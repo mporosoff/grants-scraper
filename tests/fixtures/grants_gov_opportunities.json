@@ -1,0 +1,83 @@
+{
+  "fixture_version": 1,
+  "description": "Curated Grants.gov field families used by the normalizer. This is not a bulk API response.",
+  "opportunities": [
+    {
+      "stub": {
+        "id": "347749",
+        "number": "22-605",
+        "title": "Chemistry program",
+        "agency": "U.S. National Science Foundation",
+        "agencyCode": "NSF",
+        "openDate": "04/26/2023",
+        "closeDate": "09/30/2026",
+        "oppStatus": "posted",
+        "docType": "synopsis",
+        "alnist": ["47.049"]
+      },
+      "detail": {
+        "id": 347749,
+        "opportunityNumber": "22-605",
+        "opportunityTitle": "Division of Chemistry",
+        "owningAgencyCode": "NSF",
+        "docType": "synopsis",
+        "synopsis": {
+          "version": 9,
+          "agencyCode": "NSF",
+          "agencyDetails": {
+            "agencyName": "U.S. National Science Foundation"
+          },
+          "synopsisDesc": "Research in chemistry and catalysis.",
+          "responseDate": "Sep 30, 2026 12:00:00 AM EDT",
+          "responseDateDesc": "Applications are due by 5:00 p.m. Eastern Time.",
+          "postingDate": "Apr 26, 2023 12:00:00 AM EDT",
+          "costSharing": false,
+          "applicantTypes": [
+            {"description": "Public and State controlled institutions of higher education"}
+          ]
+        },
+        "synopsisAttachmentFolders": [],
+        "synopsisDocumentURLs": [],
+        "alns": [{"alnNumber": "47.049"}]
+      }
+    },
+    {
+      "stub": {
+        "id": "355824",
+        "number": "MP-CPI-25-001",
+        "title": "Forecasted program",
+        "agency": "Office of the Assistant Secretary for Health",
+        "agencyCode": "HHS-OPHS",
+        "openDate": "08/01/2024",
+        "closeDate": "",
+        "oppStatus": "forecasted",
+        "docType": "forecast",
+        "alnist": ["93.137"]
+      },
+      "detail": {
+        "id": 355824,
+        "opportunityNumber": "MP-CPI-25-001",
+        "opportunityTitle": "Forecasted program",
+        "owningAgencyCode": "HHS-OPHS",
+        "docType": "forecast",
+        "forecast": {
+          "version": 7,
+          "forecastDesc": "A forecast description suitable for matching.",
+          "agencyCode": "HHS-OPHS",
+          "agencyDetails": {
+            "agencyName": "Office of the Assistant Secretary for Health"
+          },
+          "estSynopsisPostingDate": "Aug 15, 2026 12:00:00 AM EDT",
+          "estApplicationResponseDate": "Oct 15, 2026 12:00:00 AM EDT",
+          "estApplicationResponseDateDesc": "Estimated application deadline.",
+          "estAwardDate": "Jan 15, 2027 12:00:00 AM EST",
+          "estProjectStartDate": "Mar 01, 2027 12:00:00 AM EST",
+          "costSharing": false
+        },
+        "synopsisAttachmentFolders": [],
+        "synopsisDocumentURLs": [],
+        "alns": [{"alnNumber": "93.137"}]
+      }
+    }
+  ]
+}

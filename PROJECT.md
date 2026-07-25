@@ -1,13 +1,14 @@
-# UR Grant Matcher — Product Plan
+# Funding Finder — Product Plan
 
-**Status:** Phase 0 complete; GitHub Pages is the canonical product
+**Status:** Phase 1 implementation complete; production Pages and first scheduled-refresh verification pending
+
+**Next implementation phase:** Phase 2 — Pilot validation and relevance quality
 
 **Canonical application:** https://mporosoff.github.io/grants-scraper/
 
 **Repository:** https://github.com/mporosoff/grants-scraper
 
-**Initial audience:** University of Rochester faculty, beginning with Chemical
-and Sustainability Engineering
+**Initial audience:** University of Rochester researchers, with a design that remains useful to any public user
 
 **Last updated:** July 25, 2026
 
@@ -15,399 +16,323 @@ and Sustainability Engineering
 
 ## 1. Product goal
 
-UR Grant Matcher should answer a faculty member's practical question:
+Funding Finder is a public funding-opportunity search engine with an optional AI refinement layer.
 
-> Is this funding opportunity relevant enough to be worth my time?
+The base product should provide the useful parts of the [Duke Research Funding database](https://researchfunding.duke.edu/search-results)—a broad catalog, keyword search, filters, sorting, result details, and export—in a faster and more approachable interface. AI is not the database and is not required to browse it.
 
-It is not intended to be another large grant directory. Faculty describe their
-research in their own words, the application ranks plausible opportunities,
-and every result explains why it matched while showing the funding, deadline,
-duration, eligibility, submission requirements, and source links needed for a
-quick decision.
+The product answers two related questions:
 
-The product must remain easy to use:
+1. **What funding opportunities are available?** Search the comprehensive catalog directly.
+2. **Which of these are most relevant to my work?** Let AI expand a research description, rerank a bounded candidate set, explain the matches, and answer follow-up questions about that shortlist.
 
-- open one URL on a phone or computer;
-- install nothing;
-- enter a general research synopsis instead of selecting a faculty record;
-- choose OpenAI or Anthropic and enter one key;
-- use that same provider for both matching stages;
-- save searches in the browser; and
-- export results as CSV.
+The system must not make a model call for ordinary search. It must not hide the catalog behind an API key.
 
 ---
 
-## 2. Phase 0 decisions
+## 2. Product decisions
 
-These decisions are the current project boundary and replace the earlier
-private server/database direction.
-
-### 2.1 Canonical application
+### 2.1 One public application
 
 GitHub Pages is the only active product surface:
 
 https://mporosoff.github.io/grants-scraper/
 
-The page is public. There is no account, access allowlist, installation,
-Python requirement, or private application database. The project owner shares
-the URL with intended users, but anyone who discovers the URL can open it.
+There are no accounts, installations, faculty profiles, or user-managed opportunity files. The retained server experiment under `web/` is reference material, not a second product.
 
-The server-backed code under `web/` is retained as an implementation reference.
-It is not the current deployment target and should not be treated as a second
-product.
+### 2.2 Comprehensive catalog, not a curated shortlist
 
-### 2.2 Faculty information
+The scheduled pipeline uses the official [Grants.gov daily XML database extract](https://www.grants.gov/xml-extract), not dozens of narrow keyword API calls.
 
-Faculty scraping is retired. A user writes a free-form research description
-and may optionally save named searches in the browser. No faculty dropdown,
-faculty JSON file, or faculty upload is part of the product.
+Each refresh:
 
-### 2.3 AI provider and key
+- downloads one complete official extract;
+- streams it from the ZIP rather than unpacking a raw database into the repository;
+- includes current posted and forecasted opportunities;
+- removes expired and duplicate records;
+- normalizes dates, awards, eligibility, agencies, instruments, and source links;
+- derives transparent discipline, topic, and warning facets;
+- builds a compact BM25 keyword index; and
+- publishes one versioned browser asset.
 
-The existing bring-your-own-key design remains:
+The current build contains roughly 1,700 open or forecasted federal opportunities rather than the former 48-record engineering shortlist. Sources outside Grants.gov will be added independently when they have a sustainable public ingestion path.
 
-- the user chooses either OpenAI or Anthropic;
-- one key from the selected provider runs both matching stages;
-- the key is stored in that browser's `localStorage`;
-- the key is sent directly from the browser to the selected AI provider;
-- the key is never committed to GitHub or included in result exports; and
-- the user can clear it from the application at any time.
+### 2.3 Search is the primary workflow
 
-OpenAI uses embeddings for the broad shortlist and an OpenAI language model for
-final scoring. Anthropic uses Claude for both the broad shortlist and final
-scoring. We are not changing this matching architecture during Phase 0.
+Anyone can use, without an API key:
 
-### 2.4 Application data
+- full-text keyword and opportunity-number search;
+- open and forecasted status filters;
+- discipline, topic, agency, eligibility, and funding-instrument facets;
+- deadline and minimum-award filters;
+- preliminary-stage, limited-submission, early-career, and cost-share signals;
+- relevance, deadline, posted-date, award, agency, and title sorting;
+- pagination and expandable record details;
+- official source links; and
+- CSV export of the complete current result set.
 
-Research descriptions, saved searches, cached OpenAI embeddings, and saved
-result snapshots stay in the browser. CSV files exist only when a user
-explicitly exports them.
+Search and filtering execute in the browser over the prebuilt index. They make zero AI calls and have no per-search infrastructure cost.
 
-Funding opportunities are public information. The current application contains
-a small bundled calibration set. Phase 1 will replace that set with an
-automatically refreshed public opportunity feed generated by GitHub Actions and
-published with the site. Users will not upload or manage grant data files.
+### 2.4 AI is an optional refinement layer
 
-### 2.5 GitHub's role
+A user may choose OpenAI or Anthropic and enter one provider key. The same provider powers:
 
-GitHub stores:
+1. **Query expansion:** translate a natural-language research description into concrete search terms and synonyms.
+2. **Bounded reranking:** compare at most 32 locally retrieved candidates and return at most 12 grounded recommendations.
+3. **Shortlist chat:** answer questions using only the pulled opportunities and, when explicitly requested, narrow the shortlist further.
 
-- application code;
-- public normalized opportunity data used by the site;
-- tests and automation;
-- project documentation; and
-- public source provenance.
+AI output is advisory. It must:
 
-GitHub does not store:
+- use exact catalog record identifiers;
+- distinguish source facts from inference;
+- call missing data “not listed”;
+- never invent deadlines, amounts, eligibility, or requirements; and
+- direct users to the official notice for final verification.
 
-- API keys;
-- private faculty profiles;
-- browser-saved searches;
-- private feedback;
-- exported result files; or
-- raw document collections that are unnecessary for the public site.
+### 2.5 No application local storage
+
+The search catalog is a published static asset, not a user-maintained local database. Search state is computed from the current page and the keyword query can be shared in the URL.
+
+The provider selection, API key, research description, AI shortlist, and chat exist in page memory only. They disappear on reload or when the tab closes. The application does not write them to `localStorage`, `sessionStorage`, GitHub, or an application database.
+
+CSV is created only when a user explicitly exports results and never includes the API key or research description.
 
 ---
 
-## 3. Canonical architecture
+## 3. Architecture
 
 ```text
-Grants.gov and later public sources
-              |
-              | scheduled GitHub Actions refresh
-              v
-Public normalized opportunity asset
-              |
-              v
-GitHub Pages application
-      |                   |
-      |                   +--> OpenAI or Anthropic API
-      |                        using the faculty member's local key
-      |
-      +--> Browser localStorage
-           - provider and API key
-           - research text
-           - named searches
-           - result snapshots
-           - cached embeddings
+Official Grants.gov daily XML extract
+                 |
+                 | scheduled GitHub Action
+                 v
+Normalized current catalog + facets + BM25 index
+                 |
+                 v
+          GitHub Pages app
+          /              \
+         /                \ optional, user initiated
+        v                  v
+Zero-cost browser       OpenAI or Anthropic
+search and filters      using an in-memory user key
+                            |
+                            +-- query expansion
+                            +-- rerank <= 32 candidates
+                            +-- chat over <= 12 matches
 ```
 
-There is no application server or central user database. GitHub Actions may run
-Python or other developer tooling in the background, but faculty never install
-or run those tools.
+There is no application server, search cluster, vector database, account system, or central user database. GitHub Actions performs the expensive ingestion work once per day; every visitor reuses the published result.
 
 ---
 
 ## 4. User workflow
 
-1. Open the GitHub Pages URL.
-2. Choose OpenAI or Anthropic and save one provider key.
-3. Enter a general research synopsis in natural language.
-4. Optionally name and save the search in the browser.
-5. Run matching.
-6. Review ranked cards showing:
-   - verdict and score;
-   - concrete match rationale;
-   - funding amount or range;
-   - due date or dates;
-   - grant duration;
-   - expected number of awards;
-   - anticipated project start;
-   - preliminary-stage requirements;
-   - limited-submission and cost-share warnings;
-   - eligibility and opportunity details; and
-   - official opportunity and NOFO links.
-7. Export the visible results as CSV.
-8. Clear the API key before leaving a shared device.
+### Browse and search
 
-Missing source data must be shown as "not listed" or equivalent. The
-application must never invent award economics, deadlines, or eligibility facts.
+1. Open the public URL.
+2. Search by topic, method, program name, agency, or opportunity number.
+3. Narrow with facets, dates, award size, or special-requirement signals.
+4. Sort and inspect detailed results.
+5. Open the official record or export the result set.
+
+### Add AI refinement
+
+1. Describe the research or proposed project.
+2. Choose a provider and enter a key for the current tab.
+3. Refine the current search.
+4. Review the shortlist, scores, specific rationale, and caveats.
+5. Ask grounded follow-up questions such as:
+   - “Which allow a university to lead?”
+   - “Keep only those closing after October.”
+   - “Which require cost share?”
+   - “Compare the top three on fit and timing.”
+6. Return to the unmodified catalog at any time.
 
 ---
 
-## 5. Privacy and security policy
+## 5. Privacy, security, and cost boundary
 
-This is a public, browser-only research tool, not a confidential University
-system.
+Funding records are public. The catalog and its search index are committed to the public repository and served by GitHub Pages.
 
-### What remains on the device
+Ordinary search sends no research description to an AI provider and makes zero AI calls. When a user explicitly invokes refinement or chat:
 
-The selected provider, API key, research text, named searches, cached
-embeddings, and saved result snapshots are stored in the browser's local
-storage. They are not uploaded to this GitHub repository or an application
-database.
+- the browser sends the research description and a bounded selection of public opportunities directly to the selected provider;
+- that provider’s billing, retention, and privacy terms apply;
+- the application never proxies, receives, or stores the key;
+- the key remains visible to the running page in memory, so users should use a scoped key with a spending limit; and
+- users should not enter confidential or unpublished information.
 
-Local storage is convenient, but it is not a secure credential vault. Anyone
-with access to the same unlocked browser profile may be able to use or inspect
-the saved key. Users should:
-
-- use a personal or project-scoped key;
-- set provider spending limits when available;
-- avoid entering unpublished confidential research details;
-- clear the key on a shared or managed device; and
-- revoke the key at the provider if a device is lost or compromised.
-
-### What is sent externally
-
-When matching runs, the research description and relevant opportunity text are
-sent directly to the selected AI provider. That provider's privacy, retention,
-and billing terms apply. GitHub Pages serves the application files but does not
-proxy the AI request.
-
-The application currently has no application-owned analytics, user accounts,
-or server-side activity log. GitHub and the AI provider may maintain their
-normal infrastructure logs under their own policies.
-
-### Data loss and portability
-
-Browser-local data is device- and browser-specific. It does not automatically
-sync or back up. Clearing site data may permanently delete saved searches and
-cached results. CSV export is the supported portable copy.
+The browser-only design cannot provide a secure institutional credential vault. A future institution-managed AI gateway would be a separate architectural decision.
 
 ---
 
-## 6. What works now
+## 6. Phase 1 — Comprehensive federal opportunity search
 
-- public, mobile-friendly GitHub Pages application;
-- faculty-authored free-text research profiles;
-- no faculty or opportunity file uploads;
-- one selectable AI provider and one locally stored key;
-- two-stage matching with verdict, score, and rationale;
-- named browser-local saved searches and result snapshots;
-- CSV export;
-- richer result cards with funding, deadlines, duration, eligibility, and
-  submission warnings;
-- official source and NOFO links when supplied;
-- automated tests on pushes and pull requests; and
-- a small bundled set of calibration opportunities.
+**Status: implementation complete; production Pages and first scheduled-run verification pending**
 
-## 7. What is not complete
+Phase 1 now includes both the catalog foundation and the first optional refinement workflow:
 
-- The opportunity feed is not yet automatically refreshed from Grants.gov.
-- The public application still relies on a small bundled calibration set.
-- Match quality has not been measured against a faculty-labeled benchmark.
-- Users cannot label results as useful or not relevant in a reusable evaluation
-  export.
-- NOFO PDFs are linked but not parsed for evidence.
-- Dates are not yet normalized into separate LOI, concept paper, preproposal,
-  and full-proposal fields with reliable clock time and timezone.
-- Amendments, superseded notices, and feed freshness need stronger handling.
-- Sources outside Grants.gov are not integrated.
-- Browser-local searches do not sync across devices.
-- A static GitHub Pages application cannot send automatic personalized weekly
-  email digests without adding a separate service.
+- official complete Grants.gov XML ingestion;
+- current posted and forecasted records;
+- record-count and required-field health checks;
+- daily scheduled refresh and failure alert;
+- comprehensive browser search and BM25 index;
+- Duke-style facets, sorting, details, pagination, and CSV export;
+- visible record count, source, generated time, and stale-data warning;
+- bounded two-call AI refinement;
+- grounded shortlist chat with explicit narrowing;
+- no browser persistence of API keys or research text; and
+- regression coverage for forecasts, expired records, ambiguous rolling language, indexing, generated assets, and workflow safeguards.
+
+**Exit criterion:** merge the implementation, observe one successful scheduled production refresh, confirm the Pages deployment loads the catalog, and smoke-test search, filters, export, one refinement, and one follow-up question.
 
 ---
 
-## 8. Roadmap
+## 7. Roadmap
 
-### Phase 0 — Product boundary and project control
+### Phase 2 — Pilot validation and relevance quality
 
-**Status: complete with this document**
+**Status: next to implement**
 
-- Make GitHub Pages the canonical product.
-- Document the public/browser-only architecture.
-- Keep the existing one-provider, one-local-key AI system.
-- Establish the privacy policy above.
-- Retire faculty scraping and user-managed JSON workflows.
-- Align the README and hosting documentation.
-- Track remaining work through GitHub milestones and issues.
+Phase 1 solved catalog coverage and established a bounded AI workflow. The next
+risk is quality: whether deterministic retrieval finds the right candidates
+and whether AI puts the genuinely useful opportunities near the top. Phase 2
+creates the evidence and feedback loop needed to answer that before more
+sources or infrastructure are added.
 
-**Exit criterion:** the repository documentation and issue tracker describe one
-architecture, one application URL, and one ordered backlog.
+#### 2A. Evaluation controls
 
-### Phase 1 — Automated live opportunity feed
+- Add in-session labels for `useful`, `not relevant`, and `needs verification`.
+- Add reason codes for topic, eligibility, career stage, deadline, award size,
+  application burden, duplicate/already known, and insufficient source detail.
+- Keep labels in page memory and include them only in an explicit evaluation
+  export; do not reintroduce browser storage.
+- Export enough catalog, query, filter, retrieval-rank, AI-rank, model, and
+  reason-code context to reproduce an evaluation without exporting the API key
+  or research description by default.
 
-**Priority: next**
+#### 2B. Reproducible quality harness
 
-[GitHub milestone](https://github.com/mporosoff/grants-scraper/milestone/1)
+- Create a versioned, consented benchmark fixture separate from the production
+  catalog.
+- Measure catalog retrieval independently from AI reranking:
+  - recall within the 32-record candidate set;
+  - precision and useful-result rate within the 12-record shortlist;
+  - rank movement between BM25 retrieval and AI output; and
+  - hard eligibility and expired-record error rates.
+- Add regression cases for known synonym, interdisciplinary, eligibility, and
+  sparse-description failures.
+- Record provider/model and prompt versions so comparisons are meaningful.
 
-- Run the Grants.gov normalizer on a scheduled GitHub Action.
-- Publish a generated JavaScript opportunity asset with GitHub Pages; users do
-  not upload or edit data files.
-- Replace the bundled calibration set with current posted and forecast
-  opportunities.
-- De-duplicate records and remove or clearly mark closed opportunities.
-- Display source, fetched date, and data-freshness status.
-- Preserve a small curated test fixture rather than committing large raw API
-  responses.
-- Alert the project owner when a scheduled refresh fails or returns an
-  implausible record count.
+#### 2C. Pilot
 
-**Exit criterion:** GitHub Pages automatically receives a tested opportunity
-refresh at least daily, and users can see when the data was last updated.
+- Recruit 3–5 researchers across multiple disciplines.
+- Evaluate approximately 75–150 researcher/opportunity pairs.
+- Test whether 32 candidates and 12 recommendations are the right
+  cost/quality boundary.
+- Tune search weights, topic rules, prompts, and thresholds only from labeled
+  evidence.
+- Publish a short pilot report identifying retrieval failures, reranking
+  failures, source-data gaps, and the highest-value missing funding sources.
 
-### Phase 2 — Pilot and matching evaluation
+**Exit criterion:** a reproducible benchmark and pilot report separate search
+recall from AI ranking quality, identify the main failure modes, and provide
+evidence for whether Phase 3 source-evidence work or Phase 4 source expansion
+should be prioritized next.
 
-[GitHub milestone](https://github.com/mporosoff/grants-scraper/milestone/2)
+### Phase 3 — Better source evidence
 
-- Add browser-local useful, not relevant, and pursue labels.
-- Add reason codes for topic mismatch, eligibility, award size, deadline,
-  career stage, and duplicate/already-known opportunities.
-- Include labels in CSV export without including the API key.
-- Ask 3–5 faculty members to evaluate 20–30 opportunities each.
-- Establish a benchmark of approximately 75–150 labeled
-  faculty-opportunity pairs.
-- Compare OpenAI and Anthropic result quality using the existing two-stage
-  design.
-- Tune prompts and thresholds only when the labeled evidence justifies it.
-
-**Exit criterion:** the project has a reproducible baseline for top-ranked match
-quality and a documented list of the most common failure modes.
-
-### Phase 3 — Data depth and NOFO evidence
-
-[GitHub milestone](https://github.com/mporosoff/grants-scraper/milestone/3)
-
-- Broaden Grants.gov regression coverage across agencies and forecast records.
-- Track version, amendment, posted, closed, rolling, and superseded status.
-- Represent LOI, concept paper, preproposal, and full deadlines separately.
+- Track amendment, superseded, archive, and recurring-program status more precisely.
+- Normalize LOI, concept-paper, preproposal, and full-proposal deadlines separately.
 - Preserve deadline time and timezone when supplied.
-- Parse primary NOFO documents during the scheduled GitHub workflow.
-- Extract page limits, review criteria, required documents, cost-share terms,
-  required partners, program contacts, and detailed eligibility.
-- Store concise public extracted facts and source-page evidence with the
-  published opportunity data.
-- Mark every fact as source-provided, machine-extracted, or unavailable.
+- Extract high-value NOFO facts during the scheduled workflow.
+- Attach provenance and confidence to machine-extracted fields.
+- Make limited-submission detection an explicit review queue rather than an authoritative label.
 
-**Exit criterion:** important decision fields link back to verifiable source
-evidence and extraction uncertainty is visible.
+**Exit criterion:** decisive dates and requirements link to verifiable source evidence.
 
-### Phase 4 — Complete the browser workflow
+### Phase 4 — Expand the funding universe
 
-[GitHub milestone](https://github.com/mporosoff/grants-scraper/milestone/4)
+Add one maintainable public source at a time, prioritizing gaps reported in the pilot:
 
-- Add browser-local watchlists and pursuit status.
-- Add deadline sorting and calendar export.
-- Improve saved-search management and result comparison.
-- Add an optional portable backup/export for locally saved searches that does
-  not expose the API key.
-- Improve accessibility, mobile behavior, and low-data failure messages.
-
-**Exit criterion:** a faculty member can find, save, compare, and follow up on
-an opportunity entirely from the public browser application.
-
-### Phase 5 — Expand funding sources selectively
-
-[GitHub milestone](https://github.com/mporosoff/grants-scraper/milestone/5)
-
-Add one source at a time, based on gaps reported during the pilot:
-
-1. ARPA-E eXCHANGE
-2. DOE Office of Science
-3. SAM.gov for DOD and DARPA
-4. selected high-value private foundations
+1. SAM.gov and selected DOD/DARPA sources
+2. ARPA-E eXCHANGE
+3. DOE Office of Science
+4. selected private foundations and associations
 5. NSF Dear Colleague Letters
-6. UR-provided internal deadlines and limited-submission notices
+6. University of Rochester internal deadlines and limited submissions
 
-Every source must have a public-use basis, automated health check, regression
-fixture, failure alert, and identified maintenance owner. Pivot-RP must not be
-scraped.
+Each source requires a documented public-use basis, stable ingestion route, health check, regression fixture, failure alert, and maintenance owner. Duke and Pivot-RP are product references, not scrape targets.
 
-**Exit criterion:** each added source contributes demonstrably useful
-opportunities and does not silently fail.
+**Exit criterion:** each new source adds opportunities users actually value without silently degrading.
 
-### Optional future architecture decision
+### Phase 5 — Optional service-backed capabilities
 
-Automatic personalized email digests, cross-device synchronization, shared
-departmental feedback, administrative review, and institution-wide access
-controls require a server or third-party service. They are intentionally
-outside the current GitHub Pages architecture. We will reconsider them only if
-the static pilot demonstrates sufficient value.
+Only consider a server or managed third-party service after the public pilot demonstrates value. It would be required for:
 
----
-
-## 9. Product quality rules
-
-The project should not advance to broad rollout until:
-
-- the public feed updates reliably and reports its freshness;
-- top-ranked recommendations have been evaluated by real faculty;
-- critical dates and eligibility warnings link to official evidence;
-- missing values are explicit rather than inferred without warning;
-- API keys never appear in source control, exports, or URLs;
-- the application works on current mobile and desktop browsers; and
-- every non-Grants.gov source has an ongoing maintenance owner.
+- saved searches across devices;
+- watchlists and pursuit status;
+- automatic personalized alerts or email digests;
+- shared departmental feedback;
+- institutional identity and access controls; or
+- centrally managed AI credentials and budgets.
 
 ---
 
-## 10. Explicit non-goals
+## 8. Product quality rules
 
-- scraping faculty pages;
-- faculty dropdowns or preloaded faculty identities;
-- user-managed faculty or opportunity JSON files;
-- Python installation for faculty;
-- storing API keys in GitHub;
-- storing private research profiles centrally;
-- scraping Pivot-RP;
-- building many fragile source scrapers before validating match quality; and
-- presenting AI-generated rationales as authoritative evidence.
+- A user can always search the full catalog without AI.
+- Record-count checks should fail closed rather than silently publish a tiny feed.
+- Expired records must not be revived by incidental language such as “rolling assessment.”
+- Undated recurring records must visibly ask the user to verify current status.
+- Missing facts remain missing; neither deterministic rules nor AI may fabricate them.
+- AI only receives a bounded candidate set and is never the retrieval database.
+- Every result retains an official source link.
+- API keys never enter source control, URLs, exports, or browser storage.
+- The application remains usable on current mobile and desktop browsers.
+- Every added source has an identified maintenance strategy.
 
 ---
 
-## 11. Project files
+## 9. Explicit non-goals
+
+- a 48-record discipline-specific shortlist;
+- local storage as the funding database;
+- AI calls for every keyword search;
+- faculty scraping or preloaded faculty identities;
+- user-managed JSON files;
+- a Python installation for end users;
+- scraping Duke, Pivot-RP, or other licensed databases;
+- presenting inferred topics or AI rationales as official requirements; and
+- building account infrastructure before the public search workflow is validated.
+
+---
+
+## 10. Project files
 
 | Path | Purpose |
 |---|---|
 | `index.html` | GitHub Pages entry point |
-| `match_explorer.html` | Canonical public application |
-| `scripts/pull_grants.py` | Grants.gov ingestion and normalization used for future scheduled publishing |
-| `tests/` | Static application and Grants.gov normalization tests |
-| `.github/workflows/` | Continuous integration and future scheduled feed refresh |
-| `docs/API_VALIDATION.md` | Findings from live Grants.gov validation |
-| `docs/HOSTING.md` | GitHub Pages deployment and data boundary |
-| `legacy/scrape_faculty.py` | Retired faculty scraper, retained only for history |
-| `web/` | Retained server-backed experiment; not the canonical product |
+| `match_explorer.html` | Public search and refinement interface |
+| `assets/app.js` | Browser search, filters, export, AI refinement, and shortlist chat |
+| `assets/app.css` | Responsive visual design |
+| `data/opportunities.js` | Generated catalog, facets, and BM25 index |
+| `scripts/build_catalog.py` | Complete XML ingestion, normalization, validation, and index build |
+| `scripts/pull_grants.py` | Earlier API normalizer retained for fixtures and reference |
+| `tests/` | Pipeline and public-application regression checks |
+| `.github/workflows/refresh-opportunities.yml` | Daily catalog refresh and owner alert |
+| `docs/HOSTING.md` | Deployment, privacy, and data boundary |
+| `web/` | Retained server experiment; not the canonical product |
 
 ---
 
-## 12. Decision log
+## 11. Decision log
 
 | Date | Decision |
 |---|---|
-| July 2026 | Faculty will author their own research descriptions; faculty scraping is retired. |
-| July 2026 | Users choose OpenAI or Anthropic and provide one key for both matching stages. |
-| July 2026 | Faculty and opportunity file-upload workflows are removed. |
-| July 2026 | GitHub Pages becomes the canonical public product. |
-| July 2026 | API keys, saved searches, research text, and result snapshots remain browser-local. |
-| July 2026 | Server-backed accounts, shared storage, and automatic personalized email are deferred unless the static pilot proves value. |
+| July 2026 | GitHub Pages remains the only active product surface. |
+| July 2026 | Replace the 48-record keyword feed with the complete current Grants.gov daily extract. |
+| July 2026 | Make deterministic public search the primary workflow and keep it free of AI calls. |
+| July 2026 | Use AI only for bounded query expansion, reranking, and grounded shortlist chat. |
+| July 2026 | Remove saved-search, embedding-cache, API-key, and research-text use of browser storage. |
+| July 2026 | Treat Duke as a search/discovery design reference, not a data source. |
+| July 2026 | Make pilot validation and separate retrieval/reranking measurement the next implementation phase before expanding sources. |

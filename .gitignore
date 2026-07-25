@@ -9,7 +9,9 @@ grants.json
 grants_raw.json
 faculty.json
 faculty.csv
-/data/
+/data/*
+!/data/opportunities.js
+/GrantsDBExtract*.zip
 
 # Original local handoff archive
 /files.zip

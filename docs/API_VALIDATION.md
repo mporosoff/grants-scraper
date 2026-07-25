@@ -2,6 +2,11 @@
 
 **Date:** July 25, 2026
 
+> **Current role:** Phase 1 catalog ingestion now uses the complete daily XML
+> extract. These endpoint findings are retained for regression fixtures and
+> possible on-demand detail or attachment enrichment; they are not the
+> browser catalog's retrieval mechanism.
+
 The ingestion prototype was exercised against the public `search2` and
 `fetchOpportunity` endpoints without an API key.
 

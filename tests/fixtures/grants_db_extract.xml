@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Grants xmlns="http://apply.grants.gov/system/OpportunityDetail-V1.0">
+  <OpportunitySynopsisDetail_1_0>
+    <OpportunityID>1001</OpportunityID>
+    <OpportunityTitle>Carbon Capture Materials Research</OpportunityTitle>
+    <OpportunityNumber>DOE-OPEN-1</OpportunityNumber>
+    <OpportunityCategory>D</OpportunityCategory>
+    <FundingInstrumentType>G</FundingInstrumentType>
+    <CategoryOfFundingActivity>EN</CategoryOfFundingActivity>
+    <CategoryOfFundingActivity>ST</CategoryOfFundingActivity>
+    <CFDANumbers>81.049</CFDANumbers>
+    <EligibleApplicants>06</EligibleApplicants>
+    <EligibleApplicants>20</EligibleApplicants>
+    <AgencyCode>DOE-SC</AgencyCode>
+    <AgencyName>Department of Energy</AgencyName>
+    <PostDate>07012026</PostDate>
+    <CloseDate>09302026</CloseDate>
+    <LastUpdatedDate>07152026</LastUpdatedDate>
+    <AwardCeiling>1000000</AwardCeiling>
+    <AwardFloor>250000</AwardFloor>
+    <ExpectedNumberOfAwards>4</ExpectedNumberOfAwards>
+    <Description>Research on carbon capture, porous materials, and catalytic conversion.</Description>
+    <Version>Synopsis 2</Version>
+    <CostSharingOrMatchingRequirement>No</CostSharingOrMatchingRequirement>
+    <ArchiveDate>10302026</ArchiveDate>
+  </OpportunitySynopsisDetail_1_0>
+  <OpportunitySynopsisDetail_1_0>
+    <OpportunityID>1002</OpportunityID>
+    <OpportunityTitle>Expired Opportunity</OpportunityTitle>
+    <OpportunityNumber>OLD-1</OpportunityNumber>
+    <FundingInstrumentType>G</FundingInstrumentType>
+    <CategoryOfFundingActivity>ST</CategoryOfFundingActivity>
+    <AgencyName>Old Agency</AgencyName>
+    <PostDate>01012025</PostDate>
+    <CloseDate>01312025</CloseDate>
+    <ArchiveDate>03012025</ArchiveDate>
+    <Description>This opportunity has closed.</Description>
+  </OpportunitySynopsisDetail_1_0>
+  <OpportunitySynopsisDetail_1_0>
+    <OpportunityID>1004</OpportunityID>
+    <OpportunityTitle>Expired Notice With Ordinary Rolling Language</OpportunityTitle>
+    <OpportunityNumber>OLD-ROLLING-WORD-1</OpportunityNumber>
+    <FundingInstrumentType>CA</FundingInstrumentType>
+    <CategoryOfFundingActivity>CD</CategoryOfFundingActivity>
+    <AgencyName>Old Agency</AgencyName>
+    <PostDate>08312009</PostDate>
+    <CloseDate>11132009</CloseDate>
+    <Description>The project uses a rolling assessment of changing regional needs.</Description>
+  </OpportunitySynopsisDetail_1_0>
+  <OpportunitySynopsisDetail_1_0>
+    <OpportunityID>1005</OpportunityID>
+    <OpportunityTitle>Recurring Program Without a Listed Deadline</OpportunityTitle>
+    <OpportunityNumber>OPEN-UNDATED-1</OpportunityNumber>
+    <FundingInstrumentType>G</FundingInstrumentType>
+    <CategoryOfFundingActivity>ED</CategoryOfFundingActivity>
+    <EligibleApplicants>06</EligibleApplicants>
+    <AgencyName>Current Agency</AgencyName>
+    <PostDate>06012026</PostDate>
+    <LastUpdatedDate>07152026</LastUpdatedDate>
+    <Description>This recurring program does not list a closing date.</Description>
+  </OpportunitySynopsisDetail_1_0>
+  <OpportunityForecastDetail_1_0>
+    <OpportunityID>1003</OpportunityID>
+    <OpportunityTitle>Forecasted Membrane Separations Program</OpportunityTitle>
+    <OpportunityNumber>NSF-FORECAST-1</OpportunityNumber>
+    <FundingInstrumentType>CA</FundingInstrumentType>
+    <CategoryOfFundingActivity>ST</CategoryOfFundingActivity>
+    <EligibleApplicants>99</EligibleApplicants>
+    <AgencyCode>NSF</AgencyCode>
+    <AgencyName>National Science Foundation</AgencyName>
+    <PostDate>07012026</PostDate>
+    <EstimatedSynopsisPostDate>08152026</EstimatedSynopsisPostDate>
+    <EstimatedSynopsisCloseDate>11152026</EstimatedSynopsisCloseDate>
+    <EstimatedSynopsisCloseDateExplanation>Estimated deadline at 5 PM ET.</EstimatedSynopsisCloseDateExplanation>
+    <LastUpdatedDate>07202026</LastUpdatedDate>
+    <Description>Forecast for membrane separations and water purification.</Description>
+    <Version>Forecast 1</Version>
+    <CostSharingOrMatchingRequirement>No</CostSharingOrMatchingRequirement>
+  </OpportunityForecastDetail_1_0>
+</Grants>
