@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Generated opportunity data
+grants.json
+grants_raw.json
+faculty.json
+faculty.csv
+/data/
+
+# Original local handoff archive
+/files.zip
+
+# Local application state
+*.sqlite3
+.env
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
