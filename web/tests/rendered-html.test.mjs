@@ -53,32 +53,38 @@ test("uses persistent application storage and removes starter dependencies", asy
   assert.deepEqual(previewFiles, []);
 });
 
-test("uses one selected AI provider and one key in the standalone explorer", async () => {
-  const prototype = await readFile(
-    new URL("../match_explorer.html", root),
-    "utf8",
-  );
-  const script = prototype.match(/<script>([\s\S]*?)<\/script>/)?.[1];
+test("supports public catalog search and optional AI refinement", async () => {
+  const [prototype, script] = await Promise.all([
+    readFile(new URL("../match_explorer.html", root), "utf8"),
+    readFile(new URL("../assets/app.js", root), "utf8"),
+  ]);
 
+  assert.match(prototype, /id="query"/);
+  assert.match(prototype, /id="facet-discipline"/);
+  assert.match(prototype, /id="facet-agency"/);
+  assert.match(prototype, /id="sort"/);
+  assert.match(prototype, /id="export-csv"/);
   assert.match(prototype, /id="k-provider"/);
   assert.match(prototype, /id="k-key"/);
-  assert.match(prototype, /gpt-5\.6-sol/);
-  assert.match(prototype, /claude-sonnet-5/);
-  assert.match(prototype, /async function deepRank/);
-  assert.match(prototype, /async function anthropicShortlist/);
   assert.match(prototype, /id="research-profile"/);
-  assert.match(prototype, /id="btn-save-search"/);
-  assert.match(prototype, /id="btn-new-search"/);
-  assert.match(prototype, /id="saved-searches"/);
-  assert.match(prototype, /Export results\.csv/);
-  assert.match(prototype, /Due date\(s\)/);
-  assert.match(prototype, /Grant duration/);
-  assert.match(prototype, /Expected awards/);
+  assert.match(prototype, /id="ai-refine"/);
+  assert.match(prototype, /id="chat-form"/);
+  assert.match(prototype, /data\/opportunities\.js/);
+  assert.match(prototype, /assets\/app\.js/);
+  assert.match(script, /gpt-5\.6-luna/);
+  assert.match(script, /claude-sonnet-5/);
+  assert.match(script, /api\.openai\.com\/v1\/responses/);
+  assert.match(script, /api\.anthropic\.com\/v1\/messages/);
+  assert.match(script, /MAX_AI_CANDIDATES = 32/);
+  assert.match(script, /async function refineWithAi/);
+  assert.match(script, /async function askShortlist/);
+  assert.doesNotMatch(prototype + script, /localStorage|sessionStorage/);
+  assert.doesNotMatch(
+    prototype + script,
+    /GRANT_MATCH_FEED|btn-save-search|saved-searches/,
+  );
   assert.doesNotMatch(
     prototype,
     /id="sel-faculty"|id="load-faculty"|id="load-grants"|type="file"/,
   );
-  assert.doesNotMatch(prototype, /id="k-openai"|id="k-anthropic"/);
-  assert.ok(script);
-  assert.doesNotThrow(() => new Function(script));
 });
