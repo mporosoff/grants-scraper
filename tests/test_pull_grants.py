@@ -1,9 +1,41 @@
+from datetime import date, datetime, timezone
+import json
+from pathlib import Path
+from tempfile import TemporaryDirectory
 import unittest
 
-from scripts.pull_grants import normalize, parse_args
+from scripts.pull_grants import (
+    build_feed,
+    normalize,
+    parse_args,
+    prepare_records,
+    write_feed,
+)
+
+
+FIXTURE_PATH = (
+    Path(__file__).resolve().parent
+    / "fixtures"
+    / "grants_gov_opportunities.json"
+)
 
 
 class NormalizeTests(unittest.TestCase):
+    def test_curated_api_fixture_normalizes_posted_and_forecast_records(self):
+        fixture = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
+
+        records = [
+            normalize(item["stub"], item["detail"])
+            for item in fixture["opportunities"]
+        ]
+
+        self.assertEqual(
+            [record["status"] for record in records],
+            ["posted", "forecasted"],
+        )
+        self.assertTrue(all(record["source"] == "Grants.gov" for record in records))
+        self.assertTrue(all(record["title"] for record in records))
+
     def test_normalizes_live_synopsis_field_names_and_attachment(self):
         stub = {
             "id": "347749",
@@ -155,6 +187,11 @@ class NormalizeTests(unittest.TestCase):
 
 
 class ArgumentTests(unittest.TestCase):
+    def test_default_output_cannot_overwrite_production_catalog(self):
+        args = parse_args([])
+
+        self.assertEqual(args.output, Path("data/api-sample.js"))
+
     def test_small_live_run_arguments(self):
         args = parse_args(
             [
@@ -162,14 +199,93 @@ class ArgumentTests(unittest.TestCase):
                 "catalysis",
                 "--max-opportunities",
                 "3",
-                "--output-dir",
-                "data",
+                "--output",
+                "data/test-opportunities.js",
+                "--min-records",
+                "2",
             ]
         )
 
         self.assertEqual(args.search_terms, ["catalysis"])
         self.assertEqual(args.max_opportunities, 3)
-        self.assertEqual(str(args.output_dir), "data")
+        self.assertEqual(args.output, Path("data/test-opportunities.js"))
+        self.assertEqual(args.min_records, 2)
+
+
+class FeedTests(unittest.TestCase):
+    def test_deduplicates_and_removes_expired_posted_opportunities(self):
+        base = {
+            "opportunity_id": "100",
+            "opportunity_number": "DOE-TEST-1",
+            "title": "Current opportunity",
+            "status": "forecasted",
+            "version": 1,
+        }
+        posted_revision = {
+            **base,
+            "opportunity_id": "101",
+            "status": "posted",
+            "version": 2,
+            "close_date": "Dec 31, 2026 12:00:00 AM EST",
+        }
+        expired = {
+            "opportunity_id": "200",
+            "opportunity_number": "NSF-EXPIRED",
+            "title": "Expired opportunity",
+            "status": "posted",
+            "close_date": "06/30/2026",
+        }
+        rolling = {
+            **expired,
+            "opportunity_id": "300",
+            "opportunity_number": "DOD-ROLLING",
+            "title": "Rolling opportunity",
+            "rolling": True,
+        }
+
+        records, diagnostics = prepare_records(
+            [base, posted_revision, expired, rolling],
+            as_of=date(2026, 7, 25),
+        )
+
+        self.assertEqual(
+            [record["opportunity_number"] for record in records],
+            ["DOE-TEST-1", "DOD-ROLLING"],
+        )
+        self.assertEqual(records[0]["status"], "posted")
+        self.assertEqual(diagnostics["deduplicated_count"], 1)
+        self.assertEqual(diagnostics["closed_removed_count"], 1)
+
+    def test_writes_versioned_javascript_feed(self):
+        generated_at = datetime(2026, 7, 25, 14, 0, tzinfo=timezone.utc)
+        records = [
+            {
+                "opportunity_id": "1",
+                "opportunity_number": "TEST-1",
+                "title": "Test &amp; <strong>opportunity</strong>",
+                "status": "posted",
+            }
+        ]
+        feed = build_feed(
+            records,
+            generated_at,
+            ["catalysis"],
+            {"closed_removed_count": 0},
+        )
+
+        with TemporaryDirectory() as directory:
+            output = Path(directory) / "opportunities.js"
+            write_feed(feed, output)
+            javascript = output.read_text(encoding="utf-8")
+
+        self.assertIn("globalThis.GRANT_MATCH_FEED =", javascript)
+        self.assertIn('"schema_version": 1', javascript)
+        self.assertIn('"generated_at": "2026-07-25T14:00:00Z"', javascript)
+        self.assertIn('"record_count": 1', javascript)
+        self.assertEqual(
+            feed["opportunities"][0]["title"],
+            "Test & opportunity",
+        )
 
 
 if __name__ == "__main__":

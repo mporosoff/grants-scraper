@@ -1,0 +1,84 @@
+name: Refresh Grants.gov opportunities
+
+on:
+  schedule:
+    - cron: "17 10 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: grants-gov-opportunity-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - name: Run regression tests before refresh
+        run: python -m unittest discover -s tests -v
+      - name: Build and validate complete public opportunity catalog
+        run: >-
+          python -m scripts.build_catalog
+          --output data/opportunities.js
+          --min-records 1000
+          --max-record-count 5000
+      - name: Run regression tests against generated asset
+        run: python -m unittest discover -s tests -v
+      - name: Commit refreshed catalog
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/opportunities.js
+          if git diff --cached --quiet; then
+            echo "The generated catalog is unchanged."
+          else
+            git commit -m "chore: refresh Grants.gov catalog"
+            git push
+          fi
+      - name: Alert the project owner
+        if: failure()
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const title = "Automated Grants.gov refresh failed";
+            const runUrl =
+              `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}` +
+              `/actions/runs/${context.runId}`;
+            const body =
+              `The scheduled opportunity refresh failed on ${new Date().toISOString()}.\n\n` +
+              `Inspect the workflow run: ${runUrl}\n\n` +
+              `The public site continues to serve the last successful catalog and will mark it stale.`;
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "open",
+              per_page: 100,
+            });
+            const existing = issues.find(issue => issue.title === title);
+            if (existing) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body,
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+              });
+            }

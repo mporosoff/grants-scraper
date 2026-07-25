@@ -1,1058 +1,272 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>UR ChemE Grant Matcher — Match Explorer</title>
-<style>
-  :root{
-    --bg:#f6f7f9; --panel:#ffffff; --ink:#1c2430; --muted:#5c6773;
-    --line:#e3e7ec; --accent:#0b6bcb; --accent-ink:#ffffff;
-    --strong:#12805c; --strong-bg:#e6f4ee;
-    --plausible:#0b6bcb; --plausible-bg:#e7f0fb;
-    --poor:#6b7280; --poor-bg:#f1f2f4;
-    --inelig:#b45309; --inelig-bg:#fdf1e0;
-    --err:#b42318; --err-bg:#fdecea;
-    --ok:#12805c;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);
-    font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
-  .wrap{max-width:900px;margin:0 auto;padding:28px 20px 80px;}
-  h1{font-size:22px;margin:0 0 4px;}
-  h2{font-size:15px;margin:0 0 12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);}
-  .standfirst{color:var(--muted);margin:0 0 22px;}
-  .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;
-    padding:18px 18px;margin-bottom:16px;}
-  .row{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;}
-  .col{flex:1 1 240px;min-width:200px;}
-  label.lab{display:block;font-weight:600;font-size:13px;margin-bottom:5px;}
-  .hint{font-size:12.5px;color:var(--muted);margin:4px 0 0;}
-  input[type=text],input[type=password],select,input[type=number],textarea{
-    width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;
-    font:inherit;background:#fff;color:var(--ink);}
-  textarea{min-height:150px;resize:vertical;}
-  input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:0;border-color:var(--accent);}
-  button{font:inherit;border:1px solid var(--line);background:#fff;color:var(--ink);
-    padding:9px 14px;border-radius:8px;cursor:pointer;}
-  button:hover{background:#f0f2f5;}
-  button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600;}
-  button.primary:hover{filter:brightness(1.06);}
-  button:disabled{opacity:.5;cursor:not-allowed;}
-  .keys-status{font-size:13px;margin-top:8px;}
-  .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:middle;}
-  .dot.on{background:var(--ok);} .dot.off{background:#c9ced6;}
-  details.keys summary{cursor:pointer;font-weight:600;list-style:none;}
-  details.keys summary::-webkit-details-marker{display:none;}
-  details.keys summary::before{content:"▸ ";color:var(--muted);}
-  details.keys[open] summary::before{content:"▾ ";}
-  .note{font-size:12.5px;color:var(--muted);}
-  .banner{border-radius:8px;padding:11px 13px;margin:12px 0;font-size:14px;display:none;}
-  .banner.err{background:var(--err-bg);color:var(--err);border:1px solid #f3c4bf;display:block;}
-  .banner.info{background:#eef3f8;color:#274b6d;border:1px solid #d6e3f0;display:block;}
-  #status{min-height:20px;font-size:13.5px;color:var(--muted);margin:10px 0;}
-  .card{border:1px solid var(--line);border-radius:12px;padding:15px 16px;margin-bottom:12px;background:#fff;}
-  .card-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;}
-  .card-title{font-weight:600;font-size:16px;margin:0;}
-  .card-sub{color:var(--muted);font-size:13px;margin:2px 0 0;}
-  .badge{font-size:12px;font-weight:700;padding:4px 9px;border-radius:999px;white-space:nowrap;text-transform:capitalize;}
-  .b-strong{background:var(--strong-bg);color:var(--strong);}
-  .b-plausible{background:var(--plausible-bg);color:var(--plausible);}
-  .b-poor{background:var(--poor-bg);color:var(--poor);}
-  .b-ineligible{background:var(--inelig-bg);color:var(--inelig);border:1px solid #f0d3a8;}
-  .scores{font-size:12.5px;color:var(--muted);margin-top:2px;}
-  .rationale{margin:10px 0 0;}
-  .elig{font-size:13px;color:var(--inelig);margin:6px 0 0;}
-  .links{margin-top:10px;font-size:13px;}
-  .links a{color:var(--accent);margin-right:14px;text-decoration:none;}
-  .links a:hover{text-decoration:underline;}
-  details.desc{margin-top:8px;} details.desc summary{cursor:pointer;color:var(--muted);font-size:13px;}
-  .desc p{font-size:13.5px;color:#39424e;margin:8px 0 0;}
-  .saved-searches{display:grid;gap:8px;margin-top:12px;}
-  .saved-empty{color:var(--muted);font-size:13px;padding:10px 0;}
-  .saved-item{display:flex;gap:10px;align-items:center;justify-content:space-between;
-    border-top:1px solid var(--line);padding-top:9px;}
-  .saved-item-name{font-weight:600;font-size:13px;}
-  .saved-item-date{display:block;color:var(--muted);font-size:11.5px;font-weight:400;}
-  .saved-item-actions{display:flex;gap:7px;flex-shrink:0;}
-  .saved-item-actions button{padding:6px 10px;font-size:12.5px;}
-  .fact-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:13px;}
-  .fact{border:1px solid var(--line);border-radius:8px;background:#fafbfd;padding:9px 10px;}
-  .fact-label{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;
-    letter-spacing:.04em;margin-bottom:2px;}
-  .fact-value{display:block;font-size:13px;font-weight:600;overflow-wrap:anywhere;}
-  .flags{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px;}
-  .flag{border-radius:999px;padding:4px 8px;background:#f4f6f8;color:#4b5563;font-size:11.5px;}
-  .flag.warn{background:var(--inelig-bg);color:var(--inelig);}
-  .footer{font-size:12px;color:var(--muted);margin-top:24px;text-align:center;}
-  .pill{display:inline-block;background:#eef1f4;border-radius:999px;padding:2px 9px;font-size:12px;color:var(--muted);margin-right:6px;}
-  @media (max-width:640px){
-    .wrap{padding:18px 12px 56px;}
-    .panel{padding:15px 14px;}
-    .col{min-width:100%;}
-    .card-top{display:block;}
-    .card-top>div:last-child{text-align:left!important;margin-top:10px;}
-    .fact-grid{grid-template-columns:1fr 1fr;}
-    .saved-item{align-items:flex-start;flex-direction:column;}
-    .saved-item-actions{width:100%;}
-    .saved-item-actions button{flex:1;}
-  }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Search current federal funding opportunities and optionally refine a shortlist with AI.">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://api.openai.com https://api.anthropic.com; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self'">
+  <title>Funding Finder</title>
+  <link rel="stylesheet" href="./assets/app.css">
 </head>
 <body>
-<div class="wrap">
+  <a class="skip-link" href="#results">Skip to results</a>
 
-  <h1>Match Explorer</h1>
-  <p class="standfirst">Describe your research in your own words and rank funding opportunities against it.
-  Each match includes a score, a concrete reason, eligibility context, deadlines, funding, duration, and submission details.</p>
-
-  <!-- ============ AI PROVIDER ============ -->
-  <div class="panel">
-    <details class="keys" id="keys-box">
-      <summary><span id="keys-summary">AI provider — click to set up</span></summary>
-      <div style="margin-top:14px;">
-        <div class="row">
-          <div class="col">
-            <label class="lab" for="k-provider">Provider</label>
-            <select id="k-provider">
-              <option value="openai">OpenAI</option>
-              <option value="anthropic">Anthropic</option>
-            </select>
-          </div>
-          <div class="col">
-            <label class="lab" for="k-key">API key <span class="note">(used for both matching steps)</span></label>
-            <input type="password" id="k-key" placeholder="sk-...">
-          </div>
-        </div>
-        <div class="row" style="margin-top:12px;">
-          <div class="col">
-            <p class="hint" id="provider-detail"></p>
-          </div>
-          <div class="col" style="display:flex;gap:10px;align-items:flex-end;">
-            <button class="primary" id="btn-save-key">Save provider and key</button>
-            <button id="btn-clear-key">Clear key</button>
-          </div>
-        </div>
-        <p class="hint">The selected key is stored only in this browser (localStorage) and is sent directly to that provider's API.
-        It is never committed with this page. Get a key from platform.openai.com/api-keys or platform.claude.com.</p>
-      </div>
-    </details>
-    <div class="keys-status" id="keys-status"></div>
-  </div>
-
-  <!-- ============ RESEARCH PROFILE ============ -->
-  <div class="panel">
-    <h2>1 · Your research</h2>
-    <label class="lab" for="research-profile">Research interests and general information</label>
-    <textarea id="research-profile" placeholder="Describe your research questions, methods, capabilities, application areas, future directions, career stage, and any eligibility context that may matter. You can write naturally—no special format is required."></textarea>
-    <p class="hint">Aim for at least a few sentences. Specific methods, materials, systems, populations, and future directions produce better matches.</p>
-    <div class="row">
-      <div class="col">
-        <label class="lab" for="search-name">Search name</label>
-        <input type="text" id="search-name" placeholder="e.g. Carbon capture and catalytic conversion">
-        <p class="hint">Use a short name so you can save and reopen this search on this device.</p>
-      </div>
-      <div class="col" style="flex:0 0 220px;">
-        <label class="lab" for="topk">Shortlist size</label>
-        <input type="number" id="topk" min="1" max="50" value="12">
-        <p class="hint">The first pass keeps this many top grants; only those receive the deeper second-pass scoring.</p>
-      </div>
+  <header class="site-header">
+    <a class="brand" href="./match_explorer.html" aria-label="Funding Finder home">
+      <span class="brand-mark" aria-hidden="true">F</span>
+      <span>
+        <strong>Funding Finder</strong>
+        <small>University of Rochester pilot</small>
+      </span>
+    </a>
+    <div class="catalog-pill" id="catalog-pill" aria-live="polite">
+      <span class="status-dot" aria-hidden="true"></span>
+      Loading catalog…
     </div>
-    <div class="row" style="margin-top:12px;">
-      <button id="btn-save-search">Save current search</button>
-      <button id="btn-new-search">Start a new search</button>
-      <span class="hint">Saved searches stay in this browser and never include your API key.</span>
-    </div>
-    <div class="saved-searches" id="saved-searches" aria-live="polite"></div>
-    <p class="hint" id="grant-src">Opportunity source: built-in demonstration set. The hosted application refreshes live opportunities directly from Grants.gov.</p>
-  </div>
+  </header>
 
-  <!-- ============ RUN ============ -->
-  <div class="panel">
-    <h2>2 · Match</h2>
-    <button class="primary" id="btn-run">Find matches</button>
-    <button id="btn-export" disabled style="margin-left:8px;">Export results.csv</button>
-    <div class="banner" id="banner"></div>
-    <div id="status"></div>
-  </div>
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Search first. Use AI only when it helps.</p>
+        <h1 id="page-title">Find funding without fighting a database.</h1>
+        <p class="lede">Search every current opportunity in the public catalog, then narrow by deadline, discipline, eligibility, agency, award, and more.</p>
+      </div>
 
-  <!-- ============ RESULTS ============ -->
-  <div id="results"></div>
+      <form class="search-form" id="search-form" role="search">
+        <label class="sr-only" for="query">Search funding opportunities</label>
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"/></svg>
+        <input id="query" name="q" type="search" autocomplete="off" placeholder="Try “carbon capture”, “rural health”, or an opportunity number">
+        <button class="button primary search-button" type="submit">Search</button>
+      </form>
 
-  <div class="footer">
-    UR ChemE Grant Matcher · Match Explorer · Stage 3 prototype · faculty → ranked opportunities
-  </div>
-</div>
+      <div class="quick-searches" aria-label="Example searches">
+        <span>Explore:</span>
+        <button type="button" data-example-query="carbon capture and utilization">Carbon capture</button>
+        <button type="button" data-example-query="early career investigator">Early career</button>
+        <button type="button" data-example-query="rural public health">Rural health</button>
+        <button type="button" data-example-query="artificial intelligence manufacturing">AI + manufacturing</button>
+      </div>
+    </section>
 
-<script>
-/* =====================================================================
-   UR ChemE Grant Matcher — Match Explorer
-   Single-file, no dependencies, no server. Bring-your-own-key.
+    <div class="notice error hidden" id="catalog-error" role="alert"></div>
 
-   Pipeline (Stage 3 of PROJECT.md):
-     1. Similarity shortlist  — selected provider
-     2. Scored re-rank        — same provider returns verdict + score + rationale
-
-   The pure functions in the "LOGIC" block below are written so they can be
-   copied into a Node test harness and checked without a browser or a network.
-   ===================================================================== */
-
-/* ---------------------------------------------------------------------
-   BUNDLED OPPORTUNITY SAMPLE
-   The public prototype carries a small demonstration set so faculty can try
-   the workflow without uploading files. The hosted application refreshes
-   current records directly from Grants.gov.
-   --------------------------------------------------------------------- */
-const CALIBRATION_GRANTS = [
-  {opportunity_number:"NSF-CAREER", title:"Faculty Early Career Development Program (CAREER)", agency:"National Science Foundation",
-   career_stage_signal:"untenured tenure-track assistant professor", limited_submission:false, cost_share_required:false, has_preliminary_stage:false,
-   description:"Supports early-career faculty who can build an integrated research and education program. Open across all NSF-supported disciplines, with the proposal routed to the relevant disciplinary program. Restricted to untenured assistant professors who have not previously received a CAREER award."},
-  {opportunity_number:"DOE-SC-ECRP", title:"Office of Science Early Career Research Program", agency:"Department of Energy",
-   career_stage_signal:"within ten years of PhD, untenured", limited_submission:false, cost_share_required:false, has_preliminary_stage:true, preliminary_stage_type:"pre-proposal",
-   description:"Supports individual early-career investigators in areas aligned with the six Office of Science program offices, including Basic Energy Sciences. Requires a pre-proposal gate before full submission. Eligibility is tied to years since doctorate and to untenured status."},
-  {opportunity_number:"ACS-PRF-DNI", title:"Petroleum Research Fund Doctoral New Investigator", agency:"American Chemical Society",
-   career_stage_signal:"within three years of first academic appointment", limited_submission:false, cost_share_required:false, has_preliminary_stage:false,
-   source_note:"Not listed on Grants.gov",
-   description:"Seed funding for new academic investigators in fundamental research related to petroleum or fossil fuels, broadly interpreted to include catalysis, surface chemistry, polymers, and separations. Intended to launch a new research direction rather than extend existing funded work."},
-  {opportunity_number:"NSF-CBET-CATALYSIS", title:"Catalysis Program, Division of Chemical, Bioengineering, Environmental and Transport Systems", agency:"National Science Foundation",
-   limited_submission:false, cost_share_required:false, has_preliminary_stage:false,
-   description:"Core disciplinary program supporting fundamental research in catalytic materials and mechanisms, including heterogeneous, homogeneous, and biological catalysis. Emphasis on molecular-level understanding of active sites and reaction pathways. Open to investigators at any career stage."},
-  {opportunity_number:"ARPA-E-OPEN", title:"ARPA-E OPEN Funding Opportunity", agency:"Advanced Research Projects Agency Energy",
-   limited_submission:false, cost_share_required:true, cost_share_detail:"cost share required, share varies by project type", has_preliminary_stage:true, preliminary_stage_type:"concept paper",
-   source_note:"Submitted through ARPA-E eXCHANGE, not Grants.gov",
-   description:"Open call for transformational energy technologies across the full spectrum of energy applications. Requires a concept paper before an invited full application. Explicitly disfavours incremental improvement, and expects a quantified energy or emissions impact if the technology succeeds at scale."},
-  {opportunity_number:"NIH-R01-PARENT", title:"Research Project Grant (Parent R01)", agency:"National Institutes of Health",
-   limited_submission:false, cost_share_required:false, has_preliminary_stage:false,
-   description:"Supports discrete, specified, circumscribed health-related research projects. The work must fall within the mission of one of the NIH institutes and address a human health question. Open to investigators at any career stage."},
-  {opportunity_number:"NSF-MRI", title:"Major Research Instrumentation Program", agency:"National Science Foundation",
-   limited_submission:true, limited_submission_criteria:"institutions may submit a limited number of proposals per competition", cost_share_required:true, cost_share_detail:"cost share required for non-exempt institutions", has_preliminary_stage:false,
-   description:"Supports acquisition or development of shared research instrumentation that enables research across multiple users and groups. Institutional coordination is required because the number of submissions per institution is capped."},
-  {opportunity_number:"DOE-EFRC", title:"Energy Frontier Research Centers", agency:"Department of Energy",
-   limited_submission:true, limited_submission_criteria:"institutional coordination required, lead institution submits", cost_share_required:false, has_preliminary_stage:true, preliminary_stage_type:"letter of intent",
-   description:"Multi-investigator centers addressing grand challenges in energy-relevant basic science. Requires an assembled team spanning several investigators and often several institutions, with a single lead submission. Not suited to a single-PI project."}
-];
-
-/* =====================================================================
-   LOGIC  (pure, testable — no DOM, no network)
-   ===================================================================== */
-
-/* Build the text that represents a self-reported faculty profile. */
-function facultyText(f){
-  const parts = [
-    f.synopsis,
-    f.future_directions,
-    Array.isArray(f.include_topics) ? f.include_topics.join(", ") : "",
-    f.capabilities
-  ];
-  return parts.filter(s => s && String(s).trim()).join(". ").trim();
-}
-
-/* Build the text that represents an opportunity for embedding. */
-function grantText(g){
-  const parts = [
-    g.title,
-    g.agency,
-    g.description || g.eligibility_text,
-    g.eligibility_text,
-    g.career_stage_signal,
-    g.duration || g.project_duration || g.award_duration,
-    g.close_date_note,
-    Array.isArray(g.funding_categories) ? g.funding_categories.join(", ") : "",
-    Array.isArray(g.funding_instruments) ? g.funding_instruments.join(", ") : ""
-  ];
-  return parts.filter(s => s && String(s).trim()).join(". ").trim();
-}
-
-/* Cosine similarity of two equal-length numeric vectors. Range roughly [-1, 1]. */
-function cosine(a, b){
-  let dot = 0, na = 0, nb = 0;
-  for (let i = 0; i < a.length; i++){ dot += a[i]*b[i]; na += a[i]*a[i]; nb += b[i]*b[i]; }
-  if (na === 0 || nb === 0) return 0;
-  return dot / (Math.sqrt(na) * Math.sqrt(nb));
-}
-
-/* A faculty member's exclusions, from either data shape, as a plain list. */
-function facultyExclusions(f){
-  if (Array.isArray(f.exclude_topics)) return f.exclude_topics.filter(Boolean);
-  return [];
-}
-
-/* Pull a JSON value out of an LLM reply that may be wrapped in prose or ```fences```. */
-function extractJson(text){
-  if (!text) throw new Error("Empty response from the AI provider.");
-  let t = String(text).trim();
-  const fence = t.match(/```(?:json)?\s*([\s\S]*?)```/i);
-  if (fence) t = fence[1].trim();
-  // find the outermost array or object
-  const start = t.search(/[[{]/);
-  if (start === -1) throw new Error("No JSON found in the AI provider reply.");
-  const open = t[start], close = open === "[" ? "]" : "}";
-  let depth = 0, end = -1;
-  for (let i = start; i < t.length; i++){
-    if (t[i] === open) depth++;
-    else if (t[i] === close){ depth--; if (depth === 0){ end = i; break; } }
-  }
-  if (end === -1) throw new Error("Unbalanced JSON in the AI provider reply.");
-  return JSON.parse(t.slice(start, end + 1));
-}
-
-/* Rank order for verdicts, best first. Used to sort results. */
-const VERDICT_RANK = { strong:0, plausible:1, poor:2, ineligible:3 };
-
-/* Merge the provider's judgments back onto the shortlisted grants and sort them. */
-function assembleResults(shortlist, judgments){
-  const byIndex = {};
-  (judgments || []).forEach(j => { if (j && Number.isInteger(j.index)) byIndex[j.index] = j; });
-  const rows = shortlist.map((item, i) => {
-    const j = byIndex[i] || {};
-    const verdict = (VERDICT_RANK.hasOwnProperty(j.verdict) ? j.verdict : "poor");
-    let score = Number(j.score);
-    if (!Number.isFinite(score)) score = 0;
-    score = Math.max(0, Math.min(100, Math.round(score)));
-    return {
-      grant: item.grant,
-      similarity: item.similarity,
-      verdict,
-      score,
-      rationale: j.rationale || "(no rationale returned)",
-      eligibility: j.eligibility || ""
-    };
-  });
-  rows.sort((a, b) => {
-    if (VERDICT_RANK[a.verdict] !== VERDICT_RANK[b.verdict])
-      return VERDICT_RANK[a.verdict] - VERDICT_RANK[b.verdict];
-    return b.score - a.score;
-  });
-  return rows;
-}
-
-/* Expose for Node testing without breaking in the browser. */
-if (typeof module !== "undefined" && module.exports){
-  module.exports = { facultyText, grantText, cosine, extractJson, assembleResults,
-                     facultyExclusions, CALIBRATION_GRANTS };
-}
-
-/* =====================================================================
-   BROWSER-ONLY CODE below this line
-   ===================================================================== */
-if (typeof document !== "undefined"){
-(function(){
-
-  const LS = {
-    provider: "grantmatch.provider",
-    apiKey: "grantmatch.api_key",
-    searches: "grantmatch.saved_searches.v1",
-    emb: "grantmatch.emb."   // + hash  -> cached embedding
-  };
-
-  const PROVIDERS = {
-    openai: {
-      name: "OpenAI",
-      model: "gpt-5.6-sol",
-      detail: "OpenAI uses text-embedding-3-small for the shortlist and gpt-5.6-sol for the scored rationale."
-    },
-    anthropic: {
-      name: "Anthropic",
-      model: "claude-sonnet-5",
-      detail: "Anthropic uses Claude Sonnet 5 for both the shortlist and the scored rationale."
-    }
-  };
-
-  const state = {
-    grants: CALIBRATION_GRANTS.slice(),
-    lastResults: null,
-    lastFaculty: null,
-    lastProvider: null,
-    activeSearchId: null
-  };
-
-  const $ = id => document.getElementById(id);
-
-  /* ---------- provider and key handling ---------- */
-  function selectedProvider(){
-    return PROVIDERS[$("k-provider").value] ? $("k-provider").value : "openai";
-  }
-  function loadProvider(){
-    const savedProvider = localStorage.getItem(LS.provider);
-    const oldOpenAIKey = localStorage.getItem("grantmatch.openai_key");
-    const oldAnthropicKey = localStorage.getItem("grantmatch.anthropic_key");
-    const provider = PROVIDERS[savedProvider]
-      ? savedProvider
-      : (oldAnthropicKey && !oldOpenAIKey ? "anthropic" : "openai");
-    $("k-provider").value = provider;
-    $("k-key").value =
-      localStorage.getItem(LS.apiKey) ||
-      (provider === "anthropic" ? oldAnthropicKey : oldOpenAIKey) ||
-      "";
-    updateProviderDetail();
-    renderKeyStatus();
-  }
-  function updateProviderDetail(){
-    const provider = PROVIDERS[selectedProvider()];
-    $("provider-detail").textContent = provider.detail;
-    $("k-key").placeholder =
-      selectedProvider() === "anthropic" ? "sk-ant-..." : "sk-...";
-  }
-  function renderKeyStatus(){
-    const provider = localStorage.getItem(LS.provider);
-    const configured = PROVIDERS[provider] && !!localStorage.getItem(LS.apiKey);
-    const name = PROVIDERS[provider]?.name || "Provider";
-    $("keys-status").innerHTML =
-      `<span class="dot ${configured?'on':'off'}"></span>${configured ? `${name} ready` : "No provider key set"}`;
-    $("keys-summary").textContent = configured
-      ? `AI provider — ${name} ready (click to edit)`
-      : "AI provider — click to set up";
-    if (!configured) $("keys-box").open = true;
-  }
-  $("k-provider").addEventListener("change", updateProviderDetail);
-  $("btn-save-key").addEventListener("click", () => {
-    const key = $("k-key").value.trim();
-    if (!key){ err("Enter an API key for the selected provider."); return; }
-    localStorage.setItem(LS.provider, selectedProvider());
-    localStorage.setItem(LS.apiKey, key);
-    localStorage.removeItem("grantmatch.openai_key");
-    localStorage.removeItem("grantmatch.anthropic_key");
-    localStorage.removeItem("grantmatch.model");
-    renderKeyStatus();
-    info(`${PROVIDERS[selectedProvider()].name} is now used for both matching steps.`);
-  });
-  $("btn-clear-key").addEventListener("click", () => {
-    [LS.apiKey, "grantmatch.openai_key", "grantmatch.anthropic_key", "grantmatch.model"]
-      .forEach(k => localStorage.removeItem(k));
-    $("k-key").value = "";
-    renderKeyStatus();
-    info("API key cleared from this browser.");
-  });
-
-  /* ---------- banners / status ---------- */
-  function err(msg){ const b=$("banner"); b.className="banner err"; b.textContent="⚠ "+msg; }
-  function info(msg){ const b=$("banner"); b.className="banner info"; b.textContent=msg; }
-  function clearBanner(){ const b=$("banner"); b.className="banner"; b.textContent=""; }
-  function setStatus(msg){ $("status").textContent = msg; }
-
-  /* ---------- free-text and saved searches ---------- */
-  function currentFaculty(){
-    return {
-      name: $("search-name").value.trim() || "Current research search",
-      synopsis: $("research-profile").value.trim(),
-      career_stage: "unknown",
-      research_active: true
-    };
-  }
-
-  function readSavedSearches(){
-    try {
-      const parsed = JSON.parse(localStorage.getItem(LS.searches) || "[]");
-      return Array.isArray(parsed) ? parsed.filter(item => item && item.id) : [];
-    } catch(_) {
-      return [];
-    }
-  }
-
-  function writeSavedSearches(searches){
-    localStorage.setItem(LS.searches, JSON.stringify(searches.slice(0, 20)));
-  }
-
-  function defaultSearchName(text){
-    const words = String(text).replace(/\s+/g, " ").trim().split(" ").slice(0, 8);
-    return words.join(" ") || "Saved research search";
-  }
-
-  function renderSavedSearches(){
-    const box = $("saved-searches");
-    const searches = readSavedSearches();
-    box.innerHTML = "";
-    if (!searches.length){
-      const empty = document.createElement("div");
-      empty.className = "saved-empty";
-      empty.textContent = "No saved searches on this device yet.";
-      box.appendChild(empty);
-      return;
-    }
-
-    searches.forEach(search => {
-      const row = document.createElement("div");
-      row.className = "saved-item";
-      const label = document.createElement("div");
-      label.className = "saved-item-name";
-      label.textContent = search.name;
-      const date = document.createElement("span");
-      date.className = "saved-item-date";
-      date.textContent = `Saved ${new Date(search.updatedAt).toLocaleString()}${Array.isArray(search.results) ? ` · ${search.results.length} results` : ""}`;
-      label.appendChild(date);
-
-      const actions = document.createElement("div");
-      actions.className = "saved-item-actions";
-      const load = document.createElement("button");
-      load.type = "button";
-      load.textContent = "Open";
-      load.addEventListener("click", () => {
-        $("search-name").value = search.name || "";
-        $("research-profile").value = search.researchText || "";
-        $("topk").value = String(search.topk || 12);
-        state.activeSearchId = search.id;
-        $("results").innerHTML = "";
-        if (Array.isArray(search.results) && search.results.length){
-          const faculty = currentFaculty();
-          state.lastFaculty = faculty;
-          state.lastResults = search.results;
-          state.lastProvider = search.provider || null;
-          renderResults(
-            faculty,
-            search.results,
-            state.grants.length,
-            PROVIDERS[search.provider]?.name || "saved run"
-          );
-          $("btn-export").disabled = false;
-        } else {
-          state.lastFaculty = null;
-          state.lastResults = null;
-          state.lastProvider = null;
-          $("btn-export").disabled = true;
-        }
-        clearBanner();
-        info(`Opened “${search.name}”.`);
-      });
-
-      const remove = document.createElement("button");
-      remove.type = "button";
-      remove.textContent = "Delete";
-      remove.addEventListener("click", () => {
-        writeSavedSearches(readSavedSearches().filter(item => item.id !== search.id));
-        if (state.activeSearchId === search.id) state.activeSearchId = null;
-        renderSavedSearches();
-        info(`Deleted “${search.name}” from this browser.`);
-      });
-      actions.append(load, remove);
-      row.append(label, actions);
-      box.appendChild(row);
-    });
-  }
-
-  $("btn-save-search").addEventListener("click", () => {
-    clearBanner();
-    const faculty = currentFaculty();
-    if (faculty.synopsis.length < 40){
-      err("Describe your research in at least 40 characters before saving.");
-      return;
-    }
-    const name = $("search-name").value.trim() || defaultSearchName(faculty.synopsis);
-    $("search-name").value = name;
-    const searches = readSavedSearches();
-    const id = state.activeSearchId ||
-      (globalThis.crypto?.randomUUID ? crypto.randomUUID() : `search-${Date.now()}`);
-    const sameResearch =
-      state.lastFaculty && facultyText(state.lastFaculty) === facultyText(faculty);
-    const record = {
-      id,
-      name,
-      researchText: faculty.synopsis,
-      topk: Math.max(1, Math.min(50, parseInt($("topk").value, 10) || 12)),
-      provider: sameResearch ? state.lastProvider : null,
-      results: sameResearch ? state.lastResults : null,
-      updatedAt: new Date().toISOString()
-    };
-    const next = [record, ...searches.filter(item => item.id !== id)];
-    try {
-      writeSavedSearches(next);
-      state.activeSearchId = id;
-      renderSavedSearches();
-      info(`Saved “${name}”${record.results ? " with its current results" : ""}.`);
-    } catch(_) {
-      err("This browser could not save the search. Storage may be full or disabled.");
-    }
-  });
-  $("btn-new-search").addEventListener("click", () => {
-    state.activeSearchId = null;
-    state.lastFaculty = null;
-    state.lastResults = null;
-    state.lastProvider = null;
-    $("search-name").value = "";
-    $("research-profile").value = "";
-    $("topk").value = "12";
-    $("results").innerHTML = "";
-    $("btn-export").disabled = true;
-    setStatus("");
-    clearBanner();
-    info("Started a new blank research search. Your saved searches are unchanged.");
-    $("research-profile").focus();
-  });
-
-  /* ---------- tiny hash for embedding cache (cyrb53) ---------- */
-  function hash(str){
-    let h1=0xdeadbeef, h2=0x41c6ce57;
-    for (let i=0,ch; i<str.length; i++){ ch=str.charCodeAt(i);
-      h1=Math.imul(h1^ch,2654435761); h2=Math.imul(h2^ch,1597334677); }
-    h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);
-    h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);
-    return (4294967296*(2097151&h2)+(h1>>>0)).toString(36);
-  }
-
-  /* ---------- OpenAI embeddings (with localStorage cache) ---------- */
-  const EMB_MODEL = "text-embedding-3-small";
-  async function embed(texts, key){
-    const out = new Array(texts.length);
-    const need = [], needIdx = [];
-    texts.forEach((t, i) => {
-      const cached = localStorage.getItem(LS.emb + hash(EMB_MODEL + "|" + t));
-      if (cached){ out[i] = JSON.parse(cached); }
-      else { need.push(t); needIdx.push(i); }
-    });
-    if (need.length){
-      const resp = await fetch("https://api.openai.com/v1/embeddings", {
-        method:"POST",
-        headers:{ "Content-Type":"application/json", "Authorization":"Bearer "+key },
-        body: JSON.stringify({ model: EMB_MODEL, input: need })
-      });
-      if (!resp.ok){
-        const body = await resp.text();
-        throw new Error(`OpenAI embeddings failed (${resp.status}): ${body.slice(0,300)}`);
-      }
-      const data = await resp.json();
-      data.data.forEach((d, k) => {
-        const i = needIdx[k];
-        out[i] = d.embedding;
-        try { localStorage.setItem(LS.emb + hash(EMB_MODEL + "|" + need[k]), JSON.stringify(d.embedding)); }
-        catch(_) { /* cache full — ignore */ }
-      });
-    }
-    return out;
-  }
-
-  /* ---------- shared deep-scoring prompt ---------- */
-  function buildPrompt(faculty, shortlist){
-    const exclusions = facultyExclusions(faculty);
-    const facBlock = {
-      name: faculty.name,
-      career_stage: faculty.career_stage || faculty.rank || "unknown",
-      research_active: faculty.research_active,
-      years_since_doctorate: faculty.years_since_doctorate ?? null,
-      research_summary: facultyText(faculty),
-      do_not_send: exclusions
-    };
-    const grantsBlock = shortlist.map((item, i) => ({
-      index: i,
-      opportunity_number: item.grant.opportunity_number || null,
-      title: item.grant.title,
-      agency: item.grant.agency || null,
-      career_stage_signal: item.grant.career_stage_signal || null,
-      limited_submission: item.grant.limited_submission ?? null,
-      cost_share_required: item.grant.cost_share_required ?? null,
-      has_preliminary_stage: item.grant.has_preliminary_stage ?? null,
-      funding: item.grant.funding_amount || item.grant.award_ceiling || null,
-      deadline: item.grant.close_date || item.grant.close_date_note || null,
-      duration: item.grant.duration || item.grant.project_duration || null,
-      description: (item.grant.description || item.grant.eligibility_text || "").slice(0, 1200)
-    }));
-
-    const system =
-`You screen federal and foundation funding opportunities for a single university faculty member.
-For each opportunity, decide how worth the PI's time it is to pursue, and say why in one sentence.
-
-Use exactly these four verdicts:
-- "strong": clear topical fit AND the PI is eligible.
-- "plausible": real but partial fit, or fit with a caveat.
-- "poor": weak topical fit; eligible but not a good use of time.
-- "ineligible": the PI is barred by a hard eligibility rule (career stage, institution limits, mission mismatch). This is a hard gate, not a ranking judgment — never rank an ineligible opportunity as strong.
-
-Rules:
-- Treat career_stage_signal as an eligibility gate. Example: an early-career-only program is "ineligible" for a full/tenured professor.
-- If an opportunity matches anything in the PI's "do_not_send" list, cap the verdict at "poor" and say so.
-- The rationale must name the SPECIFIC overlap or the SPECIFIC blocker, using concrete nouns from the research summary and the opportunity. No generic praise.
-- score: 0-100, your confidence that this is worth pursuing (ineligible items score low).
-- eligibility: a short note ONLY if there is an eligibility concern; otherwise "".
-
-Return ONLY a JSON array, one object per opportunity, each: {"index":int,"verdict":str,"score":int,"rationale":str,"eligibility":str}. No prose outside the JSON.`;
-
-    const user =
-`FACULTY MEMBER:\n${JSON.stringify(facBlock, null, 2)}\n\nOPPORTUNITIES:\n${JSON.stringify(grantsBlock, null, 2)}`;
-    return { system, user };
-  }
-
-  function openAIResponseText(data){
-    if (data && typeof data.output_text === "string") return data.output_text;
-    return (data?.output || [])
-      .flatMap(item => item.content || [])
-      .filter(item => item.type === "output_text")
-      .map(item => item.text || "")
-      .join("");
-  }
-
-  async function openAIJson(system, user, key){
-    const model = PROVIDERS.openai.model;
-    const resp = await fetch("https://api.openai.com/v1/responses", {
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json",
-        "Authorization":"Bearer "+key
-      },
-      body: JSON.stringify({
-        model,
-        instructions: system,
-        input: user,
-        max_output_tokens: 4000
-      })
-    });
-    if (!resp.ok){
-      const body = await resp.text();
-      throw new Error(`OpenAI request failed (${resp.status}): ${body.slice(0,300)}`);
-    }
-    return extractJson(openAIResponseText(await resp.json()));
-  }
-
-  async function anthropicJson(system, user, key){
-    const model = PROVIDERS.anthropic.model;
-    const resp = await fetch("https://api.anthropic.com/v1/messages", {
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json",
-        "x-api-key": key,
-        "anthropic-version":"2023-06-01",
-        "anthropic-dangerous-direct-browser-access":"true"
-      },
-      body: JSON.stringify({
-        model, max_tokens: 4000, system,
-        messages:[{ role:"user", content:user }]
-      })
-    });
-    if (!resp.ok){
-      const body = await resp.text();
-      throw new Error(`Claude request failed (${resp.status}): ${body.slice(0,300)}`);
-    }
-    const data = await resp.json();
-    const text = (data.content || []).map(c => c.text || "").join("");
-    return extractJson(text);
-  }
-
-  async function deepRank(provider, key, faculty, shortlist){
-    const { system, user } = buildPrompt(faculty, shortlist);
-    return provider === "anthropic"
-      ? anthropicJson(system, user, key)
-      : openAIJson(system, user, key);
-  }
-
-  function buildAnthropicShortlistPrompt(faculty, grants){
-    const system =
-`You create the first-pass shortlist for a university grant matcher.
-Score the semantic research fit between one faculty profile and every opportunity.
-This pass is only for topical retrieval; do not make the final eligibility or pursuit decision.
-Use synonyms and related scientific concepts, not just exact keyword overlap.
-Return ONLY a JSON array with one object per opportunity:
-{"index":int,"similarity":int}
-where similarity is an integer from 0 to 100. No prose outside the JSON.`;
-    const user =
-`FACULTY RESEARCH:\n${facultyText(faculty)}\n\nOPPORTUNITIES:\n${JSON.stringify(
-  grants.map((grant, index) => ({
-    index,
-    title: grant.title,
-    agency: grant.agency || null,
-    description: (grant.description || grant.eligibility_text || "").slice(0, 900)
-  })),
-  null,
-  2
-)}`;
-    return { system, user };
-  }
-
-  async function openAIShortlist(faculty, grants, topk, key){
-    const grantTexts = grants.map(grantText);
-    const vectors = await embed([facultyText(faculty), ...grantTexts], key);
-    const facultyVector = vectors[0];
-    const scored = grants.map((grant, index) => ({
-      grant,
-      similarity: cosine(facultyVector, vectors[index + 1])
-    })).sort((left, right) => right.similarity - left.similarity);
-    return { scored, shortlist: scored.slice(0, topk) };
-  }
-
-  async function anthropicShortlist(faculty, grants, topk, key){
-    const scored = [];
-    const batchSize = 40;
-    for (let start = 0; start < grants.length; start += batchSize){
-      const batch = grants.slice(start, start + batchSize);
-      setStatus(
-        `Step 1/2 · Anthropic shortlist ${Math.min(start + batch.length, grants.length)}/${grants.length}…`
-      );
-      const { system, user } = buildAnthropicShortlistPrompt(faculty, batch);
-      const judgments = await anthropicJson(system, user, key);
-      const byIndex = new Map(
-        (Array.isArray(judgments) ? judgments : [])
-          .filter(item => Number.isInteger(item?.index))
-          .map(item => [item.index, item])
-      );
-      batch.forEach((grant, index) => {
-        const raw = Number(byIndex.get(index)?.similarity);
-        const similarity = Number.isFinite(raw)
-          ? Math.max(0, Math.min(100, raw)) / 100
-          : 0;
-        scored.push({ grant, similarity });
-      });
-    }
-    scored.sort((left, right) => right.similarity - left.similarity);
-    return { scored, shortlist: scored.slice(0, topk) };
-  }
-
-  /* ---------- run ---------- */
-  $("btn-run").addEventListener("click", async () => {
-    clearBanner();
-    const provider = localStorage.getItem(LS.provider);
-    const key = localStorage.getItem(LS.apiKey);
-    if (!PROVIDERS[provider] || !key){
-      err("Choose one provider and save its API key first."); $("keys-box").open = true; return;
-    }
-    const faculty = currentFaculty();
-    if (facultyText(faculty).length < 40){
-      err("Describe your research in at least 40 characters before matching.");
-      $("research-profile").focus();
-      return;
-    }
-    if (!state.grants.length){ err("No opportunities loaded."); return; }
-
-    const topk = Math.max(
-      1,
-      Math.min(state.grants.length, 50, parseInt($("topk").value, 10) || 12)
-    );
-    $("btn-run").disabled = true; $("btn-export").disabled = true;
-    $("results").innerHTML = "";
-
-    try {
-      // Step 1: provider-specific shortlist, using the same key as step 2.
-      setStatus(`Step 1/2 · creating shortlist with ${PROVIDERS[provider].name}…`);
-      const { scored, shortlist } = provider === "anthropic"
-        ? await anthropicShortlist(faculty, state.grants, topk, key)
-        : await openAIShortlist(faculty, state.grants, topk, key);
-
-      // Step 2: deep scoring with the same selected provider.
-      setStatus(
-        `Step 2/2 · scoring ${shortlist.length} opportunities with ${PROVIDERS[provider].model}…`
-      );
-      const judgments = await deepRank(provider, key, faculty, shortlist);
-      const results = assembleResults(shortlist, judgments);
-
-      state.lastResults = results; state.lastFaculty = faculty;
-      state.lastProvider = provider;
-      renderResults(faculty, results, scored.length, PROVIDERS[provider].name);
-      setStatus(`Done · ${results.length} scored, ${state.grants.length} considered.`);
-      $("btn-export").disabled = false;
-      info("Matching complete. Save this search to keep the profile and result snapshot on this device.");
-    } catch(ex){
-      err(ex.message);
-      setStatus("");
-    } finally {
-      $("btn-run").disabled = false;
-    }
-  });
-
-  /* ---------- render ---------- */
-  function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
-  function firstText(...values){
-    const found = values.find(value => value !== null && value !== undefined && String(value).trim());
-    return found === undefined ? "" : String(found).trim();
-  }
-  function formatMoney(value){
-    const raw = firstText(value);
-    if (!raw) return "";
-    const numeric = Number(raw.replace(/[$,\s]/g, ""));
-    if (!Number.isFinite(numeric) || numeric <= 0) return raw;
-    return new Intl.NumberFormat("en-US", {
-      style:"currency", currency:"USD", maximumFractionDigits:0,
-      notation:numeric >= 1_000_000 ? "compact" : "standard"
-    }).format(numeric);
-  }
-  function fundingText(g){
-    const explicit = firstText(g.funding_amount, g.fundingAmount);
-    if (explicit) return explicit;
-    const floor = formatMoney(g.award_floor ?? g.awardFloor);
-    const ceiling = formatMoney(g.award_ceiling ?? g.awardCeiling);
-    if (floor && ceiling) return floor === ceiling ? ceiling : `${floor}–${ceiling} per award`;
-    if (ceiling) return `Up to ${ceiling} per award`;
-    if (floor) return `From ${floor} per award`;
-    const total = formatMoney(
-      g.total_program_funding ?? g.estimated_total_program_funding ?? g.totalProgramFunding
-    );
-    return total ? `${total} total program funding` : "Not listed — check notice";
-  }
-  function formatDate(value){
-    const raw = firstText(value);
-    if (!raw) return "";
-    const date = new Date(raw);
-    if (Number.isNaN(date.getTime())) return raw;
-    return new Intl.DateTimeFormat("en-US", {
-      month:"short", day:"numeric", year:"numeric"
-    }).format(date);
-  }
-  function deadlineText(g){
-    if (g.rolling) return "Rolling / open until superseded";
-    const date = formatDate(g.close_date ?? g.closeDate ?? g.response_date);
-    const note = firstText(g.close_date_note, g.closeDateNote, g.deadline_note);
-    if (date && note && !note.toLowerCase().includes(date.toLowerCase())) return `${date} · ${note}`;
-    return date || note || "Not listed — check notice";
-  }
-  function durationText(g){
-    return firstText(
-      g.duration,
-      g.project_duration,
-      g.award_duration,
-      g.project_period,
-      g.funding_period,
-      g.grantDuration
-    ) || "Not listed — check notice";
-  }
-  function fact(label, value){
-    return `<div class="fact"><span class="fact-label">${esc(label)}</span><span class="fact-value">${esc(value)}</span></div>`;
-  }
-  function renderResults(faculty, results, considered, providerName){
-    const box = $("results");
-    const head = document.createElement("div");
-    head.className = "panel";
-    head.innerHTML = `<h2>Matches for ${esc(faculty.name)}</h2>
-      <div class="note">${considered} opportunities considered · ${results.length} scored by ${esc(providerName)} · ranked by verdict then score.</div>`;
-    box.appendChild(head);
-
-    results.forEach(r => {
-      const g = r.grant;
-      const card = document.createElement("div");
-      card.className = "card";
-      const sub = [g.agency, g.opportunity_number, g.source_note].filter(Boolean).map(esc).join(" · ");
-      const links = [];
-      const detailPage = firstText(g.detail_page, g.detailPage);
-      const nofoUrl = firstText(g.nofo_pdf_url, g.nofoPdfUrl, g.primary_document_url);
-      const applyUrl = firstText(g.apply_url, g.applyUrl);
-      if (detailPage) links.push(`<a href="${esc(detailPage)}" target="_blank" rel="noopener">Opportunity page</a>`);
-      if (nofoUrl) links.push(`<a href="${esc(nofoUrl)}" target="_blank" rel="noopener">NOFO / announcement</a>`);
-      if (applyUrl) links.push(`<a href="${esc(applyUrl)}" target="_blank" rel="noopener">Apply</a>`);
-      const flags = [];
-      if (g.has_preliminary_stage ?? g.hasPreliminaryStage){
-        const type = firstText(g.preliminary_stage_type, g.preliminaryStageType);
-        flags.push(`<span class="flag warn">${esc(type ? `Preliminary stage: ${type}` : "Preliminary stage required")}</span>`);
-      }
-      if (g.limited_submission ?? g.limitedSubmission){
-        flags.push(`<span class="flag warn">${esc(firstText(g.limited_submission_criteria, g.limitedSubmissionCriteria) || "Limited submission")}</span>`);
-      }
-      if (g.cost_share_required ?? g.costShareRequired){
-        flags.push(`<span class="flag warn">${esc(firstText(g.cost_share_detail, g.costShareDetail) || "Cost share required")}</span>`);
-      }
-      if (g.rolling) flags.push(`<span class="flag">Rolling opportunity</span>`);
-      const expectedAwards = firstText(
-        g.expected_number_of_awards,
-        g.number_of_awards,
-        g.expectedAwards
-      ) || "Not listed";
-      const projectStart = formatDate(
-        g.estimated_project_start ?? g.project_start_date ?? g.projectStartDate
-      ) || "Not listed";
-      const status = firstText(g.status, g.opportunity_status) || "Check current notice";
-      const eligibilityText = firstText(
-        g.eligibility_text,
-        g.applicant_eligibility_description,
-        Array.isArray(g.applicant_types) ? g.applicant_types.join(", ") : ""
-      );
-      card.innerHTML = `
-        <div class="card-top">
+    <div class="workspace">
+      <aside class="filter-panel" aria-label="Search filters">
+        <div class="panel-heading">
           <div>
-            <p class="card-title">${esc(g.title)}</p>
-            <p class="card-sub">${sub}</p>
+            <p class="eyebrow">Narrow results</p>
+            <h2>Filters</h2>
           </div>
-          <div style="text-align:right;">
-            <span class="badge b-${r.verdict}">${esc(r.verdict)}</span>
-            <div class="scores">score ${r.score} · sim ${(r.similarity*100).toFixed(0)}%</div>
+          <button class="text-button" id="clear-filters" type="button">Clear all</button>
+        </div>
+
+        <fieldset class="status-filter">
+          <legend>Opportunity status</legend>
+          <label>
+            <input type="checkbox" id="status-posted" checked>
+            <span>Open now</span>
+            <strong id="count-posted">—</strong>
+          </label>
+          <label>
+            <input type="checkbox" id="status-forecasted" checked>
+            <span>Forecasted</span>
+            <strong id="count-forecasted">—</strong>
+          </label>
+        </fieldset>
+
+        <details class="facet" open>
+          <summary>
+            <span>Discipline</span>
+            <span class="selection-count" id="selected-discipline"></span>
+          </summary>
+          <div class="facet-list" id="facet-discipline"></div>
+        </details>
+
+        <details class="facet">
+          <summary>
+            <span>Topic</span>
+            <span class="selection-count" id="selected-topic"></span>
+          </summary>
+          <label class="facet-search">
+            <span class="sr-only">Search topics</span>
+            <input type="search" data-facet-search="topic" placeholder="Find a topic">
+          </label>
+          <div class="facet-list" id="facet-topic"></div>
+        </details>
+
+        <details class="facet">
+          <summary>
+            <span>Agency</span>
+            <span class="selection-count" id="selected-agency"></span>
+          </summary>
+          <label class="facet-search">
+            <span class="sr-only">Search agencies</span>
+            <input type="search" data-facet-search="agency" placeholder="Find an agency">
+          </label>
+          <div class="facet-list" id="facet-agency"></div>
+        </details>
+
+        <details class="facet">
+          <summary>
+            <span>Eligibility</span>
+            <span class="selection-count" id="selected-eligibility"></span>
+          </summary>
+          <label class="facet-search">
+            <span class="sr-only">Search eligibility types</span>
+            <input type="search" data-facet-search="eligibility" placeholder="Find applicant type">
+          </label>
+          <div class="facet-list" id="facet-eligibility"></div>
+        </details>
+
+        <details class="facet">
+          <summary>
+            <span>Funding instrument</span>
+            <span class="selection-count" id="selected-funding_instrument"></span>
+          </summary>
+          <div class="facet-list" id="facet-funding_instrument"></div>
+        </details>
+
+        <details class="facet">
+          <summary><span>Deadline and award</span></summary>
+          <div class="range-grid">
+            <label>
+              Deadline from
+              <input id="deadline-from" type="date">
+            </label>
+            <label>
+              Deadline through
+              <input id="deadline-to" type="date">
+            </label>
+          </div>
+          <label class="number-field">
+            Minimum award ceiling
+            <span class="input-prefix">$</span>
+            <input id="award-min" type="number" min="0" step="1000" inputmode="numeric" placeholder="100,000">
+          </label>
+        </details>
+
+        <details class="facet">
+          <summary><span>Special requirements</span></summary>
+          <div class="switch-list">
+            <label><input id="flag-preliminary" type="checkbox"><span>Has LOI or preproposal</span></label>
+            <label><input id="flag-limited" type="checkbox"><span>Potential limited submission</span></label>
+            <label><input id="flag-early-career" type="checkbox"><span>Early-career signal</span></label>
+            <label><input id="flag-no-cost-share" type="checkbox"><span>No listed cost share</span></label>
+          </div>
+        </details>
+      </aside>
+
+      <section class="results-column" aria-labelledby="results-heading">
+        <div class="results-toolbar">
+          <div>
+            <p class="eyebrow" id="results-mode">Public catalog</p>
+            <h2 id="results-heading"><span id="result-count">—</span> opportunities</h2>
+            <p class="result-range" id="result-range"></p>
+          </div>
+          <div class="toolbar-actions">
+            <label>
+              <span>Sort</span>
+              <select id="sort">
+                <option value="relevance">Relevance</option>
+                <option value="deadline">Deadline: soonest</option>
+                <option value="posted">Recently posted</option>
+                <option value="award">Largest award</option>
+                <option value="agency">Agency</option>
+                <option value="title">Title</option>
+              </select>
+            </label>
+            <button class="button secondary" id="export-csv" type="button">Export CSV</button>
           </div>
         </div>
-        <p class="rationale">${esc(r.rationale)}</p>
-        ${r.eligibility ? `<p class="elig">⚑ ${esc(r.eligibility)}</p>` : ""}
-        <div class="fact-grid">
-          ${fact("Funding", fundingText(g))}
-          ${fact("Due date(s)", deadlineText(g))}
-          ${fact("Grant duration", durationText(g))}
-          ${fact("Expected awards", expectedAwards)}
-          ${fact("Project start", projectStart)}
-          ${fact("Status", status)}
+
+        <div class="active-filters hidden" id="active-filters" aria-label="Active filters"></div>
+        <div class="notice warning hidden" id="stale-warning"></div>
+        <div class="result-list" id="results" aria-live="polite"></div>
+
+        <nav class="pagination" id="pagination" aria-label="Results pages">
+          <button class="button secondary" id="page-prev" type="button">Previous</button>
+          <span id="page-label"></span>
+          <button class="button secondary" id="page-next" type="button">Next</button>
+        </nav>
+      </section>
+
+      <aside class="ai-panel" aria-labelledby="ai-heading">
+        <div class="ai-heading">
+          <span class="spark" aria-hidden="true">✦</span>
+          <div>
+            <p class="eyebrow">Optional refinement</p>
+            <h2 id="ai-heading">Ask AI to find the best fits</h2>
+          </div>
         </div>
-        ${flags.length ? `<div class="flags">${flags.join("")}</div>` : ""}
-        ${links.length ? `<div class="links">${links.join("")}</div>` : ""}
-        ${(g.description || eligibilityText) ? `<details class="desc"><summary>Opportunity and eligibility details</summary>
-          ${eligibilityText ? `<p><strong>Eligibility:</strong> ${esc(eligibilityText)}</p>` : ""}
-          ${g.description ? `<p>${esc(g.description)}</p>` : ""}
-        </details>` : ""}
-      `;
-      box.appendChild(card);
-    });
-  }
+        <p class="panel-copy">Describe the work you want funded. AI expands the search, reviews a small candidate set, and explains the shortlist. Normal search remains free.</p>
 
-  /* ---------- export ---------- */
-  function csvCell(value){
-    return `"${String(value ?? "").replaceAll('"', '""')}"`;
-  }
-  $("btn-export").addEventListener("click", () => {
-    if (!state.lastResults) return;
-    const header = [
-      "search_name", "research_profile", "provider", "model",
-      "verdict", "score", "similarity", "rationale", "eligibility",
-      "opportunity_number", "title", "agency", "status",
-      "funding", "award_floor", "award_ceiling", "total_program_funding",
-      "expected_awards", "due_dates", "deadline_note", "grant_duration",
-      "project_start", "preliminary_stage", "limited_submission",
-      "cost_share", "applicant_eligibility", "opportunity_url", "nofo_url"
-    ];
-    const rows = state.lastResults.map(r => {
-      const g = r.grant;
-      return [
-        state.lastFaculty.name,
-        facultyText(state.lastFaculty),
-        state.lastProvider || "",
-        PROVIDERS[state.lastProvider]?.model || "",
-        r.verdict,
-        r.score,
-        Number(r.similarity.toFixed(4)),
-        r.rationale,
-        r.eligibility,
-        firstText(g.opportunity_number, g.opportunityNumber),
-        g.title,
-        g.agency,
-        firstText(g.status, g.opportunity_status),
-        fundingText(g),
-        firstText(g.award_floor, g.awardFloor),
-        firstText(g.award_ceiling, g.awardCeiling),
-        firstText(g.total_program_funding, g.estimated_total_program_funding, g.totalProgramFunding),
-        firstText(g.expected_number_of_awards, g.number_of_awards, g.expectedAwards),
-        deadlineText(g),
-        firstText(g.close_date_note, g.closeDateNote, g.deadline_note),
-        durationText(g),
-        firstText(g.estimated_project_start, g.project_start_date, g.projectStartDate),
-        (g.has_preliminary_stage ?? g.hasPreliminaryStage)
-          ? firstText(g.preliminary_stage_type, g.preliminaryStageType) || "Required"
-          : "No",
-        (g.limited_submission ?? g.limitedSubmission)
-          ? firstText(g.limited_submission_criteria, g.limitedSubmissionCriteria) || "Yes"
-          : "No",
-        (g.cost_share_required ?? g.costShareRequired)
-          ? firstText(g.cost_share_detail, g.costShareDetail) || "Required"
-          : "No",
-        firstText(
-          g.eligibility_text,
-          g.applicant_eligibility_description,
-          Array.isArray(g.applicant_types) ? g.applicant_types.join(", ") : ""
-        ),
-        firstText(g.detail_page, g.detailPage),
-        firstText(g.nofo_pdf_url, g.nofoPdfUrl, g.primary_document_url)
-      ];
-    });
-    const csv = [header, ...rows].map(row => row.map(csvCell).join(",")).join("\r\n");
-    const blob = new Blob([`\uFEFF${csv}`], {type:"text/csv;charset=utf-8"});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    const slug = state.lastFaculty.name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
-    a.href = url;
-    a.download = `grant-matches-${slug || "research-search"}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
-  });
+        <label class="stacked-field" for="research-profile">
+          Research or project description
+          <textarea id="research-profile" rows="7" placeholder="Example: We develop electrochemical and catalytic routes that turn captured CO₂ into fuels and commodity chemicals. We can lead reactor design, materials synthesis, and techno-economic analysis."></textarea>
+        </label>
 
-  /* ---------- init ---------- */
-  loadProvider();
-  renderSavedSearches();
-})();
-}
-</script>
+        <details class="provider-setup">
+          <summary>
+            <span>AI provider</span>
+            <span id="provider-state">Not configured</span>
+          </summary>
+          <div class="provider-fields">
+            <label>
+              Provider
+              <select id="k-provider">
+                <option value="openai">OpenAI</option>
+                <option value="anthropic">Anthropic</option>
+              </select>
+            </label>
+            <label>
+              API key
+              <input id="k-key" type="password" autocomplete="new-password" spellcheck="false" placeholder="sk-…">
+            </label>
+            <button class="text-button" id="clear-key" type="button">Clear key</button>
+          </div>
+          <p class="privacy-note">The key and research text stay in page memory only and disappear when this tab closes or reloads. A refinement sends the research text and a limited set of public opportunities directly to the selected provider.</p>
+        </details>
+
+        <button class="button ai-button" id="ai-refine" type="button">
+          <span aria-hidden="true">✦</span>
+          Refine current search
+        </button>
+        <p class="cost-note">Uses two bounded model calls: search expansion, then reranking of at most 32 opportunities.</p>
+        <div class="ai-status hidden" id="ai-status" aria-live="polite"></div>
+
+        <section class="chat hidden" id="chat" aria-labelledby="chat-heading">
+          <div class="chat-header">
+            <div>
+              <p class="eyebrow">Grounded follow-up</p>
+              <h3 id="chat-heading">Ask the shortlist</h3>
+            </div>
+            <button class="text-button" id="clear-ai" type="button">Back to search</button>
+          </div>
+          <p class="chat-summary" id="chat-summary"></p>
+          <div class="suggestion-list" id="chat-suggestions"></div>
+          <div class="messages" id="chat-messages" aria-live="polite"></div>
+          <form class="chat-form" id="chat-form">
+            <label class="sr-only" for="chat-input">Ask about the shortlisted opportunities</label>
+            <textarea id="chat-input" rows="3" placeholder="Which opportunities fit a university-led pilot and close after October?"></textarea>
+            <button class="button primary" type="submit">Ask</button>
+          </form>
+          <button class="text-button hidden" id="reset-narrowing" type="button">Restore the original AI shortlist</button>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <p><strong>Source:</strong> <a href="https://www.grants.gov/xml-extract" target="_blank" rel="noopener">Grants.gov daily database extract</a>. Always verify requirements and dates in the official notice before applying.</p>
+    <p id="catalog-detail"></p>
+  </footer>
+
+  <noscript>
+    <div class="notice error">JavaScript is required to search the opportunity catalog.</div>
+  </noscript>
+  <script src="./data/opportunities.js"></script>
+  <script src="./assets/app.js"></script>
 </body>
 </html>

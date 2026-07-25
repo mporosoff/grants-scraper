@@ -1,72 +1,70 @@
-# UR Grant Matcher
+# Funding Finder
 
-A public, faculty-first browser application for identifying funding
-opportunities worth attention.
+A public funding-opportunity search engine with optional AI refinement.
 
 Open the application:
 
 https://mporosoff.github.io/grants-scraper/
 
-Faculty do not install Python or upload faculty/grant files. A user writes a
-research description in their own words, chooses either OpenAI or Anthropic,
-and supplies one key from that provider. The same provider runs both matching
-stages.
+## What it does
 
-## Current product model
+Anyone can search the comprehensive catalog without an account or API key. The browser provides:
 
-- GitHub Pages is the canonical application.
-- The application is public and has no accounts or central user database.
-- The provider selection, API key, research text, named searches, result
-  snapshots, and cached embeddings stay in that browser's local storage.
-- Matching requests go directly from the browser to the selected AI provider.
-- Results can be exported as CSV.
-- The API key is not included in exports or committed to GitHub.
+- full-text search across current Grants.gov opportunities;
+- filters for status, discipline, topic, agency, eligibility, instrument, deadline, award size, and special requirements;
+- relevance and field-based sorting;
+- expandable source details, pagination, and CSV export; and
+- visible catalog source, size, generated time, and freshness.
 
-Local browser storage is convenient, not a secure credential vault. Use a
-scoped key with a spending limit, avoid unpublished confidential research
-details, and clear the key before leaving a shared device.
+Ordinary search makes zero AI calls. A user may optionally enter an OpenAI or Anthropic key and a research description to:
 
-## What works now
+1. expand the search with useful synonyms;
+2. rerank at most 32 retrieved candidates into a shortlist of at most 12; and
+3. ask grounded follow-up questions that can further narrow the shortlist.
 
-- free-text faculty research descriptions;
-- no faculty dropdowns or JSON-file workflows;
-- one selectable AI provider and one locally saved key;
-- two-stage matching with verdicts, scores, and visible rationales;
-- browser-local named saved searches and result snapshots;
-- result cards with funding, due dates, duration, expected awards,
-  eligibility, submission warnings, and source links;
-- CSV export; and
-- mobile-friendly, installation-free use.
+The key, research description, shortlist, and chat stay in page memory only. They are not written to local storage, session storage, GitHub, or an application database, and they disappear when the page reloads.
 
-The current opportunity list is a small bundled calibration set. The next
-milestone is an automatically refreshed Grants.gov feed published to GitHub
-Pages by a scheduled GitHub Action.
+## Data model
+
+The daily workflow processes the official [Grants.gov XML database extract](https://www.grants.gov/xml-extract). It publishes current posted and forecasted records plus a compact BM25 search index to `data/opportunities.js`.
+
+This replaces the former 48-record Chemical and Sustainability Engineering feed. The current catalog is typically around 1,700 federal opportunities and is intended for broad public search.
 
 ## Project layout
 
 | Path | Purpose |
 |---|---|
 | `index.html` | Redirects GitHub Pages to the application |
-| `match_explorer.html` | Canonical public application |
-| `PROJECT.md` | Authoritative product decisions, privacy policy, and roadmap |
-| `scripts/pull_grants.py` | Grants.gov ingestion and normalization |
-| `tests/` | Static application and normalizer checks |
-| `docs/` | Hosting and API validation notes |
-| `legacy/scrape_faculty.py` | Retired faculty scraper |
-| `web/` | Retained server-backed experiment; not the current product |
+| `match_explorer.html` | Public search and AI-refinement interface |
+| `assets/app.js` | Search, facets, sorting, export, refinement, and shortlist chat |
+| `assets/app.css` | Responsive application styles |
+| `data/opportunities.js` | Generated catalog and search index |
+| `scripts/build_catalog.py` | Official XML ingestion and catalog builder |
+| `PROJECT.md` | Product decisions, architecture, and roadmap |
+| `tests/` | Pipeline and public-page regression checks |
+| `docs/HOSTING.md` | Deployment and privacy boundary |
 
 ## Development
 
-The public application is a standalone HTML file and requires no local server.
-Developers can run the regression checks with:
+Install the small Python dependency set and run the regression suite:
 
 ```powershell
 python -m pip install -r requirements.txt
 python -m unittest discover -s tests -v
 ```
 
-The retained `web/` experiment has separate Node-based checks, but it is not
-deployed as the canonical application.
+Build from an existing official extract:
 
-See `PROJECT.md` for the complete plan and `docs/HOSTING.md` for the GitHub
-Pages data and privacy boundary.
+```powershell
+python -m scripts.build_catalog --archive GrantsDBExtractYYYYMMDDv2.zip
+```
+
+Or discover and download the latest official extract:
+
+```powershell
+python -m scripts.build_catalog
+```
+
+The scheduled workflow runs the latter command daily, validates a plausible catalog size, retests the generated asset, and commits only the normalized browser catalog. Raw XML archives are not committed.
+
+See `PROJECT.md` for the product plan and `docs/HOSTING.md` for the deployment boundary.
