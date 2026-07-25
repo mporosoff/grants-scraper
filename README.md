@@ -27,13 +27,18 @@ baseline. It is useful for testing the complete workflow, but the next quality
 upgrade is a server-side semantic retrieval and reranking stage evaluated
 against faculty feedback.
 
+The standalone match explorer supports bring-your-own-key experiments. A user
+chooses either OpenAI or Anthropic and supplies one key; that same provider runs
+both the shortlist and the deeper scoring pass. The hosted faculty application
+does not expose shared production keys in its browser UI.
+
 ## Project layout
 
 | Path | Purpose |
 |---|---|
 | `web/` | Hosted application, APIs, database schema, migrations, and UI |
 | `scripts/pull_grants.py` | Standalone Grants.gov ingestion and normalization tool |
-| `match_explorer.html` | Original interaction/design prototype retained as a reference |
+| `match_explorer.html` | Standalone prototype with one selectable AI provider and one key |
 | `legacy/scrape_faculty.py` | Retired faculty scraper |
 | `docs/` | API validation and hosting decisions |
 

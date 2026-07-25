@@ -41,3 +41,21 @@ test("uses persistent application storage and removes starter dependencies", asy
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
   assert.deepEqual(previewFiles, []);
 });
+
+test("uses one selected AI provider and one key in the standalone explorer", async () => {
+  const prototype = await readFile(
+    new URL("../match_explorer.html", root),
+    "utf8",
+  );
+  const script = prototype.match(/<script>([\s\S]*?)<\/script>/)?.[1];
+
+  assert.match(prototype, /id="k-provider"/);
+  assert.match(prototype, /id="k-key"/);
+  assert.match(prototype, /gpt-5\.6-sol/);
+  assert.match(prototype, /claude-sonnet-5/);
+  assert.match(prototype, /async function deepRank/);
+  assert.match(prototype, /async function anthropicShortlist/);
+  assert.doesNotMatch(prototype, /id="k-openai"|id="k-anthropic"/);
+  assert.ok(script);
+  assert.doesNotThrow(() => new Function(script));
+});

@@ -78,40 +78,37 @@
 
   <h1>Match Explorer</h1>
   <p class="standfirst">Pick a faculty member and rank funding opportunities against their profile.
-  Each match is scored and gets a one-sentence reason. Runs entirely in your browser: your API keys stay on this machine and go only to OpenAI and Anthropic.</p>
+  Each match is scored and gets a one-sentence reason. Choose OpenAI or Anthropic once; one key powers the complete matching run.</p>
 
-  <!-- ============ API KEYS ============ -->
+  <!-- ============ AI PROVIDER ============ -->
   <div class="panel">
     <details class="keys" id="keys-box">
-      <summary><span id="keys-summary">API keys — click to set up</span></summary>
+      <summary><span id="keys-summary">AI provider — click to set up</span></summary>
       <div style="margin-top:14px;">
         <div class="row">
           <div class="col">
-            <label class="lab" for="k-openai">OpenAI API key <span class="note">(for the similarity shortlist)</span></label>
-            <input type="password" id="k-openai" placeholder="sk-...">
+            <label class="lab" for="k-provider">Provider</label>
+            <select id="k-provider">
+              <option value="openai">OpenAI</option>
+              <option value="anthropic">Anthropic</option>
+            </select>
           </div>
           <div class="col">
-            <label class="lab" for="k-anthropic">Anthropic API key <span class="note">(for the scored rationale)</span></label>
-            <input type="password" id="k-anthropic" placeholder="sk-ant-...">
+            <label class="lab" for="k-key">API key <span class="note">(used for both matching steps)</span></label>
+            <input type="password" id="k-key" placeholder="sk-...">
           </div>
         </div>
         <div class="row" style="margin-top:12px;">
-          <div class="col" style="flex:0 0 260px;">
-            <label class="lab" for="k-model">Claude model</label>
-            <select id="k-model">
-              <option value="claude-sonnet-5">claude-sonnet-5 (balanced, recommended)</option>
-              <option value="claude-haiku-4-5-20251001">claude-haiku-4-5 (cheapest, fastest)</option>
-              <option value="claude-opus-5">claude-opus-5 (best, priciest)</option>
-            </select>
+          <div class="col">
+            <p class="hint" id="provider-detail"></p>
           </div>
           <div class="col" style="display:flex;gap:10px;align-items:flex-end;">
-            <button class="primary" id="btn-save-keys">Save keys</button>
-            <button id="btn-clear-keys">Clear keys</button>
+            <button class="primary" id="btn-save-key">Save provider and key</button>
+            <button id="btn-clear-key">Clear key</button>
           </div>
         </div>
-        <p class="hint">Keys are stored only in this browser (localStorage) and are sent directly to each provider's API.
-        Nothing is uploaded anywhere else and nothing is committed if you host this page. Get keys at
-        platform.openai.com/api-keys and console.anthropic.com.</p>
+        <p class="hint">The selected key is stored only in this browser (localStorage) and is sent directly to that provider's API.
+        It is never committed with this page. Get a key from platform.openai.com/api-keys or platform.claude.com.</p>
       </div>
     </details>
     <div class="keys-status" id="keys-status"></div>
@@ -135,9 +132,9 @@
     </div>
     <div class="row" style="margin-top:12px;">
       <div class="col" style="flex:0 0 220px;">
-        <label class="lab" for="topk">Shortlist size (grants sent to Claude)</label>
+        <label class="lab" for="topk">Shortlist size</label>
         <input type="number" id="topk" min="1" max="50" value="12">
-        <p class="hint">The similarity step keeps this many top grants; only those get the (costlier) Claude scoring.</p>
+        <p class="hint">The first pass keeps this many top grants; only those receive the deeper second-pass scoring.</p>
       </div>
     </div>
   </div>
@@ -165,8 +162,8 @@
    Single-file, no dependencies, no server. Bring-your-own-key.
 
    Pipeline (Stage 3 of PROJECT.md):
-     1. Similarity shortlist  — OpenAI embeddings + cosine similarity
-     2. Scored re-rank        — Claude returns verdict + score + rationale
+     1. Similarity shortlist  — selected provider
+     2. Scored re-rank        — same provider returns verdict + score + rationale
 
    The pure functions in the "LOGIC" block below are written so they can be
    copied into a Node test harness and checked without a browser or a network.
@@ -284,27 +281,27 @@ function facultyExclusions(f){
 
 /* Pull a JSON value out of an LLM reply that may be wrapped in prose or ```fences```. */
 function extractJson(text){
-  if (!text) throw new Error("Empty response from Claude.");
+  if (!text) throw new Error("Empty response from the AI provider.");
   let t = String(text).trim();
   const fence = t.match(/```(?:json)?\s*([\s\S]*?)```/i);
   if (fence) t = fence[1].trim();
   // find the outermost array or object
   const start = t.search(/[[{]/);
-  if (start === -1) throw new Error("No JSON found in Claude reply.");
+  if (start === -1) throw new Error("No JSON found in the AI provider reply.");
   const open = t[start], close = open === "[" ? "]" : "}";
   let depth = 0, end = -1;
   for (let i = start; i < t.length; i++){
     if (t[i] === open) depth++;
     else if (t[i] === close){ depth--; if (depth === 0){ end = i; break; } }
   }
-  if (end === -1) throw new Error("Unbalanced JSON in Claude reply.");
+  if (end === -1) throw new Error("Unbalanced JSON in the AI provider reply.");
   return JSON.parse(t.slice(start, end + 1));
 }
 
 /* Rank order for verdicts, best first. Used to sort results. */
 const VERDICT_RANK = { strong:0, plausible:1, poor:2, ineligible:3 };
 
-/* Merge Claude's judgments back onto the shortlisted grants and sort them. */
+/* Merge the provider's judgments back onto the shortlisted grants and sort them. */
 function assembleResults(shortlist, judgments){
   const byIndex = {};
   (judgments || []).forEach(j => { if (j && Number.isInteger(j.index)) byIndex[j.index] = j; });
@@ -359,10 +356,22 @@ if (typeof document !== "undefined"){
 (function(){
 
   const LS = {
-    openai: "grantmatch.openai_key",
-    anthropic: "grantmatch.anthropic_key",
-    model: "grantmatch.model",
+    provider: "grantmatch.provider",
+    apiKey: "grantmatch.api_key",
     emb: "grantmatch.emb."   // + hash  -> cached embedding
+  };
+
+  const PROVIDERS = {
+    openai: {
+      name: "OpenAI",
+      model: "gpt-5.6-sol",
+      detail: "OpenAI uses text-embedding-3-small for the shortlist and gpt-5.6-sol for the scored rationale."
+    },
+    anthropic: {
+      name: "Anthropic",
+      model: "claude-sonnet-5",
+      detail: "Anthropic uses Claude Sonnet 5 for both the shortlist and the scored rationale."
+    }
   };
 
   const state = {
@@ -371,42 +380,66 @@ if (typeof document !== "undefined"){
     facultySource: "bundled sample (14 records)",
     grantSource: "calibration sample (8 opportunities)",
     lastResults: null,
-    lastFaculty: null
+    lastFaculty: null,
+    lastProvider: null
   };
 
   const $ = id => document.getElementById(id);
 
-  /* ---------- key handling ---------- */
-  function loadKeys(){
-    $("k-openai").value    = localStorage.getItem(LS.openai) || "";
-    $("k-anthropic").value = localStorage.getItem(LS.anthropic) || "";
-    const m = localStorage.getItem(LS.model);
-    if (m) $("k-model").value = m;
+  /* ---------- provider and key handling ---------- */
+  function selectedProvider(){
+    return PROVIDERS[$("k-provider").value] ? $("k-provider").value : "openai";
+  }
+  function loadProvider(){
+    const savedProvider = localStorage.getItem(LS.provider);
+    const oldOpenAIKey = localStorage.getItem("grantmatch.openai_key");
+    const oldAnthropicKey = localStorage.getItem("grantmatch.anthropic_key");
+    const provider = PROVIDERS[savedProvider]
+      ? savedProvider
+      : (oldAnthropicKey && !oldOpenAIKey ? "anthropic" : "openai");
+    $("k-provider").value = provider;
+    $("k-key").value =
+      localStorage.getItem(LS.apiKey) ||
+      (provider === "anthropic" ? oldAnthropicKey : oldOpenAIKey) ||
+      "";
+    updateProviderDetail();
     renderKeyStatus();
+  }
+  function updateProviderDetail(){
+    const provider = PROVIDERS[selectedProvider()];
+    $("provider-detail").textContent = provider.detail;
+    $("k-key").placeholder =
+      selectedProvider() === "anthropic" ? "sk-ant-..." : "sk-...";
   }
   function renderKeyStatus(){
-    const o = !!localStorage.getItem(LS.openai);
-    const a = !!localStorage.getItem(LS.anthropic);
+    const provider = localStorage.getItem(LS.provider);
+    const configured = PROVIDERS[provider] && !!localStorage.getItem(LS.apiKey);
+    const name = PROVIDERS[provider]?.name || "Provider";
     $("keys-status").innerHTML =
-      `<span class="dot ${o?'on':'off'}"></span>OpenAI ${o?'set':'not set'}` +
-      `&nbsp;&nbsp;<span class="dot ${a?'on':'off'}"></span>Anthropic ${a?'set':'not set'}`;
-    $("keys-summary").textContent = (o && a)
-      ? "API keys — both set (click to edit)"
-      : "API keys — click to set up";
-    if (!(o && a)) $("keys-box").open = true;
+      `<span class="dot ${configured?'on':'off'}"></span>${configured ? `${name} ready` : "No provider key set"}`;
+    $("keys-summary").textContent = configured
+      ? `AI provider — ${name} ready (click to edit)`
+      : "AI provider — click to set up";
+    if (!configured) $("keys-box").open = true;
   }
-  $("btn-save-keys").addEventListener("click", () => {
-    localStorage.setItem(LS.openai, $("k-openai").value.trim());
-    localStorage.setItem(LS.anthropic, $("k-anthropic").value.trim());
-    localStorage.setItem(LS.model, $("k-model").value);
+  $("k-provider").addEventListener("change", updateProviderDetail);
+  $("btn-save-key").addEventListener("click", () => {
+    const key = $("k-key").value.trim();
+    if (!key){ err("Enter an API key for the selected provider."); return; }
+    localStorage.setItem(LS.provider, selectedProvider());
+    localStorage.setItem(LS.apiKey, key);
+    localStorage.removeItem("grantmatch.openai_key");
+    localStorage.removeItem("grantmatch.anthropic_key");
+    localStorage.removeItem("grantmatch.model");
     renderKeyStatus();
-    info("Keys saved to this browser.");
+    info(`${PROVIDERS[selectedProvider()].name} is now used for both matching steps.`);
   });
-  $("btn-clear-keys").addEventListener("click", () => {
-    [LS.openai, LS.anthropic].forEach(k => localStorage.removeItem(k));
-    $("k-openai").value = ""; $("k-anthropic").value = "";
+  $("btn-clear-key").addEventListener("click", () => {
+    [LS.apiKey, "grantmatch.openai_key", "grantmatch.anthropic_key", "grantmatch.model"]
+      .forEach(k => localStorage.removeItem(k));
+    $("k-key").value = "";
     renderKeyStatus();
-    info("Keys cleared from this browser.");
+    info("API key cleared from this browser.");
   });
 
   /* ---------- banners / status ---------- */
@@ -474,9 +507,7 @@ if (typeof document !== "undefined"){
 
   /* ---------- OpenAI embeddings (with localStorage cache) ---------- */
   const EMB_MODEL = "text-embedding-3-small";
-  async function embed(texts){
-    const key = localStorage.getItem(LS.openai);
-    if (!key) throw new Error("OpenAI key is not set.");
+  async function embed(texts, key){
     const out = new Array(texts.length);
     const need = [], needIdx = [];
     texts.forEach((t, i) => {
@@ -505,7 +536,7 @@ if (typeof document !== "undefined"){
     return out;
   }
 
-  /* ---------- Claude re-rank ---------- */
+  /* ---------- shared deep-scoring prompt ---------- */
   function buildPrompt(faculty, shortlist){
     const exclusions = facultyExclusions(faculty);
     const facBlock = {
@@ -552,11 +583,39 @@ Return ONLY a JSON array, one object per opportunity, each: {"index":int,"verdic
     return { system, user };
   }
 
-  async function claudeRank(faculty, shortlist){
-    const key = localStorage.getItem(LS.anthropic);
-    if (!key) throw new Error("Anthropic key is not set.");
-    const model = localStorage.getItem(LS.model) || "claude-sonnet-5";
-    const { system, user } = buildPrompt(faculty, shortlist);
+  function openAIResponseText(data){
+    if (data && typeof data.output_text === "string") return data.output_text;
+    return (data?.output || [])
+      .flatMap(item => item.content || [])
+      .filter(item => item.type === "output_text")
+      .map(item => item.text || "")
+      .join("");
+  }
+
+  async function openAIJson(system, user, key){
+    const model = PROVIDERS.openai.model;
+    const resp = await fetch("https://api.openai.com/v1/responses", {
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+        "Authorization":"Bearer "+key
+      },
+      body: JSON.stringify({
+        model,
+        instructions: system,
+        input: user,
+        max_output_tokens: 4000
+      })
+    });
+    if (!resp.ok){
+      const body = await resp.text();
+      throw new Error(`OpenAI request failed (${resp.status}): ${body.slice(0,300)}`);
+    }
+    return extractJson(openAIResponseText(await resp.json()));
+  }
+
+  async function anthropicJson(system, user, key){
+    const model = PROVIDERS.anthropic.model;
     const resp = await fetch("https://api.anthropic.com/v1/messages", {
       method:"POST",
       headers:{
@@ -566,7 +625,7 @@ Return ONLY a JSON array, one object per opportunity, each: {"index":int,"verdic
         "anthropic-dangerous-direct-browser-access":"true"
       },
       body: JSON.stringify({
-        model, max_tokens: 2000, system,
+        model, max_tokens: 4000, system,
         messages:[{ role:"user", content:user }]
       })
     });
@@ -579,11 +638,81 @@ Return ONLY a JSON array, one object per opportunity, each: {"index":int,"verdic
     return extractJson(text);
   }
 
+  async function deepRank(provider, key, faculty, shortlist){
+    const { system, user } = buildPrompt(faculty, shortlist);
+    return provider === "anthropic"
+      ? anthropicJson(system, user, key)
+      : openAIJson(system, user, key);
+  }
+
+  function buildAnthropicShortlistPrompt(faculty, grants){
+    const system =
+`You create the first-pass shortlist for a university grant matcher.
+Score the semantic research fit between one faculty profile and every opportunity.
+This pass is only for topical retrieval; do not make the final eligibility or pursuit decision.
+Use synonyms and related scientific concepts, not just exact keyword overlap.
+Return ONLY a JSON array with one object per opportunity:
+{"index":int,"similarity":int}
+where similarity is an integer from 0 to 100. No prose outside the JSON.`;
+    const user =
+`FACULTY RESEARCH:\n${facultyText(faculty)}\n\nOPPORTUNITIES:\n${JSON.stringify(
+  grants.map((grant, index) => ({
+    index,
+    title: grant.title,
+    agency: grant.agency || null,
+    description: (grant.description || grant.eligibility_text || "").slice(0, 900)
+  })),
+  null,
+  2
+)}`;
+    return { system, user };
+  }
+
+  async function openAIShortlist(faculty, grants, topk, key){
+    const grantTexts = grants.map(grantText);
+    const vectors = await embed([facultyText(faculty), ...grantTexts], key);
+    const facultyVector = vectors[0];
+    const scored = grants.map((grant, index) => ({
+      grant,
+      similarity: cosine(facultyVector, vectors[index + 1])
+    })).sort((left, right) => right.similarity - left.similarity);
+    return { scored, shortlist: scored.slice(0, topk) };
+  }
+
+  async function anthropicShortlist(faculty, grants, topk, key){
+    const scored = [];
+    const batchSize = 40;
+    for (let start = 0; start < grants.length; start += batchSize){
+      const batch = grants.slice(start, start + batchSize);
+      setStatus(
+        `Step 1/2 · Anthropic shortlist ${Math.min(start + batch.length, grants.length)}/${grants.length}…`
+      );
+      const { system, user } = buildAnthropicShortlistPrompt(faculty, batch);
+      const judgments = await anthropicJson(system, user, key);
+      const byIndex = new Map(
+        (Array.isArray(judgments) ? judgments : [])
+          .filter(item => Number.isInteger(item?.index))
+          .map(item => [item.index, item])
+      );
+      batch.forEach((grant, index) => {
+        const raw = Number(byIndex.get(index)?.similarity);
+        const similarity = Number.isFinite(raw)
+          ? Math.max(0, Math.min(100, raw)) / 100
+          : 0;
+        scored.push({ grant, similarity });
+      });
+    }
+    scored.sort((left, right) => right.similarity - left.similarity);
+    return { scored, shortlist: scored.slice(0, topk) };
+  }
+
   /* ---------- run ---------- */
   $("btn-run").addEventListener("click", async () => {
     clearBanner();
-    if (!localStorage.getItem(LS.openai) || !localStorage.getItem(LS.anthropic)){
-      err("Set both API keys first (the panel at the top)."); $("keys-box").open = true; return;
+    const provider = localStorage.getItem(LS.provider);
+    const key = localStorage.getItem(LS.apiKey);
+    if (!PROVIDERS[provider] || !key){
+      err("Choose one provider and save its API key first."); $("keys-box").open = true; return;
     }
     const faculty = state.faculty[parseInt($("sel-faculty").value, 10)];
     if (!faculty){ err("Pick a faculty member."); return; }
@@ -595,23 +724,22 @@ Return ONLY a JSON array, one object per opportunity, each: {"index":int,"verdic
     $("results").innerHTML = "";
 
     try {
-      // Step 1: embeddings + cosine shortlist
-      setStatus("Step 1/2 · embedding profile and opportunities (OpenAI)…");
-      const gTexts = state.grants.map(grantText);
-      const vectors = await embed([facultyText(faculty), ...gTexts]);
-      const facVec = vectors[0];
-      const scored = state.grants.map((g, i) => ({
-        grant: g, similarity: cosine(facVec, vectors[i+1])
-      })).sort((a,b) => b.similarity - a.similarity);
-      const shortlist = scored.slice(0, topk);
+      // Step 1: provider-specific shortlist, using the same key as step 2.
+      setStatus(`Step 1/2 · creating shortlist with ${PROVIDERS[provider].name}…`);
+      const { scored, shortlist } = provider === "anthropic"
+        ? await anthropicShortlist(faculty, state.grants, topk, key)
+        : await openAIShortlist(faculty, state.grants, topk, key);
 
-      // Step 2: Claude re-rank
-      setStatus(`Step 2/2 · scoring ${shortlist.length} opportunities with ${localStorage.getItem(LS.model)}…`);
-      const judgments = await claudeRank(faculty, shortlist);
+      // Step 2: deep scoring with the same selected provider.
+      setStatus(
+        `Step 2/2 · scoring ${shortlist.length} opportunities with ${PROVIDERS[provider].model}…`
+      );
+      const judgments = await deepRank(provider, key, faculty, shortlist);
       const results = assembleResults(shortlist, judgments);
 
       state.lastResults = results; state.lastFaculty = faculty;
-      renderResults(faculty, results, scored.length);
+      state.lastProvider = provider;
+      renderResults(faculty, results, scored.length, PROVIDERS[provider].name);
       setStatus(`Done · ${results.length} scored, ${state.grants.length} considered.`);
       $("btn-export").disabled = false;
     } catch(ex){
@@ -624,12 +752,12 @@ Return ONLY a JSON array, one object per opportunity, each: {"index":int,"verdic
 
   /* ---------- render ---------- */
   function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
-  function renderResults(faculty, results, considered){
+  function renderResults(faculty, results, considered, providerName){
     const box = $("results");
     const head = document.createElement("div");
     head.className = "panel";
     head.innerHTML = `<h2>Matches for ${esc(faculty.name)}</h2>
-      <div class="note">${considered} opportunities considered · ${results.length} scored by Claude · ranked by verdict then score.</div>`;
+      <div class="note">${considered} opportunities considered · ${results.length} scored by ${esc(providerName)} · ranked by verdict then score.</div>`;
     box.appendChild(head);
 
     results.forEach(r => {
@@ -666,7 +794,8 @@ Return ONLY a JSON array, one object per opportunity, each: {"index":int,"verdic
     const payload = {
       schema: "ur-cheme-matches/1",
       exported_at: new Date().toISOString(),
-      model: localStorage.getItem(LS.model),
+      provider: state.lastProvider,
+      model: PROVIDERS[state.lastProvider]?.model || null,
       faculty_name: state.lastFaculty.name,
       faculty_source: state.facultySource,
       grant_source: state.grantSource,
@@ -691,7 +820,7 @@ Return ONLY a JSON array, one object per opportunity, each: {"index":int,"verdic
   });
 
   /* ---------- init ---------- */
-  loadKeys();
+  loadProvider();
   refreshFacultyOptions();
 })();
 }

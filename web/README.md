@@ -35,5 +35,6 @@ pnpm db:generate
 ```
 
 The application has no browser-side model key fields. A later semantic matcher
-must call models only from server-side code and keep credentials in the hosting
-platform's secret store.
+must call one selected provider for both retrieval and reranking from
+server-side code, with its single credential kept in the hosting platform's
+secret store.

@@ -134,6 +134,12 @@ ideas—the shortlisting view, verdicts, rationales, source links, and export—
 now part of the hosted application. Its direct browser API-key fields and
 bundled scraped faculty records were intentionally not carried forward.
 
+For standalone BYOK testing, the explorer asks for one provider and one key.
+OpenAI uses that key for embeddings plus final scoring; Anthropic uses Claude
+for both the coarse shortlist and final scoring. The production direction
+remains a single server-side provider configuration so faculty do not manage
+shared credentials.
+
 The deployed matcher is still a transparent lexical baseline. It exists to
 make the entire product testable before introducing a more expensive semantic
 stage.
