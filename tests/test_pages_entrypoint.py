@@ -34,6 +34,20 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertNotIn('id="k-openai"', explorer_html)
         self.assertNotIn('id="k-anthropic"', explorer_html)
 
+    def test_project_docs_define_one_public_browser_product(self):
+        project = (REPOSITORY_ROOT / "PROJECT.md").read_text(encoding="utf-8")
+        readme = (REPOSITORY_ROOT / "README.md").read_text(encoding="utf-8")
+        hosting = (REPOSITORY_ROOT / "docs" / "HOSTING.md").read_text(
+            encoding="utf-8"
+        )
+        docs = "\n".join((project, readme, hosting))
+
+        self.assertIn("GitHub Pages is the canonical product", project)
+        self.assertIn("https://mporosoff.github.io/grants-scraper/", docs)
+        self.assertIn("browser's local storage", readme)
+        self.assertIn("one key", readme)
+        self.assertNotIn("https://ur-grant-matcher.zing78.chatgpt.site", docs)
+
 
 if __name__ == "__main__":
     unittest.main()
