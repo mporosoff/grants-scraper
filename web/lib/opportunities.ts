@@ -58,10 +58,41 @@ export function normalizeOpportunity(record: OpportunityInput) {
     ),
     careerStageSignal: stringValue(record.career_stage_signal),
     closeDate: stringValue(record.close_date ?? record.response_date),
-    awardCeiling: stringValue(record.award_ceiling),
+    closeDateNote: stringValue(
+      record.close_date_note ?? record.response_date_note,
+    ),
+    rolling: booleanValue(record.rolling),
+    awardCeiling: stringValue(record.award_ceiling ?? record.awardCeiling),
+    awardFloor: stringValue(record.award_floor ?? record.awardFloor),
+    totalProgramFunding: stringValue(
+      record.total_program_funding ??
+        record.estimated_total_program_funding ??
+        record.estimatedFunding,
+    ),
+    expectedAwards: stringValue(
+      record.expected_number_of_awards ??
+        record.number_of_awards ??
+        record.numberOfAwards,
+    ),
+    duration: stringValue(
+      record.duration ??
+        record.project_duration ??
+        record.award_duration ??
+        record.project_period,
+    ),
+    projectStartDate: stringValue(
+      record.estimated_project_start ??
+        record.project_start_date ??
+        record.projectStartDate,
+    ),
     limitedSubmission: booleanValue(record.limited_submission),
+    limitedSubmissionCriteria: stringValue(
+      record.limited_submission_criteria,
+    ),
     costShareRequired: booleanValue(record.cost_share_required),
+    costShareDetail: stringValue(record.cost_share_detail),
     hasPreliminaryStage: booleanValue(record.has_preliminary_stage),
+    preliminaryStageType: stringValue(record.preliminary_stage_type),
     detailPage: safeUrl(record.detail_page),
     nofoPdfUrl: safeUrl(
       record.nofo_pdf_url ?? record.primary_document_url,

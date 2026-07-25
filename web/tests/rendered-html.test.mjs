@@ -19,17 +19,24 @@ test("builds the grant matcher product shell", async () => {
   assert.match(client, /Opportunity feed/);
   assert.match(client, /Match explorer/);
   assert.match(client, /Faculty-controlled profiles/);
+  assert.match(client, /formatFunding/);
+  assert.match(client, /Grant duration/);
+  assert.match(client, /Expected awards/);
+  assert.doesNotMatch(client, /Import grants\.json|type="file"/);
   assert.match(css, /\.match-card/);
+  assert.match(css, /\.grant-facts/);
   assert.match(css, /@media \(max-width: 640px\)/);
   assert.doesNotMatch(client, /OpenAI API key|Anthropic API key|localStorage/i);
   await access(new URL("dist/server/index.js", root));
 });
 
 test("uses persistent application storage and removes starter dependencies", async () => {
-  const [hosting, client, packageJson, previewFiles] = await Promise.all([
+  const [hosting, client, packageJson, schema, migration, previewFiles] = await Promise.all([
     readFile(new URL(".openai/hosting.json", root), "utf8"),
     readFile(new URL("app/GrantMatcherApp.tsx", root), "utf8"),
     readFile(new URL("package.json", root), "utf8"),
+    readFile(new URL("db/schema.ts", root), "utf8"),
+    readFile(new URL("drizzle/0001_blue_ezekiel.sql", root), "utf8"),
     readdir(new URL("app/_sites-preview", root)).catch(() => []),
   ]);
 
@@ -38,6 +45,10 @@ test("uses persistent application storage and removes starter dependencies", asy
   assert.match(client, /\/api\/profile/);
   assert.match(client, /\/api\/opportunities\/refresh/);
   assert.match(client, /\/api\/matches/);
+  assert.match(schema, /totalProgramFunding/);
+  assert.match(schema, /expectedAwards/);
+  assert.match(schema, /preliminaryStageType/);
+  assert.match(migration, /ADD `duration`/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
   assert.deepEqual(previewFiles, []);
 });
@@ -55,6 +66,18 @@ test("uses one selected AI provider and one key in the standalone explorer", asy
   assert.match(prototype, /claude-sonnet-5/);
   assert.match(prototype, /async function deepRank/);
   assert.match(prototype, /async function anthropicShortlist/);
+  assert.match(prototype, /id="research-profile"/);
+  assert.match(prototype, /id="btn-save-search"/);
+  assert.match(prototype, /id="btn-new-search"/);
+  assert.match(prototype, /id="saved-searches"/);
+  assert.match(prototype, /Export results\.csv/);
+  assert.match(prototype, /Due date\(s\)/);
+  assert.match(prototype, /Grant duration/);
+  assert.match(prototype, /Expected awards/);
+  assert.doesNotMatch(
+    prototype,
+    /id="sel-faculty"|id="load-faculty"|id="load-grants"|type="file"/,
+  );
   assert.doesNotMatch(prototype, /id="k-openai"|id="k-anthropic"/);
   assert.ok(script);
   assert.doesNotThrow(() => new Function(script));

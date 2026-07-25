@@ -29,10 +29,20 @@ type Opportunity = {
   status: string;
   description: string;
   closeDate: string;
+  closeDateNote: string;
+  rolling: boolean;
   awardCeiling: string;
+  awardFloor: string;
+  totalProgramFunding: string;
+  expectedAwards: string;
+  duration: string;
+  projectStartDate: string;
   limitedSubmission: boolean;
+  limitedSubmissionCriteria: string;
   costShareRequired: boolean;
+  costShareDetail: string;
   hasPreliminaryStage: boolean;
+  preliminaryStageType: string;
   detailPage: string;
   nofoPdfUrl: string;
   importedAt: string;
@@ -94,6 +104,39 @@ function formatMoney(value: string) {
     maximumFractionDigits: 0,
     notation: numeric >= 1_000_000 ? "compact" : "standard",
   }).format(numeric);
+}
+
+function formatFunding(opportunity: Opportunity) {
+  const floor = opportunity.awardFloor
+    ? formatMoney(opportunity.awardFloor)
+    : "";
+  const ceiling = opportunity.awardCeiling
+    ? formatMoney(opportunity.awardCeiling)
+    : "";
+  if (floor && ceiling) {
+    return floor === ceiling ? ceiling : `${floor}–${ceiling} per award`;
+  }
+  if (ceiling) return `Up to ${ceiling} per award`;
+  if (floor) return `From ${floor} per award`;
+  if (opportunity.totalProgramFunding) {
+    return `${formatMoney(opportunity.totalProgramFunding)} total program`;
+  }
+  return "Not listed — check notice";
+}
+
+function formatDeadline(opportunity: Opportunity) {
+  if (opportunity.rolling) return "Rolling / open until superseded";
+  if (!opportunity.closeDate) {
+    return opportunity.closeDateNote || "No deadline listed";
+  }
+  const date = formatDate(opportunity.closeDate);
+  if (
+    opportunity.closeDateNote &&
+    opportunity.closeDateNote !== opportunity.closeDate
+  ) {
+    return `${date} · ${opportunity.closeDateNote}`;
+  }
+  return date;
 }
 
 function csvCell(value: unknown) {
@@ -234,35 +277,6 @@ export function GrantMatcherApp() {
     }
   }
 
-  async function importFile(event: ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
-    if (!file) return;
-    setBusy("import");
-    setNotice(null);
-    try {
-      const parsed = JSON.parse(await file.text()) as unknown;
-      const response = await fetch("/api/opportunities", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(parsed),
-      });
-      const payload = await readJson<{ saved: number }>(response);
-      await reloadOpportunities();
-      setNotice({
-        tone: "success",
-        text: `${payload.saved} opportunities imported from ${file.name}.`,
-      });
-    } catch (error) {
-      setNotice({
-        tone: "error",
-        text: error instanceof Error ? error.message : "Import failed.",
-      });
-    } finally {
-      event.target.value = "";
-      setBusy("");
-    }
-  }
-
   async function runMatches() {
     setBusy("matches");
     setNotice(null);
@@ -318,8 +332,20 @@ export function GrantMatcherApp() {
       "title",
       "agency",
       "opportunity_number",
-      "deadline",
+      "status",
+      "due_dates",
+      "deadline_note",
+      "rolling",
+      "funding",
+      "award_floor",
       "award_ceiling",
+      "total_program_funding",
+      "expected_awards",
+      "grant_duration",
+      "project_start",
+      "preliminary_stage",
+      "limited_submission",
+      "cost_share",
       "rationale",
       "eligibility",
       "feedback",
@@ -332,8 +358,26 @@ export function GrantMatcherApp() {
       match.opportunity.title,
       match.opportunity.agency,
       match.opportunity.opportunityNumber,
+      match.opportunity.status,
       match.opportunity.closeDate,
+      match.opportunity.closeDateNote,
+      match.opportunity.rolling,
+      formatFunding(match.opportunity),
+      match.opportunity.awardFloor,
       match.opportunity.awardCeiling,
+      match.opportunity.totalProgramFunding,
+      match.opportunity.expectedAwards,
+      match.opportunity.duration,
+      match.opportunity.projectStartDate,
+      match.opportunity.hasPreliminaryStage
+        ? match.opportunity.preliminaryStageType || "Required"
+        : "No",
+      match.opportunity.limitedSubmission
+        ? match.opportunity.limitedSubmissionCriteria || "Yes"
+        : "No",
+      match.opportunity.costShareRequired
+        ? match.opportunity.costShareDetail || "Required"
+        : "No",
       match.rationale,
       match.eligibility,
       match.feedback,
@@ -576,8 +620,8 @@ export function GrantMatcherApp() {
               <p className="step-label">Step 2 · Opportunity feed</p>
               <h2>Bring in opportunities once.</h2>
               <p>
-                Refresh directly from Grants.gov or import normalized JSON from
-                the existing Python pipeline.
+                Refresh directly from Grants.gov. Faculty never upload or manage
+                opportunity files.
               </p>
             </div>
             <span className={opportunities.length ? "state ready" : "state"}>
@@ -604,15 +648,6 @@ export function GrantMatcherApp() {
               >
                 {busy === "refresh" ? "Refreshing…" : "Refresh live opportunities"}
               </button>
-              <label className="file-button">
-                {busy === "import" ? "Importing…" : "Import grants.json"}
-                <input
-                  type="file"
-                  accept=".json,application/json"
-                  onChange={importFile}
-                  disabled={Boolean(busy)}
-                />
-              </label>
             </div>
           </div>
 
@@ -632,8 +667,8 @@ export function GrantMatcherApp() {
                     </span>
                   </div>
                   <div className="row-meta">
-                    <span>{formatDate(opportunity.closeDate)}</span>
-                    <strong>{formatMoney(opportunity.awardCeiling)}</strong>
+                    <span>{formatDeadline(opportunity)}</span>
+                    <strong>{formatFunding(opportunity)}</strong>
                   </div>
                 </article>
               ))}
@@ -730,19 +765,60 @@ export function GrantMatcherApp() {
                       )}
                       <div className="grant-facts">
                         <span>
-                          Deadline <strong>{formatDate(match.opportunity.closeDate)}</strong>
+                          <small>Funding</small>
+                          <strong>{formatFunding(match.opportunity)}</strong>
                         </span>
                         <span>
-                          Ceiling <strong>{formatMoney(match.opportunity.awardCeiling)}</strong>
+                          <small>Due date(s)</small>
+                          <strong>{formatDeadline(match.opportunity)}</strong>
                         </span>
+                        <span>
+                          <small>Grant duration</small>
+                          <strong>
+                            {match.opportunity.duration ||
+                              "Not listed — check notice"}
+                          </strong>
+                        </span>
+                        <span>
+                          <small>Expected awards</small>
+                          <strong>
+                            {match.opportunity.expectedAwards || "Not listed"}
+                          </strong>
+                        </span>
+                        <span>
+                          <small>Project start</small>
+                          <strong>
+                            {match.opportunity.projectStartDate
+                              ? formatDate(match.opportunity.projectStartDate)
+                              : "Not listed"}
+                          </strong>
+                        </span>
+                        <span>
+                          <small>Status</small>
+                          <strong>
+                            {match.opportunity.status || "Check current notice"}
+                          </strong>
+                        </span>
+                      </div>
+                      <div className="grant-flags">
                         {match.opportunity.hasPreliminaryStage && (
-                          <span className="warning-chip">Preliminary stage</span>
+                          <span className="warning-chip">
+                            {match.opportunity.preliminaryStageType
+                              ? `Preliminary stage: ${match.opportunity.preliminaryStageType}`
+                              : "Preliminary stage required"}
+                          </span>
                         )}
                         {match.opportunity.limitedSubmission && (
-                          <span className="warning-chip">Limited submission</span>
+                          <span className="warning-chip">
+                            {match.opportunity.limitedSubmissionCriteria ||
+                              "Limited submission"}
+                          </span>
                         )}
                         {match.opportunity.costShareRequired && (
-                          <span className="warning-chip">Cost share</span>
+                          <span className="warning-chip">
+                            {match.opportunity.costShareDetail ||
+                              "Cost share required"}
+                          </span>
                         )}
                       </div>
                       <div className="card-actions">

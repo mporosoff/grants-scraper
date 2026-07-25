@@ -126,19 +126,22 @@ phrasing from ARPA-E, NSF, and DOE, including NSF's awkward
 
 The `web/` application now implements the core faculty experience: an editable
 research profile, durable application storage, live Grants.gov refresh,
-normalized JSON import, ranked and explained matches, eligibility warnings,
-saved useful/not-relevant feedback, and filtered CSV export.
+ranked and explained matches, decision-ready funding and deadline details,
+eligibility warnings, saved useful/not-relevant feedback, and filtered CSV
+export. Faculty do not manage opportunity data files.
 
 `match_explorer.html` was useful as an interaction prototype. Its strongest
 ideas—the shortlisting view, verdicts, rationales, source links, and export—are
 now part of the hosted application. Its direct browser API-key fields and
 bundled scraped faculty records were intentionally not carried forward.
 
-For standalone BYOK testing, the explorer asks for one provider and one key.
-OpenAI uses that key for embeddings plus final scoring; Anthropic uses Claude
-for both the coarse shortlist and final scoring. The production direction
-remains a single server-side provider configuration so faculty do not manage
-shared credentials.
+For standalone BYOK testing, any faculty member writes a general free-text
+research description, optionally saves named searches in the browser, and
+exports result snapshots as CSV. The explorer asks for one provider and one
+key. OpenAI uses that key for embeddings plus final scoring; Anthropic uses
+Claude for both the coarse shortlist and final scoring. The production
+direction remains a single server-side provider configuration so faculty do
+not manage shared credentials.
 
 The deployed matcher is still a transparent lexical baseline. It exists to
 make the entire product testable before introducing a more expensive semantic
@@ -322,7 +325,7 @@ sponsors. That is a winnable fight.
 | File | Purpose |
 |---|---|
 | `web/` | Hosted application, APIs, D1 schema, migrations, and tests |
-| `match_explorer.html` | Original static interaction prototype |
+| `match_explorer.html` | Free-text, saved-search static matching prototype |
 | `legacy/scrape_faculty.py` | Retired faculty scraper retained for reference |
 | `scripts/pull_grants.py` | Grants.gov API puller and normalizer |
 | `README.md` | Run instructions and setup |

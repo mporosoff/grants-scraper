@@ -28,18 +28,17 @@
   .col{flex:1 1 240px;min-width:200px;}
   label.lab{display:block;font-weight:600;font-size:13px;margin-bottom:5px;}
   .hint{font-size:12.5px;color:var(--muted);margin:4px 0 0;}
-  input[type=text],input[type=password],select,input[type=number]{
+  input[type=text],input[type=password],select,input[type=number],textarea{
     width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;
     font:inherit;background:#fff;color:var(--ink);}
-  input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0;border-color:var(--accent);}
+  textarea{min-height:150px;resize:vertical;}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:0;border-color:var(--accent);}
   button{font:inherit;border:1px solid var(--line);background:#fff;color:var(--ink);
     padding:9px 14px;border-radius:8px;cursor:pointer;}
   button:hover{background:#f0f2f5;}
   button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600;}
   button.primary:hover{filter:brightness(1.06);}
   button:disabled{opacity:.5;cursor:not-allowed;}
-  .filebtn{position:relative;overflow:hidden;display:inline-block;}
-  .filebtn input{position:absolute;inset:0;opacity:0;cursor:pointer;}
   .keys-status{font-size:13px;margin-top:8px;}
   .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:middle;}
   .dot.on{background:var(--ok);} .dot.off{background:#c9ced6;}
@@ -69,16 +68,43 @@
   .links a:hover{text-decoration:underline;}
   details.desc{margin-top:8px;} details.desc summary{cursor:pointer;color:var(--muted);font-size:13px;}
   .desc p{font-size:13.5px;color:#39424e;margin:8px 0 0;}
+  .saved-searches{display:grid;gap:8px;margin-top:12px;}
+  .saved-empty{color:var(--muted);font-size:13px;padding:10px 0;}
+  .saved-item{display:flex;gap:10px;align-items:center;justify-content:space-between;
+    border-top:1px solid var(--line);padding-top:9px;}
+  .saved-item-name{font-weight:600;font-size:13px;}
+  .saved-item-date{display:block;color:var(--muted);font-size:11.5px;font-weight:400;}
+  .saved-item-actions{display:flex;gap:7px;flex-shrink:0;}
+  .saved-item-actions button{padding:6px 10px;font-size:12.5px;}
+  .fact-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:13px;}
+  .fact{border:1px solid var(--line);border-radius:8px;background:#fafbfd;padding:9px 10px;}
+  .fact-label{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;
+    letter-spacing:.04em;margin-bottom:2px;}
+  .fact-value{display:block;font-size:13px;font-weight:600;overflow-wrap:anywhere;}
+  .flags{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px;}
+  .flag{border-radius:999px;padding:4px 8px;background:#f4f6f8;color:#4b5563;font-size:11.5px;}
+  .flag.warn{background:var(--inelig-bg);color:var(--inelig);}
   .footer{font-size:12px;color:var(--muted);margin-top:24px;text-align:center;}
   .pill{display:inline-block;background:#eef1f4;border-radius:999px;padding:2px 9px;font-size:12px;color:var(--muted);margin-right:6px;}
+  @media (max-width:640px){
+    .wrap{padding:18px 12px 56px;}
+    .panel{padding:15px 14px;}
+    .col{min-width:100%;}
+    .card-top{display:block;}
+    .card-top>div:last-child{text-align:left!important;margin-top:10px;}
+    .fact-grid{grid-template-columns:1fr 1fr;}
+    .saved-item{align-items:flex-start;flex-direction:column;}
+    .saved-item-actions{width:100%;}
+    .saved-item-actions button{flex:1;}
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <h1>Match Explorer</h1>
-  <p class="standfirst">Pick a faculty member and rank funding opportunities against their profile.
-  Each match is scored and gets a one-sentence reason. Choose OpenAI or Anthropic once; one key powers the complete matching run.</p>
+  <p class="standfirst">Describe your research in your own words and rank funding opportunities against it.
+  Each match includes a score, a concrete reason, eligibility context, deadlines, funding, duration, and submission details.</p>
 
   <!-- ============ AI PROVIDER ============ -->
   <div class="panel">
@@ -114,36 +140,38 @@
     <div class="keys-status" id="keys-status"></div>
   </div>
 
-  <!-- ============ DATA ============ -->
+  <!-- ============ RESEARCH PROFILE ============ -->
   <div class="panel">
-    <h2>1 · Data</h2>
+    <h2>1 · Your research</h2>
+    <label class="lab" for="research-profile">Research interests and general information</label>
+    <textarea id="research-profile" placeholder="Describe your research questions, methods, capabilities, application areas, future directions, career stage, and any eligibility context that may matter. You can write naturally—no special format is required."></textarea>
+    <p class="hint">Aim for at least a few sentences. Specific methods, materials, systems, populations, and future directions produce better matches.</p>
     <div class="row">
       <div class="col">
-        <label class="lab" for="sel-faculty">Faculty member</label>
-        <select id="sel-faculty"></select>
-        <p class="hint" id="fac-src"></p>
+        <label class="lab" for="search-name">Search name</label>
+        <input type="text" id="search-name" placeholder="e.g. Carbon capture and catalytic conversion">
+        <p class="hint">Use a short name so you can save and reopen this search on this device.</p>
       </div>
-      <div class="col" style="flex:0 0 auto;">
-        <label class="lab">Load your own data</label>
-        <span class="filebtn"><button>Load faculty.json</button><input type="file" id="load-faculty" accept=".json"></span>
-        <span class="filebtn" style="margin-left:8px;"><button>Load grants.json</button><input type="file" id="load-grants" accept=".json"></span>
-        <p class="hint" id="grant-src"></p>
-      </div>
-    </div>
-    <div class="row" style="margin-top:12px;">
       <div class="col" style="flex:0 0 220px;">
         <label class="lab" for="topk">Shortlist size</label>
         <input type="number" id="topk" min="1" max="50" value="12">
         <p class="hint">The first pass keeps this many top grants; only those receive the deeper second-pass scoring.</p>
       </div>
     </div>
+    <div class="row" style="margin-top:12px;">
+      <button id="btn-save-search">Save current search</button>
+      <button id="btn-new-search">Start a new search</button>
+      <span class="hint">Saved searches stay in this browser and never include your API key.</span>
+    </div>
+    <div class="saved-searches" id="saved-searches" aria-live="polite"></div>
+    <p class="hint" id="grant-src">Opportunity source: built-in demonstration set. The hosted application refreshes live opportunities directly from Grants.gov.</p>
   </div>
 
   <!-- ============ RUN ============ -->
   <div class="panel">
     <h2>2 · Match</h2>
     <button class="primary" id="btn-run">Find matches</button>
-    <button id="btn-export" disabled style="margin-left:8px;">Export matches.json</button>
+    <button id="btn-export" disabled style="margin-left:8px;">Export results.csv</button>
     <div class="banner" id="banner"></div>
     <div id="status"></div>
   </div>
@@ -170,41 +198,11 @@
    ===================================================================== */
 
 /* ---------------------------------------------------------------------
-   BUNDLED SAMPLE DATA
-   Copied verbatim from label_matches.html so this tool demos on the same
-   14 faculty and 8 calibration opportunities as the labeling tool.
+   BUNDLED OPPORTUNITY SAMPLE
+   The public prototype carries a small demonstration set so faculty can try
+   the workflow without uploading files. The hosted application refreshes
+   current records directly from Grants.gov.
    --------------------------------------------------------------------- */
-const BUNDLED_FACULTY = [
-  {name:"Mitchell Anthamatten", titles:["Professor of Chemical Engineering","Distinguished Scientist, Laboratory for Laser Energetics"], career_stage:"full", research_active:true,
-   interests:["Macromolecular Self-assembly","Associative & Functional Polymers","Nanostructured Materials","Interfacial Phenomena","Optoelectronic Materials","Vapor Deposition Polymerization"]},
-  {name:"Yasemin Basdogan", titles:["Assistant Professor of Chemical Engineering"], career_stage:"assistant", research_active:true,
-   interests:["Artificial Intelligence","Machine Learning","Molecular Dynamics Simulations","Quantum Chemistry","Computational Materials Design","Energy and Sustainability","Polymers, Solutions, Catalysis"]},
-  {name:"Pooja Rajendra Bhalode", titles:["Assistant Professor of Chemical Engineering"], career_stage:"assistant", research_active:true,
-   interests:["Process Systems Engineering","Sustainability","Multiscale Modeling","Powder flow Modeling","Data-driven Hybrid Modeling","Solvent-based Extraction"]},
-  {name:"Siddharth Deshpande", titles:["Assistant Professor of Chemical Engineering"], career_stage:"assistant", research_active:true,
-   interests:["Atomic modeling at complex solid-liquid and solid-gas interfaces","Data-driven methods: machine learning and algorithm development","Heterogeneous catalysis, electrocatalysis, batteries"]},
-  {name:"Gang Fan", titles:["Assistant Professor of Chemical Engineering"], career_stage:"assistant", research_active:true,
-   interests:["Polymer Chemistry","Bio-inspired Catalysis","Plastic Upcycling","Bioelectrochemistry","Biosensors","Synthetic Biology","Metabolic Engineering","Environmental Remediation"]},
-  {name:"David G. Foster", titles:["Professor of Chemical Engineering (instructional)"], career_stage:"full", research_active:false,
-   interests:["Principles of Transport Phenomena","Computational Fluid Dynamics and Transport Phenomena","Nanoparticle Coatings for Enhanced Capture of Flowing Cells"]},
-  {name:"Melodie I. Lawton", titles:["Associate Professor of Chemical Engineering (Instructional)","Associate Chair"], career_stage:"associate", research_active:false,
-   interests:["Shape Memory Polymers","Polymeric Composites","Biomaterials","Polymer Degradation","Controlled Drug Delivery","Structure-Property Relationships"]},
-  {name:"Darren Lipomi", titles:["Arthur G. Yates Professor of Engineering","Professor of Chemical Engineering","Chair, Department of Chemical and Sustainability Engineering"], career_stage:"full", research_active:true,
-   interests:[]},
-  {name:"Allison J. Lopatkin", titles:["Assistant Professor of Chemical Engineering","Assistant Professor of Microbiology and Immunology","Assistant Professor of Biomedical Engineering"], career_stage:"assistant", research_active:true,
-   interests:["Systems and Synthetic Biology","Computational Biology","Engineered Microbial Communities","Metabolic Engineering","Mathematical Modeling","Machine Learning","Horizontal Gene Transfer","Antibiotic Resistance"]},
-  {name:"Astrid M. Müller", titles:["Assistant Professor of Chemical Engineering"], career_stage:"assistant", research_active:true,
-   interests:["Electrocatalytic Aqueous PFAS Defluorination","Organic Electrooxidations via Water Activation","Selective Carbon Dioxide Reduction","Electrode Microenvironments","Pulsed Laser in Liquid Fabrication of Controlled Nanomaterials"]},
-  {name:"Marc D. Porosoff", titles:["Associate Professor of Chemical Engineering"], career_stage:"associate", research_active:true,
-   interests:["CO2 capture and conversion","Heterogeneous thermal catalysis","Catalyst representation with large language models","Reactive separations"]},
-  {name:"Alexander A. Shestopalov", titles:["Associate Professor of Chemical Engineering","Scientist, Laboratory for Laser Energetics"], career_stage:"associate", research_active:true,
-   interests:["Surface Chemistry","Organic Chemistry","Surface Patterning","Nanostructured Materials","Interfacial Thermodynamics"]},
-  {name:"Wyatt E. Tenhaeff", titles:["Associate Professor of Chemical Engineering"], career_stage:"associate", research_active:true,
-   interests:["Electrochemical Energy Storage","Solid State and Lithium Metal Batteries","Polymer Thin Films, Interfaces and Thin Film Synthesis","Vacuum Deposition Processing"]},
-  {name:"Matthew Z. Yates", titles:["Professor of Chemical Engineering","Scientist, Laboratory for Laser Energetics"], career_stage:"full", research_active:true,
-   interests:["Surfaces and coatings","Electrochemistry","Sensors","Open-source hardware"]}
-];
-
 const CALIBRATION_GRANTS = [
   {opportunity_number:"NSF-CAREER", title:"Faculty Early Career Development Program (CAREER)", agency:"National Science Foundation",
    career_stage_signal:"untenured tenure-track assistant professor", limited_submission:false, cost_share_required:false, has_preliminary_stage:false,
@@ -238,17 +236,13 @@ const CALIBRATION_GRANTS = [
    LOGIC  (pure, testable — no DOM, no network)
    ===================================================================== */
 
-/* Build the text that represents a faculty member for embedding.
-   Handles BOTH shapes: the rich self-reported profile (ur-cheme-faculty-profile/1,
-   which has `synopsis`) and the lighter scraped/bundled record (which has `interests`). */
+/* Build the text that represents a self-reported faculty profile. */
 function facultyText(f){
   const parts = [
     f.synopsis,
     f.future_directions,
     Array.isArray(f.include_topics) ? f.include_topics.join(", ") : "",
-    f.capabilities,
-    Array.isArray(f.interests) ? f.interests.join(", ") : "",
-    Array.isArray(f.titles) ? f.titles.join("; ") : ""
+    f.capabilities
   ];
   return parts.filter(s => s && String(s).trim()).join(". ").trim();
 }
@@ -259,6 +253,10 @@ function grantText(g){
     g.title,
     g.agency,
     g.description || g.eligibility_text,
+    g.eligibility_text,
+    g.career_stage_signal,
+    g.duration || g.project_duration || g.award_duration,
+    g.close_date_note,
     Array.isArray(g.funding_categories) ? g.funding_categories.join(", ") : "",
     Array.isArray(g.funding_instruments) ? g.funding_instruments.join(", ") : ""
   ];
@@ -328,25 +326,10 @@ function assembleResults(shortlist, judgments){
   return rows;
 }
 
-/* Normalize a loaded faculty file into an array of records.
-   Accepts: a single profile object, or an array of them. */
-function toFacultyArray(parsed){
-  if (Array.isArray(parsed)) return parsed;
-  if (parsed && typeof parsed === "object") return [parsed];
-  throw new Error("faculty.json must be an object or an array of objects.");
-}
-function toGrantArray(parsed){
-  if (Array.isArray(parsed)) return parsed;
-  if (parsed && Array.isArray(parsed.grants)) return parsed.grants;
-  if (parsed && typeof parsed === "object") return [parsed];
-  throw new Error("grants.json must be an array (or {grants:[...]}).");
-}
-
 /* Expose for Node testing without breaking in the browser. */
 if (typeof module !== "undefined" && module.exports){
   module.exports = { facultyText, grantText, cosine, extractJson, assembleResults,
-                     toFacultyArray, toGrantArray, facultyExclusions,
-                     BUNDLED_FACULTY, CALIBRATION_GRANTS };
+                     facultyExclusions, CALIBRATION_GRANTS };
 }
 
 /* =====================================================================
@@ -358,6 +341,7 @@ if (typeof document !== "undefined"){
   const LS = {
     provider: "grantmatch.provider",
     apiKey: "grantmatch.api_key",
+    searches: "grantmatch.saved_searches.v1",
     emb: "grantmatch.emb."   // + hash  -> cached embedding
   };
 
@@ -375,13 +359,11 @@ if (typeof document !== "undefined"){
   };
 
   const state = {
-    faculty: BUNDLED_FACULTY.slice(),
     grants: CALIBRATION_GRANTS.slice(),
-    facultySource: "bundled sample (14 records)",
-    grantSource: "calibration sample (8 opportunities)",
     lastResults: null,
     lastFaculty: null,
-    lastProvider: null
+    lastProvider: null,
+    activeSearchId: null
   };
 
   const $ = id => document.getElementById(id);
@@ -448,51 +430,152 @@ if (typeof document !== "undefined"){
   function clearBanner(){ const b=$("banner"); b.className="banner"; b.textContent=""; }
   function setStatus(msg){ $("status").textContent = msg; }
 
-  /* ---------- populate faculty dropdown ---------- */
-  function refreshFacultyOptions(){
-    const sel = $("sel-faculty");
-    sel.innerHTML = "";
-    state.faculty.forEach((f, i) => {
-      const o = document.createElement("option");
-      o.value = String(i);
-      const stage = f.career_stage || f.rank || "";
-      o.textContent = f.name + (stage ? ` — ${stage}` : "");
-      sel.appendChild(o);
-    });
-    $("fac-src").textContent = "Source: " + state.facultySource;
-    $("grant-src").textContent = "Grants: " + state.grantSource;
+  /* ---------- free-text and saved searches ---------- */
+  function currentFaculty(){
+    return {
+      name: $("search-name").value.trim() || "Current research search",
+      synopsis: $("research-profile").value.trim(),
+      career_stage: "unknown",
+      research_active: true
+    };
   }
 
-  /* ---------- file loading ---------- */
-  $("load-faculty").addEventListener("change", e => {
-    const file = e.target.files[0]; if (!file) return;
-    const r = new FileReader();
-    r.onload = () => {
-      try {
-        const arr = toFacultyArray(JSON.parse(r.result));
-        if (!arr.length) throw new Error("No records found.");
-        state.faculty = arr;
-        state.facultySource = `${file.name} (${arr.length} record${arr.length>1?'s':''})`;
-        refreshFacultyOptions(); clearBanner();
-        info(`Loaded ${arr.length} faculty record(s) from ${file.name}.`);
-      } catch(ex){ err("Could not read faculty file: " + ex.message); }
+  function readSavedSearches(){
+    try {
+      const parsed = JSON.parse(localStorage.getItem(LS.searches) || "[]");
+      return Array.isArray(parsed) ? parsed.filter(item => item && item.id) : [];
+    } catch(_) {
+      return [];
+    }
+  }
+
+  function writeSavedSearches(searches){
+    localStorage.setItem(LS.searches, JSON.stringify(searches.slice(0, 20)));
+  }
+
+  function defaultSearchName(text){
+    const words = String(text).replace(/\s+/g, " ").trim().split(" ").slice(0, 8);
+    return words.join(" ") || "Saved research search";
+  }
+
+  function renderSavedSearches(){
+    const box = $("saved-searches");
+    const searches = readSavedSearches();
+    box.innerHTML = "";
+    if (!searches.length){
+      const empty = document.createElement("div");
+      empty.className = "saved-empty";
+      empty.textContent = "No saved searches on this device yet.";
+      box.appendChild(empty);
+      return;
+    }
+
+    searches.forEach(search => {
+      const row = document.createElement("div");
+      row.className = "saved-item";
+      const label = document.createElement("div");
+      label.className = "saved-item-name";
+      label.textContent = search.name;
+      const date = document.createElement("span");
+      date.className = "saved-item-date";
+      date.textContent = `Saved ${new Date(search.updatedAt).toLocaleString()}${Array.isArray(search.results) ? ` · ${search.results.length} results` : ""}`;
+      label.appendChild(date);
+
+      const actions = document.createElement("div");
+      actions.className = "saved-item-actions";
+      const load = document.createElement("button");
+      load.type = "button";
+      load.textContent = "Open";
+      load.addEventListener("click", () => {
+        $("search-name").value = search.name || "";
+        $("research-profile").value = search.researchText || "";
+        $("topk").value = String(search.topk || 12);
+        state.activeSearchId = search.id;
+        $("results").innerHTML = "";
+        if (Array.isArray(search.results) && search.results.length){
+          const faculty = currentFaculty();
+          state.lastFaculty = faculty;
+          state.lastResults = search.results;
+          state.lastProvider = search.provider || null;
+          renderResults(
+            faculty,
+            search.results,
+            state.grants.length,
+            PROVIDERS[search.provider]?.name || "saved run"
+          );
+          $("btn-export").disabled = false;
+        } else {
+          state.lastFaculty = null;
+          state.lastResults = null;
+          state.lastProvider = null;
+          $("btn-export").disabled = true;
+        }
+        clearBanner();
+        info(`Opened “${search.name}”.`);
+      });
+
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.textContent = "Delete";
+      remove.addEventListener("click", () => {
+        writeSavedSearches(readSavedSearches().filter(item => item.id !== search.id));
+        if (state.activeSearchId === search.id) state.activeSearchId = null;
+        renderSavedSearches();
+        info(`Deleted “${search.name}” from this browser.`);
+      });
+      actions.append(load, remove);
+      row.append(label, actions);
+      box.appendChild(row);
+    });
+  }
+
+  $("btn-save-search").addEventListener("click", () => {
+    clearBanner();
+    const faculty = currentFaculty();
+    if (faculty.synopsis.length < 40){
+      err("Describe your research in at least 40 characters before saving.");
+      return;
+    }
+    const name = $("search-name").value.trim() || defaultSearchName(faculty.synopsis);
+    $("search-name").value = name;
+    const searches = readSavedSearches();
+    const id = state.activeSearchId ||
+      (globalThis.crypto?.randomUUID ? crypto.randomUUID() : `search-${Date.now()}`);
+    const sameResearch =
+      state.lastFaculty && facultyText(state.lastFaculty) === facultyText(faculty);
+    const record = {
+      id,
+      name,
+      researchText: faculty.synopsis,
+      topk: Math.max(1, Math.min(50, parseInt($("topk").value, 10) || 12)),
+      provider: sameResearch ? state.lastProvider : null,
+      results: sameResearch ? state.lastResults : null,
+      updatedAt: new Date().toISOString()
     };
-    r.readAsText(file);
+    const next = [record, ...searches.filter(item => item.id !== id)];
+    try {
+      writeSavedSearches(next);
+      state.activeSearchId = id;
+      renderSavedSearches();
+      info(`Saved “${name}”${record.results ? " with its current results" : ""}.`);
+    } catch(_) {
+      err("This browser could not save the search. Storage may be full or disabled.");
+    }
   });
-  $("load-grants").addEventListener("change", e => {
-    const file = e.target.files[0]; if (!file) return;
-    const r = new FileReader();
-    r.onload = () => {
-      try {
-        const arr = toGrantArray(JSON.parse(r.result));
-        if (!arr.length) throw new Error("No opportunities found.");
-        state.grants = arr;
-        state.grantSource = `${file.name} (${arr.length} opportunit${arr.length>1?'ies':'y'})`;
-        refreshFacultyOptions(); clearBanner();
-        info(`Loaded ${arr.length} opportunit${arr.length>1?'ies':'y'} from ${file.name}.`);
-      } catch(ex){ err("Could not read grants file: " + ex.message); }
-    };
-    r.readAsText(file);
+  $("btn-new-search").addEventListener("click", () => {
+    state.activeSearchId = null;
+    state.lastFaculty = null;
+    state.lastResults = null;
+    state.lastProvider = null;
+    $("search-name").value = "";
+    $("research-profile").value = "";
+    $("topk").value = "12";
+    $("results").innerHTML = "";
+    $("btn-export").disabled = true;
+    setStatus("");
+    clearBanner();
+    info("Started a new blank research search. Your saved searches are unchanged.");
+    $("research-profile").focus();
   });
 
   /* ---------- tiny hash for embedding cache (cyrb53) ---------- */
@@ -556,6 +639,9 @@ if (typeof document !== "undefined"){
       limited_submission: item.grant.limited_submission ?? null,
       cost_share_required: item.grant.cost_share_required ?? null,
       has_preliminary_stage: item.grant.has_preliminary_stage ?? null,
+      funding: item.grant.funding_amount || item.grant.award_ceiling || null,
+      deadline: item.grant.close_date || item.grant.close_date_note || null,
+      duration: item.grant.duration || item.grant.project_duration || null,
       description: (item.grant.description || item.grant.eligibility_text || "").slice(0, 1200)
     }));
 
@@ -714,12 +800,18 @@ where similarity is an integer from 0 to 100. No prose outside the JSON.`;
     if (!PROVIDERS[provider] || !key){
       err("Choose one provider and save its API key first."); $("keys-box").open = true; return;
     }
-    const faculty = state.faculty[parseInt($("sel-faculty").value, 10)];
-    if (!faculty){ err("Pick a faculty member."); return; }
-    if (!facultyText(faculty)){ err(`${faculty.name} has no research text to match on (empty profile).`); return; }
+    const faculty = currentFaculty();
+    if (facultyText(faculty).length < 40){
+      err("Describe your research in at least 40 characters before matching.");
+      $("research-profile").focus();
+      return;
+    }
     if (!state.grants.length){ err("No opportunities loaded."); return; }
 
-    const topk = Math.max(1, Math.min(50, parseInt($("topk").value, 10) || 12));
+    const topk = Math.max(
+      1,
+      Math.min(state.grants.length, 50, parseInt($("topk").value, 10) || 12)
+    );
     $("btn-run").disabled = true; $("btn-export").disabled = true;
     $("results").innerHTML = "";
 
@@ -742,6 +834,7 @@ where similarity is an integer from 0 to 100. No prose outside the JSON.`;
       renderResults(faculty, results, scored.length, PROVIDERS[provider].name);
       setStatus(`Done · ${results.length} scored, ${state.grants.length} considered.`);
       $("btn-export").disabled = false;
+      info("Matching complete. Save this search to keep the profile and result snapshot on this device.");
     } catch(ex){
       err(ex.message);
       setStatus("");
@@ -752,6 +845,62 @@ where similarity is an integer from 0 to 100. No prose outside the JSON.`;
 
   /* ---------- render ---------- */
   function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+  function firstText(...values){
+    const found = values.find(value => value !== null && value !== undefined && String(value).trim());
+    return found === undefined ? "" : String(found).trim();
+  }
+  function formatMoney(value){
+    const raw = firstText(value);
+    if (!raw) return "";
+    const numeric = Number(raw.replace(/[$,\s]/g, ""));
+    if (!Number.isFinite(numeric) || numeric <= 0) return raw;
+    return new Intl.NumberFormat("en-US", {
+      style:"currency", currency:"USD", maximumFractionDigits:0,
+      notation:numeric >= 1_000_000 ? "compact" : "standard"
+    }).format(numeric);
+  }
+  function fundingText(g){
+    const explicit = firstText(g.funding_amount, g.fundingAmount);
+    if (explicit) return explicit;
+    const floor = formatMoney(g.award_floor ?? g.awardFloor);
+    const ceiling = formatMoney(g.award_ceiling ?? g.awardCeiling);
+    if (floor && ceiling) return floor === ceiling ? ceiling : `${floor}–${ceiling} per award`;
+    if (ceiling) return `Up to ${ceiling} per award`;
+    if (floor) return `From ${floor} per award`;
+    const total = formatMoney(
+      g.total_program_funding ?? g.estimated_total_program_funding ?? g.totalProgramFunding
+    );
+    return total ? `${total} total program funding` : "Not listed — check notice";
+  }
+  function formatDate(value){
+    const raw = firstText(value);
+    if (!raw) return "";
+    const date = new Date(raw);
+    if (Number.isNaN(date.getTime())) return raw;
+    return new Intl.DateTimeFormat("en-US", {
+      month:"short", day:"numeric", year:"numeric"
+    }).format(date);
+  }
+  function deadlineText(g){
+    if (g.rolling) return "Rolling / open until superseded";
+    const date = formatDate(g.close_date ?? g.closeDate ?? g.response_date);
+    const note = firstText(g.close_date_note, g.closeDateNote, g.deadline_note);
+    if (date && note && !note.toLowerCase().includes(date.toLowerCase())) return `${date} · ${note}`;
+    return date || note || "Not listed — check notice";
+  }
+  function durationText(g){
+    return firstText(
+      g.duration,
+      g.project_duration,
+      g.award_duration,
+      g.project_period,
+      g.funding_period,
+      g.grantDuration
+    ) || "Not listed — check notice";
+  }
+  function fact(label, value){
+    return `<div class="fact"><span class="fact-label">${esc(label)}</span><span class="fact-value">${esc(value)}</span></div>`;
+  }
   function renderResults(faculty, results, considered, providerName){
     const box = $("results");
     const head = document.createElement("div");
@@ -766,8 +915,38 @@ where similarity is an integer from 0 to 100. No prose outside the JSON.`;
       card.className = "card";
       const sub = [g.agency, g.opportunity_number, g.source_note].filter(Boolean).map(esc).join(" · ");
       const links = [];
-      if (g.detail_page) links.push(`<a href="${esc(g.detail_page)}" target="_blank" rel="noopener">Grants.gov page</a>`);
-      if (g.nofo_pdf_url) links.push(`<a href="${esc(g.nofo_pdf_url)}" target="_blank" rel="noopener">NOFO PDF</a>`);
+      const detailPage = firstText(g.detail_page, g.detailPage);
+      const nofoUrl = firstText(g.nofo_pdf_url, g.nofoPdfUrl, g.primary_document_url);
+      const applyUrl = firstText(g.apply_url, g.applyUrl);
+      if (detailPage) links.push(`<a href="${esc(detailPage)}" target="_blank" rel="noopener">Opportunity page</a>`);
+      if (nofoUrl) links.push(`<a href="${esc(nofoUrl)}" target="_blank" rel="noopener">NOFO / announcement</a>`);
+      if (applyUrl) links.push(`<a href="${esc(applyUrl)}" target="_blank" rel="noopener">Apply</a>`);
+      const flags = [];
+      if (g.has_preliminary_stage ?? g.hasPreliminaryStage){
+        const type = firstText(g.preliminary_stage_type, g.preliminaryStageType);
+        flags.push(`<span class="flag warn">${esc(type ? `Preliminary stage: ${type}` : "Preliminary stage required")}</span>`);
+      }
+      if (g.limited_submission ?? g.limitedSubmission){
+        flags.push(`<span class="flag warn">${esc(firstText(g.limited_submission_criteria, g.limitedSubmissionCriteria) || "Limited submission")}</span>`);
+      }
+      if (g.cost_share_required ?? g.costShareRequired){
+        flags.push(`<span class="flag warn">${esc(firstText(g.cost_share_detail, g.costShareDetail) || "Cost share required")}</span>`);
+      }
+      if (g.rolling) flags.push(`<span class="flag">Rolling opportunity</span>`);
+      const expectedAwards = firstText(
+        g.expected_number_of_awards,
+        g.number_of_awards,
+        g.expectedAwards
+      ) || "Not listed";
+      const projectStart = formatDate(
+        g.estimated_project_start ?? g.project_start_date ?? g.projectStartDate
+      ) || "Not listed";
+      const status = firstText(g.status, g.opportunity_status) || "Check current notice";
+      const eligibilityText = firstText(
+        g.eligibility_text,
+        g.applicant_eligibility_description,
+        Array.isArray(g.applicant_types) ? g.applicant_types.join(", ") : ""
+      );
       card.innerHTML = `
         <div class="card-top">
           <div>
@@ -781,47 +960,97 @@ where similarity is an integer from 0 to 100. No prose outside the JSON.`;
         </div>
         <p class="rationale">${esc(r.rationale)}</p>
         ${r.eligibility ? `<p class="elig">⚑ ${esc(r.eligibility)}</p>` : ""}
+        <div class="fact-grid">
+          ${fact("Funding", fundingText(g))}
+          ${fact("Due date(s)", deadlineText(g))}
+          ${fact("Grant duration", durationText(g))}
+          ${fact("Expected awards", expectedAwards)}
+          ${fact("Project start", projectStart)}
+          ${fact("Status", status)}
+        </div>
+        ${flags.length ? `<div class="flags">${flags.join("")}</div>` : ""}
         ${links.length ? `<div class="links">${links.join("")}</div>` : ""}
-        ${(g.description) ? `<details class="desc"><summary>Opportunity text</summary><p>${esc(g.description)}</p></details>` : ""}
+        ${(g.description || eligibilityText) ? `<details class="desc"><summary>Opportunity and eligibility details</summary>
+          ${eligibilityText ? `<p><strong>Eligibility:</strong> ${esc(eligibilityText)}</p>` : ""}
+          ${g.description ? `<p>${esc(g.description)}</p>` : ""}
+        </details>` : ""}
       `;
       box.appendChild(card);
     });
   }
 
   /* ---------- export ---------- */
+  function csvCell(value){
+    return `"${String(value ?? "").replaceAll('"', '""')}"`;
+  }
   $("btn-export").addEventListener("click", () => {
     if (!state.lastResults) return;
-    const payload = {
-      schema: "ur-cheme-matches/1",
-      exported_at: new Date().toISOString(),
-      provider: state.lastProvider,
-      model: PROVIDERS[state.lastProvider]?.model || null,
-      faculty_name: state.lastFaculty.name,
-      faculty_source: state.facultySource,
-      grant_source: state.grantSource,
-      count: state.lastResults.length,
-      matches: state.lastResults.map(r => ({
-        opportunity_number: r.grant.opportunity_number || null,
-        title: r.grant.title,
-        agency: r.grant.agency || null,
-        verdict: r.verdict,
-        score: r.score,
-        similarity: Number(r.similarity.toFixed(4)),
-        rationale: r.rationale,
-        eligibility: r.eligibility
-      }))
-    };
-    const blob = new Blob([JSON.stringify(payload, null, 2)], {type:"application/json"});
+    const header = [
+      "search_name", "research_profile", "provider", "model",
+      "verdict", "score", "similarity", "rationale", "eligibility",
+      "opportunity_number", "title", "agency", "status",
+      "funding", "award_floor", "award_ceiling", "total_program_funding",
+      "expected_awards", "due_dates", "deadline_note", "grant_duration",
+      "project_start", "preliminary_stage", "limited_submission",
+      "cost_share", "applicant_eligibility", "opportunity_url", "nofo_url"
+    ];
+    const rows = state.lastResults.map(r => {
+      const g = r.grant;
+      return [
+        state.lastFaculty.name,
+        facultyText(state.lastFaculty),
+        state.lastProvider || "",
+        PROVIDERS[state.lastProvider]?.model || "",
+        r.verdict,
+        r.score,
+        Number(r.similarity.toFixed(4)),
+        r.rationale,
+        r.eligibility,
+        firstText(g.opportunity_number, g.opportunityNumber),
+        g.title,
+        g.agency,
+        firstText(g.status, g.opportunity_status),
+        fundingText(g),
+        firstText(g.award_floor, g.awardFloor),
+        firstText(g.award_ceiling, g.awardCeiling),
+        firstText(g.total_program_funding, g.estimated_total_program_funding, g.totalProgramFunding),
+        firstText(g.expected_number_of_awards, g.number_of_awards, g.expectedAwards),
+        deadlineText(g),
+        firstText(g.close_date_note, g.closeDateNote, g.deadline_note),
+        durationText(g),
+        firstText(g.estimated_project_start, g.project_start_date, g.projectStartDate),
+        (g.has_preliminary_stage ?? g.hasPreliminaryStage)
+          ? firstText(g.preliminary_stage_type, g.preliminaryStageType) || "Required"
+          : "No",
+        (g.limited_submission ?? g.limitedSubmission)
+          ? firstText(g.limited_submission_criteria, g.limitedSubmissionCriteria) || "Yes"
+          : "No",
+        (g.cost_share_required ?? g.costShareRequired)
+          ? firstText(g.cost_share_detail, g.costShareDetail) || "Required"
+          : "No",
+        firstText(
+          g.eligibility_text,
+          g.applicant_eligibility_description,
+          Array.isArray(g.applicant_types) ? g.applicant_types.join(", ") : ""
+        ),
+        firstText(g.detail_page, g.detailPage),
+        firstText(g.nofo_pdf_url, g.nofoPdfUrl, g.primary_document_url)
+      ];
+    });
+    const csv = [header, ...rows].map(row => row.map(csvCell).join(",")).join("\r\n");
+    const blob = new Blob([`\uFEFF${csv}`], {type:"text/csv;charset=utf-8"});
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     const slug = state.lastFaculty.name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
-    a.href = url; a.download = `matches-${slug}.json`; a.click();
+    a.href = url;
+    a.download = `grant-matches-${slug || "research-search"}.csv`;
+    a.click();
     URL.revokeObjectURL(url);
   });
 
   /* ---------- init ---------- */
   loadProvider();
-  refreshFacultyOptions();
+  renderSavedSearches();
 })();
 }
 </script>

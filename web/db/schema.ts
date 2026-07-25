@@ -40,16 +40,28 @@ export const opportunities = sqliteTable("opportunities", {
   eligibilityText: text("eligibility_text").notNull().default(""),
   careerStageSignal: text("career_stage_signal").notNull().default(""),
   closeDate: text("close_date").notNull().default(""),
+  closeDateNote: text("close_date_note").notNull().default(""),
+  rolling: integer("rolling", { mode: "boolean" }).notNull().default(false),
   awardCeiling: text("award_ceiling").notNull().default(""),
+  awardFloor: text("award_floor").notNull().default(""),
+  totalProgramFunding: text("total_program_funding").notNull().default(""),
+  expectedAwards: text("expected_awards").notNull().default(""),
+  duration: text("duration").notNull().default(""),
+  projectStartDate: text("project_start_date").notNull().default(""),
   limitedSubmission: integer("limited_submission", { mode: "boolean" })
     .notNull()
     .default(false),
+  limitedSubmissionCriteria: text("limited_submission_criteria")
+    .notNull()
+    .default(""),
   costShareRequired: integer("cost_share_required", { mode: "boolean" })
     .notNull()
     .default(false),
+  costShareDetail: text("cost_share_detail").notNull().default(""),
   hasPreliminaryStage: integer("has_preliminary_stage", { mode: "boolean" })
     .notNull()
     .default(false),
+  preliminaryStageType: text("preliminary_stage_type").notNull().default(""),
   detailPage: text("detail_page").notNull().default(""),
   nofoPdfUrl: text("nofo_pdf_url").notNull().default(""),
   importedAt: text("imported_at").notNull().default(sql`CURRENT_TIMESTAMP`),
