@@ -10,6 +10,11 @@ Source repository: <https://github.com/mporosoff/grants-scraper>
 Faculty use a hosted URL. They do not install Python, clone the repository, or
 handle model API keys.
 
+Public browser demos:
+
+- GitHub Pages Match Explorer: <https://mporosoff.github.io/grants-scraper/>
+- hosted faculty application: <https://ur-grant-matcher.zing78.chatgpt.site/>
+
 ## What works now
 
 - faculty-authored, editable research profiles
@@ -36,6 +41,7 @@ does not expose shared production keys in its browser UI.
 
 | Path | Purpose |
 |---|---|
+| `index.html` | GitHub Pages entry point for the Match Explorer |
 | `web/` | Hosted application, APIs, database schema, migrations, and UI |
 | `scripts/pull_grants.py` | Standalone Grants.gov ingestion and normalization tool |
 | `match_explorer.html` | Standalone prototype with one selectable AI provider and one key |
