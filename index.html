@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b6bcb">
+  <meta http-equiv="refresh" content="0; url=./match_explorer.html">
+  <title>UR Grant Matcher</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: #f6f7f9;
+      color: #1c2430;
+      font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      width: min(100%, 34rem);
+      padding: 28px;
+      border: 1px solid #e3e7ec;
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: 0 12px 36px rgb(28 36 48 / 8%);
+      text-align: center;
+    }
+    h1 { margin: 0 0 8px; font-size: 1.45rem; }
+    p { margin: 0 0 18px; color: #5c6773; }
+    a {
+      display: inline-block;
+      padding: 10px 16px;
+      border-radius: 8px;
+      background: #0b6bcb;
+      color: #fff;
+      font-weight: 650;
+      text-decoration: none;
+    }
+  </style>
+  <script>
+    const target = new URL("./match_explorer.html", window.location.href);
+    target.search = window.location.search;
+    target.hash = window.location.hash;
+    window.location.replace(target);
+  </script>
+</head>
+<body>
+  <main>
+    <h1>UR Grant Matcher</h1>
+    <p>Opening the Match Explorer…</p>
+    <a href="./match_explorer.html">Open the application</a>
+  </main>
+</body>
+</html>

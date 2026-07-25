@@ -1,0 +1,176 @@
+import unittest
+
+from scripts.pull_grants import normalize, parse_args
+
+
+class NormalizeTests(unittest.TestCase):
+    def test_normalizes_live_synopsis_field_names_and_attachment(self):
+        stub = {
+            "id": "347749",
+            "number": "22-605",
+            "title": "Chemistry program",
+            "agency": "U.S. National Science Foundation",
+            "agencyCode": "NSF",
+            "openDate": "04/26/2023",
+            "closeDate": "09/30/2026",
+            "oppStatus": "posted",
+            "docType": "synopsis",
+            "cfdaList": ["47.049"],
+        }
+        detail = {
+            "id": 347749,
+            "opportunityNumber": "22-605",
+            "opportunityTitle": "Division of Chemistry",
+            "owningAgencyCode": "NSF",
+            "docType": "synopsis",
+            "synopsis": {
+                "version": 9,
+                "agencyCode": "NSF",
+                "agencyName": "A contact accidentally supplied as agency",
+                "agencyDetails": {
+                    "agencyName": "U.S. National Science Foundation"
+                },
+                "synopsisDesc": "Research in chemical catalysis.",
+                "responseDate": "Sep 30, 2026 12:00:00 AM EDT",
+                "responseDateDesc": "Applications are due by 5:00 p.m. Eastern Time.",
+                "postingDate": "Apr 26, 2023 12:00:00 AM EDT",
+                "costSharing": False,
+                "fundingDescLinkUrl": "https://www.nsf.gov/example",
+                "applicantTypes": [{"description": "Higher education"}],
+                "fundingActivityCategories": [{"description": "Science"}],
+                "fundingInstruments": [{"description": "Grant"}],
+            },
+            "synopsisAttachmentFolders": [
+                {
+                    "folderType": "Full Announcement",
+                    "folderName": "Current NOFO",
+                    "synopsisAttachments": [
+                        {
+                            "id": 111111,
+                            "fileName": "Attachment 01 FAQ Program.pdf",
+                            "fileDescription": "Frequently asked questions",
+                            "mimeType": "application/pdf",
+                            "fileLobSize": 12345,
+                        },
+                        {
+                            "id": 353260,
+                            "fileName": "Open BAA.pdf",
+                            "fileDescription": "Full announcement",
+                            "mimeType": "application/pdf",
+                            "fileLobSize": 378652,
+                        }
+                    ],
+                }
+            ],
+            "synopsisDocumentURLs": [],
+            "cfdas": [{"cfdaNumber": "47.049"}],
+        }
+
+        record = normalize(stub, detail)
+
+        self.assertEqual(record["agency"], "U.S. National Science Foundation")
+        self.assertEqual(record["agency_code"], "NSF")
+        self.assertEqual(record["close_date_note"], detail["synopsis"]["responseDateDesc"])
+        self.assertEqual(record["deadline_time"].lower(), "5:00 p.m.")
+        self.assertEqual(record["deadline_timezone"], "Eastern Time")
+        self.assertEqual(record["aln"], ["47.049"])
+        self.assertEqual(record["all_attachments"][0]["folder_name"], "Current NOFO")
+        self.assertTrue(record["nofo_pdf_url"].endswith("/353260"))
+        self.assertEqual(record["primary_document_url"], record["nofo_pdf_url"])
+
+    def test_normalizes_forecast_field_family(self):
+        stub = {
+            "id": "355824",
+            "number": "MP-CPI-25-001",
+            "title": "Forecasted program",
+            "agency": "Office of the Assistant Secretary for Health",
+            "agencyCode": "HHS-OPHS",
+            "openDate": "08/01/2024",
+            "closeDate": "",
+            "oppStatus": "forecasted",
+            "docType": "forecast",
+            "cfdaList": ["93.137"],
+        }
+        detail = {
+            "id": 355824,
+            "opportunityNumber": "MP-CPI-25-001",
+            "opportunityTitle": "Forecasted program",
+            "owningAgencyCode": "HHS-OPHS",
+            "docType": "forecast",
+            "forecast": {
+                "version": 7,
+                "postingDate": "Aug 01, 2024 12:00:00 AM EDT",
+                "forecastDesc": "A forecast description suitable for matching.",
+                "agencyCode": "HHS-OPHS",
+                "agencyDetails": {
+                    "agencyName": "Office of the Assistant Secretary for Health"
+                },
+                "estSynopsisPostingDate": "Aug 15, 2026 12:00:00 AM EDT",
+                "estApplicationResponseDate": "Oct 15, 2026 12:00:00 AM EDT",
+                "estApplicationResponseDateDesc": "Estimated application deadline.",
+                "estAwardDate": "Jan 15, 2027 12:00:00 AM EST",
+                "estProjectStartDate": "Mar 01, 2027 12:00:00 AM EST",
+                "estimatedFunding": "5000000",
+                "numberOfAwards": "9",
+                "awardCeiling": "600000",
+                "awardFloor": "450000",
+                "costSharing": False,
+            },
+            "synopsisAttachmentFolders": [],
+            "synopsisDocumentURLs": [],
+            "alns": [{"alnNumber": "93.137"}],
+        }
+
+        record = normalize(stub, detail)
+
+        self.assertEqual(record["description"], detail["forecast"]["forecastDesc"])
+        self.assertEqual(
+            record["estimated_posting_date"],
+            detail["forecast"]["estSynopsisPostingDate"],
+        )
+        self.assertEqual(
+            record["close_date"],
+            detail["forecast"]["estApplicationResponseDate"],
+        )
+        self.assertEqual(record["estimated_award_date"], detail["forecast"]["estAwardDate"])
+        self.assertEqual(
+            record["estimated_project_start"],
+            detail["forecast"]["estProjectStartDate"],
+        )
+        self.assertEqual(record["aln"], ["93.137"])
+
+    def test_marks_open_until_superseded_as_rolling(self):
+        record = normalize(
+            {"id": "1", "oppStatus": "posted", "docType": "synopsis"},
+            {
+                "id": 1,
+                "synopsis": {
+                    "responseDateDesc": "Open until superseded",
+                    "synopsisDesc": "Standing opportunity.",
+                },
+            },
+        )
+
+        self.assertTrue(record["rolling"])
+
+
+class ArgumentTests(unittest.TestCase):
+    def test_small_live_run_arguments(self):
+        args = parse_args(
+            [
+                "--search-term",
+                "catalysis",
+                "--max-opportunities",
+                "3",
+                "--output-dir",
+                "data",
+            ]
+        )
+
+        self.assertEqual(args.search_terms, ["catalysis"])
+        self.assertEqual(args.max_opportunities, 3)
+        self.assertEqual(str(args.output_dir), "data")
+
+
+if __name__ == "__main__":
+    unittest.main()
