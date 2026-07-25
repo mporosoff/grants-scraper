@@ -7,10 +7,10 @@ need Python or a local installation.
 ## Workflow
 
 1. A faculty member writes and saves a research profile.
-2. The opportunity feed is refreshed from Grants.gov or populated from
-   normalized JSON.
-3. The match explorer ranks the feed, explains each recommendation, and flags
-   eligibility or deadline concerns.
+2. The opportunity feed is refreshed directly from Grants.gov; faculty do not
+   upload or manage data files.
+3. The match explorer ranks the feed, explains each recommendation, and shows
+   funding, due dates, duration, eligibility, and submission requirements.
 4. The faculty member records useful/not-relevant feedback and can export the
    visible list as CSV.
 

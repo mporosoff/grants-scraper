@@ -48,6 +48,21 @@ function text(value: unknown): string {
   return value === null || value === undefined ? "" : String(value).trim();
 }
 
+function inferDuration(value: unknown): string {
+  const source = text(value);
+  const match = source.match(
+    /\b(?:project|award|performance|budget)\s+(?:period|duration)[^.\n]{0,80}?\b((?:up to|maximum(?: of)?)?\s*\d+(?:\.\d+)?\s*(?:years?|months?))\b/i,
+  );
+  return match ? text(match[1]).replace(/\s+/g, " ") : "";
+}
+
+function preliminaryStage(value: unknown): string {
+  const match = text(value).match(
+    /\b(concept\s+paper|pre[\s-]?proposal|letter\s+of\s+intent|LOI)\b/i,
+  );
+  return match ? text(match[1]) : "";
+}
+
 function selectPrimaryAttachment(detail: JsonRecord) {
   const attachments = records(detail.synopsisAttachmentFolders).flatMap(
     (folder) =>
@@ -101,6 +116,11 @@ function normalizeDetail(stub: JsonRecord, detail: JsonRecord): OpportunityInput
     source.estApplicationResponseDateDesc ||
     "";
   const description = source.synopsisDesc || source.forecastDesc || "";
+  const applicantTypes = records(source.applicantTypes)
+    .map((applicant) => text(applicant.description))
+    .filter(Boolean)
+    .join(", ");
+  const preliminaryStageType = preliminaryStage(`${description} ${closeNote}`);
   const primaryAttachment = selectPrimaryAttachment(detail);
 
   return {
@@ -111,18 +131,31 @@ function normalizeDetail(stub: JsonRecord, detail: JsonRecord): OpportunityInput
       agencyDetails.agencyName || source.agencyName || stub.agency || "",
     status: stub.oppStatus || detail.ost || "",
     description,
-    eligibility_text: source.applicantEligibilityDesc || "",
+    eligibility_text: source.applicantEligibilityDesc || applicantTypes,
     close_date: closeDate || "",
+    close_date_note: closeNote,
+    rolling: /rolling|open\s+until\s+superseded/i.test(text(closeNote)),
     career_stage_signal: `${text(closeNote)} ${text(
       source.applicantEligibilityDesc,
     )}`.slice(0, 1000),
     award_ceiling: source.awardCeiling || "",
+    award_floor: source.awardFloor || "",
+    total_program_funding: source.estimatedFunding || "",
+    expected_number_of_awards: source.numberOfAwards || "",
+    duration:
+      source.projectPeriod ||
+      source.awardDuration ||
+      inferDuration(description),
+    estimated_project_start:
+      source.estimatedProjectStartDate ||
+      source.estProjectStartDate ||
+      "",
     limited_submission: false,
+    limited_submission_criteria: "",
     cost_share_required: Boolean(source.costSharing),
-    has_preliminary_stage:
-      /concept\s+paper|pre[\s-]?proposal|letter\s+of\s+intent|\bLOI\b/i.test(
-        `${text(description)} ${text(closeNote)}`,
-      ),
+    cost_share_detail: source.costSharing ? "Cost share required" : "",
+    has_preliminary_stage: Boolean(preliminaryStageType),
+    preliminary_stage_type: preliminaryStageType,
     detail_page: opportunityId ? `${DETAIL_PAGE}${opportunityId}` : "",
     nofo_pdf_url: primaryAttachment,
     primary_document_url:

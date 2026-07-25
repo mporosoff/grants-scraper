@@ -20,9 +20,9 @@ Public browser demos:
 - faculty-authored, editable research profiles
 - durable profile, opportunity, and feedback storage
 - live Grants.gov refresh for up to five research topics
-- import of normalized `grants.json` from the Python ingestion pipeline
 - ranked results with verdicts, visible rationale, eligibility warnings,
-  deadlines, award ceilings, and source links
+  funding ranges, due dates, grant duration, submission requirements, and
+  source links
 - useful/not-relevant feedback stored per faculty member
 - filtered CSV export for follow-up and sharing
 - a responsive, double-click-free web interface
@@ -32,10 +32,13 @@ baseline. It is useful for testing the complete workflow, but the next quality
 upgrade is a server-side semantic retrieval and reranking stage evaluated
 against faculty feedback.
 
-The standalone match explorer supports bring-your-own-key experiments. A user
-chooses either OpenAI or Anthropic and supplies one key; that same provider runs
-both the shortlist and the deeper scoring pass. The hosted faculty application
-does not expose shared production keys in its browser UI.
+The standalone match explorer supports bring-your-own-key experiments. Any
+faculty member can describe their research in free text, save named searches in
+their browser, and export results as CSV. A user chooses either OpenAI or
+Anthropic and supplies one key; that same provider runs both the shortlist and
+the deeper scoring pass. No profile or opportunity file uploads are required.
+The hosted faculty application does not expose shared production keys in its
+browser UI.
 
 ## Project layout
 
