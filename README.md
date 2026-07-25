@@ -1,80 +1,72 @@
 # UR Grant Matcher
 
-A faculty-first web application for finding funding opportunities worth
-attention. Faculty describe their research in their own words, the application
-maintains a shared Grants.gov opportunity feed, and every recommendation shows
-the concrete reason it matched.
+A public, faculty-first browser application for identifying funding
+opportunities worth attention.
 
-Source repository: <https://github.com/mporosoff/grants-scraper>
+Open the application:
 
-Faculty use a hosted URL. They do not install Python, clone the repository, or
-handle model API keys.
+https://mporosoff.github.io/grants-scraper/
 
-Public browser demos:
+Faculty do not install Python or upload faculty/grant files. A user writes a
+research description in their own words, chooses either OpenAI or Anthropic,
+and supplies one key from that provider. The same provider runs both matching
+stages.
 
-- GitHub Pages Match Explorer: <https://mporosoff.github.io/grants-scraper/>
-- hosted faculty application: <https://ur-grant-matcher.zing78.chatgpt.site/>
+## Current product model
+
+- GitHub Pages is the canonical application.
+- The application is public and has no accounts or central user database.
+- The provider selection, API key, research text, named searches, result
+  snapshots, and cached embeddings stay in that browser's local storage.
+- Matching requests go directly from the browser to the selected AI provider.
+- Results can be exported as CSV.
+- The API key is not included in exports or committed to GitHub.
+
+Local browser storage is convenient, not a secure credential vault. Use a
+scoped key with a spending limit, avoid unpublished confidential research
+details, and clear the key before leaving a shared device.
 
 ## What works now
 
-- faculty-authored, editable research profiles
-- durable profile, opportunity, and feedback storage
-- live Grants.gov refresh for up to five research topics
-- ranked results with verdicts, visible rationale, eligibility warnings,
-  funding ranges, due dates, grant duration, submission requirements, and
-  source links
-- useful/not-relevant feedback stored per faculty member
-- filtered CSV export for follow-up and sharing
-- a responsive, double-click-free web interface
+- free-text faculty research descriptions;
+- no faculty dropdowns or JSON-file workflows;
+- one selectable AI provider and one locally saved key;
+- two-stage matching with verdicts, scores, and visible rationales;
+- browser-local named saved searches and result snapshots;
+- result cards with funding, due dates, duration, expected awards,
+  eligibility, submission warnings, and source links;
+- CSV export; and
+- mobile-friendly, installation-free use.
 
-The current matcher is deliberately labeled as a transparent lexical
-baseline. It is useful for testing the complete workflow, but the next quality
-upgrade is a server-side semantic retrieval and reranking stage evaluated
-against faculty feedback.
-
-The standalone match explorer supports bring-your-own-key experiments. Any
-faculty member can describe their research in free text, save named searches in
-their browser, and export results as CSV. A user chooses either OpenAI or
-Anthropic and supplies one key; that same provider runs both the shortlist and
-the deeper scoring pass. No profile or opportunity file uploads are required.
-The hosted faculty application does not expose shared production keys in its
-browser UI.
+The current opportunity list is a small bundled calibration set. The next
+milestone is an automatically refreshed Grants.gov feed published to GitHub
+Pages by a scheduled GitHub Action.
 
 ## Project layout
 
 | Path | Purpose |
 |---|---|
-| `index.html` | GitHub Pages entry point for the Match Explorer |
-| `web/` | Hosted application, APIs, database schema, migrations, and UI |
-| `scripts/pull_grants.py` | Standalone Grants.gov ingestion and normalization tool |
-| `match_explorer.html` | Standalone prototype with one selectable AI provider and one key |
+| `index.html` | Redirects GitHub Pages to the application |
+| `match_explorer.html` | Canonical public application |
+| `PROJECT.md` | Authoritative product decisions, privacy policy, and roadmap |
+| `scripts/pull_grants.py` | Grants.gov ingestion and normalization |
+| `tests/` | Static application and normalizer checks |
+| `docs/` | Hosting and API validation notes |
 | `legacy/scrape_faculty.py` | Retired faculty scraper |
-| `docs/` | API validation and hosting decisions |
+| `web/` | Retained server-backed experiment; not the current product |
 
-## Local development
+## Development
 
-Local setup is only for developers. Faculty use the hosted application.
-
-```powershell
-cd web
-pnpm install
-pnpm dev
-```
-
-Run the complete web build check:
-
-```powershell
-cd web
-pnpm test
-```
-
-The bounded Python ingestion smoke test is still available when working on the
-normalizer:
+The public application is a standalone HTML file and requires no local server.
+Developers can run the regression checks with:
 
 ```powershell
 python -m pip install -r requirements.txt
-python scripts/pull_grants.py --search-term catalysis --max-opportunities 3
+python -m unittest discover -s tests -v
 ```
 
-See `PROJECT.md` for product rationale and roadmap, `docs/HOSTING.md` for the
-deployment boundary, and `docs/API_VALIDATION.md` for live Grants.gov findings.
+The retained `web/` experiment has separate Node-based checks, but it is not
+deployed as the canonical application.
+
+See `PROJECT.md` for the complete plan and `docs/HOSTING.md` for the GitHub
+Pages data and privacy boundary.

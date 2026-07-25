@@ -1,6 +1,11 @@
-# UR Grant Matcher web application
+# UR Grant Matcher server-backed experiment
 
-The faculty-facing application is a Vinext/React site with server routes and a
+> **Status:** Retained for reference. The canonical product is the public
+> GitHub Pages application at
+> https://mporosoff.github.io/grants-scraper/. This directory is not the
+> current deployment target.
+
+This experimental application is a Vinext/React site with server routes and a
 durable D1 database. It is designed to be opened from a URL; end users do not
 need Python or a local installation.
 
