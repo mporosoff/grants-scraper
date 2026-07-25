@@ -2,30 +2,26 @@
 
 ## Decision
 
-`mporosoff/grants-scraper` is the source-of-truth repository for application
-code, documentation, tests, database migrations, and deployment configuration.
+`mporosoff/grants-scraper` is the source of truth for application code,
+documentation, tests, database migrations, and deployment configuration.
 
-GitHub is not the production database or the host for the Python web
-application. GitHub Pages serves static files and cannot run the planned
-Django backend. GitHub-hosted Actions runners are temporary machines, so their
-filesystems are not durable application storage.
+The running application is hosted as a private web site with a durable D1
+database. GitHub is the development and review environment; it is not the
+production database. Faculty open the deployed URL and do not install Python.
 
-## Intended topology
+## Current topology
 
 ```text
 GitHub repository
     |
-    | test and deploy
+    | review and tests
     v
-Python web application  ---->  managed PostgreSQL database
+Hosted web application  ---->  D1 application database
     |
-    +----> Grants.gov and other funding sources
+    +----> Grants.gov public API
     |
-    +----> optional object storage for cached NOFO files
+    +----> future server-side semantic matching service
 ```
-
-Faculty use only the web application URL. They do not clone the repository,
-install Python, or run ingestion commands.
 
 ## What belongs in GitHub
 
@@ -34,39 +30,35 @@ install Python, or run ingestion commands.
 - database schema migrations
 - deployment configuration
 - non-sensitive documentation
-- continuous-integration workflows
+- the static `match_explorer.html` design prototype
 
-## What must stay outside GitHub
+## What stays outside GitHub
 
-- faculty accounts and profile contents
-- normalized production grant records
+- faculty profile contents
+- normalized production opportunity records
 - feedback and match history
 - API keys, passwords, and signing secrets
 - downloaded NOFO files and other generated datasets
 
-These belong in the deployed application's database, secret store, or object
-storage. Committing generated records repeatedly would permanently inflate Git
-history and would expose profile data in the public repository.
+These belong in the deployed database, hosting secret store, or future object
+storage. They should never be committed to the repository.
 
-## Role of GitHub Actions
+## Access
 
-GitHub Actions should:
+The first deployment is an owner-only pilot. Sharing with additional faculty
+is an explicit access-policy change, not a code change. Before a broader pilot,
+confirm the University-approved access group, privacy expectations, data
+retention, and support owner.
 
-- run tests for every proposed change
-- build and deploy the application
-- optionally trigger a scheduled ingestion job against the deployed service
+## GitHub Actions
 
-Actions should not act as the primary database. Every hosted job starts on a
-fresh runner and the runner is discarded when the job ends.
+GitHub Actions runs both the Python normalizer tests and the production web
+build. Hosted runners are temporary and must not be treated as durable storage.
 
-## Deployment stages
+## Path to a shared pilot
 
-1. **Development:** run the application locally with SQLite.
-2. **Shared pilot:** deploy the same application to a managed Python host with
-   PostgreSQL.
-3. **Production:** move or retain it on a University-approved service, add UR
-   single sign-on, backups, monitoring, and a scheduled worker.
-
-The application should remain deployment-neutral until University hosting
-options are confirmed. A container definition can provide the same build on a
-commercial platform or a University-managed server.
+1. Validate the complete workflow with the owner-only deployment.
+2. Label a small set of good and bad faculty-opportunity pairs.
+3. Add and evaluate server-side semantic retrieval and reranking.
+4. Confirm University access, privacy, and operational ownership.
+5. Expand access to a small faculty group and monitor feedback quality.

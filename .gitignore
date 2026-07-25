@@ -17,6 +17,7 @@ faculty.csv
 # Local application state
 *.sqlite3
 .env
+.pnpm-store/
 
 # Editors and operating systems
 .idea/

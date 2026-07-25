@@ -1,69 +1,66 @@
-# UR ChemE Grant Matcher
+# UR Grant Matcher
 
-Early prototype of a grant recommendation system for the University of
-Rochester Department of Chemical and Sustainability Engineering.
+A faculty-first web application for finding funding opportunities worth
+attention. Faculty describe their research in their own words, the application
+maintains a shared Grants.gov opportunity feed, and every recommendation shows
+the concrete reason it matched.
 
 Source repository: <https://github.com/mporosoff/grants-scraper>
 
-The product is intended to be a hosted web application. Faculty will open a
-URL, enter and maintain their own research synopsis and general profile
-information, and receive ranked funding recommendations with a visible reason
-for every match. Faculty will not need to install Python or run scripts.
+Faculty use a hosted URL. They do not install Python, clone the repository, or
+handle model API keys.
 
-## Current state
+## What works now
 
-Only the first data-ingestion prototype exists:
+- faculty-authored, editable research profiles
+- durable profile, opportunity, and feedback storage
+- live Grants.gov refresh for up to five research topics
+- import of normalized `grants.json` from the Python ingestion pipeline
+- ranked results with verdicts, visible rationale, eligibility warnings,
+  deadlines, award ceilings, and source links
+- useful/not-relevant feedback stored per faculty member
+- filtered CSV export for follow-up and sharing
+- a responsive, double-click-free web interface
 
-- `scripts/pull_grants.py` searches Grants.gov, fetches full opportunity
-  details, and normalizes them into a screening-oriented JSON schema. Posted
-  and forecasted records have been smoke-tested against the live API.
-- `legacy/scrape_faculty.py` is the original faculty scraper. It is retained
-  for reference but is no longer part of the planned product.
-- No web application, database, matching engine, scheduler, or generated data
-  exists yet.
+The current matcher is deliberately labeled as a transparent lexical
+baseline. It is useful for testing the complete workflow, but the next quality
+upgrade is a server-side semantic retrieval and reranking stage evaluated
+against faculty feedback.
 
-## Faculty profile direction
+## Project layout
 
-Faculty profiles will be created through a short web form. At minimum, each
-profile should contain:
+| Path | Purpose |
+|---|---|
+| `web/` | Hosted application, APIs, database schema, migrations, and UI |
+| `scripts/pull_grants.py` | Standalone Grants.gov ingestion and normalization tool |
+| `match_explorer.html` | Original interaction/design prototype retained as a reference |
+| `legacy/scrape_faculty.py` | Retired faculty scraper |
+| `docs/` | API validation and hosting decisions |
 
-- name and email
-- academic title and career stage
-- research synopsis written in the faculty member's own words
-- research topics and methods
-- application areas
-- optional exclusions or topics they do not want matched
-- optional group website and researcher identifiers
+## Local development
 
-Publication data from OpenAlex may later be offered as an optional enrichment
-or suggestion source. It should not replace faculty control of the profile.
+Local setup is only for developers. Faculty use the hosted application.
 
-## Planned product flow
+```powershell
+cd web
+pnpm install
+pnpm dev
+```
 
-1. Faculty creates or edits a profile in the web application.
-2. Scheduled jobs ingest and normalize funding opportunities.
-3. The matching service retrieves and ranks relevant opportunities.
-4. The application explains the specific overlap behind each recommendation.
-5. Faculty marks recommendations relevant or not relevant.
-6. Feedback is used to evaluate and improve match quality.
+Run the complete web build check:
 
-## Prototype setup
+```powershell
+cd web
+pnpm test
+```
 
-The current Grants.gov script is a developer tool, not the faculty-facing
-experience:
+The bounded Python ingestion smoke test is still available when working on the
+normalizer:
 
 ```powershell
 python -m pip install -r requirements.txt
-python scripts/pull_grants.py
-```
-
-It writes `grants.json` and `grants_raw.json` in the current directory. Use the
-bounded form below for development:
-
-```powershell
 python scripts/pull_grants.py --search-term catalysis --max-opportunities 3
 ```
 
-See `PROJECT.md` for the full product rationale, limitations, and roadmap.
-See `docs/HOSTING.md` for the boundary between GitHub and the running service.
-See `docs/API_VALIDATION.md` for the live Grants.gov findings.
+See `PROJECT.md` for product rationale and roadmap, `docs/HOSTING.md` for the
+deployment boundary, and `docs/API_VALIDATION.md` for live Grants.gov findings.

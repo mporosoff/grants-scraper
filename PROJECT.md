@@ -1,6 +1,6 @@
 # UR ChemE Grant Matching System
 
-**Status:** early prototype; Grants.gov ingestion smoke-tested against live data
+**Status:** private web pilot; complete workflow validated with live Grants.gov data
 **Initial scope:** Department of Chemical and Sustainability Engineering
 **Last updated:** July 2026
 
@@ -122,6 +122,22 @@ The extraction patterns were verified offline against real solicitation
 phrasing from ARPA-E, NSF, and DOE, including NSF's awkward
 `5:00 p.m. submitter's local time`.
 
+### 2.5 Built the first usable web workflow
+
+The `web/` application now implements the core faculty experience: an editable
+research profile, durable application storage, live Grants.gov refresh,
+normalized JSON import, ranked and explained matches, eligibility warnings,
+saved useful/not-relevant feedback, and filtered CSV export.
+
+`match_explorer.html` was useful as an interaction prototype. Its strongest
+ideas—the shortlisting view, verdicts, rationales, source links, and export—are
+now part of the hosted application. Its direct browser API-key fields and
+bundled scraped faculty records were intentionally not carried forward.
+
+The deployed matcher is still a transparent lexical baseline. It exists to
+make the entire product testable before introducing a more expensive semantic
+stage.
+
 ---
 
 ## 3. What we really intend to build
@@ -215,16 +231,16 @@ false positives and false negatives.
 as authoritative values.** A missed limited-submission flag means a wasted
 proposal. Design the UI so the flag links to the source text it matched on.
 
-### 4.3 Match quality is the actual hard problem, and it is unsolved
+### 4.3 Match quality is the actual hard problem, and it is not yet validated
 
 Everything above is plumbing. Albany's system worked mechanically and still
 drew "the recommendations had nothing to do with my research." Semantic
 matching improves on string matching but does not guarantee usefulness.
 
-There is currently **no evaluation set**. We have no labeled examples of good
-and bad matches, so there is no way to measure whether a change helps. Before
-stage 3 ships, someone needs to hand-label a few dozen opportunity-faculty
-pairs as good or bad. Without that, tuning is guesswork.
+The web application now captures useful/not-relevant judgments, but there is
+not yet a sufficiently large evaluation set. We need a few dozen labeled
+opportunity-faculty pairs before claiming that semantic changes improve the
+recommendations. Without that, tuning remains guesswork.
 
 ### 4.4 Scraping is structurally fragile
 
@@ -286,16 +302,21 @@ sponsors. That is a winnable fight.
 
 ## 5. Immediate next steps
 
-1. Build the web application shell and faculty profile form.
-2. Store faculty profiles and normalized opportunities in a database.
-3. Turn the Grants.gov functions into a scheduled application job.
-4. Build a small end-to-end matcher and collect relevant/not-relevant feedback.
-5. Use that feedback to create an evaluation set before tuning the matcher.
+1. Pilot the hosted workflow and label a small, representative set of good and
+   bad faculty-opportunity pairs.
+2. Add server-side embeddings for candidate retrieval and an explainable
+   semantic reranker; keep all model credentials out of the browser.
+3. Compare semantic results against the lexical baseline and the labeled set.
+4. Add scheduled opportunity refresh plus stale/deadline monitoring.
+5. Parse NOFO PDFs for review criteria, required documents, and eligibility
+   details that are missing from Grants.gov fields.
 
 ## 6. Files
 
 | File | Purpose |
 |---|---|
+| `web/` | Hosted application, APIs, D1 schema, migrations, and tests |
+| `match_explorer.html` | Original static interaction prototype |
 | `legacy/scrape_faculty.py` | Retired faculty scraper retained for reference |
 | `scripts/pull_grants.py` | Grants.gov API puller and normalizer |
 | `README.md` | Run instructions and setup |
