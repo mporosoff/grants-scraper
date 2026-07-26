@@ -1,8 +1,8 @@
 # Funding Finder — Product Plan
 
-**Status:** Phase 1 complete; Phase 1.5 source-evidence and actionability layer implemented
+**Status:** Phase 1 and 1.5 complete; Phase 2 evaluation and personalized-relevance tooling implemented
 
-**Next implementation phase:** Phase 2 — Pilot validation and relevance quality
+**Next implementation phase:** Phase 2C — Run the multi-researcher pilot and publish the quality report
 
 **Canonical application:** https://mporosoff.github.io/grants-scraper/
 
@@ -93,13 +93,35 @@ AI output is advisory. It must:
 - never invent deadlines, amounts, eligibility, or requirements; and
 - direct users to the official notice for final verification.
 
-### 2.5 No application local storage
+### 2.5 Explicit device-local profiles, not a local funding database
 
-The search catalog is a published static asset, not a user-maintained local database. Search state is computed from the current page and the keyword query can be shared in the URL.
+The search catalog remains a published static asset. It is not copied into a
+user-maintained browser database, and keyword searches remain shareable by
+URL.
 
-The provider selection, API key, research description, AI shortlist, and chat exist in page memory only. They disappear on reload or when the tab closes. The application does not write them to `localStorage`, `sessionStorage`, GitHub, or an application database.
+At the user's explicit request, the application can now remember a reusable
+research profile on that device. The saved record contains:
 
-CSV is created only when a user explicitly exports results and never includes the API key or research description.
+- research description and expertise keywords;
+- applicant context and career stage;
+- extracted CV text and file metadata, bounded to 120,000 characters;
+- the user's current filters, sort, selected provider (never its key), and
+  profile-ranking preference; and
+- Phase 2 usefulness labels and reason codes in a separate local record.
+
+PDF, DOCX, TXT, and Markdown CVs are parsed in the browser. The original file
+is never saved or uploaded by the application. The user can disable
+remembering, remove the CV extract, clear the profile, or clear evaluation
+labels at any time.
+
+The API key, AI shortlist, and chat remain page-memory only and disappear on
+reload. They are never written to `localStorage`, `sessionStorage`, a URL,
+GitHub, or an application database. The bounded CV excerpt is sent to the
+selected AI provider only when the user leaves that option enabled and
+explicitly runs AI matching or chat.
+
+CSV and Phase 2 JSON are created only on explicit export. The evaluation JSON
+excludes the API key, CV text, research description, and chat by default.
 
 ---
 
@@ -118,19 +140,23 @@ Deadline/award evidence + direct FOA and agency links
                  |
                  v
           GitHub Pages app
-          /              \
-         /                \ optional, user initiated
-        v                  v
-Zero-cost browser       OpenAI or Anthropic
-search and filters      using an in-memory user key
-                            |
-                            +-- query expansion
-                            +-- rerank <= 32 candidates
-                            +-- chat over <= 20 search results
-                                or <= 12 AI matches
+          /       |       \
+         /        |        \ optional, user initiated
+        v         v         v
+Zero-cost     Device-local  OpenAI or Anthropic
+catalog and  profile, CV   using an in-memory user key
+profile      extract, and       |
+ranking      pilot labels       +-- query expansion
+                                +-- rerank <= 32 candidates
+                                +-- chat over <= 20 search results
+                                    or <= 12 AI matches
 ```
 
-There is no application server, search cluster, vector database, account system, or central user database. GitHub Actions performs the expensive ingestion work once per day; every visitor reuses the published result.
+There is no application server, search cluster, vector database, account
+system, or central user database. GitHub Actions performs the expensive
+ingestion work once per day; every visitor reuses the published result.
+Device-local profile storage is optional and never becomes the funding
+catalog or a shared institutional record.
 
 ---
 
@@ -145,9 +171,21 @@ There is no application server, search cluster, vector database, account system,
 5. Open the best available official source in one click or export the result
    set.
 
+### Add reusable profile relevance
+
+1. Enter a research description and expertise keywords, or upload a PDF,
+   DOCX, TXT, or Markdown CV.
+2. Choose applicant context and career stage.
+3. Use “Search with my profile” to rank the catalog locally with zero AI
+   calls.
+4. Leave “remember” enabled to restore the profile, extracted CV text,
+   filters, and sort on that device.
+5. Remove the CV extract, disable remembering, or clear the profile at any
+   time.
+
 ### Add AI refinement
 
-1. Describe the research or proposed project.
+1. Use the research profile, expertise keywords, and optional CV excerpt.
 2. Choose a provider and enter a key for the current tab.
 3. Ask AI to build and rank a best-fit shortlist.
 4. Review the shortlist, scores, specific rationale, and caveats.
@@ -171,15 +209,25 @@ There is no application server, search cluster, vector database, account system,
 
 Funding records are public. The catalog and its search index are committed to the public repository and served by GitHub Pages.
 
-Ordinary search sends no research description to an AI provider and makes zero AI calls. When a user explicitly invokes refinement or chat:
+Ordinary and profile-ranked search send nothing to an AI provider and make
+zero AI calls. A remembered profile and extracted CV text stay in that
+browser's local storage; the original CV file is not retained. When a user
+explicitly invokes refinement or chat:
 
-- the browser sends the research description and a bounded selection of public opportunities directly to the selected provider;
+- the browser sends the enabled profile context, a CV excerpt of at most
+  12,000 characters, and a bounded selection of public opportunities directly
+  to the selected provider;
 - that provider’s billing, retention, and privacy terms apply;
 - the application never proxies, receives, or stores the key;
 - the key remains visible to the running page in memory, so users should use a scoped key with a spending limit; and
 - users should not enter confidential or unpublished information.
 
 The browser-only design cannot provide a secure institutional credential vault. A future institution-managed AI gateway would be a separate architectural decision.
+
+Evaluation labels also stay on the device until explicit export or deletion.
+The export uses a non-content comparison fingerprint and excludes profile text, CV
+text, API keys, and chat so a pilot team can evaluate retrieval and reranking
+without collecting those fields by default.
 
 ---
 
@@ -201,7 +249,8 @@ Phase 1 now includes both the catalog foundation and the first optional refineme
 - bounded two-call AI refinement;
 - always-visible chat over ordinary results or the AI shortlist;
 - mobile ordering that places AI matching and chat before filters and results;
-- no browser persistence of API keys or research text; and
+- no browser persistence of API keys (Phase 2 later added explicit,
+  user-controlled profile persistence); and
 - regression coverage for forecasts, expired records, ambiguous rolling language, indexing, generated assets, and workflow safeguards.
 
 The provider adapters have deterministic contract tests for OpenAI Responses
@@ -294,50 +343,64 @@ repeatable, and missing evidence remains explicit.
 
 ### Phase 2 — Pilot validation and relevance quality
 
-**Status: next to implement**
+**Status: engineering implementation complete; human pilot next**
 
 Phase 1 solved catalog coverage and established a bounded AI workflow. The next
 risk is quality: whether deterministic retrieval finds the right candidates
 and whether AI puts the genuinely useful opportunities near the top. Phase 2
 creates the evidence and feedback loop needed to answer that before more
-sources or infrastructure are added.
+sources or infrastructure are added. It also adds a reusable researcher
+profile and locally parsed CV so relevance is based on more than a one-off
+keyword string.
 
 #### 2A. Evaluation controls
 
-- Add in-session labels for `useful`, `not relevant`, and `needs verification`.
-- Add reason codes for topic, eligibility, career stage, deadline, award size,
+- **Implemented:** locally persistent labels for `useful`, `not relevant`, and
+  `needs verification`.
+- **Implemented:** reason codes for topic, eligibility, career stage, deadline, award size,
   application burden, duplicate/already known, and insufficient source detail.
-- Keep labels in page memory and include them only in an explicit evaluation
-  export; do not reintroduce browser storage.
-- Export enough catalog, query, filter, retrieval-rank, AI-rank, model, and
+- **Implemented:** explicit removal controls and a separate device-local
+  evaluation record.
+- **Implemented:** export enough catalog, query, filter, retrieval-rank, AI-rank, model, and
   reason-code context to reproduce an evaluation without exporting the API key
   or research description by default.
+- **Implemented:** reusable device-local profiles, applicant/career context,
+  and browser-only PDF/DOCX/TXT/Markdown CV extraction. Raw CV files are not
+  retained; a CV excerpt is included in AI calls only when enabled.
 
 #### 2B. Reproducible quality harness
 
-- Create a versioned, consented benchmark fixture separate from the production
-  catalog.
-- Measure catalog retrieval independently from AI reranking:
+- **Implemented:** a versioned synthetic regression fixture and export schema
+  separate from the production catalog. Consented human exports will remain
+  separate from source control.
+- **Implemented:** measure catalog retrieval independently from AI reranking:
   - recall within the 32-record candidate set;
   - precision and useful-result rate within the 12-record shortlist;
   - rank movement between BM25 retrieval and AI output; and
   - hard eligibility and expired-record error rates.
-- Add regression cases for known synonym, interdisciplinary, eligibility, and
-  sparse-description failures.
-- Record provider/model and prompt versions so comparisons are meaningful.
+- **Implemented:** a reviewer can switch between the 12-record AI shortlist
+  and the pre-reranking candidate set to label retrieval and ranking failures
+  separately.
+- **Implemented:** profile persistence, CV-parser, provider-contract, privacy,
+  and evaluator regression tests.
+- **Implemented:** provider/model and prompt versions in evaluation exports so
+  comparisons are meaningful.
+- **Pilot task:** add consented synonym, interdisciplinary, eligibility, and
+  sparse-description cases based on real participant judgments.
 
 #### 2C. Pilot
 
-- Recruit 3–5 researchers across multiple disciplines.
-- Evaluate approximately 75–150 researcher/opportunity pairs.
-- Test whether 32 candidates and 12 recommendations are the right
+- **Ready to run:** recruit 3–5 researchers across multiple disciplines.
+- **Ready to run:** evaluate approximately 75–150
+  researcher/opportunity pairs with the result-card controls.
+- **Ready to run:** test whether 32 candidates and 12 recommendations are the right
   cost/quality boundary.
-- Tune search weights, topic rules, prompts, and thresholds only from labeled
+- **After collection:** tune search weights, topic rules, prompts, and thresholds only from labeled
   evidence.
-- Publish a short pilot report identifying retrieval failures, reranking
+- **After collection:** publish a short pilot report identifying retrieval failures, reranking
   failures, source-data gaps, and the highest-value missing funding sources.
 
-**Exit criterion:** a reproducible benchmark and pilot report separate search
+**Exit criterion (not yet met):** a reproducible benchmark and pilot report separate search
 recall from AI ranking quality, identify the main failure modes, and provide
 evidence for whether Phase 3 source-evidence work or Phase 4 source expansion
 should be prioritized next.
@@ -433,13 +496,17 @@ Only consider a server or managed third-party service after the public pilot dem
 |---|---|
 | `index.html` | GitHub Pages entry point |
 | `match_explorer.html` | Public search and refinement interface |
-| `assets/app.js` | Browser search, filters, source actions, export, AI matching, and chat |
+| `assets/app.js` | Browser search, profile ranking, feedback, export, AI matching, and chat |
+| `assets/profile.js` | Device-local profile/feedback boundary and browser CV extraction |
 | `assets/ai-provider.js` | Testable OpenAI and Anthropic browser adapters |
 | `assets/app.css` | Responsive visual design |
+| `assets/vendor/` | Vendored PDF.js and Mammoth browser parsers plus licenses |
 | `data/opportunities.js` | Generated catalog, facets, and BM25 index |
 | `data/opportunity_enrichment.json` | Compact official-detail cache for incremental refresh |
 | `scripts/build_catalog.py` | Complete XML ingestion, normalization, validation, and index build |
 | `scripts/enrich_catalog.py` | Official detail enrichment, evidence reconciliation, and FOA selection |
+| `scripts/evaluate_phase2.py` | Reproducible retrieval/reranking pilot evaluator |
+| `evaluation/README.md` | Consented Phase 2 export and aggregation workflow |
 | `scripts/pull_grants.py` | Earlier API normalizer retained for fixtures and reference |
 | `tests/` | Pipeline and public-application regression checks |
 | `.github/workflows/refresh-opportunities.yml` | Daily catalog refresh and owner alert |
@@ -458,8 +525,10 @@ Only consider a server or managed third-party service after the public pilot dem
 | July 2026 | Use AI only for bounded query expansion, reranking, and grounded chat over current results. |
 | July 2026 | Present search and AI matching as equal entry points; keep chat visible before the result list on mobile. |
 | July 2026 | Reject past forecast deadlines and stale undated forecasts instead of treating every unarchived forecast as current. |
-| July 2026 | Remove saved-search, embedding-cache, API-key, and research-text use of browser storage. |
+| July 2026 | Remove browser storage as a funding database and permanently exclude API keys from persistence. |
 | July 2026 | Treat Duke as a search/discovery design reference, not a data source. |
 | July 2026 | Add a Phase 1.5 evidence layer before pilot work: incremental official detail enrichment, one-click source actions, and strict funding/deadline semantics. |
 | July 2026 | Treat the Albany study as evidence that exact-keyword recommendations require researcher feedback and separate retrieval/reranking evaluation. |
 | July 2026 | Make pilot validation and separate retrieval/reranking measurement the next implementation phase before expanding sources. |
+| July 2026 | Add explicit device-local profile, extracted-CV, preference, and evaluation-label persistence while keeping raw CV files, API keys, AI shortlists, and chat out of storage. |
+| July 2026 | Implement Phase 2A/2B controls and evaluator; require the 3–5 researcher pilot and report before declaring Phase 2 complete. |

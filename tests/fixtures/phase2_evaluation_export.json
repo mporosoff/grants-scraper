@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "prompt_version": "phase2-profile-v1",
+  "exported_at": "2026-07-26T12:00:00.000Z",
+  "privacy": "Synthetic test fixture.",
+  "catalog": {
+    "schema_version": 3,
+    "generated_at": "2026-07-26T05:00:00Z",
+    "record_count": 1465,
+    "source": "Grants.gov"
+  },
+  "session": {
+    "query": "carbon conversion",
+    "filters": {
+      "status": [
+        "open"
+      ]
+    },
+    "sort": "relevance",
+    "profile_active": true,
+    "profile_fingerprint": "fixture01",
+    "applicant_context": "higher_education",
+    "career_stage": "early_career",
+    "cv_present": true,
+    "ai_provider": "openai",
+    "ai_model": "fixture-model",
+    "candidate_ids": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "shortlist_ids": [
+      "B",
+      "A",
+      "D"
+    ]
+  },
+  "metrics": {
+    "reviewed": 6
+  },
+  "feedback": [
+    {
+      "opportunity_id": "A",
+      "label": "useful",
+      "reason": "topic_fit",
+      "retrieval_rank": 1,
+      "displayed_rank": 2,
+      "ai_rank": 2,
+      "provider": "openai",
+      "model": "fixture-model"
+    },
+    {
+      "opportunity_id": "B",
+      "label": "useful",
+      "reason": "career_stage",
+      "retrieval_rank": 6,
+      "displayed_rank": 1,
+      "ai_rank": 1,
+      "provider": "openai",
+      "model": "fixture-model"
+    },
+    {
+      "opportunity_id": "C",
+      "label": "not_relevant",
+      "reason": "eligibility",
+      "retrieval_rank": 4,
+      "displayed_rank": 3,
+      "ai_rank": 3,
+      "provider": "openai",
+      "model": "fixture-model"
+    },
+    {
+      "opportunity_id": "D",
+      "label": "needs_verification",
+      "reason": "insufficient_source_detail",
+      "retrieval_rank": 8,
+      "displayed_rank": 4,
+      "ai_rank": 4,
+      "provider": "openai",
+      "model": "fixture-model"
+    },
+    {
+      "opportunity_id": "E",
+      "label": "useful",
+      "reason": "topic_fit",
+      "retrieval_rank": 40,
+      "displayed_rank": 40,
+      "ai_rank": null,
+      "provider": "",
+      "model": ""
+    },
+    {
+      "opportunity_id": "F",
+      "label": "not_relevant",
+      "reason": "expired_or_closed",
+      "retrieval_rank": 12,
+      "displayed_rank": 12,
+      "ai_rank": null,
+      "provider": "",
+      "model": ""
+    }
+  ]
+}

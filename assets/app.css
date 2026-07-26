@@ -29,11 +29,13 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
   margin: 0;
   min-width: 320px;
+  overflow-x: clip;
   color: var(--ink);
   background: var(--page);
   line-height: 1.5;
@@ -570,6 +572,8 @@ h1 {
 .range-grid input,
 .number-field input,
 .stacked-field textarea,
+.profile-fields input,
+.profile-fields select,
 .provider-fields input,
 .provider-fields select,
 .toolbar-actions select,
@@ -716,6 +720,12 @@ textarea:focus {
   line-height: 1;
 }
 
+.filter-chip.profile-chip {
+  color: #0d6545;
+  background: #e4f6ee;
+  border-color: #b8e3d1;
+}
+
 .notice {
   padding: 12px 14px;
   border: 1px solid;
@@ -740,12 +750,14 @@ textarea:focus {
 
 .result-list {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 13px;
   padding-top: 16px;
 }
 
 .result-card {
   position: relative;
+  min-width: 0;
   padding: 20px;
   background: white;
   border: 1px solid var(--line);
@@ -804,10 +816,16 @@ textarea:focus {
   background: #e5efff;
 }
 
+.badge.candidate {
+  color: #5d477e;
+  background: #f1eafb;
+}
+
 .opportunity-number {
   color: #7b8899;
   font-size: .72rem;
   font-weight: 700;
+  overflow-wrap: anywhere;
 }
 
 .result-card h3 {
@@ -1004,6 +1022,65 @@ textarea:focus {
   line-height: 1.35;
 }
 
+.result-feedback {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) minmax(150px, auto);
+  gap: 8px 12px;
+  align-items: center;
+  margin-top: 14px;
+  padding: 11px 12px;
+  color: #526177;
+  font-size: .72rem;
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+}
+
+.result-feedback > span {
+  color: var(--navy);
+  font-weight: 800;
+}
+
+.feedback-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.feedback-button {
+  min-height: 32px;
+  padding: 5px 9px;
+  color: #42546b;
+  font-size: .7rem;
+  font-weight: 750;
+  background: white;
+  border: 1px solid #c9d3df;
+  border-radius: 7px;
+}
+
+.feedback-button:hover,
+.feedback-button.selected {
+  color: white;
+  background: var(--blue-dark);
+  border-color: var(--blue-dark);
+}
+
+.result-feedback select {
+  width: 100%;
+  min-height: 32px;
+  padding: 5px 24px 5px 8px;
+  color: var(--ink);
+  font-size: .7rem;
+  background: white;
+  border: 1px solid var(--line-strong);
+  border-radius: 7px;
+}
+
+.result-feedback select:disabled {
+  cursor: not-allowed;
+  opacity: .55;
+}
+
 .empty-state {
   padding: 54px 24px;
   text-align: center;
@@ -1085,6 +1162,145 @@ textarea:focus {
   font-size: .83rem;
   font-weight: 450;
   line-height: 1.45;
+}
+
+.profile-fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, .9fr) minmax(0, .9fr);
+  gap: 9px;
+  margin-top: 11px;
+}
+
+.profile-fields label {
+  min-width: 0;
+  color: #3d4d62;
+  font-size: .72rem;
+  font-weight: 800;
+}
+
+.profile-fields input,
+.profile-fields select {
+  display: block;
+  min-height: 39px;
+  margin-top: 5px;
+  padding: 8px 9px;
+  font-size: .75rem;
+  font-weight: 500;
+}
+
+.cv-uploader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 6px 12px;
+  align-items: center;
+  margin-top: 11px;
+  padding: 11px;
+  background: var(--surface-alt);
+  border: 1px dashed #aebfd2;
+  border-radius: 9px;
+}
+
+.cv-uploader strong,
+.cv-uploader span {
+  display: block;
+}
+
+.cv-uploader strong {
+  color: var(--navy);
+  font-size: .78rem;
+}
+
+.cv-uploader span,
+.cv-status {
+  color: #6b798d;
+  font-size: .68rem;
+}
+
+.cv-input {
+  width: min(100%, 210px);
+  min-height: 36px;
+  padding: 4px;
+  color: #4f5f74;
+  font-size: .7rem;
+  background: white;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+}
+
+.cv-input::file-selector-button {
+  min-height: 28px;
+  margin-right: 7px;
+  padding: 4px 8px;
+  color: var(--navy);
+  font-weight: 800;
+  background: white;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cv-status,
+.cv-uploader .text-button {
+  grid-column: 1 / -1;
+}
+
+.cv-uploader .text-button {
+  width: max-content;
+}
+
+.profile-options {
+  display: grid;
+  gap: 6px;
+  margin-top: 11px;
+}
+
+.profile-options label {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  color: #526177;
+  font-size: .7rem;
+}
+
+.profile-options input {
+  width: 15px;
+  height: 15px;
+  margin: 2px 0 0;
+  accent-color: var(--blue);
+}
+
+.profile-storage-note {
+  margin: 7px 0 0;
+  color: #758296;
+  font-size: .66rem;
+  line-height: 1.4;
+}
+
+.profile-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-top: 11px;
+}
+
+.profile-actions .button {
+  min-height: 38px;
+  font-size: .75rem;
+}
+
+.profile-status,
+.evaluation-status {
+  min-height: 18px;
+  margin-top: 7px;
+  color: #4d6d5e;
+  font-size: .69rem;
+  line-height: 1.4;
+}
+
+.profile-status.error {
+  color: var(--danger);
 }
 
 .provider-setup {
@@ -1169,6 +1385,81 @@ textarea:focus {
 .ai-status.error {
   color: var(--danger);
   background: var(--danger-bg);
+}
+
+.evaluation-panel {
+  margin-top: 15px;
+  padding: 13px;
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.evaluation-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.evaluation-heading h3 {
+  margin: 0;
+  color: var(--navy);
+  font-size: .96rem;
+}
+
+.evaluation-heading > strong {
+  color: var(--blue-dark);
+  font-size: .69rem;
+  white-space: nowrap;
+}
+
+.evaluation-panel > p {
+  margin: 8px 0;
+  color: #657388;
+  font-size: .7rem;
+}
+
+.evaluation-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.evaluation-metrics div {
+  padding: 7px 8px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+}
+
+.evaluation-metrics strong,
+.evaluation-metrics span {
+  display: block;
+}
+
+.evaluation-metrics strong {
+  color: var(--navy);
+  font-size: .86rem;
+}
+
+.evaluation-metrics span {
+  color: #728096;
+  font-size: .62rem;
+}
+
+.evaluation-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 10px;
+  align-items: center;
+  margin-top: 9px;
+}
+
+.evaluation-actions .button {
+  min-height: 34px;
+  padding: 6px 9px;
+  font-size: .69rem;
 }
 
 .chat {
@@ -1361,6 +1652,15 @@ footer p {
   .toolbar-actions select {
     min-width: 0;
   }
+
+  .profile-fields,
+  .result-feedback {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .result-feedback label {
+    width: 100%;
+  }
 }
 
 @media (max-width: 540px) {
@@ -1408,6 +1708,20 @@ footer p {
 
   .source-action {
     width: 100%;
+  }
+
+  .cv-uploader {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cv-input,
+  .profile-actions .button {
+    width: 100%;
+  }
+
+  .profile-actions {
+    align-items: stretch;
+    flex-direction: column;
   }
 }
 

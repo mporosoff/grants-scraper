@@ -1,4 +1,5 @@
 from datetime import date
+import hashlib
 import json
 from pathlib import Path
 import unittest
@@ -25,6 +26,9 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         ai_provider_js = (
             REPOSITORY_ROOT / "assets" / "ai-provider.js"
         ).read_text(encoding="utf-8")
+        profile_js = (
+            REPOSITORY_ROOT / "assets" / "profile.js"
+        ).read_text(encoding="utf-8")
         application_css = (
             REPOSITORY_ROOT / "assets" / "app.css"
         ).read_text(encoding="utf-8")
@@ -37,6 +41,12 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn('id="k-provider"', explorer_html)
         self.assertIn('id="k-key"', explorer_html)
         self.assertIn('id="research-profile"', explorer_html)
+        self.assertIn('id="expertise-keywords"', explorer_html)
+        self.assertIn('id="cv-file"', explorer_html)
+        self.assertIn('id="profile-search"', explorer_html)
+        self.assertIn('id="remember-profile"', explorer_html)
+        self.assertIn('id="export-evaluation"', explorer_html)
+        self.assertIn('id="review-candidates"', explorer_html)
         self.assertIn('id="ai-refine"', explorer_html)
         self.assertIn('id="chat-form"', explorer_html)
         self.assertIn('<section class="chat" id="chat"', explorer_html)
@@ -45,6 +55,10 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn('id="result-label"', explorer_html)
         self.assertIn(
             '<script src="./data/opportunities.js"></script>',
+            explorer_html,
+        )
+        self.assertIn(
+            '<script src="./assets/profile.js"></script>',
             explorer_html,
         )
         self.assertIn(
@@ -68,6 +82,13 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             application_js,
         )
         self.assertIn("globalThis.FUNDING_AI.providerJson", application_js)
+        self.assertIn("globalThis.FUNDING_PROFILE", profile_js)
+        self.assertIn("funding-finder.profile.v1", profile_js)
+        self.assertIn("funding-finder.feedback.v1", profile_js)
+        self.assertIn("async function extractCv", profile_js)
+        self.assertIn("profileContext({ includeCv: true })", application_js)
+        self.assertIn("function exportEvaluation", application_js)
+        self.assertIn("AI retrieval candidate set", application_js)
         self.assertIn(
             '$("result-label").textContent = display.length === 1',
             application_js,
@@ -85,12 +106,15 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertNotIn('class="chat hidden"', explorer_html)
         self.assertNotIn("localStorage", application_js)
         self.assertNotIn("sessionStorage", application_js)
+        self.assertNotIn("sessionStorage", profile_js)
+        self.assertNotIn("k-key", profile_js)
+        self.assertNotIn("api_key", profile_js)
         self.assertNotIn("GRANT_MATCH_FEED", explorer_html + application_js)
         self.assertNotIn("CALIBRATION_GRANTS", explorer_html)
         self.assertNotIn('id="sel-faculty"', explorer_html)
         self.assertNotIn('id="load-faculty"', explorer_html)
         self.assertNotIn('id="load-grants"', explorer_html)
-        self.assertNotIn('type="file"', explorer_html)
+        self.assertIn('type="file"', explorer_html)
         self.assertNotIn('id="k-openai"', explorer_html)
         self.assertNotIn('id="k-anthropic"', explorer_html)
 
@@ -194,6 +218,28 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             )
         )
 
+    def test_vendored_cv_parsers_match_reviewed_hashes(self):
+        expected = {
+            "pdf.mjs": (
+                "d7f44e075a8fa47ac165362d404de2dabf61f64f3d98c9180162c5f71f54980a"
+            ),
+            "pdf.worker.mjs": (
+                "f9ed6a050771ad74c228a1cbfc8edb3271249f2e2efa29ed4692468ecb001733"
+            ),
+            "mammoth.browser.min.js": (
+                "5d4c0e7c9165d70b78f789c5274a2c7846d9e1c06ec19b69afa6ef45f789a3b9"
+            ),
+        }
+        vendor = REPOSITORY_ROOT / "assets" / "vendor"
+        for name, digest in expected.items():
+            with self.subTest(name=name):
+                self.assertEqual(
+                    hashlib.sha256((vendor / name).read_bytes()).hexdigest(),
+                    digest,
+                )
+        self.assertTrue((vendor / "pdfjs.LICENSE").is_file())
+        self.assertTrue((vendor / "mammoth.LICENSE").is_file())
+
     def test_scheduled_refresh_has_health_checks_and_failure_alert(self):
         workflow = (
             REPOSITORY_ROOT
@@ -207,6 +253,8 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("python -m scripts.enrich_catalog", workflow)
         self.assertIn("--min-records 1000", workflow)
         self.assertIn("--max-record-count 5000", workflow)
+        self.assertIn("actions/setup-node@v6", workflow)
+        self.assertIn("web/tests/profile-contract.test.mjs", workflow)
         self.assertIn("if: failure()", workflow)
         self.assertIn("data/opportunities.js", workflow)
 

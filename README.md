@@ -17,7 +17,15 @@ Anyone can search the comprehensive catalog without an account or API key. The b
 - expandable evidence details, pagination, and CSV export; and
 - visible catalog source, size, generated time, and freshness.
 
-Ordinary search makes zero AI calls. “Describe your research” is presented beside keyword search as a second, optional entry point. A user may enter an OpenAI or Anthropic key to:
+Users can also build a reusable researcher profile from a research
+description, expertise keywords, applicant/career context, and an optional
+PDF, DOCX, TXT, or Markdown CV. “Search with my profile” uses the local BM25
+index and makes zero AI calls. When remembering is enabled, the profile,
+bounded extracted CV text, filters, sort, and Phase 2 relevance labels are
+saved only on that device.
+
+Ordinary and profile-ranked search make zero AI calls. A user may enter an
+OpenAI or Anthropic key to:
 
 1. expand the search with useful synonyms;
 2. rerank at most 32 retrieved candidates into a shortlist of at most 12; and
@@ -25,7 +33,19 @@ Ordinary search makes zero AI calls. “Describe your research” is presented b
 
 The always-visible “Chat with results” panel can also answer questions over the top 20 ordinary search results without requiring a prior AI rerank. On mobile, AI matching and chat appear before the filters and result list.
 
-The key, research description, shortlist, and chat stay in page memory only. They are not written to local storage, session storage, GitHub, or an application database, and they disappear when the page reloads.
+The original CV file is never retained. A bounded CV excerpt is sent only when
+the user enables that option and explicitly runs AI matching or chat. The API
+key, shortlist, and chat stay in page memory only; they are never written to
+local storage, session storage, GitHub, URLs, exports, or an application
+database.
+
+Phase 2 result cards include `useful`, `not relevant`, and `needs
+verification` labels with reason codes. The explicit evaluation export omits
+API keys, profile text, CV text, and chat, and
+`scripts/evaluate_phase2.py` measures retrieval recall separately from AI
+reranking precision. Reviewers can switch from the 12-result shortlist to the
+pre-reranking candidate set when labeling. The software is pilot-ready; the
+3–5 researcher pilot is the remaining Phase 2 exit criterion.
 
 ## Data model
 
@@ -54,13 +74,17 @@ support it.
 |---|---|
 | `index.html` | Redirects GitHub Pages to the application |
 | `match_explorer.html` | Public search and AI-refinement interface |
-| `assets/app.js` | Search, facets, source actions, export, AI matching, and chat |
+| `assets/app.js` | Search, profile ranking, feedback, export, AI matching, and chat |
+| `assets/profile.js` | Local profile/feedback storage and CV extraction |
 | `assets/ai-provider.js` | OpenAI and Anthropic request adapters |
 | `assets/app.css` | Responsive application styles |
+| `assets/vendor/` | Vendored PDF.js and Mammoth parsers and license notices |
 | `data/opportunities.js` | Generated catalog and search index |
 | `data/opportunity_enrichment.json` | Incremental official-detail cache |
 | `scripts/build_catalog.py` | Official XML ingestion and catalog builder |
 | `scripts/enrich_catalog.py` | Official detail reconciliation and FOA selection |
+| `scripts/evaluate_phase2.py` | Phase 2 retrieval/reranking evaluator |
+| `evaluation/README.md` | Pilot export, privacy, and aggregation workflow |
 | `PROJECT.md` | Product decisions, architecture, and roadmap |
 | `tests/` | Pipeline and public-page regression checks |
 | `docs/HOSTING.md` | Deployment and privacy boundary |
@@ -96,5 +120,5 @@ The scheduled workflow runs both steps daily, validates a plausible catalog
 size, retests the generated assets, and commits the normalized browser catalog
 and compact enrichment cache. Raw XML archives are not committed.
 
-See `PROJECT.md` for the completed Phase 1/1.5 scope and the Phase 2 pilot plan,
+See `PROJECT.md` for the completed Phase 1/1.5 scope and Phase 2 implementation,
 and `docs/HOSTING.md` for the deployment boundary.

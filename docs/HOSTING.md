@@ -23,10 +23,11 @@ Deadline/award evidence + direct source actions
                 |
                 v
           GitHub Pages
-          /          \
-         v            v
-Local browser       Optional OpenAI or Anthropic request
-search/filter       using a key held in page memory
+          /      |      \
+         v       v       v
+Local catalog  Device-  Optional OpenAI or Anthropic request
+and profile    local    using a key held in page memory
+ranking        profile
 ```
 
 The generated public asset is `data/opportunities.js`. It contains open posted
@@ -42,7 +43,9 @@ paces requests, and caps updates per run. It does not store source PDFs.
 
 ## Cost boundary
 
-Keyword search, filtering, sorting, pagination, detail expansion, and CSV export execute locally and make zero AI calls.
+Keyword search, profile ranking, filtering, sorting, pagination, detail
+expansion, CSV export, CV parsing, and Phase 2 labeling execute locally and
+make zero AI calls.
 
 AI refinement is explicit and bounded:
 
@@ -70,16 +73,38 @@ The repository must not contain:
 - private or unpublished research descriptions;
 - user chat history;
 - exported user result files;
+- exported pilot-evaluation files;
 - raw daily XML archives; or
 - unnecessary bulk source documents.
 
-## Page-memory information
+## Device-local and page-memory information
 
-The provider selection, API key, research description, AI shortlist, and chat exist only in the running page. The application does not write them to `localStorage`, `sessionStorage`, cookies, GitHub, or a central database.
+When the user leaves “remember” enabled, one browser-local profile record
+contains the research description, expertise keywords, applicant/career
+context, extracted CV text, and search preferences. Extracted CV text is
+bounded to 120,000 characters. The original CV file is not retained. A
+separate browser-local record contains Phase 2 labels and reason codes.
 
-Reloading or closing the tab removes this state. This is intentional: browser storage is neither a useful shared search backend nor a secure credential vault.
+Both records are device-specific, removable from the interface, and never
+sent to GitHub or a central database. They are a convenience and evaluation
+boundary, not an institutional credential vault or a local copy of the
+funding catalog. Shared search URLs take precedence over saved profile
+ranking until the user activates it.
 
-When AI is invoked, the browser sends the research description and a bounded set of public opportunity text directly to the selected provider. The provider’s billing, privacy, and retention terms apply. Users should use scoped keys with spending limits and should not enter confidential research.
+The API key, AI shortlist, and chat exist only in page memory. Reloading or
+closing the tab removes them. They are never written to `localStorage`,
+`sessionStorage`, cookies, a URL, exports, GitHub, or a central database.
+
+When AI is invoked, the browser sends enabled profile context, at most 12,000
+characters of extracted CV text, and a bounded set of public opportunity text
+directly to the selected provider. The provider’s billing, privacy, and
+retention terms apply. Users should use scoped keys with spending limits and
+should not enter confidential research.
+
+The explicit Phase 2 export excludes profile text, CV text, API keys, and chat
+by default. It contains a non-content comparison fingerprint, catalog version,
+filters, public opportunity metadata, retrieval/AI ranks, provider/model, and
+reason codes.
 
 ## Opportunity refresh
 
@@ -108,6 +133,13 @@ Phase 1 and Phase 1.5 release verification covers:
 - search a known phrase and opportunity number;
 - verify typed search text has readable contrast;
 - verify AI matching and “Chat with results” appear before the result list on mobile;
+- upload a TXT CV, activate profile ranking, reload, and confirm that the
+  profile/CV extract/preferences return while the API key does not;
+- confirm PDF.js and Mammoth are served locally and profile search makes no
+  network request;
+- label a result, select a reason, reload, and export a privacy-safe Phase 2
+  evaluation file;
+- run `scripts/evaluate_phase2.py` against the versioned synthetic fixture;
 - exercise at least two facets and each sort mode;
 - export a multi-record CSV;
 - verify direct-FOA, agency-notice, and Grants.gov fallback actions;

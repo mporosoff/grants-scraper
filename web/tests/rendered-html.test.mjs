@@ -53,10 +53,11 @@ test("uses persistent application storage and removes starter dependencies", asy
   assert.deepEqual(previewFiles, []);
 });
 
-test("supports public catalog search and optional AI refinement", async () => {
-  const [prototype, script, providerScript] = await Promise.all([
+test("supports public catalog search, reusable profiles, and optional AI refinement", async () => {
+  const [prototype, script, profileScript, providerScript] = await Promise.all([
     readFile(new URL("../match_explorer.html", root), "utf8"),
     readFile(new URL("../assets/app.js", root), "utf8"),
+    readFile(new URL("../assets/profile.js", root), "utf8"),
     readFile(new URL("../assets/ai-provider.js", root), "utf8"),
   ]);
 
@@ -68,6 +69,12 @@ test("supports public catalog search and optional AI refinement", async () => {
   assert.match(prototype, /id="k-provider"/);
   assert.match(prototype, /id="k-key"/);
   assert.match(prototype, /id="research-profile"/);
+  assert.match(prototype, /id="expertise-keywords"/);
+  assert.match(prototype, /id="cv-file"/);
+  assert.match(prototype, /id="profile-search"/);
+  assert.match(prototype, /id="remember-profile"/);
+  assert.match(prototype, /id="export-evaluation"/);
+  assert.match(prototype, /id="review-candidates"/);
   assert.match(prototype, /id="ai-refine"/);
   assert.match(prototype, /id="chat-form"/);
   assert.match(prototype, /id="result-label"/);
@@ -76,6 +83,7 @@ test("supports public catalog search and optional AI refinement", async () => {
   assert.match(prototype, /not endorsed or certified/);
   assert.doesNotMatch(prototype, /class="chat hidden"/);
   assert.match(prototype, /data\/opportunities\.js/);
+  assert.match(prototype, /assets\/profile\.js/);
   assert.match(prototype, /assets\/ai-provider\.js/);
   assert.match(prototype, /assets\/app\.js/);
   assert.match(providerScript, /gpt-5\.6-luna/);
@@ -83,6 +91,12 @@ test("supports public catalog search and optional AI refinement", async () => {
   assert.match(providerScript, /api\.openai\.com\/v1\/responses/);
   assert.match(providerScript, /api\.anthropic\.com\/v1\/messages/);
   assert.match(script, /globalThis\.FUNDING_AI\.providerJson/);
+  assert.match(profileScript, /globalThis\.FUNDING_PROFILE/);
+  assert.match(profileScript, /funding-finder\.profile\.v1/);
+  assert.match(profileScript, /funding-finder\.feedback\.v1/);
+  assert.match(script, /profileContext\(\{ includeCv: true \}\)/);
+  assert.match(script, /function exportEvaluation/);
+  assert.match(script, /AI retrieval candidate set/);
   assert.match(script, /result-label/);
   assert.match(script, /MAX_AI_CANDIDATES = 32/);
   assert.match(script, /MAX_CHAT_RESULTS = 20/);
@@ -95,13 +109,15 @@ test("supports public catalog search and optional AI refinement", async () => {
     script,
     /Math\.max\([^)]*total_program_funding/s,
   );
-  assert.doesNotMatch(prototype + script, /localStorage|sessionStorage/);
+  assert.doesNotMatch(script, /localStorage|sessionStorage/);
+  assert.doesNotMatch(profileScript, /sessionStorage|k-key|api_key/);
   assert.doesNotMatch(
     prototype + script,
     /GRANT_MATCH_FEED|btn-save-search|saved-searches/,
   );
   assert.doesNotMatch(
     prototype,
-    /id="sel-faculty"|id="load-faculty"|id="load-grants"|type="file"/,
+    /id="sel-faculty"|id="load-faculty"|id="load-grants"/,
   );
+  assert.match(prototype, /type="file"/);
 });
