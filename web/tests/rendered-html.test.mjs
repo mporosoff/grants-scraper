@@ -53,13 +53,15 @@ test("uses persistent application storage and removes starter dependencies", asy
   assert.deepEqual(previewFiles, []);
 });
 
-test("supports public catalog search, cited FOA evidence, reusable profiles, and optional AI refinement", async () => {
-  const [prototype, script, profileScript, reviewScript, providerScript] = await Promise.all([
+test("supports one guided funding search, cited FOA evidence, reusable profiles, and optional AI refinement", async () => {
+  const [prototype, script, profileScript, reviewScript, credentialsScript, providerScript, css] = await Promise.all([
     readFile(new URL("../match_explorer.html", root), "utf8"),
     readFile(new URL("../assets/app.js", root), "utf8"),
     readFile(new URL("../assets/profile.js", root), "utf8"),
     readFile(new URL("../assets/review.js", root), "utf8"),
+    readFile(new URL("../assets/credentials.js", root), "utf8"),
     readFile(new URL("../assets/ai-provider.js", root), "utf8"),
+    readFile(new URL("../assets/app.css", root), "utf8"),
   ]);
 
   assert.match(prototype, /id="query"/);
@@ -73,15 +75,20 @@ test("supports public catalog search, cited FOA evidence, reusable profiles, and
   assert.match(prototype, /id="research-profile"/);
   assert.match(prototype, /id="expertise-keywords"/);
   assert.match(prototype, /id="cv-file"/);
-  assert.match(prototype, /id="profile-search"/);
-  assert.match(prototype, /id="remember-profile"/);
+  assert.match(prototype, /id="save-profile"/);
+  assert.match(prototype, /id="use-profile"/);
+  assert.match(prototype, /id="find-funding"/);
+  assert.match(prototype, /id="save-key"/);
+  assert.match(prototype, /id="key-storage-status"/);
+  assert.match(prototype, /id="feedback-tools"/);
+  assert.match(prototype, /id="result-assistant"/);
   assert.match(prototype, /id="export-evaluation"/);
   assert.match(prototype, /id="review-candidates"/);
   assert.match(prototype, /id="send-deployment-review"/);
   assert.match(prototype, /id="ai-refine"/);
   assert.match(prototype, /id="chat-form"/);
   assert.match(prototype, /id="result-label"/);
-  assert.match(prototype, /Chat with results/);
+  assert.match(prototype, /Ask about these results/);
   assert.match(prototype, /Minimum per-award amount/);
   assert.match(prototype, /not endorsed or certified/);
   assert.doesNotMatch(prototype, /class="chat hidden"/);
@@ -99,6 +106,8 @@ test("supports public catalog search, cited FOA evidence, reusable profiles, and
   assert.match(profileScript, /funding-finder\.profile\.v1/);
   assert.match(profileScript, /funding-finder\.feedback\.v1/);
   assert.match(reviewScript, /funding-finder\.deployment-review\.v1/);
+  assert.match(credentialsScript, /funding-finder\.credentials\.v1/);
+  assert.match(credentialsScript, /localStorage/);
   assert.match(script, /profileContext\(\{ includeCv: true \}\)/);
   assert.match(script, /function exportEvaluation/);
   assert.match(script, /function evidenceRows/);
@@ -120,6 +129,13 @@ test("supports public catalog search, cited FOA evidence, reusable profiles, and
   assert.doesNotMatch(script, /localStorage|sessionStorage/);
   assert.doesNotMatch(profileScript, /sessionStorage|k-key|api_key/);
   assert.doesNotMatch(reviewScript, /sessionStorage|k-key|api_key/);
+  assert.doesNotMatch(profileScript, /FUNDING_CREDENTIALS/);
+  assert.doesNotMatch(reviewScript, /FUNDING_CREDENTIALS/);
+  assert.doesNotMatch(prototype, /Phase 3 deployment/);
+  assert.doesNotMatch(prototype, /id="profile-search"|id="remember-profile"/);
+  assert.match(prototype, /Your matches will appear here/);
+  assert.match(css, /\/\* Unified search workflow \*\//);
+  assert.match(css, /\.results-column\s*\{[^}]*width:\s*100%/s);
   assert.doesNotMatch(
     prototype + script,
     /GRANT_MATCH_FEED|btn-save-search|saved-searches/,

@@ -32,6 +32,9 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         review_js = (
             REPOSITORY_ROOT / "assets" / "review.js"
         ).read_text(encoding="utf-8")
+        credentials_js = (
+            REPOSITORY_ROOT / "assets" / "credentials.js"
+        ).read_text(encoding="utf-8")
         application_css = (
             REPOSITORY_ROOT / "assets" / "app.css"
         ).read_text(encoding="utf-8")
@@ -47,8 +50,13 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn('id="research-profile"', explorer_html)
         self.assertIn('id="expertise-keywords"', explorer_html)
         self.assertIn('id="cv-file"', explorer_html)
-        self.assertIn('id="profile-search"', explorer_html)
-        self.assertIn('id="remember-profile"', explorer_html)
+        self.assertIn('id="save-profile"', explorer_html)
+        self.assertIn('id="use-profile"', explorer_html)
+        self.assertIn('id="find-funding"', explorer_html)
+        self.assertIn('id="save-key"', explorer_html)
+        self.assertIn('id="key-storage-status"', explorer_html)
+        self.assertIn('id="feedback-tools"', explorer_html)
+        self.assertIn('id="result-assistant"', explorer_html)
         self.assertIn('id="export-evaluation"', explorer_html)
         self.assertIn('id="review-candidates"', explorer_html)
         self.assertIn('id="send-deployment-review"', explorer_html)
@@ -56,7 +64,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn('id="ai-refine"', explorer_html)
         self.assertIn('id="chat-form"', explorer_html)
         self.assertIn('<section class="chat" id="chat"', explorer_html)
-        self.assertIn("Chat with results", explorer_html)
+        self.assertIn("Ask about these results", explorer_html)
         self.assertIn("Export CSV", explorer_html)
         self.assertIn('id="result-label"', explorer_html)
         self.assertIn(
@@ -64,7 +72,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/profile.js"></script>',
+            '<script src="./assets/profile.js?v=unified-search-v1"></script>',
             explorer_html,
         )
         self.assertIn(
@@ -76,7 +84,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/app.js"></script>',
+            '<script src="./assets/credentials.js?v=unified-search-v1"></script>',
+            explorer_html,
+        )
+        self.assertIn(
+            '<script src="./assets/app.js?v=unified-search-v1"></script>',
             explorer_html,
         )
         self.assertIn("globalThis.GRANT_CATALOG", application_js)
@@ -103,6 +115,9 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("citation_evidence_ids", application_js)
         self.assertIn("globalThis.FUNDING_REVIEW", review_js)
         self.assertIn("funding-finder.deployment-review.v1", review_js)
+        self.assertIn("globalThis.FUNDING_CREDENTIALS", application_js)
+        self.assertIn("funding-finder.credentials.v1", credentials_js)
+        self.assertIn("localStorage", credentials_js)
         self.assertIn("AI retrieval candidate set", application_js)
         self.assertIn(
             '$("result-label").textContent = display.length === 1',
@@ -114,9 +129,14 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             application_css,
             r"(?s)\.search-form input\s*\{[^}]*color: var\(--ink\);",
         )
+        self.assertIn("/* Unified search workflow */", application_css)
         self.assertRegex(
             application_css,
-            r'(?s)grid-template-areas:\s*"assistant"\s*"filters"\s*"results"',
+            r"(?s)\.context-grid\s*\{[^}]*grid-template-columns:\s*repeat\(2",
+        )
+        self.assertRegex(
+            application_css,
+            r"(?s)\.results-column\s*\{[^}]*width:\s*100%",
         )
         self.assertNotIn('class="chat hidden"', explorer_html)
         self.assertNotIn("localStorage", application_js)
@@ -127,6 +147,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertNotIn("api_key", profile_js)
         self.assertNotIn("k-key", review_js)
         self.assertNotIn("api_key", review_js)
+        self.assertNotIn("FUNDING_CREDENTIALS", profile_js)
+        self.assertNotIn("FUNDING_CREDENTIALS", review_js)
+        self.assertNotIn("Phase 3 deployment", explorer_html)
+        self.assertNotIn('id="profile-search"', explorer_html)
+        self.assertNotIn('id="remember-profile"', explorer_html)
         self.assertNotIn("GRANT_MATCH_FEED", explorer_html + application_js)
         self.assertNotIn("CALIBRATION_GRANTS", explorer_html)
         self.assertNotIn('id="sel-faculty"', explorer_html)
@@ -147,7 +172,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("GitHub Pages is the only active product surface", project)
         self.assertIn("comprehensive catalog", docs.lower())
         self.assertIn("https://mporosoff.github.io/grants-scraper/", docs)
-        self.assertIn("page memory", docs)
+        self.assertIn("save it on this device", docs)
         self.assertIn("zero AI calls", docs)
         self.assertNotIn("https://ur-grant-matcher.zing78.chatgpt.site", docs)
         self.assertNotIn("saved searches in the browser", docs)
@@ -284,6 +309,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("--max-record-count 5000", workflow)
         self.assertIn("actions/setup-node@v6", workflow)
         self.assertIn("web/tests/profile-contract.test.mjs", workflow)
+        self.assertIn("web/tests/credentials-contract.test.mjs", workflow)
         self.assertIn("web/tests/review-contract.test.mjs", workflow)
         self.assertIn("if: failure()", workflow)
         self.assertIn("data/opportunities.js", workflow)

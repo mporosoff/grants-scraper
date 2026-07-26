@@ -9,13 +9,14 @@
   const MAX_CHAT_RESULTS = 20;
   const MAX_PROFILE_TERMS = 28;
   const MAX_AI_CV_CHARS = 12_000;
-  const PROMPT_VERSION = "phase3-cited-evidence-v1";
-  const APP_VERSION = "phase3-v1";
+  const PROMPT_VERSION = "unified-search-cited-evidence-v1";
+  const APP_VERSION = "unified-search-v1";
   const CANONICAL_URL = "https://mporosoff.github.io/grants-scraper/";
   const REVIEW_EMAIL = "marc.porosoff@rochester.edu";
   const INDEX_TERMS = Object.keys(catalog?.search_index?.postings || {});
   const PROFILE_API = globalThis.FUNDING_PROFILE;
   const REVIEW_API = globalThis.FUNDING_REVIEW;
+  const CREDENTIAL_API = globalThis.FUNDING_CREDENTIALS;
   const DEFAULT_CHAT_SUGGESTIONS = [
     "Which submission stages and deadlines are actually cited?",
     "Compare the cited award amounts and project durations.",
@@ -91,6 +92,7 @@
 
   const state = {
     ready: false,
+    searched: false,
     page: 1,
     query: "",
     sort: "deadline",
@@ -98,6 +100,7 @@
     matches: [],
     profile: {
       value: null,
+      saved: false,
       active: false,
       query: "",
       terms: [],
@@ -430,7 +433,7 @@
       limited: $("flag-limited").checked,
       early_career: $("flag-early-career").checked,
       no_cost_share: $("flag-no-cost-share").checked,
-      profile_search_active: state.profile.active,
+      profile_search_active: $("use-profile").checked,
       ai_provider: $("k-provider").value,
       sort: $("sort").value,
       facets: Object.fromEntries(
@@ -448,7 +451,7 @@
       applicant_context: $("applicant-context").value,
       career_stage: $("career-stage").value,
       include_cv_in_ai: $("include-cv-ai").checked,
-      remember: $("remember-profile").checked,
+      remember: state.profile.saved,
       preferences: currentPreferences(),
     };
   }
@@ -464,6 +467,12 @@
   function setProfileStatus(message, isError = false) {
     $("profile-status").textContent = message;
     $("profile-status").classList.toggle("error", isError);
+  }
+
+  function renderProfileSaveState() {
+    $("save-profile").textContent = state.profile.saved
+      ? "Update saved profile"
+      : "Save profile on this device";
   }
 
   function renderCvStatus() {
@@ -485,12 +494,14 @@
 
   function applyProfileToForm(profile) {
     state.profile.value = PROFILE_API.sanitizeProfile(profile);
+    state.profile.saved = Boolean(state.profile.value.remember);
     $("research-profile").value = state.profile.value.research_description;
     $("expertise-keywords").value = state.profile.value.expertise_keywords;
     $("applicant-context").value = state.profile.value.applicant_context;
     $("career-stage").value = state.profile.value.career_stage;
     $("include-cv-ai").checked = state.profile.value.include_cv_in_ai;
-    $("remember-profile").checked = state.profile.value.remember;
+    $("use-profile").checked =
+      state.profile.saved && profileHasContent(state.profile.value);
     $("k-provider").value = state.profile.value.preferences.ai_provider;
     $("k-key").placeholder = $("k-provider").value === "anthropic"
       ? "sk-ant-…"
@@ -499,6 +510,7 @@
     state.profile.query = built.query;
     state.profile.terms = built.terms;
     renderCvStatus();
+    renderProfileSaveState();
   }
 
   function applyPreferences(preferences) {
@@ -521,7 +533,9 @@
         (value.facets[name] || []).filter(item => validValues.has(item)),
       );
     }
-    state.profile.active = value.profile_search_active && profileHasContent();
+    $("use-profile").checked =
+      value.profile_search_active && profileHasContent();
+    state.profile.active = false;
   }
 
   function hasManagedUrlState() {
@@ -533,17 +547,37 @@
     ].some(key => params.has(key));
   }
 
-  function saveProfileNow({ announce = false } = {}) {
+  function saveProfileNow({ announce = false, force = false } = {}) {
     clearTimeout(state.profile.saveTimer);
     state.profile.saveTimer = null;
+    if (force) state.profile.saved = true;
     refreshProfileQuery();
+    state.profile.value = PROFILE_API.sanitizeProfile({
+      ...state.profile.value,
+      remember: state.profile.saved,
+    });
+    if (!state.profile.saved) {
+      if (announce) {
+        setProfileStatus(
+          "Profile is ready for this search but is not saved on this device.",
+        );
+      }
+      renderProfileSaveState();
+      return {
+        saved: false,
+        reason: "not_requested",
+        profile: state.profile.value,
+      };
+    }
     const result = PROFILE_API.saveProfile(state.profile.value);
     state.profile.value = result.profile;
+    state.profile.saved = result.saved;
+    renderProfileSaveState();
     if (announce || !result.saved) {
       if (result.saved) {
-        setProfileStatus("Profile and search preferences saved on this device.");
-      } else if (result.reason === "remember_disabled") {
-        setProfileStatus("Profile is available in this tab only; the saved copy was removed.");
+        setProfileStatus(
+          "Profile saved on this device. Future changes will save automatically.",
+        );
       } else {
         setProfileStatus("This browser could not save the profile. It remains available in this tab.", true);
       }
@@ -553,6 +587,7 @@
 
   function scheduleProfileSave({ rerank = false } = {}) {
     clearTimeout(state.profile.saveTimer);
+    if (!state.profile.saved) return;
     state.profile.saveTimer = setTimeout(() => {
       saveProfileNow();
       if (rerank && state.profile.active) runSearch({ preserveAi: false });
@@ -769,6 +804,73 @@
     $("ai-status").classList.add("hidden");
   }
 
+  function selectedFilterCount() {
+    let count = Object.values(state.filters)
+      .reduce((total, values) => total + values.size, 0);
+    count += [
+      "deadline-from",
+      "deadline-to",
+      "award-min",
+    ].filter(id => Boolean($(id).value)).length;
+    count += [
+      "flag-evidence",
+      "flag-preliminary",
+      "flag-limited",
+      "flag-early-career",
+      "flag-no-cost-share",
+    ].filter(id => $(id).checked).length;
+    if (!$("status-posted").checked || !$("status-forecasted").checked) count += 1;
+    return count;
+  }
+
+  function updateFilterSummary() {
+    const count = selectedFilterCount();
+    $("filter-summary").textContent = count
+      ? `${count} selected`
+      : "Add filters";
+  }
+
+  function hasSearchCriteria() {
+    return Boolean(
+      $("query").value.trim()
+      || (state.profile.active && state.profile.terms.length)
+      || selectedFilterCount(),
+    );
+  }
+
+  function startSearch() {
+    const built = refreshProfileQuery();
+    state.profile.active = $("use-profile").checked && profileHasContent();
+    if ($("use-profile").checked && !profileHasContent()) {
+      $("search-status").textContent =
+        "Add profile information or turn off “Use this profile” before searching.";
+      $("profile-builder").open = true;
+      $("research-profile").focus();
+      return;
+    }
+    if (state.profile.active && !built.terms.length) {
+      $("search-status").textContent =
+        "Add a few concrete expertise keywords so the profile can improve ranking.";
+      $("profile-builder").open = true;
+      $("expertise-keywords").focus();
+      return;
+    }
+    if (!hasSearchCriteria()) {
+      $("search-status").textContent =
+        "Enter a topic, use a profile, or select at least one filter to start.";
+      $("query").focus();
+      return;
+    }
+    state.searched = true;
+    $("sort").value =
+      $("query").value.trim() || state.profile.active ? "relevance" : "deadline";
+    recordDeploymentUsage(state.profile.active ? "profile_searches" : "searches");
+    runSearch({ autoSort: true });
+    $("search-status").textContent =
+      `Search complete: ${state.matches.length.toLocaleString()} opportunities match the context above.`;
+    $("results-heading").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
   function runSearch({
     resetPage = true,
     preserveAi = false,
@@ -776,6 +878,15 @@
     persistProfile = true,
   } = {}) {
     if (!state.ready) return;
+    updateFilterSummary();
+    renderActiveFilters();
+    if (!state.searched) {
+      if (persistProfile) scheduleProfileSave();
+      renderResults();
+      return;
+    }
+    refreshProfileQuery();
+    state.profile.active = $("use-profile").checked && profileHasContent();
     const nextQuery = $("query").value.trim();
     if (autoSort && nextQuery !== state.query) {
       $("sort").value = nextQuery || state.profile.active ? "relevance" : "deadline";
@@ -787,7 +898,6 @@
     if (resetPage) state.page = 1;
     syncStateToUrl();
     if (persistProfile) scheduleProfileSave();
-    renderActiveFilters();
     renderResults();
   }
 
@@ -899,7 +1009,7 @@
     return `<section class="document-evidence" aria-label="Citation-backed official notice evidence">
       <div class="document-evidence-heading">
         <div>
-          <p class="eyebrow">Phase 3 source evidence</p>
+          <p class="eyebrow">Official notice evidence</p>
           <h4>Facts linked to the notice</h4>
         </div>
         <span>${escapeHtml(checked ? `Checked ${formatDate(checked)}` : "Checked in the scheduled pipeline")}</span>
@@ -959,7 +1069,7 @@
       .map(([value, label]) =>
         `<option value="${escapeAttribute(value)}"${entry.reason === value ? " selected" : ""}>${escapeHtml(label)}</option>`)
       .join("");
-    return `<div class="result-feedback" aria-label="Evaluate this opportunity">
+    return `<div class="result-feedback pilot-feedback-control" aria-label="Evaluate this opportunity">
       <span>Was this match useful?</span>
       <div class="feedback-buttons">
         ${button("useful", "Useful")}
@@ -985,10 +1095,10 @@
       .map(([value, label]) =>
         `<option value="${escapeAttribute(value)}"${entry.field === value ? " selected" : ""}>${escapeHtml(label)}</option>`)
       .join("");
-    return `<div class="source-review" aria-label="Verify the extracted official-notice evidence">
+    return `<div class="source-review pilot-feedback-control" aria-label="Verify the extracted official-notice evidence">
       <div class="source-review-heading">
         <strong>Did the cited evidence match the official notice?</strong>
-        <span>Saved locally for the Phase 3 deployment review</span>
+        <span>Saved locally for the optional reviewer feedback package</span>
       </div>
       <div class="feedback-buttons">${statusButtons}</div>
       <label>
@@ -1350,7 +1460,7 @@
   }
 
   function openReviewEmail(bundle) {
-    const subject = `Funding Finder Phase 3 review ${bundle.payload.review.review_id}`;
+    const subject = `Funding Finder reviewer feedback ${bundle.payload.review.review_id}`;
     const body = `${REVIEW_API.handoffSummary(bundle.payload, bundle.filename)}\n\nPlease attach the downloaded JSON file before sending.`;
     const link = document.createElement("a");
     link.href = `mailto:${REVIEW_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -1376,7 +1486,7 @@
       try {
         await navigator.share({
           files: [bundle.file],
-          title: "Funding Finder Phase 3 deployment review",
+          title: "Funding Finder reviewer feedback",
           text: `Review ${bundle.payload.review.review_id} for the Funding Finder project owner.`,
         });
         $("deployment-review-status").textContent =
@@ -1496,6 +1606,27 @@
   }
 
   function renderResults() {
+    if (!state.searched) {
+      $("results-toolbar").classList.add("search-not-started");
+      $("result-count").textContent = "";
+      $("result-label").textContent = "Your matches will appear here";
+      $("results-mode").textContent = "Ready when you are";
+      $("result-range").textContent = "";
+      $("results").innerHTML = `<div class="empty-state initial-empty-state">
+        <span class="empty-step-number" aria-hidden="true">1</span>
+        <h3>Start with the search above</h3>
+        <p>Describe the work, add any optional context, and select “Find funding.” The catalog stays out of the way until you ask for results.</p>
+      </div>`;
+      $("page-label").textContent = "";
+      $("pagination").classList.add("hidden");
+      $("export-csv").disabled = true;
+      $("ai-refine").disabled = true;
+      $("result-assistant").classList.add("hidden");
+      renderDeploymentReview();
+      renderEvaluation();
+      return;
+    }
+
     const display = currentDisplayMatches();
     const totalPages = Math.max(1, Math.ceil(display.length / PAGE_SIZE));
     state.page = Math.min(state.page, totalPages);
@@ -1512,6 +1643,7 @@
       : state.profile.active
         ? "Profile-ranked catalog"
         : "Public catalog";
+    $("results-toolbar").classList.remove("search-not-started");
     $("result-range").textContent = display.length
       ? `Showing ${start + 1}–${Math.min(start + PAGE_SIZE, display.length)} of ${display.length.toLocaleString()}`
       : "No records match the current search";
@@ -1532,6 +1664,7 @@
     $("page-next").disabled = state.page >= totalPages;
     $("pagination").classList.toggle("hidden", display.length <= PAGE_SIZE);
     $("export-csv").disabled = !display.length;
+    $("ai-refine").disabled = !display.length;
     renderDeploymentReview();
     renderEvaluation();
     renderChat();
@@ -1540,7 +1673,7 @@
   function renderActiveFilters() {
     const chips = [];
     if (state.profile.active) {
-      chips.push(`<button class="filter-chip profile-chip" type="button" data-disable-profile="1">Profile relevance active <span aria-hidden="true">Ã—</span></button>`);
+      chips.push(`<button class="filter-chip profile-chip" type="button" data-disable-profile="1">Profile relevance active <span aria-hidden="true">×</span></button>`);
     }
     for (const [name, values] of Object.entries(state.filters)) {
       for (const value of values) {
@@ -1583,8 +1716,12 @@
   function clearEverything() {
     $("query").value = "";
     $("sort").value = "deadline";
+    state.searched = false;
     state.profile.active = false;
+    clearAiState();
+    $("search-status").textContent = "Search cleared. Add new context when you are ready.";
     clearFiltersOnly();
+    history.replaceState(null, "", location.pathname);
   }
 
   function csvCell(value) {
@@ -1763,18 +1900,27 @@
   }
 
   function setAiBusy(busy) {
-    $("ai-refine").disabled = busy;
+    $("ai-refine").disabled =
+      busy || !state.searched || !state.matches.length;
     $("chat-input").disabled = busy || !currentChatIds().length;
     $("chat-form").querySelector("button").disabled =
       busy || !currentChatIds().length;
   }
 
   async function refineWithAi() {
+    if (!state.searched || !state.matches.length) {
+      setAiStatus("Run the catalog search before asking AI to refine its results.", true);
+      $("find-funding").focus();
+      return;
+    }
     refreshProfileQuery();
     const profile = PROFILE_API.sanitizeProfile(currentProfile());
-    if (!profileHasContent(profile)) {
-      setAiStatus("Add a research description, expertise keywords, or a CV before running AI matching.", true);
-      $("research-profile").focus();
+    if (!profileHasContent(profile) && !state.query) {
+      setAiStatus(
+        "AI needs a topic or research profile to judge fit. Add one above, run the search again, then refine the results.",
+        true,
+      );
+      $("query").focus();
       return;
     }
     if (!$("k-key").value.trim()) {
@@ -1881,6 +2027,10 @@
 
   function renderChat() {
     const contextIds = currentChatIds();
+    $("result-assistant").classList.toggle(
+      "hidden",
+      !state.searched || !contextIds.length,
+    );
     const suggestions = state.ai.active && state.ai.suggestions.length
       ? state.ai.suggestions
       : DEFAULT_CHAT_SUGGESTIONS;
@@ -1944,7 +2094,7 @@
       return;
     }
     if (!$("k-key").value.trim()) {
-      setAiStatus("Connect an AI provider under “Describe your research” before starting chat.", true);
+      setAiStatus("Add an API key under the optional AI settings before starting chat.", true);
       document.querySelector(".provider-setup").open = true;
       $("k-key").focus();
       return;
@@ -2046,28 +2196,50 @@
     }
   }
 
-  function updateProviderState() {
-    const keyPresent = Boolean($("k-key").value.trim());
-    const provider = $("k-provider").value === "anthropic" ? "Anthropic" : "OpenAI";
-    $("provider-state").textContent = keyPresent ? `${provider} ready for this tab` : "Not configured";
+  function providerLabel() {
+    return $("k-provider").value === "anthropic" ? "Anthropic" : "OpenAI";
+  }
+
+  function updateProviderState(message = "") {
+    const key = $("k-key").value.trim();
+    const savedKey = CREDENTIAL_API.loadKey($("k-provider").value);
+    const isSaved = Boolean(key && savedKey === key);
+    $("provider-state").textContent = isSaved
+      ? `${providerLabel()} key saved`
+      : key
+        ? `${providerLabel()} key entered`
+        : "Not configured";
+    $("key-storage-status").textContent = message || (
+      isSaved
+        ? `${providerLabel()} key is saved on this device.`
+        : key
+          ? "Key is available for this tab but has not been saved."
+          : `No ${providerLabel()} key is stored on this device.`
+    );
+    $("save-key").disabled = !key || isSaved;
+  }
+
+  function loadProviderKey({ announce = false } = {}) {
+    const key = CREDENTIAL_API.loadKey($("k-provider").value);
+    $("k-key").value = key;
+    $("k-key").placeholder =
+      $("k-provider").value === "anthropic" ? "sk-ant-..." : "sk-...";
+    updateProviderState(
+      announce && key
+        ? `${providerLabel()} key loaded from this device.`
+        : "",
+    );
   }
 
   function bindEvents() {
     $("search-form").addEventListener("submit", event => {
       event.preventDefault();
-      recordDeploymentUsage("searches");
-      runSearch({ autoSort: true });
-    });
-    let queryTimer;
-    $("query").addEventListener("input", () => {
-      clearTimeout(queryTimer);
-      queryTimer = setTimeout(() => runSearch({ autoSort: true }), 280);
+      startSearch();
     });
     document.querySelectorAll("[data-example-query]").forEach(button => {
       button.addEventListener("click", () => {
         $("query").value = button.dataset.exampleQuery;
-        recordDeploymentUsage("searches");
-        runSearch({ autoSort: true });
+        startSearch();
       });
     });
 
@@ -2078,7 +2250,12 @@
         input.checked ? selected.add(input.value) : selected.delete(input.value);
         renderFacet(input.dataset.facet, document.querySelector(`[data-facet-search="${input.dataset.facet}"]`)?.value || "");
       }
-      runSearch();
+      if (state.searched) runSearch();
+      else {
+        updateFilterSummary();
+        renderActiveFilters();
+        scheduleProfileSave();
+      }
     });
     document.querySelectorAll("[data-facet-search]").forEach(input => {
       input.addEventListener("input", () => renderFacet(input.dataset.facetSearch, input.value));
@@ -2095,9 +2272,15 @@
         else control.value = "";
       } else if (button.dataset.disableProfile) {
         state.profile.active = false;
+        $("use-profile").checked = false;
         setProfileStatus("Profile relevance is off. Your saved profile is unchanged.");
       }
-      runSearch();
+      if (state.searched) runSearch();
+      else {
+        updateFilterSummary();
+        renderActiveFilters();
+        scheduleProfileSave();
+      }
     });
     $("clear-filters").addEventListener("click", clearFiltersOnly);
     $("sort").addEventListener("change", () => {
@@ -2120,29 +2303,37 @@
     });
     $("export-csv").addEventListener("click", exportCsv);
 
-    let profileRerankTimer;
     ["research-profile", "expertise-keywords"].forEach(id => {
       $(id).addEventListener("input", () => {
+        refreshProfileQuery();
         scheduleProfileSave();
-        if (state.profile.active) {
-          clearTimeout(profileRerankTimer);
-          profileRerankTimer = setTimeout(() => {
-            refreshProfileQuery();
-            runSearch();
-          }, 360);
-        }
+        setProfileStatus(state.profile.saved
+          ? "Profile changes are being saved. Select “Find funding” to update the results."
+          : "Profile is ready for this search. Save it only if you want to reuse it later.");
       });
     });
     ["applicant-context", "career-stage", "include-cv-ai"].forEach(id => {
       $(id).addEventListener("change", () => {
-        saveProfileNow();
-        if (state.profile.active) runSearch();
+        refreshProfileQuery();
+        scheduleProfileSave();
+        setProfileStatus(state.profile.saved
+          ? "Profile changes saved. Select “Find funding” to update the results."
+          : "Profile is ready for this search but is not saved on this device.");
       });
     });
-    $("remember-profile").addEventListener("change", () => {
-      saveProfileNow({ announce: true });
+    $("use-profile").addEventListener("change", () => {
+      refreshProfileQuery();
+      if ($("use-profile").checked && !profileHasContent()) {
+        setProfileStatus("Add a research description, expertise keywords, or a CV before using the profile.", true);
+        $("profile-builder").open = true;
+      } else {
+        setProfileStatus($("use-profile").checked
+          ? "This profile will be combined with keywords and filters in the next search."
+          : "Profile context is off. The saved profile is unchanged.");
+      }
+      if (state.searched) runSearch();
     });
-    $("profile-search").addEventListener("click", () => {
+    $("save-profile").addEventListener("click", () => {
       const built = refreshProfileQuery();
       if (!profileHasContent()) {
         setProfileStatus("Add a research description, expertise keywords, or a CV first.", true);
@@ -2154,22 +2345,24 @@
         $("expertise-keywords").focus();
         return;
       }
-      state.profile.active = true;
-      $("sort").value = "relevance";
-      saveProfileNow();
-      recordDeploymentUsage("profile_searches");
-      setProfileStatus(`Profile relevance is active using ${built.terms.length} high-signal terms. No AI call was made.`);
-      runSearch({ autoSort: true });
-      $("results-heading").scrollIntoView({ behavior: "smooth", block: "start" });
+      state.profile.saved = true;
+      $("use-profile").checked = true;
+      saveProfileNow({ announce: true, force: true });
+      setProfileStatus(
+        `Profile saved on this device with ${built.terms.length} high-signal terms. It will be combined with the next search.`,
+      );
     });
     $("clear-profile").addEventListener("click", () => {
-      if (!globalThis.confirm("Remove the locally saved profile, CV extract, and saved search preferences from this device?")) return;
+      if (!globalThis.confirm("Clear the profile and remove any saved profile or CV extract from this device?")) return;
       PROFILE_API.clearProfile();
+      state.profile.saved = false;
       state.profile.active = false;
       applyProfileToForm(PROFILE_API.emptyProfile());
+      $("use-profile").checked = false;
       $("cv-file").value = "";
-      setProfileStatus("Saved profile and CV extract removed from this device.");
-      runSearch();
+      loadProviderKey();
+      setProfileStatus("Profile and CV extract cleared from this device.");
+      if (state.searched) runSearch();
     });
     $("cv-file").addEventListener("change", async event => {
       const file = event.target.files?.[0];
@@ -2190,9 +2383,10 @@
         });
         refreshProfileQuery();
         renderCvStatus();
-        saveProfileNow();
-        setProfileStatus(`CV added. ${state.profile.terms.length} high-signal profile terms are ready for local ranking.`);
-        if (state.profile.active) runSearch();
+        scheduleProfileSave();
+        setProfileStatus(state.profile.saved
+          ? `CV added and saved. ${state.profile.terms.length} profile terms are ready for the next search.`
+          : `CV added for this tab. ${state.profile.terms.length} profile terms are ready; save the profile to reuse them later.`);
       } catch (error) {
         renderCvStatus();
         setProfileStatus(error?.message || String(error), true);
@@ -2214,9 +2408,10 @@
       });
       refreshProfileQuery();
       renderCvStatus();
-      saveProfileNow();
-      setProfileStatus("CV extract removed from the profile.");
-      if (state.profile.active) runSearch();
+      scheduleProfileSave();
+      setProfileStatus(state.profile.saved
+        ? "CV extract removed from the saved profile."
+        : "CV extract removed from this tab.");
     });
 
     $("results").addEventListener("click", event => {
@@ -2327,24 +2522,42 @@
       sendDeploymentReview,
     );
     $("clear-deployment-review").addEventListener("click", () => {
-      if (!globalThis.confirm("Clear all locally saved Phase 3 deployment-review data from this device?")) return;
+      if (!globalThis.confirm("Clear all locally saved reviewer feedback from this device?")) return;
       REVIEW_API.clearReview();
       applyDeploymentReviewToForm(REVIEW_API.emptyReview());
       $("deployment-review-status").textContent =
-        "Phase 3 deployment-review data cleared from this device.";
+        "Reviewer feedback cleared from this device.";
       renderResults();
     });
 
+    $("feedback-tools").addEventListener("toggle", () => {
+      document.body.classList.toggle(
+        "feedback-mode",
+        $("feedback-tools").open,
+      );
+    });
+
     $("k-provider").addEventListener("change", () => {
-      $("k-key").value = "";
-      $("k-key").placeholder = $("k-provider").value === "anthropic" ? "sk-ant-…" : "sk-…";
-      updateProviderState();
-      saveProfileNow();
+      loadProviderKey({ announce: true });
+      scheduleProfileSave();
     });
     $("k-key").addEventListener("input", updateProviderState);
+    $("save-key").addEventListener("click", () => {
+      const key = $("k-key").value.trim();
+      if (!key) {
+        updateProviderState("Enter an API key before saving it.");
+        $("k-key").focus();
+        return;
+      }
+      const result = CREDENTIAL_API.saveKey($("k-provider").value, key);
+      updateProviderState(result.saved
+        ? `${providerLabel()} key saved on this device.`
+        : "This browser could not save the key. It remains available in this tab.");
+    });
     $("clear-key").addEventListener("click", () => {
+      CREDENTIAL_API.clearKey($("k-provider").value);
       $("k-key").value = "";
-      updateProviderState();
+      updateProviderState(`${providerLabel()} key removed from this device.`);
       $("k-key").focus();
     });
     $("ai-refine").addEventListener("click", refineWithAi);
@@ -2383,29 +2596,40 @@
       if (!REVIEW_API?.loadReview || !REVIEW_API?.buildPackage) {
         throw new Error("The local deployment-review module did not load. Refresh the page and try again.");
       }
+      if (!CREDENTIAL_API?.loadKey || !CREDENTIAL_API?.saveKey) {
+        throw new Error("The local API-key storage module did not load. Refresh the page and try again.");
+      }
       state.ready = true;
       updateCatalogStatus();
       hydrateStateFromUrl();
       const savedProfile = PROFILE_API.loadProfile();
       applyProfileToForm(savedProfile);
       if (hasManagedUrlState()) {
+        state.searched = true;
         state.profile.active = false;
+        $("use-profile").checked = false;
         if (profileHasContent(savedProfile)) {
-          setProfileStatus("Saved profile restored. Activate profile relevance when you want it applied to this shared search.");
+          setProfileStatus("Saved profile restored but not added to this shared search. Turn on “Use this profile” and search again to include it.");
         }
       } else {
         applyPreferences(savedProfile.preferences);
         if (profileHasContent(savedProfile)) {
-          setProfileStatus(state.profile.active
-            ? "Saved profile and relevance preferences restored from this device."
-            : "Saved profile restored from this device.");
+          setProfileStatus($("use-profile").checked
+            ? "Saved profile restored. It will be combined with your next search."
+            : "Saved profile restored but is not currently selected for searching.");
         }
       }
+      loadProviderKey({ announce: true });
       state.feedback = PROFILE_API.loadFeedback();
       applyDeploymentReviewToForm(REVIEW_API.loadReview());
       renderAllFacets();
+      updateFilterSummary();
       bindEvents();
-      runSearch({ persistProfile: false });
+      if (state.searched) runSearch({ persistProfile: false });
+      else {
+        renderActiveFilters();
+        renderResults();
+      }
     } catch (error) {
       $("catalog-error").textContent = error?.message || String(error);
       $("catalog-error").classList.remove("hidden");

@@ -127,7 +127,7 @@
       cv_updated_at: null,
       cv_truncated: false,
       include_cv_in_ai: true,
-      remember: true,
+      remember: false,
       preferences: emptyPreferences(),
       updated_at: null,
     };
@@ -160,7 +160,7 @@
       cv_updated_at: cleanString(source.cv_updated_at, 40) || null,
       cv_truncated: source.cv_truncated === true || normalizedCv.truncated,
       include_cv_in_ai: source.include_cv_in_ai !== false,
-      remember: source.remember !== false,
+      remember: source.remember === true,
       preferences: sanitizePreferences(source.preferences),
       updated_at: cleanString(source.updated_at, 40) || null,
     };

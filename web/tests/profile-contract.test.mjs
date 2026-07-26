@@ -90,6 +90,14 @@ test("persists a sanitized profile and preferences without credential fields", (
   assert.ok(loaded.cv_word_count > 10);
 });
 
+test("an empty profile is not treated as saved before explicit opt-in", () => {
+  const storage = memoryStorage();
+  const profile = loadProfileApi();
+
+  assert.equal(profile.emptyProfile().remember, false);
+  assert.equal(profile.loadProfile(storage).remember, false);
+});
+
 test("disabling remember removes the saved profile", () => {
   const api = loadProfileApi();
   const storage = memoryStorage();

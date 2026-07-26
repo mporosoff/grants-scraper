@@ -43,6 +43,7 @@ jobs:
         run: >-
           node --test
           web/tests/ai-provider-contract.test.mjs
+          web/tests/credentials-contract.test.mjs
           web/tests/profile-contract.test.mjs
           web/tests/review-contract.test.mjs
       - name: Build and validate complete public opportunity catalog
