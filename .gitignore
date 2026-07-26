@@ -12,7 +12,12 @@ faculty.csv
 /data/*
 !/data/opportunities.js
 !/data/opportunity_enrichment.json
+!/data/document_evidence.json
 /GrantsDBExtract*.zip
+
+# Human deployment-review files stay private and out of source control
+/evaluation/inbox/
+/evaluation/reports/
 
 # Original local handoff archive
 /files.zip

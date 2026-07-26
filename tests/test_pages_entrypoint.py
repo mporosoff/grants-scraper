@@ -29,6 +29,9 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         profile_js = (
             REPOSITORY_ROOT / "assets" / "profile.js"
         ).read_text(encoding="utf-8")
+        review_js = (
+            REPOSITORY_ROOT / "assets" / "review.js"
+        ).read_text(encoding="utf-8")
         application_css = (
             REPOSITORY_ROOT / "assets" / "app.css"
         ).read_text(encoding="utf-8")
@@ -36,6 +39,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn('id="query"', explorer_html)
         self.assertIn('id="facet-discipline"', explorer_html)
         self.assertIn('id="facet-agency"', explorer_html)
+        self.assertIn('id="flag-evidence"', explorer_html)
         self.assertIn('id="sort"', explorer_html)
         self.assertIn('id="export-csv"', explorer_html)
         self.assertIn('id="k-provider"', explorer_html)
@@ -47,6 +51,8 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn('id="remember-profile"', explorer_html)
         self.assertIn('id="export-evaluation"', explorer_html)
         self.assertIn('id="review-candidates"', explorer_html)
+        self.assertIn('id="send-deployment-review"', explorer_html)
+        self.assertIn('id="source-review-progress"', explorer_html)
         self.assertIn('id="ai-refine"', explorer_html)
         self.assertIn('id="chat-form"', explorer_html)
         self.assertIn('<section class="chat" id="chat"', explorer_html)
@@ -59,6 +65,10 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         )
         self.assertIn(
             '<script src="./assets/profile.js"></script>',
+            explorer_html,
+        )
+        self.assertIn(
+            '<script src="./assets/review.js"></script>',
             explorer_html,
         )
         self.assertIn(
@@ -88,6 +98,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("async function extractCv", profile_js)
         self.assertIn("profileContext({ includeCv: true })", application_js)
         self.assertIn("function exportEvaluation", application_js)
+        self.assertIn("function evidenceRows", application_js)
+        self.assertIn("function sendDeploymentReview", application_js)
+        self.assertIn("citation_evidence_ids", application_js)
+        self.assertIn("globalThis.FUNDING_REVIEW", review_js)
+        self.assertIn("funding-finder.deployment-review.v1", review_js)
         self.assertIn("AI retrieval candidate set", application_js)
         self.assertIn(
             '$("result-label").textContent = display.length === 1',
@@ -107,8 +122,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertNotIn("localStorage", application_js)
         self.assertNotIn("sessionStorage", application_js)
         self.assertNotIn("sessionStorage", profile_js)
+        self.assertNotIn("sessionStorage", review_js)
         self.assertNotIn("k-key", profile_js)
         self.assertNotIn("api_key", profile_js)
+        self.assertNotIn("k-key", review_js)
+        self.assertNotIn("api_key", review_js)
         self.assertNotIn("GRANT_MATCH_FEED", explorer_html + application_js)
         self.assertNotIn("CALIBRATION_GRANTS", explorer_html)
         self.assertNotIn('id="sel-faculty"', explorer_html)
@@ -157,6 +175,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("carbon", catalog["search_index"]["postings"])
         self.assertIn("agency", catalog["facets"])
         self.assertIn("quality", catalog["diagnostics"])
+        self.assertIn("document_evidence", catalog["diagnostics"])
         identities = {
             record.get("opportunity_number") or record.get("opportunity_id")
             for record in catalog["opportunities"]
@@ -189,6 +208,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
                 isinstance(record.get("deadlines"), list)
                 and record.get("award_source")
                 and record.get("detail_enrichment_status")
+                and record.get("document_evidence_status")
                 for record in catalog["opportunities"]
             )
         )
@@ -217,6 +237,14 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
                 )
             )
         )
+
+        document_cache = json.loads(
+            (
+                REPOSITORY_ROOT / "data" / "document_evidence.json"
+            ).read_text(encoding="utf-8")
+        )
+        self.assertEqual(document_cache["schema_version"], 1)
+        self.assertIsInstance(document_cache["records"], dict)
 
     def test_vendored_cv_parsers_match_reviewed_hashes(self):
         expected = {
@@ -251,12 +279,15 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("schedule:", workflow)
         self.assertIn("python -m scripts.build_catalog", workflow)
         self.assertIn("python -m scripts.enrich_catalog", workflow)
+        self.assertIn("python -m scripts.extract_document_evidence", workflow)
         self.assertIn("--min-records 1000", workflow)
         self.assertIn("--max-record-count 5000", workflow)
         self.assertIn("actions/setup-node@v6", workflow)
         self.assertIn("web/tests/profile-contract.test.mjs", workflow)
+        self.assertIn("web/tests/review-contract.test.mjs", workflow)
         self.assertIn("if: failure()", workflow)
         self.assertIn("data/opportunities.js", workflow)
+        self.assertIn("data/document_evidence.json", workflow)
 
 
 if __name__ == "__main__":

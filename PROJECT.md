@@ -1,8 +1,8 @@
 # Funding Finder — Product Plan
 
-**Status:** Phase 1 and 1.5 complete; Phase 2 evaluation and personalized-relevance tooling implemented
+**Status:** Phase 1 and 1.5 complete; Phase 2 engineering complete with its human pilot deferred; Phase 3 source-evidence and deployment-review engineering implemented
 
-**Next implementation phase:** Phase 2C — Run the multi-researcher pilot and publish the quality report
+**Next implementation phase:** Phase 3D — Publish and verify the first real document-evidence batch, then run the deferred multi-researcher pilot
 
 **Canonical application:** https://mporosoff.github.io/grants-scraper/
 
@@ -68,6 +68,7 @@ Anyone can use, without an API key:
 - discipline, topic, agency, eligibility, and funding-instrument facets;
 - deadline and minimum per-award filters;
 - preliminary-stage, limited-submission, early-career, and cost-share signals;
+- a cited-FOA-evidence availability filter for deployment review;
 - relevance, deadline, posted-date, award, agency, and title sorting;
 - pagination and expandable record details;
 - one-click official FOA, agency-notice, or Grants.gov record links; and
@@ -123,6 +124,35 @@ explicitly runs AI matching or chat.
 CSV and Phase 2 JSON are created only on explicit export. The evaluation JSON
 excludes the API key, CV text, research description, and chat by default.
 
+### 2.6 Document evidence and deployment learning
+
+Phase 3 does not ask an AI model to guess what an FOA says. The scheduled
+pipeline retrieves a bounded set of selected official PDF or HTML notices,
+extracts readable text ephemerally, and commits only compact derived facts:
+
+- a document URL, content hash, version number, and last-checked time;
+- deadlines, per-award ranges, duration, expected awards, page limits, cost
+  share, eligibility/review excerpts, application-component signals, and
+  amendment/status signals when an extraction pattern has support;
+- an exact page or HTML section, short source quote, and direct citation URL
+  for every extracted fact; and
+- an explicit human-review queue for document changes, conflicting dates,
+  cancellation/supersession language, unreadable sources, and potential
+  limited submissions.
+
+Raw PDFs and HTML are never committed. Machine-extracted facts never replace
+structured Grants.gov fields for deadline or award filtering. They expand
+search and provide cited context for result details and optional AI chat.
+
+Deployment review is also explicit rather than silent telemetry. Source
+verdicts, coarse action counters, checklist answers, and optional notes
+autosave under one separate device-local record. “Send review” attaches a
+privacy-safe JSON file to the native share sheet on supported mobile devices;
+on desktop it downloads the file and opens an addressed email to the project
+owner. The export excludes API keys, profile/CV text, search text, Funding
+Finder search URL/parameters, and chat. Returned files are kept in gitignored `evaluation/inbox/`
+and aggregated into private Markdown, JSON, and CSV reports.
+
 ---
 
 ## 3. Architecture
@@ -138,18 +168,27 @@ Normalized current catalog + facets + BM25 index
                  v
 Deadline/award evidence + direct FOA and agency links
                  |
+                 | bounded official PDF/HTML retrieval
+                 v
+Cited notice facts + document hash/version + review queue
+                 |
                  v
           GitHub Pages app
-          /       |       \
-         /        |        \ optional, user initiated
-        v         v         v
-Zero-cost     Device-local  OpenAI or Anthropic
-catalog and  profile, CV   using an in-memory user key
-profile      extract, and       |
-ranking      pilot labels       +-- query expansion
-                                +-- rerank <= 32 candidates
-                                +-- chat over <= 20 search results
-                                    or <= 12 AI matches
+          /          |          \
+         /           |           \ optional, user initiated
+        v            v            v
+Zero-cost       Device-local     OpenAI or Anthropic
+catalog and     profile, CV,     using an in-memory user key
+cited source    match labels,         |
+facts           source review         +-- query expansion
+ranking         and deployment        +-- rerank <= 32 candidates
+                checklist             +-- chat over <= 20 search results
+                        |                  or <= 12 AI matches
+                        v
+             Explicit share/download/email
+                        |
+                        v
+            Private gitignored inbox + report
 ```
 
 There is no application server, search cluster, vector database, account
@@ -203,6 +242,28 @@ catalog or a shared institutional record.
 3. Ask about the top 20 current results without first running AI refinement.
 4. Let chat narrow the displayed results only when explicitly requested.
 
+### Verify an actual FOA
+
+1. Open the primary official FOA directly from the result card.
+2. Expand “cited evidence” to see extracted deadlines, funding, duration,
+   page limits, cost share, review/eligibility excerpts, and application
+   components that the current document supports.
+3. Open the page/section citation beside any decisive fact.
+4. Mark the cited evidence `accurate`, `incorrect`, or `couldn’t verify`, and
+   identify the field checked.
+5. Optionally focus “Chat with results” on that single FOA. AI receives only
+   the compact cited facts and can return only supplied evidence identifiers;
+   unsupported model citations are discarded.
+
+### Return a deployment review
+
+1. Use the site normally; only coarse action counts are kept locally.
+2. Complete the short deployment checklist and optional non-confidential note.
+3. Select “Send review.” On compatible mobile browsers, choose an app from the
+   native share sheet. On desktop, attach the automatically downloaded JSON to
+   the addressed email that opens.
+4. Keep or clear the autosaved local review after sending.
+
 ---
 
 ## 5. Privacy, security, and cost boundary
@@ -228,6 +289,19 @@ Evaluation labels also stay on the device until explicit export or deletion.
 The export uses a non-content comparison fingerprint and excludes profile text, CV
 text, API keys, and chat so a pilot team can evaluate retrieval and reranking
 without collecting those fields by default.
+
+Phase 3 deployment review uses a separate local-storage key. It contains only
+explicit source-verification choices, optional notes, checklist answers,
+coarse viewport/capability fields, aggregate action counts, and public
+opportunity/document identifiers. Nothing is transmitted automatically. The
+share/download handoff excludes profile/CV text, API keys, search text, Funding
+Finder search URL/parameters, and chat. The optional note is user-authored and therefore warns
+reviewers not to include confidential research.
+
+Official PDF and HTML notice bodies exist only in the memory of the scheduled
+job while being parsed. The repository retains document hashes, HTTP
+validators, bounded source quotes, extracted facts, citations, and limited
+version history—not raw source files or full extracted text.
 
 ---
 
@@ -343,7 +417,7 @@ repeatable, and missing evidence remains explicit.
 
 ### Phase 2 — Pilot validation and relevance quality
 
-**Status: engineering implementation complete; human pilot next**
+**Status: engineering implementation complete; human pilot deliberately deferred until Phase 3 deployment verification**
 
 Phase 1 solved catalog coverage and established a bounded AI workflow. The next
 risk is quality: whether deterministic retrieval finds the right candidates
@@ -390,10 +464,12 @@ keyword string.
 
 #### 2C. Pilot
 
-- **Ready to run:** recruit 3–5 researchers across multiple disciplines.
-- **Ready to run:** evaluate approximately 75–150
+- **Deferred by product decision, not completed:** recruit 3–5 researchers
+  across multiple disciplines only after the first Phase 3 document-evidence
+  batch and handoff workflow pass deployment verification.
+- **Then:** evaluate approximately 75–150
   researcher/opportunity pairs with the result-card controls.
-- **Ready to run:** test whether 32 candidates and 12 recommendations are the right
+- **Then:** test whether 32 candidates and 12 recommendations are the right
   cost/quality boundary.
 - **After collection:** tune search weights, topic rules, prompts, and thresholds only from labeled
   evidence.
@@ -416,17 +492,90 @@ reranking.
 
 ### Phase 3 — Better source evidence
 
-- Track amendment, superseded, archive, and recurring-program status more precisely.
-- Retrieve and parse the linked official PDF/HTML notice when structured
-  Grants.gov fields are incomplete.
-- Normalize multiple LOI, concept-paper, preproposal, and full-proposal
-  deadlines as distinct evidence-backed events.
-- Extract high-value NOFO facts such as per-award ranges, project duration,
-  page limits, review criteria, cost share, and application burden.
-- Cite the exact source document and location for every machine-extracted fact.
-- Make limited-submission detection an explicit review queue rather than an authoritative label.
+**Status: engineering implemented; first scheduled evidence batch and returned-review dry run still required**
 
-**Exit criterion:** decisive dates and requirements link to verifiable source evidence.
+Phase 3 is the “understand the actual FOA” layer. It remains a static,
+low-cost architecture: GitHub Actions performs document work once and every
+visitor reuses the compact output.
+
+#### 3A. Official-document acquisition and versioning
+
+- **Implemented:** select the Phase 1.5 primary notice first, and use an agency
+  page only for records with structured-data gaps.
+- **Implemented:** retrieve at most 45 new or due sources per scheduled run,
+  with size, redirect, public-network, timeout, and pacing safeguards.
+- **Implemented:** revalidate unchanged primary notices with
+  ETag/Last-Modified after 14 days, lower-priority agency pages after 30 days,
+  and prioritize newly changed opportunity signatures and never-processed
+  sources over routine rechecks.
+- **Implemented:** retain SHA-256, first/last seen timestamps, current version,
+  and up to six prior version summaries.
+- **Implemented:** mark cached opportunities that disappear from the current
+  catalog rather than silently deleting their document history.
+- **Implemented:** keep the previous usable evidence on transient refresh
+  failures and surface bounded failure diagnostics.
+- **Boundary:** raw PDFs/HTML and full extracted text are never committed.
+
+#### 3B. Deterministic evidence extraction
+
+- **Implemented:** parse selectable PDF text with pypdf and readable HTML by
+  section; scanned/unreadable notices enter the review queue rather than OCR
+  silently guessing.
+- **Implemented:** normalize distinct LOI, concept-paper, white-paper,
+  preapplication, preproposal, and full-application dates.
+- **Implemented:** extract supported per-award ranges, expected awards, project
+  duration, page limits, cost-share statements, review/eligibility excerpts,
+  and common application-component signals.
+- **Implemented:** surface cancellation, supersession, amendment/revision, and
+  recurring/open-until-superseded language.
+- **Implemented:** attach a stable evidence ID, document hash, exact PDF page or
+  HTML section, short quote, and direct citation URL to every extracted fact.
+- **Implemented:** never overwrite official structured dates or amounts with
+  narrative extraction; use document text as searchable/citable evidence only.
+- **Implemented:** create a human review queue for changed documents,
+  structured/document date conflicts, limited-submission signals,
+  cancellation/supersession language, and unreadable notices.
+
+#### 3C. PI and AI workflow
+
+- **Implemented:** retain the visible one-click official FOA/agency/Grants.gov
+  action before the detail expander.
+- **Implemented:** show notice-analysis state, document version, cited facts,
+  quotes, and review-queue items on the result card.
+- **Implemented:** include compact cited facts in CSV exports.
+- **Implemented:** add “Ask AI about this FOA,” which focuses chat on one
+  notice and offers deadline, funding/duration, and requirements questions.
+- **Implemented:** AI can cite only exact evidence IDs supplied in its bounded
+  context. Unknown IDs are discarded in the browser.
+- **Implemented:** distinguish structured facts from machine-extracted
+  verification-required evidence in prompts and the interface.
+
+#### 3D. Deployment review, storage, return, and reporting
+
+- **Implemented:** autosave source verdicts (`accurate`, `incorrect`,
+  `couldn’t verify`), checked field, optional note, deployment checklist, and
+  coarse action counts in a separate device-local record.
+- **Implemented:** include existing relevance labels in the Phase 3 handoff
+  without profile/CV text, search text, chat, Funding Finder search URL
+  parameters, or API keys.
+- **Implemented:** one “Send review” action uses file sharing on compatible
+  mobile browsers or downloads the JSON and opens an addressed desktop email.
+- **Implemented:** retain a separate “Download copy” fallback and local clear
+  control.
+- **Implemented:** aggregate returned exports with
+  `scripts/summarize_phase3_reviews.py` into private Markdown, JSON, and CSV.
+  Input and report directories are gitignored.
+- **Deployment gate:** publish the pipeline, observe one successful bounded
+  batch with real citations, verify one PDF page and one HTML section link, send
+  one review package through each available handoff path, and run the
+  aggregator. A main-branch change to the ingestion/evidence pipeline triggers
+  the first batch automatically; the generated-data commit does not recursively
+  retrigger it. This gate occurs before the deferred Phase 2C researcher pilot.
+
+**Exit criterion (not yet met):** decisive dates and requirements link to
+verifiable source evidence in the deployed site, document changes remain
+traceable, and at least one privacy-safe deployment review can be returned to
+the owner and reproduced as a private report.
 
 ### Phase 4 — Expand the funding universe
 
@@ -470,6 +619,14 @@ Only consider a server or managed third-party service after the public pilot dem
   amount.
 - Narrative deadline extraction must be labeled as machine-extracted and
   verification-required.
+- Every document-derived fact must retain its source document hash, exact
+  page/section, short quote, and direct citation URL.
+- Document-derived dates and amounts must not silently replace structured
+  Grants.gov values used for filtering or sorting.
+- Raw official documents and full extracted notice text must not be committed.
+- Deployment review must be explicit, device-local until handoff, and free of
+  profile/CV text, API keys, search text, Funding Finder search URL parameters,
+  and chat by default.
 - API keys never enter source control, URLs, exports, or browser storage.
 - The application remains usable on current mobile and desktop browsers.
 - Every added source has an identified maintenance strategy.
@@ -496,17 +653,22 @@ Only consider a server or managed third-party service after the public pilot dem
 |---|---|
 | `index.html` | GitHub Pages entry point |
 | `match_explorer.html` | Public search and refinement interface |
-| `assets/app.js` | Browser search, profile ranking, feedback, export, AI matching, and chat |
+| `assets/app.js` | Browser search, cited source evidence, review/export, profile ranking, AI matching, and chat |
 | `assets/profile.js` | Device-local profile/feedback boundary and browser CV extraction |
+| `assets/review.js` | Device-local Phase 3 deployment-review boundary and privacy-safe handoff package |
 | `assets/ai-provider.js` | Testable OpenAI and Anthropic browser adapters |
 | `assets/app.css` | Responsive visual design |
 | `assets/vendor/` | Vendored PDF.js and Mammoth browser parsers plus licenses |
 | `data/opportunities.js` | Generated catalog, facets, and BM25 index |
 | `data/opportunity_enrichment.json` | Compact official-detail cache for incremental refresh |
+| `data/document_evidence.json` | Compact document hash/version, citations, extracted facts, and review-queue cache |
 | `scripts/build_catalog.py` | Complete XML ingestion, normalization, validation, and index build |
 | `scripts/enrich_catalog.py` | Official detail enrichment, evidence reconciliation, and FOA selection |
+| `scripts/extract_document_evidence.py` | Bounded official-notice retrieval, deterministic extraction, versioning, and citations |
 | `scripts/evaluate_phase2.py` | Reproducible retrieval/reranking pilot evaluator |
+| `scripts/summarize_phase3_reviews.py` | Private aggregation of returned deployment-review exports |
 | `evaluation/README.md` | Consented Phase 2 export and aggregation workflow |
+| `evaluation/PHASE3_REVIEW.md` | Phase 3 reviewer handoff, private storage, and reporting procedure |
 | `scripts/pull_grants.py` | Earlier API normalizer retained for fixtures and reference |
 | `tests/` | Pipeline and public-application regression checks |
 | `.github/workflows/refresh-opportunities.yml` | Daily catalog refresh and owner alert |
@@ -532,3 +694,7 @@ Only consider a server or managed third-party service after the public pilot dem
 | July 2026 | Make pilot validation and separate retrieval/reranking measurement the next implementation phase before expanding sources. |
 | July 2026 | Add explicit device-local profile, extracted-CV, preference, and evaluation-label persistence while keeping raw CV files, API keys, AI shortlists, and chat out of storage. |
 | July 2026 | Implement Phase 2A/2B controls and evaluator; require the 3–5 researcher pilot and report before declaring Phase 2 complete. |
+| July 2026 | Defer the Phase 2C researcher pilot until Phase 3 source evidence and deployment-review handoff are deployed and verified; the pilot is deferred, not declared complete. |
+| July 2026 | Retrieve and parse official notices only in bounded scheduled jobs; retain compact citations, hashes, facts, and version history while discarding raw documents and full text. |
+| July 2026 | Keep structured Grants.gov dates and amounts authoritative for filters; treat all narrative notice extraction as verification-required evidence. |
+| July 2026 | Collect no silent central telemetry. Autosave deployment review locally and return it only through explicit file share/download/email, then aggregate it in gitignored private folders. |

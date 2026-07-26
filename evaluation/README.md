@@ -1,5 +1,9 @@
 # Phase 2 evaluation workflow
 
+The human Phase 2C pilot is deferred until the Phase 3 source-evidence
+deployment gate passes. See `PHASE3_REVIEW.md` for the current explicit file
+handoff, private inbox, and reporting workflow.
+
 Funding Finder keeps pilot ratings on the researcher's device. A participant
 can label result cards as `useful`, `not relevant`, or `needs verification`,
 optionally choose a reason, and explicitly export one JSON file.
