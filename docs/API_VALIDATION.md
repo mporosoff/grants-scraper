@@ -1,10 +1,10 @@
 # Grants.gov live API validation
 
-**Date:** July 25, 2026
+**Date:** July 26, 2026
 
-> **Current role:** Phase 1 catalog ingestion now uses the complete daily XML
-> extract. These endpoint findings are retained for regression fixtures and
-> possible on-demand detail or attachment enrichment; they are not the
+> **Current role:** The complete daily XML extract remains the catalog
+> ingestion mechanism. Phase 1.5 now uses `fetchOpportunity` only as an
+> incremental source-evidence layer for new or changed records; it is not the
 > browser catalog's retrieval mechanism.
 
 The ingestion prototype was exercised against the public `search2` and
@@ -37,12 +37,24 @@ The ingestion prototype was exercised against the public `search2` and
 - Opportunities without an attached PDF may provide an agency announcement
   link through `fundingDescLinkUrl`.
 - `Open until superseded` is a useful rolling-opportunity signal.
+- The detail response can supply deadline notes, time/timezone, attachment
+  history, agency announcement links, and award values that are absent or less
+  precise in the daily XML extract.
+- XML/detail disagreement must become a visible conflict flag rather than a
+  silent overwrite.
+- Explicit NOFO/FOA filenames can support a high-confidence direct action. A
+  sole plausible full-announcement PDF is medium confidence; ambiguous
+  attachment sets must fall back to the agency notice or Grants.gov record.
+- The compact cache can be keyed by record status, version, update date, close
+  date, and archive date so unchanged records require no API request.
 
 ## Remaining validation work
 
 - Exercise a broader agency and opportunity sample.
-- Save curated, anonymized API fixtures for repeatable regression testing.
+- Expand curated API fixtures for complex amendment histories.
 - Verify amended and revised NOFO selection across more complex attachment
   histories.
-- Parse API date strings into timezone-aware database values.
+- Confirm daylight-saving and uncommon timezone labels across more agencies.
 - Validate limited-submission and cost-share flags against source documents.
+- Add document-level extraction only when every derived fact can retain an
+  exact official source reference and confidence.

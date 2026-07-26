@@ -7,8 +7,6 @@
   const MAX_AI_CANDIDATES = 32;
   const MAX_AI_MATCHES = 12;
   const MAX_CHAT_RESULTS = 20;
-  const OPENAI_MODEL = "gpt-5.6-luna";
-  const ANTHROPIC_MODEL = "claude-sonnet-5";
   const INDEX_TERMS = Object.keys(catalog?.search_index?.postings || {});
   const DEFAULT_CHAT_SUGGESTIONS = [
     "Which results best fit a university-led project?",
@@ -66,11 +64,12 @@
     return escapeHtml(value).replaceAll("`", "&#096;");
   }
 
-  function safeUrl(value, fallback = catalog?.source?.url || "https://www.grants.gov/") {
+  function safeUrl(value, fallback = "") {
     try {
       let candidate = String(value || "").trim();
       if (/^www\./i.test(candidate)) candidate = `https://${candidate}`;
-      const parsed = new URL(candidate, location.href);
+      if (!/^https?:\/\//i.test(candidate)) return fallback;
+      const parsed = new URL(candidate);
       return ["http:", "https:"].includes(parsed.protocol) ? parsed.href : fallback;
     } catch {
       return fallback;
@@ -98,7 +97,7 @@
   }
 
   function validateCatalog(value) {
-    if (!value || value.schema_version !== 2) {
+    if (!value || value.schema_version !== 3) {
       throw new Error("The published opportunity catalog is missing or uses an unsupported schema.");
     }
     if (!Array.isArray(value.opportunities) || value.opportunities.length !== value.record_count) {
@@ -133,14 +132,24 @@
     return `$${amount.toLocaleString()}`;
   }
 
-  function awardLabel(record) {
+  function perAwardLabel(record) {
     const floor = Number(record.award_floor || 0);
     const ceiling = Number(record.award_ceiling || 0);
     if (floor && ceiling && floor !== ceiling) return `${formatMoney(floor)}–${formatMoney(ceiling)}`;
     if (ceiling) return `Up to ${formatMoney(ceiling)}`;
     if (floor) return `From ${formatMoney(floor)}`;
-    if (record.total_program_funding) return `${formatMoney(record.total_program_funding)} program total`;
     return "Not listed";
+  }
+
+  function programFundingLabel(record) {
+    return record.total_program_funding
+      ? formatMoney(record.total_program_funding)
+      : "Not listed";
+  }
+
+  function fundingEvidenceLabel(record) {
+    if (record.award_conflicts) return "Conflicting Grants.gov amount fields — verify";
+    return record.award_source || "Grants.gov XML extract";
   }
 
   function deadlineLabel(record) {
@@ -150,6 +159,12 @@
     return record.status === "forecasted" && record.close_date
       ? `Estimated ${formatted}`
       : formatted;
+  }
+
+  function deadlineEvidenceLabel(record) {
+    if (record.deadline_conflict) return "Conflicting Grants.gov dates — verify";
+    if (record.status === "forecasted") return "Estimated by Grants.gov";
+    return record.deadline_source || "Grants.gov structured record";
   }
 
   function ageInDays(timestamp) {
@@ -286,7 +301,6 @@
     const awardMaximum = Math.max(
       Number(record.award_ceiling || 0),
       Number(record.award_floor || 0),
-      Number(record.total_program_funding || 0),
     );
     if (awardMinimum && awardMaximum < awardMinimum) return false;
     if ($("flag-preliminary").checked && !record.has_preliminary_stage) return false;
@@ -312,8 +326,8 @@
       }
       if (mode === "posted") return compareValues(a.posted_date, b.posted_date, -1) || compareValues(a.close_date, b.close_date);
       if (mode === "award") {
-        const aAward = Math.max(Number(a.award_ceiling || 0), Number(a.total_program_funding || 0));
-        const bAward = Math.max(Number(b.award_ceiling || 0), Number(b.total_program_funding || 0));
+        const aAward = Math.max(Number(a.award_ceiling || 0), Number(a.award_floor || 0));
+        const bAward = Math.max(Number(b.award_ceiling || 0), Number(b.award_floor || 0));
         return bAward - aAward || compareValues(a.close_date, b.close_date);
       }
       if (mode === "agency") return compareValues(a.agency, b.agency) || compareValues(a.title, b.title);
@@ -467,28 +481,104 @@
     ].slice(0, 5);
   }
 
+  function deadlineKindLabel(kind) {
+    const labels = {
+      application: "Application deadline",
+      estimated_application: "Estimated application deadline",
+      letter_of_intent: "Letter of intent",
+      concept_paper: "Concept paper",
+      white_paper: "White paper",
+      preapplication: "Preapplication",
+      preproposal: "Preproposal",
+      preliminary: "Preliminary stage",
+    };
+    return labels[kind] || "Deadline";
+  }
+
+  function deadlineRows(record) {
+    return (record.deadlines || []).map(deadline => {
+      const timing = [
+        deadline.date ? formatDate(deadline.date, { long: true }) : "",
+        deadline.time || "",
+        deadline.timezone || "",
+      ].filter(Boolean).join(" · ") || "Date not listed";
+      const verification = deadline.confidence === "machine_extracted_needs_verification"
+        ? " · verify in the official notice"
+        : "";
+      return `<div>
+        <dt>${escapeHtml(deadlineKindLabel(deadline.kind))}</dt>
+        <dd>${escapeHtml(timing)}${escapeHtml(verification)}</dd>
+      </div>`;
+    }).join("");
+  }
+
+  function officialActions(record) {
+    const primaryDocument = record.primary_document_url
+      ? safeUrl(record.primary_document_url)
+      : "";
+    const agencyNotice = record.funding_opportunity_url
+      ? safeUrl(record.funding_opportunity_url)
+      : "";
+    const grantsRecord = record.detail_page
+      ? safeUrl(record.detail_page)
+      : "";
+    const seen = new Set();
+    const links = [];
+    if (primaryDocument) {
+      seen.add(primaryDocument);
+      links.push(`<a class="source-action primary" href="${escapeAttribute(primaryDocument)}" target="_blank" rel="noopener">Open official FOA ↗</a>`);
+    } else if (agencyNotice) {
+      seen.add(agencyNotice);
+      links.push(`<a class="source-action primary" href="${escapeAttribute(agencyNotice)}" target="_blank" rel="noopener">Open agency notice ↗</a>`);
+    } else if (grantsRecord) {
+      seen.add(grantsRecord);
+      links.push(`<a class="source-action primary" href="${escapeAttribute(grantsRecord)}" target="_blank" rel="noopener">Open Grants.gov record ↗</a>`);
+    }
+    if (grantsRecord && !seen.has(grantsRecord)) {
+      seen.add(grantsRecord);
+      links.push(`<a class="source-action" href="${escapeAttribute(grantsRecord)}" target="_blank" rel="noopener">Grants.gov record ↗</a>`);
+    }
+    if (agencyNotice && !seen.has(agencyNotice)) {
+      links.push(`<a class="source-action" href="${escapeAttribute(agencyNotice)}" target="_blank" rel="noopener">Agency notice ↗</a>`);
+    }
+    const note = primaryDocument
+      ? `FOA selected from official Grants.gov attachment metadata (${record.primary_document_confidence || "review"} confidence). Confirm that it is the current amended notice.`
+      : agencyNotice
+        ? "No primary FOA attachment was identified automatically; this opens the agency notice."
+        : "No primary FOA attachment was identified automatically; use the official Grants.gov record.";
+    return {
+      url: primaryDocument || agencyNotice || grantsRecord,
+      html: `<div class="source-actions">${links.join("")}</div><p class="source-action-note">${escapeHtml(note)}</p>`,
+    };
+  }
+
   function resultCard(match) {
     const record = catalog.opportunities[match.index];
     const id = recordId(record);
     const assessment = state.ai.assessments.get(id);
-    const detailUrl = safeUrl(record.detail_page || record.funding_opportunity_url);
+    const actions = officialActions(record);
+    const detailUrl = actions.url
+      || safeUrl(record.detail_page || record.funding_opportunity_url)
+      || catalog?.source?.url
+      || "https://www.grants.gov/";
     const flags = [
       record.has_preliminary_stage ? `<span class="badge warning">LOI / preproposal</span>` : "",
+      record.actionability_status === "preliminary_deadline_passed_verify"
+        ? `<span class="badge warning">Preliminary deadline may have passed</span>`
+        : "",
       record.limited_submission ? `<span class="badge warning">Potential limited submission</span>` : "",
       record.cost_share_required === true ? `<span class="badge warning">Cost share</span>` : "",
       record.status_verification_required ? `<span class="badge warning">Verify current status</span>` : "",
+      record.deadline_conflict ? `<span class="badge warning">Deadline conflict</span>` : "",
+      record.award_conflicts ? `<span class="badge warning">Funding conflict</span>` : "",
     ].filter(Boolean).join("");
     const aiBlock = assessment
       ? `<div class="ai-rationale"><strong>${escapeHtml(assessment.verdict || "AI match")} · ${Number(assessment.score || 0)}/100</strong> ${escapeHtml(assessment.reason || "")}${assessment.concern ? `<span class="ai-concern"><strong>Check:</strong> ${escapeHtml(assessment.concern)}</span>` : ""}</div>`
       : "";
     const tags = cardTags(record).map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
     const eligibility = (record.applicant_types || []).join("; ") || record.eligibility_text || "Not listed";
-    const sourceLinks = [
-      record.detail_page ? `<a href="${escapeAttribute(safeUrl(record.detail_page))}" target="_blank" rel="noopener">Grants.gov record ↗</a>` : "",
-      record.funding_opportunity_url && record.funding_opportunity_url !== record.detail_page
-        ? `<a href="${escapeAttribute(safeUrl(record.funding_opportunity_url))}" target="_blank" rel="noopener">Agency notice ↗</a>`
-        : "",
-    ].filter(Boolean).join("");
+    const perAward = perAwardLabel(record);
+    const programFunding = programFundingLabel(record);
 
     return `<article class="result-card${assessment ? " ai-match" : ""}">
       <div class="card-topline">
@@ -500,30 +590,36 @@
       <h3><a href="${escapeAttribute(detailUrl)}" target="_blank" rel="noopener">${escapeHtml(record.title)}</a></h3>
       <p class="agency">${escapeHtml(record.agency || "Agency not listed")}</p>
       <div class="key-facts">
-        <div class="key-fact"><span>Deadline</span><strong>${escapeHtml(deadlineLabel(record))}</strong></div>
-        <div class="key-fact"><span>Award</span><strong>${escapeHtml(awardLabel(record))}</strong></div>
+        <div class="key-fact"><span>Deadline</span><strong>${escapeHtml(deadlineLabel(record))}</strong><small>${escapeHtml(deadlineEvidenceLabel(record))}</small></div>
+        <div class="key-fact"><span>Per-award amount</span><strong>${escapeHtml(perAward)}</strong><small>${record.total_program_funding ? `Program total ${escapeHtml(programFunding)}` : escapeHtml(fundingEvidenceLabel(record))}</small></div>
         <div class="key-fact"><span>Posted</span><strong>${escapeHtml(formatDate(record.posted_date))}</strong></div>
       </div>
       ${aiBlock}
       <p class="description">${escapeHtml(truncate(record.description, 430) || "No synopsis was included in the extract.")}</p>
       ${tags ? `<div class="tag-row">${tags}</div>` : ""}
+      ${actions.html}
       <details class="record-details">
         <summary>View eligibility and full details</summary>
         <div class="details-body">
           <dl class="detail-grid">
             <div><dt>Eligible applicants</dt><dd>${escapeHtml(eligibility)}</dd></div>
             <div><dt>Funding instrument</dt><dd>${escapeHtml((record.funding_instruments || []).join("; ") || "Not listed")}</dd></div>
+            <div><dt>Per-award amount</dt><dd>${escapeHtml(perAward)}</dd></div>
             <div><dt>Expected awards</dt><dd>${escapeHtml(record.expected_number_of_awards || "Not listed")}</dd></div>
-            <div><dt>Program funding</dt><dd>${escapeHtml(formatMoney(record.total_program_funding))}</dd></div>
+            <div><dt>Total program funding</dt><dd>${escapeHtml(programFunding)}</dd></div>
+            <div><dt>Funding evidence</dt><dd>${escapeHtml(fundingEvidenceLabel(record))}</dd></div>
             <div><dt>Estimated award date</dt><dd>${escapeHtml(formatDate(record.estimated_award_date))}</dd></div>
             <div><dt>Estimated project start</dt><dd>${escapeHtml(formatDate(record.estimated_project_start))}</dd></div>
             <div><dt>Cost share</dt><dd>${record.cost_share_required == null ? "Not listed" : record.cost_share_required ? "Required" : "Not required"}</dd></div>
             <div><dt>Assistance listing</dt><dd>${escapeHtml((record.aln || []).join(", ") || "Not listed")}</dd></div>
-            <div><dt>Status confidence</dt><dd>${record.status_verification_required ? "No current deadline or archive date is listed; verify status in the official notice." : "Open or forecasted according to the dated Grants.gov extract."}</dd></div>
+            <div><dt>Deadline evidence</dt><dd>${escapeHtml(deadlineEvidenceLabel(record))}</dd></div>
+            <div><dt>Detail enrichment</dt><dd>${record.detail_enrichment_status === "current" ? `Checked ${escapeHtml(formatDate(record.detail_enriched_at?.slice(0, 10)))} against the Grants.gov detail API.` : "Detail attachment check pending; use the Grants.gov record."}</dd></div>
+            <div><dt>Status confidence</dt><dd>${record.status_verification_required ? "One or more decisive status fields require verification in the official notice." : "Current according to the dated Grants.gov extract."}</dd></div>
+            ${deadlineRows(record)}
           </dl>
           ${record.close_date_note ? `<p class="description"><strong>Deadline note:</strong> ${escapeHtml(record.close_date_note)}</p>` : ""}
+          ${record.preliminary_deadline_text ? `<p class="description"><strong>Potential preliminary deadline:</strong> ${escapeHtml(record.preliminary_deadline_text)} <em>Machine extracted; verify in the official notice.</em></p>` : ""}
           <div class="full-description">${escapeHtml(record.description || "No description listed.")}</div>
-          <div class="source-links">${sourceLinks}</div>
         </div>
       </details>
     </article>`;
@@ -536,6 +632,9 @@
     const start = (state.page - 1) * PAGE_SIZE;
     const page = display.slice(start, start + PAGE_SIZE);
     $("result-count").textContent = display.length.toLocaleString();
+    $("result-label").textContent = display.length === 1
+      ? "opportunity"
+      : "opportunities";
     $("results-mode").textContent = state.ai.active ? "AI-refined shortlist" : "Public catalog";
     $("result-range").textContent = display.length
       ? `Showing ${start + 1}–${Math.min(start + PAGE_SIZE, display.length)} of ${display.length.toLocaleString()}`
@@ -570,7 +669,7 @@
     const simple = [
       ["deadline-from", "Deadline from"],
       ["deadline-to", "Deadline through"],
-      ["award-min", "Minimum award"],
+      ["award-min", "Minimum per-award amount"],
     ];
     simple.forEach(([id, label]) => {
       const value = $(id).value;
@@ -614,10 +713,11 @@
     const rows = [[
       "Title", "Agency", "Status", "Opportunity number", "Deadline", "Posted",
       "Award floor", "Award ceiling", "Program funding", "Expected awards",
+      "Deadline evidence", "Preliminary deadline", "Funding evidence",
       "Funding instruments", "Categories", "Disciplines", "Topics",
       "Eligible applicants", "Limited submission", "Cost share required",
       "Preliminary stage", "AI verdict", "AI score", "AI rationale",
-      "Grants.gov URL",
+      "Primary FOA URL", "Agency notice URL", "Grants.gov URL",
     ]];
     currentDisplayMatches().forEach(match => {
       const record = catalog.opportunities[match.index];
@@ -627,6 +727,8 @@
         record.close_date, record.posted_date, record.award_floor,
         record.award_ceiling, record.total_program_funding,
         record.expected_number_of_awards,
+        deadlineEvidenceLabel(record), record.preliminary_deadline,
+        fundingEvidenceLabel(record),
         (record.funding_instruments || []).join("; "),
         (record.funding_categories || []).join("; "),
         (record.disciplines || []).join("; "),
@@ -634,7 +736,8 @@
         (record.applicant_types || []).join("; "),
         record.limited_submission, record.cost_share_required,
         record.preliminary_stage_type, assessment.verdict, assessment.score,
-        assessment.reason, record.detail_page,
+        assessment.reason, record.primary_document_url,
+        record.funding_opportunity_url, record.detail_page,
       ]);
     });
     const csv = rows.map(row => row.map(csvCell).join(",")).join("\r\n");
@@ -649,80 +752,17 @@
     URL.revokeObjectURL(url);
   }
 
-  function extractJson(text) {
-    const cleaned = String(text || "").trim().replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "");
-    try {
-      return JSON.parse(cleaned);
-    } catch {
-      const objectStart = cleaned.indexOf("{");
-      const objectEnd = cleaned.lastIndexOf("}");
-      if (objectStart >= 0 && objectEnd > objectStart) return JSON.parse(cleaned.slice(objectStart, objectEnd + 1));
-      const arrayStart = cleaned.indexOf("[");
-      const arrayEnd = cleaned.lastIndexOf("]");
-      if (arrayStart >= 0 && arrayEnd > arrayStart) return JSON.parse(cleaned.slice(arrayStart, arrayEnd + 1));
-      throw new Error("The AI provider returned an answer that was not valid JSON.");
-    }
-  }
-
-  function openAIResponseText(data) {
-    if (data && typeof data.output_text === "string") return data.output_text;
-    return (data?.output || [])
-      .flatMap(item => item.content || [])
-      .filter(item => item.type === "output_text")
-      .map(item => item.text || "")
-      .join("");
-  }
-
   async function providerJson(system, user) {
-    const provider = $("k-provider").value;
-    const key = $("k-key").value.trim();
-    if (!key) throw new Error("Enter an API key to use AI refinement. Public catalog search does not require one.");
-
-    if (provider === "anthropic") {
-      const response = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": key,
-          "anthropic-version": "2023-06-01",
-          "anthropic-dangerous-direct-browser-access": "true",
-        },
-        body: JSON.stringify({
-          model: ANTHROPIC_MODEL,
-          max_tokens: 3000,
-          system,
-          messages: [{ role: "user", content: user }],
-        }),
-      });
-      if (!response.ok) {
-        const body = await response.text();
-        throw new Error(`Anthropic request failed (${response.status}): ${truncate(body, 280)}`);
-      }
-      const data = await response.json();
-      return extractJson((data.content || []).map(block => block.text || "").join(""));
+    if (!globalThis.FUNDING_AI?.providerJson) {
+      throw new Error("The optional AI refinement module did not load. Public catalog search is still available.");
     }
-
-    const response = await fetch("https://api.openai.com/v1/responses", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${key}`,
-      },
-      body: JSON.stringify({
-        model: OPENAI_MODEL,
-        instructions: system,
-        input: user,
-        reasoning: { effort: "low" },
-        text: { verbosity: "low" },
-        max_output_tokens: 3000,
-        store: false,
-      }),
+    return globalThis.FUNDING_AI.providerJson({
+      provider: $("k-provider").value,
+      key: $("k-key").value,
+      system,
+      user,
+      fetchImpl: globalThis.fetch,
     });
-    if (!response.ok) {
-      const body = await response.text();
-      throw new Error(`OpenAI request failed (${response.status}): ${truncate(body, 280)}`);
-    }
-    return extractJson(openAIResponseText(await response.json()));
   }
 
   function selectedFilterSummary() {
@@ -754,9 +794,15 @@
       status: record.status,
       deadline: record.close_date,
       deadline_note: record.close_date_note,
+      deadlines: record.deadlines || [],
+      deadline_source: deadlineEvidenceLabel(record),
+      deadline_conflict: record.deadline_conflict || null,
+      actionability_status: record.actionability_status || null,
       award_floor: record.award_floor,
       award_ceiling: record.award_ceiling,
       total_program_funding: record.total_program_funding,
+      award_source: fundingEvidenceLabel(record),
+      award_conflicts: record.award_conflicts || null,
       eligibility: (record.applicant_types || []).slice(0, 10),
       eligibility_note: truncate(record.eligibility_text, 300),
       disciplines: record.disciplines || [],
@@ -766,6 +812,7 @@
       preliminary_stage_signal: record.preliminary_stage_type,
       cost_share_required: record.cost_share_required,
       status_verification_required: record.status_verification_required,
+      primary_foa_identified: Boolean(record.primary_document_url),
       description: truncate(record.description, descriptionLength),
     };
   }

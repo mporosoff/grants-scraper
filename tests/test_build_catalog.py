@@ -12,6 +12,7 @@ from scripts.build_catalog import (
     is_current,
     iter_catalog_records,
     read_archive,
+    safe_http_url,
     tokenize,
     write_catalog,
 )
@@ -40,6 +41,13 @@ class CatalogExtractTests(unittest.TestCase):
             record for record in records if record["status"] == "posted"
         )
         self.assertEqual(posted["award_ceiling"], 1_000_000)
+        self.assertEqual(posted["award_source"], "Grants.gov XML extract")
+        self.assertEqual(posted["deadlines"][0]["kind"], "application")
+        self.assertEqual(
+            posted["deadlines"][0]["confidence"],
+            "official_structured",
+        )
+        self.assertEqual(posted["detail_enrichment_status"], "pending")
         self.assertIn(
             "Public and state institutions of higher education",
             posted["applicant_types"],
@@ -125,7 +133,11 @@ class CatalogExtractTests(unittest.TestCase):
         self.assertIn("membrane", catalog["search_index"]["postings"])
         prefix = "globalThis.GRANT_CATALOG="
         payload = javascript.split(prefix, 1)[1].strip().removesuffix(";")
-        self.assertEqual(json.loads(payload)["schema_version"], 2)
+        self.assertEqual(json.loads(payload)["schema_version"], 3)
+        self.assertEqual(
+            catalog["diagnostics"]["quality"]["per_award_amount_count"],
+            1,
+        )
 
     def test_discovers_newest_enhanced_extract(self):
         html = """
@@ -146,6 +158,14 @@ class TokenTests(unittest.TestCase):
         self.assertEqual(
             tokenize("Catalytic materials and batteries for applications"),
             ["catalytic", "material", "battery"],
+        )
+
+    def test_source_urls_must_be_absolute_http_urls(self):
+        self.assertIsNone(safe_http_url("N/A"))
+        self.assertIsNone(safe_http_url("/relative/path"))
+        self.assertEqual(
+            safe_http_url("www.nsf.gov/funding"),
+            "https://www.nsf.gov/funding",
         )
 
 

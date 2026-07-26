@@ -54,9 +54,10 @@ test("uses persistent application storage and removes starter dependencies", asy
 });
 
 test("supports public catalog search and optional AI refinement", async () => {
-  const [prototype, script] = await Promise.all([
+  const [prototype, script, providerScript] = await Promise.all([
     readFile(new URL("../match_explorer.html", root), "utf8"),
     readFile(new URL("../assets/app.js", root), "utf8"),
+    readFile(new URL("../assets/ai-provider.js", root), "utf8"),
   ]);
 
   assert.match(prototype, /id="query"/);
@@ -69,18 +70,31 @@ test("supports public catalog search and optional AI refinement", async () => {
   assert.match(prototype, /id="research-profile"/);
   assert.match(prototype, /id="ai-refine"/);
   assert.match(prototype, /id="chat-form"/);
+  assert.match(prototype, /id="result-label"/);
   assert.match(prototype, /Chat with results/);
+  assert.match(prototype, /Minimum per-award amount/);
+  assert.match(prototype, /not endorsed or certified/);
   assert.doesNotMatch(prototype, /class="chat hidden"/);
   assert.match(prototype, /data\/opportunities\.js/);
+  assert.match(prototype, /assets\/ai-provider\.js/);
   assert.match(prototype, /assets\/app\.js/);
-  assert.match(script, /gpt-5\.6-luna/);
-  assert.match(script, /claude-sonnet-5/);
-  assert.match(script, /api\.openai\.com\/v1\/responses/);
-  assert.match(script, /api\.anthropic\.com\/v1\/messages/);
+  assert.match(providerScript, /gpt-5\.6-luna/);
+  assert.match(providerScript, /claude-sonnet-5/);
+  assert.match(providerScript, /api\.openai\.com\/v1\/responses/);
+  assert.match(providerScript, /api\.anthropic\.com\/v1\/messages/);
+  assert.match(script, /globalThis\.FUNDING_AI\.providerJson/);
+  assert.match(script, /result-label/);
   assert.match(script, /MAX_AI_CANDIDATES = 32/);
   assert.match(script, /MAX_CHAT_RESULTS = 20/);
   assert.match(script, /async function refineWithAi/);
   assert.match(script, /async function askResults/);
+  assert.match(script, /Open official FOA/);
+  assert.match(script, /primary_document_url/);
+  assert.match(script, /deadlineEvidenceLabel/);
+  assert.doesNotMatch(
+    script,
+    /Math\.max\([^)]*total_program_funding/s,
+  );
   assert.doesNotMatch(prototype + script, /localStorage|sessionStorage/);
   assert.doesNotMatch(
     prototype + script,

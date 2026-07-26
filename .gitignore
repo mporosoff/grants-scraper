@@ -11,6 +11,7 @@ faculty.json
 faculty.csv
 /data/*
 !/data/opportunities.js
+!/data/opportunity_enrichment.json
 /GrantsDBExtract*.zip
 
 # Original local handoff archive

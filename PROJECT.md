@@ -1,6 +1,6 @@
 # Funding Finder — Product Plan
 
-**Status:** Phase 1 product correction deployed; Pages and corrected automated refresh verified; provider-key smoke test pending
+**Status:** Phase 1 complete; Phase 1.5 source-evidence and actionability layer implemented
 
 **Next implementation phase:** Phase 2 — Pilot validation and relevance quality
 
@@ -10,7 +10,7 @@
 
 **Initial audience:** University of Rochester researchers, with a design that remains useful to any public user
 
-**Last updated:** July 25, 2026
+**Last updated:** July 26, 2026
 
 ---
 
@@ -51,6 +51,8 @@ Each refresh:
 - rejects past deadlines for both posted and forecasted records;
 - removes stale undated forecasts, archived records, and duplicates;
 - normalizes dates, awards, eligibility, agencies, instruments, and source links;
+- incrementally enriches new and changed records from the official Grants.gov
+  detail API;
 - derives transparent discipline, topic, and warning facets;
 - builds a compact BM25 keyword index; and
 - publishes one versioned browser asset.
@@ -64,11 +66,11 @@ Anyone can use, without an API key:
 - full-text keyword and opportunity-number search;
 - open and forecasted status filters;
 - discipline, topic, agency, eligibility, and funding-instrument facets;
-- deadline and minimum-award filters;
+- deadline and minimum per-award filters;
 - preliminary-stage, limited-submission, early-career, and cost-share signals;
 - relevance, deadline, posted-date, award, agency, and title sorting;
 - pagination and expandable record details;
-- official source links; and
+- one-click official FOA, agency-notice, or Grants.gov record links; and
 - CSV export of the complete current result set.
 
 Search and filtering execute in the browser over the prebuilt index. They make zero AI calls and have no per-search infrastructure cost.
@@ -110,6 +112,10 @@ Official Grants.gov daily XML extract
                  v
 Normalized current catalog + facets + BM25 index
                  |
+                 | incremental official detail API enrichment
+                 v
+Deadline/award evidence + direct FOA and agency links
+                 |
                  v
           GitHub Pages app
           /              \
@@ -136,7 +142,8 @@ There is no application server, search cluster, vector database, account system,
 2. Search by topic, method, program name, agency, or opportunity number.
 3. Narrow with facets, dates, award size, or special-requirement signals.
 4. Sort and inspect detailed results.
-5. Open the official record or export the result set.
+5. Open the best available official source in one click or export the result
+   set.
 
 ### Add AI refinement
 
@@ -178,7 +185,7 @@ The browser-only design cannot provide a secure institutional credential vault. 
 
 ## 6. Phase 1 — Comprehensive federal opportunity search
 
-**Status: product correction deployed; Pages and corrected automated refresh verified; provider-key smoke test pending**
+**Status: complete**
 
 Phase 1 now includes both the catalog foundation and the first optional refinement workflow:
 
@@ -197,11 +204,93 @@ Phase 1 now includes both the catalog foundation and the first optional refineme
 - no browser persistence of API keys or research text; and
 - regression coverage for forecasts, expired records, ambiguous rolling language, indexing, generated assets, and workflow safeguards.
 
-**Exit criterion:** merge the correction, observe one successful scheduled production refresh, confirm Pages loads a catalog with zero past deadlines, and smoke-test desktop/mobile search, filters, export, one refinement, and chat with both ordinary and AI-refined results.
+The provider adapters have deterministic contract tests for OpenAI Responses
+and Anthropic Messages, including request shape, non-persistence, JSON parsing,
+and error behavior. The complete refinement and chat flow is also exercised
+with bounded mock responses in browser QA, so Phase 1 does not depend on a
+paid credential merely to remain testable.
+
+**Exit criterion: met.** The corrected comprehensive feed, automated refresh,
+desktop/mobile public search, AI refinement contract, and chat workflow are
+covered by production checks or repeatable regression tests.
 
 ---
 
-## 7. Roadmap
+## 7. Phase 1.5 — Trustworthy source evidence and one-click action
+
+**Status: implemented**
+
+Phase 1.5 closes the gap between finding a promising result and deciding
+whether it is real, current, and worth opening. It does not use AI to guess
+missing facts.
+
+### 1.5A. Incremental official enrichment
+
+- The daily workflow retains the complete Grants.gov XML extract as the
+  catalog source and calls the unauthenticated official
+  `fetchOpportunity` detail endpoint only for new or changed records.
+- A compact versioned cache prevents all 1,465 records from being fetched on
+  every run. Retries, pacing, and a per-run update ceiling contain failure and
+  rate-limit risk.
+- XML and detail-API deadlines and award values are compared. Conflicts are
+  displayed for verification instead of silently choosing a value.
+- Every enriched field carries its source, confidence, or verification status.
+
+### 1.5B. Deadline and funding semantics
+
+- Posted close dates and forecast estimated response dates remain official
+  structured fields. Records with a structured date before the catalog date
+  are excluded.
+- Deadline time and timezone are preserved when Grants.gov supplies them.
+- LOI, concept-paper, and preproposal language is surfaced as a preliminary
+  stage. A date extracted from narrative text is explicitly marked
+  machine-extracted and verification-required.
+- “Per-award amount” means only award floor or ceiling. Total program funding
+  is displayed separately and is never used for the per-award filter or
+  largest-award sort.
+- Missing amounts stay missing. Parsing unstructured notices to fill source
+  gaps belongs to Phase 3 and will require document-level provenance.
+
+### 1.5C. One-click official action
+
+Every result card has a visible primary action:
+
+1. open the direct official FOA/NOFO attachment when identification is
+   defensible;
+2. otherwise open the agency’s official announcement; or
+3. otherwise open the Grants.gov opportunity record.
+
+Direct attachments are selected conservatively. Explicit NOFO/FOA names are
+high confidence; a sole plausible full-announcement PDF may be medium
+confidence; FAQs, templates, appendices, and ambiguous attachment sets are not
+presented as the FOA.
+
+### Current evidence baseline
+
+The July 26 catalog contains 1,465 current posted or forecasted opportunities:
+
+- 447 have a defensible direct announcement attachment (249 high confidence,
+  198 medium confidence);
+- another 615 route directly to an official agency notice;
+- the remaining 403 route to the official Grants.gov record;
+- 233 preserve an official deadline time or timezone;
+- 53 carry a preliminary-stage signal, including 3 narrative dates that are
+  visibly marked for verification;
+- 703 (48.0%) have an official per-award floor or ceiling;
+- 986 (67.3%) have at least one structured funding amount; and
+- zero have a past structured close date or a detected XML/detail-API deadline
+  conflict in this build.
+
+These are data-quality measurements, not claims that the underlying notices
+are complete. Users are still told to verify the official announcement.
+
+**Exit criterion: met.** Every result has one visible official path, deadline
+and funding semantics are source-aware, enrichment is incremental and
+repeatable, and missing evidence remains explicit.
+
+---
+
+## 8. Roadmap
 
 ### Phase 2 — Pilot validation and relevance quality
 
@@ -253,13 +342,25 @@ recall from AI ranking quality, identify the main failure modes, and provide
 evidence for whether Phase 3 source-evidence work or Phase 4 source expansion
 should be prioritized next.
 
+This directly responds to the
+[University at Albany funding-recommendation study](https://par.nsf.gov/servlets/purl/10566919).
+That pilot showed why exact keyword/string matching is not enough: participant
+feedback was mixed, and the system could return irrelevant or already-known
+opportunities even when some recommendations were useful. Funding Finder will
+therefore treat researcher-entered context and explicit usefulness feedback as
+evaluation evidence, while measuring catalog retrieval separately from AI
+reranking.
+
 ### Phase 3 — Better source evidence
 
 - Track amendment, superseded, archive, and recurring-program status more precisely.
-- Normalize LOI, concept-paper, preproposal, and full-proposal deadlines separately.
-- Preserve deadline time and timezone when supplied.
-- Extract high-value NOFO facts during the scheduled workflow.
-- Attach provenance and confidence to machine-extracted fields.
+- Retrieve and parse the linked official PDF/HTML notice when structured
+  Grants.gov fields are incomplete.
+- Normalize multiple LOI, concept-paper, preproposal, and full-proposal
+  deadlines as distinct evidence-backed events.
+- Extract high-value NOFO facts such as per-award ranges, project duration,
+  page limits, review criteria, cost share, and application burden.
+- Cite the exact source document and location for every machine-extracted fact.
 - Make limited-submission detection an explicit review queue rather than an authoritative label.
 
 **Exit criterion:** decisive dates and requirements link to verifiable source evidence.
@@ -292,7 +393,7 @@ Only consider a server or managed third-party service after the public pilot dem
 
 ---
 
-## 8. Product quality rules
+## 9. Product quality rules
 
 - A user can always search the full catalog without AI.
 - Record-count checks should fail closed rather than silently publish a tiny feed.
@@ -300,14 +401,19 @@ Only consider a server or managed third-party service after the public pilot dem
 - Undated recurring records must visibly ask the user to verify current status.
 - Missing facts remain missing; neither deterministic rules nor AI may fabricate them.
 - AI only receives a bounded candidate set and is never the retrieval database.
-- Every result retains an official source link.
+- Every result exposes one visible official action without making the user
+  expand details first.
+- Total program funding must never be presented or filtered as a per-award
+  amount.
+- Narrative deadline extraction must be labeled as machine-extracted and
+  verification-required.
 - API keys never enter source control, URLs, exports, or browser storage.
 - The application remains usable on current mobile and desktop browsers.
 - Every added source has an identified maintenance strategy.
 
 ---
 
-## 9. Explicit non-goals
+## 10. Explicit non-goals
 
 - a 48-record discipline-specific shortlist;
 - local storage as the funding database;
@@ -321,16 +427,19 @@ Only consider a server or managed third-party service after the public pilot dem
 
 ---
 
-## 10. Project files
+## 11. Project files
 
 | Path | Purpose |
 |---|---|
 | `index.html` | GitHub Pages entry point |
 | `match_explorer.html` | Public search and refinement interface |
-| `assets/app.js` | Browser search, filters, export, AI matching, and chat with results |
+| `assets/app.js` | Browser search, filters, source actions, export, AI matching, and chat |
+| `assets/ai-provider.js` | Testable OpenAI and Anthropic browser adapters |
 | `assets/app.css` | Responsive visual design |
 | `data/opportunities.js` | Generated catalog, facets, and BM25 index |
+| `data/opportunity_enrichment.json` | Compact official-detail cache for incremental refresh |
 | `scripts/build_catalog.py` | Complete XML ingestion, normalization, validation, and index build |
+| `scripts/enrich_catalog.py` | Official detail enrichment, evidence reconciliation, and FOA selection |
 | `scripts/pull_grants.py` | Earlier API normalizer retained for fixtures and reference |
 | `tests/` | Pipeline and public-application regression checks |
 | `.github/workflows/refresh-opportunities.yml` | Daily catalog refresh and owner alert |
@@ -339,7 +448,7 @@ Only consider a server or managed third-party service after the public pilot dem
 
 ---
 
-## 11. Decision log
+## 12. Decision log
 
 | Date | Decision |
 |---|---|
@@ -351,4 +460,6 @@ Only consider a server or managed third-party service after the public pilot dem
 | July 2026 | Reject past forecast deadlines and stale undated forecasts instead of treating every unarchived forecast as current. |
 | July 2026 | Remove saved-search, embedding-cache, API-key, and research-text use of browser storage. |
 | July 2026 | Treat Duke as a search/discovery design reference, not a data source. |
+| July 2026 | Add a Phase 1.5 evidence layer before pilot work: incremental official detail enrichment, one-click source actions, and strict funding/deadline semantics. |
+| July 2026 | Treat the Albany study as evidence that exact-keyword recommendations require researcher feedback and separate retrieval/reranking evaluation. |
 | July 2026 | Make pilot validation and separate retrieval/reranking measurement the next implementation phase before expanding sources. |

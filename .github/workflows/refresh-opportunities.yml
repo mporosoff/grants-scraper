@@ -33,6 +33,13 @@ jobs:
           --output data/opportunities.js
           --min-records 1000
           --max-record-count 5000
+      - name: Enrich new or changed records with official detail evidence
+        run: >-
+          python -m scripts.enrich_catalog
+          --catalog data/opportunities.js
+          --cache data/opportunity_enrichment.json
+          --max-updates 250
+          --request-delay 0.25
       - name: Run regression tests against generated asset
         run: python -m unittest discover -s tests -v
       - name: Commit refreshed catalog
@@ -40,7 +47,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/opportunities.js
+          git add data/opportunities.js data/opportunity_enrichment.json
           if git diff --cached --quiet; then
             echo "The generated catalog is unchanged."
           else

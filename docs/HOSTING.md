@@ -17,6 +17,10 @@ Official Grants.gov daily XML extract
                 v
 Normalized catalog + facets + BM25 search index
                 |
+                | official detail API for new/changed records
+                v
+Deadline/award evidence + direct source actions
+                |
                 v
           GitHub Pages
           /          \
@@ -25,7 +29,16 @@ Local browser       Optional OpenAI or Anthropic request
 search/filter       using a key held in page memory
 ```
 
-The generated public asset is `data/opportunities.js`. It contains open posted and current forecasted records, facet counts, and the term postings needed for local BM25 search. Records with past posted or estimated forecast deadlines are rejected, and undated forecasts must pass fiscal-year and recency checks.
+The generated public asset is `data/opportunities.js`. It contains open posted
+and current forecasted records, facet counts, evidence fields, official source
+actions, and the term postings needed for local BM25 search. Records with past
+posted or estimated forecast deadlines are rejected, and undated forecasts
+must pass fiscal-year and recency checks.
+
+`data/opportunity_enrichment.json` is a versioned compact cache of selected
+facts from the unauthenticated official `fetchOpportunity` endpoint. The
+workflow fetches only new or changed records, prunes removed identifiers,
+paces requests, and caps updates per run. It does not store source PDFs.
 
 ## Cost boundary
 
@@ -76,16 +89,18 @@ When AI is invoked, the browser sends the research description and a bounded set
 2. Discover and download the latest official Grants.gov enhanced XML extract.
 3. Stream, normalize, deduplicate, reject past deadlines, and remove stale undated forecasts.
 4. Build facet counts and the compact BM25 search index.
-5. Fail if record counts, identities, or required fields are implausible.
-6. Retest the newly generated browser asset.
-7. Commit a changed catalog to the default branch for GitHub Pages.
-8. Open or update one owner-alert issue if the refresh fails.
+5. Enrich new or changed records with official detail evidence and reconcile
+   deadlines, awards, announcement attachments, and agency links.
+6. Fail if record counts, identities, or required fields are implausible.
+7. Retest the newly generated browser assets.
+8. Commit a changed catalog and cache to the default branch for GitHub Pages.
+9. Open or update one owner-alert issue if the refresh fails.
 
 The last successful catalog remains available after a failure, and the page visibly warns when its generated timestamp is stale.
 
 ## Deployment verification
 
-Before declaring Phase 1 complete in production:
+Phase 1 and Phase 1.5 release verification covers:
 
 - observe one successful scheduled refresh;
 - confirm the generated commit triggers GitHub Pages;
@@ -95,9 +110,14 @@ Before declaring Phase 1 complete in production:
 - verify AI matching and “Chat with results” appear before the result list on mobile;
 - exercise at least two facets and each sort mode;
 - export a multi-record CSV;
-- verify an official link;
-- run one OpenAI or Anthropic refinement with a scoped test key; and
-- ask one narrowing follow-up question.
+- verify direct-FOA, agency-notice, and Grants.gov fallback actions;
+- verify program-total funding does not affect per-award filtering or sorting;
+- run the deterministic OpenAI and Anthropic adapter contract tests; and
+- exercise refinement, ordinary-results chat, and a narrowing follow-up with
+  bounded mock provider responses.
+
+Paid-provider smoke tests are useful before changing a model or prompt, but
+they are not the only way to verify the browser workflow.
 
 ## Deliberate limitations
 

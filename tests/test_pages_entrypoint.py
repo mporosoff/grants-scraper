@@ -22,6 +22,9 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         application_js = (
             REPOSITORY_ROOT / "assets" / "app.js"
         ).read_text(encoding="utf-8")
+        ai_provider_js = (
+            REPOSITORY_ROOT / "assets" / "ai-provider.js"
+        ).read_text(encoding="utf-8")
         application_css = (
             REPOSITORY_ROOT / "assets" / "app.css"
         ).read_text(encoding="utf-8")
@@ -39,8 +42,13 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn('<section class="chat" id="chat"', explorer_html)
         self.assertIn("Chat with results", explorer_html)
         self.assertIn("Export CSV", explorer_html)
+        self.assertIn('id="result-label"', explorer_html)
         self.assertIn(
             '<script src="./data/opportunities.js"></script>',
+            explorer_html,
+        )
+        self.assertIn(
+            '<script src="./assets/ai-provider.js"></script>',
             explorer_html,
         )
         self.assertIn(
@@ -51,8 +59,21 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("MAX_AI_CANDIDATES = 32", application_js)
         self.assertIn("MAX_CHAT_RESULTS = 20", application_js)
         self.assertIn("async function askResults", application_js)
-        self.assertIn("api.openai.com/v1/responses", application_js)
-        self.assertIn("api.anthropic.com/v1/messages", application_js)
+        self.assertIn("Open official FOA", application_js)
+        self.assertIn("Minimum per-award amount", explorer_html)
+        self.assertIn("primary_document_url", application_js)
+        self.assertIn("deadlineEvidenceLabel", application_js)
+        self.assertNotIn(
+            "Number(record.total_program_funding || 0),\n    );",
+            application_js,
+        )
+        self.assertIn("globalThis.FUNDING_AI.providerJson", application_js)
+        self.assertIn(
+            '$("result-label").textContent = display.length === 1',
+            application_js,
+        )
+        self.assertIn("api.openai.com/v1/responses", ai_provider_js)
+        self.assertIn("api.anthropic.com/v1/messages", ai_provider_js)
         self.assertRegex(
             application_css,
             r"(?s)\.search-form input\s*\{[^}]*color: var\(--ink\);",
@@ -99,7 +120,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         payload = asset.split(prefix, 1)[1].strip().removesuffix(";")
         catalog = json.loads(payload)
 
-        self.assertEqual(catalog["schema_version"], 2)
+        self.assertEqual(catalog["schema_version"], 3)
         self.assertEqual(
             catalog["record_count"], len(catalog["opportunities"])
         )
@@ -111,6 +132,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         )
         self.assertIn("carbon", catalog["search_index"]["postings"])
         self.assertIn("agency", catalog["facets"])
+        self.assertIn("quality", catalog["diagnostics"])
         identities = {
             record.get("opportunity_number") or record.get("opportunity_id")
             for record in catalog["opportunities"]
@@ -138,6 +160,39 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
                 and not record.get("rolling")
             )
         )
+        self.assertTrue(
+            all(
+                isinstance(record.get("deadlines"), list)
+                and record.get("award_source")
+                and record.get("detail_enrichment_status")
+                for record in catalog["opportunities"]
+            )
+        )
+        self.assertTrue(
+            all(
+                any(
+                    record.get(field)
+                    for field in (
+                        "primary_document_url",
+                        "funding_opportunity_url",
+                        "detail_page",
+                    )
+                )
+                for record in catalog["opportunities"]
+            )
+        )
+        self.assertTrue(
+            all(
+                not record.get(field)
+                or record[field].startswith(("http://", "https://"))
+                for record in catalog["opportunities"]
+                for field in (
+                    "primary_document_url",
+                    "funding_opportunity_url",
+                    "detail_page",
+                )
+            )
+        )
 
     def test_scheduled_refresh_has_health_checks_and_failure_alert(self):
         workflow = (
@@ -149,6 +204,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
 
         self.assertIn("schedule:", workflow)
         self.assertIn("python -m scripts.build_catalog", workflow)
+        self.assertIn("python -m scripts.enrich_catalog", workflow)
         self.assertIn("--min-records 1000", workflow)
         self.assertIn("--max-record-count 5000", workflow)
         self.assertIn("if: failure()", workflow)

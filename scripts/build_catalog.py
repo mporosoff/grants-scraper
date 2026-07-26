@@ -19,7 +19,7 @@ import math
 from pathlib import Path
 import re
 import tempfile
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 from xml.etree.ElementTree import iterparse
 from zipfile import ZipFile
 
@@ -30,7 +30,7 @@ EXTRACT_PAGE = "https://www.grants.gov/xml-extract"
 GRANTS_HOME = "https://www.grants.gov/"
 DETAIL_PAGE = "https://www.grants.gov/search-results-detail/{opportunity_id}"
 CATALOG_GLOBAL = "GRANT_CATALOG"
-CATALOG_SCHEMA_VERSION = 2
+CATALOG_SCHEMA_VERSION = 3
 USER_AGENT = "UR-Grant-Matcher-Catalog/1.0"
 
 CATEGORY_NAMES = {
@@ -277,6 +277,20 @@ def clean_text(value):
     return "\n".join(line for line in lines if line).strip() or None
 
 
+def safe_http_url(value):
+    text = clean_text(value)
+    if not text:
+        return None
+    if text.casefold().startswith("www."):
+        text = f"https://{text}"
+    parsed = urlparse(text)
+    return (
+        text
+        if parsed.scheme in {"http", "https"} and parsed.netloc
+        else None
+    )
+
+
 def parse_extract_date(value):
     if not value:
         return None
@@ -437,12 +451,41 @@ def normalize_element(element, as_of):
         if status == "forecasted"
         else "PostDate"
     )
-    source_url = clean_text(first(values, "AdditionalInformationURL"))
+    source_url = safe_http_url(first(values, "AdditionalInformationURL"))
     cost_share_raw = clean_text(
         first(values, "CostSharingOrMatchingRequirement")
     )
     archive_date = iso_date(first(values, "ArchiveDate"))
     close_date = iso_date(first(values, close_field))
+    detail_page = (
+        DETAIL_PAGE.format(opportunity_id=opportunity_id)
+        if opportunity_id
+        else GRANTS_HOME
+    )
+    deadlines = []
+    if close_date:
+        deadlines.append(
+            {
+                "kind": (
+                    "estimated_application"
+                    if status == "forecasted"
+                    else "application"
+                ),
+                "date": close_date,
+                "time": None,
+                "timezone": None,
+                "note": close_note,
+                "estimated": status == "forecasted",
+                "source": "Grants.gov XML extract",
+                "source_url": detail_page,
+                "source_field": close_field,
+                "confidence": (
+                    "official_estimate"
+                    if status == "forecasted"
+                    else "official_structured"
+                ),
+            }
+        )
 
     return {
         "opportunity_id": opportunity_id,
@@ -453,15 +496,18 @@ def normalize_element(element, as_of):
         "status": status,
         "source": "Grants.gov",
         "source_type": "Federal",
-        "detail_page": (
-            DETAIL_PAGE.format(opportunity_id=opportunity_id)
-            if opportunity_id
-            else GRANTS_HOME
-        ),
+        "detail_page": detail_page,
         "funding_opportunity_url": source_url,
+        "primary_document_url": None,
+        "primary_document_name": None,
+        "primary_document_source": None,
+        "primary_document_confidence": None,
+        "detail_enrichment_status": "pending",
         "posted_date": iso_date(first(values, post_field)),
         "close_date": close_date,
         "close_date_note": close_note,
+        "deadlines": deadlines,
+        "deadline_source": "Grants.gov XML extract",
         "archive_date": archive_date,
         "status_verification_required": (
             not close_date
@@ -503,6 +549,7 @@ def normalize_element(element, as_of):
         "expected_number_of_awards": numeric(
             first(values, "ExpectedNumberOfAwards")
         ),
+        "award_source": "Grants.gov XML extract",
         "cost_share_required": (
             None
             if not cost_share_raw
@@ -683,6 +730,46 @@ def facet_counts(records):
     return result
 
 
+def quality_metrics(records):
+    def count(predicate):
+        return sum(1 for record in records if predicate(record))
+
+    return {
+        "close_date_count": count(
+            lambda record: record.get("close_date")
+        ),
+        "status_verification_count": count(
+            lambda record: record.get("status_verification_required")
+        ),
+        "per_award_amount_count": count(
+            lambda record: (
+                record.get("award_floor")
+                or record.get("award_ceiling")
+            )
+        ),
+        "program_total_only_count": count(
+            lambda record: (
+                not record.get("award_floor")
+                and not record.get("award_ceiling")
+                and record.get("total_program_funding")
+            )
+        ),
+        "any_amount_count": count(
+            lambda record: (
+                record.get("award_floor")
+                or record.get("award_ceiling")
+                or record.get("total_program_funding")
+            )
+        ),
+        "agency_notice_count": count(
+            lambda record: record.get("funding_opportunity_url")
+        ),
+        "preliminary_stage_count": count(
+            lambda record: record.get("has_preliminary_stage")
+        ),
+    }
+
+
 def build_catalog(records, generated_at, source_file, deduplicated_count):
     return {
         "schema_version": CATALOG_SCHEMA_VERSION,
@@ -699,6 +786,7 @@ def build_catalog(records, generated_at, source_file, deduplicated_count):
         ),
         "diagnostics": {
             "deduplicated_count": deduplicated_count,
+            "quality": quality_metrics(records),
         },
         "facets": facet_counts(records),
         "opportunities": records,

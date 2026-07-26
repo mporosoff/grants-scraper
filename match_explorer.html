@@ -195,7 +195,7 @@
             </label>
           </div>
           <label class="number-field">
-            Minimum award ceiling
+            Minimum per-award amount
             <span class="input-prefix">$</span>
             <input id="award-min" type="number" min="0" step="1000" inputmode="numeric" placeholder="100,000">
           </label>
@@ -216,7 +216,7 @@
         <div class="results-toolbar">
           <div>
             <p class="eyebrow" id="results-mode">Public catalog</p>
-            <h2 id="results-heading"><span id="result-count">—</span> opportunities</h2>
+            <h2 id="results-heading"><span id="result-count">—</span> <span id="result-label">opportunities</span></h2>
             <p class="result-range" id="result-range"></p>
           </div>
           <div class="toolbar-actions">
@@ -277,6 +277,7 @@
 
   <footer>
     <p><strong>Source:</strong> <a href="https://www.grants.gov/xml-extract" target="_blank" rel="noopener">Grants.gov daily database extract</a>. Always verify requirements and dates in the official notice before applying.</p>
+    <p>This product uses the Grants.gov API but is not endorsed or certified by the U.S. Department of Health and Human Services.</p>
     <p id="catalog-detail"></p>
   </footer>
 
@@ -284,6 +285,7 @@
     <div class="notice error">JavaScript is required to search the opportunity catalog.</div>
   </noscript>
   <script src="./data/opportunities.js"></script>
+  <script src="./assets/ai-provider.js"></script>
   <script src="./assets/app.js"></script>
 </body>
 </html>
