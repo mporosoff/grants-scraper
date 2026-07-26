@@ -1,8 +1,8 @@
 # Funding Finder — Product Plan
 
-**Status:** Phase 1 and 1.5 complete; Phase 2 engineering complete with its human pilot deferred; Phase 3 source-evidence and deployment-review engineering implemented
+**Status:** Phase 1 and 1.5 complete; Phase 2 engineering complete with its human pilot deferred; Phase 3 deployed with its first production evidence batch successful
 
-**Next implementation phase:** Phase 3D — Publish and verify the first real document-evidence batch, then run the deferred multi-researcher pilot
+**Next implementation phase:** Phase 3D — complete the returned-review and citation-landing dry run, then run the deferred multi-researcher pilot
 
 **Canonical application:** https://mporosoff.github.io/grants-scraper/
 
@@ -492,7 +492,7 @@ reranking.
 
 ### Phase 3 — Better source evidence
 
-**Status: engineering implemented; first scheduled evidence batch and returned-review dry run still required**
+**Status: deployed; first scheduled evidence batch successful; returned-review dry run still required**
 
 Phase 3 is the “understand the actual FOA” layer. It remains a static,
 low-cost architecture: GitHub Actions performs document work once and every
@@ -514,6 +514,11 @@ visitor reuses the compact output.
   catalog rather than silently deleting their document history.
 - **Implemented:** keep the previous usable evidence on transient refresh
   failures and surface bounded failure diagnostics.
+- **Production verification (July 26, 2026):** the first scheduled batch
+  processed 45 official notices, produced 524 cited facts across all 45
+  records, and completed with zero document-request failures. The live
+  catalog reported 792 eligible source updates still queued for later bounded
+  runs.
 - **Boundary:** raw PDFs/HTML and full extracted text are never committed.
 
 #### 3B. Deterministic evidence extraction
@@ -565,12 +570,15 @@ visitor reuses the compact output.
 - **Implemented:** aggregate returned exports with
   `scripts/summarize_phase3_reviews.py` into private Markdown, JSON, and CSV.
   Input and report directories are gitignored.
-- **Deployment gate:** publish the pipeline, observe one successful bounded
-  batch with real citations, verify one PDF page and one HTML section link, send
-  one review package through each available handoff path, and run the
-  aggregator. A main-branch change to the ingestion/evidence pipeline triggers
-  the first batch automatically; the generated-data commit does not recursively
-  retrigger it. This gate occurs before the deferred Phase 2C researcher pilot.
+- **Deployment gate completed:** the pipeline was published, its first bounded
+  real-document batch succeeded, the generated catalog was committed, the
+  refreshed GitHub Pages deployment succeeded, and the public asset returned
+  the expected 45-document/524-fact diagnostics.
+- **Deployment gate remaining:** manually verify one PDF page citation and one
+  HTML section citation when an HTML source enters the batch, send one review
+  package through each available handoff path, and reproduce it with the
+  private aggregator. This gate occurs before the deferred Phase 2C researcher
+  pilot.
 
 **Exit criterion (not yet met):** decisive dates and requirements link to
 verifiable source evidence in the deployed site, document changes remain
@@ -602,6 +610,27 @@ Only consider a server or managed third-party service after the public pilot dem
 - shared departmental feedback;
 - institutional identity and access controls; or
 - centrally managed AI credentials and budgets.
+
+For email digests, the daily catalog job should first create a compact change
+feed keyed by stable opportunity ID: newly added, materially amended or
+deadline-changed, and removed/closed. A fixed owner or small internal-recipient
+digest can be sent directly after a successful GitHub Actions refresh through a
+transactional email provider using encrypted repository secrets.
+
+Public personalized digests require a small server-side subscription API and
+database because a static GitHub Pages app cannot securely retain subscriber
+addresses, preferences, or an email-provider credential. Store only explicit
+saved-search criteria such as keywords, agencies, topics, eligibility, and
+deadline horizon; keep CV text, AI chat, and the full device-local research
+profile out of the subscription service. The sender must support confirmation,
+unsubscribe, bounce handling, retry-safe send identifiers, and a durable send
+log.
+
+A Google Sheet and Apps Script may be acceptable for a short, manually managed
+internal pilot, but they are not the production ingestion engine or subscriber
+system of record. The authoritative full-catalog refresh remains GitHub
+Actions; a managed database/serverless function plus a transactional email
+provider is the maintainable path if the pilot justifies personalized alerts.
 
 ---
 
@@ -698,3 +727,4 @@ Only consider a server or managed third-party service after the public pilot dem
 | July 2026 | Retrieve and parse official notices only in bounded scheduled jobs; retain compact citations, hashes, facts, and version history while discarding raw documents and full text. |
 | July 2026 | Keep structured Grants.gov dates and amounts authoritative for filters; treat all narrative notice extraction as verification-required evidence. |
 | July 2026 | Collect no silent central telemetry. Autosave deployment review locally and return it only through explicit file share/download/email, then aggregate it in gitignored private folders. |
+| July 2026 | Keep GitHub Actions as the authoritative daily refresh engine; do not move ingestion to Google Sheets. Build any automatic digest from a catalog change feed and a separate consent-based subscription service. |
