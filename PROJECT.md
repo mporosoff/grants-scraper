@@ -53,6 +53,9 @@ Each refresh:
 - normalizes dates, awards, eligibility, agencies, instruments, and source links;
 - incrementally enriches new and changed records from the official Grants.gov
   detail API;
+- replaces a spacing-damaged NSF synopsis only when the linked official NSF
+  funding page provides a valid authoritative synopsis, then rebuilds the
+  search index;
 - derives transparent discipline, topic, and warning facets;
 - builds a compact BM25 keyword index; and
 - publishes one versioned browser asset.
@@ -385,6 +388,10 @@ missing facts.
   rate-limit risk.
 - XML and detail-API deadlines and award values are compared. Conflicts are
   displayed for verification instead of silently choosing a value.
+- Because Grants.gov can delete nonbreaking spaces from NSF prose, damaged
+  NSF synopses are refreshed from the linked official NSF page, cached for 14
+  days, and labeled with that source. Failed agency parsing never overwrites
+  the Grants.gov text.
 - Every enriched field carries its source, confidence, or verification status.
 
 ### 1.5B. Deadline and funding semantics
@@ -764,3 +771,4 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | July 2026 | Start with an empty result state, integrate keywords/profile/CV/filters under one “Find funding” action, and move invited-tester evidence checks out of the normal user workflow. |
 | July 2026 | Make result chat visibly interactive: add a large focused workspace, working indicator, keyboard send, safe rich formatting, exact result references, jump-to-result/source actions, and explicit result-list focusing. |
 | July 2026 | Stack profile/CV and filters full-width, remove nested filter scrolling, and retry malformed AI structured responses once with a smaller-output instruction. |
+| July 2026 | Repair Grants.gov synopsis spacing loss by preferring the linked official NSF synopsis only for damaged NSF prose, caching it, and rebuilding search terms. |
