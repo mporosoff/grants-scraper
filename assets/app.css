@@ -2199,7 +2199,7 @@ footer p {
 
 .context-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 14px;
 }
 
@@ -2272,6 +2272,7 @@ footer p {
 }
 
 .filter-panel {
+  grid-area: auto;
   position: static;
   max-height: none;
   padding: 0;
@@ -2281,9 +2282,14 @@ footer p {
 }
 
 .filter-body {
-  max-height: 650px;
+  max-height: none;
   padding: 0;
-  overflow-y: auto;
+  overflow: visible;
+}
+
+.filter-body .facet-list {
+  max-height: none;
+  overflow: visible;
 }
 
 .filter-body .panel-heading h3 {

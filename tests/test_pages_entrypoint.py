@@ -86,7 +86,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/ai-provider.js"></script>',
+            '<script src="./assets/ai-provider.js?v=layout-ai-recovery-v1"></script>',
             explorer_html,
         )
         self.assertIn(
@@ -98,7 +98,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/app.js?v=result-aware-chat-v1"></script>',
+            '<script src="./assets/app.js?v=layout-ai-recovery-v1"></script>',
             explorer_html,
         )
         self.assertIn("globalThis.GRANT_CATALOG", application_js)
@@ -145,7 +145,15 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("/* Unified search workflow */", application_css)
         self.assertRegex(
             application_css,
-            r"(?s)\.context-grid\s*\{[^}]*grid-template-columns:\s*repeat\(2",
+            r"(?s)\.context-grid\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr",
+        )
+        self.assertRegex(
+            application_css,
+            r"(?s)\.filter-panel\s*\{[^}]*grid-area:\s*auto",
+        )
+        self.assertRegex(
+            application_css,
+            r"(?s)\.filter-body\s*\{[^}]*overflow:\s*visible",
         )
         self.assertRegex(
             application_css,
