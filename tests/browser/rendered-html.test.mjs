@@ -1,67 +1,18 @@
 import assert from "node:assert/strict";
-import { access, readFile, readdir } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const root = new URL("../", import.meta.url);
-
-test("builds the grant matcher product shell", async () => {
-  const [layout, page, client, css] = await Promise.all([
-    readFile(new URL("app/layout.tsx", root), "utf8"),
-    readFile(new URL("app/page.tsx", root), "utf8"),
-    readFile(new URL("app/GrantMatcherApp.tsx", root), "utf8"),
-    readFile(new URL("app/globals.css", root), "utf8"),
-  ]);
-
-  assert.match(layout, /title:\s*"UR Grant Matcher"/);
-  assert.match(page, /<GrantMatcherApp \/>/);
-  assert.match(client, /Funding worth your attention\./);
-  assert.match(client, /Research profile/);
-  assert.match(client, /Opportunity feed/);
-  assert.match(client, /Match explorer/);
-  assert.match(client, /Faculty-controlled profiles/);
-  assert.match(client, /formatFunding/);
-  assert.match(client, /Grant duration/);
-  assert.match(client, /Expected awards/);
-  assert.doesNotMatch(client, /Import grants\.json|type="file"/);
-  assert.match(css, /\.match-card/);
-  assert.match(css, /\.grant-facts/);
-  assert.match(css, /@media \(max-width: 640px\)/);
-  assert.doesNotMatch(client, /OpenAI API key|Anthropic API key|localStorage/i);
-  await access(new URL("dist/server/index.js", root));
-});
-
-test("uses persistent application storage and removes starter dependencies", async () => {
-  const [hosting, client, packageJson, schema, migration, previewFiles] = await Promise.all([
-    readFile(new URL(".openai/hosting.json", root), "utf8"),
-    readFile(new URL("app/GrantMatcherApp.tsx", root), "utf8"),
-    readFile(new URL("package.json", root), "utf8"),
-    readFile(new URL("db/schema.ts", root), "utf8"),
-    readFile(new URL("drizzle/0001_blue_ezekiel.sql", root), "utf8"),
-    readdir(new URL("app/_sites-preview", root)).catch(() => []),
-  ]);
-
-  assert.match(hosting, /"d1":\s*"DB"/);
-  assert.match(hosting, /"project_id":\s*"appgprj_/);
-  assert.match(client, /\/api\/profile/);
-  assert.match(client, /\/api\/opportunities\/refresh/);
-  assert.match(client, /\/api\/matches/);
-  assert.match(schema, /totalProgramFunding/);
-  assert.match(schema, /expectedAwards/);
-  assert.match(schema, /preliminaryStageType/);
-  assert.match(migration, /ADD `duration`/);
-  assert.doesNotMatch(packageJson, /react-loading-skeleton/);
-  assert.deepEqual(previewFiles, []);
-});
+const root = new URL("../../", import.meta.url);
 
 test("supports one guided funding search, cited FOA evidence, reusable profiles, and optional AI refinement", async () => {
   const [prototype, script, profileScript, reviewScript, credentialsScript, providerScript, css] = await Promise.all([
-    readFile(new URL("../match_explorer.html", root), "utf8"),
-    readFile(new URL("../assets/app.js", root), "utf8"),
-    readFile(new URL("../assets/profile.js", root), "utf8"),
-    readFile(new URL("../assets/review.js", root), "utf8"),
-    readFile(new URL("../assets/credentials.js", root), "utf8"),
-    readFile(new URL("../assets/ai-provider.js", root), "utf8"),
-    readFile(new URL("../assets/app.css", root), "utf8"),
+    readFile(new URL("match_explorer.html", root), "utf8"),
+    readFile(new URL("assets/app.js", root), "utf8"),
+    readFile(new URL("assets/profile.js", root), "utf8"),
+    readFile(new URL("assets/review.js", root), "utf8"),
+    readFile(new URL("assets/credentials.js", root), "utf8"),
+    readFile(new URL("assets/ai-provider.js", root), "utf8"),
+    readFile(new URL("assets/app.css", root), "utf8"),
   ]);
 
   assert.match(prototype, /id="query"/);
@@ -80,6 +31,8 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(prototype, /id="find-funding"/);
   assert.match(prototype, /id="save-key"/);
   assert.match(prototype, /id="key-storage-status"/);
+  assert.match(prototype, /OpenAI key and project limits/);
+  assert.match(prototype, /Anthropic key safety and limits/);
   assert.match(prototype, /id="feedback-tools"/);
   assert.match(prototype, /id="result-assistant"/);
   assert.match(prototype, /id="export-evaluation"/);
@@ -145,6 +98,8 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.doesNotMatch(prototype, /Phase 3 deployment/);
   assert.doesNotMatch(prototype, /id="profile-search"|id="remember-profile"/);
   assert.match(prototype, /Your matches will appear here/);
+  assert.match(script, /id="browse-all"/);
+  assert.match(script, /function browseAllOpportunities/);
   assert.match(css, /\/\* Unified search workflow \*\//);
   assert.match(
     css,
@@ -153,6 +108,8 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(css, /\.filter-panel\s*\{[^}]*grid-area:\s*auto/s);
   assert.match(css, /\.filter-body\s*\{[^}]*overflow:\s*visible/s);
   assert.match(css, /\.results-column\s*\{[^}]*width:\s*100%/s);
+  assert.match(css, /@media \(prefers-color-scheme:\s*dark\)/);
+  assert.match(css, /@media \(forced-colors:\s*active\)/);
   assert.doesNotMatch(
     prototype + script,
     /GRANT_MATCH_FEED|btn-save-search|saved-searches/,

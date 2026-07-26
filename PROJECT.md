@@ -37,7 +37,7 @@ GitHub Pages is the only active product surface:
 
 https://mporosoff.github.io/grants-scraper/
 
-There are no accounts, installations, faculty profiles, or user-managed opportunity files. The retained server experiment under `web/` is reference material, not a second product.
+There are no accounts, installations, faculty profiles, or user-managed opportunity files. The retired server experiment remains available in Git history, not in the active product tree or CI.
 
 ### 2.2 Comprehensive catalog, not a curated shortlist
 
@@ -60,13 +60,20 @@ Each refresh:
 - builds a compact BM25 keyword index; and
 - publishes one versioned browser asset.
 
-The July 26 build contains 1,465 open or current forecasted federal opportunities rather than the former 48-record engineering shortlist. It contains no record with a deadline before the catalog date. Sources outside Grants.gov will be added independently when they have a sustainable public ingestion path.
+<!-- catalog-summary:start -->
+The July 26, 2026 build contains 1,465 open or current forecasted federal opportunities
+(1,224 posted and 241 forecasted) rather than the former 48-record engineering
+shortlist. It contains no record with a deadline before the catalog date. Sources
+outside Grants.gov will be added independently when they have a sustainable public
+ingestion path.
+<!-- catalog-summary:end -->
 
 ### 2.3 Search is the primary workflow
 
 Anyone can use, without an API key:
 
 - full-text keyword and opportunity-number search;
+- a one-click browse-all path when they do not yet have search terms;
 - open and forecasted status filters;
 - discipline, topic, agency, eligibility, and funding-instrument facets;
 - deadline and minimum per-award filters;
@@ -383,7 +390,7 @@ missing facts.
 - The daily workflow retains the complete Grants.gov XML extract as the
   catalog source and calls the unauthenticated official
   `fetchOpportunity` detail endpoint only for new or changed records.
-- A compact versioned cache prevents all 1,465 records from being fetched on
+- A compact versioned cache prevents the entire catalog from being fetched on
   every run. Retries, pacing, and a per-run update ceiling contain failure and
   rate-limit risk.
 - XML and detail-API deadlines and award values are compared. Conflicts are
@@ -425,19 +432,22 @@ presented as the FOA.
 
 ### Current evidence baseline
 
-The July 26 catalog contains 1,465 current posted or forecasted opportunities:
+<!-- catalog-evidence:start -->
+The July 26, 2026 catalog contains 1,465 current posted or forecasted opportunities:
 
-- 447 have a defensible direct announcement attachment (249 high confidence,
-  198 medium confidence);
-- another 615 route directly to an official agency notice;
-- the remaining 403 route to the official Grants.gov record;
-- 233 preserve an official deadline time or timezone;
-- 53 carry a preliminary-stage signal, including 3 narrative dates that are
-  visibly marked for verification;
+- 447 have a defensible direct announcement attachment (249 high confidence, 198 medium
+  confidence);
+- another 615 use an official agency notice as their primary route;
+- the remaining 403 use the official Grants.gov record as their primary route;
+- 774 contain an agency notice URL across all route types;
+- 309 preserve an official deadline time or timezone;
+- 98 carry a preliminary-stage signal, including 3 narrative dates visibly marked for
+  verification;
 - 703 (48.0%) have an official per-award floor or ceiling;
 - 986 (67.3%) have at least one structured funding amount; and
-- zero have a past structured close date or a detected XML/detail-API deadline
-  conflict in this build.
+- zero have a past structured close date and zero have a detected XML/detail-API
+  deadline conflict in this build.
+<!-- catalog-evidence:end -->
 
 These are data-quality measurements, not claims that the underlying notices
 are complete. Users are still told to verify the official announcement.
@@ -734,6 +744,7 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | `scripts/build_catalog.py` | Complete XML ingestion, normalization, validation, and index build |
 | `scripts/enrich_catalog.py` | Official detail enrichment, evidence reconciliation, and FOA selection |
 | `scripts/extract_document_evidence.py` | Bounded official-notice retrieval, deterministic extraction, versioning, and citations |
+| `scripts/update_catalog_docs.py` | Generated catalog baseline statistics in README and project documentation |
 | `scripts/evaluate_phase2.py` | Reproducible retrieval/reranking pilot evaluator |
 | `scripts/summarize_phase3_reviews.py` | Private aggregation of returned deployment-review exports |
 | `evaluation/README.md` | Consented Phase 2 export and aggregation workflow |
@@ -742,7 +753,6 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | `tests/` | Pipeline and public-application regression checks |
 | `.github/workflows/refresh-opportunities.yml` | Daily catalog refresh and owner alert |
 | `docs/HOSTING.md` | Deployment, privacy, and data boundary |
-| `web/` | Retained server experiment; not the canonical product |
 
 ---
 
@@ -768,6 +778,7 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | July 2026 | Keep structured Grants.gov dates and amounts authoritative for filters; treat all narrative notice extraction as verification-required evidence. |
 | July 2026 | Collect no silent central telemetry. Autosave deployment review locally and return it only through explicit file share/download/email, then aggregate it in gitignored private folders. |
 | July 2026 | Keep GitHub Actions as the authoritative daily refresh engine; do not move ingestion to Google Sheets. Build any automatic digest from a catalog change feed and a separate consent-based subscription service. |
+| July 2026 | Generate catalog baselines from the published asset, keep browser tests with the canonical product, and retire the unused server experiment and faculty scraper from the active tree. |
 | July 2026 | Start with an empty result state, integrate keywords/profile/CV/filters under one “Find funding” action, and move invited-tester evidence checks out of the normal user workflow. |
 | July 2026 | Make result chat visibly interactive: add a large focused workspace, working indicator, keyboard send, safe rich formatting, exact result references, jump-to-result/source actions, and explicit result-list focusing. |
 | July 2026 | Stack profile/CV and filters full-width, remove nested filter scrolling, and retry malformed AI structured responses once with a smaller-output instruction. |

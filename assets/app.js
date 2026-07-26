@@ -877,6 +877,30 @@
     $("results-heading").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
+  function resetFilterControls() {
+    Object.values(state.filters).forEach(selected => selected.clear());
+    ["deadline-from", "deadline-to", "award-min"].forEach(id => { $(id).value = ""; });
+    ["flag-evidence", "flag-preliminary", "flag-limited", "flag-early-career", "flag-no-cost-share"].forEach(id => { $(id).checked = false; });
+    $("status-posted").checked = true;
+    $("status-forecasted").checked = true;
+    document.querySelectorAll("[data-facet-search]").forEach(input => { input.value = ""; });
+    renderAllFacets();
+  }
+
+  function browseAllOpportunities() {
+    $("query").value = "";
+    $("use-profile").checked = false;
+    state.profile.active = false;
+    resetFilterControls();
+    $("sort").value = "deadline";
+    state.searched = true;
+    recordDeploymentUsage("searches");
+    runSearch();
+    $("search-status").textContent =
+      `Browsing all ${state.matches.length.toLocaleString()} current opportunities.`;
+    $("results-heading").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
   function runSearch({
     resetPage = true,
     preserveAi = false,
@@ -1622,7 +1646,9 @@
         <span class="empty-step-number" aria-hidden="true">1</span>
         <h3>Start with the search above</h3>
         <p>Describe the work, add any optional context, and select “Find funding.” The catalog stays out of the way until you ask for results.</p>
+        <button class="button secondary browse-all-button" id="browse-all" type="button">Browse all current opportunities</button>
       </div>`;
+      $("browse-all")?.addEventListener("click", browseAllOpportunities);
       $("page-label").textContent = "";
       $("pagination").classList.add("hidden");
       $("export-csv").disabled = true;
@@ -1713,13 +1739,7 @@
   }
 
   function clearFiltersOnly() {
-    Object.values(state.filters).forEach(selected => selected.clear());
-    ["deadline-from", "deadline-to", "award-min"].forEach(id => { $(id).value = ""; });
-    ["flag-evidence", "flag-preliminary", "flag-limited", "flag-early-career", "flag-no-cost-share"].forEach(id => { $(id).checked = false; });
-    $("status-posted").checked = true;
-    $("status-forecasted").checked = true;
-    document.querySelectorAll("[data-facet-search]").forEach(input => { input.value = ""; });
-    renderAllFacets();
+    resetFilterControls();
     runSearch();
   }
 

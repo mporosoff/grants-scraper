@@ -58,6 +58,8 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn('id="find-funding"', explorer_html)
         self.assertIn('id="save-key"', explorer_html)
         self.assertIn('id="key-storage-status"', explorer_html)
+        self.assertIn("OpenAI key and project limits", explorer_html)
+        self.assertIn("Anthropic key safety and limits", explorer_html)
         self.assertIn('id="feedback-tools"', explorer_html)
         self.assertIn('id="result-assistant"', explorer_html)
         self.assertIn('id="export-evaluation"', explorer_html)
@@ -132,6 +134,8 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("funding-finder.credentials.v1", credentials_js)
         self.assertIn("localStorage", credentials_js)
         self.assertIn("AI retrieval candidate set", application_js)
+        self.assertIn('id="browse-all"', application_js)
+        self.assertIn("function browseAllOpportunities", application_js)
         self.assertIn(
             '$("result-label").textContent = display.length === 1',
             application_js,
@@ -159,6 +163,8 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             application_css,
             r"(?s)\.results-column\s*\{[^}]*width:\s*100%",
         )
+        self.assertIn("@media (prefers-color-scheme: dark)", application_css)
+        self.assertIn("@media (forced-colors: active)", application_css)
         self.assertNotIn('class="chat hidden"', explorer_html)
         self.assertNotIn("localStorage", application_js)
         self.assertNotIn("sessionStorage", application_js)
@@ -307,8 +313,9 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         vendor = REPOSITORY_ROOT / "assets" / "vendor"
         for name, digest in expected.items():
             with self.subTest(name=name):
+                payload = (vendor / name).read_bytes().replace(b"\r\n", b"\n")
                 self.assertEqual(
-                    hashlib.sha256((vendor / name).read_bytes()).hexdigest(),
+                    hashlib.sha256(payload).hexdigest(),
                     digest,
                 )
         self.assertTrue((vendor / "pdfjs.LICENSE").is_file())
@@ -329,9 +336,10 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("--min-records 1000", workflow)
         self.assertIn("--max-record-count 5000", workflow)
         self.assertIn("actions/setup-node@v6", workflow)
-        self.assertIn("web/tests/profile-contract.test.mjs", workflow)
-        self.assertIn("web/tests/credentials-contract.test.mjs", workflow)
-        self.assertIn("web/tests/review-contract.test.mjs", workflow)
+        self.assertIn("tests/browser/*.test.mjs", workflow)
+        self.assertNotIn("web/tests/", workflow)
+        self.assertIn("python -m scripts.update_catalog_docs", workflow)
+        self.assertIn("git add README.md PROJECT.md", workflow)
         self.assertIn("if: failure()", workflow)
         self.assertIn("data/opportunities.js", workflow)
         self.assertIn("data/document_evidence.json", workflow)

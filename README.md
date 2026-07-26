@@ -11,12 +11,14 @@ https://mporosoff.github.io/grants-scraper/
 Anyone can search the comprehensive catalog without an account or API key. The browser provides:
 
 - full-text search across current Grants.gov opportunities;
+- one-click browsing of the complete current catalog without search terms;
 - filters for status, discipline, topic, agency, eligibility, instrument,
   deadline, award size, cited-FOA availability, and special requirements;
 - relevance and field-based sorting;
 - one-click official FOA, agency-notice, or Grants.gov record actions;
 - expandable page/section-cited FOA evidence, pagination, and CSV export; and
-- visible catalog source, size, generated time, and freshness.
+- visible catalog source, size, generated time, and freshness; and
+- automatic dark-mode and Windows high-contrast support.
 
 The page initially shows no opportunities. One guided workflow combines a
 topic, optional profile/CV context, and optional filters under a single “Find
@@ -88,11 +90,14 @@ committed. Machine-extracted dates and amounts do not replace structured
 Grants.gov fields used by filters or sorting. Its compact cache is
 `data/document_evidence.json`.
 
-This replaces the former 48-record Chemical and Sustainability Engineering
-feed. The July 26 build contains 1,465 federal opportunities with no deadline
-before the catalog date. It provides a direct official announcement for 447
-records, an agency-notice route for another 615, and the official Grants.gov
-record for the remaining 403.
+<!-- catalog-stats:start -->
+This replaces the former 48-record Chemical and Sustainability Engineering feed. The
+July 26, 2026 build contains 1,465 current federal opportunities (1,224 posted and 241
+forecasted) with no deadline before the catalog date. It provides a direct official
+announcement for 447 records, an agency-notice route for another 615, and the official
+Grants.gov record for the remaining 403. Across all route types, 774 records also
+contain an agency notice URL.
+<!-- catalog-stats:end -->
 
 Funding values are intentionally not conflated: award floor/ceiling drive
 per-award display and filtering, while total program funding is a separate

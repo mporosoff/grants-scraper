@@ -27,6 +27,9 @@ faculty.csv
 .env
 .pnpm-store/
 
+# Retired server experiment artifacts may remain in old local checkouts.
+/web/
+
 # Editors and operating systems
 .idea/
 .vscode/

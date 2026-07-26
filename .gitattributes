@@ -1,1 +1,17 @@
-data/opportunities.js linguist-generated=true -diff
+* text=auto eol=lf
+
+*.gif binary
+*.ico binary
+*.jpeg binary
+*.jpg binary
+*.pdf binary
+*.png binary
+*.webp binary
+*.zip binary
+
+# Keep reviewed third-party parser bytes exactly as committed.
+assets/vendor/pdf.mjs -text
+assets/vendor/pdf.worker.mjs -text
+assets/vendor/mammoth.browser.min.js -text
+
+data/opportunities.js text eol=lf linguist-generated=true -diff

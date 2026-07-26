@@ -2360,6 +2360,20 @@ footer p {
   font-size: .78rem;
 }
 
+.key-help {
+  margin: 0 0 13px;
+  padding: 10px 12px;
+  color: #425873;
+  font-size: .74rem;
+  background: var(--blue-soft);
+  border: 1px solid #cbdcf5;
+  border-radius: 8px;
+}
+
+.key-help a {
+  font-weight: 800;
+}
+
 .provider-fields {
   grid-template-columns: minmax(160px, .35fr) minmax(0, 1fr);
   padding: 0;
@@ -2398,6 +2412,10 @@ footer p {
 
 .initial-empty-state .empty-step-number {
   margin: 0 auto 12px;
+}
+
+.browse-all-button {
+  margin-top: 8px;
 }
 
 .result-assistant {
@@ -2881,5 +2899,215 @@ body.chat-expanded .chat-privacy {
   body.chat-expanded .chat-form .button {
     min-height: 46px;
     margin-top: 7px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --navy: #e7f0fc;
+    --ink: #edf4ff;
+    --muted: #aebed3;
+    --line: #34465e;
+    --line-strong: #496079;
+    --surface: #152236;
+    --surface-alt: #1b2a3f;
+    --page: #0b1422;
+    --blue-soft: #203a61;
+    --warning: #ffd27c;
+    --warning-bg: #3b2b0c;
+    --danger: #ffadb6;
+    --danger-bg: #3c1720;
+    --shadow: 0 14px 35px rgba(0, 0, 0, .3);
+    color-scheme: dark;
+  }
+
+  .skip-link {
+    background: #07182d;
+  }
+
+  a,
+  .text-button,
+  .source-action,
+  .evaluation-heading > strong {
+    color: #8dbaff;
+  }
+
+  .search-form,
+  .button.secondary,
+  .result-card,
+  .evidence-list li,
+  .source-action,
+  .feedback-button,
+  .result-feedback select,
+  .source-review select,
+  .source-review input,
+  .cv-input,
+  .cv-input::file-selector-button,
+  .evaluation-metrics div,
+  .review-field input,
+  .review-field textarea,
+  .deployment-checks select,
+  .primary-step,
+  .context-card,
+  .filter-panel,
+  .provider-setup,
+  .feedback-tools,
+  .chat-result-reference,
+  body.chat-expanded .result-assistant {
+    background: var(--surface);
+  }
+
+  .search-workflow,
+  .context-step,
+  .launch-step,
+  .result-assistant,
+  .result-feedback,
+  .source-review,
+  .deployment-review-panel,
+  .feedback-intro,
+  .chat-thinking {
+    background: var(--surface-alt);
+  }
+
+  .facet-search input,
+  .range-grid input,
+  .number-field input,
+  .stacked-field textarea,
+  .profile-fields input,
+  .profile-fields select,
+  .provider-fields input,
+  .provider-fields select,
+  .toolbar-actions select,
+  .chat-form textarea {
+    color: var(--ink);
+    background: #101c2d;
+    border-color: var(--line-strong);
+  }
+
+  .search-form input {
+    color: var(--ink);
+  }
+
+  .search-form input::placeholder {
+    color: var(--muted);
+  }
+
+  .key-help {
+    color: #c6d5e8;
+    background: #193252;
+    border-color: #385a81;
+  }
+
+  .notice.warning {
+    border-color: #795716;
+  }
+
+  .notice.error {
+    border-color: #78343e;
+  }
+
+  .badge,
+  .reason-code,
+  .ai-score,
+  .filter-chip,
+  .summary-action,
+  .optional-label {
+    color: #d7e8fb;
+    background: #203a58;
+    border-color: #49627d;
+  }
+
+  .badge.open,
+  .evidence-status.current {
+    color: #9be8c8;
+    background: #153d31;
+  }
+
+  .badge.forecasted,
+  .badge.warning {
+    color: #ffd48a;
+    background: #44320f;
+  }
+
+  .panel-copy,
+  .provider-explanation,
+  .source-action-note,
+  .result-feedback,
+  .feedback-intro,
+  .evaluation-panel > p,
+  .chat-privacy,
+  .message-content blockquote,
+  .chat-result-reference span,
+  .chat-result-reference small {
+    color: var(--muted);
+  }
+
+  .message.assistant,
+  .full-description,
+  .empty-state {
+    color: var(--ink);
+    background: var(--surface-alt);
+  }
+
+  .message-content code {
+    color: #dce8f7;
+    background: #263951;
+  }
+
+  .result-card:hover {
+    border-color: #6d87a5;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .28);
+  }
+}
+
+@media (forced-colors: active) {
+  *,
+  *::before,
+  *::after {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  .site-header,
+  .search-workflow,
+  .workflow-map li,
+  .context-card,
+  .result-card,
+  .result-assistant,
+  .feedback-tools,
+  .message,
+  .chat-result-reference,
+  .notice,
+  input,
+  select,
+  textarea,
+  button {
+    border: 1px solid CanvasText;
+  }
+
+  .result-card.ai-match {
+    border-left: 4px solid Highlight;
+  }
+
+  .result-card.chat-target {
+    outline: 4px solid Highlight;
+  }
+
+  .step-number,
+  .empty-step-number,
+  .brand-mark,
+  .thinking-mark i {
+    color: Canvas;
+    background: CanvasText;
+    border: 1px solid CanvasText;
+  }
+
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  summary {
+    forced-color-adjust: auto;
   }
 }

@@ -19,25 +19,19 @@ jobs:
           cache: pip
       - run: python -m pip install -r requirements.txt
       - run: python -m unittest discover -s tests -v
-      - run: node --check assets/app.js
-      - run: node --check assets/profile.js
-      - run: node --check assets/credentials.js
 
-  web:
+  browser:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: web
 
     steps:
       - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 11.9.0
       - uses: actions/setup-node@v6
         with:
           node-version: "22"
-          cache: pnpm
-          cache-dependency-path: web/pnpm-lock.yaml
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm test
+      - run: node --check assets/app.js
+      - run: node --check assets/profile.js
+      - run: node --check assets/credentials.js
+      - run: node --check assets/review.js
+      - run: node --check assets/ai-provider.js
+      - run: node --check assets/chat-ui.js
+      - run: node --test tests/browser/*.test.mjs
