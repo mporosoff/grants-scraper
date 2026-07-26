@@ -47,7 +47,7 @@ test("OpenAI adapter sends a bounded, non-persisted Responses request", async ()
   assert.equal(body.store, false);
   assert.equal(body.instructions, "Return JSON.");
   assert.equal(body.input, "Rank these opportunities.");
-  assert.equal(body.max_output_tokens, 3000);
+  assert.equal(body.max_output_tokens, 5000);
   assert.equal(JSON.stringify(result), '{"matches":["123"]}');
 });
 
@@ -75,6 +75,7 @@ test("Anthropic adapter sends the direct-browser Messages contract", async () =>
     "true",
   );
   assert.equal(body.model, provider.ANTHROPIC_MODEL);
+  assert.equal(body.max_tokens, 5000);
   assert.deepEqual(body.messages, [
     { role: "user", content: "Answer from these results." },
   ]);
@@ -104,6 +105,56 @@ test("adapter rejects missing keys and reports provider failures", async () => {
     }),
     /OpenAI request failed \(401\).*invalid credential/,
   );
+});
+
+test("retries malformed structured data once with a smaller-output instruction", async () => {
+  const provider = await loadProvider();
+  const requests = [];
+  let retryCount = 0;
+  const result = await provider.providerJson({
+    provider: "openai",
+    key: "test-openai-key",
+    system: "Return ranked matches as JSON.",
+    user: "Rank the bounded candidate set.",
+    onRetry: () => {
+      retryCount += 1;
+    },
+    fetchImpl: async (url, options) => {
+      requests.push({ url, body: JSON.parse(options.body) });
+      return requests.length === 1
+        ? jsonResponse({ output_text: '{"matches":[{"id":"A"} {"id":"B"}]}' })
+        : jsonResponse({ output_text: '{"matches":[{"id":"A"}]}' });
+    },
+  });
+
+  assert.equal(requests.length, 2);
+  assert.equal(retryCount, 1);
+  assert.match(
+    requests[1].body.instructions,
+    /previous response was malformed or incomplete JSON/,
+  );
+  assert.equal(JSON.stringify(result), '{"matches":[{"id":"A"}]}');
+});
+
+test("returns a useful error after two malformed responses", async () => {
+  const provider = await loadProvider();
+  let requests = 0;
+  await assert.rejects(
+    provider.providerJson({
+      provider: "anthropic",
+      key: "test-anthropic-key",
+      system: "Return JSON.",
+      user: "Answer from the bounded results.",
+      fetchImpl: async () => {
+        requests += 1;
+        return jsonResponse({
+          content: [{ type: "text", text: '{"answer":["unfinished"' }],
+        });
+      },
+    }),
+    /malformed structured data twice/,
+  );
+  assert.equal(requests, 2);
 });
 
 test("keeps only supplied citation identifiers and rejects invented ones", async () => {

@@ -79,7 +79,9 @@ Search and filtering execute in the browser over the prebuilt index. They make z
 The public page begins with no opportunity cards. One guided workflow combines
 keywords, optional profile/CV context, and optional filters; “Find funding” is
 the only search action. This prevents the catalog, profile search, and AI
-matching from appearing to be separate products.
+matching from appearing to be separate products. Profile/CV context and filters
+are stacked as full-width sections in that workflow. Expanded filters use the
+page scrollbar rather than a sticky nested scrolling pane.
 
 ### 2.4 AI is an optional first-class workflow
 
@@ -95,7 +97,10 @@ candidate set, while “Chat with your results” appears with the result set on
 desktop and mobile. Chat can expand into a large in-page workspace without
 losing the current result state, uses readable limited-Markdown responses,
 shows a visible working state, and supports Enter-to-send with Shift+Enter for
-a new line. Neither AI action is a separate search source.
+a new line. Provider responses receive a larger bounded output budget; if a
+provider still returns malformed or truncated JSON, the application retries
+once with a shorter-output instruction and then reports a plain-language error.
+Neither AI action is a separate search source.
 
 AI output is advisory. It must:
 
@@ -758,3 +763,4 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | July 2026 | Keep GitHub Actions as the authoritative daily refresh engine; do not move ingestion to Google Sheets. Build any automatic digest from a catalog change feed and a separate consent-based subscription service. |
 | July 2026 | Start with an empty result state, integrate keywords/profile/CV/filters under one “Find funding” action, and move invited-tester evidence checks out of the normal user workflow. |
 | July 2026 | Make result chat visibly interactive: add a large focused workspace, working indicator, keyboard send, safe rich formatting, exact result references, jump-to-result/source actions, and explicit result-list focusing. |
+| July 2026 | Stack profile/CV and filters full-width, remove nested filter scrolling, and retry malformed AI structured responses once with a smaller-output instruction. |

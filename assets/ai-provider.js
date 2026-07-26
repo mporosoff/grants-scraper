@@ -3,29 +3,38 @@
 
   const OPENAI_MODEL = "gpt-5.6-luna";
   const ANTHROPIC_MODEL = "claude-sonnet-5";
+  const MAX_OUTPUT_TOKENS = 5000;
+  const MAX_JSON_ATTEMPTS = 2;
 
   function extractJson(text) {
     const cleaned = String(text || "")
       .trim()
       .replace(/^```(?:json)?\s*/i, "")
       .replace(/\s*```$/, "");
-    try {
-      return JSON.parse(cleaned);
-    } catch {
-      const objectStart = cleaned.indexOf("{");
-      const objectEnd = cleaned.lastIndexOf("}");
-      if (objectStart >= 0 && objectEnd > objectStart) {
-        return JSON.parse(cleaned.slice(objectStart, objectEnd + 1));
-      }
+    const candidates = [cleaned];
+    const objectStart = cleaned.indexOf("{");
+    const objectEnd = cleaned.lastIndexOf("}");
+    if (objectStart >= 0 && objectEnd > objectStart) {
+      candidates.push(cleaned.slice(objectStart, objectEnd + 1));
+    } else {
       const arrayStart = cleaned.indexOf("[");
       const arrayEnd = cleaned.lastIndexOf("]");
       if (arrayStart >= 0 && arrayEnd > arrayStart) {
-        return JSON.parse(cleaned.slice(arrayStart, arrayEnd + 1));
+        candidates.push(cleaned.slice(arrayStart, arrayEnd + 1));
       }
-      throw new Error(
-        "The AI provider returned an answer that was not valid JSON.",
-      );
     }
+    for (const candidate of [...new Set(candidates)]) {
+      try {
+        return JSON.parse(candidate);
+      } catch {
+        // Try the next bounded candidate before requesting one clean retry.
+      }
+    }
+    const error = new Error(
+      "The AI provider returned malformed or incomplete structured data.",
+    );
+    error.name = "ProviderJsonParseError";
+    throw error;
   }
 
   function openAIResponseText(data) {
@@ -66,6 +75,7 @@
     system,
     user,
     fetchImpl = globalThis.fetch,
+    onRetry,
   }) {
     const cleanKey = String(key || "").trim();
     if (!cleanKey) {
@@ -77,57 +87,80 @@
       throw new Error("The browser does not provide a compatible fetch API.");
     }
 
-    if (provider === "anthropic") {
-      const response = await fetchImpl("https://api.anthropic.com/v1/messages", {
+    const requestText = async attempt => {
+      const retryInstruction = attempt
+        ? "\n\nYour previous response was malformed or incomplete JSON. Return the entire answer again as one smaller valid JSON value. Shorten strings and return fewer list items if necessary. Do not use Markdown fences or add commentary outside the JSON."
+        : "";
+      if (provider === "anthropic") {
+        const response = await fetchImpl("https://api.anthropic.com/v1/messages", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key": cleanKey,
+            "anthropic-version": "2023-06-01",
+            "anthropic-dangerous-direct-browser-access": "true",
+          },
+          body: JSON.stringify({
+            model: ANTHROPIC_MODEL,
+            max_tokens: MAX_OUTPUT_TOKENS,
+            system: `${system}${retryInstruction}`,
+            messages: [{ role: "user", content: user }],
+          }),
+        });
+        if (!response.ok) {
+          const body = await response.text();
+          throw new Error(
+            `Anthropic request failed (${response.status}): ${truncate(body, 280)}`,
+          );
+        }
+        const data = await response.json();
+        return (data.content || []).map(block => block.text || "").join("");
+      }
+
+      const response = await fetchImpl("https://api.openai.com/v1/responses", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key": cleanKey,
-          "anthropic-version": "2023-06-01",
-          "anthropic-dangerous-direct-browser-access": "true",
+          "Authorization": `Bearer ${cleanKey}`,
         },
         body: JSON.stringify({
-          model: ANTHROPIC_MODEL,
-          max_tokens: 3000,
-          system,
-          messages: [{ role: "user", content: user }],
+          model: OPENAI_MODEL,
+          instructions: `${system}${retryInstruction}`,
+          input: user,
+          reasoning: { effort: "low" },
+          text: { verbosity: "low" },
+          max_output_tokens: MAX_OUTPUT_TOKENS,
+          store: false,
         }),
       });
       if (!response.ok) {
         const body = await response.text();
         throw new Error(
-          `Anthropic request failed (${response.status}): ${truncate(body, 280)}`,
+          `OpenAI request failed (${response.status}): ${truncate(body, 280)}`,
         );
       }
-      const data = await response.json();
-      return extractJson(
-        (data.content || []).map(block => block.text || "").join(""),
-      );
-    }
+      return openAIResponseText(await response.json());
+    };
 
-    const response = await fetchImpl("https://api.openai.com/v1/responses", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${cleanKey}`,
-      },
-      body: JSON.stringify({
-        model: OPENAI_MODEL,
-        instructions: system,
-        input: user,
-        reasoning: { effort: "low" },
-        text: { verbosity: "low" },
-        max_output_tokens: 3000,
-        store: false,
-      }),
-    });
-    if (!response.ok) {
-      const body = await response.text();
-      throw new Error(
-        `OpenAI request failed (${response.status}): ${truncate(body, 280)}`,
-      );
+    for (let attempt = 0; attempt < MAX_JSON_ATTEMPTS; attempt += 1) {
+      try {
+        return extractJson(await requestText(attempt));
+      } catch (error) {
+        if (
+          error?.name !== "ProviderJsonParseError"
+          || attempt + 1 >= MAX_JSON_ATTEMPTS
+        ) {
+          if (error?.name === "ProviderJsonParseError") {
+            throw new Error(
+              "The AI provider returned malformed structured data twice. Try the refinement again; ordinary catalog search is unaffected.",
+            );
+          }
+          throw error;
+        }
+        if (typeof onRetry === "function") onRetry();
+      }
     }
-    return extractJson(openAIResponseText(await response.json()));
+    throw new Error("The AI provider did not return structured data.");
   }
 
   globalThis.FUNDING_AI = Object.freeze({

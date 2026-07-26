@@ -146,6 +146,12 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.doesNotMatch(prototype, /id="profile-search"|id="remember-profile"/);
   assert.match(prototype, /Your matches will appear here/);
   assert.match(css, /\/\* Unified search workflow \*\//);
+  assert.match(
+    css,
+    /\.context-grid\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)/s,
+  );
+  assert.match(css, /\.filter-panel\s*\{[^}]*grid-area:\s*auto/s);
+  assert.match(css, /\.filter-body\s*\{[^}]*overflow:\s*visible/s);
   assert.match(css, /\.results-column\s*\{[^}]*width:\s*100%/s);
   assert.doesNotMatch(
     prototype + script,

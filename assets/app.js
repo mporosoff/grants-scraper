@@ -10,7 +10,7 @@
   const MAX_PROFILE_TERMS = 28;
   const MAX_AI_CV_CHARS = 12_000;
   const PROMPT_VERSION = "result-aware-chat-v1";
-  const APP_VERSION = "result-aware-chat-v1";
+  const APP_VERSION = "layout-ai-recovery-v1";
   const CANONICAL_URL = "https://mporosoff.github.io/grants-scraper/";
   const REVIEW_EMAIL = "marc.porosoff@rochester.edu";
   const INDEX_TERMS = Object.keys(catalog?.search_index?.postings || {});
@@ -1812,6 +1812,11 @@
       system,
       user,
       fetchImpl: globalThis.fetch,
+      onRetry: () => {
+        setAiStatus(
+          "The provider returned incomplete structured data. Retrying once with a smaller response…",
+        );
+      },
     });
   }
 
