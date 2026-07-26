@@ -18,12 +18,11 @@ Anyone can search the comprehensive catalog without an account or API key. The b
 - expandable page/section-cited FOA evidence, pagination, and CSV export; and
 - visible catalog source, size, generated time, and freshness.
 
-Users can also build a reusable researcher profile from a research
-description, expertise keywords, applicant/career context, and an optional
-PDF, DOCX, TXT, or Markdown CV. “Search with my profile” uses the local BM25
-index and makes zero AI calls. When remembering is enabled, the profile,
-bounded extracted CV text, filters, sort, and Phase 2 relevance labels are
-saved only on that device.
+The page initially shows no opportunities. One guided workflow combines a
+topic, optional profile/CV context, and optional filters under a single “Find
+funding” action. Users can explicitly save a reusable researcher profile on
+that device; saving it does not launch a competing search. Profile relevance
+uses the local BM25 index and makes zero AI calls.
 
 Ordinary and profile-ranked search make zero AI calls. A user may enter an
 OpenAI or Anthropic key to:
@@ -32,7 +31,9 @@ OpenAI or Anthropic key to:
 2. rerank at most 32 retrieved candidates into a shortlist of at most 12; and
 3. ask grounded follow-up questions that can further narrow the shortlist.
 
-The always-visible “Chat with results” panel can also answer questions over the top 20 ordinary search results without requiring a prior AI rerank. On mobile, AI matching and chat appear before the filters and result list.
+“Ask about these results” appears with the returned result set and can answer
+questions over the top 20 ordinary search results without requiring a prior AI
+rerank. It uses the same responsive result workflow on desktop and mobile.
 
 When the scheduled Phase 3 pipeline has analyzed an official notice, the
 result card shows document version/change status and compact cited facts for
@@ -42,10 +43,11 @@ exact PDF page or HTML section. “Ask AI about this FOA” focuses chat on a
 single result; AI may cite only evidence identifiers that the browser supplied.
 
 The original CV file is never retained. A bounded CV excerpt is sent only when
-the user enables that option and explicitly runs AI matching or chat. The API
-key, shortlist, and chat stay in page memory only; they are never written to
-local storage, session storage, GitHub, URLs, exports, or an application
-database.
+the user enables that option and explicitly runs AI refinement or chat. An API
+key is tab-only unless the user explicitly saves it on that device. Saved keys
+are isolated from profiles and reviewer data, have a visible saved/loaded
+status and removal control, and never enter GitHub, URLs, exports, or an
+application database. The shortlist and chat remain page-memory only.
 
 Match-quality controls include `useful`, `not relevant`, and `needs
 verification` labels with reason codes. The explicit evaluation export omits
@@ -56,8 +58,8 @@ pre-reranking candidate set when labeling. The 3–5 researcher pilot is
 deliberately deferred until the Phase 3 deployment batch and review handoff are
 verified.
 
-Phase 3 adds a separate source-verification and deployment-review loop.
-Reviewers can mark cited evidence accurate, incorrect, or unverifiable, check
+Invited testers can open the collapsed “Help improve Funding Finder” area to
+mark cited evidence accurate, incorrect, or unverifiable, check
 the field they inspected, and add a short non-confidential note. This progress
 autosaves only on that device. “Send review” uses the native file share sheet
 where available; otherwise it downloads a privacy-safe JSON file and opens an
@@ -102,6 +104,7 @@ support it.
 | `assets/app.js` | Search, cited source evidence, review/export, profile ranking, AI matching, and chat |
 | `assets/profile.js` | Local profile/feedback storage and CV extraction |
 | `assets/review.js` | Local Phase 3 deployment-review storage and privacy-safe handoff |
+| `assets/credentials.js` | Explicit device-local provider-key save/load/clear boundary |
 | `assets/ai-provider.js` | OpenAI and Anthropic request adapters |
 | `assets/app.css` | Responsive application styles |
 | `assets/vendor/` | Vendored PDF.js and Mammoth parsers and license notices |

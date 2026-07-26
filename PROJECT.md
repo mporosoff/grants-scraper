@@ -1,6 +1,6 @@
 # Funding Finder — Product Plan
 
-**Status:** Phase 1 and 1.5 complete; Phase 2 engineering complete with its human pilot deferred; Phase 3 deployed with its first production evidence batch successful
+**Status:** Phase 1 and 1.5 complete; Phase 2 engineering complete with its human pilot deferred; Phase 3 deployed with its first production evidence batch successful; unified-search usability pass complete
 
 **Next implementation phase:** Phase 3D — complete the returned-review and citation-landing dry run, then run the deferred multi-researcher pilot
 
@@ -76,6 +76,11 @@ Anyone can use, without an API key:
 
 Search and filtering execute in the browser over the prebuilt index. They make zero AI calls and have no per-search infrastructure cost.
 
+The public page begins with no opportunity cards. One guided workflow combines
+keywords, optional profile/CV context, and optional filters; “Find funding” is
+the only search action. This prevents the catalog, profile search, and AI
+matching from appearing to be separate products.
+
 ### 2.4 AI is an optional first-class workflow
 
 A user may choose OpenAI or Anthropic and enter one provider key. The same provider powers:
@@ -84,7 +89,10 @@ A user may choose OpenAI or Anthropic and enter one provider key. The same provi
 2. **Bounded reranking:** compare at most 32 locally retrieved candidates and return at most 12 grounded recommendations.
 3. **Chat with results:** answer questions over either the top 20 ordinary search results or the AI shortlist and, when explicitly requested, narrow those results further.
 
-Keyword search and “Describe your research” are equally visible entry points. The chat panel remains visible on desktop and mobile before the long result list; it is not hidden behind a successful reranking call.
+AI settings sit inside that same workflow and become useful only after the
+catalog search has results. “Refine these results with AI” reranks the bounded
+candidate set, while “Ask about these results” appears with the result set on
+desktop and mobile. Neither is a separate search source.
 
 AI output is advisory. It must:
 
@@ -112,14 +120,17 @@ research profile on that device. The saved record contains:
 
 PDF, DOCX, TXT, and Markdown CVs are parsed in the browser. The original file
 is never saved or uploaded by the application. The user can disable
-remembering, remove the CV extract, clear the profile, or clear evaluation
-labels at any time.
+profile use, remove the CV extract, clear the saved profile, or clear
+evaluation labels at any time.
 
-The API key, AI shortlist, and chat remain page-memory only and disappear on
-reload. They are never written to `localStorage`, `sessionStorage`, a URL,
-GitHub, or an application database. The bounded CV excerpt is sent to the
-selected AI provider only when the user leaves that option enabled and
-explicitly runs AI matching or chat.
+The AI shortlist and chat remain page-memory only and disappear on reload. An
+API key is tab-only by default, but the user may explicitly save one key per
+provider in a separate device-local credential record. The interface confirms
+whether the current key is entered, saved, loaded, or removed and warns against
+saving a key on a shared browser. Keys are never written to the profile,
+review/evaluation records, `sessionStorage`, a URL, GitHub, or an application
+database. The bounded CV excerpt is sent to the selected AI provider only when
+the user leaves that option enabled and explicitly runs AI refinement or chat.
 
 CSV and Phase 2 JSON are created only on explicit export. The evaluation JSON
 excludes the API key, CV text, research description, and chat by default.
@@ -174,16 +185,17 @@ Cited notice facts + document hash/version + review queue
                  |
                  v
           GitHub Pages app
-          /          |          \
-         /           |           \ optional, user initiated
-        v            v            v
-Zero-cost       Device-local     OpenAI or Anthropic
-catalog and     profile, CV,     using an in-memory user key
-cited source    match labels,         |
-facts           source review         +-- query expansion
-ranking         and deployment        +-- rerank <= 32 candidates
-                checklist             +-- chat over <= 20 search results
-                        |                  or <= 12 AI matches
+          /             |              \
+         /              |               \ optional, user initiated
+        v               v                v
+Zero-cost          Device-local       OpenAI or Anthropic
+catalog and        profile, CV,       using a tab-only or
+cited source       optional saved     explicitly device-saved key
+facts              provider keys,          |
+ranking            match labels,           +-- query expansion
+                   source review            +-- rerank <= 32 candidates
+                   and checklist            +-- chat over <= 20 results
+                        |                        or <= 12 AI matches
                         v
              Explicit share/download/email
                         |
@@ -201,44 +213,47 @@ catalog or a shared institutional record.
 
 ## 4. User workflow
 
-### Browse and search
+### Find funding in one workflow
 
 1. Open the public URL.
-2. Search by topic, method, program name, agency, or opportunity number.
-3. Narrow with facets, dates, award size, or special-requirement signals.
-4. Sort and inspect detailed results.
-5. Open the best available official source in one click or export the result
+2. Describe the work with a topic, method, population, goal, program name, or
+   opportunity number.
+3. Optionally add a research profile/CV and filters. These improve the same
+   search; they do not launch separate searches.
+4. Select “Find funding.” No catalog cards appear before this action.
+5. Sort and inspect detailed results.
+6. Open the best available official source in one click or export the result
    set.
 
-### Add reusable profile relevance
+### Save and reuse profile relevance
 
 1. Enter a research description and expertise keywords, or upload a PDF,
    DOCX, TXT, or Markdown CV.
 2. Choose applicant context and career stage.
-3. Use “Search with my profile” to rank the catalog locally with zero AI
-   calls.
-4. Leave “remember” enabled to restore the profile, extracted CV text,
-   filters, and sort on that device.
-5. Remove the CV extract, disable remembering, or clear the profile at any
-   time.
+3. Select “Use this profile in my funding searches.”
+4. Optionally select “Save profile on this device.” Saving confirms
+   persistence but does not launch a search.
+5. Select the same “Find funding” action used for keyword/filter searches.
+6. Remove the CV extract or clear the profile at any time.
 
 ### Add AI refinement
 
-1. Use the research profile, expertise keywords, and optional CV excerpt.
-2. Choose a provider and enter a key for the current tab.
-3. Ask AI to build and rank a best-fit shortlist.
-4. Review the shortlist, scores, specific rationale, and caveats.
-5. Ask grounded follow-up questions such as:
+1. Run the combined catalog search.
+2. Open the optional AI settings, choose a provider, and enter a key.
+3. Keep the key tab-only or explicitly save it on this device.
+4. Select “Refine these results with AI.”
+5. Review the shortlist, scores, specific rationale, and caveats.
+6. Ask grounded follow-up questions such as:
    - “Which allow a university to lead?”
    - “Keep only those closing after October.”
    - “Which require cost share?”
    - “Compare the top three on fit and timing.”
-6. Return to the unmodified catalog at any time.
+7. Return to the unmodified catalog at any time.
 
 ### Chat with ordinary results
 
 1. Run any keyword or filtered catalog search.
-2. Use the visible “Chat with results” panel.
+2. Use “Ask about these results,” shown with the returned result set.
 3. Ask about the top 20 current results without first running AI refinement.
 4. Let chat narrow the displayed results only when explicitly requested.
 
@@ -279,8 +294,12 @@ explicitly invokes refinement or chat:
   12,000 characters, and a bounded selection of public opportunities directly
   to the selected provider;
 - that provider’s billing, retention, and privacy terms apply;
-- the application never proxies, receives, or stores the key;
-- the key remains visible to the running page in memory, so users should use a scoped key with a spending limit; and
+- the application never proxies or receives the key;
+- the key stays in the current tab unless the user explicitly saves it in
+  browser local storage, and either way users should use a scoped key with a
+  spending limit;
+- a saved key is readable by anyone using that browser profile and should not
+  be stored on a shared device; and
 - users should not enter confidential or unpublished information.
 
 The browser-only design cannot provide a secure institutional credential vault. A future institution-managed AI gateway would be a separate architectural decision.
@@ -319,12 +338,13 @@ Phase 1 now includes both the catalog foundation and the first optional refineme
 - comprehensive browser search and BM25 index;
 - Duke-style facets, sorting, details, pagination, and CSV export;
 - visible record count, source, generated time, and stale-data warning;
-- equally prominent deterministic search and AI matching entry points;
+- one guided search that combines keywords, optional profile/CV context, and
+  filters;
 - bounded two-call AI refinement;
-- always-visible chat over ordinary results or the AI shortlist;
-- mobile ordering that places AI matching and chat before filters and results;
-- no browser persistence of API keys (Phase 2 later added explicit,
-  user-controlled profile persistence); and
+- chat integrated with ordinary results or the AI shortlist;
+- an empty initial result state until a user starts a search;
+- explicit optional device-local API-key persistence with visible state and
+  a removal control; and
 - regression coverage for forecasts, expired records, ambiguous rolling language, indexing, generated assets, and workflow safeguards.
 
 The provider adapters have deterministic contract tests for OpenAI Responses
@@ -557,6 +577,9 @@ visitor reuses the compact output.
 
 #### 3D. Deployment review, storage, return, and reporting
 
+- **Implemented:** remove phase/deployment terminology from the normal search
+  path and place invited-tester controls in one collapsed, clearly labeled
+  “Help improve Funding Finder” area that does not affect searching.
 - **Implemented:** autosave source verdicts (`accurate`, `incorrect`,
   `couldn’t verify`), checked field, optional note, deployment checklist, and
   coarse action counts in a separate device-local record.
@@ -656,7 +679,9 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 - Deployment review must be explicit, device-local until handoff, and free of
   profile/CV text, API keys, search text, Funding Finder search URL parameters,
   and chat by default.
-- API keys never enter source control, URLs, exports, or browser storage.
+- API keys never enter source control, URLs, exports, profile storage, or
+  review/evaluation storage. Optional browser credential storage requires an
+  explicit save action and has a visible removal control.
 - The application remains usable on current mobile and desktop browsers.
 - Every added source has an identified maintenance strategy.
 
@@ -714,9 +739,9 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | July 2026 | Replace the 48-record keyword feed with the complete current Grants.gov daily extract. |
 | July 2026 | Make deterministic public search the primary workflow and keep it free of AI calls. |
 | July 2026 | Use AI only for bounded query expansion, reranking, and grounded chat over current results. |
-| July 2026 | Present search and AI matching as equal entry points; keep chat visible before the result list on mobile. |
+| July 2026 | Replace separate keyword/profile/AI entry points with one guided search; show chat with the returned result set on desktop and mobile. |
 | July 2026 | Reject past forecast deadlines and stale undated forecasts instead of treating every unarchived forecast as current. |
-| July 2026 | Remove browser storage as a funding database and permanently exclude API keys from persistence. |
+| July 2026 | Remove browser storage as a funding database; later allow explicit, isolated device-local provider-key storage with status and removal controls. |
 | July 2026 | Treat Duke as a search/discovery design reference, not a data source. |
 | July 2026 | Add a Phase 1.5 evidence layer before pilot work: incremental official detail enrichment, one-click source actions, and strict funding/deadline semantics. |
 | July 2026 | Treat the Albany study as evidence that exact-keyword recommendations require researcher feedback and separate retrieval/reranking evaluation. |
@@ -728,3 +753,4 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | July 2026 | Keep structured Grants.gov dates and amounts authoritative for filters; treat all narrative notice extraction as verification-required evidence. |
 | July 2026 | Collect no silent central telemetry. Autosave deployment review locally and return it only through explicit file share/download/email, then aggregate it in gitignored private folders. |
 | July 2026 | Keep GitHub Actions as the authoritative daily refresh engine; do not move ingestion to Google Sheets. Build any automatic digest from a catalog change feed and a separate consent-based subscription service. |
+| July 2026 | Start with an empty result state, integrate keywords/profile/CV/filters under one “Find funding” action, and move invited-tester evidence checks out of the normal user workflow. |

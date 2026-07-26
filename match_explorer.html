@@ -7,7 +7,7 @@
   <meta name="referrer" content="no-referrer">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://api.openai.com https://api.anthropic.com; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self'">
   <title>Funding Finder</title>
-  <link rel="stylesheet" href="./assets/app.css">
+  <link rel="stylesheet" href="./assets/app.css?v=unified-search-v1">
 </head>
 <body>
   <a class="skip-link" href="#results">Skip to results</a>
@@ -17,39 +17,45 @@
       <span class="brand-mark" aria-hidden="true">F</span>
       <span>
         <strong>Funding Finder</strong>
-        <small>University of Rochester deployment review</small>
+        <small>Search current funding opportunities</small>
       </span>
     </a>
     <div class="catalog-pill" id="catalog-pill" aria-live="polite">
       <span class="status-dot" aria-hidden="true"></span>
-      Loading catalog…
+      Loading catalog...
     </div>
   </header>
 
   <main>
     <section class="hero" aria-labelledby="page-title">
       <div class="hero-copy">
-        <p class="eyebrow">Two ways to find funding</p>
-        <h1 id="page-title">Search directly or build a profile for better matches.</h1>
-        <p class="lede">Browse the complete catalog, reuse a locally saved research profile and CV, or let AI build, rank, and explain a grounded shortlist.</p>
+        <p class="eyebrow">One search, improved by the context you add</p>
+        <h1 id="page-title">Find funding in a few clear steps.</h1>
+        <p class="lede">Start with a topic, then optionally add your profile, CV, or filters. Funding Finder combines everything into one search. AI is an optional second pass over the results—not a separate database.</p>
       </div>
 
-      <div class="discovery-grid">
-        <section class="discovery-card search-discovery" aria-labelledby="catalog-search-heading">
-          <div class="discovery-heading">
-            <p class="eyebrow">Search the catalog</p>
-            <h2 id="catalog-search-heading">Use keywords and filters</h2>
-            <p>Fast, free, and no AI key required.</p>
-          </div>
-          <form class="search-form" id="search-form" role="search">
-            <label class="sr-only" for="query">Search funding opportunities</label>
-            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"/></svg>
-            <input id="query" name="q" type="search" autocomplete="off" placeholder="Try “carbon capture”, “rural health”, or an opportunity number">
-            <button class="button primary search-button" type="submit">Search</button>
-          </form>
+      <ol class="workflow-map" aria-label="Suggested funding search steps">
+        <li><strong>1</strong><span><b>Describe the work</b><small>Recommended</small></span></li>
+        <li><strong>2</strong><span><b>Add context</b><small>Optional profile, CV, and filters</small></span></li>
+        <li><strong>3</strong><span><b>Find and review</b><small>Optional AI refinement afterward</small></span></li>
+      </ol>
 
+      <form class="search-workflow" id="search-form" role="search">
+        <section class="workflow-step primary-step" aria-labelledby="search-step-heading">
+          <div class="step-heading">
+            <span class="step-number">1</span>
+            <div>
+              <p class="eyebrow">Start here</p>
+              <h2 id="search-step-heading">What are you looking to fund?</h2>
+              <p>Use a topic, method, population, goal, or opportunity number. You can leave this blank if your profile or filters provide enough context.</p>
+            </div>
+          </div>
+          <div class="search-form">
+            <label class="sr-only" for="query">Search funding opportunities</label>
+            <input id="query" name="q" type="search" autocomplete="off" placeholder="Example: carbon capture catalysts for sustainable manufacturing">
+          </div>
           <div class="quick-searches" aria-label="Example searches">
-            <span>Explore:</span>
+            <span>Examples:</span>
             <button type="button" data-example-query="carbon capture and utilization">Carbon capture</button>
             <button type="button" data-example-query="early career investigator">Early career</button>
             <button type="button" data-example-query="rural public health">Rural health</button>
@@ -57,223 +63,234 @@
           </div>
         </section>
 
-        <section class="discovery-card ai-discovery" id="ai-start" aria-labelledby="ai-heading">
-          <div class="ai-heading">
-            <span class="spark" aria-hidden="true">✦</span>
+        <section class="workflow-step context-step" aria-labelledby="context-step-heading">
+          <div class="step-heading">
+            <span class="step-number">2</span>
             <div>
-              <p class="eyebrow">Research profile + AI</p>
-              <h2 id="ai-heading">Build your reusable profile</h2>
+              <p class="eyebrow">Improve relevance <span class="optional-label">Optional</span></p>
+              <h2 id="context-step-heading">Add context and narrow the search</h2>
+              <p>Each item you add improves ranking or removes results that do not fit. Skip anything you do not know.</p>
             </div>
           </div>
-          <p class="panel-copy">Describe your work or add a CV. Profile search runs locally; optional AI expands the search and explains the strongest candidates.</p>
 
-          <label class="stacked-field" for="research-profile">
-            What work do you want funded?
-            <textarea id="research-profile" rows="5" placeholder="Example: We develop electrochemical and catalytic routes that turn captured CO₂ into fuels and commodity chemicals. We can lead reactor design, materials synthesis, and techno-economic analysis."></textarea>
-          </label>
+          <div class="context-grid">
+            <details class="context-card profile-builder" id="profile-builder">
+              <summary>
+                <span>
+                  <strong>Research profile and CV</strong>
+                  <small>Improve relevance using your expertise and applicant context</small>
+                </span>
+                <span class="summary-action">Add or edit</span>
+              </summary>
+              <div class="context-card-body">
+                <label class="stacked-field" for="research-profile">
+                  Describe your research
+                  <textarea id="research-profile" rows="4" placeholder="Example: We develop electrochemical and catalytic routes that turn captured CO2 into fuels and chemicals."></textarea>
+                </label>
 
-          <div class="profile-fields">
-            <label>
-              Expertise keywords
-              <input id="expertise-keywords" type="text" autocomplete="off" placeholder="Catalysis, CO₂ conversion, reactor design">
-            </label>
-            <label>
-              Applicant context
-              <select id="applicant-context">
-                <option value="higher_education">College or university</option>
-                <option value="nonprofit">Nonprofit organization</option>
-                <option value="small_business">Small business</option>
-                <option value="individual">Individual investigator</option>
-                <option value="government">Government entity</option>
-                <option value="tribal">Tribal organization</option>
-                <option value="other">Other or mixed team</option>
-              </select>
-            </label>
-            <label>
-              Career stage
-              <select id="career-stage">
-                <option value="any">Any / not specified</option>
-                <option value="trainee">Trainee or postdoctoral</option>
-                <option value="early_career">Early-career investigator</option>
-                <option value="established">Established investigator</option>
-              </select>
-            </label>
+                <div class="profile-fields">
+                  <label>
+                    Expertise keywords
+                    <input id="expertise-keywords" type="text" autocomplete="off" placeholder="Catalysis, CO2 conversion, reactor design">
+                  </label>
+                  <label>
+                    Applicant context
+                    <select id="applicant-context">
+                      <option value="higher_education">College or university</option>
+                      <option value="nonprofit">Nonprofit organization</option>
+                      <option value="small_business">Small business</option>
+                      <option value="individual">Individual investigator</option>
+                      <option value="government">Government entity</option>
+                      <option value="tribal">Tribal organization</option>
+                      <option value="other">Other or mixed team</option>
+                    </select>
+                  </label>
+                  <label>
+                    Career stage
+                    <select id="career-stage">
+                      <option value="any">Any / not specified</option>
+                      <option value="trainee">Trainee or postdoctoral</option>
+                      <option value="early_career">Early-career investigator</option>
+                      <option value="established">Established investigator</option>
+                    </select>
+                  </label>
+                </div>
+
+                <div class="cv-uploader">
+                  <div>
+                    <strong>Add a CV for better relevance</strong>
+                    <span>PDF, DOCX, TXT, or Markdown; parsed in this browser</span>
+                  </div>
+                  <input class="cv-input" id="cv-file" type="file" aria-label="Choose CV" accept=".pdf,.docx,.txt,.md,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,text/markdown">
+                  <div class="cv-status" id="cv-status" aria-live="polite">No CV added.</div>
+                  <button class="text-button hidden" id="remove-cv" type="button">Remove CV</button>
+                </div>
+
+                <div class="profile-options">
+                  <label>
+                    <input id="use-profile" type="checkbox">
+                    <span>Use this profile in my funding searches</span>
+                  </label>
+                  <label>
+                    <input id="include-cv-ai" type="checkbox" checked>
+                    <span>Include a bounded CV excerpt only when I use AI</span>
+                  </label>
+                </div>
+                <p class="profile-storage-note">Your current profile works in this tab. Saving is optional. When saved, the extracted CV text—not the original file—is stored on this device.</p>
+
+                <div class="profile-actions">
+                  <button class="button secondary" id="save-profile" type="button">Save profile on this device</button>
+                  <button class="text-button" id="clear-profile" type="button">Clear profile</button>
+                </div>
+                <div class="profile-status" id="profile-status" aria-live="polite"></div>
+              </div>
+            </details>
+
+            <details class="context-card filter-panel" id="filter-panel">
+              <summary>
+                <span>
+                  <strong>Filters</strong>
+                  <small>Limit by agency, eligibility, deadline, amount, and more</small>
+                </span>
+                <span class="summary-action" id="filter-summary">Add filters</span>
+              </summary>
+              <div class="context-card-body filter-body">
+                <div class="panel-heading">
+                  <div>
+                    <p class="eyebrow">All filters work with keywords and profile context</p>
+                    <h3>Narrow the same search</h3>
+                  </div>
+                  <button class="text-button" id="clear-filters" type="button">Clear filters</button>
+                </div>
+
+                <fieldset class="status-filter">
+                  <legend>Opportunity status</legend>
+                  <label>
+                    <input type="checkbox" id="status-posted" checked>
+                    <span>Open now</span>
+                    <strong id="count-posted">—</strong>
+                  </label>
+                  <label>
+                    <input type="checkbox" id="status-forecasted" checked>
+                    <span>Forecasted</span>
+                    <strong id="count-forecasted">—</strong>
+                  </label>
+                </fieldset>
+
+                <details class="facet" open>
+                  <summary><span>Discipline</span><span class="selection-count" id="selected-discipline"></span></summary>
+                  <div class="facet-list" id="facet-discipline"></div>
+                </details>
+                <details class="facet">
+                  <summary><span>Topic</span><span class="selection-count" id="selected-topic"></span></summary>
+                  <label class="facet-search"><span class="sr-only">Search topics</span><input type="search" data-facet-search="topic" placeholder="Find a topic"></label>
+                  <div class="facet-list" id="facet-topic"></div>
+                </details>
+                <details class="facet">
+                  <summary><span>Agency</span><span class="selection-count" id="selected-agency"></span></summary>
+                  <label class="facet-search"><span class="sr-only">Search agencies</span><input type="search" data-facet-search="agency" placeholder="Find an agency"></label>
+                  <div class="facet-list" id="facet-agency"></div>
+                </details>
+                <details class="facet">
+                  <summary><span>Eligibility</span><span class="selection-count" id="selected-eligibility"></span></summary>
+                  <label class="facet-search"><span class="sr-only">Search eligibility types</span><input type="search" data-facet-search="eligibility" placeholder="Find applicant type"></label>
+                  <div class="facet-list" id="facet-eligibility"></div>
+                </details>
+                <details class="facet">
+                  <summary><span>Funding instrument</span><span class="selection-count" id="selected-funding_instrument"></span></summary>
+                  <div class="facet-list" id="facet-funding_instrument"></div>
+                </details>
+                <details class="facet">
+                  <summary><span>Deadline and award</span></summary>
+                  <div class="range-grid">
+                    <label>Deadline from<input id="deadline-from" type="date"></label>
+                    <label>Deadline through<input id="deadline-to" type="date"></label>
+                  </div>
+                  <label class="number-field">
+                    Minimum per-award amount
+                    <span class="input-prefix">$</span>
+                    <input id="award-min" type="number" min="0" step="1000" inputmode="numeric" placeholder="100,000">
+                  </label>
+                </details>
+                <details class="facet">
+                  <summary><span>Special requirements</span></summary>
+                  <div class="switch-list">
+                    <label><input id="flag-evidence" type="checkbox"><span>Has cited FOA facts</span></label>
+                    <label><input id="flag-preliminary" type="checkbox"><span>Has LOI or preproposal</span></label>
+                    <label><input id="flag-limited" type="checkbox"><span>Potential limited submission</span></label>
+                    <label><input id="flag-early-career" type="checkbox"><span>Early-career signal</span></label>
+                    <label><input id="flag-no-cost-share" type="checkbox"><span>No listed cost share</span></label>
+                  </div>
+                </details>
+              </div>
+            </details>
           </div>
+        </section>
 
-          <div class="cv-uploader">
+        <section class="workflow-step launch-step" aria-labelledby="launch-step-heading">
+          <div class="step-heading">
+            <span class="step-number">3</span>
             <div>
-              <strong>Add a CV for added relevance</strong>
-              <span>PDF, DOCX, TXT, or Markdown · parsed in this browser</span>
+              <p class="eyebrow">Run the combined search</p>
+              <h2 id="launch-step-heading">Find and review your opportunities</h2>
+              <p>Funding Finder will use the keywords, profile, and filters selected above together. It will not show the full catalog until you start a search.</p>
             </div>
-            <input class="cv-input" id="cv-file" type="file" aria-label="Choose CV" accept=".pdf,.docx,.txt,.md,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,text/markdown">
-            <div class="cv-status" id="cv-status" aria-live="polite">No CV added.</div>
-            <button class="text-button hidden" id="remove-cv" type="button">Remove CV from profile</button>
           </div>
-
-          <div class="profile-options">
-            <label>
-              <input id="remember-profile" type="checkbox" checked>
-              <span>Save this profile and current search preferences on this device</span>
-            </label>
-            <label>
-              <input id="include-cv-ai" type="checkbox" checked>
-              <span>Include a bounded CV excerpt when I explicitly run AI matching</span>
-            </label>
+          <div class="launch-actions">
+            <button class="button primary find-button" id="find-funding" type="submit">Find funding</button>
+            <span>Free catalog search. No AI key required.</span>
           </div>
-          <p class="profile-storage-note">When remembered, extracted CV text—not the original file—is stored in this browser profile. Do not use a shared device for private material.</p>
-
-          <div class="profile-actions">
-            <button class="button secondary" id="profile-search" type="button">Search with my profile</button>
-            <button class="text-button" id="clear-profile" type="button">Clear saved profile</button>
-          </div>
-          <div class="profile-status" id="profile-status" aria-live="polite"></div>
+          <div class="search-status" id="search-status" aria-live="polite"></div>
 
           <details class="provider-setup">
             <summary>
-              <span>Connect an AI provider</span>
+              <span>
+                <strong>Optional: refine results with AI</strong>
+                <small>AI reranks a bounded set of results from this same search</small>
+              </span>
               <span id="provider-state">Not configured</span>
             </summary>
-            <div class="provider-fields">
-              <label>
-                Provider
-                <select id="k-provider">
-                  <option value="openai">OpenAI</option>
-                  <option value="anthropic">Anthropic</option>
-                </select>
-              </label>
-              <label>
-                API key
-                <input id="k-key" type="password" autocomplete="new-password" spellcheck="false" placeholder="sk-…">
-              </label>
-              <button class="text-button" id="clear-key" type="button">Clear key</button>
+            <div class="provider-setup-body">
+              <p class="provider-explanation"><strong>What AI changes:</strong> after you search, AI can expand terminology, rerank up to 32 matching opportunities, explain the best fits, and answer questions about those results. It never replaces or searches outside the funding catalog.</p>
+              <div class="provider-fields">
+                <label>
+                  Provider
+                  <select id="k-provider">
+                    <option value="openai">OpenAI</option>
+                    <option value="anthropic">Anthropic</option>
+                  </select>
+                </label>
+                <label>
+                  API key
+                  <input id="k-key" type="password" autocomplete="off" spellcheck="false" placeholder="sk-...">
+                </label>
+              </div>
+              <div class="credential-actions">
+                <button class="button secondary" id="save-key" type="button">Save key on this device</button>
+                <button class="text-button" id="clear-key" type="button">Remove key</button>
+              </div>
+              <div class="credential-status" id="key-storage-status" aria-live="polite"></div>
+              <p class="privacy-note">A saved key stays in this browser's local storage until you remove it. Anyone using this browser profile could use it, so do not save a key on a shared device. Research text and an enabled CV excerpt go directly to the selected provider only when you choose AI refinement or chat.</p>
+              <button class="button ai-button" id="ai-refine" type="button" disabled>
+                <span aria-hidden="true">✦</span>
+                Refine these results with AI
+              </button>
+              <p class="cost-note">AI uses two bounded calls: terminology expansion, then reranking of at most 32 results. Ordinary search makes zero AI calls.</p>
+              <div class="ai-status hidden" id="ai-status" aria-live="polite"></div>
             </div>
-            <p class="privacy-note">Your API key stays in this tab only. Research text and the optional CV excerpt go directly to the selected provider only when you run AI matching or chat.</p>
           </details>
-
-          <button class="button ai-button" id="ai-refine" type="button">
-            <span aria-hidden="true">✦</span>
-            Find my best-fit opportunities
-          </button>
-          <p class="cost-note">Profile search makes zero AI calls. AI matching uses two bounded calls: search expansion, then reranking of at most 32 opportunities.</p>
-          <div class="ai-status hidden" id="ai-status" aria-live="polite"></div>
         </section>
-      </div>
+      </form>
     </section>
 
     <div class="notice error hidden" id="catalog-error" role="alert"></div>
 
     <div class="workspace">
-      <aside class="filter-panel" aria-label="Search filters">
-        <div class="panel-heading">
-          <div>
-            <p class="eyebrow">Narrow results</p>
-            <h2>Filters</h2>
-          </div>
-          <button class="text-button" id="clear-filters" type="button">Clear all</button>
-        </div>
-
-        <fieldset class="status-filter">
-          <legend>Opportunity status</legend>
-          <label>
-            <input type="checkbox" id="status-posted" checked>
-            <span>Open now</span>
-            <strong id="count-posted">—</strong>
-          </label>
-          <label>
-            <input type="checkbox" id="status-forecasted" checked>
-            <span>Forecasted</span>
-            <strong id="count-forecasted">—</strong>
-          </label>
-        </fieldset>
-
-        <details class="facet" open>
-          <summary>
-            <span>Discipline</span>
-            <span class="selection-count" id="selected-discipline"></span>
-          </summary>
-          <div class="facet-list" id="facet-discipline"></div>
-        </details>
-
-        <details class="facet">
-          <summary>
-            <span>Topic</span>
-            <span class="selection-count" id="selected-topic"></span>
-          </summary>
-          <label class="facet-search">
-            <span class="sr-only">Search topics</span>
-            <input type="search" data-facet-search="topic" placeholder="Find a topic">
-          </label>
-          <div class="facet-list" id="facet-topic"></div>
-        </details>
-
-        <details class="facet">
-          <summary>
-            <span>Agency</span>
-            <span class="selection-count" id="selected-agency"></span>
-          </summary>
-          <label class="facet-search">
-            <span class="sr-only">Search agencies</span>
-            <input type="search" data-facet-search="agency" placeholder="Find an agency">
-          </label>
-          <div class="facet-list" id="facet-agency"></div>
-        </details>
-
-        <details class="facet">
-          <summary>
-            <span>Eligibility</span>
-            <span class="selection-count" id="selected-eligibility"></span>
-          </summary>
-          <label class="facet-search">
-            <span class="sr-only">Search eligibility types</span>
-            <input type="search" data-facet-search="eligibility" placeholder="Find applicant type">
-          </label>
-          <div class="facet-list" id="facet-eligibility"></div>
-        </details>
-
-        <details class="facet">
-          <summary>
-            <span>Funding instrument</span>
-            <span class="selection-count" id="selected-funding_instrument"></span>
-          </summary>
-          <div class="facet-list" id="facet-funding_instrument"></div>
-        </details>
-
-        <details class="facet">
-          <summary><span>Deadline and award</span></summary>
-          <div class="range-grid">
-            <label>
-              Deadline from
-              <input id="deadline-from" type="date">
-            </label>
-            <label>
-              Deadline through
-              <input id="deadline-to" type="date">
-            </label>
-          </div>
-          <label class="number-field">
-            Minimum per-award amount
-            <span class="input-prefix">$</span>
-            <input id="award-min" type="number" min="0" step="1000" inputmode="numeric" placeholder="100,000">
-          </label>
-        </details>
-
-        <details class="facet">
-          <summary><span>Special requirements</span></summary>
-          <div class="switch-list">
-            <label><input id="flag-evidence" type="checkbox"><span>Has cited FOA facts</span></label>
-            <label><input id="flag-preliminary" type="checkbox"><span>Has LOI or preproposal</span></label>
-            <label><input id="flag-limited" type="checkbox"><span>Potential limited submission</span></label>
-            <label><input id="flag-early-career" type="checkbox"><span>Early-career signal</span></label>
-            <label><input id="flag-no-cost-share" type="checkbox"><span>No listed cost share</span></label>
-          </div>
-        </details>
-      </aside>
-
       <section class="results-column" aria-labelledby="results-heading">
-        <div class="results-toolbar">
+        <div class="results-toolbar search-not-started" id="results-toolbar">
           <div>
-            <p class="eyebrow" id="results-mode">Public catalog</p>
-            <h2 id="results-heading"><span id="result-count">—</span> <span id="result-label">opportunities</span></h2>
+            <p class="eyebrow" id="results-mode">Ready when you are</p>
+            <h2 id="results-heading"><span id="result-count"></span> <span id="result-label">Your matches will appear here</span></h2>
             <p class="result-range" id="result-range"></p>
           </div>
           <div class="toolbar-actions">
@@ -292,91 +309,84 @@
           </div>
         </div>
 
-        <div class="active-filters hidden" id="active-filters" aria-label="Active filters"></div>
+        <div class="active-filters hidden" id="active-filters" aria-label="Active search context"></div>
         <div class="notice warning hidden" id="stale-warning"></div>
+
+        <section class="ai-panel result-assistant hidden" id="result-assistant" aria-labelledby="chat-heading">
+          <div class="ai-heading">
+            <span class="spark" aria-hidden="true">✦</span>
+            <div>
+              <p class="eyebrow">Optional AI follow-up for this result set</p>
+              <h2 id="chat-heading">Ask about these results</h2>
+            </div>
+          </div>
+          <p class="panel-copy">Chat only receives a bounded set of the opportunities shown below. It does not search a separate source.</p>
+          <section class="chat" id="chat" aria-label="Chat with the current funding results">
+            <p class="chat-summary" id="chat-summary"></p>
+            <div class="suggestion-list" id="chat-suggestions"></div>
+            <div class="messages" id="chat-messages" aria-live="polite"></div>
+            <form class="chat-form" id="chat-form">
+              <label class="sr-only" for="chat-input">Ask about the current funding results</label>
+              <textarea id="chat-input" rows="3" placeholder="Which opportunities best fit a university-led pilot, and why?"></textarea>
+              <button class="button primary" type="submit">Ask</button>
+            </form>
+            <div class="chat-actions">
+              <button class="text-button hidden" id="clear-ai" type="button">Return to the full search results</button>
+              <button class="text-button hidden" id="reset-narrowing" type="button">Restore the original AI shortlist</button>
+            </div>
+          </section>
+          <p class="privacy-note chat-privacy">Chat uses the AI provider configured above. Only the bounded result context, your question, and the profile context you enabled are sent.</p>
+        </section>
+
         <div class="result-list" id="results" aria-live="polite"></div>
 
-        <nav class="pagination" id="pagination" aria-label="Results pages">
+        <nav class="pagination hidden" id="pagination" aria-label="Results pages">
           <button class="button secondary" id="page-prev" type="button">Previous</button>
           <span id="page-label"></span>
           <button class="button secondary" id="page-next" type="button">Next</button>
         </nav>
       </section>
+    </div>
 
-      <aside class="ai-panel" aria-labelledby="chat-heading">
-        <div class="ai-heading">
-          <span class="spark" aria-hidden="true">✦</span>
-          <div>
-            <p class="eyebrow">AI assistant</p>
-            <h2 id="chat-heading">Chat with results</h2>
-          </div>
-        </div>
-        <p class="panel-copy">Ask questions about the opportunities already in your current results. If you run AI matching first, the conversation stays grounded in that shortlist.</p>
-
-        <section class="chat" id="chat" aria-label="Chat with the current funding results">
-          <p class="chat-summary" id="chat-summary"></p>
-          <div class="suggestion-list" id="chat-suggestions"></div>
-          <div class="messages" id="chat-messages" aria-live="polite"></div>
-          <form class="chat-form" id="chat-form">
-            <label class="sr-only" for="chat-input">Ask about the current funding results</label>
-            <textarea id="chat-input" rows="3" placeholder="Which results best fit a university-led pilot, and why?"></textarea>
-            <button class="button primary" type="submit">Ask</button>
-          </form>
-          <div class="chat-actions">
-            <button class="text-button hidden" id="clear-ai" type="button">Return to all search results</button>
-            <button class="text-button hidden" id="reset-narrowing" type="button">Restore the original AI shortlist</button>
-          </div>
-        </section>
-        <p class="privacy-note chat-privacy">Chat uses the provider configured under “Build your reusable profile.” Only the bounded result context, your question, and the profile context you enabled are sent.</p>
+    <details class="feedback-tools" id="feedback-tools">
+      <summary>
+        <span>
+          <strong>Help improve Funding Finder</strong>
+          <small>Optional tools for invited testers; these do not affect your search</small>
+        </span>
+        <span class="summary-action">Open feedback tools</span>
+      </summary>
+      <div class="feedback-tools-body">
+        <p class="feedback-intro">Use this area only if you were asked to test Funding Finder. It collects explicit ratings and source checks on this device so you can choose to send them to the project owner. Nothing is sent automatically.</p>
 
         <section class="evaluation-panel deployment-review-panel" aria-labelledby="deployment-review-heading">
           <div class="evaluation-heading">
             <div>
-              <p class="eyebrow">Phase 3 deployment</p>
-              <h3 id="deployment-review-heading">Verify the evidence</h3>
+              <p class="eyebrow">Source-accuracy testing</p>
+              <h3 id="deployment-review-heading">Check whether cited facts match the official notice</h3>
             </div>
             <strong id="source-review-progress">0 checked</strong>
           </div>
-          <p>Open a cited notice, then mark its extracted facts on the result card. Progress is autosaved on this device.</p>
+          <p>After opening a cited official notice from a result, use the source-check controls that appear on that result card. This checklist records whether the testing workflow itself worked.</p>
           <label class="review-field">
             Reviewer code <span>(optional)</span>
             <input id="reviewer-code" type="text" maxlength="80" autocomplete="off" placeholder="Example: pilot-03">
           </label>
-          <div class="deployment-checks" aria-label="Deployment checks">
+          <div class="deployment-checks" aria-label="Reviewer checklist">
             <label>Search worked
-              <select data-deployment-check="search_worked">
-                <option value="not_tested">Not tested</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-              </select>
+              <select data-deployment-check="search_worked"><option value="not_tested">Not tested</option><option value="yes">Yes</option><option value="no">No</option></select>
             </label>
             <label>Official notice opened
-              <select data-deployment-check="official_notice_opened">
-                <option value="not_tested">Not tested</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-              </select>
+              <select data-deployment-check="official_notice_opened"><option value="not_tested">Not tested</option><option value="yes">Yes</option><option value="no">No</option></select>
             </label>
             <label>Citation landed correctly
-              <select data-deployment-check="citation_landed_correctly">
-                <option value="not_tested">Not tested</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-              </select>
+              <select data-deployment-check="citation_landed_correctly"><option value="not_tested">Not tested</option><option value="yes">Yes</option><option value="no">No</option></select>
             </label>
             <label>Mobile layout was usable
-              <select data-deployment-check="mobile_layout_usable">
-                <option value="not_tested">Not tested</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-              </select>
+              <select data-deployment-check="mobile_layout_usable"><option value="not_tested">Not tested</option><option value="yes">Yes</option><option value="no">No</option></select>
             </label>
             <label>Export or share worked
-              <select data-deployment-check="export_or_share_worked">
-                <option value="not_tested">Not tested</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-              </select>
+              <select data-deployment-check="export_or_share_worked"><option value="not_tested">Not tested</option><option value="yes">Yes</option><option value="no">No</option></select>
             </label>
           </div>
           <label class="review-field">
@@ -384,33 +394,33 @@
             <textarea id="deployment-note" rows="3" maxlength="2000" placeholder="What worked, what was wrong, or what slowed you down?"></textarea>
           </label>
           <div class="evaluation-actions">
-            <button class="button primary" id="send-deployment-review" type="button">Send review</button>
+            <button class="button primary" id="send-deployment-review" type="button">Send feedback</button>
             <button class="button secondary" id="download-deployment-review" type="button">Download copy</button>
-            <button class="text-button" id="clear-deployment-review" type="button">Clear review</button>
+            <button class="text-button" id="clear-deployment-review" type="button">Clear feedback</button>
           </div>
-          <p class="review-privacy">On mobile, “Send review” opens the share sheet with the file attached. On desktop, it downloads the file and opens an email to the project owner. The file excludes API keys, profile/CV text, search text, Funding Finder search URLs, and chat.</p>
+          <p class="review-privacy">On compatible mobile devices, “Send feedback” opens the share sheet with a JSON file attached. On desktop, it downloads the file and opens an addressed email. The file excludes API keys, profile/CV text, search text, Funding Finder search URLs, and chat.</p>
           <div class="evaluation-status" id="deployment-review-status" aria-live="polite"></div>
         </section>
 
         <section class="evaluation-panel" aria-labelledby="evaluation-heading">
           <div class="evaluation-heading">
             <div>
-              <p class="eyebrow">Match-quality evidence</p>
-              <h3 id="evaluation-heading">Rate relevance</h3>
+              <p class="eyebrow">Match-quality testing</p>
+              <h3 id="evaluation-heading">Rate whether opportunities are relevant</h3>
             </div>
             <strong id="feedback-progress">0 reviewed</strong>
           </div>
-          <p>Mark result cards as useful, not relevant, or needing verification. These labels are included in the Phase 3 handoff without profile, CV, search, or chat text.</p>
+          <p>Opening these feedback tools also reveals optional rating controls on result cards. Ratings stay on this device until you export or clear them.</p>
           <div class="evaluation-metrics" id="evaluation-metrics"></div>
           <div class="evaluation-actions">
             <button class="button secondary" id="export-evaluation" type="button">Export match ratings</button>
             <button class="button secondary hidden" id="review-candidates" type="button">Review AI candidates</button>
-            <button class="text-button" id="clear-feedback" type="button">Clear labels</button>
+            <button class="text-button" id="clear-feedback" type="button">Clear ratings</button>
           </div>
           <div class="evaluation-status" id="evaluation-status" aria-live="polite"></div>
         </section>
-      </aside>
-    </div>
+      </div>
+    </details>
   </main>
 
   <footer>
@@ -423,9 +433,10 @@
     <div class="notice error">JavaScript is required to search the opportunity catalog.</div>
   </noscript>
   <script src="./data/opportunities.js"></script>
-  <script src="./assets/profile.js"></script>
+  <script src="./assets/profile.js?v=unified-search-v1"></script>
   <script src="./assets/review.js"></script>
+  <script src="./assets/credentials.js?v=unified-search-v1"></script>
   <script src="./assets/ai-provider.js"></script>
-  <script src="./assets/app.js"></script>
+  <script src="./assets/app.js?v=unified-search-v1"></script>
 </body>
 </html>

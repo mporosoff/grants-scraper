@@ -30,9 +30,10 @@ Cited facts + document hash/version + review queue
           /         |         \
          v          v          v
 Local catalog   Device-local   Optional OpenAI or Anthropic request
-and cited       profile and    using a key held in page memory
-facts           deployment
-ranking         review
+and cited       profile,      using a tab-only or explicitly
+facts           optional      device-saved provider key
+ranking         provider keys,
+                and review
                     |
                     v
           Explicit file share/download/email
@@ -104,7 +105,7 @@ The repository must not contain:
 
 ## Device-local and page-memory information
 
-When the user leaves “remember” enabled, one browser-local profile record
+When the user explicitly saves a profile, one browser-local profile record
 contains the research description, expertise keywords, applicant/career
 context, extracted CV text, and search preferences. Extracted CV text is
 bounded to 120,000 characters. The original CV file is not retained. A
@@ -116,9 +117,13 @@ boundary, not an institutional credential vault or a local copy of the
 funding catalog. Shared search URLs take precedence over saved profile
 ranking until the user activates it.
 
-The API key, AI shortlist, and chat exist only in page memory. Reloading or
-closing the tab removes them. They are never written to `localStorage`,
-`sessionStorage`, cookies, a URL, exports, GitHub, or a central database.
+The AI shortlist and chat exist only in page memory. An API key is also
+tab-only by default. The user may explicitly save one key per provider in a
+separate `funding-finder.credentials.v1` local-storage record; the interface
+shows whether the key is entered, saved, loaded, or removed. A saved key is
+available to anyone using that browser profile, so it should not be used on a
+shared device. Keys are never placed in the profile, evaluation/review records,
+`sessionStorage`, cookies, URLs, exports, GitHub, or a central database.
 
 When AI is invoked, the browser sends enabled profile context, at most 12,000
 characters of extracted CV text, and a bounded set of public opportunity text
@@ -171,9 +176,13 @@ Phase 1 through Phase 3 release verification covers:
 - confirm the page reports roughly the expected open and forecasted counts;
 - search a known phrase and opportunity number;
 - verify typed search text has readable contrast;
-- verify AI matching and “Chat with results” appear before the result list on mobile;
-- upload a TXT CV, activate profile ranking, reload, and confirm that the
-  profile/CV extract/preferences return while the API key does not;
+- verify the initial page contains no opportunity cards and that keywords,
+  profile/CV context, and filters all feed the same “Find funding” action;
+- verify “Ask about these results” appears with the result set on mobile;
+- upload a TXT CV, explicitly save the profile, reload, and confirm that the
+  profile/CV extract/preferences return;
+- save a fake provider key, reload, confirm the interface reports it loaded,
+  remove it, and confirm the credential record is gone;
 - confirm PDF.js and Mammoth are served locally and profile search makes no
   network request;
 - label a result, select a reason, reload, and export a privacy-safe Phase 2
