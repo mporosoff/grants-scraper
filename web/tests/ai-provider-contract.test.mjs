@@ -105,3 +105,24 @@ test("adapter rejects missing keys and reports provider failures", async () => {
     /OpenAI request failed \(401\).*invalid credential/,
   );
 });
+
+test("keeps only supplied citation identifiers and rejects invented ones", async () => {
+  const provider = await loadProvider();
+  const citations = provider.knownEvidenceCitations(
+    ["evidence-valid", "evidence-invented", "evidence-valid"],
+    [
+      {
+        evidence_id: "evidence-valid",
+        label: "FOA-123 · Deadline · page 4",
+        url: "https://example.test/nofo.pdf#page=4",
+      },
+    ],
+  );
+
+  assert.equal(citations.length, 1);
+  assert.equal(citations[0].evidence_id, "evidence-valid");
+  assert.equal(
+    citations[0].url,
+    "https://example.test/nofo.pdf#page=4",
+  );
+});

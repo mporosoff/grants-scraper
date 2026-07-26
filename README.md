@@ -11,10 +11,11 @@ https://mporosoff.github.io/grants-scraper/
 Anyone can search the comprehensive catalog without an account or API key. The browser provides:
 
 - full-text search across current Grants.gov opportunities;
-- filters for status, discipline, topic, agency, eligibility, instrument, deadline, award size, and special requirements;
+- filters for status, discipline, topic, agency, eligibility, instrument,
+  deadline, award size, cited-FOA availability, and special requirements;
 - relevance and field-based sorting;
 - one-click official FOA, agency-notice, or Grants.gov record actions;
-- expandable evidence details, pagination, and CSV export; and
+- expandable page/section-cited FOA evidence, pagination, and CSV export; and
 - visible catalog source, size, generated time, and freshness.
 
 Users can also build a reusable researcher profile from a research
@@ -33,19 +34,35 @@ OpenAI or Anthropic key to:
 
 The always-visible “Chat with results” panel can also answer questions over the top 20 ordinary search results without requiring a prior AI rerank. On mobile, AI matching and chat appear before the filters and result list.
 
+When the scheduled Phase 3 pipeline has analyzed an official notice, the
+result card shows document version/change status and compact cited facts for
+submission stages, funding, duration, page limits, cost share,
+eligibility/review excerpts, and application components. Each fact opens the
+exact PDF page or HTML section. “Ask AI about this FOA” focuses chat on a
+single result; AI may cite only evidence identifiers that the browser supplied.
+
 The original CV file is never retained. A bounded CV excerpt is sent only when
 the user enables that option and explicitly runs AI matching or chat. The API
 key, shortlist, and chat stay in page memory only; they are never written to
 local storage, session storage, GitHub, URLs, exports, or an application
 database.
 
-Phase 2 result cards include `useful`, `not relevant`, and `needs
+Match-quality controls include `useful`, `not relevant`, and `needs
 verification` labels with reason codes. The explicit evaluation export omits
 API keys, profile text, CV text, and chat, and
 `scripts/evaluate_phase2.py` measures retrieval recall separately from AI
 reranking precision. Reviewers can switch from the 12-result shortlist to the
-pre-reranking candidate set when labeling. The software is pilot-ready; the
-3–5 researcher pilot is the remaining Phase 2 exit criterion.
+pre-reranking candidate set when labeling. The 3–5 researcher pilot is
+deliberately deferred until the Phase 3 deployment batch and review handoff are
+verified.
+
+Phase 3 adds a separate source-verification and deployment-review loop.
+Reviewers can mark cited evidence accurate, incorrect, or unverifiable, check
+the field they inspected, and add a short non-confidential note. This progress
+autosaves only on that device. “Send review” uses the native file share sheet
+where available; otherwise it downloads a privacy-safe JSON file and opens an
+addressed email to the project owner. Returned files can be aggregated into
+private Markdown, JSON, and CSV reports.
 
 ## Data model
 
@@ -56,6 +73,14 @@ official Grants.gov `fetchOpportunity` detail API. It reconciles structured
 deadline and award evidence, preserves supplied deadline time/timezone, and
 selects a direct announcement only when the attachment evidence is defensible.
 Its compact cache is `data/opportunity_enrichment.json`.
+
+A bounded third step retrieves selected official PDF or HTML notices. It uses
+document hashes and HTTP validators to detect changes and avoid unnecessary
+downloads, extracts readable text ephemerally, and publishes only short cited
+facts and a human-review queue. Raw notices and full extracted text are never
+committed. Machine-extracted dates and amounts do not replace structured
+Grants.gov fields used by filters or sorting. Its compact cache is
+`data/document_evidence.json`.
 
 This replaces the former 48-record Chemical and Sustainability Engineering
 feed. The July 26 build contains 1,465 federal opportunities with no deadline
@@ -74,17 +99,22 @@ support it.
 |---|---|
 | `index.html` | Redirects GitHub Pages to the application |
 | `match_explorer.html` | Public search and AI-refinement interface |
-| `assets/app.js` | Search, profile ranking, feedback, export, AI matching, and chat |
+| `assets/app.js` | Search, cited source evidence, review/export, profile ranking, AI matching, and chat |
 | `assets/profile.js` | Local profile/feedback storage and CV extraction |
+| `assets/review.js` | Local Phase 3 deployment-review storage and privacy-safe handoff |
 | `assets/ai-provider.js` | OpenAI and Anthropic request adapters |
 | `assets/app.css` | Responsive application styles |
 | `assets/vendor/` | Vendored PDF.js and Mammoth parsers and license notices |
 | `data/opportunities.js` | Generated catalog and search index |
 | `data/opportunity_enrichment.json` | Incremental official-detail cache |
+| `data/document_evidence.json` | Incremental document hash/version, cited-fact, and review-queue cache |
 | `scripts/build_catalog.py` | Official XML ingestion and catalog builder |
 | `scripts/enrich_catalog.py` | Official detail reconciliation and FOA selection |
+| `scripts/extract_document_evidence.py` | Official PDF/HTML retrieval, versioning, deterministic fact extraction, and citations |
 | `scripts/evaluate_phase2.py` | Phase 2 retrieval/reranking evaluator |
+| `scripts/summarize_phase3_reviews.py` | Private Phase 3 deployment-review aggregator |
 | `evaluation/README.md` | Pilot export, privacy, and aggregation workflow |
+| `evaluation/PHASE3_REVIEW.md` | Deployment-review storage, return, and reporting procedure |
 | `PROJECT.md` | Product decisions, architecture, and roadmap |
 | `tests/` | Pipeline and public-page regression checks |
 | `docs/HOSTING.md` | Deployment and privacy boundary |
@@ -116,9 +146,23 @@ Then enrich new or changed records:
 python -m scripts.enrich_catalog --catalog data/opportunities.js --cache data/opportunity_enrichment.json --max-updates 250
 ```
 
-The scheduled workflow runs both steps daily, validates a plausible catalog
-size, retests the generated assets, and commits the normalized browser catalog
-and compact enrichment cache. Raw XML archives are not committed.
+Then process a bounded set of new, changed, or due official notices:
 
-See `PROJECT.md` for the completed Phase 1/1.5 scope and Phase 2 implementation,
+```powershell
+python -m scripts.extract_document_evidence --catalog data/opportunities.js --cache data/document_evidence.json --max-documents 45
+```
+
+To summarize review files returned to the project owner:
+
+```powershell
+python -m scripts.summarize_phase3_reviews evaluation/inbox --output-dir evaluation/reports
+```
+
+The scheduled workflow runs all three data steps daily, validates a plausible
+catalog size, retests the generated assets, and commits the normalized browser
+catalog plus compact caches. Raw XML archives, raw notices, full extracted
+notice text, and returned review files are not committed.
+
+See `PROJECT.md` for the completed Phase 1/1.5 scope, deferred Phase 2 pilot,
+and Phase 3 implementation,
 and `docs/HOSTING.md` for the deployment boundary.

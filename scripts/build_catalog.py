@@ -675,6 +675,9 @@ def build_search_index(records):
             (" ".join(record.get("applicant_types") or []), 1),
             (record.get("eligibility_text"), 1),
             (record.get("description"), 1),
+            # Phase 3 adds only compact, cited notice facts here. Raw notice
+            # text is never placed in the browser catalog or search index.
+            (record.get("document_search_text"), 1),
         )
         for value, weight in fields:
             for term, count in Counter(tokenize(value)).items():

@@ -53,17 +53,19 @@ test("uses persistent application storage and removes starter dependencies", asy
   assert.deepEqual(previewFiles, []);
 });
 
-test("supports public catalog search, reusable profiles, and optional AI refinement", async () => {
-  const [prototype, script, profileScript, providerScript] = await Promise.all([
+test("supports public catalog search, cited FOA evidence, reusable profiles, and optional AI refinement", async () => {
+  const [prototype, script, profileScript, reviewScript, providerScript] = await Promise.all([
     readFile(new URL("../match_explorer.html", root), "utf8"),
     readFile(new URL("../assets/app.js", root), "utf8"),
     readFile(new URL("../assets/profile.js", root), "utf8"),
+    readFile(new URL("../assets/review.js", root), "utf8"),
     readFile(new URL("../assets/ai-provider.js", root), "utf8"),
   ]);
 
   assert.match(prototype, /id="query"/);
   assert.match(prototype, /id="facet-discipline"/);
   assert.match(prototype, /id="facet-agency"/);
+  assert.match(prototype, /id="flag-evidence"/);
   assert.match(prototype, /id="sort"/);
   assert.match(prototype, /id="export-csv"/);
   assert.match(prototype, /id="k-provider"/);
@@ -75,6 +77,7 @@ test("supports public catalog search, reusable profiles, and optional AI refinem
   assert.match(prototype, /id="remember-profile"/);
   assert.match(prototype, /id="export-evaluation"/);
   assert.match(prototype, /id="review-candidates"/);
+  assert.match(prototype, /id="send-deployment-review"/);
   assert.match(prototype, /id="ai-refine"/);
   assert.match(prototype, /id="chat-form"/);
   assert.match(prototype, /id="result-label"/);
@@ -84,6 +87,7 @@ test("supports public catalog search, reusable profiles, and optional AI refinem
   assert.doesNotMatch(prototype, /class="chat hidden"/);
   assert.match(prototype, /data\/opportunities\.js/);
   assert.match(prototype, /assets\/profile\.js/);
+  assert.match(prototype, /assets\/review\.js/);
   assert.match(prototype, /assets\/ai-provider\.js/);
   assert.match(prototype, /assets\/app\.js/);
   assert.match(providerScript, /gpt-5\.6-luna/);
@@ -94,8 +98,12 @@ test("supports public catalog search, reusable profiles, and optional AI refinem
   assert.match(profileScript, /globalThis\.FUNDING_PROFILE/);
   assert.match(profileScript, /funding-finder\.profile\.v1/);
   assert.match(profileScript, /funding-finder\.feedback\.v1/);
+  assert.match(reviewScript, /funding-finder\.deployment-review\.v1/);
   assert.match(script, /profileContext\(\{ includeCv: true \}\)/);
   assert.match(script, /function exportEvaluation/);
+  assert.match(script, /function evidenceRows/);
+  assert.match(script, /function sendDeploymentReview/);
+  assert.match(script, /citation_evidence_ids/);
   assert.match(script, /AI retrieval candidate set/);
   assert.match(script, /result-label/);
   assert.match(script, /MAX_AI_CANDIDATES = 32/);
@@ -111,6 +119,7 @@ test("supports public catalog search, reusable profiles, and optional AI refinem
   );
   assert.doesNotMatch(script, /localStorage|sessionStorage/);
   assert.doesNotMatch(profileScript, /sessionStorage|k-key|api_key/);
+  assert.doesNotMatch(reviewScript, /sessionStorage|k-key|api_key/);
   assert.doesNotMatch(
     prototype + script,
     /GRANT_MATCH_FEED|btn-save-search|saved-searches/,

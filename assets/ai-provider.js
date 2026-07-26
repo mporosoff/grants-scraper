@@ -43,6 +43,23 @@
     return `${text.slice(0, maximum - 1).trim()}…`;
   }
 
+  function knownEvidenceCitations(requestedIds, available, maximum = 8) {
+    const byId = new Map(
+      (Array.isArray(available) ? available : [])
+        .filter(item => item && item.evidence_id)
+        .map(item => [String(item.evidence_id), item]),
+    );
+    const limit = Number.isInteger(maximum) && maximum > 0
+      ? Math.min(20, maximum)
+      : 8;
+    return [...new Set(
+      (Array.isArray(requestedIds) ? requestedIds : []).map(String),
+    )]
+      .map(id => byId.get(id))
+      .filter(Boolean)
+      .slice(0, limit);
+  }
+
   async function providerJson({
     provider,
     key,
@@ -117,6 +134,7 @@
     ANTHROPIC_MODEL,
     OPENAI_MODEL,
     extractJson,
+    knownEvidenceCitations,
     openAIResponseText,
     providerJson,
   });

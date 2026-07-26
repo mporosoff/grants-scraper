@@ -1,6 +1,15 @@
 name: Refresh Grants.gov opportunities
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/refresh-opportunities.yml"
+      - "requirements.txt"
+      - "scripts/build_catalog.py"
+      - "scripts/enrich_catalog.py"
+      - "scripts/extract_document_evidence.py"
   schedule:
     - cron: "17 10 * * *"
   workflow_dispatch:
@@ -16,7 +25,7 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
 
     steps:
       - uses: actions/checkout@v6
@@ -35,6 +44,7 @@ jobs:
           node --test
           web/tests/ai-provider-contract.test.mjs
           web/tests/profile-contract.test.mjs
+          web/tests/review-contract.test.mjs
       - name: Build and validate complete public opportunity catalog
         run: >-
           python -m scripts.build_catalog
@@ -48,6 +58,14 @@ jobs:
           --cache data/opportunity_enrichment.json
           --max-updates 250
           --request-delay 0.25
+      - name: Extract citation-backed facts from official notices
+        run: >-
+          python -m scripts.extract_document_evidence
+          --catalog data/opportunities.js
+          --cache data/document_evidence.json
+          --max-documents 45
+          --request-delay 0.2
+          --recheck-days 14
       - name: Run regression tests against generated asset
         run: python -m unittest discover -s tests -v
       - name: Commit refreshed catalog
@@ -55,7 +73,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/opportunities.js data/opportunity_enrichment.json
+          git add data/opportunities.js data/opportunity_enrichment.json data/document_evidence.json
           if git diff --cached --quiet; then
             echo "The generated catalog is unchanged."
           else

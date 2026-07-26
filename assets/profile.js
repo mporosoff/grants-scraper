@@ -70,6 +70,7 @@
       deadline_from: "",
       deadline_to: "",
       minimum_award: "",
+      evidence: false,
       preliminary: false,
       limited: false,
       early_career: false,
@@ -95,6 +96,7 @@
       minimum_award: Number.isFinite(minimumAward) && minimumAward > 0
         ? String(Math.round(minimumAward))
         : "",
+      evidence: source.evidence === true,
       preliminary: source.preliminary === true,
       limited: source.limited === true,
       early_career: source.early_career === true,

@@ -21,13 +21,24 @@ Normalized catalog + facets + BM25 search index
                 v
 Deadline/award evidence + direct source actions
                 |
+                | bounded official PDF/HTML retrieval
+                v
+Cited facts + document hash/version + review queue
+                |
                 v
           GitHub Pages
-          /      |      \
-         v       v       v
-Local catalog  Device-  Optional OpenAI or Anthropic request
-and profile    local    using a key held in page memory
-ranking        profile
+          /         |         \
+         v          v          v
+Local catalog   Device-local   Optional OpenAI or Anthropic request
+and cited       profile and    using a key held in page memory
+facts           deployment
+ranking         review
+                    |
+                    v
+          Explicit file share/download/email
+                    |
+                    v
+       Private gitignored inbox and reports
 ```
 
 The generated public asset is `data/opportunities.js`. It contains open posted
@@ -41,11 +52,21 @@ facts from the unauthenticated official `fetchOpportunity` endpoint. The
 workflow fetches only new or changed records, prunes removed identifiers,
 paces requests, and caps updates per run. It does not store source PDFs.
 
+`data/document_evidence.json` is the Phase 3 cache. The workflow retrieves at
+most 45 new, changed, or recheck-due official sources per run. It stores HTTP
+validators, SHA-256, current/prior version summaries, short evidence quotes,
+page/section citations, deterministic extracted facts, and a human-review
+queue. Primary notices are revalidated after 14 days and lower-priority agency
+pages after 30 days; new and changed sources are processed before routine
+rechecks. Raw PDFs/HTML and full extracted text exist only in the job's memory and
+are discarded. Cached records that disappear from the current catalog are
+marked rather than silently erased so change history remains inspectable.
+
 ## Cost boundary
 
 Keyword search, profile ranking, filtering, sorting, pagination, detail
-expansion, CSV export, CV parsing, and Phase 2 labeling execute locally and
-make zero AI calls.
+expansion, citation display, CSV/review export, CV parsing, and local labeling
+execute locally and make zero AI calls.
 
 AI refinement is explicit and bounded:
 
@@ -64,6 +85,8 @@ The following are intentionally public:
 - normalized public funding records;
 - deterministic topic, discipline, and warning signals;
 - official source links;
+- compact document hashes, versions, quotes, extracted facts, citations, and
+  review-queue signals;
 - the generated search index; and
 - automation logs that contain no credentials or private research text.
 
@@ -74,7 +97,9 @@ The repository must not contain:
 - user chat history;
 - exported user result files;
 - exported pilot-evaluation files;
+- returned Phase 3 deployment-review files and reports;
 - raw daily XML archives; or
+- raw official notices or full extracted notice text; or
 - unnecessary bulk source documents.
 
 ## Device-local and page-memory information
@@ -106,9 +131,20 @@ by default. It contains a non-content comparison fingerprint, catalog version,
 filters, public opportunity metadata, retrieval/AI ranks, provider/model, and
 reason codes.
 
+A separate Phase 3 local record contains explicit source verdicts, the field
+checked, optional reviewer notes, deployment checklist answers, coarse
+viewport/capability data, and aggregate action counts. No event is sent
+automatically. The Phase 3 handoff excludes API keys, profile/CV text, search
+text, Funding Finder search URL/parameters, and chat. On compatible mobile browsers it is shared as
+an attached JSON file through the native share sheet. The desktop fallback
+downloads the file and opens an addressed email. The owner stores returned
+files under gitignored `evaluation/inbox/` and generates private reports under
+gitignored `evaluation/reports/`.
+
 ## Opportunity refresh
 
-`.github/workflows/refresh-opportunities.yml` runs daily:
+`.github/workflows/refresh-opportunities.yml` runs daily, on manual dispatch,
+and once when ingestion/evidence pipeline code reaches `main`:
 
 1. Run regression tests against the application and last successful catalog.
 2. Discover and download the latest official Grants.gov enhanced XML extract.
@@ -116,16 +152,19 @@ reason codes.
 4. Build facet counts and the compact BM25 search index.
 5. Enrich new or changed records with official detail evidence and reconcile
    deadlines, awards, announcement attachments, and agency links.
-6. Fail if record counts, identities, or required fields are implausible.
-7. Retest the newly generated browser assets.
-8. Commit a changed catalog and cache to the default branch for GitHub Pages.
-9. Open or update one owner-alert issue if the refresh fails.
+6. Retrieve and parse a bounded set of new, changed, or due official notices;
+   merge only compact citation-backed evidence and rebuild the search index.
+7. Fail if record counts, identities, or required fields are implausible.
+8. Retest the newly generated browser assets and privacy contracts.
+9. Commit a changed catalog and compact caches to the default branch for
+   GitHub Pages.
+10. Open or update one owner-alert issue if the refresh fails.
 
 The last successful catalog remains available after a failure, and the page visibly warns when its generated timestamp is stale.
 
 ## Deployment verification
 
-Phase 1 and Phase 1.5 release verification covers:
+Phase 1 through Phase 3 release verification covers:
 
 - observe one successful scheduled refresh;
 - confirm the generated commit triggers GitHub Pages;
@@ -143,6 +182,20 @@ Phase 1 and Phase 1.5 release verification covers:
 - exercise at least two facets and each sort mode;
 - export a multi-record CSV;
 - verify direct-FOA, agency-notice, and Grants.gov fallback actions;
+- observe a successful bounded document-evidence batch and inspect its
+  processed/queued/failure counts;
+- verify one PDF citation lands on the listed page and one HTML citation opens
+  the listed section/anchor;
+- verify extracted deadlines, awards, and requirements are labeled
+  machine-extracted and do not replace structured filtering values;
+- simulate a changed document and confirm version increment plus amendment
+  review-queue behavior;
+- mark one cited fact accurate/incorrect/unverifiable, reload, and confirm the
+  source review returns without any automatic network submission;
+- use “Ask AI about this FOA” with a mock response containing one valid and one
+  invented evidence ID; render only the valid citation;
+- send/download one Phase 3 review file, inspect its privacy boundary, place it
+  in `evaluation/inbox/`, and run the private report aggregator;
 - verify program-total funding does not affect per-award filtering or sorting;
 - run the deterministic OpenAI and Anthropic adapter contract tests; and
 - exercise refinement, ordinary-results chat, and a narrowing follow-up with
@@ -160,6 +213,7 @@ Without a service layer, the application does not provide:
 - institutional AI credential management;
 - central usage budgets;
 - shared evaluation data;
+- automatic central telemetry or anonymous review submission;
 - private access control; or
 - administrative review workflows.
 
