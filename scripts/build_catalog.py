@@ -322,22 +322,49 @@ def numeric(value):
 
 def is_current(values, status, as_of):
     archive = parse_extract_date(first(values, "ArchiveDate"))
+    close_field = (
+        "EstimatedSynopsisCloseDate"
+        if status == "forecasted"
+        else "CloseDate"
+    )
+    close = parse_extract_date(first(values, close_field))
+    if close:
+        return close >= as_of
+    if archive:
+        return archive >= as_of
+
     if status == "forecasted":
-        # Current forecasts in the enhanced extract generally have no archive
-        # date yet. Historic forecasts retain a past archive date.
-        return archive is None or archive >= as_of
+        # An undated forecast can remain in the extract long after the planned
+        # funding year. Keep current/future forecasts, but do not present an
+        # old fiscal-year placeholder as an active opportunity.
+        fiscal_year = first(values, "FiscalYear")
+        if fiscal_year and fiscal_year.isdigit():
+            if int(fiscal_year) < as_of.year:
+                return False
+
+        milestone_dates = [
+            parse_extract_date(first(values, field))
+            for field in ("EstimatedAwardDate", "EstimatedProjectStartDate")
+        ]
+        dated_milestones = [value for value in milestone_dates if value]
+        if dated_milestones and max(dated_milestones) < as_of:
+            return False
+
+        # Some forecasts omit every planning date. Treat one that has not
+        # changed in eighteen months as stale instead of retaining it forever.
+        last_updated = parse_extract_date(first(values, "LastUpdatedDate"))
+        if last_updated and (as_of - last_updated).days > 548:
+            return False
+        return True
 
     description = " ".join(values.get("Description") or [])
     rolling = bool(ROLLING_RE.search(description))
-    close = parse_extract_date(first(values, "CloseDate"))
-    if close:
-        return close >= as_of
     if rolling:
-        return archive is None or archive >= as_of
+        return True
     # Grants.gov keeps active, recurring program descriptions that intentionally
     # omit both dates. Include them, but normalization flags them for explicit
     # status verification in the browser.
-    return archive is None or archive >= as_of
+    return True
 
 
 def topic_areas(title, description, categories):
@@ -437,10 +464,12 @@ def normalize_element(element, as_of):
         "close_date_note": close_note,
         "archive_date": archive_date,
         "status_verification_required": (
-            status == "posted"
-            and not close_date
+            not close_date
             and not archive_date
-            and not bool(ROLLING_RE.search(text_blob))
+            and (
+                status == "forecasted"
+                or not bool(ROLLING_RE.search(text_blob))
+            )
         ),
         "last_updated": iso_date(first(values, "LastUpdatedDate")),
         "estimated_award_date": iso_date(

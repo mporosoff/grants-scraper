@@ -75,6 +75,31 @@ class CatalogExtractTests(unittest.TestCase):
 
         self.assertFalse(is_current(values, "posted", date(2026, 7, 25)))
 
+    def test_expired_forecast_deadline_is_not_current(self):
+        values = {
+            "EstimatedSynopsisCloseDate": ["12052019"],
+            "LastUpdatedDate": ["12022019"],
+            "FiscalYear": ["2020"],
+        }
+
+        self.assertFalse(is_current(values, "forecasted", date(2026, 7, 25)))
+
+    def test_undated_forecast_from_old_fiscal_year_is_not_current(self):
+        values = {
+            "LastUpdatedDate": ["07112025"],
+            "FiscalYear": ["2025"],
+        }
+
+        self.assertFalse(is_current(values, "forecasted", date(2026, 7, 25)))
+
+    def test_recent_undated_forecast_for_current_year_is_current(self):
+        values = {
+            "LastUpdatedDate": ["07202026"],
+            "FiscalYear": ["2026"],
+        }
+
+        self.assertTrue(is_current(values, "forecasted", date(2026, 7, 25)))
+
     def test_reads_zip_and_builds_searchable_catalog(self):
         with TemporaryDirectory() as directory:
             archive_path = Path(directory) / "extract.zip"

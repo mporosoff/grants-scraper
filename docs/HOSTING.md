@@ -25,7 +25,7 @@ Local browser       Optional OpenAI or Anthropic request
 search/filter       using a key held in page memory
 ```
 
-The generated public asset is `data/opportunities.js`. It contains current posted and forecasted records, facet counts, and the term postings needed for local BM25 search.
+The generated public asset is `data/opportunities.js`. It contains open posted and current forecasted records, facet counts, and the term postings needed for local BM25 search. Records with past posted or estimated forecast deadlines are rejected, and undated forecasts must pass fiscal-year and recency checks.
 
 ## Cost boundary
 
@@ -36,7 +36,7 @@ AI refinement is explicit and bounded:
 - one call translates a research description into retrieval terms;
 - local search selects at most 32 candidates;
 - one call reranks those candidates into at most 12 matches; and
-- later chat calls receive only the current shortlist and recent conversation.
+- later chat calls receive at most the top 20 ordinary results or the current 12-record AI shortlist plus recent conversation.
 
 This avoids sending the full catalog to a model and avoids model cost for ordinary browsing.
 
@@ -74,7 +74,7 @@ When AI is invoked, the browser sends the research description and a bounded set
 
 1. Run regression tests against the application and last successful catalog.
 2. Discover and download the latest official Grants.gov enhanced XML extract.
-3. Stream, normalize, deduplicate, and filter current records.
+3. Stream, normalize, deduplicate, reject past deadlines, and remove stale undated forecasts.
 4. Build facet counts and the compact BM25 search index.
 5. Fail if record counts, identities, or required fields are implausible.
 6. Retest the newly generated browser asset.
@@ -91,6 +91,8 @@ Before declaring Phase 1 complete in production:
 - confirm the generated commit triggers GitHub Pages;
 - confirm the page reports roughly the expected open and forecasted counts;
 - search a known phrase and opportunity number;
+- verify typed search text has readable contrast;
+- verify AI matching and “Chat with results” appear before the result list on mobile;
 - exercise at least two facets and each sort mode;
 - export a multi-record CSV;
 - verify an official link;

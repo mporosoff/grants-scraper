@@ -29,24 +29,78 @@
   <main>
     <section class="hero" aria-labelledby="page-title">
       <div class="hero-copy">
-        <p class="eyebrow">Search first. Use AI only when it helps.</p>
-        <h1 id="page-title">Find funding without fighting a database.</h1>
-        <p class="lede">Search every current opportunity in the public catalog, then narrow by deadline, discipline, eligibility, agency, award, and more.</p>
+        <p class="eyebrow">Two ways to find funding</p>
+        <h1 id="page-title">Search directly or let AI find the best fits.</h1>
+        <p class="lede">Browse open and current forecasted opportunities yourself, or describe your work and let AI build, rank, and explain a grounded shortlist.</p>
       </div>
 
-      <form class="search-form" id="search-form" role="search">
-        <label class="sr-only" for="query">Search funding opportunities</label>
-        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"/></svg>
-        <input id="query" name="q" type="search" autocomplete="off" placeholder="Try “carbon capture”, “rural health”, or an opportunity number">
-        <button class="button primary search-button" type="submit">Search</button>
-      </form>
+      <div class="discovery-grid">
+        <section class="discovery-card search-discovery" aria-labelledby="catalog-search-heading">
+          <div class="discovery-heading">
+            <p class="eyebrow">Search the catalog</p>
+            <h2 id="catalog-search-heading">Use keywords and filters</h2>
+            <p>Fast, free, and no AI key required.</p>
+          </div>
+          <form class="search-form" id="search-form" role="search">
+            <label class="sr-only" for="query">Search funding opportunities</label>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"/></svg>
+            <input id="query" name="q" type="search" autocomplete="off" placeholder="Try “carbon capture”, “rural health”, or an opportunity number">
+            <button class="button primary search-button" type="submit">Search</button>
+          </form>
 
-      <div class="quick-searches" aria-label="Example searches">
-        <span>Explore:</span>
-        <button type="button" data-example-query="carbon capture and utilization">Carbon capture</button>
-        <button type="button" data-example-query="early career investigator">Early career</button>
-        <button type="button" data-example-query="rural public health">Rural health</button>
-        <button type="button" data-example-query="artificial intelligence manufacturing">AI + manufacturing</button>
+          <div class="quick-searches" aria-label="Example searches">
+            <span>Explore:</span>
+            <button type="button" data-example-query="carbon capture and utilization">Carbon capture</button>
+            <button type="button" data-example-query="early career investigator">Early career</button>
+            <button type="button" data-example-query="rural public health">Rural health</button>
+            <button type="button" data-example-query="artificial intelligence manufacturing">AI + manufacturing</button>
+          </div>
+        </section>
+
+        <section class="discovery-card ai-discovery" id="ai-start" aria-labelledby="ai-heading">
+          <div class="ai-heading">
+            <span class="spark" aria-hidden="true">✦</span>
+            <div>
+              <p class="eyebrow">AI matching</p>
+              <h2 id="ai-heading">Describe your research</h2>
+            </div>
+          </div>
+          <p class="panel-copy">AI turns your description into a catalog search, compares the strongest candidates, and explains why each opportunity may fit.</p>
+
+          <label class="stacked-field" for="research-profile">
+            What work do you want funded?
+            <textarea id="research-profile" rows="5" placeholder="Example: We develop electrochemical and catalytic routes that turn captured CO₂ into fuels and commodity chemicals. We can lead reactor design, materials synthesis, and techno-economic analysis."></textarea>
+          </label>
+
+          <details class="provider-setup">
+            <summary>
+              <span>Connect an AI provider</span>
+              <span id="provider-state">Not configured</span>
+            </summary>
+            <div class="provider-fields">
+              <label>
+                Provider
+                <select id="k-provider">
+                  <option value="openai">OpenAI</option>
+                  <option value="anthropic">Anthropic</option>
+                </select>
+              </label>
+              <label>
+                API key
+                <input id="k-key" type="password" autocomplete="new-password" spellcheck="false" placeholder="sk-…">
+              </label>
+              <button class="text-button" id="clear-key" type="button">Clear key</button>
+            </div>
+            <p class="privacy-note">Your key and research text stay in this tab only. Requests go directly from your browser to the selected provider.</p>
+          </details>
+
+          <button class="button ai-button" id="ai-refine" type="button">
+            <span aria-hidden="true">✦</span>
+            Find my best-fit opportunities
+          </button>
+          <p class="cost-note">Uses two bounded model calls: search expansion, then reranking of at most 32 opportunities.</p>
+          <div class="ai-status hidden" id="ai-status" aria-live="polite"></div>
+        </section>
       </div>
     </section>
 
@@ -192,68 +246,31 @@
         </nav>
       </section>
 
-      <aside class="ai-panel" aria-labelledby="ai-heading">
+      <aside class="ai-panel" aria-labelledby="chat-heading">
         <div class="ai-heading">
           <span class="spark" aria-hidden="true">✦</span>
           <div>
-            <p class="eyebrow">Optional refinement</p>
-            <h2 id="ai-heading">Ask AI to find the best fits</h2>
+            <p class="eyebrow">AI assistant</p>
+            <h2 id="chat-heading">Chat with results</h2>
           </div>
         </div>
-        <p class="panel-copy">Describe the work you want funded. AI expands the search, reviews a small candidate set, and explains the shortlist. Normal search remains free.</p>
+        <p class="panel-copy">Ask questions about the opportunities already in your current results. If you run AI matching first, the conversation stays grounded in that shortlist.</p>
 
-        <label class="stacked-field" for="research-profile">
-          Research or project description
-          <textarea id="research-profile" rows="7" placeholder="Example: We develop electrochemical and catalytic routes that turn captured CO₂ into fuels and commodity chemicals. We can lead reactor design, materials synthesis, and techno-economic analysis."></textarea>
-        </label>
-
-        <details class="provider-setup">
-          <summary>
-            <span>AI provider</span>
-            <span id="provider-state">Not configured</span>
-          </summary>
-          <div class="provider-fields">
-            <label>
-              Provider
-              <select id="k-provider">
-                <option value="openai">OpenAI</option>
-                <option value="anthropic">Anthropic</option>
-              </select>
-            </label>
-            <label>
-              API key
-              <input id="k-key" type="password" autocomplete="new-password" spellcheck="false" placeholder="sk-…">
-            </label>
-            <button class="text-button" id="clear-key" type="button">Clear key</button>
-          </div>
-          <p class="privacy-note">The key and research text stay in page memory only and disappear when this tab closes or reloads. A refinement sends the research text and a limited set of public opportunities directly to the selected provider.</p>
-        </details>
-
-        <button class="button ai-button" id="ai-refine" type="button">
-          <span aria-hidden="true">✦</span>
-          Refine current search
-        </button>
-        <p class="cost-note">Uses two bounded model calls: search expansion, then reranking of at most 32 opportunities.</p>
-        <div class="ai-status hidden" id="ai-status" aria-live="polite"></div>
-
-        <section class="chat hidden" id="chat" aria-labelledby="chat-heading">
-          <div class="chat-header">
-            <div>
-              <p class="eyebrow">Grounded follow-up</p>
-              <h3 id="chat-heading">Ask the shortlist</h3>
-            </div>
-            <button class="text-button" id="clear-ai" type="button">Back to search</button>
-          </div>
+        <section class="chat" id="chat" aria-label="Chat with the current funding results">
           <p class="chat-summary" id="chat-summary"></p>
           <div class="suggestion-list" id="chat-suggestions"></div>
           <div class="messages" id="chat-messages" aria-live="polite"></div>
           <form class="chat-form" id="chat-form">
-            <label class="sr-only" for="chat-input">Ask about the shortlisted opportunities</label>
-            <textarea id="chat-input" rows="3" placeholder="Which opportunities fit a university-led pilot and close after October?"></textarea>
+            <label class="sr-only" for="chat-input">Ask about the current funding results</label>
+            <textarea id="chat-input" rows="3" placeholder="Which results best fit a university-led pilot, and why?"></textarea>
             <button class="button primary" type="submit">Ask</button>
           </form>
-          <button class="text-button hidden" id="reset-narrowing" type="button">Restore the original AI shortlist</button>
+          <div class="chat-actions">
+            <button class="text-button hidden" id="clear-ai" type="button">Return to all search results</button>
+            <button class="text-button hidden" id="reset-narrowing" type="button">Restore the original AI shortlist</button>
+          </div>
         </section>
+        <p class="privacy-note chat-privacy">Chat uses the provider configured under “Describe your research.” Only the bounded result context and your question are sent.</p>
       </aside>
     </div>
   </main>
