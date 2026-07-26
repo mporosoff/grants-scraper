@@ -74,6 +74,10 @@ An incremental second step enriches only new or changed records through the
 official Grants.gov `fetchOpportunity` detail API. It reconciles structured
 deadline and award evidence, preserves supplied deadline time/timezone, and
 selects a direct announcement only when the attachment evidence is defensible.
+When Grants.gov drops spacing from an NSF synopsis, the same step replaces
+only that damaged prose with the synopsis from the linked official NSF funding
+page and rebuilds the search index. Successful NSF text is cached for 14 days;
+an unparseable agency page leaves the Grants.gov text unchanged.
 Its compact cache is `data/opportunity_enrichment.json`.
 
 A bounded third step retrieves selected official PDF or HTML notices. It uses

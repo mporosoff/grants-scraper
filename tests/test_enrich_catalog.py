@@ -3,8 +3,10 @@ import unittest
 
 from scripts.enrich_catalog import (
     compact_detail,
+    description_spacing_issue_count,
     empty_cache,
     enrich_catalog,
+    extract_nsf_synopsis,
     merge_detail,
     select_primary_document,
 )
@@ -111,6 +113,42 @@ def detail_response(close_date="Sep 30, 2026 12:00:00 AM EDT"):
 
 
 class EnrichmentTests(unittest.TestCase):
+    def test_extracts_authoritative_nsf_synopsis_without_breaking_inline_text(self):
+        html = """
+        <main>
+          <div class="field field-funding-synopsis">
+            <div class="label__above"><h2>Synopsis</h2></div>
+            <p>The&nbsp;<strong>Thermal Transport Processes</strong>&nbsp;program
+            supports new&nbsp;advances in thermal science.</p>
+            <ul><li><strong>T</strong><strong>hermal systems</strong> matter.</li></ul>
+          </div>
+        </main>
+        """
+
+        synopsis = extract_nsf_synopsis(html)
+
+        self.assertIn(
+            "The Thermal Transport Processes program supports new advances",
+            synopsis,
+        )
+        self.assertIn("• Thermal systems matter.", synopsis)
+        self.assertNotIn("TheThermal", synopsis)
+        self.assertNotIn("T hermal", synopsis)
+
+    def test_detects_high_confidence_description_spacing_damage(self):
+        damaged = (
+            "TheThermal Transport Processesprogram supports research."
+            "Projects should be clear;applications must be complete."
+        )
+
+        self.assertGreater(description_spacing_issue_count(damaged), 0)
+        self.assertEqual(
+            description_spacing_issue_count(
+                "The Thermal Transport Processes program supports research."
+            ),
+            0,
+        )
+
     def test_selects_explicit_revised_nofo_instead_of_supplement(self):
         attachments = [
             {
@@ -226,6 +264,151 @@ class EnrichmentTests(unittest.TestCase):
         self.assertEqual(
             enriched_again["diagnostics"]["detail_enrichment"][
                 "refreshed_count"
+            ],
+            0,
+        )
+
+    def test_replaces_damaged_grants_text_with_cached_official_nsf_synopsis(self):
+        record = base_record()
+        record.update(
+            {
+                "agency": "U.S. National Science Foundation",
+                "agency_code": "NSF",
+                "description": (
+                    "TheThermal Transport Processesprogram supports "
+                    "newadvances in thermal science."
+                ),
+            }
+        )
+        catalog = {
+            "generated_at": "2026-07-25T14:00:00Z",
+            "record_count": 1,
+            "source": {"name": "Grants.gov"},
+            "diagnostics": {},
+            "opportunities": [record],
+        }
+        detail = detail_response()
+        detail["synopsis"]["agencyName"] = (
+            "U.S. National Science Foundation"
+        )
+        detail["synopsis"]["agencyDetails"] = {
+            "agencyName": "U.S. National Science Foundation"
+        }
+        detail["synopsis"]["fundingDescLinkUrl"] = (
+            "https://www.nsf.gov/funding/opportunities/thermal-processes"
+        )
+        detail_calls = []
+        agency_calls = []
+
+        def detail_fetcher(opportunity_id):
+            detail_calls.append(opportunity_id)
+            return {"data": detail}
+
+        def agency_fetcher(url):
+            agency_calls.append(url)
+            return {
+                "text": (
+                    "The Thermal Transport Processes program supports new "
+                    "advances in thermal science and engineering research."
+                ),
+                "source_url": (
+                    "https://www.nsf.gov/funding/opportunities/"
+                    "thermal-processes"
+                ),
+            }
+
+        enriched, cache = enrich_catalog(
+            catalog,
+            empty_cache(),
+            max_updates=10,
+            max_agency_updates=10,
+            request_delay=0,
+            fetcher=detail_fetcher,
+            agency_synopsis_fetcher=agency_fetcher,
+            now=datetime(2026, 7, 25, 14, tzinfo=timezone.utc),
+        )
+        enriched_again, cache = enrich_catalog(
+            catalog,
+            cache,
+            max_updates=10,
+            max_agency_updates=10,
+            request_delay=0,
+            fetcher=detail_fetcher,
+            agency_synopsis_fetcher=agency_fetcher,
+            now=datetime(2026, 7, 26, 14, tzinfo=timezone.utc),
+        )
+
+        opportunity = enriched["opportunities"][0]
+        self.assertEqual(detail_calls, ["360001"])
+        self.assertEqual(len(agency_calls), 1)
+        self.assertIn("The Thermal Transport Processes", opportunity["description"])
+        self.assertEqual(
+            opportunity["description_source"],
+            "Official NSF funding page",
+        )
+        self.assertIn("thermal", enriched["search_index"]["postings"])
+        self.assertEqual(
+            enriched_again["opportunities"][0]["description"],
+            opportunity["description"],
+        )
+
+    def test_backs_off_after_an_official_nsf_page_cannot_be_parsed(self):
+        record = base_record()
+        record.update(
+            {
+                "agency": "U.S. National Science Foundation",
+                "agency_code": "NSF",
+                "description": "TheBroken synopsis has spacing damage.",
+            }
+        )
+        catalog = {
+            "generated_at": "2026-07-25T14:00:00Z",
+            "record_count": 1,
+            "source": {"name": "Grants.gov"},
+            "diagnostics": {},
+            "opportunities": [record],
+        }
+        detail = detail_response()
+        detail["synopsis"]["fundingDescLinkUrl"] = (
+            "https://www.nsf.gov/funding/opportunities/missing-synopsis"
+        )
+        agency_calls = []
+
+        def agency_fetcher(url):
+            agency_calls.append(url)
+            raise RuntimeError("no synopsis section")
+
+        first, cache = enrich_catalog(
+            catalog,
+            empty_cache(),
+            max_updates=10,
+            max_agency_updates=10,
+            request_delay=0,
+            fetcher=lambda opportunity_id: {"data": detail},
+            agency_synopsis_fetcher=agency_fetcher,
+            now=datetime(2026, 7, 25, 14, tzinfo=timezone.utc),
+        )
+        second, cache = enrich_catalog(
+            catalog,
+            cache,
+            max_updates=10,
+            max_agency_updates=10,
+            request_delay=0,
+            fetcher=lambda opportunity_id: {"data": detail},
+            agency_synopsis_fetcher=agency_fetcher,
+            now=datetime(2026, 7, 26, 14, tzinfo=timezone.utc),
+        )
+
+        self.assertEqual(len(agency_calls), 1)
+        self.assertEqual(
+            first["diagnostics"]["detail_enrichment"][
+                "agency_synopsis_failed_count"
+            ],
+            1,
+        )
+        self.assertEqual(
+            second["diagnostics"]["detail_enrichment"][
+                "agency_synopsis_failed_count"
             ],
             0,
         )
