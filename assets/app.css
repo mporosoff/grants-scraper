@@ -194,11 +194,10 @@ main {
 }
 
 .hero-copy,
-.search-form,
-.quick-searches {
+.discovery-grid {
   position: relative;
   z-index: 1;
-  max-width: 1050px;
+  max-width: 1240px;
   margin-right: auto;
   margin-left: auto;
 }
@@ -238,6 +237,54 @@ h1 {
   font-size: clamp(1rem, 2vw, 1.23rem);
 }
 
+.discovery-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(340px, .9fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.discovery-card {
+  padding: 22px;
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 16px;
+}
+
+.search-discovery {
+  background: rgba(8, 28, 52, .4);
+  box-shadow: 0 18px 48px rgba(5, 18, 36, .18);
+}
+
+.ai-discovery {
+  color: var(--ink);
+  background: rgba(255, 255, 255, .98);
+  box-shadow: 0 18px 48px rgba(5, 18, 36, .22);
+}
+
+.discovery-heading {
+  margin-bottom: 15px;
+}
+
+.discovery-heading h2,
+.ai-discovery h2 {
+  margin-bottom: 4px;
+  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+}
+
+.discovery-heading p:last-child {
+  margin-bottom: 0;
+  color: #d5e2ef;
+  font-size: .84rem;
+}
+
+.ai-discovery .eyebrow {
+  color: var(--blue);
+}
+
+.ai-discovery .panel-copy {
+  color: #53647a;
+}
+
 .search-form {
   display: grid;
   grid-template-columns: 28px minmax(0, 1fr) auto;
@@ -267,10 +314,17 @@ h1 {
   width: 100%;
   min-height: 49px;
   padding: 8px 12px;
+  color: var(--ink);
+  caret-color: var(--ink);
   font-size: 1.05rem;
   background: transparent;
   border: 0;
   outline: 0;
+}
+
+.search-form input::placeholder {
+  color: #6b778a;
+  opacity: 1;
 }
 
 .button {
@@ -340,6 +394,7 @@ h1 {
 .workspace {
   display: grid;
   grid-template-columns: minmax(220px, 270px) minmax(480px, 1fr) minmax(285px, 345px);
+  grid-template-areas: "filters results assistant";
   gap: 18px;
   width: min(1760px, 100%);
   margin: 0 auto;
@@ -365,6 +420,7 @@ h1 {
 }
 
 .filter-panel {
+  grid-area: filters;
   padding-bottom: 10px;
 }
 
@@ -587,6 +643,7 @@ textarea:focus {
 }
 
 .results-column {
+  grid-area: results;
   min-width: 0;
   padding: 22px;
 }
@@ -937,6 +994,7 @@ textarea:focus {
 }
 
 .ai-panel {
+  grid-area: assistant;
   padding: 20px;
 }
 
@@ -1068,9 +1126,7 @@ textarea:focus {
 }
 
 .chat {
-  margin-top: 18px;
-  padding-top: 17px;
-  border-top: 1px solid var(--line);
+  margin-top: 12px;
 }
 
 .chat-header h3 {
@@ -1153,8 +1209,21 @@ textarea:focus {
   margin-top: 7px;
 }
 
-#reset-narrowing {
+.chat-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
   margin-top: 8px;
+}
+
+.chat-privacy {
+  margin: 14px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+#reset-narrowing {
+  margin-top: 0;
 }
 
 footer {
@@ -1171,12 +1240,20 @@ footer p {
 @media (max-width: 1220px) {
   .workspace {
     grid-template-columns: minmax(220px, 270px) minmax(0, 1fr);
+    grid-template-areas:
+      "assistant assistant"
+      "filters results";
   }
 
   .ai-panel {
     position: static;
-    grid-column: 2;
     max-height: none;
+  }
+}
+
+@media (max-width: 960px) {
+  .discovery-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -1206,26 +1283,20 @@ footer p {
 
   .workspace {
     grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "assistant"
+      "filters"
+      "results";
   }
 
   .filter-panel,
   .ai-panel {
     position: static;
-    grid-column: auto;
     max-height: none;
   }
 
-  .filter-panel {
-    order: 1;
-  }
-
   .results-column {
-    order: 2;
     padding: 16px;
-  }
-
-  .ai-panel {
-    order: 3;
   }
 
   .results-toolbar {
@@ -1261,6 +1332,10 @@ footer p {
 
   .hero {
     padding: 34px 16px 32px;
+  }
+
+  .discovery-card {
+    padding: 16px;
   }
 
   .quick-searches span {

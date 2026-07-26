@@ -22,6 +22,9 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         application_js = (
             REPOSITORY_ROOT / "assets" / "app.js"
         ).read_text(encoding="utf-8")
+        application_css = (
+            REPOSITORY_ROOT / "assets" / "app.css"
+        ).read_text(encoding="utf-8")
 
         self.assertIn('id="query"', explorer_html)
         self.assertIn('id="facet-discipline"', explorer_html)
@@ -33,6 +36,8 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn('id="research-profile"', explorer_html)
         self.assertIn('id="ai-refine"', explorer_html)
         self.assertIn('id="chat-form"', explorer_html)
+        self.assertIn('<section class="chat" id="chat"', explorer_html)
+        self.assertIn("Chat with results", explorer_html)
         self.assertIn("Export CSV", explorer_html)
         self.assertIn(
             '<script src="./data/opportunities.js"></script>',
@@ -44,8 +49,19 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         )
         self.assertIn("globalThis.GRANT_CATALOG", application_js)
         self.assertIn("MAX_AI_CANDIDATES = 32", application_js)
+        self.assertIn("MAX_CHAT_RESULTS = 20", application_js)
+        self.assertIn("async function askResults", application_js)
         self.assertIn("api.openai.com/v1/responses", application_js)
         self.assertIn("api.anthropic.com/v1/messages", application_js)
+        self.assertRegex(
+            application_css,
+            r"(?s)\.search-form input\s*\{[^}]*color: var\(--ink\);",
+        )
+        self.assertRegex(
+            application_css,
+            r'(?s)grid-template-areas:\s*"assistant"\s*"filters"\s*"results"',
+        )
+        self.assertNotIn('class="chat hidden"', explorer_html)
         self.assertNotIn("localStorage", application_js)
         self.assertNotIn("sessionStorage", application_js)
         self.assertNotIn("GRANT_MATCH_FEED", explorer_html + application_js)
@@ -109,7 +125,6 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             all(
                 not record.get("close_date")
                 or date.fromisoformat(record["close_date"]) >= catalog_date
-                or record.get("status") == "forecasted"
                 for record in catalog["opportunities"]
             )
         )

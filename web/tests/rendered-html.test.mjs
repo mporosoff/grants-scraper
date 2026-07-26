@@ -69,6 +69,8 @@ test("supports public catalog search and optional AI refinement", async () => {
   assert.match(prototype, /id="research-profile"/);
   assert.match(prototype, /id="ai-refine"/);
   assert.match(prototype, /id="chat-form"/);
+  assert.match(prototype, /Chat with results/);
+  assert.doesNotMatch(prototype, /class="chat hidden"/);
   assert.match(prototype, /data\/opportunities\.js/);
   assert.match(prototype, /assets\/app\.js/);
   assert.match(script, /gpt-5\.6-luna/);
@@ -76,8 +78,9 @@ test("supports public catalog search and optional AI refinement", async () => {
   assert.match(script, /api\.openai\.com\/v1\/responses/);
   assert.match(script, /api\.anthropic\.com\/v1\/messages/);
   assert.match(script, /MAX_AI_CANDIDATES = 32/);
+  assert.match(script, /MAX_CHAT_RESULTS = 20/);
   assert.match(script, /async function refineWithAi/);
-  assert.match(script, /async function askShortlist/);
+  assert.match(script, /async function askResults/);
   assert.doesNotMatch(prototype + script, /localStorage|sessionStorage/);
   assert.doesNotMatch(
     prototype + script,
