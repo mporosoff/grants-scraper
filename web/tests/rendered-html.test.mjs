@@ -87,8 +87,12 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(prototype, /id="send-deployment-review"/);
   assert.match(prototype, /id="ai-refine"/);
   assert.match(prototype, /id="chat-form"/);
+  assert.match(prototype, /id="chat-thinking"/);
+  assert.match(prototype, /id="toggle-chat-size"/);
+  assert.match(prototype, /id="chat-submit"/);
+  assert.match(prototype, /Enter to send/);
   assert.match(prototype, /id="result-label"/);
-  assert.match(prototype, /Ask about these results/);
+  assert.match(prototype, /Chat with your results/);
   assert.match(prototype, /Minimum per-award amount/);
   assert.match(prototype, /not endorsed or certified/);
   assert.doesNotMatch(prototype, /class="chat hidden"/);
@@ -96,6 +100,7 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(prototype, /assets\/profile\.js/);
   assert.match(prototype, /assets\/review\.js/);
   assert.match(prototype, /assets\/ai-provider\.js/);
+  assert.match(prototype, /assets\/chat-ui\.js/);
   assert.match(prototype, /assets\/app\.js/);
   assert.match(providerScript, /gpt-5\.6-luna/);
   assert.match(providerScript, /claude-sonnet-5/);
@@ -119,6 +124,12 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(script, /MAX_CHAT_RESULTS = 20/);
   assert.match(script, /async function refineWithAi/);
   assert.match(script, /async function askResults/);
+  assert.match(script, /referenced_result_ids/);
+  assert.match(script, /focus_result_ids/);
+  assert.match(script, /data-chat-jump/);
+  assert.match(script, /requestSubmit/);
+  assert.match(css, /body\.chat-expanded/);
+  assert.match(css, /\.chat-thinking/);
   assert.match(script, /Open official FOA/);
   assert.match(script, /primary_document_url/);
   assert.match(script, /deadlineEvidenceLabel/);

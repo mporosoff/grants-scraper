@@ -1,6 +1,6 @@
 # Funding Finder — Product Plan
 
-**Status:** Phase 1 and 1.5 complete; Phase 2 engineering complete with its human pilot deferred; Phase 3 deployed with its first production evidence batch successful; unified-search usability pass complete
+**Status:** Phase 1 and 1.5 complete; Phase 2 engineering complete with its human pilot deferred; Phase 3 deployed with its first production evidence batch successful; unified-search and result-aware-chat usability passes complete
 
 **Next implementation phase:** Phase 3D — complete the returned-review and citation-landing dry run, then run the deferred multi-researcher pilot
 
@@ -87,12 +87,15 @@ A user may choose OpenAI or Anthropic and enter one provider key. The same provi
 
 1. **Query expansion:** translate a natural-language research description into concrete search terms and synonyms.
 2. **Bounded reranking:** compare at most 32 locally retrieved candidates and return at most 12 grounded recommendations.
-3. **Chat with results:** answer questions over either the top 20 ordinary search results or the AI shortlist and, when explicitly requested, narrow those results further.
+3. **Chat with results:** answer questions over either the top 20 ordinary search results or the AI shortlist; connect every named opportunity back to its result card and official source; and focus the displayed list when explicitly requested.
 
 AI settings sit inside that same workflow and become useful only after the
 catalog search has results. “Refine these results with AI” reranks the bounded
-candidate set, while “Ask about these results” appears with the result set on
-desktop and mobile. Neither is a separate search source.
+candidate set, while “Chat with your results” appears with the result set on
+desktop and mobile. Chat can expand into a large in-page workspace without
+losing the current result state, uses readable limited-Markdown responses,
+shows a visible working state, and supports Enter-to-send with Shift+Enter for
+a new line. Neither AI action is a separate search source.
 
 AI output is advisory. It must:
 
@@ -754,3 +757,4 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | July 2026 | Collect no silent central telemetry. Autosave deployment review locally and return it only through explicit file share/download/email, then aggregate it in gitignored private folders. |
 | July 2026 | Keep GitHub Actions as the authoritative daily refresh engine; do not move ingestion to Google Sheets. Build any automatic digest from a catalog change feed and a separate consent-based subscription service. |
 | July 2026 | Start with an empty result state, integrate keywords/profile/CV/filters under one “Find funding” action, and move invited-tester evidence checks out of the normal user workflow. |
+| July 2026 | Make result chat visibly interactive: add a large focused workspace, working indicator, keyboard send, safe rich formatting, exact result references, jump-to-result/source actions, and explicit result-list focusing. |
