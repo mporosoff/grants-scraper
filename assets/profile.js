@@ -33,6 +33,8 @@
     "title",
   ]);
   const FACET_NAMES = [
+    "source",
+    "source_type",
     "discipline",
     "topic",
     "agency",
@@ -433,7 +435,9 @@
 
   function sanitizeFeedbackEntry(value) {
     const source = value && typeof value === "object" ? value : {};
-    const labels = new Set(["useful", "not_relevant", "needs_verification"]);
+    const labels = new Set([
+      "useful", "not_relevant", "needs_verification", "partial", "strong",
+    ]);
     if (!labels.has(source.label)) return null;
     return {
       opportunity_id: cleanString(source.opportunity_id, 120),

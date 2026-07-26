@@ -10,8 +10,8 @@
 *.zip binary
 
 # Keep reviewed third-party parser bytes exactly as committed.
-assets/vendor/pdf.mjs -text
-assets/vendor/pdf.worker.mjs -text
-assets/vendor/mammoth.browser.min.js -text
+assets/vendor/pdf.mjs -text -eol
+assets/vendor/pdf.worker.mjs -text -eol
+assets/vendor/mammoth.browser.min.js -text -eol
 
 data/opportunities.js text eol=lf linguist-generated=true -diff

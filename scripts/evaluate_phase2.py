@@ -8,13 +8,18 @@ from __future__ import annotations
 
 import argparse
 import json
-from collections import Counter
+import math
+from collections import Counter, defaultdict
 from pathlib import Path
 from statistics import mean
 from typing import Any, Iterable
 
 
-VALID_LABELS = {"useful", "not_relevant", "needs_verification"}
+VALID_LABELS = {"useful", "not_relevant", "needs_verification", "partial", "strong"}
+# Labels that count as a positive (useful-tier) match for retrieval/precision.
+POSITIVE_LABELS = {"useful", "strong"}
+# Graded relevance values; needs_verification is intentionally ungraded (None).
+GRADE_VALUES = {"not_relevant": 0, "partial": 1, "useful": 2, "strong": 3}
 
 
 def _load_export(path: Path) -> dict[str, Any]:
@@ -50,6 +55,25 @@ def _rank(value: Any) -> int | None:
     return value if isinstance(value, int) and value > 0 else None
 
 
+def _ndcg(rank_gain_pairs) -> float | None:
+    """Graded nDCG over labeled items placed at their ranks (gain = relevance).
+
+    Each labeled item contributes gain/log2(rank+1); the ideal ordering places
+    the same gains at the best ranks. Returns None when nothing is rankable.
+    """
+    items = [
+        (rank, gain)
+        for rank, gain in rank_gain_pairs
+        if isinstance(rank, int) and rank > 0 and gain is not None
+    ]
+    if not items:
+        return None
+    dcg = sum(gain / math.log2(rank + 1) for rank, gain in items)
+    ideal = sorted((gain for _, gain in items), reverse=True)
+    idcg = sum(gain / math.log2(index + 2) for index, gain in enumerate(ideal))
+    return dcg / idcg if idcg > 0 else 0.0
+
+
 def evaluate_exports(exports: Iterable[dict[str, Any]]) -> dict[str, Any]:
     exports = list(exports)
     entries = _valid_entries(exports)
@@ -59,7 +83,39 @@ def evaluate_exports(exports: Iterable[dict[str, Any]]) -> dict[str, Any]:
         for entry in entries
     )
 
-    useful = [entry for entry in entries if entry["label"] == "useful"]
+    graded_values = [
+        GRADE_VALUES[entry["label"]]
+        for entry in entries
+        if entry["label"] in GRADE_VALUES
+    ]
+    graded_distribution = Counter(
+        entry["label"] for entry in entries if entry["label"] in GRADE_VALUES
+    )
+
+    # Graded ranking quality (nDCG), computed per export/query then averaged.
+    by_export: dict[Any, list] = defaultdict(list)
+    for entry in entries:
+        by_export[entry["_export_index"]].append(entry)
+    retrieval_ndcgs = [
+        value for value in (
+            _ndcg([
+                (item.get("retrieval_rank"), GRADE_VALUES.get(item["label"]))
+                for item in group
+            ])
+            for group in by_export.values()
+        ) if value is not None
+    ]
+    reranking_ndcgs = [
+        value for value in (
+            _ndcg([
+                (item.get("ai_rank"), GRADE_VALUES.get(item["label"]))
+                for item in group
+            ])
+            for group in by_export.values()
+        ) if value is not None
+    ]
+
+    useful = [entry for entry in entries if entry["label"] in POSITIVE_LABELS]
     useful_with_candidate_judgment = [
         entry
         for entry in useful
@@ -81,7 +137,7 @@ def evaluate_exports(exports: Iterable[dict[str, Any]]) -> dict[str, Any]:
         if (_rank(entry.get("ai_rank")) or 10_000) <= 12
     ]
     ai_top_12_useful = [
-        entry for entry in ai_top_12 if entry["label"] == "useful"
+        entry for entry in ai_top_12 if entry["label"] in POSITIVE_LABELS
     ]
     rank_movements = [
         entry["retrieval_rank"] - entry["ai_rank"]
@@ -115,6 +171,14 @@ def evaluate_exports(exports: Iterable[dict[str, Any]]) -> dict[str, Any]:
         "reviewed": len(entries),
         "labels": dict(sorted(labels.items())),
         "reasons": dict(sorted(reasons.items())),
+        "graded": {
+            "mean_relevance": (mean(graded_values) if graded_values else None),
+            "graded_count": len(graded_values),
+            "distribution": dict(sorted(graded_distribution.items())),
+            "retrieval_ndcg": (mean(retrieval_ndcgs) if retrieval_ndcgs else None),
+            "reranking_ndcg": (mean(reranking_ndcgs) if reranking_ndcgs else None),
+            "exports_scored": len(by_export),
+        },
         "retrieval": {
             "useful_with_known_candidate_membership": len(
                 useful_with_candidate_judgment
@@ -172,6 +236,20 @@ def format_report(summary: dict[str, Any]) -> str:
         f"Exports: {summary['exports']}",
         f"Reviewed pairs: {summary['reviewed']}",
         f"Labels: {json.dumps(summary['labels'], sort_keys=True)}",
+        (
+            "Mean graded relevance (0-3): "
+            f"{summary['graded']['mean_relevance']:.2f}"
+            if summary["graded"]["mean_relevance"] is not None
+            else "Mean graded relevance (0-3): not available"
+        ),
+        (
+            "Graded nDCG retrieval / reranking: "
+            + (f"{summary['graded']['retrieval_ndcg']:.3f}"
+               if summary["graded"]["retrieval_ndcg"] is not None else "not available")
+            + " / "
+            + (f"{summary['graded']['reranking_ndcg']:.3f}"
+               if summary["graded"]["reranking_ndcg"] is not None else "not available")
+        ),
         (
             "Retrieval candidate recall@32: "
             f"{_percent(retrieval['candidate_recall_at_32'])} "

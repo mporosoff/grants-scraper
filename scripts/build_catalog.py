@@ -711,6 +711,8 @@ def build_search_index(records):
 def facet_counts(records):
     fields = {
         "status": "status",
+        "source_type": "source_type",
+        "source": "source",
         "agency": "agency",
         "discipline": "disciplines",
         "topic": "topic_areas",

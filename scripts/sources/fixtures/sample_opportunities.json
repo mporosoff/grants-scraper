@@ -1,0 +1,31 @@
+[
+  {
+    "id": "DEMO-001",
+    "title": "Demonstration Grant for Carbon Capture and Utilization Catalysis",
+    "url": "https://example.org/opportunities/demo-001",
+    "agency": "Example Energy Foundation",
+    "description": "Supports early-career investigators developing catalytic and electrochemical routes that convert captured CO2 into fuels and chemicals. A letter of intent is required before the full proposal.",
+    "status": "posted",
+    "close_date": "2026-11-30",
+    "posted_date": "2026-07-01",
+    "award_floor": 50000,
+    "award_ceiling": 250000,
+    "eligibility_text": "Open to universities and nonprofit research institutions in the United States.",
+    "applicant_types": ["Public and state institutions of higher education"],
+    "disciplines": ["Engineering and Physical Sciences"]
+  },
+  {
+    "id": "DEMO-002",
+    "title": "Rural Public Health Innovation Awards",
+    "url": "https://example.org/opportunities/demo-002",
+    "agency": "Example Health Trust",
+    "description": "Funds community-based projects that improve rural public health outcomes and health equity. Limited to one application per institution.",
+    "status": "forecasted",
+    "close_date": "2027-02-15",
+    "posted_date": "2026-07-10",
+    "award_ceiling": 120000,
+    "eligibility_text": "Nonprofit organizations and universities.",
+    "applicant_types": ["Nonprofits with 501(c)(3) status"],
+    "disciplines": ["Medical and Health"]
+  }
+]

@@ -525,6 +525,7 @@ h1 {
   font-size: .82rem;
   font-weight: 850;
   list-style: none;
+  cursor: pointer;
 }
 
 .facet summary::-webkit-details-marker {

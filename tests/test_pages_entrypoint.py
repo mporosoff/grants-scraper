@@ -234,8 +234,12 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         }
         self.assertEqual(len(identities), catalog["record_count"])
         self.assertTrue(
-            all(record.get("source") == "Grants.gov"
+            all(record.get("source") and record.get("source_type")
                 for record in catalog["opportunities"])
+        )
+        self.assertIn(
+            "Grants.gov",
+            {record.get("source") for record in catalog["opportunities"]},
         )
         catalog_date = date.fromisoformat(catalog["generated_at"][:10])
         self.assertTrue(

@@ -80,7 +80,7 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(script, /referenced_result_ids/);
   assert.match(script, /focus_result_ids/);
   assert.match(script, /data-chat-jump/);
-  assert.match(script, /requestSubmit/);
+  assert.match(script, /event\.key !== "Enter"[\s\S]*?askResults\(/);
   assert.match(css, /body\.chat-expanded/);
   assert.match(css, /\.chat-thinking/);
   assert.match(script, /Open official FOA/);

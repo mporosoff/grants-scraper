@@ -10,6 +10,7 @@ on:
       - "scripts/build_catalog.py"
       - "scripts/enrich_catalog.py"
       - "scripts/extract_document_evidence.py"
+      - "scripts/sources/**"
       - "scripts/update_catalog_docs.py"
   schedule:
     - cron: "17 10 * * *"
@@ -63,6 +64,12 @@ jobs:
           --max-documents 45
           --request-delay 0.2
           --recheck-days 14
+      - name: Merge additional (non-Grants.gov) sources
+        run: >-
+          python -m scripts.sources merge
+          --catalog data/opportunities.js
+          --cache data/source_records.json
+          --write
       - name: Regenerate catalog statistics in project documentation
         run: python -m scripts.update_catalog_docs
       - name: Run regression tests against generated asset
@@ -72,7 +79,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md PROJECT.md data/opportunities.js data/opportunity_enrichment.json data/document_evidence.json
+          git add README.md PROJECT.md data/opportunities.js data/opportunity_enrichment.json data/document_evidence.json data/source_records.json
           if git diff --cached --quiet; then
             echo "The generated catalog is unchanged."
           else
