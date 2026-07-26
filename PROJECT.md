@@ -1,6 +1,6 @@
 # Funding Finder — Product Plan
 
-**Status:** Phase 1 product correction implemented; production deployment verification pending
+**Status:** Phase 1 product correction deployed; Pages and corrected automated refresh verified; provider-key smoke test pending
 
 **Next implementation phase:** Phase 2 — Pilot validation and relevance quality
 
@@ -178,7 +178,7 @@ The browser-only design cannot provide a secure institutional credential vault. 
 
 ## 6. Phase 1 — Comprehensive federal opportunity search
 
-**Status: product correction implemented; production deployment verification pending**
+**Status: product correction deployed; Pages and corrected automated refresh verified; provider-key smoke test pending**
 
 Phase 1 now includes both the catalog foundation and the first optional refinement workflow:
 
