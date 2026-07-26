@@ -35,6 +35,9 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         credentials_js = (
             REPOSITORY_ROOT / "assets" / "credentials.js"
         ).read_text(encoding="utf-8")
+        chat_ui_js = (
+            REPOSITORY_ROOT / "assets" / "chat-ui.js"
+        ).read_text(encoding="utf-8")
         application_css = (
             REPOSITORY_ROOT / "assets" / "app.css"
         ).read_text(encoding="utf-8")
@@ -64,7 +67,10 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn('id="ai-refine"', explorer_html)
         self.assertIn('id="chat-form"', explorer_html)
         self.assertIn('<section class="chat" id="chat"', explorer_html)
-        self.assertIn("Ask about these results", explorer_html)
+        self.assertIn("Chat with your results", explorer_html)
+        self.assertIn('id="chat-thinking"', explorer_html)
+        self.assertIn('id="toggle-chat-size"', explorer_html)
+        self.assertIn("Enter to send", explorer_html)
         self.assertIn("Export CSV", explorer_html)
         self.assertIn('id="result-label"', explorer_html)
         self.assertIn(
@@ -88,13 +94,20 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/app.js?v=unified-search-v1"></script>',
+            '<script src="./assets/chat-ui.js?v=result-aware-chat-v1"></script>',
+            explorer_html,
+        )
+        self.assertIn(
+            '<script src="./assets/app.js?v=result-aware-chat-v1"></script>',
             explorer_html,
         )
         self.assertIn("globalThis.GRANT_CATALOG", application_js)
         self.assertIn("MAX_AI_CANDIDATES = 32", application_js)
         self.assertIn("MAX_CHAT_RESULTS = 20", application_js)
         self.assertIn("async function askResults", application_js)
+        self.assertIn("referenced_result_ids", application_js)
+        self.assertIn("focus_result_ids", application_js)
+        self.assertIn("renderRichText", chat_ui_js)
         self.assertIn("Open official FOA", application_js)
         self.assertIn("Minimum per-award amount", explorer_html)
         self.assertIn("primary_document_url", application_js)

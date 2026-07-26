@@ -7,7 +7,7 @@
   <meta name="referrer" content="no-referrer">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://api.openai.com https://api.anthropic.com; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self'">
   <title>Funding Finder</title>
-  <link rel="stylesheet" href="./assets/app.css?v=unified-search-v1">
+  <link rel="stylesheet" href="./assets/app.css?v=result-aware-chat-v1">
 </head>
 <body>
   <a class="skip-link" href="#results">Skip to results</a>
@@ -316,23 +316,29 @@
           <div class="ai-heading">
             <span class="spark" aria-hidden="true">✦</span>
             <div>
-              <p class="eyebrow">Optional AI follow-up for this result set</p>
-              <h2 id="chat-heading">Ask about these results</h2>
+              <p class="eyebrow">Result-aware AI workspace</p>
+              <h2 id="chat-heading">Chat with your results</h2>
             </div>
+            <button class="button secondary chat-size-toggle" id="toggle-chat-size" type="button" aria-expanded="false">Open larger chat</button>
           </div>
-          <p class="panel-copy">Chat only receives a bounded set of the opportunities shown below. It does not search a separate source.</p>
+          <p class="panel-copy">Compare, question, or focus the opportunities already in your search. Every named opportunity links back to its result card and official source.</p>
           <section class="chat" id="chat" aria-label="Chat with the current funding results">
             <p class="chat-summary" id="chat-summary"></p>
             <div class="suggestion-list" id="chat-suggestions"></div>
-            <div class="messages" id="chat-messages" aria-live="polite"></div>
+            <div class="messages" id="chat-messages" aria-live="polite" aria-label="Conversation"></div>
+            <div class="chat-thinking hidden" id="chat-thinking" role="status" aria-live="polite">
+              <span class="thinking-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span>Reviewing the connected opportunities and their evidence…</span>
+            </div>
             <form class="chat-form" id="chat-form">
               <label class="sr-only" for="chat-input">Ask about the current funding results</label>
               <textarea id="chat-input" rows="3" placeholder="Which opportunities best fit a university-led pilot, and why?"></textarea>
-              <button class="button primary" type="submit">Ask</button>
+              <button class="button primary" id="chat-submit" type="submit"><span>Send</span></button>
+              <p class="chat-keyboard-hint">Enter to send <span aria-hidden="true">·</span> Shift+Enter for a new line</p>
             </form>
             <div class="chat-actions">
               <button class="text-button hidden" id="clear-ai" type="button">Return to the full search results</button>
-              <button class="text-button hidden" id="reset-narrowing" type="button">Restore the original AI shortlist</button>
+              <button class="text-button hidden" id="reset-narrowing" type="button">Restore the connected result set</button>
             </div>
           </section>
           <p class="privacy-note chat-privacy">Chat uses the AI provider configured above. Only the bounded result context, your question, and the profile context you enabled are sent.</p>
@@ -437,6 +443,7 @@
   <script src="./assets/review.js"></script>
   <script src="./assets/credentials.js?v=unified-search-v1"></script>
   <script src="./assets/ai-provider.js"></script>
-  <script src="./assets/app.js?v=unified-search-v1"></script>
+  <script src="./assets/chat-ui.js?v=result-aware-chat-v1"></script>
+  <script src="./assets/app.js?v=result-aware-chat-v1"></script>
 </body>
 </html>
