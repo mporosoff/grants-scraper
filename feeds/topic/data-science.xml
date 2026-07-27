@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-07-27T14:02:03Z</updated>
+  <updated>2026-07-27T14:10:37Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -179,6 +179,18 @@
     <summary>National Institutes of Health — Closes 2026-09-25 — The Office of Data Science Strategy (ODSS) along with other participating institutes and Centers intends to renew the Notice of Funding Opportunity (NOFO) PAR-23-237.This funding opportunity is intended to provide continuation to support established biomedical data repositories and knowledge bases as distinct and separate resources that have demonstrated impact and have potential for continued ben…</summary>
   </entry>
   <entry>
+    <title>Technology Enhanced Adoptive Family Recruiting and Matching</title>
+    <link href="https://www.grants.gov/search-results-detail/361968"/>
+    <id>urn:funding-finder:grants-gov:361968</id>
+    <updated>2026-07-22T00:00:00Z</updated>
+    <author><name>Administration for Children and Families - ACYF/CB</name></author>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Administration for Children and Families - ACYF/CB — Closes 2026-08-21 — This program will fund projects focused on technology-enabled strategies that improve adoptive matching, placement, and permanency for children in foster care awaiting adoption. The funds, awarded to four regional centers, will be used to design, implement and evaluate these strategies.These centers will focus on children with an adoption permanency goal or who are legally free for adoption due to…</summary>
+  </entry>
+  <entry>
     <title>Fiscal Year 2026 Next Generation Warning System Grant Program</title>
     <link href="https://www.grants.gov/search-results-detail/363192"/>
     <id>urn:funding-finder:grants-gov:363192</id>
@@ -241,6 +253,29 @@
     <category term="Education and workforce"/>
     <category term="Energy"/>
     <summary>U.S. Mission to Oman — Closes 2026-08-09 — The Public Diplomacy Section of U.S. Embassy Muscat announces an open competition to support projects that advance U.S. foreign policy priorities in Oman while strengthening the long-standing partnership between the United States and the Sultanate of Oman. This Annual Program Statement outlines strategic funding priorities, eligibility criteria, and application guidelines for grants ranging from $…</summary>
+  </entry>
+  <entry>
+    <title>English Language Exchange Programs: AI and Educational Technology Integration</title>
+    <link href="https://www.grants.gov/search-results-detail/363105"/>
+    <id>urn:funding-finder:grants-gov:363105</id>
+    <updated>2026-07-08T00:00:00Z</updated>
+    <author><name>U.S. Mission to the Philippines</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to the Philippines — Closes 2026-08-15 — The U.S. Department of State's Embassy in the Philippines announces an opportunity to implement a professional exchange program bringing approximately twelve high-merit educators from the Philippines, Japan, South Korea, Taiwan, and Brunei to the United States for direct, immersive exposure to American approaches to AI and educational technology integration in English language instruction. Partici…</summary>
+  </entry>
+  <entry>
+    <title>Change 1 to Training and Employment Guidance Letter 02-25, Industry-Driven Skills Training Fund Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363108"/>
+    <id>urn:funding-finder:grants-gov:363108</id>
+    <updated>2026-07-08T00:00:00Z</updated>
+    <author><name>Employment and Training Administration</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Manufacturing"/>
+    <summary>Employment and Training Administration — Closes 2026-08-17 — Questions regarding this Training and Employment Guidance Letter (TEGL) may be emailed to Daniela Petchik, Grants Management Specialist at petchik.daniela.m@dol.gov and Brinda Ruggles, Grant Officer at ruggles.brinda@dol.gov. We encourage prospective applicants and interested parties to use the Grants.gov subscription option to register for future updates provided for this particular TEGL.</summary>
   </entry>
   <entry>
     <title>FY26 American Spaces Vietnam Programming</title>
@@ -401,6 +436,18 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>U.S. Mission to Indonesia — Closes 2026-08-07 — Indonesia faces a pervasive and evolving cybercrime threat, with online scams growing in number and sophistication – while U.S. families continue to lose their life’s savings to international cybercrime, totaling over $12 billions in financial losses in 2023 alone. Unlike scam compounds in mainland Southeast Asia, criminal scam operations in Indonesia are decentralized and embedded within transnat…</summary>
+  </entry>
+  <entry>
+    <title>Tribal Colleges Extension Program - Capacity Applications</title>
+    <link href="https://www.grants.gov/search-results-detail/362780"/>
+    <id>urn:funding-finder:grants-gov:362780</id>
+    <updated>2026-06-12T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Community development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>National Institute of Food and Agriculture — Closes 2026-08-14 — The TCEP-CA under assistance listing 10.517, supports informal, community-based extension projects that address agriculture, youths, economic development, healthy lifestyles, natural resources, or other topics important to Tribal communities. This NOFO will begin a new 4-year continuation funding cycle.</summary>
   </entry>
   <entry>
     <title>U.S. Talent Program for the U.S. Embassy and Consulates in Canada</title>
@@ -693,51 +740,5 @@
     <category term="Biology and biotechnology"/>
     <category term="Data science"/>
     <summary>National Institutes of Health — Closes 2027-02-26 — This Funding Opportunity Announcement is intended to identify and support research projects by exceptionally promising Early Stage Investigators with a long-term career interest in pursuing innovative research in genomics. This opportunity is open to research in all areas relevant to the mission of NHGRI, including genomic sciences, genomic medicine, genomic data science, and ethical, legal, and s…</summary>
-  </entry>
-  <entry>
-    <title>D-START: Data Science Track Award for Research Transition (D/START) (R03-Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/357733"/>
-    <id>urn:funding-finder:grants-gov:357733</id>
-    <updated>2024-12-16T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health — Closes 2027-09-07 — Data science is an important cross-cutting research approach in the 2022 - 2026 NIDA Strategic Plan and increasing the capacity of experts in addiction related data science is critical. The purpose of this Notice is to facilitate the entry of investigators to the area of addiction-related data science, including newly independent data scientists or established investigators seeking to incorporate …</summary>
-  </entry>
-  <entry>
-    <title>Institutional Training Programs to Advance Translational Research on Alzheimer's Disease (AD) and AD-Related Dementias (ADRD) (T32 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/357710"/>
-    <id>urn:funding-finder:grants-gov:357710</id>
-    <updated>2024-12-13T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health — Closes 2026-09-25 — The specific purpose of this Notice of Funding Opportunity (NOFO) is to promote the development of a diverse, interdisciplinary workforce needed to conduct translational research on Alzheimer's disease and Alzheimer's-related dementias from target discovery through clinical development. This NOFO will support institutional training programs for predoctoral and postdoctoral level researchers with d…</summary>
-  </entry>
-  <entry>
-    <title>Personal Health Informatics for Delivering Actionable Insights to Individuals (R01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/357273"/>
-    <id>urn:funding-finder:grants-gov:357273</id>
-    <updated>2024-11-21T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <summary>National Institutes of Health — Closes 2027-01-07 — The purpose of this Notice of Funding Opportunity (NOFO) is to advance the development of novel informatics and data science approaches that can help individuals understand and improve their health through actionable insights. NLM seeks applications that further the science of personal health informatics by providing meaningful and actionable insights to individuals through innovative personal hea…</summary>
-  </entry>
-  <entry>
-    <title>Cellular and Molecular Biology of Complex Brain Disorders (R01 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/357182"/>
-    <id>urn:funding-finder:grants-gov:357182</id>
-    <updated>2024-11-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
-    <category term="Environmental science"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health — Closes 2026-09-07 — This Notice of Funding Opportunity (NOFO) encourages research on the biology of high-confidence risk factors associated with complex brain disorders, with a focus on the intracellular, transcellular, and circuit substrates of neural function. For the purposes of this NOFO, the term complex can refer to a multifactorial contribution to risk (e.g., polygenic and/or environmental) and/or highly distr…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-07-27T14:02:03Z</updated>
+  <updated>2026-07-27T14:10:37Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -77,6 +77,7 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <category term="Public health"/>
+    <category term="Cybersecurity"/>
     <summary>Food and Drug Administration — Closes 2026-08-21 — FDA is announcing the availability of funds for the support of a cooperative agreement between the Human Food Program/ Office of Laboratory Operations and Applied Science (OLOAS)/ Office of Applied Microbiolgy and Technology (OAMT) and the Marine Environmental Sciences Consortium/Dauphin Island Sea Lab (DISL). The scientific, public health, and policy expertise within the Food and Drug Administrat…</summary>
   </entry>
   <entry>
@@ -111,6 +112,7 @@
     <category term="Education and workforce"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
+    <category term="Cybersecurity"/>
     <summary>Food and Drug Administration — Closes 2026-08-21 — The purpose of this funding opportunity is to (1) improve information exchange and transfer among States, Federal and Foreign Agencies, industry, and consumers; (2) strengthen state activities through training, technical assistance, research, education, and support for States to participate in meetings that foster a cooperative shellfish program based on public health principles; and (3) promote e…</summary>
   </entry>
   <entry>
@@ -122,6 +124,7 @@
     <category term="Agriculture and food"/>
     <category term="Education and workforce"/>
     <category term="Public health"/>
+    <category term="Cybersecurity"/>
     <summary>Food and Drug Administration — Closes 2026-08-21 — The purpose of this funding opportunity is to provide continued support to: (1) assist in the identification and development of a prioritized list of botanical ingredients based on safety concerns, trends and knowledge of botanical ingredients in foods, dietary supplements, and cosmetics marketed in the U.S.; (2) acquire, validate and characterize authenticated reference materials, including raw a…</summary>
   </entry>
   <entry>
@@ -143,6 +146,7 @@
     <category term="Agriculture and food"/>
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
+    <category term="Cybersecurity"/>
     <summary>Food and Drug Administration — Closes 2026-08-20 — The primary purpose of this program is to develop and provide education and/or training, and outreach regarding FDA's Produce Safety Rule to produce farmers who are members of federally recognized Tribes. The program is expected to help Tribal farmers access appropriate technical assistance and may include Tribal farmers who are not currently required to comply with the rule but are interested in …</summary>
   </entry>
   <entry>
@@ -153,6 +157,7 @@
     <author><name>Food and Drug Administration</name></author>
     <category term="Agriculture and food"/>
     <category term="Biology and biotechnology"/>
+    <category term="Cybersecurity"/>
     <summary>Food and Drug Administration — Closes 2026-08-20 — The purpose of this Notice of Funding Opportunity (NOFO) is to address topics related to the use of digital health technologies (DHTs) for remote data acquisition in clinical investigations to support drug development.</summary>
   </entry>
   <entry>
@@ -476,6 +481,8 @@
     <author><name>National Institute of Food and Agriculture</name></author>
     <category term="Agriculture and food"/>
     <category term="Community development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>National Institute of Food and Agriculture — Closes 2026-08-14 — The TCEP-CA under assistance listing 10.517, supports informal, community-based extension projects that address agriculture, youths, economic development, healthy lifestyles, natural resources, or other topics important to Tribal communities. This NOFO will begin a new 4-year continuation funding cycle.</summary>
   </entry>
   <entry>

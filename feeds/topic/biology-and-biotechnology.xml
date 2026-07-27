@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-07-27T14:02:03Z</updated>
+  <updated>2026-07-27T14:10:37Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -419,6 +419,7 @@
     <author><name>Food and Drug Administration</name></author>
     <category term="Agriculture and food"/>
     <category term="Biology and biotechnology"/>
+    <category term="Cybersecurity"/>
     <summary>Food and Drug Administration — Closes 2026-08-20 — The purpose of this Notice of Funding Opportunity (NOFO) is to address topics related to the use of digital health technologies (DHTs) for remote data acquisition in clinical investigations to support drug development.</summary>
   </entry>
   <entry>

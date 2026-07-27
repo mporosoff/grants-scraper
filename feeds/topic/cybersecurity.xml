@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-07-27T14:02:03Z</updated>
+  <updated>2026-07-27T14:10:37Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Independent Internal Audit Services</title>
@@ -14,6 +14,44 @@
     <author><name>NYSERDA</name></author>
     <category term="Cybersecurity"/>
     <summary>NYSERDA — Closes 2026-08-19 — Seeking proposals from qualified firms to provide independent internal audit, advisory, compliance, investigative, technology, cybersecurity, and related professional services to support NYSERDA’s Internal Audit function under a five-year umbrella contract.</summary>
+  </entry>
+  <entry>
+    <title>Federal and University Partnership to Improve the Safety of Seafood from the Gulf of America</title>
+    <link href="https://www.grants.gov/search-results-detail/363304"/>
+    <id>urn:funding-finder:grants-gov:363304</id>
+    <updated>2026-07-23T00:00:00Z</updated>
+    <author><name>Food and Drug Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Public health"/>
+    <category term="Cybersecurity"/>
+    <summary>Food and Drug Administration — Closes 2026-08-21 — FDA is announcing the availability of funds for the support of a cooperative agreement between the Human Food Program/ Office of Laboratory Operations and Applied Science (OLOAS)/ Office of Applied Microbiolgy and Technology (OAMT) and the Marine Environmental Sciences Consortium/Dauphin Island Sea Lab (DISL). The scientific, public health, and policy expertise within the Food and Drug Administrat…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement to Support Shellfish Safety Assistance Project</title>
+    <link href="https://www.grants.gov/search-results-detail/363282"/>
+    <id>urn:funding-finder:grants-gov:363282</id>
+    <updated>2026-07-22T00:00:00Z</updated>
+    <author><name>Food and Drug Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Cybersecurity"/>
+    <summary>Food and Drug Administration — Closes 2026-08-21 — The purpose of this funding opportunity is to (1) improve information exchange and transfer among States, Federal and Foreign Agencies, industry, and consumers; (2) strengthen state activities through training, technical assistance, research, education, and support for States to participate in meetings that foster a cooperative shellfish program based on public health principles; and (3) promote e…</summary>
+  </entry>
+  <entry>
+    <title>Research, Education, and Outreach on Botanical Natural Products</title>
+    <link href="https://www.grants.gov/search-results-detail/363286"/>
+    <id>urn:funding-finder:grants-gov:363286</id>
+    <updated>2026-07-22T00:00:00Z</updated>
+    <author><name>Food and Drug Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <category term="Cybersecurity"/>
+    <summary>Food and Drug Administration — Closes 2026-08-21 — The purpose of this funding opportunity is to provide continued support to: (1) assist in the identification and development of a prioritized list of botanical ingredients based on safety concerns, trends and knowledge of botanical ingredients in foods, dietary supplements, and cosmetics marketed in the U.S.; (2) acquire, validate and characterize authenticated reference materials, including raw a…</summary>
   </entry>
   <entry>
     <title>Farm and Ranch Stress Assistance Network</title>
@@ -39,6 +77,18 @@
     <summary>U.S. Mission to Albania — Closes 2026-08-20 — Project Background, Goals, and Objectives Albania has experienced multiple cyberattacks in recent years, placing increasingly digital government services and critical institutions at significant risk. While Albania is actively embracing AI, substantial skill gaps remain – gaps that American expertise is uniquely positioned to address. The “CyberNext: Advanced Cybersecurity and AI Readiness” progra…</summary>
   </entry>
   <entry>
+    <title>Education and Outreach to Tribal Producers through the Tribal Food Safety Alliance</title>
+    <link href="https://www.grants.gov/search-results-detail/363239"/>
+    <id>urn:funding-finder:grants-gov:363239</id>
+    <updated>2026-07-20T00:00:00Z</updated>
+    <author><name>Food and Drug Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Cybersecurity"/>
+    <summary>Food and Drug Administration — Closes 2026-08-20 — The primary purpose of this program is to develop and provide education and/or training, and outreach regarding FDA's Produce Safety Rule to produce farmers who are members of federally recognized Tribes. The program is expected to help Tribal farmers access appropriate technical assistance and may include Tribal farmers who are not currently required to comply with the rule but are interested in …</summary>
+  </entry>
+  <entry>
     <title>GameON – U.S.-Albania E-Sports and Innovation</title>
     <link href="https://www.grants.gov/search-results-detail/363247"/>
     <id>urn:funding-finder:grants-gov:363247</id>
@@ -50,6 +100,17 @@
     <category term="Environmental science"/>
     <category term="Technology development"/>
     <summary>U.S. Mission to Albania — Closes 2026-08-20 — 1. Project Background, Goals, and Objectives Albania's youth face a rapidly evolving digital economy that demands advanced technical skills, entrepreneurial mindsets, and exposure to international industry standards. Albanian interest in gaming – a global market forecasted to surpass $745 billion by 2030, in which the United States is leading – is high, presenting an opportunity to increase Albani…</summary>
+  </entry>
+  <entry>
+    <title>Use of Digital Health Technologies in Clinical Investigations to Support Drug and Biological Product Development (U01) Clinical Trials Optional</title>
+    <link href="https://www.grants.gov/search-results-detail/363255"/>
+    <id>urn:funding-finder:grants-gov:363255</id>
+    <updated>2026-07-20T00:00:00Z</updated>
+    <author><name>Food and Drug Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Cybersecurity"/>
+    <summary>Food and Drug Administration — Closes 2026-08-20 — The purpose of this Notice of Funding Opportunity (NOFO) is to address topics related to the use of digital health technologies (DHTs) for remote data acquisition in clinical investigations to support drug development.</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 Next Generation Warning System Grant Program</title>
@@ -224,6 +285,87 @@
     <category term="Cybersecurity"/>
     <category term="Water"/>
     <summary>Department of Homeland Security - FEMA — Closes 2026-08-11 — The CAP-SSSE program provides funding to ensure adoption and enforcement of standards consistent with the National Flood Insurance Program (NFIP) minimum criteria in participating and flood-prone communities. This cooperative agreement strives to empower states and territories to own and effectively manage their flood risk and reduce exposure, disaster costs, and recovery demands by providing plan…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 10</title>
+    <link href="https://www.grants.gov/search-results-detail/363007"/>
+    <id>urn:funding-finder:grants-gov:363007</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>Department of Homeland Security - FEMA</name></author>
+    <category term="Cybersecurity"/>
+    <summary>Department of Homeland Security - FEMA — Closes 2026-08-17 — The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 2</title>
+    <link href="https://www.grants.gov/search-results-detail/362994"/>
+    <id>urn:funding-finder:grants-gov:362994</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>Department of Homeland Security - FEMA</name></author>
+    <category term="Cybersecurity"/>
+    <summary>Department of Homeland Security - FEMA — Closes 2026-08-17 — The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 3</title>
+    <link href="https://www.grants.gov/search-results-detail/362995"/>
+    <id>urn:funding-finder:grants-gov:362995</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>Department of Homeland Security - FEMA</name></author>
+    <category term="Cybersecurity"/>
+    <summary>Department of Homeland Security - FEMA — Closes 2026-08-17 — The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 4</title>
+    <link href="https://www.grants.gov/search-results-detail/362998"/>
+    <id>urn:funding-finder:grants-gov:362998</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>Department of Homeland Security - FEMA</name></author>
+    <category term="Cybersecurity"/>
+    <summary>Department of Homeland Security - FEMA — Closes 2026-08-17 — The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 5</title>
+    <link href="https://www.grants.gov/search-results-detail/362999"/>
+    <id>urn:funding-finder:grants-gov:362999</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>Department of Homeland Security - FEMA</name></author>
+    <category term="Cybersecurity"/>
+    <summary>Department of Homeland Security - FEMA — Closes 2026-08-17 — The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 6</title>
+    <link href="https://www.grants.gov/search-results-detail/363000"/>
+    <id>urn:funding-finder:grants-gov:363000</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>Department of Homeland Security - FEMA</name></author>
+    <category term="Cybersecurity"/>
+    <summary>Department of Homeland Security - FEMA — Closes 2026-08-17 — The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 7</title>
+    <link href="https://www.grants.gov/search-results-detail/363001"/>
+    <id>urn:funding-finder:grants-gov:363001</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>Department of Homeland Security - FEMA</name></author>
+    <category term="Cybersecurity"/>
+    <summary>Department of Homeland Security - FEMA — Closes 2026-08-17 — The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 8</title>
+    <link href="https://www.grants.gov/search-results-detail/363002"/>
+    <id>urn:funding-finder:grants-gov:363002</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>Department of Homeland Security - FEMA</name></author>
+    <category term="Cybersecurity"/>
+    <summary>Department of Homeland Security - FEMA — Closes 2026-08-17 — The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 9</title>
+    <link href="https://www.grants.gov/search-results-detail/363006"/>
+    <id>urn:funding-finder:grants-gov:363006</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>Department of Homeland Security - FEMA</name></author>
+    <category term="Cybersecurity"/>
+    <summary>Department of Homeland Security - FEMA — Closes 2026-08-17 — The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
   </entry>
   <entry>
     <title>FY25-FY26 Advanced Transportation Technology and Innovation (ATTAIN)</title>
