@@ -6,6 +6,7 @@ from scripts.update_catalog_docs import (
     catalog_stats,
     load_catalog,
     render_docs,
+    update_catalog_asset_reference,
 )
 
 
@@ -30,13 +31,18 @@ class CatalogDocumentationTests(unittest.TestCase):
     def test_committed_documentation_matches_generated_catalog(self):
         readme_path = REPOSITORY_ROOT / "README.md"
         project_path = REPOSITORY_ROOT / "PROJECT.md"
+        explorer_path = REPOSITORY_ROOT / "match_explorer.html"
         readme = readme_path.read_text(encoding="utf-8")
         project = project_path.read_text(encoding="utf-8")
-        stats = catalog_stats(
-            load_catalog(REPOSITORY_ROOT / "data" / "opportunities.js")
-        )
+        explorer = explorer_path.read_text(encoding="utf-8")
+        catalog = load_catalog(REPOSITORY_ROOT / "data" / "opportunities.js")
+        stats = catalog_stats(catalog)
 
         self.assertEqual(render_docs(readme, project, stats), (readme, project))
+        self.assertEqual(
+            update_catalog_asset_reference(explorer, catalog),
+            explorer,
+        )
 
     def test_generator_requires_unique_marker_pairs(self):
         stats = catalog_stats(
@@ -44,6 +50,19 @@ class CatalogDocumentationTests(unittest.TestCase):
         )
         with self.assertRaisesRegex(ValueError, "marker pair"):
             render_docs("README without markers", "PROJECT without markers", stats)
+
+    def test_catalog_asset_reference_uses_latest_pipeline_timestamp(self):
+        html = '<script src="./data/opportunities.js"></script>'
+        catalog = {
+            "generated_at": "2026-07-27T12:00:00Z",
+            "document_evidence_generated_at": "2026-07-27T12:05:06Z",
+            "detail_enrichment_generated_at": "2026-07-27T12:03:00",
+        }
+        self.assertEqual(
+            update_catalog_asset_reference(html, catalog),
+            '<script src="./data/opportunities.js?v='
+            'catalog-20260727T120506Z"></script>',
+        )
 
 
 if __name__ == "__main__":

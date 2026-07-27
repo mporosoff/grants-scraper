@@ -76,7 +76,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("Export CSV", explorer_html)
         self.assertIn('id="result-label"', explorer_html)
         self.assertIn(
-            '<script src="./data/opportunities.js"></script>',
+            '<script src="./data/opportunities.js?v=catalog-',
             explorer_html,
         )
         release_version = "release-2026-07-27-v3"

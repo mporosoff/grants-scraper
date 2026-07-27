@@ -4,15 +4,19 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 import json
 from pathlib import Path
+import re
 import textwrap
 from typing import Any
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 CATALOG_PREFIX = "globalThis.GRANT_CATALOG="
+CATALOG_SCRIPT_RE = re.compile(
+    r'<script src="\./data/opportunities\.js(?:\?v=[^"]+)?"></script>'
+)
 
 
 def load_catalog(path: Path) -> dict[str, Any]:
@@ -104,6 +108,44 @@ def catalog_stats(catalog: dict[str, Any]) -> dict[str, Any]:
     if sum(routes.values()) != stats["record_count"]:
         raise ValueError("primary source route counts do not cover the catalog")
     return stats
+
+
+def catalog_asset_version(catalog: dict[str, Any]) -> str:
+    """Build a cache-busting token from the latest completed catalog stage."""
+    values = [
+        catalog.get("generated_at"),
+        catalog.get("detail_enrichment_generated_at"),
+        catalog.get("document_evidence_generated_at"),
+        ((catalog.get("diagnostics") or {}).get("additional_sources") or {}).get(
+            "merged_at"
+        ),
+    ]
+    parsed = []
+    for value in values:
+        if not value:
+            continue
+        try:
+            timestamp = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+            if timestamp.tzinfo is None:
+                timestamp = timestamp.replace(tzinfo=timezone.utc)
+            parsed.append(timestamp.astimezone(timezone.utc))
+        except ValueError:
+            continue
+    if not parsed:
+        raise ValueError("catalog has no valid generated timestamp")
+    latest = max(parsed)
+    return latest.strftime("catalog-%Y%m%dT%H%M%SZ")
+
+
+def update_catalog_asset_reference(html: str, catalog: dict[str, Any]) -> str:
+    matches = CATALOG_SCRIPT_RE.findall(html)
+    if len(matches) != 1:
+        raise ValueError("expected exactly one opportunity catalog script reference")
+    replacement = (
+        '<script src="./data/opportunities.js?v='
+        f'{catalog_asset_version(catalog)}"></script>'
+    )
+    return CATALOG_SCRIPT_RE.sub(replacement, html)
 
 
 def format_date(value: date) -> str:
@@ -255,17 +297,25 @@ def main() -> int:
     args = parser.parse_args()
     readme_path = REPOSITORY_ROOT / "README.md"
     project_path = REPOSITORY_ROOT / "PROJECT.md"
-    stats = catalog_stats(load_catalog(args.catalog))
+    explorer_path = REPOSITORY_ROOT / "match_explorer.html"
+    catalog = load_catalog(args.catalog)
+    stats = catalog_stats(catalog)
     current_readme = readme_path.read_text(encoding="utf-8")
     current_project = project_path.read_text(encoding="utf-8")
+    current_explorer = explorer_path.read_text(encoding="utf-8")
     next_readme, next_project = render_docs(
         current_readme, current_project, stats
+    )
+    next_explorer = update_catalog_asset_reference(
+        current_explorer, catalog
     )
     changed = []
     if current_readme != next_readme:
         changed.append(readme_path)
     if current_project != next_project:
         changed.append(project_path)
+    if current_explorer != next_explorer:
+        changed.append(explorer_path)
     if args.check and changed:
         print("Catalog documentation is stale:")
         for path in changed:
@@ -274,6 +324,9 @@ def main() -> int:
     if not args.check:
         readme_path.write_text(next_readme, encoding="utf-8", newline="\n")
         project_path.write_text(next_project, encoding="utf-8", newline="\n")
+        explorer_path.write_text(
+            next_explorer, encoding="utf-8", newline="\n"
+        )
     print(
         f"Catalog documentation is current for {stats['record_count']:,} "
         f"records ({format_date(stats['generated'])})."
