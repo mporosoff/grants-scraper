@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-07-27T14:10:37Z</updated>
+  <updated>2026-07-27T14:18:43Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Independent Internal Audit Services</title>
@@ -27,6 +27,19 @@
     <category term="Public health"/>
     <category term="Cybersecurity"/>
     <summary>Food and Drug Administration — Closes 2026-08-21 — FDA is announcing the availability of funds for the support of a cooperative agreement between the Human Food Program/ Office of Laboratory Operations and Applied Science (OLOAS)/ Office of Applied Microbiolgy and Technology (OAMT) and the Marine Environmental Sciences Consortium/Dauphin Island Sea Lab (DISL). The scientific, public health, and policy expertise within the Food and Drug Administrat…</summary>
+  </entry>
+  <entry>
+    <title>Advancing Oil and Natural Gas Production and Delivery</title>
+    <link href="https://www.grants.gov/search-results-detail/363302"/>
+    <id>urn:funding-finder:grants-gov:363302</id>
+    <updated>2026-07-23T00:00:00Z</updated>
+    <author><name>National Energy Technology Laboratory</name></author>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>National Energy Technology Laboratory — Closes 2026-09-22 — Advancing Oil and Natural Gas Production and Delivery This Notice of Funding Opportunity (NOFO) is seeking proposals to advance cost-effective technologies for improving the efficiency, reliability, and resilience of the Unites States oil and natural gas supply chain. This funding opportunity spans research and development efforts focused on enhancing resource utilization, modernizing infrastructu…</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement to Support Shellfish Safety Assistance Project</title>
@@ -111,6 +124,22 @@
     <category term="Biology and biotechnology"/>
     <category term="Cybersecurity"/>
     <summary>Food and Drug Administration — Closes 2026-08-20 — The purpose of this Notice of Funding Opportunity (NOFO) is to address topics related to the use of digital health technologies (DHTs) for remote data acquisition in clinical investigations to support drug development.</summary>
+  </entry>
+  <entry>
+    <title>Egypt Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363252"/>
+    <id>urn:funding-finder:grants-gov:363252</id>
+    <updated>2026-07-20T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Materials science"/>
+    <category term="Cybersecurity"/>
+    <summary>Bureau of Near Eastern Affairs — Closes 2026-08-31 — The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 Next Generation Warning System Grant Program</title>
@@ -206,6 +235,16 @@
     <summary>U.S. Mission to Oman — Closes 2026-08-09 — The Public Diplomacy Section of U.S. Embassy Muscat announces an open competition to support projects that advance U.S. foreign policy priorities in Oman while strengthening the long-standing partnership between the United States and the Sultanate of Oman. This Annual Program Statement outlines strategic funding priorities, eligibility criteria, and application guidelines for grants ranging from $…</summary>
   </entry>
   <entry>
+    <title>Fiscal Year 2027 Expanding Nutrition Services</title>
+    <link href="https://www.grants.gov/search-results-detail/362823"/>
+    <id>urn:funding-finder:grants-gov:362823</id>
+    <updated>2026-07-08T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Cybersecurity"/>
+    <summary>Health Resources and Services Administration — Closes 2026-09-09 — The purpose of Fiscal Year (FY) 2027 Expanding Nutrition Services (ENS) funding is to increase access to nutrition services at HRSA-funded health centers. Nutrition services can help to prevent, manage, and treat diseases and conditions through nutritional and food-based interventions. Health centers will use ENS funding to increase the number of nutrition services patients or visits.</summary>
+  </entry>
+  <entry>
     <title>FY26 American Spaces Vietnam Programming</title>
     <link href="https://www.grants.gov/search-results-detail/363080"/>
     <id>urn:funding-finder:grants-gov:363080</id>
@@ -251,6 +290,33 @@
     <category term="Cybersecurity"/>
     <category term="Education and workforce"/>
     <summary>U.S. Mission to Vietnam — Closes 2026-08-02 — The U.S. Department of State’s Consulate General Ho Chi Minh City announces an open competition to implement a program to combat cyber scams.Transnational organized crime in Southeast Asia is increasing at an unprecedented pace. The region has witnessed the proliferation of industrial-scale cyber fraud and scam operations, driven by sophisticated transnational criminal syndicates and networks of h…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year 2026 United States Marine Highway Program (USMHP)</title>
+    <link href="https://www.grants.gov/search-results-detail/362478"/>
+    <id>urn:funding-finder:grants-gov:362478</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>Maritime Administration</name></author>
+    <category term="Energy"/>
+    <category term="Transportation"/>
+    <category term="Cybersecurity"/>
+    <summary>Maritime Administration — Closes 2026-08-31 — The United States Marine Highway Program (USMHP), codified at 46 U.S.C. 55601, was originally established by Section 1121 of the Energy Independence and Security Act of 2007 to reduce landside congestion through the designation of Marine Highway Routes. The USMHP statute authorizes the U.S. Department of Transportation (“Department” or “DOT”) to make grants to implement Projects or components of P…</summary>
+  </entry>
+  <entry>
+    <title>Improved Oil and Gas Recovery and Produced Water Management Technologies</title>
+    <link href="https://www.grants.gov/search-results-detail/363065"/>
+    <id>urn:funding-finder:grants-gov:363065</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>National Energy Technology Laboratory</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Water"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <category term="Cybersecurity"/>
+    <summary>National Energy Technology Laboratory — Closes 2026-09-08 — Modification 000003: The purpose of this modification is to revise NOFO Part 1. Section I.A.1 is revised to correct the Topic Area 1b cost share to 20% and Section IV.C.2 is revised to delete the Environmental Considerations Summary and Environmental Impact Volume from the Summary of Application Requirements table. This Notice of Funding Opportunity (NOFO) will seek proposals for specific research…</summary>
   </entry>
   <entry>
     <title>Small Health Care Provider Quality Improvement Program</title>
@@ -368,6 +434,19 @@
     <summary>Department of Homeland Security - FEMA — Closes 2026-08-17 — The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
   </entry>
   <entry>
+    <title>Interdisciplinary Transportation Law and Policy Technology Training Development</title>
+    <link href="https://www.grants.gov/search-results-detail/362960"/>
+    <id>urn:funding-finder:grants-gov:362960</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>69A355 Research and Technology</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <category term="Cybersecurity"/>
+    <summary>69A355 Research and Technology — Closes 2026-08-28 — The U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Interdisciplinary Transportation Law and Policy Technology Training Development program. This 24-month cooperative agreement aims to bridge the critical knowledge gap between fast-changing transportation technologies and our Nati…</summary>
+  </entry>
+  <entry>
     <title>FY25-FY26 Advanced Transportation Technology and Innovation (ATTAIN)</title>
     <link href="https://www.grants.gov/search-results-detail/362980"/>
     <id>urn:funding-finder:grants-gov:362980</id>
@@ -389,6 +468,17 @@
     <summary>Office of the Assistant Secretary for Health — Closes 2026-08-05 — This notice solicits applications for practical, data-driven, and scalable projects that support States, Tribal communities, healthcare systems, or community-based organizations in collecting, analyzing, and reporting information related to access to medical forensic examinations for women and girl survivors of sexual assault. Projects funded under this initiative should identify barriers, service…</summary>
   </entry>
   <entry>
+    <title>FY 2027 International Visitor Leadership Program’s National Program Agencies</title>
+    <link href="https://www.grants.gov/search-results-detail/362943"/>
+    <id>urn:funding-finder:grants-gov:362943</id>
+    <updated>2026-06-24T00:00:00Z</updated>
+    <author><name>Bureau Of Educational and Cultural Affairs</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Cybersecurity"/>
+    <summary>Bureau Of Educational and Cultural Affairs — Closes 2026-08-24 — The United States Department of State’s Bureau of Educational and Cultural Affairs’ Office of International Visitors (ECA/PE/V) announces an open competition for approximately five cooperative agreements to support the staff expenses and overhead costs of the FY 2027 International Visitor Leadership Program’s (IVLP) National Program Agencies (NPAs). Launched in 1940, the IVLP is the Department of …</summary>
+  </entry>
+  <entry>
     <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
     <link href="https://www.grants.gov/search-results-detail/362900"/>
     <id>urn:funding-finder:grants-gov:362900</id>
@@ -400,6 +490,8 @@
     <category term="Manufacturing"/>
     <category term="Technology development"/>
     <category term="Transportation"/>
+    <category term="Data science"/>
+    <category term="Energy"/>
     <summary>U.S. Mission to Indonesia — Closes 2026-08-31 — Project Background, Goals, and ObjectivesIn an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will leave…</summary>
   </entry>
   <entry>

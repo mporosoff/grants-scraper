@@ -487,8 +487,8 @@ The July 27, 2026 catalog contains 1,506 current posted or forecasted opportunit
 - another 654 use an official source page as their primary route;
 - the remaining 404 use the official Grants.gov record as their primary route;
 - 813 contain an agency notice URL across all route types;
-- 376 preserve an official deadline time or timezone;
-- 132 carry a preliminary-stage signal, including 3 narrative dates visibly marked for
+- 386 preserve an official deadline time or timezone;
+- 133 carry a preliminary-stage signal, including 3 narrative dates visibly marked for
   verification;
 - 705 (46.8%) have an official per-award floor or ceiling;
 - 988 (65.6%) have at least one structured funding amount; and

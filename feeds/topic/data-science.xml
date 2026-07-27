@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-07-27T14:10:37Z</updated>
+  <updated>2026-07-27T14:18:43Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -179,6 +179,34 @@
     <summary>National Institutes of Health — Closes 2026-09-25 — The Office of Data Science Strategy (ODSS) along with other participating institutes and Centers intends to renew the Notice of Funding Opportunity (NOFO) PAR-23-237.This funding opportunity is intended to provide continuation to support established biomedical data repositories and knowledge bases as distinct and separate resources that have demonstrated impact and have potential for continued ben…</summary>
   </entry>
   <entry>
+    <title>American Innovation Hub: AI &amp; Digital Skills for the Creative &amp; Tech Economy</title>
+    <link href="https://www.grants.gov/search-results-detail/363293"/>
+    <id>urn:funding-finder:grants-gov:363293</id>
+    <updated>2026-07-23T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Indonesia — Closes 2026-08-30 — Indonesia is ASEAN’s largest economy and most populous nation, with a young, fast-growing digital population that is rapidly adopting artificial intelligence and creative-technology tools. The choices this generation makes about which technologies, standards, and platforms to build on will shape Indonesia’s digital economy for decades. Demand for trusted, high-quality AI tools is outpacing access …</summary>
+  </entry>
+  <entry>
+    <title>Advancing Oil and Natural Gas Production and Delivery</title>
+    <link href="https://www.grants.gov/search-results-detail/363302"/>
+    <id>urn:funding-finder:grants-gov:363302</id>
+    <updated>2026-07-23T00:00:00Z</updated>
+    <author><name>National Energy Technology Laboratory</name></author>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>National Energy Technology Laboratory — Closes 2026-09-22 — Advancing Oil and Natural Gas Production and Delivery This Notice of Funding Opportunity (NOFO) is seeking proposals to advance cost-effective technologies for improving the efficiency, reliability, and resilience of the Unites States oil and natural gas supply chain. This funding opportunity spans research and development efforts focused on enhancing resource utilization, modernizing infrastructu…</summary>
+  </entry>
+  <entry>
     <title>Technology Enhanced Adoptive Family Recruiting and Matching</title>
     <link href="https://www.grants.gov/search-results-detail/361968"/>
     <id>urn:funding-finder:grants-gov:361968</id>
@@ -189,6 +217,22 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Administration for Children and Families - ACYF/CB — Closes 2026-08-21 — This program will fund projects focused on technology-enabled strategies that improve adoptive matching, placement, and permanency for children in foster care awaiting adoption. The funds, awarded to four regional centers, will be used to design, implement and evaluate these strategies.These centers will focus on children with an adoption permanency goal or who are legally free for adoption due to…</summary>
+  </entry>
+  <entry>
+    <title>Egypt Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363252"/>
+    <id>urn:funding-finder:grants-gov:363252</id>
+    <updated>2026-07-20T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Materials science"/>
+    <category term="Cybersecurity"/>
+    <summary>Bureau of Near Eastern Affairs — Closes 2026-08-31 — The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 Next Generation Warning System Grant Program</title>
@@ -315,6 +359,17 @@
     <summary>U.S. Mission to Jerusalem — Closes 2026-08-06 — U.S. Embassy Jerusalem’s Public Diplomacy Section (PDS) announces an open competition to implement projects that advance U.S. economic, commercial, and security interests among Palestinian audiences. This Annual Program Statement (APS) outlines strategic goals, expected outcomes, target audiences, eligibility criteria, and application guidelines for cooperative agreements ranging from $50,000 to $…</summary>
   </entry>
   <entry>
+    <title>Collaborative Research</title>
+    <link href="https://www.grants.gov/search-results-detail/363084"/>
+    <id>urn:funding-finder:grants-gov:363084</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>National Endowment for the Humanities</name></author>
+    <category term="Arts and culture"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>National Endowment for the Humanities — Closes 2026-09-16 — The program supports groups of two or more scholars increasing humanistic knowledge through the preparation of a manuscript for print publication, the creation of a scholarly digital project, or the planning of an international collaboration. Projects must pursue significant research questions and lead toward an interpretive product. This year’s competition is limited to projects on American histo…</summary>
+  </entry>
+  <entry>
     <title>Disability and Rehabilitation Research Projects (DRRP) Program: Community Living and Participation (Development)</title>
     <link href="https://www.grants.gov/search-results-detail/362016"/>
     <id>urn:funding-finder:grants-gov:362016</id>
@@ -346,6 +401,22 @@
     <category term="Technology development"/>
     <category term="Data science"/>
     <summary>U.S. Mission to Indonesia — Closes 2026-08-09 — Executive Summary The U.S. Department of State’s Embassy Jakarta announces an open competition to implement the AI Pathways to the Future program, a comprehensive initiative designed to strengthen U.S.-Indonesia partnerships in artificial intelligence education, research, and innovation. Promoting AI innovation and security is a top priority of the United States government, including in its foreig…</summary>
+  </entry>
+  <entry>
+    <title>Improved Oil and Gas Recovery and Produced Water Management Technologies</title>
+    <link href="https://www.grants.gov/search-results-detail/363065"/>
+    <id>urn:funding-finder:grants-gov:363065</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>National Energy Technology Laboratory</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Water"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <category term="Cybersecurity"/>
+    <summary>National Energy Technology Laboratory — Closes 2026-09-08 — Modification 000003: The purpose of this modification is to revise NOFO Part 1. Section I.A.1 is revised to correct the Topic Area 1b cost share to 20% and Section IV.C.2 is revised to delete the Environmental Considerations Summary and Environmental Impact Volume from the Summary of Application Requirements table. This Notice of Funding Opportunity (NOFO) will seek proposals for specific research…</summary>
   </entry>
   <entry>
     <title>Voices for the Future</title>
@@ -384,6 +455,30 @@
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health — Closes 2026-10-01 — The overall goal of this program is to accelerate scientific discovery, improve research efficiency, and enhance the translation of research findings into improved health outcomes. Centers funded under this program will also foster multidisciplinary collaboration, support workforce development across career stages, and promote training in emerging areas such as data science, artificial intelligenc…</summary>
+  </entry>
+  <entry>
+    <title>Tribal Transportation Safety Strategy Pilot Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362956"/>
+    <id>urn:funding-finder:grants-gov:362956</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>69A355 Research and Technology</name></author>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>69A355 Research and Technology — Closes 2026-08-28 — he U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Tribal Transportation Safety Strategy Pilot Program. This three-year cooperative agreement is designed to address the critical public safety crisis in Tribal communities, as American Indian and Alaska Native populations experience…</summary>
+  </entry>
+  <entry>
+    <title>Scholarly Editions and Translations</title>
+    <link href="https://www.grants.gov/search-results-detail/363014"/>
+    <id>urn:funding-finder:grants-gov:363014</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>National Endowment for the Humanities</name></author>
+    <category term="Arts and culture"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>National Endowment for the Humanities — Closes 2026-09-16 — The National Endowment for the Humanities (NEH) Division of Research is accepting applications for the Scholarly Editions and Translations program. The purpose of this program is to support collaborative teams who edit, annotate, and translate foundational humanities texts that are vital to generating new scholarship but are not available in adequate editions or translations. This year’s competiti…</summary>
   </entry>
   <entry>
     <title>A Demonstration to Scale Innovative Person-Centered Approaches to Falls Prevention through Clinical-Community Partnerships</title>
@@ -426,6 +521,22 @@
     <summary>U.S. Mission to Indonesia — Closes 2026-08-07 — Project Background, Goals, and ObjectivesThe Creative Industries Film Lab and Residency – American Film Showcase 2026 is a five-day public diplomacy program aligned with the American Film Showcase 2026 Envoy visit and scheduled during the Jogja-NETPAC Asian Film Festival Market 2026. The program includes two main components: Exhibition Booth: In partnership with Jogja-NETPAC, the program will secu…</summary>
   </entry>
   <entry>
+    <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
+    <link href="https://www.grants.gov/search-results-detail/362900"/>
+    <id>urn:funding-finder:grants-gov:362900</id>
+    <updated>2026-06-22T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Cybersecurity"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <category term="Data science"/>
+    <category term="Energy"/>
+    <summary>U.S. Mission to Indonesia — Closes 2026-08-31 — Project Background, Goals, and ObjectivesIn an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will leave…</summary>
+  </entry>
+  <entry>
     <title>Escape The Hack: Countering Cyber Scams with an Immersive Experience for Everyday Indonesians</title>
     <link href="https://www.grants.gov/search-results-detail/362863"/>
     <id>urn:funding-finder:grants-gov:362863</id>
@@ -462,6 +573,17 @@
     <summary>U.S. Mission to Canada — Closes 2026-07-31 — The U.S. Department of State’s Embassy Ottawa announces an open competition to implement a program to connect U.S. citizen talent, including subject matter experts, artists and cultural professionals, and current and former American athletes and coaches, with Canadian audiences and institutions on topics of strategic importance to the United States. Recipients should be prepared to identify and re…</summary>
   </entry>
   <entry>
+    <title>GlobalX Challenge 26.1: AI-Native Air Interface for Tactical Communication Networks</title>
+    <link href="https://www.grants.gov/search-results-detail/362721"/>
+    <id>urn:funding-finder:grants-gov:362721</id>
+    <updated>2026-06-09T00:00:00Z</updated>
+    <author><name>Office of Naval Research</name></author>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Office of Naval Research — Closes 2026-08-31 — The purpose of the GlobalX Innovation Challenge is to accelerate the traditional knowledge generation cycle, rapidly testing applied research theories to enable the discovery of revolutionary dual-use capabilities for the benefit of the U.S. Navy and Marine Corps, the commercial marketplace, and the public. Led by the Office of Naval Research Global and targeted at researchers in the Indian subcon…</summary>
+  </entry>
+  <entry>
     <title>Research and Education Program for Historically Black Colleges and Universities (HBCU) and Tribal Colleges and Universities (TCU)</title>
     <link href="https://www.grants.gov/search-results-detail/362711"/>
     <id>urn:funding-finder:grants-gov:362711</id>
@@ -496,6 +618,18 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Department of Housing and Urban Development — Closes 2026-08-03 — As President Trump said in his Executive Order on Removing Regulatory Barriers to Affordable Home Construction (March 13, 2026), The American dream of homeownership depends on a dynamic housing market in which a varied inventory of new homes is built and renovated each year. Layers of unnecessary regulatory barriers, slow permitting processes, and onerous mandates at all levels of government have …</summary>
+  </entry>
+  <entry>
+    <title>Native American Affairs: Fiscal Year 2025 Colorado River Basin Tribal Drought Resiliency Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362644"/>
+    <id>urn:funding-finder:grants-gov:362644</id>
+    <updated>2026-06-02T00:00:00Z</updated>
+    <author><name>Bureau of Reclamation</name></author>
+    <category term="Energy"/>
+    <category term="Water"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Bureau of Reclamation — Closes 2026-09-23 — The objectives of this NAA/TAP funding opportunity are to provide funding for drought relief actions/projects that mitigate drought impacts for designated federally recognized tribes within the Colorado River Basin (see Eligibility section for list of tribes), and which advance Presidential and Department of the Interior Priorities within the Basin.Proposals should meet one or more of the followin…</summary>
   </entry>
   <entry>
     <title>NLM Institutional Grants for Research Training in Biomedical Informatics, Data Science, and AI</title>
@@ -612,133 +746,5 @@
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <summary>National Institute of Food and Agriculture — Closes 2026-12-31 — TCRGP focuses on development of research capacity at Tribal colleges, specifically in agriculture, natural resources, and human sciences. The program aims to teach leadership skills, knowledge, and qualities that are necessary to prepare students to be competitive with other students for agricultural and related careers in the private sector, government, and academia. Of interest are the projects …</summary>
-  </entry>
-  <entry>
-    <title>Post Kuala Lumpur FY2026 Annual Program Statement</title>
-    <link href="https://www.grants.gov/search-results-detail/361693"/>
-    <id>urn:funding-finder:grants-gov:361693</id>
-    <updated>2026-03-27T00:00:00Z</updated>
-    <author><name>U.S. Mission to Malaysia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>U.S. Mission to Malaysia — Closes 2026-07-31 — The U.S. Embassy Kuala Lumpur Public Diplomacy Section seeks proposals that advance American leadership, prosperity, and security interests in Malaysia. This program supports initiatives that promote U.S. technological innovation and economic competitiveness, showcase American excellence in sports and education, strengthen ties with exchange program alumni, and position the United States as Malays…</summary>
-  </entry>
-  <entry>
-    <title>Advancing Bioinformatics, Translational Bioinformatics and Computational Biology Research (R01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359003"/>
-    <id>urn:funding-finder:grants-gov:359003</id>
-    <updated>2026-02-11T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2029-03-05 — The National Library of Medicine (NLM) seeks applications for research projects that drive groundbreaking innovation and advanced development in the fields of bioinformatics, translational bioinformatics, and computational biology. The primary goal of this initiative is to support the creation and implementation of cutting-edge methods, tools, and approaches that can transform the landscape of bio…</summary>
-  </entry>
-  <entry>
-    <title>Research Grants in Clinical Informatics (R01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359004"/>
-    <id>urn:funding-finder:grants-gov:359004</id>
-    <updated>2026-02-11T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Data science"/>
-    <summary>National Institutes of Health — Closes 2029-03-05 — The National Library of Medicine (NLM) seeks applications for innovative research in clinical informatics. The overarching goal of this forthcoming program is to catalyze the development and advancement of novel informatics methodologies that empower clinicians, patients, and the broader public to better understand, manage, and improve health and health care delivery. This NOFO will support resear…</summary>
-  </entry>
-  <entry>
-    <title>Collaboratory to Advance Mathematics Education and Learning (CAMEL) for K-12</title>
-    <link href="https://www.grants.gov/search-results-detail/361008"/>
-    <id>urn:funding-finder:grants-gov:361008</id>
-    <updated>2025-12-12T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Technology development"/>
-    <summary>U.S. National Science Foundation — Posted — The Collaboratory to Advance Mathematics Education and Learning (CAMEL) for K-12 initiative aims to advance mathematics learning and education through purposeful collaboration that draws on the interdisciplinary Science of Learning (including neuroscience; cognitive, developmental, and social sciences; computer science; machine learning; engineering; and education research), deep experiences in ed…</summary>
-  </entry>
-  <entry>
-    <title>Animal and Biological Material Resource Centers (P40 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359646"/>
-    <id>urn:funding-finder:grants-gov:359646</id>
-    <updated>2025-12-05T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
-    <summary>National Institutes of Health — Closes 2028-09-26 — This Notice of Funding Opportunity (NOFO) encourages grant applications for Animal and Biological Material Resource Centers. These Centers provide support for special colonies of laboratory animals and associated services, as well as other resources such as informatics tools, reagents, cultures (cells, tissues, and organs) and genetic stocks that serve the biomedical research community in a variet…</summary>
-  </entry>
-  <entry>
-    <title>FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
-    <link href="https://www.grants.gov/search-results-detail/360678"/>
-    <id>urn:funding-finder:grants-gov:360678</id>
-    <updated>2025-09-30T00:00:00Z</updated>
-    <author><name>Office of Science</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Separations and membranes"/>
-    <category term="Carbon management"/>
-    <category term="Quantum science"/>
-    <summary>Office of Science — Closes 2026-09-30 — The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
-  </entry>
-  <entry>
-    <title>Computer and Information Science and Engineering (CISE): Future Computing Research</title>
-    <link href="https://www.grants.gov/search-results-detail/360149"/>
-    <id>urn:funding-finder:grants-gov:360149</id>
-    <updated>2025-07-25T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <summary>U.S. National Science Foundation — Closes 2026-09-10 — The NSF CISE Directorate supports research and education projects that develop new knowledge in all aspects of computing, communications, and information science and engineering through the following Future Computing Research (Future CoRe) programs: Algorithmic Foundations (AF) program; Communications and Information Foundations (CIF) program; Computer Systems Research (CSR) program; Computing Edu…</summary>
-  </entry>
-  <entry>
-    <title>Centers of Research Excellence in Science and Technology - Research Infrastructure for Science and Engineering</title>
-    <link href="https://www.grants.gov/search-results-detail/359061"/>
-    <id>urn:funding-finder:grants-gov:359061</id>
-    <updated>2025-05-21T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Climate change"/>
-    <category term="Cybersecurity"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <summary>U.S. National Science Foundation — Closes 2026-08-07 — The Centers of Research Excellence in Science and Technology (CREST) program provides support to enhance the research capabilities of minority-serving institutions (MSIs) as defined in this solicitation’s Eligibility section, through effective integration of education and research. The CREST program, composed of the CREST Centers, the CREST Postdoctoral Research Program, and the projects supported…</summary>
-  </entry>
-  <entry>
-    <title>Infrastructure Systems and People</title>
-    <link href="https://www.grants.gov/search-results-detail/358397"/>
-    <id>urn:funding-finder:grants-gov:358397</id>
-    <updated>2025-01-25T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Data science"/>
-    <category term="Environmental science"/>
-    <category term="Materials science"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <category term="Water"/>
-    <summary>U.S. National Science Foundation — Posted — Infrastructure systems comprise complex connections between physical components, organizational structures and operational methods that support the needs of people and communities at the local, regional, national, and global scales. Such systems form the backbone of society, providing essential services as well as ensuring public health and welfare, economic prosperity and national security, and a…</summary>
-  </entry>
-  <entry>
-    <title>Supporting Talented Early Career Researchers in Genomics (R01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/357744"/>
-    <id>urn:funding-finder:grants-gov:357744</id>
-    <updated>2024-12-16T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
-    <summary>National Institutes of Health — Closes 2027-02-26 — This Funding Opportunity Announcement is intended to identify and support research projects by exceptionally promising Early Stage Investigators with a long-term career interest in pursuing innovative research in genomics. This opportunity is open to research in all areas relevant to the mission of NHGRI, including genomic sciences, genomic medicine, genomic data science, and ethical, legal, and s…</summary>
   </entry>
 </feed>
