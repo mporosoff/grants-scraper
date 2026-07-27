@@ -92,10 +92,10 @@ Grants.gov fields used by filters or sorting. Its compact cache is
 
 <!-- catalog-stats:start -->
 This replaces the former 48-record Chemical and Sustainability Engineering feed. The
-July 26, 2026 build contains 1,465 current federal opportunities (1,224 posted and 241
+July 27, 2026 build contains 1,466 current federal opportunities (1,225 posted and 241
 forecasted) with no deadline before the catalog date. It provides a direct official
-announcement for 447 records, an agency-notice route for another 615, and the official
-Grants.gov record for the remaining 403. Across all route types, 774 records also
+announcement for 447 records, an agency-notice route for another 616, and the official
+Grants.gov record for the remaining 403. Across all route types, 775 records also
 contain an agency notice URL.
 <!-- catalog-stats:end -->
 
