@@ -3144,6 +3144,20 @@ body.chat-expanded .chat-privacy {
     border-color: #49627d;
   }
 
+  /* Example "quick search" chips: light text on dark blue for readable contrast. */
+  .quick-searches button,
+  .search-workflow .quick-searches button {
+    color: #dbe9fc;
+    background: #24406a;
+    border-color: #4a648a;
+  }
+
+  .quick-searches button:hover,
+  .search-workflow .quick-searches button:hover {
+    background: #2f4f7f;
+    color: #ffffff;
+  }
+
   .badge.open,
   .evidence-status.current {
     color: #9be8c8;

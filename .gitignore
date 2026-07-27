@@ -36,3 +36,6 @@ faculty.csv
 .vscode/
 .DS_Store
 Thumbs.db
+
+# Local agent/session settings (never commit)
+.claude/

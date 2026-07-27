@@ -635,5 +635,55 @@ class DiscoverabilityTests(unittest.TestCase):
         self.assertEqual(record["document_search_text"], first_text)
 
 
+class DoeExchangeParseTests(unittest.TestCase):
+    FIXTURE = (
+        '<ul>'
+        '<li><a href="#FoaId11111111-1111-1111-1111-111111111111">DE-FOA-0009001</a> '
+        '<a href="#FoaId11111111-1111-1111-1111-111111111111">Carbon Capture Catalysis (CCC)</a> '
+        'Notice Of Funding Opportunity (NOFO) 9/15/2026 05:00 PM ET 12/1/2026 05:00 PM ET</li>'
+        '<li><a href="#FoaId22222222-2222-2222-2222-222222222222">RFI-0000200</a> '
+        '<a href="#FoaId22222222-2222-2222-2222-222222222222">Request for Information on Widgets</a> '
+        'Request for Information (RFI) 7/1/2026 05:00 PM ET</li>'
+        '<li><a href="#FoaId33333333-3333-3333-3333-333333333333">DE-FOA-0008000</a> '
+        '<a href="#FoaId33333333-3333-3333-3333-333333333333">Legacy Closed Program</a> '
+        'Notice Of Funding Opportunity (NOFO) 2/1/2024 05:00 PM ET 4/1/2024 05:00 PM ET</li>'
+        '<li><a href="#FoaId44444444-4444-4444-4444-444444444444">DE-FOA-0009050</a> '
+        '<a href="#FoaId44444444-4444-4444-4444-444444444444">Geothermal Field Tests</a> '
+        'Notice Of Funding Opportunity (NOFO) Geothermal Technologies (GTO) 10/30/2026 05:00 PM ET TBD</li>'
+        '</ul>'
+    )
+
+    def test_parses_nofos_and_filters_non_funding(self):
+        from scripts.sources.adapters.doe_exchange import ArpaEAdapter
+
+        opps = ArpaEAdapter().parse_html(self.FIXTURE, as_of=date(2026, 7, 25))
+        by_title = {o.title: o for o in opps}
+        # RFI is dropped; three NOFOs remain.
+        self.assertEqual(len(opps), 3)
+        self.assertNotIn("Request for Information on Widgets", by_title)
+
+        ccc = by_title["Carbon Capture Catalysis (CCC)"].to_record(
+            slug="arpa-e", source="ARPA-E eXCHANGE", source_type="Federal")
+        self.assertEqual(ccc["close_date"], "2026-09-15")   # next open date
+        self.assertIn("2026-12-01", [d.get("date") for d in ccc["deadlines"]])  # later round kept
+        self.assertIn("11111111", ccc["detail_page"])
+
+        geo = by_title["Geothermal Field Tests"].to_record(
+            slug="arpa-e", source="ARPA-E eXCHANGE", source_type="Federal")
+        self.assertEqual(geo["agency"], "Geothermal Technologies (GTO)")
+
+    def test_currentness_gate_drops_closed_foas(self):
+        from scripts.sources.adapters.doe_exchange import ArpaEAdapter
+
+        records = [
+            o.to_record(slug="arpa-e", source="ARPA-E eXCHANGE", source_type="Federal")
+            for o in ArpaEAdapter().parse_html(self.FIXTURE, as_of=date(2026, 7, 25))
+        ]
+        kept, dropped = filter_publishable(records, date(2026, 7, 25))
+        kept_titles = {r["title"] for r in kept}
+        self.assertIn("Carbon Capture Catalysis (CCC)", kept_titles)
+        self.assertNotIn("Legacy Closed Program", kept_titles)
+
+
 if __name__ == "__main__":
     unittest.main()

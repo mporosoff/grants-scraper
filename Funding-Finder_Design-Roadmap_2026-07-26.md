@@ -38,7 +38,7 @@ comparison.
 
 **Problem.** Useful / Not relevant / Verify captures *acceptance*, not *degree of fit*. It can't express "close, but not quite," and it doesn't clearly separate two different jobs:
 - **Evaluation** (for you, the developer): measure whether retrieval and ranking work, aggregated across a pilot. *This is what the tool does today.*
-- **Signal for the user** (Workstream B): make this user's next results better. *This does not exist yet.*
+- **Signal for the user** (Workstream B): make this user's next results better. *This is now implemented as the optional device-local preference re-ranker.*
 
 **Scope (in).**
 1. **Graded relevance scale** (4 levels), e.g. `Not relevant → Marginal (close) → Relevant → Highly relevant`. This maps to standard graded-relevance metrics (nDCG).

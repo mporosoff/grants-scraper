@@ -11,5 +11,7 @@ from . import rss            # noqa: F401  (Philanthropy News Digest RFP; disabl
 from . import sample         # noqa: F401  (offline demo/fixture adapter; disabled)
 from . import nyserda        # noqa: F401  (verified state source; enabled)
 from . import ur_infoready   # noqa: F401  (disabled shell; parser retained)
+from . import doe_exchange   # noqa: F401  (ARPA-E + DOE EERE Exchange; enabled)
+from . import nspires        # noqa: F401  (NASA NSPIRES; enabled)
 
-__all__ = ["rss", "sample", "nyserda", "ur_infoready"]
+__all__ = ["rss", "sample", "nyserda", "ur_infoready", "doe_exchange", "nspires"]
