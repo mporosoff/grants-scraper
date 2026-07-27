@@ -81,7 +81,18 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(script, /focus_result_ids/);
   assert.match(script, /data-chat-jump/);
   assert.match(script, /event\.key !== "Enter"[\s\S]*?askResults\(/);
+  assert.match(script, /document\.documentElement\.classList\.add\("chat-expanded"\)/);
+  assert.match(script, /document\.documentElement\.classList\.remove\("chat-expanded"\)/);
+  assert.doesNotMatch(script, /chat-thinking"\)\.scrollIntoView/);
   assert.match(css, /body\.chat-expanded/);
+  assert.match(
+    css,
+    /\.messages\s*\{[^}]*align-content:\s*start[^}]*overscroll-behavior-y:\s*contain/s,
+  );
+  assert.match(
+    css,
+    /html\.chat-expanded,\s*body\.chat-expanded\s*\{[^}]*overflow:\s*hidden[^}]*overscroll-behavior:\s*none/s,
+  );
   assert.match(css, /\.chat-thinking/);
   assert.match(script, /Open official FOA/);
   assert.match(script, /primary_document_url/);

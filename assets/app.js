@@ -18,6 +18,8 @@
   const REVIEW_API = globalThis.FUNDING_REVIEW;
   const CREDENTIAL_API = globalThis.FUNDING_CREDENTIALS;
   const CHAT_UI = globalThis.FUNDING_CHAT_UI;
+  const PREFERENCES_API = globalThis.FUNDING_PREFERENCES;
+  const SAVED_API = globalThis.FUNDING_SAVED;
   const DEFAULT_CHAT_SUGGESTIONS = [
     "Which submission stages and deadlines are actually cited?",
     "Compare the cited award amounts and project durations.",
@@ -101,6 +103,10 @@
     sort: "deadline",
     filters: Object.fromEntries(Object.keys(FACETS).map(name => [name, new Set()])),
     matches: [],
+    personalize: false,
+    preferenceModel: null,
+    savedItems: [],
+    savedIds: new Set(),
     profile: {
       value: null,
       saved: false,
@@ -448,6 +454,7 @@
       early_career: $("flag-early-career").checked,
       no_cost_share: $("flag-no-cost-share").checked,
       profile_search_active: $("use-profile").checked,
+      personalize: $("use-preferences")?.checked || false,
       ai_provider: $("k-provider").value,
       sort: $("sort").value,
       facets: Object.fromEntries(
@@ -541,6 +548,8 @@
     $("flag-no-cost-share").checked = value.no_cost_share;
     $("k-provider").value = value.ai_provider;
     $("sort").value = value.sort;
+    if ($("use-preferences")) $("use-preferences").checked = value.personalize;
+    state.personalize = value.personalize;
     for (const name of Object.keys(FACETS)) {
       const validValues = new Set(Object.keys(catalog.facets[name] || {}));
       state.filters[name] = new Set(
@@ -663,11 +672,16 @@
     return String(a).localeCompare(String(b), undefined, { numeric: true }) * direction;
   }
 
-  function sortMatches(matches, hasSearchTerms, mode = state.sort) {
+  function sortMatches(
+    matches,
+    hasSearchTerms,
+    mode = state.sort,
+    hasPersonalization = false,
+  ) {
     matches.sort((left, right) => {
       const a = catalog.opportunities[left.index];
       const b = catalog.opportunities[right.index];
-      if (mode === "relevance" && hasSearchTerms) {
+      if (mode === "relevance" && (hasSearchTerms || hasPersonalization)) {
         return right.score - left.score || compareValues(a.close_date, b.close_date);
       }
       if (mode === "posted") return compareValues(a.posted_date, b.posted_date, -1) || compareValues(a.close_date, b.close_date);
@@ -683,12 +697,56 @@
     return matches;
   }
 
+  function preferenceTrainingModel() {
+    if (!PREFERENCES_API) return null;
+    const labeled = [];
+    for (const [id, entry] of Object.entries(state.feedback)) {
+      if (!entry || !entry.label) continue;
+      const record = catalog.opportunities.find(item => recordId(item) === id);
+      if (record) labeled.push({ label: entry.label, record });
+    }
+    return PREFERENCES_API.buildModel(labeled);
+  }
+
+  function buildPreferenceModel() {
+    if (!state.personalize) return null;
+    const model = preferenceTrainingModel();
+    return model?.ready ? model : null;
+  }
+
+  function renderPreferenceStatus() {
+    const status = $("preference-status");
+    if (!status) return;
+    const model = preferenceTrainingModel();
+    const used = model?.used || 0;
+    const remaining = Math.max(0, (PREFERENCES_API?.MIN_LABELS || 3) - used);
+    if (remaining) {
+      status.textContent =
+        `Rate ${remaining} more ${remaining === 1 ? "opportunity" : "opportunities"} to personalize.`;
+      return;
+    }
+    status.textContent = state.personalize
+      ? `Prioritizing Relevance using ${used} local ratings.`
+      : `${used} local ratings ready; turn this on to personalize.`;
+  }
+
+  function preferenceReason(record) {
+    const why = state.preferenceModel
+      ? PREFERENCES_API.explain(record, state.preferenceModel)
+      : null;
+    return why
+      ? `Similar to opportunities you rated highly (${why.value})`
+      : "Based on your ratings on this device";
+  }
+
   function computeMatches(query, sortMode = state.sort) {
     const direct = bm25Scores(query);
     const profiled = state.profile.active
       ? bm25Scores(state.profile.query)
       : { scores: new Float64Array(catalog.record_count), hasTerms: false };
     const hasTerms = direct.hasTerms || profiled.hasTerms;
+    const model = buildPreferenceModel();
+    state.preferenceModel = model;
     const matches = [];
     catalog.opportunities.forEach((record, index) => {
       if (!recordPassesFilters(record)) return;
@@ -699,9 +757,18 @@
         score += applicantFitBonus(record, state.profile.value.applicant_context);
         score += careerFitBonus(record, state.profile.value.career_stage);
       }
+      if (model) {
+        const preference = PREFERENCES_API.factor(record, model);
+        score = score
+          ? score * (1 + preference)
+          : preference;
+      }
       matches.push({ index, score });
     });
-    return { matches: sortMatches(matches, hasTerms, sortMode), hasTerms };
+    return {
+      matches: sortMatches(matches, hasTerms, sortMode, Boolean(model)),
+      hasTerms,
+    };
   }
 
   function currentDisplayMatches() {
@@ -879,8 +946,11 @@
       return;
     }
     state.searched = true;
+    const personalized = state.personalize && preferenceTrainingModel()?.ready;
     $("sort").value =
-      $("query").value.trim() || state.profile.active ? "relevance" : "deadline";
+      $("query").value.trim() || state.profile.active || personalized
+        ? "relevance"
+        : "deadline";
     recordDeploymentUsage(state.profile.active ? "profile_searches" : "searches");
     runSearch({ autoSort: true });
     $("search-status").textContent =
@@ -903,7 +973,8 @@
     $("use-profile").checked = false;
     state.profile.active = false;
     resetFilterControls();
-    $("sort").value = "deadline";
+    const personalized = state.personalize && preferenceTrainingModel()?.ready;
+    $("sort").value = personalized ? "relevance" : "deadline";
     state.searched = true;
     recordDeploymentUsage("searches");
     runSearch();
@@ -930,7 +1001,11 @@
     state.profile.active = $("use-profile").checked && profileHasContent();
     const nextQuery = $("query").value.trim();
     if (autoSort && nextQuery !== state.query) {
-      $("sort").value = nextQuery || state.profile.active ? "relevance" : "deadline";
+      const personalized = state.personalize && preferenceTrainingModel()?.ready;
+      $("sort").value =
+        nextQuery || state.profile.active || personalized
+          ? "relevance"
+          : "deadline";
     }
     state.query = nextQuery;
     state.sort = $("sort").value;
@@ -1113,8 +1188,8 @@
       .map(([value, label]) =>
         `<option value="${escapeAttribute(value)}"${entry.reason === value ? " selected" : ""}>${escapeHtml(label)}</option>`)
       .join("");
-    return `<div class="result-feedback pilot-feedback-control" aria-label="Evaluate this opportunity">
-      <span>How well does this match your work?</span>
+    return `<div class="result-feedback" aria-label="Rate this funding opportunity">
+      <span>Rate this result to improve future searches</span>
       <div class="feedback-buttons feedback-grades">
         ${button("not_relevant", "Not a fit")}
         ${button("partial", "Somewhat")}
@@ -1184,6 +1259,10 @@
       (record.document_status_signals || []).some(value => ["cancelled", "superseded"].includes(value))
         ? `<span class="badge warning">Document status review</span>`
         : "",
+      state.personalize && state.preferenceModel
+        && PREFERENCES_API.factor(record, state.preferenceModel) > 0.05
+        ? `<span class="badge prioritized" title="${escapeAttribute(preferenceReason(record))}">Prioritized from your ratings</span>`
+        : "",
     ].filter(Boolean).join("");
     const aiBlock = assessment
       ? `<div class="ai-rationale"><strong>${escapeHtml(assessment.verdict || "AI match")} · ${Number(assessment.score || 0)}/100</strong> ${escapeHtml(assessment.reason || "")}${assessment.concern ? `<span class="ai-concern"><strong>Check:</strong> ${escapeHtml(assessment.concern)}</span>` : ""}</div>`
@@ -1200,6 +1279,7 @@
         ${candidateReview && !assessment ? `<span class="badge candidate">Retrieved candidate</span>` : ""}
         ${flags}
         <span class="opportunity-number">${escapeHtml(record.opportunity_number || record.opportunity_id || "")}</span>
+        <button type="button" class="save-button${state.savedIds.has(id) ? " saved" : ""}" data-save="${escapeAttribute(id)}" aria-pressed="${state.savedIds.has(id)}" title="${state.savedIds.has(id) ? "Saved on this device — select to remove" : "Save this opportunity to view later"}">${state.savedIds.has(id) ? "★ Saved" : "☆ Save"}</button>
       </div>
       <h3><a href="${escapeAttribute(detailUrl)}" target="_blank" rel="noopener">${escapeHtml(record.title)}</a></h3>
       <p class="agency">${escapeHtml(record.agency || "Agency not listed")}</p>
@@ -1300,6 +1380,15 @@
       $("evaluation-status").textContent = "Rating saved on this device.";
     }
     PROFILE_API.saveFeedback(state.feedback);
+    if (state.personalize && state.searched) {
+      const model = preferenceTrainingModel();
+      if (model?.ready) {
+        state.sort = "relevance";
+        $("sort").value = "relevance";
+      }
+      state.matches = computeMatches(state.query, state.sort).matches;
+      state.page = 1;
+    }
     renderResults();
   }
 
@@ -1600,6 +1689,7 @@
       .join("");
     $("export-evaluation").disabled = !metrics.reviewed;
     $("clear-feedback").disabled = !metrics.reviewed;
+    renderPreferenceStatus();
     const reviewCandidates = $("review-candidates");
     reviewCandidates.classList.toggle(
       "hidden",
@@ -1629,7 +1719,7 @@
       schema_version: PROFILE_API.FEEDBACK_SCHEMA_VERSION,
       prompt_version: PROMPT_VERSION,
       exported_at: new Date().toISOString(),
-      privacy: "Contains ratings and profile fingerprint, but no API key, CV text, research description, or chat.",
+      privacy: "Contains the current search text, filters, rankings, ratings, and a non-content profile fingerprint. Excludes API keys, profile/CV text, and chat.",
       catalog: {
         schema_version: catalog.schema_version,
         generated_at: catalog.generated_at,
@@ -1661,7 +1751,95 @@
     );
     recordDeploymentUsage("evaluation_exports");
     $("evaluation-status").textContent =
-      "Evaluation exported without your API key, CV text, research description, or chat.";
+      "Match ratings exported with the current search text, filters, and rankings. API keys, profile/CV text, and chat were excluded.";
+  }
+
+  function refreshSavedState(items) {
+    state.savedItems = items || [];
+    state.savedIds = new Set(state.savedItems.map(SAVED_API.idOf));
+  }
+
+  function renderSaved() {
+    const list = $("saved-list");
+    const count = $("saved-count");
+    const items = state.savedItems || [];
+    if (count) count.textContent = `(${items.length})`;
+    if (!list) return;
+    if (!items.length) {
+      list.innerHTML = `<p class="privacy-note">No saved opportunities yet. Select “☆ Save” on any result to keep it here on this device.</p>`;
+      $("clear-saved")?.classList.add("hidden");
+      return;
+    }
+    $("clear-saved")?.classList.remove("hidden");
+    list.innerHTML = items.map(item => {
+      const url = safeUrl(item.url) || "";
+      const link = url
+        ? `<a href="${escapeAttribute(url)}" target="_blank" rel="noopener">${escapeHtml(item.title)}</a>`
+        : escapeHtml(item.title);
+      const meta = [
+        item.agency, item.source,
+        item.close_date ? `due ${formatDate(item.close_date)}` : "",
+      ].filter(Boolean).map(escapeHtml).join(" · ");
+      return `<div class="saved-item">
+        <div><strong>${link}</strong><small>${meta}</small></div>
+        <button type="button" class="text-button" data-remove-saved="${escapeAttribute(SAVED_API.idOf(item))}">Remove</button>
+      </div>`;
+    }).join("");
+  }
+
+  function toggleSave(id) {
+    const record = catalog.opportunities.find(item => recordId(item) === id);
+    if (!record) return;
+    const snapshot = { ...record, url: officialActions(record).url || record.detail_page };
+    const { items } = SAVED_API.toggle(snapshot);
+    refreshSavedState(items);
+    renderSaved();
+    renderResults();
+  }
+
+  function removeSaved(id) {
+    refreshSavedState(SAVED_API.remove(id));
+    renderSaved();
+    renderResults();
+  }
+
+  function clearSaved() {
+    SAVED_API.clear();
+    refreshSavedState([]);
+    renderSaved();
+    renderResults();
+  }
+
+  function renderExploration() {
+    const container = $("exploration");
+    if (!container) return;
+    const model = state.preferenceModel;
+    if (!state.searched || !state.personalize || !model || state.ai.active) {
+      container.classList.add("hidden");
+      container.innerHTML = "";
+      return;
+    }
+    const shown = new Set(
+      state.matches.map(match => recordId(catalog.opportunities[match.index])));
+    const candidates = catalog.opportunities.filter(
+      record => recordPassesFilters(record) && !shown.has(recordId(record)));
+    const picks = PREFERENCES_API.selectExploration(model, candidates, 3);
+    if (!picks.length) {
+      container.classList.add("hidden");
+      container.innerHTML = "";
+      return;
+    }
+    container.classList.remove("hidden");
+    container.innerHTML =
+      `<p class="eyebrow">Suggested from your ratings — related opportunities outside your current results</p>`
+      + picks.map(record => {
+        const url = safeUrl(record.detail_page || record.funding_opportunity_url) || "";
+        const why = PREFERENCES_API.explain(record, model);
+        const link = url
+          ? `<a href="${escapeAttribute(url)}" target="_blank" rel="noopener">${escapeHtml(record.title)}</a>`
+          : escapeHtml(record.title);
+        return `<div class="exploration-item">${link}<small>${escapeHtml(record.agency || "")}${why ? ` · matches ${escapeHtml(why.value)}` : ""}</small></div>`;
+      }).join("");
   }
 
   function renderResults() {
@@ -1683,6 +1861,7 @@
       $("export-csv").disabled = true;
       $("ai-refine").disabled = true;
       $("result-assistant").classList.add("hidden");
+      renderExploration();
       renderDeploymentReview();
       renderEvaluation();
       return;
@@ -1723,6 +1902,7 @@
     } else {
       $("results").innerHTML = page.map(resultCard).join("");
     }
+    renderExploration();
 
     $("page-label").textContent = display.length ? `Page ${state.page} of ${totalPages}` : "";
     $("page-prev").disabled = state.page <= 1;
@@ -1976,7 +2156,12 @@
       busy ? "Working…" : "Send";
     $("chat").setAttribute("aria-busy", String(busy));
     $("chat-thinking").classList.toggle("hidden", !busy);
-    if (busy) $("chat-thinking").scrollIntoView({ block: "nearest" });
+    if (busy) {
+      requestAnimationFrame(() => {
+        const messages = $("chat-messages");
+        messages.scrollTop = messages.scrollHeight;
+      });
+    }
   }
 
   async function refineWithAi() {
@@ -2122,7 +2307,7 @@
           : `<p>${escapeHtml(message.text)}</p>`}</div>
         ${message.note ? `<span class="message-note">${escapeHtml(message.note)}</span>` : ""}
         ${message.resultIds?.length ? renderChatResultReferences(message.resultIds) : ""}
-        ${message.focusIds?.length ? `<button class="button secondary chat-focus-action" type="button" data-chat-focus-message="${messageIndex}">Show only these ${message.focusIds.length} ${message.focusIds.length === 1 ? "result" : "results"}</button>` : ""}
+        ${message.focusIds?.length ? `<button class="button secondary chat-focus-action" type="button" data-chat-focus-message="${messageIndex}">${escapeHtml(CHAT_UI.focusActionLabel(message.focusIds.length))}</button>` : ""}
         ${message.citations?.length ? `<div class="message-citations">${message.citations.map(citation =>
           `<a data-citation-open href="${escapeAttribute(citation.url)}" target="_blank" rel="noopener">${escapeHtml(citation.label)} <span aria-hidden="true">↗</span></a>`
         ).join("")}</div>` : ""}
@@ -2162,14 +2347,17 @@
   }
 
   function openExpandedChat() {
+    document.documentElement.classList.add("chat-expanded");
     document.body.classList.add("chat-expanded");
     $("toggle-chat-size").setAttribute("aria-expanded", "true");
     $("toggle-chat-size").textContent = "Close larger chat";
-    $("result-assistant").scrollTop = 0;
+    const messages = $("chat-messages");
+    messages.scrollTop = messages.scrollHeight;
     $("chat-input").focus();
   }
 
   function closeExpandedChat() {
+    document.documentElement.classList.remove("chat-expanded");
     document.body.classList.remove("chat-expanded");
     $("toggle-chat-size")?.setAttribute("aria-expanded", "false");
     if ($("toggle-chat-size")) {
@@ -2467,7 +2655,28 @@
       renderResults();
       $("results-heading").scrollIntoView({ behavior: "smooth", block: "start" });
     });
+    $("use-preferences")?.addEventListener("change", () => {
+      state.personalize = $("use-preferences").checked;
+      PREFERENCES_API.saveEnabled(state.personalize);
+      if (state.personalize && preferenceTrainingModel()?.ready) {
+        state.sort = "relevance";
+        $("sort").value = "relevance";
+      }
+      scheduleProfileSave();
+      if (state.searched) {
+        state.matches = computeMatches(state.query, state.sort).matches;
+        state.page = 1;
+      }
+      renderResults();
+    });
     $("export-csv").addEventListener("click", exportCsv);
+    $("clear-saved")?.addEventListener("click", clearSaved);
+    document.addEventListener("click", event => {
+      const save = event.target.closest("[data-save]");
+      if (save) { toggleSave(save.dataset.save); return; }
+      const remove = event.target.closest("[data-remove-saved]");
+      if (remove) { removeSaved(remove.dataset.removeSaved); }
+    });
 
     ["research-profile", "expertise-keywords"].forEach(id => {
       $(id).addEventListener("input", () => {
@@ -2668,8 +2877,13 @@
     $("clear-feedback").addEventListener("click", () => {
       if (!globalThis.confirm("Clear all locally saved opportunity ratings from this device?")) return;
       state.feedback = {};
+      state.preferenceModel = null;
       PROFILE_API.clearFeedback();
       $("evaluation-status").textContent = "All locally saved ratings were cleared.";
+      if (state.searched) {
+        state.matches = computeMatches(state.query, state.sort).matches;
+        state.page = 1;
+      }
       renderResults();
     });
 
@@ -2800,6 +3014,12 @@
       if (!CHAT_UI?.renderRichText || !CHAT_UI?.knownResultIds) {
         throw new Error("The chat display module did not load. Refresh the page and try again.");
       }
+      if (!PREFERENCES_API?.buildModel || !PREFERENCES_API?.factor) {
+        throw new Error("The local preference module did not load. Refresh the page and try again.");
+      }
+      if (!SAVED_API?.load || !SAVED_API?.toggle) {
+        throw new Error("The saved-opportunities module did not load. Refresh the page and try again.");
+      }
       state.ready = true;
       updateCatalogStatus();
       hydrateStateFromUrl();
@@ -2820,8 +3040,17 @@
             : "Saved profile restored but is not currently selected for searching.");
         }
       }
+      if (!hasManagedUrlState()) {
+        const savedPersonalization = PREFERENCES_API.loadEnabled();
+        if (typeof savedPersonalization === "boolean") {
+          state.personalize = savedPersonalization;
+          $("use-preferences").checked = savedPersonalization;
+        }
+      }
       loadProviderKey({ announce: true });
       state.feedback = PROFILE_API.loadFeedback();
+      refreshSavedState(SAVED_API.load());
+      renderSaved();
       applyDeploymentReviewToForm(REVIEW_API.loadReview());
       renderAllFacets();
       updateFilterSummary();

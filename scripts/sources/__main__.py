@@ -27,6 +27,18 @@ from .merge import DEFAULT_CACHE, DEFAULT_CATALOG, integrate
 from .registry import REGISTRY, collect
 
 
+def summary_is_degraded(summary: dict, *, write_requested: bool = False) -> bool:
+    """Return True when an enabled source or post-merge validation degraded."""
+    if not (summary.get("validation") or {}).get("ok"):
+        return True
+    if write_requested and summary.get("written") is False:
+        return True
+    return any(
+        source.get("status") != "refreshed"
+        for source in summary.get("sources") or []
+    )
+
+
 def _select(adapter_slug):
     if not adapter_slug:
         return None
@@ -75,6 +87,14 @@ def cmd_merge(args):
     print(json.dumps(summary, indent=2))
     if not args.write:
         print("\n(Preview only. Re-run with --write to update the catalog file.)")
+    if args.fail_on_degraded and summary_is_degraded(
+        summary, write_requested=args.write
+    ):
+        print(
+            "\nOne or more enabled sources or the merged catalog degraded. "
+            "Healthy records and last-known-good snapshots were retained."
+        )
+        raise SystemExit(2)
 
 
 def main(argv=None):
@@ -99,6 +119,14 @@ def main(argv=None):
     merge.add_argument("--include-disabled", action="store_true")
     merge.add_argument("--write", action="store_true",
                        help="actually rewrite the catalog (default is preview)")
+    merge.add_argument(
+        "--fail-on-degraded",
+        action="store_true",
+        help=(
+            "exit nonzero after safe write/fallback when an enabled source "
+            "or post-merge validation is degraded"
+        ),
+    )
     merge.set_defaults(func=cmd_merge)
 
     args = parser.parse_args(argv)

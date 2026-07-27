@@ -110,6 +110,7 @@ class CanonicalOpportunity:
     funding_categories: list = field(default_factory=list)
     primary_document_url: Optional[str] = None
     primary_document_name: Optional[str] = None
+    additional_deadlines: list = field(default_factory=list)
     extra: dict = field(default_factory=dict)            # escape hatch, never indexed
 
     def stable_external_id(self) -> str:
@@ -165,6 +166,37 @@ class CanonicalOpportunity:
                     "source_url": url or primary_document_url,
                     "source_field": "source listing",
                     "confidence": "source_listed",
+                }
+            )
+        seen_deadlines = {
+            (deadline.get("kind"), deadline.get("date"))
+            for deadline in deadlines
+        }
+        for item in self.additional_deadlines[:50]:
+            if not isinstance(item, dict):
+                continue
+            item_date = to_iso_date(item.get("date"))
+            item_kind = clean_text(item.get("kind")) or "application"
+            identity = (item_kind, item_date)
+            if not item_date or identity in seen_deadlines:
+                continue
+            seen_deadlines.add(identity)
+            deadlines.append(
+                {
+                    "kind": item_kind,
+                    "date": item_date,
+                    "time": clean_text(item.get("time")),
+                    "timezone": clean_text(item.get("timezone")),
+                    "note": clean_text(item.get("note")),
+                    "estimated": item.get("estimated") is True,
+                    "source": clean_text(item.get("source")) or source,
+                    "source_url": safe_http_url(item.get("source_url"))
+                    or url
+                    or primary_document_url,
+                    "source_field": clean_text(item.get("source_field"))
+                    or "source listing",
+                    "confidence": clean_text(item.get("confidence"))
+                    or "source_listed",
                 }
             )
 

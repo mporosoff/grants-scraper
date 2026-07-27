@@ -5,8 +5,9 @@ deployment gate passes. See `PHASE3_REVIEW.md` for the current explicit file
 handoff, private inbox, and reporting workflow.
 
 Funding Finder keeps pilot ratings on the researcher's device. A participant
-can label result cards as `useful`, `not relevant`, or `needs verification`,
-optionally choose a reason, and explicitly export one JSON file.
+can label result cards as `not relevant`, `partial`, `useful`, `strong`, or
+`needs verification`, optionally choose a reason, and explicitly export one
+JSON file.
 
 The export intentionally excludes:
 
@@ -16,9 +17,11 @@ The export intentionally excludes:
 - chat messages.
 
 It includes a non-content comparison fingerprint, catalog timestamp, public
-opportunity metadata, active filters, retrieval rank, AI rank, provider/model,
-prompt version, and reason codes. Researchers should review the exported file
-before sharing it with the pilot team.
+opportunity metadata, the current search text, active filters, retrieval rank,
+AI rank, provider/model, prompt version, and reason codes. Because search text
+can itself describe research, participants must use non-confidential wording
+they are comfortable returning to the pilot team. Researchers should review
+the exported file before sharing it.
 The fingerprint is only for comparing profile versions within the pilot; it
 is not a secure identity or authentication mechanism.
 

@@ -21,6 +21,11 @@ class CatalogDocumentationTests(unittest.TestCase):
         )
         self.assertGreaterEqual(stats["agency_url_total"], stats["agency_route"])
         self.assertEqual(stats["past_deadlines"], 0)
+        self.assertEqual(sum(stats["source_counts"].values()), stats["record_count"])
+        self.assertEqual(
+            stats["non_grants_count"],
+            stats["record_count"] - stats["source_counts"].get("Grants.gov", 0),
+        )
 
     def test_committed_documentation_matches_generated_catalog(self):
         readme_path = REPOSITORY_ROOT / "README.md"

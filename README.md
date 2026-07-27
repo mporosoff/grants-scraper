@@ -51,16 +51,19 @@ are isolated from profiles and reviewer data, have a visible saved/loaded
 status and removal control, and never enter GitHub, URLs, exports, or an
 application database. The shortlist and chat remain page-memory only.
 
-Match-quality controls include `useful`, `not relevant`, and `needs
-verification` labels with reason codes. The explicit evaluation export omits
-API keys, profile text, CV text, and chat, and
+Match-quality controls include `not relevant`, `partial`, `useful`, `strong`,
+and `needs verification` labels with reason codes. After three graded ratings,
+an optional local preference model can prioritize future Relevance sorting.
+The explicit evaluation export includes current search text, filters, ranks,
+and ratings while omitting API keys, saved profile text, CV text, and chat.
 `scripts/evaluate_phase2.py` measures retrieval recall separately from AI
 reranking precision. Reviewers can switch from the 12-result shortlist to the
 pre-reranking candidate set when labeling. The 3–5 researcher pilot is
 deliberately deferred until the Phase 3 deployment batch and review handoff are
 verified.
 
-Invited testers can open the collapsed “Help improve Funding Finder” area to
+Ratings appear directly on result cards. Invited testers can open the collapsed
+“Help improve Funding Finder” area to
 mark cited evidence accurate, incorrect, or unverifiable, check
 the field they inspected, and add a short non-confidential note. This progress
 autosaves only on that device. “Send review” uses the native file share sheet
@@ -70,7 +73,12 @@ private Markdown, JSON, and CSV reports.
 
 ## Data model
 
-The daily workflow processes the official [Grants.gov XML database extract](https://www.grants.gov/xml-extract). It publishes open posted and current forecasted records plus a compact BM25 search index to `data/opportunities.js`. Past deadlines are rejected for both statuses, and stale undated forecasts are excluded.
+The daily workflow processes the official [Grants.gov XML database extract](https://www.grants.gov/xml-extract), then merges enabled, independently validated
+public-source adapters. NSF upcoming due dates and NYSERDA are currently
+enabled. UR InfoReady remains a disabled shell until a stable permissioned
+route exists. It publishes open posted and current forecasted records plus a
+compact BM25 search index to `data/opportunities.js`. Past deadlines are
+rejected for every source, and stale undated forecasts are excluded.
 
 An incremental second step enriches only new or changed records through the
 official Grants.gov `fetchOpportunity` detail API. It reconciles structured
@@ -90,13 +98,20 @@ committed. Machine-extracted dates and amounts do not replace structured
 Grants.gov fields used by filters or sorting. Its compact cache is
 `data/document_evidence.json`.
 
+External-source records use atomic per-source replacement and the committed
+`data/source_records.json` last-known-good cache. A degraded enabled source
+cannot erase healthy published records: the safe merge completes, exits
+nonzero for monitoring, and the scheduled workflow opens or updates an
+owner-facing GitHub issue. NYSERDA publishes the next open application round
+and retains later application and concept-paper dates as structured deadlines.
+
 <!-- catalog-stats:start -->
 This replaces the former 48-record Chemical and Sustainability Engineering feed. The
-July 27, 2026 build contains 1,466 current federal opportunities (1,225 posted and 241
-forecasted) with no deadline before the catalog date. It provides a direct official
-announcement for 447 records, an agency-notice route for another 616, and the official
-Grants.gov record for the remaining 403. Across all route types, 775 records also
-contain an agency notice URL.
+July 27, 2026 build contains 1,466 current funding opportunities (1,225 posted and 241
+forecasted) from Grants.gov (1,465), National Science Foundation (1), with no deadline
+before the catalog date. It provides a direct official announcement for 447 records, an
+official source-page route for another 616, and the official Grants.gov record for the
+remaining 403. Across all route types, 775 records also contain an official source URL.
 <!-- catalog-stats:end -->
 
 Funding values are intentionally not conflated: award floor/ceiling drive
@@ -120,9 +135,11 @@ support it.
 | `data/opportunities.js` | Generated catalog and search index |
 | `data/opportunity_enrichment.json` | Incremental official-detail cache |
 | `data/document_evidence.json` | Incremental document hash/version, cited-fact, and review-queue cache |
+| `data/source_records.json` | Last-known-good snapshots for enabled external sources |
 | `scripts/build_catalog.py` | Official XML ingestion and catalog builder |
 | `scripts/enrich_catalog.py` | Official detail reconciliation and FOA selection |
 | `scripts/extract_document_evidence.py` | Official PDF/HTML retrieval, versioning, deterministic fact extraction, and citations |
+| `scripts/sources/` | Validated multi-source adapters, lifecycle, health gates, and merge |
 | `scripts/evaluate_phase2.py` | Phase 2 retrieval/reranking evaluator |
 | `scripts/summarize_phase3_reviews.py` | Private Phase 3 deployment-review aggregator |
 | `evaluation/README.md` | Pilot export, privacy, and aggregation workflow |
@@ -170,10 +187,12 @@ To summarize review files returned to the project owner:
 python -m scripts.summarize_phase3_reviews evaluation/inbox --output-dir evaluation/reports
 ```
 
-The scheduled workflow runs all three data steps daily, validates a plausible
-catalog size, retests the generated assets, and commits the normalized browser
-catalog plus compact caches. Raw XML archives, raw notices, full extracted
-notice text, and returned review files are not committed.
+The scheduled workflow runs the Grants.gov, enrichment, document-evidence, and
+external-source steps daily; validates source-specific and whole-catalog
+health; retests the generated assets; alerts the owner about degradation; and
+commits the normalized browser catalog plus compact caches. Raw XML archives,
+raw notices, full extracted notice text, and returned review files are not
+committed.
 
 See `PROJECT.md` for the completed Phase 1/1.5 scope, deferred Phase 2 pilot,
 and Phase 3 implementation,

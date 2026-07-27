@@ -42,6 +42,7 @@ from scripts.build_catalog import (
 )
 from .registry import AdapterResult, collect
 from .validate import filter_publishable, within_health_bounds
+from .discoverability import augment_records
 
 DEFAULT_CATALOG = Path("data/opportunities.js")
 DEFAULT_CACHE = Path("data/source_records.json")
@@ -269,6 +270,9 @@ def integrate(catalog_path: Path = DEFAULT_CATALOG,
     _, results = collect(adapters=adapters, include_disabled=include_disabled)
     external, cache, source_summaries = resolve_live_records(results, cache, as_of)
     combined, stats = merge_records(base, external)
+    # Discoverability: tag opaque umbrella FOAs (e.g. DOE Office of Science) with
+    # program-area topics/terms so topical searches surface them.
+    augmented = augment_records(combined)
 
     validation_ok, validation_error = True, None
     try:
@@ -283,6 +287,7 @@ def integrate(catalog_path: Path = DEFAULT_CATALOG,
         "written": False,
         "stats": stats,
         "sources": source_summaries,
+        "discoverability_augmented": augmented,
         "validation": {"ok": validation_ok, "error": validation_error},
     }
 

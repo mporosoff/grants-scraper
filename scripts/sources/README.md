@@ -1,6 +1,6 @@
 # `scripts/sources` — modular multi-source ingestion layer
 
-Add funding sources beyond Grants.gov (NYSERDA, foundations, UR InfoReady, RSS
+Add funding sources beyond Grants.gov (NYSERDA, foundations, internal portals, RSS
 feeds, …) through a final pipeline step that refreshes external records in the
 generated catalog.
 
@@ -16,6 +16,9 @@ generated catalog.
 - **One broken source can't break the build.** Adapter errors are isolated and
   reported; a committed per-source snapshot republishes the last healthy
   records. Expired cached records are still removed.
+- **Degradation is visible.** The scheduled job keeps healthy/last-known-good
+  data available but opens or updates an owner-facing GitHub issue when an
+  enabled source fails, becomes unhealthy, or fails post-merge validation.
 - **Fail closed.** Records need an official URL and plausible dates, source
   counts must remain within health bounds, and the full merged catalog is
   validated before either generated file is written.
@@ -32,7 +35,7 @@ generated catalog.
 | `merge.py` | Applies atomic per-source refresh/fallback, merges/dedups, rebuilds index/facets/counts, validates, and writes the catalog plus snapshot cache. `integrate()` is the entry point. |
 | `validate.py` | Currentness, official-link, date-plausibility, and source health gates. |
 | `http.py` | Polite HTTP client (UA, timeouts, size cap, pacing) for network adapters. |
-| `adapters/` | Bundled adapters. `_template.py` to copy; `rss.py` (works today); `sample.py` (offline demo); `nyserda.py` / `ur_infoready.py` (scaffolds). |
+| `adapters/` | Bundled adapters. `_template.py` to copy; `rss.py`; `sample.py` (offline demo); verified `nyserda.py`; and the disabled `ur_infoready.py` shell. |
 | `fixtures/` | Demo data for the sample adapter and tests. |
 | `__main__.py` | CLI: `list`, `dry-run`, `merge`. |
 
@@ -71,6 +74,7 @@ post-refresh regression suite:
           --catalog data/opportunities.js
           --cache data/source_records.json
           --write
+          --fail-on-degraded
 ```
 
 That's it. Locally, the equivalent one-liner is:
@@ -91,8 +95,8 @@ against generated asset" step still validates the result.
 | `pnd-rfp` (Philanthropy News Digest / Candid) | Ready to configure | Confirm the live RSS URL and add a topic/eligibility filter (it's nonprofit-skewed) before enabling. |
 | `nsf-funding` | Enabled | Official NSF upcoming-due-dates feed; tolerant of the feed's malformed bare ampersands and protected by source health bounds. |
 | `nih-guide` | Disabled intentionally | NIH stopped publishing NOFOs in the Guide in FY2026; its feed now carries policy/informational notices while Grants.gov is the official NIH NOFO source. |
-| `nyserda` | Scaffold | Implement `parse()` against the live funding page; low volume, low maintenance. |
-| `ur-infoready` | Scaffold | Implement `parse()` against `rochester.infoready4.com`; covers internal + limited submissions. |
+| `nyserda` | Enabled | Verified live JSON API; publishes the next open application round and retains later application/concept-paper dates as structured deadlines. |
+| `ur-infoready` | Disabled shell | The earlier undocumented endpoint currently returns HTTP 500. No embedded credential or unstable request ships; the fixture parser remains for a future permissioned route. |
 
 ## Notes
 

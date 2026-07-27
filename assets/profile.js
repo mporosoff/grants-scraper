@@ -78,6 +78,7 @@
       early_career: false,
       no_cost_share: false,
       profile_search_active: false,
+      personalize: false,
       ai_provider: "openai",
       sort: "deadline",
       facets: Object.fromEntries(FACET_NAMES.map(name => [name, []])),
@@ -104,6 +105,7 @@
       early_career: source.early_career === true,
       no_cost_share: source.no_cost_share === true,
       profile_search_active: source.profile_search_active === true,
+      personalize: source.personalize === true,
       ai_provider: source.ai_provider === "anthropic"
         ? "anthropic"
         : "openai",

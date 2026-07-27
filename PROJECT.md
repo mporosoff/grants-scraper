@@ -1,6 +1,6 @@
 # Funding Finder — Product Plan
 
-**Status:** Phase 1 and 1.5 complete; Phase 2 engineering complete with its human pilot deferred; Phase 3 deployed with its first production evidence batch successful; unified-search and result-aware-chat usability passes complete
+**Status:** Phase 1 and 1.5 complete; Phase 2 engineering complete with its human pilot deferred; Phase 3 deployed with its first production evidence batch successful; unified search, result-aware chat, local personalization/saved opportunities, and monitored NSF/NYSERDA source ingestion implemented
 
 **Next implementation phase:** Phase 3D — complete the returned-review and citation-landing dry run, then run the deferred multi-researcher pilot
 
@@ -10,7 +10,7 @@
 
 **Initial audience:** University of Rochester researchers, with a design that remains useful to any public user
 
-**Last updated:** July 26, 2026
+**Last updated:** July 27, 2026
 
 ---
 
@@ -60,12 +60,22 @@ Each refresh:
 - builds a compact BM25 keyword index; and
 - publishes one versioned browser asset.
 
+After the Grants.gov evidence steps, verified public adapters add NSF upcoming
+due dates and NYSERDA opportunities through the same normalized schema and
+search index. NYSERDA uses the next open application round and retains later
+round and concept-paper dates. Each enabled source has
+currentness/actionability gates, plausible-count bounds, atomic replacement,
+and a committed last-known-good snapshot. Degradation keeps safe current data
+available but exits visibly and opens or updates an owner-facing GitHub issue.
+UR InfoReady is a disabled shell pending a stable permissioned route.
+
 <!-- catalog-summary:start -->
-The July 27, 2026 build contains 1,466 open or current forecasted federal opportunities
+The July 27, 2026 build contains 1,466 open or current forecasted funding opportunities
 (1,225 posted and 241 forecasted) rather than the former 48-record engineering
-shortlist. It contains no record with a deadline before the catalog date. Sources
-outside Grants.gov will be added independently when they have a sustainable public
-ingestion path.
+shortlist. It contains no record with a deadline before the catalog date. Current
+published sources are Grants.gov (1,465), National Science Foundation (1); additional
+sources are enabled only after a sustainable public ingestion path and health bounds are
+verified.
 <!-- catalog-summary:end -->
 
 ### 2.3 Search is the primary workflow
@@ -133,13 +143,24 @@ research profile on that device. The saved record contains:
 - applicant context and career stage;
 - extracted CV text and file metadata, bounded to 120,000 characters;
 - the user's current filters, sort, selected provider (never its key), and
-  profile-ranking preference; and
-- Phase 2 usefulness labels and reason codes in a separate local record.
+  profile-ranking preference;
+- Phase 2 usefulness labels and reason codes in a separate local record;
+- saved-opportunity snapshots in another compact device-local record.
 
 PDF, DOCX, TXT, and Markdown CVs are parsed in the browser. The original file
 is never saved or uploaded by the application. The user can disable
 profile use, remove the CV extract, clear the saved profile, or clear
 evaluation labels at any time.
+
+After three graded ratings, the user can explicitly enable a deterministic
+local preference model that gently reranks Relevance results from source,
+agency, topic, discipline, and applicant-type signals. Prioritized cards show
+why, a small exploration section surfaces related unseen opportunities, and
+the model can be switched off or cleared without changing the public catalog.
+Its on/off choice is stored independently from the research profile, so it
+survives reload even when the user chooses not to save profile or CV content.
+Shared search URLs still begin with the public base ranking until the user
+explicitly turns personalization on for that search.
 
 The AI shortlist and chat remain page-memory only and disappear on reload. An
 API key is tab-only by default, but the user may explicitly save one key per
@@ -151,7 +172,11 @@ database. The bounded CV excerpt is sent to the selected AI provider only when
 the user leaves that option enabled and explicitly runs AI refinement or chat.
 
 CSV and Phase 2 JSON are created only on explicit export. The evaluation JSON
-excludes the API key, CV text, research description, and chat by default.
+includes the current search-box text, filters, rankings, and explicit ratings
+needed to reproduce retrieval quality. It excludes the API key, saved
+profile/expertise fields, CV text, and chat. Because search text can itself
+describe research, pilot participants are told to use non-confidential wording
+they are comfortable returning to the project team.
 
 ### 2.6 Document evidence and deployment learning
 
@@ -201,6 +226,11 @@ Deadline/award evidence + direct FOA and agency links
                  v
 Cited notice facts + document hash/version + review queue
                  |
+                 | verified NSF/NYSERDA source merge
+                 | atomic snapshots + health alerts
+                 v
+Cross-source current catalog + rebuilt facets/index
+                 |
                  v
           GitHub Pages app
           /             |              \
@@ -211,7 +241,8 @@ catalog and        profile, CV,       using a tab-only or
 cited source       optional saved     explicitly device-saved key
 facts              provider keys,          |
 ranking            match labels,           +-- query expansion
-                   source review            +-- rerank <= 32 candidates
+                   saved items,             +-- rerank <= 32 candidates
+                   source review
                    and checklist            +-- chat over <= 20 results
                         |                        or <= 12 AI matches
                         v
@@ -253,6 +284,15 @@ catalog or a shared institutional record.
    persistence but does not launch a search.
 5. Select the same “Find funding” action used for keyword/filter searches.
 6. Remove the CV extract or clear the profile at any time.
+
+### Save opportunities and personalize from ratings
+
+1. Select “Save” on any result to keep a compact device-local shortcut.
+2. Rate opportunities directly on their cards.
+3. After three graded ratings, enable “Personalize from my ratings.”
+4. Relevance sorting gently prioritizes matching local signals and labels the
+   reason; switch personalization off or clear ratings to restore the base
+   ranking.
 
 ### Add AI refinement
 
@@ -323,9 +363,10 @@ explicitly invokes refinement or chat:
 The browser-only design cannot provide a secure institutional credential vault. A future institution-managed AI gateway would be a separate architectural decision.
 
 Evaluation labels also stay on the device until explicit export or deletion.
-The export uses a non-content comparison fingerprint and excludes profile text, CV
-text, API keys, and chat so a pilot team can evaluate retrieval and reranking
-without collecting those fields by default.
+The export uses a non-content comparison fingerprint, includes the current
+search text needed to reproduce retrieval, and excludes saved profile text, CV
+text, API keys, and chat. Pilot instructions disclose the search-text field
+before a participant returns the file.
 
 Phase 3 deployment review uses a separate local-storage key. It contains only
 explicit source-verification choices, optional notes, checklist answers,
@@ -352,7 +393,7 @@ Phase 1 now includes both the catalog foundation and the first optional refineme
 - open posted and current forecasted records with no past deadlines;
 - stale undated-forecast exclusion and explicit verification warnings;
 - record-count and required-field health checks;
-- daily scheduled refresh and failure alert;
+- daily scheduled refresh with whole-job and per-source degradation alerts;
 - comprehensive browser search and BM25 index;
 - Duke-style facets, sorting, details, pagination, and CSV export;
 - visible record count, source, generated time, and stale-data warning;
@@ -362,8 +403,14 @@ Phase 1 now includes both the catalog foundation and the first optional refineme
 - chat integrated with ordinary results or the AI shortlist;
 - an empty initial result state until a user starts a search;
 - explicit optional device-local API-key persistence with visible state and
-  a removal control; and
-- regression coverage for forecasts, expired records, ambiguous rolling language, indexing, generated assets, and workflow safeguards.
+  a removal control;
+- monitored NSF/NYSERDA ingestion with source-aware facets and provenance;
+- atomic external-source refresh with still-current last-known-good fallback;
+- direct saved-opportunity controls and optional device-local preference
+  reranking after three graded ratings; and
+- regression coverage for forecasts, expired records, ambiguous rolling
+  language, source lifecycles, indexing, generated assets, and workflow
+  safeguards.
 
 The provider adapters have deterministic contract tests for OpenAI Responses
 and Anthropic Messages, including request shape, non-persistence, JSON parsing,
@@ -437,7 +484,7 @@ The July 27, 2026 catalog contains 1,466 current posted or forecasted opportunit
 
 - 447 have a defensible direct announcement attachment (249 high confidence, 198 medium
   confidence);
-- another 616 use an official agency notice as their primary route;
+- another 616 use an official source page as their primary route;
 - the remaining 403 use the official Grants.gov record as their primary route;
 - 775 contain an agency notice URL across all route types;
 - 350 preserve an official deadline time or timezone;
@@ -474,8 +521,9 @@ keyword string.
 
 #### 2A. Evaluation controls
 
-- **Implemented:** locally persistent labels for `useful`, `not relevant`, and
-  `needs verification`.
+- **Implemented:** locally persistent graded labels for `not relevant`,
+  `partial`, `useful`, `strong`, and `needs verification`, shown directly on
+  result cards.
 - **Implemented:** reason codes for topic, eligibility, career stage, deadline, award size,
   application burden, duplicate/already known, and insufficient source detail.
 - **Implemented:** explicit removal controls and a separate device-local
@@ -495,6 +543,7 @@ keyword string.
 - **Implemented:** measure catalog retrieval independently from AI reranking:
   - recall within the 32-record candidate set;
   - precision and useful-result rate within the 12-record shortlist;
+  - graded nDCG for both retrieval and AI reranking;
   - rank movement between BM25 retrieval and AI output; and
   - hard eligibility and expired-record error rates.
 - **Implemented:** a reviewer can switch between the 12-record AI shortlist
@@ -637,12 +686,13 @@ the owner and reproduced as a private report.
 
 Add one maintainable public source at a time, prioritizing gaps reported in the pilot:
 
-1. SAM.gov and selected DOD/DARPA sources
-2. ARPA-E eXCHANGE
-3. DOE Office of Science
-4. selected private foundations and associations
-5. NSF Dear Colleague Letters
-6. University of Rochester internal deadlines and limited submissions
+1. DOE EERE Exchange and ARPA-E eXCHANGE
+2. DOE Office of Science national-lab announcements and other DOE offices
+3. selected private foundations and associations
+4. NASA and NSF Dear Colleague Letters
+5. University of Rochester internal deadlines and limited submissions, only
+   after a stable permissioned InfoReady route is established
+6. SAM.gov and selected DOD/DARPA contract sources only if users want them
 
 Each source requires a documented public-use basis, stable ingestion route, health check, regression fixture, failure alert, and maintenance owner. Duke and Pivot-RP are product references, not scrape targets.
 
@@ -783,3 +833,6 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | July 2026 | Make result chat visibly interactive: add a large focused workspace, working indicator, keyboard send, safe rich formatting, exact result references, jump-to-result/source actions, and explicit result-list focusing. |
 | July 2026 | Stack profile/CV and filters full-width, remove nested filter scrolling, and retry malformed AI structured responses once with a smaller-output instruction. |
 | July 2026 | Repair Grants.gov synopsis spacing loss by preferring the linked official NSF synopsis only for damaged NSF prose, caching it, and rebuilding search terms. |
+| July 2026 | Enable verified NSF and NYSERDA sources through atomic per-source snapshots and health alerts; keep InfoReady disabled until a stable permissioned route exists. |
+| July 2026 | Add compact device-local saved opportunities and an optional, reversible preference re-ranker trained only after three graded ratings. |
+| July 2026 | Include search text in explicit match-quality exports for reproducibility, disclose it before export, and continue excluding API keys, saved profile/CV text, and chat. |

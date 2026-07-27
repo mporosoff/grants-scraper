@@ -37,6 +37,7 @@ from scripts.sources.validate import (
 )
 from scripts.sources.adapters.rss import RSSAdapter
 from scripts.sources.adapters.sample import SampleFixtureAdapter
+from scripts.sources.__main__ import summary_is_degraded
 
 FIXTURE = Path(__file__).resolve().parent / "fixtures" / "grants_db_extract.xml"
 
@@ -170,6 +171,27 @@ class RegistryTests(unittest.TestCase):
         )
         self.assertEqual(len(records), 2)
         self.assertTrue(all(r.ok for r in results))
+
+
+class SourceHealthExitTests(unittest.TestCase):
+    def test_summary_reports_enabled_source_degradation(self):
+        healthy = {
+            "validation": {"ok": True},
+            "sources": [{"status": "refreshed"}],
+        }
+        failed = {
+            "validation": {"ok": True},
+            "sources": [{"status": "failed_kept_last_good"}],
+        }
+        unhealthy = {
+            "validation": {"ok": True},
+            "sources": [{"status": "unhealthy_kept_last_good"}],
+        }
+        invalid = {"validation": {"ok": False}, "sources": []}
+        self.assertFalse(summary_is_degraded(healthy))
+        self.assertTrue(summary_is_degraded(failed))
+        self.assertTrue(summary_is_degraded(unhealthy))
+        self.assertTrue(summary_is_degraded(invalid))
 
 
 class RSSTests(unittest.TestCase):
@@ -451,6 +473,166 @@ class NSFFeedTests(unittest.TestCase):
         </item></channel></rss>"""
         opportunities = list(NSFFundingUpcoming().parse(feed))
         self.assertEqual(opportunities[0].opportunity_number, "26-509")
+
+
+class NyserdaParseTests(unittest.TestCase):
+    PAYLOAD = {
+        "FundingOpportunities": [
+            {
+                "SectionTitle": "Open Solicitations",
+                "FundingOpportunities": [
+                    {
+                        "SolicitationName": "Clean Energy Career Pathways Training",
+                        "SolicitationNumber": "PON 5001",
+                        "ShortDescription": "<p>Supports clean energy workforce training.</p>",
+                        "SolicitationRounds": [
+                            {"Status": "Closed", "Round": "1",
+                             "DueDate": "5/20/2026 3:00 PM",
+                             "ConceptPaperDueDate": ""},
+                            {"Status": "Open", "Round": "2",
+                             "DueDate": "9/23/2026 3:00 PM",
+                             "ConceptPaperDueDate": "8/20/2026 3:00 PM"},
+                            {"Status": "Open", "Round": "3",
+                             "DueDate": "12/15/2027 3:00 PM",
+                             "ConceptPaperDueDate": ""},
+                        ],
+                        "DueDateString": "<p><strong>Due Date:&nbsp;5/20/2026</strong>&nbsp;(Round 1);<strong> 9/23/2026</strong> (Round 2);<strong> 12/15/2027</strong> (Round 3)</p>",
+                        "RevisedDate": "07/01/2026",
+                        "DetailPageLink": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=abc",
+                        "SolicitationLinkPDF": "https://portal.nyserda.ny.gov/files/pon-5001.pdf",
+                    },
+                    {
+                        "SolicitationName": "Expired Legacy Program",
+                        "SolicitationNumber": "PON 4000",
+                        "ShortDescription": "Closed.",
+                        "DueDateString": "<p><strong>Due Date:&nbsp;7/27/2022</strong></p>",
+                        "DetailPageLink": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=old",
+                    },
+                ],
+            }
+        ]
+    }
+
+    def test_parses_real_shape_and_picks_next_open_round(self):
+        from scripts.sources.adapters.nyserda import NyserdaAdapter
+
+        opportunities = NyserdaAdapter().parse_payload(
+            self.PAYLOAD, as_of=date(2026, 7, 25))
+        self.assertEqual(len(opportunities), 2)
+        first = opportunities[0].to_record(
+            slug="nyserda", source="NYSERDA", source_type="State")
+        self.assertEqual(first["close_date"], "2026-09-23")
+        self.assertEqual(first["opportunity_number"], "PON 5001")
+        self.assertIn("later rounds", first["close_date_note"])
+        self.assertTrue(any(
+            deadline["date"] == "2027-12-15"
+            and deadline["kind"] == "application"
+            for deadline in first["deadlines"]
+        ))
+        self.assertTrue(any(
+            deadline["date"] == "2026-08-20"
+            and deadline["kind"] == "concept_paper"
+            for deadline in first["deadlines"]
+        ))
+        self.assertEqual(first["source_type"], "State")
+        self.assertTrue(first["detail_page"].startswith("https://portal.nyserda.ny.gov"))
+        self.assertTrue(first["primary_document_url"].endswith(".pdf"))
+
+    def test_currentness_gate_drops_the_expired_solicitation(self):
+        from scripts.sources.adapters.nyserda import NyserdaAdapter
+
+        records = [
+            opp.to_record(slug="nyserda", source="NYSERDA", source_type="State")
+            for opp in NyserdaAdapter().parse_payload(
+                self.PAYLOAD, as_of=date(2026, 7, 25))
+        ]
+        kept, dropped = filter_publishable(records, date(2026, 7, 25))
+        kept_titles = {record["title"] for record in kept}
+        self.assertIn("Clean Energy Career Pathways Training", kept_titles)
+        self.assertNotIn("Expired Legacy Program", kept_titles)
+        self.assertEqual(dropped[0]["reason"], "expired")
+
+
+class URInfoReadyParseTests(unittest.TestCase):
+    PAYLOAD = [
+        {"cardId": 75682, "opportunityId": 2022459,
+         "title": "NIH-Atopic Dermatitis Research Network (ADRN) (U19 Clinical Trial Optional)",
+         "description": "The ADRN program will support Centers that integrate research.",
+         "dueDate": "08/25/2026 03:59:59", "category": "Cooperative Agreement"},
+        {"cardId": 75697, "opportunityId": 2022469,
+         "title": "Greenwall Foundation - Faculty Scholars Program in Bioethics",
+         "description": "A career development award for early-career faculty members.",
+         "dueDate": "08/04/2026 03:59:59", "category": "Scholar Award"},
+    ]
+
+    def test_parses_competition_cards(self):
+        from scripts.sources.adapters.ur_infoready import URInfoReadyAdapter
+
+        opportunities = URInfoReadyAdapter().parse_payload(self.PAYLOAD)
+        self.assertEqual(len(opportunities), 2)
+        first = opportunities[0].to_record(
+            slug="ur-infoready", source="UR InfoReady", source_type="Internal")
+        self.assertEqual(first["close_date"], "2026-08-24")
+        self.assertEqual(first["source_type"], "Internal")
+        self.assertEqual(
+            first["detail_page"],
+            "https://rochester.infoready4.com/#competitionDetail/2022459",
+        )
+        self.assertFalse(URInfoReadyAdapter.enabled)
+        second = opportunities[1].to_record(
+            slug="ur-infoready", source="UR InfoReady", source_type="Internal")
+        self.assertTrue(second["career_stage_signal"])  # "early-career" detected
+
+
+class DiscoverabilityTests(unittest.TestCase):
+    UMBRELLA = {
+        "opportunity_number": "DE-FOA-0003600",
+        "title": "FY 2026 Continuation of Solicitation for the Office of Science "
+                 "Financial Assistance Program",
+        "agency": "Office of Science",
+        "description": "Supports the Office of Science financial assistance program.",
+        "topic_areas": [],
+        "document_search_text": None,
+    }
+
+    def test_umbrella_foa_gains_program_topics_and_terms(self):
+        from scripts.sources.discoverability import augment_records
+
+        record = dict(self.UMBRELLA)
+        changed = augment_records([record])
+        self.assertEqual(changed, 1)
+        self.assertIn("Catalysis and reaction engineering", record["topic_areas"])
+        self.assertIn("catalysis", (record["document_search_text"] or "").lower())
+        self.assertTrue(record["discoverability_augmented"])
+
+    def test_unrelated_record_is_untouched(self):
+        from scripts.sources.discoverability import augment_records
+
+        record = {"title": "Rural health services grant", "agency": "HRSA",
+                  "description": "", "topic_areas": ["Public health"]}
+        self.assertEqual(augment_records([record]), 0)
+        self.assertEqual(record["topic_areas"], ["Public health"])
+
+    def test_augmented_umbrella_is_findable_by_catalysis(self):
+        from scripts.sources.discoverability import augment_records
+        from scripts.build_catalog import build_search_index, tokenize
+
+        record = dict(self.UMBRELLA)
+        augment_records([record])
+        index = build_search_index([record])
+        token = tokenize("catalysis")[0]  # stemmed search token
+        self.assertIn(token, index["postings"])
+
+    def test_augmentation_is_idempotent(self):
+        from scripts.sources.discoverability import augment_records
+
+        record = dict(self.UMBRELLA)
+        self.assertEqual(augment_records([record]), 1)
+        first_topics = list(record["topic_areas"])
+        first_text = record["document_search_text"]
+        self.assertEqual(augment_records([record]), 0)
+        self.assertEqual(record["topic_areas"], first_topics)
+        self.assertEqual(record["document_search_text"], first_text)
 
 
 if __name__ == "__main__":

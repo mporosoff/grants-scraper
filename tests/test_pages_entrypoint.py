@@ -79,30 +79,19 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             '<script src="./data/opportunities.js"></script>',
             explorer_html,
         )
+        release_version = "release-2026-07-27-v1"
         self.assertIn(
-            '<script src="./assets/profile.js?v=unified-search-v1"></script>',
+            f'<link rel="stylesheet" href="./assets/app.css?v={release_version}">',
             explorer_html,
         )
-        self.assertIn(
-            '<script src="./assets/review.js"></script>',
-            explorer_html,
-        )
-        self.assertIn(
-            '<script src="./assets/ai-provider.js?v=layout-ai-recovery-v1"></script>',
-            explorer_html,
-        )
-        self.assertIn(
-            '<script src="./assets/credentials.js?v=unified-search-v1"></script>',
-            explorer_html,
-        )
-        self.assertIn(
-            '<script src="./assets/chat-ui.js?v=result-aware-chat-v1"></script>',
-            explorer_html,
-        )
-        self.assertIn(
-            '<script src="./assets/app.js?v=layout-ai-recovery-v1"></script>',
-            explorer_html,
-        )
+        for asset in (
+            "profile.js", "review.js", "ai-provider.js", "credentials.js",
+            "chat-ui.js", "saved.js", "preferences.js", "app.js",
+        ):
+            self.assertIn(
+                f'<script src="./assets/{asset}?v={release_version}"></script>',
+                explorer_html,
+            )
         self.assertIn("globalThis.GRANT_CATALOG", application_js)
         self.assertIn("MAX_AI_CANDIDATES = 32", application_js)
         self.assertIn("MAX_CHAT_RESULTS = 20", application_js)
@@ -124,6 +113,10 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("funding-finder.feedback.v1", profile_js)
         self.assertIn("async function extractCv", profile_js)
         self.assertIn("profileContext({ includeCv: true })", application_js)
+        self.assertIn("globalThis.FUNDING_PREFERENCES", application_js)
+        self.assertIn("globalThis.FUNDING_SAVED", application_js)
+        self.assertIn("function renderPreferenceStatus", application_js)
+        self.assertIn("function renderSaved", application_js)
         self.assertIn("function exportEvaluation", application_js)
         self.assertIn("function evidenceRows", application_js)
         self.assertIn("function sendDeploymentReview", application_js)
@@ -337,6 +330,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("python -m scripts.build_catalog", workflow)
         self.assertIn("python -m scripts.enrich_catalog", workflow)
         self.assertIn("python -m scripts.extract_document_evidence", workflow)
+        self.assertIn("python -m scripts.sources merge", workflow)
+        self.assertIn("--fail-on-degraded", workflow)
+        self.assertIn("continue-on-error: true", workflow)
+        self.assertIn("steps.additional-sources.outcome == 'failure'", workflow)
+        self.assertIn("External funding source refresh degraded", workflow)
         self.assertIn("--min-records 1000", workflow)
         self.assertIn("--max-record-count 5000", workflow)
         self.assertIn("actions/setup-node@v6", workflow)
@@ -347,6 +345,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("if: failure()", workflow)
         self.assertIn("data/opportunities.js", workflow)
         self.assertIn("data/document_evidence.json", workflow)
+        self.assertIn("data/source_records.json", workflow)
 
 
 if __name__ == "__main__":

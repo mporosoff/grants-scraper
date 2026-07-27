@@ -65,11 +65,14 @@ jobs:
           --request-delay 0.2
           --recheck-days 14
       - name: Merge additional (non-Grants.gov) sources
+        id: additional-sources
+        continue-on-error: true
         run: >-
           python -m scripts.sources merge
           --catalog data/opportunities.js
           --cache data/source_records.json
           --write
+          --fail-on-degraded
       - name: Regenerate catalog statistics in project documentation
         run: python -m scripts.update_catalog_docs
       - name: Run regression tests against generated asset
@@ -86,6 +89,42 @@ jobs:
             git commit -m "chore: refresh Grants.gov catalog"
             git push
           fi
+      - name: Alert the project owner about a degraded external source
+        if: always() && steps.additional-sources.outcome == 'failure'
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const title = "External funding source refresh degraded";
+            const runUrl =
+              `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}` +
+              `/actions/runs/${context.runId}`;
+            const body =
+              `At least one enabled non-Grants.gov source failed its refresh, ` +
+              `health bounds, or post-merge validation on ${new Date().toISOString()}.\n\n` +
+              `Healthy sources were still refreshed and any available last-known-good ` +
+              `snapshot was retained.\n\nInspect the source summary: ${runUrl}`;
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "open",
+              per_page: 100,
+            });
+            const existing = issues.find(issue => issue.title === title);
+            if (existing) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body,
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+              });
+            }
       - name: Alert the project owner
         if: failure()
         uses: actions/github-script@v8

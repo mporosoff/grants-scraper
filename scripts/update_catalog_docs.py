@@ -72,6 +72,9 @@ def catalog_stats(catalog: dict[str, Any]) -> dict[str, Any]:
     )
     diagnostics = catalog.get("diagnostics", {})
     details = diagnostics.get("detail_enrichment", {})
+    source_counts = Counter(
+        record.get("source") or "Source not listed" for record in records
+    )
     stats = {
         "generated": generated,
         "record_count": len(records),
@@ -92,6 +95,11 @@ def catalog_stats(catalog: dict[str, Any]) -> dict[str, Any]:
         "any_amount": any_amount,
         "past_deadlines": past_deadlines,
         "deadline_conflicts": details.get("deadline_conflict_count", 0),
+        "source_counts": dict(sorted(source_counts.items())),
+        "non_grants_count": sum(
+            count for source, count in source_counts.items()
+            if source != "Grants.gov"
+        ),
     }
     if sum(routes.values()) != stats["record_count"]:
         raise ValueError("primary source route counts do not cover the catalog")
@@ -121,30 +129,39 @@ def bullet(value: str) -> str:
 
 
 def readme_block(stats: dict[str, Any]) -> str:
+    sources = ", ".join(
+        f"{source} ({count:,})"
+        for source, count in stats["source_counts"].items()
+    )
     return paragraph(
         "This replaces the former 48-record Chemical and Sustainability "
         f"Engineering feed. The {format_date(stats['generated'])} build "
-        f"contains {stats['record_count']:,} current federal opportunities "
+        f"contains {stats['record_count']:,} current funding opportunities "
         f"({stats['posted']:,} posted and {stats['forecasted']:,} forecasted) "
-        "with no deadline before the catalog date. It provides a direct "
+        f"from {sources}, with no deadline before the catalog date. It provides a direct "
         f"official announcement for {stats['direct']:,} records, an "
-        f"agency-notice route for another {stats['agency_route']:,}, and the "
+        f"official source-page route for another {stats['agency_route']:,}, and the "
         "official Grants.gov record for the remaining "
         f"{stats['grants_route']:,}. Across all route types, "
-        f"{stats['agency_url_total']:,} records also contain an agency notice "
+        f"{stats['agency_url_total']:,} records also contain an official source "
         "URL."
     )
 
 
 def project_summary_block(stats: dict[str, Any]) -> str:
+    sources = ", ".join(
+        f"{source} ({count:,})"
+        for source, count in stats["source_counts"].items()
+    )
     return paragraph(
         f"The {format_date(stats['generated'])} build contains "
-        f"{stats['record_count']:,} open or current forecasted federal "
+        f"{stats['record_count']:,} open or current forecasted funding "
         f"opportunities ({stats['posted']:,} posted and "
         f"{stats['forecasted']:,} forecasted) rather than the former 48-record "
         "engineering shortlist. It contains no record with a deadline before "
-        "the catalog date. Sources outside Grants.gov will be added "
-        "independently when they have a sustainable public ingestion path."
+        f"the catalog date. Current published sources are {sources}; additional "
+        "sources are enabled only after a sustainable public ingestion path and "
+        "health bounds are verified."
     )
 
 
@@ -161,7 +178,7 @@ def project_evidence_block(stats: dict[str, Any]) -> str:
             f"{stats['direct_medium']:,} medium confidence);"
         ),
         bullet(
-            f"another {stats['agency_route']:,} use an official agency notice "
+            f"another {stats['agency_route']:,} use an official source page "
             "as their primary route;"
         ),
         bullet(

@@ -25,6 +25,10 @@ Deadline/award evidence + direct source actions
                 v
 Cited facts + document hash/version + review queue
                 |
+                | validated NSF/NYSERDA adapters + source lifecycle
+                v
+Current cross-source catalog + last-known-good snapshots
+                |
                 v
           GitHub Pages
           /         |         \
@@ -62,6 +66,15 @@ pages after 30 days; new and changed sources are processed before routine
 rechecks. Raw PDFs/HTML and full extracted text exist only in the job's memory and
 are discarded. Cached records that disappear from the current catalog are
 marked rather than silently erased so change history remains inspectable.
+
+`data/source_records.json` is the committed last-known-good cache for enabled
+non-Grants.gov adapters. NSF upcoming due dates and NYSERDA are enabled.
+NYSERDA selects the next open round and preserves later application and
+concept-paper dates. UR InfoReady is an intentionally disabled shell pending a
+stable, permissioned ingestion route; no portal credential is embedded.
+Healthy refreshes atomically replace that source's snapshot. Failed or
+implausible refreshes retain only still-current cached records, exit nonzero
+for monitoring, and open or update an owner-facing GitHub issue.
 
 ## Cost boundary
 
@@ -109,13 +122,18 @@ When the user explicitly saves a profile, one browser-local profile record
 contains the research description, expertise keywords, applicant/career
 context, extracted CV text, and search preferences. Extracted CV text is
 bounded to 120,000 characters. The original CV file is not retained. A
-separate browser-local record contains Phase 2 labels and reason codes.
+separate browser-local record contains Phase 2 labels and reason codes, a
+third compact record stores saved-opportunity snapshots, and a fourth stores
+only the personalization on/off choice. After three graded
+ratings, the user may explicitly enable a deterministic device-local
+preference model for Relevance sorting; it can be disabled or cleared at any
+time and makes no network request.
 
-Both records are device-specific, removable from the interface, and never
+All device-local records are removable from the interface and never
 sent to GitHub or a central database. They are a convenience and evaluation
 boundary, not an institutional credential vault or a local copy of the
-funding catalog. Shared search URLs take precedence over saved profile
-ranking until the user activates it.
+funding catalog. Shared search URLs take precedence over saved profile and
+preference ranking until the user activates them.
 
 The AI shortlist and chat exist only in page memory. An API key is also
 tab-only by default. The user may explicitly save one key per provider in a
@@ -131,10 +149,11 @@ directly to the selected provider. The provider’s billing, privacy, and
 retention terms apply. Users should use scoped keys with spending limits and
 should not enter confidential research.
 
-The explicit Phase 2 export excludes profile text, CV text, API keys, and chat
-by default. It contains a non-content comparison fingerprint, catalog version,
-filters, public opportunity metadata, retrieval/AI ranks, provider/model, and
-reason codes.
+The explicit Phase 2 export excludes profile text, CV text, API keys, and chat.
+It includes the current search text, a non-content comparison fingerprint,
+catalog version, filters, public opportunity metadata, retrieval/AI ranks,
+provider/model, ratings, and reason codes. Pilot instructions tell participants
+to use only non-confidential search wording they are comfortable returning.
 
 A separate Phase 3 local record contains explicit source verdicts, the field
 checked, optional reviewer notes, deployment checklist answers, coarse
@@ -159,11 +178,16 @@ and once when ingestion/evidence pipeline code reaches `main`:
    deadlines, awards, announcement attachments, and agency links.
 6. Retrieve and parse a bounded set of new, changed, or due official notices;
    merge only compact citation-backed evidence and rebuild the search index.
-7. Fail if record counts, identities, or required fields are implausible.
-8. Retest the newly generated browser assets and privacy contracts.
-9. Commit a changed catalog and compact caches to the default branch for
+7. Refresh enabled external sources, atomically replace healthy source
+   snapshots, retain still-current last-known-good records on degradation, and
+   rebuild all facets and indexes.
+8. Fail visibly if source or whole-catalog health is implausible while keeping
+   safe published data available.
+9. Retest the newly generated browser assets and privacy contracts.
+10. Commit a changed catalog and compact caches to the default branch for
    GitHub Pages.
-10. Open or update one owner-alert issue if the refresh fails.
+11. Open or update an owner-alert issue for whole-job or source-level
+    degradation.
 
 The last successful catalog remains available after a failure, and the page visibly warns when its generated timestamp is stale.
 
@@ -187,6 +211,10 @@ Phase 1 through Phase 3 release verification covers:
   network request;
 - label a result, select a reason, reload, and export a privacy-safe Phase 2
   evaluation file;
+- rate three opportunities, enable local personalization, and verify Relevance
+  sorting changes with a visible explanation and can be turned off;
+- save and remove an opportunity, reload, and confirm the compact saved list
+  remains device-local;
 - run `scripts/evaluate_phase2.py` against the versioned synthetic fixture;
 - exercise at least two facets and each sort mode;
 - export a multi-record CSV;

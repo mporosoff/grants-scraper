@@ -53,3 +53,17 @@ test("keeps only unique result ids from the bounded context", async () => {
 
   assert.deepEqual([...ids], ["A", "B"]);
 });
+
+test("labels optional result narrowing clearly for singular and plural sets", async () => {
+  const chatUi = await loadChatUi();
+
+  assert.equal(
+    chatUi.focusActionLabel(1),
+    "Narrow results to this opportunity",
+  );
+  assert.equal(
+    chatUi.focusActionLabel(3),
+    "Narrow results to these 3 opportunities",
+  );
+  assert.equal(chatUi.focusActionLabel(0), "");
+});

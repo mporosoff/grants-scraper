@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Search current federal funding opportunities, inspect citation-backed FOA evidence, and optionally refine results with AI.">
+  <meta name="description" content="Search current funding opportunities, inspect citation-backed FOA evidence, and optionally refine results with AI.">
   <meta name="referrer" content="no-referrer">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://api.openai.com https://api.anthropic.com; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self'">
   <title>Funding Finder</title>
-  <link rel="stylesheet" href="./assets/app.css?v=layout-ai-recovery-v1">
+  <link rel="stylesheet" href="./assets/app.css?v=release-2026-07-27-v1">
 </head>
 <body>
   <a class="skip-link" href="#results">Skip to results</a>
@@ -296,6 +296,16 @@
 
     <div class="workspace">
       <section class="results-column" aria-labelledby="results-heading">
+        <details class="saved-panel" id="saved-panel">
+          <summary>
+            <span><strong>★ Saved opportunities</strong> <small id="saved-count">(0)</small></span>
+            <span class="summary-action">View your saved list</span>
+          </summary>
+          <div class="saved-body">
+            <div class="saved-list" id="saved-list"></div>
+            <button class="text-button hidden" id="clear-saved" type="button">Clear all saved</button>
+          </div>
+        </details>
         <div class="results-toolbar search-not-started" id="results-toolbar">
           <div>
             <p class="eyebrow" id="results-mode">Ready when you are</p>
@@ -313,6 +323,13 @@
                 <option value="agency">Agency</option>
                 <option value="title">Title</option>
               </select>
+            </label>
+            <label class="personalize-toggle" title="Prioritize results using ratings stored only on this device">
+              <input type="checkbox" id="use-preferences">
+              <span>
+                Personalize from my ratings
+                <small id="preference-status" aria-live="polite">Rate 3 opportunities to personalize.</small>
+              </span>
             </label>
             <button class="button secondary" id="export-csv" type="button">Export CSV</button>
           </div>
@@ -354,6 +371,7 @@
         </section>
 
         <div class="result-list" id="results" aria-live="polite"></div>
+        <aside class="exploration hidden" id="exploration" aria-label="Suggested from your ratings"></aside>
 
         <nav class="pagination hidden" id="pagination" aria-label="Results pages">
           <button class="button secondary" id="page-prev" type="button">Previous</button>
@@ -367,12 +385,12 @@
       <summary>
         <span>
           <strong>Help improve Funding Finder</strong>
-          <small>Optional tools for invited testers; these do not affect your search</small>
+          <small>Optional export and source-check tools for invited testers</small>
         </span>
         <span class="summary-action">Open feedback tools</span>
       </summary>
       <div class="feedback-tools-body">
-        <p class="feedback-intro">Use this area only if you were asked to test Funding Finder. It collects explicit ratings and source checks on this device so you can choose to send them to the project owner. Nothing is sent automatically.</p>
+        <p class="feedback-intro">Opportunity ratings are available directly on result cards and stay on this device. Invited testers can use this area to export match-quality data or return source checks. Nothing is sent automatically.</p>
 
         <section class="evaluation-panel deployment-review-panel" aria-labelledby="deployment-review-heading">
           <div class="evaluation-heading">
@@ -425,7 +443,7 @@
             </div>
             <strong id="feedback-progress">0 reviewed</strong>
           </div>
-          <p>Opening these feedback tools also reveals optional rating controls on result cards. Ratings stay on this device until you export or clear them.</p>
+          <p>Ratings stay on this device and can personalize Relevance sorting after three graded opportunities. The optional export includes your current search text, filters, rankings, and ratings; it excludes API keys, profile/CV text, and chat.</p>
           <div class="evaluation-metrics" id="evaluation-metrics"></div>
           <div class="evaluation-actions">
             <button class="button secondary" id="export-evaluation" type="button">Export match ratings</button>
@@ -439,7 +457,7 @@
   </main>
 
   <footer>
-    <p><strong>Source:</strong> <a href="https://www.grants.gov/xml-extract" target="_blank" rel="noopener">Grants.gov daily database extract</a> plus citation-backed facts from selected official notices. Machine-extracted facts always require notice verification.</p>
+    <p><strong>Sources:</strong> <a href="https://www.grants.gov/xml-extract" target="_blank" rel="noopener">Grants.gov daily database extract</a> plus independently validated public listings (currently NSF and NYSERDA) and citation-backed facts from selected official notices. Machine-extracted facts always require notice verification.</p>
     <p>This product uses the Grants.gov API but is not endorsed or certified by the U.S. Department of Health and Human Services.</p>
     <p id="catalog-detail"></p>
   </footer>
@@ -448,11 +466,13 @@
     <div class="notice error">JavaScript is required to search the opportunity catalog.</div>
   </noscript>
   <script src="./data/opportunities.js"></script>
-  <script src="./assets/profile.js?v=unified-search-v1"></script>
-  <script src="./assets/review.js"></script>
-  <script src="./assets/credentials.js?v=unified-search-v1"></script>
-  <script src="./assets/ai-provider.js?v=layout-ai-recovery-v1"></script>
-  <script src="./assets/chat-ui.js?v=result-aware-chat-v1"></script>
-  <script src="./assets/app.js?v=layout-ai-recovery-v1"></script>
+  <script src="./assets/profile.js?v=release-2026-07-27-v1"></script>
+  <script src="./assets/review.js?v=release-2026-07-27-v1"></script>
+  <script src="./assets/credentials.js?v=release-2026-07-27-v1"></script>
+  <script src="./assets/ai-provider.js?v=release-2026-07-27-v1"></script>
+  <script src="./assets/chat-ui.js?v=release-2026-07-27-v1"></script>
+  <script src="./assets/saved.js?v=release-2026-07-27-v1"></script>
+  <script src="./assets/preferences.js?v=release-2026-07-27-v1"></script>
+  <script src="./assets/app.js?v=release-2026-07-27-v1"></script>
 </body>
 </html>

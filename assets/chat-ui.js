@@ -127,8 +127,19 @@
     return ids;
   }
 
+  function focusActionLabel(count) {
+    const total = Number.isFinite(Number(count))
+      ? Math.max(0, Math.floor(Number(count)))
+      : 0;
+    if (!total) return "";
+    return total === 1
+      ? "Narrow results to this opportunity"
+      : `Narrow results to these ${total} opportunities`;
+  }
+
   globalThis.FUNDING_CHAT_UI = Object.freeze({
     renderRichText,
     knownResultIds,
+    focusActionLabel,
   });
 })();

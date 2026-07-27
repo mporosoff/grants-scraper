@@ -5,7 +5,7 @@
 
 > Note on wording: I read item 1 ("make the audit layer less coarse") as the **relevance-feedback / evaluation layer** — the "Match Quality Testing" controls (useful / not relevant / verify) we discussed as too coarse. If you meant something else by "audit layer," flag it.
 
-> **Status update (July 26, 2026, later):** Workstream 0 is done (`.gitattributes`, vendored-hash normalization, and the one-time repository renormalization are complete). Workstream A's graded scale is shipped and the evaluator now reports graded relevance **and nDCG** for retrieval and reranking. Workstream C has moved well past shells: the verified NSF upcoming-due-dates adapter is enabled, the daily workflow runs the merge step, and the source layer now has an atomic per-source replace, a committed last-known-good snapshot cache, currentness/actionability validation, per-source health bounds, full post-merge validation, and a provenance-aware UI/AI/export pass. The NIH Guide adapter is intentionally disabled because NIH stopped publishing NOFOs there in FY2026; Grants.gov remains the official NIH NOFO source. Workstream B (local preference model) is the main remaining build.
+> **Status update (July 27, 2026):** Workstream 0 is done (`.gitattributes`, vendored-hash normalization, and the one-time repository renormalization are complete). Workstream A's graded scale is shipped and the evaluator reports graded relevance **and nDCG** for retrieval and reranking. Workstream B is implemented as an optional device-local preference re-ranker after three graded ratings, with visible explanations, reversible controls, and a small exploration set. Workstream C now publishes verified NSF upcoming-due-dates and NYSERDA records through the daily lifecycle. NYSERDA selects the next open round and retains later structured dates. The lifecycle includes atomic per-source replacement, a committed last-known-good snapshot, currentness/actionability gates, health bounds, full post-merge validation, and owner-facing degradation alerts. UR InfoReady remains a disabled shell pending a stable permissioned route; no unstable credential is shipped. The NIH Guide adapter is intentionally disabled because NIH stopped publishing NOFOs there in FY2026; Grants.gov remains the official NIH NOFO source.
 
 ---
 
@@ -81,20 +81,29 @@ comparison.
 ## Workstream C — Adapter layer: from framework to connected sources
 
 **Current state (precise).**
-- **Framework:** built, tested (28 source tests), verified against the real 1,465-record catalog. Safe by default (adapters off unless enabled; Grants.gov always wins; one broken source can't break the build). Now also: atomic per-source replace, committed last-known-good snapshot cache, currentness/actionability validation, per-source health bounds, and full post-merge validation.
+- **Framework:** built and tested against the real catalog. Safe by default
+  (adapters off unless enabled; Grants.gov always wins; one broken source
+  cannot erase healthy data). It includes atomic per-source replacement,
+  committed last-known-good snapshots, currentness/actionability validation,
+  per-source health bounds, full post-merge validation, and owner alerts.
 - **`rss` engine:** works and is tested. **`sample`:** works offline (demo).
 - **`nsf-funding`:** enabled and live against NSF's official upcoming-due-dates feed.
 - **`nih-guide`:** disabled intentionally; NIH Guide now carries policy and informational notices rather than FY2026 NOFOs.
-- **`nyserda`, `ur_infoready`:** **shells** — `parse()` returns nothing.
+- **`nyserda`:** enabled against the verified JSON route; publishes the next
+  open application round and preserves later application/concept-paper dates.
+- **`ur_infoready`:** disabled shell with a fixture parser. The earlier
+  undocumented endpoint returns HTTP 500, so no unstable request or embedded
+  secret ships.
 - **`pnd-rfp`:** ready to configure (needs live feed URL + a topic filter).
-- **Net:** NSF is connected; additional non-federal and institutional sources remain to be built.
+- **Net:** NSF and NYSERDA are connected; institutional and broader
+  non-federal coverage remains incremental.
 
 **"Can we wire in every source we can think of?"** We can *add an adapter for each*, but each real source is its own implementation + live verification, and a few should never be added (licensed databases). So the plan is: enumerate the full backlog, implement incrementally, enable one verified source at a time. Here's the backlog, tiered:
 
 | Tier | Source | Route | Effort | Notes |
 |---|---|---|---|---|
-| **1 — do first** | UR InfoReady | scrape public competitions page | S–M | Highest institutional value; internal + limited submissions. Best first real adapter. |
-| 1 | NYSERDA | scrape one funding page | S–M | You named it; energy-relevant; low volume. |
+| **Connected** | NYSERDA | verified JSON API | Done | Next-round and later structured deadlines are retained. |
+| **Blocked** | UR InfoReady | stable permissioned route needed | Unknown | Keep the disabled shell until the portal owner provides or documents a reliable route. |
 | **2 — breadth** | Candid PND RFP Bulletin | RSS (engine already built) | M | One source → many foundations. Needs topic/eligibility filter (nonprofit-skewed). |
 | 2 | ~10 flagship foundations (Templeton, Sloan, Moore, Simons, Keck, …) | per-site scrapers | S each × N | Cap the list; maintenance scales with N. Derive from your spreadsheet's top sponsors. |
 | **3 — fill gaps** | NSF Dear Colleague Letters | scrape NSF opportunities page | M | Overlaps Grants.gov → needs dedup. |
@@ -104,7 +113,10 @@ comparison.
 
 **Per-source "definition of done"** (the reusable checklist): adapter module + fixture test + health check (plausible row count) + documented public-use basis + maintenance owner + `enabled = True`. Then one shared change: add the single documented workflow step (in `scripts/sources/README.md`) and confirm the regression test passes on the merged asset.
 
-**Recommendation.** Do **UR InfoReady first** (highest value, single page), then **NYSERDA**, then **PND**. Don't try to wire everything at once — enable sources one verified adapter at a time.
+**Recommendation.** Keep InfoReady disabled until a stable permissioned route
+exists. Next prioritize the documented DOE Exchange gaps, then PND if its
+public feed and topic filter can be validated. Continue enabling sources one
+verified adapter at a time.
 
 ---
 
@@ -114,12 +126,24 @@ comparison.
 2. **Handle sparse non-federal data gracefully.** Foundation/state records rarely have structured award floors or eligibility codes, so they populate fewer facets and more "not listed." The UI should degrade cleanly and lean on "verify at official source." *(S)*
 3. **The deferred pilot is now more important, not less.** Both A and B optimize toward a feedback signal; if that signal is coarse or biased, an adaptive loop can *degrade* quality. You need real labeled data to (a) validate graded metrics and (b) tune/trust the preference model. This ties directly to the audit's open Phase 2C pilot. *(Planning, not code.)*
 4. **Guard the enrich/evidence steps against external records.** Those steps assume Grants.gov-shaped records. Running the source-merge as the *last* step (as designed) already avoids this, but add a one-line guard/test so a future reordering can't send a foundation record to the Grants.gov detail API. *(S)*
-5. **Cross-source dedup will need to grow up.** Today's dedup is identity + (title, close_date). As sources overlap (NSF in Grants.gov *and* on nsf.gov), you may need fuzzier matching. Fine for now; revisit at Tier 3. *(M, later)*
-6. **Governance:** per-source maintenance owner, health check, and failure alert (the Phase 4 checklist). One-person bus factor is fine for a pilot, not for 6 live sources. *(Planning.)*
+5. **Cross-source dedup will need to grow up.** Today's dedup is stable identity
+   plus normalized opportunity number/title. As sources overlap (NSF in
+   Grants.gov *and* on nsf.gov), fuzzier matching may eventually be needed.
+   Fine for now; revisit at Tier 3. *(M, later)*
+6. **Governance:** per-source maintenance owner and public-use basis remain
+   planning requirements. Health checks and owner-facing degradation alerts
+   are implemented. One-person bus factor is fine for a pilot, not for six
+   live sources.
 7. **Legal hygiene per scrape:** respect `robots.txt` and rate limits (the HTTP client already paces); document each source's public-use basis. *(Ongoing.)*
 
 ---
 
 ## One-paragraph summary
 
-Repository hygiene, graded feedback, graded evaluation metrics, source facets, the safe source lifecycle, the daily merge, and the first verified external source are complete. The main next build is Workstream B: a local, transparent preference model with an exploration slot so it can recover wrongly-filtered opportunities rather than only reinforcing its first guess. In parallel, turn the remaining adapter shells into verified sources one at a time, starting with UR InfoReady and NYSERDA. Keep the base catalog searchable without personalization, and use the deferred researcher pilot to verify that these layers improve real matches.
+Repository hygiene, graded feedback and evaluation metrics, source facets, the
+safe daily source lifecycle, NSF/NYSERDA ingestion, owner alerts, local saved
+opportunities, and the transparent preference model with an exploration slot
+are implemented. InfoReady remains a disabled shell until a stable
+permissioned route exists. Keep the base catalog searchable without
+personalization, expand only verified sources, and use the deferred researcher
+pilot to determine whether these layers improve real matches.
