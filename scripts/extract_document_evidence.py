@@ -38,6 +38,7 @@ from scripts.build_catalog import (
     write_catalog,
 )
 from scripts.enrich_catalog import read_catalog
+from scripts import program_areas
 
 
 EVIDENCE_SCHEMA_VERSION = 1
@@ -48,6 +49,7 @@ MAX_DOWNLOAD_BYTES = 30 * 1024 * 1024
 MAX_PDF_PAGES = 250
 MAX_PAGE_CHARS = 30_000
 MAX_FACTS = 36
+MAX_PROGRAM_AREAS = 14
 MAX_QUOTE_CHARS = 360
 MAX_VERSION_HISTORY = 6
 
@@ -911,6 +913,39 @@ def extract_repeated_signals(
     return facts
 
 
+def extract_program_areas(containers, document, extracted_at, maximum=MAX_PROGRAM_AREAS):
+    """Detect controlled program-area terms that actually appear in the notice.
+
+    Returns a list of ``{"label", "topics", "citation"}`` for each program area
+    found in the official document text. These are inferred discoverability
+    signals -- kept separate from official ``facts`` -- that make an opaque
+    umbrella FOA findable by topic. Each hit carries a page/section citation, so
+    it is evidence-backed and auditable in the evidence cache.
+    """
+    hits = []
+    seen = set()
+    for label, topics, pattern in program_areas.ENTRIES:
+        if label in seen:
+            continue
+        for container in containers:
+            match = pattern.search(container["text"])
+            if not match:
+                continue
+            citation = citation_for(
+                container,
+                document,
+                match.start(),
+                match.end(),
+                extracted_at,
+            )
+            hits.append({"label": label, "topics": list(topics), "citation": citation})
+            seen.add(label)
+            break
+        if len(hits) >= maximum:
+            break
+    return hits
+
+
 def extract_document_facts(
     record,
     containers,
@@ -1355,6 +1390,11 @@ def build_document_entry(record, source, response, previous, now):
         document,
         fetched_at,
     )
+    program_area_hits = extract_program_areas(
+        containers,
+        document,
+        fetched_at,
+    )
     review_queue = build_review_queue(
         record,
         facts,
@@ -1369,6 +1409,7 @@ def build_document_entry(record, source, response, previous, now):
         "document": document,
         "extraction": extraction,
         "facts": facts,
+        "program_areas": program_area_hits,
         "review_queue": review_queue,
         "version_history": version_history,
         "archived_from_catalog_at": None,
@@ -1531,6 +1572,39 @@ def merge_document_entry(record, entry):
                 fact.get("citation", {}).get("quote"),
             ]
         )
+
+    # Evidence-backed program-area discoverability: controlled terms that were
+    # actually found in the official notice (see extract_program_areas). Add the
+    # compact canonical labels to the indexed search text and their Topic tags
+    # to the facet -- but NOT the raw quotes, so the browser catalog stays lean.
+    # Full page/section citations remain in the evidence cache for auditability.
+    # Revalidate cached hits against the current controlled vocabulary. This
+    # lets a tightened recognizer remove an older false positive (for example,
+    # "catalytic capital") without retaining stale search/facet pollution.
+    patterns_by_label = {
+        label: pattern for label, _, pattern in program_areas.ENTRIES
+    }
+    program_area_hits = [
+        hit
+        for hit in (entry.get("program_areas") or [])
+        if patterns_by_label.get(hit.get("label"))
+        and patterns_by_label[hit["label"]].search(
+            ((hit.get("citation") or {}).get("quote") or "")
+        )
+    ]
+    program_labels = [hit.get("label") for hit in program_area_hits if hit.get("label")]
+    if program_labels:
+        searchable.extend(program_labels)
+        output["document_program_areas"] = program_labels
+        inferred_topics = []
+        for hit in program_area_hits:
+            for topic in hit.get("topics") or []:
+                if topic not in inferred_topics:
+                    inferred_topics.append(topic)
+        if inferred_topics:
+            existing = list(output.get("topic_areas") or [])
+            output["topic_areas"] = list(dict.fromkeys(existing + inferred_topics))
+
     output["document_search_text"] = clean_text(
         " ".join(str(value) for value in searchable if value)
     )

@@ -17,7 +17,9 @@ Anyone can search the comprehensive catalog without an account or API key. The b
 - relevance and field-based sorting;
 - one-click official FOA, agency-notice, or Grants.gov record actions;
 - expandable page/section-cited FOA evidence, pagination, and CSV export; and
-- visible catalog source, size, generated time, and freshness; and
+- visible catalog source, size, generated time, and freshness;
+- public RSS/Atom feeds for the full catalog and individual topics/source
+  types; and
 - automatic dark-mode and Windows high-contrast support.
 
 The page initially shows no opportunities. One guided workflow combines a
@@ -74,11 +76,12 @@ private Markdown, JSON, and CSV reports.
 ## Data model
 
 The daily workflow processes the official [Grants.gov XML database extract](https://www.grants.gov/xml-extract), then merges enabled, independently validated
-public-source adapters. NSF upcoming due dates and NYSERDA are currently
-enabled. UR InfoReady remains a disabled shell until a stable permissioned
-route exists. It publishes open posted and current forecasted records plus a
-compact BM25 search index to `data/opportunities.js`. Past deadlines are
-rejected for every source, and stale undated forecasts are excluded.
+public-source adapters. NSF upcoming due dates, NYSERDA, ARPA-E eXCHANGE, and
+DOE EERE Exchange are enabled. NASA NSPIRES and UR InfoReady remain disabled
+shells until stable public or permissioned routes exist. It publishes open
+posted and current forecasted records plus a compact BM25 search index to
+`data/opportunities.js`. Past deadlines are rejected for every source, and
+stale undated forecasts are excluded.
 
 An incremental second step enriches only new or changed records through the
 official Grants.gov `fetchOpportunity` detail API. It reconciles structured
@@ -104,14 +107,26 @@ cannot erase healthy published records: the safe merge completes, exits
 nonzero for monitoring, and the scheduled workflow opens or updates an
 owner-facing GitHub issue. NYSERDA publishes the next open application round
 and retains later application and concept-paper dates as structured deadlines.
+DOE Exchange adapters publish only actual NOFOs, not RFIs, teaming notices, or
+notices of intent, and retain later submission rounds as structured deadlines.
+The source cache also preserves a first-seen date so undated external records
+can participate reliably in feeds and consent-based alerts.
+
+After the final validated merge, `scripts/build_feeds.py` regenerates static
+Atom feeds under `feeds/`. They require no account, backend, or personal data.
+For a small manually managed pilot, `docs/weekly-alerts/` contains a
+private-repository email-digest bundle. The public site does not collect email
+addresses; the bundle requires explicit consent and keeps subscriptions,
+watermarks, and SMTP secrets outside this public repository.
 
 <!-- catalog-stats:start -->
 This replaces the former 48-record Chemical and Sustainability Engineering feed. The
-July 27, 2026 build contains 1,466 current funding opportunities (1,225 posted and 241
-forecasted) from Grants.gov (1,465), National Science Foundation (1), with no deadline
-before the catalog date. It provides a direct official announcement for 447 records, an
-official source-page route for another 616, and the official Grants.gov record for the
-remaining 403. Across all route types, 775 records also contain an official source URL.
+July 27, 2026 build contains 1,506 current funding opportunities (1,265 posted and 241
+forecasted) from ARPA-E eXCHANGE (1), Grants.gov (1,467), NYSERDA (37), National Science
+Foundation (1), with no deadline before the catalog date. It provides a direct official
+announcement for 448 records, an official source-page route for another 654, and the
+official Grants.gov record for the remaining 404. Across all route types, 813 records
+also contain an official source URL.
 <!-- catalog-stats:end -->
 
 Funding values are intentionally not conflated: award floor/ceiling drive
@@ -139,7 +154,12 @@ support it.
 | `scripts/build_catalog.py` | Official XML ingestion and catalog builder |
 | `scripts/enrich_catalog.py` | Official detail reconciliation and FOA selection |
 | `scripts/extract_document_evidence.py` | Official PDF/HTML retrieval, versioning, deterministic fact extraction, and citations |
+| `scripts/program_areas.py` | Evidence-backed controlled vocabulary for discoverability in official notices |
 | `scripts/sources/` | Validated multi-source adapters, lifecycle, health gates, and merge |
+| `scripts/build_feeds.py` | Static all/topic/source-type Atom feed generator |
+| `scripts/alert_match.py` | Server-side saved-search matcher shared by the optional digest bundle |
+| `feeds/` | Generated public Atom feeds and feed directory |
+| `docs/weekly-alerts/` | Private-repository pilot bundle for consent-based weekly email digests |
 | `scripts/evaluate_phase2.py` | Phase 2 retrieval/reranking evaluator |
 | `scripts/summarize_phase3_reviews.py` | Private Phase 3 deployment-review aggregator |
 | `evaluation/README.md` | Pilot export, privacy, and aggregation workflow |
@@ -189,10 +209,10 @@ python -m scripts.summarize_phase3_reviews evaluation/inbox --output-dir evaluat
 
 The scheduled workflow runs the Grants.gov, enrichment, document-evidence, and
 external-source steps daily; validates source-specific and whole-catalog
-health; retests the generated assets; alerts the owner about degradation; and
-commits the normalized browser catalog plus compact caches. Raw XML archives,
-raw notices, full extracted notice text, and returned review files are not
-committed.
+health; regenerates the public feeds; retests the generated assets; alerts the
+owner about degradation; and commits the normalized browser catalog, feeds,
+and compact caches. Raw XML archives, raw notices, full extracted notice text,
+subscriber data, SMTP credentials, and returned review files are not committed.
 
 See `PROJECT.md` for the completed Phase 1/1.5 scope, deferred Phase 2 pilot,
 and Phase 3 implementation,

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Funding Finder — Catalysis and reaction engineering</title>
+  <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml" rel="self"/>
+  <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
+  <id>https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml</id>
+  <updated>2026-07-27T14:02:03Z</updated>
+  <generator>Funding Finder</generator>
+  <entry>
+    <title>Chemical Process Systems (CPS)</title>
+    <link href="https://www.grants.gov/search-results-detail/362061"/>
+    <id>urn:funding-finder:grants-gov:362061</id>
+    <updated>2026-04-24T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <summary>U.S. National Science Foundation — Posted — Society relies on chemical processes to turn raw materials into useful products. The Chemical Process Systems (CPS) program invests in fundamental research on chemical and biochemical processes to make them more efficient, sustainable, and resilient. New CPS technologies for manufacturing, biotechnology, critical minerals, energy, food, and other national priorities will help make the U.S. more co…</summary>
+  </entry>
+  <entry>
+    <title>FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
+    <link href="https://www.grants.gov/search-results-detail/360678"/>
+    <id>urn:funding-finder:grants-gov:360678</id>
+    <updated>2025-09-30T00:00:00Z</updated>
+    <author><name>Office of Science</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Carbon management"/>
+    <category term="Quantum science"/>
+    <summary>Office of Science — Closes 2026-09-30 — The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
+  </entry>
+  <entry>
+    <title>Computational and Data-Enabled Science and Engineering</title>
+    <link href="https://www.grants.gov/search-results-detail/356055"/>
+    <id>urn:funding-finder:grants-gov:356055</id>
+    <updated>2024-08-15T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Data science"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation — Posted — Large-scale simulations and the ability to accumulate massive amounts of data have revolutionized science and engineering. The goal of the Computational and Data-enabled Science and Engineering (CDS&amp;E) meta-program is to identify and capitalize on opportunities for major scientific and engineering breakthroughs through new computational and data-analysis approaches and best practices. The CDS&amp;E me…</summary>
+  </entry>
+  <entry>
+    <title>ECosystem for Leading Innovation in Plasma Science and Engineering</title>
+    <link href="https://www.grants.gov/search-results-detail/351715"/>
+    <id>urn:funding-finder:grants-gov:351715</id>
+    <updated>2024-01-06T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Climate change"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation — Closes 2026-08-11 — Plasma science is a transdisciplinary field of research where fundamental studies in many disciplines, including plasma physics, plasma chemistry, materials science, and space science, come together to advance knowledge for discovery and technological innovation. The primary goal of the ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) program is to identify and capitali…</summary>
+  </entry>
+  <entry>
+    <title>Plasma Physics</title>
+    <link href="https://www.grants.gov/search-results-detail/350018"/>
+    <id>urn:funding-finder:grants-gov:350018</id>
+    <updated>2023-08-29T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation — Closes 2026-11-16 — Proposals in the area of plasma physics submitted to the Division of Physics that are not governed by another solicitation (such as CAREER), should be submitted to the Division-wide solicitation: Division of Physics: Investigator-Initiated Research Projects. The Plasma Physics program participates in multiple NSF meta-programs such as the ECosytem for Leading Innovation in Plasma Science and Engin…</summary>
+  </entry>
+  <entry>
+    <title>Catalysis</title>
+    <link href="https://www.grants.gov/search-results-detail/348932"/>
+    <id>urn:funding-finder:grants-gov:348932</id>
+    <updated>2023-06-27T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Climate change"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Quantum science"/>
+    <summary>U.S. National Science Foundation — Posted — The Catalysis program is part of the Chemical Process Systems cluster, which also includes: 1) the Electrochemical Systems program; 2) the Interfacial Engineering program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
+The goals of the Catalysis program are to increase fundamental understanding in catalytic engineering science and to advance the development…</summary>
+  </entry>
+  <entry>
+    <title>Process Systems, Reaction Engineering, and Molecular Thermodynamics</title>
+    <link href="https://www.grants.gov/search-results-detail/348793"/>
+    <id>urn:funding-finder:grants-gov:348793</id>
+    <updated>2023-06-18T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <summary>U.S. National Science Foundation — Posted — The Process Systems, Reaction Engineering, and Molecular Thermodynamics program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Electrochemical Systems program; and 3) the Interfacial Engineering program.
+The goal of the Process Systems, Reaction Engineering, and Molecular Thermodynamics program is to advance fundamental engineering research o…</summary>
+  </entry>
+  <entry>
+    <title>Division of Chemistry: Disciplinary Research Programs</title>
+    <link href="https://www.grants.gov/search-results-detail/347749"/>
+    <id>urn:funding-finder:grants-gov:347749</id>
+    <updated>2023-04-26T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Environmental science"/>
+    <summary>U.S. National Science Foundation — Closes 2026-09-30 — This solicitation applies to six (of the nine) CHE Disciplinary Research Programs: Chemical Catalysis (CAT); Chemical Measurement and Imaging (CMI); Chemical Mechanism, Function and Properties (CMFP); Chemical Synthesis (SYN); Environmental Chemical Sciences (ECS); and Macromolecular, Supramolecular and Nanochemistry (MSN). All proposals submitted to these six CHE Disciplinary Research Programs (o…</summary>
+  </entry>
+  <entry>
+    <title>Electrochemical Systems</title>
+    <link href="https://www.grants.gov/search-results-detail/347329"/>
+    <id>urn:funding-finder:grants-gov:347329</id>
+    <updated>2023-04-05T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Arts and culture"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Climate change"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Materials science"/>
+    <category term="Transportation"/>
+    <summary>U.S. National Science Foundation — Posted — The Electrochemical Systems program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Interfacial Engineering program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
+The goal of the Electrochemical Systems program is to support fundamental engineering science research that will enable innovative processes…</summary>
+  </entry>
+  <entry>
+    <title>Interfacial Engineering</title>
+    <link href="https://www.grants.gov/search-results-detail/347326"/>
+    <id>urn:funding-finder:grants-gov:347326</id>
+    <updated>2023-04-05T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation — Posted — The Interfacial Engineering program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Electrochemical Systems program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
+The goal of the Interfacial Engineering program is to support fundamental research on atomic- and molecular-scale interfacial phenomena and …</summary>
+  </entry>
+</feed>

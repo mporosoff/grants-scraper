@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Funding Finder — Data science</title>
+  <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
+  <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
+  <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
+  <updated>2026-07-27T14:02:03Z</updated>
+  <generator>Funding Finder</generator>
+  <entry>
+    <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/362639"/>
+    <id>urn:funding-finder:grants-gov:362639</id>
+    <updated>2027-08-03T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2028-02-01 — The National Human Genome Research Institute (NHGRI) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to establish an ancient DNA for Modern Genomics (aDMG) program. The goal of aDMG is to establish an ethical resource of ancient and historical human DNA (aDNA) data to advance studies about contemporary human traits and biology. This NOFO aims to solicit applicatio…</summary>
+  </entry>
+  <entry>
+    <title>Maternal-Child Surveillance and Partnerships for Action, Results, and Knowledge</title>
+    <link href="https://www.grants.gov/search-results-detail/363313"/>
+    <id>urn:funding-finder:grants-gov:363313</id>
+    <updated>2027-02-25T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCBDDD</name></author>
+    <category term="Data science"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control - NCBDDD — Closes 2027-04-26 — CDC proposes to allocate funds to implement Notice of Funding Opportunity (NOFO) DD-27-0028, Maternal Child Surveillance and Partnerships for Action, Results, and Knowledge. This NOFO will integrate maternal child health surveillance with national partnership activities to address key public health challenges including alcohol use during pregnancy, fetal alcohol spectrum disorders (FASDs), neonata…</summary>
+  </entry>
+  <entry>
+    <title>AIDS Research Center on Mental Health and HIV/AIDS (P30 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/362945"/>
+    <id>urn:funding-finder:grants-gov:362945</id>
+    <updated>2027-02-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Data science"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health — Closes 2027-05-25 — The National Institute of Mental Health (NIMH) seeks research applications to support the NIMH HIV/AIDS Research Centers (ARC) program, including Developmental Centers (D-ARCs) and full AIDS Research Centers (ARCs). These Research Centers aim to capitalize on the coordinated infrastructure to advance high-impact, interdisciplinary HIV/AIDS research. The ARC program supports innovative research acr…</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: The NHGRI Analysis, Visualization, and Informatics Lab-space (AnVIL) (U54 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/362638"/>
+    <id>urn:funding-finder:grants-gov:362638</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health — Closes 2027-05-25 — The National Human Genome Research Institute (NHGRI) intends to issue a Notice of Funding Opportunity (NOFO) to support a limited competition renewal of the Analysis, Visualization, and Informatics Lab-space (AnVIL) program. AnVIL is a secure, cloud-based platform that enables researchers to access, share, and analyze large-scale genomic datasets without relying on local infrastructure. Currently,…</summary>
+  </entry>
+  <entry>
+    <title>Advanced Laboratories for Accelerating the Reach and Impact of Treatments for Youth and Adults with Mental Illness (ALACRITY) Research Centers</title>
+    <link href="https://www.grants.gov/search-results-detail/361521"/>
+    <id>urn:funding-finder:grants-gov:361521</id>
+    <updated>2027-01-27T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health — Closes 2027-05-27 — The National Institute of Mental Health (NIMH) intends to publish a notice of funding opportunity (NOFO) to solicit research applications for practice-based research centers to support interdisciplinary teams of mental health researchers to engage in high-impact studies that will significantly advance clinical practice and generate knowledge to fuel the transformation of mental health care in the …</summary>
+  </entry>
+  <entry>
+    <title>Health and Extreme Weather Research Coordination and Data Center (U2C - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/362979"/>
+    <id>urn:funding-finder:grants-gov:362979</id>
+    <updated>2026-11-27T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health — Closes 2027-01-29 — The National Institute of Environmental Health Sciences (NIEHS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for research coordination and data support for the Health and Extreme Weather (HEW) initiative. This solicitation will include two closely aligned components: research coordination and data support. The coordinating component will be responsible for faci…</summary>
+  </entry>
+  <entry>
+    <title>Precision and Systems Biology to Uncover the Link Between Chronic and Infectious Diseases</title>
+    <link href="https://www.grants.gov/search-results-detail/362952"/>
+    <id>urn:funding-finder:grants-gov:362952</id>
+    <updated>2026-11-06T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-01-22 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
+  </entry>
+  <entry>
+    <title>Restoring Joint Health and Function to Reduce Pain (RE-JOIN) 2.0</title>
+    <link href="https://www.grants.gov/search-results-detail/361186"/>
+    <id>urn:funding-finder:grants-gov:361186</id>
+    <updated>2026-10-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Data science"/>
+    <summary>National Institutes of Health — Closes 2026-12-01 — The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS), in conjunction with other NIH Institutes and Centers (ICs) as a part of the congressionally mandated NIH Helping to End Addiction Long Term (HEAL) initiative intends to publish a Notice of Funding Opportunity (NOFO) to leverage and accelerate the progress achieved in the Restoring Joint Health and Function to Reduce…</summary>
+  </entry>
+  <entry>
+    <title>Genomic Community Resources (U24 Clinical Trials Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/361263"/>
+    <id>urn:funding-finder:grants-gov:361263</id>
+    <updated>2026-09-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Data science"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health — Closes 2027-01-25 — The National Human Genome Research Institute (NHGRI), with other NIH Institutes and Centers (ICs) National Cancer Institute (NCI) and National Institute of Environmental Health Sciences (NIEHS), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to facilitate genomic research and the dissemination of its products, NHGRI proposes this RFA to support both new and exist…</summary>
+  </entry>
+  <entry>
+    <title>Radiation Oncology-Biology Integration Network (ROBIN) Centers (U54 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/362647"/>
+    <id>urn:funding-finder:grants-gov:362647</id>
+    <updated>2026-08-19T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health — Closes 2027-01-25 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to continue to support the Radiation Oncology-Biology Integration Network (ROBIN) with applications from both new and renewing investigators. This network model will sustain an agile and effective national radiation oncology infrastructure that collectively addresses critical hypothesis-based translation…</summary>
+  </entry>
+  <entry>
+    <title>BRAIN Initiative Cell Atlas Network (BICAN): Coordinating Unit for Biostatistics, Informatics, and Engagement (CUBIE)</title>
+    <link href="https://www.grants.gov/search-results-detail/361449"/>
+    <id>urn:funding-finder:grants-gov:361449</id>
+    <updated>2026-08-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Data science"/>
+    <category term="Environmental science"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health — Closes 2026-10-01 — The National Institute of Mental Health (NIMH), with other NIH Institutes and Centers (ICs), intends to publish a notice of funding opportunity (NOFO) to solicit research applications for the BRAIN Initiative Cell Atlas Network (BICAN) Coordinating Unit for Biostatistics, Informatics, and Engagement (CUBIE). In accordance with NIH standard peer-review processes, the application(s) will be peer-rev…</summary>
+  </entry>
+  <entry>
+    <title>The NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC) Data Coordinating Center</title>
+    <link href="https://www.grants.gov/search-results-detail/360622"/>
+    <id>urn:funding-finder:grants-gov:360622</id>
+    <updated>2026-08-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health — Closes 2026-11-01 — The National Institute of Diabetes and Digestive Diseases and Nutrition (NIDDK) seeks to advance its mission by continuing the NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC). The IBDGC has led collaborative efforts resulting in the identification of &gt;300 genetic risk loci for different IBD subtypes across patient populations and characterization of underlying biological mechanisms. D…</summary>
+  </entry>
+  <entry>
+    <title>The NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC) Genomic Research Centers</title>
+    <link href="https://www.grants.gov/search-results-detail/360621"/>
+    <id>urn:funding-finder:grants-gov:360621</id>
+    <updated>2026-08-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health — Closes 2026-11-01 — The National Institute of Diabetes and Digestive Diseases and Nutrition (NIDDK) seeks to advance its mission by continuing the NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC). The IBDGC has led collaborative efforts resulting in the identification of &gt;300 genetic risk loci for different IBD subtypes across patient populations and characterization of underlying biological mechanisms. D…</summary>
+  </entry>
+  <entry>
+    <title>AI Partnership &amp; Exchange for Tech Leaders (APEX)</title>
+    <link href="https://www.grants.gov/search-results-detail/363315"/>
+    <id>urn:funding-finder:grants-gov:363315</id>
+    <updated>2026-07-26T00:00:00Z</updated>
+    <author><name>U.S. Mission to Saudi Arabia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>U.S. Mission to Saudi Arabia — Closes 2026-09-08 — Program PurposeThe U.S. Embassy Riyadh Public Diplomacy Section is accepting applications for a cooperative agreement to run the AI Partnership &amp; Exchange for Tech Leaders. The goal of this program is to connect rising Saudi Artificial Intelligence (AI) leaders with American experts in business, tech, and academia. This initiative helps participants build professional networks, study U.S. technolo…</summary>
+  </entry>
+  <entry>
+    <title>Enhancement and Management of Established Biomedical Data Repositories and Knowledgebases (R24 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/362355"/>
+    <id>urn:funding-finder:grants-gov:362355</id>
+    <updated>2026-07-24T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Data science"/>
+    <summary>National Institutes of Health — Closes 2026-09-25 — The Office of Data Science Strategy (ODSS) along with other participating institutes and Centers intends to renew the Notice of Funding Opportunity (NOFO) PAR-23-237.This funding opportunity is intended to provide continuation to support established biomedical data repositories and knowledge bases as distinct and separate resources that have demonstrated impact and have potential for continued ben…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year 2026 Next Generation Warning System Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363192"/>
+    <id>urn:funding-finder:grants-gov:363192</id>
+    <updated>2026-07-17T00:00:00Z</updated>
+    <author><name>Department of Homeland Security - FEMA</name></author>
+    <category term="Cybersecurity"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Department of Homeland Security - FEMA — Closes 2026-08-07 — This grant will fund projects to identify capability gaps and implement solutions for alert and warning to deliver timely public warning and emergency information and to protect critical infrastructure. There are rapid changes in technology, cybersecurity threats, and public preferences for consuming content, recipients will work with the Federal Emergency Management Agency (FEMA) to explore curre…</summary>
+  </entry>
+  <entry>
+    <title>Data Analytics &amp; AI to Counter Global Diversion</title>
+    <link href="https://www.grants.gov/search-results-detail/363221"/>
+    <id>urn:funding-finder:grants-gov:363221</id>
+    <updated>2026-07-16T00:00:00Z</updated>
+    <author><name>Bureau of Arms Control and Nonproliferation</name></author>
+    <category term="Data science"/>
+    <summary>Bureau of Arms Control and Nonproliferation — Closes 2026-08-21 — This effort seeks to address multiple facets of export control challenges. The first component will analyze trade data, create exemplary visualizations (e.g., dashboards), and train export control authorities to use data analysis for export control implementation. The second component will design, develop, and deploy a smartphone-accessible application for frontline officers to detect and identify…</summary>
+  </entry>
+  <entry>
+    <title>EducationUSA AI/STEM and Sports Diplomacy Grant</title>
+    <link href="https://www.grants.gov/search-results-detail/363123"/>
+    <id>urn:funding-finder:grants-gov:363123</id>
+    <updated>2026-07-09T00:00:00Z</updated>
+    <author><name>U.S. Mission to Georgia</name></author>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>U.S. Mission to Georgia — Closes 2026-08-10 — This funding opportunity supports the America First agenda by strengthening U.S. competitiveness, expanding American universities' international recruitment pipelines and building lasting ties between Georgian talent and U.S. institutions through two complementary initiatives: the EducationUSA Sports Pathways Initiative and the EducationUSA AI and Innovation Hubs. Both proposals under this funding…</summary>
+  </entry>
+  <entry>
+    <title>Freedom 250 Great American State Fair Initiative – Abu Dhabi</title>
+    <link href="https://www.grants.gov/search-results-detail/363119"/>
+    <id>urn:funding-finder:grants-gov:363119</id>
+    <updated>2026-07-09T00:00:00Z</updated>
+    <author><name>U.S. Mission to United Arab Emirates</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to United Arab Emirates — Closes 2026-08-10 — The U.S. Embassy Abu Dhabi, Public Diplomacy Section, announces an open competition to develop and implement the programmatic elements of a three-day Freedom 250 Great American State Fair. The Fair will showcase authentic American heartland culture, creativity, entrepreneurship, entertainment, culinary traditions, and music through immersive public programming designed for UAE audiences. Proposals…</summary>
+  </entry>
+  <entry>
+    <title>Muscat - Annual Program Statement (APS)- PD Small Grants Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363078"/>
+    <id>urn:funding-finder:grants-gov:363078</id>
+    <updated>2026-07-08T00:00:00Z</updated>
+    <author><name>U.S. Mission to Oman</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Community development"/>
+    <category term="Cybersecurity"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <summary>U.S. Mission to Oman — Closes 2026-08-09 — The Public Diplomacy Section of U.S. Embassy Muscat announces an open competition to support projects that advance U.S. foreign policy priorities in Oman while strengthening the long-standing partnership between the United States and the Sultanate of Oman. This Annual Program Statement outlines strategic funding priorities, eligibility criteria, and application guidelines for grants ranging from $…</summary>
+  </entry>
+  <entry>
+    <title>FY26 American Spaces Vietnam Programming</title>
+    <link href="https://www.grants.gov/search-results-detail/363080"/>
+    <id>urn:funding-finder:grants-gov:363080</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>U.S. Mission to Vietnam</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Vietnam — Closes 2026-08-02 — U.S. Mission Vietnam's Public Diplomacy Section seeks proposals to implement workforce development and innovation programs through American Spaces. This program builds a pipeline of skilled, English-capable Vietnamese youth who support U.S. trade, investment, and innovation partnerships while expanding economic opportunity in Vietnam. The project targets university students, educators, and early-c…</summary>
+  </entry>
+  <entry>
+    <title>Annual Program Statement (APS) – Public Diplomacy Grants Program: Advancing America First Priorities</title>
+    <link href="https://www.grants.gov/search-results-detail/363093"/>
+    <id>urn:funding-finder:grants-gov:363093</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>U.S. Mission to Ecuador</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>U.S. Mission to Ecuador — Closes 2026-08-06 — The U.S. Mission to Ecuador of the U.S. Department of State is pleased to announce that funding is available through its Public Diplomacy Grants Program. This is an Annual Program Statement, outlining our funding priorities, the strategic themes we focus on, and the procedures for submitting requests for funding.</summary>
+  </entry>
+  <entry>
+    <title>U.S. Embassy Jerusalem Public Diplomacy Annual Program Statement (Palestinian audiences)</title>
+    <link href="https://www.grants.gov/search-results-detail/363046"/>
+    <id>urn:funding-finder:grants-gov:363046</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>U.S. Mission to Jerusalem</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>U.S. Mission to Jerusalem — Closes 2026-08-06 — U.S. Embassy Jerusalem’s Public Diplomacy Section (PDS) announces an open competition to implement projects that advance U.S. economic, commercial, and security interests among Palestinian audiences. This Annual Program Statement (APS) outlines strategic goals, expected outcomes, target audiences, eligibility criteria, and application guidelines for cooperative agreements ranging from $50,000 to $…</summary>
+  </entry>
+  <entry>
+    <title>Disability and Rehabilitation Research Projects (DRRP) Program: Community Living and Participation (Development)</title>
+    <link href="https://www.grants.gov/search-results-detail/362016"/>
+    <id>urn:funding-finder:grants-gov:362016</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Administration for Community Living — Closes 2026-08-05 — Under this particular DRRP priority, applicants must propose a development project that is aimed at improving community living and participation outcomes of individuals with disabilities. In carrying out a development project under this program, a grantee must use knowledge and understanding gained from research to create models, methods, tools, applications, and devices beneficial to the target p…</summary>
+  </entry>
+  <entry>
+    <title>Disability and Rehabilitation Research Projects (DRRP) Program: Community Living and Participation (Research)</title>
+    <link href="https://www.grants.gov/search-results-detail/362015"/>
+    <id>urn:funding-finder:grants-gov:362015</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Administration for Community Living — Closes 2026-08-05 — Under this particular DRRP priority, applicants must propose a research project that is aimed at improving community living and participation outcomes among people with disabilities. In carrying out a research project under this program, a grantee must identify one or more hypotheses or research questions and, based on the hypotheses or research questions identified, perform an intensive, systemat…</summary>
+  </entry>
+  <entry>
+    <title>AI Pathways To The Future</title>
+    <link href="https://www.grants.gov/search-results-detail/363061"/>
+    <id>urn:funding-finder:grants-gov:363061</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Indonesia — Closes 2026-08-09 — Executive Summary The U.S. Department of State’s Embassy Jakarta announces an open competition to implement the AI Pathways to the Future program, a comprehensive initiative designed to strengthen U.S.-Indonesia partnerships in artificial intelligence education, research, and innovation. Promoting AI innovation and security is a top priority of the United States government, including in its foreig…</summary>
+  </entry>
+  <entry>
+    <title>Voices for the Future</title>
+    <link href="https://www.grants.gov/search-results-detail/363043"/>
+    <id>urn:funding-finder:grants-gov:363043</id>
+    <updated>2026-07-02T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Indonesia — Closes 2026-07-31 — PROGRAM DESCRIPTION 1. Project Background, Goals, and Objectives Indonesia is the world’s third largest democracy and over half of its population is under the age 30. Because of this large youth demographic, the United States has an opportunity to engage the next generation of Indonesian leaders. For the last several years, however, Indonesian favorability towards the United States has failed to i…</summary>
+  </entry>
+  <entry>
+    <title>Small Health Care Provider Quality Improvement Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362831"/>
+    <id>urn:funding-finder:grants-gov:362831</id>
+    <updated>2026-07-02T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Arts and culture"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>Health Resources and Services Administration — Closes 2026-08-06 — The purpose of the Small Health Care Provider Quality Improvement Program is to strengthen the quality improvement culture in small rural healthcare facilities by building capacity to effectively collect and use clinical data while implementing evidence-based approaches to improve health care quality with a particular focus on improving chronic disease outcomes. Additionally, the program strengthe…</summary>
+  </entry>
+  <entry>
+    <title>NIAMS P30 Centers Program (P30 - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359152"/>
+    <id>urn:funding-finder:grants-gov:359152</id>
+    <updated>2026-07-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health — Closes 2026-10-01 — The overall goal of this program is to accelerate scientific discovery, improve research efficiency, and enhance the translation of research findings into improved health outcomes. Centers funded under this program will also foster multidisciplinary collaboration, support workforce development across career stages, and promote training in emerging areas such as data science, artificial intelligenc…</summary>
+  </entry>
+  <entry>
+    <title>A Demonstration to Scale Innovative Person-Centered Approaches to Falls Prevention through Clinical-Community Partnerships</title>
+    <link href="https://www.grants.gov/search-results-detail/360505"/>
+    <id>urn:funding-finder:grants-gov:360505</id>
+    <updated>2026-06-26T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Data science"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>Administration for Community Living — Closes 2026-07-27 — The purpose of this funding announcement is to demonstrate and evaluate the scalability of person-centered and evidence-based approaches to falls prevention that leverage clinical and community partnerships and related data and technology tools. ACL intends to award a single cooperative agreement to one grantee for a three-year project period with the expectation that the grantee will fund up to t…</summary>
+  </entry>
+  <entry>
+    <title>Rapid Reskill Employment Recovery National Dislocated Worker Grants</title>
+    <link href="https://www.grants.gov/search-results-detail/362987"/>
+    <id>urn:funding-finder:grants-gov:362987</id>
+    <updated>2026-06-26T00:00:00Z</updated>
+    <author><name>Employment and Training Administration</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>Employment and Training Administration — Closes 2026-08-03 — Please direct inquiries about this funding opportunity to Sabrina Guerrier at DOL-ETA-DWG@dol.gov with Reskill DWG in the subject line.</summary>
+  </entry>
+  <entry>
+    <title>Creative Industries Film Lab and Residency - American Film Showcase 2026</title>
+    <link href="https://www.grants.gov/search-results-detail/362939"/>
+    <id>urn:funding-finder:grants-gov:362939</id>
+    <updated>2026-06-24T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Indonesia — Closes 2026-08-07 — Project Background, Goals, and ObjectivesThe Creative Industries Film Lab and Residency – American Film Showcase 2026 is a five-day public diplomacy program aligned with the American Film Showcase 2026 Envoy visit and scheduled during the Jogja-NETPAC Asian Film Festival Market 2026. The program includes two main components: Exhibition Booth: In partnership with Jogja-NETPAC, the program will secu…</summary>
+  </entry>
+  <entry>
+    <title>Escape The Hack: Countering Cyber Scams with an Immersive Experience for Everyday Indonesians</title>
+    <link href="https://www.grants.gov/search-results-detail/362863"/>
+    <id>urn:funding-finder:grants-gov:362863</id>
+    <updated>2026-06-18T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Cybersecurity"/>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Indonesia — Closes 2026-08-07 — Indonesia faces a pervasive and evolving cybercrime threat, with online scams growing in number and sophistication – while U.S. families continue to lose their life’s savings to international cybercrime, totaling over $12 billions in financial losses in 2023 alone. Unlike scam compounds in mainland Southeast Asia, criminal scam operations in Indonesia are decentralized and embedded within transnat…</summary>
+  </entry>
+  <entry>
+    <title>U.S. Talent Program for the U.S. Embassy and Consulates in Canada</title>
+    <link href="https://www.grants.gov/search-results-detail/362763"/>
+    <id>urn:funding-finder:grants-gov:362763</id>
+    <updated>2026-06-11T00:00:00Z</updated>
+    <author><name>U.S. Mission to Canada</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Manufacturing"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Canada — Closes 2026-07-31 — The U.S. Department of State’s Embassy Ottawa announces an open competition to implement a program to connect U.S. citizen talent, including subject matter experts, artists and cultural professionals, and current and former American athletes and coaches, with Canadian audiences and institutions on topics of strategic importance to the United States. Recipients should be prepared to identify and re…</summary>
+  </entry>
+  <entry>
+    <title>Research and Education Program for Historically Black Colleges and Universities (HBCU) and Tribal Colleges and Universities (TCU)</title>
+    <link href="https://www.grants.gov/search-results-detail/362711"/>
+    <id>urn:funding-finder:grants-gov:362711</id>
+    <updated>2026-06-08T00:00:00Z</updated>
+    <author><name>Dept of the Army -- Materiel Command</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>Dept of the Army -- Materiel Command — Closes 2026-08-11 — This solicitation invites applications (also referred to as “proposals”) for basic research projects. The proposals must align with the research areas of interest to the DoW (which includes the USW(R&amp;E) and the Agencies) and enhance the education of students in areas of STEM that align with the DoW research interests. Information about these areas of interest (including websites) is discussed belo…</summary>
+  </entry>
+  <entry>
+    <title>HEAL Initiative: Translating Addiction Epidemiology, Prevention, Treatment, and Recovery Research into Practice (R61/R33 - Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/362672"/>
+    <id>urn:funding-finder:grants-gov:362672</id>
+    <updated>2026-06-04T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Data science"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2029-02-09 — The goal of this notice of funding opportunity (NOFO) is to address the opioid crisis and/or overdose events by supporting action-oriented research, accelerating the translation of addiction epidemiology, prevention, treatment services, and recovery research to practice. Proposed studies may target the individual, provider, organizational, community, or system level. This initiative prioritizes re…</summary>
+  </entry>
+  <entry>
+    <title>FY26 Pathways to Removing Obstacles to Housing (PRO Housing)</title>
+    <link href="https://www.grants.gov/search-results-detail/362005"/>
+    <id>urn:funding-finder:grants-gov:362005</id>
+    <updated>2026-06-03T00:00:00Z</updated>
+    <author><name>Department of Housing and Urban Development</name></author>
+    <category term="Community development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Department of Housing and Urban Development — Closes 2026-08-03 — As President Trump said in his Executive Order on Removing Regulatory Barriers to Affordable Home Construction (March 13, 2026), The American dream of homeownership depends on a dynamic housing market in which a varied inventory of new homes is built and renovated each year. Layers of unnecessary regulatory barriers, slow permitting processes, and onerous mandates at all levels of government have …</summary>
+  </entry>
+  <entry>
+    <title>NLM Institutional Grants for Research Training in Biomedical Informatics, Data Science, and AI</title>
+    <link href="https://www.grants.gov/search-results-detail/361318"/>
+    <id>urn:funding-finder:grants-gov:361318</id>
+    <updated>2026-06-02T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health — Closes 2026-09-25 — The National Library of Medicine (NLM) invites applications for innovative predoctoral and postdoctoral training programs that prepare the next generation of researchers in biomedical informatics, data science, and artificial intelligence/machine learning (AI/ML). NLM emphasizes cutting-edge, forward-looking training experiences that equip trainees to address complex health and biomedical challeng…</summary>
+  </entry>
+  <entry>
+    <title>Optimizing Behavioral Sleep Interventions for Adolescents and Young Adults (R34 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/359159"/>
+    <id>urn:funding-finder:grants-gov:359159</id>
+    <updated>2026-05-28T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Data science"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health — Closes 2026-10-22 — NIMH seeks applications for pilot research to adapt, optimize, and test behavioral interventions that address common sleep problems in adolescents and young adults with or at risk for a mental health disorder. This notice of funding opportunity (NOFO) supports pilot clinical trials designed to evaluate the feasibility, tolerability, acceptability, safety, and potential effectiveness of the approac…</summary>
+  </entry>
+  <entry>
+    <title>DoW Prostate Cancer, Data Science Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362259"/>
+    <id>urn:funding-finder:grants-gov:362259</id>
+    <updated>2026-05-21T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Data science"/>
+    <category term="Public health"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-02 — Summary: The fiscal year 2026 (FY26) Prostate Cancer Research Program (PCRP) Data Science Award (DSA) supports research that develops or uses quantitative and analytical approaches, processes and/or systems to obtain knowledge and insight from large and/or complex sets of prostate cancer data in one or more of the following research areas: Analysis of clinically annotated datasets; analysis of -om…</summary>
+  </entry>
+  <entry>
+    <title>DoW Traumatic Brain Injury and Psychological Health, Health Services Research Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362271"/>
+    <id>urn:funding-finder:grants-gov:362271</id>
+    <updated>2026-05-21T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Data science"/>
+    <category term="Neuroscience"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-15 — Summary: The fiscal year 2026 (FY26) Traumatic Brain Injury and Psychological Health Research Program (TBIPHRP) Health Services Research Award (HSRA) intends to fund high-impact research that bridges the gap between research, practice and policy by building real-world evidence on how interventions, clinical practices/guidelines, or policies can be deployed to targeted populations at the appropriat…</summary>
+  </entry>
+  <entry>
+    <title>Advanced Development of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/359855"/>
+    <id>urn:funding-finder:grants-gov:359855</id>
+    <updated>2026-05-21T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health — Closes 2026-10-19 — This Notice of Funding Opportunity (NOFO) invites applications for advanced development and enhancement of emerging informatics technologies to improve the acquisition, analysis, visualization, and interpretation of data across the cancer research continuum including cancer biology, cancer treatment and diagnosis, early cancer detection, risk assessment and prevention, cancer control and epidemiol…</summary>
+  </entry>
+  <entry>
+    <title>Sustained Support for Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/359853"/>
+    <id>urn:funding-finder:grants-gov:359853</id>
+    <updated>2026-05-21T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2026-10-19 — This Notice of Funding Opportunity (NOFO) solicits applications for the continued development and sustainment of high value informatics research resources to improve the acquisition, management, analysis, and dissemination of data and knowledge across the cancer research continuum including cancer biology, cancer treatment and diagnosis, early cancer detection, risk assessment and prevention, canc…</summary>
+  </entry>
+  <entry>
+    <title>Early-Stage Development of Informatics Technologies for Cancer Research and Management (U01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/359892"/>
+    <id>urn:funding-finder:grants-gov:359892</id>
+    <updated>2026-05-21T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Data science"/>
+    <category term="Public health"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health — Closes 2027-10-19 — This Notice of Funding Opportunity (NOFO) solicits applications for the development of enabling informatics technologies to improve the acquisition, management, analysis, and dissemination of data and knowledge across the cancer research continuum including cancer biology, cancer treatment and diagnosis, early cancer detection, risk assessment and prevention, cancer control and epidemiology. As a …</summary>
+  </entry>
+  <entry>
+    <title>High-performance Optimized Recycled Nuclear Isotopes for Gen IV reactors (HORNIG)</title>
+    <link href="https://www.grants.gov/search-results-detail/362035"/>
+    <id>urn:funding-finder:grants-gov:362035</id>
+    <updated>2026-04-23T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency Energy</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>Advanced Research Projects Agency Energy — Closes 2026-08-06 — This is Modification 01 to the NOFO: • Inserted certain deadlines and updated dates, including the deadlines for submitting questions and Full Applications (Basic Information, Section IV.C). NOFO Number: DE-FOA-0003623 – High-performance Optimized Recycled Nuclear Isotopes for Gen IV reactors (HORNIG) Agency Overview: The Advanced Research Projects Agency—Energy (ARPA-E), an organization within th…</summary>
+  </entry>
+  <entry>
+    <title>Tribal Colleges Research Grants Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362029"/>
+    <id>urn:funding-finder:grants-gov:362029</id>
+    <updated>2026-04-22T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>National Institute of Food and Agriculture — Closes 2026-12-31 — TCRGP focuses on development of research capacity at Tribal colleges, specifically in agriculture, natural resources, and human sciences. The program aims to teach leadership skills, knowledge, and qualities that are necessary to prepare students to be competitive with other students for agricultural and related careers in the private sector, government, and academia. Of interest are the projects …</summary>
+  </entry>
+  <entry>
+    <title>Post Kuala Lumpur FY2026 Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/361693"/>
+    <id>urn:funding-finder:grants-gov:361693</id>
+    <updated>2026-03-27T00:00:00Z</updated>
+    <author><name>U.S. Mission to Malaysia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>U.S. Mission to Malaysia — Closes 2026-07-31 — The U.S. Embassy Kuala Lumpur Public Diplomacy Section seeks proposals that advance American leadership, prosperity, and security interests in Malaysia. This program supports initiatives that promote U.S. technological innovation and economic competitiveness, showcase American excellence in sports and education, strengthen ties with exchange program alumni, and position the United States as Malays…</summary>
+  </entry>
+  <entry>
+    <title>Advancing Bioinformatics, Translational Bioinformatics and Computational Biology Research (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/359003"/>
+    <id>urn:funding-finder:grants-gov:359003</id>
+    <updated>2026-02-11T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Public health"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health — Closes 2029-03-05 — The National Library of Medicine (NLM) seeks applications for research projects that drive groundbreaking innovation and advanced development in the fields of bioinformatics, translational bioinformatics, and computational biology. The primary goal of this initiative is to support the creation and implementation of cutting-edge methods, tools, and approaches that can transform the landscape of bio…</summary>
+  </entry>
+  <entry>
+    <title>Research Grants in Clinical Informatics (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/359004"/>
+    <id>urn:funding-finder:grants-gov:359004</id>
+    <updated>2026-02-11T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Data science"/>
+    <summary>National Institutes of Health — Closes 2029-03-05 — The National Library of Medicine (NLM) seeks applications for innovative research in clinical informatics. The overarching goal of this forthcoming program is to catalyze the development and advancement of novel informatics methodologies that empower clinicians, patients, and the broader public to better understand, manage, and improve health and health care delivery. This NOFO will support resear…</summary>
+  </entry>
+  <entry>
+    <title>Collaboratory to Advance Mathematics Education and Learning (CAMEL) for K-12</title>
+    <link href="https://www.grants.gov/search-results-detail/361008"/>
+    <id>urn:funding-finder:grants-gov:361008</id>
+    <updated>2025-12-12T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation — Posted — The Collaboratory to Advance Mathematics Education and Learning (CAMEL) for K-12 initiative aims to advance mathematics learning and education through purposeful collaboration that draws on the interdisciplinary Science of Learning (including neuroscience; cognitive, developmental, and social sciences; computer science; machine learning; engineering; and education research), deep experiences in ed…</summary>
+  </entry>
+  <entry>
+    <title>Animal and Biological Material Resource Centers (P40 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359646"/>
+    <id>urn:funding-finder:grants-gov:359646</id>
+    <updated>2025-12-05T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <summary>National Institutes of Health — Closes 2028-09-26 — This Notice of Funding Opportunity (NOFO) encourages grant applications for Animal and Biological Material Resource Centers. These Centers provide support for special colonies of laboratory animals and associated services, as well as other resources such as informatics tools, reagents, cultures (cells, tissues, and organs) and genetic stocks that serve the biomedical research community in a variet…</summary>
+  </entry>
+  <entry>
+    <title>FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
+    <link href="https://www.grants.gov/search-results-detail/360678"/>
+    <id>urn:funding-finder:grants-gov:360678</id>
+    <updated>2025-09-30T00:00:00Z</updated>
+    <author><name>Office of Science</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Carbon management"/>
+    <category term="Quantum science"/>
+    <summary>Office of Science — Closes 2026-09-30 — The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
+  </entry>
+  <entry>
+    <title>Computer and Information Science and Engineering (CISE): Future Computing Research</title>
+    <link href="https://www.grants.gov/search-results-detail/360149"/>
+    <id>urn:funding-finder:grants-gov:360149</id>
+    <updated>2025-07-25T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>U.S. National Science Foundation — Closes 2026-09-10 — The NSF CISE Directorate supports research and education projects that develop new knowledge in all aspects of computing, communications, and information science and engineering through the following Future Computing Research (Future CoRe) programs: Algorithmic Foundations (AF) program; Communications and Information Foundations (CIF) program; Computer Systems Research (CSR) program; Computing Edu…</summary>
+  </entry>
+  <entry>
+    <title>Centers of Research Excellence in Science and Technology - Research Infrastructure for Science and Engineering</title>
+    <link href="https://www.grants.gov/search-results-detail/359061"/>
+    <id>urn:funding-finder:grants-gov:359061</id>
+    <updated>2025-05-21T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Climate change"/>
+    <category term="Cybersecurity"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <summary>U.S. National Science Foundation — Closes 2026-08-07 — The Centers of Research Excellence in Science and Technology (CREST) program provides support to enhance the research capabilities of minority-serving institutions (MSIs) as defined in this solicitation’s Eligibility section, through effective integration of education and research. The CREST program, composed of the CREST Centers, the CREST Postdoctoral Research Program, and the projects supported…</summary>
+  </entry>
+  <entry>
+    <title>Infrastructure Systems and People</title>
+    <link href="https://www.grants.gov/search-results-detail/358397"/>
+    <id>urn:funding-finder:grants-gov:358397</id>
+    <updated>2025-01-25T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Data science"/>
+    <category term="Environmental science"/>
+    <category term="Materials science"/>
+    <category term="Public health"/>
+    <category term="Technology development"/>
+    <category term="Water"/>
+    <summary>U.S. National Science Foundation — Posted — Infrastructure systems comprise complex connections between physical components, organizational structures and operational methods that support the needs of people and communities at the local, regional, national, and global scales. Such systems form the backbone of society, providing essential services as well as ensuring public health and welfare, economic prosperity and national security, and a…</summary>
+  </entry>
+  <entry>
+    <title>Supporting Talented Early Career Researchers in Genomics (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357744"/>
+    <id>urn:funding-finder:grants-gov:357744</id>
+    <updated>2024-12-16T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <summary>National Institutes of Health — Closes 2027-02-26 — This Funding Opportunity Announcement is intended to identify and support research projects by exceptionally promising Early Stage Investigators with a long-term career interest in pursuing innovative research in genomics. This opportunity is open to research in all areas relevant to the mission of NHGRI, including genomic sciences, genomic medicine, genomic data science, and ethical, legal, and s…</summary>
+  </entry>
+  <entry>
+    <title>D-START: Data Science Track Award for Research Transition (D/START) (R03-Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357733"/>
+    <id>urn:funding-finder:grants-gov:357733</id>
+    <updated>2024-12-16T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health — Closes 2027-09-07 — Data science is an important cross-cutting research approach in the 2022 - 2026 NIDA Strategic Plan and increasing the capacity of experts in addiction related data science is critical. The purpose of this Notice is to facilitate the entry of investigators to the area of addiction-related data science, including newly independent data scientists or established investigators seeking to incorporate …</summary>
+  </entry>
+  <entry>
+    <title>Institutional Training Programs to Advance Translational Research on Alzheimer's Disease (AD) and AD-Related Dementias (ADRD) (T32 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357710"/>
+    <id>urn:funding-finder:grants-gov:357710</id>
+    <updated>2024-12-13T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health — Closes 2026-09-25 — The specific purpose of this Notice of Funding Opportunity (NOFO) is to promote the development of a diverse, interdisciplinary workforce needed to conduct translational research on Alzheimer's disease and Alzheimer's-related dementias from target discovery through clinical development. This NOFO will support institutional training programs for predoctoral and postdoctoral level researchers with d…</summary>
+  </entry>
+  <entry>
+    <title>Personal Health Informatics for Delivering Actionable Insights to Individuals (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357273"/>
+    <id>urn:funding-finder:grants-gov:357273</id>
+    <updated>2024-11-21T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health — Closes 2027-01-07 — The purpose of this Notice of Funding Opportunity (NOFO) is to advance the development of novel informatics and data science approaches that can help individuals understand and improve their health through actionable insights. NLM seeks applications that further the science of personal health informatics by providing meaningful and actionable insights to individuals through innovative personal hea…</summary>
+  </entry>
+  <entry>
+    <title>Cellular and Molecular Biology of Complex Brain Disorders (R01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357182"/>
+    <id>urn:funding-finder:grants-gov:357182</id>
+    <updated>2024-11-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Environmental science"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health — Closes 2026-09-07 — This Notice of Funding Opportunity (NOFO) encourages research on the biology of high-confidence risk factors associated with complex brain disorders, with a focus on the intracellular, transcellular, and circuit substrates of neural function. For the purposes of this NOFO, the term complex can refer to a multifactorial contribution to risk (e.g., polygenic and/or environmental) and/or highly distr…</summary>
+  </entry>
+</feed>

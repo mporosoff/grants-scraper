@@ -240,3 +240,21 @@ test("builds a bounded opt-in CV context for AI calls", () => {
   assert.equal(disabled.cv_excerpt, undefined);
   assert.equal(disabled.research_description, profile.research_description);
 });
+
+test("extracts a text CV and collapses blank lines", async () => {
+  const api = loadProfileApi();
+  const text =
+    "Research Summary\n\n\n\nI study heterogeneous catalysis for clean " +
+    "hydrogen production and carbon capture across several funded projects.\n\n\n";
+  const extracted = await api.extractCv(mockFile("cv.txt", "text/plain", text));
+  assert.match(extracted.text, /Research Summary/);
+  assert.match(extracted.text, /heterogeneous catalysis/);
+  assert.ok(!extracted.text.includes("\n\n\n"));   // multiple blanks collapsed
+  assert.ok(extracted.text.length >= 80);           // passes the min-text gate
+});
+
+test("profile.js avoids Array.prototype.at (older Safari lacks it)", () => {
+  // Regression guard for the CV-upload bug: .at() throws on Safari < 15.4,
+  // which made every CV upload fail silently.
+  assert.ok(!source.includes(".at("), "use index access instead of .at() in profile.js");
+});

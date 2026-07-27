@@ -70,12 +70,12 @@ available but exits visibly and opens or updates an owner-facing GitHub issue.
 UR InfoReady is a disabled shell pending a stable permissioned route.
 
 <!-- catalog-summary:start -->
-The July 27, 2026 build contains 1,466 open or current forecasted funding opportunities
-(1,225 posted and 241 forecasted) rather than the former 48-record engineering
+The July 27, 2026 build contains 1,506 open or current forecasted funding opportunities
+(1,265 posted and 241 forecasted) rather than the former 48-record engineering
 shortlist. It contains no record with a deadline before the catalog date. Current
-published sources are Grants.gov (1,465), National Science Foundation (1); additional
-sources are enabled only after a sustainable public ingestion path and health bounds are
-verified.
+published sources are ARPA-E eXCHANGE (1), Grants.gov (1,467), NYSERDA (37), National
+Science Foundation (1); additional sources are enabled only after a sustainable public
+ingestion path and health bounds are verified.
 <!-- catalog-summary:end -->
 
 ### 2.3 Search is the primary workflow
@@ -480,18 +480,18 @@ presented as the FOA.
 ### Current evidence baseline
 
 <!-- catalog-evidence:start -->
-The July 27, 2026 catalog contains 1,466 current posted or forecasted opportunities:
+The July 27, 2026 catalog contains 1,506 current posted or forecasted opportunities:
 
-- 447 have a defensible direct announcement attachment (249 high confidence, 198 medium
+- 448 have a defensible direct announcement attachment (250 high confidence, 198 medium
   confidence);
-- another 616 use an official source page as their primary route;
-- the remaining 403 use the official Grants.gov record as their primary route;
-- 775 contain an agency notice URL across all route types;
-- 350 preserve an official deadline time or timezone;
-- 128 carry a preliminary-stage signal, including 3 narrative dates visibly marked for
+- another 654 use an official source page as their primary route;
+- the remaining 404 use the official Grants.gov record as their primary route;
+- 813 contain an agency notice URL across all route types;
+- 369 preserve an official deadline time or timezone;
+- 129 carry a preliminary-stage signal, including 3 narrative dates visibly marked for
   verification;
-- 703 (48.0%) have an official per-award floor or ceiling;
-- 986 (67.3%) have at least one structured funding amount; and
+- 705 (46.8%) have an official per-award floor or ceiling;
+- 988 (65.6%) have at least one structured funding amount; and
 - zero have a past structured close date and zero have a detected XML/detail-API
   deadline conflict in this build.
 <!-- catalog-evidence:end -->
@@ -686,7 +686,8 @@ the owner and reproduced as a private report.
 
 Add one maintainable public source at a time, prioritizing gaps reported in the pilot:
 
-1. DOE EERE Exchange and ARPA-E eXCHANGE
+1. ~~DOE EERE Exchange and ARPA-E eXCHANGE~~ — enabled with NOFO-only parsing,
+   health bounds, atomic snapshots, and last-known-good fallback
 2. DOE Office of Science national-lab announcements and other DOE offices
 3. selected private foundations and associations
 4. NASA and NSF Dear Colleague Letters
@@ -700,20 +701,30 @@ Each source requires a documented public-use basis, stable ingestion route, heal
 
 ### Phase 5 — Optional service-backed capabilities
 
-Only consider a server or managed third-party service after the public pilot demonstrates value. It would be required for:
+Static Atom feeds now cover the no-account alert case: the daily workflow
+generates an all-opportunities feed plus topic and source-type feeds under
+`feeds/`, without storing any personal data. A separate bundle in
+`docs/weekly-alerts/` can run manually consented weekly saved-search digests
+from a private GitHub repository. It reuses the production tokenizer and BM25
+index, stores subscribers and watermarks only in that private repository, and
+keeps SMTP credentials in encrypted repository secrets.
+
+A public self-service system still requires a server or managed third-party
+service. Only consider that after the public pilot demonstrates value. It would
+be required for:
 
 - saved searches across devices;
 - watchlists and pursuit status;
-- automatic personalized alerts or email digests;
+- self-service personalized alerts or email digests;
 - shared departmental feedback;
 - institutional identity and access controls; or
 - centrally managed AI credentials and budgets.
 
-For email digests, the daily catalog job should first create a compact change
-feed keyed by stable opportunity ID: newly added, materially amended or
-deadline-changed, and removed/closed. A fixed owner or small internal-recipient
-digest can be sent directly after a successful GitHub Actions refresh through a
-transactional email provider using encrypted repository secrets.
+For a production email service, the daily catalog job should add a compact
+change feed keyed by stable opportunity ID: newly added, materially amended or
+deadline-changed, and removed/closed. The current pilot bundle intentionally
+handles new-match digests only; it is not a replacement for durable amendment,
+bounce, retry, and unsubscribe infrastructure.
 
 Public personalized digests require a small server-side subscription API and
 database because a static GitHub Pages app cannot securely retain subscriber
@@ -791,14 +802,21 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | `data/opportunities.js` | Generated catalog, facets, and BM25 index |
 | `data/opportunity_enrichment.json` | Compact official-detail cache for incremental refresh |
 | `data/document_evidence.json` | Compact document hash/version, citations, extracted facts, and review-queue cache |
+| `data/source_records.json` | Last-known-good external-source snapshots and first-seen dates |
 | `scripts/build_catalog.py` | Complete XML ingestion, normalization, validation, and index build |
 | `scripts/enrich_catalog.py` | Official detail enrichment, evidence reconciliation, and FOA selection |
 | `scripts/extract_document_evidence.py` | Bounded official-notice retrieval, deterministic extraction, versioning, and citations |
+| `scripts/program_areas.py` | Evidence-backed controlled vocabulary for official-notice discoverability |
+| `scripts/sources/` | Multi-source adapters, validation, health gates, lifecycle, and merge |
+| `scripts/build_feeds.py` | Static all/topic/source-type Atom feed generator |
+| `scripts/alert_match.py` | Saved-search matcher shared with the private weekly-digest bundle |
 | `scripts/update_catalog_docs.py` | Generated catalog baseline statistics in README and project documentation |
 | `scripts/evaluate_phase2.py` | Reproducible retrieval/reranking pilot evaluator |
 | `scripts/summarize_phase3_reviews.py` | Private aggregation of returned deployment-review exports |
 | `evaluation/README.md` | Consented Phase 2 export and aggregation workflow |
 | `evaluation/PHASE3_REVIEW.md` | Phase 3 reviewer handoff, private storage, and reporting procedure |
+| `feeds/` | Generated public feed directory |
+| `docs/weekly-alerts/` | Private-repository pilot bundle for consent-based weekly email digests |
 | `scripts/pull_grants.py` | Earlier API normalizer retained for fixtures and reference |
 | `tests/` | Pipeline and public-application regression checks |
 | `.github/workflows/refresh-opportunities.yml` | Daily catalog refresh and owner alert |
@@ -836,3 +854,5 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | July 2026 | Enable verified NSF and NYSERDA sources through atomic per-source snapshots and health alerts; keep InfoReady disabled until a stable permissioned route exists. |
 | July 2026 | Add compact device-local saved opportunities and an optional, reversible preference re-ranker trained only after three graded ratings. |
 | July 2026 | Include search text in explicit match-quality exports for reproducibility, disclose it before export, and continue excluding API keys, saved profile/CV text, and chat. |
+| July 2026 | Enable NOFO-only ARPA-E and DOE EERE Exchange adapters; keep NASA NSPIRES disabled until a stable public list route exists. |
+| July 2026 | Publish no-account Atom feeds and provide a fail-closed, consent-based weekly digest bundle for a separate private repository; keep public subscriber data out of GitHub Pages. |

@@ -1,0 +1,758 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Funding Finder — Artificial intelligence and machine learning</title>
+  <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
+  <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
+  <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
+  <updated>2026-07-27T14:02:03Z</updated>
+  <generator>Funding Finder</generator>
+  <entry>
+    <title>Precision and Systems Biology to Uncover the Link Between Chronic and Infectious Diseases</title>
+    <link href="https://www.grants.gov/search-results-detail/362952"/>
+    <id>urn:funding-finder:grants-gov:362952</id>
+    <updated>2026-11-06T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-01-22 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
+  </entry>
+  <entry>
+    <title>Rigorously Evaluating Approaches to Prevent Child Sexual Abuse and Problematic Sexual Behavior among Youth</title>
+    <link href="https://www.grants.gov/search-results-detail/363147"/>
+    <id>urn:funding-finder:grants-gov:363147</id>
+    <updated>2026-10-01T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-01 — The Centers for Disease Control and Prevention's (CDC) National Center for Injury Prevention and Control (NCIPC) is soliciting investigator-initiated gold standard research proposals to rigorously evaluate programs and policies for their impact on primary prevention of child sexual abuse (CSA) or problematic sexual behavior (PSB) among youth. For the purposes of this NOFO:CSA is defined as sexual …</summary>
+  </entry>
+  <entry>
+    <title>The NIA Genetics of Alzheimer's Disease Data Storage Site (NIAGADS)</title>
+    <link href="https://www.grants.gov/search-results-detail/362454"/>
+    <id>urn:funding-finder:grants-gov:362454</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health — Closes 2026-11-01 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop, operate, and sustain a cloud-based data storage and computing platform that democratizes access to large-scale Alzheimer’s disease (AD) and AD-related dementias (ADRD) genetic and genomic data. The platform must be secure, scalable, and interoperable. The platform wil…</summary>
+  </entry>
+  <entry>
+    <title>Illuminating AD/ADRD Genome to Enable Precision Genomic Medicine</title>
+    <link href="https://www.grants.gov/search-results-detail/360906"/>
+    <id>urn:funding-finder:grants-gov:360906</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Infectious disease"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health — Closes 2026-10-06 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose a program that supports integrative, cross-disciplinary projects aimed at scaling up mechanistic studies to understand the genomic underpinnings of the pathogenesis and progression AD/ADRD.The proposed research projects will employ interdisciplinary approaches that i…</summary>
+  </entry>
+  <entry>
+    <title>Novel Approaches to Advance Precision Aging and Cognitive Health</title>
+    <link href="https://www.grants.gov/search-results-detail/360910"/>
+    <id>urn:funding-finder:grants-gov:360910</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health — Closes 2026-10-06 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that develop or incorporate novel, cutting-edge study designs/methods/analytic approaches through the use of machine learning, artificial intelligence, and adaptive designs to allow the discovery of health/function profiles at the level of the individual and that could lead to th…</summary>
+  </entry>
+  <entry>
+    <title>BRAIN Initiative Cell Atlas Network (BICAN): Coordinating Unit for Biostatistics, Informatics, and Engagement (CUBIE)</title>
+    <link href="https://www.grants.gov/search-results-detail/361449"/>
+    <id>urn:funding-finder:grants-gov:361449</id>
+    <updated>2026-08-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Data science"/>
+    <category term="Environmental science"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health — Closes 2026-10-01 — The National Institute of Mental Health (NIMH), with other NIH Institutes and Centers (ICs), intends to publish a notice of funding opportunity (NOFO) to solicit research applications for the BRAIN Initiative Cell Atlas Network (BICAN) Coordinating Unit for Biostatistics, Informatics, and Engagement (CUBIE). In accordance with NIH standard peer-review processes, the application(s) will be peer-rev…</summary>
+  </entry>
+  <entry>
+    <title>AI Partnership &amp; Exchange for Tech Leaders (APEX)</title>
+    <link href="https://www.grants.gov/search-results-detail/363315"/>
+    <id>urn:funding-finder:grants-gov:363315</id>
+    <updated>2026-07-26T00:00:00Z</updated>
+    <author><name>U.S. Mission to Saudi Arabia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>U.S. Mission to Saudi Arabia — Closes 2026-09-08 — Program PurposeThe U.S. Embassy Riyadh Public Diplomacy Section is accepting applications for a cooperative agreement to run the AI Partnership &amp; Exchange for Tech Leaders. The goal of this program is to connect rising Saudi Artificial Intelligence (AI) leaders with American experts in business, tech, and academia. This initiative helps participants build professional networks, study U.S. technolo…</summary>
+  </entry>
+  <entry>
+    <title>Pax Silica Artificial Intelligence Assistance Project</title>
+    <link href="https://www.grants.gov/search-results-detail/363312"/>
+    <id>urn:funding-finder:grants-gov:363312</id>
+    <updated>2026-07-24T00:00:00Z</updated>
+    <author><name>Bureau of Economic and Business Affairs</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Manufacturing"/>
+    <summary>Bureau of Economic and Business Affairs — Closes 2026-08-20 — Leveraging foreign assistance from the Pax Fund, this NOFO launches the Pax Silica Artificial Intelligence (AI) Assistance Project—a historic first-of-its-kind programmatic initiative to strengthen global AI supply chain security by creating a trusted supply chain credentialing and provenance platform to secure the AI supply chain in partner countries and economies. This NOFO seeks to fund the est…</summary>
+  </entry>
+  <entry>
+    <title>American Innovation Hub: AI &amp; Digital Skills for the Creative &amp; Tech Economy</title>
+    <link href="https://www.grants.gov/search-results-detail/363293"/>
+    <id>urn:funding-finder:grants-gov:363293</id>
+    <updated>2026-07-23T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Technology development"/>
+    <summary>U.S. Mission to Indonesia — Closes 2026-08-30 — Indonesia is ASEAN’s largest economy and most populous nation, with a young, fast-growing digital population that is rapidly adopting artificial intelligence and creative-technology tools. The choices this generation makes about which technologies, standards, and platforms to build on will shape Indonesia’s digital economy for decades. Demand for trusted, high-quality AI tools is outpacing access …</summary>
+  </entry>
+  <entry>
+    <title>Young Trilateral Leaders (YTL) Summit</title>
+    <link href="https://www.grants.gov/search-results-detail/363267"/>
+    <id>urn:funding-finder:grants-gov:363267</id>
+    <updated>2026-07-21T00:00:00Z</updated>
+    <author><name>U.S. Mission to South Korea</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Transportation"/>
+    <summary>U.S. Mission to South Korea — Closes 2026-08-05 — Funding Opportunity Title: 2027 Young Trilateral Leaders (YTL) Summit Funding Opportunity Number: PD-SEOUL-FY26-04 Deadline for Applications: Wednesday, August 5, 2026, 11:59 p.m. (GMT+9) CFDA Number: 19.040 Type of Funding: FY26 Smith Mundt Public Diplomacy Funds Total Amount Available: $250,000 This notice is subject to availability of funding. This NOFO is currently listed under Assistance List…</summary>
+  </entry>
+  <entry>
+    <title>Unlocking Dataset Value for AI-Enabled Scientific Discovery</title>
+    <link href="https://www.grants.gov/search-results-detail/363268"/>
+    <id>urn:funding-finder:grants-gov:363268</id>
+    <updated>2026-07-21T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation — Closes 2026-11-04 — This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
+  </entry>
+  <entry>
+    <title>CyberNext: Advance Cybersecurity and AI Readiness</title>
+    <link href="https://www.grants.gov/search-results-detail/363249"/>
+    <id>urn:funding-finder:grants-gov:363249</id>
+    <updated>2026-07-20T00:00:00Z</updated>
+    <author><name>U.S. Mission to Albania</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <summary>U.S. Mission to Albania — Closes 2026-08-20 — Project Background, Goals, and Objectives Albania has experienced multiple cyberattacks in recent years, placing increasingly digital government services and critical institutions at significant risk. While Albania is actively embracing AI, substantial skill gaps remain – gaps that American expertise is uniquely positioned to address. The “CyberNext: Advanced Cybersecurity and AI Readiness” progra…</summary>
+  </entry>
+  <entry>
+    <title>Artificial Intelligence for American Competitiveness and Economic Security (AI-ACES) in South Asia</title>
+    <link href="https://www.grants.gov/search-results-detail/363227"/>
+    <id>urn:funding-finder:grants-gov:363227</id>
+    <updated>2026-07-17T00:00:00Z</updated>
+    <author><name>Bureau of South and Central Asian Affairs</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <summary>Bureau of South and Central Asian Affairs — Closes 2026-08-02 — The program within SCA will aim to deploy American AI technology securely in U.S. partners’ strategic economic sectors and infrastructure.  The specific strategic economic sector(s) and organizations (including government, public institutions like utilities, and private companies) targeted in each country for support would be developed in consultation with State Department and host country governm…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year 2026 Next Generation Warning System Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363192"/>
+    <id>urn:funding-finder:grants-gov:363192</id>
+    <updated>2026-07-17T00:00:00Z</updated>
+    <author><name>Department of Homeland Security - FEMA</name></author>
+    <category term="Cybersecurity"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Department of Homeland Security - FEMA — Closes 2026-08-07 — This grant will fund projects to identify capability gaps and implement solutions for alert and warning to deliver timely public warning and emergency information and to protect critical infrastructure. There are rapid changes in technology, cybersecurity threats, and public preferences for consuming content, recipients will work with the Federal Emergency Management Agency (FEMA) to explore curre…</summary>
+  </entry>
+  <entry>
+    <title>Global Digital Threat Lab</title>
+    <link href="https://www.grants.gov/search-results-detail/363201"/>
+    <id>urn:funding-finder:grants-gov:363201</id>
+    <updated>2026-07-15T00:00:00Z</updated>
+    <author><name>Bureau of Democracy Human Rights and Labor</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Cybersecurity"/>
+    <summary>Bureau of Democracy Human Rights and Labor — Closes 2026-08-13 — Freedom of expression online faces threats globally from authoritarian governments employing sophisticated technology to restrict speech, control the flow of information, and chill dissenting voices. These challenges infringe on privacy; access to information; and the exercise of freedoms of expression, peaceful assembly, association, and religion or belief online. The misuse of commercial spyware…</summary>
+  </entry>
+  <entry>
+    <title>Public Wireless Supply Chain Innovation Fund Grant Program – Solutions for AI-Native RAN</title>
+    <link href="https://www.grants.gov/search-results-detail/363179"/>
+    <id>urn:funding-finder:grants-gov:363179</id>
+    <updated>2026-07-14T00:00:00Z</updated>
+    <author><name>National Telecommunications and Information Admini</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <summary>National Telecommunications and Information Admini — Closes 2026-09-09 — This NOFO is the fourth issued under NTIA’s Public Wireless Supply Chain Innovation Fund (PWSCIF or Innovation Fund). Titled “Solutions for AI-Native RAN,” the goal of this NOFO is to support the development of a secure compute environment to enable or leverage native artificial intelligence (“AI”) capabilities in the Radio Access Network (RAN) that generate revenue for operators, cost savings, an…</summary>
+  </entry>
+  <entry>
+    <title>EducationUSA AI/STEM and Sports Diplomacy Grant</title>
+    <link href="https://www.grants.gov/search-results-detail/363123"/>
+    <id>urn:funding-finder:grants-gov:363123</id>
+    <updated>2026-07-09T00:00:00Z</updated>
+    <author><name>U.S. Mission to Georgia</name></author>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>U.S. Mission to Georgia — Closes 2026-08-10 — This funding opportunity supports the America First agenda by strengthening U.S. competitiveness, expanding American universities' international recruitment pipelines and building lasting ties between Georgian talent and U.S. institutions through two complementary initiatives: the EducationUSA Sports Pathways Initiative and the EducationUSA AI and Innovation Hubs. Both proposals under this funding…</summary>
+  </entry>
+  <entry>
+    <title>Freedom 250 Great American State Fair Initiative – Abu Dhabi</title>
+    <link href="https://www.grants.gov/search-results-detail/363119"/>
+    <id>urn:funding-finder:grants-gov:363119</id>
+    <updated>2026-07-09T00:00:00Z</updated>
+    <author><name>U.S. Mission to United Arab Emirates</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to United Arab Emirates — Closes 2026-08-10 — The U.S. Embassy Abu Dhabi, Public Diplomacy Section, announces an open competition to develop and implement the programmatic elements of a three-day Freedom 250 Great American State Fair. The Fair will showcase authentic American heartland culture, creativity, entrepreneurship, entertainment, culinary traditions, and music through immersive public programming designed for UAE audiences. Proposals…</summary>
+  </entry>
+  <entry>
+    <title>Freedom250 Advancing U.S. Artificial Intelligence Leadership in Algeria</title>
+    <link href="https://www.grants.gov/search-results-detail/363121"/>
+    <id>urn:funding-finder:grants-gov:363121</id>
+    <updated>2026-07-09T00:00:00Z</updated>
+    <author><name>U.S. Mission to Algeria</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Technology development"/>
+    <summary>U.S. Mission to Algeria — Closes 2026-08-10 — A. ELIGIBILITY 1. Eligible Applicants The following organizations are eligible to apply: ● Not-for-profit organizations, including think tanks and civil society/non-governmental organizations ● Public and private educational institutions ● Public International Organizations and Governmental institutions For-profit entities, even those that may fall into the categories listed above, are not eligibl…</summary>
+  </entry>
+  <entry>
+    <title>Economic Advancement Grants for Local Empowerment (EAGLE)</title>
+    <link href="https://www.grants.gov/search-results-detail/361908"/>
+    <id>urn:funding-finder:grants-gov:361908</id>
+    <updated>2026-07-08T00:00:00Z</updated>
+    <author><name>Administration for Children and Families - ANA</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <summary>Administration for Children and Families - ANA — Closes 2026-08-07 — The Administration for Native Americans anticipates announcing the availability of funds and requesting applications for EAGLE: Economic Advancement Grants for Local Empowerment, supporting socioeconomic and cultural success for Native communities through business creation in regenerative agriculture, artificial intelligence, tribal energy sovereignty, and human capital development. The primary go…</summary>
+  </entry>
+  <entry>
+    <title>Muscat - Annual Program Statement (APS)- PD Small Grants Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363078"/>
+    <id>urn:funding-finder:grants-gov:363078</id>
+    <updated>2026-07-08T00:00:00Z</updated>
+    <author><name>U.S. Mission to Oman</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Community development"/>
+    <category term="Cybersecurity"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <summary>U.S. Mission to Oman — Closes 2026-08-09 — The Public Diplomacy Section of U.S. Embassy Muscat announces an open competition to support projects that advance U.S. foreign policy priorities in Oman while strengthening the long-standing partnership between the United States and the Sultanate of Oman. This Annual Program Statement outlines strategic funding priorities, eligibility criteria, and application guidelines for grants ranging from $…</summary>
+  </entry>
+  <entry>
+    <title>FY26 American Spaces Vietnam Programming</title>
+    <link href="https://www.grants.gov/search-results-detail/363080"/>
+    <id>urn:funding-finder:grants-gov:363080</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>U.S. Mission to Vietnam</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Vietnam — Closes 2026-08-02 — U.S. Mission Vietnam's Public Diplomacy Section seeks proposals to implement workforce development and innovation programs through American Spaces. This program builds a pipeline of skilled, English-capable Vietnamese youth who support U.S. trade, investment, and innovation partnerships while expanding economic opportunity in Vietnam. The project targets university students, educators, and early-c…</summary>
+  </entry>
+  <entry>
+    <title>Annual Program Statement (APS) – Public Diplomacy Grants Program: Advancing America First Priorities</title>
+    <link href="https://www.grants.gov/search-results-detail/363093"/>
+    <id>urn:funding-finder:grants-gov:363093</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>U.S. Mission to Ecuador</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>U.S. Mission to Ecuador — Closes 2026-08-06 — The U.S. Mission to Ecuador of the U.S. Department of State is pleased to announce that funding is available through its Public Diplomacy Grants Program. This is an Annual Program Statement, outlining our funding priorities, the strategic themes we focus on, and the procedures for submitting requests for funding.</summary>
+  </entry>
+  <entry>
+    <title>U.S. Embassy Jerusalem Public Diplomacy Annual Program Statement (Palestinian audiences)</title>
+    <link href="https://www.grants.gov/search-results-detail/363046"/>
+    <id>urn:funding-finder:grants-gov:363046</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>U.S. Mission to Jerusalem</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>U.S. Mission to Jerusalem — Closes 2026-08-06 — U.S. Embassy Jerusalem’s Public Diplomacy Section (PDS) announces an open competition to implement projects that advance U.S. economic, commercial, and security interests among Palestinian audiences. This Annual Program Statement (APS) outlines strategic goals, expected outcomes, target audiences, eligibility criteria, and application guidelines for cooperative agreements ranging from $50,000 to $…</summary>
+  </entry>
+  <entry>
+    <title>Empowering English Educators</title>
+    <link href="https://www.grants.gov/search-results-detail/363060"/>
+    <id>urn:funding-finder:grants-gov:363060</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>U.S. Mission to Egypt</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <summary>U.S. Mission to Egypt — Closes 2026-08-07 — The U.S. Department of State's Embassy Cairo announces an open competition to implement a teacher training program serving up to 200 Egyptian university English language teaching assistants, lecturers, and English instructors from across Egypt. This program advances U.S. strategic interests by promoting American culture, strengthening the U.S.-Egypt partnership, and projecting American influence t…</summary>
+  </entry>
+  <entry>
+    <title>Notice of Funding Opportunity 2026 – Lebanon</title>
+    <link href="https://www.grants.gov/search-results-detail/363090"/>
+    <id>urn:funding-finder:grants-gov:363090</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>U.S. Mission to Lebanon</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <summary>U.S. Mission to Lebanon — Closes 2026-08-07 — Executive Summary: The U.S. Department of State’s Embassy Beirut, Lebanon announces an open competition to implement programs that promote U.S. priorities and strengthen ties between the United States and Lebanon. U.S. priorities include highlighting U.S.-led peace and stabilization efforts and advancing digital literacy to identify and counter false adversarial narratives and claims. All programs…</summary>
+  </entry>
+  <entry>
+    <title>Disability and Rehabilitation Research Projects (DRRP) Program: Community Living and Participation (Development)</title>
+    <link href="https://www.grants.gov/search-results-detail/362016"/>
+    <id>urn:funding-finder:grants-gov:362016</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Administration for Community Living — Closes 2026-08-05 — Under this particular DRRP priority, applicants must propose a development project that is aimed at improving community living and participation outcomes of individuals with disabilities. In carrying out a development project under this program, a grantee must use knowledge and understanding gained from research to create models, methods, tools, applications, and devices beneficial to the target p…</summary>
+  </entry>
+  <entry>
+    <title>Disability and Rehabilitation Research Projects (DRRP) Program: Community Living and Participation (Research)</title>
+    <link href="https://www.grants.gov/search-results-detail/362015"/>
+    <id>urn:funding-finder:grants-gov:362015</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Administration for Community Living — Closes 2026-08-05 — Under this particular DRRP priority, applicants must propose a research project that is aimed at improving community living and participation outcomes among people with disabilities. In carrying out a research project under this program, a grantee must identify one or more hypotheses or research questions and, based on the hypotheses or research questions identified, perform an intensive, systemat…</summary>
+  </entry>
+  <entry>
+    <title>AI Pathways To The Future</title>
+    <link href="https://www.grants.gov/search-results-detail/363061"/>
+    <id>urn:funding-finder:grants-gov:363061</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Indonesia — Closes 2026-08-09 — Executive Summary The U.S. Department of State’s Embassy Jakarta announces an open competition to implement the AI Pathways to the Future program, a comprehensive initiative designed to strengthen U.S.-Indonesia partnerships in artificial intelligence education, research, and innovation. Promoting AI innovation and security is a top priority of the United States government, including in its foreig…</summary>
+  </entry>
+  <entry>
+    <title>EARLY STAGE INNOVATIONS (ESI26)</title>
+    <link href="https://www.grants.gov/search-results-detail/363066"/>
+    <id>urn:funding-finder:grants-gov:363066</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Space and aeronautics"/>
+    <category term="Technology development"/>
+    <summary>NASA Headquarters — Closes 2026-08-13 — The National Aeronautics and Space Administration (NASA) Headquarters has released the solicitation Early Stage Innovations (ESI), as an appendix to the Research and Technology Mission Directorate (RTMD) umbrella NASA Research Announcement (NRA) titled "Space Technology Research, Development, Demonstration, and Infusion 2026 (SpaceTech REDDI 2026).”. The solicitation is available by opening the NS…</summary>
+  </entry>
+  <entry>
+    <title>Voices for the Future</title>
+    <link href="https://www.grants.gov/search-results-detail/363043"/>
+    <id>urn:funding-finder:grants-gov:363043</id>
+    <updated>2026-07-02T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Indonesia — Closes 2026-07-31 — PROGRAM DESCRIPTION 1. Project Background, Goals, and Objectives Indonesia is the world’s third largest democracy and over half of its population is under the age 30. Because of this large youth demographic, the United States has an opportunity to engage the next generation of Indonesian leaders. For the last several years, however, Indonesian favorability towards the United States has failed to i…</summary>
+  </entry>
+  <entry>
+    <title>Small Health Care Provider Quality Improvement Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362831"/>
+    <id>urn:funding-finder:grants-gov:362831</id>
+    <updated>2026-07-02T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Arts and culture"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>Health Resources and Services Administration — Closes 2026-08-06 — The purpose of the Small Health Care Provider Quality Improvement Program is to strengthen the quality improvement culture in small rural healthcare facilities by building capacity to effectively collect and use clinical data while implementing evidence-based approaches to improve health care quality with a particular focus on improving chronic disease outcomes. Additionally, the program strengthe…</summary>
+  </entry>
+  <entry>
+    <title>NIAMS P30 Centers Program (P30 - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359152"/>
+    <id>urn:funding-finder:grants-gov:359152</id>
+    <updated>2026-07-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health — Closes 2026-10-01 — The overall goal of this program is to accelerate scientific discovery, improve research efficiency, and enhance the translation of research findings into improved health outcomes. Centers funded under this program will also foster multidisciplinary collaboration, support workforce development across career stages, and promote training in emerging areas such as data science, artificial intelligenc…</summary>
+  </entry>
+  <entry>
+    <title>Interdisciplinary Transportation Law and Policy Technology Training Development</title>
+    <link href="https://www.grants.gov/search-results-detail/362960"/>
+    <id>urn:funding-finder:grants-gov:362960</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>69A355 Research and Technology</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>69A355 Research and Technology — Closes 2026-08-28 — The U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Interdisciplinary Transportation Law and Policy Technology Training Development program. This 24-month cooperative agreement aims to bridge the critical knowledge gap between fast-changing transportation technologies and our Nati…</summary>
+  </entry>
+  <entry>
+    <title>Development and Testing of a Multi-use Frameworks Playbook for Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) (U01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359271"/>
+    <id>urn:funding-finder:grants-gov:359271</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <summary>National Institutes of Health — Closes 2026-10-09 — The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
+  </entry>
+  <entry>
+    <title>Model-to-Clinic (M2C) for Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) (UG3/UH3, Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/359666"/>
+    <id>urn:funding-finder:grants-gov:359666</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health — Closes 2026-10-19 — The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
+  </entry>
+  <entry>
+    <title>PRIMED-AI: Data-to-Model Academic-Industrial Partnerships (D2M-AIP) for Precision Medicine with AI: Integrating Imaging with Multimodal Data (UG3/UH3 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/359270"/>
+    <id>urn:funding-finder:grants-gov:359270</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <summary>National Institutes of Health — Closes 2026-10-19 — The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
+  </entry>
+  <entry>
+    <title>A Demonstration to Scale Innovative Person-Centered Approaches to Falls Prevention through Clinical-Community Partnerships</title>
+    <link href="https://www.grants.gov/search-results-detail/360505"/>
+    <id>urn:funding-finder:grants-gov:360505</id>
+    <updated>2026-06-26T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Data science"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>Administration for Community Living — Closes 2026-07-27 — The purpose of this funding announcement is to demonstrate and evaluate the scalability of person-centered and evidence-based approaches to falls prevention that leverage clinical and community partnerships and related data and technology tools. ACL intends to award a single cooperative agreement to one grantee for a three-year project period with the expectation that the grantee will fund up to t…</summary>
+  </entry>
+  <entry>
+    <title>Rapid Reskill Employment Recovery National Dislocated Worker Grants</title>
+    <link href="https://www.grants.gov/search-results-detail/362987"/>
+    <id>urn:funding-finder:grants-gov:362987</id>
+    <updated>2026-06-26T00:00:00Z</updated>
+    <author><name>Employment and Training Administration</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>Employment and Training Administration — Closes 2026-08-03 — Please direct inquiries about this funding opportunity to Sabrina Guerrier at DOL-ETA-DWG@dol.gov with Reskill DWG in the subject line.</summary>
+  </entry>
+  <entry>
+    <title>Ensuring Research Integrity – Research on Research Integrity Program (RRI)</title>
+    <link href="https://www.grants.gov/search-results-detail/362967"/>
+    <id>urn:funding-finder:grants-gov:362967</id>
+    <updated>2026-06-25T00:00:00Z</updated>
+    <author><name>Office of the Assistant Secretary for Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Office of the Assistant Secretary for Health — Closes 2026-07-27 — We seek applications to conduct empirical research on societal, organizational, behavioral, group, and individual factors that affect integrity in research, focusing on the identification of the root causes of research misconduct and driving factors for research integrity in compliance with 42 C.F.R. part 93. The projects funded under this opportunity must aim to research any combination of the fo…</summary>
+  </entry>
+  <entry>
+    <title>Creative Industries Film Lab and Residency - American Film Showcase 2026</title>
+    <link href="https://www.grants.gov/search-results-detail/362939"/>
+    <id>urn:funding-finder:grants-gov:362939</id>
+    <updated>2026-06-24T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Indonesia — Closes 2026-08-07 — Project Background, Goals, and ObjectivesThe Creative Industries Film Lab and Residency – American Film Showcase 2026 is a five-day public diplomacy program aligned with the American Film Showcase 2026 Envoy visit and scheduled during the Jogja-NETPAC Asian Film Festival Market 2026. The program includes two main components: Exhibition Booth: In partnership with Jogja-NETPAC, the program will secu…</summary>
+  </entry>
+  <entry>
+    <title>Countering Terrorist Recruitment Online</title>
+    <link href="https://www.grants.gov/search-results-detail/362904"/>
+    <id>urn:funding-finder:grants-gov:362904</id>
+    <updated>2026-06-22T00:00:00Z</updated>
+    <author><name>Bureau of Counterterrorism</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <summary>Bureau of Counterterrorism — Closes 2026-07-27 — U.S.-designated foreign terrorist organizations (FTOs), including jihadist networks, drug cartels, and individual extremists, continue to act on violent ideations and inspire others globally. Recruitment efforts are increasingly digital, thus making counterterrorism investigations more complex across borders. Furthermore, emerging technology, such as generative artificial intelligence (AI), are en…</summary>
+  </entry>
+  <entry>
+    <title>Prosperity through Partnership: Catalyzing U.S.-Algerian Collaboration in Innovation, Commerce and English Language</title>
+    <link href="https://www.grants.gov/search-results-detail/362903"/>
+    <id>urn:funding-finder:grants-gov:362903</id>
+    <updated>2026-06-22T00:00:00Z</updated>
+    <author><name>U.S. Mission to Algeria</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Technology development"/>
+    <summary>U.S. Mission to Algeria — Closes 2026-08-08 — 1. Executive SummaryThe U.S. Department of State’s Embassy Algiers is launching a competitive program to catalyze innovation and commerce between the United States and Algeria and advance key U.S. foreign policy priorities. The initiative aims to strengthen commercial ties, expand market access for American companies, and promote American business models and technology, particularly in entrepreneu…</summary>
+  </entry>
+  <entry>
+    <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
+    <link href="https://www.grants.gov/search-results-detail/362900"/>
+    <id>urn:funding-finder:grants-gov:362900</id>
+    <updated>2026-06-22T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Cybersecurity"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>U.S. Mission to Indonesia — Closes 2026-08-31 — Project Background, Goals, and ObjectivesIn an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will leave…</summary>
+  </entry>
+  <entry>
+    <title>Escape The Hack: Countering Cyber Scams with an Immersive Experience for Everyday Indonesians</title>
+    <link href="https://www.grants.gov/search-results-detail/362863"/>
+    <id>urn:funding-finder:grants-gov:362863</id>
+    <updated>2026-06-18T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Cybersecurity"/>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Indonesia — Closes 2026-08-07 — Indonesia faces a pervasive and evolving cybercrime threat, with online scams growing in number and sophistication – while U.S. families continue to lose their life’s savings to international cybercrime, totaling over $12 billions in financial losses in 2023 alone. Unlike scam compounds in mainland Southeast Asia, criminal scam operations in Indonesia are decentralized and embedded within transnat…</summary>
+  </entry>
+  <entry>
+    <title>U.S. Talent Program for the U.S. Embassy and Consulates in Canada</title>
+    <link href="https://www.grants.gov/search-results-detail/362763"/>
+    <id>urn:funding-finder:grants-gov:362763</id>
+    <updated>2026-06-11T00:00:00Z</updated>
+    <author><name>U.S. Mission to Canada</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Manufacturing"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Canada — Closes 2026-07-31 — The U.S. Department of State’s Embassy Ottawa announces an open competition to implement a program to connect U.S. citizen talent, including subject matter experts, artists and cultural professionals, and current and former American athletes and coaches, with Canadian audiences and institutions on topics of strategic importance to the United States. Recipients should be prepared to identify and re…</summary>
+  </entry>
+  <entry>
+    <title>HEAL Initiative: Optimization of Therapeutic Medical Devices through Team Science Mechanistic Research (RM1)</title>
+    <link href="https://www.grants.gov/search-results-detail/361520"/>
+    <id>urn:funding-finder:grants-gov:361520</id>
+    <updated>2026-06-11T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health — Closes 2026-10-30 — The National Institute of Neurological Disorders and Stroke (NINDS), with other NIH Institutes and Centers (ICs), intends to publish a Notice of Funding Opportunity (NOFO) to investigate the mechanisms of action of therapeutic medical devices with the overall goal of improving clinical outcomes with device-based approaches. Medical devices are essential in managing health conditions, complementing…</summary>
+  </entry>
+  <entry>
+    <title>Decentralized Artificial Intelligence through Controlled Emergence (DICE)</title>
+    <link href="https://www.grants.gov/search-results-detail/362743"/>
+    <id>urn:funding-finder:grants-gov:362743</id>
+    <updated>2026-06-10T00:00:00Z</updated>
+    <author><name>DARPA - Information Processing Technologies Office</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Environmental science"/>
+    <summary>DARPA - Information Processing Technologies Office — Closes 2026-08-25 — The DICE program seeks to develop the theory and algorithms for decentralized coordination and local inference control to enable a scalable, adaptive, and resilient collective of heterogeneous AI agents that can autonomously execute sustained long-time-horizon missions in contested environments while remaining under human control. In contrast to small-scale, rigid, and fragile centralized orchestr…</summary>
+  </entry>
+  <entry>
+    <title>Research and Education Program for Historically Black Colleges and Universities (HBCU) and Tribal Colleges and Universities (TCU)</title>
+    <link href="https://www.grants.gov/search-results-detail/362711"/>
+    <id>urn:funding-finder:grants-gov:362711</id>
+    <updated>2026-06-08T00:00:00Z</updated>
+    <author><name>Dept of the Army -- Materiel Command</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>Dept of the Army -- Materiel Command — Closes 2026-08-11 — This solicitation invites applications (also referred to as “proposals”) for basic research projects. The proposals must align with the research areas of interest to the DoW (which includes the USW(R&amp;E) and the Agencies) and enhance the education of students in areas of STEM that align with the DoW research interests. Information about these areas of interest (including websites) is discussed belo…</summary>
+  </entry>
+  <entry>
+    <title>Single Source Competition: Continuation of the Cardiovascular Repository for Type 1 Diabetes (CaRe-T1D) - Resource Center (U24 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/361035"/>
+    <id>urn:funding-finder:grants-gov:361035</id>
+    <updated>2026-06-04T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <summary>National Institutes of Health — Closes 2026-09-30 — This Notice of Funding Opportunity (NOFO) invites a single cooperative agreement application for the Resource Center for the Cardiovascular Repository for Type 1 Diabetes (CaRe-T1D). The purpose of CaRe-T1D is to support innovative, discovery and mechanistic research through the study of human cardiovascular (CV) tissue. This research seeks to better understand cardiovascular disease (CVD) in type…</summary>
+  </entry>
+  <entry>
+    <title>FY26 Pathways to Removing Obstacles to Housing (PRO Housing)</title>
+    <link href="https://www.grants.gov/search-results-detail/362005"/>
+    <id>urn:funding-finder:grants-gov:362005</id>
+    <updated>2026-06-03T00:00:00Z</updated>
+    <author><name>Department of Housing and Urban Development</name></author>
+    <category term="Community development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Department of Housing and Urban Development — Closes 2026-08-03 — As President Trump said in his Executive Order on Removing Regulatory Barriers to Affordable Home Construction (March 13, 2026), The American dream of homeownership depends on a dynamic housing market in which a varied inventory of new homes is built and renovated each year. Layers of unnecessary regulatory barriers, slow permitting processes, and onerous mandates at all levels of government have …</summary>
+  </entry>
+  <entry>
+    <title>Novel Experiential Technologies Assisting Individual Learning (NExT AI) Hubs (P20 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/359949"/>
+    <id>urn:funding-finder:grants-gov:359949</id>
+    <updated>2026-06-03T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Neuroscience"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health — Closes 2026-10-02 — This Notice of Funding Opportunity (NOFO) invites exploratory grant applications, hereafter referred to as the Novel Experiential Technologies Assisting Individual learning Hubs or NExT AI Hubs (formerly Learning Disabilities Innovation Hubs), to address the impact of Artificial Intelligence (AI) technologies on developmental outcomes in children diagnosed with or at risk for developing a specific…</summary>
+  </entry>
+  <entry>
+    <title>NLM Institutional Grants for Research Training in Biomedical Informatics, Data Science, and AI</title>
+    <link href="https://www.grants.gov/search-results-detail/361318"/>
+    <id>urn:funding-finder:grants-gov:361318</id>
+    <updated>2026-06-02T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health — Closes 2026-09-25 — The National Library of Medicine (NLM) invites applications for innovative predoctoral and postdoctoral training programs that prepare the next generation of researchers in biomedical informatics, data science, and artificial intelligence/machine learning (AI/ML). NLM emphasizes cutting-edge, forward-looking training experiences that equip trainees to address complex health and biomedical challeng…</summary>
+  </entry>
+  <entry>
+    <title>Improving Chronic Conditions Through Inexpensive Interventions</title>
+    <link href="https://www.grants.gov/search-results-detail/361348"/>
+    <id>urn:funding-finder:grants-gov:361348</id>
+    <updated>2026-05-30T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2026-09-25 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to invite applications to create a national consortium of researchers, clinicians, and electronic health record (EHR) vendors. The consortium will conduct research to evaluate clinical effectiveness impacts of different care approaches on whole-person outcomes and quality metrics. This NOFO is intended …</summary>
+  </entry>
+  <entry>
+    <title>DoW Prostate Cancer, Data Science Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362259"/>
+    <id>urn:funding-finder:grants-gov:362259</id>
+    <updated>2026-05-21T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Data science"/>
+    <category term="Public health"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-02 — Summary: The fiscal year 2026 (FY26) Prostate Cancer Research Program (PCRP) Data Science Award (DSA) supports research that develops or uses quantitative and analytical approaches, processes and/or systems to obtain knowledge and insight from large and/or complex sets of prostate cancer data in one or more of the following research areas: Analysis of clinically annotated datasets; analysis of -om…</summary>
+  </entry>
+  <entry>
+    <title>Community Engagement Evaluation and Data Coordination (CEED) Hub to Advance Data and Practice Transformation for Optimizing Oral Health for All (U01, Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359123"/>
+    <id>urn:funding-finder:grants-gov:359123</id>
+    <updated>2026-04-27T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <summary>National Institutes of Health — Closes 2026-10-19 — The purpose of this Notice of Funding Opportunity (NOFO) is to seek applications for a Community Engagement Evaluation and Data coordination hub (CEED) for the Community-Based Participatory Research (CBPR) consortium: Advancing Data and Practice Transformation (ADAPT) for Optimizing Oral Health for All. In addition to CEED, the ADAPT consortium will include separately funded CBPR projects, which w…</summary>
+  </entry>
+  <entry>
+    <title>Community-Based Participatory Research to Advance Data and Practice Transformation (ADAPT) for Optimizing Oral Health for All (UG3/UH3 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/358864"/>
+    <id>urn:funding-finder:grants-gov:358864</id>
+    <updated>2026-04-27T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <summary>National Institutes of Health — Closes 2028-11-16 — The purpose of this Notice of Funding Opportunity (NOFO) is to solicit UG3/UH3 phased, cooperative agreement research applications to evaluate, implement, and/or test population-based interventions to policies, programs, and/or practices for promoting integration of services, systems, and/or values by leveraging cross-sector partnerships in communities. Such interventions must address social and c…</summary>
+  </entry>
+  <entry>
+    <title>Chemical Process Systems (CPS)</title>
+    <link href="https://www.grants.gov/search-results-detail/362061"/>
+    <id>urn:funding-finder:grants-gov:362061</id>
+    <updated>2026-04-24T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <summary>U.S. National Science Foundation — Posted — Society relies on chemical processes to turn raw materials into useful products. The Chemical Process Systems (CPS) program invests in fundamental research on chemical and biochemical processes to make them more efficient, sustainable, and resilient. New CPS technologies for manufacturing, biotechnology, critical minerals, energy, food, and other national priorities will help make the U.S. more co…</summary>
+  </entry>
+  <entry>
+    <title>Transport Phenomena (TP)</title>
+    <link href="https://www.grants.gov/search-results-detail/362063"/>
+    <id>urn:funding-finder:grants-gov:362063</id>
+    <updated>2026-04-24T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Separations and membranes"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation — Posted — The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
+  </entry>
+  <entry>
+    <title>High-performance Optimized Recycled Nuclear Isotopes for Gen IV reactors (HORNIG)</title>
+    <link href="https://www.grants.gov/search-results-detail/362035"/>
+    <id>urn:funding-finder:grants-gov:362035</id>
+    <updated>2026-04-23T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency Energy</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>Advanced Research Projects Agency Energy — Closes 2026-08-06 — This is Modification 01 to the NOFO: • Inserted certain deadlines and updated dates, including the deadlines for submitting questions and Full Applications (Basic Information, Section IV.C). NOFO Number: DE-FOA-0003623 – High-performance Optimized Recycled Nuclear Isotopes for Gen IV reactors (HORNIG) Agency Overview: The Advanced Research Projects Agency—Energy (ARPA-E), an organization within th…</summary>
+  </entry>
+</feed>

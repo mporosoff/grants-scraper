@@ -31,7 +31,7 @@ from ..http import PoliteClient
 from ..registry import register
 
 _GUID = r"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
-_FOA_NUMBER = r"(?:[A-Z]{2,4}-)?[A-Z]{2,5}-\d{3,}"
+_FOA_NUMBER = r"(?:[A-Z]{2,4}-)?[A-Z0-9]{2,8}-[A-Z0-9]{3,}"
 # One summary row: FOA-number anchor, then everything up to the next FOA-number
 # anchor (or end). The middle holds the title anchor + type + office + dates.
 _ROW_RE = re.compile(
@@ -42,7 +42,10 @@ _ROW_RE = re.compile(
 )
 _ANCHOR_RE = re.compile(r"<a\b[^>]*>(?P<text>.*?)</a>", re.IGNORECASE | re.DOTALL)
 _TAG_RE = re.compile(r"<[^>]+>")
-_NOFO_RE = re.compile(r"notice of funding opportunity", re.IGNORECASE)
+_NOFO_TYPE_RE = re.compile(
+    r"^\s*notice of funding opportunity\s*\(NOFO\)",
+    re.IGNORECASE,
+)
 _DATE_RE = re.compile(
     r"(\d{1,2})/(\d{1,2})/(\d{4})(?:\s+(\d{1,2}:\d{2}\s*(?:AM|PM))\s*ET)?",
     re.IGNORECASE,
@@ -55,7 +58,7 @@ def _strip_tags(html: str) -> str:
 
 def _deadlines_after_type(text: str, as_of: date):
     """From the NOFO type marker onward, return (next_iso, additional, office, note)."""
-    match = _NOFO_RE.search(text)
+    match = _NOFO_TYPE_RE.search(text)
     if not match:
         return None, [], None, None
     window = text[match.end(): match.end() + 200]
@@ -91,7 +94,10 @@ class EEREExchangeAdapter(SourceAdapter):
 
     list_url: str = ""
     source_type = "Federal"
-    min_records = 1
+    # A portal can legitimately have no currently actionable NOFOs. Parser
+    # health is guarded separately by the recognizable-row count below, so an
+    # empty current result does not by itself imply endpoint drift.
+    min_records = 0
     max_records = 300
 
     def fetch(self) -> str:
@@ -104,17 +110,27 @@ class EEREExchangeAdapter(SourceAdapter):
         if as_of is None:
             as_of = date.today()
         opportunities: list[CanonicalOpportunity] = []
-        for row in _ROW_RE.finditer(html or ""):
+        rows = list(_ROW_RE.finditer(html or ""))
+        if len(rows) < 3:
+            raise ValueError(
+                "DOE Exchange page did not contain a plausible opportunity-row structure"
+            )
+        for row in rows:
             middle = row.group("middle")
-            middle_text = _strip_tags(middle)
-            if not _NOFO_RE.search(middle_text):
-                continue  # keep only Notice of Funding Opportunity rows
             title_anchor = _ANCHOR_RE.search(middle)
             title = _strip_tags(title_anchor.group("text")) if title_anchor else ""
             if not title:
                 continue
+            # The announcement type immediately follows the title anchor.
+            # Do not search the whole row: NOI/RFI titles often contain the
+            # words "Notice of Funding Opportunity" while remaining non-fundable.
+            type_and_dates = _strip_tags(middle[title_anchor.end():])
+            if not _NOFO_TYPE_RE.match(type_and_dates):
+                continue
             number = row.group("number").upper()
-            close_date, additional, office, note = _deadlines_after_type(middle_text, as_of)
+            close_date, additional, office, note = _deadlines_after_type(
+                type_and_dates, as_of
+            )
             opportunities.append(CanonicalOpportunity(
                 external_id=number,
                 opportunity_number=number,
@@ -125,6 +141,10 @@ class EEREExchangeAdapter(SourceAdapter):
                 deadline_note=note,
                 additional_deadlines=additional,
             ))
+        if not opportunities:
+            raise ValueError(
+                "DOE Exchange page contained rows but no recognizable NOFO types"
+            )
         return opportunities
 
 

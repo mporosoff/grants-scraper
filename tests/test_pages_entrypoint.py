@@ -79,7 +79,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             '<script src="./data/opportunities.js"></script>',
             explorer_html,
         )
-        release_version = "release-2026-07-27-v2"
+        release_version = "release-2026-07-27-v3"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={release_version}">',
             explorer_html,
@@ -331,6 +331,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("python -m scripts.enrich_catalog", workflow)
         self.assertIn("python -m scripts.extract_document_evidence", workflow)
         self.assertIn("python -m scripts.sources merge", workflow)
+        self.assertIn("python -m scripts.build_feeds", workflow)
         self.assertIn("--fail-on-degraded", workflow)
         self.assertIn("continue-on-error: true", workflow)
         self.assertIn("steps.additional-sources.outcome == 'failure'", workflow)
@@ -346,6 +347,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("data/opportunities.js", workflow)
         self.assertIn("data/document_evidence.json", workflow)
         self.assertIn("data/source_records.json", workflow)
+        self.assertIn("feeds", workflow)
 
 
 if __name__ == "__main__":

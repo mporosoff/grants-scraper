@@ -96,6 +96,9 @@ against generated asset" step still validates the result.
 | `nsf-funding` | Enabled | Official NSF upcoming-due-dates feed; tolerant of the feed's malformed bare ampersands and protected by source health bounds. |
 | `nih-guide` | Disabled intentionally | NIH stopped publishing NOFOs in the Guide in FY2026; its feed now carries policy/informational notices while Grants.gov is the official NIH NOFO source. |
 | `nyserda` | Enabled | Verified live JSON API; publishes the next open application round and retains later application/concept-paper dates as structured deadlines. |
+| `arpa-e` | Enabled | Server-rendered ARPA-E eXCHANGE NOFO list; excludes RFIs/teaming/intent notices and retains later open submission dates. |
+| `eere-exchange` | Enabled | Server-rendered DOE EERE Exchange NOFO list using the same verified parser and source-health gates. |
+| `nasa-nspires` | Disabled shell | The public entry point is session/POST-gated; no stable list route is confirmed. |
 | `ur-infoready` | Disabled shell | The earlier undocumented endpoint currently returns HTTP 500. No embedded credential or unstable request ships; the fixture parser remains for a future permissioned route. |
 
 ## Notes

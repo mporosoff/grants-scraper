@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Funding Finder — Infectious disease</title>
+  <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml" rel="self"/>
+  <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
+  <id>https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml</id>
+  <updated>2026-07-27T14:02:03Z</updated>
+  <generator>Funding Finder</generator>
+  <entry>
+    <title>Limited Competition: Resources and Workforce Development for the Regional Biocontainment Laboratories</title>
+    <link href="https://www.grants.gov/search-results-detail/362951"/>
+    <id>urn:funding-finder:grants-gov:362951</id>
+    <updated>2027-07-02T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-09-30 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by providing critical resources, staff and facilities support for the Regional Biocontainment Laboratories (RBLs). The RBLs provide biosafety level 2 and 3 (BSL-2/3) biocontainment facilities for research on infectious diseases. They play a critical role in public health emergency response by facilitatin…</summary>
+  </entry>
+  <entry>
+    <title>Clinical Trials in Organ Transplantation in Children and Adults</title>
+    <link href="https://www.grants.gov/search-results-detail/362955"/>
+    <id>urn:funding-finder:grants-gov:362955</id>
+    <updated>2027-06-17T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-09-30 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Clinical Trials in Organ Transplantation in Children and Adults (CTOT-CA) program. The goal of the CTOT-CA is to improve the outcome of organ transplantation through clinical trials with mechanistic studies. The CTOT-CA will support multicenter clinical trials, with a…</summary>
+  </entry>
+  <entry>
+    <title>National Viral Hepatitis Education, Awareness, and Capacity Building for Communities and Providers</title>
+    <link href="https://www.grants.gov/search-results-detail/363142"/>
+    <id>urn:funding-finder:grants-gov:363142</id>
+    <updated>2027-03-30T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCHHSTP</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-06-01 — In alignment with CDC's viral hepatitis strategic goals and current epidemiology, this Notice of Funding Opportunity (NOFO) will address the need for increasing awareness of viral hepatitis prevention, testing, and treatment options among populations disproportionately affected by hepatitis B and/or hepatitis C virus infections. The priority populations' needs will also be addressed by increasing …</summary>
+  </entry>
+  <entry>
+    <title>Strengthening Services to Prevent the Infectious Disease Consequences of Drug Use</title>
+    <link href="https://www.grants.gov/search-results-detail/363310"/>
+    <id>urn:funding-finder:grants-gov:363310</id>
+    <updated>2027-03-24T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCHHSTP</name></author>
+    <category term="Infectious disease"/>
+    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-05-24 — This NOFO aims to strengthen services to prevent the infectious disease consequences of drug use in high impact settings serving people who use drugs (PWUD) through two components. Component 1 will improve service data by conducting a biennial survey of high-impact settings that serve PWUD to document capacity, needs, access, and service gaps. It will also improve timely local data on infectious d…</summary>
+  </entry>
+  <entry>
+    <title>Improved Drug Susceptibility Testing (DST) for Mycobacteria</title>
+    <link href="https://www.grants.gov/search-results-detail/362948"/>
+    <id>urn:funding-finder:grants-gov:362948</id>
+    <updated>2027-03-12T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-05-28 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting research to develop improved drug susceptibility tests (DSTs) for mycobacterial drugs, including those currently used for treatment of tuberculosis (TB) and clinically important non-tuberculous mycobacterial (NTM) infections, new drugs and drugs in late-stage clinical development. TB is a l…</summary>
+  </entry>
+  <entry>
+    <title>Clinical Data, Safety and Statistical Centers (CDSSC)</title>
+    <link href="https://www.grants.gov/search-results-detail/362957"/>
+    <id>urn:funding-finder:grants-gov:362957</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-06-01 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the support of the Clinical Data, Safety and Statistical Centers program. The overall objective of this program is to provide coordination and oversight for multiple activities in service to clinical research and mechanistic studies supported by NIAID, including all Division of Allergy, Immunolog…</summary>
+  </entry>
+  <entry>
+    <title>Translational Transplantation Tolerance Cooperative Study Group</title>
+    <link href="https://www.grants.gov/search-results-detail/362958"/>
+    <id>urn:funding-finder:grants-gov:362958</id>
+    <updated>2027-01-21T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-05-21 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the support of the Translational Transplantation Tolerance Cooperative Study Group (TTTCSG) program. The overarching goal of this program is to facilitate clinical translation of safe and effective transplant tolerance regimens that achieve long-term graft survival without the need for life-long …</summary>
+  </entry>
+  <entry>
+    <title>Childhood Asthma in Urban Settings Clinical Research Network</title>
+    <link href="https://www.grants.gov/search-results-detail/362950"/>
+    <id>urn:funding-finder:grants-gov:362950</id>
+    <updated>2027-01-08T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-05-28 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Childhood Asthma in Urban Settings Clinical Research Network (CAUSE) network. The CAUSE network will support multi-site clinical studies and trials on the prevention and treatment of asthma in economically disadvantaged pediatric populations where disease burden is hi…</summary>
+  </entry>
+  <entry>
+    <title>Asthma and Allergic Diseases Cooperative Research Centers</title>
+    <link href="https://www.grants.gov/search-results-detail/362953"/>
+    <id>urn:funding-finder:grants-gov:362953</id>
+    <updated>2027-01-05T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-05-21 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Asthma and Allergic Diseases Cooperative Research Centers (AADCRC). The AADCRC program serves as the cornerstone of NIAID's efforts to promote clinical and basic research in diseases including asthma, upper airway allergic/inflammatory diseases, food and drug allergie…</summary>
+  </entry>
+  <entry>
+    <title>Accelerating Research and Development of Next Generation Malaria Vaccines Against Malaria – A Model for Mosquito-Borne Diseases</title>
+    <link href="https://www.grants.gov/search-results-detail/361832"/>
+    <id>urn:funding-finder:grants-gov:361832</id>
+    <updated>2026-11-27T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health — Closes 2027-02-11 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to support basic research, discovery, and/or preclinical development of highly efficacious vaccines for malaria and potentially other mosquito-borne illness. The program will encourage novel approaches to vaccine design that capitalize on recent technological innovations including structure-based immunogen design, and/or combi…</summary>
+  </entry>
+  <entry>
+    <title>Research Resource for a National Swine Resource and Research Center (U42 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/362278"/>
+    <id>urn:funding-finder:grants-gov:362278</id>
+    <updated>2026-11-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <summary>National Institutes of Health — Closes 2027-01-25 — This Notice of Funding Opportunity (NOFO) encourages applications to provide continuing support for a National Swine Resource and Research Center (NSRRC). The NSRRC aims to enable gold-standard science in biomedical research by serving as a centralized national resource for the creation, breeding, cryopreservation, and distribution of genetically modified models. By consolidating these essential f…</summary>
+  </entry>
+  <entry>
+    <title>Integrated Specific Pathogen Free Research Models and Human New Approach Methodologies to Advance HIV/AIDS Research (U42 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/362488"/>
+    <id>urn:funding-finder:grants-gov:362488</id>
+    <updated>2026-11-24T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <summary>National Institutes of Health — Closes 2027-01-25 — This NOFO is issued during a period of accelerating development, validation, and adoption of human new approach methodologies (NAMs). Accordingly, it has two integrated priorities for NIH-funded HIV/AIDS research: (1) implementation of a NAMs-enabled stewardship framework, including optional HIV-relevant human in vitro testing support and pilot benchmarking activities, to reduce or replace specifi…</summary>
+  </entry>
+  <entry>
+    <title>Translational Centers Using Microphysiologic Systems for Infectious Diseases</title>
+    <link href="https://www.grants.gov/search-results-detail/362954"/>
+    <id>urn:funding-finder:grants-gov:362954</id>
+    <updated>2026-11-13T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-01-29 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting the development of human microphysiologic systems (MPS) for infectious disease research and the development of therapeutics or biological products. MPS are in vitro platforms composed of cells or tissues maintained in a microenvironment designed to mimic the physiological aspects of in vivo…</summary>
+  </entry>
+  <entry>
+    <title>Precision and Systems Biology to Uncover the Link Between Chronic and Infectious Diseases</title>
+    <link href="https://www.grants.gov/search-results-detail/362952"/>
+    <id>urn:funding-finder:grants-gov:362952</id>
+    <updated>2026-11-06T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-01-22 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
+  </entry>
+  <entry>
+    <title>Collaborative Network for Clinical Research on Immune Tolerance</title>
+    <link href="https://www.grants.gov/search-results-detail/362946"/>
+    <id>urn:funding-finder:grants-gov:362946</id>
+    <updated>2026-10-16T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-01-29 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Collaborative Network for Clinical Research on Immune Tolerance. The purpose of this program is to enhance understanding of the underlying mechanisms of the induction, maintenance, and loss of immune tolerance in humans; and to develop improved tolerogenic interventio…</summary>
+  </entry>
+  <entry>
+    <title>Integrated Viral Hepatitis Surveillance, Testing, Treatment, and Prevention Programs for Health Departments (IVH-STTP)</title>
+    <link href="https://www.grants.gov/search-results-detail/362731"/>
+    <id>urn:funding-finder:grants-gov:362731</id>
+    <updated>2026-10-09T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCHHSTP</name></author>
+    <category term="Infectious disease"/>
+    <summary>Centers for Disease Control - NCHHSTP — Closes 2026-12-09 — This NOFO supports integrated viral hepatitis surveillance and prevention programs in states, territories, and large cities in the United States. Key strategies include viral hepatitis outbreak response and surveillance for hepatitis A, acute and chronic hepatitis B, and acute, chronic, and perinatal hepatitis C. Surveillance activities include developing and utilizing disease registries, conducti…</summary>
+  </entry>
+  <entry>
+    <title>HIV/AIDS Clinical Trials Network Clinical Trials Units</title>
+    <link href="https://www.grants.gov/search-results-detail/361821"/>
+    <id>urn:funding-finder:grants-gov:361821</id>
+    <updated>2026-08-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-01-22 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the National Institutes of Health (NIH) mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center, and Laboratory Center working with Clinical Trials Units (CTUs), to advance prevention and treatment research on HIV and HIV…</summary>
+  </entry>
+  <entry>
+    <title>HIV/AIDS Clinical Trials Network Laboratory Centers</title>
+    <link href="https://www.grants.gov/search-results-detail/361820"/>
+    <id>urn:funding-finder:grants-gov:361820</id>
+    <updated>2026-08-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-01-22 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center, and Laboratory Center (LC) working with Clinical Trials Units, to test prevention and treatment strategies and conduct implementation research designed to end t…</summary>
+  </entry>
+  <entry>
+    <title>HIV/AIDS Clinical Trials Network Leadership and Operations Centers</title>
+    <link href="https://www.grants.gov/search-results-detail/361815"/>
+    <id>urn:funding-finder:grants-gov:361815</id>
+    <updated>2026-08-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-01-22 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the National Institutes of Health (NIH) mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center (LOC), Statistical and Data Management Center, and Laboratory Center working with Clinical Trials Units to advance prevention, treatment, and implementation research…</summary>
+  </entry>
+  <entry>
+    <title>HIV/AIDS Clinical Trials Network Statistical and Data Management Centers</title>
+    <link href="https://www.grants.gov/search-results-detail/361816"/>
+    <id>urn:funding-finder:grants-gov:361816</id>
+    <updated>2026-08-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-01-22 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the National Institutes of Health (NIH) mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center (SDMC), and Laboratory Center (LC) working with Clinical Trials Units (CTUs), to advance prevention, treatment, and implement…</summary>
+  </entry>
+  <entry>
+    <title>Centers for Structural Biology of HIV and other Infectious Diseases</title>
+    <link href="https://www.grants.gov/search-results-detail/361050"/>
+    <id>urn:funding-finder:grants-gov:361050</id>
+    <updated>2026-08-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2026-12-18 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting the Centers for Structural Biology of HIV and other Infectious Diseases. This solicitation will support multidisciplinary groups of scientists to determine the 3-dimensional structures of molecules and molecular complexes involved in priority infectious diseases. The effort focuses on explo…</summary>
+  </entry>
+  <entry>
+    <title>Impact of Immunotherapies on CNS Outcomes in People with HIV: Potential Benefits, Challenges and Risks</title>
+    <link href="https://www.grants.gov/search-results-detail/361519"/>
+    <id>urn:funding-finder:grants-gov:361519</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health — Closes 2026-10-22 — The National Institute of Mental Health (NIMH) intends to publish a notice of funding opportunity (NOFO) to solicit biphasic research applications to evaluate the impact of HIV immunotherapies on central nervous system (CNS) outcomes in people with HIV and to identify mechanisms, benefits, and risks associated with their use in the CNS compartment. The primary goal is to generate evidence that inf…</summary>
+  </entry>
+  <entry>
+    <title>Illuminating AD/ADRD Genome to Enable Precision Genomic Medicine</title>
+    <link href="https://www.grants.gov/search-results-detail/360906"/>
+    <id>urn:funding-finder:grants-gov:360906</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Infectious disease"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health — Closes 2026-10-06 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose a program that supports integrative, cross-disciplinary projects aimed at scaling up mechanistic studies to understand the genomic underpinnings of the pathogenesis and progression AD/ADRD.The proposed research projects will employ interdisciplinary approaches that i…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement to Support Shellfish Safety Assistance Project</title>
+    <link href="https://www.grants.gov/search-results-detail/363282"/>
+    <id>urn:funding-finder:grants-gov:363282</id>
+    <updated>2026-07-22T00:00:00Z</updated>
+    <author><name>Food and Drug Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>Food and Drug Administration — Closes 2026-08-21 — The purpose of this funding opportunity is to (1) improve information exchange and transfer among States, Federal and Foreign Agencies, industry, and consumers; (2) strengthen state activities through training, technical assistance, research, education, and support for States to participate in meetings that foster a cooperative shellfish program based on public health principles; and (3) promote e…</summary>
+  </entry>
+  <entry>
+    <title>Strengthening Global Health Security by improving public health capacity to detect, notify, and respond to disease outbreaks globally</title>
+    <link href="https://www.grants.gov/search-results-detail/360342"/>
+    <id>urn:funding-finder:grants-gov:360342</id>
+    <updated>2026-07-14T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control-GHC — Closes 2026-08-14 — This Notice of Funding Opportunity (NOFO) seeks to build upon activities funded by CDC to support Global Health Security (GHS) through implementation of programs and activities that focus on protecting and improving health globally through partnerships with Ministries of Health and other governmental institutions. This NOFO will build on lessons learned from the global COVID outbreak and other sig…</summary>
+  </entry>
+  <entry>
+    <title>Strengthening public health efforts to protect and improve health in the Democratic Republic of the Congo (DRC)</title>
+    <link href="https://www.grants.gov/search-results-detail/360331"/>
+    <id>urn:funding-finder:grants-gov:360331</id>
+    <updated>2026-07-14T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control-GHC — Closes 2026-08-14 — This Notice of Funding Opportunity (NOFO) seeks to build upon activities funded by CDC to support Global Health Security (GHS) in the Democratic Republic of Congo through implementation of programs and activities that focus on protecting and improving health globally through partnerships with Ministries of Health and other governmental institutions. The main outcomes of this NOFO are the following…</summary>
+  </entry>
+  <entry>
+    <title>Sustaining Global Health Security to protect and improve public health in Kenya</title>
+    <link href="https://www.grants.gov/search-results-detail/360341"/>
+    <id>urn:funding-finder:grants-gov:360341</id>
+    <updated>2026-07-14T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control-GHC — Closes 2026-08-14 — For over forty years, the U.S. Centers for Disease Control and Prevention (CDC) has partnered with the Government of Kenya (GoK) to protect the health of the Kenyan people and strengthen health systems. The United States Government remains the largest investor in Kenya"s health sector. This investment includes PEPFAR (President"s Emergency Plan for AIDS Relief), GHS (Global Health Security), Malar…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Program for Modeling Clinical Transplantation</title>
+    <link href="https://www.grants.gov/search-results-detail/361831"/>
+    <id>urn:funding-finder:grants-gov:361831</id>
+    <updated>2026-07-10T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2026-10-09 — The National Institute of Allergy and Infectious Diseases (NIAID) will support its mission through the Cooperative Program for Modeling Clinical Transplantation. Advancements of new therapeutics and success in human solid organ transplantation will require innovative and clinically translatable in-vitro and in-vivo systems to model local and systemic immune responses. This program seeks applicatio…</summary>
+  </entry>
+  <entry>
+    <title>Development of Candidate Medical Countermeasures (MCMs) and Technologies Against Chemical or Radiation/Nuclear (CRN) Threats</title>
+    <link href="https://www.grants.gov/search-results-detail/361833"/>
+    <id>urn:funding-finder:grants-gov:361833</id>
+    <updated>2026-07-10T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2026-10-09 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the NIH mission by supporting research on concepts and technologies to address civilian radiation or chemical threats. Research is administered by NIAID on behalf of NIH via the Radiation and Nuclear (RNCP), and the Chemical Countermeasures (CCRP) Research Programs. A shared congressional mandate to the NIH OD (119 …</summary>
+  </entry>
+  <entry>
+    <title>Clinical Research Network on Antimicrobial Resistance</title>
+    <link href="https://www.grants.gov/search-results-detail/361065"/>
+    <id>urn:funding-finder:grants-gov:361065</id>
+    <updated>2026-07-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Cancer"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2026-09-29 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by continuing support for a Clinical Research Network on Antimicrobial Resistance (AMR). AMR is a major health challenge that limits treatment options and allows resistant infections to persist. Individuals with chronic conditions like diabetes and cancer are particularly vulnerable, resulting in increas…</summary>
+  </entry>
+  <entry>
+    <title>Improving global health security in Côte d'Ivoire through collaboration with local partners</title>
+    <link href="https://www.grants.gov/search-results-detail/360324"/>
+    <id>urn:funding-finder:grants-gov:360324</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control-GHC — Closes 2026-08-15 — This Notice of Funding Opportunity (NOFO) seeks to build upon activities funded by CDC to support Global Health Security (GHS) in the Cote d’Ivore through implementation of programs and activities that focus on protecting and improving health globally through partnerships with Ministries of Health and other governmental institutions. The main outcomes of this NOFO are the following: (1) Improve pr…</summary>
+  </entry>
+  <entry>
+    <title>Protecting and Improving Global Health Security by Engaging Local Partners: Strengthening and Sustaining Public Health Systems in Ghana</title>
+    <link href="https://www.grants.gov/search-results-detail/360455"/>
+    <id>urn:funding-finder:grants-gov:360455</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control-GHC — Closes 2026-08-15 — This NOFO seeks to build and sustain a more resilient public health system in Ghana capable of identifying, responding to and mitigating public health threats. CDC, through this NOFO, will continue to leverage and complement the strengths and resources of multi-sectoral and multilateral partners in Ghana to build and improve country capacity and leadership in the prevention, early detection and re…</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: Social, Behavioral, &amp; Economic (SBE) Coordinating Center</title>
+    <link href="https://www.grants.gov/search-results-detail/360159"/>
+    <id>urn:funding-finder:grants-gov:360159</id>
+    <updated>2026-06-20T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health — Closes 2026-08-20 — This is a Forecast for a Limited Competition Notice of Funding Opportunity (NOFO) that will invite application(s) from eligible organization(s) to apply. Please see the Eligibility Section for additional information. In accordance with NIH standard peer-review processes, the application(s) will be peer-reviewed, and only meritorious application(s) will be considered for funding.It is anticipated t…</summary>
+  </entry>
+  <entry>
+    <title>Avant Garde/Avenir Awards for Investigators Conducting High Risk/High Reward Research on HIV and Substance Use (or Substance Use Disorders) (DP1 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/358991"/>
+    <id>urn:funding-finder:grants-gov:358991</id>
+    <updated>2026-06-09T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <summary>National Institutes of Health — Closes 2028-09-25 — The purpose of this notice of funding opportunity (NOFO) is to support innovative basic, clinical, translational, and implementation science research relevant to HIV and substance use. This initiative encourages high risk high impact transformative studies that advance knowledge and strategies for HIV prevention, diagnosis, treatment and virus suppression in people who use substances and/or have a…</summary>
+  </entry>
+  <entry>
+    <title>Centers for AIDS Research (CFAR)</title>
+    <link href="https://www.grants.gov/search-results-detail/360869"/>
+    <id>urn:funding-finder:grants-gov:360869</id>
+    <updated>2026-05-21T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2026-08-19 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by continuing support for the Centers for AIDS Research (CFAR). The national network of CFARs cooperates with other HHS-funded HIV/AIDS programs to establish and maintain the collaborations and infrastructure required to carry out innovative implementation science research for ending the HIV epidemic dom…</summary>
+  </entry>
+  <entry>
+    <title>Multidisciplinary Research to Accelerate Hepatitis B Cure in Persons Living with HIV and HBV (MRA-HBV)</title>
+    <link href="https://www.grants.gov/search-results-detail/359860"/>
+    <id>urn:funding-finder:grants-gov:359860</id>
+    <updated>2026-05-21T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2026-08-19 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by soliciting applications to support Multidisciplinary Research to Accelerate Hepatitis B Cure in Persons Living with HIV (PLWH) and Hepatitis B Virus (HBV). This program will focus on: elucidating mechanisms of persistence and pathogenesis; discovering and developing clinically relevant biomarkers; dis…</summary>
+  </entry>
+  <entry>
+    <title>Using Archived Data and Specimen Collections to Advance Maternal and Pediatric HIV/AIDS Research (R21 CT Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359945"/>
+    <id>urn:funding-finder:grants-gov:359945</id>
+    <updated>2026-05-19T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2028-10-20 — The purpose of this Funding Opportunity is to address the needs of the maternal and pediatric HIV scientific community for research data translation and sharing.This initiative will support secondary data analyses using archived HIV/AIDS data and specimens. The goal of this initiative is to encourage the scientific community to utilize HIV/AIDS archived data sets and specimen collections to answer…</summary>
+  </entry>
+  <entry>
+    <title>NIAID Investigator Initiated Program Project Applications (P01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359732"/>
+    <id>urn:funding-finder:grants-gov:359732</id>
+    <updated>2026-05-07T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Infectious disease"/>
+    <summary>National Institutes of Health — Closes 2029-05-25 — This notice of funding opportunity (NOFO) invites submission of investigator-initiated Program Project (P01) applications. The proposed Programs should address scientific areas relevant to the NIAID mission including: biology and pathogenesis of infectious microbes, including HIV; host-microbe interactions; mechanisms regulating immune system development and function across the lifespan, and in re…</summary>
+  </entry>
+  <entry>
+    <title>NIAID Resource-Related Research Projects (R24 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359692"/>
+    <id>urn:funding-finder:grants-gov:359692</id>
+    <updated>2026-05-07T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Infectious disease"/>
+    <summary>National Institutes of Health — Closes 2029-05-25 — This notice of funding opportunity (NOFO) invites applications for investigator-initiated Resource-Related Research Projects (R24). The proposed resource must provide a significant benefit to currently funded high priority projects in need of further coordination and support in the areas specified. This mechanism may also be used to support development of a new resource to the broader scientific c…</summary>
+  </entry>
+  <entry>
+    <title>Martin Delaney Collaboratories for HIV Cure Research</title>
+    <link href="https://www.grants.gov/search-results-detail/359663"/>
+    <id>urn:funding-finder:grants-gov:359663</id>
+    <updated>2026-04-21T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2026-08-19 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by continuing support for the Martin Delaney Collaboratories (MDCs) for HIV Cure Research. The goal of the MDC program is to develop strategies to control viral replication without the need for lifelong antiretroviral therapy, with an ultimate goal of completely eradicating HIV reservoirs from the indivi…</summary>
+  </entry>
+  <entry>
+    <title>Global Infectious Diseases Research Training Program (D43 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/361252"/>
+    <id>urn:funding-finder:grants-gov:361252</id>
+    <updated>2026-04-16T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <summary>National Institutes of Health — Closes 2026-08-06 — This initiative supports rigorous advanced research training programs for low- and middle-income country (LMIC) scientists on infectious diseases that pose a potential threat to the U.S. and present special opportunities for research that are not readily available in the U.S., such as unique resources, exposed or infected populations, or environmental conditions that impact transmission. Applicati…</summary>
+  </entry>
+  <entry>
+    <title>NIDCD Clinical Research Center Grant (P50 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/358863"/>
+    <id>urn:funding-finder:grants-gov:358863</id>
+    <updated>2025-09-15T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2026-10-03 — The National Institute on Deafness and Other Communication Disorders (NIDCD) invites applications for Clinical Research Center Grants designed to advance the diagnosis, prevention, treatment, and amelioration of human sensory and communication disorders. For this announcement, Clinical Research is defined as research involving individuals with a sensory and/or communication disorder, or data/tissu…</summary>
+  </entry>
+  <entry>
+    <title>NARMS Cooperative Agreement Program to Strengthen Antibiotic Resistance Surveillance in Retail Food Specimens</title>
+    <link href="https://www.grants.gov/search-results-detail/360006"/>
+    <id>urn:funding-finder:grants-gov:360006</id>
+    <updated>2025-07-11T00:00:00Z</updated>
+    <author><name>Food and Drug Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>Food and Drug Administration — Closes 2027-04-01 — This Funding Opportunity Announcement (FOA) issued by the Food and Drug Administration (FDA), Center for Veterinary Medicine (CVM), builds upon the National Antimicrobial Resistance Monitoring System (NARMS) which was initiated in 1996 as one of the key activities in a national action plan to combat antibiotic resistance threats. The purpose of this FOA is to protect and promote public health by e…</summary>
+  </entry>
+  <entry>
+    <title>Pilot Studies of Biological, Behavioral and Social Mechanisms Contributing to HIV Pathogenesis Within the Mission of NIDDK (R21 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/358082"/>
+    <id>urn:funding-finder:grants-gov:358082</id>
+    <updated>2025-01-08T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Health equity"/>
+    <category term="Infectious disease"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health — Closes 2027-11-16 — This Notice of Funding Opportunity (NOFO) invites applications for innovative basic and translational pilot research projects within the mission of the NIDDK that are aligned with NIH HIV/AIDS research priorities. These priorities were most recently outlined by the NIH Office of AIDS Research (OAR) in NOT-20-018, UPDATE: NIH HIV/AIDS Research Priorities and Guidelines for Determining HIV/AIDS Fund…</summary>
+  </entry>
+  <entry>
+    <title>Translational Efforts to Advance Gene-based Therapies for Ultra-Rare Neurological and Neuromuscular Disorders (U01 - Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357817"/>
+    <id>urn:funding-finder:grants-gov:357817</id>
+    <updated>2024-12-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Infectious disease"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health — Closes 2027-10-08 — The Ultra-Rare Gene-Based Therapy (URGenT) network supports Investigational New Drug (IND)-enabling studies and planning activities for First-in-Human (FIH) clinical testing of gene-based or transcript-directed therapeutics, such as oligonucleotides and viral-based gene therapies, for ultra-rare neurological or neuromuscular disorders. The goal of this announcement is to accelerate the development…</summary>
+  </entry>
+  <entry>
+    <title>Dissemination and Implementation Research in Health (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/356893"/>
+    <id>urn:funding-finder:grants-gov:356893</id>
+    <updated>2024-10-29T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2028-01-07 — The purpose of this Notice of Funding Opportunity (NOFO) is to support studies that will identify, develop, and/or test strategies for overcoming barriers to the adoption, adaptation, integration, sustainability, scale-up, and spread of evidence-based interventions, practices, programs, tools, treatments, guidelines, and policies (hereafter referred to as evidence-based interventions). Conversely,…</summary>
+  </entry>
+  <entry>
+    <title>Blueprint Neurotherapeutics Network (BPN): Biologic-based Drug Discovery and Development for Disorders of the Nervous System (UG3/UH3 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/356610"/>
+    <id>urn:funding-finder:grants-gov:356610</id>
+    <updated>2024-10-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <category term="Manufacturing"/>
+    <summary>National Institutes of Health — Closes 2027-08-18 — The Blueprint Neurotherapeutics Network for Biologics (BPN-Biologics) provides support for biologic-based therapeutic discovery and development, from lead optimization through phase I clinical testing. This Funding Opportunity Announcement (FOA) supports preclinical discovery and development of potential therapeutic Biotechnology Products and Biologics including, but not limited to, large biologic…</summary>
+  </entry>
+  <entry>
+    <title>BRAIN Initiative: Reagent Resources for Brain Cell Type-Specific Access to Broaden Distribution of Enabling Technologies for Neuroscience (U24 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/356530"/>
+    <id>urn:funding-finder:grants-gov:356530</id>
+    <updated>2024-09-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Manufacturing"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health — Closes 2027-06-15 — This Notice of Funding Opportunity Announcement (NOFO) from the NIH Brain Research through Advancing Innovative Neurotechnologies (BRAIN) Initiative is intended to support establishment of facilities at minority-serving institutions (MSIs) and Institutional Development Award (IDeA)-eligible institutions for scaled production and distribution of brain cell type-specific access and manipulation reag…</summary>
+  </entry>
+  <entry>
+    <title>Animal and Veterinary Innovation Centers (U18)</title>
+    <link href="https://www.grants.gov/search-results-detail/355044"/>
+    <id>urn:funding-finder:grants-gov:355044</id>
+    <updated>2024-06-20T00:00:00Z</updated>
+    <author><name>Food and Drug Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Technology development"/>
+    <summary>Food and Drug Administration — Closes 2028-05-12 — The purpose of this Funding Opportunity Announcement (FOA) is to solicit applications for inclusion as Animal and Veterinary Innovation Centers, which are intended to form long-term partnerships to address priority areas for FDA's Center for Veterinary Medicine (CVM). This includes CVM developing cooperative agreement(s) with academic research institutions (public and private) to: 1. Drive researc…</summary>
+  </entry>
+  <entry>
+    <title>Global Infectious Disease Research Training Program (D43 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/353590"/>
+    <id>urn:funding-finder:grants-gov:353590</id>
+    <updated>2024-04-17T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health — Closes 2026-08-06 — This Funding Opportunity Announcement (FOA) encourages joint applications for the Global Infectious Disease (GID) Research Training programs from U.S. and low- and middle-income country (LMIC) institutions. The application should propose a collaborative training program that will strengthen the capacity of a LMIC institution to conduct infectious disease research. FIC will support research-trainin…</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: Specific Pathogen Free Macaque Colonies to Support HIV/AIDS Research (U42 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/351920"/>
+    <id>urn:funding-finder:grants-gov:351920</id>
+    <updated>2024-01-22T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <summary>National Institutes of Health — Closes 2026-09-25 — The purpose of this Notice of Funding Opportunity (NOFO) is to provide continuing support for specific pathogen-free (SPF) macaque colonies previously funded under the auspices of PAR-21-089 and PAR-18-669 that support Human Immunodeficiency Virus (HIV)/Acquired Immunodeficiency Syndrome (AIDS) research. Breeding colonies are essential to sustain appropriate SPF macaques for research related to HI…</summary>
+  </entry>
+  <entry>
+    <title>Engineering of Biomedical Systems</title>
+    <link href="https://www.grants.gov/search-results-detail/348796"/>
+    <id>urn:funding-finder:grants-gov:348796</id>
+    <updated>2023-06-18T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation — Posted — The Engineering of Biomedical Systems program is part of the Engineering Biology and Health cluster, which also includes: 1) the Biophotonics program; 2) the Biosensing program; 3) the Cellular and Biochemical Engineering program; and 4) the Disability and Rehabilitation Engineering program.
+The goal of the Engineering of Biomedical Systems (EBMS) program is to provide opportunities for fundamenta…</summary>
+  </entry>
+  <entry>
+    <title>Department of Defense HIV/AIDS Prevention Program</title>
+    <link href="https://www.grants.gov/search-results-detail/343653"/>
+    <id>urn:funding-finder:grants-gov:343653</id>
+    <updated>2022-09-19T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Cancer"/>
+    <category term="Infectious disease"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Transportation"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2027-09-18 — ATTENTION: This announcement will be revised regularly to incorporate country specific narratives (Attachment 1 of the announcement) with information vital to the content of application. Potential applicants interested in applying to this announcement should click 'Subscribe' to be notified of future revisions. DoD HIV/AID Prevention Program's (DHAPP) objective, through the PEPFAR program, is to s…</summary>
+  </entry>
+  <entry>
+    <title>Plant Biotic Interactions</title>
+    <link href="https://www.grants.gov/search-results-detail/327047"/>
+    <id>urn:funding-finder:grants-gov:327047</id>
+    <updated>2020-05-14T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <summary>U.S. National Science Foundation — Posted — The Plant Biotic Interactions (PBI) program supports research on the processes that mediate beneficial and antagonistic interactions between plants and their viral, bacterial, oomycete, fungal, plant, and invertebrate symbionts, pathogens and pests. This joint NSF/NIFA program supports projects focused on current and emerging model and non-model systems, and agriculturally relevant plants. The pro…</summary>
+  </entry>
+  <entry>
+    <title>Biosensing</title>
+    <link href="https://www.grants.gov/search-results-detail/320536"/>
+    <id>urn:funding-finder:grants-gov:320536</id>
+    <updated>2019-09-12T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>U.S. National Science Foundation — Posted — The Biosensing program is part of the Engineering Biology and Health cluster, which also includes 1) the Biophotonics program; 2) the Cellular and Biochemical Engineering program; 3) the Disability and Rehabilitation Engineering program; and 4) the Engineering of Biomedical Systems program.
+The Biosensing program supports fundamental engineering research in the monitoring, identification and/or qu…</summary>
+  </entry>
+</feed>

@@ -1,0 +1,692 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Funding Finder — Arts and culture</title>
+  <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml" rel="self"/>
+  <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
+  <id>https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml</id>
+  <updated>2026-07-27T14:02:03Z</updated>
+  <generator>Funding Finder</generator>
+  <entry>
+    <title>Improved Drug Susceptibility Testing (DST) for Mycobacteria</title>
+    <link href="https://www.grants.gov/search-results-detail/362948"/>
+    <id>urn:funding-finder:grants-gov:362948</id>
+    <updated>2027-03-12T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-05-28 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting research to develop improved drug susceptibility tests (DSTs) for mycobacterial drugs, including those currently used for treatment of tuberculosis (TB) and clinically important non-tuberculous mycobacterial (NTM) infections, new drugs and drugs in late-stage clinical development. TB is a l…</summary>
+  </entry>
+  <entry>
+    <title>Continuing Enhanced National Surveillance for Prion Diseases in the United States</title>
+    <link href="https://www.grants.gov/search-results-detail/363153"/>
+    <id>urn:funding-finder:grants-gov:363153</id>
+    <updated>2026-12-29T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCEZID</name></author>
+    <category term="Arts and culture"/>
+    <category term="Neuroscience"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control - NCEZID — Closes 2027-03-27 — The CDC announces the availability of FY 2027 funds for a cooperative agreement to continue enhanced national surveillance for human prion diseases, also known as transmissible spongiform encephalopathies (TSEs), in the United States. The purpose is to continue an active surveillance program to help confirm suspected and clinically diagnosed cases of human prion disease and to monitor the occurren…</summary>
+  </entry>
+  <entry>
+    <title>NIOSH Small Research Grant Program (R03)</title>
+    <link href="https://www.grants.gov/search-results-detail/363299"/>
+    <id>urn:funding-finder:grants-gov:363299</id>
+    <updated>2026-12-17T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Arts and culture"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-16 — The purpose of the R03 grant program is (1) to develop an understanding of the risks and conditions associated with occupational diseases and injuries, (2) to explore methods for reducing risks and preventing or minimizing exposure to hazardous conditions in the workplace, and (3) to translate significant scientific findings into prevention practices and products that will effectively reduce work-…</summary>
+  </entry>
+  <entry>
+    <title>Tribal Maternal, Infant, and Early Childhood Home Visiting Program: Development and Implementation Grants</title>
+    <link href="https://www.grants.gov/search-results-detail/363222"/>
+    <id>urn:funding-finder:grants-gov:363222</id>
+    <updated>2026-12-01T00:00:00Z</updated>
+    <author><name>Administration for Children and Families</name></author>
+    <category term="Arts and culture"/>
+    <summary>Administration for Children and Families — Closes 2027-03-02 — The Office of Early Childhood Development (ECD) within the Administration for Children and Families (ACF) will be soliciting applications for the Fiscal Year 2027 Tribal Maternal, Infant, and Early Childhood Home Visiting (MIECHV) Program: Development and Implementation Grants. Funds will support 5-year cooperative agreements between ACF and federally recognized Indian tribes (or a consortium of I…</summary>
+  </entry>
+  <entry>
+    <title>Precision and Systems Biology to Uncover the Link Between Chronic and Infectious Diseases</title>
+    <link href="https://www.grants.gov/search-results-detail/362952"/>
+    <id>urn:funding-finder:grants-gov:362952</id>
+    <updated>2026-11-06T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-01-22 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
+  </entry>
+  <entry>
+    <title>NIAMS Clinical Trial Implementation Cooperative Agreement</title>
+    <link href="https://www.grants.gov/search-results-detail/362753"/>
+    <id>urn:funding-finder:grants-gov:362753</id>
+    <updated>2026-11-02T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health — Closes 2027-07-02 — The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for the Clinical Trial Cooperative Agreement Program within the mission areas of the institute. This Notice of Funding Opportunity (NOFO) solicits cooperative agreement applications for implementation of investigator-initiated, single o…</summary>
+  </entry>
+  <entry>
+    <title>NIOSH Miner Safety and Health Training Program - Western United States – U60</title>
+    <link href="https://www.grants.gov/search-results-detail/363232"/>
+    <id>urn:funding-finder:grants-gov:363232</id>
+    <updated>2026-10-27T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-01-26 — BackgroundDespite advances in technology and improvements in work environments, mining remains one of the most challenging and hazardous occupations in the United States. The industry continues to experience a fatality rate nearly three times higher than the national average for all industries, according to the U.S. Bureau of Labor Statistics (BLS). Public MSHA data show that in 2025, the U.S. min…</summary>
+  </entry>
+  <entry>
+    <title>Improving Linkage to Care for People with Opioid Use Disorder (U01)</title>
+    <link href="https://www.grants.gov/search-results-detail/363058"/>
+    <id>urn:funding-finder:grants-gov:363058</id>
+    <updated>2026-10-01T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Arts and culture"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-01 — The Centers for Disease Control and Prevention’s (CDC) National Center for Injury Prevention and Control (NCIPC, Injury Center) is soliciting investigator-initiated research to develop, implement, and rigorously evaluate strategies to address and overcome barriers to implementing evidence-based linkage to care services in health care settings. Strategies should focus on individuals with opioid use…</summary>
+  </entry>
+  <entry>
+    <title>Restoring Joint Health and Function to Reduce Pain (RE-JOIN) 2.0</title>
+    <link href="https://www.grants.gov/search-results-detail/361186"/>
+    <id>urn:funding-finder:grants-gov:361186</id>
+    <updated>2026-10-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Data science"/>
+    <summary>National Institutes of Health — Closes 2026-12-01 — The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS), in conjunction with other NIH Institutes and Centers (ICs) as a part of the congressionally mandated NIH Helping to End Addiction Long Term (HEAL) initiative intends to publish a Notice of Funding Opportunity (NOFO) to leverage and accelerate the progress achieved in the Restoring Joint Health and Function to Reduce…</summary>
+  </entry>
+  <entry>
+    <title>Rigorously Evaluating Approaches to Prevent Child Sexual Abuse and Problematic Sexual Behavior among Youth</title>
+    <link href="https://www.grants.gov/search-results-detail/363147"/>
+    <id>urn:funding-finder:grants-gov:363147</id>
+    <updated>2026-10-01T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-01 — The Centers for Disease Control and Prevention's (CDC) National Center for Injury Prevention and Control (NCIPC) is soliciting investigator-initiated gold standard research proposals to rigorously evaluate programs and policies for their impact on primary prevention of child sexual abuse (CSA) or problematic sexual behavior (PSB) among youth. For the purposes of this NOFO:CSA is defined as sexual …</summary>
+  </entry>
+  <entry>
+    <title>Supporting Implementation of the Labor Provisions of Trade Arrangements for American Worker Competitiveness</title>
+    <link href="https://www.grants.gov/search-results-detail/363212"/>
+    <id>urn:funding-finder:grants-gov:363212</id>
+    <updated>2026-09-15T00:00:00Z</updated>
+    <author><name>Bureau of International Labor Affairs</name></author>
+    <category term="Arts and culture"/>
+    <summary>Bureau of International Labor Affairs — Closes 2026-10-15 — This is a Notice of Intent/Forecast only. The Bureau of International Labor Affairs (ILAB), DOL intends to award two (2) cooperative agreements ($18 million, total costs subject to the availability of Federal funds) to fund technical assistance projects to improve labor law enforcement in targeted sectors of key trade partner countries to ensure unfair competition does not undercut American worker…</summary>
+  </entry>
+  <entry>
+    <title>The NIA Genetics of Alzheimer's Disease Data Storage Site (NIAGADS)</title>
+    <link href="https://www.grants.gov/search-results-detail/362454"/>
+    <id>urn:funding-finder:grants-gov:362454</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health — Closes 2026-11-01 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop, operate, and sustain a cloud-based data storage and computing platform that democratizes access to large-scale Alzheimer’s disease (AD) and AD-related dementias (ADRD) genetic and genomic data. The platform must be secure, scalable, and interoperable. The platform wil…</summary>
+  </entry>
+  <entry>
+    <title>Exploratory Clinical Trial Grants in Arthritis and Musculoskeletal and Skin Diseases</title>
+    <link href="https://www.grants.gov/search-results-detail/362752"/>
+    <id>urn:funding-finder:grants-gov:362752</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health — Closes 2027-03-04 — The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for Exploratory Clinical Trials Grants Program in the mission areas of NIAMS. The goal of the NIAMS clinical trial program is to support research leading to the prevention or reduction of symptoms and improve outcomes and function in pa…</summary>
+  </entry>
+  <entry>
+    <title>HIV/AIDS Clinical Trials Network Laboratory Centers</title>
+    <link href="https://www.grants.gov/search-results-detail/361820"/>
+    <id>urn:funding-finder:grants-gov:361820</id>
+    <updated>2026-08-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-01-22 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center, and Laboratory Center (LC) working with Clinical Trials Units, to test prevention and treatment strategies and conduct implementation research designed to end t…</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: NIGMS Mature Synchrotron Resources (MSR) for Structural Biology (P30 - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/360947"/>
+    <id>urn:funding-finder:grants-gov:360947</id>
+    <updated>2026-08-13T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health — Closes 2026-10-13 — The NIGMS Mature Synchrotron Resources for Structural Biology program supports mature technologies at synchrotron facilities that provide biomedical researchers with state-of-the-art X-ray beamlines, hands-on user training, and expert assistance to generate and analyze structural biology data. NIGMS intends to reissue a Notice of Funding Opportunity to continue to support these important national …</summary>
+  </entry>
+  <entry>
+    <title>Novel Approaches to Advance Precision Aging and Cognitive Health</title>
+    <link href="https://www.grants.gov/search-results-detail/360910"/>
+    <id>urn:funding-finder:grants-gov:360910</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health — Closes 2026-10-06 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that develop or incorporate novel, cutting-edge study designs/methods/analytic approaches through the use of machine learning, artificial intelligence, and adaptive designs to allow the discovery of health/function profiles at the level of the individual and that could lead to th…</summary>
+  </entry>
+  <entry>
+    <title>BRAIN Initiative Cell Atlas Network (BICAN): Coordinating Unit for Biostatistics, Informatics, and Engagement (CUBIE)</title>
+    <link href="https://www.grants.gov/search-results-detail/361449"/>
+    <id>urn:funding-finder:grants-gov:361449</id>
+    <updated>2026-08-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Data science"/>
+    <category term="Environmental science"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health — Closes 2026-10-01 — The National Institute of Mental Health (NIMH), with other NIH Institutes and Centers (ICs), intends to publish a notice of funding opportunity (NOFO) to solicit research applications for the BRAIN Initiative Cell Atlas Network (BICAN) Coordinating Unit for Biostatistics, Informatics, and Engagement (CUBIE). In accordance with NIH standard peer-review processes, the application(s) will be peer-rev…</summary>
+  </entry>
+  <entry>
+    <title>The NIDDK Disorders of Gastrointestinal Interoception Consortium Clinical Centers (DGIC)</title>
+    <link href="https://www.grants.gov/search-results-detail/360623"/>
+    <id>urn:funding-finder:grants-gov:360623</id>
+    <updated>2026-08-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <summary>National Institutes of Health — Closes 2026-11-01 — The National Institute of Diabetes and Digestive Diseases and Nutrition (NIDDK) seeks to advance its mission by continuing the work of the NIDDK Gastroparesis Consortium (GpCRC) but also to expand its scope. The collaborative efforts of the GpCRC provided a large database, the Gastroparesis Registry, which is located in the NIDDK central repository and contains information on patients with symptom…</summary>
+  </entry>
+  <entry>
+    <title>The NIDDK Disorders of Gastrointestinal Interoception Consortium Clinical Centers (DGIC)</title>
+    <link href="https://www.grants.gov/search-results-detail/360625"/>
+    <id>urn:funding-finder:grants-gov:360625</id>
+    <updated>2026-08-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <summary>National Institutes of Health — Closes 2026-11-01 — The National Institute of Diabetes and Digestive Diseases and Nutrition (NIDDK) seeks to advance its mission by continuing the work of the NIDDK Gastroparesis Consortium (GpCRC) but also to expand its scope. The collaborative efforts of the GpCRC provided a large database, the Gastroparesis Registry, which is located in the NIDDK central repository and contains information on patients with symptom…</summary>
+  </entry>
+  <entry>
+    <title>AI Partnership &amp; Exchange for Tech Leaders (APEX)</title>
+    <link href="https://www.grants.gov/search-results-detail/363315"/>
+    <id>urn:funding-finder:grants-gov:363315</id>
+    <updated>2026-07-26T00:00:00Z</updated>
+    <author><name>U.S. Mission to Saudi Arabia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>U.S. Mission to Saudi Arabia — Closes 2026-09-08 — Program PurposeThe U.S. Embassy Riyadh Public Diplomacy Section is accepting applications for a cooperative agreement to run the AI Partnership &amp; Exchange for Tech Leaders. The goal of this program is to connect rising Saudi Artificial Intelligence (AI) leaders with American experts in business, tech, and academia. This initiative helps participants build professional networks, study U.S. technolo…</summary>
+  </entry>
+  <entry>
+    <title>Pax Silica Artificial Intelligence Assistance Project</title>
+    <link href="https://www.grants.gov/search-results-detail/363312"/>
+    <id>urn:funding-finder:grants-gov:363312</id>
+    <updated>2026-07-24T00:00:00Z</updated>
+    <author><name>Bureau of Economic and Business Affairs</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Manufacturing"/>
+    <summary>Bureau of Economic and Business Affairs — Closes 2026-08-20 — Leveraging foreign assistance from the Pax Fund, this NOFO launches the Pax Silica Artificial Intelligence (AI) Assistance Project—a historic first-of-its-kind programmatic initiative to strengthen global AI supply chain security by creating a trusted supply chain credentialing and provenance platform to secure the AI supply chain in partner countries and economies. This NOFO seeks to fund the est…</summary>
+  </entry>
+  <entry>
+    <title>American Innovation Hub: AI &amp; Digital Skills for the Creative &amp; Tech Economy</title>
+    <link href="https://www.grants.gov/search-results-detail/363293"/>
+    <id>urn:funding-finder:grants-gov:363293</id>
+    <updated>2026-07-23T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Technology development"/>
+    <summary>U.S. Mission to Indonesia — Closes 2026-08-30 — Indonesia is ASEAN’s largest economy and most populous nation, with a young, fast-growing digital population that is rapidly adopting artificial intelligence and creative-technology tools. The choices this generation makes about which technologies, standards, and platforms to build on will shape Indonesia’s digital economy for decades. Demand for trusted, high-quality AI tools is outpacing access …</summary>
+  </entry>
+  <entry>
+    <title>NRCS' Feral Swine Eradication and Control Pilot Program Fiscal Year (FY) 2026</title>
+    <link href="https://www.grants.gov/search-results-detail/363285"/>
+    <id>urn:funding-finder:grants-gov:363285</id>
+    <updated>2026-07-23T00:00:00Z</updated>
+    <author><name>Natural Resources Conservation Service</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Environmental science"/>
+    <category term="Water"/>
+    <summary>Natural Resources Conservation Service — Closes 2026-09-21 — The purpose of the Feral Swine Eradication and Control Project (FSCP) is to respond to the threat feral swine pose to agriculture, native ecosystems, and human and animal health. Feral swine are a destructive, non-native, invasive species and their populations have expanded across the United States since the 1980’s. Over an estimated $3.4 billion in damage, including agricultural, is caused by fer…</summary>
+  </entry>
+  <entry>
+    <title>U.S-Nigeria Creative, Digital, &amp; Innovation Economy Initiative</title>
+    <link href="https://www.grants.gov/search-results-detail/363269"/>
+    <id>urn:funding-finder:grants-gov:363269</id>
+    <updated>2026-07-22T00:00:00Z</updated>
+    <author><name>U.S. Mission to Nigeria</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <summary>U.S. Mission to Nigeria — Closes 2026-08-20 — The U.S. Department of State’s U.S. Consulate General Lagos announces an open competition to implement a program to increase two-way trade and investment between the United States and Nigeria by building commercial relationships, professional knowledge, legal infrastructure, and institutional connections that enable U.S. companies and Nigerian creative/digital professionals to partner and grow tog…</summary>
+  </entry>
+  <entry>
+    <title>Qissati ma3 America</title>
+    <link href="https://www.grants.gov/search-results-detail/363270"/>
+    <id>urn:funding-finder:grants-gov:363270</id>
+    <updated>2026-07-22T00:00:00Z</updated>
+    <author><name>U.S. Mission to Jordan</name></author>
+    <category term="Arts and culture"/>
+    <summary>U.S. Mission to Jordan — Closes 2026-08-31 — The U.S. Department of State’s Embassy Amman announces an open competition to design and implement Qissati ma3 America —a digital storytelling campaign that shares the firsthand experiences of Jordanian alumni of U.S. Department of State-funded exchange programs. Jordan is home to thousands of alumni of U.S. government funded exchange programs — professionals, policymakers, entrepreneurs, educator…</summary>
+  </entry>
+  <entry>
+    <title>Reel American: The Road to the Olympic Rings</title>
+    <link href="https://www.grants.gov/search-results-detail/363271"/>
+    <id>urn:funding-finder:grants-gov:363271</id>
+    <updated>2026-07-22T00:00:00Z</updated>
+    <author><name>U.S. Mission to Jordan</name></author>
+    <category term="Arts and culture"/>
+    <summary>U.S. Mission to Jordan — Closes 2026-08-31 — The U.S. Department of State’s Embassy Amman announces an open competition to implement a program titled Reel American: The Road to the Olympic Rings. Reel American is a 21-month public diplomacy film program designed to showcase American excellence in sports and build excitement ahead of the 2028 Olympic and Paralympic Games in Los Angeles. Beginning in October 2026 and continuing through June 20…</summary>
+  </entry>
+  <entry>
+    <title>Young Trilateral Leaders (YTL) Summit</title>
+    <link href="https://www.grants.gov/search-results-detail/363267"/>
+    <id>urn:funding-finder:grants-gov:363267</id>
+    <updated>2026-07-21T00:00:00Z</updated>
+    <author><name>U.S. Mission to South Korea</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Transportation"/>
+    <summary>U.S. Mission to South Korea — Closes 2026-08-05 — Funding Opportunity Title: 2027 Young Trilateral Leaders (YTL) Summit Funding Opportunity Number: PD-SEOUL-FY26-04 Deadline for Applications: Wednesday, August 5, 2026, 11:59 p.m. (GMT+9) CFDA Number: 19.040 Type of Funding: FY26 Smith Mundt Public Diplomacy Funds Total Amount Available: $250,000 This notice is subject to availability of funding. This NOFO is currently listed under Assistance List…</summary>
+  </entry>
+  <entry>
+    <title>Access Alumni Outreach and Engagement and English Access Scholarship Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363256"/>
+    <id>urn:funding-finder:grants-gov:363256</id>
+    <updated>2026-07-21T00:00:00Z</updated>
+    <author><name>U.S. Mission to Kazakhstan</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <summary>U.S. Mission to Kazakhstan — Closes 2026-08-21 — Funding Instrument Type: Cooperative agreement. PDS will be involved in the selection of participants, review of proposed publications, or more. Project Performance Period: Proposed projects should be completed in 20 months or less. This notice is subject to availability of funding. The Public Diplomacy Section reserves the right to award less or more than the funds described under circumstances d…</summary>
+  </entry>
+  <entry>
+    <title>Unlocking Dataset Value for AI-Enabled Scientific Discovery</title>
+    <link href="https://www.grants.gov/search-results-detail/363268"/>
+    <id>urn:funding-finder:grants-gov:363268</id>
+    <updated>2026-07-21T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation — Closes 2026-11-04 — This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
+  </entry>
+  <entry>
+    <title>CyberNext: Advance Cybersecurity and AI Readiness</title>
+    <link href="https://www.grants.gov/search-results-detail/363249"/>
+    <id>urn:funding-finder:grants-gov:363249</id>
+    <updated>2026-07-20T00:00:00Z</updated>
+    <author><name>U.S. Mission to Albania</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <summary>U.S. Mission to Albania — Closes 2026-08-20 — Project Background, Goals, and Objectives Albania has experienced multiple cyberattacks in recent years, placing increasingly digital government services and critical institutions at significant risk. While Albania is actively embracing AI, substantial skill gaps remain – gaps that American expertise is uniquely positioned to address. The “CyberNext: Advanced Cybersecurity and AI Readiness” progra…</summary>
+  </entry>
+  <entry>
+    <title>Education and Outreach to Tribal Producers through the Tribal Food Safety Alliance</title>
+    <link href="https://www.grants.gov/search-results-detail/363239"/>
+    <id>urn:funding-finder:grants-gov:363239</id>
+    <updated>2026-07-20T00:00:00Z</updated>
+    <author><name>Food and Drug Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <summary>Food and Drug Administration — Closes 2026-08-20 — The primary purpose of this program is to develop and provide education and/or training, and outreach regarding FDA's Produce Safety Rule to produce farmers who are members of federally recognized Tribes. The program is expected to help Tribal farmers access appropriate technical assistance and may include Tribal farmers who are not currently required to comply with the rule but are interested in …</summary>
+  </entry>
+  <entry>
+    <title>GameON – U.S.-Albania E-Sports and Innovation</title>
+    <link href="https://www.grants.gov/search-results-detail/363247"/>
+    <id>urn:funding-finder:grants-gov:363247</id>
+    <updated>2026-07-20T00:00:00Z</updated>
+    <author><name>U.S. Mission to Albania</name></author>
+    <category term="Arts and culture"/>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Technology development"/>
+    <summary>U.S. Mission to Albania — Closes 2026-08-20 — 1. Project Background, Goals, and Objectives Albania's youth face a rapidly evolving digital economy that demands advanced technical skills, entrepreneurial mindsets, and exposure to international industry standards. Albanian interest in gaming – a global market forecasted to surpass $745 billion by 2030, in which the United States is leading – is high, presenting an opportunity to increase Albani…</summary>
+  </entry>
+  <entry>
+    <title>Artificial Intelligence for American Competitiveness and Economic Security (AI-ACES) in South Asia</title>
+    <link href="https://www.grants.gov/search-results-detail/363227"/>
+    <id>urn:funding-finder:grants-gov:363227</id>
+    <updated>2026-07-17T00:00:00Z</updated>
+    <author><name>Bureau of South and Central Asian Affairs</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <summary>Bureau of South and Central Asian Affairs — Closes 2026-08-02 — The program within SCA will aim to deploy American AI technology securely in U.S. partners’ strategic economic sectors and infrastructure.  The specific strategic economic sector(s) and organizations (including government, public institutions like utilities, and private companies) targeted in each country for support would be developed in consultation with State Department and host country governm…</summary>
+  </entry>
+  <entry>
+    <title>Tribal Personal Responsibility Education Program (Tribal PREP)</title>
+    <link href="https://www.grants.gov/search-results-detail/361987"/>
+    <id>urn:funding-finder:grants-gov:361987</id>
+    <updated>2026-07-17T00:00:00Z</updated>
+    <author><name>Administration for Children &amp; Families - ACYF/FYSB</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>Administration for Children &amp; Families - ACYF/FYSB — Closes 2026-08-17 — Tribal PREP competitively funds projects that educate American Indian/Alaska Native (AI/AN) youth ages 10-19, and expectant and parenting youth under age 21, on both abstinence and contraception for the prevention of pregnancy, sexually transmitted infections (STIs), and HIV and promote successful transition of youth to adulthood through education on key adulthood preparation subjects (APS). Proje…</summary>
+  </entry>
+  <entry>
+    <title>Personal Responsibility Education Innovative Strategies (PREIS)</title>
+    <link href="https://www.grants.gov/search-results-detail/361986"/>
+    <id>urn:funding-finder:grants-gov:361986</id>
+    <updated>2026-07-17T00:00:00Z</updated>
+    <author><name>Administration for Children &amp; Families - ACYF/FYSB</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <summary>Administration for Children &amp; Families - ACYF/FYSB — Closes 2026-08-18 — The Personal Responsibility Education Program-Innovative Strategies (PREIS) builds the evidence base for adolescent pregnancy prevention interventions that are effective with high risk and vulnerable youth populations and addresses gaps with new promising program models. PREIS funds rigorous impact evaluations of innovative youth pregnancy prevention interventions that target services to high-risk…</summary>
+  </entry>
+  <entry>
+    <title>Annual Program Statement for U.S. Presentation at International Architecture Biennales</title>
+    <link href="https://www.grants.gov/search-results-detail/363225"/>
+    <id>urn:funding-finder:grants-gov:363225</id>
+    <updated>2026-07-17T00:00:00Z</updated>
+    <author><name>Bureau Of Educational and Cultural Affairs</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <summary>Bureau Of Educational and Cultural Affairs — Closes 2099-01-01 — The U.S. Department of State, Bureau of Educational and Cultural Affairs, Cultural Programs Division (ECA/PE/C/CU) seeks to advance international understanding of American values by exposing foreign audiences to innovative and compelling architectural designs that reflect U.S. foreign policy and foster international dialogue on shared global challenges.</summary>
+  </entry>
+  <entry>
+    <title>Developing Civilizational Bonds, Democratic Resilience, and Rule of Law in Europe</title>
+    <link href="https://www.grants.gov/search-results-detail/363207"/>
+    <id>urn:funding-finder:grants-gov:363207</id>
+    <updated>2026-07-16T00:00:00Z</updated>
+    <author><name>Bureau of Democracy Human Rights and Labor</name></author>
+    <category term="Arts and culture"/>
+    <summary>Bureau of Democracy Human Rights and Labor — Closes 2026-08-12 — DRL requests proposals to strengthen and develop democratic resilience, rule of law, freedom of speech and freedom of the press, and the defense of human rights in Europe through research, conferences, cultural engagements, and support for civil society to address national sovereignty, migration, censorship, and lawfare challenges in line with shared political philosophy, law, and our common Weste…</summary>
+  </entry>
+  <entry>
+    <title>Title V Competitive Sexual Risk Avoidance Education</title>
+    <link href="https://www.grants.gov/search-results-detail/362128"/>
+    <id>urn:funding-finder:grants-gov:362128</id>
+    <updated>2026-07-16T00:00:00Z</updated>
+    <author><name>Administration for Children &amp; Families - ACYF/FYSB</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <summary>Administration for Children &amp; Families - ACYF/FYSB — Closes 2026-08-17 — The Title V Competitive SRAE program competitively funds projects to implement sexual risk avoidance education that teaches youth ages 10-19 how to voluntarily refrain from non-marital sexual activity. Projects must: 1) use medically accurate information referencing peer-reviewed publications by educational, scientific, governmental, or health organizations; 2) implement an evidence-based approach…</summary>
+  </entry>
+  <entry>
+    <title>American Center Yangon (ACY) Small Grants Competition</title>
+    <link href="https://www.grants.gov/search-results-detail/363184"/>
+    <id>urn:funding-finder:grants-gov:363184</id>
+    <updated>2026-07-15T00:00:00Z</updated>
+    <author><name>U.S. Mission to Myanmar</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>U.S. Mission to Myanmar — Closes 2026-08-10 — 1. Project Background, Goals and Objectives American Center Yangon Small Grants’ projects must clearly advance America First foreign policy principles by demonstrating how the proposed activities make the United States safer, stronger, and more prosperous, while celebrating Freedom250 and American excellence. Priority will be given to projects that deliver tangible, measurable benefits to U.S. int…</summary>
+  </entry>
+  <entry>
+    <title>Jefferson Center Mandalay (JCM) Small Grants Competition</title>
+    <link href="https://www.grants.gov/search-results-detail/363185"/>
+    <id>urn:funding-finder:grants-gov:363185</id>
+    <updated>2026-07-15T00:00:00Z</updated>
+    <author><name>U.S. Mission to Myanmar</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>U.S. Mission to Myanmar — Closes 2026-08-10 — 1. Project Background, Goals and Objectives Jefferson Center Mandalay Small Grants’ projects must clearly advance America First foreign policy principles by demonstrating how the proposed activities make the United States safer, stronger, and more prosperous, while celebrating Freedom250 and American excellence. Priority will be given to projects that deliver tangible, measurable benefits to U.S. …</summary>
+  </entry>
+  <entry>
+    <title>Global Digital Threat Lab</title>
+    <link href="https://www.grants.gov/search-results-detail/363201"/>
+    <id>urn:funding-finder:grants-gov:363201</id>
+    <updated>2026-07-15T00:00:00Z</updated>
+    <author><name>Bureau of Democracy Human Rights and Labor</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Cybersecurity"/>
+    <summary>Bureau of Democracy Human Rights and Labor — Closes 2026-08-13 — Freedom of expression online faces threats globally from authoritarian governments employing sophisticated technology to restrict speech, control the flow of information, and chill dissenting voices. These challenges infringe on privacy; access to information; and the exercise of freedoms of expression, peaceful assembly, association, and religion or belief online. The misuse of commercial spyware…</summary>
+  </entry>
+  <entry>
+    <title>Public Wireless Supply Chain Innovation Fund Grant Program – Solutions for AI-Native RAN</title>
+    <link href="https://www.grants.gov/search-results-detail/363179"/>
+    <id>urn:funding-finder:grants-gov:363179</id>
+    <updated>2026-07-14T00:00:00Z</updated>
+    <author><name>National Telecommunications and Information Admini</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <summary>National Telecommunications and Information Admini — Closes 2026-09-09 — This NOFO is the fourth issued under NTIA’s Public Wireless Supply Chain Innovation Fund (PWSCIF or Innovation Fund). Titled “Solutions for AI-Native RAN,” the goal of this NOFO is to support the development of a secure compute environment to enable or leverage native artificial intelligence (“AI”) capabilities in the Radio Access Network (RAN) that generate revenue for operators, cost savings, an…</summary>
+  </entry>
+  <entry>
+    <title>EducationUSA AI/STEM and Sports Diplomacy Grant</title>
+    <link href="https://www.grants.gov/search-results-detail/363123"/>
+    <id>urn:funding-finder:grants-gov:363123</id>
+    <updated>2026-07-09T00:00:00Z</updated>
+    <author><name>U.S. Mission to Georgia</name></author>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>U.S. Mission to Georgia — Closes 2026-08-10 — This funding opportunity supports the America First agenda by strengthening U.S. competitiveness, expanding American universities' international recruitment pipelines and building lasting ties between Georgian talent and U.S. institutions through two complementary initiatives: the EducationUSA Sports Pathways Initiative and the EducationUSA AI and Innovation Hubs. Both proposals under this funding…</summary>
+  </entry>
+  <entry>
+    <title>Freedom 250 Great American State Fair Initiative – Abu Dhabi</title>
+    <link href="https://www.grants.gov/search-results-detail/363119"/>
+    <id>urn:funding-finder:grants-gov:363119</id>
+    <updated>2026-07-09T00:00:00Z</updated>
+    <author><name>U.S. Mission to United Arab Emirates</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to United Arab Emirates — Closes 2026-08-10 — The U.S. Embassy Abu Dhabi, Public Diplomacy Section, announces an open competition to develop and implement the programmatic elements of a three-day Freedom 250 Great American State Fair. The Fair will showcase authentic American heartland culture, creativity, entrepreneurship, entertainment, culinary traditions, and music through immersive public programming designed for UAE audiences. Proposals…</summary>
+  </entry>
+  <entry>
+    <title>Freedom250 Advancing U.S. Artificial Intelligence Leadership in Algeria</title>
+    <link href="https://www.grants.gov/search-results-detail/363121"/>
+    <id>urn:funding-finder:grants-gov:363121</id>
+    <updated>2026-07-09T00:00:00Z</updated>
+    <author><name>U.S. Mission to Algeria</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Technology development"/>
+    <summary>U.S. Mission to Algeria — Closes 2026-08-10 — A. ELIGIBILITY 1. Eligible Applicants The following organizations are eligible to apply: ● Not-for-profit organizations, including think tanks and civil society/non-governmental organizations ● Public and private educational institutions ● Public International Organizations and Governmental institutions For-profit entities, even those that may fall into the categories listed above, are not eligibl…</summary>
+  </entry>
+  <entry>
+    <title>Economic Advancement Grants for Local Empowerment (EAGLE)</title>
+    <link href="https://www.grants.gov/search-results-detail/361908"/>
+    <id>urn:funding-finder:grants-gov:361908</id>
+    <updated>2026-07-08T00:00:00Z</updated>
+    <author><name>Administration for Children and Families - ANA</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <summary>Administration for Children and Families - ANA — Closes 2026-08-07 — The Administration for Native Americans anticipates announcing the availability of funds and requesting applications for EAGLE: Economic Advancement Grants for Local Empowerment, supporting socioeconomic and cultural success for Native communities through business creation in regenerative agriculture, artificial intelligence, tribal energy sovereignty, and human capital development. The primary go…</summary>
+  </entry>
+  <entry>
+    <title>Kinship Navigator Programs: Replication and Tribal Adaptation​​</title>
+    <link href="https://www.grants.gov/search-results-detail/361961"/>
+    <id>urn:funding-finder:grants-gov:361961</id>
+    <updated>2026-07-08T00:00:00Z</updated>
+    <author><name>Administration for Children and Families - ACYF/CB</name></author>
+    <category term="Arts and culture"/>
+    <summary>Administration for Children and Families - ACYF/CB — Closes 2026-08-07 — The goal of this funding opportunity is to increase the number of state and tribal child welfare agencies that replicate and implement an evidence-based Kinship Navigator Program (KNP) rated as promising, supported, or well-supported by the Title IV-E Prevention Services Clearinghouse. Tribal child welfare agencies may replicate one of the approved models and adapt program manuals as needed to ali…</summary>
+  </entry>
+  <entry>
+    <title>U.S. Embassy Suva Annual Program Statement for Fiji, Kiribati, Nauru, and Tuvalu</title>
+    <link href="https://www.grants.gov/search-results-detail/363104"/>
+    <id>urn:funding-finder:grants-gov:363104</id>
+    <updated>2026-07-08T00:00:00Z</updated>
+    <author><name>U.S. Mission to Fiji</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <summary>U.S. Mission to Fiji — Closes 2026-08-08 — The U.S. Department of State’s Embassy Suva announces an open competition to implement programs that advance U.S. foreign policy priorities by strengthening economic, scientific, educational, cultural, and security ties between the United States and Fiji, Kiribati, Nauru and/or Tuvalu. This Annual Program Statement (APS) invites proposals from eligible organizations or individuals that will deepen…</summary>
+  </entry>
+  <entry>
+    <title>Muscat - Annual Program Statement (APS)- PD Small Grants Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363078"/>
+    <id>urn:funding-finder:grants-gov:363078</id>
+    <updated>2026-07-08T00:00:00Z</updated>
+    <author><name>U.S. Mission to Oman</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Community development"/>
+    <category term="Cybersecurity"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <summary>U.S. Mission to Oman — Closes 2026-08-09 — The Public Diplomacy Section of U.S. Embassy Muscat announces an open competition to support projects that advance U.S. foreign policy priorities in Oman while strengthening the long-standing partnership between the United States and the Sultanate of Oman. This Annual Program Statement outlines strategic funding priorities, eligibility criteria, and application guidelines for grants ranging from $…</summary>
+  </entry>
+  <entry>
+    <title>Public Diplomacy Small Grants Competition</title>
+    <link href="https://www.grants.gov/search-results-detail/363079"/>
+    <id>urn:funding-finder:grants-gov:363079</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>U.S. Mission to Myanmar</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>U.S. Mission to Myanmar — Closes 2026-07-31 — 1. Project Background, Goals, and Objectives PD small grants’ projects must clearly advance America First foreign policy principles by demonstrating how the proposed activities make the United States safer, stronger, and more prosperous, while celebrating Freedom250 and American excellence. Priority will be given to projects that deliver tangible, measurable benefits to U.S. interests; elevate U.S…</summary>
+  </entry>
+  <entry>
+    <title>FY26 American Spaces Vietnam Programming</title>
+    <link href="https://www.grants.gov/search-results-detail/363080"/>
+    <id>urn:funding-finder:grants-gov:363080</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>U.S. Mission to Vietnam</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Vietnam — Closes 2026-08-02 — U.S. Mission Vietnam's Public Diplomacy Section seeks proposals to implement workforce development and innovation programs through American Spaces. This program builds a pipeline of skilled, English-capable Vietnamese youth who support U.S. trade, investment, and innovation partnerships while expanding economic opportunity in Vietnam. The project targets university students, educators, and early-c…</summary>
+  </entry>
+  <entry>
+    <title>Empowering English Educators</title>
+    <link href="https://www.grants.gov/search-results-detail/363060"/>
+    <id>urn:funding-finder:grants-gov:363060</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>U.S. Mission to Egypt</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <summary>U.S. Mission to Egypt — Closes 2026-08-07 — The U.S. Department of State's Embassy Cairo announces an open competition to implement a teacher training program serving up to 200 Egyptian university English language teaching assistants, lecturers, and English instructors from across Egypt. This program advances U.S. strategic interests by promoting American culture, strengthening the U.S.-Egypt partnership, and projecting American influence t…</summary>
+  </entry>
+  <entry>
+    <title>Notice of Funding Opportunity 2026 – Lebanon</title>
+    <link href="https://www.grants.gov/search-results-detail/363090"/>
+    <id>urn:funding-finder:grants-gov:363090</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>U.S. Mission to Lebanon</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <summary>U.S. Mission to Lebanon — Closes 2026-08-07 — Executive Summary: The U.S. Department of State’s Embassy Beirut, Lebanon announces an open competition to implement programs that promote U.S. priorities and strengthen ties between the United States and Lebanon. U.S. priorities include highlighting U.S.-led peace and stabilization efforts and advancing digital literacy to identify and counter false adversarial narratives and claims. All programs…</summary>
+  </entry>
+  <entry>
+    <title>Mentor Program for English Educators</title>
+    <link href="https://www.grants.gov/search-results-detail/363064"/>
+    <id>urn:funding-finder:grants-gov:363064</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>U.S. Mission to Egypt</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <summary>U.S. Mission to Egypt — Closes 2026-08-09 — The U.S. Department of State's Embassy Cairo announces an open competition to implement a comprehensive mentor program for Egyptian English language instructors that will strengthen English education capacity throughout Egypt while advancing U.S.-Egypt educational partnerships and cross-cultural understanding. This program addresses a critical need: Egyptian English instructors face limited access…</summary>
+  </entry>
+  <entry>
+    <title>Public Diplomacy Bujumbura Small Grants Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363085"/>
+    <id>urn:funding-finder:grants-gov:363085</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>U.S. Mission to Burundi</name></author>
+    <category term="Arts and culture"/>
+    <summary>U.S. Mission to Burundi — Closes 2026-08-14 — The U.S. Department of State’s Embassy Bujumbura announces an open competition to implement a program to support U.S. policy objectives and promote shared interests. Projects must promote Freedom250 and align with policy goals such as making the United States safer, stronger, and more prosperous. Specifically, the projects should showcase American leadership and excellence in sports-particularly i…</summary>
+  </entry>
+  <entry>
+    <title>English Language Teaching and Learning Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363077"/>
+    <id>urn:funding-finder:grants-gov:363077</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>U.S. Mission to Uzbekistan</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <summary>U.S. Mission to Uzbekistan — Closes 2026-08-17 — The U.S. Department of State announces an open competition to deliver in-person, specialized English language teacher training and direct student instruction aligned with priority sectors such as space, critical minerals, rare earths, energy, high technology, business and trade, agriculture, media, and security. As U.S. engagement with Uzbekistan increases, English proficiency has become a strateg…</summary>
+  </entry>
+  <entry>
+    <title>Collaborative Research</title>
+    <link href="https://www.grants.gov/search-results-detail/363084"/>
+    <id>urn:funding-finder:grants-gov:363084</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>National Endowment for the Humanities</name></author>
+    <category term="Arts and culture"/>
+    <summary>National Endowment for the Humanities — Closes 2026-09-16 — The program supports groups of two or more scholars increasing humanistic knowledge through the preparation of a manuscript for print publication, the creation of a scholarly digital project, or the planning of an international collaboration. Projects must pursue significant research questions and lead toward an interpretive product. This year’s competition is limited to projects on American histo…</summary>
+  </entry>
+  <entry>
+    <title>English Language Fellows Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363063"/>
+    <id>urn:funding-finder:grants-gov:363063</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>U.S. Mission to Egypt</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <summary>U.S. Mission to Egypt — Closes 2026-08-07 — The U.S. Department of State's Embassy Cairo announces an open competition to identify a qualified provider organization to support the placement and administration of two English Language Fellows (ELFs) in Egypt for a 28-month program period. This program addresses a critical operational need: the successful implementation of the English Language Fellows program requires an international or local…</summary>
+  </entry>
+  <entry>
+    <title>AI Pathways To The Future</title>
+    <link href="https://www.grants.gov/search-results-detail/363061"/>
+    <id>urn:funding-finder:grants-gov:363061</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Indonesia — Closes 2026-08-09 — Executive Summary The U.S. Department of State’s Embassy Jakarta announces an open competition to implement the AI Pathways to the Future program, a comprehensive initiative designed to strengthen U.S.-Indonesia partnerships in artificial intelligence education, research, and innovation. Promoting AI innovation and security is a top priority of the United States government, including in its foreig…</summary>
+  </entry>
+  <entry>
+    <title>Kidney Precision Medicine Project Central Hub</title>
+    <link href="https://www.grants.gov/search-results-detail/359197"/>
+    <id>urn:funding-finder:grants-gov:359197</id>
+    <updated>2026-07-05T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <summary>National Institutes of Health — Closes 2026-10-05 — The National Institute of Diabetes and Digestive and Kidney Disease (NIDDK), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for the continuation of the Kidney Precisions Medicine Project (KPMP). The Kidney Precision Medicine Project (KPMP) was started in FY2017 with the vision to safely and ethically collect and interrogate human kidney biopsy tissue to discover …</summary>
+  </entry>
+</feed>

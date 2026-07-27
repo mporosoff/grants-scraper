@@ -186,6 +186,15 @@ class NyserdaAdapter(SourceAdapter):
             if not title:
                 continue
             number = str(_get(item, "SolicitationNumber", "SolicitationID") or title)
+            if (
+                re.match(r"^\s*(?:RFI|NOI|TPL)\b", number, re.IGNORECASE)
+                or re.search(
+                    r"\b(?:request for information|notice of intent|teaming partner list)\b",
+                    str(title),
+                    re.IGNORECASE,
+                )
+            ):
+                continue
             close_date, additional_deadlines, deadline_note = (
                 _next_round_deadlines(item, as_of)
             )

@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Funding Finder — Education and workforce</title>
+  <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml" rel="self"/>
+  <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
+  <id>https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml</id>
+  <updated>2026-07-27T14:02:03Z</updated>
+  <generator>Funding Finder</generator>
+  <entry>
+    <title>NIDCD Research Fellowship for Audiologists</title>
+    <link href="https://www.grants.gov/search-results-detail/362597"/>
+    <id>urn:funding-finder:grants-gov:362597</id>
+    <updated>2028-04-29T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health — Closes 2028-05-30 — The National Institute on Deafness and Other Communication Disorders (NIDCD) intends to publish a Notice of Funding Opportunity (NOFO) for clinical audiologists currently enrolled in Ph.D. programs. NIDCD encourages audiologists with strong research potential to integrate clinical and translational research into their career paths. A strong research foundation is essential for advancing hearing he…</summary>
+  </entry>
+  <entry>
+    <title>Single Source: Institutional Development Award (IDeA) Clinical Research Resource Center (I-CRRC)</title>
+    <link href="https://www.grants.gov/search-results-detail/362574"/>
+    <id>urn:funding-finder:grants-gov:362574</id>
+    <updated>2027-07-28T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health — Closes 2027-09-28 — The Institutional Development Award (IDeA) program supports biomedical research capacity building in states that have historically received low levels of NIH funding. One such program, the IDeA Clinical &amp; Translational Research (CTR) award, supports clinical and translational (C&amp;T) research capacity building to enable research on diseases and health challenges prevalent in IDeA states. Significant…</summary>
+  </entry>
+  <entry>
+    <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
+    <link href="https://www.grants.gov/search-results-detail/363210"/>
+    <id>urn:funding-finder:grants-gov:363210</id>
+    <updated>2027-07-24T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Neuroscience"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health — Closes 2027-10-20 — The Eunice Kennedy Shriver National Institute of Child Health and Human Development seeks to advance its mission of supporting maternal, fetal, and child health by continuing to enhance the understanding of maternal, fetal, and child exposure to nutrients, metabolites, medications, supplements, microbiome-derived products, and environmental chemicals. This will be done by supporting a second phase…</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: Resources and Workforce Development for the Regional Biocontainment Laboratories</title>
+    <link href="https://www.grants.gov/search-results-detail/362951"/>
+    <id>urn:funding-finder:grants-gov:362951</id>
+    <updated>2027-07-02T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-09-30 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by providing critical resources, staff and facilities support for the Regional Biocontainment Laboratories (RBLs). The RBLs provide biosafety level 2 and 3 (BSL-2/3) biocontainment facilities for research on infectious diseases. They play a critical role in public health emergency response by facilitatin…</summary>
+  </entry>
+  <entry>
+    <title>Advancing Screening, Diagnosis, and Referral for Late Talking Children</title>
+    <link href="https://www.grants.gov/search-results-detail/362352"/>
+    <id>urn:funding-finder:grants-gov:362352</id>
+    <updated>2027-05-03T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health — Closes 2027-10-15 — The National Institutes of Health (NIH) Tackling Acquisition of Language in Kids (TALK) initiative intends to publish a Notice of Funding Opportunity (NOFO) to solicit research grant applications to improve the earliest steps in clinical practice for late talking children. The overarching purpose of this funding opportunity is to inform, develop, and evaluate evidence-based practices and implement…</summary>
+  </entry>
+  <entry>
+    <title>Claude D. Pepper Older Americans Independence Centers</title>
+    <link href="https://www.grants.gov/search-results-detail/362098"/>
+    <id>urn:funding-finder:grants-gov:362098</id>
+    <updated>2027-05-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health — Closes 2027-09-25 — The National Institute on Aging intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for the Claude D. Pepper Older Americans Independence Centers (OAICs) award. The goal of the OAIC program is to establish centers of excellence in geriatrics research and research education to increase scientific knowledge leading to better ways to maintain or restore independence in o…</summary>
+  </entry>
+  <entry>
+    <title>NIDDK Disease Research and Translational Core Centers (P30 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/363052"/>
+    <id>urn:funding-finder:grants-gov:363052</id>
+    <updated>2027-04-30T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health — Closes 2027-06-01 — This Notice of Funding Opportunity (NOFO) invites applications for NIDDK Disease Research and Translational Core Centers (P30 Clinical Trial Optional). These Core Centers are part of an integrated program of biomedical and translational research supporting our cystic fibrosis, diabetes, nutrition, obesity, liver and digestive diseases research. They enhance multidisciplinary collaboration, rigor, …</summary>
+  </entry>
+  <entry>
+    <title>National Viral Hepatitis Education, Awareness, and Capacity Building for Communities and Providers</title>
+    <link href="https://www.grants.gov/search-results-detail/363142"/>
+    <id>urn:funding-finder:grants-gov:363142</id>
+    <updated>2027-03-30T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCHHSTP</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-06-01 — In alignment with CDC's viral hepatitis strategic goals and current epidemiology, this Notice of Funding Opportunity (NOFO) will address the need for increasing awareness of viral hepatitis prevention, testing, and treatment options among populations disproportionately affected by hepatitis B and/or hepatitis C virus infections. The priority populations' needs will also be addressed by increasing …</summary>
+  </entry>
+  <entry>
+    <title>Single Source: Resource Center for the Support for Research Excellence (SuRE) Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362575"/>
+    <id>urn:funding-finder:grants-gov:362575</id>
+    <updated>2027-03-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health — Closes 2027-05-25 — The Support for Research Excellence (SuRE) program aims to develop and sustain research excellence at resource-limited institutions, many of which disproportionately serve regions of the U.S. that have not historically participated in substantial NIH research, by supporting investigator-initiated research with strong student participation. A SuRE Resource Center has been established to enhance the…</summary>
+  </entry>
+  <entry>
+    <title>Medical Scientist Training Program (MSTP)</title>
+    <link href="https://www.grants.gov/search-results-detail/361271"/>
+    <id>urn:funding-finder:grants-gov:361271</id>
+    <updated>2027-03-16T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health — Closes 2027-05-25 — The overall goal of the NIH Ruth L. Kirschstein National Research Service Award (NRSA) program is to help ensure that a pool of highly trained scientists is available in appropriate scientific disciplines to address the Nation's biomedical, behavioral, and clinical research needs.In alignment with the goal of the NRSA program, the Medical Scientist Training Program (MSTP) supports the development …</summary>
+  </entry>
+  <entry>
+    <title>Veterans Legacy Grants Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363069"/>
+    <id>urn:funding-finder:grants-gov:363069</id>
+    <updated>2027-03-08T00:00:00Z</updated>
+    <author><name>Veterans Legacy Grants Program</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <summary>Veterans Legacy Grants Program — Closes 2027-04-09 — VLGP will provide grants to eligible entities for the purpose of conducting cemetery research related to national, State, or Tribal Veterans’ cemeteries; producing educational materials that teach about the history of Veterans interred in national, State, or Tribal Veterans’ cemeteries; and promoting community engagement with the histories of Veterans interred in national, State, or Tribal Veteran…</summary>
+  </entry>
+  <entry>
+    <title>IDeA Networks of Biomedical Research Excellence (INBRE)</title>
+    <link href="https://www.grants.gov/search-results-detail/360633"/>
+    <id>urn:funding-finder:grants-gov:360633</id>
+    <updated>2027-02-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health — Closes 2027-05-18 — The Institutional Development Award program develops biomedical research capacity in states that have historically received low levels of NIH funding (IDeA states). The IDeA Networks of Biomedical Research Excellence (INBRE) Notice of Funding Opportunity will support statewide networks in IDeA states made up of one or more research intensive institution and multiple primarily undergraduate institu…</summary>
+  </entry>
+  <entry>
+    <title>NIOSH Support for Conferences and Scientific Meetings (R13 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363290"/>
+    <id>urn:funding-finder:grants-gov:363290</id>
+    <updated>2027-02-05T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Education and workforce"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-04-12 — The purpose of the NIOSH Support for Conferences and Scientific Meetings (R13) program is to support high-quality scientific meetings, conferences, and workshops that are relevant to the NIOSH mission and that promote occupational safety and health. The conference program is an important part of the NIOSH mission. Applications should address and advance research topics in occupational safety and h…</summary>
+  </entry>
+  <entry>
+    <title>NIOSH Support for Conferences and Scientific Meetings (U13 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363291"/>
+    <id>urn:funding-finder:grants-gov:363291</id>
+    <updated>2027-02-05T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Education and workforce"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-04-12 — The purpose of the NIOSH Support for Conferences and Scientific Meetings (U13) program is to support high-quality scientific meetings, conferences, and workshops that are relevant to the NIOSH mission and that promote occupational safety and health. The conference program is an important part of the NIOSH mission. Applications should address and advance research topics in occupational safety and h…</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: The NHGRI Analysis, Visualization, and Informatics Lab-space (AnVIL) (U54 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/362638"/>
+    <id>urn:funding-finder:grants-gov:362638</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health — Closes 2027-05-25 — The National Human Genome Research Institute (NHGRI) intends to issue a Notice of Funding Opportunity (NOFO) to support a limited competition renewal of the Analysis, Visualization, and Informatics Lab-space (AnVIL) program. AnVIL is a secure, cloud-based platform that enables researchers to access, share, and analyze large-scale genomic datasets without relying on local infrastructure. Currently,…</summary>
+  </entry>
+  <entry>
+    <title>Advanced Laboratories for Accelerating the Reach and Impact of Treatments for Youth and Adults with Mental Illness (ALACRITY) Research Centers</title>
+    <link href="https://www.grants.gov/search-results-detail/361521"/>
+    <id>urn:funding-finder:grants-gov:361521</id>
+    <updated>2027-01-27T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health — Closes 2027-05-27 — The National Institute of Mental Health (NIMH) intends to publish a notice of funding opportunity (NOFO) to solicit research applications for practice-based research centers to support interdisciplinary teams of mental health researchers to engage in high-impact studies that will significantly advance clinical practice and generate knowledge to fuel the transformation of mental health care in the …</summary>
+  </entry>
+  <entry>
+    <title>Health Workforce Research Center (HWRC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363112"/>
+    <id>urn:funding-finder:grants-gov:363112</id>
+    <updated>2027-01-08T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <summary>Health Resources and Services Administration — Closes 2027-03-09 — The Health Workforce Research Centers support research that helps decision-makers at the federal, state, and local levels understand health workforce needs.</summary>
+  </entry>
+  <entry>
+    <title>Bridge2AI Network for AI Health Science</title>
+    <link href="https://www.grants.gov/search-results-detail/363107"/>
+    <id>urn:funding-finder:grants-gov:363107</id>
+    <updated>2027-01-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health — Closes 2027-03-01 — The purpose of this forecast is to inform the research community that the NIH Common Fund, along with its partner NIH Institutes, Centers, and Offices, is planning to issue a notice of funding opportunity (NOFO) to support the continuation of the Bridge2AI program. Stage 1 of the Bridge2AI program produced unique, large-scale, valuable, and open resource, AI-ready datasets and best practices that …</summary>
+  </entry>
+  <entry>
+    <title>NIOSH Centers for Agriculture, Forestry, and Fishing Safety and Health (U54)</title>
+    <link href="https://www.grants.gov/search-results-detail/363195"/>
+    <id>urn:funding-finder:grants-gov:363195</id>
+    <updated>2026-12-04T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-03-03 — The Agriculture, Forestry, and Fishing (AgFF) sector is essential to the safety, security, and economic stability of the U.S. because it produces the nation's food, fuel, and fiber. At the same time, AgFF workers experience some of the highest occupational fatality and non-fatal injury rates of any sector. AgFF workers also face increased risk of poor mental health, death by suicide, and substance…</summary>
+  </entry>
+  <entry>
+    <title>NIOSH National Center of Excellence for the Prevention of Childhood Agricultural Injury (U54)</title>
+    <link href="https://www.grants.gov/search-results-detail/363189"/>
+    <id>urn:funding-finder:grants-gov:363189</id>
+    <updated>2026-12-04T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-03-03 — The National Institute for Occupational Safety and Health (NIOSH) is committed to addressing a wide range of occupational health and safety hazards affecting those who work in the agriculture, forestry, and fishing (AgFF) sector. Children and adolescents ("youth") are consistently more likely to be fatally injured working in agriculture compared to other industries. While many steps have been take…</summary>
+  </entry>
+  <entry>
+    <title>Centers of Excellence (COE)</title>
+    <link href="https://www.grants.gov/search-results-detail/363272"/>
+    <id>urn:funding-finder:grants-gov:363272</id>
+    <updated>2026-12-02T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <summary>Health Resources and Services Administration — Closes 2027-02-02 — The Centers of Excellence Program provides grants to health professions schools and other public and nonprofit health or educational entities to assist schools in supporting programs of excellence in health professions education for under-represented minority individuals. By statute, the Centers of Excellence Program awards funding to organizations to operate programs that establish, strengthen, a…</summary>
+  </entry>
+  <entry>
+    <title>Establishing a Research Network to Guide Foundational Research on Human Consciousness</title>
+    <link href="https://www.grants.gov/search-results-detail/362097"/>
+    <id>urn:funding-finder:grants-gov:362097</id>
+    <updated>2026-12-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Neuroscience"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health — Closes 2027-02-08 — This Funding Opportunity will establish the NIH Blueprint for Neuroscience Research Network to Guide Foundational Research on Human Consciousness, leveraging a trans-NIH collaboration of 14 Institutes, Centers, and Offices dedicated to reducing the burden of nervous system disorders. Consciousness is central to numerous serious biomedical conditions, including coma, delirium, dementia, traumatic b…</summary>
+  </entry>
+  <entry>
+    <title>NIDDK Multi-Purpose Resource-Related, Multi-Component Research Services Centers Cooperative Agreement (U2C - Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/363037"/>
+    <id>urn:funding-finder:grants-gov:363037</id>
+    <updated>2026-11-28T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health — Closes 2027-01-28 — This Notice of Funding Opportunity (NOFO) announcement invites applications for NIDDK Multi-Purpose Resource-Related Research, Multi-Component Centers Cooperative Agreement (U2C - Clinical Trial Not Allowed). To help increase rigor, reproducibility and cost efficiencies, U2C centers offer highly specialized cores that provide a range of topic focused services including but not limited to hands-on …</summary>
+  </entry>
+  <entry>
+    <title>Health and Extreme Weather Research Coordination and Data Center (U2C - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/362979"/>
+    <id>urn:funding-finder:grants-gov:362979</id>
+    <updated>2026-11-27T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health — Closes 2027-01-29 — The National Institute of Environmental Health Sciences (NIEHS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for research coordination and data support for the Health and Extreme Weather (HEW) initiative. This solicitation will include two closely aligned components: research coordination and data support. The coordinating component will be responsible for faci…</summary>
+  </entry>
+  <entry>
+    <title>Research Resource for a National Swine Resource and Research Center (U42 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/362278"/>
+    <id>urn:funding-finder:grants-gov:362278</id>
+    <updated>2026-11-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <summary>National Institutes of Health — Closes 2027-01-25 — This Notice of Funding Opportunity (NOFO) encourages applications to provide continuing support for a National Swine Resource and Research Center (NSRRC). The NSRRC aims to enable gold-standard science in biomedical research by serving as a centralized national resource for the creation, breeding, cryopreservation, and distribution of genetically modified models. By consolidating these essential f…</summary>
+  </entry>
+  <entry>
+    <title>NIOSH Robotics and Intelligent Mining Technology and Workplace Safety Research (U60)</title>
+    <link href="https://www.grants.gov/search-results-detail/363292"/>
+    <id>urn:funding-finder:grants-gov:363292</id>
+    <updated>2026-11-12T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-08 — PurposeThis NOFO supports applied research to advance automation, robotics, and intelligent mining systems that improve safety and health in U.S. mining operations. Projects should deliver field-ready solutions that strengthen communication, self-escape, refuge performance, and overall safety through modern autonomy, sensing, and decision-support technologies.BackgroundMining remains hazardous. In…</summary>
+  </entry>
+  <entry>
+    <title>Small Business Transition Grant for New Entrepreneurs (Parent R41/R42 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/362577"/>
+    <id>urn:funding-finder:grants-gov:362577</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health — Closes 2027-01-05 — The National Institutes of Health (NIH), including the participating Institutes, Centers and Offices, intends to publish a Notice of Funding Opportunity (NOFO) to invite eligible United States small business concerns (SBCs) to submit Small Business Technology Transfer (STTR) Phase I, and Fast-Track grant applications for the Small Business Transition Grant. Through this NOFO, NIH will support earl…</summary>
+  </entry>
+  <entry>
+    <title>Small Business Transition Grant for New Entrepreneurs (Parent R43/R44 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/362576"/>
+    <id>urn:funding-finder:grants-gov:362576</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health — Closes 2027-01-05 — The National Institutes of Health (NIH) and Centers for Disease Control and Prevention (CDC), including the participating Institutes, Centers and Offices, intend to publish a Notice of Funding Opportunity (NOFO) to invite eligible United States small business concerns (SBCs) to submit Small Business Innovation Research (SBIR) Phase I, and Fast-Track (NIH only) grant applications for the Small Busi…</summary>
+  </entry>
+  <entry>
+    <title>NIOSH Miner Safety and Health Training Program - Western United States – U60</title>
+    <link href="https://www.grants.gov/search-results-detail/363232"/>
+    <id>urn:funding-finder:grants-gov:363232</id>
+    <updated>2026-10-27T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-01-26 — BackgroundDespite advances in technology and improvements in work environments, mining remains one of the most challenging and hazardous occupations in the United States. The industry continues to experience a fatality rate nearly three times higher than the national average for all industries, according to the U.S. Bureau of Labor Statistics (BLS). Public MSHA data show that in 2025, the U.S. min…</summary>
+  </entry>
+  <entry>
+    <title>Ryan White HIV/AIDS Program (RWHAP) Integrated HIV/AIDS Planning Resource Allocation Cooperative Agreement</title>
+    <link href="https://www.grants.gov/search-results-detail/363167"/>
+    <id>urn:funding-finder:grants-gov:363167</id>
+    <updated>2026-10-19T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <summary>Health Resources and Services Administration — Closes 2027-01-18 — The purpose of this cooperative agreement is to provide tools, training and technical assistance (TA) to RWHAP Parts A and B recipients and their planning bodies to support integrated HIV prevention and care planning, maximizing resources and stregthening the system of HIV care and treatment.</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: Supporting Programs to Advance Research Knowledge in Environmental Health Sciences (SPARK-EHS) (UE5/T32 - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/362977"/>
+    <id>urn:funding-finder:grants-gov:362977</id>
+    <updated>2026-10-05T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health — Closes 2026-12-07 — The goal of the Supporting Programs to Advance Research Knowledge in Environmental Health Sciences (SPARK-EHS) initiative is to extend the institutional, geographical, and research reach of NIEHS training. This initiative proposes to launch new and innovative environmental health training programs for research-focused predoctoral trainees at institutions that have not had a funded NIEHS T32 during…</summary>
+  </entry>
+  <entry>
+    <title>CDC National Centers of Excellence in Youth Violence Prevention (YVPCs): Rigorous Evaluation of Prevention Approaches to Prevent and Reduce Youth Violence</title>
+    <link href="https://www.grants.gov/search-results-detail/363055"/>
+    <id>urn:funding-finder:grants-gov:363055</id>
+    <updated>2026-10-01T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Education and workforce"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-01 — The Centers for Disease Control and Prevention’s (CDC) National Center for Injury Prevention and Control (NCIPC) seeks investigator-initiated research proposals to expand the evidence base for the prevention of violence among youth aged 10 to 24 years.The purpose of this announcement is to fund the National Centers of Excellence in Youth Violence Prevention (or Youth Violence Prevention Centers; Y…</summary>
+  </entry>
+  <entry>
+    <title>Comprehensive Housing Counseling (CHC) and the Housing Counseling Training (HCT) NOFO (FY2026)</title>
+    <link href="https://www.grants.gov/search-results-detail/362014"/>
+    <id>urn:funding-finder:grants-gov:362014</id>
+    <updated>2026-09-30T00:00:00Z</updated>
+    <author><name>Department of Housing and Urban Development</name></author>
+    <category term="Education and workforce"/>
+    <summary>Department of Housing and Urban Development — Closes 2026-11-30 — The purpose of HUD’s Housing Counseling Grant Program is to provide funds to HUD-approved housing counseling agencies that provide counseling and advice to tenants and homeowners, with respect to property maintenance, financial management and literacy, and other matters as may be appropriate to assist program clients in improving their housing conditions, meeting their financial needs, and fulfill…</summary>
+  </entry>
+  <entry>
+    <title>NIH Research Evaluation and Commercialization Hubs (REACH)</title>
+    <link href="https://www.grants.gov/search-results-detail/362965"/>
+    <id>urn:funding-finder:grants-gov:362965</id>
+    <updated>2026-09-30T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health — Closes 2026-11-30 — The National Institutes of Health (NIH), including all of its Institutes and Centers, plans to publish a Notice of Funding Opportunity inviting eligible colleges, universities, and nonprofit organizations to apply for the NIH Research Evaluation and Commercialization Hub (REACH) program. The REACH program helps move promising biomedical discoveries from academic research into real-world products t…</summary>
+  </entry>
+  <entry>
+    <title>Preschool Development Grant Birth Through Five (PDG B-5) SMART Grant</title>
+    <link href="https://www.grants.gov/search-results-detail/363047"/>
+    <id>urn:funding-finder:grants-gov:363047</id>
+    <updated>2026-09-17T00:00:00Z</updated>
+    <author><name>Administration for Children and Families</name></author>
+    <category term="Education and workforce"/>
+    <summary>Administration for Children and Families — Closes 2026-11-17 — The U.S. Department of Health and Human Services (HHS), Administration for Children and Families (ACF), seeks applications for the Preschool Development Grant Birth through Five (PDG B-5) SMART Grant: Strategic Measurement, Analytics, and Results using Technology. This funding opportunity will support states and territories to make targeted, one-year investments in statewide early care and educati…</summary>
+  </entry>
+  <entry>
+    <title>The NIA Genetics of Alzheimer's Disease Data Storage Site (NIAGADS)</title>
+    <link href="https://www.grants.gov/search-results-detail/362454"/>
+    <id>urn:funding-finder:grants-gov:362454</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health — Closes 2026-11-01 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop, operate, and sustain a cloud-based data storage and computing platform that democratizes access to large-scale Alzheimer’s disease (AD) and AD-related dementias (ADRD) genetic and genomic data. The platform must be secure, scalable, and interoperable. The platform wil…</summary>
+  </entry>
+  <entry>
+    <title>Clinical and Translational Science Award</title>
+    <link href="https://www.grants.gov/search-results-detail/363244"/>
+    <id>urn:funding-finder:grants-gov:363244</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-01-25 — The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: High Impact Specialized Innovation Programs in Clinical and Translational Science</title>
+    <link href="https://www.grants.gov/search-results-detail/363250"/>
+    <id>urn:funding-finder:grants-gov:363250</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health — Closes 2027-01-25 — The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: Research Education Program for the Clinical and Translational Science Awards Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363248"/>
+    <id>urn:funding-finder:grants-gov:363248</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health — Closes 2027-01-25 — The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: Ruth L. Kirschstein National Research Service Award (NRSA) Institutional Research Training Grant for the Clinical and Translational Science Awards Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363246"/>
+    <id>urn:funding-finder:grants-gov:363246</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-01-25 — The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
+  </entry>
+  <entry>
+    <title>The Next Generation of the Clinical and Translational Science Awards Program Trial Innovation Network</title>
+    <link href="https://www.grants.gov/search-results-detail/363253"/>
+    <id>urn:funding-finder:grants-gov:363253</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health — Closes 2027-01-25 — The Clinical and Translational Science Awards Program Trial Innovation Network (TIN) is a collaborative initiative aimed at addressing critical roadblocks in the design and implementation of multi-center clinical trials. The goal of the TIN is to execute trials better, faster, and more cost-efficiently, as well as serve as a national laboratory to study, understand, and innovate the process of con…</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: Institutional Mentored Research Career Development Program for the Clinical and Translational Science Awards Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363245"/>
+    <id>urn:funding-finder:grants-gov:363245</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-02-12 — The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: Clinical and Translational Science Awards (CTSA) Program: Collaborative and Innovative Acceleration Award</title>
+    <link href="https://www.grants.gov/search-results-detail/363251"/>
+    <id>urn:funding-finder:grants-gov:363251</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-02-16 — The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
+  </entry>
+  <entry>
+    <title>Radiation Oncology-Biology Integration Network (ROBIN) Centers (U54 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/362647"/>
+    <id>urn:funding-finder:grants-gov:362647</id>
+    <updated>2026-08-19T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health — Closes 2027-01-25 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to continue to support the Radiation Oncology-Biology Integration Network (ROBIN) with applications from both new and renewing investigators. This network model will sustain an agile and effective national radiation oncology infrastructure that collectively addresses critical hypothesis-based translation…</summary>
+  </entry>
+  <entry>
+    <title>Network of the National Library of Medicine Coordinating Center (U24 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/361282"/>
+    <id>urn:funding-finder:grants-gov:361282</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health — Closes 2026-12-15 — The National Library of Medicine (NLM) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for a Coordinating Center of the Network of the National Library of Medicine (NNLM).Established in 1965 and organized geographically across the United States and its territories, the NNLM promotes and supports the initiatives, products, and services of the NLM and the National I…</summary>
+  </entry>
+  <entry>
+    <title>Network of the National Library of Medicine Regional Medical Libraries (UG4 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/361284"/>
+    <id>urn:funding-finder:grants-gov:361284</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health — Closes 2026-12-15 — The National Library of Medicine (NLM) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for Regional Medical Libraries of the Network of the National Library of Medicine (NNLM).Established in 1965 and organized geographically across the United States and its territories, the NNLM promotes and supports the initiatives, products, and services of the NLM and the Natio…</summary>
+  </entry>
+  <entry>
+    <title>Network of the National Library of Medicine Training Center (U24 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/361281"/>
+    <id>urn:funding-finder:grants-gov:361281</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health — Closes 2026-12-15 — The National Library of Medicine (NLM) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for a Training Center of the Network of the National Library of Medicine (NNLM).Established in 1965 and organized geographically across the United States and its territories, the NNLM promotes and supports the initiatives, products, and services of the NLM and the National Insti…</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: NIGMS Mature Synchrotron Resources (MSR) for Structural Biology (P30 - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/360947"/>
+    <id>urn:funding-finder:grants-gov:360947</id>
+    <updated>2026-08-13T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health — Closes 2026-10-13 — The NIGMS Mature Synchrotron Resources for Structural Biology program supports mature technologies at synchrotron facilities that provide biomedical researchers with state-of-the-art X-ray beamlines, hands-on user training, and expert assistance to generate and analyze structural biology data. NIGMS intends to reissue a Notice of Funding Opportunity to continue to support these important national …</summary>
+  </entry>
+  <entry>
+    <title>Children’s Hospitals Graduate Medical Education (CHGME) Payment Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363113"/>
+    <id>urn:funding-finder:grants-gov:363113</id>
+    <updated>2026-07-31T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <summary>Health Resources and Services Administration — Closes 2026-08-31 — The Children’s Hospitals Graduate Medical Education (CHGME) Payment Program funds freestanding, children's hospitals. The money helps their graduate medical education (GME) programs train resident physicians and dentists.</summary>
+  </entry>
+  <entry>
+    <title>Teaching Health Center Graduate Medical Education (THCGME) Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363111"/>
+    <id>urn:funding-finder:grants-gov:363111</id>
+    <updated>2026-07-31T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <summary>Health Resources and Services Administration — Closes 2026-09-29 — The purpose of the THCGME Program is to provide maintenance funding to support the training of residents in existing HRSA-supported primary care residency training programs in community-based ambulatory patient care centers. These programs will prepare residents to provide high-quality care, particularly in rural and medically vulnerable communities, and develop competencies to serve a wide range …</summary>
+  </entry>
+  <entry>
+    <title>Resident Opportunity and Self-Sufficiency Service Coordinator (ROSS-SC) Program – Fiscal Year 2026</title>
+    <link href="https://www.grants.gov/search-results-detail/361994"/>
+    <id>urn:funding-finder:grants-gov:361994</id>
+    <updated>2026-07-28T00:00:00Z</updated>
+    <author><name>Department of Housing and Urban Development</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <summary>Department of Housing and Urban Development — Closes 2026-09-28 — The Resident Opportunity and Self Sufficiency Service Coordinator (ROSS-SC) program is designed to assist residents of Public and Indian Housing make progress towards economic and housing self-sufficiency by addressing the educational, professional and health barriers they face. Self-sufficiency is defined as an individual’s ability to support their household by maintaining financial, housing, and…</summary>
+  </entry>
+  <entry>
+    <title>Apprenticeship and Pre-apprenticeship Clean Energy Training</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z000000FOEyAAO"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON5437</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <summary>NYSERDA — Closes 2026-08-04 — Through this funding opportunity the New York State Energy Research and Development Authority (NYSERDA) seeks to work with labor organizations and registered pre-apprenticeship programs across the State, to grow a diverse, equitable, and inclusive pipeline of skilled talent for the clean energy labor market. This solicitation is intended to fund Projects that create and/or expand the capacity of d…</summary>
+  </entry>
+  <entry>
+    <title>Clean Green Schools Initiative</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt000001Q0ClRAAV"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON4924</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Climate change"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <summary>NYSERDA — Closes 2026-08-18 — The P-12 Schools: Clean Green Schools Initiative is available to help public schools that traditionally lack resources to invest in infrastructure improvements become healthier, more productive learning environments. The program provides funding for schools to implement construction projects that decarbonize their building portfolio and enhance extreme heat resilience, such as comprehensive retrof…</summary>
+  </entry>
+  <entry>
+    <title>National Disaster Coverage Training for Indonesian Journalists</title>
+    <link href="https://www.grants.gov/search-results-detail/363318"/>
+    <id>urn:funding-finder:grants-gov:363318</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>U.S. Mission to Indonesia — Closes 2026-08-28 — 1. Project Background, Goals, and Objectives Indonesia is one of the most disaster-prone nations on earth. Situated on the Pacific Ring of Fire and spanning more than 17,000 islands, the archipelago experiences an extraordinary frequency of natural hazards including earthquakes, volcanic eruptions, tsunamis, floods, and landslides affecting millions of people and causing billions of dollars in eco…</summary>
+  </entry>
+  <entry>
+    <title>U.S.-ASEAN Road to 50: Rising Leaders Forum</title>
+    <link href="https://www.grants.gov/search-results-detail/363316"/>
+    <id>urn:funding-finder:grants-gov:363316</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>U.S. Mission to ASEAN</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>U.S. Mission to ASEAN — Closes 2026-08-30 — The U.S. Mission to ASEAN (USASEAN) Public Diplomacy Section (PDS) announces an open competition for applications to develop, organize, and oversee the U.S.-ASEAN Road to 50: Rising Leaders Forum. This one-day Jakarta workshop will gather approximately 50 rising leaders selected exclusively from the USASEAN alumni networks across Southeast Asia. Celebrating 50 years of partnership, this forum look…</summary>
+  </entry>
+  <entry>
+    <title>Clean Energy Career Pathways Training</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr000012uHhNAAU"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON6121</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <summary>NYSERDA — Closes 2026-09-23 — The New York State Energy Research and Development Authority (NYSERDA) is seeking proposals for clean energy career pathways projects. These projects must include clean energy technical training as well as career preparation, wraparound services, and job placement support to prepare new workers for entry-level clean energy careers. Projects funded under this solicitation are intended to build or e…</summary>
+  </entry>
+  <entry>
+    <title>Municipal Permitting Modernization Program</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001CXCB6AAP"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON5862</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Education and workforce"/>
+    <summary>NYSERDA — Closes 2026-12-31 — NYSERDA PON 5862 seeks applications from NYS municipalities interested in no-cost access to Citizenserve®, software, a browser-based Software-as-a-Service (SaaS) platform for building plan approval (“Program Software”), including a subscription, support, and training for two years. For the purposes of this PON, the term “municipality” refers to cities, towns, villages and counties in New York Stat…</summary>
+  </entry>
+  <entry>
+    <title>Clean Energy Training Services</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001AcPtcAAF"/>
+    <id>urn:funding-finder:nyserda:nyserda%3ARFQL6152</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Climate change"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Health equity"/>
+    <category term="Transportation"/>
+    <summary>NYSERDA — Closes 2029-12-31 — NYSERDA is looking to establish a pool of contractors qualified to deliver training, develop curriculum and/or training tools, and provide market expertise and/or other services related to clean energy workforce development and training. Qualified contractors will have experience in one or more of the following categories: building decarbonization and energy efficiency, renewable energy, grid mode…</summary>
+  </entry>
+  <entry>
+    <title>Technical Skills Training and Upskilling</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr000012gizTAAQ"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON6122</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Transportation"/>
+    <summary>NYSERDA — Closes 2030-09-30 — Funding is available to build and expand training capacity that advances skills and knowledge for clean energy workers in the areas of energy efficiency and building electrification, renewable energy, energy storage, smart grid, and electric vehicle charging stations. This solicitation may also support the enhancement of clean energy content delivered to students enrolled in a degree or certificat…</summary>
+  </entry>
+  <entry>
+    <title>On-the-Job Training for Energy Efficiency and Clean Technology</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt000000MdOBsAAN"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON3982</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <summary>NYSERDA — Closes 2030-12-02 — The New York State Energy Research and Development Authority (NYSERDA) will provide incentives to eligible energy efficiency and clean technology employers to hire and provide on-the-job training for new workers. NYSERDA’s intent for this is to advance the state’s energy goals by developing a workforce equipped to perform jobs in energy efficiency and clean technology.</summary>
+  </entry>
+</feed>

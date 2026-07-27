@@ -1,0 +1,25 @@
+[
+  {
+    "id": "amy-catalysis",
+    "email": "amy.researcher@example.edu",
+    "label": "Amy — catalysis & clean energy",
+    "query": "heterogeneous catalysis hydrogen",
+    "filters": {
+      "source_type": ["Federal"],
+      "topic": ["Catalysis and reaction engineering", "Energy"]
+    },
+    "active": true,
+    "confirmed": true
+  },
+  {
+    "id": "nsf-quantum-materials",
+    "email": "pi@example.edu",
+    "label": "NSF quantum & materials",
+    "query": "quantum materials",
+    "filters": {
+      "source": ["National Science Foundation"]
+    },
+    "active": true,
+    "confirmed": true
+  }
+]

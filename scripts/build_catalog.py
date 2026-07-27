@@ -138,7 +138,10 @@ TOPIC_RULES = {
         r"carbon management|direct air capture|CO2)\b"
     ),
     "Catalysis and reaction engineering": (
-        r"\b(?:cataly\w*|reaction engineering|reactor design)\b"
+        r"\b(?:catalys(?:is|es)|catalytic (?:reaction|process|conversion|"
+        r"activity|material|system|site|mechanism|chemistry|engineering|"
+        r"technology|performance)|(?:electro|photo|thermo)catalys\w*|"
+        r"reaction engineering|reactor design)\b"
     ),
     "Climate change": (
         r"\b(?:climate change|decarboni[sz]|greenhouse gas|global warming|"

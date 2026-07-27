@@ -14,6 +14,7 @@ from scripts.build_catalog import (
     read_archive,
     safe_http_url,
     tokenize,
+    topic_areas,
     write_catalog,
 )
 
@@ -166,6 +167,25 @@ class TokenTests(unittest.TestCase):
         self.assertEqual(
             safe_http_url("www.nsf.gov/funding"),
             "https://www.nsf.gov/funding",
+        )
+
+    def test_catalysis_topic_does_not_match_the_ordinary_verb_catalyze(self):
+        self.assertNotIn(
+            "Catalysis and reaction engineering",
+            topic_areas(
+                "Community innovation",
+                "The program will catalyze partnerships and use catalytic "
+                "capital as a catalyst for economic growth.",
+                [],
+            ),
+        )
+        self.assertIn(
+            "Catalysis and reaction engineering",
+            topic_areas(
+                "Heterogeneous catalysis",
+                "Develop catalytic reactor systems.",
+                [],
+            ),
         )
 
 

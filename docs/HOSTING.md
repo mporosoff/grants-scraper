@@ -183,10 +183,11 @@ and once when ingestion/evidence pipeline code reaches `main`:
    rebuild all facets and indexes.
 8. Fail visibly if source or whole-catalog health is implausible while keeping
    safe published data available.
-9. Retest the newly generated browser assets and privacy contracts.
-10. Commit a changed catalog and compact caches to the default branch for
-   GitHub Pages.
-11. Open or update an owner-alert issue for whole-job or source-level
+9. Generate public all/topic/source-type Atom feeds from the final catalog.
+10. Retest the newly generated browser assets and privacy contracts.
+11. Commit a changed catalog, public feeds, and compact caches to the default
+    branch for GitHub Pages.
+12. Open or update an owner-alert issue for whole-job or source-level
     degradation.
 
 The last successful catalog remains available after a failure, and the page visibly warns when its generated timestamp is stale.
@@ -246,7 +247,7 @@ they are not the only way to verify the browser workflow.
 Without a service layer, the application does not provide:
 
 - saved searches or watchlists across devices;
-- personalized automatic alerts or email;
+- self-service personalized email subscriptions in the public application;
 - institutional AI credential management;
 - central usage budgets;
 - shared evaluation data;
@@ -254,4 +255,9 @@ Without a service layer, the application does not provide:
 - private access control; or
 - administrative review workflows.
 
-Those capabilities require an explicit service-backed architecture and are deferred until the public catalog and refinement workflow demonstrate value.
+Public Atom feeds require no service and are deployed under `feeds/`. A
+separate private-repository bundle under `docs/weekly-alerts/` can support a
+small, manually consented weekly-email pilot, but it is not a public
+subscription service. Cross-device accounts, an in-page signup flow,
+double-opt-in, automated unsubscribe, bounce handling, and central preference
+management still require an explicit service-backed architecture.

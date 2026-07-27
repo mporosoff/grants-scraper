@@ -1,0 +1,71 @@
+# Weekly Funding Finder email digests.
+#
+# This workflow belongs in a PRIVATE repository (so subscriber emails stay
+# private). Copy it to `.github/workflows/weekly-digest.yml` in that repo.
+# It clones the PUBLIC site repo to get the current catalog + shared matcher,
+# then sends one digest per active subscription and commits the updated
+# watermark (state.json) back to this repo.
+#
+# Required repository secrets (Settings -> Secrets and variables -> Actions):
+#   SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD, SMTP_FROM
+
+name: Weekly funding digest
+
+on:
+  schedule:
+    - cron: "0 12 * * 1"   # Mondays 12:00 UTC
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Preview only (do not send email)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write   # to commit updated state.json
+
+concurrency:
+  group: weekly-funding-digest
+  cancel-in-progress: false
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out this (private) alerts repo
+        uses: actions/checkout@v4
+
+      - name: Clone the public site repo (catalog + shared matcher)
+        run: git clone --depth 1 https://github.com/mporosoff/grants-scraper site
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Send weekly digests
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          SMTP_FROM: ${{ secrets.SMTP_FROM }}
+        run: |
+          if [ "${{ inputs.dry_run }}" = "true" ]; then MODE=--dry-run; else MODE=--send; fi
+          python send_digest.py --site ./site \
+            --subscriptions subscriptions.json --state state.json $MODE
+
+      - name: Commit updated watermark
+        # Persist successful sends even if a later subscriber fails, preventing
+        # duplicate mail when the workflow is retried.
+        if: ${{ !cancelled() && inputs.dry_run != true }}
+        run: |
+          git config user.name "funding-digest-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add state.json
+          if git diff --cached --quiet; then
+            echo "No watermark change."
+          else
+            git commit -m "chore: update digest watermark"
+            git push
+          fi

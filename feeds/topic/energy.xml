@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Funding Finder — Energy</title>
+  <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
+  <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
+  <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
+  <updated>2026-07-27T14:02:03Z</updated>
+  <generator>Funding Finder</generator>
+  <entry>
+    <title>Apprenticeship and Pre-apprenticeship Clean Energy Training</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z000000FOEyAAO"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON5437</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <summary>NYSERDA — Closes 2026-08-04 — Through this funding opportunity the New York State Energy Research and Development Authority (NYSERDA) seeks to work with labor organizations and registered pre-apprenticeship programs across the State, to grow a diverse, equitable, and inclusive pipeline of skilled talent for the clean energy labor market. This solicitation is intended to fund Projects that create and/or expand the capacity of d…</summary>
+  </entry>
+  <entry>
+    <title>Clean Green Schools Initiative</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt000001Q0ClRAAV"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON4924</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Climate change"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <summary>NYSERDA — Closes 2026-08-18 — The P-12 Schools: Clean Green Schools Initiative is available to help public schools that traditionally lack resources to invest in infrastructure improvements become healthier, more productive learning environments. The program provides funding for schools to implement construction projects that decarbonize their building portfolio and enhance extreme heat resilience, such as comprehensive retrof…</summary>
+  </entry>
+  <entry>
+    <title>Inspiring Generations of New Innovators to Impact Technologies in Energy 2026 (IGNIITE 2026)</title>
+    <link href="https://arpa-e-foa.energy.gov/#FoaId1704ae68-308e-4bb8-bcdc-ef39c8c69bc6"/>
+    <id>urn:funding-finder:arpa-e-exchange:arpa-e%3ADE-FOA-0003624</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>ARPA-E eXCHANGE</name></author>
+    <category term="Energy"/>
+    <summary>ARPA-E eXCHANGE — Closes 2026-08-26</summary>
+  </entry>
+  <entry>
+    <title>U.S.-ASEAN Road to 50: Rising Leaders Forum</title>
+    <link href="https://www.grants.gov/search-results-detail/363316"/>
+    <id>urn:funding-finder:grants-gov:363316</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>U.S. Mission to ASEAN</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>U.S. Mission to ASEAN — Closes 2026-08-30 — The U.S. Mission to ASEAN (USASEAN) Public Diplomacy Section (PDS) announces an open competition for applications to develop, organize, and oversee the U.S.-ASEAN Road to 50: Rising Leaders Forum. This one-day Jakarta workshop will gather approximately 50 rising leaders selected exclusively from the USASEAN alumni networks across Southeast Asia. Celebrating 50 years of partnership, this forum look…</summary>
+  </entry>
+  <entry>
+    <title>New York State Clean Energy Internship Program</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt000000MdhViAAJ"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON4000</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <summary>NYSERDA — Closes 2026-08-31 — Provides funding to eligible clean energy businesses, organizations, and local municipalities hiring interns to perform meaningful work in the clean energy sector. Both clean energy employers and interns can apply to participate in the program. Accepted employers will select, interview, and hire interns, and NYSERDA provides reimbursement on a percentage of the interns’ wages.</summary>
+  </entry>
+  <entry>
+    <title>Empire Building Challenge: Hospitals</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00000IUDGnAAP"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON5989</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <summary>NYSERDA — Closes 2026-09-15 — Through this competitive solicitation, eligible hospitals can request up to $5 million for the construction and installation of scalable, efficient, low-carbon solutions such as electrification of building systems, electrification readiness projects, and comprehensive energy efficiency projects that will achieve significant carbon and/or energy reduction.</summary>
+  </entry>
+  <entry>
+    <title>Clean Energy Career Pathways Training</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr000012uHhNAAU"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON6121</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <summary>NYSERDA — Closes 2026-09-23 — The New York State Energy Research and Development Authority (NYSERDA) is seeking proposals for clean energy career pathways projects. These projects must include clean energy technical training as well as career preparation, wraparound services, and job placement support to prepare new workers for entry-level clean energy careers. Projects funded under this solicitation are intended to build or e…</summary>
+  </entry>
+  <entry>
+    <title>Large Scale Non-drop-in Alternative Fuels Based Resources and Infrastructure</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr0000191nvfAAA"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON6161</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <summary>NYSERDA — Closes 2026-09-28 — Supporting the development, scale-up, and demonstration of large-scale alternative fuel-based energy systems and supporting infrastructure, up to $8 million is available through Program Opportunity Notice (PON) 6161. This funding will help advance solutions optimized for safe, cost-effective, and scalable deployment of non-drop-in fuels such as hydrogen and ammonia within New York State. This comp…</summary>
+  </entry>
+  <entry>
+    <title>Upstate Through Wall Heat Pump Demonstration Program</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00000Vto2LAAR"/>
+    <id>urn:funding-finder:nyserda:nyserda%3ARFQL5937</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <summary>NYSERDA — Closes 2026-10-29 — The New York State Energy Research and Development Authority (NYSERDA) is seeking applications from owners, managers, or operators of multifamily buildings to serve as demonstration host sites for Packaged Terminal Heat Pumps (PTHPs) through the Clean Heat for All: Room Heat Pump Program. Eligible buildings must contain at least five (5) dwelling units, be located in New York State counties within…</summary>
+  </entry>
+  <entry>
+    <title>Appliance Upgrade Program- Application for Retailer and Contractor Enrollment</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z000000IrwXAAS"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON5859</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <summary>NYSERDA — Closes 2026-12-31 — Seeks to establish a network of Participating Retailers and Contractors, as part of the Appliance Upgrade Program, to sell (retailers) and install (contractors) ENERGY STAR® certified heat pump dryers (including all-in-one washer-dryers with a heat pump dryer). The Appliance Upgrade Program will provide New York households below the 150% AMI (State’s Area Median Income) with rebates for these appl…</summary>
+  </entry>
+  <entry>
+    <title>New York State Flexible Energy Technical Analysis</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z000000Dk3yAAC"/>
+    <id>urn:funding-finder:nyserda:nyserda%3ARFQL5548</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <summary>NYSERDA — Closes 2026-12-31 — Establishes a pool of consulting firms qualified to provide NYSERDA with diverse technical, energy, economic, and environmental analytical capacity, some of which may be requests for support services on short notice.</summary>
+  </entry>
+  <entry>
+    <title>Community Decarbonization Fund - Financing for Disadvantaged Community Lenders</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z000000CXHrAAO"/>
+    <id>urn:funding-finder:nyserda:nyserda%3ARFP23</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Climate change"/>
+    <category term="Community development"/>
+    <category term="Energy"/>
+    <summary>NYSERDA — Closes 2027-12-31 — NY Green Bank’s RFP 23 for the Community Decarbonization Fund invites regulated and unregulated financial entities (including but not limited to community development financial institutions (CDFIs), insured credit unions and depository institutions, and not-for-profit corporations that perform lending activities) deploying capital into clean energy and sustainable infrastructure and related small …</summary>
+  </entry>
+  <entry>
+    <title>Grid Modernization Grid Enhancing Technologies</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr0000181NQbAAM"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON6149</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <category term="Transportation"/>
+    <summary>NYSERDA — Closes 2029-11-19 — Helping to achieve a modernized energy grid, investments in Grid Enhancing Technologies (GETs) roll up to meet New York State’s clean energy goals. Up to $3 million per project is available in Program Opportunity Notice (PON) 6149 to promote product developments and demonstrations that work together to advance the transition of New York State’s electric grid to cleaner resources.</summary>
+  </entry>
+  <entry>
+    <title>Affordable Solar and Storage Predevelopment and Technical Assistance</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt0000000QnFIAA0"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON3414</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <summary>NYSERDA — Closes 2029-12-31 — Affordable Solar and Storage Predevelopment and Technical Assistance will provide grants to address barriers for solar and/or storage installations serving low-to-moderate income (LMI) households living in rental housing, multifamily buildings, or other households not served by traditional onsite residential solar/storage. Individual awards will not exceed $200,000. Funding to proposals through th…</summary>
+  </entry>
+  <entry>
+    <title>Clean Energy Training Services</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001AcPtcAAF"/>
+    <id>urn:funding-finder:nyserda:nyserda%3ARFQL6152</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Climate change"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Health equity"/>
+    <category term="Transportation"/>
+    <summary>NYSERDA — Closes 2029-12-31 — NYSERDA is looking to establish a pool of contractors qualified to deliver training, develop curriculum and/or training tools, and provide market expertise and/or other services related to clean energy workforce development and training. Qualified contractors will have experience in one or more of the following categories: building decarbonization and energy efficiency, renewable energy, grid mode…</summary>
+  </entry>
+  <entry>
+    <title>Financing Arrangements for High-Performance Affordable Housing</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt000001GOHEzAAP"/>
+    <id>urn:funding-finder:nyserda:nyserda%3ARFP18</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <summary>NYSERDA — Closes 2030-05-01 — NY Green Bank’s RFP 18 invites property owners and developers, energy service companies and equipment manufacturers, capital providers, and other market participants to submit proposals for NYGB investment in the construction or retrofit of multifamily affordable housing to high levels of energy performance in New York State.</summary>
+  </entry>
+  <entry>
+    <title>Technical Skills Training and Upskilling</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr000012gizTAAQ"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON6122</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Transportation"/>
+    <summary>NYSERDA — Closes 2030-09-30 — Funding is available to build and expand training capacity that advances skills and knowledge for clean energy workers in the areas of energy efficiency and building electrification, renewable energy, energy storage, smart grid, and electric vehicle charging stations. This solicitation may also support the enhancement of clean energy content delivered to students enrolled in a degree or certificat…</summary>
+  </entry>
+  <entry>
+    <title>On-the-Job Training for Energy Efficiency and Clean Technology</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt000000MdOBsAAN"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON3982</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <summary>NYSERDA — Closes 2030-12-02 — The New York State Energy Research and Development Authority (NYSERDA) will provide incentives to eligible energy efficiency and clean technology employers to hire and provide on-the-job training for new workers. NYSERDA’s intent for this is to advance the state’s energy goals by developing a workforce equipped to perform jobs in energy efficiency and clean technology.</summary>
+  </entry>
+  <entry>
+    <title>Clean Energy Financing Arrangements</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt0000000QnxtAAC"/>
+    <id>urn:funding-finder:nyserda:nyserda%3ARFP1</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <summary>NYSERDA — Closes 2030-12-30 — NY Green Bank invites private sector capital providers and other clean energy industry participants to propose transactions involving NY Green Bank that facilitate the financing of clean energy projects in New York State, consistent with its mandate, mission and priorities in addressing financing market gaps and barriers.</summary>
+  </entry>
+  <entry>
+    <title>Affordable Multifamily Program Upstate</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00000oeLiVAAU"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON6088</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <summary>NYSERDA — Closes 2030-12-31 — Provides technical assistance and financial incentives to support retrofits in low-to moderate-income (LMI) multifamily buildings in upstate New York under the LMI Energy Efficiency and Building Electrification (EE/BE) Order from 2026-2030.</summary>
+  </entry>
+  <entry>
+    <title>FlexTech Program</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt000000kXV1yAAG"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON4192</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <summary>NYSERDA — Closes 2030-12-31 — The Flexible Technical Assistance (FlexTech) Program supports New York State commercial, industrial, institutional, and multifamily customers who pay into the Systems Benefit Charge by providing a cost-share for credible, objective technical assistance services, such as energy audits, that help businesses make more informed energy decisions.</summary>
+  </entry>
+  <entry>
+    <title>Multifamily Contractor Network</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr000004RjWbAAK"/>
+    <id>urn:funding-finder:nyserda:nyserda%3ARFQL5906</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <summary>NYSERDA — Closes 2030-12-31 — Establishes a network of highly qualified firms who work directly with developers, building owners, and their representatives to plan and implement energy efficiency and beneficial electrification projects for Multifamily Residential programs.</summary>
+  </entry>
+  <entry>
+    <title>NY-Sun Commercial / Industrial Incentive Program</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt0000000QnDbAAK"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON3082</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <summary>NYSERDA — Closes 2030-12-31 — The NY-Sun Program provides cash incentives for the installation by Contractors of new grid-connected electric photovoltaic (PV) systems that range from 750kW to 7.5MW in the Upstate region. Incentives are granted on a first-come, first-served basis and PV project applications will be accepted through December 31, 2030, or until funds are fully committed, whichever comes first. Total incentives av…</summary>
+  </entry>
+  <entry>
+    <title>NY-Sun Residential/Nonresidential Incentive Program</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt0000000QnxFAAS"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON2112</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <summary>NYSERDA — Closes 2030-12-31 — The NY-Sun Program provides cash incentives for the installation of new grid-connected electric photovoltaic (PV) systems for residential and nonresidential sites completed by Contractors and Builders. Incentives are granted on a first-come, first-served basis, and PV project applications will be accepted through December 31, 2030, or until funds are fully committed, whichever comes first. Total i…</summary>
+  </entry>
+  <entry>
+    <title>On-site Energy Manager Program</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt000000Bn1EnAAJ"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON3701</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <summary>NYSERDA — Closes 2030-12-31 — Offers a cost-share for industrial, commercial, and multifamily facilities or buildings to hire a dedicated, full-time or part-time on-site energy manager. Energy managers are responsible for creating efficient processes that decrease cost and waste—helping organizations lower operational costs, reduce maintenance time, and create comfortable, safe facilities.</summary>
+  </entry>
+  <entry>
+    <title>Residential and Retail Energy Storage Market Acceleration Incentives Programs</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00000NEwgbAAD"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON6004</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <summary>NYSERDA — Closes 2030-12-31 — The Residential and Retail Energy Storage Market Acceleration Incentives Program provides financial incentives for the installation of new grid-connected distributed energy storage systems by participating contractors. Incentives are structured as fixed-rate incentives per kWh of system energy capacity and are available on a standard offer first-come, first-served basis. The Program includes marke…</summary>
+  </entry>
+  <entry>
+    <title>Revolving Loan Fund</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00000R29hoAAB"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON6025</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Climate change"/>
+    <category term="Energy"/>
+    <summary>NYSERDA — Closes 2030-12-31 — The New York State Energy Research and Development Authority (NYSERDA) requests applications from qualified contractors to utilize the Department of Energy - Energy Efficiency Revolving Loan Fund (DOE-EERLF) funds for projects financed by single family residential customers. NYSERDA has established a new revolving loan fund intended to spur investment in energy efficiency and decarbonization measu…</summary>
+  </entry>
+  <entry>
+    <title>Advancing Oil and Natural Gas Production and Delivery</title>
+    <link href="https://www.grants.gov/search-results-detail/363302"/>
+    <id>urn:funding-finder:grants-gov:363302</id>
+    <updated>2026-07-23T00:00:00Z</updated>
+    <author><name>National Energy Technology Laboratory</name></author>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <summary>National Energy Technology Laboratory — Closes 2026-09-22 — Advancing Oil and Natural Gas Production and Delivery This Notice of Funding Opportunity (NOFO) is seeking proposals to advance cost-effective technologies for improving the efficiency, reliability, and resilience of the Unites States oil and natural gas supply chain. This funding opportunity spans research and development efforts focused on enhancing resource utilization, modernizing infrastructu…</summary>
+  </entry>
+  <entry>
+    <title>ROSES25: C.4 Planetary Science Enabling Facilities</title>
+    <link href="https://www.grants.gov/search-results-detail/363258"/>
+    <id>urn:funding-finder:grants-gov:363258</id>
+    <updated>2026-07-21T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters — Closes 2026-11-10 — NOTICE: Amended July 21, 2026. This amendment adds to ROSES-2025 this program element which was previously listed as not solicited this year. Proposals are due November 10, 2026. New this year: no Step-1 or Notice of Intent is requested. New this year: Proposals to this program element will be evaluated using a dual-anonymous peer review process. See guidelines in Section 3.13 of C.1, and in the a…</summary>
+  </entry>
+  <entry>
+    <title>Egypt Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363252"/>
+    <id>urn:funding-finder:grants-gov:363252</id>
+    <updated>2026-07-20T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>Bureau of Near Eastern Affairs — Closes 2026-08-31 — The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
+  </entry>
+  <entry>
+    <title>ROSES25: A.14 Atmosphere</title>
+    <link href="https://www.grants.gov/search-results-detail/363240"/>
+    <id>urn:funding-finder:grants-gov:363240</id>
+    <updated>2026-07-20T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters — Closes 2026-10-20 — PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by 8/20/2026. See the full posting on NSPIRES for details. NOTICE: Amended July 20, 2026. This amendment adds this new program element to ROSES-2025. Mandatory Notices of Intent are due by August 20, 2026, and proposals are due October 20, 2026. Any proposal not preceded by an on-time NOI will be declined without …</summary>
+  </entry>
+  <entry>
+    <title>ROSES25: A.15 Biosphere</title>
+    <link href="https://www.grants.gov/search-results-detail/363241"/>
+    <id>urn:funding-finder:grants-gov:363241</id>
+    <updated>2026-07-20T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters — Closes 2026-11-06 — The close date above is the date for the Step-2 proposal due date. The Step-1 proposal due date is September 4, 2026. Step-2 proposals cannot be submitted if a Step-1 proposal was not submitted. NOTICE: Amended July 20, 2026. This amendment adds this new program element to ROSES-2025. This element uses a two-step proposal process (Section 4). Step-1 proposals are due by September 4, 2026, and Step…</summary>
+  </entry>
+  <entry>
+    <title>Healthy Homes Production Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362368"/>
+    <id>urn:funding-finder:grants-gov:362368</id>
+    <updated>2026-07-17T00:00:00Z</updated>
+    <author><name>Department of Housing and Urban Development</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <summary>Department of Housing and Urban Development — Closes 2026-08-31 — The Healthy Homes Production Program (HHP) is part of HUD"s overall Healthy Homes Initiative launched in 1999. The program takes a comprehensive approach to addressing multiple childhood diseases and injuries in the home by focusing on housing-related hazards in a coordinated fashion, rather than addressing a single hazard at a time. The program builds upon HUD"s successful Lead Hazard Control pro…</summary>
+  </entry>
+  <entry>
+    <title>ROSES25: A.13 Accelerating Earth Solutions</title>
+    <link href="https://www.grants.gov/search-results-detail/363224"/>
+    <id>urn:funding-finder:grants-gov:363224</id>
+    <updated>2026-07-17T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters — Closes 2026-10-15 — NOTICE: Amended July 17, 2026. This amendment presents a new program element in ROSES-2025. Proposals are due October 15, 2026. The pre-proposal teleconference will be held on approximately 6 weeks after the release of the program element on a no-advance-reservation, first-to-dial-in basis. Teleconference information will be posted under other documents on the NSPIRES page for this program element…</summary>
+  </entry>
+  <entry>
+    <title>Syria Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363190"/>
+    <id>urn:funding-finder:grants-gov:363190</id>
+    <updated>2026-07-15T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>Bureau of Near Eastern Affairs — Closes 2026-08-31 — The Bureau of Near Eastern Affairs’ Office of Assistance Coordination of the U.S. Department of State announces an open competition for organizations to submit a statement of interest (SOI) for innovative foreign assistance programs benefiting partner countries that also advance U.S. commercial diplomacy and put American interests first. SOI must demonstrate how projects will leverage foreign assi…</summary>
+  </entry>
+  <entry>
+    <title>DE-FOA-0003646 Notice of Intent to Issue DE-FOA-0003647 Accelerating Scale-up and Pre-piloting of Emerging Chemical Technologies (ASPECT)</title>
+    <link href="https://www.grants.gov/search-results-detail/363174"/>
+    <id>urn:funding-finder:grants-gov:363174</id>
+    <updated>2026-07-14T00:00:00Z</updated>
+    <author><name>Golden Field Office</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Carbon management"/>
+    <category term="Climate change"/>
+    <summary>Golden Field Office — Closes 2026-09-14 — CMEI intends to issue, on behalf of AFFO, a NOFO titled, “Accelerating Scale-up and Pre-piloting of Emerging Chemical Technologies (ASPECT).” This NOFO will seek applications for financial assistance from entities that wish to conduct work in support of AFFO's focus on emerging chemical technologies. AFFO supports expanding the supply and use of domestic alternative feedstocks to improve supply ch…</summary>
+  </entry>
+  <entry>
+    <title>Economic Advancement Grants for Local Empowerment (EAGLE)</title>
+    <link href="https://www.grants.gov/search-results-detail/361908"/>
+    <id>urn:funding-finder:grants-gov:361908</id>
+    <updated>2026-07-08T00:00:00Z</updated>
+    <author><name>Administration for Children and Families - ANA</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <summary>Administration for Children and Families - ANA — Closes 2026-08-07 — The Administration for Native Americans anticipates announcing the availability of funds and requesting applications for EAGLE: Economic Advancement Grants for Local Empowerment, supporting socioeconomic and cultural success for Native communities through business creation in regenerative agriculture, artificial intelligence, tribal energy sovereignty, and human capital development. The primary go…</summary>
+  </entry>
+  <entry>
+    <title>Muscat - Annual Program Statement (APS)- PD Small Grants Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363078"/>
+    <id>urn:funding-finder:grants-gov:363078</id>
+    <updated>2026-07-08T00:00:00Z</updated>
+    <author><name>U.S. Mission to Oman</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Community development"/>
+    <category term="Cybersecurity"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <summary>U.S. Mission to Oman — Closes 2026-08-09 — The Public Diplomacy Section of U.S. Embassy Muscat announces an open competition to support projects that advance U.S. foreign policy priorities in Oman while strengthening the long-standing partnership between the United States and the Sultanate of Oman. This Annual Program Statement outlines strategic funding priorities, eligibility criteria, and application guidelines for grants ranging from $…</summary>
+  </entry>
+  <entry>
+    <title>Supply Chain Acceleration and Logistics Enablement (SCALE) Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363089"/>
+    <id>urn:funding-finder:grants-gov:363089</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>Small Business Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>Small Business Administration — Closes 2026-08-07 — The Supply Chain Acceleration and Logistics Enablement (SCALE) Program supports organizations that help small businesses overcome operational, technical, workforce, and market access barriers that limit their ability to participate and grow as suppliers within strategically important industries. Through technical assistance, industry engagement, and other implementation focused activities, SCALE h…</summary>
+  </entry>
+  <entry>
+    <title>English Language Teaching and Learning Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363077"/>
+    <id>urn:funding-finder:grants-gov:363077</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>U.S. Mission to Uzbekistan</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <summary>U.S. Mission to Uzbekistan — Closes 2026-08-17 — The U.S. Department of State announces an open competition to deliver in-person, specialized English language teacher training and direct student instruction aligned with priority sectors such as space, critical minerals, rare earths, energy, high technology, business and trade, agriculture, media, and security. As U.S. engagement with Uzbekistan increases, English proficiency has become a strateg…</summary>
+  </entry>
+  <entry>
+    <title>EARLY STAGE INNOVATIONS (ESI26)</title>
+    <link href="https://www.grants.gov/search-results-detail/363066"/>
+    <id>urn:funding-finder:grants-gov:363066</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Space and aeronautics"/>
+    <category term="Technology development"/>
+    <summary>NASA Headquarters — Closes 2026-08-13 — The National Aeronautics and Space Administration (NASA) Headquarters has released the solicitation Early Stage Innovations (ESI), as an appendix to the Research and Technology Mission Directorate (RTMD) umbrella NASA Research Announcement (NRA) titled "Space Technology Research, Development, Demonstration, and Infusion 2026 (SpaceTech REDDI 2026).”. The solicitation is available by opening the NS…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year 2026 United States Marine Highway Program (USMHP)</title>
+    <link href="https://www.grants.gov/search-results-detail/362478"/>
+    <id>urn:funding-finder:grants-gov:362478</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>Maritime Administration</name></author>
+    <category term="Energy"/>
+    <category term="Transportation"/>
+    <summary>Maritime Administration — Closes 2026-08-31 — The United States Marine Highway Program (USMHP), codified at 46 U.S.C. 55601, was originally established by Section 1121 of the Energy Independence and Security Act of 2007 to reduce landside congestion through the designation of Marine Highway Routes. The USMHP statute authorizes the U.S. Department of Transportation (“Department” or “DOT”) to make grants to implement Projects or components of P…</summary>
+  </entry>
+  <entry>
+    <title>Improved Oil and Gas Recovery and Produced Water Management Technologies</title>
+    <link href="https://www.grants.gov/search-results-detail/363065"/>
+    <id>urn:funding-finder:grants-gov:363065</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>National Energy Technology Laboratory</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Water"/>
+    <summary>National Energy Technology Laboratory — Closes 2026-09-08 — Modification 000003: The purpose of this modification is to revise NOFO Part 1. Section I.A.1 is revised to correct the Topic Area 1b cost share to 20% and Section IV.C.2 is revised to delete the Environmental Considerations Summary and Environmental Impact Volume from the Summary of Application Requirements table. This Notice of Funding Opportunity (NOFO) will seek proposals for specific research…</summary>
+  </entry>
+  <entry>
+    <title>Young Southeast Asian Leaders Initiative (YSEALI) Summit 2027</title>
+    <link href="https://www.grants.gov/search-results-detail/362913"/>
+    <id>urn:funding-finder:grants-gov:362913</id>
+    <updated>2026-06-24T00:00:00Z</updated>
+    <author><name>U.S. Mission to Singapore</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <summary>U.S. Mission to Singapore — Closes 2026-08-05 — A. PROGRAM DESCRIPTION 1. Project Background, Goals, and ObjectivesThe Department of State Agency Strategic Plan outlines U.S. economic and technological dominance (Goal 5) including strengthening the U.S. technological edge, increasing U.S. technical exports and investments, and stopping foreign actor abuse of the global trading system.Project Goal: The YSEALI Summit 2027 in Singapore will accele…</summary>
+  </entry>
+  <entry>
+    <title>Special Program Announcement for Office of Naval Research Research Opportunity: FY27 Communications and Networking Applied Research</title>
+    <link href="https://www.grants.gov/search-results-detail/362836"/>
+    <id>urn:funding-finder:grants-gov:362836</id>
+    <updated>2026-06-16T00:00:00Z</updated>
+    <author><name>Office of Naval Research</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Transportation"/>
+    <summary>Office of Naval Research — Closes 2026-11-16 — The proposed topic will develop and mature Communications and Networking technologies for Naval operations.Background:A Design for Maritime Superiority (2018) describes an operational architecture for distributed maritime operations (DMO) that "... will provide accurate, timely, and analyzed information to units, warfighting groups, and fleets." A critical component of this architecture is the Nav…</summary>
+  </entry>
+  <entry>
+    <title>Youth Homelessness NOFO for FY2024 and FY2025</title>
+    <link href="https://www.grants.gov/search-results-detail/362002"/>
+    <id>urn:funding-finder:grants-gov:362002</id>
+    <updated>2026-06-10T00:00:00Z</updated>
+    <author><name>Department of Housing and Urban Development</name></author>
+    <category term="Community development"/>
+    <category term="Energy"/>
+    <summary>Department of Housing and Urban Development — Closes 2026-08-10 — 1. NOFO HighlightsThe Youth Homelessness NOFO provides competitive awards to eligible applicants under two different programs-Youth Homelessness System Improvement (YHSI) grants- Assistance Listing Number (ALN) 14.277Youth Homelessness Demonstration Program (YHDP)- ALN 14.276Under the YHSI grants, HUD will make awards to selected communities to support them in establishing and implementing a respo…</summary>
+  </entry>
+  <entry>
+    <title>WaterSMART Cooperative Watershed Management Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362755"/>
+    <id>urn:funding-finder:grants-gov:362755</id>
+    <updated>2026-06-10T00:00:00Z</updated>
+    <author><name>Bureau of Reclamation</name></author>
+    <category term="Energy"/>
+    <summary>Bureau of Reclamation — Closes 2028-02-15 — The WaterSMART Cooperative Watershed Management Program funding opportunity invites eligible entities to apply for funding to develop local solutions to address their water management needs. This opportunity provides funding for watershed group development, restoration planning, and watershed management project planning and design. By providing this funding, Reclamation promotes water reliability …</summary>
+  </entry>
+  <entry>
+    <title>MINE HEALTH AND SAFETY STATE GRANTS</title>
+    <link href="https://www.grants.gov/search-results-detail/362729"/>
+    <id>urn:funding-finder:grants-gov:362729</id>
+    <updated>2026-06-09T00:00:00Z</updated>
+    <author><name>Mine Safety and Health Administration</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Materials science"/>
+    <summary>Mine Safety and Health Administration — Closes 2026-08-10 — The Secretary of Labor, through MSHA, may award grants to State, Tribal, and Territorial Governments (including the District of Columbia, the Commonwealth of Puerto Rico, the Virgin Islands, American Samoa, Guam, and the Commonwealth of the Northern Mariana Islands) to assist them in developing and enforcing State mining laws and regulations, improve State workers’ compensation and mining occupati…</summary>
+  </entry>
+  <entry>
+    <title>Research and Education Program for Historically Black Colleges and Universities (HBCU) and Tribal Colleges and Universities (TCU)</title>
+    <link href="https://www.grants.gov/search-results-detail/362711"/>
+    <id>urn:funding-finder:grants-gov:362711</id>
+    <updated>2026-06-08T00:00:00Z</updated>
+    <author><name>Dept of the Army -- Materiel Command</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>Dept of the Army -- Materiel Command — Closes 2026-08-11 — This solicitation invites applications (also referred to as “proposals”) for basic research projects. The proposals must align with the research areas of interest to the DoW (which includes the USW(R&amp;E) and the Agencies) and enhance the education of students in areas of STEM that align with the DoW research interests. Information about these areas of interest (including websites) is discussed belo…</summary>
+  </entry>
+  <entry>
+    <title>Native American Affairs: Fiscal Year 2025 Colorado River Basin Tribal Drought Resiliency Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362644"/>
+    <id>urn:funding-finder:grants-gov:362644</id>
+    <updated>2026-06-02T00:00:00Z</updated>
+    <author><name>Bureau of Reclamation</name></author>
+    <category term="Energy"/>
+    <category term="Water"/>
+    <summary>Bureau of Reclamation — Closes 2026-09-23 — The objectives of this NAA/TAP funding opportunity are to provide funding for drought relief actions/projects that mitigate drought impacts for designated federally recognized tribes within the Colorado River Basin (see Eligibility section for list of tribes), and which advance Presidential and Department of the Interior Priorities within the Basin.Proposals should meet one or more of the followin…</summary>
+  </entry>
+  <entry>
+    <title>ROSES25: F.17 Research Initiation Awards</title>
+    <link href="https://www.grants.gov/search-results-detail/362495"/>
+    <id>urn:funding-finder:grants-gov:362495</id>
+    <updated>2026-05-20T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Energy"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters — Closes 2026-08-18 — NOTICE: Amended May 20, 2026. This amendment releases final text for this program element, which was previously TBD. Neither an NOI nor Step-1 proposal is requested. The due date for proposals is August 18, 2026. An informational webinar about this opportunity will occur at 1 p.m. Eastern Time on June 16. Register for the webinar at https://nasaevents.webex.com/weblink/register/r2fbc7ed95634bfe117…</summary>
+  </entry>
+  <entry>
+    <title>Title XVI Water Reclamation and Reuse Projects</title>
+    <link href="https://www.grants.gov/search-results-detail/362396"/>
+    <id>urn:funding-finder:grants-gov:362396</id>
+    <updated>2026-05-14T00:00:00Z</updated>
+    <author><name>Bureau of Reclamation</name></author>
+    <category term="Energy"/>
+    <summary>Bureau of Reclamation — Closes 2027-08-26 — Through WaterSMART, the Bureau of Reclamation (Reclamation) leverages Federal and non- Federal funding to work cooperatively with States, Tribes, and other entities as they plan for and implement actions to increase water supply and hydropower reliability. The WaterSMART Program demonstrably advances Trump administration priorities, such as those identified in Presidential Executive Order 14154 (J…</summary>
+  </entry>
+  <entry>
+    <title>WaterSMART: Desalination Construction Projects</title>
+    <link href="https://www.grants.gov/search-results-detail/362395"/>
+    <id>urn:funding-finder:grants-gov:362395</id>
+    <updated>2026-05-14T00:00:00Z</updated>
+    <author><name>Bureau of Reclamation</name></author>
+    <category term="Energy"/>
+    <category term="Water"/>
+    <summary>Bureau of Reclamation — Closes 2027-08-26 — Through WaterSMART, the Bureau of Reclamation (Reclamation) leverages Federal and non-Federal funding to work cooperatively with States, Tribes, and other entities as they plan for and implement actions to increase water supply and hydropower reliability. The WaterSMART Program demonstrably advances Trump administration priorities, such as those identified in Presidential Executive Order 14154 (Ja…</summary>
+  </entry>
+  <entry>
+    <title>WaterSMART Enhancing Water Resources Projects</title>
+    <link href="https://www.grants.gov/search-results-detail/362394"/>
+    <id>urn:funding-finder:grants-gov:362394</id>
+    <updated>2026-05-14T00:00:00Z</updated>
+    <author><name>Bureau of Reclamation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <summary>Bureau of Reclamation — Closes 2027-09-08 — The objective of the WaterSMART Enhancing Water Resources Projects funding opportunity is to invite eligible entities to apply for funding to implement projects per the authorizing language referenced above that benefit water resource management for multiple uses, including water conservation and efficiency projects, water infrastructure improvements, and river and watershed restoration. Projects …</summary>
+  </entry>
+  <entry>
+    <title>ROSES25: D.6 Astrophysics Research and Analysis</title>
+    <link href="https://www.grants.gov/search-results-detail/362338"/>
+    <id>urn:funding-finder:grants-gov:362338</id>
+    <updated>2026-05-08T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters — Closes 2026-08-06 — PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by June 25, 2026. See the full posting on NSPIRES for details. NOTICE: Research security training required starting August 5, 2026. All PIs and any Co-Is that would spend ≥ 10% time on a proposed grants or cooperative agreements must certify they have taken research security training. NASA will be satisfied with t…</summary>
+  </entry>
+  <entry>
+    <title>ROSES25: D.7 Strategic Astrophysics Technology</title>
+    <link href="https://www.grants.gov/search-results-detail/362340"/>
+    <id>urn:funding-finder:grants-gov:362340</id>
+    <updated>2026-05-08T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters — Closes 2026-08-06 — NOTICE: Research security training required starting August 5, 2026. All PIs and any Co-Is that would spend ≥ 10% time on a proposed grants or cooperative agreements must certify they have taken research security training. NASA will be satisfied with the four online research security training modules on the National Science Foundation's (NSF) Research Security Training website at https://www.nsf.g…</summary>
+  </entry>
+  <entry>
+    <title>Africa Regional Services Paris Annual Program Statement: ARS Speaker Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362065"/>
+    <id>urn:funding-finder:grants-gov:362065</id>
+    <updated>2026-04-27T00:00:00Z</updated>
+    <author><name>Africa Regional Services</name></author>
+    <category term="Arts and culture"/>
+    <category term="Energy"/>
+    <category term="Technology development"/>
+    <summary>Africa Regional Services — Closes 2026-08-31 — Priority Region: Sub-Saharan Africa Africa Regional Services (ARS) Paris, part of the U.S. Department of State’s Bureau of African Affairs, invites U.S. citizen speakers, artists, and athletes/coaches to submit Statements of Interest (SOIs) for inclusion on the ARS U.S. Speaker Program roster. Roster members may be selected for small program specific grants to conduct in-person and virtual outreac…</summary>
+  </entry>
+  <entry>
+    <title>Chemical Process Systems (CPS)</title>
+    <link href="https://www.grants.gov/search-results-detail/362061"/>
+    <id>urn:funding-finder:grants-gov:362061</id>
+    <updated>2026-04-24T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <summary>U.S. National Science Foundation — Posted — Society relies on chemical processes to turn raw materials into useful products. The Chemical Process Systems (CPS) program invests in fundamental research on chemical and biochemical processes to make them more efficient, sustainable, and resilient. New CPS technologies for manufacturing, biotechnology, critical minerals, energy, food, and other national priorities will help make the U.S. more co…</summary>
+  </entry>
+  <entry>
+    <title>Transport Phenomena (TP)</title>
+    <link href="https://www.grants.gov/search-results-detail/362063"/>
+    <id>urn:funding-finder:grants-gov:362063</id>
+    <updated>2026-04-24T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Separations and membranes"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation — Posted — The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
+  </entry>
+  <entry>
+    <title>High-performance Optimized Recycled Nuclear Isotopes for Gen IV reactors (HORNIG)</title>
+    <link href="https://www.grants.gov/search-results-detail/362035"/>
+    <id>urn:funding-finder:grants-gov:362035</id>
+    <updated>2026-04-23T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency Energy</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>Advanced Research Projects Agency Energy — Closes 2026-08-06 — This is Modification 01 to the NOFO: • Inserted certain deadlines and updated dates, including the deadlines for submitting questions and Full Applications (Basic Information, Section IV.C). NOFO Number: DE-FOA-0003623 – High-performance Optimized Recycled Nuclear Isotopes for Gen IV reactors (HORNIG) Agency Overview: The Advanced Research Projects Agency—Energy (ARPA-E), an organization within th…</summary>
+  </entry>
+</feed>

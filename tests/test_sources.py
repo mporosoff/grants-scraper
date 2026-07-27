@@ -376,6 +376,30 @@ class LifecycleTests(unittest.TestCase):
             cache["sources"]["nih"]["records"][0]["opportunity_id"], "demo:NEW")
         self.assertEqual(summaries[0]["status"], "refreshed")
 
+    def test_successful_refresh_preserves_first_seen_date(self):
+        cache = self._cache_with("nih", "KEEP")
+        cache["sources"]["nih"]["fetched_at"] = "2026-07-20T12:00:00Z"
+        cache["sources"]["nih"]["records"][0]["source_first_seen_date"] = "2026-07-18"
+        fresh = [an_external_record(
+            external_id="KEEP", url="https://x.org/KEEP", close_date="2026-12-15")]
+        live, cache, _ = resolve_live_records(
+            [self._ok("nih", fresh)], cache, self.AS_OF)
+        self.assertEqual(live[0]["source_first_seen_date"], "2026-07-18")
+        self.assertEqual(
+            cache["sources"]["nih"]["records"][0]["source_first_seen_date"],
+            "2026-07-18",
+        )
+
+    def test_successful_refresh_dates_new_records(self):
+        fresh = [an_external_record(
+            external_id="NEW", url="https://x.org/new", close_date="2026-12-15")]
+        live, _, _ = resolve_live_records(
+            [self._ok("nih", fresh)],
+            {"schema_version": 1, "sources": {}},
+            self.AS_OF,
+        )
+        self.assertEqual(live[0]["source_first_seen_date"], "2026-07-25")
+
     def test_unhealthy_count_keeps_last_known_good(self):
         cache = self._cache_with("s", "GOOD")
         empty_refresh = self._ok("s", [])  # 0 records < min_records
@@ -508,6 +532,13 @@ class NyserdaParseTests(unittest.TestCase):
                         "DueDateString": "<p><strong>Due Date:&nbsp;7/27/2022</strong></p>",
                         "DetailPageLink": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=old",
                     },
+                    {
+                        "SolicitationName": "Grid Planning Request for Information",
+                        "SolicitationNumber": "RFI 6000",
+                        "ShortDescription": "Input only; no award is offered.",
+                        "DueDateString": "<p><strong>Due Date:&nbsp;10/1/2026</strong></p>",
+                        "DetailPageLink": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=rfi",
+                    },
                 ],
             }
         ]
@@ -550,6 +581,7 @@ class NyserdaParseTests(unittest.TestCase):
         kept_titles = {record["title"] for record in kept}
         self.assertIn("Clean Energy Career Pathways Training", kept_titles)
         self.assertNotIn("Expired Legacy Program", kept_titles)
+        self.assertNotIn("Grid Planning Request for Information", kept_titles)
         self.assertEqual(dropped[0]["reason"], "expired")
 
 
@@ -650,6 +682,12 @@ class DoeExchangeParseTests(unittest.TestCase):
         '<li><a href="#FoaId44444444-4444-4444-4444-444444444444">DE-FOA-0009050</a> '
         '<a href="#FoaId44444444-4444-4444-4444-444444444444">Geothermal Field Tests</a> '
         'Notice Of Funding Opportunity (NOFO) Geothermal Technologies (GTO) 10/30/2026 05:00 PM ET TBD</li>'
+        '<li><a href="#FoaId55555555-5555-5555-5555-555555555555">DE-TA3-0003589</a> '
+        '<a href="#FoaId55555555-5555-5555-5555-555555555555">Critical Minerals Topic Area 3</a> '
+        'Notice Of Funding Opportunity (NOFO) Manufacturing Office 11/30/2026 05:00 PM ET</li>'
+        '<li><a href="#FoaId66666666-6666-6666-6666-666666666666">DE-FOA-0003588</a> '
+        '<a href="#FoaId66666666-6666-6666-6666-666666666666">Notice of Intent to issue a Notice of Funding Opportunity</a> '
+        'Notice of Intent to Publish Announcement (NOI) Manufacturing Office TBD</li>'
         '</ul>'
     )
 
@@ -658,9 +696,14 @@ class DoeExchangeParseTests(unittest.TestCase):
 
         opps = ArpaEAdapter().parse_html(self.FIXTURE, as_of=date(2026, 7, 25))
         by_title = {o.title: o for o in opps}
-        # RFI is dropped; three NOFOs remain.
-        self.assertEqual(len(opps), 3)
+        # RFI and NOI are dropped; four actual NOFOs remain.
+        self.assertEqual(len(opps), 4)
         self.assertNotIn("Request for Information on Widgets", by_title)
+        self.assertNotIn(
+            "Notice of Intent to issue a Notice of Funding Opportunity",
+            by_title,
+        )
+        self.assertIn("Critical Minerals Topic Area 3", by_title)
 
         ccc = by_title["Carbon Capture Catalysis (CCC)"].to_record(
             slug="arpa-e", source="ARPA-E eXCHANGE", source_type="Federal")
@@ -683,6 +726,23 @@ class DoeExchangeParseTests(unittest.TestCase):
         kept_titles = {r["title"] for r in kept}
         self.assertIn("Carbon Capture Catalysis (CCC)", kept_titles)
         self.assertNotIn("Legacy Closed Program", kept_titles)
+
+    def test_parser_fails_closed_when_rows_have_no_recognizable_nofo_type(self):
+        from scripts.sources.adapters.doe_exchange import ArpaEAdapter
+
+        nonfunding = (
+            '<a href="#FoaId11111111-1111-1111-1111-111111111111">RFI-0000001</a>'
+            '<a href="#FoaId11111111-1111-1111-1111-111111111111">RFI one</a>'
+            'Request for Information (RFI)'
+            '<a href="#FoaId22222222-2222-2222-2222-222222222222">NOI-0000002</a>'
+            '<a href="#FoaId22222222-2222-2222-2222-222222222222">NOI two</a>'
+            'Notice of Intent to Publish Announcement (NOI)'
+            '<a href="#FoaId33333333-3333-3333-3333-333333333333">TPL-0000003</a>'
+            '<a href="#FoaId33333333-3333-3333-3333-333333333333">TPL three</a>'
+            'Teaming Partner List'
+        )
+        with self.assertRaisesRegex(ValueError, "no recognizable NOFO"):
+            ArpaEAdapter().parse_html(nonfunding, as_of=date(2026, 7, 25))
 
 
 if __name__ == "__main__":

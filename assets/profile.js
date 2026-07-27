@@ -232,7 +232,7 @@
       .map(line => line.replace(/[ \t]+/g, " ").trim());
     const normalized = lines
       .reduce((output, line) => {
-        if (!line && output.at(-1) === "") return output;
+        if (!line && output[output.length - 1] === "") return output;
         output.push(line);
         return output;
       }, [])

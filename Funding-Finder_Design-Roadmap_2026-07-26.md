@@ -5,7 +5,7 @@
 
 > Note on wording: I read item 1 ("make the audit layer less coarse") as the **relevance-feedback / evaluation layer** — the "Match Quality Testing" controls (useful / not relevant / verify) we discussed as too coarse. If you meant something else by "audit layer," flag it.
 
-> **Status update (July 27, 2026):** Workstream 0 is done (`.gitattributes`, vendored-hash normalization, and the one-time repository renormalization are complete). Workstream A's graded scale is shipped and the evaluator reports graded relevance **and nDCG** for retrieval and reranking. Workstream B is implemented as an optional device-local preference re-ranker after three graded ratings, with visible explanations, reversible controls, and a small exploration set. Workstream C now publishes verified NSF upcoming-due-dates and NYSERDA records through the daily lifecycle. NYSERDA selects the next open round and retains later structured dates. The lifecycle includes atomic per-source replacement, a committed last-known-good snapshot, currentness/actionability gates, health bounds, full post-merge validation, and owner-facing degradation alerts. UR InfoReady remains a disabled shell pending a stable permissioned route; no unstable credential is shipped. The NIH Guide adapter is intentionally disabled because NIH stopped publishing NOFOs there in FY2026; Grants.gov remains the official NIH NOFO source.
+> **Status update (July 27, 2026):** Workstream 0 is done (`.gitattributes`, vendored-hash normalization, and the one-time repository renormalization are complete). Workstream A's graded scale is shipped and the evaluator reports graded relevance **and nDCG** for retrieval and reranking. Workstream B is implemented as an optional device-local preference re-ranker after three graded ratings, with visible explanations, reversible controls, and a small exploration set. Workstream C now publishes verified NSF upcoming-due-dates, NYSERDA, ARPA-E eXCHANGE, and DOE EERE Exchange records through the daily lifecycle. NYSERDA selects the next open round and retains later structured dates; the DOE adapters publish only actual NOFOs. The lifecycle includes atomic per-source replacement, a committed last-known-good snapshot with record first-seen dates, currentness/actionability gates, health bounds, full post-merge validation, and owner-facing degradation alerts. Official-notice program-area extraction, public Atom feeds, and a private-repository weekly-digest pilot bundle are also wired into the daily catalog. NASA NSPIRES and UR InfoReady remain disabled shells pending stable routes; no unstable credential is shipped. The NIH Guide adapter is intentionally disabled because NIH stopped publishing NOFOs there in FY2026; Grants.gov remains the official NIH NOFO source.
 
 ---
 
@@ -91,19 +91,27 @@ comparison.
 - **`nih-guide`:** disabled intentionally; NIH Guide now carries policy and informational notices rather than FY2026 NOFOs.
 - **`nyserda`:** enabled against the verified JSON route; publishes the next
   open application round and preserves later application/concept-paper dates.
+- **`arpa-e` / `eere-exchange`:** enabled against the live server-rendered DOE
+  Exchange lists. They keep actual NOFO rows, reject RFIs/NOIs/teaming lists,
+  and retain later open submission dates.
+- **`nasa-nspires`:** disabled shell; the public list remains session/POST-gated
+  and no stable ingestion route is confirmed.
 - **`ur_infoready`:** disabled shell with a fixture parser. The earlier
   undocumented endpoint returns HTTP 500, so no unstable request or embedded
   secret ships.
 - **`pnd-rfp`:** ready to configure (needs live feed URL + a topic filter).
-- **Net:** NSF and NYSERDA are connected; institutional and broader
-  non-federal coverage remains incremental.
+- **Net:** NSF, NYSERDA, ARPA-E, and DOE EERE are connected; institutional,
+  foundation, and broader non-federal coverage remains incremental.
 
 **"Can we wire in every source we can think of?"** We can *add an adapter for each*, but each real source is its own implementation + live verification, and a few should never be added (licensed databases). So the plan is: enumerate the full backlog, implement incrementally, enable one verified source at a time. Here's the backlog, tiered:
 
 | Tier | Source | Route | Effort | Notes |
 |---|---|---|---|---|
 | **Connected** | NYSERDA | verified JSON API | Done | Next-round and later structured deadlines are retained. |
+| **Connected** | ARPA-E eXCHANGE | server-rendered NOFO list | Done | Live-verified; non-funding announcements are excluded. |
+| **Connected** | DOE EERE Exchange | server-rendered NOFO list | Done | Live-verified; currently closed rows are removed by the lifecycle. |
 | **Blocked** | UR InfoReady | stable permissioned route needed | Unknown | Keep the disabled shell until the portal owner provides or documents a reliable route. |
+| **Blocked** | NASA NSPIRES | stable public solicitation list needed | Unknown | Keep disabled until the session/POST flow has a maintainable route. |
 | **2 — breadth** | Candid PND RFP Bulletin | RSS (engine already built) | M | One source → many foundations. Needs topic/eligibility filter (nonprofit-skewed). |
 | 2 | ~10 flagship foundations (Templeton, Sloan, Moore, Simons, Keck, …) | per-site scrapers | S each × N | Cap the list; maintenance scales with N. Derive from your spreadsheet's top sponsors. |
 | **3 — fill gaps** | NSF Dear Colleague Letters | scrape NSF opportunities page | M | Overlaps Grants.gov → needs dedup. |
@@ -113,10 +121,10 @@ comparison.
 
 **Per-source "definition of done"** (the reusable checklist): adapter module + fixture test + health check (plausible row count) + documented public-use basis + maintenance owner + `enabled = True`. Then one shared change: add the single documented workflow step (in `scripts/sources/README.md`) and confirm the regression test passes on the merged asset.
 
-**Recommendation.** Keep InfoReady disabled until a stable permissioned route
-exists. Next prioritize the documented DOE Exchange gaps, then PND if its
-public feed and topic filter can be validated. Continue enabling sources one
-verified adapter at a time.
+**Recommendation.** Keep InfoReady and NSPIRES disabled until stable routes
+exist. Run the deferred relevance pilot before scaling further, then prioritize
+PND if its public feed and topic filter can be validated. Continue enabling
+sources one verified adapter at a time.
 
 ---
 
@@ -135,15 +143,17 @@ verified adapter at a time.
    are implemented. One-person bus factor is fine for a pilot, not for six
    live sources.
 7. **Legal hygiene per scrape:** respect `robots.txt` and rate limits (the HTTP client already paces); document each source's public-use basis. *(Ongoing.)*
+8. **No-account alerts — first cut done.** The daily job publishes all/topic/source-type Atom feeds. A separate private-repository bundle can run manually consented weekly saved-search digests without putting subscriber data or SMTP credentials in this public repository. A public self-service subscription system remains later service-backed work.
 
 ---
 
 ## One-paragraph summary
 
 Repository hygiene, graded feedback and evaluation metrics, source facets, the
-safe daily source lifecycle, NSF/NYSERDA ingestion, owner alerts, local saved
+safe daily source lifecycle, NSF/NYSERDA/ARPA-E/EERE ingestion, evidence-backed
+program-area discovery, public Atom feeds, owner alerts, local saved
 opportunities, and the transparent preference model with an exploration slot
-are implemented. InfoReady remains a disabled shell until a stable
-permissioned route exists. Keep the base catalog searchable without
-personalization, expand only verified sources, and use the deferred researcher
-pilot to determine whether these layers improve real matches.
+are implemented. InfoReady and NSPIRES remain disabled shells until stable
+routes exist. Keep the base catalog searchable without personalization, expand
+only verified sources, and use the deferred researcher pilot to determine
+whether these layers improve real matches.

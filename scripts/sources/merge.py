@@ -127,14 +127,32 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                 len(kept), result.min_records, result.max_records
             )
             if healthy:
+                previous_snapshot = sources.get(slug) or {}
+                previous_records = {
+                    record_identity(record): record
+                    for record in (previous_snapshot.get("records") or [])
+                }
+                previous_fetch_date = str(
+                    previous_snapshot.get("fetched_at") or ""
+                )[:10]
+                refreshed_records = []
+                for record in kept:
+                    refreshed = dict(record)
+                    previous = previous_records.get(record_identity(refreshed)) or {}
+                    refreshed["source_first_seen_date"] = (
+                        previous.get("source_first_seen_date")
+                        or previous_fetch_date
+                        or as_of.isoformat()
+                    )
+                    refreshed_records.append(refreshed)
                 sources[slug] = {
                     "source": result.display_name,
                     "source_type": result.source_type,
                     "fetched_at": iso_utc(utc_now()),
-                    "record_count": len(kept),
-                    "records": kept,
+                    "record_count": len(refreshed_records),
+                    "records": refreshed_records,
                 }
-                published = kept
+                published = refreshed_records
                 status = "refreshed"
             else:
                 published = _cached_publishable(sources, slug, as_of)

@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Funding Finder — Manufacturing</title>
+  <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
+  <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
+  <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
+  <updated>2026-07-27T14:02:03Z</updated>
+  <generator>Funding Finder</generator>
+  <entry>
+    <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development</title>
+    <link href="https://www.grants.gov/search-results-detail/363095"/>
+    <id>urn:funding-finder:grants-gov:363095</id>
+    <updated>2026-11-15T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Manufacturing"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health — Closes 2027-06-16 — The NIH Blueprint for Neuroscience Research is interested in continuing to support the BluePrint Neurotherapeutics Network for Small Molecules (BPN-SM)- a program designed to help investigators advance promising small-molecule therapeutics toward clinical testing. The BPN-SM program supports drug discovery and development activities in investigators’ own laboratories while also providing access to…</summary>
+  </entry>
+  <entry>
+    <title>Ensuring “Pro-American Worker” Critical Minerals Supply Chain in the Western Hemisphere</title>
+    <link href="https://www.grants.gov/search-results-detail/363215"/>
+    <id>urn:funding-finder:grants-gov:363215</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>Bureau of International Labor Affairs</name></author>
+    <category term="Manufacturing"/>
+    <summary>Bureau of International Labor Affairs — Closes 2026-10-17 — The Bureau of International Labor Affairs (ILAB), U.S. Department of Labor (USDOL, or the Department), announces the availability of approximately $5,000,000 total costs (subject to the availability of Federal funds) for 1 cooperative agreement(s) to fund a technical assistance project aimed at supporting fair labor standards in the critical minerals sector, specifically copper, lithium, and silve…</summary>
+  </entry>
+  <entry>
+    <title>Protecting the American Seafood Supply Chain by Countering Unfair Labor Practices and Illegal, Unreported, and Unregulated (IUU) Fishing</title>
+    <link href="https://www.grants.gov/search-results-detail/363214"/>
+    <id>urn:funding-finder:grants-gov:363214</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>Bureau of International Labor Affairs</name></author>
+    <category term="Manufacturing"/>
+    <summary>Bureau of International Labor Affairs — Closes 2026-10-17 — The Bureau of International Labor Affairs (ILAB), U.S. Department of Labor (USDOL, or the Department), announces the availability of approximately $11,000,000 total costs (subject to the availability of Federal funds) for 1 cooperative agreement(s) to fund a technical assistance project aimed at addressing abusive labor practices associated with Illegal, Unreported, and Unregulated (IUU) fishing i…</summary>
+  </entry>
+  <entry>
+    <title>Preservation and Reinvestment Initiative for Community Enhancement (PRICE)</title>
+    <link href="https://www.grants.gov/search-results-detail/362077"/>
+    <id>urn:funding-finder:grants-gov:362077</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>Department of Housing and Urban Development</name></author>
+    <category term="Community development"/>
+    <category term="Manufacturing"/>
+    <summary>Department of Housing and Urban Development — Closes 2026-10-19 — HUD is issuing the Preservation and Reinvestment Initiative for Community Enhancement (PRICE) competition NOFO to preserve long-term housing affordability for residents of manufactured housing or an MHC, to redevelop MHCs, and to primarily benefit low- and moderate-income (LMI) residents. Congress appropriated in FY2025 these competitive grants to preserve and revitalize manufactured housing and e…</summary>
+  </entry>
+  <entry>
+    <title>Better Tools for Fair Cotton: Traceability Solutions to Protect U.S. Supply Chains from Chinese Forced Labor</title>
+    <link href="https://www.grants.gov/search-results-detail/363226"/>
+    <id>urn:funding-finder:grants-gov:363226</id>
+    <updated>2026-08-05T00:00:00Z</updated>
+    <author><name>Bureau of International Labor Affairs</name></author>
+    <category term="Manufacturing"/>
+    <summary>Bureau of International Labor Affairs — Closes 2026-09-04 — The Bureau of International Labor Affairs (ILAB), U.S. Department of Labor (USDOL, or the Department), announces the availability of approximately $6 million total costs (subject to the availability of Federal funds) for one cooperative agreement to fund a project that will strengthen traceability and responsible sourcing in cotton supply chains in South Asia. These efforts will enhance the reputa…</summary>
+  </entry>
+  <entry>
+    <title>U.S.-ASEAN Road to 50: Rising Leaders Forum</title>
+    <link href="https://www.grants.gov/search-results-detail/363316"/>
+    <id>urn:funding-finder:grants-gov:363316</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>U.S. Mission to ASEAN</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>U.S. Mission to ASEAN — Closes 2026-08-30 — The U.S. Mission to ASEAN (USASEAN) Public Diplomacy Section (PDS) announces an open competition for applications to develop, organize, and oversee the U.S.-ASEAN Road to 50: Rising Leaders Forum. This one-day Jakarta workshop will gather approximately 50 rising leaders selected exclusively from the USASEAN alumni networks across Southeast Asia. Celebrating 50 years of partnership, this forum look…</summary>
+  </entry>
+  <entry>
+    <title>Upstate Through Wall Heat Pump Demonstration Program</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00000Vto2LAAR"/>
+    <id>urn:funding-finder:nyserda:nyserda%3ARFQL5937</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <summary>NYSERDA — Closes 2026-10-29 — The New York State Energy Research and Development Authority (NYSERDA) is seeking applications from owners, managers, or operators of multifamily buildings to serve as demonstration host sites for Packaged Terminal Heat Pumps (PTHPs) through the Clean Heat for All: Room Heat Pump Program. Eligible buildings must contain at least five (5) dwelling units, be located in New York State counties within…</summary>
+  </entry>
+  <entry>
+    <title>Window Heat Pump Demonstration Program - Phase I</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00000Xse5XAAR"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON6037-PhaseI</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Manufacturing"/>
+    <summary>NYSERDA — Closes 2027-06-30 — NYSERDA’s Clean Heat for All: Packaged Window Heat Pump Demonstration Program provides up to $10 million in incentives to support the installation and performance monitoring of cold-climate packaged window heat pumps (PWHPs) in multifamily buildings across New York State. Through a two-phase structure, the Program qualifies manufacturers and vendors whose PWHP products meet technical and installat…</summary>
+  </entry>
+  <entry>
+    <title>Window Heat Pump Demonstration Program - Phase II</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00000iqxxLAAQ"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON6037-PhaseII</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Manufacturing"/>
+    <summary>NYSERDA — Closes 2027-06-30 — NYSERDA’s Clean Heat for All: Packaged Window Heat Pump Demonstration Program provides up to $10 million in incentives to support the installation and performance monitoring of cold-climate packaged window heat pumps (PWHPs) in multifamily buildings across New York State. Through a two-phase structure, the Program qualifies manufacturers and vendors whose PWHP products meet technical and installat…</summary>
+  </entry>
+  <entry>
+    <title>The New York Truck-Voucher Incentive Program</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt0000000Qp7PAAS"/>
+    <id>urn:funding-finder:nyserda:nyserda%3ANYT-VIP</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>NYSERDA — Closes 2029-12-31 — Helps fleet owners in New York State afford clean vehicle technologies that are quiet, efficient and do not emit harmful pollutants or carbon. NYTVIP provides point-of-sale vouchers to fleet owners that purchase or lease zero emission Class 3-8 vehicles, non-road equipment, and transit buses. Information about how fleets, dealers, and manufacturers can participate in NYTVIP can be found in the Imp…</summary>
+  </entry>
+  <entry>
+    <title>Financing Arrangements for High-Performance Affordable Housing</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt000001GOHEzAAP"/>
+    <id>urn:funding-finder:nyserda:nyserda%3ARFP18</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <summary>NYSERDA — Closes 2030-05-01 — NY Green Bank’s RFP 18 invites property owners and developers, energy service companies and equipment manufacturers, capital providers, and other market participants to submit proposals for NYGB investment in the construction or retrofit of multifamily affordable housing to high levels of energy performance in New York State.</summary>
+  </entry>
+  <entry>
+    <title>New York School Bus Incentive Program</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z000000EMPCAA4"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON5552</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <summary>NYSERDA — Closes 2030-12-30 — The New York School Bus Incentive Program (NYSBIP) is a voucher incentive program to accelerate the deployment of zero-emission school buses and associated charging infrastructure throughout New York State using funds allocated by the 2022 Clean Water, Clean Air, and Green Jobs Environmental Bond Act (Bond Act). More information about how fleets, dealers, and manufacturers can participate in NYSBI…</summary>
+  </entry>
+  <entry>
+    <title>Pax Silica Artificial Intelligence Assistance Project</title>
+    <link href="https://www.grants.gov/search-results-detail/363312"/>
+    <id>urn:funding-finder:grants-gov:363312</id>
+    <updated>2026-07-24T00:00:00Z</updated>
+    <author><name>Bureau of Economic and Business Affairs</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Manufacturing"/>
+    <summary>Bureau of Economic and Business Affairs — Closes 2026-08-20 — Leveraging foreign assistance from the Pax Fund, this NOFO launches the Pax Silica Artificial Intelligence (AI) Assistance Project—a historic first-of-its-kind programmatic initiative to strengthen global AI supply chain security by creating a trusted supply chain credentialing and provenance platform to secure the AI supply chain in partner countries and economies. This NOFO seeks to fund the est…</summary>
+  </entry>
+  <entry>
+    <title>ONAA 7J-TCU Manufacturing NOFO FY2026</title>
+    <link href="https://www.grants.gov/search-results-detail/363311"/>
+    <id>urn:funding-finder:grants-gov:363311</id>
+    <updated>2026-07-24T00:00:00Z</updated>
+    <author><name>Small Business Administration</name></author>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <summary>Small Business Administration — Closes 2026-08-24 — The purpose of this Funding Opportunity Announcement is to invite proposals for funding from Tribal Colleges and Universities, Tribal Serving Institutions, Community Colleges on or near Tribal Lands, and other Trade Schools on or near Tribal Lands interested in providing innovative hands-on, in-person manufacturing training and technical assistance through rapid reskilling of employees for 8(a) an…</summary>
+  </entry>
+  <entry>
+    <title>Advancing Oil and Natural Gas Production and Delivery</title>
+    <link href="https://www.grants.gov/search-results-detail/363302"/>
+    <id>urn:funding-finder:grants-gov:363302</id>
+    <updated>2026-07-23T00:00:00Z</updated>
+    <author><name>National Energy Technology Laboratory</name></author>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <summary>National Energy Technology Laboratory — Closes 2026-09-22 — Advancing Oil and Natural Gas Production and Delivery This Notice of Funding Opportunity (NOFO) is seeking proposals to advance cost-effective technologies for improving the efficiency, reliability, and resilience of the Unites States oil and natural gas supply chain. This funding opportunity spans research and development efforts focused on enhancing resource utilization, modernizing infrastructu…</summary>
+  </entry>
+  <entry>
+    <title>Manufacturing Extension Partnership Center State Competition</title>
+    <link href="https://www.grants.gov/search-results-detail/363279"/>
+    <id>urn:funding-finder:grants-gov:363279</id>
+    <updated>2026-07-22T00:00:00Z</updated>
+    <author><name>National Institute of Standards and Technology</name></author>
+    <category term="Manufacturing"/>
+    <summary>National Institute of Standards and Technology — Closes 2026-08-21 — The NIST Hollings Manufacturing Extension Partnership (NIST MEP) is seeking applications from eligible applicants to establish and operate a MEP Center in the States of Alabama, Alaska, Arkansas, California, Georgia, Louisiana, Massachusetts, Missouri, Montana, Ohio, Pennsylvania, Utah and Vermont, and in the U.S. Territory of Puerto Rico.</summary>
+  </entry>
+  <entry>
+    <title>Young Trilateral Leaders (YTL) Summit</title>
+    <link href="https://www.grants.gov/search-results-detail/363267"/>
+    <id>urn:funding-finder:grants-gov:363267</id>
+    <updated>2026-07-21T00:00:00Z</updated>
+    <author><name>U.S. Mission to South Korea</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Transportation"/>
+    <summary>U.S. Mission to South Korea — Closes 2026-08-05 — Funding Opportunity Title: 2027 Young Trilateral Leaders (YTL) Summit Funding Opportunity Number: PD-SEOUL-FY26-04 Deadline for Applications: Wednesday, August 5, 2026, 11:59 p.m. (GMT+9) CFDA Number: 19.040 Type of Funding: FY26 Smith Mundt Public Diplomacy Funds Total Amount Available: $250,000 This notice is subject to availability of funding. This NOFO is currently listed under Assistance List…</summary>
+  </entry>
+  <entry>
+    <title>Egypt Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363252"/>
+    <id>urn:funding-finder:grants-gov:363252</id>
+    <updated>2026-07-20T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>Bureau of Near Eastern Affairs — Closes 2026-08-31 — The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
+  </entry>
+  <entry>
+    <title>American Center Yangon (ACY) Small Grants Competition</title>
+    <link href="https://www.grants.gov/search-results-detail/363184"/>
+    <id>urn:funding-finder:grants-gov:363184</id>
+    <updated>2026-07-15T00:00:00Z</updated>
+    <author><name>U.S. Mission to Myanmar</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>U.S. Mission to Myanmar — Closes 2026-08-10 — 1. Project Background, Goals and Objectives American Center Yangon Small Grants’ projects must clearly advance America First foreign policy principles by demonstrating how the proposed activities make the United States safer, stronger, and more prosperous, while celebrating Freedom250 and American excellence. Priority will be given to projects that deliver tangible, measurable benefits to U.S. int…</summary>
+  </entry>
+  <entry>
+    <title>Jefferson Center Mandalay (JCM) Small Grants Competition</title>
+    <link href="https://www.grants.gov/search-results-detail/363185"/>
+    <id>urn:funding-finder:grants-gov:363185</id>
+    <updated>2026-07-15T00:00:00Z</updated>
+    <author><name>U.S. Mission to Myanmar</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>U.S. Mission to Myanmar — Closes 2026-08-10 — 1. Project Background, Goals and Objectives Jefferson Center Mandalay Small Grants’ projects must clearly advance America First foreign policy principles by demonstrating how the proposed activities make the United States safer, stronger, and more prosperous, while celebrating Freedom250 and American excellence. Priority will be given to projects that deliver tangible, measurable benefits to U.S. …</summary>
+  </entry>
+  <entry>
+    <title>Syria Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363190"/>
+    <id>urn:funding-finder:grants-gov:363190</id>
+    <updated>2026-07-15T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>Bureau of Near Eastern Affairs — Closes 2026-08-31 — The Bureau of Near Eastern Affairs’ Office of Assistance Coordination of the U.S. Department of State announces an open competition for organizations to submit a statement of interest (SOI) for innovative foreign assistance programs benefiting partner countries that also advance U.S. commercial diplomacy and put American interests first. SOI must demonstrate how projects will leverage foreign assi…</summary>
+  </entry>
+  <entry>
+    <title>Public Wireless Supply Chain Innovation Fund Grant Program – Solutions for AI-Native RAN</title>
+    <link href="https://www.grants.gov/search-results-detail/363179"/>
+    <id>urn:funding-finder:grants-gov:363179</id>
+    <updated>2026-07-14T00:00:00Z</updated>
+    <author><name>National Telecommunications and Information Admini</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <summary>National Telecommunications and Information Admini — Closes 2026-09-09 — This NOFO is the fourth issued under NTIA’s Public Wireless Supply Chain Innovation Fund (PWSCIF or Innovation Fund). Titled “Solutions for AI-Native RAN,” the goal of this NOFO is to support the development of a secure compute environment to enable or leverage native artificial intelligence (“AI”) capabilities in the Radio Access Network (RAN) that generate revenue for operators, cost savings, an…</summary>
+  </entry>
+  <entry>
+    <title>DE-FOA-0003646 Notice of Intent to Issue DE-FOA-0003647 Accelerating Scale-up and Pre-piloting of Emerging Chemical Technologies (ASPECT)</title>
+    <link href="https://www.grants.gov/search-results-detail/363174"/>
+    <id>urn:funding-finder:grants-gov:363174</id>
+    <updated>2026-07-14T00:00:00Z</updated>
+    <author><name>Golden Field Office</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Carbon management"/>
+    <category term="Climate change"/>
+    <summary>Golden Field Office — Closes 2026-09-14 — CMEI intends to issue, on behalf of AFFO, a NOFO titled, “Accelerating Scale-up and Pre-piloting of Emerging Chemical Technologies (ASPECT).” This NOFO will seek applications for financial assistance from entities that wish to conduct work in support of AFFO's focus on emerging chemical technologies. AFFO supports expanding the supply and use of domestic alternative feedstocks to improve supply ch…</summary>
+  </entry>
+  <entry>
+    <title>Muscat - Annual Program Statement (APS)- PD Small Grants Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363078"/>
+    <id>urn:funding-finder:grants-gov:363078</id>
+    <updated>2026-07-08T00:00:00Z</updated>
+    <author><name>U.S. Mission to Oman</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Community development"/>
+    <category term="Cybersecurity"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <summary>U.S. Mission to Oman — Closes 2026-08-09 — The Public Diplomacy Section of U.S. Embassy Muscat announces an open competition to support projects that advance U.S. foreign policy priorities in Oman while strengthening the long-standing partnership between the United States and the Sultanate of Oman. This Annual Program Statement outlines strategic funding priorities, eligibility criteria, and application guidelines for grants ranging from $…</summary>
+  </entry>
+  <entry>
+    <title>Public Diplomacy Small Grants Competition</title>
+    <link href="https://www.grants.gov/search-results-detail/363079"/>
+    <id>urn:funding-finder:grants-gov:363079</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>U.S. Mission to Myanmar</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>U.S. Mission to Myanmar — Closes 2026-07-31 — 1. Project Background, Goals, and Objectives PD small grants’ projects must clearly advance America First foreign policy principles by demonstrating how the proposed activities make the United States safer, stronger, and more prosperous, while celebrating Freedom250 and American excellence. Priority will be given to projects that deliver tangible, measurable benefits to U.S. interests; elevate U.S…</summary>
+  </entry>
+  <entry>
+    <title>Supply Chain Acceleration and Logistics Enablement (SCALE) Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363089"/>
+    <id>urn:funding-finder:grants-gov:363089</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>Small Business Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>Small Business Administration — Closes 2026-08-07 — The Supply Chain Acceleration and Logistics Enablement (SCALE) Program supports organizations that help small businesses overcome operational, technical, workforce, and market access barriers that limit their ability to participate and grow as suppliers within strategically important industries. Through technical assistance, industry engagement, and other implementation focused activities, SCALE h…</summary>
+  </entry>
+  <entry>
+    <title>EARLY STAGE INNOVATIONS (ESI26)</title>
+    <link href="https://www.grants.gov/search-results-detail/363066"/>
+    <id>urn:funding-finder:grants-gov:363066</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Space and aeronautics"/>
+    <category term="Technology development"/>
+    <summary>NASA Headquarters — Closes 2026-08-13 — The National Aeronautics and Space Administration (NASA) Headquarters has released the solicitation Early Stage Innovations (ESI), as an appendix to the Research and Technology Mission Directorate (RTMD) umbrella NASA Research Announcement (NRA) titled "Space Technology Research, Development, Demonstration, and Infusion 2026 (SpaceTech REDDI 2026).”. The solicitation is available by opening the NS…</summary>
+  </entry>
+  <entry>
+    <title>Fertilizer Investment &amp; Expansion for Long-term Domestic Supply (FIELDS)</title>
+    <link href="https://www.grants.gov/search-results-detail/363038"/>
+    <id>urn:funding-finder:grants-gov:363038</id>
+    <updated>2026-07-01T00:00:00Z</updated>
+    <author><name>Rural Business-Cooperative Service</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>Rural Business-Cooperative Service — Closes 2026-08-17 — Fertilizer Investment &amp; Expansion for Long-term Domestic Supply (FIELDS) Program The Fertilizer Investment &amp; Expansion for Long-term Domestic Supply (FIELDS) Program is intended to expand or bring into operation new, independent domestic fertilizer production capacity in order to provide agricultural producers with additional domestic fertilizer options and strengthen the U.S. fertilizer supply ch…</summary>
+  </entry>
+  <entry>
+    <title>Genomic and Biologic Therapies for ADRD (U01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/361287"/>
+    <id>urn:funding-finder:grants-gov:361287</id>
+    <updated>2026-07-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Manufacturing"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health — Closes 2026-11-10 — The National Institutes of Neurological Disorders and Stroke (NINDS) is interested in supporting research projects proposing the optimization and translational development of genomic and biologic therapeutic candidates for Alzheimer’s Disease-Related Dementias (ADRD). Breakthroughs in genomic and biologic therapies are creating new opportunities to treat, prevent, and potentially modify the course…</summary>
+  </entry>
+  <entry>
+    <title>Rapid Reskill Employment Recovery National Dislocated Worker Grants</title>
+    <link href="https://www.grants.gov/search-results-detail/362987"/>
+    <id>urn:funding-finder:grants-gov:362987</id>
+    <updated>2026-06-26T00:00:00Z</updated>
+    <author><name>Employment and Training Administration</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>Employment and Training Administration — Closes 2026-08-03 — Please direct inquiries about this funding opportunity to Sabrina Guerrier at DOL-ETA-DWG@dol.gov with Reskill DWG in the subject line.</summary>
+  </entry>
+  <entry>
+    <title>Young Southeast Asian Leaders Initiative (YSEALI) Summit 2027</title>
+    <link href="https://www.grants.gov/search-results-detail/362913"/>
+    <id>urn:funding-finder:grants-gov:362913</id>
+    <updated>2026-06-24T00:00:00Z</updated>
+    <author><name>U.S. Mission to Singapore</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <summary>U.S. Mission to Singapore — Closes 2026-08-05 — A. PROGRAM DESCRIPTION 1. Project Background, Goals, and ObjectivesThe Department of State Agency Strategic Plan outlines U.S. economic and technological dominance (Goal 5) including strengthening the U.S. technological edge, increasing U.S. technical exports and investments, and stopping foreign actor abuse of the global trading system.Project Goal: The YSEALI Summit 2027 in Singapore will accele…</summary>
+  </entry>
+  <entry>
+    <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
+    <link href="https://www.grants.gov/search-results-detail/362900"/>
+    <id>urn:funding-finder:grants-gov:362900</id>
+    <updated>2026-06-22T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Cybersecurity"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>U.S. Mission to Indonesia — Closes 2026-08-31 — Project Background, Goals, and ObjectivesIn an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will leave…</summary>
+  </entry>
+  <entry>
+    <title>U.S. Talent Program for the U.S. Embassy and Consulates in Canada</title>
+    <link href="https://www.grants.gov/search-results-detail/362763"/>
+    <id>urn:funding-finder:grants-gov:362763</id>
+    <updated>2026-06-11T00:00:00Z</updated>
+    <author><name>U.S. Mission to Canada</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Manufacturing"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Canada — Closes 2026-07-31 — The U.S. Department of State’s Embassy Ottawa announces an open competition to implement a program to connect U.S. citizen talent, including subject matter experts, artists and cultural professionals, and current and former American athletes and coaches, with Canadian audiences and institutions on topics of strategic importance to the United States. Recipients should be prepared to identify and re…</summary>
+  </entry>
+  <entry>
+    <title>Annual Program Statement for Public Diplomacy Mission Mexico - FY26</title>
+    <link href="https://www.grants.gov/search-results-detail/362564"/>
+    <id>urn:funding-finder:grants-gov:362564</id>
+    <updated>2026-05-26T00:00:00Z</updated>
+    <author><name>U.S. Mission to Mexico</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <summary>U.S. Mission to Mexico — Closes 2026-08-10 — The U.S. Department of State’s Public Diplomacy Mission Mexico announces an open competition to implement a program to strengthen cultural ties and mutual understanding between the U.S. and Mexico through cultural, economic, security, educational, professional, and exchange programming that highlights shared values and promotes bilateral cooperation. All programs must include a U.S. cultural eleme…</summary>
+  </entry>
+  <entry>
+    <title>PD ANNUAL PROGRAM STATEMENT</title>
+    <link href="https://www.grants.gov/search-results-detail/362383"/>
+    <id>urn:funding-finder:grants-gov:362383</id>
+    <updated>2026-05-13T00:00:00Z</updated>
+    <author><name>U.S. Mission to Bolivia</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <summary>U.S. Mission to Bolivia — Closes 2026-08-15 — Goals and Objectives• Celebrate American Excellence:o Showcase American innovation, technological leadership, and entrepreneurial spirit, celebrating American dynamism or telling America’s story of excellence.o Highlight U.S. achievements in science, technology, sports, industry, and culture.o Demonstrate the excellence and reliability of American products, services, and standards.o Promote Americ…</summary>
+  </entry>
+  <entry>
+    <title>Meat and Poultry Processing Expansion Program - Phase 4</title>
+    <link href="https://www.grants.gov/search-results-detail/362298"/>
+    <id>urn:funding-finder:grants-gov:362298</id>
+    <updated>2026-05-07T00:00:00Z</updated>
+    <author><name>Rural Business-Cooperative Service</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Community development"/>
+    <category term="Manufacturing"/>
+    <summary>Rural Business-Cooperative Service — Closes 2026-08-07 — The U.S. Department of Agriculture (USDA), Rural Development (RD) Rural Business‐Cooperative Service (RBCS or Agency), requests applications for the Meat and Poultry Processing Expansion Program - Phase 4 (the Program or MPPEP-4) - Fortifying the American Beef Industry. MPPEP-4 is authorized under Section 1001(b)(4) of the American Rescue Plan Act of 2021 (ARPA), which provides funding to make “lo…</summary>
+  </entry>
+  <entry>
+    <title>Chemical Process Systems (CPS)</title>
+    <link href="https://www.grants.gov/search-results-detail/362061"/>
+    <id>urn:funding-finder:grants-gov:362061</id>
+    <updated>2026-04-24T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <summary>U.S. National Science Foundation — Posted — Society relies on chemical processes to turn raw materials into useful products. The Chemical Process Systems (CPS) program invests in fundamental research on chemical and biochemical processes to make them more efficient, sustainable, and resilient. New CPS technologies for manufacturing, biotechnology, critical minerals, energy, food, and other national priorities will help make the U.S. more co…</summary>
+  </entry>
+  <entry>
+    <title>Transport Phenomena (TP)</title>
+    <link href="https://www.grants.gov/search-results-detail/362063"/>
+    <id>urn:funding-finder:grants-gov:362063</id>
+    <updated>2026-04-24T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Separations and membranes"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation — Posted — The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
+  </entry>
+  <entry>
+    <title>High-performance Optimized Recycled Nuclear Isotopes for Gen IV reactors (HORNIG)</title>
+    <link href="https://www.grants.gov/search-results-detail/362035"/>
+    <id>urn:funding-finder:grants-gov:362035</id>
+    <updated>2026-04-23T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency Energy</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>Advanced Research Projects Agency Energy — Closes 2026-08-06 — This is Modification 01 to the NOFO: • Inserted certain deadlines and updated dates, including the deadlines for submitting questions and Full Applications (Basic Information, Section IV.C). NOFO Number: DE-FOA-0003623 – High-performance Optimized Recycled Nuclear Isotopes for Gen IV reactors (HORNIG) Agency Overview: The Advanced Research Projects Agency—Energy (ARPA-E), an organization within th…</summary>
+  </entry>
+  <entry>
+    <title>2026 Alaska Marine Education and Training Mini-Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362034"/>
+    <id>urn:funding-finder:grants-gov:362034</id>
+    <updated>2026-04-23T00:00:00Z</updated>
+    <author><name>DOC NOAA - ERA Production</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>DOC NOAA - ERA Production — Closes 2028-05-01 — This announcement supports Executive Order 14276, Restoring America’s Seafood Competitiveness, by soliciting projects that support: workforce development for marine-related professions in marine science, aquaculture/mariculture, and maritime operations; enhancing seafood safety and management through training in seafood best practices, marketing, and fishery management; technological innovation in…</summary>
+  </entry>
+  <entry>
+    <title>The Genesis Mission: Transforming Science and Energy with AI</title>
+    <link href="https://www.grants.gov/search-results-detail/361526"/>
+    <id>urn:funding-finder:grants-gov:361526</id>
+    <updated>2026-03-17T00:00:00Z</updated>
+    <author><name>Office of Science</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <summary>Office of Science — Closes 2026-12-17 — The DOE Office of Science (SC), Office of Critical Minerals and Energy Innovation (CMEI), Office of Environmental Management (EM), Office of Nuclear Energy (NE), Office of Electricity (OE), and Hydrocarbons and Geothermal Office (HGEO) hereby announce interest in receiving applications from interdisciplinary teams addressing the Genesis Mission National Science and Technology Challenges to acceler…</summary>
+  </entry>
+  <entry>
+    <title>Pathways to Enable Secure Open-Source Ecosystems</title>
+    <link href="https://www.grants.gov/search-results-detail/361333"/>
+    <id>urn:funding-finder:grants-gov:361333</id>
+    <updated>2026-02-19T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation — Closes 2026-09-01 — The Pathways to Enable Secure Open-Source Ecosystems (PESOSE) program supports the translation of open-source science and engineering-focused research products into safe and sustainable ecosystems that address national and societal challenges. Open-source tools such as software, hardware, machine learning models, languages, and data platforms are designed to be shared as they are publicly-accessib…</summary>
+  </entry>
+  <entry>
+    <title>Postdoctoral Research Fellowships in Biology</title>
+    <link href="https://www.grants.gov/search-results-detail/361249"/>
+    <id>urn:funding-finder:grants-gov:361249</id>
+    <updated>2026-02-05T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation — Closes 2026-09-29 — The integration of Artificial Intelligence (AI) and Biological Research has the potential to pave the way for breakthroughs in biotechnology and bio-system design that will create innovations, new industries, and jobs. To capitalize on this promise, the Directorate for Biological Sciences (BIO) will make awards for Postdoctoral Research Fellowships in Biology (PRFB) to recent doctoral degree recip…</summary>
+  </entry>
+  <entry>
+    <title>NSF National Innovation Corps Teams (NSF National I-Corps (TM) Teams) program</title>
+    <link href="https://www.grants.gov/search-results-detail/360664"/>
+    <id>urn:funding-finder:grants-gov:360664</id>
+    <updated>2025-09-26T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation — Posted — The U.S. National Science Foundation (NSF) continues to develop and nurture a national innovation ecosystem that guides the output of scientific discoveries closer to the development of technologies, products, processes, and services that benefit allAmericans. The goals of the NSF I-Corps™program are to spur translation of foundational research to the marketplace, to encourage collaboration betwee…</summary>
+  </entry>
+  <entry>
+    <title>TTO Office Wide (OW) BAA 2025</title>
+    <link href="https://www.grants.gov/search-results-detail/359782"/>
+    <id>urn:funding-finder:grants-gov:359782</id>
+    <updated>2025-06-23T00:00:00Z</updated>
+    <author><name>DARPA - Tactical Technology Office</name></author>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <summary>DARPA - Tactical Technology Office — Closes 2026-12-22 — The DARPA Tactical Technology Office (TTO) creates technological surprise and provides new options for national security, by demonstrating revolutionary platforms and systems with cutting-edge technology. TTO demonstrates compelling hardware at scales that demonstrate disruptive capability, with designs that reduce risk and cost by managing complexity, and which can be manufactured responsively an…</summary>
+  </entry>
+  <entry>
+    <title>Blueprint MedTech Translator (UG3/UH3 - Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/358823"/>
+    <id>urn:funding-finder:grants-gov:358823</id>
+    <updated>2025-06-17T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health — Closes 2028-01-28 — The purpose of this announcement is to encourage investigators to pursue translational activities and clinical feasibility studies to advance the development of therapeutic, and diagnostic devices for disorders that affect the nervous or neuromuscular systems. Activities supported in this program include implementation of clinical prototype devices, non-clinical safety and efficacy testing, design…</summary>
+  </entry>
+  <entry>
+    <title>Centers of Research Excellence in Science and Technology - Research Infrastructure for Science and Engineering</title>
+    <link href="https://www.grants.gov/search-results-detail/359061"/>
+    <id>urn:funding-finder:grants-gov:359061</id>
+    <updated>2025-05-21T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Climate change"/>
+    <category term="Cybersecurity"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <summary>U.S. National Science Foundation — Closes 2026-08-07 — The Centers of Research Excellence in Science and Technology (CREST) program provides support to enhance the research capabilities of minority-serving institutions (MSIs) as defined in this solicitation’s Eligibility section, through effective integration of education and research. The CREST program, composed of the CREST Centers, the CREST Postdoctoral Research Program, and the projects supported…</summary>
+  </entry>
+  <entry>
+    <title>Measurement Science and Engineering (MSE) Research Grant Programs</title>
+    <link href="https://www.grants.gov/search-results-detail/358955"/>
+    <id>urn:funding-finder:grants-gov:358955</id>
+    <updated>2025-05-14T00:00:00Z</updated>
+    <author><name>National Institute of Standards and Technology</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <summary>National Institute of Standards and Technology — Closes 2026-09-15 — To support activities that develop, expand, strengthen, or sustain NIST partnership programs and/or support the conduct of research or a recipient's portion of collaborative research in a variety of areas including, but not limited to: Metrology; Standards; Nanotechnology; Artificial Intelligence; Advanced Communications; Advanced Manufacturing; Promotion of U.S. innovation and industrial competit…</summary>
+  </entry>
+  <entry>
+    <title>Mind, Machine and Motor Nexus</title>
+    <link href="https://www.grants.gov/search-results-detail/358682"/>
+    <id>urn:funding-finder:grants-gov:358682</id>
+    <updated>2025-04-16T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Arts and culture"/>
+    <category term="Environmental science"/>
+    <category term="Neuroscience"/>
+    <category term="Technology development"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Carbon management"/>
+    <category term="Climate change"/>
+    <summary>U.S. National Science Foundation — Posted — The Mind, Machine, and Motor Nexus (M3X) program supports fundamental research that enables intelligent engineered systems and humans to engage in bidirectional interaction in a physics-based environment, to enhance and ensure safety, productivity, and well-being.
+For the purpose of this program an intelligent engineered system is a human-designed system — physical, virtual, or a combination of bo…</summary>
+  </entry>
+  <entry>
+    <title>Alzheimer's Drug-Development Program (U01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357529"/>
+    <id>urn:funding-finder:grants-gov:357529</id>
+    <updated>2024-12-04T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health — Closes 2027-11-05 — The goal of this Notice of Funding Opportunity (NOFO) is to provide funding support for the pre-clinical and early stage clinical (Phase I) development of novel small-molecule and biologic drug candidates that prevent Alzheimer's disease (AD), slow its progression, or treat its cognitive and behavioral symptoms. Participants in this program will receive funding for therapy development activities s…</summary>
+  </entry>
+  <entry>
+    <title>BRAIN Initiative: Clinical Studies to Advance Next-Generation Devices for Recording and Modulation in the Human Central Nervous System (UH3 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/356982"/>
+    <id>urn:funding-finder:grants-gov:356982</id>
+    <updated>2024-11-05T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health — Closes 2026-09-28 — The purpose of this announcement is to encourage investigators to pursue a small clinical trial to obtain critical information necessary to advance recording and/or stimulating devices to treat central nervous system disorders and better understand the human brain (e.g., Early Feasibility Study). Clinical studies supported may consist of acute or short-term procedures that are deemed Non-Significa…</summary>
+  </entry>
+  <entry>
+    <title>SEEDING CRITICAL ADVANCES FOR LEADING ENERGY TECHNOLOGIES WITH UNTAPPED POTENTIAL (SCALEUP) READY</title>
+    <link href="https://www.grants.gov/search-results-detail/356623"/>
+    <id>urn:funding-finder:grants-gov:356623</id>
+    <updated>2024-10-02T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency Energy</name></author>
+    <category term="Carbon management"/>
+    <category term="Climate change"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <summary>Advanced Research Projects Agency Energy — Closes 2029-09-29 — The purpose of this modification is to clarify the meaning of the Program Policy Factors in Section V.C. To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to the ARPA-E website at https://arpa-e-foa.energy.gov. To apply to this NOFO, Applicants must register with and submit application materials through ARPA-E eXCHANGE (https://arpa-e-foa.energy.gov/Registration.aspx). For det…</summary>
+  </entry>
+  <entry>
+    <title>Blueprint Neurotherapeutics Network (BPN): Biologic-based Drug Discovery and Development for Disorders of the Nervous System (UG3/UH3 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/356610"/>
+    <id>urn:funding-finder:grants-gov:356610</id>
+    <updated>2024-10-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <category term="Manufacturing"/>
+    <summary>National Institutes of Health — Closes 2027-08-18 — The Blueprint Neurotherapeutics Network for Biologics (BPN-Biologics) provides support for biologic-based therapeutic discovery and development, from lead optimization through phase I clinical testing. This Funding Opportunity Announcement (FOA) supports preclinical discovery and development of potential therapeutic Biotechnology Products and Biologics including, but not limited to, large biologic…</summary>
+  </entry>
+  <entry>
+    <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development of Disorders of the Nervous System (UG3/UH3 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/356531"/>
+    <id>urn:funding-finder:grants-gov:356531</id>
+    <updated>2024-09-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health — Closes 2026-08-18 — The Blueprint Neurotherapeutics Network (BPN) invites applications from neuroscience investigators seeking support to advance their small molecule drug discovery and development projects into the clinic. Participants in the BPN are responsible for conducting all studies that involve disease- or target-specific assays, models, and other research tools and receive funding for all activities to be co…</summary>
+  </entry>
+  <entry>
+    <title>BRAIN Initiative: Reagent Resources for Brain Cell Type-Specific Access to Broaden Distribution of Enabling Technologies for Neuroscience (U24 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/356530"/>
+    <id>urn:funding-finder:grants-gov:356530</id>
+    <updated>2024-09-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Manufacturing"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health — Closes 2027-06-15 — This Notice of Funding Opportunity Announcement (NOFO) from the NIH Brain Research through Advancing Innovative Neurotechnologies (BRAIN) Initiative is intended to support establishment of facilities at minority-serving institutions (MSIs) and Institutional Development Award (IDeA)-eligible institutions for scaled production and distribution of brain cell type-specific access and manipulation reag…</summary>
+  </entry>
+  <entry>
+    <title>Computational and Data-Enabled Science and Engineering</title>
+    <link href="https://www.grants.gov/search-results-detail/356055"/>
+    <id>urn:funding-finder:grants-gov:356055</id>
+    <updated>2024-08-15T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Data science"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation — Posted — Large-scale simulations and the ability to accumulate massive amounts of data have revolutionized science and engineering. The goal of the Computational and Data-enabled Science and Engineering (CDS&amp;E) meta-program is to identify and capitalize on opportunities for major scientific and engineering breakthroughs through new computational and data-analysis approaches and best practices. The CDS&amp;E me…</summary>
+  </entry>
+  <entry>
+    <title>Advanced Technological Education</title>
+    <link href="https://www.grants.gov/search-results-detail/355100"/>
+    <id>urn:funding-finder:grants-gov:355100</id>
+    <updated>2024-06-25T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation — Closes 2026-10-01 — With a focus on two-year Institutions of Higher Education (IHEs), the Advanced Technological Education (ATE) program supports the education of technicians for the high-technology fields that drive our nation's economy. The program involves partnerships between academic institutions (grades 7-12, IHEs), industry, and economic development agencies to promote improvement in the education of science a…</summary>
+  </entry>
+  <entry>
+    <title>IUSE/Professional Formation of Engineers: Revolutionizing Engineering Departments</title>
+    <link href="https://www.grants.gov/search-results-detail/353413"/>
+    <id>urn:funding-finder:grants-gov:353413</id>
+    <updated>2024-04-05T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation — Closes 2026-09-08 — Revolutionizing Engineering Departments (hereinafter referred to as RED) is designed to build upon previous efforts in engineering education research. Specifically, previous and ongoing evaluations of the NSF Engineering Education and Centers Division program and its predecessors, as well as those related programs in the Directorate for STEM Education, have shown that prior investments have signif…</summary>
+  </entry>
+  <entry>
+    <title>ECosystem for Leading Innovation in Plasma Science and Engineering</title>
+    <link href="https://www.grants.gov/search-results-detail/351715"/>
+    <id>urn:funding-finder:grants-gov:351715</id>
+    <updated>2024-01-06T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Climate change"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation — Closes 2026-08-11 — Plasma science is a transdisciplinary field of research where fundamental studies in many disciplines, including plasma physics, plasma chemistry, materials science, and space science, come together to advance knowledge for discovery and technological innovation. The primary goal of the ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) program is to identify and capitali…</summary>
+  </entry>
+  <entry>
+    <title>Joint Center of Excellence for Advanced Materials Research</title>
+    <link href="https://www.grants.gov/search-results-detail/39841"/>
+    <id>urn:funding-finder:grants-gov:39841</id>
+    <updated>2023-11-01T00:00:00Z</updated>
+    <author><name>FAA-COE-JAMS</name></author>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Transportation"/>
+    <summary>FAA-COE-JAMS — Posted — The Joint Center of Excellence (COE) for Advanced Materials (JAMS) was established in January 2004 to assist in ensuring the safe and reliable application of composites and advanced materials to commercial aircraft. The Center is a joint effort of the Center of Excellence for Composite and Advanced Materials (CECAM) led by Wichita State University and the Center of Excellence for Advanced Material…</summary>
+  </entry>
+</feed>

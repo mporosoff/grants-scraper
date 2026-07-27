@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Funding Finder — Materials science</title>
+  <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
+  <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
+  <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
+  <updated>2026-07-27T14:02:03Z</updated>
+  <generator>Funding Finder</generator>
+  <entry>
+    <title>Microplastics Research and Resource Coordination Center (U24 - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/362996"/>
+    <id>urn:funding-finder:grants-gov:362996</id>
+    <updated>2026-10-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Materials science"/>
+    <summary>National Institutes of Health — Closes 2026-12-01 — The goal of the Micro/Nanoplastics (M/NPs) Research and Resource Coordination Center initiative is to establish a robust center that will coordinate and advance multidisciplinary efforts among biomedical and material science researchers to gain a comprehensive understanding of the health effects of M/NPs. This coordination center will accelerate the development and dissemination of sampling and an…</summary>
+  </entry>
+  <entry>
+    <title>Rapid Reskill Employment Recovery National Dislocated Worker Grants</title>
+    <link href="https://www.grants.gov/search-results-detail/362987"/>
+    <id>urn:funding-finder:grants-gov:362987</id>
+    <updated>2026-06-26T00:00:00Z</updated>
+    <author><name>Employment and Training Administration</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>Employment and Training Administration — Closes 2026-08-03 — Please direct inquiries about this funding opportunity to Sabrina Guerrier at DOL-ETA-DWG@dol.gov with Reskill DWG in the subject line.</summary>
+  </entry>
+  <entry>
+    <title>MINE HEALTH AND SAFETY STATE GRANTS</title>
+    <link href="https://www.grants.gov/search-results-detail/362729"/>
+    <id>urn:funding-finder:grants-gov:362729</id>
+    <updated>2026-06-09T00:00:00Z</updated>
+    <author><name>Mine Safety and Health Administration</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Materials science"/>
+    <summary>Mine Safety and Health Administration — Closes 2026-08-10 — The Secretary of Labor, through MSHA, may award grants to State, Tribal, and Territorial Governments (including the District of Columbia, the Commonwealth of Puerto Rico, the Virgin Islands, American Samoa, Guam, and the Commonwealth of the Northern Mariana Islands) to assist them in developing and enforcing State mining laws and regulations, improve State workers’ compensation and mining occupati…</summary>
+  </entry>
+  <entry>
+    <title>Annual Program Statement for Public Diplomacy Mission Mexico - FY26</title>
+    <link href="https://www.grants.gov/search-results-detail/362564"/>
+    <id>urn:funding-finder:grants-gov:362564</id>
+    <updated>2026-05-26T00:00:00Z</updated>
+    <author><name>U.S. Mission to Mexico</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <summary>U.S. Mission to Mexico — Closes 2026-08-10 — The U.S. Department of State’s Public Diplomacy Mission Mexico announces an open competition to implement a program to strengthen cultural ties and mutual understanding between the U.S. and Mexico through cultural, economic, security, educational, professional, and exchange programming that highlights shared values and promotes bilateral cooperation. All programs must include a U.S. cultural eleme…</summary>
+  </entry>
+  <entry>
+    <title>Chemical Process Systems (CPS)</title>
+    <link href="https://www.grants.gov/search-results-detail/362061"/>
+    <id>urn:funding-finder:grants-gov:362061</id>
+    <updated>2026-04-24T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <summary>U.S. National Science Foundation — Posted — Society relies on chemical processes to turn raw materials into useful products. The Chemical Process Systems (CPS) program invests in fundamental research on chemical and biochemical processes to make them more efficient, sustainable, and resilient. New CPS technologies for manufacturing, biotechnology, critical minerals, energy, food, and other national priorities will help make the U.S. more co…</summary>
+  </entry>
+  <entry>
+    <title>FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
+    <link href="https://www.grants.gov/search-results-detail/360678"/>
+    <id>urn:funding-finder:grants-gov:360678</id>
+    <updated>2025-09-30T00:00:00Z</updated>
+    <author><name>Office of Science</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Carbon management"/>
+    <category term="Quantum science"/>
+    <summary>Office of Science — Closes 2026-09-30 — The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
+  </entry>
+  <entry>
+    <title>Centers of Research Excellence in Science and Technology - Research Infrastructure for Science and Engineering</title>
+    <link href="https://www.grants.gov/search-results-detail/359061"/>
+    <id>urn:funding-finder:grants-gov:359061</id>
+    <updated>2025-05-21T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Climate change"/>
+    <category term="Cybersecurity"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <summary>U.S. National Science Foundation — Closes 2026-08-07 — The Centers of Research Excellence in Science and Technology (CREST) program provides support to enhance the research capabilities of minority-serving institutions (MSIs) as defined in this solicitation’s Eligibility section, through effective integration of education and research. The CREST program, composed of the CREST Centers, the CREST Postdoctoral Research Program, and the projects supported…</summary>
+  </entry>
+  <entry>
+    <title>Infrastructure Systems and People</title>
+    <link href="https://www.grants.gov/search-results-detail/358397"/>
+    <id>urn:funding-finder:grants-gov:358397</id>
+    <updated>2025-01-25T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Data science"/>
+    <category term="Environmental science"/>
+    <category term="Materials science"/>
+    <category term="Public health"/>
+    <category term="Technology development"/>
+    <category term="Water"/>
+    <summary>U.S. National Science Foundation — Posted — Infrastructure systems comprise complex connections between physical components, organizational structures and operational methods that support the needs of people and communities at the local, regional, national, and global scales. Such systems form the backbone of society, providing essential services as well as ensuring public health and welfare, economic prosperity and national security, and a…</summary>
+  </entry>
+  <entry>
+    <title>NRL Long Range Broad Agency Announcement (BAA) for Basic and Applied Research</title>
+    <link href="https://www.grants.gov/search-results-detail/352741"/>
+    <id>urn:funding-finder:grants-gov:352741</id>
+    <updated>2024-03-01T00:00:00Z</updated>
+    <author><name>Naval Research Laboratory</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Materials science"/>
+    <category term="Space and aeronautics"/>
+    <category term="Technology development"/>
+    <summary>Naval Research Laboratory — Closes 2026-09-30 — Amendment 0007The purpose of this amendment is to add Summary Topic 61-24-06 - AFFF ALTERNATIVE PROGRAM COMPATIBILITY OF FLUORINE-FREE FOAM (F3) WITH NON-ASPIRATING SPRINKLER NOZZLES to Appendix 1 in it’s entirety. All other terms and conditions remain unchanged.--------------------------------------------------------------Amendment 0006The purpose of this amendment is to extend the due date for a…</summary>
+  </entry>
+  <entry>
+    <title>ECosystem for Leading Innovation in Plasma Science and Engineering</title>
+    <link href="https://www.grants.gov/search-results-detail/351715"/>
+    <id>urn:funding-finder:grants-gov:351715</id>
+    <updated>2024-01-06T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Climate change"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation — Closes 2026-08-11 — Plasma science is a transdisciplinary field of research where fundamental studies in many disciplines, including plasma physics, plasma chemistry, materials science, and space science, come together to advance knowledge for discovery and technological innovation. The primary goal of the ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) program is to identify and capitali…</summary>
+  </entry>
+  <entry>
+    <title>Joint Center of Excellence for Advanced Materials Research</title>
+    <link href="https://www.grants.gov/search-results-detail/39841"/>
+    <id>urn:funding-finder:grants-gov:39841</id>
+    <updated>2023-11-01T00:00:00Z</updated>
+    <author><name>FAA-COE-JAMS</name></author>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Transportation"/>
+    <summary>FAA-COE-JAMS — Posted — The Joint Center of Excellence (COE) for Advanced Materials (JAMS) was established in January 2004 to assist in ensuring the safe and reliable application of composites and advanced materials to commercial aircraft. The Center is a joint effort of the Center of Excellence for Composite and Advanced Materials (CECAM) led by Wichita State University and the Center of Excellence for Advanced Material…</summary>
+  </entry>
+  <entry>
+    <title>Plasma Physics</title>
+    <link href="https://www.grants.gov/search-results-detail/350018"/>
+    <id>urn:funding-finder:grants-gov:350018</id>
+    <updated>2023-08-29T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation — Closes 2026-11-16 — Proposals in the area of plasma physics submitted to the Division of Physics that are not governed by another solicitation (such as CAREER), should be submitted to the Division-wide solicitation: Division of Physics: Investigator-Initiated Research Projects. The Plasma Physics program participates in multiple NSF meta-programs such as the ECosytem for Leading Innovation in Plasma Science and Engin…</summary>
+  </entry>
+  <entry>
+    <title>Condensed Matter and Materials Theory</title>
+    <link href="https://www.grants.gov/search-results-detail/349654"/>
+    <id>urn:funding-finder:grants-gov:349654</id>
+    <updated>2023-08-01T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Transportation"/>
+    <summary>U.S. National Science Foundation — Posted — CMMT supports theoretical and computational materials research in the topical areas represented in DMR's other Topical Materials Research Programs (these are also variously known as Individual Investigator Award (IIA) Programs, or Core Programs, or Disciplinary Programs), which are: Condensed Matter Physics (CMP), Biomaterials (BMAT), Ceramics (CER), Electronic and Photonic Materials (EPM), Metals…</summary>
+  </entry>
+  <entry>
+    <title>Division of Materials Research: Topical Materials Research Programs</title>
+    <link href="https://www.grants.gov/search-results-detail/349655"/>
+    <id>urn:funding-finder:grants-gov:349655</id>
+    <updated>2023-08-01T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Materials science"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation — Posted — Materials Research is the field of science where physics, chemistry, materials science, and engineering naturally converge in the pursuit of the fundamental understanding of the properties of materials and the phenomena they host. Materials are abundant and pervasive, serving as critical building blocks in technology and innovation. Materials Research impacts life and society, as it shapes our und…</summary>
+  </entry>
+  <entry>
+    <title>Process Systems, Reaction Engineering, and Molecular Thermodynamics</title>
+    <link href="https://www.grants.gov/search-results-detail/348793"/>
+    <id>urn:funding-finder:grants-gov:348793</id>
+    <updated>2023-06-18T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <summary>U.S. National Science Foundation — Posted — The Process Systems, Reaction Engineering, and Molecular Thermodynamics program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Electrochemical Systems program; and 3) the Interfacial Engineering program.
+The goal of the Process Systems, Reaction Engineering, and Molecular Thermodynamics program is to advance fundamental engineering research o…</summary>
+  </entry>
+  <entry>
+    <title>Archaeometry</title>
+    <link href="https://www.grants.gov/search-results-detail/347331"/>
+    <id>urn:funding-finder:grants-gov:347331</id>
+    <updated>2023-04-05T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Materials science"/>
+    <summary>U.S. National Science Foundation — Closes 2026-12-01 — The Archaeology Program administers an annual Archaeometry competition with a target date of December 1. The goal is to fund projects in two main categories: To develop or refine anthropologically relevant archaeometric techniques. Examples include the development of methods to identify specific types of organic residues on ceramics or development of field applicable analytic techniques. To suppor…</summary>
+  </entry>
+  <entry>
+    <title>Biophotonics</title>
+    <link href="https://www.grants.gov/search-results-detail/347327"/>
+    <id>urn:funding-finder:grants-gov:347327</id>
+    <updated>2023-04-05T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <category term="Materials science"/>
+    <category term="Neuroscience"/>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation — Posted — The Biophotonics program is part of the Engineering Biology and Health cluster, which also includes: 1) the Biosensing program; 2) the Cellular and Biochemical Engineering program; 3) the Disability and Rehabilitation Engineering program; and 4) the Engineering of Biomedical Systems program.
+The goal of the Biophotonics program is to explore the research frontiers in photonics principles, engineer…</summary>
+  </entry>
+  <entry>
+    <title>Electrochemical Systems</title>
+    <link href="https://www.grants.gov/search-results-detail/347329"/>
+    <id>urn:funding-finder:grants-gov:347329</id>
+    <updated>2023-04-05T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Arts and culture"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Climate change"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Materials science"/>
+    <category term="Transportation"/>
+    <summary>U.S. National Science Foundation — Posted — The Electrochemical Systems program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Interfacial Engineering program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
+The goal of the Electrochemical Systems program is to support fundamental engineering science research that will enable innovative processes…</summary>
+  </entry>
+  <entry>
+    <title>Interfacial Engineering</title>
+    <link href="https://www.grants.gov/search-results-detail/347326"/>
+    <id>urn:funding-finder:grants-gov:347326</id>
+    <updated>2023-04-05T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation — Posted — The Interfacial Engineering program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Electrochemical Systems program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
+The goal of the Interfacial Engineering program is to support fundamental research on atomic- and molecular-scale interfacial phenomena and …</summary>
+  </entry>
+  <entry>
+    <title>Nanoscale Interactions</title>
+    <link href="https://www.grants.gov/search-results-detail/347323"/>
+    <id>urn:funding-finder:grants-gov:347323</id>
+    <updated>2023-04-05T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <summary>U.S. National Science Foundation — Posted — The Nanoscale Interactions program is part of the Environmental Engineering and Sustainability cluster, which also includes: 1) the Environmental Engineering program; and 2) the Environmental Sustainability program.
+The goal of the Nanoscale Interactions program is to support research to advance fundamental and quantitative understanding of the interactions of nanomaterials and nanosystems with bi…</summary>
+  </entry>
+  <entry>
+    <title>University Nuclear Leadership Program– Scholarship and Fellowship Support</title>
+    <link href="https://www.grants.gov/search-results-detail/329436"/>
+    <id>urn:funding-finder:grants-gov:329436</id>
+    <updated>2020-10-15T00:00:00Z</updated>
+    <author><name>Idaho Field Office</name></author>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Materials science"/>
+    <category term="Technology development"/>
+    <summary>Idaho Field Office — Closes 2030-10-14 — A. STATEMENT OF OBJECTIVESThis Funding Opportunity Announcement (FOA) is to award multiple cooperative agreements to accredited United States (U.S.) two- and four-year colleges and universities (Institutions of Higher Education (IHEs)) to receive and administer scholarship and fellowship funding—provided through the University Nuclear Leadership Program (UNLP) and as administered by the Department…</summary>
+  </entry>
+  <entry>
+    <title>Science of Learning and Augmented Intelligence</title>
+    <link href="https://www.grants.gov/search-results-detail/320753"/>
+    <id>urn:funding-finder:grants-gov:320753</id>
+    <updated>2019-09-19T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Materials science"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>U.S. National Science Foundation — Closes 2026-08-05 — Science of Learning and Augmented Intelligence (SL) supports potentially transformative research that develops basic theoretical insights and fundamental knowledge about principles, processes and mechanisms of learning, and about augmented intelligence — how human cognitive function can be augmented through interactions with others or with technology, or through variations in context.
+The program …</summary>
+  </entry>
+  <entry>
+    <title>Environmental Engineering</title>
+    <link href="https://www.grants.gov/search-results-detail/320490"/>
+    <id>urn:funding-finder:grants-gov:320490</id>
+    <updated>2019-09-11T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Water"/>
+    <category term="Energy"/>
+    <summary>U.S. National Science Foundation — Posted — The Environmental Engineering program is part of the Environmental Engineering and Sustainability cluster, which also includes 1) the Nanoscale Interactions program; and 2) the Environmental Sustainability program.
+Environmental engineering is an interdisciplinary field that applies chemical, biological, and physical scientific principles to protect human and ecological health.
+The goal of the Env…</summary>
+  </entry>
+  <entry>
+    <title>Crosscutting Activities in Materials Research</title>
+    <link href="https://www.grants.gov/search-results-detail/308873"/>
+    <id>urn:funding-finder:grants-gov:308873</id>
+    <updated>2018-09-08T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Health equity"/>
+    <category term="Materials science"/>
+    <summary>U.S. National Science Foundation — Posted — Crosscutting Activities in Materials Research (XC) coordinates and supports crosscutting activities within the Division of Materials Research (DMR) and more broadly across NSF.
+The emphasis within XC is diversity and inclusion, international cooperation, and education (including experiential learning at REU/RET Sites). Additionally, activities that broadly engage the community, such as summer scho…</summary>
+  </entry>
+</feed>

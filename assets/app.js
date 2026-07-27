@@ -2763,8 +2763,13 @@
           ? `CV added and saved. ${state.profile.terms.length} profile terms are ready for the next search.`
           : `CV added for this tab. ${state.profile.terms.length} profile terms are ready; save the profile to reuse them later.`);
       } catch (error) {
-        renderCvStatus();
-        setProfileStatus(error?.message || String(error), true);
+        const reason = error?.message || String(error);
+        // Keep the selected file acknowledged and show why it could not be read,
+        // instead of silently reverting to "No CV added." (which looked like the
+        // upload never registered).
+        $("cv-status").textContent = `Couldn't read “${file.name}”. ${reason}`;
+        $("remove-cv").classList.add("hidden");
+        setProfileStatus(reason, true);
       } finally {
         $("cv-file").disabled = false;
         $("cv-file").value = "";
