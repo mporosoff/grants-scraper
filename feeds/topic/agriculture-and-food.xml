@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-07-27T14:18:43Z</updated>
+  <updated>2026-07-28T12:16:14Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -15,6 +15,16 @@
     <category term="Agriculture and food"/>
     <category term="Public health"/>
     <summary>National Institutes of Health — Closes 2027-11-10 — The Tobacco Regulatory Science Program, participating NIH Institutes and Centers (ICs), and the Food and Drug Administration (FDA) Center for Tobacco Products (CTP) intend to issue a Notice of Funding Opportunity (NOFO) soliciting applications for Tobacco Centers of Regulatory Science (TCORS). The awards under this NOFO will be administered by NIH using funds made available through FDA CTP and the…</summary>
+  </entry>
+  <entry>
+    <title>Comprehensive Suicide Prevention Program for States</title>
+    <link href="https://www.grants.gov/search-results-detail/363329"/>
+    <id>urn:funding-finder:grants-gov:363329</id>
+    <updated>2027-02-16T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCIPC</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control - NCIPC — Closes 2027-04-17 — This forecast is for CDC's Comprehensive Suicide Prevention Program for States, a cooperative agreement intended to support implementation and evaluation of a comprehensive public health approach to suicide prevention in the United States. Funded recipients will focus on one or more Focus Prevention Areas (FPAs), groups or settings identified through available data as experiencing a significant su…</summary>
   </entry>
   <entry>
     <title>Asthma and Allergic Diseases Cooperative Research Centers</title>
@@ -48,6 +58,55 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-03-03 — The National Institute for Occupational Safety and Health (NIOSH) is committed to addressing a wide range of occupational health and safety hazards affecting those who work in the agriculture, forestry, and fishing (AgFF) sector. Children and adolescents ("youth") are consistently more likely to be fatally injured working in agriculture compared to other industries. While many steps have been take…</summary>
+  </entry>
+  <entry>
+    <title>FY26 Bureau of Land Management Abandoned Mine Lands and Hazardous Materials - Bureau wide</title>
+    <link href="https://www.grants.gov/search-results-detail/363334"/>
+    <id>urn:funding-finder:grants-gov:363334</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>Bureau of Land Management</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <category term="Public health"/>
+    <summary>Bureau of Land Management — Closes 2026-08-28 — The BLM and its partners inventory and mitigate abandoned mine hazards to protect public health and safety and the environment, and restore watersheds for recreation, fish, wildlife and domestic animals, manage air quality for the protection of public health and sensitive ecosystems, and return lands to productive uses including, but not limited to, recreation, fish and wildlife habitat, and prese…</summary>
+  </entry>
+  <entry>
+    <title>Plant Protection Act Section 7721 Plant Pest and Disease Management and Disaster Prevention Program (PPDMDPP)</title>
+    <link href="https://www.grants.gov/search-results-detail/363328"/>
+    <id>urn:funding-finder:grants-gov:363328</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>Animal and Plant Health Inspection Service</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <summary>Animal and Plant Health Inspection Service — Closes 2026-09-21 — This funding opportunity is provided to carry out the provisions described in Section 7721 of the Plant Protection Act. Through the PPA 7721 program, APHIS provides funds to support projects that protect specialty crops, nursery systems, forestry, other agricultural production systems, and natural resources from harmful and invasive plant pests and pathogens. Additional details about the program a…</summary>
+  </entry>
+  <entry>
+    <title>FY26 Bureau of Land Management Invasive and Noxious Plant Management - Bureau wide</title>
+    <link href="https://www.grants.gov/search-results-detail/363335"/>
+    <id>urn:funding-finder:grants-gov:363335</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>Bureau of Land Management</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Public health"/>
+    <summary>Bureau of Land Management — Closes 2026-09-25 — BLM Invasive and Noxious Plant Management Programs work to prevent, detect, inventory, control, and monitor weed populations on public lands.Invasive species cost the public millions of dollars in control and management each year and many invasive plants and noxious weeds are highly competitive and have the ability to permanently degrade our public lands.Noxious weeds and invasive species expansio…</summary>
+  </entry>
+  <entry>
+    <title>Plant Protection Act Section 7721 Fiscal Year 2027 National Clean Plant Network (NCPN)</title>
+    <link href="https://www.grants.gov/search-results-detail/363326"/>
+    <id>urn:funding-finder:grants-gov:363326</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>Animal and Plant Health Inspection Service</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <summary>Animal and Plant Health Inspection Service — Closes 2026-10-19 — The U.S. Department of Agriculture, Animal and Plant Health Inspection Service announce this funding opportunity to carry out the Plant Protection Act Section 7721 (PPA 7721) National Clean Plant Network (NCPN) program. APHIS will consider project proposals that clearly and directly support the strategic goals and objectives of the National Clean Plant Network as described in the NCPN Strategic Pl…</summary>
   </entry>
   <entry>
     <title>Street Outreach Program (SOP)</title>
@@ -276,16 +335,6 @@
     <summary>U.S. Mission to Algeria — Closes 2026-08-10 — A. ELIGIBILITY 1. Eligible Applicants The following organizations are eligible to apply: ● Not-for-profit organizations, including think tanks and civil society/non-governmental organizations ● Public and private educational institutions ● Public International Organizations and Governmental institutions For-profit entities, even those that may fall into the categories listed above, are not eligibl…</summary>
   </entry>
   <entry>
-    <title>Secondary Education, Two-Year Postsecondary Education, and Agriculture in the K-12 Classroom Challenge Grants Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363109"/>
-    <id>urn:funding-finder:grants-gov:363109</id>
-    <updated>2026-07-08T00:00:00Z</updated>
-    <author><name>National Institute of Food and Agriculture-eRA</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <summary>National Institute of Food and Agriculture-eRA — Closes 2026-07-27 — The purpose of the SPECA program is to award grants to; enhance curricula in agricultural education, increase faculty teaching competencies, interest young people in pursuing higher education in order to prepare for scientific and professional careers in the food and agricultural sciences, promote the incorporation of agriscience and agribusiness subject matter into other instructional programs, p…</summary>
-  </entry>
-  <entry>
     <title>FY 2026 Mobile Payments Solution for SNAP Authorized Farmers - Cooperative Agreement</title>
     <link href="https://www.grants.gov/search-results-detail/363096"/>
     <id>urn:funding-finder:grants-gov:363096</id>
@@ -368,16 +417,6 @@
     <summary>Rural Business-Cooperative Service — Closes 2026-08-17 — Fertilizer Investment &amp; Expansion for Long-term Domestic Supply (FIELDS) Program The Fertilizer Investment &amp; Expansion for Long-term Domestic Supply (FIELDS) Program is intended to expand or bring into operation new, independent domestic fertilizer production capacity in order to provide agricultural producers with additional domestic fertilizer options and strengthen the U.S. fertilizer supply ch…</summary>
   </entry>
   <entry>
-    <title>Disaster Assistance for State Units on Aging (SUAs) and Tribal Organizations</title>
-    <link href="https://www.grants.gov/search-results-detail/360510"/>
-    <id>urn:funding-finder:grants-gov:360510</id>
-    <updated>2026-06-26T00:00:00Z</updated>
-    <author><name>Administration for Community Living</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Transportation"/>
-    <summary>Administration for Community Living — Closes 2026-07-27 — Grants awarded under this announcement are to provide disaster reimbursement and assistance funds to those State Units on Aging (SUAs), and federally recognized Tribal Organizations who are currently receiving a grant under Title VI of the Older Americans Act (OAA), as amended. Total funding available for disaster assistance is subject to the availability of funds appropriated. The estimated numbe…</summary>
-  </entry>
-  <entry>
     <title>FY 2026 CN Technology Innovation Grant for Child and Adult Care Food Program Integrity</title>
     <link href="https://www.grants.gov/search-results-detail/362971"/>
     <id>urn:funding-finder:grants-gov:362971</id>
@@ -451,18 +490,6 @@
     <category term="Agriculture and food"/>
     <category term="Education and workforce"/>
     <summary>Foreign Agricultural Service — Closes 2026-08-14 — The U.S. Department of Agriculture, Foreign Agricultural Service, Fellowship Programs, announces this funding opportunity to support the Norman E. Borlaug International Agricultural Science and Technology Fellowship Program by issuing a new award. This opportunity is available to State cooperative institutions or other colleges and universities in the United States, as defined at 7 U.S.C. § 3103. …</summary>
-  </entry>
-  <entry>
-    <title>Urban, Indoor, and other Emerging Agricultural Production Research, Education, and Extension Initiative</title>
-    <link href="https://www.grants.gov/search-results-detail/362781"/>
-    <id>urn:funding-finder:grants-gov:362781</id>
-    <updated>2026-06-12T00:00:00Z</updated>
-    <author><name>National Institute of Food and Agriculture</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Transportation"/>
-    <summary>National Institute of Food and Agriculture — Closes 2026-07-27 — The UIE program (ALN 10.333) supports research, education, and extension activities through competitive grants designed to address key production and market challenges of local, regional, and national importance. The authorization covers the full food value chain, including production, harvesting, transportation, aggregation, packaging, distribution, and market development. Public input was solici…</summary>
   </entry>
   <entry>
     <title>FY26 Bureau of Land Management Rangeland Resource Management - Bureau wide</title>
@@ -546,28 +573,6 @@
     <summary>Foreign Agricultural Service — Closes 2026-08-14 — The TASC program is designed to assist U.S. organizations by providing funding for projects that seek to remove, resolve, or mitigate existing or potential sanitary, phytosanitary, or technical barriers that prohibit or threaten the export of U.S. specialty crops.</summary>
   </entry>
   <entry>
-    <title>CONSERVATION INNOVATION GRANTS (CIG) CLASSIC PROGRAM</title>
-    <link href="https://www.grants.gov/search-results-detail/362545"/>
-    <id>urn:funding-finder:grants-gov:362545</id>
-    <updated>2026-05-26T00:00:00Z</updated>
-    <author><name>Natural Resources Conservation Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Environmental science"/>
-    <category term="Technology development"/>
-    <summary>Natural Resources Conservation Service — Closes 2026-07-27 — The CIG program stimulates the development and adoption of innovative conservation approaches and technologies in conjunction with agricultural production. CIG projects are expected to lead to the transfer of conservation technologies, management systems, and innovative approaches (such as market-based systems) to agricultural producers through the development of technical manuals, guides, and for…</summary>
-  </entry>
-  <entry>
-    <title>Conservation Innovation Grants (CIG) On-Farm Conservation Innovation Trials for fiscal year (FY) 2026</title>
-    <link href="https://www.grants.gov/search-results-detail/362550"/>
-    <id>urn:funding-finder:grants-gov:362550</id>
-    <updated>2026-05-26T00:00:00Z</updated>
-    <author><name>Natural Resources Conservation Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Environmental science"/>
-    <category term="Technology development"/>
-    <summary>Natural Resources Conservation Service — Closes 2026-07-27 — NRCS is announcing the availability of CIG On-Farm Conservation Innovation Trials (On-Farm Trials). Through On Farm Trials projects, awardees recruit producers and provide them with technical assistance and incentive payments to stimulate the adoption and evaluation of innovative conservation approaches. For 2026, applications will be accepted from eligible entities for projects addressing at leas…</summary>
-  </entry>
-  <entry>
     <title>NCI Community Oncology Research Program (NCORP) Research Bases (UG1 Clinical Trial Required)</title>
     <link href="https://www.grants.gov/search-results-detail/358963"/>
     <id>urn:funding-finder:grants-gov:358963</id>
@@ -587,6 +592,7 @@
     <category term="Agriculture and food"/>
     <category term="Energy"/>
     <category term="Environmental science"/>
+    <category term="Water"/>
     <summary>Bureau of Reclamation — Closes 2027-09-08 — The objective of the WaterSMART Enhancing Water Resources Projects funding opportunity is to invite eligible entities to apply for funding to implement projects per the authorizing language referenced above that benefit water resource management for multiple uses, including water conservation and efficiency projects, water infrastructure improvements, and river and watershed restoration. Projects …</summary>
   </entry>
   <entry>

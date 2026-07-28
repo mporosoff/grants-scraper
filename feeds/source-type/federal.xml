@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml</id>
-  <updated>2026-07-27T14:18:43Z</updated>
+  <updated>2026-07-28T12:16:14Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -158,6 +158,14 @@
     <summary>Centers for Disease Control - NCHHSTP — Closes 2027-05-24 — This NOFO aims to strengthen services to prevent the infectious disease consequences of drug use in high impact settings serving people who use drugs (PWUD) through two components. Component 1 will improve service data by conducting a biennial survey of high-impact settings that serve PWUD to document capacity, needs, access, and service gaps. It will also improve timely local data on infectious d…</summary>
   </entry>
   <entry>
+    <title>Direct-to-Consumer Distribution of HIV and other STI Self-Tests</title>
+    <link href="https://www.grants.gov/search-results-detail/363323"/>
+    <id>urn:funding-finder:grants-gov:363323</id>
+    <updated>2027-03-22T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCHHSTP</name></author>
+    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-05-21 — The purpose of this notice of funding opportunity (NOFO) is to optimize the recipient's existing web-based ordering portal and distribution program to provide at least 1.5 million HIV and other STI self-tests to communities with a high burden of HIV. The use of the program's HIV and other STI self-tests and of resources for treatment and preventive services will increase awareness of HIV and other…</summary>
+  </entry>
+  <entry>
     <title>Medical Scientist Training Program (MSTP)</title>
     <link href="https://www.grants.gov/search-results-detail/361271"/>
     <id>urn:funding-finder:grants-gov:361271</id>
@@ -189,6 +197,14 @@
     <summary>Veterans Legacy Grants Program — Closes 2027-04-09 — VLGP will provide grants to eligible entities for the purpose of conducting cemetery research related to national, State, or Tribal Veterans’ cemeteries; producing educational materials that teach about the history of Veterans interred in national, State, or Tribal Veterans’ cemeteries; and promoting community engagement with the histories of Veterans interred in national, State, or Tribal Veteran…</summary>
   </entry>
   <entry>
+    <title>Statewide Perinatal Quality Collaboratives: Improving Perinatal Care and Outcomes</title>
+    <link href="https://www.grants.gov/search-results-detail/363330"/>
+    <id>urn:funding-finder:grants-gov:363330</id>
+    <updated>2027-03-04T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCCDPHP</name></author>
+    <summary>Centers for Disease Control - NCCDPHP — Closes 2027-05-03 — The purpose of this multi-component NOFO is to improve the health of pregnant and postpartum women and their newborns through quality improvement. CDC will fund two components. Component A will support state Perinatal Quality Collaboratives (PQCs). PQCs are state-based organizations that support quality improvement (QI) efforts in health facilities and whose approach has been successful in improvi…</summary>
+  </entry>
+  <entry>
     <title>Maternal-Child Surveillance and Partnerships for Action, Results, and Knowledge</title>
     <link href="https://www.grants.gov/search-results-detail/363313"/>
     <id>urn:funding-finder:grants-gov:363313</id>
@@ -217,6 +233,16 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health — Closes 2027-05-18 — The Institutional Development Award program develops biomedical research capacity in states that have historically received low levels of NIH funding (IDeA states). The IDeA Networks of Biomedical Research Excellence (INBRE) Notice of Funding Opportunity will support statewide networks in IDeA states made up of one or more research intensive institution and multiple primarily undergraduate institu…</summary>
+  </entry>
+  <entry>
+    <title>Comprehensive Suicide Prevention Program for States</title>
+    <link href="https://www.grants.gov/search-results-detail/363329"/>
+    <id>urn:funding-finder:grants-gov:363329</id>
+    <updated>2027-02-16T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCIPC</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control - NCIPC — Closes 2027-04-17 — This forecast is for CDC's Comprehensive Suicide Prevention Program for States, a cooperative agreement intended to support implementation and evaluation of a comprehensive public health approach to suicide prevention in the United States. Funded recipients will focus on one or more Focus Prevention Areas (FPAs), groups or settings identified through available data as experiencing a significant su…</summary>
   </entry>
   <entry>
     <title>BRAIN Initiative: Development and Validation of Novel Tools and New Approaches for Neuroscience Research</title>
@@ -446,6 +472,15 @@
     <summary>Department of Housing and Urban Development — Closes 2027-02-17 — The Eviction Protection Grant Program (EPGP) will provide competitive awards to approximately 16 eligible nonprofit organizations and government entities to provide no cost legal assistance (including assistance related to pretrial activities, trial activities, post-trial activities and alternative dispute resolution) to low-income tenants at risk of or subject to eviction.</summary>
   </entry>
   <entry>
+    <title>NIOSH Exploratory/Developmental Grant Program (R21)</title>
+    <link href="https://www.grants.gov/search-results-detail/363327"/>
+    <id>urn:funding-finder:grants-gov:363327</id>
+    <updated>2026-12-16T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Environmental science"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-16 — The R21 grant program is designed to advance our understanding of occupational diseases and injuries by focusing on the following three objectives: Identify the risks and conditions linked to workplace health issues.Develop strategies to reduce risks and limit exposure to hazardous environments. Translate significant scientific discoveries into prevention measures and products that can effectively…</summary>
+  </entry>
+  <entry>
     <title>NIOSH Centers for Agriculture, Forestry, and Fishing Safety and Health (U54)</title>
     <link href="https://www.grants.gov/search-results-detail/363195"/>
     <id>urn:funding-finder:grants-gov:363195</id>
@@ -565,44 +600,5 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>National Institutes of Health — Closes 2027-01-29 — The National Institute of Environmental Health Sciences (NIEHS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for research coordination and data support for the Health and Extreme Weather (HEW) initiative. This solicitation will include two closely aligned components: research coordination and data support. The coordinating component will be responsible for faci…</summary>
-  </entry>
-  <entry>
-    <title>Health and Extreme Weather Solutions-Focused Research Hubs (U54 - Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/362978"/>
-    <id>urn:funding-finder:grants-gov:362978</id>
-    <updated>2026-11-27T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Community development"/>
-    <category term="Environmental science"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-01-29 — The National Institute of Environmental Health Sciences (NIEHS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose translational research hubs with multiple highly integrated components focused on research, capacity building, and community/public health translation for regionally relevant topics related to the health impacts of extreme weather and cumula…</summary>
-  </entry>
-  <entry>
-    <title>Accelerating Research and Development of Next Generation Malaria Vaccines Against Malaria – A Model for Mosquito-Borne Diseases</title>
-    <link href="https://www.grants.gov/search-results-detail/361832"/>
-    <id>urn:funding-finder:grants-gov:361832</id>
-    <updated>2026-11-27T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-02-11 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to support basic research, discovery, and/or preclinical development of highly efficacious vaccines for malaria and potentially other mosquito-borne illness. The program will encourage novel approaches to vaccine design that capitalize on recent technological innovations including structure-based immunogen design, and/or combi…</summary>
-  </entry>
-  <entry>
-    <title>Collaborative Program Grant for Multidisciplinary Teams</title>
-    <link href="https://www.grants.gov/search-results-detail/361322"/>
-    <id>urn:funding-finder:grants-gov:361322</id>
-    <updated>2026-11-26T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <summary>National Institutes of Health — Closes 2027-01-26 — The Collaborative Program Grants for Multidisciplinary Teams supports highly integrated teams of investigators working together to address a single, focused, ambitious, and challenging project that cannot be addressed by individual research projects. The program requires synergistic interactions of multiple investigators with complementary expertise to achieve the team's research objectives. Teams…</summary>
-  </entry>
-  <entry>
-    <title>Canine Cancer Immunotherapy Network (K9CIN; U01 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/361532"/>
-    <id>urn:funding-finder:grants-gov:361532</id>
-    <updated>2026-11-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2027-01-25 — The goal of this RFA is to continue to support canine cancer immunotherapy clinical trials as indicators of safe and effective cancer treatments in humans. Pet dog patients develop cancer spontaneously and the courses of disease and treatment responses are similar to those in humans. Canine clinical trial results are translatable to humans. The assessment of responses to immunotherapy in immune-in…</summary>
   </entry>
 </feed>

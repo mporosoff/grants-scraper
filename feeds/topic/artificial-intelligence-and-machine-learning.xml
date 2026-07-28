@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-07-27T14:18:43Z</updated>
+  <updated>2026-07-28T12:16:14Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Precision and Systems Biology to Uncover the Link Between Chronic and Infectious Diseases</title>
@@ -82,6 +82,34 @@
     <summary>National Institutes of Health — Closes 2026-10-01 — The National Institute of Mental Health (NIMH), with other NIH Institutes and Centers (ICs), intends to publish a notice of funding opportunity (NOFO) to solicit research applications for the BRAIN Initiative Cell Atlas Network (BICAN) Coordinating Unit for Biostatistics, Informatics, and Engagement (CUBIE). In accordance with NIH standard peer-review processes, the application(s) will be peer-rev…</summary>
   </entry>
   <entry>
+    <title>Subnational Industrial Innovation and Resilient Entrepreneurship Accelerator</title>
+    <link href="https://www.grants.gov/search-results-detail/363319"/>
+    <id>urn:funding-finder:grants-gov:363319</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>U.S. Mission to Argentina</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Argentina — Closes 2026-08-20 — The U.S. Embassy Buenos Aires announces an open competition to support subnational economic growth and operational modernization in Argentina's strategic manufacturing and resource corridors. This program will establish a competitive business acceleration program designed to provide next-generation entrepreneurs in industrial and mining provinces with practical management tools, strategic scaling …</summary>
+  </entry>
+  <entry>
+    <title>U.S.-Argentina Alumni Summit</title>
+    <link href="https://www.grants.gov/search-results-detail/363320"/>
+    <id>urn:funding-finder:grants-gov:363320</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>U.S. Mission to Argentina</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Technology development"/>
+    <summary>U.S. Mission to Argentina — Closes 2026-08-20 — The U.S. Embassy Buenos Aires announces an open competition to strengthen civic leadership, good governance, and institutional resilience across Argentina. This program will organize a national cross-sector Alumni Summit to equip emerging leaders from the public, academic, and non-governmental organization (NGO) sectors with practical tools, strategic insights, and ethical frameworks regarding inn…</summary>
+  </entry>
+  <entry>
     <title>AI Partnership &amp; Exchange for Tech Leaders (APEX)</title>
     <link href="https://www.grants.gov/search-results-detail/363315"/>
     <id>urn:funding-finder:grants-gov:363315</id>
@@ -131,6 +159,18 @@
     <category term="Data science"/>
     <category term="Cybersecurity"/>
     <summary>National Energy Technology Laboratory — Closes 2026-09-22 — Advancing Oil and Natural Gas Production and Delivery This Notice of Funding Opportunity (NOFO) is seeking proposals to advance cost-effective technologies for improving the efficiency, reliability, and resilience of the Unites States oil and natural gas supply chain. This funding opportunity spans research and development efforts focused on enhancing resource utilization, modernizing infrastructu…</summary>
+  </entry>
+  <entry>
+    <title>U.S.-Africa Strategic Investment Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363298"/>
+    <id>urn:funding-finder:grants-gov:363298</id>
+    <updated>2026-07-23T00:00:00Z</updated>
+    <author><name>Bureau of African Affairs</name></author>
+    <category term="Environmental science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>Bureau of African Affairs — Closes 2027-05-27 — The U.S.-Africa Strategic Investment Program advances America's national interests by harnessing market-based, private sector-led growth across two strategic focus areas: Critical Minerals Investment and Commercial Diplomacy Acceleration. This program seeks market-based solutions that strengthen the environment for foreign investment in sub-Saharan Africa through transparent and competitive proces…</summary>
   </entry>
   <entry>
     <title>Technology Enhanced Adoptive Family Recruiting and Matching</title>
@@ -582,19 +622,6 @@
     <summary>National Institutes of Health — Closes 2026-10-19 — The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
   </entry>
   <entry>
-    <title>A Demonstration to Scale Innovative Person-Centered Approaches to Falls Prevention through Clinical-Community Partnerships</title>
-    <link href="https://www.grants.gov/search-results-detail/360505"/>
-    <id>urn:funding-finder:grants-gov:360505</id>
-    <updated>2026-06-26T00:00:00Z</updated>
-    <author><name>Administration for Community Living</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Data science"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>Administration for Community Living — Closes 2026-07-27 — The purpose of this funding announcement is to demonstrate and evaluate the scalability of person-centered and evidence-based approaches to falls prevention that leverage clinical and community partnerships and related data and technology tools. ACL intends to award a single cooperative agreement to one grantee for a three-year project period with the expectation that the grantee will fund up to t…</summary>
-  </entry>
-  <entry>
     <title>Rapid Reskill Employment Recovery National Dislocated Worker Grants</title>
     <link href="https://www.grants.gov/search-results-detail/362987"/>
     <id>urn:funding-finder:grants-gov:362987</id>
@@ -606,18 +633,6 @@
     <category term="Materials science"/>
     <category term="Manufacturing"/>
     <summary>Employment and Training Administration — Closes 2026-08-03 — Please direct inquiries about this funding opportunity to Sabrina Guerrier at DOL-ETA-DWG@dol.gov with Reskill DWG in the subject line.</summary>
-  </entry>
-  <entry>
-    <title>Ensuring Research Integrity – Research on Research Integrity Program (RRI)</title>
-    <link href="https://www.grants.gov/search-results-detail/362967"/>
-    <id>urn:funding-finder:grants-gov:362967</id>
-    <updated>2026-06-25T00:00:00Z</updated>
-    <author><name>Office of the Assistant Secretary for Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Office of the Assistant Secretary for Health — Closes 2026-07-27 — We seek applications to conduct empirical research on societal, organizational, behavioral, group, and individual factors that affect integrity in research, focusing on the identification of the root causes of research misconduct and driving factors for research integrity in compliance with 42 C.F.R. part 93. The projects funded under this opportunity must aim to research any combination of the fo…</summary>
   </entry>
   <entry>
     <title>Creative Industries Film Lab and Residency - American Film Showcase 2026</title>
@@ -632,16 +647,6 @@
     <category term="Technology development"/>
     <category term="Data science"/>
     <summary>U.S. Mission to Indonesia — Closes 2026-08-07 — Project Background, Goals, and ObjectivesThe Creative Industries Film Lab and Residency – American Film Showcase 2026 is a five-day public diplomacy program aligned with the American Film Showcase 2026 Envoy visit and scheduled during the Jogja-NETPAC Asian Film Festival Market 2026. The program includes two main components: Exhibition Booth: In partnership with Jogja-NETPAC, the program will secu…</summary>
-  </entry>
-  <entry>
-    <title>Countering Terrorist Recruitment Online</title>
-    <link href="https://www.grants.gov/search-results-detail/362904"/>
-    <id>urn:funding-finder:grants-gov:362904</id>
-    <updated>2026-06-22T00:00:00Z</updated>
-    <author><name>Bureau of Counterterrorism</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <summary>Bureau of Counterterrorism — Closes 2026-07-27 — U.S.-designated foreign terrorist organizations (FTOs), including jihadist networks, drug cartels, and individual extremists, continue to act on violent ideations and inspire others globally. Recruitment efforts are increasingly digital, thus making counterterrorism investigations more complex across borders. Furthermore, emerging technology, such as generative artificial intelligence (AI), are en…</summary>
   </entry>
   <entry>
     <title>Prosperity through Partnership: Catalyzing U.S.-Algerian Collaboration in Innovation, Commerce and English Language</title>

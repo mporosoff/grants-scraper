@@ -121,12 +121,11 @@ watermarks, and SMTP secrets outside this public repository.
 
 <!-- catalog-stats:start -->
 This replaces the former 48-record Chemical and Sustainability Engineering feed. The
-July 27, 2026 build contains 1,506 current funding opportunities (1,265 posted and 241
-forecasted) from ARPA-E eXCHANGE (1), Grants.gov (1,467), NYSERDA (37), National Science
-Foundation (1), with no deadline before the catalog date. It provides a direct official
-announcement for 448 records, an official source-page route for another 654, and the
-official Grants.gov record for the remaining 404. Across all route types, 813 records
-also contain an official source URL.
+July 28, 2026 build contains 1,493 current funding opportunities (1,247 posted and 246
+forecasted) from Grants.gov (1,456), NYSERDA (37), with no deadline before the catalog
+date. It provides a direct official announcement for 447 records, an official source-
+page route for another 637, and the official Grants.gov record for the remaining 409.
+Across all route types, 789 records also contain an official source URL.
 <!-- catalog-stats:end -->
 
 Funding values are intentionally not conflated: award floor/ceiling drive

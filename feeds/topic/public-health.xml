@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml</id>
-  <updated>2026-07-27T14:18:43Z</updated>
+  <updated>2026-07-28T12:16:14Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -80,6 +80,16 @@
     <category term="Data science"/>
     <category term="Public health"/>
     <summary>Centers for Disease Control - NCBDDD — Closes 2027-04-26 — CDC proposes to allocate funds to implement Notice of Funding Opportunity (NOFO) DD-27-0028, Maternal Child Surveillance and Partnerships for Action, Results, and Knowledge. This NOFO will integrate maternal child health surveillance with national partnership activities to address key public health challenges including alcohol use during pregnancy, fetal alcohol spectrum disorders (FASDs), neonata…</summary>
+  </entry>
+  <entry>
+    <title>Comprehensive Suicide Prevention Program for States</title>
+    <link href="https://www.grants.gov/search-results-detail/363329"/>
+    <id>urn:funding-finder:grants-gov:363329</id>
+    <updated>2027-02-16T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCIPC</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control - NCIPC — Closes 2027-04-17 — This forecast is for CDC's Comprehensive Suicide Prevention Program for States, a cooperative agreement intended to support implementation and evaluation of a comprehensive public health approach to suicide prevention in the United States. Funded recipients will focus on one or more Focus Prevention Areas (FPAs), groups or settings identified through available data as experiencing a significant su…</summary>
   </entry>
   <entry>
     <title>Clinical Data, Safety and Statistical Centers (CDSSC)</title>
@@ -267,6 +277,15 @@
     <author><name>Centers for Disease Control - NCEZID</name></author>
     <category term="Public health"/>
     <summary>Centers for Disease Control - NCEZID — Closes 2027-01-04 — This Program will create a collaborative network of healthcare systems, facilities and public health partners to rapidly detect, respond to, and prevent threats to patient and healthcare worker safety. This Program will support work that improves the safety, quality and resilience of U.S. healthcare delivery.The Program will be made up of healthcare systems inclusive of multiple facilities in a va…</summary>
+  </entry>
+  <entry>
+    <title>Early Detection, Response, and Control of Global Rabies Outbreaks and Associated Threats to America's Dog-Rabies Free Status</title>
+    <link href="https://www.grants.gov/search-results-detail/363332"/>
+    <id>urn:funding-finder:grants-gov:363332</id>
+    <updated>2026-10-30T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-01 — This Notice of Funding Opportunity (NOFO) supports research to develop, implement, monitor, and evaluate technology-driven and cost-effective tools that reduce the global human rabies burden. It also measures progress toward canine rabies elimination, with an emphasis on high-burden countries. Priority research areas include:Electronic systems for tracking human and dog rabies vaccinations.Managin…</summary>
   </entry>
   <entry>
     <title>Collaborative Network for Clinical Research on Immune Tolerance</title>
@@ -466,6 +485,32 @@
     <summary>National Institutes of Health — Closes 2026-10-17 — The purpose of this NOFO is to enhance the capability of NCATS CTSA Program KL2 scholars supported by the CTSA Program to conduct research as they complete the transition to fully independent academic translational scientists. These small research grants will support different clinical and translational science research projects, including pilot and feasibility studies; secondary data analysis of …</summary>
   </entry>
   <entry>
+    <title>FY26 Bureau of Land Management Abandoned Mine Lands and Hazardous Materials - Bureau wide</title>
+    <link href="https://www.grants.gov/search-results-detail/363334"/>
+    <id>urn:funding-finder:grants-gov:363334</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>Bureau of Land Management</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <category term="Public health"/>
+    <summary>Bureau of Land Management — Closes 2026-08-28 — The BLM and its partners inventory and mitigate abandoned mine hazards to protect public health and safety and the environment, and restore watersheds for recreation, fish, wildlife and domestic animals, manage air quality for the protection of public health and sensitive ecosystems, and return lands to productive uses including, but not limited to, recreation, fish and wildlife habitat, and prese…</summary>
+  </entry>
+  <entry>
+    <title>FY26 Bureau of Land Management Invasive and Noxious Plant Management - Bureau wide</title>
+    <link href="https://www.grants.gov/search-results-detail/363335"/>
+    <id>urn:funding-finder:grants-gov:363335</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>Bureau of Land Management</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Public health"/>
+    <summary>Bureau of Land Management — Closes 2026-09-25 — BLM Invasive and Noxious Plant Management Programs work to prevent, detect, inventory, control, and monitor weed populations on public lands.Invasive species cost the public millions of dollars in control and management each year and many invasive plants and noxious weeds are highly competitive and have the ability to permanently degrade our public lands.Noxious weeds and invasive species expansio…</summary>
+  </entry>
+  <entry>
     <title>NEI Collaborative Clinical Vision Research (UG1 - Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/361394"/>
     <id>urn:funding-finder:grants-gov:361394</id>
@@ -605,47 +650,5 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <summary>Administration for Children and Families - ACYF/CB — Closes 2026-08-07 — The Regional Partnership Grant (RPG) Program supports regional partnerships between child welfare, substance abuse treatment and juvenile or state courts. The goal is to support family-centered treatment programs and services for children who are in an out-of-home placement or are at risk of being placed in an out-of-home placement due to caregiver's substance abuse. Projects will also work to exp…</summary>
-  </entry>
-  <entry>
-    <title>U.S. Wildland Fire Service BLM-National Interagency Fire Center (NIFC) Joint Fire Science Program (JFSP) Primary Announcement</title>
-    <link href="https://www.grants.gov/search-results-detail/363103"/>
-    <id>urn:funding-finder:grants-gov:363103</id>
-    <updated>2026-07-07T00:00:00Z</updated>
-    <author><name>Bureau of Land Management</name></author>
-    <category term="Environmental science"/>
-    <category term="Public health"/>
-    <summary>Bureau of Land Management — Closes 2026-09-17 — The U.S. Wildland Fire Service Joint Fire Science Program is soliciting proposals in two topic areas: (1) drivers of changing wildfire regimes and consequences for wildfire risk factors and (2) smoke impacts from prescribed fire and wildfire. 1. Drivers of changing wildfire regimes and consequences for wildfire risk factors The objective of this task statement is to increase understanding of the d…</summary>
-  </entry>
-  <entry>
-    <title>GLS Campus Suicide Prevention Grant Program</title>
-    <link href="https://www.grants.gov/search-results-detail/360972"/>
-    <id>urn:funding-finder:grants-gov:360972</id>
-    <updated>2026-07-01T00:00:00Z</updated>
-    <author><name>Substance Abuse and Mental Health Services Adminis</name></author>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Substance Abuse and Mental Health Services Adminis — Closes 2026-07-27 — The purpose of this program is to support a comprehensive, public health, and evidence-based approach for colleges and universities that: improves access to behavioral health services for all college students, including those at risk for suicide, depression, serious mental illness, and substance use disorders that can lead to school failure; prevents and reduces suicide, mental health and substanc…</summary>
-  </entry>
-  <entry>
-    <title>Recovery Community Services Program - Statewide Network</title>
-    <link href="https://www.grants.gov/search-results-detail/362467"/>
-    <id>urn:funding-finder:grants-gov:362467</id>
-    <updated>2026-07-01T00:00:00Z</updated>
-    <author><name>Substance Abuse and Mental Health Services Adminis</name></author>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <summary>Substance Abuse and Mental Health Services Adminis — Closes 2026-07-27 — The purpose of this program is to strengthen recovery organizations, their statewide recovery networks, and healthcare systems to improve the delivery of recovery support services (RSS). This is accomplished through structured collaboration, systems improvement, public health messaging, and targeted training for key recovery partners.</summary>
-  </entry>
-  <entry>
-    <title>Culturally Specific Domestic Violence and Sexual Assault Services</title>
-    <link href="https://www.grants.gov/search-results-detail/362378"/>
-    <id>urn:funding-finder:grants-gov:362378</id>
-    <updated>2026-07-01T00:00:00Z</updated>
-    <author><name>Administration for Children and Families - OFVPS</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <summary>Administration for Children and Families - OFVPS — Closes 2026-08-07 — The purpose of the Culturally Specific Services for Domestic Violence and Sexual Assault program is to provide culturally specific services for survivors of domestic violence and sexual assault. Objectives include services for survivors of sexual assault and domestic violence to address emergent needs resulting from a public health emergency and other public health concerns and support for organiz…</summary>
   </entry>
 </feed>

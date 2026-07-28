@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml</id>
-  <updated>2026-07-27T14:18:43Z</updated>
+  <updated>2026-07-28T12:16:14Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NRCS' Feral Swine Eradication and Control Pilot Program Fiscal Year (FY) 2026</title>
@@ -61,6 +61,19 @@
     <category term="Manufacturing"/>
     <category term="Cybersecurity"/>
     <summary>National Energy Technology Laboratory — Closes 2026-09-08 — Modification 000003: The purpose of this modification is to revise NOFO Part 1. Section I.A.1 is revised to correct the Topic Area 1b cost share to 20% and Section IV.C.2 is revised to delete the Environmental Considerations Summary and Environmental Impact Volume from the Summary of Application Requirements table. This Notice of Funding Opportunity (NOFO) will seek proposals for specific research…</summary>
+  </entry>
+  <entry>
+    <title>Middle East Regional Cooperation (MERC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363070"/>
+    <id>urn:funding-finder:grants-gov:363070</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>Assistance Coordination</name></author>
+    <category term="Technology development"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Cybersecurity"/>
+    <category term="Water"/>
+    <summary>Assistance Coordination — Closes 2026-09-30 — The Middle East Regional Cooperation (MERC) Program supports joint scientific research and innovation partnerships between the United States, Israel, and countries across the Middle East and North Africa (MENA). The program funds applied research projects that address shared regional challenges while advancing U.S. economic, technological, and strategic interests. MERC is designed to bring togethe…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 26 Community Assistance Program - State Support Services Element (CAP-SSSE)</title>
@@ -134,6 +147,42 @@
     <summary>Bureau of Reclamation — Closes 2026-09-23 — The objectives of this NAA/TAP funding opportunity are to provide funding for drought relief actions/projects that mitigate drought impacts for designated federally recognized tribes within the Colorado River Basin (see Eligibility section for list of tribes), and which advance Presidential and Department of the Interior Priorities within the Basin.Proposals should meet one or more of the followin…</summary>
   </entry>
   <entry>
+    <title>F25AS00332 Highlands Conservation Act – Competitive Funding Round</title>
+    <link href="https://www.grants.gov/search-results-detail/362484"/>
+    <id>urn:funding-finder:grants-gov:362484</id>
+    <updated>2026-05-19T00:00:00Z</updated>
+    <author><name>Fish and Wildlife Service</name></author>
+    <category term="Environmental science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Water"/>
+    <summary>Fish and Wildlife Service — Closes 2026-10-31 — The Highlands Conservation Act Program (HCA) is administered by the US Fish and Wildlife Service (Service) to assist Connecticut, New Jersey, New York, and Pennsylvania in the protection of land and natural resources in the Highlands Region. HCA grants support land conservation projects in which a State, County, or Municipal entity acquires land or an interest in land from a willing seller to cons…</summary>
+  </entry>
+  <entry>
+    <title>F25AS00379 Highlands Conservation Act - Base Funding Round</title>
+    <link href="https://www.grants.gov/search-results-detail/362480"/>
+    <id>urn:funding-finder:grants-gov:362480</id>
+    <updated>2026-05-19T00:00:00Z</updated>
+    <author><name>Fish and Wildlife Service</name></author>
+    <category term="Environmental science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Water"/>
+    <summary>Fish and Wildlife Service — Closes 2026-10-31 — The Highlands Conservation Act Program (HCA) is administered by the US Fish and Wildlife Service (Service) to assist Connecticut, New Jersey, New York, and Pennsylvania in the protection of land and natural resources in the Highlands Region. HCA grants support land conservation projects in which a State, County, or Municipal entity acquires land or an interest in land from a willing seller to cons…</summary>
+  </entry>
+  <entry>
+    <title>Title XVI Water Reclamation and Reuse Projects</title>
+    <link href="https://www.grants.gov/search-results-detail/362396"/>
+    <id>urn:funding-finder:grants-gov:362396</id>
+    <updated>2026-05-14T00:00:00Z</updated>
+    <author><name>Bureau of Reclamation</name></author>
+    <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Water"/>
+    <summary>Bureau of Reclamation — Closes 2027-08-26 — Through WaterSMART, the Bureau of Reclamation (Reclamation) leverages Federal and non- Federal funding to work cooperatively with States, Tribes, and other entities as they plan for and implement actions to increase water supply and hydropower reliability. The WaterSMART Program demonstrably advances Trump administration priorities, such as those identified in Presidential Executive Order 14154 (J…</summary>
+  </entry>
+  <entry>
     <title>WaterSMART: Desalination Construction Projects</title>
     <link href="https://www.grants.gov/search-results-detail/362395"/>
     <id>urn:funding-finder:grants-gov:362395</id>
@@ -141,7 +190,21 @@
     <author><name>Bureau of Reclamation</name></author>
     <category term="Energy"/>
     <category term="Water"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>Bureau of Reclamation — Closes 2027-08-26 — Through WaterSMART, the Bureau of Reclamation (Reclamation) leverages Federal and non-Federal funding to work cooperatively with States, Tribes, and other entities as they plan for and implement actions to increase water supply and hydropower reliability. The WaterSMART Program demonstrably advances Trump administration priorities, such as those identified in Presidential Executive Order 14154 (Ja…</summary>
+  </entry>
+  <entry>
+    <title>WaterSMART Enhancing Water Resources Projects</title>
+    <link href="https://www.grants.gov/search-results-detail/362394"/>
+    <id>urn:funding-finder:grants-gov:362394</id>
+    <updated>2026-05-14T00:00:00Z</updated>
+    <author><name>Bureau of Reclamation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Water"/>
+    <summary>Bureau of Reclamation — Closes 2027-09-08 — The objective of the WaterSMART Enhancing Water Resources Projects funding opportunity is to invite eligible entities to apply for funding to implement projects per the authorizing language referenced above that benefit water resource management for multiple uses, including water conservation and efficiency projects, water infrastructure improvements, and river and watershed restoration. Projects …</summary>
   </entry>
   <entry>
     <title>WaterSMART: Applied Science Grants</title>
@@ -151,6 +214,8 @@
     <author><name>Bureau of Reclamation</name></author>
     <category term="Energy"/>
     <category term="Water"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>Bureau of Reclamation — Closes 2027-04-13 — Through WaterSMART, the Bureau of Reclamation (Reclamation) leverages Federal and non-Federal funding to work cooperatively with States, Tribes, and local entities as they plan and implement actions to increase water supply and hydropower reliability. The WaterSMART Program demonstrably advances Trump administration priorities, such as those identified in Presidential Executive Order 14154 (Januar…</summary>
   </entry>
   <entry>
@@ -165,6 +230,38 @@
     <category term="Transportation"/>
     <category term="Water"/>
     <summary>Engineer Research and Development Center — Closes 2027-01-01 — The U.S. Army Corps of Engineers (USACE) Engineer Research and Development Center (ERDC) is issuing this announcement for various research and development topic areas. The ERDC consists of the Coastal and Hydraulics Laboratory (CHL), the Geotechnical and Structures Laboratory (GSL), the Environmental Laboratory (EL) and the Information Technology Laboratory (ITL) in Vicksburg, Mississippi, the Col…</summary>
+  </entry>
+  <entry>
+    <title>FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
+    <link href="https://www.grants.gov/search-results-detail/360678"/>
+    <id>urn:funding-finder:grants-gov:360678</id>
+    <updated>2025-09-30T00:00:00Z</updated>
+    <author><name>Office of Science</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <summary>Office of Science — Closes 2026-09-30 — The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
+  </entry>
+  <entry>
+    <title>Agriculture and Food Research Initiative Competitive Grants Program Foundational and Applied Science Program</title>
+    <link href="https://www.grants.gov/search-results-detail/360205"/>
+    <id>urn:funding-finder:grants-gov:360205</id>
+    <updated>2025-08-01T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Cybersecurity"/>
+    <summary>National Institute of Food and Agriculture — Closes 2026-12-31 — The AFRI Foundational and Applied Science Program supports grants in six AFRI priority areas to advance knowledge in both fundamental and applied sciences important to agriculture. The six priority areas are: Plant Health and Production and Plant Products; Animal Health and Production and Animal Products; Food Safety, Nutrition, and Health; Bioenergy, Natural Resources, and Environment; Agricultur…</summary>
   </entry>
   <entry>
     <title>Infrastructure Systems and People</title>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-07-27T14:18:43Z</updated>
+  <updated>2026-07-28T12:16:14Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Independent Internal Audit Services</title>
@@ -40,6 +40,18 @@
     <category term="Data science"/>
     <category term="Cybersecurity"/>
     <summary>National Energy Technology Laboratory — Closes 2026-09-22 — Advancing Oil and Natural Gas Production and Delivery This Notice of Funding Opportunity (NOFO) is seeking proposals to advance cost-effective technologies for improving the efficiency, reliability, and resilience of the Unites States oil and natural gas supply chain. This funding opportunity spans research and development efforts focused on enhancing resource utilization, modernizing infrastructu…</summary>
+  </entry>
+  <entry>
+    <title>U.S.-Africa Strategic Investment Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363298"/>
+    <id>urn:funding-finder:grants-gov:363298</id>
+    <updated>2026-07-23T00:00:00Z</updated>
+    <author><name>Bureau of African Affairs</name></author>
+    <category term="Environmental science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>Bureau of African Affairs — Closes 2027-05-27 — The U.S.-Africa Strategic Investment Program advances America's national interests by harnessing market-based, private sector-led growth across two strategic focus areas: Critical Minerals Investment and Commercial Diplomacy Acceleration. This program seeks market-based solutions that strengthen the environment for foreign investment in sub-Saharan Africa through transparent and competitive proces…</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement to Support Shellfish Safety Assistance Project</title>
@@ -319,6 +331,19 @@
     <summary>National Energy Technology Laboratory — Closes 2026-09-08 — Modification 000003: The purpose of this modification is to revise NOFO Part 1. Section I.A.1 is revised to correct the Topic Area 1b cost share to 20% and Section IV.C.2 is revised to delete the Environmental Considerations Summary and Environmental Impact Volume from the Summary of Application Requirements table. This Notice of Funding Opportunity (NOFO) will seek proposals for specific research…</summary>
   </entry>
   <entry>
+    <title>Middle East Regional Cooperation (MERC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363070"/>
+    <id>urn:funding-finder:grants-gov:363070</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>Assistance Coordination</name></author>
+    <category term="Technology development"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Cybersecurity"/>
+    <category term="Water"/>
+    <summary>Assistance Coordination — Closes 2026-09-30 — The Middle East Regional Cooperation (MERC) Program supports joint scientific research and innovation partnerships between the United States, Israel, and countries across the Middle East and North Africa (MENA). The program funds applied research projects that address shared regional challenges while advancing U.S. economic, technological, and strategic interests. MERC is designed to bring togethe…</summary>
+  </entry>
+  <entry>
     <title>Small Health Care Provider Quality Improvement Program</title>
     <link href="https://www.grants.gov/search-results-detail/362831"/>
     <id>urn:funding-finder:grants-gov:362831</id>
@@ -546,6 +571,22 @@
     <category term="Manufacturing"/>
     <category term="Technology development"/>
     <summary>U.S. National Science Foundation — Closes 2026-09-01 — The Pathways to Enable Secure Open-Source Ecosystems (PESOSE) program supports the translation of open-source science and engineering-focused research products into safe and sustainable ecosystems that address national and societal challenges. Open-source tools such as software, hardware, machine learning models, languages, and data platforms are designed to be shared as they are publicly-accessib…</summary>
+  </entry>
+  <entry>
+    <title>Agriculture and Food Research Initiative Competitive Grants Program Foundational and Applied Science Program</title>
+    <link href="https://www.grants.gov/search-results-detail/360205"/>
+    <id>urn:funding-finder:grants-gov:360205</id>
+    <updated>2025-08-01T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Cybersecurity"/>
+    <summary>National Institute of Food and Agriculture — Closes 2026-12-31 — The AFRI Foundational and Applied Science Program supports grants in six AFRI priority areas to advance knowledge in both fundamental and applied sciences important to agriculture. The six priority areas are: Plant Health and Production and Plant Products; Animal Health and Production and Animal Products; Food Safety, Nutrition, and Health; Bioenergy, Natural Resources, and Environment; Agricultur…</summary>
   </entry>
   <entry>
     <title>Centers of Research Excellence in Science and Technology - Research Infrastructure for Science and Engineering</title>

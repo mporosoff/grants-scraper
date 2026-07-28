@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-07-27T14:18:43Z</updated>
+  <updated>2026-07-28T12:16:14Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -158,6 +158,21 @@
     <summary>National Institutes of Health — Closes 2026-11-01 — The National Institute of Diabetes and Digestive Diseases and Nutrition (NIDDK) seeks to advance its mission by continuing the NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC). The IBDGC has led collaborative efforts resulting in the identification of &gt;300 genetic risk loci for different IBD subtypes across patient populations and characterization of underlying biological mechanisms. D…</summary>
   </entry>
   <entry>
+    <title>Subnational Industrial Innovation and Resilient Entrepreneurship Accelerator</title>
+    <link href="https://www.grants.gov/search-results-detail/363319"/>
+    <id>urn:funding-finder:grants-gov:363319</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>U.S. Mission to Argentina</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Argentina — Closes 2026-08-20 — The U.S. Embassy Buenos Aires announces an open competition to support subnational economic growth and operational modernization in Argentina's strategic manufacturing and resource corridors. This program will establish a competitive business acceleration program designed to provide next-generation entrepreneurs in industrial and mining provinces with practical management tools, strategic scaling …</summary>
+  </entry>
+  <entry>
     <title>AI Partnership &amp; Exchange for Tech Leaders (APEX)</title>
     <link href="https://www.grants.gov/search-results-detail/363315"/>
     <id>urn:funding-finder:grants-gov:363315</id>
@@ -205,6 +220,18 @@
     <category term="Data science"/>
     <category term="Cybersecurity"/>
     <summary>National Energy Technology Laboratory — Closes 2026-09-22 — Advancing Oil and Natural Gas Production and Delivery This Notice of Funding Opportunity (NOFO) is seeking proposals to advance cost-effective technologies for improving the efficiency, reliability, and resilience of the Unites States oil and natural gas supply chain. This funding opportunity spans research and development efforts focused on enhancing resource utilization, modernizing infrastructu…</summary>
+  </entry>
+  <entry>
+    <title>U.S.-Africa Strategic Investment Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363298"/>
+    <id>urn:funding-finder:grants-gov:363298</id>
+    <updated>2026-07-23T00:00:00Z</updated>
+    <author><name>Bureau of African Affairs</name></author>
+    <category term="Environmental science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>Bureau of African Affairs — Closes 2027-05-27 — The U.S.-Africa Strategic Investment Program advances America's national interests by harnessing market-based, private sector-led growth across two strategic focus areas: Critical Minerals Investment and Commercial Diplomacy Acceleration. This program seeks market-based solutions that strengthen the environment for foreign investment in sub-Saharan Africa through transparent and competitive proces…</summary>
   </entry>
   <entry>
     <title>Technology Enhanced Adoptive Family Recruiting and Matching</title>
@@ -481,19 +508,6 @@
     <summary>National Endowment for the Humanities — Closes 2026-09-16 — The National Endowment for the Humanities (NEH) Division of Research is accepting applications for the Scholarly Editions and Translations program. The purpose of this program is to support collaborative teams who edit, annotate, and translate foundational humanities texts that are vital to generating new scholarship but are not available in adequate editions or translations. This year’s competiti…</summary>
   </entry>
   <entry>
-    <title>A Demonstration to Scale Innovative Person-Centered Approaches to Falls Prevention through Clinical-Community Partnerships</title>
-    <link href="https://www.grants.gov/search-results-detail/360505"/>
-    <id>urn:funding-finder:grants-gov:360505</id>
-    <updated>2026-06-26T00:00:00Z</updated>
-    <author><name>Administration for Community Living</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Data science"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>Administration for Community Living — Closes 2026-07-27 — The purpose of this funding announcement is to demonstrate and evaluate the scalability of person-centered and evidence-based approaches to falls prevention that leverage clinical and community partnerships and related data and technology tools. ACL intends to award a single cooperative agreement to one grantee for a three-year project period with the expectation that the grantee will fund up to t…</summary>
-  </entry>
-  <entry>
     <title>Rapid Reskill Employment Recovery National Dislocated Worker Grants</title>
     <link href="https://www.grants.gov/search-results-detail/362987"/>
     <id>urn:funding-finder:grants-gov:362987</id>
@@ -720,31 +734,15 @@
     <summary>National Institutes of Health — Closes 2027-10-19 — This Notice of Funding Opportunity (NOFO) solicits applications for the development of enabling informatics technologies to improve the acquisition, management, analysis, and dissemination of data and knowledge across the cancer research continuum including cancer biology, cancer treatment and diagnosis, early cancer detection, risk assessment and prevention, cancer control and epidemiology. As a …</summary>
   </entry>
   <entry>
-    <title>High-performance Optimized Recycled Nuclear Isotopes for Gen IV reactors (HORNIG)</title>
-    <link href="https://www.grants.gov/search-results-detail/362035"/>
-    <id>urn:funding-finder:grants-gov:362035</id>
-    <updated>2026-04-23T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency Energy</name></author>
-    <category term="Energy"/>
+    <title>F25AS00332 Highlands Conservation Act – Competitive Funding Round</title>
+    <link href="https://www.grants.gov/search-results-detail/362484"/>
+    <id>urn:funding-finder:grants-gov:362484</id>
+    <updated>2026-05-19T00:00:00Z</updated>
+    <author><name>Fish and Wildlife Service</name></author>
     <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
-    <summary>Advanced Research Projects Agency Energy — Closes 2026-08-06 — This is Modification 01 to the NOFO: • Inserted certain deadlines and updated dates, including the deadlines for submitting questions and Full Applications (Basic Information, Section IV.C). NOFO Number: DE-FOA-0003623 – High-performance Optimized Recycled Nuclear Isotopes for Gen IV reactors (HORNIG) Agency Overview: The Advanced Research Projects Agency—Energy (ARPA-E), an organization within th…</summary>
-  </entry>
-  <entry>
-    <title>Tribal Colleges Research Grants Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362029"/>
-    <id>urn:funding-finder:grants-gov:362029</id>
-    <updated>2026-04-22T00:00:00Z</updated>
-    <author><name>National Institute of Food and Agriculture</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <summary>National Institute of Food and Agriculture — Closes 2026-12-31 — TCRGP focuses on development of research capacity at Tribal colleges, specifically in agriculture, natural resources, and human sciences. The program aims to teach leadership skills, knowledge, and qualities that are necessary to prepare students to be competitive with other students for agricultural and related careers in the private sector, government, and academia. Of interest are the projects …</summary>
+    <category term="Water"/>
+    <summary>Fish and Wildlife Service — Closes 2026-10-31 — The Highlands Conservation Act Program (HCA) is administered by the US Fish and Wildlife Service (Service) to assist Connecticut, New Jersey, New York, and Pennsylvania in the protection of land and natural resources in the Highlands Region. HCA grants support land conservation projects in which a State, County, or Municipal entity acquires land or an interest in land from a willing seller to cons…</summary>
   </entry>
 </feed>

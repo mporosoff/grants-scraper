@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-07-27T14:18:43Z</updated>
+  <updated>2026-07-28T12:16:14Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -412,6 +412,32 @@
     <summary>National Institutes of Health — Closes 2026-09-30 — The National Institute of Neurological Disorders and Stroke, National Institute of Aging, the NIH Helping to End Addiction Long Term (HEAL) initiative, and other participating ICs seek to support applications to conduct pharmacodynamic, pharmacokinetic, and efficacy studies to demonstrate that the proposed therapeutic agent(s) have sufficient biological activity to warrant further development as t…</summary>
   </entry>
   <entry>
+    <title>FY26 Bureau of Land Management Abandoned Mine Lands and Hazardous Materials - Bureau wide</title>
+    <link href="https://www.grants.gov/search-results-detail/363334"/>
+    <id>urn:funding-finder:grants-gov:363334</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>Bureau of Land Management</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <category term="Public health"/>
+    <summary>Bureau of Land Management — Closes 2026-08-28 — The BLM and its partners inventory and mitigate abandoned mine hazards to protect public health and safety and the environment, and restore watersheds for recreation, fish, wildlife and domestic animals, manage air quality for the protection of public health and sensitive ecosystems, and return lands to productive uses including, but not limited to, recreation, fish and wildlife habitat, and prese…</summary>
+  </entry>
+  <entry>
+    <title>FY26 Bureau of Land Management Invasive and Noxious Plant Management - Bureau wide</title>
+    <link href="https://www.grants.gov/search-results-detail/363335"/>
+    <id>urn:funding-finder:grants-gov:363335</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>Bureau of Land Management</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Public health"/>
+    <summary>Bureau of Land Management — Closes 2026-09-25 — BLM Invasive and Noxious Plant Management Programs work to prevent, detect, inventory, control, and monitor weed populations on public lands.Invasive species cost the public millions of dollars in control and management each year and many invasive plants and noxious weeds are highly competitive and have the ability to permanently degrade our public lands.Noxious weeds and invasive species expansio…</summary>
+  </entry>
+  <entry>
     <title>Use of Digital Health Technologies in Clinical Investigations to Support Drug and Biological Product Development (U01) Clinical Trials Optional</title>
     <link href="https://www.grants.gov/search-results-detail/363255"/>
     <id>urn:funding-finder:grants-gov:363255</id>
@@ -642,29 +668,5 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
     <summary>National Institutes of Health — Closes 2029-02-20 — The purpose of this Notice of Funding Opportunity (NOFO) is to support the preclinical optimization and development of safe, effective, and non-addictive small molecule and biologic therapeutics for the treatment of pain. The goal of the program is to accelerate the advancement of promising early-stage therapeutic candidates and facilitate their readiness for Phase II clinical trials. Applicants m…</summary>
-  </entry>
-  <entry>
-    <title>Systematic Testing of Radionuclides in Preclinical Experiments (STRIPE, RP1 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/361447"/>
-    <id>urn:funding-finder:grants-gov:361447</id>
-    <updated>2026-06-15T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2026-10-05 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to support research projects that employ state-of-the-art cancer biology approaches and preclinical model systems to investigate the biological effects of radiation emitted by radionuclides used in radiopharmaceutical therapy (RPT). The focus of this initiative is to advance mechanistic understanding of …</summary>
-  </entry>
-  <entry>
-    <title>HEAL Initiative: Optimization of Therapeutic Medical Devices through Team Science Mechanistic Research (RM1)</title>
-    <link href="https://www.grants.gov/search-results-detail/361520"/>
-    <id>urn:funding-finder:grants-gov:361520</id>
-    <updated>2026-06-11T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health — Closes 2026-10-30 — The National Institute of Neurological Disorders and Stroke (NINDS), with other NIH Institutes and Centers (ICs), intends to publish a Notice of Funding Opportunity (NOFO) to investigate the mechanisms of action of therapeutic medical devices with the overall goal of improving clinical outcomes with device-based approaches. Medical devices are essential in managing health conditions, complementing…</summary>
   </entry>
 </feed>
