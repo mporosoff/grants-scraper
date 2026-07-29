@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-07-28T12:16:14Z</updated>
+  <updated>2026-07-29T12:22:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Independent Internal Audit Services</title>
@@ -573,6 +573,20 @@
     <summary>U.S. National Science Foundation — Closes 2026-09-01 — The Pathways to Enable Secure Open-Source Ecosystems (PESOSE) program supports the translation of open-source science and engineering-focused research products into safe and sustainable ecosystems that address national and societal challenges. Open-source tools such as software, hardware, machine learning models, languages, and data platforms are designed to be shared as they are publicly-accessib…</summary>
   </entry>
   <entry>
+    <title>CHIPS Research and Development Office (CRDO) Broad Agency Announcement (BAA)</title>
+    <link href="https://www.grants.gov/search-results-detail/360651"/>
+    <id>urn:funding-finder:grants-gov:360651</id>
+    <updated>2025-09-24T00:00:00Z</updated>
+    <author><name>National Institute of Standards and Technology</name></author>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <category term="Cybersecurity"/>
+    <summary>National Institute of Standards and Technology — Closes 2029-09-30 — NIST is soliciting proposals from eligible applicants for research, prototyping, and commercial solutions that advance microelectronics technology in the U.S., to be considered for funding by the CHIPS Research and Development Office (CRDO).</summary>
+  </entry>
+  <entry>
     <title>Agriculture and Food Research Initiative Competitive Grants Program Foundational and Applied Science Program</title>
     <link href="https://www.grants.gov/search-results-detail/360205"/>
     <id>urn:funding-finder:grants-gov:360205</id>
@@ -654,6 +668,22 @@
     <summary>U.S. National Science Foundation — Closes 2026-08-11 — The long-range goal of the Research Training Groups in the Mathematical Sciences (RTG) program is to strengthen the nation's scientific competitiveness by increasing the number of well-prepared U.S. citizens, nationals, and permanent residents who pursue careers in the mathematical sciences, be they in academia, government, or industry. The RTG program supports efforts to improve graduate student …</summary>
   </entry>
   <entry>
+    <title>Centers of Research Excellence in Science and Technology</title>
+    <link href="https://www.grants.gov/search-results-detail/348375"/>
+    <id>urn:funding-finder:grants-gov:348375</id>
+    <updated>2023-05-25T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <category term="Cybersecurity"/>
+    <summary>U.S. National Science Foundation — Closes 2026-12-04 — CREST Center awards provide support to enhance the research capabilities of Minority-serving institutions (MSIs) through the establishment of centers that effectively integrate education and research. CREST Center awards promote the development of new knowledge, enhancements of the research productivity of individual faculty, and an expanded presence of students historically underrepresented in sc…</summary>
+  </entry>
+  <entry>
     <title>Energy, Power, Control, and Networks</title>
     <link href="https://www.grants.gov/search-results-detail/348258"/>
     <id>urn:funding-finder:grants-gov:348258</id>
@@ -693,20 +723,10 @@
     <category term="Cybersecurity"/>
     <category term="Education and workforce"/>
     <category term="Transportation"/>
-    <summary>Air Force Academy — Posted — The USAFA invests in an active research program for three main reasons. First and foremost, research significantly enhances the cadet learning experience. Our research is done by, for and with cadets who work alongside fellow cadets and faculty mentors. Research provides cadets with rich independent learning opportunities as they tackle ill-defined problems and are challenged to apply their knowle…</summary>
-  </entry>
-  <entry>
-    <title>University Nuclear Leadership Program– Scholarship and Fellowship Support</title>
-    <link href="https://www.grants.gov/search-results-detail/329436"/>
-    <id>urn:funding-finder:grants-gov:329436</id>
-    <updated>2020-10-15T00:00:00Z</updated>
-    <author><name>Idaho Field Office</name></author>
-    <category term="Cybersecurity"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
+    <category term="Catalysis and reaction engineering"/>
     <category term="Materials science"/>
-    <category term="Technology development"/>
-    <summary>Idaho Field Office — Closes 2030-10-14 — A. STATEMENT OF OBJECTIVESThis Funding Opportunity Announcement (FOA) is to award multiple cooperative agreements to accredited United States (U.S.) two- and four-year colleges and universities (Institutions of Higher Education (IHEs)) to receive and administer scholarship and fellowship funding—provided through the University Nuclear Leadership Program (UNLP) and as administered by the Department…</summary>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>Air Force Academy — Posted — The USAFA invests in an active research program for three main reasons. First and foremost, research significantly enhances the cadet learning experience. Our research is done by, for and with cadets who work alongside fellow cadets and faculty mentors. Research provides cadets with rich independent learning opportunities as they tackle ill-defined problems and are challenged to apply their knowle…</summary>
   </entry>
 </feed>

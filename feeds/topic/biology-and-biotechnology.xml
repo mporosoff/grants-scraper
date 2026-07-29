@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-07-28T12:16:14Z</updated>
+  <updated>2026-07-29T12:22:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -40,6 +40,27 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health — Closes 2027-09-30 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Clinical Trials in Organ Transplantation in Children and Adults (CTOT-CA) program. The goal of the CTOT-CA is to improve the outcome of organ transplantation through clinical trials with mechanistic studies. The CTOT-CA will support multicenter clinical trials, with a…</summary>
+  </entry>
+  <entry>
+    <title>INCLUDE Project: Omics Phenotypes Related to Down Syndrome (X01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363349"/>
+    <id>urn:funding-finder:grants-gov:363349</id>
+    <updated>2027-04-15T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <summary>National Institutes of Health — Closes 2027-06-15 — The NIH INvestigation of Co-occurring conditions across the Lifespan to Understand Down syndromE (INCLUDE) Project seeks to improve health and quality-of-life for individuals with Down syndrome. The purpose of this Notice of Funding Opportunity (NOFO) is to solicit applications to submit samples to NIH INCLUDE Project-supported resources to generate a large volume of integrated genomic and multi-o…</summary>
+  </entry>
+  <entry>
+    <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/363350"/>
+    <id>urn:funding-finder:grants-gov:363350</id>
+    <updated>2027-04-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Data science"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-06-11 — NCI intends to release a Notice of Funding Opportunity (NOFO) that serves to continue the advancement and sustainment of informatics tools, software, and research resources that enable the acquisition, management, analysis, visualization, and interpretation of data across the cancer research continuum, including cancer biology, diagnosis and treatment, early detection, risk assessment and preventi…</summary>
   </entry>
   <entry>
     <title>BRAIN Initiative: Development and Validation of Novel Tools and New Approaches for Neuroscience Research</title>
@@ -649,24 +670,5 @@
     <category term="Biology and biotechnology"/>
     <category term="Cancer"/>
     <summary>National Institutes of Health — Closes 2027-01-11 — As part of the Gabriella Miller Kids First Pediatric Research Program (Kids First Program), the NIH invites applications to submit samples from pediatric cohorts for whole genome sequencing at a Kids First Program supported genomic data generating centers. Applicants are encouraged to propose sequencing of existing pediatric cancer or congenital anomaly cohorts to elucidate the genetic contributio…</summary>
-  </entry>
-  <entry>
-    <title>DoW Joint Warfighter Medical, Military Medical Research and Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362857"/>
-    <id>urn:funding-finder:grants-gov:362857</id>
-    <updated>2026-06-17T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Technology development"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-11-16 — Summary: The fiscal year 2026 (FY26) Joint Warfighter Medical Research Program (JWMRP) Military Medical Research and Development Award (MMRDA) mechanism is intended to fund the logical continuation of previous Department of War (DOW)-funded research and development efforts relevant to the FY26 JWMRP that augment and accelerate high-priority medical requirements to meet the needs of Service Members…</summary>
-  </entry>
-  <entry>
-    <title>HEAL Initiative: Non-addictive Analgesic Therapeutics Development [Small Molecules and Biologics] to Treat Pain (UG3/UH3 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359161"/>
-    <id>urn:funding-finder:grants-gov:359161</id>
-    <updated>2026-06-16T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health — Closes 2029-02-20 — The purpose of this Notice of Funding Opportunity (NOFO) is to support the preclinical optimization and development of safe, effective, and non-addictive small molecule and biologic therapeutics for the treatment of pain. The goal of the program is to accelerate the advancement of promising early-stage therapeutic candidates and facilitate their readiness for Phase II clinical trials. Applicants m…</summary>
   </entry>
 </feed>

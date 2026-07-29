@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml</id>
-  <updated>2026-07-28T12:16:14Z</updated>
+  <updated>2026-07-29T12:22:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Chemical Process Systems (CPS)</title>
@@ -49,6 +49,9 @@
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
     <summary>U.S. National Science Foundation — Posted — Large-scale simulations and the ability to accumulate massive amounts of data have revolutionized science and engineering. The goal of the Computational and Data-enabled Science and Engineering (CDS&amp;E) meta-program is to identify and capitalize on opportunities for major scientific and engineering breakthroughs through new computational and data-analysis approaches and best practices. The CDS&amp;E me…</summary>
   </entry>
   <entry>
@@ -126,6 +129,23 @@ The goal of the Process Systems, Reaction Engineering, and Molecular Thermodynam
     <summary>U.S. National Science Foundation — Closes 2026-09-30 — This solicitation applies to six (of the nine) CHE Disciplinary Research Programs: Chemical Catalysis (CAT); Chemical Measurement and Imaging (CMI); Chemical Mechanism, Function and Properties (CMFP); Chemical Synthesis (SYN); Environmental Chemical Sciences (ECS); and Macromolecular, Supramolecular and Nanochemistry (MSN). All proposals submitted to these six CHE Disciplinary Research Programs (o…</summary>
   </entry>
   <entry>
+    <title>Combustion and Fire Systems</title>
+    <link href="https://www.grants.gov/search-results-detail/347509"/>
+    <id>urn:funding-finder:grants-gov:347509</id>
+    <updated>2023-04-14T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Arts and culture"/>
+    <category term="Carbon management"/>
+    <category term="Climate change"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>U.S. National Science Foundation — Posted — The Combustion and Fire Systems program is part of the Transport Phenomena cluster, which also includes 1) the Fluid Dynamics program; 2) the Particulate and Multiphase Processes program; and 3) the Thermal Transport Processes program.
+The goal of the Combustion and Fire Systems program is to create new knowledge to support advances in clean energy, climate change mitigation, a cleaner environment…</summary>
+  </entry>
+  <entry>
     <title>Electrochemical Systems</title>
     <link href="https://www.grants.gov/search-results-detail/347329"/>
     <id>urn:funding-finder:grants-gov:347329</id>
@@ -158,5 +178,21 @@ The goal of the Electrochemical Systems program is to support fundamental engine
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation — Posted — The Interfacial Engineering program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Electrochemical Systems program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
 The goal of the Interfacial Engineering program is to support fundamental research on atomic- and molecular-scale interfacial phenomena and …</summary>
+  </entry>
+  <entry>
+    <title>Research Interests of the United States Air Force Academy (formerly USAFA-BAA-2021)</title>
+    <link href="https://www.grants.gov/search-results-detail/330175"/>
+    <id>urn:funding-finder:grants-gov:330175</id>
+    <updated>2020-12-02T00:00:00Z</updated>
+    <author><name>Air Force Academy</name></author>
+    <category term="Arts and culture"/>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>Air Force Academy — Posted — The USAFA invests in an active research program for three main reasons. First and foremost, research significantly enhances the cadet learning experience. Our research is done by, for and with cadets who work alongside fellow cadets and faculty mentors. Research provides cadets with rich independent learning opportunities as they tackle ill-defined problems and are challenged to apply their knowle…</summary>
   </entry>
 </feed>

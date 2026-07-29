@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-07-28T12:16:14Z</updated>
+  <updated>2026-07-29T12:22:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -16,6 +16,18 @@
     <category term="Data science"/>
     <category term="Public health"/>
     <summary>National Institutes of Health — Closes 2028-02-01 — The National Human Genome Research Institute (NHGRI) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to establish an ancient DNA for Modern Genomics (aDMG) program. The goal of aDMG is to establish an ethical resource of ancient and historical human DNA (aDNA) data to advance studies about contemporary human traits and biology. This NOFO aims to solicit applicatio…</summary>
+  </entry>
+  <entry>
+    <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/363350"/>
+    <id>urn:funding-finder:grants-gov:363350</id>
+    <updated>2027-04-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Data science"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-06-11 — NCI intends to release a Notice of Funding Opportunity (NOFO) that serves to continue the advancement and sustainment of informatics tools, software, and research resources that enable the acquisition, management, analysis, visualization, and interpretation of data across the cancer research continuum, including cancer biology, diagnosis and treatment, early detection, risk assessment and preventi…</summary>
   </entry>
   <entry>
     <title>Maternal-Child Surveillance and Partnerships for Action, Results, and Knowledge</title>
@@ -156,6 +168,32 @@
     <category term="Data science"/>
     <category term="Environmental science"/>
     <summary>National Institutes of Health — Closes 2026-11-01 — The National Institute of Diabetes and Digestive Diseases and Nutrition (NIDDK) seeks to advance its mission by continuing the NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC). The IBDGC has led collaborative efforts resulting in the identification of &gt;300 genetic risk loci for different IBD subtypes across patient populations and characterization of underlying biological mechanisms. D…</summary>
+  </entry>
+  <entry>
+    <title>Building Skills, Strengthening Communities, and Advancing Innovation in Northwest Mexico</title>
+    <link href="https://www.grants.gov/search-results-detail/363347"/>
+    <id>urn:funding-finder:grants-gov:363347</id>
+    <updated>2026-07-28T00:00:00Z</updated>
+    <author><name>U.S. Mission to Mexico</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Mexico — Closes 2026-08-27 — The Public Diplomacy Sections of the U.S. Consulates General Tijuana, Nogales, and Hermosillo announce an open competition for programs that strengthen workforce readiness, promote safe border communities, and support a transparent and innovative information ecosystem in northwest Mexico. This Notice of Funding Opportunity (NOFO) seeks merit-based proposals that equip Mexican educators, youth, and…</summary>
+  </entry>
+  <entry>
+    <title>National Center for Native Training and Technical Assistance (the Center)</title>
+    <link href="https://www.grants.gov/search-results-detail/361960"/>
+    <id>urn:funding-finder:grants-gov:361960</id>
+    <updated>2026-07-28T00:00:00Z</updated>
+    <author><name>Administration for Children and Families - ANA</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Administration for Children and Families - ANA — Closes 2026-08-27 — The Administration for Native Americans (ANA), announces funds for a National Center for Native Training and Technical Assistance (the Center). The Center will be ANA"s primary provider of training and technical assistance (TTA). The goal is to build the capacity of ANA applicants and recipients to implement successful strategies and facilitate sustainable and successful outcomes that strengthen N…</summary>
   </entry>
   <entry>
     <title>Subnational Industrial Innovation and Resilient Entrepreneurship Accelerator</title>
@@ -587,6 +625,18 @@
     <summary>U.S. Mission to Canada — Closes 2026-07-31 — The U.S. Department of State’s Embassy Ottawa announces an open competition to implement a program to connect U.S. citizen talent, including subject matter experts, artists and cultural professionals, and current and former American athletes and coaches, with Canadian audiences and institutions on topics of strategic importance to the United States. Recipients should be prepared to identify and re…</summary>
   </entry>
   <entry>
+    <title>WaterSMART Cooperative Watershed Management Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362755"/>
+    <id>urn:funding-finder:grants-gov:362755</id>
+    <updated>2026-06-10T00:00:00Z</updated>
+    <author><name>Bureau of Reclamation</name></author>
+    <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Water"/>
+    <summary>Bureau of Reclamation — Closes 2028-02-15 — The WaterSMART Cooperative Watershed Management Program funding opportunity invites eligible entities to apply for funding to develop local solutions to address their water management needs. This opportunity provides funding for watershed group development, restoration planning, and watershed management project planning and design. By providing this funding, Reclamation promotes water reliability …</summary>
+  </entry>
+  <entry>
     <title>GlobalX Challenge 26.1: AI-Native Air Interface for Tactical Communication Networks</title>
     <link href="https://www.grants.gov/search-results-detail/362721"/>
     <id>urn:funding-finder:grants-gov:362721</id>
@@ -692,57 +742,5 @@
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
     <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-15 — Summary: The fiscal year 2026 (FY26) Traumatic Brain Injury and Psychological Health Research Program (TBIPHRP) Health Services Research Award (HSRA) intends to fund high-impact research that bridges the gap between research, practice and policy by building real-world evidence on how interventions, clinical practices/guidelines, or policies can be deployed to targeted populations at the appropriat…</summary>
-  </entry>
-  <entry>
-    <title>Advanced Development of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359855"/>
-    <id>urn:funding-finder:grants-gov:359855</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2026-10-19 — This Notice of Funding Opportunity (NOFO) invites applications for advanced development and enhancement of emerging informatics technologies to improve the acquisition, analysis, visualization, and interpretation of data across the cancer research continuum including cancer biology, cancer treatment and diagnosis, early cancer detection, risk assessment and prevention, cancer control and epidemiol…</summary>
-  </entry>
-  <entry>
-    <title>Sustained Support for Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359853"/>
-    <id>urn:funding-finder:grants-gov:359853</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2026-10-19 — This Notice of Funding Opportunity (NOFO) solicits applications for the continued development and sustainment of high value informatics research resources to improve the acquisition, management, analysis, and dissemination of data and knowledge across the cancer research continuum including cancer biology, cancer treatment and diagnosis, early cancer detection, risk assessment and prevention, canc…</summary>
-  </entry>
-  <entry>
-    <title>Early-Stage Development of Informatics Technologies for Cancer Research and Management (U01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359892"/>
-    <id>urn:funding-finder:grants-gov:359892</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Data science"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-10-19 — This Notice of Funding Opportunity (NOFO) solicits applications for the development of enabling informatics technologies to improve the acquisition, management, analysis, and dissemination of data and knowledge across the cancer research continuum including cancer biology, cancer treatment and diagnosis, early cancer detection, risk assessment and prevention, cancer control and epidemiology. As a …</summary>
-  </entry>
-  <entry>
-    <title>F25AS00332 Highlands Conservation Act – Competitive Funding Round</title>
-    <link href="https://www.grants.gov/search-results-detail/362484"/>
-    <id>urn:funding-finder:grants-gov:362484</id>
-    <updated>2026-05-19T00:00:00Z</updated>
-    <author><name>Fish and Wildlife Service</name></author>
-    <category term="Environmental science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Water"/>
-    <summary>Fish and Wildlife Service — Closes 2026-10-31 — The Highlands Conservation Act Program (HCA) is administered by the US Fish and Wildlife Service (Service) to assist Connecticut, New Jersey, New York, and Pennsylvania in the protection of land and natural resources in the Highlands Region. HCA grants support land conservation projects in which a State, County, or Municipal entity acquires land or an interest in land from a willing seller to cons…</summary>
   </entry>
 </feed>

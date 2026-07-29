@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-07-28T12:16:14Z</updated>
+  <updated>2026-07-29T12:22:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIOSH Centers for Agriculture, Forestry, and Fishing Safety and Health (U54)</title>
@@ -39,6 +39,19 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Transportation"/>
     <summary>National Institutes of Health — Closes 2027-02-16 — The NIH intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop and implement investigator-initiated multi-site clinical trials, including efficacy, effectiveness, pragmatic, and/or implementation research clinical trials. Applications that propose a large and/or complex clinical trial conducted at either a single site or at multiple locations but without physi…</summary>
+  </entry>
+  <entry>
+    <title>NIOSH Centers of Excellence for Total Worker Health® (U19)</title>
+    <link href="https://www.grants.gov/search-results-detail/363369"/>
+    <id>urn:funding-finder:grants-gov:363369</id>
+    <updated>2026-11-16T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-26 — PURPOSENIOSH intends to support the Centers of Excellence in Total Worker Health® (TWH). These Centers will conduct rigorous research and translation activities to prevent harmful exposures, improve working conditions, and advance worker well-being. The Centers will develop practical, scalable solutions for employers and workers. All projects must use the NIOSH Worker Well-Being Questionnaire (Wel…</summary>
   </entry>
   <entry>
     <title>Small Business Transition Grant for New Entrepreneurs (Parent R41/R42 Clinical Trial Optional)</title>
@@ -82,6 +95,17 @@
     <summary>National Institutes of Health — Closes 2026-11-10 — The National Institute of Neurological Disorders and Stroke (NINDS), in conjunction with additional Institutes/Centers (ICs)at the National Institutes of Health seek to support projects proposing Clinical Trials and Ancillary Studies that are conducted within NIH-Funded Clinical Trial Research Networks.The program will encourage applications for multi-center clinical trials to be conducted within …</summary>
   </entry>
   <entry>
+    <title>FY26 US DOT Drone Infrastructure Inspection Grants (DIIG) Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363242"/>
+    <id>urn:funding-finder:grants-gov:363242</id>
+    <updated>2026-09-15T00:00:00Z</updated>
+    <author><name>69A345 Office of the Under Secretary for Policy</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>69A345 Office of the Under Secretary for Policy — Closes 2026-11-15 — The Drone Infrastructure Inspection Grants (DIIG) Program will provide grants to eligible government entities to facilitate the use of small Unmanned Aircraft Systems (UAS), referred to herein as drones, in critical infrastructure inspection. The objective is to increase the widespread adoption of drones and relevant technologies in support of more efficient Inspection, Operation, Construction, Ma…</summary>
+  </entry>
+  <entry>
     <title>Limited Competition: Small Grant Program for the NCATS Clinical and Translational Science Award (CTSA) Program (Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/361317"/>
     <id>urn:funding-finder:grants-gov:361317</id>
@@ -99,6 +123,16 @@
     <author><name>Department of Housing and Urban Development</name></author>
     <category term="Transportation"/>
     <summary>Department of Housing and Urban Development — Closes 2026-11-10 — The Family Unification Program (FUP) public housing authorities (PHAs) to partner with public child welfare agencies (PCWAs) to provide Housing Choice Voucher (HCV) assistance to two primary groups:1. Families: Those for whom the lack of adequate housing is a primary factor in the imminent placement of a child (or children) in out-of-home care, or a delay in the discharge of a child to the family …</summary>
+  </entry>
+  <entry>
+    <title>DOJ FY 2026 Bridging Immigration-Related Deficits Experienced Nationwide (“BIDEN”) Program Round 2</title>
+    <link href="https://www.grants.gov/search-results-detail/363368"/>
+    <id>urn:funding-finder:grants-gov:363368</id>
+    <updated>2026-07-28T00:00:00Z</updated>
+    <author><name>Bureau of Justice Assistance</name></author>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>Bureau of Justice Assistance — Closes 2026-08-26 — This is a notice of funding opportunity (NOFO) for the Department of Justice’s (DOJ) FY 2026 Bridging Immigration-Related Deficits Experienced Nationwide (BIDEN) Program. This program, authorized under the BIDEN Reimbursement Fund established by the One Big Beautiful Bill Act, Public Law 119-21, Title X, Subtitle A, Part II (codified at 34 U.S.C. § 61101), provides funding for grants to eligible S…</summary>
   </entry>
   <entry>
     <title>U.S.-ASEAN Road to 50: Rising Leaders Forum</title>
@@ -272,17 +306,6 @@
     <category term="Materials science"/>
     <category term="Cybersecurity"/>
     <summary>Bureau of Near Eastern Affairs — Closes 2026-08-31 — The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
-  </entry>
-  <entry>
-    <title>FY26 US DOT Drone Infrastructure Inspection Grants (DIIG) Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363242"/>
-    <id>urn:funding-finder:grants-gov:363242</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>69A345 Office of the Under Secretary for Policy</name></author>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <summary>69A345 Office of the Under Secretary for Policy — Forecasted — The Drone Infrastructure Inspection Grants (DIIG) Program will provide grants to eligible government entities to facilitate the use of small Unmanned Aircraft Systems (UAS), referred to herein as drones, in critical infrastructure inspection. The objective is to increase the widespread adoption of drones and relevant technologies in support of more efficient Inspection, Operation, Construction, Ma…</summary>
   </entry>
   <entry>
     <title>Title IV-E Prevention Accelerator Grants</title>
@@ -636,25 +659,5 @@
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Transportation"/>
     <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-22 — Summary: The fiscal year 2026 (FY26) Autism Research Program (ARP) Career Development Award supports early-career, independent investigators and/or the transition of established investigators from other research fields to conduct innovative, high-impact ideas or early-phase, proof-of-principle clinical trials with the potential to have a major impact on autism.Distinctive Features: ﻿Applications a…</summary>
-  </entry>
-  <entry>
-    <title>NASA Innovative Advanced Concepts (NIAC) Phase II</title>
-    <link href="https://www.grants.gov/search-results-detail/362393"/>
-    <id>urn:funding-finder:grants-gov:362393</id>
-    <updated>2026-05-14T00:00:00Z</updated>
-    <author><name>NASA Headquarters</name></author>
-    <category term="Space and aeronautics"/>
-    <category term="Transportation"/>
-    <summary>NASA Headquarters — Posted — The National Aeronautics and Space Administration (NASA) Headquarters anticipates release of a solicitation, titled “NASA Innovative Advanced Concepts (NIAC), Phase II,” as an Appendix to the Space Technology Mission Directorate (STMD) NASA Research Announcement (NRA), titled “Space Technology Research, Development, Demonstration, and Infusion - 2026 (SpaceTech-REDDI-2026),” on or about May 11, 20…</summary>
-  </entry>
-  <entry>
-    <title>INCLUDE Project: Clinical Trials Phased Awards for Down syndrome Research (R61/R33 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/360655"/>
-    <id>urn:funding-finder:grants-gov:360655</id>
-    <updated>2026-05-13T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health — Closes 2028-06-15 — The NIH INvestigation of Co-occurring conditions across the Lifespan to Understand Down syndromE (INCLUDE) Project seeks to improve health and quality-of-life for individuals with Down syndrome. The purpose of this Notice of Funding Opportunity (NOFO) encourages Exploratory/Developmental Phased Innovation (R61/R33) grant applications to support development of clinical trials to treat critical and …</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml</id>
-  <updated>2026-07-28T12:16:14Z</updated>
+  <updated>2026-07-29T12:22:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -48,6 +48,18 @@
     <category term="Agriculture and food"/>
     <category term="Public health"/>
     <summary>National Institutes of Health — Closes 2027-11-10 — The Tobacco Regulatory Science Program, participating NIH Institutes and Centers (ICs), and the Food and Drug Administration (FDA) Center for Tobacco Products (CTP) intend to issue a Notice of Funding Opportunity (NOFO) soliciting applications for Tobacco Centers of Regulatory Science (TCORS). The awards under this NOFO will be administered by NIH using funds made available through FDA CTP and the…</summary>
+  </entry>
+  <entry>
+    <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/363350"/>
+    <id>urn:funding-finder:grants-gov:363350</id>
+    <updated>2027-04-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Data science"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-06-11 — NCI intends to release a Notice of Funding Opportunity (NOFO) that serves to continue the advancement and sustainment of informatics tools, software, and research resources that enable the acquisition, management, analysis, visualization, and interpretation of data across the cancer research continuum, including cancer biology, diagnosis and treatment, early detection, risk assessment and preventi…</summary>
   </entry>
   <entry>
     <title>National Viral Hepatitis Education, Awareness, and Capacity Building for Communities and Providers</title>
@@ -100,6 +112,16 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health — Closes 2027-06-01 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the support of the Clinical Data, Safety and Statistical Centers program. The overall objective of this program is to provide coordination and oversight for multiple activities in service to clinical research and mechanistic studies supported by NIAID, including all Division of Allergy, Immunolog…</summary>
+  </entry>
+  <entry>
+    <title>Health Promotion and Disease Prevention Research Centers: 2027 Special Interest Project Supplements (SIPS)</title>
+    <link href="https://www.grants.gov/search-results-detail/363341"/>
+    <id>urn:funding-finder:grants-gov:363341</id>
+    <updated>2027-01-21T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Cancer"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-03-23 — This NOFO will provide supplemental funding to the currently funding twenty (20) CDC Prevention Research Centers (PRCs) to conduct Special Interest Projects (SIPs). The purpose of the SIPs is to inform public health practice through high-quality applied health promotion and disease prevention public health research in real-world settings to identify, design, test, assess, evaluate, disseminate, an…</summary>
   </entry>
   <entry>
     <title>Translational Transplantation Tolerance Cooperative Study Group</title>
@@ -277,6 +299,16 @@
     <author><name>Centers for Disease Control - NCEZID</name></author>
     <category term="Public health"/>
     <summary>Centers for Disease Control - NCEZID — Closes 2027-01-04 — This Program will create a collaborative network of healthcare systems, facilities and public health partners to rapidly detect, respond to, and prevent threats to patient and healthcare worker safety. This Program will support work that improves the safety, quality and resilience of U.S. healthcare delivery.The Program will be made up of healthcare systems inclusive of multiple facilities in a va…</summary>
+  </entry>
+  <entry>
+    <title>Expanded Surveillance for Pediatric Infectious Diseases</title>
+    <link href="https://www.grants.gov/search-results-detail/363342"/>
+    <id>urn:funding-finder:grants-gov:363342</id>
+    <updated>2026-10-30T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-31 — The purpose of this Notice of Funding Opportunity (NOFO) is to support a network of U.S. institutions that will conduct standardized, prospective, active surveillance of pediatric acute respiratory illness (ARI) and acute gastroenteritis (AGE). The network will focus on respiratory and enteric viruses among pediatric patients seeking healthcare.In addition, the network will generate robust estimat…</summary>
   </entry>
   <entry>
     <title>Early Detection, Response, and Control of Global Rabies Outbreaks and Associated Threats to America's Dog-Rabies Free Status</title>
@@ -619,36 +651,5 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>Centers for Disease Control-GHC — Closes 2026-08-14 — For over forty years, the U.S. Centers for Disease Control and Prevention (CDC) has partnered with the Government of Kenya (GoK) to protect the health of the Kenyan people and strengthen health systems. The United States Government remains the largest investor in Kenya"s health sector. This investment includes PEPFAR (President"s Emergency Plan for AIDS Relief), GHS (Global Health Security), Malar…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Program for Modeling Clinical Transplantation</title>
-    <link href="https://www.grants.gov/search-results-detail/361831"/>
-    <id>urn:funding-finder:grants-gov:361831</id>
-    <updated>2026-07-10T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2026-10-09 — The National Institute of Allergy and Infectious Diseases (NIAID) will support its mission through the Cooperative Program for Modeling Clinical Transplantation. Advancements of new therapeutics and success in human solid organ transplantation will require innovative and clinically translatable in-vitro and in-vivo systems to model local and systemic immune responses. This program seeks applicatio…</summary>
-  </entry>
-  <entry>
-    <title>Development of Candidate Medical Countermeasures (MCMs) and Technologies Against Chemical or Radiation/Nuclear (CRN) Threats</title>
-    <link href="https://www.grants.gov/search-results-detail/361833"/>
-    <id>urn:funding-finder:grants-gov:361833</id>
-    <updated>2026-07-10T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2026-10-09 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the NIH mission by supporting research on concepts and technologies to address civilian radiation or chemical threats. Research is administered by NIAID on behalf of NIH via the Radiation and Nuclear (RNCP), and the Chemical Countermeasures (CCRP) Research Programs. A shared congressional mandate to the NIH OD (119 …</summary>
-  </entry>
-  <entry>
-    <title>Regional Partnership Grants</title>
-    <link href="https://www.grants.gov/search-results-detail/361913"/>
-    <id>urn:funding-finder:grants-gov:361913</id>
-    <updated>2026-07-08T00:00:00Z</updated>
-    <author><name>Administration for Children and Families - ACYF/CB</name></author>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <summary>Administration for Children and Families - ACYF/CB — Closes 2026-08-07 — The Regional Partnership Grant (RPG) Program supports regional partnerships between child welfare, substance abuse treatment and juvenile or state courts. The goal is to support family-centered treatment programs and services for children who are in an out-of-home placement or are at risk of being placed in an out-of-home placement due to caregiver's substance abuse. Projects will also work to exp…</summary>
   </entry>
 </feed>

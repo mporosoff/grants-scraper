@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml</id>
-  <updated>2026-07-28T12:16:14Z</updated>
+  <updated>2026-07-29T12:22:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Resources and Workforce Development for the Regional Biocontainment Laboratories</title>
@@ -157,6 +157,25 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health — Closes 2027-01-22 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
+  </entry>
+  <entry>
+    <title>Expanded Surveillance for Pediatric Infectious Diseases</title>
+    <link href="https://www.grants.gov/search-results-detail/363342"/>
+    <id>urn:funding-finder:grants-gov:363342</id>
+    <updated>2026-10-30T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-31 — The purpose of this Notice of Funding Opportunity (NOFO) is to support a network of U.S. institutions that will conduct standardized, prospective, active surveillance of pediatric acute respiratory illness (ARI) and acute gastroenteritis (AGE). The network will focus on respiratory and enteric viruses among pediatric patients seeking healthcare.In addition, the network will generate robust estimat…</summary>
+  </entry>
+  <entry>
+    <title>Improving Protection against Influenza and Other Respiratory Pathogens: the US Flu VE Network</title>
+    <link href="https://www.grants.gov/search-results-detail/363343"/>
+    <id>urn:funding-finder:grants-gov:363343</id>
+    <updated>2026-10-30T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Infectious disease"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-31 — The purpose of this notice of funding opportunity (NOFO) is to continue the work of the US Influenza Vaccine Effectiveness (Flu VE) Network. Influenza and other respiratory pathogens are important causes of morbidity, mortality, and healthcare burden across the age spectrum. This network provides evidence needed to improve the effectiveness of influenza and other respiratory pathogen vaccines. You…</summary>
   </entry>
   <entry>
     <title>Collaborative Network for Clinical Research on Immune Tolerance</title>

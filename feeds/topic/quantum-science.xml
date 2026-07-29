@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml</id>
-  <updated>2026-07-28T12:16:14Z</updated>
+  <updated>2026-07-29T12:22:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Young Trilateral Leaders (YTL) Summit</title>
@@ -99,6 +99,20 @@
     <category term="Quantum science"/>
     <category term="Data science"/>
     <summary>Office of Science — Closes 2026-09-30 — The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
+  </entry>
+  <entry>
+    <title>CHIPS Research and Development Office (CRDO) Broad Agency Announcement (BAA)</title>
+    <link href="https://www.grants.gov/search-results-detail/360651"/>
+    <id>urn:funding-finder:grants-gov:360651</id>
+    <updated>2025-09-24T00:00:00Z</updated>
+    <author><name>National Institute of Standards and Technology</name></author>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <category term="Cybersecurity"/>
+    <summary>National Institute of Standards and Technology — Closes 2029-09-30 — NIST is soliciting proposals from eligible applicants for research, prototyping, and commercial solutions that advance microelectronics technology in the U.S., to be considered for funding by the CHIPS Research and Development Office (CRDO).</summary>
   </entry>
   <entry>
     <title>Centers of Research Excellence in Science and Technology - Research Infrastructure for Science and Engineering</title>
@@ -201,6 +215,22 @@ The goals of the Catalysis program are to increase fundamental understanding in 
 The goal of the Process Systems, Reaction Engineering, and Molecular Thermodynamics program is to advance fundamental engineering research o…</summary>
   </entry>
   <entry>
+    <title>Centers of Research Excellence in Science and Technology</title>
+    <link href="https://www.grants.gov/search-results-detail/348375"/>
+    <id>urn:funding-finder:grants-gov:348375</id>
+    <updated>2023-05-25T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <category term="Cybersecurity"/>
+    <summary>U.S. National Science Foundation — Closes 2026-12-04 — CREST Center awards provide support to enhance the research capabilities of Minority-serving institutions (MSIs) through the establishment of centers that effectively integrate education and research. CREST Center awards promote the development of new knowledge, enhancements of the research productivity of individual faculty, and an expanded presence of students historically underrepresented in sc…</summary>
+  </entry>
+  <entry>
     <title>Biophotonics</title>
     <link href="https://www.grants.gov/search-results-detail/347327"/>
     <id>urn:funding-finder:grants-gov:347327</id>
@@ -213,6 +243,7 @@ The goal of the Process Systems, Reaction Engineering, and Molecular Thermodynam
     <category term="Neuroscience"/>
     <category term="Quantum science"/>
     <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
     <summary>U.S. National Science Foundation — Posted — The Biophotonics program is part of the Engineering Biology and Health cluster, which also includes: 1) the Biosensing program; 2) the Cellular and Biochemical Engineering program; 3) the Disability and Rehabilitation Engineering program; and 4) the Engineering of Biomedical Systems program.
 The goal of the Biophotonics program is to explore the research frontiers in photonics principles, engineer…</summary>
   </entry>

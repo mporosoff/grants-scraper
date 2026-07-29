@@ -4,8 +4,18 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml</id>
-  <updated>2026-07-28T12:16:14Z</updated>
+  <updated>2026-07-29T12:22:47Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Rural Decentralized Water System Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363364"/>
+    <id>urn:funding-finder:grants-gov:363364</id>
+    <updated>2026-07-28T00:00:00Z</updated>
+    <author><name>Rural Utilities Service</name></author>
+    <category term="Community development"/>
+    <category term="Water"/>
+    <summary>Rural Utilities Service — Closes 2026-09-30 — The DWS Grant Program has been established to help individuals with low to moderate incomes finance certain costs of household water wells and individually owned decentralized wastewater systems that they own or will own. Grants are made to eligible nonprofit organizations to establish and maintain a revolving fund to provide loans and sub-grants to eligible individuals for individually owned wate…</summary>
+  </entry>
   <entry>
     <title>NRCS' Feral Swine Eradication and Control Pilot Program Fiscal Year (FY) 2026</title>
     <link href="https://www.grants.gov/search-results-detail/363285"/>
@@ -135,6 +145,18 @@
     <summary>Bureau of Land Management — Closes 2026-10-16 — The Headquarters Bureau of Land Management (BLM) offices have collaborated with Qualified Youth Corps, as authorized by the Public Lands Corps Act (PLC), to accomplish natural and cultural resource-focused projects for numerous years. This program"s projects provide opportunities to gain work experience in public lands and natural resources management. Through their BLM experience, youth gain an a…</summary>
   </entry>
   <entry>
+    <title>WaterSMART Cooperative Watershed Management Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362755"/>
+    <id>urn:funding-finder:grants-gov:362755</id>
+    <updated>2026-06-10T00:00:00Z</updated>
+    <author><name>Bureau of Reclamation</name></author>
+    <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Water"/>
+    <summary>Bureau of Reclamation — Closes 2028-02-15 — The WaterSMART Cooperative Watershed Management Program funding opportunity invites eligible entities to apply for funding to develop local solutions to address their water management needs. This opportunity provides funding for watershed group development, restoration planning, and watershed management project planning and design. By providing this funding, Reclamation promotes water reliability …</summary>
+  </entry>
+  <entry>
     <title>Native American Affairs: Fiscal Year 2025 Colorado River Basin Tribal Drought Resiliency Program</title>
     <link href="https://www.grants.gov/search-results-detail/362644"/>
     <id>urn:funding-finder:grants-gov:362644</id>
@@ -217,6 +239,18 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Bureau of Reclamation — Closes 2027-04-13 — Through WaterSMART, the Bureau of Reclamation (Reclamation) leverages Federal and non-Federal funding to work cooperatively with States, Tribes, and local entities as they plan and implement actions to increase water supply and hydropower reliability. The WaterSMART Program demonstrably advances Trump administration priorities, such as those identified in Presidential Executive Order 14154 (Januar…</summary>
+  </entry>
+  <entry>
+    <title>WaterSMART Drought Response Program</title>
+    <link href="https://www.grants.gov/search-results-detail/361415"/>
+    <id>urn:funding-finder:grants-gov:361415</id>
+    <updated>2026-03-05T00:00:00Z</updated>
+    <author><name>Bureau of Reclamation</name></author>
+    <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Water"/>
+    <summary>Bureau of Reclamation — Posted — Through WaterSMART, the Bureau of Reclamation (Reclamation) leverages Federal and non-Federal funding to work cooperatively with States, Tribes, and other entities as they plan for and implement actions to increase water supply and hydropower reliability. The WaterSMART Drought Response Program NOFO invites eligible applicants to submit proposals for projects designed to improve drought resilience…</summary>
   </entry>
   <entry>
     <title>ERDC Broad Agency Announcement</title>

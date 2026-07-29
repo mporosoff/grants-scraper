@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/climate-change.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/climate-change.xml</id>
-  <updated>2026-07-28T12:16:14Z</updated>
+  <updated>2026-07-29T12:22:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Clean Green Schools Initiative</title>
@@ -243,6 +243,8 @@ The goals of the Catalysis program are to increase fundamental understanding in 
     <category term="Education and workforce"/>
     <category term="Energy"/>
     <category term="Environmental science"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Artificial intelligence and machine learning"/>
     <summary>U.S. National Science Foundation — Posted — The Combustion and Fire Systems program is part of the Transport Phenomena cluster, which also includes 1) the Fluid Dynamics program; 2) the Particulate and Multiphase Processes program; and 3) the Thermal Transport Processes program.
 The goal of the Combustion and Fire Systems program is to create new knowledge to support advances in clean energy, climate change mitigation, a cleaner environment…</summary>
   </entry>

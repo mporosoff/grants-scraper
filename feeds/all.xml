@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-07-28T12:16:14Z</updated>
+  <updated>2026-07-29T12:22:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -127,6 +127,27 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>National Institutes of Health — Closes 2027-06-01 — This Notice of Funding Opportunity (NOFO) invites applications for NIDDK Disease Research and Translational Core Centers (P30 Clinical Trial Optional). These Core Centers are part of an integrated program of biomedical and translational research supporting our cystic fibrosis, diabetes, nutrition, obesity, liver and digestive diseases research. They enhance multidisciplinary collaboration, rigor, …</summary>
+  </entry>
+  <entry>
+    <title>INCLUDE Project: Omics Phenotypes Related to Down Syndrome (X01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363349"/>
+    <id>urn:funding-finder:grants-gov:363349</id>
+    <updated>2027-04-15T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <summary>National Institutes of Health — Closes 2027-06-15 — The NIH INvestigation of Co-occurring conditions across the Lifespan to Understand Down syndromE (INCLUDE) Project seeks to improve health and quality-of-life for individuals with Down syndrome. The purpose of this Notice of Funding Opportunity (NOFO) is to solicit applications to submit samples to NIH INCLUDE Project-supported resources to generate a large volume of integrated genomic and multi-o…</summary>
+  </entry>
+  <entry>
+    <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/363350"/>
+    <id>urn:funding-finder:grants-gov:363350</id>
+    <updated>2027-04-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Data science"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-06-11 — NCI intends to release a Notice of Funding Opportunity (NOFO) that serves to continue the advancement and sustainment of informatics tools, software, and research resources that enable the acquisition, management, analysis, visualization, and interpretation of data across the cancer research continuum, including cancer biology, diagnosis and treatment, early detection, risk assessment and preventi…</summary>
   </entry>
   <entry>
     <title>National Viral Hepatitis Education, Awareness, and Capacity Building for Communities and Providers</title>
@@ -342,6 +363,32 @@
     <summary>National Institutes of Health — Closes 2027-05-27 — The National Institute of Mental Health (NIMH) intends to publish a notice of funding opportunity (NOFO) to solicit research applications for practice-based research centers to support interdisciplinary teams of mental health researchers to engage in high-impact studies that will significantly advance clinical practice and generate knowledge to fuel the transformation of mental health care in the …</summary>
   </entry>
   <entry>
+    <title>Drug-Free Communities (DFC) Support Program – NEW (Year 1)</title>
+    <link href="https://www.grants.gov/search-results-detail/363353"/>
+    <id>urn:funding-finder:grants-gov:363353</id>
+    <updated>2027-01-26T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCIPC</name></author>
+    <summary>Centers for Disease Control - NCIPC — Closes 2027-03-31 — The Drug-Free Communities (DFC) Support Program was created by the Drug-Free Communities Act of 1997 (Public Law 105-20). The Executive Office of the President, Office of National Drug Control Policy (ONDCP), and the Department of Health and Human Services (HHS), Centers for Disease Control and Prevention (CDC), National Center for Injury Prevention and Control (NCIPC) are accepting applications f…</summary>
+  </entry>
+  <entry>
+    <title>Implementation Research on Coordinated Combinations of Community-Clinical Linkage Strategies for Diabetes Prevention and Management</title>
+    <link href="https://www.grants.gov/search-results-detail/363360"/>
+    <id>urn:funding-finder:grants-gov:363360</id>
+    <updated>2027-01-21T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-03-22 — Diabetes causes illness and death in the United States. It leads to high health care costs. People who use Federally Qualified Health Centers (FQHCs) and other safety-net clinics face greater risks. Many community-clinical linkage (CCL) strategies show benefits when used alone. We know less about how several strategies can be combined and coordinated. Using multiple strategies together may improve…</summary>
+  </entry>
+  <entry>
+    <title>Health Promotion and Disease Prevention Research Centers: 2027 Special Interest Project Supplements (SIPS)</title>
+    <link href="https://www.grants.gov/search-results-detail/363341"/>
+    <id>urn:funding-finder:grants-gov:363341</id>
+    <updated>2027-01-21T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Cancer"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-03-23 — This NOFO will provide supplemental funding to the currently funding twenty (20) CDC Prevention Research Centers (PRCs) to conduct Special Interest Projects (SIPs). The purpose of the SIPs is to inform public health practice through high-quality applied health promotion and disease prevention public health research in real-world settings to identify, design, test, assess, evaluate, disseminate, an…</summary>
+  </entry>
+  <entry>
     <title>Pilot Testing, Implementation, and Evaluation of the Cervical, Breast and Colorectal Cancer Clinical Decision Support Tools</title>
     <link href="https://www.grants.gov/search-results-detail/363309"/>
     <id>urn:funding-finder:grants-gov:363309</id>
@@ -453,6 +500,15 @@
     <category term="Neuroscience"/>
     <category term="Public health"/>
     <summary>Centers for Disease Control - NCEZID — Closes 2027-03-27 — The CDC announces the availability of FY 2027 funds for a cooperative agreement to continue enhanced national surveillance for human prion diseases, also known as transmissible spongiform encephalopathies (TSEs), in the United States. The purpose is to continue an active surveillance program to help confirm suspected and clinically diagnosed cases of human prion disease and to monitor the occurren…</summary>
+  </entry>
+  <entry>
+    <title>The National Network of STI Clinical Prevention Training Centers (NNPTC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363356"/>
+    <id>urn:funding-finder:grants-gov:363356</id>
+    <updated>2026-12-20T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCHHSTP</name></author>
+    <category term="Education and workforce"/>
+    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-02-20 — This NOFO will support the development and dissemination of education, training and technical assistance—emphasizing prevention strategies—for clinicians and disease intervention professionals to improve sexually transmitted infection (STI) patient care. The NOFO aims to improve the capacity of providers, clinical sites, and healthcare systems to diagnose, manage, treat and counsel individuals wit…</summary>
   </entry>
   <entry>
     <title>NIOSH Small Research Grant Program (R03)</title>
@@ -716,6 +772,19 @@
     <summary>National Institutes of Health — Closes 2027-02-16 — The NIH intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop and implement investigator-initiated multi-site clinical trials, including efficacy, effectiveness, pragmatic, and/or implementation research clinical trials. Applications that propose a large and/or complex clinical trial conducted at either a single site or at multiple locations but without physi…</summary>
   </entry>
   <entry>
+    <title>NIOSH Centers of Excellence for Total Worker Health® (U19)</title>
+    <link href="https://www.grants.gov/search-results-detail/363369"/>
+    <id>urn:funding-finder:grants-gov:363369</id>
+    <updated>2026-11-16T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-26 — PURPOSENIOSH intends to support the Centers of Excellence in Total Worker Health® (TWH). These Centers will conduct rigorous research and translation activities to prevent harmful exposures, improve working conditions, and advance worker well-being. The Centers will develop practical, scalable solutions for employers and workers. All projects must use the NIOSH Worker Well-Being Questionnaire (Wel…</summary>
+  </entry>
+  <entry>
     <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development</title>
     <link href="https://www.grants.gov/search-results-detail/363095"/>
     <id>urn:funding-finder:grants-gov:363095</id>
@@ -838,6 +907,25 @@
     <summary>National Institutes of Health — Closes 2027-01-25 — This Notice of Funding Opportunity (NOFO) invites applications for P30 Cancer Center Support Grants (CCSGs) to support NCI-Designated Cancer Centers. CCSGs support three types of Cancer Centers: 1) Comprehensive Cancer Centers, which demonstrate reasonable depth and breadth of research activities in each of three major areas: basic laboratory; clinical; and prevention, control and population-based…</summary>
   </entry>
   <entry>
+    <title>Expanded Surveillance for Pediatric Infectious Diseases</title>
+    <link href="https://www.grants.gov/search-results-detail/363342"/>
+    <id>urn:funding-finder:grants-gov:363342</id>
+    <updated>2026-10-30T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-31 — The purpose of this Notice of Funding Opportunity (NOFO) is to support a network of U.S. institutions that will conduct standardized, prospective, active surveillance of pediatric acute respiratory illness (ARI) and acute gastroenteritis (AGE). The network will focus on respiratory and enteric viruses among pediatric patients seeking healthcare.In addition, the network will generate robust estimat…</summary>
+  </entry>
+  <entry>
+    <title>Improving Protection against Influenza and Other Respiratory Pathogens: the US Flu VE Network</title>
+    <link href="https://www.grants.gov/search-results-detail/363343"/>
+    <id>urn:funding-finder:grants-gov:363343</id>
+    <updated>2026-10-30T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Infectious disease"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-31 — The purpose of this notice of funding opportunity (NOFO) is to continue the work of the US Influenza Vaccine Effectiveness (Flu VE) Network. Influenza and other respiratory pathogens are important causes of morbidity, mortality, and healthcare burden across the age spectrum. This network provides evidence needed to improve the effectiveness of influenza and other respiratory pathogen vaccines. You…</summary>
+  </entry>
+  <entry>
     <title>Early Detection, Response, and Control of Global Rabies Outbreaks and Associated Threats to America's Dog-Rabies Free Status</title>
     <link href="https://www.grants.gov/search-results-detail/363332"/>
     <id>urn:funding-finder:grants-gov:363332</id>
@@ -902,89 +990,5 @@
     <author><name>Centers for Disease Control - NCHHSTP</name></author>
     <category term="Infectious disease"/>
     <summary>Centers for Disease Control - NCHHSTP — Closes 2026-12-09 — This NOFO supports integrated viral hepatitis surveillance and prevention programs in states, territories, and large cities in the United States. Key strategies include viral hepatitis outbreak response and surveillance for hepatitis A, acute and chronic hepatitis B, and acute, chronic, and perinatal hepatitis C. Surveillance activities include developing and utilizing disease registries, conducti…</summary>
-  </entry>
-  <entry>
-    <title>World Trade Center Health Program Mentored Research Scientist Career Development Award (K01)</title>
-    <link href="https://www.grants.gov/search-results-detail/363054"/>
-    <id>urn:funding-finder:grants-gov:363054</id>
-    <updated>2026-10-07T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-08 — The National Institute for Occupational Safety and Health (NIOSH) World Trade Center (WTC) Health Program K01 Award supports early-career investigators in developing independent research careers focused on improving the health and well-being of populations affected by the September 11, 2001, terrorist attacks (9/11). This award provides up to three years of mentored research and career development…</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: Supporting Programs to Advance Research Knowledge in Environmental Health Sciences (SPARK-EHS) (UE5/T32 - Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/362977"/>
-    <id>urn:funding-finder:grants-gov:362977</id>
-    <updated>2026-10-05T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>National Institutes of Health — Closes 2026-12-07 — The goal of the Supporting Programs to Advance Research Knowledge in Environmental Health Sciences (SPARK-EHS) initiative is to extend the institutional, geographical, and research reach of NIEHS training. This initiative proposes to launch new and innovative environmental health training programs for research-focused predoctoral trainees at institutions that have not had a funded NIEHS T32 during…</summary>
-  </entry>
-  <entry>
-    <title>CDC National Centers of Excellence in Youth Violence Prevention (YVPCs): Rigorous Evaluation of Prevention Approaches to Prevent and Reduce Youth Violence</title>
-    <link href="https://www.grants.gov/search-results-detail/363055"/>
-    <id>urn:funding-finder:grants-gov:363055</id>
-    <updated>2026-10-01T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Education and workforce"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-01 — The Centers for Disease Control and Prevention’s (CDC) National Center for Injury Prevention and Control (NCIPC) seeks investigator-initiated research proposals to expand the evidence base for the prevention of violence among youth aged 10 to 24 years.The purpose of this announcement is to fund the National Centers of Excellence in Youth Violence Prevention (or Youth Violence Prevention Centers; Y…</summary>
-  </entry>
-  <entry>
-    <title>Identify and Evaluate Potential Risk Factors for Amyotrophic Lateral Sclerosis (ALS)</title>
-    <link href="https://www.grants.gov/search-results-detail/363115"/>
-    <id>urn:funding-finder:grants-gov:363115</id>
-    <updated>2026-10-01T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <category term="Neuroscience"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-01 — CDC/ATSDR is inviting research proposals to study risk factors for Amyotrophic Lateral Sclerosis (ALS). Studies on military service, contact sports, traumatic brain injury, neuroinflammation, and infections agents and exposures are encouraged. Funding will be for four funding options: Option A - Support research with strong existing evidence such as studies on known environmental or genetic risk f…</summary>
-  </entry>
-  <entry>
-    <title>Improving Linkage to Care for People with Opioid Use Disorder (U01)</title>
-    <link href="https://www.grants.gov/search-results-detail/363058"/>
-    <id>urn:funding-finder:grants-gov:363058</id>
-    <updated>2026-10-01T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Arts and culture"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-01 — The Centers for Disease Control and Prevention’s (CDC) National Center for Injury Prevention and Control (NCIPC, Injury Center) is soliciting investigator-initiated research to develop, implement, and rigorously evaluate strategies to address and overcome barriers to implementing evidence-based linkage to care services in health care settings. Strategies should focus on individuals with opioid use…</summary>
-  </entry>
-  <entry>
-    <title>Microplastics Research and Resource Coordination Center (U24 - Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/362996"/>
-    <id>urn:funding-finder:grants-gov:362996</id>
-    <updated>2026-10-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Materials science"/>
-    <summary>National Institutes of Health — Closes 2026-12-01 — The goal of the Micro/Nanoplastics (M/NPs) Research and Resource Coordination Center initiative is to establish a robust center that will coordinate and advance multidisciplinary efforts among biomedical and material science researchers to gain a comprehensive understanding of the health effects of M/NPs. This coordination center will accelerate the development and dissemination of sampling and an…</summary>
-  </entry>
-  <entry>
-    <title>New Investigator Grants to Conduct Research to Prevent Interpersonal Violence and Suicide Among Children and Adolescents (K01)</title>
-    <link href="https://www.grants.gov/search-results-detail/363059"/>
-    <id>urn:funding-finder:grants-gov:363059</id>
-    <updated>2026-10-01T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-01 — This Centers for Disease Control and Prevention (CDC), National Center for Injury Prevention and Control (NCIPC) Mentored Research Scientist Development Award (K01) supports an intensive, supervised (mentored) career development experience in violence and suicide prevention research leading to research independence. NCIPC supports K01 grants to help ensure the availability of an adequate number of…</summary>
-  </entry>
-  <entry>
-    <title>Preventing Suicide and Interpersonal Violence Among Youth and Young Adults</title>
-    <link href="https://www.grants.gov/search-results-detail/363141"/>
-    <id>urn:funding-finder:grants-gov:363141</id>
-    <updated>2026-10-01T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-01 — The Centers for Disease Control and Prevention's (CDC) National Center for Injury Prevention and Control (NCIPC) seeks investigator-initiated research proposals to evaluate primary prevention-focused approaches to reduce suicide and interpersonal violence among youth and young adults (ages 10 to 24 years).This NOFO will support the evaluation of existing primary prevention approaches (i.e., approa…</summary>
-  </entry>
-  <entry>
-    <title>Research Grants to Rigorously Evaluate Innovative and Promising Approaches to Prevent Firearm-Related Violence and Injuries</title>
-    <link href="https://www.grants.gov/search-results-detail/363137"/>
-    <id>urn:funding-finder:grants-gov:363137</id>
-    <updated>2026-10-01T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-01 — The Centers for Disease Control and Prevention’s (CDC) National Center for Injury Prevention and Control (NCIPC or the Injury Center) is soliciting investigator-initiated research to rigorously evaluate the effectiveness of innovative and promising approaches to prevent all forms of firearm-related injuries, deaths, violence, or crime without infringing on the rights of legal firearm owners. For t…</summary>
   </entry>
 </feed>

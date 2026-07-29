@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml</id>
-  <updated>2026-07-28T12:16:14Z</updated>
+  <updated>2026-07-29T12:22:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -127,6 +127,27 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>National Institutes of Health — Closes 2027-06-01 — This Notice of Funding Opportunity (NOFO) invites applications for NIDDK Disease Research and Translational Core Centers (P30 Clinical Trial Optional). These Core Centers are part of an integrated program of biomedical and translational research supporting our cystic fibrosis, diabetes, nutrition, obesity, liver and digestive diseases research. They enhance multidisciplinary collaboration, rigor, …</summary>
+  </entry>
+  <entry>
+    <title>INCLUDE Project: Omics Phenotypes Related to Down Syndrome (X01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363349"/>
+    <id>urn:funding-finder:grants-gov:363349</id>
+    <updated>2027-04-15T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <summary>National Institutes of Health — Closes 2027-06-15 — The NIH INvestigation of Co-occurring conditions across the Lifespan to Understand Down syndromE (INCLUDE) Project seeks to improve health and quality-of-life for individuals with Down syndrome. The purpose of this Notice of Funding Opportunity (NOFO) is to solicit applications to submit samples to NIH INCLUDE Project-supported resources to generate a large volume of integrated genomic and multi-o…</summary>
+  </entry>
+  <entry>
+    <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/363350"/>
+    <id>urn:funding-finder:grants-gov:363350</id>
+    <updated>2027-04-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Data science"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-06-11 — NCI intends to release a Notice of Funding Opportunity (NOFO) that serves to continue the advancement and sustainment of informatics tools, software, and research resources that enable the acquisition, management, analysis, visualization, and interpretation of data across the cancer research continuum, including cancer biology, diagnosis and treatment, early detection, risk assessment and preventi…</summary>
   </entry>
   <entry>
     <title>National Viral Hepatitis Education, Awareness, and Capacity Building for Communities and Providers</title>
@@ -342,6 +363,32 @@
     <summary>National Institutes of Health — Closes 2027-05-27 — The National Institute of Mental Health (NIMH) intends to publish a notice of funding opportunity (NOFO) to solicit research applications for practice-based research centers to support interdisciplinary teams of mental health researchers to engage in high-impact studies that will significantly advance clinical practice and generate knowledge to fuel the transformation of mental health care in the …</summary>
   </entry>
   <entry>
+    <title>Drug-Free Communities (DFC) Support Program – NEW (Year 1)</title>
+    <link href="https://www.grants.gov/search-results-detail/363353"/>
+    <id>urn:funding-finder:grants-gov:363353</id>
+    <updated>2027-01-26T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCIPC</name></author>
+    <summary>Centers for Disease Control - NCIPC — Closes 2027-03-31 — The Drug-Free Communities (DFC) Support Program was created by the Drug-Free Communities Act of 1997 (Public Law 105-20). The Executive Office of the President, Office of National Drug Control Policy (ONDCP), and the Department of Health and Human Services (HHS), Centers for Disease Control and Prevention (CDC), National Center for Injury Prevention and Control (NCIPC) are accepting applications f…</summary>
+  </entry>
+  <entry>
+    <title>Implementation Research on Coordinated Combinations of Community-Clinical Linkage Strategies for Diabetes Prevention and Management</title>
+    <link href="https://www.grants.gov/search-results-detail/363360"/>
+    <id>urn:funding-finder:grants-gov:363360</id>
+    <updated>2027-01-21T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-03-22 — Diabetes causes illness and death in the United States. It leads to high health care costs. People who use Federally Qualified Health Centers (FQHCs) and other safety-net clinics face greater risks. Many community-clinical linkage (CCL) strategies show benefits when used alone. We know less about how several strategies can be combined and coordinated. Using multiple strategies together may improve…</summary>
+  </entry>
+  <entry>
+    <title>Health Promotion and Disease Prevention Research Centers: 2027 Special Interest Project Supplements (SIPS)</title>
+    <link href="https://www.grants.gov/search-results-detail/363341"/>
+    <id>urn:funding-finder:grants-gov:363341</id>
+    <updated>2027-01-21T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Cancer"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-03-23 — This NOFO will provide supplemental funding to the currently funding twenty (20) CDC Prevention Research Centers (PRCs) to conduct Special Interest Projects (SIPs). The purpose of the SIPs is to inform public health practice through high-quality applied health promotion and disease prevention public health research in real-world settings to identify, design, test, assess, evaluate, disseminate, an…</summary>
+  </entry>
+  <entry>
     <title>Pilot Testing, Implementation, and Evaluation of the Cervical, Breast and Colorectal Cancer Clinical Decision Support Tools</title>
     <link href="https://www.grants.gov/search-results-detail/363309"/>
     <id>urn:funding-finder:grants-gov:363309</id>
@@ -455,6 +502,15 @@
     <summary>Centers for Disease Control - NCEZID — Closes 2027-03-27 — The CDC announces the availability of FY 2027 funds for a cooperative agreement to continue enhanced national surveillance for human prion diseases, also known as transmissible spongiform encephalopathies (TSEs), in the United States. The purpose is to continue an active surveillance program to help confirm suspected and clinically diagnosed cases of human prion disease and to monitor the occurren…</summary>
   </entry>
   <entry>
+    <title>The National Network of STI Clinical Prevention Training Centers (NNPTC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363356"/>
+    <id>urn:funding-finder:grants-gov:363356</id>
+    <updated>2026-12-20T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCHHSTP</name></author>
+    <category term="Education and workforce"/>
+    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-02-20 — This NOFO will support the development and dissemination of education, training and technical assistance—emphasizing prevention strategies—for clinicians and disease intervention professionals to improve sexually transmitted infection (STI) patient care. The NOFO aims to improve the capacity of providers, clinical sites, and healthcare systems to diagnose, manage, treat and counsel individuals wit…</summary>
+  </entry>
+  <entry>
     <title>NIOSH Small Research Grant Program (R03)</title>
     <link href="https://www.grants.gov/search-results-detail/363299"/>
     <id>urn:funding-finder:grants-gov:363299</id>
@@ -535,70 +591,5 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
     <summary>National Institutes of Health — Closes 2027-02-05 — The goal of this program is to support collaborative translational research projects aligned with NIH efforts to enhance the translation of basic biological discoveries into clinical applications that improve health. It encourages high quality science demonstrating the potential to result in understanding an important disease process or lead to new therapeutic interventions, diagnostics, or preven…</summary>
-  </entry>
-  <entry>
-    <title>Establishing a Research Network to Guide Foundational Research on Human Consciousness</title>
-    <link href="https://www.grants.gov/search-results-detail/362097"/>
-    <id>urn:funding-finder:grants-gov:362097</id>
-    <updated>2026-12-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Neuroscience"/>
-    <category term="Public health"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health — Closes 2027-02-08 — This Funding Opportunity will establish the NIH Blueprint for Neuroscience Research Network to Guide Foundational Research on Human Consciousness, leveraging a trans-NIH collaboration of 14 Institutes, Centers, and Offices dedicated to reducing the burden of nervous system disorders. Consciousness is central to numerous serious biomedical conditions, including coma, delirium, dementia, traumatic b…</summary>
-  </entry>
-  <entry>
-    <title>International Research Scientist Development Award (IRSDA)</title>
-    <link href="https://www.grants.gov/search-results-detail/363050"/>
-    <id>urn:funding-finder:grants-gov:363050</id>
-    <updated>2026-12-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health — Closes 2027-02-09 — This initiative will provide salary and research support to advanced U.S. postdoctoral researchers and junior faculty for intensive mentored research and career development activities focused on biomedical, behavioral, and/or clinical research in low- and middle-income countries (LMICs). Proposals will leverage special opportunities not present in the U.S. and result in generalizable knowledge app…</summary>
-  </entry>
-  <entry>
-    <title>Digital Health Technology and Reciprocal Innovation to Improve Clinical and Public Health Outcomes</title>
-    <link href="https://www.grants.gov/search-results-detail/363049"/>
-    <id>urn:funding-finder:grants-gov:363049</id>
-    <updated>2026-12-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Environmental science"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-02-11 — This initiative will support research on the development, validation, feasibility, and effectiveness of innovative digital health interventions or tools (including mobile health) specifically suited for underserved settings in the U.S. and globally. Research should utilize new or emerging technologies, platforms, systems, and/or analytics to address high priority health problems, expand the eviden…</summary>
-  </entry>
-  <entry>
-    <title>Tribal Maternal, Infant, and Early Childhood Home Visiting Program: Development and Implementation Grants</title>
-    <link href="https://www.grants.gov/search-results-detail/363222"/>
-    <id>urn:funding-finder:grants-gov:363222</id>
-    <updated>2026-12-01T00:00:00Z</updated>
-    <author><name>Administration for Children and Families</name></author>
-    <category term="Arts and culture"/>
-    <summary>Administration for Children and Families — Closes 2027-03-02 — The Office of Early Childhood Development (ECD) within the Administration for Children and Families (ACF) will be soliciting applications for the Fiscal Year 2027 Tribal Maternal, Infant, and Early Childhood Home Visiting (MIECHV) Program: Development and Implementation Grants. Funds will support 5-year cooperative agreements between ACF and federally recognized Indian tribes (or a consortium of I…</summary>
-  </entry>
-  <entry>
-    <title>NIDDK Multi-Purpose Resource-Related, Multi-Component Research Services Centers Cooperative Agreement (U2C - Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/363037"/>
-    <id>urn:funding-finder:grants-gov:363037</id>
-    <updated>2026-11-28T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <summary>National Institutes of Health — Closes 2027-01-28 — This Notice of Funding Opportunity (NOFO) announcement invites applications for NIDDK Multi-Purpose Resource-Related Research, Multi-Component Centers Cooperative Agreement (U2C - Clinical Trial Not Allowed). To help increase rigor, reproducibility and cost efficiencies, U2C centers offer highly specialized cores that provide a range of topic focused services including but not limited to hands-on …</summary>
-  </entry>
-  <entry>
-    <title>Health and Extreme Weather Research Coordination and Data Center (U2C - Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/362979"/>
-    <id>urn:funding-finder:grants-gov:362979</id>
-    <updated>2026-11-27T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>National Institutes of Health — Closes 2027-01-29 — The National Institute of Environmental Health Sciences (NIEHS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for research coordination and data support for the Health and Extreme Weather (HEW) initiative. This solicitation will include two closely aligned components: research coordination and data support. The coordinating component will be responsible for faci…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-07-28T12:16:14Z</updated>
+  <updated>2026-07-29T12:22:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Microplastics Research and Resource Coordination Center (U24 - Clinical Trial Not Allowed)</title>
@@ -132,6 +132,31 @@
     <summary>Office of Science — Closes 2026-09-30 — The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
   </entry>
   <entry>
+    <title>CHIPS Research and Development Office (CRDO) Broad Agency Announcement (BAA)</title>
+    <link href="https://www.grants.gov/search-results-detail/360651"/>
+    <id>urn:funding-finder:grants-gov:360651</id>
+    <updated>2025-09-24T00:00:00Z</updated>
+    <author><name>National Institute of Standards and Technology</name></author>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <category term="Cybersecurity"/>
+    <summary>National Institute of Standards and Technology — Closes 2029-09-30 — NIST is soliciting proposals from eligible applicants for research, prototyping, and commercial solutions that advance microelectronics technology in the U.S., to be considered for funding by the CHIPS Research and Development Office (CRDO).</summary>
+  </entry>
+  <entry>
+    <title>Staff Research Program</title>
+    <link href="https://www.grants.gov/search-results-detail/359236"/>
+    <id>urn:funding-finder:grants-gov:359236</id>
+    <updated>2025-06-03T00:00:00Z</updated>
+    <author><name>Dept of the Army -- Materiel Command</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Materials science"/>
+    <summary>Dept of the Army -- Materiel Command — Closes 2030-06-02 — The ARO is soliciting proposals for Staff Research Program opportunities. The purpose of the program is to enable ARO scientific staff to maintain and expand professional competence in support of fulfilling the ARO mission through the conduct of hands-on, basic research. The staff research will be performed collaboratively with institutions external to ARO. Staff research efforts will involve scie…</summary>
+  </entry>
+  <entry>
     <title>Centers of Research Excellence in Science and Technology - Research Infrastructure for Science and Engineering</title>
     <link href="https://www.grants.gov/search-results-detail/359061"/>
     <id>urn:funding-finder:grants-gov:359061</id>
@@ -160,6 +185,22 @@
     <category term="Technology development"/>
     <category term="Water"/>
     <summary>U.S. National Science Foundation — Posted — Infrastructure systems comprise complex connections between physical components, organizational structures and operational methods that support the needs of people and communities at the local, regional, national, and global scales. Such systems form the backbone of society, providing essential services as well as ensuring public health and welfare, economic prosperity and national security, and a…</summary>
+  </entry>
+  <entry>
+    <title>Computational and Data-Enabled Science and Engineering</title>
+    <link href="https://www.grants.gov/search-results-detail/356055"/>
+    <id>urn:funding-finder:grants-gov:356055</id>
+    <updated>2024-08-15T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Data science"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>U.S. National Science Foundation — Posted — Large-scale simulations and the ability to accumulate massive amounts of data have revolutionized science and engineering. The goal of the Computational and Data-enabled Science and Engineering (CDS&amp;E) meta-program is to identify and capitalize on opportunities for major scientific and engineering breakthroughs through new computational and data-analysis approaches and best practices. The CDS&amp;E me…</summary>
   </entry>
   <entry>
     <title>NRL Long Range Broad Agency Announcement (BAA) for Basic and Applied Research</title>
@@ -258,6 +299,22 @@
 The goal of the Process Systems, Reaction Engineering, and Molecular Thermodynamics program is to advance fundamental engineering research o…</summary>
   </entry>
   <entry>
+    <title>Centers of Research Excellence in Science and Technology</title>
+    <link href="https://www.grants.gov/search-results-detail/348375"/>
+    <id>urn:funding-finder:grants-gov:348375</id>
+    <updated>2023-05-25T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <category term="Cybersecurity"/>
+    <summary>U.S. National Science Foundation — Closes 2026-12-04 — CREST Center awards provide support to enhance the research capabilities of Minority-serving institutions (MSIs) through the establishment of centers that effectively integrate education and research. CREST Center awards promote the development of new knowledge, enhancements of the research productivity of individual faculty, and an expanded presence of students historically underrepresented in sc…</summary>
+  </entry>
+  <entry>
     <title>Archaeometry</title>
     <link href="https://www.grants.gov/search-results-detail/347331"/>
     <id>urn:funding-finder:grants-gov:347331</id>
@@ -279,6 +336,7 @@ The goal of the Process Systems, Reaction Engineering, and Molecular Thermodynam
     <category term="Neuroscience"/>
     <category term="Quantum science"/>
     <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
     <summary>U.S. National Science Foundation — Posted — The Biophotonics program is part of the Engineering Biology and Health cluster, which also includes: 1) the Biosensing program; 2) the Cellular and Biochemical Engineering program; 3) the Disability and Rehabilitation Engineering program; and 4) the Engineering of Biomedical Systems program.
 The goal of the Biophotonics program is to explore the research frontiers in photonics principles, engineer…</summary>
   </entry>
@@ -330,6 +388,22 @@ The goal of the Interfacial Engineering program is to support fundamental resear
     <category term="Quantum science"/>
     <summary>U.S. National Science Foundation — Posted — The Nanoscale Interactions program is part of the Environmental Engineering and Sustainability cluster, which also includes: 1) the Environmental Engineering program; and 2) the Environmental Sustainability program.
 The goal of the Nanoscale Interactions program is to support research to advance fundamental and quantitative understanding of the interactions of nanomaterials and nanosystems with bi…</summary>
+  </entry>
+  <entry>
+    <title>Research Interests of the United States Air Force Academy (formerly USAFA-BAA-2021)</title>
+    <link href="https://www.grants.gov/search-results-detail/330175"/>
+    <id>urn:funding-finder:grants-gov:330175</id>
+    <updated>2020-12-02T00:00:00Z</updated>
+    <author><name>Air Force Academy</name></author>
+    <category term="Arts and culture"/>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>Air Force Academy — Posted — The USAFA invests in an active research program for three main reasons. First and foremost, research significantly enhances the cadet learning experience. Our research is done by, for and with cadets who work alongside fellow cadets and faculty mentors. Research provides cadets with rich independent learning opportunities as they tackle ill-defined problems and are challenged to apply their knowle…</summary>
   </entry>
   <entry>
     <title>University Nuclear Leadership Program– Scholarship and Fellowship Support</title>

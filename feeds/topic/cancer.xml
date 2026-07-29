@@ -4,8 +4,30 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml</id>
-  <updated>2026-07-28T12:16:14Z</updated>
+  <updated>2026-07-29T12:22:47Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/363350"/>
+    <id>urn:funding-finder:grants-gov:363350</id>
+    <updated>2027-04-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Data science"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2027-06-11 — NCI intends to release a Notice of Funding Opportunity (NOFO) that serves to continue the advancement and sustainment of informatics tools, software, and research resources that enable the acquisition, management, analysis, visualization, and interpretation of data across the cancer research continuum, including cancer biology, diagnosis and treatment, early detection, risk assessment and preventi…</summary>
+  </entry>
+  <entry>
+    <title>Health Promotion and Disease Prevention Research Centers: 2027 Special Interest Project Supplements (SIPS)</title>
+    <link href="https://www.grants.gov/search-results-detail/363341"/>
+    <id>urn:funding-finder:grants-gov:363341</id>
+    <updated>2027-01-21T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Cancer"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-03-23 — This NOFO will provide supplemental funding to the currently funding twenty (20) CDC Prevention Research Centers (PRCs) to conduct Special Interest Projects (SIPs). The purpose of the SIPs is to inform public health practice through high-quality applied health promotion and disease prevention public health research in real-world settings to identify, design, test, assess, evaluate, disseminate, an…</summary>
+  </entry>
   <entry>
     <title>Pilot Testing, Implementation, and Evaluation of the Cervical, Breast and Colorectal Cancer Clinical Decision Support Tools</title>
     <link href="https://www.grants.gov/search-results-detail/363309"/>
@@ -185,16 +207,6 @@
     <category term="Biology and biotechnology"/>
     <category term="Cancer"/>
     <summary>National Institutes of Health — Closes 2027-01-11 — As part of the Gabriella Miller Kids First Pediatric Research Program (Kids First Program), the NIH invites applications to submit samples from pediatric cohorts for whole genome sequencing at a Kids First Program supported genomic data generating centers. Applicants are encouraged to propose sequencing of existing pediatric cancer or congenital anomaly cohorts to elucidate the genetic contributio…</summary>
-  </entry>
-  <entry>
-    <title>DoW Kidney Cancer, Concept Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362852"/>
-    <id>urn:funding-finder:grants-gov:362852</id>
-    <updated>2026-06-17T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <category term="Technology development"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-07-28 — Summary: The fiscal year 2026 (FY26) Kidney Cancer Research Program (KCRP) Concept Award supports highly innovative, untested, potentially groundbreaking concepts, theories, paradigms and/or basic kidney cancer research. This award mechanism supports high-risk studies that have the potential to reveal entirely new avenues for investigation in kidney cancer. Applications must describe how the new c…</summary>
   </entry>
   <entry>
     <title>DoW Rare Cancers Concept Award</title>
@@ -601,14 +613,5 @@
     <category term="Cancer"/>
     <category term="Separations and membranes"/>
     <summary>Food and Drug Administration — Forecasted — The purpose of this program is to support new approaches that can be applied to facilitate therapeutic development in ultra-rare pediatric and adult cancers, including molecularly-defined subsets of more common cancers. Specific areas of interest include, but are not limited to, the following examples:• Development of infrastructure for a coordination network and data repository for patient-level …</summary>
-  </entry>
-  <entry>
-    <title>Cancer Center Support Grants (CCSGs) for NCI-designated Cancer Centers (P30 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/360918"/>
-    <id>urn:funding-finder:grants-gov:360918</id>
-    <updated>2025-11-26T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2028-09-25 — This Notice of Funding Opportunity (NOFO) invites applications for P30 Cancer Center Support Grants (CCSGs) to support NCI-Designated Cancer Centers. CCSGs support three types of Cancer Centers: 1) Comprehensive Cancer Centers, which demonstrate reasonable depth and breadth of research activities in each of three major areas: basic laboratory; clinical; and prevention, control and population-based…</summary>
   </entry>
 </feed>
