@@ -1415,7 +1415,7 @@
     </div>`;
   }
 
-  function resultCard(match) {
+  function resultCard(match, resultPosition) {
     const record = catalog.opportunities[match.index];
     const id = recordId(record);
     const assessment = state.ai.assessments.get(id);
@@ -1472,6 +1472,7 @@
 
     return `<article class="result-card${assessment ? " ai-match" : ""}" data-opportunity-id="${escapeAttribute(id)}" tabindex="-1">
       <div class="card-topline">
+        <span class="result-position">Result ${Number(resultPosition).toLocaleString()}</span>
         <span class="badge ${record.status === "posted" ? "open" : "forecasted"}">${record.status === "posted" ? "Open" : "Forecasted"}</span>
         ${assessment ? `<span class="badge ai">AI shortlist</span>` : ""}
         ${candidateReview && !assessment ? `<span class="badge candidate">Retrieved candidate</span>` : ""}
@@ -2184,6 +2185,66 @@
       }).join("");
   }
 
+  function paginationItems(currentPage, totalPages) {
+    if (totalPages <= 7) {
+      return Array.from({ length: totalPages }, (_, index) => index + 1);
+    }
+    const pages = new Set([1, totalPages, currentPage - 1, currentPage, currentPage + 1]);
+    if (currentPage <= 4) {
+      [2, 3, 4, 5].forEach(page => pages.add(page));
+    }
+    if (currentPage >= totalPages - 3) {
+      [totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1]
+        .forEach(page => pages.add(page));
+    }
+    const sorted = [...pages]
+      .filter(page => page >= 1 && page <= totalPages)
+      .sort((left, right) => left - right);
+    const items = [];
+    sorted.forEach((page, index) => {
+      if (index && page - sorted[index - 1] > 1) items.push("ellipsis");
+      items.push(page);
+    });
+    return items;
+  }
+
+  function renderPagination(totalPages, hasResults) {
+    const pagination = $("pagination");
+    const pageNumbers = $("page-numbers");
+    $("page-label").textContent = hasResults
+      ? `Page ${state.page} of ${totalPages}`
+      : "";
+    $("page-prev").disabled = state.page <= 1;
+    $("page-next").disabled = state.page >= totalPages;
+    pageNumbers.innerHTML = hasResults && totalPages > 1
+      ? paginationItems(state.page, totalPages).map(item =>
+          item === "ellipsis"
+            ? `<span class="pagination-ellipsis" aria-hidden="true">&hellip;</span>`
+            : `<button class="page-number" type="button" data-page="${item}" aria-label="Go to results page ${item}"${item === state.page ? ' aria-current="page"' : ""}>${item}</button>`
+        ).join("")
+      : "";
+    pagination.classList.toggle("hidden", !hasResults || totalPages <= 1);
+  }
+
+  function jumpToResultsTop() {
+    const root = document.documentElement;
+    root.classList.add("instant-scroll");
+    $("results-heading").scrollIntoView({ block: "start" });
+    globalThis.requestAnimationFrame(() => root.classList.remove("instant-scroll"));
+  }
+
+  function goToResultsPage(nextPage) {
+    const totalPages = Math.max(
+      1,
+      Math.ceil(currentDisplayMatches().length / PAGE_SIZE),
+    );
+    const page = Math.max(1, Math.min(Number(nextPage) || 1, totalPages));
+    if (page === state.page) return;
+    state.page = page;
+    renderResults();
+    jumpToResultsTop();
+  }
+
   function renderResults() {
     if (!state.searched) {
       $("results-toolbar").classList.add("search-not-started");
@@ -2199,6 +2260,7 @@
       </div>`;
       $("browse-all")?.addEventListener("click", browseAllOpportunities);
       $("page-label").textContent = "";
+      $("page-numbers").innerHTML = "";
       $("pagination").classList.add("hidden");
       $("export-csv").disabled = true;
       $("export-ics").disabled = true;
@@ -2244,14 +2306,13 @@
       </div>`;
       $("empty-clear")?.addEventListener("click", clearEverything);
     } else {
-      $("results").innerHTML = page.map(resultCard).join("");
+      $("results").innerHTML = page
+        .map((match, index) => resultCard(match, start + index + 1))
+        .join("");
     }
     renderExploration();
 
-    $("page-label").textContent = display.length ? `Page ${state.page} of ${totalPages}` : "";
-    $("page-prev").disabled = state.page <= 1;
-    $("page-next").disabled = state.page >= totalPages;
-    $("pagination").classList.toggle("hidden", display.length <= PAGE_SIZE);
+    renderPagination(totalPages, Boolean(display.length));
     $("export-csv").disabled = !display.length;
     $("export-ics").disabled = !display.some(match =>
       calendarEvents(catalog.opportunities[match.index]).length
@@ -2997,14 +3058,14 @@
       renderResults();
     });
     $("page-prev").addEventListener("click", () => {
-      state.page -= 1;
-      renderResults();
-      $("results-heading").scrollIntoView({ behavior: "smooth", block: "start" });
+      goToResultsPage(state.page - 1);
     });
     $("page-next").addEventListener("click", () => {
-      state.page += 1;
-      renderResults();
-      $("results-heading").scrollIntoView({ behavior: "smooth", block: "start" });
+      goToResultsPage(state.page + 1);
+    });
+    $("page-numbers").addEventListener("click", event => {
+      const pageButton = event.target.closest("[data-page]");
+      if (pageButton) goToResultsPage(pageButton.dataset.page);
     });
     $("use-preferences")?.addEventListener("change", () => {
       state.personalize = $("use-preferences").checked;

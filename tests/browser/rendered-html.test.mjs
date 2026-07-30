@@ -26,6 +26,7 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(prototype, /id="k-provider"/);
   assert.match(prototype, /id="k-key"/);
   assert.match(prototype, /id="research-profile"/);
+  assert.match(prototype, /id="page-numbers"/);
   assert.match(prototype, /id="expertise-keywords"/);
   assert.match(prototype, /id="cv-file"/);
   assert.match(prototype, /id="save-profile"/);
@@ -71,6 +72,9 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(script, /profileContext\(\{ includeCv: true \}\)/);
   assert.match(script, /function exportEvaluation/);
   assert.match(script, /function recordIsCurrent/);
+  assert.match(script, /function paginationItems/);
+  assert.match(script, /function goToResultsPage/);
+  assert.match(script, /data-page=/);
   assert.match(script, /function exportCalendar/);
   assert.match(script, /function renderComparePanel/);
   assert.match(script, /Why this matched/);
@@ -78,6 +82,8 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(script, /function evidenceRows/);
   assert.match(script, /function sendDeploymentReview/);
   assert.match(script, /citation_evidence_ids/);
+  assert.match(css, /\.page-number\[aria-current="page"\]/);
+  assert.match(css, /\.result-card:nth-child\(even\)/);
   assert.match(script, /AI retrieval candidate set/);
   assert.match(script, /result-label/);
   assert.match(script, /MAX_AI_CANDIDATES = 32/);
