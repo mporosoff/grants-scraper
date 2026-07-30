@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-30T18:49:14Z",
+  "generated_at": "2026-07-30T19:45:56Z",
   "retention_days": 90,
   "events": [
     {
       "id": "b01a7137c67b706a507d",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-07-30T12:04:03.593285Z",
+      "changed_at": "2026-07-30T19:42:16.396186Z",
       "opportunity_id": "363385",
       "detail": "Deadline 2026-08-29",
       "record": {
