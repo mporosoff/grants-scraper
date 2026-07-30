@@ -21,6 +21,8 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(prototype, /id="flag-evidence"/);
   assert.match(prototype, /id="sort"/);
   assert.match(prototype, /id="export-csv"/);
+  assert.match(prototype, /id="export-ics"/);
+  assert.match(prototype, /id="compare-panel"/);
   assert.match(prototype, /id="k-provider"/);
   assert.match(prototype, /id="k-key"/);
   assert.match(prototype, /id="research-profile"/);
@@ -68,6 +70,11 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(credentialsScript, /localStorage/);
   assert.match(script, /profileContext\(\{ includeCv: true \}\)/);
   assert.match(script, /function exportEvaluation/);
+  assert.match(script, /function recordIsCurrent/);
+  assert.match(script, /function exportCalendar/);
+  assert.match(script, /function renderComparePanel/);
+  assert.match(script, /Why this matched/);
+  assert.match(script, /Program contact/);
   assert.match(script, /function evidenceRows/);
   assert.match(script, /function sendDeploymentReview/);
   assert.match(script, /citation_evidence_ids/);

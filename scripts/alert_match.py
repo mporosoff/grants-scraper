@@ -20,6 +20,7 @@ from datetime import date, datetime
 from pathlib import Path
 
 from .build_catalog import tokenize  # identical tokenizer -> identical terms
+from .currentness import record_is_current
 
 # Facet name -> record field. Mirrors ``facet_counts`` in build_catalog so the
 # filters a user picked in the UI mean the same thing here.
@@ -163,6 +164,7 @@ def search_catalog(
     query: str = "",
     filters: dict | None = None,
     top_k: int | None = None,
+    as_of: date | None = None,
 ) -> list[dict]:
     """Return matching opportunity records, ranked like the site.
 
@@ -179,6 +181,8 @@ def search_catalog(
 
     ranked: list[tuple[float, int, dict]] = []
     for i, record in enumerate(records):
+        if not record_is_current(record, as_of)[0]:
+            continue
         if not matches_filters(record, filters):
             continue
         if has_terms and scores[i] <= 0:

@@ -16,7 +16,10 @@ Anyone can search the comprehensive catalog without an account or API key. The b
   deadline, award size, cited-FOA availability, and special requirements;
 - relevance and field-based sorting;
 - one-click official FOA, agency-notice, or Grants.gov record actions;
-- expandable page/section-cited FOA evidence, pagination, and CSV export; and
+- four-field deadline/award/eligibility/contact overviews with email POC links;
+- “why this matched” explanations, side-by-side comparison, calendar and CSV
+  export;
+- expandable page/section-cited FOA evidence and pagination;
 - visible catalog source, size, generated time, and freshness;
 - public RSS/Atom feeds for the full catalog and individual topics/source
   types; and
@@ -114,18 +117,26 @@ can participate reliably in feeds and consent-based alerts.
 
 After the final validated merge, `scripts/build_feeds.py` regenerates static
 Atom feeds under `feeds/`. They require no account, backend, or personal data.
+Feeds, email matching, and the browser independently reapply a runtime
+expiration/non-funding gate so an opportunity that ages out between catalog
+runs is not shown as active. The daily workflow also maintains a rolling
+change feed and rotates through official links, recording status, content
+type, redirect target, and last-check time.
 For a small manually managed pilot, `docs/weekly-alerts/` contains a
-private-repository email-digest bundle. The public site does not collect email
-addresses; the bundle requires explicit consent and keeps subscriptions,
-watermarks, and SMTP secrets outside this public repository.
+private-repository email-digest bundle. It now includes deadline-change,
+amendment, closing-soon, and closure events from the rolling change feed. The
+public site does not collect email addresses; the bundle requires explicit
+consent and keeps subscriptions, watermarks, and SMTP secrets outside this
+public repository. See `docs/EMAIL_ALERT_SERVICE_SETUP.md` for the recommended
+self-service account, personalized RSS, and email-service architecture.
 
 <!-- catalog-stats:start -->
 This replaces the former 48-record Chemical and Sustainability Engineering feed. The
-July 30, 2026 build contains 1,512 current funding opportunities (1,257 posted and 255
-forecasted) from Grants.gov (1,475), NYSERDA (37), with no deadline before the catalog
-date. It provides a direct official announcement for 447 records, an official source-
-page route for another 641, and the official Grants.gov record for the remaining 424.
-Across all route types, 786 records also contain an official source URL.
+July 30, 2026 build contains 1,505 current funding opportunities (1,250 posted and 255
+forecasted) from Grants.gov (1,468), NYSERDA (37), with no deadline before the catalog
+date. It provides a direct official announcement for 445 records, an official source-
+page route for another 638, and the official Grants.gov record for the remaining 422.
+Across all route types, 782 records also contain an official source URL.
 <!-- catalog-stats:end -->
 
 Funding values are intentionally not conflated: award floor/ceiling drive
@@ -150,15 +161,20 @@ support it.
 | `data/opportunity_enrichment.json` | Incremental official-detail cache |
 | `data/document_evidence.json` | Incremental document hash/version, cited-fact, and review-queue cache |
 | `data/source_records.json` | Last-known-good snapshots for enabled external sources |
+| `data/link_health.json` | Rotating official-link status, redirect, and last-check state |
 | `scripts/build_catalog.py` | Official XML ingestion and catalog builder |
 | `scripts/enrich_catalog.py` | Official detail reconciliation and FOA selection |
 | `scripts/extract_document_evidence.py` | Official PDF/HTML retrieval, versioning, deterministic fact extraction, and citations |
 | `scripts/program_areas.py` | Evidence-backed controlled vocabulary for discoverability in official notices |
 | `scripts/sources/` | Validated multi-source adapters, lifecycle, health gates, and merge |
 | `scripts/build_feeds.py` | Static all/topic/source-type Atom feed generator |
+| `scripts/build_changes.py` | Rolling new/deadline/amendment/closing/closure event feeds |
+| `scripts/check_links.py` | Bounded official-link health and redirect monitor |
+| `scripts/currentness.py` | Shared runtime expiration and non-funding gate |
 | `scripts/alert_match.py` | Server-side saved-search matcher shared by the optional digest bundle |
 | `feeds/` | Generated public Atom feeds and feed directory |
 | `docs/weekly-alerts/` | Private-repository pilot bundle for consent-based weekly email digests |
+| `docs/EMAIL_ALERT_SERVICE_SETUP.md` | Self-service accounts, personalized RSS, and email-alert deployment guide |
 | `scripts/evaluate_phase2.py` | Phase 2 retrieval/reranking evaluator |
 | `scripts/summarize_phase3_reviews.py` | Private Phase 3 deployment-review aggregator |
 | `evaluation/README.md` | Pilot export, privacy, and aggregation workflow |

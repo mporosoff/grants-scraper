@@ -208,6 +208,34 @@ class NyserdaAdapter(SourceAdapter):
                 deadline_note=deadline_note,
                 posted_date=_get(item, "RevisedDate"),
                 primary_document_url=_get(item, "SolicitationLinkPDF"),
+                contacts=[
+                    {
+                        "name": contact.get("Name"),
+                        "email": contact.get("Email"),
+                        "phone": " ".join(
+                            value
+                            for value in (
+                                str(contact.get("Phone") or "").strip(),
+                                (
+                                    f"Ext. {contact.get('Extension')}"
+                                    if contact.get("Extension")
+                                    else ""
+                                ),
+                            )
+                            if value
+                        ),
+                        "role": "Program contact",
+                        "source_url": _get(
+                            item,
+                            "DetailPageLink",
+                            "SalesforceLink",
+                        ),
+                    }
+                    for contact in (
+                        item.get("SolicitationContacts") or []
+                    )
+                    if isinstance(contact, dict)
+                ],
                 additional_deadlines=additional_deadlines,
             ))
         return opportunities

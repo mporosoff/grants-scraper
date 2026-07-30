@@ -107,6 +107,13 @@
     preferenceModel: null,
     savedItems: [],
     savedIds: new Set(),
+    compareIds: new Set(),
+    runtimeCatalog: {
+      records: [],
+      facets: {},
+      statusCounts: {},
+      excluded: 0,
+    },
     profile: {
       value: null,
       saved: false,
@@ -156,6 +163,15 @@
       if (/^www\./i.test(candidate)) candidate = `https://${candidate}`;
       if (!/^https?:\/\//i.test(candidate)) return fallback;
       const parsed = new URL(candidate);
+      if (
+        parsed.protocol === "http:"
+        && (
+          /^(?:www\.)?(?:grants\.gov|grants\.nih\.gov|nsf\.gov|nspires\.nasaprs\.com)$/i.test(parsed.hostname)
+          || /\.(?:gov|mil)$/i.test(parsed.hostname)
+        )
+      ) {
+        parsed.protocol = "https:";
+      }
       return ["http:", "https:"].includes(parsed.protocol) ? parsed.href : fallback;
     } catch {
       return fallback;
@@ -209,6 +225,63 @@
     }).format(parsed);
   }
 
+  function runtimeDateIso() {
+    const now = new Date();
+    return [
+      now.getFullYear(),
+      String(now.getMonth() + 1).padStart(2, "0"),
+      String(now.getDate()).padStart(2, "0"),
+    ].join("-");
+  }
+
+  function nonFundingReason(record) {
+    const title = String(record.title || "").trim();
+    if (/^(?:[A-Z0-9_.-]+\s+)?(?:notice of intent\b|request for information\b|rfi\s*[-:])/i.test(title)) {
+      return "informational notice";
+    }
+    const instruments = (record.funding_instruments || []).map(value => String(value).toLowerCase());
+    const note = `${record.description || ""} ${record.close_date_note || ""}`;
+    if (
+      instruments.length
+      && instruments.every(value => value === "other")
+      && /\bnot accepting applications?\b/i.test(note)
+    ) {
+      return "not accepting applications";
+    }
+    return "";
+  }
+
+  function recordIsCurrent(record, asOf = runtimeDateIso()) {
+    const status = String(record.status || "").toLowerCase();
+    if (["closed", "archived", "cancelled", "canceled", "withdrawn", "expired"].includes(status)) {
+      return false;
+    }
+    if (nonFundingReason(record)) return false;
+    if (record.close_date) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(record.close_date)) return false;
+      if (record.close_date < asOf) return false;
+    } else if (record.archive_date && record.archive_date < asOf) return false;
+    return status === "posted" || status === "forecasted";
+  }
+
+  function currentRecords() {
+    return (catalog?.opportunities || []).filter(record => recordIsCurrent(record));
+  }
+
+  function currentFacetCounts(records) {
+    const output = Object.fromEntries(Object.keys(FACETS).map(name => [name, {}]));
+    for (const record of records) {
+      for (const [name, config] of Object.entries(FACETS)) {
+        const raw = record[config.recordField];
+        const values = Array.isArray(raw) ? raw : [raw];
+        for (const value of new Set(values.filter(Boolean))) {
+          output[name][value] = (output[name][value] || 0) + 1;
+        }
+      }
+    }
+    return output;
+  }
+
   function formatMoney(value) {
     if (!Number.isFinite(Number(value)) || Number(value) <= 0) return "Not listed";
     const amount = Number(value);
@@ -247,6 +320,113 @@
       : formatted;
   }
 
+  function primaryDeadline(record) {
+    const application = (record.deadlines || []).find(deadline =>
+      ["application", "estimated_application"].includes(deadline.kind)
+    );
+    return application || (record.deadlines || [])[0] || {
+      kind: record.status === "forecasted" ? "estimated_application" : "application",
+      date: record.close_date,
+      time: record.deadline_time,
+      timezone: record.deadline_timezone,
+    };
+  }
+
+  function deadlineOverview(record) {
+    const deadline = primaryDeadline(record);
+    const timing = [deadline.time, deadline.timezone].filter(Boolean).join(" · ");
+    return {
+      label: deadlineKindLabel(deadline.kind),
+      value: deadlineLabel(record),
+      detail: timing || deadlineEvidenceLabel(record),
+    };
+  }
+
+  function eligibilityOverview(record) {
+    const applicants = (record.applicant_types || []).filter(Boolean);
+    if (!applicants.length) return truncate(record.eligibility_text, 90) || "Verify in notice";
+    const visible = applicants.slice(0, 2).join("; ");
+    return applicants.length > 2 ? `${visible} +${applicants.length - 2} more` : visible;
+  }
+
+  function safeEmail(value) {
+    const email = String(value || "").trim();
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? email : "";
+  }
+
+  function primaryContact(record) {
+    const contacts = Array.isArray(record.contacts) ? record.contacts : [];
+    const contact = contacts.find(item => safeEmail(item?.email))
+      || contacts.find(item => item?.name || item?.phone)
+      || {};
+    return {
+      name: contact.name || record.contact_name || "",
+      email: safeEmail(contact.email || record.contact_email),
+      phone: contact.phone || record.contact_phone || "",
+      role: contact.role || "",
+    };
+  }
+
+  function contactOverview(record) {
+    const contact = primaryContact(record);
+    const label = contact.name || contact.email || contact.phone || "Not listed";
+    const detail = [contact.role, contact.email ? "Email POC" : contact.phone].filter(Boolean).join(" · ");
+    return { ...contact, label, detail: detail || "Check official notice" };
+  }
+
+  function daysUntil(value) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(value || ""))) return null;
+    const today = new Date(`${runtimeDateIso()}T12:00:00`);
+    const target = new Date(`${value}T12:00:00`);
+    return Math.ceil((target.getTime() - today.getTime()) / 86_400_000);
+  }
+
+  function whyMatched(record) {
+    const reasons = [];
+    const queryTerms = [...new Set(tokenize(state.query))];
+    const rawQueryTerms = String(state.query || "").toLowerCase()
+      .match(/[a-z0-9][a-z0-9+.-]{1,}/g) || [];
+    const displayTerm = term =>
+      rawQueryTerms.find(raw => normalizeToken(raw) === term) || term;
+    const titleTokens = new Set(tokenize(record.title));
+    const titleHits = queryTerms.filter(term => titleTokens.has(term)).slice(0, 3);
+    if (titleHits.length) {
+      reasons.push(`Title matches ${titleHits.map(displayTerm).join(", ")}`);
+    }
+
+    const topicText = [
+      ...(record.topic_areas || []),
+      ...(record.disciplines || []),
+      record.description || "",
+    ].join(" ");
+    const topicTokens = new Set(tokenize(topicText));
+    const topicHits = queryTerms.filter(term => topicTokens.has(term) && !titleHits.includes(term)).slice(0, 3);
+    if (topicHits.length) {
+      reasons.push(
+        `Topic/synopsis matches ${topicHits.map(displayTerm).join(", ")}`
+      );
+    }
+
+    const selected = [];
+    for (const [name, values] of Object.entries(state.filters)) {
+      if (values.size && intersects(record[FACETS[name].recordField], values)) {
+        selected.push(name.replaceAll("_", " "));
+      }
+    }
+    if (selected.length) reasons.push(`Matches selected ${selected.slice(0, 2).join(" and ")}`);
+    if (state.profile.active) reasons.push("Matches terms in your active profile");
+    if (state.personalize && state.preferenceModel) reasons.push(preferenceReason(record));
+    return reasons.slice(0, 3);
+  }
+
+  function matchExplanation(record) {
+    const reasons = whyMatched(record);
+    if (!reasons.length) return "";
+    return `<div class="match-explanation"><strong>Why this matched</strong><ul>${
+      reasons.map(reason => `<li>${escapeHtml(reason)}</li>`).join("")
+    }</ul></div>`;
+  }
+
   function deadlineEvidenceLabel(record) {
     const external = record.source && record.source !== "Grants.gov";
     if (record.deadline_conflict) return "Conflicting Grants.gov dates — verify";
@@ -270,8 +450,9 @@
       ? "unknown date"
       : new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric" }).format(generated);
     $("catalog-pill").classList.toggle("stale", stale);
+    const liveCount = state.runtimeCatalog.records.length;
     $("catalog-pill").innerHTML =
-      `<span class="status-dot" aria-hidden="true"></span>${catalog.record_count.toLocaleString()} open or forecasted · updated ${escapeHtml(dateText)}`;
+      `<span class="status-dot" aria-hidden="true"></span>${liveCount.toLocaleString()} current · updated ${escapeHtml(dateText)}`;
     const evidenceCount = Number(
       catalog.diagnostics?.document_evidence?.document_current_count || 0,
     );
@@ -279,7 +460,7 @@
       ? ` Citation-backed notice evidence is currently available for ${evidenceCount.toLocaleString()} records and expands incrementally.`
       : " Citation-backed notice processing is queued and expands incrementally.";
     $("catalog-detail").textContent =
-      `${catalog.record_count.toLocaleString()} open or forecasted records (${(catalog.status_counts.posted || 0).toLocaleString()} open, ${(catalog.status_counts.forecasted || 0).toLocaleString()} forecasted). Catalog generated ${generated.toLocaleString()}.${evidenceText}`;
+      `${liveCount.toLocaleString()} current records (${(state.runtimeCatalog.statusCounts.posted || 0).toLocaleString()} open, ${(state.runtimeCatalog.statusCounts.forecasted || 0).toLocaleString()} forecasted). ${state.runtimeCatalog.excluded.toLocaleString()} non-current or informational records were hidden at runtime. Catalog generated ${generated.toLocaleString()}.${evidenceText}`;
     if (stale) {
       $("stale-warning").textContent =
         "This catalog is more than three days old. Search still works, but verify status and deadlines at each opportunity’s official source.";
@@ -289,7 +470,7 @@
 
   function renderFacet(name, search = "") {
     const config = FACETS[name];
-    const counts = catalog.facets[name] || {};
+    const counts = state.runtimeCatalog.facets[name] || {};
     const selected = state.filters[name];
     const query = search.trim().toLowerCase();
     let entries = Object.entries(counts)
@@ -327,8 +508,8 @@
       const input = document.querySelector(`[data-facet-search="${name}"]`);
       renderFacet(name, input?.value || "");
     });
-    $("count-posted").textContent = (catalog.status_counts.posted || 0).toLocaleString();
-    $("count-forecasted").textContent = (catalog.status_counts.forecasted || 0).toLocaleString();
+    $("count-posted").textContent = (state.runtimeCatalog.statusCounts.posted || 0).toLocaleString();
+    $("count-forecasted").textContent = (state.runtimeCatalog.statusCounts.forecasted || 0).toLocaleString();
   }
 
   function postingTerms(term) {
@@ -636,6 +817,7 @@
   }
 
   function recordPassesFilters(record) {
+    if (!recordIsCurrent(record)) return false;
     const posted = $("status-posted").checked;
     const forecasted = $("status-forecasted").checked;
     if (!posted && !forecasted) return false;
@@ -1259,6 +1441,15 @@
       (record.document_status_signals || []).some(value => ["cancelled", "superseded"].includes(value))
         ? `<span class="badge warning">Document status review</span>`
         : "",
+      Number.isInteger(daysUntil(record.close_date))
+        && daysUntil(record.close_date) >= 0
+        && daysUntil(record.close_date) <= 30
+        ? `<span class="badge warning">Closing in ${daysUntil(record.close_date)} days</span>`
+        : "",
+      Number(record.history?.modified_field_count || 0) > 0
+        || Number(record.history?.change_comment_count || 0) > 0
+        ? `<span class="badge warning">Amended</span>`
+        : "",
       state.personalize && state.preferenceModel
         && PREFERENCES_API.factor(record, state.preferenceModel) > 0.05
         ? `<span class="badge prioritized" title="${escapeAttribute(preferenceReason(record))}">Prioritized from your ratings</span>`
@@ -1271,6 +1462,13 @@
     const eligibility = (record.applicant_types || []).join("; ") || record.eligibility_text || "Not listed";
     const perAward = perAwardLabel(record);
     const programFunding = programFundingLabel(record);
+    const deadline = deadlineOverview(record);
+    const overviewEligibility = eligibilityOverview(record);
+    const contact = contactOverview(record);
+    const contactHref = contact.email
+      ? `mailto:${contact.email}?subject=${encodeURIComponent(`Question about ${record.opportunity_number || record.title}`)}`
+      : "";
+    const compared = state.compareIds.has(id);
 
     return `<article class="result-card${assessment ? " ai-match" : ""}" data-opportunity-id="${escapeAttribute(id)}" tabindex="-1">
       <div class="card-topline">
@@ -1284,15 +1482,21 @@
       <h3><a href="${escapeAttribute(detailUrl)}" target="_blank" rel="noopener">${escapeHtml(record.title)}</a></h3>
       <p class="agency">${escapeHtml(record.agency || "Agency not listed")}</p>
       <div class="key-facts">
-        <div class="key-fact"><span>Deadline</span><strong>${escapeHtml(deadlineLabel(record))}</strong><small>${escapeHtml(deadlineEvidenceLabel(record))}</small></div>
+        <div class="key-fact"><span>${escapeHtml(deadline.label)}</span><strong>${escapeHtml(deadline.value)}</strong><small>${escapeHtml(deadline.detail)}</small></div>
         <div class="key-fact"><span>Per-award amount</span><strong>${escapeHtml(perAward)}</strong><small>${record.total_program_funding ? `Program total ${escapeHtml(programFunding)}` : escapeHtml(fundingEvidenceLabel(record))}</small></div>
-        <div class="key-fact"><span>Posted</span><strong>${escapeHtml(formatDate(record.posted_date))}</strong></div>
+        <div class="key-fact"><span>Eligibility</span><strong>${escapeHtml(overviewEligibility)}</strong><small>Confirm in official notice</small></div>
+        <div class="key-fact"><span>Program contact</span><strong>${contactHref ? `<a href="${escapeAttribute(contactHref)}">${escapeHtml(contact.label)}</a>` : escapeHtml(contact.label)}</strong><small>${escapeHtml(contact.detail)}</small></div>
       </div>
+      ${matchExplanation(record)}
       ${evidenceSummary(record)}
       ${aiBlock}
       <p class="description">${escapeHtml(truncate(record.description, 430) || "No synopsis was included in the extract.")}</p>
       ${tags ? `<div class="tag-row">${tags}</div>` : ""}
       ${actions.html}
+      <div class="result-utility-actions">
+        <button type="button" class="source-action" data-calendar="${escapeAttribute(id)}"${record.close_date ? "" : " disabled"}>Add deadline to calendar</button>
+        <button type="button" class="source-action${compared ? " selected" : ""}" data-compare="${escapeAttribute(id)}" aria-pressed="${compared}">${compared ? "✓ Added to comparison" : "Compare"}</button>
+      </div>
       ${sourceReviewControls(record)}
       ${feedbackControls(record)}
       <details class="record-details">
@@ -1311,6 +1515,8 @@
             <div><dt>Cost share</dt><dd>${record.cost_share_required == null ? "Not listed" : record.cost_share_required ? "Required" : "Not required"}</dd></div>
             <div><dt>Assistance listing</dt><dd>${escapeHtml((record.aln || []).join(", ") || "Not listed")}</dd></div>
             <div><dt>Deadline evidence</dt><dd>${escapeHtml(deadlineEvidenceLabel(record))}</dd></div>
+            <div><dt>Program contact</dt><dd>${contactHref ? `<a href="${escapeAttribute(contactHref)}">${escapeHtml(contact.label)}</a>` : escapeHtml(contact.label)}${contact.phone ? ` · ${escapeHtml(contact.phone)}` : ""}</dd></div>
+            <div><dt>Posted</dt><dd>${escapeHtml(formatDate(record.posted_date))}</dd></div>
             <div><dt>Detail enrichment</dt><dd>${record.detail_enrichment_status === "current" ? `Checked ${escapeHtml(formatDate(record.detail_enriched_at?.slice(0, 10)))} against the Grants.gov detail API.` : record.source && record.source !== "Grants.gov" ? `Provided by ${escapeHtml(record.source)}; verify details at the official source.` : "Detail attachment check pending; use the Grants.gov record."}</dd></div>
             <div><dt>Status confidence</dt><dd>${record.status_verification_required ? "One or more decisive status fields require verification in the official notice." : record.source && record.source !== "Grants.gov" ? `Listed as current by ${escapeHtml(record.source)}; verify at the official source.` : "Current according to the dated Grants.gov extract."}</dd></div>
             ${deadlineRows(record)}
@@ -1711,6 +1917,142 @@
     URL.revokeObjectURL(url);
   }
 
+  function icsEscape(value) {
+    return String(value || "")
+      .replaceAll("\\", "\\\\")
+      .replaceAll("\r", "")
+      .replaceAll("\n", "\\n")
+      .replaceAll(",", "\\,")
+      .replaceAll(";", "\\;");
+  }
+
+  function icsDate(value) {
+    return String(value || "").replaceAll("-", "");
+  }
+
+  function nextIsoDate(value) {
+    const parsed = new Date(`${value}T12:00:00`);
+    parsed.setDate(parsed.getDate() + 1);
+    return [
+      parsed.getFullYear(),
+      String(parsed.getMonth() + 1).padStart(2, "0"),
+      String(parsed.getDate()).padStart(2, "0"),
+    ].join("-");
+  }
+
+  function calendarEvents(record) {
+    const deadlines = (record.deadlines || []).filter(item =>
+      /^\d{4}-\d{2}-\d{2}$/.test(String(item?.date || ""))
+      && item.date >= runtimeDateIso()
+    );
+    if (!deadlines.length && record.close_date && record.close_date >= runtimeDateIso()) {
+      deadlines.push({
+        kind: record.status === "forecasted" ? "estimated_application" : "application",
+        date: record.close_date,
+      });
+    }
+    const source = officialActions(record).url || "";
+    return deadlines.map((deadline, index) => ({
+      uid: `${recordId(record)}-${deadline.kind || "deadline"}-${index}@funding-finder`,
+      date: deadline.date,
+      summary: `${deadlineKindLabel(deadline.kind)}: ${record.title}`,
+      description: [
+        record.agency,
+        record.opportunity_number,
+        deadline.time,
+        deadline.timezone,
+        source,
+      ].filter(Boolean).join(" · "),
+      url: source,
+    }));
+  }
+
+  function exportCalendar(records, filename = "funding-finder-deadlines.ics") {
+    const events = records.flatMap(calendarEvents);
+    if (!events.length) {
+      $("search-status").textContent = "No future dated deadlines are available in this selection.";
+      return;
+    }
+    const timestamp = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z");
+    const lines = [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//Funding Finder//Opportunity Deadlines//EN",
+      "CALSCALE:GREGORIAN",
+      "METHOD:PUBLISH",
+    ];
+    for (const event of events) {
+      lines.push(
+        "BEGIN:VEVENT",
+        `UID:${icsEscape(event.uid)}`,
+        `DTSTAMP:${timestamp}`,
+        `DTSTART;VALUE=DATE:${icsDate(event.date)}`,
+        `DTEND;VALUE=DATE:${icsDate(nextIsoDate(event.date))}`,
+        `SUMMARY:${icsEscape(event.summary)}`,
+        `DESCRIPTION:${icsEscape(event.description)}`,
+      );
+      if (event.url) lines.push(`URL:${icsEscape(event.url)}`);
+      lines.push("END:VEVENT");
+    }
+    lines.push("END:VCALENDAR", "");
+    downloadBlob(
+      new Blob([lines.join("\r\n")], { type: "text/calendar;charset=utf-8" }),
+      filename,
+    );
+  }
+
+  function recordById(id) {
+    return catalog.opportunities.find(record => recordId(record) === id);
+  }
+
+  function toggleCompare(id) {
+    if (state.compareIds.has(id)) {
+      state.compareIds.delete(id);
+    } else if (state.compareIds.size >= 4) {
+      $("search-status").textContent = "You can compare up to four opportunities at once.";
+      return;
+    } else {
+      state.compareIds.add(id);
+    }
+    renderResults();
+  }
+
+  function renderComparePanel() {
+    const panel = $("compare-panel");
+    if (!panel) return;
+    const records = [...state.compareIds]
+      .map(recordById)
+      .filter(record => record && recordIsCurrent(record));
+    state.compareIds = new Set(records.map(recordId));
+    panel.classList.toggle("hidden", records.length === 0);
+    if (!records.length) {
+      panel.innerHTML = "";
+      return;
+    }
+    const rows = [
+      ["Deadline", record => deadlineOverview(record).value],
+      ["Per-award amount", perAwardLabel],
+      ["Eligibility", eligibilityOverview],
+      ["Contact", record => contactOverview(record).label],
+      ["Agency", record => record.agency || "Not listed"],
+      ["Funding instrument", record => (record.funding_instruments || []).join("; ") || "Not listed"],
+    ];
+    panel.innerHTML = `
+      <div class="compare-heading">
+        <div><p class="eyebrow">Side-by-side review</p><h2 id="compare-heading">Compare ${records.length} opportunities</h2></div>
+        <button type="button" class="text-button" data-clear-compare>Clear comparison</button>
+      </div>
+      <div class="compare-scroll"><table>
+        <thead><tr><th scope="col">Field</th>${records.map(record => {
+          const url = officialActions(record).url;
+          return `<th scope="col">${url ? `<a href="${escapeAttribute(url)}" target="_blank" rel="noopener">${escapeHtml(truncate(record.title, 80))}</a>` : escapeHtml(truncate(record.title, 80))}<button class="text-button compare-remove" type="button" data-compare="${escapeAttribute(recordId(record))}">Remove</button></th>`;
+        }).join("")}</tr></thead>
+        <tbody>${rows.map(([label, getter]) =>
+          `<tr><th scope="row">${escapeHtml(label)}</th>${records.map(record => `<td>${escapeHtml(getter(record))}</td>`).join("")}</tr>`
+        ).join("")}</tbody>
+      </table></div>`;
+  }
+
   function exportEvaluation() {
     const metrics = feedbackMetrics();
     if (!metrics.reviewed) return;
@@ -1859,8 +2201,10 @@
       $("page-label").textContent = "";
       $("pagination").classList.add("hidden");
       $("export-csv").disabled = true;
+      $("export-ics").disabled = true;
       $("ai-refine").disabled = true;
       $("result-assistant").classList.add("hidden");
+      renderComparePanel();
       renderExploration();
       renderDeploymentReview();
       renderEvaluation();
@@ -1909,7 +2253,11 @@
     $("page-next").disabled = state.page >= totalPages;
     $("pagination").classList.toggle("hidden", display.length <= PAGE_SIZE);
     $("export-csv").disabled = !display.length;
+    $("export-ics").disabled = !display.some(match =>
+      calendarEvents(catalog.opportunities[match.index]).length
+    );
     $("ai-refine").disabled = !display.length;
+    renderComparePanel();
     renderDeploymentReview();
     renderEvaluation();
     renderChat();
@@ -1975,6 +2323,7 @@
       "Deadline evidence", "Preliminary deadline", "Funding evidence",
       "Funding instruments", "Categories", "Disciplines", "Topics",
       "Eligible applicants", "Limited submission", "Cost share required",
+      "Contact name", "Contact email", "Contact phone", "Contact role",
       "Preliminary stage", "AI verdict", "AI score", "AI rationale",
       "Document evidence status", "Document version", "Document SHA-256",
       "Cited FOA facts", "Citation URLs", "Source review queue",
@@ -1989,6 +2338,7 @@
       const sourceReview = state.deployment.review?.source_reviews?.[
         recordId(record)
       ] || {};
+      const contact = primaryContact(record);
       rows.push([
         record.title, record.agency, record.source, record.status, record.opportunity_number,
         record.close_date, record.posted_date, record.award_floor,
@@ -2002,6 +2352,7 @@
         (record.topic_areas || []).join("; "),
         (record.applicant_types || []).join("; "),
         record.limited_submission, record.cost_share_required,
+        contact.name, contact.email, contact.phone, contact.role,
         record.preliminary_stage_type, assessment.verdict, assessment.score,
         assessment.reason, record.document_evidence_status,
         document.version, document.sha256,
@@ -2669,11 +3020,32 @@
       }
       renderResults();
     });
+    $("export-ics").addEventListener("click", () => {
+      const records = currentDisplayMatches().map(match => catalog.opportunities[match.index]);
+      exportCalendar(
+        records,
+        `funding-finder-deadlines-${runtimeDateIso()}.ics`,
+      );
+    });
     $("export-csv").addEventListener("click", exportCsv);
     $("clear-saved")?.addEventListener("click", clearSaved);
     document.addEventListener("click", event => {
       const save = event.target.closest("[data-save]");
       if (save) { toggleSave(save.dataset.save); return; }
+      const calendar = event.target.closest("[data-calendar]");
+      if (calendar) {
+        const record = recordById(calendar.dataset.calendar);
+        if (record) exportCalendar([record], `funding-deadline-${recordId(record)}.ics`);
+        return;
+      }
+      const compare = event.target.closest("[data-compare]");
+      if (compare) { toggleCompare(compare.dataset.compare); return; }
+      const clearCompare = event.target.closest("[data-clear-compare]");
+      if (clearCompare) {
+        state.compareIds.clear();
+        renderResults();
+        return;
+      }
       const remove = event.target.closest("[data-remove-saved]");
       if (remove) { removeSaved(remove.dataset.removeSaved); }
     });
@@ -3025,6 +3397,14 @@
       if (!SAVED_API?.load || !SAVED_API?.toggle) {
         throw new Error("The saved-opportunities module did not load. Refresh the page and try again.");
       }
+      state.runtimeCatalog.records = currentRecords();
+      state.runtimeCatalog.facets = currentFacetCounts(state.runtimeCatalog.records);
+      state.runtimeCatalog.statusCounts = state.runtimeCatalog.records.reduce((counts, record) => {
+        counts[record.status] = (counts[record.status] || 0) + 1;
+        return counts;
+      }, {});
+      state.runtimeCatalog.excluded =
+        catalog.opportunities.length - state.runtimeCatalog.records.length;
       state.ready = true;
       updateCatalogStatus();
       hydrateStateFromUrl();

@@ -109,6 +109,17 @@ class CatalogExtractTests(unittest.TestCase):
 
         self.assertTrue(is_current(values, "forecasted", date(2026, 7, 25)))
 
+    def test_informational_notice_with_placeholder_date_is_not_current(self):
+        values = {
+            "OpportunityTitle": [
+                "DE-FOA-123 Notice of Intent to Issue a Funding Opportunity"
+            ],
+            "CloseDate": ["12312099"],
+            "FundingInstrumentType": ["O"],
+        }
+
+        self.assertFalse(is_current(values, "posted", date(2026, 7, 25)))
+
     def test_reads_zip_and_builds_searchable_catalog(self):
         with TemporaryDirectory() as directory:
             archive_path = Path(directory) / "extract.zip"
@@ -167,6 +178,10 @@ class TokenTests(unittest.TestCase):
         self.assertEqual(
             safe_http_url("www.nsf.gov/funding"),
             "https://www.nsf.gov/funding",
+        )
+        self.assertEqual(
+            safe_http_url("http://grants.nih.gov/example"),
+            "https://grants.nih.gov/example",
         )
 
     def test_catalysis_topic_does_not_match_the_ordinary_verb_catalyze(self):

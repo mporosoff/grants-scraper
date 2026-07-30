@@ -25,6 +25,8 @@ from pathlib import Path
 from urllib.parse import quote
 from xml.sax.saxutils import escape, quoteattr
 
+from scripts.currentness import filter_current
+
 SITE_BASE = "https://mporosoff.github.io/grants-scraper"
 APP_URL = f"{SITE_BASE}/match_explorer.html"
 FEEDS_BASE = f"{SITE_BASE}/feeds"
@@ -180,8 +182,16 @@ def _facet_groups(records: list[dict], field: str) -> dict[str, list[dict]]:
     return groups
 
 
-def build_feeds(catalog: dict, out_dir: Path) -> list[dict]:
-    records = catalog.get("opportunities") or []
+def build_feeds(
+    catalog: dict,
+    out_dir: Path,
+    *,
+    as_of=None,
+) -> list[dict]:
+    records, excluded = filter_current(
+        catalog.get("opportunities") or [],
+        as_of,
+    )
     now = catalog_datetime(catalog)
     manifest: list[dict] = []
     generated_paths: set[Path] = set()
@@ -204,6 +214,16 @@ def build_feeds(catalog: dict, out_dir: Path) -> list[dict]:
     for value, subset in sorted(_facet_groups(records, "topic_areas").items()):
         emit(f"Funding Finder — {value}", f"topic/{slugify(value)}.xml", subset)
 
+    changes_path = out_dir / "changes.xml"
+    if changes_path.exists():
+        manifest.append(
+            {
+                "title": "Opportunity changes",
+                "url": f"{FEEDS_BASE}/changes.xml",
+                "count": None,
+            }
+        )
+
     # Remove only obsolete files in the directories this generator owns.
     for managed_dir in (out_dir / "source-type", out_dir / "topic"):
         if managed_dir.exists():
@@ -211,7 +231,19 @@ def build_feeds(catalog: dict, out_dir: Path) -> list[dict]:
                 if path not in generated_paths:
                     path.unlink()
 
-    _write(out_dir / "index.json", json.dumps({"generated_at": rfc3339(now), "feeds": manifest}, ensure_ascii=False, indent=2) + "\n")
+    _write(
+        out_dir / "index.json",
+        json.dumps(
+            {
+                "generated_at": rfc3339(now),
+                "excluded_noncurrent": len(excluded),
+                "feeds": manifest,
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+    )
     _write(out_dir / "index.html", _index_html(manifest, now))
     return manifest
 
@@ -219,7 +251,12 @@ def build_feeds(catalog: dict, out_dir: Path) -> list[dict]:
 def _index_html(manifest: list[dict], now: datetime) -> str:
     rows = "\n".join(
         f'      <li><a href="{escape(item["url"])}">{escape(item["title"])}</a> '
-        f'<span class="count">({item["count"]})</span></li>'
+        + (
+            f'<span class="count">({item["count"]})</span>'
+            if item["count"] is not None
+            else ""
+        )
+        + "</li>"
         for item in manifest
     )
     return f"""<!doctype html>

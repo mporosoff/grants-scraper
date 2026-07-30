@@ -116,6 +116,10 @@ EARLY_CAREER_RE = re.compile(
     r"tenure[\s-]track\s+assistant)",
     re.I,
 )
+EMAIL_RE = re.compile(
+    r"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b",
+    re.I,
+)
 
 
 def utc_now():
@@ -342,6 +346,38 @@ def normalize(stub, detail):
         aln = stub.get("alnist") or stub.get("cfdaList") or []
 
     opportunity_id = detail.get("id") or stub.get("id")
+    contact_name = source_record.get("agencyContactName")
+    contact_phone = source_record.get("agencyContactPhone")
+    contact_description = source_record.get("agencyContactDesc") or ""
+    contact_emails = []
+    email_text = " ".join(
+        str(value or "")
+        for value in (
+            source_record.get("agencyContactEmail"),
+            contact_description,
+        )
+    )
+    for candidate in EMAIL_RE.findall(unescape(email_text)):
+        value = str(candidate or "").strip().strip(".,;:")
+        if value and value.casefold() not in {
+            email.casefold() for email in contact_emails
+        }:
+            contact_emails.append(value)
+    contacts = []
+    if contact_name or contact_phone or contact_emails:
+        contacts.append(
+            {
+                "name": contact_name,
+                "email": contact_emails[0] if contact_emails else None,
+                "phone": contact_phone,
+                "role": "Agency contact",
+                "source_url": (
+                    DETAIL_PAGE.format(opp_id=opportunity_id)
+                    if opportunity_id
+                    else GRANTS_GOV_HOME
+                ),
+            }
+        )
     return {
         "opportunity_id": opportunity_id,
         "opportunity_number": (
@@ -428,8 +464,9 @@ def normalize(stub, detail):
         "eligibility_text": source_record.get("applicantEligibilityDesc"),
         "career_stage_signal": first_match(EARLY_CAREER_RE, text_blob),
         "contact_name": source_record.get("agencyContactName"),
-        "contact_email": source_record.get("agencyContactEmail"),
-        "contact_phone": source_record.get("agencyContactPhone"),
+        "contact_email": contact_emails[0] if contact_emails else None,
+        "contact_phone": contact_phone,
+        "contacts": contacts,
         "description": description,
         "funding_categories": [
             category.get("description")

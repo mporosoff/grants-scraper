@@ -110,6 +110,7 @@ class CanonicalOpportunity:
     funding_categories: list = field(default_factory=list)
     primary_document_url: Optional[str] = None
     primary_document_name: Optional[str] = None
+    contacts: list = field(default_factory=list)
     additional_deadlines: list = field(default_factory=list)
     extra: dict = field(default_factory=dict)            # escape hatch, never indexed
 
@@ -255,6 +256,22 @@ class CanonicalOpportunity:
             "expected_number_of_awards": numeric(self.expected_number_of_awards),
             "award_source": f"{source} listing",
             "cost_share_required": self.cost_share_required,
+            "contacts": [
+                {
+                    "name": clean_text(contact.get("name")),
+                    "email": clean_text(contact.get("email")),
+                    "phone": clean_text(contact.get("phone")),
+                    "role": clean_text(contact.get("role")),
+                    "source_url": safe_http_url(contact.get("source_url"))
+                    or url,
+                }
+                for contact in self.contacts[:12]
+                if isinstance(contact, dict)
+                and any(
+                    contact.get(field)
+                    for field in ("name", "email", "phone")
+                )
+            ],
             # --- deterministic signals ---
             "has_preliminary_stage": bool(preliminary),
             "preliminary_stage_type": preliminary.group(1) if preliminary else None,

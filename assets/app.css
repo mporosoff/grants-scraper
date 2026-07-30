@@ -855,7 +855,7 @@ textarea:focus {
 
 .key-facts {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 9px;
   margin-bottom: 13px;
 }
@@ -884,12 +884,43 @@ textarea:focus {
   line-height: 1.3;
 }
 
+.key-fact a {
+  color: var(--blue-dark);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
 .key-fact small {
   display: block;
   margin-top: 4px;
   color: #69788c;
   font-size: .68rem;
   line-height: 1.3;
+}
+
+.match-explanation {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  margin: 11px 0;
+  padding: 9px 11px;
+  color: #294a67;
+  font-size: .76rem;
+  background: #f1f7fc;
+  border: 1px solid #d3e3f0;
+  border-radius: 8px;
+}
+
+.match-explanation strong {
+  flex: 0 0 auto;
+}
+
+.match-explanation ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 18px;
+  margin: 0;
+  padding-left: 18px;
 }
 
 .evidence-summary {
@@ -1157,6 +1188,83 @@ textarea:focus {
   color: var(--blue-dark);
   background: var(--blue-soft);
   border-color: var(--blue);
+}
+
+.source-action.selected {
+  color: #0d6545;
+  background: #e4f6ee;
+  border-color: #8ac7ae;
+}
+
+.result-utility-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.compare-panel {
+  margin: 14px 0 4px;
+  padding: 16px;
+  background: white;
+  border: 1px solid #bccde0;
+  border-radius: 12px;
+  box-shadow: 0 8px 22px rgba(18, 38, 63, .06);
+}
+
+.compare-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 12px;
+}
+
+.compare-heading h2 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 1.05rem;
+}
+
+.compare-scroll {
+  overflow-x: auto;
+}
+
+.compare-panel table {
+  width: 100%;
+  min-width: 700px;
+  border-collapse: collapse;
+  font-size: .76rem;
+}
+
+.compare-panel th,
+.compare-panel td {
+  min-width: 150px;
+  padding: 9px 10px;
+  text-align: left;
+  vertical-align: top;
+  border: 1px solid var(--line);
+}
+
+.compare-panel tbody th {
+  min-width: 120px;
+  color: #53647a;
+  background: var(--surface-alt);
+}
+
+.compare-panel thead th {
+  color: var(--navy);
+  background: #eef5fb;
+}
+
+.compare-panel thead a {
+  color: var(--blue-dark);
+}
+
+.compare-remove {
+  display: block;
+  margin-top: 7px;
+  font-size: .68rem;
 }
 
 .source-action.primary {

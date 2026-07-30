@@ -79,23 +79,24 @@ def make_catalog(records):
 class MatcherTests(unittest.TestCase):
     def setUp(self):
         self.catalog = make_catalog(RECORDS)
+        self.as_of = date(2026, 7, 25)
 
     def test_query_ranks_relevant_first(self):
-        results = search_catalog(self.catalog, "catalysis")
+        results = search_catalog(self.catalog, "catalysis", as_of=self.as_of)
         self.assertTrue(results)
         self.assertEqual(results[0]["opportunity_id"], "1")
 
     def test_query_excludes_nonmatching(self):
-        ids = {r["opportunity_id"] for r in search_catalog(self.catalog, "catalysis")}
+        ids = {r["opportunity_id"] for r in search_catalog(self.catalog, "catalysis", as_of=self.as_of)}
         self.assertIn("1", ids)
         self.assertNotIn("2", ids)  # marine biology should not match "catalysis"
 
     def test_filter_only_returns_by_recency(self):
-        results = search_catalog(self.catalog, "", {"source_type": ["State"]})
+        results = search_catalog(self.catalog, "", {"source_type": ["State"]}, as_of=self.as_of)
         self.assertEqual([r["opportunity_id"] for r in results], ["3"])
 
     def test_query_and_filter_combine_as_and(self):
-        results = search_catalog(self.catalog, "energy", {"source_type": ["Federal"]})
+        results = search_catalog(self.catalog, "energy", {"source_type": ["Federal"]}, as_of=self.as_of)
         ids = {r["opportunity_id"] for r in results}
         self.assertIn("1", ids)      # federal energy
         self.assertNotIn("3", ids)   # energy but State -> filtered out
@@ -105,7 +106,7 @@ class MatcherTests(unittest.TestCase):
         self.assertFalse(matches_filters(RECORDS[0], {"topic": ["Nonexistent"]}))
 
     def test_opportunity_number_exact_match_ranks_first(self):
-        results = search_catalog(self.catalog, "NYSERDA-3")
+        results = search_catalog(self.catalog, "NYSERDA-3", as_of=self.as_of)
         self.assertEqual(results[0]["opportunity_id"], "3")
 
     def test_is_new_since(self):
@@ -122,9 +123,27 @@ class MatcherTests(unittest.TestCase):
         self.assertTrue(is_new_since(undated_external, date(2026, 7, 25)))
 
     def test_empty_query_no_filters_returns_all_newest_first(self):
-        results = search_catalog(self.catalog, "")
+        results = search_catalog(self.catalog, "", as_of=self.as_of)
         self.assertEqual(len(results), 3)
         self.assertEqual(results[0]["opportunity_id"], "3")  # 07-25 newest
+
+    def test_runtime_gate_drops_an_expired_match(self):
+        expired = _base(
+            opportunity_id="expired",
+            title="Catalysis expired",
+            description="catalysis",
+            close_date="2026-07-24",
+        )
+        catalog = make_catalog([*RECORDS, expired])
+        ids = {
+            item["opportunity_id"]
+            for item in search_catalog(
+                catalog,
+                "catalysis",
+                as_of=self.as_of,
+            )
+        }
+        self.assertNotIn("expired", ids)
 
 
 if __name__ == "__main__":

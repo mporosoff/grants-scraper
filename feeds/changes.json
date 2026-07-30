@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-30T18:49:14Z",
+  "retention_days": 90,
+  "events": [
+    {
+      "id": "b01a7137c67b706a507d",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-07-30T12:04:03.593285Z",
+      "opportunity_id": "363385",
+      "detail": "Deadline 2026-08-29",
+      "record": {
+        "opportunity_id": "363385",
+        "opportunity_number": "G26AS00153",
+        "title": "Cooperative Agreement for Affiliated Partner with the Rocky Mountain Cooperative Ecosystem Studies Unit (CESU)",
+        "agency": "Geological Survey",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-29",
+        "close_date": "2026-08-29",
+        "last_updated": "2026-07-29",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Arts and culture",
+          "Energy",
+          "Environmental science",
+          "Water"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 1,
+        "award_ceiling": 300000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363385",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-08-29"
+    }
+  ]
+}

@@ -70,10 +70,10 @@ available but exits visibly and opens or updates an owner-facing GitHub issue.
 UR InfoReady is a disabled shell pending a stable permissioned route.
 
 <!-- catalog-summary:start -->
-The July 30, 2026 build contains 1,512 open or current forecasted funding opportunities
-(1,257 posted and 255 forecasted) rather than the former 48-record engineering
+The July 30, 2026 build contains 1,505 open or current forecasted funding opportunities
+(1,250 posted and 255 forecasted) rather than the former 48-record engineering
 shortlist. It contains no record with a deadline before the catalog date. Current
-published sources are Grants.gov (1,475), NYSERDA (37); additional sources are enabled
+published sources are Grants.gov (1,468), NYSERDA (37); additional sources are enabled
 only after a sustainable public ingestion path and health bounds are verified.
 <!-- catalog-summary:end -->
 
@@ -90,6 +90,9 @@ Anyone can use, without an API key:
 - a cited-FOA-evidence availability filter for deployment review;
 - relevance, deadline, posted-date, award, agency, and title sorting;
 - pagination and expandable record details;
+- a compact deadline/award/eligibility/contact overview with mailto POC links;
+- transparent “why this matched” reasons and side-by-side comparison;
+- per-opportunity and result-set calendar export;
 - one-click official FOA, agency-notice, or Grants.gov record links; and
 - CSV export of the complete current result set.
 
@@ -479,18 +482,18 @@ presented as the FOA.
 ### Current evidence baseline
 
 <!-- catalog-evidence:start -->
-The July 30, 2026 catalog contains 1,512 current posted or forecasted opportunities:
+The July 30, 2026 catalog contains 1,505 current posted or forecasted opportunities:
 
-- 447 have a defensible direct announcement attachment (271 high confidence, 176 medium
+- 445 have a defensible direct announcement attachment (269 high confidence, 176 medium
   confidence);
-- another 641 use an official source page as their primary route;
-- the remaining 424 use the official Grants.gov record as their primary route;
-- 786 contain an agency notice URL across all route types;
+- another 638 use an official source page as their primary route;
+- the remaining 422 use the official Grants.gov record as their primary route;
+- 782 contain an agency notice URL across all route types;
 - 401 preserve an official deadline time or timezone;
 - 142 carry a preliminary-stage signal, including 3 narrative dates visibly marked for
   verification;
-- 705 (46.6%) have an official per-award floor or ceiling;
-- 994 (65.7%) have at least one structured funding amount; and
+- 705 (46.8%) have an official per-award floor or ceiling;
+- 994 (66.0%) have at least one structured funding amount; and
 - zero have a past structured close date and zero have a detected XML/detail-API
   deadline conflict in this build.
 <!-- catalog-evidence:end -->
@@ -706,7 +709,11 @@ generates an all-opportunities feed plus topic and source-type feeds under
 `docs/weekly-alerts/` can run manually consented weekly saved-search digests
 from a private GitHub repository. It reuses the production tokenizer and BM25
 index, stores subscribers and watermarks only in that private repository, and
-keeps SMTP credentials in encrypted repository secrets.
+keeps SMTP credentials in encrypted repository secrets. The daily workflow
+now also publishes a rolling change feed keyed by stable opportunity ID for
+new, materially amended, deadline-changed, closing-soon, and removed/closed
+events. The digest includes relevant unseen change events as well as new
+matches.
 
 A public self-service system still requires a server or managed third-party
 service. Only consider that after the public pilot demonstrates value. It would
@@ -719,11 +726,10 @@ be required for:
 - institutional identity and access controls; or
 - centrally managed AI credentials and budgets.
 
-For a production email service, the daily catalog job should add a compact
-change feed keyed by stable opportunity ID: newly added, materially amended or
-deadline-changed, and removed/closed. The current pilot bundle intentionally
-handles new-match digests only; it is not a replacement for durable amendment,
-bounce, retry, and unsubscribe infrastructure.
+The pilot bundle is still not a replacement for durable bounce, retry,
+account, and unsubscribe infrastructure. The recommended self-service design,
+data model, endpoint set, scheduled job, and deployment choices are documented
+in `docs/EMAIL_ALERT_SERVICE_SETUP.md`.
 
 Public personalized digests require a small server-side subscription API and
 database because a static GitHub Pages app cannot securely retain subscriber

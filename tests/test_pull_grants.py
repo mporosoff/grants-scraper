@@ -67,6 +67,9 @@ class NormalizeTests(unittest.TestCase):
                 "responseDateDesc": "Applications are due by 5:00 p.m. Eastern Time.",
                 "postingDate": "Apr 26, 2023 12:00:00 AM EDT",
                 "costSharing": False,
+                "agencyContactName": "Dr. Program Officer",
+                "agencyContactEmail": "program.officer@nsf.gov",
+                "agencyContactPhone": "703-555-0100",
                 "fundingDescLinkUrl": "https://www.nsf.gov/example",
                 "applicantTypes": [{"description": "Higher education"}],
                 "fundingActivityCategories": [{"description": "Science"}],
@@ -109,6 +112,11 @@ class NormalizeTests(unittest.TestCase):
         self.assertEqual(record["all_attachments"][0]["folder_name"], "Current NOFO")
         self.assertTrue(record["nofo_pdf_url"].endswith("/353260"))
         self.assertEqual(record["primary_document_url"], record["nofo_pdf_url"])
+        self.assertEqual(record["contacts"][0]["name"], "Dr. Program Officer")
+        self.assertEqual(
+            record["contacts"][0]["email"],
+            "program.officer@nsf.gov",
+        )
 
     def test_normalizes_forecast_field_family(self):
         stub = {

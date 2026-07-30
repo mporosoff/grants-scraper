@@ -35,6 +35,7 @@ from scripts.build_catalog import (
     clean_text,
     iso_utc,
     numeric,
+    safe_http_url,
     write_catalog,
 )
 from scripts.pull_grants import (
@@ -45,6 +46,7 @@ from scripts.pull_grants import (
 
 
 CACHE_SCHEMA_VERSION = 2
+CONTACT_SCHEMA_VERSION = 1
 NSF_SYNOPSIS_PARSER_VERSION = 1
 AGENCY_SYNOPSIS_RECHECK_DAYS = 14
 DEFAULT_CATALOG = Path("data/opportunities.js")
@@ -282,16 +284,6 @@ def preliminary_kind(value):
     if "application" in text:
         return "preapplication"
     return "preproposal"
-
-
-def safe_http_url(value):
-    if not value:
-        return None
-    text = str(value).strip()
-    if text.casefold().startswith("www."):
-        text = f"https://{text}"
-    parsed = urlparse(text)
-    return text if parsed.scheme in {"http", "https"} and parsed.netloc else None
 
 
 def description_spacing_issue_count(value):
@@ -593,6 +585,23 @@ def compact_detail(record, detail, fetched_at):
         },
         "api_notice": API_NOTICE,
         "source_record_version": source_record.get("version"),
+        "contact_version": CONTACT_SCHEMA_VERSION,
+        "contacts": [
+            {
+                "name": clean_text(contact.get("name")),
+                "email": clean_text(contact.get("email")),
+                "phone": clean_text(contact.get("phone")),
+                "role": clean_text(contact.get("role")),
+                "source_url": safe_http_url(contact.get("source_url"))
+                or record.get("detail_page"),
+            }
+            for contact in (normalized.get("contacts") or [])[:12]
+            if isinstance(contact, dict)
+            and any(
+                contact.get(field)
+                for field in ("name", "email", "phone")
+            )
+        ],
     }
 
 
@@ -606,6 +615,7 @@ def field_conflict(existing, enriched):
 
 def merge_detail(record, detail_entry, as_of):
     output = deepcopy(record)
+    output.setdefault("contacts", [])
     if not detail_entry:
         output["detail_enrichment_status"] = "pending"
         output.setdefault("award_source", "Grants.gov XML extract")
@@ -619,6 +629,7 @@ def merge_detail(record, detail_entry, as_of):
     output["attachment_count"] = detail_entry.get("attachment_count") or 0
     output["document_urls"] = detail_entry.get("document_urls") or []
     output["history"] = detail_entry.get("history") or {}
+    output["contacts"] = deepcopy(detail_entry.get("contacts") or [])
 
     agency_url = safe_http_url(
         detail_entry.get("funding_opportunity_url")
@@ -804,6 +815,14 @@ def enrichment_metrics(records):
         "preliminary_deadline_count": count(
             lambda record: record.get("preliminary_deadline")
         ),
+        "contact_count": count(lambda record: record.get("contacts")),
+        "contact_email_count": count(
+            lambda record: any(
+                contact.get("email")
+                for contact in (record.get("contacts") or [])
+                if isinstance(contact, dict)
+            )
+        ),
     }
 
 
@@ -844,6 +863,10 @@ def enrich_catalog(
                 "source_signature"
             )
             != record_signature(record)
+            or cached_records[str(record["opportunity_id"])].get(
+                "contact_version", 0
+            )
+            < CONTACT_SCHEMA_VERSION
         )
     ]
     candidates.sort(
