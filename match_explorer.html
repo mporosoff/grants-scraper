@@ -7,7 +7,7 @@
   <meta name="referrer" content="no-referrer">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://api.openai.com https://api.anthropic.com; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self'">
   <title>Funding Finder</title>
-  <link rel="stylesheet" href="./assets/app.css?v=release-2026-07-30-v4">
+  <link rel="stylesheet" href="./assets/app.css?v=release-2026-07-30-v5">
 </head>
 <body>
   <a class="skip-link" href="#results">Skip to results</a>
@@ -376,9 +376,12 @@
         <aside class="exploration hidden" id="exploration" aria-label="Suggested from your ratings"></aside>
 
         <nav class="pagination hidden" id="pagination" aria-label="Results pages">
-          <button class="button secondary" id="page-prev" type="button">Previous</button>
-          <span id="page-label"></span>
-          <button class="button secondary" id="page-next" type="button">Next</button>
+          <button class="button secondary page-step" id="page-prev" type="button" aria-label="Previous results page">&larr; Previous</button>
+          <div class="pagination-main">
+            <span class="page-label" id="page-label" aria-live="polite"></span>
+            <div class="page-numbers" id="page-numbers" aria-label="Choose a results page"></div>
+          </div>
+          <button class="button secondary page-step" id="page-next" type="button" aria-label="Next results page">Next &rarr;</button>
         </nav>
       </section>
     </div>
@@ -468,13 +471,13 @@
     <div class="notice error">JavaScript is required to search the opportunity catalog.</div>
   </noscript>
   <script src="./data/opportunities.js?v=catalog-20260730T194556Z"></script>
-  <script src="./assets/profile.js?v=release-2026-07-30-v4"></script>
-  <script src="./assets/review.js?v=release-2026-07-30-v4"></script>
-  <script src="./assets/credentials.js?v=release-2026-07-30-v4"></script>
-  <script src="./assets/ai-provider.js?v=release-2026-07-30-v4"></script>
-  <script src="./assets/chat-ui.js?v=release-2026-07-30-v4"></script>
-  <script src="./assets/saved.js?v=release-2026-07-30-v4"></script>
-  <script src="./assets/preferences.js?v=release-2026-07-30-v4"></script>
-  <script src="./assets/app.js?v=release-2026-07-30-v4"></script>
+  <script src="./assets/profile.js?v=release-2026-07-30-v5"></script>
+  <script src="./assets/review.js?v=release-2026-07-30-v5"></script>
+  <script src="./assets/credentials.js?v=release-2026-07-30-v5"></script>
+  <script src="./assets/ai-provider.js?v=release-2026-07-30-v5"></script>
+  <script src="./assets/chat-ui.js?v=release-2026-07-30-v5"></script>
+  <script src="./assets/saved.js?v=release-2026-07-30-v5"></script>
+  <script src="./assets/preferences.js?v=release-2026-07-30-v5"></script>
+  <script src="./assets/app.js?v=release-2026-07-30-v5"></script>
 </body>
 </html>
