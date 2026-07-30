@@ -79,6 +79,9 @@ def detail_response(close_date="Sep 30, 2026 12:00:00 AM EDT"):
             "estimatedFunding": "5000000",
             "numberOfAwards": "5",
             "costSharing": False,
+            "agencyContactName": "Program Officer",
+            "agencyContactEmail": "program@example.gov",
+            "agencyContactPhone": "202-555-0100",
             "fundingDescLinkUrl": "https://agency.example.test/program",
         },
         "synopsisAttachmentFolders": [
@@ -203,6 +206,7 @@ class EnrichmentTests(unittest.TestCase):
             "Eastern Time",
         )
         self.assertFalse(merged.get("deadline_conflict"))
+        self.assertEqual(merged["contacts"][0]["email"], "program@example.gov")
 
     def test_surfaces_conflicting_structured_deadline(self):
         record = base_record()

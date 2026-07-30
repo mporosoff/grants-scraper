@@ -5,8 +5,9 @@ never stored in the public site repo). Once a week a GitHub Action:
   1. clones the public site repo (public -> no auth) to get the current catalog
      and the shared matcher (``scripts/alert_match.py``);
   2. runs this script, which -- for each active subscription -- reruns the saved
-     search against the catalog, keeps only opportunities that are NEW since that
-     subscriber's last email, and sends a digest by SMTP;
+     search, selects unseen new opportunities and relevant deadline/amendment/
+     closure events since that subscriber's last email, and sends a digest by
+     SMTP;
   3. commits the updated ``state.json`` (last-run watermark) back to the private
      repo.
 
@@ -70,6 +71,47 @@ def select_new(ranked: list[dict], since, seen: set, is_new_since, limit: int = 
     return fresh
 
 
+def load_change_events(site_dir: Path) -> list[dict]:
+    path = site_dir / "feeds" / "changes.json"
+    if not path.exists():
+        return []
+    try:
+        return json.loads(path.read_text(encoding="utf-8")).get("events") or []
+    except (OSError, json.JSONDecodeError):
+        return []
+
+
+def select_updates(
+    events: list[dict],
+    ranked: list[dict],
+    seen_ids: set,
+    notified_event_ids: set,
+    since: date,
+    limit: int = MAX_ITEMS_PER_EMAIL,
+) -> list[dict]:
+    """Select relevant deadline/amendment/closure events for a subscription."""
+    matched_ids = {record_id(record) for record in ranked}
+    selected = []
+    for event in events:
+        if event.get("type") == "new" or event.get("id") in notified_event_ids:
+            continue
+        try:
+            changed = date.fromisoformat(str(event.get("changed_at") or "")[:10])
+        except ValueError:
+            continue
+        if changed < since:
+            continue
+        opportunity_id = str(event.get("opportunity_id") or "")
+        relevant = opportunity_id in matched_ids
+        if event.get("type") == "closed_or_removed":
+            relevant = opportunity_id in seen_ids
+        if relevant:
+            selected.append(event)
+        if len(selected) >= limit:
+            break
+    return selected
+
+
 def _mask(email: str) -> str:
     name, _, domain = email.partition("@")
     head = (name[:2] + "…") if len(name) > 2 else "…"
@@ -95,24 +137,39 @@ def _describe_search(sub: dict) -> str:
     return " · ".join(parts) or "all new opportunities"
 
 
-def render_text(sub: dict, items: list[dict], best_url) -> str:
+def render_text(sub: dict, items: list[dict], best_url, updates: list[dict] | None = None) -> str:
+    updates = updates or []
     lines = [
-        f"New funding matches for your saved search ({_describe_search(sub)}):",
+        f"Funding alerts for your saved search ({_describe_search(sub)}):",
         "",
     ]
-    for record in items:
-        lines.append(f"• {record.get('title') or 'Untitled opportunity'}")
-        meta = []
-        if record.get("agency"):
-            meta.append(str(record["agency"]))
-        if record.get("close_date"):
-            meta.append(f"closes {record['close_date']}")
-        if record.get("source"):
-            meta.append(str(record["source"]))
-        if meta:
-            lines.append(f"  {' · '.join(meta)}")
-        lines.append(f"  {best_url(record)}")
-        lines.append("")
+    if items:
+        lines.extend(["NEW MATCHES", ""])
+        for record in items:
+            lines.append(f"• {record.get('title') or 'Untitled opportunity'}")
+            meta = []
+            if record.get("agency"):
+                meta.append(str(record["agency"]))
+            if record.get("close_date"):
+                meta.append(f"closes {record['close_date']}")
+            if record.get("source"):
+                meta.append(str(record["source"]))
+            if meta:
+                lines.append(f"  {' · '.join(meta)}")
+            lines.append(f"  {best_url(record)}")
+            lines.append("")
+    if updates:
+        lines.extend(["CHANGES TO MATCHES YOU FOLLOW", ""])
+        for event in updates:
+            record = event.get("record") or {}
+            lines.append(
+                f"• {event.get('label') or 'Opportunity update'}: "
+                f"{record.get('title') or 'Untitled opportunity'}"
+            )
+            if event.get("detail"):
+                lines.append(f"  {event['detail']}")
+            lines.append(f"  {best_url(record)}")
+            lines.append("")
     lines += [
         "—",
         f"Search Funding Finder: {SITE_URL}",
@@ -124,9 +181,10 @@ def render_text(sub: dict, items: list[dict], best_url) -> str:
     return "\n".join(lines)
 
 
-def render_html(sub: dict, items: list[dict], best_url) -> str:
+def render_html(sub: dict, items: list[dict], best_url, updates: list[dict] | None = None) -> str:
     from html import escape
 
+    updates = updates or []
     rows = []
     for record in items:
         meta = []
@@ -144,10 +202,21 @@ def render_html(sub: dict, items: list[dict], best_url) -> str:
             f'<span style="color:#556;font-size:13px">{" · ".join(meta)}</span><br>'
             f'<span style="color:#333;font-size:13px">{summary}</span></li>'
         )
+    update_rows = []
+    for event in updates:
+        record = event.get("record") or {}
+        update_rows.append(
+            f'<li style="margin:0 0 14px">'
+            f'<strong>{escape(event.get("label") or "Opportunity update")}:</strong> '
+            f'<a href="{escape(best_url(record))}" style="font-weight:600;color:#12467d;text-decoration:none">'
+            f'{escape(record.get("title") or "Untitled opportunity")}</a><br>'
+            f'<span style="color:#556;font-size:13px">{escape(event.get("detail") or "")}</span></li>'
+        )
     return f"""<!doctype html><html><body style="font-family:system-ui,Arial,sans-serif;color:#222;max-width:640px;margin:0 auto">
-  <h2 style="font-size:18px">New funding matches for your saved search</h2>
+  <h2 style="font-size:18px">Funding alerts for your saved search</h2>
   <p style="color:#556;font-size:13px">{escape(_describe_search(sub))}</p>
-  <ul style="list-style:none;padding:0">{''.join(rows)}</ul>
+  {f'<h3 style="font-size:15px">New matches</h3><ul style="list-style:none;padding:0">{"".join(rows)}</ul>' if rows else ''}
+  {f'<h3 style="font-size:15px">Changes to matches you follow</h3><ul style="list-style:none;padding:0">{"".join(update_rows)}</ul>' if update_rows else ''}
   <hr style="border:none;border-top:1px solid #ddd">
   <p style="font-size:12px;color:#667">
     <a href="{SITE_URL}">Search Funding Finder</a> ·
@@ -193,6 +262,7 @@ def run(args) -> int:
     load_catalog, search_catalog, is_new_since, best_url = _import_shared(site_dir)
 
     catalog = load_catalog(Path(args.catalog) if args.catalog else site_dir / "data/opportunities.js")
+    change_events = load_change_events(site_dir)
     subscriptions = json.loads(Path(args.subscriptions).read_text(encoding="utf-8"))
     state_path = Path(args.state)
     state = json.loads(state_path.read_text(encoding="utf-8")) if state_path.exists() else {}
@@ -208,6 +278,7 @@ def run(args) -> int:
         sub_id = str(sub["id"])
         prior = state.get(sub_id, {})
         seen = set(prior.get("notified_ids", []))
+        notified_event_ids = set(prior.get("notified_event_ids", []))
         try:
             last_run = date.fromisoformat(prior["last_run"])
         except (KeyError, ValueError):
@@ -216,30 +287,63 @@ def run(args) -> int:
 
         # Apply the date/seen gate before the final per-email cap so a broad
         # query cannot hide new matches behind hundreds of older high scorers.
-        ranked = search_catalog(catalog, sub.get("query", ""), sub.get("filters"))
+        ranked = search_catalog(
+            catalog,
+            sub.get("query", ""),
+            sub.get("filters"),
+            as_of=today,
+        )
         fresh = select_new(ranked, since, seen, is_new_since)
+        updates = select_updates(
+            change_events,
+            ranked,
+            seen,
+            notified_event_ids,
+            since,
+        )
+        fresh_ids = {record_id(record) for record in fresh}
+        updates = [
+            event
+            for event in updates
+            if str(event.get("opportunity_id") or "") not in fresh_ids
+        ]
 
-        if not fresh:
-            print(f"[{sub_id}] no new matches for {_mask(sub['email'])}")
+        if not fresh and not updates:
+            print(f"[{sub_id}] no new matches or changes for {_mask(sub['email'])}")
             continue
 
-        subject = f"Funding Finder: {len(fresh)} new match{'es' if len(fresh) != 1 else ''} for your saved search"
+        subject = (
+            f"Funding Finder: {len(fresh)} new, {len(updates)} changed "
+            "for your saved search"
+        )
         if args.dry_run:
-            print(f"[{sub_id}] DRY RUN -> {_mask(sub['email'])}: {len(fresh)} items")
+            print(
+                f"[{sub_id}] DRY RUN -> {_mask(sub['email'])}: "
+                f"{len(fresh)} new, {len(updates)} changed"
+            )
             for record in fresh[:5]:
                 print(f"        - {record.get('title')}")
             continue
 
-        send_email(sub["email"], subject, render_text(sub, fresh, best_url), render_html(sub, fresh, best_url))
+        send_email(
+            sub["email"],
+            subject,
+            render_text(sub, fresh, best_url, updates),
+            render_html(sub, fresh, best_url, updates),
+        )
         sent += 1
         print(f"[{sub_id}] sent {len(fresh)} items to {_mask(sub['email'])}")
 
         remembered = list(dict.fromkeys(
             [*prior.get("notified_ids", []), *(record_id(record) for record in fresh)]
         ))
+        remembered_events = list(dict.fromkeys(
+            [*prior.get("notified_event_ids", []), *(event["id"] for event in updates)]
+        ))
         state[sub_id] = {
             "last_run": today.isoformat(),
             "notified_ids": remembered[-MAX_REMEMBERED_IDS:],
+            "notified_event_ids": remembered_events[-MAX_REMEMBERED_IDS:],
         }
         # Persist after each successful send. If a later subscriber fails, the
         # workflow's always-run commit step can still retain this watermark.

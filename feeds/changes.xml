@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Funding Finder — opportunity changes</title>
+  <link href="https://mporosoff.github.io/grants-scraper/feeds/changes.xml" rel="self"/>
+  <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
+  <id>https://mporosoff.github.io/grants-scraper/feeds/changes.xml</id>
+  <updated>2026-07-30T18:49:14Z</updated>
+  <generator>Funding Finder</generator>
+  <entry>
+    <title>Closing soon: Cooperative Agreement for Affiliated Partner with the Rocky Mountain Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/363385"/>
+    <id>urn:funding-finder:change:b01a7137c67b706a507d</id>
+    <updated>2026-07-30T12:04:03.593285Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-08-29</summary>
+  </entry>
+</feed>

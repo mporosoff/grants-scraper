@@ -14,6 +14,9 @@ on:
       - "scripts/sources/**"
       - "scripts/update_catalog_docs.py"
       - "scripts/build_feeds.py"
+      - "scripts/build_changes.py"
+      - "scripts/check_links.py"
+      - "scripts/currentness.py"
       - "scripts/alert_match.py"
   schedule:
     - cron: "17 10 * * *"
@@ -41,6 +44,9 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: "22"
+      - name: Preserve the prior catalog for change detection
+        shell: bash
+        run: cp data/opportunities.js "$RUNNER_TEMP/opportunities.previous.js"
       - run: python -m pip install -r requirements.txt
       - name: Run regression tests before refresh
         run: python -m unittest discover -s tests -v
@@ -76,6 +82,20 @@ jobs:
           --cache data/source_records.json
           --write
           --fail-on-degraded
+      - name: Build deadline, amendment, closing-soon, and closure events
+        run: >-
+          python -m scripts.build_changes
+          --previous "${{ runner.temp }}/opportunities.previous.js"
+          --current data/opportunities.js
+          --out feeds
+      - name: Rotate through official links and record health and redirects
+        run: >-
+          python -m scripts.check_links
+          --catalog data/opportunities.js
+          --state data/link_health.json
+          --max-checks 150
+          --workers 8
+          --fail-threshold 0.35
       - name: Generate static RSS/Atom feeds from the final catalog
         run: python -m scripts.build_feeds --catalog data/opportunities.js --out feeds
       - name: Regenerate catalog statistics in project documentation
@@ -87,7 +107,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md PROJECT.md match_explorer.html data/opportunities.js data/opportunity_enrichment.json data/document_evidence.json data/source_records.json feeds
+          git add README.md PROJECT.md match_explorer.html data/opportunities.js data/opportunity_enrichment.json data/document_evidence.json data/source_records.json data/link_health.json feeds
           if git diff --cached --quiet; then
             echo "The generated catalog is unchanged."
           else

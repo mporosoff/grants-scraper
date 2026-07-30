@@ -303,20 +303,6 @@
     <summary>National Telecommunications and Information Admini — Closes 2026-09-09 — This NOFO is the fourth issued under NTIA’s Public Wireless Supply Chain Innovation Fund (PWSCIF or Innovation Fund). Titled “Solutions for AI-Native RAN,” the goal of this NOFO is to support the development of a secure compute environment to enable or leverage native artificial intelligence (“AI”) capabilities in the Radio Access Network (RAN) that generate revenue for operators, cost savings, an…</summary>
   </entry>
   <entry>
-    <title>DE-FOA-0003646 Notice of Intent to Issue DE-FOA-0003647 Accelerating Scale-up and Pre-piloting of Emerging Chemical Technologies (ASPECT)</title>
-    <link href="https://www.grants.gov/search-results-detail/363174"/>
-    <id>urn:funding-finder:grants-gov:363174</id>
-    <updated>2026-07-14T00:00:00Z</updated>
-    <author><name>Golden Field Office</name></author>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Carbon management"/>
-    <category term="Climate change"/>
-    <summary>Golden Field Office — Closes 2026-09-14 — CMEI intends to issue, on behalf of AFFO, a NOFO titled, “Accelerating Scale-up and Pre-piloting of Emerging Chemical Technologies (ASPECT).” This NOFO will seek applications for financial assistance from entities that wish to conduct work in support of AFFO's focus on emerging chemical technologies. AFFO supports expanding the supply and use of domestic alternative feedstocks to improve supply ch…</summary>
-  </entry>
-  <entry>
     <title>Muscat - Annual Program Statement (APS)- PD Small Grants Program</title>
     <link href="https://www.grants.gov/search-results-detail/363078"/>
     <id>urn:funding-finder:grants-gov:363078</id>
@@ -764,5 +750,16 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health — Closes 2027-11-05 — The goal of this Notice of Funding Opportunity (NOFO) is to provide funding support for the pre-clinical and early stage clinical (Phase I) development of novel small-molecule and biologic drug candidates that prevent Alzheimer's disease (AD), slow its progression, or treat its cognitive and behavioral symptoms. Participants in this program will receive funding for therapy development activities s…</summary>
+  </entry>
+  <entry>
+    <title>BRAIN Initiative: Clinical Studies to Advance Next-Generation Devices for Recording and Modulation in the Human Central Nervous System (UH3 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/356982"/>
+    <id>urn:funding-finder:grants-gov:356982</id>
+    <updated>2024-11-05T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health — Closes 2026-09-28 — The purpose of this announcement is to encourage investigators to pursue a small clinical trial to obtain critical information necessary to advance recording and/or stimulating devices to treat central nervous system disorders and better understand the human brain (e.g., Early Feasibility Study). Clinical studies supported may consist of acute or short-term procedures that are deemed Non-Significa…</summary>
   </entry>
 </feed>

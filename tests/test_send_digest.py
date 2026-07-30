@@ -43,6 +43,33 @@ class SelectNewTests(unittest.TestCase):
         fresh = send_digest.select_new(ranked, date(2026, 7, 1), set(), is_new_since, limit=10)
         self.assertEqual(len(fresh), 10)
 
+    def test_selects_relevant_change_events_and_deduplicates(self):
+        ranked = [rec(opportunity_id="1")]
+        events = [
+            {
+                "id": "event-1",
+                "type": "deadline_changed",
+                "changed_at": "2026-07-25T12:00:00Z",
+                "opportunity_id": "1",
+                "record": rec(opportunity_id="1"),
+            },
+            {
+                "id": "event-2",
+                "type": "amended",
+                "changed_at": "2026-07-25T12:00:00Z",
+                "opportunity_id": "2",
+                "record": rec(opportunity_id="2"),
+            },
+        ]
+        selected = send_digest.select_updates(
+            events,
+            ranked,
+            set(),
+            {"event-2"},
+            date(2026, 7, 22),
+        )
+        self.assertEqual([event["id"] for event in selected], ["event-1"])
+
 
 class ConsentTests(unittest.TestCase):
     def test_consent_is_fail_closed(self):
@@ -68,6 +95,21 @@ class RenderTests(unittest.TestCase):
         html = send_digest.render_html(self.sub, items, best_url)
         self.assertIn("R&amp;D &lt;energy&gt;", html)
         self.assertNotIn("<energy>", html)
+
+    def test_renders_deadline_change_section(self):
+        updates = [{
+            "label": "Deadline changed",
+            "detail": "2026-09-01 → 2026-10-01",
+            "record": rec(title="Changed opportunity"),
+        }]
+        text = send_digest.render_text(
+            self.sub,
+            [],
+            best_url,
+            updates,
+        )
+        self.assertIn("CHANGES TO MATCHES YOU FOLLOW", text)
+        self.assertIn("Deadline changed", text)
 
     def test_describe_search_includes_query_and_filters(self):
         text = send_digest._describe_search(self.sub)

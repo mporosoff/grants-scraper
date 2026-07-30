@@ -11,6 +11,7 @@ import re
 import textwrap
 from typing import Any
 
+from scripts.currentness import filter_current
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 CATALOG_PREFIX = "globalThis.GRANT_CATALOG="
@@ -31,10 +32,10 @@ def load_catalog(path: Path) -> dict[str, Any]:
 
 
 def catalog_stats(catalog: dict[str, Any]) -> dict[str, Any]:
-    records = catalog["opportunities"]
     generated = datetime.fromisoformat(
         catalog["generated_at"].replace("Z", "+00:00")
     ).date()
+    records, excluded = filter_current(catalog["opportunities"], generated)
     routes = Counter(
         "direct"
         if record.get("primary_document_url")
@@ -82,8 +83,11 @@ def catalog_stats(catalog: dict[str, Any]) -> dict[str, Any]:
     stats = {
         "generated": generated,
         "record_count": len(records),
-        "posted": catalog.get("status_counts", {}).get("posted", 0),
-        "forecasted": catalog.get("status_counts", {}).get("forecasted", 0),
+        "posted": sum(record.get("status") == "posted" for record in records),
+        "forecasted": sum(
+            record.get("status") == "forecasted" for record in records
+        ),
+        "excluded_noncurrent": len(excluded),
         "direct": routes["direct"],
         "direct_high": confidence["high"],
         "direct_medium": confidence["medium"],

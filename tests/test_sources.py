@@ -524,6 +524,14 @@ class NyserdaParseTests(unittest.TestCase):
                         "RevisedDate": "07/01/2026",
                         "DetailPageLink": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=abc",
                         "SolicitationLinkPDF": "https://portal.nyserda.ny.gov/files/pon-5001.pdf",
+                        "SolicitationContacts": [
+                            {
+                                "Name": "Clean Energy Programs",
+                                "Email": "programs@nyserda.ny.gov",
+                                "Phone": "518-555-0100",
+                                "Title": "Program Manager",
+                            }
+                        ],
                     },
                     {
                         "SolicitationName": "Expired Legacy Program",
@@ -568,6 +576,10 @@ class NyserdaParseTests(unittest.TestCase):
         self.assertEqual(first["source_type"], "State")
         self.assertTrue(first["detail_page"].startswith("https://portal.nyserda.ny.gov"))
         self.assertTrue(first["primary_document_url"].endswith(".pdf"))
+        self.assertEqual(
+            first["contacts"][0]["email"],
+            "programs@nyserda.ny.gov",
+        )
 
     def test_currentness_gate_drops_the_expired_solicitation(self):
         from scripts.sources.adapters.nyserda import NyserdaAdapter

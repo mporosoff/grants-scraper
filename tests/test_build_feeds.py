@@ -3,6 +3,7 @@
 import json
 import tempfile
 import unittest
+from datetime import date
 from pathlib import Path
 from xml.etree import ElementTree
 
@@ -35,7 +36,11 @@ class BuildFeedsTests(unittest.TestCase):
         self.catalog = {"opportunities": RECORDS}
         self.tmp = tempfile.TemporaryDirectory()
         self.out = Path(self.tmp.name) / "feeds"
-        self.manifest = build_feeds.build_feeds(self.catalog, self.out)
+        self.manifest = build_feeds.build_feeds(
+            self.catalog,
+            self.out,
+            as_of=date(2026, 7, 25),
+        )
 
     def tearDown(self):
         self.tmp.cleanup()
@@ -76,9 +81,9 @@ class BuildFeedsTests(unittest.TestCase):
             "generated_at": "2026-07-27T10:30:00Z",
             "opportunities": RECORDS,
         }
-        build_feeds.build_feeds(catalog, self.out)
+        build_feeds.build_feeds(catalog, self.out, as_of=date(2026, 7, 25))
         first = (self.out / "all.xml").read_text(encoding="utf-8")
-        build_feeds.build_feeds(catalog, self.out)
+        build_feeds.build_feeds(catalog, self.out, as_of=date(2026, 7, 25))
         second = (self.out / "all.xml").read_text(encoding="utf-8")
         self.assertEqual(first, second)
         self.assertIn("2026-07-27T10:30:00Z", first)
@@ -86,7 +91,11 @@ class BuildFeedsTests(unittest.TestCase):
     def test_obsolete_managed_facet_feed_is_removed(self):
         obsolete = self.out / "topic" / "obsolete.xml"
         obsolete.write_text("<feed/>", encoding="utf-8")
-        build_feeds.build_feeds(self.catalog, self.out)
+        build_feeds.build_feeds(
+            self.catalog,
+            self.out,
+            as_of=date(2026, 7, 25),
+        )
         self.assertFalse(obsolete.exists())
 
     def test_source_first_seen_dates_sort_undated_external_records(self):
@@ -99,6 +108,23 @@ class BuildFeedsTests(unittest.TestCase):
         )
         recent = build_feeds.sorted_recent([RECORDS[0], undated], 2)
         self.assertEqual(recent[0]["opportunity_id"], "3")
+
+    def test_runtime_gate_excludes_expired_records(self):
+        expired = dict(
+            RECORDS[0],
+            opportunity_id="expired",
+            close_date="2026-07-24",
+        )
+        build_feeds.build_feeds(
+            {"opportunities": [*RECORDS, expired]},
+            self.out,
+            as_of=date(2026, 7, 25),
+        )
+        tree = ElementTree.parse(self.out / "all.xml")
+        ids = [entry.findtext(f"{ATOM}id") for entry in tree.findall(f"{ATOM}entry")]
+        self.assertFalse(any(value.endswith(":expired") for value in ids))
+        manifest = json.loads((self.out / "index.json").read_text(encoding="utf-8"))
+        self.assertEqual(manifest["excluded_noncurrent"], 1)
 
 
 if __name__ == "__main__":

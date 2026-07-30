@@ -7,7 +7,7 @@
   <meta name="referrer" content="no-referrer">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://api.openai.com https://api.anthropic.com; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self'">
   <title>Funding Finder</title>
-  <link rel="stylesheet" href="./assets/app.css?v=release-2026-07-27-v3">
+  <link rel="stylesheet" href="./assets/app.css?v=release-2026-07-30-v4">
 </head>
 <body>
   <a class="skip-link" href="#results">Skip to results</a>
@@ -331,12 +331,14 @@
                 <small id="preference-status" aria-live="polite">Rate 3 opportunities to personalize.</small>
               </span>
             </label>
+            <button class="button secondary" id="export-ics" type="button">Export deadlines</button>
             <button class="button secondary" id="export-csv" type="button">Export CSV</button>
           </div>
         </div>
 
         <div class="active-filters hidden" id="active-filters" aria-label="Active search context"></div>
         <div class="notice warning hidden" id="stale-warning"></div>
+        <section class="compare-panel hidden" id="compare-panel" aria-labelledby="compare-heading"></section>
 
         <section class="ai-panel result-assistant hidden" id="result-assistant" aria-labelledby="chat-heading">
           <div class="ai-heading">
@@ -465,14 +467,14 @@
   <noscript>
     <div class="notice error">JavaScript is required to search the opportunity catalog.</div>
   </noscript>
-  <script src="./data/opportunities.js?v=catalog-20260730T120629Z"></script>
-  <script src="./assets/profile.js?v=release-2026-07-27-v3"></script>
-  <script src="./assets/review.js?v=release-2026-07-27-v3"></script>
-  <script src="./assets/credentials.js?v=release-2026-07-27-v3"></script>
-  <script src="./assets/ai-provider.js?v=release-2026-07-27-v3"></script>
-  <script src="./assets/chat-ui.js?v=release-2026-07-27-v3"></script>
-  <script src="./assets/saved.js?v=release-2026-07-27-v3"></script>
-  <script src="./assets/preferences.js?v=release-2026-07-27-v3"></script>
-  <script src="./assets/app.js?v=release-2026-07-27-v3"></script>
+  <script src="./data/opportunities.js?v=catalog-20260730T185136Z"></script>
+  <script src="./assets/profile.js?v=release-2026-07-30-v4"></script>
+  <script src="./assets/review.js?v=release-2026-07-30-v4"></script>
+  <script src="./assets/credentials.js?v=release-2026-07-30-v4"></script>
+  <script src="./assets/ai-provider.js?v=release-2026-07-30-v4"></script>
+  <script src="./assets/chat-ui.js?v=release-2026-07-30-v4"></script>
+  <script src="./assets/saved.js?v=release-2026-07-30-v4"></script>
+  <script src="./assets/preferences.js?v=release-2026-07-30-v4"></script>
+  <script src="./assets/app.js?v=release-2026-07-30-v4"></script>
 </body>
 </html>

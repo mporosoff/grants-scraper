@@ -19,7 +19,7 @@ import math
 from pathlib import Path
 import re
 import tempfile
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urljoin, urlparse, urlunparse
 from xml.etree.ElementTree import iterparse
 from zipfile import ZipFile
 
@@ -32,6 +32,16 @@ DETAIL_PAGE = "https://www.grants.gov/search-results-detail/{opportunity_id}"
 CATALOG_GLOBAL = "GRANT_CATALOG"
 CATALOG_SCHEMA_VERSION = 3
 USER_AGENT = "UR-Grant-Matcher-Catalog/1.0"
+HTTPS_UPGRADE_HOSTS = {
+    "grants.gov",
+    "www.grants.gov",
+    "grants.nih.gov",
+    "www.grants.nih.gov",
+    "nsf.gov",
+    "www.nsf.gov",
+    "nspires.nasaprs.com",
+    "www.nspires.nasaprs.com",
+}
 
 CATEGORY_NAMES = {
     "ACA": "Affordable Care Act",
@@ -216,6 +226,19 @@ PRELIMINARY_RE = re.compile(
     r"preliminary\s+proposal|letter\s+of\s+intent|LOI|white\s+paper)\b",
     re.I,
 )
+NON_FUNDING_TITLE_RE = re.compile(
+    r"^(?:[A-Z0-9-]+\s+)?(?:"
+    r"notice\s+of\s+intent(?:\s+to\s+issue)?\b|"
+    r"request\s+for\s+information\b|"
+    r"RFI\s*[-:]"
+    r")",
+    re.I,
+)
+NOT_ACCEPTING_RE = re.compile(
+    r"\b(?:not|isn't|is\s+not)\s+accepting\s+applications?\b|"
+    r"\bno\s+applications?\s+(?:are|will\s+be)\s+accepted\b",
+    re.I,
+)
 LIMITED_SUBMISSION_RE = re.compile(
     r"(?:limit(?:ed|s)?\s+(?:to\s+)?(?:one|two|three|1|2|3)\s+"
     r"(?:application|proposal|submission)|(?:one|two|three|1|2|3)\s+"
@@ -287,6 +310,14 @@ def safe_http_url(value):
     if text.casefold().startswith("www."):
         text = f"https://{text}"
     parsed = urlparse(text)
+    hostname = (parsed.hostname or "").casefold()
+    if parsed.scheme == "http" and (
+        hostname in HTTPS_UPGRADE_HOSTS
+        or hostname.endswith(".gov")
+        or hostname.endswith(".mil")
+    ):
+        parsed = parsed._replace(scheme="https")
+        text = urlunparse(parsed)
     return (
         text
         if parsed.scheme in {"http", "https"} and parsed.netloc
@@ -338,6 +369,22 @@ def numeric(value):
 
 
 def is_current(values, status, as_of):
+    title = clean_text(first(values, "OpportunityTitle")) or ""
+    if NON_FUNDING_TITLE_RE.search(title):
+        return False
+    instrument_codes = {
+        value.casefold()
+        for value in (values.get("FundingInstrumentType") or [])
+        if value
+    }
+    description = " ".join(values.get("Description") or [])
+    if (
+        instrument_codes
+        and instrument_codes <= {"o"}
+        and NOT_ACCEPTING_RE.search(description[:2500])
+    ):
+        return False
+
     archive = parse_extract_date(first(values, "ArchiveDate"))
     close_field = (
         "EstimatedSynopsisCloseDate"
@@ -374,7 +421,6 @@ def is_current(values, status, as_of):
             return False
         return True
 
-    description = " ".join(values.get("Description") or [])
     rolling = bool(ROLLING_RE.search(description))
     if rolling:
         return True
@@ -558,6 +604,7 @@ def normalize_element(element, as_of):
             if not cost_share_raw
             else cost_share_raw.casefold() in {"yes", "true", "y"}
         ),
+        "contacts": [],
         "has_preliminary_stage": bool(PRELIMINARY_RE.search(text_blob)),
         "preliminary_stage_type": (
             PRELIMINARY_RE.search(text_blob).group(1)

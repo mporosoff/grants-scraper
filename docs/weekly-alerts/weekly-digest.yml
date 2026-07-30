@@ -2,9 +2,9 @@
 #
 # This workflow belongs in a PRIVATE repository (so subscriber emails stay
 # private). Copy it to `.github/workflows/weekly-digest.yml` in that repo.
-# It clones the PUBLIC site repo to get the current catalog + shared matcher,
-# then sends one digest per active subscription and commits the updated
-# watermark (state.json) back to this repo.
+# It clones the PUBLIC site repo to get the current catalog, rolling change
+# feed, and shared matcher, then sends one digest per active subscription and
+# commits the updated watermark (state.json) back to this repo.
 #
 # Required repository secrets (Settings -> Secrets and variables -> Actions):
 #   SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD, SMTP_FROM
