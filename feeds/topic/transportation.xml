@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-07-29T12:22:47Z</updated>
+  <updated>2026-07-30T12:06:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIOSH Centers for Agriculture, Forestry, and Fishing Safety and Health (U54)</title>
@@ -123,6 +123,16 @@
     <author><name>Department of Housing and Urban Development</name></author>
     <category term="Transportation"/>
     <summary>Department of Housing and Urban Development — Closes 2026-11-10 — The Family Unification Program (FUP) public housing authorities (PHAs) to partner with public child welfare agencies (PCWAs) to provide Housing Choice Voucher (HCV) assistance to two primary groups:1. Families: Those for whom the lack of adequate housing is a primary factor in the imminent placement of a child (or children) in out-of-home care, or a delay in the discharge of a child to the family …</summary>
+  </entry>
+  <entry>
+    <title>FY26 Bus Safety, Accessibility, and Innovation Notice of Funding Opportunity</title>
+    <link href="https://www.grants.gov/search-results-detail/363372"/>
+    <id>urn:funding-finder:grants-gov:363372</id>
+    <updated>2026-07-29T00:00:00Z</updated>
+    <author><name>DOT - Federal Transit Administration</name></author>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>DOT - Federal Transit Administration — Closes 2026-09-28 — The Federal Transit Administration (FTA) announces the opportunity to apply for competitive awards totaling up to $10 million in Public Transportation Innovation Program (49 U.S.C. 5312) funds for the Fiscal Year (FY) 2026 Bus Safety, Accessibility, and Innovation Research Program under Assistance Listing Number 20.530. As required by Federal public transportation law, funds will be awarded compet…</summary>
   </entry>
   <entry>
     <title>DOJ FY 2026 Bridging Immigration-Related Deficits Experienced Nationwide (“BIDEN”) Program Round 2</title>
@@ -650,14 +660,5 @@
     <author><name>DOT - Federal Transit Administration</name></author>
     <category term="Transportation"/>
     <summary>DOT - Federal Transit Administration — Closes 2026-08-25 — The Federal Transit Administration (FTA) announces the opportunity to apply for $18,954,885 in competitive grants for the Fiscal Year (FY) 2026 Public Transportation on Indian Reservations (Tribal Transit) Competitive Program under Assistance Listing Number 20.509.</summary>
-  </entry>
-  <entry>
-    <title>DoW Autism Career Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362529"/>
-    <id>urn:funding-finder:grants-gov:362529</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Transportation"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-22 — Summary: The fiscal year 2026 (FY26) Autism Research Program (ARP) Career Development Award supports early-career, independent investigators and/or the transition of established investigators from other research fields to conduct innovative, high-impact ideas or early-phase, proof-of-principle clinical trials with the potential to have a major impact on autism.Distinctive Features: ﻿Applications a…</summary>
   </entry>
 </feed>

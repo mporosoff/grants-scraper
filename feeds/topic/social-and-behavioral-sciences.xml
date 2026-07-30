@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml</id>
-  <updated>2026-07-29T12:22:47Z</updated>
+  <updated>2026-07-30T12:06:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -59,6 +59,19 @@
     <category term="Environmental science"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health — Closes 2027-05-27 — The National Institute of Mental Health (NIMH) intends to publish a notice of funding opportunity (NOFO) to solicit research applications for practice-based research centers to support interdisciplinary teams of mental health researchers to engage in high-impact studies that will significantly advance clinical practice and generate knowledge to fuel the transformation of mental health care in the …</summary>
+  </entry>
+  <entry>
+    <title>Demonstration Projects for Whole-Person Health Models for Women Living with HIV in the South</title>
+    <link href="https://www.grants.gov/search-results-detail/363389"/>
+    <id>urn:funding-finder:grants-gov:363389</id>
+    <updated>2027-01-14T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCHHSTP</name></author>
+    <category term="Arts and culture"/>
+    <category term="Cancer"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-03-15 — The purpose of this demonstration project is to support coordinated Clinic and Community Collaboratives (CCCs) to integrate HIV care with broader women's health services in jurisdictions with disproportionately high HIV disease burden to improve HIV-related outcomes, overall health, and quality of life among WWH. Organizations will be funded to implement 4 strategies: (1) Integrate HIV care with b…</summary>
   </entry>
   <entry>
     <title>Bridge2AI Network for AI Health Science</title>
@@ -646,16 +659,5 @@
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health — Closes 2028-06-07 — The National Center for Complementary and Integrative Health (NCCIH) announces this Notice of Funding Opportunity (NOFO) to solicit applications for research on how mind and body interventions through psychological and/or physical inputs (e.g., mindfulness meditation, yoga, acupuncture, massage, and other brain and/or body based interventions) impact mechanisms of emotional well-being (EWB) and th…</summary>
-  </entry>
-  <entry>
-    <title>NIA Expanding Research in AD/ADRD (ERA) Postbaccalaureate Research Education Program (R25 Independent Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359653"/>
-    <id>urn:funding-finder:grants-gov:359653</id>
-    <updated>2025-09-02T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health — Closes 2027-05-26 — This Notice of Funding Opportunity Announcement (NOFO) invites R25 applications to support the development and implementation of research education programs for recent baccalaureates from all backgrounds, including those from groups underrepresented in the biomedical and behavioral sciences. It is essential to expand and broaden the skilled Alzheimers Disease (AD) and Alzheimers Disease and Relate…</summary>
   </entry>
 </feed>

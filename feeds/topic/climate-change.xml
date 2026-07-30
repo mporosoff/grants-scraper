@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/climate-change.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/climate-change.xml</id>
-  <updated>2026-07-29T12:22:47Z</updated>
+  <updated>2026-07-30T12:06:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Clean Green Schools Initiative</title>
@@ -141,7 +141,7 @@
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <category term="Energy"/>
-    <summary>U.S. National Science Foundation — Closes 2026-08-07 — The Centers of Research Excellence in Science and Technology (CREST) program provides support to enhance the research capabilities of minority-serving institutions (MSIs) as defined in this solicitation’s Eligibility section, through effective integration of education and research. The CREST program, composed of the CREST Centers, the CREST Postdoctoral Research Program, and the projects supported…</summary>
+    <summary>U.S. National Science Foundation — Posted — The Centers of Research Excellence in Science and Technology (CREST) program provides support to enhance the research capabilities of minority-serving institutions (MSIs) as defined in this solicitation’s Eligibility section, through effective integration of education and research. The CREST program, composed of the CREST Centers, the CREST Postdoctoral Research Program, and the projects supported…</summary>
   </entry>
   <entry>
     <title>Mind, Machine and Motor Nexus</title>
@@ -184,6 +184,8 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Energy"/>
     <category term="Environmental science"/>
     <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>U.S. National Science Foundation — Posted — The Geospace Cluster (GC) in the Division of Atmospheric and Geospace Sciences (AGS) supports fundamental and solutions-oriented research, technology development and education related to the Earth's near-space environment (including the mesosphere, thermosphere, ionosphere, exosphere, magnetosphere and radiation belts) and the inner heliosphere and solar atmosphere. The GC advances knowledge of th…</summary>
   </entry>
   <entry>
@@ -295,7 +297,7 @@ The goal of the Environmental Sustainability program is to promote sustainable e
     <category term="Environmental science"/>
     <category term="Materials science"/>
     <category term="Separations and membranes"/>
-    <category term="Manufacturing"/>
+    <category term="Artificial intelligence and machine learning"/>
     <summary>U.S. National Science Foundation — Posted — The Interfacial Engineering program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Electrochemical Systems program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
 The goal of the Interfacial Engineering program is to support fundamental research on atomic- and molecular-scale interfacial phenomena and …</summary>
   </entry>
@@ -363,6 +365,8 @@ The Thermal Transport Processes program supports engineering research projects t
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Arts and culture"/>
     <category term="Environmental science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <category term="Energy"/>
     <category term="Manufacturing"/>
     <category term="Carbon management"/>
@@ -382,7 +386,7 @@ The Thermal Transport Processes program supports engineering research projects t
     <category term="Materials science"/>
     <category term="Separations and membranes"/>
     <category term="Water"/>
-    <category term="Energy"/>
+    <category term="Catalysis and reaction engineering"/>
     <summary>U.S. National Science Foundation — Posted — The Environmental Engineering program is part of the Environmental Engineering and Sustainability cluster, which also includes 1) the Nanoscale Interactions program; and 2) the Environmental Sustainability program.
 Environmental engineering is an interdisciplinary field that applies chemical, biological, and physical scientific principles to protect human and ecological health.
 The goal of the Env…</summary>
@@ -414,6 +418,8 @@ The goal of the Env…</summary>
     <category term="Environmental science"/>
     <category term="Transportation"/>
     <category term="Water"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>U.S. National Science Foundation — Posted — The Engineering for Civil Infrastructure (ECI) program supports fundamental research in geotechnical, structural, materials, architectural, and coastal engineering. The ECI program promotes research that can shape the future of the nation’s physical civil infrastructure and that can contribute to climate change adaptation and mitigation, and hazards and disaster resilience. Types of civil infrastr…</summary>
   </entry>
   <entry>

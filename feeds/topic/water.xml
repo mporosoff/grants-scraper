@@ -4,8 +4,36 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml</id>
-  <updated>2026-07-29T12:22:47Z</updated>
+  <updated>2026-07-30T12:06:29Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Cooperative Agreement for Affiliated Partner with the Rocky Mountain Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/363385"/>
+    <id>urn:funding-finder:grants-gov:363385</id>
+    <updated>2026-07-29T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Water"/>
+    <summary>Geological Survey — Closes 2026-08-29 — The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner for research in processing and analyzing of data from the Surface Water and Ocean Topography (SWOT) mission. The project will advance hydrologic decision making from remotely sensed water surface elevation by making available water surface elevation data at unprecedented scales. Research Scientists in the Observi…</summary>
+  </entry>
+  <entry>
+    <title>Desalination and Water Purification Research Program: Research Projects</title>
+    <link href="https://www.grants.gov/search-results-detail/363375"/>
+    <id>urn:funding-finder:grants-gov:363375</id>
+    <updated>2026-07-29T00:00:00Z</updated>
+    <author><name>Bureau of Reclamation</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Separations and membranes"/>
+    <category term="Technology development"/>
+    <category term="Water"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Bureau of Reclamation — Closes 2026-09-29 — The Bureau of Reclamation"s Desalination and Water Purification Research (DWPR) Program aims to increase water supplies by reducing the costs, energy requirements, and other barriers to adoption of treating impaired water for beneficial uses.This NOFO invites proposals from eligible applicants to conduct innovative laboratory and pilot-scale water treatment research. Strong applications will demon…</summary>
+  </entry>
   <entry>
     <title>Rural Decentralized Water System Grant Program</title>
     <link href="https://www.grants.gov/search-results-detail/363364"/>
@@ -166,7 +194,7 @@
     <category term="Water"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Bureau of Reclamation — Closes 2026-09-23 — The objectives of this NAA/TAP funding opportunity are to provide funding for drought relief actions/projects that mitigate drought impacts for designated federally recognized tribes within the Colorado River Basin (see Eligibility section for list of tribes), and which advance Presidential and Department of the Interior Priorities within the Basin.Proposals should meet one or more of the followin…</summary>
+    <summary>Bureau of Reclamation — Closes 2026-09-28 — The objectives of this NAA/TAP funding opportunity are to provide funding for drought relief actions/projects that mitigate drought impacts for designated federally recognized tribes within the Colorado River Basin (see Eligibility section for list of tribes), and which advance Presidential and Department of the Interior Priorities within the Basin.Proposals should meet one or more of the followin…</summary>
   </entry>
   <entry>
     <title>F25AS00332 Highlands Conservation Act – Competitive Funding Round</title>
@@ -309,6 +337,7 @@
     <category term="Public health"/>
     <category term="Technology development"/>
     <category term="Water"/>
+    <category term="Artificial intelligence and machine learning"/>
     <summary>U.S. National Science Foundation — Posted — Infrastructure systems comprise complex connections between physical components, organizational structures and operational methods that support the needs of people and communities at the local, regional, national, and global scales. Such systems form the backbone of society, providing essential services as well as ensuring public health and welfare, economic prosperity and national security, and a…</summary>
   </entry>
   <entry>
@@ -369,7 +398,7 @@ The goal of the Environmental Sustainability program is to promote sustainable e
     <category term="Materials science"/>
     <category term="Separations and membranes"/>
     <category term="Water"/>
-    <category term="Energy"/>
+    <category term="Catalysis and reaction engineering"/>
     <summary>U.S. National Science Foundation — Posted — The Environmental Engineering program is part of the Environmental Engineering and Sustainability cluster, which also includes 1) the Nanoscale Interactions program; and 2) the Environmental Sustainability program.
 Environmental engineering is an interdisciplinary field that applies chemical, biological, and physical scientific principles to protect human and ecological health.
 The goal of the Env…</summary>
@@ -385,6 +414,8 @@ The goal of the Env…</summary>
     <category term="Environmental science"/>
     <category term="Transportation"/>
     <category term="Water"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>U.S. National Science Foundation — Posted — The Engineering for Civil Infrastructure (ECI) program supports fundamental research in geotechnical, structural, materials, architectural, and coastal engineering. The ECI program promotes research that can shape the future of the nation’s physical civil infrastructure and that can contribute to climate change adaptation and mitigation, and hazards and disaster resilience. Types of civil infrastr…</summary>
   </entry>
 </feed>

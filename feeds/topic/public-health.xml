@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml</id>
-  <updated>2026-07-29T12:22:47Z</updated>
+  <updated>2026-07-30T12:06:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -156,6 +156,19 @@
     <category term="Public health"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health — Closes 2027-06-04 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing to develop innovative technologies for cancer research or clinical care. The emphasis of this NOFO is on early-stage projects proposing proof-of-concept/pilot studies to test the technical feasibility of the proposed method, tool, assay, platform, or instrument. Well-suited …</summary>
+  </entry>
+  <entry>
+    <title>Demonstration Projects for Whole-Person Health Models for Women Living with HIV in the South</title>
+    <link href="https://www.grants.gov/search-results-detail/363389"/>
+    <id>urn:funding-finder:grants-gov:363389</id>
+    <updated>2027-01-14T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCHHSTP</name></author>
+    <category term="Arts and culture"/>
+    <category term="Cancer"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-03-15 — The purpose of this demonstration project is to support coordinated Clinic and Community Collaboratives (CCCs) to integrate HIV care with broader women's health services in jurisdictions with disproportionately high HIV disease burden to improve HIV-related outcomes, overall health, and quality of life among WWH. Organizations will be funded to implement 4 strategies: (1) Integrate HIV care with b…</summary>
   </entry>
   <entry>
     <title>Childhood Asthma in Urban Settings Clinical Research Network</title>
@@ -640,16 +653,5 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>Centers for Disease Control-GHC — Closes 2026-08-14 — This Notice of Funding Opportunity (NOFO) seeks to build upon activities funded by CDC to support Global Health Security (GHS) in the Democratic Republic of Congo through implementation of programs and activities that focus on protecting and improving health globally through partnerships with Ministries of Health and other governmental institutions. The main outcomes of this NOFO are the following…</summary>
-  </entry>
-  <entry>
-    <title>Sustaining Global Health Security to protect and improve public health in Kenya</title>
-    <link href="https://www.grants.gov/search-results-detail/360341"/>
-    <id>urn:funding-finder:grants-gov:360341</id>
-    <updated>2026-07-14T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-08-14 — For over forty years, the U.S. Centers for Disease Control and Prevention (CDC) has partnered with the Government of Kenya (GoK) to protect the health of the Kenyan people and strengthen health systems. The United States Government remains the largest investor in Kenya"s health sector. This investment includes PEPFAR (President"s Emergency Plan for AIDS Relief), GHS (Global Health Security), Malar…</summary>
   </entry>
 </feed>

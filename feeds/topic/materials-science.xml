@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-07-29T12:22:47Z</updated>
+  <updated>2026-07-30T12:06:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Microplastics Research and Resource Coordination Center (U24 - Clinical Trial Not Allowed)</title>
@@ -170,7 +170,7 @@
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <category term="Energy"/>
-    <summary>U.S. National Science Foundation — Closes 2026-08-07 — The Centers of Research Excellence in Science and Technology (CREST) program provides support to enhance the research capabilities of minority-serving institutions (MSIs) as defined in this solicitation’s Eligibility section, through effective integration of education and research. The CREST program, composed of the CREST Centers, the CREST Postdoctoral Research Program, and the projects supported…</summary>
+    <summary>U.S. National Science Foundation — Posted — The Centers of Research Excellence in Science and Technology (CREST) program provides support to enhance the research capabilities of minority-serving institutions (MSIs) as defined in this solicitation’s Eligibility section, through effective integration of education and research. The CREST program, composed of the CREST Centers, the CREST Postdoctoral Research Program, and the projects supported…</summary>
   </entry>
   <entry>
     <title>Infrastructure Systems and People</title>
@@ -184,6 +184,7 @@
     <category term="Public health"/>
     <category term="Technology development"/>
     <category term="Water"/>
+    <category term="Artificial intelligence and machine learning"/>
     <summary>U.S. National Science Foundation — Posted — Infrastructure systems comprise complex connections between physical components, organizational structures and operational methods that support the needs of people and communities at the local, regional, national, and global scales. Such systems form the backbone of society, providing essential services as well as ensuring public health and welfare, economic prosperity and national security, and a…</summary>
   </entry>
   <entry>
@@ -269,6 +270,7 @@
     <category term="Materials science"/>
     <category term="Quantum science"/>
     <category term="Transportation"/>
+    <category term="Data science"/>
     <summary>U.S. National Science Foundation — Posted — CMMT supports theoretical and computational materials research in the topical areas represented in DMR's other Topical Materials Research Programs (these are also variously known as Individual Investigator Award (IIA) Programs, or Core Programs, or Disciplinary Programs), which are: Condensed Matter Physics (CMP), Biomaterials (BMAT), Ceramics (CER), Electronic and Photonic Materials (EPM), Metals…</summary>
   </entry>
   <entry>
@@ -279,6 +281,8 @@
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Materials science"/>
     <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>U.S. National Science Foundation — Posted — Materials Research is the field of science where physics, chemistry, materials science, and engineering naturally converge in the pursuit of the fundamental understanding of the properties of materials and the phenomena they host. Materials are abundant and pervasive, serving as critical building blocks in technology and innovation. Materials Research impacts life and society, as it shapes our und…</summary>
   </entry>
   <entry>
@@ -370,7 +374,7 @@ The goal of the Electrochemical Systems program is to support fundamental engine
     <category term="Environmental science"/>
     <category term="Materials science"/>
     <category term="Separations and membranes"/>
-    <category term="Manufacturing"/>
+    <category term="Artificial intelligence and machine learning"/>
     <summary>U.S. National Science Foundation — Posted — The Interfacial Engineering program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Electrochemical Systems program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
 The goal of the Interfacial Engineering program is to support fundamental research on atomic- and molecular-scale interfacial phenomena and …</summary>
   </entry>
@@ -388,6 +392,20 @@ The goal of the Interfacial Engineering program is to support fundamental resear
     <category term="Quantum science"/>
     <summary>U.S. National Science Foundation — Posted — The Nanoscale Interactions program is part of the Environmental Engineering and Sustainability cluster, which also includes: 1) the Environmental Engineering program; and 2) the Environmental Sustainability program.
 The goal of the Nanoscale Interactions program is to support research to advance fundamental and quantitative understanding of the interactions of nanomaterials and nanosystems with bi…</summary>
+  </entry>
+  <entry>
+    <title>Electronics, Photonics and Magnetic Devices</title>
+    <link href="https://www.grants.gov/search-results-detail/345872"/>
+    <id>urn:funding-finder:grants-gov:345872</id>
+    <updated>2023-02-08T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <summary>U.S. National Science Foundation — Posted — The Electronics, Photonics and Magnetic Devices (EPMD) Program supports innovative research on novel devices based on the principles of electronics, optics and photonics, optoelectronics, magnetics, opto- and electromechanics, electromagnetics, and related physical phenomena. EPMD’s goal is to advance the frontiers of micro-, nano- and quantum-based devices operating within the electromagnetic spe…</summary>
   </entry>
   <entry>
     <title>Research Interests of the United States Air Force Academy (formerly USAFA-BAA-2021)</title>
@@ -449,7 +467,7 @@ The program …</summary>
     <category term="Materials science"/>
     <category term="Separations and membranes"/>
     <category term="Water"/>
-    <category term="Energy"/>
+    <category term="Catalysis and reaction engineering"/>
     <summary>U.S. National Science Foundation — Posted — The Environmental Engineering program is part of the Environmental Engineering and Sustainability cluster, which also includes 1) the Nanoscale Interactions program; and 2) the Environmental Sustainability program.
 Environmental engineering is an interdisciplinary field that applies chemical, biological, and physical scientific principles to protect human and ecological health.
 The goal of the Env…</summary>
@@ -464,6 +482,7 @@ The goal of the Env…</summary>
     <category term="Education and workforce"/>
     <category term="Health equity"/>
     <category term="Materials science"/>
+    <category term="Artificial intelligence and machine learning"/>
     <summary>U.S. National Science Foundation — Posted — Crosscutting Activities in Materials Research (XC) coordinates and supports crosscutting activities within the Division of Materials Research (DMR) and more broadly across NSF.
 The emphasis within XC is diversity and inclusion, international cooperation, and education (including experiential learning at REU/RET Sites). Additionally, activities that broadly engage the community, such as summer scho…</summary>
   </entry>

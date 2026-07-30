@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml</id>
-  <updated>2026-07-29T12:22:47Z</updated>
+  <updated>2026-07-30T12:06:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Chemical Process Systems (CPS)</title>
@@ -163,6 +163,23 @@ The goal of the Combustion and Fire Systems program is to create new knowledge t
 The goal of the Electrochemical Systems program is to support fundamental engineering science research that will enable innovative processes…</summary>
   </entry>
   <entry>
+    <title>Environmental Sustainability</title>
+    <link href="https://www.grants.gov/search-results-detail/347328"/>
+    <id>urn:funding-finder:grants-gov:347328</id>
+    <updated>2023-04-05T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Carbon management"/>
+    <category term="Climate change"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>U.S. National Science Foundation — Posted — The Environmental Sustainability program is part of the Environmental Engineering and Sustainability cluster together with 1) the Environmental Engineering program and 2) the Nanoscale Interactions program.
+The goal of the Environmental Sustainability program is to promote sustainable engineered systems that support human well-being and that are also compatible with sustaining natural (environment…</summary>
+  </entry>
+  <entry>
     <title>Interfacial Engineering</title>
     <link href="https://www.grants.gov/search-results-detail/347326"/>
     <id>urn:funding-finder:grants-gov:347326</id>
@@ -175,9 +192,39 @@ The goal of the Electrochemical Systems program is to support fundamental engine
     <category term="Environmental science"/>
     <category term="Materials science"/>
     <category term="Separations and membranes"/>
-    <category term="Manufacturing"/>
+    <category term="Artificial intelligence and machine learning"/>
     <summary>U.S. National Science Foundation — Posted — The Interfacial Engineering program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Electrochemical Systems program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
 The goal of the Interfacial Engineering program is to support fundamental research on atomic- and molecular-scale interfacial phenomena and …</summary>
+  </entry>
+  <entry>
+    <title>Fluid Dynamics</title>
+    <link href="https://www.grants.gov/search-results-detail/347020"/>
+    <id>urn:funding-finder:grants-gov:347020</id>
+    <updated>2023-03-21T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation — Posted — The Fluid Dynamics program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Particulate and Multiphase Processes program; and 3) the Thermal Transport Processes program.
+The Fluid Dynamics program supports fundamental research toward gaining an understanding of the physics of various fluid dynamics phenomena. Proposed research shoul…</summary>
+  </entry>
+  <entry>
+    <title>Division of Chemistry: Disciplinary Research Programs: No Deadline Pilot</title>
+    <link href="https://www.grants.gov/search-results-detail/341244"/>
+    <id>urn:funding-finder:grants-gov:341244</id>
+    <updated>2022-06-18T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation — Posted — With this solicitation, the Division of Chemistry is piloting the removal of deadlines for the submission of proposals to the CLP, CSD and CTMC Programs. The no-deadline pilot seeks to assess the benefits and challenges of removing deadlines in proposal submission for the chemistry research community: the removal of deadlines on proposal submission is intended to allow principal investigators (PIs…</summary>
   </entry>
   <entry>
     <title>Research Interests of the United States Air Force Academy (formerly USAFA-BAA-2021)</title>
@@ -194,5 +241,23 @@ The goal of the Interfacial Engineering program is to support fundamental resear
     <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
     <summary>Air Force Academy — Posted — The USAFA invests in an active research program for three main reasons. First and foremost, research significantly enhances the cadet learning experience. Our research is done by, for and with cadets who work alongside fellow cadets and faculty mentors. Research provides cadets with rich independent learning opportunities as they tackle ill-defined problems and are challenged to apply their knowle…</summary>
+  </entry>
+  <entry>
+    <title>Environmental Engineering</title>
+    <link href="https://www.grants.gov/search-results-detail/320490"/>
+    <id>urn:funding-finder:grants-gov:320490</id>
+    <updated>2019-09-11T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Water"/>
+    <category term="Catalysis and reaction engineering"/>
+    <summary>U.S. National Science Foundation — Posted — The Environmental Engineering program is part of the Environmental Engineering and Sustainability cluster, which also includes 1) the Nanoscale Interactions program; and 2) the Environmental Sustainability program.
+Environmental engineering is an interdisciplinary field that applies chemical, biological, and physical scientific principles to protect human and ecological health.
+The goal of the Env…</summary>
   </entry>
 </feed>

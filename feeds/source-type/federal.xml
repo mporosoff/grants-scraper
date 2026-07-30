@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml</id>
-  <updated>2026-07-29T12:22:47Z</updated>
+  <updated>2026-07-30T12:06:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -441,6 +441,19 @@
     <summary>National Institutes of Health — Closes 2027-06-04 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing to develop innovative technologies for cancer research or clinical care. The emphasis of this NOFO is on early-stage projects proposing proof-of-concept/pilot studies to test the technical feasibility of the proposed method, tool, assay, platform, or instrument. Well-suited …</summary>
   </entry>
   <entry>
+    <title>Demonstration Projects for Whole-Person Health Models for Women Living with HIV in the South</title>
+    <link href="https://www.grants.gov/search-results-detail/363389"/>
+    <id>urn:funding-finder:grants-gov:363389</id>
+    <updated>2027-01-14T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCHHSTP</name></author>
+    <category term="Arts and culture"/>
+    <category term="Cancer"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-03-15 — The purpose of this demonstration project is to support coordinated Clinic and Community Collaboratives (CCCs) to integrate HIV care with broader women's health services in jurisdictions with disproportionately high HIV disease burden to improve HIV-related outcomes, overall health, and quality of life among WWH. Organizations will be funded to implement 4 strategies: (1) Integrate HIV care with b…</summary>
+  </entry>
+  <entry>
     <title>Ryan White HIV/AIDS Program Part B States/Territories Supplemental Grant Program</title>
     <link href="https://www.grants.gov/search-results-detail/363163"/>
     <id>urn:funding-finder:grants-gov:363163</id>
@@ -502,13 +515,13 @@
     <summary>Centers for Disease Control - NCEZID — Closes 2027-03-27 — The CDC announces the availability of FY 2027 funds for a cooperative agreement to continue enhanced national surveillance for human prion diseases, also known as transmissible spongiform encephalopathies (TSEs), in the United States. The purpose is to continue an active surveillance program to help confirm suspected and clinically diagnosed cases of human prion disease and to monitor the occurren…</summary>
   </entry>
   <entry>
-    <title>The National Network of STI Clinical Prevention Training Centers (NNPTC)</title>
+    <title>The National Network of STI Prevention Training Centers (NNPTC)</title>
     <link href="https://www.grants.gov/search-results-detail/363356"/>
     <id>urn:funding-finder:grants-gov:363356</id>
     <updated>2026-12-20T00:00:00Z</updated>
     <author><name>Centers for Disease Control - NCHHSTP</name></author>
     <category term="Education and workforce"/>
-    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-02-20 — This NOFO will support the development and dissemination of education, training and technical assistance—emphasizing prevention strategies—for clinicians and disease intervention professionals to improve sexually transmitted infection (STI) patient care. The NOFO aims to improve the capacity of providers, clinical sites, and healthcare systems to diagnose, manage, treat and counsel individuals wit…</summary>
+    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-02-20 — This NOFO will support the development and dissemination of education, training and technical assistance—emphasizing prevention strategies—for clinicians and disease intervention specialists to improve sexually transmitted infection (STI) patient care. The NOFO aims to improve the capacity of providers, clinical sites, and healthcare systems to diagnose, manage, treat and counsel individuals with …</summary>
   </entry>
   <entry>
     <title>NIOSH Small Research Grant Program (R03)</title>
@@ -534,7 +547,7 @@
     <updated>2026-12-16T00:00:00Z</updated>
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Environmental science"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-16 — The R21 grant program is designed to advance our understanding of occupational diseases and injuries by focusing on the following three objectives: Identify the risks and conditions linked to workplace health issues.Develop strategies to reduce risks and limit exposure to hazardous environments. Translate significant scientific discoveries into prevention measures and products that can effectively…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-16 — The R21 grant program is designed to advance our understanding of occupational diseases and injuries by focusing on the following three objectives:Identify the risks and conditions linked to workplace health issues.Develop strategies to reduce risks and limit exposure to hazardous environments.Translate significant scientific discoveries into prevention measures and products that can effectively r…</summary>
   </entry>
   <entry>
     <title>NIOSH Centers for Agriculture, Forestry, and Fishing Safety and Health (U54)</title>
@@ -582,14 +595,5 @@
     <updated>2026-12-01T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <summary>National Institutes of Health — Closes 2027-01-30 — This Notice of Funding Opportunity (NOFO) requests applications for Center Coordinating Hubs within the mission of NIDDK/Kidney, Urology, and Hematology (KUH) Diseases. Each Center Coordinating Hub will work collaboratively with a national network of funded Centers to develop and share unique research resources (e.g., data, reagents, models, tools, services, expertise) with the broader community.</summary>
-  </entry>
-  <entry>
-    <title>Opportunities for Collaborative Research with the NIH Intramural Research Program (U01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/363204"/>
-    <id>urn:funding-finder:grants-gov:363204</id>
-    <updated>2026-12-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health — Closes 2027-02-05 — The goal of this program is to support collaborative translational research projects aligned with NIH efforts to enhance the translation of basic biological discoveries into clinical applications that improve health. It encourages high quality science demonstrating the potential to result in understanding an important disease process or lead to new therapeutic interventions, diagnostics, or preven…</summary>
   </entry>
 </feed>

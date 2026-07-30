@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-07-29T12:22:47Z</updated>
+  <updated>2026-07-30T12:06:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -182,6 +182,31 @@
     <category term="Neuroscience"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health — Closes 2026-09-30 — The National Institute of Neurological Disorders and Stroke, National Institute of Aging, the NIH Helping to End Addiction Long Term (HEAL) initiative, and other participating ICs seek to support applications to conduct pharmacodynamic, pharmacokinetic, and efficacy studies to demonstrate that the proposed therapeutic agent(s) have sufficient biological activity to warrant further development as t…</summary>
+  </entry>
+  <entry>
+    <title>FY26 Bus Safety, Accessibility, and Innovation Notice of Funding Opportunity</title>
+    <link href="https://www.grants.gov/search-results-detail/363372"/>
+    <id>urn:funding-finder:grants-gov:363372</id>
+    <updated>2026-07-29T00:00:00Z</updated>
+    <author><name>DOT - Federal Transit Administration</name></author>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>DOT - Federal Transit Administration — Closes 2026-09-28 — The Federal Transit Administration (FTA) announces the opportunity to apply for competitive awards totaling up to $10 million in Public Transportation Innovation Program (49 U.S.C. 5312) funds for the Fiscal Year (FY) 2026 Bus Safety, Accessibility, and Innovation Research Program under Assistance Listing Number 20.530. As required by Federal public transportation law, funds will be awarded compet…</summary>
+  </entry>
+  <entry>
+    <title>Desalination and Water Purification Research Program: Research Projects</title>
+    <link href="https://www.grants.gov/search-results-detail/363375"/>
+    <id>urn:funding-finder:grants-gov:363375</id>
+    <updated>2026-07-29T00:00:00Z</updated>
+    <author><name>Bureau of Reclamation</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Separations and membranes"/>
+    <category term="Technology development"/>
+    <category term="Water"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Bureau of Reclamation — Closes 2026-09-29 — The Bureau of Reclamation"s Desalination and Water Purification Research (DWPR) Program aims to increase water supplies by reducing the costs, energy requirements, and other barriers to adoption of treating impaired water for beneficial uses.This NOFO invites proposals from eligible applicants to conduct innovative laboratory and pilot-scale water treatment research. Strong applications will demon…</summary>
   </entry>
   <entry>
     <title>Building Skills, Strengthening Communities, and Advancing Innovation in Northwest Mexico</title>
@@ -694,30 +719,5 @@
     <category term="Arts and culture"/>
     <category term="Technology development"/>
     <summary>Administration for Children and Families - ORR — Closes 2026-08-15 — The Office of Refugee Resettlement (ORR) within the Administration for Children and Families (ACF), invites eligible applicants to submit applications to administer the Placement and Coordination (PC) program. ORR will provide funding to diversify providers of PC services through awards to eligible organizations not currently implementing the Program of Initial Resettlement (PIR). New providers wi…</summary>
-  </entry>
-  <entry>
-    <title>Tribal Transportation Safety Strategy Pilot Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362956"/>
-    <id>urn:funding-finder:grants-gov:362956</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>69A355 Research and Technology</name></author>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>69A355 Research and Technology — Closes 2026-08-28 — he U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Tribal Transportation Safety Strategy Pilot Program. This three-year cooperative agreement is designed to address the critical public safety crisis in Tribal communities, as American Indian and Alaska Native populations experience…</summary>
-  </entry>
-  <entry>
-    <title>Model-to-Clinic (M2C) for Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) (UG3/UH3, Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359666"/>
-    <id>urn:funding-finder:grants-gov:359666</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2026-10-19 — The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
   </entry>
 </feed>

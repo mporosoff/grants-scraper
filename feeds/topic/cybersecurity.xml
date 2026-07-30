@@ -4,8 +4,17 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-07-29T12:22:47Z</updated>
+  <updated>2026-07-30T12:06:29Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Global Cybercrime and Cryptocurrency Assessment and Intelligence Gathering</title>
+    <link href="https://www.grants.gov/search-results-detail/363380"/>
+    <id>urn:funding-finder:grants-gov:363380</id>
+    <updated>2026-07-29T00:00:00Z</updated>
+    <author><name>Bureau of International Narcotics-Law Enforcement</name></author>
+    <category term="Cybersecurity"/>
+    <summary>Bureau of International Narcotics-Law Enforcement — Closes 2026-08-31 — Overview: The Bureau of International Narcotics and Law Enforcement Affairs of the U.S. Department of State announces an open competition for organizations to submit applications addressing cybercrime and cyber-enabled crimes. Projects should focus on combating cyber intrusions, online fraud, online-facilitated drug trafficking, digital piracy, and the criminal misuse of cryptocurrency and virtual…</summary>
+  </entry>
   <entry>
     <title>Independent Internal Audit Services</title>
     <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001AbghyAAB"/>
@@ -573,6 +582,19 @@
     <summary>U.S. National Science Foundation — Closes 2026-09-01 — The Pathways to Enable Secure Open-Source Ecosystems (PESOSE) program supports the translation of open-source science and engineering-focused research products into safe and sustainable ecosystems that address national and societal challenges. Open-source tools such as software, hardware, machine learning models, languages, and data platforms are designed to be shared as they are publicly-accessib…</summary>
   </entry>
   <entry>
+    <title>CyberAICorps Scholarship for Service</title>
+    <link href="https://www.grants.gov/search-results-detail/361238"/>
+    <id>urn:funding-finder:grants-gov:361238</id>
+    <updated>2026-02-04T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation — Closes 2027-07-20 — Government and the nation face a talent shortfall in artificial intelligence (AI) and cybersecurity. The CyberAICorps Scholarship for Service (CyberAI SFS) program welcomes proposals that address AI and cybersecurity education and workforce development. CyberAI refers to using AI in cybersecurity as well as providing security and resilience for AI systems. The Scholarship Track provides funding to…</summary>
+  </entry>
+  <entry>
     <title>CHIPS Research and Development Office (CRDO) Broad Agency Announcement (BAA)</title>
     <link href="https://www.grants.gov/search-results-detail/360651"/>
     <id>urn:funding-finder:grants-gov:360651</id>
@@ -616,7 +638,7 @@
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <category term="Energy"/>
-    <summary>U.S. National Science Foundation — Closes 2026-08-07 — The Centers of Research Excellence in Science and Technology (CREST) program provides support to enhance the research capabilities of minority-serving institutions (MSIs) as defined in this solicitation’s Eligibility section, through effective integration of education and research. The CREST program, composed of the CREST Centers, the CREST Postdoctoral Research Program, and the projects supported…</summary>
+    <summary>U.S. National Science Foundation — Posted — The Centers of Research Excellence in Science and Technology (CREST) program provides support to enhance the research capabilities of minority-serving institutions (MSIs) as defined in this solicitation’s Eligibility section, through effective integration of education and research. The CREST program, composed of the CREST Centers, the CREST Postdoctoral Research Program, and the projects supported…</summary>
   </entry>
   <entry>
     <title>Department of War Cyber Service Academy (DoW CSA)</title>
@@ -696,37 +718,5 @@
     <category term="Neuroscience"/>
     <category term="Transportation"/>
     <summary>U.S. National Science Foundation — Posted — The Energy, Power, Control, and Networks (EPCN) Program supports innovative research in modeling, optimization, learning, adaptation, and control of networked multi-agent systems, higher-level decision making, and dynamic resource allocation, as well as risk management in the presence of uncertainty, sub-system failures, and stochastic disturbances. EPCN also invests in novel machine learning algo…</summary>
-  </entry>
-  <entry>
-    <title>Tribal Colleges and Universities Program</title>
-    <link href="https://www.grants.gov/search-results-detail/334326"/>
-    <id>urn:funding-finder:grants-gov:334326</id>
-    <updated>2021-06-24T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Community development"/>
-    <category term="Cybersecurity"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Quantum science"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>U.S. National Science Foundation — Closes 2026-09-01 — The Tribal Colleges and Universities Program (TCUP) provides awards to federally recognized1 Tribal Colleges and Universities, Alaska Native-serving institutions, and Native Hawaiian-serving institutions to promote high quality science (including sociology, psychology, anthropology, linguistics, economics and bioeconomics, statistics, and other social and behavioral sciences; natural sciences; com…</summary>
-  </entry>
-  <entry>
-    <title>Research Interests of the United States Air Force Academy (formerly USAFA-BAA-2021)</title>
-    <link href="https://www.grants.gov/search-results-detail/330175"/>
-    <id>urn:funding-finder:grants-gov:330175</id>
-    <updated>2020-12-02T00:00:00Z</updated>
-    <author><name>Air Force Academy</name></author>
-    <category term="Arts and culture"/>
-    <category term="Cybersecurity"/>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Data science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <summary>Air Force Academy — Posted — The USAFA invests in an active research program for three main reasons. First and foremost, research significantly enhances the cadet learning experience. Our research is done by, for and with cadets who work alongside fellow cadets and faculty mentors. Research provides cadets with rich independent learning opportunities as they tackle ill-defined problems and are challenged to apply their knowle…</summary>
   </entry>
 </feed>

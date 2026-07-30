@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-07-29T12:22:47Z</updated>
+  <updated>2026-07-30T12:06:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -441,6 +441,19 @@
     <summary>National Institutes of Health — Closes 2027-06-04 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing to develop innovative technologies for cancer research or clinical care. The emphasis of this NOFO is on early-stage projects proposing proof-of-concept/pilot studies to test the technical feasibility of the proposed method, tool, assay, platform, or instrument. Well-suited …</summary>
   </entry>
   <entry>
+    <title>Demonstration Projects for Whole-Person Health Models for Women Living with HIV in the South</title>
+    <link href="https://www.grants.gov/search-results-detail/363389"/>
+    <id>urn:funding-finder:grants-gov:363389</id>
+    <updated>2027-01-14T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCHHSTP</name></author>
+    <category term="Arts and culture"/>
+    <category term="Cancer"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-03-15 — The purpose of this demonstration project is to support coordinated Clinic and Community Collaboratives (CCCs) to integrate HIV care with broader women's health services in jurisdictions with disproportionately high HIV disease burden to improve HIV-related outcomes, overall health, and quality of life among WWH. Organizations will be funded to implement 4 strategies: (1) Integrate HIV care with b…</summary>
+  </entry>
+  <entry>
     <title>Ryan White HIV/AIDS Program Part B States/Territories Supplemental Grant Program</title>
     <link href="https://www.grants.gov/search-results-detail/363163"/>
     <id>urn:funding-finder:grants-gov:363163</id>
@@ -502,13 +515,13 @@
     <summary>Centers for Disease Control - NCEZID — Closes 2027-03-27 — The CDC announces the availability of FY 2027 funds for a cooperative agreement to continue enhanced national surveillance for human prion diseases, also known as transmissible spongiform encephalopathies (TSEs), in the United States. The purpose is to continue an active surveillance program to help confirm suspected and clinically diagnosed cases of human prion disease and to monitor the occurren…</summary>
   </entry>
   <entry>
-    <title>The National Network of STI Clinical Prevention Training Centers (NNPTC)</title>
+    <title>The National Network of STI Prevention Training Centers (NNPTC)</title>
     <link href="https://www.grants.gov/search-results-detail/363356"/>
     <id>urn:funding-finder:grants-gov:363356</id>
     <updated>2026-12-20T00:00:00Z</updated>
     <author><name>Centers for Disease Control - NCHHSTP</name></author>
     <category term="Education and workforce"/>
-    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-02-20 — This NOFO will support the development and dissemination of education, training and technical assistance—emphasizing prevention strategies—for clinicians and disease intervention professionals to improve sexually transmitted infection (STI) patient care. The NOFO aims to improve the capacity of providers, clinical sites, and healthcare systems to diagnose, manage, treat and counsel individuals wit…</summary>
+    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-02-20 — This NOFO will support the development and dissemination of education, training and technical assistance—emphasizing prevention strategies—for clinicians and disease intervention specialists to improve sexually transmitted infection (STI) patient care. The NOFO aims to improve the capacity of providers, clinical sites, and healthcare systems to diagnose, manage, treat and counsel individuals with …</summary>
   </entry>
   <entry>
     <title>NIOSH Small Research Grant Program (R03)</title>
@@ -534,7 +547,7 @@
     <updated>2026-12-16T00:00:00Z</updated>
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Environmental science"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-16 — The R21 grant program is designed to advance our understanding of occupational diseases and injuries by focusing on the following three objectives: Identify the risks and conditions linked to workplace health issues.Develop strategies to reduce risks and limit exposure to hazardous environments. Translate significant scientific discoveries into prevention measures and products that can effectively…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-16 — The R21 grant program is designed to advance our understanding of occupational diseases and injuries by focusing on the following three objectives:Identify the risks and conditions linked to workplace health issues.Develop strategies to reduce risks and limit exposure to hazardous environments.Translate significant scientific discoveries into prevention measures and products that can effectively r…</summary>
   </entry>
   <entry>
     <title>NIOSH Centers for Agriculture, Forestry, and Fishing Safety and Health (U54)</title>
@@ -981,14 +994,5 @@
     <category term="Neuroscience"/>
     <category term="Transportation"/>
     <summary>National Institutes of Health — Closes 2026-11-10 — The National Institute of Neurological Disorders and Stroke (NINDS), in conjunction with additional Institutes/Centers (ICs)at the National Institutes of Health seek to support projects proposing Clinical Trials and Ancillary Studies that are conducted within NIH-Funded Clinical Trial Research Networks.The program will encourage applications for multi-center clinical trials to be conducted within …</summary>
-  </entry>
-  <entry>
-    <title>Integrated Viral Hepatitis Surveillance, Testing, Treatment, and Prevention Programs for Health Departments (IVH-STTP)</title>
-    <link href="https://www.grants.gov/search-results-detail/362731"/>
-    <id>urn:funding-finder:grants-gov:362731</id>
-    <updated>2026-10-09T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCHHSTP</name></author>
-    <category term="Infectious disease"/>
-    <summary>Centers for Disease Control - NCHHSTP — Closes 2026-12-09 — This NOFO supports integrated viral hepatitis surveillance and prevention programs in states, territories, and large cities in the United States. Key strategies include viral hepatitis outbreak response and surveillance for hepatitis A, acute and chronic hepatitis B, and acute, chronic, and perinatal hepatitis C. Surveillance activities include developing and utilizing disease registries, conducti…</summary>
   </entry>
 </feed>

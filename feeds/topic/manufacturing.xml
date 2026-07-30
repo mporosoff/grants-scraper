@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-07-29T12:22:47Z</updated>
+  <updated>2026-07-30T12:06:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development</title>
@@ -53,6 +53,26 @@
     <author><name>Bureau of International Labor Affairs</name></author>
     <category term="Manufacturing"/>
     <summary>Bureau of International Labor Affairs — Closes 2026-09-04 — The Bureau of International Labor Affairs (ILAB), U.S. Department of Labor (USDOL, or the Department), announces the availability of approximately $6 million total costs (subject to the availability of Federal funds) for one cooperative agreement to fund a project that will strengthen traceability and responsible sourcing in cotton supply chains in South Asia. These efforts will enhance the reputa…</summary>
+  </entry>
+  <entry>
+    <title>Advancing Labor Rights in the Garment Industry</title>
+    <link href="https://www.grants.gov/search-results-detail/363387"/>
+    <id>urn:funding-finder:grants-gov:363387</id>
+    <updated>2026-07-29T00:00:00Z</updated>
+    <author><name>Bureau of Democracy Human Rights and Labor</name></author>
+    <category term="Arts and culture"/>
+    <category term="Manufacturing"/>
+    <summary>Bureau of Democracy Human Rights and Labor — Closes 2026-08-27 — The program will strengthen labor rights protections consistent with labor rights commitments and support labor rights reforms in strategic partner countries with existing Agreements on Reciprocal Trade (ARTs). This program will support garment workers to help them better understand and exercise their labor rights, freely associate, and access timely, non-retaliatory remedies for workplace abuses …</summary>
+  </entry>
+  <entry>
+    <title>DRL Transshipment Supply Chain Tracing</title>
+    <link href="https://www.grants.gov/search-results-detail/363382"/>
+    <id>urn:funding-finder:grants-gov:363382</id>
+    <updated>2026-07-29T00:00:00Z</updated>
+    <author><name>Bureau of Democracy Human Rights and Labor</name></author>
+    <category term="Arts and culture"/>
+    <category term="Manufacturing"/>
+    <summary>Bureau of Democracy Human Rights and Labor — Closes 2026-08-27 — DRL solicits proposals of up to $1,973,359 that aim to strengthen the ability of the United States and partner countries with ARTs to detect and disrupt transshipment practices that evade U.S. laws that prohibit the importation of goods made with forced labor and/or other country’s forced labor import prohibitions.</summary>
   </entry>
   <entry>
     <title>FY26 Bureau of Land Management Plant Conservation and Restoration Management - Bureau wide</title>
@@ -701,7 +721,7 @@
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <category term="Energy"/>
-    <summary>U.S. National Science Foundation — Closes 2026-08-07 — The Centers of Research Excellence in Science and Technology (CREST) program provides support to enhance the research capabilities of minority-serving institutions (MSIs) as defined in this solicitation’s Eligibility section, through effective integration of education and research. The CREST program, composed of the CREST Centers, the CREST Postdoctoral Research Program, and the projects supported…</summary>
+    <summary>U.S. National Science Foundation — Posted — The Centers of Research Excellence in Science and Technology (CREST) program provides support to enhance the research capabilities of minority-serving institutions (MSIs) as defined in this solicitation’s Eligibility section, through effective integration of education and research. The CREST program, composed of the CREST Centers, the CREST Postdoctoral Research Program, and the projects supported…</summary>
   </entry>
   <entry>
     <title>Measurement Science and Engineering (MSE) Research Grant Programs</title>
@@ -744,29 +764,5 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health — Closes 2027-11-05 — The goal of this Notice of Funding Opportunity (NOFO) is to provide funding support for the pre-clinical and early stage clinical (Phase I) development of novel small-molecule and biologic drug candidates that prevent Alzheimer's disease (AD), slow its progression, or treat its cognitive and behavioral symptoms. Participants in this program will receive funding for therapy development activities s…</summary>
-  </entry>
-  <entry>
-    <title>BRAIN Initiative: Clinical Studies to Advance Next-Generation Devices for Recording and Modulation in the Human Central Nervous System (UH3 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/356982"/>
-    <id>urn:funding-finder:grants-gov:356982</id>
-    <updated>2024-11-05T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Manufacturing"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health — Closes 2026-09-28 — The purpose of this announcement is to encourage investigators to pursue a small clinical trial to obtain critical information necessary to advance recording and/or stimulating devices to treat central nervous system disorders and better understand the human brain (e.g., Early Feasibility Study). Clinical studies supported may consist of acute or short-term procedures that are deemed Non-Significa…</summary>
-  </entry>
-  <entry>
-    <title>SEEDING CRITICAL ADVANCES FOR LEADING ENERGY TECHNOLOGIES WITH UNTAPPED POTENTIAL (SCALEUP) READY</title>
-    <link href="https://www.grants.gov/search-results-detail/356623"/>
-    <id>urn:funding-finder:grants-gov:356623</id>
-    <updated>2024-10-02T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency Energy</name></author>
-    <category term="Carbon management"/>
-    <category term="Climate change"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <summary>Advanced Research Projects Agency Energy — Closes 2029-09-29 — The purpose of this modification is to clarify the meaning of the Program Policy Factors in Section V.C. To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to the ARPA-E website at https://arpa-e-foa.energy.gov. To apply to this NOFO, Applicants must register with and submit application materials through ARPA-E eXCHANGE (https://arpa-e-foa.energy.gov/Registration.aspx). For det…</summary>
   </entry>
 </feed>

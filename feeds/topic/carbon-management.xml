@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/carbon-management.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/carbon-management.xml</id>
-  <updated>2026-07-29T12:22:47Z</updated>
+  <updated>2026-07-30T12:06:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>DE-FOA-0003646 Notice of Intent to Issue DE-FOA-0003647 Accelerating Scale-up and Pre-piloting of Emerging Chemical Technologies (ASPECT)</title>
@@ -144,7 +144,7 @@ The goal of the Environmental Sustainability program is to promote sustainable e
     <category term="Environmental science"/>
     <category term="Materials science"/>
     <category term="Separations and membranes"/>
-    <category term="Manufacturing"/>
+    <category term="Artificial intelligence and machine learning"/>
     <summary>U.S. National Science Foundation — Posted — The Interfacial Engineering program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Electrochemical Systems program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
 The goal of the Interfacial Engineering program is to support fundamental research on atomic- and molecular-scale interfacial phenomena and …</summary>
   </entry>
@@ -173,6 +173,8 @@ The goal of the Particulate and Multiphase Processes program is to support funda
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Arts and culture"/>
     <category term="Environmental science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <category term="Energy"/>
     <category term="Manufacturing"/>
     <category term="Carbon management"/>
@@ -192,7 +194,7 @@ The goal of the Particulate and Multiphase Processes program is to support funda
     <category term="Materials science"/>
     <category term="Separations and membranes"/>
     <category term="Water"/>
-    <category term="Energy"/>
+    <category term="Catalysis and reaction engineering"/>
     <summary>U.S. National Science Foundation — Posted — The Environmental Engineering program is part of the Environmental Engineering and Sustainability cluster, which also includes 1) the Nanoscale Interactions program; and 2) the Environmental Sustainability program.
 Environmental engineering is an interdisciplinary field that applies chemical, biological, and physical scientific principles to protect human and ecological health.
 The goal of the Env…</summary>

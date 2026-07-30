@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml</id>
-  <updated>2026-07-29T12:22:47Z</updated>
+  <updated>2026-07-30T12:06:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -290,35 +290,6 @@
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health — Closes 2026-10-13 — The Brain Research Through Advancing Innovative Neurotechnologies® (BRAIN) Initiative, a collaboration of Federal and non-Federal partners led by NIH, seeks to accelerate development and dissemination of new neurotechnologies, transdisciplinary approaches, and scientific databases to study brain function with unprecedented resolution and scope. The BRAIN Initiative’s Brain Behavior Quantification …</summary>
-  </entry>
-  <entry>
-    <title>Disability and Rehabilitation Research Projects (DRRP) Program: Model Systems Knowledge Translation Center</title>
-    <link href="https://www.grants.gov/search-results-detail/360496"/>
-    <id>urn:funding-finder:grants-gov:360496</id>
-    <updated>2026-06-22T00:00:00Z</updated>
-    <author><name>Administration for Community Living</name></author>
-    <category term="Education and workforce"/>
-    <category term="Neuroscience"/>
-    <summary>Administration for Community Living — Closes 2026-07-29 — The purpose of NIDILRR's Disability and Rehabilitation Research Project (DRRP) grants is to improve the effectiveness of services authorized under the Rehabilitation Act by generating knowledge or developing methods, procedures, and rehabilitation technologies that advance a wide range of independent living and employment outcomes for individuals with disabilities, especially those with the greate…</summary>
-  </entry>
-  <entry>
-    <title>Spinal Cord Injury Model Systems Centers</title>
-    <link href="https://www.grants.gov/search-results-detail/360520"/>
-    <id>urn:funding-finder:grants-gov:360520</id>
-    <updated>2026-06-22T00:00:00Z</updated>
-    <author><name>Administration for Community Living</name></author>
-    <category term="Neuroscience"/>
-    <summary>Administration for Community Living — Closes 2026-07-29 — The SCIMS program is designed to provide research-based knowledge to support a multidisciplinary system of rehabilitation care for people with spinal cord injury (SCI). For purposes of this program, SCI is defined as a clinically discernible degree of neurologic impairment of the spinal cord. SCIMS Centers must conduct site-specific and collaborative research. SCIMS Centers must also collect and c…</summary>
-  </entry>
-  <entry>
-    <title>Traumatic Brain Injury Model Systems National Data and Statistical Center</title>
-    <link href="https://www.grants.gov/search-results-detail/360498"/>
-    <id>urn:funding-finder:grants-gov:360498</id>
-    <updated>2026-06-22T00:00:00Z</updated>
-    <author><name>Administration for Community Living</name></author>
-    <category term="Education and workforce"/>
-    <category term="Neuroscience"/>
-    <summary>Administration for Community Living — Closes 2026-07-29 — The purpose of NIDILRR's Disability and Rehabilitation Research Project (DRRP) grants is to improve the effectiveness of services authorized under the Rehabilitation Act by generating knowledge or developing methods, procedures, and rehabilitation technologies that advance a wide range of independent living and employment outcomes for individuals with disabilities, especially those with the greate…</summary>
   </entry>
   <entry>
     <title>Advancing Behavioral Health in Corrections: Training and Policy Innovation Initiative</title>
@@ -660,5 +631,36 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Neuroscience"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health — Closes 2027-05-07 — The purpose of this funding opportunity is to encourage multidisciplinary investigators to develop new approaches or apply existing approaches in novel ways to measure brain activity, connectivity, genomics, or other aspects across the age spectrum of neurodevelopment. The overarching goal is to extend our understanding of brain development and aging, including studies of the neurodevelopmental or…</summary>
+  </entry>
+  <entry>
+    <title>New Approaches for Measuring Brain Changes Across Longer Timespans (R21 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357377"/>
+    <id>urn:funding-finder:grants-gov:357377</id>
+    <updated>2024-11-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Neuroscience"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health — Closes 2027-05-07 — The purpose of this funding opportunity is to encourage multidisciplinary investigators to submit applications developing exploratory, highly novel new approaches, or innovative applications of existing approaches to measure brain activity, connectivity, genomics, or other aspects across the age spectrum of neurodevelopment. The overarching goal is to extend our understanding of brain development …</summary>
+  </entry>
+  <entry>
+    <title>Seamless Early-Stage Clinical Drug Development (Phase 1 to 2a) for Novel therapeutic Agents for the Spectrum of Alzheimer's Disease (AD) and AD-related Dementias (ADRD) (UG3/UH3 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/357343"/>
+    <id>urn:funding-finder:grants-gov:357343</id>
+    <updated>2024-11-22T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health — Closes 2026-11-19 — The purpose of this Notice of Funding Opportunity (NOFO) is to invite applications that bundle independent protocols for phase 1 clinical trials with phase 1b/phase 2a clinical trials to streamline the early-stage evaluation of promising pharmacological interventions for Alzheimer's disease (AD) and Alzheimer's disease-related Dementias (ADRD). Candidate interventions evaluated through this progra…</summary>
+  </entry>
+  <entry>
+    <title>Utilizing Invasive Recording and Stimulating Opportunities in Humans to Advance Neural Circuitry Understanding of Mental Health Disorders (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357346"/>
+    <id>urn:funding-finder:grants-gov:357346</id>
+    <updated>2024-11-22T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health — Closes 2028-01-07 — The purpose of this Notice of Funding Opportunity (NOFO) is to encourage applications to pursue invasive neural recording studies focused on mental health-relevant questions. Invasive neural recordings provide an unparalleled window into the human brain to explore the neural circuitry and neural dynamics underlying complex moods, emotions, cognitive functions, and behaviors with high spatial and t…</summary>
   </entry>
 </feed>

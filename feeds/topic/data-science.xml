@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-07-29T12:22:47Z</updated>
+  <updated>2026-07-30T12:06:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -168,6 +168,43 @@
     <category term="Data science"/>
     <category term="Environmental science"/>
     <summary>National Institutes of Health — Closes 2026-11-01 — The National Institute of Diabetes and Digestive Diseases and Nutrition (NIDDK) seeks to advance its mission by continuing the NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC). The IBDGC has led collaborative efforts resulting in the identification of &gt;300 genetic risk loci for different IBD subtypes across patient populations and characterization of underlying biological mechanisms. D…</summary>
+  </entry>
+  <entry>
+    <title>Desalination and Water Purification Research Program: Research Projects</title>
+    <link href="https://www.grants.gov/search-results-detail/363375"/>
+    <id>urn:funding-finder:grants-gov:363375</id>
+    <updated>2026-07-29T00:00:00Z</updated>
+    <author><name>Bureau of Reclamation</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Separations and membranes"/>
+    <category term="Technology development"/>
+    <category term="Water"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Bureau of Reclamation — Closes 2026-09-29 — The Bureau of Reclamation"s Desalination and Water Purification Research (DWPR) Program aims to increase water supplies by reducing the costs, energy requirements, and other barriers to adoption of treating impaired water for beneficial uses.This NOFO invites proposals from eligible applicants to conduct innovative laboratory and pilot-scale water treatment research. Strong applications will demon…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year (FY) 2027 Department of War (DoW) Defense University Research Instrumentation Program (DURIP)</title>
+    <link href="https://www.grants.gov/search-results-detail/363379"/>
+    <id>urn:funding-finder:grants-gov:363379</id>
+    <updated>2026-07-29T00:00:00Z</updated>
+    <author><name>Dept of the Army -- Materiel Command</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Dept of the Army -- Materiel Command — Closes 2026-11-06 — Department of Army:The Department of War (DoW) announces the Fiscal Year 2027 Defense University Research Instrumentation Program (DURIP). DURIP is designed to improve the capabilities of accredited United States (U.S.) institutions of higher education to conduct research and to educate scientists and engineers in areas important to national defense, by providing funds for the acquisition of resea…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year (FY) 2027 Department of War (DoW) Defense University Research Instrumentation Program (DURIP)</title>
+    <link href="https://www.grants.gov/search-results-detail/363378"/>
+    <id>urn:funding-finder:grants-gov:363378</id>
+    <updated>2026-07-29T00:00:00Z</updated>
+    <author><name>Office of Naval Research</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Office of Naval Research — Closes 2026-11-06 — In accordance with EO 14332, Improving Oversight of Federal Grantmaking, dated 7 August 2025, and EO 14303, Restoring Gold Standard Science, dated 23 May 2025, this Announcement seeksproposals from universities to purchase equipment and instrumentation in support of research in areas of interest to the DoW, reflecting the basic research priorities for the Department of War and advancing the admini…</summary>
   </entry>
   <entry>
     <title>Building Skills, Strengthening Communities, and Advancing Innovation in Northwest Mexico</title>
@@ -484,19 +521,6 @@
     <summary>National Energy Technology Laboratory — Closes 2026-09-08 — Modification 000003: The purpose of this modification is to revise NOFO Part 1. Section I.A.1 is revised to correct the Topic Area 1b cost share to 20% and Section IV.C.2 is revised to delete the Environmental Considerations Summary and Environmental Impact Volume from the Summary of Application Requirements table. This Notice of Funding Opportunity (NOFO) will seek proposals for specific research…</summary>
   </entry>
   <entry>
-    <title>Voices for the Future</title>
-    <link href="https://www.grants.gov/search-results-detail/363043"/>
-    <id>urn:funding-finder:grants-gov:363043</id>
-    <updated>2026-07-02T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Indonesia — Closes 2026-07-31 — PROGRAM DESCRIPTION 1. Project Background, Goals, and Objectives Indonesia is the world’s third largest democracy and over half of its population is under the age 30. Because of this large youth demographic, the United States has an opportunity to engage the next generation of Indonesian leaders. For the last several years, however, Indonesian favorability towards the United States has failed to i…</summary>
-  </entry>
-  <entry>
     <title>Small Health Care Provider Quality Improvement Program</title>
     <link href="https://www.grants.gov/search-results-detail/362831"/>
     <id>urn:funding-finder:grants-gov:362831</id>
@@ -507,6 +531,19 @@
     <category term="Data science"/>
     <category term="Cybersecurity"/>
     <summary>Health Resources and Services Administration — Closes 2026-08-06 — The purpose of the Small Health Care Provider Quality Improvement Program is to strengthen the quality improvement culture in small rural healthcare facilities by building capacity to effectively collect and use clinical data while implementing evidence-based approaches to improve health care quality with a particular focus on improving chronic disease outcomes. Additionally, the program strengthe…</summary>
+  </entry>
+  <entry>
+    <title>Voices for the Future</title>
+    <link href="https://www.grants.gov/search-results-detail/363043"/>
+    <id>urn:funding-finder:grants-gov:363043</id>
+    <updated>2026-07-02T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Indonesia — Closes 2026-08-07 — PROGRAM DESCRIPTION 1. Project Background, Goals, and Objectives Indonesia is the world’s third largest democracy and over half of its population is under the age 30. Because of this large youth demographic, the United States has an opportunity to engage the next generation of Indonesian leaders. For the last several years, however, Indonesian favorability towards the United States has failed to i…</summary>
   </entry>
   <entry>
     <title>NIAMS P30 Centers Program (P30 - Clinical Trial Not Allowed)</title>
@@ -684,18 +721,6 @@
     <summary>Department of Housing and Urban Development — Closes 2026-08-03 — As President Trump said in his Executive Order on Removing Regulatory Barriers to Affordable Home Construction (March 13, 2026), The American dream of homeownership depends on a dynamic housing market in which a varied inventory of new homes is built and renovated each year. Layers of unnecessary regulatory barriers, slow permitting processes, and onerous mandates at all levels of government have …</summary>
   </entry>
   <entry>
-    <title>Native American Affairs: Fiscal Year 2025 Colorado River Basin Tribal Drought Resiliency Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362644"/>
-    <id>urn:funding-finder:grants-gov:362644</id>
-    <updated>2026-06-02T00:00:00Z</updated>
-    <author><name>Bureau of Reclamation</name></author>
-    <category term="Energy"/>
-    <category term="Water"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Bureau of Reclamation — Closes 2026-09-23 — The objectives of this NAA/TAP funding opportunity are to provide funding for drought relief actions/projects that mitigate drought impacts for designated federally recognized tribes within the Colorado River Basin (see Eligibility section for list of tribes), and which advance Presidential and Department of the Interior Priorities within the Basin.Proposals should meet one or more of the followin…</summary>
-  </entry>
-  <entry>
     <title>NLM Institutional Grants for Research Training in Biomedical Informatics, Data Science, and AI</title>
     <link href="https://www.grants.gov/search-results-detail/361318"/>
     <id>urn:funding-finder:grants-gov:361318</id>
@@ -708,39 +733,15 @@
     <summary>National Institutes of Health — Closes 2026-09-25 — The National Library of Medicine (NLM) invites applications for innovative predoctoral and postdoctoral training programs that prepare the next generation of researchers in biomedical informatics, data science, and artificial intelligence/machine learning (AI/ML). NLM emphasizes cutting-edge, forward-looking training experiences that equip trainees to address complex health and biomedical challeng…</summary>
   </entry>
   <entry>
-    <title>Optimizing Behavioral Sleep Interventions for Adolescents and Young Adults (R34 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/359159"/>
-    <id>urn:funding-finder:grants-gov:359159</id>
-    <updated>2026-05-28T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Data science"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health — Closes 2026-10-22 — NIMH seeks applications for pilot research to adapt, optimize, and test behavioral interventions that address common sleep problems in adolescents and young adults with or at risk for a mental health disorder. This notice of funding opportunity (NOFO) supports pilot clinical trials designed to evaluate the feasibility, tolerability, acceptability, safety, and potential effectiveness of the approac…</summary>
-  </entry>
-  <entry>
-    <title>DoW Prostate Cancer, Data Science Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362259"/>
-    <id>urn:funding-finder:grants-gov:362259</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <title>Native American Affairs: Fiscal Year 2025 Colorado River Basin Tribal Drought Resiliency Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362644"/>
+    <id>urn:funding-finder:grants-gov:362644</id>
+    <updated>2026-06-02T00:00:00Z</updated>
+    <author><name>Bureau of Reclamation</name></author>
+    <category term="Energy"/>
+    <category term="Water"/>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
     <category term="Data science"/>
-    <category term="Public health"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-02 — Summary: The fiscal year 2026 (FY26) Prostate Cancer Research Program (PCRP) Data Science Award (DSA) supports research that develops or uses quantitative and analytical approaches, processes and/or systems to obtain knowledge and insight from large and/or complex sets of prostate cancer data in one or more of the following research areas: Analysis of clinically annotated datasets; analysis of -om…</summary>
-  </entry>
-  <entry>
-    <title>DoW Traumatic Brain Injury and Psychological Health, Health Services Research Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362271"/>
-    <id>urn:funding-finder:grants-gov:362271</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Data science"/>
-    <category term="Neuroscience"/>
-    <category term="Public health"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-15 — Summary: The fiscal year 2026 (FY26) Traumatic Brain Injury and Psychological Health Research Program (TBIPHRP) Health Services Research Award (HSRA) intends to fund high-impact research that bridges the gap between research, practice and policy by building real-world evidence on how interventions, clinical practices/guidelines, or policies can be deployed to targeted populations at the appropriat…</summary>
+    <summary>Bureau of Reclamation — Closes 2026-09-28 — The objectives of this NAA/TAP funding opportunity are to provide funding for drought relief actions/projects that mitigate drought impacts for designated federally recognized tribes within the Colorado River Basin (see Eligibility section for list of tribes), and which advance Presidential and Department of the Interior Priorities within the Basin.Proposals should meet one or more of the followin…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml</id>
-  <updated>2026-07-29T12:22:47Z</updated>
+  <updated>2026-07-30T12:06:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Veterans Legacy Grants Program</title>
@@ -241,15 +241,6 @@
     <summary>Health Resources and Services Administration — Closes 2026-08-12 — The Delta States Rural Development Network Program supports support the planning, development, and implementation of integrated health care networks that collaborate in order to (i) achieve efficiencies; (ii) expand access to, coordinate, and improve the quality of basic health care services and associated health outcomes in rural areas within the eight rural Mississippi Delta Region states (Alaba…</summary>
   </entry>
   <entry>
-    <title>FY26 Women Business Center Renewal Announcement</title>
-    <link href="https://www.grants.gov/search-results-detail/363155"/>
-    <id>urn:funding-finder:grants-gov:363155</id>
-    <updated>2026-07-10T00:00:00Z</updated>
-    <author><name>Small Business Administration</name></author>
-    <category term="Community development"/>
-    <summary>Small Business Administration — Closes 2026-07-29 — The purpose of this directed announcement is to provide existing SBA WBC grantees that will have successfully completed a 5-year Initial WBC Project or those WBCs that will have successfully completed a 3-year Renewal WBC Project the opportunity to apply for a new renewal grant.</summary>
-  </entry>
-  <entry>
     <title>EducationUSA AI/STEM and Sports Diplomacy Grant</title>
     <link href="https://www.grants.gov/search-results-detail/363123"/>
     <id>urn:funding-finder:grants-gov:363123</id>
@@ -468,6 +459,18 @@
     <summary>Department of Housing and Urban Development — Closes 2026-09-30 — This Notice provides Tribes with program requirements and instructions on how to apply for Indian Community Development Block Grant (ICDBG) Imminent Threat (IT) funding. This Notice also increases ceilings for ICDBG-IT grants. How to Submit Your Application:You must email your ICDBG-IT application to: ONAP-ICDBG@hud.gov Also send a copy to your ONAP Area Office.Important: Do not submit your ICDBG-…</summary>
   </entry>
   <entry>
+    <title>EPSCoR Research Infrastructure Improvement Program: EPSCoR Collaborations for Optimizing Research Ecosystems</title>
+    <link href="https://www.grants.gov/search-results-detail/357725"/>
+    <id>urn:funding-finder:grants-gov:357725</id>
+    <updated>2024-12-14T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation — Closes 2027-07-20 — The Established Program to Stimulate Competitive Research (EPSCoR) supports the U.S. National Science Foundation (NSF) mission by promoting nationwide scientific progress. Through this program, NSF fosters partnerships among academic institutions, government entities, industry, and non-profits. These collaborations aim to drive long-term improvements in research infrastructure, enhance R&amp;D capacit…</summary>
+  </entry>
+  <entry>
     <title>Environmental Health Sciences Core Centers Program (P30 Clinical Trials Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/357121"/>
     <id>urn:funding-finder:grants-gov:357121</id>
@@ -541,6 +544,8 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>U.S. National Science Foundation — Posted — NSF GRANTED supports innovative models of research enterprise administrative development and workforce training infrastructure that promote sustainable research capacity and opportunities for economic impact in U.S. organizations. The research enterprise, broadly defined, includes research development and administration, research analytics, technology transfer and commercialization, corporate rela…</summary>
   </entry>
   <entry>

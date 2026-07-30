@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-07-29T12:22:47Z</updated>
+  <updated>2026-07-30T12:06:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -58,6 +58,15 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-03-03 — The National Institute for Occupational Safety and Health (NIOSH) is committed to addressing a wide range of occupational health and safety hazards affecting those who work in the agriculture, forestry, and fishing (AgFF) sector. Children and adolescents ("youth") are consistently more likely to be fatally injured working in agriculture compared to other industries. While many steps have been take…</summary>
+  </entry>
+  <entry>
+    <title>Sheep Production and Marketing Grant Program FY 2026</title>
+    <link href="https://www.grants.gov/search-results-detail/363376"/>
+    <id>urn:funding-finder:grants-gov:363376</id>
+    <updated>2026-07-29T00:00:00Z</updated>
+    <author><name>Agricultural Marketing Service</name></author>
+    <category term="Agriculture and food"/>
+    <summary>Agricultural Marketing Service — Closes 2026-10-02 — The purpose of SPMGP is to support projects that strengthen and enhance the production and marketing of sheep and sheep products in the United States. This includes improving infrastructure, business, and resource development, and the development of innovative approaches to solve long-term needs. The SPMGP seeks to develop solutions for practical problems across the United States and address the n…</summary>
   </entry>
   <entry>
     <title>Economic Advancement Grants for Local Empowerment (EAGLE)</title>
@@ -658,16 +667,5 @@
     <category term="Agriculture and food"/>
     <category term="Biology and biotechnology"/>
     <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-08-13 — Summary: The fiscal year 2026 (FY26) Multiple Sclerosis Research Program (MSRP) Clinical Trial Award (CTA) supports the rapid implementation of clinical trials with the potential to have a significant impact on the treatment or management of multiple sclerosis. All applications must address at least one of the FY26 MSRP CTA focus areas. Clinical trials may evaluate promising new products, pharmaco…</summary>
-  </entry>
-  <entry>
-    <title>DoW Amyotrophic Lateral Sclerosis Research Program, Pilot Clinical Trial Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362195"/>
-    <id>urn:funding-finder:grants-gov:362195</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Transportation"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-30 — Summary: The fiscal year 2026 (FY26) Amyotrophic Lateral Sclerosis Research Program (ALSRP) Pilot Clinical Trial Award (PCTA) supports the rapid implementation of clinical trials with the potential to have a significant impact on the treatment or management of amyotrophic lateral sclerosis (ALS). Projects may range from phase 1 to small-scale phase 2 trials.Applications must address one of the fol…</summary>
   </entry>
 </feed>

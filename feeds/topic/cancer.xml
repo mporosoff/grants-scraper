@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml</id>
-  <updated>2026-07-29T12:22:47Z</updated>
+  <updated>2026-07-30T12:06:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -60,6 +60,19 @@
     <category term="Public health"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health — Closes 2027-06-04 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing to develop innovative technologies for cancer research or clinical care. The emphasis of this NOFO is on early-stage projects proposing proof-of-concept/pilot studies to test the technical feasibility of the proposed method, tool, assay, platform, or instrument. Well-suited …</summary>
+  </entry>
+  <entry>
+    <title>Demonstration Projects for Whole-Person Health Models for Women Living with HIV in the South</title>
+    <link href="https://www.grants.gov/search-results-detail/363389"/>
+    <id>urn:funding-finder:grants-gov:363389</id>
+    <updated>2027-01-14T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCHHSTP</name></author>
+    <category term="Arts and culture"/>
+    <category term="Cancer"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-03-15 — The purpose of this demonstration project is to support coordinated Clinic and Community Collaboratives (CCCs) to integrate HIV care with broader women's health services in jurisdictions with disproportionately high HIV disease burden to improve HIV-related outcomes, overall health, and quality of life among WWH. Organizations will be funded to implement 4 strategies: (1) Integrate HIV care with b…</summary>
   </entry>
   <entry>
     <title>Canine Cancer Immunotherapy Network (K9CIN; U01 Clinical Trial Not Allowed)</title>
@@ -207,6 +220,16 @@
     <category term="Biology and biotechnology"/>
     <category term="Cancer"/>
     <summary>National Institutes of Health — Closes 2027-01-11 — As part of the Gabriella Miller Kids First Pediatric Research Program (Kids First Program), the NIH invites applications to submit samples from pediatric cohorts for whole genome sequencing at a Kids First Program supported genomic data generating centers. Applicants are encouraged to propose sequencing of existing pediatric cancer or congenital anomaly cohorts to elucidate the genetic contributio…</summary>
+  </entry>
+  <entry>
+    <title>DoW Kidney Cancer, Concept Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362852"/>
+    <id>urn:funding-finder:grants-gov:362852</id>
+    <updated>2026-06-17T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Cancer"/>
+    <category term="Technology development"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-08-11 — Summary: The fiscal year 2026 (FY26) Kidney Cancer Research Program (KCRP) Concept Award supports highly innovative, untested, potentially groundbreaking concepts, theories, paradigms and/or basic kidney cancer research. This award mechanism supports high-risk studies that have the potential to reveal entirely new avenues for investigation in kidney cancer. Applications must describe how the new c…</summary>
   </entry>
   <entry>
     <title>DoW Rare Cancers Concept Award</title>
@@ -592,26 +615,5 @@
     <category term="Cancer"/>
     <category term="Transportation"/>
     <summary>National Institutes of Health — Closes 2027-02-08 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits applications to support the validation of molecular/cellular/imaging markers (referred to as "markers" or "biomarkers") and assays for cancer detection, diagnosis, prognosis, monitoring, and prediction of response or resistance to treatment, as well as markers for cancer prevention and control. The appl…</summary>
-  </entry>
-  <entry>
-    <title>The Metastasis Research Network (MetNet): MetNet Research Projects (U01 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359725"/>
-    <id>urn:funding-finder:grants-gov:359725</id>
-    <updated>2026-02-04T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2028-11-22 — The National Cancer Institute's (NCI) Metastasis Research Network (MetNet) is a collection of U54 Research Centers that support using systems-level approaches to understand pressing questions in metastasis. The overall goal of the MetNet is to advance our understanding of metastasis as a whole body, systems-level problem to develop a comprehensive and cohesive picture of the processes involved. Th…</summary>
-  </entry>
-  <entry>
-    <title>Novel approaches to support therapeutic development in ultra-rare cancers</title>
-    <link href="https://www.grants.gov/search-results-detail/360223"/>
-    <id>urn:funding-finder:grants-gov:360223</id>
-    <updated>2026-01-08T00:00:00Z</updated>
-    <author><name>Food and Drug Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Separations and membranes"/>
-    <summary>Food and Drug Administration — Forecasted — The purpose of this program is to support new approaches that can be applied to facilitate therapeutic development in ultra-rare pediatric and adult cancers, including molecularly-defined subsets of more common cancers. Specific areas of interest include, but are not limited to, the following examples:• Development of infrastructure for a coordination network and data repository for patient-level …</summary>
   </entry>
 </feed>

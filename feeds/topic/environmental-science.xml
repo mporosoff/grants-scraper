@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml</id>
-  <updated>2026-07-29T12:22:47Z</updated>
+  <updated>2026-07-30T12:06:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
@@ -79,7 +79,7 @@
     <updated>2026-12-16T00:00:00Z</updated>
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Environmental science"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-16 — The R21 grant program is designed to advance our understanding of occupational diseases and injuries by focusing on the following three objectives: Identify the risks and conditions linked to workplace health issues.Develop strategies to reduce risks and limit exposure to hazardous environments. Translate significant scientific discoveries into prevention measures and products that can effectively…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-16 — The R21 grant program is designed to advance our understanding of occupational diseases and injuries by focusing on the following three objectives:Identify the risks and conditions linked to workplace health issues.Develop strategies to reduce risks and limit exposure to hazardous environments.Translate significant scientific discoveries into prevention measures and products that can effectively r…</summary>
   </entry>
   <entry>
     <title>NIOSH National Center of Excellence for the Prevention of Childhood Agricultural Injury (U54)</title>
@@ -274,6 +274,34 @@
     <category term="Data science"/>
     <category term="Environmental science"/>
     <summary>National Institutes of Health — Closes 2026-11-01 — The National Institute of Diabetes and Digestive Diseases and Nutrition (NIDDK) seeks to advance its mission by continuing the NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC). The IBDGC has led collaborative efforts resulting in the identification of &gt;300 genetic risk loci for different IBD subtypes across patient populations and characterization of underlying biological mechanisms. D…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for Affiliated Partner with the Rocky Mountain Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/363385"/>
+    <id>urn:funding-finder:grants-gov:363385</id>
+    <updated>2026-07-29T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Water"/>
+    <summary>Geological Survey — Closes 2026-08-29 — The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner for research in processing and analyzing of data from the Surface Water and Ocean Topography (SWOT) mission. The project will advance hydrologic decision making from remotely sensed water surface elevation by making available water surface elevation data at unprecedented scales. Research Scientists in the Observi…</summary>
+  </entry>
+  <entry>
+    <title>Desalination and Water Purification Research Program: Research Projects</title>
+    <link href="https://www.grants.gov/search-results-detail/363375"/>
+    <id>urn:funding-finder:grants-gov:363375</id>
+    <updated>2026-07-29T00:00:00Z</updated>
+    <author><name>Bureau of Reclamation</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Separations and membranes"/>
+    <category term="Technology development"/>
+    <category term="Water"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Bureau of Reclamation — Closes 2026-09-29 — The Bureau of Reclamation"s Desalination and Water Purification Research (DWPR) Program aims to increase water supplies by reducing the costs, energy requirements, and other barriers to adoption of treating impaired water for beneficial uses.This NOFO invites proposals from eligible applicants to conduct innovative laboratory and pilot-scale water treatment research. Strong applications will demon…</summary>
   </entry>
   <entry>
     <title>U.S. Embassy Nassau Annual Program Statement for Public Diplomacy</title>
@@ -671,32 +699,5 @@
     <category term="Agriculture and food"/>
     <category term="Environmental science"/>
     <summary>Geological Survey — Closes 2026-08-14 — The U.S. Geological Survey's (USGS) Fort Collins Science Center is offering a cooperative-agreement funding opportunity to a CESU partner having capability to conduct research and studies related to the long-term demography of bumble bees, with a focus on imperiled species. The research will focus on Bombus affinis (rusty patched bumble bee), the previously-widespread bumble bee species whose popu…</summary>
-  </entry>
-  <entry>
-    <title>Public Wireless Supply Chain Innovation Fund Grant Program – Solutions for AI-Native RAN</title>
-    <link href="https://www.grants.gov/search-results-detail/363179"/>
-    <id>urn:funding-finder:grants-gov:363179</id>
-    <updated>2026-07-14T00:00:00Z</updated>
-    <author><name>National Telecommunications and Information Admini</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <summary>National Telecommunications and Information Admini — Closes 2026-09-09 — This NOFO is the fourth issued under NTIA’s Public Wireless Supply Chain Innovation Fund (PWSCIF or Innovation Fund). Titled “Solutions for AI-Native RAN,” the goal of this NOFO is to support the development of a secure compute environment to enable or leverage native artificial intelligence (“AI”) capabilities in the Radio Access Network (RAN) that generate revenue for operators, cost savings, an…</summary>
-  </entry>
-  <entry>
-    <title>DE-FOA-0003646 Notice of Intent to Issue DE-FOA-0003647 Accelerating Scale-up and Pre-piloting of Emerging Chemical Technologies (ASPECT)</title>
-    <link href="https://www.grants.gov/search-results-detail/363174"/>
-    <id>urn:funding-finder:grants-gov:363174</id>
-    <updated>2026-07-14T00:00:00Z</updated>
-    <author><name>Golden Field Office</name></author>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Carbon management"/>
-    <category term="Climate change"/>
-    <summary>Golden Field Office — Closes 2026-09-14 — CMEI intends to issue, on behalf of AFFO, a NOFO titled, “Accelerating Scale-up and Pre-piloting of Emerging Chemical Technologies (ASPECT).” This NOFO will seek applications for financial assistance from entities that wish to conduct work in support of AFFO's focus on emerging chemical technologies. AFFO supports expanding the supply and use of domestic alternative feedstocks to improve supply ch…</summary>
   </entry>
 </feed>
