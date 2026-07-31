@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/climate-change.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/climate-change.xml</id>
-  <updated>2026-07-30T19:45:56Z</updated>
+  <updated>2026-07-31T12:20:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Clean Green Schools Initiative</title>
@@ -114,22 +114,6 @@
     <summary>Office of Science — Closes 2026-09-30 — The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
   </entry>
   <entry>
-    <title>Centers of Research Excellence in Science and Technology - Research Infrastructure for Science and Engineering</title>
-    <link href="https://www.grants.gov/search-results-detail/359061"/>
-    <id>urn:funding-finder:grants-gov:359061</id>
-    <updated>2025-05-21T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Climate change"/>
-    <category term="Cybersecurity"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <summary>U.S. National Science Foundation — Posted — The Centers of Research Excellence in Science and Technology (CREST) program provides support to enhance the research capabilities of minority-serving institutions (MSIs) as defined in this solicitation’s Eligibility section, through effective integration of education and research. The CREST program, composed of the CREST Centers, the CREST Postdoctoral Research Program, and the projects supported…</summary>
-  </entry>
-  <entry>
     <title>Mind, Machine and Motor Nexus</title>
     <link href="https://www.grants.gov/search-results-detail/358682"/>
     <id>urn:funding-finder:grants-gov:358682</id>
@@ -139,10 +123,10 @@
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <category term="Energy"/>
     <category term="Manufacturing"/>
-    <category term="Carbon management"/>
-    <category term="Climate change"/>
     <summary>U.S. National Science Foundation — Posted — The Mind, Machine, and Motor Nexus (M3X) program supports fundamental research that enables intelligent engineered systems and humans to engage in bidirectional interaction in a physics-based environment, to enhance and ensure safety, productivity, and well-being.
 For the purpose of this program an intelligent engineered system is a human-designed system — physical, virtual, or a combination of bo…</summary>
   </entry>
@@ -299,8 +283,8 @@ The goal of the Interfacial Engineering program is to support fundamental resear
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <category term="Separations and membranes"/>
-    <category term="Carbon management"/>
-    <category term="Climate change"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Artificial intelligence and machine learning"/>
     <summary>U.S. National Science Foundation — Posted — The Particulate and Multiphase Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Thermal Transport Processes program.
 The goal of the Particulate and Multiphase Processes program is to support fundamental research on physico-chemical phenomena that govern particulate and multiphase…</summary>
   </entry>

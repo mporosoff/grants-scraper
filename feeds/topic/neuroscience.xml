@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml</id>
-  <updated>2026-07-30T19:45:56Z</updated>
+  <updated>2026-07-31T12:20:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -49,6 +49,17 @@
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health — Closes 2027-06-01 — The National Institute of Mental Health (NIMH), with other NIH Institutes and Centers (ICs), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop web-accessible data archives to capture, store, and curate data related to the Brain Research Through Advancing Innovative Neurotechnologies® (BRAIN) Initiative activities. The data archives teams will work with th…</summary>
+  </entry>
+  <entry>
+    <title>Core State Injury Prevention Program (Core SIPP)</title>
+    <link href="https://www.grants.gov/search-results-detail/363398"/>
+    <id>urn:funding-finder:grants-gov:363398</id>
+    <updated>2027-01-07T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCIPC</name></author>
+    <category term="Neuroscience"/>
+    <category term="Public health"/>
+    <category term="Transportation"/>
+    <summary>Centers for Disease Control - NCIPC — Closes 2027-03-08 — This forecast is for CDC's Core State Injury Prevention Program (Core SIPP), a cooperative agreement to support public health infrastructure, data, and partnerships to use data to identify potential risk and inform the implementation of strategies to prevent unintentional injury. Actions using the best available evidence are intended to increase protective factors and reduce risk factors for injur…</summary>
   </entry>
   <entry>
     <title>Continuing Enhanced National Surveillance for Prion Diseases in the United States</title>
@@ -539,10 +550,10 @@
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <category term="Energy"/>
     <category term="Manufacturing"/>
-    <category term="Carbon management"/>
-    <category term="Climate change"/>
     <summary>U.S. National Science Foundation — Posted — The Mind, Machine, and Motor Nexus (M3X) program supports fundamental research that enables intelligent engineered systems and humans to engage in bidirectional interaction in a physics-based environment, to enhance and ensure safety, productivity, and well-being.
 For the purpose of this program an intelligent engineered system is a human-designed system — physical, virtual, or a combination of bo…</summary>
   </entry>
@@ -653,14 +664,5 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health — Closes 2026-11-19 — The purpose of this Notice of Funding Opportunity (NOFO) is to invite applications that bundle independent protocols for phase 1 clinical trials with phase 1b/phase 2a clinical trials to streamline the early-stage evaluation of promising pharmacological interventions for Alzheimer's disease (AD) and Alzheimer's disease-related Dementias (ADRD). Candidate interventions evaluated through this progra…</summary>
-  </entry>
-  <entry>
-    <title>Utilizing Invasive Recording and Stimulating Opportunities in Humans to Advance Neural Circuitry Understanding of Mental Health Disorders (R01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/357346"/>
-    <id>urn:funding-finder:grants-gov:357346</id>
-    <updated>2024-11-22T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health — Closes 2028-01-07 — The purpose of this Notice of Funding Opportunity (NOFO) is to encourage applications to pursue invasive neural recording studies focused on mental health-relevant questions. Invasive neural recordings provide an unparalleled window into the human brain to explore the neural circuitry and neural dynamics underlying complex moods, emotions, cognitive functions, and behaviors with high spatial and t…</summary>
   </entry>
 </feed>

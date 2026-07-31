@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-07-30T19:45:56Z</updated>
+  <updated>2026-07-31T12:20:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -58,6 +58,15 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-03-03 — The National Institute for Occupational Safety and Health (NIOSH) is committed to addressing a wide range of occupational health and safety hazards affecting those who work in the agriculture, forestry, and fishing (AgFF) sector. Children and adolescents ("youth") are consistently more likely to be fatally injured working in agriculture compared to other industries. While many steps have been take…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year 2027 Regional Nutrition Hubs</title>
+    <link href="https://www.grants.gov/search-results-detail/363392"/>
+    <id>urn:funding-finder:grants-gov:363392</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Agriculture and food"/>
+    <summary>Health Resources and Services Administration — Closes 2026-10-20 — Fiscal Year (FY) 2027 Regional Nutrition Hubs (RNH) will support region-specific technical assistance (TA) on expanding high-quality nutrition services to the Health Resources and Services Administration's (HRSA) Health Center Program (H80) award recipients and look-alikes (health centers). Nutrition services prevent, manage, and treat diseases and conditions through nutritional and food-based int…</summary>
   </entry>
   <entry>
     <title>Sheep Production and Marketing Grant Program FY 2026</title>
@@ -657,15 +666,5 @@
     <category term="Community development"/>
     <category term="Manufacturing"/>
     <summary>Rural Business-Cooperative Service — Closes 2026-08-07 — The U.S. Department of Agriculture (USDA), Rural Development (RD) Rural Business‐Cooperative Service (RBCS or Agency), requests applications for the Meat and Poultry Processing Expansion Program - Phase 4 (the Program or MPPEP-4) - Fortifying the American Beef Industry. MPPEP-4 is authorized under Section 1001(b)(4) of the American Rescue Plan Act of 2021 (ARPA), which provides funding to make “lo…</summary>
-  </entry>
-  <entry>
-    <title>DoW Multiple Sclerosis Clinical Trial Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362227"/>
-    <id>urn:funding-finder:grants-gov:362227</id>
-    <updated>2026-05-05T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-08-13 — Summary: The fiscal year 2026 (FY26) Multiple Sclerosis Research Program (MSRP) Clinical Trial Award (CTA) supports the rapid implementation of clinical trials with the potential to have a significant impact on the treatment or management of multiple sclerosis. All applications must address at least one of the FY26 MSRP CTA focus areas. Clinical trials may evaluate promising new products, pharmaco…</summary>
   </entry>
 </feed>

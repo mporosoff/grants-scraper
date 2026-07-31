@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml</id>
-  <updated>2026-07-30T19:45:56Z</updated>
+  <updated>2026-07-31T12:20:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Resources and Workforce Development for the Regional Biocontainment Laboratories</title>
@@ -282,6 +282,27 @@
     <category term="Infectious disease"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health — Closes 2026-10-06 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose a program that supports integrative, cross-disciplinary projects aimed at scaling up mechanistic studies to understand the genomic underpinnings of the pathogenesis and progression AD/ADRD.The proposed research projects will employ interdisciplinary approaches that i…</summary>
+  </entry>
+  <entry>
+    <title>Advancing Global Capacity to Detect and Respond to Fungal Diseases</title>
+    <link href="https://www.grants.gov/search-results-detail/361931"/>
+    <id>urn:funding-finder:grants-gov:361931</id>
+    <updated>2026-07-30T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCEZID</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control - NCEZID — Closes 2026-08-31 — This Notice of Funding Opportunity (NOFO) aims to support activities that build and strengthen sustainable fungal disease detection, diagnosis, surveillance, and response systems. Activities may address interconnected areas such as system and workforce development, laboratory and diagnostic capacity, and improved use of data to inform public health action. Through these efforts, this NOFO seeks to…</summary>
+  </entry>
+  <entry>
+    <title>Pediatric Disaster Care Centers of Excellence Program Cooperative Agreement</title>
+    <link href="https://www.grants.gov/search-results-detail/363404"/>
+    <id>urn:funding-finder:grants-gov:363404</id>
+    <updated>2026-07-30T00:00:00Z</updated>
+    <author><name>Assistant Secretary for Preparedness and Response</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <summary>Assistant Secretary for Preparedness and Response — Closes 2026-08-31 — The purpose of this NOFO is to fund four PEDs COEs to:Develop a coordinated pediatric disaster care capability for pediatric patient care in disasters.Strengthen pediatric disaster preparedness plans and health care system coordination related to pediatric medical surge in disasters.Enhance statewide and regional medical surge capacity for pediatric patients.Increase and maintain health care profe…</summary>
   </entry>
   <entry>
     <title>Plant Protection Act Section 7721 Plant Pest and Disease Management and Disaster Prevention Program (PPDMDPP)</title>
@@ -641,34 +662,5 @@ The goal of the Engineering of Biomedical Systems (EBMS) program is to provide o
     <category term="Social and behavioral sciences"/>
     <category term="Transportation"/>
     <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2027-09-18 — ATTENTION: This announcement will be revised regularly to incorporate country specific narratives (Attachment 1 of the announcement) with information vital to the content of application. Potential applicants interested in applying to this announcement should click 'Subscribe' to be notified of future revisions. DoD HIV/AID Prevention Program's (DHAPP) objective, through the PEPFAR program, is to s…</summary>
-  </entry>
-  <entry>
-    <title>Plant Biotic Interactions</title>
-    <link href="https://www.grants.gov/search-results-detail/327047"/>
-    <id>urn:funding-finder:grants-gov:327047</id>
-    <updated>2020-05-14T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <category term="Infectious disease"/>
-    <summary>U.S. National Science Foundation — Posted — The Plant Biotic Interactions (PBI) program supports research on the processes that mediate beneficial and antagonistic interactions between plants and their viral, bacterial, oomycete, fungal, plant, and invertebrate symbionts, pathogens and pests. This joint NSF/NIFA program supports projects focused on current and emerging model and non-model systems, and agriculturally relevant plants. The pro…</summary>
-  </entry>
-  <entry>
-    <title>Biosensing</title>
-    <link href="https://www.grants.gov/search-results-detail/320536"/>
-    <id>urn:funding-finder:grants-gov:320536</id>
-    <updated>2019-09-12T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>U.S. National Science Foundation — Posted — The Biosensing program is part of the Engineering Biology and Health cluster, which also includes 1) the Biophotonics program; 2) the Cellular and Biochemical Engineering program; 3) the Disability and Rehabilitation Engineering program; and 4) the Engineering of Biomedical Systems program.
-The Biosensing program supports fundamental engineering research in the monitoring, identification and/or qu…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-07-30T19:45:56Z</updated>
+  <updated>2026-07-31T12:20:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Microplastics Research and Resource Coordination Center (U24 - Clinical Trial Not Allowed)</title>
@@ -116,6 +116,22 @@
     <summary>U.S. National Science Foundation — Posted — Society relies on chemical processes to turn raw materials into useful products. The Chemical Process Systems (CPS) program invests in fundamental research on chemical and biochemical processes to make them more efficient, sustainable, and resilient. New CPS technologies for manufacturing, biotechnology, critical minerals, energy, food, and other national priorities will help make the U.S. more co…</summary>
   </entry>
   <entry>
+    <title>Transport Phenomena (TP)</title>
+    <link href="https://www.grants.gov/search-results-detail/362063"/>
+    <id>urn:funding-finder:grants-gov:362063</id>
+    <updated>2026-04-24T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Separations and membranes"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation — Posted — The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
+  </entry>
+  <entry>
     <title>FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
     <link href="https://www.grants.gov/search-results-detail/360678"/>
     <id>urn:funding-finder:grants-gov:360678</id>
@@ -155,22 +171,6 @@
     <category term="Education and workforce"/>
     <category term="Materials science"/>
     <summary>Dept of the Army -- Materiel Command — Closes 2030-06-02 — The ARO is soliciting proposals for Staff Research Program opportunities. The purpose of the program is to enable ARO scientific staff to maintain and expand professional competence in support of fulfilling the ARO mission through the conduct of hands-on, basic research. The staff research will be performed collaboratively with institutions external to ARO. Staff research efforts will involve scie…</summary>
-  </entry>
-  <entry>
-    <title>Centers of Research Excellence in Science and Technology - Research Infrastructure for Science and Engineering</title>
-    <link href="https://www.grants.gov/search-results-detail/359061"/>
-    <id>urn:funding-finder:grants-gov:359061</id>
-    <updated>2025-05-21T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Climate change"/>
-    <category term="Cybersecurity"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <summary>U.S. National Science Foundation — Posted — The Centers of Research Excellence in Science and Technology (CREST) program provides support to enhance the research capabilities of minority-serving institutions (MSIs) as defined in this solicitation’s Eligibility section, through effective integration of education and research. The CREST program, composed of the CREST Centers, the CREST Postdoctoral Research Program, and the projects supported…</summary>
   </entry>
   <entry>
     <title>Infrastructure Systems and People</title>
@@ -390,6 +390,8 @@ The goal of the Interfacial Engineering program is to support fundamental resear
     <category term="Manufacturing"/>
     <category term="Materials science"/>
     <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>U.S. National Science Foundation — Posted — The Nanoscale Interactions program is part of the Environmental Engineering and Sustainability cluster, which also includes: 1) the Environmental Engineering program; and 2) the Environmental Sustainability program.
 The goal of the Nanoscale Interactions program is to support research to advance fundamental and quantitative understanding of the interactions of nanomaterials and nanosystems with bi…</summary>
   </entry>
@@ -485,5 +487,16 @@ The goal of the Env…</summary>
     <category term="Artificial intelligence and machine learning"/>
     <summary>U.S. National Science Foundation — Posted — Crosscutting Activities in Materials Research (XC) coordinates and supports crosscutting activities within the Division of Materials Research (DMR) and more broadly across NSF.
 The emphasis within XC is diversity and inclusion, international cooperation, and education (including experiential learning at REU/RET Sites). Additionally, activities that broadly engage the community, such as summer scho…</summary>
+  </entry>
+  <entry>
+    <title>Mechanics of Materials and Structures</title>
+    <link href="https://www.grants.gov/search-results-detail/306172"/>
+    <id>urn:funding-finder:grants-gov:306172</id>
+    <updated>2018-06-12T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>U.S. National Science Foundation — Posted — The Mechanics of Materials and Structures program supports fundamental research in mechanics as related to the behavior of deformable solid materials and structures under internal and external actions. The program supports a diverse spectrum of research with emphasis on transformative advances in experimental, theoretical, and computational methods. Submitted proposals should clearly emphasize the…</summary>
   </entry>
 </feed>

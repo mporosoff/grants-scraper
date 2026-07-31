@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-07-30T19:45:56Z</updated>
+  <updated>2026-07-31T12:20:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Global Cybercrime and Cryptocurrency Assessment and Intelligence Gathering</title>
@@ -625,22 +625,6 @@
     <summary>National Institute of Food and Agriculture — Closes 2026-12-31 — The AFRI Foundational and Applied Science Program supports grants in six AFRI priority areas to advance knowledge in both fundamental and applied sciences important to agriculture. The six priority areas are: Plant Health and Production and Plant Products; Animal Health and Production and Animal Products; Food Safety, Nutrition, and Health; Bioenergy, Natural Resources, and Environment; Agricultur…</summary>
   </entry>
   <entry>
-    <title>Centers of Research Excellence in Science and Technology - Research Infrastructure for Science and Engineering</title>
-    <link href="https://www.grants.gov/search-results-detail/359061"/>
-    <id>urn:funding-finder:grants-gov:359061</id>
-    <updated>2025-05-21T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Climate change"/>
-    <category term="Cybersecurity"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <summary>U.S. National Science Foundation — Posted — The Centers of Research Excellence in Science and Technology (CREST) program provides support to enhance the research capabilities of minority-serving institutions (MSIs) as defined in this solicitation’s Eligibility section, through effective integration of education and research. The CREST program, composed of the CREST Centers, the CREST Postdoctoral Research Program, and the projects supported…</summary>
-  </entry>
-  <entry>
     <title>Department of War Cyber Service Academy (DoW CSA)</title>
     <link href="https://www.grants.gov/search-results-detail/358380"/>
     <id>urn:funding-finder:grants-gov:358380</id>
@@ -718,5 +702,21 @@
     <category term="Neuroscience"/>
     <category term="Transportation"/>
     <summary>U.S. National Science Foundation — Posted — The Energy, Power, Control, and Networks (EPCN) Program supports innovative research in modeling, optimization, learning, adaptation, and control of networked multi-agent systems, higher-level decision making, and dynamic resource allocation, as well as risk management in the presence of uncertainty, sub-system failures, and stochastic disturbances. EPCN also invests in novel machine learning algo…</summary>
+  </entry>
+  <entry>
+    <title>Tribal Colleges and Universities Program</title>
+    <link href="https://www.grants.gov/search-results-detail/334326"/>
+    <id>urn:funding-finder:grants-gov:334326</id>
+    <updated>2021-06-24T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Cybersecurity"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Quantum science"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>U.S. National Science Foundation — Closes 2026-09-01 — The Tribal Colleges and Universities Program (TCUP) provides awards to federally recognized1 Tribal Colleges and Universities, Alaska Native-serving institutions, and Native Hawaiian-serving institutions to promote high quality science (including sociology, psychology, anthropology, linguistics, economics and bioeconomics, statistics, and other social and behavioral sciences; natural sciences; com…</summary>
   </entry>
 </feed>

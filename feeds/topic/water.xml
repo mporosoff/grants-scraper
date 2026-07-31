@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml</id>
-  <updated>2026-07-30T19:45:56Z</updated>
+  <updated>2026-07-31T12:20:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Rocky Mountain Cooperative Ecosystem Studies Unit (CESU)</title>
@@ -349,6 +349,8 @@
     <category term="Agriculture and food"/>
     <category term="Environmental science"/>
     <category term="Water"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>U.S. National Science Foundation — Posted — The Water, Landscape, and Critical Zone Processes program supports research on the Earth’s near-surface environment and how that environment responds to change. The Program focuses on the complex interplay amongst and between hydrologic, geomorphic, and geochemical processes and how they regulate the structure and function of the Earth’s near surface. These processes drive weathering and soil deve…</summary>
   </entry>
   <entry>

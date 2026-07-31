@@ -4,8 +4,19 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-07-30T19:45:56Z</updated>
+  <updated>2026-07-31T12:20:29Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Core State Injury Prevention Program (Core SIPP)</title>
+    <link href="https://www.grants.gov/search-results-detail/363398"/>
+    <id>urn:funding-finder:grants-gov:363398</id>
+    <updated>2027-01-07T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCIPC</name></author>
+    <category term="Neuroscience"/>
+    <category term="Public health"/>
+    <category term="Transportation"/>
+    <summary>Centers for Disease Control - NCIPC — Closes 2027-03-08 — This forecast is for CDC's Core State Injury Prevention Program (Core SIPP), a cooperative agreement to support public health infrastructure, data, and partnerships to use data to identify potential risk and inform the implementation of strategies to prevent unintentional injury. Actions using the best available evidence are intended to increase protective factors and reduce risk factors for injur…</summary>
+  </entry>
   <entry>
     <title>NIOSH Centers for Agriculture, Forestry, and Fishing Safety and Health (U54)</title>
     <link href="https://www.grants.gov/search-results-detail/363195"/>
@@ -651,14 +662,5 @@
     <category term="Arts and culture"/>
     <category term="Transportation"/>
     <summary>National Institutes of Health — Closes 2029-07-16 — The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) announces a program that provides NIAMS-supported K01, K08, K23, and K25 recipients the opportunity to apply for the Small Grant (R03) during the second to fourth year of their K award, as well as to provide support to recipients of significant career development awards from federal or non-federal organizations that …</summary>
-  </entry>
-  <entry>
-    <title>FY 2026 Competitive Funding Opportunity: Public Transportation on Indian Reservations (Tribal Transit) Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362568"/>
-    <id>urn:funding-finder:grants-gov:362568</id>
-    <updated>2026-05-27T00:00:00Z</updated>
-    <author><name>DOT - Federal Transit Administration</name></author>
-    <category term="Transportation"/>
-    <summary>DOT - Federal Transit Administration — Closes 2026-08-25 — The Federal Transit Administration (FTA) announces the opportunity to apply for $18,954,885 in competitive grants for the Fiscal Year (FY) 2026 Public Transportation on Indian Reservations (Tribal Transit) Competitive Program under Assistance Listing Number 20.509.</summary>
   </entry>
 </feed>

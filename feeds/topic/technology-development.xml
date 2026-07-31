@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-07-30T19:45:56Z</updated>
+  <updated>2026-07-31T12:20:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -160,6 +160,27 @@
     <category term="Public health"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health — Closes 2027-01-25 — The Clinical and Translational Science Awards Program Trial Innovation Network (TIN) is a collaborative initiative aimed at addressing critical roadblocks in the design and implementation of multi-center clinical trials. The goal of the TIN is to execute trials better, faster, and more cost-efficiently, as well as serve as a national laboratory to study, understand, and innovate the process of con…</summary>
+  </entry>
+  <entry>
+    <title>Alumni Engagement Innovation Fund 2026</title>
+    <link href="https://www.grants.gov/search-results-detail/363405"/>
+    <id>urn:funding-finder:grants-gov:363405</id>
+    <updated>2026-07-31T00:00:00Z</updated>
+    <author><name>U.S. Mission to Laos</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <summary>U.S. Mission to Laos — Closes 2026-08-01 — The U.S. Department of State’s Embassy Vientiane announces an open competition to implement a program under the 2026 Alumni Engagement Innovation Fund (AEIF). This program is designed to increase the impact of the U.S. government’s investment in exchange participants and programs by helping alumni develop and implement projects that support U.S. policy objectives and promote shared interests. All …</summary>
+  </entry>
+  <entry>
+    <title>Placement and Coordination Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362962"/>
+    <id>urn:funding-finder:grants-gov:362962</id>
+    <updated>2026-07-31T00:00:00Z</updated>
+    <author><name>Administration for Children and Families - ORR</name></author>
+    <category term="Arts and culture"/>
+    <category term="Technology development"/>
+    <summary>Administration for Children and Families - ORR — Closes 2026-09-15 — The Office of Refugee Resettlement (ORR) within the Administration for Children and Families (ACF), invites eligible applicants to submit applications to administer the Placement and Coordination (PC) program. ORR will provide funding to diversify providers of PC services through awards to eligible organizations not currently implementing the Program of Initial Resettlement (PIR). New providers wi…</summary>
   </entry>
   <entry>
     <title>Innovation Grants to Nurture Initial Translational Efforts (IGNITE): Assay Development and Therapeutic Agent Identification</title>
@@ -695,28 +716,5 @@
     <category term="Education and workforce"/>
     <category term="Technology development"/>
     <summary>U.S. Mission to Kyrgyzstan — Closes 2026-08-07 — The U.S. Department of State's Embassy Bishkek Public Diplomacy Section (PDS) announces an open competition to implement a program supporting the American Corners network in the Kyrgyz Republic—the U.S. government's primary information and cultural centers. They showcase American innovation to foreign audiences and promote demand for U.S. products and services, particularly as the United States ce…</summary>
-  </entry>
-  <entry>
-    <title>Placement and Coordination Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362962"/>
-    <id>urn:funding-finder:grants-gov:362962</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>Administration for Children and Families - ORR</name></author>
-    <category term="Arts and culture"/>
-    <category term="Technology development"/>
-    <summary>Administration for Children and Families - ORR — Closes 2026-08-15 — The Office of Refugee Resettlement (ORR) within the Administration for Children and Families (ACF), invites eligible applicants to submit applications to administer the Placement and Coordination (PC) program. ORR will provide funding to diversify providers of PC services through awards to eligible organizations not currently implementing the Program of Initial Resettlement (PIR). New providers wi…</summary>
-  </entry>
-  <entry>
-    <title>Tribal Transportation Safety Strategy Pilot Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362956"/>
-    <id>urn:funding-finder:grants-gov:362956</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>69A355 Research and Technology</name></author>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>69A355 Research and Technology — Closes 2026-08-28 — he U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Tribal Transportation Safety Strategy Pilot Program. This three-year cooperative agreement is designed to address the critical public safety crisis in Tribal communities, as American Indian and Alaska Native populations experience…</summary>
   </entry>
 </feed>

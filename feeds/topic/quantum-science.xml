@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml</id>
-  <updated>2026-07-30T19:45:56Z</updated>
+  <updated>2026-07-31T12:20:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Young Trilateral Leaders (YTL) Summit</title>
@@ -113,22 +113,6 @@
     <category term="Manufacturing"/>
     <category term="Cybersecurity"/>
     <summary>National Institute of Standards and Technology — Closes 2029-09-30 — NIST is soliciting proposals from eligible applicants for research, prototyping, and commercial solutions that advance microelectronics technology in the U.S., to be considered for funding by the CHIPS Research and Development Office (CRDO).</summary>
-  </entry>
-  <entry>
-    <title>Centers of Research Excellence in Science and Technology - Research Infrastructure for Science and Engineering</title>
-    <link href="https://www.grants.gov/search-results-detail/359061"/>
-    <id>urn:funding-finder:grants-gov:359061</id>
-    <updated>2025-05-21T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Climate change"/>
-    <category term="Cybersecurity"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <summary>U.S. National Science Foundation — Posted — The Centers of Research Excellence in Science and Technology (CREST) program provides support to enhance the research capabilities of minority-serving institutions (MSIs) as defined in this solicitation’s Eligibility section, through effective integration of education and research. The CREST program, composed of the CREST Centers, the CREST Postdoctoral Research Program, and the projects supported…</summary>
   </entry>
   <entry>
     <title>NSF National Quantum Virtual Laboratory - Quantum Testbeds</title>
@@ -260,6 +244,8 @@ The goal of the Biophotonics program is to explore the research frontiers in pho
     <category term="Manufacturing"/>
     <category term="Materials science"/>
     <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>U.S. National Science Foundation — Posted — The Nanoscale Interactions program is part of the Environmental Engineering and Sustainability cluster, which also includes: 1) the Environmental Engineering program; and 2) the Environmental Sustainability program.
 The goal of the Nanoscale Interactions program is to support research to advance fundamental and quantitative understanding of the interactions of nanomaterials and nanosystems with bi…</summary>
   </entry>
@@ -372,5 +358,18 @@ The Thermal Transport Processes program supports engineering research projects t
     <category term="Energy"/>
     <category term="Quantum science"/>
     <summary>Dept of the Army -- Materiel Command — Closes 2027-03-31 — The U.S. Military Academy at West Point's mission is "to educate, train, and inspire the Corps of Cadets so that each graduate is a commissioned leader of character committed to the values of Duty, Honor, Country and prepared for a career of professional excellence and service to the Nation as an officer in the United States Army." The United States Military Academy is located at West Point, New Y…</summary>
+  </entry>
+  <entry>
+    <title>National Facilities</title>
+    <link href="https://www.grants.gov/search-results-detail/275109"/>
+    <id>urn:funding-finder:grants-gov:275109</id>
+    <updated>2015-03-13T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation — Posted — The National Facilities program supports the operation of national user facilities: National Facilities are research facilities with specialized instrumentation available to the scientific research community in general and the materials research community in particular. These facilities provide unique research capabilities that can be located at only a few highly specialized laboratories in the Na…</summary>
   </entry>
 </feed>

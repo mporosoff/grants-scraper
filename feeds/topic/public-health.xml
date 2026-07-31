@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml</id>
-  <updated>2026-07-30T19:45:56Z</updated>
+  <updated>2026-07-31T12:20:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -180,6 +180,17 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health — Closes 2027-05-28 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Childhood Asthma in Urban Settings Clinical Research Network (CAUSE) network. The CAUSE network will support multi-site clinical studies and trials on the prevention and treatment of asthma in economically disadvantaged pediatric populations where disease burden is hi…</summary>
+  </entry>
+  <entry>
+    <title>Core State Injury Prevention Program (Core SIPP)</title>
+    <link href="https://www.grants.gov/search-results-detail/363398"/>
+    <id>urn:funding-finder:grants-gov:363398</id>
+    <updated>2027-01-07T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCIPC</name></author>
+    <category term="Neuroscience"/>
+    <category term="Public health"/>
+    <category term="Transportation"/>
+    <summary>Centers for Disease Control - NCIPC — Closes 2027-03-08 — This forecast is for CDC's Core State Injury Prevention Program (Core SIPP), a cooperative agreement to support public health infrastructure, data, and partnerships to use data to identify potential risk and inform the implementation of strategies to prevent unintentional injury. Actions using the best available evidence are intended to increase protective factors and reduce risk factors for injur…</summary>
   </entry>
   <entry>
     <title>Asthma and Allergic Diseases Cooperative Research Centers</title>
@@ -530,6 +541,17 @@
     <summary>National Institutes of Health — Closes 2026-10-17 — The purpose of this NOFO is to enhance the capability of NCATS CTSA Program KL2 scholars supported by the CTSA Program to conduct research as they complete the transition to fully independent academic translational scientists. These small research grants will support different clinical and translational science research projects, including pilot and feasibility studies; secondary data analysis of …</summary>
   </entry>
   <entry>
+    <title>Advancing Global Capacity to Detect and Respond to Fungal Diseases</title>
+    <link href="https://www.grants.gov/search-results-detail/361931"/>
+    <id>urn:funding-finder:grants-gov:361931</id>
+    <updated>2026-07-30T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCEZID</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control - NCEZID — Closes 2026-08-31 — This Notice of Funding Opportunity (NOFO) aims to support activities that build and strengthen sustainable fungal disease detection, diagnosis, surveillance, and response systems. Activities may address interconnected areas such as system and workforce development, laboratory and diagnostic capacity, and improved use of data to inform public health action. Through these efforts, this NOFO seeks to…</summary>
+  </entry>
+  <entry>
     <title>FY26 Bureau of Land Management Abandoned Mine Lands and Hazardous Materials - Bureau wide</title>
     <link href="https://www.grants.gov/search-results-detail/363334"/>
     <id>urn:funding-finder:grants-gov:363334</id>
@@ -623,17 +645,6 @@
     <summary>Community Oriented Policing Services — Closes 2026-08-27 — The Office of Community Oriented Policing Services (COPS) is the component of the U.S. Department of Justice responsible for advancing the practice of community policing and the Administration’s priority of Making America Safe Again by supporting the nation’s state, local, territorial and Tribal law enforcement agencies through information and grant resources. This is a notice of funding opportuni…</summary>
   </entry>
   <entry>
-    <title>Fiscal Year 2026 BioWatch Grant Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363186"/>
-    <id>urn:funding-finder:grants-gov:363186</id>
-    <updated>2026-07-15T00:00:00Z</updated>
-    <author><name>Department of Homeland Security - FEMA</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <summary>Department of Homeland Security - FEMA — Closes 2026-07-30 — The BioWatch program, managed by the U.S. Department of Homeland Security, is designed to detect aerosolized biological attacks by continuously monitoring the air for specific biological threats using strategically placed air collectors. This federally managed, locally operated system provides early warnings of biological incidents, enabling state and local authorities to respond quickly and effec…</summary>
-  </entry>
-  <entry>
     <title>Strengthening Global Health Security by improving public health capacity to detect, notify, and respond to disease outbreaks globally</title>
     <link href="https://www.grants.gov/search-results-detail/360342"/>
     <id>urn:funding-finder:grants-gov:360342</id>
@@ -643,15 +654,5 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>Centers for Disease Control-GHC — Closes 2026-08-14 — This Notice of Funding Opportunity (NOFO) seeks to build upon activities funded by CDC to support Global Health Security (GHS) through implementation of programs and activities that focus on protecting and improving health globally through partnerships with Ministries of Health and other governmental institutions. This NOFO will build on lessons learned from the global COVID outbreak and other sig…</summary>
-  </entry>
-  <entry>
-    <title>Strengthening public health efforts to protect and improve health in the Democratic Republic of the Congo (DRC)</title>
-    <link href="https://www.grants.gov/search-results-detail/360331"/>
-    <id>urn:funding-finder:grants-gov:360331</id>
-    <updated>2026-07-14T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-08-14 — This Notice of Funding Opportunity (NOFO) seeks to build upon activities funded by CDC to support Global Health Security (GHS) in the Democratic Republic of Congo through implementation of programs and activities that focus on protecting and improving health globally through partnerships with Ministries of Health and other governmental institutions. The main outcomes of this NOFO are the following…</summary>
   </entry>
 </feed>

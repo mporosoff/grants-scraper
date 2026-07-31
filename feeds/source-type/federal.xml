@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml</id>
-  <updated>2026-07-30T19:45:56Z</updated>
+  <updated>2026-07-31T12:20:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -89,6 +89,14 @@
     <category term="Agriculture and food"/>
     <category term="Public health"/>
     <summary>National Institutes of Health — Closes 2027-11-10 — The Tobacco Regulatory Science Program, participating NIH Institutes and Centers (ICs), and the Food and Drug Administration (FDA) Center for Tobacco Products (CTP) intend to issue a Notice of Funding Opportunity (NOFO) soliciting applications for Tobacco Centers of Regulatory Science (TCORS). The awards under this NOFO will be administered by NIH using funds made available through FDA CTP and the…</summary>
+  </entry>
+  <entry>
+    <title>Investigator-Focused Award (Parent R35)</title>
+    <link href="https://www.grants.gov/search-results-detail/363391"/>
+    <id>urn:funding-finder:grants-gov:363391</id>
+    <updated>2027-05-27T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <summary>National Institutes of Health — Closes 2027-10-04 — The National Institutes of Health intends to publish a Parent R35 "Investigator-Focused Award" Notice of Funding Opportunity (NOFO) to fund research programs for investigators at all career stages, including Early Stage Investigators (ESIs). The Parent R35 Investigator-Focused Award is intended to provide support for an investigator's program of research within the mission of the awarding Institut…</summary>
   </entry>
   <entry>
     <title>Native American Research Centers for Health (NARCH)</title>
@@ -482,6 +490,17 @@
     <summary>National Institutes of Health — Closes 2027-05-28 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Childhood Asthma in Urban Settings Clinical Research Network (CAUSE) network. The CAUSE network will support multi-site clinical studies and trials on the prevention and treatment of asthma in economically disadvantaged pediatric populations where disease burden is hi…</summary>
   </entry>
   <entry>
+    <title>Core State Injury Prevention Program (Core SIPP)</title>
+    <link href="https://www.grants.gov/search-results-detail/363398"/>
+    <id>urn:funding-finder:grants-gov:363398</id>
+    <updated>2027-01-07T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCIPC</name></author>
+    <category term="Neuroscience"/>
+    <category term="Public health"/>
+    <category term="Transportation"/>
+    <summary>Centers for Disease Control - NCIPC — Closes 2027-03-08 — This forecast is for CDC's Core State Injury Prevention Program (Core SIPP), a cooperative agreement to support public health infrastructure, data, and partnerships to use data to identify potential risk and inform the implementation of strategies to prevent unintentional injury. Actions using the best available evidence are intended to increase protective factors and reduce risk factors for injur…</summary>
+  </entry>
+  <entry>
     <title>Asthma and Allergic Diseases Cooperative Research Centers</title>
     <link href="https://www.grants.gov/search-results-detail/362953"/>
     <id>urn:funding-finder:grants-gov:362953</id>
@@ -579,21 +598,5 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Education and workforce"/>
     <summary>Health Resources and Services Administration — Closes 2027-02-02 — The Centers of Excellence Program provides grants to health professions schools and other public and nonprofit health or educational entities to assist schools in supporting programs of excellence in health professions education for under-represented minority individuals. By statute, the Centers of Excellence Program awards funding to organizations to operate programs that establish, strengthen, a…</summary>
-  </entry>
-  <entry>
-    <title>KUH P30 Resource Core Center (P30 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/363036"/>
-    <id>urn:funding-finder:grants-gov:363036</id>
-    <updated>2026-12-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <summary>National Institutes of Health — Closes 2027-01-30 — This Notice of Funding Opportunity (NOFO) requests applications for Resource Core Centers within the mission of NIDDK/Kidney, Urology, and Hematology (KUH) Diseases. Each Center is designed to advance national research efforts by sharing unique research resources (e.g., data, reagents, models, tools, services, expertise) with the broader community. The Resource Core Centers are expected to work co…</summary>
-  </entry>
-  <entry>
-    <title>KUH U24 Center Coordinating Hub (U24 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/363039"/>
-    <id>urn:funding-finder:grants-gov:363039</id>
-    <updated>2026-12-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <summary>National Institutes of Health — Closes 2027-01-30 — This Notice of Funding Opportunity (NOFO) requests applications for Center Coordinating Hubs within the mission of NIDDK/Kidney, Urology, and Hematology (KUH) Diseases. Each Center Coordinating Hub will work collaboratively with a national network of funded Centers to develop and share unique research resources (e.g., data, reagents, models, tools, services, expertise) with the broader community.</summary>
   </entry>
 </feed>

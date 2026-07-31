@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-07-30T19:45:56Z</updated>
+  <updated>2026-07-31T12:20:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -89,6 +89,14 @@
     <category term="Agriculture and food"/>
     <category term="Public health"/>
     <summary>National Institutes of Health — Closes 2027-11-10 — The Tobacco Regulatory Science Program, participating NIH Institutes and Centers (ICs), and the Food and Drug Administration (FDA) Center for Tobacco Products (CTP) intend to issue a Notice of Funding Opportunity (NOFO) soliciting applications for Tobacco Centers of Regulatory Science (TCORS). The awards under this NOFO will be administered by NIH using funds made available through FDA CTP and the…</summary>
+  </entry>
+  <entry>
+    <title>Investigator-Focused Award (Parent R35)</title>
+    <link href="https://www.grants.gov/search-results-detail/363391"/>
+    <id>urn:funding-finder:grants-gov:363391</id>
+    <updated>2027-05-27T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <summary>National Institutes of Health — Closes 2027-10-04 — The National Institutes of Health intends to publish a Parent R35 "Investigator-Focused Award" Notice of Funding Opportunity (NOFO) to fund research programs for investigators at all career stages, including Early Stage Investigators (ESIs). The Parent R35 Investigator-Focused Award is intended to provide support for an investigator's program of research within the mission of the awarding Institut…</summary>
   </entry>
   <entry>
     <title>Native American Research Centers for Health (NARCH)</title>
@@ -480,6 +488,17 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health — Closes 2027-05-28 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Childhood Asthma in Urban Settings Clinical Research Network (CAUSE) network. The CAUSE network will support multi-site clinical studies and trials on the prevention and treatment of asthma in economically disadvantaged pediatric populations where disease burden is hi…</summary>
+  </entry>
+  <entry>
+    <title>Core State Injury Prevention Program (Core SIPP)</title>
+    <link href="https://www.grants.gov/search-results-detail/363398"/>
+    <id>urn:funding-finder:grants-gov:363398</id>
+    <updated>2027-01-07T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCIPC</name></author>
+    <category term="Neuroscience"/>
+    <category term="Public health"/>
+    <category term="Transportation"/>
+    <summary>Centers for Disease Control - NCIPC — Closes 2027-03-08 — This forecast is for CDC's Core State Injury Prevention Program (Core SIPP), a cooperative agreement to support public health infrastructure, data, and partnerships to use data to identify potential risk and inform the implementation of strategies to prevent unintentional injury. Actions using the best available evidence are intended to increase protective factors and reduce risk factors for injur…</summary>
   </entry>
   <entry>
     <title>Asthma and Allergic Diseases Cooperative Research Centers</title>
@@ -974,25 +993,5 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Education and workforce"/>
     <summary>Health Resources and Services Administration — Closes 2027-01-18 — The purpose of this cooperative agreement is to provide tools, training and technical assistance (TA) to RWHAP Parts A and B recipients and their planning bodies to support integrated HIV prevention and care planning, maximizing resources and stregthening the system of HIV care and treatment.</summary>
-  </entry>
-  <entry>
-    <title>Collaborative Network for Clinical Research on Immune Tolerance</title>
-    <link href="https://www.grants.gov/search-results-detail/362946"/>
-    <id>urn:funding-finder:grants-gov:362946</id>
-    <updated>2026-10-16T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-01-29 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Collaborative Network for Clinical Research on Immune Tolerance. The purpose of this program is to enhance understanding of the underlying mechanisms of the induction, maintenance, and loss of immune tolerance in humans; and to develop improved tolerogenic interventio…</summary>
-  </entry>
-  <entry>
-    <title>Clinical Trials and Ancillary Studies Conducted within NIH-Funded Clinical Trial Research Networks (UG3/UH3 - Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/361522"/>
-    <id>urn:funding-finder:grants-gov:361522</id>
-    <updated>2026-10-10T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health — Closes 2026-11-10 — The National Institute of Neurological Disorders and Stroke (NINDS), in conjunction with additional Institutes/Centers (ICs)at the National Institutes of Health seek to support projects proposing Clinical Trials and Ancillary Studies that are conducted within NIH-Funded Clinical Trial Research Networks.The program will encourage applications for multi-center clinical trials to be conducted within …</summary>
   </entry>
 </feed>

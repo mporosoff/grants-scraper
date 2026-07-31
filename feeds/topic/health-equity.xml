@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/health-equity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/health-equity.xml</id>
-  <updated>2026-07-30T19:45:56Z</updated>
+  <updated>2026-07-31T12:20:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Clean Energy Training Services</title>
@@ -228,20 +228,6 @@
     <summary>National Institutes of Health — Closes 2028-01-07 — The purpose of this initiative is to advance the science and implementation of innovative multi-level health care research for older adults from populations that experience health disparities. The initiative will support research designed to (1) gain a better understanding of appropriate screening, diagnostic, and clinical care guidelines in a primary care setting, (2) explore shared decision-maki…</summary>
   </entry>
   <entry>
-    <title>Developmental Sciences</title>
-    <link href="https://www.grants.gov/search-results-detail/352455"/>
-    <id>urn:funding-finder:grants-gov:352455</id>
-    <updated>2024-02-15T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Health equity"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>U.S. National Science Foundation — Closes 2026-07-30 — Developmental Sciences supports basic research that increases our understanding of perceptual, cognitive, linguistic, social, cultural, and biological processes related to human development across the lifespan. Research supported by this program will add to our knowledge of the underlying developmental processes that support social, cognitive, and behavioral functioning, thereby illuminating ways …</summary>
-  </entry>
-  <entry>
     <title>NHLBI Program Project Applications (P01 Clinical Trials Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/351057"/>
     <id>urn:funding-finder:grants-gov:351057</id>
@@ -277,6 +263,7 @@
     <category term="Health equity"/>
     <category term="Technology development"/>
     <category term="Transportation"/>
+    <category term="Data science"/>
     <summary>U.S. National Science Foundation — Posted — The NSF Engineering Directorate (ENG) has launched a multi-year initiative, the Professional Formation of Engineers, to create and support an innovative and inclusive engineering profession for the 21st century. Professional Formation of Engineers (PFE) refers to the formal and informal processes and value systems by which people become engineers. It also includes the ethical responsibility of pra…</summary>
   </entry>
   <entry>

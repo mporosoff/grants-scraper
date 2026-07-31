@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-07-30T19:45:56Z</updated>
+  <updated>2026-07-31T12:20:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Rocky Mountain Cooperative Ecosystem Studies Unit (CESU)</title>
@@ -388,10 +388,11 @@
     <id>urn:funding-finder:grants-gov:363240</id>
     <updated>2026-07-20T00:00:00Z</updated>
     <author><name>NASA Headquarters</name></author>
+    <category term="Artificial intelligence and machine learning"/>
     <category term="Education and workforce"/>
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters — Closes 2026-10-20 — PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by 8/20/2026. See the full posting on NSPIRES for details. NOTICE: Amended July 20, 2026. This amendment adds this new program element to ROSES-2025. Mandatory Notices of Intent are due by August 20, 2026, and proposals are due October 20, 2026. Any proposal not preceded by an on-time NOI will be declined without …</summary>
+    <summary>NASA Headquarters — Closes 2026-10-20 — PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by 8/20/2026. See the full posting on NSPIRES for details. NOTICE: July 30, 2026. An erroneous reference in Section 4.1 to was corrected to refer to Section 4.2 regarding Sub-element of relevance. Section 4.3.3 "Use of Generative AI" was added. On the NSPIRES cover page, the NOI Program Specific Data Cover Page El…</summary>
   </entry>
   <entry>
     <title>ROSES25: A.15 Biosphere</title>
