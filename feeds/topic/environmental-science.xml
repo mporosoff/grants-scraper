@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml</id>
-  <updated>2026-07-31T12:20:29Z</updated>
+  <updated>2026-08-01T11:38:52Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
@@ -71,6 +71,18 @@
     <category term="Environmental science"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health — Closes 2027-05-27 — The National Institute of Mental Health (NIMH) intends to publish a notice of funding opportunity (NOFO) to solicit research applications for practice-based research centers to support interdisciplinary teams of mental health researchers to engage in high-impact studies that will significantly advance clinical practice and generate knowledge to fuel the transformation of mental health care in the …</summary>
+  </entry>
+  <entry>
+    <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
+    <link href="https://www.grants.gov/search-results-detail/363412"/>
+    <id>urn:funding-finder:grants-gov:363412</id>
+    <updated>2026-12-18T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Environmental science"/>
+    <summary>Health Resources and Services Administration — Closes 2027-03-18 — The purpose of this program is to improve maternal and infant outcomes by preventing contact with harmful materials before, during, and after pregnancy. This program aims to improve maternal and infant health outcomes by preventing harmful exposures before, during, and after pregnancy. It supports a national expert-staffed call center that provides timely, evidence-based information and personaliz…</summary>
   </entry>
   <entry>
     <title>NIOSH Exploratory/Developmental Grant Program (R21)</title>
@@ -148,6 +160,29 @@
     <category term="Environmental science"/>
     <category term="Public health"/>
     <summary>National Institutes of Health — Closes 2027-01-29 — The National Institute of Environmental Health Sciences (NIEHS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose translational research hubs with multiple highly integrated components focused on research, capacity building, and community/public health translation for regionally relevant topics related to the health impacts of extreme weather and cumula…</summary>
+  </entry>
+  <entry>
+    <title>World Trade Center Youth Research Coordinating Center (U54)</title>
+    <link href="https://www.grants.gov/search-results-detail/363417"/>
+    <id>urn:funding-finder:grants-gov:363417</id>
+    <updated>2026-11-24T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Neuroscience"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-23 — The National Institute for Occupational Safety and Health (NIOSH), World Trade Center (WTC) Health Program, plans to establish a WTC Youth Research Coordinating Center ("Center") through a U54 cooperative agreement.In December 2022, Congress amended the Public Health Service Act (42 U.S.C. § 300mm–51(c)) to direct the WTC Health Program Administrator to establish a research cohort for emerging hea…</summary>
+  </entry>
+  <entry>
+    <title>Ryan White HIV/AIDS Program Part B AIDS Drug Assistance Program Training and Technical Assistance</title>
+    <link href="https://www.grants.gov/search-results-detail/363414"/>
+    <id>urn:funding-finder:grants-gov:363414</id>
+    <updated>2026-11-21T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>Health Resources and Services Administration — Closes 2027-01-20 — The purpose of this funding is to build the capacity of ADAPs through tools and technical assistance to maximize the impact of ADAPs in improving the health outcomes of people with HIV in a changing health care environment.</summary>
   </entry>
   <entry>
     <title>Precision and Systems Biology to Uncover the Link Between Chronic and Infectious Diseases</title>
@@ -276,6 +311,17 @@
     <summary>National Institutes of Health — Closes 2026-11-01 — The National Institute of Diabetes and Digestive Diseases and Nutrition (NIDDK) seeks to advance its mission by continuing the NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC). The IBDGC has led collaborative efforts resulting in the identification of &gt;300 genetic risk loci for different IBD subtypes across patient populations and characterization of underlying biological mechanisms. D…</summary>
   </entry>
   <entry>
+    <title>U.S. Embassy Nassau Annual Program Statement for Public Diplomacy</title>
+    <link href="https://www.grants.gov/search-results-detail/363406"/>
+    <id>urn:funding-finder:grants-gov:363406</id>
+    <updated>2026-07-31T00:00:00Z</updated>
+    <author><name>U.S. Mission to the Bahamas</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>U.S. Mission to the Bahamas — Closes 2026-08-14 — The U.S. Embassy Nassau Public Diplomacy Section announces an open competition for grants to implement programs that strengthen bilateral relations and advance shared priorities between the United States and The Bahamas. Priority program areas include Freedom 250 (commemorating the 250th anniversary of American independence); Business Development and Entrepreneurship; Educational and Cultural Prog…</summary>
+  </entry>
+  <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Rocky Mountain Cooperative Ecosystem Studies Unit (CESU)</title>
     <link href="https://www.grants.gov/search-results-detail/363385"/>
     <id>urn:funding-finder:grants-gov:363385</id>
@@ -302,17 +348,6 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Bureau of Reclamation — Closes 2026-09-29 — The Bureau of Reclamation"s Desalination and Water Purification Research (DWPR) Program aims to increase water supplies by reducing the costs, energy requirements, and other barriers to adoption of treating impaired water for beneficial uses.This NOFO invites proposals from eligible applicants to conduct innovative laboratory and pilot-scale water treatment research. Strong applications will demon…</summary>
-  </entry>
-  <entry>
-    <title>U.S. Embassy Nassau Annual Program Statement for Public Diplomacy</title>
-    <link href="https://www.grants.gov/search-results-detail/363346"/>
-    <id>urn:funding-finder:grants-gov:363346</id>
-    <updated>2026-07-28T00:00:00Z</updated>
-    <author><name>U.S. Mission to the Bahamas</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>U.S. Mission to the Bahamas — Closes 2026-08-14 — The U.S. Embassy Nassau Public Diplomacy Section announces an open competition for grants to implement programs that strengthen bilateral relations and advance shared priorities between the United States and The Bahamas. Priority program areas include Freedom 250 (commemorating the 250th anniversary of American independence); Business Development and Entrepreneurship; Educational and Cultural Prog…</summary>
   </entry>
   <entry>
     <title>Building Skills, Strengthening Communities, and Advancing Innovation in Northwest Mexico</title>
@@ -661,43 +696,5 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>Environmental Protection Agency — Closes 2026-09-23 — This notice announces the availability of funds and solicits applications from eligible entities to deliver Brownfields Job Training programs that recruit, train, and place local, unemployed, and underemployed residents with the skills needed to secure full-time employment in the environmental field.Brownfields Job Training Grants fund training programs that strengthen local workforces by preparin…</summary>
-  </entry>
-  <entry>
-    <title>American Center Yangon (ACY) Small Grants Competition</title>
-    <link href="https://www.grants.gov/search-results-detail/363184"/>
-    <id>urn:funding-finder:grants-gov:363184</id>
-    <updated>2026-07-15T00:00:00Z</updated>
-    <author><name>U.S. Mission to Myanmar</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>U.S. Mission to Myanmar — Closes 2026-08-10 — 1. Project Background, Goals and Objectives American Center Yangon Small Grants’ projects must clearly advance America First foreign policy principles by demonstrating how the proposed activities make the United States safer, stronger, and more prosperous, while celebrating Freedom250 and American excellence. Priority will be given to projects that deliver tangible, measurable benefits to U.S. int…</summary>
-  </entry>
-  <entry>
-    <title>Jefferson Center Mandalay (JCM) Small Grants Competition</title>
-    <link href="https://www.grants.gov/search-results-detail/363185"/>
-    <id>urn:funding-finder:grants-gov:363185</id>
-    <updated>2026-07-15T00:00:00Z</updated>
-    <author><name>U.S. Mission to Myanmar</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>U.S. Mission to Myanmar — Closes 2026-08-10 — 1. Project Background, Goals and Objectives Jefferson Center Mandalay Small Grants’ projects must clearly advance America First foreign policy principles by demonstrating how the proposed activities make the United States safer, stronger, and more prosperous, while celebrating Freedom250 and American excellence. Priority will be given to projects that deliver tangible, measurable benefits to U.S. …</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for Affiliated Partner with the Great Lakes Northern Forest Cooperative Ecosystem Studies Unit (CESU)</title>
-    <link href="https://www.grants.gov/search-results-detail/363172"/>
-    <id>urn:funding-finder:grants-gov:363172</id>
-    <updated>2026-07-14T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Environmental science"/>
-    <summary>Geological Survey — Closes 2026-08-14 — The U.S. Geological Survey's (USGS) Fort Collins Science Center is offering a cooperative-agreement funding opportunity to a CESU partner having capability to conduct research and studies related to the long-term demography of bumble bees, with a focus on imperiled species. The research will focus on Bombus affinis (rusty patched bumble bee), the previously-widespread bumble bee species whose popu…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml</id>
-  <updated>2026-07-31T12:20:29Z</updated>
+  <updated>2026-08-01T11:38:52Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -109,6 +109,17 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Cancer"/>
     <summary>National Institutes of Health — Closes 2027-01-25 — This Notice of Funding Opportunity (NOFO) invites applications for P30 Cancer Center Support Grants (CCSGs) to support NCI-Designated Cancer Centers. CCSGs support three types of Cancer Centers: 1) Comprehensive Cancer Centers, which demonstrate reasonable depth and breadth of research activities in each of three major areas: basic laboratory; clinical; and prevention, control and population-based…</summary>
+  </entry>
+  <entry>
+    <title>State Occupational Safety and Health Surveillance Program (U60)</title>
+    <link href="https://www.grants.gov/search-results-detail/363431"/>
+    <id>urn:funding-finder:grants-gov:363431</id>
+    <updated>2026-10-30T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-30 — NIOSH has provided financial and technical assistance to develop or expand state-level OSH surveillance capacity and infrastructure since the 1970s. From 2021-2026, NIOSH funded cooperative agreements in 23 states under announcement PAR-20-312. These programs varied in scope and focus, each providing a level of occupational health expertise to the public health system in their state. Grantees incl…</summary>
   </entry>
   <entry>
     <title>Genomic Community Resources (U24 Clinical Trials Not Allowed)</title>
@@ -604,16 +615,5 @@
     <category term="Cancer"/>
     <category term="Public health"/>
     <summary>National Institutes of Health — Closes 2029-07-05 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) encourages grant applications to support research in cancer epidemiology cohort studies that address specific knowledge gaps in cancer etiology and survivorship. Applications should include hypothesis-based research, support for cohort infrastructure and/or maintenance, continued follow-up, and sharing of data a…</summary>
-  </entry>
-  <entry>
-    <title>Assay Validation of High Quality Markers for Clinical Studies in Cancer (UH2/UH3 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360946"/>
-    <id>urn:funding-finder:grants-gov:360946</id>
-    <updated>2026-02-16T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health — Closes 2027-02-08 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits applications to support the validation of molecular/cellular/imaging markers (referred to as "markers" or "biomarkers") and assays for cancer detection, diagnosis, prognosis, monitoring, and prediction of response or resistance to treatment, as well as markers for cancer prevention and control. The appl…</summary>
   </entry>
 </feed>

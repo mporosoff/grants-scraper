@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml</id>
-  <updated>2026-07-31T12:20:29Z</updated>
+  <updated>2026-08-01T11:38:52Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Veterans Legacy Grants Program</title>
@@ -36,6 +36,19 @@
     <category term="Environmental science"/>
     <category term="Public health"/>
     <summary>National Institutes of Health — Closes 2027-01-29 — The National Institute of Environmental Health Sciences (NIEHS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose translational research hubs with multiple highly integrated components focused on research, capacity building, and community/public health translation for regionally relevant topics related to the health impacts of extreme weather and cumula…</summary>
+  </entry>
+  <entry>
+    <title>World Trade Center Youth Research Coordinating Center (U54)</title>
+    <link href="https://www.grants.gov/search-results-detail/363417"/>
+    <id>urn:funding-finder:grants-gov:363417</id>
+    <updated>2026-11-24T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Neuroscience"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-23 — The National Institute for Occupational Safety and Health (NIOSH), World Trade Center (WTC) Health Program, plans to establish a WTC Youth Research Coordinating Center ("Center") through a U54 cooperative agreement.In December 2022, Congress amended the Public Health Service Act (42 U.S.C. § 300mm–51(c)) to direct the WTC Health Program Administrator to establish a research cohort for emerging hea…</summary>
   </entry>
   <entry>
     <title>NIOSH Robotics and Intelligent Mining Technology and Workplace Safety Research (U60)</title>

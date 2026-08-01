@@ -70,10 +70,10 @@ available but exits visibly and opens or updates an owner-facing GitHub issue.
 UR InfoReady is a disabled shell pending a stable permissioned route.
 
 <!-- catalog-summary:start -->
-The July 31, 2026 build contains 1,503 open or current forecasted funding opportunities
-(1,247 posted and 256 forecasted) rather than the former 48-record engineering
+The August 1, 2026 build contains 1,500 open or current forecasted funding opportunities
+(1,230 posted and 270 forecasted) rather than the former 48-record engineering
 shortlist. It contains no record with a deadline before the catalog date. Current
-published sources are Grants.gov (1,466), NYSERDA (37); additional sources are enabled
+published sources are Grants.gov (1,463), NYSERDA (37); additional sources are enabled
 only after a sustainable public ingestion path and health bounds are verified.
 <!-- catalog-summary:end -->
 
@@ -482,18 +482,18 @@ presented as the FOA.
 ### Current evidence baseline
 
 <!-- catalog-evidence:start -->
-The July 31, 2026 catalog contains 1,503 current posted or forecasted opportunities:
+The August 1, 2026 catalog contains 1,500 current posted or forecasted opportunities:
 
-- 442 have a defensible direct announcement attachment (268 high confidence, 174 medium
+- 429 have a defensible direct announcement attachment (255 high confidence, 174 medium
   confidence);
-- another 638 use an official source page as their primary route;
-- the remaining 423 use the official Grants.gov record as their primary route;
-- 780 contain an agency notice URL across all route types;
-- 398 preserve an official deadline time or timezone;
-- 139 carry a preliminary-stage signal, including 3 narrative dates visibly marked for
+- another 632 use an official source page as their primary route;
+- the remaining 439 use the official Grants.gov record as their primary route;
+- 765 contain an agency notice URL across all route types;
+- 403 preserve an official deadline time or timezone;
+- 138 carry a preliminary-stage signal, including 3 narrative dates visibly marked for
   verification;
-- 704 (46.8%) have an official per-award floor or ceiling;
-- 992 (66.0%) have at least one structured funding amount; and
+- 700 (46.7%) have an official per-award floor or ceiling;
+- 988 (65.9%) have at least one structured funding amount; and
 - zero have a past structured close date and 1 have a detected XML/detail-API deadline
   conflict in this build.
 <!-- catalog-evidence:end -->

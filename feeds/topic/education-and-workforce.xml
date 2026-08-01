@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml</id>
-  <updated>2026-07-31T12:20:29Z</updated>
+  <updated>2026-08-01T11:38:52Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -147,6 +147,16 @@
     <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-04-12 — The purpose of the NIOSH Support for Conferences and Scientific Meetings (U13) program is to support high-quality scientific meetings, conferences, and workshops that are relevant to the NIOSH mission and that promote occupational safety and health. The conference program is an important part of the NIOSH mission. Applications should address and advance research topics in occupational safety and h…</summary>
   </entry>
   <entry>
+    <title>Strengthening Public Health Systems and Services in Indian Country</title>
+    <link href="https://www.grants.gov/search-results-detail/363416"/>
+    <id>urn:funding-finder:grants-gov:363416</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>CENTERS FOR DISEASE CONTROL CSTLTS</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>CENTERS FOR DISEASE CONTROL CSTLTS — Closes 2027-04-02 — CDC announces the availability of supplemental funding for the 34 American Indian and Alaska Native (AI/AN) Tribes and regional AI/AN tribally designated organizations awarded funding under CDC-RFA-TO-23-0001: Strengthening Public Health Systems and Services in Indian Country. The CDC-RFA-TO-23-0001 recipients are eligible to submit applications for new FY 2027 Centers, Institute, and Offices (CIO…</summary>
+  </entry>
+  <entry>
     <title>Limited Competition: The NHGRI Analysis, Visualization, and Informatics Lab-space (AnVIL) (U54 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/362638"/>
     <id>urn:funding-finder:grants-gov:362638</id>
@@ -157,6 +167,16 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>National Institutes of Health — Closes 2027-05-25 — The National Human Genome Research Institute (NHGRI) intends to issue a Notice of Funding Opportunity (NOFO) to support a limited competition renewal of the Analysis, Visualization, and Informatics Lab-space (AnVIL) program. AnVIL is a secure, cloud-based platform that enables researchers to access, share, and analyze large-scale genomic datasets without relying on local infrastructure. Currently,…</summary>
+  </entry>
+  <entry>
+    <title>State Maternal Health Innovation Program (SMHI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363408"/>
+    <id>urn:funding-finder:grants-gov:363408</id>
+    <updated>2027-01-29T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <summary>Health Resources and Services Administration — Closes 2027-04-19 — The purpose of the State Maternal Health Innovation (SMHI) program is to build capacity in states to improve maternal health and address maternal health gaps. This is done through quality services, a skilled workforce, enhanced data quality and capacity, and innovative programming that reduces maternal mortality and severe maternal morbidity (SMM).</summary>
   </entry>
   <entry>
     <title>Advanced Laboratories for Accelerating the Reach and Impact of Treatments for Youth and Adults with Mental Illness (ALACRITY) Research Centers</title>
@@ -277,6 +297,47 @@
     <summary>National Institutes of Health — Closes 2027-01-25 — This Notice of Funding Opportunity (NOFO) encourages applications to provide continuing support for a National Swine Resource and Research Center (NSRRC). The NSRRC aims to enable gold-standard science in biomedical research by serving as a centralized national resource for the creation, breeding, cryopreservation, and distribution of genetically modified models. By consolidating these essential f…</summary>
   </entry>
   <entry>
+    <title>World Trade Center Youth Research Coordinating Center (U54)</title>
+    <link href="https://www.grants.gov/search-results-detail/363417"/>
+    <id>urn:funding-finder:grants-gov:363417</id>
+    <updated>2026-11-24T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Neuroscience"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-23 — The National Institute for Occupational Safety and Health (NIOSH), World Trade Center (WTC) Health Program, plans to establish a WTC Youth Research Coordinating Center ("Center") through a U54 cooperative agreement.In December 2022, Congress amended the Public Health Service Act (42 U.S.C. § 300mm–51(c)) to direct the WTC Health Program Administrator to establish a research cohort for emerging hea…</summary>
+  </entry>
+  <entry>
+    <title>Ryan White HIV/AIDS Program Part B AIDS Drug Assistance Program Training and Technical Assistance</title>
+    <link href="https://www.grants.gov/search-results-detail/363414"/>
+    <id>urn:funding-finder:grants-gov:363414</id>
+    <updated>2026-11-21T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>Health Resources and Services Administration — Closes 2027-01-20 — The purpose of this funding is to build the capacity of ADAPs through tools and technical assistance to maximize the impact of ADAPs in improving the health outcomes of people with HIV in a changing health care environment.</summary>
+  </entry>
+  <entry>
+    <title>Leadership Education in Adolescent Health (LEAH)</title>
+    <link href="https://www.grants.gov/search-results-detail/363410"/>
+    <id>urn:funding-finder:grants-gov:363410</id>
+    <updated>2026-11-20T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <summary>Health Resources and Services Administration — Closes 2027-01-20 — The Leadership Education in Adolescent Health (LEAH) Program establishes adolescent and young adult (AYA) health graduate training programs that aim to expand access to high quality, team-based health care for the AYA population. The LEAH program trains health care professionals who can address chronic disease prevention in adolescents and young adults.</summary>
+  </entry>
+  <entry>
+    <title>Maternal and Child Health (MCH) Nutrition Training Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363411"/>
+    <id>urn:funding-finder:grants-gov:363411</id>
+    <updated>2026-11-20T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <summary>Health Resources and Services Administration — Closes 2027-01-20 — The purpose of this program is to improve the nutrition and overall well-being of mothers, children, and families. MCH Nutrition Training Programs will provide interdisciplinary graduate education to build a skilled workforce, provide technical assistance to state Title V and other MCH programs, expand nutrition education and career pathways, and improve access to high-quality nutrition services t…</summary>
+  </entry>
+  <entry>
     <title>NIOSH Centers of Excellence for Total Worker Health® (U19)</title>
     <link href="https://www.grants.gov/search-results-detail/363369"/>
     <id>urn:funding-finder:grants-gov:363369</id>
@@ -321,6 +382,17 @@
     <summary>National Institutes of Health — Closes 2027-01-05 — The National Institutes of Health (NIH) and Centers for Disease Control and Prevention (CDC), including the participating Institutes, Centers and Offices, intend to publish a Notice of Funding Opportunity (NOFO) to invite eligible United States small business concerns (SBCs) to submit Small Business Innovation Research (SBIR) Phase I, and Fast-Track (NIH only) grant applications for the Small Busi…</summary>
   </entry>
   <entry>
+    <title>State Occupational Safety and Health Surveillance Program (U60)</title>
+    <link href="https://www.grants.gov/search-results-detail/363431"/>
+    <id>urn:funding-finder:grants-gov:363431</id>
+    <updated>2026-10-30T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-30 — NIOSH has provided financial and technical assistance to develop or expand state-level OSH surveillance capacity and infrastructure since the 1970s. From 2021-2026, NIOSH funded cooperative agreements in 23 states under announcement PAR-20-312. These programs varied in scope and focus, each providing a level of occupational health expertise to the public health system in their state. Grantees incl…</summary>
+  </entry>
+  <entry>
     <title>NIOSH Miner Safety and Health Training Program - Western United States – U60</title>
     <link href="https://www.grants.gov/search-results-detail/363232"/>
     <id>urn:funding-finder:grants-gov:363232</id>
@@ -330,6 +402,15 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-01-26 — BackgroundDespite advances in technology and improvements in work environments, mining remains one of the most challenging and hazardous occupations in the United States. The industry continues to experience a fatality rate nearly three times higher than the national average for all industries, according to the U.S. Bureau of Labor Statistics (BLS). Public MSHA data show that in 2025, the U.S. min…</summary>
+  </entry>
+  <entry>
+    <title>Family-to-Family Health Information Centers (F2F HIC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363413"/>
+    <id>urn:funding-finder:grants-gov:363413</id>
+    <updated>2026-10-20T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <summary>Health Resources and Services Administration — Closes 2026-12-19 — The purpose of this program is to provide information, education, technical assistance, and peer support to families of children and youth with special health care needs (CYSHCN) and the professionals who serve them so that CYSHCN and their families can better navigate complex systems to receive needed services and improve their health and well-being.</summary>
   </entry>
   <entry>
     <title>Ryan White HIV/AIDS Program (RWHAP) Integrated HIV/AIDS Planning Resource Allocation Cooperative Agreement</title>
@@ -549,85 +630,5 @@
     <category term="Biology and biotechnology"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health — Closes 2026-10-13 — The NIGMS Mature Synchrotron Resources for Structural Biology program supports mature technologies at synchrotron facilities that provide biomedical researchers with state-of-the-art X-ray beamlines, hands-on user training, and expert assistance to generate and analyze structural biology data. NIGMS intends to reissue a Notice of Funding Opportunity to continue to support these important national …</summary>
-  </entry>
-  <entry>
-    <title>Alumni Engagement Innovation Fund 2026</title>
-    <link href="https://www.grants.gov/search-results-detail/363405"/>
-    <id>urn:funding-finder:grants-gov:363405</id>
-    <updated>2026-07-31T00:00:00Z</updated>
-    <author><name>U.S. Mission to Laos</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Laos — Closes 2026-08-01 — The U.S. Department of State’s Embassy Vientiane announces an open competition to implement a program under the 2026 Alumni Engagement Innovation Fund (AEIF). This program is designed to increase the impact of the U.S. government’s investment in exchange participants and programs by helping alumni develop and implement projects that support U.S. policy objectives and promote shared interests. All …</summary>
-  </entry>
-  <entry>
-    <title>Children’s Hospitals Graduate Medical Education (CHGME) Payment Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363113"/>
-    <id>urn:funding-finder:grants-gov:363113</id>
-    <updated>2026-07-31T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Education and workforce"/>
-    <summary>Health Resources and Services Administration — Closes 2026-08-31 — The Children’s Hospitals Graduate Medical Education (CHGME) Payment Program funds freestanding, children's hospitals. The money helps their graduate medical education (GME) programs train resident physicians and dentists.</summary>
-  </entry>
-  <entry>
-    <title>Teaching Health Center Graduate Medical Education (THCGME) Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363111"/>
-    <id>urn:funding-finder:grants-gov:363111</id>
-    <updated>2026-07-31T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Education and workforce"/>
-    <summary>Health Resources and Services Administration — Closes 2026-09-29 — The purpose of the THCGME Program is to provide maintenance funding to support the training of residents in existing HRSA-supported primary care residency training programs in community-based ambulatory patient care centers. These programs will prepare residents to provide high-quality care, particularly in rural and medically vulnerable communities, and develop competencies to serve a wide range …</summary>
-  </entry>
-  <entry>
-    <title>AI3 Action Institute - Artificial Intelligence for American Indians</title>
-    <link href="https://www.grants.gov/search-results-detail/362270"/>
-    <id>urn:funding-finder:grants-gov:362270</id>
-    <updated>2026-07-30T00:00:00Z</updated>
-    <author><name>Administration for Children and Families - ANA</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <summary>Administration for Children and Families - ANA — Closes 2026-08-27 — The Administration for Native Americans (ANA) anticipates announcing the availability of funds and requesting applications for the AI3 Action Institute – Artificial Intelligence for American Indians. The successful applicant will establish the AI3 Action Institute, which will monitor the pace of AI change, identify responsible and practical opportunities to apply this technology to socioeconomic d…</summary>
-  </entry>
-  <entry>
-    <title>Advancing Global Capacity to Detect and Respond to Fungal Diseases</title>
-    <link href="https://www.grants.gov/search-results-detail/361931"/>
-    <id>urn:funding-finder:grants-gov:361931</id>
-    <updated>2026-07-30T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCEZID</name></author>
-    <category term="Education and workforce"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control - NCEZID — Closes 2026-08-31 — This Notice of Funding Opportunity (NOFO) aims to support activities that build and strengthen sustainable fungal disease detection, diagnosis, surveillance, and response systems. Activities may address interconnected areas such as system and workforce development, laboratory and diagnostic capacity, and improved use of data to inform public health action. Through these efforts, this NOFO seeks to…</summary>
-  </entry>
-  <entry>
-    <title>Pediatric Disaster Care Centers of Excellence Program Cooperative Agreement</title>
-    <link href="https://www.grants.gov/search-results-detail/363404"/>
-    <id>urn:funding-finder:grants-gov:363404</id>
-    <updated>2026-07-30T00:00:00Z</updated>
-    <author><name>Assistant Secretary for Preparedness and Response</name></author>
-    <category term="Education and workforce"/>
-    <category term="Infectious disease"/>
-    <summary>Assistant Secretary for Preparedness and Response — Closes 2026-08-31 — The purpose of this NOFO is to fund four PEDs COEs to:Develop a coordinated pediatric disaster care capability for pediatric patient care in disasters.Strengthen pediatric disaster preparedness plans and health care system coordination related to pediatric medical surge in disasters.Enhance statewide and regional medical surge capacity for pediatric patients.Increase and maintain health care profe…</summary>
-  </entry>
-  <entry>
-    <title>Diaper Distribution Demonstration Research Pilot (DDDRP)</title>
-    <link href="https://www.grants.gov/search-results-detail/363015"/>
-    <id>urn:funding-finder:grants-gov:363015</id>
-    <updated>2026-07-30T00:00:00Z</updated>
-    <author><name>Administration for Children and Families - OCS</name></author>
-    <category term="Education and workforce"/>
-    <summary>Administration for Children and Families - OCS — Closes 2026-09-15 — The Office of Community Services (OCS) announces the availability of funds for a Diaper Distribution Demonstration and Research Pilot (DDDRP). OCS anticipates awarding approximately $29 million available through fourteen cooperative agreements to eligible Community Services Block Grant (CSBG) state associations, tribes that were funded directly by the CSBG in fiscal year (FY) 2025, and the CSBG-fu…</summary>
-  </entry>
-  <entry>
-    <title>OVC FY26 Invited to Apply Antiterrorism and Emergency Assistance Program for Crime Victim Compensation and/or Assistance - Providence, Rhode Island (Crisis)</title>
-    <link href="https://www.grants.gov/search-results-detail/363386"/>
-    <id>urn:funding-finder:grants-gov:363386</id>
-    <updated>2026-07-29T00:00:00Z</updated>
-    <author><name>Office for Victims of Crime</name></author>
-    <category term="Education and workforce"/>
-    <summary>Office for Victims of Crime — Closes 2026-07-31 — This is a notice of funding opportunity (NOFO) for the OVC FY 2026 Invited to Apply Antiterrorism and Emergency Assistance Program for Crime Victim Compensation and/or Assistance. This opportunity supports victims of mass violence and terrorism through the Antiterrorism Emergency Assistance Program (AEAP). Funding for this program comes from the Antiterrorism Emergency Reserve (the Emergency Reser…</summary>
   </entry>
 </feed>

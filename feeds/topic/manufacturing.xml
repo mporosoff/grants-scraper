@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-07-31T12:20:29Z</updated>
+  <updated>2026-08-01T11:38:52Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development</title>
@@ -53,6 +53,17 @@
     <author><name>Bureau of International Labor Affairs</name></author>
     <category term="Manufacturing"/>
     <summary>Bureau of International Labor Affairs — Closes 2026-09-04 — The Bureau of International Labor Affairs (ILAB), U.S. Department of Labor (USDOL, or the Department), announces the availability of approximately $6 million total costs (subject to the availability of Federal funds) for one cooperative agreement to fund a project that will strengthen traceability and responsible sourcing in cotton supply chains in South Asia. These efforts will enhance the reputa…</summary>
+  </entry>
+  <entry>
+    <title>Pax Silica Artificial Intelligence Assistance Project</title>
+    <link href="https://www.grants.gov/search-results-detail/363422"/>
+    <id>urn:funding-finder:grants-gov:363422</id>
+    <updated>2026-07-31T00:00:00Z</updated>
+    <author><name>Bureau of Economic and Business Affairs</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Manufacturing"/>
+    <summary>Bureau of Economic and Business Affairs — Closes 2026-08-20 — Leveraging foreign assistance from the Pax Fund, this NOFO launches the Pax Silica Artificial Intelligence (AI) Assistance Project—a historic first-of-its-kind programmatic initiative to strengthen global AI supply chain security by creating a trusted supply chain credentialing and provenance platform to secure the AI supply chain in partner countries and economies. This NOFO seeks to fund the est…</summary>
   </entry>
   <entry>
     <title>DRL Transshipment Supply Chain Tracing</title>
@@ -173,17 +184,6 @@
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <summary>NYSERDA — Closes 2030-12-30 — The New York School Bus Incentive Program (NYSBIP) is a voucher incentive program to accelerate the deployment of zero-emission school buses and associated charging infrastructure throughout New York State using funds allocated by the 2022 Clean Water, Clean Air, and Green Jobs Environmental Bond Act (Bond Act). More information about how fleets, dealers, and manufacturers can participate in NYSBI…</summary>
-  </entry>
-  <entry>
-    <title>Pax Silica Artificial Intelligence Assistance Project</title>
-    <link href="https://www.grants.gov/search-results-detail/363312"/>
-    <id>urn:funding-finder:grants-gov:363312</id>
-    <updated>2026-07-24T00:00:00Z</updated>
-    <author><name>Bureau of Economic and Business Affairs</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Manufacturing"/>
-    <summary>Bureau of Economic and Business Affairs — Closes 2026-08-20 — Leveraging foreign assistance from the Pax Fund, this NOFO launches the Pax Silica Artificial Intelligence (AI) Assistance Project—a historic first-of-its-kind programmatic initiative to strengthen global AI supply chain security by creating a trusted supply chain credentialing and provenance platform to secure the AI supply chain in partner countries and economies. This NOFO seeks to fund the est…</summary>
   </entry>
   <entry>
     <title>ONAA 7J-TCU Manufacturing NOFO FY2026</title>
@@ -331,19 +331,6 @@
     <summary>Employment and Training Administration — Closes 2026-08-17 — Questions regarding this Training and Employment Guidance Letter (TEGL) may be emailed to Daniela Petchik, Grants Management Specialist at petchik.daniela.m@dol.gov and Brinda Ruggles, Grant Officer at ruggles.brinda@dol.gov. We encourage prospective applicants and interested parties to use the Grants.gov subscription option to register for future updates provided for this particular TEGL.</summary>
   </entry>
   <entry>
-    <title>Public Diplomacy Small Grants Competition</title>
-    <link href="https://www.grants.gov/search-results-detail/363079"/>
-    <id>urn:funding-finder:grants-gov:363079</id>
-    <updated>2026-07-07T00:00:00Z</updated>
-    <author><name>U.S. Mission to Myanmar</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>U.S. Mission to Myanmar — Closes 2026-07-31 — 1. Project Background, Goals, and Objectives PD small grants’ projects must clearly advance America First foreign policy principles by demonstrating how the proposed activities make the United States safer, stronger, and more prosperous, while celebrating Freedom250 and American excellence. Priority will be given to projects that deliver tangible, measurable benefits to U.S. interests; elevate U.S…</summary>
-  </entry>
-  <entry>
     <title>Supply Chain Acceleration and Logistics Enablement (SCALE) Program</title>
     <link href="https://www.grants.gov/search-results-detail/363089"/>
     <id>urn:funding-finder:grants-gov:363089</id>
@@ -461,18 +448,6 @@
     <category term="Data science"/>
     <category term="Energy"/>
     <summary>U.S. Mission to Indonesia — Closes 2026-08-31 — Project Background, Goals, and ObjectivesIn an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will leave…</summary>
-  </entry>
-  <entry>
-    <title>U.S. Talent Program for the U.S. Embassy and Consulates in Canada</title>
-    <link href="https://www.grants.gov/search-results-detail/362763"/>
-    <id>urn:funding-finder:grants-gov:362763</id>
-    <updated>2026-06-11T00:00:00Z</updated>
-    <author><name>U.S. Mission to Canada</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Manufacturing"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Canada — Closes 2026-07-31 — The U.S. Department of State’s Embassy Ottawa announces an open competition to implement a program to connect U.S. citizen talent, including subject matter experts, artists and cultural professionals, and current and former American athletes and coaches, with Canadian audiences and institutions on topics of strategic importance to the United States. Recipients should be prepared to identify and re…</summary>
   </entry>
   <entry>
     <title>Annual Program Statement for Public Diplomacy Mission Mexico - FY26</title>
@@ -656,6 +631,8 @@
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>U.S. National Science Foundation — Posted — The U.S. National Science Foundation (NSF) continues to develop and nurture a national innovation ecosystem that guides the output of scientific discoveries closer to the development of technologies, products, processes, and services that benefit allAmericans. The goals of the NSF I-Corps™program are to spur translation of foundational research to the marketplace, to encourage collaboration betwee…</summary>
   </entry>
   <entry>
@@ -758,5 +735,29 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <summary>Advanced Research Projects Agency Energy — Closes 2029-09-29 — The purpose of this modification is to clarify the meaning of the Program Policy Factors in Section V.C. To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to the ARPA-E website at https://arpa-e-foa.energy.gov. To apply to this NOFO, Applicants must register with and submit application materials through ARPA-E eXCHANGE (https://arpa-e-foa.energy.gov/Registration.aspx). For det…</summary>
+  </entry>
+  <entry>
+    <title>Blueprint Neurotherapeutics Network (BPN): Biologic-based Drug Discovery and Development for Disorders of the Nervous System (UG3/UH3 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/356610"/>
+    <id>urn:funding-finder:grants-gov:356610</id>
+    <updated>2024-10-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <category term="Manufacturing"/>
+    <summary>National Institutes of Health — Closes 2027-08-18 — The Blueprint Neurotherapeutics Network for Biologics (BPN-Biologics) provides support for biologic-based therapeutic discovery and development, from lead optimization through phase I clinical testing. This Funding Opportunity Announcement (FOA) supports preclinical discovery and development of potential therapeutic Biotechnology Products and Biologics including, but not limited to, large biologic…</summary>
+  </entry>
+  <entry>
+    <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development of Disorders of the Nervous System (UG3/UH3 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/356531"/>
+    <id>urn:funding-finder:grants-gov:356531</id>
+    <updated>2024-09-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health — Closes 2026-08-18 — The Blueprint Neurotherapeutics Network (BPN) invites applications from neuroscience investigators seeking support to advance their small molecule drug discovery and development projects into the clinic. Participants in the BPN are responsible for conducting all studies that involve disease- or target-specific assays, models, and other research tools and receive funding for all activities to be co…</summary>
   </entry>
 </feed>

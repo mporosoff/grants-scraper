@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-07-31T12:20:29Z</updated>
+  <updated>2026-08-01T11:38:52Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -650,18 +650,6 @@
     <summary>National Institute of Food and Agriculture — Closes 2026-08-14 — The TCEP-CA under assistance listing 10.517, supports informal, community-based extension projects that address agriculture, youths, economic development, healthy lifestyles, natural resources, or other topics important to Tribal communities. This NOFO will begin a new 4-year continuation funding cycle.</summary>
   </entry>
   <entry>
-    <title>U.S. Talent Program for the U.S. Embassy and Consulates in Canada</title>
-    <link href="https://www.grants.gov/search-results-detail/362763"/>
-    <id>urn:funding-finder:grants-gov:362763</id>
-    <updated>2026-06-11T00:00:00Z</updated>
-    <author><name>U.S. Mission to Canada</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Manufacturing"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Canada — Closes 2026-07-31 — The U.S. Department of State’s Embassy Ottawa announces an open competition to implement a program to connect U.S. citizen talent, including subject matter experts, artists and cultural professionals, and current and former American athletes and coaches, with Canadian audiences and institutions on topics of strategic importance to the United States. Recipients should be prepared to identify and re…</summary>
-  </entry>
-  <entry>
     <title>WaterSMART Cooperative Watershed Management Program</title>
     <link href="https://www.grants.gov/search-results-detail/362755"/>
     <id>urn:funding-finder:grants-gov:362755</id>
@@ -743,5 +731,15 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Bureau of Reclamation — Closes 2026-09-28 — The objectives of this NAA/TAP funding opportunity are to provide funding for drought relief actions/projects that mitigate drought impacts for designated federally recognized tribes within the Colorado River Basin (see Eligibility section for list of tribes), and which advance Presidential and Department of the Interior Priorities within the Basin.Proposals should meet one or more of the followin…</summary>
+  </entry>
+  <entry>
+    <title>Optimizing Behavioral Sleep Interventions for Adolescents and Young Adults (R34 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/359159"/>
+    <id>urn:funding-finder:grants-gov:359159</id>
+    <updated>2026-05-28T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Data science"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health — Closes 2026-10-22 — NIMH seeks applications for pilot research to adapt, optimize, and test behavioral interventions that address common sleep problems in adolescents and young adults with or at risk for a mental health disorder. This notice of funding opportunity (NOFO) supports pilot clinical trials designed to evaluate the feasibility, tolerability, acceptability, safety, and potential effectiveness of the approac…</summary>
   </entry>
 </feed>

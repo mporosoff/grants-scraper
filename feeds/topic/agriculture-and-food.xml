@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-07-31T12:20:29Z</updated>
+  <updated>2026-08-01T11:38:52Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -38,6 +38,18 @@
     <summary>National Institutes of Health — Closes 2027-05-21 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Asthma and Allergic Diseases Cooperative Research Centers (AADCRC). The AADCRC program serves as the cornerstone of NIAID's efforts to promote clinical and basic research in diseases including asthma, upper airway allergic/inflammatory diseases, food and drug allergie…</summary>
   </entry>
   <entry>
+    <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
+    <link href="https://www.grants.gov/search-results-detail/363412"/>
+    <id>urn:funding-finder:grants-gov:363412</id>
+    <updated>2026-12-18T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Environmental science"/>
+    <summary>Health Resources and Services Administration — Closes 2027-03-18 — The purpose of this program is to improve maternal and infant outcomes by preventing contact with harmful materials before, during, and after pregnancy. This program aims to improve maternal and infant health outcomes by preventing harmful exposures before, during, and after pregnancy. It supports a national expert-staffed call center that provides timely, evidence-based information and personaliz…</summary>
+  </entry>
+  <entry>
     <title>NIOSH Centers for Agriculture, Forestry, and Fishing Safety and Health (U54)</title>
     <link href="https://www.grants.gov/search-results-detail/363195"/>
     <id>urn:funding-finder:grants-gov:363195</id>
@@ -67,6 +79,16 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Agriculture and food"/>
     <summary>Health Resources and Services Administration — Closes 2026-10-20 — Fiscal Year (FY) 2027 Regional Nutrition Hubs (RNH) will support region-specific technical assistance (TA) on expanding high-quality nutrition services to the Health Resources and Services Administration's (HRSA) Health Center Program (H80) award recipients and look-alikes (health centers). Nutrition services prevent, manage, and treat diseases and conditions through nutritional and food-based int…</summary>
+  </entry>
+  <entry>
+    <title>Sun Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363424"/>
+    <id>urn:funding-finder:grants-gov:363424</id>
+    <updated>2026-07-31T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Energy"/>
+    <summary>National Institute of Food and Agriculture — Closes 2026-08-17 — In carrying out the SGP, under Assistance Listing Number 10.320, NIFA is authorized to make awards to fund subgrants and activities that: 1. Enhance national energy security through the development, distribution, and implementation of biobased energy technologies; 2. Promote varied agricultural production systems in the U.S. through biobased energy and product technologies; 3. Promote economic gro…</summary>
   </entry>
   <entry>
     <title>Sheep Production and Marketing Grant Program FY 2026</title>
@@ -371,17 +393,6 @@
     <summary>Geological Survey — Closes 2026-08-14 — The U.S. Geological Survey's (USGS) Fort Collins Science Center is offering a cooperative-agreement funding opportunity to a CESU partner having capability to conduct research and studies related to the long-term demography of bumble bees, with a focus on imperiled species. The research will focus on Bombus affinis (rusty patched bumble bee), the previously-widespread bumble bee species whose popu…</summary>
   </entry>
   <entry>
-    <title>Enhancing Agricultural Opportunities for Military Veterans Competitive Grants Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363139"/>
-    <id>urn:funding-finder:grants-gov:363139</id>
-    <updated>2026-07-09T00:00:00Z</updated>
-    <author><name>National Institute of Food and Agriculture</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <summary>National Institute of Food and Agriculture — Closes 2026-07-31 — The USDA and NIFA continue to take a leadership role in assisting veterans who are interested in pursuing careers in agriculture, while also supporting military families in rural America. As military members complete their tours of duty or transition to Veteran status, many return to rural America ready to farm, ranch, and start new businesses. Job and career opportunities can be difficult to loca…</summary>
-  </entry>
-  <entry>
     <title>Freedom 250 Great American State Fair Initiative – Abu Dhabi</title>
     <link href="https://www.grants.gov/search-results-detail/363119"/>
     <id>urn:funding-finder:grants-gov:363119</id>
@@ -408,16 +419,6 @@
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
     <summary>U.S. Mission to Algeria — Closes 2026-08-10 — A. ELIGIBILITY 1. Eligible Applicants The following organizations are eligible to apply: ● Not-for-profit organizations, including think tanks and civil society/non-governmental organizations ● Public and private educational institutions ● Public International Organizations and Governmental institutions For-profit entities, even those that may fall into the categories listed above, are not eligibl…</summary>
-  </entry>
-  <entry>
-    <title>FY 2026 Mobile Payments Solution for SNAP Authorized Farmers - Cooperative Agreement</title>
-    <link href="https://www.grants.gov/search-results-detail/363096"/>
-    <id>urn:funding-finder:grants-gov:363096</id>
-    <updated>2026-07-08T00:00:00Z</updated>
-    <author><name>Food and Nutrition Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <summary>Food and Nutrition Service — Closes 2026-07-31 — The United States Department of Agriculture’s (USDA) Food and Nutrition Administration (FNA) works to nourish those in need through financially sound programs that promote health and work, as well as champion the productivity of American agriculture. FNA plans to award the Mobile Payments Solution for SNAP Authorized Farmers, Cooperative Agreement. The purpose of this cooperative agreement is to c…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2027 Expanding Nutrition Services</title>
@@ -456,17 +457,6 @@
     <summary>U.S. Mission to Uzbekistan — Closes 2026-08-17 — The U.S. Department of State announces an open competition to deliver in-person, specialized English language teacher training and direct student instruction aligned with priority sectors such as space, critical minerals, rare earths, energy, high technology, business and trade, agriculture, media, and security. As U.S. engagement with Uzbekistan increases, English proficiency has become a strateg…</summary>
   </entry>
   <entry>
-    <title>FY 2026 Team Nutrition Training Grants</title>
-    <link href="https://www.grants.gov/search-results-detail/363026"/>
-    <id>urn:funding-finder:grants-gov:363026</id>
-    <updated>2026-07-01T00:00:00Z</updated>
-    <author><name>Food and Nutrition Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>Food and Nutrition Service — Closes 2026-07-31 — The goal of the FY 2026 Team Nutrition Training Grant: Growing Healthier Futures is to enhance training for child nutrition professionals to improve meal quality, support wellness policies and nutrition education that emphasize whole, minimally processed foods, and build sustainable infrastructure for NSLP, SBP, SFSP, and CACFP program operators. Applicants have the option of selecting one of the …</summary>
-  </entry>
-  <entry>
     <title>Fertilizer Investment &amp; Expansion for Long-term Domestic Supply (FIELDS)</title>
     <link href="https://www.grants.gov/search-results-detail/363038"/>
     <id>urn:funding-finder:grants-gov:363038</id>
@@ -476,17 +466,6 @@
     <category term="Manufacturing"/>
     <category term="Transportation"/>
     <summary>Rural Business-Cooperative Service — Closes 2026-08-17 — Fertilizer Investment &amp; Expansion for Long-term Domestic Supply (FIELDS) Program The Fertilizer Investment &amp; Expansion for Long-term Domestic Supply (FIELDS) Program is intended to expand or bring into operation new, independent domestic fertilizer production capacity in order to provide agricultural producers with additional domestic fertilizer options and strengthen the U.S. fertilizer supply ch…</summary>
-  </entry>
-  <entry>
-    <title>FY 2026 CN Technology Innovation Grant for Child and Adult Care Food Program Integrity</title>
-    <link href="https://www.grants.gov/search-results-detail/362971"/>
-    <id>urn:funding-finder:grants-gov:362971</id>
-    <updated>2026-06-25T00:00:00Z</updated>
-    <author><name>Food and Nutrition Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>Food and Nutrition Service — Closes 2026-07-31 — Executive Summary Under the leadership of Secretary Brooke Rollins, the United States Department of Agriculture (USDA) is committed to supporting State innovation, developing and implementing modernized systems, and minimizing instances of fraud, waste, and program abuse. To advance these priorities, the USDA’s Food and Nutrition Administration (FNA) is excited to announce the availability of $8.7…</summary>
   </entry>
   <entry>
     <title>Regional Conservation Partnership Program (RCPP) Alternative Funding Arrangements (AFA) for Federal fiscal year (FY) 2026</title>
@@ -508,17 +487,6 @@
     <category term="Agriculture and food"/>
     <category term="Environmental science"/>
     <summary>Natural Resources Conservation Service — Closes 2026-08-24 — Federal Awarding Agency Name: U.S. Department of Agriculture (USDA), Natural Resources Conservation Service (NRCS), Commodity Credit Corporation (CCC) Funding Opportunity Title: Regional Conservation Partnership Program (RCPP) Classic for federal fiscal year (FY) 2026. Funding Opportunity Number: USDA-NRCS-NHQ-RCPP-Classic-26-NOFO0001450 Assistance Listing: 10.932, Regional Conservation Partnershi…</summary>
-  </entry>
-  <entry>
-    <title>FY 2026 FDPIR NUTRITION EDUCATION</title>
-    <link href="https://www.grants.gov/search-results-detail/362902"/>
-    <id>urn:funding-finder:grants-gov:362902</id>
-    <updated>2026-06-22T00:00:00Z</updated>
-    <author><name>Food and Nutrition Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <summary>Food and Nutrition Service — Closes 2026-07-31 — USDA’S Food and Nutrition Administration (FNA) seeks to enter into a cooperative agreement(s) with an organization(s)/agency(ies) with expertise in working with Tribal communities who can develop, design, and implement an innovative nutrition education project for participants and program staff of the FDPIR. A maximum of $500,000 will be made available for this opportunity for the period of perfor…</summary>
   </entry>
   <entry>
     <title>Expanding Financial Literacy and Empowerment: Increasing Awareness and Use of ABLE Accounts for Americans with Disabilities</title>
@@ -666,5 +634,36 @@
     <category term="Community development"/>
     <category term="Manufacturing"/>
     <summary>Rural Business-Cooperative Service — Closes 2026-08-07 — The U.S. Department of Agriculture (USDA), Rural Development (RD) Rural Business‐Cooperative Service (RBCS or Agency), requests applications for the Meat and Poultry Processing Expansion Program - Phase 4 (the Program or MPPEP-4) - Fortifying the American Beef Industry. MPPEP-4 is authorized under Section 1001(b)(4) of the American Rescue Plan Act of 2021 (ARPA), which provides funding to make “lo…</summary>
+  </entry>
+  <entry>
+    <title>DoW Multiple Sclerosis Clinical Trial Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362227"/>
+    <id>urn:funding-finder:grants-gov:362227</id>
+    <updated>2026-05-05T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-08-13 — Summary: The fiscal year 2026 (FY26) Multiple Sclerosis Research Program (MSRP) Clinical Trial Award (CTA) supports the rapid implementation of clinical trials with the potential to have a significant impact on the treatment or management of multiple sclerosis. All applications must address at least one of the FY26 MSRP CTA focus areas. Clinical trials may evaluate promising new products, pharmaco…</summary>
+  </entry>
+  <entry>
+    <title>DoW Amyotrophic Lateral Sclerosis Research Program, Pilot Clinical Trial Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362195"/>
+    <id>urn:funding-finder:grants-gov:362195</id>
+    <updated>2026-05-04T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Transportation"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-30 — Summary: The fiscal year 2026 (FY26) Amyotrophic Lateral Sclerosis Research Program (ALSRP) Pilot Clinical Trial Award (PCTA) supports the rapid implementation of clinical trials with the potential to have a significant impact on the treatment or management of amyotrophic lateral sclerosis (ALS). Projects may range from phase 1 to small-scale phase 2 trials.Applications must address one of the fol…</summary>
+  </entry>
+  <entry>
+    <title>DoW Amyotrophic Lateral Sclerosis Research Program, Therapeutic Development Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362196"/>
+    <id>urn:funding-finder:grants-gov:362196</id>
+    <updated>2026-05-04T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-30 — Summary: The fiscal year 2026 (FY26) Amyotrophic Lateral Sclerosis Research Program (ALSRP) Therapeutic Development Award (TDA) supports research ranging from preclinical validation of therapeutic leads through U.S. Food and Drug Administration (FDA) Investigational New Drug (IND)-enabling studies. The proposed studies are expected to be empirical in nature and product-driven. Applicants with limi…</summary>
   </entry>
 </feed>

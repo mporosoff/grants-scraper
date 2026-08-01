@@ -4,8 +4,20 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-07-31T12:20:29Z</updated>
+  <updated>2026-08-01T11:38:52Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
+    <link href="https://www.grants.gov/search-results-detail/363412"/>
+    <id>urn:funding-finder:grants-gov:363412</id>
+    <updated>2026-12-18T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Environmental science"/>
+    <summary>Health Resources and Services Administration — Closes 2027-03-18 — The purpose of this program is to improve maternal and infant outcomes by preventing contact with harmful materials before, during, and after pregnancy. This program aims to improve maternal and infant health outcomes by preventing harmful exposures before, during, and after pregnancy. It supports a national expert-staffed call center that provides timely, evidence-based information and personaliz…</summary>
+  </entry>
   <entry>
     <title>NIOSH Centers of Excellence for Total Worker Health® (U19)</title>
     <link href="https://www.grants.gov/search-results-detail/363369"/>
@@ -93,6 +105,17 @@
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health — Closes 2026-10-01 — The National Institute of Mental Health (NIMH), with other NIH Institutes and Centers (ICs), intends to publish a notice of funding opportunity (NOFO) to solicit research applications for the BRAIN Initiative Cell Atlas Network (BICAN) Coordinating Unit for Biostatistics, Informatics, and Engagement (CUBIE). In accordance with NIH standard peer-review processes, the application(s) will be peer-rev…</summary>
+  </entry>
+  <entry>
+    <title>Pax Silica Artificial Intelligence Assistance Project</title>
+    <link href="https://www.grants.gov/search-results-detail/363422"/>
+    <id>urn:funding-finder:grants-gov:363422</id>
+    <updated>2026-07-31T00:00:00Z</updated>
+    <author><name>Bureau of Economic and Business Affairs</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Manufacturing"/>
+    <summary>Bureau of Economic and Business Affairs — Closes 2026-08-20 — Leveraging foreign assistance from the Pax Fund, this NOFO launches the Pax Silica Artificial Intelligence (AI) Assistance Project—a historic first-of-its-kind programmatic initiative to strengthen global AI supply chain security by creating a trusted supply chain credentialing and provenance platform to secure the AI supply chain in partner countries and economies. This NOFO seeks to fund the est…</summary>
   </entry>
   <entry>
     <title>AI3 Action Institute - Artificial Intelligence for American Indians</title>
@@ -235,17 +258,6 @@
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <summary>U.S. Mission to Saudi Arabia — Closes 2026-09-08 — Program PurposeThe U.S. Embassy Riyadh Public Diplomacy Section is accepting applications for a cooperative agreement to run the AI Partnership &amp; Exchange for Tech Leaders. The goal of this program is to connect rising Saudi Artificial Intelligence (AI) leaders with American experts in business, tech, and academia. This initiative helps participants build professional networks, study U.S. technolo…</summary>
-  </entry>
-  <entry>
-    <title>Pax Silica Artificial Intelligence Assistance Project</title>
-    <link href="https://www.grants.gov/search-results-detail/363312"/>
-    <id>urn:funding-finder:grants-gov:363312</id>
-    <updated>2026-07-24T00:00:00Z</updated>
-    <author><name>Bureau of Economic and Business Affairs</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Manufacturing"/>
-    <summary>Bureau of Economic and Business Affairs — Closes 2026-08-20 — Leveraging foreign assistance from the Pax Fund, this NOFO launches the Pax Silica Artificial Intelligence (AI) Assistance Project—a historic first-of-its-kind programmatic initiative to strengthen global AI supply chain security by creating a trusted supply chain credentialing and provenance platform to secure the AI supply chain in partner countries and economies. This NOFO seeks to fund the est…</summary>
   </entry>
   <entry>
     <title>American Innovation Hub: AI &amp; Digital Skills for the Creative &amp; Tech Economy</title>
@@ -746,19 +758,5 @@
     <category term="Materials science"/>
     <category term="Manufacturing"/>
     <summary>Employment and Training Administration — Closes 2026-08-03 — Please direct inquiries about this funding opportunity to Sabrina Guerrier at DOL-ETA-DWG@dol.gov with Reskill DWG in the subject line.</summary>
-  </entry>
-  <entry>
-    <title>Creative Industries Film Lab and Residency - American Film Showcase 2026</title>
-    <link href="https://www.grants.gov/search-results-detail/362939"/>
-    <id>urn:funding-finder:grants-gov:362939</id>
-    <updated>2026-06-24T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Indonesia — Closes 2026-08-07 — Project Background, Goals, and ObjectivesThe Creative Industries Film Lab and Residency – American Film Showcase 2026 is a five-day public diplomacy program aligned with the American Film Showcase 2026 Envoy visit and scheduled during the Jogja-NETPAC Asian Film Festival Market 2026. The program includes two main components: Exhibition Booth: In partnership with Jogja-NETPAC, the program will secu…</summary>
   </entry>
 </feed>

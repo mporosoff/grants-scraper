@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-07-31T12:20:29Z</updated>
+  <updated>2026-08-01T11:38:52Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -319,6 +319,16 @@
     <summary>National Institutes of Health — Closes 2027-05-25 — The National Center for Complementary and Integrative Health (NCCIH) intends to publish a Notice of Funding Opportunity (NOFO) to support collaborative interdisciplinary research that advances foundational understanding of non-addictive natural products for chronic pain management through a holistic, system-oriented approach. This initiative aligns with the NIH Helping to End Addiction Long-term (…</summary>
   </entry>
   <entry>
+    <title>Strengthening Public Health Systems and Services in Indian Country</title>
+    <link href="https://www.grants.gov/search-results-detail/363416"/>
+    <id>urn:funding-finder:grants-gov:363416</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>CENTERS FOR DISEASE CONTROL CSTLTS</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>CENTERS FOR DISEASE CONTROL CSTLTS — Closes 2027-04-02 — CDC announces the availability of supplemental funding for the 34 American Indian and Alaska Native (AI/AN) Tribes and regional AI/AN tribally designated organizations awarded funding under CDC-RFA-TO-23-0001: Strengthening Public Health Systems and Services in Indian Country. The CDC-RFA-TO-23-0001 recipients are eligible to submit applications for new FY 2027 Centers, Institute, and Offices (CIO…</summary>
+  </entry>
+  <entry>
     <title>Chronic Care Telehealth Centers of Excellence Program</title>
     <link href="https://www.grants.gov/search-results-detail/363274"/>
     <id>urn:funding-finder:grants-gov:363274</id>
@@ -357,6 +367,16 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health — Closes 2027-06-01 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the support of the Clinical Data, Safety and Statistical Centers program. The overall objective of this program is to provide coordination and oversight for multiple activities in service to clinical research and mechanistic studies supported by NIAID, including all Division of Allergy, Immunolog…</summary>
+  </entry>
+  <entry>
+    <title>State Maternal Health Innovation Program (SMHI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363408"/>
+    <id>urn:funding-finder:grants-gov:363408</id>
+    <updated>2027-01-29T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <summary>Health Resources and Services Administration — Closes 2027-04-19 — The purpose of the State Maternal Health Innovation (SMHI) program is to build capacity in states to improve maternal health and address maternal health gaps. This is done through quality services, a skilled workforce, enhanced data quality and capacity, and innovative programming that reduces maternal mortality and severe maternal morbidity (SMM).</summary>
   </entry>
   <entry>
     <title>Advanced Laboratories for Accelerating the Reach and Impact of Treatments for Youth and Adults with Mental Illness (ALACRITY) Research Centers</title>
@@ -423,6 +443,15 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Technology development"/>
     <summary>Health Resources and Services Administration — Closes 2027-03-16 — The purpose of the program is to strengthen the capacity of community-based organizations to improve health outcomes and reduce HIV transmission, especially for people not yet in regular HIV care. The activities fall under two categories: HIV Care Innovation and Infrastructure Development.</summary>
+  </entry>
+  <entry>
+    <title>Alliance for Innovation on Maternal Health (AIM) Capacity Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363407"/>
+    <id>urn:funding-finder:grants-gov:363407</id>
+    <updated>2027-01-15T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Technology development"/>
+    <summary>Health Resources and Services Administration — Closes 2027-03-17 — The purpose of the AIM Capacity program is to strengthen state, territorial, and Tribal capacity to implement, expand, and sustain AIM Patient Safety Bundles and associated resources across the United States. The program supports implementation of evidence-informed maternal safety practices to improve the quality and safety of maternity care, improve maternal health outcomes, and reduce preventabl…</summary>
   </entry>
   <entry>
     <title>Advanced Development and Validation of Emerging Technologies for Basic and Clinical Cancer Research (R33 Clinical Trial Not Allowed)</title>
@@ -543,6 +572,18 @@
     <summary>Centers for Disease Control - NCHHSTP — Closes 2027-02-20 — This NOFO will support the development and dissemination of education, training and technical assistance—emphasizing prevention strategies—for clinicians and disease intervention specialists to improve sexually transmitted infection (STI) patient care. The NOFO aims to improve the capacity of providers, clinical sites, and healthcare systems to diagnose, manage, treat and counsel individuals with …</summary>
   </entry>
   <entry>
+    <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
+    <link href="https://www.grants.gov/search-results-detail/363412"/>
+    <id>urn:funding-finder:grants-gov:363412</id>
+    <updated>2026-12-18T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Environmental science"/>
+    <summary>Health Resources and Services Administration — Closes 2027-03-18 — The purpose of this program is to improve maternal and infant outcomes by preventing contact with harmful materials before, during, and after pregnancy. This program aims to improve maternal and infant health outcomes by preventing harmful exposures before, during, and after pregnancy. It supports a national expert-staffed call center that provides timely, evidence-based information and personaliz…</summary>
+  </entry>
+  <entry>
     <title>NIOSH Small Research Grant Program (R03)</title>
     <link href="https://www.grants.gov/search-results-detail/363299"/>
     <id>urn:funding-finder:grants-gov:363299</id>
@@ -567,6 +608,15 @@
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Environmental science"/>
     <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-16 — The R21 grant program is designed to advance our understanding of occupational diseases and injuries by focusing on the following three objectives:Identify the risks and conditions linked to workplace health issues.Develop strategies to reduce risks and limit exposure to hazardous environments.Translate significant scientific discoveries into prevention measures and products that can effectively r…</summary>
+  </entry>
+  <entry>
+    <title>Ryan White HIV/AIDS Program Part D - Women, Infants, Children and Youth Grant Supplemental Funding</title>
+    <link href="https://www.grants.gov/search-results-detail/363415"/>
+    <id>urn:funding-finder:grants-gov:363415</id>
+    <updated>2026-12-04T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Technology development"/>
+    <summary>Health Resources and Services Administration — Closes 2027-02-02 — The purpose of this supplemental funding is to strengthen organizational infrastructure and increase capacity to develop, enhance, or expand access to high quality family-centered HIV care services. The activities fall under two categories: HIV Care Innovation and Infrastructure Development.</summary>
   </entry>
   <entry>
     <title>NIOSH Centers for Agriculture, Forestry, and Fishing Safety and Health (U54)</title>
@@ -795,6 +845,55 @@
     <summary>National Institutes of Health — Closes 2027-02-23 — The National Institutes of Health intends to publish a Notice of Funding Opportunity (NOFO), Pragmatic and Implementation Trials Conducted in Health Care SettingsThis funding opportunity will support large-scale pragmatic trials that test intervention effectiveness in routine clinical care and/or implementation trials that evaluate strategies for delivering interventions within health care setting…</summary>
   </entry>
   <entry>
+    <title>World Trade Center Youth Research Coordinating Center (U54)</title>
+    <link href="https://www.grants.gov/search-results-detail/363417"/>
+    <id>urn:funding-finder:grants-gov:363417</id>
+    <updated>2026-11-24T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Neuroscience"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-23 — The National Institute for Occupational Safety and Health (NIOSH), World Trade Center (WTC) Health Program, plans to establish a WTC Youth Research Coordinating Center ("Center") through a U54 cooperative agreement.In December 2022, Congress amended the Public Health Service Act (42 U.S.C. § 300mm–51(c)) to direct the WTC Health Program Administrator to establish a research cohort for emerging hea…</summary>
+  </entry>
+  <entry>
+    <title>Fetal, Infant, and Child Death Review Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363409"/>
+    <id>urn:funding-finder:grants-gov:363409</id>
+    <updated>2026-11-21T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <summary>Health Resources and Services Administration — Closes 2027-01-20 — This program will support coordinated leadership and technical assistance to state, local, and tribal fetal infant and child death review (FICDR) teams to ensure a standardized and coordinated approach for quality fatality reviews, data collection, and dissemination of findings to inform review team practice and local prevention strategies.</summary>
+  </entry>
+  <entry>
+    <title>Ryan White HIV/AIDS Program Part B AIDS Drug Assistance Program Training and Technical Assistance</title>
+    <link href="https://www.grants.gov/search-results-detail/363414"/>
+    <id>urn:funding-finder:grants-gov:363414</id>
+    <updated>2026-11-21T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>Health Resources and Services Administration — Closes 2027-01-20 — The purpose of this funding is to build the capacity of ADAPs through tools and technical assistance to maximize the impact of ADAPs in improving the health outcomes of people with HIV in a changing health care environment.</summary>
+  </entry>
+  <entry>
+    <title>Leadership Education in Adolescent Health (LEAH)</title>
+    <link href="https://www.grants.gov/search-results-detail/363410"/>
+    <id>urn:funding-finder:grants-gov:363410</id>
+    <updated>2026-11-20T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <summary>Health Resources and Services Administration — Closes 2027-01-20 — The Leadership Education in Adolescent Health (LEAH) Program establishes adolescent and young adult (AYA) health graduate training programs that aim to expand access to high quality, team-based health care for the AYA population. The LEAH program trains health care professionals who can address chronic disease prevention in adolescents and young adults.</summary>
+  </entry>
+  <entry>
+    <title>Maternal and Child Health (MCH) Nutrition Training Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363411"/>
+    <id>urn:funding-finder:grants-gov:363411</id>
+    <updated>2026-11-20T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <summary>Health Resources and Services Administration — Closes 2027-01-20 — The purpose of this program is to improve the nutrition and overall well-being of mothers, children, and families. MCH Nutrition Training Programs will provide interdisciplinary graduate education to build a skilled workforce, provide technical assistance to state Title V and other MCH programs, expand nutrition education and career pathways, and improve access to high-quality nutrition services t…</summary>
+  </entry>
+  <entry>
     <title>Multi-Site Investigator-Initiated Clinical Trials (Collaborative UG3/UH3 Clinical Trial Required)</title>
     <link href="https://www.grants.gov/search-results-detail/363025"/>
     <id>urn:funding-finder:grants-gov:363025</id>
@@ -898,100 +997,5 @@
     <category term="Education and workforce"/>
     <category term="Transportation"/>
     <summary>National Institutes of Health — Closes 2027-01-05 — The National Institutes of Health (NIH), including the participating Institutes, Centers and Offices, intends to publish a Notice of Funding Opportunity (NOFO) to invite eligible United States small business concerns (SBCs) to submit Small Business Technology Transfer (STTR) Phase I, and Fast-Track grant applications for the Small Business Transition Grant. Through this NOFO, NIH will support earl…</summary>
-  </entry>
-  <entry>
-    <title>Small Business Transition Grant for New Entrepreneurs (Parent R43/R44 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/362576"/>
-    <id>urn:funding-finder:grants-gov:362576</id>
-    <updated>2026-11-05T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health — Closes 2027-01-05 — The National Institutes of Health (NIH) and Centers for Disease Control and Prevention (CDC), including the participating Institutes, Centers and Offices, intend to publish a Notice of Funding Opportunity (NOFO) to invite eligible United States small business concerns (SBCs) to submit Small Business Innovation Research (SBIR) Phase I, and Fast-Track (NIH only) grant applications for the Small Busi…</summary>
-  </entry>
-  <entry>
-    <title>Research on the Ethical, Legal and Social Implications (ELSI) of Genomics</title>
-    <link href="https://www.grants.gov/search-results-detail/362666"/>
-    <id>urn:funding-finder:grants-gov:362666</id>
-    <updated>2026-11-02T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health — Closes 2027-02-16 — The National Human Genome Research Institute (NHGRI) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications related to the ethical, legal, and social implications (ELSI) of genomics. Genomics has the potential to improve human health and well-being. Driven by advances in technology and analysis, genomics is being integrated into large swaths of biomedical research and me…</summary>
-  </entry>
-  <entry>
-    <title>NIAMS Clinical Trial Implementation Cooperative Agreement</title>
-    <link href="https://www.grants.gov/search-results-detail/362753"/>
-    <id>urn:funding-finder:grants-gov:362753</id>
-    <updated>2026-11-02T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health — Closes 2027-07-02 — The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for the Clinical Trial Cooperative Agreement Program within the mission areas of the institute. This Notice of Funding Opportunity (NOFO) solicits cooperative agreement applications for implementation of investigator-initiated, single o…</summary>
-  </entry>
-  <entry>
-    <title>Cancer Center Support Grants (CCSGs) for NCI-designated Cancer Centers (P30 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/361439"/>
-    <id>urn:funding-finder:grants-gov:361439</id>
-    <updated>2026-11-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2027-01-25 — This Notice of Funding Opportunity (NOFO) invites applications for P30 Cancer Center Support Grants (CCSGs) to support NCI-Designated Cancer Centers. CCSGs support three types of Cancer Centers: 1) Comprehensive Cancer Centers, which demonstrate reasonable depth and breadth of research activities in each of three major areas: basic laboratory; clinical; and prevention, control and population-based…</summary>
-  </entry>
-  <entry>
-    <title>Expanded Surveillance for Pediatric Infectious Diseases</title>
-    <link href="https://www.grants.gov/search-results-detail/363342"/>
-    <id>urn:funding-finder:grants-gov:363342</id>
-    <updated>2026-10-30T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-31 — The purpose of this Notice of Funding Opportunity (NOFO) is to support a network of U.S. institutions that will conduct standardized, prospective, active surveillance of pediatric acute respiratory illness (ARI) and acute gastroenteritis (AGE). The network will focus on respiratory and enteric viruses among pediatric patients seeking healthcare.In addition, the network will generate robust estimat…</summary>
-  </entry>
-  <entry>
-    <title>Improving Protection against Influenza and Other Respiratory Pathogens: the US Flu VE Network</title>
-    <link href="https://www.grants.gov/search-results-detail/363343"/>
-    <id>urn:funding-finder:grants-gov:363343</id>
-    <updated>2026-10-30T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Infectious disease"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-31 — The purpose of this notice of funding opportunity (NOFO) is to continue the work of the US Influenza Vaccine Effectiveness (Flu VE) Network. Influenza and other respiratory pathogens are important causes of morbidity, mortality, and healthcare burden across the age spectrum. This network provides evidence needed to improve the effectiveness of influenza and other respiratory pathogen vaccines. You…</summary>
-  </entry>
-  <entry>
-    <title>Early Detection, Response, and Control of Global Rabies Outbreaks and Associated Threats to America's Dog-Rabies Free Status</title>
-    <link href="https://www.grants.gov/search-results-detail/363332"/>
-    <id>urn:funding-finder:grants-gov:363332</id>
-    <updated>2026-10-30T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-01 — This Notice of Funding Opportunity (NOFO) supports research to develop, implement, monitor, and evaluate technology-driven and cost-effective tools that reduce the global human rabies burden. It also measures progress toward canine rabies elimination, with an emphasis on high-burden countries. Priority research areas include:Electronic systems for tracking human and dog rabies vaccinations.Managin…</summary>
-  </entry>
-  <entry>
-    <title>NIOSH Miner Safety and Health Training Program - Western United States – U60</title>
-    <link href="https://www.grants.gov/search-results-detail/363232"/>
-    <id>urn:funding-finder:grants-gov:363232</id>
-    <updated>2026-10-27T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-01-26 — BackgroundDespite advances in technology and improvements in work environments, mining remains one of the most challenging and hazardous occupations in the United States. The industry continues to experience a fatality rate nearly three times higher than the national average for all industries, according to the U.S. Bureau of Labor Statistics (BLS). Public MSHA data show that in 2025, the U.S. min…</summary>
-  </entry>
-  <entry>
-    <title>Intervention Research to Improve Native American Health</title>
-    <link href="https://www.grants.gov/search-results-detail/362315"/>
-    <id>urn:funding-finder:grants-gov:362315</id>
-    <updated>2026-10-22T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <summary>National Institutes of Health — Closes 2027-10-18 — The National Institute on Drug Abuse, along with other National Health Institutes, Centers, and Offices, seeks to advance its mission through the Intervention Research to Improve Native American Health (IRINAH), which aims to support:Research on the causes of health problems to inform the creation or refinement of interventionsStudies that develop, adapt, or test interventions for health promotion…</summary>
-  </entry>
-  <entry>
-    <title>Ryan White HIV/AIDS Program (RWHAP) Integrated HIV/AIDS Planning Resource Allocation Cooperative Agreement</title>
-    <link href="https://www.grants.gov/search-results-detail/363167"/>
-    <id>urn:funding-finder:grants-gov:363167</id>
-    <updated>2026-10-19T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Education and workforce"/>
-    <summary>Health Resources and Services Administration — Closes 2027-01-18 — The purpose of this cooperative agreement is to provide tools, training and technical assistance (TA) to RWHAP Parts A and B recipients and their planning bodies to support integrated HIV prevention and care planning, maximizing resources and stregthening the system of HIV care and treatment.</summary>
   </entry>
 </feed>

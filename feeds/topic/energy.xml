@@ -4,8 +4,18 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-07-31T12:20:29Z</updated>
+  <updated>2026-08-01T11:38:52Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Sun Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363424"/>
+    <id>urn:funding-finder:grants-gov:363424</id>
+    <updated>2026-07-31T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Energy"/>
+    <summary>National Institute of Food and Agriculture — Closes 2026-08-17 — In carrying out the SGP, under Assistance Listing Number 10.320, NIFA is authorized to make awards to fund subgrants and activities that: 1. Enhance national energy security through the development, distribution, and implementation of biobased energy technologies; 2. Promote varied agricultural production systems in the U.S. through biobased energy and product technologies; 3. Promote economic gro…</summary>
+  </entry>
   <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Rocky Mountain Cooperative Ecosystem Studies Unit (CESU)</title>
     <link href="https://www.grants.gov/search-results-detail/363385"/>
@@ -679,17 +689,5 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Bureau of Reclamation — Closes 2027-08-26 — Through WaterSMART, the Bureau of Reclamation (Reclamation) leverages Federal and non-Federal funding to work cooperatively with States, Tribes, and other entities as they plan for and implement actions to increase water supply and hydropower reliability. The WaterSMART Program demonstrably advances Trump administration priorities, such as those identified in Presidential Executive Order 14154 (Ja…</summary>
-  </entry>
-  <entry>
-    <title>WaterSMART Enhancing Water Resources Projects</title>
-    <link href="https://www.grants.gov/search-results-detail/362394"/>
-    <id>urn:funding-finder:grants-gov:362394</id>
-    <updated>2026-05-14T00:00:00Z</updated>
-    <author><name>Bureau of Reclamation</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Water"/>
-    <summary>Bureau of Reclamation — Closes 2027-09-08 — The objective of the WaterSMART Enhancing Water Resources Projects funding opportunity is to invite eligible entities to apply for funding to implement projects per the authorizing language referenced above that benefit water resource management for multiple uses, including water conservation and efficiency projects, water infrastructure improvements, and river and watershed restoration. Projects …</summary>
   </entry>
 </feed>

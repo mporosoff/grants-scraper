@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml</id>
-  <updated>2026-07-31T12:20:29Z</updated>
+  <updated>2026-08-01T11:38:52Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -241,16 +241,6 @@
     <summary>U.S. Mission to Algeria — Closes 2026-08-10 — A. ELIGIBILITY 1. Eligible Applicants The following organizations are eligible to apply: ● Not-for-profit organizations, including think tanks and civil society/non-governmental organizations ● Public and private educational institutions ● Public International Organizations and Governmental institutions For-profit entities, even those that may fall into the categories listed above, are not eligibl…</summary>
   </entry>
   <entry>
-    <title>Consumer and Consumer Support Technical Assistance Center</title>
-    <link href="https://www.grants.gov/search-results-detail/360979"/>
-    <id>urn:funding-finder:grants-gov:360979</id>
-    <updated>2026-07-07T00:00:00Z</updated>
-    <author><name>Substance Abuse and Mental Health Services Adminis</name></author>
-    <category term="Education and workforce"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Substance Abuse and Mental Health Services Adminis — Closes 2026-07-31 — The purpose of this program is to establish and operate a national TAC dedicated to addressing priority mental health needs of regional and national significance. These activities can include:Developing, delivering, coordinating, and evaluating technical assistance to organizations that are dedicated to addressing mental health needs through courses, seminars, workshops, and cohort support to buil…</summary>
-  </entry>
-  <entry>
     <title>Department of Interior Wildland Fire Service BLM-National Interagency Fire Center (NIFC) Joint Fire Science Program (JFSP)Fire Leaders And Managers, Emerging Scientists (FLAMES)</title>
     <link href="https://www.grants.gov/search-results-detail/363101"/>
     <id>urn:funding-finder:grants-gov:363101</id>
@@ -343,20 +333,6 @@
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Social and behavioral sciences"/>
     <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-11-18 — Summary: The Orthopaedic Research Program (ORP) Applied Research Award (ARA) seeks applied research applications focused on advancing optimal treatment and restoration of function for individuals with orthopaedic injuries sustained during combat or service-related activities.Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a …</summary>
-  </entry>
-  <entry>
-    <title>Advancing Behavioral Health in Corrections: Training and Policy Innovation Initiative</title>
-    <link href="https://www.grants.gov/search-results-detail/362572"/>
-    <id>urn:funding-finder:grants-gov:362572</id>
-    <updated>2026-06-16T00:00:00Z</updated>
-    <author><name>National Institute of Corrections</name></author>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Neuroscience"/>
-    <category term="Public health"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Technology development"/>
-    <summary>National Institute of Corrections — Closes 2026-07-31 — The National Institute of Corrections (NIC) acknowledges the pressing challenges facing behavioral health care within correctional settings nationwide. Correctional facilities increasingly contend with complex mental health and substance use issues among incarcerated individuals, yet existing behavioral health services are consistently limited by service gaps, inconsistent institutional policies, …</summary>
   </entry>
   <entry>
     <title>HEAL Initiative: Optimization of Therapeutic Medical Devices through Team Science Mechanistic Research (RM1)</title>
@@ -661,5 +637,26 @@
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health — Closes 2028-06-07 — The National Center for Complementary and Integrative Health (NCCIH) announces this Notice of Funding Opportunity (NOFO) to solicit applications for research on how mind and body interventions through psychological and/or physical inputs (e.g., mindfulness meditation, yoga, acupuncture, massage, and other brain and/or body based interventions) impact mechanisms of emotional well-being (EWB) and th…</summary>
+  </entry>
+  <entry>
+    <title>NIA Expanding Research in AD/ADRD (ERA) Postbaccalaureate Research Education Program (R25 Independent Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359653"/>
+    <id>urn:funding-finder:grants-gov:359653</id>
+    <updated>2025-09-02T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health — Closes 2027-05-26 — This Notice of Funding Opportunity Announcement (NOFO) invites R25 applications to support the development and implementation of research education programs for recent baccalaureates from all backgrounds, including those from groups underrepresented in the biomedical and behavioral sciences. It is essential to expand and broaden the skilled Alzheimers Disease (AD) and Alzheimers Disease and Relate…</summary>
+  </entry>
+  <entry>
+    <title>NIA Expanding Research in AD/ADRD (ERA) Summer Research Education Program (R25 Independent Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359655"/>
+    <id>urn:funding-finder:grants-gov:359655</id>
+    <updated>2025-09-02T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health — Closes 2027-05-26 — This Notice of Funding Opportunity (NOFO) invites R25 applications to support the development and implementation of summer research education programs for high school students, undergraduates, or science teachers from all backgrounds, including those from groups underrepresented in the biomedical and behavioral sciences. It is essential to expand and broaden the skilled Alzheimer's Disease (AD) an…</summary>
   </entry>
 </feed>

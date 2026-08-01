@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml</id>
-  <updated>2026-07-31T12:20:29Z</updated>
+  <updated>2026-08-01T11:38:52Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -102,6 +102,16 @@
     <category term="Agriculture and food"/>
     <category term="Public health"/>
     <summary>Centers for Disease Control - NCIPC — Closes 2027-04-17 — This forecast is for CDC's Comprehensive Suicide Prevention Program for States, a cooperative agreement intended to support implementation and evaluation of a comprehensive public health approach to suicide prevention in the United States. Funded recipients will focus on one or more Focus Prevention Areas (FPAs), groups or settings identified through available data as experiencing a significant su…</summary>
+  </entry>
+  <entry>
+    <title>Strengthening Public Health Systems and Services in Indian Country</title>
+    <link href="https://www.grants.gov/search-results-detail/363416"/>
+    <id>urn:funding-finder:grants-gov:363416</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>CENTERS FOR DISEASE CONTROL CSTLTS</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>CENTERS FOR DISEASE CONTROL CSTLTS — Closes 2027-04-02 — CDC announces the availability of supplemental funding for the 34 American Indian and Alaska Native (AI/AN) Tribes and regional AI/AN tribally designated organizations awarded funding under CDC-RFA-TO-23-0001: Strengthening Public Health Systems and Services in Indian Country. The CDC-RFA-TO-23-0001 recipients are eligible to submit applications for new FY 2027 Centers, Institute, and Offices (CIO…</summary>
   </entry>
   <entry>
     <title>Clinical Data, Safety and Statistical Centers (CDSSC)</title>
@@ -281,6 +291,19 @@
     <summary>National Institutes of Health — Closes 2027-02-23 — The National Institutes of Health intends to publish a Notice of Funding Opportunity (NOFO), Pragmatic and Implementation Trials Conducted in Health Care SettingsThis funding opportunity will support large-scale pragmatic trials that test intervention effectiveness in routine clinical care and/or implementation trials that evaluate strategies for delivering interventions within health care setting…</summary>
   </entry>
   <entry>
+    <title>World Trade Center Youth Research Coordinating Center (U54)</title>
+    <link href="https://www.grants.gov/search-results-detail/363417"/>
+    <id>urn:funding-finder:grants-gov:363417</id>
+    <updated>2026-11-24T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Neuroscience"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-23 — The National Institute for Occupational Safety and Health (NIOSH), World Trade Center (WTC) Health Program, plans to establish a WTC Youth Research Coordinating Center ("Center") through a U54 cooperative agreement.In December 2022, Congress amended the Public Health Service Act (42 U.S.C. § 300mm–51(c)) to direct the WTC Health Program Administrator to establish a research cohort for emerging hea…</summary>
+  </entry>
+  <entry>
     <title>Translational Centers Using Microphysiologic Systems for Infectious Diseases</title>
     <link href="https://www.grants.gov/search-results-detail/362954"/>
     <id>urn:funding-finder:grants-gov:362954</id>
@@ -323,6 +346,17 @@
     <author><name>Centers for Disease Control - NCEZID</name></author>
     <category term="Public health"/>
     <summary>Centers for Disease Control - NCEZID — Closes 2027-01-04 — This Program will create a collaborative network of healthcare systems, facilities and public health partners to rapidly detect, respond to, and prevent threats to patient and healthcare worker safety. This Program will support work that improves the safety, quality and resilience of U.S. healthcare delivery.The Program will be made up of healthcare systems inclusive of multiple facilities in a va…</summary>
+  </entry>
+  <entry>
+    <title>State Occupational Safety and Health Surveillance Program (U60)</title>
+    <link href="https://www.grants.gov/search-results-detail/363431"/>
+    <id>urn:funding-finder:grants-gov:363431</id>
+    <updated>2026-10-30T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-30 — NIOSH has provided financial and technical assistance to develop or expand state-level OSH surveillance capacity and infrastructure since the 1970s. From 2021-2026, NIOSH funded cooperative agreements in 23 states under announcement PAR-20-312. These programs varied in scope and focus, each providing a level of occupational health expertise to the public health system in their state. Grantees incl…</summary>
   </entry>
   <entry>
     <title>Expanded Surveillance for Pediatric Infectious Diseases</title>
@@ -541,6 +575,18 @@
     <summary>National Institutes of Health — Closes 2026-10-17 — The purpose of this NOFO is to enhance the capability of NCATS CTSA Program KL2 scholars supported by the CTSA Program to conduct research as they complete the transition to fully independent academic translational scientists. These small research grants will support different clinical and translational science research projects, including pilot and feasibility studies; secondary data analysis of …</summary>
   </entry>
   <entry>
+    <title>Improving regional capacity to respond to HIV, TB, and other global health priorities in Central America</title>
+    <link href="https://www.grants.gov/search-results-detail/360704"/>
+    <id>urn:funding-finder:grants-gov:360704</id>
+    <updated>2026-07-31T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Transportation"/>
+    <category term="Cybersecurity"/>
+    <summary>Centers for Disease Control-GHC — Closes 2026-08-31 — The Award Ceiling for Year 1 is 0 (none). CDC anticipates an Approximate Total Fiscal Year Funding amount of $20,000,000 for Year 1, subject to the availability of funds.You will advance progress towards achieving the 95-95-95 targets and continue to transition site-level support to local governments in Central America (CA) for:El Salvador.Guatemala.Honduras.Nicaragua.Panama.To achieve the goals o…</summary>
+  </entry>
+  <entry>
     <title>Advancing Global Capacity to Detect and Respond to Fungal Diseases</title>
     <link href="https://www.grants.gov/search-results-detail/361931"/>
     <id>urn:funding-finder:grants-gov:361931</id>
@@ -607,52 +653,5 @@
     <category term="Public health"/>
     <category term="Cybersecurity"/>
     <summary>Food and Drug Administration — Closes 2026-08-21 — FDA is announcing the availability of funds for the support of a cooperative agreement between the Human Food Program/ Office of Laboratory Operations and Applied Science (OLOAS)/ Office of Applied Microbiolgy and Technology (OAMT) and the Marine Environmental Sciences Consortium/Dauphin Island Sea Lab (DISL). The scientific, public health, and policy expertise within the Food and Drug Administrat…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement to Support Shellfish Safety Assistance Project</title>
-    <link href="https://www.grants.gov/search-results-detail/363282"/>
-    <id>urn:funding-finder:grants-gov:363282</id>
-    <updated>2026-07-22T00:00:00Z</updated>
-    <author><name>Food and Drug Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <category term="Cybersecurity"/>
-    <summary>Food and Drug Administration — Closes 2026-08-21 — The purpose of this funding opportunity is to (1) improve information exchange and transfer among States, Federal and Foreign Agencies, industry, and consumers; (2) strengthen state activities through training, technical assistance, research, education, and support for States to participate in meetings that foster a cooperative shellfish program based on public health principles; and (3) promote e…</summary>
-  </entry>
-  <entry>
-    <title>Research, Education, and Outreach on Botanical Natural Products</title>
-    <link href="https://www.grants.gov/search-results-detail/363286"/>
-    <id>urn:funding-finder:grants-gov:363286</id>
-    <updated>2026-07-22T00:00:00Z</updated>
-    <author><name>Food and Drug Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <category term="Cybersecurity"/>
-    <summary>Food and Drug Administration — Closes 2026-08-21 — The purpose of this funding opportunity is to provide continued support to: (1) assist in the identification and development of a prioritized list of botanical ingredients based on safety concerns, trends and knowledge of botanical ingredients in foods, dietary supplements, and cosmetics marketed in the U.S.; (2) acquire, validate and characterize authenticated reference materials, including raw a…</summary>
-  </entry>
-  <entry>
-    <title>FY26 Safer Outcomes Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363260"/>
-    <id>urn:funding-finder:grants-gov:363260</id>
-    <updated>2026-07-21T00:00:00Z</updated>
-    <author><name>Community Oriented Policing Services</name></author>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Community Oriented Policing Services — Closes 2026-08-27 — The Office of Community Oriented Policing Services (COPS) is the component of the U.S. Department of Justice responsible for advancing the practice of community policing and the Administration’s priority of Making America Safe Again by supporting the nation’s state, local, territorial and Tribal law enforcement agencies through information and grant resources. This is a notice of funding opportuni…</summary>
-  </entry>
-  <entry>
-    <title>Strengthening Global Health Security by improving public health capacity to detect, notify, and respond to disease outbreaks globally</title>
-    <link href="https://www.grants.gov/search-results-detail/360342"/>
-    <id>urn:funding-finder:grants-gov:360342</id>
-    <updated>2026-07-14T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-08-14 — This Notice of Funding Opportunity (NOFO) seeks to build upon activities funded by CDC to support Global Health Security (GHS) through implementation of programs and activities that focus on protecting and improving health globally through partnerships with Ministries of Health and other governmental institutions. This NOFO will build on lessons learned from the global COVID outbreak and other sig…</summary>
   </entry>
 </feed>
