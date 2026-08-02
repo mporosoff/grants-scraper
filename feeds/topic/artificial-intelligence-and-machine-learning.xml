@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-08-01T11:38:52Z</updated>
+  <updated>2026-08-02T11:38:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
@@ -94,6 +94,22 @@
     <summary>National Institutes of Health — Closes 2026-10-06 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that develop or incorporate novel, cutting-edge study designs/methods/analytic approaches through the use of machine learning, artificial intelligence, and adaptive designs to allow the discovery of health/function profiles at the level of the individual and that could lead to th…</summary>
   </entry>
   <entry>
+    <title>Advancing Investigative Journalism in Ukraine through U.S. AI Innovation</title>
+    <link href="https://www.grants.gov/search-results-detail/363440"/>
+    <id>urn:funding-finder:grants-gov:363440</id>
+    <updated>2026-08-01T00:00:00Z</updated>
+    <author><name>U.S. Mission to Ukraine</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Ukraine — Closes 2026-09-01 — The U.S. Department of State's Embassy Kyiv announces an open competition for Ukrainian non-governmental media organizations and independent media outlets to implement a program that strengthens data-driven and AI-enabled journalism in Ukraine. It will build the capacity of journalists and newsrooms to produce high-quality reporting on economic development, reconstruction and investment through tr…</summary>
+  </entry>
+  <entry>
     <title>BRAIN Initiative Cell Atlas Network (BICAN): Coordinating Unit for Biostatistics, Informatics, and Engagement (CUBIE)</title>
     <link href="https://www.grants.gov/search-results-detail/361449"/>
     <id>urn:funding-finder:grants-gov:361449</id>
@@ -127,6 +143,7 @@
     <category term="Arts and culture"/>
     <category term="Community development"/>
     <category term="Education and workforce"/>
+    <category term="Data science"/>
     <summary>Administration for Children and Families - ANA — Closes 2026-08-27 — The Administration for Native Americans (ANA) anticipates announcing the availability of funds and requesting applications for the AI3 Action Institute – Artificial Intelligence for American Indians. The successful applicant will establish the AI3 Action Institute, which will monitor the pace of AI change, identify responsible and practical opportunities to apply this technology to socioeconomic d…</summary>
   </entry>
   <entry>
@@ -327,7 +344,7 @@
     <summary>U.S. Mission to South Korea — Closes 2026-08-05 — Funding Opportunity Title: 2027 Young Trilateral Leaders (YTL) Summit Funding Opportunity Number: PD-SEOUL-FY26-04 Deadline for Applications: Wednesday, August 5, 2026, 11:59 p.m. (GMT+9) CFDA Number: 19.040 Type of Funding: FY26 Smith Mundt Public Diplomacy Funds Total Amount Available: $250,000 This notice is subject to availability of funding. This NOFO is currently listed under Assistance List…</summary>
   </entry>
   <entry>
-    <title>Unlocking Dataset Value for AI-Enabled Scientific Discovery</title>
+    <title>Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets)</title>
     <link href="https://www.grants.gov/search-results-detail/363268"/>
     <id>urn:funding-finder:grants-gov:363268</id>
     <updated>2026-07-21T00:00:00Z</updated>
@@ -745,18 +762,5 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Arts and culture"/>
     <summary>National Institutes of Health — Closes 2026-10-19 — The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
-  </entry>
-  <entry>
-    <title>Rapid Reskill Employment Recovery National Dislocated Worker Grants</title>
-    <link href="https://www.grants.gov/search-results-detail/362987"/>
-    <id>urn:funding-finder:grants-gov:362987</id>
-    <updated>2026-06-26T00:00:00Z</updated>
-    <author><name>Employment and Training Administration</name></author>
-    <category term="Education and workforce"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <summary>Employment and Training Administration — Closes 2026-08-03 — Please direct inquiries about this funding opportunity to Sabrina Guerrier at DOL-ETA-DWG@dol.gov with Reskill DWG in the subject line.</summary>
   </entry>
 </feed>

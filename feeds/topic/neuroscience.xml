@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml</id>
-  <updated>2026-08-01T11:38:52Z</updated>
+  <updated>2026-08-02T11:38:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -434,16 +434,6 @@
     <summary>National Institutes of Health — Closes 2027-03-05 — The purpose of this Notice of Funding Opportunity (NOFO) is to support investigators who have the interest and capability to join efforts for the discovery of in vivo chemical probes for novel brain targets. It is expected that applicants will have, in hand, the starting compounds (validated hits) for chemical optimization and bioassays for testing new analog compounds.Through this NOFO, NIH wishe…</summary>
   </entry>
   <entry>
-    <title>Forecast to Publish a Funding Opportunity Announcement for Limited Competition for the Continuation of the National Consortium on Alcohol and Neurodevelopment in Adolescence (NCANDA) Research Project Sites (U01 Clinical Trials Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/358940"/>
-    <id>urn:funding-finder:grants-gov:358940</id>
-    <updated>2026-05-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health — Closes 2026-08-01 — The National Institute on Alcohol Abuse and Alcoholism (NIAAA) launched the National Consortium on Alcohol and Neurodevelopment in Adolescence (NCANDA) in 2012 to determine how adolescent alcohol-related disruption of normal brain growth patterns of structure, related brain function, and psychiatric health affects brain functioning in emerging adulthood. The consortium uses an accelerated longitud…</summary>
-  </entry>
-  <entry>
     <title>NIH Brain Development Cohorts (NBDC) and Population Assessment of Tobacco and Health (PATH) Study Biospecimen Access</title>
     <link href="https://www.grants.gov/search-results-detail/360554"/>
     <id>urn:funding-finder:grants-gov:360554</id>
@@ -518,26 +508,6 @@
     <category term="Education and workforce"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health — Closes 2027-11-08 — The Theories, Models and Methods (TMM) initiative will support the development of computational tools for understanding dynamic brain circuits that are made broadly accessible to the greater research community. This program supports applications focused on tool building and dissemination in the domain of theories about neural circuit mechanisms, models of circuit structure and function, and/or com…</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition for the Continuation of the National Consortium on Alcohol and Neurodevelopment in Adolescence (NCANDA) Administrative Resource (U24 Clinical Trials Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/358941"/>
-    <id>urn:funding-finder:grants-gov:358941</id>
-    <updated>2025-09-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health — Closes 2026-08-01 — The National Institute on Alcohol Abuse and Alcoholism (NIAAA) launched the National Consortium on Alcohol and Neurodevelopment in Adolescence (NCANDA) in 2012 to determine how adolescent alcohol-related disruption of normal brain growth patterns of structure, related brain function, and psychiatric health affects brain functioning in emerging adulthood. The consortium uses an accelerated longitud…</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition for the Continuation of the National Consortium on Alcohol and Neurodevelopment in Adolescence (NCANDA) Data Analysis Resource (U24 Clinical Trials Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/358942"/>
-    <id>urn:funding-finder:grants-gov:358942</id>
-    <updated>2025-09-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health — Closes 2026-08-01 — The National Institute on Alcohol Abuse and Alcoholism (NIAAA) launched the National Consortium on Alcohol and Neurodevelopment in Adolescence (NCANDA) in 2012 to determine how adolescent alcohol-related disruption of normal brain growth patterns of structure, related brain function, and psychiatric health affects brain functioning in emerging adulthood. The consortium uses an accelerated longitud…</summary>
   </entry>
   <entry>
     <title>Mind, Machine and Motor Nexus</title>
@@ -663,5 +633,33 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health — Closes 2026-11-19 — The purpose of this Notice of Funding Opportunity (NOFO) is to invite applications that bundle independent protocols for phase 1 clinical trials with phase 1b/phase 2a clinical trials to streamline the early-stage evaluation of promising pharmacological interventions for Alzheimer's disease (AD) and Alzheimer's disease-related Dementias (ADRD). Candidate interventions evaluated through this progra…</summary>
+  </entry>
+  <entry>
+    <title>Utilizing Invasive Recording and Stimulating Opportunities in Humans to Advance Neural Circuitry Understanding of Mental Health Disorders (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357346"/>
+    <id>urn:funding-finder:grants-gov:357346</id>
+    <updated>2024-11-22T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health — Closes 2028-01-07 — The purpose of this Notice of Funding Opportunity (NOFO) is to encourage applications to pursue invasive neural recording studies focused on mental health-relevant questions. Invasive neural recordings provide an unparalleled window into the human brain to explore the neural circuitry and neural dynamics underlying complex moods, emotions, cognitive functions, and behaviors with high spatial and t…</summary>
+  </entry>
+  <entry>
+    <title>Utilizing Invasive Recording and Stimulating Opportunities in Humans to Advance Neural Circuitry Understanding of Mental Health Disorders (R21 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357345"/>
+    <id>urn:funding-finder:grants-gov:357345</id>
+    <updated>2024-11-22T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health — Closes 2028-01-07 — Reissue of RFA-20-351.The purpose of this Notice of Funding Opportunity (NOFO) is to encourage applications to pursue invasive neural recording studies focused on mental health-relevant questions. Invasive neural recordings provide an unparalleled window into the human brain to explore the neural circuitry and neural dynamics underlying complex moods, emotions, cognitive functions, and behaviors w…</summary>
+  </entry>
+  <entry>
+    <title>Neuromodulation/Neurostimulation Device Development for Mental Health Applications (R01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357309"/>
+    <id>urn:funding-finder:grants-gov:357309</id>
+    <updated>2024-11-21T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health — Closes 2028-01-07 — The purpose of this Notice of Funding Opportunity (NOFO) is to encourage applications seeking to develop the next generation of brain stimulation devices for treating mental health disorders. Applications are sought that will either 1) develop novel brain stimulation devices or 2) significantly enhance, by means of hardware/software improvements, the effectiveness of brain stimulation devices that…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-08-01T11:38:52Z</updated>
+  <updated>2026-08-02T11:38:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -190,15 +190,20 @@
     <summary>National Institutes of Health — Closes 2027-01-25 — The Clinical and Translational Science Awards Program Trial Innovation Network (TIN) is a collaborative initiative aimed at addressing critical roadblocks in the design and implementation of multi-center clinical trials. The goal of the TIN is to execute trials better, faster, and more cost-efficiently, as well as serve as a national laboratory to study, understand, and innovate the process of con…</summary>
   </entry>
   <entry>
-    <title>Alumni Engagement Innovation Fund 2026</title>
-    <link href="https://www.grants.gov/search-results-detail/363405"/>
-    <id>urn:funding-finder:grants-gov:363405</id>
-    <updated>2026-07-31T00:00:00Z</updated>
-    <author><name>U.S. Mission to Laos</name></author>
+    <title>Advancing Investigative Journalism in Ukraine through U.S. AI Innovation</title>
+    <link href="https://www.grants.gov/search-results-detail/363440"/>
+    <id>urn:funding-finder:grants-gov:363440</id>
+    <updated>2026-08-01T00:00:00Z</updated>
+    <author><name>U.S. Mission to Ukraine</name></author>
+    <category term="Artificial intelligence and machine learning"/>
     <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Cybersecurity"/>
     <category term="Education and workforce"/>
+    <category term="Environmental science"/>
     <category term="Technology development"/>
-    <summary>U.S. Mission to Laos — Closes 2026-08-01 — The U.S. Department of State’s Embassy Vientiane announces an open competition to implement a program under the 2026 Alumni Engagement Innovation Fund (AEIF). This program is designed to increase the impact of the U.S. government’s investment in exchange participants and programs by helping alumni develop and implement projects that support U.S. policy objectives and promote shared interests. All …</summary>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Ukraine — Closes 2026-09-01 — The U.S. Department of State's Embassy Kyiv announces an open competition for Ukrainian non-governmental media organizations and independent media outlets to implement a program that strengthens data-driven and AI-enabled journalism in Ukraine. It will build the capacity of journalists and newsrooms to produce high-quality reporting on economic development, reconstruction and investment through tr…</summary>
   </entry>
   <entry>
     <title>Placement and Coordination Program</title>
@@ -431,7 +436,7 @@
     <summary>Administration for Children and Families - ACYF/CB — Closes 2026-08-21 — This program will fund projects focused on technology-enabled strategies that improve adoptive matching, placement, and permanency for children in foster care awaiting adoption. The funds, awarded to four regional centers, will be used to design, implement and evaluate these strategies.These centers will focus on children with an adoption permanency goal or who are legally free for adoption due to…</summary>
   </entry>
   <entry>
-    <title>Unlocking Dataset Value for AI-Enabled Scientific Discovery</title>
+    <title>Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets)</title>
     <link href="https://www.grants.gov/search-results-detail/363268"/>
     <id>urn:funding-finder:grants-gov:363268</id>
     <updated>2026-07-21T00:00:00Z</updated>

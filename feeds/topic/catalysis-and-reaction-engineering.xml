@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml</id>
-  <updated>2026-08-01T11:38:52Z</updated>
+  <updated>2026-08-02T11:38:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Chemical Process Systems (CPS)</title>
@@ -53,6 +53,20 @@
     <category term="Quantum science"/>
     <category term="Data science"/>
     <summary>Office of Science — Closes 2026-09-30 — The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
+  </entry>
+  <entry>
+    <title>Assay development and screening for discovery of chemical probes, drugs or immunomodulators (R01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357014"/>
+    <id>urn:funding-finder:grants-gov:357014</id>
+    <updated>2024-11-06T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>National Institutes of Health — Closes 2026-09-07 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits applications for identification of small molecules that function to elucidate the biology of disease as chemical probes or function as agonists or antagonists of disease target(s) for therapy or immunotherapy. The NOFO is intended to support discovery research for the identification of validated hits re…</summary>
   </entry>
   <entry>
     <title>Computational and Data-Enabled Science and Engineering</title>

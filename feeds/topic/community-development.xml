@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml</id>
-  <updated>2026-08-01T11:38:52Z</updated>
+  <updated>2026-08-02T11:38:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Veterans Legacy Grants Program</title>
@@ -136,6 +136,22 @@
     <summary>National Institutes of Health — Closes 2026-12-15 — The National Library of Medicine (NLM) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for a Training Center of the Network of the National Library of Medicine (NNLM).Established in 1965 and organized geographically across the United States and its territories, the NNLM promotes and supports the initiatives, products, and services of the NLM and the National Insti…</summary>
   </entry>
   <entry>
+    <title>Advancing Investigative Journalism in Ukraine through U.S. AI Innovation</title>
+    <link href="https://www.grants.gov/search-results-detail/363440"/>
+    <id>urn:funding-finder:grants-gov:363440</id>
+    <updated>2026-08-01T00:00:00Z</updated>
+    <author><name>U.S. Mission to Ukraine</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Ukraine — Closes 2026-09-01 — The U.S. Department of State's Embassy Kyiv announces an open competition for Ukrainian non-governmental media organizations and independent media outlets to implement a program that strengthens data-driven and AI-enabled journalism in Ukraine. It will build the capacity of journalists and newsrooms to produce high-quality reporting on economic development, reconstruction and investment through tr…</summary>
+  </entry>
+  <entry>
     <title>AI3 Action Institute - Artificial Intelligence for American Indians</title>
     <link href="https://www.grants.gov/search-results-detail/362270"/>
     <id>urn:funding-finder:grants-gov:362270</id>
@@ -145,6 +161,7 @@
     <category term="Arts and culture"/>
     <category term="Community development"/>
     <category term="Education and workforce"/>
+    <category term="Data science"/>
     <summary>Administration for Children and Families - ANA — Closes 2026-08-27 — The Administration for Native Americans (ANA) anticipates announcing the availability of funds and requesting applications for the AI3 Action Institute – Artificial Intelligence for American Indians. The successful applicant will establish the AI3 Action Institute, which will monitor the pace of AI change, identify responsible and practical opportunities to apply this technology to socioeconomic d…</summary>
   </entry>
   <entry>
@@ -656,17 +673,6 @@
     <title>Philadelphia FY 2021 – FY 2023 EDA Planning and Local Technical Assistance</title>
     <link href="https://www.grants.gov/search-results-detail/332138"/>
     <id>urn:funding-finder:grants-gov:332138</id>
-    <updated>2021-03-15T00:00:00Z</updated>
-    <author><name>Department of Commerce</name></author>
-    <category term="Arts and culture"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <summary>Department of Commerce — Posted — UPDATED NOTICE - PLEASE READ: April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
-  </entry>
-  <entry>
-    <title>Seattle FY 2021 – FY 2023 EDA Planning and Local Technical Assistance</title>
-    <link href="https://www.grants.gov/search-results-detail/332127"/>
-    <id>urn:funding-finder:grants-gov:332127</id>
     <updated>2021-03-15T00:00:00Z</updated>
     <author><name>Department of Commerce</name></author>
     <category term="Arts and culture"/>

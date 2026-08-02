@@ -132,11 +132,11 @@ self-service account, personalized RSS, and email-service architecture.
 
 <!-- catalog-stats:start -->
 This replaces the former 48-record Chemical and Sustainability Engineering feed. The
-August 1, 2026 build contains 1,500 current funding opportunities (1,230 posted and 270
-forecasted) from Grants.gov (1,463), NYSERDA (37), with no deadline before the catalog
-date. It provides a direct official announcement for 429 records, an official source-
-page route for another 632, and the official Grants.gov record for the remaining 439.
-Across all route types, 765 records also contain an official source URL.
+August 2, 2026 build contains 1,496 current funding opportunities (1,230 posted and 266
+forecasted) from Grants.gov (1,459), NYSERDA (37), with no deadline before the catalog
+date. It provides a direct official announcement for 437 records, an official source-
+page route for another 627, and the official Grants.gov record for the remaining 432.
+Across all route types, 764 records also contain an official source URL.
 <!-- catalog-stats:end -->
 
 Funding values are intentionally not conflated: award floor/ceiling drive

@@ -4,8 +4,24 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-08-01T11:38:52Z</updated>
+  <updated>2026-08-02T11:38:01Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Advancing Investigative Journalism in Ukraine through U.S. AI Innovation</title>
+    <link href="https://www.grants.gov/search-results-detail/363440"/>
+    <id>urn:funding-finder:grants-gov:363440</id>
+    <updated>2026-08-01T00:00:00Z</updated>
+    <author><name>U.S. Mission to Ukraine</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Ukraine — Closes 2026-09-01 — The U.S. Department of State's Embassy Kyiv announces an open competition for Ukrainian non-governmental media organizations and independent media outlets to implement a program that strengthens data-driven and AI-enabled journalism in Ukraine. It will build the capacity of journalists and newsrooms to produce high-quality reporting on economic development, reconstruction and investment through tr…</summary>
+  </entry>
   <entry>
     <title>Small Business Transportation Technical Assistance Center (Region 1)</title>
     <link href="https://www.grants.gov/search-results-detail/363425"/>
@@ -17,6 +33,17 @@
     <summary>69A350 OSDBU — Closes 2026-08-30 — The U.S. Department of Transportation (USDOT), Office of the Secretary (OST), Office of Small and Disadvantaged Business Utilization (OSDBU), announces the availability of funding under Notice of Funding Opportunity (NOFO) Number OST/OSDBU-2026-SBTTAC-Region 1-FY2026-1 to establish and operate the Region 1 Small Business Transportation Technical Assistance Center (SBTTAC) formerly known as the Sma…</summary>
   </entry>
   <entry>
+    <title>Small Business Transportation Technical Assistance Center (Region 2)</title>
+    <link href="https://www.grants.gov/search-results-detail/363436"/>
+    <id>urn:funding-finder:grants-gov:363436</id>
+    <updated>2026-07-31T00:00:00Z</updated>
+    <author><name>69A350 OSDBU</name></author>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <category term="Cybersecurity"/>
+    <summary>69A350 OSDBU — Closes 2026-08-30 — The United States Department of Transportation Office of Small and Disadvantaged Business Utilization will enter into Cooperative Agreements with eligible organizations to provide outreach to the small business community in their designated region and provide financial and technical assistance, business training programs, business assessment, management training, counseling, marketing and outreach…</summary>
+  </entry>
+  <entry>
     <title>Small Business Transportation Technical Assistance Center (Region 3)</title>
     <link href="https://www.grants.gov/search-results-detail/363428"/>
     <id>urn:funding-finder:grants-gov:363428</id>
@@ -25,6 +52,28 @@
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
     <summary>69A350 OSDBU — Closes 2026-08-30 — The U.S. Department of Transportation (USDOT), Office of the Secretary (OST), Office of Small and Disadvantaged Business Utilization (OSDBU), announces the availability of funding under Notice of Funding Opportunity (NOFO) Number OST/OSDBU-2026-SBTTAC-Region 3-FY2026-1 to establish and operate the Region 3 Small Business Transportation Technical Assistance Center (SBTTAC) formerly known as the Sma…</summary>
+  </entry>
+  <entry>
+    <title>Small Business Transportation Technical Assistance Center (Region 4)</title>
+    <link href="https://www.grants.gov/search-results-detail/363437"/>
+    <id>urn:funding-finder:grants-gov:363437</id>
+    <updated>2026-07-31T00:00:00Z</updated>
+    <author><name>69A350 OSDBU</name></author>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <category term="Cybersecurity"/>
+    <summary>69A350 OSDBU — Closes 2026-08-30 — The United States Department of Transportation Office of Small and Disadvantaged Business Utilization will enter into Cooperative Agreements with eligible organizations to provide outreach to the small business community in their designated region and provide financial and technical assistance, business training programs, business assessment, management training, counseling, marketing and outreach…</summary>
+  </entry>
+  <entry>
+    <title>Small Business Transportation Technical Assistance Center (Region 5)</title>
+    <link href="https://www.grants.gov/search-results-detail/363439"/>
+    <id>urn:funding-finder:grants-gov:363439</id>
+    <updated>2026-07-31T00:00:00Z</updated>
+    <author><name>69A350 OSDBU</name></author>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <category term="Cybersecurity"/>
+    <summary>69A350 OSDBU — Closes 2026-08-30 — The United States Department of Transportation Office of Small and Disadvantaged Business Utilization will enter into Cooperative Agreements with eligible organizations to provide outreach to the small business community in their designated region and provide financial and technical assistance, business training programs, business assessment, management training, counseling, marketing and outreach…</summary>
   </entry>
   <entry>
     <title>Small Business Transportation Technical Assistance Center (Region 6)</title>
@@ -597,6 +646,7 @@
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <category term="Technology development"/>
+    <category term="Data science"/>
     <summary>U.S. National Science Foundation — Closes 2026-09-01 — The Pathways to Enable Secure Open-Source Ecosystems (PESOSE) program supports the translation of open-source science and engineering-focused research products into safe and sustainable ecosystems that address national and societal challenges. Open-source tools such as software, hardware, machine learning models, languages, and data platforms are designed to be shared as they are publicly-accessib…</summary>
   </entry>
   <entry>
@@ -651,60 +701,5 @@
     <category term="Cybersecurity"/>
     <category term="Education and workforce"/>
     <summary>Washington Headquarters Services — Closes 2030-01-22 — See the "Related Documents" and "Package" tabs for the complete application package, including the full text of the Notice of Funding Opportunity.The Department of War (DoW) Cyber Service Academy (CSA) is authorized by Chapter 112 of Title 10, United States Code, Section 2200. The purpose of the program is to support the recruitment of new cyber talent and the retention of current highly skilled p…</summary>
-  </entry>
-  <entry>
-    <title>Cybersecurity Innovation for Cyberinfrastructure</title>
-    <link href="https://www.grants.gov/search-results-detail/358004"/>
-    <id>urn:funding-finder:grants-gov:358004</id>
-    <updated>2025-01-04T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Cybersecurity"/>
-    <category term="Environmental science"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>U.S. National Science Foundation — Closes 2027-01-20 — The objective of the Cybersecurity Innovation for Cyberinfrastructure (CICI) program is to advance scientific discovery and innovation by enhancing the security and privacy of cyberinfrastructure. CICI supports efforts to develop, deploy and integrate cybersecurity that will benefit the broader scientific community by securing science data, computation, collaborations workflows, and infrastructure…</summary>
-  </entry>
-  <entry>
-    <title>Security, Privacy, and Trust in Cyberspace</title>
-    <link href="https://www.grants.gov/search-results-detail/357554"/>
-    <id>urn:funding-finder:grants-gov:357554</id>
-    <updated>2024-12-06T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Cybersecurity"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Transportation"/>
-    <summary>U.S. National Science Foundation — Closes 2026-09-28 — Our world is at a pivotal moment where the boundaries dividing the physical and social worlds from the cyber world have become blurred. Cyberspace has evolved from an interconnected digital environment into a complex and interdependent cyber ecosystem that involves hardware, software, networks, data, people, organizations, countries, and the physical world. Critical functions of everyday life are …</summary>
-  </entry>
-  <entry>
-    <title>Research Training Groups in the Mathematical Sciences</title>
-    <link href="https://www.grants.gov/search-results-detail/353962"/>
-    <id>urn:funding-finder:grants-gov:353962</id>
-    <updated>2024-05-03T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cybersecurity"/>
-    <category term="Education and workforce"/>
-    <category term="Quantum science"/>
-    <summary>U.S. National Science Foundation — Closes 2026-08-11 — The long-range goal of the Research Training Groups in the Mathematical Sciences (RTG) program is to strengthen the nation's scientific competitiveness by increasing the number of well-prepared U.S. citizens, nationals, and permanent residents who pursue careers in the mathematical sciences, be they in academia, government, or industry. The RTG program supports efforts to improve graduate student …</summary>
-  </entry>
-  <entry>
-    <title>Centers of Research Excellence in Science and Technology</title>
-    <link href="https://www.grants.gov/search-results-detail/348375"/>
-    <id>urn:funding-finder:grants-gov:348375</id>
-    <updated>2023-05-25T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Quantum science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <category term="Cybersecurity"/>
-    <summary>U.S. National Science Foundation — Closes 2026-12-04 — CREST Center awards provide support to enhance the research capabilities of Minority-serving institutions (MSIs) through the establishment of centers that effectively integrate education and research. CREST Center awards promote the development of new knowledge, enhancements of the research productivity of individual faculty, and an expanded presence of students historically underrepresented in sc…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml</id>
-  <updated>2026-08-01T11:38:52Z</updated>
+  <updated>2026-08-02T11:38:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
@@ -274,6 +274,22 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Environmental science"/>
     <summary>National Institutes of Health — Closes 2026-09-25 — The National Institute on Drug Abuse (NIDA) seeks to advance its mission by supporting Core Center of Transformative Science Grants. These Centers will bring together investigators currently funded by NIH or other Federal or non-Federal sources to enhance and extend existing research relevant to substance use, addiction, and HIV. Centers are expected to transform the scientific field of study by f…</summary>
+  </entry>
+  <entry>
+    <title>Advancing Investigative Journalism in Ukraine through U.S. AI Innovation</title>
+    <link href="https://www.grants.gov/search-results-detail/363440"/>
+    <id>urn:funding-finder:grants-gov:363440</id>
+    <updated>2026-08-01T00:00:00Z</updated>
+    <author><name>U.S. Mission to Ukraine</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Ukraine — Closes 2026-09-01 — The U.S. Department of State's Embassy Kyiv announces an open competition for Ukrainian non-governmental media organizations and independent media outlets to implement a program that strengthens data-driven and AI-enabled journalism in Ukraine. It will build the capacity of journalists and newsrooms to produce high-quality reporting on economic development, reconstruction and investment through tr…</summary>
   </entry>
   <entry>
     <title>BRAIN Initiative Cell Atlas Network (BICAN): Coordinating Unit for Biostatistics, Informatics, and Engagement (CUBIE)</title>
@@ -686,15 +702,5 @@
     <category term="Transportation"/>
     <category term="Water"/>
     <summary>DOC NOAA - ERA Production — Closes 2026-09-18 — The National Estuarine Research Reserve System (NERRS) consists of estuarine areas of the United States and its territories designated and managed for research and educational purposes (Reserve) as specified in 15 C.F.R. Part 921. By funding Reserve lead agencies and universities to conduct land acquisition and construction projects that support the NERRS mission, NOAA will strengthen protection o…</summary>
-  </entry>
-  <entry>
-    <title>FY27 Brownfields Job Training (JT) Grants</title>
-    <link href="https://www.grants.gov/search-results-detail/363223"/>
-    <id>urn:funding-finder:grants-gov:363223</id>
-    <updated>2026-07-17T00:00:00Z</updated>
-    <author><name>Environmental Protection Agency</name></author>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>Environmental Protection Agency — Closes 2026-09-23 — This notice announces the availability of funds and solicits applications from eligible entities to deliver Brownfields Job Training programs that recruit, train, and place local, unemployed, and underemployed residents with the skills needed to secure full-time employment in the environmental field.Brownfields Job Training Grants fund training programs that strengthen local workforces by preparin…</summary>
   </entry>
 </feed>

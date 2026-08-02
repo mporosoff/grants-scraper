@@ -4,8 +4,152 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/changes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/changes.xml</id>
-  <updated>2026-08-01T11:38:53Z</updated>
+  <updated>2026-08-02T11:38:02Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Opportunity amended: Small Business Transportation Technical Assistance Center (Region 4)</title>
+    <link href="https://www.grants.gov/search-results-detail/363437"/>
+    <id>urn:funding-finder:change:f7545f25f3db8088bb3d</id>
+    <updated>2026-08-02T11:34:36.257363Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: National HIV Behavioral Surveillance</title>
+    <link href="https://www.grants.gov/search-results-detail/361918"/>
+    <id>urn:funding-finder:change:f58fca96b201afe4e74c</id>
+    <updated>2026-08-02T11:34:36.257363Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-01</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Tribal Colleges and Universities Program</title>
+    <link href="https://www.grants.gov/search-results-detail/334326"/>
+    <id>urn:funding-finder:change:ee1fd4600dc3ac2da018</id>
+    <updated>2026-08-02T11:34:36.257363Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-01</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Medical Student Education Program (MSE)</title>
+    <link href="https://www.grants.gov/search-results-detail/362317"/>
+    <id>urn:funding-finder:change:d59067c3a8e07db86905</id>
+    <updated>2026-08-02T11:34:36.257363Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-01</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Small Business Transportation Technical Assistance Center (Region 2)</title>
+    <link href="https://www.grants.gov/search-results-detail/363436"/>
+    <id>urn:funding-finder:change:b22f9ce483e916cc2420</id>
+    <updated>2026-08-02T11:34:36.257363Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Limited Competition for the Continuation of the National Consortium on Alcohol and Neurodevelopment in Adolescence (NCANDA) Administrative Resource (U24 Clinical Trials Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/358941"/>
+    <id>urn:funding-finder:change:ad0ac75abec073cc5376</id>
+    <updated>2026-08-02T11:34:36.257363Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Advancing Investigative Journalism in Ukraine through U.S. AI Innovation</title>
+    <link href="https://www.grants.gov/search-results-detail/363440"/>
+    <id>urn:funding-finder:change:acafb1153aa3d8bf6c3c</id>
+    <updated>2026-08-02T11:34:36.257363Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-01</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Limited Competition for the Continuation of the National Consortium on Alcohol and Neurodevelopment in Adolescence (NCANDA) Data Analysis Resource (U24 Clinical Trials Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/358942"/>
+    <id>urn:funding-finder:change:a854a9891ebb78bc3a67</id>
+    <updated>2026-08-02T11:34:36.257363Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: OnHold 2026/3/4 Funding Opportunity Announcement - NIBIB Technology Development Networks</title>
+    <link href="https://www.grants.gov/search-results-detail/360629"/>
+    <id>urn:funding-finder:change:94af97fc714c48718a2d</id>
+    <updated>2026-08-02T11:34:36.257363Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: OVW Fiscal Year 2026 Grants to Indian Tribal Governments Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362682"/>
+    <id>urn:funding-finder:change:943002209c862726aa26</id>
+    <updated>2026-08-02T11:34:36.257363Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-01</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Pathways to Enable Secure Open-Source Ecosystems</title>
+    <link href="https://www.grants.gov/search-results-detail/361333"/>
+    <id>urn:funding-finder:change:83c4582b52cb6817125f</id>
+    <updated>2026-08-02T11:34:36.257363Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-01</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Forecast to Publish a Funding Opportunity Announcement for Limited Competition for the Continuation of the National Consortium on Alcohol and Neurodevelopment in Adolescence (NCANDA) Research Project Sites (U01 Clinical Trials Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/358940"/>
+    <id>urn:funding-finder:change:79bf609555f26f871637</id>
+    <updated>2026-08-02T11:34:36.257363Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Advancing Investigative Journalism in Ukraine through U.S. AI Innovation</title>
+    <link href="https://www.grants.gov/search-results-detail/363440"/>
+    <id>urn:funding-finder:change:7335b7f163a4bcf91c8a</id>
+    <updated>2026-08-02T11:34:36.257363Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets)</title>
+    <link href="https://www.grants.gov/search-results-detail/363268"/>
+    <id>urn:funding-finder:change:68747f1a1fd06bf41ee7</id>
+    <updated>2026-08-02T11:34:36.257363Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: OVW Fiscal Year 2026 Local Law Enforcement Grants for Enforcement of Cybercrimes Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362670"/>
+    <id>urn:funding-finder:change:2a1f745b589a67015160</id>
+    <updated>2026-08-02T11:34:36.257363Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-01</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Small Business Transportation Technical Assistance Center (Region 5)</title>
+    <link href="https://www.grants.gov/search-results-detail/363439"/>
+    <id>urn:funding-finder:change:20cf17acbc2f884211e9</id>
+    <updated>2026-08-02T11:34:36.257363Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Alumni Engagement Innovation Fund 2026</title>
+    <link href="https://www.grants.gov/search-results-detail/363405"/>
+    <id>urn:funding-finder:change:017a01e6008a57af7e45</id>
+    <updated>2026-08-02T11:34:36.257363Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: OVW Fiscal Year 2026 Tribal Sexual Assault Services Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362688"/>
+    <id>urn:funding-finder:change:0116d82d6a866616f377</id>
+    <updated>2026-08-02T11:34:36.257363Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-01</summary>
+  </entry>
   <entry>
     <title>New opportunity: Small Business Transportation Technical Assistance Center (Region 5)</title>
     <link href="https://www.grants.gov/search-results-detail/363439"/>
