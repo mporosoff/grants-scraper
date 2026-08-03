@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-08-02T11:38:01Z</updated>
+  <updated>2026-08-03T13:24:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -70,6 +70,18 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-03-03 — The National Institute for Occupational Safety and Health (NIOSH) is committed to addressing a wide range of occupational health and safety hazards affecting those who work in the agriculture, forestry, and fishing (AgFF) sector. Children and adolescents ("youth") are consistently more likely to be fatally injured working in agriculture compared to other industries. While many steps have been take…</summary>
+  </entry>
+  <entry>
+    <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363396"/>
+    <id>urn:funding-finder:grants-gov:363396</id>
+    <updated>2026-09-08T00:00:00Z</updated>
+    <author><name>Rural Utilities Service</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Community development"/>
+    <category term="Energy"/>
+    <category term="Cybersecurity"/>
+    <summary>Rural Utilities Service — Closes 2027-05-03 — The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2027 Regional Nutrition Hubs</title>
@@ -655,15 +667,5 @@
     <category term="Biology and biotechnology"/>
     <category term="Transportation"/>
     <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-30 — Summary: The fiscal year 2026 (FY26) Amyotrophic Lateral Sclerosis Research Program (ALSRP) Pilot Clinical Trial Award (PCTA) supports the rapid implementation of clinical trials with the potential to have a significant impact on the treatment or management of amyotrophic lateral sclerosis (ALS). Projects may range from phase 1 to small-scale phase 2 trials.Applications must address one of the fol…</summary>
-  </entry>
-  <entry>
-    <title>DoW Amyotrophic Lateral Sclerosis Research Program, Therapeutic Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362196"/>
-    <id>urn:funding-finder:grants-gov:362196</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-30 — Summary: The fiscal year 2026 (FY26) Amyotrophic Lateral Sclerosis Research Program (ALSRP) Therapeutic Development Award (TDA) supports research ranging from preclinical validation of therapeutic leads through U.S. Food and Drug Administration (FDA) Investigational New Drug (IND)-enabling studies. The proposed studies are expected to be empirical in nature and product-driven. Applicants with limi…</summary>
   </entry>
 </feed>

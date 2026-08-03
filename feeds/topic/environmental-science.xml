@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml</id>
-  <updated>2026-08-02T11:38:01Z</updated>
+  <updated>2026-08-03T13:24:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
@@ -274,6 +274,18 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Environmental science"/>
     <summary>National Institutes of Health — Closes 2026-09-25 — The National Institute on Drug Abuse (NIDA) seeks to advance its mission by supporting Core Center of Transformative Science Grants. These Centers will bring together investigators currently funded by NIH or other Federal or non-Federal sources to enhance and extend existing research relevant to substance use, addiction, and HIV. Centers are expected to transform the scientific field of study by f…</summary>
+  </entry>
+  <entry>
+    <title>Media Literacy and Capacity Building Workshop Series</title>
+    <link href="https://www.grants.gov/search-results-detail/363441"/>
+    <id>urn:funding-finder:grants-gov:363441</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Transportation"/>
+    <summary>U.S. Mission to Indonesia — Closes 2026-09-02 — 1. Project Background, Goals, and Objectives With over 270 million people and one of the world’s largest social media user bases, Indonesia’s citizens consume media content from a wide array of traditional and digital sources. As the country continues to expand its regional leadership role, Indonesian journalists must develop their capacity to report accurately and comprehensively on critical issu…</summary>
   </entry>
   <entry>
     <title>Advancing Investigative Journalism in Ukraine through U.S. AI Innovation</title>
@@ -690,17 +702,5 @@
     <category term="Energy"/>
     <category term="Environmental science"/>
     <summary>Department of Housing and Urban Development — Closes 2026-08-31 — The Healthy Homes Production Program (HHP) is part of HUD"s overall Healthy Homes Initiative launched in 1999. The program takes a comprehensive approach to addressing multiple childhood diseases and injuries in the home by focusing on housing-related hazards in a coordinated fashion, rather than addressing a single hazard at a time. The program builds upon HUD"s successful Lead Hazard Control pro…</summary>
-  </entry>
-  <entry>
-    <title>National Estuarine Research Reserve System (NERRS) Land Acquisition and Construction Program for Fiscal Year 2026</title>
-    <link href="https://www.grants.gov/search-results-detail/363229"/>
-    <id>urn:funding-finder:grants-gov:363229</id>
-    <updated>2026-07-17T00:00:00Z</updated>
-    <author><name>DOC NOAA - ERA Production</name></author>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Transportation"/>
-    <category term="Water"/>
-    <summary>DOC NOAA - ERA Production — Closes 2026-09-18 — The National Estuarine Research Reserve System (NERRS) consists of estuarine areas of the United States and its territories designated and managed for research and educational purposes (Reserve) as specified in 15 C.F.R. Part 921. By funding Reserve lead agencies and universities to conduct land acquisition and construction projects that support the NERRS mission, NOAA will strengthen protection o…</summary>
   </entry>
 </feed>

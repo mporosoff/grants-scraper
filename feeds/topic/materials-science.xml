@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-08-02T11:38:01Z</updated>
+  <updated>2026-08-03T13:24:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Microplastics Research and Resource Coordination Center (U24 - Clinical Trial Not Allowed)</title>
@@ -257,6 +257,8 @@
     <category term="Manufacturing"/>
     <category term="Materials science"/>
     <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>U.S. National Science Foundation — Closes 2026-11-16 — Proposals in the area of plasma physics submitted to the Division of Physics that are not governed by another solicitation (such as CAREER), should be submitted to the Division-wide solicitation: Division of Physics: Investigator-Initiated Research Projects. The Plasma Physics program participates in multiple NSF meta-programs such as the ECosytem for Leading Innovation in Plasma Science and Engin…</summary>
   </entry>
   <entry>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-08-02T11:38:01Z</updated>
+  <updated>2026-08-03T13:24:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -444,6 +444,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Arts and culture"/>
     <category term="Technology development"/>
+    <category term="Data science"/>
     <summary>U.S. National Science Foundation — Closes 2026-11-04 — This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
   </entry>
   <entry>
@@ -638,20 +639,6 @@
     <summary>U.S. Mission to Oman — Closes 2026-08-09 — The Public Diplomacy Section of U.S. Embassy Muscat announces an open competition to support projects that advance U.S. foreign policy priorities in Oman while strengthening the long-standing partnership between the United States and the Sultanate of Oman. This Annual Program Statement outlines strategic funding priorities, eligibility criteria, and application guidelines for grants ranging from $…</summary>
   </entry>
   <entry>
-    <title>FY26 American Spaces Vietnam Programming</title>
-    <link href="https://www.grants.gov/search-results-detail/363080"/>
-    <id>urn:funding-finder:grants-gov:363080</id>
-    <updated>2026-07-07T00:00:00Z</updated>
-    <author><name>U.S. Mission to Vietnam</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Cybersecurity"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Vietnam — Closes 2026-08-02 — U.S. Mission Vietnam's Public Diplomacy Section seeks proposals to implement workforce development and innovation programs through American Spaces. This program builds a pipeline of skilled, English-capable Vietnamese youth who support U.S. trade, investment, and innovation partnerships while expanding economic opportunity in Vietnam. The project targets university students, educators, and early-c…</summary>
-  </entry>
-  <entry>
     <title>Notice of Funding Opportunity 2026 – Lebanon</title>
     <link href="https://www.grants.gov/search-results-detail/363090"/>
     <id>urn:funding-finder:grants-gov:363090</id>
@@ -714,5 +701,16 @@
     <category term="Cybersecurity"/>
     <category term="Water"/>
     <summary>Assistance Coordination — Closes 2026-09-30 — The Middle East Regional Cooperation (MERC) Program supports joint scientific research and innovation partnerships between the United States, Israel, and countries across the Middle East and North Africa (MENA). The program funds applied research projects that address shared regional challenges while advancing U.S. economic, technological, and strategic interests. MERC is designed to bring togethe…</summary>
+  </entry>
+  <entry>
+    <title>U.S. Embassy Bishkek Public Diplomacy American Corners</title>
+    <link href="https://www.grants.gov/search-results-detail/363008"/>
+    <id>urn:funding-finder:grants-gov:363008</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>U.S. Mission to Kyrgyzstan</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <summary>U.S. Mission to Kyrgyzstan — Closes 2026-08-07 — The U.S. Department of State's Embassy Bishkek Public Diplomacy Section (PDS) announces an open competition to implement a program supporting the American Corners network in the Kyrgyz Republic—the U.S. government's primary information and cultural centers. They showcase American innovation to foreign audiences and promote demand for U.S. products and services, particularly as the United States ce…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml</id>
-  <updated>2026-08-02T11:38:01Z</updated>
+  <updated>2026-08-03T13:24:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Improved Drug Susceptibility Testing (DST) for Mycobacteria</title>
@@ -554,6 +554,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Arts and culture"/>
     <category term="Technology development"/>
+    <category term="Data science"/>
     <summary>U.S. National Science Foundation — Closes 2026-11-04 — This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
   </entry>
   <entry>
@@ -593,16 +594,6 @@
     <category term="Environmental science"/>
     <category term="Technology development"/>
     <summary>U.S. Mission to Albania — Closes 2026-08-20 — 1. Project Background, Goals, and Objectives Albania's youth face a rapidly evolving digital economy that demands advanced technical skills, entrepreneurial mindsets, and exposure to international industry standards. Albanian interest in gaming – a global market forecasted to surpass $745 billion by 2030, in which the United States is leading – is high, presenting an opportunity to increase Albani…</summary>
-  </entry>
-  <entry>
-    <title>Artificial Intelligence for American Competitiveness and Economic Security (AI-ACES) in South Asia</title>
-    <link href="https://www.grants.gov/search-results-detail/363227"/>
-    <id>urn:funding-finder:grants-gov:363227</id>
-    <updated>2026-07-17T00:00:00Z</updated>
-    <author><name>Bureau of South and Central Asian Affairs</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <summary>Bureau of South and Central Asian Affairs — Closes 2026-08-02 — The program within SCA will aim to deploy American AI technology securely in U.S. partners’ strategic economic sectors and infrastructure.  The specific strategic economic sector(s) and organizations (including government, public institutions like utilities, and private companies) targeted in each country for support would be developed in consultation with State Department and host country governm…</summary>
   </entry>
   <entry>
     <title>Tribal Personal Responsibility Education Program (Tribal PREP)</title>
@@ -692,5 +683,18 @@
     <category term="Arts and culture"/>
     <category term="Cybersecurity"/>
     <summary>Bureau of Democracy Human Rights and Labor — Closes 2026-08-13 — Freedom of expression online faces threats globally from authoritarian governments employing sophisticated technology to restrict speech, control the flow of information, and chill dissenting voices. These challenges infringe on privacy; access to information; and the exercise of freedoms of expression, peaceful assembly, association, and religion or belief online. The misuse of commercial spyware…</summary>
+  </entry>
+  <entry>
+    <title>Public Wireless Supply Chain Innovation Fund Grant Program – Solutions for AI-Native RAN</title>
+    <link href="https://www.grants.gov/search-results-detail/363179"/>
+    <id>urn:funding-finder:grants-gov:363179</id>
+    <updated>2026-07-14T00:00:00Z</updated>
+    <author><name>National Telecommunications and Information Admini</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <summary>National Telecommunications and Information Admini — Closes 2026-09-09 — This NOFO is the fourth issued under NTIA’s Public Wireless Supply Chain Innovation Fund (PWSCIF or Innovation Fund). Titled “Solutions for AI-Native RAN,” the goal of this NOFO is to support the development of a secure compute environment to enable or leverage native artificial intelligence (“AI”) capabilities in the Radio Access Network (RAN) that generate revenue for operators, cost savings, an…</summary>
   </entry>
 </feed>

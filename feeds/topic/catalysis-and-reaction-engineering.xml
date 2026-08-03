@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml</id>
-  <updated>2026-08-02T11:38:01Z</updated>
+  <updated>2026-08-03T13:24:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Chemical Process Systems (CPS)</title>
@@ -112,6 +112,8 @@
     <category term="Manufacturing"/>
     <category term="Materials science"/>
     <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>U.S. National Science Foundation — Closes 2026-11-16 — Proposals in the area of plasma physics submitted to the Division of Physics that are not governed by another solicitation (such as CAREER), should be submitted to the Division-wide solicitation: Division of Physics: Investigator-Initiated Research Projects. The Plasma Physics program participates in multiple NSF meta-programs such as the ECosytem for Leading Innovation in Plasma Science and Engin…</summary>
   </entry>
   <entry>
@@ -156,6 +158,10 @@ The goal of the Process Systems, Reaction Engineering, and Molecular Thermodynam
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Catalysis and reaction engineering"/>
     <category term="Environmental science"/>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation — Closes 2026-09-30 — This solicitation applies to six (of the nine) CHE Disciplinary Research Programs: Chemical Catalysis (CAT); Chemical Measurement and Imaging (CMI); Chemical Mechanism, Function and Properties (CMFP); Chemical Synthesis (SYN); Environmental Chemical Sciences (ECS); and Macromolecular, Supramolecular and Nanochemistry (MSN). All proposals submitted to these six CHE Disciplinary Research Programs (o…</summary>
   </entry>
   <entry>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-08-02T11:38:01Z</updated>
+  <updated>2026-08-03T13:24:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Core State Injury Prevention Program (Core SIPP)</title>
@@ -134,6 +134,18 @@
     <author><name>Department of Housing and Urban Development</name></author>
     <category term="Transportation"/>
     <summary>Department of Housing and Urban Development — Closes 2026-11-10 — The Family Unification Program (FUP) public housing authorities (PHAs) to partner with public child welfare agencies (PCWAs) to provide Housing Choice Voucher (HCV) assistance to two primary groups:1. Families: Those for whom the lack of adequate housing is a primary factor in the imminent placement of a child (or children) in out-of-home care, or a delay in the discharge of a child to the family …</summary>
+  </entry>
+  <entry>
+    <title>Media Literacy and Capacity Building Workshop Series</title>
+    <link href="https://www.grants.gov/search-results-detail/363441"/>
+    <id>urn:funding-finder:grants-gov:363441</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Transportation"/>
+    <summary>U.S. Mission to Indonesia — Closes 2026-09-02 — 1. Project Background, Goals, and Objectives With over 270 million people and one of the world’s largest social media user bases, Indonesia’s citizens consume media content from a wide array of traditional and digital sources. As the country continues to expand its regional leadership role, Indonesian journalists must develop their capacity to report accurately and comprehensively on critical issu…</summary>
   </entry>
   <entry>
     <title>Small Business Transportation Technical Assistance Center (Region 1)</title>
@@ -654,16 +666,5 @@
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Transportation"/>
     <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-18 — Summary: The fiscal year 2026 (FY26) Duchenne Muscular Dystrophy Research Program (DMDRP) Idea Development Award (IDA) promotes new ideas that are still in the early stages of development and have the potential to yield impactful data and new avenues of investigation. This award supports impactful, high-risk/high-reward research that could lead to critical discoveries or major advancements that wi…</summary>
-  </entry>
-  <entry>
-    <title>Special Program Announcement for Office of Naval Research Research Opportunity: FY27 Communications and Networking Applied Research</title>
-    <link href="https://www.grants.gov/search-results-detail/362836"/>
-    <id>urn:funding-finder:grants-gov:362836</id>
-    <updated>2026-06-16T00:00:00Z</updated>
-    <author><name>Office of Naval Research</name></author>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Transportation"/>
-    <summary>Office of Naval Research — Closes 2026-11-16 — The proposed topic will develop and mature Communications and Networking technologies for Naval operations.Background:A Design for Maritime Superiority (2018) describes an operational architecture for distributed maritime operations (DMO) that "... will provide accurate, timely, and analyzed information to units, warfighting groups, and fleets." A critical component of this architecture is the Nav…</summary>
   </entry>
 </feed>

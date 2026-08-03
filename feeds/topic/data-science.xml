@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-08-02T11:38:01Z</updated>
+  <updated>2026-08-03T13:24:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -350,6 +350,18 @@
     <summary>Administration for Children and Families - ACYF/CB — Closes 2026-08-21 — This program will fund projects focused on technology-enabled strategies that improve adoptive matching, placement, and permanency for children in foster care awaiting adoption. The funds, awarded to four regional centers, will be used to design, implement and evaluate these strategies.These centers will focus on children with an adoption permanency goal or who are legally free for adoption due to…</summary>
   </entry>
   <entry>
+    <title>Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets)</title>
+    <link href="https://www.grants.gov/search-results-detail/363268"/>
+    <id>urn:funding-finder:grants-gov:363268</id>
+    <updated>2026-07-21T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation — Closes 2026-11-04 — This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
+  </entry>
+  <entry>
     <title>Egypt Annual Program Statement</title>
     <link href="https://www.grants.gov/search-results-detail/363252"/>
     <id>urn:funding-finder:grants-gov:363252</id>
@@ -451,20 +463,6 @@
     <category term="Data science"/>
     <category term="Manufacturing"/>
     <summary>Employment and Training Administration — Closes 2026-08-17 — Questions regarding this Training and Employment Guidance Letter (TEGL) may be emailed to Daniela Petchik, Grants Management Specialist at petchik.daniela.m@dol.gov and Brinda Ruggles, Grant Officer at ruggles.brinda@dol.gov. We encourage prospective applicants and interested parties to use the Grants.gov subscription option to register for future updates provided for this particular TEGL.</summary>
-  </entry>
-  <entry>
-    <title>FY26 American Spaces Vietnam Programming</title>
-    <link href="https://www.grants.gov/search-results-detail/363080"/>
-    <id>urn:funding-finder:grants-gov:363080</id>
-    <updated>2026-07-07T00:00:00Z</updated>
-    <author><name>U.S. Mission to Vietnam</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Cybersecurity"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Vietnam — Closes 2026-08-02 — U.S. Mission Vietnam's Public Diplomacy Section seeks proposals to implement workforce development and innovation programs through American Spaces. This program builds a pipeline of skilled, English-capable Vietnamese youth who support U.S. trade, investment, and innovation partnerships while expanding economic opportunity in Vietnam. The project targets university students, educators, and early-c…</summary>
   </entry>
   <entry>
     <title>Annual Program Statement (APS) – Public Diplomacy Grants Program: Advancing America First Priorities</title>

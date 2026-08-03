@@ -4,8 +4,20 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-08-02T11:38:01Z</updated>
+  <updated>2026-08-03T13:24:01Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363396"/>
+    <id>urn:funding-finder:grants-gov:363396</id>
+    <updated>2026-09-08T00:00:00Z</updated>
+    <author><name>Rural Utilities Service</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Community development"/>
+    <category term="Energy"/>
+    <category term="Cybersecurity"/>
+    <summary>Rural Utilities Service — Closes 2027-05-03 — The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+  </entry>
   <entry>
     <title>Sun Grant Program</title>
     <link href="https://www.grants.gov/search-results-detail/363424"/>
@@ -677,17 +689,5 @@
     <category term="Data science"/>
     <category term="Water"/>
     <summary>Bureau of Reclamation — Closes 2027-08-26 — Through WaterSMART, the Bureau of Reclamation (Reclamation) leverages Federal and non- Federal funding to work cooperatively with States, Tribes, and other entities as they plan for and implement actions to increase water supply and hydropower reliability. The WaterSMART Program demonstrably advances Trump administration priorities, such as those identified in Presidential Executive Order 14154 (J…</summary>
-  </entry>
-  <entry>
-    <title>WaterSMART: Desalination Construction Projects</title>
-    <link href="https://www.grants.gov/search-results-detail/362395"/>
-    <id>urn:funding-finder:grants-gov:362395</id>
-    <updated>2026-05-14T00:00:00Z</updated>
-    <author><name>Bureau of Reclamation</name></author>
-    <category term="Energy"/>
-    <category term="Water"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Bureau of Reclamation — Closes 2027-08-26 — Through WaterSMART, the Bureau of Reclamation (Reclamation) leverages Federal and non-Federal funding to work cooperatively with States, Tribes, and other entities as they plan for and implement actions to increase water supply and hydropower reliability. The WaterSMART Program demonstrably advances Trump administration priorities, such as those identified in Presidential Executive Order 14154 (Ja…</summary>
   </entry>
 </feed>

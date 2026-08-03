@@ -4,8 +4,20 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-08-02T11:38:01Z</updated>
+  <updated>2026-08-03T13:24:01Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363396"/>
+    <id>urn:funding-finder:grants-gov:363396</id>
+    <updated>2026-09-08T00:00:00Z</updated>
+    <author><name>Rural Utilities Service</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Community development"/>
+    <category term="Energy"/>
+    <category term="Cybersecurity"/>
+    <summary>Rural Utilities Service — Closes 2027-05-03 — The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+  </entry>
   <entry>
     <title>Advancing Investigative Journalism in Ukraine through U.S. AI Innovation</title>
     <link href="https://www.grants.gov/search-results-detail/363440"/>
@@ -357,20 +369,6 @@
     <summary>Health Resources and Services Administration — Closes 2026-09-09 — The purpose of Fiscal Year (FY) 2027 Expanding Nutrition Services (ENS) funding is to increase access to nutrition services at HRSA-funded health centers. Nutrition services can help to prevent, manage, and treat diseases and conditions through nutritional and food-based interventions. Health centers will use ENS funding to increase the number of nutrition services patients or visits.</summary>
   </entry>
   <entry>
-    <title>FY26 American Spaces Vietnam Programming</title>
-    <link href="https://www.grants.gov/search-results-detail/363080"/>
-    <id>urn:funding-finder:grants-gov:363080</id>
-    <updated>2026-07-07T00:00:00Z</updated>
-    <author><name>U.S. Mission to Vietnam</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Cybersecurity"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Vietnam — Closes 2026-08-02 — U.S. Mission Vietnam's Public Diplomacy Section seeks proposals to implement workforce development and innovation programs through American Spaces. This program builds a pipeline of skilled, English-capable Vietnamese youth who support U.S. trade, investment, and innovation partnerships while expanding economic opportunity in Vietnam. The project targets university students, educators, and early-c…</summary>
-  </entry>
-  <entry>
     <title>Annual Program Statement (APS) – Public Diplomacy Grants Program: Advancing America First Priorities</title>
     <link href="https://www.grants.gov/search-results-detail/363093"/>
     <id>urn:funding-finder:grants-gov:363093</id>
@@ -392,16 +390,6 @@
     <category term="Data science"/>
     <category term="Cybersecurity"/>
     <summary>U.S. Mission to Jerusalem — Closes 2026-08-06 — U.S. Embassy Jerusalem’s Public Diplomacy Section (PDS) announces an open competition to implement projects that advance U.S. economic, commercial, and security interests among Palestinian audiences. This Annual Program Statement (APS) outlines strategic goals, expected outcomes, target audiences, eligibility criteria, and application guidelines for cooperative agreements ranging from $50,000 to $…</summary>
-  </entry>
-  <entry>
-    <title>Vietnam CyberSafe Hacks 2026</title>
-    <link href="https://www.grants.gov/search-results-detail/363062"/>
-    <id>urn:funding-finder:grants-gov:363062</id>
-    <updated>2026-07-06T00:00:00Z</updated>
-    <author><name>U.S. Mission to Vietnam</name></author>
-    <category term="Cybersecurity"/>
-    <category term="Education and workforce"/>
-    <summary>U.S. Mission to Vietnam — Closes 2026-08-02 — The U.S. Department of State’s Consulate General Ho Chi Minh City announces an open competition to implement a program to combat cyber scams.Transnational organized crime in Southeast Asia is increasing at an unprecedented pace. The region has witnessed the proliferation of industrial-scale cyber fraud and scam operations, driven by sophisticated transnational criminal syndicates and networks of h…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 United States Marine Highway Program (USMHP)</title>
@@ -677,6 +665,27 @@
     <summary>National Institute of Standards and Technology — Closes 2029-09-30 — NIST is soliciting proposals from eligible applicants for research, prototyping, and commercial solutions that advance microelectronics technology in the U.S., to be considered for funding by the CHIPS Research and Development Office (CRDO).</summary>
   </entry>
   <entry>
+    <title>Advancing Research on the Application of Digital Health Technology to the Management of Type 2 Diabetes (R01- Clinical Trail Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/359252"/>
+    <id>urn:funding-finder:grants-gov:359252</id>
+    <updated>2025-09-17T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Cybersecurity"/>
+    <summary>National Institutes of Health — Closes 2026-10-06 — This notice of funding opportunity (NOFO) invites applications designed to examine the efficacy and clinical effectiveness of multimodality digital health technology approaches to the remote management of diabetes.</summary>
+  </entry>
+  <entry>
+    <title>NIDCD Clinical Research Center Grant (P50 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/358863"/>
+    <id>urn:funding-finder:grants-gov:358863</id>
+    <updated>2025-09-15T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Cybersecurity"/>
+    <summary>National Institutes of Health — Closes 2026-10-03 — The National Institute on Deafness and Other Communication Disorders (NIDCD) invites applications for Clinical Research Center Grants designed to advance the diagnosis, prevention, treatment, and amelioration of human sensory and communication disorders. For this announcement, Clinical Research is defined as research involving individuals with a sensory and/or communication disorder, or data/tissu…</summary>
+  </entry>
+  <entry>
     <title>Agriculture and Food Research Initiative Competitive Grants Program Foundational and Applied Science Program</title>
     <link href="https://www.grants.gov/search-results-detail/360205"/>
     <id>urn:funding-finder:grants-gov:360205</id>
@@ -691,15 +700,5 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>National Institute of Food and Agriculture — Closes 2026-12-31 — The AFRI Foundational and Applied Science Program supports grants in six AFRI priority areas to advance knowledge in both fundamental and applied sciences important to agriculture. The six priority areas are: Plant Health and Production and Plant Products; Animal Health and Production and Animal Products; Food Safety, Nutrition, and Health; Bioenergy, Natural Resources, and Environment; Agricultur…</summary>
-  </entry>
-  <entry>
-    <title>Department of War Cyber Service Academy (DoW CSA)</title>
-    <link href="https://www.grants.gov/search-results-detail/358380"/>
-    <id>urn:funding-finder:grants-gov:358380</id>
-    <updated>2025-01-23T00:00:00Z</updated>
-    <author><name>Washington Headquarters Services</name></author>
-    <category term="Cybersecurity"/>
-    <category term="Education and workforce"/>
-    <summary>Washington Headquarters Services — Closes 2030-01-22 — See the "Related Documents" and "Package" tabs for the complete application package, including the full text of the Notice of Funding Opportunity.The Department of War (DoW) Cyber Service Academy (CSA) is authorized by Chapter 112 of Title 10, United States Code, Section 2200. The purpose of the program is to support the recruitment of new cyber talent and the retention of current highly skilled p…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml</id>
-  <updated>2026-08-02T11:38:01Z</updated>
+  <updated>2026-08-03T13:24:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Veterans Legacy Grants Program</title>
@@ -72,6 +72,18 @@
     <summary>69A345 Office of the Under Secretary for Policy — Closes 2026-11-15 — The Drone Infrastructure Inspection Grants (DIIG) Program will provide grants to eligible government entities to facilitate the use of small Unmanned Aircraft Systems (UAS), referred to herein as drones, in critical infrastructure inspection. The objective is to increase the widespread adoption of drones and relevant technologies in support of more efficient Inspection, Operation, Construction, Ma…</summary>
   </entry>
   <entry>
+    <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363396"/>
+    <id>urn:funding-finder:grants-gov:363396</id>
+    <updated>2026-09-08T00:00:00Z</updated>
+    <author><name>Rural Utilities Service</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Community development"/>
+    <category term="Energy"/>
+    <category term="Cybersecurity"/>
+    <summary>Rural Utilities Service — Closes 2027-05-03 — The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+  </entry>
+  <entry>
     <title>The NIA Genetics of Alzheimer's Disease Data Storage Site (NIAGADS)</title>
     <link href="https://www.grants.gov/search-results-detail/362454"/>
     <id>urn:funding-finder:grants-gov:362454</id>
@@ -134,6 +146,18 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health — Closes 2026-12-15 — The National Library of Medicine (NLM) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for a Training Center of the Network of the National Library of Medicine (NNLM).Established in 1965 and organized geographically across the United States and its territories, the NNLM promotes and supports the initiatives, products, and services of the NLM and the National Insti…</summary>
+  </entry>
+  <entry>
+    <title>Media Literacy and Capacity Building Workshop Series</title>
+    <link href="https://www.grants.gov/search-results-detail/363441"/>
+    <id>urn:funding-finder:grants-gov:363441</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Transportation"/>
+    <summary>U.S. Mission to Indonesia — Closes 2026-09-02 — 1. Project Background, Goals, and Objectives With over 270 million people and one of the world’s largest social media user bases, Indonesia’s citizens consume media content from a wide array of traditional and digital sources. As the country continues to expand its regional leadership role, Indonesian journalists must develop their capacity to report accurately and comprehensively on critical issu…</summary>
   </entry>
   <entry>
     <title>Advancing Investigative Journalism in Ukraine through U.S. AI Innovation</title>
@@ -651,28 +675,6 @@
     <title>Chicago FY 2021 – FY 2023 EDA Planning and Local Technical Assistance</title>
     <link href="https://www.grants.gov/search-results-detail/332125"/>
     <id>urn:funding-finder:grants-gov:332125</id>
-    <updated>2021-03-15T00:00:00Z</updated>
-    <author><name>Department of Commerce</name></author>
-    <category term="Arts and culture"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <summary>Department of Commerce — Posted — UPDATED NOTICE - PLEASE READ: April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
-  </entry>
-  <entry>
-    <title>Denver FY 2021 – FY 2023 EDA Planning and Local Technical Assistance</title>
-    <link href="https://www.grants.gov/search-results-detail/332126"/>
-    <id>urn:funding-finder:grants-gov:332126</id>
-    <updated>2021-03-15T00:00:00Z</updated>
-    <author><name>Department of Commerce</name></author>
-    <category term="Arts and culture"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <summary>Department of Commerce — Posted — UPDATED NOTICE - PLEASE READ: April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
-  </entry>
-  <entry>
-    <title>Philadelphia FY 2021 – FY 2023 EDA Planning and Local Technical Assistance</title>
-    <link href="https://www.grants.gov/search-results-detail/332138"/>
-    <id>urn:funding-finder:grants-gov:332138</id>
     <updated>2021-03-15T00:00:00Z</updated>
     <author><name>Department of Commerce</name></author>
     <category term="Arts and culture"/>
