@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml</id>
-  <updated>2026-08-03T13:24:01Z</updated>
+  <updated>2026-08-04T12:23:31Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -338,6 +338,15 @@
     <summary>Health Resources and Services Administration — Closes 2027-01-20 — The purpose of this program is to improve the nutrition and overall well-being of mothers, children, and families. MCH Nutrition Training Programs will provide interdisciplinary graduate education to build a skilled workforce, provide technical assistance to state Title V and other MCH programs, expand nutrition education and career pathways, and improve access to high-quality nutrition services t…</summary>
   </entry>
   <entry>
+    <title>Fiscal Year (FY) 2027 State and Regional Primary Care Association (PCA) Cooperative Agreements</title>
+    <link href="https://www.grants.gov/search-results-detail/363450"/>
+    <id>urn:funding-finder:grants-gov:363450</id>
+    <updated>2026-11-16T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <summary>Health Resources and Services Administration — Closes 2027-01-25 — The purpose of the Fiscal Year (FY) 2027 State and Regional Primary Care Association (PCA) program is to develop and deliver technical assistance (TA) that supports existing and potential Health Center Program award recipients and look-alikes (LALs), hereafter referred to as health centers, both directly and collaboratively with other HRSA-funded TA programs. PCAs will improve the health of medica…</summary>
+  </entry>
+  <entry>
     <title>NIOSH Centers of Excellence for Total Worker Health® (U19)</title>
     <link href="https://www.grants.gov/search-results-detail/363369"/>
     <id>urn:funding-finder:grants-gov:363369</id>
@@ -619,16 +628,5 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health — Closes 2026-12-15 — The National Library of Medicine (NLM) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for a Training Center of the Network of the National Library of Medicine (NNLM).Established in 1965 and organized geographically across the United States and its territories, the NNLM promotes and supports the initiatives, products, and services of the NLM and the National Insti…</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: NIGMS Mature Synchrotron Resources (MSR) for Structural Biology (P30 - Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360947"/>
-    <id>urn:funding-finder:grants-gov:360947</id>
-    <updated>2026-08-13T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <summary>National Institutes of Health — Closes 2026-10-13 — The NIGMS Mature Synchrotron Resources for Structural Biology program supports mature technologies at synchrotron facilities that provide biomedical researchers with state-of-the-art X-ray beamlines, hands-on user training, and expert assistance to generate and analyze structural biology data. NIGMS intends to reissue a Notice of Funding Opportunity to continue to support these important national …</summary>
   </entry>
 </feed>

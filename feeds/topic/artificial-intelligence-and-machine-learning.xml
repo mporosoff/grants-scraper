@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-08-03T13:24:01Z</updated>
+  <updated>2026-08-04T12:23:31Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
@@ -92,6 +92,18 @@
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health — Closes 2026-10-06 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that develop or incorporate novel, cutting-edge study designs/methods/analytic approaches through the use of machine learning, artificial intelligence, and adaptive designs to allow the discovery of health/function profiles at the level of the individual and that could lead to th…</summary>
+  </entry>
+  <entry>
+    <title>Innovative Traffic Safety Enforcement (ITSE) Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363446"/>
+    <id>urn:funding-finder:grants-gov:363446</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>National Highway Traffic Safety Administration</name></author>
+    <category term="Transportation"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>National Highway Traffic Safety Administration — Closes 2027-09-01 — The primary intent of this of the ITSE Grant Program is to 1) develop innovative traffic safety enforcement programs that demonstrate effectiveness by reducing the number of motor vehicle crashes due to one or more of the subject risky driving behaviors; and 2) ensure the traffic safety enforcement programs are repeatable and scalable for use by law enforcement throughout the United States. In add…</summary>
   </entry>
   <entry>
     <title>Advancing Investigative Journalism in Ukraine through U.S. AI Innovation</title>
@@ -739,19 +751,6 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Arts and culture"/>
     <summary>National Institutes of Health — Closes 2026-10-19 — The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
-  </entry>
-  <entry>
-    <title>Rapid Reskill Employment Recovery National Dislocated Worker Grants</title>
-    <link href="https://www.grants.gov/search-results-detail/362987"/>
-    <id>urn:funding-finder:grants-gov:362987</id>
-    <updated>2026-06-26T00:00:00Z</updated>
-    <author><name>Employment and Training Administration</name></author>
-    <category term="Education and workforce"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <summary>Employment and Training Administration — Closes 2026-08-03 — Please direct inquiries about this funding opportunity to Sabrina Guerrier at DOL-ETA-DWG@dol.gov with Reskill DWG in the subject line.</summary>
   </entry>
   <entry>
     <title>Creative Industries Film Lab and Residency - American Film Showcase 2026</title>

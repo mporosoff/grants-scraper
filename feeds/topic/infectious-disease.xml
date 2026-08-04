@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml</id>
-  <updated>2026-08-03T13:24:01Z</updated>
+  <updated>2026-08-04T12:23:31Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Resources and Workforce Development for the Regional Biocontainment Laboratories</title>
@@ -47,6 +47,16 @@
     <author><name>Centers for Disease Control - NCHHSTP</name></author>
     <category term="Infectious disease"/>
     <summary>Centers for Disease Control - NCHHSTP — Closes 2027-05-24 — This NOFO aims to strengthen services to prevent the infectious disease consequences of drug use in high impact settings serving people who use drugs (PWUD) through two components. Component 1 will improve service data by conducting a biennial survey of high-impact settings that serve PWUD to document capacity, needs, access, and service gaps. It will also improve timely local data on infectious d…</summary>
+  </entry>
+  <entry>
+    <title>DHQP Global NOFO</title>
+    <link href="https://www.grants.gov/search-results-detail/363448"/>
+    <id>urn:funding-finder:grants-gov:363448</id>
+    <updated>2027-03-21T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCEZID</name></author>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <summary>Centers for Disease Control - NCEZID — Closes 2027-05-20 — The proposed international hybrid Notice of Funding Opportunity (NOFO) will link non-research implementation with targeted research that advances CDC's mission to address antimicrobial resistance (AR) across multiple bacterial and fungal pathogens, healthcare-associated infections (HAIs), and emerging infectious disease threats including viral pathogens across healthcare, community, and environmen…</summary>
   </entry>
   <entry>
     <title>Improved Drug Susceptibility Testing (DST) for Mycobacteria</title>
@@ -284,6 +294,78 @@
     <summary>National Institutes of Health — Closes 2026-10-06 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose a program that supports integrative, cross-disciplinary projects aimed at scaling up mechanistic studies to understand the genomic underpinnings of the pathogenesis and progression AD/ADRD.The proposed research projects will employ interdisciplinary approaches that i…</summary>
   </entry>
   <entry>
+    <title>Expanding Global Health Security through local partnerships in Senegal</title>
+    <link href="https://www.grants.gov/search-results-detail/360334"/>
+    <id>urn:funding-finder:grants-gov:360334</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Cybersecurity"/>
+    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — This NOFO aims to enhance Senegal's public health infrastructure to prevent, detect, and respond to infectious disease threats through implementing partners. The initiative focuses on strengthening public health surveillance systems, including community-based surveillance, improving laboratory networks, and enhancing workforce training. The goal is to build sustainable, resilient health security i…</summary>
+  </entry>
+  <entry>
+    <title>Improving global health security in Côte d'Ivoire to stop the spread of infectious disease</title>
+    <link href="https://www.grants.gov/search-results-detail/360324"/>
+    <id>urn:funding-finder:grants-gov:360324</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Cybersecurity"/>
+    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — This Notice of Funding Opportunity (NOFO) seeks to build upon activities funded by CDC to support Global Health Security (GHS) in the Cote d"Ivore through implementation of programs and activities that focus on protecting and improving health globally through partnerships with Ministries of Health and other governmental institutions. The main outcomes of this NOFO are the following: (1) Improve pr…</summary>
+  </entry>
+  <entry>
+    <title>Protecting and Improving Global Health Security by Engaging Local Partners: Strengthening and Sustaining Public Health Systems in Ghana</title>
+    <link href="https://www.grants.gov/search-results-detail/360455"/>
+    <id>urn:funding-finder:grants-gov:360455</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Cybersecurity"/>
+    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — This NOFO seeks to build and sustain a more resilient public health system in Ghana capable of identifying, responding to and mitigating public health threats. CDC, through this NOFO, will continue to leverage and complement the strengths and resources of multi-sectoral and multilateral partners in Ghana to build and improve country capacity and leadership in the prevention, early detection and re…</summary>
+  </entry>
+  <entry>
+    <title>Strengthening global health security in India to contain public health threats and accelerate outbreak response</title>
+    <link href="https://www.grants.gov/search-results-detail/360336"/>
+    <id>urn:funding-finder:grants-gov:360336</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Transportation"/>
+    <category term="Cybersecurity"/>
+    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — This NOFO"s purpose is to support district, state and national public health systems in India to advance GHSA priorities to prevent, detect and respond to infectious disease threats. CDC will work with the Government of India (GoI) to strengthen capacity to control disease outbreaks at their source and neutralize public health threats. This NOFO will augment and increasingly transition CDC-support…</summary>
+  </entry>
+  <entry>
+    <title>Strengthening Global Health Security through local partnerships in Sierra Leone</title>
+    <link href="https://www.grants.gov/search-results-detail/360335"/>
+    <id>urn:funding-finder:grants-gov:360335</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Cybersecurity"/>
+    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — The purpose of this NOFO is to build and sustain a more resilient public health system in Sierra Leone in an effort to identify, respond and mitigate health threats. CDC, through this NOFO, will continue to leverage and complement the strengths and resources of multisectoral and multilateral partners in Sierra Leone to build and improve country capacity and leadership in the prevention, early dete…</summary>
+  </entry>
+  <entry>
+    <title>Emerging Infections Network - Research for Preventing, Detecting, and Managing Travel-associated Infectious Diseases</title>
+    <link href="https://www.grants.gov/search-results-detail/360199"/>
+    <id>urn:funding-finder:grants-gov:360199</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Transportation"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-11-05 — The focus of this notice of funding opportunity (NOFO) is to produce insights into disease detection and prevention strategies, burden, severity, diagnostics, treatment, and outcomes of infectious diseases in international travelers. Timely surveillance and sentinel detection are essential for collecting actionable data. The research should:Address public health questions that improve the speed of…</summary>
+  </entry>
+  <entry>
     <title>Improving regional capacity to respond to HIV, TB, and other global health priorities in Central America</title>
     <link href="https://www.grants.gov/search-results-detail/360704"/>
     <id>urn:funding-finder:grants-gov:360704</id>
@@ -415,27 +497,6 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health — Closes 2026-09-29 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by continuing support for a Clinical Research Network on Antimicrobial Resistance (AMR). AMR is a major health challenge that limits treatment options and allows resistant infections to persist. Individuals with chronic conditions like diabetes and cancer are particularly vulnerable, resulting in increas…</summary>
-  </entry>
-  <entry>
-    <title>Improving global health security in Côte d'Ivoire through collaboration with local partners</title>
-    <link href="https://www.grants.gov/search-results-detail/360324"/>
-    <id>urn:funding-finder:grants-gov:360324</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-08-15 — This Notice of Funding Opportunity (NOFO) seeks to build upon activities funded by CDC to support Global Health Security (GHS) in the Cote d’Ivore through implementation of programs and activities that focus on protecting and improving health globally through partnerships with Ministries of Health and other governmental institutions. The main outcomes of this NOFO are the following: (1) Improve pr…</summary>
-  </entry>
-  <entry>
-    <title>Protecting and Improving Global Health Security by Engaging Local Partners: Strengthening and Sustaining Public Health Systems in Ghana</title>
-    <link href="https://www.grants.gov/search-results-detail/360455"/>
-    <id>urn:funding-finder:grants-gov:360455</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Education and workforce"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-08-15 — This NOFO seeks to build and sustain a more resilient public health system in Ghana capable of identifying, responding to and mitigating public health threats. CDC, through this NOFO, will continue to leverage and complement the strengths and resources of multi-sectoral and multilateral partners in Ghana to build and improve country capacity and leadership in the prevention, early detection and re…</summary>
   </entry>
   <entry>
     <title>Limited Competition: Social, Behavioral, &amp; Economic (SBE) Coordinating Center</title>
@@ -599,69 +660,5 @@
     <category term="Infectious disease"/>
     <category term="Manufacturing"/>
     <summary>National Institutes of Health — Closes 2027-08-18 — The Blueprint Neurotherapeutics Network for Biologics (BPN-Biologics) provides support for biologic-based therapeutic discovery and development, from lead optimization through phase I clinical testing. This Funding Opportunity Announcement (FOA) supports preclinical discovery and development of potential therapeutic Biotechnology Products and Biologics including, but not limited to, large biologic…</summary>
-  </entry>
-  <entry>
-    <title>BRAIN Initiative: Reagent Resources for Brain Cell Type-Specific Access to Broaden Distribution of Enabling Technologies for Neuroscience (U24 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/356530"/>
-    <id>urn:funding-finder:grants-gov:356530</id>
-    <updated>2024-09-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Infectious disease"/>
-    <category term="Manufacturing"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health — Closes 2027-06-15 — This Notice of Funding Opportunity Announcement (NOFO) from the NIH Brain Research through Advancing Innovative Neurotechnologies (BRAIN) Initiative is intended to support establishment of facilities at minority-serving institutions (MSIs) and Institutional Development Award (IDeA)-eligible institutions for scaled production and distribution of brain cell type-specific access and manipulation reag…</summary>
-  </entry>
-  <entry>
-    <title>Animal and Veterinary Innovation Centers (U18)</title>
-    <link href="https://www.grants.gov/search-results-detail/355044"/>
-    <id>urn:funding-finder:grants-gov:355044</id>
-    <updated>2024-06-20T00:00:00Z</updated>
-    <author><name>Food and Drug Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>Food and Drug Administration — Closes 2028-05-12 — The purpose of this Funding Opportunity Announcement (FOA) is to solicit applications for inclusion as Animal and Veterinary Innovation Centers, which are intended to form long-term partnerships to address priority areas for FDA's Center for Veterinary Medicine (CVM). This includes CVM developing cooperative agreement(s) with academic research institutions (public and private) to: 1. Drive researc…</summary>
-  </entry>
-  <entry>
-    <title>Global Infectious Disease Research Training Program (D43 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/353590"/>
-    <id>urn:funding-finder:grants-gov:353590</id>
-    <updated>2024-04-17T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health — Closes 2026-08-06 — This Funding Opportunity Announcement (FOA) encourages joint applications for the Global Infectious Disease (GID) Research Training programs from U.S. and low- and middle-income country (LMIC) institutions. The application should propose a collaborative training program that will strengthen the capacity of a LMIC institution to conduct infectious disease research. FIC will support research-trainin…</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: Specific Pathogen Free Macaque Colonies to Support HIV/AIDS Research (U42 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/351920"/>
-    <id>urn:funding-finder:grants-gov:351920</id>
-    <updated>2024-01-22T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Infectious disease"/>
-    <summary>National Institutes of Health — Closes 2026-09-25 — The purpose of this Notice of Funding Opportunity (NOFO) is to provide continuing support for specific pathogen-free (SPF) macaque colonies previously funded under the auspices of PAR-21-089 and PAR-18-669 that support Human Immunodeficiency Virus (HIV)/Acquired Immunodeficiency Syndrome (AIDS) research. Breeding colonies are essential to sustain appropriate SPF macaques for research related to HI…</summary>
-  </entry>
-  <entry>
-    <title>Engineering of Biomedical Systems</title>
-    <link href="https://www.grants.gov/search-results-detail/348796"/>
-    <id>urn:funding-finder:grants-gov:348796</id>
-    <updated>2023-06-18T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Education and workforce"/>
-    <category term="Infectious disease"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation — Posted — The Engineering of Biomedical Systems program is part of the Engineering Biology and Health cluster, which also includes: 1) the Biophotonics program; 2) the Biosensing program; 3) the Cellular and Biochemical Engineering program; and 4) the Disability and Rehabilitation Engineering program.
-The goal of the Engineering of Biomedical Systems (EBMS) program is to provide opportunities for fundamenta…</summary>
   </entry>
 </feed>

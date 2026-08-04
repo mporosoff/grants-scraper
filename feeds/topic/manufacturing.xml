@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-08-03T13:24:01Z</updated>
+  <updated>2026-08-04T12:23:31Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development</title>
@@ -53,6 +53,27 @@
     <author><name>Bureau of International Labor Affairs</name></author>
     <category term="Manufacturing"/>
     <summary>Bureau of International Labor Affairs — Closes 2026-09-04 — The Bureau of International Labor Affairs (ILAB), U.S. Department of Labor (USDOL, or the Department), announces the availability of approximately $6 million total costs (subject to the availability of Federal funds) for one cooperative agreement to fund a project that will strengthen traceability and responsible sourcing in cotton supply chains in South Asia. These efforts will enhance the reputa…</summary>
+  </entry>
+  <entry>
+    <title>Increasing Market Opportunities in Vietnam for U.S. Innovative Biofertilizer Exporters</title>
+    <link href="https://www.grants.gov/search-results-detail/363449"/>
+    <id>urn:funding-finder:grants-gov:363449</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>Foreign Agricultural Service</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <summary>Foreign Agricultural Service — Closes 2026-09-02 — Fertilize Right Vietnam (FR Vietnam) is a program implemented by USDA/FAS since 2023. USDA’s official partner is the Ministry of Agriculture and Environment (MAE) and an implementing partner from an international agricultural research organization. The objectives of FR Vietnam are to (1) increase fertilizer-use efficiency, (2) enhance fertilizer effectiveness, and (3) develop alternatives to tradi…</summary>
+  </entry>
+  <entry>
+    <title>Safeguarding U.S. Critical Minerals Supply Chains- Tunisia</title>
+    <link href="https://www.grants.gov/search-results-detail/363451"/>
+    <id>urn:funding-finder:grants-gov:363451</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Community development"/>
+    <category term="Manufacturing"/>
+    <summary>Bureau of Near Eastern Affairs — Closes 2026-09-02 — U.S. Embassy Tunis and the Bureau of Near Eastern Affairs' Office of Assistance Coordination (NEA/AC) seek applications for the “Safeguarding U.S. Critical Minerals Supply Chains- Tunisia” program, a commercial diplomacy initiative to support transparent, private-sector-led investment in phosphate development, optimize downstream mineral processing to meet international standards, and strengthen t…</summary>
   </entry>
   <entry>
     <title>Pax Silica Artificial Intelligence Assistance Project</title>
@@ -409,19 +430,6 @@
     <summary>National Institutes of Health — Closes 2026-11-10 — The National Institutes of Neurological Disorders and Stroke (NINDS) is interested in supporting research projects proposing the optimization and translational development of genomic and biologic therapeutic candidates for Alzheimer’s Disease-Related Dementias (ADRD). Breakthroughs in genomic and biologic therapies are creating new opportunities to treat, prevent, and potentially modify the course…</summary>
   </entry>
   <entry>
-    <title>Rapid Reskill Employment Recovery National Dislocated Worker Grants</title>
-    <link href="https://www.grants.gov/search-results-detail/362987"/>
-    <id>urn:funding-finder:grants-gov:362987</id>
-    <updated>2026-06-26T00:00:00Z</updated>
-    <author><name>Employment and Training Administration</name></author>
-    <category term="Education and workforce"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <summary>Employment and Training Administration — Closes 2026-08-03 — Please direct inquiries about this funding opportunity to Sabrina Guerrier at DOL-ETA-DWG@dol.gov with Reskill DWG in the subject line.</summary>
-  </entry>
-  <entry>
     <title>Young Southeast Asian Leaders Initiative (YSEALI) Summit 2027</title>
     <link href="https://www.grants.gov/search-results-detail/362913"/>
     <id>urn:funding-finder:grants-gov:362913</id>
@@ -751,16 +759,5 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Infectious disease"/>
     <category term="Manufacturing"/>
     <summary>National Institutes of Health — Closes 2027-08-18 — The Blueprint Neurotherapeutics Network for Biologics (BPN-Biologics) provides support for biologic-based therapeutic discovery and development, from lead optimization through phase I clinical testing. This Funding Opportunity Announcement (FOA) supports preclinical discovery and development of potential therapeutic Biotechnology Products and Biologics including, but not limited to, large biologic…</summary>
-  </entry>
-  <entry>
-    <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development of Disorders of the Nervous System (UG3/UH3 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/356531"/>
-    <id>urn:funding-finder:grants-gov:356531</id>
-    <updated>2024-09-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Manufacturing"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health — Closes 2026-08-18 — The Blueprint Neurotherapeutics Network (BPN) invites applications from neuroscience investigators seeking support to advance their small molecule drug discovery and development projects into the clinic. Participants in the BPN are responsible for conducting all studies that involve disease- or target-specific assays, models, and other research tools and receive funding for all activities to be co…</summary>
   </entry>
 </feed>

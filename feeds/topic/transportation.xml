@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-08-03T13:24:01Z</updated>
+  <updated>2026-08-04T12:23:31Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Core State Injury Prevention Program (Core SIPP)</title>
@@ -146,6 +146,43 @@
     <category term="Environmental science"/>
     <category term="Transportation"/>
     <summary>U.S. Mission to Indonesia — Closes 2026-09-02 — 1. Project Background, Goals, and Objectives With over 270 million people and one of the world’s largest social media user bases, Indonesia’s citizens consume media content from a wide array of traditional and digital sources. As the country continues to expand its regional leadership role, Indonesian journalists must develop their capacity to report accurately and comprehensively on critical issu…</summary>
+  </entry>
+  <entry>
+    <title>Strengthening global health security in India to contain public health threats and accelerate outbreak response</title>
+    <link href="https://www.grants.gov/search-results-detail/360336"/>
+    <id>urn:funding-finder:grants-gov:360336</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Transportation"/>
+    <category term="Cybersecurity"/>
+    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — This NOFO"s purpose is to support district, state and national public health systems in India to advance GHSA priorities to prevent, detect and respond to infectious disease threats. CDC will work with the Government of India (GoI) to strengthen capacity to control disease outbreaks at their source and neutralize public health threats. This NOFO will augment and increasingly transition CDC-support…</summary>
+  </entry>
+  <entry>
+    <title>Emerging Infections Network - Research for Preventing, Detecting, and Managing Travel-associated Infectious Diseases</title>
+    <link href="https://www.grants.gov/search-results-detail/360199"/>
+    <id>urn:funding-finder:grants-gov:360199</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Transportation"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-11-05 — The focus of this notice of funding opportunity (NOFO) is to produce insights into disease detection and prevention strategies, burden, severity, diagnostics, treatment, and outcomes of infectious diseases in international travelers. Timely surveillance and sentinel detection are essential for collecting actionable data. The research should:Address public health questions that improve the speed of…</summary>
+  </entry>
+  <entry>
+    <title>Innovative Traffic Safety Enforcement (ITSE) Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363446"/>
+    <id>urn:funding-finder:grants-gov:363446</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>National Highway Traffic Safety Administration</name></author>
+    <category term="Transportation"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>National Highway Traffic Safety Administration — Closes 2027-09-01 — The primary intent of this of the ITSE Grant Program is to 1) develop innovative traffic safety enforcement programs that demonstrate effectiveness by reducing the number of motor vehicle crashes due to one or more of the subject risky driving behaviors; and 2) ensure the traffic safety enforcement programs are repeatable and scalable for use by law enforcement throughout the United States. In add…</summary>
   </entry>
   <entry>
     <title>Small Business Transportation Technical Assistance Center (Region 1)</title>
@@ -533,26 +570,6 @@
     <summary>Maritime Administration — Closes 2026-08-31 — The United States Marine Highway Program (USMHP), codified at 46 U.S.C. 55601, was originally established by Section 1121 of the Energy Independence and Security Act of 2007 to reduce landside congestion through the designation of Marine Highway Routes. The USMHP statute authorizes the U.S. Department of Transportation (“Department” or “DOT”) to make grants to implement Projects or components of P…</summary>
   </entry>
   <entry>
-    <title>Centers for Independent Living Competition - American Samoa</title>
-    <link href="https://www.grants.gov/search-results-detail/360318"/>
-    <id>urn:funding-finder:grants-gov:360318</id>
-    <updated>2026-07-02T00:00:00Z</updated>
-    <author><name>Administration for Community Living</name></author>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <summary>Administration for Community Living — Closes 2026-08-03 — ACL intends to award funds for the establishment of one (1) center for independent living in American Samoa to provide, expand and improve the provision of independent living services and support the network of centers for independent living. At a minimum, centers funded are required to provide the following core services: information and referral; independent living skills training; peer counseli…</summary>
-  </entry>
-  <entry>
-    <title>Centers for Independent Living Competition - Guam</title>
-    <link href="https://www.grants.gov/search-results-detail/360319"/>
-    <id>urn:funding-finder:grants-gov:360319</id>
-    <updated>2026-07-02T00:00:00Z</updated>
-    <author><name>Administration for Community Living</name></author>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <summary>Administration for Community Living — Closes 2026-08-03 — ACL intends to award funds for the establishment of one (1) center for independent living in Guam to provide, expand and improve the provision of independent living services and support the network of centers for independent living. At a minimum, centers funded by the program are required to provide the following core services: information and referral; independent living skills training; peer cou…</summary>
-  </entry>
-  <entry>
     <title>Specialized Services for Abused Parents and Their Children (Demonstration Projects)</title>
     <link href="https://www.grants.gov/search-results-detail/362404"/>
     <id>urn:funding-finder:grants-gov:362404</id>
@@ -612,15 +629,14 @@
     <summary>DOT Federal Highway Administration — Closes 2026-08-11 — The ATTAIN Competitive Grant Program will provide funding to deploy, install, and operate advanced transportation technologies to improve safety, mobility, efficiency, system performance, intermodal connectivity, and infrastructure return on investment. Eligible applicants for ATTAIN Competitive Grant Program funds are: • State or local governments; • transit agencies; • metropolitan planning orga…</summary>
   </entry>
   <entry>
-    <title>Expanding Financial Literacy and Empowerment: Increasing Awareness and Use of ABLE Accounts for Americans with Disabilities</title>
-    <link href="https://www.grants.gov/search-results-detail/361403"/>
-    <id>urn:funding-finder:grants-gov:361403</id>
-    <updated>2026-06-22T00:00:00Z</updated>
+    <title>Disaster Assistance for State Units on Aging (SUAs) and Tribal Organizations</title>
+    <link href="https://www.grants.gov/search-results-detail/360510"/>
+    <id>urn:funding-finder:grants-gov:360510</id>
+    <updated>2026-06-26T00:00:00Z</updated>
     <author><name>Administration for Community Living</name></author>
     <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
     <category term="Transportation"/>
-    <summary>Administration for Community Living — Closes 2026-08-03 — This grant is funded under the Projects of National Significance (PNS) authorized by the Developmental Disabilities Assistance and Bill of Rights Act. Its purpose is to increase awareness, access, and use of ABLE (Achieving a Better Life Experience) accounts so that individuals with disabilities have the resources needed to better support their health and economic well-being and improve their econ…</summary>
+    <summary>Administration for Community Living — Closes 2026-09-01 — Grants awarded under this announcement are to provide disaster reimbursement and assistance funds to those State Units on Aging (SUAs), and federally recognized Tribal Organizations who are currently receiving a grant under Title VI of the Older Americans Act (OAA), as amended. Total funding available for disaster assistance is subject to the availability of funds appropriated. The estimated numbe…</summary>
   </entry>
   <entry>
     <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
@@ -657,14 +673,5 @@
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Transportation"/>
     <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-18 — Summary: The fiscal year 2026 (FY26) Duchenne Muscular Dystrophy Research Program (DMDRP) Clinical/Translational Research Award (CTRA) supports advanced translational research to accelerate promising ideas in Duchenne muscular dystrophy (DMD) research toward clinical applications. Research must address at least one of the FY26 CTRA Focus Areas. Research projects investigating therapies that will b…</summary>
-  </entry>
-  <entry>
-    <title>DoW Duchenne Muscular Dystrophy, Idea Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362848"/>
-    <id>urn:funding-finder:grants-gov:362848</id>
-    <updated>2026-06-17T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Transportation"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-18 — Summary: The fiscal year 2026 (FY26) Duchenne Muscular Dystrophy Research Program (DMDRP) Idea Development Award (IDA) promotes new ideas that are still in the early stages of development and have the potential to yield impactful data and new avenues of investigation. This award supports impactful, high-risk/high-reward research that could lead to critical discoveries or major advancements that wi…</summary>
   </entry>
 </feed>

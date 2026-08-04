@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-08-03T13:24:01Z</updated>
+  <updated>2026-08-04T12:23:31Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -371,6 +371,18 @@
     <summary>National Institutes of Health — Closes 2026-10-06 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that develop or incorporate novel, cutting-edge study designs/methods/analytic approaches through the use of machine learning, artificial intelligence, and adaptive designs to allow the discovery of health/function profiles at the level of the individual and that could lead to th…</summary>
   </entry>
   <entry>
+    <title>Emerging Infections Network - Research for Preventing, Detecting, and Managing Travel-associated Infectious Diseases</title>
+    <link href="https://www.grants.gov/search-results-detail/360199"/>
+    <id>urn:funding-finder:grants-gov:360199</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Transportation"/>
+    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-11-05 — The focus of this notice of funding opportunity (NOFO) is to produce insights into disease detection and prevention strategies, burden, severity, diagnostics, treatment, and outcomes of infectious diseases in international travelers. Timely surveillance and sentinel detection are essential for collecting actionable data. The research should:Address public health questions that improve the speed of…</summary>
+  </entry>
+  <entry>
     <title>Cellular Senescence Network (SenNet): SenNet Data Coordination and Integration Center (SenNet DCIC) (UM1 Clinical Trials Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/361817"/>
     <id>urn:funding-finder:grants-gov:361817</id>
@@ -659,15 +671,5 @@
     <category term="Biology and biotechnology"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health — Closes 2026-10-30 — The Genomics Research to Elucidate the Genetics of Rare Diseases:innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. The purpose of this Notice of Funding Opportunity is to establish the GREGoR…</summary>
-  </entry>
-  <entry>
-    <title>Discovery of the Genetic Basis of Childhood Cancers and of Congenital Anomalies: Gabriella Miller Kids First Pediatric Research Program (X01 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/361164"/>
-    <id>urn:funding-finder:grants-gov:361164</id>
-    <updated>2026-06-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2027-01-11 — As part of the Gabriella Miller Kids First Pediatric Research Program (Kids First Program), the NIH invites applications to submit samples from pediatric cohorts for whole genome sequencing at a Kids First Program supported genomic data generating centers. Applicants are encouraged to propose sequencing of existing pediatric cancer or congenital anomaly cohorts to elucidate the genetic contributio…</summary>
   </entry>
 </feed>

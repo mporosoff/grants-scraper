@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-08-03T13:24:01Z</updated>
+  <updated>2026-08-04T12:23:31Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Microplastics Research and Resource Coordination Center (U24 - Clinical Trial Not Allowed)</title>
@@ -46,19 +46,6 @@
     <category term="Manufacturing"/>
     <category term="Cybersecurity"/>
     <summary>National Energy Technology Laboratory — Closes 2026-09-08 — Modification 000003: The purpose of this modification is to revise NOFO Part 1. Section I.A.1 is revised to correct the Topic Area 1b cost share to 20% and Section IV.C.2 is revised to delete the Environmental Considerations Summary and Environmental Impact Volume from the Summary of Application Requirements table. This Notice of Funding Opportunity (NOFO) will seek proposals for specific research…</summary>
-  </entry>
-  <entry>
-    <title>Rapid Reskill Employment Recovery National Dislocated Worker Grants</title>
-    <link href="https://www.grants.gov/search-results-detail/362987"/>
-    <id>urn:funding-finder:grants-gov:362987</id>
-    <updated>2026-06-26T00:00:00Z</updated>
-    <author><name>Employment and Training Administration</name></author>
-    <category term="Education and workforce"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <summary>Employment and Training Administration — Closes 2026-08-03 — Please direct inquiries about this funding opportunity to Sabrina Guerrier at DOL-ETA-DWG@dol.gov with Reskill DWG in the subject line.</summary>
   </entry>
   <entry>
     <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
@@ -327,6 +314,8 @@ The goal of the Process Systems, Reaction Engineering, and Molecular Thermodynam
     <updated>2023-04-05T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Materials science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>U.S. National Science Foundation — Closes 2026-12-01 — The Archaeology Program administers an annual Archaeometry competition with a target date of December 1. The goal is to fund projects in two main categories: To develop or refine anthropologically relevant archaeometric techniques. Examples include the development of methods to identify specific types of organic residues on ceramics or development of field applicable analytic techniques. To suppor…</summary>
   </entry>
   <entry>

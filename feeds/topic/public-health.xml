@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml</id>
-  <updated>2026-08-03T13:24:01Z</updated>
+  <updated>2026-08-04T12:23:31Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -575,83 +575,84 @@
     <summary>National Institutes of Health — Closes 2026-10-17 — The purpose of this NOFO is to enhance the capability of NCATS CTSA Program KL2 scholars supported by the CTSA Program to conduct research as they complete the transition to fully independent academic translational scientists. These small research grants will support different clinical and translational science research projects, including pilot and feasibility studies; secondary data analysis of …</summary>
   </entry>
   <entry>
-    <title>Improving regional capacity to respond to HIV, TB, and other global health priorities in Central America</title>
-    <link href="https://www.grants.gov/search-results-detail/360704"/>
-    <id>urn:funding-finder:grants-gov:360704</id>
-    <updated>2026-07-31T00:00:00Z</updated>
+    <title>Expanding global health security through local partnerships in Ethiopia</title>
+    <link href="https://www.grants.gov/search-results-detail/360333"/>
+    <id>urn:funding-finder:grants-gov:360333</id>
+    <updated>2026-08-03T00:00:00Z</updated>
     <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <category term="Cybersecurity"/>
+    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — The CDC office in Ethiopia was established in 2001 and works closely with the Ministry of Health (MOH), the Ethiopian Public Health Institute (EPHI), and other Government of Ethiopia (GOE) agencies to develop the capacity to prevent, detect, and respond to priority diseases. In 2014, CDC began coordination with the GOE to build Ethiopia's capacity to achieve the International Health Regulation (IH…</summary>
+  </entry>
+  <entry>
+    <title>Expanding global health security through local partnerships in Indonesia</title>
+    <link href="https://www.grants.gov/search-results-detail/360338"/>
+    <id>urn:funding-finder:grants-gov:360338</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <category term="Cybersecurity"/>
+    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — This NOFO aims to foster partnerships that support collaboration between CDC and the Indonesian Ministry of Health (MOH) in achieving global health security goals, implementing International Health Regulations core principles, and effectively preventing, detecting, and responding to public health threats. Projects considered for this opportunity should focus on strengthening capacity in five key p…</summary>
+  </entry>
+  <entry>
+    <title>Expanding global health security through local partnerships in Nigeria</title>
+    <link href="https://www.grants.gov/search-results-detail/360332"/>
+    <id>urn:funding-finder:grants-gov:360332</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <category term="Cybersecurity"/>
+    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — The purpose of this NOFO is to strengthen International Health Regulations (IHR) (2005) capacities of the Nigeria Centre for Disease Control and Prevention (NCDC); other Government of Nigeria ministries, departments, and agencies (MDAs) relevant to the implementation of multi-sectoral response efforts of the IHR; and sub-national public health institutions, such as State Ministries of Health and l…</summary>
+  </entry>
+  <entry>
+    <title>Expanding Global Health Security through local partnerships in Senegal</title>
+    <link href="https://www.grants.gov/search-results-detail/360334"/>
+    <id>urn:funding-finder:grants-gov:360334</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Cybersecurity"/>
+    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — This NOFO aims to enhance Senegal's public health infrastructure to prevent, detect, and respond to infectious disease threats through implementing partners. The initiative focuses on strengthening public health surveillance systems, including community-based surveillance, improving laboratory networks, and enhancing workforce training. The goal is to build sustainable, resilient health security i…</summary>
+  </entry>
+  <entry>
+    <title>Improving global health security in Côte d'Ivoire to stop the spread of infectious disease</title>
+    <link href="https://www.grants.gov/search-results-detail/360324"/>
+    <id>urn:funding-finder:grants-gov:360324</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Cybersecurity"/>
+    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — This Notice of Funding Opportunity (NOFO) seeks to build upon activities funded by CDC to support Global Health Security (GHS) in the Cote d"Ivore through implementation of programs and activities that focus on protecting and improving health globally through partnerships with Ministries of Health and other governmental institutions. The main outcomes of this NOFO are the following: (1) Improve pr…</summary>
+  </entry>
+  <entry>
+    <title>Protecting and Improving Global Health Security by Engaging Local Partners: Strengthening and Sustaining Public Health Systems in Ghana</title>
+    <link href="https://www.grants.gov/search-results-detail/360455"/>
+    <id>urn:funding-finder:grants-gov:360455</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Cybersecurity"/>
+    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — This NOFO seeks to build and sustain a more resilient public health system in Ghana capable of identifying, responding to and mitigating public health threats. CDC, through this NOFO, will continue to leverage and complement the strengths and resources of multi-sectoral and multilateral partners in Ghana to build and improve country capacity and leadership in the prevention, early detection and re…</summary>
+  </entry>
+  <entry>
+    <title>Strengthening global health security in India to contain public health threats and accelerate outbreak response</title>
+    <link href="https://www.grants.gov/search-results-detail/360336"/>
+    <id>urn:funding-finder:grants-gov:360336</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Education and workforce"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-08-31 — The Award Ceiling for Year 1 is 0 (none). CDC anticipates an Approximate Total Fiscal Year Funding amount of $20,000,000 for Year 1, subject to the availability of funds.You will advance progress towards achieving the 95-95-95 targets and continue to transition site-level support to local governments in Central America (CA) for:El Salvador.Guatemala.Honduras.Nicaragua.Panama.To achieve the goals o…</summary>
-  </entry>
-  <entry>
-    <title>Advancing Global Capacity to Detect and Respond to Fungal Diseases</title>
-    <link href="https://www.grants.gov/search-results-detail/361931"/>
-    <id>urn:funding-finder:grants-gov:361931</id>
-    <updated>2026-07-30T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCEZID</name></author>
-    <category term="Education and workforce"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control - NCEZID — Closes 2026-08-31 — This Notice of Funding Opportunity (NOFO) aims to support activities that build and strengthen sustainable fungal disease detection, diagnosis, surveillance, and response systems. Activities may address interconnected areas such as system and workforce development, laboratory and diagnostic capacity, and improved use of data to inform public health action. Through these efforts, this NOFO seeks to…</summary>
-  </entry>
-  <entry>
-    <title>FY26 Bureau of Land Management Abandoned Mine Lands and Hazardous Materials - Bureau wide</title>
-    <link href="https://www.grants.gov/search-results-detail/363334"/>
-    <id>urn:funding-finder:grants-gov:363334</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>Bureau of Land Management</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <category term="Public health"/>
-    <summary>Bureau of Land Management — Closes 2026-08-28 — The BLM and its partners inventory and mitigate abandoned mine hazards to protect public health and safety and the environment, and restore watersheds for recreation, fish, wildlife and domestic animals, manage air quality for the protection of public health and sensitive ecosystems, and return lands to productive uses including, but not limited to, recreation, fish and wildlife habitat, and prese…</summary>
-  </entry>
-  <entry>
-    <title>FY26 Bureau of Land Management Invasive and Noxious Plant Management - Bureau wide</title>
-    <link href="https://www.grants.gov/search-results-detail/363335"/>
-    <id>urn:funding-finder:grants-gov:363335</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>Bureau of Land Management</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Public health"/>
-    <summary>Bureau of Land Management — Closes 2026-09-25 — BLM Invasive and Noxious Plant Management Programs work to prevent, detect, inventory, control, and monitor weed populations on public lands.Invasive species cost the public millions of dollars in control and management each year and many invasive plants and noxious weeds are highly competitive and have the ability to permanently degrade our public lands.Noxious weeds and invasive species expansio…</summary>
-  </entry>
-  <entry>
-    <title>NEI Collaborative Clinical Vision Research (UG1 - Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/361394"/>
-    <id>urn:funding-finder:grants-gov:361394</id>
-    <updated>2026-07-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2026-09-25 — The NEI uses UG1 cooperative agreement awards to support investigator-initiated clinical vision research projects, including multi-center clinical trials, human gene-transfer, stem cell therapy trials, epidemiological studies, and other studies that are complex, high resource, or that require increased oversight due to elevated safety considerations.These collaborative clinical vision research pro…</summary>
-  </entry>
-  <entry>
-    <title>ORACLE 3C: Chronic Conditions, Coinfections, and Comorbidities in HIV</title>
-    <link href="https://www.grants.gov/search-results-detail/361255"/>
-    <id>urn:funding-finder:grants-gov:361255</id>
-    <updated>2026-07-24T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2026-09-25 — NICHD will advance its mission by using the DP2 mechanism to support early-career investigators conducting pioneering research on HIV-related chronic conditions, coinfections, and comorbidities (3C). Scientific directions will be distinct from concepts and approaches already pursued and consistent with the scientific priorities of the Office of AIDS Research (OAR). HIV-related 3Cs cause significan…</summary>
-  </entry>
-  <entry>
-    <title>Federal and University Partnership to Improve the Safety of Seafood from the Gulf of America</title>
-    <link href="https://www.grants.gov/search-results-detail/363304"/>
-    <id>urn:funding-finder:grants-gov:363304</id>
-    <updated>2026-07-23T00:00:00Z</updated>
-    <author><name>Food and Drug Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Public health"/>
-    <category term="Cybersecurity"/>
-    <summary>Food and Drug Administration — Closes 2026-08-21 — FDA is announcing the availability of funds for the support of a cooperative agreement between the Human Food Program/ Office of Laboratory Operations and Applied Science (OLOAS)/ Office of Applied Microbiolgy and Technology (OAMT) and the Marine Environmental Sciences Consortium/Dauphin Island Sea Lab (DISL). The scientific, public health, and policy expertise within the Food and Drug Administrat…</summary>
+    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — This NOFO"s purpose is to support district, state and national public health systems in India to advance GHSA priorities to prevent, detect and respond to infectious disease threats. CDC will work with the Government of India (GoI) to strengthen capacity to control disease outbreaks at their source and neutralize public health threats. This NOFO will augment and increasingly transition CDC-support…</summary>
   </entry>
 </feed>

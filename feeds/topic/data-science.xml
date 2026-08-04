@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-08-03T13:24:01Z</updated>
+  <updated>2026-08-04T12:23:31Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -133,6 +133,18 @@
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health — Closes 2027-01-25 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to continue to support the Radiation Oncology-Biology Integration Network (ROBIN) with applications from both new and renewing investigators. This network model will sustain an agile and effective national radiation oncology infrastructure that collectively addresses critical hypothesis-based translation…</summary>
+  </entry>
+  <entry>
+    <title>Innovative Traffic Safety Enforcement (ITSE) Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363446"/>
+    <id>urn:funding-finder:grants-gov:363446</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>National Highway Traffic Safety Administration</name></author>
+    <category term="Transportation"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>National Highway Traffic Safety Administration — Closes 2027-09-01 — The primary intent of this of the ITSE Grant Program is to 1) develop innovative traffic safety enforcement programs that demonstrate effectiveness by reducing the number of motor vehicle crashes due to one or more of the subject risky driving behaviors; and 2) ensure the traffic safety enforcement programs are repeatable and scalable for use by law enforcement throughout the United States. In add…</summary>
   </entry>
   <entry>
     <title>Advancing Investigative Journalism in Ukraine through U.S. AI Innovation</title>
@@ -610,19 +622,6 @@
     <summary>National Endowment for the Humanities — Closes 2026-09-16 — The National Endowment for the Humanities (NEH) Division of Research is accepting applications for the Scholarly Editions and Translations program. The purpose of this program is to support collaborative teams who edit, annotate, and translate foundational humanities texts that are vital to generating new scholarship but are not available in adequate editions or translations. This year’s competiti…</summary>
   </entry>
   <entry>
-    <title>Rapid Reskill Employment Recovery National Dislocated Worker Grants</title>
-    <link href="https://www.grants.gov/search-results-detail/362987"/>
-    <id>urn:funding-finder:grants-gov:362987</id>
-    <updated>2026-06-26T00:00:00Z</updated>
-    <author><name>Employment and Training Administration</name></author>
-    <category term="Education and workforce"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <summary>Employment and Training Administration — Closes 2026-08-03 — Please direct inquiries about this funding opportunity to Sabrina Guerrier at DOL-ETA-DWG@dol.gov with Reskill DWG in the subject line.</summary>
-  </entry>
-  <entry>
     <title>Creative Industries Film Lab and Residency - American Film Showcase 2026</title>
     <link href="https://www.grants.gov/search-results-detail/362939"/>
     <id>urn:funding-finder:grants-gov:362939</id>
@@ -725,17 +724,6 @@
     <summary>National Institutes of Health — Closes 2029-02-09 — The goal of this notice of funding opportunity (NOFO) is to address the opioid crisis and/or overdose events by supporting action-oriented research, accelerating the translation of addiction epidemiology, prevention, treatment services, and recovery research to practice. Proposed studies may target the individual, provider, organizational, community, or system level. This initiative prioritizes re…</summary>
   </entry>
   <entry>
-    <title>FY26 Pathways to Removing Obstacles to Housing (PRO Housing)</title>
-    <link href="https://www.grants.gov/search-results-detail/362005"/>
-    <id>urn:funding-finder:grants-gov:362005</id>
-    <updated>2026-06-03T00:00:00Z</updated>
-    <author><name>Department of Housing and Urban Development</name></author>
-    <category term="Community development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Department of Housing and Urban Development — Closes 2026-08-03 — As President Trump said in his Executive Order on Removing Regulatory Barriers to Affordable Home Construction (March 13, 2026), The American dream of homeownership depends on a dynamic housing market in which a varied inventory of new homes is built and renovated each year. Layers of unnecessary regulatory barriers, slow permitting processes, and onerous mandates at all levels of government have …</summary>
-  </entry>
-  <entry>
     <title>NLM Institutional Grants for Research Training in Biomedical Informatics, Data Science, and AI</title>
     <link href="https://www.grants.gov/search-results-detail/361318"/>
     <id>urn:funding-finder:grants-gov:361318</id>
@@ -746,5 +734,17 @@
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health — Closes 2026-09-25 — The National Library of Medicine (NLM) invites applications for innovative predoctoral and postdoctoral training programs that prepare the next generation of researchers in biomedical informatics, data science, and artificial intelligence/machine learning (AI/ML). NLM emphasizes cutting-edge, forward-looking training experiences that equip trainees to address complex health and biomedical challeng…</summary>
+  </entry>
+  <entry>
+    <title>Native American Affairs: Fiscal Year 2025 Colorado River Basin Tribal Drought Resiliency Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362644"/>
+    <id>urn:funding-finder:grants-gov:362644</id>
+    <updated>2026-06-02T00:00:00Z</updated>
+    <author><name>Bureau of Reclamation</name></author>
+    <category term="Energy"/>
+    <category term="Water"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Bureau of Reclamation — Closes 2026-09-28 — The objectives of this NAA/TAP funding opportunity are to provide funding for drought relief actions/projects that mitigate drought impacts for designated federally recognized tribes within the Colorado River Basin (see Eligibility section for list of tribes), and which advance Presidential and Department of the Interior Priorities within the Basin.Proposals should meet one or more of the followin…</summary>
   </entry>
 </feed>

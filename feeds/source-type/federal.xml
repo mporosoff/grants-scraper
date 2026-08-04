@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml</id>
-  <updated>2026-08-03T13:24:01Z</updated>
+  <updated>2026-08-04T12:23:31Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -193,6 +193,16 @@
     <updated>2027-03-22T00:00:00Z</updated>
     <author><name>Centers for Disease Control - NCHHSTP</name></author>
     <summary>Centers for Disease Control - NCHHSTP — Closes 2027-05-21 — The purpose of this notice of funding opportunity (NOFO) is to optimize the recipient's existing web-based ordering portal and distribution program to provide at least 1.5 million HIV and other STI self-tests to communities with a high burden of HIV. The use of the program's HIV and other STI self-tests and of resources for treatment and preventive services will increase awareness of HIV and other…</summary>
+  </entry>
+  <entry>
+    <title>DHQP Global NOFO</title>
+    <link href="https://www.grants.gov/search-results-detail/363448"/>
+    <id>urn:funding-finder:grants-gov:363448</id>
+    <updated>2027-03-21T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCEZID</name></author>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <summary>Centers for Disease Control - NCEZID — Closes 2027-05-20 — The proposed international hybrid Notice of Funding Opportunity (NOFO) will link non-research implementation with targeted research that advances CDC's mission to address antimicrobial resistance (AR) across multiple bacterial and fungal pathogens, healthcare-associated infections (HAIs), and emerging infectious disease threats including viral pathogens across healthcare, community, and environmen…</summary>
   </entry>
   <entry>
     <title>Medical Scientist Training Program (MSTP)</title>
@@ -591,13 +601,5 @@
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Arts and culture"/>
     <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-16 — The purpose of the R03 grant program is (1) to develop an understanding of the risks and conditions associated with occupational diseases and injuries, (2) to explore methods for reducing risks and preventing or minimizing exposure to hazardous conditions in the workplace, and (3) to translate significant scientific findings into prevention practices and products that will effectively reduce work-…</summary>
-  </entry>
-  <entry>
-    <title>Eviction Protection Grant Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363148"/>
-    <id>urn:funding-finder:grants-gov:363148</id>
-    <updated>2026-12-17T00:00:00Z</updated>
-    <author><name>Department of Housing and Urban Development</name></author>
-    <summary>Department of Housing and Urban Development — Closes 2027-02-17 — The Eviction Protection Grant Program (EPGP) will provide competitive awards to approximately 16 eligible nonprofit organizations and government entities to provide no cost legal assistance (including assistance related to pretrial activities, trial activities, post-trial activities and alternative dispute resolution) to low-income tenants at risk of or subject to eviction.</summary>
   </entry>
 </feed>

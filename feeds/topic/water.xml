@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml</id>
-  <updated>2026-08-03T13:24:01Z</updated>
+  <updated>2026-08-04T12:23:31Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Rocky Mountain Cooperative Ecosystem Studies Unit (CESU)</title>
@@ -255,18 +255,6 @@
     <category term="Environmental science"/>
     <category term="Water"/>
     <summary>Bureau of Reclamation — Closes 2027-09-08 — The objective of the WaterSMART Enhancing Water Resources Projects funding opportunity is to invite eligible entities to apply for funding to implement projects per the authorizing language referenced above that benefit water resource management for multiple uses, including water conservation and efficiency projects, water infrastructure improvements, and river and watershed restoration. Projects …</summary>
-  </entry>
-  <entry>
-    <title>WaterSMART: Applied Science Grants</title>
-    <link href="https://www.grants.gov/search-results-detail/361417"/>
-    <id>urn:funding-finder:grants-gov:361417</id>
-    <updated>2026-03-05T00:00:00Z</updated>
-    <author><name>Bureau of Reclamation</name></author>
-    <category term="Energy"/>
-    <category term="Water"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Bureau of Reclamation — Closes 2027-04-13 — Through WaterSMART, the Bureau of Reclamation (Reclamation) leverages Federal and non-Federal funding to work cooperatively with States, Tribes, and local entities as they plan and implement actions to increase water supply and hydropower reliability. The WaterSMART Program demonstrably advances Trump administration priorities, such as those identified in Presidential Executive Order 14154 (Januar…</summary>
   </entry>
   <entry>
     <title>WaterSMART Drought Response Program</title>

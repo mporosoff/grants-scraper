@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml</id>
-  <updated>2026-08-03T13:24:01Z</updated>
+  <updated>2026-08-04T12:23:31Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Improved Drug Susceptibility Testing (DST) for Mycobacteria</title>
@@ -216,6 +216,16 @@
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health — Closes 2026-10-06 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that develop or incorporate novel, cutting-edge study designs/methods/analytic approaches through the use of machine learning, artificial intelligence, and adaptive designs to allow the discovery of health/function profiles at the level of the individual and that could lead to th…</summary>
+  </entry>
+  <entry>
+    <title>Affiliate American Spaces PD Support Program FY 2026</title>
+    <link href="https://www.grants.gov/search-results-detail/363443"/>
+    <id>urn:funding-finder:grants-gov:363443</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>U.S. Mission to Croatia</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <summary>U.S. Mission to Croatia — Closes 2026-08-14 — All American Spaces programs showcase the breadth and depth of American values, ideals, culture, and perspectives on a variety of themes. Public Diplomacy section Croatia supports and implements programs and activities in Affiliate American Spaces Croatia – Affiliate American Corner Zagreb, Affiliate American Corner Koprivnica, Affiliate American Corner Vukovar - aligning with the needs and intere…</summary>
   </entry>
   <entry>
     <title>Advancing Investigative Journalism in Ukraine through U.S. AI Innovation</title>
@@ -683,18 +693,5 @@
     <category term="Arts and culture"/>
     <category term="Cybersecurity"/>
     <summary>Bureau of Democracy Human Rights and Labor — Closes 2026-08-13 — Freedom of expression online faces threats globally from authoritarian governments employing sophisticated technology to restrict speech, control the flow of information, and chill dissenting voices. These challenges infringe on privacy; access to information; and the exercise of freedoms of expression, peaceful assembly, association, and religion or belief online. The misuse of commercial spyware…</summary>
-  </entry>
-  <entry>
-    <title>Public Wireless Supply Chain Innovation Fund Grant Program – Solutions for AI-Native RAN</title>
-    <link href="https://www.grants.gov/search-results-detail/363179"/>
-    <id>urn:funding-finder:grants-gov:363179</id>
-    <updated>2026-07-14T00:00:00Z</updated>
-    <author><name>National Telecommunications and Information Admini</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <summary>National Telecommunications and Information Admini — Closes 2026-09-09 — This NOFO is the fourth issued under NTIA’s Public Wireless Supply Chain Innovation Fund (PWSCIF or Innovation Fund). Titled “Solutions for AI-Native RAN,” the goal of this NOFO is to support the development of a secure compute environment to enable or leverage native artificial intelligence (“AI”) capabilities in the Radio Access Network (RAN) that generate revenue for operators, cost savings, an…</summary>
   </entry>
 </feed>

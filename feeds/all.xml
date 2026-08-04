@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-08-03T13:24:01Z</updated>
+  <updated>2026-08-04T12:23:31Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -193,6 +193,16 @@
     <updated>2027-03-22T00:00:00Z</updated>
     <author><name>Centers for Disease Control - NCHHSTP</name></author>
     <summary>Centers for Disease Control - NCHHSTP — Closes 2027-05-21 — The purpose of this notice of funding opportunity (NOFO) is to optimize the recipient's existing web-based ordering portal and distribution program to provide at least 1.5 million HIV and other STI self-tests to communities with a high burden of HIV. The use of the program's HIV and other STI self-tests and of resources for treatment and preventive services will increase awareness of HIV and other…</summary>
+  </entry>
+  <entry>
+    <title>DHQP Global NOFO</title>
+    <link href="https://www.grants.gov/search-results-detail/363448"/>
+    <id>urn:funding-finder:grants-gov:363448</id>
+    <updated>2027-03-21T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCEZID</name></author>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <summary>Centers for Disease Control - NCEZID — Closes 2027-05-20 — The proposed international hybrid Notice of Funding Opportunity (NOFO) will link non-research implementation with targeted research that advances CDC's mission to address antimicrobial resistance (AR) across multiple bacterial and fungal pathogens, healthcare-associated infections (HAIs), and emerging infectious disease threats including viral pathogens across healthcare, community, and environmen…</summary>
   </entry>
   <entry>
     <title>Medical Scientist Training Program (MSTP)</title>
@@ -894,6 +904,15 @@
     <summary>Health Resources and Services Administration — Closes 2027-01-20 — The purpose of this program is to improve the nutrition and overall well-being of mothers, children, and families. MCH Nutrition Training Programs will provide interdisciplinary graduate education to build a skilled workforce, provide technical assistance to state Title V and other MCH programs, expand nutrition education and career pathways, and improve access to high-quality nutrition services t…</summary>
   </entry>
   <entry>
+    <title>Fiscal Year (FY) 2027 State and Regional Primary Care Association (PCA) Cooperative Agreements</title>
+    <link href="https://www.grants.gov/search-results-detail/363450"/>
+    <id>urn:funding-finder:grants-gov:363450</id>
+    <updated>2026-11-16T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <summary>Health Resources and Services Administration — Closes 2027-01-25 — The purpose of the Fiscal Year (FY) 2027 State and Regional Primary Care Association (PCA) program is to develop and deliver technical assistance (TA) that supports existing and potential Health Center Program award recipients and look-alikes (LALs), hereafter referred to as health centers, both directly and collaboratively with other HRSA-funded TA programs. PCAs will improve the health of medica…</summary>
+  </entry>
+  <entry>
     <title>Multi-Site Investigator-Initiated Clinical Trials (Collaborative UG3/UH3 Clinical Trial Required)</title>
     <link href="https://www.grants.gov/search-results-detail/363025"/>
     <id>urn:funding-finder:grants-gov:363025</id>
@@ -978,24 +997,5 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health — Closes 2027-01-22 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
-  </entry>
-  <entry>
-    <title>Centers of Excellence in Healthcare Quality and Safety</title>
-    <link href="https://www.grants.gov/search-results-detail/361997"/>
-    <id>urn:funding-finder:grants-gov:361997</id>
-    <updated>2026-11-05T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCEZID</name></author>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control - NCEZID — Closes 2027-01-04 — This Program will create a collaborative network of healthcare systems, facilities and public health partners to rapidly detect, respond to, and prevent threats to patient and healthcare worker safety. This Program will support work that improves the safety, quality and resilience of U.S. healthcare delivery.The Program will be made up of healthcare systems inclusive of multiple facilities in a va…</summary>
-  </entry>
-  <entry>
-    <title>Small Business Transition Grant for New Entrepreneurs (Parent R41/R42 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/362577"/>
-    <id>urn:funding-finder:grants-gov:362577</id>
-    <updated>2026-11-05T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health — Closes 2027-01-05 — The National Institutes of Health (NIH), including the participating Institutes, Centers and Offices, intends to publish a Notice of Funding Opportunity (NOFO) to invite eligible United States small business concerns (SBCs) to submit Small Business Technology Transfer (STTR) Phase I, and Fast-Track grant applications for the Small Business Transition Grant. Through this NOFO, NIH will support earl…</summary>
   </entry>
 </feed>
