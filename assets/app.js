@@ -1205,11 +1205,41 @@
     return `${text.slice(0, maximum - 1).trim()}…`;
   }
 
+  function structuredDescription(value) {
+    const lines = String(value || "")
+      .replace(/\r/g, "")
+      .split("\n")
+      .map(line => line.trim());
+    const blocks = [];
+    let listItems = [];
+    const flushList = () => {
+      if (!listItems.length) return;
+      blocks.push(`<ul>${listItems.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`);
+      listItems = [];
+    };
+
+    for (const line of lines) {
+      if (!line) {
+        flushList();
+        continue;
+      }
+      const bullet = line.match(/^(?:[•●▪◦‣⁃*+-]|\d+[.)])\s+(.+)$/);
+      if (bullet) {
+        listItems.push(bullet[1]);
+        continue;
+      }
+      flushList();
+      blocks.push(`<p>${escapeHtml(line)}</p>`);
+    }
+    flushList();
+    return blocks.join("") || "<p>No description listed.</p>";
+  }
+
   function cardTags(record) {
     return [
       ...(record.disciplines || []).slice(0, 2),
-      ...(record.topic_areas || []).slice(0, 3),
-    ].slice(0, 5);
+      ...(record.topic_areas || []).slice(0, 2),
+    ].slice(0, 3);
   }
 
   function deadlineKindLabel(kind) {
@@ -1258,24 +1288,104 @@
     return record.document_evidence?.facts || [];
   }
 
+  function amendmentOverview(record) {
+    const evidence = record.document_evidence || {};
+    const document = evidence.document || {};
+    const history = record.history || {};
+    const documentChanged = Boolean(document.changed_since_previous);
+    const modifiedCount = Number(history.modified_field_count || 0);
+    const commentCount = Number(history.change_comment_count || 0);
+    const sourceChanged = modifiedCount > 0 || commentCount > 0;
+    if (!documentChanged && !sourceChanged) return null;
+
+    const primaryDates = [
+      documentChanged ? document.last_seen_at : "",
+      sourceChanged ? record.last_updated : "",
+      sourceChanged ? record.api_last_updated : "",
+    ]
+      .map(value => String(value || "").slice(0, 10))
+      .filter(value => /^\d{4}-\d{2}-\d{2}$/.test(value))
+      .sort();
+    const fallbackDate = [record.detail_enriched_at, record.posted_date]
+      .map(value => String(value || "").slice(0, 10))
+      .find(value => /^\d{4}-\d{2}-\d{2}$/.test(value));
+    const changedDate = primaryDates[primaryDates.length - 1] || fallbackDate || "";
+    const summaryParts = [];
+
+    if (documentChanged) {
+      const versionHistory = evidence.version_history || [];
+      const previousDocument = versionHistory[versionHistory.length - 1] || {};
+      const previousName = truncate(previousDocument.name, 72);
+      const currentName = truncate(document.name, 72);
+      if (previousName && currentName && previousName !== currentName) {
+        summaryParts.push(`Official notice replaced ${previousName} with ${currentName}.`);
+      } else {
+        summaryParts.push("The official notice file changed.");
+      }
+
+      const amendmentQueue = (evidence.review_queue || [])
+        .find(item => item.type === "amendment");
+      const evidenceIds = new Set(amendmentQueue?.evidence_ids || []);
+      const labels = evidenceFacts(record)
+        .filter(fact => evidenceIds.has(fact.id))
+        .map(fact => fact.label)
+        .filter((label, index, values) => label && values.indexOf(label) === index)
+        .slice(0, 3);
+      summaryParts.push(
+        labels.length
+          ? `Recheck ${labels.join(", ").toLowerCase()} in the revised notice.`
+          : "No field-level difference was identified automatically; recheck the deadline, funding, eligibility, and application requirements.",
+      );
+    }
+
+    if (sourceChanged) {
+      const changes = [];
+      if (modifiedCount) {
+        changes.push(`${modifiedCount.toLocaleString()} tracked field${modifiedCount === 1 ? "" : "s"}`);
+      }
+      if (commentCount) {
+        changes.push(`${commentCount.toLocaleString()} agency change comment${commentCount === 1 ? "" : "s"}`);
+      }
+      const version = record.version ? ` (${record.version})` : "";
+      summaryParts.push(
+        `The official source revised ${changes.join(" and ")}${version}; a field-level diff was not provided.`,
+      );
+    }
+
+    return {
+      date: changedDate ? formatDate(changedDate, { long: true }) : "Date unavailable",
+      summary: summaryParts.join(" "),
+    };
+  }
+
+  function amendmentNotice(record) {
+    const amendment = amendmentOverview(record);
+    if (!amendment) return "";
+    return `<aside class="amendment-notice" aria-label="Funding opportunity amendment">
+      <div class="amendment-heading">
+        <span>FOA amended</span>
+        <time>${escapeHtml(amendment.date)}</time>
+      </div>
+      <p><strong>Summary of changes:</strong> ${escapeHtml(amendment.summary)}</p>
+    </aside>`;
+  }
+
   function evidenceSummary(record) {
     const evidence = record.document_evidence;
     if (!evidence || record.document_evidence_status !== "current") return "";
     const facts = evidenceFacts(record);
     const document = evidence.document || {};
     const reviewCount = (evidence.review_queue || []).length;
-    const changed = document.changed_since_previous
-      ? `<span class="badge warning">Document changed</span>`
-      : "";
     return `<div class="evidence-summary">
       <div>
         <span class="evidence-kicker">Official notice analyzed</span>
         <strong>${facts.length.toLocaleString()} cited ${facts.length === 1 ? "fact" : "facts"} · document v${Number(document.version || 1)}</strong>
         <small>${reviewCount ? `${reviewCount} item${reviewCount === 1 ? "" : "s"} queued for verification` : "No automatic conflict signal"}</small>
       </div>
-      ${changed}
-      <button class="text-button" type="button" data-open-evidence>View cited facts</button>
-      <button class="text-button" type="button" data-chat-record="${escapeAttribute(recordId(record))}">Ask AI about this FOA</button>
+      <div class="evidence-summary-actions">
+        <button class="text-button" type="button" data-open-evidence>View citations</button>
+        <button class="text-button" type="button" data-chat-record="${escapeAttribute(recordId(record))}">Ask AI</button>
+      </div>
     </div>`;
   }
 
@@ -1357,7 +1467,8 @@
         : `No primary FOA attachment was identified automatically; use the official ${recordSourceName} record.`;
     return {
       url: primaryDocument || agencyNotice || grantsRecord,
-      html: `<div class="source-actions">${links.join("")}</div><p class="source-action-note">${escapeHtml(note)}</p>`,
+      html: `<div class="source-actions">${links.join("")}</div>`,
+      note,
     };
   }
 
@@ -1437,7 +1548,6 @@
       record.status_verification_required ? `<span class="badge warning">Verify current status</span>` : "",
       record.deadline_conflict ? `<span class="badge warning">Deadline conflict</span>` : "",
       record.award_conflicts ? `<span class="badge warning">Funding conflict</span>` : "",
-      record.document_evidence?.document?.changed_since_previous ? `<span class="badge warning">FOA changed</span>` : "",
       (record.document_status_signals || []).some(value => ["cancelled", "superseded"].includes(value))
         ? `<span class="badge warning">Document status review</span>`
         : "",
@@ -1446,15 +1556,11 @@
         && daysUntil(record.close_date) <= 30
         ? `<span class="badge warning">Closing in ${daysUntil(record.close_date)} days</span>`
         : "",
-      Number(record.history?.modified_field_count || 0) > 0
-        || Number(record.history?.change_comment_count || 0) > 0
-        ? `<span class="badge warning">Amended</span>`
-        : "",
-      state.personalize && state.preferenceModel
-        && PREFERENCES_API.factor(record, state.preferenceModel) > 0.05
-        ? `<span class="badge prioritized" title="${escapeAttribute(preferenceReason(record))}">Prioritized from your ratings</span>`
-        : "",
     ].filter(Boolean).join("");
+    const prioritized = state.personalize && state.preferenceModel
+      && PREFERENCES_API.factor(record, state.preferenceModel) > 0.05
+      ? `<span class="badge prioritized" title="${escapeAttribute(preferenceReason(record))}">Prioritized from your ratings</span>`
+      : "";
     const aiBlock = assessment
       ? `<div class="ai-rationale"><strong>${escapeHtml(assessment.verdict || "AI match")} · ${Number(assessment.score || 0)}/100</strong> ${escapeHtml(assessment.reason || "")}${assessment.concern ? `<span class="ai-concern"><strong>Check:</strong> ${escapeHtml(assessment.concern)}</span>` : ""}</div>`
       : "";
@@ -1476,34 +1582,42 @@
         <span class="badge ${record.status === "posted" ? "open" : "forecasted"}">${record.status === "posted" ? "Open" : "Forecasted"}</span>
         ${assessment ? `<span class="badge ai">AI shortlist</span>` : ""}
         ${candidateReview && !assessment ? `<span class="badge candidate">Retrieved candidate</span>` : ""}
-        ${flags}
+        ${prioritized}
         <span class="opportunity-number">${escapeHtml(record.opportunity_number || record.opportunity_id || "")}</span>
         <button type="button" class="save-button${state.savedIds.has(id) ? " saved" : ""}" data-save="${escapeAttribute(id)}" aria-pressed="${state.savedIds.has(id)}" title="${state.savedIds.has(id) ? "Saved on this device — select to remove" : "Save this opportunity to view later"}">${state.savedIds.has(id) ? "★ Saved" : "☆ Save"}</button>
       </div>
       <h3><a href="${escapeAttribute(detailUrl)}" target="_blank" rel="noopener">${escapeHtml(record.title)}</a></h3>
       <p class="agency">${escapeHtml(record.agency || "Agency not listed")}</p>
+      ${flags ? `<div class="card-alerts" aria-label="Important opportunity flags">${flags}</div>` : ""}
+      ${amendmentNotice(record)}
       <div class="key-facts">
         <div class="key-fact"><span>${escapeHtml(deadline.label)}</span><strong>${escapeHtml(deadline.value)}</strong><small>${escapeHtml(deadline.detail)}</small></div>
         <div class="key-fact"><span>Per-award amount</span><strong>${escapeHtml(perAward)}</strong><small>${record.total_program_funding ? `Program total ${escapeHtml(programFunding)}` : escapeHtml(fundingEvidenceLabel(record))}</small></div>
         <div class="key-fact"><span>Eligibility</span><strong>${escapeHtml(overviewEligibility)}</strong><small>Confirm in official notice</small></div>
-        <div class="key-fact"><span>Program contact</span><strong>${contactHref ? `<a href="${escapeAttribute(contactHref)}">${escapeHtml(contact.label)}</a>` : escapeHtml(contact.label)}</strong><small>${escapeHtml(contact.detail)}</small></div>
       </div>
+      <div class="card-contact"><span>Program contact</span><strong>${contactHref ? `<a href="${escapeAttribute(contactHref)}">${escapeHtml(contact.label)}</a>` : escapeHtml(contact.label)}</strong><small>${escapeHtml(contact.detail)}</small></div>
       ${matchExplanation(record)}
       ${evidenceSummary(record)}
       ${aiBlock}
-      <p class="description">${escapeHtml(truncate(record.description, 430) || "No synopsis was included in the extract.")}</p>
+      <p class="description">${escapeHtml(truncate(record.description, 300) || "No synopsis was included in the extract.")}</p>
       ${tags ? `<div class="tag-row">${tags}</div>` : ""}
-      ${actions.html}
-      <div class="result-utility-actions">
-        <button type="button" class="source-action" data-calendar="${escapeAttribute(id)}"${record.close_date ? "" : " disabled"}>Add deadline to calendar</button>
-        <button type="button" class="source-action${compared ? " selected" : ""}" data-compare="${escapeAttribute(id)}" aria-pressed="${compared}">${compared ? "✓ Added to comparison" : "Compare"}</button>
+      <div class="card-actions">
+        ${actions.html}
+        <div class="result-utility-actions">
+          <button type="button" class="source-action" data-calendar="${escapeAttribute(id)}"${record.close_date ? "" : " disabled"}>Add to calendar</button>
+          <button type="button" class="source-action${compared ? " selected" : ""}" data-compare="${escapeAttribute(id)}" aria-pressed="${compared}">${compared ? "✓ Comparing" : "Compare"}</button>
+        </div>
       </div>
       ${sourceReviewControls(record)}
-      ${feedbackControls(record)}
+      <details class="result-feedback-toggle">
+        <summary>Rate this result</summary>
+        ${feedbackControls(record)}
+      </details>
       <details class="record-details">
         <summary>View cited evidence, eligibility, and full details</summary>
         <div class="details-body">
           ${evidenceRows(record)}
+          <p class="source-action-note"><strong>Source link note:</strong> ${escapeHtml(actions.note)}</p>
           <dl class="detail-grid">
             <div><dt>Eligible applicants</dt><dd>${escapeHtml(eligibility)}</dd></div>
             <div><dt>Funding instrument</dt><dd>${escapeHtml((record.funding_instruments || []).join("; ") || "Not listed")}</dd></div>
@@ -1524,7 +1638,7 @@
           </dl>
           ${record.close_date_note ? `<p class="description"><strong>Deadline note:</strong> ${escapeHtml(record.close_date_note)}</p>` : ""}
           ${record.preliminary_deadline_text ? `<p class="description"><strong>Potential preliminary deadline:</strong> ${escapeHtml(record.preliminary_deadline_text)} <em>Machine extracted; verify in the official notice.</em></p>` : ""}
-          <div class="full-description">${escapeHtml(record.description || "No description listed.")}</div>
+          <div class="full-description">${structuredDescription(record.description)}</div>
         </div>
       </details>
     </article>`;

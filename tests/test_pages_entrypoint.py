@@ -79,7 +79,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             '<script src="./data/opportunities.js?v=catalog-',
             explorer_html,
         )
-        release_version = "release-2026-07-30-v5"
+        release_version = "release-2026-08-05-v2"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={release_version}">',
             explorer_html,
@@ -119,6 +119,15 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("function renderSaved", application_js)
         self.assertIn("function exportEvaluation", application_js)
         self.assertIn("function evidenceRows", application_js)
+        self.assertIn("function amendmentOverview", application_js)
+        self.assertIn("function amendmentNotice", application_js)
+        self.assertIn("function structuredDescription", application_js)
+        self.assertIn("FOA amended", application_js)
+        self.assertIn("Summary of changes:", application_js)
+        self.assertIn(".amendment-notice", application_css)
+        self.assertIn(".result-feedback-toggle", application_css)
+        self.assertIn(".full-description p", application_css)
+        self.assertIn(".full-description li + li", application_css)
         self.assertIn("function sendDeploymentReview", application_js)
         self.assertIn("citation_evidence_ids", application_js)
         self.assertIn("globalThis.FUNDING_REVIEW", review_js)
@@ -259,6 +268,30 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
                 and record.get("detail_enrichment_status")
                 and record.get("document_evidence_status")
                 for record in catalog["opportunities"]
+            )
+        )
+        amended_records = [
+            record
+            for record in catalog["opportunities"]
+            if (
+                (record.get("document_evidence") or {})
+                .get("document", {})
+                .get("changed_since_previous")
+                or (record.get("history") or {}).get("modified_field_count", 0)
+                or (record.get("history") or {}).get("change_comment_count", 0)
+            )
+        ]
+        self.assertTrue(amended_records)
+        self.assertTrue(
+            all(
+                (record.get("document_evidence") or {})
+                .get("document", {})
+                .get("last_seen_at")
+                or record.get("last_updated")
+                or record.get("api_last_updated")
+                or record.get("detail_enriched_at")
+                or record.get("posted_date")
+                for record in amended_records
             )
         )
         self.assertTrue(

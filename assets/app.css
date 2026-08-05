@@ -872,19 +872,65 @@ textarea:focus {
 }
 
 .agency {
-  padding-bottom: 12px;
-  margin-bottom: 14px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
   color: #516178;
   font-size: .84rem;
   font-weight: 700;
   border-bottom: 1px solid #dfe6ee;
 }
 
+.card-alerts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 10px;
+}
+
+.amendment-notice {
+  display: grid;
+  grid-template-columns: minmax(120px, auto) minmax(0, 1fr);
+  gap: 10px 16px;
+  align-items: start;
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  color: #664216;
+  background: #fff8e8;
+  border: 1px solid #e8cb8f;
+  border-left: 4px solid #c78418;
+  border-radius: 8px;
+}
+
+.amendment-heading {
+  display: grid;
+  gap: 2px;
+}
+
+.amendment-heading span {
+  color: #8b4d00;
+  font-size: .69rem;
+  font-weight: 900;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.amendment-heading time {
+  color: #5e4829;
+  font-size: .74rem;
+  font-weight: 800;
+}
+
+.amendment-notice p {
+  margin: 0;
+  font-size: .75rem;
+  line-height: 1.42;
+}
+
 .key-facts {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 9px;
-  margin-bottom: 13px;
+  margin-bottom: 9px;
 }
 
 .key-fact {
@@ -926,6 +972,40 @@ textarea:focus {
   line-height: 1.3;
 }
 
+.card-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px 8px;
+  align-items: baseline;
+  margin: 0 0 11px;
+  padding: 0 2px;
+  color: #5a697d;
+  font-size: .72rem;
+}
+
+.card-contact span {
+  color: #7a8798;
+  font-size: .64rem;
+  font-weight: 850;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.card-contact strong {
+  color: #33445a;
+  font-size: .74rem;
+}
+
+.card-contact a {
+  color: var(--blue-dark);
+  text-underline-offset: 2px;
+}
+
+.card-contact small {
+  color: #758195;
+  font-size: .67rem;
+}
+
 .match-explanation {
   display: flex;
   gap: 10px;
@@ -953,11 +1033,11 @@ textarea:focus {
 
 .evidence-summary {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto auto;
-  gap: 8px 12px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px 16px;
   align-items: center;
-  margin: 12px 0;
-  padding: 11px 12px;
+  margin: 10px 0;
+  padding: 9px 11px;
   color: #24415f;
   background: #eef8f4;
   border: 1px solid #badccb;
@@ -997,6 +1077,13 @@ textarea:focus {
 .evidence-summary .text-button {
   margin: 0;
   white-space: nowrap;
+}
+
+.evidence-summary-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 12px;
+  justify-content: flex-end;
 }
 
 .document-evidence {
@@ -1180,13 +1267,34 @@ textarea:focus {
 
 .full-description {
   max-height: 360px;
-  padding: 13px;
+  padding: 16px;
   overflow-y: auto;
   color: #445368;
   font-size: .8rem;
-  white-space: pre-wrap;
+  line-height: 1.58;
   background: var(--surface-alt);
   border-radius: 8px;
+}
+
+.full-description p {
+  margin: 0 0 13px;
+}
+
+.full-description ul {
+  margin: 0 0 15px;
+  padding-left: 22px;
+}
+
+.full-description li {
+  padding-left: 3px;
+}
+
+.full-description li + li {
+  margin-top: 7px;
+}
+
+.full-description > :last-child {
+  margin-bottom: 0;
 }
 
 .source-actions {
@@ -1194,7 +1302,7 @@ textarea:focus {
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
-  margin-top: 13px;
+  margin: 0;
 }
 
 .source-action {
@@ -1228,7 +1336,18 @@ textarea:focus {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 8px;
+  margin: 0;
+}
+
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 11px;
+  padding-top: 11px;
+  border-top: 1px solid var(--line);
 }
 
 .compare-panel {
@@ -1307,10 +1426,29 @@ textarea:focus {
 }
 
 .source-action-note {
-  margin-top: 7px;
+  margin: 0 0 13px;
+  padding: 9px 10px;
   color: #68778b;
   font-size: .7rem;
   line-height: 1.35;
+  background: var(--surface-alt);
+  border-radius: 7px;
+}
+
+.result-feedback-toggle {
+  margin-top: 8px;
+}
+
+.result-feedback-toggle > summary {
+  width: max-content;
+  color: #637287;
+  font-size: .72rem;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.result-feedback-toggle[open] > summary {
+  color: var(--blue-dark);
 }
 
 .result-feedback {
@@ -1318,7 +1456,7 @@ textarea:focus {
   grid-template-columns: auto minmax(0, 1fr) minmax(150px, auto);
   gap: 8px 12px;
   align-items: center;
-  margin-top: 14px;
+  margin-top: 8px;
   padding: 11px 12px;
   color: #526177;
   font-size: .72rem;
@@ -2281,6 +2419,10 @@ footer p {
   .evidence-summary .badge {
     justify-self: start;
   }
+
+  .evidence-summary-actions {
+    justify-content: flex-start;
+  }
 }
 
 @media (max-width: 540px) {
@@ -2308,10 +2450,22 @@ footer p {
     width: 100%;
   }
 
-  .key-facts,
   .detail-grid,
   .deployment-checks {
     grid-template-columns: 1fr;
+  }
+
+  .amendment-notice {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 7px;
+  }
+
+  .key-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .key-fact:first-child {
+    grid-column: 1 / -1;
   }
 
   .document-evidence-heading,
@@ -2335,6 +2489,16 @@ footer p {
   .source-actions {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .card-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .result-utility-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .source-action {
@@ -3321,6 +3485,46 @@ body.chat-expanded .chat-privacy {
   .agency,
   .key-fact {
     border-color: var(--line);
+  }
+
+  .amendment-notice {
+    color: #f2d8a9;
+    background: #382b16;
+    border-color: #705526;
+    border-left-color: #e1a441;
+  }
+
+  .amendment-heading span {
+    color: #ffc76b;
+  }
+
+  .amendment-heading time,
+  .card-contact,
+  .card-contact small {
+    color: #b9c6d8;
+  }
+
+  .card-contact span {
+    color: #9eacc0;
+  }
+
+  .card-contact strong {
+    color: #dce7f6;
+  }
+
+  .evidence-summary {
+    color: #bce7d6;
+    background: #15372f;
+    border-color: #376c59;
+  }
+
+  .evidence-kicker,
+  .evidence-summary strong {
+    color: #a8e3ca;
+  }
+
+  .evidence-summary small {
+    color: #a6c7ba;
   }
 
   .page-number[aria-current="page"] {
