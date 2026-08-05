@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml</id>
-  <updated>2026-08-04T12:23:31Z</updated>
+  <updated>2026-08-05T12:17:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -312,6 +312,15 @@
     <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-04-12 — The purpose of the NIOSH Support for Conferences and Scientific Meetings (U13) program is to support high-quality scientific meetings, conferences, and workshops that are relevant to the NIOSH mission and that promote occupational safety and health. The conference program is an important part of the NIOSH mission. Applications should address and advance research topics in occupational safety and h…</summary>
   </entry>
   <entry>
+    <title>Single Source Competition for Continuation of Understanding and Targeting the Pathophysiology of Youth-Onset Type 2 Diabetes Clinical Centers (U01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363454"/>
+    <id>urn:funding-finder:grants-gov:363454</id>
+    <updated>2027-02-02T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <summary>National Institutes of Health — Closes 2027-03-10 — The DISCOVERY of Risk Factors for Type 2 Diabetes in Youth Study is a multi-center longitudinal consortium conducted across 19 clinical sites to identify risk factors and biological mechanisms driving progression to youth-onset type 2 diabetes. The study is actively recruiting and following early pubertal youth at high risk for the disease with longitudinal follow-up currently underway. The curren…</summary>
+  </entry>
+  <entry>
     <title>Telehealth Nutrition Services Network Grant Program</title>
     <link href="https://www.grants.gov/search-results-detail/363277"/>
     <id>urn:funding-finder:grants-gov:363277</id>
@@ -592,14 +601,5 @@
     <category term="Arts and culture"/>
     <category term="Environmental science"/>
     <summary>Health Resources and Services Administration — Closes 2027-03-18 — The purpose of this program is to improve maternal and infant outcomes by preventing contact with harmful materials before, during, and after pregnancy. This program aims to improve maternal and infant health outcomes by preventing harmful exposures before, during, and after pregnancy. It supports a national expert-staffed call center that provides timely, evidence-based information and personaliz…</summary>
-  </entry>
-  <entry>
-    <title>NIOSH Small Research Grant Program (R03)</title>
-    <link href="https://www.grants.gov/search-results-detail/363299"/>
-    <id>urn:funding-finder:grants-gov:363299</id>
-    <updated>2026-12-17T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Arts and culture"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-16 — The purpose of the R03 grant program is (1) to develop an understanding of the risks and conditions associated with occupational diseases and injuries, (2) to explore methods for reducing risks and preventing or minimizing exposure to hazardous conditions in the workplace, and (3) to translate significant scientific findings into prevention practices and products that will effectively reduce work-…</summary>
   </entry>
 </feed>

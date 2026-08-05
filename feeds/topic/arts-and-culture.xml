@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml</id>
-  <updated>2026-08-04T12:23:31Z</updated>
+  <updated>2026-08-05T12:17:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Improved Drug Susceptibility Testing (DST) for Mycobacteria</title>
@@ -606,17 +606,6 @@
     <summary>U.S. Mission to Albania — Closes 2026-08-20 — 1. Project Background, Goals, and Objectives Albania's youth face a rapidly evolving digital economy that demands advanced technical skills, entrepreneurial mindsets, and exposure to international industry standards. Albanian interest in gaming – a global market forecasted to surpass $745 billion by 2030, in which the United States is leading – is high, presenting an opportunity to increase Albani…</summary>
   </entry>
   <entry>
-    <title>Tribal Personal Responsibility Education Program (Tribal PREP)</title>
-    <link href="https://www.grants.gov/search-results-detail/361987"/>
-    <id>urn:funding-finder:grants-gov:361987</id>
-    <updated>2026-07-17T00:00:00Z</updated>
-    <author><name>Administration for Children &amp; Families - ACYF/FYSB</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <summary>Administration for Children &amp; Families - ACYF/FYSB — Closes 2026-08-17 — Tribal PREP competitively funds projects that educate American Indian/Alaska Native (AI/AN) youth ages 10-19, and expectant and parenting youth under age 21, on both abstinence and contraception for the prevention of pregnancy, sexually transmitted infections (STIs), and HIV and promote successful transition of youth to adulthood through education on key adulthood preparation subjects (APS). Proje…</summary>
-  </entry>
-  <entry>
     <title>Personal Responsibility Education Innovative Strategies (PREIS)</title>
     <link href="https://www.grants.gov/search-results-detail/361986"/>
     <id>urn:funding-finder:grants-gov:361986</id>
@@ -693,5 +682,18 @@
     <category term="Arts and culture"/>
     <category term="Cybersecurity"/>
     <summary>Bureau of Democracy Human Rights and Labor — Closes 2026-08-13 — Freedom of expression online faces threats globally from authoritarian governments employing sophisticated technology to restrict speech, control the flow of information, and chill dissenting voices. These challenges infringe on privacy; access to information; and the exercise of freedoms of expression, peaceful assembly, association, and religion or belief online. The misuse of commercial spyware…</summary>
+  </entry>
+  <entry>
+    <title>Public Wireless Supply Chain Innovation Fund Grant Program – Solutions for AI-Native RAN</title>
+    <link href="https://www.grants.gov/search-results-detail/363179"/>
+    <id>urn:funding-finder:grants-gov:363179</id>
+    <updated>2026-07-14T00:00:00Z</updated>
+    <author><name>National Telecommunications and Information Admini</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <summary>National Telecommunications and Information Admini — Closes 2026-09-09 — This NOFO is the fourth issued under NTIA’s Public Wireless Supply Chain Innovation Fund (PWSCIF or Innovation Fund). Titled “Solutions for AI-Native RAN,” the goal of this NOFO is to support the development of a secure compute environment to enable or leverage native artificial intelligence (“AI”) capabilities in the Radio Access Network (RAN) that generate revenue for operators, cost savings, an…</summary>
   </entry>
 </feed>

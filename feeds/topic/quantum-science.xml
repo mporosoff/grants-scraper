@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml</id>
-  <updated>2026-08-04T12:23:31Z</updated>
+  <updated>2026-08-05T12:17:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Young Trilateral Leaders (YTL) Summit</title>
@@ -122,6 +122,8 @@
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Education and workforce"/>
     <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>U.S. National Science Foundation — Closes 2027-04-06 — The National Quantum Initiative (NQI) Act1aims to ensure the continuing leadership of the United States (U.S.) in quantum information science and technology. In conformance with the NQI goals, an argument2-5was set forth for a renewed emphasis on identifying and fostering early adoption of quantum technologies to transform the field of Quantum Information Science and Engineering (QISE) and to acce…</summary>
   </entry>
   <entry>

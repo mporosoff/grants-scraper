@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml</id>
-  <updated>2026-08-04T12:23:31Z</updated>
+  <updated>2026-08-05T12:17:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Veterans Legacy Grants Program</title>
@@ -148,6 +148,16 @@
     <summary>National Institutes of Health — Closes 2026-12-15 — The National Library of Medicine (NLM) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for a Training Center of the Network of the National Library of Medicine (NNLM).Established in 1965 and organized geographically across the United States and its territories, the NNLM promotes and supports the initiatives, products, and services of the NLM and the National Insti…</summary>
   </entry>
   <entry>
+    <title>Safeguarding U.S. Critical Minerals Supply Chains- Tunisia</title>
+    <link href="https://www.grants.gov/search-results-detail/363458"/>
+    <id>urn:funding-finder:grants-gov:363458</id>
+    <updated>2026-08-04T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Community development"/>
+    <category term="Manufacturing"/>
+    <summary>Bureau of Near Eastern Affairs — Closes 2026-09-02 — U.S. Embassy Tunis and the Bureau of Near Eastern Affairs' Office of Assistance Coordination (NEA/AC) seek applications for the “Safeguarding U.S. Critical Minerals Supply Chains- Tunisia” program, a commercial diplomacy initiative to support transparent, private-sector-led investment in phosphate development, optimize downstream mineral processing to meet international standards, and strengthen t…</summary>
+  </entry>
+  <entry>
     <title>Media Literacy and Capacity Building Workshop Series</title>
     <link href="https://www.grants.gov/search-results-detail/363441"/>
     <id>urn:funding-finder:grants-gov:363441</id>
@@ -158,16 +168,6 @@
     <category term="Environmental science"/>
     <category term="Transportation"/>
     <summary>U.S. Mission to Indonesia — Closes 2026-09-02 — 1. Project Background, Goals, and Objectives With over 270 million people and one of the world’s largest social media user bases, Indonesia’s citizens consume media content from a wide array of traditional and digital sources. As the country continues to expand its regional leadership role, Indonesian journalists must develop their capacity to report accurately and comprehensively on critical issu…</summary>
-  </entry>
-  <entry>
-    <title>Safeguarding U.S. Critical Minerals Supply Chains- Tunisia</title>
-    <link href="https://www.grants.gov/search-results-detail/363451"/>
-    <id>urn:funding-finder:grants-gov:363451</id>
-    <updated>2026-08-03T00:00:00Z</updated>
-    <author><name>Bureau of Near Eastern Affairs</name></author>
-    <category term="Community development"/>
-    <category term="Manufacturing"/>
-    <summary>Bureau of Near Eastern Affairs — Closes 2026-09-02 — U.S. Embassy Tunis and the Bureau of Near Eastern Affairs' Office of Assistance Coordination (NEA/AC) seek applications for the “Safeguarding U.S. Critical Minerals Supply Chains- Tunisia” program, a commercial diplomacy initiative to support transparent, private-sector-led investment in phosphate development, optimize downstream mineral processing to meet international standards, and strengthen t…</summary>
   </entry>
   <entry>
     <title>Advancing Investigative Journalism in Ukraine through U.S. AI Innovation</title>
@@ -555,6 +555,7 @@
     <category term="Community development"/>
     <category term="Environmental science"/>
     <category term="Public health"/>
+    <category term="Cybersecurity"/>
     <summary>National Institutes of Health — Closes 2027-04-20 — This Notice of Funding Opportunity Announcement (NOFO) invites grant applications for Environmental Health Sciences Core Centers (EHSCC). As intellectual hubs for environmental health science research, the EHSCC's are expected to be the thought leaders for the field and advance the goals of the 2025-2029 NIEHS Strategic Plan (http://www.niehs.nih.gov/about/strategicplan/). The Core Centers provide…</summary>
   </entry>
   <entry>

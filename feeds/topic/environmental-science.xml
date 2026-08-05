@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml</id>
-  <updated>2026-08-04T12:23:31Z</updated>
+  <updated>2026-08-05T12:17:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
@@ -284,6 +284,15 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Environmental science"/>
     <summary>National Institutes of Health — Closes 2026-09-25 — The National Institute on Drug Abuse (NIDA) seeks to advance its mission by supporting Core Center of Transformative Science Grants. These Centers will bring together investigators currently funded by NIH or other Federal or non-Federal sources to enhance and extend existing research relevant to substance use, addiction, and HIV. Centers are expected to transform the scientific field of study by f…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for Affiliated Partner with the Great Lakes – Northern Forest Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/363457"/>
+    <id>urn:funding-finder:grants-gov:363457</id>
+    <updated>2026-08-04T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Environmental science"/>
+    <summary>Geological Survey — Closes 2026-09-04 — The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner for wildlife disease molecular diagnostic testing and capacity building. The USGS National Wildlife Health Center (NWHC) plays a critical role in identifying causes of morbidity and mortality in wildlife through comprehensive diagnostic services. Among the vital diagnostic disciplines, parasitology has historical…</summary>
   </entry>
   <entry>
     <title>Increasing Market Opportunities in Vietnam for U.S. Innovative Biofertilizer Exporters</title>
@@ -683,16 +692,5 @@
     <author><name>Bureau of Oceans - Int. Environmental - Scientific</name></author>
     <category term="Environmental science"/>
     <summary>Bureau of Oceans - Int. Environmental - Scientific — Closes 2026-08-14 — The U.S. Department of State, Bureau of Oceans and International Environmental and Scientific Affairs (OES), Office of Ocean and Polar Affairs (OPA) announces an open competition for a U.S. institution, company, or organization (see eligibility information in B.1) interested in submitting an application to conduct ocean mapping, seabed exploration, habitat and resource characterization, and data m…</summary>
-  </entry>
-  <entry>
-    <title>Great Lakes Restoration Initiative: Community Forest and Open Space Conservation Program</title>
-    <link href="https://www.grants.gov/search-results-detail/361418"/>
-    <id>urn:funding-finder:grants-gov:361418</id>
-    <updated>2026-07-22T00:00:00Z</updated>
-    <author><name>Forest Service</name></author>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>Forest Service — Closes 2026-12-08 — Federally recognized Indian Tribes, local government entities, and nonprofit organizations that are qualified to acquire and manage land may apply for up to $1,000,000 for the fee simple acquisition of private forest land in portions of the Lake Superior Basin of Michigan and Wisconsin. Projects submitted for funding consideration must be forested properties at least five acres in size that are th…</summary>
   </entry>
 </feed>

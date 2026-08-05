@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-08-04T12:23:31Z</updated>
+  <updated>2026-08-05T12:17:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -85,16 +85,6 @@
     <summary>Bureau of Land Management — Closes 2026-09-28 — The Bureau of Land Management"s Plant Conservation and Restoration Program (PCRP) is a national leader in building the native seed supply chain essential for restoring resilient public lands and supporting multiple use and sustained yield. PCRP advances Department of the Interior mission to protect and manage America's natural resources. The native seed PCRP adds to the commercial market enables r…</summary>
   </entry>
   <entry>
-    <title>Apprenticeship and Pre-apprenticeship Clean Energy Training</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z000000FOEyAAO"/>
-    <id>urn:funding-finder:nyserda:nyserda%3APON5437</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>NYSERDA</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <summary>NYSERDA — Closes 2026-08-04 — Through this funding opportunity the New York State Energy Research and Development Authority (NYSERDA) seeks to work with labor organizations and registered pre-apprenticeship programs across the State, to grow a diverse, equitable, and inclusive pipeline of skilled talent for the clean energy labor market. This solicitation is intended to fund Projects that create and/or expand the capacity of d…</summary>
-  </entry>
-  <entry>
     <title>Clean Green Schools Initiative</title>
     <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt000001Q0ClRAAV"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON4924</id>
@@ -155,6 +145,16 @@
     <author><name>NYSERDA</name></author>
     <category term="Energy"/>
     <summary>NYSERDA — Closes 2026-09-28 — Supporting the development, scale-up, and demonstration of large-scale alternative fuel-based energy systems and supporting infrastructure, up to $8 million is available through Program Opportunity Notice (PON) 6161. This funding will help advance solutions optimized for safe, cost-effective, and scalable deployment of non-drop-in fuels such as hydrogen and ammonia within New York State. This comp…</summary>
+  </entry>
+  <entry>
+    <title>Apprenticeship and Pre-apprenticeship Clean Energy Training</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z000000FOEyAAO"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON5437</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <summary>NYSERDA — Closes 2026-10-06 — Through this funding opportunity the New York State Energy Research and Development Authority (NYSERDA) seeks to work with labor organizations and registered pre-apprenticeship programs across the State, to grow a diverse, equitable, and inclusive pipeline of skilled talent for the clean energy labor market. This solicitation is intended to fund Projects that create and/or expand the capacity of d…</summary>
   </entry>
   <entry>
     <title>Plant Protection Act Section 7721 Fiscal Year 2027 National Clean Plant Network (NCPN)</title>
@@ -414,7 +414,7 @@
     <category term="Education and workforce"/>
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters — Closes 2026-10-20 — PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by 8/20/2026. See the full posting on NSPIRES for details. NOTICE: July 30, 2026. An erroneous reference in Section 4.1 to was corrected to refer to Section 4.2 regarding Sub-element of relevance. Section 4.3.3 "Use of Generative AI" was added. On the NSPIRES cover page, the NOI Program Specific Data Cover Page El…</summary>
+    <summary>NASA Headquarters — Closes 2026-10-20 — PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by 8/20/2026. See the full posting on NSPIRES for details. ﻿NOTICE: August 4, 2026. Going forward, a $0.09/SBU charge now applies to all proposing to Earth Science (ROSES Appendix A) to use any NASA high-end computing resource. Proposers must account for this in their budget, per the instructions provided in Secti…</summary>
   </entry>
   <entry>
     <title>ROSES25: A.15 Biosphere</title>
@@ -425,7 +425,7 @@
     <category term="Education and workforce"/>
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters — Closes 2026-11-06 — The close date above is the date for the Step-2 proposal due date. The Step-1 proposal due date is September 4, 2026. Step-2 proposals cannot be submitted if a Step-1 proposal was not submitted. NOTICE: Amended July 20, 2026. This amendment adds this new program element to ROSES-2025. This element uses a two-step proposal process (Section 4). Step-1 proposals are due by September 4, 2026, and Step…</summary>
+    <summary>NASA Headquarters — Closes 2026-11-06 — The close date above is the date for the Step-2 proposal due date. The Step-1 proposal due date is September 4, 2026. Step-2 proposals cannot be submitted if a Step-1 proposal was not submitted. ﻿NOTICE: August 4, 2026. Going forward, a $0.09/SBU charge now applies to all proposing to Earth Science (ROSES Appendix A) to use any NASA high-end computing resource. Proposers must account for this in t…</summary>
   </entry>
   <entry>
     <title>Healthy Homes Production Grant Program</title>
@@ -448,7 +448,7 @@
     <category term="Education and workforce"/>
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters — Closes 2026-10-15 — NOTICE: July 28, 2026. A set of slides describing the Application Readiness Levels (ARLs) has been posted under "other documents" on the NSPIRES page for this program element. Text regarding ARLs has been added to a few locations in Section 2 and a row has been added to the Summary Table of Key information in Section 4. New Text is in bold and deleted text is struck through. We anticipate posting …</summary>
+    <summary>NASA Headquarters — Closes 2026-10-15 — NOTICE: August 4, 2026. Going forward, a $0.09/SBU charge now applies to all proposing to Earth Science (ROSES Appendix A) to use any NASA high-end computing resource. Proposers must account for this in their budget, per the instructions provided in Section 7.3 of ROSES-25 A.1 Earth Science Research Overview. NOTICE: July 28, 2026. A set of slides describing the Application Readiness Levels (ARLs)…</summary>
   </entry>
   <entry>
     <title>Syria Annual Program Statement</title>

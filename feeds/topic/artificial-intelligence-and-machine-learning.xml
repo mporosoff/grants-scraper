@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-08-04T12:23:31Z</updated>
+  <updated>2026-08-05T12:17:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
@@ -92,6 +92,16 @@
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health — Closes 2026-10-06 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that develop or incorporate novel, cutting-edge study designs/methods/analytic approaches through the use of machine learning, artificial intelligence, and adaptive designs to allow the discovery of health/function profiles at the level of the individual and that could lead to th…</summary>
+  </entry>
+  <entry>
+    <title>DRL FY 2025 China Programs</title>
+    <link href="https://www.grants.gov/search-results-detail/363456"/>
+    <id>urn:funding-finder:grants-gov:363456</id>
+    <updated>2026-08-04T00:00:00Z</updated>
+    <author><name>Bureau of Democracy Human Rights and Labor</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Bureau of Democracy Human Rights and Labor — Closes 2026-08-31 — Significant human rights abuses including genocide and crimes against humanity in Xinjiang are ongoing in China, with global implications. As the State Department’s annual Human Rights Reports repeatedly document, there are widespread and credible reports of offenses ranging from genocide and grave human rights abuses to serious restrictions on freedom of expression and access to information; arbi…</summary>
   </entry>
   <entry>
     <title>Innovative Traffic Safety Enforcement (ITSE) Grant Program</title>
@@ -406,7 +416,7 @@
     <category term="Education and workforce"/>
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters — Closes 2026-10-20 — PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by 8/20/2026. See the full posting on NSPIRES for details. NOTICE: July 30, 2026. An erroneous reference in Section 4.1 to was corrected to refer to Section 4.2 regarding Sub-element of relevance. Section 4.3.3 "Use of Generative AI" was added. On the NSPIRES cover page, the NOI Program Specific Data Cover Page El…</summary>
+    <summary>NASA Headquarters — Closes 2026-10-20 — PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by 8/20/2026. See the full posting on NSPIRES for details. ﻿NOTICE: August 4, 2026. Going forward, a $0.09/SBU charge now applies to all proposing to Earth Science (ROSES Appendix A) to use any NASA high-end computing resource. Proposers must account for this in their budget, per the instructions provided in Secti…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 Next Generation Warning System Grant Program</title>
@@ -751,19 +761,5 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Arts and culture"/>
     <summary>National Institutes of Health — Closes 2026-10-19 — The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
-  </entry>
-  <entry>
-    <title>Creative Industries Film Lab and Residency - American Film Showcase 2026</title>
-    <link href="https://www.grants.gov/search-results-detail/362939"/>
-    <id>urn:funding-finder:grants-gov:362939</id>
-    <updated>2026-06-24T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Indonesia — Closes 2026-08-07 — Project Background, Goals, and ObjectivesThe Creative Industries Film Lab and Residency – American Film Showcase 2026 is a five-day public diplomacy program aligned with the American Film Showcase 2026 Envoy visit and scheduled during the Jogja-NETPAC Asian Film Festival Market 2026. The program includes two main components: Exhibition Booth: In partnership with Jogja-NETPAC, the program will secu…</summary>
   </entry>
 </feed>

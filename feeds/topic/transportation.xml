@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-08-04T12:23:31Z</updated>
+  <updated>2026-08-05T12:17:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Core State Injury Prevention Program (Core SIPP)</title>
@@ -462,17 +462,6 @@
     <summary>Administration for Children and Families - ACYF/CB — Closes 2026-08-17 — Despite expanded authority under the Family First Prevention Services Act, title IV-E prevention services account for less than 2% of total program claims. Many title IV-E agencies face implementation barriers including limited infrastructure, provider readiness, evaluation capacity, and complex claiming requirements.To overcome these barriers, the Children's Bureau will fund projects to accelerat…</summary>
   </entry>
   <entry>
-    <title>Tribal Personal Responsibility Education Program (Tribal PREP)</title>
-    <link href="https://www.grants.gov/search-results-detail/361987"/>
-    <id>urn:funding-finder:grants-gov:361987</id>
-    <updated>2026-07-17T00:00:00Z</updated>
-    <author><name>Administration for Children &amp; Families - ACYF/FYSB</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <summary>Administration for Children &amp; Families - ACYF/FYSB — Closes 2026-08-17 — Tribal PREP competitively funds projects that educate American Indian/Alaska Native (AI/AN) youth ages 10-19, and expectant and parenting youth under age 21, on both abstinence and contraception for the prevention of pregnancy, sexually transmitted infections (STIs), and HIV and promote successful transition of youth to adulthood through education on key adulthood preparation subjects (APS). Proje…</summary>
-  </entry>
-  <entry>
     <title>National Estuarine Research Reserve System (NERRS) Land Acquisition and Construction Program for Fiscal Year 2026</title>
     <link href="https://www.grants.gov/search-results-detail/363229"/>
     <id>urn:funding-finder:grants-gov:363229</id>
@@ -673,5 +662,14 @@
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Transportation"/>
     <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-18 — Summary: The fiscal year 2026 (FY26) Duchenne Muscular Dystrophy Research Program (DMDRP) Clinical/Translational Research Award (CTRA) supports advanced translational research to accelerate promising ideas in Duchenne muscular dystrophy (DMD) research toward clinical applications. Research must address at least one of the FY26 CTRA Focus Areas. Research projects investigating therapies that will b…</summary>
+  </entry>
+  <entry>
+    <title>DoW Duchenne Muscular Dystrophy, Idea Development Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362848"/>
+    <id>urn:funding-finder:grants-gov:362848</id>
+    <updated>2026-06-17T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Transportation"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-18 — Summary: The fiscal year 2026 (FY26) Duchenne Muscular Dystrophy Research Program (DMDRP) Idea Development Award (IDA) promotes new ideas that are still in the early stages of development and have the potential to yield impactful data and new avenues of investigation. This award supports impactful, high-risk/high-reward research that could lead to critical discoveries or major advancements that wi…</summary>
   </entry>
 </feed>
