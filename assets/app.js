@@ -9,6 +9,9 @@
   const MAX_CHAT_RESULTS = 20;
   const MAX_PROFILE_TERMS = 28;
   const MAX_AI_CV_CHARS = 12_000;
+  const NEW_RELEVANT_MAX_AGE_DAYS = 14;
+  const NEW_RELEVANT_MIN_SCORE_RATIO = .2;
+  const NEW_RELEVANT_MIN_BOOST = 8;
   const PROMPT_VERSION = "result-aware-chat-v1";
   const APP_VERSION = "layout-ai-recovery-v1";
   const CANONICAL_URL = "https://mporosoff.github.io/grants-scraper/";
@@ -234,6 +237,42 @@
     ].join("-");
   }
 
+  function isoDateOrdinal(value) {
+    const match = String(value || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (!match) return null;
+    const year = Number(match[1]);
+    const month = Number(match[2]);
+    const day = Number(match[3]);
+    const ordinal = Math.floor(Date.UTC(year, month - 1, day) / 86_400_000);
+    const parsed = new Date(ordinal * 86_400_000);
+    return parsed.getUTCFullYear() === year
+      && parsed.getUTCMonth() + 1 === month
+      && parsed.getUTCDate() === day
+      ? ordinal
+      : null;
+  }
+
+  function announcementAgeDays(record, asOf = runtimeDateIso()) {
+    const announced = isoDateOrdinal(
+      record.posted_date || record.source_first_seen_date,
+    );
+    const current = isoDateOrdinal(asOf);
+    if (announced == null || current == null || announced > current) return null;
+    return current - announced;
+  }
+
+  function newRelevantBoost(record, score, peakScore, asOf = runtimeDateIso()) {
+    if (!(score > 0) || !(peakScore > 0)) return 0;
+    if (score < peakScore * NEW_RELEVANT_MIN_SCORE_RATIO) return 0;
+    const age = announcementAgeDays(record, asOf);
+    if (age == null || age > NEW_RELEVANT_MAX_AGE_DAYS) return 0;
+    const freshness = 1 - (age / (NEW_RELEVANT_MAX_AGE_DAYS + 1));
+    return peakScore + Math.max(
+      NEW_RELEVANT_MIN_BOOST,
+      peakScore * .15 * freshness,
+    );
+  }
+
   function nonFundingReason(record) {
     const title = String(record.title || "").trim();
     if (/^(?:[A-Z0-9_.-]+\s+)?(?:notice of intent\b|request for information\b|rfi\s*[-:])/i.test(title)) {
@@ -374,57 +413,31 @@
     return { ...contact, label, detail: detail || "Check official notice" };
   }
 
+  function programContactAction(record) {
+    const contact = primaryContact(record);
+    const phone = String(contact.phone || "").replace(/[^\d+]/g, "");
+    const label = contact.name || contact.email || contact.phone || "program contact";
+    const subject = encodeURIComponent(
+      `Question about ${record.opportunity_number || record.title}`,
+    );
+    const href = contact.email
+      ? `mailto:${contact.email}?subject=${subject}`
+      : phone
+        ? `tel:${phone}`
+        : "";
+    if (!href) return "";
+    const title = [label, contact.role, contact.email || contact.phone]
+      .filter(Boolean)
+      .join(" · ");
+    const ariaLabel = contact.email ? `Email ${label}` : `Call ${label}`;
+    return `<a class="source-action" href="${escapeAttribute(href)}" aria-label="${escapeAttribute(ariaLabel)}" title="${escapeAttribute(title)}">Program contact</a>`;
+  }
+
   function daysUntil(value) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(String(value || ""))) return null;
     const today = new Date(`${runtimeDateIso()}T12:00:00`);
     const target = new Date(`${value}T12:00:00`);
     return Math.ceil((target.getTime() - today.getTime()) / 86_400_000);
-  }
-
-  function whyMatched(record) {
-    const reasons = [];
-    const queryTerms = [...new Set(tokenize(state.query))];
-    const rawQueryTerms = String(state.query || "").toLowerCase()
-      .match(/[a-z0-9][a-z0-9+.-]{1,}/g) || [];
-    const displayTerm = term =>
-      rawQueryTerms.find(raw => normalizeToken(raw) === term) || term;
-    const titleTokens = new Set(tokenize(record.title));
-    const titleHits = queryTerms.filter(term => titleTokens.has(term)).slice(0, 3);
-    if (titleHits.length) {
-      reasons.push(`Title matches ${titleHits.map(displayTerm).join(", ")}`);
-    }
-
-    const topicText = [
-      ...(record.topic_areas || []),
-      ...(record.disciplines || []),
-      record.description || "",
-    ].join(" ");
-    const topicTokens = new Set(tokenize(topicText));
-    const topicHits = queryTerms.filter(term => topicTokens.has(term) && !titleHits.includes(term)).slice(0, 3);
-    if (topicHits.length) {
-      reasons.push(
-        `Topic/synopsis matches ${topicHits.map(displayTerm).join(", ")}`
-      );
-    }
-
-    const selected = [];
-    for (const [name, values] of Object.entries(state.filters)) {
-      if (values.size && intersects(record[FACETS[name].recordField], values)) {
-        selected.push(name.replaceAll("_", " "));
-      }
-    }
-    if (selected.length) reasons.push(`Matches selected ${selected.slice(0, 2).join(" and ")}`);
-    if (state.profile.active) reasons.push("Matches terms in your active profile");
-    if (state.personalize && state.preferenceModel) reasons.push(preferenceReason(record));
-    return reasons.slice(0, 3);
-  }
-
-  function matchExplanation(record) {
-    const reasons = whyMatched(record);
-    if (!reasons.length) return "";
-    return `<div class="match-explanation"><strong>Why this matched</strong><ul>${
-      reasons.map(reason => `<li>${escapeHtml(reason)}</li>`).join("")
-    }</ul></div>`;
   }
 
   function deadlineEvidenceLabel(record) {
@@ -912,15 +925,6 @@
       : `${used} local ratings ready; turn this on to personalize.`;
   }
 
-  function preferenceReason(record) {
-    const why = state.preferenceModel
-      ? PREFERENCES_API.explain(record, state.preferenceModel)
-      : null;
-    return why
-      ? `Similar to opportunities you rated highly (${why.value})`
-      : "Based on your ratings on this device";
-  }
-
   function computeMatches(query, sortMode = state.sort) {
     const direct = bm25Scores(query);
     const profiled = state.profile.active
@@ -947,6 +951,21 @@
       }
       matches.push({ index, score });
     });
+    if (hasTerms || model) {
+      const peakScore = matches.reduce(
+        (maximum, match) => Math.max(maximum, match.score),
+        0,
+      );
+      matches.forEach(match => {
+        const boost = newRelevantBoost(
+          catalog.opportunities[match.index],
+          match.score,
+          peakScore,
+        );
+        match.score += boost;
+        match.newRelevant = boost > 0;
+      });
+    }
     return {
       matches: sortMatches(matches, hasTerms, sortMode, Boolean(model)),
       hasTerms,
@@ -1370,25 +1389,6 @@
     </aside>`;
   }
 
-  function evidenceSummary(record) {
-    const evidence = record.document_evidence;
-    if (!evidence || record.document_evidence_status !== "current") return "";
-    const facts = evidenceFacts(record);
-    const document = evidence.document || {};
-    const reviewCount = (evidence.review_queue || []).length;
-    return `<div class="evidence-summary">
-      <div>
-        <span class="evidence-kicker">Official notice analyzed</span>
-        <strong>${facts.length.toLocaleString()} cited ${facts.length === 1 ? "fact" : "facts"} · document v${Number(document.version || 1)}</strong>
-        <small>${reviewCount ? `${reviewCount} item${reviewCount === 1 ? "" : "s"} queued for verification` : "No automatic conflict signal"}</small>
-      </div>
-      <div class="evidence-summary-actions">
-        <button class="text-button" type="button" data-open-evidence>View citations</button>
-        <button class="text-button" type="button" data-chat-record="${escapeAttribute(recordId(record))}">Ask AI</button>
-      </div>
-    </div>`;
-  }
-
   function evidenceRows(record) {
     const evidence = record.document_evidence;
     if (!evidence || record.document_evidence_status !== "current") {
@@ -1467,7 +1467,7 @@
         : `No primary FOA attachment was identified automatically; use the official ${recordSourceName} record.`;
     return {
       url: primaryDocument || agencyNotice || grantsRecord,
-      html: `<div class="source-actions">${links.join("")}</div>`,
+      html: links.join(""),
       note,
     };
   }
@@ -1545,7 +1545,6 @@
         : "",
       record.limited_submission ? `<span class="badge warning">Potential limited submission</span>` : "",
       record.cost_share_required === true ? `<span class="badge warning">Cost share</span>` : "",
-      record.status_verification_required ? `<span class="badge warning">Verify current status</span>` : "",
       record.deadline_conflict ? `<span class="badge warning">Deadline conflict</span>` : "",
       record.award_conflicts ? `<span class="badge warning">Funding conflict</span>` : "",
       (record.document_status_signals || []).some(value => ["cancelled", "superseded"].includes(value))
@@ -1557,10 +1556,6 @@
         ? `<span class="badge warning">Closing in ${daysUntil(record.close_date)} days</span>`
         : "",
     ].filter(Boolean).join("");
-    const prioritized = state.personalize && state.preferenceModel
-      && PREFERENCES_API.factor(record, state.preferenceModel) > 0.05
-      ? `<span class="badge prioritized" title="${escapeAttribute(preferenceReason(record))}">Prioritized from your ratings</span>`
-      : "";
     const aiBlock = assessment
       ? `<div class="ai-rationale"><strong>${escapeHtml(assessment.verdict || "AI match")} · ${Number(assessment.score || 0)}/100</strong> ${escapeHtml(assessment.reason || "")}${assessment.concern ? `<span class="ai-concern"><strong>Check:</strong> ${escapeHtml(assessment.concern)}</span>` : ""}</div>`
       : "";
@@ -1574,6 +1569,11 @@
     const contactHref = contact.email
       ? `mailto:${contact.email}?subject=${encodeURIComponent(`Question about ${record.opportunity_number || record.title}`)}`
       : "";
+    const contactAction = programContactAction(record);
+    const hasCitations = Boolean(
+      record.document_evidence
+      && record.document_evidence_status === "current",
+    );
     const compared = state.compareIds.has(id);
 
     return `<article class="result-card${assessment ? " ai-match" : ""}" data-opportunity-id="${escapeAttribute(id)}" tabindex="-1">
@@ -1582,7 +1582,6 @@
         <span class="badge ${record.status === "posted" ? "open" : "forecasted"}">${record.status === "posted" ? "Open" : "Forecasted"}</span>
         ${assessment ? `<span class="badge ai">AI shortlist</span>` : ""}
         ${candidateReview && !assessment ? `<span class="badge candidate">Retrieved candidate</span>` : ""}
-        ${prioritized}
         <span class="opportunity-number">${escapeHtml(record.opportunity_number || record.opportunity_id || "")}</span>
         <button type="button" class="save-button${state.savedIds.has(id) ? " saved" : ""}" data-save="${escapeAttribute(id)}" aria-pressed="${state.savedIds.has(id)}" title="${state.savedIds.has(id) ? "Saved on this device — select to remove" : "Save this opportunity to view later"}">${state.savedIds.has(id) ? "★ Saved" : "☆ Save"}</button>
       </div>
@@ -1595,24 +1594,18 @@
         <div class="key-fact"><span>Per-award amount</span><strong>${escapeHtml(perAward)}</strong><small>${record.total_program_funding ? `Program total ${escapeHtml(programFunding)}` : escapeHtml(fundingEvidenceLabel(record))}</small></div>
         <div class="key-fact"><span>Eligibility</span><strong>${escapeHtml(overviewEligibility)}</strong><small>Confirm in official notice</small></div>
       </div>
-      <div class="card-contact"><span>Program contact</span><strong>${contactHref ? `<a href="${escapeAttribute(contactHref)}">${escapeHtml(contact.label)}</a>` : escapeHtml(contact.label)}</strong><small>${escapeHtml(contact.detail)}</small></div>
-      ${matchExplanation(record)}
-      ${evidenceSummary(record)}
       ${aiBlock}
       <p class="description">${escapeHtml(truncate(record.description, 300) || "No synopsis was included in the extract.")}</p>
       ${tags ? `<div class="tag-row">${tags}</div>` : ""}
       <div class="card-actions">
         ${actions.html}
-        <div class="result-utility-actions">
-          <button type="button" class="source-action" data-calendar="${escapeAttribute(id)}"${record.close_date ? "" : " disabled"}>Add to calendar</button>
-          <button type="button" class="source-action${compared ? " selected" : ""}" data-compare="${escapeAttribute(id)}" aria-pressed="${compared}">${compared ? "✓ Comparing" : "Compare"}</button>
-        </div>
+        ${hasCitations ? `<button class="source-action" type="button" data-open-evidence>View citations</button>` : ""}
+        <button class="source-action" type="button" data-chat-record="${escapeAttribute(id)}">Ask AI</button>
+        ${contactAction}
+        <button type="button" class="source-action" data-calendar="${escapeAttribute(id)}"${record.close_date ? "" : " disabled"}>Add to calendar</button>
+        <button type="button" class="source-action${compared ? " selected" : ""}" data-compare="${escapeAttribute(id)}" aria-pressed="${compared}">${compared ? "✓ Comparing" : "Compare"}</button>
       </div>
       ${sourceReviewControls(record)}
-      <details class="result-feedback-toggle">
-        <summary>Rate this result</summary>
-        ${feedbackControls(record)}
-      </details>
       <details class="record-details">
         <summary>View cited evidence, eligibility, and full details</summary>
         <div class="details-body">
@@ -1640,6 +1633,10 @@
           ${record.preliminary_deadline_text ? `<p class="description"><strong>Potential preliminary deadline:</strong> ${escapeHtml(record.preliminary_deadline_text)} <em>Machine extracted; verify in the official notice.</em></p>` : ""}
           <div class="full-description">${structuredDescription(record.description)}</div>
         </div>
+      </details>
+      <details class="result-feedback-toggle">
+        <summary>Rate this result</summary>
+        ${feedbackControls(record)}
       </details>
     </article>`;
   }

@@ -6,6 +6,7 @@ by reusing the real ``build_search_index`` and mirroring ``bm25Scores``.
 
 import unittest
 from datetime import date
+from unittest.mock import patch
 
 from scripts import build_catalog
 from scripts.alert_match import (
@@ -85,6 +86,66 @@ class MatcherTests(unittest.TestCase):
         results = search_catalog(self.catalog, "catalysis", as_of=self.as_of)
         self.assertTrue(results)
         self.assertEqual(results[0]["opportunity_id"], "1")
+
+    def test_new_relevant_announcement_outranks_stronger_old_match(self):
+        old = _base(
+            opportunity_id="old",
+            title="Established catalysis program",
+            posted_date="2026-05-01",
+        )
+        new = _base(
+            opportunity_id="new",
+            title="New catalysis announcement",
+            posted_date="2026-07-25",
+        )
+        catalog = make_catalog([old, new])
+        with patch(
+            "scripts.alert_match.bm25_scores",
+            return_value=([100.0, 25.0], True),
+        ):
+            results = search_catalog(catalog, "catalysis", as_of=self.as_of)
+        self.assertEqual([item["opportunity_id"] for item in results], ["new", "old"])
+
+    def test_weak_new_match_does_not_hijack_relevance(self):
+        old = _base(
+            opportunity_id="old",
+            title="Established catalysis program",
+            posted_date="2026-05-01",
+        )
+        weak_new = _base(
+            opportunity_id="weak-new",
+            title="Marginally related new announcement",
+            posted_date="2026-07-25",
+        )
+        catalog = make_catalog([old, weak_new])
+        with patch(
+            "scripts.alert_match.bm25_scores",
+            return_value=([100.0, 19.9], True),
+        ):
+            results = search_catalog(catalog, "catalysis", as_of=self.as_of)
+        self.assertEqual([item["opportunity_id"] for item in results], ["old", "weak-new"])
+
+    def test_new_relevance_priority_expires_after_two_weeks(self):
+        old = _base(
+            opportunity_id="old",
+            title="Established catalysis program",
+            posted_date="2026-05-01",
+        )
+        no_longer_new = _base(
+            opportunity_id="fifteen-days-old",
+            title="Recent catalysis announcement",
+            posted_date="2026-07-10",
+        )
+        catalog = make_catalog([old, no_longer_new])
+        with patch(
+            "scripts.alert_match.bm25_scores",
+            return_value=([100.0, 25.0], True),
+        ):
+            results = search_catalog(catalog, "catalysis", as_of=self.as_of)
+        self.assertEqual(
+            [item["opportunity_id"] for item in results],
+            ["old", "fifteen-days-old"],
+        )
 
     def test_query_excludes_nonmatching(self):
         ids = {r["opportunity_id"] for r in search_catalog(self.catalog, "catalysis", as_of=self.as_of)}

@@ -5,9 +5,10 @@ The browser application ranks a search with a BM25 index that is *prebuilt* by
 search rank the *same* way in an email digest as it does on the site, this
 module reuses that same prebuilt index and the same tokenizer, and mirrors the
 browser scorer in ``assets/app.js`` (``bm25Scores``) term for term -- including
-prefix expansion and the title/opportunity-number phrase boosts. It also applies
-the same facet filters the UI exposes and provides a "new since" helper so a
-digest can surface only opportunities posted since the subscriber's last email.
+prefix expansion, title/opportunity-number phrase boosts, and the guarded
+new-relevant priority boost. It also applies the same facet filters the UI
+exposes and provides a "new since" helper so a digest can surface only
+opportunities posted since the subscriber's last email.
 
 Pure standard library; no third-party dependencies. Import path:
     from scripts.alert_match import load_catalog, search_catalog, is_new_since
@@ -38,6 +39,9 @@ FACET_FIELDS: dict[str, str] = {
 
 _K1 = 1.2
 _B = 0.75
+NEW_RELEVANT_MAX_AGE_DAYS = 14
+NEW_RELEVANT_MIN_SCORE_RATIO = 0.2
+NEW_RELEVANT_MIN_BOOST = 8.0
 
 
 def load_catalog(path: str | Path) -> dict:
@@ -144,6 +148,43 @@ def _recency_ordinal(record: dict) -> int:
     return d.toordinal() if d else 0
 
 
+def announcement_age_days(record: dict, as_of: date) -> int | None:
+    """Return the age of a newly discoverable announcement, if known."""
+    announced = parse_date(record.get("posted_date")) or parse_date(
+        record.get("source_first_seen_date")
+    )
+    if announced is None or announced > as_of:
+        return None
+    return (as_of - announced).days
+
+
+def new_relevant_boost(
+    record: dict,
+    score: float,
+    peak_score: float,
+    as_of: date,
+) -> float:
+    """Prioritize a recent record only when it has credible base relevance.
+
+    Records posted in the last two weeks must first reach 20% of the strongest
+    pre-boost match. Qualifying records receive a boost larger than the peak
+    base score, so they appear ahead of older matches while weakly related new
+    records remain in their ordinary relevance position.
+    """
+    if score <= 0 or peak_score <= 0:
+        return 0.0
+    if score < peak_score * NEW_RELEVANT_MIN_SCORE_RATIO:
+        return 0.0
+    age = announcement_age_days(record, as_of)
+    if age is None or age > NEW_RELEVANT_MAX_AGE_DAYS:
+        return 0.0
+    freshness = 1 - (age / (NEW_RELEVANT_MAX_AGE_DAYS + 1))
+    return peak_score + max(
+        NEW_RELEVANT_MIN_BOOST,
+        peak_score * 0.15 * freshness,
+    )
+
+
 def is_new_since(record: dict, since: date) -> bool:
     """True if a record became discoverable on or after a date watermark.
 
@@ -188,6 +229,18 @@ def search_catalog(
         if has_terms and scores[i] <= 0:
             continue
         ranked.append((scores[i], _recency_ordinal(record), record))
+
+    if has_terms and ranked:
+        peak_score = max(score for score, _, _ in ranked)
+        ranking_date = as_of or date.today()
+        ranked = [
+            (
+                score + new_relevant_boost(record, score, peak_score, ranking_date),
+                recency,
+                record,
+            )
+            for score, recency, record in ranked
+        ]
 
     ranked.sort(key=lambda item: (-item[0], -item[1], (item[2].get("title") or "")))
     results = [record for _, _, record in ranked]

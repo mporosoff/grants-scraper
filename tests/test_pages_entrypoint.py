@@ -79,7 +79,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             '<script src="./data/opportunities.js?v=catalog-',
             explorer_html,
         )
-        release_version = "release-2026-08-05-v2"
+        release_version = "release-2026-08-06-v1"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={release_version}">',
             explorer_html,
@@ -95,6 +95,12 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("globalThis.GRANT_CATALOG", application_js)
         self.assertIn("MAX_AI_CANDIDATES = 32", application_js)
         self.assertIn("MAX_CHAT_RESULTS = 20", application_js)
+        self.assertIn("NEW_RELEVANT_MAX_AGE_DAYS = 14", application_js)
+        self.assertIn("NEW_RELEVANT_MIN_SCORE_RATIO = .2", application_js)
+        self.assertIn("function announcementAgeDays", application_js)
+        self.assertIn("function newRelevantBoost", application_js)
+        self.assertIn("const boost = newRelevantBoost", application_js)
+        self.assertIn("match.newRelevant = boost > 0", application_js)
         self.assertIn("async function askResults", application_js)
         self.assertIn("referenced_result_ids", application_js)
         self.assertIn("focus_result_ids", application_js)
@@ -119,6 +125,10 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("function renderSaved", application_js)
         self.assertIn("function exportEvaluation", application_js)
         self.assertIn("function evidenceRows", application_js)
+        self.assertIn("function programContactAction", application_js)
+        self.assertIn("data-open-evidence>View citations", application_js)
+        self.assertIn(">Ask AI</button>", application_js)
+        self.assertIn(">Program contact</a>", application_js)
         self.assertIn("function amendmentOverview", application_js)
         self.assertIn("function amendmentNotice", application_js)
         self.assertIn("function structuredDescription", application_js)
@@ -126,8 +136,19 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("Summary of changes:", application_js)
         self.assertIn(".amendment-notice", application_css)
         self.assertIn(".result-feedback-toggle", application_css)
+        self.assertLess(
+            application_js.index('<details class="record-details">'),
+            application_js.index('<details class="result-feedback-toggle">'),
+        )
         self.assertIn(".full-description p", application_css)
         self.assertIn(".full-description li + li", application_css)
+        self.assertNotIn("Prioritized from your ratings", application_js)
+        self.assertNotIn("Verify current status", application_js)
+        self.assertNotIn("Why this matched", application_js)
+        self.assertNotIn("Official notice analyzed", application_js)
+        self.assertNotIn(".card-contact", application_css)
+        self.assertNotIn(".match-explanation", application_css)
+        self.assertNotIn(".evidence-summary", application_css)
         self.assertIn("function sendDeploymentReview", application_js)
         self.assertIn("citation_evidence_ids", application_js)
         self.assertIn("globalThis.FUNDING_REVIEW", review_js)

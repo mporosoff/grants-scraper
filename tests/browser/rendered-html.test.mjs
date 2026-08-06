@@ -72,13 +72,21 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(script, /profileContext\(\{ includeCv: true \}\)/);
   assert.match(script, /function exportEvaluation/);
   assert.match(script, /function recordIsCurrent/);
+  assert.match(script, /NEW_RELEVANT_MAX_AGE_DAYS = 14/);
+  assert.match(script, /NEW_RELEVANT_MIN_SCORE_RATIO = \.2/);
+  assert.match(script, /function announcementAgeDays/);
+  assert.match(script, /function newRelevantBoost/);
+  assert.match(script, /const boost = newRelevantBoost/);
+  assert.match(script, /match\.newRelevant = boost > 0/);
   assert.match(script, /function paginationItems/);
   assert.match(script, /function goToResultsPage/);
   assert.match(script, /data-page=/);
   assert.match(script, /function exportCalendar/);
   assert.match(script, /function renderComparePanel/);
-  assert.match(script, /Why this matched/);
   assert.match(script, /Program contact/);
+  assert.match(script, /function programContactAction/);
+  assert.match(script, /data-open-evidence>View citations/);
+  assert.match(script, /data-chat-record=.*?>Ask AI/);
   assert.match(script, /function amendmentOverview/);
   assert.match(script, /function amendmentNotice/);
   assert.match(script, /function structuredDescription/);
@@ -92,11 +100,21 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(css, /\.page-number\[aria-current="page"\]/);
   assert.match(css, /\.result-card:nth-child\(even\)/);
   assert.match(css, /\.amendment-notice/);
-  assert.match(css, /\.card-contact/);
   assert.match(css, /\.card-actions/);
+  assert.match(css, /\.source-action\.primary/);
   assert.match(css, /\.result-feedback-toggle/);
+  assert.ok(
+    script.indexOf('<details class="record-details">')
+      < script.indexOf('<details class="result-feedback-toggle">'),
+    "cited details should appear before the final rating control",
+  );
   assert.match(css, /\.full-description p/);
   assert.match(css, /\.full-description li \+ li/);
+  assert.doesNotMatch(script, /Prioritized from your ratings/);
+  assert.doesNotMatch(script, /Verify current status/);
+  assert.doesNotMatch(script, /Why this matched/);
+  assert.doesNotMatch(script, /Official notice analyzed/);
+  assert.doesNotMatch(css, /\.card-contact|\.match-explanation|\.evidence-summary/);
   assert.doesNotMatch(script, />FOA changed</);
   assert.match(script, /AI retrieval candidate set/);
   assert.match(script, /result-label/);
