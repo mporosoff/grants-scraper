@@ -236,7 +236,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertNotIn("https://ur-grant-matcher.zing78.chatgpt.site", docs)
         self.assertNotIn("saved searches in the browser", docs)
 
-    def test_pages_deployment_uses_current_actions_and_extended_timeout(self):
+    def test_pages_deployment_uses_current_actions_and_curated_artifact(self):
         workflow = (
             REPOSITORY_ROOT
             / ".github"
@@ -248,8 +248,12 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("actions/configure-pages@v6", workflow)
         self.assertIn("actions/upload-pages-artifact@v5", workflow)
         self.assertIn("actions/deploy-pages@v5", workflow)
-        self.assertIn('timeout: "1800000"', workflow)
-        self.assertIn("timeout-minutes: 35", workflow)
+        self.assertIn("cp index.html match_explorer.html .nojekyll _site/", workflow)
+        self.assertIn("cp -R assets feeds _site/", workflow)
+        self.assertIn("cp data/opportunities.js _site/data/", workflow)
+        self.assertIn('path: "./_site"', workflow)
+        self.assertNotIn('path: "."', workflow)
+        self.assertIn("timeout-minutes: 15", workflow)
         self.assertIn("pages: write", workflow)
         self.assertIn("id-token: write", workflow)
 
