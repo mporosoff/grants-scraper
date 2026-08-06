@@ -44,7 +44,10 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(prototype, /id="ai-refine"/);
   assert.match(prototype, /id="chat-form"/);
   assert.match(prototype, /id="chat-thinking"/);
+  assert.match(prototype, /id="open-results-chat"/);
   assert.match(prototype, /id="toggle-chat-size"/);
+  assert.match(prototype, /role="dialog" aria-modal="true"/);
+  assert.doesNotMatch(prototype, /Open larger chat/);
   assert.match(prototype, /id="chat-submit"/);
   assert.match(prototype, /Enter to send/);
   assert.match(prototype, /id="result-label"/);
@@ -122,6 +125,9 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(script, /MAX_CHAT_RESULTS = 20/);
   assert.match(script, /async function refineWithAi/);
   assert.match(script, /async function askResults/);
+  assert.match(script, /\$\("open-results-chat"\)\.addEventListener\("click", openExpandedChat\)/);
+  assert.match(script, /\$\("result-assistant"\)\.classList\.remove\("hidden"\)/);
+  assert.match(script, /\$\("result-assistant"\)\?\.classList\.add\("hidden"\)/);
   assert.match(script, /referenced_result_ids/);
   assert.match(script, /focus_result_ids/);
   assert.match(script, /data-chat-jump/);

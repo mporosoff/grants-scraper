@@ -71,7 +71,10 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn('<section class="chat" id="chat"', explorer_html)
         self.assertIn("Chat with your results", explorer_html)
         self.assertIn('id="chat-thinking"', explorer_html)
+        self.assertIn('id="open-results-chat"', explorer_html)
         self.assertIn('id="toggle-chat-size"', explorer_html)
+        self.assertIn('role="dialog" aria-modal="true"', explorer_html)
+        self.assertNotIn("Open larger chat", explorer_html)
         self.assertIn("Enter to send", explorer_html)
         self.assertIn("Export CSV", explorer_html)
         self.assertIn('id="result-label"', explorer_html)
@@ -79,7 +82,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             '<script src="./data/opportunities.js?v=catalog-',
             explorer_html,
         )
-        release_version = "release-2026-08-06-v1"
+        release_version = "release-2026-08-06-v2"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={release_version}">',
             explorer_html,
@@ -102,6 +105,9 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("const boost = newRelevantBoost", application_js)
         self.assertIn("match.newRelevant = boost > 0", application_js)
         self.assertIn("async function askResults", application_js)
+        self.assertIn('$("open-results-chat").addEventListener("click", openExpandedChat)', application_js)
+        self.assertIn('$("result-assistant").classList.remove("hidden")', application_js)
+        self.assertIn('$("result-assistant")?.classList.add("hidden")', application_js)
         self.assertIn("referenced_result_ids", application_js)
         self.assertIn("focus_result_ids", application_js)
         self.assertIn("renderRichText", chat_ui_js)

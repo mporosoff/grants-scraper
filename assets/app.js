@@ -146,6 +146,7 @@
       model: "",
     },
   };
+  let chatReturnFocus = null;
 
   function escapeHtml(value) {
     return String(value ?? "")
@@ -2375,8 +2376,9 @@
       $("pagination").classList.add("hidden");
       $("export-csv").disabled = true;
       $("export-ics").disabled = true;
+      $("open-results-chat").disabled = true;
       $("ai-refine").disabled = true;
-      $("result-assistant").classList.add("hidden");
+      closeExpandedChat({ restoreFocus: false });
       renderComparePanel();
       renderExploration();
       renderDeploymentReview();
@@ -2808,10 +2810,11 @@
 
   function renderChat() {
     const contextIds = currentChatIds();
-    $("result-assistant").classList.toggle(
-      "hidden",
-      !state.searched || !contextIds.length,
-    );
+    const canChat = state.searched && Boolean(contextIds.length);
+    $("open-results-chat").disabled = !canChat;
+    if (!canChat && document.body.classList.contains("chat-expanded")) {
+      closeExpandedChat({ restoreFocus: false });
+    }
     const suggestions = state.ai.active && state.ai.suggestions.length
       ? state.ai.suggestions
       : DEFAULT_CHAT_SUGGESTIONS;
@@ -2870,22 +2873,32 @@
   }
 
   function openExpandedChat() {
+    if (!state.searched || !currentChatIds().length) return;
+    chatReturnFocus = document.activeElement;
+    $("result-assistant").classList.remove("hidden");
     document.documentElement.classList.add("chat-expanded");
     document.body.classList.add("chat-expanded");
-    $("toggle-chat-size").setAttribute("aria-expanded", "true");
-    $("toggle-chat-size").textContent = "Close larger chat";
+    $("open-results-chat").setAttribute("aria-expanded", "true");
     const messages = $("chat-messages");
     messages.scrollTop = messages.scrollHeight;
     $("chat-input").focus();
   }
 
-  function closeExpandedChat() {
+  function closeExpandedChat({ restoreFocus = true } = {}) {
+    const wasExpanded = document.body.classList.contains("chat-expanded");
     document.documentElement.classList.remove("chat-expanded");
     document.body.classList.remove("chat-expanded");
-    $("toggle-chat-size")?.setAttribute("aria-expanded", "false");
-    if ($("toggle-chat-size")) {
-      $("toggle-chat-size").textContent = "Open larger chat";
+    $("result-assistant")?.classList.add("hidden");
+    $("open-results-chat")?.setAttribute("aria-expanded", "false");
+    if (restoreFocus && wasExpanded) {
+      const target = chatReturnFocus?.isConnected
+        && chatReturnFocus !== document.body
+        && !chatReturnFocus.closest?.("#result-assistant")
+        ? chatReturnFocus
+        : $("open-results-chat");
+      requestAnimationFrame(() => target?.focus());
     }
+    chatReturnFocus = null;
   }
 
   function jumpToResultFromChat(id) {
@@ -2895,7 +2908,7 @@
     if (index < 0) return;
     state.page = Math.floor(index / PAGE_SIZE) + 1;
     renderResults();
-    closeExpandedChat();
+    closeExpandedChat({ restoreFocus: false });
     requestAnimationFrame(() => {
       const card = [...document.querySelectorAll("[data-opportunity-id]")]
         .find(item => item.dataset.opportunityId === id);
@@ -2945,8 +2958,7 @@
     state.page = 1;
     renderResults();
     renderChat();
-    $("chat").scrollIntoView({ behavior: "smooth", block: "start" });
-    $("chat-input").focus();
+    openExpandedChat();
   }
 
   async function askResults(question) {
@@ -3514,10 +3526,8 @@
       $("chat-input").value = button.dataset.chatSuggestion;
       askResults(button.dataset.chatSuggestion);
     });
-    $("toggle-chat-size").addEventListener("click", () => {
-      if (document.body.classList.contains("chat-expanded")) closeExpandedChat();
-      else openExpandedChat();
-    });
+    $("open-results-chat").addEventListener("click", openExpandedChat);
+    $("toggle-chat-size").addEventListener("click", closeExpandedChat);
     $("chat-messages").addEventListener("click", event => {
       const jump = event.target.closest("[data-chat-jump]");
       if (jump) {
@@ -3537,7 +3547,6 @@
     document.addEventListener("keydown", event => {
       if (event.key === "Escape" && document.body.classList.contains("chat-expanded")) {
         closeExpandedChat();
-        $("toggle-chat-size").focus();
       }
     });
     $("reset-narrowing").addEventListener("click", () => {
