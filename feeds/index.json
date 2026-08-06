@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-06T10:33:54Z",
+  "generated_at": "2026-08-06T12:20:02Z",
   "excluded_noncurrent": 0,
   "feeds": [
     {
@@ -25,7 +25,7 @@
     {
       "title": "Funding Finder — Artificial intelligence and machine learning",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml",
-      "count": 238
+      "count": 249
     },
     {
       "title": "Funding Finder — Arts and culture",
@@ -65,12 +65,12 @@
     {
       "title": "Funding Finder — Cybersecurity",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml",
-      "count": 125
+      "count": 157
     },
     {
       "title": "Funding Finder — Data science",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml",
-      "count": 234
+      "count": 243
     },
     {
       "title": "Funding Finder — Education and workforce",
@@ -80,12 +80,12 @@
     {
       "title": "Funding Finder — Energy",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml",
-      "count": 128
+      "count": 129
     },
     {
       "title": "Funding Finder — Environmental science",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml",
-      "count": 298
+      "count": 300
     },
     {
       "title": "Funding Finder — Health equity",

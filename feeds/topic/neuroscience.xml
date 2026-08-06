@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml</id>
-  <updated>2026-08-06T10:33:54Z</updated>
+  <updated>2026-08-06T12:20:02Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -507,6 +507,9 @@
     <category term="Biology and biotechnology"/>
     <category term="Education and workforce"/>
     <category term="Neuroscience"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
     <summary>National Institutes of Health — Closes 2027-11-08 — The Theories, Models and Methods (TMM) initiative will support the development of computational tools for understanding dynamic brain circuits that are made broadly accessible to the greater research community. This program supports applications focused on tool building and dissemination in the domain of theories about neural circuit mechanisms, models of circuit structure and function, and/or com…</summary>
   </entry>
   <entry>
@@ -535,6 +538,7 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Biology and biotechnology"/>
     <category term="Infectious disease"/>
     <category term="Neuroscience"/>
+    <category term="Cybersecurity"/>
     <summary>National Institutes of Health — Closes 2027-10-08 — The Ultra-Rare Gene-Based Therapy (URGenT) network supports Investigational New Drug (IND)-enabling studies and planning activities for First-in-Human (FIH) clinical testing of gene-based or transcript-directed therapeutics, such as oligonucleotides and viral-based gene therapies, for ultra-rare neurological or neuromuscular disorders. The goal of this announcement is to accelerate the development…</summary>
   </entry>
   <entry>
@@ -558,6 +562,7 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <author><name>National Institutes of Health</name></author>
     <category term="Neuroscience"/>
     <category term="Transportation"/>
+    <category term="Cybersecurity"/>
     <summary>National Institutes of Health — Closes 2027-11-12 — The objective of the NIH Career Transition Award (K22) is to provide support to outstanding basic or clinical investigators to develop their independent research skills through a two phase program: an initial period involving an intramural appointment at the NIH and a final period of support at an extramural institution. This NINDS K22 is specifically designed to facilitate the transition of NINDS…</summary>
   </entry>
   <entry>
@@ -568,6 +573,7 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <author><name>National Institutes of Health</name></author>
     <category term="Neuroscience"/>
     <category term="Transportation"/>
+    <category term="Cybersecurity"/>
     <summary>National Institutes of Health — Closes 2027-11-12 — The objective of the NIH Career Transition Award (K22) is to provide support to outstanding basic or clinical investigators to develop their independent research skills through a two phase program: an initial period involving an intramural appointment at the NIH and a final period of support at an extramural institution. This NINDS K22 is specifically designed to facilitate the transition of NINDS…</summary>
   </entry>
   <entry>
@@ -578,6 +584,7 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <author><name>National Institutes of Health</name></author>
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
+    <category term="Cybersecurity"/>
     <summary>National Institutes of Health — Closes 2027-10-15 — Development of Psychosocial Therapeutic and Preventive Interventions for Mental Disorders (R33 Clinical Trial Required). As part of NIMH's clinical trials pipeline, this NOFO encourages pilot research developing and testing novel psychosocial interventions and/or targets. Consistent with NIMH's emphasis on the experimental therapeutics approach to intervention development, it intends to speed the …</summary>
   </entry>
   <entry>
@@ -588,6 +595,7 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <author><name>National Institutes of Health</name></author>
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
+    <category term="Cybersecurity"/>
     <summary>National Institutes of Health — Closes 2027-10-15 — Development of Psychosocial Therapeutic and Preventive Interventions for Mental Disorders (R61/R33 Clinical Trial Required). As part of NIMH's clinical trials pipeline, this NOFO encourages pilot research developing and testing novel psychosocial interventions and/or targets. Consistent with NIMH's emphasis on the experimental therapeutics approach to intervention development, it intends to speed …</summary>
   </entry>
   <entry>
@@ -598,6 +606,7 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
+    <category term="Cybersecurity"/>
     <summary>National Institutes of Health — Closes 2027-10-15 — The purpose of this Notice of Funding Opportunity (NOFO) is to encourage cooperative agreement applications to support early stage clinical trials of novel mechanism of action, investigational drugs, or novel neuromodulatory devices for the treatment of psychiatric disorders in areas of unmet medical need. The NOFO will support milestone-driven early stage trials in pediatric and adult populations…</summary>
   </entry>
   <entry>

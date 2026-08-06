@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/health-equity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/health-equity.xml</id>
-  <updated>2026-08-06T10:33:54Z</updated>
+  <updated>2026-08-06T12:20:02Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Clean Energy Training Services</title>
@@ -75,6 +75,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Education and workforce"/>
     <category term="Health equity"/>
+    <category term="Cybersecurity"/>
     <summary>National Institutes of Health — Closes 2027-09-07 — This PAR is being reissued in accordance with the simplified review criteria in effect for application due dates after January 25, 2025. The objective of this funding opportunity is to support non-pharmacological interventions to promote sleep health, reduce sleep health disparities, and examine sleep as a modifiable factor to reduce health disparities for other health outcomes among populations t…</summary>
   </entry>
   <entry>
@@ -150,6 +151,7 @@
     <category term="Cancer"/>
     <category term="Education and workforce"/>
     <category term="Health equity"/>
+    <category term="Cybersecurity"/>
     <summary>National Institutes of Health — Closes 2027-11-16 — This Notice of Funding Opportunity (NOFO) encourages grant applications from investigators interested in conducting basic, mechanistic research into the biological/genetic causes of cancer health disparities. These research project grants will support innovative studies designed to investigate biological/genetic bases of cancer health disparities, such as (1) mechanistic studies of biological fact…</summary>
   </entry>
   <entry>
@@ -209,6 +211,8 @@
     <category term="Health equity"/>
     <category term="Public health"/>
     <category term="Technology development"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
     <summary>National Institutes of Health — Closes 2027-09-28 — This Notice of Funding Opportunity announcement (NOFO) invites applications for the Clinical and Translational Science Award (CTSA) Program hubs that will be part of a national, collaborative consortium focused on bringing more treatments for all people more quickly through advancing clinical and translational science (CTS) by (1) developing, demonstrating, and disseminating scientific and operati…</summary>
   </entry>
   <entry>
