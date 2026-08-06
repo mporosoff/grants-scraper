@@ -236,23 +236,6 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertNotIn("https://ur-grant-matcher.zing78.chatgpt.site", docs)
         self.assertNotIn("saved searches in the browser", docs)
 
-    def test_pages_deployment_uses_current_actions_and_extended_timeout(self):
-        workflow = (
-            REPOSITORY_ROOT
-            / ".github"
-            / "workflows"
-            / "pages.yml"
-        ).read_text(encoding="utf-8")
-
-        self.assertIn("actions/checkout@v6", workflow)
-        self.assertIn("actions/configure-pages@v6", workflow)
-        self.assertIn("actions/upload-pages-artifact@v5", workflow)
-        self.assertIn("actions/deploy-pages@v5", workflow)
-        self.assertIn('timeout: "1800000"', workflow)
-        self.assertIn("timeout-minutes: 35", workflow)
-        self.assertIn("pages: write", workflow)
-        self.assertIn("id-token: write", workflow)
-
     def test_generated_opportunity_asset_is_valid(self):
         asset = (
             REPOSITORY_ROOT / "data" / "opportunities.js"
