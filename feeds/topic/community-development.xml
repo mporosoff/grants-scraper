@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml</id>
-  <updated>2026-08-05T12:17:48Z</updated>
+  <updated>2026-08-06T10:33:54Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Veterans Legacy Grants Program</title>
@@ -59,6 +59,16 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-08 — PurposeThis NOFO supports applied research to advance automation, robotics, and intelligent mining systems that improve safety and health in U.S. mining operations. Projects should deliver field-ready solutions that strengthen communication, self-escape, refuge performance, and overall safety through modern autonomy, sensing, and decision-support technologies.BackgroundMining remains hazardous. In…</summary>
+  </entry>
+  <entry>
+    <title>RNomics Outreach and Coordination (ROC) Center</title>
+    <link href="https://www.grants.gov/search-results-detail/363476"/>
+    <id>urn:funding-finder:grants-gov:363476</id>
+    <updated>2026-10-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health — Closes 2027-02-01 — The NIH Common Fund, in partnership with other NIH Institutes and Centers, plans to issue Notices of Funding Opportunity (NOFOs) for the RNomics program, which seeks to develop tools for studying the full set of RNA molecules (the RNome) in cells and tissues. The program will support technologies and resources that enable integrated analysis of RNA sequences, modifications, structures, locations, …</summary>
   </entry>
   <entry>
     <title>FY26 US DOT Drone Infrastructure Inspection Grants (DIIG) Program</title>
@@ -146,6 +156,15 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health — Closes 2026-12-15 — The National Library of Medicine (NLM) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for a Training Center of the Network of the National Library of Medicine (NNLM).Established in 1965 and organized geographically across the United States and its territories, the NNLM promotes and supports the initiatives, products, and services of the NLM and the National Insti…</summary>
+  </entry>
+  <entry>
+    <title>Rural Housing Preservation Grant</title>
+    <link href="https://www.grants.gov/search-results-detail/363400"/>
+    <id>urn:funding-finder:grants-gov:363400</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>Rural Housing Service</name></author>
+    <category term="Community development"/>
+    <summary>Rural Housing Service — Closes 2026-09-08 — The Rural Housing Service (RHS) announces a notice in funding availability under its Housing Preservation Grant (HPG) program. The HPG program is a grant program which provides qualified public agencies, private nonprofit organizations, which may include but not be limited to, Faith-Based and Community Organizations, and other eligible entities grant funds to assist very low- and low-income homeow…</summary>
   </entry>
   <entry>
     <title>Safeguarding U.S. Critical Minerals Supply Chains- Tunisia</title>
@@ -543,6 +562,8 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>U.S. National Science Foundation — Closes 2027-07-20 — The Established Program to Stimulate Competitive Research (EPSCoR) supports the U.S. National Science Foundation (NSF) mission by promoting nationwide scientific progress. Through this program, NSF fosters partnerships among academic institutions, government entities, industry, and non-profits. These collaborations aim to drive long-term improvements in research infrastructure, enhance R&amp;D capacit…</summary>
   </entry>
   <entry>
@@ -659,27 +680,5 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>Department of Commerce — Posted — NOTICE: Application Process as of April 6th EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
-  </entry>
-  <entry>
-    <title>Austin FY 2021 – FY 2023 EDA Planning and Local Technical Assistance</title>
-    <link href="https://www.grants.gov/search-results-detail/332137"/>
-    <id>urn:funding-finder:grants-gov:332137</id>
-    <updated>2021-03-15T00:00:00Z</updated>
-    <author><name>Department of Commerce</name></author>
-    <category term="Arts and culture"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <summary>Department of Commerce — Posted — UPDATED NOTICE - PLEASE READ: April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
-  </entry>
-  <entry>
-    <title>Chicago FY 2021 – FY 2023 EDA Planning and Local Technical Assistance</title>
-    <link href="https://www.grants.gov/search-results-detail/332125"/>
-    <id>urn:funding-finder:grants-gov:332125</id>
-    <updated>2021-03-15T00:00:00Z</updated>
-    <author><name>Department of Commerce</name></author>
-    <category term="Arts and culture"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <summary>Department of Commerce — Posted — UPDATED NOTICE - PLEASE READ: April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
   </entry>
 </feed>

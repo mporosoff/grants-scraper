@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-08-05T12:17:48Z</updated>
+  <updated>2026-08-06T10:33:54Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Core State Injury Prevention Program (Core SIPP)</title>
@@ -106,6 +106,16 @@
     <summary>National Institutes of Health — Closes 2026-11-10 — The National Institute of Neurological Disorders and Stroke (NINDS), in conjunction with additional Institutes/Centers (ICs)at the National Institutes of Health seek to support projects proposing Clinical Trials and Ancillary Studies that are conducted within NIH-Funded Clinical Trial Research Networks.The program will encourage applications for multi-center clinical trials to be conducted within …</summary>
   </entry>
   <entry>
+    <title>Transformative Technologies for Experimental and Computational RNome Characterization and Functional Analysis</title>
+    <link href="https://www.grants.gov/search-results-detail/363474"/>
+    <id>urn:funding-finder:grants-gov:363474</id>
+    <updated>2026-10-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health — Closes 2027-02-15 — The NIH Common Fund, in partnership with other NIH Institutes and Centers, plans to issue Notices of Funding Opportunity (NOFOs) for the RNomics program, which seeks to develop tools for studying the full set of RNA molecules (the RNome) in cells and tissues. The program will support technologies and resources that enable integrated analysis of RNA sequences, modifications, structures, locations, …</summary>
+  </entry>
+  <entry>
     <title>FY26 US DOT Drone Infrastructure Inspection Grants (DIIG) Program</title>
     <link href="https://www.grants.gov/search-results-detail/363242"/>
     <id>urn:funding-finder:grants-gov:363242</id>
@@ -134,6 +144,26 @@
     <author><name>Department of Housing and Urban Development</name></author>
     <category term="Transportation"/>
     <summary>Department of Housing and Urban Development — Closes 2026-11-10 — The Family Unification Program (FUP) public housing authorities (PHAs) to partner with public child welfare agencies (PCWAs) to provide Housing Choice Voucher (HCV) assistance to two primary groups:1. Families: Those for whom the lack of adequate housing is a primary factor in the imminent placement of a child (or children) in out-of-home care, or a delay in the discharge of a child to the family …</summary>
+  </entry>
+  <entry>
+    <title>SOI - Rural Transportation Match and Gap Funding Assistance Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363480"/>
+    <id>urn:funding-finder:grants-gov:363480</id>
+    <updated>2026-08-05T00:00:00Z</updated>
+    <author><name>Denali Commission</name></author>
+    <category term="Transportation"/>
+    <summary>Denali Commission — Closes 2026-08-28 — The Denali Commission is inviting statements of interest for rural Alaska transportation projects in need of local match or gap funding assistance. Many Alaskan communities lack the tax base or resources necessary to meet cost share requirements. This opportunity seeks to provide funding to cover local match needs or address funding gaps, facilitating the completion of transportation projects and …</summary>
+  </entry>
+  <entry>
+    <title>Tribal Personal Responsibility Education Program (Tribal PREP)</title>
+    <link href="https://www.grants.gov/search-results-detail/361987"/>
+    <id>urn:funding-finder:grants-gov:361987</id>
+    <updated>2026-08-05T00:00:00Z</updated>
+    <author><name>Administration for Children &amp; Families - ACYF/FYSB</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>Administration for Children &amp; Families - ACYF/FYSB — Closes 2026-08-31 — The Family and Youth Services Bureau will be posting a revised Tribal PREP NOFO shortly and will be accepting applications. Tribal PREP competitively funds projects that educate American Indian/Alaska Native (AI/AN) youth ages 10-19, and expectant and parenting youth under age 21, on both abstinence and contraception for the prevention of pregnancy, sexually transmitted infections (STIs), and HIV …</summary>
   </entry>
   <entry>
     <title>Media Literacy and Capacity Building Workshop Series</title>
@@ -422,21 +452,6 @@
     <summary>Bureau of East Asian and Pacific Affairs — Closes 2026-08-25 — The overall goal of the project is to strengthen the legal capacity and proficiency of government officials, including policymakers, negotiators, legal experts and practitioners, and other relevant officials from Southeast Asian and Pacific Islands countries concerning the principles and practices of public international law, including, but not limited to, the law of the sea as reflected in the 19…</summary>
   </entry>
   <entry>
-    <title>Young Trilateral Leaders (YTL) Summit</title>
-    <link href="https://www.grants.gov/search-results-detail/363267"/>
-    <id>urn:funding-finder:grants-gov:363267</id>
-    <updated>2026-07-21T00:00:00Z</updated>
-    <author><name>U.S. Mission to South Korea</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Quantum science"/>
-    <category term="Transportation"/>
-    <summary>U.S. Mission to South Korea — Closes 2026-08-05 — Funding Opportunity Title: 2027 Young Trilateral Leaders (YTL) Summit Funding Opportunity Number: PD-SEOUL-FY26-04 Deadline for Applications: Wednesday, August 5, 2026, 11:59 p.m. (GMT+9) CFDA Number: 19.040 Type of Funding: FY26 Smith Mundt Public Diplomacy Funds Total Amount Available: $250,000 This notice is subject to availability of funding. This NOFO is currently listed under Assistance List…</summary>
-  </entry>
-  <entry>
     <title>Egypt Annual Program Statement</title>
     <link href="https://www.grants.gov/search-results-detail/363252"/>
     <id>urn:funding-finder:grants-gov:363252</id>
@@ -653,23 +668,5 @@
     <category term="Social and behavioral sciences"/>
     <category term="Transportation"/>
     <summary>National Institutes of Health — Closes 2029-07-12 — The National Institutes of Health (NIH) will award Institutional Mentored Career Development grants to eligible domestic institutions to support career development programs designed to prepare later stage postdoctoral fellows and junior faculty scholars who have made a commitment to an independent research career for their career advancement and transition to independence. Supported scholars will …</summary>
-  </entry>
-  <entry>
-    <title>DoW Duchenne Muscular Dystrophy, Clinical/Translational Research Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362851"/>
-    <id>urn:funding-finder:grants-gov:362851</id>
-    <updated>2026-06-17T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Transportation"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-18 — Summary: The fiscal year 2026 (FY26) Duchenne Muscular Dystrophy Research Program (DMDRP) Clinical/Translational Research Award (CTRA) supports advanced translational research to accelerate promising ideas in Duchenne muscular dystrophy (DMD) research toward clinical applications. Research must address at least one of the FY26 CTRA Focus Areas. Research projects investigating therapies that will b…</summary>
-  </entry>
-  <entry>
-    <title>DoW Duchenne Muscular Dystrophy, Idea Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362848"/>
-    <id>urn:funding-finder:grants-gov:362848</id>
-    <updated>2026-06-17T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Transportation"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-18 — Summary: The fiscal year 2026 (FY26) Duchenne Muscular Dystrophy Research Program (DMDRP) Idea Development Award (IDA) promotes new ideas that are still in the early stages of development and have the potential to yield impactful data and new avenues of investigation. This award supports impactful, high-risk/high-reward research that could lead to critical discoveries or major advancements that wi…</summary>
   </entry>
 </feed>

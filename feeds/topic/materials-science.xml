@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-08-05T12:17:48Z</updated>
+  <updated>2026-08-06T10:33:54Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Microplastics Research and Resource Coordination Center (U24 - Clinical Trial Not Allowed)</title>
@@ -173,6 +173,20 @@
     <category term="Water"/>
     <category term="Artificial intelligence and machine learning"/>
     <summary>U.S. National Science Foundation — Posted — Infrastructure systems comprise complex connections between physical components, organizational structures and operational methods that support the needs of people and communities at the local, regional, national, and global scales. Such systems form the backbone of society, providing essential services as well as ensuring public health and welfare, economic prosperity and national security, and a…</summary>
+  </entry>
+  <entry>
+    <title>BRAIN Initiative: Brain Behavior Quantification and Synchronization- Next Generation Sensor Technology Development (U01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/356811"/>
+    <id>urn:funding-finder:grants-gov:356811</id>
+    <updated>2024-10-23T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Energy"/>
+    <summary>National Institutes of Health — Closes 2027-06-15 — This NOFO solicits applications for next generation sensor and bioelectronic device development that will synchronize with brain recordings. The sensor and neural recording data will be used to generate new computational models of behavior in human and animal models. There has been a lack of quantitative approaches and models to understand the complexity of human and animal behavior in naturalisti…</summary>
   </entry>
   <entry>
     <title>Computational and Data-Enabled Science and Engineering</title>
@@ -429,23 +443,6 @@ The goal of the Nanoscale Interactions program is to support research to advance
     <category term="Materials science"/>
     <category term="Technology development"/>
     <summary>Idaho Field Office — Closes 2030-10-14 — A. STATEMENT OF OBJECTIVESThis Funding Opportunity Announcement (FOA) is to award multiple cooperative agreements to accredited United States (U.S.) two- and four-year colleges and universities (Institutions of Higher Education (IHEs)) to receive and administer scholarship and fellowship funding—provided through the University Nuclear Leadership Program (UNLP) and as administered by the Department…</summary>
-  </entry>
-  <entry>
-    <title>Science of Learning and Augmented Intelligence</title>
-    <link href="https://www.grants.gov/search-results-detail/320753"/>
-    <id>urn:funding-finder:grants-gov:320753</id>
-    <updated>2019-09-19T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Materials science"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>U.S. National Science Foundation — Closes 2026-08-05 — Science of Learning and Augmented Intelligence (SL) supports potentially transformative research that develops basic theoretical insights and fundamental knowledge about principles, processes and mechanisms of learning, and about augmented intelligence — how human cognitive function can be augmented through interactions with others or with technology, or through variations in context.
-The program …</summary>
   </entry>
   <entry>
     <title>Environmental Engineering</title>

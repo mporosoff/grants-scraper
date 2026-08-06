@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-08-05T12:17:48Z</updated>
+  <updated>2026-08-06T10:33:54Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -17,6 +17,16 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>Rural Utilities Service — Closes 2027-05-03 — The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year 2026 National Dam Safety Program - Rehabilitation of High Hazard Potential Dams (HHPD)</title>
+    <link href="https://www.grants.gov/search-results-detail/363445"/>
+    <id>urn:funding-finder:grants-gov:363445</id>
+    <updated>2026-08-05T00:00:00Z</updated>
+    <author><name>Department of Homeland Security - FEMA</name></author>
+    <category term="Cybersecurity"/>
+    <category term="Water"/>
+    <summary>Department of Homeland Security - FEMA — Closes 2026-08-31 — FEMA’s National Dam Safety Program (NDSP) is committed to protecting lives and property from the risks associated with dams. The Rehabilitation of High Hazard Potential Dams (HHPD) Grant Program makes available federal funds to eligible states for pass through to non-Federal governmental organizations or nonprofit organizations for the rehabilitation of eligible high hazard potential dams that fai…</summary>
   </entry>
   <entry>
     <title>Expanding global health security though local partnerships in Tanzania</title>
@@ -674,15 +684,5 @@
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
     <summary>DOT Federal Highway Administration — Closes 2026-08-11 — The ATTAIN Competitive Grant Program will provide funding to deploy, install, and operate advanced transportation technologies to improve safety, mobility, efficiency, system performance, intermodal connectivity, and infrastructure return on investment. Eligible applicants for ATTAIN Competitive Grant Program funds are: • State or local governments; • transit agencies; • metropolitan planning orga…</summary>
-  </entry>
-  <entry>
-    <title>Medical Forensic Access Initiative</title>
-    <link href="https://www.grants.gov/search-results-detail/362966"/>
-    <id>urn:funding-finder:grants-gov:362966</id>
-    <updated>2026-06-25T00:00:00Z</updated>
-    <author><name>Office of the Assistant Secretary for Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Cybersecurity"/>
-    <summary>Office of the Assistant Secretary for Health — Closes 2026-08-05 — This notice solicits applications for practical, data-driven, and scalable projects that support States, Tribal communities, healthcare systems, or community-based organizations in collecting, analyzing, and reporting information related to access to medical forensic examinations for women and girl survivors of sexual assault. Projects funded under this initiative should identify barriers, service…</summary>
   </entry>
 </feed>

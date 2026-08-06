@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-08-05T12:17:48Z</updated>
+  <updated>2026-08-06T10:33:54Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development</title>
@@ -239,21 +239,6 @@
     <summary>National Institute of Standards and Technology — Closes 2026-08-21 — The NIST Hollings Manufacturing Extension Partnership (NIST MEP) is seeking applications from eligible applicants to establish and operate a MEP Center in the States of Alabama, Alaska, Arkansas, California, Georgia, Louisiana, Massachusetts, Missouri, Montana, Ohio, Pennsylvania, Utah and Vermont, and in the U.S. Territory of Puerto Rico.</summary>
   </entry>
   <entry>
-    <title>Young Trilateral Leaders (YTL) Summit</title>
-    <link href="https://www.grants.gov/search-results-detail/363267"/>
-    <id>urn:funding-finder:grants-gov:363267</id>
-    <updated>2026-07-21T00:00:00Z</updated>
-    <author><name>U.S. Mission to South Korea</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Quantum science"/>
-    <category term="Transportation"/>
-    <summary>U.S. Mission to South Korea — Closes 2026-08-05 — Funding Opportunity Title: 2027 Young Trilateral Leaders (YTL) Summit Funding Opportunity Number: PD-SEOUL-FY26-04 Deadline for Applications: Wednesday, August 5, 2026, 11:59 p.m. (GMT+9) CFDA Number: 19.040 Type of Funding: FY26 Smith Mundt Public Diplomacy Funds Total Amount Available: $250,000 This notice is subject to availability of funding. This NOFO is currently listed under Assistance List…</summary>
-  </entry>
-  <entry>
     <title>Egypt Annual Program Statement</title>
     <link href="https://www.grants.gov/search-results-detail/363252"/>
     <id>urn:funding-finder:grants-gov:363252</id>
@@ -428,18 +413,6 @@
     <category term="Manufacturing"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health — Closes 2026-11-10 — The National Institutes of Neurological Disorders and Stroke (NINDS) is interested in supporting research projects proposing the optimization and translational development of genomic and biologic therapeutic candidates for Alzheimer’s Disease-Related Dementias (ADRD). Breakthroughs in genomic and biologic therapies are creating new opportunities to treat, prevent, and potentially modify the course…</summary>
-  </entry>
-  <entry>
-    <title>Young Southeast Asian Leaders Initiative (YSEALI) Summit 2027</title>
-    <link href="https://www.grants.gov/search-results-detail/362913"/>
-    <id>urn:funding-finder:grants-gov:362913</id>
-    <updated>2026-06-24T00:00:00Z</updated>
-    <author><name>U.S. Mission to Singapore</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Singapore — Closes 2026-08-05 — A. PROGRAM DESCRIPTION 1. Project Background, Goals, and ObjectivesThe Department of State Agency Strategic Plan outlines U.S. economic and technological dominance (Goal 5) including strengthening the U.S. technological edge, increasing U.S. technical exports and investments, and stopping foreign actor abuse of the global trading system.Project Goal: The YSEALI Summit 2027 in Singapore will accele…</summary>
   </entry>
   <entry>
     <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
@@ -759,5 +732,28 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Infectious disease"/>
     <category term="Manufacturing"/>
     <summary>National Institutes of Health — Closes 2027-08-18 — The Blueprint Neurotherapeutics Network for Biologics (BPN-Biologics) provides support for biologic-based therapeutic discovery and development, from lead optimization through phase I clinical testing. This Funding Opportunity Announcement (FOA) supports preclinical discovery and development of potential therapeutic Biotechnology Products and Biologics including, but not limited to, large biologic…</summary>
+  </entry>
+  <entry>
+    <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development of Disorders of the Nervous System (UG3/UH3 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/356531"/>
+    <id>urn:funding-finder:grants-gov:356531</id>
+    <updated>2024-09-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health — Closes 2026-08-18 — The Blueprint Neurotherapeutics Network (BPN) invites applications from neuroscience investigators seeking support to advance their small molecule drug discovery and development projects into the clinic. Participants in the BPN are responsible for conducting all studies that involve disease- or target-specific assays, models, and other research tools and receive funding for all activities to be co…</summary>
+  </entry>
+  <entry>
+    <title>BRAIN Initiative: Reagent Resources for Brain Cell Type-Specific Access to Broaden Distribution of Enabling Technologies for Neuroscience (U24 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/356530"/>
+    <id>urn:funding-finder:grants-gov:356530</id>
+    <updated>2024-09-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Manufacturing"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health — Closes 2027-06-15 — This Notice of Funding Opportunity Announcement (NOFO) from the NIH Brain Research through Advancing Innovative Neurotechnologies (BRAIN) Initiative is intended to support establishment of facilities at minority-serving institutions (MSIs) and Institutional Development Award (IDeA)-eligible institutions for scaled production and distribution of brain cell type-specific access and manipulation reag…</summary>
   </entry>
 </feed>

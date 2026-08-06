@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-08-05T12:17:48Z</updated>
+  <updated>2026-08-06T10:33:54Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -560,18 +560,6 @@
     <summary>Assistance Coordination — Closes 2026-09-30 — The Middle East Regional Cooperation (MERC) Program supports joint scientific research and innovation partnerships between the United States, Israel, and countries across the Middle East and North Africa (MENA). The program funds applied research projects that address shared regional challenges while advancing U.S. economic, technological, and strategic interests. MERC is designed to bring togethe…</summary>
   </entry>
   <entry>
-    <title>Young Southeast Asian Leaders Initiative (YSEALI) Summit 2027</title>
-    <link href="https://www.grants.gov/search-results-detail/362913"/>
-    <id>urn:funding-finder:grants-gov:362913</id>
-    <updated>2026-06-24T00:00:00Z</updated>
-    <author><name>U.S. Mission to Singapore</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Singapore — Closes 2026-08-05 — A. PROGRAM DESCRIPTION 1. Project Background, Goals, and ObjectivesThe Department of State Agency Strategic Plan outlines U.S. economic and technological dominance (Goal 5) including strengthening the U.S. technological edge, increasing U.S. technical exports and investments, and stopping foreign actor abuse of the global trading system.Project Goal: The YSEALI Summit 2027 in Singapore will accele…</summary>
-  </entry>
-  <entry>
     <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
     <link href="https://www.grants.gov/search-results-detail/362900"/>
     <id>urn:funding-finder:grants-gov:362900</id>
@@ -689,5 +677,17 @@
     <category term="Data science"/>
     <category term="Water"/>
     <summary>Bureau of Reclamation — Closes 2027-08-26 — Through WaterSMART, the Bureau of Reclamation (Reclamation) leverages Federal and non- Federal funding to work cooperatively with States, Tribes, and other entities as they plan for and implement actions to increase water supply and hydropower reliability. The WaterSMART Program demonstrably advances Trump administration priorities, such as those identified in Presidential Executive Order 14154 (J…</summary>
+  </entry>
+  <entry>
+    <title>WaterSMART: Desalination Construction Projects</title>
+    <link href="https://www.grants.gov/search-results-detail/362395"/>
+    <id>urn:funding-finder:grants-gov:362395</id>
+    <updated>2026-05-14T00:00:00Z</updated>
+    <author><name>Bureau of Reclamation</name></author>
+    <category term="Energy"/>
+    <category term="Water"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Bureau of Reclamation — Closes 2027-08-26 — Through WaterSMART, the Bureau of Reclamation (Reclamation) leverages Federal and non-Federal funding to work cooperatively with States, Tribes, and other entities as they plan for and implement actions to increase water supply and hydropower reliability. The WaterSMART Program demonstrably advances Trump administration priorities, such as those identified in Presidential Executive Order 14154 (Ja…</summary>
   </entry>
 </feed>

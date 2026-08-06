@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-08-05T12:17:48Z</updated>
+  <updated>2026-08-06T10:33:54Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
@@ -351,21 +351,6 @@
     <summary>Administration for Children and Families - ACYF/CB — Closes 2026-08-21 — This program will fund projects focused on technology-enabled strategies that improve adoptive matching, placement, and permanency for children in foster care awaiting adoption. The funds, awarded to four regional centers, will be used to design, implement and evaluate these strategies.These centers will focus on children with an adoption permanency goal or who are legally free for adoption due to…</summary>
   </entry>
   <entry>
-    <title>Young Trilateral Leaders (YTL) Summit</title>
-    <link href="https://www.grants.gov/search-results-detail/363267"/>
-    <id>urn:funding-finder:grants-gov:363267</id>
-    <updated>2026-07-21T00:00:00Z</updated>
-    <author><name>U.S. Mission to South Korea</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Quantum science"/>
-    <category term="Transportation"/>
-    <summary>U.S. Mission to South Korea — Closes 2026-08-05 — Funding Opportunity Title: 2027 Young Trilateral Leaders (YTL) Summit Funding Opportunity Number: PD-SEOUL-FY26-04 Deadline for Applications: Wednesday, August 5, 2026, 11:59 p.m. (GMT+9) CFDA Number: 19.040 Type of Funding: FY26 Smith Mundt Public Diplomacy Funds Total Amount Available: $250,000 This notice is subject to availability of funding. This NOFO is currently listed under Assistance List…</summary>
-  </entry>
-  <entry>
     <title>Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets)</title>
     <link href="https://www.grants.gov/search-results-detail/363268"/>
     <id>urn:funding-finder:grants-gov:363268</id>
@@ -593,26 +578,6 @@
     <summary>National Endowment for the Humanities — Closes 2026-09-16 — The program supports groups of two or more scholars increasing humanistic knowledge through the preparation of a manuscript for print publication, the creation of a scholarly digital project, or the planning of an international collaboration. Projects must pursue significant research questions and lead toward an interpretive product. This year’s competition is limited to projects on American histo…</summary>
   </entry>
   <entry>
-    <title>Disability and Rehabilitation Research Projects (DRRP) Program: Community Living and Participation (Development)</title>
-    <link href="https://www.grants.gov/search-results-detail/362016"/>
-    <id>urn:funding-finder:grants-gov:362016</id>
-    <updated>2026-07-06T00:00:00Z</updated>
-    <author><name>Administration for Community Living</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Administration for Community Living — Closes 2026-08-05 — Under this particular DRRP priority, applicants must propose a development project that is aimed at improving community living and participation outcomes of individuals with disabilities. In carrying out a development project under this program, a grantee must use knowledge and understanding gained from research to create models, methods, tools, applications, and devices beneficial to the target p…</summary>
-  </entry>
-  <entry>
-    <title>Disability and Rehabilitation Research Projects (DRRP) Program: Community Living and Participation (Research)</title>
-    <link href="https://www.grants.gov/search-results-detail/362015"/>
-    <id>urn:funding-finder:grants-gov:362015</id>
-    <updated>2026-07-06T00:00:00Z</updated>
-    <author><name>Administration for Community Living</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Administration for Community Living — Closes 2026-08-05 — Under this particular DRRP priority, applicants must propose a research project that is aimed at improving community living and participation outcomes among people with disabilities. In carrying out a research project under this program, a grantee must identify one or more hypotheses or research questions and, based on the hypotheses or research questions identified, perform an intensive, systemat…</summary>
-  </entry>
-  <entry>
     <title>AI Pathways To The Future</title>
     <link href="https://www.grants.gov/search-results-detail/363061"/>
     <id>urn:funding-finder:grants-gov:363061</id>
@@ -761,5 +726,49 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Arts and culture"/>
     <summary>National Institutes of Health — Closes 2026-10-19 — The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
+  </entry>
+  <entry>
+    <title>Creative Industries Film Lab and Residency - American Film Showcase 2026</title>
+    <link href="https://www.grants.gov/search-results-detail/362939"/>
+    <id>urn:funding-finder:grants-gov:362939</id>
+    <updated>2026-06-24T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Indonesia — Closes 2026-08-07 — Project Background, Goals, and ObjectivesThe Creative Industries Film Lab and Residency – American Film Showcase 2026 is a five-day public diplomacy program aligned with the American Film Showcase 2026 Envoy visit and scheduled during the Jogja-NETPAC Asian Film Festival Market 2026. The program includes two main components: Exhibition Booth: In partnership with Jogja-NETPAC, the program will secu…</summary>
+  </entry>
+  <entry>
+    <title>Prosperity through Partnership: Catalyzing U.S.-Algerian Collaboration in Innovation, Commerce and English Language</title>
+    <link href="https://www.grants.gov/search-results-detail/362903"/>
+    <id>urn:funding-finder:grants-gov:362903</id>
+    <updated>2026-06-22T00:00:00Z</updated>
+    <author><name>U.S. Mission to Algeria</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Technology development"/>
+    <summary>U.S. Mission to Algeria — Closes 2026-08-08 — 1. Executive SummaryThe U.S. Department of State’s Embassy Algiers is launching a competitive program to catalyze innovation and commerce between the United States and Algeria and advance key U.S. foreign policy priorities. The initiative aims to strengthen commercial ties, expand market access for American companies, and promote American business models and technology, particularly in entrepreneu…</summary>
+  </entry>
+  <entry>
+    <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
+    <link href="https://www.grants.gov/search-results-detail/362900"/>
+    <id>urn:funding-finder:grants-gov:362900</id>
+    <updated>2026-06-22T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Cybersecurity"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <category term="Data science"/>
+    <category term="Energy"/>
+    <summary>U.S. Mission to Indonesia — Closes 2026-08-31 — Project Background, Goals, and ObjectivesIn an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will leave…</summary>
   </entry>
 </feed>

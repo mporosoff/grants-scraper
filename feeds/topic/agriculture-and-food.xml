@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-08-05T12:17:48Z</updated>
+  <updated>2026-08-06T10:33:54Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -91,6 +91,16 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Agriculture and food"/>
     <summary>Health Resources and Services Administration — Closes 2026-10-20 — Fiscal Year (FY) 2027 Regional Nutrition Hubs (RNH) will support region-specific technical assistance (TA) on expanding high-quality nutrition services to the Health Resources and Services Administration's (HRSA) Health Center Program (H80) award recipients and look-alikes (health centers). Nutrition services prevent, manage, and treat diseases and conditions through nutritional and food-based int…</summary>
+  </entry>
+  <entry>
+    <title>Higher Education Challenge Grants Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363479"/>
+    <id>urn:funding-finder:grants-gov:363479</id>
+    <updated>2026-08-05T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <summary>National Institute of Food and Agriculture — Closes 2026-10-15 — The purpose of HEC, under assistance listing 10.217, is to strengthen institutional capacities, including curriculum, faculty, scientific instrumentation, and student recruitment and retention. The HEC program is focused on developing and improving formal master’s or doctorate degree-level food and agricultural sciences education and first professional degree-level education in veterinary medicine…</summary>
   </entry>
   <entry>
     <title>Increasing Market Opportunities in Vietnam for U.S. Innovative Biofertilizer Exporters</title>
@@ -655,16 +665,5 @@
     <category term="Environmental science"/>
     <category term="Water"/>
     <summary>Bureau of Reclamation — Closes 2027-09-08 — The objective of the WaterSMART Enhancing Water Resources Projects funding opportunity is to invite eligible entities to apply for funding to implement projects per the authorizing language referenced above that benefit water resource management for multiple uses, including water conservation and efficiency projects, water infrastructure improvements, and river and watershed restoration. Projects …</summary>
-  </entry>
-  <entry>
-    <title>Meat and Poultry Processing Expansion Program - Phase 4</title>
-    <link href="https://www.grants.gov/search-results-detail/362298"/>
-    <id>urn:funding-finder:grants-gov:362298</id>
-    <updated>2026-05-07T00:00:00Z</updated>
-    <author><name>Rural Business-Cooperative Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Community development"/>
-    <category term="Manufacturing"/>
-    <summary>Rural Business-Cooperative Service — Closes 2026-08-07 — The U.S. Department of Agriculture (USDA), Rural Development (RD) Rural Business‐Cooperative Service (RBCS or Agency), requests applications for the Meat and Poultry Processing Expansion Program - Phase 4 (the Program or MPPEP-4) - Fortifying the American Beef Industry. MPPEP-4 is authorized under Section 1001(b)(4) of the American Rescue Plan Act of 2021 (ARPA), which provides funding to make “lo…</summary>
   </entry>
 </feed>

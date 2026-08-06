@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml</id>
-  <updated>2026-08-05T12:17:48Z</updated>
+  <updated>2026-08-06T10:33:54Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -451,6 +451,16 @@
     <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-01 — The Centers for Disease Control and Prevention’s (CDC) National Center for Injury Prevention and Control (NCIPC) seeks investigator-initiated research proposals to expand the evidence base for the prevention of violence among youth aged 10 to 24 years.The purpose of this announcement is to fund the National Centers of Excellence in Youth Violence Prevention (or Youth Violence Prevention Centers; Y…</summary>
   </entry>
   <entry>
+    <title>RNomics Outreach and Coordination (ROC) Center</title>
+    <link href="https://www.grants.gov/search-results-detail/363476"/>
+    <id>urn:funding-finder:grants-gov:363476</id>
+    <updated>2026-10-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health — Closes 2027-02-01 — The NIH Common Fund, in partnership with other NIH Institutes and Centers, plans to issue Notices of Funding Opportunity (NOFOs) for the RNomics program, which seeks to develop tools for studying the full set of RNA molecules (the RNome) in cells and tissues. The program will support technologies and resources that enable integrated analysis of RNA sequences, modifications, structures, locations, …</summary>
+  </entry>
+  <entry>
     <title>Comprehensive Housing Counseling (CHC) and the Housing Counseling Training (HCT) NOFO (FY2026)</title>
     <link href="https://www.grants.gov/search-results-detail/362014"/>
     <id>urn:funding-finder:grants-gov:362014</id>
@@ -618,15 +628,5 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health — Closes 2026-12-15 — The National Library of Medicine (NLM) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for Regional Medical Libraries of the Network of the National Library of Medicine (NNLM).Established in 1965 and organized geographically across the United States and its territories, the NNLM promotes and supports the initiatives, products, and services of the NLM and the Natio…</summary>
-  </entry>
-  <entry>
-    <title>Network of the National Library of Medicine Training Center (U24 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/361281"/>
-    <id>urn:funding-finder:grants-gov:361281</id>
-    <updated>2026-08-15T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <summary>National Institutes of Health — Closes 2026-12-15 — The National Library of Medicine (NLM) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for a Training Center of the Network of the National Library of Medicine (NNLM).Established in 1965 and organized geographically across the United States and its territories, the NNLM promotes and supports the initiatives, products, and services of the NLM and the National Insti…</summary>
   </entry>
 </feed>
