@@ -1141,11 +1141,65 @@ textarea:focus {
 }
 
 .record-details summary {
-  width: max-content;
+  display: block;
+  width: auto;
+  list-style: none;
+  cursor: pointer;
+}
+
+.record-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.record-details .description-preview {
+  display: block;
+  margin-bottom: 8px;
+  color: #4e5d72;
+  font-size: .84rem;
+  font-weight: 400;
+}
+
+.record-details .details-cue {
+  display: inline-block;
   color: var(--blue-dark);
   font-size: .79rem;
   font-weight: 800;
-  cursor: pointer;
+}
+
+.record-details .details-cue::before {
+  content: "▾ ";
+}
+
+.record-details[open] .details-cue::before {
+  content: "▴ ";
+}
+
+.record-details[open] .description-preview {
+  display: none;
+}
+
+.record-details .cue-less {
+  display: none;
+}
+
+.record-details[open] .cue-more {
+  display: none;
+}
+
+.record-details[open] .cue-less {
+  display: inline;
+}
+
+.feedback-tools .sa-close {
+  display: none;
+}
+
+.feedback-tools[open] .sa-open {
+  display: none;
+}
+
+.feedback-tools[open] .sa-close {
+  display: inline;
 }
 
 .details-body {
@@ -1166,9 +1220,8 @@ textarea:focus {
 }
 
 .full-description {
-  max-height: 360px;
+  margin-bottom: 14px;
   padding: 16px;
-  overflow-y: auto;
   color: #445368;
   font-size: .8rem;
   line-height: 1.58;

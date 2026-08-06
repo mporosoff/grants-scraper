@@ -7,7 +7,7 @@
   <meta name="referrer" content="no-referrer">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://api.openai.com https://api.anthropic.com; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self'">
   <title>Funding Finder</title>
-  <link rel="stylesheet" href="./assets/app.css?v=release-2026-08-06-v2">
+  <link rel="stylesheet" href="./assets/app.css?v=release-2026-08-06-v3">
 </head>
 <body>
   <a class="skip-link" href="#results">Skip to results</a>
@@ -223,7 +223,7 @@
                 <details class="facet">
                   <summary><span>Special requirements</span></summary>
                   <div class="switch-list">
-                    <label><input id="flag-evidence" type="checkbox"><span>Has cited FOA facts</span></label>
+                    <label hidden><input id="flag-evidence" type="checkbox"><span>Has cited FOA facts</span></label>
                     <label><input id="flag-preliminary" type="checkbox"><span>Has LOI or preproposal</span></label>
                     <label><input id="flag-limited" type="checkbox"><span>Potential limited submission</span></label>
                     <label><input id="flag-early-career" type="checkbox"><span>Early-career signal</span></label>
@@ -393,14 +393,14 @@
       <summary>
         <span>
           <strong>Help improve Funding Finder</strong>
-          <small>Optional export and source-check tools for invited testers</small>
+          <small>Optional match-quality rating export for invited testers</small>
         </span>
-        <span class="summary-action">Open feedback tools</span>
+        <span class="summary-action"><span class="sa-open">Open feedback tools</span><span class="sa-close">Close feedback tools</span></span>
       </summary>
       <div class="feedback-tools-body">
-        <p class="feedback-intro">Opportunity ratings are available directly on result cards and stay on this device. Invited testers can use this area to export match-quality data or return source checks. Nothing is sent automatically.</p>
+        <p class="feedback-intro">Opportunity ratings are available directly on result cards and stay on this device. Invited testers can use this area to export match-quality data. Nothing is sent automatically.</p>
 
-        <section class="evaluation-panel deployment-review-panel" aria-labelledby="deployment-review-heading">
+        <section class="evaluation-panel deployment-review-panel" aria-labelledby="deployment-review-heading" hidden>
           <div class="evaluation-heading">
             <div>
               <p class="eyebrow">Source-accuracy testing</p>
@@ -474,13 +474,13 @@
     <div class="notice error">JavaScript is required to search the opportunity catalog.</div>
   </noscript>
   <script src="./data/opportunities.js?v=catalog-20260806T122002Z"></script>
-  <script src="./assets/profile.js?v=release-2026-08-06-v2"></script>
-  <script src="./assets/review.js?v=release-2026-08-06-v2"></script>
-  <script src="./assets/credentials.js?v=release-2026-08-06-v2"></script>
-  <script src="./assets/ai-provider.js?v=release-2026-08-06-v2"></script>
-  <script src="./assets/chat-ui.js?v=release-2026-08-06-v2"></script>
-  <script src="./assets/saved.js?v=release-2026-08-06-v2"></script>
-  <script src="./assets/preferences.js?v=release-2026-08-06-v2"></script>
-  <script src="./assets/app.js?v=release-2026-08-06-v2"></script>
+  <script src="./assets/profile.js?v=release-2026-08-06-v3"></script>
+  <script src="./assets/review.js?v=release-2026-08-06-v3"></script>
+  <script src="./assets/credentials.js?v=release-2026-08-06-v3"></script>
+  <script src="./assets/ai-provider.js?v=release-2026-08-06-v3"></script>
+  <script src="./assets/chat-ui.js?v=release-2026-08-06-v3"></script>
+  <script src="./assets/saved.js?v=release-2026-08-06-v3"></script>
+  <script src="./assets/preferences.js?v=release-2026-08-06-v3"></script>
+  <script src="./assets/app.js?v=release-2026-08-06-v3"></script>
 </body>
 </html>

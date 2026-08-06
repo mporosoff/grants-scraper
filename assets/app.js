@@ -1596,22 +1596,13 @@
         <div class="key-fact"><span>Eligibility</span><strong>${escapeHtml(overviewEligibility)}</strong><small>Confirm in official notice</small></div>
       </div>
       ${aiBlock}
-      <p class="description">${escapeHtml(truncate(record.description, 300) || "No synopsis was included in the extract.")}</p>
-      ${tags ? `<div class="tag-row">${tags}</div>` : ""}
-      <div class="card-actions">
-        ${actions.html}
-        ${hasCitations ? `<button class="source-action" type="button" data-open-evidence>View citations</button>` : ""}
-        <button class="source-action" type="button" data-chat-record="${escapeAttribute(id)}">Ask AI</button>
-        ${contactAction}
-        <button type="button" class="source-action" data-calendar="${escapeAttribute(id)}"${record.close_date ? "" : " disabled"}>Add to calendar</button>
-        <button type="button" class="source-action${compared ? " selected" : ""}" data-compare="${escapeAttribute(id)}" aria-pressed="${compared}">${compared ? "✓ Comparing" : "Compare"}</button>
-      </div>
-      ${sourceReviewControls(record)}
       <details class="record-details">
-        <summary>View cited evidence, eligibility, and full details</summary>
+        <summary>
+          <span class="description description-preview">${escapeHtml(truncate(record.description, 300) || "No synopsis was included in the extract.")}</span>
+          <span class="details-cue"><span class="cue-more">Show full description &amp; details</span><span class="cue-less">Show less</span></span>
+        </summary>
         <div class="details-body">
-          ${evidenceRows(record)}
-          <p class="source-action-note"><strong>Source link note:</strong> ${escapeHtml(actions.note)}</p>
+          <div class="full-description">${structuredDescription(record.description)}</div>
           <dl class="detail-grid">
             <div><dt>Eligible applicants</dt><dd>${escapeHtml(eligibility)}</dd></div>
             <div><dt>Funding instrument</dt><dd>${escapeHtml((record.funding_instruments || []).join("; ") || "Not listed")}</dd></div>
@@ -1627,14 +1618,20 @@
             <div><dt>Program contact</dt><dd>${contactHref ? `<a href="${escapeAttribute(contactHref)}">${escapeHtml(contact.label)}</a>` : escapeHtml(contact.label)}${contact.phone ? ` · ${escapeHtml(contact.phone)}` : ""}</dd></div>
             <div><dt>Posted</dt><dd>${escapeHtml(formatDate(record.posted_date))}</dd></div>
             <div><dt>Detail enrichment</dt><dd>${record.detail_enrichment_status === "current" ? `Checked ${escapeHtml(formatDate(record.detail_enriched_at?.slice(0, 10)))} against the Grants.gov detail API.` : record.source && record.source !== "Grants.gov" ? `Provided by ${escapeHtml(record.source)}; verify details at the official source.` : "Detail attachment check pending; use the Grants.gov record."}</dd></div>
-            <div><dt>Status confidence</dt><dd>${record.status_verification_required ? "One or more decisive status fields require verification in the official notice." : record.source && record.source !== "Grants.gov" ? `Listed as current by ${escapeHtml(record.source)}; verify at the official source.` : "Current according to the dated Grants.gov extract."}</dd></div>
             ${deadlineRows(record)}
           </dl>
           ${record.close_date_note ? `<p class="description"><strong>Deadline note:</strong> ${escapeHtml(record.close_date_note)}</p>` : ""}
           ${record.preliminary_deadline_text ? `<p class="description"><strong>Potential preliminary deadline:</strong> ${escapeHtml(record.preliminary_deadline_text)} <em>Machine extracted; verify in the official notice.</em></p>` : ""}
-          <div class="full-description">${structuredDescription(record.description)}</div>
         </div>
       </details>
+      ${tags ? `<div class="tag-row">${tags}</div>` : ""}
+      <div class="card-actions">
+        ${actions.html}
+        <button class="source-action" type="button" data-chat-record="${escapeAttribute(id)}">Ask AI</button>
+        ${contactAction}
+        <button type="button" class="source-action" data-calendar="${escapeAttribute(id)}"${record.close_date ? "" : " disabled"}>Add to calendar</button>
+        <button type="button" class="source-action${compared ? " selected" : ""}" data-compare="${escapeAttribute(id)}" aria-pressed="${compared}">${compared ? "✓ Comparing" : "Compare"}</button>
+      </div>
       <details class="result-feedback-toggle">
         <summary>Rate this result</summary>
         ${feedbackControls(record)}
