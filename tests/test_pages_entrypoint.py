@@ -82,7 +82,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             '<script src="./data/opportunities.js?v=catalog-',
             explorer_html,
         )
-        release_version = "release-2026-08-06-v2"
+        release_version = "release-2026-08-06-v3"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={release_version}">',
             explorer_html,
@@ -132,7 +132,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("function exportEvaluation", application_js)
         self.assertIn("function evidenceRows", application_js)
         self.assertIn("function programContactAction", application_js)
-        self.assertIn("data-open-evidence>View citations", application_js)
+        self.assertIn("Show full description &amp; details", application_js)
         self.assertIn(">Ask AI</button>", application_js)
         self.assertIn(">Program contact</a>", application_js)
         self.assertIn("function amendmentOverview", application_js)

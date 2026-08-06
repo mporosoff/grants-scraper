@@ -88,7 +88,7 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(script, /function renderComparePanel/);
   assert.match(script, /Program contact/);
   assert.match(script, /function programContactAction/);
-  assert.match(script, /data-open-evidence>View citations/);
+  assert.match(script, /Show full description &amp; details/);
   assert.match(script, /data-chat-record=.*?>Ask AI/);
   assert.match(script, /function amendmentOverview/);
   assert.match(script, /function amendmentNotice/);
@@ -109,7 +109,7 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.ok(
     script.indexOf('<details class="record-details">')
       < script.indexOf('<details class="result-feedback-toggle">'),
-    "cited details should appear before the final rating control",
+    "expanded details should appear before the final rating control",
   );
   assert.match(css, /\.full-description p/);
   assert.match(css, /\.full-description li \+ li/);
