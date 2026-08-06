@@ -82,7 +82,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             '<script src="./data/opportunities.js?v=catalog-',
             explorer_html,
         )
-        release_version = "release-2026-08-06-v3"
+        release_version = "release-2026-08-06-v4"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={release_version}">',
             explorer_html,
@@ -192,7 +192,10 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             application_css,
             r"(?s)\.results-column\s*\{[^}]*width:\s*100%",
         )
-        self.assertIn("@media (prefers-color-scheme: dark)", application_css)
+        self.assertIn('<meta name="color-scheme" content="light">', explorer_html)
+        self.assertIn('<h1 id="page-title">Find funding in a few clear steps</h1>', explorer_html)
+        self.assertNotIn("@media (prefers-color-scheme: dark)", application_css)
+        self.assertRegex(application_css, r"(?s):root\s*\{[^}]*color-scheme:\s*light")
         self.assertIn("@media (forced-colors: active)", application_css)
         self.assertNotIn('class="chat hidden"', explorer_html)
         self.assertNotIn("localStorage", application_js)

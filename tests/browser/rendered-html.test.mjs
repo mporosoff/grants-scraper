@@ -16,6 +16,8 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   ]);
 
   assert.match(prototype, /id="query"/);
+  assert.match(prototype, /<meta name="color-scheme" content="light">/);
+  assert.match(prototype, /<h1 id="page-title">Find funding in a few clear steps<\/h1>/);
   assert.match(prototype, /id="facet-discipline"/);
   assert.match(prototype, /id="facet-agency"/);
   assert.match(prototype, /id="flag-evidence"/);
@@ -170,7 +172,8 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(css, /\.filter-panel\s*\{[^}]*grid-area:\s*auto/s);
   assert.match(css, /\.filter-body\s*\{[^}]*overflow:\s*visible/s);
   assert.match(css, /\.results-column\s*\{[^}]*width:\s*100%/s);
-  assert.match(css, /@media \(prefers-color-scheme:\s*dark\)/);
+  assert.doesNotMatch(css, /@media \(prefers-color-scheme:\s*dark\)/);
+  assert.match(css, /:root\s*\{[^}]*color-scheme:\s*light/s);
   assert.match(css, /@media \(forced-colors:\s*active\)/);
   assert.doesNotMatch(
     prototype + script,
