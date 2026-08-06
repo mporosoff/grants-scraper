@@ -18,7 +18,7 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 35
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -30,18 +30,13 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v6
 
-      - name: Assemble public site
-        run: |
-          mkdir -p _site/data
-          cp index.html match_explorer.html .nojekyll _site/
-          cp -R assets feeds _site/
-          cp data/opportunities.js _site/data/
-
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
         with:
-          path: "./_site"
+          path: "."
 
       - name: Deploy Pages
         id: deployment
         uses: actions/deploy-pages@v5
+        with:
+          timeout: "1800000"
