@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-08-06T12:20:02Z</updated>
+  <updated>2026-08-07T11:08:35Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
@@ -70,6 +70,80 @@
     <summary>National Institutes of Health — Closes 2026-11-01 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop, operate, and sustain a cloud-based data storage and computing platform that democratizes access to large-scale Alzheimer’s disease (AD) and AD-related dementias (ADRD) genetic and genomic data. The platform must be secure, scalable, and interoperable. The platform wil…</summary>
   </entry>
   <entry>
+    <title>DRL Ensuring Resilient Seafood Supply Chains: Countering Forced Labor and any associated Illegal, Unreported and Unregulated Fishing</title>
+    <link href="https://www.grants.gov/search-results-detail/363486"/>
+    <id>urn:funding-finder:grants-gov:363486</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>Bureau of Democracy Human Rights and Labor</name></author>
+    <category term="Arts and culture"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Bureau of Democracy Human Rights and Labor — Closes 2026-09-03 — This program will counter forced labor in seafood supply chains associated with countries that have signed Agreements on Reciprocal Trade (ART) in East Asia and the Pacific (excluding Indonesia and the Philippines) and the Western Hemisphere, as well as other strategically important countries and prospective ART partners where engagement advances U.S. economic, trade, and maritime interests.</summary>
+  </entry>
+  <entry>
+    <title>Institute of Education Sciences (IES): National Center for Education Research (NCER): Research Training Programs in The Education Sciences, Assistance Listing Number (ALN) 84.305B</title>
+    <link href="https://www.grants.gov/search-results-detail/363466"/>
+    <id>urn:funding-finder:grants-gov:363466</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>Department of Education</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>Department of Education — Closes 2026-10-01 — NCER training programs prepare individuals to conduct education research that advances knowledge within the field and addresses issues important to education policymakers and practitioners. Under this competition, NCER will consider only applications that address one of the following programs: (1) Early Career Development and Mentoring Program for Education Research (Early Career) or (2) Methods T…</summary>
+  </entry>
+  <entry>
+    <title>Institute of Education Sciences (IES): National Center for Education Research (NCER): Statistical and Research Methodology in Education, Assistance Listing Number (ALN) 84.305D</title>
+    <link href="https://www.grants.gov/search-results-detail/363468"/>
+    <id>urn:funding-finder:grants-gov:363468</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>Department of Education</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>Department of Education — Closes 2026-10-01 — The goal of the Statistical and Research Methodology in Education (Stats/Methods) grant program (84.305D) is to provide a wide range of methodological and statistical tools that will better enable applied education scientists to conduct rigorous education research.Under this program, NCER will consider only applications that address one of the following topics: (1) Core Grants or (2) Toolkits, Gui…</summary>
+  </entry>
+  <entry>
+    <title>Institute of Education Sciences (IES): National Center for Education Research (NCER): Using Longitudinal Data to Support State Education Policymaking, Assistance Listing Number (ALN) 84.305S</title>
+    <link href="https://www.grants.gov/search-results-detail/363469"/>
+    <id>urn:funding-finder:grants-gov:363469</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>Department of Education</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>Department of Education — Closes 2026-10-01 — Through this grant program, IES supports state agencies’ use of their statewide longitudinal data systems (SLDSs) to provide evidence for their own program and policy decisions, and those of their local education agencies regarding increasing learners’ access to high-quality education and increased academic achievement. Assistance Listing Number (ALN) 84.305S.</summary>
+  </entry>
+  <entry>
+    <title>Institute of Education Sciences (IES): National Center for Special Education Research (NCSER): Research Training Programs in Special Education, Assistance Listing Number (ALN) 84.324B</title>
+    <link href="https://www.grants.gov/search-results-detail/363467"/>
+    <id>urn:funding-finder:grants-gov:363467</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>Department of Education</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>Department of Education — Closes 2026-10-01 — NCSER training programs prepare individuals to conduct special education and early intervention research that advances knowledge within the field and addresses issues important to education policymakers and practitioners. Under this competition, NCSER will consider only applications that address one of the following topics: (1) Early Career Development and Mentoring or (2) Methods Training for Spe…</summary>
+  </entry>
+  <entry>
+    <title>Institute of Education Sciences (IES): National Center for Special Education Research (NCSER): Using Longitudinal Data to Support State Education Policymaking in Special Education, Assistance Listing Number (ALN) 84.324S</title>
+    <link href="https://www.grants.gov/search-results-detail/363471"/>
+    <id>urn:funding-finder:grants-gov:363471</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>Department of Education</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>Department of Education — Closes 2026-10-01 — Through this grant program, NCSER supports state agencies’ use of their statewide longitudinal data systems (SLDSs) to provide evidence for their own program and policy decisions, and those of their local education agencies pertaining to learners with or at risk for disabilitiesAssistance Listing Number: 84.324S.</summary>
+  </entry>
+  <entry>
     <title>Illuminating AD/ADRD Genome to Enable Precision Genomic Medicine</title>
     <link href="https://www.grants.gov/search-results-detail/360906"/>
     <id>urn:funding-finder:grants-gov:360906</id>
@@ -92,6 +166,19 @@
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health — Closes 2026-10-06 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that develop or incorporate novel, cutting-edge study designs/methods/analytic approaches through the use of machine learning, artificial intelligence, and adaptive designs to allow the discovery of health/function profiles at the level of the individual and that could lead to th…</summary>
+  </entry>
+  <entry>
+    <title>U.S. National Science Foundation State and Regional Artificial Intelligence Infrastructure Hubs:</title>
+    <link href="https://www.grants.gov/search-results-detail/363481"/>
+    <id>urn:funding-finder:grants-gov:363481</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>U.S. National Science Foundation — Closes 2026-11-04 — The NSF State and Regional AI Infrastructure Hubs program aims to expand access to the compute required for AI-enabled scientific discovery and to transform the research, education, and training opportunities offered by institutions of higher education. AI Infrastructure Hubs will connect researchers to new compute infrastructure that leverages contributions from state governments, research instit…</summary>
   </entry>
   <entry>
     <title>DRL FY 2025 China Programs</title>
@@ -194,7 +281,7 @@
     <category term="Water"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Bureau of Reclamation — Closes 2026-09-29 — The Bureau of Reclamation"s Desalination and Water Purification Research (DWPR) Program aims to increase water supplies by reducing the costs, energy requirements, and other barriers to adoption of treating impaired water for beneficial uses.This NOFO invites proposals from eligible applicants to conduct innovative laboratory and pilot-scale water treatment research. Strong applications will demon…</summary>
+    <summary>Bureau of Reclamation — Closes 2026-09-29 — The Bureau of Reclamation"s Desalination and Water Purification Research (DWPR) Program aims to increase water supplies by reducing the costs, energy requirements, and other barriers to adoption of treating impaired water for beneficial uses. This NOFO invites proposals from eligible applicants to conduct innovative laboratory and pilot-scale water treatment research. Strong applications will demo…</summary>
   </entry>
   <entry>
     <title>Fiscal Year (FY) 2027 Department of War (DoW) Defense University Research Instrumentation Program (DURIP)</title>
@@ -521,29 +608,6 @@
     <summary>Employment and Training Administration — Closes 2026-08-17 — Questions regarding this Training and Employment Guidance Letter (TEGL) may be emailed to Daniela Petchik, Grants Management Specialist at petchik.daniela.m@dol.gov and Brinda Ruggles, Grant Officer at ruggles.brinda@dol.gov. We encourage prospective applicants and interested parties to use the Grants.gov subscription option to register for future updates provided for this particular TEGL.</summary>
   </entry>
   <entry>
-    <title>Annual Program Statement (APS) – Public Diplomacy Grants Program: Advancing America First Priorities</title>
-    <link href="https://www.grants.gov/search-results-detail/363093"/>
-    <id>urn:funding-finder:grants-gov:363093</id>
-    <updated>2026-07-07T00:00:00Z</updated>
-    <author><name>U.S. Mission to Ecuador</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>U.S. Mission to Ecuador — Closes 2026-08-06 — The U.S. Mission to Ecuador of the U.S. Department of State is pleased to announce that funding is available through its Public Diplomacy Grants Program. This is an Annual Program Statement, outlining our funding priorities, the strategic themes we focus on, and the procedures for submitting requests for funding.</summary>
-  </entry>
-  <entry>
-    <title>U.S. Embassy Jerusalem Public Diplomacy Annual Program Statement (Palestinian audiences)</title>
-    <link href="https://www.grants.gov/search-results-detail/363046"/>
-    <id>urn:funding-finder:grants-gov:363046</id>
-    <updated>2026-07-07T00:00:00Z</updated>
-    <author><name>U.S. Mission to Jerusalem</name></author>
-    <category term="Education and workforce"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>U.S. Mission to Jerusalem — Closes 2026-08-06 — U.S. Embassy Jerusalem’s Public Diplomacy Section (PDS) announces an open competition to implement projects that advance U.S. economic, commercial, and security interests among Palestinian audiences. This Annual Program Statement (APS) outlines strategic goals, expected outcomes, target audiences, eligibility criteria, and application guidelines for cooperative agreements ranging from $50,000 to $…</summary>
-  </entry>
-  <entry>
     <title>Empowering English Educators</title>
     <link href="https://www.grants.gov/search-results-detail/363060"/>
     <id>urn:funding-finder:grants-gov:363060</id>
@@ -619,18 +683,6 @@
     <category term="Manufacturing"/>
     <category term="Cybersecurity"/>
     <summary>National Energy Technology Laboratory — Closes 2026-09-08 — Modification 000003: The purpose of this modification is to revise NOFO Part 1. Section I.A.1 is revised to correct the Topic Area 1b cost share to 20% and Section IV.C.2 is revised to delete the Environmental Considerations Summary and Environmental Impact Volume from the Summary of Application Requirements table. This Notice of Funding Opportunity (NOFO) will seek proposals for specific research…</summary>
-  </entry>
-  <entry>
-    <title>Small Health Care Provider Quality Improvement Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362831"/>
-    <id>urn:funding-finder:grants-gov:362831</id>
-    <updated>2026-07-02T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Arts and culture"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>Health Resources and Services Administration — Closes 2026-08-06 — The purpose of the Small Health Care Provider Quality Improvement Program is to strengthen the quality improvement culture in small rural healthcare facilities by building capacity to effectively collect and use clinical data while implementing evidence-based approaches to improve health care quality with a particular focus on improving chronic disease outcomes. Additionally, the program strengthe…</summary>
   </entry>
   <entry>
     <title>Voices for the Future</title>
@@ -716,59 +768,5 @@
     <category term="Education and workforce"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health — Closes 2026-10-19 — The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
-  </entry>
-  <entry>
-    <title>PRIMED-AI: Data-to-Model Academic-Industrial Partnerships (D2M-AIP) for Precision Medicine with AI: Integrating Imaging with Multimodal Data (UG3/UH3 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359270"/>
-    <id>urn:funding-finder:grants-gov:359270</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <summary>National Institutes of Health — Closes 2026-10-19 — The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
-  </entry>
-  <entry>
-    <title>Creative Industries Film Lab and Residency - American Film Showcase 2026</title>
-    <link href="https://www.grants.gov/search-results-detail/362939"/>
-    <id>urn:funding-finder:grants-gov:362939</id>
-    <updated>2026-06-24T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Indonesia — Closes 2026-08-07 — Project Background, Goals, and ObjectivesThe Creative Industries Film Lab and Residency – American Film Showcase 2026 is a five-day public diplomacy program aligned with the American Film Showcase 2026 Envoy visit and scheduled during the Jogja-NETPAC Asian Film Festival Market 2026. The program includes two main components: Exhibition Booth: In partnership with Jogja-NETPAC, the program will secu…</summary>
-  </entry>
-  <entry>
-    <title>Prosperity through Partnership: Catalyzing U.S.-Algerian Collaboration in Innovation, Commerce and English Language</title>
-    <link href="https://www.grants.gov/search-results-detail/362903"/>
-    <id>urn:funding-finder:grants-gov:362903</id>
-    <updated>2026-06-22T00:00:00Z</updated>
-    <author><name>U.S. Mission to Algeria</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Algeria — Closes 2026-08-08 — 1. Executive SummaryThe U.S. Department of State’s Embassy Algiers is launching a competitive program to catalyze innovation and commerce between the United States and Algeria and advance key U.S. foreign policy priorities. The initiative aims to strengthen commercial ties, expand market access for American companies, and promote American business models and technology, particularly in entrepreneu…</summary>
-  </entry>
-  <entry>
-    <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
-    <link href="https://www.grants.gov/search-results-detail/362900"/>
-    <id>urn:funding-finder:grants-gov:362900</id>
-    <updated>2026-06-22T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Cybersecurity"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <category term="Data science"/>
-    <category term="Energy"/>
-    <summary>U.S. Mission to Indonesia — Closes 2026-08-31 — Project Background, Goals, and ObjectivesIn an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will leave…</summary>
   </entry>
 </feed>

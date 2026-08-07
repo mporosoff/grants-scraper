@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml</id>
-  <updated>2026-08-06T12:20:02Z</updated>
+  <updated>2026-08-07T11:08:35Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
@@ -81,6 +81,18 @@
     <category term="Environmental science"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health — Closes 2027-05-27 — The National Institute of Mental Health (NIMH) intends to publish a notice of funding opportunity (NOFO) to solicit research applications for practice-based research centers to support interdisciplinary teams of mental health researchers to engage in high-impact studies that will significantly advance clinical practice and generate knowledge to fuel the transformation of mental health care in the …</summary>
+  </entry>
+  <entry>
+    <title>Partnership with Common Fund Data Ecosystem Resources</title>
+    <link href="https://www.grants.gov/search-results-detail/363488"/>
+    <id>urn:funding-finder:grants-gov:363488</id>
+    <updated>2027-01-11T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Cancer"/>
+    <category term="Environmental science"/>
+    <category term="Neuroscience"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health — Closes 2027-05-25 — The NIH Office of Strategic Coordination (Common Fund) has generated many valuable and widely available datasets. The Common Fund Data Ecosystem is helping to ensure that all Common Fund (CF) data are Findable, Accessible, Interoperable, and Reusable (FAIR). The purpose of this Notice of Funding Opportunity (NOFO) is to announce the availability of funds for projects that involve collaboration bet…</summary>
   </entry>
   <entry>
     <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
@@ -445,7 +457,7 @@
     <category term="Water"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Bureau of Reclamation — Closes 2026-09-29 — The Bureau of Reclamation"s Desalination and Water Purification Research (DWPR) Program aims to increase water supplies by reducing the costs, energy requirements, and other barriers to adoption of treating impaired water for beneficial uses.This NOFO invites proposals from eligible applicants to conduct innovative laboratory and pilot-scale water treatment research. Strong applications will demon…</summary>
+    <summary>Bureau of Reclamation — Closes 2026-09-29 — The Bureau of Reclamation"s Desalination and Water Purification Research (DWPR) Program aims to increase water supplies by reducing the costs, energy requirements, and other barriers to adoption of treating impaired water for beneficial uses. This NOFO invites proposals from eligible applicants to conduct innovative laboratory and pilot-scale water treatment research. Strong applications will demo…</summary>
   </entry>
   <entry>
     <title>Building Skills, Strengthening Communities, and Advancing Innovation in Northwest Mexico</title>
@@ -679,15 +691,5 @@
     <category term="Technology development"/>
     <category term="Data science"/>
     <summary>U.S. Mission to Indonesia — Closes 2026-08-30 — Indonesia is ASEAN’s largest economy and most populous nation, with a young, fast-growing digital population that is rapidly adopting artificial intelligence and creative-technology tools. The choices this generation makes about which technologies, standards, and platforms to build on will shape Indonesia’s digital economy for decades. Demand for trusted, high-quality AI tools is outpacing access …</summary>
-  </entry>
-  <entry>
-    <title>Wetland Mitigation Banking Program Fiscal Year (FY) 2026</title>
-    <link href="https://www.grants.gov/search-results-detail/363288"/>
-    <id>urn:funding-finder:grants-gov:363288</id>
-    <updated>2026-07-23T00:00:00Z</updated>
-    <author><name>Natural Resources Conservation Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Environmental science"/>
-    <summary>Natural Resources Conservation Service — Closes 2026-09-08 — NRCS is announcing the availability of $3 million in WMBP grant funds for the development and establishment of mitigation banks and banking opportunities solely for agricultural producers with wetlands subject to the wetland conservation compliance provisions of the Food Security Act of 1985 (as amended). WMBP is a competitive grants program accepting proposals from eligible entities as identified…</summary>
   </entry>
 </feed>

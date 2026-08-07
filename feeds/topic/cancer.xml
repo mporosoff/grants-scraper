@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml</id>
-  <updated>2026-08-06T12:20:02Z</updated>
+  <updated>2026-08-07T11:08:35Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -73,6 +73,18 @@
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
     <summary>Centers for Disease Control - NCHHSTP — Closes 2027-03-15 — The purpose of this demonstration project is to support coordinated Clinic and Community Collaboratives (CCCs) to integrate HIV care with broader women's health services in jurisdictions with disproportionately high HIV disease burden to improve HIV-related outcomes, overall health, and quality of life among WWH. Organizations will be funded to implement 4 strategies: (1) Integrate HIV care with b…</summary>
+  </entry>
+  <entry>
+    <title>Partnership with Common Fund Data Ecosystem Resources</title>
+    <link href="https://www.grants.gov/search-results-detail/363488"/>
+    <id>urn:funding-finder:grants-gov:363488</id>
+    <updated>2027-01-11T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Cancer"/>
+    <category term="Environmental science"/>
+    <category term="Neuroscience"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health — Closes 2027-05-25 — The NIH Office of Strategic Coordination (Common Fund) has generated many valuable and widely available datasets. The Common Fund Data Ecosystem is helping to ensure that all Common Fund (CF) data are Findable, Accessible, Interoperable, and Reusable (FAIR). The purpose of this Notice of Funding Opportunity (NOFO) is to announce the availability of funds for projects that involve collaboration bet…</summary>
   </entry>
   <entry>
     <title>Canine Cancer Immunotherapy Network (K9CIN; U01 Clinical Trial Not Allowed)</title>
@@ -605,15 +617,5 @@
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
     <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-07 — Summary: The fiscal year 2026 (FY26) Pancreatic Cancer Research Program (PCARP) Translational Research Partnership Award supports partnerships between clinicians, population scientists, applied scientists and/or basic scientists that will accelerate the movement of promising ideas in pancreatic cancer toward clinical applications. The partnership must include at least one member with expertise in …</summary>
-  </entry>
-  <entry>
-    <title>Research Opportunities in Cancer Epidemiology Cohort Studies (U01 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359091"/>
-    <id>urn:funding-finder:grants-gov:359091</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Cancer"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2029-07-05 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) encourages grant applications to support research in cancer epidemiology cohort studies that address specific knowledge gaps in cancer etiology and survivorship. Applications should include hypothesis-based research, support for cohort infrastructure and/or maintenance, continued follow-up, and sharing of data a…</summary>
   </entry>
 </feed>

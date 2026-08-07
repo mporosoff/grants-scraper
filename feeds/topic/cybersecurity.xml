@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-08-06T12:20:02Z</updated>
+  <updated>2026-08-07T11:08:35Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -17,6 +17,89 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>Rural Utilities Service — Closes 2027-05-03 — The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+  </entry>
+  <entry>
+    <title>Precision Inertial Navigation &amp; Positioning On an Integrated Tesseract (PINPOINT)</title>
+    <link href="https://www.grants.gov/search-results-detail/363489"/>
+    <id>urn:funding-finder:grants-gov:363489</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>DARPA - Defense Sciences Office</name></author>
+    <category term="Cybersecurity"/>
+    <summary>DARPA - Defense Sciences Office — Closes 2026-09-25 — The Defense Advanced Research Projects Agency (DARPA) is soliciting innovative proposals in the following technical area: physics and nonlinear control of inertial measurement units (IMUs) appropriate for tactical and unmanned missions. The Precision Inertial Navigation &amp; Positioning On an Integrated Tesseract (PINPOINT) program will challenge the research community to overcome the decade-long per…</summary>
+  </entry>
+  <entry>
+    <title>Institute of Education Sciences (IES): National Center for Education Research (NCER): Research Training Programs in The Education Sciences, Assistance Listing Number (ALN) 84.305B</title>
+    <link href="https://www.grants.gov/search-results-detail/363466"/>
+    <id>urn:funding-finder:grants-gov:363466</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>Department of Education</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>Department of Education — Closes 2026-10-01 — NCER training programs prepare individuals to conduct education research that advances knowledge within the field and addresses issues important to education policymakers and practitioners. Under this competition, NCER will consider only applications that address one of the following programs: (1) Early Career Development and Mentoring Program for Education Research (Early Career) or (2) Methods T…</summary>
+  </entry>
+  <entry>
+    <title>Institute of Education Sciences (IES): National Center for Education Research (NCER): Statistical and Research Methodology in Education, Assistance Listing Number (ALN) 84.305D</title>
+    <link href="https://www.grants.gov/search-results-detail/363468"/>
+    <id>urn:funding-finder:grants-gov:363468</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>Department of Education</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>Department of Education — Closes 2026-10-01 — The goal of the Statistical and Research Methodology in Education (Stats/Methods) grant program (84.305D) is to provide a wide range of methodological and statistical tools that will better enable applied education scientists to conduct rigorous education research.Under this program, NCER will consider only applications that address one of the following topics: (1) Core Grants or (2) Toolkits, Gui…</summary>
+  </entry>
+  <entry>
+    <title>Institute of Education Sciences (IES): National Center for Education Research (NCER): Using Longitudinal Data to Support State Education Policymaking, Assistance Listing Number (ALN) 84.305S</title>
+    <link href="https://www.grants.gov/search-results-detail/363469"/>
+    <id>urn:funding-finder:grants-gov:363469</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>Department of Education</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>Department of Education — Closes 2026-10-01 — Through this grant program, IES supports state agencies’ use of their statewide longitudinal data systems (SLDSs) to provide evidence for their own program and policy decisions, and those of their local education agencies regarding increasing learners’ access to high-quality education and increased academic achievement. Assistance Listing Number (ALN) 84.305S.</summary>
+  </entry>
+  <entry>
+    <title>Institute of Education Sciences (IES): National Center for Special Education Research (NCSER): Research Training Programs in Special Education, Assistance Listing Number (ALN) 84.324B</title>
+    <link href="https://www.grants.gov/search-results-detail/363467"/>
+    <id>urn:funding-finder:grants-gov:363467</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>Department of Education</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>Department of Education — Closes 2026-10-01 — NCSER training programs prepare individuals to conduct special education and early intervention research that advances knowledge within the field and addresses issues important to education policymakers and practitioners. Under this competition, NCSER will consider only applications that address one of the following topics: (1) Early Career Development and Mentoring or (2) Methods Training for Spe…</summary>
+  </entry>
+  <entry>
+    <title>Institute of Education Sciences (IES): National Center for Special Education Research (NCSER): Using Longitudinal Data to Support State Education Policymaking in Special Education, Assistance Listing Number (ALN) 84.324S</title>
+    <link href="https://www.grants.gov/search-results-detail/363471"/>
+    <id>urn:funding-finder:grants-gov:363471</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>Department of Education</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>Department of Education — Closes 2026-10-01 — Through this grant program, NCSER supports state agencies’ use of their statewide longitudinal data systems (SLDSs) to provide evidence for their own program and policy decisions, and those of their local education agencies pertaining to learners with or at risk for disabilitiesAssistance Listing Number: 84.324S.</summary>
+  </entry>
+  <entry>
+    <title>U.S. National Science Foundation State and Regional Artificial Intelligence Infrastructure Hubs:</title>
+    <link href="https://www.grants.gov/search-results-detail/363481"/>
+    <id>urn:funding-finder:grants-gov:363481</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>U.S. National Science Foundation — Closes 2026-11-04 — The NSF State and Regional AI Infrastructure Hubs program aims to expand access to the compute required for AI-enabled scientific discovery and to transform the research, education, and training opportunities offered by institutions of higher education. AI Infrastructure Hubs will connect researchers to new compute infrastructure that leverages contributions from state governments, research instit…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 National Dam Safety Program - Rehabilitation of High Hazard Potential Dams (HHPD)</title>
@@ -494,29 +577,6 @@
     <summary>Health Resources and Services Administration — Closes 2026-09-09 — The purpose of Fiscal Year (FY) 2027 Expanding Nutrition Services (ENS) funding is to increase access to nutrition services at HRSA-funded health centers. Nutrition services can help to prevent, manage, and treat diseases and conditions through nutritional and food-based interventions. Health centers will use ENS funding to increase the number of nutrition services patients or visits.</summary>
   </entry>
   <entry>
-    <title>Annual Program Statement (APS) – Public Diplomacy Grants Program: Advancing America First Priorities</title>
-    <link href="https://www.grants.gov/search-results-detail/363093"/>
-    <id>urn:funding-finder:grants-gov:363093</id>
-    <updated>2026-07-07T00:00:00Z</updated>
-    <author><name>U.S. Mission to Ecuador</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>U.S. Mission to Ecuador — Closes 2026-08-06 — The U.S. Mission to Ecuador of the U.S. Department of State is pleased to announce that funding is available through its Public Diplomacy Grants Program. This is an Annual Program Statement, outlining our funding priorities, the strategic themes we focus on, and the procedures for submitting requests for funding.</summary>
-  </entry>
-  <entry>
-    <title>U.S. Embassy Jerusalem Public Diplomacy Annual Program Statement (Palestinian audiences)</title>
-    <link href="https://www.grants.gov/search-results-detail/363046"/>
-    <id>urn:funding-finder:grants-gov:363046</id>
-    <updated>2026-07-07T00:00:00Z</updated>
-    <author><name>U.S. Mission to Jerusalem</name></author>
-    <category term="Education and workforce"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>U.S. Mission to Jerusalem — Closes 2026-08-06 — U.S. Embassy Jerusalem’s Public Diplomacy Section (PDS) announces an open competition to implement projects that advance U.S. economic, commercial, and security interests among Palestinian audiences. This Annual Program Statement (APS) outlines strategic goals, expected outcomes, target audiences, eligibility criteria, and application guidelines for cooperative agreements ranging from $50,000 to $…</summary>
-  </entry>
-  <entry>
     <title>Fiscal Year 2026 United States Marine Highway Program (USMHP)</title>
     <link href="https://www.grants.gov/search-results-detail/362478"/>
     <id>urn:funding-finder:grants-gov:362478</id>
@@ -555,18 +615,6 @@
     <category term="Cybersecurity"/>
     <category term="Water"/>
     <summary>Assistance Coordination — Closes 2026-09-30 — The Middle East Regional Cooperation (MERC) Program supports joint scientific research and innovation partnerships between the United States, Israel, and countries across the Middle East and North Africa (MENA). The program funds applied research projects that address shared regional challenges while advancing U.S. economic, technological, and strategic interests. MERC is designed to bring togethe…</summary>
-  </entry>
-  <entry>
-    <title>Small Health Care Provider Quality Improvement Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362831"/>
-    <id>urn:funding-finder:grants-gov:362831</id>
-    <updated>2026-07-02T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Arts and culture"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>Health Resources and Services Administration — Closes 2026-08-06 — The purpose of the Small Health Care Provider Quality Improvement Program is to strengthen the quality improvement culture in small rural healthcare facilities by building capacity to effectively collect and use clinical data while implementing evidence-based approaches to improve health care quality with a particular focus on improving chronic disease outcomes. Additionally, the program strengthe…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 26 Community Assistance Program - State Support Services Element (CAP-SSSE)</title>
@@ -642,47 +690,5 @@
     <author><name>Department of Homeland Security - FEMA</name></author>
     <category term="Cybersecurity"/>
     <summary>Department of Homeland Security - FEMA — Closes 2026-08-17 — The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
-  </entry>
-  <entry>
-    <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 8</title>
-    <link href="https://www.grants.gov/search-results-detail/363002"/>
-    <id>urn:funding-finder:grants-gov:363002</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>Department of Homeland Security - FEMA</name></author>
-    <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA — Closes 2026-08-17 — The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
-  </entry>
-  <entry>
-    <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 9</title>
-    <link href="https://www.grants.gov/search-results-detail/363006"/>
-    <id>urn:funding-finder:grants-gov:363006</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>Department of Homeland Security - FEMA</name></author>
-    <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA — Closes 2026-08-17 — The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
-  </entry>
-  <entry>
-    <title>Interdisciplinary Transportation Law and Policy Technology Training Development</title>
-    <link href="https://www.grants.gov/search-results-detail/362960"/>
-    <id>urn:funding-finder:grants-gov:362960</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>69A355 Research and Technology</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <category term="Cybersecurity"/>
-    <summary>69A355 Research and Technology — Closes 2026-08-28 — The U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Interdisciplinary Transportation Law and Policy Technology Training Development program. This 24-month cooperative agreement aims to bridge the critical knowledge gap between fast-changing transportation technologies and our Nati…</summary>
-  </entry>
-  <entry>
-    <title>FY25-FY26 Advanced Transportation Technology and Innovation (ATTAIN)</title>
-    <link href="https://www.grants.gov/search-results-detail/362980"/>
-    <id>urn:funding-finder:grants-gov:362980</id>
-    <updated>2026-06-26T00:00:00Z</updated>
-    <author><name>DOT Federal Highway Administration</name></author>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <category term="Cybersecurity"/>
-    <summary>DOT Federal Highway Administration — Closes 2026-08-11 — The ATTAIN Competitive Grant Program will provide funding to deploy, install, and operate advanced transportation technologies to improve safety, mobility, efficiency, system performance, intermodal connectivity, and infrastructure return on investment. Eligible applicants for ATTAIN Competitive Grant Program funds are: • State or local governments; • transit agencies; • metropolitan planning orga…</summary>
   </entry>
 </feed>

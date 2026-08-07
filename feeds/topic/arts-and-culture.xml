@@ -4,8 +4,27 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml</id>
-  <updated>2026-08-06T12:20:02Z</updated>
+  <updated>2026-08-07T11:08:35Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Public Health Nursing</title>
+    <link href="https://www.grants.gov/search-results-detail/363495"/>
+    <id>urn:funding-finder:grants-gov:363495</id>
+    <updated>2028-03-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Public health"/>
+    <summary>Indian Health Service — Closes 2028-05-01 — The goal of this cooperative agreement is to improve the overall health and wellness of American Indian and Alaska Native men through a culturally responsive Public Health Nursing (PHN) case management and care navigation model. PHNs will engage men in preventive health and wellness services, increase access to care, promote early identification and management of health conditions, and support hea…</summary>
+  </entry>
+  <entry>
+    <title>Youth Regional Treatment Center Aftercare Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363503"/>
+    <id>urn:funding-finder:grants-gov:363503</id>
+    <updated>2027-08-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <summary>Indian Health Service — Closes 2027-10-01 — The goal of the Youth Aftercare cooperative agreement is to help American Indian and Alaska Native (AI/AN) youth achieve and sustain safety, sobriety, and long-term success after discharge from a Youth Regional Treatment Center (YRTC). The program strengthens culturally appropriate, community-based aftercare services by improving care coordination, building partnerships across the continuum of car…</summary>
+  </entry>
   <entry>
     <title>Improved Drug Susceptibility Testing (DST) for Mycobacteria</title>
     <link href="https://www.grants.gov/search-results-detail/362948"/>
@@ -16,6 +35,37 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health — Closes 2027-05-28 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting research to develop improved drug susceptibility tests (DSTs) for mycobacterial drugs, including those currently used for treatment of tuberculosis (TB) and clinically important non-tuberculous mycobacterial (NTM) infections, new drugs and drugs in late-stage clinical development. TB is a l…</summary>
+  </entry>
+  <entry>
+    <title>Domestic Violence Prevention</title>
+    <link href="https://www.grants.gov/search-results-detail/363491"/>
+    <id>urn:funding-finder:grants-gov:363491</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Indian Health Service — Closes 2027-04-01 — The purpose of this IHS grant is to support the development and expansion of Domestic Violence Prevention (DVP) programs that integrate culturally appropriate, trauma-informed prevention and victim services for Tribes, Tribal organizations, and Urban Indian Organizations serving AI/AN communities. The program will address domestic and sexual violence, sexual exploitation and human trafficking, Mis…</summary>
+  </entry>
+  <entry>
+    <title>Domestic Violence Prevention: Forensic Healthcare Services</title>
+    <link href="https://www.grants.gov/search-results-detail/363493"/>
+    <id>urn:funding-finder:grants-gov:363493</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <summary>Indian Health Service — Closes 2027-04-01 — The purpose of this IHS grant is to expand access to culturally appropriate, trauma-informed forensic healthcare (FHC) services for American Indian/Alaska Native (AI/AN) victims of domestic violence, sexual violence, child maltreatment, and human trafficking. The grant supports the development and expansion of FHC services across IHS Areas while promoting coordinated treatment, intervention, preve…</summary>
+  </entry>
+  <entry>
+    <title>Suicide Prevention, Intervention, and Postvention</title>
+    <link href="https://www.grants.gov/search-results-detail/363496"/>
+    <id>urn:funding-finder:grants-gov:363496</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Indian Health Service — Closes 2027-04-01 — The primary purpose of this program is to reduce suicide among American Indian and Alaska Native (AI/AN) populations by improving care coordination, expanding culturally appropriate behavioral health services, and implementing early intervention strategies for at-risk AI/AN youth. The program supports Tribal, community-driven suicide prevention, intervention, and postvention efforts that promote c…</summary>
   </entry>
   <entry>
     <title>Demonstration Projects for Whole-Person Health Models for Women Living with HIV in the South</title>
@@ -61,6 +111,18 @@
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Arts and culture"/>
     <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-16 — The purpose of the R03 grant program is (1) to develop an understanding of the risks and conditions associated with occupational diseases and injuries, (2) to explore methods for reducing risks and preventing or minimizing exposure to hazardous conditions in the workplace, and (3) to translate significant scientific findings into prevention practices and products that will effectively reduce work-…</summary>
+  </entry>
+  <entry>
+    <title>National Urban Indian Health Program (Education and Research)</title>
+    <link href="https://www.grants.gov/search-results-detail/363494"/>
+    <id>urn:funding-finder:grants-gov:363494</id>
+    <updated>2026-12-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Indian Health Service — Closes 2027-02-01 — The purpose of the NUIBH program is to strengthen behavioral health services for Urban Indian communities by increasing awareness, advocacy, education, and collaboration nationwide. The program supports Urban Indian Organizations (UIOs) through technical assistance, training, information sharing, strategic planning, and quality improvement to expand culturally appropriate behavioral health service…</summary>
   </entry>
   <entry>
     <title>Tribal Maternal, Infant, and Early Childhood Home Visiting Program: Development and Implementation Grants</title>
@@ -206,6 +268,32 @@
     <summary>National Institutes of Health — Closes 2026-10-13 — The NIGMS Mature Synchrotron Resources for Structural Biology program supports mature technologies at synchrotron facilities that provide biomedical researchers with state-of-the-art X-ray beamlines, hands-on user training, and expert assistance to generate and analyze structural biology data. NIGMS intends to reissue a Notice of Funding Opportunity to continue to support these important national …</summary>
   </entry>
   <entry>
+    <title>DRL Ensuring Resilient Seafood Supply Chains: Countering Forced Labor and any associated Illegal, Unreported and Unregulated Fishing</title>
+    <link href="https://www.grants.gov/search-results-detail/363486"/>
+    <id>urn:funding-finder:grants-gov:363486</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>Bureau of Democracy Human Rights and Labor</name></author>
+    <category term="Arts and culture"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Bureau of Democracy Human Rights and Labor — Closes 2026-09-03 — This program will counter forced labor in seafood supply chains associated with countries that have signed Agreements on Reciprocal Trade (ART) in East Asia and the Pacific (excluding Indonesia and the Philippines) and the Western Hemisphere, as well as other strategically important countries and prospective ART partners where engagement advances U.S. economic, trade, and maritime interests.</summary>
+  </entry>
+  <entry>
+    <title>Institute of Education Sciences (IES): National Center for Education Research (NCER): Statistical and Research Methodology in Education, Assistance Listing Number (ALN) 84.305D</title>
+    <link href="https://www.grants.gov/search-results-detail/363468"/>
+    <id>urn:funding-finder:grants-gov:363468</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>Department of Education</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>Department of Education — Closes 2026-10-01 — The goal of the Statistical and Research Methodology in Education (Stats/Methods) grant program (84.305D) is to provide a wide range of methodological and statistical tools that will better enable applied education scientists to conduct rigorous education research.Under this program, NCER will consider only applications that address one of the following topics: (1) Core Grants or (2) Toolkits, Gui…</summary>
+  </entry>
+  <entry>
     <title>Novel Approaches to Advance Precision Aging and Cognitive Health</title>
     <link href="https://www.grants.gov/search-results-detail/360910"/>
     <id>urn:funding-finder:grants-gov:360910</id>
@@ -216,6 +304,19 @@
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health — Closes 2026-10-06 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that develop or incorporate novel, cutting-edge study designs/methods/analytic approaches through the use of machine learning, artificial intelligence, and adaptive designs to allow the discovery of health/function profiles at the level of the individual and that could lead to th…</summary>
+  </entry>
+  <entry>
+    <title>U.S. National Science Foundation State and Regional Artificial Intelligence Infrastructure Hubs:</title>
+    <link href="https://www.grants.gov/search-results-detail/363481"/>
+    <id>urn:funding-finder:grants-gov:363481</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>U.S. National Science Foundation — Closes 2026-11-04 — The NSF State and Regional AI Infrastructure Hubs program aims to expand access to the compute required for AI-enabled scientific discovery and to transform the research, education, and training opportunities offered by institutions of higher education. AI Infrastructure Hubs will connect researchers to new compute infrastructure that leverages contributions from state governments, research instit…</summary>
   </entry>
   <entry>
     <title>Tribal Personal Responsibility Education Program (Tribal PREP)</title>
@@ -587,109 +688,5 @@
     <category term="Education and workforce"/>
     <category term="Cybersecurity"/>
     <summary>Food and Drug Administration — Closes 2026-08-20 — The primary purpose of this program is to develop and provide education and/or training, and outreach regarding FDA's Produce Safety Rule to produce farmers who are members of federally recognized Tribes. The program is expected to help Tribal farmers access appropriate technical assistance and may include Tribal farmers who are not currently required to comply with the rule but are interested in …</summary>
-  </entry>
-  <entry>
-    <title>GameON – U.S.-Albania E-Sports and Innovation</title>
-    <link href="https://www.grants.gov/search-results-detail/363247"/>
-    <id>urn:funding-finder:grants-gov:363247</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>U.S. Mission to Albania</name></author>
-    <category term="Arts and culture"/>
-    <category term="Cybersecurity"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Albania — Closes 2026-08-20 — 1. Project Background, Goals, and Objectives Albania's youth face a rapidly evolving digital economy that demands advanced technical skills, entrepreneurial mindsets, and exposure to international industry standards. Albanian interest in gaming – a global market forecasted to surpass $745 billion by 2030, in which the United States is leading – is high, presenting an opportunity to increase Albani…</summary>
-  </entry>
-  <entry>
-    <title>Personal Responsibility Education Innovative Strategies (PREIS)</title>
-    <link href="https://www.grants.gov/search-results-detail/361986"/>
-    <id>urn:funding-finder:grants-gov:361986</id>
-    <updated>2026-07-17T00:00:00Z</updated>
-    <author><name>Administration for Children &amp; Families - ACYF/FYSB</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <summary>Administration for Children &amp; Families - ACYF/FYSB — Closes 2026-08-18 — The Personal Responsibility Education Program-Innovative Strategies (PREIS) builds the evidence base for adolescent pregnancy prevention interventions that are effective with high risk and vulnerable youth populations and addresses gaps with new promising program models. PREIS funds rigorous impact evaluations of innovative youth pregnancy prevention interventions that target services to high-risk…</summary>
-  </entry>
-  <entry>
-    <title>Annual Program Statement for U.S. Presentation at International Architecture Biennales</title>
-    <link href="https://www.grants.gov/search-results-detail/363225"/>
-    <id>urn:funding-finder:grants-gov:363225</id>
-    <updated>2026-07-17T00:00:00Z</updated>
-    <author><name>Bureau Of Educational and Cultural Affairs</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <summary>Bureau Of Educational and Cultural Affairs — Closes 2099-01-01 — The U.S. Department of State, Bureau of Educational and Cultural Affairs, Cultural Programs Division (ECA/PE/C/CU) seeks to advance international understanding of American values by exposing foreign audiences to innovative and compelling architectural designs that reflect U.S. foreign policy and foster international dialogue on shared global challenges.</summary>
-  </entry>
-  <entry>
-    <title>Developing Civilizational Bonds, Democratic Resilience, and Rule of Law in Europe</title>
-    <link href="https://www.grants.gov/search-results-detail/363207"/>
-    <id>urn:funding-finder:grants-gov:363207</id>
-    <updated>2026-07-16T00:00:00Z</updated>
-    <author><name>Bureau of Democracy Human Rights and Labor</name></author>
-    <category term="Arts and culture"/>
-    <summary>Bureau of Democracy Human Rights and Labor — Closes 2026-08-12 — DRL requests proposals to strengthen and develop democratic resilience, rule of law, freedom of speech and freedom of the press, and the defense of human rights in Europe through research, conferences, cultural engagements, and support for civil society to address national sovereignty, migration, censorship, and lawfare challenges in line with shared political philosophy, law, and our common Weste…</summary>
-  </entry>
-  <entry>
-    <title>Title V Competitive Sexual Risk Avoidance Education</title>
-    <link href="https://www.grants.gov/search-results-detail/362128"/>
-    <id>urn:funding-finder:grants-gov:362128</id>
-    <updated>2026-07-16T00:00:00Z</updated>
-    <author><name>Administration for Children &amp; Families - ACYF/FYSB</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <summary>Administration for Children &amp; Families - ACYF/FYSB — Closes 2026-08-17 — This NOFO is modified. Changes are made to Step 1: Review the Opportunity, Eligibility: Locality restrictions. The state of New Hampshire was added. The Title V Competitive SRAE program competitively funds projects to implement sexual risk avoidance education that teaches youth ages 10-19 how to voluntarily refrain from non-marital sexual activity. Projects must: 1) use medically accurate informat…</summary>
-  </entry>
-  <entry>
-    <title>American Center Yangon (ACY) Small Grants Competition</title>
-    <link href="https://www.grants.gov/search-results-detail/363184"/>
-    <id>urn:funding-finder:grants-gov:363184</id>
-    <updated>2026-07-15T00:00:00Z</updated>
-    <author><name>U.S. Mission to Myanmar</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>U.S. Mission to Myanmar — Closes 2026-08-10 — 1. Project Background, Goals and Objectives American Center Yangon Small Grants’ projects must clearly advance America First foreign policy principles by demonstrating how the proposed activities make the United States safer, stronger, and more prosperous, while celebrating Freedom250 and American excellence. Priority will be given to projects that deliver tangible, measurable benefits to U.S. int…</summary>
-  </entry>
-  <entry>
-    <title>Jefferson Center Mandalay (JCM) Small Grants Competition</title>
-    <link href="https://www.grants.gov/search-results-detail/363185"/>
-    <id>urn:funding-finder:grants-gov:363185</id>
-    <updated>2026-07-15T00:00:00Z</updated>
-    <author><name>U.S. Mission to Myanmar</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>U.S. Mission to Myanmar — Closes 2026-08-10 — 1. Project Background, Goals and Objectives Jefferson Center Mandalay Small Grants’ projects must clearly advance America First foreign policy principles by demonstrating how the proposed activities make the United States safer, stronger, and more prosperous, while celebrating Freedom250 and American excellence. Priority will be given to projects that deliver tangible, measurable benefits to U.S. …</summary>
-  </entry>
-  <entry>
-    <title>Global Digital Threat Lab</title>
-    <link href="https://www.grants.gov/search-results-detail/363201"/>
-    <id>urn:funding-finder:grants-gov:363201</id>
-    <updated>2026-07-15T00:00:00Z</updated>
-    <author><name>Bureau of Democracy Human Rights and Labor</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Cybersecurity"/>
-    <summary>Bureau of Democracy Human Rights and Labor — Closes 2026-08-13 — Freedom of expression online faces threats globally from authoritarian governments employing sophisticated technology to restrict speech, control the flow of information, and chill dissenting voices. These challenges infringe on privacy; access to information; and the exercise of freedoms of expression, peaceful assembly, association, and religion or belief online. The misuse of commercial spyware…</summary>
-  </entry>
-  <entry>
-    <title>Public Wireless Supply Chain Innovation Fund Grant Program – Solutions for AI-Native RAN</title>
-    <link href="https://www.grants.gov/search-results-detail/363179"/>
-    <id>urn:funding-finder:grants-gov:363179</id>
-    <updated>2026-07-14T00:00:00Z</updated>
-    <author><name>National Telecommunications and Information Admini</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <summary>National Telecommunications and Information Admini — Closes 2026-09-09 — This NOFO is the fourth issued under NTIA’s Public Wireless Supply Chain Innovation Fund (PWSCIF or Innovation Fund). Titled “Solutions for AI-Native RAN,” the goal of this NOFO is to support the development of a secure compute environment to enable or leverage native artificial intelligence (“AI”) capabilities in the Radio Access Network (RAN) that generate revenue for operators, cost savings, an…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml</id>
-  <updated>2026-08-06T12:20:02Z</updated>
+  <updated>2026-08-07T11:08:35Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -15,6 +15,16 @@
     <category term="Education and workforce"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health — Closes 2028-05-30 — The National Institute on Deafness and Other Communication Disorders (NIDCD) intends to publish a Notice of Funding Opportunity (NOFO) for clinical audiologists currently enrolled in Ph.D. programs. NIDCD encourages audiologists with strong research potential to integrate clinical and translational research into their career paths. A strong research foundation is essential for advancing hearing he…</summary>
+  </entry>
+  <entry>
+    <title>Public Health Nursing</title>
+    <link href="https://www.grants.gov/search-results-detail/363495"/>
+    <id>urn:funding-finder:grants-gov:363495</id>
+    <updated>2028-03-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Public health"/>
+    <summary>Indian Health Service — Closes 2028-05-01 — The goal of this cooperative agreement is to improve the overall health and wellness of American Indian and Alaska Native men through a culturally responsive Public Health Nursing (PHN) case management and care navigation model. PHNs will engage men in preventive health and wellness services, increase access to care, promote early identification and management of health conditions, and support hea…</summary>
   </entry>
   <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
@@ -35,6 +45,15 @@
     <category term="Data science"/>
     <category term="Public health"/>
     <summary>National Institutes of Health — Closes 2028-02-01 — The National Human Genome Research Institute (NHGRI) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to establish an ancient DNA for Modern Genomics (aDMG) program. The goal of aDMG is to establish an ethical resource of ancient and historical human DNA (aDNA) data to advance studies about contemporary human traits and biology. This NOFO aims to solicit applicatio…</summary>
+  </entry>
+  <entry>
+    <title>Youth Regional Treatment Center Aftercare Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363503"/>
+    <id>urn:funding-finder:grants-gov:363503</id>
+    <updated>2027-08-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <summary>Indian Health Service — Closes 2027-10-01 — The goal of the Youth Aftercare cooperative agreement is to help American Indian and Alaska Native (AI/AN) youth achieve and sustain safety, sobriety, and long-term success after discharge from a Youth Regional Treatment Center (YRTC). The program strengthens culturally appropriate, community-based aftercare services by improving care coordination, building partnerships across the continuum of car…</summary>
   </entry>
   <entry>
     <title>Single Source: Institutional Development Award (IDeA) Clinical Research Resource Center (I-CRRC)</title>
@@ -338,6 +357,80 @@
     <summary>National Institutes of Health — Closes 2027-05-25 — The National Center for Complementary and Integrative Health (NCCIH) intends to publish a Notice of Funding Opportunity (NOFO) to support collaborative interdisciplinary research that advances foundational understanding of non-addictive natural products for chronic pain management through a holistic, system-oriented approach. This initiative aligns with the NIH Helping to End Addiction Long-term (…</summary>
   </entry>
   <entry>
+    <title>Domestic Violence Prevention</title>
+    <link href="https://www.grants.gov/search-results-detail/363491"/>
+    <id>urn:funding-finder:grants-gov:363491</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Indian Health Service — Closes 2027-04-01 — The purpose of this IHS grant is to support the development and expansion of Domestic Violence Prevention (DVP) programs that integrate culturally appropriate, trauma-informed prevention and victim services for Tribes, Tribal organizations, and Urban Indian Organizations serving AI/AN communities. The program will address domestic and sexual violence, sexual exploitation and human trafficking, Mis…</summary>
+  </entry>
+  <entry>
+    <title>Domestic Violence Prevention: Forensic Healthcare Services</title>
+    <link href="https://www.grants.gov/search-results-detail/363493"/>
+    <id>urn:funding-finder:grants-gov:363493</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <summary>Indian Health Service — Closes 2027-04-01 — The purpose of this IHS grant is to expand access to culturally appropriate, trauma-informed forensic healthcare (FHC) services for American Indian/Alaska Native (AI/AN) victims of domestic violence, sexual violence, child maltreatment, and human trafficking. The grant supports the development and expansion of FHC services across IHS Areas while promoting coordinated treatment, intervention, preve…</summary>
+  </entry>
+  <entry>
+    <title>Suicide Prevention, Intervention, and Postvention</title>
+    <link href="https://www.grants.gov/search-results-detail/363496"/>
+    <id>urn:funding-finder:grants-gov:363496</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Indian Health Service — Closes 2027-04-01 — The primary purpose of this program is to reduce suicide among American Indian and Alaska Native (AI/AN) populations by improving care coordination, expanding culturally appropriate behavioral health services, and implementing early intervention strategies for at-risk AI/AN youth. The program supports Tribal, community-driven suicide prevention, intervention, and postvention efforts that promote c…</summary>
+  </entry>
+  <entry>
+    <title>Tribal Epidemiology Centers</title>
+    <link href="https://www.grants.gov/search-results-detail/363492"/>
+    <id>urn:funding-finder:grants-gov:363492</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Public health"/>
+    <summary>Indian Health Service — Closes 2027-04-01 — Second cohort of TEC sites for any currently unserved Areas.</summary>
+  </entry>
+  <entry>
+    <title>Tribal Management Development</title>
+    <link href="https://www.grants.gov/search-results-detail/363498"/>
+    <id>urn:funding-finder:grants-gov:363498</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Education and workforce"/>
+    <summary>Indian Health Service — Closes 2027-04-01 — The Tribal Management Grant program aims to prepare tribes and tribal organizations for assuming all or part of existing Indian Health Service programs functions services and activities under the Public Law 93 638 Indian Self Determination and Education Assistance Act as amended and to further develop and improve their health management capabilities. The Indian Health Service intends to issue five…</summary>
+  </entry>
+  <entry>
+    <title>Tribal Self-Governance - Negotiation</title>
+    <link href="https://www.grants.gov/search-results-detail/363499"/>
+    <id>urn:funding-finder:grants-gov:363499</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <summary>Indian Health Service — Closes 2027-04-01 — The Tribal Self Governance Planning and Negotiation Cooperative Agreements aim to support tribes and tribal organization in their efforts to plan and prepare for assuming responsibility for providing health care to their members through the Tribal Self Governance Program. The Indian Health Service intends to issue three awards under each program announcement.</summary>
+  </entry>
+  <entry>
+    <title>Tribal Self-Governance - Planning</title>
+    <link href="https://www.grants.gov/search-results-detail/363504"/>
+    <id>urn:funding-finder:grants-gov:363504</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <summary>Indian Health Service — Closes 2027-04-01 — The Tribal Self Governance Planning and Negotiation Cooperative Agreements aim to support tribes and tribal organization in their efforts to plan and prepare for assuming responsibility for providing health care to their members through the Tribal Self Governance Program. The Indian Health Service intends to issue three awards under each program announcement.</summary>
+  </entry>
+  <entry>
+    <title>Urban Indian Health Program - Education &amp; Research</title>
+    <link href="https://www.grants.gov/search-results-detail/363502"/>
+    <id>urn:funding-finder:grants-gov:363502</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Education and workforce"/>
+    <summary>Indian Health Service — Closes 2027-04-01 — National organization that is an urban Indian education and research partner to DUIA and all IHS contracted UIOs</summary>
+  </entry>
+  <entry>
     <title>Strengthening Public Health Systems and Services in Indian Country</title>
     <link href="https://www.grants.gov/search-results-detail/363416"/>
     <id>urn:funding-finder:grants-gov:363416</id>
@@ -495,111 +588,5 @@
     <category term="Public health"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health — Closes 2027-06-04 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing to develop innovative technologies for cancer research or clinical care. The emphasis of this NOFO is on early-stage projects proposing proof-of-concept/pilot studies to test the technical feasibility of the proposed method, tool, assay, platform, or instrument. Well-suited …</summary>
-  </entry>
-  <entry>
-    <title>Demonstration Projects for Whole-Person Health Models for Women Living with HIV in the South</title>
-    <link href="https://www.grants.gov/search-results-detail/363389"/>
-    <id>urn:funding-finder:grants-gov:363389</id>
-    <updated>2027-01-14T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCHHSTP</name></author>
-    <category term="Arts and culture"/>
-    <category term="Cancer"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-03-15 — The purpose of this demonstration project is to support coordinated Clinic and Community Collaboratives (CCCs) to integrate HIV care with broader women's health services in jurisdictions with disproportionately high HIV disease burden to improve HIV-related outcomes, overall health, and quality of life among WWH. Organizations will be funded to implement 4 strategies: (1) Integrate HIV care with b…</summary>
-  </entry>
-  <entry>
-    <title>Ryan White HIV/AIDS Program Part B States/Territories Supplemental Grant Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363163"/>
-    <id>urn:funding-finder:grants-gov:363163</id>
-    <updated>2027-01-14T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <summary>Health Resources and Services Administration — Closes 2027-03-15 — The purpose of this program is to supplement formula-based funding provided through the HIV Care Grant Program – RWHAP Part B States/Territories Formula and AIDS Drug Assistance Program (ADAP) Formula and ADAP Supplemental Awards Notice of Funding Opportunity.</summary>
-  </entry>
-  <entry>
-    <title>Health Workforce Research Center (HWRC)</title>
-    <link href="https://www.grants.gov/search-results-detail/363112"/>
-    <id>urn:funding-finder:grants-gov:363112</id>
-    <updated>2027-01-08T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Education and workforce"/>
-    <summary>Health Resources and Services Administration — Closes 2027-03-09 — The Health Workforce Research Centers support research that helps decision-makers at the federal, state, and local levels understand health workforce needs.</summary>
-  </entry>
-  <entry>
-    <title>Childhood Asthma in Urban Settings Clinical Research Network</title>
-    <link href="https://www.grants.gov/search-results-detail/362950"/>
-    <id>urn:funding-finder:grants-gov:362950</id>
-    <updated>2027-01-08T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-05-28 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Childhood Asthma in Urban Settings Clinical Research Network (CAUSE) network. The CAUSE network will support multi-site clinical studies and trials on the prevention and treatment of asthma in economically disadvantaged pediatric populations where disease burden is hi…</summary>
-  </entry>
-  <entry>
-    <title>Core State Injury Prevention Program (Core SIPP)</title>
-    <link href="https://www.grants.gov/search-results-detail/363398"/>
-    <id>urn:funding-finder:grants-gov:363398</id>
-    <updated>2027-01-07T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCIPC</name></author>
-    <category term="Neuroscience"/>
-    <category term="Public health"/>
-    <category term="Transportation"/>
-    <summary>Centers for Disease Control - NCIPC — Closes 2027-03-08 — This forecast is for CDC's Core State Injury Prevention Program (Core SIPP), a cooperative agreement to support public health infrastructure, data, and partnerships to use data to identify potential risk and inform the implementation of strategies to prevent unintentional injury. Actions using the best available evidence are intended to increase protective factors and reduce risk factors for injur…</summary>
-  </entry>
-  <entry>
-    <title>Asthma and Allergic Diseases Cooperative Research Centers</title>
-    <link href="https://www.grants.gov/search-results-detail/362953"/>
-    <id>urn:funding-finder:grants-gov:362953</id>
-    <updated>2027-01-05T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-05-21 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Asthma and Allergic Diseases Cooperative Research Centers (AADCRC). The AADCRC program serves as the cornerstone of NIAID's efforts to promote clinical and basic research in diseases including asthma, upper airway allergic/inflammatory diseases, food and drug allergie…</summary>
-  </entry>
-  <entry>
-    <title>Bridge2AI Network for AI Health Science</title>
-    <link href="https://www.grants.gov/search-results-detail/363107"/>
-    <id>urn:funding-finder:grants-gov:363107</id>
-    <updated>2027-01-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health — Closes 2027-03-01 — The purpose of this forecast is to inform the research community that the NIH Common Fund, along with its partner NIH Institutes, Centers, and Offices, is planning to issue a notice of funding opportunity (NOFO) to support the continuation of the Bridge2AI program. Stage 1 of the Bridge2AI program produced unique, large-scale, valuable, and open resource, AI-ready datasets and best practices that …</summary>
-  </entry>
-  <entry>
-    <title>Continuing Enhanced National Surveillance for Prion Diseases in the United States</title>
-    <link href="https://www.grants.gov/search-results-detail/363153"/>
-    <id>urn:funding-finder:grants-gov:363153</id>
-    <updated>2026-12-29T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCEZID</name></author>
-    <category term="Arts and culture"/>
-    <category term="Neuroscience"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control - NCEZID — Closes 2027-03-27 — The CDC announces the availability of FY 2027 funds for a cooperative agreement to continue enhanced national surveillance for human prion diseases, also known as transmissible spongiform encephalopathies (TSEs), in the United States. The purpose is to continue an active surveillance program to help confirm suspected and clinically diagnosed cases of human prion disease and to monitor the occurren…</summary>
-  </entry>
-  <entry>
-    <title>The National Network of STI Prevention Training Centers (NNPTC)</title>
-    <link href="https://www.grants.gov/search-results-detail/363356"/>
-    <id>urn:funding-finder:grants-gov:363356</id>
-    <updated>2026-12-20T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCHHSTP</name></author>
-    <category term="Education and workforce"/>
-    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-02-20 — This NOFO will support the development and dissemination of education, training and technical assistance—emphasizing prevention strategies—for clinicians and disease intervention specialists to improve sexually transmitted infection (STI) patient care. The NOFO aims to improve the capacity of providers, clinical sites, and healthcare systems to diagnose, manage, treat and counsel individuals with …</summary>
-  </entry>
-  <entry>
-    <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
-    <link href="https://www.grants.gov/search-results-detail/363412"/>
-    <id>urn:funding-finder:grants-gov:363412</id>
-    <updated>2026-12-18T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Environmental science"/>
-    <summary>Health Resources and Services Administration — Closes 2027-03-18 — The purpose of this program is to improve maternal and infant outcomes by preventing contact with harmful materials before, during, and after pregnancy. This program aims to improve maternal and infant health outcomes by preventing harmful exposures before, during, and after pregnancy. It supports a national expert-staffed call center that provides timely, evidence-based information and personaliz…</summary>
   </entry>
 </feed>

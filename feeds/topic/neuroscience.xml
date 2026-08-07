@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml</id>
-  <updated>2026-08-06T12:20:02Z</updated>
+  <updated>2026-08-07T11:08:35Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -49,6 +49,18 @@
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health — Closes 2027-06-01 — The National Institute of Mental Health (NIMH), with other NIH Institutes and Centers (ICs), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop web-accessible data archives to capture, store, and curate data related to the Brain Research Through Advancing Innovative Neurotechnologies® (BRAIN) Initiative activities. The data archives teams will work with th…</summary>
+  </entry>
+  <entry>
+    <title>Partnership with Common Fund Data Ecosystem Resources</title>
+    <link href="https://www.grants.gov/search-results-detail/363488"/>
+    <id>urn:funding-finder:grants-gov:363488</id>
+    <updated>2027-01-11T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Cancer"/>
+    <category term="Environmental science"/>
+    <category term="Neuroscience"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health — Closes 2027-05-25 — The NIH Office of Strategic Coordination (Common Fund) has generated many valuable and widely available datasets. The Common Fund Data Ecosystem is helping to ensure that all Common Fund (CF) data are Findable, Accessible, Interoperable, and Reusable (FAIR). The purpose of this Notice of Funding Opportunity (NOFO) is to announce the availability of funds for projects that involve collaboration bet…</summary>
   </entry>
   <entry>
     <title>Core State Injury Prevention Program (Core SIPP)</title>
@@ -663,15 +675,5 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <author><name>National Institutes of Health</name></author>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health — Closes 2028-01-07 — Reissue of RFA-20-351.The purpose of this Notice of Funding Opportunity (NOFO) is to encourage applications to pursue invasive neural recording studies focused on mental health-relevant questions. Invasive neural recordings provide an unparalleled window into the human brain to explore the neural circuitry and neural dynamics underlying complex moods, emotions, cognitive functions, and behaviors w…</summary>
-  </entry>
-  <entry>
-    <title>Neuromodulation/Neurostimulation Device Development for Mental Health Applications (R01 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/357309"/>
-    <id>urn:funding-finder:grants-gov:357309</id>
-    <updated>2024-11-21T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health — Closes 2028-01-07 — The purpose of this Notice of Funding Opportunity (NOFO) is to encourage applications seeking to develop the next generation of brain stimulation devices for treating mental health disorders. Applications are sought that will either 1) develop novel brain stimulation devices or 2) significantly enhance, by means of hardware/software improvements, the effectiveness of brain stimulation devices that…</summary>
   </entry>
 </feed>

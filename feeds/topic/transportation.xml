@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-08-06T12:20:02Z</updated>
+  <updated>2026-08-07T11:08:35Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Core State Injury Prevention Program (Core SIPP)</title>
@@ -144,6 +144,28 @@
     <author><name>Department of Housing and Urban Development</name></author>
     <category term="Transportation"/>
     <summary>Department of Housing and Urban Development — Closes 2026-11-10 — The Family Unification Program (FUP) public housing authorities (PHAs) to partner with public child welfare agencies (PCWAs) to provide Housing Choice Voucher (HCV) assistance to two primary groups:1. Families: Those for whom the lack of adequate housing is a primary factor in the imminent placement of a child (or children) in out-of-home care, or a delay in the discharge of a child to the family …</summary>
+  </entry>
+  <entry>
+    <title>DRL Ensuring Resilient Seafood Supply Chains: Countering Forced Labor and any associated Illegal, Unreported and Unregulated Fishing</title>
+    <link href="https://www.grants.gov/search-results-detail/363486"/>
+    <id>urn:funding-finder:grants-gov:363486</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>Bureau of Democracy Human Rights and Labor</name></author>
+    <category term="Arts and culture"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Bureau of Democracy Human Rights and Labor — Closes 2026-09-03 — This program will counter forced labor in seafood supply chains associated with countries that have signed Agreements on Reciprocal Trade (ART) in East Asia and the Pacific (excluding Indonesia and the Philippines) and the Western Hemisphere, as well as other strategically important countries and prospective ART partners where engagement advances U.S. economic, trade, and maritime interests.</summary>
+  </entry>
+  <entry>
+    <title>Development of Fiscal Year 2027 Commercial Vehicle Safety Plans to Support National Safety Goals</title>
+    <link href="https://www.grants.gov/search-results-detail/363483"/>
+    <id>urn:funding-finder:grants-gov:363483</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>DOT-Federal Motor Carrier Safety Administration</name></author>
+    <category term="Transportation"/>
+    <summary>DOT-Federal Motor Carrier Safety Administration — Closes 2026-09-30 — The Motor Carrier Safety Assistance Program (MCSAP) is a Federal formula grant program that provides financial assistance to States, and U.S. Territories to reduce the number and severity of crashes, injuries, and fatalities and hazardous material incidents involving commercial motor vehicles.</summary>
   </entry>
   <entry>
     <title>SOI - Rural Transportation Match and Gap Funding Assistance Program</title>
@@ -641,32 +663,5 @@
     <category term="Agriculture and food"/>
     <category term="Transportation"/>
     <summary>Administration for Community Living — Closes 2026-09-01 — Grants awarded under this announcement are to provide disaster reimbursement and assistance funds to those State Units on Aging (SUAs), and federally recognized Tribal Organizations who are currently receiving a grant under Title VI of the Older Americans Act (OAA), as amended. Total funding available for disaster assistance is subject to the availability of funds appropriated. The estimated numbe…</summary>
-  </entry>
-  <entry>
-    <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
-    <link href="https://www.grants.gov/search-results-detail/362900"/>
-    <id>urn:funding-finder:grants-gov:362900</id>
-    <updated>2026-06-22T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Cybersecurity"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <category term="Data science"/>
-    <category term="Energy"/>
-    <summary>U.S. Mission to Indonesia — Closes 2026-08-31 — Project Background, Goals, and ObjectivesIn an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will leave…</summary>
-  </entry>
-  <entry>
-    <title>Institutional Mentored Career Development Award (Parent K12) (Clinical Trials Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/361251"/>
-    <id>urn:funding-finder:grants-gov:361251</id>
-    <updated>2026-06-22T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health — Closes 2029-07-12 — The National Institutes of Health (NIH) will award Institutional Mentored Career Development grants to eligible domestic institutions to support career development programs designed to prepare later stage postdoctoral fellows and junior faculty scholars who have made a commitment to an independent research career for their career advancement and transition to independence. Supported scholars will …</summary>
   </entry>
 </feed>

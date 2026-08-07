@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml</id>
-  <updated>2026-08-06T12:20:02Z</updated>
+  <updated>2026-08-07T11:08:35Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Resources and Workforce Development for the Regional Biocontainment Laboratories</title>
@@ -579,17 +579,6 @@
     <summary>National Institutes of Health — Closes 2026-08-19 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by continuing support for the Martin Delaney Collaboratories (MDCs) for HIV Cure Research. The goal of the MDC program is to develop strategies to control viral replication without the need for lifelong antiretroviral therapy, with an ultimate goal of completely eradicating HIV reservoirs from the indivi…</summary>
   </entry>
   <entry>
-    <title>Global Infectious Diseases Research Training Program (D43 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/361252"/>
-    <id>urn:funding-finder:grants-gov:361252</id>
-    <updated>2026-04-16T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Infectious disease"/>
-    <summary>National Institutes of Health — Closes 2026-08-06 — This initiative supports rigorous advanced research training programs for low- and middle-income country (LMIC) scientists on infectious diseases that pose a potential threat to the U.S. and present special opportunities for research that are not readily available in the U.S., such as unique resources, exposed or infected populations, or environmental conditions that impact transmission. Applicati…</summary>
-  </entry>
-  <entry>
     <title>NIDCD Clinical Research Center Grant (P50 Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/358863"/>
     <id>urn:funding-finder:grants-gov:358863</id>
@@ -647,6 +636,9 @@
     <category term="Environmental science"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
     <summary>National Institutes of Health — Closes 2028-01-07 — The purpose of this Notice of Funding Opportunity (NOFO) is to support studies that will identify, develop, and/or test strategies for overcoming barriers to the adoption, adaptation, integration, sustainability, scale-up, and spread of evidence-based interventions, practices, programs, tools, treatments, guidelines, and policies (hereafter referred to as evidence-based interventions). Conversely,…</summary>
   </entry>
   <entry>
@@ -661,5 +653,17 @@
     <category term="Infectious disease"/>
     <category term="Manufacturing"/>
     <summary>National Institutes of Health — Closes 2027-08-18 — The Blueprint Neurotherapeutics Network for Biologics (BPN-Biologics) provides support for biologic-based therapeutic discovery and development, from lead optimization through phase I clinical testing. This Funding Opportunity Announcement (FOA) supports preclinical discovery and development of potential therapeutic Biotechnology Products and Biologics including, but not limited to, large biologic…</summary>
+  </entry>
+  <entry>
+    <title>BRAIN Initiative: Reagent Resources for Brain Cell Type-Specific Access to Broaden Distribution of Enabling Technologies for Neuroscience (U24 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/356530"/>
+    <id>urn:funding-finder:grants-gov:356530</id>
+    <updated>2024-09-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Manufacturing"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health — Closes 2027-06-15 — This Notice of Funding Opportunity Announcement (NOFO) from the NIH Brain Research through Advancing Innovative Neurotechnologies (BRAIN) Initiative is intended to support establishment of facilities at minority-serving institutions (MSIs) and Institutional Development Award (IDeA)-eligible institutions for scaled production and distribution of brain cell type-specific access and manipulation reag…</summary>
   </entry>
 </feed>

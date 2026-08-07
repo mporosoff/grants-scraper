@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml</id>
-  <updated>2026-08-06T12:20:02Z</updated>
+  <updated>2026-08-07T11:08:35Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -147,6 +147,35 @@
     <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-04-12 — The purpose of the NIOSH Support for Conferences and Scientific Meetings (U13) program is to support high-quality scientific meetings, conferences, and workshops that are relevant to the NIOSH mission and that promote occupational safety and health. The conference program is an important part of the NIOSH mission. Applications should address and advance research topics in occupational safety and h…</summary>
   </entry>
   <entry>
+    <title>Domestic Violence Prevention</title>
+    <link href="https://www.grants.gov/search-results-detail/363491"/>
+    <id>urn:funding-finder:grants-gov:363491</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Indian Health Service — Closes 2027-04-01 — The purpose of this IHS grant is to support the development and expansion of Domestic Violence Prevention (DVP) programs that integrate culturally appropriate, trauma-informed prevention and victim services for Tribes, Tribal organizations, and Urban Indian Organizations serving AI/AN communities. The program will address domestic and sexual violence, sexual exploitation and human trafficking, Mis…</summary>
+  </entry>
+  <entry>
+    <title>Tribal Management Development</title>
+    <link href="https://www.grants.gov/search-results-detail/363498"/>
+    <id>urn:funding-finder:grants-gov:363498</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Education and workforce"/>
+    <summary>Indian Health Service — Closes 2027-04-01 — The Tribal Management Grant program aims to prepare tribes and tribal organizations for assuming all or part of existing Indian Health Service programs functions services and activities under the Public Law 93 638 Indian Self Determination and Education Assistance Act as amended and to further develop and improve their health management capabilities. The Indian Health Service intends to issue five…</summary>
+  </entry>
+  <entry>
+    <title>Urban Indian Health Program - Education &amp; Research</title>
+    <link href="https://www.grants.gov/search-results-detail/363502"/>
+    <id>urn:funding-finder:grants-gov:363502</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Education and workforce"/>
+    <summary>Indian Health Service — Closes 2027-04-01 — National organization that is an urban Indian education and research partner to DUIA and all IHS contracted UIOs</summary>
+  </entry>
+  <entry>
     <title>Strengthening Public Health Systems and Services in Indian Country</title>
     <link href="https://www.grants.gov/search-results-detail/363416"/>
     <id>urn:funding-finder:grants-gov:363416</id>
@@ -249,6 +278,18 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Education and workforce"/>
     <summary>Health Resources and Services Administration — Closes 2027-02-02 — The Centers of Excellence Program provides grants to health professions schools and other public and nonprofit health or educational entities to assist schools in supporting programs of excellence in health professions education for under-represented minority individuals. By statute, the Centers of Excellence Program awards funding to organizations to operate programs that establish, strengthen, a…</summary>
+  </entry>
+  <entry>
+    <title>National Urban Indian Health Program (Education and Research)</title>
+    <link href="https://www.grants.gov/search-results-detail/363494"/>
+    <id>urn:funding-finder:grants-gov:363494</id>
+    <updated>2026-12-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Indian Health Service — Closes 2027-02-01 — The purpose of the NUIBH program is to strengthen behavioral health services for Urban Indian communities by increasing awareness, advocacy, education, and collaboration nationwide. The program supports Urban Indian Organizations (UIOs) through technical assistance, training, information sharing, strategic planning, and quality improvement to expand culturally appropriate behavioral health service…</summary>
   </entry>
   <entry>
     <title>Establishing a Research Network to Guide Foundational Research on Human Consciousness</title>
@@ -586,47 +627,5 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <summary>National Institutes of Health — Closes 2027-02-12 — The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: Clinical and Translational Science Awards (CTSA) Program: Collaborative and Innovative Acceleration Award</title>
-    <link href="https://www.grants.gov/search-results-detail/363251"/>
-    <id>urn:funding-finder:grants-gov:363251</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-02-16 — The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
-  </entry>
-  <entry>
-    <title>Radiation Oncology-Biology Integration Network (ROBIN) Centers (U54 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/362647"/>
-    <id>urn:funding-finder:grants-gov:362647</id>
-    <updated>2026-08-19T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <summary>National Institutes of Health — Closes 2027-01-25 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to continue to support the Radiation Oncology-Biology Integration Network (ROBIN) with applications from both new and renewing investigators. This network model will sustain an agile and effective national radiation oncology infrastructure that collectively addresses critical hypothesis-based translation…</summary>
-  </entry>
-  <entry>
-    <title>Network of the National Library of Medicine Coordinating Center (U24 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/361282"/>
-    <id>urn:funding-finder:grants-gov:361282</id>
-    <updated>2026-08-15T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <summary>National Institutes of Health — Closes 2026-12-15 — The National Library of Medicine (NLM) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for a Coordinating Center of the Network of the National Library of Medicine (NNLM).Established in 1965 and organized geographically across the United States and its territories, the NNLM promotes and supports the initiatives, products, and services of the NLM and the National I…</summary>
-  </entry>
-  <entry>
-    <title>Network of the National Library of Medicine Regional Medical Libraries (UG4 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/361284"/>
-    <id>urn:funding-finder:grants-gov:361284</id>
-    <updated>2026-08-15T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <summary>National Institutes of Health — Closes 2026-12-15 — The National Library of Medicine (NLM) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for Regional Medical Libraries of the Network of the National Library of Medicine (NNLM).Established in 1965 and organized geographically across the United States and its territories, the NNLM promotes and supports the initiatives, products, and services of the NLM and the Natio…</summary>
   </entry>
 </feed>

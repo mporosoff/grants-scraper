@@ -4,8 +4,18 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml</id>
-  <updated>2026-08-06T12:20:02Z</updated>
+  <updated>2026-08-07T11:08:35Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Public Health Nursing</title>
+    <link href="https://www.grants.gov/search-results-detail/363495"/>
+    <id>urn:funding-finder:grants-gov:363495</id>
+    <updated>2028-03-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Public health"/>
+    <summary>Indian Health Service — Closes 2028-05-01 — The goal of this cooperative agreement is to improve the overall health and wellness of American Indian and Alaska Native men through a culturally responsive Public Health Nursing (PHN) case management and care navigation model. PHNs will engage men in preventive health and wellness services, increase access to care, promote early identification and management of health conditions, and support hea…</summary>
+  </entry>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/362639"/>
@@ -102,6 +112,26 @@
     <category term="Agriculture and food"/>
     <category term="Public health"/>
     <summary>Centers for Disease Control - NCIPC — Closes 2027-04-17 — This forecast is for CDC's Comprehensive Suicide Prevention Program for States, a cooperative agreement intended to support implementation and evaluation of a comprehensive public health approach to suicide prevention in the United States. Funded recipients will focus on one or more Focus Prevention Areas (FPAs), groups or settings identified through available data as experiencing a significant su…</summary>
+  </entry>
+  <entry>
+    <title>Suicide Prevention, Intervention, and Postvention</title>
+    <link href="https://www.grants.gov/search-results-detail/363496"/>
+    <id>urn:funding-finder:grants-gov:363496</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Indian Health Service — Closes 2027-04-01 — The primary purpose of this program is to reduce suicide among American Indian and Alaska Native (AI/AN) populations by improving care coordination, expanding culturally appropriate behavioral health services, and implementing early intervention strategies for at-risk AI/AN youth. The program supports Tribal, community-driven suicide prevention, intervention, and postvention efforts that promote c…</summary>
+  </entry>
+  <entry>
+    <title>Tribal Epidemiology Centers</title>
+    <link href="https://www.grants.gov/search-results-detail/363492"/>
+    <id>urn:funding-finder:grants-gov:363492</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Public health"/>
+    <summary>Indian Health Service — Closes 2027-04-01 — Second cohort of TEC sites for any currently unserved Areas.</summary>
   </entry>
   <entry>
     <title>Strengthening Public Health Systems and Services in Indian Country</title>
@@ -223,6 +253,18 @@
     <category term="Neuroscience"/>
     <category term="Public health"/>
     <summary>Centers for Disease Control - NCEZID — Closes 2027-03-27 — The CDC announces the availability of FY 2027 funds for a cooperative agreement to continue enhanced national surveillance for human prion diseases, also known as transmissible spongiform encephalopathies (TSEs), in the United States. The purpose is to continue an active surveillance program to help confirm suspected and clinically diagnosed cases of human prion disease and to monitor the occurren…</summary>
+  </entry>
+  <entry>
+    <title>National Urban Indian Health Program (Education and Research)</title>
+    <link href="https://www.grants.gov/search-results-detail/363494"/>
+    <id>urn:funding-finder:grants-gov:363494</id>
+    <updated>2026-12-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Indian Health Service — Closes 2027-02-01 — The purpose of the NUIBH program is to strengthen behavioral health services for Urban Indian communities by increasing awareness, advocacy, education, and collaboration nationwide. The program supports Urban Indian Organizations (UIOs) through technical assistance, training, information sharing, strategic planning, and quality improvement to expand culturally appropriate behavioral health service…</summary>
   </entry>
   <entry>
     <title>Establishing a Research Network to Guide Foundational Research on Human Consciousness</title>
@@ -575,6 +617,16 @@
     <summary>National Institutes of Health — Closes 2026-10-17 — The purpose of this NOFO is to enhance the capability of NCATS CTSA Program KL2 scholars supported by the CTSA Program to conduct research as they complete the transition to fully independent academic translational scientists. These small research grants will support different clinical and translational science research projects, including pilot and feasibility studies; secondary data analysis of …</summary>
   </entry>
   <entry>
+    <title>Applied Drug Policy Research Experiences</title>
+    <link href="https://www.grants.gov/search-results-detail/363487"/>
+    <id>urn:funding-finder:grants-gov:363487</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>Office of National Drug Control Policy</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>Office of National Drug Control Policy — Closes 2026-09-06 — This project will establish applied drug policy research experiences for graduate students and recent post-graduates to conduct rigorous research studies and data analyses to support the National Drug Control Strategy. This research will investigate dynamic shifts in, and associations between, illicit drug supply, drug use and their associated consequences, to help public health and public safety …</summary>
+  </entry>
+  <entry>
     <title>Expanding global health security through local partnerships in Ethiopia</title>
     <link href="https://www.grants.gov/search-results-detail/360333"/>
     <id>urn:funding-finder:grants-gov:360333</id>
@@ -595,64 +647,5 @@
     <category term="Public health"/>
     <category term="Cybersecurity"/>
     <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — This NOFO aims to foster partnerships that support collaboration between CDC and the Indonesian Ministry of Health (MOH) in achieving global health security goals, implementing International Health Regulations core principles, and effectively preventing, detecting, and responding to public health threats. Projects considered for this opportunity should focus on strengthening capacity in five key p…</summary>
-  </entry>
-  <entry>
-    <title>Expanding global health security through local partnerships in Nigeria</title>
-    <link href="https://www.grants.gov/search-results-detail/360332"/>
-    <id>urn:funding-finder:grants-gov:360332</id>
-    <updated>2026-08-03T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <category term="Cybersecurity"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — The purpose of this NOFO is to strengthen International Health Regulations (IHR) (2005) capacities of the Nigeria Centre for Disease Control and Prevention (NCDC); other Government of Nigeria ministries, departments, and agencies (MDAs) relevant to the implementation of multi-sectoral response efforts of the IHR; and sub-national public health institutions, such as State Ministries of Health and l…</summary>
-  </entry>
-  <entry>
-    <title>Expanding Global Health Security through local partnerships in Senegal</title>
-    <link href="https://www.grants.gov/search-results-detail/360334"/>
-    <id>urn:funding-finder:grants-gov:360334</id>
-    <updated>2026-08-03T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Education and workforce"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <category term="Cybersecurity"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — This NOFO aims to enhance Senegal's public health infrastructure to prevent, detect, and respond to infectious disease threats through implementing partners. The initiative focuses on strengthening public health surveillance systems, including community-based surveillance, improving laboratory networks, and enhancing workforce training. The goal is to build sustainable, resilient health security i…</summary>
-  </entry>
-  <entry>
-    <title>Improving global health security in Côte d'Ivoire to stop the spread of infectious disease</title>
-    <link href="https://www.grants.gov/search-results-detail/360324"/>
-    <id>urn:funding-finder:grants-gov:360324</id>
-    <updated>2026-08-03T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <category term="Cybersecurity"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — This Notice of Funding Opportunity (NOFO) seeks to build upon activities funded by CDC to support Global Health Security (GHS) in the Cote d"Ivore through implementation of programs and activities that focus on protecting and improving health globally through partnerships with Ministries of Health and other governmental institutions. The main outcomes of this NOFO are the following: (1) Improve pr…</summary>
-  </entry>
-  <entry>
-    <title>Protecting and Improving Global Health Security by Engaging Local Partners: Strengthening and Sustaining Public Health Systems in Ghana</title>
-    <link href="https://www.grants.gov/search-results-detail/360455"/>
-    <id>urn:funding-finder:grants-gov:360455</id>
-    <updated>2026-08-03T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Education and workforce"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <category term="Cybersecurity"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — This NOFO seeks to build and sustain a more resilient public health system in Ghana capable of identifying, responding to and mitigating public health threats. CDC, through this NOFO, will continue to leverage and complement the strengths and resources of multi-sectoral and multilateral partners in Ghana to build and improve country capacity and leadership in the prevention, early detection and re…</summary>
-  </entry>
-  <entry>
-    <title>Strengthening global health security in India to contain public health threats and accelerate outbreak response</title>
-    <link href="https://www.grants.gov/search-results-detail/360336"/>
-    <id>urn:funding-finder:grants-gov:360336</id>
-    <updated>2026-08-03T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Education and workforce"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <category term="Transportation"/>
-    <category term="Cybersecurity"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — This NOFO"s purpose is to support district, state and national public health systems in India to advance GHSA priorities to prevent, detect and respond to infectious disease threats. CDC will work with the Government of India (GoI) to strengthen capacity to control disease outbreaks at their source and neutralize public health threats. This NOFO will augment and increasingly transition CDC-support…</summary>
   </entry>
 </feed>
