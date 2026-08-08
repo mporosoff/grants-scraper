@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-08-07T11:08:35Z</updated>
+  <updated>2026-08-08T10:52:00Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -487,17 +487,6 @@
     <summary>Bureau of Near Eastern Affairs — Closes 2026-08-31 — The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
   </entry>
   <entry>
-    <title>Fiscal Year 2026 Next Generation Warning System Grant Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363192"/>
-    <id>urn:funding-finder:grants-gov:363192</id>
-    <updated>2026-07-17T00:00:00Z</updated>
-    <author><name>Department of Homeland Security - FEMA</name></author>
-    <category term="Cybersecurity"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Department of Homeland Security - FEMA — Closes 2026-08-07 — This grant will fund projects to identify capability gaps and implement solutions for alert and warning to deliver timely public warning and emergency information and to protect critical infrastructure. There are rapid changes in technology, cybersecurity threats, and public preferences for consuming content, recipients will work with the Federal Emergency Management Agency (FEMA) to explore curre…</summary>
-  </entry>
-  <entry>
     <title>Data Analytics &amp; AI to Counter Global Diversion</title>
     <link href="https://www.grants.gov/search-results-detail/363221"/>
     <id>urn:funding-finder:grants-gov:363221</id>
@@ -614,19 +603,6 @@
     <summary>National Energy Technology Laboratory — Closes 2026-09-08 — Modification 000003: The purpose of this modification is to revise NOFO Part 1. Section I.A.1 is revised to correct the Topic Area 1b cost share to 20% and Section IV.C.2 is revised to delete the Environmental Considerations Summary and Environmental Impact Volume from the Summary of Application Requirements table. This Notice of Funding Opportunity (NOFO) will seek proposals for specific research…</summary>
   </entry>
   <entry>
-    <title>Voices for the Future</title>
-    <link href="https://www.grants.gov/search-results-detail/363043"/>
-    <id>urn:funding-finder:grants-gov:363043</id>
-    <updated>2026-07-02T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Indonesia — Closes 2026-08-07 — PROGRAM DESCRIPTION 1. Project Background, Goals, and Objectives Indonesia is the world’s third largest democracy and over half of its population is under the age 30. Because of this large youth demographic, the United States has an opportunity to engage the next generation of Indonesian leaders. For the last several years, however, Indonesian favorability towards the United States has failed to i…</summary>
-  </entry>
-  <entry>
     <title>NIAMS P30 Centers Program (P30 - Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/359152"/>
     <id>urn:funding-finder:grants-gov:359152</id>
@@ -664,20 +640,6 @@
     <summary>National Endowment for the Humanities — Closes 2026-09-16 — The National Endowment for the Humanities (NEH) Division of Research is accepting applications for the Scholarly Editions and Translations program. The purpose of this program is to support collaborative teams who edit, annotate, and translate foundational humanities texts that are vital to generating new scholarship but are not available in adequate editions or translations. This year’s competiti…</summary>
   </entry>
   <entry>
-    <title>Creative Industries Film Lab and Residency - American Film Showcase 2026</title>
-    <link href="https://www.grants.gov/search-results-detail/362939"/>
-    <id>urn:funding-finder:grants-gov:362939</id>
-    <updated>2026-06-24T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Indonesia — Closes 2026-08-07 — Project Background, Goals, and ObjectivesThe Creative Industries Film Lab and Residency – American Film Showcase 2026 is a five-day public diplomacy program aligned with the American Film Showcase 2026 Envoy visit and scheduled during the Jogja-NETPAC Asian Film Festival Market 2026. The program includes two main components: Exhibition Booth: In partnership with Jogja-NETPAC, the program will secu…</summary>
-  </entry>
-  <entry>
     <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
     <link href="https://www.grants.gov/search-results-detail/362900"/>
     <id>urn:funding-finder:grants-gov:362900</id>
@@ -692,18 +654,6 @@
     <category term="Data science"/>
     <category term="Energy"/>
     <summary>U.S. Mission to Indonesia — Closes 2026-08-31 — Project Background, Goals, and ObjectivesIn an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will leave…</summary>
-  </entry>
-  <entry>
-    <title>Escape The Hack: Countering Cyber Scams with an Immersive Experience for Everyday Indonesians</title>
-    <link href="https://www.grants.gov/search-results-detail/362863"/>
-    <id>urn:funding-finder:grants-gov:362863</id>
-    <updated>2026-06-18T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Cybersecurity"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Indonesia — Closes 2026-08-07 — Indonesia faces a pervasive and evolving cybercrime threat, with online scams growing in number and sophistication – while U.S. families continue to lose their life’s savings to international cybercrime, totaling over $12 billions in financial losses in 2023 alone. Unlike scam compounds in mainland Southeast Asia, criminal scam operations in Indonesia are decentralized and embedded within transnat…</summary>
   </entry>
   <entry>
     <title>Tribal Colleges Extension Program - Capacity Applications</title>
@@ -754,5 +704,49 @@
     <category term="Technology development"/>
     <category term="Data science"/>
     <summary>Dept of the Army -- Materiel Command — Closes 2026-08-11 — This solicitation invites applications (also referred to as “proposals”) for basic research projects. The proposals must align with the research areas of interest to the DoW (which includes the USW(R&amp;E) and the Agencies) and enhance the education of students in areas of STEM that align with the DoW research interests. Information about these areas of interest (including websites) is discussed belo…</summary>
+  </entry>
+  <entry>
+    <title>HEAL Initiative: Translating Addiction Epidemiology, Prevention, Treatment, and Recovery Research into Practice (R61/R33 - Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/362672"/>
+    <id>urn:funding-finder:grants-gov:362672</id>
+    <updated>2026-06-04T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Data science"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health — Closes 2029-02-09 — The goal of this notice of funding opportunity (NOFO) is to address the opioid crisis and/or overdose events by supporting action-oriented research, accelerating the translation of addiction epidemiology, prevention, treatment services, and recovery research to practice. Proposed studies may target the individual, provider, organizational, community, or system level. This initiative prioritizes re…</summary>
+  </entry>
+  <entry>
+    <title>NLM Institutional Grants for Research Training in Biomedical Informatics, Data Science, and AI</title>
+    <link href="https://www.grants.gov/search-results-detail/361318"/>
+    <id>urn:funding-finder:grants-gov:361318</id>
+    <updated>2026-06-02T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health — Closes 2026-09-25 — The National Library of Medicine (NLM) invites applications for innovative predoctoral and postdoctoral training programs that prepare the next generation of researchers in biomedical informatics, data science, and artificial intelligence/machine learning (AI/ML). NLM emphasizes cutting-edge, forward-looking training experiences that equip trainees to address complex health and biomedical challeng…</summary>
+  </entry>
+  <entry>
+    <title>Native American Affairs: Fiscal Year 2025 Colorado River Basin Tribal Drought Resiliency Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362644"/>
+    <id>urn:funding-finder:grants-gov:362644</id>
+    <updated>2026-06-02T00:00:00Z</updated>
+    <author><name>Bureau of Reclamation</name></author>
+    <category term="Energy"/>
+    <category term="Water"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Bureau of Reclamation — Closes 2026-09-28 — The objectives of this NAA/TAP funding opportunity are to provide funding for drought relief actions/projects that mitigate drought impacts for designated federally recognized tribes within the Colorado River Basin (see Eligibility section for list of tribes), and which advance Presidential and Department of the Interior Priorities within the Basin.Proposals should meet one or more of the followin…</summary>
+  </entry>
+  <entry>
+    <title>Optimizing Behavioral Sleep Interventions for Adolescents and Young Adults (R34 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/359159"/>
+    <id>urn:funding-finder:grants-gov:359159</id>
+    <updated>2026-05-28T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Data science"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health — Closes 2026-10-22 — NIMH seeks applications for pilot research to adapt, optimize, and test behavioral interventions that address common sleep problems in adolescents and young adults with or at risk for a mental health disorder. This notice of funding opportunity (NOFO) supports pilot clinical trials designed to evaluate the feasibility, tolerability, acceptability, safety, and potential effectiveness of the approac…</summary>
   </entry>
 </feed>

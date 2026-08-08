@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml</id>
-  <updated>2026-08-07T11:08:35Z</updated>
+  <updated>2026-08-08T10:52:00Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -220,6 +220,15 @@
     <summary>National Institutes of Health — Closes 2027-05-27 — The National Institute of Mental Health (NIMH) intends to publish a notice of funding opportunity (NOFO) to solicit research applications for practice-based research centers to support interdisciplinary teams of mental health researchers to engage in high-impact studies that will significantly advance clinical practice and generate knowledge to fuel the transformation of mental health care in the …</summary>
   </entry>
   <entry>
+    <title>Infant-Toddler Court Program–State Awards</title>
+    <link href="https://www.grants.gov/search-results-detail/363512"/>
+    <id>urn:funding-finder:grants-gov:363512</id>
+    <updated>2027-01-21T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <summary>Health Resources and Services Administration — Closes 2027-04-21 — The Infant-Toddler Court Program (ITCP) State Awards allow states and communities to support and expand use of enhanced child welfare practices in communities across the country that bring together courts, social services, and families to improve the safety, healthy development, and nurturing relationships of families with young children involved with child welfare. The ITCP State Awards support i…</summary>
+  </entry>
+  <entry>
     <title>Health Workforce Research Center (HWRC)</title>
     <link href="https://www.grants.gov/search-results-detail/363112"/>
     <id>urn:funding-finder:grants-gov:363112</id>
@@ -247,6 +256,15 @@
     <author><name>Centers for Disease Control - NCHHSTP</name></author>
     <category term="Education and workforce"/>
     <summary>Centers for Disease Control - NCHHSTP — Closes 2027-02-20 — This NOFO will support the development and dissemination of education, training and technical assistance—emphasizing prevention strategies—for clinicians and disease intervention specialists to improve sexually transmitted infection (STI) patient care. The NOFO aims to improve the capacity of providers, clinical sites, and healthcare systems to diagnose, manage, treat and counsel individuals with …</summary>
+  </entry>
+  <entry>
+    <title>Rural Residency Planning and Development Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363508"/>
+    <id>urn:funding-finder:grants-gov:363508</id>
+    <updated>2026-12-18T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <summary>Health Resources and Services Administration — Closes 2027-03-18 — The Rural Residency Planning and Development (RRPD) program improves and expands rural health care access. It does this by developing new, accredited, sustainable rural residency programs, including rural track programs (RTPs). Newly created rural physician residency programs increase training and ultimately practice in rural areas to address physician shortages. The RRPD program provides start-up…</summary>
   </entry>
   <entry>
     <title>NIOSH Centers for Agriculture, Forestry, and Fishing Safety and Health (U54)</title>
@@ -605,27 +623,5 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <summary>National Institutes of Health — Closes 2027-01-25 — The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
-  </entry>
-  <entry>
-    <title>The Next Generation of the Clinical and Translational Science Awards Program Trial Innovation Network</title>
-    <link href="https://www.grants.gov/search-results-detail/363253"/>
-    <id>urn:funding-finder:grants-gov:363253</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-01-25 — The Clinical and Translational Science Awards Program Trial Innovation Network (TIN) is a collaborative initiative aimed at addressing critical roadblocks in the design and implementation of multi-center clinical trials. The goal of the TIN is to execute trials better, faster, and more cost-efficiently, as well as serve as a national laboratory to study, understand, and innovate the process of con…</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: Institutional Mentored Research Career Development Program for the Clinical and Translational Science Awards Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363245"/>
-    <id>urn:funding-finder:grants-gov:363245</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-02-12 — The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
   </entry>
 </feed>

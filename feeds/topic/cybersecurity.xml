@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-08-07T11:08:35Z</updated>
+  <updated>2026-08-08T10:52:00Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -474,17 +474,6 @@
     <summary>Bureau of Near Eastern Affairs — Closes 2026-08-31 — The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
   </entry>
   <entry>
-    <title>Fiscal Year 2026 Next Generation Warning System Grant Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363192"/>
-    <id>urn:funding-finder:grants-gov:363192</id>
-    <updated>2026-07-17T00:00:00Z</updated>
-    <author><name>Department of Homeland Security - FEMA</name></author>
-    <category term="Cybersecurity"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Department of Homeland Security - FEMA — Closes 2026-08-07 — This grant will fund projects to identify capability gaps and implement solutions for alert and warning to deliver timely public warning and emergency information and to protect critical infrastructure. There are rapid changes in technology, cybersecurity threats, and public preferences for consuming content, recipients will work with the Federal Emergency Management Agency (FEMA) to explore curre…</summary>
-  </entry>
-  <entry>
     <title>Global Digital Threat Lab</title>
     <link href="https://www.grants.gov/search-results-detail/363201"/>
     <id>urn:funding-finder:grants-gov:363201</id>
@@ -686,6 +675,15 @@
     <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 7</title>
     <link href="https://www.grants.gov/search-results-detail/363001"/>
     <id>urn:funding-finder:grants-gov:363001</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>Department of Homeland Security - FEMA</name></author>
+    <category term="Cybersecurity"/>
+    <summary>Department of Homeland Security - FEMA — Closes 2026-08-17 — The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 8</title>
+    <link href="https://www.grants.gov/search-results-detail/363002"/>
+    <id>urn:funding-finder:grants-gov:363002</id>
     <updated>2026-06-30T00:00:00Z</updated>
     <author><name>Department of Homeland Security - FEMA</name></author>
     <category term="Cybersecurity"/>

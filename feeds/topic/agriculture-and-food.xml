@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-08-07T11:08:35Z</updated>
+  <updated>2026-08-08T10:52:00Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -381,15 +381,6 @@
     <summary>Food and Nutrition Service — Closes 2026-08-19 — The USDA’s Food and Nutrition Administration (FNA) works to nourish those in need through financially sound programs that promote health and work, as well as champion the productivity of American agriculture. The purpose of these grants is to support SNAP State agencies in meeting these requirements and testing different income verification services to determine the most cost-effective solution. T…</summary>
   </entry>
   <entry>
-    <title>Laying Hen and Turkey Research Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363198"/>
-    <id>urn:funding-finder:grants-gov:363198</id>
-    <updated>2026-07-15T00:00:00Z</updated>
-    <author><name>National Institute of Food and Agriculture</name></author>
-    <category term="Agriculture and food"/>
-    <summary>National Institute of Food and Agriculture — Closes 2026-08-07 — The LHTR program, under assistance listing number 10.245, will support one research project for improving the efficiency and sustainability of laying hen and turkey production through integrated collaborative research and technology transfer. All research must be conducted on laying hens or turkeys, or both.</summary>
-  </entry>
-  <entry>
     <title>FY 2026 FDPIR Nutrition Paraprofessional Training Program Cooperative Agreement</title>
     <link href="https://www.grants.gov/search-results-detail/363200"/>
     <id>urn:funding-finder:grants-gov:363200</id>
@@ -472,19 +463,6 @@
     <category term="Agriculture and food"/>
     <category term="Cybersecurity"/>
     <summary>Health Resources and Services Administration — Closes 2026-09-09 — The purpose of Fiscal Year (FY) 2027 Expanding Nutrition Services (ENS) funding is to increase access to nutrition services at HRSA-funded health centers. Nutrition services can help to prevent, manage, and treat diseases and conditions through nutritional and food-based interventions. Health centers will use ENS funding to increase the number of nutrition services patients or visits.</summary>
-  </entry>
-  <entry>
-    <title>Supply Chain Acceleration and Logistics Enablement (SCALE) Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363089"/>
-    <id>urn:funding-finder:grants-gov:363089</id>
-    <updated>2026-07-07T00:00:00Z</updated>
-    <author><name>Small Business Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <summary>Small Business Administration — Closes 2026-08-07 — The Supply Chain Acceleration and Logistics Enablement (SCALE) Program supports organizations that help small businesses overcome operational, technical, workforce, and market access barriers that limit their ability to participate and grow as suppliers within strategically important industries. Through technical assistance, industry engagement, and other implementation focused activities, SCALE h…</summary>
   </entry>
   <entry>
     <title>English Language Teaching and Learning Program</title>
@@ -665,5 +643,26 @@
     <category term="Environmental science"/>
     <category term="Water"/>
     <summary>Bureau of Reclamation — Closes 2027-09-08 — The objective of the WaterSMART Enhancing Water Resources Projects funding opportunity is to invite eligible entities to apply for funding to implement projects per the authorizing language referenced above that benefit water resource management for multiple uses, including water conservation and efficiency projects, water infrastructure improvements, and river and watershed restoration. Projects …</summary>
+  </entry>
+  <entry>
+    <title>DoW Multiple Sclerosis Clinical Trial Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362227"/>
+    <id>urn:funding-finder:grants-gov:362227</id>
+    <updated>2026-05-05T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-08-13 — Summary: The fiscal year 2026 (FY26) Multiple Sclerosis Research Program (MSRP) Clinical Trial Award (CTA) supports the rapid implementation of clinical trials with the potential to have a significant impact on the treatment or management of multiple sclerosis. All applications must address at least one of the FY26 MSRP CTA focus areas. Clinical trials may evaluate promising new products, pharmaco…</summary>
+  </entry>
+  <entry>
+    <title>DoW Amyotrophic Lateral Sclerosis Research Program, Pilot Clinical Trial Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362195"/>
+    <id>urn:funding-finder:grants-gov:362195</id>
+    <updated>2026-05-04T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Transportation"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-30 — Summary: The fiscal year 2026 (FY26) Amyotrophic Lateral Sclerosis Research Program (ALSRP) Pilot Clinical Trial Award (PCTA) supports the rapid implementation of clinical trials with the potential to have a significant impact on the treatment or management of amyotrophic lateral sclerosis (ALS). Projects may range from phase 1 to small-scale phase 2 trials.Applications must address one of the fol…</summary>
   </entry>
 </feed>

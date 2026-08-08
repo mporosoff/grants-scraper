@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-08-07T11:08:35Z</updated>
+  <updated>2026-08-08T10:52:00Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -17,6 +17,20 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>Rural Utilities Service — Closes 2027-05-03 — The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+  </entry>
+  <entry>
+    <title>NOI: PROSPECT Program: Providing Opportunities for Specialized Education in Critical Technologies</title>
+    <link href="https://www.grants.gov/search-results-detail/363510"/>
+    <id>urn:funding-finder:grants-gov:363510</id>
+    <updated>2026-08-07T00:00:00Z</updated>
+    <author><name>Golden Field Office</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Carbon management"/>
+    <category term="Climate change"/>
+    <summary>Golden Field Office — Closes 2027-01-15 — The U.S Department of Energy (DOE)’s Office of Critical Minerals and Energy Innovation (CMEI) intends to establish, on behalf of the Analysis and Strategy Office (ASO), the PROSPECT Program—Providing Opportunities for Specialized Education in Critical Technologies—and anticipates investing up to $100 million, subject to the availability of appropriated funds, to strengthen the nation's educational…</summary>
   </entry>
   <entry>
     <title>Sun Grant Program</title>
@@ -478,19 +492,6 @@
     <category term="Education and workforce"/>
     <category term="Energy"/>
     <summary>U.S. Mission to Oman — Closes 2026-08-09 — The Public Diplomacy Section of U.S. Embassy Muscat announces an open competition to support projects that advance U.S. foreign policy priorities in Oman while strengthening the long-standing partnership between the United States and the Sultanate of Oman. This Annual Program Statement outlines strategic funding priorities, eligibility criteria, and application guidelines for grants ranging from $…</summary>
-  </entry>
-  <entry>
-    <title>Supply Chain Acceleration and Logistics Enablement (SCALE) Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363089"/>
-    <id>urn:funding-finder:grants-gov:363089</id>
-    <updated>2026-07-07T00:00:00Z</updated>
-    <author><name>Small Business Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <summary>Small Business Administration — Closes 2026-08-07 — The Supply Chain Acceleration and Logistics Enablement (SCALE) Program supports organizations that help small businesses overcome operational, technical, workforce, and market access barriers that limit their ability to participate and grow as suppliers within strategically important industries. Through technical assistance, industry engagement, and other implementation focused activities, SCALE h…</summary>
   </entry>
   <entry>
     <title>English Language Teaching and Learning Program</title>

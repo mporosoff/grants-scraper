@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml</id>
-  <updated>2026-08-07T11:08:35Z</updated>
+  <updated>2026-08-08T10:52:00Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Veterans Legacy Grants Program</title>
@@ -410,15 +410,6 @@
     <summary>National Institutes of Health — Closes 2026-10-05 — The National Institute of Neurological Disorders and Stroke (NINDS) is interested in supporting research projects that investigate how specific neural exposome factors contribute mechanistically to Alzheimer’s disease-related dementias (ADRD) pathology and resilience. For the purposes of this program, exposome factors of interest include, but are not limited to, environmental toxins, sleep and cir…</summary>
   </entry>
   <entry>
-    <title>Tribal Tourism Grant Program (TTGP)</title>
-    <link href="https://www.grants.gov/search-results-detail/362968"/>
-    <id>urn:funding-finder:grants-gov:362968</id>
-    <updated>2026-06-25T00:00:00Z</updated>
-    <author><name>Bureau of Indian Affairs</name></author>
-    <category term="Community development"/>
-    <summary>Bureau of Indian Affairs — Closes 2026-08-07 — The U.S. Department of the Interior (DOI), Office of the Assistant Secretary–Indian Affairs (Indian Affairs), through the Office of Indian Economic Development (OIED), solicits proposals from eligible entities (see Eligibility Section) for tourism grants focused on increasing visitors to existing Tribal tourism operations through facilitation, promotion, and enhancing visibility. The Tribal Touris…</summary>
-  </entry>
-  <entry>
     <title>DoW Rare Cancers Resource and Community Development Award</title>
     <link href="https://www.grants.gov/search-results-detail/362850"/>
     <id>urn:funding-finder:grants-gov:362850</id>
@@ -468,17 +459,6 @@
     <category term="Community development"/>
     <category term="Energy"/>
     <summary>Department of Housing and Urban Development — Closes 2026-08-26 — The Continuum of Care (CoC) Program is designed to:promote a community-wide commitment to the goal of ending homelessness;provide funding for efforts by nonprofit providers, States, Indian Tribes or Tribally Designated Housing Entities [as defined in section 4 of the Native American Housing Assistance and Self-Determination Act of 1996 (25 U.S.C. 4103) (TDHEs)], and local governments to quickly re…</summary>
-  </entry>
-  <entry>
-    <title>Meat and Poultry Processing Expansion Program - Phase 4</title>
-    <link href="https://www.grants.gov/search-results-detail/362298"/>
-    <id>urn:funding-finder:grants-gov:362298</id>
-    <updated>2026-05-07T00:00:00Z</updated>
-    <author><name>Rural Business-Cooperative Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Community development"/>
-    <category term="Manufacturing"/>
-    <summary>Rural Business-Cooperative Service — Closes 2026-08-07 — The U.S. Department of Agriculture (USDA), Rural Development (RD) Rural Business‐Cooperative Service (RBCS or Agency), requests applications for the Meat and Poultry Processing Expansion Program - Phase 4 (the Program or MPPEP-4) - Fortifying the American Beef Industry. MPPEP-4 is authorized under Section 1001(b)(4) of the American Rescue Plan Act of 2021 (ARPA), which provides funding to make “lo…</summary>
   </entry>
   <entry>
     <title>Community Engagement Evaluation and Data Coordination (CEED) Hub to Advance Data and Practice Transformation for Optimizing Oral Health for All (U01, Clinical Trial Not Allowed)</title>
@@ -680,5 +660,27 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>Department of Commerce — Posted — NOTICE: Application Process as of April 6th EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
+  </entry>
+  <entry>
+    <title>Austin FY 2021 – FY 2023 EDA Planning and Local Technical Assistance</title>
+    <link href="https://www.grants.gov/search-results-detail/332137"/>
+    <id>urn:funding-finder:grants-gov:332137</id>
+    <updated>2021-03-15T00:00:00Z</updated>
+    <author><name>Department of Commerce</name></author>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <summary>Department of Commerce — Posted — UPDATED NOTICE - PLEASE READ: April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
+  </entry>
+  <entry>
+    <title>Chicago FY 2021 – FY 2023 EDA Planning and Local Technical Assistance</title>
+    <link href="https://www.grants.gov/search-results-detail/332125"/>
+    <id>urn:funding-finder:grants-gov:332125</id>
+    <updated>2021-03-15T00:00:00Z</updated>
+    <author><name>Department of Commerce</name></author>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <summary>Department of Commerce — Posted — UPDATED NOTICE - PLEASE READ: April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
   </entry>
 </feed>

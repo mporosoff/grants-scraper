@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-08-07T11:08:35Z</updated>
+  <updated>2026-08-08T10:52:00Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -538,6 +538,23 @@
     <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-03-23 — The Centers for Disease Control and Prevention's (CDC) National Center for Chronic Disease Prevention and Health Promotion is advancing the development of clinical decision support (CDS) tools designed to facilitate evidence-based cancer screening and management at the point of care. These CDS tools integrate up-to-date, computable guidelines into electronic health records systems to support clini…</summary>
   </entry>
   <entry>
+    <title>Infant-Toddler Court Program–National Resource Center</title>
+    <link href="https://www.grants.gov/search-results-detail/363511"/>
+    <id>urn:funding-finder:grants-gov:363511</id>
+    <updated>2027-01-21T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <summary>Health Resources and Services Administration — Closes 2027-04-21 — The Infant-Toddler Court Program's (ITCP) National Resource Center (NRC) helps states and communities to strengthen and expand use of enhanced child welfare practices in communities across the country that bring together courts, social services, and families to improve the safety, healthy development, and nurturing relationships of families with young children involved with the child welfare syste…</summary>
+  </entry>
+  <entry>
+    <title>Infant-Toddler Court Program–State Awards</title>
+    <link href="https://www.grants.gov/search-results-detail/363512"/>
+    <id>urn:funding-finder:grants-gov:363512</id>
+    <updated>2027-01-21T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <summary>Health Resources and Services Administration — Closes 2027-04-21 — The Infant-Toddler Court Program (ITCP) State Awards allow states and communities to support and expand use of enhanced child welfare practices in communities across the country that bring together courts, social services, and families to improve the safety, healthy development, and nurturing relationships of families with young children involved with child welfare. The ITCP State Awards support i…</summary>
+  </entry>
+  <entry>
     <title>Translational Transplantation Tolerance Cooperative Study Group</title>
     <link href="https://www.grants.gov/search-results-detail/362958"/>
     <id>urn:funding-finder:grants-gov:362958</id>
@@ -546,6 +563,14 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health — Closes 2027-05-21 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the support of the Translational Transplantation Tolerance Cooperative Study Group (TTTCSG) program. The overarching goal of this program is to facilitate clinical translation of safe and effective transplant tolerance regimens that achieve long-term graft survival without the need for life-long …</summary>
+  </entry>
+  <entry>
+    <title>Rural Health Value Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363509"/>
+    <id>urn:funding-finder:grants-gov:363509</id>
+    <updated>2027-01-19T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <summary>Health Resources and Services Administration — Closes 2027-03-20 — The purpose of the Rural Health Value (RHV) Program is to fund one recipient to provide analysis and technical assistance (TA) for rural stakeholders to help them understand and engage in the value-based care landscape in the context of rural health care. The goal of this funding opportunity is to support the ability of rural providers to participate and succeed in current and emerging payment and…</summary>
   </entry>
   <entry>
     <title>Ryan White HIV/AIDS Program Part C Capacity Development Program</title>
@@ -706,6 +731,15 @@
     <category term="Arts and culture"/>
     <category term="Environmental science"/>
     <summary>Health Resources and Services Administration — Closes 2027-03-18 — The purpose of this program is to improve maternal and infant outcomes by preventing contact with harmful materials before, during, and after pregnancy. This program aims to improve maternal and infant health outcomes by preventing harmful exposures before, during, and after pregnancy. It supports a national expert-staffed call center that provides timely, evidence-based information and personaliz…</summary>
+  </entry>
+  <entry>
+    <title>Rural Residency Planning and Development Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363508"/>
+    <id>urn:funding-finder:grants-gov:363508</id>
+    <updated>2026-12-18T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <summary>Health Resources and Services Administration — Closes 2027-03-18 — The Rural Residency Planning and Development (RRPD) program improves and expands rural health care access. It does this by developing new, accredited, sustainable rural residency programs, including rural track programs (RTPs). Newly created rural physician residency programs increase training and ultimately practice in rural areas to address physician shortages. The RRPD program provides start-up…</summary>
   </entry>
   <entry>
     <title>NIOSH Small Research Grant Program (R03)</title>
@@ -950,42 +984,5 @@
     <category term="Education and workforce"/>
     <category term="Infectious disease"/>
     <summary>National Institutes of Health — Closes 2027-01-25 — This Notice of Funding Opportunity (NOFO) encourages applications to provide continuing support for a National Swine Resource and Research Center (NSRRC). The NSRRC aims to enable gold-standard science in biomedical research by serving as a centralized national resource for the creation, breeding, cryopreservation, and distribution of genetically modified models. By consolidating these essential f…</summary>
-  </entry>
-  <entry>
-    <title>Single Source: Coordinating Center (CC) for the Small Cell Lung Cancer (SCLC) Consortium (U24 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/361606"/>
-    <id>urn:funding-finder:grants-gov:361606</id>
-    <updated>2026-11-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2027-01-25 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to continue to support the Coordinating Center (CC) for the Small Cell Lung Cancer (SCLC) Consortium, which coordinates research on prevention, diagnosis, treatment, and mechanisms of resistance in SCLC. The CC manages administrative activities, centralized databases, tissue banking and a virtual biospec…</summary>
-  </entry>
-  <entry>
-    <title>Integrated Specific Pathogen Free Research Models and Human New Approach Methodologies to Advance HIV/AIDS Research (U42 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/362488"/>
-    <id>urn:funding-finder:grants-gov:362488</id>
-    <updated>2026-11-24T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Infectious disease"/>
-    <summary>National Institutes of Health — Closes 2027-01-25 — This NOFO is issued during a period of accelerating development, validation, and adoption of human new approach methodologies (NAMs). Accordingly, it has two integrated priorities for NIH-funded HIV/AIDS research: (1) implementation of a NAMs-enabled stewardship framework, including optional HIV-relevant human in vitro testing support and pilot benchmarking activities, to reduce or replace specifi…</summary>
-  </entry>
-  <entry>
-    <title>Feasibility Studies to Inform the Design of Future Clinical Trials</title>
-    <link href="https://www.grants.gov/search-results-detail/362101"/>
-    <id>urn:funding-finder:grants-gov:362101</id>
-    <updated>2026-11-24T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-02-16 — The National Institutes of Health intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose feasibility studies that could inform the design and conduct of subsequent definitive clinical trials (e.g., efficacy, effectiveness, pragmatic, dissemination and implementation, phase/stage II or later trials). Applications to this NOFO should demonstrate that the propo…</summary>
-  </entry>
-  <entry>
-    <title>NIH Pragmatic Trials Conducted in Health Care Systems</title>
-    <link href="https://www.grants.gov/search-results-detail/362108"/>
-    <id>urn:funding-finder:grants-gov:362108</id>
-    <updated>2026-11-24T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Public health"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health — Closes 2027-02-23 — The National Institutes of Health intends to publish a Notice of Funding Opportunity (NOFO), Pragmatic and Implementation Trials Conducted in Health Care SettingsThis funding opportunity will support large-scale pragmatic trials that test intervention effectiveness in routine clinical care and/or implementation trials that evaluate strategies for delivering interventions within health care setting…</summary>
   </entry>
 </feed>

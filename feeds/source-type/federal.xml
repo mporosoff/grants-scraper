@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml</id>
-  <updated>2026-08-07T11:08:35Z</updated>
+  <updated>2026-08-08T10:52:00Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -538,6 +538,23 @@
     <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-03-23 — The Centers for Disease Control and Prevention's (CDC) National Center for Chronic Disease Prevention and Health Promotion is advancing the development of clinical decision support (CDS) tools designed to facilitate evidence-based cancer screening and management at the point of care. These CDS tools integrate up-to-date, computable guidelines into electronic health records systems to support clini…</summary>
   </entry>
   <entry>
+    <title>Infant-Toddler Court Program–National Resource Center</title>
+    <link href="https://www.grants.gov/search-results-detail/363511"/>
+    <id>urn:funding-finder:grants-gov:363511</id>
+    <updated>2027-01-21T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <summary>Health Resources and Services Administration — Closes 2027-04-21 — The Infant-Toddler Court Program's (ITCP) National Resource Center (NRC) helps states and communities to strengthen and expand use of enhanced child welfare practices in communities across the country that bring together courts, social services, and families to improve the safety, healthy development, and nurturing relationships of families with young children involved with the child welfare syste…</summary>
+  </entry>
+  <entry>
+    <title>Infant-Toddler Court Program–State Awards</title>
+    <link href="https://www.grants.gov/search-results-detail/363512"/>
+    <id>urn:funding-finder:grants-gov:363512</id>
+    <updated>2027-01-21T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <summary>Health Resources and Services Administration — Closes 2027-04-21 — The Infant-Toddler Court Program (ITCP) State Awards allow states and communities to support and expand use of enhanced child welfare practices in communities across the country that bring together courts, social services, and families to improve the safety, healthy development, and nurturing relationships of families with young children involved with child welfare. The ITCP State Awards support i…</summary>
+  </entry>
+  <entry>
     <title>Translational Transplantation Tolerance Cooperative Study Group</title>
     <link href="https://www.grants.gov/search-results-detail/362958"/>
     <id>urn:funding-finder:grants-gov:362958</id>
@@ -548,6 +565,14 @@
     <summary>National Institutes of Health — Closes 2027-05-21 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the support of the Translational Transplantation Tolerance Cooperative Study Group (TTTCSG) program. The overarching goal of this program is to facilitate clinical translation of safe and effective transplant tolerance regimens that achieve long-term graft survival without the need for life-long …</summary>
   </entry>
   <entry>
+    <title>Rural Health Value Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363509"/>
+    <id>urn:funding-finder:grants-gov:363509</id>
+    <updated>2027-01-19T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <summary>Health Resources and Services Administration — Closes 2027-03-20 — The purpose of the Rural Health Value (RHV) Program is to fund one recipient to provide analysis and technical assistance (TA) for rural stakeholders to help them understand and engage in the value-based care landscape in the context of rural health care. The goal of this funding opportunity is to support the ability of rural providers to participate and succeed in current and emerging payment and…</summary>
+  </entry>
+  <entry>
     <title>Ryan White HIV/AIDS Program Part C Capacity Development Program</title>
     <link href="https://www.grants.gov/search-results-detail/363166"/>
     <id>urn:funding-finder:grants-gov:363166</id>
@@ -555,38 +580,5 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Technology development"/>
     <summary>Health Resources and Services Administration — Closes 2027-03-16 — The purpose of the program is to strengthen the capacity of community-based organizations to improve health outcomes and reduce HIV transmission, especially for people not yet in regular HIV care. The activities fall under two categories: HIV Care Innovation and Infrastructure Development.</summary>
-  </entry>
-  <entry>
-    <title>Alliance for Innovation on Maternal Health (AIM) Capacity Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363407"/>
-    <id>urn:funding-finder:grants-gov:363407</id>
-    <updated>2027-01-15T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Technology development"/>
-    <summary>Health Resources and Services Administration — Closes 2027-03-17 — The purpose of the AIM Capacity program is to strengthen state, territorial, and Tribal capacity to implement, expand, and sustain AIM Patient Safety Bundles and associated resources across the United States. The program supports implementation of evidence-informed maternal safety practices to improve the quality and safety of maternity care, improve maternal health outcomes, and reduce preventabl…</summary>
-  </entry>
-  <entry>
-    <title>Advanced Development and Validation of Emerging Technologies for Basic and Clinical Cancer Research (R33 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/363168"/>
-    <id>urn:funding-finder:grants-gov:363168</id>
-    <updated>2027-01-15T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-06-04 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing exploratory research projects focused on further development and validation of emerging technologies for cancer research or clinical care. This NOFO solicits R33 applications where major feasibility gaps for the technology or methodology have been overcome, as demonstrated w…</summary>
-  </entry>
-  <entry>
-    <title>Early-Stage Innovative Technology Development for Basic and Clinical Cancer Research (R61 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/363169"/>
-    <id>urn:funding-finder:grants-gov:363169</id>
-    <updated>2027-01-15T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-06-04 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing to develop innovative technologies for cancer research or clinical care. The emphasis of this NOFO is on early-stage projects proposing proof-of-concept/pilot studies to test the technical feasibility of the proposed method, tool, assay, platform, or instrument. Well-suited …</summary>
   </entry>
 </feed>

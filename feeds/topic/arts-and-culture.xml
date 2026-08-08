@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml</id>
-  <updated>2026-08-07T11:08:35Z</updated>
+  <updated>2026-08-08T10:52:00Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -268,6 +268,37 @@
     <summary>National Institutes of Health — Closes 2026-10-13 — The NIGMS Mature Synchrotron Resources for Structural Biology program supports mature technologies at synchrotron facilities that provide biomedical researchers with state-of-the-art X-ray beamlines, hands-on user training, and expert assistance to generate and analyze structural biology data. NIGMS intends to reissue a Notice of Funding Opportunity to continue to support these important national …</summary>
   </entry>
   <entry>
+    <title>Pax Silica Artificial Intelligence Assistance Project</title>
+    <link href="https://www.grants.gov/search-results-detail/363513"/>
+    <id>urn:funding-finder:grants-gov:363513</id>
+    <updated>2026-08-07T00:00:00Z</updated>
+    <author><name>Bureau of Economic and Business Affairs</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Manufacturing"/>
+    <summary>Bureau of Economic and Business Affairs — Closes 2026-08-20 — Leveraging foreign assistance from the Pax Fund, this NOFO launches the Pax Silica Artificial Intelligence (AI) Assistance Project—a historic first-of-its-kind programmatic initiative to strengthen global AI supply chain security by creating a trusted supply chain credentialing and provenance platform to secure the AI supply chain in partner countries and economies. This NOFO seeks to fund the est…</summary>
+  </entry>
+  <entry>
+    <title>Promoting Civilizational Values</title>
+    <link href="https://www.grants.gov/search-results-detail/363505"/>
+    <id>urn:funding-finder:grants-gov:363505</id>
+    <updated>2026-08-07T00:00:00Z</updated>
+    <author><name>Bureau of Democracy Human Rights and Labor</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <summary>Bureau of Democracy Human Rights and Labor — Closes 2026-08-21 — DRL requests proposals to strengthen the ability of European countries and institutions to protect freedom of expression, political pluralism, and national self-government. This funding opportunity directly supports the U.S. National Security Strategy's priority of "building up the healthy nations of Central, Eastern, and Southern Europe through commercial ties, political collaboration, and cultur…</summary>
+  </entry>
+  <entry>
+    <title>Lewis-Houghton Civics and Democracy Initiative: New Awards for 2027-2029</title>
+    <link href="https://www.grants.gov/search-results-detail/363514"/>
+    <id>urn:funding-finder:grants-gov:363514</id>
+    <updated>2026-08-07T00:00:00Z</updated>
+    <author><name>Library of Congress</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <summary>Library of Congress — Closes 2026-09-18 — This funding opportunity is authorized under the “Legislative Branch Appropriations Act of 2023” (Pub. L. 117-389 (H.R. 8237)), subject to availability of funding. The resulting awards will be subject to the Library of Congress Regulation (LCR) 7-310. In addition, while the Library, as a legislative agency, is not subject to 2 CFR 200 – Uniform Administrative Requirements, Costs Principles and Aud…</summary>
+  </entry>
+  <entry>
     <title>DRL Ensuring Resilient Seafood Supply Chains: Countering Forced Labor and any associated Illegal, Unreported and Unregulated Fishing</title>
     <link href="https://www.grants.gov/search-results-detail/363486"/>
     <id>urn:funding-finder:grants-gov:363486</id>
@@ -398,17 +429,6 @@
     <summary>U.S. Mission to the Bahamas — Closes 2026-08-14 — The U.S. Embassy Nassau Public Diplomacy Section announces an open competition for grants to implement programs that strengthen bilateral relations and advance shared priorities between the United States and The Bahamas. Priority program areas include Freedom 250 (commemorating the 250th anniversary of American independence); Business Development and Entrepreneurship; Educational and Cultural Prog…</summary>
   </entry>
   <entry>
-    <title>Pax Silica Artificial Intelligence Assistance Project</title>
-    <link href="https://www.grants.gov/search-results-detail/363422"/>
-    <id>urn:funding-finder:grants-gov:363422</id>
-    <updated>2026-07-31T00:00:00Z</updated>
-    <author><name>Bureau of Economic and Business Affairs</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Manufacturing"/>
-    <summary>Bureau of Economic and Business Affairs — Closes 2026-08-20 — Leveraging foreign assistance from the Pax Fund, this NOFO launches the Pax Silica Artificial Intelligence (AI) Assistance Project—a historic first-of-its-kind programmatic initiative to strengthen global AI supply chain security by creating a trusted supply chain credentialing and provenance platform to secure the AI supply chain in partner countries and economies. This NOFO seeks to fund the est…</summary>
-  </entry>
-  <entry>
     <title>Placement and Coordination Program</title>
     <link href="https://www.grants.gov/search-results-detail/362962"/>
     <id>urn:funding-finder:grants-gov:362962</id>
@@ -416,7 +436,7 @@
     <author><name>Administration for Children and Families - ORR</name></author>
     <category term="Arts and culture"/>
     <category term="Technology development"/>
-    <summary>Administration for Children and Families - ORR — Closes 2026-09-17 — The Office of Refugee Resettlement (ORR) within the Administration for Children and Families (ACF), invites eligible applicants to submit applications to administer the Placement and Coordination (PC) program. ORR will provide funding to diversify providers of PC services through awards to eligible organizations not currently implementing the Program of Initial Resettlement (PIR). New providers wi…</summary>
+    <summary>Administration for Children and Families - ORR — Closes 2026-09-17 — This NOFO is modified. Changes are made to Step 1: Review the Opportunity and Step 2: Get Ready to Apply. The disqualifying factors section has been updated to clarify that applications from organizations currently funded by ORR to support Program of Initial Resettlement services will be disqualified, including organizations receiving PIR funding through subaward. The webinar description has been …</summary>
   </entry>
   <entry>
     <title>AI3 Action Institute - Artificial Intelligence for American Indians</title>
@@ -663,30 +683,5 @@
     <category term="Technology development"/>
     <category term="Data science"/>
     <summary>U.S. National Science Foundation — Closes 2026-11-04 — This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
-  </entry>
-  <entry>
-    <title>CyberNext: Advance Cybersecurity and AI Readiness</title>
-    <link href="https://www.grants.gov/search-results-detail/363249"/>
-    <id>urn:funding-finder:grants-gov:363249</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>U.S. Mission to Albania</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Cybersecurity"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Albania — Closes 2026-08-20 — Project Background, Goals, and Objectives Albania has experienced multiple cyberattacks in recent years, placing increasingly digital government services and critical institutions at significant risk. While Albania is actively embracing AI, substantial skill gaps remain – gaps that American expertise is uniquely positioned to address. The “CyberNext: Advanced Cybersecurity and AI Readiness” progra…</summary>
-  </entry>
-  <entry>
-    <title>Education and Outreach to Tribal Producers through the Tribal Food Safety Alliance</title>
-    <link href="https://www.grants.gov/search-results-detail/363239"/>
-    <id>urn:funding-finder:grants-gov:363239</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>Food and Drug Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Cybersecurity"/>
-    <summary>Food and Drug Administration — Closes 2026-08-20 — The primary purpose of this program is to develop and provide education and/or training, and outreach regarding FDA's Produce Safety Rule to produce farmers who are members of federally recognized Tribes. The program is expected to help Tribal farmers access appropriate technical assistance and may include Tribal farmers who are not currently required to comply with the rule but are interested in …</summary>
   </entry>
 </feed>

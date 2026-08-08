@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-08-07T11:08:35Z</updated>
+  <updated>2026-08-08T10:52:00Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development</title>
@@ -44,6 +44,31 @@
     <category term="Community development"/>
     <category term="Manufacturing"/>
     <summary>Department of Housing and Urban Development — Closes 2026-10-19 — HUD is issuing the Preservation and Reinvestment Initiative for Community Enhancement (PRICE) competition NOFO to preserve long-term housing affordability for residents of manufactured housing or an MHC, to redevelop MHCs, and to primarily benefit low- and moderate-income (LMI) residents. Congress appropriated in FY2025 these competitive grants to preserve and revitalize manufactured housing and e…</summary>
+  </entry>
+  <entry>
+    <title>Pax Silica Artificial Intelligence Assistance Project</title>
+    <link href="https://www.grants.gov/search-results-detail/363513"/>
+    <id>urn:funding-finder:grants-gov:363513</id>
+    <updated>2026-08-07T00:00:00Z</updated>
+    <author><name>Bureau of Economic and Business Affairs</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Manufacturing"/>
+    <summary>Bureau of Economic and Business Affairs — Closes 2026-08-20 — Leveraging foreign assistance from the Pax Fund, this NOFO launches the Pax Silica Artificial Intelligence (AI) Assistance Project—a historic first-of-its-kind programmatic initiative to strengthen global AI supply chain security by creating a trusted supply chain credentialing and provenance platform to secure the AI supply chain in partner countries and economies. This NOFO seeks to fund the est…</summary>
+  </entry>
+  <entry>
+    <title>NOI: PROSPECT Program: Providing Opportunities for Specialized Education in Critical Technologies</title>
+    <link href="https://www.grants.gov/search-results-detail/363510"/>
+    <id>urn:funding-finder:grants-gov:363510</id>
+    <updated>2026-08-07T00:00:00Z</updated>
+    <author><name>Golden Field Office</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Carbon management"/>
+    <category term="Climate change"/>
+    <summary>Golden Field Office — Closes 2027-01-15 — The U.S Department of Energy (DOE)’s Office of Critical Minerals and Energy Innovation (CMEI) intends to establish, on behalf of the Analysis and Strategy Office (ASO), the PROSPECT Program—Providing Opportunities for Specialized Education in Critical Technologies—and anticipates investing up to $100 million, subject to the availability of appropriated funds, to strengthen the nation's educational…</summary>
   </entry>
   <entry>
     <title>DRL Ensuring Resilient Seafood Supply Chains: Countering Forced Labor and any associated Illegal, Unreported and Unregulated Fishing</title>
@@ -87,17 +112,6 @@
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <summary>Foreign Agricultural Service — Closes 2026-09-02 — Fertilize Right Vietnam (FR Vietnam) is a program implemented by USDA/FAS since 2023. USDA’s official partner is the Ministry of Agriculture and Environment (MAE) and an implementing partner from an international agricultural research organization. The objectives of FR Vietnam are to (1) increase fertilizer-use efficiency, (2) enhance fertilizer effectiveness, and (3) develop alternatives to tradi…</summary>
-  </entry>
-  <entry>
-    <title>Pax Silica Artificial Intelligence Assistance Project</title>
-    <link href="https://www.grants.gov/search-results-detail/363422"/>
-    <id>urn:funding-finder:grants-gov:363422</id>
-    <updated>2026-07-31T00:00:00Z</updated>
-    <author><name>Bureau of Economic and Business Affairs</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Manufacturing"/>
-    <summary>Bureau of Economic and Business Affairs — Closes 2026-08-20 — Leveraging foreign assistance from the Pax Fund, this NOFO launches the Pax Silica Artificial Intelligence (AI) Assistance Project—a historic first-of-its-kind programmatic initiative to strengthen global AI supply chain security by creating a trusted supply chain credentialing and provenance platform to secure the AI supply chain in partner countries and economies. This NOFO seeks to fund the est…</summary>
   </entry>
   <entry>
     <title>DRL Transshipment Supply Chain Tracing</title>
@@ -350,19 +364,6 @@
     <summary>Employment and Training Administration — Closes 2026-08-17 — Questions regarding this Training and Employment Guidance Letter (TEGL) may be emailed to Daniela Petchik, Grants Management Specialist at petchik.daniela.m@dol.gov and Brinda Ruggles, Grant Officer at ruggles.brinda@dol.gov. We encourage prospective applicants and interested parties to use the Grants.gov subscription option to register for future updates provided for this particular TEGL.</summary>
   </entry>
   <entry>
-    <title>Supply Chain Acceleration and Logistics Enablement (SCALE) Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363089"/>
-    <id>urn:funding-finder:grants-gov:363089</id>
-    <updated>2026-07-07T00:00:00Z</updated>
-    <author><name>Small Business Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <summary>Small Business Administration — Closes 2026-08-07 — The Supply Chain Acceleration and Logistics Enablement (SCALE) Program supports organizations that help small businesses overcome operational, technical, workforce, and market access barriers that limit their ability to participate and grow as suppliers within strategically important industries. Through technical assistance, industry engagement, and other implementation focused activities, SCALE h…</summary>
-  </entry>
-  <entry>
     <title>EARLY STAGE INNOVATIONS (ESI26)</title>
     <link href="https://www.grants.gov/search-results-detail/363066"/>
     <id>urn:funding-finder:grants-gov:363066</id>
@@ -466,17 +467,6 @@
     <category term="Manufacturing"/>
     <category term="Technology development"/>
     <summary>U.S. Mission to Bolivia — Closes 2026-08-15 — Goals and Objectives• Celebrate American Excellence:o Showcase American innovation, technological leadership, and entrepreneurial spirit, celebrating American dynamism or telling America’s story of excellence.o Highlight U.S. achievements in science, technology, sports, industry, and culture.o Demonstrate the excellence and reliability of American products, services, and standards.o Promote Americ…</summary>
-  </entry>
-  <entry>
-    <title>Meat and Poultry Processing Expansion Program - Phase 4</title>
-    <link href="https://www.grants.gov/search-results-detail/362298"/>
-    <id>urn:funding-finder:grants-gov:362298</id>
-    <updated>2026-05-07T00:00:00Z</updated>
-    <author><name>Rural Business-Cooperative Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Community development"/>
-    <category term="Manufacturing"/>
-    <summary>Rural Business-Cooperative Service — Closes 2026-08-07 — The U.S. Department of Agriculture (USDA), Rural Development (RD) Rural Business‐Cooperative Service (RBCS or Agency), requests applications for the Meat and Poultry Processing Expansion Program - Phase 4 (the Program or MPPEP-4) - Fortifying the American Beef Industry. MPPEP-4 is authorized under Section 1001(b)(4) of the American Rescue Plan Act of 2021 (ARPA), which provides funding to make “lo…</summary>
   </entry>
   <entry>
     <title>Chemical Process Systems (CPS)</title>
@@ -648,6 +638,8 @@
     <category term="Education and workforce"/>
     <category term="Manufacturing"/>
     <category term="Technology development"/>
+    <category term="Energy"/>
+    <category term="Cybersecurity"/>
     <summary>National Institutes of Health — Closes 2028-01-28 — The purpose of this announcement is to encourage investigators to pursue translational activities and clinical feasibility studies to advance the development of therapeutic, and diagnostic devices for disorders that affect the nervous or neuromuscular systems. Activities supported in this program include implementation of clinical prototype devices, non-clinical safety and efficacy testing, design…</summary>
   </entry>
   <entry>
@@ -753,5 +745,21 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Manufacturing"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health — Closes 2027-06-15 — This Notice of Funding Opportunity Announcement (NOFO) from the NIH Brain Research through Advancing Innovative Neurotechnologies (BRAIN) Initiative is intended to support establishment of facilities at minority-serving institutions (MSIs) and Institutional Development Award (IDeA)-eligible institutions for scaled production and distribution of brain cell type-specific access and manipulation reag…</summary>
+  </entry>
+  <entry>
+    <title>Computational and Data-Enabled Science and Engineering</title>
+    <link href="https://www.grants.gov/search-results-detail/356055"/>
+    <id>urn:funding-finder:grants-gov:356055</id>
+    <updated>2024-08-15T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Data science"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>U.S. National Science Foundation — Posted — Large-scale simulations and the ability to accumulate massive amounts of data have revolutionized science and engineering. The goal of the Computational and Data-enabled Science and Engineering (CDS&amp;E) meta-program is to identify and capitalize on opportunities for major scientific and engineering breakthroughs through new computational and data-analysis approaches and best practices. The CDS&amp;E me…</summary>
   </entry>
 </feed>
