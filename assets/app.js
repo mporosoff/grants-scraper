@@ -830,6 +830,15 @@
     return values.some(value => selected.has(value));
   }
 
+  function classifyAudience(record) {
+    // Title-based so faculty grants that merely mention students aren't miscategorized.
+    const title = (record.title || "").toLowerCase();
+    if (/\breu\b|research experiences for undergraduates|goldwater|\bundergraduate\b/.test(title)) return "undergrad";
+    if (/post-?doctoral|\bpostdoc\b/.test(title)) return "postdoc";
+    if (/graduate research fellowship|\bgrfp\b|pre-?doctoral|dissertation|doctoral fellowship|graduate fellowship|graduate student research|\bndseg\b|\bscgsr\b/.test(title)) return "grad";
+    return "faculty";
+  }
+
   function recordPassesFilters(record) {
     if (!recordIsCurrent(record)) return false;
     const posted = $("status-posted").checked;
@@ -858,6 +867,9 @@
     if ($("flag-limited").checked && !record.limited_submission) return false;
     if ($("flag-early-career").checked && !record.career_stage_signal) return false;
     if ($("flag-no-cost-share").checked && record.cost_share_required === true) return false;
+    const audienceSel = $("audience-filter");
+    if (audienceSel && audienceSel.value && audienceSel.value !== "all"
+        && classifyAudience(record) !== audienceSel.value) return false;
     return true;
   }
 
@@ -1166,6 +1178,7 @@
     ["flag-evidence", "flag-preliminary", "flag-limited", "flag-early-career", "flag-no-cost-share"].forEach(id => { $(id).checked = false; });
     $("status-posted").checked = true;
     $("status-forecasted").checked = true;
+    if ($("audience-filter")) $("audience-filter").value = "all";
     document.querySelectorAll("[data-facet-search]").forEach(input => { input.value = ""; });
     renderAllFacets();
   }

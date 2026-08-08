@@ -76,6 +76,12 @@ jobs:
       - name: Merge additional (non-Grants.gov) sources
         id: additional-sources
         continue-on-error: true
+        env:
+          VPR_IMAP_HOST: imap.gmail.com
+          VPR_IMAP_USER: ${{ secrets.VPR_IMAP_USER }}
+          VPR_IMAP_PASS: ${{ secrets.VPR_IMAP_PASS }}
+          VPR_SENDER: VPR_Funding_Opps@lists.rochester.edu
+          VPR_LOOKBACK_DAYS: "45"
         run: >-
           python -m scripts.sources merge
           --catalog data/opportunities.js

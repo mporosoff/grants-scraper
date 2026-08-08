@@ -13,5 +13,7 @@ from . import nyserda        # noqa: F401  (verified state source; enabled)
 from . import ur_infoready   # noqa: F401  (disabled shell; parser retained)
 from . import doe_exchange   # noqa: F401  (ARPA-E + DOE EERE Exchange; enabled)
 from . import nspires        # noqa: F401  (NASA NSPIRES; disabled shell)
+from . import vpr_email      # noqa: F401  (UR VPR email digest; disabled shell)
 
-__all__ = ["rss", "sample", "nyserda", "ur_infoready", "doe_exchange", "nspires"]
+__all__ = ["rss", "sample", "nyserda", "ur_infoready", "doe_exchange",
+           "nspires", "vpr_email"]

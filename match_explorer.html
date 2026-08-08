@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="light">
   <meta name="description" content="Search current funding opportunities, inspect citation-backed FOA evidence, and optionally refine results with AI.">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://api.openai.com https://api.anthropic.com; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://api.openai.com https://api.anthropic.com https://cloudflareinsights.com; img-src 'self' data:; style-src 'self'; script-src 'self' https://static.cloudflareinsights.com; base-uri 'self'; form-action 'self'">
   <title>Funding Finder</title>
   <link rel="stylesheet" href="./assets/app.css?v=release-2026-08-06-v4">
 </head>
@@ -175,6 +175,20 @@
                     <input type="checkbox" id="status-forecasted" checked>
                     <span>Forecasted</span>
                     <strong id="count-forecasted">—</strong>
+                  </label>
+                </fieldset>
+
+                <fieldset class="status-filter audience-filter-field">
+                  <legend>Applicant audience</legend>
+                  <label class="audience-select-label">
+                    <span class="sr-only">Filter by applicant audience</span>
+                    <select id="audience-filter">
+                      <option value="all">All applicants</option>
+                      <option value="faculty">Faculty / PI grants</option>
+                      <option value="postdoc">Postdoctoral fellowships</option>
+                      <option value="grad">Graduate student fellowships</option>
+                      <option value="undergrad">Undergraduate (REU, etc.)</option>
+                    </select>
                   </label>
                 </fieldset>
 
@@ -483,5 +497,6 @@
   <script src="./assets/saved.js?v=release-2026-08-06-v4"></script>
   <script src="./assets/preferences.js?v=release-2026-08-06-v4"></script>
   <script src="./assets/app.js?v=release-2026-08-06-v4"></script>
+  <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "209e9983c16e4747947cf621792fe833"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
