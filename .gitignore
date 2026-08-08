@@ -26,6 +26,9 @@ faculty.csv
 # Original local handoff archive
 /files.zip
 
+# Raw email samples used to tune the VPR/Cindy parser — private, never commit
+*.eml
+
 # Local application state
 *.sqlite3
 .env
