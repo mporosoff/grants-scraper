@@ -61,7 +61,7 @@
   },
   {
     "name": "Pooja Rajendra Bhalode",
-    "error": "no OpenAlex match"
+    "error": "no University of Rochester match in OpenAlex"
   },
   {
     "name": "Siddharth Deshpande",
@@ -95,32 +95,32 @@
   },
   {
     "name": "Gang Fan",
-    "openalex_id": "https://openalex.org/A5059907602",
-    "resolved_name": "Fan‐Gang Tseng",
-    "affiliation": "National Tsing Hua University | Research Center for Applied Science, Academia Sinica | Tung Fang Design Institute | University of Southern California | Ming Chi University of Technology | California NanoSystems Institute | Minghsin University of Science and Technology | National Yang Ming Chiao Tung University | Rochester Institute of Technology | University of California, Los Angeles | National Health Research Institutes | National Chung Shan Institute of Science and Technology | National Chi Nan University | Hsuan Chuang University | National Tsing Hua University | California Southern University | Atomic Energy Council | University System of Taiwan | University of California System | Genomics Research Center, Academia Sinica | Research Center for Applied Science, Academia Sinica | Institute of Physics, Academia Sinica | Development Center for Biotechnology | Institute of Nuclear Energy Research | Research Center for Humanities and Social Sciences, Academia Sinica | Microsystems (United Kingdom) | National Hsinchu University of Education | Centre for Research and Development | Indian Institute of Science Bangalore | Syracuse University | Academia Sinica | Tsinghua University",
+    "openalex_id": "https://openalex.org/A5079948886",
+    "resolved_name": "Gang Fan",
+    "affiliation": "University of Rochester | ON Semiconductor (United States) | Kunming University of Science and Technology | Xidian University | Tianjin University | Center for NanoScience | National Center for Nanoscience and Technology | China XD Group (China) | Collaborative Innovation Center of Chemical Science and Engineering Tianjin | Zhejiang Medicine (China) | University of Rochester | Massachusetts Institute of Technology | The University of Texas at Austin",
     "matched_rochester": true,
-    "works_count": 550,
+    "works_count": 44,
     "concepts": [],
     "topics": [
-      "Microfluidic and Bio-sensing Technologies",
-      "Microfluidic and Capillary Electrophoresis Applications",
-      "Innovative Microfluidic and Catalytic Techniques Innovation",
-      "3D Printing in Biomedical Research",
-      "Nanofabrication and Lithography Techniques"
+      "Perovskite Materials and Applications",
+      "Molecular Junctions and Nanostructures",
+      "Luminescence and Fluorescent Materials",
+      "Advanced biosensing and bioanalysis techniques",
+      "Electrochemical sensors and biosensors"
     ],
     "recent_titles": [
-      "Automated Label-Free Classification of Circulating Tumor Cells and White Blood Cells Using Hyperspectral Imaging and Deep Learning on Microfluidic SACA Chip System",
-      "Microfluidic innovations driving the future of sperm motility and sex sorting techniques",
-      "High-Efficiency Methanol Steam Reformer with Artificial Intelligence Complex System Response (AICSR) Optimized Pd–CuZn Catalysts for Portable Hydrogen Generation",
-      "Thermoelectric Assisted Cascaded Microreactor for Solar Hydrogen Production Using Ti <sub>3</sub> C <sub>2</sub> ‐CdS Heterostructure Photoelectrocatalysis (Adv. Energy Mater. 15/2026)",
-      "Thermoelectric Assisted Cascaded Microreactor for Solar Hydrogen Production Using Ti <sub>3</sub> C <sub>2</sub> ‐CdS Heterostructure Photoelectrocatalysis",
-      "A modular microfluidic chip unit for multiple-organ-on-chip platform integration and drug screening",
-      "REAL-TIME THREE-DIMENSIONAL MONITORING OF OXYGEN AND PH IN CO-CULTURED TUMOR ORGANOID USING POLYMERIC NANOPARTICLE SENSORS.",
-      "A Constant Pressure-Driven Podocyte-on-Chip Model for Studying Hypertension-Induced Podocytopathy Pathomechanism and Drug Screening",
-      "Rapid Detection of SARS-CoV-2 Variants via SERS and Machine Learning",
-      "SERS based pH nanosensors for <i>in-vitro</i> pH measurement in multicellular 3D tumour spheroids",
-      "Power density Enhancement via Counter Flow in a Clover-type Bipolar Plate for High-Performance High Temperature Proton Exchange Membrane Fuel Cell",
-      "DeepATsers: a deep learning framework for one-pot SERS biosensor to detect SARS-CoV-2 virus"
+      "Bio-Inspired Catalysis for Circularizing the Polymer Economy",
+      "Whole-Cell Controlled Living Polymerization By Electrochemically-Active Bacteria",
+      "Continuous flow process optimization aided by machine learning for a pharmaceutical intermediate",
+      "Highly Efficient Carbon Dioxide Electroreduction via DNA-Directed Catalyst Immobilization",
+      "Self-Assembled Nanocoatings Protect Microbial Fertilizers for Climate-Resilient Agriculture",
+      "Enhanced Electrochemical CO2 Reduction Using DNA-Based Nanomaterials",
+      "Exploring the Impact of Oligomerization on Redox Flow Cell Performance",
+      "Characterizing the Impact of Oligomerization on Redox Flow Cell Performance",
+      "Magnesium salt removal from manganese electrolyte via low-temperature crystallisation",
+      "Ultrahigh fill-factor all-inorganic CsPbBr3 perovskite solar cells processed from two-step solution method and solvent additive strategy",
+      "Carbon Electrode-Based Biosensing Enabled by Biocompatible Surface Modification with DNA and Proteins",
+      "Optimization of NaOH–Na2CO3 brine purification method: From laboratory experiments to industrial application"
     ]
   },
   {
@@ -155,22 +155,7 @@
   },
   {
     "name": "Melodie I. Lawton",
-    "openalex_id": "https://openalex.org/A5032389476",
-    "resolved_name": "Melodie I. Lawton",
-    "affiliation": "Syracuse University | Syracuse University",
-    "matched_rochester": false,
-    "works_count": 2,
-    "concepts": [],
-    "topics": [
-      "Polymer composites and self-healing",
-      "Advanced Sensor and Energy Harvesting Materials",
-      "Electrospun Nanofibers in Biomedical Applications",
-      "Synthetic Organic Chemistry Methods"
-    ],
-    "recent_titles": [
-      "Anhydride-Based Reconfigurable Shape Memory Elastomers",
-      "Biodegradable anhydride-based reconfigurable shape memory elastomer"
-    ]
+    "error": "no University of Rochester match in OpenAlex"
   },
   {
     "name": "Darren Lipomi",

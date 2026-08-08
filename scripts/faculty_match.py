@@ -34,7 +34,7 @@ import urllib.request
 
 OPENALEX = "https://api.openalex.org"
 MAILTO = "marc.porosoff@rochester.edu"           # OpenAlex polite pool
-ROCHESTER_HINT = "rochester"
+ROCHESTER_HINT = "university of rochester"        # exclude "Rochester Institute of Technology"
 
 # Core Chemical & Sustainability Engineering faculty (Hajim, 2026).
 FACULTY = [
@@ -69,17 +69,18 @@ def _affiliation_names(author: dict) -> str:
 
 
 def find_author(name: str) -> dict | None:
-    """Best OpenAlex author for a name, preferring a Rochester affiliation."""
-    data = _get(f"{OPENALEX}/authors?search={urllib.parse.quote(name)}&per_page=10")
+    """Best OpenAlex author for a name that is actually affiliated with the
+    University of Rochester. Returns None when no confident UR match exists, so
+    we omit the person rather than attach a same-named stranger's publications
+    (that mis-resolution is how "Gang Fan" and "Melodie Lawton" went wrong)."""
+    data = _get(f"{OPENALEX}/authors?search={urllib.parse.quote(name)}&per_page=15")
     results = data.get("results") or []
-    if not results:
-        return None
     rochester = [a for a in results
                  if ROCHESTER_HINT in _affiliation_names(a).lower()]
-    pool = rochester or results
-    # Highest works_count in the preferred pool.
-    best = max(pool, key=lambda a: a.get("works_count") or 0)
-    best["_matched_rochester"] = bool(rochester)
+    if not rochester:
+        return None
+    best = max(rochester, key=lambda a: a.get("works_count") or 0)
+    best["_matched_rochester"] = True
     return best
 
 
@@ -102,7 +103,8 @@ def build_profiles() -> list[dict]:
             profiles.append({"name": name, "error": str(exc)})
             continue
         if not author:
-            profiles.append({"name": name, "error": "no OpenAlex match"})
+            profiles.append({"name": name,
+                             "error": "no University of Rochester match in OpenAlex"})
             continue
         concepts = [c.get("display_name") for c in (author.get("x_concepts") or [])
                     if (c.get("score") or 0) >= 10][:12]
@@ -130,10 +132,22 @@ def build_profiles() -> list[dict]:
 # Stage 2: match profiles against the opportunity catalog (v1 keyword/topic)
 # --------------------------------------------------------------------------- #
 _WORD_RE = re.compile(r"[a-z][a-z0-9\-]{2,}")
+# Generic words are stripped so a shared key phrase must overlap on *distinctive*
+# terms, not filler like "research"/"program"/"science".
 _STOP = set("""the and for with from this that are was into over out per via
-research program grants grant funding award awards project projects support
-science engineering national university institute department studies study
-development new using based their which will been more also may can under""".split())
+research program programs grant grants funding award awards project projects
+support science sciences engineering technology technologies national university
+universities institute department departments studies study development
+applications application advancing advanced approaches approach based using their
+which will been more also may can under new toward towards related general
+foundation opportunity opportunities proposal proposals faculty investigator
+investigators""".split())
+
+# Optional hand-curated key phrases per PI (override the auto OpenAlex topics).
+# Leave a name out to use their topics. Example:
+#   FACULTY_KEYTERMS = {"Marc D. Porosoff": ["CO2 hydrogenation", "tungsten carbide",
+#       "reverse water-gas shift", "syngas to olefins", "heterogeneous catalysis"]}
+FACULTY_KEYTERMS: dict[str, list[str]] = {}
 
 
 def _load_catalog(path: str) -> list[dict]:
@@ -143,68 +157,103 @@ def _load_catalog(path: str) -> list[dict]:
     return obj.get("opportunities", obj.get("records", []))
 
 
-def _bag(*parts: str) -> set[str]:
-    words = set()
-    for p in parts:
-        for w in _WORD_RE.findall((p or "").lower()):
-            if w not in _STOP:
-                words.add(w)
-    return words
+def _sig_words(phrase: str) -> list[str]:
+    return [w for w in _WORD_RE.findall((phrase or "").lower()) if w not in _STOP]
 
 
-def _profile_bag(profile: dict) -> set[str]:
-    return _bag(" ".join(profile.get("concepts", [])),
-               " ".join(profile.get("topics", [])),
-               " ".join(profile.get("recent_titles", [])))
+def _phrase_hit(sig: list[str], opp_words: set[str]) -> bool:
+    """A key phrase 'hits' an opportunity when enough of its distinctive words are
+    present. A single-word phrase needs its one word; multi-word phrases need at
+    least ceil(60%) of their distinctive words (minimum 2), so a match can't rest
+    on one or two generic words like 'energy' + 'materials'."""
+    if not sig:
+        return False
+    present = sum(1 for w in sig if w in opp_words)
+    if len(sig) == 1:
+        return present >= 1
+    need = max(2, (3 * len(sig) + 4) // 5)   # ceil(0.6 * len), floored at 2
+    return present >= need
+
+
+def _key_terms(profile: dict) -> list[str]:
+    """5-8 descriptive key phrases for a PI: a hand-curated override if provided,
+    otherwise the PI's top OpenAlex research topics."""
+    if profile["name"] in FACULTY_KEYTERMS:
+        return [t for t in FACULTY_KEYTERMS[profile["name"]] if t][:8]
+    seen, terms = set(), []
+    for t in (profile.get("topics") or []):
+        t = re.sub(r"\s+", " ", t or "").strip()
+        if t and t.lower() not in seen:
+            seen.add(t.lower())
+            terms.append(t)
+    return terms[:8]
 
 
 def match_to_catalog(profiles: list[dict], catalog_path: str, out_path: str,
                      top_n: int = 25) -> dict:
     catalog = _load_catalog(catalog_path)
-    # Build a research bag from each profile's concepts + topics + recent titles.
-    # OpenAlex retired the author ``x_concepts`` field, so most profiles now carry
-    # an empty ``concepts`` list; gate on the *combined* bag being non-empty rather
-    # than on ``concepts`` specifically (otherwise every faculty is skipped).
-    bags: dict[str, set] = {}
+
+    # Each PI is reduced to 5-8 descriptive key phrases; an opportunity matches a
+    # PI only when it shares the *distinctive* words of one of those phrases. This
+    # is far more specific than the old whole-word-bag overlap.
+    faculty_terms: dict[str, list[str]] = {}
+    faculty_meta: dict[str, dict] = {}
     for p in profiles:
         if p.get("error"):
             continue
-        bag = _profile_bag(p)
-        if bag:
-            bags[p["name"]] = bag
-    per_faculty: dict[str, list] = {name: [] for name in bags}
+        terms = _key_terms(p)
+        if not terms:
+            continue
+        faculty_terms[p["name"]] = terms
+        faculty_meta[p["name"]] = {
+            "resolved_name": p.get("resolved_name") or p["name"],
+            "openalex_id": p.get("openalex_id"),
+            "works_count": p.get("works_count"),
+            "key_terms": terms,
+        }
+    term_sig = {name: [(t, _sig_words(t)) for t in terms]
+                for name, terms in faculty_terms.items()}
+
+    per_faculty: dict[str, list] = {name: [] for name in faculty_terms}
     per_opp_scores: list[tuple] = []
 
     for opp in catalog:
-        obag = _bag(opp.get("title"), opp.get("description"),
-                    " ".join(opp.get("topic_areas") or []),
-                    " ".join(opp.get("disciplines") or []))
-        if not obag:
+        text = " ".join([
+            opp.get("title") or "", opp.get("description") or "",
+            " ".join(opp.get("topic_areas") or []),
+            " ".join(opp.get("disciplines") or []),
+        ]).lower()
+        opp_words = {w for w in _WORD_RE.findall(text) if w not in _STOP}
+        if not opp_words:
             continue
         opp_id = opp.get("opportunity_id") or opp.get("opportunity_number") or opp.get("title")
         contributors = []
-        for name, fbag in bags.items():
-            overlap = fbag & obag
-            score = len(overlap)
-            if score >= 3:
-                contributors.append((name, score, sorted(overlap)[:8]))
-                per_faculty[name].append((score, opp_id, opp.get("title")))
+        for name, sigs in term_sig.items():
+            matched = [t for (t, sig) in sigs if _phrase_hit(sig, opp_words)]
+            if matched:
+                contributors.append((name, len(matched), matched))
+                per_faculty[name].append((len(matched), opp_id, opp.get("title"), matched))
         if len(contributors) >= 2:  # multi-PI candidate
             per_opp_scores.append((sum(c[1] for c in contributors), opp_id,
                                    opp.get("title"), contributors))
 
+    def _rank(item):
+        return (-(item[0]), (item[2] or "").lower())
+
     faculty_top = {
-        name: [{"opportunity_id": oid, "title": t, "score": s}
-               for (s, oid, t) in sorted(items, reverse=True)[:top_n]]
+        name: [{"opportunity_id": oid, "title": t, "score": s, "matched_terms": m}
+               for (s, oid, t, m) in sorted(items, key=_rank)[:top_n]]
         for name, items in per_faculty.items()
     }
     multi_pi = [{
         "opportunity_id": oid, "title": t, "total_score": tot,
-        "suggested_team": [{"name": n, "score": s, "shared_terms": terms}
-                           for (n, s, terms) in sorted(contribs, key=lambda c: -c[1])[:4]],
-    } for (tot, oid, t, contribs) in sorted(per_opp_scores, reverse=True)[:100]]
+        "suggested_team": [{"name": n, "score": s, "matched_terms": m}
+                           for (n, s, m) in sorted(contribs, key=lambda c: -c[1])[:5]],
+    } for (tot, oid, t, contribs) in sorted(per_opp_scores, key=lambda x: -x[0])[:150]]
 
-    out = {"faculty_top_matches": faculty_top, "multi_pi_suggestions": multi_pi}
+    out = {"faculty": faculty_meta,
+           "faculty_top_matches": faculty_top,
+           "multi_pi_suggestions": multi_pi}
     with open(out_path, "w", encoding="utf-8") as fh:
         fh.write("/* Generated by scripts/faculty_match.py. Do not edit by hand. */\n")
         fh.write("globalThis.FACULTY_MATCHES=")

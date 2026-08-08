@@ -1135,9 +1135,11 @@ textarea:focus {
 }
 
 .record-details {
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid var(--line);
+  margin-top: 12px;
+  padding: 13px 15px;
+  background: var(--surface-alt);
+  border: 1px solid var(--line);
+  border-radius: 10px;
 }
 
 .record-details summary {
@@ -1221,12 +1223,9 @@ textarea:focus {
 
 .full-description {
   margin-bottom: 14px;
-  padding: 16px;
   color: #445368;
   font-size: .8rem;
   line-height: 1.58;
-  background: var(--surface-alt);
-  border-radius: 8px;
 }
 
 .full-description p {

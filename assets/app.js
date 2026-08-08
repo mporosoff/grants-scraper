@@ -1603,7 +1603,6 @@
     const aiBlock = assessment
       ? `<div class="ai-rationale"><strong>${escapeHtml(assessment.verdict || "AI match")} · ${Number(assessment.score || 0)}/100</strong> ${escapeHtml(assessment.reason || "")}${assessment.concern ? `<span class="ai-concern"><strong>Check:</strong> ${escapeHtml(assessment.concern)}</span>` : ""}</div>`
       : "";
-    const tags = cardTags(record).map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
     const eligibility = (record.applicant_types || []).join("; ") || record.eligibility_text || "Not listed";
     const perAward = perAwardLabel(record);
     const programFunding = programFundingLabel(record);
@@ -1667,7 +1666,6 @@
           ${record.preliminary_deadline_text ? `<p class="description"><strong>Potential preliminary deadline:</strong> ${escapeHtml(record.preliminary_deadline_text)} <em>Machine extracted; verify in the official notice.</em></p>` : ""}
         </div>
       </details>
-      ${tags ? `<div class="tag-row">${tags}</div>` : ""}
       <div class="card-actions">
         ${actions.html}
         <button class="source-action" type="button" data-chat-record="${escapeAttribute(id)}">Ask AI</button>
