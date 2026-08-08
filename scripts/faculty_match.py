@@ -161,7 +161,17 @@ def _profile_bag(profile: dict) -> set[str]:
 def match_to_catalog(profiles: list[dict], catalog_path: str, out_path: str,
                      top_n: int = 25) -> dict:
     catalog = _load_catalog(catalog_path)
-    bags = {p["name"]: _profile_bag(p) for p in profiles if p.get("concepts")}
+    # Build a research bag from each profile's concepts + topics + recent titles.
+    # OpenAlex retired the author ``x_concepts`` field, so most profiles now carry
+    # an empty ``concepts`` list; gate on the *combined* bag being non-empty rather
+    # than on ``concepts`` specifically (otherwise every faculty is skipped).
+    bags: dict[str, set] = {}
+    for p in profiles:
+        if p.get("error"):
+            continue
+        bag = _profile_bag(p)
+        if bag:
+            bags[p["name"]] = bag
     per_faculty: dict[str, list] = {name: [] for name in bags}
     per_opp_scores: list[tuple] = []
 

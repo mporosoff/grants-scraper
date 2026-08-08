@@ -3397,4 +3397,20 @@ body.chat-expanded .chat-privacy {
   }
 }
 
-.audience-filter-field select{width:100%;margin-top:6px;padding:7px 8px;font:inherit;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink)}
+.audience-filter-field .audience-select-label {
+  display: block;
+  width: 100%;
+}
+
+.audience-filter-field select {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 9px 12px;
+  font: inherit;
+  color: var(--ink, #223049);
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--line, #d6dde6);
+  border-radius: 8px;
+  cursor: pointer;
+}

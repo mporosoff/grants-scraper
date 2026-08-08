@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'" />
+<meta name="robots" content="noindex, nofollow" />
+<title>ChemE Faculty ↔ Funding — team match (internal)</title>
+<style>
+  :root{
+    --navy:#12263f;--navy-2:#1d3b5d;--blue:#1f64d5;--blue-dark:#174ca4;--blue-soft:#eaf2ff;
+    --gold:#f4b942;--ink:#172033;--muted:#617087;--line:#dce3ec;--line-strong:#c8d2df;
+    --surface:#ffffff;--surface-alt:#f5f7fa;--page:#eef2f6;--success:#16845b;--warning:#9a5a00;
+    --warning-bg:#fff7e6;--shadow:0 14px 35px rgba(18,38,63,.09);--radius:14px;
+    color-scheme:light;
+    font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--page);color:var(--ink);line-height:1.5;}
+  a{color:var(--blue-dark);}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 20px 80px;}
+  header.page{background:linear-gradient(135deg,var(--navy),var(--navy-2));color:#fff;border-radius:var(--radius);padding:26px 28px;box-shadow:var(--shadow);}
+  header.page h1{margin:0 0 6px;font-size:1.5rem;}
+  header.page p{margin:0;color:#cfe0f5;font-size:.95rem;}
+  .internal-tag{display:inline-block;margin-bottom:10px;background:rgba(244,185,66,.2);color:var(--gold);border:1px solid rgba(244,185,66,.5);padding:2px 10px;border-radius:999px;font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;}
+  .meta-line{margin-top:12px;color:#a9c1de;font-size:.82rem;}
+  .controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:22px 0 8px;}
+  .tabs{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+  .tabs button{appearance:none;border:0;background:transparent;padding:9px 16px;font:inherit;font-weight:600;color:var(--muted);cursor:pointer;}
+  .tabs button[aria-selected="true"]{background:var(--blue);color:#fff;}
+  .search{flex:1;min-width:220px;}
+  .search input{width:100%;padding:10px 13px;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;}
+  .facpick{display:flex;align-items:center;gap:8px;}
+  .facpick select{padding:9px 12px;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;cursor:pointer;}
+  .count{color:var(--muted);font-size:.85rem;margin:6px 2px 16px;}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:14px;}
+  .card h3{margin:0 0 4px;font-size:1.06rem;line-height:1.35;}
+  .card h3 a{text-decoration:none;}
+  .card h3 a:hover{text-decoration:underline;}
+  .agency{margin:0;color:var(--muted);font-size:.86rem;}
+  .deadline{margin:4px 0 0;font-size:.82rem;color:var(--warning);}
+  .scorebadge{float:right;background:var(--blue-soft);color:var(--blue-dark);border:1px solid #cfe0fb;border-radius:999px;padding:3px 11px;font-size:.76rem;font-weight:700;white-space:nowrap;margin-left:10px;}
+  .team{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;}
+  .pi{background:var(--surface-alt);border:1px solid var(--line);border-radius:10px;padding:8px 11px;font-size:.83rem;max-width:100%;}
+  .pi .name{font-weight:600;color:var(--navy);}
+  .pi .pi-score{color:var(--muted);}
+  .terms{margin-top:3px;color:var(--muted);font-size:.76rem;}
+  .terms span{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:6px;padding:1px 6px;margin:2px 3px 0 0;}
+  .fac-list .row{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line);}
+  .fac-list .row:last-child{border-bottom:0;}
+  .fac-list .row .body{flex:1;}
+  .fac-list .row .body p{margin:2px 0 0;}
+  .empty{background:var(--surface);border:1px dashed var(--line-strong);border-radius:var(--radius);padding:34px 22px;text-align:center;color:var(--muted);}
+  .empty code{background:var(--surface-alt);padding:2px 6px;border-radius:6px;}
+  footer.note{margin-top:26px;color:var(--muted);font-size:.8rem;text-align:center;}
+  .hide{display:none !important;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="page">
+    <span class="internal-tag">Internal · Porosoff group</span>
+    <h1>ChemE faculty ↔ funding — team match</h1>
+    <p>Auto-matched from department publication profiles against the live opportunity catalog. Scores are keyword/topic overlap (a rough relevance signal, not a ranking of fit).</p>
+    <p class="meta-line" id="meta-line">Loading…</p>
+  </header>
+
+  <div class="controls">
+    <div class="tabs" role="tablist" aria-label="View">
+      <button id="tab-teams" role="tab" aria-selected="true">Multi-PI opportunities</button>
+      <button id="tab-faculty" role="tab" aria-selected="false">By faculty member</button>
+    </div>
+    <div class="search"><input id="filter" type="search" placeholder="Filter by title, agency, name, or term…" autocomplete="off" /></div>
+    <div class="facpick hide" id="facpick"><label for="fac-select">Faculty:</label><select id="fac-select"></select></div>
+  </div>
+
+  <p class="count" id="count"></p>
+  <div id="view-teams"></div>
+  <div id="view-faculty" class="hide"></div>
+
+  <footer class="note">
+    Generated by <code>scripts/faculty_match.py</code>. Not linked from the public finder and marked no-index. Re-run the profiles + match steps to refresh.
+  </footer>
+</div>
+
+<script src="data/opportunities.js"></script>
+<script src="data/faculty_matches.js"></script>
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var catalog = (globalThis.GRANT_CATALOG && globalThis.GRANT_CATALOG.opportunities) || [];
+  var MATCHES = globalThis.FACULTY_MATCHES || null;
+
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function recId(r) { return r.opportunity_id || r.opportunity_number || r.title || ""; }
+  function bestUrl(r) {
+    var u = r.funding_opportunity_url || r.primary_document_url || r.detail_page || r.url || "";
+    return /^https?:\/\//i.test(u) ? u : "";
+  }
+  function deadlineText(r) {
+    if (!r) return "";
+    if (r.close_date && /^\d{4}-\d{2}-\d{2}$/.test(r.close_date)) return "Closes " + r.close_date;
+    if (r.deadline_note) return String(r.deadline_note);
+    if (r.close_date_note) return String(r.close_date_note);
+    return "";
+  }
+
+  // Index the catalog by every id form a match might reference.
+  var byId = {};
+  catalog.forEach(function (r) {
+    [r.opportunity_id, r.opportunity_number, r.title].forEach(function (k) {
+      if (k && !(k in byId)) byId[k] = r;
+    });
+  });
+  function lookup(id) { return byId[id] || null; }
+
+  // ---- render helpers -----------------------------------------------------
+  function oppHeader(id, title, score) {
+    var r = lookup(id);
+    var url = r ? bestUrl(r) : "";
+    var agency = (r && r.agency) || "";
+    var dl = deadlineText(r);
+    var titleHtml = url
+      ? '<a href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(title) + " ↗</a>"
+      : esc(title);
+    return (
+      (score != null ? '<span class="scorebadge">score ' + esc(score) + "</span>" : "") +
+      "<h3>" + titleHtml + "</h3>" +
+      (agency ? '<p class="agency">' + esc(agency) + "</p>" : "") +
+      (dl ? '<p class="deadline">' + esc(dl) + "</p>" : "")
+    );
+  }
+  function teamChips(team) {
+    return '<div class="team">' + (team || []).map(function (m) {
+      var terms = (m.shared_terms || []).slice(0, 6).map(function (t) {
+        return "<span>" + esc(t) + "</span>";
+      }).join("");
+      return '<div class="pi"><span class="name">' + esc(m.name) + "</span> " +
+        '<span class="pi-score">· ' + esc(m.score) + " shared</span>" +
+        (terms ? '<div class="terms">' + terms + "</div>" : "") + "</div>";
+    }).join("") + "</div>";
+  }
+
+  // ---- data ---------------------------------------------------------------
+  var teams = (MATCHES && MATCHES.multi_pi_suggestions) || [];
+  var facultyTop = (MATCHES && MATCHES.faculty_top_matches) || {};
+  var facultyNames = Object.keys(facultyTop).sort();
+
+  function teamText(t) {
+    return (t.title + " " + (t.suggested_team || []).map(function (m) {
+      return m.name + " " + (m.shared_terms || []).join(" ");
+    }).join(" ") + " " + ((lookup(t.opportunity_id) || {}).agency || "")).toLowerCase();
+  }
+
+  function renderTeams(q) {
+    var host = $("view-teams");
+    var list = teams.filter(function (t) { return !q || teamText(t).indexOf(q) !== -1; });
+    $("count").textContent = list.length + " opportunit" + (list.length === 1 ? "y" : "ies") +
+      " where 2+ faculty overlap" + (q ? " (filtered)" : "");
+    if (!list.length) {
+      host.innerHTML = '<div class="empty">No multi-PI opportunities' + (q ? " match that filter." : " in the current data.") + "</div>";
+      return;
+    }
+    host.innerHTML = list.map(function (t) {
+      return '<div class="card">' + oppHeader(t.opportunity_id, t.title, t.total_score) +
+        teamChips(t.suggested_team) + "</div>";
+    }).join("");
+  }
+
+  function renderFaculty(q) {
+    var host = $("view-faculty");
+    var name = $("fac-select").value;
+    var items = (facultyTop[name] || []).filter(function (it) {
+      if (!q) return true;
+      var r = lookup(it.opportunity_id) || {};
+      return (it.title + " " + (r.agency || "")).toLowerCase().indexOf(q) !== -1;
+    });
+    $("count").textContent = items.length + " opportunit" + (items.length === 1 ? "y" : "ies") +
+      " for " + name + (q ? " (filtered)" : "");
+    if (!items.length) {
+      host.innerHTML = '<div class="empty">No matches' + (q ? " for that filter." : " for this person.") + "</div>";
+      return;
+    }
+    host.innerHTML = '<div class="card fac-list">' + items.map(function (it) {
+      return '<div class="row"><div class="body">' + oppHeader(it.opportunity_id, it.title, it.score) +
+        "</div></div>";
+    }).join("") + "</div>";
+  }
+
+  // ---- wiring -------------------------------------------------------------
+  var mode = "teams";
+  function refresh() {
+    var q = ($("filter").value || "").trim().toLowerCase();
+    if (mode === "teams") renderTeams(q); else renderFaculty(q);
+  }
+  function setMode(m) {
+    mode = m;
+    var teamsSel = m === "teams";
+    $("tab-teams").setAttribute("aria-selected", teamsSel ? "true" : "false");
+    $("tab-faculty").setAttribute("aria-selected", teamsSel ? "false" : "true");
+    $("view-teams").classList.toggle("hide", !teamsSel);
+    $("view-faculty").classList.toggle("hide", teamsSel);
+    $("facpick").classList.toggle("hide", teamsSel);
+    refresh();
+  }
+
+  function init() {
+    if (!MATCHES) {
+      $("meta-line").textContent = "No match data found.";
+      $("count").textContent = "";
+      $("view-teams").innerHTML = '<div class="empty">Couldn\'t find <code>data/faculty_matches.js</code>.<br>' +
+        "Run <code>python -m scripts.faculty_match match</code> and commit the generated file.</div>";
+      return;
+    }
+    $("meta-line").textContent = facultyNames.length + " faculty profiles · " +
+      teams.length + " multi-PI opportunities · catalog of " + catalog.length + " opportunities";
+    facultyNames.forEach(function (n) {
+      var o = document.createElement("option");
+      o.value = n; o.textContent = n;
+      $("fac-select").appendChild(o);
+    });
+    $("tab-teams").addEventListener("click", function () { setMode("teams"); });
+    $("tab-faculty").addEventListener("click", function () { setMode("faculty"); });
+    $("fac-select").addEventListener("change", refresh);
+    $("filter").addEventListener("input", refresh);
+    setMode("teams");
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>

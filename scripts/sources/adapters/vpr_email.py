@@ -376,7 +376,8 @@ class VPREmailAdapter(SourceAdapter):
     slug = "vpr-email"
     display_name = "UR VPR funding digest (limited submissions & foundations)"
     source_type = "Internal"
-    enabled = False          # flip to True after verifying against real mail
+    enabled = False          # OFF until tuned against a real forwarded digest (urldefense
+                             # link-unwrapping + Outlook MsoNormal HTML). Flip to True after tuning.
     min_records = 1
     max_records = 500
 

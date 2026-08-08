@@ -15,6 +15,7 @@ faculty.csv
 !/data/document_evidence.json
 !/data/source_records.json
 !/data/link_health.json
+!/data/faculty_matches.js
 /GrantsDBExtract*.zip
 
 # Human deployment-review files stay private and out of source control

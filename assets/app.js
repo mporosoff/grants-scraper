@@ -23,6 +23,28 @@
   const CHAT_UI = globalThis.FUNDING_CHAT_UI;
   const PREFERENCES_API = globalThis.FUNDING_PREFERENCES;
   const SAVED_API = globalThis.FUNDING_SAVED;
+
+  // --- Anonymous usage logging (Cloudflare Worker + KV) --------------------
+  // Fire-and-forget: counts searches, per-load sessions, and the visitor's
+  // network organization (resolved server-side; the raw IP is never stored).
+  // Wrapped so any logging failure can never affect the app.
+  const USAGE_ENDPOINT = "https://funding-usage.urochestercheme.workers.dev/";
+  const USAGE_SESSION = (() => {
+    try { return crypto.randomUUID(); }
+    catch (_e) { return `s-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`; }
+  })();
+  function logUsage(category) {
+    if (!USAGE_ENDPOINT) return;
+    try {
+      // No custom headers -> a CORS "simple request", so no preflight round-trip.
+      fetch(USAGE_ENDPOINT, {
+        method: "POST",
+        body: JSON.stringify({ session: USAGE_SESSION, category: category || "all" }),
+        keepalive: true,
+      }).catch(() => {});
+    } catch (_e) { /* never let logging affect the app */ }
+  }
+
   const DEFAULT_CHAT_SUGGESTIONS = [
     "Which submission stages and deadlines are actually cited?",
     "Compare the cited award amounts and project durations.",
@@ -831,7 +853,13 @@
   }
 
   function classifyAudience(record) {
-    // Title-based so faculty grants that merely mention students aren't miscategorized.
+    // Curated sources (e.g. JHU) carry an explicit audience in applicant_types.
+    const at = (record.applicant_types || []).join(" | ").toLowerCase();
+    if (at.includes("early-career faculty")) return "faculty";
+    if (at.includes("postdoctoral researchers")) return "postdoc";
+    if (at.includes("graduate students")) return "grad";
+    if (at.includes("undergraduate students")) return "undergrad";
+    // Otherwise infer from the title (federal records don't carry those markers).
     const title = (record.title || "").toLowerCase();
     if (/\breu\b|research experiences for undergraduates|goldwater|\bundergraduate\b/.test(title)) return "undergrad";
     if (/post-?doctoral|\bpostdoc\b/.test(title)) return "postdoc";
@@ -1166,6 +1194,7 @@
         ? "relevance"
         : "deadline";
     recordDeploymentUsage(state.profile.active ? "profile_searches" : "searches");
+    logUsage($("audience-filter") ? $("audience-filter").value : "all");
     runSearch({ autoSort: true });
     $("search-status").textContent =
       `Search complete: ${state.matches.length.toLocaleString()} opportunities match the context above.`;
@@ -1192,6 +1221,7 @@
     $("sort").value = personalized ? "relevance" : "deadline";
     state.searched = true;
     recordDeploymentUsage("searches");
+    logUsage("browse-all");
     runSearch();
     $("search-status").textContent =
       `Browsing all ${state.matches.length.toLocaleString()} current opportunities.`;
