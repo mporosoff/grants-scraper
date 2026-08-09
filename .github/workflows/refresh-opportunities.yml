@@ -119,7 +119,21 @@ jobs:
             echo "The generated catalog is unchanged."
           else
             git commit -m "chore: refresh Grants.gov catalog"
-            git push
+            # Rebase onto any commit that landed while this run was building, then
+            # push. Retry a few times so a concurrent push can't drop the refresh.
+            pushed=false
+            for attempt in 1 2 3 4 5; do
+              if git pull --rebase --autostash origin "${GITHUB_REF_NAME:-main}" && git push; then
+                pushed=true
+                break
+              fi
+              echo "Rebase/push attempt ${attempt} failed; retrying in 5s..."
+              sleep 5
+            done
+            if [ "$pushed" != "true" ]; then
+              echo "::error::Could not push the refreshed catalog after retries."
+              exit 1
+            fi
           fi
       - name: Alert the project owner about a degraded external source
         if: always() && steps.additional-sources.outcome == 'failure'
