@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml</id>
-  <updated>2026-08-08T10:52:00Z</updated>
+  <updated>2026-08-09T00:41:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -294,20 +294,6 @@
     <author><name>Centers for Disease Control - NCHHSTP</name></author>
     <category term="Social and behavioral sciences"/>
     <summary>Centers for Disease Control - NCHHSTP — Closes 2026-09-01 — The purpose of this NOFO is to support ongoing bio-behavioral surveillance among populations disproportionately affected by HIV. Data will be collected on behavioral risk factors for HIV (e.g., sexual behaviors, drug use), HIV testing behaviors, use of prevention strategies (e.g., condoms, PrEP) and receipt of prevention services. All NHBS participants will be offered an HIV test and linked to app…</summary>
-  </entry>
-  <entry>
-    <title>Prosperity through Partnership: Catalyzing U.S.-Algerian Collaboration in Innovation, Commerce and English Language</title>
-    <link href="https://www.grants.gov/search-results-detail/362903"/>
-    <id>urn:funding-finder:grants-gov:362903</id>
-    <updated>2026-06-22T00:00:00Z</updated>
-    <author><name>U.S. Mission to Algeria</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Algeria — Closes 2026-08-08 — 1. Executive SummaryThe U.S. Department of State’s Embassy Algiers is launching a competitive program to catalyze innovation and commerce between the United States and Algeria and advance key U.S. foreign policy priorities. The initiative aims to strengthen commercial ties, expand market access for American companies, and promote American business models and technology, particularly in entrepreneu…</summary>
   </entry>
   <entry>
     <title>Institutional Mentored Career Development Award (Parent K12) (Clinical Trials Not Allowed)</title>
@@ -664,5 +650,16 @@
     <category term="Social and behavioral sciences"/>
     <category term="Cybersecurity"/>
     <summary>National Institutes of Health — Closes 2028-06-07 — The National Center for Complementary and Integrative Health (NCCIH) announces this Notice of Funding Opportunity (NOFO) to solicit applications for research on how mind and body interventions through psychological and/or physical inputs (e.g., mindfulness meditation, yoga, acupuncture, massage, and other brain and/or body based interventions) impact mechanisms of emotional well-being (EWB) and th…</summary>
+  </entry>
+  <entry>
+    <title>NIA Expanding Research in AD/ADRD (ERA) Postbaccalaureate Research Education Program (R25 Independent Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359653"/>
+    <id>urn:funding-finder:grants-gov:359653</id>
+    <updated>2025-09-02T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health — Closes 2027-05-26 — This Notice of Funding Opportunity Announcement (NOFO) invites R25 applications to support the development and implementation of research education programs for recent baccalaureates from all backgrounds, including those from groups underrepresented in the biomedical and behavioral sciences. It is essential to expand and broaden the skilled Alzheimers Disease (AD) and Alzheimers Disease and Relate…</summary>
   </entry>
 </feed>

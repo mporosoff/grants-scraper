@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-08-08T10:52:00Z</updated>
+  <updated>2026-08-09T00:41:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -640,17 +640,6 @@
     <summary>U.S. Mission to Algeria — Closes 2026-08-10 — A. ELIGIBILITY 1. Eligible Applicants The following organizations are eligible to apply: ● Not-for-profit organizations, including think tanks and civil society/non-governmental organizations ● Public and private educational institutions ● Public International Organizations and Governmental institutions For-profit entities, even those that may fall into the categories listed above, are not eligibl…</summary>
   </entry>
   <entry>
-    <title>U.S. Embassy Suva Annual Program Statement for Fiji, Kiribati, Nauru, and Tuvalu</title>
-    <link href="https://www.grants.gov/search-results-detail/363104"/>
-    <id>urn:funding-finder:grants-gov:363104</id>
-    <updated>2026-07-08T00:00:00Z</updated>
-    <author><name>U.S. Mission to Fiji</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Fiji — Closes 2026-08-08 — The U.S. Department of State’s Embassy Suva announces an open competition to implement programs that advance U.S. foreign policy priorities by strengthening economic, scientific, educational, cultural, and security ties between the United States and Fiji, Kiribati, Nauru and/or Tuvalu. This Annual Program Statement (APS) invites proposals from eligible organizations or individuals that will deepen…</summary>
-  </entry>
-  <entry>
     <title>Muscat - Annual Program Statement (APS)- PD Small Grants Program</title>
     <link href="https://www.grants.gov/search-results-detail/363078"/>
     <id>urn:funding-finder:grants-gov:363078</id>
@@ -717,5 +706,18 @@
     <category term="Cybersecurity"/>
     <category term="Water"/>
     <summary>Assistance Coordination — Closes 2026-09-30 — The Middle East Regional Cooperation (MERC) Program supports joint scientific research and innovation partnerships between the United States, Israel, and countries across the Middle East and North Africa (MENA). The program funds applied research projects that address shared regional challenges while advancing U.S. economic, technological, and strategic interests. MERC is designed to bring togethe…</summary>
+  </entry>
+  <entry>
+    <title>Tribal Transportation Safety Strategy Pilot Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362956"/>
+    <id>urn:funding-finder:grants-gov:362956</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>69A355 Research and Technology</name></author>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>69A355 Research and Technology — Closes 2026-08-28 — he U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Tribal Transportation Safety Strategy Pilot Program. This three-year cooperative agreement is designed to address the critical public safety crisis in Tribal communities, as American Indian and Alaska Native populations experience…</summary>
   </entry>
 </feed>

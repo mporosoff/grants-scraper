@@ -4,8 +4,96 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/changes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/changes.xml</id>
-  <updated>2026-08-08T10:52:01Z</updated>
+  <updated>2026-08-09T00:41:45Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Closing soon: Rural Housing Preservation Grant</title>
+    <link href="https://www.grants.gov/search-results-detail/363400"/>
+    <id>urn:funding-finder:change:e9d1a7b7ded08f39c5da</id>
+    <updated>2026-08-09T00:40:50.892173Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-08</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Prosperity through Partnership: Catalyzing U.S.-Algerian Collaboration in Innovation, Commerce and English Language</title>
+    <link href="https://www.grants.gov/search-results-detail/362903"/>
+    <id>urn:funding-finder:change:e8dafa1952f32deb4747</id>
+    <updated>2026-08-09T00:40:50.892173Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: U.S. National Science Foundation Research Traineeship (NRT) Program</title>
+    <link href="https://www.grants.gov/search-results-detail/356119"/>
+    <id>urn:funding-finder:change:dba038e92d1aa5601a88</id>
+    <updated>2026-08-09T00:40:50.892173Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-08</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Improved Oil and Gas Recovery and Produced Water Management Technologies</title>
+    <link href="https://www.grants.gov/search-results-detail/363065"/>
+    <id>urn:funding-finder:change:d12485f6885330fdc4b2</id>
+    <updated>2026-08-09T00:40:50.892173Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-08</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: OVW Fiscal Year 2026 Consolidated Grant Program to Assist Children and Youth Affected by and to Engage Men and Youth in Preventing Domestic Violence, Dating Violence, Sexual Assault, and Stalking</title>
+    <link href="https://www.grants.gov/search-results-detail/363199"/>
+    <id>urn:funding-finder:change:72dcac9f9091356bd040</id>
+    <updated>2026-08-09T00:40:50.892173Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-08</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Southwest Border Resource Protection Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362754"/>
+    <id>urn:funding-finder:change:5c112db27abaa90f8db9</id>
+    <updated>2026-08-09T00:40:50.892173Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-08</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: U.S. Embassy Suva Annual Program Statement for Fiji, Kiribati, Nauru, and Tuvalu</title>
+    <link href="https://www.grants.gov/search-results-detail/363104"/>
+    <id>urn:funding-finder:change:5ae0fcadc87a88f3f091</id>
+    <updated>2026-08-09T00:40:50.892173Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: IUSE/Professional Formation of Engineers: Revolutionizing Engineering Departments</title>
+    <link href="https://www.grants.gov/search-results-detail/353413"/>
+    <id>urn:funding-finder:change:4069ef91a84815001f53</id>
+    <updated>2026-08-09T00:40:50.892173Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-08</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: AI Partnership &amp; Exchange for Tech Leaders (APEX)</title>
+    <link href="https://www.grants.gov/search-results-detail/363315"/>
+    <id>urn:funding-finder:change:3daeea263d526ee42f5a</id>
+    <updated>2026-08-09T00:40:50.892173Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-08</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: NIH Brain Development Cohorts (NBDC) and Population Assessment of Tobacco and Health (PATH) Study Biospecimen Access</title>
+    <link href="https://www.grants.gov/search-results-detail/360554"/>
+    <id>urn:funding-finder:change:1f94ce934eb978825f2d</id>
+    <updated>2026-08-09T00:40:50.892173Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-08</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Wetland Mitigation Banking Program Fiscal Year (FY) 2026</title>
+    <link href="https://www.grants.gov/search-results-detail/363288"/>
+    <id>urn:funding-finder:change:01f5a87283b029ba6b5b</id>
+    <updated>2026-08-09T00:40:50.892173Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-08</summary>
+  </entry>
   <entry>
     <title>Closing soon: Alcohol Health Services Research (R01 Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/357440"/>
@@ -1517,93 +1605,5 @@
     <updated>2026-08-05T12:16:48.936874Z</updated>
     <category term="closed_or_removed"/>
     <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Deadline changed: Apprenticeship and Pre-apprenticeship Clean Energy Training</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z000000FOEyAAO"/>
-    <id>urn:funding-finder:change:e475713f744e283aec12</id>
-    <updated>2026-08-05T12:16:48.936874Z</updated>
-    <category term="deadline_changed"/>
-    <summary>2026-08-04 → 2026-10-06</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Small Business Transportation Technical Assistance Center (Region 4)</title>
-    <link href="https://www.grants.gov/search-results-detail/363437"/>
-    <id>urn:funding-finder:change:d7e8343b5eacdba12fbc</id>
-    <updated>2026-08-05T12:16:48.936874Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: National Research Center for Promoting Work and Strong Families</title>
-    <link href="https://www.grants.gov/search-results-detail/362168"/>
-    <id>urn:funding-finder:change:cb2e64a39cfd46558f28</id>
-    <updated>2026-08-05T12:16:48.936874Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Global Coalition Against Transnational Repression</title>
-    <link href="https://www.grants.gov/search-results-detail/363464"/>
-    <id>urn:funding-finder:change:c461f385260072aa7baa</id>
-    <updated>2026-08-05T12:16:48.936874Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Fiscal Year (FY) 2027 Service Area Competition (SAC)</title>
-    <link href="https://www.grants.gov/search-results-detail/363419"/>
-    <id>urn:funding-finder:change:be150c63bce29ee5317b</id>
-    <updated>2026-08-05T12:16:48.936874Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-04</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: DRL FY 2025 China Programs</title>
-    <link href="https://www.grants.gov/search-results-detail/363456"/>
-    <id>urn:funding-finder:change:b77ddb0e857fcbc564d0</id>
-    <updated>2026-08-05T12:16:48.936874Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: FY26 COPS Technology and Equipment Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362643"/>
-    <id>urn:funding-finder:change:b43d0fa6866555ecc718</id>
-    <updated>2026-08-05T12:16:48.936874Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-08-13</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Global Coalition Against Transnational Repression</title>
-    <link href="https://www.grants.gov/search-results-detail/363213"/>
-    <id>urn:funding-finder:change:b17c4696d1e893c2c143</id>
-    <updated>2026-08-05T12:16:48.936874Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Cooperative Agreement for Affiliated Partner with the Great Lakes – Northern Forest Cooperative Ecosystem Studies Unit (CESU)</title>
-    <link href="https://www.grants.gov/search-results-detail/363457"/>
-    <id>urn:funding-finder:change:a65aae4b84898b6bd793</id>
-    <updated>2026-08-05T12:16:48.936874Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-04</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Strengthening Bosnia and Herzegovina’s Organized Crime Specialized Departments for Organized Crime Through Expert Advisory Support</title>
-    <link href="https://www.grants.gov/search-results-detail/363390"/>
-    <id>urn:funding-finder:change:a471c5546e0c72fe4b82</id>
-    <updated>2026-08-05T12:16:48.936874Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Deadline changed: National Research Center for Promoting Work and Strong Families</title>
-    <link href="https://www.grants.gov/search-results-detail/362168"/>
-    <id>urn:funding-finder:change:a40b279e49881f5d7283</id>
-    <updated>2026-08-05T12:16:48.936874Z</updated>
-    <category term="deadline_changed"/>
-    <summary>2026-08-18 → 2026-08-31</summary>
   </entry>
 </feed>

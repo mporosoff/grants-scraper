@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-08-08T10:52:00Z",
+  "generated_at": "2026-08-09T00:41:44Z",
   "excluded_noncurrent": 0,
   "feeds": [
     {
       "title": "All new opportunities",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/all.xml",
-      "count": 1482
+      "count": 1480
     },
     {
       "title": "Funding Finder — Federal",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml",
-      "count": 1445
+      "count": 1443
     },
     {
       "title": "Funding Finder — State",
@@ -25,12 +25,12 @@
     {
       "title": "Funding Finder — Artificial intelligence and machine learning",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml",
-      "count": 263
+      "count": 262
     },
     {
       "title": "Funding Finder — Arts and culture",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml",
-      "count": 224
+      "count": 222
     },
     {
       "title": "Funding Finder — Biology and biotechnology",
@@ -75,7 +75,7 @@
     {
       "title": "Funding Finder — Education and workforce",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml",
-      "count": 582
+      "count": 580
     },
     {
       "title": "Funding Finder — Energy",
@@ -85,7 +85,7 @@
     {
       "title": "Funding Finder — Environmental science",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml",
-      "count": 295
+      "count": 294
     },
     {
       "title": "Funding Finder — Health equity",
@@ -130,7 +130,7 @@
     {
       "title": "Funding Finder — Social and behavioral sciences",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml",
-      "count": 138
+      "count": 137
     },
     {
       "title": "Funding Finder — Space and aeronautics",
@@ -140,7 +140,7 @@
     {
       "title": "Funding Finder — Technology development",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml",
-      "count": 198
+      "count": 196
     },
     {
       "title": "Funding Finder — Transportation",
