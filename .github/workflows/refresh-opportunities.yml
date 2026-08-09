@@ -66,6 +66,7 @@ jobs:
           --max-updates 250
           --request-delay 0.25
       - name: Extract citation-backed facts from official notices
+        continue-on-error: true
         run: >-
           python -m scripts.extract_document_evidence
           --catalog data/opportunities.js
