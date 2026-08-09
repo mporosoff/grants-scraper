@@ -1,8 +1,424 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-09T01:10:20Z",
+  "generated_at": "2026-08-09T10:53:22Z",
   "retention_days": 90,
   "events": [
+    {
+      "id": "e9d1a7b7ded08f39c5da",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-09T10:52:23.700254Z",
+      "opportunity_id": "363400",
+      "detail": "Deadline 2026-09-08",
+      "record": {
+        "opportunity_id": "363400",
+        "opportunity_number": "USDA-RD-HCFP-HPG-2026",
+        "title": "Rural Housing Preservation Grant",
+        "agency": "Rural Housing Service",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-06",
+        "close_date": "2026-09-08",
+        "last_updated": "2026-08-05",
+        "version": "Synopsis 4",
+        "topic_areas": [
+          "Community development"
+        ],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Federally recognized Native American tribal governments",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/363400",
+        "funding_opportunity_url": "https://www.rd.usda.gov/programs-services/single-family-housing-programs/housing-preservation-grants#overview",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-08"
+    },
+    {
+      "id": "dba038e92d1aa5601a88",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-09T10:52:23.700254Z",
+      "opportunity_id": "356119",
+      "detail": "Deadline 2026-09-08",
+      "record": {
+        "opportunity_id": "356119",
+        "opportunity_number": "24-597",
+        "title": "U.S. National Science Foundation Research Traineeship (NRT) Program",
+        "agency": "U.S. National Science Foundation",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2024-08-17",
+        "close_date": "2026-09-08",
+        "last_updated": "2025-09-16",
+        "version": "Synopsis 4",
+        "topic_areas": [
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 2000000,
+        "award_ceiling": 3000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/356119",
+        "funding_opportunity_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf24597",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-08"
+    },
+    {
+      "id": "d12485f6885330fdc4b2",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-09T10:52:23.700254Z",
+      "opportunity_id": "363065",
+      "detail": "Deadline 2026-09-08",
+      "record": {
+        "opportunity_id": "363065",
+        "opportunity_number": "DE-FOA-0003627",
+        "title": "Improved Oil and Gas Recovery and Produced Water Management Technologies",
+        "agency": "National Energy Technology Laboratory",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-06",
+        "close_date": "2026-09-08",
+        "last_updated": "2026-07-24",
+        "version": "Synopsis 4",
+        "topic_areas": [
+          "Energy",
+          "Environmental science",
+          "Water",
+          "Artificial intelligence and machine learning",
+          "Data science",
+          "Materials science",
+          "Manufacturing",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences",
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 1,
+        "award_ceiling": 150000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363065",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354135"
+      },
+      "deadline": "2026-09-08"
+    },
+    {
+      "id": "72dcac9f9091356bd040",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-09T10:52:23.700254Z",
+      "opportunity_id": "363199",
+      "detail": "Deadline 2026-09-08",
+      "record": {
+        "opportunity_id": "363199",
+        "opportunity_number": "O-OVW-2026-172652",
+        "title": "OVW Fiscal Year 2026 Consolidated Grant Program to Assist Children and Youth Affected by and to Engage Men and Youth in Preventing Domestic Violence, Dating Violence, Sexual Assault, and Stalking",
+        "agency": "Office on Violence Against Women",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-15",
+        "close_date": "2026-09-08",
+        "last_updated": "2026-07-15",
+        "version": "Synopsis 1",
+        "topic_areas": [],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "County governments",
+          "City or township governments",
+          "Independent school districts",
+          "Federally recognized Native American tribal governments",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 350000,
+        "award_ceiling": 500000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363199",
+        "funding_opportunity_url": "https://www.justice.gov/ovw/media/1452571/dl?inline",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-08"
+    },
+    {
+      "id": "5c112db27abaa90f8db9",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-09T10:52:23.700254Z",
+      "opportunity_id": "362754",
+      "detail": "Deadline 2026-09-08",
+      "record": {
+        "opportunity_id": "362754",
+        "opportunity_number": "P26AS00060",
+        "title": "Southwest Border Resource Protection Program",
+        "agency": "National Park Service",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-06-10",
+        "close_date": "2026-09-08",
+        "last_updated": "2026-06-16",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Arts and culture",
+          "Climate change",
+          "Education and workforce",
+          "Environmental science"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Private institutions of higher education"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 15000,
+        "award_ceiling": 50000,
+        "detail_page": "https://www.grants.gov/search-results-detail/362754",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-08"
+    },
+    {
+      "id": "4069ef91a84815001f53",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-09T10:52:23.700254Z",
+      "opportunity_id": "353413",
+      "detail": "Deadline 2026-09-08",
+      "record": {
+        "opportunity_id": "353413",
+        "opportunity_number": "24-564",
+        "title": "IUSE/Professional Formation of Engineers: Revolutionizing Engineering Departments",
+        "agency": "U.S. National Science Foundation",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2024-04-05",
+        "close_date": "2026-09-08",
+        "last_updated": "2026-07-20",
+        "version": "Synopsis 8",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Arts and culture",
+          "Biology and biotechnology",
+          "Education and workforce",
+          "Manufacturing",
+          "Quantum science",
+          "Technology development"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 50000,
+        "award_ceiling": 2000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/353413",
+        "funding_opportunity_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf24564",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-08"
+    },
+    {
+      "id": "3daeea263d526ee42f5a",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-09T10:52:23.700254Z",
+      "opportunity_id": "363315",
+      "detail": "Deadline 2026-09-08",
+      "record": {
+        "opportunity_id": "363315",
+        "opportunity_number": "DOS-SAU-2602",
+        "title": "AI Partnership & Exchange for Tech Leaders (APEX)",
+        "agency": "U.S. Mission to Saudi Arabia",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-26",
+        "close_date": "2026-09-08",
+        "last_updated": "2026-07-28",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Arts and culture",
+          "Data science",
+          "Education and workforce"
+        ],
+        "disciplines": [],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 150000,
+        "award_ceiling": 250000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363315",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354160"
+      },
+      "deadline": "2026-09-08"
+    },
+    {
+      "id": "1f94ce934eb978825f2d",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-09T10:52:23.700254Z",
+      "opportunity_id": "360554",
+      "detail": "Deadline 2026-09-08",
+      "record": {
+        "opportunity_id": "360554",
+        "opportunity_number": "PAR-26-051",
+        "title": "NIH Brain Development Cohorts (NBDC) and Population Assessment of Tobacco and Health (PATH) Study Biospecimen Access",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-05-01",
+        "close_date": "2026-09-08",
+        "last_updated": "2025-09-10",
+        "version": "Forecast 1",
+        "topic_areas": [
+          "Environmental science",
+          "Neuroscience",
+          "Public health"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/360554",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-08"
+    },
+    {
+      "id": "01f5a87283b029ba6b5b",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-09T10:52:23.700254Z",
+      "opportunity_id": "363288",
+      "detail": "Deadline 2026-09-08",
+      "record": {
+        "opportunity_id": "363288",
+        "opportunity_number": "USDA-NRCS-NHQ-WMBP-NOFO0001458",
+        "title": "Wetland Mitigation Banking Program Fiscal Year (FY) 2026",
+        "agency": "Natural Resources Conservation Service",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-23",
+        "close_date": "2026-09-08",
+        "last_updated": "2026-07-24",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Agriculture and food",
+          "Environmental science"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 100000,
+        "award_ceiling": 1000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363288",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354092"
+      },
+      "deadline": "2026-09-08"
+    },
     {
       "id": "ffb060aa5a5f2271902e",
       "type": "new",
@@ -130,52 +546,6 @@
       }
     },
     {
-      "id": "e9d1a7b7ded08f39c5da",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "opportunity_id": "363400",
-      "detail": "Deadline 2026-09-08",
-      "record": {
-        "opportunity_id": "363400",
-        "opportunity_number": "USDA-RD-HCFP-HPG-2026",
-        "title": "Rural Housing Preservation Grant",
-        "agency": "Rural Housing Service",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-08-06",
-        "close_date": "2026-09-08",
-        "last_updated": "2026-08-05",
-        "version": "Synopsis 4",
-        "topic_areas": [
-          "Community development"
-        ],
-        "disciplines": [
-          "Community and Social Sciences"
-        ],
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Federally recognized Native American tribal governments",
-          "Other Native American tribal organizations",
-          "Nonprofits with 501(c)(3) status",
-          "Nonprofits without 501(c)(3) status",
-          "Other"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": null,
-        "award_ceiling": null,
-        "detail_page": "https://www.grants.gov/search-results-detail/363400",
-        "funding_opportunity_url": "https://www.rd.usda.gov/programs-services/single-family-housing-programs/housing-preservation-grants#overview",
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-08"
-    },
-    {
       "id": "e599192a36b2c665b6ee",
       "type": "new",
       "label": "New opportunity",
@@ -204,45 +574,6 @@
         "funding_opportunity_url": "https://www.acs.org/funding/grants/petroleum-research-fund/programs.html",
         "primary_document_url": null
       }
-    },
-    {
-      "id": "dba038e92d1aa5601a88",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "opportunity_id": "356119",
-      "detail": "Deadline 2026-09-08",
-      "record": {
-        "opportunity_id": "356119",
-        "opportunity_number": "24-597",
-        "title": "U.S. National Science Foundation Research Traineeship (NRT) Program",
-        "agency": "U.S. National Science Foundation",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2024-08-17",
-        "close_date": "2026-09-08",
-        "last_updated": "2025-09-16",
-        "version": "Synopsis 4",
-        "topic_areas": [
-          "Education and workforce"
-        ],
-        "disciplines": [
-          "Engineering and Physical Sciences"
-        ],
-        "applicant_types": [
-          "Other"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": 2000000,
-        "award_ceiling": 3000000,
-        "detail_page": "https://www.grants.gov/search-results-detail/356119",
-        "funding_opportunity_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf24597",
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-08"
     },
     {
       "id": "db258cd0128e17c852c1",
@@ -307,53 +638,6 @@
         "funding_opportunity_url": "http://rochester.infoready4.com/CompetitionSpace/",
         "primary_document_url": null
       }
-    },
-    {
-      "id": "d12485f6885330fdc4b2",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "opportunity_id": "363065",
-      "detail": "Deadline 2026-09-08",
-      "record": {
-        "opportunity_id": "363065",
-        "opportunity_number": "DE-FOA-0003627",
-        "title": "Improved Oil and Gas Recovery and Produced Water Management Technologies",
-        "agency": "National Energy Technology Laboratory",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-07-06",
-        "close_date": "2026-09-08",
-        "last_updated": "2026-07-24",
-        "version": "Synopsis 4",
-        "topic_areas": [
-          "Energy",
-          "Environmental science",
-          "Water",
-          "Artificial intelligence and machine learning",
-          "Data science",
-          "Materials science",
-          "Manufacturing",
-          "Cybersecurity"
-        ],
-        "disciplines": [
-          "Engineering and Physical Sciences",
-          "Environmental and Life Sciences"
-        ],
-        "applicant_types": [
-          "Unrestricted"
-        ],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "award_floor": 1,
-        "award_ceiling": 150000000,
-        "detail_page": "https://www.grants.gov/search-results-detail/363065",
-        "funding_opportunity_url": null,
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354135"
-      },
-      "deadline": "2026-09-08"
     },
     {
       "id": "b6ea34591ab22152856f",
@@ -543,146 +827,6 @@
       "deadline": "2026-09-01"
     },
     {
-      "id": "72dcac9f9091356bd040",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "opportunity_id": "363199",
-      "detail": "Deadline 2026-09-08",
-      "record": {
-        "opportunity_id": "363199",
-        "opportunity_number": "O-OVW-2026-172652",
-        "title": "OVW Fiscal Year 2026 Consolidated Grant Program to Assist Children and Youth Affected by and to Engage Men and Youth in Preventing Domestic Violence, Dating Violence, Sexual Assault, and Stalking",
-        "agency": "Office on Violence Against Women",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-07-15",
-        "close_date": "2026-09-08",
-        "last_updated": "2026-07-15",
-        "version": "Synopsis 1",
-        "topic_areas": [],
-        "disciplines": [
-          "Community and Social Sciences"
-        ],
-        "applicant_types": [
-          "County governments",
-          "City or township governments",
-          "Independent school districts",
-          "Federally recognized Native American tribal governments",
-          "Other Native American tribal organizations",
-          "Nonprofits with 501(c)(3) status",
-          "Nonprofits without 501(c)(3) status",
-          "Other"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": 350000,
-        "award_ceiling": 500000,
-        "detail_page": "https://www.grants.gov/search-results-detail/363199",
-        "funding_opportunity_url": "https://www.justice.gov/ovw/media/1452571/dl?inline",
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-08"
-    },
-    {
-      "id": "5c112db27abaa90f8db9",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "opportunity_id": "362754",
-      "detail": "Deadline 2026-09-08",
-      "record": {
-        "opportunity_id": "362754",
-        "opportunity_number": "P26AS00060",
-        "title": "Southwest Border Resource Protection Program",
-        "agency": "National Park Service",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-06-10",
-        "close_date": "2026-09-08",
-        "last_updated": "2026-06-16",
-        "version": "Synopsis 1",
-        "topic_areas": [
-          "Arts and culture",
-          "Climate change",
-          "Education and workforce",
-          "Environmental science"
-        ],
-        "disciplines": [
-          "Environmental and Life Sciences"
-        ],
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Special district governments",
-          "Independent school districts",
-          "Public and state institutions of higher education",
-          "Federally recognized Native American tribal governments",
-          "Other Native American tribal organizations",
-          "Nonprofits with 501(c)(3) status",
-          "Private institutions of higher education"
-        ],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "award_floor": 15000,
-        "award_ceiling": 50000,
-        "detail_page": "https://www.grants.gov/search-results-detail/362754",
-        "funding_opportunity_url": null,
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-08"
-    },
-    {
-      "id": "4069ef91a84815001f53",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "opportunity_id": "353413",
-      "detail": "Deadline 2026-09-08",
-      "record": {
-        "opportunity_id": "353413",
-        "opportunity_number": "24-564",
-        "title": "IUSE/Professional Formation of Engineers: Revolutionizing Engineering Departments",
-        "agency": "U.S. National Science Foundation",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2024-04-05",
-        "close_date": "2026-09-08",
-        "last_updated": "2026-07-20",
-        "version": "Synopsis 8",
-        "topic_areas": [
-          "Artificial intelligence and machine learning",
-          "Arts and culture",
-          "Biology and biotechnology",
-          "Education and workforce",
-          "Manufacturing",
-          "Quantum science",
-          "Technology development"
-        ],
-        "disciplines": [
-          "Engineering and Physical Sciences"
-        ],
-        "applicant_types": [
-          "Other"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": 50000,
-        "award_ceiling": 2000000,
-        "detail_page": "https://www.grants.gov/search-results-detail/353413",
-        "funding_opportunity_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf24564",
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-08"
-    },
-    {
       "id": "3f0fe2b734ecfe77e1df",
       "type": "new",
       "label": "New opportunity",
@@ -713,46 +857,6 @@
       }
     },
     {
-      "id": "3daeea263d526ee42f5a",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "opportunity_id": "363315",
-      "detail": "Deadline 2026-09-08",
-      "record": {
-        "opportunity_id": "363315",
-        "opportunity_number": "DOS-SAU-2602",
-        "title": "AI Partnership & Exchange for Tech Leaders (APEX)",
-        "agency": "U.S. Mission to Saudi Arabia",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-07-26",
-        "close_date": "2026-09-08",
-        "last_updated": "2026-07-28",
-        "version": "Synopsis 1",
-        "topic_areas": [
-          "Artificial intelligence and machine learning",
-          "Arts and culture",
-          "Data science",
-          "Education and workforce"
-        ],
-        "disciplines": [],
-        "applicant_types": [
-          "Other"
-        ],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "award_floor": 150000,
-        "award_ceiling": 250000,
-        "detail_page": "https://www.grants.gov/search-results-detail/363315",
-        "funding_opportunity_url": null,
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354160"
-      },
-      "deadline": "2026-09-08"
-    },
-    {
       "id": "3d542af12bd408db0e41",
       "type": "new",
       "label": "New opportunity",
@@ -781,59 +885,6 @@
         "funding_opportunity_url": "https://airtable.com/appDCapaPF9M0iLQO/pagRxgvY9pCkOeaxx/form",
         "primary_document_url": null
       }
-    },
-    {
-      "id": "1f94ce934eb978825f2d",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "opportunity_id": "360554",
-      "detail": "Deadline 2026-09-08",
-      "record": {
-        "opportunity_id": "360554",
-        "opportunity_number": "PAR-26-051",
-        "title": "NIH Brain Development Cohorts (NBDC) and Population Assessment of Tobacco and Health (PATH) Study Biospecimen Access",
-        "agency": "National Institutes of Health",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "forecasted",
-        "posted_date": "2026-05-01",
-        "close_date": "2026-09-08",
-        "last_updated": "2025-09-10",
-        "version": "Forecast 1",
-        "topic_areas": [
-          "Environmental science",
-          "Neuroscience",
-          "Public health"
-        ],
-        "disciplines": [
-          "Medical and Health"
-        ],
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Special district governments",
-          "Independent school districts",
-          "Public and state institutions of higher education",
-          "Federally recognized Native American tribal governments",
-          "Public and Indian housing authorities",
-          "Other Native American tribal organizations",
-          "Nonprofits with 501(c)(3) status",
-          "Nonprofits without 501(c)(3) status",
-          "Private institutions of higher education",
-          "Other"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": null,
-        "award_ceiling": null,
-        "detail_page": "https://www.grants.gov/search-results-detail/360554",
-        "funding_opportunity_url": null,
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-08"
     },
     {
       "id": "1598e0506d5672c5db1d",
@@ -928,57 +979,6 @@
         "funding_opportunity_url": "http://www.sloan.org/sloan-research-fellowships/",
         "primary_document_url": null
       }
-    },
-    {
-      "id": "01f5a87283b029ba6b5b",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "opportunity_id": "363288",
-      "detail": "Deadline 2026-09-08",
-      "record": {
-        "opportunity_id": "363288",
-        "opportunity_number": "USDA-NRCS-NHQ-WMBP-NOFO0001458",
-        "title": "Wetland Mitigation Banking Program Fiscal Year (FY) 2026",
-        "agency": "Natural Resources Conservation Service",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-07-23",
-        "close_date": "2026-09-08",
-        "last_updated": "2026-07-24",
-        "version": "Synopsis 2",
-        "topic_areas": [
-          "Agriculture and food",
-          "Environmental science"
-        ],
-        "disciplines": [
-          "Environmental and Life Sciences"
-        ],
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Special district governments",
-          "Public and state institutions of higher education",
-          "Federally recognized Native American tribal governments",
-          "Other Native American tribal organizations",
-          "Nonprofits with 501(c)(3) status",
-          "Nonprofits without 501(c)(3) status",
-          "Private institutions of higher education",
-          "For-profit organizations other than small businesses",
-          "Small businesses"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": 100000,
-        "award_ceiling": 1000000,
-        "detail_page": "https://www.grants.gov/search-results-detail/363288",
-        "funding_opportunity_url": null,
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354092"
-      },
-      "deadline": "2026-09-08"
     },
     {
       "id": "e8dafa1952f32deb4747",
