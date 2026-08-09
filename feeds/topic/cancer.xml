@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml</id>
-  <updated>2026-08-09T00:48:21Z</updated>
+  <updated>2026-08-09T01:10:19Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -184,6 +184,18 @@
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health — Closes 2027-01-25 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to continue to support the Radiation Oncology-Biology Integration Network (ROBIN) with applications from both new and renewing investigators. This network model will sustain an agile and effective national radiation oncology infrastructure that collectively addresses critical hypothesis-based translation…</summary>
+  </entry>
+  <entry>
+    <title>Damon Runyon Cancer Research Foundation Clinical Investigator Award 2027</title>
+    <link href="http://rochester.infoready4.com/CompetitionSpace/"/>
+    <id>urn:funding-finder:ur-vpr-funding-digest-limited-submissions-foundations:vpr-email%3Ainfoready-2024058</id>
+    <updated>2026-08-09T00:00:00Z</updated>
+    <author><name>UR VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Cancer"/>
+    <category term="Public health"/>
+    <category term="Technology development"/>
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Closes 2027-01-19 — The Damon Runyon Clinical Investigator Award supports independent young physician-scientists conducting disease-oriented research that demonstrates
+a high level of innovation and creativity. The goal is to support the best young physician-scientists doing work aimed at improving the practice of cancer medicine. The Clinical Investigator Award program is specifically intended to provide outstanding…</summary>
   </entry>
   <entry>
     <title>Clinical Research Network on Antimicrobial Resistance</title>
@@ -608,14 +620,5 @@
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
     <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-07 — Summary: The fiscal year 2026 (FY26) Pancreatic Cancer Research Program (PCARP) Idea Development Award supports the development of innovative, high-risk/high-reward research that could lead to critical discoveries or major advancements that will accelerate progress in improving outcomes for individuals with pancreatic cancer. This award mechanism supports innovative ideas with the potential to yie…</summary>
-  </entry>
-  <entry>
-    <title>DoW Pancreatic Cancer Research Program, Translational Research Partnership Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362191"/>
-    <id>urn:funding-finder:grants-gov:362191</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-07 — Summary: The fiscal year 2026 (FY26) Pancreatic Cancer Research Program (PCARP) Translational Research Partnership Award supports partnerships between clinicians, population scientists, applied scientists and/or basic scientists that will accelerate the movement of promising ideas in pancreatic cancer toward clinical applications. The partnership must include at least one member with expertise in …</summary>
   </entry>
 </feed>

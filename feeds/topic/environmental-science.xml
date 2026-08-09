@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml</id>
-  <updated>2026-08-09T00:48:21Z</updated>
+  <updated>2026-08-09T01:10:19Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
@@ -296,6 +296,17 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Environmental science"/>
     <summary>National Institutes of Health — Closes 2026-09-25 — The National Institute on Drug Abuse (NIDA) seeks to advance its mission by supporting Core Center of Transformative Science Grants. These Centers will bring together investigators currently funded by NIH or other Federal or non-Federal sources to enhance and extend existing research relevant to substance use, addiction, and HIV. Centers are expected to transform the scientific field of study by f…</summary>
+  </entry>
+  <entry>
+    <title>NSF DCL Advancing Artificial Intelligence (AI) Agent Ecosystems through the National Science Foundation Pathways to Enable Secure Open-Source Ecosystems (NSF PESOSE) Program | NSF 26-015</title>
+    <link href="https://www.nsf.gov/funding/opportunities/dcl-advancing-artificial-intelligence-ai-agent-ecosystems"/>
+    <id>urn:funding-finder:ur-vpr-funding-digest-limited-submissions-foundations:vpr-email%3ANSF26-015</id>
+    <updated>2026-08-09T00:00:00Z</updated>
+    <author><name>UR VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Environmental science"/>
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Closes 2026-09-01</summary>
   </entry>
   <entry>
     <title>Seabed Mapping, Exploration, and Characterization in the Pacific</title>
@@ -676,20 +687,5 @@
     <category term="Public health"/>
     <category term="Cybersecurity"/>
     <summary>Food and Drug Administration — Closes 2026-08-21 — FDA is announcing the availability of funds for the support of a cooperative agreement between the Human Food Program/ Office of Laboratory Operations and Applied Science (OLOAS)/ Office of Applied Microbiolgy and Technology (OAMT) and the Marine Environmental Sciences Consortium/Dauphin Island Sea Lab (DISL). The scientific, public health, and policy expertise within the Food and Drug Administrat…</summary>
-  </entry>
-  <entry>
-    <title>American Innovation Hub: AI &amp; Digital Skills for the Creative &amp; Tech Economy</title>
-    <link href="https://www.grants.gov/search-results-detail/363293"/>
-    <id>urn:funding-finder:grants-gov:363293</id>
-    <updated>2026-07-23T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Indonesia — Closes 2026-08-30 — Indonesia is ASEAN’s largest economy and most populous nation, with a young, fast-growing digital population that is rapidly adopting artificial intelligence and creative-technology tools. The choices this generation makes about which technologies, standards, and platforms to build on will shape Indonesia’s digital economy for decades. Demand for trusted, high-quality AI tools is outpacing access …</summary>
   </entry>
 </feed>

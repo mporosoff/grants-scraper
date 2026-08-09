@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml</id>
-  <updated>2026-08-09T00:48:21Z</updated>
+  <updated>2026-08-09T01:10:19Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -617,6 +617,18 @@
     <summary>National Institutes of Health — Closes 2026-10-17 — The purpose of this NOFO is to enhance the capability of NCATS CTSA Program KL2 scholars supported by the CTSA Program to conduct research as they complete the transition to fully independent academic translational scientists. These small research grants will support different clinical and translational science research projects, including pilot and feasibility studies; secondary data analysis of …</summary>
   </entry>
   <entry>
+    <title>Damon Runyon Cancer Research Foundation Clinical Investigator Award 2027</title>
+    <link href="http://rochester.infoready4.com/CompetitionSpace/"/>
+    <id>urn:funding-finder:ur-vpr-funding-digest-limited-submissions-foundations:vpr-email%3Ainfoready-2024058</id>
+    <updated>2026-08-09T00:00:00Z</updated>
+    <author><name>UR VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Cancer"/>
+    <category term="Public health"/>
+    <category term="Technology development"/>
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Closes 2027-01-19 — The Damon Runyon Clinical Investigator Award supports independent young physician-scientists conducting disease-oriented research that demonstrates
+a high level of innovation and creativity. The goal is to support the best young physician-scientists doing work aimed at improving the practice of cancer medicine. The Clinical Investigator Award program is specifically intended to provide outstanding…</summary>
+  </entry>
+  <entry>
     <title>Applied Drug Policy Research Experiences</title>
     <link href="https://www.grants.gov/search-results-detail/363487"/>
     <id>urn:funding-finder:grants-gov:363487</id>
@@ -636,16 +648,5 @@
     <category term="Public health"/>
     <category term="Cybersecurity"/>
     <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — The CDC office in Ethiopia was established in 2001 and works closely with the Ministry of Health (MOH), the Ethiopian Public Health Institute (EPHI), and other Government of Ethiopia (GOE) agencies to develop the capacity to prevent, detect, and respond to priority diseases. In 2014, CDC began coordination with the GOE to build Ethiopia's capacity to achieve the International Health Regulation (IH…</summary>
-  </entry>
-  <entry>
-    <title>Expanding global health security through local partnerships in Indonesia</title>
-    <link href="https://www.grants.gov/search-results-detail/360338"/>
-    <id>urn:funding-finder:grants-gov:360338</id>
-    <updated>2026-08-03T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <category term="Cybersecurity"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — This NOFO aims to foster partnerships that support collaboration between CDC and the Indonesian Ministry of Health (MOH) in achieving global health security goals, implementing International Health Regulations core principles, and effectively preventing, detecting, and responding to public health threats. Projects considered for this opportunity should focus on strengthening capacity in five key p…</summary>
   </entry>
 </feed>

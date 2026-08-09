@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-08-09T00:48:21Z</updated>
+  <updated>2026-08-09T01:10:19Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
@@ -68,6 +68,17 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health — Closes 2026-11-01 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop, operate, and sustain a cloud-based data storage and computing platform that democratizes access to large-scale Alzheimer’s disease (AD) and AD-related dementias (ADRD) genetic and genomic data. The platform must be secure, scalable, and interoperable. The platform wil…</summary>
+  </entry>
+  <entry>
+    <title>NSF DCL Advancing Artificial Intelligence (AI) Agent Ecosystems through the National Science Foundation Pathways to Enable Secure Open-Source Ecosystems (NSF PESOSE) Program | NSF 26-015</title>
+    <link href="https://www.nsf.gov/funding/opportunities/dcl-advancing-artificial-intelligence-ai-agent-ecosystems"/>
+    <id>urn:funding-finder:ur-vpr-funding-digest-limited-submissions-foundations:vpr-email%3ANSF26-015</id>
+    <updated>2026-08-09T00:00:00Z</updated>
+    <author><name>UR VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Environmental science"/>
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Closes 2026-09-01</summary>
   </entry>
   <entry>
     <title>Pax Silica Artificial Intelligence Assistance Project</title>
@@ -759,18 +770,5 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>National Institute of Food and Agriculture — Closes 2026-08-14 — The TCEP-CA under assistance listing 10.517, supports informal, community-based extension projects that address agriculture, youths, economic development, healthy lifestyles, natural resources, or other topics important to Tribal communities. This NOFO will begin a new 4-year continuation funding cycle.</summary>
-  </entry>
-  <entry>
-    <title>HEAL Initiative: Optimization of Therapeutic Medical Devices through Team Science Mechanistic Research (RM1)</title>
-    <link href="https://www.grants.gov/search-results-detail/361520"/>
-    <id>urn:funding-finder:grants-gov:361520</id>
-    <updated>2026-06-11T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health — Closes 2026-10-30 — The National Institute of Neurological Disorders and Stroke (NINDS), with other NIH Institutes and Centers (ICs), intends to publish a Notice of Funding Opportunity (NOFO) to investigate the mechanisms of action of therapeutic medical devices with the overall goal of improving clinical outcomes with device-based approaches. Medical devices are essential in managing health conditions, complementing…</summary>
   </entry>
 </feed>
