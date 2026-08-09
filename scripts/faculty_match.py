@@ -245,11 +245,25 @@ def match_to_catalog(profiles: list[dict], catalog_path: str, out_path: str,
                for (s, oid, t, m) in sorted(items, key=_rank)[:top_n]]
         for name, items in per_faculty.items()
     }
+    # Select groups so every PI is represented -- a niche PI (e.g. Shestopalov)
+    # must not be starved by a global top-N cut -- then rank by total score.
+    ranked = sorted(per_opp_scores, key=lambda x: -x[0])
+    chosen: dict = {}
+    seen_per_pi: dict = {}
+    for entry in ranked:                       # each PI's strongest ~12 groups
+        for (n, _s, _m) in entry[3]:
+            if seen_per_pi.get(n, 0) < 12:
+                seen_per_pi[n] = seen_per_pi.get(n, 0) + 1
+                chosen[entry[1]] = entry
+    for entry in ranked[:120]:                 # plus the strongest groups overall
+        chosen[entry[1]] = entry
     multi_pi = [{
         "opportunity_id": oid, "title": t, "total_score": tot,
+        # Include *every* contributing PI (capped generously) so a low-scoring
+        # member is never silently dropped from a team they belong to.
         "suggested_team": [{"name": n, "score": s, "matched_terms": m}
-                           for (n, s, m) in sorted(contribs, key=lambda c: -c[1])[:5]],
-    } for (tot, oid, t, contribs) in sorted(per_opp_scores, key=lambda x: -x[0])[:150]]
+                           for (n, s, m) in sorted(contribs, key=lambda c: -c[1])[:12]],
+    } for (tot, oid, t, contribs) in sorted(chosen.values(), key=lambda x: -x[0])]
 
     out = {"faculty": faculty_meta,
            "faculty_top_matches": faculty_top,

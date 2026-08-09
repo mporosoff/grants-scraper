@@ -178,31 +178,21 @@
       (meta.key_terms || []).map(function (t) { return '<span class="chip">' + esc(t) + "</span>"; }).join("") +
       "</div>";
 
-    var mine = (facultyTop[name] || []).filter(function (it) { return !q || oppText(it).indexOf(q) !== -1; });
     var withMe = groups.filter(function (g) {
       return (g.suggested_team || []).some(function (m) { return m.name === name; }) &&
         (!q || groupText(g).indexOf(q) !== -1);
     });
-    $("count").textContent = mine.length + " opportunit" + (mine.length === 1 ? "y" : "ies") +
-      " for " + last(name) + " · " + withMe.length + " collaboration group" + (withMe.length === 1 ? "" : "s") +
-      (q ? " (filtered)" : "");
+    $("count").textContent = withMe.length + " collaboration group" + (withMe.length === 1 ? "" : "s") +
+      " including " + last(name) + (q ? " (filtered)" : "");
 
-    var html = "";
-    html += '<div class="section-label">Opportunities matched to ' + esc(last(name)) + "</div>";
-    html += mine.length
-      ? mine.map(function (it) {
-          return '<div class="card">' + oppHead(it.opportunity_id, it.title, it.score) +
-            '<div class="why">why: ' + terms(it.matched_terms) + "</div></div>";
-        }).join("")
-      : '<div class="empty">No opportunities matched' + (q ? " that filter." : ".") + "</div>";
-
-    html += '<div class="section-label">Collaboration groups including ' + esc(last(name)) + "</div>";
+    var html = '<div class="section-label">Collaboration groups including ' + esc(last(name)) + "</div>";
     html += withMe.length
       ? withMe.map(function (g) {
           return '<div class="card">' + oppHead(g.opportunity_id, g.title, g.total_score) +
             teamChips(g.suggested_team, name) + "</div>";
         }).join("")
-      : '<div class="empty">No 2+ faculty collaboration groups' + (q ? " match that filter." : " for this PI.") + "</div>";
+      : '<div class="empty">No collaboration opportunities (2+ faculty)' +
+        (q ? " match that filter." : " matched this PI in the current catalog.") + "</div>";
     $("view").innerHTML = html;
   }
 
