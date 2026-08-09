@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-09T00:41:45Z",
+  "generated_at": "2026-08-09T00:48:22Z",
   "retention_days": 90,
   "events": [
     {
       "id": "e9d1a7b7ded08f39c5da",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-09T00:40:50.892173Z",
+      "changed_at": "2026-08-09T00:47:15.779603Z",
       "opportunity_id": "363400",
       "detail": "Deadline 2026-09-08",
       "record": {
@@ -50,53 +50,10 @@
       "deadline": "2026-09-08"
     },
     {
-      "id": "e8dafa1952f32deb4747",
-      "type": "closed_or_removed",
-      "label": "Closed or removed",
-      "changed_at": "2026-08-09T00:40:50.892173Z",
-      "opportunity_id": "362903",
-      "detail": "No longer in the current catalog",
-      "record": {
-        "opportunity_id": "362903",
-        "opportunity_number": "OFOP0002813",
-        "title": "Prosperity through Partnership: Catalyzing U.S.-Algerian Collaboration in Innovation, Commerce and English Language",
-        "agency": "U.S. Mission to Algeria",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-06-22",
-        "close_date": "2026-08-08",
-        "last_updated": "2026-06-22",
-        "version": "Synopsis 2",
-        "topic_areas": [
-          "Artificial intelligence and machine learning",
-          "Arts and culture",
-          "Education and workforce",
-          "Environmental science",
-          "Social and behavioral sciences",
-          "Technology development"
-        ],
-        "disciplines": [
-          "Engineering and Physical Sciences"
-        ],
-        "applicant_types": [
-          "Nonprofits with 501(c)(3) status"
-        ],
-        "funding_instruments": [
-          "Other"
-        ],
-        "award_floor": 5000,
-        "award_ceiling": 100000,
-        "detail_page": "https://www.grants.gov/search-results-detail/362903",
-        "funding_opportunity_url": "https://mygrants.servicenowservices.com/mygrants?id=mygrants_form&table=x_g_usd4_o_grant_funding_opportunity&sys_id=465d1dd447cd075067358810326d4326&view=Default",
-        "primary_document_url": null
-      }
-    },
-    {
       "id": "dba038e92d1aa5601a88",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-09T00:40:50.892173Z",
+      "changed_at": "2026-08-09T00:47:15.779603Z",
       "opportunity_id": "356119",
       "detail": "Deadline 2026-09-08",
       "record": {
@@ -135,7 +92,7 @@
       "id": "d12485f6885330fdc4b2",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-09T00:40:50.892173Z",
+      "changed_at": "2026-08-09T00:47:15.779603Z",
       "opportunity_id": "363065",
       "detail": "Deadline 2026-09-08",
       "record": {
@@ -182,7 +139,7 @@
       "id": "72dcac9f9091356bd040",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-09T00:40:50.892173Z",
+      "changed_at": "2026-08-09T00:47:15.779603Z",
       "opportunity_id": "363199",
       "detail": "Deadline 2026-09-08",
       "record": {
@@ -226,7 +183,7 @@
       "id": "5c112db27abaa90f8db9",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-09T00:40:50.892173Z",
+      "changed_at": "2026-08-09T00:47:15.779603Z",
       "opportunity_id": "362754",
       "detail": "Deadline 2026-09-08",
       "record": {
@@ -274,49 +231,10 @@
       "deadline": "2026-09-08"
     },
     {
-      "id": "5ae0fcadc87a88f3f091",
-      "type": "closed_or_removed",
-      "label": "Closed or removed",
-      "changed_at": "2026-08-09T00:40:50.892173Z",
-      "opportunity_id": "363104",
-      "detail": "No longer in the current catalog",
-      "record": {
-        "opportunity_id": "363104",
-        "opportunity_number": "PDS-SUVA-FY26-02",
-        "title": "U.S. Embassy Suva Annual Program Statement for Fiji, Kiribati, Nauru, and Tuvalu",
-        "agency": "U.S. Mission to Fiji",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-07-08",
-        "close_date": "2026-08-08",
-        "last_updated": "2026-07-07",
-        "version": "Synopsis 1",
-        "topic_areas": [
-          "Arts and culture",
-          "Education and workforce",
-          "Technology development"
-        ],
-        "disciplines": [],
-        "applicant_types": [
-          "Other"
-        ],
-        "funding_instruments": [
-          "Cooperative Agreement",
-          "Grant"
-        ],
-        "award_floor": 5000,
-        "award_ceiling": 24000,
-        "detail_page": "https://www.grants.gov/search-results-detail/363104",
-        "funding_opportunity_url": null,
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353707"
-      }
-    },
-    {
       "id": "4069ef91a84815001f53",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-09T00:40:50.892173Z",
+      "changed_at": "2026-08-09T00:47:15.779603Z",
       "opportunity_id": "353413",
       "detail": "Deadline 2026-09-08",
       "record": {
@@ -361,7 +279,7 @@
       "id": "3daeea263d526ee42f5a",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-09T00:40:50.892173Z",
+      "changed_at": "2026-08-09T00:47:15.779603Z",
       "opportunity_id": "363315",
       "detail": "Deadline 2026-09-08",
       "record": {
@@ -401,7 +319,7 @@
       "id": "1f94ce934eb978825f2d",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-09T00:40:50.892173Z",
+      "changed_at": "2026-08-09T00:47:15.779603Z",
       "opportunity_id": "360554",
       "detail": "Deadline 2026-09-08",
       "record": {
@@ -454,7 +372,7 @@
       "id": "01f5a87283b029ba6b5b",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-09T00:40:50.892173Z",
+      "changed_at": "2026-08-09T00:47:15.779603Z",
       "opportunity_id": "363288",
       "detail": "Deadline 2026-09-08",
       "record": {
@@ -500,6 +418,88 @@
         "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354092"
       },
       "deadline": "2026-09-08"
+    },
+    {
+      "id": "e8dafa1952f32deb4747",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-09T00:40:50.892173Z",
+      "opportunity_id": "362903",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "362903",
+        "opportunity_number": "OFOP0002813",
+        "title": "Prosperity through Partnership: Catalyzing U.S.-Algerian Collaboration in Innovation, Commerce and English Language",
+        "agency": "U.S. Mission to Algeria",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-06-22",
+        "close_date": "2026-08-08",
+        "last_updated": "2026-06-22",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Arts and culture",
+          "Education and workforce",
+          "Environmental science",
+          "Social and behavioral sciences",
+          "Technology development"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Nonprofits with 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Other"
+        ],
+        "award_floor": 5000,
+        "award_ceiling": 100000,
+        "detail_page": "https://www.grants.gov/search-results-detail/362903",
+        "funding_opportunity_url": "https://mygrants.servicenowservices.com/mygrants?id=mygrants_form&table=x_g_usd4_o_grant_funding_opportunity&sys_id=465d1dd447cd075067358810326d4326&view=Default",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "5ae0fcadc87a88f3f091",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-09T00:40:50.892173Z",
+      "opportunity_id": "363104",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363104",
+        "opportunity_number": "PDS-SUVA-FY26-02",
+        "title": "U.S. Embassy Suva Annual Program Statement for Fiji, Kiribati, Nauru, and Tuvalu",
+        "agency": "U.S. Mission to Fiji",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-08",
+        "close_date": "2026-08-08",
+        "last_updated": "2026-07-07",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Arts and culture",
+          "Education and workforce",
+          "Technology development"
+        ],
+        "disciplines": [],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement",
+          "Grant"
+        ],
+        "award_floor": 5000,
+        "award_ceiling": 24000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363104",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353707"
+      }
     },
     {
       "id": "fb542df1edb122773fc2",
