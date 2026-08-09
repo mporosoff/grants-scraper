@@ -618,7 +618,7 @@ class VPREmailAdapter(SourceAdapter):
     display_name = "UR VPR funding digest (limited submissions & foundations)"
     source_type = "Internal"
     enabled = True           # validated against real Cindy (digest) + VPR (single) emails.
-    min_records = 1
+    min_records = 0          # 0 is valid (a quiet mailbox week); don't flag degraded.
     max_records = 500
 
     def fetch(self):
@@ -663,12 +663,16 @@ class VPREmailAdapter(SourceAdapter):
                 from_hdr = str(make_header(decode_header(msg.get("From", "")))).lower()
                 subj = str(make_header(decode_header(msg.get("Subject", "")))).lower()
                 body = self._message_html_or_text(msg)
-                head = from_hdr + "\n" + (body or "")[:3000].lower()
+                # Search the WHOLE body, not just the first few KB: Outlook digests
+                # open with a large <style>/MsoNormal block, so the sender line
+                # (in a forward's quoted header) sits well past any small cap.
+                body_l = (body or "").lower()
+                head = from_hdr + "\n" + body_l
                 matched = next((s for s in senders if s in head), None)
                 if not matched:
                     continue
                 if (matched in subject_required and subject_keyword
-                        and subject_keyword not in (subj + " " + (body or "")[:800].lower())):
+                        and subject_keyword not in (subj + " " + body_l)):
                     continue
                 messages.append(body)
         finally:
