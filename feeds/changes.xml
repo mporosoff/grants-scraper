@@ -4,8 +4,56 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/changes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/changes.xml</id>
-  <updated>2026-08-10T19:26:25Z</updated>
+  <updated>2026-08-10T19:33:33Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Closing soon: NIH Director’s Pioneer Award (DP1 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/360986"/>
+    <id>urn:funding-finder:change:a8e42ca68b63c5fb03d6</id>
+    <updated>2026-08-10T19:32:19.702427Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-09</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Public Wireless Supply Chain Innovation Fund Grant Program – Solutions for AI-Native RAN</title>
+    <link href="https://www.grants.gov/search-results-detail/363179"/>
+    <id>urn:funding-finder:change:9745c4005df3a4411350</id>
+    <updated>2026-08-10T19:32:19.702427Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-09</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Disrupting Transnational Criminal Organizations Through Advanced Forensic Capabilities in Morocco</title>
+    <link href="https://www.grants.gov/search-results-detail/363194"/>
+    <id>urn:funding-finder:change:821cd898df4aeec48045</id>
+    <updated>2026-08-10T19:32:19.702427Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-09</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: FY 2026 Notice of Funding Opportunity: Innovative Coordinated Access and Mobility Pilot Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363122"/>
+    <id>urn:funding-finder:change:41de2c6da7bd4f82be63</id>
+    <updated>2026-08-10T19:32:19.702427Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-09</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Fiscal Year 2027 Expanding Nutrition Services</title>
+    <link href="https://www.grants.gov/search-results-detail/362823"/>
+    <id>urn:funding-finder:change:2c0ddea4e40334b44e2a</id>
+    <updated>2026-08-10T19:32:19.702427Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-09</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: A Science of Science Approach to Analyzing and Innovating the Biomedical Research Enterprise</title>
+    <link href="https://www.grants.gov/search-results-detail/347026"/>
+    <id>urn:funding-finder:change:00eb6bc214cc8e7b75bd</id>
+    <updated>2026-08-10T19:32:19.702427Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-09</summary>
+  </entry>
   <entry>
     <title>Closed or removed: Lymphoma Scientific Research Mentoring Program</title>
     <link href="https://lymphoma.org/researchers/grants/"/>
@@ -1554,54 +1602,6 @@
     <title>Closed or removed: Student Scholarships in Cerebrovascular Disease and Stroke</title>
     <link href="https://professional.heart.org/en/partners/awards-and-lectures/student-scholarships"/>
     <id>urn:funding-finder:change:c6c1118de6353c8c71e1</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Faculty Starter Grants</title>
-    <link href="https://www.phrmafoundation.org/grants-fellowships/faculty-starter-grants/"/>
-    <id>urn:funding-finder:change:c687188206b323454969</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: ENTELLIGENCE Young Investigators Award</title>
-    <link href="http://www.entelligencemd.org/submitting_an_application"/>
-    <id>urn:funding-finder:change:c5ce4855640261e219c8</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: William and Sandra Bennett Clinical Scholars Program</title>
-    <link href="https://www.asn-online.org/grants/tig/ceg.aspx"/>
-    <id>urn:funding-finder:change:c407599e42c5efefe72d</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Midcareer Investigator Award in Patient-Oriented Research (Parent K24 Independent Clinical Trial Not Allowed) PA-24-188</title>
-    <link href="https://grants.nih.gov/grants/guide/pa-files/PA-24-188.html"/>
-    <id>urn:funding-finder:change:c31c9a1e7197dee61569</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Research Grants</title>
-    <link href="https://preventcancer.org/research/grants-fellowships/"/>
-    <id>urn:funding-finder:change:c2316fb73816d95b8eb0</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: SMART (Science, Mathematics and Research Transformation) Program</title>
-    <link href="http://smart.asee.org/about"/>
-    <id>urn:funding-finder:change:c1e999568c39e4be0b43</id>
     <updated>2026-08-10T19:25:04.391102Z</updated>
     <category term="closed_or_removed"/>
     <summary>No longer in the current catalog</summary>
