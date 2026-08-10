@@ -5,10 +5,28 @@
   const MAX_EXTERNAL = 4;
   const MIN_KEYWORDS = 3;
   const MAX_KEYWORDS = 8;
-  const MAX_MATCHES_PER_KEYWORD = 40;
-  const MAX_SEMANTIC_MATCHES_PER_KEYWORD = 8;
-  const MIN_RELATIVE_KEYWORD_SCORE = .14;
-  const BROAD_RE = /broad agency announcement|\bbaa\b|continuation of solicitation|office of science|long[\s-]?range|research announcement|\broses\b|omnibus|unsolicited proposal/i;
+  const MAX_MATCHES_PER_KEYWORD = 16;
+  const MAX_SEMANTIC_MATCHES_PER_KEYWORD = 4;
+  const MIN_RELATIVE_KEYWORD_SCORE = .28;
+  const MIN_RELATIVE_SEMANTIC_SCORE = .6;
+  const MIN_SINGLE_SEMANTIC_SCORE = .72;
+  const GENERIC_KEYWORDS = new Set([
+    "biology", "chemistry", "energy", "engineering", "environment",
+    "environmental science", "manufacturing", "material science",
+    "materials", "materials science", "science", "sustainability", "technology",
+  ]);
+  const UMBRELLA_TOPICS = new Set([
+    "Artificial intelligence and machine learning",
+    "Biology and biotechnology",
+    "Energy",
+    "Environmental science",
+    "Manufacturing",
+    "Materials science",
+  ]);
+  const CONCEPT_STOP_WORDS = new Set([
+    "a", "an", "and", "for", "from", "in", "of", "on", "or", "the", "to",
+    "using", "via", "with",
+  ]);
   const DOMAIN_HINTS = Object.freeze({
     "Catalysis and reaction engineering": ["cataly", "electrocataly", "photocataly", "reaction engineering", "kinetic", "hydrogenation"],
     Energy: ["energy", "fuel cell", "biofuel", "battery", "electrochem", "solar", "photovolta", "combustion", "hydrogen", "electroly", "power grid", "renewable"],
@@ -30,6 +48,19 @@
     return String(value || "").replace(/\s+/g, " ").trim().slice(0, maximum);
   }
 
+  function conceptTokens(value) {
+    const raw = String(value || "").normalize("NFKC").toLowerCase()
+      .match(/[a-z0-9][a-z0-9+.-]{1,}/g) || [];
+    return raw.map(token => {
+      let normalized = token.replace(/^[.-]+|[.-]+$/g, "");
+      if (normalized.length > 5 && normalized.endsWith("ies")) normalized = `${normalized.slice(0, -3)}y`;
+      else if (normalized.length > 5 && normalized.endsWith("ing")) normalized = normalized.slice(0, -3);
+      else if (normalized.length > 4 && normalized.endsWith("ed")) normalized = normalized.slice(0, -2);
+      else if (normalized.length > 4 && normalized.endsWith("s") && !normalized.endsWith("ss")) normalized = normalized.slice(0, -1);
+      return normalized;
+    }).filter(token => token.length > 1 && !CONCEPT_STOP_WORDS.has(token));
+  }
+
   function parseKeywords(value, limit = MAX_KEYWORDS) {
     const values = Array.isArray(value)
       ? value
@@ -39,7 +70,7 @@
     for (const item of values) {
       const keyword = cleanText(item, 64);
       const key = keyword.toLowerCase();
-      if (!keyword || seen.has(key)) continue;
+      if (!keyword || GENERIC_KEYWORDS.has(key) || seen.has(key)) continue;
       seen.add(key);
       output.push(keyword);
       if (output.length >= limit) break;
@@ -136,6 +167,96 @@
       : 0;
   }
 
+  function recencyScore(value, newestValue) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(value || ""))
+      || !/^\d{4}-\d{2}-\d{2}$/.test(String(newestValue || ""))) return 0;
+    const current = Date.parse(`${value}T00:00:00Z`);
+    const newest = Date.parse(`${newestValue}T00:00:00Z`);
+    if (!Number.isFinite(current) || !Number.isFinite(newest)) return 0;
+    const ageDays = Math.max(0, (newest - current) / 86400000);
+    return 3 * Math.max(0, 1 - ageDays / 365);
+  }
+
+  function keywordEvidence(keyword, record, searchApi, retrievalEngine) {
+    // Validate retrieval against source wording, not derived topic facets. The
+    // search index intentionally contains broad catalog topics, so trusting its
+    // lexical score alone can turn a noisy "Materials science" tag into a
+    // researcher match.
+    const rawText = [
+      record.title || "",
+      record.description || "",
+      ...(record.disciplines || []),
+    ].join(" ");
+    const rawTokenList = conceptTokens(rawText);
+    const rawTokens = new Set(rawTokenList);
+    const groups = searchApi.expandGroups
+      ? searchApi.expandGroups(keyword, term => rawTokens.has(term))
+      : searchApi.tokenize(keyword).map(term => ({
+        source: term,
+        terms: [{ term, weight: 1 }],
+      }));
+    const groupedSources = new Set(groups.map(group => group.source));
+    conceptTokens(keyword).forEach(term => {
+      if (groupedSources.has(term)) return;
+      groupedSources.add(term);
+      groups.push({ source: term, terms: [{ term, weight: 1 }] });
+    });
+    if (!groups.length) return { matched: false, strength: 0, lexical: false };
+
+    let covered = 0;
+    let direct = 0;
+    let aliasHits = 0;
+    const groupTermSets = groups.map(group => {
+      const resolvedTerms = new Set();
+      group.terms.forEach(item => {
+        resolvedTerms.add(item.term);
+        if (typeof retrievalEngine?.resolveTerm === "function") {
+          retrievalEngine.resolveTerm(item.term).forEach(resolution => {
+            resolvedTerms.add(resolution.term);
+          });
+        }
+      });
+      return resolvedTerms;
+    });
+    groups.forEach((group, groupIndex) => {
+      const groupHits = new Set();
+      groupTermSets[groupIndex].forEach(term => {
+        if (rawTokens.has(term)) groupHits.add(term);
+      });
+      if (groupHits.size) covered += 1;
+      if (rawTokens.has(group.source)) direct += 1;
+      aliasHits += groupHits.size;
+    });
+
+    const needed = groups.length === 1
+      ? 1
+      : groups.length <= 3
+        ? groups.length
+        : Math.max(3, Math.ceil(groups.length * .75));
+    // Long one-token aliases such as PFAS expand to a concept family; require
+    // at least two contextual words when the abbreviation itself is absent.
+    const aliasEnough = groups.length !== 1
+      || direct > 0
+      || groups[0].terms.length < 6
+      || aliasHits >= 2;
+    const windowSize = groups.length + 4;
+    let proximityEnough = groups.length === 1;
+    for (let start = 0; !proximityEnough && start < rawTokenList.length; start += 1) {
+      const matchedGroups = new Set();
+      rawTokenList.slice(start, start + windowSize).forEach(token => {
+        groupTermSets.forEach((terms, groupIndex) => {
+          if (terms.has(token)) matchedGroups.add(groupIndex);
+        });
+      });
+      proximityEnough = matchedGroups.size >= needed;
+    }
+    return {
+      matched: covered >= needed && aliasEnough && proximityEnough,
+      strength: covered / groups.length,
+      lexical: direct > 0,
+    };
+  }
+
   function buildMatches(
     profile,
     catalogData,
@@ -149,10 +270,23 @@
     const postings = catalogData?.search_index?.postings || {};
     if (!records.length || !searchApi?.tokenize || !searchApi?.expandTerms) return [];
 
-    const hitsByDocument = new Map();
-    const retrievalScores = new Float64Array(records.length);
+    const focusedKeywords = (profile.keywords || []).filter(keyword =>
+      !GENERIC_KEYWORDS.has(cleanText(keyword, 64).toLowerCase()),
+    );
+    const evidenceByDocument = new Map();
+    function addEvidence(documentId, keyword, strength, lexical) {
+      const evidence = evidenceByDocument.get(documentId) || [];
+      const prior = evidence.find(item => item.term === keyword);
+      if (prior) {
+        prior.strength = Math.max(prior.strength, strength);
+        prior.lexical = prior.lexical || lexical;
+      } else {
+        evidence.push({ term: keyword, strength, lexical });
+      }
+      evidenceByDocument.set(documentId, evidence);
+    }
     if (typeof retrievalEngine?.score === "function") {
-      for (const keyword of profile.keywords || []) {
+      for (const keyword of focusedKeywords) {
         const result = retrievalEngine.score(keyword);
         const candidates = [];
         for (let documentId = 0; documentId < records.length; documentId += 1) {
@@ -167,25 +301,33 @@
         candidates.sort((left, right) =>
           right.score - left.score || left.documentId - right.documentId,
         );
-        const minimumScore = (candidates[0]?.score || 0) * MIN_RELATIVE_KEYWORD_SCORE;
+        const topScore = candidates[0]?.score || 0;
+        const minimumScore = topScore * MIN_RELATIVE_KEYWORD_SCORE;
         let semanticMatches = 0;
         let acceptedMatches = 0;
         for (const candidate of candidates) {
           if (candidate.score < minimumScore || acceptedMatches >= MAX_MATCHES_PER_KEYWORD) break;
           const semanticOnly = candidate.lexicalScore <= 0;
+          const relativeScore = topScore > 0 ? candidate.score / topScore : 0;
+          if (semanticOnly && relativeScore < MIN_RELATIVE_SEMANTIC_SCORE) continue;
           if (semanticOnly && semanticMatches >= MAX_SEMANTIC_MATCHES_PER_KEYWORD) continue;
-          const { documentId, score } = candidate;
-          const terms = hitsByDocument.get(documentId) || [];
-          if (!terms.includes(keyword)) terms.push(keyword);
-          hitsByDocument.set(documentId, terms);
-          retrievalScores[documentId] += score;
+          const evidence = keywordEvidence(
+            keyword, records[candidate.documentId], searchApi, retrievalEngine,
+          );
+          if (!evidence.matched) continue;
+          addEvidence(
+            candidate.documentId,
+            keyword,
+            Math.max(relativeScore, evidence.strength),
+            evidence.lexical,
+          );
           acceptedMatches += 1;
           if (semanticOnly) semanticMatches += 1;
         }
       }
     } else {
       // Keep a small compatibility path if the hybrid scorer fails to load.
-      for (const keyword of profile.keywords || []) {
+      for (const keyword of focusedKeywords) {
         const concepts = [...new Set(searchApi.tokenize(keyword))];
         if (!concepts.length) continue;
         const conceptCount = new Map();
@@ -210,9 +352,16 @@
           : Math.max(2, Math.ceil(concepts.length * .6));
         conceptCount.forEach((count, documentId) => {
           if (count < needed) return;
-          const terms = hitsByDocument.get(documentId) || [];
-          terms.push(keyword);
-          hitsByDocument.set(documentId, terms);
+          const evidence = keywordEvidence(
+            keyword, records[documentId], searchApi, retrievalEngine,
+          );
+          if (!evidence.matched) return;
+          addEvidence(
+            documentId,
+            keyword,
+            Math.max(count / concepts.length, evidence.strength),
+            evidence.lexical,
+          );
         });
       }
     }
@@ -221,38 +370,46 @@
       ...(profile.domains || []).filter(Boolean),
       ...inferDomains(profile.keywords || []),
     ]);
-    const niche = new Set(nicheTopics || []);
+    const newestListing = records.reduce((newest, record) => {
+      const value = listingDate(record);
+      return listingDateValue(value) > listingDateValue(newest) ? value : newest;
+    }, "");
     const matches = [];
     records.forEach((record, documentId) => {
-      const hitTerms = hitsByDocument.get(documentId) || [];
+      const evidence = evidenceByDocument.get(documentId) || [];
+      if (!evidence.length) return;
+      if (evidence.length === 1 && !evidence[0].lexical
+        && evidence[0].strength < MIN_SINGLE_SEMANTIC_SCORE) return;
+      const hitTerms = evidence.map(item => item.term);
       const topics = new Set(record.topic_areas || []);
       const sharedDomains = [...domains].filter(domain => topics.has(domain));
-      const nicheHits = sharedDomains.filter(domain => niche.has(domain));
-      const broad = BROAD_RE.test(`${record.title || ""} ${(record.description || "").slice(0, 400)}`);
-      const broadHits = broad ? sharedDomains : [];
-      const strong = Boolean(hitTerms.length || nicheHits.length);
-      if (!strong && !broadHits.length) return;
-      const sharedTopics = strong ? nicheHits : broadHits;
+      const sharedTopics = sharedDomains.filter(domain => !UMBRELLA_TOPICS.has(domain));
+      const relevance = evidence.reduce((total, item) =>
+        total + 3 + item.strength + (item.lexical ? 1 : 0), 0)
+        + Math.min(1.5, sharedTopics.length * .25);
+      const listed = listingDate(record);
+      const recent = recencyScore(listed, newestListing);
       matches.push({
         id: record.opportunity_id || record.opportunity_number || record.title,
         title: record.title || "Untitled opportunity",
         agency: record.agency || "",
         url: bestUrl(record),
         deadline: deadlineText(record),
-        listing_date: listingDate(record),
-        tier: strong ? "strong" : "broad",
+        listing_date: listed,
+        tier: "focused",
         terms: hitTerms,
         shared_topics: sharedTopics,
-        score: (strong ? 2 : 0)
-          + hitTerms.length
-          + sharedTopics.length
-          + Math.min(8, Math.log1p(retrievalScores[documentId])),
+        score: relevance,
+        relevance_score: relevance,
+        recency_score: recent,
+        rank_score: relevance + recent,
       });
     });
 
     matches.sort((left, right) =>
-      listingDateValue(right.listing_date) - listingDateValue(left.listing_date)
-      || right.score - left.score
+      right.rank_score - left.rank_score
+      || listingDateValue(right.listing_date) - listingDateValue(left.listing_date)
+      || right.relevance_score - left.relevance_score
       || left.title.localeCompare(right.title),
     );
     return matches;

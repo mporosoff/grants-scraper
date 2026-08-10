@@ -3,12 +3,25 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import vm from "node:vm";
 
-const [querySource, retrievalSource, teamSource, teamPage] = await Promise.all([
+const [
+  querySource,
+  retrievalSource,
+  teamSource,
+  teamPage,
+  catalogSource,
+  facultyMatchesSource,
+] = await Promise.all([
   readFile(new URL("../../assets/search-query.js", import.meta.url), "utf8"),
   readFile(new URL("../../assets/search-retrieval.js", import.meta.url), "utf8"),
   readFile(new URL("../../assets/team-researchers.js", import.meta.url), "utf8"),
   readFile(new URL("../../team_match.html", import.meta.url), "utf8"),
+  readFile(new URL("../../data/opportunities.js", import.meta.url), "utf8"),
+  readFile(new URL("../../data/faculty_matches.js", import.meta.url), "utf8"),
 ]);
+
+function assignmentJson(source) {
+  return JSON.parse(source.slice(source.indexOf("{"), source.lastIndexOf(";")).trim());
+}
 
 function loadApis() {
   const context = { globalThis: {} };
@@ -90,6 +103,14 @@ test("normalizes and saves no more than four external researchers", () => {
   );
 });
 
+test("drops standalone umbrella keywords from external profiles", () => {
+  const { team } = loadApis();
+  assert.deepEqual(
+    [...team.parseKeywords("materials science; energy; battery interfaces; carbon conversion; catalysis")],
+    ["battery interfaces", "carbon conversion", "catalysis"],
+  );
+});
+
 test("builds opportunity matches from an external researcher's keywords", () => {
   const { query, retrieval, team } = loadApis();
   const records = [
@@ -127,7 +148,7 @@ test("builds opportunity matches from an external researcher's keywords", () => 
 
   assert.equal(matches.length, 1);
   assert.equal(matches[0].id, "carbon");
-  assert.equal(matches[0].tier, "strong");
+  assert.equal(matches[0].tier, "focused");
   assert.ok(matches[0].terms.includes("CO2 capture"));
 
   const partnerMatches = team.buildMatches(
@@ -144,32 +165,40 @@ test("builds opportunity matches from an external researcher's keywords", () => 
   assert.ok(partnerMatches.some(match => sharedIds.has(match.id)));
 });
 
-test("ranks collaboration matches by listing date instead of broad or specific tier", () => {
+test("requires focused evidence and balances relevance with listing date", () => {
   const { query, team } = loadApis();
   const records = [
     {
-      opportunity_id: "older-specific",
-      title: "Specialized catalyst initiative",
-      description: "Research on a specialized catalyst platform.",
-      topic_areas: ["Catalysis and reaction engineering"],
+      opportunity_id: "older-strong",
+      title: "Integrated carbon catalyst initiative",
+      description: "Heterogeneous catalysis for carbon dioxide conversion.",
+      topic_areas: ["Catalysis and reaction engineering", "Carbon management"],
       disciplines: ["Engineering"],
       posted_date: "2026-02-01",
     },
     {
-      opportunity_id: "newer-broad",
-      title: "Broad Agency Announcement for Energy",
-      description: "Open research announcement across the energy portfolio.",
-      topic_areas: ["Energy"],
+      opportunity_id: "newer-focused",
+      title: "New catalyst initiative",
+      description: "Heterogeneous catalysis research.",
+      topic_areas: ["Catalysis and reaction engineering"],
       disciplines: ["Engineering"],
       source_first_seen_date: "2026-08-09",
+    },
+    {
+      opportunity_id: "newer-broad",
+      title: "Egypt Annual Program Statement",
+      description: "Commercial diplomacy, energy exports, manufacturing, and critical minerals.",
+      topic_areas: ["Energy", "Materials science", "Manufacturing"],
+      disciplines: ["Engineering"],
+      source_first_seen_date: "2026-08-10",
     },
   ];
   const catalog = { opportunities: records, search_index: buildIndex(records, query) };
   const matches = team.buildMatches(
     {
-      name: "Date-first Researcher",
-      keywords: ["specialized catalyst"],
-      domains: ["Energy"],
+      name: "Balanced Researcher",
+      keywords: ["heterogeneous catalysis", "carbon dioxide conversion"],
+      domains: ["Energy", "Materials science", "Catalysis and reaction engineering"],
     },
     catalog,
     query,
@@ -177,16 +206,39 @@ test("ranks collaboration matches by listing date instead of broad or specific t
     null,
   );
 
-  assert.deepEqual(Array.from(matches, match => match.id), ["newer-broad", "older-specific"]);
-  assert.equal(matches[0].tier, "broad");
-  assert.equal(matches[0].listing_date, "2026-08-09");
-  assert.equal(matches[1].tier, "strong");
-  assert.equal(matches[1].listing_date, "2026-02-01");
+  assert.deepEqual(Array.from(matches, match => match.id), ["older-strong", "newer-focused"]);
+  assert.equal(matches[0].terms.length, 2);
+  assert.equal(matches[1].terms.length, 1);
+  assert.ok(matches[0].rank_score > matches[1].rank_score);
 });
 
-test("presents one newest-first collaboration list without broad-specific labels", () => {
-  assert.match(teamPage, /Newest shared opportunities/);
-  assert.match(teamPage, /newest listings first/);
+test("the live Egypt diplomacy notice is not a faculty research match", () => {
+  const { query, retrieval, team } = loadApis();
+  const catalog = assignmentJson(catalogSource);
+  const generated = assignmentJson(facultyMatchesSource);
+  const engine = retrieval.create(catalog, query);
+
+  for (const name of ["Marc D. Porosoff", "Siddharth Deshpande"]) {
+    const metadata = generated.faculty[name];
+    const matches = team.buildMatches(
+      { name, keywords: metadata.key_terms, domains: metadata.domains },
+      catalog,
+      query,
+      generated.niche_topics,
+      engine,
+    );
+    assert.equal(matches.some(match => match.title === "Egypt Annual Program Statement"), false);
+  }
+  assert.equal(
+    generated.multi_pi_suggestions.some(group => group.title === "Egypt Annual Program Statement"),
+    false,
+  );
+});
+
+test("presents one relevance-and-recency collaboration list without broad-specific labels", () => {
+  assert.match(teamPage, /Best current shared opportunities/);
+  assert.match(teamPage, /balanced by research fit and listing date/);
+  assert.match(teamPage, /research_summary/);
   assert.match(teamPage, /Listed /);
   assert.doesNotMatch(teamPage, /broad · verify fit/);
   assert.doesNotMatch(teamPage, />specific<\/span>/);

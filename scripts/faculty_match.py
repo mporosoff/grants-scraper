@@ -13,9 +13,10 @@ Two stages:
    ``data/faculty_matches.js`` for the (forthcoming) internal team-match page,
    including simple multi-PI groupings for large/center solicitations.
 
-Stage 1 is runnable now (network only). Stage 2 is implemented but expects the
-catalog file; it is wired for the pipeline but intentionally conservative (v1
-keyword/topic overlap; embeddings are a later upgrade).
+Stage 1 is runnable now (network only). Stage 2 is wired into the catalog
+pipeline and intentionally conservative: focused research concepts establish
+eligibility, catalog topics only corroborate that evidence, and recency is
+balanced with relevance after low-confidence matches are removed.
 
 Usage:
     python -m scripts.faculty_match profiles --out faculty_profiles.json
@@ -26,6 +27,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+from datetime import date
 import json
 import re
 import time
@@ -136,46 +138,45 @@ _WORD_RE = re.compile(r"[a-z][a-z0-9\-]{2,}")
 # terms, not filler like "research"/"program"/"science".
 _STOP = set("""the and for with from this that are was into over out per via
 research program programs grant grants funding award awards project projects
-support science sciences engineering technology technologies national university
+support national university
 universities institute department departments studies study development
 applications application advancing advanced approaches approach based using their
 which will been more also may can under new toward towards related general
 foundation opportunity opportunities proposal proposals faculty investigator
 investigators""".split())
 
-# Hand-curated research interests per PI, verified against each person's
-# University of Rochester ChemE faculty page and recent publications. These are
-# authoritative: they override OpenAlex's auto topics, which mis-resolved several
-# people (a computer-scientist "David Foster", a fungal biologist "Astrid Muller",
-# a perovskite "Gang Fan") and attached over-broad tags. Phrases are specific on
-# purpose so a match rests on real overlap, never a generic word.
+# Focused research concepts per PI, verified against the University of Rochester
+# Chemical and Sustainability Engineering faculty directory and supplemented by
+# recent publications. These override OpenAlex's auto topics, which mis-resolved
+# several people and attached over-broad tags. Each phrase is specific enough to
+# establish fit while broad enough to catch adjacent funding language.
 FACULTY_KEYTERMS: dict[str, list[str]] = {
     "Mitchell Anthamatten": [
-        "liquid crystal polymers", "two-photon polymerization",
-        "shape-memory polymers", "stimuli-responsive polymers",
-        "polymer synthesis", "cellulose nanocrystal thin films"],
+        "macromolecular self-assembly", "associative and functional polymers",
+        "nanostructured polymer materials", "polymer interfacial phenomena",
+        "optoelectronic polymer materials", "vapor deposition polymerization"],
     "Yasemin Basdogan": [
-        "computational chemistry", "machine learning for materials discovery",
-        "CO2 separation membranes", "electrocatalytic oxidation",
-        "molecular simulation", "solvation modeling"],
+        "machine learning for computational materials design",
+        "molecular dynamics simulation", "quantum chemistry",
+        "polymer solution modeling", "computational catalysis",
+        "CO2 separation membranes"],
     "Pooja Rajendra Bhalode": [
         "process systems engineering", "multiscale molecules-to-systems modeling",
-        "physics and data-driven hybrid modeling",
-        "product-process lifecycle optimization", "sustainable process design",
-        "particulate and process dynamics"],
+        "physics and data-driven hybrid modeling", "powder flow modeling",
+        "sustainable process design", "solvent-based extraction"],
     "Siddharth Deshpande": [
-        "computational heterogeneous catalysis",
-        "machine learning for catalyst screening", "oxygenate electrooxidation",
-        "tungsten carbide catalysts", "propane dehydrogenation",
-        "first-principles reaction modeling"],
+        "atomic modeling of solid-liquid interfaces",
+        "atomic modeling of solid-gas interfaces",
+        "machine learning for catalyst discovery", "heterogeneous catalysis",
+        "electrocatalysis at interfaces", "battery interface modeling"],
     "Gang Fan": [
-        "bio-inspired catalysis", "microbial and synthetic biology",
-        "biodegradable polymers and plastic upcycling", "CO2 electroreduction",
-        "bioelectrochemistry", "DNA-directed catalyst assembly"],
+        "bio-inspired catalysis", "polymer chemistry and plastic upcycling",
+        "bioelectrochemistry", "biosensors", "synthetic biology",
+        "metabolic engineering for environmental remediation"],
     "David G. Foster": [
         "transport phenomena", "computational fluid dynamics",
-        "microfluidic cell capture", "nanoparticle coatings",
-        "reactor modeling", "electrodeposition"],
+        "microfluidic cancer cell capture", "nanoparticle capture coatings",
+        "biomedical transport modeling", "fluid mechanics education"],
     "Melodie I. Lawton": [
         "shape-memory polymers", "polymeric composites", "biomaterials",
         "polymer degradation", "controlled drug delivery",
@@ -183,40 +184,108 @@ FACULTY_KEYTERMS: dict[str, list[str]] = {
     "Darren Lipomi": [
         "organic and flexible electronics", "conducting polymers",
         "stretchable semiconductors", "mechanical properties of organic electronics",
-        "electrotactile haptics", "bioelectronic interfaces"],
+        "electrotactile haptics", "wearable bioelectronic interfaces"],
     "Allison J. Lopatkin": [
         "antibiotic resistance", "plasmid dynamics and horizontal gene transfer",
-        "microbial systems biology", "bacterial metabolism",
-        "antimicrobial resistance in the environment", "quantitative microbiology"],
+        "engineered microbial communities", "microbial systems biology",
+        "metabolic engineering", "computational models of bacterial resistance"],
     "Astrid M. Muller": [
-        "earth-abundant electrocatalysts", "electrocatalytic water oxidation",
-        "CO2 reduction to syngas", "PFAS electrochemical destruction",
-        "laser-ablation nanoparticle synthesis",
-        "sustainable electrochemical manufacturing"],
+        "electrocatalytic aqueous PFAS defluorination",
+        "organic electrooxidation through water activation",
+        "selective carbon dioxide reduction", "electrode microenvironments",
+        "pulsed-laser nanoparticle synthesis", "nanocatalyst structure-function"],
     "Marc D. Porosoff": [
-        "heterogeneous catalysis", "CO2 hydrogenation and utilization",
-        "reverse water-gas shift", "tungsten carbide catalysts",
-        "syngas-to-olefins", "Fischer-Tropsch synthesis"],
+        "carbon dioxide capture and conversion", "heterogeneous thermal catalysis",
+        "catalyst structure-property relationships", "reactive separations",
+        "C1 chemistry and light alkane upgrading",
+        "catalyst representation with large language models"],
     "Alexander A. Shestopalov": [
-        "surface functionalization and molecular monolayers",
-        "soft lithography and contact printing", "micro- and nanofabrication",
-        "atomic layer deposition", "organic thin-film coatings",
+        "surface chemistry and molecular monolayers",
+        "surface patterning and contact printing", "nanostructured materials",
+        "interfacial thermodynamics", "organic thin-film coatings",
         "self-assembled monolayers"],
     "Wyatt E. Tenhaeff": [
         "lithium metal batteries", "solid electrolyte interphase",
-        "battery interfacial engineering", "polymer thin-film electrolytes",
-        "energy storage materials", "battery separators"],
+        "solid-state battery electrolytes", "battery interfacial engineering",
+        "polymer thin-film electrolytes", "vacuum deposition processing"],
     "Matthew Z. Yates": [
-        "functional polymer coatings", "sorbent polymers for chemical sensing",
+        "functional surfaces and coatings", "sorbent polymers for chemical sensing",
         "waveguide-enhanced Raman sensing", "electrochemical sensors",
-        "bimetallic catalyst particles", "colloids and emulsions"],
+        "electrochemical surface modification", "open-source electrochemistry hardware"],
+}
+
+# Human-readable synthesis of each official profile. The matcher uses the
+# focused concepts above, while these summaries preserve the broader research
+# context that motivated those concepts and can be shown by the interface.
+FACULTY_RESEARCH_SUMMARIES: dict[str, str] = {
+    "Mitchell Anthamatten": (
+        "Develops associative and functional polymers, macromolecular self-assembly, "
+        "nanostructured and optoelectronic polymer materials, and vapor-deposited "
+        "polymer interfaces."
+    ),
+    "Yasemin Basdogan": (
+        "Uses quantum chemistry, molecular dynamics, and machine learning to design "
+        "polymers, solutions, catalytic materials, and separation media."
+    ),
+    "Pooja Rajendra Bhalode": (
+        "Builds multiscale, physics-informed, and data-driven process models for "
+        "sustainable process systems, powder flow, and solvent-based separations."
+    ),
+    "Siddharth Deshpande": (
+        "Models solid-liquid and solid-gas interfaces and develops data-driven methods "
+        "for heterogeneous catalysis, electrocatalysis, and battery interfaces."
+    ),
+    "Gang Fan": (
+        "Combines polymer chemistry, bio-inspired catalysis, synthetic biology, "
+        "bioelectrochemistry, and metabolic engineering for plastic upcycling, sensing, "
+        "and environmental remediation."
+    ),
+    "David G. Foster": (
+        "Studies transport phenomena and computational fluid dynamics, including "
+        "microfluidic and nanoparticle-coating approaches for capturing circulating cells."
+    ),
+    "Melodie I. Lawton": (
+        "Studies shape-memory polymers, polymer composites and degradation, biomaterials, "
+        "controlled drug delivery, and polymer structure-property relationships."
+    ),
+    "Darren Lipomi": (
+        "Develops conducting and semiconducting polymers for flexible electronics, "
+        "wearable biointerfaces, medical devices, and electrotactile haptics."
+    ),
+    "Allison J. Lopatkin": (
+        "Uses systems and synthetic biology, microbial community engineering, mathematical "
+        "modeling, and machine learning to study metabolism, horizontal gene transfer, and "
+        "antibiotic resistance."
+    ),
+    "Astrid M. Muller": (
+        "Develops nanocatalysts and electrode microenvironments for aqueous PFAS "
+        "defluorination, selective carbon dioxide reduction, and organic electrooxidation, "
+        "including controlled pulsed-laser synthesis."
+    ),
+    "Marc D. Porosoff": (
+        "Develops heterogeneous thermal catalysts and reactive separations for carbon "
+        "dioxide capture and conversion, C1 chemistry, and light-alkane upgrading, with "
+        "data and language-model representations of catalyst behavior."
+    ),
+    "Alexander A. Shestopalov": (
+        "Studies molecularly engineered surfaces, monolayers, surface patterning, "
+        "nanostructured materials, organic coatings, and interfacial thermodynamics."
+    ),
+    "Wyatt E. Tenhaeff": (
+        "Engineers interfaces, solid electrolytes, and polymer thin films for solid-state "
+        "and lithium-metal batteries using thin-film synthesis and vacuum processing."
+    ),
+    "Matthew Z. Yates": (
+        "Develops functional surfaces and coatings, electrochemical and Raman sensors, "
+        "surface-modification methods, and open-source electrochemistry hardware."
+    ),
 }
 
 # Curated program-topic domains per PI, drawn from the catalog's controlled
 # ``topic_areas`` vocabulary. Chosen conservatively and only where central to the
-# person's work -- a broad umbrella tag (Energy, Environmental science, AI/ML) is
-# assigned only when it is genuinely a core area, never inferred from one stray
-# keyword. These drive niche-topic and broad-solicitation matching.
+# person's work. These tags can corroborate concept-level evidence, but never
+# establish a match by themselves because catalog topic tagging is intentionally
+# broad and occasionally noisy.
 FACULTY_DOMAINS: dict[str, list[str]] = {
     "Mitchell Anthamatten": ["Materials science", "Manufacturing"],
     "Yasemin Basdogan": [
@@ -263,32 +332,31 @@ def _sig_words(phrase: str) -> list[str]:
     return [w for w in _WORD_RE.findall((phrase or "").lower()) if w not in _STOP]
 
 
-def _phrase_hit(sig: list[str], opp_words: set[str],
-                common: set | None = None) -> bool:
-    """A key phrase 'hits' an opportunity when enough of its distinctive words are
-    present. A single-word phrase needs its one word; multi-word phrases need at
-    least ceil(60%) of their distinctive words (minimum 2), so a match can't rest
-    on one or two generic words like 'energy' + 'materials'.
+def _phrase_hit(sig: list[str], opp_tokens: list[str]) -> bool:
+    """A key phrase hits only when its distinctive words occur close together.
 
-    ``common`` is an optional set of corpus-frequent words (e.g. 'materials',
-    'learning', 'systems') that carry no distinguishing signal; they are stripped
-    before the count so an OpenAlex topic label like 'Machine Learning in
-    Materials Science' can't match hundreds of unrelated notices."""
+    Short phrases require every concept word. Longer phrases may omit one word,
+    but the evidence must fit inside a compact token window; scattered mentions
+    across a long notice are not research-fit evidence.
+
+    Generic words remain useful inside a focused phrase (for example,
+    "metabolic engineering"), but never qualify on their own because short
+    phrases require complete, proximate coverage."""
     orig_len = len(sig)
-    if common:
-        sig = [w for w in sig if w not in common]
     if not sig:
         return False
-    present = sum(1 for w in sig if w in opp_words)
     if orig_len == 1:
-        return present >= 1          # a genuine single-word key term
-    # A multi-word phrase must keep >=2 distinctive words, so it can't collapse to
-    # one lingering moderately-common word (e.g. 'sustainable process design' ->
-    # 'sustainable') and match hundreds of unrelated notices.
+        return sig[0] in opp_tokens
     if len(sig) < 2:
         return False
-    need = max(2, (3 * len(sig) + 4) // 5)   # ceil(0.6 * len), floored at 2
-    return present >= need
+    need = len(sig) if len(sig) <= 3 else max(3, (3 * len(sig) + 3) // 4)
+    window_size = len(sig) + 4
+    sig_set = set(sig)
+    for start in range(len(opp_tokens)):
+        window = set(opp_tokens[start:start + window_size])
+        if len(sig_set & window) >= need:
+            return True
+    return False
 
 
 def _key_terms(profile: dict) -> list[str]:
@@ -306,11 +374,9 @@ def _key_terms(profile: dict) -> list[str]:
 
 
 # --------------------------------------------------------------------------- #
-# Program-topic domains. A PI's *specific* work ("heterogeneous catalysis") is
-# mapped onto the catalog's controlled ``topic_areas`` vocabulary. Broad
-# solicitations (BAAs, DOE Office of Science, NASA ROSES) bury their real scope
-# behind boilerplate FOA language, but they ARE tagged with these program
-# topics -- so matching on topics, not just wording, is what surfaces them.
+# Program-topic domains. A PI's specific work is mapped onto the catalog's
+# controlled ``topic_areas`` vocabulary. These domains are context and may
+# corroborate focused phrase evidence; they never establish eligibility.
 # Keys are catalog topic_areas; values are substrings sought in a PI profile.
 # --------------------------------------------------------------------------- #
 DOMAIN_LEXICON: dict[str, list[str]] = {
@@ -357,15 +423,18 @@ DOMAIN_LEXICON: dict[str, list[str]] = {
          "in situ resource"],
 }
 
-# Concrete markers of a broad/open solicitation (vs. a targeted call). These
-# fund many topics, so we let a PI's program-topic overlap surface them -- but
-# they are flagged "broad" so the reader verifies fit against the full notice.
-_BROAD_RE = re.compile(
-    r"broad agency announcement|\bbaa\b|continuation of solicitation|"
-    r"office of science|long[\s-]?range|research announcement|\broses\b|"
-    r"omnibus|unsolicited proposal",
-    re.I,
-)
+# These catalog facets are useful for browsing, but too broad to explain or
+# materially boost a researcher match. In particular, a single noisy
+# "Materials science" tag caused the Egypt Annual Program Statement to be
+# recommended to most of the department.
+_UMBRELLA_TOPICS = {
+    "Artificial intelligence and machine learning",
+    "Biology and biotechnology",
+    "Energy",
+    "Environmental science",
+    "Manufacturing",
+    "Materials science",
+}
 
 
 def _pi_domains(profile: dict) -> list[str]:
@@ -388,16 +457,12 @@ def _domains_for(name: str, profile: dict) -> list[str]:
     return _pi_domains(profile)
 
 
-def _is_broad(opp: dict) -> bool:
-    blob = (opp.get("title") or "") + " " + (opp.get("description") or "")[:400]
-    return bool(_BROAD_RE.search(blob))
-
-
 def _niche_topics(catalog: list[dict]) -> set[str]:
-    """Topic areas specific enough that a single shared one signals a real
-    research overlap. Common umbrella topics (Energy, AI/ML, Environmental
-    science...) are excluded -- those only count toward *broad* solicitations,
-    so they can't flood the results."""
+    """Retain topic-frequency metadata for diagnostics and compatibility.
+
+    Topic rarity no longer determines eligibility; the former rule mistakenly
+    treated a noisy Materials science tag as sufficient research evidence.
+    """
     from collections import Counter
     freq: Counter = Counter()
     for r in catalog:
@@ -405,24 +470,6 @@ def _niche_topics(catalog: list[dict]) -> set[str]:
             freq[x] += 1
     cutoff = max(45, round(0.03 * len(catalog)))
     return {t for t, c in freq.items() if c <= cutoff}
-
-
-def _common_words(catalog: list[dict]) -> set:
-    """Words that appear in more than ~5% of notices carry no distinguishing
-    signal (e.g. 'materials', 'learning', 'systems', 'energy'). Stripping them
-    from phrase matching keeps a match resting on genuinely specific terms."""
-    from collections import Counter
-    df: Counter = Counter()
-    for opp in catalog:
-        text = " ".join([
-            opp.get("title") or "", opp.get("description") or "",
-            " ".join(opp.get("topic_areas") or []),
-            " ".join(opp.get("disciplines") or []),
-        ]).lower()
-        for w in {w for w in _WORD_RE.findall(text) if w not in _STOP}:
-            df[w] += 1
-    cutoff = max(60, round(0.05 * len(catalog)))
-    return {w for w, c in df.items() if c > cutoff}
 
 
 def _best_url(r: dict) -> str:
@@ -453,18 +500,28 @@ def _listing_date_value(value: str) -> int:
     return int(value.replace("-", "")) if re.match(r"^\d{4}-\d{2}-\d{2}$", value or "") else 0
 
 
+def _recency_score(value: str, newest_value: str) -> float:
+    """Return a bounded 0-3 recency contribution over a one-year window."""
+    try:
+        age = max(0, (date.fromisoformat(newest_value) - date.fromisoformat(value)).days)
+    except (TypeError, ValueError):
+        return 0.0
+    return round(3.0 * max(0.0, 1.0 - age / 365.0), 3)
+
+
 def match_to_catalog(profiles: list[dict], catalog_path: str, out_path: str,
                      top_n: int = 25) -> dict:
     """Match every PI against the catalog and emit a per-PI index the team page
     uses to compute mutual interests for any chosen subset.
 
-    Distinctive phrase/niche-topic matches and open-solicitation topic matches
-    are both eligible. The signal type remains as provenance, but it does not
-    create separate result categories or outrank a newer listing.
+    At least one focused research concept must match an opportunity. Catalog
+    topics may corroborate that evidence but never establish eligibility by
+    themselves. A bounded recency contribution is then combined with research
+    relevance so newer calls are favored without outranking a substantially
+    better scientific fit merely because of date.
     """
     catalog = _load_catalog(catalog_path)
     niche = _niche_topics(catalog)
-    common = _common_words(catalog)
 
     # Roster = the full FACULTY list, so hand-curated people with no OpenAlex
     # profile (Bhalode, Lawton) are still included. Curated key terms / domains
@@ -486,6 +543,7 @@ def match_to_catalog(profiles: list[dict], catalog_path: str, out_path: str,
             "resolved_name": resolved,
             "openalex_id": None if p.get("error") else p.get("openalex_id"),
             "works_count": None if p.get("error") else p.get("works_count"),
+            "research_summary": FACULTY_RESEARCH_SUMMARIES.get(name, ""),
             "key_terms": terms,
             "domains": sorted(doms),
         }
@@ -493,20 +551,24 @@ def match_to_catalog(profiles: list[dict], catalog_path: str, out_path: str,
                 for name, terms in faculty_terms.items()}
 
     pi_matches: dict[str, list] = {name: [] for name in faculty_meta}
-    per_opp: dict[str, list] = {}     # opp_id -> [(name, tier, score), ...]
+    # opp_id -> [(name, tier, relevance_score, rank_score), ...]
+    per_opp: dict[str, list] = {}
+    newest_listing = max(
+        (_listing_date(opp) for opp in catalog),
+        key=_listing_date_value,
+        default="",
+    )
 
     for opp in catalog:
         title = opp.get("title") or ""
         text = " ".join([
             title, opp.get("description") or "",
-            " ".join(opp.get("topic_areas") or []),
             " ".join(opp.get("disciplines") or []),
         ]).lower()
-        opp_words = {w for w in _WORD_RE.findall(text) if w not in _STOP}
-        if not opp_words:
+        opp_tokens = [w for w in _WORD_RE.findall(text) if w not in _STOP]
+        if not opp_tokens:
             continue
         opp_topics = set(opp.get("topic_areas") or [])
-        broad = _is_broad(opp)
         oid = (opp.get("opportunity_id") or opp.get("opportunity_number")
                or title)
         display = {
@@ -517,28 +579,33 @@ def match_to_catalog(profiles: list[dict], catalog_path: str, out_path: str,
         for name, sigs in term_sig.items():
             doms = faculty_doms[name]
             hit_terms = [t for (t, sig) in sigs
-                         if _phrase_hit(sig, opp_words, common)]
-            niche_hit = sorted(doms & opp_topics & niche)
-            broad_hit = sorted(doms & opp_topics) if broad else []
-            strong = bool(hit_terms or niche_hit)
-            if not strong and not broad_hit:
+                         if _phrase_hit(sig, opp_tokens)]
+            if not hit_terms:
                 continue
-            tier = "strong" if strong else "broad"
-            shared = niche_hit if strong else broad_hit
-            score = (2 if strong else 0) + len(hit_terms) + len(shared)
+            shared = sorted((doms & opp_topics) - _UMBRELLA_TOPICS)
+            relevance_score = round(
+                4.0 * len(hit_terms) + min(1.5, 0.25 * len(shared)), 3
+            )
+            recency_score = _recency_score(display["listing_date"], newest_listing)
+            rank_score = round(relevance_score + recency_score, 3)
             pi_matches[name].append({
-                **display, "tier": tier, "terms": hit_terms,
-                "shared_topics": shared, "score": score,
+                **display, "tier": "focused", "terms": hit_terms,
+                "shared_topics": shared, "score": relevance_score,
+                "relevance_score": relevance_score,
+                "recency_score": recency_score,
+                "rank_score": rank_score,
             })
-            per_opp.setdefault(oid, []).append((name, tier, score))
+            per_opp.setdefault(oid, []).append(
+                (name, "focused", relevance_score, rank_score)
+            )
 
     for name in pi_matches:
         pi_matches[name].sort(key=lambda m: (
-            -_listing_date_value(m["listing_date"]),
-            -m["score"], (m["title"] or "").lower()))
+            -m["rank_score"], -_listing_date_value(m["listing_date"]),
+            -m["relevance_score"], (m["title"] or "").lower()))
 
-    # Department-wide overview: opportunities where 2+ faculty overlap, newest
-    # listings first. Fit counts and scores only break same-date ties.
+    # Department-wide overview: opportunities where 2+ faculty have focused
+    # concept evidence. Combined fit and recency determine order.
     idx = {m["id"]: m for lst in pi_matches.values() for m in lst}
     groups = []
     for oid, members in per_opp.items():
@@ -546,12 +613,13 @@ def match_to_catalog(profiles: list[dict], catalog_path: str, out_path: str,
             continue
         d = idx.get(oid, {})
         team = []
-        for (name, tier, score) in members:
+        for (name, tier, score, rank_score) in members:
             mm = next((x for x in pi_matches[name] if x["id"] == oid), {})
             team.append({"name": name, "tier": tier, "score": score,
+                         "rank_score": rank_score,
                          "matched_terms": mm.get("terms") or [],
                          "shared_topics": mm.get("shared_topics") or []})
-        team.sort(key=lambda t: -t["score"])
+        team.sort(key=lambda t: (-t["rank_score"], -t["score"], t["name"]))
         groups.append({
             "opportunity_id": oid, "title": d.get("title") or oid,
             "agency": d.get("agency") or "", "url": d.get("url") or "",
@@ -559,11 +627,12 @@ def match_to_catalog(profiles: list[dict], catalog_path: str, out_path: str,
             "listing_date": d.get("listing_date") or "",
             "team_size": len(team),
             "total_score": sum(t["score"] for t in team),
+            "total_rank_score": round(sum(t["rank_score"] for t in team), 3),
             "suggested_team": team[:12],
         })
     groups.sort(key=lambda g: (
-        -_listing_date_value(g["listing_date"]), -g["team_size"],
-        -g["total_score"], (g["title"] or "").lower()))
+        -g["total_rank_score"], -_listing_date_value(g["listing_date"]),
+        -g["team_size"], -g["total_score"], (g["title"] or "").lower()))
 
     out = {
         "catalog_size": len(catalog),

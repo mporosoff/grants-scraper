@@ -91,7 +91,7 @@ jobs:
           --cache data/source_records.json
           --write
           --fail-on-degraded
-      - name: Rebuild date-first collaboration matches from the current catalog
+      - name: Rebuild relevance-and-recency collaboration matches
         run: >-
           python -m scripts.faculty_match match
           --catalog data/opportunities.js
