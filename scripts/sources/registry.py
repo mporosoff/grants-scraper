@@ -40,6 +40,7 @@ class AdapterResult:
     min_records: Optional[int] = None
     max_records: Optional[int] = None
     fallback_grace_days: int = 0
+    retain_on_failure: bool = True
 
 
 def collect(adapters: Optional[list[SourceAdapter]] = None,
@@ -71,6 +72,7 @@ def collect(adapters: Optional[list[SourceAdapter]] = None,
                     min_records=adapter.min_records,
                     max_records=adapter.max_records,
                     fallback_grace_days=adapter.fallback_grace_days,
+                    retain_on_failure=adapter.retain_on_failure,
                 )
             )
             continue
@@ -86,6 +88,7 @@ def collect(adapters: Optional[list[SourceAdapter]] = None,
                 min_records=adapter.min_records,
                 max_records=adapter.max_records,
                 fallback_grace_days=adapter.fallback_grace_days,
+                retain_on_failure=adapter.retain_on_failure,
             )
         )
         all_records.extend(records)

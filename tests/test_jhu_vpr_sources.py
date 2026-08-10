@@ -1,6 +1,7 @@
 """Regression coverage for the JHU and UR funding-email source adapters."""
 
 from io import BytesIO
+from datetime import date
 from email.message import EmailMessage
 import os
 from pathlib import Path
@@ -21,7 +22,11 @@ from scripts.sources.registry import collect
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
 
 
-def jhu_workbook_bytes(prefix: str, rows: int = MIN_ROWS_PER_AUDIENCE) -> bytes:
+def jhu_workbook_bytes(
+    prefix: str,
+    rows: int = MIN_ROWS_PER_AUDIENCE,
+    deadline="2030-12-31",
+) -> bytes:
     workbook = openpyxl.Workbook()
     sheet = workbook.active
     sheet.append([
@@ -34,6 +39,7 @@ def jhu_workbook_bytes(prefix: str, rows: int = MIN_ROWS_PER_AUDIENCE) -> bytes:
         "Annual Deadline",
     ])
     for index in range(rows):
+        row_deadline = deadline(index) if callable(deadline) else deadline
         sheet.append([
             f"{prefix} Foundation {index}",
             f"{prefix} Research Fellowship {index}",
@@ -41,7 +47,7 @@ def jhu_workbook_bytes(prefix: str, rows: int = MIN_ROWS_PER_AUDIENCE) -> bytes:
             "Researchers at eligible universities.",
             "water; materials",
             "$100,000",
-            "Recurring; verify current cycle",
+            row_deadline,
         ])
         sheet.cell(index + 2, 2).hyperlink = f"https://example.org/{prefix.lower()}/{index}"
     output = BytesIO()
@@ -84,7 +90,7 @@ class JHUFellowshipsTests(unittest.TestCase):
         self.assertIn("postdoc", adapter.diagnostics["download_failures"][0])
 
     def test_parse_requires_and_reports_all_three_audiences(self):
-        adapter = JHUFellowshipsAdapter()
+        adapter = JHUFellowshipsAdapter(as_of=date(2026, 8, 10))
         payload = [
             {**config, "data": jhu_workbook_bytes(config["audience"])}
             for config in SHEETS
@@ -92,12 +98,99 @@ class JHUFellowshipsTests(unittest.TestCase):
         records = list(adapter.parse(payload))
         self.assertEqual(len(records), MIN_ROWS_PER_AUDIENCE * 3)
         self.assertEqual(
-            adapter.diagnostics["parsed_rows_by_audience"],
+            adapter.diagnostics["raw_rows_by_audience"],
             {
                 "grad": MIN_ROWS_PER_AUDIENCE,
                 "postdoc": MIN_ROWS_PER_AUDIENCE,
                 "faculty": MIN_ROWS_PER_AUDIENCE,
             },
+        )
+        self.assertEqual(
+            adapter.diagnostics["current_rows_by_audience"],
+            {
+                "grad": MIN_ROWS_PER_AUDIENCE,
+                "postdoc": MIN_ROWS_PER_AUDIENCE,
+                "faculty": MIN_ROWS_PER_AUDIENCE,
+            },
+        )
+        self.assertTrue(all(record.close_date == "2030-12-31" for record in records))
+
+    def test_expired_and_unverified_rows_are_removed_but_zero_is_valid(self):
+        adapter = JHUFellowshipsAdapter(as_of=date(2026, 8, 10))
+        payload = [
+            {
+                **config,
+                "data": jhu_workbook_bytes(
+                    config["audience"],
+                    deadline=lambda index: "2020-01-01" if index % 2 else "TBD",
+                ),
+            }
+            for config in SHEETS
+        ]
+
+        records = list(adapter.parse(payload))
+
+        self.assertEqual(records, [])
+        self.assertEqual(adapter.min_records, 0)
+        self.assertEqual(adapter.diagnostics["parsed_records"], 0)
+        for audience in ("grad", "postdoc", "faculty"):
+            dropped = adapter.diagnostics["dropped_deadlines_by_audience"][audience]
+            self.assertEqual(dropped["expired"] + dropped["unverified"], 50)
+
+    def test_explicit_rolling_rows_remain_only_while_present_in_fresh_files(self):
+        adapter = JHUFellowshipsAdapter(as_of=date(2026, 8, 10))
+        payload = [
+            {
+                **config,
+                "data": jhu_workbook_bytes(
+                    config["audience"],
+                    deadline=lambda index: "Rolling applications" if index == 0 else "2020-01-01",
+                ),
+            }
+            for config in SHEETS
+        ]
+
+        records = list(adapter.parse(payload))
+
+        self.assertEqual(len(records), 3)
+        self.assertTrue(all(record.close_date is None for record in records))
+        self.assertTrue(all("Rolling" in record.deadline_note for record in records))
+
+    def test_exact_deadline_expires_on_the_following_day(self):
+        payload = [
+            {
+                **config,
+                "data": jhu_workbook_bytes(
+                    config["audience"], deadline="2026-08-10"
+                ),
+            }
+            for config in SHEETS
+        ]
+
+        on_deadline = list(
+            JHUFellowshipsAdapter(as_of=date(2026, 8, 10)).parse(payload)
+        )
+        after_deadline = list(
+            JHUFellowshipsAdapter(as_of=date(2026, 8, 11)).parse(payload)
+        )
+
+        self.assertEqual(len(on_deadline), MIN_ROWS_PER_AUDIENCE * 3)
+        self.assertEqual(after_deadline, [])
+
+    def test_same_program_across_audiences_is_merged_once(self):
+        adapter = JHUFellowshipsAdapter(as_of=date(2026, 8, 10))
+        payload = [
+            {**config, "data": jhu_workbook_bytes("Shared")}
+            for config in SHEETS
+        ]
+
+        records = list(adapter.parse(payload))
+
+        self.assertEqual(len(records), MIN_ROWS_PER_AUDIENCE)
+        self.assertEqual(adapter.diagnostics["deduplicated_current_rows"], 100)
+        self.assertEqual(
+            set(records[0].applicant_types),
+            {"Graduate students", "Postdoctoral researchers", "Early-career faculty"},
         )
 
 

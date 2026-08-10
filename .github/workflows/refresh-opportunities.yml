@@ -10,6 +10,7 @@ on:
       - "scripts/build_catalog.py"
       - "scripts/enrich_catalog.py"
       - "scripts/extract_document_evidence.py"
+      - "scripts/faculty_match.py"
       - "scripts/program_areas.py"
       - "scripts/sources/**"
       - "scripts/update_catalog_docs.py"
@@ -90,6 +91,12 @@ jobs:
           --cache data/source_records.json
           --write
           --fail-on-degraded
+      - name: Rebuild date-first collaboration matches from the current catalog
+        run: >-
+          python -m scripts.faculty_match match
+          --catalog data/opportunities.js
+          --profiles faculty_profiles.json
+          --out data/faculty_matches.js
       - name: Build deadline, amendment, closing-soon, and closure events
         run: >-
           python -m scripts.build_changes
@@ -115,7 +122,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md PROJECT.md match_explorer.html data/opportunities.js data/opportunity_enrichment.json data/document_evidence.json data/source_records.json data/link_health.json feeds
+          git add README.md PROJECT.md match_explorer.html data/opportunities.js data/opportunity_enrichment.json data/document_evidence.json data/source_records.json data/faculty_matches.js data/link_health.json feeds
           if git diff --cached --quiet; then
             echo "The generated catalog is unchanged."
           else
@@ -148,8 +155,9 @@ jobs:
             const body =
               `At least one enabled non-Grants.gov source failed its refresh, ` +
               `health bounds, or post-merge validation on ${new Date().toISOString()}.\n\n` +
-              `Healthy sources were still refreshed and any available last-known-good ` +
-              `snapshot was retained.\n\nInspect the source summary: ${runUrl}`;
+              `Healthy sources were still refreshed. Sources configured to retain ` +
+              `last-known-good data kept only publishable records; fail-closed sources ` +
+              `published zero.\n\nInspect the source summary: ${runUrl}`;
             const { data: issues } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,

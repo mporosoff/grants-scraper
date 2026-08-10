@@ -5,12 +5,12 @@ Design (addresses the source-lifecycle and currentness audit findings):
 - **Atomic per-source replace.** Each source's published records are replaced
   wholesale on a successful refresh, so a changed deadline or a removed
   opportunity is reflected -- not left stale next to an old copy.
-- **Last-known-good on failure.** A committed snapshot cache
+- **Configurable failure policy.** A committed snapshot cache
   (``data/source_records.json``) holds each source's last successful records.
-  If a refresh fails or looks unhealthy, that snapshot is republished instead
-  of dropping the source. (The daily ``build_catalog`` run rewrites the catalog
-  from Grants.gov only, so this cache is what carries external records across
-  days and survives a failed fetch.)
+  Most sources republish that snapshot when a refresh fails. Sources whose
+  rows cannot be proven current can opt out and publish zero instead. (The
+  daily ``build_catalog`` run rewrites the catalog from Grants.gov only, so
+  this cache is what carries safe external records across days.)
 - **Currentness + actionability gates.** Every external record must have an
   official URL and only plausible, non-expired dates; expired records are
   dropped even from a cached snapshot before publication.
@@ -117,13 +117,26 @@ def _snapshot_age_days(sources: dict, slug: str, as_of: date) -> int | None:
         return None
 
 
+def _clear_failed_source(sources: dict, result: AdapterResult) -> None:
+    """Remove an unsafe snapshot while retaining failure diagnostics."""
+    sources[result.slug] = {
+        "source": result.display_name,
+        "source_type": result.source_type,
+        "fetched_at": None,
+        "record_count": 0,
+        "diagnostics": result.diagnostics,
+        "records": [],
+    }
+
+
 def resolve_live_records(results: list[AdapterResult], cache: dict,
                          as_of: date) -> tuple[list[dict], dict, list[dict]]:
     """Return ``(records_to_publish, updated_cache, per_source_summaries)``.
 
-    Successful, healthy sources are refreshed (and their snapshot updated);
-    failed or unhealthy sources fall back to their last-known-good snapshot.
-    Expired records are removed even from a cached snapshot.
+    Successful, healthy sources are refreshed (and their snapshot updated).
+    Failed or unhealthy sources use their configured policy: retain a filtered
+    last-known-good snapshot, or clear it and publish zero. Expired records are
+    removed even from a retained snapshot.
     """
     sources = cache.setdefault("sources", {})
     live: list[dict] = []
@@ -166,8 +179,13 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                 published = refreshed_records
                 status = "refreshed"
             else:
-                published = _cached_publishable(sources, slug, as_of)
-                status = "unhealthy_kept_last_good"
+                if result.retain_on_failure:
+                    published = _cached_publishable(sources, slug, as_of)
+                    status = "unhealthy_kept_last_good"
+                else:
+                    published = []
+                    _clear_failed_source(sources, result)
+                    status = "unhealthy_no_fallback"
             summaries.append({
                 "slug": slug, "source": result.display_name, "status": status,
                 "fetched": len(result.records), "dropped_invalid": len(dropped),
@@ -175,21 +193,30 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                 "diagnostics": result.diagnostics,
             })
         else:
-            published = _cached_publishable(sources, slug, as_of)
-            snapshot_age = _snapshot_age_days(sources, slug, as_of)
-            recent_snapshot = bool(
-                result.fallback_grace_days > 0
-                and snapshot_age is not None
-                and snapshot_age <= result.fallback_grace_days
-                and within_health_bounds(
-                    len(published), result.min_records, result.max_records
+            if result.retain_on_failure:
+                published = _cached_publishable(sources, slug, as_of)
+                snapshot_age = _snapshot_age_days(sources, slug, as_of)
+                recent_snapshot = bool(
+                    result.fallback_grace_days > 0
+                    and snapshot_age is not None
+                    and snapshot_age <= result.fallback_grace_days
+                    and within_health_bounds(
+                        len(published), result.min_records, result.max_records
+                    )
                 )
-            )
+                status = (
+                    "recent_snapshot" if recent_snapshot
+                    else "failed_kept_last_good"
+                )
+            else:
+                published = []
+                snapshot_age = None
+                recent_snapshot = False
+                status = "failed_no_fallback"
+                _clear_failed_source(sources, result)
             summaries.append({
                 "slug": slug, "source": result.display_name,
-                "status": (
-                    "recent_snapshot" if recent_snapshot else "failed_kept_last_good"
-                ),
+                "status": status,
                 "fetched": 0, "dropped_invalid": 0,
                 "published": len(published), "healthy": recent_snapshot,
                 "error": result.error,

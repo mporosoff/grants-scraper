@@ -14,8 +14,9 @@ generated catalog.
 - **Grants.gov always wins.** External records never override a Grants.gov
   record, and duplicates are dropped.
 - **One broken source can't break the build.** Adapter errors are isolated and
-  reported; a committed per-source snapshot republishes the last healthy
-  records. Expired cached records are still removed.
+  reported. Most sources can republish a filtered last-healthy snapshot;
+  sources that cannot prove their rows are current can opt out and publish
+  zero. Expired cached records are always removed.
 - **Degradation is visible.** The scheduled job keeps healthy/last-known-good
   data available but opens or updates an owner-facing GitHub issue when an
   enabled source fails, becomes unhealthy, or fails post-merge validation.
@@ -101,7 +102,7 @@ against generated asset" step still validates the result.
 | `nasa-nspires` | Disabled shell | The public entry point is session/POST-gated; no stable list route is confirmed. |
 | `ur-infoready` | Disabled shell | The earlier undocumented endpoint currently returns HTTP 500. No embedded credential or unstable request ships; the fixture parser remains for a future permissioned route. |
 | `vpr-email` | Enabled | Reads the private forwarding mailbox over read-only IMAP. VPR and Cindy messages are classified and counted separately; both streams are required, and a format regression preserves the last good snapshot. |
-| `jhu-fellowships` | Enabled | Reads JHU's graduate, postdoctoral, and early-career workbooks. Retries and official short-link fallbacks handle intermittent blocking; partial or unexpectedly small refreshes are rejected. Because JHU blocks GitHub-hosted runners, a complete locally refreshed snapshot may cover that expected 403 for up to 45 days before the pipeline alerts as stale. |
+| `jhu-fellowships` | Enabled | Resolves and downloads JHU's latest graduate, postdoctoral, and early-career workbooks on every run—no manual Excel upload. All three raw sheets must be structurally healthy, but the publishable current set may legitimately be zero. Only exact current/future deadlines and explicit rolling entries are retained; expired or unverifiable rows are removed, cross-audience duplicates are merged, and a blocked/failed refresh clears the JHU snapshot instead of republishing stale records. |
 
 ## Notes
 

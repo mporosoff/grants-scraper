@@ -396,6 +396,37 @@ class LifecycleTests(unittest.TestCase):
         self.assertEqual(summaries[0]["status"], "failed_kept_last_good")
         self.assertFalse(summaries[0]["healthy"])
 
+    def test_no_fallback_source_clears_snapshot_after_fetch_failure(self):
+        cache = self._cache_with("jhu", "UNVERIFIED")
+        failed = AdapterResult(
+            slug="jhu", display_name="JHU", source_type="Fellowship", ok=False,
+            error="HTTP 403", min_records=0, max_records=2000,
+            retain_on_failure=False,
+        )
+
+        live, updated, summaries = resolve_live_records([failed], cache, self.AS_OF)
+
+        self.assertEqual(live, [])
+        self.assertEqual(updated["sources"]["jhu"]["records"], [])
+        self.assertEqual(updated["sources"]["jhu"]["record_count"], 0)
+        self.assertEqual(summaries[0]["status"], "failed_no_fallback")
+        self.assertFalse(summaries[0]["healthy"])
+
+    def test_valid_empty_source_replaces_an_old_snapshot(self):
+        cache = self._cache_with("jhu", "OLD")
+        empty = AdapterResult(
+            slug="jhu", display_name="JHU", source_type="Fellowship", ok=True,
+            record_count=0, records=[], min_records=0, max_records=2000,
+            retain_on_failure=False,
+        )
+
+        live, updated, summaries = resolve_live_records([empty], cache, self.AS_OF)
+
+        self.assertEqual(live, [])
+        self.assertEqual(updated["sources"]["jhu"]["records"], [])
+        self.assertEqual(summaries[0]["status"], "refreshed")
+        self.assertTrue(summaries[0]["healthy"])
+
     def test_successful_refresh_replaces_records_and_cache(self):
         cache = self._cache_with("nih", "OLD")
         fresh = [an_external_record(

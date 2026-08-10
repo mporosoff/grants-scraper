@@ -322,6 +322,9 @@ class SourceAdapter:
     #: fetch may use a complete snapshot no older than this many days without
     #: degrading the whole pipeline. The failure and snapshot age stay visible.
     fallback_grace_days: int = 0
+    #: Most sources retain their last good snapshot during a transient failure.
+    #: Set False when an unverifiable old record is riskier than an empty source.
+    retain_on_failure: bool = True
 
     def __init__(self) -> None:
         if not self.slug:

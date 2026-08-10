@@ -123,9 +123,10 @@ Grants.gov fields used by filters or sorting. Its compact cache is
 `data/document_evidence.json`.
 
 External-source records use atomic per-source replacement and the committed
-`data/source_records.json` last-known-good cache. A degraded enabled source
-cannot erase healthy published records: the safe merge completes, exits
-nonzero for monitoring, and the scheduled workflow opens or updates an
+`data/source_records.json` source cache. Most degraded sources retain only a
+filtered last-known-good snapshot; stricter sources can fail closed and publish
+zero when their records cannot be proven current. The safe merge completes,
+exits nonzero for monitoring, and the scheduled workflow opens or updates an
 owner-facing GitHub issue. NYSERDA publishes the next open application round
 and retains later application and concept-paper dates as structured deadlines.
 DOE Exchange adapters publish only actual NOFOs, not RFIs, teaming notices, or
@@ -184,7 +185,7 @@ support it.
 | `data/opportunities.js` | Generated catalog and search index |
 | `data/opportunity_enrichment.json` | Incremental official-detail cache |
 | `data/document_evidence.json` | Incremental document hash/version, cited-fact, and review-queue cache |
-| `data/source_records.json` | Last-known-good snapshots for enabled external sources |
+| `data/source_records.json` | Per-source records and refresh diagnostics for enabled external sources |
 | `data/link_health.json` | Rotating official-link status, redirect, and last-check state |
 | `scripts/build_catalog.py` | Official XML ingestion and catalog builder |
 | `scripts/enrich_catalog.py` | Official detail reconciliation and FOA selection |

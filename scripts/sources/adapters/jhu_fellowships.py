@@ -14,22 +14,25 @@ Avoiding duplicates / mess:
 - Each row is audience-tagged via ``applicant_types`` (Graduate students /
   Postdoctoral researchers / Early-career faculty), so items land in the
   fellowship buckets rather than flooding the default view.
+- The same sponsor/program appearing in multiple workbooks is merged into one
+  record with all applicable audiences.
 - On the *early-career faculty* sheet (the one that overlaps our federal catalog
   most — CAREER, NIH ESI, etc.) federal sponsors are dropped, keeping only the
   foundation/private awards we don't already have.
 - The merge layer still lets Grants.gov win and drops same-id repeats.
 
 The production adapter retries transient failures, falls back to the official
-short links published by JHU, and accepts a refresh only when all three audience
-workbooks parse above conservative row-count bounds. Otherwise the source
-lifecycle retains its last-known-good snapshot. JHU currently blocks
-GitHub-hosted runner IPs, so a complete locally refreshed snapshot has a bounded
-45-day production grace period; after that it becomes a degraded source.
+short links published by JHU, and validates that all three audience workbooks
+still contain their expected raw row volume. Only rows with an exact current or
+future deadline, or an explicit rolling deadline, are published. A valid
+current result may therefore be empty. If JHU blocks an automated refresh, the
+catalog publishes zero JHU records rather than reviving an unverifiable snapshot.
 """
 
 from __future__ import annotations
 
 import datetime as _dt
+from collections import Counter
 import hashlib
 import io
 import re
@@ -69,9 +72,19 @@ _FEDERAL_RE = re.compile(
 )
 
 _MONEY_RE = re.compile(r"\$\s?([\d][\d,]{2,})(?:\s?(million|m|k))?", re.IGNORECASE)
+_MONTH_RE = (
+    r"(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|"
+    r"Jul(?:y)?|Aug(?:ust)?|Sep(?:t(?:ember)?)?|Oct(?:ober)?|Nov(?:ember)?|"
+    r"Dec(?:ember)?)"
+)
 _DATE_RE = re.compile(
-    r"((?:January|February|March|April|May|June|July|August|September|October"
-    r"|November|December)\s+\d{1,2},?\s+\d{4}|\d{4}-\d{2}-\d{2}|\d{1,2}/\d{1,2}/\d{4})"
+    rf"({_MONTH_RE}\s+\d{{1,2}},?\s+\d{{4}}|\d{{4}}-\d{{2}}-\d{{2}}|"
+    rf"\d{{1,2}}/\d{{1,2}}/(?:\d{{4}}|\d{{2}}))",
+    re.IGNORECASE,
+)
+_ROLLING_RE = re.compile(
+    r"\b(?:rolling|ongoing|continuous(?:ly)?|any\s+time|year[- ]round)\b",
+    re.IGNORECASE,
 )
 _LINK_RE = re.compile(r"""https?://[^\s"'<>]+""", re.IGNORECASE)
 
@@ -108,25 +121,50 @@ def _money(value) -> Optional[str]:
     return str(int(n))
 
 
-def _first_date(value) -> Optional[str]:
-    if not value:
-        return None
-    m = _DATE_RE.search(str(value))
-    return m.group(1) if m else None
+def _parse_date_token(token: str) -> Optional[_dt.date]:
+    cleaned = re.sub(r"\s+", " ", str(token or "")).strip()
+    for fmt in (
+        "%Y-%m-%d", "%m/%d/%Y", "%m/%d/%y",
+        "%B %d, %Y", "%B %d %Y", "%b %d, %Y", "%b %d %Y",
+    ):
+        try:
+            return _dt.datetime.strptime(cleaned, fmt).date()
+        except ValueError:
+            continue
+    return None
 
 
-def _clean_deadline(value) -> Optional[str]:
-    """JHU deadline cells are recurring/annual, often with a stale year (or a
-    real date object). Render date cells as a month/day recurrence hint so they
-    don't read as an expired hard deadline; pass through free text as-is."""
-    if value is None:
-        return None
+def _deadline_metadata(value, as_of: _dt.date) -> tuple[Optional[str], Optional[str], str]:
+    """Return ``(close_date, note, status)`` without inventing recurrence.
+
+    Exact past dates are expired. Exact current/future dates are publishable.
+    Explicitly rolling rows remain current only while a fresh workbook still
+    contains them. Undated/TBD/ambiguous rows are excluded because they cannot
+    expire automatically or be verified as open.
+    """
+    if value is None or value == "":
+        return None, None, "unverified"
     if isinstance(value, _dt.datetime):
         value = value.date()
     if isinstance(value, _dt.date):
-        return "Recurring ~" + value.strftime("%b %d").replace(" 0", " ") + " (verify current year)"
+        note = "Deadline " + value.strftime("%b %d, %Y").replace(" 0", " ")
+        return value.isoformat(), note, "current" if value >= as_of else "expired"
     text = re.sub(r"\s+", " ", str(value)).strip()
-    return text[:300] or None
+    note = text[:300] or None
+    parsed_dates = [
+        parsed
+        for parsed in (_parse_date_token(match.group(1)) for match in _DATE_RE.finditer(text))
+        if parsed is not None
+    ]
+    if parsed_dates:
+        deadline = max(parsed_dates)
+        return (
+            deadline.isoformat(), note,
+            "current" if deadline >= as_of else "expired",
+        )
+    if _ROLLING_RE.search(text):
+        return None, note, "rolling"
+    return None, note, "unverified"
 
 
 def _colmap(header_cells: list) -> dict:
@@ -157,7 +195,7 @@ def _colmap(header_cells: list) -> dict:
     return mapping
 
 
-def parse_worksheet(ws, cfg: dict) -> list[dict]:
+def parse_worksheet(ws, cfg: dict, as_of: Optional[_dt.date] = None) -> list[dict]:
     """Turn one JHU worksheet into opportunity dicts (dependency-light; the
     caller passes an openpyxl worksheet)."""
     # Find the header row (the one containing "Sponsor").
@@ -178,6 +216,7 @@ def parse_worksheet(ws, cfg: dict) -> list[dict]:
         c = cols.get(key)
         return ws.cell(r, c + 1).value if c is not None else None
 
+    as_of = as_of or _dt.date.today()
     out: list[dict] = []
     for r in range(header_row + 1, ws.max_row + 1):
         program = cell(r, "program")
@@ -203,10 +242,14 @@ def parse_worksheet(ws, cfg: dict) -> list[dict]:
         ) or None
         keywords = cell(r, "keywords")
         deadline_text = cell(r, "deadline") or cell(r, "annual_deadline")
+        close_date, deadline_note, deadline_status = _deadline_metadata(
+            deadline_text, as_of
+        )
 
-        external_id = "jhu-{}-{}".format(
-            cfg["audience"],
-            hashlib.sha1(f"{sponsor}|{program}".casefold().encode()).hexdigest()[:16],
+        external_id = "jhu-{}".format(
+            hashlib.sha1(
+                f"{sponsor}|{program}".casefold().encode()
+            ).hexdigest()[:16],
         )
         out.append({
             "title": program,
@@ -219,10 +262,9 @@ def parse_worksheet(ws, cfg: dict) -> list[dict]:
             "applicant_types": list(cfg["applicant_types"]),
             "disciplines": [str(keywords).strip()] if keywords and str(keywords).strip() else [],
             "award_ceiling": _money(cell(r, "amount")),
-            # JHU deadlines are recurring/annual with stale years -> keep as a note,
-            # never a hard close_date (a past date would mark items expired and hide them).
-            "close_date": None,
-            "deadline_note": _clean_deadline(deadline_text),
+            "close_date": close_date,
+            "deadline_note": deadline_note,
+            "_deadline_status": deadline_status,
         })
     return out
 
@@ -232,17 +274,26 @@ class JHUFellowshipsAdapter(SourceAdapter):
     display_name = "Johns Hopkins RDT fellowships list"
     source_type = "Fellowship"
     enabled = True           # parser verified on JHU sample files; live fetch runs in pipeline
-    min_records = 150
+    # A complete workbook set can legitimately contain zero currently open
+    # rows after strict expiration filtering. Raw workbook volume is validated
+    # separately in parse().
+    min_records = 0
     max_records = 1500
-    fallback_grace_days = 45  # JHU currently blocks GitHub-hosted runner IPs.
+    fallback_grace_days = 0
+    retain_on_failure = False
+
+    def __init__(self, as_of: Optional[_dt.date] = None) -> None:
+        super().__init__()
+        self.as_of = as_of or _dt.date.today()
 
     def fetch(self):
         """Download every JHU workbook or fail the source as an incomplete run.
 
-        JHU intermittently rejects automated page requests.  The page remains
+        JHU intermittently rejects automated page requests. The page remains
         the preferred source of the current workbook URL, while the official
-        bit.ly link printed on that page is a resilient fallback.  A partial
-        result must never replace the last-known-good three-audience snapshot.
+        bit.ly link printed on that page is a fallback. A partial download is a
+        failed refresh; the no-fallback lifecycle publishes zero rather than an
+        old snapshot.
         """
         results = []
         failures = []
@@ -309,36 +360,55 @@ class JHUFellowshipsAdapter(SourceAdapter):
 
     def parse(self, payload) -> Iterable[CanonicalOpportunity]:
         import openpyxl
-        seen: set[str] = set()
-        parsed = []
-        audience_counts = {}
+        merged: dict[str, dict] = {}
+        raw_counts = {}
+        current_counts = {}
+        dropped_counts = {}
         for cfg in payload or []:
             wb = openpyxl.load_workbook(io.BytesIO(cfg["data"]), data_only=True)
-            items = parse_worksheet(wb.active, cfg)
-            audience_counts[cfg["audience"]] = len(items)
+            items = parse_worksheet(wb.active, cfg, self.as_of)
+            raw_counts[cfg["audience"]] = len(items)
             if len(items) < MIN_ROWS_PER_AUDIENCE:
                 self.diagnostics = {
                     **getattr(self, "diagnostics", {}),
-                    "parsed_rows_by_audience": audience_counts,
+                    "raw_rows_by_audience": raw_counts,
                 }
                 raise ValueError(
                     f"JHU {cfg['audience']} workbook yielded only {len(items)} rows; "
                     f"expected at least {MIN_ROWS_PER_AUDIENCE}."
                 )
+            drop_reasons: Counter = Counter()
+            current = 0
             for item in items:
-                if item["external_id"] in seen:
+                status = item.pop("_deadline_status")
+                if status not in {"current", "rolling"}:
+                    drop_reasons[status] += 1
                     continue
-                seen.add(item["external_id"])
-                parsed.append(self._to_canonical(item))
+                current += 1
+                external_id = item["external_id"]
+                existing = merged.get(external_id)
+                if existing:
+                    for field in ("applicant_types", "disciplines"):
+                        existing[field] = list(dict.fromkeys(
+                            [*(existing.get(field) or []), *(item.get(field) or [])]
+                        ))
+                    continue
+                merged[external_id] = item
+            current_counts[cfg["audience"]] = current
+            dropped_counts[cfg["audience"]] = dict(sorted(drop_reasons.items()))
         expected = {cfg["audience"] for cfg in SHEETS}
-        if set(audience_counts) != expected:
+        if set(raw_counts) != expected:
             raise ValueError(
                 "JHU parse did not receive every audience: "
-                + ", ".join(sorted(expected - set(audience_counts)))
+                + ", ".join(sorted(expected - set(raw_counts)))
             )
+        parsed = [self._to_canonical(item) for item in merged.values()]
         self.diagnostics = {
             **getattr(self, "diagnostics", {}),
-            "parsed_rows_by_audience": audience_counts,
+            "raw_rows_by_audience": raw_counts,
+            "current_rows_by_audience": current_counts,
+            "dropped_deadlines_by_audience": dropped_counts,
+            "deduplicated_current_rows": sum(current_counts.values()) - len(parsed),
             "parsed_records": len(parsed),
         }
         return parsed
@@ -347,7 +417,11 @@ class JHUFellowshipsAdapter(SourceAdapter):
         """Offline test helper: parse a local .xlsx against a sheet config."""
         import openpyxl
         wb = openpyxl.load_workbook(path, data_only=True)
-        return [self._to_canonical(i) for i in parse_worksheet(wb.active, cfg)]
+        return [
+            self._to_canonical({k: v for k, v in item.items() if not k.startswith("_")})
+            for item in parse_worksheet(wb.active, cfg, self.as_of)
+            if item.get("_deadline_status") in {"current", "rolling"}
+        ]
 
     @staticmethod
     def _to_canonical(item: dict) -> CanonicalOpportunity:
