@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml</id>
-  <updated>2026-08-09T00:48:21Z</updated>
+  <updated>2026-08-10T11:22:35Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Veterans Legacy Grants Program</title>
@@ -371,22 +371,6 @@
     <summary>Small Business Administration — Closes 2026-08-14 — SCORE is the nation’s largest network of volunteer, expert business mentors, with more than 10,000 dedicated volunteers in more than 250 local chapters designed to provide high quality business and economic development assistance to existing small businesses and nascent (pre-venture) entrepreneurs.</summary>
   </entry>
   <entry>
-    <title>Muscat - Annual Program Statement (APS)- PD Small Grants Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363078"/>
-    <id>urn:funding-finder:grants-gov:363078</id>
-    <updated>2026-07-08T00:00:00Z</updated>
-    <author><name>U.S. Mission to Oman</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Community development"/>
-    <category term="Cybersecurity"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <summary>U.S. Mission to Oman — Closes 2026-08-09 — The Public Diplomacy Section of U.S. Embassy Muscat announces an open competition to support projects that advance U.S. foreign policy priorities in Oman while strengthening the long-standing partnership between the United States and the Sultanate of Oman. This Annual Program Statement outlines strategic funding priorities, eligibility criteria, and application guidelines for grants ranging from $…</summary>
-  </entry>
-  <entry>
     <title>FAIR HOUSING INITIATIVES PROGRAM PRIVATE ENFORCEMENT INITIATIVE</title>
     <link href="https://www.grants.gov/search-results-detail/362827"/>
     <id>urn:funding-finder:grants-gov:362827</id>
@@ -676,6 +660,17 @@
     <title>Chicago FY 2021 – FY 2023 EDA Planning and Local Technical Assistance</title>
     <link href="https://www.grants.gov/search-results-detail/332125"/>
     <id>urn:funding-finder:grants-gov:332125</id>
+    <updated>2021-03-15T00:00:00Z</updated>
+    <author><name>Department of Commerce</name></author>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <summary>Department of Commerce — Posted — UPDATED NOTICE - PLEASE READ: April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
+  </entry>
+  <entry>
+    <title>Denver FY 2021 – FY 2023 EDA Planning and Local Technical Assistance</title>
+    <link href="https://www.grants.gov/search-results-detail/332126"/>
+    <id>urn:funding-finder:grants-gov:332126</id>
     <updated>2021-03-15T00:00:00Z</updated>
     <author><name>Department of Commerce</name></author>
     <category term="Arts and culture"/>

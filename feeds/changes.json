@@ -1,13 +1,479 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-09T00:48:22Z",
+  "generated_at": "2026-08-10T11:22:37Z",
   "retention_days": 90,
   "events": [
+    {
+      "id": "fd6bf9c89c60dd13d536",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-10T11:20:55.609357Z",
+      "opportunity_id": "363061",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363061",
+        "opportunity_number": "PAS-JAKARTA-FY26-07",
+        "title": "AI Pathways To The Future",
+        "agency": "U.S. Mission to Indonesia",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-06",
+        "close_date": "2026-08-09",
+        "last_updated": "2026-07-06",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Arts and culture",
+          "Education and workforce",
+          "Technology development",
+          "Data science"
+        ],
+        "disciplines": [
+          "Education"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 50000,
+        "award_ceiling": 75000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363061",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353606"
+      }
+    },
+    {
+      "id": "ca779f9ea5dae1ce72e4",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-10T11:20:55.609357Z",
+      "opportunity_id": "363064",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363064",
+        "opportunity_number": "PDS-CAIRO-004-FY26",
+        "title": "Mentor Program for English Educators",
+        "agency": "U.S. Mission to Egypt",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-07",
+        "close_date": "2026-08-09",
+        "last_updated": "2026-07-06",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Arts and culture",
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Education"
+        ],
+        "applicant_types": [
+          "Public and state institutions of higher education",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 100000,
+        "award_ceiling": 150000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363064",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "c9d8662d648ee64fc406",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-10T11:20:55.609357Z",
+      "opportunity_id": "363087",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363087",
+        "opportunity_number": "PAS-DJI-FY2026-ELT",
+        "title": "English Language Teaching Services Program",
+        "agency": "U.S. Mission to Djibouti",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-20",
+        "close_date": "2026-08-09",
+        "last_updated": "2026-08-06",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Education"
+        ],
+        "applicant_types": [
+          "Individuals"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 5000,
+        "award_ceiling": 25000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363087",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "a8e42ca68b63c5fb03d6",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-10T11:20:55.609357Z",
+      "opportunity_id": "360986",
+      "detail": "Deadline 2026-09-09",
+      "record": {
+        "opportunity_id": "360986",
+        "opportunity_number": "RFA-RM-27-001",
+        "title": "NIH Director’s Pioneer Award (DP1 Clinical Trial Optional)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-06-29",
+        "close_date": "2026-09-09",
+        "last_updated": "2026-06-29",
+        "version": "Synopsis 1",
+        "topic_areas": [],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 700000,
+        "award_ceiling": 700000,
+        "detail_page": "https://www.grants.gov/search-results-detail/360986",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-09"
+    },
+    {
+      "id": "a89982000e6cd78290ba",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-10T11:20:55.609357Z",
+      "opportunity_id": "363078",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363078",
+        "opportunity_number": "MUSCAT-PAS-2026-APS-01",
+        "title": "Muscat - Annual Program Statement (APS)- PD Small Grants Program",
+        "agency": "U.S. Mission to Oman",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-08",
+        "close_date": "2026-08-09",
+        "last_updated": "2026-07-22",
+        "version": "Synopsis 6",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Arts and culture",
+          "Biology and biotechnology",
+          "Community development",
+          "Cybersecurity",
+          "Data science",
+          "Education and workforce",
+          "Energy",
+          "Environmental science",
+          "Manufacturing",
+          "Space and aeronautics",
+          "Technology development"
+        ],
+        "disciplines": [],
+        "applicant_types": [
+          "Individuals",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement",
+          "Grant"
+        ],
+        "award_floor": 1000,
+        "award_ceiling": 100000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363078",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "9745c4005df3a4411350",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-10T11:20:55.609357Z",
+      "opportunity_id": "363179",
+      "detail": "Deadline 2026-09-09",
+      "record": {
+        "opportunity_id": "363179",
+        "opportunity_number": "NTIA-PWSCIF-26-01",
+        "title": "Public Wireless Supply Chain Innovation Fund Grant Program – Solutions for AI-Native RAN",
+        "agency": "National Telecommunications and Information Admini",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-14",
+        "close_date": "2026-09-09",
+        "last_updated": "2026-07-14",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Arts and culture",
+          "Environmental science",
+          "Manufacturing",
+          "Technology development"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/363179",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353846"
+      },
+      "deadline": "2026-09-09"
+    },
+    {
+      "id": "821cd898df4aeec48045",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-10T11:20:55.609357Z",
+      "opportunity_id": "363194",
+      "detail": "Deadline 2026-09-09",
+      "record": {
+        "opportunity_id": "363194",
+        "opportunity_number": "OFOP0003172",
+        "title": "Disrupting Transnational Criminal Organizations Through Advanced Forensic Capabilities in Morocco",
+        "agency": "Bureau of International Narcotics-Law Enforcement",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-15",
+        "close_date": "2026-09-09",
+        "last_updated": "2026-07-15",
+        "version": "Synopsis 1",
+        "topic_areas": [],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 1500000,
+        "award_ceiling": 2100000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363194",
+        "funding_opportunity_url": "https://mygrants.servicenowservices.com/mygrants?id=mygrants_form&table=x_g_usd4_o_grant_funding_opportunity&sys_id=c765365087b98f5020b862060cbb3513&view=Default",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353875"
+      },
+      "deadline": "2026-09-09"
+    },
+    {
+      "id": "41de2c6da7bd4f82be63",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-10T11:20:55.609357Z",
+      "opportunity_id": "363122",
+      "detail": "Deadline 2026-09-09",
+      "record": {
+        "opportunity_id": "363122",
+        "opportunity_number": "FTA-2026-012-TPM-ICAM",
+        "title": "FY 2026 Notice of Funding Opportunity: Innovative Coordinated Access and Mobility Pilot Program",
+        "agency": "DOT - Federal Transit Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-09",
+        "close_date": "2026-09-09",
+        "last_updated": "2026-07-10",
+        "version": "Synopsis 3",
+        "topic_areas": [
+          "Transportation"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "Federally recognized Native American tribal governments",
+          "Nonprofits with 501(c)(3) status",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/363122",
+        "funding_opportunity_url": "https://www.transit.dot.gov/notices-funding/fy-2026-notice-funding-opportunity-innovative-coordinated-access-and-mobility-pilot",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-09"
+    },
+    {
+      "id": "2c0ddea4e40334b44e2a",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-10T11:20:55.609357Z",
+      "opportunity_id": "362823",
+      "detail": "Deadline 2026-09-09",
+      "record": {
+        "opportunity_id": "362823",
+        "opportunity_number": "HRSA-27-099",
+        "title": "Fiscal Year 2027 Expanding Nutrition Services",
+        "agency": "Health Resources and Services Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-08",
+        "close_date": "2026-09-09",
+        "last_updated": "2026-07-13",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Agriculture and food",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 350000,
+        "award_ceiling": 350000,
+        "detail_page": "https://www.grants.gov/search-results-detail/362823",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353720"
+      },
+      "deadline": "2026-09-09"
+    },
+    {
+      "id": "2beaa71c45086bc42d80",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-10T11:20:55.609357Z",
+      "opportunity_id": "363086",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363086",
+        "opportunity_number": "PAS-DJI-FY26-AIWAP",
+        "title": "American Innovation and Workforce Advancement Program",
+        "agency": "U.S. Mission to Djibouti",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-20",
+        "close_date": "2026-08-09",
+        "last_updated": "2026-08-06",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Education and workforce",
+          "Technology development"
+        ],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "Individuals"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 5000,
+        "award_ceiling": 25000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363086",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "00eb6bc214cc8e7b75bd",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-10T11:20:55.609357Z",
+      "opportunity_id": "347026",
+      "detail": "Deadline 2026-09-09",
+      "record": {
+        "opportunity_id": "347026",
+        "opportunity_number": "23-569",
+        "title": "A Science of Science Approach to Analyzing and Innovating the Biomedical Research Enterprise",
+        "agency": "U.S. National Science Foundation",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2023-03-21",
+        "close_date": "2026-09-09",
+        "last_updated": "2026-02-25",
+        "version": "Synopsis 9",
+        "topic_areas": [
+          "Arts and culture",
+          "Biology and biotechnology",
+          "Education and workforce",
+          "Environmental science",
+          "Social and behavioral sciences",
+          "Technology development"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 100000,
+        "award_ceiling": 250000,
+        "detail_page": "https://www.grants.gov/search-results-detail/347026",
+        "funding_opportunity_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf23569",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-09"
+    },
     {
       "id": "e9d1a7b7ded08f39c5da",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-09T00:47:15.779603Z",
+      "changed_at": "2026-08-09T10:52:23.700254Z",
       "opportunity_id": "363400",
       "detail": "Deadline 2026-09-08",
       "record": {
@@ -53,7 +519,7 @@
       "id": "dba038e92d1aa5601a88",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-09T00:47:15.779603Z",
+      "changed_at": "2026-08-09T10:52:23.700254Z",
       "opportunity_id": "356119",
       "detail": "Deadline 2026-09-08",
       "record": {
@@ -92,7 +558,7 @@
       "id": "d12485f6885330fdc4b2",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-09T00:47:15.779603Z",
+      "changed_at": "2026-08-09T10:52:23.700254Z",
       "opportunity_id": "363065",
       "detail": "Deadline 2026-09-08",
       "record": {
@@ -139,7 +605,7 @@
       "id": "72dcac9f9091356bd040",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-09T00:47:15.779603Z",
+      "changed_at": "2026-08-09T10:52:23.700254Z",
       "opportunity_id": "363199",
       "detail": "Deadline 2026-09-08",
       "record": {
@@ -183,7 +649,7 @@
       "id": "5c112db27abaa90f8db9",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-09T00:47:15.779603Z",
+      "changed_at": "2026-08-09T10:52:23.700254Z",
       "opportunity_id": "362754",
       "detail": "Deadline 2026-09-08",
       "record": {
@@ -234,7 +700,7 @@
       "id": "4069ef91a84815001f53",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-09T00:47:15.779603Z",
+      "changed_at": "2026-08-09T10:52:23.700254Z",
       "opportunity_id": "353413",
       "detail": "Deadline 2026-09-08",
       "record": {
@@ -279,7 +745,7 @@
       "id": "3daeea263d526ee42f5a",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-09T00:47:15.779603Z",
+      "changed_at": "2026-08-09T10:52:23.700254Z",
       "opportunity_id": "363315",
       "detail": "Deadline 2026-09-08",
       "record": {
@@ -319,7 +785,7 @@
       "id": "1f94ce934eb978825f2d",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-09T00:47:15.779603Z",
+      "changed_at": "2026-08-09T10:52:23.700254Z",
       "opportunity_id": "360554",
       "detail": "Deadline 2026-09-08",
       "record": {
@@ -372,7 +838,7 @@
       "id": "01f5a87283b029ba6b5b",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-09T00:47:15.779603Z",
+      "changed_at": "2026-08-09T10:52:23.700254Z",
       "opportunity_id": "363288",
       "detail": "Deadline 2026-09-08",
       "record": {
@@ -418,6 +884,567 @@
         "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354092"
       },
       "deadline": "2026-09-08"
+    },
+    {
+      "id": "ffb060aa5a5f2271902e",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-09T01:09:28.346011Z",
+      "opportunity_id": "vpr-email:NSF26-512",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "vpr-email:NSF26-512",
+        "opportunity_number": "NSF26-512",
+        "title": "NSF Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets) | NSF 26-512",
+        "agency": "UR VPR funding digest (limited submissions & foundations)",
+        "source": "UR VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-11-04",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.nsf.gov/funding/opportunities/ai-datasets-unlocking-dataset-value-ai-enabled-scientific-discovery",
+        "funding_opportunity_url": "https://www.nsf.gov/funding/opportunities/ai-datasets-unlocking-dataset-value-ai-enabled-scientific-discovery",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "f860409b20b483ff5cc3",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-09T01:09:28.346011Z",
+      "opportunity_id": "vpr-email:NSF26-510",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "vpr-email:NSF26-510",
+        "opportunity_number": "NSF26-510",
+        "title": "Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs SBIR/STTR: Developing Deep Technologies that Advance U.S. Competitiveness and Security | NSF 26-510",
+        "agency": "UR VPR funding digest (limited submissions & foundations)",
+        "source": "UR VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-11-04",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [
+          "Technology development"
+        ],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.nsf.gov/funding/opportunities/small-business-innovation-research-small-business-technology",
+        "funding_opportunity_url": "https://www.nsf.gov/funding/opportunities/small-business-innovation-research-small-business-technology",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "f0b7cb88a000c6d14b03",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-09T01:09:28.346011Z",
+      "opportunity_id": "vpr-email:NSF26-015",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "vpr-email:NSF26-015",
+        "opportunity_number": "NSF26-015",
+        "title": "NSF DCL Advancing Artificial Intelligence (AI) Agent Ecosystems through the National Science Foundation Pathways to Enable Secure Open-Source Ecosystems (NSF PESOSE) Program | NSF 26-015",
+        "agency": "UR VPR funding digest (limited submissions & foundations)",
+        "source": "UR VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-09-01",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Arts and culture",
+          "Environmental science"
+        ],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.nsf.gov/funding/opportunities/dcl-advancing-artificial-intelligence-ai-agent-ecosystems",
+        "funding_opportunity_url": "https://www.nsf.gov/funding/opportunities/dcl-advancing-artificial-intelligence-ai-agent-ecosystems",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "ed5b67f83e22613d17b7",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-09T01:09:28.346011Z",
+      "opportunity_id": "vpr-email:vpr-63cc8866673bd1a1",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "vpr-email:vpr-63cc8866673bd1a1",
+        "opportunity_number": null,
+        "title": "NIH https://seed.nih.gov/small-business-funding/find-funding/sbir-sttr-funding-opportunities New PA posted June 1, 2026.",
+        "agency": "UR VPR funding digest (limited submissions & foundations)",
+        "source": "UR VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": null,
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": 400000,
+        "detail_page": "https://seed.nih.gov/small-business-funding/find-funding/sbir-sttr-funding-opportunities",
+        "funding_opportunity_url": "https://seed.nih.gov/small-business-funding/find-funding/sbir-sttr-funding-opportunities",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "e599192a36b2c665b6ee",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-09T01:09:28.346011Z",
+      "opportunity_id": "vpr-email:vpr-167136617b79dc5d",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "vpr-email:vpr-167136617b79dc5d",
+        "opportunity_number": null,
+        "title": "ACS Petroleum Research Fund – 2 programs",
+        "agency": "UR VPR funding digest (limited submissions & foundations)",
+        "source": "UR VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-09-14",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.acs.org/funding/grants/petroleum-research-fund/programs.html",
+        "funding_opportunity_url": "https://www.acs.org/funding/grants/petroleum-research-fund/programs.html",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "db258cd0128e17c852c1",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-09T01:09:28.346011Z",
+      "opportunity_id": "vpr-email:vpr-e4ce54abf9b529bf",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "vpr-email:vpr-e4ce54abf9b529bf",
+        "opportunity_number": null,
+        "title": "American Chemical Society, petroleum Research Fund New Directions (ND) Grants",
+        "agency": "UR VPR funding digest (limited submissions & foundations)",
+        "source": "UR VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-09-14",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": 125000,
+        "detail_page": "https://www.acs.org/funding/grants/petroleum-research-fund/programs/new-directions-grants.html",
+        "funding_opportunity_url": "https://www.acs.org/funding/grants/petroleum-research-fund/programs/new-directions-grants.html",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "d1ae6f6af3b791a030cf",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-09T01:09:28.346011Z",
+      "opportunity_id": "vpr-email:infoready-2024058",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "vpr-email:infoready-2024058",
+        "opportunity_number": null,
+        "title": "Damon Runyon Cancer Research Foundation Clinical Investigator Award 2027",
+        "agency": "UR VPR funding digest (limited submissions & foundations)",
+        "source": "UR VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2027-01-19",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [
+          "Cancer",
+          "Public health",
+          "Technology development"
+        ],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "http://rochester.infoready4.com/CompetitionSpace/",
+        "funding_opportunity_url": "http://rochester.infoready4.com/CompetitionSpace/",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "b6ea34591ab22152856f",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-09T01:09:28.346011Z",
+      "opportunity_id": "vpr-email:vpr-122b30a8725e40bf",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "vpr-email:vpr-122b30a8725e40bf",
+        "opportunity_number": null,
+        "title": "SONY RESEARCH AWARD PROGRAM",
+        "agency": "UR VPR funding digest (limited submissions & foundations)",
+        "source": "UR VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-09-15",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": 150000,
+        "detail_page": "https://www.sony.com/en/SonyInfo/research-award-program/",
+        "funding_opportunity_url": "https://www.sony.com/en/SonyInfo/research-award-program/",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "b3c428bfa67b1c93a66a",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-09T01:09:28.346011Z",
+      "opportunity_id": "vpr-email:vpr-0f186b990288c021",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "vpr-email:vpr-0f186b990288c021",
+        "opportunity_number": null,
+        "title": "NSF Ongoing - New requirement for providing e-mail documentation of Program Officer approval for the submission of RAPID and EAGER proposals",
+        "agency": "UR VPR funding digest (limited submissions & foundations)",
+        "source": "UR VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": null,
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": 300000,
+        "detail_page": "https://new.nsf.gov/policies/pappg/24-1",
+        "funding_opportunity_url": "https://new.nsf.gov/policies/pappg/24-1",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "9f00d614231c656c77a3",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-09T01:09:28.346011Z",
+      "opportunity_id": "vpr-email:vpr-ca54a2886f6fb184",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "vpr-email:vpr-ca54a2886f6fb184",
+        "opportunity_number": null,
+        "title": "NSF Computational and Data-Enabled Science and Engineering (CDS&E) | NSF - National Science Foundation PD 24-8084",
+        "agency": "UR VPR funding digest (limited submissions & foundations)",
+        "source": "UR VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-09-15",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://new.nsf.gov/funding/opportunities/computational-data-enabled-science-engineering-0",
+        "funding_opportunity_url": "https://new.nsf.gov/funding/opportunities/computational-data-enabled-science-engineering-0",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "892335349d6cbdb7e5ce",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-09T01:09:28.346011Z",
+      "opportunity_id": "vpr-email:vpr-e1612e2acba631d2",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "vpr-email:vpr-e1612e2acba631d2",
+        "opportunity_number": null,
+        "title": "Doctoral New Investigator (DNI) Grants",
+        "agency": "UR VPR funding digest (limited submissions & foundations)",
+        "source": "UR VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": null,
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": 110000,
+        "detail_page": "https://www.acs.org/funding/grants/petroleum-research-fund/programs/doctoral-new-investigator-grants.html",
+        "funding_opportunity_url": "https://www.acs.org/funding/grants/petroleum-research-fund/programs/doctoral-new-investigator-grants.html",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "87f1a69fccfe278b183e",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-09T01:09:28.346011Z",
+      "opportunity_id": "vpr-email:vpr-36e6aed03b0511a5",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "vpr-email:vpr-36e6aed03b0511a5",
+        "opportunity_number": null,
+        "title": "Camille & Henry Dreyfus Foundation - Camille Dreyfus Teacher-Scholar Award (2027)",
+        "agency": "UR VPR funding digest (limited submissions & foundations)",
+        "source": "UR VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2027-02-04",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [
+          "Education and workforce"
+        ],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": 100000,
+        "detail_page": "https://rochester.infoready4.com/",
+        "funding_opportunity_url": "https://rochester.infoready4.com/",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "861ca7fb356c18a9fd69",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-09T01:09:28.346011Z",
+      "opportunity_id": "vpr-email:NSF26-015",
+      "detail": "Deadline 2026-09-01",
+      "record": {
+        "opportunity_id": "vpr-email:NSF26-015",
+        "opportunity_number": "NSF26-015",
+        "title": "NSF DCL Advancing Artificial Intelligence (AI) Agent Ecosystems through the National Science Foundation Pathways to Enable Secure Open-Source Ecosystems (NSF PESOSE) Program | NSF 26-015",
+        "agency": "UR VPR funding digest (limited submissions & foundations)",
+        "source": "UR VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-09-01",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Arts and culture",
+          "Environmental science"
+        ],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.nsf.gov/funding/opportunities/dcl-advancing-artificial-intelligence-ai-agent-ecosystems",
+        "funding_opportunity_url": "https://www.nsf.gov/funding/opportunities/dcl-advancing-artificial-intelligence-ai-agent-ecosystems",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-01"
+    },
+    {
+      "id": "3f0fe2b734ecfe77e1df",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-09T01:09:28.346011Z",
+      "opportunity_id": "vpr-email:vpr-c3bbadc4b31b4e1c",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "vpr-email:vpr-c3bbadc4b31b4e1c",
+        "opportunity_number": null,
+        "title": "NSF Computer and Information Science and Engineering : Core Programs 25-543",
+        "agency": "UR VPR funding digest (limited submissions & foundations)",
+        "source": "UR VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-09-10",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://beta.nsf.gov/funding/opportunities/computer-information-science-engineering-core",
+        "funding_opportunity_url": "https://beta.nsf.gov/funding/opportunities/computer-information-science-engineering-core",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "3d542af12bd408db0e41",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-09T01:09:28.346011Z",
+      "opportunity_id": "vpr-email:vpr-93df7a9faf5e4c37",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "vpr-email:vpr-93df7a9faf5e4c37",
+        "opportunity_number": null,
+        "title": "Schmidt Sciences",
+        "agency": "UR VPR funding digest (limited submissions & foundations)",
+        "source": "UR VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-09-11",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://airtable.com/appDCapaPF9M0iLQO/pagRxgvY9pCkOeaxx/form",
+        "funding_opportunity_url": "https://airtable.com/appDCapaPF9M0iLQO/pagRxgvY9pCkOeaxx/form",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "1598e0506d5672c5db1d",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-09T01:09:28.346011Z",
+      "opportunity_id": "vpr-email:vpr-dda9003b9def7103",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "vpr-email:vpr-dda9003b9def7103",
+        "opportunity_number": null,
+        "title": "NY THRIVE",
+        "agency": "UR VPR funding digest (limited submissions & foundations)",
+        "source": "UR VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": null,
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://nysmarticorridor.com/new-funding-available-to-connect-businesses-with-cutting-edge-research-assets/",
+        "funding_opportunity_url": "https://nysmarticorridor.com/new-funding-available-to-connect-businesses-with-cutting-edge-research-assets/",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "0756d1fdb592016e611f",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-09T01:09:28.346011Z",
+      "opportunity_id": "vpr-email:NSF26-511",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "vpr-email:NSF26-511",
+        "opportunity_number": "NSF26-511",
+        "title": "NEW NSF Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs : A Pilot Emphasis on Scientific Instrumentation. | NSF 26-511",
+        "agency": "UR VPR funding digest (limited submissions & foundations)",
+        "source": "UR VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-11-04",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [
+          "Technology development"
+        ],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": 305000,
+        "detail_page": "https://www.nsf.gov/funding/opportunities/small-business-innovation-research-small-business-technology-0",
+        "funding_opportunity_url": "https://www.nsf.gov/funding/opportunities/small-business-innovation-research-small-business-technology-0",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "022b53c699fb2b6dcc80",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-09T01:09:28.346011Z",
+      "opportunity_id": "vpr-email:vpr-aed7d81578b24028",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "vpr-email:vpr-aed7d81578b24028",
+        "opportunity_number": null,
+        "title": "Sloan Research Fellowships",
+        "agency": "UR VPR funding digest (limited submissions & foundations)",
+        "source": "UR VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-09-15",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [
+          "chemistry, computer science, earth systems science, economics, mathematics, neuroscience, physics, or a related field"
+        ],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": 75000,
+        "detail_page": "http://www.sloan.org/sloan-research-fellowships/",
+        "funding_opportunity_url": "http://www.sloan.org/sloan-research-fellowships/",
+        "primary_document_url": null
+      }
     },
     {
       "id": "e8dafa1952f32deb4747",
