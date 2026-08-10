@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-08-09T10:53:21Z</updated>
+  <updated>2026-08-10T11:22:35Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -507,16 +507,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <summary>U.S. National Science Foundation — Closes 2026-11-04 — This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
   </entry>
   <entry>
-    <title>American Innovation and Workforce Advancement Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363086"/>
-    <id>urn:funding-finder:grants-gov:363086</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>U.S. Mission to Djibouti</name></author>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Djibouti — Closes 2026-08-09 — The U.S. Embassy Djibouti's Public Diplomacy Section announces an open competition for organizations to implement the American Innovation and Workforce Advancement Program. This funding opportunity supports projects that strengthen workforce readiness, entrepreneurship, innovation, leadership, and professional skills among Djiboutian youth and emerging professionals. Competitive proposals should p…</summary>
-  </entry>
-  <entry>
     <title>CyberNext: Advance Cybersecurity and AI Readiness</title>
     <link href="https://www.grants.gov/search-results-detail/363249"/>
     <id>urn:funding-finder:grants-gov:363249</id>
@@ -671,35 +661,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <summary>U.S. Mission to Algeria — Closes 2026-08-10 — A. ELIGIBILITY 1. Eligible Applicants The following organizations are eligible to apply: ● Not-for-profit organizations, including think tanks and civil society/non-governmental organizations ● Public and private educational institutions ● Public International Organizations and Governmental institutions For-profit entities, even those that may fall into the categories listed above, are not eligibl…</summary>
   </entry>
   <entry>
-    <title>Muscat - Annual Program Statement (APS)- PD Small Grants Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363078"/>
-    <id>urn:funding-finder:grants-gov:363078</id>
-    <updated>2026-07-08T00:00:00Z</updated>
-    <author><name>U.S. Mission to Oman</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Community development"/>
-    <category term="Cybersecurity"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <summary>U.S. Mission to Oman — Closes 2026-08-09 — The Public Diplomacy Section of U.S. Embassy Muscat announces an open competition to support projects that advance U.S. foreign policy priorities in Oman while strengthening the long-standing partnership between the United States and the Sultanate of Oman. This Annual Program Statement outlines strategic funding priorities, eligibility criteria, and application guidelines for grants ranging from $…</summary>
-  </entry>
-  <entry>
-    <title>AI Pathways To The Future</title>
-    <link href="https://www.grants.gov/search-results-detail/363061"/>
-    <id>urn:funding-finder:grants-gov:363061</id>
-    <updated>2026-07-06T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Indonesia — Closes 2026-08-09 — Executive Summary The U.S. Department of State’s Embassy Jakarta announces an open competition to implement the AI Pathways to the Future program, a comprehensive initiative designed to strengthen U.S.-Indonesia partnerships in artificial intelligence education, research, and innovation. Promoting AI innovation and security is a top priority of the United States government, including in its foreig…</summary>
-  </entry>
-  <entry>
     <title>EARLY STAGE INNOVATIONS (ESI26)</title>
     <link href="https://www.grants.gov/search-results-detail/363066"/>
     <id>urn:funding-finder:grants-gov:363066</id>
@@ -712,5 +673,43 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Space and aeronautics"/>
     <category term="Technology development"/>
     <summary>NASA Headquarters — Closes 2026-08-13 — The National Aeronautics and Space Administration (NASA) Headquarters has released the solicitation Early Stage Innovations (ESI), as an appendix to the Research and Technology Mission Directorate (RTMD) umbrella NASA Research Announcement (NRA) titled "Space Technology Research, Development, Demonstration, and Infusion 2026 (SpaceTech REDDI 2026).”. The solicitation is available by opening the NS…</summary>
+  </entry>
+  <entry>
+    <title>EARLY STAGE INNOVATIONS FOR IN SITU RESOURCE UTILIZATION (ESI26-ISRU)</title>
+    <link href="https://www.grants.gov/search-results-detail/363067"/>
+    <id>urn:funding-finder:grants-gov:363067</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Education and workforce"/>
+    <category term="Separations and membranes"/>
+    <category term="Space and aeronautics"/>
+    <category term="Technology development"/>
+    <summary>NASA Headquarters — Closes 2026-08-13 — The National Aeronautics and Space Administration (NASA) Headquarters has released the solicitation Early Stage Innovations for In Situ Resource Utilization (ESI26-ISRU), as an appendix to the Research and Technology Mission Directorate (RTMD) umbrella NASA Research Announcement (NRA) titled "Space Technology Research, Development, Demonstration, and Infusion 2026 (SpaceTech REDDI 2026).”. The sol…</summary>
+  </entry>
+  <entry>
+    <title>Middle East Regional Cooperation (MERC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363070"/>
+    <id>urn:funding-finder:grants-gov:363070</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>Assistance Coordination</name></author>
+    <category term="Technology development"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Cybersecurity"/>
+    <category term="Water"/>
+    <summary>Assistance Coordination — Closes 2026-09-30 — The Middle East Regional Cooperation (MERC) Program supports joint scientific research and innovation partnerships between the United States, Israel, and countries across the Middle East and North Africa (MENA). The program funds applied research projects that address shared regional challenges while advancing U.S. economic, technological, and strategic interests. MERC is designed to bring togethe…</summary>
+  </entry>
+  <entry>
+    <title>Tribal Transportation Safety Strategy Pilot Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362956"/>
+    <id>urn:funding-finder:grants-gov:362956</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>69A355 Research and Technology</name></author>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>69A355 Research and Technology — Closes 2026-08-28 — he U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Tribal Transportation Safety Strategy Pilot Program. This three-year cooperative agreement is designed to address the critical public safety crisis in Tribal communities, as American Indian and Alaska Native populations experience…</summary>
   </entry>
 </feed>

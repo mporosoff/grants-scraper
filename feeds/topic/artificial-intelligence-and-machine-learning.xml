@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-08-09T10:53:21Z</updated>
+  <updated>2026-08-10T11:22:35Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
@@ -569,22 +569,6 @@
     <summary>U.S. Mission to Algeria — Closes 2026-08-10 — A. ELIGIBILITY 1. Eligible Applicants The following organizations are eligible to apply: ● Not-for-profit organizations, including think tanks and civil society/non-governmental organizations ● Public and private educational institutions ● Public International Organizations and Governmental institutions For-profit entities, even those that may fall into the categories listed above, are not eligibl…</summary>
   </entry>
   <entry>
-    <title>Muscat - Annual Program Statement (APS)- PD Small Grants Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363078"/>
-    <id>urn:funding-finder:grants-gov:363078</id>
-    <updated>2026-07-08T00:00:00Z</updated>
-    <author><name>U.S. Mission to Oman</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Community development"/>
-    <category term="Cybersecurity"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <summary>U.S. Mission to Oman — Closes 2026-08-09 — The Public Diplomacy Section of U.S. Embassy Muscat announces an open competition to support projects that advance U.S. foreign policy priorities in Oman while strengthening the long-standing partnership between the United States and the Sultanate of Oman. This Annual Program Statement outlines strategic funding priorities, eligibility criteria, and application guidelines for grants ranging from $…</summary>
-  </entry>
-  <entry>
     <title>English Language Exchange Programs: AI and Educational Technology Integration</title>
     <link href="https://www.grants.gov/search-results-detail/363105"/>
     <id>urn:funding-finder:grants-gov:363105</id>
@@ -617,19 +601,6 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>National Endowment for the Humanities — Closes 2026-09-16 — The program supports groups of two or more scholars increasing humanistic knowledge through the preparation of a manuscript for print publication, the creation of a scholarly digital project, or the planning of an international collaboration. Projects must pursue significant research questions and lead toward an interpretive product. This year’s competition is limited to projects on American histo…</summary>
-  </entry>
-  <entry>
-    <title>AI Pathways To The Future</title>
-    <link href="https://www.grants.gov/search-results-detail/363061"/>
-    <id>urn:funding-finder:grants-gov:363061</id>
-    <updated>2026-07-06T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Indonesia — Closes 2026-08-09 — Executive Summary The U.S. Department of State’s Embassy Jakarta announces an open competition to implement the AI Pathways to the Future program, a comprehensive initiative designed to strengthen U.S.-Indonesia partnerships in artificial intelligence education, research, and innovation. Promoting AI innovation and security is a top priority of the United States government, including in its foreig…</summary>
   </entry>
   <entry>
     <title>EARLY STAGE INNOVATIONS (ESI26)</title>
@@ -770,5 +741,29 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>National Institute of Food and Agriculture — Closes 2026-08-14 — The TCEP-CA under assistance listing 10.517, supports informal, community-based extension projects that address agriculture, youths, economic development, healthy lifestyles, natural resources, or other topics important to Tribal communities. This NOFO will begin a new 4-year continuation funding cycle.</summary>
+  </entry>
+  <entry>
+    <title>HEAL Initiative: Optimization of Therapeutic Medical Devices through Team Science Mechanistic Research (RM1)</title>
+    <link href="https://www.grants.gov/search-results-detail/361520"/>
+    <id>urn:funding-finder:grants-gov:361520</id>
+    <updated>2026-06-11T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health — Closes 2026-10-30 — The National Institute of Neurological Disorders and Stroke (NINDS), with other NIH Institutes and Centers (ICs), intends to publish a Notice of Funding Opportunity (NOFO) to investigate the mechanisms of action of therapeutic medical devices with the overall goal of improving clinical outcomes with device-based approaches. Medical devices are essential in managing health conditions, complementing…</summary>
+  </entry>
+  <entry>
+    <title>Decentralized Artificial Intelligence through Controlled Emergence (DICE)</title>
+    <link href="https://www.grants.gov/search-results-detail/362743"/>
+    <id>urn:funding-finder:grants-gov:362743</id>
+    <updated>2026-06-10T00:00:00Z</updated>
+    <author><name>DARPA - Information Processing Technologies Office</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Environmental science"/>
+    <summary>DARPA - Information Processing Technologies Office — Closes 2026-08-25 — The DICE program seeks to develop the theory and algorithms for decentralized coordination and local inference control to enable a scalable, adaptive, and resilient collective of heterogeneous AI agents that can autonomously execute sustained long-time-horizon missions in contested environments while remaining under human control. In contrast to small-scale, rigid, and fragile centralized orchestr…</summary>
   </entry>
 </feed>

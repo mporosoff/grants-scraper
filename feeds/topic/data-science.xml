@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-08-09T10:53:21Z</updated>
+  <updated>2026-08-10T11:22:35Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -524,22 +524,6 @@
     <summary>U.S. Mission to United Arab Emirates — Closes 2026-08-10 — The U.S. Embassy Abu Dhabi, Public Diplomacy Section, announces an open competition to develop and implement the programmatic elements of a three-day Freedom 250 Great American State Fair. The Fair will showcase authentic American heartland culture, creativity, entrepreneurship, entertainment, culinary traditions, and music through immersive public programming designed for UAE audiences. Proposals…</summary>
   </entry>
   <entry>
-    <title>Muscat - Annual Program Statement (APS)- PD Small Grants Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363078"/>
-    <id>urn:funding-finder:grants-gov:363078</id>
-    <updated>2026-07-08T00:00:00Z</updated>
-    <author><name>U.S. Mission to Oman</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Community development"/>
-    <category term="Cybersecurity"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <summary>U.S. Mission to Oman — Closes 2026-08-09 — The Public Diplomacy Section of U.S. Embassy Muscat announces an open competition to support projects that advance U.S. foreign policy priorities in Oman while strengthening the long-standing partnership between the United States and the Sultanate of Oman. This Annual Program Statement outlines strategic funding priorities, eligibility criteria, and application guidelines for grants ranging from $…</summary>
-  </entry>
-  <entry>
     <title>English Language Exchange Programs: AI and Educational Technology Integration</title>
     <link href="https://www.grants.gov/search-results-detail/363105"/>
     <id>urn:funding-finder:grants-gov:363105</id>
@@ -572,19 +556,6 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>National Endowment for the Humanities — Closes 2026-09-16 — The program supports groups of two or more scholars increasing humanistic knowledge through the preparation of a manuscript for print publication, the creation of a scholarly digital project, or the planning of an international collaboration. Projects must pursue significant research questions and lead toward an interpretive product. This year’s competition is limited to projects on American histo…</summary>
-  </entry>
-  <entry>
-    <title>AI Pathways To The Future</title>
-    <link href="https://www.grants.gov/search-results-detail/363061"/>
-    <id>urn:funding-finder:grants-gov:363061</id>
-    <updated>2026-07-06T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Indonesia — Closes 2026-08-09 — Executive Summary The U.S. Department of State’s Embassy Jakarta announces an open competition to implement the AI Pathways to the Future program, a comprehensive initiative designed to strengthen U.S.-Indonesia partnerships in artificial intelligence education, research, and innovation. Promoting AI innovation and security is a top priority of the United States government, including in its foreig…</summary>
   </entry>
   <entry>
     <title>Improved Oil and Gas Recovery and Produced Water Management Technologies</title>
@@ -748,5 +719,30 @@
     <category term="Data science"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health — Closes 2026-10-22 — NIMH seeks applications for pilot research to adapt, optimize, and test behavioral interventions that address common sleep problems in adolescents and young adults with or at risk for a mental health disorder. This notice of funding opportunity (NOFO) supports pilot clinical trials designed to evaluate the feasibility, tolerability, acceptability, safety, and potential effectiveness of the approac…</summary>
+  </entry>
+  <entry>
+    <title>NSF Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs: A Pilot Emphasis on Scientific Instrumentation</title>
+    <link href="https://www.grants.gov/search-results-detail/362551"/>
+    <id>urn:funding-finder:grants-gov:362551</id>
+    <updated>2026-05-22T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation — Closes 2026-11-04 — NSF invests in scientific discoveries, technological breakthroughs, and transformative innovations that strengthen economic growth, enhance security, and improve the lives of Americans and people around the world. Our ability to support that mission requires a robust scientific and engineering (S&amp;E) enterprise in the United States that allows scientists to innovate at the frontier. In addition to …</summary>
+  </entry>
+  <entry>
+    <title>DoW Prostate Cancer, Data Science Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362259"/>
+    <id>urn:funding-finder:grants-gov:362259</id>
+    <updated>2026-05-21T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Data science"/>
+    <category term="Public health"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-02 — Summary: The fiscal year 2026 (FY26) Prostate Cancer Research Program (PCRP) Data Science Award (DSA) supports research that develops or uses quantitative and analytical approaches, processes and/or systems to obtain knowledge and insight from large and/or complex sets of prostate cancer data in one or more of the following research areas: Analysis of clinically annotated datasets; analysis of -om…</summary>
   </entry>
 </feed>

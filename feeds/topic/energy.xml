@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-08-09T10:53:21Z</updated>
+  <updated>2026-08-10T11:22:35Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -478,22 +478,6 @@
     <summary>Bureau of Near Eastern Affairs — Closes 2026-08-31 — The Bureau of Near Eastern Affairs’ Office of Assistance Coordination of the U.S. Department of State announces an open competition for organizations to submit a statement of interest (SOI) for innovative foreign assistance programs benefiting partner countries that also advance U.S. commercial diplomacy and put American interests first. SOI must demonstrate how projects will leverage foreign assi…</summary>
   </entry>
   <entry>
-    <title>Muscat - Annual Program Statement (APS)- PD Small Grants Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363078"/>
-    <id>urn:funding-finder:grants-gov:363078</id>
-    <updated>2026-07-08T00:00:00Z</updated>
-    <author><name>U.S. Mission to Oman</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Community development"/>
-    <category term="Cybersecurity"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <summary>U.S. Mission to Oman — Closes 2026-08-09 — The Public Diplomacy Section of U.S. Embassy Muscat announces an open competition to support projects that advance U.S. foreign policy priorities in Oman while strengthening the long-standing partnership between the United States and the Sultanate of Oman. This Annual Program Statement outlines strategic funding priorities, eligibility criteria, and application guidelines for grants ranging from $…</summary>
-  </entry>
-  <entry>
     <title>English Language Teaching and Learning Program</title>
     <link href="https://www.grants.gov/search-results-detail/363077"/>
     <id>urn:funding-finder:grants-gov:363077</id>
@@ -690,5 +674,17 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Bureau of Reclamation — Closes 2027-08-26 — Through WaterSMART, the Bureau of Reclamation (Reclamation) leverages Federal and non-Federal funding to work cooperatively with States, Tribes, and other entities as they plan for and implement actions to increase water supply and hydropower reliability. The WaterSMART Program demonstrably advances Trump administration priorities, such as those identified in Presidential Executive Order 14154 (Ja…</summary>
+  </entry>
+  <entry>
+    <title>WaterSMART Enhancing Water Resources Projects</title>
+    <link href="https://www.grants.gov/search-results-detail/362394"/>
+    <id>urn:funding-finder:grants-gov:362394</id>
+    <updated>2026-05-14T00:00:00Z</updated>
+    <author><name>Bureau of Reclamation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Water"/>
+    <summary>Bureau of Reclamation — Closes 2027-09-08 — The objective of the WaterSMART Enhancing Water Resources Projects funding opportunity is to invite eligible entities to apply for funding to implement projects per the authorizing language referenced above that benefit water resource management for multiple uses, including water conservation and efficiency projects, water infrastructure improvements, and river and watershed restoration. Projects …</summary>
   </entry>
 </feed>

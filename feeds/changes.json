@@ -1,8 +1,474 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-09T10:53:22Z",
+  "generated_at": "2026-08-10T11:22:37Z",
   "retention_days": 90,
   "events": [
+    {
+      "id": "fd6bf9c89c60dd13d536",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-10T11:20:55.609357Z",
+      "opportunity_id": "363061",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363061",
+        "opportunity_number": "PAS-JAKARTA-FY26-07",
+        "title": "AI Pathways To The Future",
+        "agency": "U.S. Mission to Indonesia",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-06",
+        "close_date": "2026-08-09",
+        "last_updated": "2026-07-06",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Arts and culture",
+          "Education and workforce",
+          "Technology development",
+          "Data science"
+        ],
+        "disciplines": [
+          "Education"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 50000,
+        "award_ceiling": 75000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363061",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353606"
+      }
+    },
+    {
+      "id": "ca779f9ea5dae1ce72e4",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-10T11:20:55.609357Z",
+      "opportunity_id": "363064",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363064",
+        "opportunity_number": "PDS-CAIRO-004-FY26",
+        "title": "Mentor Program for English Educators",
+        "agency": "U.S. Mission to Egypt",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-07",
+        "close_date": "2026-08-09",
+        "last_updated": "2026-07-06",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Arts and culture",
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Education"
+        ],
+        "applicant_types": [
+          "Public and state institutions of higher education",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 100000,
+        "award_ceiling": 150000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363064",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "c9d8662d648ee64fc406",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-10T11:20:55.609357Z",
+      "opportunity_id": "363087",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363087",
+        "opportunity_number": "PAS-DJI-FY2026-ELT",
+        "title": "English Language Teaching Services Program",
+        "agency": "U.S. Mission to Djibouti",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-20",
+        "close_date": "2026-08-09",
+        "last_updated": "2026-08-06",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Education"
+        ],
+        "applicant_types": [
+          "Individuals"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 5000,
+        "award_ceiling": 25000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363087",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "a8e42ca68b63c5fb03d6",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-10T11:20:55.609357Z",
+      "opportunity_id": "360986",
+      "detail": "Deadline 2026-09-09",
+      "record": {
+        "opportunity_id": "360986",
+        "opportunity_number": "RFA-RM-27-001",
+        "title": "NIH Director’s Pioneer Award (DP1 Clinical Trial Optional)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-06-29",
+        "close_date": "2026-09-09",
+        "last_updated": "2026-06-29",
+        "version": "Synopsis 1",
+        "topic_areas": [],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 700000,
+        "award_ceiling": 700000,
+        "detail_page": "https://www.grants.gov/search-results-detail/360986",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-09"
+    },
+    {
+      "id": "a89982000e6cd78290ba",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-10T11:20:55.609357Z",
+      "opportunity_id": "363078",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363078",
+        "opportunity_number": "MUSCAT-PAS-2026-APS-01",
+        "title": "Muscat - Annual Program Statement (APS)- PD Small Grants Program",
+        "agency": "U.S. Mission to Oman",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-08",
+        "close_date": "2026-08-09",
+        "last_updated": "2026-07-22",
+        "version": "Synopsis 6",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Arts and culture",
+          "Biology and biotechnology",
+          "Community development",
+          "Cybersecurity",
+          "Data science",
+          "Education and workforce",
+          "Energy",
+          "Environmental science",
+          "Manufacturing",
+          "Space and aeronautics",
+          "Technology development"
+        ],
+        "disciplines": [],
+        "applicant_types": [
+          "Individuals",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement",
+          "Grant"
+        ],
+        "award_floor": 1000,
+        "award_ceiling": 100000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363078",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "9745c4005df3a4411350",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-10T11:20:55.609357Z",
+      "opportunity_id": "363179",
+      "detail": "Deadline 2026-09-09",
+      "record": {
+        "opportunity_id": "363179",
+        "opportunity_number": "NTIA-PWSCIF-26-01",
+        "title": "Public Wireless Supply Chain Innovation Fund Grant Program – Solutions for AI-Native RAN",
+        "agency": "National Telecommunications and Information Admini",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-14",
+        "close_date": "2026-09-09",
+        "last_updated": "2026-07-14",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Arts and culture",
+          "Environmental science",
+          "Manufacturing",
+          "Technology development"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/363179",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353846"
+      },
+      "deadline": "2026-09-09"
+    },
+    {
+      "id": "821cd898df4aeec48045",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-10T11:20:55.609357Z",
+      "opportunity_id": "363194",
+      "detail": "Deadline 2026-09-09",
+      "record": {
+        "opportunity_id": "363194",
+        "opportunity_number": "OFOP0003172",
+        "title": "Disrupting Transnational Criminal Organizations Through Advanced Forensic Capabilities in Morocco",
+        "agency": "Bureau of International Narcotics-Law Enforcement",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-15",
+        "close_date": "2026-09-09",
+        "last_updated": "2026-07-15",
+        "version": "Synopsis 1",
+        "topic_areas": [],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 1500000,
+        "award_ceiling": 2100000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363194",
+        "funding_opportunity_url": "https://mygrants.servicenowservices.com/mygrants?id=mygrants_form&table=x_g_usd4_o_grant_funding_opportunity&sys_id=c765365087b98f5020b862060cbb3513&view=Default",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353875"
+      },
+      "deadline": "2026-09-09"
+    },
+    {
+      "id": "41de2c6da7bd4f82be63",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-10T11:20:55.609357Z",
+      "opportunity_id": "363122",
+      "detail": "Deadline 2026-09-09",
+      "record": {
+        "opportunity_id": "363122",
+        "opportunity_number": "FTA-2026-012-TPM-ICAM",
+        "title": "FY 2026 Notice of Funding Opportunity: Innovative Coordinated Access and Mobility Pilot Program",
+        "agency": "DOT - Federal Transit Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-09",
+        "close_date": "2026-09-09",
+        "last_updated": "2026-07-10",
+        "version": "Synopsis 3",
+        "topic_areas": [
+          "Transportation"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "Federally recognized Native American tribal governments",
+          "Nonprofits with 501(c)(3) status",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/363122",
+        "funding_opportunity_url": "https://www.transit.dot.gov/notices-funding/fy-2026-notice-funding-opportunity-innovative-coordinated-access-and-mobility-pilot",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-09"
+    },
+    {
+      "id": "2c0ddea4e40334b44e2a",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-10T11:20:55.609357Z",
+      "opportunity_id": "362823",
+      "detail": "Deadline 2026-09-09",
+      "record": {
+        "opportunity_id": "362823",
+        "opportunity_number": "HRSA-27-099",
+        "title": "Fiscal Year 2027 Expanding Nutrition Services",
+        "agency": "Health Resources and Services Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-08",
+        "close_date": "2026-09-09",
+        "last_updated": "2026-07-13",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Agriculture and food",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 350000,
+        "award_ceiling": 350000,
+        "detail_page": "https://www.grants.gov/search-results-detail/362823",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353720"
+      },
+      "deadline": "2026-09-09"
+    },
+    {
+      "id": "2beaa71c45086bc42d80",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-10T11:20:55.609357Z",
+      "opportunity_id": "363086",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363086",
+        "opportunity_number": "PAS-DJI-FY26-AIWAP",
+        "title": "American Innovation and Workforce Advancement Program",
+        "agency": "U.S. Mission to Djibouti",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-20",
+        "close_date": "2026-08-09",
+        "last_updated": "2026-08-06",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Education and workforce",
+          "Technology development"
+        ],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "Individuals"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 5000,
+        "award_ceiling": 25000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363086",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "00eb6bc214cc8e7b75bd",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-10T11:20:55.609357Z",
+      "opportunity_id": "347026",
+      "detail": "Deadline 2026-09-09",
+      "record": {
+        "opportunity_id": "347026",
+        "opportunity_number": "23-569",
+        "title": "A Science of Science Approach to Analyzing and Innovating the Biomedical Research Enterprise",
+        "agency": "U.S. National Science Foundation",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2023-03-21",
+        "close_date": "2026-09-09",
+        "last_updated": "2026-02-25",
+        "version": "Synopsis 9",
+        "topic_areas": [
+          "Arts and culture",
+          "Biology and biotechnology",
+          "Education and workforce",
+          "Environmental science",
+          "Social and behavioral sciences",
+          "Technology development"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 100000,
+        "award_ceiling": 250000,
+        "detail_page": "https://www.grants.gov/search-results-detail/347026",
+        "funding_opportunity_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf23569",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-09"
+    },
     {
       "id": "e9d1a7b7ded08f39c5da",
       "type": "closing_soon",

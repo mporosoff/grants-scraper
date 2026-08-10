@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-08-09T10:53:21Z</updated>
+  <updated>2026-08-10T11:22:35Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -556,22 +556,6 @@
     <summary>National Institutes of Health — Closes 2026-10-09 — The National Institute of Allergy and Infectious Diseases (NIAID) will support its mission through the Cooperative Program for Modeling Clinical Transplantation. Advancements of new therapeutics and success in human solid organ transplantation will require innovative and clinically translatable in-vitro and in-vivo systems to model local and systemic immune responses. This program seeks applicatio…</summary>
   </entry>
   <entry>
-    <title>Muscat - Annual Program Statement (APS)- PD Small Grants Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363078"/>
-    <id>urn:funding-finder:grants-gov:363078</id>
-    <updated>2026-07-08T00:00:00Z</updated>
-    <author><name>U.S. Mission to Oman</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Community development"/>
-    <category term="Cybersecurity"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <summary>U.S. Mission to Oman — Closes 2026-08-09 — The Public Diplomacy Section of U.S. Embassy Muscat announces an open competition to support projects that advance U.S. foreign policy priorities in Oman while strengthening the long-standing partnership between the United States and the Sultanate of Oman. This Annual Program Statement outlines strategic funding priorities, eligibility criteria, and application guidelines for grants ranging from $…</summary>
-  </entry>
-  <entry>
     <title>Department of Interior Wildland Fire Service BLM-National Interagency Fire Center (NIFC) Joint Fire Science Program (JFSP)Fire Leaders And Managers, Emerging Scientists (FLAMES)</title>
     <link href="https://www.grants.gov/search-results-detail/363101"/>
     <id>urn:funding-finder:grants-gov:363101</id>
@@ -669,5 +653,16 @@
     <category term="Biology and biotechnology"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health — Closes 2026-10-30 — The Genomics Research to Elucidate the Genetics of Rare Diseases:innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. The purpose of this Notice of Funding Opportunity is to establish the GREGoR…</summary>
+  </entry>
+  <entry>
+    <title>GREGoRi Innovation Projects (U01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/359644"/>
+    <id>urn:funding-finder:grants-gov:359644</id>
+    <updated>2026-06-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health — Closes 2026-10-30 — The Genomics Research to Elucidate the Genetics of Rare Diseases:innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. This Notice of Funding Opportunity is intended to stimulate the development …</summary>
   </entry>
 </feed>
