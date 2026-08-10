@@ -24,6 +24,9 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         team_html = (REPOSITORY_ROOT / "team_match.html").read_text(
             encoding="utf-8"
         )
+        team_researchers_js = (
+            REPOSITORY_ROOT / "assets" / "team-researchers.js"
+        ).read_text(encoding="utf-8")
 
         main_image_url = (
             "https://mporosoff.github.io/grants-scraper/"
@@ -53,6 +56,15 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             team_html,
         )
         self.assertIn('name="robots" content="noindex, nofollow"', team_html)
+        self.assertIn('id="add-researcher"', team_html)
+        self.assertIn('id="external-researcher-form"', team_html)
+        self.assertIn('id="external-name"', team_html)
+        self.assertIn('id="external-keywords"', team_html)
+        self.assertIn('assets/team-researchers.js', team_html)
+        self.assertIn('assets/search-query.js', team_html)
+        self.assertIn('MAX_EXTERNAL = 4', team_researchers_js)
+        self.assertIn('funding-finder.external-researchers.v1', team_researchers_js)
+        self.assertIn('function buildMatches', team_researchers_js)
 
         for asset in (
             "assets/social/funding-finder-preview.jpg",

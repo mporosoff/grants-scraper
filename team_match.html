@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="An internal UR ChemE tool for finding funding opportunities that fit collaborative faculty teams." />
+<meta name="description" content="An internal UR ChemE tool for finding funding opportunities that fit department faculty and saved external collaborators." />
 <meta name="theme-color" content="#12263f" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="UR ChemE Faculty Pairing" />
@@ -55,6 +55,31 @@
   .pi-toggle.on{background:var(--blue-soft);border-color:var(--blue);color:var(--blue-dark);font-weight:600;}
   .pi-toggle.on .dot{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px #fff;}
   .pi-toggle[disabled]{opacity:.4;cursor:not-allowed;}
+  .pi-entry{display:inline-flex;align-items:center;gap:4px;}
+  .pi-toggle.external{border-style:dashed;background:#f2fbf7;}
+  .pi-toggle.external .dot{border-color:#5aa88a;background:#d7f2e7;}
+  .pi-toggle.external.on .dot{background:var(--success);border-color:var(--success);}
+  .pi-toggle.add-researcher{border-style:dashed;border-color:#8ab2e8;background:var(--blue-soft);color:var(--blue-dark);font-weight:700;}
+  .pi-toggle.add-researcher .dot{display:grid;place-items:center;border:0;background:var(--blue);color:#fff;font-size:.9rem;line-height:1;}
+  .pi-edit{display:grid;place-items:center;width:30px;height:30px;border:1px solid var(--line-strong);border-radius:50%;background:var(--surface);color:var(--blue-dark);font:inherit;cursor:pointer;}
+  .pi-edit:hover{border-color:var(--blue);background:var(--blue-soft);}
+  .pi-edit[disabled]{opacity:.4;cursor:not-allowed;}
+  .external-status{margin:9px 2px 0;color:var(--muted);font-size:.78rem;}
+  .external-status.error{color:#9b2735;}
+  .researcher-editor{margin:14px 0 2px;padding:16px;border:1px solid #bed2eb;border-radius:12px;background:#f7faff;}
+  .researcher-editor[hidden]{display:none;}
+  .researcher-editor h3{margin:0 0 3px;color:var(--navy);font-size:1rem;}
+  .researcher-editor > p{margin:0 0 13px;color:var(--muted);font-size:.8rem;}
+  .researcher-fields{display:grid;grid-template-columns:minmax(180px,.75fr) minmax(280px,1.6fr);gap:12px;}
+  .researcher-fields label{display:grid;gap:5px;color:var(--navy);font-size:.8rem;font-weight:700;}
+  .researcher-fields input,.researcher-fields textarea{width:100%;padding:9px 11px;border:1px solid var(--line-strong);border-radius:9px;background:#fff;color:var(--ink);font:inherit;font-weight:400;}
+  .researcher-fields textarea{resize:vertical;min-height:76px;}
+  .field-note{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:.73rem;font-weight:400;}
+  .researcher-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:13px;}
+  .researcher-actions button{border:1px solid var(--line-strong);border-radius:9px;padding:8px 13px;background:#fff;color:var(--ink);font:inherit;font-size:.82rem;font-weight:700;cursor:pointer;}
+  .researcher-actions .save-researcher{border-color:var(--blue);background:var(--blue);color:#fff;}
+  .researcher-actions .delete-researcher{margin-left:auto;border-color:#e0aab1;color:#9b2735;background:#fff6f7;}
+  .editor-message{min-height:1.2em;margin:8px 0 0;color:#9b2735;font-size:.78rem;}
   .toolrow{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:14px;}
   .toolrow .search{flex:1;min-width:220px;}
   .toolrow input[type=search]{width:100%;padding:10px 13px;font:inherit;color:var(--ink);background:var(--surface-alt);border:1px solid var(--line-strong);border-radius:10px;}
@@ -92,25 +117,53 @@
   .empty code{background:var(--surface-alt);padding:2px 6px;border-radius:6px;}
   footer.note{margin-top:26px;color:var(--muted);font-size:.8rem;text-align:center;}
   .hide{display:none !important;}
+  @media (max-width:700px){.researcher-fields{grid-template-columns:1fr}.researcher-actions .delete-researcher{margin-left:0}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="page">
     <span class="internal-tag">Internal · UR ChemE Department</span>
-    <h1>ChemE faculty ↔ funding — collaboration finder</h1>
-    <p>Pick 2–4 faculty. The tool finds funding calls that fit at least two of them — matching on program topics, not just the wording of the notice, so broad agency announcements and omnibus solicitations (DOE Office of Science, NASA ROSES, DoD/ONR BAAs) surface too, clearly flagged so fit can be verified.</p>
+    <h1>Research team ↔ funding — collaboration finder</h1>
+    <p>Pick 2–4 department faculty or saved external collaborators. The tool finds funding calls that fit at least two people — matching on program topics and research keywords, while clearly flagging broader solicitations whose fit should be verified.</p>
     <p class="meta-line" id="meta-line">Loading…</p>
   </header>
 
   <div class="panel">
     <h2>Your team</h2>
-    <p class="hint" id="team-hint">Pick 2–4 faculty to see funding calls that fit the group.</p>
-    <div class="pi-grid" id="pi-grid"></div>
+    <p class="hint" id="team-hint">Pick 2–4 researchers to see funding calls that fit the group.</p>
+    <div class="pi-grid" id="pi-grid">
+      <button class="pi-toggle add-researcher" id="add-researcher" type="button" aria-expanded="false" aria-controls="external-researcher-form">
+        <span class="dot" aria-hidden="true">+</span>
+        Add researcher
+      </button>
+    </div>
+    <p class="external-status" id="external-status" aria-live="polite">External researchers are saved only in this browser.</p>
+    <form class="researcher-editor" id="external-researcher-form" hidden>
+      <h3 id="external-editor-heading">Add an external researcher</h3>
+      <p>Add a name and 3–8 specific research keywords; about five usually gives the best balance.</p>
+      <div class="researcher-fields">
+        <label for="external-name">
+          Researcher name
+          <input id="external-name" type="text" maxlength="80" autocomplete="off" placeholder="Example: Ada Lovelace" required />
+        </label>
+        <label for="external-keywords">
+          Research keywords
+          <textarea id="external-keywords" maxlength="520" placeholder="Example: carbon capture, heterogeneous catalysis, membrane separations, CO2 conversion, electrochemistry" required></textarea>
+          <span class="field-note"><span>Separate keywords with commas or new lines.</span><span id="external-keyword-count">0 keywords</span></span>
+        </label>
+      </div>
+      <div class="researcher-actions">
+        <button class="save-researcher" type="submit">Save researcher</button>
+        <button id="cancel-external" type="button">Cancel</button>
+        <button class="delete-researcher" id="delete-external" type="button" hidden>Delete researcher</button>
+      </div>
+      <p class="editor-message" id="external-editor-message" aria-live="polite"></p>
+    </form>
     <div class="toolrow">
       <div class="search"><input id="filter" type="search" placeholder="Filter results by title, agency, or keyword…" autocomplete="off" /></div>
       <div class="deptbar">
-        <label><input type="checkbox" id="dept-toggle" /> Department-wide overview (all faculty)</label>
+        <label><input type="checkbox" id="dept-toggle" /> Department-wide overview (department faculty only)</label>
       </div>
     </div>
   </div>
@@ -120,19 +173,25 @@
   <div id="view"></div>
 
   <footer class="note">
-    Generated by <code>scripts/faculty_match.py</code> from OpenAlex publication profiles. Not linked from the public finder and marked no-index. “Specific” = a key research phrase or a niche program topic matched; “broad” = an open solicitation whose program areas overlap the team. Re-run the profiles + match steps to refresh; edit <code>FACULTY_KEYTERMS</code> / <code>DOMAIN_LEXICON</code> in the script to hand-tune.
+    Department profiles are generated by <code>scripts/faculty_match.py</code> from OpenAlex publication profiles. External researchers and their keywords are stored only in this browser. Not linked from the public finder and marked no-index. “Specific” = a key research phrase or niche program topic matched; “broad” = an open solicitation whose program areas overlap the team.
   </footer>
 </div>
 
 <script src="data/opportunities.js"></script>
 <script src="data/faculty_matches.js"></script>
+<script src="assets/search-query.js?v=release-2026-08-10-v10"></script>
+<script src="assets/team-researchers.js?v=team-collaboration-v1"></script>
 <script>
 (function () {
   "use strict";
   var $ = function (id) { return document.getElementById(id); };
   var M = globalThis.FACULTY_MATCHES || null;
-  var catalog = (globalThis.GRANT_CATALOG && globalThis.GRANT_CATALOG.opportunities) || [];
+  var catalogData = globalThis.GRANT_CATALOG || {};
+  var catalog = catalogData.opportunities || [];
+  var TEAM_API = globalThis.FUNDING_TEAM_RESEARCHERS || null;
+  var SEARCH_API = globalThis.FUNDING_SEARCH_QUERY || null;
   var MAX = 4;
+  var MAX_EXTERNAL = (TEAM_API && TEAM_API.MAX_EXTERNAL) || 4;
 
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
@@ -156,6 +215,31 @@
   var groups = (M && M.multi_pi_suggestions) || [];
   var names = Object.keys(faculty).sort();
   var selected = [];
+  var externalResearchers = [];
+  var externalMatches = {};
+  var externalStorage = null;
+  var editingExternalId = "";
+  var storageAvailable = true;
+
+  function externalKey(id) { return "external:" + id; }
+  function isExternalKey(key) { return String(key || "").indexOf("external:") === 0; }
+  function externalId(key) { return String(key || "").slice(9); }
+  function externalProfile(key) {
+    var id = isExternalKey(key) ? externalId(key) : String(key || "");
+    return externalResearchers.find(function (profile) { return profile.id === id; }) || null;
+  }
+  function memberName(key) {
+    var profile = externalProfile(key);
+    return profile ? profile.name : key;
+  }
+  function memberTerms(key) {
+    var profile = externalProfile(key);
+    return profile ? profile.keywords : ((faculty[key] && faculty[key].key_terms) || []);
+  }
+  function memberMatches(key) {
+    var profile = externalProfile(key);
+    return profile ? (externalMatches[profile.id] || []) : (piMatches[key] || []);
+  }
 
   function reasonText(fit) {
     var parts = (fit.terms || []).slice(0);
@@ -183,6 +267,7 @@
       var cls = f.tier === "strong" ? "pi strong" : "pi broadfit";
       var why = reasonText(f);
       return '<div class="' + cls + '"><span class="name">' + esc(last(f.name)) + "</span>" +
+        (f.external ? '<span class="badge specific">external</span>' : "") +
         (why ? '<div class="why">' + esc(why) + "</div>" : "") + "</div>";
     }).join("") + "</div>";
   }
@@ -190,13 +275,20 @@
   // ---- team mode -------------------------------------------------------- //
   function buildShared() {
     var map = {};
-    selected.forEach(function (name) {
-      (piMatches[name] || []).forEach(function (m) {
+    selected.forEach(function (member) {
+      memberMatches(member).forEach(function (m) {
         var e = map[m.id] || (map[m.id] = {
           d: { id: m.id, title: m.title, agency: m.agency, url: m.url, deadline: m.deadline },
           fits: []
         });
-        e.fits.push({ name: name, tier: m.tier, terms: m.terms, shared_topics: m.shared_topics, score: m.score });
+        e.fits.push({
+          name: memberName(member),
+          external: isExternalKey(member),
+          tier: m.tier,
+          terms: m.terms,
+          shared_topics: m.shared_topics,
+          score: m.score
+        });
       });
     });
     return Object.keys(map).map(function (k) {
@@ -217,15 +309,16 @@
     return hay.indexOf(q) !== -1;
   }
   function renderTeam(q) {
-    $("selected-terms").innerHTML = selected.map(function (n) {
-      var kt = (faculty[n] && faculty[n].key_terms) || [];
-      return '<div class="st-card"><span class="who">' + esc(last(n)) + "</span>" +
+    $("selected-terms").innerHTML = selected.map(function (member) {
+      var kt = memberTerms(member);
+      return '<div class="st-card"><span class="who">' + esc(last(memberName(member))) + "</span>" +
+        (isExternalKey(member) ? ' <span class="badge specific">external</span>' : "") +
         (kt.length ? '<div class="terms">' + esc(kt.slice(0, 6).join(" · ")) + "</div>" : "") + "</div>";
     }).join("");
 
     if (selected.length < 2) {
       $("count").textContent = "";
-      $("view").innerHTML = '<div class="empty">Pick at least two faculty above to see the calls they could pursue together.</div>';
+      $("view").innerHTML = '<div class="empty">Pick at least two researchers above to see the calls they could pursue together.</div>';
       return;
     }
     var all = buildShared().filter(function (e) { return matchesQuery(e, q); });
@@ -234,7 +327,7 @@
     primary.sort(function (a, b) { return b.strongN - a.strongN || b.totalN - a.totalN || b.sumScore - a.sumScore; });
     broad.sort(function (a, b) { return b.totalN - a.totalN || b.sumScore - a.sumScore; });
 
-    var picked = selected.map(last).join(" + ");
+    var picked = selected.map(function (member) { return last(memberName(member)); }).join(" + ");
     $("count").textContent = all.length + " call" + (all.length === 1 ? "" : "s") + " fit 2+ of {" + picked + "}" +
       (q ? " (filtered)" : "") + " · " + primary.length + " specific, " + broad.length + " broader";
 
@@ -252,7 +345,7 @@
         }).join("");
     }
     if (!html) {
-      html = '<div class="empty">No calls fit 2 or more of the selected faculty' +
+      html = '<div class="empty">No calls fit 2 or more of the selected researchers' +
         (q ? " for that filter." : ". Try a different combination.") + "</div>";
     }
     $("view").innerHTML = html;
@@ -300,26 +393,229 @@
     if ($("dept-toggle").checked) renderDept(q); else renderTeam(q);
   }
 
+  function safeStorage() {
+    try { return globalThis.localStorage; }
+    catch (_error) { return null; }
+  }
+
+  function updateMetaLine() {
+    var externalLabel = externalResearchers.length
+      ? " · " + externalResearchers.length + " external researcher" + (externalResearchers.length === 1 ? "" : "s")
+      : "";
+    $("meta-line").textContent = names.length + " faculty profiles" + externalLabel + " · " +
+      groups.length + " department-wide groups · catalog of " + catalog.length + " opportunities";
+  }
+
+  function renderExternalStatus(message, isError) {
+    var count = externalResearchers.length;
+    var base = count
+      ? count + " of " + MAX_EXTERNAL + " external researcher" + (count === 1 ? "" : "s") + " saved on this device."
+      : "External researchers are saved only in this browser (up to " + MAX_EXTERNAL + ").";
+    if (!storageAvailable) base = "External researchers are available in this tab only; browser storage is unavailable.";
+    $("external-status").textContent = message ? base + " " + message : base;
+    $("external-status").classList.toggle("error", Boolean(isError));
+  }
+
+  function rebuildExternalMatches() {
+    externalMatches = {};
+    if (!TEAM_API || !SEARCH_API) return;
+    externalResearchers.forEach(function (profile) {
+      externalMatches[profile.id] = TEAM_API.buildMatches(
+        profile,
+        catalogData,
+        SEARCH_API,
+        (M && M.niche_topics) || []
+      );
+    });
+  }
+
+  function renderExternalButtons() {
+    var grid = $("pi-grid");
+    grid.querySelectorAll("[data-external-entry]").forEach(function (entry) { entry.remove(); });
+    var addButton = $("add-researcher");
+    externalResearchers.forEach(function (profile) {
+      var member = externalKey(profile.id);
+      var entry = document.createElement("span");
+      entry.className = "pi-entry";
+      entry.dataset.externalEntry = profile.id;
+
+      var toggleButton = document.createElement("button");
+      toggleButton.type = "button";
+      toggleButton.className = "pi-toggle external";
+      toggleButton.id = "t_" + btnId(member);
+      toggleButton.innerHTML = '<span class="dot" aria-hidden="true"></span>' + esc(profile.name);
+      toggleButton.addEventListener("click", function () { toggle(member); });
+
+      var editButton = document.createElement("button");
+      editButton.type = "button";
+      editButton.className = "pi-edit";
+      editButton.setAttribute("aria-label", "Edit " + profile.name);
+      editButton.title = "Edit " + profile.name;
+      editButton.innerHTML = "&#9998;";
+      editButton.addEventListener("click", function () { openExternalEditor(profile.id); });
+
+      entry.appendChild(toggleButton);
+      entry.appendChild(editButton);
+      grid.insertBefore(entry, addButton);
+    });
+  }
+
+  function keywordInput() {
+    return TEAM_API ? TEAM_API.parseKeywords($("external-keywords").value, 50) : [];
+  }
+
+  function updateKeywordCount() {
+    var count = keywordInput().length;
+    $("external-keyword-count").textContent = count + " keyword" + (count === 1 ? "" : "s");
+  }
+
+  function closeExternalEditor() {
+    editingExternalId = "";
+    $("external-researcher-form").hidden = true;
+    $("external-researcher-form").reset();
+    $("external-editor-message").textContent = "";
+    $("delete-external").hidden = true;
+    $("add-researcher").setAttribute("aria-expanded", "false");
+    updateKeywordCount();
+  }
+
+  function openExternalEditor(id) {
+    if (!TEAM_API) {
+      renderExternalStatus("The external-researcher helper did not load. Refresh the page and try again.", true);
+      return;
+    }
+    var profile = id ? externalProfile(id) : null;
+    if (!profile && externalResearchers.length >= MAX_EXTERNAL) {
+      renderExternalStatus("Delete or edit a saved researcher before adding another.", true);
+      return;
+    }
+    editingExternalId = profile ? profile.id : "";
+    $("external-editor-heading").textContent = profile ? "Edit external researcher" : "Add an external researcher";
+    $("external-name").value = profile ? profile.name : "";
+    $("external-keywords").value = profile ? profile.keywords.join(", ") : "";
+    $("delete-external").hidden = !profile;
+    $("external-editor-message").textContent = "";
+    $("external-researcher-form").hidden = false;
+    $("add-researcher").setAttribute("aria-expanded", "true");
+    updateKeywordCount();
+    $("external-name").focus();
+  }
+
+  function persistExternal(nextProfiles) {
+    var result = TEAM_API.save(externalStorage, nextProfiles);
+    externalResearchers = result.profiles;
+    storageAvailable = result.saved;
+    rebuildExternalMatches();
+    return result;
+  }
+
+  function saveExternal(event) {
+    event.preventDefault();
+    var name = $("external-name").value.replace(/\s+/g, " ").trim();
+    var keywords = keywordInput();
+    if (name.length < 2) {
+      $("external-editor-message").textContent = "Enter the researcher's name.";
+      $("external-name").focus();
+      return;
+    }
+    if (keywords.length < TEAM_API.MIN_KEYWORDS || keywords.length > TEAM_API.MAX_KEYWORDS) {
+      $("external-editor-message").textContent = "Add 3–8 distinct research keywords; about five works best.";
+      $("external-keywords").focus();
+      return;
+    }
+    var duplicate = externalResearchers.some(function (profile) {
+      return profile.id !== editingExternalId && profile.name.toLowerCase() === name.toLowerCase();
+    });
+    if (duplicate) {
+      $("external-editor-message").textContent = "A saved external researcher already uses that name.";
+      $("external-name").focus();
+      return;
+    }
+
+    var next = externalResearchers.slice(0);
+    var savedId = editingExternalId;
+    if (editingExternalId) {
+      next = next.map(function (profile) {
+        return profile.id === editingExternalId
+          ? { id: profile.id, name: name, keywords: keywords }
+          : profile;
+      });
+    } else {
+      if (next.length >= MAX_EXTERNAL) {
+        $("external-editor-message").textContent = "You can save up to four external researchers.";
+        return;
+      }
+      savedId = TEAM_API.createId(name, next);
+      next.push({ id: savedId, name: name, keywords: keywords });
+    }
+
+    var wasEditing = Boolean(editingExternalId);
+    var result = persistExternal(next);
+    var autoSelected = !wasEditing && selected.length < MAX;
+    if (autoSelected) selected.push(externalKey(savedId));
+    closeExternalEditor();
+    renderExternalButtons();
+    updateMetaLine();
+    updateToggles();
+    refresh();
+    var successMessage = wasEditing
+      ? name + " was updated."
+      : name + (autoSelected ? " was saved and selected." : " was saved. Select them when you are ready.");
+    if (!result.saved) {
+      successMessage = wasEditing
+        ? name + " was updated for this tab."
+        : name + (autoSelected ? " was added to this tab and selected." : " was added to this tab.");
+    }
+    renderExternalStatus(
+      successMessage,
+      !result.saved
+    );
+  }
+
+  function deleteExternal() {
+    var profile = externalProfile(editingExternalId);
+    if (!profile || !globalThis.confirm("Delete " + profile.name + " from this browser?")) return;
+    var key = externalKey(profile.id);
+    var result = persistExternal(externalResearchers.filter(function (item) { return item.id !== profile.id; }));
+    selected = selected.filter(function (member) { return member !== key; });
+    closeExternalEditor();
+    renderExternalButtons();
+    updateMetaLine();
+    updateToggles();
+    refresh();
+    renderExternalStatus(
+      profile.name + (result.saved ? " was removed." : " was removed for this tab."),
+      !result.saved
+    );
+  }
+
   function updateToggles() {
     var atMax = selected.length >= MAX;
-    names.forEach(function (n) {
-      var btn = $("t_" + btnId(n));
-      var on = selected.indexOf(n) !== -1;
+    var members = names.concat(externalResearchers.map(function (profile) { return externalKey(profile.id); }));
+    members.forEach(function (member) {
+      var btn = $("t_" + btnId(member));
+      if (!btn) return;
+      var on = selected.indexOf(member) !== -1;
       btn.classList.toggle("on", on);
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
       btn.disabled = !on && (atMax || $("dept-toggle").checked);
     });
+    $("add-researcher").disabled = $("dept-toggle").checked || externalResearchers.length >= MAX_EXTERNAL;
+    $("add-researcher").title = externalResearchers.length >= MAX_EXTERNAL
+      ? "Four external researchers are already saved"
+      : "Add and save an external researcher";
     $("team-hint").textContent = $("dept-toggle").checked
-      ? "Showing every pair/group of faculty across the department. Uncheck to pick a specific team."
+      ? "Showing every pair/group of department faculty. Uncheck to build a specific team."
       : (selected.length < 2
-          ? "Pick 2–4 faculty to see funding calls that fit the group."
-          : "Showing calls that fit 2+ of the " + selected.length + " selected faculty. Pick up to " + MAX + ".");
+          ? "Pick 2–4 researchers, including saved external collaborators, to see shared funding calls."
+          : "Showing calls that fit 2+ of the " + selected.length + " selected researchers. Pick up to " + MAX + ".");
   }
   function btnId(n) { return n.replace(/[^a-z0-9]/gi, ""); }
 
-  function toggle(n) {
-    var i = selected.indexOf(n);
+  function toggle(member) {
+    var i = selected.indexOf(member);
     if (i !== -1) selected.splice(i, 1);
-    else if (selected.length < MAX) selected.push(n);
+    else if (selected.length < MAX) selected.push(member);
     updateToggles();
     refresh();
   }
@@ -331,10 +627,20 @@
         "Run <code>python -m scripts.faculty_match match</code> and commit the generated file.</div>";
       return;
     }
-    $("meta-line").textContent = names.length + " faculty profiles · " +
-      groups.length + " department-wide groups · catalog of " + catalog.length + " opportunities";
+    if (!TEAM_API || !SEARCH_API) {
+      renderExternalStatus("External researchers are unavailable because a helper did not load.", true);
+    } else {
+      externalStorage = safeStorage();
+      var loaded = TEAM_API.load(externalStorage);
+      externalResearchers = loaded.profiles;
+      storageAvailable = loaded.available;
+      rebuildExternalMatches();
+      renderExternalStatus(loaded.error, Boolean(loaded.error));
+    }
+    updateMetaLine();
 
     var grid = $("pi-grid");
+    var addButton = $("add-researcher");
     names.forEach(function (n) {
       var btn = document.createElement("button");
       btn.type = "button";
@@ -342,11 +648,17 @@
       btn.id = "t_" + btnId(n);
       btn.innerHTML = '<span class="dot"></span>' + esc(n);
       btn.addEventListener("click", function () { toggle(n); });
-      grid.appendChild(btn);
+      grid.insertBefore(btn, addButton);
     });
+    renderExternalButtons();
 
     $("filter").addEventListener("input", refresh);
     $("dept-toggle").addEventListener("change", function () { updateToggles(); refresh(); });
+    $("add-researcher").addEventListener("click", function () { openExternalEditor(""); });
+    $("cancel-external").addEventListener("click", closeExternalEditor);
+    $("delete-external").addEventListener("click", deleteExternal);
+    $("external-researcher-form").addEventListener("submit", saveExternal);
+    $("external-keywords").addEventListener("input", updateKeywordCount);
     updateToggles();
     refresh();
   }
