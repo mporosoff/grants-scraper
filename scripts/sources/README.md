@@ -100,6 +100,8 @@ against generated asset" step still validates the result.
 | `eere-exchange` | Enabled | Server-rendered DOE EERE Exchange NOFO list using the same verified parser and source-health gates. |
 | `nasa-nspires` | Disabled shell | The public entry point is session/POST-gated; no stable list route is confirmed. |
 | `ur-infoready` | Disabled shell | The earlier undocumented endpoint currently returns HTTP 500. No embedded credential or unstable request ships; the fixture parser remains for a future permissioned route. |
+| `vpr-email` | Enabled | Reads the private forwarding mailbox over read-only IMAP. VPR and Cindy messages are classified and counted separately; both streams are required, and a format regression preserves the last good snapshot. |
+| `jhu-fellowships` | Enabled | Reads JHU's graduate, postdoctoral, and early-career workbooks. Retries and official short-link fallbacks handle intermittent blocking; partial or unexpectedly small refreshes are rejected. |
 
 ## Notes
 

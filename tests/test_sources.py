@@ -376,6 +376,22 @@ class LifecycleTests(unittest.TestCase):
             cache["sources"]["nih"]["records"][0]["opportunity_id"], "demo:NEW")
         self.assertEqual(summaries[0]["status"], "refreshed")
 
+    def test_successful_refresh_persists_safe_adapter_diagnostics(self):
+        fresh = [an_external_record(
+            external_id="NEW", url="https://x.org/new", close_date="2026-12-15")]
+        result = self._ok("mail", fresh)
+        result.diagnostics = {
+            "streams": {
+                "vpr": {"accepted_messages": 1, "parsed_records": 2},
+                "cindy": {"accepted_messages": 1, "parsed_records": 4},
+            }
+        }
+        _, cache, summaries = resolve_live_records(
+            [result], {"schema_version": 1, "sources": {}}, self.AS_OF)
+        self.assertEqual(
+            cache["sources"]["mail"]["diagnostics"], result.diagnostics)
+        self.assertEqual(summaries[0]["diagnostics"], result.diagnostics)
+
     def test_successful_refresh_preserves_first_seen_date(self):
         cache = self._cache_with("nih", "KEEP")
         cache["sources"]["nih"]["fetched_at"] = "2026-07-20T12:00:00Z"

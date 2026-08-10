@@ -36,6 +36,7 @@ class AdapterResult:
     record_count: int = 0
     error: Optional[str] = None
     records: list = field(default_factory=list)
+    diagnostics: dict = field(default_factory=dict)
     min_records: Optional[int] = None
     max_records: Optional[int] = None
 
@@ -65,6 +66,7 @@ def collect(adapters: Optional[list[SourceAdapter]] = None,
                     source_type=adapter.source_type,
                     ok=False,
                     error=f"{type(exc).__name__}: {exc}",
+                    diagnostics=dict(getattr(adapter, "diagnostics", {}) or {}),
                     min_records=adapter.min_records,
                     max_records=adapter.max_records,
                 )
@@ -78,6 +80,7 @@ def collect(adapters: Optional[list[SourceAdapter]] = None,
                 ok=True,
                 record_count=len(records),
                 records=records,
+                diagnostics=dict(getattr(adapter, "diagnostics", {}) or {}),
                 min_records=adapter.min_records,
                 max_records=adapter.max_records,
             )

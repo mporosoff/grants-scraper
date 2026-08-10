@@ -83,6 +83,7 @@ jobs:
           VPR_IMAP_PASS: ${{ secrets.VPR_IMAP_PASS }}
           VPR_SENDER: VPR_Funding_Opps@lists.rochester.edu
           VPR_LOOKBACK_DAYS: "45"
+          VPR_REQUIRED_STREAMS: "vpr,cindy"
         run: >-
           python -m scripts.sources merge
           --catalog data/opportunities.js

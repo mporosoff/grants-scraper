@@ -150,6 +150,7 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                     "source_type": result.source_type,
                     "fetched_at": iso_utc(utc_now()),
                     "record_count": len(refreshed_records),
+                    "diagnostics": result.diagnostics,
                     "records": refreshed_records,
                 }
                 published = refreshed_records
@@ -161,6 +162,7 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                 "slug": slug, "source": result.display_name, "status": status,
                 "fetched": len(result.records), "dropped_invalid": len(dropped),
                 "published": len(published), "healthy": healthy, "error": None,
+                "diagnostics": result.diagnostics,
             })
         else:
             published = _cached_publishable(sources, slug, as_of)
@@ -168,6 +170,7 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                 "slug": slug, "source": result.display_name,
                 "status": "failed_kept_last_good", "fetched": 0, "dropped_invalid": 0,
                 "published": len(published), "healthy": False, "error": result.error,
+                "diagnostics": result.diagnostics,
             })
         live.extend(published)
 
@@ -252,7 +255,8 @@ def rebuild_catalog(catalog: dict, combined: list[dict],
         "lifecycle": lifecycle or [],
         "adapters": [
             {"slug": r.slug, "source": r.display_name, "source_type": r.source_type,
-             "ok": r.ok, "record_count": r.record_count, "error": r.error}
+             "ok": r.ok, "record_count": r.record_count, "error": r.error,
+             "diagnostics": r.diagnostics}
             for r in results
         ],
     }

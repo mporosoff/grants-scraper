@@ -324,6 +324,7 @@ class SourceAdapter:
             self.slug = _slugify(self.display_name or self.__class__.__name__)
         if not self.display_name:
             self.display_name = self.slug
+        self.diagnostics: dict = {}
 
     # --- implement these two in a subclass -------------------------------
     def fetch(self) -> Any:

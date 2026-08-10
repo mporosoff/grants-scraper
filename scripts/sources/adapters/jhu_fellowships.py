@@ -19,9 +19,10 @@ Avoiding duplicates / mess:
   foundation/private awards we don't already have.
 - The merge layer still lets Grants.gov win and drops same-id repeats.
 
-Disabled until verified end-to-end in the pipeline (network fetch can't run in
-the dev sandbox). The row parser (:func:`parse_worksheet`) is unit-tested
-offline against the downloaded sample files.
+The production adapter retries transient failures, falls back to the official
+short links published by JHU, and accepts a refresh only when all three audience
+workbooks parse above conservative row-count bounds. Otherwise the source
+lifecycle retains its last-known-good snapshot.
 """
 
 from __future__ import annotations
@@ -30,6 +31,7 @@ import datetime as _dt
 import hashlib
 import io
 import re
+import time
 import urllib.request
 from typing import Iterable, Optional
 
@@ -40,14 +42,20 @@ from ..registry import register
 SHEETS = [
     {"audience": "grad",
      "page": "https://research.jhu.edu/rdt/funding-opportunities/graduate/",
+     "fallback_sheet": "https://bit.ly/GradFundingOpps7126",
      "applicant_types": ["Graduate students"], "drop_federal": False},
     {"audience": "postdoc",
      "page": "https://research.jhu.edu/rdt/funding-opportunities/postdoctoral/",
+     "fallback_sheet": "https://bit.ly/PostdocFundingOpps7126",
      "applicant_types": ["Postdoctoral researchers"], "drop_federal": False},
     {"audience": "faculty",
      "page": "https://research.jhu.edu/rdt/funding-opportunities/early-career/",
+     "fallback_sheet": "https://bit.ly/ECFopps7126",
      "applicant_types": ["Early-career faculty"], "drop_federal": True},
 ]
+
+MIN_ROWS_PER_AUDIENCE = 50
+FETCH_ATTEMPTS = 3
 
 _FEDERAL_RE = re.compile(
     r"national science foundation|\bnsf\b|national institutes of health|\bnih\b"
@@ -222,13 +230,22 @@ class JHUFellowshipsAdapter(SourceAdapter):
     display_name = "Johns Hopkins RDT fellowships list"
     source_type = "Fellowship"
     enabled = True           # parser verified on JHU sample files; live fetch runs in pipeline
-    min_records = 0          # CI runner may be blocked from research.jhu.edu; 0 != degraded
+    min_records = 150
     max_records = 1500
 
     def fetch(self):
-        """Scrape each JHU sub-page for its current .xlsx link and download it."""
+        """Download every JHU workbook or fail the source as an incomplete run.
+
+        JHU intermittently rejects automated page requests.  The page remains
+        the preferred source of the current workbook URL, while the official
+        bit.ly link printed on that page is a resilient fallback.  A partial
+        result must never replace the last-known-good three-audience snapshot.
+        """
         results = []
+        failures = []
         for cfg in SHEETS:
+            candidates = []
+            page_error = None
             try:
                 html = self._get(cfg["page"]).decode("utf-8", errors="replace")
                 links = _LINK_RE.findall(html)
@@ -237,30 +254,91 @@ class JHUFellowshipsAdapter(SourceAdapter):
                      if "bit.ly" in u.lower() and "opp" in u.lower()), None)
                 candidate = candidate or next(
                     (u for u in links if u.lower().endswith(".xlsx")), None)
-                if not candidate:
-                    continue
-                data = self._get(candidate)
-                results.append({**cfg, "data": data})
-            except Exception:
-                continue  # per-sheet isolation; registry also isolates the adapter
+                if candidate:
+                    candidates.append(candidate)
+            except Exception as exc:  # page fallback is intentional
+                page_error = f"page: {type(exc).__name__}: {exc}"
+            fallback = cfg.get("fallback_sheet")
+            if fallback and fallback not in candidates:
+                candidates.append(fallback)
+
+            sheet_errors = []
+            for candidate in candidates:
+                try:
+                    data = self._get(candidate)
+                    if not data.startswith(b"PK"):
+                        raise ValueError("response is not an XLSX/ZIP workbook")
+                    results.append({**cfg, "data": data, "sheet_url": candidate})
+                    break
+                except Exception as exc:
+                    sheet_errors.append(
+                        f"{candidate}: {type(exc).__name__}: {exc}"
+                    )
+            else:
+                details = [page_error, *sheet_errors]
+                failures.append(
+                    f"{cfg['audience']} ({'; '.join(item for item in details if item)})"
+                )
+        self.diagnostics = {
+            "expected_audiences": [cfg["audience"] for cfg in SHEETS],
+            "downloaded_audiences": [cfg["audience"] for cfg in results],
+            "download_failures": failures,
+        }
+        if failures or len(results) != len(SHEETS):
+            raise RuntimeError("Incomplete JHU workbook refresh: " + " | ".join(failures))
         return results
 
     @staticmethod
     def _get(url: str) -> bytes:
-        req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-        with urllib.request.urlopen(req, timeout=60) as resp:
-            return resp.read(16 * 1024 * 1024)  # 16 MB cap
+        last_error = None
+        for attempt in range(FETCH_ATTEMPTS):
+            try:
+                req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+                with urllib.request.urlopen(req, timeout=60) as resp:
+                    return resp.read(16 * 1024 * 1024)  # 16 MB cap
+            except Exception as exc:
+                last_error = exc
+                if attempt + 1 < FETCH_ATTEMPTS:
+                    time.sleep(attempt + 1)
+        raise RuntimeError(
+            f"request failed after {FETCH_ATTEMPTS} attempts: {last_error}"
+        ) from last_error
 
     def parse(self, payload) -> Iterable[CanonicalOpportunity]:
         import openpyxl
         seen: set[str] = set()
+        parsed = []
+        audience_counts = {}
         for cfg in payload or []:
             wb = openpyxl.load_workbook(io.BytesIO(cfg["data"]), data_only=True)
-            for item in parse_worksheet(wb.active, cfg):
+            items = parse_worksheet(wb.active, cfg)
+            audience_counts[cfg["audience"]] = len(items)
+            if len(items) < MIN_ROWS_PER_AUDIENCE:
+                self.diagnostics = {
+                    **getattr(self, "diagnostics", {}),
+                    "parsed_rows_by_audience": audience_counts,
+                }
+                raise ValueError(
+                    f"JHU {cfg['audience']} workbook yielded only {len(items)} rows; "
+                    f"expected at least {MIN_ROWS_PER_AUDIENCE}."
+                )
+            for item in items:
                 if item["external_id"] in seen:
                     continue
                 seen.add(item["external_id"])
-                yield self._to_canonical(item)
+                parsed.append(self._to_canonical(item))
+        expected = {cfg["audience"] for cfg in SHEETS}
+        if set(audience_counts) != expected:
+            raise ValueError(
+                "JHU parse did not receive every audience: "
+                + ", ".join(sorted(expected - set(audience_counts)))
+            )
+        self.diagnostics = {
+            **getattr(self, "diagnostics", {}),
+            "parsed_rows_by_audience": audience_counts,
+            "parsed_records": len(parsed),
+        }
+        return parsed
 
     def parse_file(self, path: str, cfg: dict) -> list[CanonicalOpportunity]:
         """Offline test helper: parse a local .xlsx against a sheet config."""

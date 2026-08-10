@@ -16,7 +16,9 @@ Flow
 
 Credentials come from environment variables (GitHub Actions secrets), never the
 repo: VPR_IMAP_HOST/USER/PASS/FOLDER, VPR_SENDERS, VPR_SUBJECT_SENDERS,
-VPR_SUBJECT_KEYWORD, VPR_LOOKBACK_DAYS.
+VPR_SUBJECT_KEYWORD, VPR_LOOKBACK_DAYS, and VPR_REQUIRED_STREAMS. The default
+required streams are ``vpr,cindy``; a refresh falls back to the last good
+snapshot if either stream disappears or accepted messages stop parsing.
 
 Parsing the real digests
 ------------------------
@@ -54,6 +56,11 @@ DEFAULT_SENDERS = [
     "VPR_Funding_Opps@lists.rochester.edu",
     "cindy.gary@rochester.edu",  # subject usually "Updates, Events, Funding opportunities"
 ]
+STREAM_BY_SENDER = {
+    "vpr_funding_opps@lists.rochester.edu": "vpr",
+    "cindy.gary@rochester.edu": "cindy",
+}
+DEFAULT_REQUIRED_STREAMS = ("vpr", "cindy")
 # Senders who also send unrelated mail: only accept when the subject matches the
 # funding keyword. (The VPR listserv is a pure funding digest, so it's exempt.)
 SUBJECT_REQUIRED_SENDERS = ["cindy.gary@rochester.edu"]
@@ -618,7 +625,7 @@ class VPREmailAdapter(SourceAdapter):
     display_name = "UR VPR funding digest (limited submissions & foundations)"
     source_type = "Internal"
     enabled = True           # validated against real Cindy (digest) + VPR (single) emails.
-    min_records = 0          # 0 is valid (a quiet mailbox week); don't flag degraded.
+    min_records = 1
     max_records = 500
 
     def fetch(self):
@@ -637,25 +644,43 @@ class VPREmailAdapter(SourceAdapter):
         senders_env = os.environ.get("VPR_SENDERS") or os.environ.get("VPR_SENDER") or ""
         senders = {s.strip().lower() for s in senders_env.split(",") if s.strip()}
         senders |= {s.lower() for s in DEFAULT_SENDERS}
-        senders = list(senders)
+        senders = sorted(senders)
         subject_required = [s.strip().lower() for s in os.environ.get(
             "VPR_SUBJECT_SENDERS", ",".join(SUBJECT_REQUIRED_SENDERS)).split(",")
             if s.strip()]
         subject_keyword = os.environ.get(
             "VPR_SUBJECT_KEYWORD", DEFAULT_SUBJECT_KEYWORD).lower()
         lookback = int(os.environ.get("VPR_LOOKBACK_DAYS", "45"))
+        required_streams = {
+            value.strip().lower()
+            for value in os.environ.get(
+                "VPR_REQUIRED_STREAMS", ",".join(DEFAULT_REQUIRED_STREAMS)
+            ).split(",")
+            if value.strip()
+        }
         if not user or not password:
             raise RuntimeError("VPR_IMAP_USER / VPR_IMAP_PASS not set; cannot fetch mail.")
 
         since = (date.today() - timedelta(days=lookback)).strftime("%d-%b-%Y")
-        messages: list[str] = []
+        messages: list[dict] = []
+        stream_stats = {
+            stream: {
+                "sender_messages": 0,
+                "accepted_messages": 0,
+                "parsed_records": 0,
+                "empty_messages": 0,
+            }
+            for stream in sorted(required_streams | set(STREAM_BY_SENDER.values()))
+        }
         client = imaplib.IMAP4_SSL(host)
+        scanned_messages = 0
         try:
             client.login(user, password)
             client.select(folder, readonly=True)
             typ, data = client.search(None, "SINCE", since)
             ids = data[0].split() if data and data[0] else []
             for msg_id in ids[-200:]:
+                scanned_messages += 1
                 typ, raw = client.fetch(msg_id, "(RFC822)")
                 if typ != "OK" or not raw or not raw[0]:
                     continue
@@ -667,19 +692,44 @@ class VPREmailAdapter(SourceAdapter):
                 # open with a large <style>/MsoNormal block, so the sender line
                 # (in a forward's quoted header) sits well past any small cap.
                 body_l = (body or "").lower()
-                head = from_hdr + "\n" + body_l
-                matched = next((s for s in senders if s in head), None)
+                matched = next((s for s in senders if s in from_hdr), None)
+                matched = matched or next((s for s in senders if s in body_l), None)
                 if not matched:
                     continue
+                stream = STREAM_BY_SENDER.get(matched, "configured")
+                stats = stream_stats.setdefault(stream, {
+                    "sender_messages": 0,
+                    "accepted_messages": 0,
+                    "parsed_records": 0,
+                    "empty_messages": 0,
+                })
+                stats["sender_messages"] += 1
                 if (matched in subject_required and subject_keyword
                         and subject_keyword not in (subj + " " + body_l)):
                     continue
-                messages.append(body)
+                stats["accepted_messages"] += 1
+                messages.append({"body": body, "stream": stream})
         finally:
             try:
                 client.logout()
             except Exception:
                 pass
+        missing_streams = sorted(
+            stream for stream in required_streams
+            if stream_stats.get(stream, {}).get("accepted_messages", 0) == 0
+        )
+        self.diagnostics = {
+            "lookback_days": lookback,
+            "scanned_messages": scanned_messages,
+            "required_streams": sorted(required_streams),
+            "missing_streams": missing_streams,
+            "streams": stream_stats,
+        }
+        if missing_streams:
+            raise RuntimeError(
+                "No accepted funding email found for required stream(s): "
+                + ", ".join(missing_streams)
+            )
         return messages
 
     @staticmethod
@@ -705,9 +755,42 @@ class VPREmailAdapter(SourceAdapter):
         return html_part or text_part or ""
 
     def parse(self, payload) -> Iterable[CanonicalOpportunity]:
-        for body in payload or []:
-            for item in extract_opportunities(body):
-                yield self._to_canonical(item)
+        records = []
+        diagnostics = dict(getattr(self, "diagnostics", {}) or {})
+        streams = diagnostics.setdefault("streams", {})
+        for message in payload or []:
+            if isinstance(message, dict):
+                body = message.get("body") or ""
+                stream = str(message.get("stream") or "unknown")
+            else:
+                body = str(message or "")
+                stream = "unknown"
+            stats = streams.setdefault(stream, {
+                "sender_messages": 0,
+                "accepted_messages": 0,
+                "parsed_records": 0,
+                "empty_messages": 0,
+            })
+            items = extract_opportunities(body)
+            stats["parsed_records"] += len(items)
+            if not items:
+                stats["empty_messages"] += 1
+            records.extend(self._to_canonical(item) for item in items)
+        required_streams = set(diagnostics.get("required_streams") or [])
+        failed_streams = sorted(
+            stream for stream in required_streams
+            if streams.get(stream, {}).get("accepted_messages", 0) > 0
+            and streams.get(stream, {}).get("parsed_records", 0) == 0
+        )
+        diagnostics["parse_failed_streams"] = failed_streams
+        diagnostics["parsed_records"] = len(records)
+        self.diagnostics = diagnostics
+        if failed_streams:
+            raise ValueError(
+                "Accepted funding email(s) yielded no opportunities for stream(s): "
+                + ", ".join(failed_streams)
+            )
+        return records
 
     def parse_payload(self, raw: str) -> list[CanonicalOpportunity]:
         """Parse one raw HTML/text sample (offline tests)."""
