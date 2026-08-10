@@ -111,6 +111,34 @@ test("drops standalone umbrella keywords from external profiles", () => {
   );
 });
 
+test("requires every selected researcher to match a shared opportunity", () => {
+  const { team } = loadApis();
+  const match = id => ({
+    id,
+    title: `Opportunity ${id}`,
+    score: 5,
+    rank_score: 6,
+    terms: [`concept ${id}`],
+  });
+  const researchers = [
+    { key: "a", name: "Researcher A", matches: [match("shared"), match("partial")] },
+    { key: "b", name: "Researcher B", matches: [match("shared"), match("partial")] },
+    { key: "c", name: "Researcher C", matches: [match("shared")] },
+    { key: "d", name: "Researcher D", matches: [match("different")] },
+  ];
+
+  const twoPerson = team.intersectMemberMatches(researchers.slice(0, 2));
+  const threePerson = team.intersectMemberMatches(researchers.slice(0, 3));
+  const fourPerson = team.intersectMemberMatches(researchers);
+
+  assert.deepEqual(Array.from(twoPerson, item => item.d.id), ["shared", "partial"]);
+  assert.deepEqual(Array.from(threePerson, item => item.d.id), ["shared"]);
+  assert.deepEqual(Array.from(fourPerson, item => item.d.id), []);
+  assert.ok(threePerson.length <= twoPerson.length);
+  assert.ok(fourPerson.length <= threePerson.length);
+  assert.equal(threePerson[0].totalN, 3);
+});
+
 test("builds opportunity matches from an external researcher's keywords", () => {
   const { query, retrieval, team } = loadApis();
   const records = [
@@ -235,8 +263,13 @@ test("the live Egypt diplomacy notice is not a faculty research match", () => {
   );
 });
 
-test("presents one relevance-and-recency collaboration list without broad-specific labels", () => {
-  assert.match(teamPage, /Best current shared opportunities/);
+test("presents only full-team relevance-and-recency matches without broad-specific labels", () => {
+  assert.match(teamPage, /Opportunities matching the full selected team/);
+  assert.match(teamPage, /fit every selected researcher/);
+  assert.match(teamPage, /Adding a researcher can only narrow these results/);
+  assert.match(teamPage, /TEAM_API\.intersectMemberMatches/);
+  assert.doesNotMatch(teamPage, /fit 2\+ of \{/);
+  assert.doesNotMatch(teamPage, /departmentGroups\s*=\s*buildShared\(names\)/);
   assert.match(teamPage, /balanced by research fit and listing date/);
   assert.match(teamPage, /research_summary/);
   assert.match(teamPage, /Listed /);

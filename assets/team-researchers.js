@@ -415,6 +415,55 @@
     return matches;
   }
 
+  function intersectMemberMatches(members) {
+    if (!Array.isArray(members) || members.length < 2) return [];
+    const opportunities = new Map();
+
+    members.forEach((member, memberIndex) => {
+      const memberKey = String(member?.key || `member-${memberIndex}`);
+      const seen = new Set();
+      (Array.isArray(member?.matches) ? member.matches : []).forEach(match => {
+        const opportunityId = String(match?.id || "");
+        if (!opportunityId || seen.has(opportunityId)) return;
+        seen.add(opportunityId);
+        const entry = opportunities.get(opportunityId) || {
+          d: {
+            id: opportunityId,
+            title: match.title,
+            agency: match.agency,
+            url: match.url,
+            deadline: match.deadline,
+            listing_date: match.listing_date || "",
+          },
+          fits: [],
+          memberKeys: new Set(),
+        };
+        entry.memberKeys.add(memberKey);
+        entry.fits.push({
+          name: member.name,
+          external: Boolean(member.external),
+          tier: match.tier,
+          terms: match.terms,
+          shared_topics: match.shared_topics,
+          score: Number(match.score || 0),
+          rank_score: Number(match.rank_score || match.score || 0),
+        });
+        opportunities.set(opportunityId, entry);
+      });
+    });
+
+    return [...opportunities.values()]
+      .filter(entry => entry.memberKeys.size === members.length)
+      .map(entry => {
+        entry.fits.sort((left, right) => right.score - left.score);
+        entry.totalN = entry.fits.length;
+        entry.sumScore = entry.fits.reduce((sum, fit) => sum + fit.score, 0);
+        entry.sumRankScore = entry.fits.reduce((sum, fit) => sum + fit.rank_score, 0);
+        delete entry.memberKeys;
+        return entry;
+      });
+  }
+
   globalThis.FUNDING_TEAM_RESEARCHERS = Object.freeze({
     STORAGE_KEY,
     MAX_EXTERNAL,
@@ -427,5 +476,6 @@
     save,
     inferDomains,
     buildMatches,
+    intersectMemberMatches,
   });
 })();
