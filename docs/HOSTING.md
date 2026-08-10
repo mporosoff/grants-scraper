@@ -48,9 +48,11 @@ ranking         provider keys,
 
 The generated public asset is `data/opportunities.js`. It contains open posted
 and current forecasted records, facet counts, evidence fields, official source
-actions, and the term postings needed for local BM25 search. Records with past
-posted or estimated forecast deadlines are rejected, and undated forecasts
-must pass fiscal-year and recency checks.
+actions, and the term postings needed for local hybrid search. The browser uses
+those postings for BM25 relevance, typo-tolerant term resolution, term-coverage
+checks, and catalog-derived topic similarity; query terms do not need to be
+pre-enumerated. Records with past posted or estimated forecast deadlines are
+rejected, and undated forecasts must pass fiscal-year and recency checks.
 
 `data/opportunity_enrichment.json` is a versioned compact cache of selected
 facts from the unauthenticated official `fetchOpportunity` endpoint. The

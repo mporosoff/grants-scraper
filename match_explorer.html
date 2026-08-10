@@ -26,8 +26,8 @@
   <title>Funding Finder</title>
   <link rel="canonical" href="https://mporosoff.github.io/grants-scraper/">
   <link rel="icon" type="image/svg+xml" href="./assets/icons/funding-finder.svg">
-  <link rel="stylesheet" href="./assets/app.css?v=release-2026-08-10-v10">
-  <link rel="stylesheet" href="./assets/site-nav.css?v=navigation-v1">
+  <link rel="stylesheet" href="./assets/app.css?v=release-2026-08-10-v12">
+  <link rel="stylesheet" href="./assets/site-nav.css?v=navigation-v2">
 </head>
 <body>
   <a class="skip-link" href="#results">Skip to results</a>
@@ -45,9 +45,12 @@
         <a href="./match_explorer.html" aria-current="page">Find funding</a>
         <a href="./team_match.html">Team matcher</a>
       </nav>
-      <div class="catalog-pill" id="catalog-pill" aria-live="polite">
+      <div class="catalog-pill" id="catalog-pill" aria-live="polite" aria-label="Loading catalog status">
         <span class="status-dot" aria-hidden="true"></span>
-        Loading catalog...
+        <span class="catalog-pill-copy">
+          <strong>Catalog</strong>
+          <small>Loading…</small>
+        </span>
       </div>
       <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu">
         <span class="nav-toggle-lines" aria-hidden="true"></span>
@@ -302,13 +305,13 @@
           <details class="provider-setup">
             <summary>
               <span>
-                <strong>Optional: refine results with AI</strong>
-                <small>AI reranks a bounded set of results from this same search</small>
+                <strong>Optional: expand and refine with AI</strong>
+                <small>AI can translate unfamiliar terminology before retrieving and reranking results</small>
               </span>
               <span id="provider-state">Not configured</span>
             </summary>
             <div class="provider-setup-body">
-              <p class="provider-explanation"><strong>What AI changes:</strong> after you search, AI can expand terminology, rerank up to 32 matching opportunities, explain the best fits, and answer questions about those results. It never replaces or searches outside the funding catalog.</p>
+              <p class="provider-explanation"><strong>What AI changes:</strong> after you search, AI can expand terminology first, retrieve a fresh candidate set, rerank up to 32 opportunities, explain the best fits, and answer questions about those results. It never replaces or searches outside the funding catalog.</p>
               <p class="key-help"><strong>You do not need a key for normal search.</strong> AI refinement requires your own provider key. Create a separate, limited-use key and review its spending controls before saving it here: <a href="https://help.openai.com/en/articles/9186755-managing-projects-in-the-api-platform" target="_blank" rel="noopener noreferrer">OpenAI key and project limits</a> or <a href="https://support.anthropic.com/en/articles/9767949-api-key-best-practices-keeping-your-keys-safe-and-secure" target="_blank" rel="noopener noreferrer">Anthropic key safety and limits</a>.</p>
               <div class="provider-fields">
                 <label>
@@ -331,7 +334,7 @@
               <p class="privacy-note">A saved key stays in this browser's local storage until you remove it. Anyone using this browser profile could use it, so do not save a key on a shared device. Research text and an enabled CV excerpt go directly to the selected provider only when you choose AI refinement or chat.</p>
               <button class="button ai-button" id="ai-refine" type="button" disabled>
                 <span aria-hidden="true">✦</span>
-                Refine these results with AI
+                <span id="ai-refine-label">Expand and refine these results with AI</span>
               </button>
               <p class="cost-note">AI uses two bounded calls: terminology expansion, then reranking of at most 32 results. Ordinary search makes zero AI calls.</p>
               <div class="ai-status hidden" id="ai-status" aria-live="polite"></div>
@@ -546,17 +549,18 @@
     <div class="notice error">JavaScript is required to search the opportunity catalog.</div>
   </noscript>
   <script src="./data/opportunities.js?v=catalog-20260810T135907Z"></script>
-  <script src="./assets/profile.js?v=release-2026-08-10-v10"></script>
-  <script src="./assets/nofo.js?v=release-2026-08-10-v10"></script>
-  <script src="./assets/review.js?v=release-2026-08-10-v10"></script>
-  <script src="./assets/credentials.js?v=release-2026-08-10-v10"></script>
-  <script src="./assets/ai-provider.js?v=release-2026-08-10-v10"></script>
-  <script src="./assets/chat-ui.js?v=release-2026-08-10-v10"></script>
-  <script src="./assets/saved.js?v=release-2026-08-10-v10"></script>
-  <script src="./assets/preferences.js?v=release-2026-08-10-v10"></script>
-  <script src="./assets/search-query.js?v=release-2026-08-10-v10"></script>
-  <script src="./assets/site-nav.js?v=navigation-v1"></script>
-  <script src="./assets/app.js?v=release-2026-08-10-v10"></script>
+  <script src="./assets/profile.js?v=release-2026-08-10-v12"></script>
+  <script src="./assets/nofo.js?v=release-2026-08-10-v12"></script>
+  <script src="./assets/review.js?v=release-2026-08-10-v12"></script>
+  <script src="./assets/credentials.js?v=release-2026-08-10-v12"></script>
+  <script src="./assets/ai-provider.js?v=release-2026-08-10-v12"></script>
+  <script src="./assets/chat-ui.js?v=release-2026-08-10-v12"></script>
+  <script src="./assets/saved.js?v=release-2026-08-10-v12"></script>
+  <script src="./assets/preferences.js?v=release-2026-08-10-v12"></script>
+  <script src="./assets/search-query.js?v=release-2026-08-10-v12"></script>
+  <script src="./assets/search-retrieval.js?v=release-2026-08-10-v12"></script>
+  <script src="./assets/site-nav.js?v=navigation-v2"></script>
+  <script src="./assets/app.js?v=release-2026-08-10-v12"></script>
   <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "209e9983c16e4747947cf621792fe833"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>

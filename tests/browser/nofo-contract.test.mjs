@@ -91,3 +91,23 @@ test("extracts page-marked PDF text locally and rejects non-PDF files", async ()
     /Only PDF notices/,
   );
 });
+
+test("rejects an incorrect catalog connection without discarding the uploaded notice", async () => {
+  const api = await loadNofoApi();
+  const notice = {
+    fileName: "uploaded-nofo.pdf",
+    text: "Locally extracted notice text",
+    matchedId: "25-533",
+    matchConfidence: "title",
+    rejectedIds: ["OLD-1"],
+  };
+
+  const reconciled = api.rejectCatalogMatch(notice);
+
+  assert.equal(reconciled.matchedId, "");
+  assert.equal(reconciled.matchConfidence, "rejected");
+  assert.match(reconciled.matchReason, /marked as unrelated/);
+  assert.deepEqual([...reconciled.rejectedIds], ["OLD-1", "25-533"]);
+  assert.equal(reconciled.text, notice.text);
+  assert.equal(notice.matchedId, "25-533", "the helper must not mutate caller state");
+});

@@ -17,8 +17,8 @@
   const APP_VERSION = "layout-ai-recovery-v1";
   const CANONICAL_URL = "https://mporosoff.github.io/grants-scraper/";
   const REVIEW_EMAIL = "marc.porosoff@rochester.edu";
-  const INDEX_TERMS = Object.keys(catalog?.search_index?.postings || {});
   const SEARCH_QUERY = globalThis.FUNDING_SEARCH_QUERY;
+  const RETRIEVAL_API = globalThis.FUNDING_RETRIEVAL;
   const PROFILE_API = globalThis.FUNDING_PROFILE;
   const NOFO_API = globalThis.FUNDING_NOFO;
   const REVIEW_API = globalThis.FUNDING_REVIEW;
@@ -52,13 +52,6 @@
     "Which submission stages and deadlines are actually cited?",
     "Compare the cited award amounts and project durations.",
     "Which eligibility or application requirements still need verification?",
-  ];
-
-  const NOFO_CHAT_SUGGESTIONS = [
-    "Summarize the purpose, scope, and strongest fit signals.",
-    "List every submission stage and deadline, with page references.",
-    "What are the eligibility, cost-share, and application requirements?",
-    "What details should I verify before deciding whether to apply?",
   ];
 
   const FACETS = {
@@ -129,6 +122,7 @@
     matches: [],
     personalize: false,
     preferenceModel: null,
+    searchDiagnostics: null,
     savedItems: [],
     savedIds: new Set(),
     compareIds: new Set(),
@@ -161,6 +155,7 @@
       matchedId: "",
       matchConfidence: "none",
       matchReason: "",
+      rejectedIds: [],
     },
     ai: {
       active: false,
@@ -179,6 +174,7 @@
     },
   };
   let chatReturnFocus = null;
+  let searchEngine = null;
 
   function escapeHtml(value) {
     return String(value ?? "")
@@ -485,8 +481,13 @@
       : new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric" }).format(generated);
     $("catalog-pill").classList.toggle("stale", stale);
     const liveCount = state.runtimeCatalog.records.length;
+    $("catalog-pill").setAttribute(
+      "aria-label",
+      `${liveCount.toLocaleString()} current opportunities; catalog updated ${dateText}`,
+    );
     $("catalog-pill").innerHTML =
-      `<span class="status-dot" aria-hidden="true"></span>${liveCount.toLocaleString()} current · updated ${escapeHtml(dateText)}`;
+      `<span class="status-dot" aria-hidden="true"></span>
+      <span class="catalog-pill-copy"><strong>${liveCount.toLocaleString()} current</strong><small>updated ${escapeHtml(dateText)}</small></span>`;
     const evidenceCount = Number(
       catalog.diagnostics?.document_evidence?.document_current_count || 0,
     );
@@ -546,49 +547,8 @@
     $("count-forecasted").textContent = (state.runtimeCatalog.statusCounts.forecasted || 0).toLocaleString();
   }
 
-  function postingTerms(term) {
-    const postings = catalog.search_index.postings;
-    if (postings[term]) return [term];
-    if (term.length < 3) return [];
-    return INDEX_TERMS
-      .filter(candidate => candidate.startsWith(term))
-      .slice(0, 12);
-  }
-
-  function bm25Scores(query) {
-    const documentCount = catalog.search_index.document_count;
-    const averageLength = catalog.search_index.average_document_length || 1;
-    const lengths = catalog.search_index.document_lengths;
-    const postings = catalog.search_index.postings;
-    const scores = new Float64Array(documentCount);
-    const queryTerms = SEARCH_QUERY.expandTerms(query, term => Boolean(postings[term]));
-    const k1 = 1.2;
-    const b = 0.75;
-
-    for (const { term: queryTerm, weight: queryWeight } of queryTerms) {
-      const expanded = postingTerms(queryTerm);
-      for (const term of expanded) {
-        const values = postings[term];
-        const documentFrequency = values.length / 2;
-        const inverseFrequency = Math.log(1 + ((documentCount - documentFrequency + .5) / (documentFrequency + .5)));
-        const prefixWeight = (term === queryTerm ? 1 : .72) * queryWeight;
-        for (let cursor = 0; cursor < values.length; cursor += 2) {
-          const documentId = values[cursor];
-          const frequency = values[cursor + 1];
-          const denominator = frequency + k1 * (1 - b + b * (lengths[documentId] / averageLength));
-          scores[documentId] += prefixWeight * inverseFrequency * ((frequency * (k1 + 1)) / denominator);
-        }
-      }
-    }
-
-    const phrase = SEARCH_QUERY.normalizeText(query).trim().toLowerCase();
-    if (phrase.length >= 4) {
-      catalog.opportunities.forEach((record, index) => {
-        if ((record.title || "").toLowerCase().includes(phrase)) scores[index] += 12;
-        if ((record.opportunity_number || "").toLowerCase() === phrase) scores[index] += 30;
-      });
-    }
-    return { scores, hasTerms: queryTerms.length > 0 };
+  function hybridScores(query, options = {}) {
+    return searchEngine.score(query, options);
   }
 
   function profileTermQuery(profile) {
@@ -964,20 +924,27 @@
       : `${used} local ratings ready; turn this on to personalize.`;
   }
 
-  function computeMatches(query, sortMode = state.sort) {
-    const direct = bm25Scores(query);
+  function computeMatches(query, sortMode = state.sort, retrievalOptions = {}) {
+    const direct = hybridScores(query, retrievalOptions);
     const profiled = state.profile.active
-      ? bm25Scores(state.profile.query)
-      : { scores: new Float64Array(catalog.record_count), hasTerms: false };
+      ? hybridScores(state.profile.query, { semantic: false, coverage: false })
+      : {
+          scores: new Float64Array(catalog.record_count),
+          lexicalScores: new Float64Array(catalog.record_count),
+          hasTerms: false,
+        };
     const hasTerms = direct.hasTerms || profiled.hasTerms;
     const model = buildPreferenceModel();
     state.preferenceModel = model;
     const matches = [];
+    const rejectedNofoIds = new Set(state.nofo.rejectedIds || []);
     catalog.opportunities.forEach((record, index) => {
+      if (rejectedNofoIds.has(recordId(record))) return;
       if (!recordPassesFilters(record)) return;
       if (direct.hasTerms && direct.scores[index] <= 0) return;
       if (!direct.hasTerms && profiled.hasTerms && profiled.scores[index] <= 0) return;
       let score = direct.scores[index] * 2 + profiled.scores[index];
+      const lexicalScore = direct.lexicalScores[index] * 2 + profiled.lexicalScores[index];
       if (state.profile.active) {
         score += applicantFitBonus(record, state.profile.value.applicant_context);
         score += careerFitBonus(record, state.profile.value.career_stage);
@@ -988,18 +955,18 @@
           ? score * (1 + preference)
           : preference;
       }
-      matches.push({ index, score });
+      matches.push({ index, score, lexicalScore });
     });
     if (hasTerms || model) {
-      const peakScore = matches.reduce(
-        (maximum, match) => Math.max(maximum, match.score),
+      const peakLexicalScore = matches.reduce(
+        (maximum, match) => Math.max(maximum, match.lexicalScore),
         0,
       );
       matches.forEach(match => {
         const boost = newRelevantBoost(
           catalog.opportunities[match.index],
-          match.score,
-          peakScore,
+          match.lexicalScore,
+          peakLexicalScore,
         );
         match.score += boost;
         match.newRelevant = boost > 0;
@@ -1008,6 +975,7 @@
     return {
       matches: sortMatches(matches, hasTerms, sortMode, Boolean(model)),
       hasTerms,
+      diagnostics: direct.diagnostics || null,
     };
   }
 
@@ -1135,6 +1103,7 @@
       matchedId: "",
       matchConfidence: "none",
       matchReason: "",
+      rejectedIds: [],
     };
     if ($("nofo-file")) $("nofo-file").value = "";
     if (clearStatus && $("nofo-upload-status")) {
@@ -1232,8 +1201,14 @@
     recordDeploymentUsage(state.profile.active ? "profile_searches" : "searches");
     logUsage($("audience-filter") ? $("audience-filter").value : "all");
     runSearch({ autoSort: true });
+    const typoSources = (state.searchDiagnostics?.fuzzyTerms || [])
+      .map(item => item.source)
+      .filter(Boolean);
+    const typoNote = typoSources.length
+      ? ` Spelling-tolerant matching was used for ${typoSources.map(term => `“${term}”`).join(", ")}.`
+      : "";
     $("search-status").textContent =
-      `Search complete: ${state.matches.length.toLocaleString()} opportunities match the context above.`;
+      `Search complete: ${state.matches.length.toLocaleString()} opportunities match the context above.${typoNote}`;
     $("results-heading").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
@@ -1292,7 +1267,9 @@
     state.query = nextQuery;
     state.sort = $("sort").value;
     if (!preserveAi) clearAiState({ preserveNofo });
-    state.matches = computeMatches(state.query).matches;
+    const search = computeMatches(state.query);
+    state.matches = search.matches;
+    state.searchDiagnostics = search.diagnostics;
     if (resetPage) state.page = 1;
     syncStateToUrl();
     if (persistProfile) scheduleProfileSave();
@@ -1323,6 +1300,7 @@
         matchedId,
         matchConfidence: match.confidence,
         matchReason: match.reason,
+        rejectedIds: [],
       };
 
       resetFilterControls();
@@ -1348,7 +1326,7 @@
       state.ai.summary = matchedId
         ? `The uploaded notice was matched to ${match.record.opportunity_number || match.record.title} in the catalog. Ask questions about the PDF or use the connected card to save it, add its deadline to your calendar, or open the official source.`
         : "The uploaded notice is ready to chat with. No confident catalog match was found, so related search results remain visible for manual review.";
-      state.ai.suggestions = [...NOFO_CHAT_SUGGESTIONS];
+      state.ai.suggestions = [];
       state.ai.messages = [];
       state.ai.provider = $("k-provider").value;
       state.ai.model = currentModel();
@@ -2526,7 +2504,7 @@
       $("export-csv").disabled = true;
       $("export-ics").disabled = true;
       $("open-results-chat").disabled = true;
-      $("ai-refine").disabled = true;
+      updateAiRefineControl();
       closeExpandedChat({ restoreFocus: false });
       renderComparePanel();
       renderExploration();
@@ -2567,10 +2545,12 @@
     if (!page.length) {
       $("results").innerHTML = `<div class="empty-state">
         <h3>${hasNofoDocument() ? "No catalog record matched this notice" : "No opportunities matched"}</h3>
-        <p>${hasNofoDocument() ? "You can still ask questions about the uploaded PDF in document chat. Try searching its opportunity number manually if you expect a catalog record." : "Try fewer terms, remove a filter, include forecasted opportunities, or describe the project to the AI refinement layer."}</p>
+        <p>${hasNofoDocument() ? "You can still ask questions about the uploaded PDF in document chat. Try searching its opportunity number manually if you expect a catalog record." : "Try fewer terms, remove a filter, include forecasted opportunities, or use optional AI expansion to translate the idea into catalog terminology."}</p>
+        ${!hasNofoDocument() && aiRefineHasContext() ? `<button class="button ai-button" id="empty-ai-refine" type="button"><span aria-hidden="true">✦</span> Broaden this search with AI</button>` : ""}
         <button class="button secondary" id="empty-clear" type="button">Clear search and filters</button>
       </div>`;
       $("empty-clear")?.addEventListener("click", clearEverything);
+      $("empty-ai-refine")?.addEventListener("click", refineWithAi);
     } else {
       $("results").innerHTML = page
         .map((match, index) => resultCard(match, start + index + 1))
@@ -2583,7 +2563,7 @@
     $("export-ics").disabled = !display.some(match =>
       calendarEvents(catalog.opportunities[match.index]).length
     );
-    $("ai-refine").disabled = !display.length;
+    updateAiRefineControl();
     renderComparePanel();
     renderDeploymentReview();
     renderEvaluation();
@@ -2631,6 +2611,7 @@
     $("query").value = "";
     $("sort").value = "deadline";
     state.searched = false;
+    state.searchDiagnostics = null;
     state.profile.active = false;
     clearAiState();
     $("search-status").textContent = "Search cleared. Add new context when you are ready.";
@@ -2823,10 +2804,28 @@
     $("ai-status").classList.toggle("error", isError);
   }
 
+  function aiRefineHasContext() {
+    return Boolean(
+      state.searched
+      && (state.query || (state.profile.active && state.profile.query)),
+    );
+  }
+
+  function updateAiRefineControl() {
+    const button = $("ai-refine");
+    if (!button) return;
+    button.disabled = state.ai.busy || !aiRefineHasContext();
+    const label = $("ai-refine-label");
+    if (label) {
+      label.textContent = state.matches.length
+        ? "Expand and refine these results with AI"
+        : "Broaden this search with AI";
+    }
+  }
+
   function setAiBusy(busy) {
     state.ai.busy = busy;
-    $("ai-refine").disabled =
-      busy || !state.searched || !state.matches.length;
+    updateAiRefineControl();
     $("chat-input").disabled = busy || !chatHasContext() || !$("k-key").value.trim();
     $("chat-submit").disabled =
       busy || !chatHasContext() || !$("k-key").value.trim();
@@ -2846,8 +2845,8 @@
   }
 
   async function refineWithAi() {
-    if (!state.searched || !state.matches.length) {
-      setAiStatus("Run the catalog search before asking AI to refine its results.", true);
+    if (!state.searched) {
+      setAiStatus("Run the catalog search before asking AI to broaden or refine it.", true);
       $("find-funding").focus();
       return;
     }
@@ -2890,7 +2889,11 @@
 
       const terms = Array.isArray(plan.search_terms) ? plan.search_terms.filter(Boolean).slice(0, 16) : [];
       const expandedQuery = [state.query, state.profile.query, ...terms].filter(Boolean).join(" ");
-      const candidates = computeMatches(expandedQuery, "relevance").matches.slice(0, MAX_AI_CANDIDATES);
+      const candidates = computeMatches(
+        expandedQuery,
+        "relevance",
+        { coverage: false },
+      ).matches.slice(0, MAX_AI_CANDIDATES);
       if (!candidates.length) {
         throw new Error("The expanded search did not find candidates under the current filters. Clear one or more filters and try again.");
       }
@@ -2980,11 +2983,12 @@
     const matchLabel = state.nofo.matchConfidence === "exact"
       ? "Exact catalog match"
       : "Probable catalog match";
+    const rejectedMatch = state.nofo.matchConfidence === "rejected";
     let matchHtml = `<div class="nofo-match-record">
       <div>
-        <span>No confident catalog match</span>
-        <strong>Document chat is still ready</strong>
-        <small>Related catalog results remain available behind this chat.</small>
+        <span>${rejectedMatch ? "Catalog connection removed" : "No confident catalog match"}</span>
+        <strong>${rejectedMatch ? "No matching catalog item is confirmed" : "Document chat is still ready"}</strong>
+        <small>${rejectedMatch ? "This conversation now uses the uploaded PDF only." : "Related catalog results remain available behind this chat."}</small>
       </div>
     </div>`;
     if (record) {
@@ -3001,6 +3005,7 @@
           <button type="button" class="text-button" data-calendar="${escapeAttribute(id)}"${record.close_date ? "" : " disabled"}>Add to calendar</button>
           <button type="button" class="text-button" data-chat-jump="${escapeAttribute(id)}">View full card</button>
           ${source.url ? `<a data-source-open="chat" href="${escapeAttribute(source.url)}" target="_blank" rel="noopener">Official source <span aria-hidden="true">↗</span></a>` : ""}
+          <button type="button" class="text-button nofo-reject-match" data-nofo-reject-match="${escapeAttribute(id)}"${state.ai.busy ? " disabled" : ""}>Not this opportunity</button>
         </div>
       </article>`;
     }
@@ -3009,9 +3014,39 @@
         <strong>${escapeHtml(state.nofo.fileName)}</strong>
         <p>${state.nofo.pageCount.toLocaleString()} ${state.nofo.pageCount === 1 ? "page" : "pages"} · ${state.nofo.wordCount.toLocaleString()} extracted words${escapeHtml(boundedNote)}</p>
       </div>
-      <span class="badge ai">Uploaded PDF</span>
+      <div class="nofo-context-tools">
+        <span class="badge ai">Uploaded PDF</span>
+        <button type="button" class="text-button" data-nofo-remove>Remove PDF</button>
+      </div>
     </div>${matchHtml}`;
     container.classList.remove("hidden");
+  }
+
+  function rejectNofoCatalogMatch() {
+    const rejectedId = state.nofo.matchedId;
+    if (!rejectedId || state.ai.busy || !NOFO_API?.rejectCatalogMatch) return;
+    state.nofo = NOFO_API.rejectCatalogMatch(state.nofo);
+    state.ai.originalIds = [];
+    state.ai.currentIds = [];
+    state.ai.candidateIds = [];
+    state.ai.assessments = new Map();
+    state.ai.suggestions = [];
+    state.ai.summary = "The suggested catalog connection was marked as unrelated. No matching catalog item is confirmed, so this chat is grounded only in the uploaded PDF.";
+    state.ai.messages.push({
+      role: "assistant",
+      text: "I removed that catalog connection. I could not confirm another matching catalog item, so I’ll use only the uploaded PDF for this conversation.",
+    });
+    state.matches = state.matches.filter(match =>
+      recordId(catalog.opportunities[match.index]) !== rejectedId
+    );
+    state.page = 1;
+    setNofoUploadStatus(
+      `${state.nofo.fileName} · suggested catalog match removed; no matching catalog item is confirmed.`,
+    );
+    $("search-status").textContent =
+      "The suggested catalog match was marked as unrelated. Document chat remains available without catalog metadata.";
+    renderResults();
+    requestAnimationFrame(() => $("chat-input")?.focus());
   }
 
   function renderChatKeyPrompt() {
@@ -3040,6 +3075,7 @@
     const documentChat = hasNofoDocument() && state.ai.mode === "uploaded-nofo";
     const canChat = state.searched && Boolean(contextIds.length || documentChat);
     const canAsk = canChat && Boolean($("k-key").value.trim());
+    $("result-assistant").classList.toggle("document-chat", documentChat);
     $("open-results-chat").disabled = !canChat;
     if (!canChat && document.body.classList.contains("chat-expanded")) {
       closeExpandedChat({ restoreFocus: false });
@@ -3050,6 +3086,9 @@
     $("chat-heading").textContent = documentChat
       ? "Chat with the NOFO"
       : "Chat with your results";
+    $("toggle-chat-size").textContent = documentChat
+      ? "Return to search"
+      : "Close chat";
     $("chat-panel-copy").textContent = documentChat
       ? "Ask about the uploaded notice. Answers are grounded in the locally extracted PDF text and include page references when the source supports them."
       : "Compare, question, or focus the opportunities already in your search. Every named opportunity links back to its result card and official source.";
@@ -3070,7 +3109,7 @@
       : "Chat uses the AI provider configured above. Only the bounded result context, your question, and the profile context you enabled are sent.";
     renderNofoContext();
     renderChatKeyPrompt();
-    const suggestions = state.ai.active && state.ai.suggestions.length
+    const suggestions = !documentChat && state.ai.active && state.ai.suggestions.length
       ? state.ai.suggestions
       : DEFAULT_CHAT_SUGGESTIONS;
     $("chat-summary").textContent = documentChat
@@ -3080,7 +3119,8 @@
       : contextIds.length
         ? `Ask about the top ${contextIds.length} of ${state.matches.length.toLocaleString()} current results. Chat never searches outside this bounded result context.`
         : "Run a search or loosen the filters before asking about results.";
-    $("chat-suggestions").innerHTML = (canChat ? suggestions : [])
+    $("chat-suggestions").classList.toggle("hidden", documentChat);
+    $("chat-suggestions").innerHTML = (canChat && !documentChat ? suggestions : [])
       .map(suggestion => `<button type="button" data-chat-suggestion="${escapeAttribute(suggestion)}">${escapeHtml(suggestion)}</button>`)
       .join("");
     $("chat-messages").innerHTML = state.ai.messages.map((message, messageIndex) =>
@@ -3097,10 +3137,8 @@
       </div>`
     ).join("");
     $("chat-messages").scrollTop = $("chat-messages").scrollHeight;
-    $("clear-ai").classList.toggle("hidden", !state.ai.active && !documentChat);
-    $("clear-ai").textContent = documentChat
-      ? "Close the uploaded NOFO"
-      : "Return to the full search results";
+    $("clear-ai").classList.toggle("hidden", documentChat || !state.ai.active);
+    $("clear-ai").textContent = "Return to the full search results";
     const narrowed = state.ai.active && (
       state.ai.currentIds.length !== state.ai.originalIds.length
       || state.ai.currentIds.some((id, index) => id !== state.ai.originalIds[index])
@@ -3960,6 +3998,17 @@
       }
     });
     $("nofo-chat-context").addEventListener("click", event => {
+      if (event.target.closest("[data-nofo-reject-match]")) {
+        rejectNofoCatalogMatch();
+        return;
+      }
+      if (event.target.closest("[data-nofo-remove]")) {
+        clearAiState();
+        state.page = 1;
+        $("search-status").textContent = "The uploaded PDF was removed. Catalog search remains available.";
+        renderResults();
+        return;
+      }
       const jump = event.target.closest("[data-chat-jump]");
       if (jump) jumpToResultFromChat(jump.dataset.chatJump);
     });
@@ -3979,9 +4028,13 @@
   function initialize() {
     try {
       validateCatalog(catalog);
-      if (!SEARCH_QUERY?.tokenize || !SEARCH_QUERY?.expandTerms) {
+      if (!SEARCH_QUERY?.tokenize || !SEARCH_QUERY?.expandGroups) {
         throw new Error("The search-term helper did not load. Refresh the page and try again.");
       }
+      if (!RETRIEVAL_API?.create) {
+        throw new Error("The hybrid retrieval helper did not load. Refresh the page and try again.");
+      }
+      searchEngine = RETRIEVAL_API.create(catalog, SEARCH_QUERY);
       if (!PROFILE_API?.loadProfile || !PROFILE_API?.extractCv) {
         throw new Error("The local profile module did not load. Refresh the page and try again.");
       }
@@ -4054,7 +4107,9 @@
     } catch (error) {
       $("catalog-error").textContent = error?.message || String(error);
       $("catalog-error").classList.remove("hidden");
-      $("catalog-pill").textContent = "Catalog unavailable";
+      $("catalog-pill").setAttribute("aria-label", "Catalog unavailable");
+      $("catalog-pill").innerHTML = `<span class="status-dot" aria-hidden="true"></span>
+        <span class="catalog-pill-copy"><strong>Catalog</strong><small>unavailable</small></span>`;
     }
   }
 

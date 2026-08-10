@@ -108,6 +108,89 @@ class MatcherTests(unittest.TestCase):
                     ["carbon"],
                 )
 
+    def test_typo_tolerance_and_irregular_scientific_forms(self):
+        catalysis = _base(
+            opportunity_id="catalysis",
+            title="Catalysis and reaction engineering",
+        )
+        analysis = _base(
+            opportunity_id="analysis",
+            title="Statistical analysis methods",
+        )
+        index = _base(
+            opportunity_id="index",
+            title="Community vulnerability index methods",
+        )
+        unrelated = _base(
+            opportunity_id="unrelated",
+            title="Arts education fellowship",
+        )
+        catalog = make_catalog([catalysis, analysis, index, unrelated])
+
+        typo_results = search_catalog(catalog, "catalyis", as_of=self.as_of)
+        self.assertEqual(typo_results[0]["opportunity_id"], "catalysis")
+        self.assertNotIn("unrelated", [item["opportunity_id"] for item in typo_results])
+
+        irregular_results = search_catalog(catalog, "analyses", as_of=self.as_of)
+        self.assertEqual(irregular_results[0]["opportunity_id"], "analysis")
+        self.assertNotIn("unrelated", [item["opportunity_id"] for item in irregular_results])
+
+        index_results = search_catalog(catalog, "indices", as_of=self.as_of)
+        self.assertEqual(index_results[0]["opportunity_id"], "index")
+
+    def test_long_query_requires_meaningful_term_coverage(self):
+        complete = _base(
+            opportunity_id="complete",
+            title="Water contamination membrane treatment",
+        )
+        partial = _base(
+            opportunity_id="partial",
+            title="Water infrastructure planning",
+        )
+        unrelated = _base(
+            opportunity_id="unrelated",
+            title="Arts education fellowship",
+        )
+        catalog = make_catalog([complete, partial, unrelated])
+
+        results = search_catalog(
+            catalog,
+            "water contamination membrane treatment",
+            as_of=self.as_of,
+        )
+        self.assertEqual([item["opportunity_id"] for item in results], ["complete"])
+
+    def test_catalog_topics_bridge_semantically_related_summaries(self):
+        records = [
+            _base(
+                opportunity_id="seed-1",
+                title="Carbon dioxide capture",
+                description="Industrial emissions",
+                topic_areas=["Carbon management"],
+            ),
+            _base(
+                opportunity_id="seed-2",
+                title="Carbon dioxide storage",
+                description="Industrial emissions and geologic sequestration",
+                topic_areas=["Carbon management"],
+            ),
+            _base(
+                opportunity_id="related",
+                title="Direct air removal demonstration",
+                description="Durable atmospheric removal",
+                topic_areas=["Carbon management"],
+            ),
+            _base(opportunity_id="water", title="Drinking water systems", topic_areas=["Water"]),
+            _base(opportunity_id="health", title="Community health", topic_areas=["Public health"]),
+            _base(opportunity_id="arts", title="Arts education", topic_areas=["Arts and culture"]),
+        ]
+        catalog = make_catalog(records)
+
+        results = search_catalog(catalog, "industrial emissions", as_of=self.as_of)
+        ids = [item["opportunity_id"] for item in results]
+        self.assertIn("related", ids)
+        self.assertNotIn("water", ids)
+
     def test_existing_literal_abbreviation_is_not_broadened(self):
         literal = _base(
             opportunity_id="literal",
@@ -198,8 +281,8 @@ class MatcherTests(unittest.TestCase):
         )
         catalog = make_catalog([old, new])
         with patch(
-            "scripts.alert_match.bm25_scores",
-            return_value=([100.0, 25.0], True),
+            "scripts.alert_match.hybrid_scores",
+            return_value=([100.0, 25.0], True, [100.0, 25.0]),
         ):
             results = search_catalog(catalog, "catalysis", as_of=self.as_of)
         self.assertEqual([item["opportunity_id"] for item in results], ["new", "old"])
@@ -217,8 +300,8 @@ class MatcherTests(unittest.TestCase):
         )
         catalog = make_catalog([old, weak_new])
         with patch(
-            "scripts.alert_match.bm25_scores",
-            return_value=([100.0, 19.9], True),
+            "scripts.alert_match.hybrid_scores",
+            return_value=([100.0, 19.9], True, [100.0, 19.9]),
         ):
             results = search_catalog(catalog, "catalysis", as_of=self.as_of)
         self.assertEqual([item["opportunity_id"] for item in results], ["old", "weak-new"])
@@ -236,8 +319,8 @@ class MatcherTests(unittest.TestCase):
         )
         catalog = make_catalog([old, no_longer_new])
         with patch(
-            "scripts.alert_match.bm25_scores",
-            return_value=([100.0, 25.0], True),
+            "scripts.alert_match.hybrid_scores",
+            return_value=([100.0, 25.0], True, [100.0, 25.0]),
         ):
             results = search_catalog(catalog, "catalysis", as_of=self.as_of)
         self.assertEqual(

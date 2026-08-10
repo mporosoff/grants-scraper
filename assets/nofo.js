@@ -144,6 +144,22 @@
       .join(" ");
   }
 
+  function rejectCatalogMatch(nofo) {
+    const current = nofo && typeof nofo === "object" ? nofo : {};
+    const rejectedId = String(current.matchedId || "");
+    return {
+      ...current,
+      matchedId: "",
+      matchConfidence: "rejected",
+      matchReason: rejectedId
+        ? "The suggested catalog connection was marked as unrelated by the user."
+        : "No catalog connection was confirmed.",
+      rejectedIds: [
+        ...new Set([...(current.rejectedIds || []).map(String), rejectedId].filter(Boolean)),
+      ],
+    };
+  }
+
   async function extract(file, dependencies = {}) {
     if (!file) throw new Error("Choose a NOFO or FOA PDF first.");
     if (!isPdfFile(file)) throw new Error("Only PDF notices can be dropped here.");
@@ -201,6 +217,7 @@
     isPdfFile,
     matchCatalog,
     normalizeIdentifier,
+    rejectCatalogMatch,
     suggestedQuery,
     titleTokens,
   });

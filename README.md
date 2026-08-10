@@ -28,14 +28,21 @@ Anyone can search the comprehensive catalog without an account or API key. The b
 The page initially shows no opportunities. One guided workflow combines a
 topic, optional profile/CV context, and optional filters under a single “Find
 funding” action. Users can explicitly save a reusable researcher profile on
-that device; saving it does not launch a competing search. Profile relevance
-uses the local BM25 index and makes zero AI calls.
+that device; saving it does not launch a competing search. Ordinary retrieval
+uses a local hybrid scorer: BM25 lexical relevance, conservative spelling and
+scientific-word-form recovery, meaningful coverage for multi-term searches,
+and topic relationships inferred from the current catalog. Exact titles and
+opportunity numbers remain highest priority. The postings index contains terms
+found in the records; it is not a pre-approved list of queries. Common,
+unambiguous abbreviations add query-side context without requiring a catalog
+rebuild. This path and profile relevance make zero AI calls.
 
 Ordinary and profile-ranked search make zero AI calls. A user may enter an
 OpenAI or Anthropic key to:
 
-1. expand the search with useful synonyms;
-2. rerank at most 32 retrieved candidates into a shortlist of at most 12; and
+1. expand the search with useful terminology before retrieval, including when
+   the ordinary search returned no candidates;
+2. rerank at most 32 newly retrieved candidates into a shortlist of at most 12; and
 3. ask grounded follow-up questions that can further narrow the shortlist.
 
 “Chat with your results” appears with the returned result set and can answer
@@ -163,6 +170,8 @@ support it.
 | `index.html` | Redirects GitHub Pages to the application |
 | `match_explorer.html` | Public search and AI-refinement interface |
 | `assets/app.js` | Search, cited source evidence, review/export, profile ranking, AI matching, and chat |
+| `assets/search-retrieval.js` | Local hybrid BM25, fuzzy, coverage, and catalog-topic retrieval |
+| `assets/search-query.js` | Conservative abbreviation and scientific word-form expansion |
 | `assets/profile.js` | Local profile/feedback storage and CV extraction |
 | `assets/nofo.js` | Browser-only NOFO PDF extraction, opportunity-number detection, and catalog matching |
 | `assets/review.js` | Local Phase 3 deployment-review storage and privacy-safe handoff |

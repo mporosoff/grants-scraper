@@ -107,3 +107,17 @@ test("does not expand short ambiguous terms", () => {
     assert.equal(Object.hasOwn(api.aliases, term), false);
   }
 });
+
+test("groups aliases and scientific irregulars under the terms the user entered", () => {
+  const api = loadApi();
+  const groups = api.expandGroups("analyses CO2");
+  assert.equal(groups.length, 2);
+  assert.deepEqual(
+    [...groups[0].terms].map(({ term, weight }) => [term, weight]),
+    [["analyse", 1], ["analysi", 0.94]],
+  );
+  assert.ok(groups[1].terms.some(({ term }) => term === "dioxide"));
+
+  const indexGroup = api.expandGroups("indices")[0];
+  assert.ok(indexGroup.terms.some(({ term }) => term === "index"));
+});

@@ -89,6 +89,37 @@
     "under", "use", "using", "was", "we", "which", "will", "with",
   ]);
 
+  // The catalog index intentionally keeps its compact, deterministic stemmer.
+  // These query-side alternatives cover common scientific irregulars without
+  // forcing a full catalog rebuild or making every search depend on a glossary.
+  const QUERY_VARIANTS = Object.freeze({
+    analyse: ["analysi"],
+    analysi: ["analyse"],
+    bacterium: ["bacteria"],
+    bacteria: ["bacterium"],
+    child: ["children"],
+    children: ["child"],
+    criterion: ["criteria"],
+    criteria: ["criterion"],
+    datum: ["data"],
+    fungus: ["fungi"],
+    fungi: ["fungus"],
+    index: ["indicy", "indice"],
+    indicy: ["index"],
+    indice: ["index"],
+    man: ["men"],
+    men: ["man"],
+    matrix: ["matrice"],
+    matrice: ["matrix"],
+    medium: ["media"],
+    mouse: ["mice"],
+    mice: ["mouse"],
+    phenomenon: ["phenomena"],
+    phenomena: ["phenomenon"],
+    woman: ["women"],
+    women: ["woman"],
+  });
+
   function normalizeText(value) {
     // NFKC turns commonly pasted scientific subscripts into searchable ASCII:
     // CO₂ -> CO2, H₂ -> H2, and PM₂.₅ -> PM2.5.
@@ -111,18 +142,43 @@
       .filter(token => token.length > 1 && !STOP_WORDS.has(token));
   }
 
-  function expandTerms(value, hasIndexedTerm = () => false) {
-    const directTerms = [...new Set(tokenize(value))];
-    const weightedTerms = new Map(directTerms.map(term => [term, 1]));
+  function variants(term) {
+    return [term, ...(QUERY_VARIANTS[term] || [])];
+  }
 
-    directTerms.forEach(term => {
+  function expandGroups(value, hasIndexedTerm = () => false) {
+    const directTerms = [...new Set(tokenize(value))];
+    const directTermSet = new Set(directTerms);
+    return directTerms.map(term => {
+      const weightedTerms = new Map([[term, 1]]);
+      variants(term).slice(1).forEach(variant => weightedTerms.set(variant, .94));
       // Literal matches are preferable to broader long-form expansions. The
       // glossary is a fallback for abbreviations absent from this catalog.
-      if (hasIndexedTerm(term) && !ALWAYS_EXPAND_ALIASES.has(term)) return;
+      if (hasIndexedTerm(term) && !ALWAYS_EXPAND_ALIASES.has(term)) {
+        return {
+          source: term,
+          terms: [...weightedTerms].map(([expanded, weight]) => ({ term: expanded, weight })),
+        };
+      }
       const expansion = QUERY_ALIASES[term];
-      if (!expansion) return;
-      tokenize(expansion).forEach(expanded => {
+      tokenize(expansion || "").forEach(expanded => {
+        // A term the user explicitly supplied belongs to its own coverage
+        // group; do not let one literal occurrence satisfy two concepts.
+        if (expanded !== term && directTermSet.has(expanded)) return;
         if (!weightedTerms.has(expanded)) weightedTerms.set(expanded, .86);
+      });
+      return {
+        source: term,
+        terms: [...weightedTerms].map(([expanded, weight]) => ({ term: expanded, weight })),
+      };
+    });
+  }
+
+  function expandTerms(value, hasIndexedTerm = () => false) {
+    const weightedTerms = new Map();
+    expandGroups(value, hasIndexedTerm).forEach(group => {
+      group.terms.forEach(({ term, weight }) => {
+        weightedTerms.set(term, Math.max(weight, weightedTerms.get(term) || 0));
       });
     });
 
@@ -133,6 +189,8 @@
     aliases: QUERY_ALIASES,
     normalizeText,
     tokenize,
+    variants,
+    expandGroups,
     expandTerms,
   });
 })();

@@ -83,20 +83,69 @@ ALWAYS_EXPAND_ALIASES = {
     term for term, expansion in QUERY_ALIASES.items() if expansion == PFAS_CONCEPT
 }
 
+QUERY_VARIANTS: dict[str, tuple[str, ...]] = {
+    "analyse": ("analysi",),
+    "analysi": ("analyse",),
+    "bacterium": ("bacteria",),
+    "bacteria": ("bacterium",),
+    "child": ("children",),
+    "children": ("child",),
+    "criterion": ("criteria",),
+    "criteria": ("criterion",),
+    "datum": ("data",),
+    "fungus": ("fungi",),
+    "fungi": ("fungus",),
+    "index": ("indicy", "indice"),
+    "indicy": ("index",),
+    "indice": ("index",),
+    "man": ("men",),
+    "men": ("man",),
+    "matrix": ("matrice",),
+    "matrice": ("matrix",),
+    "medium": ("media",),
+    "mouse": ("mice",),
+    "mice": ("mouse",),
+    "phenomenon": ("phenomena",),
+    "phenomena": ("phenomenon",),
+    "woman": ("women",),
+    "women": ("woman",),
+}
+
+
+def query_variants(term: str) -> tuple[str, ...]:
+    return (term, *QUERY_VARIANTS.get(term, ()))
+
+
+def expand_query_groups(
+    value: str,
+    postings: dict[str, list] | None = None,
+) -> list[tuple[str, list[tuple[str, float]]]]:
+    """Group every alias/irregular expansion under its original query term."""
+    groups: list[tuple[str, list[tuple[str, float]]]] = []
+    direct_terms = list(dict.fromkeys(tokenize(value)))
+    direct_term_set = set(direct_terms)
+    for term in direct_terms:
+        weighted_terms: dict[str, float] = {term: 1.0}
+        for variant in query_variants(term)[1:]:
+            weighted_terms.setdefault(variant, 0.94)
+        if not (postings and term in postings and term not in ALWAYS_EXPAND_ALIASES):
+            expansion = QUERY_ALIASES.get(term)
+            if expansion:
+                for expanded in tokenize(expansion):
+                    if expanded != term and expanded in direct_term_set:
+                        continue
+                    weighted_terms.setdefault(expanded, 0.86)
+        groups.append((term, list(weighted_terms.items())))
+    return groups
+
 
 def expand_query_terms(
     value: str,
     postings: dict[str, list] | None = None,
 ) -> list[tuple[str, float]]:
     """Return de-duplicated direct and lightly downweighted alias terms."""
-    direct_terms = list(dict.fromkeys(tokenize(value)))
-    weighted_terms = {term: 1.0 for term in direct_terms}
-    for term in direct_terms:
-        if postings and term in postings and term not in ALWAYS_EXPAND_ALIASES:
-            continue
-        expansion = QUERY_ALIASES.get(term)
-        if not expansion:
-            continue
-        for expanded in tokenize(expansion):
-            weighted_terms.setdefault(expanded, 0.86)
+    weighted_terms: dict[str, float] = {}
+    for _, terms in expand_query_groups(value, postings):
+        for term, weight in terms:
+            weighted_terms[term] = max(weight, weighted_terms.get(term, 0.0))
     return list(weighted_terms.items())

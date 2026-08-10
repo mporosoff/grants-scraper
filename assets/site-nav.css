@@ -250,10 +250,7 @@
   }
 
   .catalog-pill {
-    max-width: min(32vw, 150px);
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    max-width: none;
   }
 }
 
@@ -277,9 +274,32 @@
   }
 
   .catalog-pill {
-    max-width: 92px;
-    padding: 5px 8px;
-    font-size: .66rem;
+    min-width: 105px;
+    max-width: 118px;
+    padding: 7px 10px;
+    gap: 7px;
+    font-size: .7rem;
+    border-radius: 14px;
+  }
+
+  .catalog-pill-copy {
+    display: grid;
+    gap: 2px;
+    line-height: 1.05;
+  }
+
+  .catalog-pill-copy strong {
+    font-size: .72rem;
+  }
+
+  .catalog-pill-copy small {
+    color: #b9cbe0;
+    font-size: .61rem;
+    font-weight: 650;
+  }
+
+  .catalog-pill-copy small::before {
+    content: none;
   }
 
   .header-context-pill {
@@ -287,6 +307,16 @@
     overflow: hidden;
     font-size: .66rem;
     text-overflow: ellipsis;
+  }
+}
+
+@media (max-width: 350px) {
+  .site-header .brand > span:last-child {
+    display: none;
+  }
+
+  .header-actions {
+    margin-left: 8px;
   }
 }
 
