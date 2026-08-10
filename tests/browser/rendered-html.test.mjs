@@ -141,6 +141,7 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(script, /async function askResults/);
   assert.match(script, /async function openNofoFromFile/);
   assert.match(script, /async function askNofo/);
+  assert.match(script, /Markdown tables are supported/);
   assert.match(script, /function rejectNofoCatalogMatch/);
   assert.match(script, /data-nofo-reject-match/);
   assert.match(script, /data-nofo-remove/);
@@ -173,6 +174,8 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
     /html\.chat-expanded,\s*body\.chat-expanded\s*\{[^}]*overflow:\s*hidden[^}]*overscroll-behavior:\s*none/s,
   );
   assert.match(css, /\.chat-thinking/);
+  assert.match(css, /\.chat-table-wrap/);
+  assert.match(css, /\.chat-table th/);
   assert.match(script, /Open official FOA/);
   assert.match(script, /primary_document_url/);
   assert.match(script, /deadlineEvidenceLabel/);

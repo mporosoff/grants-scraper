@@ -3315,6 +3315,64 @@ footer p {
   border-left: 3px solid #b9cae2;
 }
 
+.message-content {
+  min-width: 0;
+}
+
+.chat-table-wrap {
+  max-width: 100%;
+  margin: 2px 0 10px;
+  overflow-x: auto;
+  background: white;
+  border: 1px solid #c8d5e5;
+  border-radius: 8px;
+  overscroll-behavior-x: contain;
+}
+
+.chat-table {
+  width: 100%;
+  min-width: 360px;
+  font-size: .78rem;
+  line-height: 1.4;
+  border-collapse: collapse;
+}
+
+.chat-table th,
+.chat-table td {
+  padding: 8px 10px;
+  overflow-wrap: anywhere;
+  vertical-align: top;
+  border-right: 1px solid #d8e2ee;
+  border-bottom: 1px solid #d8e2ee;
+}
+
+.chat-table th:last-child,
+.chat-table td:last-child {
+  border-right: 0;
+}
+
+.chat-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.chat-table th {
+  color: var(--navy);
+  font-weight: 800;
+  background: #eaf1fa;
+}
+
+.chat-table-align-left {
+  text-align: left;
+}
+
+.chat-table-align-center {
+  text-align: center;
+}
+
+.chat-table-align-right {
+  text-align: right;
+}
+
 .chat-thinking {
   display: flex;
   align-items: center;

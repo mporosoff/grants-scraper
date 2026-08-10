@@ -5,6 +5,9 @@
   const MAX_EXTERNAL = 4;
   const MIN_KEYWORDS = 3;
   const MAX_KEYWORDS = 8;
+  const MAX_MATCHES_PER_KEYWORD = 40;
+  const MAX_SEMANTIC_MATCHES_PER_KEYWORD = 8;
+  const MIN_RELATIVE_KEYWORD_SCORE = .14;
   const BROAD_RE = /broad agency announcement|\bbaa\b|continuation of solicitation|office of science|long[\s-]?range|research announcement|\broses\b|omnibus|unsolicited proposal/i;
   const DOMAIN_HINTS = Object.freeze({
     "Catalysis and reaction engineering": ["cataly", "electrocataly", "photocataly", "reaction engineering", "kinetic", "hydrogenation"],
@@ -119,7 +122,13 @@
     return String(record.deadline_note || record.close_date_note || "");
   }
 
-  function buildMatches(profile, catalogData, searchApi, nicheTopics = []) {
+  function buildMatches(
+    profile,
+    catalogData,
+    searchApi,
+    nicheTopics = [],
+    retrievalEngine = null,
+  ) {
     const records = Array.isArray(catalogData?.opportunities)
       ? catalogData.opportunities
       : [];
@@ -127,38 +136,77 @@
     if (!records.length || !searchApi?.tokenize || !searchApi?.expandTerms) return [];
 
     const hitsByDocument = new Map();
-    for (const keyword of profile.keywords || []) {
-      const concepts = [...new Set(searchApi.tokenize(keyword))];
-      if (!concepts.length) continue;
-      const conceptCount = new Map();
-      for (const concept of concepts) {
-        const documentIds = new Set();
-        const alternatives = searchApi.expandTerms(
-          concept,
-          term => Boolean(postings[term]),
-        );
-        for (const { term } of alternatives) {
-          const values = postings[term] || [];
-          for (let cursor = 0; cursor < values.length; cursor += 2) {
-            documentIds.add(values[cursor]);
-          }
+    const retrievalScores = new Float64Array(records.length);
+    if (typeof retrievalEngine?.score === "function") {
+      for (const keyword of profile.keywords || []) {
+        const result = retrievalEngine.score(keyword);
+        const candidates = [];
+        for (let documentId = 0; documentId < records.length; documentId += 1) {
+          const score = Number(result.scores?.[documentId] || 0);
+          if (score <= 0) continue;
+          candidates.push({
+            documentId,
+            score,
+            lexicalScore: Number(result.lexicalScores?.[documentId] || 0),
+          });
         }
-        documentIds.forEach(documentId => {
-          conceptCount.set(documentId, (conceptCount.get(documentId) || 0) + 1);
+        candidates.sort((left, right) =>
+          right.score - left.score || left.documentId - right.documentId,
+        );
+        const minimumScore = (candidates[0]?.score || 0) * MIN_RELATIVE_KEYWORD_SCORE;
+        let semanticMatches = 0;
+        let acceptedMatches = 0;
+        for (const candidate of candidates) {
+          if (candidate.score < minimumScore || acceptedMatches >= MAX_MATCHES_PER_KEYWORD) break;
+          const semanticOnly = candidate.lexicalScore <= 0;
+          if (semanticOnly && semanticMatches >= MAX_SEMANTIC_MATCHES_PER_KEYWORD) continue;
+          const { documentId, score } = candidate;
+          const terms = hitsByDocument.get(documentId) || [];
+          if (!terms.includes(keyword)) terms.push(keyword);
+          hitsByDocument.set(documentId, terms);
+          retrievalScores[documentId] += score;
+          acceptedMatches += 1;
+          if (semanticOnly) semanticMatches += 1;
+        }
+      }
+    } else {
+      // Keep a small compatibility path if the hybrid scorer fails to load.
+      for (const keyword of profile.keywords || []) {
+        const concepts = [...new Set(searchApi.tokenize(keyword))];
+        if (!concepts.length) continue;
+        const conceptCount = new Map();
+        for (const concept of concepts) {
+          const documentIds = new Set();
+          const alternatives = searchApi.expandTerms(
+            concept,
+            term => Boolean(postings[term]),
+          );
+          for (const { term } of alternatives) {
+            const values = postings[term] || [];
+            for (let cursor = 0; cursor < values.length; cursor += 2) {
+              documentIds.add(values[cursor]);
+            }
+          }
+          documentIds.forEach(documentId => {
+            conceptCount.set(documentId, (conceptCount.get(documentId) || 0) + 1);
+          });
+        }
+        const needed = concepts.length === 1
+          ? 1
+          : Math.max(2, Math.ceil(concepts.length * .6));
+        conceptCount.forEach((count, documentId) => {
+          if (count < needed) return;
+          const terms = hitsByDocument.get(documentId) || [];
+          terms.push(keyword);
+          hitsByDocument.set(documentId, terms);
         });
       }
-      const needed = concepts.length === 1
-        ? 1
-        : Math.max(2, Math.ceil(concepts.length * .6));
-      conceptCount.forEach((count, documentId) => {
-        if (count < needed) return;
-        const terms = hitsByDocument.get(documentId) || [];
-        terms.push(keyword);
-        hitsByDocument.set(documentId, terms);
-      });
     }
 
-    const domains = new Set(inferDomains(profile.keywords || []));
+    const domains = new Set([
+      ...(profile.domains || []).filter(Boolean),
+      ...inferDomains(profile.keywords || []),
+    ]);
     const niche = new Set(nicheTopics || []);
     const matches = [];
     records.forEach((record, documentId) => {
@@ -180,7 +228,10 @@
         tier: strong ? "strong" : "broad",
         terms: hitTerms,
         shared_topics: sharedTopics,
-        score: (strong ? 2 : 0) + hitTerms.length + sharedTopics.length,
+        score: (strong ? 2 : 0)
+          + hitTerms.length
+          + sharedTopics.length
+          + Math.min(8, Math.log1p(retrievalScores[documentId])),
       });
     });
 

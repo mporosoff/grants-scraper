@@ -43,6 +43,37 @@ test("allows safe Markdown links and rejects script links", async () => {
   assert.doesNotMatch(rendered, /href="javascript:/);
 });
 
+test("turns plain email addresses into safe mail links", async () => {
+  const chatUi = await loadChatUi();
+  const rendered = chatUi.renderRichText(
+    "Contact viviane.schwartz@science.doe.gov or chris.bradley@science.doe.gov.",
+  );
+
+  assert.match(rendered, /href="mailto:viviane\.schwartz@science\.doe\.gov"/);
+  assert.match(rendered, />viviane\.schwartz@science\.doe\.gov<\/a>/);
+  assert.match(rendered, /href="mailto:chris\.bradley@science\.doe\.gov"/);
+  assert.doesNotMatch(rendered, /mailto:chris\.bradley@science\.doe\.gov\./);
+});
+
+test("renders Markdown contact tables without flattening their rows", async () => {
+  const chatUi = await loadChatUi();
+  const rendered = chatUi.renderRichText([
+    "### Program Officers and Email Addresses [Page 47]",
+    "",
+    "| Name | Email |",
+    "|:-----|:------|",
+    "| Viviane Schwartz | viviane.schwartz@science.doe.gov |",
+    "| Chris Bradley | chris.bradley@science.doe.gov |",
+  ].join("\n"));
+
+  assert.match(rendered, /<div class="chat-table-wrap" tabindex="0">/);
+  assert.match(rendered, /<table class="chat-table">/);
+  assert.match(rendered, /<th scope="col" class="chat-table-align-left">Name<\/th>/);
+  assert.match(rendered, /<td class="chat-table-align-left">Viviane Schwartz<\/td>/);
+  assert.match(rendered, /href="mailto:chris\.bradley@science\.doe\.gov"/);
+  assert.doesNotMatch(rendered, /\|:-----\|/);
+});
+
 test("keeps only unique result ids from the bounded context", async () => {
   const chatUi = await loadChatUi();
   const ids = chatUi.knownResultIds(

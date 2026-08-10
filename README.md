@@ -171,6 +171,7 @@ support it.
 | `match_explorer.html` | Public search and AI-refinement interface |
 | `assets/app.js` | Search, cited source evidence, review/export, profile ranking, AI matching, and chat |
 | `assets/search-retrieval.js` | Local hybrid BM25, fuzzy, coverage, and catalog-topic retrieval |
+| `assets/team-researchers.js` | Device-local external researchers and shared hybrid researcher-to-opportunity matching |
 | `assets/search-query.js` | Conservative abbreviation and scientific word-form expansion |
 | `assets/profile.js` | Local profile/feedback storage and CV extraction |
 | `assets/nofo.js` | Browser-only NOFO PDF extraction, opportunity-number detection, and catalog matching |
