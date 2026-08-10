@@ -172,6 +172,9 @@ class TokenTests(unittest.TestCase):
             ["catalytic", "material", "battery"],
         )
 
+    def test_tokenizer_normalizes_scientific_subscripts(self):
+        self.assertEqual(tokenize("CO₂ H₂ PM₂.₅"), ["co2", "h2", "pm2.5"])
+
     def test_source_urls_must_be_absolute_http_urls(self):
         self.assertIsNone(safe_http_url("N/A"))
         self.assertIsNone(safe_http_url("/relative/path"))

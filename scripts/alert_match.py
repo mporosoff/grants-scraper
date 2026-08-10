@@ -20,8 +20,8 @@ import math
 from datetime import date, datetime
 from pathlib import Path
 
-from .build_catalog import tokenize  # identical tokenizer -> identical terms
 from .currentness import record_is_current
+from .search_query import expand_query_terms
 
 # Facet name -> record field. Mirrors ``facet_counts`` in build_catalog so the
 # filters a user picked in the UI mean the same thing here.
@@ -81,16 +81,16 @@ def bm25_scores(catalog: dict, query: str) -> tuple[list[float], bool]:
     index_terms = list(postings.keys())
 
     scores = [0.0] * document_count
-    query_terms = list(dict.fromkeys(tokenize(query)))
+    query_terms = expand_query_terms(query, postings)
 
-    for query_term in query_terms:
+    for query_term, query_weight in query_terms:
         for term in _posting_terms(query_term, postings, index_terms):
             values = postings[term]
             document_frequency = len(values) // 2
             inverse_frequency = math.log(
                 1 + ((document_count - document_frequency + 0.5) / (document_frequency + 0.5))
             )
-            prefix_weight = 1.0 if term == query_term else 0.72
+            prefix_weight = (1.0 if term == query_term else 0.72) * query_weight
             for cursor in range(0, len(values), 2):
                 document_id = values[cursor]
                 frequency = values[cursor + 1]
@@ -107,7 +107,7 @@ def bm25_scores(catalog: dict, query: str) -> tuple[list[float], bool]:
             if (record.get("opportunity_number") or "").lower() == phrase:
                 scores[i] += 30
 
-    return scores, len(query_terms) > 0
+    return scores, bool(query_terms)
 
 
 def _facet_values(record: dict, field: str) -> set[str]:

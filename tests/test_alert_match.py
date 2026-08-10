@@ -87,6 +87,47 @@ class MatcherTests(unittest.TestCase):
         self.assertTrue(results)
         self.assertEqual(results[0]["opportunity_id"], "1")
 
+    def test_common_abbreviation_finds_expanded_catalog_language(self):
+        carbon = _base(
+            opportunity_id="carbon",
+            title="Carbon dioxide removal research",
+            description="Capture atmospheric carbon dioxide for durable storage.",
+        )
+        unrelated = _base(
+            opportunity_id="unrelated",
+            title="Coastal habitat restoration",
+            description="Restore marine habitats and coastal ecosystems.",
+        )
+        catalog = make_catalog([carbon, unrelated])
+
+        for query in ("CO2", "CO₂"):
+            with self.subTest(query=query):
+                results = search_catalog(catalog, query, as_of=self.as_of)
+                self.assertEqual(
+                    [item["opportunity_id"] for item in results],
+                    ["carbon"],
+                )
+
+    def test_existing_literal_abbreviation_is_not_broadened(self):
+        literal = _base(
+            opportunity_id="literal",
+            title="AI safety evaluation",
+            description="Evaluation methods for AI systems.",
+        )
+        long_form_only = _base(
+            opportunity_id="long-form",
+            title="Artificial intelligence infrastructure",
+            description="Infrastructure for artificial intelligence research.",
+        )
+        catalog = make_catalog([literal, long_form_only])
+
+        results = search_catalog(catalog, "AI", as_of=self.as_of)
+
+        self.assertEqual(
+            [item["opportunity_id"] for item in results],
+            ["literal"],
+        )
+
     def test_new_relevant_announcement_outranks_stronger_old_match(self):
         old = _base(
             opportunity_id="old",

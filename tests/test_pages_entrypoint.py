@@ -138,7 +138,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             '<script src="./data/opportunities.js?v=catalog-',
             explorer_html,
         )
-        release_version = "release-2026-08-10-v9"
+        release_version = "release-2026-08-10-v10"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={release_version}">',
             explorer_html,
@@ -151,7 +151,13 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
                 f'<script src="./assets/{asset}?v={release_version}"></script>',
                 explorer_html,
             )
+        self.assertIn(
+            f'<script src="./assets/search-query.js?v={release_version}"></script>',
+            explorer_html,
+        )
         self.assertIn("globalThis.GRANT_CATALOG", application_js)
+        self.assertIn("globalThis.FUNDING_SEARCH_QUERY", application_js)
+        self.assertIn("SEARCH_QUERY.expandTerms", application_js)
         self.assertIn("MAX_AI_CANDIDATES = 32", application_js)
         self.assertIn("MAX_CHAT_RESULTS = 20", application_js)
         self.assertIn("NEW_RELEVANT_MAX_AGE_DAYS = 14", application_js)

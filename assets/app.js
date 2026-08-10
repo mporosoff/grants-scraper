@@ -18,6 +18,7 @@
   const CANONICAL_URL = "https://mporosoff.github.io/grants-scraper/";
   const REVIEW_EMAIL = "marc.porosoff@rochester.edu";
   const INDEX_TERMS = Object.keys(catalog?.search_index?.postings || {});
+  const SEARCH_QUERY = globalThis.FUNDING_SEARCH_QUERY;
   const PROFILE_API = globalThis.FUNDING_PROFILE;
   const NOFO_API = globalThis.FUNDING_NOFO;
   const REVIEW_API = globalThis.FUNDING_REVIEW;
@@ -118,17 +119,6 @@
     established: "Established investigator",
   };
 
-  const STOP_WORDS = new Set([
-    "a", "about", "after", "all", "also", "an", "and", "any", "application",
-    "applications", "are", "as", "at", "award", "awards", "be", "been",
-    "being", "by", "can", "for", "from", "funding", "grant", "grants", "has",
-    "have", "in", "including", "is", "it", "may", "more", "must", "new", "not",
-    "of", "on", "opportunities", "opportunity", "or", "other", "program",
-    "project", "projects", "proposal", "proposals", "research", "shall", "should",
-    "support", "than", "that", "the", "their", "these", "this", "through", "to",
-    "under", "use", "using", "was", "we", "which", "will", "with",
-  ]);
-
   const state = {
     ready: false,
     searched: false,
@@ -224,20 +214,8 @@
     }
   }
 
-  function normalizeToken(raw) {
-    let token = raw.toLowerCase().replace(/^[.-]+|[.-]+$/g, "");
-    if (token.length > 5 && token.endsWith("ies")) token = `${token.slice(0, -3)}y`;
-    else if (token.length > 5 && token.endsWith("ing")) token = token.slice(0, -3);
-    else if (token.length > 4 && token.endsWith("ed")) token = token.slice(0, -2);
-    else if (token.length > 4 && token.endsWith("s") && !token.endsWith("ss")) token = token.slice(0, -1);
-    return token;
-  }
-
   function tokenize(value) {
-    const raw = String(value || "").toLowerCase().match(/[a-z0-9][a-z0-9+.-]{1,}/g) || [];
-    return raw
-      .map(normalizeToken)
-      .filter(token => token.length > 1 && !STOP_WORDS.has(token));
+    return SEARCH_QUERY.tokenize(value);
   }
 
   function recordId(record) {
@@ -583,17 +561,17 @@
     const lengths = catalog.search_index.document_lengths;
     const postings = catalog.search_index.postings;
     const scores = new Float64Array(documentCount);
-    const queryTerms = [...new Set(tokenize(query))];
+    const queryTerms = SEARCH_QUERY.expandTerms(query, term => Boolean(postings[term]));
     const k1 = 1.2;
     const b = 0.75;
 
-    for (const queryTerm of queryTerms) {
+    for (const { term: queryTerm, weight: queryWeight } of queryTerms) {
       const expanded = postingTerms(queryTerm);
       for (const term of expanded) {
         const values = postings[term];
         const documentFrequency = values.length / 2;
         const inverseFrequency = Math.log(1 + ((documentCount - documentFrequency + .5) / (documentFrequency + .5)));
-        const prefixWeight = term === queryTerm ? 1 : .72;
+        const prefixWeight = (term === queryTerm ? 1 : .72) * queryWeight;
         for (let cursor = 0; cursor < values.length; cursor += 2) {
           const documentId = values[cursor];
           const frequency = values[cursor + 1];
@@ -603,7 +581,7 @@
       }
     }
 
-    const phrase = query.trim().toLowerCase();
+    const phrase = SEARCH_QUERY.normalizeText(query).trim().toLowerCase();
     if (phrase.length >= 4) {
       catalog.opportunities.forEach((record, index) => {
         if ((record.title || "").toLowerCase().includes(phrase)) scores[index] += 12;
@@ -4001,6 +3979,9 @@
   function initialize() {
     try {
       validateCatalog(catalog);
+      if (!SEARCH_QUERY?.tokenize || !SEARCH_QUERY?.expandTerms) {
+        throw new Error("The search-term helper did not load. Refresh the page and try again.");
+      }
       if (!PROFILE_API?.loadProfile || !PROFILE_API?.extractCv) {
         throw new Error("The local profile module did not load. Refresh the page and try again.");
       }

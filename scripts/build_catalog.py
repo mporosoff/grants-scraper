@@ -19,6 +19,7 @@ import math
 from pathlib import Path
 import re
 import tempfile
+import unicodedata
 from urllib.parse import urljoin, urlparse, urlunparse
 from xml.etree.ElementTree import iterparse
 from zipfile import ZipFile
@@ -700,9 +701,10 @@ def normalize_token(token):
 
 
 def tokenize(value):
+    normalized_value = unicodedata.normalize("NFKC", value or "").casefold()
     return [
         normalized
-        for raw in TOKEN_RE.findall((value or "").casefold())
+        for raw in TOKEN_RE.findall(normalized_value)
         if (normalized := normalize_token(raw))
         and normalized not in STOP_WORDS
         and len(normalized) > 1
