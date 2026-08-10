@@ -161,11 +161,19 @@ def _sig_words(phrase: str) -> list[str]:
     return [w for w in _WORD_RE.findall((phrase or "").lower()) if w not in _STOP]
 
 
-def _phrase_hit(sig: list[str], opp_words: set[str]) -> bool:
+def _phrase_hit(sig: list[str], opp_words: set[str],
+                common: set | None = None) -> bool:
     """A key phrase 'hits' an opportunity when enough of its distinctive words are
     present. A single-word phrase needs its one word; multi-word phrases need at
     least ceil(60%) of their distinctive words (minimum 2), so a match can't rest
-    on one or two generic words like 'energy' + 'materials'."""
+    on one or two generic words like 'energy' + 'materials'.
+
+    ``common`` is an optional set of corpus-frequent words (e.g. 'materials',
+    'learning', 'systems') that carry no distinguishing signal; they are stripped
+    before the count so an OpenAlex topic label like 'Machine Learning in
+    Materials Science' can't match hundreds of unrelated notices."""
+    if common:
+        sig = [w for w in sig if w not in common]
     if not sig:
         return False
     present = sum(1 for w in sig if w in opp_words)
@@ -189,85 +197,247 @@ def _key_terms(profile: dict) -> list[str]:
     return terms[:8]
 
 
-def match_to_catalog(profiles: list[dict], catalog_path: str, out_path: str,
-                     top_n: int = 25) -> dict:
-    catalog = _load_catalog(catalog_path)
+# --------------------------------------------------------------------------- #
+# Program-topic domains. A PI's *specific* work ("heterogeneous catalysis") is
+# mapped onto the catalog's controlled ``topic_areas`` vocabulary. Broad
+# solicitations (BAAs, DOE Office of Science, NASA ROSES) bury their real scope
+# behind boilerplate FOA language, but they ARE tagged with these program
+# topics -- so matching on topics, not just wording, is what surfaces them.
+# Keys are catalog topic_areas; values are substrings sought in a PI profile.
+# --------------------------------------------------------------------------- #
+DOMAIN_LEXICON: dict[str, list[str]] = {
+    "Catalysis and reaction engineering":
+        ["cataly", "electrocataly", "photocataly", "reaction engineering",
+         "kinetics", "water-gas shift", "hydrogenation"],
+    "Energy":
+        ["energy", "fuel cell", "biofuel", "fuel", "battery", "batteries",
+         "electrochem", "solar", "photovolta", "combustion", "hydrogen",
+         "electroly", "power grid", "renewable"],
+    "Carbon management":
+        ["co2", "carbon dioxide", "carbon capture", "carbon utiliz",
+         "decarboniz", "sequestrat", "direct air capture", "syngas"],
+    "Materials science":
+        ["material", "polymer", "nanomaterial", "thin film", "crystal",
+         "metal-organic framework", "mof", "composite", "coating", "graphene",
+         "2d material", "semiconductor", "nanoparticle", "self-assembl"],
+    "Separations and membranes":
+        ["membrane", "gas separation", "adsorp", "filtration", "distillation",
+         "chromatograph", "ion exchange"],
+    "Manufacturing":
+        ["manufactur", "additive manufactur", "3d printing", "fabrication",
+         "roll-to-roll", "process intensification", "scale-up"],
+    "Artificial intelligence and machine learning":
+        ["machine learning", "deep learning", "neural network",
+         "artificial intelligence", "data-driven"],
+    "Quantum science": ["quantum"],
+    "Biology and biotechnology":
+        ["biolog", "biotechnolog", "microb", "protein", "synthetic biology",
+         "enzyme", "antibiotic", "bioreactor", "metabolic", "fermentation"],
+    "Environmental science":
+        ["environ", "pollut", "emission", "sustainab", "remediation",
+         "air quality"],
+    "Water":
+        ["desalinat", "wastewater", "water treatment", "drinking water",
+         "water purification", "water resources"],
+    "Public health":
+        ["clinical trial", "drug delivery", "therapeutic", "pharmaceutic",
+         "vaccine", "diagnostic"],
+    "Climate change":
+        ["climate", "greenhouse gas", "global warming"],
+    "Space and aeronautics":
+        ["aerospace", "spacecraft", "aeronautic", "propulsion",
+         "in situ resource"],
+}
 
-    # Each PI is reduced to 5-8 descriptive key phrases; an opportunity matches a
-    # PI only when it shares the *distinctive* words of one of those phrases. This
-    # is far more specific than the old whole-word-bag overlap.
-    faculty_terms: dict[str, list[str]] = {}
-    faculty_meta: dict[str, dict] = {}
-    for p in profiles:
-        if p.get("error"):
-            continue
-        terms = _key_terms(p)
-        if not terms:
-            continue
-        faculty_terms[p["name"]] = terms
-        faculty_meta[p["name"]] = {
-            "resolved_name": p.get("resolved_name") or p["name"],
-            "openalex_id": p.get("openalex_id"),
-            "works_count": p.get("works_count"),
-            "key_terms": terms,
-        }
-    term_sig = {name: [(t, _sig_words(t)) for t in terms]
-                for name, terms in faculty_terms.items()}
+# Concrete markers of a broad/open solicitation (vs. a targeted call). These
+# fund many topics, so we let a PI's program-topic overlap surface them -- but
+# they are flagged "broad" so the reader verifies fit against the full notice.
+_BROAD_RE = re.compile(
+    r"broad agency announcement|\bbaa\b|continuation of solicitation|"
+    r"office of science|long[\s-]?range|research announcement|\broses\b|"
+    r"omnibus|unsolicited proposal",
+    re.I,
+)
 
-    per_faculty: dict[str, list] = {name: [] for name in faculty_terms}
-    per_opp_scores: list[tuple] = []
 
+def _pi_domains(profile: dict) -> list[str]:
+    """Program topics a PI works in, inferred from their OpenAlex topics, recent
+    titles, and key phrases via :data:`DOMAIN_LEXICON`."""
+    text = " ".join(
+        (profile.get("topics") or [])
+        + (profile.get("recent_titles") or [])
+        + _key_terms(profile)
+    ).lower()
+    return [area for area, kws in DOMAIN_LEXICON.items()
+            if any(k in text for k in kws)]
+
+
+def _is_broad(opp: dict) -> bool:
+    blob = (opp.get("title") or "") + " " + (opp.get("description") or "")[:400]
+    return bool(_BROAD_RE.search(blob))
+
+
+def _niche_topics(catalog: list[dict]) -> set[str]:
+    """Topic areas specific enough that a single shared one signals a real
+    research overlap. Common umbrella topics (Energy, AI/ML, Environmental
+    science...) are excluded -- those only count toward *broad* solicitations,
+    so they can't flood the results."""
+    from collections import Counter
+    freq: Counter = Counter()
+    for r in catalog:
+        for x in (r.get("topic_areas") or []):
+            freq[x] += 1
+    cutoff = max(45, round(0.03 * len(catalog)))
+    return {t for t, c in freq.items() if c <= cutoff}
+
+
+def _common_words(catalog: list[dict]) -> set:
+    """Words that appear in more than ~5% of notices carry no distinguishing
+    signal (e.g. 'materials', 'learning', 'systems', 'energy'). Stripping them
+    from phrase matching keeps a match resting on genuinely specific terms."""
+    from collections import Counter
+    df: Counter = Counter()
     for opp in catalog:
         text = " ".join([
             opp.get("title") or "", opp.get("description") or "",
             " ".join(opp.get("topic_areas") or []),
             " ".join(opp.get("disciplines") or []),
         ]).lower()
+        for w in {w for w in _WORD_RE.findall(text) if w not in _STOP}:
+            df[w] += 1
+    cutoff = max(60, round(0.05 * len(catalog)))
+    return {w for w, c in df.items() if c > cutoff}
+
+
+def _best_url(r: dict) -> str:
+    for k in ("funding_opportunity_url", "primary_document_url", "detail_page", "url"):
+        u = r.get(k) or ""
+        if re.match(r"^https?://", str(u), re.I):
+            return str(u)
+    return ""
+
+
+def _deadline_text(r: dict) -> str:
+    cd = r.get("close_date")
+    if cd and re.match(r"^\d{4}-\d{2}-\d{2}$", str(cd)):
+        return "Closes " + str(cd)
+    return str(r.get("deadline_note") or r.get("close_date_note") or "")
+
+
+def match_to_catalog(profiles: list[dict], catalog_path: str, out_path: str,
+                     top_n: int = 25) -> dict:
+    """Match every PI against the catalog on two tiers and emit a per-PI index
+    the team page uses to compute mutual interests for any chosen subset.
+
+    STRONG  -- a distinctive key-phrase appears in the notice, OR the PI shares
+               a *niche* (specific) program topic with the call. High precision.
+    BROAD   -- the call is a broad/open solicitation (BAA, DOE Office of Science,
+               NASA ROSES...) and the PI shares any program topic with it. These
+               are flagged so the reader verifies fit against the full notice.
+    """
+    catalog = _load_catalog(catalog_path)
+    niche = _niche_topics(catalog)
+    common = _common_words(catalog)
+
+    faculty_meta: dict[str, dict] = {}
+    faculty_terms: dict[str, list[str]] = {}
+    faculty_doms: dict[str, set] = {}
+    for p in profiles:
+        if p.get("error"):
+            continue
+        terms = _key_terms(p)
+        doms = set(_pi_domains(p))
+        if not terms and not doms:
+            continue
+        name = p["name"]
+        faculty_terms[name] = terms
+        faculty_doms[name] = doms
+        faculty_meta[name] = {
+            "resolved_name": p.get("resolved_name") or name,
+            "openalex_id": p.get("openalex_id"),
+            "works_count": p.get("works_count"),
+            "key_terms": terms,
+            "domains": sorted(doms),
+        }
+    term_sig = {name: [(t, _sig_words(t)) for t in terms]
+                for name, terms in faculty_terms.items()}
+
+    pi_matches: dict[str, list] = {name: [] for name in faculty_meta}
+    per_opp: dict[str, list] = {}     # opp_id -> [(name, tier, score), ...]
+
+    for opp in catalog:
+        title = opp.get("title") or ""
+        text = " ".join([
+            title, opp.get("description") or "",
+            " ".join(opp.get("topic_areas") or []),
+            " ".join(opp.get("disciplines") or []),
+        ]).lower()
         opp_words = {w for w in _WORD_RE.findall(text) if w not in _STOP}
         if not opp_words:
             continue
-        opp_id = opp.get("opportunity_id") or opp.get("opportunity_number") or opp.get("title")
-        contributors = []
+        opp_topics = set(opp.get("topic_areas") or [])
+        broad = _is_broad(opp)
+        oid = (opp.get("opportunity_id") or opp.get("opportunity_number")
+               or title)
+        display = {
+            "id": oid, "title": title, "agency": opp.get("agency") or "",
+            "url": _best_url(opp), "deadline": _deadline_text(opp),
+        }
         for name, sigs in term_sig.items():
-            matched = [t for (t, sig) in sigs if _phrase_hit(sig, opp_words)]
-            if matched:
-                contributors.append((name, len(matched), matched))
-                per_faculty[name].append((len(matched), opp_id, opp.get("title"), matched))
-        if len(contributors) >= 2:  # multi-PI candidate
-            per_opp_scores.append((sum(c[1] for c in contributors), opp_id,
-                                   opp.get("title"), contributors))
+            doms = faculty_doms[name]
+            hit_terms = [t for (t, sig) in sigs
+                         if _phrase_hit(sig, opp_words, common)]
+            niche_hit = sorted(doms & opp_topics & niche)
+            broad_hit = sorted(doms & opp_topics) if broad else []
+            strong = bool(hit_terms or niche_hit)
+            if not strong and not broad_hit:
+                continue
+            tier = "strong" if strong else "broad"
+            shared = niche_hit if strong else broad_hit
+            score = (2 if strong else 0) + len(hit_terms) + len(shared)
+            pi_matches[name].append({
+                **display, "tier": tier, "terms": hit_terms,
+                "shared_topics": shared, "score": score,
+            })
+            per_opp.setdefault(oid, []).append((name, tier, score))
 
-    def _rank(item):
-        return (-(item[0]), (item[2] or "").lower())
+    for name in pi_matches:
+        pi_matches[name].sort(key=lambda m: (
+            0 if m["tier"] == "strong" else 1, -m["score"], (m["title"] or "").lower()))
 
-    faculty_top = {
-        name: [{"opportunity_id": oid, "title": t, "score": s, "matched_terms": m}
-               for (s, oid, t, m) in sorted(items, key=_rank)[:top_n]]
-        for name, items in per_faculty.items()
+    # Department-wide overview: opportunities where 2+ faculty overlap, ranked so
+    # the ones with the most *strong* fits (then most PIs) surface first.
+    idx = {m["id"]: m for lst in pi_matches.values() for m in lst}
+    groups = []
+    for oid, members in per_opp.items():
+        if len({m[0] for m in members}) < 2:
+            continue
+        d = idx.get(oid, {})
+        team = []
+        for (name, tier, score) in members:
+            mm = next((x for x in pi_matches[name] if x["id"] == oid), {})
+            team.append({"name": name, "tier": tier, "score": score,
+                         "matched_terms": mm.get("terms") or [],
+                         "shared_topics": mm.get("shared_topics") or []})
+        team.sort(key=lambda t: (0 if t["tier"] == "strong" else 1, -t["score"]))
+        strong_n = sum(1 for t in team if t["tier"] == "strong")
+        groups.append({
+            "opportunity_id": oid, "title": d.get("title") or oid,
+            "agency": d.get("agency") or "", "url": d.get("url") or "",
+            "deadline": d.get("deadline") or "",
+            "strong_count": strong_n, "team_size": len(team),
+            "total_score": sum(t["score"] for t in team),
+            "suggested_team": team[:12],
+        })
+    groups.sort(key=lambda g: (-g["strong_count"], -g["team_size"], -g["total_score"]))
+
+    out = {
+        "catalog_size": len(catalog),
+        "niche_topics": sorted(niche),
+        "faculty": faculty_meta,
+        "pi_matches": pi_matches,
+        "multi_pi_suggestions": groups,
     }
-    # Select groups so every PI is represented -- a niche PI (e.g. Shestopalov)
-    # must not be starved by a global top-N cut -- then rank by total score.
-    ranked = sorted(per_opp_scores, key=lambda x: -x[0])
-    chosen: dict = {}
-    seen_per_pi: dict = {}
-    for entry in ranked:                       # each PI's strongest ~12 groups
-        for (n, _s, _m) in entry[3]:
-            if seen_per_pi.get(n, 0) < 12:
-                seen_per_pi[n] = seen_per_pi.get(n, 0) + 1
-                chosen[entry[1]] = entry
-    for entry in ranked[:120]:                 # plus the strongest groups overall
-        chosen[entry[1]] = entry
-    multi_pi = [{
-        "opportunity_id": oid, "title": t, "total_score": tot,
-        # Include *every* contributing PI (capped generously) so a low-scoring
-        # member is never silently dropped from a team they belong to.
-        "suggested_team": [{"name": n, "score": s, "matched_terms": m}
-                           for (n, s, m) in sorted(contribs, key=lambda c: -c[1])[:12]],
-    } for (tot, oid, t, contribs) in sorted(chosen.values(), key=lambda x: -x[0])]
-
-    out = {"faculty": faculty_meta,
-           "faculty_top_matches": faculty_top,
-           "multi_pi_suggestions": multi_pi}
     with open(out_path, "w", encoding="utf-8") as fh:
         fh.write("/* Generated by scripts/faculty_match.py. Do not edit by hand. */\n")
         fh.write("globalThis.FACULTY_MATCHES=")

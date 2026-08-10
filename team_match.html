@@ -11,7 +11,8 @@
   :root{
     --navy:#12263f;--navy-2:#1d3b5d;--blue:#1f64d5;--blue-dark:#174ca4;--blue-soft:#eaf2ff;
     --gold:#f4b942;--ink:#172033;--muted:#617087;--line:#dce3ec;--line-strong:#c8d2df;
-    --surface:#ffffff;--surface-alt:#f5f7fa;--page:#eef2f6;--success:#16845b;--warning:#9a5a00;
+    --surface:#ffffff;--surface-alt:#f5f7fa;--page:#eef2f6;--success:#16845b;--success-soft:#e6f5ef;
+    --warning:#9a5a00;--warning-soft:#fdf2dd;
     --shadow:0 14px 35px rgba(18,38,63,.09);--radius:14px;color-scheme:light;
     font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   }
@@ -24,30 +25,51 @@
   header.page p{margin:0;color:#cfe0f5;font-size:.92rem;}
   .internal-tag{display:inline-block;margin-bottom:10px;background:rgba(244,185,66,.2);color:var(--gold);border:1px solid rgba(244,185,66,.5);padding:2px 10px;border-radius:999px;font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;}
   .meta-line{margin-top:12px;color:#a9c1de;font-size:.82rem;}
-  .controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:22px 0 6px;}
-  .picker{display:flex;align-items:center;gap:8px;font-size:.9rem;font-weight:600;}
-  .picker select{padding:9px 12px;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;cursor:pointer;max-width:100%;}
-  .search{flex:1;min-width:220px;}
-  .search input{width:100%;padding:10px 13px;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;}
-  .count{color:var(--muted);font-size:.85rem;margin:8px 2px 14px;}
-  .keyterms{background:var(--blue-soft);border:1px solid #cfe0fb;border-radius:12px;padding:12px 15px;margin:6px 0 18px;}
-  .keyterms h2{margin:0 0 8px;font-size:.95rem;color:var(--navy);}
-  .keyterms .sub{color:var(--muted);font-size:.8rem;margin:0 0 8px;}
-  .chip{display:inline-block;background:#fff;border:1px solid #cfe0fb;color:var(--blue-dark);border-radius:999px;padding:3px 10px;margin:3px 4px 0 0;font-size:.78rem;font-weight:600;}
+
+  .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin:22px 0 6px;}
+  .panel h2{margin:0 0 4px;font-size:.98rem;color:var(--navy);}
+  .panel .hint{margin:0 0 12px;color:var(--muted);font-size:.82rem;}
+  .pi-grid{display:flex;flex-wrap:wrap;gap:8px;}
+  .pi-toggle{display:inline-flex;align-items:center;gap:7px;background:var(--surface-alt);border:1px solid var(--line-strong);color:var(--ink);border-radius:999px;padding:7px 13px;font:inherit;font-size:.86rem;cursor:pointer;transition:all .12s;}
+  .pi-toggle:hover{border-color:var(--blue);}
+  .pi-toggle .dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--line-strong);flex:none;}
+  .pi-toggle.on{background:var(--blue-soft);border-color:var(--blue);color:var(--blue-dark);font-weight:600;}
+  .pi-toggle.on .dot{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px #fff;}
+  .pi-toggle.you{border-style:dashed;}
+  .pi-toggle[disabled]{opacity:.4;cursor:not-allowed;}
+  .toolrow{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:14px;}
+  .toolrow .search{flex:1;min-width:220px;}
+  .toolrow input[type=search]{width:100%;padding:10px 13px;font:inherit;color:var(--ink);background:var(--surface-alt);border:1px solid var(--line-strong);border-radius:10px;}
+  .linkbtn{background:none;border:none;color:var(--blue-dark);font:inherit;font-size:.84rem;cursor:pointer;padding:6px 4px;text-decoration:underline;}
+  .deptbar{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted);}
+
+  .selected-terms{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px;}
+  .st-card{background:var(--blue-soft);border:1px solid #cfe0fb;border-radius:12px;padding:9px 13px;font-size:.8rem;max-width:100%;}
+  .st-card .who{font-weight:700;color:var(--navy);}
+  .st-card .terms{color:var(--blue-dark);margin-top:2px;font-size:.75rem;}
+
+  .count{color:var(--muted);font-size:.85rem;margin:16px 2px 12px;}
   .section-label{margin:22px 2px 10px;font-size:.75rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
+  .section-label.broad{color:var(--warning);}
+
   .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 18px;margin-bottom:12px;}
+  .card.broadcard{border-left:4px solid var(--gold);}
   .card h3{margin:0 0 4px;font-size:1.02rem;line-height:1.35;}
   .card h3 a{text-decoration:none;}
   .card h3 a:hover{text-decoration:underline;}
   .agency{margin:0;color:var(--muted);font-size:.84rem;}
   .deadline{margin:4px 0 0;font-size:.8rem;color:var(--warning);}
-  .scorebadge{float:right;background:var(--blue-soft);color:var(--blue-dark);border:1px solid #cfe0fb;border-radius:999px;padding:3px 11px;font-size:.74rem;font-weight:700;white-space:nowrap;margin-left:10px;}
-  .why{margin-top:8px;font-size:.76rem;color:var(--muted);}
-  .why .term{display:inline-block;background:var(--surface-alt);border:1px solid var(--line);border-radius:6px;padding:1px 7px;margin:2px 4px 0 0;color:#455;}
+  .badges{float:right;margin-left:10px;text-align:right;}
+  .badge{display:inline-block;border-radius:999px;padding:3px 11px;font-size:.72rem;font-weight:700;white-space:nowrap;}
+  .badge.fit{background:var(--blue-soft);color:var(--blue-dark);border:1px solid #cfe0fb;}
+  .badge.specific{background:var(--success-soft);color:var(--success);border:1px solid #bfe6d5;margin-left:6px;}
+  .badge.broad{background:var(--warning-soft);color:var(--warning);border:1px solid #f0d9a8;margin-left:6px;}
   .team{margin-top:11px;display:flex;flex-wrap:wrap;gap:8px;}
   .pi{background:var(--surface-alt);border:1px solid var(--line);border-radius:10px;padding:8px 11px;font-size:.82rem;max-width:100%;}
+  .pi.strong{border-color:#bfe6d5;background:var(--success-soft);}
+  .pi.broadfit{border-color:#f0d9a8;background:var(--warning-soft);}
   .pi .name{font-weight:700;color:var(--navy);}
-  .pi .terms{margin-top:2px;color:var(--muted);font-size:.73rem;}
+  .pi .why{margin-top:2px;color:var(--muted);font-size:.73rem;}
   .empty{background:var(--surface);border:1px dashed var(--line-strong);border-radius:var(--radius);padding:32px 22px;text-align:center;color:var(--muted);}
   .empty code{background:var(--surface-alt);padding:2px 6px;border-radius:6px;}
   footer.note{margin-top:26px;color:var(--muted);font-size:.8rem;text-align:center;}
@@ -59,24 +81,28 @@
   <header class="page">
     <span class="internal-tag">Internal · Porosoff group</span>
     <h1>ChemE faculty ↔ funding — collaboration finder</h1>
-    <p>Each PI is matched on 5–8 key research phrases drawn from their publication profile. Pick a faculty member to see their opportunities and the collaboration groups they fit, or leave it on <em>All faculty</em> to browse cross-PI collaboration opportunities by topic.</p>
+    <p>Pick yourself and up to three colleagues. The tool finds funding calls that fit at least two of you — matching on program topics, not just the wording of the notice, so broad agency announcements and omnibus solicitations (DOE Office of Science, NASA ROSES, DoD/ONR BAAs) surface too, clearly flagged so you can verify fit.</p>
     <p class="meta-line" id="meta-line">Loading…</p>
   </header>
 
-  <div class="controls">
-    <div class="picker">
-      <label for="pi-select">Faculty member:</label>
-      <select id="pi-select"><option value="">All faculty — collaboration groups</option></select>
+  <div class="panel">
+    <h2>Your team</h2>
+    <p class="hint" id="team-hint">Pick 2–4 faculty. You (Porosoff) are selected — add colleagues to find shared opportunities.</p>
+    <div class="pi-grid" id="pi-grid"></div>
+    <div class="toolrow">
+      <div class="search"><input id="filter" type="search" placeholder="Filter results by title, agency, or keyword…" autocomplete="off" /></div>
+      <div class="deptbar">
+        <label><input type="checkbox" id="dept-toggle" /> Department-wide overview (all faculty)</label>
+      </div>
     </div>
-    <div class="search"><input id="filter" type="search" placeholder="Filter by title, agency, or keyword…" autocomplete="off" /></div>
   </div>
 
+  <div id="selected-terms" class="selected-terms"></div>
   <p class="count" id="count"></p>
-  <div id="keyterms"></div>
   <div id="view"></div>
 
   <footer class="note">
-    Generated by <code>scripts/faculty_match.py</code> from OpenAlex publication profiles. Not linked from the public finder and marked no-index. Re-run the profiles + match steps to refresh; edit <code>FACULTY_KEYTERMS</code> in the script to hand-tune a PI's key phrases.
+    Generated by <code>scripts/faculty_match.py</code> from OpenAlex publication profiles. Not linked from the public finder and marked no-index. “Specific” = a key research phrase or a niche program topic matched; “broad” = an open solicitation whose program areas overlap the team. Re-run the profiles + match steps to refresh; edit <code>FACULTY_KEYTERMS</code> / <code>DOMAIN_LEXICON</code> in the script to hand-tune.
   </footer>
 </div>
 
@@ -86,8 +112,10 @@
 (function () {
   "use strict";
   var $ = function (id) { return document.getElementById(id); };
-  var catalog = (globalThis.GRANT_CATALOG && globalThis.GRANT_CATALOG.opportunities) || [];
   var M = globalThis.FACULTY_MATCHES || null;
+  var catalog = (globalThis.GRANT_CATALOG && globalThis.GRANT_CATALOG.opportunities) || [];
+  var MAX = 4;
+  var YOU = "Marc D. Porosoff";
 
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
@@ -95,111 +123,188 @@
     });
   }
   function last(name) { return String(name || "").split(" ").pop(); }
-  function bestUrl(r) {
-    var u = r && (r.funding_opportunity_url || r.primary_document_url || r.detail_page || r.url) || "";
-    return /^https?:\/\//i.test(u) ? u : "";
-  }
-  function deadlineText(r) {
-    if (!r) return "";
-    if (r.close_date && /^\d{4}-\d{2}-\d{2}$/.test(r.close_date)) return "Closes " + r.close_date;
-    if (r.deadline_note) return String(r.deadline_note);
-    if (r.close_date_note) return String(r.close_date_note);
-    return "";
-  }
 
+  // Catalog lookup (for a richer description if id still present); the match data
+  // already carries title/agency/url/deadline so the page renders even if the
+  // catalog has since refreshed and dropped an id.
   var byId = {};
   catalog.forEach(function (r) {
     [r.opportunity_id, r.opportunity_number, r.title].forEach(function (k) {
       if (k && !(k in byId)) byId[k] = r;
     });
   });
-  function lookup(id) { return byId[id] || null; }
 
-  function terms(list) {
-    return (list || []).map(function (t) { return '<span class="term">' + esc(t) + "</span>"; }).join("");
+  var faculty = (M && M.faculty) || {};
+  var piMatches = (M && M.pi_matches) || {};
+  var groups = (M && M.multi_pi_suggestions) || [];
+  var names = Object.keys(faculty).sort();
+  var selected = [];
+
+  function reasonText(fit) {
+    var parts = (fit.terms || []).slice(0);
+    (fit.shared_topics || []).forEach(function (t) {
+      if (parts.indexOf(t) === -1) parts.push(t);
+    });
+    return parts.join(" · ");
   }
-  function oppHead(id, title, score) {
-    var r = lookup(id), url = r ? bestUrl(r) : "", agency = (r && r.agency) || "", dl = deadlineText(r);
+  function oppHead(d, fitCount, isSpecific) {
+    var url = d.url && /^https?:\/\//i.test(d.url) ? d.url : "";
     var titleHtml = url
-      ? '<a href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(title) + " ↗</a>"
-      : esc(title);
-    return (score != null ? '<span class="scorebadge">' + esc(score) + " match" + (score === 1 ? "" : "es") + "</span>" : "") +
-      "<h3>" + titleHtml + "</h3>" +
-      (agency ? '<p class="agency">' + esc(agency) + "</p>" : "") +
-      (dl ? '<p class="deadline">' + esc(dl) + "</p>" : "");
+      ? '<a href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(d.title) + " ↗</a>"
+      : esc(d.title);
+    var badges = '<span class="badges">' +
+      '<span class="badge fit">' + fitCount + " of " + selected.length + "</span>" +
+      (isSpecific ? '<span class="badge specific">specific</span>'
+                  : '<span class="badge broad">broad · verify fit</span>') +
+      "</span>";
+    return badges + "<h3>" + titleHtml + "</h3>" +
+      (d.agency ? '<p class="agency">' + esc(d.agency) + "</p>" : "") +
+      (d.deadline ? '<p class="deadline">' + esc(d.deadline) + "</p>" : "");
   }
-  function teamChips(team, highlight) {
-    return '<div class="team">' + (team || []).map(function (m) {
-      var nm = highlight && m.name === highlight
-        ? '<span class="name" style="color:var(--blue-dark)">' + esc(last(m.name)) + " ★</span>"
-        : '<span class="name">' + esc(last(m.name)) + "</span>";
-      var tm = (m.matched_terms || []).slice(0, 4).join(" · ");
-      return '<div class="pi">' + nm + (tm ? '<div class="terms">' + esc(tm) + "</div>" : "") + "</div>";
+  function teamChips(fits) {
+    return '<div class="team">' + fits.map(function (f) {
+      var cls = f.tier === "strong" ? "pi strong" : "pi broadfit";
+      var why = reasonText(f);
+      return '<div class="' + cls + '"><span class="name">' + esc(last(f.name)) + "</span>" +
+        (why ? '<div class="why">' + esc(why) + "</div>" : "") + "</div>";
     }).join("") + "</div>";
   }
 
-  var faculty = (M && M.faculty) || {};
-  var facultyTop = (M && M.faculty_top_matches) || {};
-  var groups = (M && M.multi_pi_suggestions) || [];
-  var names = Object.keys(faculty).length ? Object.keys(faculty) : Object.keys(facultyTop);
-  names.sort();
-
-  function groupText(g) {
-    return (g.title + " " + (g.suggested_team || []).map(function (m) {
-      return m.name + " " + (m.matched_terms || []).join(" ");
-    }).join(" ") + " " + ((lookup(g.opportunity_id) || {}).agency || "")).toLowerCase();
+  // ---- team mode -------------------------------------------------------- //
+  function buildShared() {
+    var map = {};
+    selected.forEach(function (name) {
+      (piMatches[name] || []).forEach(function (m) {
+        var e = map[m.id] || (map[m.id] = {
+          d: { id: m.id, title: m.title, agency: m.agency, url: m.url, deadline: m.deadline },
+          fits: []
+        });
+        e.fits.push({ name: name, tier: m.tier, terms: m.terms, shared_topics: m.shared_topics, score: m.score });
+      });
+    });
+    return Object.keys(map).map(function (k) {
+      var e = map[k];
+      e.fits.sort(function (a, b) {
+        return (a.tier === "strong" ? 0 : 1) - (b.tier === "strong" ? 0 : 1) || b.score - a.score;
+      });
+      e.strongN = e.fits.filter(function (f) { return f.tier === "strong"; }).length;
+      e.totalN = e.fits.length;
+      e.sumScore = e.fits.reduce(function (s, f) { return s + f.score; }, 0);
+      return e;
+    }).filter(function (e) { return e.totalN >= 2; });
   }
-  function oppText(it) {
-    var r = lookup(it.opportunity_id) || {};
-    return (it.title + " " + (it.matched_terms || []).join(" ") + " " + (r.agency || "")).toLowerCase();
+  function matchesQuery(e, q) {
+    if (!q) return true;
+    var hay = (e.d.title + " " + e.d.agency + " " +
+      e.fits.map(function (f) { return f.name + " " + reasonText(f); }).join(" ")).toLowerCase();
+    return hay.indexOf(q) !== -1;
   }
+  function renderTeam(q) {
+    $("selected-terms").innerHTML = selected.map(function (n) {
+      var kt = (faculty[n] && faculty[n].key_terms) || [];
+      return '<div class="st-card"><span class="who">' + esc(last(n)) + "</span>" +
+        (kt.length ? '<div class="terms">' + esc(kt.slice(0, 6).join(" · ")) + "</div>" : "") + "</div>";
+    }).join("");
 
-  function renderAll(q) {
-    $("keyterms").innerHTML = "";
-    var list = groups.filter(function (g) { return !q || groupText(g).indexOf(q) !== -1; });
-    $("count").textContent = list.length + " collaboration opportunit" + (list.length === 1 ? "y" : "ies") +
-      " where 2+ faculty overlap" + (q ? " (filtered)" : "");
-    if (!list.length) {
-      $("view").innerHTML = '<div class="empty">No collaboration opportunities' + (q ? " match that filter." : " in the current data.") + "</div>";
+    if (selected.length < 2) {
+      $("count").textContent = "";
+      $("view").innerHTML = '<div class="empty">Pick at least one colleague above to see the calls you could pursue together.</div>';
       return;
     }
-    $("view").innerHTML = '<div class="section-label">Collaboration opportunities (2+ faculty)</div>' +
-      list.map(function (g) {
-        return '<div class="card">' + oppHead(g.opportunity_id, g.title, g.total_score) +
-          teamChips(g.suggested_team) + "</div>";
-      }).join("");
+    var all = buildShared().filter(function (e) { return matchesQuery(e, q); });
+    var primary = all.filter(function (e) { return e.strongN >= 1; });
+    var broad = all.filter(function (e) { return e.strongN === 0; });
+    primary.sort(function (a, b) { return b.strongN - a.strongN || b.totalN - a.totalN || b.sumScore - a.sumScore; });
+    broad.sort(function (a, b) { return b.totalN - a.totalN || b.sumScore - a.sumScore; });
+
+    var picked = selected.map(last).join(" + ");
+    $("count").textContent = all.length + " call" + (all.length === 1 ? "" : "s") + " fit 2+ of {" + picked + "}" +
+      (q ? " (filtered)" : "") + " · " + primary.length + " specific, " + broad.length + " broader";
+
+    var html = "";
+    if (primary.length) {
+      html += '<div class="section-label">Shared opportunities</div>' +
+        primary.map(function (e) {
+          return '<div class="card">' + oppHead(e.d, e.totalN, true) + teamChips(e.fits) + "</div>";
+        }).join("");
+    }
+    if (broad.length) {
+      html += '<div class="section-label broad">Broader programs to consider — verify fit</div>' +
+        broad.map(function (e) {
+          return '<div class="card broadcard">' + oppHead(e.d, e.totalN, false) + teamChips(e.fits) + "</div>";
+        }).join("");
+    }
+    if (!html) {
+      html = '<div class="empty">No calls fit 2 or more of the selected faculty' +
+        (q ? " for that filter." : ". Try a different combination.") + "</div>";
+    }
+    $("view").innerHTML = html;
   }
 
-  function renderPI(name, q) {
-    var meta = faculty[name] || {};
-    $("keyterms").innerHTML = '<div class="keyterms"><h2>' + esc(name) +
-      (meta.resolved_name && meta.resolved_name !== name ? ' <span class="sub">(OpenAlex: ' + esc(meta.resolved_name) + ")</span>" : "") +
-      '</h2><p class="sub">Matched on these key research phrases:</p>' +
-      (meta.key_terms || []).map(function (t) { return '<span class="chip">' + esc(t) + "</span>"; }).join("") +
-      "</div>";
-
-    var withMe = groups.filter(function (g) {
-      return (g.suggested_team || []).some(function (m) { return m.name === name; }) &&
-        (!q || groupText(g).indexOf(q) !== -1);
-    });
-    $("count").textContent = withMe.length + " collaboration group" + (withMe.length === 1 ? "" : "s") +
-      " including " + last(name) + (q ? " (filtered)" : "");
-
-    var html = '<div class="section-label">Collaboration groups including ' + esc(last(name)) + "</div>";
-    html += withMe.length
-      ? withMe.map(function (g) {
-          return '<div class="card">' + oppHead(g.opportunity_id, g.title, g.total_score) +
-            teamChips(g.suggested_team, name) + "</div>";
-        }).join("")
-      : '<div class="empty">No collaboration opportunities (2+ faculty)' +
-        (q ? " match that filter." : " matched this PI in the current catalog.") + "</div>";
-    $("view").innerHTML = html;
+  // ---- department overview --------------------------------------------- //
+  function groupQuery(g, q) {
+    if (!q) return true;
+    var hay = (g.title + " " + g.agency + " " + (g.suggested_team || []).map(function (m) {
+      return m.name + " " + (m.matched_terms || []).join(" ") + " " + (m.shared_topics || []).join(" ");
+    }).join(" ")).toLowerCase();
+    return hay.indexOf(q) !== -1;
+  }
+  function renderDept(q) {
+    $("selected-terms").innerHTML = "";
+    var list = groups.filter(function (g) { return groupQuery(g, q); });
+    $("count").textContent = list.length + " department-wide collaboration group" +
+      (list.length === 1 ? "" : "s") + " (2+ faculty overlap)" + (q ? " (filtered)" : "");
+    if (!list.length) {
+      $("view").innerHTML = '<div class="empty">No collaboration groups' + (q ? " match that filter." : " in the current data.") + "</div>";
+      return;
+    }
+    $("view").innerHTML = '<div class="section-label">Department-wide collaboration groups</div>' +
+      list.map(function (g) {
+        var fits = (g.suggested_team || []).map(function (m) {
+          return { name: m.name, tier: m.tier, terms: m.matched_terms, shared_topics: m.shared_topics };
+        });
+        var d = { title: g.title, agency: g.agency, url: g.url, deadline: g.deadline };
+        var specific = g.strong_count >= 1;
+        // reuse oppHead but fitCount = team_size against "all faculty"
+        var url = d.url && /^https?:\/\//i.test(d.url) ? d.url : "";
+        var titleHtml = url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(d.title) + " ↗</a>" : esc(d.title);
+        var badges = '<span class="badges"><span class="badge fit">' + g.team_size + " faculty</span>" +
+          (specific ? '<span class="badge specific">specific</span>' : '<span class="badge broad">broad · verify fit</span>') + "</span>";
+        return '<div class="card' + (specific ? "" : " broadcard") + '">' + badges +
+          "<h3>" + titleHtml + "</h3>" +
+          (d.agency ? '<p class="agency">' + esc(d.agency) + "</p>" : "") +
+          (d.deadline ? '<p class="deadline">' + esc(d.deadline) + "</p>" : "") +
+          teamChips(fits) + "</div>";
+      }).join("");
   }
 
   function refresh() {
     var q = ($("filter").value || "").trim().toLowerCase();
-    var pi = $("pi-select").value;
-    if (pi) renderPI(pi, q); else renderAll(q);
+    if ($("dept-toggle").checked) renderDept(q); else renderTeam(q);
+  }
+
+  function updateToggles() {
+    var atMax = selected.length >= MAX;
+    names.forEach(function (n) {
+      var btn = $("t_" + btnId(n));
+      var on = selected.indexOf(n) !== -1;
+      btn.classList.toggle("on", on);
+      btn.disabled = !on && (atMax || $("dept-toggle").checked);
+    });
+    $("team-hint").textContent = $("dept-toggle").checked
+      ? "Showing every pair/group of faculty across the department. Uncheck to pick a specific team."
+      : (selected.length < 2
+          ? "Pick 2–4 faculty. Add colleagues to find shared opportunities."
+          : "Showing calls that fit 2+ of your " + selected.length + " selected faculty. Pick up to " + MAX + ".");
+  }
+  function btnId(n) { return n.replace(/[^a-z0-9]/gi, ""); }
+
+  function toggle(n) {
+    var i = selected.indexOf(n);
+    if (i !== -1) selected.splice(i, 1);
+    else if (selected.length < MAX) selected.push(n);
+    updateToggles();
+    refresh();
   }
 
   function init() {
@@ -210,14 +315,23 @@
       return;
     }
     $("meta-line").textContent = names.length + " faculty profiles · " +
-      groups.length + " collaboration opportunities · catalog of " + catalog.length + " opportunities";
+      groups.length + " department-wide groups · catalog of " + catalog.length + " opportunities";
+
+    var grid = $("pi-grid");
     names.forEach(function (n) {
-      var o = document.createElement("option");
-      o.value = n; o.textContent = n;
-      $("pi-select").appendChild(o);
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "pi-toggle" + (n === YOU ? " you" : "");
+      btn.id = "t_" + btnId(n);
+      btn.innerHTML = '<span class="dot"></span>' + esc(n === YOU ? last(n) + " (you)" : n);
+      btn.addEventListener("click", function () { toggle(n); });
+      grid.appendChild(btn);
     });
-    $("pi-select").addEventListener("change", refresh);
+
+    if (names.indexOf(YOU) !== -1) selected.push(YOU);
     $("filter").addEventListener("input", refresh);
+    $("dept-toggle").addEventListener("change", function () { updateToggles(); refresh(); });
+    updateToggles();
     refresh();
   }
 
