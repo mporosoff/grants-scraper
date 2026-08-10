@@ -4,8 +4,97 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/health-equity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/health-equity.xml</id>
-  <updated>2026-08-10T18:41:26Z</updated>
+  <updated>2026-08-10T18:47:18Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Alzheimer’s Association Research Grant to Promote Diversity (AARG-D)</title>
+    <link href="http://www.alz.org/research/alzheimers_grants/types_of_grants.asp"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-8c1f79c85ed23596</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Alzheimer’s Association</name></author>
+    <category term="Health equity"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Alzheimer’s Association — Posted — The Alzheimer’s Association Research Grant to Promote Diversity program award is up to three years, minimum of 2 years to investigators who are currently underrepresented at academic institutions in Alzheimer’s or related dementias research. The objective of this award is to increase the number of highly trained investigators from diverse backgrounds whose basic, clinical and social/behavioral res…</summary>
+  </entry>
+  <entry>
+    <title>Basil O’Connor Starter Scholar Research Award</title>
+    <link href="https://www.marchofdimes.org/basil-oconnor-starter-scholar-research-awards"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-cec18c22d8b64247</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>March of Dimes</name></author>
+    <category term="Health equity"/>
+    <summary>March of Dimes — Posted — This award is designed to support outstanding researchers who are embarking, or continuing, on their independent research careers.
+They are conducting concerted translational research in line with their personal and professional interests that will one day grow into a body of distinguished work that sheds light on the U.S. maternal fetal health crisis. Named in honor of the first MOD Chairman and …</summary>
+  </entry>
+  <entry>
+    <title>Centennial Travel Award in Basic Science Tropical Disease Research</title>
+    <link href="https://www.astmh.org/awards-fellowships-medals/astmh-sponsored-fellowships"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-35f8bf16ad8fe716</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Society of Tropical Medicine &amp; Hygiene (ASTMH)</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Health equity"/>
+    <summary>American Society of Tropical Medicine &amp; Hygiene (ASTMH) — Posted — Short-term research experience in the tropics focused on benefiting underserved populations in locations in the world where the burden of disease is high. All areas of tropical medicine and hygiene including immunology, genetics, molecular biology, biochemistry, cell biology and entomology.</summary>
+  </entry>
+  <entry>
+    <title>Inflammatory Bowel Disease (IBD) Fellowship</title>
+    <link href="https://cdn.pfizer.com/pfizercom/2026-02/2026-I%26I-US-GI-Fellowship.pdf?VersionId=078AIjBpC1y2ecrv7LnovLtuDSg5OZpg"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-83f586cf4a0c94f2</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Pfizer</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Education and workforce"/>
+    <category term="Health equity"/>
+    <summary>Pfizer — Posted — The goal of this RFP is to offer salary support for IBD fellowship programs. It is our intent to support fellowship programs at institutions with clinical training programs in regions where there are continued workforce challenges and that have a strong focus on healthcare equity, clinical practice, research, education, and advancing the standard of care in IBD (i.e., IUS, AI endoscopy, machine le…</summary>
+  </entry>
+  <entry>
+    <title>Making a Difference in Real-World Bioethics Dilemmas grants program</title>
+    <link href="https://greenwall.org/making-a-difference-grants"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-f394a98ce9566af4</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Greenwall Foundation</name></author>
+    <category term="Health equity"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>Greenwall Foundation — Posted — The Making a Difference program supports research to help resolve an important emerging or unanswered bioethics problem in clinical, biomedical, or public health decision-making, policy, or practice.
+The Foundation’s vision is to make bioethics integral to decisions in health care, policy, and research. Our mission is to expand bioethics knowledge to improve clinical, biomedical, and public health…</summary>
+  </entry>
+  <entry>
+    <title>Predoctoral Fellowships</title>
+    <link href="https://www.autismspeaks.org/scientific-research-grants-how-apply"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-eaaff54cdead5bb3</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>The American Heart Association (AHA) &amp; Autism Speaks</name></author>
+    <category term="Health equity"/>
+    <category term="Neuroscience"/>
+    <summary>The American Heart Association (AHA) &amp; Autism Speaks — Posted — This joint initiative supports research at the intersection of autism, cardiovascular health and brain health, with a focus on improving health equity and real-world outcomes for autistic people.
+Projects are expected to address critical knowledge gaps in cardiovascular health and autism, while incorporating implementation science approaches to improve adoption of interventions in clinical and com…</summary>
+  </entry>
+  <entry>
+    <title>Young Investigator Award (APA YIA)</title>
+    <link href="http://www.academicpeds.org/research/research_young_investigator_awards.cfm"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-243a115d630bb4e0</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Academic Pediatric Association</name></author>
+    <category term="Education and workforce"/>
+    <category term="Health equity"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Academic Pediatric Association — Posted — The APA YIA Funding Path supports projects in health services research, medical education, adolescent medicine, public health, epidemiology, emergency medicine, child maltreatment, hospital medicine, developmental/behavioral pediatrics, and other general pediatric clinical research domains. The YIA Program is particularly interested in proposals that address health equity.
+APA YIA recipients may r…</summary>
+  </entry>
+  <entry>
+    <title>Young Investigator Awards</title>
+    <link href="https://www.pcf.org/science-impact/for-researchers/open-rfas/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-5e3503ad77498699</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Prostate Cancer Foundation</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <category term="Health equity"/>
+    <summary>Prostate Cancer Foundation — Posted — The Prostate Cancer Foundation (PCF) is pleased to announce a new round of funding for PCF Young Investigators. We especially encourage young investigators working on prostate cancer health disparities to apply.
+PCF Young Investigator Awards will be three (3) years in duration and will provide $75,000 per year. The award funds may be used innovatively and flexibly to advance the career and researc…</summary>
+  </entry>
   <entry>
     <title>Clean Energy Training Services</title>
     <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001AcPtcAAF"/>

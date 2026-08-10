@@ -22,7 +22,9 @@ Avoiding duplicates / mess:
 The production adapter retries transient failures, falls back to the official
 short links published by JHU, and accepts a refresh only when all three audience
 workbooks parse above conservative row-count bounds. Otherwise the source
-lifecycle retains its last-known-good snapshot.
+lifecycle retains its last-known-good snapshot. JHU currently blocks
+GitHub-hosted runner IPs, so a complete locally refreshed snapshot has a bounded
+45-day production grace period; after that it becomes a degraded source.
 """
 
 from __future__ import annotations
@@ -232,6 +234,7 @@ class JHUFellowshipsAdapter(SourceAdapter):
     enabled = True           # parser verified on JHU sample files; live fetch runs in pipeline
     min_records = 150
     max_records = 1500
+    fallback_grace_days = 45  # JHU currently blocks GitHub-hosted runner IPs.
 
     def fetch(self):
         """Download every JHU workbook or fail the source as an incomplete run.

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-08-10T18:41:26Z</updated>
+  <updated>2026-08-10T18:47:18Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -357,312 +357,289 @@
     <summary>National Institutes of Health — Closes 2026-09-03 — The Center for Inherited Disease Research (CIDR) carries out high-throughput genotyping and sequencing and supports statistical genetics services designed to 1) aid identification of genes or genetic modifications that contribute to human health and disease or 2) enhance the classification and characterization of well-phenotyped specimens by the addition of genotype or next-generation sequence dat…</summary>
   </entry>
   <entry>
-    <title>Illuminating AD/ADRD Genome to Enable Precision Genomic Medicine</title>
-    <link href="https://www.grants.gov/search-results-detail/360906"/>
-    <id>urn:funding-finder:grants-gov:360906</id>
-    <updated>2026-08-06T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
+    <title>2018 Award in Pain</title>
+    <link href="https://research.jhu.edu/rdt/funding-opportunities/early-career/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-1bd51ad29f0f2bb7</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>The Rita Allen Foundation and the American Pain Society</name></author>
     <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health — Closes 2026-10-06 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose a program that supports integrative, cross-disciplinary projects aimed at scaling up mechanistic studies to understand the genomic underpinnings of the pathogenesis and progression AD/ADRD.The proposed research projects will employ interdisciplinary approaches that i…</summary>
+    <category term="Education and workforce"/>
+    <summary>The Rita Allen Foundation and the American Pain Society — Posted — Proposed research projects should be directed toward the molecular biology of pain and/or basic science topics related to the development of new analgesics for the management of pain due to terminal illness. Eligible candidates will have completed their training and be able to provide persuasive evidence of distinguished achievement or extraordinary promise in basic science research in pain. Candi…</summary>
   </entry>
   <entry>
-    <title>Mechanisms Underlying Olfactory Dysfunction in Aging and Alzheimer’s Disease and Alzheimer’s Disease-Related Dementias</title>
-    <link href="https://www.grants.gov/search-results-detail/360893"/>
-    <id>urn:funding-finder:grants-gov:360893</id>
-    <updated>2026-08-06T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
+    <title>2022-2023 Awards Supported by the San Antonio Nathan Shock Center</title>
+    <link href="https://nathanshock.barshop.uthscsa.edu/rfa-support-core-service/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-8f8c69f395c64710</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>San Antonio Nathan Shock Center</name></author>
     <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health — Closes 2026-10-06 — The National Institute on Aging (NIA), with the National Institute on Deafness and Other Communication Disorders (NIDCD), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that investigate the mechanisms underlying the association between olfactory decline and aging or Alzheimer's disease (AD) and AD-related dementias (ADRD). Understanding these mechanisms may help …</summary>
+    <summary>San Antonio Nathan Shock Center — Posted — The San Antonio Nathan Shock Center is soliciting applications to support the research of any investigator who is developing a new project in the basic biology of aging. The projects should utilize one or more Cores of the Center.</summary>
   </entry>
   <entry>
-    <title>Novel Approaches to Advance Precision Aging and Cognitive Health</title>
-    <link href="https://www.grants.gov/search-results-detail/360910"/>
-    <id>urn:funding-finder:grants-gov:360910</id>
-    <updated>2026-08-06T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
+    <title>Alzheimer's Disease Research Program (ADR) Postdoctoral Fellowship Awards</title>
+    <link href="https://www.brightfocus.org/about/for-scientists/apply-for-a-research-grant/alzheimers-disease-research-request-for-proposals/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-f3ff043126eb3c54</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>BrightFocus Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <summary>BrightFocus Foundation — Posted — This Alzheimer’s Disease Research Fellowship is intended to support postdoctoral researchers during their final stages of mentored training (within five years of receipt of terminal degree or clinical training). The award provides salary and research support for a young scientist to conduct postdoctoral studies in an established laboratory focused on research contributing to understanding the biol…</summary>
+  </entry>
+  <entry>
+    <title>APHL-CDC Bioinformatics Fellowship Program</title>
+    <link href="https://www.aphl.org/Career-Pathways/fellowships/Pages/Application.aspx"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-15e70c52942383e9</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Association of Public Health Laboratories (APHL)</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Public health"/>
+    <summary>Association of Public Health Laboratories (APHL) — Posted — The APHL-CDC Bioinformatics Fellowship aims to train and prepare bioinformaticians to apply their expertise within public health and design tools to aid existing public health personnel in the use of bioinformatics. The Bioinformatics Fellowships provide post-master’s and post-doctoral level professionals the opportunity to apply their skills to a range of important and emerging public health prob…</summary>
+  </entry>
+  <entry>
+    <title>APHL-CDC Bioinformatics Fellowship Program</title>
+    <link href="https://www.aphl.org/Career-Pathways/fellowships/Pages/default.aspx"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-15e70c52942383e9</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Association of Public Health Laboratories (APHL)</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Public health"/>
+    <summary>Association of Public Health Laboratories (APHL) — Posted — The program is a one-year full-time working fellowship for master's- and doctoral- level bioinformaticians. Postdoctoral fellows may extend for an additional year, provided funding is available.
+The APHL-CDC Bioinformatics Fellowship aims to train and prepare bioinformaticians to apply their expertise within public health and design tools to aid existing public health personnel in the use of bioin…</summary>
+  </entry>
+  <entry>
+    <title>Basic Research Proposals</title>
+    <link href="https://www.curesma.org/funding-opportunities/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-9e50d6cc36113c08</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>CURE SMA</name></author>
+    <category term="Biology and biotechnology"/>
+    <summary>CURE SMA — Posted — Cure SMA encourages applications on novel research that will enhance our understanding of SMA disease pathology at the molecular, cellular, and biochemical level; generate key reagents and tools to facilitate drug development and clinical trials; and identify new therapeutic strategies for SMA. Particular interests exist in understanding mechanisms
+underlying the pathology of disease and/or identi…</summary>
+  </entry>
+  <entry>
+    <title>Ben J. Lipps Research Fellowship</title>
+    <link href="https://www.asn-online.org/grants/fellowships/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-225ff6aa622f2ce4</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Society of Nephrology (ASN)</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <summary>American Society of Nephrology (ASN) — Posted — The goal of the Ben J. Lipps Research Fellowship Program is to fund nephrology fellows to conduct original, meritorious research projects. This program will foster the training of fellows, under the direction of a sponsor, who are highly motivated to make contributions to the understanding of kidney biology and disease. This Fellowship serves to establish the beginnings of an independent career. F…</summary>
+  </entry>
+  <entry>
+    <title>Biological Anthropology Program - Doctoral Dissertation Research Improvement Grants (BA-DDRIG)</title>
+    <link href="https://www.nsf.gov/pubs/2023/nsf23504/nsf23504.htm"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-a37d0363e320bd37</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>National Science Foundation</name></author>
     <category term="Arts and culture"/>
     <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health — Closes 2026-10-06 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that develop or incorporate novel, cutting-edge study designs/methods/analytic approaches through the use of machine learning, artificial intelligence, and adaptive designs to allow the discovery of health/function profiles at the level of the individual and that could lead to th…</summary>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>National Science Foundation — Posted — The Biological Anthropology Program seeks to advance scientific knowledge about the processes that have shaped biological diversity in living and fossil humans and their primate relatives through support of basic research on human and primate evolution, biological variation, and interactions between biology, behavior and culture. The program supports a portfolio of research that demonstrates engag…</summary>
   </entry>
   <entry>
-    <title>Emerging Infections Network - Research for Preventing, Detecting, and Managing Travel-associated Infectious Diseases</title>
-    <link href="https://www.grants.gov/search-results-detail/360199"/>
-    <id>urn:funding-finder:grants-gov:360199</id>
-    <updated>2026-08-03T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <title>Blavatnik National Award for Young Scientists</title>
+    <link href="http://blavatnikawards.org/awards/national-awards/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-409eb2af7043bfde</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Blavatnik Awards for Young Scientists</name></author>
     <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
+    <category term="Environmental science"/>
+    <category term="Materials science"/>
+    <summary>Blavatnik Awards for Young Scientists — Posted — LIMITED SUBMISSION (limit 1 application from JHU): The Blavatnik National Awards for Young Scientists recognize the country’s most promising young faculty rank scientists and engineers in the disciplinary categories of Life Sciences, Physical Sciences &amp; Engineering, and Chemistry. Analytical Chemistry, Biochemistry &amp; Structural Biology, Chemical Biology, Chemical Engineering, Environmental Chemist…</summary>
+  </entry>
+  <entry>
+    <title>Career Awards at the Scientific Interface</title>
+    <link href="http://www.bwfund.org/grant-programs/interfaces-science/career-awards-scientific-interface"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-dd1fc70e40243393</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Burroughs Wellcome Fund</name></author>
+    <category term="Biology and biotechnology"/>
     <category term="Transportation"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-11-05 — The focus of this notice of funding opportunity (NOFO) is to produce insights into disease detection and prevention strategies, burden, severity, diagnostics, treatment, and outcomes of infectious diseases in international travelers. Timely surveillance and sentinel detection are essential for collecting actionable data. The research should:Address public health questions that improve the speed of…</summary>
+    <summary>Burroughs Wellcome Fund — Posted — These grants are intended to foster the early career development of researchers who are dedicated to pursuing a career in academic research. The specific target group are researchers who have transitioned from graduate work in the physical/mathematical/computational sciences or engineering into postdoctoral work in the biological sciences.</summary>
   </entry>
   <entry>
-    <title>Cellular Senescence Network (SenNet): SenNet Data Coordination and Integration Center (SenNet DCIC) (UM1 Clinical Trials Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/361817"/>
-    <id>urn:funding-finder:grants-gov:361817</id>
-    <updated>2026-08-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
+    <title>Career Awards at the Scientific Interface (CASI)</title>
+    <link href="http://www.bwfund.org/grant-programs/interfaces-science/career-awards-scientific-interface"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-fb0641de5c07a289</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Burroughs Wellcome Fund</name></author>
     <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health — Closes 2026-10-01 — The purpose of this Notice of Funding Opportunity (NOFO) is to support the SenNet Data Coordination and Integration Center (SenNet DCIC) as a core component of Stage 2 of the NIH Common Fund Cellular Senescence Network (SenNet). The DCIC will enable timely, high-quality submission, harmonization, integration, and broad dissemination of SenNet-generated data and associated resources by developing a…</summary>
+    <category term="Transportation"/>
+    <summary>Burroughs Wellcome Fund — Posted — These grants are intended to foster the early career development of researchers who have transitioned or are transitioning from undergraduate and/or graduate work in the physical/mathematical/computational sciences or engineering into postdoctoral work in the biological sciences, and who are dedicated to pursuing a career in academic research.</summary>
   </entry>
   <entry>
-    <title>The NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC) Data Coordinating Center</title>
-    <link href="https://www.grants.gov/search-results-detail/360622"/>
-    <id>urn:funding-finder:grants-gov:360622</id>
-    <updated>2026-08-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
-    <category term="Environmental science"/>
-    <summary>National Institutes of Health — Closes 2026-11-01 — The National Institute of Diabetes and Digestive Diseases and Nutrition (NIDDK) seeks to advance its mission by continuing the NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC). The IBDGC has led collaborative efforts resulting in the identification of &gt;300 genetic risk loci for different IBD subtypes across patient populations and characterization of underlying biological mechanisms. D…</summary>
-  </entry>
-  <entry>
-    <title>The NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC) Genomic Research Centers</title>
-    <link href="https://www.grants.gov/search-results-detail/360621"/>
-    <id>urn:funding-finder:grants-gov:360621</id>
-    <updated>2026-08-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
-    <category term="Environmental science"/>
-    <summary>National Institutes of Health — Closes 2026-11-01 — The National Institute of Diabetes and Digestive Diseases and Nutrition (NIDDK) seeks to advance its mission by continuing the NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC). The IBDGC has led collaborative efforts resulting in the identification of &gt;300 genetic risk loci for different IBD subtypes across patient populations and characterization of underlying biological mechanisms. D…</summary>
-  </entry>
-  <entry>
-    <title>Expanding the Therapeutic Pipeline for Treating and Preventing Alzheimer's Disease and Related Dementias: Preclinical Validation and Drug Discovery for Novel Candidate Targets (U01 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/361411"/>
-    <id>urn:funding-finder:grants-gov:361411</id>
-    <updated>2026-07-31T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health — Closes 2026-10-05 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for research on Alzheimer's disease (AD) and AD-related dementias (ADRD) drug target validation and early-stage drug discovery against novel targets. This NOFO will utilize the U01 activity code. The NOFO will support rigorous preclinical AD/ADRD drug target validation and early-…</summary>
-  </entry>
-  <entry>
-    <title>Innovation Grants to Nurture Initial Translational Efforts (IGNITE): Assay Development and Therapeutic Agent Identification</title>
-    <link href="https://www.grants.gov/search-results-detail/361369"/>
-    <id>urn:funding-finder:grants-gov:361369</id>
-    <updated>2026-07-30T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2026-09-30 — The National Institute of Neurological Disorders and Stroke, National Institute of Aging, the NIH Helping to End Addiction Long Term (HEAL) initiative, and other participating NIH Institutes/Centers (ICs) seek to support applications to develop in vitro, ex vivo or in vivo assays and conduct screening efforts with the goal of identifying and characterizing potential therapeutic agents for disorder…</summary>
-  </entry>
-  <entry>
-    <title>Innovation Grants to Nurture Initial Translational Efforts (IGNITE): Therapeutic Agent Characterization and Preclinical Efficacy Studies</title>
-    <link href="https://www.grants.gov/search-results-detail/361370"/>
-    <id>urn:funding-finder:grants-gov:361370</id>
-    <updated>2026-07-30T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2026-09-30 — The National Institute of Neurological Disorders and Stroke, National Institute of Aging, the NIH Helping to End Addiction Long Term (HEAL) initiative, and other participating ICs seek to support applications to conduct pharmacodynamic, pharmacokinetic, and efficacy studies to demonstrate that the proposed therapeutic agent(s) have sufficient biological activity to warrant further development as t…</summary>
-  </entry>
-  <entry>
-    <title>FY26 Bureau of Land Management Abandoned Mine Lands and Hazardous Materials - Bureau wide</title>
-    <link href="https://www.grants.gov/search-results-detail/363334"/>
-    <id>urn:funding-finder:grants-gov:363334</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>Bureau of Land Management</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <category term="Public health"/>
-    <summary>Bureau of Land Management — Closes 2026-08-28 — The BLM and its partners inventory and mitigate abandoned mine hazards to protect public health and safety and the environment, and restore watersheds for recreation, fish, wildlife and domestic animals, manage air quality for the protection of public health and sensitive ecosystems, and return lands to productive uses including, but not limited to, recreation, fish and wildlife habitat, and prese…</summary>
-  </entry>
-  <entry>
-    <title>FY26 Bureau of Land Management Invasive and Noxious Plant Management - Bureau wide</title>
-    <link href="https://www.grants.gov/search-results-detail/363335"/>
-    <id>urn:funding-finder:grants-gov:363335</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>Bureau of Land Management</name></author>
-    <category term="Agriculture and food"/>
+    <title>Career Development Award</title>
+    <link href="https://professional.heart.org/en/research-programs/application-information/career-development-award"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-071e342a63f843c5</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Heart Association (AHA)</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Education and workforce"/>
-    <category term="Environmental science"/>
     <category term="Public health"/>
-    <summary>Bureau of Land Management — Closes 2026-09-25 — BLM Invasive and Noxious Plant Management Programs work to prevent, detect, inventory, control, and monitor weed populations on public lands.Invasive species cost the public millions of dollars in control and management each year and many invasive plants and noxious weeds are highly competitive and have the ability to permanently degrade our public lands.Noxious weeds and invasive species expansio…</summary>
-  </entry>
-  <entry>
-    <title>Use of Digital Health Technologies in Clinical Investigations to Support Drug and Biological Product Development (U01) Clinical Trials Optional</title>
-    <link href="https://www.grants.gov/search-results-detail/363255"/>
-    <id>urn:funding-finder:grants-gov:363255</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>Food and Drug Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Cybersecurity"/>
-    <summary>Food and Drug Administration — Closes 2026-08-20 — The purpose of this Notice of Funding Opportunity (NOFO) is to address topics related to the use of digital health technologies (DHTs) for remote data acquisition in clinical investigations to support drug development.</summary>
-  </entry>
-  <entry>
-    <title>Enhancing Biotechnology Market Opportunities for U.S. Exporters and American Farmers</title>
-    <link href="https://www.grants.gov/search-results-detail/363193"/>
-    <id>urn:funding-finder:grants-gov:363193</id>
-    <updated>2026-07-15T00:00:00Z</updated>
-    <author><name>Foreign Agricultural Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>Foreign Agricultural Service — Closes 2026-08-17 — Modern agricultural biotechnology such as genome editing is a revolutionary tool that could transform the sustainability and viability of the agriculture sector. American farmers rely on agricultural biotechnology products, with over 90% of corn and soybeans derived from these technologies. In 2025, American farmers exported over $51 billion in agricultural biotechnology products worldwide. Howeve…</summary>
-  </entry>
-  <entry>
-    <title>Advancing Outbreak Detection, Notification, and Response Capacity by Implementing 7-1-7 in Partner Countries</title>
-    <link href="https://www.grants.gov/search-results-detail/361093"/>
-    <id>urn:funding-finder:grants-gov:361093</id>
-    <updated>2026-07-14T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Biology and biotechnology"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-08-14 — This Notice of Funding Opportunity (NOFO) supports strengthening country systems to detect, notify, and respond to outbreaks in alignment with the 7-1-7 target. Activities under this award are intended for implementation outside the United States and its territories. Building on previous outbreak experience and other international health emergencies, this NOFO advances American interests by reinfo…</summary>
-  </entry>
-  <entry>
-    <title>Strengthening Global Health Security by improving public health capacity to detect, notify, and respond to disease outbreaks globally</title>
-    <link href="https://www.grants.gov/search-results-detail/360342"/>
-    <id>urn:funding-finder:grants-gov:360342</id>
-    <updated>2026-07-14T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-08-14 — This Notice of Funding Opportunity (NOFO) seeks to build upon activities funded by CDC to support Global Health Security (GHS) through implementation of programs and activities that focus on protecting and improving health globally through partnerships with Ministries of Health and other governmental institutions. This NOFO will build on lessons learned from the global COVID outbreak and other sig…</summary>
-  </entry>
-  <entry>
-    <title>Sustaining Global Health Security to protect and improve public health in Kenya</title>
-    <link href="https://www.grants.gov/search-results-detail/360341"/>
-    <id>urn:funding-finder:grants-gov:360341</id>
-    <updated>2026-07-14T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-08-14 — For over forty years, the U.S. Centers for Disease Control and Prevention (CDC) has partnered with the Government of Kenya (GoK) to protect the health of the Kenyan people and strengthen health systems. The United States Government remains the largest investor in Kenya"s health sector. This investment includes PEPFAR (President"s Emergency Plan for AIDS Relief), GHS (Global Health Security), Malar…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Program for Modeling Clinical Transplantation</title>
-    <link href="https://www.grants.gov/search-results-detail/361831"/>
-    <id>urn:funding-finder:grants-gov:361831</id>
-    <updated>2026-07-10T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2026-10-09 — The National Institute of Allergy and Infectious Diseases (NIAID) will support its mission through the Cooperative Program for Modeling Clinical Transplantation. Advancements of new therapeutics and success in human solid organ transplantation will require innovative and clinically translatable in-vitro and in-vivo systems to model local and systemic immune responses. This program seeks applicatio…</summary>
-  </entry>
-  <entry>
-    <title>Department of Interior Wildland Fire Service BLM-National Interagency Fire Center (NIFC) Joint Fire Science Program (JFSP)Fire Leaders And Managers, Emerging Scientists (FLAMES)</title>
-    <link href="https://www.grants.gov/search-results-detail/363101"/>
-    <id>urn:funding-finder:grants-gov:363101</id>
-    <updated>2026-07-07T00:00:00Z</updated>
-    <author><name>Bureau of Land Management</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
     <category term="Social and behavioral sciences"/>
-    <summary>Bureau of Land Management — Closes 2026-09-17 — The U.S. Wildland Fire Service Joint Fire Science Program (JFSP) is seeking proposals from current master and doctoral students enrolled at colleges or universities within the US in the field of wildland fire and related physical, biological, and social sciences to apply for a Fire Leaders And Managers, Emerging Scientists (FLAMES) award. The purpose of a FLAMES award is to enhance student exposur…</summary>
+    <summary>American Heart Association (AHA) — Posted — The AHA funds basic, clinical, behavioral, translational and population research, bioengineering/biotechnology and public health problems broadly related to fulfilling our mission to be a relentless force for a world of longer, healthier lives. Its purpose is to support highly promising healthcare and academic professionals, in the early years of one’s first professional appointment, to explore in…</summary>
   </entry>
   <entry>
-    <title>NIAMS P30 Centers Program (P30 - Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359152"/>
-    <id>urn:funding-finder:grants-gov:359152</id>
-    <updated>2026-07-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
+    <title>Catalyst Award</title>
+    <link href="https://www.lung.org/research/awards-and-grants-opportunities"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-4255fb4e2012c850</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Lung Association</name></author>
     <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
     <category term="Education and workforce"/>
-    <summary>National Institutes of Health — Closes 2026-10-01 — The overall goal of this program is to accelerate scientific discovery, improve research efficiency, and enhance the translation of research findings into improved health outcomes. Centers funded under this program will also foster multidisciplinary collaboration, support workforce development across career stages, and promote training in emerging areas such as data science, artificial intelligenc…</summary>
+    <summary>American Lung Association — Posted — The American Lung Association Catalyst Award is a mentored award meant to support outstanding investigators on the path to independence for research into the mechanisms of lung disease and general lung biology. Preference is given to projects that are novel; innovative in design/approach; utilize modern technologies; and incorporate a multidisciplinary collaborative training plan.</summary>
   </entry>
   <entry>
-    <title>Exposomic Contributions to ADRD Pathology and Resilience</title>
-    <link href="https://www.grants.gov/search-results-detail/361451"/>
-    <id>urn:funding-finder:grants-gov:361451</id>
-    <updated>2026-07-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
+    <title>Centennial Travel Award in Basic Science Tropical Disease Research</title>
+    <link href="https://www.astmh.org/awards-fellowships-medals/astmh-sponsored-fellowships"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-35f8bf16ad8fe716</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Society of Tropical Medicine &amp; Hygiene (ASTMH)</name></author>
     <category term="Biology and biotechnology"/>
-    <category term="Community development"/>
-    <category term="Environmental science"/>
     <category term="Health equity"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health — Closes 2026-10-05 — The National Institute of Neurological Disorders and Stroke (NINDS) is interested in supporting research projects that investigate how specific neural exposome factors contribute mechanistically to Alzheimer’s disease-related dementias (ADRD) pathology and resilience. For the purposes of this program, exposome factors of interest include, but are not limited to, environmental toxins, sleep and cir…</summary>
+    <summary>American Society of Tropical Medicine &amp; Hygiene (ASTMH) — Posted — Short-term research experience in the tropics focused on benefiting underserved populations in locations in the world where the burden of disease is high. All areas of tropical medicine and hygiene including immunology, genetics, molecular biology, biochemistry, cell biology and entomology.</summary>
   </entry>
   <entry>
-    <title>HEAL Initiative: Program to Reveal and Evaluate Cells-to-gene Information that Specify Intricacies, Origins and the Nature of (PRECISION) Human Pain Network</title>
-    <link href="https://www.grants.gov/search-results-detail/361334"/>
-    <id>urn:funding-finder:grants-gov:361334</id>
-    <updated>2026-07-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
+    <title>Dalsemer Research Grant</title>
+    <link href="https://www.lung.org/research/awards-and-grants-opportunities"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-81d6f2e42104ae8f</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Lung Association</name></author>
     <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health — Closes 2026-10-12 — The National Institute of Neurological Disorders and Stroke, in conjunction with other NIH Institutes and Centers (ICs) as a part of the congressionally mandated NIH Helping to End Addiction Long Term (HEAL) initiative intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for comprehensive ‘omics and physiology dataset generation using primary human tissue across the pa…</summary>
+    <summary>American Lung Association — Posted — This is a mentored award meant to provide seed monies to junior investigators for researching the mechanisms and biology of interstitial lung disease. Applicants should be on-track to pursue a career in lung heath research with a mentor who has a demonstrated history of lung disease research and mentorship.</summary>
   </entry>
   <entry>
-    <title>Genomic and Biologic Therapies for ADRD (U01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/361287"/>
-    <id>urn:funding-finder:grants-gov:361287</id>
-    <updated>2026-07-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
+    <title>Dalsemer Research Grants</title>
+    <link href="https://www.lung.org/research/awards-and-grants-opportunities"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-3f65dad33e6d92f4</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Lung Association</name></author>
     <category term="Biology and biotechnology"/>
-    <category term="Manufacturing"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health — Closes 2026-11-10 — The National Institutes of Neurological Disorders and Stroke (NINDS) is interested in supporting research projects proposing the optimization and translational development of genomic and biologic therapeutic candidates for Alzheimer’s Disease-Related Dementias (ADRD). Breakthroughs in genomic and biologic therapies are creating new opportunities to treat, prevent, and potentially modify the course…</summary>
+    <summary>American Lung Association — Posted — The American Lung Association Dalsemer Research Grant is a mentored award meant to provide seed monies to junior investigators on the path to independence for researching the mechanisms and biology of interstitial lung disease.</summary>
   </entry>
   <entry>
-    <title>Early-Onset Cancers: Investigating Etiology, Mechanisms, and Early Detection Strategies (RP1 Clinical Trials Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/361438"/>
-    <id>urn:funding-finder:grants-gov:361438</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
+    <title>Diana Jacobs Kalman/AFAR Scholarships for Research in the Biology of Aging</title>
+    <link href="https://www.afar.org/research/funding/afar-scholarships/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-440de171c97733f3</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Federation for Aging Research</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <summary>American Federation for Aging Research — Posted — The Diana Jacobs Kalman/AFAR Graduate Student Awards in Geroscience recognizes talented graduate students who show great promise to become of the next generation of leaders in aging research. To be considered for the award, a candidate must be nominated by their PhD mentor or other leader in geroscience, aging research or a related discipline.
+The award recognizes students enrolled in MD, DO, PhD,…</summary>
+  </entry>
+  <entry>
+    <title>Drug Delivery Postdoctoral Fellowship</title>
+    <link href="https://www.phrmafoundation.org/awards/post-doctoral-fellowships/drug-delivery/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-b95a76b0828936fa</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>PhRMA Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <summary>PhRMA Foundation — Posted — The PhRMA Foundation Postdoctoral Fellowship in Drug Delivery supports individuals (U.S. and non-U.S. citizens) engaged in a multidisciplinary, collaborative research training program at an accredited U.S. university that will extend their credentials in drug delivery research, including basic pharmaceutics, biopharmaceutics, pharmaceutical technology, pharmaceutical biotechnology, or biomedical e…</summary>
+  </entry>
+  <entry>
+    <title>Early Career Scientific Research Grants Program</title>
+    <link href="http://www.aabb.org/research/nbf/Pages/grants.aspx"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-9d5e81f7e04dad85</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>AABB (American Assocication of Blood Banks)</name></author>
+    <category term="Biology and biotechnology"/>
+    <summary>AABB (American Assocication of Blood Banks) — Posted — NBF will award grants for investigator-initiated original research on all aspects of blood banking, transfusion medicine, cellular therapies, and patient blood management. Grants of up to $75,000 will support research projects of one or two years in duration. Awards will not be made to increase the funding available for currently funded research projects. NBF grants are intended to provide seed fu…</summary>
+  </entry>
+  <entry>
+    <title>Eppendorf &amp; Science Prize for Neurobiology</title>
+    <link href="http://corporate.eppendorf.com/en/company/scientific-awards/global-award/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-58d72a40f7b4a99a</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Eppendorf</name></author>
+    <category term="Biology and biotechnology"/>
+    <summary>Eppendorf — Posted — The international Eppendorf &amp; Science Prize for Neurobiology is awarded annually to one young scientist for the most outstanding neurobiological research based on methods of molecular and cell biology conducted by him/her during the past three years.</summary>
+  </entry>
+  <entry>
+    <title>Fellowship</title>
+    <link href="https://www.jccfund.org/eligibilty-criteria/important-dates-and-documents/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-fb96489801abdf47</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Jane Coffin Childs Memorial Fund for Medical Research</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2026-10-05 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) invites applications that investigate the etiology of sporadic non-hereditary early-onset cancers (EOCs: ages 18 to 49 years) and the underlying biological mechanisms that play a role in these cancers to inform prevention and control strategies. The proposed research is expected to advance the understanding of t…</summary>
+    <summary>Jane Coffin Childs Memorial Fund for Medical Research — Posted — The Jane Coffin Childs Memorial Fund for Medical Research (known colloquially as the JCC Fund) was established in 1937 for the purpose of supporting research into the causes and treatment of cancer. The Fund has taken a broad approach to the study of cell growth and development, emphasizing the study of the basic biology and chemistry of the underlying processes. The Fund has increasingly focused …</summary>
   </entry>
   <entry>
-    <title>DoW Neurofibromatosis Investigator-Initiated Research Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362975"/>
-    <id>urn:funding-finder:grants-gov:362975</id>
-    <updated>2026-06-25T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <title>Glenn Foundation for Medical Research and AFAR Grants for Junior Faculty</title>
+    <link href="https://www.afar.org/grants/afar-research-grants-1"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-e38ee4c425ffa29f</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Federation for Aging Research (AFAR)</name></author>
     <category term="Biology and biotechnology"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-22 — Summary: The fiscal year 2026 (FY26) Neurofibromatosis Research Program (NFRP) Investigator-Initiated Research Award (IIRA) supports high-impact research that addresses a critical need and has the potential to make important contributions to the field of neurofibromatosis disorders or advance patient care. Research projects may focus on any phase of research, excluding clinical trials. The rationa…</summary>
+    <summary>American Federation for Aging Research (AFAR) — Posted — The major goal of this program is to assist in the development of the careers of junior investigators committed to pursuing careers in the field of aging research. GFMR and AFAR support research projects concerned with understanding the basic mechanisms of aging rather than disease-specific research. Projects investigating age-related diseases are supported if approached from the point of view of …</summary>
   </entry>
   <entry>
-    <title>DoW Neurofibromatosis Research Academy – Leadership Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362917"/>
-    <id>urn:funding-finder:grants-gov:362917</id>
-    <updated>2026-06-23T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <title>Glenn Foundation for Medical Research Postdoctoral Fellowships in Aging Research</title>
+    <link href="https://www.afar.org/research/funding/glenn-postdoc/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-ea5fa14d8ade9457</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Federation for Aging Research</name></author>
     <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <summary>American Federation for Aging Research — Posted — The Glenn Foundation for Medical Research (GFMR), in partnership with the American Federation for Aging Research (AFAR), created the Glenn Foundation for Medical Research Postdoctoral Fellowships in Aging Research to encourage and further the careers of postdoctoral fellows who are conducting research in the basic biology of aging, as well as translating advances in basic research from the laborat…</summary>
+  </entry>
+  <entry>
+    <title>Grass Fellowship</title>
+    <link href="https://www.grassfoundation.org/fellowship-overview"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-351b7e5dcf1ceb88</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>The Grass Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Climate change"/>
     <category term="Environmental science"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-14 — Summary: The fiscal year 2026 (FY26) Neurofibromatosis Research Program (NFRP) Neurofibromatosis Research Academy – Leadership Award (NFRALA) supports visionary, established neurofibromatosis (NF) investigators with documented history of neurofibromatosis funding, publications, strong mentorship and commitment to leadership to serve as Director and Deputy Director of the Neurofibromatosis Research…</summary>
+    <category term="Neuroscience"/>
+    <summary>The Grass Foundation — Posted — Grass Fellowships at the Marine Biological Laboratory (MBL) in Woods Hole, Massachusetts, USA, support investigator-designed, independent research projects by scientists early in their careers. Successful applicants often take advantage of the model organisms available through the MBL’s Marine Resource Center (MRC). Supported approaches include neurophysiology, biophysics, integrative neurobiology…</summary>
   </entry>
   <entry>
-    <title>GREGoRi Data Coordination and Outreach Center (U01, Clinical Trials Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359279"/>
-    <id>urn:funding-finder:grants-gov:359279</id>
-    <updated>2026-06-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
+    <title>Grass Fellowship</title>
+    <link href="https://www.grassfoundation.org/fellowship-overview"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-351b7e5dcf1ceb88</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>The Grass Foundation</name></author>
     <category term="Biology and biotechnology"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2026-10-30 — The Genomics Research to Elucidate the Genetics of Rare Diseases:innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. The purpose of this Notice of Funding Opportunity is to establish the GREGoR…</summary>
+    <category term="Neuroscience"/>
+    <summary>The Grass Foundation — Posted — Grass Fellowships at the Marine Biological Laboratory (MBL) in Woods Hole, Massachusetts support investigator-designed, independent research projects by scientists early in their career. Supported approaches include neurophysiology, biophysics, integrative neurobiology, neuroethology, neuroanatomy, neuropharmacology, systems neuroscience, cellular and developmental neurobiology, and computational …</summary>
   </entry>
   <entry>
-    <title>GREGoRi Innovation Projects (U01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359644"/>
-    <id>urn:funding-finder:grants-gov:359644</id>
-    <updated>2026-06-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
+    <title>Immuno-Informatics Postdoctoral Fellowship</title>
+    <link href="https://www.cancerresearch.org/postdoctoral-fellowships"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-6bb884635c26a0d2</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Cancer Research Institute</name></author>
     <category term="Biology and biotechnology"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2026-10-30 — The Genomics Research to Elucidate the Genetics of Rare Diseases:innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. This Notice of Funding Opportunity is intended to stimulate the development …</summary>
+    <category term="Cancer"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>Cancer Research Institute — Posted — The Cancer Research Institute (CRI) Immuno-Informatics Postdoctoral Fellowship Program aims to support qualified young scientists at academic research institutions around the world who wish to receive dual training in immunology and data science. The fellowships will support both computational biologists who seek to strengthen their knowledge of immunology and cancer immunologists who seek trainin…</summary>
+  </entry>
+  <entry>
+    <title>Innovative Testing Research</title>
+    <link href="https://www.earlier.org/research"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-d7fda3423c23dd0f</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Earlier.org - Friends For An Earlier Breast Cancer Test</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <summary>Earlier.org - Friends For An Earlier Breast Cancer Test — Posted — Earlier.org - Friends For An Earlier Breast Cancer Test® is a non-profit organization dedicated to promoting awareness and education and to raising funds for pilot projects in the area of earlier detection of breast cancer. Earlier.org requests applications for pilot projects that focus on new methods to improve detection of early breast cancer and are especially interested in the development of n…</summary>
+  </entry>
+  <entry>
+    <title>International Research Fellowship Program</title>
+    <link href="http://www.americanitaliancancer.org/research-fellowships.html"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-9f56b1387f7b52f7</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American-Italian Cancer Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <summary>American-Italian Cancer Foundation — Posted — ​AICF is proud to sponsor the work of bright young scientists who perform groundbreaking research in the fields of cancer biology and treatment in competitive labs across the United States. To date, AICF has effectively launched the careers of nearly 400 scientists who have been awarded 535 fellowships since the Program’s inception in 1983.</summary>
   </entry>
 </feed>

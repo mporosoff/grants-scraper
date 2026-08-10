@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-08-10T18:41:26Z</updated>
+  <updated>2026-08-10T18:47:18Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -133,6 +133,102 @@
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health — Closes 2027-01-25 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to continue to support the Radiation Oncology-Biology Integration Network (ROBIN) with applications from both new and renewing investigators. This network model will sustain an agile and effective national radiation oncology infrastructure that collectively addresses critical hypothesis-based translation…</summary>
+  </entry>
+  <entry>
+    <title>*Limited Submission* Informatics Fellowship</title>
+    <link href="http://www.phrmafoundation.org/2015-awards/pre-doctoral-fellowship-awards/informatics/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-877e4a795e54b062</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>PhRMA Foundation</name></author>
+    <category term="Data science"/>
+    <summary>PhRMA Foundation — Posted</summary>
+  </entry>
+  <entry>
+    <title>Edmund J.Y. Pajarillo Health Informatics and Innovation Scholarship</title>
+    <link href="https://www.nln.org/nln-foundation/foundationoverview/nursing-education-scholarship-awards"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-1020c2f5dcd10987</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>National League for Nursing (NLN)</name></author>
+    <category term="Data science"/>
+    <category term="Technology development"/>
+    <summary>National League for Nursing (NLN) — Posted — With a focus on informatics and innovation in the use of data analysis and health information technology, the Edmund J.Y. Pajarillo scholarship opens a new avenue of scholarship to support the National League for Nursing and its members. Multiple real-world applications of these research studies are urgently needed.</summary>
+  </entry>
+  <entry>
+    <title>Immuno-Informatics Postdoctoral Fellowship</title>
+    <link href="https://www.cancerresearch.org/postdoctoral-fellowships"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-6bb884635c26a0d2</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Cancer Research Institute</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>Cancer Research Institute — Posted — The Cancer Research Institute (CRI) Immuno-Informatics Postdoctoral Fellowship Program aims to support qualified young scientists at academic research institutions around the world who wish to receive dual training in immunology and data science. The fellowships will support both computational biologists who seek to strengthen their knowledge of immunology and cancer immunologists who seek trainin…</summary>
+  </entry>
+  <entry>
+    <title>NCI Pathway to Independence Award for Outstanding Early Stage Postdoctoral Researchers (K99/R00 - Independent Basic Experimental Studies with Humans Required)</title>
+    <link href="https://research.jhu.edu/rdt/funding-opportunities/postdoctoral/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-c2a1108bbd0a3cc3</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>National Institutes of Health (NIH)</name></author>
+    <category term="Cancer"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health (NIH) — Posted — The purpose of this program is to increase and maintain a strong cohort of new and talented, NCI-supported, independent
+investigators. This program is designed for postdoctoral fellows with research and/or clinical doctoral degrees who do not
+require an extended period of mentored research training beyond their doctoral degrees. The objective of this award is to
+facilitate a timely transition of t…</summary>
+  </entry>
+  <entry>
+    <title>NCI Pathway to Independence Award for Outstanding Early Stage Postdoctoral Researchers (K99/R00 - Independent Clinical Trial Not Allowed)</title>
+    <link href="https://grants.nih.gov/grants/guide/rfa-files/RFA-CA-22-035.html"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-f3dc8aa00bb2af26</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>National Institutes of Health (NIH)</name></author>
+    <category term="Cancer"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health (NIH) — Posted — The purpose of the NCI Pathway to Independence Award for Outstanding Early Stage Postdoctoral Researchers (K99/R00) program is to increase and maintain a strong cohort of new and talented, NCI-supported, independent investigators. This program is designed for postdoctoral fellows with research and/or clinical doctoral degrees who do not require an extended period of mentored research training beyo…</summary>
+  </entry>
+  <entry>
+    <title>NCI Pathway to Independence Award for Outstanding Early Stage Postdoctoral Researchers (K99/R00 - Independent Clinical Trial Required)</title>
+    <link href="https://research.jhu.edu/rdt/funding-opportunities/postdoctoral/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-efdbe5a76ed3a030</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>National Institutes of Health (NIH)</name></author>
+    <category term="Cancer"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health (NIH) — Posted — The purpose of this program is to increase and maintain a strong cohort of new and talented, NCI-supported, independent investigators. This program is designed for postdoctoral fellows with research and/or clinical doctoral degrees who do not require an extended period of mentored research training beyond their doctoral degrees. The objective of this award is to facilitate a timely transition of t…</summary>
+  </entry>
+  <entry>
+    <title>Research Scholar Grant</title>
+    <link href="https://www.rsna.org/research/funding-opportunities/research-grants/research-scholar-grant"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-dee1ff5d140f8849</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Radiological Society of North America (RSNA)</name></author>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>Radiological Society of North America (RSNA) — Posted — LIMITED SUBMISSION (limit 1 application per department from JHU): The purpose of this program is to support junior faculty members who have completed the conventional resident/fellowship training program(s); but have not yet been recognized as independent investigators. The purpose of the funding is to help establish the recipient as an independent investigator, and to collect preliminary data tha…</summary>
+  </entry>
+  <entry>
+    <title>SIParCS Program Internship</title>
+    <link href="https://www.cisl.ucar.edu/outreach/internships"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-81913b8b43eae791</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Computational &amp; Information Systems Lab</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>Computational &amp; Information Systems Lab — Posted — Summer Internships in Parallel Computational Science (SIParCS) embed students in CISL to provide them with significant hands-on experience in high-performance computing and related fields that use HPC for scientific discovery and modeling.
+SIParCS (pronounced sigh-parks) is for university students who are interested in pursuing careers in such areas as:
+Application Optimization
+Data Science
+Machin…</summary>
   </entry>
   <entry>
     <title>DRL Ensuring Resilient Seafood Supply Chains: Countering Forced Labor and any associated Illegal, Unreported and Unregulated Fishing</title>
@@ -649,100 +745,5 @@
     <category term="Data science"/>
     <category term="Water"/>
     <summary>Bureau of Reclamation — Closes 2028-02-15 — The WaterSMART Cooperative Watershed Management Program funding opportunity invites eligible entities to apply for funding to develop local solutions to address their water management needs. This opportunity provides funding for watershed group development, restoration planning, and watershed management project planning and design. By providing this funding, Reclamation promotes water reliability …</summary>
-  </entry>
-  <entry>
-    <title>GlobalX Challenge 26.1: AI-Native Air Interface for Tactical Communication Networks</title>
-    <link href="https://www.grants.gov/search-results-detail/362721"/>
-    <id>urn:funding-finder:grants-gov:362721</id>
-    <updated>2026-06-09T00:00:00Z</updated>
-    <author><name>Office of Naval Research</name></author>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Office of Naval Research — Closes 2026-08-31 — The purpose of the GlobalX Innovation Challenge is to accelerate the traditional knowledge generation cycle, rapidly testing applied research theories to enable the discovery of revolutionary dual-use capabilities for the benefit of the U.S. Navy and Marine Corps, the commercial marketplace, and the public. Led by the Office of Naval Research Global and targeted at researchers in the Indian subcon…</summary>
-  </entry>
-  <entry>
-    <title>Research and Education Program for Historically Black Colleges and Universities (HBCU) and Tribal Colleges and Universities (TCU)</title>
-    <link href="https://www.grants.gov/search-results-detail/362711"/>
-    <id>urn:funding-finder:grants-gov:362711</id>
-    <updated>2026-06-08T00:00:00Z</updated>
-    <author><name>Dept of the Army -- Materiel Command</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Quantum science"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>Dept of the Army -- Materiel Command — Closes 2026-08-11 — This solicitation invites applications (also referred to as “proposals”) for basic research projects. The proposals must align with the research areas of interest to the DoW (which includes the USW(R&amp;E) and the Agencies) and enhance the education of students in areas of STEM that align with the DoW research interests. Information about these areas of interest (including websites) is discussed belo…</summary>
-  </entry>
-  <entry>
-    <title>HEAL Initiative: Translating Addiction Epidemiology, Prevention, Treatment, and Recovery Research into Practice (R61/R33 - Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/362672"/>
-    <id>urn:funding-finder:grants-gov:362672</id>
-    <updated>2026-06-04T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Data science"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2029-02-09 — The goal of this notice of funding opportunity (NOFO) is to address the opioid crisis and/or overdose events by supporting action-oriented research, accelerating the translation of addiction epidemiology, prevention, treatment services, and recovery research to practice. Proposed studies may target the individual, provider, organizational, community, or system level. This initiative prioritizes re…</summary>
-  </entry>
-  <entry>
-    <title>NLM Institutional Grants for Research Training in Biomedical Informatics, Data Science, and AI</title>
-    <link href="https://www.grants.gov/search-results-detail/361318"/>
-    <id>urn:funding-finder:grants-gov:361318</id>
-    <updated>2026-06-02T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <summary>National Institutes of Health — Closes 2026-09-25 — The National Library of Medicine (NLM) invites applications for innovative predoctoral and postdoctoral training programs that prepare the next generation of researchers in biomedical informatics, data science, and artificial intelligence/machine learning (AI/ML). NLM emphasizes cutting-edge, forward-looking training experiences that equip trainees to address complex health and biomedical challeng…</summary>
-  </entry>
-  <entry>
-    <title>Native American Affairs: Fiscal Year 2025 Colorado River Basin Tribal Drought Resiliency Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362644"/>
-    <id>urn:funding-finder:grants-gov:362644</id>
-    <updated>2026-06-02T00:00:00Z</updated>
-    <author><name>Bureau of Reclamation</name></author>
-    <category term="Energy"/>
-    <category term="Water"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Bureau of Reclamation — Closes 2026-09-28 — The objectives of this NAA/TAP funding opportunity are to provide funding for drought relief actions/projects that mitigate drought impacts for designated federally recognized tribes within the Colorado River Basin (see Eligibility section for list of tribes), and which advance Presidential and Department of the Interior Priorities within the Basin.Proposals should meet one or more of the followin…</summary>
-  </entry>
-  <entry>
-    <title>Optimizing Behavioral Sleep Interventions for Adolescents and Young Adults (R34 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/359159"/>
-    <id>urn:funding-finder:grants-gov:359159</id>
-    <updated>2026-05-28T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Data science"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health — Closes 2026-10-22 — NIMH seeks applications for pilot research to adapt, optimize, and test behavioral interventions that address common sleep problems in adolescents and young adults with or at risk for a mental health disorder. This notice of funding opportunity (NOFO) supports pilot clinical trials designed to evaluate the feasibility, tolerability, acceptability, safety, and potential effectiveness of the approac…</summary>
-  </entry>
-  <entry>
-    <title>NSF Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs: A Pilot Emphasis on Scientific Instrumentation</title>
-    <link href="https://www.grants.gov/search-results-detail/362551"/>
-    <id>urn:funding-finder:grants-gov:362551</id>
-    <updated>2026-05-22T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation — Closes 2026-11-04 — NSF invests in scientific discoveries, technological breakthroughs, and transformative innovations that strengthen economic growth, enhance security, and improve the lives of Americans and people around the world. Our ability to support that mission requires a robust scientific and engineering (S&amp;E) enterprise in the United States that allows scientists to innovate at the frontier. In addition to …</summary>
-  </entry>
-  <entry>
-    <title>DoW Prostate Cancer, Data Science Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362259"/>
-    <id>urn:funding-finder:grants-gov:362259</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Data science"/>
-    <category term="Public health"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-02 — Summary: The fiscal year 2026 (FY26) Prostate Cancer Research Program (PCRP) Data Science Award (DSA) supports research that develops or uses quantitative and analytical approaches, processes and/or systems to obtain knowledge and insight from large and/or complex sets of prostate cancer data in one or more of the following research areas: Analysis of clinically annotated datasets; analysis of -om…</summary>
   </entry>
 </feed>

@@ -4,8 +4,34 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/separations-and-membranes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/separations-and-membranes.xml</id>
-  <updated>2026-08-10T18:41:26Z</updated>
+  <updated>2026-08-10T18:47:18Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Office of Science Graduate Student Research (SCGSR) Program</title>
+    <link href="https://science.osti.gov/wdts/scgsr"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-73b9786df69845f8</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Department of Energy (DOE) Office of Science</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Carbon management"/>
+    <summary>Department of Energy (DOE) Office of Science — Posted — Provides supplemental awards to outstanding U.S. graduate students to pursue part of their graduate thesis research at a DOE laboratory/facility in collaboration with a DOE laboratory scientist within a defined award period in areas that address scientific challenges such as: Advanced Scientific Computing Research (ASCR), Basic Energy Sciences (BES), Biological and Environmental Research (BER), Fu…</summary>
+  </entry>
+  <entry>
+    <title>PCHPI Collaboration Development Pilot Program</title>
+    <link href="http://www.hivppi.pitt.edu/index.php/funding-opportunitieshttp:/www.hivppi.pitt.edu/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-01b53f762097f2bf</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Pittsburgh Center for HIV Protein Interactions (PCHPI)</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Separations and membranes"/>
+    <summary>Pittsburgh Center for HIV Protein Interactions (PCHPI) — Posted — The Pittsburgh Center for HIV Protein Interactions (PCHPI) is seeking collaborators to further our mission – to understand the early cellular events of HIV infection through characterization of HIV-host cell protein interactions/complexes at a high-resolution, molecular level. "Early cellular events" include those that occur after engagement of cell surface receptors and membrane fusion through to…</summary>
+  </entry>
   <entry>
     <title>Desalination and Water Purification Research Program: Research Projects</title>
     <link href="https://www.grants.gov/search-results-detail/363375"/>

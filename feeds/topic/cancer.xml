@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml</id>
-  <updated>2026-08-10T18:41:26Z</updated>
+  <updated>2026-08-10T18:47:18Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -186,439 +186,425 @@
     <summary>National Institutes of Health — Closes 2027-01-25 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to continue to support the Radiation Oncology-Biology Integration Network (ROBIN) with applications from both new and renewing investigators. This network model will sustain an agile and effective national radiation oncology infrastructure that collectively addresses critical hypothesis-based translation…</summary>
   </entry>
   <entry>
-    <title>Damon Runyon Cancer Research Foundation Clinical Investigator Award 2027</title>
-    <link href="http://rochester.infoready4.com/CompetitionSpace/"/>
-    <id>urn:funding-finder:ur-vpr-funding-digest-limited-submissions-foundations:vpr-email%3Ainfoready-2024058</id>
-    <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>UR VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <title>"A" Award Grants</title>
+    <link href="https://www.alexslemonade.org/researchers-reviewers/applicants"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-4c778345cee773b9</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Alex’s Lemonade Stand Foundation</name></author>
     <category term="Cancer"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Closes 2027-01-19 — The Damon Runyon Clinical Investigator Award supports independent young physician-scientists conducting disease-oriented research that demonstrates
-a high level of innovation and creativity. The goal is to support the best young physician-scientists doing work aimed at improving the practice of cancer medicine. The Clinical Investigator Award program is specifically intended to provide outstanding…</summary>
+    <summary>Alex’s Lemonade Stand Foundation — Posted — The 'A' Award is designed for the early independent career scientist who wants to establish a career in pediatric oncology research. The ideal candidate has an original project, can demonstrate outstanding career development support from the institution, and has a strong future commitment to pediatric cancer investigation.</summary>
   </entry>
   <entry>
-    <title>Clinical Research Network on Antimicrobial Resistance</title>
-    <link href="https://www.grants.gov/search-results-detail/361065"/>
-    <id>urn:funding-finder:grants-gov:361065</id>
-    <updated>2026-07-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
+    <title>2016 LUNGevity Career Development Awards</title>
+    <link href="https://www.lungevity.org/research/translational-science-research-program/how-to-apply-for-grant"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-cc117a8c4807f72d</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>LUNGevity</name></author>
+    <category term="Cancer"/>
+    <summary>LUNGevity — Posted — LUNGevity’s Career Development Awards for Translational Research program was created to support future research leaders who will keep the field of lung cancer research vibrant with new ideas. The Career Development Awards are mentored awards; a mentoring plan is part of the required submission. Projects that will be funded in 2016 are expected to have a direct impact on the early detection of lung…</summary>
+  </entry>
+  <entry>
+    <title>AACR Bayer Stimulating Therapeutic Advancements through Research Training (START) Grants</title>
+    <link href="https://www.aacr.org/Funding/Pages/Funding-Detail.aspx?ItemID=77"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-0cd194efbb278671</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Association for Cancer Research</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <summary>American Association for Cancer Research — Posted — The AACR-Bayer Stimulating Therapeutic Advancements through Research Training (START) Grants represent an exciting new initiative to encourage and support academia and industry collaborations to effectively harness the wealth of information and to advance the discovery and development of new therapies for cancer patients. This novel model, which will provide support to postdoctoral or clinical res…</summary>
+  </entry>
+  <entry>
+    <title>AACR Career Development Awards for Translational Breast Cancer Research</title>
+    <link href="http://www.aacr.org/Funding/Pages/Funding-Detail.aspx?ItemID=60"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-837313a1899c448d</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Association for Cancer Research</name></author>
+    <category term="Cancer"/>
+    <summary>American Association for Cancer Research — Posted — The Breast Cancer Research Foundation-AACR Career Development Awards for Translational Breast Cancer Research represent a joint effort to promote and support innovative research designed to accelerate the discovery, development, and application of new agents to treat breast cancer and/or for pre-clinical research with direct therapeutic intent. Eligibility is limited to junior faculty who, at the …</summary>
+  </entry>
+  <entry>
+    <title>AACR Funding Opportunities</title>
+    <link href="http://www.aacr.org/FUNDING/PAGES/DEFAULT.ASPX"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-8cf15d12463858de</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Association for Cancer Research</name></author>
+    <category term="Cancer"/>
+    <summary>American Association for Cancer Research — Posted — AACR offers an array of support mechanisms for cancer researchers at various stages in their careers, from fellowships to career development awards to grants for independent investigators. Multiple grant programs are offered.</summary>
+  </entry>
+  <entry>
+    <title>AACR Gertrude B. Elion Cancer Research Award</title>
+    <link href="https://www.aacr.org/grants/aacr-gertrude-b-elion-cancer-research-award-2/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-97996b4b45a994ad</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Association for Cancer Research (AACR)</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <summary>American Association for Cancer Research (AACR) — Posted — With generous support from GlaxoSmithKline, the AACR Gertrude B. Elion Cancer Research Award represents a joint effort to encourage and support tenure-eligible junior faculty. The research proposed for funding must focus on cancer etiology, diagnosis, treatment, or prevention and may be basic, translational, or clinical in nature.
+The award provides a one-year grant of $75,000 for expenses related…</summary>
+  </entry>
+  <entry>
+    <title>AACR Immuno-Oncoloy Research Fellowships</title>
+    <link href="https://www.aacr.org/grants/aacr-immuno-oncology-research-fellowships/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-42688d7330cf2948</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Association for Cancer Research (AACR)</name></author>
+    <category term="Cancer"/>
+    <category term="Public health"/>
+    <summary>American Association for Cancer Research (AACR) — Posted — The AACR Immuno-oncology Research Fellowships represent a joint effort to encourage and support postdoctoral or clinical research fellows to conduct immuno-oncology research and to establish a successful career path in this field. The research proposed for funding may be basic, translational, clinical, or epidemiological in nature and must have direct applicability and relevance to immuno-oncology…</summary>
+  </entry>
+  <entry>
+    <title>AACR-Aflac, Inc. Career Development Award for Pediatric Cancer Research</title>
+    <link href="https://www.idsafoundation.org/our-initiatives/research/changing-the-course-of-humanity/our-awards/?_ga=2.50760489.1282326165.1565988287-1714970133.1565988287"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-a2f9d41a035e43b3</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Association for Cancer Research</name></author>
+    <category term="Cancer"/>
+    <category term="Public health"/>
+    <summary>American Association for Cancer Research — Posted — ​The AACR-Aflac, Inc. Career Development Award for Pediatric Cancer Research represents a joint effort to encourage and support junior faculty who have completed their most recent doctoral degree or medical residency within the past 11 years at the start of the grant term to conduct pediatric cancer research and establish successful career paths in this field. ​Research projects may be in any disc…</summary>
+  </entry>
+  <entry>
+    <title>AACR-AstraZeneca Clinical Oncology Research (CORE) Training Fellowships</title>
+    <link href="https://www.aacr.org/grants/aacr-clinical-oncology-research-core-training-fellowships/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-8b97eb7e7bee42d5</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Association for Cancer Research</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <summary>American Association for Cancer Research — Posted — The AACR Clinical Oncology Research (CORE) Training Fellowships Program is designed to provide an industry-academic clinical practicum with a unique opportunity for academic clinicians to train in drug development. Each fellowship provides $100,000 over one year for the fellow to work on site at the facility of one of the AACR’s pharmaceutical industry partners.
+This fellowship is designed for ear…</summary>
+  </entry>
+  <entry>
+    <title>AACR-Conquer Cancer Foundation of ASCO Young Investigator Award for Translational Cancer Research</title>
+    <link href="https://www.aacr.org/grants/aacr-conquer-cancer-the-asco-foundation-young-investigator-award-for-translational-cancer-research/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-c0dbb5498f35b81f</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Association for Cancer Research (AACR)</name></author>
+    <category term="Cancer"/>
+    <category term="Transportation"/>
+    <summary>American Association for Cancer Research (AACR) — Posted — The AACR-Conquer Cancer Foundation of ASCO Young Investigator Award for Translational Cancer Research provides funding to promising investigators to encourage and promote quality research in clinical oncology. The purpose of this jointly-supported award is to fund a physician-scientist during the transition from a fellowship program to a faculty appointment. Research projects are restricted to tra…</summary>
+  </entry>
+  <entry>
+    <title>AACR-Sontag Foundation Brain Cancer Research Fellowship</title>
+    <link href="https://www.aacr.org/grants/aacr-sontag-foundation-brain-cancer-research-fellowship/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-6184bb1a00717f0b</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Association for Cancer Research (AACR)</name></author>
+    <category term="Cancer"/>
+    <category term="Neuroscience"/>
+    <category term="Public health"/>
+    <summary>American Association for Cancer Research (AACR) — Posted — The AACR-Sontag Foundation Brain Cancer Research Fellowship represents a joint effort to encourage and support a postdoctoral or clinical research fellow to conduct brain cancer research and to establish a successful career path in this field. The proposed project may be basic, clinical, translational, or epidemiological in nature and must have direct applicability and relevance to brain cancer. A…</summary>
+  </entry>
+  <entry>
+    <title>AGA- Caroline Craig Augustyn &amp; Damian Augustyn Award in Digestive Cancer</title>
+    <link href="https://gastro.org/research-and-awards/apply-for-awards/award/aga-caroline-craig-augustyn-damian-augustyn-award-in-digestive-cancer/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-bdff5647f0e6d4d7</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Gastroenterological Association (AGA)</name></author>
     <category term="Cancer"/>
     <category term="Infectious disease"/>
+    <summary>American Gastroenterological Association (AGA) — Posted — The objective of this AGA Research Foundation award is to provide supplemental funding to early career investigators who have existing career development awards and are conducting research relevant to the pathogenesis, prevention, diagnosis or treatment of digestive cancer.</summary>
+  </entry>
+  <entry>
+    <title>AGA-Bern Schwartz Family Fund Research Scholar Award in Pancreatic Cancer</title>
+    <link href="https://gastro.org/research-and-awards/apply-for-awards/award/aga-bern-schwartz-family-fund-rsa-in-pancreatic-cancer/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-04a1de42ae36e682</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Gastroenterological Association (AGA)</name></author>
+    <category term="Cancer"/>
+    <summary>American Gastroenterological Association (AGA) — Posted — The objective of this AGA Research Foundation Research Scholar Award (RSA) is to support early-career investigators working toward independent and productive careers in pancreatic cancer research by ensuring that a major proportion of their time is protected for research (i.e., a minimum of 75 percent effort dedicated to the proposed project). The award will support junior faculty (not fellows) wh…</summary>
+  </entry>
+  <entry>
+    <title>AGA-Gastric Cancer Foundation Ben Feinstein Memorial Research Scholar Award in Gastric Cancer</title>
+    <link href="https://gastro.org/research-and-awards/apply-for-awards/award/aga-gastric-cancer-foundation-ben-feinstein-memorial-research-scholar-award-in-gastric-cancer/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-91e3398dcd2eb755</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Gastroenterological Association (AGA)</name></author>
+    <category term="Cancer"/>
+    <summary>American Gastroenterological Association (AGA) — Posted — The AGA–Gastric Cancer Foundation Ben Feinstein Memorial Research Scholar Award in Gastric Cancer provides outstanding young researchers three-year grants of $100,000 per year to conduct innovative gastric cancer studies. These awards enable scholars to build portfolios of work that prepare them to be competitive in seeking continued funding through larger grants.
+The scarcity of funding for gastr…</summary>
+  </entry>
+  <entry>
+    <title>AHNS Pilot Grant</title>
+    <link href="https://www.ahns.info/research/grants/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-ac66fe06c108da3b</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Head &amp; Neck Society (AHNS)</name></author>
+    <category term="Cancer"/>
+    <summary>American Head &amp; Neck Society (AHNS) — Posted — The purpose of this award is to support basic, translational, or clinical research projects in head and neck oncology. Clinical or translational research studies are strongly encouraged and should be specifically related to the prevention, diagnosis, treatment, outcomes, or pathophysiology of head and neck neoplastic disease.</summary>
+  </entry>
+  <entry>
+    <title>ASH Research Training Award for Fellows (RTAF)</title>
+    <link href="https://www.hematology.org/Awards/Career-Training/435.aspx"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-0479cb30e8e79613</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Society of Hematology</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <summary>American Society of Hematology — Posted — The ASH Research Training Award for Fellows (RTAF) is designed to encourage junior researchers in hematology, hematology/oncology, and other hematology-related training programs to pursue careers in academic hematology.</summary>
+  </entry>
+  <entry>
+    <title>Basic Research Fellowship Program</title>
+    <link href="https://www.abta.org/basic-research-fellowships/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-28ed0057d6902bfc</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Brain Tumor Association (ABTA)</name></author>
+    <category term="Cancer"/>
+    <category term="Neuroscience"/>
+    <summary>American Brain Tumor Association (ABTA) — Posted — Basic Research Fellowships are two-year, $100,000 mentored grants supporting postdoctoral fellows who are conducting laboratory or field-based research projects that focus on brain tumors. Fellows must have a lead mentor who currently conducts brain tumor research at the same academic institution. The mentor will help with scientific management and other research guidance to foster the applicant’s…</summary>
+  </entry>
+  <entry>
+    <title>Cancer Research Grants</title>
+    <link href="https://branderbeacons.org/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-c894dabb7a1ffcc0</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Brander Beacons Cancer Research (BBCR)</name></author>
+    <category term="Cancer"/>
+    <summary>Brander Beacons Cancer Research (BBCR) — Posted — Brander Beacons Cancer Research injects critical funds into programs most closely connected to increased cancer prevention, better treatment outcomes, better access and, ultimately, a cure. Grants will be awarded to teams and projects that have potential to move the needle in their area of work or research. Funded projects will have clear goals, realistic plans to execute, and ways to measure succ…</summary>
+  </entry>
+  <entry>
+    <title>Cancer Research Grants Program</title>
+    <link href="https://pardeefoundation.org/how-to-apply/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-18910c2cfc8236b3</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Elsa U. Pardee Foundation</name></author>
+    <category term="Cancer"/>
+    <summary>Elsa U. Pardee Foundation — Posted — The Elsa U. Pardee Foundation funds research to investigators in United States non-profit institutions proposing research directed toward identifying new treatments or cures for cancer. The Foundation funds projects for a one year period which will allow establishment of capabilities of new cancer researchers, or new cancer approaches by established cancer researchers. It is anticipated that this …</summary>
+  </entry>
+  <entry>
+    <title>Career Development Award</title>
+    <link href="https://www.asco.org/career-development/grants-awards/funding-opportunities/career-development-award"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-a690701b5ebf4952</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Society for Clinical Oncology (ASCO)</name></author>
+    <category term="Cancer"/>
+    <summary>American Society for Clinical Oncology (ASCO) — Posted — The Career Development Award (CDA) provides research funding to clinical investigators, who have received their initial faculty appointment, as they work to establish an independent clinical cancer research program. This is a mentored award and the research project is conducted under the guidance of a scientific mentor. The research must have a patient-oriented focus, including a clinical research…</summary>
+  </entry>
+  <entry>
+    <title>Career Development Award</title>
+    <link href="https://pancan.org/research/grants-program/apply-for-a-pancreatic-cancer-research-grant/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-e611f81e72ca0db6</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Pancreatic Cancer Action Network</name></author>
+    <category term="Cancer"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2026-09-29 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by continuing support for a Clinical Research Network on Antimicrobial Resistance (AMR). AMR is a major health challenge that limits treatment options and allows resistant infections to persist. Individuals with chronic conditions like diabetes and cancer are particularly vulnerable, resulting in increas…</summary>
+    <summary>Pancreatic Cancer Action Network — Posted — The Pancreatic Cancer Action Network's (PanCAN) competitive Grants Program funds promising and meritorious research on pancreatic cancer. The organization’s grantmaking strategy recognizes the need to maintain a pipeline of researchers dedicated to studying pancreatic cancer and acknowledges an urgency to accelerate scientific and medical breakthroughs that benefit patients. Early career grants ar…</summary>
   </entry>
   <entry>
-    <title>Early-Onset Cancers: Investigating Etiology, Mechanisms, and Early Detection Strategies (RP1 Clinical Trials Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/361438"/>
-    <id>urn:funding-finder:grants-gov:361438</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
+    <title>Career Transition Award</title>
+    <link href="https://bit.ly/SusanGKomenCareerTransitionAwards2025Web"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-c3c2b12b41469ad9</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Susan G. Komen Breast Cancer Foundation</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>Susan G. Komen Breast Cancer Foundation — Posted — Through our Research Program, Komen evaluates and invests in science and technology that will accelerate research discoveries to change the standard of breast cancer care and improve the delivery of that care. We’re focused on conquering aggressive and metastatic breast cancers and eliminating breast cancer disparities. Our goal: to advance personalized medicine and improve health outcomes for eve…</summary>
+  </entry>
+  <entry>
+    <title>Clinician Scientist Development Grant (CSDG)</title>
+    <link href="https://www.cancer.org/research/we-fund-cancer-research/apply-research-grant/grant-types/clinician-scientist-development-grant.html"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-ff878cb5e35cfb2a</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Cancer Society</name></author>
+    <category term="Cancer"/>
+    <summary>American Cancer Society — Posted — The Clinician Scientist Development Grant (CSDG) supports full-time faculty members in becoming independent investigators as clinician scientists. This grant is designed for people trained primarily as clinicians who want to maintain clinical practice and conduct cancer research.</summary>
+  </entry>
+  <entry>
+    <title>Collaborative Research Development Grant</title>
+    <link href="https://ocrahope.org/research/for-researchers/apply/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-e5d08470127311fb</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Ovarian Cancer Research Fund Alliance (OCRFA)</name></author>
+    <category term="Cancer"/>
+    <summary>Ovarian Cancer Research Fund Alliance (OCRFA) — Posted — Ovarian Cancer Research Alliance is requesting Letters of Intent for the 2024 Collaborative Research Development Grant (CRDG). The purpose of this grantmaking program is to provide funds for ovarian cancer and/or related gynecologic cancers research projects that may involve several investigators within one institution or collaborations between groups in multiple institutions. Interdisciplinary co…</summary>
+  </entry>
+  <entry>
+    <title>CRI Irvington Postdoctoral Fellowship Program</title>
+    <link href="https://www.cancerresearch.org/postdoctoral-fellowships"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-2ec0f7122a823bd5</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Cancer Research Institute</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <summary>Cancer Research Institute — Posted — The CRI Irvington Postdoctoral Fellowship Program supports qualified young scientists at leading universities and research centers around the world who wish to receive training in fundamental immunology or cancer immunology.</summary>
+  </entry>
+  <entry>
+    <title>Damon Runyon Fellowship Award</title>
+    <link href="https://www.damonrunyon.org/for-scientists/application-guidelines/fellowship"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-250f25104b6dd429</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Damon Runyon Cancer Research Foundation</name></author>
+    <category term="Cancer"/>
+    <summary>Damon Runyon Cancer Research Foundation — Posted — The Foundation encourages all theoretical and experimental research relevant to the study of cancer and the search for cancer causes, mechanisms, therapies and prevention including molecular approaches to cancer prevention for inherited cancers.</summary>
+  </entry>
+  <entry>
+    <title>Damon Runyon Physician-Scientist Training Award</title>
+    <link href="https://www.damonrunyon.org/for-scientists/application-guidelines/physician-scientist"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-852e368eed34b97a</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Damon Runyon Cancer Research Foundation</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <summary>Damon Runyon Cancer Research Foundation — Posted — In an effort to confront the crisis arising from a growing dearth of physician-scientists, Damon Runyon wishes to encourage more physicians to pursue research careers. To do so, the Foundation established a program designed to recruit outstanding U.S. Specialty Board eligible physicians into cancer research careers by providing them with the opportunity for a protected research training experience…</summary>
+  </entry>
+  <entry>
+    <title>Distinguished Scientist Awards</title>
+    <link href="https://sontagfoundation.org/grant-application-process/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-6a28f2a561fe36aa</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Sontag Foundation</name></author>
+    <category term="Cancer"/>
+    <category term="Neuroscience"/>
+    <summary>Sontag Foundation — Posted — The foundation is looking for early career scientists with the potential to create new waves across the brain cancer field. Proposed research should demonstrate potential to generate new knowledge relating to causes, cure or treatment of primary brain tumors/brain cancer. Up to $150,000 per year for five years–as supported by budget request. ($600,000 max total)</summary>
+  </entry>
+  <entry>
+    <title>Doctoral Scholarship</title>
+    <link href="http://onsfoundation.org/funding-for-nurses/education/doctoral-scholarships"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-10e152cfee9dec17</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Oncology Nursing Society Foundation</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <summary>Oncology Nursing Society Foundation — Posted — To provide scholarships to registered nurses who are interested in and committed to oncology nursing to continue their education by pursuing a research doctoral degree (PhD or DNSc) or clinical doctoral degree (DNP)</summary>
+  </entry>
+  <entry>
+    <title>DTRF EARLY-CAREER INVESTIGATOR PROGRAM</title>
+    <link href="https://dtrf.org/apply-for-a-grant/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-9236268e2267f537</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>The Desmoid Tumor Research Foundation</name></author>
+    <category term="Cancer"/>
+    <summary>The Desmoid Tumor Research Foundation — Posted — DTRF funds research that will advance current scientific knowledge about desmoid tumors, moving toward the development of new treatment options and bringing us closer to our ultimate goal of a cure. Specifically, this RFP seeks applications from early-career investigators (e.g. Postdoctoral/Clinical Fellows, Instructors, Assistant Professors). Applicants are required to apply with the support of a…</summary>
+  </entry>
+  <entry>
+    <title>Emerging Leader Award</title>
+    <link href="https://themarkfoundation.org/emerging-leader-award/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-db8e4218a56d1981</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>The Mark Foundation</name></author>
+    <category term="Cancer"/>
+    <summary>The Mark Foundation — Posted — The Mark Foundation Emerging Leader Awards support innovative research from the next generation of leaders in cancer research. These grants are awarded to outstanding early career investigators to support high-impact, high-risk projects that are distinct from their current research portfolio.</summary>
+  </entry>
+  <entry>
+    <title>Endocrine Section Pilot Grants</title>
+    <link href="https://www.entnet.org/quality-practice/research/core-grants-program/2022-core-funding-opportunity-announcements/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-119a57620df22bc3</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Head and Neck Society</name></author>
+    <category term="Cancer"/>
+    <summary>American Head and Neck Society — Posted — The purpose of this award is to support basic, translational, or clinical research projects in head and neck oncology. Clinical or translational research studies are strongly encouraged and should be specifically related to the prevention, diagnosis, treatment, outcomes, or pathophysiology of head and neck neoplastic disease.</summary>
+  </entry>
+  <entry>
+    <title>Epidemiology Grant</title>
+    <link href="https://www.alexslemonade.org/grants/program-areas/accelerator-programs"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-a59a5669def20de7</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Alex’s Lemonade Stand Foundation</name></author>
+    <category term="Cancer"/>
+    <category term="Public health"/>
+    <summary>Alex’s Lemonade Stand Foundation — Posted — Epidemiology awards will support investigators pursuing research studies in human populations using C434epidemiological approaches, in order to significantly contribute to the understanding of childhood cancers. This grant mechanism is designed to support hypothesis-driven research that focuses on the epidemiology, early detection and prevention of childhood cancer or comparative effectiveness and…</summary>
+  </entry>
+  <entry>
+    <title>Familial RUNX1 Research Grant</title>
+    <link href="https://www.alexslemonade.org/grants/runx1"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-476702b241b533d9</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Alex’s Lemonade Stand Foundation</name></author>
+    <category term="Cancer"/>
+    <category term="Transportation"/>
+    <summary>Alex’s Lemonade Stand Foundation — Posted — ALSF is committed to creating opportunities for new and innovative research into treatments and cures for childhood cancers. The Babich Family Foundation (runx1.com) is dedicated to advancing areas of research of particular importance to families affected by familial platelet disorders (FPDs) leading to acute myeloid leukemia (AML) due to germline RUNX1 mutations with the ultimate goal of developi…</summary>
+  </entry>
+  <entry>
+    <title>Fellowship</title>
+    <link href="https://www.jccfund.org/eligibilty-criteria/important-dates-and-documents/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-fb96489801abdf47</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Jane Coffin Childs Memorial Fund for Medical Research</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2026-10-05 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) invites applications that investigate the etiology of sporadic non-hereditary early-onset cancers (EOCs: ages 18 to 49 years) and the underlying biological mechanisms that play a role in these cancers to inform prevention and control strategies. The proposed research is expected to advance the understanding of t…</summary>
+    <summary>Jane Coffin Childs Memorial Fund for Medical Research — Posted — The Jane Coffin Childs Memorial Fund for Medical Research (known colloquially as the JCC Fund) was established in 1937 for the purpose of supporting research into the causes and treatment of cancer. The Fund has taken a broad approach to the study of cell growth and development, emphasizing the study of the basic biology and chemistry of the underlying processes. The Fund has increasingly focused …</summary>
   </entry>
   <entry>
-    <title>Single source: Childhood Cancer Survivor Study (U24 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/361534"/>
-    <id>urn:funding-finder:grants-gov:361534</id>
-    <updated>2026-06-22T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
+    <title>Fellowship Grant</title>
+    <link href="https://www.chadtough.org/research/grant-application/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-81408f319e85b73f</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>ChadTough Defeat DIPG Foundation</name></author>
     <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2026-09-25 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to support the continuation of the Childhood Cancer Survivor Study (CCSS) that investigates the long-term morbidity and mortality associated with cancer treatments. The CCSS represents a multi-institutional, multidisciplinary collaborative research resource that currently has health-related data from 38,…</summary>
-  </entry>
-  <entry>
-    <title>DoW Kidney Cancer, Academy of Kidney Cancer Investigators – Early-Career Scholar Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362853"/>
-    <id>urn:funding-finder:grants-gov:362853</id>
-    <updated>2026-06-18T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-28 — Summary: Initially created in fiscal year 2019 (FY19), the Kidney Cancer Research Program (KCRP) Academy of Kidney Cancer Investigators (AKCI) is a unique interactive virtual academy providing intensive mentoring, national networking, collaborations, and a peer group for junior faculty. The Academy pairs Early Career Scholars (ECS) with established investigators (Designated Mentors) under the over…</summary>
-  </entry>
-  <entry>
-    <title>DoW Kidney Cancer, Idea Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362865"/>
-    <id>urn:funding-finder:grants-gov:362865</id>
-    <updated>2026-06-18T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Arts and culture"/>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-28 — Summary: The fiscal year 2026 (FY26) Kidney Cancer Research Program (KCRP) Idea Development Award (IDA) supports the development of high-impact ideas that advance the understanding of kidney cancer and ultimately lead to improved patient outcomes. The research project should include a well-formulated, testable hypothesis based on strong scientific rationale and a well-developed and articulated res…</summary>
-  </entry>
-  <entry>
-    <title>Discovery of the Genetic Basis of Childhood Cancers and of Congenital Anomalies: Gabriella Miller Kids First Pediatric Research Program (X01 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/361164"/>
-    <id>urn:funding-finder:grants-gov:361164</id>
-    <updated>2026-06-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2027-01-11 — As part of the Gabriella Miller Kids First Pediatric Research Program (Kids First Program), the NIH invites applications to submit samples from pediatric cohorts for whole genome sequencing at a Kids First Program supported genomic data generating centers. Applicants are encouraged to propose sequencing of existing pediatric cancer or congenital anomaly cohorts to elucidate the genetic contributio…</summary>
-  </entry>
-  <entry>
-    <title>DoW Kidney Cancer, Concept Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362852"/>
-    <id>urn:funding-finder:grants-gov:362852</id>
-    <updated>2026-06-17T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
+    <category term="Neuroscience"/>
     <category term="Technology development"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-08-11 — Summary: The fiscal year 2026 (FY26) Kidney Cancer Research Program (KCRP) Concept Award supports highly innovative, untested, potentially groundbreaking concepts, theories, paradigms and/or basic kidney cancer research. This award mechanism supports high-risk studies that have the potential to reveal entirely new avenues for investigation in kidney cancer. Applications must describe how the new c…</summary>
+    <summary>ChadTough Defeat DIPG Foundation — Posted — The ChadTough Defeat DIPG grants are intended to incentivize novel approaches and spark innovation to find a cure for the deadliest pediatric brain cancer, DIPG. It is no easy task. But we are confident that by working together with the passionate doctors and researchers focused on making progress on this disease, children with DIPG will finally be able to look forward to a bright future.</summary>
   </entry>
   <entry>
-    <title>DoW Rare Cancers Concept Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362847"/>
-    <id>urn:funding-finder:grants-gov:362847</id>
-    <updated>2026-06-17T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <title>Fellowship Grant</title>
+    <link href="https://www.chadtough.org/research/grant-application/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-81408f319e85b73f</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>ChadTough Defeat DIPG Foundation</name></author>
     <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-30 — Summary: The fiscal year 2026 (FY26) Rare Cancers Research Program (RCRP) Concept Award (CA) supports highly innovative, untested, potentially groundbreaking novel concepts in rare cancers. Applications must describe how the new idea will be innovative and present as a novel course of investigation in the field of rare cancers.Distinctive Features:Preliminary data are not required.Due to the blind…</summary>
-  </entry>
-  <entry>
-    <title>DoW Rare Cancers Idea Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362849"/>
-    <id>urn:funding-finder:grants-gov:362849</id>
-    <updated>2026-06-17T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-11-18 — Summary: The fiscal year 2026 (FY26) Rare Cancers Research Program (RCRP) Idea Development Award (IDA) promotes ideas that are ready for further development and have the potential to yield high-impact findings and new avenues of investigation.Distinctive Features:The RCRP encourages applicants to include an exploratory aim or sub-aim to support any necessary discovery-driven research.Preliminary d…</summary>
-  </entry>
-  <entry>
-    <title>DoW Rare Cancers Resource and Community Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362850"/>
-    <id>urn:funding-finder:grants-gov:362850</id>
-    <updated>2026-06-17T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <category term="Community development"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-11-18 — Summary: The fiscal year 2026 (FY26) Rare Cancers Research Program (RCRP) Resource and Community Development Award (RCDA) supports the development of research resources and clinical or preclinical datasets that will advance the field of rare cancers research and ultimately improve outcomes for individuals with rare cancers. Research supporting this funding opportunity should fill one of the follow…</summary>
-  </entry>
-  <entry>
-    <title>Systematic Testing of Radionuclides in Preclinical Experiments (STRIPE, RP1 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/361447"/>
-    <id>urn:funding-finder:grants-gov:361447</id>
-    <updated>2026-06-15T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2026-10-05 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to support research projects that employ state-of-the-art cancer biology approaches and preclinical model systems to investigate the biological effects of radiation emitted by radionuclides used in radiopharmaceutical therapy (RPT). The focus of this initiative is to advance mechanistic understanding of …</summary>
-  </entry>
-  <entry>
-    <title>Metastasis Research Network (U54 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360881"/>
-    <id>urn:funding-finder:grants-gov:360881</id>
-    <updated>2026-06-04T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2026-09-25 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits applications for research on developing a comprehensive and cohesive understanding of cancer metastasis. Towards this goal, the NCI will support U54 Specialized Centers that together will continue to serve as the hub of the Metastasis Research Network (MetNet). Each MetNet Center should propose an overa…</summary>
-  </entry>
-  <entry>
-    <title>Advanced Development and Validation of Emerging Technologies for Basic and Clinical Cancer Research (R33 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360534"/>
-    <id>urn:funding-finder:grants-gov:360534</id>
-    <updated>2026-06-03T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2026-11-10 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) invites grant applications proposing exploratory research projects focused on further development and technical validation of emerging technologies offering novel capabilities for the molecular or cellular characterization of cancer or for improved handling and quality control of biospecimens used for basic, cli…</summary>
-  </entry>
-  <entry>
-    <title>Early-Stage Innovative Technology Development for Basic and Clinical Cancer Research (R61 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360536"/>
-    <id>urn:funding-finder:grants-gov:360536</id>
-    <updated>2026-06-03T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Public health"/>
+    <category term="Neuroscience"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2026-11-10 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing to develop innovative technologies offering new capabilities for the molecular or cellular characterization of cancer or for improved handling and quality control of biospecimens for basic, clinical, or epidemiological cancer research. The NOFO solicits R61 applications for …</summary>
+    <summary>ChadTough Defeat DIPG Foundation — Posted — The ChadTough Defeat DIPG grants are intended to incentivize novel approaches and spark innovation to find a cure for the deadliest pediatric brain cancer, DIPG. It is no easy task. But we are confident that by working together with the passionate doctors and researchers focused on making progress on this disease, children with DIPG will finally be able to look forward to a bright future.</summary>
   </entry>
   <entry>
-    <title>Paul Calabresi Career Development Award for Clinical Oncology (K12 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/356197"/>
-    <id>urn:funding-finder:grants-gov:356197</id>
-    <updated>2026-06-03T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
+    <title>Heart Disease, Cancer and AIDS Research Program</title>
+    <link href="https://wwsmithcharitabletrust.org/medical-research/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-75aa2304c87e0720</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>W. W. Smith Charitable Trust</name></author>
     <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2029-03-12 — The goal of the Paul Calabresi Career Development Award for Clinical Oncology (PCACO) is to increase the number of clinician-scientists trained in clinical and translational cancer research, and to promote their career development as cancer researchers. This Notice of Funding Opportunity (NOFO) does not allow Scholars to propose to lead an independent clinical trial, but does allow Scholars to pro…</summary>
+    <summary>W. W. Smith Charitable Trust — Posted — LIMITED SUBMISSION (limit 3 - 1 per research area of heart disease/AIDs/Cancer - applications from JHU): Funds basic medical research in the areas of heart disease, cancer and AIDS. The philosophy of the Trust has been not to replicate governmental funding organizations, but identify and fund projects that are unique and meritorious. The Trust tries to select promising researchers who have the pot…</summary>
   </entry>
   <entry>
-    <title>Precision Approaches in Radiation Synthetic Combinations (PAIRS, RP1 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/361399"/>
-    <id>urn:funding-finder:grants-gov:361399</id>
-    <updated>2026-06-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2026-11-11 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits research projects that investigate actionable synthetic vulnerabilities that can be conditionally paired with tumor responses to radiation therapy. The goal of the Precision Approaches in Radiation Synthetic Combinations (PAIRS) program is to develop radiation-synthetic combination strategies and facili…</summary>
-  </entry>
-  <entry>
-    <title>DoW Prostate Cancer, Data Science Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362259"/>
-    <id>urn:funding-finder:grants-gov:362259</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
+    <title>Immuno-Informatics Postdoctoral Fellowship</title>
+    <link href="https://www.cancerresearch.org/postdoctoral-fellowships"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-6bb884635c26a0d2</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Cancer Research Institute</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Cancer"/>
     <category term="Data science"/>
-    <category term="Public health"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-02 — Summary: The fiscal year 2026 (FY26) Prostate Cancer Research Program (PCRP) Data Science Award (DSA) supports research that develops or uses quantitative and analytical approaches, processes and/or systems to obtain knowledge and insight from large and/or complex sets of prostate cancer data in one or more of the following research areas: Analysis of clinically annotated datasets; analysis of -om…</summary>
-  </entry>
-  <entry>
-    <title>DoW Prostate Cancer, Early Investigator Research Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362260"/>
-    <id>urn:funding-finder:grants-gov:362260</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Arts and culture"/>
-    <category term="Cancer"/>
     <category term="Education and workforce"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-02 — Summary: The fiscal year 2026 (FY26) Prostate Cancer Research Program (PCRP) Early Investigator Research Award (EIRA) supports prostate cancer research conducted by investigators in the early stages of their careers with guidance from an experienced mentor. All applications must address one of the FY26 PCRP Overarching Challenges. Distinctive Features: · Early-Career Investigator: Serves as the pr…</summary>
+    <summary>Cancer Research Institute — Posted — The Cancer Research Institute (CRI) Immuno-Informatics Postdoctoral Fellowship Program aims to support qualified young scientists at academic research institutions around the world who wish to receive dual training in immunology and data science. The fellowships will support both computational biologists who seek to strengthen their knowledge of immunology and cancer immunologists who seek trainin…</summary>
   </entry>
   <entry>
-    <title>DoW Prostate Cancer, Idea Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362261"/>
-    <id>urn:funding-finder:grants-gov:362261</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <title>Individual Rising Star Grant</title>
+    <link href="https://tinaswish.org/how-to-apply/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-8a73929c383c8d64</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>The Honorable Tina Brozman Foundation ("Tina's Wish")</name></author>
     <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-02 — Summary: The fiscal year 2026 (FY26) Prostate Cancer Research Program (PCRP) Idea Development Award (IDA) supports new ideas that represent innovative approaches to prostate cancer research and have the potential to make an important contribution to the PCRP mission. All applications must address one of the FY26 PCRP Overarching Challenges. Distinctive Features: · New Investigator Category: In add…</summary>
+    <summary>The Honorable Tina Brozman Foundation ("Tina's Wish") — Posted — The Tina’s Wish Rising Star Grant supports promising early career researchers in the early detection and prevention of ovarian cancer field and encourages them to take risks and develop innovative projects. The Rising Star Grant is $150,000 over two (2) years.</summary>
   </entry>
   <entry>
-    <title>DoW Prostate Cancer, Physician Research Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362262"/>
-    <id>urn:funding-finder:grants-gov:362262</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Arts and culture"/>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-02 — Summary: The fiscal year 2026 (FY26) Prostate Cancer Research Program (PCRP) Physician Research Award (PRA) Supports a mentored research experience to prepare physicians with clinical duties for careers in prostate cancer research. All applications must address one of the FY26 PCRP Overarching Challenges. Distinctive Features: · Early-Career Clinician Investigator: Serves as the Principal Investig…</summary>
-  </entry>
-  <entry>
-    <title>NCI Community Oncology Research Program (NCORP) Academic Community Sites (UG1 Clinical Trials Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359132"/>
-    <id>urn:funding-finder:grants-gov:359132</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2026-09-18 — This Notice of Funding Opportunity (NOFO) is one of three NOFOs for the National Cancer Institute (NCI) Community Oncology Research Program (NCORP). NCORP is designed to enhance generalizability and dissemination of clinical trial and other human subject research study results through accrual in a variety of community settings. The purpose of NCORP is to engage cancer patient populations, those at…</summary>
-  </entry>
-  <entry>
-    <title>NCI Community Oncology Research Program (NCORP) Community Sites (UG1 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/358964"/>
-    <id>urn:funding-finder:grants-gov:358964</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2026-09-18 — This Notice of Funding Opportunity (NOFO) is one of three NOFOs for the National Cancer Institute (NCI) Community Oncology Research Program (NCORP). NCORP is designed to enhance generalizability and dissemination of clinical trial and other human subject research study results through accrual in a variety of community settings. The purpose of NCORP is to engage cancer patient populations, those at…</summary>
-  </entry>
-  <entry>
-    <title>NCI Community Oncology Research Program (NCORP) Research Bases (UG1 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/358963"/>
-    <id>urn:funding-finder:grants-gov:358963</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Cancer"/>
-    <category term="Education and workforce"/>
-    <summary>National Institutes of Health — Closes 2026-09-18 — This Notice of Funding Opportunity (NOFO) is one of three NOFOs for the National Cancer Institute (NCI) Community Oncology Research Program (NCORP). NCORP is designed to enhance generalizability and dissemination of clinical trial and other human subject research study results through accrual in a variety of community settings. The purpose of NCORP is to engage cancer patient populations, those at…</summary>
-  </entry>
-  <entry>
-    <title>Advanced Development of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359855"/>
-    <id>urn:funding-finder:grants-gov:359855</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2026-10-19 — This Notice of Funding Opportunity (NOFO) invites applications for advanced development and enhancement of emerging informatics technologies to improve the acquisition, analysis, visualization, and interpretation of data across the cancer research continuum including cancer biology, cancer treatment and diagnosis, early cancer detection, risk assessment and prevention, cancer control and epidemiol…</summary>
-  </entry>
-  <entry>
-    <title>Sustained Support for Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359853"/>
-    <id>urn:funding-finder:grants-gov:359853</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2026-10-19 — This Notice of Funding Opportunity (NOFO) solicits applications for the continued development and sustainment of high value informatics research resources to improve the acquisition, management, analysis, and dissemination of data and knowledge across the cancer research continuum including cancer biology, cancer treatment and diagnosis, early cancer detection, risk assessment and prevention, canc…</summary>
-  </entry>
-  <entry>
-    <title>Early-Stage Development of Informatics Technologies for Cancer Research and Management (U01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359892"/>
-    <id>urn:funding-finder:grants-gov:359892</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Data science"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-10-19 — This Notice of Funding Opportunity (NOFO) solicits applications for the development of enabling informatics technologies to improve the acquisition, management, analysis, and dissemination of data and knowledge across the cancer research continuum including cancer biology, cancer treatment and diagnosis, early cancer detection, risk assessment and prevention, cancer control and epidemiology. As a …</summary>
-  </entry>
-  <entry>
-    <title>DoW Peer Reviewed Cancer, Clinical Trial Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362268"/>
-    <id>urn:funding-finder:grants-gov:362268</id>
-    <updated>2026-05-06T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-05 — Summary: The fiscal year 2026 (FY26) Peer Reviewed Cancer Research Program (PRCRP) Clinical Trial Award (CTA) supports the rapid implementation of clinical trials with the potential to have a significant impact on the treatment or management of cancer within at least one of the FY26 PRCRP Topic Areas. Clinical trials proposed may evaluate promising new products, pharmacologic agents (drugs or biol…</summary>
-  </entry>
-  <entry>
-    <title>DoW Peer Reviewed Cancer, Idea Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362265"/>
-    <id>urn:funding-finder:grants-gov:362265</id>
-    <updated>2026-05-06T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <title>Innovation Award</title>
+    <link href="https://www.damonrunyon.org/for-scientists/application-guidelines/innovation"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-03971e3c50ae789c</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Damon Runyon Cancer Research Foundation</name></author>
     <category term="Cancer"/>
     <category term="Technology development"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-05 — Summary: The fiscal year 2026 (FY26) Peer Reviewed Cancer Research Program (PRCRP) Idea Award (IA) supports innovative, untested, high-risk/potentially high-reward concepts, theories, paradigms, and/or basic cancer research. The advancement of knowledge in cancer research, patient care, and/or treatment options in the Military Health System (MHS) is critical to Service Members, Veterans, other mil…</summary>
+    <summary>Damon Runyon Cancer Research Foundation — Posted — The Damon Runyon-Rachleff Innovation Award is designed to provide support for the next generation of exceptionally creative thinkers with “high risk/high reward” ideas that have the potential to significantly impact our understanding of and/or approaches to the prevention, diagnosis or treatment of cancer. The Innovation Award is specifically designed to provide funding to extraordinary early care…</summary>
   </entry>
   <entry>
-    <title>DoW, Peer Reviewed Cancer, Impact Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362267"/>
-    <id>urn:funding-finder:grants-gov:362267</id>
-    <updated>2026-05-06T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-05 — Summary: The fiscal year 2026 (FY26) Peer Reviewed Cancer Research Program (PRCRP) Impact Award supports mature research that will have a near-term impact on clinical cancer care in one of the congressionally directed FY26 PRCRP Topic Areas. Applicants must consider how the research project will lead to the advancement of knowledge in cancer research, patient care and/or treatment options in the M…</summary>
-  </entry>
-  <entry>
-    <title>DoW Lung Cancer Idea Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362243"/>
-    <id>urn:funding-finder:grants-gov:362243</id>
-    <updated>2026-05-05T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-02 — Summary: The fiscal year 2026 (FY26) Lung Cancer Research Program (LCRP) Idea Development Award (IDA) supports conceptually innovative, high-risk/high-reward research that could lead to critical discoveries or major advancements that will accelerate progress toward eradicating deaths and suffering from lung cancer. This mechanism promotes new ideas that are in the early stages of development and h…</summary>
-  </entry>
-  <entry>
-    <title>DoW Lung Cancer Patient-Centered Outcomes and Survivorship Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362247"/>
-    <id>urn:funding-finder:grants-gov:362247</id>
-    <updated>2026-05-05T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-02 — Summary: The fiscal year 2026 (FY26) Lung Cancer Research Program (LCRP) Patient-Centered Outcomes and Survivorship Award (PCOSA) promotes evidence-based and patient-centered approaches to improve health and lung cancer related outcomes and enhance the patient experience in defined populations. Research must address at least one of the FY26 LCRP areas of emphasis in the Health Outcomes and Survivo…</summary>
-  </entry>
-  <entry>
-    <title>DoW Lung Cancer Translational Research Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362250"/>
-    <id>urn:funding-finder:grants-gov:362250</id>
-    <updated>2026-05-05T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-02 — Summary: The fiscal year 2026 (FY26) Lung Cancer Research Program (LCRP) Translational Research Award (TRA) supports advanced translational research that will foster transformation of promising ideas in lung cancer into clinical applications. Research must address at least one of the FY26 LCRP areas of emphasis.Distinctive Features: This funding mechanism intends to support a broad range of transl…</summary>
-  </entry>
-  <entry>
-    <title>DoW Breast Cancer, Breakthrough Award Level 3</title>
-    <link href="https://www.grants.gov/search-results-detail/362203"/>
-    <id>urn:funding-finder:grants-gov:362203</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-30 — Summary: The fiscal year 2026 (FY26) Breast Cancer Research Program (BCRP) Breakthrough Award mechanism supports promising research with high potential to lead to or make breakthroughs in breast cancer. All applications must address at least one of the FY26 BCRP overarching challenges or provide adequate justification for exception. Applications must address the challenge in a way that can lead to…</summary>
-  </entry>
-  <entry>
-    <title>DoW Breast Cancer, Breakthrough Award Level 4</title>
-    <link href="https://www.grants.gov/search-results-detail/362205"/>
-    <id>urn:funding-finder:grants-gov:362205</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-30 — Summary: The fiscal year 2026 (FY26) Breast Cancer Research Program (BCRP) Breakthrough Award mechanism supports promising research with high potential to lead to or make breakthroughs in breast cancer. All applications must address at least one of the FY26 BCRP overarching challenges or provide adequate justification for exception. Applications must address the challenge in a way that can lead to…</summary>
-  </entry>
-  <entry>
-    <title>DoW Breast Cancer, Transformative Breast Cancer Consortium Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362210"/>
-    <id>urn:funding-finder:grants-gov:362210</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-30 — Summary: The fiscal year 2026 (FY26) Breast Cancer Research Program (BCRP) Transformative Breast Cancer Consortium Award supports collaborations and ideas that will transform the lives of individuals with, and/or at risk for, breast cancer and will significantly accelerate progress toward ending breast cancer. Applications must propose a synergistic, highly integrated, multidisciplinary and multi-…</summary>
-  </entry>
-  <entry>
-    <title>DoW Ovarian Cancer, Clinical Trial Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362200"/>
-    <id>urn:funding-finder:grants-gov:362200</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <title>Innovative Testing Research</title>
+    <link href="https://www.earlier.org/research"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-d7fda3423c23dd0f</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Earlier.org - Friends For An Earlier Breast Cancer Test</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-01 — Summary: The OCRP Clinical Trial Award supports the rapid implementation of clinical trials with the potential to have a significant impact on the treatment or management of ovarian cancer.Distinctive Features: Clinical trials may be designed to evaluate promising new products, pharmacologic agents (drugs or biologics), devices, clinical guidance and/or emerging approaches and technologies. Propos…</summary>
-  </entry>
-  <entry>
-    <title>DoW, Ovarian Cancer, Investigator-Initiated Research Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362202"/>
-    <id>urn:funding-finder:grants-gov:362202</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-01 — Summary: The Ovarian Cancer Research Program (OCRP) Investigator-Initiated Research Award is intended to support high-impact research that addresses a critical need and has the potential to make an important contribution to ovarian cancer or patient/survivor care.Distinctive Features: Application must contain strong research plan with sound scientific rational and logical reasoning. Preliminary da…</summary>
-  </entry>
-  <entry>
-    <title>DoW, Ovarian Cancer, Ovarian Cancer Academy – Early-Career Investigator Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362204"/>
-    <id>urn:funding-finder:grants-gov:362204</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
     <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-01 — Summary: Initially created in FY09, the OCRP Ovarian Cancer Academy (OCA) is a unique, interactive virtual academy providing intensive mentoring, national networking, collaborations, and a peer group for junior faculty. The overarching goal of the OCA is to conduct innovative and impactful ovarian cancer research while developing successful, highly productive ovarian cancer researchers in a collab…</summary>
+    <summary>Earlier.org - Friends For An Earlier Breast Cancer Test — Posted — Earlier.org - Friends For An Earlier Breast Cancer Test® is a non-profit organization dedicated to promoting awareness and education and to raising funds for pilot projects in the area of earlier detection of breast cancer. Earlier.org requests applications for pilot projects that focus on new methods to improve detection of early breast cancer and are especially interested in the development of n…</summary>
   </entry>
   <entry>
-    <title>DoW, Ovarian Cancer, Ovarian Cancer Clinical Trial Academy – Early-Career Investigator Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362207"/>
-    <id>urn:funding-finder:grants-gov:362207</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <title>International Research Fellowship Program</title>
+    <link href="http://www.americanitaliancancer.org/research-fellowships.html"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-9f56b1387f7b52f7</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American-Italian Cancer Foundation</name></author>
+    <category term="Biology and biotechnology"/>
     <category term="Cancer"/>
-    <category term="Education and workforce"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-01 — Summary: Created in FY23, the Ovarian Cancer Clinical Trial Academy (OCCTA) supports the next generation of Early-Career Investigators (ECIs) in clinical trial research to produce effective treatments and cures for ovarian cancer. The OCCTA, through its Leadership, provides for professional and leadership development of the ECIs to include skills and competencies needed to execute clinical trials,…</summary>
-  </entry>
-  <entry>
-    <title>DoW, Ovarian Cancer, Pilot Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362209"/>
-    <id>urn:funding-finder:grants-gov:362209</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <category term="Technology development"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-01 — Summary: The Ovarian Cancer Pilot Award supports research that expands or modifies current thinking about and/or approaches in ovarian cancer, exploring innovative concepts or theories in ovarian cancer that could ultimately lead to critical discoveries or major advancements that will drive the field forward.Distinctive Features: Innovation is key. Research projects that demonstrate exceptional sc…</summary>
-  </entry>
-  <entry>
-    <title>DoW Pancreatic Cancer Research Program, Focused Pilot Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362193"/>
-    <id>urn:funding-finder:grants-gov:362193</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-07 — Summary: The fiscal year 2026 (FY26) Pancreatic Cancer Research Program (PCARP) Focused Pilot Award supports the exploration and development of impactful and innovative concepts under a patient-centered focus area of pancreatic cancer research that could ultimately lead to major advancements that will have a profound effect on patients’ overall quality of life. The research this award supports sho…</summary>
-  </entry>
-  <entry>
-    <title>DoW Pancreatic Cancer Research Program, Idea Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362190"/>
-    <id>urn:funding-finder:grants-gov:362190</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-07 — Summary: The fiscal year 2026 (FY26) Pancreatic Cancer Research Program (PCARP) Idea Development Award supports the development of innovative, high-risk/high-reward research that could lead to critical discoveries or major advancements that will accelerate progress in improving outcomes for individuals with pancreatic cancer. This award mechanism supports innovative ideas with the potential to yie…</summary>
+    <summary>American-Italian Cancer Foundation — Posted — ​AICF is proud to sponsor the work of bright young scientists who perform groundbreaking research in the fields of cancer biology and treatment in competitive labs across the United States. To date, AICF has effectively launched the careers of nearly 400 scientists who have been awarded 535 fellowships since the Program’s inception in 1983.</summary>
   </entry>
 </feed>

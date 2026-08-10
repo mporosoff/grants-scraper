@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-08-10T18:41:26Z</updated>
+  <updated>2026-08-10T18:47:18Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Microplastics Research and Resource Coordination Center (U24 - Clinical Trial Not Allowed)</title>
@@ -14,6 +14,43 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Materials science"/>
     <summary>National Institutes of Health — Closes 2026-12-01 — The goal of the Micro/Nanoplastics (M/NPs) Research and Resource Coordination Center initiative is to establish a robust center that will coordinate and advance multidisciplinary efforts among biomedical and material science researchers to gain a comprehensive understanding of the health effects of M/NPs. This coordination center will accelerate the development and dissemination of sampling and an…</summary>
+  </entry>
+  <entry>
+    <title>Blavatnik National Award for Young Scientists</title>
+    <link href="http://blavatnikawards.org/awards/national-awards/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-409eb2af7043bfde</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Blavatnik Awards for Young Scientists</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <category term="Materials science"/>
+    <summary>Blavatnik Awards for Young Scientists — Posted — LIMITED SUBMISSION (limit 1 application from JHU): The Blavatnik National Awards for Young Scientists recognize the country’s most promising young faculty rank scientists and engineers in the disciplinary categories of Life Sciences, Physical Sciences &amp; Engineering, and Chemistry. Analytical Chemistry, Biochemistry &amp; Structural Biology, Chemical Biology, Chemical Engineering, Environmental Chemist…</summary>
+  </entry>
+  <entry>
+    <title>Office of Science Graduate Student Research (SCGSR) Program</title>
+    <link href="https://science.osti.gov/wdts/scgsr"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-73b9786df69845f8</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Department of Energy (DOE) Office of Science</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Carbon management"/>
+    <summary>Department of Energy (DOE) Office of Science — Posted — Provides supplemental awards to outstanding U.S. graduate students to pursue part of their graduate thesis research at a DOE laboratory/facility in collaboration with a DOE laboratory scientist within a defined award period in areas that address scientific challenges such as: Advanced Scientific Computing Research (ASCR), Basic Energy Sciences (BES), Biological and Environmental Research (BER), Fu…</summary>
+  </entry>
+  <entry>
+    <title>URA Visiting Scholars Program (VSP)</title>
+    <link href="https://ura-hq.org/high-energy-physics-user-community/ura-visiting-scholars-program/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-14d7d768e1e73a08</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Universities Research Association</name></author>
+    <category term="Energy"/>
+    <category term="Materials science"/>
+    <summary>Universities Research Association — Posted — Research in high energy physics experiments, astrophysics, theory, accelerator physics, materials science, computer science, engineering, and accelerator R&amp;D related to the Fermilab mission.</summary>
   </entry>
   <entry>
     <title>Egypt Annual Program Statement</title>

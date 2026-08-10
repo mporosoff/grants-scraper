@@ -39,6 +39,7 @@ class AdapterResult:
     diagnostics: dict = field(default_factory=dict)
     min_records: Optional[int] = None
     max_records: Optional[int] = None
+    fallback_grace_days: int = 0
 
 
 def collect(adapters: Optional[list[SourceAdapter]] = None,
@@ -69,6 +70,7 @@ def collect(adapters: Optional[list[SourceAdapter]] = None,
                     diagnostics=dict(getattr(adapter, "diagnostics", {}) or {}),
                     min_records=adapter.min_records,
                     max_records=adapter.max_records,
+                    fallback_grace_days=adapter.fallback_grace_days,
                 )
             )
             continue
@@ -83,6 +85,7 @@ def collect(adapters: Optional[list[SourceAdapter]] = None,
                 diagnostics=dict(getattr(adapter, "diagnostics", {}) or {}),
                 min_records=adapter.min_records,
                 max_records=adapter.max_records,
+                fallback_grace_days=adapter.fallback_grace_days,
             )
         )
         all_records.extend(records)

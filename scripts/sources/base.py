@@ -318,6 +318,10 @@ class SourceAdapter:
     #: treated as unhealthy, so the merge keeps the last-known-good snapshot.
     min_records: int = 1
     max_records: int = 2000
+    #: Some public sources block cloud-runner IPs. When positive, a failed live
+    #: fetch may use a complete snapshot no older than this many days without
+    #: degrading the whole pipeline. The failure and snapshot age stay visible.
+    fallback_grace_days: int = 0
 
     def __init__(self) -> None:
         if not self.slug:

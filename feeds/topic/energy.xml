@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-08-10T18:41:26Z</updated>
+  <updated>2026-08-10T18:47:18Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -17,6 +17,134 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>Rural Utilities Service — Closes 2027-05-03 — The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+  </entry>
+  <entry>
+    <title>*Limited Submission* The 2019 International Future Energy Challenge (IFEC) Student Competition</title>
+    <link href="http://energychallenge.weebly.com/ifec-2019.html"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-7bc7f26131c32d1f</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>The Institute of Electrical and Electronics Engineers (IEEE)</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <summary>The Institute of Electrical and Electronics Engineers (IEEE) — Posted</summary>
+  </entry>
+  <entry>
+    <title>Computational Science Graduate Fellowship (DOE CSGF)</title>
+    <link href="https://www.krellinst.org/csgf/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-821dd90b23b58a1a</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>US Department of Energy (DOE)</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <summary>US Department of Energy (DOE) — Posted — The Department of Energy Computational Science Graduate Fellowship (CSGF) provides outstanding benefits and opportunities to students pursuing doctoral degrees in fields that use high-performance computing to solve complex science and engineering problems.
+The program fosters a community of energetic and committed Ph.D. students, alumni, DOE lab staff and other scientists who want to have an impac…</summary>
+  </entry>
+  <entry>
+    <title>Director's Postdoctoral Fellowship</title>
+    <link href="https://www.nrel.gov/careers/directors-fellowship.html"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-7e862368b7313668</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>National Renewable Energy Laboratory (NREL)</name></author>
+    <category term="Energy"/>
+    <summary>National Renewable Energy Laboratory (NREL) — Posted — The Director's Fellowship pairs outstanding scientists, engineers, and analysts who've earned their doctorate within the past 2 years with NREL mentors to propose and conduct innovative clean energy research.
+NREL selects fellows in three disciplines—scientists, engineers, and analysts—based on eligibility, program expectations, and research proposals, with overriding consideration for the quality…</summary>
+  </entry>
+  <entry>
+    <title>Energy Fellowship Program</title>
+    <link href="http://www.linkenergy.org/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-9cd3376f6a20e71b</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Link Foundation</name></author>
+    <category term="Energy"/>
+    <summary>Link Foundation — Posted — The Link Foundation supports programs to foster the theoretical basis, practical knowledge, and application of energy, simulation, and ocean engineering and instrumentation research, and to disseminate the results of that research through lectures, seminars and publications.</summary>
+  </entry>
+  <entry>
+    <title>Gulf Research Program Early-Career Research Fellowships</title>
+    <link href="http://www.nationalacademies.org/gulf/fellowships/early-career/index.htm"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-7589cf325d85ccfc</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>National Academies of Sciences, Engineering and Medicine</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <summary>National Academies of Sciences, Engineering and Medicine — Posted — The Gulf Research Program’s Early-Career Research Fellowship supports emerging scientific leaders as they take risks on research ideas not yet tested, pursue unique collaborations, and build a network of colleagues who share their interest in improving offshore energy system safety and the well-being of coastal communities and ecosystems.</summary>
+  </entry>
+  <entry>
+    <title>International Teams in Space and Earth Sciences</title>
+    <link href="https://www.issibern.ch/scientific-opportunities/international-teams/?_t_states=active-teams"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-689e3b99f78af153</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>International Space Science Institute</name></author>
+    <category term="Climate change"/>
+    <category term="Energy"/>
+    <category term="Space and aeronautics"/>
+    <summary>International Space Science Institute — Posted — International Teams consist of 8-15 researchers with complementary scientific expertise, and from several different institutions and countries worldwide. They hold a series of two to three one-week meetings over a period of 18 to 24 months. The aim of Teams is to carry out a research project leading to publications in scientific journals. The activity is directed and organised by a team leader who…</summary>
+  </entry>
+  <entry>
+    <title>Lewis and Clark Fund for Exploration and Field Research in Astrobiology</title>
+    <link href="https://www.amphilsoc.org/grants/lewis-and-clark-fund-exploration-and-field-research-astrobiology"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-4375a9d51ac538fb</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Philosophical Society (APS)</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <summary>American Philosophical Society (APS) — Posted — Astrobiology is the study of the origin, evolution, distribution, and future of life on Earth and in the universe. It encompasses research in, among others, the fields of astronomy, chemistry, evolutionary biology, field and population biology, geology, microbiology, molecular biology, oceanography, paleontology, and planetary science. Astrobiology includes investigations of the geologic and fossi…</summary>
+  </entry>
+  <entry>
+    <title>Office of Science Graduate Student Research (SCGSR) Program</title>
+    <link href="https://science.osti.gov/wdts/scgsr"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-73b9786df69845f8</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Department of Energy (DOE) Office of Science</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Carbon management"/>
+    <summary>Department of Energy (DOE) Office of Science — Posted — Provides supplemental awards to outstanding U.S. graduate students to pursue part of their graduate thesis research at a DOE laboratory/facility in collaboration with a DOE laboratory scientist within a defined award period in areas that address scientific challenges such as: Advanced Scientific Computing Research (ASCR), Basic Energy Sciences (BES), Biological and Environmental Research (BER), Fu…</summary>
+  </entry>
+  <entry>
+    <title>Placemaking Projects</title>
+    <link href="http://www.artplaceamerica.org/our-work/national-creative-placemaking-fund/introduction"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-32687b668905c3e2</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Artplace America</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Transportation"/>
+    <summary>Artplace America — Posted — Artplace America has announced that it is accepting applications for its National Creative Placemaking Fund. Grants of up to $500,000 will be awarded for projects that work with artists and arts organizations to help build stronger, healthier communities anywhere in the United States. Eligible projects must focus on a neighborhood (or other geographic community) challenge related to that community…</summary>
+  </entry>
+  <entry>
+    <title>Simons Early Career Investigator in Aquatic Microbial Ecology and Evolution Awards</title>
+    <link href="https://www.simonsfoundation.org/grant/simons-early-career-investigator-in-marine-microbial-ecology-and-evolution-awards/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-7070ac3e7c9179b5</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>The Simons Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Climate change"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <summary>The Simons Foundation — Posted — Microbes inhabit and sustain all habitats on Earth. In both marine and freshwater systems, microbes capture solar energy, catalyze biogeochemical transformations of important elements, produce and consume greenhouse gases, and provide the base of the food web.
+The purpose of these awards is to help launch the careers of outstanding investigators in the fields of microbial ecology, microbial biogeo…</summary>
+  </entry>
+  <entry>
+    <title>URA Visiting Scholars Program (VSP)</title>
+    <link href="https://ura-hq.org/high-energy-physics-user-community/ura-visiting-scholars-program/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-14d7d768e1e73a08</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Universities Research Association</name></author>
+    <category term="Energy"/>
+    <category term="Materials science"/>
+    <summary>Universities Research Association — Posted — Research in high energy physics experiments, astrophysics, theory, accelerator physics, materials science, computer science, engineering, and accelerator R&amp;D related to the Fermilab mission.</summary>
   </entry>
   <entry>
     <title>NOI: PROSPECT Program: Providing Opportunities for Specialized Education in Critical Technologies</title>
@@ -559,132 +687,5 @@
     <category term="Data science"/>
     <category term="Energy"/>
     <summary>U.S. Mission to Indonesia — Closes 2026-08-31 — Project Background, Goals, and ObjectivesIn an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will leave…</summary>
-  </entry>
-  <entry>
-    <title>Special Program Announcement for Office of Naval Research Research Opportunity: FY27 Communications and Networking Applied Research</title>
-    <link href="https://www.grants.gov/search-results-detail/362836"/>
-    <id>urn:funding-finder:grants-gov:362836</id>
-    <updated>2026-06-16T00:00:00Z</updated>
-    <author><name>Office of Naval Research</name></author>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Transportation"/>
-    <summary>Office of Naval Research — Closes 2026-11-16 — The proposed topic will develop and mature Communications and Networking technologies for Naval operations.Background:A Design for Maritime Superiority (2018) describes an operational architecture for distributed maritime operations (DMO) that "... will provide accurate, timely, and analyzed information to units, warfighting groups, and fleets." A critical component of this architecture is the Nav…</summary>
-  </entry>
-  <entry>
-    <title>Youth Homelessness NOFO for FY2024 and FY2025</title>
-    <link href="https://www.grants.gov/search-results-detail/362002"/>
-    <id>urn:funding-finder:grants-gov:362002</id>
-    <updated>2026-06-10T00:00:00Z</updated>
-    <author><name>Department of Housing and Urban Development</name></author>
-    <category term="Community development"/>
-    <category term="Energy"/>
-    <summary>Department of Housing and Urban Development — Closes 2026-08-10 — 1. NOFO HighlightsThe Youth Homelessness NOFO provides competitive awards to eligible applicants under two different programs-Youth Homelessness System Improvement (YHSI) grants- Assistance Listing Number (ALN) 14.277Youth Homelessness Demonstration Program (YHDP)- ALN 14.276Under the YHSI grants, HUD will make awards to selected communities to support them in establishing and implementing a respo…</summary>
-  </entry>
-  <entry>
-    <title>WaterSMART Cooperative Watershed Management Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362755"/>
-    <id>urn:funding-finder:grants-gov:362755</id>
-    <updated>2026-06-10T00:00:00Z</updated>
-    <author><name>Bureau of Reclamation</name></author>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Water"/>
-    <summary>Bureau of Reclamation — Closes 2028-02-15 — The WaterSMART Cooperative Watershed Management Program funding opportunity invites eligible entities to apply for funding to develop local solutions to address their water management needs. This opportunity provides funding for watershed group development, restoration planning, and watershed management project planning and design. By providing this funding, Reclamation promotes water reliability …</summary>
-  </entry>
-  <entry>
-    <title>MINE HEALTH AND SAFETY STATE GRANTS</title>
-    <link href="https://www.grants.gov/search-results-detail/362729"/>
-    <id>urn:funding-finder:grants-gov:362729</id>
-    <updated>2026-06-09T00:00:00Z</updated>
-    <author><name>Mine Safety and Health Administration</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Materials science"/>
-    <summary>Mine Safety and Health Administration — Closes 2026-08-10 — The Secretary of Labor, through MSHA, may award grants to State, Tribal, and Territorial Governments (including the District of Columbia, the Commonwealth of Puerto Rico, the Virgin Islands, American Samoa, Guam, and the Commonwealth of the Northern Mariana Islands) to assist them in developing and enforcing State mining laws and regulations, improve State workers’ compensation and mining occupati…</summary>
-  </entry>
-  <entry>
-    <title>Research and Education Program for Historically Black Colleges and Universities (HBCU) and Tribal Colleges and Universities (TCU)</title>
-    <link href="https://www.grants.gov/search-results-detail/362711"/>
-    <id>urn:funding-finder:grants-gov:362711</id>
-    <updated>2026-06-08T00:00:00Z</updated>
-    <author><name>Dept of the Army -- Materiel Command</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Quantum science"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>Dept of the Army -- Materiel Command — Closes 2026-08-11 — This solicitation invites applications (also referred to as “proposals”) for basic research projects. The proposals must align with the research areas of interest to the DoW (which includes the USW(R&amp;E) and the Agencies) and enhance the education of students in areas of STEM that align with the DoW research interests. Information about these areas of interest (including websites) is discussed belo…</summary>
-  </entry>
-  <entry>
-    <title>Native American Affairs: Fiscal Year 2025 Colorado River Basin Tribal Drought Resiliency Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362644"/>
-    <id>urn:funding-finder:grants-gov:362644</id>
-    <updated>2026-06-02T00:00:00Z</updated>
-    <author><name>Bureau of Reclamation</name></author>
-    <category term="Energy"/>
-    <category term="Water"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Bureau of Reclamation — Closes 2026-09-28 — The objectives of this NAA/TAP funding opportunity are to provide funding for drought relief actions/projects that mitigate drought impacts for designated federally recognized tribes within the Colorado River Basin (see Eligibility section for list of tribes), and which advance Presidential and Department of the Interior Priorities within the Basin.Proposals should meet one or more of the followin…</summary>
-  </entry>
-  <entry>
-    <title>FY 2026 Continuum of Care Competition and Youth Homelessness Demonstration Program Grants NOFO</title>
-    <link href="https://www.grants.gov/search-results-detail/361999"/>
-    <id>urn:funding-finder:grants-gov:361999</id>
-    <updated>2026-06-01T00:00:00Z</updated>
-    <author><name>Department of Housing and Urban Development</name></author>
-    <category term="Community development"/>
-    <category term="Energy"/>
-    <summary>Department of Housing and Urban Development — Closes 2026-08-26 — The Continuum of Care (CoC) Program is designed to:promote a community-wide commitment to the goal of ending homelessness;provide funding for efforts by nonprofit providers, States, Indian Tribes or Tribally Designated Housing Entities [as defined in section 4 of the Native American Housing Assistance and Self-Determination Act of 1996 (25 U.S.C. 4103) (TDHEs)], and local governments to quickly re…</summary>
-  </entry>
-  <entry>
-    <title>ROSES25: F.17 Research Initiation Awards</title>
-    <link href="https://www.grants.gov/search-results-detail/362495"/>
-    <id>urn:funding-finder:grants-gov:362495</id>
-    <updated>2026-05-20T00:00:00Z</updated>
-    <author><name>NASA Headquarters</name></author>
-    <category term="Energy"/>
-    <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters — Closes 2026-08-18 — NOTICE: Amended May 20, 2026. This amendment releases final text for this program element, which was previously TBD. Neither an NOI nor Step-1 proposal is requested. The due date for proposals is August 18, 2026. An informational webinar about this opportunity will occur at 1 p.m. Eastern Time on June 16. Register for the webinar at https://nasaevents.webex.com/weblink/register/r2fbc7ed95634bfe117…</summary>
-  </entry>
-  <entry>
-    <title>Title XVI Water Reclamation and Reuse Projects</title>
-    <link href="https://www.grants.gov/search-results-detail/362396"/>
-    <id>urn:funding-finder:grants-gov:362396</id>
-    <updated>2026-05-14T00:00:00Z</updated>
-    <author><name>Bureau of Reclamation</name></author>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Water"/>
-    <summary>Bureau of Reclamation — Closes 2027-08-26 — Through WaterSMART, the Bureau of Reclamation (Reclamation) leverages Federal and non- Federal funding to work cooperatively with States, Tribes, and other entities as they plan for and implement actions to increase water supply and hydropower reliability. The WaterSMART Program demonstrably advances Trump administration priorities, such as those identified in Presidential Executive Order 14154 (J…</summary>
-  </entry>
-  <entry>
-    <title>WaterSMART: Desalination Construction Projects</title>
-    <link href="https://www.grants.gov/search-results-detail/362395"/>
-    <id>urn:funding-finder:grants-gov:362395</id>
-    <updated>2026-05-14T00:00:00Z</updated>
-    <author><name>Bureau of Reclamation</name></author>
-    <category term="Energy"/>
-    <category term="Water"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Bureau of Reclamation — Closes 2027-08-26 — Through WaterSMART, the Bureau of Reclamation (Reclamation) leverages Federal and non-Federal funding to work cooperatively with States, Tribes, and other entities as they plan for and implement actions to increase water supply and hydropower reliability. The WaterSMART Program demonstrably advances Trump administration priorities, such as those identified in Presidential Executive Order 14154 (Ja…</summary>
-  </entry>
-  <entry>
-    <title>WaterSMART Enhancing Water Resources Projects</title>
-    <link href="https://www.grants.gov/search-results-detail/362394"/>
-    <id>urn:funding-finder:grants-gov:362394</id>
-    <updated>2026-05-14T00:00:00Z</updated>
-    <author><name>Bureau of Reclamation</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Water"/>
-    <summary>Bureau of Reclamation — Closes 2027-09-08 — The objective of the WaterSMART Enhancing Water Resources Projects funding opportunity is to invite eligible entities to apply for funding to implement projects per the authorizing language referenced above that benefit water resource management for multiple uses, including water conservation and efficiency projects, water infrastructure improvements, and river and watershed restoration. Projects …</summary>
   </entry>
 </feed>

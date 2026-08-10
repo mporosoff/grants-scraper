@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-08-10T18:41:26Z</updated>
+  <updated>2026-08-10T18:47:18Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
@@ -68,6 +68,89 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health — Closes 2026-11-01 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop, operate, and sustain a cloud-based data storage and computing platform that democratizes access to large-scale Alzheimer’s disease (AD) and AD-related dementias (ADRD) genetic and genomic data. The platform must be secure, scalable, and interoperable. The platform wil…</summary>
+  </entry>
+  <entry>
+    <title>AIMINGS Pilot Project Program</title>
+    <link href="https://www.phicor.org/rfa"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-58e213e002023f30</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>PHICOR</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <summary>PHICOR — Posted — AIMINGS, the artificial intelligence (AI) Center for the Nutrition for Precision Health’s (NPH) Consortium, released a call for proposals for its pilot project program. The RFA seeks research projects that develop and utilize AI and other computer-aided approaches to facilitate precision nutrition.</summary>
+  </entry>
+  <entry>
+    <title>AIMINGS Pilot Project Program</title>
+    <link href="https://www.phicor.org/rfa"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-58e213e002023f30</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>PHICOR</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <summary>PHICOR — Posted — AIMINGS, the artificial intelligence (AI) Center for the Nutrition for Precision Health’s (NPH) Consortium, released a call for proposals for its pilot project program. The RFA seeks research projects that develop and utilize AI and other computer-aided approaches to facilitate precision nutrition.</summary>
+  </entry>
+  <entry>
+    <title>Inflammatory Bowel Disease (IBD) Fellowship</title>
+    <link href="https://cdn.pfizer.com/pfizercom/2026-02/2026-I%26I-US-GI-Fellowship.pdf?VersionId=078AIjBpC1y2ecrv7LnovLtuDSg5OZpg"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-83f586cf4a0c94f2</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Pfizer</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Education and workforce"/>
+    <category term="Health equity"/>
+    <summary>Pfizer — Posted — The goal of this RFP is to offer salary support for IBD fellowship programs. It is our intent to support fellowship programs at institutions with clinical training programs in regions where there are continued workforce challenges and that have a strong focus on healthcare equity, clinical practice, research, education, and advancing the standard of care in IBD (i.e., IUS, AI endoscopy, machine le…</summary>
+  </entry>
+  <entry>
+    <title>Michelson Prizes</title>
+    <link href="https://www.humanimmunomeproject.org/michelsonprizes/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-828153ab26b34f9b</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Human Immunome Project</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <summary>Human Immunome Project — Posted — The Michelson Prizes: Next Generation Grants are annual awards of $150,000, which support early-career investigators who are working to significantly advance human immunology and vaccine and immunotherapy research for major global diseases. The Prizes are awarded by the Michelson Medical Research Foundation and the Human Immunome Project (previously the Human Vaccines Project).
+While the Michelson…</summary>
+  </entry>
+  <entry>
+    <title>Michelson Prizes</title>
+    <link href="https://www.humanimmunomeproject.org/michelsonprizes/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-828153ab26b34f9b</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Human Immunome Project</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <summary>Human Immunome Project — Posted — The Michelson Prizes: Next Generation Grants are annual awards of $150,000, which support early-career investigators who are working to significantly advance human immunology and vaccine and immunotherapy research for major global diseases. The Prizes are awarded by the Michelson Medical Research Foundation and the Human Immunome Project (previously the Human Vaccines Project).
+While the Michelson…</summary>
+  </entry>
+  <entry>
+    <title>SIParCS Program Internship</title>
+    <link href="https://www.cisl.ucar.edu/outreach/internships"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-81913b8b43eae791</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Computational &amp; Information Systems Lab</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>Computational &amp; Information Systems Lab — Posted — Summer Internships in Parallel Computational Science (SIParCS) embed students in CISL to provide them with significant hands-on experience in high-performance computing and related fields that use HPC for scientific discovery and modeling.
+SIParCS (pronounced sigh-parks) is for university students who are interested in pursuing careers in such areas as:
+Application Optimization
+Data Science
+Machin…</summary>
+  </entry>
+  <entry>
+    <title>Victor A. McKusick Fellowship Grant</title>
+    <link href="https://marfan.org/resource-library/victor-mckusick-fellows/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-1560f7fb7c078f9a</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Marfan Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Technology development"/>
+    <summary>Marfan Foundation — Posted — This award is for $150,000 for an MD and $100,000 for a PhD, over 2 years. It is designed to support postdoctoral fellows embarking on a scientific career in biomedical research related to Marfan syndrome or any of the genetic aorta or vascular conditions that are within the Foundation’s scope of interest. Fellows up to postgraduate year six are eligible. During the fellowship phase, the applicant…</summary>
   </entry>
   <entry>
     <title>NSF DCL Advancing Artificial Intelligence (AI) Agent Ecosystems through the National Science Foundation Pathways to Enable Secure Open-Source Ecosystems (NSF PESOSE) Program | NSF 26-015</title>
@@ -681,89 +764,5 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>National Endowment for the Humanities — Closes 2026-09-16 — The National Endowment for the Humanities (NEH) Division of Research is accepting applications for the Scholarly Editions and Translations program. The purpose of this program is to support collaborative teams who edit, annotate, and translate foundational humanities texts that are vital to generating new scholarship but are not available in adequate editions or translations. This year’s competiti…</summary>
-  </entry>
-  <entry>
-    <title>Development and Testing of a Multi-use Frameworks Playbook for Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) (U01 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359271"/>
-    <id>urn:funding-finder:grants-gov:359271</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <summary>National Institutes of Health — Closes 2026-10-09 — The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
-  </entry>
-  <entry>
-    <title>Model-to-Clinic (M2C) for Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) (UG3/UH3, Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359666"/>
-    <id>urn:funding-finder:grants-gov:359666</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2026-10-19 — The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
-  </entry>
-  <entry>
-    <title>PRIMED-AI: Data-to-Model Academic-Industrial Partnerships (D2M-AIP) for Precision Medicine with AI: Integrating Imaging with Multimodal Data (UG3/UH3 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359270"/>
-    <id>urn:funding-finder:grants-gov:359270</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <summary>National Institutes of Health — Closes 2026-10-19 — The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
-  </entry>
-  <entry>
-    <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
-    <link href="https://www.grants.gov/search-results-detail/362900"/>
-    <id>urn:funding-finder:grants-gov:362900</id>
-    <updated>2026-06-22T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Cybersecurity"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <category term="Data science"/>
-    <category term="Energy"/>
-    <summary>U.S. Mission to Indonesia — Closes 2026-08-31 — Project Background, Goals, and ObjectivesIn an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will leave…</summary>
-  </entry>
-  <entry>
-    <title>Tribal Colleges Extension Program - Capacity Applications</title>
-    <link href="https://www.grants.gov/search-results-detail/362780"/>
-    <id>urn:funding-finder:grants-gov:362780</id>
-    <updated>2026-06-12T00:00:00Z</updated>
-    <author><name>National Institute of Food and Agriculture</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Community development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>National Institute of Food and Agriculture — Closes 2026-08-14 — The TCEP-CA under assistance listing 10.517, supports informal, community-based extension projects that address agriculture, youths, economic development, healthy lifestyles, natural resources, or other topics important to Tribal communities. This NOFO will begin a new 4-year continuation funding cycle.</summary>
-  </entry>
-  <entry>
-    <title>HEAL Initiative: Optimization of Therapeutic Medical Devices through Team Science Mechanistic Research (RM1)</title>
-    <link href="https://www.grants.gov/search-results-detail/361520"/>
-    <id>urn:funding-finder:grants-gov:361520</id>
-    <updated>2026-06-11T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health — Closes 2026-10-30 — The National Institute of Neurological Disorders and Stroke (NINDS), with other NIH Institutes and Centers (ICs), intends to publish a Notice of Funding Opportunity (NOFO) to investigate the mechanisms of action of therapeutic medical devices with the overall goal of improving clinical outcomes with device-based approaches. Medical devices are essential in managing health conditions, complementing…</summary>
-  </entry>
-  <entry>
-    <title>Decentralized Artificial Intelligence through Controlled Emergence (DICE)</title>
-    <link href="https://www.grants.gov/search-results-detail/362743"/>
-    <id>urn:funding-finder:grants-gov:362743</id>
-    <updated>2026-06-10T00:00:00Z</updated>
-    <author><name>DARPA - Information Processing Technologies Office</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Environmental science"/>
-    <summary>DARPA - Information Processing Technologies Office — Closes 2026-08-25 — The DICE program seeks to develop the theory and algorithms for decentralized coordination and local inference control to enable a scalable, adaptive, and resilient collective of heterogeneous AI agents that can autonomously execute sustained long-time-horizon missions in contested environments while remaining under human control. In contrast to small-scale, rigid, and fragile centralized orchestr…</summary>
   </entry>
 </feed>

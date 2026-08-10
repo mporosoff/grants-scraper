@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Funding Finder — Fellowship</title>
+  <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/fellowship.xml" rel="self"/>
+  <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
+  <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/fellowship.xml</id>
+  <updated>2026-08-10T18:47:18Z</updated>
+  <generator>Funding Finder</generator>
+  <entry>
+    <title>"A" Award Grants</title>
+    <link href="https://www.alexslemonade.org/researchers-reviewers/applicants"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-4c778345cee773b9</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Alex’s Lemonade Stand Foundation</name></author>
+    <category term="Cancer"/>
+    <summary>Alex’s Lemonade Stand Foundation — Posted — The 'A' Award is designed for the early independent career scientist who wants to establish a career in pediatric oncology research. The ideal candidate has an original project, can demonstrate outstanding career development support from the institution, and has a strong future commitment to pediatric cancer investigation.</summary>
+  </entry>
+  <entry>
+    <title>*Limited Submission* Carolyn L. Kuckein Student Research Fellowship</title>
+    <link href="http://alphaomegaalpha.org/student_research.html"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-58d0d9bf243dc5fc</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Alpha Omega Alpha Honor Medical Society</name></author>
+    <category term="Education and workforce"/>
+    <summary>Alpha Omega Alpha Honor Medical Society — Posted</summary>
+  </entry>
+  <entry>
+    <title>*Limited Submission* Doctoral Scholarship</title>
+    <link href="https://www.trudeaufoundation.ca/scholarship"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-83572a93e3070fca</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Fondation for Pierre Elliott Trudeau Foundation</name></author>
+    <summary>Fondation for Pierre Elliott Trudeau Foundation — Posted — The renewed Scholarship program of the Pierre Elliott Trudeau Foundation is a gateway for courageous, bold, original thinkers who are hungry to play a leadership role in their communities. The Foundation’s three-year program aims to train Engaged Leaders, in order to build the capacity for academics to make their research accessible beyond academia, to partner and work with a diversity of actors a…</summary>
+  </entry>
+  <entry>
+    <title>*Limited Submission* Elizabeth Munsterberg Koppitz Child Psychology Graduate Student Fellowship</title>
+    <link href="http://bit.ly/APAKoppitzFellowship"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-1965ed7bf5cf2855</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Psychological Foundation (APF)</name></author>
+    <category term="Education and workforce"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>American Psychological Foundation (APF) — Posted</summary>
+  </entry>
+  <entry>
+    <title>*Limited Submission* Gilliam Fellowships for Advanced Study</title>
+    <link href="http://www.hhmi.org/developing-scientists/gilliam-fellowships-advanced-study"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-2f03380f4e557084</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Howard Hughes Medical Institute (HHMI)</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>Howard Hughes Medical Institute (HHMI) — Posted — The goals of the Gilliam program are to ensure that persons from populations historically excluded from and underrepresented in science are prepared to assume leadership roles in science, including as college and university faculty, and to foster the development of a healthy and inclusive academic scientific ecosystem. The program awards grants to pairs of dissertation advisers and their graduate …</summary>
+  </entry>
+  <entry>
+    <title>*Limited Submission* Graduate Student Award for the Lindau Meeting of Nobel Laureates and Students- Physiology and Medicine</title>
+    <link href="http://bit.ly/ORAUNobelLaureate2018"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-4cc5c2770f6626ac</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Oak Ridge Associated Universities (ORAU)</name></author>
+    <category term="Education and workforce"/>
+    <summary>Oak Ridge Associated Universities (ORAU) — Posted</summary>
+  </entry>
+  <entry>
+    <title>*Limited Submission* Informatics Fellowship</title>
+    <link href="http://www.phrmafoundation.org/2015-awards/pre-doctoral-fellowship-awards/informatics/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-877e4a795e54b062</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>PhRMA Foundation</name></author>
+    <category term="Data science"/>
+    <summary>PhRMA Foundation — Posted</summary>
+  </entry>
+  <entry>
+    <title>*Limited Submission* Luce Scholars</title>
+    <link href="http://www.hluce.org/lsprogram.aspx"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-f79b93578386d89e</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Henry Luce Foundation</name></author>
+    <summary>Henry Luce Foundation — Posted</summary>
+  </entry>
+  <entry>
+    <title>*Limited Submission* Pharmacology / Toxicology Fellowship</title>
+    <link href="http://www.phrmafoundation.org/2015-awards/pre-doctoral-fellowship-awards/pharmacology-toxicology/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-bd86c4f392e30a7b</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>PhRMA Foundation</name></author>
+    <summary>PhRMA Foundation — Posted</summary>
+  </entry>
+  <entry>
+    <title>*Limited Submission* Prof. Rahamioff Travel Grants Program for Young Scientists</title>
+    <link href="http://bit.ly/BSFRahamimoffTravelGrantFall2018"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-66dbdcfce0f70d75</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>U.S. - Israel Binational Science Foundation</name></author>
+    <summary>U.S. - Israel Binational Science Foundation — Posted</summary>
+  </entry>
+  <entry>
+    <title>*Limited Submission* Teacher-Scholar Awards Program</title>
+    <link href="https://bit.ly/DreyfusTeacherScholar2022"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-c2225c51234c218b</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Camille &amp; Henry Dreyfus Foundation</name></author>
+    <category term="Education and workforce"/>
+    <summary>Camille &amp; Henry Dreyfus Foundation — Posted — The Camille Dreyfus Teacher-Scholar Awards Program supports the research and teaching careers of talented young faculty in the chemical sciences. Based on institutional nomination, the program provides discretionary funding to faculty at an early stage in their careers.</summary>
+  </entry>
+  <entry>
+    <title>*Limited Submission* The 2019 International Future Energy Challenge (IFEC) Student Competition</title>
+    <link href="http://energychallenge.weebly.com/ifec-2019.html"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-7bc7f26131c32d1f</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>The Institute of Electrical and Electronics Engineers (IEEE)</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <summary>The Institute of Electrical and Electronics Engineers (IEEE) — Posted</summary>
+  </entry>
+  <entry>
+    <title>2016 LUNGevity Career Development Awards</title>
+    <link href="https://www.lungevity.org/research/translational-science-research-program/how-to-apply-for-grant"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-cc117a8c4807f72d</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>LUNGevity</name></author>
+    <category term="Cancer"/>
+    <summary>LUNGevity — Posted — LUNGevity’s Career Development Awards for Translational Research program was created to support future research leaders who will keep the field of lung cancer research vibrant with new ideas. The Career Development Awards are mentored awards; a mentoring plan is part of the required submission. Projects that will be funded in 2016 are expected to have a direct impact on the early detection of lung…</summary>
+  </entry>
+  <entry>
+    <title>2017 Fellowship</title>
+    <link href="http://www.nathancummings.org/what-we-fund/nathan-cummings-foundation-fellowship"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-b5aa7c2c6ede47c1</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>The Nathan Cummings Foundation</name></author>
+    <category term="Arts and culture"/>
+    <category term="Climate change"/>
+    <summary>The Nathan Cummings Foundation — Posted — The Foundation is interested in applications that demonstrate exceptional vision and a willingness to disrupt entrenched systems and take risks. All proposed projects must relate to at least one of the major challenges the Foundation is dedicated to addressing: Inequality and Climate Change. Fellowship applications should align with at least one of the Foundation’s four focus areas within these tw…</summary>
+  </entry>
+  <entry>
+    <title>2018 Award in Pain</title>
+    <link href="https://research.jhu.edu/rdt/funding-opportunities/early-career/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-1bd51ad29f0f2bb7</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>The Rita Allen Foundation and the American Pain Society</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <summary>The Rita Allen Foundation and the American Pain Society — Posted — Proposed research projects should be directed toward the molecular biology of pain and/or basic science topics related to the development of new analgesics for the management of pain due to terminal illness. Eligible candidates will have completed their training and be able to provide persuasive evidence of distinguished achievement or extraordinary promise in basic science research in pain. Candi…</summary>
+  </entry>
+  <entry>
+    <title>2022 SREI Research Grant</title>
+    <link href="https://www.asrmresearch.org/rfp/srei-grant?ssopc=1"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-40e572fb4a0b44af</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Society for Reproductive Medicine</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>American Society for Reproductive Medicine — Posted — The primary purpose of the SREI Research Grant Program is to provide funds for new investigators to establish independent research programs. New investigators are those who have completed their training within the past three years and have independent faculty appointments at the commencement of the research. Projects can involve physiological, psychological, biochemical, pharmacological, genetic, …</summary>
+  </entry>
+  <entry>
+    <title>2022-2023 Awards Supported by the San Antonio Nathan Shock Center</title>
+    <link href="https://nathanshock.barshop.uthscsa.edu/rfa-support-core-service/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-8f8c69f395c64710</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>San Antonio Nathan Shock Center</name></author>
+    <category term="Biology and biotechnology"/>
+    <summary>San Antonio Nathan Shock Center — Posted — The San Antonio Nathan Shock Center is soliciting applications to support the research of any investigator who is developing a new project in the basic biology of aging. The projects should utilize one or more Cores of the Center.</summary>
+  </entry>
+  <entry>
+    <title>2025 AACAP Marilyn B. Benoit, MD, Child Maltreatment Mentorship Award</title>
+    <link href="https://www.aacap.org/AACAP/Awards/Resident_and_ECP_Awards/AACAP_Marilyn_B_Benoit_MD_Child_Maltreatment_Mentorship_Award.aspx"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-495d3781abe59111</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Academy of Child and Adolescent Psychiatry AACAP</name></author>
+    <summary>American Academy of Child and Adolescent Psychiatry AACAP — Posted — The AACAP Marilyn B. Benoit, MD, Child Maltreatment Mentorship Award seeks to provide an experiential opportunity for up to two child and adolescent psychiatry residents, child and adolescent psychiatry (CAP) fellows, or early career psychiatrists (ECPs) within 7 years of graduating from a fellowship program and who show interest in the fields of child welfare, foster care, and/or child maltreatme…</summary>
+  </entry>
+  <entry>
+    <title>AAAS Mass Media Science &amp; Engineering Fellowship</title>
+    <link href="https://www.aaas.org/programs/mass-media-science-engineering-fellows/about"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-67055f7430d7fbc5</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Association for the Advancement of Science (AAAS)</name></author>
+    <category term="Education and workforce"/>
+    <summary>American Association for the Advancement of Science (AAAS) — Posted — This 10-week summer program places science, engineering, and mathematics students at media organizations nationwide. Fellows use their academic training as they research, write, and report today’s headlines, sharpening their abilities to communicate complex scientific issues to the public.</summary>
+  </entry>
+  <entry>
+    <title>AAAS Mass Media Science &amp; Engineering Fellowship</title>
+    <link href="https://www.aaas.org/programs/mass-media-science-engineering-fellows/about"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-67055f7430d7fbc5</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Association for the Advancement of Science (AAAS)</name></author>
+    <category term="Education and workforce"/>
+    <summary>American Association for the Advancement of Science (AAAS) — Posted — This highly competitive program strengthens the connections between scientists and journalists by placing advanced undergraduate, graduate, and post-graduate level scientists, engineers, and mathematicians at media organizations nationwide. Fellows work as journalists at media organizations such as National Public Radio, Los Angeles Times, WIRED, Milwaukee Journal Sentinel, and NOVA. The Mass Medi…</summary>
+  </entry>
+  <entry>
+    <title>AAAS-Lemelson Invention Ambassadors Program</title>
+    <link href="http://www.aaas.org/page/about-aaas-lemelson-invention-ambassadors-program"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-ce24fcc4981cc86e</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Association for the Advancement of Science (AAAS) and The Lemelson Foundation</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Technology development"/>
+    <summary>American Association for the Advancement of Science (AAAS) and The Lemelson Foundation — Posted — Through our partnership, we strive to help cultivate a new and diverse generation of inventors and increase global understanding of the role of invention in creating new products and building new businesses, and the importance of inventors and invention education in building economies and fostering innovation. Goals: Celebrate and highlight the importance of invention and inventors. Increase socie…</summary>
+  </entry>
+  <entry>
+    <title>AACAP Pilot Research Award for Attention Disorders, supported by AACAP's Elaine Schlosser Lewis Fund</title>
+    <link href="http://www.aacap.org/AACAP/Awards/Resident_and_ECP_Awards/AACAP_Pilot_Research_Award_for_Attention_Disorders.aspx"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-68b35a2356866071</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Academy of Child and Adolescent Psychiatry AACAP</name></author>
+    <summary>American Academy of Child and Adolescent Psychiatry AACAP — Posted — The AACAP Pilot Research Award for Attention Disorders, supported by the Elaine Schlosser Lewis Fund, offers $15,000 to general psychiatry residents, child and adolescent psychiatry fellows, and early career faculty who have an interest in beginning a career in child and adolescent psychiatry research. By providing up to two awards to a child and adolescent psychiatry early career faculty member, …</summary>
+  </entry>
+  <entry>
+    <title>AACAP Pilot Research Award for Attention Disorders, supported by AACAP’s Elaine Schlosser Lewis Fund</title>
+    <link href="https://www.aacap.org/AACAP/Awards/Resident_and_ECP_Awards/AACAP_Pilot_Research_Award_for_Attention_Disorders.aspx"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-2e65e7fc3d97322a</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Academy of Child and Adolescent Psychiatry AACAP</name></author>
+    <summary>American Academy of Child and Adolescent Psychiatry AACAP — Posted — The AACAP Pilot Research Award for Attention Disorders, supported by the Elaine Schlosser Lewis Fund, offers $15,000 to general psychiatry residents, child and adolescent psychiatry fellows, and early career faculty who have an interest in beginning a career in child and adolescent psychiatry research. By providing up to two awards to a child and adolescent psychiatry early career faculty member, …</summary>
+  </entry>
+  <entry>
+    <title>AACAP Pilot Research Award for General Psychiatry Residents, supported by Industry Supporters</title>
+    <link href="http://www.aacap.org/AACAP/Awards/Resident_and_ECP_Awards/AACAP_Pilot_Research_Award.aspx"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-fb4159f2662c9ca5</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Academy of Child and Adolescent Psychiatry AACAP</name></author>
+    <summary>American Academy of Child and Adolescent Psychiatry AACAP — Posted — The AACAP Pilot Research Award, supported by Industry Supporters, offers $15,000 for general psychiatry residents who have an interest in beginning a career in child and adolescent psychiatry research. By providing up to two awards to general psychiatry residents for pilot research programs, we support these young investigators at a critical stage, encouraging future careers in child and adolescen…</summary>
+  </entry>
+  <entry>
+    <title>AACAP Pilot Research Award for Junior Faculty and Child and Adolescent Psychiatry Fellows, supported by AACAP</title>
+    <link href="https://www.aacap.org/AACAP/Awards/Resident_and_ECP_Awards/Pilot_Research_Award_Early_Career_Faculty_and_Child_and_Adolescent_Psychiatry_Fellows.aspx"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-d4f6e10787c0c580</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Academy of Child and Adolescent Psychiatry AACAP</name></author>
+    <summary>American Academy of Child and Adolescent Psychiatry AACAP — Posted — The AACAP Pilot Research Award for Early Career Faculty and Child and Adolescent Psychiatry Fellows offers $15,000 for child and adolescent psychiatry fellows and early career faculty who have an interest in beginning a career in child and adolescent psychiatry research. Recipients have the opportunity to submit a poster presentation on their research for AACAP’s 2027 Annual Meeting in New York, N…</summary>
+  </entry>
+  <entry>
+    <title>AACAP Pilot Research Award for Learning Disabilities, supported by AACAP's Elaine Schlosser Lewis Fund</title>
+    <link href="https://www.aacap.org/AACAP/Awards/Resident_and_ECP_Awards/AACAP_Pilot_Research_Award_for_Learning_Disabilities.aspx"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-3931d0771f1c7a96</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Academy of Child and Adolescent Psychiatry AACAP</name></author>
+    <category term="Neuroscience"/>
+    <summary>American Academy of Child and Adolescent Psychiatry AACAP — Posted — The AACAP Pilot Research Award for Learning Deficits in Psychiatric Disorders, supported by AACAP’s Elaine Schlosser Lewis Fund, offers $15,000 to general psychiatry residents, child and adolescent psychiatry fellows, and early career faculty who have an interest in beginning a career in child and adolescent psychiatry research. By providing up to two awards to a child and adolescent psychiatry ea…</summary>
+  </entry>
+  <entry>
+    <title>AACR Bayer Stimulating Therapeutic Advancements through Research Training (START) Grants</title>
+    <link href="https://www.aacr.org/Funding/Pages/Funding-Detail.aspx?ItemID=77"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-0cd194efbb278671</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Association for Cancer Research</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <summary>American Association for Cancer Research — Posted — The AACR-Bayer Stimulating Therapeutic Advancements through Research Training (START) Grants represent an exciting new initiative to encourage and support academia and industry collaborations to effectively harness the wealth of information and to advance the discovery and development of new therapies for cancer patients. This novel model, which will provide support to postdoctoral or clinical res…</summary>
+  </entry>
+  <entry>
+    <title>AACR Career Development Awards for Translational Breast Cancer Research</title>
+    <link href="http://www.aacr.org/Funding/Pages/Funding-Detail.aspx?ItemID=60"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-837313a1899c448d</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Association for Cancer Research</name></author>
+    <category term="Cancer"/>
+    <summary>American Association for Cancer Research — Posted — The Breast Cancer Research Foundation-AACR Career Development Awards for Translational Breast Cancer Research represent a joint effort to promote and support innovative research designed to accelerate the discovery, development, and application of new agents to treat breast cancer and/or for pre-clinical research with direct therapeutic intent. Eligibility is limited to junior faculty who, at the …</summary>
+  </entry>
+  <entry>
+    <title>AACR Funding Opportunities</title>
+    <link href="http://www.aacr.org/FUNDING/PAGES/DEFAULT.ASPX"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-8cf15d12463858de</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Association for Cancer Research</name></author>
+    <category term="Cancer"/>
+    <summary>American Association for Cancer Research — Posted — AACR offers an array of support mechanisms for cancer researchers at various stages in their careers, from fellowships to career development awards to grants for independent investigators. Multiple grant programs are offered.</summary>
+  </entry>
+  <entry>
+    <title>AACR Gertrude B. Elion Cancer Research Award</title>
+    <link href="https://www.aacr.org/grants/aacr-gertrude-b-elion-cancer-research-award-2/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-97996b4b45a994ad</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Association for Cancer Research (AACR)</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <summary>American Association for Cancer Research (AACR) — Posted — With generous support from GlaxoSmithKline, the AACR Gertrude B. Elion Cancer Research Award represents a joint effort to encourage and support tenure-eligible junior faculty. The research proposed for funding must focus on cancer etiology, diagnosis, treatment, or prevention and may be basic, translational, or clinical in nature.
+The award provides a one-year grant of $75,000 for expenses related…</summary>
+  </entry>
+  <entry>
+    <title>AACR Immuno-Oncoloy Research Fellowships</title>
+    <link href="https://www.aacr.org/grants/aacr-immuno-oncology-research-fellowships/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-42688d7330cf2948</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Association for Cancer Research (AACR)</name></author>
+    <category term="Cancer"/>
+    <category term="Public health"/>
+    <summary>American Association for Cancer Research (AACR) — Posted — The AACR Immuno-oncology Research Fellowships represent a joint effort to encourage and support postdoctoral or clinical research fellows to conduct immuno-oncology research and to establish a successful career path in this field. The research proposed for funding may be basic, translational, clinical, or epidemiological in nature and must have direct applicability and relevance to immuno-oncology…</summary>
+  </entry>
+  <entry>
+    <title>AACR-Aflac, Inc. Career Development Award for Pediatric Cancer Research</title>
+    <link href="https://www.idsafoundation.org/our-initiatives/research/changing-the-course-of-humanity/our-awards/?_ga=2.50760489.1282326165.1565988287-1714970133.1565988287"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-a2f9d41a035e43b3</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Association for Cancer Research</name></author>
+    <category term="Cancer"/>
+    <category term="Public health"/>
+    <summary>American Association for Cancer Research — Posted — ​The AACR-Aflac, Inc. Career Development Award for Pediatric Cancer Research represents a joint effort to encourage and support junior faculty who have completed their most recent doctoral degree or medical residency within the past 11 years at the start of the grant term to conduct pediatric cancer research and establish successful career paths in this field. ​Research projects may be in any disc…</summary>
+  </entry>
+  <entry>
+    <title>AACR-AstraZeneca Clinical Oncology Research (CORE) Training Fellowships</title>
+    <link href="https://www.aacr.org/grants/aacr-clinical-oncology-research-core-training-fellowships/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-8b97eb7e7bee42d5</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Association for Cancer Research</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <summary>American Association for Cancer Research — Posted — The AACR Clinical Oncology Research (CORE) Training Fellowships Program is designed to provide an industry-academic clinical practicum with a unique opportunity for academic clinicians to train in drug development. Each fellowship provides $100,000 over one year for the fellow to work on site at the facility of one of the AACR’s pharmaceutical industry partners.
+This fellowship is designed for ear…</summary>
+  </entry>
+  <entry>
+    <title>AACR-Conquer Cancer Foundation of ASCO Young Investigator Award for Translational Cancer Research</title>
+    <link href="https://www.aacr.org/grants/aacr-conquer-cancer-the-asco-foundation-young-investigator-award-for-translational-cancer-research/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-c0dbb5498f35b81f</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Association for Cancer Research (AACR)</name></author>
+    <category term="Cancer"/>
+    <category term="Transportation"/>
+    <summary>American Association for Cancer Research (AACR) — Posted — The AACR-Conquer Cancer Foundation of ASCO Young Investigator Award for Translational Cancer Research provides funding to promising investigators to encourage and promote quality research in clinical oncology. The purpose of this jointly-supported award is to fund a physician-scientist during the transition from a fellowship program to a faculty appointment. Research projects are restricted to tra…</summary>
+  </entry>
+  <entry>
+    <title>AACR-Sontag Foundation Brain Cancer Research Fellowship</title>
+    <link href="https://www.aacr.org/grants/aacr-sontag-foundation-brain-cancer-research-fellowship/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-6184bb1a00717f0b</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Association for Cancer Research (AACR)</name></author>
+    <category term="Cancer"/>
+    <category term="Neuroscience"/>
+    <category term="Public health"/>
+    <summary>American Association for Cancer Research (AACR) — Posted — The AACR-Sontag Foundation Brain Cancer Research Fellowship represents a joint effort to encourage and support a postdoctoral or clinical research fellow to conduct brain cancer research and to establish a successful career path in this field. The proposed project may be basic, clinical, translational, or epidemiological in nature and must have direct applicability and relevance to brain cancer. A…</summary>
+  </entry>
+  <entry>
+    <title>AAN Research Program - Training Scholarships</title>
+    <link href="https://www.aan.com/research/aan-research-program"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-651aa749de6683eb</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Academy of Neurology (AAN)</name></author>
+    <category term="Education and workforce"/>
+    <category term="Neuroscience"/>
+    <summary>American Academy of Neurology (AAN) — Posted — The American Academy of Neurology is committed to making a difference in the lives of researchers who are committed to making a difference in the lives of patients with brain disease. Apply today for one of the many available opportunities for all types of research across all career levels and discovery stages.</summary>
+  </entry>
+  <entry>
+    <title>AATS Research Scholarship</title>
+    <link href="https://www.aats.org/aatsimis/AATSWeb/Foundation/Programs/Programs/Research_Scholarship/AATS_Research_Scholarship.aspx"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-69df67005b962cf2</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Association for Thoracic Surgery</name></author>
+    <category term="Education and workforce"/>
+    <summary>American Association for Thoracic Surgery — Posted — The American Association for Thoracic Surgery announces the Second Michael DeBakey Research Scholarship to provide an opportunity for research, training and experience to North American surgeons committed to pursuing an academic career in cardiothoracic surgery. The Scholarship will begin July 1, 2021 and concludes on July 1, 2023. The scholar shall submit an interim and a final written report of …</summary>
+  </entry>
+  <entry>
+    <title>ACC Fellowship Grant</title>
+    <link href="https://www.asianculturalcouncil.org/our-programs/grant-categories/subpages/individual-fellowship"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-bfe388c20985fac9</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Asian Cultural Council</name></author>
+    <summary>Asian Cultural Council — Posted</summary>
+  </entry>
+  <entry>
+    <title>ACLS Fellowships</title>
+    <link href="https://www.acls.org/programs/acls-fellowship-program/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-5bb28177ad94d04c</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Council of Learned Societies</name></author>
+    <category term="Arts and culture"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>American Council of Learned Societies — Posted — The longest running program in ACLS’s portfolio, the ACLS Fellowship program supports outstanding scholarship in the humanities and interpretive social sciences. The ultimate goal of the project should be a major piece of scholarly work by the applicant, which can take the form of a monograph, articles, publicly-engaged humanities project, digital research project, critical edition, or other schol…</summary>
+  </entry>
+  <entry>
+    <title>ACS Bridge Project Travel &amp; Professional Development Award</title>
+    <link href="https://www.acs.org/content/acs/en/funding/awards/acs-bridge-travel-professional-development-award.html"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-ed4254f584ea5887</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Chemical Society (ACS)</name></author>
+    <category term="Education and workforce"/>
+    <summary>American Chemical Society (ACS) — Posted — This award will cover up to $1,000 in expenses for selected applicants who wish to attend the upcoming ACS Fall Meeting. This opportunity is open to all undergraduate students, regardless of presentation status, abstract submission, or ACS membership.</summary>
+  </entry>
+  <entry>
+    <title>ACS-Hach Post-Baccalaureate Teacher Scholarship</title>
+    <link href="https://www.acs.org/funding/scholarships-fellowships/acs-hach-post-baccalaureate-teacher-scholarship.html"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-ece48f93485d5c4d</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Chemical Society (ACS)</name></author>
+    <category term="Education and workforce"/>
+    <summary>American Chemical Society (ACS) — Posted — To support recent graduates and graduate students with limited work experience and an interest in becoming secondary chemistry teachers.
+The ACS-Hach Post-Baccalaureate Teacher Scholarship is awarded to recent graduates and graduate students with limited work experience and an interest in becoming secondary chemistry teachers. Recipients must be pursuing a Masters degree in education or becoming c…</summary>
+  </entry>
+  <entry>
+    <title>ACS-Moore Postdoctoral Bridge Award in Quantum Materials</title>
+    <link href="https://www.acs.org/funding/scholarships-fellowships/acs-moore-postdoctoral-bridge-award-in-quantum-materials.html"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-f9dc383c3b708e1d</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Chemical Society</name></author>
+    <category term="Quantum science"/>
+    <category term="Transportation"/>
+    <summary>American Chemical Society — Posted — The ACS-Moore Postdoctoral Bridge Award in Quantum Materials is a partnership between the American Chemical Society (ACS) and the Gordon and Betty Moore Foundation (Moore Foundation). The Moore Foundation is funding the program through its Emergent Phenomena in Quantum Systems (EPiQS) Initiative.  The Emergent Phenomena in Quantum Systems Initiative has supported the quantum materials research com…</summary>
+  </entry>
+  <entry>
+    <title>Additional Ventures Catalyst to Independence Award (AVCIA)</title>
+    <link href="https://www.additionalventures.org/initiatives/biomedical-research/funding/catalyst-to-independence-award/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-1a447aee58c6fccc</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Additional Ventures</name></author>
+    <category term="Transportation"/>
+    <summary>Additional Ventures — Posted — The Additional Ventures Catalyst to Independence Award (AVCIA) is a 6 year transition award that offers up to 3 years of support for those in a mentored, postdoctoral role and up to 3 years of support once they have transitioned to a tenure track position. Fellows will be supported by up to $1.2M over the 6 year period, and are also provided with professional development opportunities, including o…</summary>
+  </entry>
+  <entry>
+    <title>Advanced Valve Disease Educational Fellowship</title>
+    <link href="https://www.aats.org/aatsimis/AATSWeb/Foundation/Programs/Programs/Advanced_Valve_Disease/Advanced_Valve_Disease_Educational_Fellowship.aspx"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-322bda40ad0d3e92</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Association for Thoracic Surgery</name></author>
+    <category term="Education and workforce"/>
+    <summary>American Association for Thoracic Surgery — Posted — This program provides fellows with an interactive educational opportunity to observe and have discussions with specialists in the treatment of heart valve disease at suggested institutions, while concurrently obtaining technical skills in perioperative patient management. The AATS Foundation Advanced Valve Disease Education Fellowship provides a live, interactional, and observational educational e…</summary>
+  </entry>
+  <entry>
+    <title>AGA- Allergan Foundation Pilot Research Award in Gastroparesis</title>
+    <link href="http://www.gastro.org/grants/aga-allergan-foundation-pilot-research-award-in-gastroparesis"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-9091d5218efe152e</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Gastroenterological Association (AGA)</name></author>
+    <summary>American Gastroenterological Association (AGA) — Posted — The objective of this pilot research award is to provide funds for early career investigators to help establish their research careers or to support projects that represent new research directions for established investigators. Projects must focus on the pathophysiology and/or treatment of gastroparesis and clearly state how the research will impact the care of patients with gastroparesis.</summary>
+  </entry>
+  <entry>
+    <title>AGA- Caroline Craig Augustyn &amp; Damian Augustyn Award in Digestive Cancer</title>
+    <link href="https://gastro.org/research-and-awards/apply-for-awards/award/aga-caroline-craig-augustyn-damian-augustyn-award-in-digestive-cancer/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-bdff5647f0e6d4d7</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Gastroenterological Association (AGA)</name></author>
+    <category term="Cancer"/>
+    <category term="Infectious disease"/>
+    <summary>American Gastroenterological Association (AGA) — Posted — The objective of this AGA Research Foundation award is to provide supplemental funding to early career investigators who have existing career development awards and are conducting research relevant to the pathogenesis, prevention, diagnosis or treatment of digestive cancer.</summary>
+  </entry>
+  <entry>
+    <title>AGA-Bern Schwartz Family Fund Research Scholar Award in Pancreatic Cancer</title>
+    <link href="https://gastro.org/research-and-awards/apply-for-awards/award/aga-bern-schwartz-family-fund-rsa-in-pancreatic-cancer/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-04a1de42ae36e682</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Gastroenterological Association (AGA)</name></author>
+    <category term="Cancer"/>
+    <summary>American Gastroenterological Association (AGA) — Posted — The objective of this AGA Research Foundation Research Scholar Award (RSA) is to support early-career investigators working toward independent and productive careers in pancreatic cancer research by ensuring that a major proportion of their time is protected for research (i.e., a minimum of 75 percent effort dedicated to the proposed project). The award will support junior faculty (not fellows) wh…</summary>
+  </entry>
+  <entry>
+    <title>AGA-Gastric Cancer Foundation Ben Feinstein Memorial Research Scholar Award in Gastric Cancer</title>
+    <link href="https://gastro.org/research-and-awards/apply-for-awards/award/aga-gastric-cancer-foundation-ben-feinstein-memorial-research-scholar-award-in-gastric-cancer/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-91e3398dcd2eb755</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Gastroenterological Association (AGA)</name></author>
+    <category term="Cancer"/>
+    <summary>American Gastroenterological Association (AGA) — Posted — The AGA–Gastric Cancer Foundation Ben Feinstein Memorial Research Scholar Award in Gastric Cancer provides outstanding young researchers three-year grants of $100,000 per year to conduct innovative gastric cancer studies. These awards enable scholars to build portfolios of work that prepare them to be competitive in seeking continued funding through larger grants.
+The scarcity of funding for gastr…</summary>
+  </entry>
+  <entry>
+    <title>AGA-Takeda Pharmaceuticals Research Scholar Award in Celiac Disease</title>
+    <link href="https://gastro.org/research-and-awards/apply-for-awards/award/aga-takeda-pharmaceuticals-research-scholar-award-in-celiac-disease/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-e61894d8065d11ea</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Gastroenterological Association (AGA)</name></author>
+    <category term="Public health"/>
+    <summary>American Gastroenterological Association (AGA) — Posted — The objective of the AGA Research Foundation Research Scholar Award (RSA) is to support early-career investigators working toward independent and productive research careers in digestive diseases by ensuring that a major proportion of their time is protected for research (i.e., a minimum of 75 percent effort dedicated to the proposed project). This award will support junior faculty (not fellows) w…</summary>
+  </entry>
+  <entry>
+    <title>AHA Postdoctoral Fellowship</title>
+    <link href="https://professional.heart.org/en/research-programs/application-information/postdoctoral-fellowship"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-a745265fa371d454</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Heart Association (AHA)</name></author>
+    <category term="Education and workforce"/>
+    <summary>American Heart Association (AHA) — Posted — Recognizing the unique challenges that clinicians, in particular, experience in balancing research and clinical activity, this award mechanism aims to be as flexible as possible to enable applicants to develop academic careers in research alongside fulfilling clinical service commitments. To enhance the integrated research and clinical training of postdoctoral applicants who are not yet independen…</summary>
+  </entry>
+  <entry>
+    <title>AHNS Pilot Grant</title>
+    <link href="https://www.ahns.info/research/grants/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-ac66fe06c108da3b</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Head &amp; Neck Society (AHNS)</name></author>
+    <category term="Cancer"/>
+    <summary>American Head &amp; Neck Society (AHNS) — Posted — The purpose of this award is to support basic, translational, or clinical research projects in head and neck oncology. Clinical or translational research studies are strongly encouraged and should be specifically related to the prevention, diagnosis, treatment, outcomes, or pathophysiology of head and neck neoplastic disease.</summary>
+  </entry>
+  <entry>
+    <title>AHRQ Grants for Health Services Research Dissertation Program (R36)</title>
+    <link href="https://grants.nih.gov/grants/guide/pa-files/PA-23-196.html"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-436fbde5b62d4c5c</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>National Institute for Health (NIH)</name></author>
+    <category term="Public health"/>
+    <summary>National Institute for Health (NIH) — Posted — This announcement represents the continuation of an AHRQ program that provides support to individuals who are conducting research undertaken as part of an accredited academic program to qualify for a research doctorate degree.
+Applications for dissertation research grants must be responsive to AHRQ’s mission, which is to produce evidence to make health care safer, higher quality, more accessible, …</summary>
+  </entry>
+  <entry>
+    <title>AIMBE Scholars Program</title>
+    <link href="http://aimbe.org/scholars-program/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-19d10eb0938c058d</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Institute for Medical and Biological Engineering (AIMBE)</name></author>
+    <category term="Agriculture and food"/>
+    <summary>American Institute for Medical and Biological Engineering (AIMBE) — Posted — The AIMBE Scholars Program is a highly competitive program, consisting of one-year immersion experiences from October 1 to September 30 in the Center for Devices and Radiological Health (CDRH) within the U.S. Food and Drug Administration (FDA) on the White Oak Campus in Silver Spring, MD. AIMBE facilitates the Scholars experience throughout the program year. The program includes an orientation to …</summary>
+  </entry>
+  <entry>
+    <title>AIMINGS Pilot Project Program</title>
+    <link href="https://www.phicor.org/rfa"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-58e213e002023f30</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>PHICOR</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <summary>PHICOR — Posted — AIMINGS, the artificial intelligence (AI) Center for the Nutrition for Precision Health’s (NPH) Consortium, released a call for proposals for its pilot project program. The RFA seeks research projects that develop and utilize AI and other computer-aided approaches to facilitate precision nutrition.</summary>
+  </entry>
+  <entry>
+    <title>AIMINGS Pilot Project Program</title>
+    <link href="https://www.phicor.org/rfa"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-58e213e002023f30</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>PHICOR</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <summary>PHICOR — Posted — AIMINGS, the artificial intelligence (AI) Center for the Nutrition for Precision Health’s (NPH) Consortium, released a call for proposals for its pilot project program. The RFA seeks research projects that develop and utilize AI and other computer-aided approaches to facilitate precision nutrition.</summary>
+  </entry>
+  <entry>
+    <title>AJS Dissertation Completion Fellowship</title>
+    <link href="https://www.associationforjewishstudies.org/professional-development/fellowships-and-awards/ajs-dissertation-fellowships"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-ecf35ae91dfef812</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Association for Jewish Studies</name></author>
+    <category term="Education and workforce"/>
+    <summary>Association for Jewish Studies — Posted — The AJS Dissertation Completion Fellowship encourages the timely completion of doctorates by the most promising graduate students in the field of Jewish Studies. Only students who are in the final stages of writing their dissertations and who display clear evidence of their ability to defend their dissertations by the end of June of the fellowship year are eligible to apply for this program.</summary>
+  </entry>
+  <entry>
+    <title>Allergic Respiratory Diseases Research Award</title>
+    <link href="https://www.lung.org/research/awards-and-grants-opportunities"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-974204ad7ab04bb4</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Lung Association</name></author>
+    <summary>American Lung Association — Posted — A long-standing joint effort between the American Lung Association and the American Academy of Allergy, Asthma &amp; Immunology to encourage and support early-stage investigators with a primary faculty appointment in an allergy/immunology division or section, to conduct research into advancing the understanding of allergic respiratory disease.</summary>
+  </entry>
+  <entry>
+    <title>Alzheimer's Association Clinician Scientist Fellowship (AACSF) Program</title>
+    <link href="https://www.alz.org/research/for_researchers/grants/types-of-grants/aacf"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-de295526fa5438a4</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Alzheimer’s Association</name></author>
+    <category term="Education and workforce"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Alzheimer’s Association — Posted — The Alzheimer's Association recognizes the need to support the training of clinician scientists in Alzheimer's and all other dementias. For the purpose of this program, a clinician scientist is defined as an individual already trained, licensed and practicing in a clinical field that includes patient contact (e.g., neurology, psychiatry, geriatrics, psychology) or patient-related diagnostic studie…</summary>
+  </entry>
+  <entry>
+    <title>Alzheimer's Association Research Fellowship (AARF)</title>
+    <link href="https://www.alz.org/research/for_researchers/grants/types-of-grants/alzheimer_s_association_research_fellowship_(aarf)"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-7173963aa6416779</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Alzheimer’s Association</name></author>
+    <category term="Social and behavioral sciences"/>
+    <summary>Alzheimer’s Association — Posted — The AARF grant program is intended to support exceptional researchers who are engaged in their post-graduate work (i.e. postdoctoral fellows) and before they have their first independent faculty positions (i.e. Assistant Professor) and working in diverse areas of research, including basic, translational, clinical, functional and social-behavioral research. Investigators doing clinically-focused re…</summary>
+  </entry>
+  <entry>
+    <title>Alzheimer's Association Research Fellowship to Promote Diversity (AARF-D)</title>
+    <link href="https://www.alz.org/research/for_researchers/grants/types-of-grants/alzheimers_association_research_fellowship_to_pro"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-5be1077e7aae759b</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Alzheimer’s Association</name></author>
+    <category term="Social and behavioral sciences"/>
+    <summary>Alzheimer’s Association — Posted — The Alzheimer's Association Research Fellowship to Promote Diversity (AARF-D) award is intended to support exceptional scientists from underrepresented groups who are working in Alzheimer's or all other dementias research and who are engaged in their post-graduate work (i.e., postdoctoral fellows) and before their first independent faculty positions (i.e., Assistant Professor) and working in diver…</summary>
+  </entry>
+</feed>

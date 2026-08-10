@@ -187,8 +187,13 @@ class SourceHealthExitTests(unittest.TestCase):
             "validation": {"ok": True},
             "sources": [{"status": "unhealthy_kept_last_good"}],
         }
+        recent_snapshot = {
+            "validation": {"ok": True},
+            "sources": [{"status": "recent_snapshot"}],
+        }
         invalid = {"validation": {"ok": False}, "sources": []}
         self.assertFalse(summary_is_degraded(healthy))
+        self.assertFalse(summary_is_degraded(recent_snapshot))
         self.assertTrue(summary_is_degraded(failed))
         self.assertTrue(summary_is_degraded(unhealthy))
         self.assertTrue(summary_is_degraded(invalid))
@@ -364,6 +369,32 @@ class LifecycleTests(unittest.TestCase):
         live, _, summaries = resolve_live_records([failed], cache, self.AS_OF)
         self.assertEqual(len(live), 1)
         self.assertEqual(summaries[0]["status"], "failed_kept_last_good")
+
+    def test_recent_complete_snapshot_covers_an_expected_cloud_runner_block(self):
+        cache = self._cache_with("jhu", "RECENT")
+        cache["sources"]["jhu"]["fetched_at"] = "2026-07-20T12:00:00Z"
+        failed = AdapterResult(
+            slug="jhu", display_name="JHU", source_type="Fellowship", ok=False,
+            error="HTTP 403", min_records=1, max_records=2000,
+            fallback_grace_days=45,
+        )
+        live, _, summaries = resolve_live_records([failed], cache, self.AS_OF)
+        self.assertEqual(len(live), 1)
+        self.assertEqual(summaries[0]["status"], "recent_snapshot")
+        self.assertTrue(summaries[0]["healthy"])
+        self.assertEqual(summaries[0]["snapshot_age_days"], 5)
+
+    def test_stale_snapshot_still_degrades_after_its_grace_period(self):
+        cache = self._cache_with("jhu", "STALE")
+        cache["sources"]["jhu"]["fetched_at"] = "2026-05-01T12:00:00Z"
+        failed = AdapterResult(
+            slug="jhu", display_name="JHU", source_type="Fellowship", ok=False,
+            error="HTTP 403", min_records=1, max_records=2000,
+            fallback_grace_days=45,
+        )
+        _, _, summaries = resolve_live_records([failed], cache, self.AS_OF)
+        self.assertEqual(summaries[0]["status"], "failed_kept_last_good")
+        self.assertFalse(summaries[0]["healthy"])
 
     def test_successful_refresh_replaces_records_and_cache(self):
         cache = self._cache_with("nih", "OLD")

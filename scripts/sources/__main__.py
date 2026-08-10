@@ -34,7 +34,7 @@ def summary_is_degraded(summary: dict, *, write_requested: bool = False) -> bool
     if write_requested and summary.get("written") is False:
         return True
     return any(
-        source.get("status") != "refreshed"
+        source.get("status") not in {"refreshed", "recent_snapshot"}
         for source in summary.get("sources") or []
     )
 

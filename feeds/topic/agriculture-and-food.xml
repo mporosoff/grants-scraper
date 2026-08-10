@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-08-10T18:41:26Z</updated>
+  <updated>2026-08-10T18:47:18Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -91,6 +91,82 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Agriculture and food"/>
     <summary>Health Resources and Services Administration — Closes 2026-10-20 — Fiscal Year (FY) 2027 Regional Nutrition Hubs (RNH) will support region-specific technical assistance (TA) on expanding high-quality nutrition services to the Health Resources and Services Administration's (HRSA) Health Center Program (H80) award recipients and look-alikes (health centers). Nutrition services prevent, manage, and treat diseases and conditions through nutritional and food-based int…</summary>
+  </entry>
+  <entry>
+    <title>AIMBE Scholars Program</title>
+    <link href="http://aimbe.org/scholars-program/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-19d10eb0938c058d</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Institute for Medical and Biological Engineering (AIMBE)</name></author>
+    <category term="Agriculture and food"/>
+    <summary>American Institute for Medical and Biological Engineering (AIMBE) — Posted — The AIMBE Scholars Program is a highly competitive program, consisting of one-year immersion experiences from October 1 to September 30 in the Center for Devices and Radiological Health (CDRH) within the U.S. Food and Drug Administration (FDA) on the White Oak Campus in Silver Spring, MD. AIMBE facilitates the Scholars experience throughout the program year. The program includes an orientation to …</summary>
+  </entry>
+  <entry>
+    <title>AMIBE Scholars Program</title>
+    <link href="http://aimbe.org/scholars-program/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-a1eeaec0fee1b489</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>American Institute for Medical and Biological Engineering (AIMBE)</name></author>
+    <category term="Agriculture and food"/>
+    <summary>American Institute for Medical and Biological Engineering (AIMBE) — Posted — The AIMBE Scholars Program is a highly competitive program, consisting of one-year immersion experiences from October 1 to September 30 in the Center for Devices and Radiological Health (CDRH) within the U.S. Food and Drug Administration (FDA) on the White Oak Campus in Silver Spring, MD. AIMBE facilitates the Scholars experience throughout the program year. The program includes an orientation to …</summary>
+  </entry>
+  <entry>
+    <title>Artist Fellowships</title>
+    <link href="https://lighthouseworks.us/fellowship"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-7ec2f6f5f73e4c86</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Lighthouse Works</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <summary>Lighthouse Works — Posted — Our Fellowship Program supports a diverse range of cultural producers working in the vanguard of their creative fields. Fellowships are six weeks in length, occur year-round and provide fellows with housing, food, studio space, and $1,750 in financial support. While in residence, our fellows’ primary obligation is to pursue their work. Still, we ask every fellow to participate in two events—an Art…</summary>
+  </entry>
+  <entry>
+    <title>Graduate Dietetic Scholarships</title>
+    <link href="https://eatrightfoundation.org/why-it-matters/scholarships/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-3644df9721eacda3</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Academy of Nutrition and Dietetics Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <summary>Academy of Nutrition and Dietetics Foundation — Posted — Food, Nutrition</summary>
+  </entry>
+  <entry>
+    <title>Innovative Regulatory Science Awards (IRSA)</title>
+    <link href="http://www.bwfund.org/grant-programs/regulatory-science/innovation-regulatory-science"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-32fc6adeec175f2b</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Burroughs Wellcome Fund</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Technology development"/>
+    <summary>Burroughs Wellcome Fund — Posted — BWF’s Innovation in Regulatory Science Awards provides up to $500,000 over five years to academic investigators developing new methodologies or innovative approaches in regulatory science that will ultimately inform the regulatory decisions the Food and Drug Administration (FDA) and others make. We especially encourage applications from those seeking to advance regulatory science approaches that w…</summary>
+  </entry>
+  <entry>
+    <title>Placemaking Projects</title>
+    <link href="http://www.artplaceamerica.org/our-work/national-creative-placemaking-fund/introduction"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-32687b668905c3e2</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Artplace America</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Transportation"/>
+    <summary>Artplace America — Posted — Artplace America has announced that it is accepting applications for its National Creative Placemaking Fund. Grants of up to $500,000 will be awarded for projects that work with artists and arts organizations to help build stronger, healthier communities anywhere in the United States. Eligible projects must focus on a neighborhood (or other geographic community) challenge related to that community…</summary>
+  </entry>
+  <entry>
+    <title>Simons Early Career Investigator in Aquatic Microbial Ecology and Evolution Awards</title>
+    <link href="https://www.simonsfoundation.org/grant/simons-early-career-investigator-in-marine-microbial-ecology-and-evolution-awards/"/>
+    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-7070ac3e7c9179b5</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>The Simons Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Climate change"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <summary>The Simons Foundation — Posted — Microbes inhabit and sustain all habitats on Earth. In both marine and freshwater systems, microbes capture solar energy, catalyze biogeochemical transformations of important elements, produce and consume greenhouse gases, and provide the base of the food web.
+The purpose of these awards is to help launch the careers of outstanding investigators in the fields of microbial ecology, microbial biogeo…</summary>
   </entry>
   <entry>
     <title>Higher Education Challenge Grants Program</title>
@@ -593,76 +669,5 @@
     <author><name>Foreign Agricultural Service</name></author>
     <category term="Agriculture and food"/>
     <summary>Foreign Agricultural Service — Closes 2026-08-14 — Under the Cooperator Program, USDA/FAS enters into agreements with nonprofit agricultural trade organizations (“Cooperators”) to share the costs of maintaining and developing foreign markets for United States agricultural commodities and products. Financial assistance under the Cooperator Program is made available on a competitive basis, and USDA/FAS endeavors to enter into agreements with eligibl…</summary>
-  </entry>
-  <entry>
-    <title>2027 Market Access Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362741"/>
-    <id>urn:funding-finder:grants-gov:362741</id>
-    <updated>2026-06-10T00:00:00Z</updated>
-    <author><name>Foreign Agricultural Service</name></author>
-    <category term="Agriculture and food"/>
-    <summary>Foreign Agricultural Service — Closes 2026-08-14 — Under MAP, USDA/FAS enters into agreements with Participants to share the cost of certain marketing and promotion activities to expand exports of U.S. agricultural commodities. Financial assistance under the MAP is made available on a competitive basis, and USDA/FAS endeavors to enter into agreements with eligible Participants to cover as broad an array of agricultural commodities as possible. All…</summary>
-  </entry>
-  <entry>
-    <title>2027 Quality Samples Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362742"/>
-    <id>urn:funding-finder:grants-gov:362742</id>
-    <updated>2026-06-10T00:00:00Z</updated>
-    <author><name>Foreign Agricultural Service</name></author>
-    <category term="Agriculture and food"/>
-    <summary>Foreign Agricultural Service — Closes 2026-08-14 — The QSP is designed to encourage the development and expansion of export markets for U.S. agricultural commodities by assisting U.S. entities in providing commodity samples to potential foreign importers to promote a better understanding and appreciation for the high quality of U.S. agricultural commodities.</summary>
-  </entry>
-  <entry>
-    <title>2027 Technical Assistance for Specialty Crops</title>
-    <link href="https://www.grants.gov/search-results-detail/362744"/>
-    <id>urn:funding-finder:grants-gov:362744</id>
-    <updated>2026-06-10T00:00:00Z</updated>
-    <author><name>Foreign Agricultural Service</name></author>
-    <category term="Agriculture and food"/>
-    <summary>Foreign Agricultural Service — Closes 2026-08-14 — The TASC program is designed to assist U.S. organizations by providing funding for projects that seek to remove, resolve, or mitigate existing or potential sanitary, phytosanitary, or technical barriers that prohibit or threaten the export of U.S. specialty crops.</summary>
-  </entry>
-  <entry>
-    <title>NCI Community Oncology Research Program (NCORP) Research Bases (UG1 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/358963"/>
-    <id>urn:funding-finder:grants-gov:358963</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Cancer"/>
-    <category term="Education and workforce"/>
-    <summary>National Institutes of Health — Closes 2026-09-18 — This Notice of Funding Opportunity (NOFO) is one of three NOFOs for the National Cancer Institute (NCI) Community Oncology Research Program (NCORP). NCORP is designed to enhance generalizability and dissemination of clinical trial and other human subject research study results through accrual in a variety of community settings. The purpose of NCORP is to engage cancer patient populations, those at…</summary>
-  </entry>
-  <entry>
-    <title>WaterSMART Enhancing Water Resources Projects</title>
-    <link href="https://www.grants.gov/search-results-detail/362394"/>
-    <id>urn:funding-finder:grants-gov:362394</id>
-    <updated>2026-05-14T00:00:00Z</updated>
-    <author><name>Bureau of Reclamation</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Water"/>
-    <summary>Bureau of Reclamation — Closes 2027-09-08 — The objective of the WaterSMART Enhancing Water Resources Projects funding opportunity is to invite eligible entities to apply for funding to implement projects per the authorizing language referenced above that benefit water resource management for multiple uses, including water conservation and efficiency projects, water infrastructure improvements, and river and watershed restoration. Projects …</summary>
-  </entry>
-  <entry>
-    <title>DoW Multiple Sclerosis Clinical Trial Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362227"/>
-    <id>urn:funding-finder:grants-gov:362227</id>
-    <updated>2026-05-05T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-08-13 — Summary: The fiscal year 2026 (FY26) Multiple Sclerosis Research Program (MSRP) Clinical Trial Award (CTA) supports the rapid implementation of clinical trials with the potential to have a significant impact on the treatment or management of multiple sclerosis. All applications must address at least one of the FY26 MSRP CTA focus areas. Clinical trials may evaluate promising new products, pharmaco…</summary>
-  </entry>
-  <entry>
-    <title>DoW Amyotrophic Lateral Sclerosis Research Program, Pilot Clinical Trial Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362195"/>
-    <id>urn:funding-finder:grants-gov:362195</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Transportation"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-30 — Summary: The fiscal year 2026 (FY26) Amyotrophic Lateral Sclerosis Research Program (ALSRP) Pilot Clinical Trial Award (PCTA) supports the rapid implementation of clinical trials with the potential to have a significant impact on the treatment or management of amyotrophic lateral sclerosis (ALS). Projects may range from phase 1 to small-scale phase 2 trials.Applications must address one of the fol…</summary>
   </entry>
 </feed>

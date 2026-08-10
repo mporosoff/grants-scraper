@@ -107,6 +107,16 @@ def _cached_publishable(sources: dict, slug: str, as_of: date) -> list[dict]:
     return kept
 
 
+def _snapshot_age_days(sources: dict, slug: str, as_of: date) -> int | None:
+    stamp = str((sources.get(slug) or {}).get("fetched_at") or "")[:10]
+    if not stamp:
+        return None
+    try:
+        return max(0, (as_of - date.fromisoformat(stamp)).days)
+    except ValueError:
+        return None
+
+
 def resolve_live_records(results: list[AdapterResult], cache: dict,
                          as_of: date) -> tuple[list[dict], dict, list[dict]]:
     """Return ``(records_to_publish, updated_cache, per_source_summaries)``.
@@ -166,11 +176,26 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
             })
         else:
             published = _cached_publishable(sources, slug, as_of)
+            snapshot_age = _snapshot_age_days(sources, slug, as_of)
+            recent_snapshot = bool(
+                result.fallback_grace_days > 0
+                and snapshot_age is not None
+                and snapshot_age <= result.fallback_grace_days
+                and within_health_bounds(
+                    len(published), result.min_records, result.max_records
+                )
+            )
             summaries.append({
                 "slug": slug, "source": result.display_name,
-                "status": "failed_kept_last_good", "fetched": 0, "dropped_invalid": 0,
-                "published": len(published), "healthy": False, "error": result.error,
+                "status": (
+                    "recent_snapshot" if recent_snapshot else "failed_kept_last_good"
+                ),
+                "fetched": 0, "dropped_invalid": 0,
+                "published": len(published), "healthy": recent_snapshot,
+                "error": result.error,
                 "diagnostics": result.diagnostics,
+                "snapshot_age_days": snapshot_age,
+                "fallback_grace_days": result.fallback_grace_days,
             })
         live.extend(published)
 
