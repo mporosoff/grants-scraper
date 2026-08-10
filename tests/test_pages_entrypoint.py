@@ -16,6 +16,55 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn('window.location.replace(target)', index_html)
         self.assertIn('name="viewport"', index_html)
 
+    def test_pages_have_distinct_favicons_and_share_previews(self):
+        index_html = (REPOSITORY_ROOT / "index.html").read_text(encoding="utf-8")
+        explorer_html = (REPOSITORY_ROOT / "match_explorer.html").read_text(
+            encoding="utf-8"
+        )
+        team_html = (REPOSITORY_ROOT / "team_match.html").read_text(
+            encoding="utf-8"
+        )
+
+        main_image_url = (
+            "https://mporosoff.github.io/grants-scraper/"
+            "assets/social/funding-finder-preview.jpg"
+        )
+        team_image_url = (
+            "https://mporosoff.github.io/grants-scraper/"
+            "assets/social/faculty-pairing-preview.jpg"
+        )
+
+        for page in (index_html, explorer_html):
+            with self.subTest(page="public matcher"):
+                self.assertIn('property="og:title"', page)
+                self.assertIn(f'property="og:image" content="{main_image_url}"', page)
+                self.assertIn('name="twitter:card" content="summary_large_image"', page)
+                self.assertIn(
+                    'rel="icon" type="image/svg+xml" '
+                    'href="./assets/icons/funding-finder.svg"',
+                    page,
+                )
+
+        self.assertIn(f'property="og:image" content="{team_image_url}"', team_html)
+        self.assertIn('name="twitter:card" content="summary_large_image"', team_html)
+        self.assertIn(
+            'rel="icon" type="image/svg+xml" '
+            'href="./assets/icons/faculty-pairing.svg"',
+            team_html,
+        )
+        self.assertIn('name="robots" content="noindex, nofollow"', team_html)
+
+        for asset in (
+            "assets/social/funding-finder-preview.jpg",
+            "assets/social/faculty-pairing-preview.jpg",
+            "assets/icons/funding-finder.svg",
+            "assets/icons/faculty-pairing.svg",
+        ):
+            path = REPOSITORY_ROOT / asset
+            with self.subTest(asset=asset):
+                self.assertTrue(path.is_file())
+                self.assertGreater(path.stat().st_size, 500)
+
     def test_match_explorer_supports_public_search_and_optional_ai(self):
         explorer_html = (
             REPOSITORY_ROOT / "match_explorer.html"
