@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-10T19:33:33Z",
+  "generated_at": "2026-08-10T20:04:07Z",
   "retention_days": 90,
   "events": [
     {
       "id": "a8e42ca68b63c5fb03d6",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-10T19:32:19.702427Z",
+      "changed_at": "2026-08-10T20:02:36.771172Z",
       "opportunity_id": "360986",
       "detail": "Deadline 2026-09-09",
       "record": {
@@ -58,7 +58,7 @@
       "id": "9745c4005df3a4411350",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-10T19:32:19.702427Z",
+      "changed_at": "2026-08-10T20:02:36.771172Z",
       "opportunity_id": "363179",
       "detail": "Deadline 2026-09-09",
       "record": {
@@ -101,7 +101,7 @@
       "id": "821cd898df4aeec48045",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-10T19:32:19.702427Z",
+      "changed_at": "2026-08-10T20:02:36.771172Z",
       "opportunity_id": "363194",
       "detail": "Deadline 2026-09-09",
       "record": {
@@ -138,7 +138,7 @@
       "id": "41de2c6da7bd4f82be63",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-10T19:32:19.702427Z",
+      "changed_at": "2026-08-10T20:02:36.771172Z",
       "opportunity_id": "363122",
       "detail": "Deadline 2026-09-09",
       "record": {
@@ -180,7 +180,7 @@
       "id": "2c0ddea4e40334b44e2a",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-10T19:32:19.702427Z",
+      "changed_at": "2026-08-10T20:02:36.771172Z",
       "opportunity_id": "362823",
       "detail": "Deadline 2026-09-09",
       "record": {
@@ -220,7 +220,7 @@
       "id": "00eb6bc214cc8e7b75bd",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-10T19:32:19.702427Z",
+      "changed_at": "2026-08-10T20:02:36.771172Z",
       "opportunity_id": "347026",
       "detail": "Deadline 2026-09-09",
       "record": {
