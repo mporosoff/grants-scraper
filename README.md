@@ -151,13 +151,12 @@ self-service account, personalized RSS, and email-service architecture.
 
 <!-- catalog-stats:start -->
 This replaces the former 48-record Chemical and Sustainability Engineering feed. The
-August 10, 2026 build contains 2,224 current funding opportunities (1,939 posted and 285
-forecasted) from Grants.gov (1,438), Johns Hopkins RDT fellowships list (732), NYSERDA
-(37), UR VPR funding digest (limited submissions & foundations) (17), with no deadline
-before the catalog date. It provides a direct official announcement for 411 records, an
-official source-page route for another 1,369, and the official Grants.gov record for the
-remaining 444. Across all route types, 1,494 records also contain an official source
-URL.
+August 10, 2026 build contains 1,492 current funding opportunities (1,207 posted and 285
+forecasted) from Grants.gov (1,438), NYSERDA (37), UR VPR funding digest (limited
+submissions & foundations) (17), with no deadline before the catalog date. It provides a
+direct official announcement for 411 records, an official source-page route for another
+637, and the official Grants.gov record for the remaining 444. Across all route types,
+762 records also contain an official source URL.
 <!-- catalog-stats:end -->
 
 Funding values are intentionally not conflated: award floor/ceiling drive

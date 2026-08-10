@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-08-10T18:53:10Z</updated>
+  <updated>2026-08-10T19:26:23Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development</title>
@@ -44,28 +44,6 @@
     <category term="Community development"/>
     <category term="Manufacturing"/>
     <summary>Department of Housing and Urban Development — Closes 2026-10-19 — HUD is issuing the Preservation and Reinvestment Initiative for Community Enhancement (PRICE) competition NOFO to preserve long-term housing affordability for residents of manufactured housing or an MHC, to redevelop MHCs, and to primarily benefit low- and moderate-income (LMI) residents. Congress appropriated in FY2025 these competitive grants to preserve and revitalize manufactured housing and e…</summary>
-  </entry>
-  <entry>
-    <title>Kenneth G. Hancock Memorial Award</title>
-    <link href="https://www.acs.org/content/acs/en/funding/awards/kenneth-hancock-memorial-award.html"/>
-    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-3f94fed01ee31535</id>
-    <updated>2026-08-10T00:00:00Z</updated>
-    <author><name>American Chemical Society (ACS)</name></author>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <summary>American Chemical Society (ACS) — Posted — The Kenneth G. Hancock Memorial Award provides national recognition and honor for outstanding student contributions to furthering the goals of green chemistry and engineering through research and/or studies. This includes but is not limited to the research, development, and implementation of fundamental and innovative chemical technologies that incorporate the principles of green chemistry into ch…</summary>
-  </entry>
-  <entry>
-    <title>Scholarships</title>
-    <link href="https://www.smeef.org/scholarships/"/>
-    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-grad-b4fd693814bd5251</id>
-    <updated>2026-08-10T00:00:00Z</updated>
-    <author><name>Society of Manufacturing Engineers (SME) Education Foundation</name></author>
-    <category term="Education and workforce"/>
-    <category term="Manufacturing"/>
-    <summary>Society of Manufacturing Engineers (SME) Education Foundation — Posted — The Foundation’s scholarships offer students a powerful reason to choose a manufacturing focused education. The generosity of our many corporate partners has enabled us to provide millions in scholarships attracting thousands of new students to manufacturing every year.
-Our scholarships are awarded annually, so students can re-apply every year. Scholarships range from $2,500 - $20,000 and can be u…</summary>
   </entry>
   <entry>
     <title>Pax Silica Artificial Intelligence Assistance Project</title>
@@ -751,5 +729,32 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Manufacturing"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health — Closes 2027-06-15 — This Notice of Funding Opportunity Announcement (NOFO) from the NIH Brain Research through Advancing Innovative Neurotechnologies (BRAIN) Initiative is intended to support establishment of facilities at minority-serving institutions (MSIs) and Institutional Development Award (IDeA)-eligible institutions for scaled production and distribution of brain cell type-specific access and manipulation reag…</summary>
+  </entry>
+  <entry>
+    <title>Computational and Data-Enabled Science and Engineering</title>
+    <link href="https://www.grants.gov/search-results-detail/356055"/>
+    <id>urn:funding-finder:grants-gov:356055</id>
+    <updated>2024-08-15T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Data science"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>U.S. National Science Foundation — Posted — Large-scale simulations and the ability to accumulate massive amounts of data have revolutionized science and engineering. The goal of the Computational and Data-enabled Science and Engineering (CDS&amp;E) meta-program is to identify and capitalize on opportunities for major scientific and engineering breakthroughs through new computational and data-analysis approaches and best practices. The CDS&amp;E me…</summary>
+  </entry>
+  <entry>
+    <title>Advanced Technological Education</title>
+    <link href="https://www.grants.gov/search-results-detail/355100"/>
+    <id>urn:funding-finder:grants-gov:355100</id>
+    <updated>2024-06-25T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation — Closes 2026-10-01 — With a focus on two-year Institutions of Higher Education (IHEs), the Advanced Technological Education (ATE) program supports the education of technicians for the high-technology fields that drive our nation's economy. The program involves partnerships between academic institutions (grades 7-12, IHEs), industry, and economic development agencies to promote improvement in the education of science a…</summary>
   </entry>
 </feed>

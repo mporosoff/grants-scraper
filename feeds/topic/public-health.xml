@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml</id>
-  <updated>2026-08-10T18:53:10Z</updated>
+  <updated>2026-08-10T19:26:23Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -617,34 +617,36 @@
     <summary>National Institutes of Health — Closes 2026-10-17 — The purpose of this NOFO is to enhance the capability of NCATS CTSA Program KL2 scholars supported by the CTSA Program to conduct research as they complete the transition to fully independent academic translational scientists. These small research grants will support different clinical and translational science research projects, including pilot and feasibility studies; secondary data analysis of …</summary>
   </entry>
   <entry>
-    <title>AACR Immuno-Oncoloy Research Fellowships</title>
-    <link href="https://www.aacr.org/grants/aacr-immuno-oncology-research-fellowships/"/>
-    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-42688d7330cf2948</id>
-    <updated>2026-08-10T00:00:00Z</updated>
-    <author><name>American Association for Cancer Research (AACR)</name></author>
+    <title>Damon Runyon Cancer Research Foundation Clinical Investigator Award 2027</title>
+    <link href="http://rochester.infoready4.com/CompetitionSpace/"/>
+    <id>urn:funding-finder:ur-vpr-funding-digest-limited-submissions-foundations:vpr-email%3Ainfoready-2024058</id>
+    <updated>2026-08-09T00:00:00Z</updated>
+    <author><name>UR VPR funding digest (limited submissions &amp; foundations)</name></author>
     <category term="Cancer"/>
     <category term="Public health"/>
-    <summary>American Association for Cancer Research (AACR) — Posted — The AACR Immuno-oncology Research Fellowships represent a joint effort to encourage and support postdoctoral or clinical research fellows to conduct immuno-oncology research and to establish a successful career path in this field. The research proposed for funding may be basic, translational, clinical, or epidemiological in nature and must have direct applicability and relevance to immuno-oncology…</summary>
+    <category term="Technology development"/>
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Closes 2027-01-19 — The Damon Runyon Clinical Investigator Award supports independent young physician-scientists conducting disease-oriented research that demonstrates
+a high level of innovation and creativity. The goal is to support the best young physician-scientists doing work aimed at improving the practice of cancer medicine. The Clinical Investigator Award program is specifically intended to provide outstanding…</summary>
   </entry>
   <entry>
-    <title>AACR-Aflac, Inc. Career Development Award for Pediatric Cancer Research</title>
-    <link href="https://www.idsafoundation.org/our-initiatives/research/changing-the-course-of-humanity/our-awards/?_ga=2.50760489.1282326165.1565988287-1714970133.1565988287"/>
-    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-a2f9d41a035e43b3</id>
-    <updated>2026-08-10T00:00:00Z</updated>
-    <author><name>American Association for Cancer Research</name></author>
-    <category term="Cancer"/>
+    <title>Applied Drug Policy Research Experiences</title>
+    <link href="https://www.grants.gov/search-results-detail/363487"/>
+    <id>urn:funding-finder:grants-gov:363487</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>Office of National Drug Control Policy</name></author>
+    <category term="Education and workforce"/>
     <category term="Public health"/>
-    <summary>American Association for Cancer Research — Posted — ​The AACR-Aflac, Inc. Career Development Award for Pediatric Cancer Research represents a joint effort to encourage and support junior faculty who have completed their most recent doctoral degree or medical residency within the past 11 years at the start of the grant term to conduct pediatric cancer research and establish successful career paths in this field. ​Research projects may be in any disc…</summary>
+    <summary>Office of National Drug Control Policy — Closes 2026-09-06 — This project will establish applied drug policy research experiences for graduate students and recent post-graduates to conduct rigorous research studies and data analyses to support the National Drug Control Strategy. This research will investigate dynamic shifts in, and associations between, illicit drug supply, drug use and their associated consequences, to help public health and public safety …</summary>
   </entry>
   <entry>
-    <title>AACR-Sontag Foundation Brain Cancer Research Fellowship</title>
-    <link href="https://www.aacr.org/grants/aacr-sontag-foundation-brain-cancer-research-fellowship/"/>
-    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-6184bb1a00717f0b</id>
-    <updated>2026-08-10T00:00:00Z</updated>
-    <author><name>American Association for Cancer Research (AACR)</name></author>
-    <category term="Cancer"/>
-    <category term="Neuroscience"/>
+    <title>Expanding global health security through local partnerships in Ethiopia</title>
+    <link href="https://www.grants.gov/search-results-detail/360333"/>
+    <id>urn:funding-finder:grants-gov:360333</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Education and workforce"/>
     <category term="Public health"/>
-    <summary>American Association for Cancer Research (AACR) — Posted — The AACR-Sontag Foundation Brain Cancer Research Fellowship represents a joint effort to encourage and support a postdoctoral or clinical research fellow to conduct brain cancer research and to establish a successful career path in this field. The proposed project may be basic, clinical, translational, or epidemiological in nature and must have direct applicability and relevance to brain cancer. A…</summary>
+    <category term="Cybersecurity"/>
+    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — The CDC office in Ethiopia was established in 2001 and works closely with the Ministry of Health (MOH), the Ethiopian Public Health Institute (EPHI), and other Government of Ethiopia (GOE) agencies to develop the capacity to prevent, detect, and respond to priority diseases. In 2014, CDC began coordination with the GOE to build Ethiopia's capacity to achieve the International Health Regulation (IH…</summary>
   </entry>
 </feed>

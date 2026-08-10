@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml</id>
-  <updated>2026-08-10T18:53:10Z</updated>
+  <updated>2026-08-10T19:26:23Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Veterans Legacy Grants Program</title>
@@ -156,33 +156,6 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health — Closes 2026-12-15 — The National Library of Medicine (NLM) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for a Training Center of the Network of the National Library of Medicine (NNLM).Established in 1965 and organized geographically across the United States and its territories, the NNLM promotes and supports the initiatives, products, and services of the NLM and the National Insti…</summary>
-  </entry>
-  <entry>
-    <title>Azrieli International Postdoctoral Fellowship</title>
-    <link href="https://azrielifoundation.org/fellows/internationalpostdoctoral/"/>
-    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-postdoc-53cb670cd1b469e8</id>
-    <updated>2026-08-10T00:00:00Z</updated>
-    <author><name>Azrieli Foundation</name></author>
-    <category term="Arts and culture"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <summary>Azrieli Foundation — Posted — The Azrieli International Postdoctoral Fellowship supports the best and brightest minds in their postdoctoral research, connecting them with world-class academics and leading researchers.
-The Fellowship provides generous funding for eligible international applicants to conduct research in any academic discipline at eligible institutions in Israel. Azrieli International Postdoctoral Fellowships are…</summary>
-  </entry>
-  <entry>
-    <title>Placemaking Projects</title>
-    <link href="http://www.artplaceamerica.org/our-work/national-creative-placemaking-fund/introduction"/>
-    <id>urn:funding-finder:johns-hopkins-rdt-fellowships-list:jhu-fellowships%3Ajhu-faculty-32687b668905c3e2</id>
-    <updated>2026-08-10T00:00:00Z</updated>
-    <author><name>Artplace America</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Transportation"/>
-    <summary>Artplace America — Posted — Artplace America has announced that it is accepting applications for its National Creative Placemaking Fund. Grants of up to $500,000 will be awarded for projects that work with artists and arts organizations to help build stronger, healthier communities anywhere in the United States. Eligible projects must focus on a neighborhood (or other geographic community) challenge related to that community…</summary>
   </entry>
   <entry>
     <title>Rural Housing Preservation Grant</title>
@@ -676,6 +649,28 @@ The Fellowship provides generous funding for eligible international applicants t
     <title>Austin FY 2021 – FY 2023 EDA Planning and Local Technical Assistance</title>
     <link href="https://www.grants.gov/search-results-detail/332137"/>
     <id>urn:funding-finder:grants-gov:332137</id>
+    <updated>2021-03-15T00:00:00Z</updated>
+    <author><name>Department of Commerce</name></author>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <summary>Department of Commerce — Posted — UPDATED NOTICE - PLEASE READ: April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
+  </entry>
+  <entry>
+    <title>Chicago FY 2021 – FY 2023 EDA Planning and Local Technical Assistance</title>
+    <link href="https://www.grants.gov/search-results-detail/332125"/>
+    <id>urn:funding-finder:grants-gov:332125</id>
+    <updated>2021-03-15T00:00:00Z</updated>
+    <author><name>Department of Commerce</name></author>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <summary>Department of Commerce — Posted — UPDATED NOTICE - PLEASE READ: April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
+  </entry>
+  <entry>
+    <title>Denver FY 2021 – FY 2023 EDA Planning and Local Technical Assistance</title>
+    <link href="https://www.grants.gov/search-results-detail/332126"/>
+    <id>urn:funding-finder:grants-gov:332126</id>
     <updated>2021-03-15T00:00:00Z</updated>
     <author><name>Department of Commerce</name></author>
     <category term="Arts and culture"/>
