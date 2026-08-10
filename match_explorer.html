@@ -8,7 +8,7 @@
   <meta name="referrer" content="no-referrer">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://api.openai.com https://api.anthropic.com https://cloudflareinsights.com https://funding-usage.urochestercheme.workers.dev; img-src 'self' data:; style-src 'self'; script-src 'self' https://static.cloudflareinsights.com; base-uri 'self'; form-action 'self'">
   <title>Funding Finder</title>
-  <link rel="stylesheet" href="./assets/app.css?v=release-2026-08-06-v8">
+  <link rel="stylesheet" href="./assets/app.css?v=release-2026-08-10-v9">
 </head>
 <body>
   <a class="skip-link" href="#results">Skip to results</a>
@@ -36,7 +36,7 @@
       </div>
 
       <ol class="workflow-map" aria-label="Suggested funding search steps">
-        <li><strong>1</strong><span><b>Describe the work</b><small>Recommended</small></span></li>
+        <li><strong>1</strong><span><b>Search or add a notice</b><small>Recommended</small></span></li>
         <li><strong>2</strong><span><b>Add context</b><small>Optional profile, CV, and filters</small></span></li>
         <li><strong>3</strong><span><b>Find and review</b><small>Optional AI refinement afterward</small></span></li>
       </ol>
@@ -47,14 +47,20 @@
             <span class="step-number">1</span>
             <div>
               <p class="eyebrow">Start here</p>
-              <h2 id="search-step-heading">What are you looking to fund?</h2>
-              <p>Use a topic, method, population, goal, or opportunity number. You can leave this blank if your profile or filters provide enough context.</p>
+              <h2 id="search-step-heading">What are you looking to fund or review?</h2>
+              <p>Search by topic, method, population, goal, or opportunity number—or drop a NOFO, FOA, or other funding-notice PDF into the search box to chat with it. You can leave the search blank if your profile or filters provide enough context.</p>
             </div>
           </div>
-          <div class="search-form">
+          <div class="search-form nofo-drop-zone" id="nofo-drop-zone">
             <label class="sr-only" for="query">Search funding opportunities</label>
             <input id="query" name="q" type="search" autocomplete="off" placeholder="Example: carbon capture catalysts for sustainable manufacturing">
+            <input class="sr-only" id="nofo-file" type="file" accept=".pdf,application/pdf" aria-label="Choose a NOFO or FOA PDF">
+            <label class="nofo-upload-button" for="nofo-file">
+              <span aria-hidden="true">&#8679;</span>
+              <span><strong>Drop or upload a NOFO</strong><small>PDF only</small></span>
+            </label>
           </div>
+          <div class="nofo-upload-status" id="nofo-upload-status" aria-live="polite">Your PDF stays in this tab and is sent to your selected AI provider only when you ask a question.</div>
           <div class="quick-searches" aria-label="Example searches">
             <span>Examples:</span>
             <button type="button" data-example-query="carbon capture and utilization">Carbon capture</button>
@@ -322,34 +328,36 @@
           </div>
         </details>
         <div class="results-toolbar search-not-started" id="results-toolbar">
-          <div>
-            <p class="eyebrow" id="results-mode">Ready when you are</p>
-            <h2 id="results-heading"><span id="result-count"></span> <span id="result-label">Your matches will appear here</span></h2>
-            <p class="result-range" id="result-range"></p>
-          </div>
           <div class="toolbar-actions">
-            <label>
-              <span>Sort</span>
-              <select id="sort">
-                <option value="relevance">Relevance</option>
-                <option value="deadline">Deadline: soonest</option>
-                <option value="posted">Recently posted</option>
-                <option value="award">Largest award</option>
-                <option value="agency">Agency</option>
-                <option value="title">Title</option>
-              </select>
-            </label>
-            <label class="personalize-toggle" title="Prioritize results using ratings stored only on this device">
-              <input type="checkbox" id="use-preferences">
-              <span>
-                Personalize from my ratings
-                <small id="preference-status" aria-live="polite">Rate 3 opportunities to personalize.</small>
-              </span>
-            </label>
+            <button class="button secondary" id="export-csv" type="button">Export CSV</button>
             <button class="button secondary" id="export-ics" type="button">Export deadlines</button>
-            <div class="toolbar-export-actions">
-              <button class="button secondary" id="export-csv" type="button">Export CSV</button>
-              <button class="button primary results-chat-launch" id="open-results-chat" type="button" aria-controls="result-assistant" aria-expanded="false" disabled>Chat with your results</button>
+            <button class="button primary results-chat-launch" id="open-results-chat" type="button" aria-controls="result-assistant" aria-expanded="false" disabled>Chat with your results</button>
+          </div>
+          <div class="toolbar-lower-row">
+            <div class="results-summary">
+              <p class="eyebrow" id="results-mode">Ready when you are</p>
+              <h2 id="results-heading"><span id="result-count"></span> <span id="result-label">Your matches will appear here</span></h2>
+              <p class="result-range" id="result-range"></p>
+            </div>
+            <div class="toolbar-controls">
+              <label>
+                <span>Sort</span>
+                <select id="sort">
+                  <option value="relevance">Relevance</option>
+                  <option value="deadline">Deadline: soonest</option>
+                  <option value="posted">Recently posted</option>
+                  <option value="award">Largest award</option>
+                  <option value="agency">Agency</option>
+                  <option value="title">Title</option>
+                </select>
+              </label>
+              <label class="personalize-toggle" title="Prioritize results using ratings stored only on this device">
+                <input type="checkbox" id="use-preferences">
+                <span>
+                  Personalize from my ratings
+                  <small id="preference-status" aria-live="polite">Rate 3 opportunities to personalize.</small>
+                </span>
+              </label>
             </div>
           </div>
         </div>
@@ -362,12 +370,33 @@
           <div class="ai-heading">
             <span class="spark" aria-hidden="true">✦</span>
             <div>
-              <p class="eyebrow">Result-aware AI workspace</p>
+              <p class="eyebrow" id="chat-eyebrow">Result-aware AI workspace</p>
               <h2 id="chat-heading">Chat with your results</h2>
             </div>
             <button class="button secondary chat-size-toggle" id="toggle-chat-size" type="button">Close chat</button>
           </div>
-          <p class="panel-copy">Compare, question, or focus the opportunities already in your search. Every named opportunity links back to its result card and official source.</p>
+          <p class="panel-copy" id="chat-panel-copy">Compare, question, or focus the opportunities already in your search. Every named opportunity links back to its result card and official source.</p>
+          <div class="nofo-chat-context hidden" id="nofo-chat-context"></div>
+          <section class="chat-key-prompt hidden" id="chat-key-prompt" aria-labelledby="chat-key-heading">
+            <div>
+              <strong id="chat-key-heading">Connect an AI provider to start chatting</strong>
+              <p>The key is used directly from this browser. Save it only on a device you trust.</p>
+            </div>
+            <div class="chat-key-fields">
+              <label>Provider
+                <select id="chat-k-provider">
+                  <option value="openai">OpenAI</option>
+                  <option value="anthropic">Anthropic</option>
+                </select>
+              </label>
+              <label>API key
+                <input id="chat-k-key" type="password" autocomplete="off" spellcheck="false" placeholder="sk-...">
+              </label>
+            </div>
+            <label class="chat-save-key"><input id="chat-save-key" type="checkbox" checked> Save this key on this device</label>
+            <button class="button primary" id="connect-chat-key" type="button">Save key and start chatting</button>
+            <p class="credential-status" id="chat-key-status" aria-live="polite"></p>
+          </section>
           <section class="chat" id="chat" aria-label="Chat with the current funding results">
             <p class="chat-summary" id="chat-summary"></p>
             <div class="suggestion-list" id="chat-suggestions"></div>
@@ -377,7 +406,7 @@
               <span>Reviewing the connected opportunities and their evidence…</span>
             </div>
             <form class="chat-form" id="chat-form">
-              <label class="sr-only" for="chat-input">Ask about the current funding results</label>
+              <label class="sr-only" id="chat-input-label" for="chat-input">Ask about the current funding results</label>
               <textarea id="chat-input" rows="3" placeholder="Which opportunities best fit a university-led pilot, and why?"></textarea>
               <button class="button primary" id="chat-submit" type="submit"><span>Send</span></button>
               <p class="chat-keyboard-hint">Enter to send <span aria-hidden="true">·</span> Shift+Enter for a new line</p>
@@ -387,7 +416,7 @@
               <button class="text-button hidden" id="reset-narrowing" type="button">Restore the connected result set</button>
             </div>
           </section>
-          <p class="privacy-note chat-privacy">Chat uses the AI provider configured above. Only the bounded result context, your question, and the profile context you enabled are sent.</p>
+          <p class="privacy-note chat-privacy" id="chat-privacy">Chat uses the AI provider configured above. Only the bounded result context, your question, and the profile context you enabled are sent.</p>
         </section>
 
         <div class="result-list" id="results" aria-live="polite"></div>
@@ -489,14 +518,15 @@
     <div class="notice error">JavaScript is required to search the opportunity catalog.</div>
   </noscript>
   <script src="./data/opportunities.js?v=catalog-20260810T112235Z"></script>
-  <script src="./assets/profile.js?v=release-2026-08-06-v8"></script>
-  <script src="./assets/review.js?v=release-2026-08-06-v8"></script>
-  <script src="./assets/credentials.js?v=release-2026-08-06-v8"></script>
-  <script src="./assets/ai-provider.js?v=release-2026-08-06-v8"></script>
-  <script src="./assets/chat-ui.js?v=release-2026-08-06-v8"></script>
-  <script src="./assets/saved.js?v=release-2026-08-06-v8"></script>
-  <script src="./assets/preferences.js?v=release-2026-08-06-v8"></script>
-  <script src="./assets/app.js?v=release-2026-08-06-v8"></script>
+  <script src="./assets/profile.js?v=release-2026-08-10-v9"></script>
+  <script src="./assets/nofo.js?v=release-2026-08-10-v9"></script>
+  <script src="./assets/review.js?v=release-2026-08-10-v9"></script>
+  <script src="./assets/credentials.js?v=release-2026-08-10-v9"></script>
+  <script src="./assets/ai-provider.js?v=release-2026-08-10-v9"></script>
+  <script src="./assets/chat-ui.js?v=release-2026-08-10-v9"></script>
+  <script src="./assets/saved.js?v=release-2026-08-10-v9"></script>
+  <script src="./assets/preferences.js?v=release-2026-08-10-v9"></script>
+  <script src="./assets/app.js?v=release-2026-08-10-v9"></script>
   <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "209e9983c16e4747947cf621792fe833"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>

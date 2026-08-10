@@ -294,13 +294,20 @@
     return globalThis.mammoth;
   }
 
-  async function extractPdfText(file, pdfLoader = loadPdfJs) {
+  async function extractPdfText(
+    file,
+    pdfLoader = loadPdfJs,
+    maximumPages = MAX_PDF_PAGES,
+  ) {
     const pdfjs = await pdfLoader();
     const bytes = new Uint8Array(await file.arrayBuffer());
     const documentTask = pdfjs.getDocument({ data: bytes });
     const pdf = await documentTask.promise;
     const totalPages = pdf.numPages;
-    const pagesToRead = Math.min(totalPages, MAX_PDF_PAGES);
+    const requestedPages = Number.isInteger(maximumPages) && maximumPages > 0
+      ? maximumPages
+      : MAX_PDF_PAGES;
+    const pagesToRead = Math.min(totalPages, requestedPages);
     const pages = [];
     try {
       for (let pageNumber = 1; pageNumber <= pagesToRead; pageNumber += 1) {
@@ -316,8 +323,9 @@
       }
       return {
         rawText: pages.filter(Boolean).join("\n\n"),
+        pages,
         pageCount: totalPages,
-        truncated: totalPages > MAX_PDF_PAGES,
+        truncated: totalPages > requestedPages,
       };
     } finally {
       await pdf.cleanup?.();
@@ -540,6 +548,7 @@
     emptyPreferences,
     emptyProfile,
     extractCv,
+    extractPdfText,
     loadFeedback,
     loadProfile,
     normalizeCvText,

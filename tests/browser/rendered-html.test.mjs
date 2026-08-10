@@ -5,10 +5,11 @@ import test from "node:test";
 const root = new URL("../../", import.meta.url);
 
 test("supports one guided funding search, cited FOA evidence, reusable profiles, and optional AI refinement", async () => {
-  const [prototype, script, profileScript, reviewScript, credentialsScript, providerScript, css] = await Promise.all([
+  const [prototype, script, profileScript, nofoScript, reviewScript, credentialsScript, providerScript, css] = await Promise.all([
     readFile(new URL("match_explorer.html", root), "utf8"),
     readFile(new URL("assets/app.js", root), "utf8"),
     readFile(new URL("assets/profile.js", root), "utf8"),
+    readFile(new URL("assets/nofo.js", root), "utf8"),
     readFile(new URL("assets/review.js", root), "utf8"),
     readFile(new URL("assets/credentials.js", root), "utf8"),
     readFile(new URL("assets/ai-provider.js", root), "utf8"),
@@ -18,6 +19,11 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(prototype, /id="query"/);
   assert.match(prototype, /<meta name="color-scheme" content="light">/);
   assert.match(prototype, /<h1 id="page-title">Find funding in a few clear steps<\/h1>/);
+  assert.match(prototype, /What are you looking to fund or review\?/);
+  assert.match(prototype, /id="nofo-drop-zone"/);
+  assert.match(prototype, /id="nofo-file"/);
+  assert.match(prototype, /id="nofo-chat-context"/);
+  assert.match(prototype, /id="chat-key-prompt"/);
   assert.match(prototype, /id="facet-discipline"/);
   assert.match(prototype, /id="facet-agency"/);
   assert.match(prototype, /id="flag-evidence"/);
@@ -59,6 +65,7 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.doesNotMatch(prototype, /class="chat hidden"/);
   assert.match(prototype, /data\/opportunities\.js/);
   assert.match(prototype, /assets\/profile\.js/);
+  assert.match(prototype, /assets\/nofo\.js/);
   assert.match(prototype, /assets\/review\.js/);
   assert.match(prototype, /assets\/ai-provider\.js/);
   assert.match(prototype, /assets\/chat-ui\.js/);
@@ -69,6 +76,9 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(providerScript, /api\.anthropic\.com\/v1\/messages/);
   assert.match(script, /globalThis\.FUNDING_AI\.providerJson/);
   assert.match(profileScript, /globalThis\.FUNDING_PROFILE/);
+  assert.match(nofoScript, /globalThis\.FUNDING_NOFO/);
+  assert.match(nofoScript, /function matchCatalog/);
+  assert.match(nofoScript, /\[Page \$\{index \+ 1\}\]/);
   assert.match(profileScript, /funding-finder\.profile\.v1/);
   assert.match(profileScript, /funding-finder\.feedback\.v1/);
   assert.match(reviewScript, /funding-finder\.deployment-review\.v1/);
@@ -127,6 +137,9 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(script, /MAX_CHAT_RESULTS = 20/);
   assert.match(script, /async function refineWithAi/);
   assert.match(script, /async function askResults/);
+  assert.match(script, /async function openNofoFromFile/);
+  assert.match(script, /async function askNofo/);
+  assert.match(script, /state\.ai\.mode = "uploaded-nofo"/);
   assert.match(script, /\$\("open-results-chat"\)\.addEventListener\("click", openExpandedChat\)/);
   assert.match(script, /\$\("result-assistant"\)\.classList\.remove\("hidden"\)/);
   assert.match(script, /\$\("result-assistant"\)\?\.classList\.add\("hidden"\)/);
@@ -172,6 +185,8 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(css, /\.filter-panel\s*\{[^}]*grid-area:\s*auto/s);
   assert.match(css, /\.filter-body\s*\{[^}]*overflow:\s*visible/s);
   assert.match(css, /\.results-column\s*\{[^}]*width:\s*100%/s);
+  assert.match(css, /\.toolbar-actions\s*\{[^}]*grid-template-columns:\s*minmax\(0, 1fr\)/s);
+  assert.match(css, /\.toolbar-actions \.button\s*\{[^}]*width:\s*100%/s);
   assert.doesNotMatch(css, /@media \(prefers-color-scheme:\s*dark\)/);
   assert.match(css, /:root\s*\{[^}]*color-scheme:\s*light/s);
   assert.match(css, /@media \(forced-colors:\s*active\)/);

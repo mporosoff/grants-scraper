@@ -6,7 +6,7 @@
 
 https://mporosoff.github.io/grants-scraper/
 
-The application is public and browser-only. Users do not install Python, create an account, choose a faculty record, upload grant files, or provide an API key merely to search.
+The application is public and browser-only. Users do not install Python, create an account, choose a faculty record, upload a file, or provide an API key merely to search. A NOFO/FOA PDF upload is an optional page-memory path for document chat.
 
 ## Architecture
 
@@ -79,15 +79,18 @@ for monitoring, and open or update an owner-facing GitHub issue.
 ## Cost boundary
 
 Keyword search, profile ranking, filtering, sorting, pagination, detail
-expansion, citation display, CSV/review export, CV parsing, and local labeling
-execute locally and make zero AI calls.
+expansion, citation display, CSV/review export, CV/NOFO parsing, catalog
+matching, and local labeling execute locally and make zero AI calls.
 
-AI refinement is explicit and bounded:
+AI use is explicit and bounded:
 
 - one call translates a research description into retrieval terms;
 - local search selects at most 32 candidates;
 - one call reranks those candidates into at most 12 matches; and
-- later chat calls receive at most the top 20 ordinary results or the current 12-record AI shortlist plus recent conversation.
+- result-chat calls receive at most the top 20 ordinary results or the current
+  12-record AI shortlist plus recent conversation; and
+- uploaded-notice chat calls receive a page-marked extract capped at 145,000
+  characters, optional matched public catalog metadata, and recent conversation.
 
 This avoids sending the full catalog to a model and avoids model cost for ordinary browsing.
 
@@ -135,8 +138,11 @@ boundary, not an institutional credential vault or a local copy of the
 funding catalog. Shared search URLs take precedence over saved profile and
 preference ranking until the user activates them.
 
-The AI shortlist and chat exist only in page memory. An API key is also
-tab-only by default. The user may explicitly save one key per provider in a
+The AI shortlist, chat, and any extracted uploaded-notice text exist only in
+page memory. The original uploaded PDF is not retained. Its bounded extracted
+text is sent directly to the selected provider only after the user asks a
+notice question. An API key is also tab-only by default. The user may explicitly
+save one key per provider in a
 separate `funding-finder.credentials.v1` local-storage record; the interface
 shows whether the key is entered, saved, loaded, or removed. A saved key is
 available to anyone using that browser profile, so it should not be used on a
@@ -203,7 +209,11 @@ Phase 1 through Phase 3 release verification covers:
 - verify typed search text has readable contrast;
 - verify the initial page contains no opportunity cards and that keywords,
   profile/CV context, and filters all feed the same “Find funding” action;
-- verify “Ask about these results” appears with the result set on mobile;
+- verify “Chat with your results” appears with the result set on mobile;
+- drag an OCR-readable NOFO PDF into the search box, verify the in-chat key
+  prompt, page-marked extraction, and matched save/calendar/source card;
+- repeat with a notice that has no catalog match and confirm document chat still
+  opens while related search results remain available;
 - upload a TXT CV, explicitly save the profile, reload, and confirm that the
   profile/CV extract/preferences return;
 - save a fake provider key, reload, confirm the interface reports it loaded,
@@ -236,8 +246,8 @@ Phase 1 through Phase 3 release verification covers:
   in `evaluation/inbox/`, and run the private report aggregator;
 - verify program-total funding does not affect per-award filtering or sorting;
 - run the deterministic OpenAI and Anthropic adapter contract tests; and
-- exercise refinement, ordinary-results chat, and a narrowing follow-up with
-  bounded mock provider responses.
+- exercise refinement, ordinary-results chat, uploaded-NOFO chat, and a
+  narrowing follow-up with bounded mock provider responses.
 
 Paid-provider smoke tests are useful before changing a model or prompt, but
 they are not the only way to verify the browser workflow.

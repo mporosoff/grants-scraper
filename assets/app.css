@@ -588,7 +588,7 @@ h1 {
 .profile-fields select,
 .provider-fields input,
 .provider-fields select,
-.toolbar-actions select,
+.toolbar-controls select,
 .chat-form textarea {
   width: 100%;
   color: var(--ink);
@@ -665,6 +665,9 @@ textarea:focus {
 }
 
 .results-toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
   align-items: flex-end;
   padding-bottom: 17px;
   border-bottom: 1px solid var(--line);
@@ -682,37 +685,48 @@ textarea:focus {
 }
 
 .toolbar-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  width: 100%;
+}
+
+.toolbar-actions .button {
+  width: 100%;
+  min-height: 44px;
+}
+
+.toolbar-lower-row {
   display: flex;
   align-items: flex-end;
-  gap: 8px;
-}
-
-.toolbar-export-actions {
-  display: grid;
-  gap: 8px;
-  min-width: 176px;
-}
-
-.toolbar-export-actions .button {
-  width: 100%;
+  justify-content: space-between;
+  gap: 18px;
+  min-width: 0;
 }
 
 .results-chat-launch {
   white-space: nowrap;
 }
 
-.toolbar-actions label {
+.toolbar-controls {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.toolbar-controls label {
   color: var(--muted);
   font-size: .72rem;
   font-weight: 750;
 }
 
-.toolbar-actions label span {
+.toolbar-controls label span {
   display: block;
   margin-bottom: 3px;
 }
 
-.toolbar-actions select {
+.toolbar-controls select {
   min-width: 155px;
   min-height: 42px;
   padding: 8px 28px 8px 10px;
@@ -1932,7 +1946,7 @@ textarea:focus {
   cursor: pointer;
 }
 
-.toolbar-actions .personalize-toggle > span {
+.toolbar-controls .personalize-toggle > span {
   margin: 0;
 }
 
@@ -2149,6 +2163,116 @@ textarea:focus {
   font-size: .78rem;
 }
 
+.nofo-chat-context {
+  margin: 10px 18px 12px;
+  padding: 13px 14px;
+  color: #344a64;
+  background: #f4f8fd;
+  border: 1px solid #cad9eb;
+  border-radius: 10px;
+}
+
+.nofo-context-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.nofo-context-heading p {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: .7rem;
+}
+
+.nofo-match-record {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px 16px;
+  align-items: center;
+  margin-top: 11px;
+  padding-top: 11px;
+  border-top: 1px solid #d8e3f0;
+}
+
+.nofo-match-record span,
+.nofo-match-record small {
+  display: block;
+  color: var(--muted);
+  font-size: .68rem;
+}
+
+.nofo-match-record strong {
+  display: block;
+  margin: 2px 0;
+  color: var(--navy);
+  font-size: .82rem;
+}
+
+.nofo-match-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px 10px;
+}
+
+.chat-key-prompt {
+  margin: 10px 18px 12px;
+  padding: 14px;
+  color: #344a64;
+  background: #fff8e8;
+  border: 1px solid #ead49f;
+  border-radius: 10px;
+}
+
+.chat-key-prompt > div:first-child p {
+  margin: 3px 0 10px;
+  color: #6d6147;
+  font-size: .72rem;
+}
+
+.chat-key-fields {
+  display: grid;
+  grid-template-columns: minmax(130px, .32fr) minmax(0, 1fr);
+  gap: 9px;
+}
+
+.chat-key-fields label,
+.chat-save-key {
+  color: #5f563f;
+  font-size: .7rem;
+  font-weight: 750;
+}
+
+.chat-key-fields select,
+.chat-key-fields input {
+  display: block;
+  width: 100%;
+  min-height: 40px;
+  margin-top: 4px;
+  padding: 7px 9px;
+  font-size: .78rem;
+}
+
+.chat-save-key {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 10px 0;
+}
+
+.chat-save-key input {
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  accent-color: var(--blue);
+}
+
+.chat-key-prompt .credential-status {
+  min-height: 0;
+  margin: 7px 0 0;
+}
+
 .suggestion-list {
   display: flex;
   flex-wrap: wrap;
@@ -2333,11 +2457,11 @@ footer p {
     align-items: stretch;
   }
 
-  .toolbar-actions label {
+  .toolbar-controls label {
     flex: 1;
   }
 
-  .toolbar-actions select {
+  .toolbar-controls select {
     min-width: 0;
   }
 
@@ -2609,7 +2733,7 @@ footer p {
 }
 
 .search-workflow .search-form {
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) auto;
   padding: 4px 7px;
   border-color: var(--line-strong);
   box-shadow: none;
@@ -2617,6 +2741,66 @@ footer p {
 
 .search-workflow .search-form:focus-within {
   box-shadow: 0 0 0 4px rgba(31, 100, 213, .12);
+}
+
+.nofo-drop-zone {
+  position: relative;
+  transition: background .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+
+.nofo-drop-zone.is-dragging {
+  background: #edf5ff;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 4px rgba(31, 100, 213, .16);
+}
+
+.nofo-upload-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 6px 12px;
+  color: var(--blue-dark);
+  font-size: .72rem;
+  line-height: 1.2;
+  background: var(--blue-soft);
+  border: 1px dashed #9ebce3;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.nofo-upload-button > span:first-child {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.nofo-upload-button strong,
+.nofo-upload-button small {
+  display: block;
+}
+
+.nofo-upload-button small {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: .62rem;
+  font-weight: 600;
+}
+
+.nofo-upload-button:hover {
+  background: #dceaff;
+  border-color: var(--blue);
+}
+
+.nofo-upload-status {
+  min-height: 18px;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: .7rem;
+  line-height: 1.4;
+}
+
+.nofo-upload-status.error {
+  color: var(--danger);
 }
 
 .search-workflow .quick-searches {
@@ -2838,7 +3022,8 @@ footer p {
   width: 100%;
 }
 
-.results-toolbar.search-not-started .toolbar-actions {
+.results-toolbar.search-not-started .toolbar-actions,
+.results-toolbar.search-not-started .toolbar-controls {
   display: none;
 }
 
@@ -2930,6 +3115,15 @@ footer p {
   .filter-body {
     max-height: none;
   }
+
+  .toolbar-lower-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .toolbar-controls {
+    justify-content: space-between;
+  }
 }
 
 @media (max-width: 540px) {
@@ -2956,6 +3150,22 @@ footer p {
 
   .search-workflow .search-form {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .nofo-upload-button {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .toolbar-controls {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .toolbar-controls select,
+  .toolbar-controls .personalize-toggle {
+    width: 100%;
+    max-width: none;
   }
 
   .find-button,
@@ -3216,6 +3426,8 @@ body.chat-expanded .result-assistant {
 
 body.chat-expanded .result-assistant .ai-heading,
 body.chat-expanded .result-assistant > .panel-copy,
+body.chat-expanded .result-assistant > .nofo-chat-context,
+body.chat-expanded .result-assistant > .chat-key-prompt,
 body.chat-expanded .result-assistant > .chat-privacy,
 body.chat-expanded .result-assistant .chat {
   width: 100%;
@@ -3324,8 +3536,26 @@ body.chat-expanded .chat-privacy {
   }
 
   body.chat-expanded .result-assistant > .panel-copy,
+  body.chat-expanded .result-assistant > .nofo-chat-context,
+  body.chat-expanded .result-assistant > .chat-key-prompt,
   body.chat-expanded .result-assistant > .chat-privacy {
     font-size: .7rem;
+  }
+
+  .nofo-context-heading {
+    flex-direction: column;
+  }
+
+  .nofo-match-record {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .nofo-match-actions {
+    justify-content: flex-start;
+  }
+
+  .chat-key-fields {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   body.chat-expanded .suggestion-list {
@@ -3346,6 +3576,14 @@ body.chat-expanded .chat-privacy {
     min-height: 46px;
     margin-top: 7px;
   }
+}
+
+body.chat-expanded .result-assistant.needs-chat-key {
+  overflow-y: auto;
+}
+
+body.chat-expanded .result-assistant.needs-chat-key .chat {
+  display: none;
 }
 
 /* Funding Finder intentionally keeps one consistent light theme, including when

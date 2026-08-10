@@ -29,6 +29,9 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         profile_js = (
             REPOSITORY_ROOT / "assets" / "profile.js"
         ).read_text(encoding="utf-8")
+        nofo_js = (
+            REPOSITORY_ROOT / "assets" / "nofo.js"
+        ).read_text(encoding="utf-8")
         review_js = (
             REPOSITORY_ROOT / "assets" / "review.js"
         ).read_text(encoding="utf-8")
@@ -43,6 +46,10 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         ).read_text(encoding="utf-8")
 
         self.assertIn('id="query"', explorer_html)
+        self.assertIn('id="nofo-drop-zone"', explorer_html)
+        self.assertIn('id="nofo-file"', explorer_html)
+        self.assertIn('id="nofo-chat-context"', explorer_html)
+        self.assertIn('id="chat-key-prompt"', explorer_html)
         self.assertIn('id="facet-discipline"', explorer_html)
         self.assertIn('id="facet-agency"', explorer_html)
         self.assertIn('id="flag-evidence"', explorer_html)
@@ -82,13 +89,13 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             '<script src="./data/opportunities.js?v=catalog-',
             explorer_html,
         )
-        release_version = "release-2026-08-06-v8"
+        release_version = "release-2026-08-10-v9"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={release_version}">',
             explorer_html,
         )
         for asset in (
-            "profile.js", "review.js", "ai-provider.js", "credentials.js",
+            "profile.js", "nofo.js", "review.js", "ai-provider.js", "credentials.js",
             "chat-ui.js", "saved.js", "preferences.js", "app.js",
         ):
             self.assertIn(
@@ -105,6 +112,8 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("const boost = newRelevantBoost", application_js)
         self.assertIn("match.newRelevant = boost > 0", application_js)
         self.assertIn("async function askResults", application_js)
+        self.assertIn("async function askNofo", application_js)
+        self.assertIn("async function openNofoFromFile", application_js)
         self.assertIn('$("open-results-chat").addEventListener("click", openExpandedChat)', application_js)
         self.assertIn('$("result-assistant").classList.remove("hidden")', application_js)
         self.assertIn('$("result-assistant")?.classList.add("hidden")', application_js)
@@ -121,6 +130,8 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         )
         self.assertIn("globalThis.FUNDING_AI.providerJson", application_js)
         self.assertIn("globalThis.FUNDING_PROFILE", profile_js)
+        self.assertIn("globalThis.FUNDING_NOFO", nofo_js)
+        self.assertIn("function matchCatalog", nofo_js)
         self.assertIn("funding-finder.profile.v1", profile_js)
         self.assertIn("funding-finder.feedback.v1", profile_js)
         self.assertIn("async function extractCv", profile_js)

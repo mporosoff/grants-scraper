@@ -1,6 +1,6 @@
 # Funding Finder — Product Plan
 
-**Status:** Phase 1 and 1.5 complete; Phase 2 engineering complete with its human pilot deferred; Phase 3 deployed with its first production evidence batch successful; unified search, result-aware chat, local personalization/saved opportunities, and monitored NSF/NYSERDA source ingestion implemented
+**Status:** Phase 1 and 1.5 complete; Phase 2 engineering complete with its human pilot deferred; Phase 3 deployed with its first production evidence batch successful; unified search, uploaded-NOFO chat, result-aware chat, local personalization/saved opportunities, and monitored NSF/NYSERDA source ingestion implemented
 
 **Next implementation phase:** Phase 3D — complete the returned-review and citation-landing dry run, then run the deferred multi-researcher pilot
 
@@ -10,7 +10,7 @@
 
 **Initial audience:** University of Rochester researchers, with a design that remains useful to any public user
 
-**Last updated:** July 27, 2026
+**Last updated:** August 10, 2026
 
 ---
 
@@ -20,10 +20,11 @@ Funding Finder is a public funding-opportunity search engine with an optional AI
 
 The base product should provide the useful parts of the [Duke Research Funding database](https://researchfunding.duke.edu/search-results)—a broad catalog, keyword search, filters, sorting, result details, and export—in a faster and more approachable interface. AI is not the database and is not required to browse it.
 
-The product answers two related questions:
+The product answers three related questions:
 
 1. **What funding opportunities are available?** Search the comprehensive catalog directly.
 2. **Which of these are most relevant to my work?** Let AI expand a research description, rerank a bounded candidate set, explain the matches, and answer follow-up questions about that shortlist.
+3. **What does this funding notice require?** Drop a NOFO/FOA PDF into the main search box, connect it to a matching catalog record when possible, and ask document-grounded questions with page references.
 
 The system must not make a model call for ordinary search. It must not hide the catalog behind an API key.
 
@@ -37,7 +38,7 @@ GitHub Pages is the only active product surface:
 
 https://mporosoff.github.io/grants-scraper/
 
-There are no accounts, installations, faculty profiles, or user-managed opportunity files. The retired server experiment remains available in Git history, not in the active product tree or CI.
+There are no accounts, installations, faculty profiles, or persistent user-managed opportunity files. An uploaded notice exists only in page memory. The retired server experiment remains available in Git history, not in the active product tree or CI.
 
 ### 2.2 Comprehensive catalog, not a curated shortlist
 
@@ -83,6 +84,7 @@ sustainable public ingestion path and health bounds are verified.
 Anyone can use, without an API key:
 
 - full-text keyword and opportunity-number search;
+- browser-local NOFO/FOA PDF parsing and catalog-record matching;
 - a one-click browse-all path when they do not yet have search terms;
 - open and forecasted status filters;
 - discipline, topic, agency, eligibility, and funding-instrument facets;
@@ -92,7 +94,7 @@ Anyone can use, without an API key:
 - relevance, deadline, posted-date, award, agency, and title sorting;
 - pagination and expandable record details;
 - a compact deadline/award/eligibility/contact overview with mailto POC links;
-- transparent “why this matched” reasons and side-by-side comparison;
+- side-by-side comparison and device-local saved opportunities;
 - per-opportunity and result-set calendar export;
 - one-click official FOA, agency-notice, or Grants.gov record links; and
 - CSV export of the complete current result set.
@@ -100,11 +102,12 @@ Anyone can use, without an API key:
 Search and filtering execute in the browser over the prebuilt index. They make zero AI calls and have no per-search infrastructure cost.
 
 The public page begins with no opportunity cards. One guided workflow combines
-keywords, optional profile/CV context, and optional filters; “Find funding” is
-the only search action. This prevents the catalog, profile search, and AI
-matching from appearing to be separate products. Profile/CV context and filters
-are stacked as full-width sections in that workflow. Expanded filters use the
-page scrollbar rather than a sticky nested scrolling pane.
+keywords, optional profile/CV context, and optional filters under “Find
+funding.” The same first step accepts a dropped or selected funding-notice PDF,
+which opens document chat and runs a catalog match without introducing a
+separate product surface. Profile/CV context and filters are stacked as
+full-width sections in that workflow. Expanded filters use the page scrollbar
+rather than a sticky nested scrolling pane.
 
 ### 2.4 AI is an optional first-class workflow
 
@@ -113,17 +116,19 @@ A user may choose OpenAI or Anthropic and enter one provider key. The same provi
 1. **Query expansion:** translate a natural-language research description into concrete search terms and synonyms.
 2. **Bounded reranking:** compare at most 32 locally retrieved candidates and return at most 12 grounded recommendations.
 3. **Chat with results:** answer questions over either the top 20 ordinary search results or the AI shortlist; connect every named opportunity back to its result card and official source; and focus the displayed list when explicitly requested.
+4. **Chat with an uploaded notice:** answer questions over a page-marked, bounded PDF extract; cite supporting page numbers; and compare against an automatically matched catalog record when available.
 
-AI settings sit inside that same workflow and become useful only after the
-catalog search has results. “Refine these results with AI” reranks the bounded
-candidate set, while “Chat with your results” appears with the result set on
-desktop and mobile. Chat can expand into a large in-page workspace without
-losing the current result state, uses readable limited-Markdown responses,
-shows a visible working state, and supports Enter-to-send with Shift+Enter for
-a new line. Provider responses receive a larger bounded output budget; if a
-provider still returns malformed or truncated JSON, the application retries
-once with a shorter-output instruction and then reports a plain-language error.
-Neither AI action is a separate search source.
+AI settings sit inside that same workflow. “Refine these results with AI”
+reranks the bounded candidate set, while “Chat with your results” appears with
+the result set on desktop and mobile. A dropped PDF opens “Chat with the NOFO”
+and, when no key is configured, presents the provider/key form inside that chat
+workspace. Chat can expand without losing the current result state, uses
+readable limited-Markdown responses, shows a visible working state, and
+supports Enter-to-send with Shift+Enter for a new line. Provider responses
+receive a larger bounded output budget; if a provider still returns malformed
+or truncated JSON, the application retries once with a shorter-output
+instruction and then reports a plain-language error. None of these AI actions
+is a separate search source.
 
 AI output is advisory. It must:
 
@@ -165,8 +170,11 @@ survives reload even when the user chooses not to save profile or CV content.
 Shared search URLs still begin with the public base ranking until the user
 explicitly turns personalization on for that search.
 
-The AI shortlist and chat remain page-memory only and disappear on reload. An
-API key is tab-only by default, but the user may explicitly save one key per
+The AI shortlist, chat, and extracted uploaded-notice text remain page-memory
+only and disappear on reload. The uploaded file itself is never stored; its
+bounded text is sent to the selected provider only after the user asks a notice
+question. An API key is tab-only by default, but the user may explicitly save
+one key per
 provider in a separate device-local credential record. The interface confirms
 whether the current key is entered, saved, loaded, or removed and warns against
 saving a key on a shared browser. Keys are never written to the profile,
@@ -314,9 +322,21 @@ catalog or a shared institutional record.
 ### Chat with ordinary results
 
 1. Run any keyword or filtered catalog search.
-2. Use “Ask about these results,” shown with the returned result set.
+2. Use “Chat with your results,” shown with the returned result set.
 3. Ask about the top 20 current results without first running AI refinement.
 4. Let chat narrow the displayed results only when explicitly requested.
+
+### Chat with an uploaded NOFO
+
+1. Drag a NOFO/FOA PDF into the main search box or choose it from the upload
+   control.
+2. Review the automatically matched catalog card when an opportunity number or
+   distinctive title is found.
+3. Use the card to save the opportunity, add its deadline to a calendar, or
+   open the official source.
+4. If no key is configured, enter and optionally save one in the chat prompt.
+5. Ask document-grounded questions and verify the returned page references in
+   the original notice.
 
 ### Verify an actual FOA
 
@@ -801,6 +821,7 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | `match_explorer.html` | Public search and refinement interface |
 | `assets/app.js` | Browser search, cited source evidence, review/export, profile ranking, AI matching, and chat |
 | `assets/profile.js` | Device-local profile/feedback boundary and browser CV extraction |
+| `assets/nofo.js` | Browser-only NOFO PDF extraction, opportunity-number detection, and catalog matching |
 | `assets/review.js` | Device-local Phase 3 deployment-review boundary and privacy-safe handoff package |
 | `assets/ai-provider.js` | Testable OpenAI and Anthropic browser adapters |
 | `assets/app.css` | Responsive visual design |

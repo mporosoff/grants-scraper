@@ -1,6 +1,6 @@
 # Funding Finder
 
-A public funding-opportunity search engine with optional AI refinement.
+A public funding-opportunity search engine with optional AI refinement and browser-based NOFO chat.
 
 Open the application:
 
@@ -11,19 +11,19 @@ https://mporosoff.github.io/grants-scraper/
 Anyone can search the comprehensive catalog without an account or API key. The browser provides:
 
 - full-text search across current Grants.gov opportunities;
+- drag-and-drop NOFO/FOA PDF chat with automatic catalog-record matching;
 - one-click browsing of the complete current catalog without search terms;
 - filters for status, discipline, topic, agency, eligibility, instrument,
   deadline, award size, cited-FOA availability, and special requirements;
 - relevance and field-based sorting;
 - one-click official FOA, agency-notice, or Grants.gov record actions;
 - four-field deadline/award/eligibility/contact overviews with email POC links;
-- “why this matched” explanations, side-by-side comparison, calendar and CSV
-  export;
+- side-by-side comparison, saved opportunities, calendar export, and CSV export;
 - expandable page/section-cited FOA evidence and pagination;
 - visible catalog source, size, generated time, and freshness;
 - public RSS/Atom feeds for the full catalog and individual topics/source
   types; and
-- automatic dark-mode and Windows high-contrast support.
+- a consistent light theme and Windows high-contrast support.
 
 The page initially shows no opportunities. One guided workflow combines a
 topic, optional profile/CV context, and optional filters under a single “Find
@@ -38,9 +38,17 @@ OpenAI or Anthropic key to:
 2. rerank at most 32 retrieved candidates into a shortlist of at most 12; and
 3. ask grounded follow-up questions that can further narrow the shortlist.
 
-“Ask about these results” appears with the returned result set and can answer
+“Chat with your results” appears with the returned result set and can answer
 questions over the top 20 ordinary search results without requiring a prior AI
 rerank. It uses the same responsive result workflow on desktop and mobile.
+
+A user can also drop or choose a NOFO, FOA, or other funding-notice PDF in the
+main search box. Funding Finder extracts page-marked text in the browser, tries
+to match the notice to an existing opportunity number or distinctive catalog
+title, shows the matched card with save/calendar/source actions, and opens a
+document-grounded “Chat with the NOFO” workspace. If no key is configured, the
+workspace prompts for one without losing the uploaded document. A missing
+catalog match does not prevent document chat.
 
 When the scheduled Phase 3 pipeline has analyzed an official notice, the
 result card shows document version/change status and compact cited facts for
@@ -49,12 +57,15 @@ eligibility/review excerpts, and application components. Each fact opens the
 exact PDF page or HTML section. “Ask AI about this FOA” focuses chat on a
 single result; AI may cite only evidence identifiers that the browser supplied.
 
-The original CV file is never retained. A bounded CV excerpt is sent only when
-the user enables that option and explicitly runs AI refinement or chat. An API
+The original CV or uploaded notice file is never retained. A bounded CV excerpt
+is sent only when the user enables that option and explicitly runs AI
+refinement or chat. An API
 key is tab-only unless the user explicitly saves it on that device. Saved keys
 are isolated from profiles and reviewer data, have a visible saved/loaded
 status and removal control, and never enter GitHub, URLs, exports, or an
-application database. The shortlist and chat remain page-memory only.
+application database. Extracted uploaded-notice text, the shortlist, and chat
+remain page-memory only; notice text is sent only when the user asks a question
+about that document.
 
 Match-quality controls include `not relevant`, `partial`, `useful`, `strong`,
 and `needs verification` labels with reason codes. After three graded ratings,
@@ -153,6 +164,7 @@ support it.
 | `match_explorer.html` | Public search and AI-refinement interface |
 | `assets/app.js` | Search, cited source evidence, review/export, profile ranking, AI matching, and chat |
 | `assets/profile.js` | Local profile/feedback storage and CV extraction |
+| `assets/nofo.js` | Browser-only NOFO PDF extraction, opportunity-number detection, and catalog matching |
 | `assets/review.js` | Local Phase 3 deployment-review storage and privacy-safe handoff |
 | `assets/credentials.js` | Explicit device-local provider-key save/load/clear boundary |
 | `assets/ai-provider.js` | OpenAI and Anthropic request adapters |
