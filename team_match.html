@@ -35,7 +35,6 @@
   .pi-toggle .dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--line-strong);flex:none;}
   .pi-toggle.on{background:var(--blue-soft);border-color:var(--blue);color:var(--blue-dark);font-weight:600;}
   .pi-toggle.on .dot{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px #fff;}
-  .pi-toggle.you{border-style:dashed;}
   .pi-toggle[disabled]{opacity:.4;cursor:not-allowed;}
   .toolrow{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:14px;}
   .toolrow .search{flex:1;min-width:220px;}
@@ -79,15 +78,15 @@
 <body>
 <div class="wrap">
   <header class="page">
-    <span class="internal-tag">Internal · Porosoff group</span>
+    <span class="internal-tag">Internal · UR ChemE Department</span>
     <h1>ChemE faculty ↔ funding — collaboration finder</h1>
-    <p>Pick yourself and up to three colleagues. The tool finds funding calls that fit at least two of you — matching on program topics, not just the wording of the notice, so broad agency announcements and omnibus solicitations (DOE Office of Science, NASA ROSES, DoD/ONR BAAs) surface too, clearly flagged so you can verify fit.</p>
+    <p>Pick 2–4 faculty. The tool finds funding calls that fit at least two of them — matching on program topics, not just the wording of the notice, so broad agency announcements and omnibus solicitations (DOE Office of Science, NASA ROSES, DoD/ONR BAAs) surface too, clearly flagged so fit can be verified.</p>
     <p class="meta-line" id="meta-line">Loading…</p>
   </header>
 
   <div class="panel">
     <h2>Your team</h2>
-    <p class="hint" id="team-hint">Pick 2–4 faculty. You (Porosoff) are selected — add colleagues to find shared opportunities.</p>
+    <p class="hint" id="team-hint">Pick 2–4 faculty to see funding calls that fit the group.</p>
     <div class="pi-grid" id="pi-grid"></div>
     <div class="toolrow">
       <div class="search"><input id="filter" type="search" placeholder="Filter results by title, agency, or keyword…" autocomplete="off" /></div>
@@ -115,7 +114,6 @@
   var M = globalThis.FACULTY_MATCHES || null;
   var catalog = (globalThis.GRANT_CATALOG && globalThis.GRANT_CATALOG.opportunities) || [];
   var MAX = 4;
-  var YOU = "Marc D. Porosoff";
 
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
@@ -208,7 +206,7 @@
 
     if (selected.length < 2) {
       $("count").textContent = "";
-      $("view").innerHTML = '<div class="empty">Pick at least one colleague above to see the calls you could pursue together.</div>';
+      $("view").innerHTML = '<div class="empty">Pick at least two faculty above to see the calls they could pursue together.</div>';
       return;
     }
     var all = buildShared().filter(function (e) { return matchesQuery(e, q); });
@@ -294,8 +292,8 @@
     $("team-hint").textContent = $("dept-toggle").checked
       ? "Showing every pair/group of faculty across the department. Uncheck to pick a specific team."
       : (selected.length < 2
-          ? "Pick 2–4 faculty. Add colleagues to find shared opportunities."
-          : "Showing calls that fit 2+ of your " + selected.length + " selected faculty. Pick up to " + MAX + ".");
+          ? "Pick 2–4 faculty to see funding calls that fit the group."
+          : "Showing calls that fit 2+ of the " + selected.length + " selected faculty. Pick up to " + MAX + ".");
   }
   function btnId(n) { return n.replace(/[^a-z0-9]/gi, ""); }
 
@@ -321,14 +319,13 @@
     names.forEach(function (n) {
       var btn = document.createElement("button");
       btn.type = "button";
-      btn.className = "pi-toggle" + (n === YOU ? " you" : "");
+      btn.className = "pi-toggle";
       btn.id = "t_" + btnId(n);
-      btn.innerHTML = '<span class="dot"></span>' + esc(n === YOU ? last(n) + " (you)" : n);
+      btn.innerHTML = '<span class="dot"></span>' + esc(n);
       btn.addEventListener("click", function () { toggle(n); });
       grid.appendChild(btn);
     });
 
-    if (names.indexOf(YOU) !== -1) selected.push(YOU);
     $("filter").addEventListener("input", refresh);
     $("dept-toggle").addEventListener("change", function () { updateToggles(); refresh(); });
     updateToggles();

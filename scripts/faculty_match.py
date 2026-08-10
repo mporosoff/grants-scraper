@@ -143,11 +143,112 @@ which will been more also may can under new toward towards related general
 foundation opportunity opportunities proposal proposals faculty investigator
 investigators""".split())
 
-# Optional hand-curated key phrases per PI (override the auto OpenAlex topics).
-# Leave a name out to use their topics. Example:
-#   FACULTY_KEYTERMS = {"Marc D. Porosoff": ["CO2 hydrogenation", "tungsten carbide",
-#       "reverse water-gas shift", "syngas to olefins", "heterogeneous catalysis"]}
-FACULTY_KEYTERMS: dict[str, list[str]] = {}
+# Hand-curated research interests per PI, verified against each person's
+# University of Rochester ChemE faculty page and recent publications. These are
+# authoritative: they override OpenAlex's auto topics, which mis-resolved several
+# people (a computer-scientist "David Foster", a fungal biologist "Astrid Muller",
+# a perovskite "Gang Fan") and attached over-broad tags. Phrases are specific on
+# purpose so a match rests on real overlap, never a generic word.
+FACULTY_KEYTERMS: dict[str, list[str]] = {
+    "Mitchell Anthamatten": [
+        "liquid crystal polymers", "two-photon polymerization",
+        "shape-memory polymers", "stimuli-responsive polymers",
+        "polymer synthesis", "cellulose nanocrystal thin films"],
+    "Yasemin Basdogan": [
+        "computational chemistry", "machine learning for materials discovery",
+        "CO2 separation membranes", "electrocatalytic oxidation",
+        "molecular simulation", "solvation modeling"],
+    "Pooja Rajendra Bhalode": [
+        "process systems engineering", "multiscale molecules-to-systems modeling",
+        "physics and data-driven hybrid modeling",
+        "product-process lifecycle optimization", "sustainable process design",
+        "particulate and process dynamics"],
+    "Siddharth Deshpande": [
+        "computational heterogeneous catalysis",
+        "machine learning for catalyst screening", "oxygenate electrooxidation",
+        "tungsten carbide catalysts", "propane dehydrogenation",
+        "first-principles reaction modeling"],
+    "Gang Fan": [
+        "bio-inspired catalysis", "microbial and synthetic biology",
+        "biodegradable polymers and plastic upcycling", "CO2 electroreduction",
+        "bioelectrochemistry", "DNA-directed catalyst assembly"],
+    "David G. Foster": [
+        "transport phenomena", "computational fluid dynamics",
+        "microfluidic cell capture", "nanoparticle coatings",
+        "reactor modeling", "electrodeposition"],
+    "Melodie I. Lawton": [
+        "shape-memory polymers", "polymeric composites", "biomaterials",
+        "polymer degradation", "controlled drug delivery",
+        "structure-property relationships"],
+    "Darren Lipomi": [
+        "organic and flexible electronics", "conducting polymers",
+        "stretchable semiconductors", "mechanical properties of organic electronics",
+        "electrotactile haptics", "bioelectronic interfaces"],
+    "Allison J. Lopatkin": [
+        "antibiotic resistance", "plasmid dynamics and horizontal gene transfer",
+        "microbial systems biology", "bacterial metabolism",
+        "antimicrobial resistance in the environment", "quantitative microbiology"],
+    "Astrid M. Muller": [
+        "earth-abundant electrocatalysts", "electrocatalytic water oxidation",
+        "CO2 reduction to syngas", "PFAS electrochemical destruction",
+        "laser-ablation nanoparticle synthesis",
+        "sustainable electrochemical manufacturing"],
+    "Marc D. Porosoff": [
+        "heterogeneous catalysis", "CO2 hydrogenation and utilization",
+        "reverse water-gas shift", "tungsten carbide catalysts",
+        "syngas-to-olefins", "Fischer-Tropsch synthesis"],
+    "Alexander A. Shestopalov": [
+        "surface functionalization and molecular monolayers",
+        "soft lithography and contact printing", "micro- and nanofabrication",
+        "atomic layer deposition", "organic thin-film coatings",
+        "self-assembled monolayers"],
+    "Wyatt E. Tenhaeff": [
+        "lithium metal batteries", "solid electrolyte interphase",
+        "battery interfacial engineering", "polymer thin-film electrolytes",
+        "energy storage materials", "battery separators"],
+    "Matthew Z. Yates": [
+        "functional polymer coatings", "sorbent polymers for chemical sensing",
+        "waveguide-enhanced Raman sensing", "electrochemical sensors",
+        "bimetallic catalyst particles", "colloids and emulsions"],
+}
+
+# Curated program-topic domains per PI, drawn from the catalog's controlled
+# ``topic_areas`` vocabulary. Chosen conservatively and only where central to the
+# person's work -- a broad umbrella tag (Energy, Environmental science, AI/ML) is
+# assigned only when it is genuinely a core area, never inferred from one stray
+# keyword. These drive niche-topic and broad-solicitation matching.
+FACULTY_DOMAINS: dict[str, list[str]] = {
+    "Mitchell Anthamatten": ["Materials science", "Manufacturing"],
+    "Yasemin Basdogan": [
+        "Catalysis and reaction engineering", "Separations and membranes",
+        "Materials science", "Carbon management",
+        "Artificial intelligence and machine learning", "Energy"],
+    "Pooja Rajendra Bhalode": [
+        "Manufacturing", "Artificial intelligence and machine learning"],
+    "Siddharth Deshpande": [
+        "Catalysis and reaction engineering", "Energy", "Materials science",
+        "Artificial intelligence and machine learning"],
+    "Gang Fan": [
+        "Biology and biotechnology", "Catalysis and reaction engineering",
+        "Carbon management", "Materials science", "Environmental science"],
+    "David G. Foster": ["Materials science", "Biology and biotechnology"],
+    "Melodie I. Lawton": ["Materials science", "Biology and biotechnology"],
+    "Darren Lipomi": ["Materials science", "Manufacturing"],
+    "Allison J. Lopatkin": [
+        "Biology and biotechnology", "Infectious disease", "Public health",
+        "Environmental science"],
+    "Astrid M. Muller": [
+        "Catalysis and reaction engineering", "Energy", "Carbon management",
+        "Environmental science", "Materials science"],
+    "Marc D. Porosoff": [
+        "Catalysis and reaction engineering", "Carbon management", "Energy",
+        "Materials science"],
+    "Alexander A. Shestopalov": ["Materials science", "Manufacturing"],
+    "Wyatt E. Tenhaeff": ["Energy", "Materials science", "Manufacturing"],
+    "Matthew Z. Yates": [
+        "Materials science", "Separations and membranes",
+        "Catalysis and reaction engineering"],
+}
 
 
 def _load_catalog(path: str) -> list[dict]:
@@ -172,13 +273,19 @@ def _phrase_hit(sig: list[str], opp_words: set[str],
     'learning', 'systems') that carry no distinguishing signal; they are stripped
     before the count so an OpenAlex topic label like 'Machine Learning in
     Materials Science' can't match hundreds of unrelated notices."""
+    orig_len = len(sig)
     if common:
         sig = [w for w in sig if w not in common]
     if not sig:
         return False
     present = sum(1 for w in sig if w in opp_words)
-    if len(sig) == 1:
-        return present >= 1
+    if orig_len == 1:
+        return present >= 1          # a genuine single-word key term
+    # A multi-word phrase must keep >=2 distinctive words, so it can't collapse to
+    # one lingering moderately-common word (e.g. 'sustainable process design' ->
+    # 'sustainable') and match hundreds of unrelated notices.
+    if len(sig) < 2:
+        return False
     need = max(2, (3 * len(sig) + 4) // 5)   # ceil(0.6 * len), floored at 2
     return present >= need
 
@@ -272,6 +379,14 @@ def _pi_domains(profile: dict) -> list[str]:
             if any(k in text for k in kws)]
 
 
+def _domains_for(name: str, profile: dict) -> list[str]:
+    """Curated program-topic domains if we have them (the norm), otherwise fall
+    back to the auto lexicon for any faculty not yet hand-curated."""
+    if name in FACULTY_DOMAINS:
+        return list(FACULTY_DOMAINS[name])
+    return _pi_domains(profile)
+
+
 def _is_broad(opp: dict) -> bool:
     blob = (opp.get("title") or "") + " " + (opp.get("description") or "")[:400]
     return bool(_BROAD_RE.search(blob))
@@ -339,23 +454,26 @@ def match_to_catalog(profiles: list[dict], catalog_path: str, out_path: str,
     niche = _niche_topics(catalog)
     common = _common_words(catalog)
 
+    # Roster = the full FACULTY list, so hand-curated people with no OpenAlex
+    # profile (Bhalode, Lawton) are still included. Curated key terms / domains
+    # take precedence; OpenAlex only supplies resolved_name / works_count.
+    prof_by_name = {p.get("name"): p for p in profiles if p.get("name")}
     faculty_meta: dict[str, dict] = {}
     faculty_terms: dict[str, list[str]] = {}
     faculty_doms: dict[str, set] = {}
-    for p in profiles:
-        if p.get("error"):
-            continue
+    for name in FACULTY:
+        p = prof_by_name.get(name) or {"name": name}
         terms = _key_terms(p)
-        doms = set(_pi_domains(p))
+        doms = set(_domains_for(name, p))
         if not terms and not doms:
             continue
-        name = p["name"]
+        resolved = name if p.get("error") else (p.get("resolved_name") or name)
         faculty_terms[name] = terms
         faculty_doms[name] = doms
         faculty_meta[name] = {
-            "resolved_name": p.get("resolved_name") or name,
-            "openalex_id": p.get("openalex_id"),
-            "works_count": p.get("works_count"),
+            "resolved_name": resolved,
+            "openalex_id": None if p.get("error") else p.get("openalex_id"),
+            "works_count": None if p.get("error") else p.get("works_count"),
             "key_terms": terms,
             "domains": sorted(doms),
         }

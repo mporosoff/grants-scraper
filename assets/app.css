@@ -472,15 +472,22 @@ h1 {
 
 .status-filter {
   margin: 0;
-  padding: 15px 18px;
+  /* Match the 14px vertical rhythm and 18px inset of the .facet summary headers
+     below, so the header row lines up as you scan down the panel. */
+  padding: 14px 18px;
   border: 0;
   border-bottom: 1px solid var(--line);
 }
 
 .status-filter legend {
-  margin-bottom: 9px;
+  /* padding:0 removes the legend's default left offset so the text sits on the
+     same 18px edge as the facet headers; font-size matches .facet summary. */
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 10px;
   color: var(--navy);
-  font-size: .8rem;
+  font-size: .82rem;
   font-weight: 850;
 }
 
