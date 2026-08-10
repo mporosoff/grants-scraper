@@ -27,6 +27,7 @@
   <link rel="canonical" href="https://mporosoff.github.io/grants-scraper/">
   <link rel="icon" type="image/svg+xml" href="./assets/icons/funding-finder.svg">
   <link rel="stylesheet" href="./assets/app.css?v=release-2026-08-10-v10">
+  <link rel="stylesheet" href="./assets/site-nav.css?v=navigation-v1">
 </head>
 <body>
   <a class="skip-link" href="#results">Skip to results</a>
@@ -39,9 +40,18 @@
         <small>Search current funding opportunities</small>
       </span>
     </a>
-    <div class="catalog-pill" id="catalog-pill" aria-live="polite">
-      <span class="status-dot" aria-hidden="true"></span>
-      Loading catalog...
+    <div class="header-actions">
+      <nav class="site-nav" id="primary-navigation" aria-label="Primary navigation">
+        <a href="./match_explorer.html" aria-current="page">Find funding</a>
+        <a href="./team_match.html">Team matcher</a>
+      </nav>
+      <div class="catalog-pill" id="catalog-pill" aria-live="polite">
+        <span class="status-dot" aria-hidden="true"></span>
+        Loading catalog...
+      </div>
+      <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu">
+        <span class="nav-toggle-lines" aria-hidden="true"></span>
+      </button>
     </div>
   </header>
 
@@ -545,6 +555,7 @@
   <script src="./assets/saved.js?v=release-2026-08-10-v10"></script>
   <script src="./assets/preferences.js?v=release-2026-08-10-v10"></script>
   <script src="./assets/search-query.js?v=release-2026-08-10-v10"></script>
+  <script src="./assets/site-nav.js?v=navigation-v1"></script>
   <script src="./assets/app.js?v=release-2026-08-10-v10"></script>
   <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "209e9983c16e4747947cf621792fe833"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
