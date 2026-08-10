@@ -122,6 +122,20 @@
     return String(record.deadline_note || record.close_date_note || "");
   }
 
+  function listingDate(record) {
+    for (const field of ["posted_date", "source_first_seen_date"]) {
+      const value = String(record[field] || "");
+      if (/^\d{4}-\d{2}-\d{2}$/.test(value)) return value;
+    }
+    return "";
+  }
+
+  function listingDateValue(value) {
+    return /^\d{4}-\d{2}-\d{2}$/.test(String(value || ""))
+      ? Number(String(value).replace(/-/g, ""))
+      : 0;
+  }
+
   function buildMatches(
     profile,
     catalogData,
@@ -225,6 +239,7 @@
         agency: record.agency || "",
         url: bestUrl(record),
         deadline: deadlineText(record),
+        listing_date: listingDate(record),
         tier: strong ? "strong" : "broad",
         terms: hitTerms,
         shared_topics: sharedTopics,
@@ -236,7 +251,7 @@
     });
 
     matches.sort((left, right) =>
-      (left.tier === "strong" ? 0 : 1) - (right.tier === "strong" ? 0 : 1)
+      listingDateValue(right.listing_date) - listingDateValue(left.listing_date)
       || right.score - left.score
       || left.title.localeCompare(right.title),
     );

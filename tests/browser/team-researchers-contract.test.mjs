@@ -144,6 +144,54 @@ test("builds opportunity matches from an external researcher's keywords", () => 
   assert.ok(partnerMatches.some(match => sharedIds.has(match.id)));
 });
 
+test("ranks collaboration matches by listing date instead of broad or specific tier", () => {
+  const { query, team } = loadApis();
+  const records = [
+    {
+      opportunity_id: "older-specific",
+      title: "Specialized catalyst initiative",
+      description: "Research on a specialized catalyst platform.",
+      topic_areas: ["Catalysis and reaction engineering"],
+      disciplines: ["Engineering"],
+      posted_date: "2026-02-01",
+    },
+    {
+      opportunity_id: "newer-broad",
+      title: "Broad Agency Announcement for Energy",
+      description: "Open research announcement across the energy portfolio.",
+      topic_areas: ["Energy"],
+      disciplines: ["Engineering"],
+      source_first_seen_date: "2026-08-09",
+    },
+  ];
+  const catalog = { opportunities: records, search_index: buildIndex(records, query) };
+  const matches = team.buildMatches(
+    {
+      name: "Date-first Researcher",
+      keywords: ["specialized catalyst"],
+      domains: ["Energy"],
+    },
+    catalog,
+    query,
+    ["Catalysis and reaction engineering"],
+    null,
+  );
+
+  assert.deepEqual(Array.from(matches, match => match.id), ["newer-broad", "older-specific"]);
+  assert.equal(matches[0].tier, "broad");
+  assert.equal(matches[0].listing_date, "2026-08-09");
+  assert.equal(matches[1].tier, "strong");
+  assert.equal(matches[1].listing_date, "2026-02-01");
+});
+
+test("presents one newest-first collaboration list without broad-specific labels", () => {
+  assert.match(teamPage, /Newest shared opportunities/);
+  assert.match(teamPage, /newest listings first/);
+  assert.match(teamPage, /Listed /);
+  assert.doesNotMatch(teamPage, /broad · verify fit/);
+  assert.doesNotMatch(teamPage, />specific<\/span>/);
+});
+
 test("uses the same PFAS and fuzzy retrieval for faculty and external profiles", () => {
   const { query, retrieval, team } = loadApis();
   const records = [

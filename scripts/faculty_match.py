@@ -252,7 +252,8 @@ FACULTY_DOMAINS: dict[str, list[str]] = {
 
 
 def _load_catalog(path: str) -> list[dict]:
-    text = open(path, encoding="utf-8").read()
+    with open(path, encoding="utf-8") as catalog_file:
+        text = catalog_file.read()
     start = text.index("{")
     obj = json.loads(text[start:].rstrip().rstrip(";"))
     return obj.get("opportunities", obj.get("records", []))
@@ -439,16 +440,27 @@ def _deadline_text(r: dict) -> str:
     return str(r.get("deadline_note") or r.get("close_date_note") or "")
 
 
+def _listing_date(r: dict) -> str:
+    """The date an opportunity was listed by its source or first seen here."""
+    for key in ("posted_date", "source_first_seen_date"):
+        value = str(r.get(key) or "")
+        if re.match(r"^\d{4}-\d{2}-\d{2}$", value):
+            return value
+    return ""
+
+
+def _listing_date_value(value: str) -> int:
+    return int(value.replace("-", "")) if re.match(r"^\d{4}-\d{2}-\d{2}$", value or "") else 0
+
+
 def match_to_catalog(profiles: list[dict], catalog_path: str, out_path: str,
                      top_n: int = 25) -> dict:
-    """Match every PI against the catalog on two tiers and emit a per-PI index
-    the team page uses to compute mutual interests for any chosen subset.
+    """Match every PI against the catalog and emit a per-PI index the team page
+    uses to compute mutual interests for any chosen subset.
 
-    STRONG  -- a distinctive key-phrase appears in the notice, OR the PI shares
-               a *niche* (specific) program topic with the call. High precision.
-    BROAD   -- the call is a broad/open solicitation (BAA, DOE Office of Science,
-               NASA ROSES...) and the PI shares any program topic with it. These
-               are flagged so the reader verifies fit against the full notice.
+    Distinctive phrase/niche-topic matches and open-solicitation topic matches
+    are both eligible. The signal type remains as provenance, but it does not
+    create separate result categories or outrank a newer listing.
     """
     catalog = _load_catalog(catalog_path)
     niche = _niche_topics(catalog)
@@ -500,6 +512,7 @@ def match_to_catalog(profiles: list[dict], catalog_path: str, out_path: str,
         display = {
             "id": oid, "title": title, "agency": opp.get("agency") or "",
             "url": _best_url(opp), "deadline": _deadline_text(opp),
+            "listing_date": _listing_date(opp),
         }
         for name, sigs in term_sig.items():
             doms = faculty_doms[name]
@@ -521,10 +534,11 @@ def match_to_catalog(profiles: list[dict], catalog_path: str, out_path: str,
 
     for name in pi_matches:
         pi_matches[name].sort(key=lambda m: (
-            0 if m["tier"] == "strong" else 1, -m["score"], (m["title"] or "").lower()))
+            -_listing_date_value(m["listing_date"]),
+            -m["score"], (m["title"] or "").lower()))
 
-    # Department-wide overview: opportunities where 2+ faculty overlap, ranked so
-    # the ones with the most *strong* fits (then most PIs) surface first.
+    # Department-wide overview: opportunities where 2+ faculty overlap, newest
+    # listings first. Fit counts and scores only break same-date ties.
     idx = {m["id"]: m for lst in pi_matches.values() for m in lst}
     groups = []
     for oid, members in per_opp.items():
@@ -537,17 +551,19 @@ def match_to_catalog(profiles: list[dict], catalog_path: str, out_path: str,
             team.append({"name": name, "tier": tier, "score": score,
                          "matched_terms": mm.get("terms") or [],
                          "shared_topics": mm.get("shared_topics") or []})
-        team.sort(key=lambda t: (0 if t["tier"] == "strong" else 1, -t["score"]))
-        strong_n = sum(1 for t in team if t["tier"] == "strong")
+        team.sort(key=lambda t: -t["score"])
         groups.append({
             "opportunity_id": oid, "title": d.get("title") or oid,
             "agency": d.get("agency") or "", "url": d.get("url") or "",
             "deadline": d.get("deadline") or "",
-            "strong_count": strong_n, "team_size": len(team),
+            "listing_date": d.get("listing_date") or "",
+            "team_size": len(team),
             "total_score": sum(t["score"] for t in team),
             "suggested_team": team[:12],
         })
-    groups.sort(key=lambda g: (-g["strong_count"], -g["team_size"], -g["total_score"]))
+    groups.sort(key=lambda g: (
+        -_listing_date_value(g["listing_date"]), -g["team_size"],
+        -g["total_score"], (g["title"] or "").lower()))
 
     out = {
         "catalog_size": len(catalog),
