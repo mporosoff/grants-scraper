@@ -1,6 +1,11 @@
 (() => {
   "use strict";
 
+  // PFAS notices are often written around the problem being addressed instead
+  // of naming an individual compound. These terms keep searches useful against
+  // catalogs that describe water contamination and remediation but omit PFAS.
+  const PFAS_CONCEPT = "persistent contaminant contamination pollution remediation groundwater drinking wastewater water treatment purification";
+
   // Keep this deliberately conservative. Ambiguous shorthand (for example,
   // AD, AM, or AR) creates worse search results than leaving it literal.
   const QUERY_ALIASES = Object.freeze({
@@ -37,7 +42,41 @@
     adhd: "attention deficit",
     ckd: "kidney",
     copd: "pulmonary",
+    pfas: PFAS_CONCEPT,
+    pfoa: PFAS_CONCEPT,
+    pfos: PFAS_CONCEPT,
+    pfhx: PFAS_CONCEPT,
+    pfna: PFAS_CONCEPT,
+    pfbs: PFAS_CONCEPT,
+    pfba: PFAS_CONCEPT,
+    pfhxa: PFAS_CONCEPT,
+    pfpea: PFAS_CONCEPT,
+    pfhpa: PFAS_CONCEPT,
+    pfda: PFAS_CONCEPT,
+    pfuna: PFAS_CONCEPT,
+    pfdoa: PFAS_CONCEPT,
+    pfca: PFAS_CONCEPT,
+    pfsa: PFAS_CONCEPT,
+    fosa: PFAS_CONCEPT,
+    "hfpo-da": PFAS_CONCEPT,
+    afff: PFAS_CONCEPT,
+    perfluoroalkyl: PFAS_CONCEPT,
+    polyfluoroalkyl: PFAS_CONCEPT,
+    perfluorinat: PFAS_CONCEPT,
+    polyfluorinat: PFAS_CONCEPT,
+    perfluorooctanoic: PFAS_CONCEPT,
+    perfluorooctane: PFAS_CONCEPT,
+    fluorochemical: PFAS_CONCEPT,
+    fluorosurfactant: PFAS_CONCEPT,
+    forever: PFAS_CONCEPT,
   });
+
+  // Always add environmental context for this family. AFFF, for example, can
+  // occur literally in an unrelated notice even though it commonly refers to
+  // PFAS-containing aqueous film-forming foam.
+  const ALWAYS_EXPAND_ALIASES = new Set(
+    Object.keys(QUERY_ALIASES).filter(term => QUERY_ALIASES[term] === PFAS_CONCEPT),
+  );
 
   const STOP_WORDS = new Set([
     "a", "about", "after", "all", "also", "an", "and", "any", "application",
@@ -79,7 +118,7 @@
     directTerms.forEach(term => {
       // Literal matches are preferable to broader long-form expansions. The
       // glossary is a fallback for abbreviations absent from this catalog.
-      if (hasIndexedTerm(term)) return;
+      if (hasIndexedTerm(term) && !ALWAYS_EXPAND_ALIASES.has(term)) return;
       const expansion = QUERY_ALIASES[term];
       if (!expansion) return;
       tokenize(expansion).forEach(expanded => {

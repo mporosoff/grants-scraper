@@ -53,6 +53,54 @@ test("prefers an indexed literal abbreviation over broadening it", () => {
   );
 });
 
+test("recognizes PFAS families and falls back to water remediation language", () => {
+  const api = loadApi();
+  const forms = [
+    "PFAS",
+    "PFOA",
+    "PFOS",
+    "PFHxS",
+    "PFNA",
+    "PFBS",
+    "PFBA",
+    "PFHxA",
+    "PFPeA",
+    "PFHpA",
+    "PFDA",
+    "PFUnA",
+    "PFDoA",
+    "PFCA",
+    "PFSA",
+    "FOSA",
+    "HFPO-DA",
+    "AFFF",
+    "perfluoroalkyl substances",
+    "polyfluoroalkyl substances",
+    "perfluorinated compounds",
+    "polyfluorinated compounds",
+    "perfluorooctanoic acid",
+    "perfluorooctane sulfonate",
+    "fluorochemicals",
+    "fluorosurfactants",
+    "forever chemicals",
+  ];
+
+  for (const form of forms) {
+    const terms = termWeights(api, form);
+    assert.equal(terms.remediation, 0.86, form);
+    assert.equal(terms.groundwater, 0.86, form);
+    assert.equal(terms.wastewater, 0.86, form);
+    assert.equal(terms.purification, 0.86, form);
+  }
+
+  const indexedAfff = Object.fromEntries(
+    api.expandTerms("AFFF", term => term === "afff")
+      .map(({ term, weight }) => [term, weight]),
+  );
+  assert.equal(indexedAfff.afff, 1);
+  assert.equal(indexedAfff.remediation, 0.86);
+});
+
 test("does not expand short ambiguous terms", () => {
   const api = loadApi();
   for (const term of ["ad", "am", "ar", "ms"]) {

@@ -11,6 +11,11 @@ from __future__ import annotations
 from .build_catalog import tokenize
 
 
+PFAS_CONCEPT = (
+    "persistent contaminant contamination pollution remediation groundwater "
+    "drinking wastewater water treatment purification"
+)
+
 QUERY_ALIASES: dict[str, str] = {
     "co2": "carbon dioxide",
     "ccs": "carbon capture",
@@ -45,6 +50,37 @@ QUERY_ALIASES: dict[str, str] = {
     "adhd": "attention deficit",
     "ckd": "kidney",
     "copd": "pulmonary",
+    "pfas": PFAS_CONCEPT,
+    "pfoa": PFAS_CONCEPT,
+    "pfos": PFAS_CONCEPT,
+    "pfhx": PFAS_CONCEPT,
+    "pfna": PFAS_CONCEPT,
+    "pfbs": PFAS_CONCEPT,
+    "pfba": PFAS_CONCEPT,
+    "pfhxa": PFAS_CONCEPT,
+    "pfpea": PFAS_CONCEPT,
+    "pfhpa": PFAS_CONCEPT,
+    "pfda": PFAS_CONCEPT,
+    "pfuna": PFAS_CONCEPT,
+    "pfdoa": PFAS_CONCEPT,
+    "pfca": PFAS_CONCEPT,
+    "pfsa": PFAS_CONCEPT,
+    "fosa": PFAS_CONCEPT,
+    "hfpo-da": PFAS_CONCEPT,
+    "afff": PFAS_CONCEPT,
+    "perfluoroalkyl": PFAS_CONCEPT,
+    "polyfluoroalkyl": PFAS_CONCEPT,
+    "perfluorinat": PFAS_CONCEPT,
+    "polyfluorinat": PFAS_CONCEPT,
+    "perfluorooctanoic": PFAS_CONCEPT,
+    "perfluorooctane": PFAS_CONCEPT,
+    "fluorochemical": PFAS_CONCEPT,
+    "fluorosurfactant": PFAS_CONCEPT,
+    "forever": PFAS_CONCEPT,
+}
+
+ALWAYS_EXPAND_ALIASES = {
+    term for term, expansion in QUERY_ALIASES.items() if expansion == PFAS_CONCEPT
 }
 
 
@@ -56,7 +92,7 @@ def expand_query_terms(
     direct_terms = list(dict.fromkeys(tokenize(value)))
     weighted_terms = {term: 1.0 for term in direct_terms}
     for term in direct_terms:
-        if postings and term in postings:
+        if postings and term in postings and term not in ALWAYS_EXPAND_ALIASES:
             continue
         expansion = QUERY_ALIASES.get(term)
         if not expansion:

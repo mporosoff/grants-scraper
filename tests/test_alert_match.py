@@ -128,6 +128,63 @@ class MatcherTests(unittest.TestCase):
             ["literal"],
         )
 
+    def test_pfas_forms_find_water_pollution_remediation(self):
+        remediation = _base(
+            opportunity_id="pfas-remediation",
+            title="Persistent contaminant remediation in groundwater",
+            description=(
+                "Pollution treatment and purification for drinking water and "
+                "wastewater contamination."
+            ),
+        )
+        broad_water = _base(
+            opportunity_id="broad-water",
+            title="Water systems planning",
+            description="Planning resilient water distribution infrastructure.",
+        )
+        unrelated = _base(
+            opportunity_id="unrelated",
+            title="Arts education fellowship",
+            description="Training for museum educators.",
+        )
+        catalog = make_catalog([broad_water, unrelated, remediation])
+
+        forms = (
+            "PFAS",
+            "PFOA",
+            "PFOS",
+            "PFHxS",
+            "PFNA",
+            "PFBS",
+            "PFBA",
+            "PFHxA",
+            "PFPeA",
+            "PFHpA",
+            "PFDA",
+            "PFUnA",
+            "PFDoA",
+            "PFCA",
+            "PFSA",
+            "FOSA",
+            "HFPO-DA",
+            "AFFF",
+            "per- and polyfluoroalkyl substances",
+            "perfluorinated compounds",
+            "perfluorooctanoic acid",
+            "perfluorooctane sulfonate",
+            "fluorochemicals",
+            "forever chemicals",
+        )
+        for query in forms:
+            with self.subTest(query=query):
+                results = search_catalog(catalog, query, as_of=self.as_of)
+                self.assertTrue(results)
+                self.assertEqual(results[0]["opportunity_id"], "pfas-remediation")
+                self.assertNotIn(
+                    "unrelated",
+                    [item["opportunity_id"] for item in results],
+                )
+
     def test_new_relevant_announcement_outranks_stronger_old_match(self):
         old = _base(
             opportunity_id="old",
