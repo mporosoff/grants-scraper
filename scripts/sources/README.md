@@ -17,8 +17,8 @@ generated catalog.
   reported. Most sources can republish a filtered last-healthy snapshot;
   sources that cannot prove their rows are current can opt out and publish
   zero. Expired cached records are always removed.
-- **Degradation is visible.** The scheduled job keeps healthy/last-known-good
-  data available but opens or updates an owner-facing GitHub issue when an
+- **Degradation is visible.** The scheduled job publishes each source's safe
+  lifecycle result and opens or updates an owner-facing GitHub issue when an
   enabled source fails, becomes unhealthy, or fails post-merge validation.
 - **Fail closed.** Records need an official URL and plausible dates, source
   counts must remain within health bounds, and the full merged catalog is

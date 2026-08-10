@@ -66,9 +66,10 @@ due dates and NYSERDA opportunities through the same normalized schema and
 search index. NYSERDA uses the next open application round and retains later
 round and concept-paper dates. Each enabled source has
 currentness/actionability gates, plausible-count bounds, atomic replacement,
-and a committed last-known-good snapshot. Degradation keeps safe current data
-available but exits visibly and opens or updates an owner-facing GitHub issue.
-UR InfoReady is a disabled shell pending a stable permissioned route.
+and a committed per-source cache. Most degraded sources retain only safe,
+current snapshot rows; stricter sources publish zero when currentness cannot be
+verified. Degradation exits visibly and opens or updates an owner-facing GitHub
+issue. UR InfoReady is a disabled shell pending a stable permissioned route.
 
 <!-- catalog-summary:start -->
 The August 10, 2026 build contains 1,492 open or current forecasted funding
@@ -829,7 +830,7 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | `data/opportunities.js` | Generated catalog, facets, and BM25 index |
 | `data/opportunity_enrichment.json` | Compact official-detail cache for incremental refresh |
 | `data/document_evidence.json` | Compact document hash/version, citations, extracted facts, and review-queue cache |
-| `data/source_records.json` | Last-known-good external-source snapshots and first-seen dates |
+| `data/source_records.json` | Per-source records, first-seen dates, and refresh diagnostics |
 | `scripts/build_catalog.py` | Complete XML ingestion, normalization, validation, and index build |
 | `scripts/enrich_catalog.py` | Official detail enrichment, evidence reconciliation, and FOA selection |
 | `scripts/extract_document_evidence.py` | Bounded official-notice retrieval, deterministic extraction, versioning, and citations |

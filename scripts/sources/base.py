@@ -314,8 +314,8 @@ class SourceAdapter:
     source_type: str = "Other"
     #: gate. Adapters stay off until implemented and verified.
     enabled: bool = False
-    #: source health bounds. A refresh returning a count outside these is
-    #: treated as unhealthy, so the merge keeps the last-known-good snapshot.
+    #: Source health bounds. A refresh returning a count outside these is
+    #: treated as unhealthy and follows ``retain_on_failure`` below.
     min_records: int = 1
     max_records: int = 2000
     #: Some public sources block cloud-runner IPs. When positive, a failed live

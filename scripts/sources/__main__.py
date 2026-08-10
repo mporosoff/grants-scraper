@@ -92,7 +92,8 @@ def cmd_merge(args):
     ):
         print(
             "\nOne or more enabled sources or the merged catalog degraded. "
-            "Healthy records and last-known-good snapshots were retained."
+            "Healthy records and permitted filtered snapshots were retained; "
+            "fail-closed sources published zero."
         )
         raise SystemExit(2)
 
