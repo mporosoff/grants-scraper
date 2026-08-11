@@ -909,6 +909,13 @@ textarea:focus {
   overflow-wrap: anywhere;
 }
 
+.listed-date {
+  color: #315b8d;
+  font-size: .72rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
 .result-card h3 {
   margin-bottom: 6px;
   color: var(--navy);

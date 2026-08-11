@@ -1707,6 +1707,7 @@
       && record.document_evidence_status === "current",
     );
     const compared = state.compareIds.has(id);
+    const listedDate = record.posted_date || record.source_first_seen_date || "";
 
     return `<article class="result-card${assessment ? " ai-match" : ""}" data-opportunity-id="${escapeAttribute(id)}" tabindex="-1">
       <div class="card-topline">
@@ -1714,6 +1715,7 @@
         <span class="badge ${record.status === "posted" ? "open" : "forecasted"}">${record.status === "posted" ? "Open" : "Forecasted"}</span>
         ${assessment ? `<span class="badge ai">AI shortlist</span>` : ""}
         ${candidateReview && !assessment ? `<span class="badge candidate">Retrieved candidate</span>` : ""}
+        ${listedDate ? `<span class="listed-date">Listed ${escapeHtml(formatDate(listedDate))}</span>` : ""}
         <span class="opportunity-number">${escapeHtml(record.opportunity_number || record.opportunity_id || "")}</span>
         <button type="button" class="save-button${state.savedIds.has(id) ? " saved" : ""}" data-save="${escapeAttribute(id)}" aria-pressed="${state.savedIds.has(id)}" title="${state.savedIds.has(id) ? "Saved on this device — select to remove" : "Save this opportunity to view later"}">${state.savedIds.has(id) ? "★ Saved" : "☆ Save"}</button>
       </div>

@@ -101,6 +101,9 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(script, /function exportCalendar/);
   assert.match(script, /function renderComparePanel/);
   assert.match(script, /Program contact/);
+  assert.match(script, /const listedDate = record\.posted_date \|\| record\.source_first_seen_date \|\| ""/);
+  assert.match(script, /class="listed-date">Listed/);
+  assert.match(css, /\.listed-date/);
   assert.match(script, /function programContactAction/);
   assert.match(script, /Show full description &amp; details/);
   assert.match(script, /data-chat-record=.*?>Ask AI/);
