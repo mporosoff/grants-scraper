@@ -3,10 +3,30 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="An internal UR ChemE tool for finding funding opportunities that fit department faculty and saved external collaborators." />
+<meta name="theme-color" content="#12263f" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="UR ChemE Faculty Pairing" />
+<meta property="og:title" content="Faculty × Funding | Collaboration Finder" />
+<meta property="og:description" content="Build UR ChemE research teams around funding opportunities that fit multiple faculty members." />
+<meta property="og:url" content="https://mporosoff.github.io/grants-scraper/team_match.html" />
+<meta property="og:image" content="https://mporosoff.github.io/grants-scraper/assets/social/faculty-pairing-preview.jpg" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Faculty and funding collaboration finder for UR ChemE" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Faculty × Funding | Collaboration Finder" />
+<meta name="twitter:description" content="Build UR ChemE research teams around funding opportunities that fit multiple faculty members." />
+<meta name="twitter:image" content="https://mporosoff.github.io/grants-scraper/assets/social/faculty-pairing-preview.jpg" />
+<meta name="twitter:image:alt" content="Faculty and funding collaboration finder for UR ChemE" />
 <meta http-equiv="Content-Security-Policy"
       content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'" />
 <meta name="robots" content="noindex, nofollow" />
 <title>ChemE faculty ↔ funding — collaboration finder (internal)</title>
+<link rel="canonical" href="https://mporosoff.github.io/grants-scraper/team_match.html" />
+<link rel="icon" type="image/svg+xml" href="./assets/icons/faculty-pairing.svg" />
+<link rel="stylesheet" href="./assets/site-nav.css?v=navigation-v2" />
 <style>
   :root{
     --navy:#12263f;--navy-2:#1d3b5d;--blue:#1f64d5;--blue-dark:#174ca4;--blue-soft:#eaf2ff;
@@ -36,18 +56,49 @@
   .pi-toggle.on{background:var(--blue-soft);border-color:var(--blue);color:var(--blue-dark);font-weight:600;}
   .pi-toggle.on .dot{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px #fff;}
   .pi-toggle[disabled]{opacity:.4;cursor:not-allowed;}
+  .pi-entry{display:inline-flex;align-items:center;gap:4px;}
+  .pi-toggle.external{border-style:dashed;background:#f2fbf7;}
+  .pi-toggle.external .dot{border-color:#5aa88a;background:#d7f2e7;}
+  .pi-toggle.external.on .dot{background:var(--success);border-color:var(--success);}
+  .pi-toggle.add-researcher{border-style:dashed;border-color:#8ab2e8;background:var(--blue-soft);color:var(--blue-dark);font-weight:700;}
+  .pi-toggle.add-researcher .dot{display:grid;place-items:center;border:0;background:var(--blue);color:#fff;font-size:.9rem;line-height:1;}
+  .pi-edit{display:grid;place-items:center;width:30px;height:30px;border:1px solid var(--line-strong);border-radius:50%;background:var(--surface);color:var(--blue-dark);font:inherit;cursor:pointer;}
+  .pi-edit:hover{border-color:var(--blue);background:var(--blue-soft);}
+  .pi-edit[disabled]{opacity:.4;cursor:not-allowed;}
+  .external-status{margin:9px 2px 0;color:var(--muted);font-size:.78rem;}
+  .external-status.error{color:#9b2735;}
+  .researcher-editor{margin:14px 0 2px;padding:16px;border:1px solid #bed2eb;border-radius:12px;background:#f7faff;}
+  .researcher-editor[hidden]{display:none;}
+  .researcher-editor h3{margin:0 0 3px;color:var(--navy);font-size:1rem;}
+  .researcher-editor > p{margin:0 0 13px;color:var(--muted);font-size:.8rem;}
+  .researcher-fields{display:grid;grid-template-columns:minmax(180px,.75fr) minmax(280px,1.6fr);gap:12px;}
+  .researcher-fields label{display:grid;gap:5px;color:var(--navy);font-size:.8rem;font-weight:700;}
+  .researcher-fields input,.researcher-fields textarea{width:100%;padding:9px 11px;border:1px solid var(--line-strong);border-radius:9px;background:#fff;color:var(--ink);font:inherit;font-weight:400;}
+  .researcher-fields textarea{resize:vertical;min-height:76px;}
+  .field-note{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:.73rem;font-weight:400;}
+  .researcher-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:13px;}
+  .researcher-actions button{border:1px solid var(--line-strong);border-radius:9px;padding:8px 13px;background:#fff;color:var(--ink);font:inherit;font-size:.82rem;font-weight:700;cursor:pointer;}
+  .researcher-actions .save-researcher{border-color:var(--blue);background:var(--blue);color:#fff;}
+  .researcher-actions .delete-researcher{margin-left:auto;border-color:#e0aab1;color:#9b2735;background:#fff6f7;}
+  .editor-message{min-height:1.2em;margin:8px 0 0;color:#9b2735;font-size:.78rem;}
   .toolrow{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:14px;}
   .toolrow .search{flex:1;min-width:220px;}
   .toolrow input[type=search]{width:100%;padding:10px 13px;font:inherit;color:var(--ink);background:var(--surface-alt);border:1px solid var(--line-strong);border-radius:10px;}
+  .linkbtn{background:none;border:none;color:var(--blue-dark);font:inherit;font-size:.84rem;cursor:pointer;padding:6px 4px;text-decoration:underline;}
   .deptbar{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted);}
 
+  .selected-terms{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px;}
+  .st-card{background:var(--blue-soft);border:1px solid #cfe0fb;border-radius:12px;padding:9px 13px;font-size:.8rem;max-width:100%;}
+  .st-card .who{font-weight:700;color:var(--navy);}
+  .st-card .terms{color:var(--blue-dark);margin-top:2px;font-size:.75rem;}
+  .st-card .summary{color:var(--muted);margin-top:5px;font-size:.75rem;line-height:1.4;max-width:560px;}
   .themes{margin:16px 0 4px;}
-  .themes .themes-head{font-size:.75rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:0 2px 8px;}
+  .themes:empty{display:none;}
+  .themes-head{font-size:.75rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:0 2px 8px;}
   .theme-row{display:flex;flex-wrap:wrap;gap:8px;}
   .theme-chip{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:6px 13px;font:inherit;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .12s;border:1px solid;}
   .theme-chip.core{background:var(--blue-soft);border-color:#cfe0fb;color:var(--blue-dark);}
   .theme-chip.bridge{background:var(--purple-soft);border-color:#ddd0f2;color:var(--purple);}
-  .theme-chip .mark{font-size:.9rem;line-height:1;}
   .theme-chip.off{background:var(--surface-alt);border-color:var(--line);color:var(--muted);font-weight:500;text-decoration:line-through;}
   .theme-note{margin:8px 2px 0;color:var(--muted);font-size:.76rem;}
 
@@ -55,68 +106,138 @@
   .section-label{margin:22px 2px 10px;font-size:.75rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
 
   .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 18px;margin-bottom:12px;}
-  .card.broadcard{border-left:4px solid var(--gold);}
+  .card.broad-card{border-left:4px solid var(--gold);}
   .card h3{margin:0 0 4px;font-size:1.02rem;line-height:1.35;}
   .card h3 a{text-decoration:none;}
   .card h3 a:hover{text-decoration:underline;}
   .agency{margin:0;color:var(--muted);font-size:.84rem;}
+  .listed{margin:5px 0 0;font-size:.8rem;color:var(--blue-dark);font-weight:700;}
   .deadline{margin:4px 0 0;font-size:.8rem;color:var(--warning);}
-  .deadline .soon{font-weight:700;}
   .badges{float:right;margin-left:10px;text-align:right;}
-  .badge{display:inline-block;border-radius:999px;padding:3px 11px;font-size:.72rem;font-weight:700;white-space:nowrap;margin-left:6px;}
-  .badge.fit{background:var(--blue-soft);color:var(--blue-dark);border:1px solid #cfe0fb;margin-left:0;}
-  .badge.new{background:var(--success);color:#fff;border:1px solid var(--success);}
-  .badge.broad{background:var(--warning-soft);color:var(--warning);border:1px solid #f0d9a8;}
+  .badge{display:inline-block;border-radius:999px;padding:3px 11px;font-size:.72rem;font-weight:700;white-space:nowrap;}
+  .badge.fit{background:var(--blue-soft);color:var(--blue-dark);border:1px solid #cfe0fb;}
+  .badge.external{background:var(--success-soft);color:var(--success);border:1px solid #bfe6d5;margin-left:6px;}
+  .badge.new{background:var(--success);color:#fff;border:1px solid var(--success);margin-left:6px;}
+  .badge.broad{background:var(--warning-soft);color:var(--warning);border:1px solid #f0d9a8;margin-left:6px;}
+  .closing-soon{font-weight:800;}
+  .matched-themes{margin:9px 0 0;color:var(--purple);font-size:.76rem;font-weight:650;}
   .team{margin-top:11px;display:flex;flex-wrap:wrap;gap:8px;}
   .pi{background:var(--surface-alt);border:1px solid var(--line);border-radius:10px;padding:8px 11px;font-size:.82rem;max-width:100%;}
-  .pi.strong{border-color:#bfe6d5;background:var(--success-soft);}
   .pi .name{font-weight:700;color:var(--navy);}
   .pi .why{margin-top:2px;color:var(--muted);font-size:.73rem;}
   .empty{background:var(--surface);border:1px dashed var(--line-strong);border-radius:var(--radius);padding:32px 22px;text-align:center;color:var(--muted);}
   .empty code{background:var(--surface-alt);padding:2px 6px;border-radius:6px;}
   footer.note{margin-top:26px;color:var(--muted);font-size:.8rem;text-align:center;}
   .hide{display:none !important;}
+  @media (max-width:700px){.researcher-fields{grid-template-columns:1fr}.researcher-actions .delete-researcher{margin-left:0}}
 </style>
 </head>
 <body>
+<header class="site-header">
+  <a class="brand" href="./match_explorer.html" aria-label="Funding Finder home">
+    <span class="brand-mark" aria-hidden="true">F</span>
+    <span>
+      <strong>Funding Finder</strong>
+      <small>Research funding tools</small>
+    </span>
+  </a>
+  <div class="header-actions">
+    <nav class="site-nav" id="primary-navigation" aria-label="Primary navigation">
+      <a href="./match_explorer.html">Find funding</a>
+      <a href="./team_match.html" aria-current="page">Team matcher</a>
+    </nav>
+    <span class="header-context-pill">Internal tool</span>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu">
+      <span class="nav-toggle-lines" aria-hidden="true"></span>
+    </button>
+  </div>
+</header>
 <div class="wrap">
   <header class="page">
     <span class="internal-tag">Internal · UR ChemE Department</span>
-    <h1>ChemE faculty ↔ funding — collaboration finder</h1>
-    <p>Pick 2–4 faculty. The tool first works out the team's linked research themes from the members' overlapping and complementary interests, then scores the entire live catalog against those themes — so broad agency announcements and omnibus calls (DOE Office of Science, NASA ROSES, DoD/ONR BAAs) surface too, flagged for verification. Newest relevant calls rank first.</p>
+    <h1>Research team ↔ funding — collaboration finder</h1>
+    <p>Pick 2–4 department faculty or saved external collaborators. The page computes their shared and complementary research themes, then scores the entire current catalog with graded research, theme, topic, agency-scope, and recency signals. Every result must fit everyone selected.</p>
     <p class="meta-line" id="meta-line">Loading…</p>
   </header>
 
   <div class="panel">
     <h2>Your team</h2>
-    <p class="hint" id="team-hint">Pick 2–4 faculty to see funding calls that fit the group.</p>
-    <div class="pi-grid" id="pi-grid"></div>
+    <p class="hint" id="team-hint">Pick 2–4 researchers to see funding calls that fit every person in the group.</p>
+    <div class="pi-grid" id="pi-grid">
+      <button class="pi-toggle add-researcher" id="add-researcher" type="button" aria-expanded="false" aria-controls="external-researcher-form">
+        <span class="dot" aria-hidden="true">+</span>
+        Add researcher
+      </button>
+    </div>
+    <p class="external-status" id="external-status" aria-live="polite">External researchers are saved only in this browser.</p>
+    <form class="researcher-editor" id="external-researcher-form" hidden>
+      <h3 id="external-editor-heading">Add an external researcher</h3>
+      <p>Add a name and 3–8 specific research keywords; about five usually gives the best balance.</p>
+      <div class="researcher-fields">
+        <label for="external-name">
+          Researcher name
+          <input id="external-name" type="text" maxlength="80" autocomplete="off" placeholder="Example: Ada Lovelace" required />
+        </label>
+        <label for="external-keywords">
+          Research keywords
+          <textarea id="external-keywords" maxlength="520" placeholder="Example: carbon capture, heterogeneous catalysis, membrane separations, CO2 conversion, electrochemistry" required></textarea>
+          <span class="field-note"><span>Separate keywords with commas or new lines.</span><span id="external-keyword-count">0 keywords</span></span>
+        </label>
+      </div>
+      <div class="researcher-actions">
+        <button class="save-researcher" type="submit">Save researcher</button>
+        <button id="cancel-external" type="button">Cancel</button>
+        <button class="delete-researcher" id="delete-external" type="button" hidden>Delete researcher</button>
+      </div>
+      <p class="editor-message" id="external-editor-message" aria-live="polite"></p>
+    </form>
     <div class="toolrow">
       <div class="search"><input id="filter" type="search" placeholder="Filter results by title, agency, or keyword…" autocomplete="off" /></div>
       <div class="deptbar">
-        <label><input type="checkbox" id="dept-toggle" /> Department-wide overview (all faculty)</label>
+        <label><input type="checkbox" id="dept-toggle" /> Department-wide overview (department faculty only)</label>
       </div>
     </div>
-    <div class="themes" id="themes"></div>
   </div>
 
+  <div id="selected-terms" class="selected-terms"></div>
+  <div id="themes" class="themes"></div>
   <p class="count" id="count"></p>
   <div id="view"></div>
 
   <footer class="note">
-    Faculty interests are curated in <code>scripts/faculty_match.py</code>; matching runs live in this page against the nightly-refreshed catalog, so results stay current automatically. Regenerate <code>data/faculty_matches.js</code> only when faculty or interests change. “Broad — verify fit” marks open-scope solicitations included because the sponsor funds the team's areas; always read the full notice.
+    Faculty interests and the hand-checked agency scope map are maintained in <code>scripts/faculty_match.py</code>. Matching runs live against the nightly-refreshed catalog, so new calls appear without manually rebuilding faculty matches. “Broad — verify fit” marks open-scope solicitations supported by the sponsor map. External researchers remain stored only in this browser. This internal tool remains marked no-index.
   </footer>
 </div>
 
 <script src="data/opportunities.js"></script>
-<script src="data/faculty_matches.js"></script>
+<script src="data/faculty_matches.js?v=graded-team-themes-v1"></script>
+<script src="assets/search-query.js?v=release-2026-08-10-v13"></script>
+<script src="assets/search-retrieval.js?v=release-2026-08-10-v13"></script>
+<script src="assets/team-researchers.js?v=graded-team-themes-v1"></script>
+<script src="assets/team-matcher.js?v=graded-team-themes-v1"></script>
+<script src="assets/site-nav.js?v=navigation-v2"></script>
 <script>
 (function () {
   "use strict";
   var $ = function (id) { return document.getElementById(id); };
   var M = globalThis.FACULTY_MATCHES || null;
-  var rawCatalog = (globalThis.GRANT_CATALOG && globalThis.GRANT_CATALOG.opportunities) || [];
+  var catalogData = globalThis.GRANT_CATALOG || {};
+  var catalog = catalogData.opportunities || [];
+  var TEAM_API = globalThis.FUNDING_TEAM_RESEARCHERS || null;
+  var SEARCH_API = globalThis.FUNDING_SEARCH_QUERY || null;
+  var RETRIEVAL_API = globalThis.FUNDING_RETRIEVAL || null;
+  var MATCHER_API = globalThis.FUNDING_TEAM_MATCHER || null;
+  var MATCH_ENGINE = null;
+  var SEARCH_ENGINE = null;
+  try {
+    SEARCH_ENGINE = RETRIEVAL_API && SEARCH_API
+      ? RETRIEVAL_API.create(catalogData, SEARCH_API)
+      : null;
+  } catch (_error) {
+    SEARCH_ENGINE = null;
+  }
   var MAX = 4;
+  var MAX_EXTERNAL = (TEAM_API && TEAM_API.MAX_EXTERNAL) || 4;
 
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
@@ -125,418 +246,280 @@
   }
   function last(name) { return String(name || "").split(" ").pop(); }
 
-  // ------------------------------------------------------------------ //
-  // Catalog preprocessing: tokenized text, document frequencies, dates. //
-  // ------------------------------------------------------------------ //
-  var STOP = {};
-  ("the and for with from this that are was into over out per via research " +
-   "program programs grant grants funding award awards project projects " +
-   "support science sciences engineering technology technologies national " +
-   "university universities institute department departments studies study " +
-   "development applications application advancing advanced approaches " +
-   "approach based using their which will been more also may can under new " +
-   "toward towards related general foundation opportunity opportunities " +
-   "proposal proposals faculty investigator investigators")
-    .split(/\s+/).forEach(function (w) { STOP[w] = 1; });
-  var TOKEN_RE = /[a-z][a-z0-9\-]{2,}/g;
-
-  var TODAY = new Date();
-  function daysSince(iso) {
-    if (!iso || !/^\d{4}-\d{2}-\d{2}/.test(iso)) return null;
-    var d = new Date(iso.slice(0, 10) + "T00:00:00Z");
-    return Math.floor((TODAY - d) / 86400000);
-  }
-
-  var BROAD_RE = null;
-  try { BROAD_RE = new RegExp((M && M.broad_pattern) || "broad agency announcement", "i"); }
-  catch (e) { BROAD_RE = /broad agency announcement/i; }
-
-  var records = [];           // preprocessed records
-  var wordDF = {};            // token -> #records containing it
-  var topicDF = {};           // topic tag -> #records carrying it
-  var N = 0;
-
-  function bestUrl(r) {
-    var u = r.funding_opportunity_url || r.primary_document_url || r.detail_page || r.url || "";
-    return /^https?:\/\//i.test(u) ? u : "";
-  }
-  function deadlineText(r) {
-    if (r.close_date && /^\d{4}-\d{2}-\d{2}$/.test(r.close_date)) return "Closes " + r.close_date;
-    return String(r.deadline_note || r.close_date_note || "");
-  }
-
-  // State Department public-diplomacy programs (embassy workshops, exchange
-  // initiatives) fund event organizers, not research teams -- they are never
-  // collaboration targets for this tool, yet their verbose priority lists
-  // (clean energy, supply chains...) make them chronic false positives.
-  var DIPLOMACY_RE = /u\.s\. mission|embassy|consulate|public diplomacy/i;
-
-  function preprocess() {
-    rawCatalog.forEach(function (r) {
-      var closeAge = daysSince(r.close_date);
-      if (closeAge !== null && closeAge > 0 && !r.rolling) return; // already closed
-      if (DIPLOMACY_RE.test((r.agency || "") + " " + (r.title || ""))) return;
-      var text = ((r.title || "") + " " + (r.description || "") + " " +
-        (r.topic_areas || []).join(" ") + " " + (r.disciplines || []).join(" ")).toLowerCase();
-      var words = {};
-      var m = text.match(TOKEN_RE) || [];
-      for (var i = 0; i < m.length; i++) if (!STOP[m[i]]) words[m[i]] = 1;
-      var topics = {};
-      (r.topic_areas || []).forEach(function (t) { topics[t] = 1; });
-      records.push({
-        r: r, text: text, words: words, topics: topics,
-        agency: (r.agency || "").toLowerCase(),
-        isBroad: BROAD_RE.test((r.title || "") + " " + (r.description || "").slice(0, 400)),
-        postedAge: daysSince(r.posted_date),
-        updatedAge: daysSince(r.last_updated),
-        closeIn: (function () {
-          var a = daysSince(r.close_date);
-          return a === null ? null : -a;   // days until close
-        })(),
-      });
+  // Catalog lookup (for a richer description if id still present); the match data
+  // already carries title/agency/url/deadline so the page renders even if the
+  // catalog has since refreshed and dropped an id.
+  var byId = {};
+  catalog.forEach(function (r) {
+    [r.opportunity_id, r.opportunity_number, r.title].forEach(function (k) {
+      if (k && !(k in byId)) byId[k] = r;
     });
-    N = records.length;
-    records.forEach(function (R) {
-      for (var w in R.words) wordDF[w] = (wordDF[w] || 0) + 1;
-      for (var t in R.topics) topicDF[t] = (topicDF[t] || 0) + 1;
-    });
-  }
-
-  // Distinctiveness weight: words in most notices carry almost no signal.
-  function idf(w) {
-    var f = (wordDF[w] || 0) / (N || 1);
-    if (f <= 0.005) return 1.0;
-    if (f <= 0.02) return 0.8;
-    if (f <= 0.05) return 0.5;
-    if (f <= 0.10) return 0.25;
-    return 0.1;
-  }
-  function topicWeight(t) {
-    var f = (topicDF[t] || 0) / (N || 1);
-    return f <= 0.03 ? 2.0 : 0.4;   // niche program topic vs. umbrella tag
-  }
-  function isNicheTopic(t) { return (topicDF[t] || 0) / (N || 1) <= 0.03; }
-
-  // ------------------------------------------------------------------ //
-  // Per-PI graded scoring against one record (memoized per PI).        //
-  // ------------------------------------------------------------------ //
-  var faculty = (M && M.faculty) || {};
-  var names = Object.keys(faculty).sort();
-  var LEX = (M && M.theme_lexicon) || {};
-  var BRIDGES = (M && M.bridge_themes) || [];
-  var SCOPES = ((M && M.agency_scope) || []).map(function (s) {
-    var re = null;
-    try { re = new RegExp(s.pattern, "i"); } catch (e) { re = null; }
-    return { label: s.label, re: re, domains: s.domains || [] };
   });
 
-  var sigCache = {};   // PI name -> [{term, sig:[words]}]
-  function sigsFor(name) {
-    if (sigCache[name]) return sigCache[name];
-    var out = (faculty[name].key_terms || []).map(function (term) {
-      var toks = (term.toLowerCase().match(TOKEN_RE) || []).filter(function (w) { return !STOP[w]; });
-      return { term: term, sig: toks };
-    });
-    sigCache[name] = out;
-    return out;
-  }
-
-  var WEAK = 1.3;
-  var scoreCache = {};   // PI name -> array aligned with records
-
-  function scorePI(name) {
-    if (scoreCache[name]) return scoreCache[name];
-    var sigs = sigsFor(name);
-    var doms = faculty[name].domains || [];
-    var out = new Array(records.length);
-    for (var i = 0; i < records.length; i++) {
-      var R = records[i];
-      var phrasePts = 0, reasons = [], strong = false;
-      // 1) interest phrases, distinctiveness-weighted
-      for (var p = 0; p < sigs.length; p++) {
-        var sig = sigs[p].sig;
-        if (!sig.length) continue;
-        var wsum = 0, hit = 0, present = 0;
-        for (var q = 0; q < sig.length; q++) {
-          var wt = idf(sig[q]);
-          wsum += wt;
-          if (R.words[sig[q]]) { hit += wt; present++; }
-        }
-        if (!wsum || !present) continue;
-        var frac = hit / wsum;
-        var needFull = Math.min(2, sig.length);
-        // A full hit needs BOTH a high share of the phrase AND an absolute
-        // amount of distinctive-word evidence (hit >= 1.2). Without the
-        // absolute floor, a phrase whose rare word is missing can still
-        // "hit" on its common words alone (machine + learning + discovery
-        // matching an Alzheimer's data call) -- exactly the old noise.
-        if (frac >= 0.6 && present >= needFull && hit >= 1.2) {
-          phrasePts += 3 * frac; strong = true; reasons.push(sigs[p].term);
-        } else if (frac >= 0.35 && present >= 2 && hit >= 0.6) {
-          phrasePts += 1.2 * frac; reasons.push("~" + sigs[p].term);
-        }
-      }
-      if (phrasePts > 6) phrasePts = 6;
-      var phraseEvid = reasons.length > 0;
-      // 2) theme vocabulary + topic tags per domain
-      var domPts = 0, tagPts = 0, domainHits = {};
-      for (var d = 0; d < doms.length; d++) {
-        var dom = doms[d], c = 0;
-        var terms = LEX[dom] || [];
-        for (var t = 0; t < terms.length; t++) {
-          if (R.text.indexOf(terms[t]) !== -1) c++;
-        }
-        if (c) { domPts += Math.min(2.4, 0.6 * c); domainHits[dom] = 1; }
-        if (R.topics[dom]) {
-          var tw = topicWeight(dom);
-          tagPts += tw; domainHits[dom] = 1;
-          // A niche program tag marks a member "strong" only when corroborated
-          // by the notice text (a lexicon term for that same domain) or by
-          // phrase evidence. Uncorroborated tags happen -- a diplomacy workshop
-          // auto-tagged "Materials science" off supply-chain wording -- and a
-          // bare tag must not carry a call into the results by itself.
-          if (tw >= 2.0 && (c > 0 || phraseEvid)) {
-            strong = true; reasons.push(dom);
-          }
-        }
-      }
-      if (domPts > 3.5) domPts = 3.5;
-      if (tagPts > 4) tagPts = 4;
-      // 3) agency scope net for open-scope calls with no subject text at all
-      var scopePts = 0, scopeLabel = null;
-      if (R.isBroad) {
-        for (var s = 0; s < SCOPES.length; s++) {
-          var sc = SCOPES[s];
-          if (!sc.re || !sc.re.test(R.agency)) continue;
-          var overlap = sc.domains.filter(function (x) { return doms.indexOf(x) !== -1; });
-          if (overlap.length) {
-            scopePts = 1.4; scopeLabel = sc.label;
-            overlap.forEach(function (x) { domainHits[x] = 1; });
-            break;
-          }
-        }
-      }
-      var score = phrasePts + domPts + tagPts + scopePts;
-      out[i] = score >= WEAK
-        ? { s: score, strong: strong, reasons: reasons.slice(0, 4),
-            domainHits: domainHits, scope: scopeLabel }
-        : null;
-    }
-    scoreCache[name] = out;
-    return out;
-  }
-
-  // ------------------------------------------------------------------ //
-  // Team themes: shared domains + recognized complementary pairs.      //
-  // ------------------------------------------------------------------ //
+  var faculty = (M && M.faculty) || {};
+  var piMatches = (M && M.pi_matches) || {};
+  var groups = (M && M.multi_pi_suggestions) || [];
+  var names = Object.keys(faculty).sort();
   var selected = [];
-  var themeState = {};   // label -> true/false (active)
+  var externalResearchers = [];
+  var researcherMatches = {};
+  var departmentGroups = groups.map(function (group) {
+    var catalogRecord = byId[group.opportunity_id] || {};
+    return {
+      d: {
+        id: group.opportunity_id,
+        title: group.title,
+        agency: group.agency,
+        url: group.url,
+        deadline: group.deadline,
+        listing_date: group.listing_date || catalogRecord.posted_date || catalogRecord.source_first_seen_date || ""
+      },
+      fits: (group.suggested_team || []).map(function (member) {
+        return {
+          name: member.name,
+          external: false,
+          tier: member.tier,
+          terms: member.matched_terms || [],
+          shared_topics: member.shared_topics || [],
+          score: member.score || 0,
+          rank_score: member.rank_score || member.score || 0
+        };
+      }),
+      totalN: group.team_size || 0,
+      sumScore: group.total_score || 0,
+      sumRankScore: group.total_rank_score || group.total_score || 0
+    };
+  });
+  var externalStorage = null;
+  var editingExternalId = "";
+  var storageAvailable = true;
+  var themeState = {};
 
-  function buildThemes(sel) {
-    var holders = {};   // domain -> [members]
-    sel.forEach(function (n) {
-      (faculty[n].domains || []).forEach(function (d) {
-        (holders[d] = holders[d] || []).push(n);
-      });
+  function externalKey(id) { return "external:" + id; }
+  function isExternalKey(key) { return String(key || "").indexOf("external:") === 0; }
+  function externalId(key) { return String(key || "").slice(9); }
+  function externalProfile(key) {
+    var id = isExternalKey(key) ? externalId(key) : String(key || "");
+    return externalResearchers.find(function (profile) { return profile.id === id; }) || null;
+  }
+  function memberName(key) {
+    var profile = externalProfile(key);
+    return profile ? profile.name : key;
+  }
+  function memberTerms(key) {
+    var profile = externalProfile(key);
+    return profile ? profile.keywords : ((faculty[key] && faculty[key].key_terms) || []);
+  }
+  function memberSummary(key) {
+    return isExternalKey(key) ? "" : ((faculty[key] && faculty[key].research_summary) || "");
+  }
+  function memberProfile(key) {
+    var profile = externalProfile(key);
+    if (profile) {
+      return {
+        name: profile.name,
+        key_terms: profile.keywords,
+        keywords: profile.keywords,
+        domains: TEAM_API ? TEAM_API.inferDomains(profile.keywords) : []
+      };
+    }
+    var metadata = faculty[key] || {};
+    return {
+      name: key,
+      key_terms: metadata.key_terms || [],
+      domains: metadata.domains || []
+    };
+  }
+  function memberMatches(key) {
+    return researcherMatches[key] || (isExternalKey(key) ? [] : (piMatches[key] || []));
+  }
+
+  function reasonText(fit) {
+    var parts = (fit.terms || []).slice(0);
+    (fit.shared_topics || []).forEach(function (t) {
+      if (parts.indexOf(t) === -1) parts.push(t);
     });
-    var themes = [];
-    Object.keys(holders).sort().forEach(function (d) {
-      if (holders[d].length >= 2) {
-        themes.push({ type: "core", label: d, domains: [d], terms: [], members: holders[d] });
-      }
+    return parts.join(" · ");
+  }
+  function listingDateValue(value) {
+    return /^\d{4}-\d{2}-\d{2}$/.test(String(value || ""))
+      ? Number(String(value).replace(/-/g, ""))
+      : 0;
+  }
+  function listingDateText(value) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(value || ""))) return "";
+    var parts = String(value).split("-").map(Number);
+    return new Date(Date.UTC(parts[0], parts[1] - 1, parts[2])).toLocaleDateString(undefined, {
+      month: "short", day: "numeric", year: "numeric", timeZone: "UTC"
     });
-    BRIDGES.forEach(function (b) {
-      var a = holders[b.domains[0]] || [], c = holders[b.domains[1]] || [];
-      // two different members must bring the two sides
-      var linked = a.some(function (x) { return c.some(function (y) { return x !== y; }); });
-      if (linked) {
-        var mem = a.concat(c).filter(function (v, i, arr) { return arr.indexOf(v) === i; });
-        themes.push({ type: "bridge", label: b.label, domains: b.domains,
-                      terms: b.terms || [], members: mem });
-      }
-    });
-    if (!themes.length) {   // fully disjoint team: every member domain, still linked-gated below
-      Object.keys(holders).sort().forEach(function (d) {
-        themes.push({ type: "core", label: d, domains: [d], terms: [], members: holders[d] });
-      });
-    }
-    return themes;
+  }
+  function balancedRanking(a, b) {
+    return b.sumRankScore - a.sumRankScore ||
+      listingDateValue(b.d.listing_date) - listingDateValue(a.d.listing_date) ||
+      b.totalN - a.totalN || b.sumScore - a.sumScore || a.d.title.localeCompare(b.d.title);
+  }
+  function oppHead(d, fitCount) {
+    var url = d.url && /^https?:\/\//i.test(d.url) ? d.url : "";
+    var titleHtml = url
+      ? '<a href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(d.title) + " ↗</a>"
+      : esc(d.title);
+    var badges = '<span class="badges">' +
+      '<span class="badge fit">' + fitCount + (d.department ? " faculty" : " of " + selected.length) + "</span>" +
+      (d.new ? '<span class="badge new">NEW</span>' : "") +
+      (d.broad ? '<span class="badge broad">broad · verify fit</span>' : "") +
+      "</span>";
+    return badges + "<h3>" + titleHtml + "</h3>" +
+      (d.agency ? '<p class="agency">' + esc(d.agency) + "</p>" : "") +
+      (d.listing_date ? '<p class="listed">Listed ' + esc(listingDateText(d.listing_date)) + "</p>" : "") +
+      (d.deadline ? '<p class="deadline">' + (d.closingSoon ? '<span class="closing-soon">Closing soon — </span>' : "") + esc(d.deadline) + "</p>" : "") +
+      (d.themeLabels && d.themeLabels.length ? '<p class="matched-themes">Matched team themes: ' + esc(d.themeLabels.join(" · ")) + "</p>" : "");
+  }
+  function teamChips(fits) {
+    return '<div class="team">' + fits.map(function (f) {
+      var why = reasonText(f);
+      return '<div class="pi"><span class="name">' + esc(last(f.name)) + "</span>" +
+        (f.external ? '<span class="badge external">external</span>' : "") +
+        (why ? '<div class="why">' + esc(why) + "</div>" : "") + "</div>";
+    }).join("") + "</div>";
   }
 
-  function domainHitsRecord(dom, R) {
-    if (R.topics[dom]) return true;
-    var terms = LEX[dom] || [];
-    for (var t = 0; t < terms.length; t++) {
-      if (R.text.indexOf(terms[t]) !== -1) return true;
-    }
-    if (R.isBroad) {
-      for (var s = 0; s < SCOPES.length; s++) {
-        var sc = SCOPES[s];
-        if (sc.re && sc.re.test(R.agency) && sc.domains.indexOf(dom) !== -1) return true;
-      }
-    }
-    return false;
-  }
-  function themeHits(theme, R) {
-    if (theme.type === "bridge") {
-      for (var t = 0; t < theme.terms.length; t++) {
-        if (R.text.indexOf(theme.terms[t]) !== -1) return true;
-      }
-      return domainHitsRecord(theme.domains[0], R) && domainHitsRecord(theme.domains[1], R);
-    }
-    return domainHitsRecord(theme.domains[0], R);
-  }
-
-  function recencyBoost(R) {
-    var age = R.postedAge !== null ? R.postedAge : R.updatedAge;
-    if (age === null) return 1.0;
-    if (age <= 14) return 1.7;    // new + relevant leads
-    if (age <= 45) return 1.3;
-    if (age <= 120) return 1.1;
-    return 1.0;
-  }
-
-  // ------------------------------------------------------------------ //
-  // Rendering                                                          //
-  // ------------------------------------------------------------------ //
+  // ---- team mode -------------------------------------------------------- //
   function renderThemes(themes) {
-    if (!themes.length || selected.length < 2) { $("themes").innerHTML = ""; return; }
-    var html = '<p class="themes-head">Team themes — computed from overlapping interests · click to toggle</p><div class="theme-row">';
-    themes.forEach(function (th) {
-      var on = themeState[th.label] !== false;
-      html += '<button type="button" class="theme-chip ' + th.type + (on ? "" : " off") +
-        '" data-theme="' + esc(th.label) + '" title="' +
-        esc((th.type === "bridge" ? "Bridge theme: " : "Shared area: ") + th.members.map(last).join(" + ")) +
-        '"><span class="mark">' + (on ? "✓" : "✕") + "</span>" + esc(th.label) + "</button>";
+    if (!themes || !themes.length || selected.length < 2) {
+      $("themes").innerHTML = selected.length >= 2
+        ? '<p class="theme-note">This selection has no linked research themes. Try a different combination.</p>'
+        : "";
+      return;
+    }
+    var html = '<p class="themes-head">Team themes · click to steer the search</p><div class="theme-row">';
+    themes.forEach(function (theme) {
+      var on = themeState[theme.label] !== false;
+      html += '<button type="button" class="theme-chip ' + esc(theme.type) + (on ? "" : " off") +
+        '" data-theme="' + esc(theme.label) + '" aria-pressed="' + (on ? "true" : "false") +
+        '" title="Linked by ' + esc(theme.members.map(function (name) { return last(name); }).join(" + ")) + '">' +
+        (on ? "✓ " : "✕ ") + esc(theme.label) + "</button>";
     });
-    html += "</div><p class=\"theme-note\">Results must connect to at least one active theme and fit at least two selected faculty.</p>";
+    html += '</div><p class="theme-note">Every result fits every selected researcher. Turn off a chip to narrow the list to the themes left active.</p>';
     $("themes").innerHTML = html;
-    Array.prototype.forEach.call(document.querySelectorAll(".theme-chip"), function (btn) {
-      btn.addEventListener("click", function () {
-        var k = btn.getAttribute("data-theme");
-        themeState[k] = themeState[k] === false;   // toggle
+    $("themes").querySelectorAll("[data-theme]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var label = button.getAttribute("data-theme");
+        themeState[label] = themeState[label] === false;
         refresh();
       });
     });
   }
 
-  function cardHtml(R, fits, teamSize, isBroadOnly) {
-    var r = R.r;
-    var url = bestUrl(r);
-    var titleHtml = url
-      ? '<a href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(r.title) + " ↗</a>"
-      : esc(r.title);
-    var badges = '<span class="badges"><span class="badge fit">' + fits.length +
-      (teamSize ? " of " + teamSize : " faculty") + "</span>";
-    if (R.postedAge !== null && R.postedAge <= 14) badges += '<span class="badge new">NEW</span>';
-    if (isBroadOnly) badges += '<span class="badge broad">broad · verify fit</span>';
-    badges += "</span>";
-    var dl = deadlineText(r);
-    var closingSoon = R.closeIn !== null && R.closeIn >= 0 && R.closeIn <= 21;
-    var chips = '<div class="team">' + fits.map(function (f) {
-      var why = f.reasons.join(" · ") + (f.scope ? (f.reasons.length ? " · " : "") + f.scope : "");
-      return '<div class="pi' + (f.strong ? " strong" : "") + '"><span class="name">' +
-        esc(last(f.name)) + "</span>" + (why ? '<div class="why">' + esc(why) + "</div>" : "") + "</div>";
-    }).join("") + "</div>";
-    return '<div class="card' + (isBroadOnly ? " broadcard" : "") + '">' + badges +
-      "<h3>" + titleHtml + "</h3>" +
-      (r.agency ? '<p class="agency">' + esc(r.agency) + "</p>" : "") +
-      (dl ? '<p class="deadline">' + (closingSoon ? '<span class="soon">Closing soon — </span>' : "") + esc(dl) + "</p>" : "") +
-      chips + "</div>";
+  function liveEntry(result, department) {
+    return {
+      d: {
+        id: result.id,
+        title: result.title,
+        agency: result.agency,
+        url: result.url,
+        deadline: result.deadline,
+        listing_date: result.postedDate || result.updatedDate || "",
+        new: result.new,
+        broad: result.broad,
+        closingSoon: result.closingSoon,
+        department: Boolean(department),
+        themeLabels: (result.themeHits || []).map(function (hit) { return hit.label; })
+      },
+      fits: result.fits.map(function (fit) {
+        return {
+          name: fit.name,
+          external: externalResearchers.some(function (profile) { return profile.name === fit.name; }),
+          terms: fit.reasons || [],
+          shared_topics: [],
+          score: fit.score || 0,
+          rank_score: fit.score || 0
+        };
+      }),
+      totalN: result.fits.length,
+      sumScore: result.relevanceScore || 0,
+      sumRankScore: result.rankScore || 0
+    };
   }
 
+  function buildShared(members) {
+    var teamMembers = members || selected;
+    if (!MATCH_ENGINE) return [];
+    var profiles = teamMembers.map(memberProfile);
+    var themes = MATCH_ENGINE.buildThemes(profiles);
+    var activeLabels = new Set(themes.filter(function (theme) {
+      return themeState[theme.label] !== false;
+    }).map(function (theme) { return theme.label; }));
+    var outcome = MATCH_ENGINE.matchTeam(profiles, activeLabels);
+    renderThemes(outcome.themes);
+    return outcome.results.map(function (result) { return liveEntry(result, false); });
+  }
+  function matchesQuery(e, q) {
+    if (!q) return true;
+    var hay = (e.d.title + " " + e.d.agency + " " +
+      e.fits.map(function (f) { return f.name + " " + reasonText(f); }).join(" ")).toLowerCase();
+    return hay.indexOf(q) !== -1;
+  }
   function renderTeam(q) {
-    var themes = buildThemes(selected);
-    renderThemes(themes);
+    $("selected-terms").innerHTML = selected.map(function (member) {
+      var kt = memberTerms(member);
+      var summary = memberSummary(member);
+      return '<div class="st-card"><span class="who">' + esc(last(memberName(member))) + "</span>" +
+        (isExternalKey(member) ? ' <span class="badge external">external</span>' : "") +
+        (kt.length ? '<div class="terms">' + esc(kt.slice(0, 6).join(" · ")) + "</div>" : "") +
+        (summary ? '<div class="summary">' + esc(summary) + "</div>" : "") + "</div>";
+    }).join("");
+
     if (selected.length < 2) {
+      $("themes").innerHTML = "";
       $("count").textContent = "";
-      $("view").innerHTML = '<div class="empty">Pick at least two faculty above to see the calls they could pursue together.</div>';
+      $("view").innerHTML = '<div class="empty">Pick at least two researchers above to see the calls they could pursue together.</div>';
       return;
     }
-    var active = themes.filter(function (t) { return themeState[t.label] !== false; });
-    var scores = selected.map(scorePI);
-    var results = [];
-    for (var i = 0; i < records.length; i++) {
-      var R = records[i];
-      var fits = [];
-      for (var j = 0; j < selected.length; j++) {
-        var e = scores[j][i];
-        if (e) fits.push({ name: selected[j], s: e.s, strong: e.strong,
-                           reasons: e.reasons, scope: e.scope });
-      }
-      if (fits.length < 2) continue;
-      var t = 0;
-      for (var k = 0; k < active.length; k++) if (themeHits(active[k], R)) t++;
-      if (!t) continue;
-      var broadOnly = !fits.some(function (f) { return f.strong; });
-      // Without at least one specific fit, only genuinely open-scope
-      // solicitations (BAAs, omnibus calls) may enter -- generic word-soup
-      // overlap on an ordinary targeted call is exactly the old noise.
-      if (broadOnly && !R.isBroad) continue;
-      var teamScore = 0;
-      fits.forEach(function (f) { teamScore += f.s; });
-      teamScore *= (1 + 0.15 * (t - 1));
-      var rank = teamScore * recencyBoost(R);
-      results.push({ R: R, fits: fits, rank: rank, broadOnly: broadOnly });
+    var all = buildShared().filter(function (e) { return matchesQuery(e, q); });
+    all.sort(balancedRanking);
+
+    var picked = selected.map(function (member) { return last(memberName(member)); }).join(" + ");
+    $("count").textContent = all.length + " call" + (all.length === 1 ? "" : "s") + " fit every selected researcher {" + picked + "}" +
+      (q ? " (filtered)" : "") + " · " + all.filter(function (entry) { return entry.d.new; }).length +
+      " new or substantively updated in the last 14 days · newest relevant first";
+
+    var html = "";
+    if (all.length) {
+      html += '<div class="section-label">Opportunities matching the full selected team</div>' +
+        all.map(function (e) {
+          return '<div class="card' + (e.d.broad ? " broad-card" : "") + '">' + oppHead(e.d, e.totalN) + teamChips(e.fits) + "</div>";
+        }).join("");
     }
-    if (q) {
-      results = results.filter(function (x) {
-        var hay = (x.R.r.title + " " + x.R.r.agency + " " +
-          x.fits.map(function (f) { return f.name + " " + f.reasons.join(" "); }).join(" ")).toLowerCase();
-        return hay.indexOf(q) !== -1;
-      });
+    if (!html) {
+      html = '<div class="empty">No current calls fit every selected researcher' +
+        (q ? " for that filter." : ". Try a different combination.") + "</div>";
     }
-    results.sort(function (a, b) { return b.rank - a.rank; });
-    var newCount = results.filter(function (x) { return x.R.postedAge !== null && x.R.postedAge <= 14; }).length;
-    var picked = selected.map(last).join(" + ");
-    $("count").textContent = results.length + " call" + (results.length === 1 ? "" : "s") +
-      " fit 2+ of {" + picked + "}" + (q ? " (filtered)" : "") +
-      " · " + newCount + " new in the last 14 days · newest relevant first";
-    var CAP = 200;
-    var shown = results.slice(0, CAP);
-    $("view").innerHTML = shown.length
-      ? '<div class="section-label">Ranked opportunities for this team</div>' +
-        shown.map(function (x) { return cardHtml(x.R, x.fits, selected.length, x.broadOnly); }).join("") +
-        (results.length > CAP ? '<div class="empty">Showing the top ' + CAP + " of " + results.length + " — use the filter box to narrow.</div>" : "")
-      : '<div class="empty">No calls fit 2 or more of the selected faculty' +
-        (q ? " for that filter." : ". Try a different combination or re-enable a theme.") + "</div>";
+    $("view").innerHTML = html;
   }
 
+  // ---- department overview --------------------------------------------- //
   function renderDept(q) {
+    $("selected-terms").innerHTML = "";
     $("themes").innerHTML = "";
-    var scores = names.map(scorePI);
-    var results = [];
-    for (var i = 0; i < records.length; i++) {
-      var R = records[i];
-      var fits = [];
-      for (var j = 0; j < names.length; j++) {
-        var e = scores[j][i];
-        if (e) fits.push({ name: names[j], s: e.s, strong: e.strong,
-                           reasons: e.reasons, scope: e.scope });
-      }
-      var strongN = fits.filter(function (f) { return f.strong; }).length;
-      if (strongN < 2) continue;
-      fits.sort(function (a, b) { return (b.strong - a.strong) || (b.s - a.s); });
-      var teamScore = 0;
-      fits.forEach(function (f) { teamScore += f.s; });
-      results.push({ R: R, fits: fits.slice(0, 10), strongN: strongN,
-                     rank: teamScore * recencyBoost(R) });
+    var list = MATCH_ENGINE ? MATCH_ENGINE.matchDepartment(names.map(memberProfile)).map(function (result) {
+      return liveEntry(result, true);
+    }).filter(function (entry) { return matchesQuery(entry, q); }) : [];
+    list.sort(balancedRanking);
+    $("count").textContent = list.length + " department-wide collaboration group" +
+      (list.length === 1 ? "" : "s") + " (2+ faculty overlap)" + (q ? " (filtered)" : "") +
+      " · live graded relevance and recency ranking";
+    if (!list.length) {
+      $("view").innerHTML = '<div class="empty">No collaboration groups' + (q ? " match that filter." : " in the current data.") + "</div>";
+      return;
     }
-    if (q) {
-      results = results.filter(function (x) {
-        var hay = (x.R.r.title + " " + x.R.r.agency + " " +
-          x.fits.map(function (f) { return f.name + " " + f.reasons.join(" "); }).join(" ")).toLowerCase();
-        return hay.indexOf(q) !== -1;
-      });
-    }
-    results.sort(function (a, b) { return (b.strongN - a.strongN) || (b.rank - a.rank); });
-    var CAP = 120;
-    $("count").textContent = results.length + " department-wide collaboration group" +
-      (results.length === 1 ? "" : "s") + " (2+ faculty with a specific fit)" + (q ? " (filtered)" : "");
-    $("view").innerHTML = results.length
-      ? '<div class="section-label">Department-wide collaboration groups</div>' +
-        results.slice(0, CAP).map(function (x) { return cardHtml(x.R, x.fits, 0, false); }).join("")
-      : '<div class="empty">No collaboration groups' + (q ? " match that filter." : " in the current data.") + "</div>";
+    $("view").innerHTML = '<div class="section-label">Best current department-wide collaboration opportunities</div>' +
+      list.map(function (entry) {
+        var d = entry.d;
+        var url = d.url && /^https?:\/\//i.test(d.url) ? d.url : "";
+        var titleHtml = url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(d.title) + " ↗</a>" : esc(d.title);
+        return '<div class="card' + (d.broad ? " broad-card" : "") + '">' +
+          oppHead(d, entry.totalN) + teamChips(entry.fits) + "</div>";
+      }).join("");
   }
 
   function refresh() {
@@ -544,47 +527,249 @@
     if ($("dept-toggle").checked) renderDept(q); else renderTeam(q);
   }
 
+  function safeStorage() {
+    try { return globalThis.localStorage; }
+    catch (_error) { return null; }
+  }
+
+  function updateMetaLine() {
+    var externalLabel = externalResearchers.length
+      ? " · " + externalResearchers.length + " external researcher" + (externalResearchers.length === 1 ? "" : "s")
+      : "";
+    $("meta-line").textContent = names.length + " faculty profiles" + externalLabel + " · " +
+      "live graded matching across " + catalog.length + " current opportunities";
+  }
+
+  function renderExternalStatus(message, isError) {
+    var count = externalResearchers.length;
+    var base = count
+      ? count + " of " + MAX_EXTERNAL + " external researcher" + (count === 1 ? "" : "s") + " saved on this device."
+      : "External researchers are saved only in this browser (up to " + MAX_EXTERNAL + ").";
+    if (!storageAvailable) base = "External researchers are available in this tab only; browser storage is unavailable.";
+    $("external-status").textContent = message ? base + " " + message : base;
+    $("external-status").classList.toggle("error", Boolean(isError));
+  }
+
+  function rebuildResearcherMatches() {
+    researcherMatches = {};
+    if (!MATCHER_API || !SEARCH_API) return;
+    MATCH_ENGINE = MATCHER_API.create(catalogData, M || {}, SEARCH_API);
+  }
+
+  function renderExternalButtons() {
+    var grid = $("pi-grid");
+    grid.querySelectorAll("[data-external-entry]").forEach(function (entry) { entry.remove(); });
+    var addButton = $("add-researcher");
+    externalResearchers.forEach(function (profile) {
+      var member = externalKey(profile.id);
+      var entry = document.createElement("span");
+      entry.className = "pi-entry";
+      entry.dataset.externalEntry = profile.id;
+
+      var toggleButton = document.createElement("button");
+      toggleButton.type = "button";
+      toggleButton.className = "pi-toggle external";
+      toggleButton.id = "t_" + btnId(member);
+      toggleButton.innerHTML = '<span class="dot" aria-hidden="true"></span>' + esc(profile.name);
+      toggleButton.addEventListener("click", function () { toggle(member); });
+
+      var editButton = document.createElement("button");
+      editButton.type = "button";
+      editButton.className = "pi-edit";
+      editButton.setAttribute("aria-label", "Edit " + profile.name);
+      editButton.title = "Edit " + profile.name;
+      editButton.innerHTML = "&#9998;";
+      editButton.addEventListener("click", function () { openExternalEditor(profile.id); });
+
+      entry.appendChild(toggleButton);
+      entry.appendChild(editButton);
+      grid.insertBefore(entry, addButton);
+    });
+  }
+
+  function keywordInput() {
+    return TEAM_API ? TEAM_API.parseKeywords($("external-keywords").value, 50) : [];
+  }
+
+  function updateKeywordCount() {
+    var count = keywordInput().length;
+    $("external-keyword-count").textContent = count + " keyword" + (count === 1 ? "" : "s");
+  }
+
+  function closeExternalEditor() {
+    editingExternalId = "";
+    $("external-researcher-form").hidden = true;
+    $("external-researcher-form").reset();
+    $("external-editor-message").textContent = "";
+    $("delete-external").hidden = true;
+    $("add-researcher").setAttribute("aria-expanded", "false");
+    updateKeywordCount();
+  }
+
+  function openExternalEditor(id) {
+    if (!TEAM_API) {
+      renderExternalStatus("The external-researcher helper did not load. Refresh the page and try again.", true);
+      return;
+    }
+    var profile = id ? externalProfile(id) : null;
+    if (!profile && externalResearchers.length >= MAX_EXTERNAL) {
+      renderExternalStatus("Delete or edit a saved researcher before adding another.", true);
+      return;
+    }
+    editingExternalId = profile ? profile.id : "";
+    $("external-editor-heading").textContent = profile ? "Edit external researcher" : "Add an external researcher";
+    $("external-name").value = profile ? profile.name : "";
+    $("external-keywords").value = profile ? profile.keywords.join(", ") : "";
+    $("delete-external").hidden = !profile;
+    $("external-editor-message").textContent = "";
+    $("external-researcher-form").hidden = false;
+    $("add-researcher").setAttribute("aria-expanded", "true");
+    updateKeywordCount();
+    $("external-name").focus();
+  }
+
+  function persistExternal(nextProfiles) {
+    var result = TEAM_API.save(externalStorage, nextProfiles);
+    externalResearchers = result.profiles;
+    storageAvailable = result.saved;
+    themeState = {};
+    rebuildResearcherMatches();
+    return result;
+  }
+
+  function saveExternal(event) {
+    event.preventDefault();
+    var name = $("external-name").value.replace(/\s+/g, " ").trim();
+    var keywords = keywordInput();
+    if (name.length < 2) {
+      $("external-editor-message").textContent = "Enter the researcher's name.";
+      $("external-name").focus();
+      return;
+    }
+    if (keywords.length < TEAM_API.MIN_KEYWORDS || keywords.length > TEAM_API.MAX_KEYWORDS) {
+      $("external-editor-message").textContent = "Add 3–8 distinct research keywords; about five works best.";
+      $("external-keywords").focus();
+      return;
+    }
+    var duplicate = externalResearchers.some(function (profile) {
+      return profile.id !== editingExternalId && profile.name.toLowerCase() === name.toLowerCase();
+    });
+    if (duplicate) {
+      $("external-editor-message").textContent = "A saved external researcher already uses that name.";
+      $("external-name").focus();
+      return;
+    }
+
+    var next = externalResearchers.slice(0);
+    var savedId = editingExternalId;
+    if (editingExternalId) {
+      next = next.map(function (profile) {
+        return profile.id === editingExternalId
+          ? { id: profile.id, name: name, keywords: keywords }
+          : profile;
+      });
+    } else {
+      if (next.length >= MAX_EXTERNAL) {
+        $("external-editor-message").textContent = "You can save up to four external researchers.";
+        return;
+      }
+      savedId = TEAM_API.createId(name, next);
+      next.push({ id: savedId, name: name, keywords: keywords });
+    }
+
+    var wasEditing = Boolean(editingExternalId);
+    var result = persistExternal(next);
+    var autoSelected = !wasEditing && selected.length < MAX;
+    if (autoSelected) selected.push(externalKey(savedId));
+    closeExternalEditor();
+    renderExternalButtons();
+    updateMetaLine();
+    updateToggles();
+    refresh();
+    var successMessage = wasEditing
+      ? name + " was updated."
+      : name + (autoSelected ? " was saved and selected." : " was saved. Select them when you are ready.");
+    if (!result.saved) {
+      successMessage = wasEditing
+        ? name + " was updated for this tab."
+        : name + (autoSelected ? " was added to this tab and selected." : " was added to this tab.");
+    }
+    renderExternalStatus(
+      successMessage,
+      !result.saved
+    );
+  }
+
+  function deleteExternal() {
+    var profile = externalProfile(editingExternalId);
+    if (!profile || !globalThis.confirm("Delete " + profile.name + " from this browser?")) return;
+    var key = externalKey(profile.id);
+    var result = persistExternal(externalResearchers.filter(function (item) { return item.id !== profile.id; }));
+    selected = selected.filter(function (member) { return member !== key; });
+    closeExternalEditor();
+    renderExternalButtons();
+    updateMetaLine();
+    updateToggles();
+    refresh();
+    renderExternalStatus(
+      profile.name + (result.saved ? " was removed." : " was removed for this tab."),
+      !result.saved
+    );
+  }
+
   function updateToggles() {
     var atMax = selected.length >= MAX;
-    names.forEach(function (n) {
-      var btn = $("t_" + btnId(n));
-      var on = selected.indexOf(n) !== -1;
+    var members = names.concat(externalResearchers.map(function (profile) { return externalKey(profile.id); }));
+    members.forEach(function (member) {
+      var btn = $("t_" + btnId(member));
+      if (!btn) return;
+      var on = selected.indexOf(member) !== -1;
       btn.classList.toggle("on", on);
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
       btn.disabled = !on && (atMax || $("dept-toggle").checked);
     });
+    $("add-researcher").disabled = $("dept-toggle").checked || externalResearchers.length >= MAX_EXTERNAL;
+    $("add-researcher").title = externalResearchers.length >= MAX_EXTERNAL
+      ? "Four external researchers are already saved"
+      : "Add and save an external researcher";
     $("team-hint").textContent = $("dept-toggle").checked
-      ? "Showing every pair/group of faculty across the department. Uncheck to pick a specific team."
+      ? "Showing every pair/group of department faculty. Uncheck to build a custom team."
       : (selected.length < 2
-          ? "Pick 2–4 faculty to see funding calls that fit the group."
-          : "Showing calls that fit 2+ of the " + selected.length + " selected faculty. Pick up to " + MAX + ".");
+          ? "Pick 2–4 researchers, including saved external collaborators, to see calls that fit everyone selected."
+          : "Showing only calls that fit all " + selected.length + " selected researchers. Adding a researcher can only narrow these results.");
   }
   function btnId(n) { return n.replace(/[^a-z0-9]/gi, ""); }
 
-  function toggle(n) {
-    var i = selected.indexOf(n);
+  function toggle(member) {
+    var i = selected.indexOf(member);
     if (i !== -1) selected.splice(i, 1);
-    else if (selected.length < MAX) selected.push(n);
-    themeState = {};   // fresh selection -> recompute themes, all active
+    else if (selected.length < MAX) selected.push(member);
+    themeState = {};
     updateToggles();
     refresh();
   }
 
   function init() {
-    if (!M || !names.length) {
-      $("meta-line").textContent = "No faculty data found.";
+    if (!M) {
+      $("meta-line").textContent = "No match data found.";
       $("view").innerHTML = '<div class="empty">Couldn\'t find <code>data/faculty_matches.js</code>.<br>' +
         "Run <code>python -m scripts.faculty_match match</code> and commit the generated file.</div>";
       return;
     }
-    if (!rawCatalog.length) {
-      $("meta-line").textContent = "No catalog found.";
-      $("view").innerHTML = '<div class="empty">Couldn\'t find <code>data/opportunities.js</code>.</div>';
-      return;
+    if (!TEAM_API || !SEARCH_API || !MATCHER_API) {
+      renderExternalStatus("External researchers are unavailable because a helper did not load.", true);
+    } else {
+      externalStorage = safeStorage();
+      var loaded = TEAM_API.load(externalStorage);
+      externalResearchers = loaded.profiles;
+      storageAvailable = loaded.available;
+      rebuildResearcherMatches();
+      renderExternalStatus(loaded.error, Boolean(loaded.error));
     }
-    preprocess();
-    $("meta-line").textContent = names.length + " faculty · live matching against " +
-      N + " current opportunities (catalog refreshes nightly)";
+    updateMetaLine();
+
     var grid = $("pi-grid");
+    var addButton = $("add-researcher");
     names.forEach(function (n) {
       var btn = document.createElement("button");
       btn.type = "button";
@@ -592,10 +777,17 @@
       btn.id = "t_" + btnId(n);
       btn.innerHTML = '<span class="dot"></span>' + esc(n);
       btn.addEventListener("click", function () { toggle(n); });
-      grid.appendChild(btn);
+      grid.insertBefore(btn, addButton);
     });
+    renderExternalButtons();
+
     $("filter").addEventListener("input", refresh);
     $("dept-toggle").addEventListener("change", function () { updateToggles(); refresh(); });
+    $("add-researcher").addEventListener("click", function () { openExternalEditor(""); });
+    $("cancel-external").addEventListener("click", closeExternalEditor);
+    $("delete-external").addEventListener("click", deleteExternal);
+    $("external-researcher-form").addEventListener("submit", saveExternal);
+    $("external-keywords").addEventListener("input", updateKeywordCount);
     updateToggles();
     refresh();
   }

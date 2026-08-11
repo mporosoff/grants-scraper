@@ -3,7 +3,12 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.faculty_match import match_to_catalog
+from scripts.faculty_match import (
+    AGENCY_SCOPE,
+    BRIDGE_THEMES,
+    THEME_LEXICON,
+    match_to_catalog,
+)
 
 
 class FacultyMatchRelevanceTests(unittest.TestCase):
@@ -82,6 +87,24 @@ class FacultyMatchRelevanceTests(unittest.TestCase):
             self.assertGreaterEqual(len(metadata["key_terms"]), 5)
             self.assertLessEqual(len(metadata["key_terms"]), 10)
             self.assertFalse(generic & {term.lower() for term in metadata["key_terms"]})
+
+    def test_live_matcher_configuration_is_published_with_generated_metadata(self):
+        result = self._match([])
+
+        self.assertEqual(result["theme_lexicon"], THEME_LEXICON)
+        self.assertEqual(result["bridge_themes"], BRIDGE_THEMES)
+        self.assertEqual(result["agency_scope"], AGENCY_SCOPE)
+        self.assertIn("broad agency announcement", result["broad_pattern"])
+        self.assertTrue(all(item["pattern"] and item["domains"] for item in AGENCY_SCOPE))
+
+    def test_nightly_refresh_rebuilds_team_matcher_metadata(self):
+        workflow = Path(".github/workflows/refresh-opportunities.yml").read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn("python -m scripts.faculty_match match", workflow)
+        self.assertIn("--catalog data/opportunities.js", workflow)
+        self.assertIn("--out data/faculty_matches.js", workflow)
 
 
 if __name__ == "__main__":
