@@ -352,6 +352,9 @@
       const hasResearcherLink = phraseScore >= .18 || linkedVocabularyScore >= .3 || scopeScore > 0;
       if (score < minimumScore || !signalCount || !hasResearcherLink) return null;
       reasons.sort((left, right) => right.score - left.score || left.label.localeCompare(right.label));
+      const researchReasons = uniq(reasons
+        .filter(reason => reason.type !== "scope")
+        .map(reason => reason.label)).slice(0, 4);
       return {
         name: profile.name,
         score,
@@ -364,6 +367,7 @@
         scopeScore,
         scopeLabel: scope?.label || "",
         matchedDomains: [...matchedDomains],
+        researchReasons,
         reasons: uniq(reasons.map(reason => reason.label)).slice(0, 4),
       };
     }

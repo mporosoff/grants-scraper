@@ -213,7 +213,11 @@ test("graded team scoring combines evidence, supports scope-only BAAs, and rejec
   assert.ok(ids.includes("graded"));
   assert.ok(ids.includes("onr"));
   assert.equal(ids.includes("generic"), false);
-  assert.equal(result.results.find(item => item.id === "onr").broad, true);
+  const onr = result.results.find(item => item.id === "onr");
+  assert.equal(onr.broad, true);
+  assert.ok(onr.fits.every(fit => fit.scopeLabel === "Office of Naval Research"));
+  assert.ok(onr.fits.every(fit => fit.researchReasons.length === 0));
+  assert.ok(onr.fits.every(fit => fit.reasons.includes("Office of Naval Research")));
   assert.ok(result.themes.some(theme => theme.label === "Data-driven catalyst discovery"));
   assert.ok(result.results.every(item => item.fits.length === gradedTeam.length));
 });
@@ -347,7 +351,12 @@ test("presents one interactive full-team list with graded themes and broad-call 
   assert.match(teamPage, /fit every selected researcher/);
   assert.match(teamPage, /Adding a researcher can only narrow these results/);
   assert.match(teamPage, /Team themes · click to steer the search/);
+  assert.match(teamPage, /Blue = shared research areas/);
+  assert.match(teamPage, /Purple = complementary bridge themes/);
   assert.match(teamPage, /broad · verify fit/);
+  assert.match(teamPage, /Broad sponsor-scope signal:/);
+  assert.match(teamPage, /Broad sponsor-scope match/);
+  assert.doesNotMatch(teamPage, /" of " \+ selected\.length/);
   assert.match(teamPage, /new or substantively updated in the last 14 days/);
   assert.match(teamPage, /Closing soon/);
   assert.match(teamPage, /MATCH_ENGINE\.matchTeam/);

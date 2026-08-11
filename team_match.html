@@ -95,12 +95,19 @@
   .themes{margin:16px 0 4px;}
   .themes:empty{display:none;}
   .themes-head{font-size:.75rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:0 2px 8px;}
+  .theme-key{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0 2px 9px;color:var(--muted);font-size:.75rem;}
+  .theme-key span{display:inline-flex;align-items:center;gap:6px;}
+  .theme-key i{display:inline-block;width:9px;height:9px;border-radius:50%;border:1px solid;}
+  .theme-key .core{background:var(--blue-soft);border-color:#8bb5ee;}
+  .theme-key .bridge{background:var(--purple-soft);border-color:#ae8edb;}
   .theme-row{display:flex;flex-wrap:wrap;gap:8px;}
   .theme-chip{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:6px 13px;font:inherit;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .12s;border:1px solid;}
   .theme-chip.core{background:var(--blue-soft);border-color:#cfe0fb;color:var(--blue-dark);}
   .theme-chip.bridge{background:var(--purple-soft);border-color:#ddd0f2;color:var(--purple);}
   .theme-chip.off{background:var(--surface-alt);border-color:var(--line);color:var(--muted);font-weight:500;text-decoration:line-through;}
   .theme-note{margin:8px 2px 0;color:var(--muted);font-size:.76rem;}
+  .scope-note{margin:10px 0 0;padding:9px 11px;border:1px solid #f0d79c;border-radius:10px;background:#fff9ea;color:#72510c;font-size:.78rem;line-height:1.4;}
+  .scope-note strong{color:#563b05;}
 
   .count{color:var(--muted);font-size:.85rem;margin:16px 2px 12px;}
   .section-label{margin:22px 2px 10px;font-size:.75rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
@@ -364,7 +371,7 @@
       ? '<a href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(d.title) + " ↗</a>"
       : esc(d.title);
     var badges = '<span class="badges">' +
-      '<span class="badge fit">' + fitCount + (d.department ? " faculty" : " of " + selected.length) + "</span>" +
+      (d.department ? '<span class="badge fit">' + fitCount + " faculty</span>" : "") +
       (d.new ? '<span class="badge new">NEW</span>' : "") +
       (d.broad ? '<span class="badge broad">broad · verify fit</span>' : "") +
       "</span>";
@@ -372,14 +379,17 @@
       (d.agency ? '<p class="agency">' + esc(d.agency) + "</p>" : "") +
       (d.listing_date ? '<p class="listed">Listed ' + esc(listingDateText(d.listing_date)) + "</p>" : "") +
       (d.deadline ? '<p class="deadline">' + (d.closingSoon ? '<span class="closing-soon">Closing soon — </span>' : "") + esc(d.deadline) + "</p>" : "") +
-      (d.themeLabels && d.themeLabels.length ? '<p class="matched-themes">Matched team themes: ' + esc(d.themeLabels.join(" · ")) + "</p>" : "");
+      (d.themeLabels && d.themeLabels.length ? '<p class="matched-themes">Matched team themes: ' + esc(d.themeLabels.join(" · ")) + "</p>" : "") +
+      (d.scopeLabels && d.scopeLabels.length ? '<p class="scope-note"><strong>Broad sponsor-scope signal:</strong> ' +
+        esc(d.scopeLabels.join(" · ")) + ". This is fallback evidence for an open-scope solicitation; verify the specific research fit.</p>" : "");
   }
   function teamChips(fits) {
     return '<div class="team">' + fits.map(function (f) {
       var why = reasonText(f);
       return '<div class="pi"><span class="name">' + esc(last(f.name)) + "</span>" +
         (f.external ? '<span class="badge external">external</span>' : "") +
-        (why ? '<div class="why">' + esc(why) + "</div>" : "") + "</div>";
+        (why ? '<div class="why">' + esc(why) + "</div>" :
+          (f.scopeLabel ? '<div class="why">Broad sponsor-scope match</div>' : "")) + "</div>";
     }).join("") + "</div>";
   }
 
@@ -391,12 +401,15 @@
         : "";
       return;
     }
-    var html = '<p class="themes-head">Team themes · click to steer the search</p><div class="theme-row">';
+    var html = '<p class="themes-head">Team themes · click to steer the search</p>' +
+      '<p class="theme-key"><span><i class="core"></i>Blue = shared research areas</span>' +
+      '<span><i class="bridge"></i>Purple = complementary bridge themes</span></p><div class="theme-row">';
     themes.forEach(function (theme) {
       var on = themeState[theme.label] !== false;
       html += '<button type="button" class="theme-chip ' + esc(theme.type) + (on ? "" : " off") +
         '" data-theme="' + esc(theme.label) + '" aria-pressed="' + (on ? "true" : "false") +
-        '" title="Linked by ' + esc(theme.members.map(function (name) { return last(name); }).join(" + ")) + '">' +
+        '" title="' + (theme.type === "core" ? "Shared area for " : "Complementary bridge across ") +
+        esc(theme.members.map(function (name) { return last(name); }).join(" + ")) + '">' +
         (on ? "✓ " : "✕ ") + esc(theme.label) + "</button>";
     });
     html += '</div><p class="theme-note">Every result fits every selected researcher. Turn off a chip to narrow the list to the themes left active.</p>';
@@ -423,13 +436,17 @@
         broad: result.broad,
         closingSoon: result.closingSoon,
         department: Boolean(department),
-        themeLabels: (result.themeHits || []).map(function (hit) { return hit.label; })
+        themeLabels: (result.themeHits || []).map(function (hit) { return hit.label; }),
+        scopeLabels: Array.from(new Set(result.fits.map(function (fit) {
+          return fit.scopeLabel || "";
+        }).filter(Boolean)))
       },
       fits: result.fits.map(function (fit) {
         return {
           name: fit.name,
           external: externalResearchers.some(function (profile) { return profile.name === fit.name; }),
-          terms: fit.reasons || [],
+          terms: fit.researchReasons || [],
+          scopeLabel: fit.scopeLabel || "",
           shared_topics: [],
           score: fit.score || 0,
           rank_score: fit.score || 0
