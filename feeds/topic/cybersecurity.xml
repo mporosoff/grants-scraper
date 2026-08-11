@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-08-10T20:03:58Z</updated>
+  <updated>2026-08-11T11:07:08Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -17,6 +17,26 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>Rural Utilities Service — Closes 2027-05-03 — The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+  </entry>
+  <entry>
+    <title>CYBER CERTIFICATION PROGRAM 2026-01</title>
+    <link href="https://www.grants.gov/search-results-detail/363527"/>
+    <id>urn:funding-finder:grants-gov:363527</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Small Business Administration</name></author>
+    <category term="Education and workforce"/>
+    <category term="Cybersecurity"/>
+    <summary>Small Business Administration — Closes 2026-09-09 — The purpose of this Funding Opportunity is to invite proposals for funding to deliver technical assistance to entrepreneurial development resource partners. Only an application from the states of Delaware, Michigan, and Ohio that have experience in managing a robust state-wide or nationwide cyber training program will be considered for funding via this announcement.</summary>
+  </entry>
+  <entry>
+    <title>FY26 - Stopping Threats On Pedestrian Competitive Grant Program (Bollards)</title>
+    <link href="https://www.grants.gov/search-results-detail/363521"/>
+    <id>urn:funding-finder:grants-gov:363521</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>DOT Federal Highway Administration</name></author>
+    <category term="Transportation"/>
+    <category term="Cybersecurity"/>
+    <summary>DOT Federal Highway Administration — Closes 2026-09-09 — The purpose of the Bollards Competitive Grant Program is to provide funding for bollard installation projects designed to prevent pedestrian injuries and acts of terrorism in areas used by large numbers of pedestrians. Eligible applicants under the Bollards Competitive Grant Program are State Departments of Transportation (State DOTs) and local government entities such as any city, county, town, p…</summary>
   </entry>
   <entry>
     <title>Precision Inertial Navigation &amp; Positioning On an Integrated Tesseract (PINPOINT)</title>
@@ -399,16 +419,6 @@
     <summary>Food and Drug Administration — Closes 2026-08-21 — The purpose of this funding opportunity is to provide continued support to: (1) assist in the identification and development of a prioritized list of botanical ingredients based on safety concerns, trends and knowledge of botanical ingredients in foods, dietary supplements, and cosmetics marketed in the U.S.; (2) acquire, validate and characterize authenticated reference materials, including raw a…</summary>
   </entry>
   <entry>
-    <title>Farm and Ranch Stress Assistance Network</title>
-    <link href="https://www.grants.gov/search-results-detail/363264"/>
-    <id>urn:funding-finder:grants-gov:363264</id>
-    <updated>2026-07-21T00:00:00Z</updated>
-    <author><name>National Institute of Food and Agriculture</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Cybersecurity"/>
-    <summary>National Institute of Food and Agriculture — Closes 2026-08-10 — The FRSAN program, under assistance listing number 10.525, is to establish a network that connects individuals who are engaged in farming, ranching, and other agriculture-related occupations to stress assistance programs.</summary>
-  </entry>
-  <entry>
     <title>CyberNext: Advance Cybersecurity and AI Readiness</title>
     <link href="https://www.grants.gov/search-results-detail/363249"/>
     <id>urn:funding-finder:grants-gov:363249</id>
@@ -513,21 +523,6 @@
     <category term="Education and workforce"/>
     <category term="Cybersecurity"/>
     <summary>Department of Homeland Security - FEMA — Closes 2026-08-14 — The National Earthquake Hazards Reduction Program (NEHRP) is a coordinating program for earthquake monitoring, research, implementation, education, and outreach activities developed and conducted by these four agencies: • Federal Emergency Management Agency• National Institute of Standards and Technology• National Science Foundation, and• U.S. Geological SurveyFEMA awards competitive grants to non…</summary>
-  </entry>
-  <entry>
-    <title>EducationUSA AI/STEM and Sports Diplomacy Grant</title>
-    <link href="https://www.grants.gov/search-results-detail/363123"/>
-    <id>urn:funding-finder:grants-gov:363123</id>
-    <updated>2026-07-09T00:00:00Z</updated>
-    <author><name>U.S. Mission to Georgia</name></author>
-    <category term="Arts and culture"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>U.S. Mission to Georgia — Closes 2026-08-10 — This funding opportunity supports the America First agenda by strengthening U.S. competitiveness, expanding American universities' international recruitment pipelines and building lasting ties between Georgian talent and U.S. institutions through two complementary initiatives: the EducationUSA Sports Pathways Initiative and the EducationUSA AI and Innovation Hubs. Both proposals under this funding…</summary>
   </entry>
   <entry>
     <title>SERVICE CORP OF RET EXECUTIVES (SCORE) 2026-01</title>

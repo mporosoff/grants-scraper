@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml</id>
-  <updated>2026-08-10T20:03:58Z</updated>
+  <updated>2026-08-11T11:07:08Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -186,6 +186,15 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>Centers for Disease Control - NCHHSTP — Closes 2027-06-01 — In alignment with CDC's viral hepatitis strategic goals and current epidemiology, this Notice of Funding Opportunity (NOFO) will address the need for increasing awareness of viral hepatitis prevention, testing, and treatment options among populations disproportionately affected by hepatitis B and/or hepatitis C virus infections. The priority populations' needs will also be addressed by increasing …</summary>
+  </entry>
+  <entry>
+    <title>Holistic and Evidence-Informed Wellness for STI Prevention</title>
+    <link href="https://www.grants.gov/search-results-detail/363519"/>
+    <id>urn:funding-finder:grants-gov:363519</id>
+    <updated>2027-03-29T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCHHSTP</name></author>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-05-31 — STIs represent a serious public health and economic burden in the United States (U.S.), with approximately 2.2 million new infections occurring each year. As the nation's lead public health agency, the Centers for Disease Control and Prevention (CDC) has a unique responsibility to provide national leadership in STI prevention and control. To meet this challenge, CDC supports a comprehensive and in…</summary>
   </entry>
   <entry>
     <title>Single Source: Resource Center for the Support for Research Excellence (SuRE) Program</title>
@@ -571,14 +580,5 @@
     <updated>2027-01-19T00:00:00Z</updated>
     <author><name>Health Resources and Services Administration</name></author>
     <summary>Health Resources and Services Administration — Closes 2027-03-20 — The purpose of the Rural Health Value (RHV) Program is to fund one recipient to provide analysis and technical assistance (TA) for rural stakeholders to help them understand and engage in the value-based care landscape in the context of rural health care. The goal of this funding opportunity is to support the ability of rural providers to participate and succeed in current and emerging payment and…</summary>
-  </entry>
-  <entry>
-    <title>Ryan White HIV/AIDS Program Part C Capacity Development Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363166"/>
-    <id>urn:funding-finder:grants-gov:363166</id>
-    <updated>2027-01-15T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Technology development"/>
-    <summary>Health Resources and Services Administration — Closes 2027-03-16 — The purpose of the program is to strengthen the capacity of community-based organizations to improve health outcomes and reduce HIV transmission, especially for people not yet in regular HIV care. The activities fall under two categories: HIV Care Innovation and Infrastructure Development.</summary>
   </entry>
 </feed>

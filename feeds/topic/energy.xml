@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-08-10T20:03:58Z</updated>
+  <updated>2026-08-11T11:07:08Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -572,16 +572,6 @@
     <summary>Office of Naval Research — Closes 2026-11-16 — The proposed topic will develop and mature Communications and Networking technologies for Naval operations.Background:A Design for Maritime Superiority (2018) describes an operational architecture for distributed maritime operations (DMO) that "... will provide accurate, timely, and analyzed information to units, warfighting groups, and fleets." A critical component of this architecture is the Nav…</summary>
   </entry>
   <entry>
-    <title>Youth Homelessness NOFO for FY2024 and FY2025</title>
-    <link href="https://www.grants.gov/search-results-detail/362002"/>
-    <id>urn:funding-finder:grants-gov:362002</id>
-    <updated>2026-06-10T00:00:00Z</updated>
-    <author><name>Department of Housing and Urban Development</name></author>
-    <category term="Community development"/>
-    <category term="Energy"/>
-    <summary>Department of Housing and Urban Development — Closes 2026-08-10 — 1. NOFO HighlightsThe Youth Homelessness NOFO provides competitive awards to eligible applicants under two different programs-Youth Homelessness System Improvement (YHSI) grants- Assistance Listing Number (ALN) 14.277Youth Homelessness Demonstration Program (YHDP)- ALN 14.276Under the YHSI grants, HUD will make awards to selected communities to support them in establishing and implementing a respo…</summary>
-  </entry>
-  <entry>
     <title>WaterSMART Cooperative Watershed Management Program</title>
     <link href="https://www.grants.gov/search-results-detail/362755"/>
     <id>urn:funding-finder:grants-gov:362755</id>
@@ -592,17 +582,6 @@
     <category term="Data science"/>
     <category term="Water"/>
     <summary>Bureau of Reclamation — Closes 2028-02-15 — The WaterSMART Cooperative Watershed Management Program funding opportunity invites eligible entities to apply for funding to develop local solutions to address their water management needs. This opportunity provides funding for watershed group development, restoration planning, and watershed management project planning and design. By providing this funding, Reclamation promotes water reliability …</summary>
-  </entry>
-  <entry>
-    <title>MINE HEALTH AND SAFETY STATE GRANTS</title>
-    <link href="https://www.grants.gov/search-results-detail/362729"/>
-    <id>urn:funding-finder:grants-gov:362729</id>
-    <updated>2026-06-09T00:00:00Z</updated>
-    <author><name>Mine Safety and Health Administration</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Materials science"/>
-    <summary>Mine Safety and Health Administration — Closes 2026-08-10 — The Secretary of Labor, through MSHA, may award grants to State, Tribal, and Territorial Governments (including the District of Columbia, the Commonwealth of Puerto Rico, the Virgin Islands, American Samoa, Guam, and the Commonwealth of the Northern Mariana Islands) to assist them in developing and enforcing State mining laws and regulations, improve State workers’ compensation and mining occupati…</summary>
   </entry>
   <entry>
     <title>Research and Education Program for Historically Black Colleges and Universities (HBCU) and Tribal Colleges and Universities (TCU)</title>
@@ -686,5 +665,32 @@
     <category term="Environmental science"/>
     <category term="Water"/>
     <summary>Bureau of Reclamation — Closes 2027-09-08 — The objective of the WaterSMART Enhancing Water Resources Projects funding opportunity is to invite eligible entities to apply for funding to implement projects per the authorizing language referenced above that benefit water resource management for multiple uses, including water conservation and efficiency projects, water infrastructure improvements, and river and watershed restoration. Projects …</summary>
+  </entry>
+  <entry>
+    <title>Africa Regional Services Paris Annual Program Statement: ARS Speaker Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362065"/>
+    <id>urn:funding-finder:grants-gov:362065</id>
+    <updated>2026-04-27T00:00:00Z</updated>
+    <author><name>Africa Regional Services</name></author>
+    <category term="Arts and culture"/>
+    <category term="Energy"/>
+    <category term="Technology development"/>
+    <summary>Africa Regional Services — Closes 2026-08-31 — Priority Region: Sub-Saharan Africa Africa Regional Services (ARS) Paris, part of the U.S. Department of State’s Bureau of African Affairs, invites U.S. citizen speakers, artists, and athletes/coaches to submit Statements of Interest (SOIs) for inclusion on the ARS U.S. Speaker Program roster. Roster members may be selected for small program specific grants to conduct in-person and virtual outreac…</summary>
+  </entry>
+  <entry>
+    <title>Chemical Process Systems (CPS)</title>
+    <link href="https://www.grants.gov/search-results-detail/362061"/>
+    <id>urn:funding-finder:grants-gov:362061</id>
+    <updated>2026-04-24T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <summary>U.S. National Science Foundation — Posted — Society relies on chemical processes to turn raw materials into useful products. The Chemical Process Systems (CPS) program invests in fundamental research on chemical and biochemical processes to make them more efficient, sustainable, and resilient. New CPS technologies for manufacturing, biotechnology, critical minerals, energy, food, and other national priorities will help make the U.S. more co…</summary>
   </entry>
 </feed>

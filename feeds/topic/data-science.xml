@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-08-10T20:03:58Z</updated>
+  <updated>2026-08-11T11:07:08Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -133,6 +133,33 @@
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health — Closes 2027-01-25 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to continue to support the Radiation Oncology-Biology Integration Network (ROBIN) with applications from both new and renewing investigators. This network model will sustain an agile and effective national radiation oncology infrastructure that collectively addresses critical hypothesis-based translation…</summary>
+  </entry>
+  <entry>
+    <title>FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) – RESEARCH COLLABORATION (RC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363526"/>
+    <id>urn:funding-finder:grants-gov:363526</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
+    <category term="Education and workforce"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Air Force Office of Scientific Research — Closes 2027-04-05 — The Department of Defense (DoD) announces the fiscal year 2026 (FY26) Defense Established Program to Stimulate Competitive Research (DEPSCoR) – Research Collaboration (RC) opportunity. The program is sponsored and managed by the Basic Research Office, Office of the Under Secretary of Defense for Research and Engineering (OUSD [R&amp;E]), awarded by the Air Force Office of Scientific Research (AFOSR), …</summary>
+  </entry>
+  <entry>
+    <title>Pax Silica Artificial Intelligence Assistance Project</title>
+    <link href="https://www.grants.gov/search-results-detail/363513"/>
+    <id>urn:funding-finder:grants-gov:363513</id>
+    <updated>2026-08-07T00:00:00Z</updated>
+    <author><name>Bureau of Economic and Business Affairs</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Manufacturing"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <summary>Bureau of Economic and Business Affairs — Closes 2026-08-20 — Leveraging foreign assistance from the Pax Fund, this NOFO launches the Pax Silica Artificial Intelligence (AI) Assistance Project—a historic first-of-its-kind programmatic initiative to strengthen global AI supply chain security by creating a trusted supply chain credentialing and provenance platform to secure the AI supply chain in partner countries and economies. This NOFO seeks to fund the est…</summary>
   </entry>
   <entry>
     <title>DRL Ensuring Resilient Seafood Supply Chains: Countering Forced Labor and any associated Illegal, Unreported and Unregulated Fishing</title>
@@ -494,34 +521,6 @@
     <author><name>Bureau of Arms Control and Nonproliferation</name></author>
     <category term="Data science"/>
     <summary>Bureau of Arms Control and Nonproliferation — Closes 2026-08-21 — This effort seeks to address multiple facets of export control challenges. The first component will analyze trade data, create exemplary visualizations (e.g., dashboards), and train export control authorities to use data analysis for export control implementation. The second component will design, develop, and deploy a smartphone-accessible application for frontline officers to detect and identify…</summary>
-  </entry>
-  <entry>
-    <title>EducationUSA AI/STEM and Sports Diplomacy Grant</title>
-    <link href="https://www.grants.gov/search-results-detail/363123"/>
-    <id>urn:funding-finder:grants-gov:363123</id>
-    <updated>2026-07-09T00:00:00Z</updated>
-    <author><name>U.S. Mission to Georgia</name></author>
-    <category term="Arts and culture"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>U.S. Mission to Georgia — Closes 2026-08-10 — This funding opportunity supports the America First agenda by strengthening U.S. competitiveness, expanding American universities' international recruitment pipelines and building lasting ties between Georgian talent and U.S. institutions through two complementary initiatives: the EducationUSA Sports Pathways Initiative and the EducationUSA AI and Innovation Hubs. Both proposals under this funding…</summary>
-  </entry>
-  <entry>
-    <title>Freedom 250 Great American State Fair Initiative – Abu Dhabi</title>
-    <link href="https://www.grants.gov/search-results-detail/363119"/>
-    <id>urn:funding-finder:grants-gov:363119</id>
-    <updated>2026-07-09T00:00:00Z</updated>
-    <author><name>U.S. Mission to United Arab Emirates</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to United Arab Emirates — Closes 2026-08-10 — The U.S. Embassy Abu Dhabi, Public Diplomacy Section, announces an open competition to develop and implement the programmatic elements of a three-day Freedom 250 Great American State Fair. The Fair will showcase authentic American heartland culture, creativity, entrepreneurship, entertainment, culinary traditions, and music through immersive public programming designed for UAE audiences. Proposals…</summary>
   </entry>
   <entry>
     <title>English Language Exchange Programs: AI and Educational Technology Integration</title>

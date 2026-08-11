@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-08-10T20:03:58Z</updated>
+  <updated>2026-08-11T11:07:08Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -186,6 +186,15 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>Centers for Disease Control - NCHHSTP — Closes 2027-06-01 — In alignment with CDC's viral hepatitis strategic goals and current epidemiology, this Notice of Funding Opportunity (NOFO) will address the need for increasing awareness of viral hepatitis prevention, testing, and treatment options among populations disproportionately affected by hepatitis B and/or hepatitis C virus infections. The priority populations' needs will also be addressed by increasing …</summary>
+  </entry>
+  <entry>
+    <title>Holistic and Evidence-Informed Wellness for STI Prevention</title>
+    <link href="https://www.grants.gov/search-results-detail/363519"/>
+    <id>urn:funding-finder:grants-gov:363519</id>
+    <updated>2027-03-29T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCHHSTP</name></author>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-05-31 — STIs represent a serious public health and economic burden in the United States (U.S.), with approximately 2.2 million new infections occurring each year. As the nation's lead public health agency, the Centers for Disease Control and Prevention (CDC) has a unique responsibility to provide national leadership in STI prevention and control. To meet this challenge, CDC supports a comprehensive and in…</summary>
   </entry>
   <entry>
     <title>Single Source: Resource Center for the Support for Research Excellence (SuRE) Program</title>
@@ -733,6 +742,14 @@
     <summary>Health Resources and Services Administration — Closes 2027-03-18 — The purpose of this program is to improve maternal and infant outcomes by preventing contact with harmful materials before, during, and after pregnancy. This program aims to improve maternal and infant health outcomes by preventing harmful exposures before, during, and after pregnancy. It supports a national expert-staffed call center that provides timely, evidence-based information and personaliz…</summary>
   </entry>
   <entry>
+    <title>Maternal, Infant, and Early Childhood Home Visiting Program (MIECHV)</title>
+    <link href="https://www.grants.gov/search-results-detail/363516"/>
+    <id>urn:funding-finder:grants-gov:363516</id>
+    <updated>2026-12-18T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <summary>Health Resources and Services Administration — Closes 2027-03-18 — The purpose of the Maternal, Infant, and Early Childhood Home Visiting (MIECHV) Program is to improve maternal and child health, early childhood development, and family well-being by providing pregnant women and families with young children voluntary, evidence-based home visiting services.</summary>
+  </entry>
+  <entry>
     <title>Rural Residency Planning and Development Program</title>
     <link href="https://www.grants.gov/search-results-detail/363508"/>
     <id>urn:funding-finder:grants-gov:363508</id>
@@ -964,25 +981,5 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Cancer"/>
     <summary>National Institutes of Health — Closes 2027-01-25 — The purpose of this Notice of Funding Opportunity (NOFO) is to support research that addresses the prevention, diagnosis, and treatment of cancers among American Indians and Alaska Natives (AI/AN), particularly those living in rural communities. The research objectives target overall cancer incidence and mortality, with the goal of making findings applicable and impactful in improving cancer outco…</summary>
-  </entry>
-  <entry>
-    <title>National Biomedical Research Centers (P50 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/362353"/>
-    <id>urn:funding-finder:grants-gov:362353</id>
-    <updated>2026-11-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-01-25 — The National Biomedical Research Centers (NBRCs) are expected to provide scientific expertise, advanced equipment, infrastructure, and a range of well-characterized research models to researchers across the nation. Research at the NBRCs is supported by almost all NIH Institutes, as well as other federal agencies, including those that safeguard US national security interests. This NOFO emphasizes d…</summary>
-  </entry>
-  <entry>
-    <title>Research Resource for a National Swine Resource and Research Center (U42 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/362278"/>
-    <id>urn:funding-finder:grants-gov:362278</id>
-    <updated>2026-11-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Infectious disease"/>
-    <summary>National Institutes of Health — Closes 2027-01-25 — This Notice of Funding Opportunity (NOFO) encourages applications to provide continuing support for a National Swine Resource and Research Center (NSRRC). The NSRRC aims to enable gold-standard science in biomedical research by serving as a centralized national resource for the creation, breeding, cryopreservation, and distribution of genetically modified models. By consolidating these essential f…</summary>
   </entry>
 </feed>

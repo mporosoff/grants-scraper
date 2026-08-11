@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-08-10T20:03:58Z</updated>
+  <updated>2026-08-11T11:07:08Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -91,6 +91,26 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Agriculture and food"/>
     <summary>Health Resources and Services Administration — Closes 2026-10-20 — Fiscal Year (FY) 2027 Regional Nutrition Hubs (RNH) will support region-specific technical assistance (TA) on expanding high-quality nutrition services to the Health Resources and Services Administration's (HRSA) Health Center Program (H80) award recipients and look-alikes (health centers). Nutrition services prevent, manage, and treat diseases and conditions through nutritional and food-based int…</summary>
+  </entry>
+  <entry>
+    <title>Community Economic Development Projects</title>
+    <link href="https://www.grants.gov/search-results-detail/362237"/>
+    <id>urn:funding-finder:grants-gov:362237</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Administration for Children and Families - OCS</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Community development"/>
+    <summary>Administration for Children and Families - OCS — Closes 2026-09-08 — The Office of Community Services (OCS) will award approximately $18.57 million in Community Economic Development (CED) discretionary funds to Community Development Corporations (CDC) to enhance job creation and business development for individuals with low income. Projects should be well-planned, financially viable, and innovative. CED awards will be made as part of a broader strategy to address o…</summary>
+  </entry>
+  <entry>
+    <title>Scholarships for Students at 1890 Institutions (1890 Scholarships)</title>
+    <link href="https://www.grants.gov/search-results-detail/363525"/>
+    <id>urn:funding-finder:grants-gov:363525</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <summary>National Institute of Food and Agriculture — Closes 2026-09-10 — The purpose of the 1890 Scholarships Program, under Assistance Listing Number 10.524, is to provide scholarships to support recruiting, engaging, retaining, mentoring, and training of undergraduate and graduate students at the 1890 Land-grant institutions. These scholarships are intended to encourage outstanding students at 1890 institutions to pursue and complete baccalaureate and graduate (i.e.,…</summary>
   </entry>
   <entry>
     <title>Higher Education Challenge Grants Program</title>
@@ -327,16 +347,6 @@
     <summary>Food and Drug Administration — Closes 2026-08-21 — The purpose of this funding opportunity is to provide continued support to: (1) assist in the identification and development of a prioritized list of botanical ingredients based on safety concerns, trends and knowledge of botanical ingredients in foods, dietary supplements, and cosmetics marketed in the U.S.; (2) acquire, validate and characterize authenticated reference materials, including raw a…</summary>
   </entry>
   <entry>
-    <title>Farm and Ranch Stress Assistance Network</title>
-    <link href="https://www.grants.gov/search-results-detail/363264"/>
-    <id>urn:funding-finder:grants-gov:363264</id>
-    <updated>2026-07-21T00:00:00Z</updated>
-    <author><name>National Institute of Food and Agriculture</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Cybersecurity"/>
-    <summary>National Institute of Food and Agriculture — Closes 2026-08-10 — The FRSAN program, under assistance listing number 10.525, is to establish a network that connects individuals who are engaged in farming, ranching, and other agriculture-related occupations to stress assistance programs.</summary>
-  </entry>
-  <entry>
     <title>Education and Outreach to Tribal Producers through the Tribal Food Safety Alliance</title>
     <link href="https://www.grants.gov/search-results-detail/363239"/>
     <id>urn:funding-finder:grants-gov:363239</id>
@@ -425,34 +435,6 @@
     <category term="Agriculture and food"/>
     <category term="Environmental science"/>
     <summary>Geological Survey — Closes 2026-08-14 — The U.S. Geological Survey's (USGS) Fort Collins Science Center is offering a cooperative-agreement funding opportunity to a CESU partner having capability to conduct research and studies related to the long-term demography of bumble bees, with a focus on imperiled species. The research will focus on Bombus affinis (rusty patched bumble bee), the previously-widespread bumble bee species whose popu…</summary>
-  </entry>
-  <entry>
-    <title>Freedom 250 Great American State Fair Initiative – Abu Dhabi</title>
-    <link href="https://www.grants.gov/search-results-detail/363119"/>
-    <id>urn:funding-finder:grants-gov:363119</id>
-    <updated>2026-07-09T00:00:00Z</updated>
-    <author><name>U.S. Mission to United Arab Emirates</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to United Arab Emirates — Closes 2026-08-10 — The U.S. Embassy Abu Dhabi, Public Diplomacy Section, announces an open competition to develop and implement the programmatic elements of a three-day Freedom 250 Great American State Fair. The Fair will showcase authentic American heartland culture, creativity, entrepreneurship, entertainment, culinary traditions, and music through immersive public programming designed for UAE audiences. Proposals…</summary>
-  </entry>
-  <entry>
-    <title>Freedom250 Advancing U.S. Artificial Intelligence Leadership in Algeria</title>
-    <link href="https://www.grants.gov/search-results-detail/363121"/>
-    <id>urn:funding-finder:grants-gov:363121</id>
-    <updated>2026-07-09T00:00:00Z</updated>
-    <author><name>U.S. Mission to Algeria</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Algeria — Closes 2026-08-10 — A. ELIGIBILITY 1. Eligible Applicants The following organizations are eligible to apply: ● Not-for-profit organizations, including think tanks and civil society/non-governmental organizations ● Public and private educational institutions ● Public International Organizations and Governmental institutions For-profit entities, even those that may fall into the categories listed above, are not eligibl…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2027 Expanding Nutrition Services</title>
@@ -664,5 +646,15 @@
     <category term="Biology and biotechnology"/>
     <category term="Transportation"/>
     <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-30 — Summary: The fiscal year 2026 (FY26) Amyotrophic Lateral Sclerosis Research Program (ALSRP) Pilot Clinical Trial Award (PCTA) supports the rapid implementation of clinical trials with the potential to have a significant impact on the treatment or management of amyotrophic lateral sclerosis (ALS). Projects may range from phase 1 to small-scale phase 2 trials.Applications must address one of the fol…</summary>
+  </entry>
+  <entry>
+    <title>DoW Amyotrophic Lateral Sclerosis Research Program, Therapeutic Development Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362196"/>
+    <id>urn:funding-finder:grants-gov:362196</id>
+    <updated>2026-05-04T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-30 — Summary: The fiscal year 2026 (FY26) Amyotrophic Lateral Sclerosis Research Program (ALSRP) Therapeutic Development Award (TDA) supports research ranging from preclinical validation of therapeutic leads through U.S. Food and Drug Administration (FDA) Investigational New Drug (IND)-enabling studies. The proposed studies are expected to be empirical in nature and product-driven. Applicants with limi…</summary>
   </entry>
 </feed>

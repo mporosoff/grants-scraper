@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-08-10T20:03:58Z</updated>
+  <updated>2026-08-11T11:07:08Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
@@ -70,6 +70,20 @@
     <summary>National Institutes of Health — Closes 2026-11-01 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop, operate, and sustain a cloud-based data storage and computing platform that democratizes access to large-scale Alzheimer’s disease (AD) and AD-related dementias (ADRD) genetic and genomic data. The platform must be secure, scalable, and interoperable. The platform wil…</summary>
   </entry>
   <entry>
+    <title>FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) – RESEARCH COLLABORATION (RC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363526"/>
+    <id>urn:funding-finder:grants-gov:363526</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
+    <category term="Education and workforce"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Air Force Office of Scientific Research — Closes 2027-04-05 — The Department of Defense (DoD) announces the fiscal year 2026 (FY26) Defense Established Program to Stimulate Competitive Research (DEPSCoR) – Research Collaboration (RC) opportunity. The program is sponsored and managed by the Basic Research Office, Office of the Under Secretary of Defense for Research and Engineering (OUSD [R&amp;E]), awarded by the Air Force Office of Scientific Research (AFOSR), …</summary>
+  </entry>
+  <entry>
     <title>NSF DCL Advancing Artificial Intelligence (AI) Agent Ecosystems through the National Science Foundation Pathways to Enable Secure Open-Source Ecosystems (NSF PESOSE) Program | NSF 26-015</title>
     <link href="https://www.nsf.gov/funding/opportunities/dcl-advancing-artificial-intelligence-ai-agent-ecosystems"/>
     <id>urn:funding-finder:ur-vpr-funding-digest-limited-submissions-foundations:vpr-email%3ANSF26-015</id>
@@ -89,6 +103,8 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Arts and culture"/>
     <category term="Manufacturing"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
     <summary>Bureau of Economic and Business Affairs — Closes 2026-08-20 — Leveraging foreign assistance from the Pax Fund, this NOFO launches the Pax Silica Artificial Intelligence (AI) Assistance Project—a historic first-of-its-kind programmatic initiative to strengthen global AI supply chain security by creating a trusted supply chain credentialing and provenance platform to secure the AI supply chain in partner countries and economies. This NOFO seeks to fund the est…</summary>
   </entry>
   <entry>
@@ -526,49 +542,6 @@
     <summary>National Telecommunications and Information Admini — Closes 2026-09-09 — This NOFO is the fourth issued under NTIA’s Public Wireless Supply Chain Innovation Fund (PWSCIF or Innovation Fund). Titled “Solutions for AI-Native RAN,” the goal of this NOFO is to support the development of a secure compute environment to enable or leverage native artificial intelligence (“AI”) capabilities in the Radio Access Network (RAN) that generate revenue for operators, cost savings, an…</summary>
   </entry>
   <entry>
-    <title>EducationUSA AI/STEM and Sports Diplomacy Grant</title>
-    <link href="https://www.grants.gov/search-results-detail/363123"/>
-    <id>urn:funding-finder:grants-gov:363123</id>
-    <updated>2026-07-09T00:00:00Z</updated>
-    <author><name>U.S. Mission to Georgia</name></author>
-    <category term="Arts and culture"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>U.S. Mission to Georgia — Closes 2026-08-10 — This funding opportunity supports the America First agenda by strengthening U.S. competitiveness, expanding American universities' international recruitment pipelines and building lasting ties between Georgian talent and U.S. institutions through two complementary initiatives: the EducationUSA Sports Pathways Initiative and the EducationUSA AI and Innovation Hubs. Both proposals under this funding…</summary>
-  </entry>
-  <entry>
-    <title>Freedom 250 Great American State Fair Initiative – Abu Dhabi</title>
-    <link href="https://www.grants.gov/search-results-detail/363119"/>
-    <id>urn:funding-finder:grants-gov:363119</id>
-    <updated>2026-07-09T00:00:00Z</updated>
-    <author><name>U.S. Mission to United Arab Emirates</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to United Arab Emirates — Closes 2026-08-10 — The U.S. Embassy Abu Dhabi, Public Diplomacy Section, announces an open competition to develop and implement the programmatic elements of a three-day Freedom 250 Great American State Fair. The Fair will showcase authentic American heartland culture, creativity, entrepreneurship, entertainment, culinary traditions, and music through immersive public programming designed for UAE audiences. Proposals…</summary>
-  </entry>
-  <entry>
-    <title>Freedom250 Advancing U.S. Artificial Intelligence Leadership in Algeria</title>
-    <link href="https://www.grants.gov/search-results-detail/363121"/>
-    <id>urn:funding-finder:grants-gov:363121</id>
-    <updated>2026-07-09T00:00:00Z</updated>
-    <author><name>U.S. Mission to Algeria</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Algeria — Closes 2026-08-10 — A. ELIGIBILITY 1. Eligible Applicants The following organizations are eligible to apply: ● Not-for-profit organizations, including think tanks and civil society/non-governmental organizations ● Public and private educational institutions ● Public International Organizations and Governmental institutions For-profit entities, even those that may fall into the categories listed above, are not eligibl…</summary>
-  </entry>
-  <entry>
     <title>English Language Exchange Programs: AI and Educational Technology Integration</title>
     <link href="https://www.grants.gov/search-results-detail/363105"/>
     <id>urn:funding-finder:grants-gov:363105</id>
@@ -765,5 +738,28 @@
     <category term="Arts and culture"/>
     <category term="Environmental science"/>
     <summary>DARPA - Information Processing Technologies Office — Closes 2026-08-25 — The DICE program seeks to develop the theory and algorithms for decentralized coordination and local inference control to enable a scalable, adaptive, and resilient collective of heterogeneous AI agents that can autonomously execute sustained long-time-horizon missions in contested environments while remaining under human control. In contrast to small-scale, rigid, and fragile centralized orchestr…</summary>
+  </entry>
+  <entry>
+    <title>WaterSMART Cooperative Watershed Management Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362755"/>
+    <id>urn:funding-finder:grants-gov:362755</id>
+    <updated>2026-06-10T00:00:00Z</updated>
+    <author><name>Bureau of Reclamation</name></author>
+    <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Water"/>
+    <summary>Bureau of Reclamation — Closes 2028-02-15 — The WaterSMART Cooperative Watershed Management Program funding opportunity invites eligible entities to apply for funding to develop local solutions to address their water management needs. This opportunity provides funding for watershed group development, restoration planning, and watershed management project planning and design. By providing this funding, Reclamation promotes water reliability …</summary>
+  </entry>
+  <entry>
+    <title>GlobalX Challenge 26.1: AI-Native Air Interface for Tactical Communication Networks</title>
+    <link href="https://www.grants.gov/search-results-detail/362721"/>
+    <id>urn:funding-finder:grants-gov:362721</id>
+    <updated>2026-06-09T00:00:00Z</updated>
+    <author><name>Office of Naval Research</name></author>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Office of Naval Research — Closes 2026-08-31 — The purpose of the GlobalX Innovation Challenge is to accelerate the traditional knowledge generation cycle, rapidly testing applied research theories to enable the discovery of revolutionary dual-use capabilities for the benefit of the U.S. Navy and Marine Corps, the commercial marketplace, and the public. Led by the Office of Naval Research Global and targeted at researchers in the Indian subcon…</summary>
   </entry>
 </feed>

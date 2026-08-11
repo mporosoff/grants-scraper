@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml</id>
-  <updated>2026-08-10T20:03:58Z</updated>
+  <updated>2026-08-11T11:07:08Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Veterans Legacy Grants Program</title>
@@ -156,6 +156,16 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health — Closes 2026-12-15 — The National Library of Medicine (NLM) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for a Training Center of the Network of the National Library of Medicine (NNLM).Established in 1965 and organized geographically across the United States and its territories, the NNLM promotes and supports the initiatives, products, and services of the NLM and the National Insti…</summary>
+  </entry>
+  <entry>
+    <title>Community Economic Development Projects</title>
+    <link href="https://www.grants.gov/search-results-detail/362237"/>
+    <id>urn:funding-finder:grants-gov:362237</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Administration for Children and Families - OCS</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Community development"/>
+    <summary>Administration for Children and Families - OCS — Closes 2026-09-08 — The Office of Community Services (OCS) will award approximately $18.57 million in Community Economic Development (CED) discretionary funds to Community Development Corporations (CDC) to enhance job creation and business development for individuals with low income. Projects should be well-planned, financially viable, and innovative. CED awards will be made as part of a broader strategy to address o…</summary>
   </entry>
   <entry>
     <title>Rural Housing Preservation Grant</title>
@@ -346,21 +356,6 @@
     <summary>Health Resources and Services Administration — Closes 2026-08-12 — The Delta States Rural Development Network Program supports support the planning, development, and implementation of integrated health care networks that collaborate in order to (i) achieve efficiencies; (ii) expand access to, coordinate, and improve the quality of basic health care services and associated health outcomes in rural areas within the eight rural Mississippi Delta Region states (Alaba…</summary>
   </entry>
   <entry>
-    <title>EducationUSA AI/STEM and Sports Diplomacy Grant</title>
-    <link href="https://www.grants.gov/search-results-detail/363123"/>
-    <id>urn:funding-finder:grants-gov:363123</id>
-    <updated>2026-07-09T00:00:00Z</updated>
-    <author><name>U.S. Mission to Georgia</name></author>
-    <category term="Arts and culture"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>U.S. Mission to Georgia — Closes 2026-08-10 — This funding opportunity supports the America First agenda by strengthening U.S. competitiveness, expanding American universities' international recruitment pipelines and building lasting ties between Georgian talent and U.S. institutions through two complementary initiatives: the EducationUSA Sports Pathways Initiative and the EducationUSA AI and Innovation Hubs. Both proposals under this funding…</summary>
-  </entry>
-  <entry>
     <title>SERVICE CORP OF RET EXECUTIVES (SCORE) 2026-01</title>
     <link href="https://www.grants.gov/search-results-detail/363127"/>
     <id>urn:funding-finder:grants-gov:363127</id>
@@ -414,16 +409,6 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>National Institute of Food and Agriculture — Closes 2026-08-14 — The TCEP-CA under assistance listing 10.517, supports informal, community-based extension projects that address agriculture, youths, economic development, healthy lifestyles, natural resources, or other topics important to Tribal communities. This NOFO will begin a new 4-year continuation funding cycle.</summary>
-  </entry>
-  <entry>
-    <title>Youth Homelessness NOFO for FY2024 and FY2025</title>
-    <link href="https://www.grants.gov/search-results-detail/362002"/>
-    <id>urn:funding-finder:grants-gov:362002</id>
-    <updated>2026-06-10T00:00:00Z</updated>
-    <author><name>Department of Housing and Urban Development</name></author>
-    <category term="Community development"/>
-    <category term="Energy"/>
-    <summary>Department of Housing and Urban Development — Closes 2026-08-10 — 1. NOFO HighlightsThe Youth Homelessness NOFO provides competitive awards to eligible applicants under two different programs-Youth Homelessness System Improvement (YHSI) grants- Assistance Listing Number (ALN) 14.277Youth Homelessness Demonstration Program (YHDP)- ALN 14.276Under the YHSI grants, HUD will make awards to selected communities to support them in establishing and implementing a respo…</summary>
   </entry>
   <entry>
     <title>Authority to Accept Unsolicited Proposals for Research Partnerships Notice of Intent (NOI)</title>
@@ -671,6 +656,17 @@
     <title>Denver FY 2021 – FY 2023 EDA Planning and Local Technical Assistance</title>
     <link href="https://www.grants.gov/search-results-detail/332126"/>
     <id>urn:funding-finder:grants-gov:332126</id>
+    <updated>2021-03-15T00:00:00Z</updated>
+    <author><name>Department of Commerce</name></author>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <summary>Department of Commerce — Posted — UPDATED NOTICE - PLEASE READ: April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
+  </entry>
+  <entry>
+    <title>Philadelphia FY 2021 – FY 2023 EDA Planning and Local Technical Assistance</title>
+    <link href="https://www.grants.gov/search-results-detail/332138"/>
+    <id>urn:funding-finder:grants-gov:332138</id>
     <updated>2021-03-15T00:00:00Z</updated>
     <author><name>Department of Commerce</name></author>
     <category term="Arts and culture"/>
