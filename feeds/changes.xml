@@ -4,8 +4,64 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/changes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/changes.xml</id>
-  <updated>2026-08-11T11:07:17Z</updated>
+  <updated>2026-08-11T14:12:34Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Closing soon: DoW Vision, Mentored Clinical Research Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362185"/>
+    <id>urn:funding-finder:change:d271455208041afd8d03</id>
+    <updated>2026-08-11T14:09:37.828028Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-10</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: NSF Computer and Information Science and Engineering : Core Programs 25-543</title>
+    <link href="https://beta.nsf.gov/funding/opportunities/computer-information-science-engineering-core"/>
+    <id>urn:funding-finder:change:c041f5783d1a34b28d77</id>
+    <updated>2026-08-11T14:09:37.828028Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-10</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: NIH Director’s Early Independence Award (DP5 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/360988"/>
+    <id>urn:funding-finder:change:6a0f0e2c4215850b8a62</id>
+    <updated>2026-08-11T14:09:37.828028Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-10</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Computer and Information Science and Engineering (CISE): Future Computing Research</title>
+    <link href="https://www.grants.gov/search-results-detail/360149"/>
+    <id>urn:funding-finder:change:6682c4f69fb246d52ded</id>
+    <updated>2026-08-11T14:09:37.828028Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-10</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: DoW Hearing Restoration Focused Research Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362218"/>
+    <id>urn:funding-finder:change:241630ea26a5dc4925df</id>
+    <updated>2026-08-11T14:09:37.828028Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-10</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Kenya: Crowd Control and Less-Than-Lethal Riot Response Training</title>
+    <link href="https://www.grants.gov/search-results-detail/363208"/>
+    <id>urn:funding-finder:change:1d493e804fe3781fde73</id>
+    <updated>2026-08-11T14:09:37.828028Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-10</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Scholarships for Students at 1890 Institutions (1890 Scholarships)</title>
+    <link href="https://www.grants.gov/search-results-detail/363525"/>
+    <id>urn:funding-finder:change:0b95d59aef1fcfddff3c</id>
+    <updated>2026-08-11T14:09:37.828028Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-10</summary>
+  </entry>
   <entry>
     <title>Closed or removed: OSERS-OSEP: National Center on Academic Interventions Assistance Listing Number (ALN): 84.326Q</title>
     <link href="https://www.grants.gov/search-results-detail/362807"/>
@@ -29,14 +85,6 @@
     <updated>2026-08-11T11:05:18.817648Z</updated>
     <category term="closed_or_removed"/>
     <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: DoW Vision, Mentored Clinical Research Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362185"/>
-    <id>urn:funding-finder:change:d271455208041afd8d03</id>
-    <updated>2026-08-11T11:05:18.817648Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-10</summary>
   </entry>
   <entry>
     <title>New opportunity: Early Warning and Response in Nigeria</title>
@@ -69,14 +117,6 @@
     <updated>2026-08-11T11:05:18.817648Z</updated>
     <category term="new"/>
     <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: NSF Computer and Information Science and Engineering : Core Programs 25-543</title>
-    <link href="https://beta.nsf.gov/funding/opportunities/computer-information-science-engineering-core"/>
-    <id>urn:funding-finder:change:c041f5783d1a34b28d77</id>
-    <updated>2026-08-11T11:05:18.817648Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-10</summary>
   </entry>
   <entry>
     <title>New opportunity: Maternal, Infant, and Early Childhood Home Visiting Program (MIECHV)</title>
@@ -239,22 +279,6 @@
     <summary>No longer in the current catalog</summary>
   </entry>
   <entry>
-    <title>Closing soon: NIH Director’s Early Independence Award (DP5 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/360988"/>
-    <id>urn:funding-finder:change:6a0f0e2c4215850b8a62</id>
-    <updated>2026-08-11T11:05:18.817648Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-10</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Computer and Information Science and Engineering (CISE): Future Computing Research</title>
-    <link href="https://www.grants.gov/search-results-detail/360149"/>
-    <id>urn:funding-finder:change:6682c4f69fb246d52ded</id>
-    <updated>2026-08-11T11:05:18.817648Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-10</summary>
-  </entry>
-  <entry>
     <title>New opportunity: The Home Visiting Research, Improvement, Sustainability and Evaluation Center (HV-RISE)</title>
     <link href="https://www.grants.gov/search-results-detail/363523"/>
     <id>urn:funding-finder:change:61a8911fce4b31935a93</id>
@@ -343,28 +367,12 @@
     <summary>No longer in the current catalog</summary>
   </entry>
   <entry>
-    <title>Closing soon: DoW Hearing Restoration Focused Research Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362218"/>
-    <id>urn:funding-finder:change:241630ea26a5dc4925df</id>
-    <updated>2026-08-11T11:05:18.817648Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-10</summary>
-  </entry>
-  <entry>
     <title>Closing soon: Public Diplomacy Grants/Small Grants Program - Ghana</title>
     <link href="https://www.grants.gov/search-results-detail/363515"/>
     <id>urn:funding-finder:change:207c37dece822d0dba06</id>
     <updated>2026-08-11T11:05:18.817648Z</updated>
     <category term="closing_soon"/>
     <summary>Deadline 2026-08-14</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Kenya: Crowd Control and Less-Than-Lethal Riot Response Training</title>
-    <link href="https://www.grants.gov/search-results-detail/363208"/>
-    <id>urn:funding-finder:change:1d493e804fe3781fde73</id>
-    <updated>2026-08-11T11:05:18.817648Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-10</summary>
   </entry>
   <entry>
     <title>Closed or removed: Freedom 250 Great American State Fair Initiative – Abu Dhabi</title>
@@ -405,14 +413,6 @@
     <updated>2026-08-11T11:05:18.817648Z</updated>
     <category term="new"/>
     <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Scholarships for Students at 1890 Institutions (1890 Scholarships)</title>
-    <link href="https://www.grants.gov/search-results-detail/363525"/>
-    <id>urn:funding-finder:change:0b95d59aef1fcfddff3c</id>
-    <updated>2026-08-11T11:05:18.817648Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-10</summary>
   </entry>
   <entry>
     <title>Closed or removed: Youth Homelessness NOFO for FY2024 and FY2025</title>

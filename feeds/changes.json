@@ -1,8 +1,285 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-11T11:07:17Z",
+  "generated_at": "2026-08-11T14:12:34Z",
   "retention_days": 90,
   "events": [
+    {
+      "id": "d271455208041afd8d03",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-11T14:09:37.828028Z",
+      "opportunity_id": "362185",
+      "detail": "Deadline 2026-09-10",
+      "record": {
+        "opportunity_id": "362185",
+        "opportunity_number": "HT942526VRPMCRA",
+        "title": "DoW Vision, Mentored Clinical Research Award",
+        "agency": "Defense Health Agency Contracting Activity - DHACA",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-05-05",
+        "close_date": "2026-09-10",
+        "last_updated": "2026-05-06",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/362185",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-10"
+    },
+    {
+      "id": "c041f5783d1a34b28d77",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-11T14:09:37.828028Z",
+      "opportunity_id": "vpr-email:vpr-c3bbadc4b31b4e1c",
+      "detail": "Deadline 2026-09-10",
+      "record": {
+        "opportunity_id": "vpr-email:vpr-c3bbadc4b31b4e1c",
+        "opportunity_number": null,
+        "title": "NSF Computer and Information Science and Engineering : Core Programs 25-543",
+        "agency": "UR VPR funding digest (limited submissions & foundations)",
+        "source": "UR VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-09-10",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://beta.nsf.gov/funding/opportunities/computer-information-science-engineering-core",
+        "funding_opportunity_url": "https://beta.nsf.gov/funding/opportunities/computer-information-science-engineering-core",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-10"
+    },
+    {
+      "id": "6a0f0e2c4215850b8a62",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-11T14:09:37.828028Z",
+      "opportunity_id": "360988",
+      "detail": "Deadline 2026-09-10",
+      "record": {
+        "opportunity_id": "360988",
+        "opportunity_number": "RFA-RM-27-004",
+        "title": "NIH Director’s Early Independence Award (DP5 Clinical Trial Optional)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-06-26",
+        "close_date": "2026-09-10",
+        "last_updated": "2026-06-26",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 350000,
+        "award_ceiling": 350000,
+        "detail_page": "https://www.grants.gov/search-results-detail/360988",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-10"
+    },
+    {
+      "id": "6682c4f69fb246d52ded",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-11T14:09:37.828028Z",
+      "opportunity_id": "360149",
+      "detail": "Deadline 2026-09-10",
+      "record": {
+        "opportunity_id": "360149",
+        "opportunity_number": "25-543",
+        "title": "Computer and Information Science and Engineering (CISE): Future Computing Research",
+        "agency": "U.S. National Science Foundation",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2025-07-25",
+        "close_date": "2026-09-10",
+        "last_updated": "2026-02-21",
+        "version": "Synopsis 5",
+        "topic_areas": [
+          "Data science",
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 600000,
+        "award_ceiling": 12000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/360149",
+        "funding_opportunity_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf25543",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-10"
+    },
+    {
+      "id": "241630ea26a5dc4925df",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-11T14:09:37.828028Z",
+      "opportunity_id": "362218",
+      "detail": "Deadline 2026-09-10",
+      "record": {
+        "opportunity_id": "362218",
+        "opportunity_number": "HT942526HRRPFRA",
+        "title": "DoW Hearing Restoration Focused Research Award",
+        "agency": "Defense Health Agency Contracting Activity - DHACA",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-05-04",
+        "close_date": "2026-09-10",
+        "last_updated": "2026-05-06",
+        "version": "Synopsis 3",
+        "topic_areas": [],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/362218",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-10"
+    },
+    {
+      "id": "1d493e804fe3781fde73",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-11T14:09:37.828028Z",
+      "opportunity_id": "363208",
+      "detail": "Deadline 2026-09-10",
+      "record": {
+        "opportunity_id": "363208",
+        "opportunity_number": "OFOP0003355",
+        "title": "Kenya: Crowd Control and Less-Than-Lethal Riot Response Training",
+        "agency": "Bureau of International Narcotics-Law Enforcement",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-16",
+        "close_date": "2026-09-10",
+        "last_updated": "2026-07-16",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce"
+        ],
+        "disciplines": [],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 500000,
+        "award_ceiling": 1600000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363208",
+        "funding_opportunity_url": "https://mygrants.servicenowservices.com/mygrants?id=mygrants_form&table=x_g_usd4_o_grant_funding_opportunity&sys_id=08402f1a1b068350e02962cae54bcbf6&view=Default",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353906"
+      },
+      "deadline": "2026-09-10"
+    },
+    {
+      "id": "0b95d59aef1fcfddff3c",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-11T14:09:37.828028Z",
+      "opportunity_id": "363525",
+      "detail": "Deadline 2026-09-10",
+      "record": {
+        "opportunity_id": "363525",
+        "opportunity_number": "USDA-NIFA-1890SS-011978",
+        "title": "Scholarships for Students at 1890 Institutions (1890 Scholarships)",
+        "agency": "National Institute of Food and Agriculture",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-10",
+        "close_date": "2026-09-10",
+        "last_updated": "2026-08-10",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Agriculture and food",
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 1111578,
+        "award_ceiling": 5557890,
+        "detail_page": "https://www.grants.gov/search-results-detail/363525",
+        "funding_opportunity_url": "https://www.nifa.usda.gov/grants/funding-opportunities/scholarships-students-1890-institutions-1890-scholarships",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354479"
+      },
+      "deadline": "2026-09-10"
+    },
     {
       "id": "fcfe3dcbb40b2c2f5a3f",
       "type": "closed_or_removed",
@@ -118,45 +395,6 @@
         "funding_opportunity_url": null,
         "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353853"
       }
-    },
-    {
-      "id": "d271455208041afd8d03",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-11T11:05:18.817648Z",
-      "opportunity_id": "362185",
-      "detail": "Deadline 2026-09-10",
-      "record": {
-        "opportunity_id": "362185",
-        "opportunity_number": "HT942526VRPMCRA",
-        "title": "DoW Vision, Mentored Clinical Research Award",
-        "agency": "Defense Health Agency Contracting Activity - DHACA",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-05-05",
-        "close_date": "2026-09-10",
-        "last_updated": "2026-05-06",
-        "version": "Synopsis 1",
-        "topic_areas": [
-          "Education and workforce"
-        ],
-        "disciplines": [
-          "Engineering and Physical Sciences"
-        ],
-        "applicant_types": [
-          "Unrestricted"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": null,
-        "award_ceiling": null,
-        "detail_page": "https://www.grants.gov/search-results-detail/362185",
-        "funding_opportunity_url": null,
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-10"
     },
     {
       "id": "cff979036fe925273c72",
@@ -320,37 +558,6 @@
         "funding_opportunity_url": "https://www.grants.gov/",
         "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354485"
       }
-    },
-    {
-      "id": "c041f5783d1a34b28d77",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-11T11:05:18.817648Z",
-      "opportunity_id": "vpr-email:vpr-c3bbadc4b31b4e1c",
-      "detail": "Deadline 2026-09-10",
-      "record": {
-        "opportunity_id": "vpr-email:vpr-c3bbadc4b31b4e1c",
-        "opportunity_number": null,
-        "title": "NSF Computer and Information Science and Engineering : Core Programs 25-543",
-        "agency": "UR VPR funding digest (limited submissions & foundations)",
-        "source": "UR VPR funding digest (limited submissions & foundations)",
-        "source_type": "Internal",
-        "status": "posted",
-        "posted_date": null,
-        "close_date": "2026-09-10",
-        "last_updated": null,
-        "version": null,
-        "topic_areas": [],
-        "disciplines": [],
-        "applicant_types": [],
-        "funding_instruments": [],
-        "award_floor": null,
-        "award_ceiling": null,
-        "detail_page": "https://beta.nsf.gov/funding/opportunities/computer-information-science-engineering-core",
-        "funding_opportunity_url": "https://beta.nsf.gov/funding/opportunities/computer-information-science-engineering-core",
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-10"
     },
     {
       "id": "b9a2b976f6aa97023992",
@@ -1186,99 +1393,6 @@
       }
     },
     {
-      "id": "6a0f0e2c4215850b8a62",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-11T11:05:18.817648Z",
-      "opportunity_id": "360988",
-      "detail": "Deadline 2026-09-10",
-      "record": {
-        "opportunity_id": "360988",
-        "opportunity_number": "RFA-RM-27-004",
-        "title": "NIH Director’s Early Independence Award (DP5 Clinical Trial Optional)",
-        "agency": "National Institutes of Health",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-06-26",
-        "close_date": "2026-09-10",
-        "last_updated": "2026-06-26",
-        "version": "Synopsis 1",
-        "topic_areas": [
-          "Education and workforce"
-        ],
-        "disciplines": [
-          "Medical and Health"
-        ],
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Special district governments",
-          "Independent school districts",
-          "Public and state institutions of higher education",
-          "Federally recognized Native American tribal governments",
-          "Public and Indian housing authorities",
-          "Other Native American tribal organizations",
-          "Nonprofits with 501(c)(3) status",
-          "Nonprofits without 501(c)(3) status",
-          "Private institutions of higher education",
-          "For-profit organizations other than small businesses",
-          "Small businesses",
-          "Other"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": 350000,
-        "award_ceiling": 350000,
-        "detail_page": "https://www.grants.gov/search-results-detail/360988",
-        "funding_opportunity_url": null,
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-10"
-    },
-    {
-      "id": "6682c4f69fb246d52ded",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-11T11:05:18.817648Z",
-      "opportunity_id": "360149",
-      "detail": "Deadline 2026-09-10",
-      "record": {
-        "opportunity_id": "360149",
-        "opportunity_number": "25-543",
-        "title": "Computer and Information Science and Engineering (CISE): Future Computing Research",
-        "agency": "U.S. National Science Foundation",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2025-07-25",
-        "close_date": "2026-09-10",
-        "last_updated": "2026-02-21",
-        "version": "Synopsis 5",
-        "topic_areas": [
-          "Data science",
-          "Education and workforce"
-        ],
-        "disciplines": [
-          "Engineering and Physical Sciences"
-        ],
-        "applicant_types": [
-          "Other"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": 600000,
-        "award_ceiling": 12000000,
-        "detail_page": "https://www.grants.gov/search-results-detail/360149",
-        "funding_opportunity_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf25543",
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-10"
-    },
-    {
       "id": "61a8911fce4b31935a93",
       "type": "new",
       "label": "New opportunity",
@@ -1781,43 +1895,6 @@
       }
     },
     {
-      "id": "241630ea26a5dc4925df",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-11T11:05:18.817648Z",
-      "opportunity_id": "362218",
-      "detail": "Deadline 2026-09-10",
-      "record": {
-        "opportunity_id": "362218",
-        "opportunity_number": "HT942526HRRPFRA",
-        "title": "DoW Hearing Restoration Focused Research Award",
-        "agency": "Defense Health Agency Contracting Activity - DHACA",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-05-04",
-        "close_date": "2026-09-10",
-        "last_updated": "2026-05-06",
-        "version": "Synopsis 3",
-        "topic_areas": [],
-        "disciplines": [
-          "Engineering and Physical Sciences"
-        ],
-        "applicant_types": [
-          "Unrestricted"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": null,
-        "award_ceiling": null,
-        "detail_page": "https://www.grants.gov/search-results-detail/362218",
-        "funding_opportunity_url": null,
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-10"
-    },
-    {
       "id": "207c37dece822d0dba06",
       "type": "closing_soon",
       "label": "Closing soon",
@@ -1862,43 +1939,6 @@
         "primary_document_url": null
       },
       "deadline": "2026-08-14"
-    },
-    {
-      "id": "1d493e804fe3781fde73",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-11T11:05:18.817648Z",
-      "opportunity_id": "363208",
-      "detail": "Deadline 2026-09-10",
-      "record": {
-        "opportunity_id": "363208",
-        "opportunity_number": "OFOP0003355",
-        "title": "Kenya: Crowd Control and Less-Than-Lethal Riot Response Training",
-        "agency": "Bureau of International Narcotics-Law Enforcement",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-07-16",
-        "close_date": "2026-09-10",
-        "last_updated": "2026-07-16",
-        "version": "Synopsis 1",
-        "topic_areas": [
-          "Education and workforce"
-        ],
-        "disciplines": [],
-        "applicant_types": [
-          "Other"
-        ],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "award_floor": 500000,
-        "award_ceiling": 1600000,
-        "detail_page": "https://www.grants.gov/search-results-detail/363208",
-        "funding_opportunity_url": "https://mygrants.servicenowservices.com/mygrants?id=mygrants_form&table=x_g_usd4_o_grant_funding_opportunity&sys_id=08402f1a1b068350e02962cae54bcbf6&view=Default",
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353906"
-      },
-      "deadline": "2026-09-10"
     },
     {
       "id": "19dfbbd732052df7d33b",
@@ -2112,46 +2152,6 @@
         "funding_opportunity_url": null,
         "primary_document_url": null
       }
-    },
-    {
-      "id": "0b95d59aef1fcfddff3c",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-11T11:05:18.817648Z",
-      "opportunity_id": "363525",
-      "detail": "Deadline 2026-09-10",
-      "record": {
-        "opportunity_id": "363525",
-        "opportunity_number": "USDA-NIFA-1890SS-011978",
-        "title": "Scholarships for Students at 1890 Institutions (1890 Scholarships)",
-        "agency": "National Institute of Food and Agriculture",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-08-10",
-        "close_date": "2026-09-10",
-        "last_updated": "2026-08-10",
-        "version": "Synopsis 1",
-        "topic_areas": [
-          "Agriculture and food",
-          "Education and workforce"
-        ],
-        "disciplines": [
-          "Environmental and Life Sciences"
-        ],
-        "applicant_types": [
-          "Other"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": 1111578,
-        "award_ceiling": 5557890,
-        "detail_page": "https://www.grants.gov/search-results-detail/363525",
-        "funding_opportunity_url": "https://www.nifa.usda.gov/grants/funding-opportunities/scholarships-students-1890-institutions-1890-scholarships",
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354479"
-      },
-      "deadline": "2026-09-10"
     },
     {
       "id": "0a5502433f5892b13093",
