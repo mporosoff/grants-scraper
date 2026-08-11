@@ -21,7 +21,7 @@
   });
 
   menu.addEventListener("click", event => {
-    if (event.target.closest("a")) setOpen(false);
+    if (event.target.closest("a, button")) setOpen(false);
   });
 
   document.addEventListener("keydown", event => {

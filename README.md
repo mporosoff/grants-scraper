@@ -11,6 +11,8 @@ https://mporosoff.github.io/grants-scraper/
 Anyone can search the comprehensive catalog without an account or API key. The browser provides:
 
 - full-text search across current Grants.gov opportunities;
+- a built-in Help guide covering search, uploaded notices, result tools, team
+  matching, privacy, troubleshooting, and optional OpenAI/Anthropic API keys;
 - drag-and-drop NOFO/FOA PDF chat with automatic catalog-record matching;
 - one-click browsing of the complete current catalog without search terms;
 - filters for status, discipline, topic, agency, eligibility, instrument,
