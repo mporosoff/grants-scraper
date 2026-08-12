@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-08-11T14:12:26Z</updated>
+  <updated>2026-08-12T11:12:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -37,6 +37,18 @@
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
     <summary>DOT Federal Highway Administration — Closes 2026-09-09 — The purpose of the Bollards Competitive Grant Program is to provide funding for bollard installation projects designed to prevent pedestrian injuries and acts of terrorism in areas used by large numbers of pedestrians. Eligible applicants under the Bollards Competitive Grant Program are State Departments of Transportation (State DOTs) and local government entities such as any city, county, town, p…</summary>
+  </entry>
+  <entry>
+    <title>FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) CAPACITY BUILDING (CB)</title>
+    <link href="https://www.grants.gov/search-results-detail/363530"/>
+    <id>urn:funding-finder:grants-gov:363530</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
+    <category term="Education and workforce"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Cybersecurity"/>
+    <summary>Air Force Office of Scientific Research — Closes 2027-04-05 — The Department of Defense (DoD) announces the fiscal year 2026 (FY26) Defense Established Program to Stimulate Competitive Research (DEPSCoR) – Capacity Building opportunity. The program is sponsored and managed by the Basic Research Office, Office of the Under Secretary of Defense for Research and Engineering (OUSD [R&amp;E]), awarded by the Air Force Office of Scientific Research (AFOSR), and admini…</summary>
   </entry>
   <entry>
     <title>Precision Inertial Navigation &amp; Positioning On an Integrated Tesseract (PINPOINT)</title>
@@ -244,7 +256,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <category term="Cybersecurity"/>
-    <summary>National Highway Traffic Safety Administration — Closes 2027-09-01 — The primary intent of this of the ITSE Grant Program is to 1) develop innovative traffic safety enforcement programs that demonstrate effectiveness by reducing the number of motor vehicle crashes due to one or more of the subject risky driving behaviors; and 2) ensure the traffic safety enforcement programs are repeatable and scalable for use by law enforcement throughout the United States. In add…</summary>
+    <summary>National Highway Traffic Safety Administration — Closes 2027-09-01 — While the agency will consider innovative enhancements to existing countermeasures, the goal is to develop evidence-based projects that are scalable and transferable for use by State and local law enforcement agencies. The primary intent of this of the ITSE Grant Program is to 1) develop innovative traffic safety enforcement programs that demonstrate effectiveness by reducing the number of motor v…</summary>
   </entry>
   <entry>
     <title>Advancing Investigative Journalism in Ukraine through U.S. AI Innovation</title>
@@ -583,18 +595,6 @@
     <category term="Cybersecurity"/>
     <category term="Water"/>
     <summary>Assistance Coordination — Closes 2026-09-30 — The Middle East Regional Cooperation (MERC) Program supports joint scientific research and innovation partnerships between the United States, Israel, and countries across the Middle East and North Africa (MENA). The program funds applied research projects that address shared regional challenges while advancing U.S. economic, technological, and strategic interests. MERC is designed to bring togethe…</summary>
-  </entry>
-  <entry>
-    <title>Fiscal Year 26 Community Assistance Program - State Support Services Element (CAP-SSSE)</title>
-    <link href="https://www.grants.gov/search-results-detail/362972"/>
-    <id>urn:funding-finder:grants-gov:362972</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>Department of Homeland Security - FEMA</name></author>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Cybersecurity"/>
-    <category term="Water"/>
-    <summary>Department of Homeland Security - FEMA — Closes 2026-08-11 — The CAP-SSSE program provides funding to ensure adoption and enforcement of standards consistent with the National Flood Insurance Program (NFIP) minimum criteria in participating and flood-prone communities. This cooperative agreement strives to empower states and territories to own and effectively manage their flood risk and reduce exposure, disaster costs, and recovery demands by providing plan…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 10</title>

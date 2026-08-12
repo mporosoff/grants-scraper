@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-08-11T14:12:26Z</updated>
+  <updated>2026-08-12T11:12:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
@@ -68,6 +68,31 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health — Closes 2026-11-01 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop, operate, and sustain a cloud-based data storage and computing platform that democratizes access to large-scale Alzheimer’s disease (AD) and AD-related dementias (ADRD) genetic and genomic data. The platform must be secure, scalable, and interoperable. The platform wil…</summary>
+  </entry>
+  <entry>
+    <title>Fostering the Future Together: Empowering Youth for a Safe Digital World</title>
+    <link href="https://www.grants.gov/search-results-detail/363426"/>
+    <id>urn:funding-finder:grants-gov:363426</id>
+    <updated>2026-08-11T00:00:00Z</updated>
+    <author><name>Bureau of International Labor Affairs</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Bureau of International Labor Affairs — Closes 2026-09-10 — Questions regarding this Funding Opportunity Announcement (FOA) Forecast may be emailed to OGM_ILAB@dol.gov; however, please note there is limited information that may be shared with the public, as this FOA is currently under development. We encourage prospective applicants and interested parties to use the Grants.gov subscription option to register for future updates provided for this particular …</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for Affiliated Partner with the Alaska Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/363537"/>
+    <id>urn:funding-finder:grants-gov:363537</id>
+    <updated>2026-08-11T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <category term="Water"/>
+    <summary>Geological Survey — Closes 2026-09-11 — This Notice of Funding Opportunity (NOFO) is for a U.S. Geological Survey (USGS) National and Regional Climate Adaptation Science Center (NRCASC) competitive research award to a CESU partner.Projects supported under this cooperative agreement should advance Administration priorities, including, but not limited to, American energy dominance, critical mineral development, water security, infrastruct…</summary>
   </entry>
   <entry>
     <title>FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) – RESEARCH COLLABORATION (RC)</title>
@@ -238,7 +263,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <category term="Cybersecurity"/>
-    <summary>National Highway Traffic Safety Administration — Closes 2027-09-01 — The primary intent of this of the ITSE Grant Program is to 1) develop innovative traffic safety enforcement programs that demonstrate effectiveness by reducing the number of motor vehicle crashes due to one or more of the subject risky driving behaviors; and 2) ensure the traffic safety enforcement programs are repeatable and scalable for use by law enforcement throughout the United States. In add…</summary>
+    <summary>National Highway Traffic Safety Administration — Closes 2027-09-01 — While the agency will consider innovative enhancements to existing countermeasures, the goal is to develop evidence-based projects that are scalable and transferable for use by State and local law enforcement agencies. The primary intent of this of the ITSE Grant Program is to 1) develop innovative traffic safety enforcement programs that demonstrate effectiveness by reducing the number of motor v…</summary>
   </entry>
   <entry>
     <title>Advancing Investigative Journalism in Ukraine through U.S. AI Innovation</title>
@@ -738,28 +763,5 @@
     <category term="Arts and culture"/>
     <category term="Environmental science"/>
     <summary>DARPA - Information Processing Technologies Office — Closes 2026-08-25 — The DICE program seeks to develop the theory and algorithms for decentralized coordination and local inference control to enable a scalable, adaptive, and resilient collective of heterogeneous AI agents that can autonomously execute sustained long-time-horizon missions in contested environments while remaining under human control. In contrast to small-scale, rigid, and fragile centralized orchestr…</summary>
-  </entry>
-  <entry>
-    <title>WaterSMART Cooperative Watershed Management Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362755"/>
-    <id>urn:funding-finder:grants-gov:362755</id>
-    <updated>2026-06-10T00:00:00Z</updated>
-    <author><name>Bureau of Reclamation</name></author>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Water"/>
-    <summary>Bureau of Reclamation — Closes 2028-02-15 — The WaterSMART Cooperative Watershed Management Program funding opportunity invites eligible entities to apply for funding to develop local solutions to address their water management needs. This opportunity provides funding for watershed group development, restoration planning, and watershed management project planning and design. By providing this funding, Reclamation promotes water reliability …</summary>
-  </entry>
-  <entry>
-    <title>GlobalX Challenge 26.1: AI-Native Air Interface for Tactical Communication Networks</title>
-    <link href="https://www.grants.gov/search-results-detail/362721"/>
-    <id>urn:funding-finder:grants-gov:362721</id>
-    <updated>2026-06-09T00:00:00Z</updated>
-    <author><name>Office of Naval Research</name></author>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Office of Naval Research — Closes 2026-08-31 — The purpose of the GlobalX Innovation Challenge is to accelerate the traditional knowledge generation cycle, rapidly testing applied research theories to enable the discovery of revolutionary dual-use capabilities for the benefit of the U.S. Navy and Marine Corps, the commercial marketplace, and the public. Led by the Office of Naval Research Global and targeted at researchers in the Indian subcon…</summary>
   </entry>
 </feed>

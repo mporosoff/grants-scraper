@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml</id>
-  <updated>2026-08-11T14:12:26Z</updated>
+  <updated>2026-08-12T11:12:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -255,16 +255,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Biology and biotechnology"/>
     <category term="Cancer"/>
     <summary>National Institutes of Health — Closes 2027-01-11 — As part of the Gabriella Miller Kids First Pediatric Research Program (Kids First Program), the NIH invites applications to submit samples from pediatric cohorts for whole genome sequencing at a Kids First Program supported genomic data generating centers. Applicants are encouraged to propose sequencing of existing pediatric cancer or congenital anomaly cohorts to elucidate the genetic contributio…</summary>
-  </entry>
-  <entry>
-    <title>DoW Kidney Cancer, Concept Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362852"/>
-    <id>urn:funding-finder:grants-gov:362852</id>
-    <updated>2026-06-17T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <category term="Technology development"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-08-11 — Summary: The fiscal year 2026 (FY26) Kidney Cancer Research Program (KCRP) Concept Award supports highly innovative, untested, potentially groundbreaking concepts, theories, paradigms and/or basic kidney cancer research. This award mechanism supports high-risk studies that have the potential to reveal entirely new avenues for investigation in kidney cancer. Applications must describe how the new c…</summary>
   </entry>
   <entry>
     <title>DoW Rare Cancers Concept Award</title>
@@ -620,5 +610,14 @@ a high level of innovation and creativity. The goal is to support the best young
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
     <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-07 — Summary: The fiscal year 2026 (FY26) Pancreatic Cancer Research Program (PCARP) Idea Development Award supports the development of innovative, high-risk/high-reward research that could lead to critical discoveries or major advancements that will accelerate progress in improving outcomes for individuals with pancreatic cancer. This award mechanism supports innovative ideas with the potential to yie…</summary>
+  </entry>
+  <entry>
+    <title>DoW Pancreatic Cancer Research Program, Translational Research Partnership Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362191"/>
+    <id>urn:funding-finder:grants-gov:362191</id>
+    <updated>2026-05-04T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Cancer"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-07 — Summary: The fiscal year 2026 (FY26) Pancreatic Cancer Research Program (PCARP) Translational Research Partnership Award supports partnerships between clinicians, population scientists, applied scientists and/or basic scientists that will accelerate the movement of promising ideas in pancreatic cancer toward clinical applications. The partnership must include at least one member with expertise in …</summary>
   </entry>
 </feed>

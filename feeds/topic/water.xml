@@ -4,8 +4,23 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml</id>
-  <updated>2026-08-11T14:12:26Z</updated>
+  <updated>2026-08-12T11:12:48Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Cooperative Agreement for Affiliated Partner with the Alaska Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/363537"/>
+    <id>urn:funding-finder:grants-gov:363537</id>
+    <updated>2026-08-11T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <category term="Water"/>
+    <summary>Geological Survey — Closes 2026-09-11 — This Notice of Funding Opportunity (NOFO) is for a U.S. Geological Survey (USGS) National and Regional Climate Adaptation Science Center (NRCASC) competitive research award to a CESU partner.Projects supported under this cooperative agreement should advance Administration priorities, including, but not limited to, American energy dominance, critical mineral development, water security, infrastruct…</summary>
+  </entry>
   <entry>
     <title>Fiscal Year 2026 National Dam Safety Program - Rehabilitation of High Hazard Potential Dams (HHPD)</title>
     <link href="https://www.grants.gov/search-results-detail/363445"/>
@@ -132,18 +147,6 @@
     <category term="Cybersecurity"/>
     <category term="Water"/>
     <summary>Assistance Coordination — Closes 2026-09-30 — The Middle East Regional Cooperation (MERC) Program supports joint scientific research and innovation partnerships between the United States, Israel, and countries across the Middle East and North Africa (MENA). The program funds applied research projects that address shared regional challenges while advancing U.S. economic, technological, and strategic interests. MERC is designed to bring togethe…</summary>
-  </entry>
-  <entry>
-    <title>Fiscal Year 26 Community Assistance Program - State Support Services Element (CAP-SSSE)</title>
-    <link href="https://www.grants.gov/search-results-detail/362972"/>
-    <id>urn:funding-finder:grants-gov:362972</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>Department of Homeland Security - FEMA</name></author>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Cybersecurity"/>
-    <category term="Water"/>
-    <summary>Department of Homeland Security - FEMA — Closes 2026-08-11 — The CAP-SSSE program provides funding to ensure adoption and enforcement of standards consistent with the National Flood Insurance Program (NFIP) minimum criteria in participating and flood-prone communities. This cooperative agreement strives to empower states and territories to own and effectively manage their flood risk and reduce exposure, disaster costs, and recovery demands by providing plan…</summary>
   </entry>
   <entry>
     <title>Regional Conservation Partnership Program (RCPP) Alternative Funding Arrangements (AFA) for Federal fiscal year (FY) 2026</title>
@@ -275,18 +278,6 @@
     <category term="Environmental science"/>
     <category term="Water"/>
     <summary>Bureau of Reclamation — Closes 2027-09-08 — The objective of the WaterSMART Enhancing Water Resources Projects funding opportunity is to invite eligible entities to apply for funding to implement projects per the authorizing language referenced above that benefit water resource management for multiple uses, including water conservation and efficiency projects, water infrastructure improvements, and river and watershed restoration. Projects …</summary>
-  </entry>
-  <entry>
-    <title>WaterSMART Drought Response Program</title>
-    <link href="https://www.grants.gov/search-results-detail/361415"/>
-    <id>urn:funding-finder:grants-gov:361415</id>
-    <updated>2026-03-05T00:00:00Z</updated>
-    <author><name>Bureau of Reclamation</name></author>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Water"/>
-    <summary>Bureau of Reclamation — Posted — Through WaterSMART, the Bureau of Reclamation (Reclamation) leverages Federal and non-Federal funding to work cooperatively with States, Tribes, and other entities as they plan for and implement actions to increase water supply and hydropower reliability. The WaterSMART Drought Response Program NOFO invites eligible applicants to submit proposals for projects designed to improve drought resilience…</summary>
   </entry>
   <entry>
     <title>ERDC Broad Agency Announcement</title>

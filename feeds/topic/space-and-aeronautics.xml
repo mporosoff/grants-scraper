@@ -4,8 +4,23 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml</id>
-  <updated>2026-08-11T14:12:26Z</updated>
+  <updated>2026-08-12T11:12:48Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Cooperative Agreement for Affiliated Partner with the Alaska Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/363537"/>
+    <id>urn:funding-finder:grants-gov:363537</id>
+    <updated>2026-08-11T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <category term="Water"/>
+    <summary>Geological Survey — Closes 2026-09-11 — This Notice of Funding Opportunity (NOFO) is for a U.S. Geological Survey (USGS) National and Regional Climate Adaptation Science Center (NRCASC) competitive research award to a CESU partner.Projects supported under this cooperative agreement should advance Administration priorities, including, but not limited to, American energy dominance, critical mineral development, water security, infrastruct…</summary>
+  </entry>
   <entry>
     <title>ROSES25: D.8 Habitable Worlds Observatory Precursor Science Investigation</title>
     <link href="https://www.grants.gov/search-results-detail/363325"/>
@@ -88,17 +103,6 @@
     <category term="Space and aeronautics"/>
     <category term="Technology development"/>
     <summary>NASA Headquarters — Closes 2026-08-13 — The National Aeronautics and Space Administration (NASA) Headquarters has released the solicitation Early Stage Innovations for In Situ Resource Utilization (ESI26-ISRU), as an appendix to the Research and Technology Mission Directorate (RTMD) umbrella NASA Research Announcement (NRA) titled "Space Technology Research, Development, Demonstration, and Infusion 2026 (SpaceTech REDDI 2026).”. The sol…</summary>
-  </entry>
-  <entry>
-    <title>Minority University Research and Education Project (MUREP) Space Technology Artemis Research (M-STAR)</title>
-    <link href="https://www.grants.gov/search-results-detail/362772"/>
-    <id>urn:funding-finder:grants-gov:362772</id>
-    <updated>2026-06-12T00:00:00Z</updated>
-    <author><name>National Aeronautics and Space Administration</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Space and aeronautics"/>
-    <summary>National Aeronautics and Space Administration — Closes 2026-08-11 — The Minority University Research and Education Project (MUREP) Space Technology Artemis Research (M-STAR) opportunity is a National Aeronautics and Space Administration (NASA) initiative through its Office of STEM Engagement (OSTEM). It is designed to strengthen the role of Historically Black Colleges and Universities (HBCUs), Tribal Colleges and Universities (TCUs) and Minority Serving Institutio…</summary>
   </entry>
   <entry>
     <title>ROSES25: F.17 Research Initiation Awards</title>
@@ -236,7 +240,7 @@
     <summary>U.S. National Science Foundation — Closes 2027-04-13 — The Established Program to Stimulate Competitive Research is designed to fulfill the mandate of the National Science Foundation (NSF) to promote scientific progress nationwide. NSF EPSCoR facilitates the establishment of partnerships among academic institutions, government, industry, and non-profit sectors that are designed to promote sustainable improvements in a jurisdiction's research infrastru…</summary>
   </entry>
   <entry>
-    <title>ECosystem for Leading Innovation in Plasma Science and Engineering</title>
+    <title>ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)</title>
     <link href="https://www.grants.gov/search-results-detail/351715"/>
     <id>urn:funding-finder:grants-gov:351715</id>
     <updated>2024-01-06T00:00:00Z</updated>
@@ -249,7 +253,7 @@
     <category term="Energy"/>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation — Closes 2026-08-11 — Plasma science is a transdisciplinary field of research where fundamental studies in many disciplines, including plasma physics, plasma chemistry, materials science, and space science, come together to advance knowledge for discovery and technological innovation. The primary goal of the ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) program is to identify and capitali…</summary>
+    <summary>U.S. National Science Foundation — Closes 2026-09-29 — Plasma science is a transdisciplinary field of research where fundamental studies in many disciplines, including plasma physics, plasma chemistry, materials science, and space science, come together to advance knowledge for discovery and technological innovation. The primary goal of the ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) program is to identify and capitali…</summary>
   </entry>
   <entry>
     <title>Pioneering Aerospace Capabilities, Engineering and Research (PACER)</title>

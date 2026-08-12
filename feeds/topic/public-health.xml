@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml</id>
-  <updated>2026-08-11T14:12:26Z</updated>
+  <updated>2026-08-12T11:12:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -375,6 +375,15 @@
     <summary>National Institutes of Health — Closes 2027-01-11 — Through this Notice of Funding Opportunity (NOFO), the participating NIH Institutes, Centers, and Offices (ICOs) encourage pursuit of the NIH’s mission through the submission of investigator-initiated Specialized Center (P50) applications. With this Parent P50 NOFO, the NIH ICOs intend to support a broadly based, multidisciplinary, often long-term research program with a specific major scientific …</summary>
   </entry>
   <entry>
+    <title>Healthy Tomorrows Partnership for Children Program (HTPCP)</title>
+    <link href="https://www.grants.gov/search-results-detail/363533"/>
+    <id>urn:funding-finder:grants-gov:363533</id>
+    <updated>2026-11-06T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Public health"/>
+    <summary>Health Resources and Services Administration — Closes 2027-01-20 — The purpose of the Healthy Tomorrows Partnership for Children Program (HTPCP) is to support community-based projects that promote access to preventive clinical and public health services for children.</summary>
+  </entry>
+  <entry>
     <title>Precision and Systems Biology to Uncover the Link Between Chronic and Infectious Diseases</title>
     <link href="https://www.grants.gov/search-results-detail/362952"/>
     <id>urn:funding-finder:grants-gov:362952</id>
@@ -626,25 +635,14 @@
     <summary>National Institutes of Health — Closes 2026-10-17 — The purpose of this NOFO is to enhance the capability of NCATS CTSA Program KL2 scholars supported by the CTSA Program to conduct research as they complete the transition to fully independent academic translational scientists. These small research grants will support different clinical and translational science research projects, including pilot and feasibility studies; secondary data analysis of …</summary>
   </entry>
   <entry>
-    <title>Damon Runyon Cancer Research Foundation Clinical Investigator Award 2027</title>
-    <link href="http://rochester.infoready4.com/CompetitionSpace/"/>
-    <id>urn:funding-finder:ur-vpr-funding-digest-limited-submissions-foundations:vpr-email%3Ainfoready-2024058</id>
-    <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>UR VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Cancer"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Closes 2027-01-19 — The Damon Runyon Clinical Investigator Award supports independent young physician-scientists conducting disease-oriented research that demonstrates
-a high level of innovation and creativity. The goal is to support the best young physician-scientists doing work aimed at improving the practice of cancer medicine. The Clinical Investigator Award program is specifically intended to provide outstanding…</summary>
-  </entry>
-  <entry>
-    <title>Applied Drug Policy Research Experiences</title>
-    <link href="https://www.grants.gov/search-results-detail/363487"/>
-    <id>urn:funding-finder:grants-gov:363487</id>
-    <updated>2026-08-06T00:00:00Z</updated>
-    <author><name>Office of National Drug Control Policy</name></author>
+    <title>Culturally Specific Domestic Violence and Sexual Assault Services</title>
+    <link href="https://www.grants.gov/search-results-detail/362378"/>
+    <id>urn:funding-finder:grants-gov:362378</id>
+    <updated>2026-08-11T00:00:00Z</updated>
+    <author><name>Administration for Children and Families - OFVPS</name></author>
+    <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Public health"/>
-    <summary>Office of National Drug Control Policy — Closes 2026-09-06 — This project will establish applied drug policy research experiences for graduate students and recent post-graduates to conduct rigorous research studies and data analyses to support the National Drug Control Strategy. This research will investigate dynamic shifts in, and associations between, illicit drug supply, drug use and their associated consequences, to help public health and public safety …</summary>
+    <summary>Administration for Children and Families - OFVPS — Closes 2026-09-08 — The purpose of the Culturally Specific Services for Domestic Violence and Sexual Assault program is to provide culturally specific services for survivors of domestic violence and sexual assault. Objectives include services for survivors of sexual assault and domestic violence to address emergent needs resulting from a public health emergency and other public health concerns and support for organiz…</summary>
   </entry>
 </feed>

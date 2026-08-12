@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml</id>
-  <updated>2026-08-11T14:12:26Z</updated>
+  <updated>2026-08-12T11:12:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Veterans Legacy Grants Program</title>
@@ -158,6 +158,27 @@
     <summary>National Institutes of Health — Closes 2026-12-15 — The National Library of Medicine (NLM) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for a Training Center of the Network of the National Library of Medicine (NNLM).Established in 1965 and organized geographically across the United States and its territories, the NNLM promotes and supports the initiatives, products, and services of the NLM and the National Insti…</summary>
   </entry>
   <entry>
+    <title>2026 National Urban and Community Forestry Challenge Cost Share Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/361315"/>
+    <id>urn:funding-finder:grants-gov:361315</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <author><name>Forest Service</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>Forest Service — Closes 2026-10-12 — The intent of the National Urban and Community Forestry Challenge Cost Share grant program is to advance solutions to the economic, health, and environmental challenges faced by communities. This year’s program focuses on advancing community tree resource utilization, which can reduce waste and create value by turning wood generated from pruning, removals, storm events, and pest or disease outbrea…</summary>
+  </entry>
+  <entry>
+    <title>Safeguarding U.S. Critical Minerals Supply Chains- Tunisia</title>
+    <link href="https://www.grants.gov/search-results-detail/363536"/>
+    <id>urn:funding-finder:grants-gov:363536</id>
+    <updated>2026-08-11T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Community development"/>
+    <category term="Manufacturing"/>
+    <summary>Bureau of Near Eastern Affairs — Closes 2026-09-02 — U.S. Embassy Tunis and the Bureau of Near Eastern Affairs' Office of Assistance Coordination (NEA/AC) seek applications for the “Safeguarding U.S. Critical Minerals Supply Chains- Tunisia” program, a commercial diplomacy initiative to support transparent, private-sector-led investment in phosphate development, optimize downstream mineral processing to meet international standards, and strengthen t…</summary>
+  </entry>
+  <entry>
     <title>Community Economic Development Projects</title>
     <link href="https://www.grants.gov/search-results-detail/362237"/>
     <id>urn:funding-finder:grants-gov:362237</id>
@@ -175,16 +196,6 @@
     <author><name>Rural Housing Service</name></author>
     <category term="Community development"/>
     <summary>Rural Housing Service — Closes 2026-09-08 — The Rural Housing Service (RHS) announces a notice in funding availability under its Housing Preservation Grant (HPG) program. The HPG program is a grant program which provides qualified public agencies, private nonprofit organizations, which may include but not be limited to, Faith-Based and Community Organizations, and other eligible entities grant funds to assist very low- and low-income homeow…</summary>
-  </entry>
-  <entry>
-    <title>Safeguarding U.S. Critical Minerals Supply Chains- Tunisia</title>
-    <link href="https://www.grants.gov/search-results-detail/363458"/>
-    <id>urn:funding-finder:grants-gov:363458</id>
-    <updated>2026-08-04T00:00:00Z</updated>
-    <author><name>Bureau of Near Eastern Affairs</name></author>
-    <category term="Community development"/>
-    <category term="Manufacturing"/>
-    <summary>Bureau of Near Eastern Affairs — Closes 2026-09-02 — U.S. Embassy Tunis and the Bureau of Near Eastern Affairs' Office of Assistance Coordination (NEA/AC) seek applications for the “Safeguarding U.S. Critical Minerals Supply Chains- Tunisia” program, a commercial diplomacy initiative to support transparent, private-sector-led investment in phosphate development, optimize downstream mineral processing to meet international standards, and strengthen t…</summary>
   </entry>
   <entry>
     <title>Media Literacy and Capacity Building Workshop Series</title>
@@ -656,17 +667,6 @@
     <title>Denver FY 2021 – FY 2023 EDA Planning and Local Technical Assistance</title>
     <link href="https://www.grants.gov/search-results-detail/332126"/>
     <id>urn:funding-finder:grants-gov:332126</id>
-    <updated>2021-03-15T00:00:00Z</updated>
-    <author><name>Department of Commerce</name></author>
-    <category term="Arts and culture"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <summary>Department of Commerce — Posted — UPDATED NOTICE - PLEASE READ: April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
-  </entry>
-  <entry>
-    <title>Philadelphia FY 2021 – FY 2023 EDA Planning and Local Technical Assistance</title>
-    <link href="https://www.grants.gov/search-results-detail/332138"/>
-    <id>urn:funding-finder:grants-gov:332138</id>
     <updated>2021-03-15T00:00:00Z</updated>
     <author><name>Department of Commerce</name></author>
     <category term="Arts and culture"/>
