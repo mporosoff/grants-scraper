@@ -1,11 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Funding Finder - opportunity changes</title>
+  <title>Funding Finder | opportunity changes</title>
   <link href="https://mporosoff.github.io/grants-scraper/feeds/changes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/changes.xml</id>
-  <updated>2026-08-12T11:12:57Z</updated>
+  <updated>2026-08-12T13:09:57Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Closing soon: FY26 Bureau of Land Management Wildlife Resource Management Program - Bureau wide</title>
+    <link href="https://www.grants.gov/search-results-detail/363535"/>
+    <id>urn:funding-finder:change:f3fbf14aeb73a1a0ee05</id>
+    <updated>2026-08-12T13:06:32.886816Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-11</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Schmidt Sciences</title>
+    <link href="https://airtable.com/appDCapaPF9M0iLQO/pagRxgvY9pCkOeaxx/form"/>
+    <id>urn:funding-finder:change:d35133e0c6c936171c41</id>
+    <updated>2026-08-12T13:06:32.886816Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-11</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Cooperative Agreement for Affiliated Partner with the Gulf Coast Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/363538"/>
+    <id>urn:funding-finder:change:d0fffb2d1086de66a16f</id>
+    <updated>2026-08-12T13:06:32.886816Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-11</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: FY26 Bureau of Land Management Threatened and Endangered Species - Bureau wide</title>
+    <link href="https://www.grants.gov/search-results-detail/363534"/>
+    <id>urn:funding-finder:change:c0e39183a2e919988ea1</id>
+    <updated>2026-08-12T13:06:32.886816Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-11</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Forest Legacy Program - FY2028 Funding</title>
+    <link href="https://www.grants.gov/search-results-detail/363363"/>
+    <id>urn:funding-finder:change:74e53670effa1183cb7d</id>
+    <updated>2026-08-12T13:06:32.886816Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-11</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Cooperative Agreement for Affiliated Partner with the Alaska Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/363537"/>
+    <id>urn:funding-finder:change:012244f776c783b2a7d5</id>
+    <updated>2026-08-12T13:06:32.886816Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-11</summary>
+  </entry>
   <entry>
     <title>Opportunity amended: Infant-Toddler Court Program-State Awards</title>
     <link href="https://www.grants.gov/search-results-detail/363512"/>
@@ -29,14 +77,6 @@
     <updated>2026-08-12T11:11:07.180373Z</updated>
     <category term="amended"/>
     <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: FY26 Bureau of Land Management Wildlife Resource Management Program - Bureau wide</title>
-    <link href="https://www.grants.gov/search-results-detail/363535"/>
-    <id>urn:funding-finder:change:f3fbf14aeb73a1a0ee05</id>
-    <updated>2026-08-12T11:11:07.180373Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-11</summary>
   </entry>
   <entry>
     <title>New opportunity: Culturally Specific Domestic Violence and Sexual Assault Services</title>
@@ -111,22 +151,6 @@
     <summary>No longer in the current catalog</summary>
   </entry>
   <entry>
-    <title>Closing soon: Schmidt Sciences</title>
-    <link href="https://airtable.com/appDCapaPF9M0iLQO/pagRxgvY9pCkOeaxx/form"/>
-    <id>urn:funding-finder:change:d35133e0c6c936171c41</id>
-    <updated>2026-08-12T11:11:07.180373Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-11</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Cooperative Agreement for Affiliated Partner with the Gulf Coast Cooperative Ecosystem Studies Unit (CESU)</title>
-    <link href="https://www.grants.gov/search-results-detail/363538"/>
-    <id>urn:funding-finder:change:d0fffb2d1086de66a16f</id>
-    <updated>2026-08-12T11:11:07.180373Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-11</summary>
-  </entry>
-  <entry>
     <title>Closing soon: Enhancing and Supporting the Network of American Spaces in Armenia</title>
     <link href="https://www.grants.gov/search-results-detail/363541"/>
     <id>urn:funding-finder:change:d0a125782d8f3086f967</id>
@@ -149,14 +173,6 @@
     <updated>2026-08-12T11:11:07.180373Z</updated>
     <category term="closing_soon"/>
     <summary>Deadline 2026-09-10</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: FY26 Bureau of Land Management Threatened and Endangered Species - Bureau wide</title>
-    <link href="https://www.grants.gov/search-results-detail/363534"/>
-    <id>urn:funding-finder:change:c0e39183a2e919988ea1</id>
-    <updated>2026-08-12T11:11:07.180373Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-11</summary>
   </entry>
   <entry>
     <title>New opportunity: Enhancing and Supporting the Network of American Spaces in Armenia</title>
@@ -205,14 +221,6 @@
     <updated>2026-08-12T11:11:07.180373Z</updated>
     <category term="amended"/>
     <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Forest Legacy Program - FY2028 Funding</title>
-    <link href="https://www.grants.gov/search-results-detail/363363"/>
-    <id>urn:funding-finder:change:74e53670effa1183cb7d</id>
-    <updated>2026-08-12T11:11:07.180373Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-11</summary>
   </entry>
   <entry>
     <title>Closed or removed: Research Training Groups in the Mathematical Sciences</title>
@@ -373,14 +381,6 @@
     <updated>2026-08-12T11:11:07.180373Z</updated>
     <category term="amended"/>
     <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Cooperative Agreement for Affiliated Partner with the Alaska Cooperative Ecosystem Studies Unit (CESU)</title>
-    <link href="https://www.grants.gov/search-results-detail/363537"/>
-    <id>urn:funding-finder:change:012244f776c783b2a7d5</id>
-    <updated>2026-08-12T11:11:07.180373Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-11</summary>
   </entry>
   <entry>
     <title>Closing soon: DoW Vision, Mentored Clinical Research Award</title>

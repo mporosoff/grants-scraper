@@ -1,8 +1,265 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-12T11:12:57Z",
+  "generated_at": "2026-08-12T13:09:57Z",
   "retention_days": 90,
   "events": [
+    {
+      "id": "f3fbf14aeb73a1a0ee05",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-12T13:06:32.886816Z",
+      "opportunity_id": "363535",
+      "detail": "Deadline 2026-09-11",
+      "record": {
+        "opportunity_id": "363535",
+        "opportunity_number": "L26AS00045",
+        "title": "FY26 Bureau of Land Management Wildlife Resource Management Program - Bureau wide",
+        "agency": "Bureau of Land Management",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-11",
+        "close_date": "2026-09-11",
+        "last_updated": "2026-08-11",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce",
+          "Environmental science"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 10000,
+        "award_ceiling": 2000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363535",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354500"
+      },
+      "deadline": "2026-09-11"
+    },
+    {
+      "id": "d35133e0c6c936171c41",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-12T13:06:32.886816Z",
+      "opportunity_id": "vpr-email:vpr-93df7a9faf5e4c37",
+      "detail": "Deadline 2026-09-11",
+      "record": {
+        "opportunity_id": "vpr-email:vpr-93df7a9faf5e4c37",
+        "opportunity_number": null,
+        "title": "Schmidt Sciences",
+        "agency": "UR VPR funding digest (limited submissions & foundations)",
+        "source": "UR VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-09-11",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://airtable.com/appDCapaPF9M0iLQO/pagRxgvY9pCkOeaxx/form",
+        "funding_opportunity_url": "https://airtable.com/appDCapaPF9M0iLQO/pagRxgvY9pCkOeaxx/form",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-11"
+    },
+    {
+      "id": "d0fffb2d1086de66a16f",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-12T13:06:32.886816Z",
+      "opportunity_id": "363538",
+      "detail": "Deadline 2026-09-11",
+      "record": {
+        "opportunity_id": "363538",
+        "opportunity_number": "G26AS00158",
+        "title": "Cooperative Agreement for Affiliated Partner with the Gulf Coast Cooperative Ecosystem Studies Unit (CESU)",
+        "agency": "Geological Survey",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-11",
+        "close_date": "2026-09-11",
+        "last_updated": "2026-08-11",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Agriculture and food",
+          "Energy",
+          "Environmental science",
+          "Manufacturing",
+          "Transportation"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 1,
+        "award_ceiling": 350000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363538",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-11"
+    },
+    {
+      "id": "c0e39183a2e919988ea1",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-12T13:06:32.886816Z",
+      "opportunity_id": "363534",
+      "detail": "Deadline 2026-09-11",
+      "record": {
+        "opportunity_id": "363534",
+        "opportunity_number": "L26AS00043",
+        "title": "FY26 Bureau of Land Management Threatened and Endangered Species - Bureau wide",
+        "agency": "Bureau of Land Management",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-11",
+        "close_date": "2026-09-11",
+        "last_updated": "2026-08-11",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Energy",
+          "Environmental science"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 10000,
+        "award_ceiling": 1000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363534",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354493"
+      },
+      "deadline": "2026-09-11"
+    },
+    {
+      "id": "74e53670effa1183cb7d",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-12T13:06:32.886816Z",
+      "opportunity_id": "363363",
+      "detail": "Deadline 2026-09-11",
+      "record": {
+        "opportunity_id": "363363",
+        "opportunity_number": "USDA-FS-2028-FLP",
+        "title": "Forest Legacy Program - FY2028 Funding",
+        "agency": "Forest Service",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-05",
+        "close_date": "2026-09-11",
+        "last_updated": "2026-08-05",
+        "version": "Synopsis 4",
+        "topic_areas": [
+          "Environmental science",
+          "Water"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 5000,
+        "award_ceiling": 20000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363363",
+        "funding_opportunity_url": "https://www.fs.usda.gov/managing-land/private-land/forest-legacy/program",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354402"
+      },
+      "deadline": "2026-09-11"
+    },
+    {
+      "id": "012244f776c783b2a7d5",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-12T13:06:32.886816Z",
+      "opportunity_id": "363537",
+      "detail": "Deadline 2026-09-11",
+      "record": {
+        "opportunity_id": "363537",
+        "opportunity_number": "G26AS00156",
+        "title": "Cooperative Agreement for Affiliated Partner with the Alaska Cooperative Ecosystem Studies Unit (CESU)",
+        "agency": "Geological Survey",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-11",
+        "close_date": "2026-09-11",
+        "last_updated": "2026-08-11",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Arts and culture",
+          "Biology and biotechnology",
+          "Energy",
+          "Environmental science",
+          "Space and aeronautics",
+          "Water"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 1,
+        "award_ceiling": 453203,
+        "detail_page": "https://www.grants.gov/search-results-detail/363537",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-11"
+    },
     {
       "id": "ffb144b5dba403f63ea2",
       "type": "amended",
@@ -126,55 +383,6 @@
         "funding_opportunity_url": null,
         "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354497"
       }
-    },
-    {
-      "id": "f3fbf14aeb73a1a0ee05",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-12T11:11:07.180373Z",
-      "opportunity_id": "363535",
-      "detail": "Deadline 2026-09-11",
-      "record": {
-        "opportunity_id": "363535",
-        "opportunity_number": "L26AS00045",
-        "title": "FY26 Bureau of Land Management Wildlife Resource Management Program - Bureau wide",
-        "agency": "Bureau of Land Management",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-08-11",
-        "close_date": "2026-09-11",
-        "last_updated": "2026-08-11",
-        "version": "Synopsis 1",
-        "topic_areas": [
-          "Education and workforce",
-          "Environmental science"
-        ],
-        "disciplines": [
-          "Environmental and Life Sciences"
-        ],
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Special district governments",
-          "Public and state institutions of higher education",
-          "Federally recognized Native American tribal governments",
-          "Other Native American tribal organizations",
-          "Nonprofits with 501(c)(3) status",
-          "Nonprofits without 501(c)(3) status",
-          "Private institutions of higher education"
-        ],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "award_floor": 10000,
-        "award_ceiling": 2000000,
-        "detail_page": "https://www.grants.gov/search-results-detail/363535",
-        "funding_opportunity_url": null,
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354500"
-      },
-      "deadline": "2026-09-11"
     },
     {
       "id": "e992ff5f7c104434b711",
@@ -554,80 +762,6 @@
       }
     },
     {
-      "id": "d35133e0c6c936171c41",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-12T11:11:07.180373Z",
-      "opportunity_id": "vpr-email:vpr-93df7a9faf5e4c37",
-      "detail": "Deadline 2026-09-11",
-      "record": {
-        "opportunity_id": "vpr-email:vpr-93df7a9faf5e4c37",
-        "opportunity_number": null,
-        "title": "Schmidt Sciences",
-        "agency": "UR VPR funding digest (limited submissions & foundations)",
-        "source": "UR VPR funding digest (limited submissions & foundations)",
-        "source_type": "Internal",
-        "status": "posted",
-        "posted_date": null,
-        "close_date": "2026-09-11",
-        "last_updated": null,
-        "version": null,
-        "topic_areas": [],
-        "disciplines": [],
-        "applicant_types": [],
-        "funding_instruments": [],
-        "award_floor": null,
-        "award_ceiling": null,
-        "detail_page": "https://airtable.com/appDCapaPF9M0iLQO/pagRxgvY9pCkOeaxx/form",
-        "funding_opportunity_url": "https://airtable.com/appDCapaPF9M0iLQO/pagRxgvY9pCkOeaxx/form",
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-11"
-    },
-    {
-      "id": "d0fffb2d1086de66a16f",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-12T11:11:07.180373Z",
-      "opportunity_id": "363538",
-      "detail": "Deadline 2026-09-11",
-      "record": {
-        "opportunity_id": "363538",
-        "opportunity_number": "G26AS00158",
-        "title": "Cooperative Agreement for Affiliated Partner with the Gulf Coast Cooperative Ecosystem Studies Unit (CESU)",
-        "agency": "Geological Survey",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-08-11",
-        "close_date": "2026-09-11",
-        "last_updated": "2026-08-11",
-        "version": "Synopsis 1",
-        "topic_areas": [
-          "Agriculture and food",
-          "Energy",
-          "Environmental science",
-          "Manufacturing",
-          "Transportation"
-        ],
-        "disciplines": [
-          "Engineering and Physical Sciences"
-        ],
-        "applicant_types": [
-          "Other"
-        ],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "award_floor": 1,
-        "award_ceiling": 350000,
-        "detail_page": "https://www.grants.gov/search-results-detail/363538",
-        "funding_opportunity_url": null,
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-11"
-    },
-    {
       "id": "d0a125782d8f3086f967",
       "type": "closing_soon",
       "label": "Closing soon",
@@ -747,55 +881,6 @@
         "primary_document_url": null
       },
       "deadline": "2026-09-10"
-    },
-    {
-      "id": "c0e39183a2e919988ea1",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-12T11:11:07.180373Z",
-      "opportunity_id": "363534",
-      "detail": "Deadline 2026-09-11",
-      "record": {
-        "opportunity_id": "363534",
-        "opportunity_number": "L26AS00043",
-        "title": "FY26 Bureau of Land Management Threatened and Endangered Species - Bureau wide",
-        "agency": "Bureau of Land Management",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-08-11",
-        "close_date": "2026-09-11",
-        "last_updated": "2026-08-11",
-        "version": "Synopsis 1",
-        "topic_areas": [
-          "Energy",
-          "Environmental science"
-        ],
-        "disciplines": [
-          "Environmental and Life Sciences"
-        ],
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Special district governments",
-          "Public and state institutions of higher education",
-          "Federally recognized Native American tribal governments",
-          "Other Native American tribal organizations",
-          "Nonprofits with 501(c)(3) status",
-          "Nonprofits without 501(c)(3) status",
-          "Private institutions of higher education"
-        ],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "award_floor": 10000,
-        "award_ceiling": 1000000,
-        "detail_page": "https://www.grants.gov/search-results-detail/363534",
-        "funding_opportunity_url": null,
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354493"
-      },
-      "deadline": "2026-09-11"
     },
     {
       "id": "bcb2963a04bc0e823f00",
@@ -1073,46 +1158,6 @@
         "funding_opportunity_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=24110Z",
         "primary_document_url": null
       }
-    },
-    {
-      "id": "74e53670effa1183cb7d",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-12T11:11:07.180373Z",
-      "opportunity_id": "363363",
-      "detail": "Deadline 2026-09-11",
-      "record": {
-        "opportunity_id": "363363",
-        "opportunity_number": "USDA-FS-2028-FLP",
-        "title": "Forest Legacy Program - FY2028 Funding",
-        "agency": "Forest Service",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-08-05",
-        "close_date": "2026-09-11",
-        "last_updated": "2026-08-05",
-        "version": "Synopsis 4",
-        "topic_areas": [
-          "Environmental science",
-          "Water"
-        ],
-        "disciplines": [
-          "Environmental and Life Sciences"
-        ],
-        "applicant_types": [
-          "Other"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": 5000,
-        "award_ceiling": 20000000,
-        "detail_page": "https://www.grants.gov/search-results-detail/363363",
-        "funding_opportunity_url": "https://www.fs.usda.gov/managing-land/private-land/forest-legacy/program",
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354402"
-      },
-      "deadline": "2026-09-11"
     },
     {
       "id": "67591f8c0104a1e863bb",
@@ -1967,51 +2012,6 @@
         "funding_opportunity_url": "https://www.grants.gov/",
         "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354516"
       }
-    },
-    {
-      "id": "012244f776c783b2a7d5",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-12T11:11:07.180373Z",
-      "opportunity_id": "363537",
-      "detail": "Deadline 2026-09-11",
-      "record": {
-        "opportunity_id": "363537",
-        "opportunity_number": "G26AS00156",
-        "title": "Cooperative Agreement for Affiliated Partner with the Alaska Cooperative Ecosystem Studies Unit (CESU)",
-        "agency": "Geological Survey",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-08-11",
-        "close_date": "2026-09-11",
-        "last_updated": "2026-08-11",
-        "version": "Synopsis 1",
-        "topic_areas": [
-          "Artificial intelligence and machine learning",
-          "Arts and culture",
-          "Biology and biotechnology",
-          "Energy",
-          "Environmental science",
-          "Space and aeronautics",
-          "Water"
-        ],
-        "disciplines": [
-          "Engineering and Physical Sciences"
-        ],
-        "applicant_types": [
-          "Other"
-        ],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "award_floor": 1,
-        "award_ceiling": 453203,
-        "detail_page": "https://www.grants.gov/search-results-detail/363537",
-        "funding_opportunity_url": null,
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-11"
     },
     {
       "id": "d271455208041afd8d03",
