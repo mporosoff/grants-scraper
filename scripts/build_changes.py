@@ -197,7 +197,7 @@ def build_atom(events: list[dict], updated: datetime) -> str:
     lines = [
         '<?xml version="1.0" encoding="utf-8"?>',
         '<feed xmlns="http://www.w3.org/2005/Atom">',
-        "  <title>Funding Finder — opportunity changes</title>",
+        "  <title>Funding Finder | opportunity changes</title>",
         f"  <link href={quoteattr(self_url)} rel=\"self\"/>",
         f"  <link href={quoteattr(APP_URL)}/>",
         f"  <id>{escape(self_url)}</id>",
@@ -250,11 +250,11 @@ def write_change_feed(
         "events": events,
     }
     json_path.write_text(
-        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        (json.dumps(payload, ensure_ascii=False, indent=2) + "\n").replace("\u2014", "-").replace("\u2013", "-"),
         encoding="utf-8",
     )
     (out_dir / "changes.xml").write_text(
-        build_atom(events, generated),
+        build_atom(events, generated).replace("\u2014", "-").replace("\u2013", "-"),
         encoding="utf-8",
     )
     return {

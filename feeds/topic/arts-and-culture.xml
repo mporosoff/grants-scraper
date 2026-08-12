@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Funding Finder — Arts and culture</title>
+  <title>Funding Finder | Arts and culture</title>
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml</id>
@@ -14,7 +14,7 @@
     <author><name>Indian Health Service</name></author>
     <category term="Arts and culture"/>
     <category term="Public health"/>
-    <summary>Indian Health Service — Closes 2028-05-01 — The goal of this cooperative agreement is to improve the overall health and wellness of American Indian and Alaska Native men through a culturally responsive Public Health Nursing (PHN) case management and care navigation model. PHNs will engage men in preventive health and wellness services, increase access to care, promote early identification and management of health conditions, and support hea…</summary>
+    <summary>Indian Health Service | Closes 2028-05-01 | The goal of this cooperative agreement is to improve the overall health and wellness of American Indian and Alaska Native men through a culturally responsive Public Health Nursing (PHN) case management and care navigation model. PHNs will engage men in preventive health and wellness services, increase access to care, promote early identification and management of health conditions, and support hea…</summary>
   </entry>
   <entry>
     <title>Youth Regional Treatment Center Aftercare Program</title>
@@ -23,7 +23,7 @@
     <updated>2027-08-01T00:00:00Z</updated>
     <author><name>Indian Health Service</name></author>
     <category term="Arts and culture"/>
-    <summary>Indian Health Service — Closes 2027-10-01 — The goal of the Youth Aftercare cooperative agreement is to help American Indian and Alaska Native (AI/AN) youth achieve and sustain safety, sobriety, and long-term success after discharge from a Youth Regional Treatment Center (YRTC). The program strengthens culturally appropriate, community-based aftercare services by improving care coordination, building partnerships across the continuum of car…</summary>
+    <summary>Indian Health Service | Closes 2027-10-01 | The goal of the Youth Aftercare cooperative agreement is to help American Indian and Alaska Native (AI/AN) youth achieve and sustain safety, sobriety, and long-term success after discharge from a Youth Regional Treatment Center (YRTC). The program strengthens culturally appropriate, community-based aftercare services by improving care coordination, building partnerships across the continuum of car…</summary>
   </entry>
   <entry>
     <title>Improved Drug Susceptibility Testing (DST) for Mycobacteria</title>
@@ -34,7 +34,7 @@
     <category term="Arts and culture"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-05-28 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting research to develop improved drug susceptibility tests (DSTs) for mycobacterial drugs, including those currently used for treatment of tuberculosis (TB) and clinically important non-tuberculous mycobacterial (NTM) infections, new drugs and drugs in late-stage clinical development. TB is a l…</summary>
+    <summary>National Institutes of Health | Closes 2027-05-28 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting research to develop improved drug susceptibility tests (DSTs) for mycobacterial drugs, including those currently used for treatment of tuberculosis (TB) and clinically important non-tuberculous mycobacterial (NTM) infections, new drugs and drugs in late-stage clinical development. TB is a l…</summary>
   </entry>
   <entry>
     <title>Domestic Violence Prevention</title>
@@ -45,7 +45,7 @@
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Social and behavioral sciences"/>
-    <summary>Indian Health Service — Closes 2027-04-01 — The purpose of this IHS grant is to support the development and expansion of Domestic Violence Prevention (DVP) programs that integrate culturally appropriate, trauma-informed prevention and victim services for Tribes, Tribal organizations, and Urban Indian Organizations serving AI/AN communities. The program will address domestic and sexual violence, sexual exploitation and human trafficking, Mis…</summary>
+    <summary>Indian Health Service | Closes 2027-04-01 | The purpose of this IHS grant is to support the development and expansion of Domestic Violence Prevention (DVP) programs that integrate culturally appropriate, trauma-informed prevention and victim services for Tribes, Tribal organizations, and Urban Indian Organizations serving AI/AN communities. The program will address domestic and sexual violence, sexual exploitation and human trafficking, Mis…</summary>
   </entry>
   <entry>
     <title>Domestic Violence Prevention: Forensic Healthcare Services</title>
@@ -54,7 +54,7 @@
     <updated>2027-02-01T00:00:00Z</updated>
     <author><name>Indian Health Service</name></author>
     <category term="Arts and culture"/>
-    <summary>Indian Health Service — Closes 2027-04-01 — The purpose of this IHS grant is to expand access to culturally appropriate, trauma-informed forensic healthcare (FHC) services for American Indian/Alaska Native (AI/AN) victims of domestic violence, sexual violence, child maltreatment, and human trafficking. The grant supports the development and expansion of FHC services across IHS Areas while promoting coordinated treatment, intervention, preve…</summary>
+    <summary>Indian Health Service | Closes 2027-04-01 | The purpose of this IHS grant is to expand access to culturally appropriate, trauma-informed forensic healthcare (FHC) services for American Indian/Alaska Native (AI/AN) victims of domestic violence, sexual violence, child maltreatment, and human trafficking. The grant supports the development and expansion of FHC services across IHS Areas while promoting coordinated treatment, intervention, preve…</summary>
   </entry>
   <entry>
     <title>Suicide Prevention, Intervention, and Postvention</title>
@@ -65,7 +65,7 @@
     <category term="Arts and culture"/>
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
-    <summary>Indian Health Service — Closes 2027-04-01 — The primary purpose of this program is to reduce suicide among American Indian and Alaska Native (AI/AN) populations by improving care coordination, expanding culturally appropriate behavioral health services, and implementing early intervention strategies for at-risk AI/AN youth. The program supports Tribal, community-driven suicide prevention, intervention, and postvention efforts that promote c…</summary>
+    <summary>Indian Health Service | Closes 2027-04-01 | The primary purpose of this program is to reduce suicide among American Indian and Alaska Native (AI/AN) populations by improving care coordination, expanding culturally appropriate behavioral health services, and implementing early intervention strategies for at-risk AI/AN youth. The program supports Tribal, community-driven suicide prevention, intervention, and postvention efforts that promote c…</summary>
   </entry>
   <entry>
     <title>Demonstration Projects for Whole-Person Health Models for Women Living with HIV in the South</title>
@@ -78,7 +78,7 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
-    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-03-15 — The purpose of this demonstration project is to support coordinated Clinic and Community Collaboratives (CCCs) to integrate HIV care with broader women's health services in jurisdictions with disproportionately high HIV disease burden to improve HIV-related outcomes, overall health, and quality of life among WWH. Organizations will be funded to implement 4 strategies: (1) Integrate HIV care with b…</summary>
+    <summary>Centers for Disease Control - NCHHSTP | Closes 2027-03-15 | The purpose of this demonstration project is to support coordinated Clinic and Community Collaboratives (CCCs) to integrate HIV care with broader women's health services in jurisdictions with disproportionately high HIV disease burden to improve HIV-related outcomes, overall health, and quality of life among WWH. Organizations will be funded to implement 4 strategies: (1) Integrate HIV care with b…</summary>
   </entry>
   <entry>
     <title>Continuing Enhanced National Surveillance for Prion Diseases in the United States</title>
@@ -89,7 +89,7 @@
     <category term="Arts and culture"/>
     <category term="Neuroscience"/>
     <category term="Public health"/>
-    <summary>Centers for Disease Control - NCEZID — Closes 2027-03-27 — The CDC announces the availability of FY 2027 funds for a cooperative agreement to continue enhanced national surveillance for human prion diseases, also known as transmissible spongiform encephalopathies (TSEs), in the United States. The purpose is to continue an active surveillance program to help confirm suspected and clinically diagnosed cases of human prion disease and to monitor the occurren…</summary>
+    <summary>Centers for Disease Control - NCEZID | Closes 2027-03-27 | The CDC announces the availability of FY 2027 funds for a cooperative agreement to continue enhanced national surveillance for human prion diseases, also known as transmissible spongiform encephalopathies (TSEs), in the United States. The purpose is to continue an active surveillance program to help confirm suspected and clinically diagnosed cases of human prion disease and to monitor the occurren…</summary>
   </entry>
   <entry>
     <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
@@ -101,7 +101,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Arts and culture"/>
     <category term="Environmental science"/>
-    <summary>Health Resources and Services Administration — Closes 2027-03-18 — The purpose of this program is to improve maternal and infant outcomes by preventing contact with harmful materials before, during, and after pregnancy. This program aims to improve maternal and infant health outcomes by preventing harmful exposures before, during, and after pregnancy. It supports a national expert-staffed call center that provides timely, evidence-based information and personaliz…</summary>
+    <summary>Health Resources and Services Administration | Closes 2027-03-18 | The purpose of this program is to improve maternal and infant outcomes by preventing contact with harmful materials before, during, and after pregnancy. This program aims to improve maternal and infant health outcomes by preventing harmful exposures before, during, and after pregnancy. It supports a national expert-staffed call center that provides timely, evidence-based information and personaliz…</summary>
   </entry>
   <entry>
     <title>NIOSH Small Research Grant Program (R03)</title>
@@ -110,7 +110,7 @@
     <updated>2026-12-17T00:00:00Z</updated>
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Arts and culture"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-16 — The purpose of the R03 grant program is (1) to develop an understanding of the risks and conditions associated with occupational diseases and injuries, (2) to explore methods for reducing risks and preventing or minimizing exposure to hazardous conditions in the workplace, and (3) to translate significant scientific findings into prevention practices and products that will effectively reduce work-…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-02-16 | The purpose of the R03 grant program is (1) to develop an understanding of the risks and conditions associated with occupational diseases and injuries, (2) to explore methods for reducing risks and preventing or minimizing exposure to hazardous conditions in the workplace, and (3) to translate significant scientific findings into prevention practices and products that will effectively reduce work-…</summary>
   </entry>
   <entry>
     <title>National Urban Indian Health Program (Education and Research)</title>
@@ -122,7 +122,7 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
-    <summary>Indian Health Service — Closes 2027-02-01 — The purpose of the NUIBH program is to strengthen behavioral health services for Urban Indian communities by increasing awareness, advocacy, education, and collaboration nationwide. The program supports Urban Indian Organizations (UIOs) through technical assistance, training, information sharing, strategic planning, and quality improvement to expand culturally appropriate behavioral health service…</summary>
+    <summary>Indian Health Service | Closes 2027-02-01 | The purpose of the NUIBH program is to strengthen behavioral health services for Urban Indian communities by increasing awareness, advocacy, education, and collaboration nationwide. The program supports Urban Indian Organizations (UIOs) through technical assistance, training, information sharing, strategic planning, and quality improvement to expand culturally appropriate behavioral health service…</summary>
   </entry>
   <entry>
     <title>Tribal Maternal, Infant, and Early Childhood Home Visiting Program: Development and Implementation Grants</title>
@@ -131,7 +131,7 @@
     <updated>2026-12-01T00:00:00Z</updated>
     <author><name>Administration for Children and Families</name></author>
     <category term="Arts and culture"/>
-    <summary>Administration for Children and Families — Closes 2027-03-02 — The Office of Early Childhood Development (ECD) within the Administration for Children and Families (ACF) will be soliciting applications for the Fiscal Year 2027 Tribal Maternal, Infant, and Early Childhood Home Visiting (MIECHV) Program: Development and Implementation Grants. Funds will support 5-year cooperative agreements between ACF and federally recognized Indian tribes (or a consortium of I…</summary>
+    <summary>Administration for Children and Families | Closes 2027-03-02 | The Office of Early Childhood Development (ECD) within the Administration for Children and Families (ACF) will be soliciting applications for the Fiscal Year 2027 Tribal Maternal, Infant, and Early Childhood Home Visiting (MIECHV) Program: Development and Implementation Grants. Funds will support 5-year cooperative agreements between ACF and federally recognized Indian tribes (or a consortium of I…</summary>
   </entry>
   <entry>
     <title>NIOSH Centers of Excellence for Total Worker Health® (U19)</title>
@@ -144,7 +144,7 @@
     <category term="Education and workforce"/>
     <category term="Technology development"/>
     <category term="Transportation"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-26 — PURPOSENIOSH intends to support the Centers of Excellence in Total Worker Health® (TWH). These Centers will conduct rigorous research and translation activities to prevent harmful exposures, improve working conditions, and advance worker well-being. The Centers will develop practical, scalable solutions for employers and workers. All projects must use the NIOSH Worker Well-Being Questionnaire (Wel…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-02-26 | PURPOSENIOSH intends to support the Centers of Excellence in Total Worker Health® (TWH). These Centers will conduct rigorous research and translation activities to prevent harmful exposures, improve working conditions, and advance worker well-being. The Centers will develop practical, scalable solutions for employers and workers. All projects must use the NIOSH Worker Well-Being Questionnaire (Wel…</summary>
   </entry>
   <entry>
     <title>Precision and Systems Biology to Uncover the Link Between Chronic and Infectious Diseases</title>
@@ -159,7 +159,7 @@
     <category term="Environmental science"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-01-22 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
+    <summary>National Institutes of Health | Closes 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
   </entry>
   <entry>
     <title>NIAMS Clinical Trial Implementation Cooperative Agreement</title>
@@ -169,10 +169,10 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Arts and culture"/>
     <category term="Transportation"/>
-    <summary>National Institutes of Health — Closes 2027-07-02 — The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for the Clinical Trial Cooperative Agreement Program within the mission areas of the institute. This Notice of Funding Opportunity (NOFO) solicits cooperative agreement applications for implementation of investigator-initiated, single o…</summary>
+    <summary>National Institutes of Health | Closes 2027-07-02 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for the Clinical Trial Cooperative Agreement Program within the mission areas of the institute. This Notice of Funding Opportunity (NOFO) solicits cooperative agreement applications for implementation of investigator-initiated, single o…</summary>
   </entry>
   <entry>
-    <title>NIOSH Miner Safety and Health Training Program - Western United States – U60</title>
+    <title>NIOSH Miner Safety and Health Training Program - Western United States - U60</title>
     <link href="https://www.grants.gov/search-results-detail/363232"/>
     <id>urn:funding-finder:grants-gov:363232</id>
     <updated>2026-10-27T00:00:00Z</updated>
@@ -180,7 +180,7 @@
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-01-26 — BackgroundDespite advances in technology and improvements in work environments, mining remains one of the most challenging and hazardous occupations in the United States. The industry continues to experience a fatality rate nearly three times higher than the national average for all industries, according to the U.S. Bureau of Labor Statistics (BLS). Public MSHA data show that in 2025, the U.S. min…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-01-26 | BackgroundDespite advances in technology and improvements in work environments, mining remains one of the most challenging and hazardous occupations in the United States. The industry continues to experience a fatality rate nearly three times higher than the national average for all industries, according to the U.S. Bureau of Labor Statistics (BLS). Public MSHA data show that in 2025, the U.S. min…</summary>
   </entry>
   <entry>
     <title>Improving Linkage to Care for People with Opioid Use Disorder (U01)</title>
@@ -190,7 +190,7 @@
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Arts and culture"/>
     <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-01 — The Centers for Disease Control and Prevention’s (CDC) National Center for Injury Prevention and Control (NCIPC, Injury Center) is soliciting investigator-initiated research to develop, implement, and rigorously evaluate strategies to address and overcome barriers to implementing evidence-based linkage to care services in health care settings. Strategies should focus on individuals with opioid use…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2026-12-01 | The Centers for Disease Control and Prevention’s (CDC) National Center for Injury Prevention and Control (NCIPC, Injury Center) is soliciting investigator-initiated research to develop, implement, and rigorously evaluate strategies to address and overcome barriers to implementing evidence-based linkage to care services in health care settings. Strategies should focus on individuals with opioid use…</summary>
   </entry>
   <entry>
     <title>Restoring Joint Health and Function to Reduce Pain (RE-JOIN) 2.0</title>
@@ -200,7 +200,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Arts and culture"/>
     <category term="Data science"/>
-    <summary>National Institutes of Health — Closes 2026-12-01 — The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS), in conjunction with other NIH Institutes and Centers (ICs) as a part of the congressionally mandated NIH Helping to End Addiction Long Term (HEAL) initiative intends to publish a Notice of Funding Opportunity (NOFO) to leverage and accelerate the progress achieved in the Restoring Joint Health and Function to Reduce…</summary>
+    <summary>National Institutes of Health | Closes 2026-12-01 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS), in conjunction with other NIH Institutes and Centers (ICs) as a part of the congressionally mandated NIH Helping to End Addiction Long Term (HEAL) initiative intends to publish a Notice of Funding Opportunity (NOFO) to leverage and accelerate the progress achieved in the Restoring Joint Health and Function to Reduce…</summary>
   </entry>
   <entry>
     <title>Rigorously Evaluating Approaches to Prevent Child Sexual Abuse and Problematic Sexual Behavior among Youth</title>
@@ -210,7 +210,7 @@
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Arts and culture"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-01 — The Centers for Disease Control and Prevention's (CDC) National Center for Injury Prevention and Control (NCIPC) is soliciting investigator-initiated gold standard research proposals to rigorously evaluate programs and policies for their impact on primary prevention of child sexual abuse (CSA) or problematic sexual behavior (PSB) among youth. For the purposes of this NOFO:CSA is defined as sexual …</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2026-12-01 | The Centers for Disease Control and Prevention's (CDC) National Center for Injury Prevention and Control (NCIPC) is soliciting investigator-initiated gold standard research proposals to rigorously evaluate programs and policies for their impact on primary prevention of child sexual abuse (CSA) or problematic sexual behavior (PSB) among youth. For the purposes of this NOFO:CSA is defined as sexual …</summary>
   </entry>
   <entry>
     <title>Supporting Implementation of the Labor Provisions of Trade Arrangements for American Worker Competitiveness</title>
@@ -219,7 +219,7 @@
     <updated>2026-09-15T00:00:00Z</updated>
     <author><name>Bureau of International Labor Affairs</name></author>
     <category term="Arts and culture"/>
-    <summary>Bureau of International Labor Affairs — Closes 2026-10-15 — This is a Notice of Intent/Forecast only. The Bureau of International Labor Affairs (ILAB), DOL intends to award two (2) cooperative agreements ($18 million, total costs subject to the availability of Federal funds) to fund technical assistance projects to improve labor law enforcement in targeted sectors of key trade partner countries to ensure unfair competition does not undercut American worker…</summary>
+    <summary>Bureau of International Labor Affairs | Closes 2026-10-15 | This is a Notice of Intent/Forecast only. The Bureau of International Labor Affairs (ILAB), DOL intends to award two (2) cooperative agreements ($18 million, total costs subject to the availability of Federal funds) to fund technical assistance projects to improve labor law enforcement in targeted sectors of key trade partner countries to ensure unfair competition does not undercut American worker…</summary>
   </entry>
   <entry>
     <title>The NIA Genetics of Alzheimer's Disease Data Storage Site (NIAGADS)</title>
@@ -232,7 +232,7 @@
     <category term="Biology and biotechnology"/>
     <category term="Community development"/>
     <category term="Education and workforce"/>
-    <summary>National Institutes of Health — Closes 2026-11-01 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop, operate, and sustain a cloud-based data storage and computing platform that democratizes access to large-scale Alzheimer’s disease (AD) and AD-related dementias (ADRD) genetic and genomic data. The platform must be secure, scalable, and interoperable. The platform wil…</summary>
+    <summary>National Institutes of Health | Closes 2026-11-01 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop, operate, and sustain a cloud-based data storage and computing platform that democratizes access to large-scale Alzheimer’s disease (AD) and AD-related dementias (ADRD) genetic and genomic data. The platform must be secure, scalable, and interoperable. The platform wil…</summary>
   </entry>
   <entry>
     <title>Exploratory Clinical Trial Grants in Arthritis and Musculoskeletal and Skin Diseases</title>
@@ -243,7 +243,7 @@
     <category term="Arts and culture"/>
     <category term="Biology and biotechnology"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health — Closes 2027-03-04 — The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for Exploratory Clinical Trials Grants Program in the mission areas of NIAMS. The goal of the NIAMS clinical trial program is to support research leading to the prevention or reduction of symptoms and improve outcomes and function in pa…</summary>
+    <summary>National Institutes of Health | Closes 2027-03-04 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for Exploratory Clinical Trials Grants Program in the mission areas of NIAMS. The goal of the NIAMS clinical trial program is to support research leading to the prevention or reduction of symptoms and improve outcomes and function in pa…</summary>
   </entry>
   <entry>
     <title>HIV/AIDS Clinical Trials Network Laboratory Centers</title>
@@ -254,7 +254,7 @@
     <category term="Arts and culture"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-01-22 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center, and Laboratory Center (LC) working with Clinical Trials Units, to test prevention and treatment strategies and conduct implementation research designed to end t…</summary>
+    <summary>National Institutes of Health | Closes 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center, and Laboratory Center (LC) working with Clinical Trials Units, to test prevention and treatment strategies and conduct implementation research designed to end t…</summary>
   </entry>
   <entry>
     <title>Freedom Shield: Global Forced Labor Import Prohibition Initiative</title>
@@ -263,7 +263,7 @@
     <updated>2026-08-18T00:00:00Z</updated>
     <author><name>Bureau of International Labor Affairs</name></author>
     <category term="Arts and culture"/>
-    <summary>Bureau of International Labor Affairs — Closes 2026-09-17 — This is a Notice of Intent/Forecast only. The Bureau of International Labor Affairs (ILAB), DOL intends to award two (2) cooperative agreements ($18 million, total costs subject to the availability of Federal funds) to fund technical assistance projects with the objective of advancing U.S. trade priorities by building accountability in key trade partner countries to implement and effectively enfor…</summary>
+    <summary>Bureau of International Labor Affairs | Closes 2026-09-17 | This is a Notice of Intent/Forecast only. The Bureau of International Labor Affairs (ILAB), DOL intends to award two (2) cooperative agreements ($18 million, total costs subject to the availability of Federal funds) to fund technical assistance projects with the objective of advancing U.S. trade priorities by building accountability in key trade partner countries to implement and effectively enfor…</summary>
   </entry>
   <entry>
     <title>Limited Competition: NIGMS Mature Synchrotron Resources (MSR) for Structural Biology (P30 - Clinical Trial Not Allowed)</title>
@@ -274,7 +274,7 @@
     <category term="Arts and culture"/>
     <category term="Biology and biotechnology"/>
     <category term="Education and workforce"/>
-    <summary>National Institutes of Health — Closes 2026-10-13 — The NIGMS Mature Synchrotron Resources for Structural Biology program supports mature technologies at synchrotron facilities that provide biomedical researchers with state-of-the-art X-ray beamlines, hands-on user training, and expert assistance to generate and analyze structural biology data. NIGMS intends to reissue a Notice of Funding Opportunity to continue to support these important national …</summary>
+    <summary>National Institutes of Health | Closes 2026-10-13 | The NIGMS Mature Synchrotron Resources for Structural Biology program supports mature technologies at synchrotron facilities that provide biomedical researchers with state-of-the-art X-ray beamlines, hands-on user training, and expert assistance to generate and analyze structural biology data. NIGMS intends to reissue a Notice of Funding Opportunity to continue to support these important national …</summary>
   </entry>
   <entry>
     <title>Enhancing and Supporting the Network of American Spaces in Armenia</title>
@@ -286,7 +286,7 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <category term="Technology development"/>
-    <summary>U.S. Mission to Armenia — Closes 2026-09-10 — The American Spaces network in Armenia is one of the United States’ strongest and most trusted platforms for advancing education, innovation, and people‑to‑people engagement. These Spaces demonstrate American excellence through open, reliable environments and high‑quality programming shaped by U.S. educational and technological leadership. They provide direct access to reliable information, modern…</summary>
+    <summary>U.S. Mission to Armenia | Closes 2026-09-10 | The American Spaces network in Armenia is one of the United States’ strongest and most trusted platforms for advancing education, innovation, and people‑to‑people engagement. These Spaces demonstrate American excellence through open, reliable environments and high‑quality programming shaped by U.S. educational and technological leadership. They provide direct access to reliable information, modern…</summary>
   </entry>
   <entry>
     <title>Culturally Specific Domestic Violence and Sexual Assault Services</title>
@@ -297,7 +297,7 @@
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Public health"/>
-    <summary>Administration for Children and Families - OFVPS — Closes 2026-09-08 — The purpose of the Culturally Specific Services for Domestic Violence and Sexual Assault program is to provide culturally specific services for survivors of domestic violence and sexual assault. Objectives include services for survivors of sexual assault and domestic violence to address emergent needs resulting from a public health emergency and other public health concerns and support for organiz…</summary>
+    <summary>Administration for Children and Families - OFVPS | Closes 2026-09-08 | The purpose of the Culturally Specific Services for Domestic Violence and Sexual Assault program is to provide culturally specific services for survivors of domestic violence and sexual assault. Objectives include services for survivors of sexual assault and domestic violence to address emergent needs resulting from a public health emergency and other public health concerns and support for organiz…</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Alaska Cooperative Ecosystem Studies Unit (CESU)</title>
@@ -312,7 +312,7 @@
     <category term="Environmental science"/>
     <category term="Space and aeronautics"/>
     <category term="Water"/>
-    <summary>Geological Survey — Closes 2026-09-11 — This Notice of Funding Opportunity (NOFO) is for a U.S. Geological Survey (USGS) National and Regional Climate Adaptation Science Center (NRCASC) competitive research award to a CESU partner.Projects supported under this cooperative agreement should advance Administration priorities, including, but not limited to, American energy dominance, critical mineral development, water security, infrastruct…</summary>
+    <summary>Geological Survey | Closes 2026-09-11 | This Notice of Funding Opportunity (NOFO) is for a U.S. Geological Survey (USGS) National and Regional Climate Adaptation Science Center (NRCASC) competitive research award to a CESU partner.Projects supported under this cooperative agreement should advance Administration priorities, including, but not limited to, American energy dominance, critical mineral development, water security, infrastruct…</summary>
   </entry>
   <entry>
     <title>NSF DCL Advancing Artificial Intelligence (AI) Agent Ecosystems through the National Science Foundation Pathways to Enable Secure Open-Source Ecosystems (NSF PESOSE) Program | NSF 26-015</title>
@@ -323,7 +323,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Arts and culture"/>
     <category term="Environmental science"/>
-    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Closes 2026-09-01</summary>
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-01</summary>
   </entry>
   <entry>
     <title>Pax Silica Artificial Intelligence Assistance Project</title>
@@ -336,7 +336,7 @@
     <category term="Manufacturing"/>
     <category term="Data science"/>
     <category term="Materials science"/>
-    <summary>Bureau of Economic and Business Affairs — Closes 2026-08-20 — Leveraging foreign assistance from the Pax Fund, this NOFO launches the Pax Silica Artificial Intelligence (AI) Assistance Project—a historic first-of-its-kind programmatic initiative to strengthen global AI supply chain security by creating a trusted supply chain credentialing and provenance platform to secure the AI supply chain in partner countries and economies. This NOFO seeks to fund the est…</summary>
+    <summary>Bureau of Economic and Business Affairs | Closes 2026-08-20 | Leveraging foreign assistance from the Pax Fund, this NOFO launches the Pax Silica Artificial Intelligence (AI) Assistance Project-a historic first-of-its-kind programmatic initiative to strengthen global AI supply chain security by creating a trusted supply chain credentialing and provenance platform to secure the AI supply chain in partner countries and economies. This NOFO seeks to fund the est…</summary>
   </entry>
   <entry>
     <title>Promoting Civilizational Values</title>
@@ -346,7 +346,7 @@
     <author><name>Bureau of Democracy Human Rights and Labor</name></author>
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
-    <summary>Bureau of Democracy Human Rights and Labor — Closes 2026-08-21 — DRL requests proposals to strengthen the ability of European countries and institutions to protect freedom of expression, political pluralism, and national self-government. This funding opportunity directly supports the U.S. National Security Strategy's priority of "building up the healthy nations of Central, Eastern, and Southern Europe through commercial ties, political collaboration, and cultur…</summary>
+    <summary>Bureau of Democracy Human Rights and Labor | Closes 2026-08-21 | DRL requests proposals to strengthen the ability of European countries and institutions to protect freedom of expression, political pluralism, and national self-government. This funding opportunity directly supports the U.S. National Security Strategy's priority of "building up the healthy nations of Central, Eastern, and Southern Europe through commercial ties, political collaboration, and cultur…</summary>
   </entry>
   <entry>
     <title>Lewis-Houghton Civics and Democracy Initiative: New Awards for 2027-2029</title>
@@ -356,7 +356,7 @@
     <author><name>Library of Congress</name></author>
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
-    <summary>Library of Congress — Closes 2026-09-18 — This funding opportunity is authorized under the “Legislative Branch Appropriations Act of 2023” (Pub. L. 117-389 (H.R. 8237)), subject to availability of funding. The resulting awards will be subject to the Library of Congress Regulation (LCR) 7-310. In addition, while the Library, as a legislative agency, is not subject to 2 CFR 200 – Uniform Administrative Requirements, Costs Principles and Aud…</summary>
+    <summary>Library of Congress | Closes 2026-09-18 | This funding opportunity is authorized under the “Legislative Branch Appropriations Act of 2023” (Pub. L. 117-389 (H.R. 8237)), subject to availability of funding. The resulting awards will be subject to the Library of Congress Regulation (LCR) 7-310. In addition, while the Library, as a legislative agency, is not subject to 2 CFR 200 - Uniform Administrative Requirements, Costs Principles and Aud…</summary>
   </entry>
   <entry>
     <title>DRL Ensuring Resilient Seafood Supply Chains: Countering Forced Labor and any associated Illegal, Unreported and Unregulated Fishing</title>
@@ -369,7 +369,7 @@
     <category term="Transportation"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Bureau of Democracy Human Rights and Labor — Closes 2026-09-03 — This program will counter forced labor in seafood supply chains associated with countries that have signed Agreements on Reciprocal Trade (ART) in East Asia and the Pacific (excluding Indonesia and the Philippines) and the Western Hemisphere, as well as other strategically important countries and prospective ART partners where engagement advances U.S. economic, trade, and maritime interests.</summary>
+    <summary>Bureau of Democracy Human Rights and Labor | Closes 2026-09-03 | This program will counter forced labor in seafood supply chains associated with countries that have signed Agreements on Reciprocal Trade (ART) in East Asia and the Pacific (excluding Indonesia and the Philippines) and the Western Hemisphere, as well as other strategically important countries and prospective ART partners where engagement advances U.S. economic, trade, and maritime interests.</summary>
   </entry>
   <entry>
     <title>Institute of Education Sciences (IES): National Center for Education Research (NCER): Statistical and Research Methodology in Education, Assistance Listing Number (ALN) 84.305D</title>
@@ -382,7 +382,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <category term="Cybersecurity"/>
-    <summary>Department of Education — Closes 2026-10-01 — The goal of the Statistical and Research Methodology in Education (Stats/Methods) grant program (84.305D) is to provide a wide range of methodological and statistical tools that will better enable applied education scientists to conduct rigorous education research.Under this program, NCER will consider only applications that address one of the following topics: (1) Core Grants or (2) Toolkits, Gui…</summary>
+    <summary>Department of Education | Closes 2026-10-01 | The goal of the Statistical and Research Methodology in Education (Stats/Methods) grant program (84.305D) is to provide a wide range of methodological and statistical tools that will better enable applied education scientists to conduct rigorous education research.Under this program, NCER will consider only applications that address one of the following topics: (1) Core Grants or (2) Toolkits, Gui…</summary>
   </entry>
   <entry>
     <title>Novel Approaches to Advance Precision Aging and Cognitive Health</title>
@@ -394,7 +394,7 @@
     <category term="Arts and culture"/>
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health — Closes 2026-10-06 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that develop or incorporate novel, cutting-edge study designs/methods/analytic approaches through the use of machine learning, artificial intelligence, and adaptive designs to allow the discovery of health/function profiles at the level of the individual and that could lead to th…</summary>
+    <summary>National Institutes of Health | Closes 2026-10-06 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that develop or incorporate novel, cutting-edge study designs/methods/analytic approaches through the use of machine learning, artificial intelligence, and adaptive designs to allow the discovery of health/function profiles at the level of the individual and that could lead to th…</summary>
   </entry>
   <entry>
     <title>U.S. National Science Foundation State and Regional Artificial Intelligence Infrastructure Hubs:</title>
@@ -407,7 +407,7 @@
     <category term="Education and workforce"/>
     <category term="Data science"/>
     <category term="Cybersecurity"/>
-    <summary>U.S. National Science Foundation — Closes 2026-11-04 — The NSF State and Regional AI Infrastructure Hubs program aims to expand access to the compute required for AI-enabled scientific discovery and to transform the research, education, and training opportunities offered by institutions of higher education. AI Infrastructure Hubs will connect researchers to new compute infrastructure that leverages contributions from state governments, research instit…</summary>
+    <summary>U.S. National Science Foundation | Closes 2026-11-04 | The NSF State and Regional AI Infrastructure Hubs program aims to expand access to the compute required for AI-enabled scientific discovery and to transform the research, education, and training opportunities offered by institutions of higher education. AI Infrastructure Hubs will connect researchers to new compute infrastructure that leverages contributions from state governments, research instit…</summary>
   </entry>
   <entry>
     <title>Tribal Personal Responsibility Education Program (Tribal PREP)</title>
@@ -418,7 +418,7 @@
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Transportation"/>
-    <summary>Administration for Children &amp; Families - ACYF/FYSB — Closes 2026-08-31 — The Family and Youth Services Bureau will be posting a revised Tribal PREP NOFO shortly and will be accepting applications. Tribal PREP competitively funds projects that educate American Indian/Alaska Native (AI/AN) youth ages 10-19, and expectant and parenting youth under age 21, on both abstinence and contraception for the prevention of pregnancy, sexually transmitted infections (STIs), and HIV …</summary>
+    <summary>Administration for Children &amp; Families - ACYF/FYSB | Closes 2026-08-31 | The Family and Youth Services Bureau will be posting a revised Tribal PREP NOFO shortly and will be accepting applications. Tribal PREP competitively funds projects that educate American Indian/Alaska Native (AI/AN) youth ages 10-19, and expectant and parenting youth under age 21, on both abstinence and contraception for the prevention of pregnancy, sexually transmitted infections (STIs), and HIV …</summary>
   </entry>
   <entry>
     <title>Affiliate American Spaces PD Support Program FY 2026</title>
@@ -428,7 +428,7 @@
     <author><name>U.S. Mission to Croatia</name></author>
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
-    <summary>U.S. Mission to Croatia — Closes 2026-08-14 — All American Spaces programs showcase the breadth and depth of American values, ideals, culture, and perspectives on a variety of themes. Public Diplomacy section Croatia supports and implements programs and activities in Affiliate American Spaces Croatia – Affiliate American Corner Zagreb, Affiliate American Corner Koprivnica, Affiliate American Corner Vukovar - aligning with the needs and intere…</summary>
+    <summary>U.S. Mission to Croatia | Closes 2026-08-14 | All American Spaces programs showcase the breadth and depth of American values, ideals, culture, and perspectives on a variety of themes. Public Diplomacy section Croatia supports and implements programs and activities in Affiliate American Spaces Croatia - Affiliate American Corner Zagreb, Affiliate American Corner Koprivnica, Affiliate American Corner Vukovar - aligning with the needs and intere…</summary>
   </entry>
   <entry>
     <title>Advancing Investigative Journalism in Ukraine through U.S. AI Innovation</title>
@@ -444,7 +444,7 @@
     <category term="Environmental science"/>
     <category term="Technology development"/>
     <category term="Data science"/>
-    <summary>U.S. Mission to Ukraine — Closes 2026-09-01 — The U.S. Department of State's Embassy Kyiv announces an open competition for Ukrainian non-governmental media organizations and independent media outlets to implement a program that strengthens data-driven and AI-enabled journalism in Ukraine. It will build the capacity of journalists and newsrooms to produce high-quality reporting on economic development, reconstruction and investment through tr…</summary>
+    <summary>U.S. Mission to Ukraine | Closes 2026-09-01 | The U.S. Department of State's Embassy Kyiv announces an open competition for Ukrainian non-governmental media organizations and independent media outlets to implement a program that strengthens data-driven and AI-enabled journalism in Ukraine. It will build the capacity of journalists and newsrooms to produce high-quality reporting on economic development, reconstruction and investment through tr…</summary>
   </entry>
   <entry>
     <title>BRAIN Initiative Cell Atlas Network (BICAN): Coordinating Unit for Biostatistics, Informatics, and Engagement (CUBIE)</title>
@@ -457,7 +457,7 @@
     <category term="Data science"/>
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health — Closes 2026-10-01 — The National Institute of Mental Health (NIMH), with other NIH Institutes and Centers (ICs), intends to publish a notice of funding opportunity (NOFO) to solicit research applications for the BRAIN Initiative Cell Atlas Network (BICAN) Coordinating Unit for Biostatistics, Informatics, and Engagement (CUBIE). In accordance with NIH standard peer-review processes, the application(s) will be peer-rev…</summary>
+    <summary>National Institutes of Health | Closes 2026-10-01 | The National Institute of Mental Health (NIMH), with other NIH Institutes and Centers (ICs), intends to publish a notice of funding opportunity (NOFO) to solicit research applications for the BRAIN Initiative Cell Atlas Network (BICAN) Coordinating Unit for Biostatistics, Informatics, and Engagement (CUBIE). In accordance with NIH standard peer-review processes, the application(s) will be peer-rev…</summary>
   </entry>
   <entry>
     <title>The NIDDK Disorders of Gastrointestinal Interoception Consortium Clinical Centers (DGIC)</title>
@@ -466,7 +466,7 @@
     <updated>2026-08-01T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Arts and culture"/>
-    <summary>National Institutes of Health — Closes 2026-11-01 — The National Institute of Diabetes and Digestive Diseases and Nutrition (NIDDK) seeks to advance its mission by continuing the work of the NIDDK Gastroparesis Consortium (GpCRC) but also to expand its scope. The collaborative efforts of the GpCRC provided a large database, the Gastroparesis Registry, which is located in the NIDDK central repository and contains information on patients with symptom…</summary>
+    <summary>National Institutes of Health | Closes 2026-11-01 | The National Institute of Diabetes and Digestive Diseases and Nutrition (NIDDK) seeks to advance its mission by continuing the work of the NIDDK Gastroparesis Consortium (GpCRC) but also to expand its scope. The collaborative efforts of the GpCRC provided a large database, the Gastroparesis Registry, which is located in the NIDDK central repository and contains information on patients with symptom…</summary>
   </entry>
   <entry>
     <title>The NIDDK Disorders of Gastrointestinal Interoception Consortium Clinical Centers (DGIC)</title>
@@ -475,7 +475,7 @@
     <updated>2026-08-01T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Arts and culture"/>
-    <summary>National Institutes of Health — Closes 2026-11-01 — The National Institute of Diabetes and Digestive Diseases and Nutrition (NIDDK) seeks to advance its mission by continuing the work of the NIDDK Gastroparesis Consortium (GpCRC) but also to expand its scope. The collaborative efforts of the GpCRC provided a large database, the Gastroparesis Registry, which is located in the NIDDK central repository and contains information on patients with symptom…</summary>
+    <summary>National Institutes of Health | Closes 2026-11-01 | The National Institute of Diabetes and Digestive Diseases and Nutrition (NIDDK) seeks to advance its mission by continuing the work of the NIDDK Gastroparesis Consortium (GpCRC) but also to expand its scope. The collaborative efforts of the GpCRC provided a large database, the Gastroparesis Registry, which is located in the NIDDK central repository and contains information on patients with symptom…</summary>
   </entry>
   <entry>
     <title>U.S. Embassy Nassau Annual Program Statement for Public Diplomacy</title>
@@ -486,7 +486,7 @@
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
-    <summary>U.S. Mission to the Bahamas — Closes 2026-08-14 — The U.S. Embassy Nassau Public Diplomacy Section announces an open competition for grants to implement programs that strengthen bilateral relations and advance shared priorities between the United States and The Bahamas. Priority program areas include Freedom 250 (commemorating the 250th anniversary of American independence); Business Development and Entrepreneurship; Educational and Cultural Prog…</summary>
+    <summary>U.S. Mission to the Bahamas | Closes 2026-08-14 | The U.S. Embassy Nassau Public Diplomacy Section announces an open competition for grants to implement programs that strengthen bilateral relations and advance shared priorities between the United States and The Bahamas. Priority program areas include Freedom 250 (commemorating the 250th anniversary of American independence); Business Development and Entrepreneurship; Educational and Cultural Prog…</summary>
   </entry>
   <entry>
     <title>Placement and Coordination Program</title>
@@ -496,7 +496,7 @@
     <author><name>Administration for Children and Families - ORR</name></author>
     <category term="Arts and culture"/>
     <category term="Technology development"/>
-    <summary>Administration for Children and Families - ORR — Closes 2026-09-17 — This NOFO is modified. Changes are made to Step 1: Review the Opportunity and Step 2: Get Ready to Apply. The disqualifying factors section has been updated to clarify that applications from organizations currently funded by ORR to support Program of Initial Resettlement services will be disqualified, including organizations receiving PIR funding through subaward. The webinar description has been …</summary>
+    <summary>Administration for Children and Families - ORR | Closes 2026-09-17 | This NOFO is modified. Changes are made to Step 1: Review the Opportunity and Step 2: Get Ready to Apply. The disqualifying factors section has been updated to clarify that applications from organizations currently funded by ORR to support Program of Initial Resettlement services will be disqualified, including organizations receiving PIR funding through subaward. The webinar description has been …</summary>
   </entry>
   <entry>
     <title>AI3 Action Institute - Artificial Intelligence for American Indians</title>
@@ -509,7 +509,7 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <category term="Data science"/>
-    <summary>Administration for Children and Families - ANA — Closes 2026-08-27 — The Administration for Native Americans (ANA) anticipates announcing the availability of funds and requesting applications for the AI3 Action Institute – Artificial Intelligence for American Indians. The successful applicant will establish the AI3 Action Institute, which will monitor the pace of AI change, identify responsible and practical opportunities to apply this technology to socioeconomic d…</summary>
+    <summary>Administration for Children and Families - ANA | Closes 2026-08-27 | The Administration for Native Americans (ANA) anticipates announcing the availability of funds and requesting applications for the AI3 Action Institute - Artificial Intelligence for American Indians. The successful applicant will establish the AI3 Action Institute, which will monitor the pace of AI change, identify responsible and practical opportunities to apply this technology to socioeconomic d…</summary>
   </entry>
   <entry>
     <title>DRL Transshipment Supply Chain Tracing</title>
@@ -519,7 +519,7 @@
     <author><name>Bureau of Democracy Human Rights and Labor</name></author>
     <category term="Arts and culture"/>
     <category term="Manufacturing"/>
-    <summary>Bureau of Democracy Human Rights and Labor — Closes 2026-08-27 — DRL solicits proposals of up to $1,973,359 that aim to strengthen the ability of the United States and partner countries with ARTs to detect and disrupt transshipment practices that evade U.S. laws that prohibit the importation of goods made with forced labor and/or other country’s forced labor import prohibitions.</summary>
+    <summary>Bureau of Democracy Human Rights and Labor | Closes 2026-08-27 | DRL solicits proposals of up to $1,973,359 that aim to strengthen the ability of the United States and partner countries with ARTs to detect and disrupt transshipment practices that evade U.S. laws that prohibit the importation of goods made with forced labor and/or other country’s forced labor import prohibitions.</summary>
   </entry>
   <entry>
     <title>NATIVE Act Tribal Tourism Cooperative Agreement</title>
@@ -529,7 +529,7 @@
     <author><name>Bureau of Indian Affairs</name></author>
     <category term="Arts and culture"/>
     <category term="Community development"/>
-    <summary>Bureau of Indian Affairs — Closes 2026-08-28 — The NATIVE Act cooperative agreement will support Tribal Tourism Grant Program (TTGP) and Office of Native Hawaiian Relations (ONHR) applicants, which is comprised of Tribes, Tribal organizations, and Native Hawaiian organizations, by identifying technical assistance needs and delivering targeted capacity-building support to expand cultural heritage tourism and increase visitation. The selected re…</summary>
+    <summary>Bureau of Indian Affairs | Closes 2026-08-28 | The NATIVE Act cooperative agreement will support Tribal Tourism Grant Program (TTGP) and Office of Native Hawaiian Relations (ONHR) applicants, which is comprised of Tribes, Tribal organizations, and Native Hawaiian organizations, by identifying technical assistance needs and delivering targeted capacity-building support to expand cultural heritage tourism and increase visitation. The selected re…</summary>
   </entry>
   <entry>
     <title>Advancing Labor Rights in the Garment Industry</title>
@@ -539,7 +539,7 @@
     <author><name>Bureau of Democracy Human Rights and Labor</name></author>
     <category term="Arts and culture"/>
     <category term="Manufacturing"/>
-    <summary>Bureau of Democracy Human Rights and Labor — Closes 2026-08-27 — The program will strengthen labor rights protections consistent with labor rights commitments and support labor rights reforms in strategic partner countries with existing Agreements on Reciprocal Trade (ARTs). This program will support garment workers to help them better understand and exercise their labor rights, freely associate, and access timely, non-retaliatory remedies for workplace abuses …</summary>
+    <summary>Bureau of Democracy Human Rights and Labor | Closes 2026-08-27 | The program will strengthen labor rights protections consistent with labor rights commitments and support labor rights reforms in strategic partner countries with existing Agreements on Reciprocal Trade (ARTs). This program will support garment workers to help them better understand and exercise their labor rights, freely associate, and access timely, non-retaliatory remedies for workplace abuses …</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Rocky Mountain Cooperative Ecosystem Studies Unit (CESU)</title>
@@ -552,7 +552,7 @@
     <category term="Energy"/>
     <category term="Environmental science"/>
     <category term="Water"/>
-    <summary>Geological Survey — Closes 2026-08-29 — The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner for research in processing and analyzing of data from the Surface Water and Ocean Topography (SWOT) mission. The project will advance hydrologic decision making from remotely sensed water surface elevation by making available water surface elevation data at unprecedented scales. Research Scientists in the Observi…</summary>
+    <summary>Geological Survey | Closes 2026-08-29 | The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner for research in processing and analyzing of data from the Surface Water and Ocean Topography (SWOT) mission. The project will advance hydrologic decision making from remotely sensed water surface elevation by making available water surface elevation data at unprecedented scales. Research Scientists in the Observi…</summary>
   </entry>
   <entry>
     <title>U.S. Embassy Jakarta Media Small Grants Competition</title>
@@ -563,7 +563,7 @@
     <category term="Arts and culture"/>
     <category term="Community development"/>
     <category term="Education and workforce"/>
-    <summary>U.S. Mission to Indonesia — Closes 2026-08-31 — 1. Project Background, Goals, and ObjectivesWith over 270 million people and one of the world’s largest social media user bases, Indonesia’s citizens consume media content from a wide array of traditional and digital sources. Journalists and media professionals capable of reporting accurately and comprehensively on critical issues – including democratic governance, economic development, emerging t…</summary>
+    <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | 1. Project Background, Goals, and ObjectivesWith over 270 million people and one of the world’s largest social media user bases, Indonesia’s citizens consume media content from a wide array of traditional and digital sources. Journalists and media professionals capable of reporting accurately and comprehensively on critical issues - including democratic governance, economic development, emerging t…</summary>
   </entry>
   <entry>
     <title>TIP Office International Programs to Combat Human Trafficking Annual Program Statement</title>
@@ -572,7 +572,7 @@
     <updated>2026-07-29T00:00:00Z</updated>
     <author><name>Office to Monitor-Combat Trafficking in Persons</name></author>
     <category term="Arts and culture"/>
-    <summary>Office to Monitor-Combat Trafficking in Persons — Closes 2099-01-01 — The TIP Office invites applications for projects that aim to combat human trafficking following the legislative framework laid out in the Trafficking Victims Protection Act, and subsequent reauthorizations, to prosecute traffickers, protect victims, and prevent trafficking. Projects should address human trafficking challenges, respond to the priorities articulated in the National Security Strategy…</summary>
+    <summary>Office to Monitor-Combat Trafficking in Persons | Closes 2099-01-01 | The TIP Office invites applications for projects that aim to combat human trafficking following the legislative framework laid out in the Trafficking Victims Protection Act, and subsequent reauthorizations, to prosecute traffickers, protect victims, and prevent trafficking. Projects should address human trafficking challenges, respond to the priorities articulated in the National Security Strategy…</summary>
   </entry>
   <entry>
     <title>Building Skills, Strengthening Communities, and Advancing Innovation in Northwest Mexico</title>
@@ -587,7 +587,7 @@
     <category term="Environmental science"/>
     <category term="Technology development"/>
     <category term="Data science"/>
-    <summary>U.S. Mission to Mexico — Closes 2026-08-27 — The Public Diplomacy Sections of the U.S. Consulates General Tijuana, Nogales, and Hermosillo announce an open competition for programs that strengthen workforce readiness, promote safe border communities, and support a transparent and innovative information ecosystem in northwest Mexico. This Notice of Funding Opportunity (NOFO) seeks merit-based proposals that equip Mexican educators, youth, and…</summary>
+    <summary>U.S. Mission to Mexico | Closes 2026-08-27 | The Public Diplomacy Sections of the U.S. Consulates General Tijuana, Nogales, and Hermosillo announce an open competition for programs that strengthen workforce readiness, promote safe border communities, and support a transparent and innovative information ecosystem in northwest Mexico. This Notice of Funding Opportunity (NOFO) seeks merit-based proposals that equip Mexican educators, youth, and…</summary>
   </entry>
   <entry>
     <title>Economic Advancement Grants for Local Empowerment (EAGLE)</title>
@@ -601,7 +601,7 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <category term="Energy"/>
-    <summary>Administration for Children and Families - ANA — Closes 2026-08-27 — The Administration for Native Americans anticipates announcing the availability of funds and requesting applications for EAGLE: Economic Advancement Grants for Local Empowerment, supporting socioeconomic and cultural success for Native communities through business creation in regenerative agriculture, artificial intelligence, tribal energy sovereignty, and human capital development. The primary go…</summary>
+    <summary>Administration for Children and Families - ANA | Closes 2026-08-27 | The Administration for Native Americans anticipates announcing the availability of funds and requesting applications for EAGLE: Economic Advancement Grants for Local Empowerment, supporting socioeconomic and cultural success for Native communities through business creation in regenerative agriculture, artificial intelligence, tribal energy sovereignty, and human capital development. The primary go…</summary>
   </entry>
   <entry>
     <title>Subnational Industrial Innovation and Resilient Entrepreneurship Accelerator</title>
@@ -616,7 +616,7 @@
     <category term="Manufacturing"/>
     <category term="Technology development"/>
     <category term="Data science"/>
-    <summary>U.S. Mission to Argentina — Closes 2026-08-20 — The U.S. Embassy Buenos Aires announces an open competition to support subnational economic growth and operational modernization in Argentina's strategic manufacturing and resource corridors. This program will establish a competitive business acceleration program designed to provide next-generation entrepreneurs in industrial and mining provinces with practical management tools, strategic scaling …</summary>
+    <summary>U.S. Mission to Argentina | Closes 2026-08-20 | The U.S. Embassy Buenos Aires announces an open competition to support subnational economic growth and operational modernization in Argentina's strategic manufacturing and resource corridors. This program will establish a competitive business acceleration program designed to provide next-generation entrepreneurs in industrial and mining provinces with practical management tools, strategic scaling …</summary>
   </entry>
   <entry>
     <title>U.S.-Argentina Alumni Summit</title>
@@ -629,7 +629,7 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <category term="Technology development"/>
-    <summary>U.S. Mission to Argentina — Closes 2026-08-20 — The U.S. Embassy Buenos Aires announces an open competition to strengthen civic leadership, good governance, and institutional resilience across Argentina. This program will organize a national cross-sector Alumni Summit to equip emerging leaders from the public, academic, and non-governmental organization (NGO) sectors with practical tools, strategic insights, and ethical frameworks regarding inn…</summary>
+    <summary>U.S. Mission to Argentina | Closes 2026-08-20 | The U.S. Embassy Buenos Aires announces an open competition to strengthen civic leadership, good governance, and institutional resilience across Argentina. This program will organize a national cross-sector Alumni Summit to equip emerging leaders from the public, academic, and non-governmental organization (NGO) sectors with practical tools, strategic insights, and ethical frameworks regarding inn…</summary>
   </entry>
   <entry>
     <title>FY26 Bureau of Land Management Abandoned Mine Lands and Hazardous Materials - Bureau wide</title>
@@ -642,7 +642,7 @@
     <category term="Biology and biotechnology"/>
     <category term="Environmental science"/>
     <category term="Public health"/>
-    <summary>Bureau of Land Management — Closes 2026-08-28 — The BLM and its partners inventory and mitigate abandoned mine hazards to protect public health and safety and the environment, and restore watersheds for recreation, fish, wildlife and domestic animals, manage air quality for the protection of public health and sensitive ecosystems, and return lands to productive uses including, but not limited to, recreation, fish and wildlife habitat, and prese…</summary>
+    <summary>Bureau of Land Management | Closes 2026-08-28 | The BLM and its partners inventory and mitigate abandoned mine hazards to protect public health and safety and the environment, and restore watersheds for recreation, fish, wildlife and domestic animals, manage air quality for the protection of public health and sensitive ecosystems, and return lands to productive uses including, but not limited to, recreation, fish and wildlife habitat, and prese…</summary>
   </entry>
   <entry>
     <title>FY26 Bureau of Land Management Forest and Woodlands Resource Management - Bureau Wide</title>
@@ -652,7 +652,7 @@
     <author><name>Bureau of Land Management</name></author>
     <category term="Arts and culture"/>
     <category term="Environmental science"/>
-    <summary>Bureau of Land Management — Closes 2026-08-28 — Priority activities under this announcement include projects that support Executive Order (EO) 14225 Immediate Expansion of American Timber Production and Section 50301 of The One Big Beautiful Bill. This program focuses on activities that promote forest and woodland health, sustainable forest management, fire resiliency, biomass utilization for bioenergy, habitat conservation needs, and insect, d…</summary>
+    <summary>Bureau of Land Management | Closes 2026-08-28 | Priority activities under this announcement include projects that support Executive Order (EO) 14225 Immediate Expansion of American Timber Production and Section 50301 of The One Big Beautiful Bill. This program focuses on activities that promote forest and woodland health, sustainable forest management, fire resiliency, biomass utilization for bioenergy, habitat conservation needs, and insect, d…</summary>
   </entry>
   <entry>
     <title>AI Partnership &amp; Exchange for Tech Leaders (APEX)</title>
@@ -664,7 +664,7 @@
     <category term="Arts and culture"/>
     <category term="Data science"/>
     <category term="Education and workforce"/>
-    <summary>U.S. Mission to Saudi Arabia — Closes 2026-09-08 — Program PurposeThe U.S. Embassy Riyadh Public Diplomacy Section is accepting applications for a cooperative agreement to run the AI Partnership &amp; Exchange for Tech Leaders. The goal of this program is to connect rising Saudi Artificial Intelligence (AI) leaders with American experts in business, tech, and academia. This initiative helps participants build professional networks, study U.S. technolo…</summary>
+    <summary>U.S. Mission to Saudi Arabia | Closes 2026-09-08 | Program PurposeThe U.S. Embassy Riyadh Public Diplomacy Section is accepting applications for a cooperative agreement to run the AI Partnership &amp; Exchange for Tech Leaders. The goal of this program is to connect rising Saudi Artificial Intelligence (AI) leaders with American experts in business, tech, and academia. This initiative helps participants build professional networks, study U.S. technolo…</summary>
   </entry>
   <entry>
     <title>American Innovation Hub: AI &amp; Digital Skills for the Creative &amp; Tech Economy</title>
@@ -679,7 +679,7 @@
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
     <category term="Data science"/>
-    <summary>U.S. Mission to Indonesia — Closes 2026-08-30 — Indonesia is ASEAN’s largest economy and most populous nation, with a young, fast-growing digital population that is rapidly adopting artificial intelligence and creative-technology tools. The choices this generation makes about which technologies, standards, and platforms to build on will shape Indonesia’s digital economy for decades. Demand for trusted, high-quality AI tools is outpacing access …</summary>
+    <summary>U.S. Mission to Indonesia | Closes 2026-08-30 | Indonesia is ASEAN’s largest economy and most populous nation, with a young, fast-growing digital population that is rapidly adopting artificial intelligence and creative-technology tools. The choices this generation makes about which technologies, standards, and platforms to build on will shape Indonesia’s digital economy for decades. Demand for trusted, high-quality AI tools is outpacing access …</summary>
   </entry>
   <entry>
     <title>NRCS' Feral Swine Eradication and Control Pilot Program Fiscal Year (FY) 2026</title>
@@ -691,6 +691,6 @@
     <category term="Arts and culture"/>
     <category term="Environmental science"/>
     <category term="Water"/>
-    <summary>Natural Resources Conservation Service — Closes 2026-09-21 — The purpose of the Feral Swine Eradication and Control Project (FSCP) is to respond to the threat feral swine pose to agriculture, native ecosystems, and human and animal health. Feral swine are a destructive, non-native, invasive species and their populations have expanded across the United States since the 1980’s. Over an estimated $3.4 billion in damage, including agricultural, is caused by fer…</summary>
+    <summary>Natural Resources Conservation Service | Closes 2026-09-21 | The purpose of the Feral Swine Eradication and Control Project (FSCP) is to respond to the threat feral swine pose to agriculture, native ecosystems, and human and animal health. Feral swine are a destructive, non-native, invasive species and their populations have expanded across the United States since the 1980’s. Over an estimated $3.4 billion in damage, including agricultural, is caused by fer…</summary>
   </entry>
 </feed>

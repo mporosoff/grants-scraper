@@ -7,9 +7,9 @@
   min-height: 72px;
   padding: 11px clamp(18px, 4vw, 64px);
   color: #fff;
-  background: rgba(18, 38, 63, .97);
+  background: rgba(0, 30, 95, .97);
   border-bottom: 1px solid rgba(255, 255, 255, .12);
-  box-shadow: 0 8px 24px rgba(9, 23, 40, .12);
+  box-shadow: 0 8px 24px rgba(0, 30, 95, .12);
   backdrop-filter: blur(14px);
 }
 
@@ -28,10 +28,10 @@
   height: 38px;
   flex: none;
   place-items: center;
-  color: #12263f;
+  color: #001e5f;
   font-size: 1.15rem;
   font-weight: 900;
-  background: #f4b942;
+  background: #ffd82b;
   border-radius: 10px 4px 10px 4px;
   box-shadow: 0 5px 14px rgba(0, 0, 0, .16);
 }
@@ -100,9 +100,9 @@
 }
 
 .site-nav a[aria-current="page"] {
-  color: #12263f;
-  background: #f4b942;
-  border-color: #ffd778;
+  color: #001e5f;
+  background: #ffd82b;
+  border-color: #ffe95f;
   box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
 }
 
@@ -116,10 +116,10 @@
   width: 18px;
   height: 18px;
   place-items: center;
-  color: #12263f;
+  color: #001e5f;
   font-size: .68rem;
   font-weight: 900;
-  background: #f4b942;
+  background: #ffd82b;
   border-radius: 50%;
 }
 
@@ -134,8 +134,9 @@ html.help-open {
   margin: auto;
   padding: 0;
   overflow: hidden;
-  color: #172033;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #001e5f;
+  font-family: InterVariable, Inter, Aptos, "Segoe UI", sans-serif;
+  font-feature-settings: "liga" 1, "calt" 1;
   line-height: 1.5;
   border: 1px solid #cbd7e5;
   border-radius: 18px;
@@ -166,13 +167,13 @@ html.help-open {
   gap: 24px;
   padding: 22px 24px 20px;
   color: #fff;
-  background: linear-gradient(135deg, #12263f, #1d4772);
-  border-bottom: 3px solid #f4b942;
+  background: linear-gradient(135deg, #001e5f, #021bc3);
+  border-bottom: 3px solid #ffd82b;
 }
 
 .help-eyebrow {
   margin: 0 0 4px;
-  color: #f7cf75;
+  color: #ffe95f;
   font-size: .69rem;
   font-weight: 850;
   letter-spacing: .12em;
@@ -234,7 +235,7 @@ html.help-open {
   font-weight: 850;
   letter-spacing: .07em;
   text-transform: uppercase;
-  background: #f4b942;
+  background: #ffd82b;
   border-radius: 999px;
 }
 
@@ -274,10 +275,10 @@ html.help-open {
   width: 28px;
   height: 28px;
   place-items: center;
-  color: #12263f;
+  color: #001e5f;
   font-size: .76rem;
   font-weight: 900;
-  background: #f4b942;
+  background: #ffd82b;
   border-radius: 8px;
 }
 
@@ -345,7 +346,7 @@ html.help-open {
   width: 42px;
   height: 42px;
   place-items: center;
-  color: #174ca4;
+  color: #021bc3;
   font-size: .72rem;
   font-weight: 900;
   background: #e7f0ff;
@@ -354,7 +355,7 @@ html.help-open {
 
 .help-section-heading h3 {
   margin: 0;
-  color: #12263f;
+  color: #001e5f;
   font-size: 1.08rem;
 }
 
@@ -433,7 +434,7 @@ html.help-open {
 }
 
 .help-feature-list strong {
-  color: #174ca4;
+  color: #021bc3;
   font-size: .77rem;
 }
 
@@ -461,13 +462,13 @@ html.help-open {
 
 .help-key-explanation {
   margin-bottom: 12px;
-  border-left: 4px solid #f4b942;
+  border-left: 4px solid #ffd82b;
 }
 
 .help-provider-card {
   position: relative;
   padding-top: 48px;
-  border-top: 3px solid #1f64d5;
+  border-top: 3px solid #0066fd;
 }
 
 .help-provider-card.anthropic {
@@ -479,7 +480,7 @@ html.help-open {
   top: 14px;
   left: 16px;
   padding: 3px 8px;
-  color: #174ca4;
+  color: #021bc3;
   font-size: .67rem;
   font-weight: 900;
   letter-spacing: .06em;
@@ -501,7 +502,7 @@ html.help-open {
 
 .help-provider-links a {
   width: fit-content;
-  color: #174ca4;
+  color: #021bc3;
   font-size: .73rem;
   font-weight: 750;
 }
@@ -553,18 +554,18 @@ html.help-open {
   font-size: .73rem;
   font-weight: 800;
   white-space: nowrap;
-  border: 1px solid rgba(244, 185, 66, .35);
+  border: 1px solid rgba(255, 216, 43, .35);
   border-radius: 999px;
-  background: rgba(244, 185, 66, .1);
+  background: rgba(255, 216, 43, .1);
 }
 
 .header-context-pill::before {
   width: 6px;
   height: 6px;
   content: "";
-  background: #f4b942;
+  background: #ffd82b;
   border-radius: 50%;
-  box-shadow: 0 0 0 3px rgba(244, 185, 66, .13);
+  box-shadow: 0 0 0 3px rgba(255, 216, 43, .13);
 }
 
 .nav-toggle {
@@ -661,7 +662,7 @@ html.help-open {
     width: 12px;
     height: 12px;
     content: "";
-    background: #12263f;
+    background: #001e5f;
     border-top: 1px solid rgba(255, 255, 255, .16);
     border-left: 1px solid rgba(255, 255, 255, .16);
     transform: rotate(45deg);

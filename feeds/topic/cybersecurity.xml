@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Funding Finder — Cybersecurity</title>
+  <title>Funding Finder | Cybersecurity</title>
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
@@ -16,7 +16,7 @@
     <category term="Community development"/>
     <category term="Energy"/>
     <category term="Cybersecurity"/>
-    <summary>Rural Utilities Service — Closes 2027-05-03 — The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+    <summary>Rural Utilities Service | Closes 2027-05-03 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
   </entry>
   <entry>
     <title>CYBER CERTIFICATION PROGRAM 2026-01</title>
@@ -26,7 +26,7 @@
     <author><name>Small Business Administration</name></author>
     <category term="Education and workforce"/>
     <category term="Cybersecurity"/>
-    <summary>Small Business Administration — Closes 2026-09-09 — The purpose of this Funding Opportunity is to invite proposals for funding to deliver technical assistance to entrepreneurial development resource partners. Only an application from the states of Delaware, Michigan, and Ohio that have experience in managing a robust state-wide or nationwide cyber training program will be considered for funding via this announcement.</summary>
+    <summary>Small Business Administration | Closes 2026-09-09 | The purpose of this Funding Opportunity is to invite proposals for funding to deliver technical assistance to entrepreneurial development resource partners. Only an application from the states of Delaware, Michigan, and Ohio that have experience in managing a robust state-wide or nationwide cyber training program will be considered for funding via this announcement.</summary>
   </entry>
   <entry>
     <title>FY26 - Stopping Threats On Pedestrian Competitive Grant Program (Bollards)</title>
@@ -36,7 +36,7 @@
     <author><name>DOT Federal Highway Administration</name></author>
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
-    <summary>DOT Federal Highway Administration — Closes 2026-09-09 — The purpose of the Bollards Competitive Grant Program is to provide funding for bollard installation projects designed to prevent pedestrian injuries and acts of terrorism in areas used by large numbers of pedestrians. Eligible applicants under the Bollards Competitive Grant Program are State Departments of Transportation (State DOTs) and local government entities such as any city, county, town, p…</summary>
+    <summary>DOT Federal Highway Administration | Closes 2026-09-09 | The purpose of the Bollards Competitive Grant Program is to provide funding for bollard installation projects designed to prevent pedestrian injuries and acts of terrorism in areas used by large numbers of pedestrians. Eligible applicants under the Bollards Competitive Grant Program are State Departments of Transportation (State DOTs) and local government entities such as any city, county, town, p…</summary>
   </entry>
   <entry>
     <title>FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) CAPACITY BUILDING (CB)</title>
@@ -48,7 +48,7 @@
     <category term="Catalysis and reaction engineering"/>
     <category term="Materials science"/>
     <category term="Cybersecurity"/>
-    <summary>Air Force Office of Scientific Research — Closes 2027-04-05 — The Department of Defense (DoD) announces the fiscal year 2026 (FY26) Defense Established Program to Stimulate Competitive Research (DEPSCoR) – Capacity Building opportunity. The program is sponsored and managed by the Basic Research Office, Office of the Under Secretary of Defense for Research and Engineering (OUSD [R&amp;E]), awarded by the Air Force Office of Scientific Research (AFOSR), and admini…</summary>
+    <summary>Air Force Office of Scientific Research | Closes 2027-04-05 | The Department of Defense (DoD) announces the fiscal year 2026 (FY26) Defense Established Program to Stimulate Competitive Research (DEPSCoR) - Capacity Building opportunity. The program is sponsored and managed by the Basic Research Office, Office of the Under Secretary of Defense for Research and Engineering (OUSD [R&amp;E]), awarded by the Air Force Office of Scientific Research (AFOSR), and admini…</summary>
   </entry>
   <entry>
     <title>Precision Inertial Navigation &amp; Positioning On an Integrated Tesseract (PINPOINT)</title>
@@ -57,7 +57,7 @@
     <updated>2026-08-06T00:00:00Z</updated>
     <author><name>DARPA - Defense Sciences Office</name></author>
     <category term="Cybersecurity"/>
-    <summary>DARPA - Defense Sciences Office — Closes 2026-09-25 — The Defense Advanced Research Projects Agency (DARPA) is soliciting innovative proposals in the following technical area: physics and nonlinear control of inertial measurement units (IMUs) appropriate for tactical and unmanned missions. The Precision Inertial Navigation &amp; Positioning On an Integrated Tesseract (PINPOINT) program will challenge the research community to overcome the decade-long per…</summary>
+    <summary>DARPA - Defense Sciences Office | Closes 2026-09-25 | The Defense Advanced Research Projects Agency (DARPA) is soliciting innovative proposals in the following technical area: physics and nonlinear control of inertial measurement units (IMUs) appropriate for tactical and unmanned missions. The Precision Inertial Navigation &amp; Positioning On an Integrated Tesseract (PINPOINT) program will challenge the research community to overcome the decade-long per…</summary>
   </entry>
   <entry>
     <title>Institute of Education Sciences (IES): National Center for Education Research (NCER): Research Training Programs in The Education Sciences, Assistance Listing Number (ALN) 84.305B</title>
@@ -69,7 +69,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <category term="Cybersecurity"/>
-    <summary>Department of Education — Closes 2026-10-01 — NCER training programs prepare individuals to conduct education research that advances knowledge within the field and addresses issues important to education policymakers and practitioners. Under this competition, NCER will consider only applications that address one of the following programs: (1) Early Career Development and Mentoring Program for Education Research (Early Career) or (2) Methods T…</summary>
+    <summary>Department of Education | Closes 2026-10-01 | NCER training programs prepare individuals to conduct education research that advances knowledge within the field and addresses issues important to education policymakers and practitioners. Under this competition, NCER will consider only applications that address one of the following programs: (1) Early Career Development and Mentoring Program for Education Research (Early Career) or (2) Methods T…</summary>
   </entry>
   <entry>
     <title>Institute of Education Sciences (IES): National Center for Education Research (NCER): Statistical and Research Methodology in Education, Assistance Listing Number (ALN) 84.305D</title>
@@ -82,7 +82,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <category term="Cybersecurity"/>
-    <summary>Department of Education — Closes 2026-10-01 — The goal of the Statistical and Research Methodology in Education (Stats/Methods) grant program (84.305D) is to provide a wide range of methodological and statistical tools that will better enable applied education scientists to conduct rigorous education research.Under this program, NCER will consider only applications that address one of the following topics: (1) Core Grants or (2) Toolkits, Gui…</summary>
+    <summary>Department of Education | Closes 2026-10-01 | The goal of the Statistical and Research Methodology in Education (Stats/Methods) grant program (84.305D) is to provide a wide range of methodological and statistical tools that will better enable applied education scientists to conduct rigorous education research.Under this program, NCER will consider only applications that address one of the following topics: (1) Core Grants or (2) Toolkits, Gui…</summary>
   </entry>
   <entry>
     <title>Institute of Education Sciences (IES): National Center for Education Research (NCER): Using Longitudinal Data to Support State Education Policymaking, Assistance Listing Number (ALN) 84.305S</title>
@@ -94,7 +94,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <category term="Cybersecurity"/>
-    <summary>Department of Education — Closes 2026-10-01 — Through this grant program, IES supports state agencies’ use of their statewide longitudinal data systems (SLDSs) to provide evidence for their own program and policy decisions, and those of their local education agencies regarding increasing learners’ access to high-quality education and increased academic achievement. Assistance Listing Number (ALN) 84.305S.</summary>
+    <summary>Department of Education | Closes 2026-10-01 | Through this grant program, IES supports state agencies’ use of their statewide longitudinal data systems (SLDSs) to provide evidence for their own program and policy decisions, and those of their local education agencies regarding increasing learners’ access to high-quality education and increased academic achievement. Assistance Listing Number (ALN) 84.305S.</summary>
   </entry>
   <entry>
     <title>Institute of Education Sciences (IES): National Center for Special Education Research (NCSER): Research Training Programs in Special Education, Assistance Listing Number (ALN) 84.324B</title>
@@ -106,7 +106,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <category term="Cybersecurity"/>
-    <summary>Department of Education — Closes 2026-10-01 — NCSER training programs prepare individuals to conduct special education and early intervention research that advances knowledge within the field and addresses issues important to education policymakers and practitioners. Under this competition, NCSER will consider only applications that address one of the following topics: (1) Early Career Development and Mentoring or (2) Methods Training for Spe…</summary>
+    <summary>Department of Education | Closes 2026-10-01 | NCSER training programs prepare individuals to conduct special education and early intervention research that advances knowledge within the field and addresses issues important to education policymakers and practitioners. Under this competition, NCSER will consider only applications that address one of the following topics: (1) Early Career Development and Mentoring or (2) Methods Training for Spe…</summary>
   </entry>
   <entry>
     <title>Institute of Education Sciences (IES): National Center for Special Education Research (NCSER): Using Longitudinal Data to Support State Education Policymaking in Special Education, Assistance Listing Number (ALN) 84.324S</title>
@@ -118,7 +118,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <category term="Cybersecurity"/>
-    <summary>Department of Education — Closes 2026-10-01 — Through this grant program, NCSER supports state agencies’ use of their statewide longitudinal data systems (SLDSs) to provide evidence for their own program and policy decisions, and those of their local education agencies pertaining to learners with or at risk for disabilitiesAssistance Listing Number: 84.324S.</summary>
+    <summary>Department of Education | Closes 2026-10-01 | Through this grant program, NCSER supports state agencies’ use of their statewide longitudinal data systems (SLDSs) to provide evidence for their own program and policy decisions, and those of their local education agencies pertaining to learners with or at risk for disabilitiesAssistance Listing Number: 84.324S.</summary>
   </entry>
   <entry>
     <title>U.S. National Science Foundation State and Regional Artificial Intelligence Infrastructure Hubs:</title>
@@ -131,7 +131,7 @@
     <category term="Education and workforce"/>
     <category term="Data science"/>
     <category term="Cybersecurity"/>
-    <summary>U.S. National Science Foundation — Closes 2026-11-04 — The NSF State and Regional AI Infrastructure Hubs program aims to expand access to the compute required for AI-enabled scientific discovery and to transform the research, education, and training opportunities offered by institutions of higher education. AI Infrastructure Hubs will connect researchers to new compute infrastructure that leverages contributions from state governments, research instit…</summary>
+    <summary>U.S. National Science Foundation | Closes 2026-11-04 | The NSF State and Regional AI Infrastructure Hubs program aims to expand access to the compute required for AI-enabled scientific discovery and to transform the research, education, and training opportunities offered by institutions of higher education. AI Infrastructure Hubs will connect researchers to new compute infrastructure that leverages contributions from state governments, research instit…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 National Dam Safety Program - Rehabilitation of High Hazard Potential Dams (HHPD)</title>
@@ -141,7 +141,7 @@
     <author><name>Department of Homeland Security - FEMA</name></author>
     <category term="Cybersecurity"/>
     <category term="Water"/>
-    <summary>Department of Homeland Security - FEMA — Closes 2026-08-31 — FEMA’s National Dam Safety Program (NDSP) is committed to protecting lives and property from the risks associated with dams. The Rehabilitation of High Hazard Potential Dams (HHPD) Grant Program makes available federal funds to eligible states for pass through to non-Federal governmental organizations or nonprofit organizations for the rehabilitation of eligible high hazard potential dams that fai…</summary>
+    <summary>Department of Homeland Security - FEMA | Closes 2026-08-31 | FEMA’s National Dam Safety Program (NDSP) is committed to protecting lives and property from the risks associated with dams. The Rehabilitation of High Hazard Potential Dams (HHPD) Grant Program makes available federal funds to eligible states for pass through to non-Federal governmental organizations or nonprofit organizations for the rehabilitation of eligible high hazard potential dams that fai…</summary>
   </entry>
   <entry>
     <title>Expanding global health security though local partnerships in Tanzania</title>
@@ -151,7 +151,7 @@
     <author><name>Centers for Disease Control-GHC</name></author>
     <category term="Education and workforce"/>
     <category term="Cybersecurity"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — CDC is working with the Tanzania government to meet key International Health Regulations requirements through implementation of the Global Health Security Agenda (GHSA). Tanzania completed the Joint External Evaluation and launched a costed National Action Plan for Health Security based on a multi-sectorial approach. This NOFO supports programs/activities in the following areas: strengthening bios…</summary>
+    <summary>Centers for Disease Control-GHC | Closes 2026-10-02 | CDC is working with the Tanzania government to meet key International Health Regulations requirements through implementation of the Global Health Security Agenda (GHSA). Tanzania completed the Joint External Evaluation and launched a costed National Action Plan for Health Security based on a multi-sectorial approach. This NOFO supports programs/activities in the following areas: strengthening bios…</summary>
   </entry>
   <entry>
     <title>Expanding global health security through local partnerships in Ethiopia</title>
@@ -162,7 +162,7 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <category term="Cybersecurity"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — The CDC office in Ethiopia was established in 2001 and works closely with the Ministry of Health (MOH), the Ethiopian Public Health Institute (EPHI), and other Government of Ethiopia (GOE) agencies to develop the capacity to prevent, detect, and respond to priority diseases. In 2014, CDC began coordination with the GOE to build Ethiopia's capacity to achieve the International Health Regulation (IH…</summary>
+    <summary>Centers for Disease Control-GHC | Closes 2026-10-02 | The CDC office in Ethiopia was established in 2001 and works closely with the Ministry of Health (MOH), the Ethiopian Public Health Institute (EPHI), and other Government of Ethiopia (GOE) agencies to develop the capacity to prevent, detect, and respond to priority diseases. In 2014, CDC began coordination with the GOE to build Ethiopia's capacity to achieve the International Health Regulation (IH…</summary>
   </entry>
   <entry>
     <title>Expanding global health security through local partnerships in Indonesia</title>
@@ -173,7 +173,7 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <category term="Cybersecurity"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — This NOFO aims to foster partnerships that support collaboration between CDC and the Indonesian Ministry of Health (MOH) in achieving global health security goals, implementing International Health Regulations core principles, and effectively preventing, detecting, and responding to public health threats. Projects considered for this opportunity should focus on strengthening capacity in five key p…</summary>
+    <summary>Centers for Disease Control-GHC | Closes 2026-10-02 | This NOFO aims to foster partnerships that support collaboration between CDC and the Indonesian Ministry of Health (MOH) in achieving global health security goals, implementing International Health Regulations core principles, and effectively preventing, detecting, and responding to public health threats. Projects considered for this opportunity should focus on strengthening capacity in five key p…</summary>
   </entry>
   <entry>
     <title>Expanding global health security through local partnerships in Nigeria</title>
@@ -184,7 +184,7 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <category term="Cybersecurity"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — The purpose of this NOFO is to strengthen International Health Regulations (IHR) (2005) capacities of the Nigeria Centre for Disease Control and Prevention (NCDC); other Government of Nigeria ministries, departments, and agencies (MDAs) relevant to the implementation of multi-sectoral response efforts of the IHR; and sub-national public health institutions, such as State Ministries of Health and l…</summary>
+    <summary>Centers for Disease Control-GHC | Closes 2026-10-02 | The purpose of this NOFO is to strengthen International Health Regulations (IHR) (2005) capacities of the Nigeria Centre for Disease Control and Prevention (NCDC); other Government of Nigeria ministries, departments, and agencies (MDAs) relevant to the implementation of multi-sectoral response efforts of the IHR; and sub-national public health institutions, such as State Ministries of Health and l…</summary>
   </entry>
   <entry>
     <title>Expanding Global Health Security through local partnerships in Senegal</title>
@@ -196,7 +196,7 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <category term="Cybersecurity"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — This NOFO aims to enhance Senegal's public health infrastructure to prevent, detect, and respond to infectious disease threats through implementing partners. The initiative focuses on strengthening public health surveillance systems, including community-based surveillance, improving laboratory networks, and enhancing workforce training. The goal is to build sustainable, resilient health security i…</summary>
+    <summary>Centers for Disease Control-GHC | Closes 2026-10-02 | This NOFO aims to enhance Senegal's public health infrastructure to prevent, detect, and respond to infectious disease threats through implementing partners. The initiative focuses on strengthening public health surveillance systems, including community-based surveillance, improving laboratory networks, and enhancing workforce training. The goal is to build sustainable, resilient health security i…</summary>
   </entry>
   <entry>
     <title>Improving global health security in Côte d'Ivoire to stop the spread of infectious disease</title>
@@ -207,7 +207,7 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <category term="Cybersecurity"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — This Notice of Funding Opportunity (NOFO) seeks to build upon activities funded by CDC to support Global Health Security (GHS) in the Cote d"Ivore through implementation of programs and activities that focus on protecting and improving health globally through partnerships with Ministries of Health and other governmental institutions. The main outcomes of this NOFO are the following: (1) Improve pr…</summary>
+    <summary>Centers for Disease Control-GHC | Closes 2026-10-02 | This Notice of Funding Opportunity (NOFO) seeks to build upon activities funded by CDC to support Global Health Security (GHS) in the Cote d"Ivore through implementation of programs and activities that focus on protecting and improving health globally through partnerships with Ministries of Health and other governmental institutions. The main outcomes of this NOFO are the following: (1) Improve pr…</summary>
   </entry>
   <entry>
     <title>Protecting and Improving Global Health Security by Engaging Local Partners: Strengthening and Sustaining Public Health Systems in Ghana</title>
@@ -219,7 +219,7 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <category term="Cybersecurity"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — This NOFO seeks to build and sustain a more resilient public health system in Ghana capable of identifying, responding to and mitigating public health threats. CDC, through this NOFO, will continue to leverage and complement the strengths and resources of multi-sectoral and multilateral partners in Ghana to build and improve country capacity and leadership in the prevention, early detection and re…</summary>
+    <summary>Centers for Disease Control-GHC | Closes 2026-10-02 | This NOFO seeks to build and sustain a more resilient public health system in Ghana capable of identifying, responding to and mitigating public health threats. CDC, through this NOFO, will continue to leverage and complement the strengths and resources of multi-sectoral and multilateral partners in Ghana to build and improve country capacity and leadership in the prevention, early detection and re…</summary>
   </entry>
   <entry>
     <title>Strengthening global health security in India to contain public health threats and accelerate outbreak response</title>
@@ -232,7 +232,7 @@
     <category term="Public health"/>
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — This NOFO"s purpose is to support district, state and national public health systems in India to advance GHSA priorities to prevent, detect and respond to infectious disease threats. CDC will work with the Government of India (GoI) to strengthen capacity to control disease outbreaks at their source and neutralize public health threats. This NOFO will augment and increasingly transition CDC-support…</summary>
+    <summary>Centers for Disease Control-GHC | Closes 2026-10-02 | This NOFO"s purpose is to support district, state and national public health systems in India to advance GHSA priorities to prevent, detect and respond to infectious disease threats. CDC will work with the Government of India (GoI) to strengthen capacity to control disease outbreaks at their source and neutralize public health threats. This NOFO will augment and increasingly transition CDC-support…</summary>
   </entry>
   <entry>
     <title>Strengthening Global Health Security through local partnerships in Sierra Leone</title>
@@ -244,7 +244,7 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <category term="Cybersecurity"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — The purpose of this NOFO is to build and sustain a more resilient public health system in Sierra Leone in an effort to identify, respond and mitigate health threats. CDC, through this NOFO, will continue to leverage and complement the strengths and resources of multisectoral and multilateral partners in Sierra Leone to build and improve country capacity and leadership in the prevention, early dete…</summary>
+    <summary>Centers for Disease Control-GHC | Closes 2026-10-02 | The purpose of this NOFO is to build and sustain a more resilient public health system in Sierra Leone in an effort to identify, respond and mitigate health threats. CDC, through this NOFO, will continue to leverage and complement the strengths and resources of multisectoral and multilateral partners in Sierra Leone to build and improve country capacity and leadership in the prevention, early dete…</summary>
   </entry>
   <entry>
     <title>Innovative Traffic Safety Enforcement (ITSE) Grant Program</title>
@@ -256,7 +256,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <category term="Cybersecurity"/>
-    <summary>National Highway Traffic Safety Administration — Closes 2027-09-01 — While the agency will consider innovative enhancements to existing countermeasures, the goal is to develop evidence-based projects that are scalable and transferable for use by State and local law enforcement agencies. The primary intent of this of the ITSE Grant Program is to 1) develop innovative traffic safety enforcement programs that demonstrate effectiveness by reducing the number of motor v…</summary>
+    <summary>National Highway Traffic Safety Administration | Closes 2027-09-01 | While the agency will consider innovative enhancements to existing countermeasures, the goal is to develop evidence-based projects that are scalable and transferable for use by State and local law enforcement agencies. The primary intent of this of the ITSE Grant Program is to 1) develop innovative traffic safety enforcement programs that demonstrate effectiveness by reducing the number of motor v…</summary>
   </entry>
   <entry>
     <title>Advancing Investigative Journalism in Ukraine through U.S. AI Innovation</title>
@@ -272,7 +272,7 @@
     <category term="Environmental science"/>
     <category term="Technology development"/>
     <category term="Data science"/>
-    <summary>U.S. Mission to Ukraine — Closes 2026-09-01 — The U.S. Department of State's Embassy Kyiv announces an open competition for Ukrainian non-governmental media organizations and independent media outlets to implement a program that strengthens data-driven and AI-enabled journalism in Ukraine. It will build the capacity of journalists and newsrooms to produce high-quality reporting on economic development, reconstruction and investment through tr…</summary>
+    <summary>U.S. Mission to Ukraine | Closes 2026-09-01 | The U.S. Department of State's Embassy Kyiv announces an open competition for Ukrainian non-governmental media organizations and independent media outlets to implement a program that strengthens data-driven and AI-enabled journalism in Ukraine. It will build the capacity of journalists and newsrooms to produce high-quality reporting on economic development, reconstruction and investment through tr…</summary>
   </entry>
   <entry>
     <title>Small Business Transportation Technical Assistance Center (Region 1)</title>
@@ -282,7 +282,7 @@
     <author><name>69A350 OSDBU</name></author>
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
-    <summary>69A350 OSDBU — Closes 2026-08-30 — The U.S. Department of Transportation (USDOT), Office of the Secretary (OST), Office of Small and Disadvantaged Business Utilization (OSDBU), announces the availability of funding under Notice of Funding Opportunity (NOFO) Number OST/OSDBU-2026-SBTTAC-Region 1-FY2026-1 to establish and operate the Region 1 Small Business Transportation Technical Assistance Center (SBTTAC) formerly known as the Sma…</summary>
+    <summary>69A350 OSDBU | Closes 2026-08-30 | The U.S. Department of Transportation (USDOT), Office of the Secretary (OST), Office of Small and Disadvantaged Business Utilization (OSDBU), announces the availability of funding under Notice of Funding Opportunity (NOFO) Number OST/OSDBU-2026-SBTTAC-Region 1-FY2026-1 to establish and operate the Region 1 Small Business Transportation Technical Assistance Center (SBTTAC) formerly known as the Sma…</summary>
   </entry>
   <entry>
     <title>Small Business Transportation Technical Assistance Center (Region 2)</title>
@@ -293,7 +293,7 @@
     <category term="Education and workforce"/>
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
-    <summary>69A350 OSDBU — Closes 2026-08-30 — The United States Department of Transportation Office of Small and Disadvantaged Business Utilization will enter into Cooperative Agreements with eligible organizations to provide outreach to the small business community in their designated region and provide financial and technical assistance, business training programs, business assessment, management training, counseling, marketing and outreach…</summary>
+    <summary>69A350 OSDBU | Closes 2026-08-30 | The United States Department of Transportation Office of Small and Disadvantaged Business Utilization will enter into Cooperative Agreements with eligible organizations to provide outreach to the small business community in their designated region and provide financial and technical assistance, business training programs, business assessment, management training, counseling, marketing and outreach…</summary>
   </entry>
   <entry>
     <title>Small Business Transportation Technical Assistance Center (Region 3)</title>
@@ -303,7 +303,7 @@
     <author><name>69A350 OSDBU</name></author>
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
-    <summary>69A350 OSDBU — Closes 2026-08-30 — The U.S. Department of Transportation (USDOT), Office of the Secretary (OST), Office of Small and Disadvantaged Business Utilization (OSDBU), announces the availability of funding under Notice of Funding Opportunity (NOFO) Number OST/OSDBU-2026-SBTTAC-Region 3-FY2026-1 to establish and operate the Region 3 Small Business Transportation Technical Assistance Center (SBTTAC) formerly known as the Sma…</summary>
+    <summary>69A350 OSDBU | Closes 2026-08-30 | The U.S. Department of Transportation (USDOT), Office of the Secretary (OST), Office of Small and Disadvantaged Business Utilization (OSDBU), announces the availability of funding under Notice of Funding Opportunity (NOFO) Number OST/OSDBU-2026-SBTTAC-Region 3-FY2026-1 to establish and operate the Region 3 Small Business Transportation Technical Assistance Center (SBTTAC) formerly known as the Sma…</summary>
   </entry>
   <entry>
     <title>Small Business Transportation Technical Assistance Center (Region 4)</title>
@@ -314,7 +314,7 @@
     <category term="Education and workforce"/>
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
-    <summary>69A350 OSDBU — Closes 2026-08-30 — The United States Department of Transportation Office of Small and Disadvantaged Business Utilization will enter into Cooperative Agreements with eligible organizations to provide outreach to the small business community in their designated region and provide financial and technical assistance, business training programs, business assessment, management training, counseling, marketing and outreach…</summary>
+    <summary>69A350 OSDBU | Closes 2026-08-30 | The United States Department of Transportation Office of Small and Disadvantaged Business Utilization will enter into Cooperative Agreements with eligible organizations to provide outreach to the small business community in their designated region and provide financial and technical assistance, business training programs, business assessment, management training, counseling, marketing and outreach…</summary>
   </entry>
   <entry>
     <title>Small Business Transportation Technical Assistance Center (Region 5)</title>
@@ -325,7 +325,7 @@
     <category term="Education and workforce"/>
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
-    <summary>69A350 OSDBU — Closes 2026-08-30 — The United States Department of Transportation Office of Small and Disadvantaged Business Utilization will enter into Cooperative Agreements with eligible organizations to provide outreach to the small business community in their designated region and provide financial and technical assistance, business training programs, business assessment, management training, counseling, marketing and outreach…</summary>
+    <summary>69A350 OSDBU | Closes 2026-08-30 | The United States Department of Transportation Office of Small and Disadvantaged Business Utilization will enter into Cooperative Agreements with eligible organizations to provide outreach to the small business community in their designated region and provide financial and technical assistance, business training programs, business assessment, management training, counseling, marketing and outreach…</summary>
   </entry>
   <entry>
     <title>Small Business Transportation Technical Assistance Center (Region 6)</title>
@@ -335,7 +335,7 @@
     <author><name>69A350 OSDBU</name></author>
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
-    <summary>69A350 OSDBU — Closes 2026-08-30 — The U.S. Department of Transportation (USDOT), Office of the Secretary (OST), Office of Small and Disadvantaged Business Utilization (OSDBU), announces the availability of funding under Notice of Funding Opportunity (NOFO) Number OST/OSDBU-2026-SBTTAC-Region 6-FY2026-1 to establish and operate the Region 6 Small Business Transportation Technical Assistance Center (SBTTAC) formerly known as the Sma…</summary>
+    <summary>69A350 OSDBU | Closes 2026-08-30 | The U.S. Department of Transportation (USDOT), Office of the Secretary (OST), Office of Small and Disadvantaged Business Utilization (OSDBU), announces the availability of funding under Notice of Funding Opportunity (NOFO) Number OST/OSDBU-2026-SBTTAC-Region 6-FY2026-1 to establish and operate the Region 6 Small Business Transportation Technical Assistance Center (SBTTAC) formerly known as the Sma…</summary>
   </entry>
   <entry>
     <title>Improving regional capacity to respond to HIV, TB, and other global health priorities in Central America</title>
@@ -347,7 +347,7 @@
     <category term="Public health"/>
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-08-31 — The Award Ceiling for Year 1 is 0 (none). CDC anticipates an Approximate Total Fiscal Year Funding amount of $20,000,000 for Year 1, subject to the availability of funds.You will advance progress towards achieving the 95-95-95 targets and continue to transition site-level support to local governments in Central America (CA) for:El Salvador.Guatemala.Honduras.Nicaragua.Panama.To achieve the goals o…</summary>
+    <summary>Centers for Disease Control-GHC | Closes 2026-08-31 | The Award Ceiling for Year 1 is 0 (none). CDC anticipates an Approximate Total Fiscal Year Funding amount of $20,000,000 for Year 1, subject to the availability of funds.You will advance progress towards achieving the 95-95-95 targets and continue to transition site-level support to local governments in Central America (CA) for:El Salvador.Guatemala.Honduras.Nicaragua.Panama.To achieve the goals o…</summary>
   </entry>
   <entry>
     <title>Global Cybercrime and Cryptocurrency Assessment and Intelligence Gathering</title>
@@ -356,7 +356,7 @@
     <updated>2026-07-29T00:00:00Z</updated>
     <author><name>Bureau of International Narcotics-Law Enforcement</name></author>
     <category term="Cybersecurity"/>
-    <summary>Bureau of International Narcotics-Law Enforcement — Closes 2026-08-31 — Overview: The Bureau of International Narcotics and Law Enforcement Affairs of the U.S. Department of State announces an open competition for organizations to submit applications addressing cybercrime and cyber-enabled crimes. Projects should focus on combating cyber intrusions, online fraud, online-facilitated drug trafficking, digital piracy, and the criminal misuse of cryptocurrency and virtual…</summary>
+    <summary>Bureau of International Narcotics-Law Enforcement | Closes 2026-08-31 | Overview: The Bureau of International Narcotics and Law Enforcement Affairs of the U.S. Department of State announces an open competition for organizations to submit applications addressing cybercrime and cyber-enabled crimes. Projects should focus on combating cyber intrusions, online fraud, online-facilitated drug trafficking, digital piracy, and the criminal misuse of cryptocurrency and virtual…</summary>
   </entry>
   <entry>
     <title>Independent Internal Audit Services</title>
@@ -365,7 +365,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Cybersecurity"/>
-    <summary>NYSERDA — Closes 2026-08-19 — Seeking proposals from qualified firms to provide independent internal audit, advisory, compliance, investigative, technology, cybersecurity, and related professional services to support NYSERDA’s Internal Audit function under a five-year umbrella contract.</summary>
+    <summary>NYSERDA | Closes 2026-08-19 | Seeking proposals from qualified firms to provide independent internal audit, advisory, compliance, investigative, technology, cybersecurity, and related professional services to support NYSERDA’s Internal Audit function under a five-year umbrella contract.</summary>
   </entry>
   <entry>
     <title>Federal and University Partnership to Improve the Safety of Seafood from the Gulf of America</title>
@@ -378,7 +378,7 @@
     <category term="Environmental science"/>
     <category term="Public health"/>
     <category term="Cybersecurity"/>
-    <summary>Food and Drug Administration — Closes 2026-08-21 — FDA is announcing the availability of funds for the support of a cooperative agreement between the Human Food Program/ Office of Laboratory Operations and Applied Science (OLOAS)/ Office of Applied Microbiolgy and Technology (OAMT) and the Marine Environmental Sciences Consortium/Dauphin Island Sea Lab (DISL). The scientific, public health, and policy expertise within the Food and Drug Administrat…</summary>
+    <summary>Food and Drug Administration | Closes 2026-08-21 | FDA is announcing the availability of funds for the support of a cooperative agreement between the Human Food Program/ Office of Laboratory Operations and Applied Science (OLOAS)/ Office of Applied Microbiolgy and Technology (OAMT) and the Marine Environmental Sciences Consortium/Dauphin Island Sea Lab (DISL). The scientific, public health, and policy expertise within the Food and Drug Administrat…</summary>
   </entry>
   <entry>
     <title>Advancing Oil and Natural Gas Production and Delivery</title>
@@ -391,7 +391,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <category term="Cybersecurity"/>
-    <summary>National Energy Technology Laboratory — Closes 2026-09-22 — Advancing Oil and Natural Gas Production and Delivery This Notice of Funding Opportunity (NOFO) is seeking proposals to advance cost-effective technologies for improving the efficiency, reliability, and resilience of the Unites States oil and natural gas supply chain. This funding opportunity spans research and development efforts focused on enhancing resource utilization, modernizing infrastructu…</summary>
+    <summary>National Energy Technology Laboratory | Closes 2026-09-22 | Advancing Oil and Natural Gas Production and Delivery This Notice of Funding Opportunity (NOFO) is seeking proposals to advance cost-effective technologies for improving the efficiency, reliability, and resilience of the Unites States oil and natural gas supply chain. This funding opportunity spans research and development efforts focused on enhancing resource utilization, modernizing infrastructu…</summary>
   </entry>
   <entry>
     <title>U.S.-Africa Strategic Investment Program</title>
@@ -403,7 +403,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <category term="Cybersecurity"/>
-    <summary>Bureau of African Affairs — Closes 2027-05-27 — The U.S.-Africa Strategic Investment Program advances America's national interests by harnessing market-based, private sector-led growth across two strategic focus areas: Critical Minerals Investment and Commercial Diplomacy Acceleration. This program seeks market-based solutions that strengthen the environment for foreign investment in sub-Saharan Africa through transparent and competitive proces…</summary>
+    <summary>Bureau of African Affairs | Closes 2027-05-27 | The U.S.-Africa Strategic Investment Program advances America's national interests by harnessing market-based, private sector-led growth across two strategic focus areas: Critical Minerals Investment and Commercial Diplomacy Acceleration. This program seeks market-based solutions that strengthen the environment for foreign investment in sub-Saharan Africa through transparent and competitive proces…</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement to Support Shellfish Safety Assistance Project</title>
@@ -416,7 +416,7 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <category term="Cybersecurity"/>
-    <summary>Food and Drug Administration — Closes 2026-08-21 — The purpose of this funding opportunity is to (1) improve information exchange and transfer among States, Federal and Foreign Agencies, industry, and consumers; (2) strengthen state activities through training, technical assistance, research, education, and support for States to participate in meetings that foster a cooperative shellfish program based on public health principles; and (3) promote e…</summary>
+    <summary>Food and Drug Administration | Closes 2026-08-21 | The purpose of this funding opportunity is to (1) improve information exchange and transfer among States, Federal and Foreign Agencies, industry, and consumers; (2) strengthen state activities through training, technical assistance, research, education, and support for States to participate in meetings that foster a cooperative shellfish program based on public health principles; and (3) promote e…</summary>
   </entry>
   <entry>
     <title>Research, Education, and Outreach on Botanical Natural Products</title>
@@ -428,7 +428,7 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <category term="Cybersecurity"/>
-    <summary>Food and Drug Administration — Closes 2026-08-21 — The purpose of this funding opportunity is to provide continued support to: (1) assist in the identification and development of a prioritized list of botanical ingredients based on safety concerns, trends and knowledge of botanical ingredients in foods, dietary supplements, and cosmetics marketed in the U.S.; (2) acquire, validate and characterize authenticated reference materials, including raw a…</summary>
+    <summary>Food and Drug Administration | Closes 2026-08-21 | The purpose of this funding opportunity is to provide continued support to: (1) assist in the identification and development of a prioritized list of botanical ingredients based on safety concerns, trends and knowledge of botanical ingredients in foods, dietary supplements, and cosmetics marketed in the U.S.; (2) acquire, validate and characterize authenticated reference materials, including raw a…</summary>
   </entry>
   <entry>
     <title>CyberNext: Advance Cybersecurity and AI Readiness</title>
@@ -441,7 +441,7 @@
     <category term="Cybersecurity"/>
     <category term="Education and workforce"/>
     <category term="Technology development"/>
-    <summary>U.S. Mission to Albania — Closes 2026-08-20 — Project Background, Goals, and Objectives Albania has experienced multiple cyberattacks in recent years, placing increasingly digital government services and critical institutions at significant risk. While Albania is actively embracing AI, substantial skill gaps remain – gaps that American expertise is uniquely positioned to address. The “CyberNext: Advanced Cybersecurity and AI Readiness” progra…</summary>
+    <summary>U.S. Mission to Albania | Closes 2026-08-20 | Project Background, Goals, and Objectives Albania has experienced multiple cyberattacks in recent years, placing increasingly digital government services and critical institutions at significant risk. While Albania is actively embracing AI, substantial skill gaps remain - gaps that American expertise is uniquely positioned to address. The “CyberNext: Advanced Cybersecurity and AI Readiness” progra…</summary>
   </entry>
   <entry>
     <title>Education and Outreach to Tribal Producers through the Tribal Food Safety Alliance</title>
@@ -453,10 +453,10 @@
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Cybersecurity"/>
-    <summary>Food and Drug Administration — Closes 2026-08-20 — The primary purpose of this program is to develop and provide education and/or training, and outreach regarding FDA's Produce Safety Rule to produce farmers who are members of federally recognized Tribes. The program is expected to help Tribal farmers access appropriate technical assistance and may include Tribal farmers who are not currently required to comply with the rule but are interested in …</summary>
+    <summary>Food and Drug Administration | Closes 2026-08-20 | The primary purpose of this program is to develop and provide education and/or training, and outreach regarding FDA's Produce Safety Rule to produce farmers who are members of federally recognized Tribes. The program is expected to help Tribal farmers access appropriate technical assistance and may include Tribal farmers who are not currently required to comply with the rule but are interested in …</summary>
   </entry>
   <entry>
-    <title>GameON – U.S.-Albania E-Sports and Innovation</title>
+    <title>GameON - U.S.-Albania E-Sports and Innovation</title>
     <link href="https://www.grants.gov/search-results-detail/363247"/>
     <id>urn:funding-finder:grants-gov:363247</id>
     <updated>2026-07-20T00:00:00Z</updated>
@@ -466,7 +466,7 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <category term="Technology development"/>
-    <summary>U.S. Mission to Albania — Closes 2026-08-20 — 1. Project Background, Goals, and Objectives Albania's youth face a rapidly evolving digital economy that demands advanced technical skills, entrepreneurial mindsets, and exposure to international industry standards. Albanian interest in gaming – a global market forecasted to surpass $745 billion by 2030, in which the United States is leading – is high, presenting an opportunity to increase Albani…</summary>
+    <summary>U.S. Mission to Albania | Closes 2026-08-20 | 1. Project Background, Goals, and Objectives Albania's youth face a rapidly evolving digital economy that demands advanced technical skills, entrepreneurial mindsets, and exposure to international industry standards. Albanian interest in gaming - a global market forecasted to surpass $745 billion by 2030, in which the United States is leading - is high, presenting an opportunity to increase Albani…</summary>
   </entry>
   <entry>
     <title>Use of Digital Health Technologies in Clinical Investigations to Support Drug and Biological Product Development (U01) Clinical Trials Optional</title>
@@ -477,7 +477,7 @@
     <category term="Agriculture and food"/>
     <category term="Biology and biotechnology"/>
     <category term="Cybersecurity"/>
-    <summary>Food and Drug Administration — Closes 2026-08-20 — The purpose of this Notice of Funding Opportunity (NOFO) is to address topics related to the use of digital health technologies (DHTs) for remote data acquisition in clinical investigations to support drug development.</summary>
+    <summary>Food and Drug Administration | Closes 2026-08-20 | The purpose of this Notice of Funding Opportunity (NOFO) is to address topics related to the use of digital health technologies (DHTs) for remote data acquisition in clinical investigations to support drug development.</summary>
   </entry>
   <entry>
     <title>Egypt Annual Program Statement</title>
@@ -493,7 +493,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Materials science"/>
     <category term="Cybersecurity"/>
-    <summary>Bureau of Near Eastern Affairs — Closes 2026-08-31 — The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
+    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
   </entry>
   <entry>
     <title>Global Digital Threat Lab</title>
@@ -504,7 +504,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Arts and culture"/>
     <category term="Cybersecurity"/>
-    <summary>Bureau of Democracy Human Rights and Labor — Closes 2026-08-13 — Freedom of expression online faces threats globally from authoritarian governments employing sophisticated technology to restrict speech, control the flow of information, and chill dissenting voices. These challenges infringe on privacy; access to information; and the exercise of freedoms of expression, peaceful assembly, association, and religion or belief online. The misuse of commercial spyware…</summary>
+    <summary>Bureau of Democracy Human Rights and Labor | Closes 2026-08-13 | Freedom of expression online faces threats globally from authoritarian governments employing sophisticated technology to restrict speech, control the flow of information, and chill dissenting voices. These challenges infringe on privacy; access to information; and the exercise of freedoms of expression, peaceful assembly, association, and religion or belief online. The misuse of commercial spyware…</summary>
   </entry>
   <entry>
     <title>Delta States Rural Development Network Program</title>
@@ -514,7 +514,7 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Community development"/>
     <category term="Cybersecurity"/>
-    <summary>Health Resources and Services Administration — Closes 2026-08-12 — The Delta States Rural Development Network Program supports support the planning, development, and implementation of integrated health care networks that collaborate in order to (i) achieve efficiencies; (ii) expand access to, coordinate, and improve the quality of basic health care services and associated health outcomes in rural areas within the eight rural Mississippi Delta Region states (Alaba…</summary>
+    <summary>Health Resources and Services Administration | Closes 2026-08-12 | The Delta States Rural Development Network Program supports support the planning, development, and implementation of integrated health care networks that collaborate in order to (i) achieve efficiencies; (ii) expand access to, coordinate, and improve the quality of basic health care services and associated health outcomes in rural areas within the eight rural Mississippi Delta Region states (Alaba…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 National Earthquake Hazards Reduction Program Individual State Earthquake Assistance</title>
@@ -524,7 +524,7 @@
     <author><name>Department of Homeland Security - FEMA</name></author>
     <category term="Education and workforce"/>
     <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA — Closes 2026-08-14 — The National Earthquake Hazards Reduction Program (NEHRP) is a coordinating program for earthquake monitoring, research, implementation, education, and outreach activities developed and conducted by these four agencies: • Federal Emergency Management Agency• National Institute of Standards and Technology• National Science Foundation, and• U.S. Geological SurveyFEMA awards non-competitive, grants t…</summary>
+    <summary>Department of Homeland Security - FEMA | Closes 2026-08-14 | The National Earthquake Hazards Reduction Program (NEHRP) is a coordinating program for earthquake monitoring, research, implementation, education, and outreach activities developed and conducted by these four agencies: • Federal Emergency Management Agency• National Institute of Standards and Technology• National Science Foundation, and• U.S. Geological SurveyFEMA awards non-competitive, grants t…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 National Earthquake Hazards Reduction Program Multi-State and National Earthquake Assistance</title>
@@ -534,7 +534,7 @@
     <author><name>Department of Homeland Security - FEMA</name></author>
     <category term="Education and workforce"/>
     <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA — Closes 2026-08-14 — The National Earthquake Hazards Reduction Program (NEHRP) is a coordinating program for earthquake monitoring, research, implementation, education, and outreach activities developed and conducted by these four agencies: • Federal Emergency Management Agency• National Institute of Standards and Technology• National Science Foundation, and• U.S. Geological SurveyFEMA awards competitive grants to non…</summary>
+    <summary>Department of Homeland Security - FEMA | Closes 2026-08-14 | The National Earthquake Hazards Reduction Program (NEHRP) is a coordinating program for earthquake monitoring, research, implementation, education, and outreach activities developed and conducted by these four agencies: • Federal Emergency Management Agency• National Institute of Standards and Technology• National Science Foundation, and• U.S. Geological SurveyFEMA awards competitive grants to non…</summary>
   </entry>
   <entry>
     <title>SERVICE CORP OF RET EXECUTIVES (SCORE) 2026-01</title>
@@ -544,7 +544,7 @@
     <author><name>Small Business Administration</name></author>
     <category term="Community development"/>
     <category term="Cybersecurity"/>
-    <summary>Small Business Administration — Closes 2026-08-14 — SCORE is the nation’s largest network of volunteer, expert business mentors, with more than 10,000 dedicated volunteers in more than 250 local chapters designed to provide high quality business and economic development assistance to existing small businesses and nascent (pre-venture) entrepreneurs.</summary>
+    <summary>Small Business Administration | Closes 2026-08-14 | SCORE is the nation’s largest network of volunteer, expert business mentors, with more than 10,000 dedicated volunteers in more than 250 local chapters designed to provide high quality business and economic development assistance to existing small businesses and nascent (pre-venture) entrepreneurs.</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2027 Expanding Nutrition Services</title>
@@ -554,7 +554,7 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Agriculture and food"/>
     <category term="Cybersecurity"/>
-    <summary>Health Resources and Services Administration — Closes 2026-09-09 — The purpose of Fiscal Year (FY) 2027 Expanding Nutrition Services (ENS) funding is to increase access to nutrition services at HRSA-funded health centers. Nutrition services can help to prevent, manage, and treat diseases and conditions through nutritional and food-based interventions. Health centers will use ENS funding to increase the number of nutrition services patients or visits.</summary>
+    <summary>Health Resources and Services Administration | Closes 2026-09-09 | The purpose of Fiscal Year (FY) 2027 Expanding Nutrition Services (ENS) funding is to increase access to nutrition services at HRSA-funded health centers. Nutrition services can help to prevent, manage, and treat diseases and conditions through nutritional and food-based interventions. Health centers will use ENS funding to increase the number of nutrition services patients or visits.</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 United States Marine Highway Program (USMHP)</title>
@@ -565,7 +565,7 @@
     <category term="Energy"/>
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
-    <summary>Maritime Administration — Closes 2026-08-31 — The United States Marine Highway Program (USMHP), codified at 46 U.S.C. 55601, was originally established by Section 1121 of the Energy Independence and Security Act of 2007 to reduce landside congestion through the designation of Marine Highway Routes. The USMHP statute authorizes the U.S. Department of Transportation (“Department” or “DOT”) to make grants to implement Projects or components of P…</summary>
+    <summary>Maritime Administration | Closes 2026-08-31 | The United States Marine Highway Program (USMHP), codified at 46 U.S.C. 55601, was originally established by Section 1121 of the Energy Independence and Security Act of 2007 to reduce landside congestion through the designation of Marine Highway Routes. The USMHP statute authorizes the U.S. Department of Transportation (“Department” or “DOT”) to make grants to implement Projects or components of P…</summary>
   </entry>
   <entry>
     <title>Improved Oil and Gas Recovery and Produced Water Management Technologies</title>
@@ -581,7 +581,7 @@
     <category term="Materials science"/>
     <category term="Manufacturing"/>
     <category term="Cybersecurity"/>
-    <summary>National Energy Technology Laboratory — Closes 2026-09-08 — Modification 000003: The purpose of this modification is to revise NOFO Part 1. Section I.A.1 is revised to correct the Topic Area 1b cost share to 20% and Section IV.C.2 is revised to delete the Environmental Considerations Summary and Environmental Impact Volume from the Summary of Application Requirements table. This Notice of Funding Opportunity (NOFO) will seek proposals for specific research…</summary>
+    <summary>National Energy Technology Laboratory | Closes 2026-09-08 | Modification 000003: The purpose of this modification is to revise NOFO Part 1. Section I.A.1 is revised to correct the Topic Area 1b cost share to 20% and Section IV.C.2 is revised to delete the Environmental Considerations Summary and Environmental Impact Volume from the Summary of Application Requirements table. This Notice of Funding Opportunity (NOFO) will seek proposals for specific research…</summary>
   </entry>
   <entry>
     <title>Middle East Regional Cooperation (MERC)</title>
@@ -594,7 +594,7 @@
     <category term="Manufacturing"/>
     <category term="Cybersecurity"/>
     <category term="Water"/>
-    <summary>Assistance Coordination — Closes 2026-09-30 — The Middle East Regional Cooperation (MERC) Program supports joint scientific research and innovation partnerships between the United States, Israel, and countries across the Middle East and North Africa (MENA). The program funds applied research projects that address shared regional challenges while advancing U.S. economic, technological, and strategic interests. MERC is designed to bring togethe…</summary>
+    <summary>Assistance Coordination | Closes 2026-09-30 | The Middle East Regional Cooperation (MERC) Program supports joint scientific research and innovation partnerships between the United States, Israel, and countries across the Middle East and North Africa (MENA). The program funds applied research projects that address shared regional challenges while advancing U.S. economic, technological, and strategic interests. MERC is designed to bring togethe…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 10</title>
@@ -603,7 +603,7 @@
     <updated>2026-06-30T00:00:00Z</updated>
     <author><name>Department of Homeland Security - FEMA</name></author>
     <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA — Closes 2026-08-17 — The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
+    <summary>Department of Homeland Security - FEMA | Closes 2026-08-17 | The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 2</title>
@@ -612,7 +612,7 @@
     <updated>2026-06-30T00:00:00Z</updated>
     <author><name>Department of Homeland Security - FEMA</name></author>
     <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA — Closes 2026-08-17 — The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
+    <summary>Department of Homeland Security - FEMA | Closes 2026-08-17 | The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 3</title>
@@ -621,7 +621,7 @@
     <updated>2026-06-30T00:00:00Z</updated>
     <author><name>Department of Homeland Security - FEMA</name></author>
     <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA — Closes 2026-08-17 — The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
+    <summary>Department of Homeland Security - FEMA | Closes 2026-08-17 | The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 4</title>
@@ -630,7 +630,7 @@
     <updated>2026-06-30T00:00:00Z</updated>
     <author><name>Department of Homeland Security - FEMA</name></author>
     <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA — Closes 2026-08-17 — The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
+    <summary>Department of Homeland Security - FEMA | Closes 2026-08-17 | The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 5</title>
@@ -639,7 +639,7 @@
     <updated>2026-06-30T00:00:00Z</updated>
     <author><name>Department of Homeland Security - FEMA</name></author>
     <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA — Closes 2026-08-17 — The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
+    <summary>Department of Homeland Security - FEMA | Closes 2026-08-17 | The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 6</title>
@@ -648,7 +648,7 @@
     <updated>2026-06-30T00:00:00Z</updated>
     <author><name>Department of Homeland Security - FEMA</name></author>
     <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA — Closes 2026-08-17 — The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
+    <summary>Department of Homeland Security - FEMA | Closes 2026-08-17 | The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 7</title>
@@ -657,7 +657,7 @@
     <updated>2026-06-30T00:00:00Z</updated>
     <author><name>Department of Homeland Security - FEMA</name></author>
     <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA — Closes 2026-08-17 — The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
+    <summary>Department of Homeland Security - FEMA | Closes 2026-08-17 | The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 8</title>
@@ -666,7 +666,7 @@
     <updated>2026-06-30T00:00:00Z</updated>
     <author><name>Department of Homeland Security - FEMA</name></author>
     <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA — Closes 2026-08-17 — The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
+    <summary>Department of Homeland Security - FEMA | Closes 2026-08-17 | The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 9</title>
@@ -675,6 +675,6 @@
     <updated>2026-06-30T00:00:00Z</updated>
     <author><name>Department of Homeland Security - FEMA</name></author>
     <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA — Closes 2026-08-17 — The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
+    <summary>Department of Homeland Security - FEMA | Closes 2026-08-17 | The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
   </entry>
 </feed>

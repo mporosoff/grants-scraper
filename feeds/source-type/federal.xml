@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Funding Finder — Federal</title>
+  <title>Funding Finder | Federal</title>
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml</id>
@@ -14,7 +14,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Education and workforce"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health — Closes 2028-05-30 — The National Institute on Deafness and Other Communication Disorders (NIDCD) intends to publish a Notice of Funding Opportunity (NOFO) for clinical audiologists currently enrolled in Ph.D. programs. NIDCD encourages audiologists with strong research potential to integrate clinical and translational research into their career paths. A strong research foundation is essential for advancing hearing he…</summary>
+    <summary>National Institutes of Health | Closes 2028-05-30 | The National Institute on Deafness and Other Communication Disorders (NIDCD) intends to publish a Notice of Funding Opportunity (NOFO) for clinical audiologists currently enrolled in Ph.D. programs. NIDCD encourages audiologists with strong research potential to integrate clinical and translational research into their career paths. A strong research foundation is essential for advancing hearing he…</summary>
   </entry>
   <entry>
     <title>Public Health Nursing</title>
@@ -24,7 +24,7 @@
     <author><name>Indian Health Service</name></author>
     <category term="Arts and culture"/>
     <category term="Public health"/>
-    <summary>Indian Health Service — Closes 2028-05-01 — The goal of this cooperative agreement is to improve the overall health and wellness of American Indian and Alaska Native men through a culturally responsive Public Health Nursing (PHN) case management and care navigation model. PHNs will engage men in preventive health and wellness services, increase access to care, promote early identification and management of health conditions, and support hea…</summary>
+    <summary>Indian Health Service | Closes 2028-05-01 | The goal of this cooperative agreement is to improve the overall health and wellness of American Indian and Alaska Native men through a culturally responsive Public Health Nursing (PHN) case management and care navigation model. PHNs will engage men in preventive health and wellness services, increase access to care, promote early identification and management of health conditions, and support hea…</summary>
   </entry>
   <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
@@ -33,7 +33,7 @@
     <updated>2027-11-27T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Environmental science"/>
-    <summary>National Institutes of Health — Closes 2028-01-27 — The Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program supports resource-limited institutions to develop and strengthen their capacity to conduct rigorous and reproducible biomedical research. Eligible organizations are expected to propose plans based on identified needs in one or more of the following areas: biomedical research environment, sponsore…</summary>
+    <summary>National Institutes of Health | Closes 2028-01-27 | The Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program supports resource-limited institutions to develop and strengthen their capacity to conduct rigorous and reproducible biomedical research. Eligible organizations are expected to propose plans based on identified needs in one or more of the following areas: biomedical research environment, sponsore…</summary>
   </entry>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -44,7 +44,7 @@
     <category term="Biology and biotechnology"/>
     <category term="Data science"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2028-02-01 — The National Human Genome Research Institute (NHGRI) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to establish an ancient DNA for Modern Genomics (aDMG) program. The goal of aDMG is to establish an ethical resource of ancient and historical human DNA (aDNA) data to advance studies about contemporary human traits and biology. This NOFO aims to solicit applicatio…</summary>
+    <summary>National Institutes of Health | Closes 2028-02-01 | The National Human Genome Research Institute (NHGRI) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to establish an ancient DNA for Modern Genomics (aDMG) program. The goal of aDMG is to establish an ethical resource of ancient and historical human DNA (aDNA) data to advance studies about contemporary human traits and biology. This NOFO aims to solicit applicatio…</summary>
   </entry>
   <entry>
     <title>Youth Regional Treatment Center Aftercare Program</title>
@@ -53,7 +53,7 @@
     <updated>2027-08-01T00:00:00Z</updated>
     <author><name>Indian Health Service</name></author>
     <category term="Arts and culture"/>
-    <summary>Indian Health Service — Closes 2027-10-01 — The goal of the Youth Aftercare cooperative agreement is to help American Indian and Alaska Native (AI/AN) youth achieve and sustain safety, sobriety, and long-term success after discharge from a Youth Regional Treatment Center (YRTC). The program strengthens culturally appropriate, community-based aftercare services by improving care coordination, building partnerships across the continuum of car…</summary>
+    <summary>Indian Health Service | Closes 2027-10-01 | The goal of the Youth Aftercare cooperative agreement is to help American Indian and Alaska Native (AI/AN) youth achieve and sustain safety, sobriety, and long-term success after discharge from a Youth Regional Treatment Center (YRTC). The program strengthens culturally appropriate, community-based aftercare services by improving care coordination, building partnerships across the continuum of car…</summary>
   </entry>
   <entry>
     <title>Single Source: Institutional Development Award (IDeA) Clinical Research Resource Center (I-CRRC)</title>
@@ -62,7 +62,7 @@
     <updated>2027-07-28T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Education and workforce"/>
-    <summary>National Institutes of Health — Closes 2027-09-28 — The Institutional Development Award (IDeA) program supports biomedical research capacity building in states that have historically received low levels of NIH funding. One such program, the IDeA Clinical &amp; Translational Research (CTR) award, supports clinical and translational (C&amp;T) research capacity building to enable research on diseases and health challenges prevalent in IDeA states. Significant…</summary>
+    <summary>National Institutes of Health | Closes 2027-09-28 | The Institutional Development Award (IDeA) program supports biomedical research capacity building in states that have historically received low levels of NIH funding. One such program, the IDeA Clinical &amp; Translational Research (CTR) award, supports clinical and translational (C&amp;T) research capacity building to enable research on diseases and health challenges prevalent in IDeA states. Significant…</summary>
   </entry>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -75,7 +75,7 @@
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-10-20 — The Eunice Kennedy Shriver National Institute of Child Health and Human Development seeks to advance its mission of supporting maternal, fetal, and child health by continuing to enhance the understanding of maternal, fetal, and child exposure to nutrients, metabolites, medications, supplements, microbiome-derived products, and environmental chemicals. This will be done by supporting a second phase…</summary>
+    <summary>National Institutes of Health | Closes 2027-10-20 | The Eunice Kennedy Shriver National Institute of Child Health and Human Development seeks to advance its mission of supporting maternal, fetal, and child health by continuing to enhance the understanding of maternal, fetal, and child exposure to nutrients, metabolites, medications, supplements, microbiome-derived products, and environmental chemicals. This will be done by supporting a second phase…</summary>
   </entry>
   <entry>
     <title>Limited Competition: Resources and Workforce Development for the Regional Biocontainment Laboratories</title>
@@ -86,7 +86,7 @@
     <category term="Education and workforce"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-09-30 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by providing critical resources, staff and facilities support for the Regional Biocontainment Laboratories (RBLs). The RBLs provide biosafety level 2 and 3 (BSL-2/3) biocontainment facilities for research on infectious diseases. They play a critical role in public health emergency response by facilitatin…</summary>
+    <summary>National Institutes of Health | Closes 2027-09-30 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by providing critical resources, staff and facilities support for the Regional Biocontainment Laboratories (RBLs). The RBLs provide biosafety level 2 and 3 (BSL-2/3) biocontainment facilities for research on infectious diseases. They play a critical role in public health emergency response by facilitatin…</summary>
   </entry>
   <entry>
     <title>Clinical Trials in Organ Transplantation in Children and Adults</title>
@@ -97,7 +97,7 @@
     <category term="Biology and biotechnology"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-09-30 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Clinical Trials in Organ Transplantation in Children and Adults (CTOT-CA) program. The goal of the CTOT-CA is to improve the outcome of organ transplantation through clinical trials with mechanistic studies. The CTOT-CA will support multicenter clinical trials, with a…</summary>
+    <summary>National Institutes of Health | Closes 2027-09-30 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Clinical Trials in Organ Transplantation in Children and Adults (CTOT-CA) program. The goal of the CTOT-CA is to improve the outcome of organ transplantation through clinical trials with mechanistic studies. The CTOT-CA will support multicenter clinical trials, with a…</summary>
   </entry>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -107,7 +107,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Agriculture and food"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-11-10 — The Tobacco Regulatory Science Program, participating NIH Institutes and Centers (ICs), and the Food and Drug Administration (FDA) Center for Tobacco Products (CTP) intend to issue a Notice of Funding Opportunity (NOFO) soliciting applications for Tobacco Centers of Regulatory Science (TCORS). The awards under this NOFO will be administered by NIH using funds made available through FDA CTP and the…</summary>
+    <summary>National Institutes of Health | Closes 2027-11-10 | The Tobacco Regulatory Science Program, participating NIH Institutes and Centers (ICs), and the Food and Drug Administration (FDA) Center for Tobacco Products (CTP) intend to issue a Notice of Funding Opportunity (NOFO) soliciting applications for Tobacco Centers of Regulatory Science (TCORS). The awards under this NOFO will be administered by NIH using funds made available through FDA CTP and the…</summary>
   </entry>
   <entry>
     <title>Investigator-Focused Award (Parent R35)</title>
@@ -115,7 +115,7 @@
     <id>urn:funding-finder:grants-gov:363391</id>
     <updated>2027-05-27T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
-    <summary>National Institutes of Health — Closes 2027-10-04 — The National Institutes of Health intends to publish a Parent R35 "Investigator-Focused Award" Notice of Funding Opportunity (NOFO) to fund research programs for investigators at all career stages, including Early Stage Investigators (ESIs). The Parent R35 Investigator-Focused Award is intended to provide support for an investigator's program of research within the mission of the awarding Institut…</summary>
+    <summary>National Institutes of Health | Closes 2027-10-04 | The National Institutes of Health intends to publish a Parent R35 "Investigator-Focused Award" Notice of Funding Opportunity (NOFO) to fund research programs for investigators at all career stages, including Early Stage Investigators (ESIs). The Parent R35 Investigator-Focused Award is intended to provide support for an investigator's program of research within the mission of the awarding Institut…</summary>
   </entry>
   <entry>
     <title>Native American Research Centers for Health (NARCH)</title>
@@ -123,7 +123,7 @@
     <id>urn:funding-finder:grants-gov:361270</id>
     <updated>2027-05-08T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
-    <summary>National Institutes of Health — Closes 2027-07-08 — The Native American Research Centers for Health (NARCH) program funds federally-recognized American Indian/Alaska Native (AI/AN) Tribes and Tribal colleges or universities, Tribal health programs, or Tribal organizations (collectively, federally-recognized Tribes and Tribal Entities) to support health-related research, research career enhancement, and research infrastructure enhancement activities…</summary>
+    <summary>National Institutes of Health | Closes 2027-07-08 | The Native American Research Centers for Health (NARCH) program funds federally-recognized American Indian/Alaska Native (AI/AN) Tribes and Tribal colleges or universities, Tribal health programs, or Tribal organizations (collectively, federally-recognized Tribes and Tribal Entities) to support health-related research, research career enhancement, and research infrastructure enhancement activities…</summary>
   </entry>
   <entry>
     <title>Advancing Screening, Diagnosis, and Referral for Late Talking Children</title>
@@ -134,7 +134,7 @@
     <category term="Education and workforce"/>
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health — Closes 2027-10-15 — The National Institutes of Health (NIH) Tackling Acquisition of Language in Kids (TALK) initiative intends to publish a Notice of Funding Opportunity (NOFO) to solicit research grant applications to improve the earliest steps in clinical practice for late talking children. The overarching purpose of this funding opportunity is to inform, develop, and evaluate evidence-based practices and implement…</summary>
+    <summary>National Institutes of Health | Closes 2027-10-15 | The National Institutes of Health (NIH) Tackling Acquisition of Language in Kids (TALK) initiative intends to publish a Notice of Funding Opportunity (NOFO) to solicit research grant applications to improve the earliest steps in clinical practice for late talking children. The overarching purpose of this funding opportunity is to inform, develop, and evaluate evidence-based practices and implement…</summary>
   </entry>
   <entry>
     <title>Claude D. Pepper Older Americans Independence Centers</title>
@@ -143,7 +143,7 @@
     <updated>2027-05-01T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Education and workforce"/>
-    <summary>National Institutes of Health — Closes 2027-09-25 — The National Institute on Aging intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for the Claude D. Pepper Older Americans Independence Centers (OAICs) award. The goal of the OAIC program is to establish centers of excellence in geriatrics research and research education to increase scientific knowledge leading to better ways to maintain or restore independence in o…</summary>
+    <summary>National Institutes of Health | Closes 2027-09-25 | The National Institute on Aging intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for the Claude D. Pepper Older Americans Independence Centers (OAICs) award. The goal of the OAIC program is to establish centers of excellence in geriatrics research and research education to increase scientific knowledge leading to better ways to maintain or restore independence in o…</summary>
   </entry>
   <entry>
     <title>NIDDK Disease Research and Translational Core Centers (P30 Clinical Trial Optional)</title>
@@ -153,7 +153,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
-    <summary>National Institutes of Health — Closes 2027-06-01 — This Notice of Funding Opportunity (NOFO) invites applications for NIDDK Disease Research and Translational Core Centers (P30 Clinical Trial Optional). These Core Centers are part of an integrated program of biomedical and translational research supporting our cystic fibrosis, diabetes, nutrition, obesity, liver and digestive diseases research. They enhance multidisciplinary collaboration, rigor, …</summary>
+    <summary>National Institutes of Health | Closes 2027-06-01 | This Notice of Funding Opportunity (NOFO) invites applications for NIDDK Disease Research and Translational Core Centers (P30 Clinical Trial Optional). These Core Centers are part of an integrated program of biomedical and translational research supporting our cystic fibrosis, diabetes, nutrition, obesity, liver and digestive diseases research. They enhance multidisciplinary collaboration, rigor, …</summary>
   </entry>
   <entry>
     <title>INCLUDE Project: Omics Phenotypes Related to Down Syndrome (X01 Clinical Trial Not Allowed)</title>
@@ -162,7 +162,7 @@
     <updated>2027-04-15T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health — Closes 2027-06-15 — The NIH INvestigation of Co-occurring conditions across the Lifespan to Understand Down syndromE (INCLUDE) Project seeks to improve health and quality-of-life for individuals with Down syndrome. The purpose of this Notice of Funding Opportunity (NOFO) is to solicit applications to submit samples to NIH INCLUDE Project-supported resources to generate a large volume of integrated genomic and multi-o…</summary>
+    <summary>National Institutes of Health | Closes 2027-06-15 | The NIH INvestigation of Co-occurring conditions across the Lifespan to Understand Down syndromE (INCLUDE) Project seeks to improve health and quality-of-life for individuals with Down syndrome. The purpose of this Notice of Funding Opportunity (NOFO) is to solicit applications to submit samples to NIH INCLUDE Project-supported resources to generate a large volume of integrated genomic and multi-o…</summary>
   </entry>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -174,7 +174,7 @@
     <category term="Cancer"/>
     <category term="Data science"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-06-11 — NCI intends to release a Notice of Funding Opportunity (NOFO) that serves to continue the advancement and sustainment of informatics tools, software, and research resources that enable the acquisition, management, analysis, visualization, and interpretation of data across the cancer research continuum, including cancer biology, diagnosis and treatment, early detection, risk assessment and preventi…</summary>
+    <summary>National Institutes of Health | Closes 2027-06-11 | NCI intends to release a Notice of Funding Opportunity (NOFO) that serves to continue the advancement and sustainment of informatics tools, software, and research resources that enable the acquisition, management, analysis, visualization, and interpretation of data across the cancer research continuum, including cancer biology, diagnosis and treatment, early detection, risk assessment and preventi…</summary>
   </entry>
   <entry>
     <title>National Viral Hepatitis Education, Awareness, and Capacity Building for Communities and Providers</title>
@@ -185,7 +185,7 @@
     <category term="Education and workforce"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-06-01 — In alignment with CDC's viral hepatitis strategic goals and current epidemiology, this Notice of Funding Opportunity (NOFO) will address the need for increasing awareness of viral hepatitis prevention, testing, and treatment options among populations disproportionately affected by hepatitis B and/or hepatitis C virus infections. The priority populations' needs will also be addressed by increasing …</summary>
+    <summary>Centers for Disease Control - NCHHSTP | Closes 2027-06-01 | In alignment with CDC's viral hepatitis strategic goals and current epidemiology, this Notice of Funding Opportunity (NOFO) will address the need for increasing awareness of viral hepatitis prevention, testing, and treatment options among populations disproportionately affected by hepatitis B and/or hepatitis C virus infections. The priority populations' needs will also be addressed by increasing …</summary>
   </entry>
   <entry>
     <title>Holistic and Evidence-Informed Wellness for STI Prevention</title>
@@ -194,7 +194,7 @@
     <updated>2027-03-29T00:00:00Z</updated>
     <author><name>Centers for Disease Control - NCHHSTP</name></author>
     <category term="Public health"/>
-    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-05-31 — STIs represent a serious public health and economic burden in the United States (U.S.), with approximately 2.2 million new infections occurring each year. As the nation's lead public health agency, the Centers for Disease Control and Prevention (CDC) has a unique responsibility to provide national leadership in STI prevention and control. To meet this challenge, CDC supports a comprehensive and in…</summary>
+    <summary>Centers for Disease Control - NCHHSTP | Closes 2027-05-31 | STIs represent a serious public health and economic burden in the United States (U.S.), with approximately 2.2 million new infections occurring each year. As the nation's lead public health agency, the Centers for Disease Control and Prevention (CDC) has a unique responsibility to provide national leadership in STI prevention and control. To meet this challenge, CDC supports a comprehensive and in…</summary>
   </entry>
   <entry>
     <title>Single Source: Resource Center for the Support for Research Excellence (SuRE) Program</title>
@@ -203,7 +203,7 @@
     <updated>2027-03-25T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Education and workforce"/>
-    <summary>National Institutes of Health — Closes 2027-05-25 — The Support for Research Excellence (SuRE) program aims to develop and sustain research excellence at resource-limited institutions, many of which disproportionately serve regions of the U.S. that have not historically participated in substantial NIH research, by supporting investigator-initiated research with strong student participation. A SuRE Resource Center has been established to enhance the…</summary>
+    <summary>National Institutes of Health | Closes 2027-05-25 | The Support for Research Excellence (SuRE) program aims to develop and sustain research excellence at resource-limited institutions, many of which disproportionately serve regions of the U.S. that have not historically participated in substantial NIH research, by supporting investigator-initiated research with strong student participation. A SuRE Resource Center has been established to enhance the…</summary>
   </entry>
   <entry>
     <title>Strengthening Services to Prevent the Infectious Disease Consequences of Drug Use</title>
@@ -212,7 +212,7 @@
     <updated>2027-03-24T00:00:00Z</updated>
     <author><name>Centers for Disease Control - NCHHSTP</name></author>
     <category term="Infectious disease"/>
-    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-05-24 — This NOFO aims to strengthen services to prevent the infectious disease consequences of drug use in high impact settings serving people who use drugs (PWUD) through two components. Component 1 will improve service data by conducting a biennial survey of high-impact settings that serve PWUD to document capacity, needs, access, and service gaps. It will also improve timely local data on infectious d…</summary>
+    <summary>Centers for Disease Control - NCHHSTP | Closes 2027-05-24 | This NOFO aims to strengthen services to prevent the infectious disease consequences of drug use in high impact settings serving people who use drugs (PWUD) through two components. Component 1 will improve service data by conducting a biennial survey of high-impact settings that serve PWUD to document capacity, needs, access, and service gaps. It will also improve timely local data on infectious d…</summary>
   </entry>
   <entry>
     <title>Direct-to-Consumer Distribution of HIV and other STI Self-Tests</title>
@@ -220,7 +220,7 @@
     <id>urn:funding-finder:grants-gov:363323</id>
     <updated>2027-03-22T00:00:00Z</updated>
     <author><name>Centers for Disease Control - NCHHSTP</name></author>
-    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-05-21 — The purpose of this notice of funding opportunity (NOFO) is to optimize the recipient's existing web-based ordering portal and distribution program to provide at least 1.5 million HIV and other STI self-tests to communities with a high burden of HIV. The use of the program's HIV and other STI self-tests and of resources for treatment and preventive services will increase awareness of HIV and other…</summary>
+    <summary>Centers for Disease Control - NCHHSTP | Closes 2027-05-21 | The purpose of this notice of funding opportunity (NOFO) is to optimize the recipient's existing web-based ordering portal and distribution program to provide at least 1.5 million HIV and other STI self-tests to communities with a high burden of HIV. The use of the program's HIV and other STI self-tests and of resources for treatment and preventive services will increase awareness of HIV and other…</summary>
   </entry>
   <entry>
     <title>DHQP Global NOFO</title>
@@ -230,7 +230,7 @@
     <author><name>Centers for Disease Control - NCEZID</name></author>
     <category term="Environmental science"/>
     <category term="Infectious disease"/>
-    <summary>Centers for Disease Control - NCEZID — Closes 2027-05-20 — The proposed international hybrid Notice of Funding Opportunity (NOFO) will link non-research implementation with targeted research that advances CDC's mission to address antimicrobial resistance (AR) across multiple bacterial and fungal pathogens, healthcare-associated infections (HAIs), and emerging infectious disease threats including viral pathogens across healthcare, community, and environmen…</summary>
+    <summary>Centers for Disease Control - NCEZID | Closes 2027-05-20 | The proposed international hybrid Notice of Funding Opportunity (NOFO) will link non-research implementation with targeted research that advances CDC's mission to address antimicrobial resistance (AR) across multiple bacterial and fungal pathogens, healthcare-associated infections (HAIs), and emerging infectious disease threats including viral pathogens across healthcare, community, and environmen…</summary>
   </entry>
   <entry>
     <title>Medical Scientist Training Program (MSTP)</title>
@@ -240,7 +240,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Education and workforce"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health — Closes 2027-05-25 — The overall goal of the NIH Ruth L. Kirschstein National Research Service Award (NRSA) program is to help ensure that a pool of highly trained scientists is available in appropriate scientific disciplines to address the Nation's biomedical, behavioral, and clinical research needs.In alignment with the goal of the NRSA program, the Medical Scientist Training Program (MSTP) supports the development …</summary>
+    <summary>National Institutes of Health | Closes 2027-05-25 | The overall goal of the NIH Ruth L. Kirschstein National Research Service Award (NRSA) program is to help ensure that a pool of highly trained scientists is available in appropriate scientific disciplines to address the Nation's biomedical, behavioral, and clinical research needs.In alignment with the goal of the NRSA program, the Medical Scientist Training Program (MSTP) supports the development …</summary>
   </entry>
   <entry>
     <title>Improved Drug Susceptibility Testing (DST) for Mycobacteria</title>
@@ -251,7 +251,7 @@
     <category term="Arts and culture"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-05-28 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting research to develop improved drug susceptibility tests (DSTs) for mycobacterial drugs, including those currently used for treatment of tuberculosis (TB) and clinically important non-tuberculous mycobacterial (NTM) infections, new drugs and drugs in late-stage clinical development. TB is a l…</summary>
+    <summary>National Institutes of Health | Closes 2027-05-28 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting research to develop improved drug susceptibility tests (DSTs) for mycobacterial drugs, including those currently used for treatment of tuberculosis (TB) and clinically important non-tuberculous mycobacterial (NTM) infections, new drugs and drugs in late-stage clinical development. TB is a l…</summary>
   </entry>
   <entry>
     <title>Veterans Legacy Grants Program</title>
@@ -261,7 +261,7 @@
     <author><name>Veterans Legacy Grants Program</name></author>
     <category term="Community development"/>
     <category term="Education and workforce"/>
-    <summary>Veterans Legacy Grants Program — Closes 2027-04-09 — VLGP will provide grants to eligible entities for the purpose of conducting cemetery research related to national, State, or Tribal Veterans’ cemeteries; producing educational materials that teach about the history of Veterans interred in national, State, or Tribal Veterans’ cemeteries; and promoting community engagement with the histories of Veterans interred in national, State, or Tribal Veteran…</summary>
+    <summary>Veterans Legacy Grants Program | Closes 2027-04-09 | VLGP will provide grants to eligible entities for the purpose of conducting cemetery research related to national, State, or Tribal Veterans’ cemeteries; producing educational materials that teach about the history of Veterans interred in national, State, or Tribal Veterans’ cemeteries; and promoting community engagement with the histories of Veterans interred in national, State, or Tribal Veteran…</summary>
   </entry>
   <entry>
     <title>Statewide Perinatal Quality Collaboratives: Improving Perinatal Care and Outcomes</title>
@@ -269,7 +269,7 @@
     <id>urn:funding-finder:grants-gov:363330</id>
     <updated>2027-03-04T00:00:00Z</updated>
     <author><name>Centers for Disease Control - NCCDPHP</name></author>
-    <summary>Centers for Disease Control - NCCDPHP — Closes 2027-05-03 — The purpose of this multi-component NOFO is to improve the health of pregnant and postpartum women and their newborns through quality improvement. CDC will fund two components. Component A will support state Perinatal Quality Collaboratives (PQCs). PQCs are state-based organizations that support quality improvement (QI) efforts in health facilities and whose approach has been successful in improvi…</summary>
+    <summary>Centers for Disease Control - NCCDPHP | Closes 2027-05-03 | The purpose of this multi-component NOFO is to improve the health of pregnant and postpartum women and their newborns through quality improvement. CDC will fund two components. Component A will support state Perinatal Quality Collaboratives (PQCs). PQCs are state-based organizations that support quality improvement (QI) efforts in health facilities and whose approach has been successful in improvi…</summary>
   </entry>
   <entry>
     <title>Maternal-Child Surveillance and Partnerships for Action, Results, and Knowledge</title>
@@ -279,7 +279,7 @@
     <author><name>Centers for Disease Control - NCBDDD</name></author>
     <category term="Data science"/>
     <category term="Public health"/>
-    <summary>Centers for Disease Control - NCBDDD — Closes 2027-04-26 — CDC proposes to allocate funds to implement Notice of Funding Opportunity (NOFO) DD-27-0028, Maternal Child Surveillance and Partnerships for Action, Results, and Knowledge. This NOFO will integrate maternal child health surveillance with national partnership activities to address key public health challenges including alcohol use during pregnancy, fetal alcohol spectrum disorders (FASDs), neonata…</summary>
+    <summary>Centers for Disease Control - NCBDDD | Closes 2027-04-26 | CDC proposes to allocate funds to implement Notice of Funding Opportunity (NOFO) DD-27-0028, Maternal Child Surveillance and Partnerships for Action, Results, and Knowledge. This NOFO will integrate maternal child health surveillance with national partnership activities to address key public health challenges including alcohol use during pregnancy, fetal alcohol spectrum disorders (FASDs), neonata…</summary>
   </entry>
   <entry>
     <title>AIDS Research Center on Mental Health and HIV/AIDS (P30 Clinical Trial Optional)</title>
@@ -290,7 +290,7 @@
     <category term="Data science"/>
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-05-25 — The National Institute of Mental Health (NIMH) seeks research applications to support the NIMH HIV/AIDS Research Centers (ARC) program, including Developmental Centers (D-ARCs) and full AIDS Research Centers (ARCs). These Research Centers aim to capitalize on the coordinated infrastructure to advance high-impact, interdisciplinary HIV/AIDS research. The ARC program supports innovative research acr…</summary>
+    <summary>National Institutes of Health | Closes 2027-05-25 | The National Institute of Mental Health (NIMH) seeks research applications to support the NIMH HIV/AIDS Research Centers (ARC) program, including Developmental Centers (D-ARCs) and full AIDS Research Centers (ARCs). These Research Centers aim to capitalize on the coordinated infrastructure to advance high-impact, interdisciplinary HIV/AIDS research. The ARC program supports innovative research acr…</summary>
   </entry>
   <entry>
     <title>IDeA Networks of Biomedical Research Excellence (INBRE)</title>
@@ -299,7 +299,7 @@
     <updated>2027-02-18T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Education and workforce"/>
-    <summary>National Institutes of Health — Closes 2027-05-18 — The Institutional Development Award program develops biomedical research capacity in states that have historically received low levels of NIH funding (IDeA states). The IDeA Networks of Biomedical Research Excellence (INBRE) Notice of Funding Opportunity will support statewide networks in IDeA states made up of one or more research intensive institution and multiple primarily undergraduate institu…</summary>
+    <summary>National Institutes of Health | Closes 2027-05-18 | The Institutional Development Award program develops biomedical research capacity in states that have historically received low levels of NIH funding (IDeA states). The IDeA Networks of Biomedical Research Excellence (INBRE) Notice of Funding Opportunity will support statewide networks in IDeA states made up of one or more research intensive institution and multiple primarily undergraduate institu…</summary>
   </entry>
   <entry>
     <title>Comprehensive Suicide Prevention Program for States</title>
@@ -309,7 +309,7 @@
     <author><name>Centers for Disease Control - NCIPC</name></author>
     <category term="Agriculture and food"/>
     <category term="Public health"/>
-    <summary>Centers for Disease Control - NCIPC — Closes 2027-04-17 — This forecast is for CDC's Comprehensive Suicide Prevention Program for States, a cooperative agreement intended to support implementation and evaluation of a comprehensive public health approach to suicide prevention in the United States. Funded recipients will focus on one or more Focus Prevention Areas (FPAs), groups or settings identified through available data as experiencing a significant su…</summary>
+    <summary>Centers for Disease Control - NCIPC | Closes 2027-04-17 | This forecast is for CDC's Comprehensive Suicide Prevention Program for States, a cooperative agreement intended to support implementation and evaluation of a comprehensive public health approach to suicide prevention in the United States. Funded recipients will focus on one or more Focus Prevention Areas (FPAs), groups or settings identified through available data as experiencing a significant su…</summary>
   </entry>
   <entry>
     <title>BRAIN Initiative: Development and Validation of Novel Tools and New Approaches for Neuroscience Research</title>
@@ -319,7 +319,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health — Closes 2027-06-10 — The Brain Research through Advancing Innovative Neurotechnologies (BRAIN) Initiative intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for research to develop novel tools and approaches that enable the interrogation of cell-specific and circuit-specific processes in the central nervous system. This NOFO consolidates three current BRAIN Initiative tool development pr…</summary>
+    <summary>National Institutes of Health | Closes 2027-06-10 | The Brain Research through Advancing Innovative Neurotechnologies (BRAIN) Initiative intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for research to develop novel tools and approaches that enable the interrogation of cell-specific and circuit-specific processes in the central nervous system. This NOFO consolidates three current BRAIN Initiative tool development pr…</summary>
   </entry>
   <entry>
     <title>NIOSH Support for Conferences and Scientific Meetings (R13 Clinical Trial Not Allowed)</title>
@@ -328,7 +328,7 @@
     <updated>2027-02-05T00:00:00Z</updated>
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Education and workforce"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-04-12 — The purpose of the NIOSH Support for Conferences and Scientific Meetings (R13) program is to support high-quality scientific meetings, conferences, and workshops that are relevant to the NIOSH mission and that promote occupational safety and health. The conference program is an important part of the NIOSH mission. Applications should address and advance research topics in occupational safety and h…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-04-12 | The purpose of the NIOSH Support for Conferences and Scientific Meetings (R13) program is to support high-quality scientific meetings, conferences, and workshops that are relevant to the NIOSH mission and that promote occupational safety and health. The conference program is an important part of the NIOSH mission. Applications should address and advance research topics in occupational safety and h…</summary>
   </entry>
   <entry>
     <title>NIOSH Support for Conferences and Scientific Meetings (U13 Clinical Trial Not Allowed)</title>
@@ -337,7 +337,7 @@
     <updated>2027-02-05T00:00:00Z</updated>
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Education and workforce"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-04-12 — The purpose of the NIOSH Support for Conferences and Scientific Meetings (U13) program is to support high-quality scientific meetings, conferences, and workshops that are relevant to the NIOSH mission and that promote occupational safety and health. The conference program is an important part of the NIOSH mission. Applications should address and advance research topics in occupational safety and h…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-04-12 | The purpose of the NIOSH Support for Conferences and Scientific Meetings (U13) program is to support high-quality scientific meetings, conferences, and workshops that are relevant to the NIOSH mission and that promote occupational safety and health. The conference program is an important part of the NIOSH mission. Applications should address and advance research topics in occupational safety and h…</summary>
   </entry>
   <entry>
     <title>Single Source Competition for Continuation of Understanding and Targeting the Pathophysiology of Youth-Onset Type 2 Diabetes Clinical Centers (U01 Clinical Trial Not Allowed)</title>
@@ -346,7 +346,7 @@
     <updated>2027-02-02T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health — Closes 2027-03-10 — The DISCOVERY of Risk Factors for Type 2 Diabetes in Youth Study is a multi-center longitudinal consortium conducted across 19 clinical sites to identify risk factors and biological mechanisms driving progression to youth-onset type 2 diabetes. The study is actively recruiting and following early pubertal youth at high risk for the disease with longitudinal follow-up currently underway. The curren…</summary>
+    <summary>National Institutes of Health | Closes 2027-03-10 | The DISCOVERY of Risk Factors for Type 2 Diabetes in Youth Study is a multi-center longitudinal consortium conducted across 19 clinical sites to identify risk factors and biological mechanisms driving progression to youth-onset type 2 diabetes. The study is actively recruiting and following early pubertal youth at high risk for the disease with longitudinal follow-up currently underway. The curren…</summary>
   </entry>
   <entry>
     <title>Telehealth Nutrition Services Network Grant Program</title>
@@ -354,7 +354,7 @@
     <id>urn:funding-finder:grants-gov:363277</id>
     <updated>2027-02-02T00:00:00Z</updated>
     <author><name>Health Resources and Services Administration</name></author>
-    <summary>Health Resources and Services Administration — Closes 2027-05-01 — The Telehealth Nutrition Services Network Grant Program will support telehealth networks that improve access to quality health care services through telehealth technology. This program will use telehealth nutrition services to help prevent and manage chronic diseases.</summary>
+    <summary>Health Resources and Services Administration | Closes 2027-05-01 | The Telehealth Nutrition Services Network Grant Program will support telehealth networks that improve access to quality health care services through telehealth technology. This program will use telehealth nutrition services to help prevent and manage chronic diseases.</summary>
   </entry>
   <entry>
     <title>A Holistic Approach to Study Non-Addictive Natural Products for Pain Management</title>
@@ -363,7 +363,7 @@
     <updated>2027-02-02T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health — Closes 2027-05-25 — The National Center for Complementary and Integrative Health (NCCIH) intends to publish a Notice of Funding Opportunity (NOFO) to support collaborative interdisciplinary research that advances foundational understanding of non-addictive natural products for chronic pain management through a holistic, system-oriented approach. This initiative aligns with the NIH Helping to End Addiction Long-term (…</summary>
+    <summary>National Institutes of Health | Closes 2027-05-25 | The National Center for Complementary and Integrative Health (NCCIH) intends to publish a Notice of Funding Opportunity (NOFO) to support collaborative interdisciplinary research that advances foundational understanding of non-addictive natural products for chronic pain management through a holistic, system-oriented approach. This initiative aligns with the NIH Helping to End Addiction Long-term (…</summary>
   </entry>
   <entry>
     <title>Domestic Violence Prevention</title>
@@ -374,7 +374,7 @@
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Social and behavioral sciences"/>
-    <summary>Indian Health Service — Closes 2027-04-01 — The purpose of this IHS grant is to support the development and expansion of Domestic Violence Prevention (DVP) programs that integrate culturally appropriate, trauma-informed prevention and victim services for Tribes, Tribal organizations, and Urban Indian Organizations serving AI/AN communities. The program will address domestic and sexual violence, sexual exploitation and human trafficking, Mis…</summary>
+    <summary>Indian Health Service | Closes 2027-04-01 | The purpose of this IHS grant is to support the development and expansion of Domestic Violence Prevention (DVP) programs that integrate culturally appropriate, trauma-informed prevention and victim services for Tribes, Tribal organizations, and Urban Indian Organizations serving AI/AN communities. The program will address domestic and sexual violence, sexual exploitation and human trafficking, Mis…</summary>
   </entry>
   <entry>
     <title>Domestic Violence Prevention: Forensic Healthcare Services</title>
@@ -383,7 +383,7 @@
     <updated>2027-02-01T00:00:00Z</updated>
     <author><name>Indian Health Service</name></author>
     <category term="Arts and culture"/>
-    <summary>Indian Health Service — Closes 2027-04-01 — The purpose of this IHS grant is to expand access to culturally appropriate, trauma-informed forensic healthcare (FHC) services for American Indian/Alaska Native (AI/AN) victims of domestic violence, sexual violence, child maltreatment, and human trafficking. The grant supports the development and expansion of FHC services across IHS Areas while promoting coordinated treatment, intervention, preve…</summary>
+    <summary>Indian Health Service | Closes 2027-04-01 | The purpose of this IHS grant is to expand access to culturally appropriate, trauma-informed forensic healthcare (FHC) services for American Indian/Alaska Native (AI/AN) victims of domestic violence, sexual violence, child maltreatment, and human trafficking. The grant supports the development and expansion of FHC services across IHS Areas while promoting coordinated treatment, intervention, preve…</summary>
   </entry>
   <entry>
     <title>Suicide Prevention, Intervention, and Postvention</title>
@@ -394,7 +394,7 @@
     <category term="Arts and culture"/>
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
-    <summary>Indian Health Service — Closes 2027-04-01 — The primary purpose of this program is to reduce suicide among American Indian and Alaska Native (AI/AN) populations by improving care coordination, expanding culturally appropriate behavioral health services, and implementing early intervention strategies for at-risk AI/AN youth. The program supports Tribal, community-driven suicide prevention, intervention, and postvention efforts that promote c…</summary>
+    <summary>Indian Health Service | Closes 2027-04-01 | The primary purpose of this program is to reduce suicide among American Indian and Alaska Native (AI/AN) populations by improving care coordination, expanding culturally appropriate behavioral health services, and implementing early intervention strategies for at-risk AI/AN youth. The program supports Tribal, community-driven suicide prevention, intervention, and postvention efforts that promote c…</summary>
   </entry>
   <entry>
     <title>Tribal Epidemiology Centers</title>
@@ -403,7 +403,7 @@
     <updated>2027-02-01T00:00:00Z</updated>
     <author><name>Indian Health Service</name></author>
     <category term="Public health"/>
-    <summary>Indian Health Service — Closes 2027-04-01 — Second cohort of TEC sites for any currently unserved Areas.</summary>
+    <summary>Indian Health Service | Closes 2027-04-01 | Second cohort of TEC sites for any currently unserved Areas.</summary>
   </entry>
   <entry>
     <title>Tribal Management Development</title>
@@ -412,7 +412,7 @@
     <updated>2027-02-01T00:00:00Z</updated>
     <author><name>Indian Health Service</name></author>
     <category term="Education and workforce"/>
-    <summary>Indian Health Service — Closes 2027-04-01 — The Tribal Management Grant program aims to prepare tribes and tribal organizations for assuming all or part of existing Indian Health Service programs functions services and activities under the Public Law 93 638 Indian Self Determination and Education Assistance Act as amended and to further develop and improve their health management capabilities. The Indian Health Service intends to issue five…</summary>
+    <summary>Indian Health Service | Closes 2027-04-01 | The Tribal Management Grant program aims to prepare tribes and tribal organizations for assuming all or part of existing Indian Health Service programs functions services and activities under the Public Law 93 638 Indian Self Determination and Education Assistance Act as amended and to further develop and improve their health management capabilities. The Indian Health Service intends to issue five…</summary>
   </entry>
   <entry>
     <title>Tribal Self-Governance - Negotiation</title>
@@ -420,7 +420,7 @@
     <id>urn:funding-finder:grants-gov:363499</id>
     <updated>2027-02-01T00:00:00Z</updated>
     <author><name>Indian Health Service</name></author>
-    <summary>Indian Health Service — Closes 2027-04-01 — The Tribal Self Governance Planning and Negotiation Cooperative Agreements aim to support tribes and tribal organization in their efforts to plan and prepare for assuming responsibility for providing health care to their members through the Tribal Self Governance Program. The Indian Health Service intends to issue three awards under each program announcement.</summary>
+    <summary>Indian Health Service | Closes 2027-04-01 | The Tribal Self Governance Planning and Negotiation Cooperative Agreements aim to support tribes and tribal organization in their efforts to plan and prepare for assuming responsibility for providing health care to their members through the Tribal Self Governance Program. The Indian Health Service intends to issue three awards under each program announcement.</summary>
   </entry>
   <entry>
     <title>Tribal Self-Governance - Planning</title>
@@ -428,7 +428,7 @@
     <id>urn:funding-finder:grants-gov:363504</id>
     <updated>2027-02-01T00:00:00Z</updated>
     <author><name>Indian Health Service</name></author>
-    <summary>Indian Health Service — Closes 2027-04-01 — The Tribal Self Governance Planning and Negotiation Cooperative Agreements aim to support tribes and tribal organization in their efforts to plan and prepare for assuming responsibility for providing health care to their members through the Tribal Self Governance Program. The Indian Health Service intends to issue three awards under each program announcement.</summary>
+    <summary>Indian Health Service | Closes 2027-04-01 | The Tribal Self Governance Planning and Negotiation Cooperative Agreements aim to support tribes and tribal organization in their efforts to plan and prepare for assuming responsibility for providing health care to their members through the Tribal Self Governance Program. The Indian Health Service intends to issue three awards under each program announcement.</summary>
   </entry>
   <entry>
     <title>Urban Indian Health Program - Education &amp; Research</title>
@@ -437,7 +437,7 @@
     <updated>2027-02-01T00:00:00Z</updated>
     <author><name>Indian Health Service</name></author>
     <category term="Education and workforce"/>
-    <summary>Indian Health Service — Closes 2027-04-01 — National organization that is an urban Indian education and research partner to DUIA and all IHS contracted UIOs</summary>
+    <summary>Indian Health Service | Closes 2027-04-01 | National organization that is an urban Indian education and research partner to DUIA and all IHS contracted UIOs</summary>
   </entry>
   <entry>
     <title>Strengthening Public Health Systems and Services in Indian Country</title>
@@ -447,7 +447,7 @@
     <author><name>CENTERS FOR DISEASE CONTROL CSTLTS</name></author>
     <category term="Education and workforce"/>
     <category term="Public health"/>
-    <summary>CENTERS FOR DISEASE CONTROL CSTLTS — Closes 2027-04-02 — CDC announces the availability of supplemental funding for the 34 American Indian and Alaska Native (AI/AN) Tribes and regional AI/AN tribally designated organizations awarded funding under CDC-RFA-TO-23-0001: Strengthening Public Health Systems and Services in Indian Country. The CDC-RFA-TO-23-0001 recipients are eligible to submit applications for new FY 2027 Centers, Institute, and Offices (CIO…</summary>
+    <summary>CENTERS FOR DISEASE CONTROL CSTLTS | Closes 2027-04-02 | CDC announces the availability of supplemental funding for the 34 American Indian and Alaska Native (AI/AN) Tribes and regional AI/AN tribally designated organizations awarded funding under CDC-RFA-TO-23-0001: Strengthening Public Health Systems and Services in Indian Country. The CDC-RFA-TO-23-0001 recipients are eligible to submit applications for new FY 2027 Centers, Institute, and Offices (CIO…</summary>
   </entry>
   <entry>
     <title>Chronic Care Telehealth Centers of Excellence Program</title>
@@ -455,7 +455,7 @@
     <id>urn:funding-finder:grants-gov:363274</id>
     <updated>2027-02-01T00:00:00Z</updated>
     <author><name>Health Resources and Services Administration</name></author>
-    <summary>Health Resources and Services Administration — Closes 2027-05-03 — The Chronic Care Telehealth Centers for Excellence Program will fund academic medical centers to integrate innovative telehealth technologies into the full spectrum of services included in chronic care models, including but not limited to, chronic disease prevention and management, and the treatment for acute episodes that result from long-term morbidity. These centers will disseminate findings th…</summary>
+    <summary>Health Resources and Services Administration | Closes 2027-05-03 | The Chronic Care Telehealth Centers for Excellence Program will fund academic medical centers to integrate innovative telehealth technologies into the full spectrum of services included in chronic care models, including but not limited to, chronic disease prevention and management, and the treatment for acute episodes that result from long-term morbidity. These centers will disseminate findings th…</summary>
   </entry>
   <entry>
     <title>Limited Competition: The NHGRI Analysis, Visualization, and Informatics Lab-space (AnVIL) (U54 Clinical Trial Not Allowed)</title>
@@ -467,7 +467,7 @@
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
-    <summary>National Institutes of Health — Closes 2027-05-25 — The National Human Genome Research Institute (NHGRI) intends to issue a Notice of Funding Opportunity (NOFO) to support a limited competition renewal of the Analysis, Visualization, and Informatics Lab-space (AnVIL) program. AnVIL is a secure, cloud-based platform that enables researchers to access, share, and analyze large-scale genomic datasets without relying on local infrastructure. Currently,…</summary>
+    <summary>National Institutes of Health | Closes 2027-05-25 | The National Human Genome Research Institute (NHGRI) intends to issue a Notice of Funding Opportunity (NOFO) to support a limited competition renewal of the Analysis, Visualization, and Informatics Lab-space (AnVIL) program. AnVIL is a secure, cloud-based platform that enables researchers to access, share, and analyze large-scale genomic datasets without relying on local infrastructure. Currently,…</summary>
   </entry>
   <entry>
     <title>BRAIN Initiative: Data Archives for the BRAIN Initiative</title>
@@ -477,7 +477,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health — Closes 2027-06-01 — The National Institute of Mental Health (NIMH), with other NIH Institutes and Centers (ICs), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop web-accessible data archives to capture, store, and curate data related to the Brain Research Through Advancing Innovative Neurotechnologies® (BRAIN) Initiative activities. The data archives teams will work with th…</summary>
+    <summary>National Institutes of Health | Closes 2027-06-01 | The National Institute of Mental Health (NIMH), with other NIH Institutes and Centers (ICs), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop web-accessible data archives to capture, store, and curate data related to the Brain Research Through Advancing Innovative Neurotechnologies® (BRAIN) Initiative activities. The data archives teams will work with th…</summary>
   </entry>
   <entry>
     <title>Clinical Data, Safety and Statistical Centers (CDSSC)</title>
@@ -487,7 +487,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-06-01 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the support of the Clinical Data, Safety and Statistical Centers program. The overall objective of this program is to provide coordination and oversight for multiple activities in service to clinical research and mechanistic studies supported by NIAID, including all Division of Allergy, Immunolog…</summary>
+    <summary>National Institutes of Health | Closes 2027-06-01 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the support of the Clinical Data, Safety and Statistical Centers program. The overall objective of this program is to provide coordination and oversight for multiple activities in service to clinical research and mechanistic studies supported by NIAID, including all Division of Allergy, Immunolog…</summary>
   </entry>
   <entry>
     <title>State Maternal Health Innovation Program (SMHI)</title>
@@ -497,7 +497,7 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Education and workforce"/>
     <category term="Technology development"/>
-    <summary>Health Resources and Services Administration — Closes 2027-04-19 — The purpose of the State Maternal Health Innovation (SMHI) program is to build capacity in states to improve maternal health and address maternal health gaps. This is done through quality services, a skilled workforce, enhanced data quality and capacity, and innovative programming that reduces maternal mortality and severe maternal morbidity (SMM).</summary>
+    <summary>Health Resources and Services Administration | Closes 2027-04-19 | The purpose of the State Maternal Health Innovation (SMHI) program is to build capacity in states to improve maternal health and address maternal health gaps. This is done through quality services, a skilled workforce, enhanced data quality and capacity, and innovative programming that reduces maternal mortality and severe maternal morbidity (SMM).</summary>
   </entry>
   <entry>
     <title>Advanced Laboratories for Accelerating the Reach and Impact of Treatments for Youth and Adults with Mental Illness (ALACRITY) Research Centers</title>
@@ -509,15 +509,15 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health — Closes 2027-05-27 — The National Institute of Mental Health (NIMH) intends to publish a notice of funding opportunity (NOFO) to solicit research applications for practice-based research centers to support interdisciplinary teams of mental health researchers to engage in high-impact studies that will significantly advance clinical practice and generate knowledge to fuel the transformation of mental health care in the …</summary>
+    <summary>National Institutes of Health | Closes 2027-05-27 | The National Institute of Mental Health (NIMH) intends to publish a notice of funding opportunity (NOFO) to solicit research applications for practice-based research centers to support interdisciplinary teams of mental health researchers to engage in high-impact studies that will significantly advance clinical practice and generate knowledge to fuel the transformation of mental health care in the …</summary>
   </entry>
   <entry>
-    <title>Drug-Free Communities (DFC) Support Program – NEW (Year 1)</title>
+    <title>Drug-Free Communities (DFC) Support Program - NEW (Year 1)</title>
     <link href="https://www.grants.gov/search-results-detail/363353"/>
     <id>urn:funding-finder:grants-gov:363353</id>
     <updated>2027-01-26T00:00:00Z</updated>
     <author><name>Centers for Disease Control - NCIPC</name></author>
-    <summary>Centers for Disease Control - NCIPC — Closes 2027-03-31 — The Drug-Free Communities (DFC) Support Program was created by the Drug-Free Communities Act of 1997 (Public Law 105-20). The Executive Office of the President, Office of National Drug Control Policy (ONDCP), and the Department of Health and Human Services (HHS), Centers for Disease Control and Prevention (CDC), National Center for Injury Prevention and Control (NCIPC) are accepting applications f…</summary>
+    <summary>Centers for Disease Control - NCIPC | Closes 2027-03-31 | The Drug-Free Communities (DFC) Support Program was created by the Drug-Free Communities Act of 1997 (Public Law 105-20). The Executive Office of the President, Office of National Drug Control Policy (ONDCP), and the Department of Health and Human Services (HHS), Centers for Disease Control and Prevention (CDC), National Center for Injury Prevention and Control (NCIPC) are accepting applications f…</summary>
   </entry>
   <entry>
     <title>Implementation Research on Coordinated Combinations of Community-Clinical Linkage Strategies for Diabetes Prevention and Management</title>
@@ -525,7 +525,7 @@
     <id>urn:funding-finder:grants-gov:363360</id>
     <updated>2027-01-21T00:00:00Z</updated>
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-03-22 — Diabetes causes illness and death in the United States. It leads to high health care costs. People who use Federally Qualified Health Centers (FQHCs) and other safety-net clinics face greater risks. Many community-clinical linkage (CCL) strategies show benefits when used alone. We know less about how several strategies can be combined and coordinated. Using multiple strategies together may improve…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-03-22 | Diabetes causes illness and death in the United States. It leads to high health care costs. People who use Federally Qualified Health Centers (FQHCs) and other safety-net clinics face greater risks. Many community-clinical linkage (CCL) strategies show benefits when used alone. We know less about how several strategies can be combined and coordinated. Using multiple strategies together may improve…</summary>
   </entry>
   <entry>
     <title>Health Promotion and Disease Prevention Research Centers: 2027 Special Interest Project Supplements (SIPS)</title>
@@ -535,7 +535,7 @@
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Cancer"/>
     <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-03-23 — This NOFO will provide supplemental funding to the currently funding twenty (20) CDC Prevention Research Centers (PRCs) to conduct Special Interest Projects (SIPs). The purpose of the SIPs is to inform public health practice through high-quality applied health promotion and disease prevention public health research in real-world settings to identify, design, test, assess, evaluate, disseminate, an…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-03-23 | This NOFO will provide supplemental funding to the currently funding twenty (20) CDC Prevention Research Centers (PRCs) to conduct Special Interest Projects (SIPs). The purpose of the SIPs is to inform public health practice through high-quality applied health promotion and disease prevention public health research in real-world settings to identify, design, test, assess, evaluate, disseminate, an…</summary>
   </entry>
   <entry>
     <title>Pilot Testing, Implementation, and Evaluation of the Cervical, Breast and Colorectal Cancer Clinical Decision Support Tools</title>
@@ -544,24 +544,24 @@
     <updated>2027-01-21T00:00:00Z</updated>
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Cancer"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-03-23 — The Centers for Disease Control and Prevention's (CDC) National Center for Chronic Disease Prevention and Health Promotion is advancing the development of clinical decision support (CDS) tools designed to facilitate evidence-based cancer screening and management at the point of care. These CDS tools integrate up-to-date, computable guidelines into electronic health records systems to support clini…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-03-23 | The Centers for Disease Control and Prevention's (CDC) National Center for Chronic Disease Prevention and Health Promotion is advancing the development of clinical decision support (CDS) tools designed to facilitate evidence-based cancer screening and management at the point of care. These CDS tools integrate up-to-date, computable guidelines into electronic health records systems to support clini…</summary>
   </entry>
   <entry>
-    <title>Infant-Toddler Court Program–National Resource Center</title>
+    <title>Infant-Toddler Court Program-National Resource Center</title>
     <link href="https://www.grants.gov/search-results-detail/363511"/>
     <id>urn:funding-finder:grants-gov:363511</id>
     <updated>2027-01-21T00:00:00Z</updated>
     <author><name>Health Resources and Services Administration</name></author>
-    <summary>Health Resources and Services Administration — Closes 2027-04-21 — The Infant-Toddler Court Program's (ITCP) National Resource Center (NRC) helps states and communities to strengthen and expand use of enhanced child welfare practices in communities across the country that bring together courts, social services, and families to improve the safety, healthy development, and nurturing relationships of families with young children involved with the child welfare syste…</summary>
+    <summary>Health Resources and Services Administration | Closes 2027-04-21 | The Infant-Toddler Court Program's (ITCP) National Resource Center (NRC) helps states and communities to strengthen and expand use of enhanced child welfare practices in communities across the country that bring together courts, social services, and families to improve the safety, healthy development, and nurturing relationships of families with young children involved with the child welfare syste…</summary>
   </entry>
   <entry>
-    <title>Infant-Toddler Court Program–State Awards</title>
+    <title>Infant-Toddler Court Program-State Awards</title>
     <link href="https://www.grants.gov/search-results-detail/363512"/>
     <id>urn:funding-finder:grants-gov:363512</id>
     <updated>2027-01-21T00:00:00Z</updated>
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Education and workforce"/>
-    <summary>Health Resources and Services Administration — Closes 2027-04-21 — The Infant-Toddler Court Program (ITCP) State Awards allow states and communities to support and expand use of enhanced child welfare practices in communities across the country that bring together courts, social services, and families to improve the safety, healthy development, and nurturing relationships of families with young children involved with child welfare. The ITCP State Awards support i…</summary>
+    <summary>Health Resources and Services Administration | Closes 2027-04-21 | The Infant-Toddler Court Program (ITCP) State Awards allow states and communities to support and expand use of enhanced child welfare practices in communities across the country that bring together courts, social services, and families to improve the safety, healthy development, and nurturing relationships of families with young children involved with child welfare. The ITCP State Awards support i…</summary>
   </entry>
   <entry>
     <title>Translational Transplantation Tolerance Cooperative Study Group</title>
@@ -571,7 +571,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-05-21 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the support of the Translational Transplantation Tolerance Cooperative Study Group (TTTCSG) program. The overarching goal of this program is to facilitate clinical translation of safe and effective transplant tolerance regimens that achieve long-term graft survival without the need for life-long …</summary>
+    <summary>National Institutes of Health | Closes 2027-05-21 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the support of the Translational Transplantation Tolerance Cooperative Study Group (TTTCSG) program. The overarching goal of this program is to facilitate clinical translation of safe and effective transplant tolerance regimens that achieve long-term graft survival without the need for life-long …</summary>
   </entry>
   <entry>
     <title>Rural Health Value Program</title>
@@ -579,6 +579,6 @@
     <id>urn:funding-finder:grants-gov:363509</id>
     <updated>2027-01-19T00:00:00Z</updated>
     <author><name>Health Resources and Services Administration</name></author>
-    <summary>Health Resources and Services Administration — Closes 2027-03-20 — The purpose of the Rural Health Value (RHV) Program is to fund one recipient to provide analysis and technical assistance (TA) for rural stakeholders to help them understand and engage in the value-based care landscape in the context of rural health care. The goal of this funding opportunity is to support the ability of rural providers to participate and succeed in current and emerging payment and…</summary>
+    <summary>Health Resources and Services Administration | Closes 2027-03-20 | The purpose of the Rural Health Value (RHV) Program is to fund one recipient to provide analysis and technical assistance (TA) for rural stakeholders to help them understand and engage in the value-based care landscape in the context of rural health care. The goal of this funding opportunity is to support the ability of rural providers to participate and succeed in current and emerging payment and…</summary>
   </entry>
 </feed>

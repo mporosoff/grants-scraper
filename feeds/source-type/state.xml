@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Funding Finder — State</title>
+  <title>Funding Finder | State</title>
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml</id>
@@ -16,7 +16,7 @@
     <category term="Education and workforce"/>
     <category term="Energy"/>
     <category term="Environmental science"/>
-    <summary>NYSERDA — Closes 2026-08-18 — The P-12 Schools: Clean Green Schools Initiative is available to help public schools that traditionally lack resources to invest in infrastructure improvements become healthier, more productive learning environments. The program provides funding for schools to implement construction projects that decarbonize their building portfolio and enhance extreme heat resilience, such as comprehensive retrof…</summary>
+    <summary>NYSERDA | Closes 2026-08-18 | The P-12 Schools: Clean Green Schools Initiative is available to help public schools that traditionally lack resources to invest in infrastructure improvements become healthier, more productive learning environments. The program provides funding for schools to implement construction projects that decarbonize their building portfolio and enhance extreme heat resilience, such as comprehensive retrof…</summary>
   </entry>
   <entry>
     <title>Independent Internal Audit Services</title>
@@ -25,7 +25,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Cybersecurity"/>
-    <summary>NYSERDA — Closes 2026-08-19 — Seeking proposals from qualified firms to provide independent internal audit, advisory, compliance, investigative, technology, cybersecurity, and related professional services to support NYSERDA’s Internal Audit function under a five-year umbrella contract.</summary>
+    <summary>NYSERDA | Closes 2026-08-19 | Seeking proposals from qualified firms to provide independent internal audit, advisory, compliance, investigative, technology, cybersecurity, and related professional services to support NYSERDA’s Internal Audit function under a five-year umbrella contract.</summary>
   </entry>
   <entry>
     <title>Net-Zero Resilience Preparation for Municipal and Rural Electric Providers</title>
@@ -34,7 +34,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Climate change"/>
-    <summary>NYSERDA — Closes 2026-08-24 — Municipal electric utilities and rural electric cooperatives across New York State play a critical role in the areas they cover. The combined dynamics of a changing climate and the effects of decarbonization present a set of new operating considerations to continue to provide resilient and reliable services. Through RFP 6129, NYSERDA seeks to support the rapid decarbonization and increased resilie…</summary>
+    <summary>NYSERDA | Closes 2026-08-24 | Municipal electric utilities and rural electric cooperatives across New York State play a critical role in the areas they cover. The combined dynamics of a changing climate and the effects of decarbonization present a set of new operating considerations to continue to provide resilient and reliable services. Through RFP 6129, NYSERDA seeks to support the rapid decarbonization and increased resilie…</summary>
   </entry>
   <entry>
     <title>New York State Clean Energy Internship Program</title>
@@ -43,7 +43,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Energy"/>
-    <summary>NYSERDA — Closes 2026-08-31 — Provides funding to eligible clean energy businesses, organizations, and local municipalities hiring interns to perform meaningful work in the clean energy sector. Both clean energy employers and interns can apply to participate in the program. Accepted employers will select, interview, and hire interns, and NYSERDA provides reimbursement on a percentage of the interns’ wages.</summary>
+    <summary>NYSERDA | Closes 2026-08-31 | Provides funding to eligible clean energy businesses, organizations, and local municipalities hiring interns to perform meaningful work in the clean energy sector. Both clean energy employers and interns can apply to participate in the program. Accepted employers will select, interview, and hire interns, and NYSERDA provides reimbursement on a percentage of the interns’ wages.</summary>
   </entry>
   <entry>
     <title>Empire Building Challenge: Hospitals</title>
@@ -52,7 +52,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Energy"/>
-    <summary>NYSERDA — Closes 2026-09-15 — Through this competitive solicitation, eligible hospitals can request up to $5 million for the construction and installation of scalable, efficient, low-carbon solutions such as electrification of building systems, electrification readiness projects, and comprehensive energy efficiency projects that will achieve significant carbon and/or energy reduction.</summary>
+    <summary>NYSERDA | Closes 2026-09-15 | Through this competitive solicitation, eligible hospitals can request up to $5 million for the construction and installation of scalable, efficient, low-carbon solutions such as electrification of building systems, electrification readiness projects, and comprehensive energy efficiency projects that will achieve significant carbon and/or energy reduction.</summary>
   </entry>
   <entry>
     <title>Clean Energy Career Pathways Training</title>
@@ -62,7 +62,7 @@
     <author><name>NYSERDA</name></author>
     <category term="Education and workforce"/>
     <category term="Energy"/>
-    <summary>NYSERDA — Closes 2026-09-23 — The New York State Energy Research and Development Authority (NYSERDA) is seeking proposals for clean energy career pathways projects. These projects must include clean energy technical training as well as career preparation, wraparound services, and job placement support to prepare new workers for entry-level clean energy careers. Projects funded under this solicitation are intended to build or e…</summary>
+    <summary>NYSERDA | Closes 2026-09-23 | The New York State Energy Research and Development Authority (NYSERDA) is seeking proposals for clean energy career pathways projects. These projects must include clean energy technical training as well as career preparation, wraparound services, and job placement support to prepare new workers for entry-level clean energy careers. Projects funded under this solicitation are intended to build or e…</summary>
   </entry>
   <entry>
     <title>Large Scale Non-drop-in Alternative Fuels Based Resources and Infrastructure</title>
@@ -71,7 +71,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Energy"/>
-    <summary>NYSERDA — Closes 2026-09-28 — Supporting the development, scale-up, and demonstration of large-scale alternative fuel-based energy systems and supporting infrastructure, up to $8 million is available through Program Opportunity Notice (PON) 6161. This funding will help advance solutions optimized for safe, cost-effective, and scalable deployment of non-drop-in fuels such as hydrogen and ammonia within New York State. This comp…</summary>
+    <summary>NYSERDA | Closes 2026-09-28 | Supporting the development, scale-up, and demonstration of large-scale alternative fuel-based energy systems and supporting infrastructure, up to $8 million is available through Program Opportunity Notice (PON) 6161. This funding will help advance solutions optimized for safe, cost-effective, and scalable deployment of non-drop-in fuels such as hydrogen and ammonia within New York State. This comp…</summary>
   </entry>
   <entry>
     <title>Apprenticeship and Pre-apprenticeship Clean Energy Training</title>
@@ -81,7 +81,7 @@
     <author><name>NYSERDA</name></author>
     <category term="Education and workforce"/>
     <category term="Energy"/>
-    <summary>NYSERDA — Closes 2026-10-06 — Through this funding opportunity the New York State Energy Research and Development Authority (NYSERDA) seeks to work with labor organizations and registered pre-apprenticeship programs across the State, to grow a diverse, equitable, and inclusive pipeline of skilled talent for the clean energy labor market. This solicitation is intended to fund Projects that create and/or expand the capacity of d…</summary>
+    <summary>NYSERDA | Closes 2026-10-06 | Through this funding opportunity the New York State Energy Research and Development Authority (NYSERDA) seeks to work with labor organizations and registered pre-apprenticeship programs across the State, to grow a diverse, equitable, and inclusive pipeline of skilled talent for the clean energy labor market. This solicitation is intended to fund Projects that create and/or expand the capacity of d…</summary>
   </entry>
   <entry>
     <title>Disadvantaged Communities (DAC) Consultant Pool</title>
@@ -89,7 +89,7 @@
     <id>urn:funding-finder:nyserda:nyserda%3ARFQL4922</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
-    <summary>NYSERDA — Closes 2026-10-23 — NYSERDA is seeking to expand the existing pool of qualified Community-Based Organizations (CBOs) and other entities, including Indigenous Nations and Indigenous-led Organizations, that represent New York State’s disadvantaged communities (DAC), herein referred to “DAC Consultants.” DAC Consultants participating in this pool will execute contracts with NYSERDA to provide support across multiple pro…</summary>
+    <summary>NYSERDA | Closes 2026-10-23 | NYSERDA is seeking to expand the existing pool of qualified Community-Based Organizations (CBOs) and other entities, including Indigenous Nations and Indigenous-led Organizations, that represent New York State’s disadvantaged communities (DAC), herein referred to “DAC Consultants.” DAC Consultants participating in this pool will execute contracts with NYSERDA to provide support across multiple pro…</summary>
   </entry>
   <entry>
     <title>Upstate Through Wall Heat Pump Demonstration Program</title>
@@ -99,7 +99,7 @@
     <author><name>NYSERDA</name></author>
     <category term="Energy"/>
     <category term="Manufacturing"/>
-    <summary>NYSERDA — Closes 2026-10-29 — The New York State Energy Research and Development Authority (NYSERDA) is seeking applications from owners, managers, or operators of multifamily buildings to serve as demonstration host sites for Packaged Terminal Heat Pumps (PTHPs) through the Clean Heat for All: Room Heat Pump Program. Eligible buildings must contain at least five (5) dwelling units, be located in New York State counties within…</summary>
+    <summary>NYSERDA | Closes 2026-10-29 | The New York State Energy Research and Development Authority (NYSERDA) is seeking applications from owners, managers, or operators of multifamily buildings to serve as demonstration host sites for Packaged Terminal Heat Pumps (PTHPs) through the Clean Heat for All: Room Heat Pump Program. Eligible buildings must contain at least five (5) dwelling units, be located in New York State counties within…</summary>
   </entry>
   <entry>
     <title>Appliance Upgrade Program- Application for Retailer and Contractor Enrollment</title>
@@ -108,7 +108,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Energy"/>
-    <summary>NYSERDA — Closes 2026-12-31 — Seeks to establish a network of Participating Retailers and Contractors, as part of the Appliance Upgrade Program, to sell (retailers) and install (contractors) ENERGY STAR® certified heat pump dryers (including all-in-one washer-dryers with a heat pump dryer). The Appliance Upgrade Program will provide New York households below the 150% AMI (State’s Area Median Income) with rebates for these appl…</summary>
+    <summary>NYSERDA | Closes 2026-12-31 | Seeks to establish a network of Participating Retailers and Contractors, as part of the Appliance Upgrade Program, to sell (retailers) and install (contractors) ENERGY STAR® certified heat pump dryers (including all-in-one washer-dryers with a heat pump dryer). The Appliance Upgrade Program will provide New York households below the 150% AMI (State’s Area Median Income) with rebates for these appl…</summary>
   </entry>
   <entry>
     <title>Charge Ready NY 2.0</title>
@@ -116,7 +116,7 @@
     <id>urn:funding-finder:nyserda:nyserda%3APON5367</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
-    <summary>NYSERDA — Closes 2026-12-31 — Charge Ready NY 2.0 (PON 5367) is an incentive program that provides $3,000 per charging port installed at a workplace or multi-unit dwelling (MUD) location, and $4,000 per charging port installed within a Disadvantaged Community (DAC). Completion of the installation of charging equipment and the provision of appropriate documentation are required. Public and private (for-profit and not-for-profit…</summary>
+    <summary>NYSERDA | Closes 2026-12-31 | Charge Ready NY 2.0 (PON 5367) is an incentive program that provides $3,000 per charging port installed at a workplace or multi-unit dwelling (MUD) location, and $4,000 per charging port installed within a Disadvantaged Community (DAC). Completion of the installation of charging equipment and the provision of appropriate documentation are required. Public and private (for-profit and not-for-profit…</summary>
   </entry>
   <entry>
     <title>Charge Ready NY 2.0 Equipment and Network Qualification Process</title>
@@ -125,7 +125,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Transportation"/>
-    <summary>NYSERDA — Closes 2026-12-31 — Establishes a list of Level 2 electric vehicle (EV) charging equipment and networks that will be eligible for incentives under the upcoming Charge Ready NY 2.0 Program. Under the Program, interested applicants will be able to receive incentives for the installation of eligible charging equipment. Charging station vendors will submit applications to determine eligibility of one or more models of ch…</summary>
+    <summary>NYSERDA | Closes 2026-12-31 | Establishes a list of Level 2 electric vehicle (EV) charging equipment and networks that will be eligible for incentives under the upcoming Charge Ready NY 2.0 Program. Under the Program, interested applicants will be able to receive incentives for the installation of eligible charging equipment. Charging station vendors will submit applications to determine eligibility of one or more models of ch…</summary>
   </entry>
   <entry>
     <title>Municipal Permitting Modernization Program</title>
@@ -134,7 +134,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Education and workforce"/>
-    <summary>NYSERDA — Closes 2026-12-31 — NYSERDA PON 5862 seeks applications from NYS municipalities interested in no-cost access to Citizenserve®, software, a browser-based Software-as-a-Service (SaaS) platform for building plan approval (“Program Software”), including a subscription, support, and training for two years. For the purposes of this PON, the term “municipality” refers to cities, towns, villages and counties in New York Stat…</summary>
+    <summary>NYSERDA | Closes 2026-12-31 | NYSERDA PON 5862 seeks applications from NYS municipalities interested in no-cost access to Citizenserve®, software, a browser-based Software-as-a-Service (SaaS) platform for building plan approval (“Program Software”), including a subscription, support, and training for two years. For the purposes of this PON, the term “municipality” refers to cities, towns, villages and counties in New York Stat…</summary>
   </entry>
   <entry>
     <title>New York State Flexible Energy Technical Analysis</title>
@@ -144,7 +144,7 @@
     <author><name>NYSERDA</name></author>
     <category term="Energy"/>
     <category term="Environmental science"/>
-    <summary>NYSERDA — Closes 2026-12-31 — Establishes a pool of consulting firms qualified to provide NYSERDA with diverse technical, energy, economic, and environmental analytical capacity, some of which may be requests for support services on short notice.</summary>
+    <summary>NYSERDA | Closes 2026-12-31 | Establishes a pool of consulting firms qualified to provide NYSERDA with diverse technical, energy, economic, and environmental analytical capacity, some of which may be requests for support services on short notice.</summary>
   </entry>
   <entry>
     <title>Owner's Representative Services for Multifamily Buildings</title>
@@ -153,7 +153,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Climate change"/>
-    <summary>NYSERDA — Closes 2026-12-31 — The Owner’s Representative Services for Multifamily Buildings Program provides incentives to multifamily owners and managers of under-resourced multifamily buildings, for technical assistance and support services to advance efficiency and decarbonization projects.</summary>
+    <summary>NYSERDA | Closes 2026-12-31 | The Owner’s Representative Services for Multifamily Buildings Program provides incentives to multifamily owners and managers of under-resourced multifamily buildings, for technical assistance and support services to advance efficiency and decarbonization projects.</summary>
   </entry>
   <entry>
     <title>Window Heat Pump Demonstration Program - Phase I</title>
@@ -162,7 +162,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Manufacturing"/>
-    <summary>NYSERDA — Closes 2027-06-30 — NYSERDA’s Clean Heat for All: Packaged Window Heat Pump Demonstration Program provides up to $10 million in incentives to support the installation and performance monitoring of cold-climate packaged window heat pumps (PWHPs) in multifamily buildings across New York State. Through a two-phase structure, the Program qualifies manufacturers and vendors whose PWHP products meet technical and installat…</summary>
+    <summary>NYSERDA | Closes 2027-06-30 | NYSERDA’s Clean Heat for All: Packaged Window Heat Pump Demonstration Program provides up to $10 million in incentives to support the installation and performance monitoring of cold-climate packaged window heat pumps (PWHPs) in multifamily buildings across New York State. Through a two-phase structure, the Program qualifies manufacturers and vendors whose PWHP products meet technical and installat…</summary>
   </entry>
   <entry>
     <title>Window Heat Pump Demonstration Program - Phase II</title>
@@ -171,7 +171,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Manufacturing"/>
-    <summary>NYSERDA — Closes 2027-06-30 — NYSERDA’s Clean Heat for All: Packaged Window Heat Pump Demonstration Program provides up to $10 million in incentives to support the installation and performance monitoring of cold-climate packaged window heat pumps (PWHPs) in multifamily buildings across New York State. Through a two-phase structure, the Program qualifies manufacturers and vendors whose PWHP products meet technical and installat…</summary>
+    <summary>NYSERDA | Closes 2027-06-30 | NYSERDA’s Clean Heat for All: Packaged Window Heat Pump Demonstration Program provides up to $10 million in incentives to support the installation and performance monitoring of cold-climate packaged window heat pumps (PWHPs) in multifamily buildings across New York State. Through a two-phase structure, the Program qualifies manufacturers and vendors whose PWHP products meet technical and installat…</summary>
   </entry>
   <entry>
     <title>Port Infrastructure</title>
@@ -180,7 +180,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Transportation"/>
-    <summary>NYSERDA — Closes 2027-11-04 — Supporting maritime port development and improvement projects at existing New York State ports, NYSERDA seeks to competitively select and fund proposals through Request for Proposals (RFP) 6041. The program will invest in New York State’s existing ports to increase the capability for New York to support the offshore wind industry while also having multi-use purposes. Investing in ports capable of …</summary>
+    <summary>NYSERDA | Closes 2027-11-04 | Supporting maritime port development and improvement projects at existing New York State ports, NYSERDA seeks to competitively select and fund proposals through Request for Proposals (RFP) 6041. The program will invest in New York State’s existing ports to increase the capability for New York to support the offshore wind industry while also having multi-use purposes. Investing in ports capable of …</summary>
   </entry>
   <entry>
     <title>Community Decarbonization Fund - Financing for Disadvantaged Community Lenders</title>
@@ -191,7 +191,7 @@
     <category term="Climate change"/>
     <category term="Community development"/>
     <category term="Energy"/>
-    <summary>NYSERDA — Closes 2027-12-31 — NY Green Bank’s RFP 23 for the Community Decarbonization Fund invites regulated and unregulated financial entities (including but not limited to community development financial institutions (CDFIs), insured credit unions and depository institutions, and not-for-profit corporations that perform lending activities) deploying capital into clean energy and sustainable infrastructure and related small …</summary>
+    <summary>NYSERDA | Closes 2027-12-31 | NY Green Bank’s RFP 23 for the Community Decarbonization Fund invites regulated and unregulated financial entities (including but not limited to community development financial institutions (CDFIs), insured credit unions and depository institutions, and not-for-profit corporations that perform lending activities) deploying capital into clean energy and sustainable infrastructure and related small …</summary>
   </entry>
   <entry>
     <title>Grid Modernization Grid Enhancing Technologies</title>
@@ -201,7 +201,7 @@
     <author><name>NYSERDA</name></author>
     <category term="Energy"/>
     <category term="Transportation"/>
-    <summary>NYSERDA — Closes 2029-11-19 — Helping to achieve a modernized energy grid, investments in Grid Enhancing Technologies (GETs) roll up to meet New York State’s clean energy goals. Up to $3 million per project is available in Program Opportunity Notice (PON) 6149 to promote product developments and demonstrations that work together to advance the transition of New York State’s electric grid to cleaner resources.</summary>
+    <summary>NYSERDA | Closes 2029-11-19 | Helping to achieve a modernized energy grid, investments in Grid Enhancing Technologies (GETs) roll up to meet New York State’s clean energy goals. Up to $3 million per project is available in Program Opportunity Notice (PON) 6149 to promote product developments and demonstrations that work together to advance the transition of New York State’s electric grid to cleaner resources.</summary>
   </entry>
   <entry>
     <title>Affordable Solar and Storage Predevelopment and Technical Assistance</title>
@@ -210,7 +210,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Energy"/>
-    <summary>NYSERDA — Closes 2029-12-31 — Affordable Solar and Storage Predevelopment and Technical Assistance will provide grants to address barriers for solar and/or storage installations serving low-to-moderate income (LMI) households living in rental housing, multifamily buildings, or other households not served by traditional onsite residential solar/storage. Individual awards will not exceed $200,000. Funding to proposals through th…</summary>
+    <summary>NYSERDA | Closes 2029-12-31 | Affordable Solar and Storage Predevelopment and Technical Assistance will provide grants to address barriers for solar and/or storage installations serving low-to-moderate income (LMI) households living in rental housing, multifamily buildings, or other households not served by traditional onsite residential solar/storage. Individual awards will not exceed $200,000. Funding to proposals through th…</summary>
   </entry>
   <entry>
     <title>Clean Energy Training Services</title>
@@ -223,7 +223,7 @@
     <category term="Energy"/>
     <category term="Health equity"/>
     <category term="Transportation"/>
-    <summary>NYSERDA — Closes 2029-12-31 — NYSERDA is looking to establish a pool of contractors qualified to deliver training, develop curriculum and/or training tools, and provide market expertise and/or other services related to clean energy workforce development and training. Qualified contractors will have experience in one or more of the following categories: building decarbonization and energy efficiency, renewable energy, grid mode…</summary>
+    <summary>NYSERDA | Closes 2029-12-31 | NYSERDA is looking to establish a pool of contractors qualified to deliver training, develop curriculum and/or training tools, and provide market expertise and/or other services related to clean energy workforce development and training. Qualified contractors will have experience in one or more of the following categories: building decarbonization and energy efficiency, renewable energy, grid mode…</summary>
   </entry>
   <entry>
     <title>The New York Truck-Voucher Incentive Program</title>
@@ -233,7 +233,7 @@
     <author><name>NYSERDA</name></author>
     <category term="Manufacturing"/>
     <category term="Transportation"/>
-    <summary>NYSERDA — Closes 2029-12-31 — Helps fleet owners in New York State afford clean vehicle technologies that are quiet, efficient and do not emit harmful pollutants or carbon. NYTVIP provides point-of-sale vouchers to fleet owners that purchase or lease zero emission Class 3-8 vehicles, non-road equipment, and transit buses. Information about how fleets, dealers, and manufacturers can participate in NYTVIP can be found in the Imp…</summary>
+    <summary>NYSERDA | Closes 2029-12-31 | Helps fleet owners in New York State afford clean vehicle technologies that are quiet, efficient and do not emit harmful pollutants or carbon. NYTVIP provides point-of-sale vouchers to fleet owners that purchase or lease zero emission Class 3-8 vehicles, non-road equipment, and transit buses. Information about how fleets, dealers, and manufacturers can participate in NYTVIP can be found in the Imp…</summary>
   </entry>
   <entry>
     <title>Financing Arrangements for High-Performance Affordable Housing</title>
@@ -243,7 +243,7 @@
     <author><name>NYSERDA</name></author>
     <category term="Energy"/>
     <category term="Manufacturing"/>
-    <summary>NYSERDA — Closes 2030-05-01 — NY Green Bank’s RFP 18 invites property owners and developers, energy service companies and equipment manufacturers, capital providers, and other market participants to submit proposals for NYGB investment in the construction or retrofit of multifamily affordable housing to high levels of energy performance in New York State.</summary>
+    <summary>NYSERDA | Closes 2030-05-01 | NY Green Bank’s RFP 18 invites property owners and developers, energy service companies and equipment manufacturers, capital providers, and other market participants to submit proposals for NYGB investment in the construction or retrofit of multifamily affordable housing to high levels of energy performance in New York State.</summary>
   </entry>
   <entry>
     <title>Technical Skills Training and Upskilling</title>
@@ -254,7 +254,7 @@
     <category term="Education and workforce"/>
     <category term="Energy"/>
     <category term="Transportation"/>
-    <summary>NYSERDA — Closes 2030-09-30 — Funding is available to build and expand training capacity that advances skills and knowledge for clean energy workers in the areas of energy efficiency and building electrification, renewable energy, energy storage, smart grid, and electric vehicle charging stations. This solicitation may also support the enhancement of clean energy content delivered to students enrolled in a degree or certificat…</summary>
+    <summary>NYSERDA | Closes 2030-09-30 | Funding is available to build and expand training capacity that advances skills and knowledge for clean energy workers in the areas of energy efficiency and building electrification, renewable energy, energy storage, smart grid, and electric vehicle charging stations. This solicitation may also support the enhancement of clean energy content delivered to students enrolled in a degree or certificat…</summary>
   </entry>
   <entry>
     <title>On-the-Job Training for Energy Efficiency and Clean Technology</title>
@@ -264,7 +264,7 @@
     <author><name>NYSERDA</name></author>
     <category term="Education and workforce"/>
     <category term="Energy"/>
-    <summary>NYSERDA — Closes 2030-12-02 — The New York State Energy Research and Development Authority (NYSERDA) will provide incentives to eligible energy efficiency and clean technology employers to hire and provide on-the-job training for new workers. NYSERDA’s intent for this is to advance the state’s energy goals by developing a workforce equipped to perform jobs in energy efficiency and clean technology.</summary>
+    <summary>NYSERDA | Closes 2030-12-02 | The New York State Energy Research and Development Authority (NYSERDA) will provide incentives to eligible energy efficiency and clean technology employers to hire and provide on-the-job training for new workers. NYSERDA’s intent for this is to advance the state’s energy goals by developing a workforce equipped to perform jobs in energy efficiency and clean technology.</summary>
   </entry>
   <entry>
     <title>Clean Energy Financing Arrangements</title>
@@ -273,7 +273,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Energy"/>
-    <summary>NYSERDA — Closes 2030-12-30 — NY Green Bank invites private sector capital providers and other clean energy industry participants to propose transactions involving NY Green Bank that facilitate the financing of clean energy projects in New York State, consistent with its mandate, mission and priorities in addressing financing market gaps and barriers.</summary>
+    <summary>NYSERDA | Closes 2030-12-30 | NY Green Bank invites private sector capital providers and other clean energy industry participants to propose transactions involving NY Green Bank that facilitate the financing of clean energy projects in New York State, consistent with its mandate, mission and priorities in addressing financing market gaps and barriers.</summary>
   </entry>
   <entry>
     <title>New York School Bus Incentive Program</title>
@@ -283,7 +283,7 @@
     <author><name>NYSERDA</name></author>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
-    <summary>NYSERDA — Closes 2030-12-30 — The New York School Bus Incentive Program (NYSBIP) is a voucher incentive program to accelerate the deployment of zero-emission school buses and associated charging infrastructure throughout New York State using funds allocated by the 2022 Clean Water, Clean Air, and Green Jobs Environmental Bond Act (Bond Act). More information about how fleets, dealers, and manufacturers can participate in NYSBI…</summary>
+    <summary>NYSERDA | Closes 2030-12-30 | The New York School Bus Incentive Program (NYSBIP) is a voucher incentive program to accelerate the deployment of zero-emission school buses and associated charging infrastructure throughout New York State using funds allocated by the 2022 Clean Water, Clean Air, and Green Jobs Environmental Bond Act (Bond Act). More information about how fleets, dealers, and manufacturers can participate in NYSBI…</summary>
   </entry>
   <entry>
     <title>Affordable Multifamily Program Upstate</title>
@@ -292,7 +292,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Energy"/>
-    <summary>NYSERDA — Closes 2030-12-31 — Provides technical assistance and financial incentives to support retrofits in low-to moderate-income (LMI) multifamily buildings in upstate New York under the LMI Energy Efficiency and Building Electrification (EE/BE) Order from 2026-2030.</summary>
+    <summary>NYSERDA | Closes 2030-12-31 | Provides technical assistance and financial incentives to support retrofits in low-to moderate-income (LMI) multifamily buildings in upstate New York under the LMI Energy Efficiency and Building Electrification (EE/BE) Order from 2026-2030.</summary>
   </entry>
   <entry>
     <title>FlexTech Program</title>
@@ -301,7 +301,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Energy"/>
-    <summary>NYSERDA — Closes 2030-12-31 — The Flexible Technical Assistance (FlexTech) Program supports New York State commercial, industrial, institutional, and multifamily customers who pay into the Systems Benefit Charge by providing a cost-share for credible, objective technical assistance services, such as energy audits, that help businesses make more informed energy decisions.</summary>
+    <summary>NYSERDA | Closes 2030-12-31 | The Flexible Technical Assistance (FlexTech) Program supports New York State commercial, industrial, institutional, and multifamily customers who pay into the Systems Benefit Charge by providing a cost-share for credible, objective technical assistance services, such as energy audits, that help businesses make more informed energy decisions.</summary>
   </entry>
   <entry>
     <title>Multifamily Contractor Network</title>
@@ -310,7 +310,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Energy"/>
-    <summary>NYSERDA — Closes 2030-12-31 — Establishes a network of highly qualified firms who work directly with developers, building owners, and their representatives to plan and implement energy efficiency and beneficial electrification projects for Multifamily Residential programs.</summary>
+    <summary>NYSERDA | Closes 2030-12-31 | Establishes a network of highly qualified firms who work directly with developers, building owners, and their representatives to plan and implement energy efficiency and beneficial electrification projects for Multifamily Residential programs.</summary>
   </entry>
   <entry>
     <title>NY-Sun Commercial / Industrial Incentive Program</title>
@@ -319,7 +319,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Energy"/>
-    <summary>NYSERDA — Closes 2030-12-31 — The NY-Sun Program provides cash incentives for the installation by Contractors of new grid-connected electric photovoltaic (PV) systems that range from 750kW to 7.5MW in the Upstate region. Incentives are granted on a first-come, first-served basis and PV project applications will be accepted through December 31, 2030, or until funds are fully committed, whichever comes first. Total incentives av…</summary>
+    <summary>NYSERDA | Closes 2030-12-31 | The NY-Sun Program provides cash incentives for the installation by Contractors of new grid-connected electric photovoltaic (PV) systems that range from 750kW to 7.5MW in the Upstate region. Incentives are granted on a first-come, first-served basis and PV project applications will be accepted through December 31, 2030, or until funds are fully committed, whichever comes first. Total incentives av…</summary>
   </entry>
   <entry>
     <title>NY-Sun Residential/Nonresidential Incentive Program</title>
@@ -328,7 +328,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Energy"/>
-    <summary>NYSERDA — Closes 2030-12-31 — The NY-Sun Program provides cash incentives for the installation of new grid-connected electric photovoltaic (PV) systems for residential and nonresidential sites completed by Contractors and Builders. Incentives are granted on a first-come, first-served basis, and PV project applications will be accepted through December 31, 2030, or until funds are fully committed, whichever comes first. Total i…</summary>
+    <summary>NYSERDA | Closes 2030-12-31 | The NY-Sun Program provides cash incentives for the installation of new grid-connected electric photovoltaic (PV) systems for residential and nonresidential sites completed by Contractors and Builders. Incentives are granted on a first-come, first-served basis, and PV project applications will be accepted through December 31, 2030, or until funds are fully committed, whichever comes first. Total i…</summary>
   </entry>
   <entry>
     <title>On-site Energy Manager Program</title>
@@ -337,7 +337,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Energy"/>
-    <summary>NYSERDA — Closes 2030-12-31 — Offers a cost-share for industrial, commercial, and multifamily facilities or buildings to hire a dedicated, full-time or part-time on-site energy manager. Energy managers are responsible for creating efficient processes that decrease cost and waste—helping organizations lower operational costs, reduce maintenance time, and create comfortable, safe facilities.</summary>
+    <summary>NYSERDA | Closes 2030-12-31 | Offers a cost-share for industrial, commercial, and multifamily facilities or buildings to hire a dedicated, full-time or part-time on-site energy manager. Energy managers are responsible for creating efficient processes that decrease cost and waste-helping organizations lower operational costs, reduce maintenance time, and create comfortable, safe facilities.</summary>
   </entry>
   <entry>
     <title>Residential and Retail Energy Storage Market Acceleration Incentives Programs</title>
@@ -346,7 +346,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Energy"/>
-    <summary>NYSERDA — Closes 2030-12-31 — The Residential and Retail Energy Storage Market Acceleration Incentives Program provides financial incentives for the installation of new grid-connected distributed energy storage systems by participating contractors. Incentives are structured as fixed-rate incentives per kWh of system energy capacity and are available on a standard offer first-come, first-served basis. The Program includes marke…</summary>
+    <summary>NYSERDA | Closes 2030-12-31 | The Residential and Retail Energy Storage Market Acceleration Incentives Program provides financial incentives for the installation of new grid-connected distributed energy storage systems by participating contractors. Incentives are structured as fixed-rate incentives per kWh of system energy capacity and are available on a standard offer first-come, first-served basis. The Program includes marke…</summary>
   </entry>
   <entry>
     <title>Revolving Loan Fund</title>
@@ -356,6 +356,6 @@
     <author><name>NYSERDA</name></author>
     <category term="Climate change"/>
     <category term="Energy"/>
-    <summary>NYSERDA — Closes 2030-12-31 — The New York State Energy Research and Development Authority (NYSERDA) requests applications from qualified contractors to utilize the Department of Energy - Energy Efficiency Revolving Loan Fund (DOE-EERLF) funds for projects financed by single family residential customers. NYSERDA has established a new revolving loan fund intended to spur investment in energy efficiency and decarbonization measu…</summary>
+    <summary>NYSERDA | Closes 2030-12-31 | The New York State Energy Research and Development Authority (NYSERDA) requests applications from qualified contractors to utilize the Department of Energy - Energy Efficiency Revolving Loan Fund (DOE-EERLF) funds for projects financed by single family residential customers. NYSERDA has established a new revolving loan fund intended to spur investment in energy efficiency and decarbonization measu…</summary>
   </entry>
 </feed>

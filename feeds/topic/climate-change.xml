@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Funding Finder — Climate change</title>
+  <title>Funding Finder | Climate change</title>
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/climate-change.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/climate-change.xml</id>
@@ -18,7 +18,7 @@
     <category term="Technology development"/>
     <category term="Carbon management"/>
     <category term="Climate change"/>
-    <summary>Golden Field Office — Closes 2027-01-15 — The U.S Department of Energy (DOE)’s Office of Critical Minerals and Energy Innovation (CMEI) intends to establish, on behalf of the Analysis and Strategy Office (ASO), the PROSPECT Program—Providing Opportunities for Specialized Education in Critical Technologies—and anticipates investing up to $100 million, subject to the availability of appropriated funds, to strengthen the nation's educational…</summary>
+    <summary>Golden Field Office | Closes 2027-01-15 | The U.S Department of Energy (DOE)’s Office of Critical Minerals and Energy Innovation (CMEI) intends to establish, on behalf of the Analysis and Strategy Office (ASO), the PROSPECT Program-Providing Opportunities for Specialized Education in Critical Technologies-and anticipates investing up to $100 million, subject to the availability of appropriated funds, to strengthen the nation's educational…</summary>
   </entry>
   <entry>
     <title>Clean Green Schools Initiative</title>
@@ -30,7 +30,7 @@
     <category term="Education and workforce"/>
     <category term="Energy"/>
     <category term="Environmental science"/>
-    <summary>NYSERDA — Closes 2026-08-18 — The P-12 Schools: Clean Green Schools Initiative is available to help public schools that traditionally lack resources to invest in infrastructure improvements become healthier, more productive learning environments. The program provides funding for schools to implement construction projects that decarbonize their building portfolio and enhance extreme heat resilience, such as comprehensive retrof…</summary>
+    <summary>NYSERDA | Closes 2026-08-18 | The P-12 Schools: Clean Green Schools Initiative is available to help public schools that traditionally lack resources to invest in infrastructure improvements become healthier, more productive learning environments. The program provides funding for schools to implement construction projects that decarbonize their building portfolio and enhance extreme heat resilience, such as comprehensive retrof…</summary>
   </entry>
   <entry>
     <title>Net-Zero Resilience Preparation for Municipal and Rural Electric Providers</title>
@@ -39,7 +39,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Climate change"/>
-    <summary>NYSERDA — Closes 2026-08-24 — Municipal electric utilities and rural electric cooperatives across New York State play a critical role in the areas they cover. The combined dynamics of a changing climate and the effects of decarbonization present a set of new operating considerations to continue to provide resilient and reliable services. Through RFP 6129, NYSERDA seeks to support the rapid decarbonization and increased resilie…</summary>
+    <summary>NYSERDA | Closes 2026-08-24 | Municipal electric utilities and rural electric cooperatives across New York State play a critical role in the areas they cover. The combined dynamics of a changing climate and the effects of decarbonization present a set of new operating considerations to continue to provide resilient and reliable services. Through RFP 6129, NYSERDA seeks to support the rapid decarbonization and increased resilie…</summary>
   </entry>
   <entry>
     <title>Owner's Representative Services for Multifamily Buildings</title>
@@ -48,7 +48,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Climate change"/>
-    <summary>NYSERDA — Closes 2026-12-31 — The Owner’s Representative Services for Multifamily Buildings Program provides incentives to multifamily owners and managers of under-resourced multifamily buildings, for technical assistance and support services to advance efficiency and decarbonization projects.</summary>
+    <summary>NYSERDA | Closes 2026-12-31 | The Owner’s Representative Services for Multifamily Buildings Program provides incentives to multifamily owners and managers of under-resourced multifamily buildings, for technical assistance and support services to advance efficiency and decarbonization projects.</summary>
   </entry>
   <entry>
     <title>Community Decarbonization Fund - Financing for Disadvantaged Community Lenders</title>
@@ -59,7 +59,7 @@
     <category term="Climate change"/>
     <category term="Community development"/>
     <category term="Energy"/>
-    <summary>NYSERDA — Closes 2027-12-31 — NY Green Bank’s RFP 23 for the Community Decarbonization Fund invites regulated and unregulated financial entities (including but not limited to community development financial institutions (CDFIs), insured credit unions and depository institutions, and not-for-profit corporations that perform lending activities) deploying capital into clean energy and sustainable infrastructure and related small …</summary>
+    <summary>NYSERDA | Closes 2027-12-31 | NY Green Bank’s RFP 23 for the Community Decarbonization Fund invites regulated and unregulated financial entities (including but not limited to community development financial institutions (CDFIs), insured credit unions and depository institutions, and not-for-profit corporations that perform lending activities) deploying capital into clean energy and sustainable infrastructure and related small …</summary>
   </entry>
   <entry>
     <title>Clean Energy Training Services</title>
@@ -72,7 +72,7 @@
     <category term="Energy"/>
     <category term="Health equity"/>
     <category term="Transportation"/>
-    <summary>NYSERDA — Closes 2029-12-31 — NYSERDA is looking to establish a pool of contractors qualified to deliver training, develop curriculum and/or training tools, and provide market expertise and/or other services related to clean energy workforce development and training. Qualified contractors will have experience in one or more of the following categories: building decarbonization and energy efficiency, renewable energy, grid mode…</summary>
+    <summary>NYSERDA | Closes 2029-12-31 | NYSERDA is looking to establish a pool of contractors qualified to deliver training, develop curriculum and/or training tools, and provide market expertise and/or other services related to clean energy workforce development and training. Qualified contractors will have experience in one or more of the following categories: building decarbonization and energy efficiency, renewable energy, grid mode…</summary>
   </entry>
   <entry>
     <title>Revolving Loan Fund</title>
@@ -82,7 +82,7 @@
     <author><name>NYSERDA</name></author>
     <category term="Climate change"/>
     <category term="Energy"/>
-    <summary>NYSERDA — Closes 2030-12-31 — The New York State Energy Research and Development Authority (NYSERDA) requests applications from qualified contractors to utilize the Department of Energy - Energy Efficiency Revolving Loan Fund (DOE-EERLF) funds for projects financed by single family residential customers. NYSERDA has established a new revolving loan fund intended to spur investment in energy efficiency and decarbonization measu…</summary>
+    <summary>NYSERDA | Closes 2030-12-31 | The New York State Energy Research and Development Authority (NYSERDA) requests applications from qualified contractors to utilize the Department of Energy - Energy Efficiency Revolving Loan Fund (DOE-EERLF) funds for projects financed by single family residential customers. NYSERDA has established a new revolving loan fund intended to spur investment in energy efficiency and decarbonization measu…</summary>
   </entry>
   <entry>
     <title>Southwest Border Resource Protection Program</title>
@@ -94,7 +94,7 @@
     <category term="Climate change"/>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
-    <summary>National Park Service — Closes 2026-09-08 — The Southwest Border Resource Protection Program (SWBRPP) provides financial assistance to National Park Service (NPS) units, as well as educational institutions, nonprofit organizations, tribes, and local and state agencies to improve resource stewardship, achieve international cooperation, provide meaningful interpretation and conduct scientific research, which will lead to increased appreciatio…</summary>
+    <summary>National Park Service | Closes 2026-09-08 | The Southwest Border Resource Protection Program (SWBRPP) provides financial assistance to National Park Service (NPS) units, as well as educational institutions, nonprofit organizations, tribes, and local and state agencies to improve resource stewardship, achieve international cooperation, provide meaningful interpretation and conduct scientific research, which will lead to increased appreciatio…</summary>
   </entry>
   <entry>
     <title>INSPIRING GENERATIONS OF NEW INNOVATORS TO IMPACT TECHNOLOGIES IN ENERGY 2026 (IGNIITE 2026)</title>
@@ -109,7 +109,7 @@
     <category term="Manufacturing"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Advanced Research Projects Agency Energy — Closes 2026-08-26 — This is Modification 01 to the NOFO: Inserted certain deadlines and updated dates, including the deadlines for submitting questions and Full Applications (Basic Information, Section IV.C, Section IV.D) NOFO number DE-FOA-0003624 INSPIRING GENERATIONS OF NEW INNOVATORS TO IMPACT TECHNOLOGIES IN ENERGY 2026 (IGNIITE 2026) To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to ARPA…</summary>
+    <summary>Advanced Research Projects Agency Energy | Closes 2026-08-26 | This is Modification 01 to the NOFO: Inserted certain deadlines and updated dates, including the deadlines for submitting questions and Full Applications (Basic Information, Section IV.C, Section IV.D) NOFO number DE-FOA-0003624 INSPIRING GENERATIONS OF NEW INNOVATORS TO IMPACT TECHNOLOGIES IN ENERGY 2026 (IGNIITE 2026) To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to ARPA…</summary>
   </entry>
   <entry>
     <title>FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
@@ -125,7 +125,7 @@
     <category term="Separations and membranes"/>
     <category term="Quantum science"/>
     <category term="Data science"/>
-    <summary>Office of Science — Closes 2026-09-30 — The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
+    <summary>Office of Science | Closes 2026-09-30 | The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
   </entry>
   <entry>
     <title>Mind, Machine and Motor Nexus</title>
@@ -141,8 +141,8 @@
     <category term="Data science"/>
     <category term="Energy"/>
     <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation — Posted — The Mind, Machine, and Motor Nexus (M3X) program supports fundamental research that enables intelligent engineered systems and humans to engage in bidirectional interaction in a physics-based environment, to enhance and ensure safety, productivity, and well-being.
-For the purpose of this program an intelligent engineered system is a human-designed system — physical, virtual, or a combination of bo…</summary>
+    <summary>U.S. National Science Foundation | Posted | The Mind, Machine, and Motor Nexus (M3X) program supports fundamental research that enables intelligent engineered systems and humans to engage in bidirectional interaction in a physics-based environment, to enhance and ensure safety, productivity, and well-being.
+For the purpose of this program an intelligent engineered system is a human-designed system - physical, virtual, or a combination of bo…</summary>
   </entry>
   <entry>
     <title>SEEDING CRITICAL ADVANCES FOR LEADING ENERGY TECHNOLOGIES WITH UNTAPPED POTENTIAL (SCALEUP) READY</title>
@@ -155,7 +155,7 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Energy"/>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
-    <summary>Advanced Research Projects Agency Energy — Closes 2029-09-29 — The purpose of this modification is to clarify the meaning of the Program Policy Factors in Section V.C. To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to the ARPA-E website at https://arpa-e-foa.energy.gov. To apply to this NOFO, Applicants must register with and submit application materials through ARPA-E eXCHANGE (https://arpa-e-foa.energy.gov/Registration.aspx). For det…</summary>
+    <summary>Advanced Research Projects Agency Energy | Closes 2029-09-29 | The purpose of this modification is to clarify the meaning of the Program Policy Factors in Section V.C. To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to the ARPA-E website at https://arpa-e-foa.energy.gov. To apply to this NOFO, Applicants must register with and submit application materials through ARPA-E eXCHANGE (https://arpa-e-foa.energy.gov/Registration.aspx). For det…</summary>
   </entry>
   <entry>
     <title>Geospace Cluster</title>
@@ -170,7 +170,7 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Technology development"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>U.S. National Science Foundation — Posted — The Geospace Cluster (GC) in the Division of Atmospheric and Geospace Sciences (AGS) supports fundamental and solutions-oriented research, technology development and education related to the Earth's near-space environment (including the mesosphere, thermosphere, ionosphere, exosphere, magnetosphere and radiation belts) and the inner heliosphere and solar atmosphere. The GC advances knowledge of th…</summary>
+    <summary>U.S. National Science Foundation | Posted | The Geospace Cluster (GC) in the Division of Atmospheric and Geospace Sciences (AGS) supports fundamental and solutions-oriented research, technology development and education related to the Earth's near-space environment (including the mesosphere, thermosphere, ionosphere, exosphere, magnetosphere and radiation belts) and the inner heliosphere and solar atmosphere. The GC advances knowledge of th…</summary>
   </entry>
   <entry>
     <title>U.S. EMBASSY TO LIBYA PAS ANNUAL PROGRAM STATEMENT</title>
@@ -182,7 +182,7 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Climate change"/>
     <category term="Community development"/>
     <category term="Environmental science"/>
-    <summary>U.S. Mission to Tunisia — Closes 2099-01-01 — U.S. DEPARTMENT OF STATE U.S. EMBASSY TO LIBYA, PUBLIC AFFAIRS SECTION Notice of Funding Opportunity (NOFO) Funding Opportunity Title: U.S. Embassy to Libya PAS Annual Program Statement Funding Opportunity Number: PAS Tripoli FY2024 CFDA Number: 19.040 Public Diplomacy Programs Maximum for Each Award: $25,000 USD PROGRAM DESCRIPTION The U.S. Embassy Tripoli Public Affairs Section (PAS) is pleased …</summary>
+    <summary>U.S. Mission to Tunisia | Closes 2099-01-01 | U.S. DEPARTMENT OF STATE U.S. EMBASSY TO LIBYA, PUBLIC AFFAIRS SECTION Notice of Funding Opportunity (NOFO) Funding Opportunity Title: U.S. Embassy to Libya PAS Annual Program Statement Funding Opportunity Number: PAS Tripoli FY2024 CFDA Number: 19.040 Public Diplomacy Programs Maximum for Each Award: $25,000 USD PROGRAM DESCRIPTION The U.S. Embassy Tripoli Public Affairs Section (PAS) is pleased …</summary>
   </entry>
   <entry>
     <title>ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)</title>
@@ -198,7 +198,7 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Energy"/>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation — Closes 2026-09-29 — Plasma science is a transdisciplinary field of research where fundamental studies in many disciplines, including plasma physics, plasma chemistry, materials science, and space science, come together to advance knowledge for discovery and technological innovation. The primary goal of the ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) program is to identify and capitali…</summary>
+    <summary>U.S. National Science Foundation | Closes 2026-09-29 | Plasma science is a transdisciplinary field of research where fundamental studies in many disciplines, including plasma physics, plasma chemistry, materials science, and space science, come together to advance knowledge for discovery and technological innovation. The primary goal of the ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) program is to identify and capitali…</summary>
   </entry>
   <entry>
     <title>Catalysis</title>
@@ -214,7 +214,7 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Energy"/>
     <category term="Environmental science"/>
     <category term="Quantum science"/>
-    <summary>U.S. National Science Foundation — Posted — The Catalysis program is part of the Chemical Process Systems cluster, which also includes: 1) the Electrochemical Systems program; 2) the Interfacial Engineering program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
+    <summary>U.S. National Science Foundation | Posted | The Catalysis program is part of the Chemical Process Systems cluster, which also includes: 1) the Electrochemical Systems program; 2) the Interfacial Engineering program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
 The goals of the Catalysis program are to increase fundamental understanding in catalytic engineering science and to advance the development…</summary>
   </entry>
   <entry>
@@ -231,7 +231,7 @@ The goals of the Catalysis program are to increase fundamental understanding in 
     <category term="Environmental science"/>
     <category term="Catalysis and reaction engineering"/>
     <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation — Posted — The Combustion and Fire Systems program is part of the Transport Phenomena cluster, which also includes 1) the Fluid Dynamics program; 2) the Particulate and Multiphase Processes program; and 3) the Thermal Transport Processes program.
+    <summary>U.S. National Science Foundation | Posted | The Combustion and Fire Systems program is part of the Transport Phenomena cluster, which also includes 1) the Fluid Dynamics program; 2) the Particulate and Multiphase Processes program; and 3) the Thermal Transport Processes program.
 The goal of the Combustion and Fire Systems program is to create new knowledge to support advances in clean energy, climate change mitigation, a cleaner environment…</summary>
   </entry>
   <entry>
@@ -248,7 +248,7 @@ The goal of the Combustion and Fire Systems program is to create new knowledge t
     <category term="Environmental science"/>
     <category term="Materials science"/>
     <category term="Transportation"/>
-    <summary>U.S. National Science Foundation — Posted — The Electrochemical Systems program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Interfacial Engineering program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
+    <summary>U.S. National Science Foundation | Posted | The Electrochemical Systems program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Interfacial Engineering program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
 The goal of the Electrochemical Systems program is to support fundamental engineering science research that will enable innovative processes…</summary>
   </entry>
   <entry>
@@ -265,7 +265,7 @@ The goal of the Electrochemical Systems program is to support fundamental engine
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <category term="Social and behavioral sciences"/>
-    <summary>U.S. National Science Foundation — Posted — The Environmental Sustainability program is part of the Environmental Engineering and Sustainability cluster together with 1) the Environmental Engineering program and 2) the Nanoscale Interactions program.
+    <summary>U.S. National Science Foundation | Posted | The Environmental Sustainability program is part of the Environmental Engineering and Sustainability cluster together with 1) the Environmental Engineering program and 2) the Nanoscale Interactions program.
 The goal of the Environmental Sustainability program is to promote sustainable engineered systems that support human well-being and that are also compatible with sustaining natural (environment…</summary>
   </entry>
   <entry>
@@ -282,7 +282,7 @@ The goal of the Environmental Sustainability program is to promote sustainable e
     <category term="Materials science"/>
     <category term="Separations and membranes"/>
     <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation — Posted — The Interfacial Engineering program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Electrochemical Systems program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
+    <summary>U.S. National Science Foundation | Posted | The Interfacial Engineering program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Electrochemical Systems program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
 The goal of the Interfacial Engineering program is to support fundamental research on atomic- and molecular-scale interfacial phenomena and …</summary>
   </entry>
   <entry>
@@ -299,7 +299,7 @@ The goal of the Interfacial Engineering program is to support fundamental resear
     <category term="Separations and membranes"/>
     <category term="Catalysis and reaction engineering"/>
     <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation — Posted — The Particulate and Multiphase Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Thermal Transport Processes program.
+    <summary>U.S. National Science Foundation | Posted | The Particulate and Multiphase Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Thermal Transport Processes program.
 The goal of the Particulate and Multiphase Processes program is to support fundamental research on physico-chemical phenomena that govern particulate and multiphase…</summary>
   </entry>
   <entry>
@@ -316,7 +316,7 @@ The goal of the Particulate and Multiphase Processes program is to support funda
     <category term="Energy"/>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation — Posted — The Thermal Transport Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Particulate and Multiphase Processes program.
+    <summary>U.S. National Science Foundation | Posted | The Thermal Transport Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Particulate and Multiphase Processes program.
 The Thermal Transport Processes program supports engineering research projects that lay the foundation for new advances in thermal transport phenomena. These projec…</summary>
   </entry>
   <entry>
@@ -328,7 +328,7 @@ The Thermal Transport Processes program supports engineering research projects t
     <category term="Climate change"/>
     <category term="Environmental science"/>
     <category term="Public health"/>
-    <summary>U.S. Mission to the United Nations — Posted — This Notice of Funding Opportunity (NOFO) outlines funding priorities, strategic areas of focus, and instructions for submitting requests for funding. Please follow all instructions carefully. Through its Small Grants Program, the United States Mission in Geneva is accepting project proposals that promote U.S. policy priorities in the multilateral sphere. Project should be aimed at international (…</summary>
+    <summary>U.S. Mission to the United Nations | Posted | This Notice of Funding Opportunity (NOFO) outlines funding priorities, strategic areas of focus, and instructions for submitting requests for funding. Please follow all instructions carefully. Through its Small Grants Program, the United States Mission in Geneva is accepting project proposals that promote U.S. policy priorities in the multilateral sphere. Project should be aimed at international (…</summary>
   </entry>
   <entry>
     <title>Foundational Research in Robotics</title>
@@ -344,7 +344,7 @@ The Thermal Transport Processes program supports engineering research projects t
     <category term="Manufacturing"/>
     <category term="Carbon management"/>
     <category term="Climate change"/>
-    <summary>U.S. National Science Foundation — Posted — The Foundational Research in Robotics (FRR) program, jointly led by the CISE and ENG Directorates, supports research on robotic systems that exhibit significant levels of both computational capability and physical complexity. For the purposes of this program, a robot is defined as intelligence embodied in an engineered construct, with the ability to process information, sense, plan, and move withi…</summary>
+    <summary>U.S. National Science Foundation | Posted | The Foundational Research in Robotics (FRR) program, jointly led by the CISE and ENG Directorates, supports research on robotic systems that exhibit significant levels of both computational capability and physical complexity. For the purposes of this program, a robot is defined as intelligence embodied in an engineered construct, with the ability to process information, sense, plan, and move withi…</summary>
   </entry>
   <entry>
     <title>Environmental Engineering</title>
@@ -360,7 +360,7 @@ The Thermal Transport Processes program supports engineering research projects t
     <category term="Separations and membranes"/>
     <category term="Water"/>
     <category term="Catalysis and reaction engineering"/>
-    <summary>U.S. National Science Foundation — Posted — The Environmental Engineering program is part of the Environmental Engineering and Sustainability cluster, which also includes 1) the Nanoscale Interactions program; and 2) the Environmental Sustainability program.
+    <summary>U.S. National Science Foundation | Posted | The Environmental Engineering program is part of the Environmental Engineering and Sustainability cluster, which also includes 1) the Nanoscale Interactions program; and 2) the Environmental Sustainability program.
 Environmental engineering is an interdisciplinary field that applies chemical, biological, and physical scientific principles to protect human and ecological health.
 The goal of the Env…</summary>
   </entry>
@@ -378,7 +378,7 @@ The goal of the Env…</summary>
     <category term="Social and behavioral sciences"/>
     <category term="Energy"/>
     <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation — Posted — The Engineering Design and Systems Engineering (EDSE) program supports fundamental research that advances design science and/or systems science through the creation of new knowledge about the design of engineered artifacts. Engineered artifacts include, but are not limited to, devices, products, processes, platforms, materials, organizations, systems, and systems of systems. The program focuses on…</summary>
+    <summary>U.S. National Science Foundation | Posted | The Engineering Design and Systems Engineering (EDSE) program supports fundamental research that advances design science and/or systems science through the creation of new knowledge about the design of engineered artifacts. Engineered artifacts include, but are not limited to, devices, products, processes, platforms, materials, organizations, systems, and systems of systems. The program focuses on…</summary>
   </entry>
   <entry>
     <title>Engineering for Civil Infrastructure</title>
@@ -393,7 +393,7 @@ The goal of the Env…</summary>
     <category term="Water"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>U.S. National Science Foundation — Posted — The Engineering for Civil Infrastructure (ECI) program supports fundamental research in geotechnical, structural, materials, architectural, and coastal engineering. The ECI program promotes research that can shape the future of the nation’s physical civil infrastructure and that can contribute to climate change adaptation and mitigation, and hazards and disaster resilience. Types of civil infrastr…</summary>
+    <summary>U.S. National Science Foundation | Posted | The Engineering for Civil Infrastructure (ECI) program supports fundamental research in geotechnical, structural, materials, architectural, and coastal engineering. The ECI program promotes research that can shape the future of the nation’s physical civil infrastructure and that can contribute to climate change adaptation and mitigation, and hazards and disaster resilience. Types of civil infrastr…</summary>
   </entry>
   <entry>
     <title>Climate Program Office for FY 2012</title>
@@ -404,6 +404,6 @@ The goal of the Env…</summary>
     <category term="Climate change"/>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
-    <summary>Department of Commerce — Posted — Changing climate confronts society with significant economic, health, safety, and national security challenges. NOAA advances scientific and technical programs to help society cope with, and adapt to, today's variations in climate and to prepare for tomorrow's. Toward this end, the agency conducts and supports climate research, observations, modeling, information management, assessments, interdisc…</summary>
+    <summary>Department of Commerce | Posted | Changing climate confronts society with significant economic, health, safety, and national security challenges. NOAA advances scientific and technical programs to help society cope with, and adapt to, today's variations in climate and to prepare for tomorrow's. Toward this end, the agency conducts and supports climate research, observations, modeling, information management, assessments, interdisc…</summary>
   </entry>
 </feed>

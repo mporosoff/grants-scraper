@@ -109,13 +109,13 @@
             <p>Shared and complementary themes appear as interactive chips. Turn a theme off to refocus the ranking. Every displayed opportunity must have linked evidence for everyone selected.</p>
           </div>
         </div>
-        <p class="help-footnote">Results use graded research, theme, topic, agency-scope, and recency signals in one ranked list. A <strong>broad — verify fit</strong> label means an open-scope agency announcement was included with weaker evidence and deserves manual review.</p>
+            <p class="help-footnote">Results use graded research, theme, topic, agency-scope, and recency signals in one ranked list. A <strong>broad: verify fit</strong> label means an open-scope agency announcement was included with weaker evidence and deserves manual review.</p>
       </section>
 
       <section class="help-section help-api-section" id="help-api-keys">
         <div class="help-section-heading">
           <span class="help-section-number">05</span>
-          <div><h3>What an API key is—and why AI needs one</h3><p>A key is a private credential from an AI provider, not your account password.</p></div>
+              <div><h3>What an API key is and why AI needs one</h3><p>A key is a private credential from an AI provider, not your account password.</p></div>
         </div>
         <div class="help-key-explanation">
           <p>This is a static public site with no shared AI account. Your provider key authorizes optional model requests and associates any usage charges with your own API account. A key is needed only for AI terminology expansion, AI reranking, result chat, and uploaded-notice chat.</p>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Funding Finder — Carbon management</title>
+  <title>Funding Finder | Carbon management</title>
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/carbon-management.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/carbon-management.xml</id>
@@ -18,7 +18,7 @@
     <category term="Technology development"/>
     <category term="Carbon management"/>
     <category term="Climate change"/>
-    <summary>Golden Field Office — Closes 2027-01-15 — The U.S Department of Energy (DOE)’s Office of Critical Minerals and Energy Innovation (CMEI) intends to establish, on behalf of the Analysis and Strategy Office (ASO), the PROSPECT Program—Providing Opportunities for Specialized Education in Critical Technologies—and anticipates investing up to $100 million, subject to the availability of appropriated funds, to strengthen the nation's educational…</summary>
+    <summary>Golden Field Office | Closes 2027-01-15 | The U.S Department of Energy (DOE)’s Office of Critical Minerals and Energy Innovation (CMEI) intends to establish, on behalf of the Analysis and Strategy Office (ASO), the PROSPECT Program-Providing Opportunities for Specialized Education in Critical Technologies-and anticipates investing up to $100 million, subject to the availability of appropriated funds, to strengthen the nation's educational…</summary>
   </entry>
   <entry>
     <title>INSPIRING GENERATIONS OF NEW INNOVATORS TO IMPACT TECHNOLOGIES IN ENERGY 2026 (IGNIITE 2026)</title>
@@ -33,7 +33,7 @@
     <category term="Manufacturing"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Advanced Research Projects Agency Energy — Closes 2026-08-26 — This is Modification 01 to the NOFO: Inserted certain deadlines and updated dates, including the deadlines for submitting questions and Full Applications (Basic Information, Section IV.C, Section IV.D) NOFO number DE-FOA-0003624 INSPIRING GENERATIONS OF NEW INNOVATORS TO IMPACT TECHNOLOGIES IN ENERGY 2026 (IGNIITE 2026) To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to ARPA…</summary>
+    <summary>Advanced Research Projects Agency Energy | Closes 2026-08-26 | This is Modification 01 to the NOFO: Inserted certain deadlines and updated dates, including the deadlines for submitting questions and Full Applications (Basic Information, Section IV.C, Section IV.D) NOFO number DE-FOA-0003624 INSPIRING GENERATIONS OF NEW INNOVATORS TO IMPACT TECHNOLOGIES IN ENERGY 2026 (IGNIITE 2026) To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to ARPA…</summary>
   </entry>
   <entry>
     <title>FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
@@ -49,7 +49,7 @@
     <category term="Separations and membranes"/>
     <category term="Quantum science"/>
     <category term="Data science"/>
-    <summary>Office of Science — Closes 2026-09-30 — The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
+    <summary>Office of Science | Closes 2026-09-30 | The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
   </entry>
   <entry>
     <title>Mind, Machine and Motor Nexus</title>
@@ -65,8 +65,8 @@
     <category term="Data science"/>
     <category term="Energy"/>
     <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation — Posted — The Mind, Machine, and Motor Nexus (M3X) program supports fundamental research that enables intelligent engineered systems and humans to engage in bidirectional interaction in a physics-based environment, to enhance and ensure safety, productivity, and well-being.
-For the purpose of this program an intelligent engineered system is a human-designed system — physical, virtual, or a combination of bo…</summary>
+    <summary>U.S. National Science Foundation | Posted | The Mind, Machine, and Motor Nexus (M3X) program supports fundamental research that enables intelligent engineered systems and humans to engage in bidirectional interaction in a physics-based environment, to enhance and ensure safety, productivity, and well-being.
+For the purpose of this program an intelligent engineered system is a human-designed system - physical, virtual, or a combination of bo…</summary>
   </entry>
   <entry>
     <title>SEEDING CRITICAL ADVANCES FOR LEADING ENERGY TECHNOLOGIES WITH UNTAPPED POTENTIAL (SCALEUP) READY</title>
@@ -79,7 +79,7 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Energy"/>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
-    <summary>Advanced Research Projects Agency Energy — Closes 2029-09-29 — The purpose of this modification is to clarify the meaning of the Program Policy Factors in Section V.C. To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to the ARPA-E website at https://arpa-e-foa.energy.gov. To apply to this NOFO, Applicants must register with and submit application materials through ARPA-E eXCHANGE (https://arpa-e-foa.energy.gov/Registration.aspx). For det…</summary>
+    <summary>Advanced Research Projects Agency Energy | Closes 2029-09-29 | The purpose of this modification is to clarify the meaning of the Program Policy Factors in Section V.C. To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to the ARPA-E website at https://arpa-e-foa.energy.gov. To apply to this NOFO, Applicants must register with and submit application materials through ARPA-E eXCHANGE (https://arpa-e-foa.energy.gov/Registration.aspx). For det…</summary>
   </entry>
   <entry>
     <title>ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)</title>
@@ -95,7 +95,7 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Energy"/>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation — Closes 2026-09-29 — Plasma science is a transdisciplinary field of research where fundamental studies in many disciplines, including plasma physics, plasma chemistry, materials science, and space science, come together to advance knowledge for discovery and technological innovation. The primary goal of the ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) program is to identify and capitali…</summary>
+    <summary>U.S. National Science Foundation | Closes 2026-09-29 | Plasma science is a transdisciplinary field of research where fundamental studies in many disciplines, including plasma physics, plasma chemistry, materials science, and space science, come together to advance knowledge for discovery and technological innovation. The primary goal of the ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) program is to identify and capitali…</summary>
   </entry>
   <entry>
     <title>Combustion and Fire Systems</title>
@@ -111,7 +111,7 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Environmental science"/>
     <category term="Catalysis and reaction engineering"/>
     <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation — Posted — The Combustion and Fire Systems program is part of the Transport Phenomena cluster, which also includes 1) the Fluid Dynamics program; 2) the Particulate and Multiphase Processes program; and 3) the Thermal Transport Processes program.
+    <summary>U.S. National Science Foundation | Posted | The Combustion and Fire Systems program is part of the Transport Phenomena cluster, which also includes 1) the Fluid Dynamics program; 2) the Particulate and Multiphase Processes program; and 3) the Thermal Transport Processes program.
 The goal of the Combustion and Fire Systems program is to create new knowledge to support advances in clean energy, climate change mitigation, a cleaner environment…</summary>
   </entry>
   <entry>
@@ -128,7 +128,7 @@ The goal of the Combustion and Fire Systems program is to create new knowledge t
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <category term="Social and behavioral sciences"/>
-    <summary>U.S. National Science Foundation — Posted — The Environmental Sustainability program is part of the Environmental Engineering and Sustainability cluster together with 1) the Environmental Engineering program and 2) the Nanoscale Interactions program.
+    <summary>U.S. National Science Foundation | Posted | The Environmental Sustainability program is part of the Environmental Engineering and Sustainability cluster together with 1) the Environmental Engineering program and 2) the Nanoscale Interactions program.
 The goal of the Environmental Sustainability program is to promote sustainable engineered systems that support human well-being and that are also compatible with sustaining natural (environment…</summary>
   </entry>
   <entry>
@@ -145,7 +145,7 @@ The goal of the Environmental Sustainability program is to promote sustainable e
     <category term="Materials science"/>
     <category term="Separations and membranes"/>
     <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation — Posted — The Interfacial Engineering program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Electrochemical Systems program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
+    <summary>U.S. National Science Foundation | Posted | The Interfacial Engineering program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Electrochemical Systems program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
 The goal of the Interfacial Engineering program is to support fundamental research on atomic- and molecular-scale interfacial phenomena and …</summary>
   </entry>
   <entry>
@@ -162,7 +162,7 @@ The goal of the Interfacial Engineering program is to support fundamental resear
     <category term="Separations and membranes"/>
     <category term="Catalysis and reaction engineering"/>
     <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation — Posted — The Particulate and Multiphase Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Thermal Transport Processes program.
+    <summary>U.S. National Science Foundation | Posted | The Particulate and Multiphase Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Thermal Transport Processes program.
 The goal of the Particulate and Multiphase Processes program is to support fundamental research on physico-chemical phenomena that govern particulate and multiphase…</summary>
   </entry>
   <entry>
@@ -179,7 +179,7 @@ The goal of the Particulate and Multiphase Processes program is to support funda
     <category term="Energy"/>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation — Posted — The Thermal Transport Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Particulate and Multiphase Processes program.
+    <summary>U.S. National Science Foundation | Posted | The Thermal Transport Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Particulate and Multiphase Processes program.
 The Thermal Transport Processes program supports engineering research projects that lay the foundation for new advances in thermal transport phenomena. These projec…</summary>
   </entry>
   <entry>
@@ -196,7 +196,7 @@ The Thermal Transport Processes program supports engineering research projects t
     <category term="Manufacturing"/>
     <category term="Carbon management"/>
     <category term="Climate change"/>
-    <summary>U.S. National Science Foundation — Posted — The Foundational Research in Robotics (FRR) program, jointly led by the CISE and ENG Directorates, supports research on robotic systems that exhibit significant levels of both computational capability and physical complexity. For the purposes of this program, a robot is defined as intelligence embodied in an engineered construct, with the ability to process information, sense, plan, and move withi…</summary>
+    <summary>U.S. National Science Foundation | Posted | The Foundational Research in Robotics (FRR) program, jointly led by the CISE and ENG Directorates, supports research on robotic systems that exhibit significant levels of both computational capability and physical complexity. For the purposes of this program, a robot is defined as intelligence embodied in an engineered construct, with the ability to process information, sense, plan, and move withi…</summary>
   </entry>
   <entry>
     <title>Environmental Engineering</title>
@@ -212,7 +212,7 @@ The Thermal Transport Processes program supports engineering research projects t
     <category term="Separations and membranes"/>
     <category term="Water"/>
     <category term="Catalysis and reaction engineering"/>
-    <summary>U.S. National Science Foundation — Posted — The Environmental Engineering program is part of the Environmental Engineering and Sustainability cluster, which also includes 1) the Nanoscale Interactions program; and 2) the Environmental Sustainability program.
+    <summary>U.S. National Science Foundation | Posted | The Environmental Engineering program is part of the Environmental Engineering and Sustainability cluster, which also includes 1) the Nanoscale Interactions program; and 2) the Environmental Sustainability program.
 Environmental engineering is an interdisciplinary field that applies chemical, biological, and physical scientific principles to protect human and ecological health.
 The goal of the Env…</summary>
   </entry>
@@ -230,6 +230,6 @@ The goal of the Env…</summary>
     <category term="Social and behavioral sciences"/>
     <category term="Energy"/>
     <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation — Posted — The Engineering Design and Systems Engineering (EDSE) program supports fundamental research that advances design science and/or systems science through the creation of new knowledge about the design of engineered artifacts. Engineered artifacts include, but are not limited to, devices, products, processes, platforms, materials, organizations, systems, and systems of systems. The program focuses on…</summary>
+    <summary>U.S. National Science Foundation | Posted | The Engineering Design and Systems Engineering (EDSE) program supports fundamental research that advances design science and/or systems science through the creation of new knowledge about the design of engineered artifacts. Engineered artifacts include, but are not limited to, devices, products, processes, platforms, materials, organizations, systems, and systems of systems. The program focuses on…</summary>
   </entry>
 </feed>

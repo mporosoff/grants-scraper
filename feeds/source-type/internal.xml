@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Funding Finder — Internal</title>
+  <title>Funding Finder | Internal</title>
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml</id>
@@ -15,7 +15,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Arts and culture"/>
     <category term="Environmental science"/>
-    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Closes 2026-09-01</summary>
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-01</summary>
   </entry>
   <entry>
     <title>NSF Computer and Information Science and Engineering : Core Programs 25-543</title>
@@ -23,7 +23,7 @@
     <id>urn:funding-finder:ur-vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-c3bbadc4b31b4e1c</id>
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>UR VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Closes 2026-09-10</summary>
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-10</summary>
   </entry>
   <entry>
     <title>Schmidt Sciences</title>
@@ -31,15 +31,15 @@
     <id>urn:funding-finder:ur-vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-93df7a9faf5e4c37</id>
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>UR VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Closes 2026-09-11</summary>
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-11</summary>
   </entry>
   <entry>
-    <title>ACS Petroleum Research Fund – 2 programs</title>
+    <title>ACS Petroleum Research Fund - 2 programs</title>
     <link href="https://www.acs.org/funding/grants/petroleum-research-fund/programs.html"/>
     <id>urn:funding-finder:ur-vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-167136617b79dc5d</id>
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>UR VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Closes 2026-09-14</summary>
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-14</summary>
   </entry>
   <entry>
     <title>American Chemical Society, petroleum Research Fund New Directions (ND) Grants</title>
@@ -47,7 +47,7 @@
     <id>urn:funding-finder:ur-vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-e4ce54abf9b529bf</id>
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>UR VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Closes 2026-09-14</summary>
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-14</summary>
   </entry>
   <entry>
     <title>NSF Computational and Data-Enabled Science and Engineering (CDS&amp;E) | NSF - National Science Foundation PD 24-8084</title>
@@ -55,7 +55,7 @@
     <id>urn:funding-finder:ur-vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-ca54a2886f6fb184</id>
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>UR VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Closes 2026-09-15</summary>
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-15</summary>
   </entry>
   <entry>
     <title>Sloan Research Fellowships</title>
@@ -63,7 +63,7 @@
     <id>urn:funding-finder:ur-vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-aed7d81578b24028</id>
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>UR VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Closes 2026-09-15 — The Sloan Research Fellowship Program recognizes and rewards outstanding early-career faculty who have the potential to revolutionize their fields of study.
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-15 | The Sloan Research Fellowship Program recognizes and rewards outstanding early-career faculty who have the potential to revolutionize their fields of study.
 Successful candidates for a Fellowship generally have a strong record of significant independent research accomplishments that demonstrate creativity and the potential to become future leaders in the scientific community. While Fellows are exp…</summary>
   </entry>
   <entry>
@@ -72,7 +72,7 @@ Successful candidates for a Fellowship generally have a strong record of signifi
     <id>urn:funding-finder:ur-vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-122b30a8725e40bf</id>
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>UR VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Closes 2026-09-15</summary>
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-15</summary>
   </entry>
   <entry>
     <title>NEW NSF Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs : A Pilot Emphasis on Scientific Instrumentation. | NSF 26-511</title>
@@ -81,7 +81,7 @@ Successful candidates for a Fellowship generally have a strong record of signifi
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>UR VPR funding digest (limited submissions &amp; foundations)</name></author>
     <category term="Technology development"/>
-    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Closes 2026-11-04</summary>
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) | Closes 2026-11-04</summary>
   </entry>
   <entry>
     <title>NSF Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets) | NSF 26-512</title>
@@ -89,7 +89,7 @@ Successful candidates for a Fellowship generally have a strong record of signifi
     <id>urn:funding-finder:ur-vpr-funding-digest-limited-submissions-foundations:vpr-email%3ANSF26-512</id>
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>UR VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Closes 2026-11-04</summary>
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) | Closes 2026-11-04</summary>
   </entry>
   <entry>
     <title>Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs SBIR/STTR: Developing Deep Technologies that Advance U.S. Competitiveness and Security | NSF 26-510</title>
@@ -98,7 +98,7 @@ Successful candidates for a Fellowship generally have a strong record of signifi
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>UR VPR funding digest (limited submissions &amp; foundations)</name></author>
     <category term="Technology development"/>
-    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Closes 2026-11-04 — NSF seeks SBIR/STTR proposals that represent success in three criteria: Intellectual Merit, Broader Impacts, and Commercial Potential. **
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) | Closes 2026-11-04 | NSF seeks SBIR/STTR proposals that represent success in three criteria: Intellectual Merit, Broader Impacts, and Commercial Potential. **
 STTR proposals require that the startup issue a subaward to a not-for-profit research institution (RI) a minimum of 30% and can receive a maximum of 60% of the total project budget</summary>
   </entry>
   <entry>
@@ -110,7 +110,7 @@ STTR proposals require that the startup issue a subaward to a not-for-profit res
     <category term="Cancer"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Closes 2027-01-19 — The Damon Runyon Clinical Investigator Award supports independent young physician-scientists conducting disease-oriented research that demonstrates
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) | Closes 2027-01-19 | The Damon Runyon Clinical Investigator Award supports independent young physician-scientists conducting disease-oriented research that demonstrates
 a high level of innovation and creativity. The goal is to support the best young physician-scientists doing work aimed at improving the practice of cancer medicine. The Clinical Investigator Award program is specifically intended to provide outstanding…</summary>
   </entry>
   <entry>
@@ -120,7 +120,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>UR VPR funding digest (limited submissions &amp; foundations)</name></author>
     <category term="Education and workforce"/>
-    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Closes 2027-02-04</summary>
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) | Closes 2027-02-04</summary>
   </entry>
   <entry>
     <title>Doctoral New Investigator (DNI) Grants</title>
@@ -128,7 +128,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <id>urn:funding-finder:ur-vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-e1612e2acba631d2</id>
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>UR VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Posted</summary>
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
   </entry>
   <entry>
     <title>NIH https://seed.nih.gov/small-business-funding/find-funding/sbir-sttr-funding-opportunities New PA posted June 1, 2026.</title>
@@ -136,7 +136,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <id>urn:funding-finder:ur-vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-63cc8866673bd1a1</id>
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>UR VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Posted</summary>
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
   </entry>
   <entry>
     <title>NSF Ongoing - New requirement for providing e-mail documentation of Program Officer approval for the submission of RAPID and EAGER proposals</title>
@@ -144,7 +144,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <id>urn:funding-finder:ur-vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-0f186b990288c021</id>
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>UR VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Posted</summary>
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
   </entry>
   <entry>
     <title>NY THRIVE</title>
@@ -152,6 +152,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <id>urn:funding-finder:ur-vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-dda9003b9def7103</id>
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>UR VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Posted</summary>
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
   </entry>
 </feed>

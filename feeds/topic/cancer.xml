@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Funding Finder — Cancer</title>
+  <title>Funding Finder | Cancer</title>
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml</id>
@@ -16,7 +16,7 @@
     <category term="Cancer"/>
     <category term="Data science"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-06-11 — NCI intends to release a Notice of Funding Opportunity (NOFO) that serves to continue the advancement and sustainment of informatics tools, software, and research resources that enable the acquisition, management, analysis, visualization, and interpretation of data across the cancer research continuum, including cancer biology, diagnosis and treatment, early detection, risk assessment and preventi…</summary>
+    <summary>National Institutes of Health | Closes 2027-06-11 | NCI intends to release a Notice of Funding Opportunity (NOFO) that serves to continue the advancement and sustainment of informatics tools, software, and research resources that enable the acquisition, management, analysis, visualization, and interpretation of data across the cancer research continuum, including cancer biology, diagnosis and treatment, early detection, risk assessment and preventi…</summary>
   </entry>
   <entry>
     <title>Health Promotion and Disease Prevention Research Centers: 2027 Special Interest Project Supplements (SIPS)</title>
@@ -26,7 +26,7 @@
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Cancer"/>
     <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-03-23 — This NOFO will provide supplemental funding to the currently funding twenty (20) CDC Prevention Research Centers (PRCs) to conduct Special Interest Projects (SIPs). The purpose of the SIPs is to inform public health practice through high-quality applied health promotion and disease prevention public health research in real-world settings to identify, design, test, assess, evaluate, disseminate, an…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-03-23 | This NOFO will provide supplemental funding to the currently funding twenty (20) CDC Prevention Research Centers (PRCs) to conduct Special Interest Projects (SIPs). The purpose of the SIPs is to inform public health practice through high-quality applied health promotion and disease prevention public health research in real-world settings to identify, design, test, assess, evaluate, disseminate, an…</summary>
   </entry>
   <entry>
     <title>Pilot Testing, Implementation, and Evaluation of the Cervical, Breast and Colorectal Cancer Clinical Decision Support Tools</title>
@@ -35,7 +35,7 @@
     <updated>2027-01-21T00:00:00Z</updated>
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Cancer"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-03-23 — The Centers for Disease Control and Prevention's (CDC) National Center for Chronic Disease Prevention and Health Promotion is advancing the development of clinical decision support (CDS) tools designed to facilitate evidence-based cancer screening and management at the point of care. These CDS tools integrate up-to-date, computable guidelines into electronic health records systems to support clini…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-03-23 | The Centers for Disease Control and Prevention's (CDC) National Center for Chronic Disease Prevention and Health Promotion is advancing the development of clinical decision support (CDS) tools designed to facilitate evidence-based cancer screening and management at the point of care. These CDS tools integrate up-to-date, computable guidelines into electronic health records systems to support clini…</summary>
   </entry>
   <entry>
     <title>Advanced Development and Validation of Emerging Technologies for Basic and Clinical Cancer Research (R33 Clinical Trial Not Allowed)</title>
@@ -47,7 +47,7 @@
     <category term="Cancer"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-06-04 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing exploratory research projects focused on further development and validation of emerging technologies for cancer research or clinical care. This NOFO solicits R33 applications where major feasibility gaps for the technology or methodology have been overcome, as demonstrated w…</summary>
+    <summary>National Institutes of Health | Closes 2027-06-04 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing exploratory research projects focused on further development and validation of emerging technologies for cancer research or clinical care. This NOFO solicits R33 applications where major feasibility gaps for the technology or methodology have been overcome, as demonstrated w…</summary>
   </entry>
   <entry>
     <title>Early-Stage Innovative Technology Development for Basic and Clinical Cancer Research (R61 Clinical Trial Not Allowed)</title>
@@ -59,7 +59,7 @@
     <category term="Cancer"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-06-04 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing to develop innovative technologies for cancer research or clinical care. The emphasis of this NOFO is on early-stage projects proposing proof-of-concept/pilot studies to test the technical feasibility of the proposed method, tool, assay, platform, or instrument. Well-suited …</summary>
+    <summary>National Institutes of Health | Closes 2027-06-04 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing to develop innovative technologies for cancer research or clinical care. The emphasis of this NOFO is on early-stage projects proposing proof-of-concept/pilot studies to test the technical feasibility of the proposed method, tool, assay, platform, or instrument. Well-suited …</summary>
   </entry>
   <entry>
     <title>Demonstration Projects for Whole-Person Health Models for Women Living with HIV in the South</title>
@@ -72,7 +72,7 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
-    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-03-15 — The purpose of this demonstration project is to support coordinated Clinic and Community Collaboratives (CCCs) to integrate HIV care with broader women's health services in jurisdictions with disproportionately high HIV disease burden to improve HIV-related outcomes, overall health, and quality of life among WWH. Organizations will be funded to implement 4 strategies: (1) Integrate HIV care with b…</summary>
+    <summary>Centers for Disease Control - NCHHSTP | Closes 2027-03-15 | The purpose of this demonstration project is to support coordinated Clinic and Community Collaboratives (CCCs) to integrate HIV care with broader women's health services in jurisdictions with disproportionately high HIV disease burden to improve HIV-related outcomes, overall health, and quality of life among WWH. Organizations will be funded to implement 4 strategies: (1) Integrate HIV care with b…</summary>
   </entry>
   <entry>
     <title>Partnership with Common Fund Data Ecosystem Resources</title>
@@ -84,7 +84,7 @@
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-05-25 — The NIH Office of Strategic Coordination (Common Fund) has generated many valuable and widely available datasets. The Common Fund Data Ecosystem is helping to ensure that all Common Fund (CF) data are Findable, Accessible, Interoperable, and Reusable (FAIR). The purpose of this Notice of Funding Opportunity (NOFO) is to announce the availability of funds for projects that involve collaboration bet…</summary>
+    <summary>National Institutes of Health | Closes 2027-05-25 | The NIH Office of Strategic Coordination (Common Fund) has generated many valuable and widely available datasets. The Common Fund Data Ecosystem is helping to ensure that all Common Fund (CF) data are Findable, Accessible, Interoperable, and Reusable (FAIR). The purpose of this Notice of Funding Opportunity (NOFO) is to announce the availability of funds for projects that involve collaboration bet…</summary>
   </entry>
   <entry>
     <title>Canine Cancer Immunotherapy Network (K9CIN; U01 Clinical Trial Not Allowed)</title>
@@ -93,7 +93,7 @@
     <updated>2026-11-25T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2027-01-25 — The goal of this RFA is to continue to support canine cancer immunotherapy clinical trials as indicators of safe and effective cancer treatments in humans. Pet dog patients develop cancer spontaneously and the courses of disease and treatment responses are similar to those in humans. Canine clinical trial results are translatable to humans. The assessment of responses to immunotherapy in immune-in…</summary>
+    <summary>National Institutes of Health | Closes 2027-01-25 | The goal of this RFA is to continue to support canine cancer immunotherapy clinical trials as indicators of safe and effective cancer treatments in humans. Pet dog patients develop cancer spontaneously and the courses of disease and treatment responses are similar to those in humans. Canine clinical trial results are translatable to humans. The assessment of responses to immunotherapy in immune-in…</summary>
   </entry>
   <entry>
     <title>Limited Competition: NIMHD Initiative for Improving American Indian and Alaska Native Cancer Outcomes (U19 - Clinical Trial Optional)</title>
@@ -102,7 +102,7 @@
     <updated>2026-11-25T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2027-01-25 — The purpose of this Notice of Funding Opportunity (NOFO) is to support research that addresses the prevention, diagnosis, and treatment of cancers among American Indians and Alaska Natives (AI/AN), particularly those living in rural communities. The research objectives target overall cancer incidence and mortality, with the goal of making findings applicable and impactful in improving cancer outco…</summary>
+    <summary>National Institutes of Health | Closes 2027-01-25 | The purpose of this Notice of Funding Opportunity (NOFO) is to support research that addresses the prevention, diagnosis, and treatment of cancers among American Indians and Alaska Natives (AI/AN), particularly those living in rural communities. The research objectives target overall cancer incidence and mortality, with the goal of making findings applicable and impactful in improving cancer outco…</summary>
   </entry>
   <entry>
     <title>Single Source: Coordinating Center (CC) for the Small Cell Lung Cancer (SCLC) Consortium (U24 Clinical Trial Not Allowed)</title>
@@ -111,7 +111,7 @@
     <updated>2026-11-25T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2027-01-25 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to continue to support the Coordinating Center (CC) for the Small Cell Lung Cancer (SCLC) Consortium, which coordinates research on prevention, diagnosis, treatment, and mechanisms of resistance in SCLC. The CC manages administrative activities, centralized databases, tissue banking and a virtual biospec…</summary>
+    <summary>National Institutes of Health | Closes 2027-01-25 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to continue to support the Coordinating Center (CC) for the Small Cell Lung Cancer (SCLC) Consortium, which coordinates research on prevention, diagnosis, treatment, and mechanisms of resistance in SCLC. The CC manages administrative activities, centralized databases, tissue banking and a virtual biospec…</summary>
   </entry>
   <entry>
     <title>Cancer Center Support Grants (CCSGs) for NCI-designated Cancer Centers (P30 Clinical Trial Optional)</title>
@@ -120,7 +120,7 @@
     <updated>2026-11-01T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2027-01-25 — This Notice of Funding Opportunity (NOFO) invites applications for P30 Cancer Center Support Grants (CCSGs) to support NCI-Designated Cancer Centers. CCSGs support three types of Cancer Centers: 1) Comprehensive Cancer Centers, which demonstrate reasonable depth and breadth of research activities in each of three major areas: basic laboratory; clinical; and prevention, control and population-based…</summary>
+    <summary>National Institutes of Health | Closes 2027-01-25 | This Notice of Funding Opportunity (NOFO) invites applications for P30 Cancer Center Support Grants (CCSGs) to support NCI-Designated Cancer Centers. CCSGs support three types of Cancer Centers: 1) Comprehensive Cancer Centers, which demonstrate reasonable depth and breadth of research activities in each of three major areas: basic laboratory; clinical; and prevention, control and population-based…</summary>
   </entry>
   <entry>
     <title>State Occupational Safety and Health Surveillance Program (U60)</title>
@@ -131,7 +131,7 @@
     <category term="Cancer"/>
     <category term="Education and workforce"/>
     <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-30 — NIOSH has provided financial and technical assistance to develop or expand state-level OSH surveillance capacity and infrastructure since the 1970s. From 2021-2026, NIOSH funded cooperative agreements in 23 states under announcement PAR-20-312. These programs varied in scope and focus, each providing a level of occupational health expertise to the public health system in their state. Grantees incl…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2026-12-30 | NIOSH has provided financial and technical assistance to develop or expand state-level OSH surveillance capacity and infrastructure since the 1970s. From 2021-2026, NIOSH funded cooperative agreements in 23 states under announcement PAR-20-312. These programs varied in scope and focus, each providing a level of occupational health expertise to the public health system in their state. Grantees incl…</summary>
   </entry>
   <entry>
     <title>Genomic Community Resources (U24 Clinical Trials Not Allowed)</title>
@@ -143,7 +143,7 @@
     <category term="Cancer"/>
     <category term="Data science"/>
     <category term="Environmental science"/>
-    <summary>National Institutes of Health — Closes 2027-01-25 — The National Human Genome Research Institute (NHGRI), with other NIH Institutes and Centers (ICs) National Cancer Institute (NCI) and National Institute of Environmental Health Sciences (NIEHS), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to facilitate genomic research and the dissemination of its products, NHGRI proposes this RFA to support both new and exist…</summary>
+    <summary>National Institutes of Health | Closes 2027-01-25 | The National Human Genome Research Institute (NHGRI), with other NIH Institutes and Centers (ICs) National Cancer Institute (NCI) and National Institute of Environmental Health Sciences (NIEHS), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to facilitate genomic research and the dissemination of its products, NHGRI proposes this RFA to support both new and exist…</summary>
   </entry>
   <entry>
     <title>NCI Research Specialist Award for Core and Laboratory-based Scientists (R50 Clinical Trial Not Allowed)</title>
@@ -152,7 +152,7 @@
     <updated>2026-09-17T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2026-11-20 — This notice of funding opportunity (NOFO) will invite applications for the Research Specialist Award (R50), which provides salary support for exceptional, non-tenure track scientists working in research laboratories and core facilities who make essential contributions to cancer research. The R50 is intended to support stable, long-term research careers for highly skilled scientists who contribute …</summary>
+    <summary>National Institutes of Health | Closes 2026-11-20 | This notice of funding opportunity (NOFO) will invite applications for the Research Specialist Award (R50), which provides salary support for exceptional, non-tenure track scientists working in research laboratories and core facilities who make essential contributions to cancer research. The R50 is intended to support stable, long-term research careers for highly skilled scientists who contribute …</summary>
   </entry>
   <entry>
     <title>Continuation and Expansion of the National Mesothelioma Virtual Bank for Translational Research (U24)</title>
@@ -162,7 +162,7 @@
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Cancer"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-11-02 — The National Mesothelioma Virtual Bank (NMVB) was established in 2006 to serve as a resource for malignant mesothelioma research. This funding opportunity will advance biomedical research for malignant mesothelioma by adding more biospecimens together with demographic data and clinical data. Examples of biospecimens include fresh frozen tumor and control tissues, paraffin embedded tissues, blood, …</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2026-11-02 | The National Mesothelioma Virtual Bank (NMVB) was established in 2006 to serve as a resource for malignant mesothelioma research. This funding opportunity will advance biomedical research for malignant mesothelioma by adding more biospecimens together with demographic data and clinical data. Examples of biospecimens include fresh frozen tumor and control tissues, paraffin embedded tissues, blood, …</summary>
   </entry>
   <entry>
     <title>NCI Research Specialist (Clinician Scientist) Award (R50 Clinical Trial Not Allowed)</title>
@@ -171,7 +171,7 @@
     <updated>2026-08-25T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2026-11-02 — This notice of funding opportunity (NOFO) invites grant applications for the Research Specialist Award (R50) specifically for clinician scientists supporting NCI-funded clinical trials research. The Research Specialist Award is designed to encourage the development of stable research career opportunities for exceptional clinician scientists who want to continue to participate in the NCI clinical t…</summary>
+    <summary>National Institutes of Health | Closes 2026-11-02 | This notice of funding opportunity (NOFO) invites grant applications for the Research Specialist Award (R50) specifically for clinician scientists supporting NCI-funded clinical trials research. The Research Specialist Award is designed to encourage the development of stable research career opportunities for exceptional clinician scientists who want to continue to participate in the NCI clinical t…</summary>
   </entry>
   <entry>
     <title>Radiation Oncology-Biology Integration Network (ROBIN) Centers (U54 Clinical Trial Required)</title>
@@ -183,7 +183,7 @@
     <category term="Cancer"/>
     <category term="Data science"/>
     <category term="Education and workforce"/>
-    <summary>National Institutes of Health — Closes 2027-01-25 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to continue to support the Radiation Oncology-Biology Integration Network (ROBIN) with applications from both new and renewing investigators. This network model will sustain an agile and effective national radiation oncology infrastructure that collectively addresses critical hypothesis-based translation…</summary>
+    <summary>National Institutes of Health | Closes 2027-01-25 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to continue to support the Radiation Oncology-Biology Integration Network (ROBIN) with applications from both new and renewing investigators. This network model will sustain an agile and effective national radiation oncology infrastructure that collectively addresses critical hypothesis-based translation…</summary>
   </entry>
   <entry>
     <title>Damon Runyon Cancer Research Foundation Clinical Investigator Award 2027</title>
@@ -194,7 +194,7 @@
     <category term="Cancer"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Closes 2027-01-19 — The Damon Runyon Clinical Investigator Award supports independent young physician-scientists conducting disease-oriented research that demonstrates
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) | Closes 2027-01-19 | The Damon Runyon Clinical Investigator Award supports independent young physician-scientists conducting disease-oriented research that demonstrates
 a high level of innovation and creativity. The goal is to support the best young physician-scientists doing work aimed at improving the practice of cancer medicine. The Clinical Investigator Award program is specifically intended to provide outstanding…</summary>
   </entry>
   <entry>
@@ -206,7 +206,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Cancer"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2026-09-29 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by continuing support for a Clinical Research Network on Antimicrobial Resistance (AMR). AMR is a major health challenge that limits treatment options and allows resistant infections to persist. Individuals with chronic conditions like diabetes and cancer are particularly vulnerable, resulting in increas…</summary>
+    <summary>National Institutes of Health | Closes 2026-09-29 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by continuing support for a Clinical Research Network on Antimicrobial Resistance (AMR). AMR is a major health challenge that limits treatment options and allows resistant infections to persist. Individuals with chronic conditions like diabetes and cancer are particularly vulnerable, resulting in increas…</summary>
   </entry>
   <entry>
     <title>Early-Onset Cancers: Investigating Etiology, Mechanisms, and Early Detection Strategies (RP1 Clinical Trials Optional)</title>
@@ -216,7 +216,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2026-10-05 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) invites applications that investigate the etiology of sporadic non-hereditary early-onset cancers (EOCs: ages 18 to 49 years) and the underlying biological mechanisms that play a role in these cancers to inform prevention and control strategies. The proposed research is expected to advance the understanding of t…</summary>
+    <summary>National Institutes of Health | Closes 2026-10-05 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) invites applications that investigate the etiology of sporadic non-hereditary early-onset cancers (EOCs: ages 18 to 49 years) and the underlying biological mechanisms that play a role in these cancers to inform prevention and control strategies. The proposed research is expected to advance the understanding of t…</summary>
   </entry>
   <entry>
     <title>Single source: Childhood Cancer Survivor Study (U24 Clinical Trial Not Allowed)</title>
@@ -225,16 +225,16 @@ a high level of innovation and creativity. The goal is to support the best young
     <updated>2026-06-22T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2026-09-25 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to support the continuation of the Childhood Cancer Survivor Study (CCSS) that investigates the long-term morbidity and mortality associated with cancer treatments. The CCSS represents a multi-institutional, multidisciplinary collaborative research resource that currently has health-related data from 38,…</summary>
+    <summary>National Institutes of Health | Closes 2026-09-25 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to support the continuation of the Childhood Cancer Survivor Study (CCSS) that investigates the long-term morbidity and mortality associated with cancer treatments. The CCSS represents a multi-institutional, multidisciplinary collaborative research resource that currently has health-related data from 38,…</summary>
   </entry>
   <entry>
-    <title>DoW Kidney Cancer, Academy of Kidney Cancer Investigators – Early-Career Scholar Award</title>
+    <title>DoW Kidney Cancer, Academy of Kidney Cancer Investigators - Early-Career Scholar Award</title>
     <link href="https://www.grants.gov/search-results-detail/362853"/>
     <id>urn:funding-finder:grants-gov:362853</id>
     <updated>2026-06-18T00:00:00Z</updated>
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-28 — Summary: Initially created in fiscal year 2019 (FY19), the Kidney Cancer Research Program (KCRP) Academy of Kidney Cancer Investigators (AKCI) is a unique interactive virtual academy providing intensive mentoring, national networking, collaborations, and a peer group for junior faculty. The Academy pairs Early Career Scholars (ECS) with established investigators (Designated Mentors) under the over…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-28 | Summary: Initially created in fiscal year 2019 (FY19), the Kidney Cancer Research Program (KCRP) Academy of Kidney Cancer Investigators (AKCI) is a unique interactive virtual academy providing intensive mentoring, national networking, collaborations, and a peer group for junior faculty. The Academy pairs Early Career Scholars (ECS) with established investigators (Designated Mentors) under the over…</summary>
   </entry>
   <entry>
     <title>DoW Kidney Cancer, Idea Development Award</title>
@@ -244,7 +244,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Arts and culture"/>
     <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-28 — Summary: The fiscal year 2026 (FY26) Kidney Cancer Research Program (KCRP) Idea Development Award (IDA) supports the development of high-impact ideas that advance the understanding of kidney cancer and ultimately lead to improved patient outcomes. The research project should include a well-formulated, testable hypothesis based on strong scientific rationale and a well-developed and articulated res…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-28 | Summary: The fiscal year 2026 (FY26) Kidney Cancer Research Program (KCRP) Idea Development Award (IDA) supports the development of high-impact ideas that advance the understanding of kidney cancer and ultimately lead to improved patient outcomes. The research project should include a well-formulated, testable hypothesis based on strong scientific rationale and a well-developed and articulated res…</summary>
   </entry>
   <entry>
     <title>Discovery of the Genetic Basis of Childhood Cancers and of Congenital Anomalies: Gabriella Miller Kids First Pediatric Research Program (X01 Clinical Trial Not Allowed)</title>
@@ -254,7 +254,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2027-01-11 — As part of the Gabriella Miller Kids First Pediatric Research Program (Kids First Program), the NIH invites applications to submit samples from pediatric cohorts for whole genome sequencing at a Kids First Program supported genomic data generating centers. Applicants are encouraged to propose sequencing of existing pediatric cancer or congenital anomaly cohorts to elucidate the genetic contributio…</summary>
+    <summary>National Institutes of Health | Closes 2027-01-11 | As part of the Gabriella Miller Kids First Pediatric Research Program (Kids First Program), the NIH invites applications to submit samples from pediatric cohorts for whole genome sequencing at a Kids First Program supported genomic data generating centers. Applicants are encouraged to propose sequencing of existing pediatric cancer or congenital anomaly cohorts to elucidate the genetic contributio…</summary>
   </entry>
   <entry>
     <title>DoW Rare Cancers Concept Award</title>
@@ -263,7 +263,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <updated>2026-06-17T00:00:00Z</updated>
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-30 — Summary: The fiscal year 2026 (FY26) Rare Cancers Research Program (RCRP) Concept Award (CA) supports highly innovative, untested, potentially groundbreaking novel concepts in rare cancers. Applications must describe how the new idea will be innovative and present as a novel course of investigation in the field of rare cancers.Distinctive Features:Preliminary data are not required.Due to the blind…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-30 | Summary: The fiscal year 2026 (FY26) Rare Cancers Research Program (RCRP) Concept Award (CA) supports highly innovative, untested, potentially groundbreaking novel concepts in rare cancers. Applications must describe how the new idea will be innovative and present as a novel course of investigation in the field of rare cancers.Distinctive Features:Preliminary data are not required.Due to the blind…</summary>
   </entry>
   <entry>
     <title>DoW Rare Cancers Idea Development Award</title>
@@ -272,7 +272,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <updated>2026-06-17T00:00:00Z</updated>
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-11-18 — Summary: The fiscal year 2026 (FY26) Rare Cancers Research Program (RCRP) Idea Development Award (IDA) promotes ideas that are ready for further development and have the potential to yield high-impact findings and new avenues of investigation.Distinctive Features:The RCRP encourages applicants to include an exploratory aim or sub-aim to support any necessary discovery-driven research.Preliminary d…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-11-18 | Summary: The fiscal year 2026 (FY26) Rare Cancers Research Program (RCRP) Idea Development Award (IDA) promotes ideas that are ready for further development and have the potential to yield high-impact findings and new avenues of investigation.Distinctive Features:The RCRP encourages applicants to include an exploratory aim or sub-aim to support any necessary discovery-driven research.Preliminary d…</summary>
   </entry>
   <entry>
     <title>DoW Rare Cancers Resource and Community Development Award</title>
@@ -282,7 +282,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
     <category term="Community development"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-11-18 — Summary: The fiscal year 2026 (FY26) Rare Cancers Research Program (RCRP) Resource and Community Development Award (RCDA) supports the development of research resources and clinical or preclinical datasets that will advance the field of rare cancers research and ultimately improve outcomes for individuals with rare cancers. Research supporting this funding opportunity should fill one of the follow…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-11-18 | Summary: The fiscal year 2026 (FY26) Rare Cancers Research Program (RCRP) Resource and Community Development Award (RCDA) supports the development of research resources and clinical or preclinical datasets that will advance the field of rare cancers research and ultimately improve outcomes for individuals with rare cancers. Research supporting this funding opportunity should fill one of the follow…</summary>
   </entry>
   <entry>
     <title>Systematic Testing of Radionuclides in Preclinical Experiments (STRIPE, RP1 Clinical Trial Not Allowed)</title>
@@ -293,7 +293,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Arts and culture"/>
     <category term="Biology and biotechnology"/>
     <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2026-10-05 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to support research projects that employ state-of-the-art cancer biology approaches and preclinical model systems to investigate the biological effects of radiation emitted by radionuclides used in radiopharmaceutical therapy (RPT). The focus of this initiative is to advance mechanistic understanding of …</summary>
+    <summary>National Institutes of Health | Closes 2026-10-05 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to support research projects that employ state-of-the-art cancer biology approaches and preclinical model systems to investigate the biological effects of radiation emitted by radionuclides used in radiopharmaceutical therapy (RPT). The focus of this initiative is to advance mechanistic understanding of …</summary>
   </entry>
   <entry>
     <title>Metastasis Research Network (U54 Clinical Trial Not Allowed)</title>
@@ -303,7 +303,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2026-09-25 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits applications for research on developing a comprehensive and cohesive understanding of cancer metastasis. Towards this goal, the NCI will support U54 Specialized Centers that together will continue to serve as the hub of the Metastasis Research Network (MetNet). Each MetNet Center should propose an overa…</summary>
+    <summary>National Institutes of Health | Closes 2026-09-25 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits applications for research on developing a comprehensive and cohesive understanding of cancer metastasis. Towards this goal, the NCI will support U54 Specialized Centers that together will continue to serve as the hub of the Metastasis Research Network (MetNet). Each MetNet Center should propose an overa…</summary>
   </entry>
   <entry>
     <title>Advanced Development and Validation of Emerging Technologies for Basic and Clinical Cancer Research (R33 Clinical Trial Not Allowed)</title>
@@ -314,7 +314,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Biology and biotechnology"/>
     <category term="Cancer"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2026-11-10 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) invites grant applications proposing exploratory research projects focused on further development and technical validation of emerging technologies offering novel capabilities for the molecular or cellular characterization of cancer or for improved handling and quality control of biospecimens used for basic, cli…</summary>
+    <summary>National Institutes of Health | Closes 2026-11-10 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) invites grant applications proposing exploratory research projects focused on further development and technical validation of emerging technologies offering novel capabilities for the molecular or cellular characterization of cancer or for improved handling and quality control of biospecimens used for basic, cli…</summary>
   </entry>
   <entry>
     <title>Early-Stage Innovative Technology Development for Basic and Clinical Cancer Research (R61 Clinical Trial Not Allowed)</title>
@@ -326,7 +326,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Cancer"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2026-11-10 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing to develop innovative technologies offering new capabilities for the molecular or cellular characterization of cancer or for improved handling and quality control of biospecimens for basic, clinical, or epidemiological cancer research. The NOFO solicits R61 applications for …</summary>
+    <summary>National Institutes of Health | Closes 2026-11-10 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing to develop innovative technologies offering new capabilities for the molecular or cellular characterization of cancer or for improved handling and quality control of biospecimens for basic, clinical, or epidemiological cancer research. The NOFO solicits R61 applications for …</summary>
   </entry>
   <entry>
     <title>Paul Calabresi Career Development Award for Clinical Oncology (K12 Clinical Trial Not Allowed)</title>
@@ -335,7 +335,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <updated>2026-06-03T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2029-03-12 — The goal of the Paul Calabresi Career Development Award for Clinical Oncology (PCACO) is to increase the number of clinician-scientists trained in clinical and translational cancer research, and to promote their career development as cancer researchers. This Notice of Funding Opportunity (NOFO) does not allow Scholars to propose to lead an independent clinical trial, but does allow Scholars to pro…</summary>
+    <summary>National Institutes of Health | Closes 2029-03-12 | The goal of the Paul Calabresi Career Development Award for Clinical Oncology (PCACO) is to increase the number of clinician-scientists trained in clinical and translational cancer research, and to promote their career development as cancer researchers. This Notice of Funding Opportunity (NOFO) does not allow Scholars to propose to lead an independent clinical trial, but does allow Scholars to pro…</summary>
   </entry>
   <entry>
     <title>Precision Approaches in Radiation Synthetic Combinations (PAIRS, RP1 Clinical Trial Optional)</title>
@@ -345,7 +345,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2026-11-11 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits research projects that investigate actionable synthetic vulnerabilities that can be conditionally paired with tumor responses to radiation therapy. The goal of the Precision Approaches in Radiation Synthetic Combinations (PAIRS) program is to develop radiation-synthetic combination strategies and facili…</summary>
+    <summary>National Institutes of Health | Closes 2026-11-11 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits research projects that investigate actionable synthetic vulnerabilities that can be conditionally paired with tumor responses to radiation therapy. The goal of the Precision Approaches in Radiation Synthetic Combinations (PAIRS) program is to develop radiation-synthetic combination strategies and facili…</summary>
   </entry>
   <entry>
     <title>DoW Prostate Cancer, Data Science Award</title>
@@ -359,7 +359,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Cancer"/>
     <category term="Data science"/>
     <category term="Public health"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-02 — Summary: The fiscal year 2026 (FY26) Prostate Cancer Research Program (PCRP) Data Science Award (DSA) supports research that develops or uses quantitative and analytical approaches, processes and/or systems to obtain knowledge and insight from large and/or complex sets of prostate cancer data in one or more of the following research areas: Analysis of clinically annotated datasets; analysis of -om…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-02 | Summary: The fiscal year 2026 (FY26) Prostate Cancer Research Program (PCRP) Data Science Award (DSA) supports research that develops or uses quantitative and analytical approaches, processes and/or systems to obtain knowledge and insight from large and/or complex sets of prostate cancer data in one or more of the following research areas: Analysis of clinically annotated datasets; analysis of -om…</summary>
   </entry>
   <entry>
     <title>DoW Prostate Cancer, Early Investigator Research Award</title>
@@ -370,7 +370,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Arts and culture"/>
     <category term="Cancer"/>
     <category term="Education and workforce"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-02 — Summary: The fiscal year 2026 (FY26) Prostate Cancer Research Program (PCRP) Early Investigator Research Award (EIRA) supports prostate cancer research conducted by investigators in the early stages of their careers with guidance from an experienced mentor. All applications must address one of the FY26 PCRP Overarching Challenges. Distinctive Features: · Early-Career Investigator: Serves as the pr…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-02 | Summary: The fiscal year 2026 (FY26) Prostate Cancer Research Program (PCRP) Early Investigator Research Award (EIRA) supports prostate cancer research conducted by investigators in the early stages of their careers with guidance from an experienced mentor. All applications must address one of the FY26 PCRP Overarching Challenges. Distinctive Features: · Early-Career Investigator: Serves as the pr…</summary>
   </entry>
   <entry>
     <title>DoW Prostate Cancer, Idea Development Award</title>
@@ -379,7 +379,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <updated>2026-05-21T00:00:00Z</updated>
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-02 — Summary: The fiscal year 2026 (FY26) Prostate Cancer Research Program (PCRP) Idea Development Award (IDA) supports new ideas that represent innovative approaches to prostate cancer research and have the potential to make an important contribution to the PCRP mission. All applications must address one of the FY26 PCRP Overarching Challenges. Distinctive Features: · New Investigator Category: In add…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-02 | Summary: The fiscal year 2026 (FY26) Prostate Cancer Research Program (PCRP) Idea Development Award (IDA) supports new ideas that represent innovative approaches to prostate cancer research and have the potential to make an important contribution to the PCRP mission. All applications must address one of the FY26 PCRP Overarching Challenges. Distinctive Features: · New Investigator Category: In add…</summary>
   </entry>
   <entry>
     <title>DoW Prostate Cancer, Physician Research Award</title>
@@ -389,7 +389,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Arts and culture"/>
     <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-02 — Summary: The fiscal year 2026 (FY26) Prostate Cancer Research Program (PCRP) Physician Research Award (PRA) Supports a mentored research experience to prepare physicians with clinical duties for careers in prostate cancer research. All applications must address one of the FY26 PCRP Overarching Challenges. Distinctive Features: · Early-Career Clinician Investigator: Serves as the Principal Investig…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-02 | Summary: The fiscal year 2026 (FY26) Prostate Cancer Research Program (PCRP) Physician Research Award (PRA) Supports a mentored research experience to prepare physicians with clinical duties for careers in prostate cancer research. All applications must address one of the FY26 PCRP Overarching Challenges. Distinctive Features: · Early-Career Clinician Investigator: Serves as the Principal Investig…</summary>
   </entry>
   <entry>
     <title>NCI Community Oncology Research Program (NCORP) Academic Community Sites (UG1 Clinical Trials Not Allowed)</title>
@@ -398,7 +398,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <updated>2026-05-21T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2026-09-18 — This Notice of Funding Opportunity (NOFO) is one of three NOFOs for the National Cancer Institute (NCI) Community Oncology Research Program (NCORP). NCORP is designed to enhance generalizability and dissemination of clinical trial and other human subject research study results through accrual in a variety of community settings. The purpose of NCORP is to engage cancer patient populations, those at…</summary>
+    <summary>National Institutes of Health | Closes 2026-09-18 | This Notice of Funding Opportunity (NOFO) is one of three NOFOs for the National Cancer Institute (NCI) Community Oncology Research Program (NCORP). NCORP is designed to enhance generalizability and dissemination of clinical trial and other human subject research study results through accrual in a variety of community settings. The purpose of NCORP is to engage cancer patient populations, those at…</summary>
   </entry>
   <entry>
     <title>NCI Community Oncology Research Program (NCORP) Community Sites (UG1 Clinical Trial Not Allowed)</title>
@@ -407,7 +407,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <updated>2026-05-21T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Cancer"/>
-    <summary>National Institutes of Health — Closes 2026-09-18 — This Notice of Funding Opportunity (NOFO) is one of three NOFOs for the National Cancer Institute (NCI) Community Oncology Research Program (NCORP). NCORP is designed to enhance generalizability and dissemination of clinical trial and other human subject research study results through accrual in a variety of community settings. The purpose of NCORP is to engage cancer patient populations, those at…</summary>
+    <summary>National Institutes of Health | Closes 2026-09-18 | This Notice of Funding Opportunity (NOFO) is one of three NOFOs for the National Cancer Institute (NCI) Community Oncology Research Program (NCORP). NCORP is designed to enhance generalizability and dissemination of clinical trial and other human subject research study results through accrual in a variety of community settings. The purpose of NCORP is to engage cancer patient populations, those at…</summary>
   </entry>
   <entry>
     <title>NCI Community Oncology Research Program (NCORP) Research Bases (UG1 Clinical Trial Required)</title>
@@ -418,7 +418,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Agriculture and food"/>
     <category term="Cancer"/>
     <category term="Education and workforce"/>
-    <summary>National Institutes of Health — Closes 2026-09-18 — This Notice of Funding Opportunity (NOFO) is one of three NOFOs for the National Cancer Institute (NCI) Community Oncology Research Program (NCORP). NCORP is designed to enhance generalizability and dissemination of clinical trial and other human subject research study results through accrual in a variety of community settings. The purpose of NCORP is to engage cancer patient populations, those at…</summary>
+    <summary>National Institutes of Health | Closes 2026-09-18 | This Notice of Funding Opportunity (NOFO) is one of three NOFOs for the National Cancer Institute (NCI) Community Oncology Research Program (NCORP). NCORP is designed to enhance generalizability and dissemination of clinical trial and other human subject research study results through accrual in a variety of community settings. The purpose of NCORP is to engage cancer patient populations, those at…</summary>
   </entry>
   <entry>
     <title>Advanced Development of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -432,7 +432,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2026-10-19 — This Notice of Funding Opportunity (NOFO) invites applications for advanced development and enhancement of emerging informatics technologies to improve the acquisition, analysis, visualization, and interpretation of data across the cancer research continuum including cancer biology, cancer treatment and diagnosis, early cancer detection, risk assessment and prevention, cancer control and epidemiol…</summary>
+    <summary>National Institutes of Health | Closes 2026-10-19 | This Notice of Funding Opportunity (NOFO) invites applications for advanced development and enhancement of emerging informatics technologies to improve the acquisition, analysis, visualization, and interpretation of data across the cancer research continuum including cancer biology, cancer treatment and diagnosis, early cancer detection, risk assessment and prevention, cancer control and epidemiol…</summary>
   </entry>
   <entry>
     <title>Sustained Support for Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -445,7 +445,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2026-10-19 — This Notice of Funding Opportunity (NOFO) solicits applications for the continued development and sustainment of high value informatics research resources to improve the acquisition, management, analysis, and dissemination of data and knowledge across the cancer research continuum including cancer biology, cancer treatment and diagnosis, early cancer detection, risk assessment and prevention, canc…</summary>
+    <summary>National Institutes of Health | Closes 2026-10-19 | This Notice of Funding Opportunity (NOFO) solicits applications for the continued development and sustainment of high value informatics research resources to improve the acquisition, management, analysis, and dissemination of data and knowledge across the cancer research continuum including cancer biology, cancer treatment and diagnosis, early cancer detection, risk assessment and prevention, canc…</summary>
   </entry>
   <entry>
     <title>Early-Stage Development of Informatics Technologies for Cancer Research and Management (U01 Clinical Trial Optional)</title>
@@ -458,7 +458,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Data science"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-10-19 — This Notice of Funding Opportunity (NOFO) solicits applications for the development of enabling informatics technologies to improve the acquisition, management, analysis, and dissemination of data and knowledge across the cancer research continuum including cancer biology, cancer treatment and diagnosis, early cancer detection, risk assessment and prevention, cancer control and epidemiology. As a …</summary>
+    <summary>National Institutes of Health | Closes 2027-10-19 | This Notice of Funding Opportunity (NOFO) solicits applications for the development of enabling informatics technologies to improve the acquisition, management, analysis, and dissemination of data and knowledge across the cancer research continuum including cancer biology, cancer treatment and diagnosis, early cancer detection, risk assessment and prevention, cancer control and epidemiology. As a …</summary>
   </entry>
   <entry>
     <title>DoW Peer Reviewed Cancer, Clinical Trial Award</title>
@@ -468,7 +468,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-05 — Summary: The fiscal year 2026 (FY26) Peer Reviewed Cancer Research Program (PRCRP) Clinical Trial Award (CTA) supports the rapid implementation of clinical trials with the potential to have a significant impact on the treatment or management of cancer within at least one of the FY26 PRCRP Topic Areas. Clinical trials proposed may evaluate promising new products, pharmacologic agents (drugs or biol…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-05 | Summary: The fiscal year 2026 (FY26) Peer Reviewed Cancer Research Program (PRCRP) Clinical Trial Award (CTA) supports the rapid implementation of clinical trials with the potential to have a significant impact on the treatment or management of cancer within at least one of the FY26 PRCRP Topic Areas. Clinical trials proposed may evaluate promising new products, pharmacologic agents (drugs or biol…</summary>
   </entry>
   <entry>
     <title>DoW Peer Reviewed Cancer, Idea Award</title>
@@ -478,7 +478,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
     <category term="Technology development"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-05 — Summary: The fiscal year 2026 (FY26) Peer Reviewed Cancer Research Program (PRCRP) Idea Award (IA) supports innovative, untested, high-risk/potentially high-reward concepts, theories, paradigms, and/or basic cancer research. The advancement of knowledge in cancer research, patient care, and/or treatment options in the Military Health System (MHS) is critical to Service Members, Veterans, other mil…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-05 | Summary: The fiscal year 2026 (FY26) Peer Reviewed Cancer Research Program (PRCRP) Idea Award (IA) supports innovative, untested, high-risk/potentially high-reward concepts, theories, paradigms, and/or basic cancer research. The advancement of knowledge in cancer research, patient care, and/or treatment options in the Military Health System (MHS) is critical to Service Members, Veterans, other mil…</summary>
   </entry>
   <entry>
     <title>DoW, Peer Reviewed Cancer, Impact Award</title>
@@ -487,7 +487,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <updated>2026-05-06T00:00:00Z</updated>
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-05 — Summary: The fiscal year 2026 (FY26) Peer Reviewed Cancer Research Program (PRCRP) Impact Award supports mature research that will have a near-term impact on clinical cancer care in one of the congressionally directed FY26 PRCRP Topic Areas. Applicants must consider how the research project will lead to the advancement of knowledge in cancer research, patient care and/or treatment options in the M…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-05 | Summary: The fiscal year 2026 (FY26) Peer Reviewed Cancer Research Program (PRCRP) Impact Award supports mature research that will have a near-term impact on clinical cancer care in one of the congressionally directed FY26 PRCRP Topic Areas. Applicants must consider how the research project will lead to the advancement of knowledge in cancer research, patient care and/or treatment options in the M…</summary>
   </entry>
   <entry>
     <title>DoW Lung Cancer Idea Development Award</title>
@@ -496,7 +496,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <updated>2026-05-05T00:00:00Z</updated>
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-02 — Summary: The fiscal year 2026 (FY26) Lung Cancer Research Program (LCRP) Idea Development Award (IDA) supports conceptually innovative, high-risk/high-reward research that could lead to critical discoveries or major advancements that will accelerate progress toward eradicating deaths and suffering from lung cancer. This mechanism promotes new ideas that are in the early stages of development and h…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-02 | Summary: The fiscal year 2026 (FY26) Lung Cancer Research Program (LCRP) Idea Development Award (IDA) supports conceptually innovative, high-risk/high-reward research that could lead to critical discoveries or major advancements that will accelerate progress toward eradicating deaths and suffering from lung cancer. This mechanism promotes new ideas that are in the early stages of development and h…</summary>
   </entry>
   <entry>
     <title>DoW Lung Cancer Patient-Centered Outcomes and Survivorship Award</title>
@@ -505,7 +505,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <updated>2026-05-05T00:00:00Z</updated>
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-02 — Summary: The fiscal year 2026 (FY26) Lung Cancer Research Program (LCRP) Patient-Centered Outcomes and Survivorship Award (PCOSA) promotes evidence-based and patient-centered approaches to improve health and lung cancer related outcomes and enhance the patient experience in defined populations. Research must address at least one of the FY26 LCRP areas of emphasis in the Health Outcomes and Survivo…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-02 | Summary: The fiscal year 2026 (FY26) Lung Cancer Research Program (LCRP) Patient-Centered Outcomes and Survivorship Award (PCOSA) promotes evidence-based and patient-centered approaches to improve health and lung cancer related outcomes and enhance the patient experience in defined populations. Research must address at least one of the FY26 LCRP areas of emphasis in the Health Outcomes and Survivo…</summary>
   </entry>
   <entry>
     <title>DoW Lung Cancer Translational Research Award</title>
@@ -514,7 +514,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <updated>2026-05-05T00:00:00Z</updated>
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-02 — Summary: The fiscal year 2026 (FY26) Lung Cancer Research Program (LCRP) Translational Research Award (TRA) supports advanced translational research that will foster transformation of promising ideas in lung cancer into clinical applications. Research must address at least one of the FY26 LCRP areas of emphasis.Distinctive Features: This funding mechanism intends to support a broad range of transl…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-02 | Summary: The fiscal year 2026 (FY26) Lung Cancer Research Program (LCRP) Translational Research Award (TRA) supports advanced translational research that will foster transformation of promising ideas in lung cancer into clinical applications. Research must address at least one of the FY26 LCRP areas of emphasis.Distinctive Features: This funding mechanism intends to support a broad range of transl…</summary>
   </entry>
   <entry>
     <title>DoW Breast Cancer, Breakthrough Award Level 3</title>
@@ -523,7 +523,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <updated>2026-05-04T00:00:00Z</updated>
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-30 — Summary: The fiscal year 2026 (FY26) Breast Cancer Research Program (BCRP) Breakthrough Award mechanism supports promising research with high potential to lead to or make breakthroughs in breast cancer. All applications must address at least one of the FY26 BCRP overarching challenges or provide adequate justification for exception. Applications must address the challenge in a way that can lead to…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-30 | Summary: The fiscal year 2026 (FY26) Breast Cancer Research Program (BCRP) Breakthrough Award mechanism supports promising research with high potential to lead to or make breakthroughs in breast cancer. All applications must address at least one of the FY26 BCRP overarching challenges or provide adequate justification for exception. Applications must address the challenge in a way that can lead to…</summary>
   </entry>
   <entry>
     <title>DoW Breast Cancer, Breakthrough Award Level 4</title>
@@ -532,7 +532,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <updated>2026-05-04T00:00:00Z</updated>
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-30 — Summary: The fiscal year 2026 (FY26) Breast Cancer Research Program (BCRP) Breakthrough Award mechanism supports promising research with high potential to lead to or make breakthroughs in breast cancer. All applications must address at least one of the FY26 BCRP overarching challenges or provide adequate justification for exception. Applications must address the challenge in a way that can lead to…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-30 | Summary: The fiscal year 2026 (FY26) Breast Cancer Research Program (BCRP) Breakthrough Award mechanism supports promising research with high potential to lead to or make breakthroughs in breast cancer. All applications must address at least one of the FY26 BCRP overarching challenges or provide adequate justification for exception. Applications must address the challenge in a way that can lead to…</summary>
   </entry>
   <entry>
     <title>DoW Breast Cancer, Transformative Breast Cancer Consortium Award</title>
@@ -541,7 +541,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <updated>2026-05-04T00:00:00Z</updated>
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-30 — Summary: The fiscal year 2026 (FY26) Breast Cancer Research Program (BCRP) Transformative Breast Cancer Consortium Award supports collaborations and ideas that will transform the lives of individuals with, and/or at risk for, breast cancer and will significantly accelerate progress toward ending breast cancer. Applications must propose a synergistic, highly integrated, multidisciplinary and multi-…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-30 | Summary: The fiscal year 2026 (FY26) Breast Cancer Research Program (BCRP) Transformative Breast Cancer Consortium Award supports collaborations and ideas that will transform the lives of individuals with, and/or at risk for, breast cancer and will significantly accelerate progress toward ending breast cancer. Applications must propose a synergistic, highly integrated, multidisciplinary and multi-…</summary>
   </entry>
   <entry>
     <title>DoW Ovarian Cancer, Clinical Trial Award</title>
@@ -551,7 +551,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-01 — Summary: The OCRP Clinical Trial Award supports the rapid implementation of clinical trials with the potential to have a significant impact on the treatment or management of ovarian cancer.Distinctive Features: Clinical trials may be designed to evaluate promising new products, pharmacologic agents (drugs or biologics), devices, clinical guidance and/or emerging approaches and technologies. Propos…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-01 | Summary: The OCRP Clinical Trial Award supports the rapid implementation of clinical trials with the potential to have a significant impact on the treatment or management of ovarian cancer.Distinctive Features: Clinical trials may be designed to evaluate promising new products, pharmacologic agents (drugs or biologics), devices, clinical guidance and/or emerging approaches and technologies. Propos…</summary>
   </entry>
   <entry>
     <title>DoW, Ovarian Cancer, Investigator-Initiated Research Award</title>
@@ -560,10 +560,10 @@ a high level of innovation and creativity. The goal is to support the best young
     <updated>2026-05-04T00:00:00Z</updated>
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-01 — Summary: The Ovarian Cancer Research Program (OCRP) Investigator-Initiated Research Award is intended to support high-impact research that addresses a critical need and has the potential to make an important contribution to ovarian cancer or patient/survivor care.Distinctive Features: Application must contain strong research plan with sound scientific rational and logical reasoning. Preliminary da…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-01 | Summary: The Ovarian Cancer Research Program (OCRP) Investigator-Initiated Research Award is intended to support high-impact research that addresses a critical need and has the potential to make an important contribution to ovarian cancer or patient/survivor care.Distinctive Features: Application must contain strong research plan with sound scientific rational and logical reasoning. Preliminary da…</summary>
   </entry>
   <entry>
-    <title>DoW, Ovarian Cancer, Ovarian Cancer Academy – Early-Career Investigator Award</title>
+    <title>DoW, Ovarian Cancer, Ovarian Cancer Academy - Early-Career Investigator Award</title>
     <link href="https://www.grants.gov/search-results-detail/362204"/>
     <id>urn:funding-finder:grants-gov:362204</id>
     <updated>2026-05-04T00:00:00Z</updated>
@@ -571,17 +571,17 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Cancer"/>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-01 — Summary: Initially created in FY09, the OCRP Ovarian Cancer Academy (OCA) is a unique, interactive virtual academy providing intensive mentoring, national networking, collaborations, and a peer group for junior faculty. The overarching goal of the OCA is to conduct innovative and impactful ovarian cancer research while developing successful, highly productive ovarian cancer researchers in a collab…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-01 | Summary: Initially created in FY09, the OCRP Ovarian Cancer Academy (OCA) is a unique, interactive virtual academy providing intensive mentoring, national networking, collaborations, and a peer group for junior faculty. The overarching goal of the OCA is to conduct innovative and impactful ovarian cancer research while developing successful, highly productive ovarian cancer researchers in a collab…</summary>
   </entry>
   <entry>
-    <title>DoW, Ovarian Cancer, Ovarian Cancer Clinical Trial Academy – Early-Career Investigator Award</title>
+    <title>DoW, Ovarian Cancer, Ovarian Cancer Clinical Trial Academy - Early-Career Investigator Award</title>
     <link href="https://www.grants.gov/search-results-detail/362207"/>
     <id>urn:funding-finder:grants-gov:362207</id>
     <updated>2026-05-04T00:00:00Z</updated>
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
     <category term="Education and workforce"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-01 — Summary: Created in FY23, the Ovarian Cancer Clinical Trial Academy (OCCTA) supports the next generation of Early-Career Investigators (ECIs) in clinical trial research to produce effective treatments and cures for ovarian cancer. The OCCTA, through its Leadership, provides for professional and leadership development of the ECIs to include skills and competencies needed to execute clinical trials,…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-01 | Summary: Created in FY23, the Ovarian Cancer Clinical Trial Academy (OCCTA) supports the next generation of Early-Career Investigators (ECIs) in clinical trial research to produce effective treatments and cures for ovarian cancer. The OCCTA, through its Leadership, provides for professional and leadership development of the ECIs to include skills and competencies needed to execute clinical trials,…</summary>
   </entry>
   <entry>
     <title>DoW, Ovarian Cancer, Pilot Award</title>
@@ -591,7 +591,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
     <category term="Technology development"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-01 — Summary: The Ovarian Cancer Pilot Award supports research that expands or modifies current thinking about and/or approaches in ovarian cancer, exploring innovative concepts or theories in ovarian cancer that could ultimately lead to critical discoveries or major advancements that will drive the field forward.Distinctive Features: Innovation is key. Research projects that demonstrate exceptional sc…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-01 | Summary: The Ovarian Cancer Pilot Award supports research that expands or modifies current thinking about and/or approaches in ovarian cancer, exploring innovative concepts or theories in ovarian cancer that could ultimately lead to critical discoveries or major advancements that will drive the field forward.Distinctive Features: Innovation is key. Research projects that demonstrate exceptional sc…</summary>
   </entry>
   <entry>
     <title>DoW Pancreatic Cancer Research Program, Focused Pilot Award</title>
@@ -600,7 +600,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <updated>2026-05-04T00:00:00Z</updated>
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-07 — Summary: The fiscal year 2026 (FY26) Pancreatic Cancer Research Program (PCARP) Focused Pilot Award supports the exploration and development of impactful and innovative concepts under a patient-centered focus area of pancreatic cancer research that could ultimately lead to major advancements that will have a profound effect on patients’ overall quality of life. The research this award supports sho…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-07 | Summary: The fiscal year 2026 (FY26) Pancreatic Cancer Research Program (PCARP) Focused Pilot Award supports the exploration and development of impactful and innovative concepts under a patient-centered focus area of pancreatic cancer research that could ultimately lead to major advancements that will have a profound effect on patients’ overall quality of life. The research this award supports sho…</summary>
   </entry>
   <entry>
     <title>DoW Pancreatic Cancer Research Program, Idea Development Award</title>
@@ -609,7 +609,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <updated>2026-05-04T00:00:00Z</updated>
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-07 — Summary: The fiscal year 2026 (FY26) Pancreatic Cancer Research Program (PCARP) Idea Development Award supports the development of innovative, high-risk/high-reward research that could lead to critical discoveries or major advancements that will accelerate progress in improving outcomes for individuals with pancreatic cancer. This award mechanism supports innovative ideas with the potential to yie…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-07 | Summary: The fiscal year 2026 (FY26) Pancreatic Cancer Research Program (PCARP) Idea Development Award supports the development of innovative, high-risk/high-reward research that could lead to critical discoveries or major advancements that will accelerate progress in improving outcomes for individuals with pancreatic cancer. This award mechanism supports innovative ideas with the potential to yie…</summary>
   </entry>
   <entry>
     <title>DoW Pancreatic Cancer Research Program, Translational Research Partnership Award</title>
@@ -618,6 +618,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <updated>2026-05-04T00:00:00Z</updated>
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-10-07 — Summary: The fiscal year 2026 (FY26) Pancreatic Cancer Research Program (PCARP) Translational Research Partnership Award supports partnerships between clinicians, population scientists, applied scientists and/or basic scientists that will accelerate the movement of promising ideas in pancreatic cancer toward clinical applications. The partnership must include at least one member with expertise in …</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-07 | Summary: The fiscal year 2026 (FY26) Pancreatic Cancer Research Program (PCARP) Translational Research Partnership Award supports partnerships between clinicians, population scientists, applied scientists and/or basic scientists that will accelerate the movement of promising ideas in pancreatic cancer toward clinical applications. The partnership must include at least one member with expertise in …</summary>
   </entry>
 </feed>

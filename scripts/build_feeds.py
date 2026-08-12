@@ -131,7 +131,7 @@ def summarize(record: dict) -> str:
     description = (record.get("description") or "").strip()
     if description:
         bits.append(description[:400] + ("…" if len(description) > 400 else ""))
-    return " — ".join(bits)
+    return " | ".join(bits)
 
 
 def sorted_recent(records: list[dict], limit: int) -> list[dict]:
@@ -169,7 +169,7 @@ def build_atom(title: str, self_path: str, records: list[dict], updated: datetim
 
 def _write(path: Path, content: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(content, encoding="utf-8")
+    path.write_text(content.replace("\u2014", "-").replace("\u2013", "-"), encoding="utf-8")
 
 
 def _facet_groups(records: list[dict], field: str) -> dict[str, list[dict]]:
@@ -204,15 +204,15 @@ def build_feeds(
 
     # All opportunities (larger limit).
     all_feed = out_dir / "all.xml"
-    _write(all_feed, build_atom("Funding Finder — all new opportunities", "all.xml", sorted_recent(records, ALL_LIMIT), now))
+    _write(all_feed, build_atom("Funding Finder | all new opportunities", "all.xml", sorted_recent(records, ALL_LIMIT), now))
     generated_paths.add(all_feed)
     manifest.append({"title": "All new opportunities", "url": f"{FEEDS_BASE}/all.xml", "count": len(records)})
 
     for value, subset in sorted(_facet_groups(records, "source_type").items()):
-        emit(f"Funding Finder — {value}", f"source-type/{slugify(value)}.xml", subset)
+        emit(f"Funding Finder | {value}", f"source-type/{slugify(value)}.xml", subset)
 
     for value, subset in sorted(_facet_groups(records, "topic_areas").items()):
-        emit(f"Funding Finder — {value}", f"topic/{slugify(value)}.xml", subset)
+        emit(f"Funding Finder | {value}", f"topic/{slugify(value)}.xml", subset)
 
     changes_path = out_dir / "changes.xml"
     if changes_path.exists():
@@ -264,17 +264,20 @@ def _index_html(manifest: list[dict], now: datetime) -> str:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Funding Finder — RSS feeds</title>
+  <title>Funding Finder | RSS feeds</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/funding-finder.svg?v=20260812">
+  <link rel="stylesheet" href="../assets/brand.css?v=20260812">
   <style>
-    body {{ font-family: system-ui, sans-serif; max-width: 42rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }}
+    body {{ max-width: 42rem; margin: 2rem auto; padding: 0 1rem; color: #001e5f; background: #fff; line-height: 1.5; }}
     h1 {{ font-size: 1.4rem; }}
-    .count {{ color: #667; font-size: .85em; }}
+    a {{ color: #021bc3; }}
+    .count {{ color: #707070; font-size: .85em; }}
     li {{ margin: .25rem 0; }}
-    code {{ background: #eef; padding: .1rem .3rem; border-radius: .2rem; }}
+    code {{ background: rgb(183 211 255 / 34%); padding: .1rem .3rem; border-radius: .2rem; }}
   </style>
 </head>
 <body>
-  <h1>Funding Finder — subscribe by RSS</h1>
+  <h1>Funding Finder RSS feeds</h1>
   <p>Copy any link below into your RSS/Atom reader to get new opportunities as
      they appear. No account or email needed. Updated {escape(rfc3339(now))}.</p>
   <p>For a small, consent-based pilot, the project also includes a

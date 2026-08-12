@@ -30,11 +30,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
 
         main_image_url = (
             "https://mporosoff.github.io/grants-scraper/"
-            "assets/social/funding-finder-preview.jpg"
+            "assets/social/funding-finder-preview.jpg?v=20260812"
         )
         team_image_url = (
             "https://mporosoff.github.io/grants-scraper/"
-            "assets/social/faculty-pairing-preview.jpg"
+            "assets/social/faculty-pairing-preview.jpg?v=20260812"
         )
 
         for page in (index_html, explorer_html):
@@ -44,7 +44,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
                 self.assertIn('name="twitter:card" content="summary_large_image"', page)
                 self.assertIn(
                     'rel="icon" type="image/svg+xml" '
-                    'href="./assets/icons/funding-finder.svg"',
+                    'href="./assets/icons/funding-finder.svg?v=20260812"',
                     page,
                 )
 
@@ -52,7 +52,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn('name="twitter:card" content="summary_large_image"', team_html)
         self.assertIn(
             'rel="icon" type="image/svg+xml" '
-            'href="./assets/icons/faculty-pairing.svg"',
+            'href="./assets/icons/faculty-pairing.svg?v=20260812"',
             team_html,
         )
         self.assertIn('name="robots" content="noindex, nofollow"', team_html)
@@ -164,7 +164,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             '<script src="./data/opportunities.js?v=catalog-',
             explorer_html,
         )
-        release_version = "release-2026-08-11-v14"
+        release_version = "brand-2026-08-12"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={release_version}">',
             explorer_html,

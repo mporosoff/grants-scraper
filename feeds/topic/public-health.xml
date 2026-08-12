@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Funding Finder — Public health</title>
+  <title>Funding Finder | Public health</title>
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml</id>
@@ -14,7 +14,7 @@
     <author><name>Indian Health Service</name></author>
     <category term="Arts and culture"/>
     <category term="Public health"/>
-    <summary>Indian Health Service — Closes 2028-05-01 — The goal of this cooperative agreement is to improve the overall health and wellness of American Indian and Alaska Native men through a culturally responsive Public Health Nursing (PHN) case management and care navigation model. PHNs will engage men in preventive health and wellness services, increase access to care, promote early identification and management of health conditions, and support hea…</summary>
+    <summary>Indian Health Service | Closes 2028-05-01 | The goal of this cooperative agreement is to improve the overall health and wellness of American Indian and Alaska Native men through a culturally responsive Public Health Nursing (PHN) case management and care navigation model. PHNs will engage men in preventive health and wellness services, increase access to care, promote early identification and management of health conditions, and support hea…</summary>
   </entry>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -25,7 +25,7 @@
     <category term="Biology and biotechnology"/>
     <category term="Data science"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2028-02-01 — The National Human Genome Research Institute (NHGRI) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to establish an ancient DNA for Modern Genomics (aDMG) program. The goal of aDMG is to establish an ethical resource of ancient and historical human DNA (aDNA) data to advance studies about contemporary human traits and biology. This NOFO aims to solicit applicatio…</summary>
+    <summary>National Institutes of Health | Closes 2028-02-01 | The National Human Genome Research Institute (NHGRI) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to establish an ancient DNA for Modern Genomics (aDMG) program. The goal of aDMG is to establish an ethical resource of ancient and historical human DNA (aDNA) data to advance studies about contemporary human traits and biology. This NOFO aims to solicit applicatio…</summary>
   </entry>
   <entry>
     <title>Limited Competition: Resources and Workforce Development for the Regional Biocontainment Laboratories</title>
@@ -36,7 +36,7 @@
     <category term="Education and workforce"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-09-30 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by providing critical resources, staff and facilities support for the Regional Biocontainment Laboratories (RBLs). The RBLs provide biosafety level 2 and 3 (BSL-2/3) biocontainment facilities for research on infectious diseases. They play a critical role in public health emergency response by facilitatin…</summary>
+    <summary>National Institutes of Health | Closes 2027-09-30 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by providing critical resources, staff and facilities support for the Regional Biocontainment Laboratories (RBLs). The RBLs provide biosafety level 2 and 3 (BSL-2/3) biocontainment facilities for research on infectious diseases. They play a critical role in public health emergency response by facilitatin…</summary>
   </entry>
   <entry>
     <title>Clinical Trials in Organ Transplantation in Children and Adults</title>
@@ -47,7 +47,7 @@
     <category term="Biology and biotechnology"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-09-30 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Clinical Trials in Organ Transplantation in Children and Adults (CTOT-CA) program. The goal of the CTOT-CA is to improve the outcome of organ transplantation through clinical trials with mechanistic studies. The CTOT-CA will support multicenter clinical trials, with a…</summary>
+    <summary>National Institutes of Health | Closes 2027-09-30 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Clinical Trials in Organ Transplantation in Children and Adults (CTOT-CA) program. The goal of the CTOT-CA is to improve the outcome of organ transplantation through clinical trials with mechanistic studies. The CTOT-CA will support multicenter clinical trials, with a…</summary>
   </entry>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -57,7 +57,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Agriculture and food"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-11-10 — The Tobacco Regulatory Science Program, participating NIH Institutes and Centers (ICs), and the Food and Drug Administration (FDA) Center for Tobacco Products (CTP) intend to issue a Notice of Funding Opportunity (NOFO) soliciting applications for Tobacco Centers of Regulatory Science (TCORS). The awards under this NOFO will be administered by NIH using funds made available through FDA CTP and the…</summary>
+    <summary>National Institutes of Health | Closes 2027-11-10 | The Tobacco Regulatory Science Program, participating NIH Institutes and Centers (ICs), and the Food and Drug Administration (FDA) Center for Tobacco Products (CTP) intend to issue a Notice of Funding Opportunity (NOFO) soliciting applications for Tobacco Centers of Regulatory Science (TCORS). The awards under this NOFO will be administered by NIH using funds made available through FDA CTP and the…</summary>
   </entry>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -69,7 +69,7 @@
     <category term="Cancer"/>
     <category term="Data science"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-06-11 — NCI intends to release a Notice of Funding Opportunity (NOFO) that serves to continue the advancement and sustainment of informatics tools, software, and research resources that enable the acquisition, management, analysis, visualization, and interpretation of data across the cancer research continuum, including cancer biology, diagnosis and treatment, early detection, risk assessment and preventi…</summary>
+    <summary>National Institutes of Health | Closes 2027-06-11 | NCI intends to release a Notice of Funding Opportunity (NOFO) that serves to continue the advancement and sustainment of informatics tools, software, and research resources that enable the acquisition, management, analysis, visualization, and interpretation of data across the cancer research continuum, including cancer biology, diagnosis and treatment, early detection, risk assessment and preventi…</summary>
   </entry>
   <entry>
     <title>National Viral Hepatitis Education, Awareness, and Capacity Building for Communities and Providers</title>
@@ -80,7 +80,7 @@
     <category term="Education and workforce"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-06-01 — In alignment with CDC's viral hepatitis strategic goals and current epidemiology, this Notice of Funding Opportunity (NOFO) will address the need for increasing awareness of viral hepatitis prevention, testing, and treatment options among populations disproportionately affected by hepatitis B and/or hepatitis C virus infections. The priority populations' needs will also be addressed by increasing …</summary>
+    <summary>Centers for Disease Control - NCHHSTP | Closes 2027-06-01 | In alignment with CDC's viral hepatitis strategic goals and current epidemiology, this Notice of Funding Opportunity (NOFO) will address the need for increasing awareness of viral hepatitis prevention, testing, and treatment options among populations disproportionately affected by hepatitis B and/or hepatitis C virus infections. The priority populations' needs will also be addressed by increasing …</summary>
   </entry>
   <entry>
     <title>Holistic and Evidence-Informed Wellness for STI Prevention</title>
@@ -89,7 +89,7 @@
     <updated>2027-03-29T00:00:00Z</updated>
     <author><name>Centers for Disease Control - NCHHSTP</name></author>
     <category term="Public health"/>
-    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-05-31 — STIs represent a serious public health and economic burden in the United States (U.S.), with approximately 2.2 million new infections occurring each year. As the nation's lead public health agency, the Centers for Disease Control and Prevention (CDC) has a unique responsibility to provide national leadership in STI prevention and control. To meet this challenge, CDC supports a comprehensive and in…</summary>
+    <summary>Centers for Disease Control - NCHHSTP | Closes 2027-05-31 | STIs represent a serious public health and economic burden in the United States (U.S.), with approximately 2.2 million new infections occurring each year. As the nation's lead public health agency, the Centers for Disease Control and Prevention (CDC) has a unique responsibility to provide national leadership in STI prevention and control. To meet this challenge, CDC supports a comprehensive and in…</summary>
   </entry>
   <entry>
     <title>Improved Drug Susceptibility Testing (DST) for Mycobacteria</title>
@@ -100,7 +100,7 @@
     <category term="Arts and culture"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-05-28 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting research to develop improved drug susceptibility tests (DSTs) for mycobacterial drugs, including those currently used for treatment of tuberculosis (TB) and clinically important non-tuberculous mycobacterial (NTM) infections, new drugs and drugs in late-stage clinical development. TB is a l…</summary>
+    <summary>National Institutes of Health | Closes 2027-05-28 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting research to develop improved drug susceptibility tests (DSTs) for mycobacterial drugs, including those currently used for treatment of tuberculosis (TB) and clinically important non-tuberculous mycobacterial (NTM) infections, new drugs and drugs in late-stage clinical development. TB is a l…</summary>
   </entry>
   <entry>
     <title>Maternal-Child Surveillance and Partnerships for Action, Results, and Knowledge</title>
@@ -110,7 +110,7 @@
     <author><name>Centers for Disease Control - NCBDDD</name></author>
     <category term="Data science"/>
     <category term="Public health"/>
-    <summary>Centers for Disease Control - NCBDDD — Closes 2027-04-26 — CDC proposes to allocate funds to implement Notice of Funding Opportunity (NOFO) DD-27-0028, Maternal Child Surveillance and Partnerships for Action, Results, and Knowledge. This NOFO will integrate maternal child health surveillance with national partnership activities to address key public health challenges including alcohol use during pregnancy, fetal alcohol spectrum disorders (FASDs), neonata…</summary>
+    <summary>Centers for Disease Control - NCBDDD | Closes 2027-04-26 | CDC proposes to allocate funds to implement Notice of Funding Opportunity (NOFO) DD-27-0028, Maternal Child Surveillance and Partnerships for Action, Results, and Knowledge. This NOFO will integrate maternal child health surveillance with national partnership activities to address key public health challenges including alcohol use during pregnancy, fetal alcohol spectrum disorders (FASDs), neonata…</summary>
   </entry>
   <entry>
     <title>Comprehensive Suicide Prevention Program for States</title>
@@ -120,7 +120,7 @@
     <author><name>Centers for Disease Control - NCIPC</name></author>
     <category term="Agriculture and food"/>
     <category term="Public health"/>
-    <summary>Centers for Disease Control - NCIPC — Closes 2027-04-17 — This forecast is for CDC's Comprehensive Suicide Prevention Program for States, a cooperative agreement intended to support implementation and evaluation of a comprehensive public health approach to suicide prevention in the United States. Funded recipients will focus on one or more Focus Prevention Areas (FPAs), groups or settings identified through available data as experiencing a significant su…</summary>
+    <summary>Centers for Disease Control - NCIPC | Closes 2027-04-17 | This forecast is for CDC's Comprehensive Suicide Prevention Program for States, a cooperative agreement intended to support implementation and evaluation of a comprehensive public health approach to suicide prevention in the United States. Funded recipients will focus on one or more Focus Prevention Areas (FPAs), groups or settings identified through available data as experiencing a significant su…</summary>
   </entry>
   <entry>
     <title>Suicide Prevention, Intervention, and Postvention</title>
@@ -131,7 +131,7 @@
     <category term="Arts and culture"/>
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
-    <summary>Indian Health Service — Closes 2027-04-01 — The primary purpose of this program is to reduce suicide among American Indian and Alaska Native (AI/AN) populations by improving care coordination, expanding culturally appropriate behavioral health services, and implementing early intervention strategies for at-risk AI/AN youth. The program supports Tribal, community-driven suicide prevention, intervention, and postvention efforts that promote c…</summary>
+    <summary>Indian Health Service | Closes 2027-04-01 | The primary purpose of this program is to reduce suicide among American Indian and Alaska Native (AI/AN) populations by improving care coordination, expanding culturally appropriate behavioral health services, and implementing early intervention strategies for at-risk AI/AN youth. The program supports Tribal, community-driven suicide prevention, intervention, and postvention efforts that promote c…</summary>
   </entry>
   <entry>
     <title>Tribal Epidemiology Centers</title>
@@ -140,7 +140,7 @@
     <updated>2027-02-01T00:00:00Z</updated>
     <author><name>Indian Health Service</name></author>
     <category term="Public health"/>
-    <summary>Indian Health Service — Closes 2027-04-01 — Second cohort of TEC sites for any currently unserved Areas.</summary>
+    <summary>Indian Health Service | Closes 2027-04-01 | Second cohort of TEC sites for any currently unserved Areas.</summary>
   </entry>
   <entry>
     <title>Strengthening Public Health Systems and Services in Indian Country</title>
@@ -150,7 +150,7 @@
     <author><name>CENTERS FOR DISEASE CONTROL CSTLTS</name></author>
     <category term="Education and workforce"/>
     <category term="Public health"/>
-    <summary>CENTERS FOR DISEASE CONTROL CSTLTS — Closes 2027-04-02 — CDC announces the availability of supplemental funding for the 34 American Indian and Alaska Native (AI/AN) Tribes and regional AI/AN tribally designated organizations awarded funding under CDC-RFA-TO-23-0001: Strengthening Public Health Systems and Services in Indian Country. The CDC-RFA-TO-23-0001 recipients are eligible to submit applications for new FY 2027 Centers, Institute, and Offices (CIO…</summary>
+    <summary>CENTERS FOR DISEASE CONTROL CSTLTS | Closes 2027-04-02 | CDC announces the availability of supplemental funding for the 34 American Indian and Alaska Native (AI/AN) Tribes and regional AI/AN tribally designated organizations awarded funding under CDC-RFA-TO-23-0001: Strengthening Public Health Systems and Services in Indian Country. The CDC-RFA-TO-23-0001 recipients are eligible to submit applications for new FY 2027 Centers, Institute, and Offices (CIO…</summary>
   </entry>
   <entry>
     <title>Clinical Data, Safety and Statistical Centers (CDSSC)</title>
@@ -160,7 +160,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-06-01 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the support of the Clinical Data, Safety and Statistical Centers program. The overall objective of this program is to provide coordination and oversight for multiple activities in service to clinical research and mechanistic studies supported by NIAID, including all Division of Allergy, Immunolog…</summary>
+    <summary>National Institutes of Health | Closes 2027-06-01 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the support of the Clinical Data, Safety and Statistical Centers program. The overall objective of this program is to provide coordination and oversight for multiple activities in service to clinical research and mechanistic studies supported by NIAID, including all Division of Allergy, Immunolog…</summary>
   </entry>
   <entry>
     <title>Health Promotion and Disease Prevention Research Centers: 2027 Special Interest Project Supplements (SIPS)</title>
@@ -170,7 +170,7 @@
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Cancer"/>
     <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-03-23 — This NOFO will provide supplemental funding to the currently funding twenty (20) CDC Prevention Research Centers (PRCs) to conduct Special Interest Projects (SIPs). The purpose of the SIPs is to inform public health practice through high-quality applied health promotion and disease prevention public health research in real-world settings to identify, design, test, assess, evaluate, disseminate, an…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-03-23 | This NOFO will provide supplemental funding to the currently funding twenty (20) CDC Prevention Research Centers (PRCs) to conduct Special Interest Projects (SIPs). The purpose of the SIPs is to inform public health practice through high-quality applied health promotion and disease prevention public health research in real-world settings to identify, design, test, assess, evaluate, disseminate, an…</summary>
   </entry>
   <entry>
     <title>Translational Transplantation Tolerance Cooperative Study Group</title>
@@ -180,7 +180,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-05-21 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the support of the Translational Transplantation Tolerance Cooperative Study Group (TTTCSG) program. The overarching goal of this program is to facilitate clinical translation of safe and effective transplant tolerance regimens that achieve long-term graft survival without the need for life-long …</summary>
+    <summary>National Institutes of Health | Closes 2027-05-21 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the support of the Translational Transplantation Tolerance Cooperative Study Group (TTTCSG) program. The overarching goal of this program is to facilitate clinical translation of safe and effective transplant tolerance regimens that achieve long-term graft survival without the need for life-long …</summary>
   </entry>
   <entry>
     <title>Advanced Development and Validation of Emerging Technologies for Basic and Clinical Cancer Research (R33 Clinical Trial Not Allowed)</title>
@@ -192,7 +192,7 @@
     <category term="Cancer"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-06-04 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing exploratory research projects focused on further development and validation of emerging technologies for cancer research or clinical care. This NOFO solicits R33 applications where major feasibility gaps for the technology or methodology have been overcome, as demonstrated w…</summary>
+    <summary>National Institutes of Health | Closes 2027-06-04 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing exploratory research projects focused on further development and validation of emerging technologies for cancer research or clinical care. This NOFO solicits R33 applications where major feasibility gaps for the technology or methodology have been overcome, as demonstrated w…</summary>
   </entry>
   <entry>
     <title>Early-Stage Innovative Technology Development for Basic and Clinical Cancer Research (R61 Clinical Trial Not Allowed)</title>
@@ -204,7 +204,7 @@
     <category term="Cancer"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-06-04 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing to develop innovative technologies for cancer research or clinical care. The emphasis of this NOFO is on early-stage projects proposing proof-of-concept/pilot studies to test the technical feasibility of the proposed method, tool, assay, platform, or instrument. Well-suited …</summary>
+    <summary>National Institutes of Health | Closes 2027-06-04 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing to develop innovative technologies for cancer research or clinical care. The emphasis of this NOFO is on early-stage projects proposing proof-of-concept/pilot studies to test the technical feasibility of the proposed method, tool, assay, platform, or instrument. Well-suited …</summary>
   </entry>
   <entry>
     <title>Demonstration Projects for Whole-Person Health Models for Women Living with HIV in the South</title>
@@ -217,7 +217,7 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
-    <summary>Centers for Disease Control - NCHHSTP — Closes 2027-03-15 — The purpose of this demonstration project is to support coordinated Clinic and Community Collaboratives (CCCs) to integrate HIV care with broader women's health services in jurisdictions with disproportionately high HIV disease burden to improve HIV-related outcomes, overall health, and quality of life among WWH. Organizations will be funded to implement 4 strategies: (1) Integrate HIV care with b…</summary>
+    <summary>Centers for Disease Control - NCHHSTP | Closes 2027-03-15 | The purpose of this demonstration project is to support coordinated Clinic and Community Collaboratives (CCCs) to integrate HIV care with broader women's health services in jurisdictions with disproportionately high HIV disease burden to improve HIV-related outcomes, overall health, and quality of life among WWH. Organizations will be funded to implement 4 strategies: (1) Integrate HIV care with b…</summary>
   </entry>
   <entry>
     <title>Childhood Asthma in Urban Settings Clinical Research Network</title>
@@ -228,7 +228,7 @@
     <category term="Biology and biotechnology"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-05-28 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Childhood Asthma in Urban Settings Clinical Research Network (CAUSE) network. The CAUSE network will support multi-site clinical studies and trials on the prevention and treatment of asthma in economically disadvantaged pediatric populations where disease burden is hi…</summary>
+    <summary>National Institutes of Health | Closes 2027-05-28 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Childhood Asthma in Urban Settings Clinical Research Network (CAUSE) network. The CAUSE network will support multi-site clinical studies and trials on the prevention and treatment of asthma in economically disadvantaged pediatric populations where disease burden is hi…</summary>
   </entry>
   <entry>
     <title>Core State Injury Prevention Program (Core SIPP)</title>
@@ -239,7 +239,7 @@
     <category term="Neuroscience"/>
     <category term="Public health"/>
     <category term="Transportation"/>
-    <summary>Centers for Disease Control - NCIPC — Closes 2027-03-08 — This forecast is for CDC's Core State Injury Prevention Program (Core SIPP), a cooperative agreement to support public health infrastructure, data, and partnerships to use data to identify potential risk and inform the implementation of strategies to prevent unintentional injury. Actions using the best available evidence are intended to increase protective factors and reduce risk factors for injur…</summary>
+    <summary>Centers for Disease Control - NCIPC | Closes 2027-03-08 | This forecast is for CDC's Core State Injury Prevention Program (Core SIPP), a cooperative agreement to support public health infrastructure, data, and partnerships to use data to identify potential risk and inform the implementation of strategies to prevent unintentional injury. Actions using the best available evidence are intended to increase protective factors and reduce risk factors for injur…</summary>
   </entry>
   <entry>
     <title>Asthma and Allergic Diseases Cooperative Research Centers</title>
@@ -250,7 +250,7 @@
     <category term="Agriculture and food"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-05-21 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Asthma and Allergic Diseases Cooperative Research Centers (AADCRC). The AADCRC program serves as the cornerstone of NIAID's efforts to promote clinical and basic research in diseases including asthma, upper airway allergic/inflammatory diseases, food and drug allergie…</summary>
+    <summary>National Institutes of Health | Closes 2027-05-21 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Asthma and Allergic Diseases Cooperative Research Centers (AADCRC). The AADCRC program serves as the cornerstone of NIAID's efforts to promote clinical and basic research in diseases including asthma, upper airway allergic/inflammatory diseases, food and drug allergie…</summary>
   </entry>
   <entry>
     <title>Continuing Enhanced National Surveillance for Prion Diseases in the United States</title>
@@ -261,7 +261,7 @@
     <category term="Arts and culture"/>
     <category term="Neuroscience"/>
     <category term="Public health"/>
-    <summary>Centers for Disease Control - NCEZID — Closes 2027-03-27 — The CDC announces the availability of FY 2027 funds for a cooperative agreement to continue enhanced national surveillance for human prion diseases, also known as transmissible spongiform encephalopathies (TSEs), in the United States. The purpose is to continue an active surveillance program to help confirm suspected and clinically diagnosed cases of human prion disease and to monitor the occurren…</summary>
+    <summary>Centers for Disease Control - NCEZID | Closes 2027-03-27 | The CDC announces the availability of FY 2027 funds for a cooperative agreement to continue enhanced national surveillance for human prion diseases, also known as transmissible spongiform encephalopathies (TSEs), in the United States. The purpose is to continue an active surveillance program to help confirm suspected and clinically diagnosed cases of human prion disease and to monitor the occurren…</summary>
   </entry>
   <entry>
     <title>National Urban Indian Health Program (Education and Research)</title>
@@ -273,7 +273,7 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
-    <summary>Indian Health Service — Closes 2027-02-01 — The purpose of the NUIBH program is to strengthen behavioral health services for Urban Indian communities by increasing awareness, advocacy, education, and collaboration nationwide. The program supports Urban Indian Organizations (UIOs) through technical assistance, training, information sharing, strategic planning, and quality improvement to expand culturally appropriate behavioral health service…</summary>
+    <summary>Indian Health Service | Closes 2027-02-01 | The purpose of the NUIBH program is to strengthen behavioral health services for Urban Indian communities by increasing awareness, advocacy, education, and collaboration nationwide. The program supports Urban Indian Organizations (UIOs) through technical assistance, training, information sharing, strategic planning, and quality improvement to expand culturally appropriate behavioral health service…</summary>
   </entry>
   <entry>
     <title>Establishing a Research Network to Guide Foundational Research on Human Consciousness</title>
@@ -287,7 +287,7 @@
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
     <category term="Transportation"/>
-    <summary>National Institutes of Health — Closes 2027-02-08 — This Funding Opportunity will establish the NIH Blueprint for Neuroscience Research Network to Guide Foundational Research on Human Consciousness, leveraging a trans-NIH collaboration of 14 Institutes, Centers, and Offices dedicated to reducing the burden of nervous system disorders. Consciousness is central to numerous serious biomedical conditions, including coma, delirium, dementia, traumatic b…</summary>
+    <summary>National Institutes of Health | Closes 2027-02-08 | This Funding Opportunity will establish the NIH Blueprint for Neuroscience Research Network to Guide Foundational Research on Human Consciousness, leveraging a trans-NIH collaboration of 14 Institutes, Centers, and Offices dedicated to reducing the burden of nervous system disorders. Consciousness is central to numerous serious biomedical conditions, including coma, delirium, dementia, traumatic b…</summary>
   </entry>
   <entry>
     <title>Digital Health Technology and Reciprocal Innovation to Improve Clinical and Public Health Outcomes</title>
@@ -298,7 +298,7 @@
     <category term="Environmental science"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-02-11 — This initiative will support research on the development, validation, feasibility, and effectiveness of innovative digital health interventions or tools (including mobile health) specifically suited for underserved settings in the U.S. and globally. Research should utilize new or emerging technologies, platforms, systems, and/or analytics to address high priority health problems, expand the eviden…</summary>
+    <summary>National Institutes of Health | Closes 2027-02-11 | This initiative will support research on the development, validation, feasibility, and effectiveness of innovative digital health interventions or tools (including mobile health) specifically suited for underserved settings in the U.S. and globally. Research should utilize new or emerging technologies, platforms, systems, and/or analytics to address high priority health problems, expand the eviden…</summary>
   </entry>
   <entry>
     <title>Health and Extreme Weather Solutions-Focused Research Hubs (U54 - Clinical Trial Optional)</title>
@@ -309,10 +309,10 @@
     <category term="Community development"/>
     <category term="Environmental science"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-01-29 — The National Institute of Environmental Health Sciences (NIEHS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose translational research hubs with multiple highly integrated components focused on research, capacity building, and community/public health translation for regionally relevant topics related to the health impacts of extreme weather and cumula…</summary>
+    <summary>National Institutes of Health | Closes 2027-01-29 | The National Institute of Environmental Health Sciences (NIEHS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose translational research hubs with multiple highly integrated components focused on research, capacity building, and community/public health translation for regionally relevant topics related to the health impacts of extreme weather and cumula…</summary>
   </entry>
   <entry>
-    <title>Accelerating Research and Development of Next Generation Malaria Vaccines Against Malaria – A Model for Mosquito-Borne Diseases</title>
+    <title>Accelerating Research and Development of Next Generation Malaria Vaccines Against Malaria - A Model for Mosquito-Borne Diseases</title>
     <link href="https://www.grants.gov/search-results-detail/361832"/>
     <id>urn:funding-finder:grants-gov:361832</id>
     <updated>2026-11-27T00:00:00Z</updated>
@@ -320,7 +320,7 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-02-11 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to support basic research, discovery, and/or preclinical development of highly efficacious vaccines for malaria and potentially other mosquito-borne illness. The program will encourage novel approaches to vaccine design that capitalize on recent technological innovations including structure-based immunogen design, and/or combi…</summary>
+    <summary>National Institutes of Health | Closes 2027-02-11 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to support basic research, discovery, and/or preclinical development of highly efficacious vaccines for malaria and potentially other mosquito-borne illness. The program will encourage novel approaches to vaccine design that capitalize on recent technological innovations including structure-based immunogen design, and/or combi…</summary>
   </entry>
   <entry>
     <title>Feasibility Studies to Inform the Design of Future Clinical Trials</title>
@@ -329,7 +329,7 @@
     <updated>2026-11-24T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-02-16 — The National Institutes of Health intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose feasibility studies that could inform the design and conduct of subsequent definitive clinical trials (e.g., efficacy, effectiveness, pragmatic, dissemination and implementation, phase/stage II or later trials). Applications to this NOFO should demonstrate that the propo…</summary>
+    <summary>National Institutes of Health | Closes 2027-02-16 | The National Institutes of Health intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose feasibility studies that could inform the design and conduct of subsequent definitive clinical trials (e.g., efficacy, effectiveness, pragmatic, dissemination and implementation, phase/stage II or later trials). Applications to this NOFO should demonstrate that the propo…</summary>
   </entry>
   <entry>
     <title>NIH Pragmatic Trials Conducted in Health Care Systems</title>
@@ -339,7 +339,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health — Closes 2027-02-23 — The National Institutes of Health intends to publish a Notice of Funding Opportunity (NOFO), Pragmatic and Implementation Trials Conducted in Health Care SettingsThis funding opportunity will support large-scale pragmatic trials that test intervention effectiveness in routine clinical care and/or implementation trials that evaluate strategies for delivering interventions within health care setting…</summary>
+    <summary>National Institutes of Health | Closes 2027-02-23 | The National Institutes of Health intends to publish a Notice of Funding Opportunity (NOFO), Pragmatic and Implementation Trials Conducted in Health Care SettingsThis funding opportunity will support large-scale pragmatic trials that test intervention effectiveness in routine clinical care and/or implementation trials that evaluate strategies for delivering interventions within health care setting…</summary>
   </entry>
   <entry>
     <title>World Trade Center Youth Research Coordinating Center (U54)</title>
@@ -352,7 +352,7 @@
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-23 — The National Institute for Occupational Safety and Health (NIOSH), World Trade Center (WTC) Health Program, plans to establish a WTC Youth Research Coordinating Center ("Center") through a U54 cooperative agreement.In December 2022, Congress amended the Public Health Service Act (42 U.S.C. § 300mm–51(c)) to direct the WTC Health Program Administrator to establish a research cohort for emerging hea…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-02-23 | The National Institute for Occupational Safety and Health (NIOSH), World Trade Center (WTC) Health Program, plans to establish a WTC Youth Research Coordinating Center ("Center") through a U54 cooperative agreement.In December 2022, Congress amended the Public Health Service Act (42 U.S.C. § 300mm-51(c)) to direct the WTC Health Program Administrator to establish a research cohort for emerging hea…</summary>
   </entry>
   <entry>
     <title>Translational Centers Using Microphysiologic Systems for Infectious Diseases</title>
@@ -363,7 +363,7 @@
     <category term="Biology and biotechnology"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-01-29 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting the development of human microphysiologic systems (MPS) for infectious disease research and the development of therapeutics or biological products. MPS are in vitro platforms composed of cells or tissues maintained in a microenvironment designed to mimic the physiological aspects of in vivo…</summary>
+    <summary>National Institutes of Health | Closes 2027-01-29 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting the development of human microphysiologic systems (MPS) for infectious disease research and the development of therapeutics or biological products. MPS are in vitro platforms composed of cells or tissues maintained in a microenvironment designed to mimic the physiological aspects of in vivo…</summary>
   </entry>
   <entry>
     <title>NIH Specialized Center Grant (Parent P50)</title>
@@ -372,7 +372,7 @@
     <updated>2026-11-09T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-01-11 — Through this Notice of Funding Opportunity (NOFO), the participating NIH Institutes, Centers, and Offices (ICOs) encourage pursuit of the NIH’s mission through the submission of investigator-initiated Specialized Center (P50) applications. With this Parent P50 NOFO, the NIH ICOs intend to support a broadly based, multidisciplinary, often long-term research program with a specific major scientific …</summary>
+    <summary>National Institutes of Health | Closes 2027-01-11 | Through this Notice of Funding Opportunity (NOFO), the participating NIH Institutes, Centers, and Offices (ICOs) encourage pursuit of the NIH’s mission through the submission of investigator-initiated Specialized Center (P50) applications. With this Parent P50 NOFO, the NIH ICOs intend to support a broadly based, multidisciplinary, often long-term research program with a specific major scientific …</summary>
   </entry>
   <entry>
     <title>Healthy Tomorrows Partnership for Children Program (HTPCP)</title>
@@ -381,7 +381,7 @@
     <updated>2026-11-06T00:00:00Z</updated>
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Public health"/>
-    <summary>Health Resources and Services Administration — Closes 2027-01-20 — The purpose of the Healthy Tomorrows Partnership for Children Program (HTPCP) is to support community-based projects that promote access to preventive clinical and public health services for children.</summary>
+    <summary>Health Resources and Services Administration | Closes 2027-01-20 | The purpose of the Healthy Tomorrows Partnership for Children Program (HTPCP) is to support community-based projects that promote access to preventive clinical and public health services for children.</summary>
   </entry>
   <entry>
     <title>Precision and Systems Biology to Uncover the Link Between Chronic and Infectious Diseases</title>
@@ -396,7 +396,7 @@
     <category term="Environmental science"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-01-22 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
+    <summary>National Institutes of Health | Closes 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
   </entry>
   <entry>
     <title>Centers of Excellence in Healthcare Quality and Safety</title>
@@ -405,7 +405,7 @@
     <updated>2026-11-05T00:00:00Z</updated>
     <author><name>Centers for Disease Control - NCEZID</name></author>
     <category term="Public health"/>
-    <summary>Centers for Disease Control - NCEZID — Closes 2027-01-04 — This Program will create a collaborative network of healthcare systems, facilities and public health partners to rapidly detect, respond to, and prevent threats to patient and healthcare worker safety. This Program will support work that improves the safety, quality and resilience of U.S. healthcare delivery.The Program will be made up of healthcare systems inclusive of multiple facilities in a va…</summary>
+    <summary>Centers for Disease Control - NCEZID | Closes 2027-01-04 | This Program will create a collaborative network of healthcare systems, facilities and public health partners to rapidly detect, respond to, and prevent threats to patient and healthcare worker safety. This Program will support work that improves the safety, quality and resilience of U.S. healthcare delivery.The Program will be made up of healthcare systems inclusive of multiple facilities in a va…</summary>
   </entry>
   <entry>
     <title>State Occupational Safety and Health Surveillance Program (U60)</title>
@@ -416,7 +416,7 @@
     <category term="Cancer"/>
     <category term="Education and workforce"/>
     <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-30 — NIOSH has provided financial and technical assistance to develop or expand state-level OSH surveillance capacity and infrastructure since the 1970s. From 2021-2026, NIOSH funded cooperative agreements in 23 states under announcement PAR-20-312. These programs varied in scope and focus, each providing a level of occupational health expertise to the public health system in their state. Grantees incl…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2026-12-30 | NIOSH has provided financial and technical assistance to develop or expand state-level OSH surveillance capacity and infrastructure since the 1970s. From 2021-2026, NIOSH funded cooperative agreements in 23 states under announcement PAR-20-312. These programs varied in scope and focus, each providing a level of occupational health expertise to the public health system in their state. Grantees incl…</summary>
   </entry>
   <entry>
     <title>Expanded Surveillance for Pediatric Infectious Diseases</title>
@@ -426,7 +426,7 @@
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-31 — The purpose of this Notice of Funding Opportunity (NOFO) is to support a network of U.S. institutions that will conduct standardized, prospective, active surveillance of pediatric acute respiratory illness (ARI) and acute gastroenteritis (AGE). The network will focus on respiratory and enteric viruses among pediatric patients seeking healthcare.In addition, the network will generate robust estimat…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2026-12-31 | The purpose of this Notice of Funding Opportunity (NOFO) is to support a network of U.S. institutions that will conduct standardized, prospective, active surveillance of pediatric acute respiratory illness (ARI) and acute gastroenteritis (AGE). The network will focus on respiratory and enteric viruses among pediatric patients seeking healthcare.In addition, the network will generate robust estimat…</summary>
   </entry>
   <entry>
     <title>Early Detection, Response, and Control of Global Rabies Outbreaks and Associated Threats to America's Dog-Rabies Free Status</title>
@@ -435,7 +435,7 @@
     <updated>2026-10-30T00:00:00Z</updated>
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-01 — This Notice of Funding Opportunity (NOFO) supports research to develop, implement, monitor, and evaluate technology-driven and cost-effective tools that reduce the global human rabies burden. It also measures progress toward canine rabies elimination, with an emphasis on high-burden countries. Priority research areas include:Electronic systems for tracking human and dog rabies vaccinations.Managin…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-02-01 | This Notice of Funding Opportunity (NOFO) supports research to develop, implement, monitor, and evaluate technology-driven and cost-effective tools that reduce the global human rabies burden. It also measures progress toward canine rabies elimination, with an emphasis on high-burden countries. Priority research areas include:Electronic systems for tracking human and dog rabies vaccinations.Managin…</summary>
   </entry>
   <entry>
     <title>Collaborative Network for Clinical Research on Immune Tolerance</title>
@@ -445,7 +445,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-01-29 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Collaborative Network for Clinical Research on Immune Tolerance. The purpose of this program is to enhance understanding of the underlying mechanisms of the induction, maintenance, and loss of immune tolerance in humans; and to develop improved tolerogenic interventio…</summary>
+    <summary>National Institutes of Health | Closes 2027-01-29 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Collaborative Network for Clinical Research on Immune Tolerance. The purpose of this program is to enhance understanding of the underlying mechanisms of the induction, maintenance, and loss of immune tolerance in humans; and to develop improved tolerogenic interventio…</summary>
   </entry>
   <entry>
     <title>World Trade Center Health Program Mentored Research Scientist Career Development Award (K01)</title>
@@ -454,7 +454,7 @@
     <updated>2026-10-07T00:00:00Z</updated>
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-08 — The National Institute for Occupational Safety and Health (NIOSH) World Trade Center (WTC) Health Program K01 Award supports early-career investigators in developing independent research careers focused on improving the health and well-being of populations affected by the September 11, 2001, terrorist attacks (9/11). This award provides up to three years of mentored research and career development…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2026-12-08 | The National Institute for Occupational Safety and Health (NIOSH) World Trade Center (WTC) Health Program K01 Award supports early-career investigators in developing independent research careers focused on improving the health and well-being of populations affected by the September 11, 2001, terrorist attacks (9/11). This award provides up to three years of mentored research and career development…</summary>
   </entry>
   <entry>
     <title>Improving Linkage to Care for People with Opioid Use Disorder (U01)</title>
@@ -464,7 +464,7 @@
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Arts and culture"/>
     <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-01 — The Centers for Disease Control and Prevention’s (CDC) National Center for Injury Prevention and Control (NCIPC, Injury Center) is soliciting investigator-initiated research to develop, implement, and rigorously evaluate strategies to address and overcome barriers to implementing evidence-based linkage to care services in health care settings. Strategies should focus on individuals with opioid use…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2026-12-01 | The Centers for Disease Control and Prevention’s (CDC) National Center for Injury Prevention and Control (NCIPC, Injury Center) is soliciting investigator-initiated research to develop, implement, and rigorously evaluate strategies to address and overcome barriers to implementing evidence-based linkage to care services in health care settings. Strategies should focus on individuals with opioid use…</summary>
   </entry>
   <entry>
     <title>New Investigator Grants to Conduct Research to Prevent Interpersonal Violence and Suicide Among Children and Adolescents (K01)</title>
@@ -473,7 +473,7 @@
     <updated>2026-10-01T00:00:00Z</updated>
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-12-01 — This Centers for Disease Control and Prevention (CDC), National Center for Injury Prevention and Control (NCIPC) Mentored Research Scientist Development Award (K01) supports an intensive, supervised (mentored) career development experience in violence and suicide prevention research leading to research independence. NCIPC supports K01 grants to help ensure the availability of an adequate number of…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2026-12-01 | This Centers for Disease Control and Prevention (CDC), National Center for Injury Prevention and Control (NCIPC) Mentored Research Scientist Development Award (K01) supports an intensive, supervised (mentored) career development experience in violence and suicide prevention research leading to research independence. NCIPC supports K01 grants to help ensure the availability of an adequate number of…</summary>
   </entry>
   <entry>
     <title>NIH Research Evaluation and Commercialization Hubs (REACH)</title>
@@ -484,7 +484,7 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2026-11-30 — The National Institutes of Health (NIH), including all of its Institutes and Centers, plans to publish a Notice of Funding Opportunity inviting eligible colleges, universities, and nonprofit organizations to apply for the NIH Research Evaluation and Commercialization Hub (REACH) program. The REACH program helps move promising biomedical discoveries from academic research into real-world products t…</summary>
+    <summary>National Institutes of Health | Closes 2026-11-30 | The National Institutes of Health (NIH), including all of its Institutes and Centers, plans to publish a Notice of Funding Opportunity inviting eligible colleges, universities, and nonprofit organizations to apply for the NIH Research Evaluation and Commercialization Hub (REACH) program. The REACH program helps move promising biomedical discoveries from academic research into real-world products t…</summary>
   </entry>
   <entry>
     <title>Clinical and Translational Science Award</title>
@@ -495,7 +495,7 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-01-25 — The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
+    <summary>National Institutes of Health | Closes 2027-01-25 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
   </entry>
   <entry>
     <title>Limited Competition: High Impact Specialized Innovation Programs in Clinical and Translational Science</title>
@@ -506,7 +506,7 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-01-25 — The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
+    <summary>National Institutes of Health | Closes 2027-01-25 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
   </entry>
   <entry>
     <title>Limited Competition: Research Education Program for the Clinical and Translational Science Awards Program</title>
@@ -517,7 +517,7 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health — Closes 2027-01-25 — The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
+    <summary>National Institutes of Health | Closes 2027-01-25 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
   </entry>
   <entry>
     <title>Limited Competition: Ruth L. Kirschstein National Research Service Award (NRSA) Institutional Research Training Grant for the Clinical and Translational Science Awards Program</title>
@@ -527,7 +527,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Education and workforce"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-01-25 — The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
+    <summary>National Institutes of Health | Closes 2027-01-25 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
   </entry>
   <entry>
     <title>The Next Generation of the Clinical and Translational Science Awards Program Trial Innovation Network</title>
@@ -539,7 +539,7 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-01-25 — The Clinical and Translational Science Awards Program Trial Innovation Network (TIN) is a collaborative initiative aimed at addressing critical roadblocks in the design and implementation of multi-center clinical trials. The goal of the TIN is to execute trials better, faster, and more cost-efficiently, as well as serve as a national laboratory to study, understand, and innovate the process of con…</summary>
+    <summary>National Institutes of Health | Closes 2027-01-25 | The Clinical and Translational Science Awards Program Trial Innovation Network (TIN) is a collaborative initiative aimed at addressing critical roadblocks in the design and implementation of multi-center clinical trials. The goal of the TIN is to execute trials better, faster, and more cost-efficiently, as well as serve as a national laboratory to study, understand, and innovate the process of con…</summary>
   </entry>
   <entry>
     <title>Limited Competition: Institutional Mentored Research Career Development Program for the Clinical and Translational Science Awards Program</title>
@@ -549,7 +549,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Education and workforce"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-02-12 — The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
+    <summary>National Institutes of Health | Closes 2027-02-12 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
   </entry>
   <entry>
     <title>Limited Competition: Clinical and Translational Science Awards (CTSA) Program: Collaborative and Innovative Acceleration Award</title>
@@ -559,7 +559,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Education and workforce"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-02-16 — The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
+    <summary>National Institutes of Health | Closes 2027-02-16 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
   </entry>
   <entry>
     <title>Community Development Block Grant Program for Indian Tribes and Alaska Native Villages</title>
@@ -570,7 +570,7 @@
     <category term="Community development"/>
     <category term="Environmental science"/>
     <category term="Public health"/>
-    <summary>Department of Housing and Urban Development — Closes 2026-11-16 — The primary objective of the Indian Community Development Block Grant (ICDBG) program is the development of viable Indian and Alaska Native communities, including the creation of decent housing, suitable living environments, and economic opportunities primarily for persons of low-and moderate-incomes. See the ICDBG regulations at 24 CFR 1003.2, the full text of which is available at 24 CFR part 10…</summary>
+    <summary>Department of Housing and Urban Development | Closes 2026-11-16 | The primary objective of the Indian Community Development Block Grant (ICDBG) program is the development of viable Indian and Alaska Native communities, including the creation of decent housing, suitable living environments, and economic opportunities primarily for persons of low-and moderate-incomes. See the ICDBG regulations at 24 CFR 1003.2, the full text of which is available at 24 CFR part 10…</summary>
   </entry>
   <entry>
     <title>HIV/AIDS Clinical Trials Network Clinical Trials Units</title>
@@ -580,7 +580,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-01-22 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the National Institutes of Health (NIH) mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center, and Laboratory Center working with Clinical Trials Units (CTUs), to advance prevention and treatment research on HIV and HIV…</summary>
+    <summary>National Institutes of Health | Closes 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the National Institutes of Health (NIH) mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center, and Laboratory Center working with Clinical Trials Units (CTUs), to advance prevention and treatment research on HIV and HIV…</summary>
   </entry>
   <entry>
     <title>HIV/AIDS Clinical Trials Network Laboratory Centers</title>
@@ -591,7 +591,7 @@
     <category term="Arts and culture"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-01-22 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center, and Laboratory Center (LC) working with Clinical Trials Units, to test prevention and treatment strategies and conduct implementation research designed to end t…</summary>
+    <summary>National Institutes of Health | Closes 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center, and Laboratory Center (LC) working with Clinical Trials Units, to test prevention and treatment strategies and conduct implementation research designed to end t…</summary>
   </entry>
   <entry>
     <title>HIV/AIDS Clinical Trials Network Leadership and Operations Centers</title>
@@ -601,7 +601,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-01-22 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the National Institutes of Health (NIH) mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center (LOC), Statistical and Data Management Center, and Laboratory Center working with Clinical Trials Units to advance prevention, treatment, and implementation research…</summary>
+    <summary>National Institutes of Health | Closes 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the National Institutes of Health (NIH) mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center (LOC), Statistical and Data Management Center, and Laboratory Center working with Clinical Trials Units to advance prevention, treatment, and implementation research…</summary>
   </entry>
   <entry>
     <title>HIV/AIDS Clinical Trials Network Statistical and Data Management Centers</title>
@@ -611,7 +611,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-01-22 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the National Institutes of Health (NIH) mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center (SDMC), and Laboratory Center (LC) working with Clinical Trials Units (CTUs), to advance prevention, treatment, and implement…</summary>
+    <summary>National Institutes of Health | Closes 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the National Institutes of Health (NIH) mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center (SDMC), and Laboratory Center (LC) working with Clinical Trials Units (CTUs), to advance prevention, treatment, and implement…</summary>
   </entry>
   <entry>
     <title>Centers for Structural Biology of HIV and other Infectious Diseases</title>
@@ -622,7 +622,7 @@
     <category term="Biology and biotechnology"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2026-12-18 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting the Centers for Structural Biology of HIV and other Infectious Diseases. This solicitation will support multidisciplinary groups of scientists to determine the 3-dimensional structures of molecules and molecular complexes involved in priority infectious diseases. The effort focuses on explo…</summary>
+    <summary>National Institutes of Health | Closes 2026-12-18 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting the Centers for Structural Biology of HIV and other Infectious Diseases. This solicitation will support multidisciplinary groups of scientists to determine the 3-dimensional structures of molecules and molecular complexes involved in priority infectious diseases. The effort focuses on explo…</summary>
   </entry>
   <entry>
     <title>Limited Competition: Small Grant Program for the NCATS Clinical and Translational Science Award (CTSA) Program (Clinical Trial Optional)</title>
@@ -632,7 +632,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Public health"/>
     <category term="Transportation"/>
-    <summary>National Institutes of Health — Closes 2026-10-17 — The purpose of this NOFO is to enhance the capability of NCATS CTSA Program KL2 scholars supported by the CTSA Program to conduct research as they complete the transition to fully independent academic translational scientists. These small research grants will support different clinical and translational science research projects, including pilot and feasibility studies; secondary data analysis of …</summary>
+    <summary>National Institutes of Health | Closes 2026-10-17 | The purpose of this NOFO is to enhance the capability of NCATS CTSA Program KL2 scholars supported by the CTSA Program to conduct research as they complete the transition to fully independent academic translational scientists. These small research grants will support different clinical and translational science research projects, including pilot and feasibility studies; secondary data analysis of …</summary>
   </entry>
   <entry>
     <title>Culturally Specific Domestic Violence and Sexual Assault Services</title>
@@ -643,6 +643,6 @@
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Public health"/>
-    <summary>Administration for Children and Families - OFVPS — Closes 2026-09-08 — The purpose of the Culturally Specific Services for Domestic Violence and Sexual Assault program is to provide culturally specific services for survivors of domestic violence and sexual assault. Objectives include services for survivors of sexual assault and domestic violence to address emergent needs resulting from a public health emergency and other public health concerns and support for organiz…</summary>
+    <summary>Administration for Children and Families - OFVPS | Closes 2026-09-08 | The purpose of the Culturally Specific Services for Domestic Violence and Sexual Assault program is to provide culturally specific services for survivors of domestic violence and sexual assault. Objectives include services for survivors of sexual assault and domestic violence to address emergent needs resulting from a public health emergency and other public health concerns and support for organiz…</summary>
   </entry>
 </feed>

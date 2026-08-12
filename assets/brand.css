@@ -1,0 +1,43 @@
+@font-face {
+  font-family: InterVariable;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("./fonts/InterVariable.woff2?v=4.1") format("woff2");
+}
+
+@font-face {
+  font-family: InterVariable;
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("./fonts/InterVariable-Italic.woff2?v=4.1") format("woff2");
+}
+
+:root {
+  --ur-navy: #001e5f;
+  --ur-meliora-blue: #021bc3;
+  --ur-quantum-cobalt: #003eff;
+  --ur-arpeggio-azure: #0066fd;
+  --ur-connective-cornflower: #66a2ff;
+  --ur-wondrous-sky: #b7d3ff;
+  --ur-dandelion-yellow: #ffd82b;
+  --ur-yellowjacket-gold: #ffc200;
+  --ur-bright-lemon: #ffe95f;
+  --ur-ever-butter: #fff3b1;
+  --ur-charcoal: #707070;
+  --ur-groundboi-gray: #bebebe;
+  --ur-silver: #e8e8e8;
+  --ur-white: #ffffff;
+  font-family: InterVariable, Inter, Aptos, "Segoe UI", sans-serif;
+  font-feature-settings: "liga" 1, "calt" 1;
+  font-optical-sizing: auto;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Funding Finder — Technology development</title>
+  <title>Funding Finder | Technology development</title>
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
@@ -17,7 +17,7 @@
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-10-20 — The Eunice Kennedy Shriver National Institute of Child Health and Human Development seeks to advance its mission of supporting maternal, fetal, and child health by continuing to enhance the understanding of maternal, fetal, and child exposure to nutrients, metabolites, medications, supplements, microbiome-derived products, and environmental chemicals. This will be done by supporting a second phase…</summary>
+    <summary>National Institutes of Health | Closes 2027-10-20 | The Eunice Kennedy Shriver National Institute of Child Health and Human Development seeks to advance its mission of supporting maternal, fetal, and child health by continuing to enhance the understanding of maternal, fetal, and child exposure to nutrients, metabolites, medications, supplements, microbiome-derived products, and environmental chemicals. This will be done by supporting a second phase…</summary>
   </entry>
   <entry>
     <title>AIDS Research Center on Mental Health and HIV/AIDS (P30 Clinical Trial Optional)</title>
@@ -28,7 +28,7 @@
     <category term="Data science"/>
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-05-25 — The National Institute of Mental Health (NIMH) seeks research applications to support the NIMH HIV/AIDS Research Centers (ARC) program, including Developmental Centers (D-ARCs) and full AIDS Research Centers (ARCs). These Research Centers aim to capitalize on the coordinated infrastructure to advance high-impact, interdisciplinary HIV/AIDS research. The ARC program supports innovative research acr…</summary>
+    <summary>National Institutes of Health | Closes 2027-05-25 | The National Institute of Mental Health (NIMH) seeks research applications to support the NIMH HIV/AIDS Research Centers (ARC) program, including Developmental Centers (D-ARCs) and full AIDS Research Centers (ARCs). These Research Centers aim to capitalize on the coordinated infrastructure to advance high-impact, interdisciplinary HIV/AIDS research. The ARC program supports innovative research acr…</summary>
   </entry>
   <entry>
     <title>State Maternal Health Innovation Program (SMHI)</title>
@@ -38,7 +38,7 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Education and workforce"/>
     <category term="Technology development"/>
-    <summary>Health Resources and Services Administration — Closes 2027-04-19 — The purpose of the State Maternal Health Innovation (SMHI) program is to build capacity in states to improve maternal health and address maternal health gaps. This is done through quality services, a skilled workforce, enhanced data quality and capacity, and innovative programming that reduces maternal mortality and severe maternal morbidity (SMM).</summary>
+    <summary>Health Resources and Services Administration | Closes 2027-04-19 | The purpose of the State Maternal Health Innovation (SMHI) program is to build capacity in states to improve maternal health and address maternal health gaps. This is done through quality services, a skilled workforce, enhanced data quality and capacity, and innovative programming that reduces maternal mortality and severe maternal morbidity (SMM).</summary>
   </entry>
   <entry>
     <title>Ryan White HIV/AIDS Program Part C Capacity Development Program</title>
@@ -47,7 +47,7 @@
     <updated>2027-01-15T00:00:00Z</updated>
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Technology development"/>
-    <summary>Health Resources and Services Administration — Closes 2027-03-16 — The purpose of the program is to strengthen the capacity of community-based organizations to improve health outcomes and reduce HIV transmission, especially for people not yet in regular HIV care. The activities fall under two categories: HIV Care Innovation and Infrastructure Development.</summary>
+    <summary>Health Resources and Services Administration | Closes 2027-03-16 | The purpose of the program is to strengthen the capacity of community-based organizations to improve health outcomes and reduce HIV transmission, especially for people not yet in regular HIV care. The activities fall under two categories: HIV Care Innovation and Infrastructure Development.</summary>
   </entry>
   <entry>
     <title>Alliance for Innovation on Maternal Health (AIM) Capacity Program</title>
@@ -56,7 +56,7 @@
     <updated>2027-01-15T00:00:00Z</updated>
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Technology development"/>
-    <summary>Health Resources and Services Administration — Closes 2027-03-17 — The purpose of the AIM Capacity program is to strengthen state, territorial, and Tribal capacity to implement, expand, and sustain AIM Patient Safety Bundles and associated resources across the United States. The program supports implementation of evidence-informed maternal safety practices to improve the quality and safety of maternity care, improve maternal health outcomes, and reduce preventabl…</summary>
+    <summary>Health Resources and Services Administration | Closes 2027-03-17 | The purpose of the AIM Capacity program is to strengthen state, territorial, and Tribal capacity to implement, expand, and sustain AIM Patient Safety Bundles and associated resources across the United States. The program supports implementation of evidence-informed maternal safety practices to improve the quality and safety of maternity care, improve maternal health outcomes, and reduce preventabl…</summary>
   </entry>
   <entry>
     <title>Advanced Development and Validation of Emerging Technologies for Basic and Clinical Cancer Research (R33 Clinical Trial Not Allowed)</title>
@@ -68,7 +68,7 @@
     <category term="Cancer"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-06-04 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing exploratory research projects focused on further development and validation of emerging technologies for cancer research or clinical care. This NOFO solicits R33 applications where major feasibility gaps for the technology or methodology have been overcome, as demonstrated w…</summary>
+    <summary>National Institutes of Health | Closes 2027-06-04 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing exploratory research projects focused on further development and validation of emerging technologies for cancer research or clinical care. This NOFO solicits R33 applications where major feasibility gaps for the technology or methodology have been overcome, as demonstrated w…</summary>
   </entry>
   <entry>
     <title>Early-Stage Innovative Technology Development for Basic and Clinical Cancer Research (R61 Clinical Trial Not Allowed)</title>
@@ -80,7 +80,7 @@
     <category term="Cancer"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-06-04 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing to develop innovative technologies for cancer research or clinical care. The emphasis of this NOFO is on early-stage projects proposing proof-of-concept/pilot studies to test the technical feasibility of the proposed method, tool, assay, platform, or instrument. Well-suited …</summary>
+    <summary>National Institutes of Health | Closes 2027-06-04 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing to develop innovative technologies for cancer research or clinical care. The emphasis of this NOFO is on early-stage projects proposing proof-of-concept/pilot studies to test the technical feasibility of the proposed method, tool, assay, platform, or instrument. Well-suited …</summary>
   </entry>
   <entry>
     <title>Partnership with Common Fund Data Ecosystem Resources</title>
@@ -92,7 +92,7 @@
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-05-25 — The NIH Office of Strategic Coordination (Common Fund) has generated many valuable and widely available datasets. The Common Fund Data Ecosystem is helping to ensure that all Common Fund (CF) data are Findable, Accessible, Interoperable, and Reusable (FAIR). The purpose of this Notice of Funding Opportunity (NOFO) is to announce the availability of funds for projects that involve collaboration bet…</summary>
+    <summary>National Institutes of Health | Closes 2027-05-25 | The NIH Office of Strategic Coordination (Common Fund) has generated many valuable and widely available datasets. The Common Fund Data Ecosystem is helping to ensure that all Common Fund (CF) data are Findable, Accessible, Interoperable, and Reusable (FAIR). The purpose of this Notice of Funding Opportunity (NOFO) is to announce the availability of funds for projects that involve collaboration bet…</summary>
   </entry>
   <entry>
     <title>Ryan White HIV/AIDS Program Part D - Women, Infants, Children and Youth Grant Supplemental Funding</title>
@@ -101,7 +101,7 @@
     <updated>2026-12-04T00:00:00Z</updated>
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Technology development"/>
-    <summary>Health Resources and Services Administration — Closes 2027-02-02 — The purpose of this supplemental funding is to strengthen organizational infrastructure and increase capacity to develop, enhance, or expand access to high quality family-centered HIV care services. The activities fall under two categories: HIV Care Innovation and Infrastructure Development.</summary>
+    <summary>Health Resources and Services Administration | Closes 2027-02-02 | The purpose of this supplemental funding is to strengthen organizational infrastructure and increase capacity to develop, enhance, or expand access to high quality family-centered HIV care services. The activities fall under two categories: HIV Care Innovation and Infrastructure Development.</summary>
   </entry>
   <entry>
     <title>Digital Health Technology and Reciprocal Innovation to Improve Clinical and Public Health Outcomes</title>
@@ -112,10 +112,10 @@
     <category term="Environmental science"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-02-11 — This initiative will support research on the development, validation, feasibility, and effectiveness of innovative digital health interventions or tools (including mobile health) specifically suited for underserved settings in the U.S. and globally. Research should utilize new or emerging technologies, platforms, systems, and/or analytics to address high priority health problems, expand the eviden…</summary>
+    <summary>National Institutes of Health | Closes 2027-02-11 | This initiative will support research on the development, validation, feasibility, and effectiveness of innovative digital health interventions or tools (including mobile health) specifically suited for underserved settings in the U.S. and globally. Research should utilize new or emerging technologies, platforms, systems, and/or analytics to address high priority health problems, expand the eviden…</summary>
   </entry>
   <entry>
-    <title>Accelerating Research and Development of Next Generation Malaria Vaccines Against Malaria – A Model for Mosquito-Borne Diseases</title>
+    <title>Accelerating Research and Development of Next Generation Malaria Vaccines Against Malaria - A Model for Mosquito-Borne Diseases</title>
     <link href="https://www.grants.gov/search-results-detail/361832"/>
     <id>urn:funding-finder:grants-gov:361832</id>
     <updated>2026-11-27T00:00:00Z</updated>
@@ -123,7 +123,7 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-02-11 — The National Institute of Allergy and Infectious Diseases (NIAID) seeks to support basic research, discovery, and/or preclinical development of highly efficacious vaccines for malaria and potentially other mosquito-borne illness. The program will encourage novel approaches to vaccine design that capitalize on recent technological innovations including structure-based immunogen design, and/or combi…</summary>
+    <summary>National Institutes of Health | Closes 2027-02-11 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to support basic research, discovery, and/or preclinical development of highly efficacious vaccines for malaria and potentially other mosquito-borne illness. The program will encourage novel approaches to vaccine design that capitalize on recent technological innovations including structure-based immunogen design, and/or combi…</summary>
   </entry>
   <entry>
     <title>National Biomedical Research Centers (P50 Clinical Trial Optional)</title>
@@ -132,7 +132,7 @@
     <updated>2026-11-25T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-01-25 — The National Biomedical Research Centers (NBRCs) are expected to provide scientific expertise, advanced equipment, infrastructure, and a range of well-characterized research models to researchers across the nation. Research at the NBRCs is supported by almost all NIH Institutes, as well as other federal agencies, including those that safeguard US national security interests. This NOFO emphasizes d…</summary>
+    <summary>National Institutes of Health | Closes 2027-01-25 | The National Biomedical Research Centers (NBRCs) are expected to provide scientific expertise, advanced equipment, infrastructure, and a range of well-characterized research models to researchers across the nation. Research at the NBRCs is supported by almost all NIH Institutes, as well as other federal agencies, including those that safeguard US national security interests. This NOFO emphasizes d…</summary>
   </entry>
   <entry>
     <title>NIOSH Centers of Excellence for Total Worker Health® (U19)</title>
@@ -145,7 +145,7 @@
     <category term="Education and workforce"/>
     <category term="Technology development"/>
     <category term="Transportation"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-26 — PURPOSENIOSH intends to support the Centers of Excellence in Total Worker Health® (TWH). These Centers will conduct rigorous research and translation activities to prevent harmful exposures, improve working conditions, and advance worker well-being. The Centers will develop practical, scalable solutions for employers and workers. All projects must use the NIOSH Worker Well-Being Questionnaire (Wel…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-02-26 | PURPOSENIOSH intends to support the Centers of Excellence in Total Worker Health® (TWH). These Centers will conduct rigorous research and translation activities to prevent harmful exposures, improve working conditions, and advance worker well-being. The Centers will develop practical, scalable solutions for employers and workers. All projects must use the NIOSH Worker Well-Being Questionnaire (Wel…</summary>
   </entry>
   <entry>
     <title>Small Business Transition Grant for New Entrepreneurs (Parent R43/R44 Clinical Trial Optional)</title>
@@ -156,7 +156,7 @@
     <category term="Education and workforce"/>
     <category term="Technology development"/>
     <category term="Transportation"/>
-    <summary>National Institutes of Health — Closes 2027-01-05 — The National Institutes of Health (NIH) and Centers for Disease Control and Prevention (CDC), including the participating Institutes, Centers and Offices, intend to publish a Notice of Funding Opportunity (NOFO) to invite eligible United States small business concerns (SBCs) to submit Small Business Innovation Research (SBIR) Phase I, and Fast-Track (NIH only) grant applications for the Small Busi…</summary>
+    <summary>National Institutes of Health | Closes 2027-01-05 | The National Institutes of Health (NIH) and Centers for Disease Control and Prevention (CDC), including the participating Institutes, Centers and Offices, intend to publish a Notice of Funding Opportunity (NOFO) to invite eligible United States small business concerns (SBCs) to submit Small Business Innovation Research (SBIR) Phase I, and Fast-Track (NIH only) grant applications for the Small Busi…</summary>
   </entry>
   <entry>
     <title>Alliance for Innovation on Maternal Health (AIM) Technical Assistance Center</title>
@@ -165,7 +165,7 @@
     <updated>2026-10-14T00:00:00Z</updated>
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Technology development"/>
-    <summary>Health Resources and Services Administration — Closes 2026-11-13 — The purpose of the Alliance for Innovation on Maternal Health (AIM) program is to provide technical assistance to support all 50 states, the District of Columbia (D.C.), jurisdictions, U.S. territories, tribal communities, and birthing facilities that are participating in the AIM program. AIM is a quality improvement initiative to support best practices that make birth safer, improve maternal heal…</summary>
+    <summary>Health Resources and Services Administration | Closes 2026-11-13 | The purpose of the Alliance for Innovation on Maternal Health (AIM) program is to provide technical assistance to support all 50 states, the District of Columbia (D.C.), jurisdictions, U.S. territories, tribal communities, and birthing facilities that are participating in the AIM program. AIM is a quality improvement initiative to support best practices that make birth safer, improve maternal heal…</summary>
   </entry>
   <entry>
     <title>NIH Research Evaluation and Commercialization Hubs (REACH)</title>
@@ -176,7 +176,7 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2026-11-30 — The National Institutes of Health (NIH), including all of its Institutes and Centers, plans to publish a Notice of Funding Opportunity inviting eligible colleges, universities, and nonprofit organizations to apply for the NIH Research Evaluation and Commercialization Hub (REACH) program. The REACH program helps move promising biomedical discoveries from academic research into real-world products t…</summary>
+    <summary>National Institutes of Health | Closes 2026-11-30 | The National Institutes of Health (NIH), including all of its Institutes and Centers, plans to publish a Notice of Funding Opportunity inviting eligible colleges, universities, and nonprofit organizations to apply for the NIH Research Evaluation and Commercialization Hub (REACH) program. The REACH program helps move promising biomedical discoveries from academic research into real-world products t…</summary>
   </entry>
   <entry>
     <title>Controlling and Preventing STIs in US Health Departments (CAP-STIs)</title>
@@ -185,7 +185,7 @@
     <updated>2026-09-01T00:00:00Z</updated>
     <author><name>Centers for Disease Control - NCHHSTP</name></author>
     <category term="Technology development"/>
-    <summary>Centers for Disease Control - NCHHSTP — Closes 2026-10-31 — CDC is funding programs that track, prevent, and control sexually transmitted infections (STI) in state, district, territorial, and city or county health departments.The purpose of this NOFO is to track, prevent, and control three common STIs: syphilis, gonorrhea, and chlamydia.The NOFO supports the goals of the Sexually Transmitted Infections National Strategic Plan 2021-2025:Prevent new STIs.Imp…</summary>
+    <summary>Centers for Disease Control - NCHHSTP | Closes 2026-10-31 | CDC is funding programs that track, prevent, and control sexually transmitted infections (STI) in state, district, territorial, and city or county health departments.The purpose of this NOFO is to track, prevent, and control three common STIs: syphilis, gonorrhea, and chlamydia.The NOFO supports the goals of the Sexually Transmitted Infections National Strategic Plan 2021-2025:Prevent new STIs.Imp…</summary>
   </entry>
   <entry>
     <title>Limited Competition: High Impact Specialized Innovation Programs in Clinical and Translational Science</title>
@@ -196,7 +196,7 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-01-25 — The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
+    <summary>National Institutes of Health | Closes 2027-01-25 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
   </entry>
   <entry>
     <title>The Next Generation of the Clinical and Translational Science Awards Program Trial Innovation Network</title>
@@ -208,7 +208,7 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2027-01-25 — The Clinical and Translational Science Awards Program Trial Innovation Network (TIN) is a collaborative initiative aimed at addressing critical roadblocks in the design and implementation of multi-center clinical trials. The goal of the TIN is to execute trials better, faster, and more cost-efficiently, as well as serve as a national laboratory to study, understand, and innovate the process of con…</summary>
+    <summary>National Institutes of Health | Closes 2027-01-25 | The Clinical and Translational Science Awards Program Trial Innovation Network (TIN) is a collaborative initiative aimed at addressing critical roadblocks in the design and implementation of multi-center clinical trials. The goal of the TIN is to execute trials better, faster, and more cost-efficiently, as well as serve as a national laboratory to study, understand, and innovate the process of con…</summary>
   </entry>
   <entry>
     <title>Enhancing and Supporting the Network of American Spaces in Armenia</title>
@@ -220,7 +220,7 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <category term="Technology development"/>
-    <summary>U.S. Mission to Armenia — Closes 2026-09-10 — The American Spaces network in Armenia is one of the United States’ strongest and most trusted platforms for advancing education, innovation, and people‑to‑people engagement. These Spaces demonstrate American excellence through open, reliable environments and high‑quality programming shaped by U.S. educational and technological leadership. They provide direct access to reliable information, modern…</summary>
+    <summary>U.S. Mission to Armenia | Closes 2026-09-10 | The American Spaces network in Armenia is one of the United States’ strongest and most trusted platforms for advancing education, innovation, and people‑to‑people engagement. These Spaces demonstrate American excellence through open, reliable environments and high‑quality programming shaped by U.S. educational and technological leadership. They provide direct access to reliable information, modern…</summary>
   </entry>
   <entry>
     <title>NEW NSF Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs : A Pilot Emphasis on Scientific Instrumentation. | NSF 26-511</title>
@@ -229,7 +229,7 @@
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>UR VPR funding digest (limited submissions &amp; foundations)</name></author>
     <category term="Technology development"/>
-    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Closes 2026-11-04</summary>
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) | Closes 2026-11-04</summary>
   </entry>
   <entry>
     <title>Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs SBIR/STTR: Developing Deep Technologies that Advance U.S. Competitiveness and Security | NSF 26-510</title>
@@ -238,7 +238,7 @@
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>UR VPR funding digest (limited submissions &amp; foundations)</name></author>
     <category term="Technology development"/>
-    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Closes 2026-11-04 — NSF seeks SBIR/STTR proposals that represent success in three criteria: Intellectual Merit, Broader Impacts, and Commercial Potential. **
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) | Closes 2026-11-04 | NSF seeks SBIR/STTR proposals that represent success in three criteria: Intellectual Merit, Broader Impacts, and Commercial Potential. **
 STTR proposals require that the startup issue a subaward to a not-for-profit research institution (RI) a minimum of 30% and can receive a maximum of 60% of the total project budget</summary>
   </entry>
   <entry>
@@ -250,7 +250,7 @@ STTR proposals require that the startup issue a subaward to a not-for-profit res
     <category term="Cancer"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>UR VPR funding digest (limited submissions &amp; foundations) — Closes 2027-01-19 — The Damon Runyon Clinical Investigator Award supports independent young physician-scientists conducting disease-oriented research that demonstrates
+    <summary>UR VPR funding digest (limited submissions &amp; foundations) | Closes 2027-01-19 | The Damon Runyon Clinical Investigator Award supports independent young physician-scientists conducting disease-oriented research that demonstrates
 a high level of innovation and creativity. The goal is to support the best young physician-scientists doing work aimed at improving the practice of cancer medicine. The Clinical Investigator Award program is specifically intended to provide outstanding…</summary>
   </entry>
   <entry>
@@ -265,7 +265,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Technology development"/>
     <category term="Carbon management"/>
     <category term="Climate change"/>
-    <summary>Golden Field Office — Closes 2027-01-15 — The U.S Department of Energy (DOE)’s Office of Critical Minerals and Energy Innovation (CMEI) intends to establish, on behalf of the Analysis and Strategy Office (ASO), the PROSPECT Program—Providing Opportunities for Specialized Education in Critical Technologies—and anticipates investing up to $100 million, subject to the availability of appropriated funds, to strengthen the nation's educational…</summary>
+    <summary>Golden Field Office | Closes 2027-01-15 | The U.S Department of Energy (DOE)’s Office of Critical Minerals and Energy Innovation (CMEI) intends to establish, on behalf of the Analysis and Strategy Office (ASO), the PROSPECT Program-Providing Opportunities for Specialized Education in Critical Technologies-and anticipates investing up to $100 million, subject to the availability of appropriated funds, to strengthen the nation's educational…</summary>
   </entry>
   <entry>
     <title>Project Constellation: Building a Constellation of Outer Space Partners at the UN</title>
@@ -276,7 +276,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <category term="Technology development"/>
-    <summary>U.S. Mission to the International Organizations — Closes 2026-09-04 — As the home of the United Nations Office for Outer Space Affairs (UNOOSA) and the United Nations Committee on the Peaceful Uses of Outer Space (COPUOS), Vienna provides a unique multilateral platform for fostering these partnerships. Building upon the successful inaugural U.S. Space Forum in 2025, the U.S. Mission to the International Organizations in Vienna (UNVIE) is launching Project Constellat…</summary>
+    <summary>U.S. Mission to the International Organizations | Closes 2026-09-04 | As the home of the United Nations Office for Outer Space Affairs (UNOOSA) and the United Nations Committee on the Peaceful Uses of Outer Space (COPUOS), Vienna provides a unique multilateral platform for fostering these partnerships. Building upon the successful inaugural U.S. Space Forum in 2025, the U.S. Mission to the International Organizations in Vienna (UNVIE) is launching Project Constellat…</summary>
   </entry>
   <entry>
     <title>Advancing Investigative Journalism in Ukraine through U.S. AI Innovation</title>
@@ -292,7 +292,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Environmental science"/>
     <category term="Technology development"/>
     <category term="Data science"/>
-    <summary>U.S. Mission to Ukraine — Closes 2026-09-01 — The U.S. Department of State's Embassy Kyiv announces an open competition for Ukrainian non-governmental media organizations and independent media outlets to implement a program that strengthens data-driven and AI-enabled journalism in Ukraine. It will build the capacity of journalists and newsrooms to produce high-quality reporting on economic development, reconstruction and investment through tr…</summary>
+    <summary>U.S. Mission to Ukraine | Closes 2026-09-01 | The U.S. Department of State's Embassy Kyiv announces an open competition for Ukrainian non-governmental media organizations and independent media outlets to implement a program that strengthens data-driven and AI-enabled journalism in Ukraine. It will build the capacity of journalists and newsrooms to produce high-quality reporting on economic development, reconstruction and investment through tr…</summary>
   </entry>
   <entry>
     <title>Placement and Coordination Program</title>
@@ -302,7 +302,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <author><name>Administration for Children and Families - ORR</name></author>
     <category term="Arts and culture"/>
     <category term="Technology development"/>
-    <summary>Administration for Children and Families - ORR — Closes 2026-09-17 — This NOFO is modified. Changes are made to Step 1: Review the Opportunity and Step 2: Get Ready to Apply. The disqualifying factors section has been updated to clarify that applications from organizations currently funded by ORR to support Program of Initial Resettlement services will be disqualified, including organizations receiving PIR funding through subaward. The webinar description has been …</summary>
+    <summary>Administration for Children and Families - ORR | Closes 2026-09-17 | This NOFO is modified. Changes are made to Step 1: Review the Opportunity and Step 2: Get Ready to Apply. The disqualifying factors section has been updated to clarify that applications from organizations currently funded by ORR to support Program of Initial Resettlement services will be disqualified, including organizations receiving PIR funding through subaward. The webinar description has been …</summary>
   </entry>
   <entry>
     <title>Innovation Grants to Nurture Initial Translational Efforts (IGNITE): Assay Development and Therapeutic Agent Identification</title>
@@ -313,7 +313,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2026-09-30 — The National Institute of Neurological Disorders and Stroke, National Institute of Aging, the NIH Helping to End Addiction Long Term (HEAL) initiative, and other participating NIH Institutes/Centers (ICs) seek to support applications to develop in vitro, ex vivo or in vivo assays and conduct screening efforts with the goal of identifying and characterizing potential therapeutic agents for disorder…</summary>
+    <summary>National Institutes of Health | Closes 2026-09-30 | The National Institute of Neurological Disorders and Stroke, National Institute of Aging, the NIH Helping to End Addiction Long Term (HEAL) initiative, and other participating NIH Institutes/Centers (ICs) seek to support applications to develop in vitro, ex vivo or in vivo assays and conduct screening efforts with the goal of identifying and characterizing potential therapeutic agents for disorder…</summary>
   </entry>
   <entry>
     <title>Innovation Grants to Nurture Initial Translational Efforts (IGNITE): Therapeutic Agent Characterization and Preclinical Efficacy Studies</title>
@@ -324,7 +324,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2026-09-30 — The National Institute of Neurological Disorders and Stroke, National Institute of Aging, the NIH Helping to End Addiction Long Term (HEAL) initiative, and other participating ICs seek to support applications to conduct pharmacodynamic, pharmacokinetic, and efficacy studies to demonstrate that the proposed therapeutic agent(s) have sufficient biological activity to warrant further development as t…</summary>
+    <summary>National Institutes of Health | Closes 2026-09-30 | The National Institute of Neurological Disorders and Stroke, National Institute of Aging, the NIH Helping to End Addiction Long Term (HEAL) initiative, and other participating ICs seek to support applications to conduct pharmacodynamic, pharmacokinetic, and efficacy studies to demonstrate that the proposed therapeutic agent(s) have sufficient biological activity to warrant further development as t…</summary>
   </entry>
   <entry>
     <title>FY26 Bus Safety, Accessibility, and Innovation Notice of Funding Opportunity</title>
@@ -334,7 +334,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <author><name>DOT - Federal Transit Administration</name></author>
     <category term="Technology development"/>
     <category term="Transportation"/>
-    <summary>DOT - Federal Transit Administration — Closes 2026-09-28 — The Federal Transit Administration (FTA) announces the opportunity to apply for competitive awards totaling up to $10 million in Public Transportation Innovation Program (49 U.S.C. 5312) funds for the Fiscal Year (FY) 2026 Bus Safety, Accessibility, and Innovation Research Program under Assistance Listing Number 20.530. As required by Federal public transportation law, funds will be awarded compet…</summary>
+    <summary>DOT - Federal Transit Administration | Closes 2026-09-28 | The Federal Transit Administration (FTA) announces the opportunity to apply for competitive awards totaling up to $10 million in Public Transportation Innovation Program (49 U.S.C. 5312) funds for the Fiscal Year (FY) 2026 Bus Safety, Accessibility, and Innovation Research Program under Assistance Listing Number 20.530. As required by Federal public transportation law, funds will be awarded compet…</summary>
   </entry>
   <entry>
     <title>Desalination and Water Purification Research Program: Research Projects</title>
@@ -349,7 +349,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Water"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Bureau of Reclamation — Closes 2026-09-29 — The Bureau of Reclamation"s Desalination and Water Purification Research (DWPR) Program aims to increase water supplies by reducing the costs, energy requirements, and other barriers to adoption of treating impaired water for beneficial uses. This NOFO invites proposals from eligible applicants to conduct innovative laboratory and pilot-scale water treatment research. Strong applications will demo…</summary>
+    <summary>Bureau of Reclamation | Closes 2026-09-29 | The Bureau of Reclamation"s Desalination and Water Purification Research (DWPR) Program aims to increase water supplies by reducing the costs, energy requirements, and other barriers to adoption of treating impaired water for beneficial uses. This NOFO invites proposals from eligible applicants to conduct innovative laboratory and pilot-scale water treatment research. Strong applications will demo…</summary>
   </entry>
   <entry>
     <title>Building Skills, Strengthening Communities, and Advancing Innovation in Northwest Mexico</title>
@@ -364,7 +364,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Environmental science"/>
     <category term="Technology development"/>
     <category term="Data science"/>
-    <summary>U.S. Mission to Mexico — Closes 2026-08-27 — The Public Diplomacy Sections of the U.S. Consulates General Tijuana, Nogales, and Hermosillo announce an open competition for programs that strengthen workforce readiness, promote safe border communities, and support a transparent and innovative information ecosystem in northwest Mexico. This Notice of Funding Opportunity (NOFO) seeks merit-based proposals that equip Mexican educators, youth, and…</summary>
+    <summary>U.S. Mission to Mexico | Closes 2026-08-27 | The Public Diplomacy Sections of the U.S. Consulates General Tijuana, Nogales, and Hermosillo announce an open competition for programs that strengthen workforce readiness, promote safe border communities, and support a transparent and innovative information ecosystem in northwest Mexico. This Notice of Funding Opportunity (NOFO) seeks merit-based proposals that equip Mexican educators, youth, and…</summary>
   </entry>
   <entry>
     <title>American Corners Portugal Operational Funding</title>
@@ -373,7 +373,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <updated>2026-07-28T00:00:00Z</updated>
     <author><name>U.S. Mission to Portugal</name></author>
     <category term="Technology development"/>
-    <summary>U.S. Mission to Portugal — Closes 2026-08-28 — The U.S. Department of State’s Mission to Portugal announces a limited competition solicitation for American Corners in Portugal to apply for FY2026 American Spaces Operational Funding. Funds will primarily support the operational needs of the Corners, including design and furnishings that showcase an American look and feel, resources and supplies, technology, internet, mission's programmatic and …</summary>
+    <summary>U.S. Mission to Portugal | Closes 2026-08-28 | The U.S. Department of State’s Mission to Portugal announces a limited competition solicitation for American Corners in Portugal to apply for FY2026 American Spaces Operational Funding. Funds will primarily support the operational needs of the Corners, including design and furnishings that showcase an American look and feel, resources and supplies, technology, internet, mission's programmatic and …</summary>
   </entry>
   <entry>
     <title>Advancing Sports Diplomacy Through Adaptive Sports</title>
@@ -382,7 +382,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <updated>2026-07-28T00:00:00Z</updated>
     <author><name>U.S. Mission to Ukraine</name></author>
     <category term="Technology development"/>
-    <summary>U.S. Mission to Ukraine — Closes 2026-08-31 — The U.S. Department of State's U.S. Embassy Kyiv announces an open competition to implement a program to build Ukraine’s capacity to support wounded veterans through adaptive sports by leveraging American leadership, innovation, and expertise in sport. Capitalizing on President Trump's announcement of the Decade of Sports (2024–2034) and the United States' role as host of global sporting events – …</summary>
+    <summary>U.S. Mission to Ukraine | Closes 2026-08-31 | The U.S. Department of State's U.S. Embassy Kyiv announces an open competition to implement a program to build Ukraine’s capacity to support wounded veterans through adaptive sports by leveraging American leadership, innovation, and expertise in sport. Capitalizing on President Trump's announcement of the Decade of Sports (2024-2034) and the United States' role as host of global sporting events - …</summary>
   </entry>
   <entry>
     <title>Building Lasting U.S.-Chad Partnerships to Promote American Excellence</title>
@@ -392,7 +392,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <author><name>U.S. Mission to Chad</name></author>
     <category term="Education and workforce"/>
     <category term="Technology development"/>
-    <summary>U.S. Mission to Chad — Closes 2026-09-06 — The U.S. Department of State’s Embassy N’Djamena announces an open competition to implement a program to build lasting partnerships that promote American excellence and closer U.S.-Chad Ties. Programs funded under this competition will build strong relationships between the U.S. and Chad, with targeted participants including, but not limited to, students, USG exchange program alumni, business lead…</summary>
+    <summary>U.S. Mission to Chad | Closes 2026-09-06 | The U.S. Department of State’s Embassy N’Djamena announces an open competition to implement a program to build lasting partnerships that promote American excellence and closer U.S.-Chad Ties. Programs funded under this competition will build strong relationships between the U.S. and Chad, with targeted participants including, but not limited to, students, USG exchange program alumni, business lead…</summary>
   </entry>
   <entry>
     <title>Coordinating Agricultural Development &amp; Innovation (CADI) to enable America First Trade Wins in Europe, the South Caucasus and Central Asia</title>
@@ -403,7 +403,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Agriculture and food"/>
     <category term="Education and workforce"/>
     <category term="Technology development"/>
-    <summary>Foreign Agricultural Service — Closes 2026-09-28 — The CADI, funded through an interagency agreement between the U.S. Department of Agriculture's Foreign Agricultural Service (USDA/FAS) and the State Department's Bureau of European and Eurasian Affairs, supports a portfolio of projects in Eastern Europe (non-E.U.), the South Caucasus, and Central Asia. These projects are designed to make American agriculture safer, stronger, and more prosperous. S…</summary>
+    <summary>Foreign Agricultural Service | Closes 2026-09-28 | The CADI, funded through an interagency agreement between the U.S. Department of Agriculture's Foreign Agricultural Service (USDA/FAS) and the State Department's Bureau of European and Eurasian Affairs, supports a portfolio of projects in Eastern Europe (non-E.U.), the South Caucasus, and Central Asia. These projects are designed to make American agriculture safer, stronger, and more prosperous. S…</summary>
   </entry>
   <entry>
     <title>FY26 Bureau of Land Management Plant Conservation and Restoration Management - Bureau wide</title>
@@ -417,7 +417,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <category term="Technology development"/>
-    <summary>Bureau of Land Management — Closes 2026-09-28 — The Bureau of Land Management"s Plant Conservation and Restoration Program (PCRP) is a national leader in building the native seed supply chain essential for restoring resilient public lands and supporting multiple use and sustained yield. PCRP advances Department of the Interior mission to protect and manage America's natural resources. The native seed PCRP adds to the commercial market enables r…</summary>
+    <summary>Bureau of Land Management | Closes 2026-09-28 | The Bureau of Land Management"s Plant Conservation and Restoration Program (PCRP) is a national leader in building the native seed supply chain essential for restoring resilient public lands and supporting multiple use and sustained yield. PCRP advances Department of the Interior mission to protect and manage America's natural resources. The native seed PCRP adds to the commercial market enables r…</summary>
   </entry>
   <entry>
     <title>Subnational Industrial Innovation and Resilient Entrepreneurship Accelerator</title>
@@ -432,7 +432,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Manufacturing"/>
     <category term="Technology development"/>
     <category term="Data science"/>
-    <summary>U.S. Mission to Argentina — Closes 2026-08-20 — The U.S. Embassy Buenos Aires announces an open competition to support subnational economic growth and operational modernization in Argentina's strategic manufacturing and resource corridors. This program will establish a competitive business acceleration program designed to provide next-generation entrepreneurs in industrial and mining provinces with practical management tools, strategic scaling …</summary>
+    <summary>U.S. Mission to Argentina | Closes 2026-08-20 | The U.S. Embassy Buenos Aires announces an open competition to support subnational economic growth and operational modernization in Argentina's strategic manufacturing and resource corridors. This program will establish a competitive business acceleration program designed to provide next-generation entrepreneurs in industrial and mining provinces with practical management tools, strategic scaling …</summary>
   </entry>
   <entry>
     <title>U.S.-Argentina Alumni Summit</title>
@@ -445,7 +445,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <category term="Technology development"/>
-    <summary>U.S. Mission to Argentina — Closes 2026-08-20 — The U.S. Embassy Buenos Aires announces an open competition to strengthen civic leadership, good governance, and institutional resilience across Argentina. This program will organize a national cross-sector Alumni Summit to equip emerging leaders from the public, academic, and non-governmental organization (NGO) sectors with practical tools, strategic insights, and ethical frameworks regarding inn…</summary>
+    <summary>U.S. Mission to Argentina | Closes 2026-08-20 | The U.S. Embassy Buenos Aires announces an open competition to strengthen civic leadership, good governance, and institutional resilience across Argentina. This program will organize a national cross-sector Alumni Summit to equip emerging leaders from the public, academic, and non-governmental organization (NGO) sectors with practical tools, strategic insights, and ethical frameworks regarding inn…</summary>
   </entry>
   <entry>
     <title>Collaborative Approaches to Adoption for Children with Complex Needs</title>
@@ -454,7 +454,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>Administration for Children and Families - ACYF/CB</name></author>
     <category term="Technology development"/>
-    <summary>Administration for Children and Families - ACYF/CB — Closes 2026-08-26 — This funding opportunity aims to support innovations that build evidence on how to help children and youth with complex or high-acuity needs achieve permanency through adoption. The projects will focus on collaborative, system-level efforts to recruit, train, support, and retain families who can meet these children's needs.Projects must be led by researchers who work within a child welfare agency …</summary>
+    <summary>Administration for Children and Families - ACYF/CB | Closes 2026-08-26 | This funding opportunity aims to support innovations that build evidence on how to help children and youth with complex or high-acuity needs achieve permanency through adoption. The projects will focus on collaborative, system-level efforts to recruit, train, support, and retain families who can meet these children's needs.Projects must be led by researchers who work within a child welfare agency …</summary>
   </entry>
   <entry>
     <title>NOFO- U.S.-Oman Youth Council Program</title>
@@ -464,7 +464,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <author><name>U.S. Mission to Oman</name></author>
     <category term="Education and workforce"/>
     <category term="Technology development"/>
-    <summary>U.S. Mission to Oman — Closes 2026-08-26 — The U.S. Embassy Muscat seeks an implementing partner to administer the U.S.-Omani Youth Council, a structured leadership and bilateral-engagement program for 10-15 university students from diverse academic disciplines and regions of Oman. The program will strengthen participants' understanding of the longstanding U.S.-Omani relationship and expose them to cooperation in diplomacy, trade, space, t…</summary>
+    <summary>U.S. Mission to Oman | Closes 2026-08-26 | The U.S. Embassy Muscat seeks an implementing partner to administer the U.S.-Omani Youth Council, a structured leadership and bilateral-engagement program for 10-15 university students from diverse academic disciplines and regions of Oman. The program will strengthen participants' understanding of the longstanding U.S.-Omani relationship and expose them to cooperation in diplomacy, trade, space, t…</summary>
   </entry>
   <entry>
     <title>NIA Research and Entrepreneurial Development Immersion (REDI): Entrepreneurship Enhancement Award</title>
@@ -475,7 +475,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2026-09-25 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to continue its Research and Entrepreneurial Development Immersion (REDI) Award program. The REDI program promotes the development of entrepreneurial education programs that are designed to broaden the skillset of graduate students and postdoctoral researchers, as well as early-career master's, Ph.D., a…</summary>
+    <summary>National Institutes of Health | Closes 2026-09-25 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to continue its Research and Entrepreneurial Development Immersion (REDI) Award program. The REDI program promotes the development of entrepreneurial education programs that are designed to broaden the skillset of graduate students and postdoctoral researchers, as well as early-career master's, Ph.D., a…</summary>
   </entry>
   <entry>
     <title>American Innovation Hub: AI &amp; Digital Skills for the Creative &amp; Tech Economy</title>
@@ -490,7 +490,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
     <category term="Data science"/>
-    <summary>U.S. Mission to Indonesia — Closes 2026-08-30 — Indonesia is ASEAN’s largest economy and most populous nation, with a young, fast-growing digital population that is rapidly adopting artificial intelligence and creative-technology tools. The choices this generation makes about which technologies, standards, and platforms to build on will shape Indonesia’s digital economy for decades. Demand for trusted, high-quality AI tools is outpacing access …</summary>
+    <summary>U.S. Mission to Indonesia | Closes 2026-08-30 | Indonesia is ASEAN’s largest economy and most populous nation, with a young, fast-growing digital population that is rapidly adopting artificial intelligence and creative-technology tools. The choices this generation makes about which technologies, standards, and platforms to build on will shape Indonesia’s digital economy for decades. Demand for trusted, high-quality AI tools is outpacing access …</summary>
   </entry>
   <entry>
     <title>U.S-Nigeria Creative, Digital, &amp; Innovation Economy Initiative</title>
@@ -501,7 +501,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Technology development"/>
-    <summary>U.S. Mission to Nigeria — Closes 2026-08-20 — The U.S. Department of State’s U.S. Consulate General Lagos announces an open competition to implement a program to increase two-way trade and investment between the United States and Nigeria by building commercial relationships, professional knowledge, legal infrastructure, and institutional connections that enable U.S. companies and Nigerian creative/digital professionals to partner and grow tog…</summary>
+    <summary>U.S. Mission to Nigeria | Closes 2026-08-20 | The U.S. Department of State’s U.S. Consulate General Lagos announces an open competition to implement a program to increase two-way trade and investment between the United States and Nigeria by building commercial relationships, professional knowledge, legal infrastructure, and institutional connections that enable U.S. companies and Nigerian creative/digital professionals to partner and grow tog…</summary>
   </entry>
   <entry>
     <title>Technology Enhanced Adoptive Family Recruiting and Matching</title>
@@ -513,7 +513,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Technology development"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Administration for Children and Families - ACYF/CB — Closes 2026-08-21 — This program will fund projects focused on technology-enabled strategies that improve adoptive matching, placement, and permanency for children in foster care awaiting adoption. The funds, awarded to four regional centers, will be used to design, implement and evaluate these strategies.These centers will focus on children with an adoption permanency goal or who are legally free for adoption due to…</summary>
+    <summary>Administration for Children and Families - ACYF/CB | Closes 2026-08-21 | This program will fund projects focused on technology-enabled strategies that improve adoptive matching, placement, and permanency for children in foster care awaiting adoption. The funds, awarded to four regional centers, will be used to design, implement and evaluate these strategies.These centers will focus on children with an adoption permanency goal or who are legally free for adoption due to…</summary>
   </entry>
   <entry>
     <title>Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets)</title>
@@ -525,7 +525,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Arts and culture"/>
     <category term="Technology development"/>
     <category term="Data science"/>
-    <summary>U.S. National Science Foundation — Closes 2026-11-04 — This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
+    <summary>U.S. National Science Foundation | Closes 2026-11-04 | This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
   </entry>
   <entry>
     <title>CyberNext: Advance Cybersecurity and AI Readiness</title>
@@ -538,10 +538,10 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Cybersecurity"/>
     <category term="Education and workforce"/>
     <category term="Technology development"/>
-    <summary>U.S. Mission to Albania — Closes 2026-08-20 — Project Background, Goals, and Objectives Albania has experienced multiple cyberattacks in recent years, placing increasingly digital government services and critical institutions at significant risk. While Albania is actively embracing AI, substantial skill gaps remain – gaps that American expertise is uniquely positioned to address. The “CyberNext: Advanced Cybersecurity and AI Readiness” progra…</summary>
+    <summary>U.S. Mission to Albania | Closes 2026-08-20 | Project Background, Goals, and Objectives Albania has experienced multiple cyberattacks in recent years, placing increasingly digital government services and critical institutions at significant risk. While Albania is actively embracing AI, substantial skill gaps remain - gaps that American expertise is uniquely positioned to address. The “CyberNext: Advanced Cybersecurity and AI Readiness” progra…</summary>
   </entry>
   <entry>
-    <title>GameON – U.S.-Albania E-Sports and Innovation</title>
+    <title>GameON - U.S.-Albania E-Sports and Innovation</title>
     <link href="https://www.grants.gov/search-results-detail/363247"/>
     <id>urn:funding-finder:grants-gov:363247</id>
     <updated>2026-07-20T00:00:00Z</updated>
@@ -551,7 +551,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <category term="Technology development"/>
-    <summary>U.S. Mission to Albania — Closes 2026-08-20 — 1. Project Background, Goals, and Objectives Albania's youth face a rapidly evolving digital economy that demands advanced technical skills, entrepreneurial mindsets, and exposure to international industry standards. Albanian interest in gaming – a global market forecasted to surpass $745 billion by 2030, in which the United States is leading – is high, presenting an opportunity to increase Albani…</summary>
+    <summary>U.S. Mission to Albania | Closes 2026-08-20 | 1. Project Background, Goals, and Objectives Albania's youth face a rapidly evolving digital economy that demands advanced technical skills, entrepreneurial mindsets, and exposure to international industry standards. Albanian interest in gaming - a global market forecasted to surpass $745 billion by 2030, in which the United States is leading - is high, presenting an opportunity to increase Albani…</summary>
   </entry>
   <entry>
     <title>StartUP Lab: U.S.-Albania Economic Leadership &amp; Innovation Exchange</title>
@@ -561,7 +561,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <author><name>U.S. Mission to Albania</name></author>
     <category term="Education and workforce"/>
     <category term="Technology development"/>
-    <summary>U.S. Mission to Albania — Closes 2026-08-20 — 1. Project Background, Goals, and Objectives American Corners in Albania have a consistent record of delivering youth entrepreneurship and economic advancement programming – from English language courses designed to build employability, to coding and tech skills bootcamps, to structured entrepreneurship incubators - each iteration reaching more participants year after year, expanding through all t…</summary>
+    <summary>U.S. Mission to Albania | Closes 2026-08-20 | 1. Project Background, Goals, and Objectives American Corners in Albania have a consistent record of delivering youth entrepreneurship and economic advancement programming - from English language courses designed to build employability, to coding and tech skills bootcamps, to structured entrepreneurship incubators - each iteration reaching more participants year after year, expanding through all t…</summary>
   </entry>
   <entry>
     <title>NextTech: Translational Development of Next-Generation Diagnostic and Therapeutic Devices (R18 Clinical Trial Not Allowed)</title>
@@ -571,7 +571,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <author><name>National Institutes of Health</name></author>
     <category term="Neuroscience"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2026-09-18 — This Notice of Funding Opportunity (NOFO) is to encourage applications from investigators to advance the development and translation of next-generation technologies to prevent, monitor, diagnose, and treat disorders within the missions of the NIH Brain Research through Advancing Innovative Neurotechnologies (BRAIN) and The Helping to End Addiction Long-term (HEAL) Initiatives. Awarded activities w…</summary>
+    <summary>National Institutes of Health | Closes 2026-09-18 | This Notice of Funding Opportunity (NOFO) is to encourage applications from investigators to advance the development and translation of next-generation technologies to prevent, monitor, diagnose, and treat disorders within the missions of the NIH Brain Research through Advancing Innovative Neurotechnologies (BRAIN) and The Helping to End Addiction Long-term (HEAL) Initiatives. Awarded activities w…</summary>
   </entry>
   <entry>
     <title>Center for Foundational Academic Research and Strategic Innovation for the Defense Enterprise (C-FARSIDE)</title>
@@ -582,7 +582,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Education and workforce"/>
     <category term="Technology development"/>
     <category term="Transportation"/>
-    <summary>Washington Headquarters Services — Closes 2026-08-17 — Bridging foundational academic research and strategic innovation for the Defense enterprise, the Center for Foundational Academic Research and Strategic Innovation for the Defense Enterprise (C-FARSIDE) will facilitate deep transdisciplinary collaborations among top-tier scholars, informed by defense strategists, that will transform rigorous and blue-sky research into breakthrough national securit…</summary>
+    <summary>Washington Headquarters Services | Closes 2026-08-17 | Bridging foundational academic research and strategic innovation for the Defense enterprise, the Center for Foundational Academic Research and Strategic Innovation for the Defense Enterprise (C-FARSIDE) will facilitate deep transdisciplinary collaborations among top-tier scholars, informed by defense strategists, that will transform rigorous and blue-sky research into breakthrough national securit…</summary>
   </entry>
   <entry>
     <title>Enhancing Biotechnology Market Opportunities for U.S. Exporters and American Farmers</title>
@@ -595,10 +595,10 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <category term="Technology development"/>
-    <summary>Foreign Agricultural Service — Closes 2026-08-17 — Modern agricultural biotechnology such as genome editing is a revolutionary tool that could transform the sustainability and viability of the agriculture sector. American farmers rely on agricultural biotechnology products, with over 90% of corn and soybeans derived from these technologies. In 2025, American farmers exported over $51 billion in agricultural biotechnology products worldwide. Howeve…</summary>
+    <summary>Foreign Agricultural Service | Closes 2026-08-17 | Modern agricultural biotechnology such as genome editing is a revolutionary tool that could transform the sustainability and viability of the agriculture sector. American farmers rely on agricultural biotechnology products, with over 90% of corn and soybeans derived from these technologies. In 2025, American farmers exported over $51 billion in agricultural biotechnology products worldwide. Howeve…</summary>
   </entry>
   <entry>
-    <title>Public Wireless Supply Chain Innovation Fund Grant Program – Solutions for AI-Native RAN</title>
+    <title>Public Wireless Supply Chain Innovation Fund Grant Program - Solutions for AI-Native RAN</title>
     <link href="https://www.grants.gov/search-results-detail/363179"/>
     <id>urn:funding-finder:grants-gov:363179</id>
     <updated>2026-07-14T00:00:00Z</updated>
@@ -608,7 +608,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <category term="Technology development"/>
-    <summary>National Telecommunications and Information Admini — Closes 2026-09-09 — This NOFO is the fourth issued under NTIA’s Public Wireless Supply Chain Innovation Fund (PWSCIF or Innovation Fund). Titled “Solutions for AI-Native RAN,” the goal of this NOFO is to support the development of a secure compute environment to enable or leverage native artificial intelligence (“AI”) capabilities in the Radio Access Network (RAN) that generate revenue for operators, cost savings, an…</summary>
+    <summary>National Telecommunications and Information Admini | Closes 2026-09-09 | This NOFO is the fourth issued under NTIA’s Public Wireless Supply Chain Innovation Fund (PWSCIF or Innovation Fund). Titled “Solutions for AI-Native RAN,” the goal of this NOFO is to support the development of a secure compute environment to enable or leverage native artificial intelligence (“AI”) capabilities in the Radio Access Network (RAN) that generate revenue for operators, cost savings, an…</summary>
   </entry>
   <entry>
     <title>EARLY STAGE INNOVATIONS (ESI26)</title>
@@ -622,7 +622,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Manufacturing"/>
     <category term="Space and aeronautics"/>
     <category term="Technology development"/>
-    <summary>NASA Headquarters — Closes 2026-08-13 — The National Aeronautics and Space Administration (NASA) Headquarters has released the solicitation Early Stage Innovations (ESI), as an appendix to the Research and Technology Mission Directorate (RTMD) umbrella NASA Research Announcement (NRA) titled "Space Technology Research, Development, Demonstration, and Infusion 2026 (SpaceTech REDDI 2026).”. The solicitation is available by opening the NS…</summary>
+    <summary>NASA Headquarters | Closes 2026-08-13 | The National Aeronautics and Space Administration (NASA) Headquarters has released the solicitation Early Stage Innovations (ESI), as an appendix to the Research and Technology Mission Directorate (RTMD) umbrella NASA Research Announcement (NRA) titled "Space Technology Research, Development, Demonstration, and Infusion 2026 (SpaceTech REDDI 2026).”. The solicitation is available by opening the NS…</summary>
   </entry>
   <entry>
     <title>EARLY STAGE INNOVATIONS FOR IN SITU RESOURCE UTILIZATION (ESI26-ISRU)</title>
@@ -634,7 +634,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Separations and membranes"/>
     <category term="Space and aeronautics"/>
     <category term="Technology development"/>
-    <summary>NASA Headquarters — Closes 2026-08-13 — The National Aeronautics and Space Administration (NASA) Headquarters has released the solicitation Early Stage Innovations for In Situ Resource Utilization (ESI26-ISRU), as an appendix to the Research and Technology Mission Directorate (RTMD) umbrella NASA Research Announcement (NRA) titled "Space Technology Research, Development, Demonstration, and Infusion 2026 (SpaceTech REDDI 2026).”. The sol…</summary>
+    <summary>NASA Headquarters | Closes 2026-08-13 | The National Aeronautics and Space Administration (NASA) Headquarters has released the solicitation Early Stage Innovations for In Situ Resource Utilization (ESI26-ISRU), as an appendix to the Research and Technology Mission Directorate (RTMD) umbrella NASA Research Announcement (NRA) titled "Space Technology Research, Development, Demonstration, and Infusion 2026 (SpaceTech REDDI 2026).”. The sol…</summary>
   </entry>
   <entry>
     <title>Middle East Regional Cooperation (MERC)</title>
@@ -647,7 +647,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Manufacturing"/>
     <category term="Cybersecurity"/>
     <category term="Water"/>
-    <summary>Assistance Coordination — Closes 2026-09-30 — The Middle East Regional Cooperation (MERC) Program supports joint scientific research and innovation partnerships between the United States, Israel, and countries across the Middle East and North Africa (MENA). The program funds applied research projects that address shared regional challenges while advancing U.S. economic, technological, and strategic interests. MERC is designed to bring togethe…</summary>
+    <summary>Assistance Coordination | Closes 2026-09-30 | The Middle East Regional Cooperation (MERC) Program supports joint scientific research and innovation partnerships between the United States, Israel, and countries across the Middle East and North Africa (MENA). The program funds applied research projects that address shared regional challenges while advancing U.S. economic, technological, and strategic interests. MERC is designed to bring togethe…</summary>
   </entry>
   <entry>
     <title>Tribal Transportation Safety Strategy Pilot Program</title>
@@ -660,7 +660,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Transportation"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>69A355 Research and Technology — Closes 2026-08-28 — he U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Tribal Transportation Safety Strategy Pilot Program. This three-year cooperative agreement is designed to address the critical public safety crisis in Tribal communities, as American Indian and Alaska Native populations experience…</summary>
+    <summary>69A355 Research and Technology | Closes 2026-08-28 | he U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Tribal Transportation Safety Strategy Pilot Program. This three-year cooperative agreement is designed to address the critical public safety crisis in Tribal communities, as American Indian and Alaska Native populations experience…</summary>
   </entry>
   <entry>
     <title>Model-to-Clinic (M2C) for Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) (UG3/UH3, Clinical Trial Optional)</title>
@@ -672,7 +672,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2026-10-19 — The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
+    <summary>National Institutes of Health | Closes 2026-10-19 | The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
   </entry>
   <entry>
     <title>DoW Neurofibromatosis Exploration-Hypothesis Development Award</title>
@@ -681,7 +681,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <updated>2026-06-25T00:00:00Z</updated>
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Technology development"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-09-22 — Summary: The fiscal year 2026 (FY26) Neurofibromatosis Research Program (NFRP) Exploration-Hypothesis Development Award (EHDA) supports the initial exploration of innovative, high-risk, high-gain, and potentially groundbreaking concepts in neurofibromatosis (NF) research. Studies supported by this award mechanism should lay the groundwork for future avenues of scientific investigation. The propose…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-22 | Summary: The fiscal year 2026 (FY26) Neurofibromatosis Research Program (NFRP) Exploration-Hypothesis Development Award (EHDA) supports the initial exploration of innovative, high-risk, high-gain, and potentially groundbreaking concepts in neurofibromatosis (NF) research. Studies supported by this award mechanism should lay the groundwork for future avenues of scientific investigation. The propose…</summary>
   </entry>
   <entry>
     <title>Limited Competition: Growing Great Ideas: Research Education Course in Entrepreneurship and Product Development for Researchers Studying Drug Use, Drug Misuse, and Drug Addiction (UE5 Clinical Trial Not Allowed)</title>
@@ -691,6 +691,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <author><name>National Institutes of Health</name></author>
     <category term="Education and workforce"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health — Closes 2026-10-01 — This notice of funding opportunity (NOFO) seeks to establish a course to equip researchers studying drug use, drug misuse, and drug addiction with the skills, knowledge, and practical tools needed to translate their scientific discoveries into impactful real world solutions. The course is envisioned to focus on building capacity in product development, entrepreneurship, and innovation pathways so …</summary>
+    <summary>National Institutes of Health | Closes 2026-10-01 | This notice of funding opportunity (NOFO) seeks to establish a course to equip researchers studying drug use, drug misuse, and drug addiction with the skills, knowledge, and practical tools needed to translate their scientific discoveries into impactful real world solutions. The course is envisioned to focus on building capacity in product development, entrepreneurship, and innovation pathways so …</summary>
   </entry>
 </feed>

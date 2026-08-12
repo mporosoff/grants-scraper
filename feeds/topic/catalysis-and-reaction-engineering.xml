@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Funding Finder — Catalysis and reaction engineering</title>
+  <title>Funding Finder | Catalysis and reaction engineering</title>
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml</id>
@@ -16,10 +16,10 @@
     <category term="Catalysis and reaction engineering"/>
     <category term="Materials science"/>
     <category term="Cybersecurity"/>
-    <summary>Air Force Office of Scientific Research — Closes 2027-04-05 — The Department of Defense (DoD) announces the fiscal year 2026 (FY26) Defense Established Program to Stimulate Competitive Research (DEPSCoR) – Capacity Building opportunity. The program is sponsored and managed by the Basic Research Office, Office of the Under Secretary of Defense for Research and Engineering (OUSD [R&amp;E]), awarded by the Air Force Office of Scientific Research (AFOSR), and admini…</summary>
+    <summary>Air Force Office of Scientific Research | Closes 2027-04-05 | The Department of Defense (DoD) announces the fiscal year 2026 (FY26) Defense Established Program to Stimulate Competitive Research (DEPSCoR) - Capacity Building opportunity. The program is sponsored and managed by the Basic Research Office, Office of the Under Secretary of Defense for Research and Engineering (OUSD [R&amp;E]), awarded by the Air Force Office of Scientific Research (AFOSR), and admini…</summary>
   </entry>
   <entry>
-    <title>FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) – RESEARCH COLLABORATION (RC)</title>
+    <title>FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) - RESEARCH COLLABORATION (RC)</title>
     <link href="https://www.grants.gov/search-results-detail/363526"/>
     <id>urn:funding-finder:grants-gov:363526</id>
     <updated>2026-08-10T00:00:00Z</updated>
@@ -30,7 +30,7 @@
     <category term="Quantum science"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Air Force Office of Scientific Research — Closes 2027-04-05 — The Department of Defense (DoD) announces the fiscal year 2026 (FY26) Defense Established Program to Stimulate Competitive Research (DEPSCoR) – Research Collaboration (RC) opportunity. The program is sponsored and managed by the Basic Research Office, Office of the Under Secretary of Defense for Research and Engineering (OUSD [R&amp;E]), awarded by the Air Force Office of Scientific Research (AFOSR), …</summary>
+    <summary>Air Force Office of Scientific Research | Closes 2027-04-05 | The Department of Defense (DoD) announces the fiscal year 2026 (FY26) Defense Established Program to Stimulate Competitive Research (DEPSCoR) - Research Collaboration (RC) opportunity. The program is sponsored and managed by the Basic Research Office, Office of the Under Secretary of Defense for Research and Engineering (OUSD [R&amp;E]), awarded by the Air Force Office of Scientific Research (AFOSR), …</summary>
   </entry>
   <entry>
     <title>Chemical Process Systems (CPS)</title>
@@ -46,7 +46,7 @@
     <category term="Energy"/>
     <category term="Manufacturing"/>
     <category term="Materials science"/>
-    <summary>U.S. National Science Foundation — Posted — Society relies on chemical processes to turn raw materials into useful products. The Chemical Process Systems (CPS) program invests in fundamental research on chemical and biochemical processes to make them more efficient, sustainable, and resilient. New CPS technologies for manufacturing, biotechnology, critical minerals, energy, food, and other national priorities will help make the U.S. more co…</summary>
+    <summary>U.S. National Science Foundation | Posted | Society relies on chemical processes to turn raw materials into useful products. The Chemical Process Systems (CPS) program invests in fundamental research on chemical and biochemical processes to make them more efficient, sustainable, and resilient. New CPS technologies for manufacturing, biotechnology, critical minerals, energy, food, and other national priorities will help make the U.S. more co…</summary>
   </entry>
   <entry>
     <title>Transport Phenomena (TP)</title>
@@ -62,7 +62,7 @@
     <category term="Quantum science"/>
     <category term="Separations and membranes"/>
     <category term="Technology development"/>
-    <summary>U.S. National Science Foundation — Posted — The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
+    <summary>U.S. National Science Foundation | Posted | The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
   </entry>
   <entry>
     <title>FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
@@ -78,7 +78,7 @@
     <category term="Separations and membranes"/>
     <category term="Quantum science"/>
     <category term="Data science"/>
-    <summary>Office of Science — Closes 2026-09-30 — The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
+    <summary>Office of Science | Closes 2026-09-30 | The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
   </entry>
   <entry>
     <title>Assay development and screening for discovery of chemical probes, drugs or immunomodulators (R01 Clinical Trial Not Allowed)</title>
@@ -92,7 +92,7 @@
     <category term="Catalysis and reaction engineering"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>National Institutes of Health — Closes 2026-09-07 — Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits applications for identification of small molecules that function to elucidate the biology of disease as chemical probes or function as agonists or antagonists of disease target(s) for therapy or immunotherapy. The NOFO is intended to support discovery research for the identification of validated hits re…</summary>
+    <summary>National Institutes of Health | Closes 2026-09-07 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits applications for identification of small molecules that function to elucidate the biology of disease as chemical probes or function as agonists or antagonists of disease target(s) for therapy or immunotherapy. The NOFO is intended to support discovery research for the identification of validated hits re…</summary>
   </entry>
   <entry>
     <title>Computational and Data-Enabled Science and Engineering</title>
@@ -108,7 +108,7 @@
     <category term="Materials science"/>
     <category term="Energy"/>
     <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation — Posted — Large-scale simulations and the ability to accumulate massive amounts of data have revolutionized science and engineering. The goal of the Computational and Data-enabled Science and Engineering (CDS&amp;E) meta-program is to identify and capitalize on opportunities for major scientific and engineering breakthroughs through new computational and data-analysis approaches and best practices. The CDS&amp;E me…</summary>
+    <summary>U.S. National Science Foundation | Posted | Large-scale simulations and the ability to accumulate massive amounts of data have revolutionized science and engineering. The goal of the Computational and Data-enabled Science and Engineering (CDS&amp;E) meta-program is to identify and capitalize on opportunities for major scientific and engineering breakthroughs through new computational and data-analysis approaches and best practices. The CDS&amp;E me…</summary>
   </entry>
   <entry>
     <title>ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)</title>
@@ -124,7 +124,7 @@
     <category term="Energy"/>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation — Closes 2026-09-29 — Plasma science is a transdisciplinary field of research where fundamental studies in many disciplines, including plasma physics, plasma chemistry, materials science, and space science, come together to advance knowledge for discovery and technological innovation. The primary goal of the ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) program is to identify and capitali…</summary>
+    <summary>U.S. National Science Foundation | Closes 2026-09-29 | Plasma science is a transdisciplinary field of research where fundamental studies in many disciplines, including plasma physics, plasma chemistry, materials science, and space science, come together to advance knowledge for discovery and technological innovation. The primary goal of the ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) program is to identify and capitali…</summary>
   </entry>
   <entry>
     <title>Plasma Physics</title>
@@ -140,7 +140,7 @@
     <category term="Technology development"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>U.S. National Science Foundation — Closes 2026-11-16 — Proposals in the area of plasma physics submitted to the Division of Physics that are not governed by another solicitation (such as CAREER), should be submitted to the Division-wide solicitation: Division of Physics: Investigator-Initiated Research Projects. The Plasma Physics program participates in multiple NSF meta-programs such as the ECosytem for Leading Innovation in Plasma Science and Engin…</summary>
+    <summary>U.S. National Science Foundation | Closes 2026-11-16 | Proposals in the area of plasma physics submitted to the Division of Physics that are not governed by another solicitation (such as CAREER), should be submitted to the Division-wide solicitation: Division of Physics: Investigator-Initiated Research Projects. The Plasma Physics program participates in multiple NSF meta-programs such as the ECosytem for Leading Innovation in Plasma Science and Engin…</summary>
   </entry>
   <entry>
     <title>Catalysis</title>
@@ -156,7 +156,7 @@
     <category term="Energy"/>
     <category term="Environmental science"/>
     <category term="Quantum science"/>
-    <summary>U.S. National Science Foundation — Posted — The Catalysis program is part of the Chemical Process Systems cluster, which also includes: 1) the Electrochemical Systems program; 2) the Interfacial Engineering program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
+    <summary>U.S. National Science Foundation | Posted | The Catalysis program is part of the Chemical Process Systems cluster, which also includes: 1) the Electrochemical Systems program; 2) the Interfacial Engineering program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
 The goals of the Catalysis program are to increase fundamental understanding in catalytic engineering science and to advance the development…</summary>
   </entry>
   <entry>
@@ -173,7 +173,7 @@ The goals of the Catalysis program are to increase fundamental understanding in 
     <category term="Manufacturing"/>
     <category term="Materials science"/>
     <category term="Quantum science"/>
-    <summary>U.S. National Science Foundation — Posted — The Process Systems, Reaction Engineering, and Molecular Thermodynamics program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Electrochemical Systems program; and 3) the Interfacial Engineering program.
+    <summary>U.S. National Science Foundation | Posted | The Process Systems, Reaction Engineering, and Molecular Thermodynamics program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Electrochemical Systems program; and 3) the Interfacial Engineering program.
 The goal of the Process Systems, Reaction Engineering, and Molecular Thermodynamics program is to advance fundamental engineering research o…</summary>
   </entry>
   <entry>
@@ -188,7 +188,7 @@ The goal of the Process Systems, Reaction Engineering, and Molecular Thermodynam
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation — Closes 2026-09-30 — This solicitation applies to six (of the nine) CHE Disciplinary Research Programs: Chemical Catalysis (CAT); Chemical Measurement and Imaging (CMI); Chemical Mechanism, Function and Properties (CMFP); Chemical Synthesis (SYN); Environmental Chemical Sciences (ECS); and Macromolecular, Supramolecular and Nanochemistry (MSN). All proposals submitted to these six CHE Disciplinary Research Programs (o…</summary>
+    <summary>U.S. National Science Foundation | Closes 2026-09-30 | This solicitation applies to six (of the nine) CHE Disciplinary Research Programs: Chemical Catalysis (CAT); Chemical Measurement and Imaging (CMI); Chemical Mechanism, Function and Properties (CMFP); Chemical Synthesis (SYN); Environmental Chemical Sciences (ECS); and Macromolecular, Supramolecular and Nanochemistry (MSN). All proposals submitted to these six CHE Disciplinary Research Programs (o…</summary>
   </entry>
   <entry>
     <title>Combustion and Fire Systems</title>
@@ -204,7 +204,7 @@ The goal of the Process Systems, Reaction Engineering, and Molecular Thermodynam
     <category term="Environmental science"/>
     <category term="Catalysis and reaction engineering"/>
     <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation — Posted — The Combustion and Fire Systems program is part of the Transport Phenomena cluster, which also includes 1) the Fluid Dynamics program; 2) the Particulate and Multiphase Processes program; and 3) the Thermal Transport Processes program.
+    <summary>U.S. National Science Foundation | Posted | The Combustion and Fire Systems program is part of the Transport Phenomena cluster, which also includes 1) the Fluid Dynamics program; 2) the Particulate and Multiphase Processes program; and 3) the Thermal Transport Processes program.
 The goal of the Combustion and Fire Systems program is to create new knowledge to support advances in clean energy, climate change mitigation, a cleaner environment…</summary>
   </entry>
   <entry>
@@ -221,7 +221,7 @@ The goal of the Combustion and Fire Systems program is to create new knowledge t
     <category term="Environmental science"/>
     <category term="Materials science"/>
     <category term="Transportation"/>
-    <summary>U.S. National Science Foundation — Posted — The Electrochemical Systems program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Interfacial Engineering program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
+    <summary>U.S. National Science Foundation | Posted | The Electrochemical Systems program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Interfacial Engineering program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
 The goal of the Electrochemical Systems program is to support fundamental engineering science research that will enable innovative processes…</summary>
   </entry>
   <entry>
@@ -238,7 +238,7 @@ The goal of the Electrochemical Systems program is to support fundamental engine
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <category term="Social and behavioral sciences"/>
-    <summary>U.S. National Science Foundation — Posted — The Environmental Sustainability program is part of the Environmental Engineering and Sustainability cluster together with 1) the Environmental Engineering program and 2) the Nanoscale Interactions program.
+    <summary>U.S. National Science Foundation | Posted | The Environmental Sustainability program is part of the Environmental Engineering and Sustainability cluster together with 1) the Environmental Engineering program and 2) the Nanoscale Interactions program.
 The goal of the Environmental Sustainability program is to promote sustainable engineered systems that support human well-being and that are also compatible with sustaining natural (environment…</summary>
   </entry>
   <entry>
@@ -255,7 +255,7 @@ The goal of the Environmental Sustainability program is to promote sustainable e
     <category term="Materials science"/>
     <category term="Separations and membranes"/>
     <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation — Posted — The Interfacial Engineering program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Electrochemical Systems program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
+    <summary>U.S. National Science Foundation | Posted | The Interfacial Engineering program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Electrochemical Systems program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
 The goal of the Interfacial Engineering program is to support fundamental research on atomic- and molecular-scale interfacial phenomena and …</summary>
   </entry>
   <entry>
@@ -272,7 +272,7 @@ The goal of the Interfacial Engineering program is to support fundamental resear
     <category term="Separations and membranes"/>
     <category term="Catalysis and reaction engineering"/>
     <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation — Posted — The Particulate and Multiphase Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Thermal Transport Processes program.
+    <summary>U.S. National Science Foundation | Posted | The Particulate and Multiphase Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Thermal Transport Processes program.
 The goal of the Particulate and Multiphase Processes program is to support fundamental research on physico-chemical phenomena that govern particulate and multiphase…</summary>
   </entry>
   <entry>
@@ -289,7 +289,7 @@ The goal of the Particulate and Multiphase Processes program is to support funda
     <category term="Energy"/>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation — Posted — The Thermal Transport Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Particulate and Multiphase Processes program.
+    <summary>U.S. National Science Foundation | Posted | The Thermal Transport Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Particulate and Multiphase Processes program.
 The Thermal Transport Processes program supports engineering research projects that lay the foundation for new advances in thermal transport phenomena. These projec…</summary>
   </entry>
   <entry>
@@ -306,7 +306,7 @@ The Thermal Transport Processes program supports engineering research projects t
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <category term="Technology development"/>
-    <summary>U.S. National Science Foundation — Posted — The Fluid Dynamics program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Particulate and Multiphase Processes program; and 3) the Thermal Transport Processes program.
+    <summary>U.S. National Science Foundation | Posted | The Fluid Dynamics program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Particulate and Multiphase Processes program; and 3) the Thermal Transport Processes program.
 The Fluid Dynamics program supports fundamental research toward gaining an understanding of the physics of various fluid dynamics phenomena. Proposed research shoul…</summary>
   </entry>
   <entry>
@@ -320,7 +320,7 @@ The Fluid Dynamics program supports fundamental research toward gaining an under
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation — Posted — With this solicitation, the Division of Chemistry is piloting the removal of deadlines for the submission of proposals to the CLP, CSD and CTMC Programs. The no-deadline pilot seeks to assess the benefits and challenges of removing deadlines in proposal submission for the chemistry research community: the removal of deadlines on proposal submission is intended to allow principal investigators (PIs…</summary>
+    <summary>U.S. National Science Foundation | Posted | With this solicitation, the Division of Chemistry is piloting the removal of deadlines for the submission of proposals to the CLP, CSD and CTMC Programs. The no-deadline pilot seeks to assess the benefits and challenges of removing deadlines in proposal submission for the chemistry research community: the removal of deadlines on proposal submission is intended to allow principal investigators (PIs…</summary>
   </entry>
   <entry>
     <title>Research Interests of the United States Air Force Academy (formerly USAFA-BAA-2021)</title>
@@ -336,7 +336,7 @@ The Fluid Dynamics program supports fundamental research toward gaining an under
     <category term="Materials science"/>
     <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
-    <summary>Air Force Academy — Posted — The USAFA invests in an active research program for three main reasons. First and foremost, research significantly enhances the cadet learning experience. Our research is done by, for and with cadets who work alongside fellow cadets and faculty mentors. Research provides cadets with rich independent learning opportunities as they tackle ill-defined problems and are challenged to apply their knowle…</summary>
+    <summary>Air Force Academy | Posted | The USAFA invests in an active research program for three main reasons. First and foremost, research significantly enhances the cadet learning experience. Our research is done by, for and with cadets who work alongside fellow cadets and faculty mentors. Research provides cadets with rich independent learning opportunities as they tackle ill-defined problems and are challenged to apply their knowle…</summary>
   </entry>
   <entry>
     <title>Environmental Engineering</title>
@@ -352,7 +352,7 @@ The Fluid Dynamics program supports fundamental research toward gaining an under
     <category term="Separations and membranes"/>
     <category term="Water"/>
     <category term="Catalysis and reaction engineering"/>
-    <summary>U.S. National Science Foundation — Posted — The Environmental Engineering program is part of the Environmental Engineering and Sustainability cluster, which also includes 1) the Nanoscale Interactions program; and 2) the Environmental Sustainability program.
+    <summary>U.S. National Science Foundation | Posted | The Environmental Engineering program is part of the Environmental Engineering and Sustainability cluster, which also includes 1) the Nanoscale Interactions program; and 2) the Environmental Sustainability program.
 Environmental engineering is an interdisciplinary field that applies chemical, biological, and physical scientific principles to protect human and ecological health.
 The goal of the Env…</summary>
   </entry>

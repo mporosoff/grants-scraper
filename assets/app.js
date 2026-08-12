@@ -178,6 +178,8 @@
 
   function escapeHtml(value) {
     return String(value ?? "")
+      .replaceAll("\u2014", "-")
+      .replaceAll("\u2013", "-")
       .replaceAll("&", "&amp;")
       .replaceAll("<", "&lt;")
       .replaceAll(">", "&gt;")
@@ -350,7 +352,7 @@
   function perAwardLabel(record) {
     const floor = Number(record.award_floor || 0);
     const ceiling = Number(record.award_ceiling || 0);
-    if (floor && ceiling && floor !== ceiling) return `${formatMoney(floor)}–${formatMoney(ceiling)}`;
+    if (floor && ceiling && floor !== ceiling) return `${formatMoney(floor)} to ${formatMoney(ceiling)}`;
     if (ceiling) return `Up to ${formatMoney(ceiling)}`;
     if (floor) return `From ${formatMoney(floor)}`;
     return "Not listed";
@@ -363,7 +365,7 @@
   }
 
   function fundingEvidenceLabel(record) {
-    if (record.award_conflicts) return "Conflicting Grants.gov amount fields — verify";
+    if (record.award_conflicts) return "Conflicting Grants.gov amount fields: verify";
     return record.award_source || "Grants.gov XML extract";
   }
 
@@ -459,7 +461,7 @@
 
   function deadlineEvidenceLabel(record) {
     const external = record.source && record.source !== "Grants.gov";
-    if (record.deadline_conflict) return "Conflicting Grants.gov dates — verify";
+    if (record.deadline_conflict) return "Conflicting Grants.gov dates: verify";
     if (record.status === "forecasted")
       return external ? `Estimated by ${record.source}` : "Estimated by Grants.gov";
     return record.deadline_source
@@ -1717,7 +1719,7 @@
         ${candidateReview && !assessment ? `<span class="badge candidate">Retrieved candidate</span>` : ""}
         ${listedDate ? `<span class="listed-date">Listed ${escapeHtml(formatDate(listedDate))}</span>` : ""}
         <span class="opportunity-number">${escapeHtml(record.opportunity_number || record.opportunity_id || "")}</span>
-        <button type="button" class="save-button${state.savedIds.has(id) ? " saved" : ""}" data-save="${escapeAttribute(id)}" aria-pressed="${state.savedIds.has(id)}" title="${state.savedIds.has(id) ? "Saved on this device — select to remove" : "Save this opportunity to view later"}">${state.savedIds.has(id) ? "★ Saved" : "☆ Save"}</button>
+        <button type="button" class="save-button${state.savedIds.has(id) ? " saved" : ""}" data-save="${escapeAttribute(id)}" aria-pressed="${state.savedIds.has(id)}" title="${state.savedIds.has(id) ? "Saved on this device. Select to remove" : "Save this opportunity to view later"}">${state.savedIds.has(id) ? "★ Saved" : "☆ Save"}</button>
       </div>
       <h3><a href="${escapeAttribute(detailUrl)}" target="_blank" rel="noopener">${escapeHtml(record.title)}</a></h3>
       <p class="agency">${escapeHtml(record.agency || "Agency not listed")}</p>
@@ -2130,8 +2132,8 @@
       ["Somewhat", metrics.counts.partial],
       ["Not a fit", metrics.counts.not_relevant],
       ["Can’t tell", metrics.counts.needs_verification],
-      ["Good-or-better", metrics.useful_rate == null ? "—" : `${Math.round(metrics.useful_rate * 100)}%`],
-      ["Avg fit (0–3)", metrics.mean_grade == null ? "—" : metrics.mean_grade.toFixed(2)],
+      ["Good or better", metrics.useful_rate == null ? "Not available" : `${Math.round(metrics.useful_rate * 100)}%`],
+      ["Avg fit (0 to 3)", metrics.mean_grade == null ? "Not available" : metrics.mean_grade.toFixed(2)],
     ].map(([label, value]) =>
       `<div><strong>${escapeHtml(value)}</strong><span>${escapeHtml(label)}</span></div>`)
       .join("");
@@ -2415,7 +2417,7 @@
     }
     container.classList.remove("hidden");
     container.innerHTML =
-      `<p class="eyebrow">Suggested from your ratings — related opportunities outside your current results</p>`
+      `<p class="eyebrow">Suggested from your ratings: related opportunities outside your current results</p>`
       + picks.map(record => {
         const url = safeUrl(record.detail_page || record.funding_opportunity_url) || "";
         const why = PREFERENCES_API.explain(record, model);
@@ -2541,7 +2543,7 @@
         : "Public catalog";
     $("results-toolbar").classList.remove("search-not-started");
     $("result-range").textContent = display.length
-      ? `Showing ${start + 1}–${Math.min(start + PAGE_SIZE, display.length)} of ${display.length.toLocaleString()}`
+      ? `Showing ${start + 1} to ${Math.min(start + PAGE_SIZE, display.length)} of ${display.length.toLocaleString()}`
       : "No records match the current search";
 
     if (!page.length) {
@@ -3549,7 +3551,7 @@
         $("query").value = button.dataset.exampleQuery;
         $("query").focus();
         $("search-status").textContent =
-          "Added to your search — select “Find funding” when ready.";
+          "Added to your search. Select “Find funding” when ready.";
       });
     });
 

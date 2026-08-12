@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Funding Finder — Transportation</title>
+  <title>Funding Finder | Transportation</title>
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
@@ -15,7 +15,7 @@
     <category term="Neuroscience"/>
     <category term="Public health"/>
     <category term="Transportation"/>
-    <summary>Centers for Disease Control - NCIPC — Closes 2027-03-08 — This forecast is for CDC's Core State Injury Prevention Program (Core SIPP), a cooperative agreement to support public health infrastructure, data, and partnerships to use data to identify potential risk and inform the implementation of strategies to prevent unintentional injury. Actions using the best available evidence are intended to increase protective factors and reduce risk factors for injur…</summary>
+    <summary>Centers for Disease Control - NCIPC | Closes 2027-03-08 | This forecast is for CDC's Core State Injury Prevention Program (Core SIPP), a cooperative agreement to support public health infrastructure, data, and partnerships to use data to identify potential risk and inform the implementation of strategies to prevent unintentional injury. Actions using the best available evidence are intended to increase protective factors and reduce risk factors for injur…</summary>
   </entry>
   <entry>
     <title>NIOSH Centers for Agriculture, Forestry, and Fishing Safety and Health (U54)</title>
@@ -26,7 +26,7 @@
     <category term="Agriculture and food"/>
     <category term="Education and workforce"/>
     <category term="Transportation"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-03-03 — The Agriculture, Forestry, and Fishing (AgFF) sector is essential to the safety, security, and economic stability of the U.S. because it produces the nation's food, fuel, and fiber. At the same time, AgFF workers experience some of the highest occupational fatality and non-fatal injury rates of any sector. AgFF workers also face increased risk of poor mental health, death by suicide, and substance…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-03-03 | The Agriculture, Forestry, and Fishing (AgFF) sector is essential to the safety, security, and economic stability of the U.S. because it produces the nation's food, fuel, and fiber. At the same time, AgFF workers experience some of the highest occupational fatality and non-fatal injury rates of any sector. AgFF workers also face increased risk of poor mental health, death by suicide, and substance…</summary>
   </entry>
   <entry>
     <title>Establishing a Research Network to Guide Foundational Research on Human Consciousness</title>
@@ -40,7 +40,7 @@
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
     <category term="Transportation"/>
-    <summary>National Institutes of Health — Closes 2027-02-08 — This Funding Opportunity will establish the NIH Blueprint for Neuroscience Research Network to Guide Foundational Research on Human Consciousness, leveraging a trans-NIH collaboration of 14 Institutes, Centers, and Offices dedicated to reducing the burden of nervous system disorders. Consciousness is central to numerous serious biomedical conditions, including coma, delirium, dementia, traumatic b…</summary>
+    <summary>National Institutes of Health | Closes 2027-02-08 | This Funding Opportunity will establish the NIH Blueprint for Neuroscience Research Network to Guide Foundational Research on Human Consciousness, leveraging a trans-NIH collaboration of 14 Institutes, Centers, and Offices dedicated to reducing the burden of nervous system disorders. Consciousness is central to numerous serious biomedical conditions, including coma, delirium, dementia, traumatic b…</summary>
   </entry>
   <entry>
     <title>Multi-Site Investigator-Initiated Clinical Trials (Collaborative UG3/UH3 Clinical Trial Required)</title>
@@ -49,7 +49,7 @@
     <updated>2026-11-16T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Transportation"/>
-    <summary>National Institutes of Health — Closes 2027-02-16 — The NIH intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop and implement investigator-initiated multi-site clinical trials, including efficacy, effectiveness, pragmatic, and/or implementation research clinical trials. Applications that propose a large and/or complex clinical trial conducted at either a single site or at multiple locations but without physi…</summary>
+    <summary>National Institutes of Health | Closes 2027-02-16 | The NIH intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop and implement investigator-initiated multi-site clinical trials, including efficacy, effectiveness, pragmatic, and/or implementation research clinical trials. Applications that propose a large and/or complex clinical trial conducted at either a single site or at multiple locations but without physi…</summary>
   </entry>
   <entry>
     <title>NIOSH Centers of Excellence for Total Worker Health® (U19)</title>
@@ -62,7 +62,7 @@
     <category term="Education and workforce"/>
     <category term="Technology development"/>
     <category term="Transportation"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-26 — PURPOSENIOSH intends to support the Centers of Excellence in Total Worker Health® (TWH). These Centers will conduct rigorous research and translation activities to prevent harmful exposures, improve working conditions, and advance worker well-being. The Centers will develop practical, scalable solutions for employers and workers. All projects must use the NIOSH Worker Well-Being Questionnaire (Wel…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-02-26 | PURPOSENIOSH intends to support the Centers of Excellence in Total Worker Health® (TWH). These Centers will conduct rigorous research and translation activities to prevent harmful exposures, improve working conditions, and advance worker well-being. The Centers will develop practical, scalable solutions for employers and workers. All projects must use the NIOSH Worker Well-Being Questionnaire (Wel…</summary>
   </entry>
   <entry>
     <title>Small Business Transition Grant for New Entrepreneurs (Parent R41/R42 Clinical Trial Optional)</title>
@@ -72,7 +72,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Education and workforce"/>
     <category term="Transportation"/>
-    <summary>National Institutes of Health — Closes 2027-01-05 — The National Institutes of Health (NIH), including the participating Institutes, Centers and Offices, intends to publish a Notice of Funding Opportunity (NOFO) to invite eligible United States small business concerns (SBCs) to submit Small Business Technology Transfer (STTR) Phase I, and Fast-Track grant applications for the Small Business Transition Grant. Through this NOFO, NIH will support earl…</summary>
+    <summary>National Institutes of Health | Closes 2027-01-05 | The National Institutes of Health (NIH), including the participating Institutes, Centers and Offices, intends to publish a Notice of Funding Opportunity (NOFO) to invite eligible United States small business concerns (SBCs) to submit Small Business Technology Transfer (STTR) Phase I, and Fast-Track grant applications for the Small Business Transition Grant. Through this NOFO, NIH will support earl…</summary>
   </entry>
   <entry>
     <title>Small Business Transition Grant for New Entrepreneurs (Parent R43/R44 Clinical Trial Optional)</title>
@@ -83,7 +83,7 @@
     <category term="Education and workforce"/>
     <category term="Technology development"/>
     <category term="Transportation"/>
-    <summary>National Institutes of Health — Closes 2027-01-05 — The National Institutes of Health (NIH) and Centers for Disease Control and Prevention (CDC), including the participating Institutes, Centers and Offices, intend to publish a Notice of Funding Opportunity (NOFO) to invite eligible United States small business concerns (SBCs) to submit Small Business Innovation Research (SBIR) Phase I, and Fast-Track (NIH only) grant applications for the Small Busi…</summary>
+    <summary>National Institutes of Health | Closes 2027-01-05 | The National Institutes of Health (NIH) and Centers for Disease Control and Prevention (CDC), including the participating Institutes, Centers and Offices, intend to publish a Notice of Funding Opportunity (NOFO) to invite eligible United States small business concerns (SBCs) to submit Small Business Innovation Research (SBIR) Phase I, and Fast-Track (NIH only) grant applications for the Small Busi…</summary>
   </entry>
   <entry>
     <title>NIAMS Clinical Trial Implementation Cooperative Agreement</title>
@@ -93,7 +93,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Arts and culture"/>
     <category term="Transportation"/>
-    <summary>National Institutes of Health — Closes 2027-07-02 — The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for the Clinical Trial Cooperative Agreement Program within the mission areas of the institute. This Notice of Funding Opportunity (NOFO) solicits cooperative agreement applications for implementation of investigator-initiated, single o…</summary>
+    <summary>National Institutes of Health | Closes 2027-07-02 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for the Clinical Trial Cooperative Agreement Program within the mission areas of the institute. This Notice of Funding Opportunity (NOFO) solicits cooperative agreement applications for implementation of investigator-initiated, single o…</summary>
   </entry>
   <entry>
     <title>Clinical Trials and Ancillary Studies Conducted within NIH-Funded Clinical Trial Research Networks (UG3/UH3 - Clinical Trial Required)</title>
@@ -103,7 +103,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Neuroscience"/>
     <category term="Transportation"/>
-    <summary>National Institutes of Health — Closes 2026-11-10 — The National Institute of Neurological Disorders and Stroke (NINDS), in conjunction with additional Institutes/Centers (ICs)at the National Institutes of Health seek to support projects proposing Clinical Trials and Ancillary Studies that are conducted within NIH-Funded Clinical Trial Research Networks.The program will encourage applications for multi-center clinical trials to be conducted within …</summary>
+    <summary>National Institutes of Health | Closes 2026-11-10 | The National Institute of Neurological Disorders and Stroke (NINDS), in conjunction with additional Institutes/Centers (ICs)at the National Institutes of Health seek to support projects proposing Clinical Trials and Ancillary Studies that are conducted within NIH-Funded Clinical Trial Research Networks.The program will encourage applications for multi-center clinical trials to be conducted within …</summary>
   </entry>
   <entry>
     <title>Transformative Technologies for Experimental and Computational RNome Characterization and Functional Analysis</title>
@@ -113,7 +113,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Transportation"/>
-    <summary>National Institutes of Health — Closes 2027-02-15 — The NIH Common Fund, in partnership with other NIH Institutes and Centers, plans to issue Notices of Funding Opportunity (NOFOs) for the RNomics program, which seeks to develop tools for studying the full set of RNA molecules (the RNome) in cells and tissues. The program will support technologies and resources that enable integrated analysis of RNA sequences, modifications, structures, locations, …</summary>
+    <summary>National Institutes of Health | Closes 2027-02-15 | The NIH Common Fund, in partnership with other NIH Institutes and Centers, plans to issue Notices of Funding Opportunity (NOFOs) for the RNomics program, which seeks to develop tools for studying the full set of RNA molecules (the RNome) in cells and tissues. The program will support technologies and resources that enable integrated analysis of RNA sequences, modifications, structures, locations, …</summary>
   </entry>
   <entry>
     <title>FY26 US DOT Drone Infrastructure Inspection Grants (DIIG) Program</title>
@@ -124,7 +124,7 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <category term="Transportation"/>
-    <summary>69A345 Office of the Under Secretary for Policy — Closes 2026-11-15 — The Drone Infrastructure Inspection Grants (DIIG) Program will provide grants to eligible government entities to facilitate the use of small Unmanned Aircraft Systems (UAS), referred to herein as drones, in critical infrastructure inspection. The objective is to increase the widespread adoption of drones and relevant technologies in support of more efficient Inspection, Operation, Construction, Ma…</summary>
+    <summary>69A345 Office of the Under Secretary for Policy | Closes 2026-11-15 | The Drone Infrastructure Inspection Grants (DIIG) Program will provide grants to eligible government entities to facilitate the use of small Unmanned Aircraft Systems (UAS), referred to herein as drones, in critical infrastructure inspection. The objective is to increase the widespread adoption of drones and relevant technologies in support of more efficient Inspection, Operation, Construction, Ma…</summary>
   </entry>
   <entry>
     <title>Limited Competition: Small Grant Program for the NCATS Clinical and Translational Science Award (CTSA) Program (Clinical Trial Optional)</title>
@@ -134,7 +134,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Public health"/>
     <category term="Transportation"/>
-    <summary>National Institutes of Health — Closes 2026-10-17 — The purpose of this NOFO is to enhance the capability of NCATS CTSA Program KL2 scholars supported by the CTSA Program to conduct research as they complete the transition to fully independent academic translational scientists. These small research grants will support different clinical and translational science research projects, including pilot and feasibility studies; secondary data analysis of …</summary>
+    <summary>National Institutes of Health | Closes 2026-10-17 | The purpose of this NOFO is to enhance the capability of NCATS CTSA Program KL2 scholars supported by the CTSA Program to conduct research as they complete the transition to fully independent academic translational scientists. These small research grants will support different clinical and translational science research projects, including pilot and feasibility studies; secondary data analysis of …</summary>
   </entry>
   <entry>
     <title>Family Unification Program (FUP) Multi-Year NOFO</title>
@@ -143,7 +143,7 @@
     <updated>2026-08-12T00:00:00Z</updated>
     <author><name>Department of Housing and Urban Development</name></author>
     <category term="Transportation"/>
-    <summary>Department of Housing and Urban Development — Closes 2026-11-10 — The Family Unification Program (FUP) public housing authorities (PHAs) to partner with public child welfare agencies (PCWAs) to provide Housing Choice Voucher (HCV) assistance to two primary groups:1. Families: Those for whom the lack of adequate housing is a primary factor in the imminent placement of a child (or children) in out-of-home care, or a delay in the discharge of a child to the family …</summary>
+    <summary>Department of Housing and Urban Development | Closes 2026-11-10 | The Family Unification Program (FUP) public housing authorities (PHAs) to partner with public child welfare agencies (PCWAs) to provide Housing Choice Voucher (HCV) assistance to two primary groups:1. Families: Those for whom the lack of adequate housing is a primary factor in the imminent placement of a child (or children) in out-of-home care, or a delay in the discharge of a child to the family …</summary>
   </entry>
   <entry>
     <title>Specialized Services for Abused Parents and Their Children (Demonstration Projects)</title>
@@ -154,7 +154,7 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <category term="Transportation"/>
-    <summary>Administration for Children and Families - OFVPS — Closes 2026-09-08 — The purpose of the Specialized Services for Abused Parents and Their Children is to expand the capacity of family violence, domestic violence, and dating violence service programs and community-based programs to prevent future domestic violence. This is done by addressing the needs of children who have been exposed to family violence, domestic violence, or dating violence in an appropriate manner.…</summary>
+    <summary>Administration for Children and Families - OFVPS | Closes 2026-09-08 | The purpose of the Specialized Services for Abused Parents and Their Children is to expand the capacity of family violence, domestic violence, and dating violence service programs and community-based programs to prevent future domestic violence. This is done by addressing the needs of children who have been exposed to family violence, domestic violence, or dating violence in an appropriate manner.…</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Gulf Coast Cooperative Ecosystem Studies Unit (CESU)</title>
@@ -167,7 +167,7 @@
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <category term="Transportation"/>
-    <summary>Geological Survey — Closes 2026-09-11 — The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner for research in determining the effects that variations of spatial geotechnical sediment properties have on geomorphic response during storm impacts. This effort will advance capabilities to predict impacts of storms along the Nation's coastline. Hurricanes Ian and Fiona, which caused major damage ($50–65 billion…</summary>
+    <summary>Geological Survey | Closes 2026-09-11 | The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner for research in determining the effects that variations of spatial geotechnical sediment properties have on geomorphic response during storm impacts. This effort will advance capabilities to predict impacts of storms along the Nation's coastline. Hurricanes Ian and Fiona, which caused major damage ($50-65 billion…</summary>
   </entry>
   <entry>
     <title>Public Diplomacy Grants/Small Grants Program - Ghana</title>
@@ -177,7 +177,7 @@
     <author><name>U.S. Mission to Ghana</name></author>
     <category term="Education and workforce"/>
     <category term="Transportation"/>
-    <summary>U.S. Mission to Ghana — Closes 2026-08-14 — The U.S. Department of State's Embassy Accra, Ghana announces an open competition to implement programs that advance U.S.-Ghana bilateral relations and U.S. foreign policy priorities in Ghana and West Africa. This funding opportunity supports projects that align U.S.-Ghana economic and commercial engagement with core U.S. interests, secure U.S. borders through law enforcement collaboration and inf…</summary>
+    <summary>U.S. Mission to Ghana | Closes 2026-08-14 | The U.S. Department of State's Embassy Accra, Ghana announces an open competition to implement programs that advance U.S.-Ghana bilateral relations and U.S. foreign policy priorities in Ghana and West Africa. This funding opportunity supports projects that align U.S.-Ghana economic and commercial engagement with core U.S. interests, secure U.S. borders through law enforcement collaboration and inf…</summary>
   </entry>
   <entry>
     <title>FY26 - Stopping Threats On Pedestrian Competitive Grant Program (Bollards)</title>
@@ -187,7 +187,7 @@
     <author><name>DOT Federal Highway Administration</name></author>
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
-    <summary>DOT Federal Highway Administration — Closes 2026-09-09 — The purpose of the Bollards Competitive Grant Program is to provide funding for bollard installation projects designed to prevent pedestrian injuries and acts of terrorism in areas used by large numbers of pedestrians. Eligible applicants under the Bollards Competitive Grant Program are State Departments of Transportation (State DOTs) and local government entities such as any city, county, town, p…</summary>
+    <summary>DOT Federal Highway Administration | Closes 2026-09-09 | The purpose of the Bollards Competitive Grant Program is to provide funding for bollard installation projects designed to prevent pedestrian injuries and acts of terrorism in areas used by large numbers of pedestrians. Eligible applicants under the Bollards Competitive Grant Program are State Departments of Transportation (State DOTs) and local government entities such as any city, county, town, p…</summary>
   </entry>
   <entry>
     <title>DRL Ensuring Resilient Seafood Supply Chains: Countering Forced Labor and any associated Illegal, Unreported and Unregulated Fishing</title>
@@ -200,7 +200,7 @@
     <category term="Transportation"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Bureau of Democracy Human Rights and Labor — Closes 2026-09-03 — This program will counter forced labor in seafood supply chains associated with countries that have signed Agreements on Reciprocal Trade (ART) in East Asia and the Pacific (excluding Indonesia and the Philippines) and the Western Hemisphere, as well as other strategically important countries and prospective ART partners where engagement advances U.S. economic, trade, and maritime interests.</summary>
+    <summary>Bureau of Democracy Human Rights and Labor | Closes 2026-09-03 | This program will counter forced labor in seafood supply chains associated with countries that have signed Agreements on Reciprocal Trade (ART) in East Asia and the Pacific (excluding Indonesia and the Philippines) and the Western Hemisphere, as well as other strategically important countries and prospective ART partners where engagement advances U.S. economic, trade, and maritime interests.</summary>
   </entry>
   <entry>
     <title>Development of Fiscal Year 2027 Commercial Vehicle Safety Plans to Support National Safety Goals</title>
@@ -209,7 +209,7 @@
     <updated>2026-08-06T00:00:00Z</updated>
     <author><name>DOT-Federal Motor Carrier Safety Administration</name></author>
     <category term="Transportation"/>
-    <summary>DOT-Federal Motor Carrier Safety Administration — Closes 2026-09-30 — The Motor Carrier Safety Assistance Program (MCSAP) is a Federal formula grant program that provides financial assistance to States, and U.S. Territories to reduce the number and severity of crashes, injuries, and fatalities and hazardous material incidents involving commercial motor vehicles.</summary>
+    <summary>DOT-Federal Motor Carrier Safety Administration | Closes 2026-09-30 | The Motor Carrier Safety Assistance Program (MCSAP) is a Federal formula grant program that provides financial assistance to States, and U.S. Territories to reduce the number and severity of crashes, injuries, and fatalities and hazardous material incidents involving commercial motor vehicles.</summary>
   </entry>
   <entry>
     <title>SOI - Rural Transportation Match and Gap Funding Assistance Program</title>
@@ -218,7 +218,7 @@
     <updated>2026-08-05T00:00:00Z</updated>
     <author><name>Denali Commission</name></author>
     <category term="Transportation"/>
-    <summary>Denali Commission — Closes 2026-08-28 — The Denali Commission is inviting statements of interest for rural Alaska transportation projects in need of local match or gap funding assistance. Many Alaskan communities lack the tax base or resources necessary to meet cost share requirements. This opportunity seeks to provide funding to cover local match needs or address funding gaps, facilitating the completion of transportation projects and …</summary>
+    <summary>Denali Commission | Closes 2026-08-28 | The Denali Commission is inviting statements of interest for rural Alaska transportation projects in need of local match or gap funding assistance. Many Alaskan communities lack the tax base or resources necessary to meet cost share requirements. This opportunity seeks to provide funding to cover local match needs or address funding gaps, facilitating the completion of transportation projects and …</summary>
   </entry>
   <entry>
     <title>Tribal Personal Responsibility Education Program (Tribal PREP)</title>
@@ -229,7 +229,7 @@
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Transportation"/>
-    <summary>Administration for Children &amp; Families - ACYF/FYSB — Closes 2026-08-31 — The Family and Youth Services Bureau will be posting a revised Tribal PREP NOFO shortly and will be accepting applications. Tribal PREP competitively funds projects that educate American Indian/Alaska Native (AI/AN) youth ages 10-19, and expectant and parenting youth under age 21, on both abstinence and contraception for the prevention of pregnancy, sexually transmitted infections (STIs), and HIV …</summary>
+    <summary>Administration for Children &amp; Families - ACYF/FYSB | Closes 2026-08-31 | The Family and Youth Services Bureau will be posting a revised Tribal PREP NOFO shortly and will be accepting applications. Tribal PREP competitively funds projects that educate American Indian/Alaska Native (AI/AN) youth ages 10-19, and expectant and parenting youth under age 21, on both abstinence and contraception for the prevention of pregnancy, sexually transmitted infections (STIs), and HIV …</summary>
   </entry>
   <entry>
     <title>Media Literacy and Capacity Building Workshop Series</title>
@@ -241,7 +241,7 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <category term="Transportation"/>
-    <summary>U.S. Mission to Indonesia — Closes 2026-09-02 — 1. Project Background, Goals, and Objectives With over 270 million people and one of the world’s largest social media user bases, Indonesia’s citizens consume media content from a wide array of traditional and digital sources. As the country continues to expand its regional leadership role, Indonesian journalists must develop their capacity to report accurately and comprehensively on critical issu…</summary>
+    <summary>U.S. Mission to Indonesia | Closes 2026-09-02 | 1. Project Background, Goals, and Objectives With over 270 million people and one of the world’s largest social media user bases, Indonesia’s citizens consume media content from a wide array of traditional and digital sources. As the country continues to expand its regional leadership role, Indonesian journalists must develop their capacity to report accurately and comprehensively on critical issu…</summary>
   </entry>
   <entry>
     <title>Strengthening global health security in India to contain public health threats and accelerate outbreak response</title>
@@ -254,7 +254,7 @@
     <category term="Public health"/>
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-10-02 — This NOFO"s purpose is to support district, state and national public health systems in India to advance GHSA priorities to prevent, detect and respond to infectious disease threats. CDC will work with the Government of India (GoI) to strengthen capacity to control disease outbreaks at their source and neutralize public health threats. This NOFO will augment and increasingly transition CDC-support…</summary>
+    <summary>Centers for Disease Control-GHC | Closes 2026-10-02 | This NOFO"s purpose is to support district, state and national public health systems in India to advance GHSA priorities to prevent, detect and respond to infectious disease threats. CDC will work with the Government of India (GoI) to strengthen capacity to control disease outbreaks at their source and neutralize public health threats. This NOFO will augment and increasingly transition CDC-support…</summary>
   </entry>
   <entry>
     <title>Emerging Infections Network - Research for Preventing, Detecting, and Managing Travel-associated Infectious Diseases</title>
@@ -266,7 +266,7 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <category term="Transportation"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2026-11-05 — The focus of this notice of funding opportunity (NOFO) is to produce insights into disease detection and prevention strategies, burden, severity, diagnostics, treatment, and outcomes of infectious diseases in international travelers. Timely surveillance and sentinel detection are essential for collecting actionable data. The research should:Address public health questions that improve the speed of…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2026-11-05 | The focus of this notice of funding opportunity (NOFO) is to produce insights into disease detection and prevention strategies, burden, severity, diagnostics, treatment, and outcomes of infectious diseases in international travelers. Timely surveillance and sentinel detection are essential for collecting actionable data. The research should:Address public health questions that improve the speed of…</summary>
   </entry>
   <entry>
     <title>Innovative Traffic Safety Enforcement (ITSE) Grant Program</title>
@@ -278,7 +278,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <category term="Cybersecurity"/>
-    <summary>National Highway Traffic Safety Administration — Closes 2027-09-01 — While the agency will consider innovative enhancements to existing countermeasures, the goal is to develop evidence-based projects that are scalable and transferable for use by State and local law enforcement agencies. The primary intent of this of the ITSE Grant Program is to 1) develop innovative traffic safety enforcement programs that demonstrate effectiveness by reducing the number of motor v…</summary>
+    <summary>National Highway Traffic Safety Administration | Closes 2027-09-01 | While the agency will consider innovative enhancements to existing countermeasures, the goal is to develop evidence-based projects that are scalable and transferable for use by State and local law enforcement agencies. The primary intent of this of the ITSE Grant Program is to 1) develop innovative traffic safety enforcement programs that demonstrate effectiveness by reducing the number of motor v…</summary>
   </entry>
   <entry>
     <title>Small Business Transportation Technical Assistance Center (Region 1)</title>
@@ -288,7 +288,7 @@
     <author><name>69A350 OSDBU</name></author>
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
-    <summary>69A350 OSDBU — Closes 2026-08-30 — The U.S. Department of Transportation (USDOT), Office of the Secretary (OST), Office of Small and Disadvantaged Business Utilization (OSDBU), announces the availability of funding under Notice of Funding Opportunity (NOFO) Number OST/OSDBU-2026-SBTTAC-Region 1-FY2026-1 to establish and operate the Region 1 Small Business Transportation Technical Assistance Center (SBTTAC) formerly known as the Sma…</summary>
+    <summary>69A350 OSDBU | Closes 2026-08-30 | The U.S. Department of Transportation (USDOT), Office of the Secretary (OST), Office of Small and Disadvantaged Business Utilization (OSDBU), announces the availability of funding under Notice of Funding Opportunity (NOFO) Number OST/OSDBU-2026-SBTTAC-Region 1-FY2026-1 to establish and operate the Region 1 Small Business Transportation Technical Assistance Center (SBTTAC) formerly known as the Sma…</summary>
   </entry>
   <entry>
     <title>Small Business Transportation Technical Assistance Center (Region 2)</title>
@@ -299,7 +299,7 @@
     <category term="Education and workforce"/>
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
-    <summary>69A350 OSDBU — Closes 2026-08-30 — The United States Department of Transportation Office of Small and Disadvantaged Business Utilization will enter into Cooperative Agreements with eligible organizations to provide outreach to the small business community in their designated region and provide financial and technical assistance, business training programs, business assessment, management training, counseling, marketing and outreach…</summary>
+    <summary>69A350 OSDBU | Closes 2026-08-30 | The United States Department of Transportation Office of Small and Disadvantaged Business Utilization will enter into Cooperative Agreements with eligible organizations to provide outreach to the small business community in their designated region and provide financial and technical assistance, business training programs, business assessment, management training, counseling, marketing and outreach…</summary>
   </entry>
   <entry>
     <title>Small Business Transportation Technical Assistance Center (Region 3)</title>
@@ -309,7 +309,7 @@
     <author><name>69A350 OSDBU</name></author>
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
-    <summary>69A350 OSDBU — Closes 2026-08-30 — The U.S. Department of Transportation (USDOT), Office of the Secretary (OST), Office of Small and Disadvantaged Business Utilization (OSDBU), announces the availability of funding under Notice of Funding Opportunity (NOFO) Number OST/OSDBU-2026-SBTTAC-Region 3-FY2026-1 to establish and operate the Region 3 Small Business Transportation Technical Assistance Center (SBTTAC) formerly known as the Sma…</summary>
+    <summary>69A350 OSDBU | Closes 2026-08-30 | The U.S. Department of Transportation (USDOT), Office of the Secretary (OST), Office of Small and Disadvantaged Business Utilization (OSDBU), announces the availability of funding under Notice of Funding Opportunity (NOFO) Number OST/OSDBU-2026-SBTTAC-Region 3-FY2026-1 to establish and operate the Region 3 Small Business Transportation Technical Assistance Center (SBTTAC) formerly known as the Sma…</summary>
   </entry>
   <entry>
     <title>Small Business Transportation Technical Assistance Center (Region 4)</title>
@@ -320,7 +320,7 @@
     <category term="Education and workforce"/>
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
-    <summary>69A350 OSDBU — Closes 2026-08-30 — The United States Department of Transportation Office of Small and Disadvantaged Business Utilization will enter into Cooperative Agreements with eligible organizations to provide outreach to the small business community in their designated region and provide financial and technical assistance, business training programs, business assessment, management training, counseling, marketing and outreach…</summary>
+    <summary>69A350 OSDBU | Closes 2026-08-30 | The United States Department of Transportation Office of Small and Disadvantaged Business Utilization will enter into Cooperative Agreements with eligible organizations to provide outreach to the small business community in their designated region and provide financial and technical assistance, business training programs, business assessment, management training, counseling, marketing and outreach…</summary>
   </entry>
   <entry>
     <title>Small Business Transportation Technical Assistance Center (Region 5)</title>
@@ -331,7 +331,7 @@
     <category term="Education and workforce"/>
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
-    <summary>69A350 OSDBU — Closes 2026-08-30 — The United States Department of Transportation Office of Small and Disadvantaged Business Utilization will enter into Cooperative Agreements with eligible organizations to provide outreach to the small business community in their designated region and provide financial and technical assistance, business training programs, business assessment, management training, counseling, marketing and outreach…</summary>
+    <summary>69A350 OSDBU | Closes 2026-08-30 | The United States Department of Transportation Office of Small and Disadvantaged Business Utilization will enter into Cooperative Agreements with eligible organizations to provide outreach to the small business community in their designated region and provide financial and technical assistance, business training programs, business assessment, management training, counseling, marketing and outreach…</summary>
   </entry>
   <entry>
     <title>Small Business Transportation Technical Assistance Center (Region 6)</title>
@@ -341,7 +341,7 @@
     <author><name>69A350 OSDBU</name></author>
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
-    <summary>69A350 OSDBU — Closes 2026-08-30 — The U.S. Department of Transportation (USDOT), Office of the Secretary (OST), Office of Small and Disadvantaged Business Utilization (OSDBU), announces the availability of funding under Notice of Funding Opportunity (NOFO) Number OST/OSDBU-2026-SBTTAC-Region 6-FY2026-1 to establish and operate the Region 6 Small Business Transportation Technical Assistance Center (SBTTAC) formerly known as the Sma…</summary>
+    <summary>69A350 OSDBU | Closes 2026-08-30 | The U.S. Department of Transportation (USDOT), Office of the Secretary (OST), Office of Small and Disadvantaged Business Utilization (OSDBU), announces the availability of funding under Notice of Funding Opportunity (NOFO) Number OST/OSDBU-2026-SBTTAC-Region 6-FY2026-1 to establish and operate the Region 6 Small Business Transportation Technical Assistance Center (SBTTAC) formerly known as the Sma…</summary>
   </entry>
   <entry>
     <title>Improving regional capacity to respond to HIV, TB, and other global health priorities in Central America</title>
@@ -353,7 +353,7 @@
     <category term="Public health"/>
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
-    <summary>Centers for Disease Control-GHC — Closes 2026-08-31 — The Award Ceiling for Year 1 is 0 (none). CDC anticipates an Approximate Total Fiscal Year Funding amount of $20,000,000 for Year 1, subject to the availability of funds.You will advance progress towards achieving the 95-95-95 targets and continue to transition site-level support to local governments in Central America (CA) for:El Salvador.Guatemala.Honduras.Nicaragua.Panama.To achieve the goals o…</summary>
+    <summary>Centers for Disease Control-GHC | Closes 2026-08-31 | The Award Ceiling for Year 1 is 0 (none). CDC anticipates an Approximate Total Fiscal Year Funding amount of $20,000,000 for Year 1, subject to the availability of funds.You will advance progress towards achieving the 95-95-95 targets and continue to transition site-level support to local governments in Central America (CA) for:El Salvador.Guatemala.Honduras.Nicaragua.Panama.To achieve the goals o…</summary>
   </entry>
   <entry>
     <title>FY26 Bus Safety, Accessibility, and Innovation Notice of Funding Opportunity</title>
@@ -363,7 +363,7 @@
     <author><name>DOT - Federal Transit Administration</name></author>
     <category term="Technology development"/>
     <category term="Transportation"/>
-    <summary>DOT - Federal Transit Administration — Closes 2026-09-28 — The Federal Transit Administration (FTA) announces the opportunity to apply for competitive awards totaling up to $10 million in Public Transportation Innovation Program (49 U.S.C. 5312) funds for the Fiscal Year (FY) 2026 Bus Safety, Accessibility, and Innovation Research Program under Assistance Listing Number 20.530. As required by Federal public transportation law, funds will be awarded compet…</summary>
+    <summary>DOT - Federal Transit Administration | Closes 2026-09-28 | The Federal Transit Administration (FTA) announces the opportunity to apply for competitive awards totaling up to $10 million in Public Transportation Innovation Program (49 U.S.C. 5312) funds for the Fiscal Year (FY) 2026 Bus Safety, Accessibility, and Innovation Research Program under Assistance Listing Number 20.530. As required by Federal public transportation law, funds will be awarded compet…</summary>
   </entry>
   <entry>
     <title>DOJ FY 2026 Bridging Immigration-Related Deficits Experienced Nationwide (“BIDEN”) Program Round 2</title>
@@ -373,7 +373,7 @@
     <author><name>Bureau of Justice Assistance</name></author>
     <category term="Education and workforce"/>
     <category term="Transportation"/>
-    <summary>Bureau of Justice Assistance — Closes 2026-08-26 — This is a notice of funding opportunity (NOFO) for the Department of Justice’s (DOJ) FY 2026 Bridging Immigration-Related Deficits Experienced Nationwide (BIDEN) Program. This program, authorized under the BIDEN Reimbursement Fund established by the One Big Beautiful Bill Act, Public Law 119-21, Title X, Subtitle A, Part II (codified at 34 U.S.C. § 61101), provides funding for grants to eligible S…</summary>
+    <summary>Bureau of Justice Assistance | Closes 2026-08-26 | This is a notice of funding opportunity (NOFO) for the Department of Justice’s (DOJ) FY 2026 Bridging Immigration-Related Deficits Experienced Nationwide (BIDEN) Program. This program, authorized under the BIDEN Reimbursement Fund established by the One Big Beautiful Bill Act, Public Law 119-21, Title X, Subtitle A, Part II (codified at 34 U.S.C. § 61101), provides funding for grants to eligible S…</summary>
   </entry>
   <entry>
     <title>U.S.-ASEAN Road to 50: Rising Leaders Forum</title>
@@ -386,7 +386,7 @@
     <category term="Energy"/>
     <category term="Manufacturing"/>
     <category term="Transportation"/>
-    <summary>U.S. Mission to ASEAN — Closes 2026-08-30 — The U.S. Mission to ASEAN (USASEAN) Public Diplomacy Section (PDS) announces an open competition for applications to develop, organize, and oversee the U.S.-ASEAN Road to 50: Rising Leaders Forum. This one-day Jakarta workshop will gather approximately 50 rising leaders selected exclusively from the USASEAN alumni networks across Southeast Asia. Celebrating 50 years of partnership, this forum look…</summary>
+    <summary>U.S. Mission to ASEAN | Closes 2026-08-30 | The U.S. Mission to ASEAN (USASEAN) Public Diplomacy Section (PDS) announces an open competition for applications to develop, organize, and oversee the U.S.-ASEAN Road to 50: Rising Leaders Forum. This one-day Jakarta workshop will gather approximately 50 rising leaders selected exclusively from the USASEAN alumni networks across Southeast Asia. Celebrating 50 years of partnership, this forum look…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 Competitive Funding Opportunity: Buses and Bus Facilities Program</title>
@@ -395,7 +395,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>DOT - Federal Transit Administration</name></author>
     <category term="Transportation"/>
-    <summary>DOT - Federal Transit Administration — Closes 2026-09-21 — The Federal Transit Administration (FTA) announces the availability of approximately $21 million in competitive grants under the Buses and Bus Facilities Program to assist in the financing of buses and bus facilities capital projects, including replacing, rehabilitating, purchasing or leasing buses or related equipment, and rehabilitating, purchasing, constructing or leasing bus-related facilities…</summary>
+    <summary>DOT - Federal Transit Administration | Closes 2026-09-21 | The Federal Transit Administration (FTA) announces the availability of approximately $21 million in competitive grants under the Buses and Bus Facilities Program to assist in the financing of buses and bus facilities capital projects, including replacing, rehabilitating, purchasing or leasing buses or related equipment, and rehabilitating, purchasing, constructing or leasing bus-related facilities…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 Competitive Funding Opportunity: Low or No Emission Program</title>
@@ -404,7 +404,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>DOT - Federal Transit Administration</name></author>
     <category term="Transportation"/>
-    <summary>DOT - Federal Transit Administration — Closes 2026-09-21 — The Federal Transit Administration (FTA) announces the availability of approximately $589 million in competitive grants under the Low or No Emission Grant Program (Low-No Program) for the purchase or lease of low-emission and zero-emission transit buses, including acquisition, construction, and leasing of required supporting facilities. Synopses and full announcement will be posted on Grants.gov a…</summary>
+    <summary>DOT - Federal Transit Administration | Closes 2026-09-21 | The Federal Transit Administration (FTA) announces the availability of approximately $589 million in competitive grants under the Low or No Emission Grant Program (Low-No Program) for the purchase or lease of low-emission and zero-emission transit buses, including acquisition, construction, and leasing of required supporting facilities. Synopses and full announcement will be posted on Grants.gov a…</summary>
   </entry>
   <entry>
     <title>Charge Ready NY 2.0 Equipment and Network Qualification Process</title>
@@ -413,7 +413,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Transportation"/>
-    <summary>NYSERDA — Closes 2026-12-31 — Establishes a list of Level 2 electric vehicle (EV) charging equipment and networks that will be eligible for incentives under the upcoming Charge Ready NY 2.0 Program. Under the Program, interested applicants will be able to receive incentives for the installation of eligible charging equipment. Charging station vendors will submit applications to determine eligibility of one or more models of ch…</summary>
+    <summary>NYSERDA | Closes 2026-12-31 | Establishes a list of Level 2 electric vehicle (EV) charging equipment and networks that will be eligible for incentives under the upcoming Charge Ready NY 2.0 Program. Under the Program, interested applicants will be able to receive incentives for the installation of eligible charging equipment. Charging station vendors will submit applications to determine eligibility of one or more models of ch…</summary>
   </entry>
   <entry>
     <title>Port Infrastructure</title>
@@ -422,7 +422,7 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Transportation"/>
-    <summary>NYSERDA — Closes 2027-11-04 — Supporting maritime port development and improvement projects at existing New York State ports, NYSERDA seeks to competitively select and fund proposals through Request for Proposals (RFP) 6041. The program will invest in New York State’s existing ports to increase the capability for New York to support the offshore wind industry while also having multi-use purposes. Investing in ports capable of …</summary>
+    <summary>NYSERDA | Closes 2027-11-04 | Supporting maritime port development and improvement projects at existing New York State ports, NYSERDA seeks to competitively select and fund proposals through Request for Proposals (RFP) 6041. The program will invest in New York State’s existing ports to increase the capability for New York to support the offshore wind industry while also having multi-use purposes. Investing in ports capable of …</summary>
   </entry>
   <entry>
     <title>Grid Modernization Grid Enhancing Technologies</title>
@@ -432,7 +432,7 @@
     <author><name>NYSERDA</name></author>
     <category term="Energy"/>
     <category term="Transportation"/>
-    <summary>NYSERDA — Closes 2029-11-19 — Helping to achieve a modernized energy grid, investments in Grid Enhancing Technologies (GETs) roll up to meet New York State’s clean energy goals. Up to $3 million per project is available in Program Opportunity Notice (PON) 6149 to promote product developments and demonstrations that work together to advance the transition of New York State’s electric grid to cleaner resources.</summary>
+    <summary>NYSERDA | Closes 2029-11-19 | Helping to achieve a modernized energy grid, investments in Grid Enhancing Technologies (GETs) roll up to meet New York State’s clean energy goals. Up to $3 million per project is available in Program Opportunity Notice (PON) 6149 to promote product developments and demonstrations that work together to advance the transition of New York State’s electric grid to cleaner resources.</summary>
   </entry>
   <entry>
     <title>Clean Energy Training Services</title>
@@ -445,7 +445,7 @@
     <category term="Energy"/>
     <category term="Health equity"/>
     <category term="Transportation"/>
-    <summary>NYSERDA — Closes 2029-12-31 — NYSERDA is looking to establish a pool of contractors qualified to deliver training, develop curriculum and/or training tools, and provide market expertise and/or other services related to clean energy workforce development and training. Qualified contractors will have experience in one or more of the following categories: building decarbonization and energy efficiency, renewable energy, grid mode…</summary>
+    <summary>NYSERDA | Closes 2029-12-31 | NYSERDA is looking to establish a pool of contractors qualified to deliver training, develop curriculum and/or training tools, and provide market expertise and/or other services related to clean energy workforce development and training. Qualified contractors will have experience in one or more of the following categories: building decarbonization and energy efficiency, renewable energy, grid mode…</summary>
   </entry>
   <entry>
     <title>The New York Truck-Voucher Incentive Program</title>
@@ -455,7 +455,7 @@
     <author><name>NYSERDA</name></author>
     <category term="Manufacturing"/>
     <category term="Transportation"/>
-    <summary>NYSERDA — Closes 2029-12-31 — Helps fleet owners in New York State afford clean vehicle technologies that are quiet, efficient and do not emit harmful pollutants or carbon. NYTVIP provides point-of-sale vouchers to fleet owners that purchase or lease zero emission Class 3-8 vehicles, non-road equipment, and transit buses. Information about how fleets, dealers, and manufacturers can participate in NYTVIP can be found in the Imp…</summary>
+    <summary>NYSERDA | Closes 2029-12-31 | Helps fleet owners in New York State afford clean vehicle technologies that are quiet, efficient and do not emit harmful pollutants or carbon. NYTVIP provides point-of-sale vouchers to fleet owners that purchase or lease zero emission Class 3-8 vehicles, non-road equipment, and transit buses. Information about how fleets, dealers, and manufacturers can participate in NYTVIP can be found in the Imp…</summary>
   </entry>
   <entry>
     <title>Technical Skills Training and Upskilling</title>
@@ -466,7 +466,7 @@
     <category term="Education and workforce"/>
     <category term="Energy"/>
     <category term="Transportation"/>
-    <summary>NYSERDA — Closes 2030-09-30 — Funding is available to build and expand training capacity that advances skills and knowledge for clean energy workers in the areas of energy efficiency and building electrification, renewable energy, energy storage, smart grid, and electric vehicle charging stations. This solicitation may also support the enhancement of clean energy content delivered to students enrolled in a degree or certificat…</summary>
+    <summary>NYSERDA | Closes 2030-09-30 | Funding is available to build and expand training capacity that advances skills and knowledge for clean energy workers in the areas of energy efficiency and building electrification, renewable energy, energy storage, smart grid, and electric vehicle charging stations. This solicitation may also support the enhancement of clean energy content delivered to students enrolled in a degree or certificat…</summary>
   </entry>
   <entry>
     <title>Affordable Housing and Supportive Services Demonstration</title>
@@ -476,7 +476,7 @@
     <author><name>Administration for Children and Families - OCS</name></author>
     <category term="Education and workforce"/>
     <category term="Transportation"/>
-    <summary>Administration for Children and Families - OCS — Closes 2026-08-24 — The Office of Community Services (OCS) intends to fund Community Action Agencies (CAAs) and tribes that received FY25 Community Services Block Grant (CSBG) awards and own affordable housing units. The purpose of the AHSSD is to demonstrate the potential for improving housing stability, economic mobility, and well-being by boosting public welfare and support service enrollment for residents of affo…</summary>
+    <summary>Administration for Children and Families - OCS | Closes 2026-08-24 | The Office of Community Services (OCS) intends to fund Community Action Agencies (CAAs) and tribes that received FY25 Community Services Block Grant (CSBG) awards and own affordable housing units. The purpose of the AHSSD is to demonstrate the potential for improving housing stability, economic mobility, and well-being by boosting public welfare and support service enrollment for residents of affo…</summary>
   </entry>
   <entry>
     <title>Community Services Block Grant (CSBG) Communities of Practice (COP)</title>
@@ -486,7 +486,7 @@
     <author><name>Administration for Children and Families - OCS</name></author>
     <category term="Education and workforce"/>
     <category term="Transportation"/>
-    <summary>Administration for Children and Families - OCS — Closes 2026-08-24 — This NOFO is modified. The email address and phone number for the program office have been revised in the Contacts and Support section.The Office of Community Services (OCS) within the Administration for Children and Families (ACF) will support a funding opportunity for six (6) three-year cooperative agreements for the Community Services Block Grant (CSBG) Communities of Practice (CoP).Six CoPs wi…</summary>
+    <summary>Administration for Children and Families - OCS | Closes 2026-08-24 | This NOFO is modified. The email address and phone number for the program office have been revised in the Contacts and Support section.The Office of Community Services (OCS) within the Administration for Children and Families (ACF) will support a funding opportunity for six (6) three-year cooperative agreements for the Community Services Block Grant (CSBG) Communities of Practice (CoP).Six CoPs wi…</summary>
   </entry>
   <entry>
     <title>FY 2026 COPS Office-NHTSA Impaired Driving Curricula Invitational Program</title>
@@ -495,7 +495,7 @@
     <updated>2026-07-24T00:00:00Z</updated>
     <author><name>Community Oriented Policing Services</name></author>
     <category term="Transportation"/>
-    <summary>Community Oriented Policing Services — Closes 2026-08-31 — The Office of Community Oriented Policing Services (COPS) is the component of the U.S. Department of Justice responsible for advancing the practice of community policing and the Administration’s priority of Making America Safe Again by supporting the nation’s state, local, territorial and Tribal law enforcement agencies through information and grant resources. The COPS Office / NHTSA Impaired Driv…</summary>
+    <summary>Community Oriented Policing Services | Closes 2026-08-31 | The Office of Community Oriented Policing Services (COPS) is the component of the U.S. Department of Justice responsible for advancing the practice of community policing and the Administration’s priority of Making America Safe Again by supporting the nation’s state, local, territorial and Tribal law enforcement agencies through information and grant resources. The COPS Office / NHTSA Impaired Driv…</summary>
   </entry>
   <entry>
     <title>The Primary Prevention Youth Homelessness Demonstration Program</title>
@@ -505,7 +505,7 @@
     <author><name>Administration for Children &amp; Families - ACYF/FYSB</name></author>
     <category term="Social and behavioral sciences"/>
     <category term="Transportation"/>
-    <summary>Administration for Children &amp; Families - ACYF/FYSB — Closes 2026-08-17 — The Primary Prevention Youth Homelessness Demonstration Program provides funding to identify and implement strategies and services for youth and young adults between ages 12 and 26 in order to prevent homelessness, including strategies designed to serve youth and young adult populations with a high likelihood of experiencing homelessness, housing instability, particularly among youth at risk of hu…</summary>
+    <summary>Administration for Children &amp; Families - ACYF/FYSB | Closes 2026-08-17 | The Primary Prevention Youth Homelessness Demonstration Program provides funding to identify and implement strategies and services for youth and young adults between ages 12 and 26 in order to prevent homelessness, including strategies designed to serve youth and young adult populations with a high likelihood of experiencing homelessness, housing instability, particularly among youth at risk of hu…</summary>
   </entry>
   <entry>
     <title>Legal Competency and Training Program in Southeast Asia and the Pacific</title>
@@ -515,7 +515,7 @@
     <author><name>Bureau of East Asian and Pacific Affairs</name></author>
     <category term="Education and workforce"/>
     <category term="Transportation"/>
-    <summary>Bureau of East Asian and Pacific Affairs — Closes 2026-08-25 — The overall goal of the project is to strengthen the legal capacity and proficiency of government officials, including policymakers, negotiators, legal experts and practitioners, and other relevant officials from Southeast Asian and Pacific Islands countries concerning the principles and practices of public international law, including, but not limited to, the law of the sea as reflected in the 19…</summary>
+    <summary>Bureau of East Asian and Pacific Affairs | Closes 2026-08-25 | The overall goal of the project is to strengthen the legal capacity and proficiency of government officials, including policymakers, negotiators, legal experts and practitioners, and other relevant officials from Southeast Asian and Pacific Islands countries concerning the principles and practices of public international law, including, but not limited to, the law of the sea as reflected in the 19…</summary>
   </entry>
   <entry>
     <title>Egypt Annual Program Statement</title>
@@ -531,7 +531,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Materials science"/>
     <category term="Cybersecurity"/>
-    <summary>Bureau of Near Eastern Affairs — Closes 2026-08-31 — The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
+    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
   </entry>
   <entry>
     <title>Title IV-E Prevention Accelerator Grants</title>
@@ -540,7 +540,7 @@
     <updated>2026-07-17T00:00:00Z</updated>
     <author><name>Administration for Children and Families - ACYF/CB</name></author>
     <category term="Transportation"/>
-    <summary>Administration for Children and Families - ACYF/CB — Closes 2026-08-17 — Despite expanded authority under the Family First Prevention Services Act, title IV-E prevention services account for less than 2% of total program claims. Many title IV-E agencies face implementation barriers including limited infrastructure, provider readiness, evaluation capacity, and complex claiming requirements.To overcome these barriers, the Children's Bureau will fund projects to accelerat…</summary>
+    <summary>Administration for Children and Families - ACYF/CB | Closes 2026-08-17 | Despite expanded authority under the Family First Prevention Services Act, title IV-E prevention services account for less than 2% of total program claims. Many title IV-E agencies face implementation barriers including limited infrastructure, provider readiness, evaluation capacity, and complex claiming requirements.To overcome these barriers, the Children's Bureau will fund projects to accelerat…</summary>
   </entry>
   <entry>
     <title>National Estuarine Research Reserve System (NERRS) Land Acquisition and Construction Program for Fiscal Year 2026</title>
@@ -552,7 +552,7 @@
     <category term="Environmental science"/>
     <category term="Transportation"/>
     <category term="Water"/>
-    <summary>DOC NOAA - ERA Production — Closes 2026-09-18 — The National Estuarine Research Reserve System (NERRS) consists of estuarine areas of the United States and its territories designated and managed for research and educational purposes (Reserve) as specified in 15 C.F.R. Part 921. By funding Reserve lead agencies and universities to conduct land acquisition and construction projects that support the NERRS mission, NOAA will strengthen protection o…</summary>
+    <summary>DOC NOAA - ERA Production | Closes 2026-09-18 | The National Estuarine Research Reserve System (NERRS) consists of estuarine areas of the United States and its territories designated and managed for research and educational purposes (Reserve) as specified in 15 C.F.R. Part 921. By funding Reserve lead agencies and universities to conduct land acquisition and construction projects that support the NERRS mission, NOAA will strengthen protection o…</summary>
   </entry>
   <entry>
     <title>Center for Foundational Academic Research and Strategic Innovation for the Defense Enterprise (C-FARSIDE)</title>
@@ -563,7 +563,7 @@
     <category term="Education and workforce"/>
     <category term="Technology development"/>
     <category term="Transportation"/>
-    <summary>Washington Headquarters Services — Closes 2026-08-17 — Bridging foundational academic research and strategic innovation for the Defense enterprise, the Center for Foundational Academic Research and Strategic Innovation for the Defense Enterprise (C-FARSIDE) will facilitate deep transdisciplinary collaborations among top-tier scholars, informed by defense strategists, that will transform rigorous and blue-sky research into breakthrough national securit…</summary>
+    <summary>Washington Headquarters Services | Closes 2026-08-17 | Bridging foundational academic research and strategic innovation for the Defense enterprise, the Center for Foundational Academic Research and Strategic Innovation for the Defense Enterprise (C-FARSIDE) will facilitate deep transdisciplinary collaborations among top-tier scholars, informed by defense strategists, that will transform rigorous and blue-sky research into breakthrough national securit…</summary>
   </entry>
   <entry>
     <title>Syria Annual Program Statement</title>
@@ -576,7 +576,7 @@
     <category term="Energy"/>
     <category term="Manufacturing"/>
     <category term="Transportation"/>
-    <summary>Bureau of Near Eastern Affairs — Closes 2026-08-31 — The Bureau of Near Eastern Affairs’ Office of Assistance Coordination of the U.S. Department of State announces an open competition for organizations to submit a statement of interest (SOI) for innovative foreign assistance programs benefiting partner countries that also advance U.S. commercial diplomacy and put American interests first. SOI must demonstrate how projects will leverage foreign assi…</summary>
+    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination of the U.S. Department of State announces an open competition for organizations to submit a statement of interest (SOI) for innovative foreign assistance programs benefiting partner countries that also advance U.S. commercial diplomacy and put American interests first. SOI must demonstrate how projects will leverage foreign assi…</summary>
   </entry>
   <entry>
     <title>FY 2026 Notice of Funding Opportunity: Innovative Coordinated Access and Mobility Pilot Program</title>
@@ -585,7 +585,7 @@
     <updated>2026-07-09T00:00:00Z</updated>
     <author><name>DOT - Federal Transit Administration</name></author>
     <category term="Transportation"/>
-    <summary>DOT - Federal Transit Administration — Closes 2026-09-09 — The Federal Transit Administration (FTA) announces the opportunity to apply for $11,959,671 million in Fiscal Year (FY) 2024, 2025, and 2026 competitive grant funding to support transit services for the FY 2026 Innovative Coordinated Access and Mobility (ICAM) pilot program. Under the ICAM pilot program, funds awarded will finance innovative capital projects for the transportation-disadvantaged, w…</summary>
+    <summary>DOT - Federal Transit Administration | Closes 2026-09-09 | The Federal Transit Administration (FTA) announces the opportunity to apply for $11,959,671 million in Fiscal Year (FY) 2024, 2025, and 2026 competitive grant funding to support transit services for the FY 2026 Innovative Coordinated Access and Mobility (ICAM) pilot program. Under the ICAM pilot program, funds awarded will finance innovative capital projects for the transportation-disadvantaged, w…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 United States Marine Highway Program (USMHP)</title>
@@ -596,7 +596,7 @@
     <category term="Energy"/>
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
-    <summary>Maritime Administration — Closes 2026-08-31 — The United States Marine Highway Program (USMHP), codified at 46 U.S.C. 55601, was originally established by Section 1121 of the Energy Independence and Security Act of 2007 to reduce landside congestion through the designation of Marine Highway Routes. The USMHP statute authorizes the U.S. Department of Transportation (“Department” or “DOT”) to make grants to implement Projects or components of P…</summary>
+    <summary>Maritime Administration | Closes 2026-08-31 | The United States Marine Highway Program (USMHP), codified at 46 U.S.C. 55601, was originally established by Section 1121 of the Energy Independence and Security Act of 2007 to reduce landside congestion through the designation of Marine Highway Routes. The USMHP statute authorizes the U.S. Department of Transportation (“Department” or “DOT”) to make grants to implement Projects or components of P…</summary>
   </entry>
   <entry>
     <title>Fertilizer Investment &amp; Expansion for Long-term Domestic Supply (FIELDS)</title>
@@ -607,7 +607,7 @@
     <category term="Agriculture and food"/>
     <category term="Manufacturing"/>
     <category term="Transportation"/>
-    <summary>Rural Business-Cooperative Service — Closes 2026-08-17 — Fertilizer Investment &amp; Expansion for Long-term Domestic Supply (FIELDS) Program The Fertilizer Investment &amp; Expansion for Long-term Domestic Supply (FIELDS) Program is intended to expand or bring into operation new, independent domestic fertilizer production capacity in order to provide agricultural producers with additional domestic fertilizer options and strengthen the U.S. fertilizer supply ch…</summary>
+    <summary>Rural Business-Cooperative Service | Closes 2026-08-17 | Fertilizer Investment &amp; Expansion for Long-term Domestic Supply (FIELDS) Program The Fertilizer Investment &amp; Expansion for Long-term Domestic Supply (FIELDS) Program is intended to expand or bring into operation new, independent domestic fertilizer production capacity in order to provide agricultural producers with additional domestic fertilizer options and strengthen the U.S. fertilizer supply ch…</summary>
   </entry>
   <entry>
     <title>Interdisciplinary Transportation Law and Policy Technology Training Development</title>
@@ -620,7 +620,7 @@
     <category term="Education and workforce"/>
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
-    <summary>69A355 Research and Technology — Closes 2026-08-28 — The U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Interdisciplinary Transportation Law and Policy Technology Training Development program. This 24-month cooperative agreement aims to bridge the critical knowledge gap between fast-changing transportation technologies and our Nati…</summary>
+    <summary>69A355 Research and Technology | Closes 2026-08-28 | The U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Interdisciplinary Transportation Law and Policy Technology Training Development program. This 24-month cooperative agreement aims to bridge the critical knowledge gap between fast-changing transportation technologies and our Nati…</summary>
   </entry>
   <entry>
     <title>Tribal Transportation Safety Strategy Pilot Program</title>
@@ -633,7 +633,7 @@
     <category term="Transportation"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>69A355 Research and Technology — Closes 2026-08-28 — he U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Tribal Transportation Safety Strategy Pilot Program. This three-year cooperative agreement is designed to address the critical public safety crisis in Tribal communities, as American Indian and Alaska Native populations experience…</summary>
+    <summary>69A355 Research and Technology | Closes 2026-08-28 | he U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Tribal Transportation Safety Strategy Pilot Program. This three-year cooperative agreement is designed to address the critical public safety crisis in Tribal communities, as American Indian and Alaska Native populations experience…</summary>
   </entry>
   <entry>
     <title>Disaster Assistance for State Units on Aging (SUAs) and Tribal Organizations</title>
@@ -643,7 +643,7 @@
     <author><name>Administration for Community Living</name></author>
     <category term="Agriculture and food"/>
     <category term="Transportation"/>
-    <summary>Administration for Community Living — Closes 2026-09-01 — Grants awarded under this announcement are to provide disaster reimbursement and assistance funds to those State Units on Aging (SUAs), and federally recognized Tribal Organizations who are currently receiving a grant under Title VI of the Older Americans Act (OAA), as amended. Total funding available for disaster assistance is subject to the availability of funds appropriated. The estimated numbe…</summary>
+    <summary>Administration for Community Living | Closes 2026-09-01 | Grants awarded under this announcement are to provide disaster reimbursement and assistance funds to those State Units on Aging (SUAs), and federally recognized Tribal Organizations who are currently receiving a grant under Title VI of the Older Americans Act (OAA), as amended. Total funding available for disaster assistance is subject to the availability of funds appropriated. The estimated numbe…</summary>
   </entry>
   <entry>
     <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
@@ -659,6 +659,6 @@
     <category term="Transportation"/>
     <category term="Data science"/>
     <category term="Energy"/>
-    <summary>U.S. Mission to Indonesia — Closes 2026-08-31 — Project Background, Goals, and ObjectivesIn an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will leave…</summary>
+    <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | Project Background, Goals, and ObjectivesIn an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will leave…</summary>
   </entry>
 </feed>

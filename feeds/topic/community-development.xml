@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Funding Finder — Community development</title>
+  <title>Funding Finder | Community development</title>
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml</id>
@@ -14,7 +14,7 @@
     <author><name>Veterans Legacy Grants Program</name></author>
     <category term="Community development"/>
     <category term="Education and workforce"/>
-    <summary>Veterans Legacy Grants Program — Closes 2027-04-09 — VLGP will provide grants to eligible entities for the purpose of conducting cemetery research related to national, State, or Tribal Veterans’ cemeteries; producing educational materials that teach about the history of Veterans interred in national, State, or Tribal Veterans’ cemeteries; and promoting community engagement with the histories of Veterans interred in national, State, or Tribal Veteran…</summary>
+    <summary>Veterans Legacy Grants Program | Closes 2027-04-09 | VLGP will provide grants to eligible entities for the purpose of conducting cemetery research related to national, State, or Tribal Veterans’ cemeteries; producing educational materials that teach about the history of Veterans interred in national, State, or Tribal Veterans’ cemeteries; and promoting community engagement with the histories of Veterans interred in national, State, or Tribal Veteran…</summary>
   </entry>
   <entry>
     <title>NIDDK Multi-Purpose Resource-Related, Multi-Component Research Services Centers Cooperative Agreement (U2C - Clinical Trial Optional)</title>
@@ -24,7 +24,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Community development"/>
     <category term="Education and workforce"/>
-    <summary>National Institutes of Health — Closes 2027-01-28 — This Notice of Funding Opportunity (NOFO) announcement invites applications for NIDDK Multi-Purpose Resource-Related Research, Multi-Component Centers Cooperative Agreement (U2C - Clinical Trial Not Allowed). To help increase rigor, reproducibility and cost efficiencies, U2C centers offer highly specialized cores that provide a range of topic focused services including but not limited to hands-on …</summary>
+    <summary>National Institutes of Health | Closes 2027-01-28 | This Notice of Funding Opportunity (NOFO) announcement invites applications for NIDDK Multi-Purpose Resource-Related Research, Multi-Component Centers Cooperative Agreement (U2C - Clinical Trial Not Allowed). To help increase rigor, reproducibility and cost efficiencies, U2C centers offer highly specialized cores that provide a range of topic focused services including but not limited to hands-on …</summary>
   </entry>
   <entry>
     <title>Health and Extreme Weather Solutions-Focused Research Hubs (U54 - Clinical Trial Optional)</title>
@@ -35,7 +35,7 @@
     <category term="Community development"/>
     <category term="Environmental science"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health — Closes 2027-01-29 — The National Institute of Environmental Health Sciences (NIEHS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose translational research hubs with multiple highly integrated components focused on research, capacity building, and community/public health translation for regionally relevant topics related to the health impacts of extreme weather and cumula…</summary>
+    <summary>National Institutes of Health | Closes 2027-01-29 | The National Institute of Environmental Health Sciences (NIEHS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose translational research hubs with multiple highly integrated components focused on research, capacity building, and community/public health translation for regionally relevant topics related to the health impacts of extreme weather and cumula…</summary>
   </entry>
   <entry>
     <title>World Trade Center Youth Research Coordinating Center (U54)</title>
@@ -48,7 +48,7 @@
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-23 — The National Institute for Occupational Safety and Health (NIOSH), World Trade Center (WTC) Health Program, plans to establish a WTC Youth Research Coordinating Center ("Center") through a U54 cooperative agreement.In December 2022, Congress amended the Public Health Service Act (42 U.S.C. § 300mm–51(c)) to direct the WTC Health Program Administrator to establish a research cohort for emerging hea…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-02-23 | The National Institute for Occupational Safety and Health (NIOSH), World Trade Center (WTC) Health Program, plans to establish a WTC Youth Research Coordinating Center ("Center") through a U54 cooperative agreement.In December 2022, Congress amended the Public Health Service Act (42 U.S.C. § 300mm-51(c)) to direct the WTC Health Program Administrator to establish a research cohort for emerging hea…</summary>
   </entry>
   <entry>
     <title>NIOSH Robotics and Intelligent Mining Technology and Workplace Safety Research (U60)</title>
@@ -58,7 +58,7 @@
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Community development"/>
     <category term="Education and workforce"/>
-    <summary>Centers for Disease Control and Prevention - ERA — Closes 2027-02-08 — PurposeThis NOFO supports applied research to advance automation, robotics, and intelligent mining systems that improve safety and health in U.S. mining operations. Projects should deliver field-ready solutions that strengthen communication, self-escape, refuge performance, and overall safety through modern autonomy, sensing, and decision-support technologies.BackgroundMining remains hazardous. In…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-02-08 | PurposeThis NOFO supports applied research to advance automation, robotics, and intelligent mining systems that improve safety and health in U.S. mining operations. Projects should deliver field-ready solutions that strengthen communication, self-escape, refuge performance, and overall safety through modern autonomy, sensing, and decision-support technologies.BackgroundMining remains hazardous. In…</summary>
   </entry>
   <entry>
     <title>RNomics Outreach and Coordination (ROC) Center</title>
@@ -68,7 +68,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Community development"/>
     <category term="Education and workforce"/>
-    <summary>National Institutes of Health — Closes 2027-02-01 — The NIH Common Fund, in partnership with other NIH Institutes and Centers, plans to issue Notices of Funding Opportunity (NOFOs) for the RNomics program, which seeks to develop tools for studying the full set of RNA molecules (the RNome) in cells and tissues. The program will support technologies and resources that enable integrated analysis of RNA sequences, modifications, structures, locations, …</summary>
+    <summary>National Institutes of Health | Closes 2027-02-01 | The NIH Common Fund, in partnership with other NIH Institutes and Centers, plans to issue Notices of Funding Opportunity (NOFOs) for the RNomics program, which seeks to develop tools for studying the full set of RNA molecules (the RNome) in cells and tissues. The program will support technologies and resources that enable integrated analysis of RNA sequences, modifications, structures, locations, …</summary>
   </entry>
   <entry>
     <title>FY26 US DOT Drone Infrastructure Inspection Grants (DIIG) Program</title>
@@ -79,7 +79,7 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <category term="Transportation"/>
-    <summary>69A345 Office of the Under Secretary for Policy — Closes 2026-11-15 — The Drone Infrastructure Inspection Grants (DIIG) Program will provide grants to eligible government entities to facilitate the use of small Unmanned Aircraft Systems (UAS), referred to herein as drones, in critical infrastructure inspection. The objective is to increase the widespread adoption of drones and relevant technologies in support of more efficient Inspection, Operation, Construction, Ma…</summary>
+    <summary>69A345 Office of the Under Secretary for Policy | Closes 2026-11-15 | The Drone Infrastructure Inspection Grants (DIIG) Program will provide grants to eligible government entities to facilitate the use of small Unmanned Aircraft Systems (UAS), referred to herein as drones, in critical infrastructure inspection. The objective is to increase the widespread adoption of drones and relevant technologies in support of more efficient Inspection, Operation, Construction, Ma…</summary>
   </entry>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -91,7 +91,7 @@
     <category term="Community development"/>
     <category term="Energy"/>
     <category term="Cybersecurity"/>
-    <summary>Rural Utilities Service — Closes 2027-05-03 — The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+    <summary>Rural Utilities Service | Closes 2027-05-03 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
   </entry>
   <entry>
     <title>The NIA Genetics of Alzheimer's Disease Data Storage Site (NIAGADS)</title>
@@ -104,7 +104,7 @@
     <category term="Biology and biotechnology"/>
     <category term="Community development"/>
     <category term="Education and workforce"/>
-    <summary>National Institutes of Health — Closes 2026-11-01 — The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop, operate, and sustain a cloud-based data storage and computing platform that democratizes access to large-scale Alzheimer’s disease (AD) and AD-related dementias (ADRD) genetic and genomic data. The platform must be secure, scalable, and interoperable. The platform wil…</summary>
+    <summary>National Institutes of Health | Closes 2026-11-01 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop, operate, and sustain a cloud-based data storage and computing platform that democratizes access to large-scale Alzheimer’s disease (AD) and AD-related dementias (ADRD) genetic and genomic data. The platform must be secure, scalable, and interoperable. The platform wil…</summary>
   </entry>
   <entry>
     <title>Community Development Block Grant Program for Indian Tribes and Alaska Native Villages</title>
@@ -115,7 +115,7 @@
     <category term="Community development"/>
     <category term="Environmental science"/>
     <category term="Public health"/>
-    <summary>Department of Housing and Urban Development — Closes 2026-11-16 — The primary objective of the Indian Community Development Block Grant (ICDBG) program is the development of viable Indian and Alaska Native communities, including the creation of decent housing, suitable living environments, and economic opportunities primarily for persons of low-and moderate-incomes. See the ICDBG regulations at 24 CFR 1003.2, the full text of which is available at 24 CFR part 10…</summary>
+    <summary>Department of Housing and Urban Development | Closes 2026-11-16 | The primary objective of the Indian Community Development Block Grant (ICDBG) program is the development of viable Indian and Alaska Native communities, including the creation of decent housing, suitable living environments, and economic opportunities primarily for persons of low-and moderate-incomes. See the ICDBG regulations at 24 CFR 1003.2, the full text of which is available at 24 CFR part 10…</summary>
   </entry>
   <entry>
     <title>Preservation and Reinvestment Initiative for Community Enhancement (PRICE)</title>
@@ -125,7 +125,7 @@
     <author><name>Department of Housing and Urban Development</name></author>
     <category term="Community development"/>
     <category term="Manufacturing"/>
-    <summary>Department of Housing and Urban Development — Closes 2026-10-19 — HUD is issuing the Preservation and Reinvestment Initiative for Community Enhancement (PRICE) competition NOFO to preserve long-term housing affordability for residents of manufactured housing or an MHC, to redevelop MHCs, and to primarily benefit low- and moderate-income (LMI) residents. Congress appropriated in FY2025 these competitive grants to preserve and revitalize manufactured housing and e…</summary>
+    <summary>Department of Housing and Urban Development | Closes 2026-10-19 | HUD is issuing the Preservation and Reinvestment Initiative for Community Enhancement (PRICE) competition NOFO to preserve long-term housing affordability for residents of manufactured housing or an MHC, to redevelop MHCs, and to primarily benefit low- and moderate-income (LMI) residents. Congress appropriated in FY2025 these competitive grants to preserve and revitalize manufactured housing and e…</summary>
   </entry>
   <entry>
     <title>Network of the National Library of Medicine Coordinating Center (U24 Clinical Trial Optional)</title>
@@ -135,7 +135,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Community development"/>
     <category term="Education and workforce"/>
-    <summary>National Institutes of Health — Closes 2026-12-15 — The National Library of Medicine (NLM) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for a Coordinating Center of the Network of the National Library of Medicine (NNLM).Established in 1965 and organized geographically across the United States and its territories, the NNLM promotes and supports the initiatives, products, and services of the NLM and the National I…</summary>
+    <summary>National Institutes of Health | Closes 2026-12-15 | The National Library of Medicine (NLM) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for a Coordinating Center of the Network of the National Library of Medicine (NNLM).Established in 1965 and organized geographically across the United States and its territories, the NNLM promotes and supports the initiatives, products, and services of the NLM and the National I…</summary>
   </entry>
   <entry>
     <title>Network of the National Library of Medicine Regional Medical Libraries (UG4 Clinical Trial Not Allowed)</title>
@@ -145,7 +145,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Community development"/>
     <category term="Education and workforce"/>
-    <summary>National Institutes of Health — Closes 2026-12-15 — The National Library of Medicine (NLM) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for Regional Medical Libraries of the Network of the National Library of Medicine (NNLM).Established in 1965 and organized geographically across the United States and its territories, the NNLM promotes and supports the initiatives, products, and services of the NLM and the Natio…</summary>
+    <summary>National Institutes of Health | Closes 2026-12-15 | The National Library of Medicine (NLM) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for Regional Medical Libraries of the Network of the National Library of Medicine (NNLM).Established in 1965 and organized geographically across the United States and its territories, the NNLM promotes and supports the initiatives, products, and services of the NLM and the Natio…</summary>
   </entry>
   <entry>
     <title>Network of the National Library of Medicine Training Center (U24 Clinical Trial Not Allowed)</title>
@@ -155,7 +155,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Community development"/>
     <category term="Education and workforce"/>
-    <summary>National Institutes of Health — Closes 2026-12-15 — The National Library of Medicine (NLM) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for a Training Center of the Network of the National Library of Medicine (NNLM).Established in 1965 and organized geographically across the United States and its territories, the NNLM promotes and supports the initiatives, products, and services of the NLM and the National Insti…</summary>
+    <summary>National Institutes of Health | Closes 2026-12-15 | The National Library of Medicine (NLM) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for a Training Center of the Network of the National Library of Medicine (NNLM).Established in 1965 and organized geographically across the United States and its territories, the NNLM promotes and supports the initiatives, products, and services of the NLM and the National Insti…</summary>
   </entry>
   <entry>
     <title>2026 National Urban and Community Forestry Challenge Cost Share Grant Program</title>
@@ -166,7 +166,7 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
-    <summary>Forest Service — Closes 2026-10-12 — The intent of the National Urban and Community Forestry Challenge Cost Share grant program is to advance solutions to the economic, health, and environmental challenges faced by communities. This year’s program focuses on advancing community tree resource utilization, which can reduce waste and create value by turning wood generated from pruning, removals, storm events, and pest or disease outbrea…</summary>
+    <summary>Forest Service | Closes 2026-10-12 | The intent of the National Urban and Community Forestry Challenge Cost Share grant program is to advance solutions to the economic, health, and environmental challenges faced by communities. This year’s program focuses on advancing community tree resource utilization, which can reduce waste and create value by turning wood generated from pruning, removals, storm events, and pest or disease outbrea…</summary>
   </entry>
   <entry>
     <title>Safeguarding U.S. Critical Minerals Supply Chains- Tunisia</title>
@@ -176,7 +176,7 @@
     <author><name>Bureau of Near Eastern Affairs</name></author>
     <category term="Community development"/>
     <category term="Manufacturing"/>
-    <summary>Bureau of Near Eastern Affairs — Closes 2026-09-02 — U.S. Embassy Tunis and the Bureau of Near Eastern Affairs' Office of Assistance Coordination (NEA/AC) seek applications for the “Safeguarding U.S. Critical Minerals Supply Chains- Tunisia” program, a commercial diplomacy initiative to support transparent, private-sector-led investment in phosphate development, optimize downstream mineral processing to meet international standards, and strengthen t…</summary>
+    <summary>Bureau of Near Eastern Affairs | Closes 2026-09-02 | U.S. Embassy Tunis and the Bureau of Near Eastern Affairs' Office of Assistance Coordination (NEA/AC) seek applications for the “Safeguarding U.S. Critical Minerals Supply Chains- Tunisia” program, a commercial diplomacy initiative to support transparent, private-sector-led investment in phosphate development, optimize downstream mineral processing to meet international standards, and strengthen t…</summary>
   </entry>
   <entry>
     <title>Community Economic Development Projects</title>
@@ -186,7 +186,7 @@
     <author><name>Administration for Children and Families - OCS</name></author>
     <category term="Agriculture and food"/>
     <category term="Community development"/>
-    <summary>Administration for Children and Families - OCS — Closes 2026-09-08 — The Office of Community Services (OCS) will award approximately $18.57 million in Community Economic Development (CED) discretionary funds to Community Development Corporations (CDC) to enhance job creation and business development for individuals with low income. Projects should be well-planned, financially viable, and innovative. CED awards will be made as part of a broader strategy to address o…</summary>
+    <summary>Administration for Children and Families - OCS | Closes 2026-09-08 | The Office of Community Services (OCS) will award approximately $18.57 million in Community Economic Development (CED) discretionary funds to Community Development Corporations (CDC) to enhance job creation and business development for individuals with low income. Projects should be well-planned, financially viable, and innovative. CED awards will be made as part of a broader strategy to address o…</summary>
   </entry>
   <entry>
     <title>Rural Housing Preservation Grant</title>
@@ -195,7 +195,7 @@
     <updated>2026-08-06T00:00:00Z</updated>
     <author><name>Rural Housing Service</name></author>
     <category term="Community development"/>
-    <summary>Rural Housing Service — Closes 2026-09-08 — The Rural Housing Service (RHS) announces a notice in funding availability under its Housing Preservation Grant (HPG) program. The HPG program is a grant program which provides qualified public agencies, private nonprofit organizations, which may include but not be limited to, Faith-Based and Community Organizations, and other eligible entities grant funds to assist very low- and low-income homeow…</summary>
+    <summary>Rural Housing Service | Closes 2026-09-08 | The Rural Housing Service (RHS) announces a notice in funding availability under its Housing Preservation Grant (HPG) program. The HPG program is a grant program which provides qualified public agencies, private nonprofit organizations, which may include but not be limited to, Faith-Based and Community Organizations, and other eligible entities grant funds to assist very low- and low-income homeow…</summary>
   </entry>
   <entry>
     <title>Media Literacy and Capacity Building Workshop Series</title>
@@ -207,7 +207,7 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <category term="Transportation"/>
-    <summary>U.S. Mission to Indonesia — Closes 2026-09-02 — 1. Project Background, Goals, and Objectives With over 270 million people and one of the world’s largest social media user bases, Indonesia’s citizens consume media content from a wide array of traditional and digital sources. As the country continues to expand its regional leadership role, Indonesian journalists must develop their capacity to report accurately and comprehensively on critical issu…</summary>
+    <summary>U.S. Mission to Indonesia | Closes 2026-09-02 | 1. Project Background, Goals, and Objectives With over 270 million people and one of the world’s largest social media user bases, Indonesia’s citizens consume media content from a wide array of traditional and digital sources. As the country continues to expand its regional leadership role, Indonesian journalists must develop their capacity to report accurately and comprehensively on critical issu…</summary>
   </entry>
   <entry>
     <title>Advancing Investigative Journalism in Ukraine through U.S. AI Innovation</title>
@@ -223,7 +223,7 @@
     <category term="Environmental science"/>
     <category term="Technology development"/>
     <category term="Data science"/>
-    <summary>U.S. Mission to Ukraine — Closes 2026-09-01 — The U.S. Department of State's Embassy Kyiv announces an open competition for Ukrainian non-governmental media organizations and independent media outlets to implement a program that strengthens data-driven and AI-enabled journalism in Ukraine. It will build the capacity of journalists and newsrooms to produce high-quality reporting on economic development, reconstruction and investment through tr…</summary>
+    <summary>U.S. Mission to Ukraine | Closes 2026-09-01 | The U.S. Department of State's Embassy Kyiv announces an open competition for Ukrainian non-governmental media organizations and independent media outlets to implement a program that strengthens data-driven and AI-enabled journalism in Ukraine. It will build the capacity of journalists and newsrooms to produce high-quality reporting on economic development, reconstruction and investment through tr…</summary>
   </entry>
   <entry>
     <title>AI3 Action Institute - Artificial Intelligence for American Indians</title>
@@ -236,7 +236,7 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <category term="Data science"/>
-    <summary>Administration for Children and Families - ANA — Closes 2026-08-27 — The Administration for Native Americans (ANA) anticipates announcing the availability of funds and requesting applications for the AI3 Action Institute – Artificial Intelligence for American Indians. The successful applicant will establish the AI3 Action Institute, which will monitor the pace of AI change, identify responsible and practical opportunities to apply this technology to socioeconomic d…</summary>
+    <summary>Administration for Children and Families - ANA | Closes 2026-08-27 | The Administration for Native Americans (ANA) anticipates announcing the availability of funds and requesting applications for the AI3 Action Institute - Artificial Intelligence for American Indians. The successful applicant will establish the AI3 Action Institute, which will monitor the pace of AI change, identify responsible and practical opportunities to apply this technology to socioeconomic d…</summary>
   </entry>
   <entry>
     <title>NATIVE Act Tribal Tourism Cooperative Agreement</title>
@@ -246,7 +246,7 @@
     <author><name>Bureau of Indian Affairs</name></author>
     <category term="Arts and culture"/>
     <category term="Community development"/>
-    <summary>Bureau of Indian Affairs — Closes 2026-08-28 — The NATIVE Act cooperative agreement will support Tribal Tourism Grant Program (TTGP) and Office of Native Hawaiian Relations (ONHR) applicants, which is comprised of Tribes, Tribal organizations, and Native Hawaiian organizations, by identifying technical assistance needs and delivering targeted capacity-building support to expand cultural heritage tourism and increase visitation. The selected re…</summary>
+    <summary>Bureau of Indian Affairs | Closes 2026-08-28 | The NATIVE Act cooperative agreement will support Tribal Tourism Grant Program (TTGP) and Office of Native Hawaiian Relations (ONHR) applicants, which is comprised of Tribes, Tribal organizations, and Native Hawaiian organizations, by identifying technical assistance needs and delivering targeted capacity-building support to expand cultural heritage tourism and increase visitation. The selected re…</summary>
   </entry>
   <entry>
     <title>U.S. Embassy Jakarta Media Small Grants Competition</title>
@@ -257,7 +257,7 @@
     <category term="Arts and culture"/>
     <category term="Community development"/>
     <category term="Education and workforce"/>
-    <summary>U.S. Mission to Indonesia — Closes 2026-08-31 — 1. Project Background, Goals, and ObjectivesWith over 270 million people and one of the world’s largest social media user bases, Indonesia’s citizens consume media content from a wide array of traditional and digital sources. Journalists and media professionals capable of reporting accurately and comprehensively on critical issues – including democratic governance, economic development, emerging t…</summary>
+    <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | 1. Project Background, Goals, and ObjectivesWith over 270 million people and one of the world’s largest social media user bases, Indonesia’s citizens consume media content from a wide array of traditional and digital sources. Journalists and media professionals capable of reporting accurately and comprehensively on critical issues - including democratic governance, economic development, emerging t…</summary>
   </entry>
   <entry>
     <title>Building Skills, Strengthening Communities, and Advancing Innovation in Northwest Mexico</title>
@@ -272,7 +272,7 @@
     <category term="Environmental science"/>
     <category term="Technology development"/>
     <category term="Data science"/>
-    <summary>U.S. Mission to Mexico — Closes 2026-08-27 — The Public Diplomacy Sections of the U.S. Consulates General Tijuana, Nogales, and Hermosillo announce an open competition for programs that strengthen workforce readiness, promote safe border communities, and support a transparent and innovative information ecosystem in northwest Mexico. This Notice of Funding Opportunity (NOFO) seeks merit-based proposals that equip Mexican educators, youth, and…</summary>
+    <summary>U.S. Mission to Mexico | Closes 2026-08-27 | The Public Diplomacy Sections of the U.S. Consulates General Tijuana, Nogales, and Hermosillo announce an open competition for programs that strengthen workforce readiness, promote safe border communities, and support a transparent and innovative information ecosystem in northwest Mexico. This Notice of Funding Opportunity (NOFO) seeks merit-based proposals that equip Mexican educators, youth, and…</summary>
   </entry>
   <entry>
     <title>Economic Advancement Grants for Local Empowerment (EAGLE)</title>
@@ -286,17 +286,17 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <category term="Energy"/>
-    <summary>Administration for Children and Families - ANA — Closes 2026-08-27 — The Administration for Native Americans anticipates announcing the availability of funds and requesting applications for EAGLE: Economic Advancement Grants for Local Empowerment, supporting socioeconomic and cultural success for Native communities through business creation in regenerative agriculture, artificial intelligence, tribal energy sovereignty, and human capital development. The primary go…</summary>
+    <summary>Administration for Children and Families - ANA | Closes 2026-08-27 | The Administration for Native Americans anticipates announcing the availability of funds and requesting applications for EAGLE: Economic Advancement Grants for Local Empowerment, supporting socioeconomic and cultural success for Native communities through business creation in regenerative agriculture, artificial intelligence, tribal energy sovereignty, and human capital development. The primary go…</summary>
   </entry>
   <entry>
-    <title>Resident Opportunity and Self-Sufficiency Service Coordinator (ROSS-SC) Program – Fiscal Year 2026</title>
+    <title>Resident Opportunity and Self-Sufficiency Service Coordinator (ROSS-SC) Program - Fiscal Year 2026</title>
     <link href="https://www.grants.gov/search-results-detail/361994"/>
     <id>urn:funding-finder:grants-gov:361994</id>
     <updated>2026-07-28T00:00:00Z</updated>
     <author><name>Department of Housing and Urban Development</name></author>
     <category term="Community development"/>
     <category term="Education and workforce"/>
-    <summary>Department of Housing and Urban Development — Closes 2026-09-28 — The Resident Opportunity and Self Sufficiency Service Coordinator (ROSS-SC) program is designed to assist residents of Public and Indian Housing make progress towards economic and housing self-sufficiency by addressing the educational, professional and health barriers they face. Self-sufficiency is defined as an individual’s ability to support their household by maintaining financial, housing, and…</summary>
+    <summary>Department of Housing and Urban Development | Closes 2026-09-28 | The Resident Opportunity and Self Sufficiency Service Coordinator (ROSS-SC) program is designed to assist residents of Public and Indian Housing make progress towards economic and housing self-sufficiency by addressing the educational, professional and health barriers they face. Self-sufficiency is defined as an individual’s ability to support their household by maintaining financial, housing, and…</summary>
   </entry>
   <entry>
     <title>Rural Decentralized Water System Grant Program</title>
@@ -306,7 +306,7 @@
     <author><name>Rural Utilities Service</name></author>
     <category term="Community development"/>
     <category term="Water"/>
-    <summary>Rural Utilities Service — Closes 2026-09-30 — The DWS Grant Program has been established to help individuals with low to moderate incomes finance certain costs of household water wells and individually owned decentralized wastewater systems that they own or will own. Grants are made to eligible nonprofit organizations to establish and maintain a revolving fund to provide loans and sub-grants to eligible individuals for individually owned wate…</summary>
+    <summary>Rural Utilities Service | Closes 2026-09-30 | The DWS Grant Program has been established to help individuals with low to moderate incomes finance certain costs of household water wells and individually owned decentralized wastewater systems that they own or will own. Grants are made to eligible nonprofit organizations to establish and maintain a revolving fund to provide loans and sub-grants to eligible individuals for individually owned wate…</summary>
   </entry>
   <entry>
     <title>U.S.-ASEAN Road to 50: Rising Leaders Forum</title>
@@ -319,7 +319,7 @@
     <category term="Energy"/>
     <category term="Manufacturing"/>
     <category term="Transportation"/>
-    <summary>U.S. Mission to ASEAN — Closes 2026-08-30 — The U.S. Mission to ASEAN (USASEAN) Public Diplomacy Section (PDS) announces an open competition for applications to develop, organize, and oversee the U.S.-ASEAN Road to 50: Rising Leaders Forum. This one-day Jakarta workshop will gather approximately 50 rising leaders selected exclusively from the USASEAN alumni networks across Southeast Asia. Celebrating 50 years of partnership, this forum look…</summary>
+    <summary>U.S. Mission to ASEAN | Closes 2026-08-30 | The U.S. Mission to ASEAN (USASEAN) Public Diplomacy Section (PDS) announces an open competition for applications to develop, organize, and oversee the U.S.-ASEAN Road to 50: Rising Leaders Forum. This one-day Jakarta workshop will gather approximately 50 rising leaders selected exclusively from the USASEAN alumni networks across Southeast Asia. Celebrating 50 years of partnership, this forum look…</summary>
   </entry>
   <entry>
     <title>Community Decarbonization Fund - Financing for Disadvantaged Community Lenders</title>
@@ -330,7 +330,7 @@
     <category term="Climate change"/>
     <category term="Community development"/>
     <category term="Energy"/>
-    <summary>NYSERDA — Closes 2027-12-31 — NY Green Bank’s RFP 23 for the Community Decarbonization Fund invites regulated and unregulated financial entities (including but not limited to community development financial institutions (CDFIs), insured credit unions and depository institutions, and not-for-profit corporations that perform lending activities) deploying capital into clean energy and sustainable infrastructure and related small …</summary>
+    <summary>NYSERDA | Closes 2027-12-31 | NY Green Bank’s RFP 23 for the Community Decarbonization Fund invites regulated and unregulated financial entities (including but not limited to community development financial institutions (CDFIs), insured credit unions and depository institutions, and not-for-profit corporations that perform lending activities) deploying capital into clean energy and sustainable infrastructure and related small …</summary>
   </entry>
   <entry>
     <title>Great Lakes Restoration Initiative: Community Forest and Open Space Conservation Program</title>
@@ -341,7 +341,7 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
-    <summary>Forest Service — Closes 2026-12-08 — Federally recognized Indian Tribes, local government entities, and nonprofit organizations that are qualified to acquire and manage land may apply for up to $1,000,000 for the fee simple acquisition of private forest land in portions of the Lake Superior Basin of Michigan and Wisconsin. Projects submitted for funding consideration must be forested properties at least five acres in size that are th…</summary>
+    <summary>Forest Service | Closes 2026-12-08 | Federally recognized Indian Tribes, local government entities, and nonprofit organizations that are qualified to acquire and manage land may apply for up to $1,000,000 for the fee simple acquisition of private forest land in portions of the Lake Superior Basin of Michigan and Wisconsin. Projects submitted for funding consideration must be forested properties at least five acres in size that are th…</summary>
   </entry>
   <entry>
     <title>Enhancing Biotechnology Market Opportunities for U.S. Exporters and American Farmers</title>
@@ -354,7 +354,7 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <category term="Technology development"/>
-    <summary>Foreign Agricultural Service — Closes 2026-08-17 — Modern agricultural biotechnology such as genome editing is a revolutionary tool that could transform the sustainability and viability of the agriculture sector. American farmers rely on agricultural biotechnology products, with over 90% of corn and soybeans derived from these technologies. In 2025, American farmers exported over $51 billion in agricultural biotechnology products worldwide. Howeve…</summary>
+    <summary>Foreign Agricultural Service | Closes 2026-08-17 | Modern agricultural biotechnology such as genome editing is a revolutionary tool that could transform the sustainability and viability of the agriculture sector. American farmers rely on agricultural biotechnology products, with over 90% of corn and soybeans derived from these technologies. In 2025, American farmers exported over $51 billion in agricultural biotechnology products worldwide. Howeve…</summary>
   </entry>
   <entry>
     <title>Delta States Rural Development Network Program</title>
@@ -364,7 +364,7 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Community development"/>
     <category term="Cybersecurity"/>
-    <summary>Health Resources and Services Administration — Closes 2026-08-12 — The Delta States Rural Development Network Program supports support the planning, development, and implementation of integrated health care networks that collaborate in order to (i) achieve efficiencies; (ii) expand access to, coordinate, and improve the quality of basic health care services and associated health outcomes in rural areas within the eight rural Mississippi Delta Region states (Alaba…</summary>
+    <summary>Health Resources and Services Administration | Closes 2026-08-12 | The Delta States Rural Development Network Program supports support the planning, development, and implementation of integrated health care networks that collaborate in order to (i) achieve efficiencies; (ii) expand access to, coordinate, and improve the quality of basic health care services and associated health outcomes in rural areas within the eight rural Mississippi Delta Region states (Alaba…</summary>
   </entry>
   <entry>
     <title>SERVICE CORP OF RET EXECUTIVES (SCORE) 2026-01</title>
@@ -374,7 +374,7 @@
     <author><name>Small Business Administration</name></author>
     <category term="Community development"/>
     <category term="Cybersecurity"/>
-    <summary>Small Business Administration — Closes 2026-08-14 — SCORE is the nation’s largest network of volunteer, expert business mentors, with more than 10,000 dedicated volunteers in more than 250 local chapters designed to provide high quality business and economic development assistance to existing small businesses and nascent (pre-venture) entrepreneurs.</summary>
+    <summary>Small Business Administration | Closes 2026-08-14 | SCORE is the nation’s largest network of volunteer, expert business mentors, with more than 10,000 dedicated volunteers in more than 250 local chapters designed to provide high quality business and economic development assistance to existing small businesses and nascent (pre-venture) entrepreneurs.</summary>
   </entry>
   <entry>
     <title>FAIR HOUSING INITIATIVES PROGRAM PRIVATE ENFORCEMENT INITIATIVE</title>
@@ -384,7 +384,7 @@
     <author><name>Department of Housing and Urban Development</name></author>
     <category term="Community development"/>
     <category term="Education and workforce"/>
-    <summary>Department of Housing and Urban Development — Closes 2026-11-02 — Congress amended the Fair Housing Act in 1988 to establish the Fair Housing Initiatives Program (FHIP) to provide funding to entities to work alongside HUD to "prevent or eliminate discriminatory housing practices" 42 USC §3616a (a). Congress determined in 1987, and has affirmed each year since then through appropriations, that HUD can only achieve its fair housing mission and obligations through …</summary>
+    <summary>Department of Housing and Urban Development | Closes 2026-11-02 | Congress amended the Fair Housing Act in 1988 to establish the Fair Housing Initiatives Program (FHIP) to provide funding to entities to work alongside HUD to "prevent or eliminate discriminatory housing practices" 42 USC §3616a (a). Congress determined in 1987, and has affirmed each year since then through appropriations, that HUD can only achieve its fair housing mission and obligations through …</summary>
   </entry>
   <entry>
     <title>Exposomic Contributions to ADRD Pathology and Resilience</title>
@@ -397,7 +397,7 @@
     <category term="Environmental science"/>
     <category term="Health equity"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health — Closes 2026-10-05 — The National Institute of Neurological Disorders and Stroke (NINDS) is interested in supporting research projects that investigate how specific neural exposome factors contribute mechanistically to Alzheimer’s disease-related dementias (ADRD) pathology and resilience. For the purposes of this program, exposome factors of interest include, but are not limited to, environmental toxins, sleep and cir…</summary>
+    <summary>National Institutes of Health | Closes 2026-10-05 | The National Institute of Neurological Disorders and Stroke (NINDS) is interested in supporting research projects that investigate how specific neural exposome factors contribute mechanistically to Alzheimer’s disease-related dementias (ADRD) pathology and resilience. For the purposes of this program, exposome factors of interest include, but are not limited to, environmental toxins, sleep and cir…</summary>
   </entry>
   <entry>
     <title>DoW Rare Cancers Resource and Community Development Award</title>
@@ -407,7 +407,7 @@
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
     <category term="Community development"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA — Closes 2026-11-18 — Summary: The fiscal year 2026 (FY26) Rare Cancers Research Program (RCRP) Resource and Community Development Award (RCDA) supports the development of research resources and clinical or preclinical datasets that will advance the field of rare cancers research and ultimately improve outcomes for individuals with rare cancers. Research supporting this funding opportunity should fill one of the follow…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-11-18 | Summary: The fiscal year 2026 (FY26) Rare Cancers Research Program (RCRP) Resource and Community Development Award (RCDA) supports the development of research resources and clinical or preclinical datasets that will advance the field of rare cancers research and ultimately improve outcomes for individuals with rare cancers. Research supporting this funding opportunity should fill one of the follow…</summary>
   </entry>
   <entry>
     <title>Tribal Colleges Extension Program - Capacity Applications</title>
@@ -419,7 +419,7 @@
     <category term="Community development"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>National Institute of Food and Agriculture — Closes 2026-08-14 — The TCEP-CA under assistance listing 10.517, supports informal, community-based extension projects that address agriculture, youths, economic development, healthy lifestyles, natural resources, or other topics important to Tribal communities. This NOFO will begin a new 4-year continuation funding cycle.</summary>
+    <summary>National Institute of Food and Agriculture | Closes 2026-08-14 | The TCEP-CA under assistance listing 10.517, supports informal, community-based extension projects that address agriculture, youths, economic development, healthy lifestyles, natural resources, or other topics important to Tribal communities. This NOFO will begin a new 4-year continuation funding cycle.</summary>
   </entry>
   <entry>
     <title>Authority to Accept Unsolicited Proposals for Research Partnerships Notice of Intent (NOI)</title>
@@ -428,7 +428,7 @@
     <updated>2026-06-09T00:00:00Z</updated>
     <author><name>Department of Housing and Urban Development</name></author>
     <category term="Community development"/>
-    <summary>Department of Housing and Urban Development — Closes 2027-06-09 — The U.S. Department of Housing and Urban Development"s Office of Policy Development and Research (PD&amp;R) expects to release a Notice inviting eligible organizations to submit unsolicited research proposals focused on HUD"s current housing and community development research priorities. The goal of this Notice is to support independent, high-quality research that helps build reliable evidence and pro…</summary>
+    <summary>Department of Housing and Urban Development | Closes 2027-06-09 | The U.S. Department of Housing and Urban Development"s Office of Policy Development and Research (PD&amp;R) expects to release a Notice inviting eligible organizations to submit unsolicited research proposals focused on HUD"s current housing and community development research priorities. The goal of this Notice is to support independent, high-quality research that helps build reliable evidence and pro…</summary>
   </entry>
   <entry>
     <title>FY 2026 Continuum of Care Competition and Youth Homelessness Demonstration Program Grants NOFO</title>
@@ -438,7 +438,7 @@
     <author><name>Department of Housing and Urban Development</name></author>
     <category term="Community development"/>
     <category term="Energy"/>
-    <summary>Department of Housing and Urban Development — Closes 2026-08-26 — The Continuum of Care (CoC) Program is designed to:promote a community-wide commitment to the goal of ending homelessness;provide funding for efforts by nonprofit providers, States, Indian Tribes or Tribally Designated Housing Entities [as defined in section 4 of the Native American Housing Assistance and Self-Determination Act of 1996 (25 U.S.C. 4103) (TDHEs)], and local governments to quickly re…</summary>
+    <summary>Department of Housing and Urban Development | Closes 2026-08-26 | The Continuum of Care (CoC) Program is designed to:promote a community-wide commitment to the goal of ending homelessness;provide funding for efforts by nonprofit providers, States, Indian Tribes or Tribally Designated Housing Entities [as defined in section 4 of the Native American Housing Assistance and Self-Determination Act of 1996 (25 U.S.C. 4103) (TDHEs)], and local governments to quickly re…</summary>
   </entry>
   <entry>
     <title>Community Engagement Evaluation and Data Coordination (CEED) Hub to Advance Data and Practice Transformation for Optimizing Oral Health for All (U01, Clinical Trial Not Allowed)</title>
@@ -449,7 +449,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Arts and culture"/>
     <category term="Community development"/>
-    <summary>National Institutes of Health — Closes 2026-10-19 — The purpose of this Notice of Funding Opportunity (NOFO) is to seek applications for a Community Engagement Evaluation and Data coordination hub (CEED) for the Community-Based Participatory Research (CBPR) consortium: Advancing Data and Practice Transformation (ADAPT) for Optimizing Oral Health for All. In addition to CEED, the ADAPT consortium will include separately funded CBPR projects, which w…</summary>
+    <summary>National Institutes of Health | Closes 2026-10-19 | The purpose of this Notice of Funding Opportunity (NOFO) is to seek applications for a Community Engagement Evaluation and Data coordination hub (CEED) for the Community-Based Participatory Research (CBPR) consortium: Advancing Data and Practice Transformation (ADAPT) for Optimizing Oral Health for All. In addition to CEED, the ADAPT consortium will include separately funded CBPR projects, which w…</summary>
   </entry>
   <entry>
     <title>Community-Based Participatory Research to Advance Data and Practice Transformation (ADAPT) for Optimizing Oral Health for All (UG3/UH3 Clinical Trial Optional)</title>
@@ -460,7 +460,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Arts and culture"/>
     <category term="Community development"/>
-    <summary>National Institutes of Health — Closes 2028-11-16 — The purpose of this Notice of Funding Opportunity (NOFO) is to solicit UG3/UH3 phased, cooperative agreement research applications to evaluate, implement, and/or test population-based interventions to policies, programs, and/or practices for promoting integration of services, systems, and/or values by leveraging cross-sector partnerships in communities. Such interventions must address social and c…</summary>
+    <summary>National Institutes of Health | Closes 2028-11-16 | The purpose of this Notice of Funding Opportunity (NOFO) is to solicit UG3/UH3 phased, cooperative agreement research applications to evaluate, implement, and/or test population-based interventions to policies, programs, and/or practices for promoting integration of services, systems, and/or values by leveraging cross-sector partnerships in communities. Such interventions must address social and c…</summary>
   </entry>
   <entry>
     <title>Clinical Coordinating Center for Multi-Site Investigator-Initiated Clinical Trials (Collaborative UG3/UH3 Clinical Trial Required)</title>
@@ -470,7 +470,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Community development"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health — Closes 2028-11-02 — This Notice of Funding Opportunity (NOFO) supports applications to develop and conduct a Clinical Coordinating Center (CCC) for investigator-initiated multi-site clinical trials including efficacy, comparative effectiveness, pragmatic and/or dissemination and implementation science clinical trials. Trials using innovative designs such as platform trials, adaptive, and Bayesian designs are encourag…</summary>
+    <summary>National Institutes of Health | Closes 2028-11-02 | This Notice of Funding Opportunity (NOFO) supports applications to develop and conduct a Clinical Coordinating Center (CCC) for investigator-initiated multi-site clinical trials including efficacy, comparative effectiveness, pragmatic and/or dissemination and implementation science clinical trials. Trials using innovative designs such as platform trials, adaptive, and Bayesian designs are encourag…</summary>
   </entry>
   <entry>
     <title>Data Coordinating Center for Multi-Site Investigator-Initiated Clinical Trials (Collaborative U24 Clinical Trial Required)</title>
@@ -480,7 +480,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Community development"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health — Closes 2028-11-02 — This Notice of Funding Opportunity (NOFO) supports applications for a collaborating Data Coordinating Center (DCC) for investigator-initiated multi-site clinical trials including efficacy, comparative effectiveness, pragmatic and/or implementation research clinical trials. Trials using innovative designs such as platform trials, adaptive, and Bayesian designs are encouraged. These trials may inclu…</summary>
+    <summary>National Institutes of Health | Closes 2028-11-02 | This Notice of Funding Opportunity (NOFO) supports applications for a collaborating Data Coordinating Center (DCC) for investigator-initiated multi-site clinical trials including efficacy, comparative effectiveness, pragmatic and/or implementation research clinical trials. Trials using innovative designs such as platform trials, adaptive, and Bayesian designs are encouraged. These trials may inclu…</summary>
   </entry>
   <entry>
     <title>Single-Site Investigator-Initiated Clinical Trials (R61/R33 Clinical Trial Required)</title>
@@ -490,7 +490,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Community development"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health — Closes 2028-11-02 — This Notice of Funding Opportunity (NOFO) supports applications to develop and conduct investigator-initiated single site clinical trials including efficacy, comparative effectiveness, pragmatic and/or dissemination and implementation science clinical trials. Trials using innovative designs such as platform trials, adaptive, and Bayesian designs are encouraged. These trials may include ones that t…</summary>
+    <summary>National Institutes of Health | Closes 2028-11-02 | This Notice of Funding Opportunity (NOFO) supports applications to develop and conduct investigator-initiated single site clinical trials including efficacy, comparative effectiveness, pragmatic and/or dissemination and implementation science clinical trials. Trials using innovative designs such as platform trials, adaptive, and Bayesian designs are encouraged. These trials may include ones that t…</summary>
   </entry>
   <entry>
     <title>ROSS Rapid Response Program</title>
@@ -501,7 +501,7 @@
     <category term="Community development"/>
     <category term="Environmental science"/>
     <category term="Public health"/>
-    <summary>Department of Housing and Urban Development — Closes 2027-01-25 — The ROSS Rapid Response Program (RRP) awards one-time assistance via a cost-reimbursable grant for service coordination and limited direct services for residents of HUD-assisted housing. The RRP utilizes a simplified application process to promote local leadership and flexibility in addressing urgent social needs caused by unanticipated emergencies. Examples of these emergencies can include but ar…</summary>
+    <summary>Department of Housing and Urban Development | Closes 2027-01-25 | The ROSS Rapid Response Program (RRP) awards one-time assistance via a cost-reimbursable grant for service coordination and limited direct services for residents of HUD-assisted housing. The RRP utilizes a simplified application process to promote local leadership and flexibility in addressing urgent social needs caused by unanticipated emergencies. Examples of these emergencies can include but ar…</summary>
   </entry>
   <entry>
     <title>Application Instructions for the Indian Community Development Block Grant (ICDBG) Imminent Threat (IT) Program</title>
@@ -510,7 +510,7 @@
     <updated>2025-04-18T00:00:00Z</updated>
     <author><name>Department of Housing and Urban Development</name></author>
     <category term="Community development"/>
-    <summary>Department of Housing and Urban Development — Closes 2026-09-30 — This Notice provides Tribes with program requirements and instructions on how to apply for Indian Community Development Block Grant (ICDBG) Imminent Threat (IT) funding. This Notice also increases ceilings for ICDBG-IT grants. How to Submit Your Application:You must email your ICDBG-IT application to: ONAP-ICDBG@hud.gov Also send a copy to your ONAP Area Office.Important: Do not submit your ICDBG-…</summary>
+    <summary>Department of Housing and Urban Development | Closes 2026-09-30 | This Notice provides Tribes with program requirements and instructions on how to apply for Indian Community Development Block Grant (ICDBG) Imminent Threat (IT) funding. This Notice also increases ceilings for ICDBG-IT grants. How to Submit Your Application:You must email your ICDBG-IT application to: ONAP-ICDBG@hud.gov Also send a copy to your ONAP Area Office.Important: Do not submit your ICDBG-…</summary>
   </entry>
   <entry>
     <title>EPSCoR Research Infrastructure Improvement Program: EPSCoR Collaborations for Optimizing Research Ecosystems</title>
@@ -524,7 +524,7 @@
     <category term="Technology development"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>U.S. National Science Foundation — Closes 2027-07-20 — The Established Program to Stimulate Competitive Research (EPSCoR) supports the U.S. National Science Foundation (NSF) mission by promoting nationwide scientific progress. Through this program, NSF fosters partnerships among academic institutions, government entities, industry, and non-profits. These collaborations aim to drive long-term improvements in research infrastructure, enhance R&amp;D capacit…</summary>
+    <summary>U.S. National Science Foundation | Closes 2027-07-20 | The Established Program to Stimulate Competitive Research (EPSCoR) supports the U.S. National Science Foundation (NSF) mission by promoting nationwide scientific progress. Through this program, NSF fosters partnerships among academic institutions, government entities, industry, and non-profits. These collaborations aim to drive long-term improvements in research infrastructure, enhance R&amp;D capacit…</summary>
   </entry>
   <entry>
     <title>Environmental Health Sciences Core Centers Program (P30 Clinical Trials Optional)</title>
@@ -537,10 +537,10 @@
     <category term="Environmental science"/>
     <category term="Public health"/>
     <category term="Cybersecurity"/>
-    <summary>National Institutes of Health — Closes 2027-04-20 — This Notice of Funding Opportunity Announcement (NOFO) invites grant applications for Environmental Health Sciences Core Centers (EHSCC). As intellectual hubs for environmental health science research, the EHSCC's are expected to be the thought leaders for the field and advance the goals of the 2025-2029 NIEHS Strategic Plan (http://www.niehs.nih.gov/about/strategicplan/). The Core Centers provide…</summary>
+    <summary>National Institutes of Health | Closes 2027-04-20 | This Notice of Funding Opportunity Announcement (NOFO) invites grant applications for Environmental Health Sciences Core Centers (EHSCC). As intellectual hubs for environmental health science research, the EHSCC's are expected to be the thought leaders for the field and advance the goals of the 2025-2029 NIEHS Strategic Plan (http://www.niehs.nih.gov/about/strategicplan/). The Core Centers provide…</summary>
   </entry>
   <entry>
-    <title>FY 2024 – 2026 - Broad Agency Announcement (BAA) Announcement Type: Initial</title>
+    <title>FY 2024 - 2026 - Broad Agency Announcement (BAA) Announcement Type: Initial</title>
     <link href="https://www.grants.gov/search-results-detail/356127"/>
     <id>urn:funding-finder:grants-gov:356127</id>
     <updated>2024-08-19T00:00:00Z</updated>
@@ -548,7 +548,7 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
-    <summary>DOC NOAA - ERA Production — Closes 2026-09-30 — This notice is not a mechanism to fund existing NOAA awards. The purpose of this notice is to request applications for special projects and programs associated with NOAA's strategic plan and mission goals, as well as to provide the general public with information and guidelines on how NOAA will select applications and administer discretionary Federal assistance under this Broad Agency Announcement…</summary>
+    <summary>DOC NOAA - ERA Production | Closes 2026-09-30 | This notice is not a mechanism to fund existing NOAA awards. The purpose of this notice is to request applications for special projects and programs associated with NOAA's strategic plan and mission goals, as well as to provide the general public with information and guidelines on how NOAA will select applications and administer discretionary Federal assistance under this Broad Agency Announcement…</summary>
   </entry>
   <entry>
     <title>U.S. EMBASSY TO LIBYA PAS ANNUAL PROGRAM STATEMENT</title>
@@ -560,7 +560,7 @@
     <category term="Climate change"/>
     <category term="Community development"/>
     <category term="Environmental science"/>
-    <summary>U.S. Mission to Tunisia — Closes 2099-01-01 — U.S. DEPARTMENT OF STATE U.S. EMBASSY TO LIBYA, PUBLIC AFFAIRS SECTION Notice of Funding Opportunity (NOFO) Funding Opportunity Title: U.S. Embassy to Libya PAS Annual Program Statement Funding Opportunity Number: PAS Tripoli FY2024 CFDA Number: 19.040 Public Diplomacy Programs Maximum for Each Award: $25,000 USD PROGRAM DESCRIPTION The U.S. Embassy Tripoli Public Affairs Section (PAS) is pleased …</summary>
+    <summary>U.S. Mission to Tunisia | Closes 2099-01-01 | U.S. DEPARTMENT OF STATE U.S. EMBASSY TO LIBYA, PUBLIC AFFAIRS SECTION Notice of Funding Opportunity (NOFO) Funding Opportunity Title: U.S. Embassy to Libya PAS Annual Program Statement Funding Opportunity Number: PAS Tripoli FY2024 CFDA Number: 19.040 Public Diplomacy Programs Maximum for Each Award: $25,000 USD PROGRAM DESCRIPTION The U.S. Embassy Tripoli Public Affairs Section (PAS) is pleased …</summary>
   </entry>
   <entry>
     <title>Advanced Technological Education</title>
@@ -571,7 +571,7 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation — Closes 2026-10-01 — With a focus on two-year Institutions of Higher Education (IHEs), the Advanced Technological Education (ATE) program supports the education of technicians for the high-technology fields that drive our nation's economy. The program involves partnerships between academic institutions (grades 7-12, IHEs), industry, and economic development agencies to promote improvement in the education of science a…</summary>
+    <summary>U.S. National Science Foundation | Closes 2026-10-01 | With a focus on two-year Institutions of Higher Education (IHEs), the Advanced Technological Education (ATE) program supports the education of technicians for the high-technology fields that drive our nation's economy. The program involves partnerships between academic institutions (grades 7-12, IHEs), industry, and economic development agencies to promote improvement in the education of science a…</summary>
   </entry>
   <entry>
     <title>FY 2023 Disaster Supplemental</title>
@@ -580,7 +580,7 @@
     <updated>2023-04-24T00:00:00Z</updated>
     <author><name>Economic Development Administration</name></author>
     <category term="Community development"/>
-    <summary>Economic Development Administration — Posted — Subject to the availability of funds, awards made under this NOFO will help communities and regions devise and implement long-term economic recovery strategies through a variety of non-construction and construction projects, as appropriate, to address economic challenges in areas where a Presidential declaration of a major disaster was issued under the Robert T. Stafford Disaster Relief and Emerge…</summary>
+    <summary>Economic Development Administration | Posted | Subject to the availability of funds, awards made under this NOFO will help communities and regions devise and implement long-term economic recovery strategies through a variety of non-construction and construction projects, as appropriate, to address economic challenges in areas where a Presidential declaration of a major disaster was issued under the Robert T. Stafford Disaster Relief and Emerge…</summary>
   </entry>
   <entry>
     <title>FY 2025 EDA Public Works and Economic Adjustment Assistance Programs</title>
@@ -589,7 +589,7 @@
     <updated>2023-03-14T00:00:00Z</updated>
     <author><name>Economic Development Administration</name></author>
     <category term="Community development"/>
-    <summary>Economic Development Administration — Posted — PLEASE FIND THE NOFO IN THE 'DOCUMENTS' SECTION OF THIS POST This opportunity has been updated as of May 11, 2026 ﻿Program Overview: EDA has authority to provide grants to meet the full range of communities’ and regions’ economic development needs from planning and technical assistance to construction of infrastructure. These grants are made through a series of Notices of Funding Opportunity (NOFO…</summary>
+    <summary>Economic Development Administration | Posted | PLEASE FIND THE NOFO IN THE 'DOCUMENTS' SECTION OF THIS POST This opportunity has been updated as of May 11, 2026 ﻿Program Overview: EDA has authority to provide grants to meet the full range of communities’ and regions’ economic development needs from planning and technical assistance to construction of infrastructure. These grants are made through a series of Notices of Funding Opportunity (NOFO…</summary>
   </entry>
   <entry>
     <title>Growing Research Access for Nationally Transformative Economic Development</title>
@@ -603,7 +603,7 @@
     <category term="Technology development"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>U.S. National Science Foundation — Posted — NSF GRANTED supports innovative models of research enterprise administrative development and workforce training infrastructure that promote sustainable research capacity and opportunities for economic impact in U.S. organizations. The research enterprise, broadly defined, includes research development and administration, research analytics, technology transfer and commercialization, corporate rela…</summary>
+    <summary>U.S. National Science Foundation | Posted | NSF GRANTED supports innovative models of research enterprise administrative development and workforce training infrastructure that promote sustainable research capacity and opportunities for economic impact in U.S. organizations. The research enterprise, broadly defined, includes research development and administration, research analytics, technology transfer and commercialization, corporate rela…</summary>
   </entry>
   <entry>
     <title>Tribal Colleges and Universities Program</title>
@@ -619,7 +619,7 @@
     <category term="Education and workforce"/>
     <category term="Quantum science"/>
     <category term="Social and behavioral sciences"/>
-    <summary>U.S. National Science Foundation — Closes 2026-09-01 — The Tribal Colleges and Universities Program (TCUP) provides awards to federally recognized1 Tribal Colleges and Universities, Alaska Native-serving institutions, and Native Hawaiian-serving institutions to promote high quality science (including sociology, psychology, anthropology, linguistics, economics and bioeconomics, statistics, and other social and behavioral sciences; natural sciences; com…</summary>
+    <summary>U.S. National Science Foundation | Closes 2026-09-01 | The Tribal Colleges and Universities Program (TCUP) provides awards to federally recognized1 Tribal Colleges and Universities, Alaska Native-serving institutions, and Native Hawaiian-serving institutions to promote high quality science (including sociology, psychology, anthropology, linguistics, economics and bioeconomics, statistics, and other social and behavioral sciences; natural sciences; com…</summary>
   </entry>
   <entry>
     <title>FY 2021 - 2023 Economic Development RNTA</title>
@@ -628,10 +628,10 @@
     <updated>2021-06-09T00:00:00Z</updated>
     <author><name>Department of Commerce</name></author>
     <category term="Community development"/>
-    <summary>Department of Commerce — Posted — NOTICE: PLEASE READ - April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the entire grant…</summary>
+    <summary>Department of Commerce | Posted | NOTICE: PLEASE READ - April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the entire grant…</summary>
   </entry>
   <entry>
-    <title>Atlanta FY 2021 – FY 2023 EDA Planning and Local Technical Assistance</title>
+    <title>Atlanta FY 2021 - FY 2023 EDA Planning and Local Technical Assistance</title>
     <link href="https://www.grants.gov/search-results-detail/332052"/>
     <id>urn:funding-finder:grants-gov:332052</id>
     <updated>2021-03-15T00:00:00Z</updated>
@@ -639,10 +639,10 @@
     <category term="Arts and culture"/>
     <category term="Community development"/>
     <category term="Education and workforce"/>
-    <summary>Department of Commerce — Posted — NOTICE: Application Process as of April 6th EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
+    <summary>Department of Commerce | Posted | NOTICE: Application Process as of April 6th EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
   </entry>
   <entry>
-    <title>Austin FY 2021 – FY 2023 EDA Planning and Local Technical Assistance</title>
+    <title>Austin FY 2021 - FY 2023 EDA Planning and Local Technical Assistance</title>
     <link href="https://www.grants.gov/search-results-detail/332137"/>
     <id>urn:funding-finder:grants-gov:332137</id>
     <updated>2021-03-15T00:00:00Z</updated>
@@ -650,10 +650,10 @@
     <category term="Arts and culture"/>
     <category term="Community development"/>
     <category term="Education and workforce"/>
-    <summary>Department of Commerce — Posted — UPDATED NOTICE - PLEASE READ: April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
+    <summary>Department of Commerce | Posted | UPDATED NOTICE - PLEASE READ: April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
   </entry>
   <entry>
-    <title>Chicago FY 2021 – FY 2023 EDA Planning and Local Technical Assistance</title>
+    <title>Chicago FY 2021 - FY 2023 EDA Planning and Local Technical Assistance</title>
     <link href="https://www.grants.gov/search-results-detail/332125"/>
     <id>urn:funding-finder:grants-gov:332125</id>
     <updated>2021-03-15T00:00:00Z</updated>
@@ -661,10 +661,10 @@
     <category term="Arts and culture"/>
     <category term="Community development"/>
     <category term="Education and workforce"/>
-    <summary>Department of Commerce — Posted — UPDATED NOTICE - PLEASE READ: April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
+    <summary>Department of Commerce | Posted | UPDATED NOTICE - PLEASE READ: April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
   </entry>
   <entry>
-    <title>Denver FY 2021 – FY 2023 EDA Planning and Local Technical Assistance</title>
+    <title>Denver FY 2021 - FY 2023 EDA Planning and Local Technical Assistance</title>
     <link href="https://www.grants.gov/search-results-detail/332126"/>
     <id>urn:funding-finder:grants-gov:332126</id>
     <updated>2021-03-15T00:00:00Z</updated>
@@ -672,6 +672,6 @@
     <category term="Arts and culture"/>
     <category term="Community development"/>
     <category term="Education and workforce"/>
-    <summary>Department of Commerce — Posted — UPDATED NOTICE - PLEASE READ: April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
+    <summary>Department of Commerce | Posted | UPDATED NOTICE - PLEASE READ: April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
   </entry>
 </feed>
