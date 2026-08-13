@@ -249,6 +249,7 @@ LIMITED_SUBMISSION_RE = re.compile(
 )
 ROLLING_RE = re.compile(
     r"(?:\bopen\s+until\s+superseded\b|"
+    r"\b(?:full\s+)?proposals?\s+(?:are\s+)?accepted\s+anytime\b|"
     r"\bon\s+(?:an?\s+)?rolling\s+basis\b|"
     r"\brolling\s+(?:deadline|application|applications|submission|"
     r"submissions|acceptance|review)\b|"

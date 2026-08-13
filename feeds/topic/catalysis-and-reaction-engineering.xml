@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml</id>
-  <updated>2026-08-12T11:12:48Z</updated>
+  <updated>2026-08-13T12:10:38Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) CAPACITY BUILDING (CB)</title>
@@ -143,40 +143,6 @@
     <summary>U.S. National Science Foundation | Closes 2026-11-16 | Proposals in the area of plasma physics submitted to the Division of Physics that are not governed by another solicitation (such as CAREER), should be submitted to the Division-wide solicitation: Division of Physics: Investigator-Initiated Research Projects. The Plasma Physics program participates in multiple NSF meta-programs such as the ECosytem for Leading Innovation in Plasma Science and Engin…</summary>
   </entry>
   <entry>
-    <title>Catalysis</title>
-    <link href="https://www.grants.gov/search-results-detail/348932"/>
-    <id>urn:funding-finder:grants-gov:348932</id>
-    <updated>2023-06-27T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Climate change"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Quantum science"/>
-    <summary>U.S. National Science Foundation | Posted | The Catalysis program is part of the Chemical Process Systems cluster, which also includes: 1) the Electrochemical Systems program; 2) the Interfacial Engineering program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
-The goals of the Catalysis program are to increase fundamental understanding in catalytic engineering science and to advance the development…</summary>
-  </entry>
-  <entry>
-    <title>Process Systems, Reaction Engineering, and Molecular Thermodynamics</title>
-    <link href="https://www.grants.gov/search-results-detail/348793"/>
-    <id>urn:funding-finder:grants-gov:348793</id>
-    <updated>2023-06-18T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Quantum science"/>
-    <summary>U.S. National Science Foundation | Posted | The Process Systems, Reaction Engineering, and Molecular Thermodynamics program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Electrochemical Systems program; and 3) the Interfacial Engineering program.
-The goal of the Process Systems, Reaction Engineering, and Molecular Thermodynamics program is to advance fundamental engineering research o…</summary>
-  </entry>
-  <entry>
     <title>Division of Chemistry: Disciplinary Research Programs</title>
     <link href="https://www.grants.gov/search-results-detail/347749"/>
     <id>urn:funding-finder:grants-gov:347749</id>
@@ -189,125 +155,6 @@ The goal of the Process Systems, Reaction Engineering, and Molecular Thermodynam
     <category term="Data science"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Closes 2026-09-30 | This solicitation applies to six (of the nine) CHE Disciplinary Research Programs: Chemical Catalysis (CAT); Chemical Measurement and Imaging (CMI); Chemical Mechanism, Function and Properties (CMFP); Chemical Synthesis (SYN); Environmental Chemical Sciences (ECS); and Macromolecular, Supramolecular and Nanochemistry (MSN). All proposals submitted to these six CHE Disciplinary Research Programs (o…</summary>
-  </entry>
-  <entry>
-    <title>Combustion and Fire Systems</title>
-    <link href="https://www.grants.gov/search-results-detail/347509"/>
-    <id>urn:funding-finder:grants-gov:347509</id>
-    <updated>2023-04-14T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Arts and culture"/>
-    <category term="Carbon management"/>
-    <category term="Climate change"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation | Posted | The Combustion and Fire Systems program is part of the Transport Phenomena cluster, which also includes 1) the Fluid Dynamics program; 2) the Particulate and Multiphase Processes program; and 3) the Thermal Transport Processes program.
-The goal of the Combustion and Fire Systems program is to create new knowledge to support advances in clean energy, climate change mitigation, a cleaner environment…</summary>
-  </entry>
-  <entry>
-    <title>Electrochemical Systems</title>
-    <link href="https://www.grants.gov/search-results-detail/347329"/>
-    <id>urn:funding-finder:grants-gov:347329</id>
-    <updated>2023-04-05T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Arts and culture"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Climate change"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Materials science"/>
-    <category term="Transportation"/>
-    <summary>U.S. National Science Foundation | Posted | The Electrochemical Systems program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Interfacial Engineering program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
-The goal of the Electrochemical Systems program is to support fundamental engineering science research that will enable innovative processes…</summary>
-  </entry>
-  <entry>
-    <title>Environmental Sustainability</title>
-    <link href="https://www.grants.gov/search-results-detail/347328"/>
-    <id>urn:funding-finder:grants-gov:347328</id>
-    <updated>2023-04-05T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Carbon management"/>
-    <category term="Climate change"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>U.S. National Science Foundation | Posted | The Environmental Sustainability program is part of the Environmental Engineering and Sustainability cluster together with 1) the Environmental Engineering program and 2) the Nanoscale Interactions program.
-The goal of the Environmental Sustainability program is to promote sustainable engineered systems that support human well-being and that are also compatible with sustaining natural (environment…</summary>
-  </entry>
-  <entry>
-    <title>Interfacial Engineering</title>
-    <link href="https://www.grants.gov/search-results-detail/347326"/>
-    <id>urn:funding-finder:grants-gov:347326</id>
-    <updated>2023-04-05T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Materials science"/>
-    <category term="Separations and membranes"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation | Posted | The Interfacial Engineering program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Electrochemical Systems program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
-The goal of the Interfacial Engineering program is to support fundamental research on atomic- and molecular-scale interfacial phenomena and …</summary>
-  </entry>
-  <entry>
-    <title>Particulate and Multiphase Processes</title>
-    <link href="https://www.grants.gov/search-results-detail/347325"/>
-    <id>urn:funding-finder:grants-gov:347325</id>
-    <updated>2023-04-05T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Separations and membranes"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation | Posted | The Particulate and Multiphase Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Thermal Transport Processes program.
-The goal of the Particulate and Multiphase Processes program is to support fundamental research on physico-chemical phenomena that govern particulate and multiphase…</summary>
-  </entry>
-  <entry>
-    <title>Thermal Transport Processes</title>
-    <link href="https://www.grants.gov/search-results-detail/347324"/>
-    <id>urn:funding-finder:grants-gov:347324</id>
-    <updated>2023-04-05T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Climate change"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation | Posted | The Thermal Transport Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Particulate and Multiphase Processes program.
-The Thermal Transport Processes program supports engineering research projects that lay the foundation for new advances in thermal transport phenomena. These projec…</summary>
-  </entry>
-  <entry>
-    <title>Fluid Dynamics</title>
-    <link href="https://www.grants.gov/search-results-detail/347020"/>
-    <id>urn:funding-finder:grants-gov:347020</id>
-    <updated>2023-03-21T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <summary>U.S. National Science Foundation | Posted | The Fluid Dynamics program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Particulate and Multiphase Processes program; and 3) the Thermal Transport Processes program.
-The Fluid Dynamics program supports fundamental research toward gaining an understanding of the physics of various fluid dynamics phenomena. Proposed research shoul…</summary>
   </entry>
   <entry>
     <title>Division of Chemistry: Disciplinary Research Programs: No Deadline Pilot</title>
@@ -337,23 +184,5 @@ The Fluid Dynamics program supports fundamental research toward gaining an under
     <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
     <summary>Air Force Academy | Posted | The USAFA invests in an active research program for three main reasons. First and foremost, research significantly enhances the cadet learning experience. Our research is done by, for and with cadets who work alongside fellow cadets and faculty mentors. Research provides cadets with rich independent learning opportunities as they tackle ill-defined problems and are challenged to apply their knowle…</summary>
-  </entry>
-  <entry>
-    <title>Environmental Engineering</title>
-    <link href="https://www.grants.gov/search-results-detail/320490"/>
-    <id>urn:funding-finder:grants-gov:320490</id>
-    <updated>2019-09-11T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Materials science"/>
-    <category term="Separations and membranes"/>
-    <category term="Water"/>
-    <category term="Catalysis and reaction engineering"/>
-    <summary>U.S. National Science Foundation | Posted | The Environmental Engineering program is part of the Environmental Engineering and Sustainability cluster, which also includes 1) the Nanoscale Interactions program; and 2) the Environmental Sustainability program.
-Environmental engineering is an interdisciplinary field that applies chemical, biological, and physical scientific principles to protect human and ecological health.
-The goal of the Env…</summary>
   </entry>
 </feed>

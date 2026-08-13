@@ -308,6 +308,33 @@ class IntegrateSafetyTests(unittest.TestCase):
         self.assertEqual(before, after)
         self.assertEqual(summary["stats"]["external_added"], 2)
 
+    def test_selected_source_refresh_preserves_other_external_sources(self):
+        catalog, _ = RebuildAndRoundTripTests()._base_catalog()
+        unselected = an_external_record(external_id="UNSELECTED")
+        catalog["opportunities"].append(unselected)
+        with TemporaryDirectory() as directory:
+            catalog_path = Path(directory) / "opportunities.js"
+            cache_path = Path(directory) / "source_records.json"
+            save_catalog(catalog, catalog_path)
+
+            summary = integrate(
+                catalog_path=catalog_path,
+                cache_path=cache_path,
+                adapters=[SampleFixtureAdapter()],
+                include_disabled=True,
+                write=True,
+            )
+            reloaded = load_catalog(catalog_path)
+
+        self.assertTrue(summary["written"])
+        self.assertIn(
+            "demo:UNSELECTED",
+            {
+                record["opportunity_id"]
+                for record in reloaded["opportunities"]
+            },
+        )
+
 
 class ValidationTests(unittest.TestCase):
     AS_OF = date(2026, 7, 25)
@@ -755,6 +782,52 @@ class DiscoverabilityTests(unittest.TestCase):
         self.assertEqual(augment_records([record]), 0)
         self.assertEqual(record["topic_areas"], first_topics)
         self.assertEqual(record["document_search_text"], first_text)
+
+
+class NSFCBETSourceTests(unittest.TestCase):
+    def test_publishes_current_clusters_and_drops_an_archived_page(self):
+        from scripts.sources.adapters.nsf_cbet import (
+            CBET_PROGRAMS,
+            NSFCBETCorePrograms,
+        )
+
+        current = """
+        <main><h1>Current program</h1>
+          <div class="field-funding-synopsis"><h2>Synopsis</h2>
+            <p>This current program supports fundamental engineering research
+            in catalysis, biological systems, energy, water, and transport
+            phenomena across a broad range of applications.</p>
+          </div>
+        </main>
+        """
+        archived = """
+        <main><h1>Old program</h1><h2>Status: Archived</h2></main>
+        """
+        payload = {
+            program["number"]: current
+            for program in CBET_PROGRAMS
+        }
+        payload[CBET_PROGRAMS[0]["number"]] = archived
+
+        opportunities = list(NSFCBETCorePrograms().parse(payload))
+
+        self.assertEqual(len(opportunities), 3)
+        self.assertNotIn(
+            CBET_PROGRAMS[0]["number"],
+            {opportunity.opportunity_number for opportunity in opportunities},
+        )
+        ewre = next(
+            opportunity
+            for opportunity in opportunities
+            if opportunity.opportunity_number == "PD-26-370Y"
+        )
+        record = ewre.to_record(
+            slug="nsf-cbet",
+            source="U.S. National Science Foundation",
+            source_type="Federal",
+        )
+        self.assertTrue(record["rolling"])
+        self.assertIn("Energy", record["topic_areas"])
 
 
 class DoeExchangeParseTests(unittest.TestCase):

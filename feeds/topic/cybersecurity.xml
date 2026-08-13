@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-08-12T11:12:48Z</updated>
+  <updated>2026-08-13T12:10:38Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -507,16 +507,6 @@
     <summary>Bureau of Democracy Human Rights and Labor | Closes 2026-08-13 | Freedom of expression online faces threats globally from authoritarian governments employing sophisticated technology to restrict speech, control the flow of information, and chill dissenting voices. These challenges infringe on privacy; access to information; and the exercise of freedoms of expression, peaceful assembly, association, and religion or belief online. The misuse of commercial spyware…</summary>
   </entry>
   <entry>
-    <title>Delta States Rural Development Network Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362942"/>
-    <id>urn:funding-finder:grants-gov:362942</id>
-    <updated>2026-07-13T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Community development"/>
-    <category term="Cybersecurity"/>
-    <summary>Health Resources and Services Administration | Closes 2026-08-12 | The Delta States Rural Development Network Program supports support the planning, development, and implementation of integrated health care networks that collaborate in order to (i) achieve efficiencies; (ii) expand access to, coordinate, and improve the quality of basic health care services and associated health outcomes in rural areas within the eight rural Mississippi Delta Region states (Alaba…</summary>
-  </entry>
-  <entry>
     <title>Fiscal Year 2026 National Earthquake Hazards Reduction Program Individual State Earthquake Assistance</title>
     <link href="https://www.grants.gov/search-results-detail/363117"/>
     <id>urn:funding-finder:grants-gov:363117</id>
@@ -676,5 +666,18 @@
     <author><name>Department of Homeland Security - FEMA</name></author>
     <category term="Cybersecurity"/>
     <summary>Department of Homeland Security - FEMA | Closes 2026-08-17 | The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
+  </entry>
+  <entry>
+    <title>Interdisciplinary Transportation Law and Policy Technology Training Development</title>
+    <link href="https://www.grants.gov/search-results-detail/362960"/>
+    <id>urn:funding-finder:grants-gov:362960</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>69A355 Research and Technology</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <category term="Cybersecurity"/>
+    <summary>69A355 Research and Technology | Closes 2026-08-28 | The U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Interdisciplinary Transportation Law and Policy Technology Training Development program. This 24-month cooperative agreement aims to bridge the critical knowledge gap between fast-changing transportation technologies and our Nati…</summary>
   </entry>
 </feed>

@@ -70,6 +70,7 @@ test("persists a sanitized profile and preferences without credential fields", (
     preferences: {
       status_posted: true,
       status_forecasted: false,
+      status_archived: true,
       profile_search_active: true,
       ai_provider: "anthropic",
       sort: "relevance",
@@ -88,6 +89,7 @@ test("persists a sanitized profile and preferences without credential fields", (
   const loaded = api.loadProfile(storage);
   assert.equal(loaded.research_description, "Electrochemical carbon dioxide conversion");
   assert.equal(loaded.preferences.profile_search_active, true);
+  assert.equal(loaded.preferences.status_archived, true);
   assert.equal(loaded.preferences.ai_provider, "anthropic");
   assert.equal(loaded.preferences.evidence, true);
   assert.deepEqual([...loaded.preferences.facets.agency], ["Department of Energy"]);

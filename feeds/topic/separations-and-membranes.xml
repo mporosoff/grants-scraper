@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/separations-and-membranes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/separations-and-membranes.xml</id>
-  <updated>2026-08-12T11:12:48Z</updated>
+  <updated>2026-08-13T12:10:38Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Desalination and Water Purification Research Program: Research Projects</title>
@@ -112,74 +112,5 @@
     <category term="Arts and culture"/>
     <category term="Separations and membranes"/>
     <summary>National Institutes of Health | Closes 2026-10-01 | This funding opportunity aims to support the development of in vivo high-resolution structural and functional imaging technologies for the living human inner ear. Proposed projects should focus on improving the resolution of current imaging techniques or developing new imaging techniques that can visualize inner ear structures in vivo with significantly greater detail and accuracy than currently p…</summary>
-  </entry>
-  <entry>
-    <title>Process Systems, Reaction Engineering, and Molecular Thermodynamics</title>
-    <link href="https://www.grants.gov/search-results-detail/348793"/>
-    <id>urn:funding-finder:grants-gov:348793</id>
-    <updated>2023-06-18T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Quantum science"/>
-    <summary>U.S. National Science Foundation | Posted | The Process Systems, Reaction Engineering, and Molecular Thermodynamics program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Electrochemical Systems program; and 3) the Interfacial Engineering program.
-The goal of the Process Systems, Reaction Engineering, and Molecular Thermodynamics program is to advance fundamental engineering research o…</summary>
-  </entry>
-  <entry>
-    <title>Interfacial Engineering</title>
-    <link href="https://www.grants.gov/search-results-detail/347326"/>
-    <id>urn:funding-finder:grants-gov:347326</id>
-    <updated>2023-04-05T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Materials science"/>
-    <category term="Separations and membranes"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation | Posted | The Interfacial Engineering program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Electrochemical Systems program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
-The goal of the Interfacial Engineering program is to support fundamental research on atomic- and molecular-scale interfacial phenomena and …</summary>
-  </entry>
-  <entry>
-    <title>Particulate and Multiphase Processes</title>
-    <link href="https://www.grants.gov/search-results-detail/347325"/>
-    <id>urn:funding-finder:grants-gov:347325</id>
-    <updated>2023-04-05T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Separations and membranes"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation | Posted | The Particulate and Multiphase Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Thermal Transport Processes program.
-The goal of the Particulate and Multiphase Processes program is to support fundamental research on physico-chemical phenomena that govern particulate and multiphase…</summary>
-  </entry>
-  <entry>
-    <title>Environmental Engineering</title>
-    <link href="https://www.grants.gov/search-results-detail/320490"/>
-    <id>urn:funding-finder:grants-gov:320490</id>
-    <updated>2019-09-11T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Materials science"/>
-    <category term="Separations and membranes"/>
-    <category term="Water"/>
-    <category term="Catalysis and reaction engineering"/>
-    <summary>U.S. National Science Foundation | Posted | The Environmental Engineering program is part of the Environmental Engineering and Sustainability cluster, which also includes 1) the Nanoscale Interactions program; and 2) the Environmental Sustainability program.
-Environmental engineering is an interdisciplinary field that applies chemical, biological, and physical scientific principles to protect human and ecological health.
-The goal of the Env…</summary>
   </entry>
 </feed>

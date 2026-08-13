@@ -27,6 +27,8 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(prototype, /id="facet-discipline"/);
   assert.match(prototype, /id="facet-agency"/);
   assert.match(prototype, /id="flag-evidence"/);
+  assert.match(prototype, /id="status-archived"/);
+  assert.match(prototype, /id="count-archived"/);
   assert.match(prototype, /id="sort"/);
   assert.match(prototype, /id="export-csv"/);
   assert.match(prototype, /id="export-ics"/);
@@ -89,6 +91,9 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(script, /profileContext\(\{ includeCv: true \}\)/);
   assert.match(script, /function exportEvaluation/);
   assert.match(script, /function recordIsCurrent/);
+  assert.match(script, /function recordIsAvailable/);
+  assert.match(script, /status === "archived"/);
+  assert.match(script, /Archived included/);
   assert.match(script, /NEW_RELEVANT_MAX_AGE_DAYS = 14/);
   assert.match(script, /NEW_RELEVANT_MIN_SCORE_RATIO = \.2/);
   assert.match(script, /function announcementAgeDays/);

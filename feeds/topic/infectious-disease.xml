@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml</id>
-  <updated>2026-08-12T11:12:48Z</updated>
+  <updated>2026-08-13T12:10:38Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Resources and Workforce Development for the Regional Biocontainment Laboratories</title>
@@ -569,6 +569,23 @@
     <summary>National Institutes of Health | Closes 2029-05-25 | This notice of funding opportunity (NOFO) invites applications for investigator-initiated Resource-Related Research Projects (R24). The proposed resource must provide a significant benefit to currently funded high priority projects in need of further coordination and support in the areas specified. This mechanism may also be used to support development of a new resource to the broader scientific c…</summary>
   </entry>
   <entry>
+    <title>Energy, Water, and Resource Engineering (EWRE)</title>
+    <link href="https://www.nsf.gov/funding/opportunities/energy-water-resource-engineering"/>
+    <id>urn:funding-finder:u-s-national-science-foundation:nsf-cbet%3APD-26-370Y</id>
+    <updated>2026-04-24T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Infectious disease"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Technology development"/>
+    <category term="Carbon management"/>
+    <summary>U.S. National Science Foundation | Posted | The Energy, Water, and Resource Engineering (EWRE) program supports fundamental research to advance energy, water, and resource management and to safeguard health. Better use of domestic resources will make U.S. manufacturing, energy and water systems more efficient and secure.
+EWRE supports research that creates domestic sources of energy, advances water management, and recovers resources using c…</summary>
+  </entry>
+  <entry>
     <title>Martin Delaney Collaboratories for HIV Cure Research</title>
     <link href="https://www.grants.gov/search-results-detail/359663"/>
     <id>urn:funding-finder:grants-gov:359663</id>
@@ -653,17 +670,5 @@
     <category term="Infectious disease"/>
     <category term="Manufacturing"/>
     <summary>National Institutes of Health | Closes 2027-08-18 | The Blueprint Neurotherapeutics Network for Biologics (BPN-Biologics) provides support for biologic-based therapeutic discovery and development, from lead optimization through phase I clinical testing. This Funding Opportunity Announcement (FOA) supports preclinical discovery and development of potential therapeutic Biotechnology Products and Biologics including, but not limited to, large biologic…</summary>
-  </entry>
-  <entry>
-    <title>BRAIN Initiative: Reagent Resources for Brain Cell Type-Specific Access to Broaden Distribution of Enabling Technologies for Neuroscience (U24 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/356530"/>
-    <id>urn:funding-finder:grants-gov:356530</id>
-    <updated>2024-09-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Infectious disease"/>
-    <category term="Manufacturing"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2027-06-15 | This Notice of Funding Opportunity Announcement (NOFO) from the NIH Brain Research through Advancing Innovative Neurotechnologies (BRAIN) Initiative is intended to support establishment of facilities at minority-serving institutions (MSIs) and Institutional Development Award (IDeA)-eligible institutions for scaled production and distribution of brain cell type-specific access and manipulation reag…</summary>
   </entry>
 </feed>

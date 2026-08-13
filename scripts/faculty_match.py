@@ -34,6 +34,8 @@ import time
 import urllib.parse
 import urllib.request
 
+from scripts.currentness import record_is_current
+
 OPENALEX = "https://api.openalex.org"
 MAILTO = "marc.porosoff@rochester.edu"           # OpenAlex polite pool
 ROCHESTER_HINT = "university of rochester"        # exclude "Rochester Institute of Technology"
@@ -672,7 +674,11 @@ def match_to_catalog(profiles: list[dict], catalog_path: str, out_path: str,
     relevance so newer calls are favored without outranking a substantially
     better scientific fit merely because of date.
     """
-    catalog = _load_catalog(catalog_path)
+    catalog = [
+        record
+        for record in _load_catalog(catalog_path)
+        if not record.get("status") or record_is_current(record)[0]
+    ]
     niche = _niche_topics(catalog)
 
     # Roster = the full FACULTY list, so hand-curated people with no OpenAlex
