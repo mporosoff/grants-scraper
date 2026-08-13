@@ -133,6 +133,37 @@ DISCIPLINE_BY_CATEGORY = {
     "T": "Engineering and Physical Sciences",
 }
 
+# Facets are a controlled vocabulary.  External listings often provide a
+# sentence-sized "discipline" field; those words remain searchable through the
+# title/description, while this mapping keeps the filter itself stable.
+DISCIPLINE_RULES = {
+    "Engineering and Physical Sciences": (
+        r"\b(?:chem(?:istry|ical)|computer science|computing|engineering|"
+        r"mathematics?|physics?|physical science|quantum|statistics?)\b"
+    ),
+    "Environmental and Life Sciences": (
+        r"\b(?:agricultur|biolog|ecolog|environment|earth systems?|geoscience|"
+        r"life science|natural resource)\w*\b"
+    ),
+    "Medical and Health": (
+        r"\b(?:biomedical|clinical|health|medicine|medical|neuroscience)\w*\b"
+    ),
+    "Community and Social Sciences": (
+        r"\b(?:anthropolog|behavioral science|political science|psycholog|"
+        r"social science|sociolog)\w*\b"
+    ),
+    "Business and Economic Development": (
+        r"\b(?:business|commerce|economic|economics|entrepreneur)\w*\b"
+    ),
+    "Education": r"\b(?:education|pedagogy|teaching)\w*\b",
+    "Arts and Humanities": (
+        r"\b(?:arts?|culture|history|humanities|language|literature|music|"
+        r"philosophy|theater)\w*\b"
+    ),
+}
+DISCIPLINE_NAMES = tuple(dict.fromkeys(DISCIPLINE_BY_CATEGORY.values()))
+DISCIPLINE_NAME_LOOKUP = {name.casefold(): name for name in DISCIPLINE_NAMES}
+
 TOPIC_RULES = {
     "Agriculture and food": r"\b(?:agricultur|crop|food|farm|livestock|soil)\w*",
     "Artificial intelligence and machine learning": (
@@ -348,6 +379,49 @@ def first(values, key):
 
 def unique(values):
     return list(dict.fromkeys(value for value in values if value))
+
+
+def normalize_disciplines(values):
+    """Map free-form source labels into the catalog's discipline taxonomy."""
+    if not isinstance(values, (list, tuple, set)):
+        values = [values] if values else []
+    normalized = []
+    for value in values:
+        text = clean_text(value)
+        if not text:
+            continue
+        canonical = DISCIPLINE_NAME_LOOKUP.get(text.casefold())
+        if canonical:
+            normalized.append(canonical)
+            continue
+        normalized.extend(
+            name
+            for name, pattern in DISCIPLINE_RULES.items()
+            if re.search(pattern, text, flags=re.I)
+        )
+    return unique(normalized)
+
+
+def source_facet_value(record):
+    """Return a stable user-selectable source without changing provenance.
+
+    Official federal pages can supplement Grants.gov (for example, when an NSF
+    program accepts proposals only through Research.gov).  These records stay
+    attributed to their agency on cards and links, but do not create isolated
+    agency-specific Source options.  Users can still select them through the
+    Federal source type or their agency.
+    """
+    source = clean_text(record.get("source"))
+    if (clean_text(record.get("source_type")) or "").casefold() == "federal":
+        return "Grants.gov" if (source or "").casefold() == "grants.gov" else None
+    return source
+
+
+def normalize_record_facets(record):
+    """Normalize every controlled facet on a catalog record in place."""
+    record["disciplines"] = normalize_disciplines(record.get("disciplines"))
+    record["source_facet"] = source_facet_value(record)
+    return record
 
 
 def values_by_tag(element):
@@ -765,7 +839,7 @@ def facet_counts(records):
     fields = {
         "status": "status",
         "source_type": "source_type",
-        "source": "source",
+        "source": "source_facet",
         "agency": "agency",
         "discipline": "disciplines",
         "topic": "topic_areas",
@@ -777,7 +851,11 @@ def facet_counts(records):
     for facet_name, record_field in fields.items():
         counts = Counter()
         for record in records:
-            value = record.get(record_field)
+            value = (
+                source_facet_value(record)
+                if facet_name == "source"
+                else record.get(record_field)
+            )
             if isinstance(value, list):
                 counts.update(value)
             elif value:
@@ -829,6 +907,7 @@ def quality_metrics(records):
 
 
 def build_catalog(records, generated_at, source_file, deduplicated_count):
+    records = [normalize_record_facets(dict(record)) for record in records]
     return {
         "schema_version": CATALOG_SCHEMA_VERSION,
         "source": {

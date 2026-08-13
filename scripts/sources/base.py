@@ -29,6 +29,8 @@ from scripts.build_catalog import (
     ROLLING_RE,
     clean_text,
     numeric,
+    normalize_disciplines,
+    normalize_record_facets,
     safe_http_url,
     topic_areas,
 )
@@ -246,7 +248,7 @@ class CanonicalOpportunity:
             "eligibility_codes": [],
             "applicant_types": list(self.applicant_types),
             "eligibility_text": eligibility_text,
-            "disciplines": list(self.disciplines),
+            "disciplines": normalize_disciplines(self.disciplines),
             "topic_areas": topics,
             "aln": [],
             # --- funding (award floor/ceiling only; never conflate totals) ---
@@ -294,7 +296,7 @@ class CanonicalOpportunity:
             "document_evidence": None,
             "document_search_text": None,
         }
-        return record
+        return normalize_record_facets(record)
 
 
 class SourceAdapter:

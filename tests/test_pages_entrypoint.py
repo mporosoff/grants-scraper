@@ -164,7 +164,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             '<script src="./data/opportunities.js?v=catalog-',
             explorer_html,
         )
-        release_version = "brand-2026-08-12"
+        release_version = "filters-2026-08-13"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={release_version}">',
             explorer_html,

@@ -215,6 +215,26 @@ class VPREmailTests(unittest.TestCase):
         self.assertIn("Instrumentation Award", vpr[0].title)
         self.assertEqual(vpr[0].close_date, "2026-10-15")
 
+    def test_free_form_email_fields_do_not_become_one_off_discipline_facets(self):
+        sample = """
+        Sloan Research Fellowships
+        Deadline: September 15, 2026
+        Topic/Discipline: chemistry, computer science, earth systems science,
+        economics, mathematics, neuroscience, physics, or a related field
+        Sponsor website: https://example.org/sloan
+        """
+
+        opportunity = VPREmailAdapter().parse_payload(sample)[0]
+        record = opportunity.to_record(
+            slug="vpr-email",
+            source="UR VPR funding digest (limited submissions & foundations)",
+            source_type="Internal",
+        )
+
+        self.assertNotIn("chemistry, computer science", " | ".join(record["disciplines"]))
+        self.assertIn("Engineering and Physical Sciences", record["disciplines"])
+        self.assertIn("Environmental and Life Sciences", record["disciplines"])
+
     def _message(self, sender, subject, body, subtype="plain"):
         message = EmailMessage()
         message["From"] = sender

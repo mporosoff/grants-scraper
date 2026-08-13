@@ -55,7 +55,7 @@
   ];
 
   const FACETS = {
-    source: { recordField: "source", limit: 12 },
+    source: { recordField: "source_facet", fallbackRecordField: "source", limit: 12 },
     source_type: { recordField: "source_type", limit: 8 },
     discipline: { recordField: "disciplines", limit: 20 },
     topic: { recordField: "topic_areas", limit: 30 },
@@ -331,11 +331,17 @@
     return (catalog?.opportunities || []).filter(record => recordIsAvailable(record));
   }
 
+  function facetRecordValue(record, config) {
+    return Object.prototype.hasOwnProperty.call(record, config.recordField)
+      ? record[config.recordField]
+      : record[config.fallbackRecordField];
+  }
+
   function currentFacetCounts(records) {
     const output = Object.fromEntries(Object.keys(FACETS).map(name => [name, {}]));
     for (const record of records) {
       for (const [name, config] of Object.entries(FACETS)) {
-        const raw = record[config.recordField];
+        const raw = facetRecordValue(record, config);
         const values = Array.isArray(raw) ? raw : [raw];
         for (const value of new Set(values.filter(Boolean))) {
           output[name][value] = (output[name][value] || 0) + 1;
@@ -851,7 +857,8 @@
     }
 
     for (const [name, config] of Object.entries(FACETS)) {
-      if (!intersects(record[config.recordField], state.filters[name])) return false;
+      const value = facetRecordValue(record, config);
+      if (!intersects(value, state.filters[name])) return false;
     }
 
     const deadlineFrom = $("deadline-from").value;

@@ -87,6 +87,23 @@ class MatcherTests(unittest.TestCase):
         self.assertTrue(results)
         self.assertEqual(results[0]["opportunity_id"], "1")
 
+    def test_federal_supplement_is_not_mislabeled_as_grants_gov(self):
+        supplement = _base(
+            opportunity_id="ewre",
+            title="Energy, Water, and Resource Engineering",
+            source="U.S. National Science Foundation",
+            source_type="Federal",
+        )
+
+        supplement["source_facet"] = None
+        self.assertFalse(matches_filters(supplement, {"source": ["Grants.gov"]}))
+        self.assertFalse(
+            matches_filters(
+                supplement,
+                {"source": ["U.S. National Science Foundation"]},
+            )
+        )
+
     def test_common_abbreviation_finds_expanded_catalog_language(self):
         carbon = _base(
             opportunity_id="carbon",

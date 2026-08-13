@@ -35,6 +35,7 @@ from scripts.build_catalog import (
     build_search_index,
     clean_text,
     facet_counts,
+    normalize_record_facets,
     iso_utc,
     numeric,
     safe_http_url,
@@ -968,7 +969,7 @@ def enrich_catalog(
         for record in merged_records
         if record.get("status") == "archived"
     ]
-    merged = merged_records
+    merged = [normalize_record_facets(record) for record in merged_records]
     output = deepcopy(catalog)
     output["opportunities"] = merged
     output["record_count"] = len(merged)
