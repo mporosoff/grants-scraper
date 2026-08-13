@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/separations-and-membranes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/separations-and-membranes.xml</id>
-  <updated>2026-08-12T13:09:49Z</updated>
+  <updated>2026-08-13T11:14:17Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Desalination and Water Purification Research Program: Research Projects</title>
@@ -158,11 +158,10 @@ The goal of the Interfacial Engineering program is to support fundamental resear
     <category term="Energy"/>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
+    <category term="Materials science"/>
     <category term="Separations and membranes"/>
     <category term="Catalysis and reaction engineering"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation | Posted | The Particulate and Multiphase Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Thermal Transport Processes program.
-The goal of the Particulate and Multiphase Processes program is to support fundamental research on physico-chemical phenomena that govern particulate and multiphase…</summary>
+    <summary>U.S. National Science Foundation | Posted | The Particulate and Multiphase Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Thermal Transport Processes program. The goal of the Particulate and Multiphase Processes program is to support fundamental research on physico-chemical phenomena that govern particulate and multiphase…</summary>
   </entry>
   <entry>
     <title>Environmental Engineering</title>
@@ -178,8 +177,6 @@ The goal of the Particulate and Multiphase Processes program is to support funda
     <category term="Separations and membranes"/>
     <category term="Water"/>
     <category term="Catalysis and reaction engineering"/>
-    <summary>U.S. National Science Foundation | Posted | The Environmental Engineering program is part of the Environmental Engineering and Sustainability cluster, which also includes 1) the Nanoscale Interactions program; and 2) the Environmental Sustainability program.
-Environmental engineering is an interdisciplinary field that applies chemical, biological, and physical scientific principles to protect human and ecological health.
-The goal of the Env…</summary>
+    <summary>U.S. National Science Foundation | Posted | The Environmental Engineering program is part of the Environmental Engineering and Sustainability cluster, which also includes 1) the Nanoscale Interactions program; and 2) the Environmental Sustainability program. Environmental engineering is an interdisciplinary field that applies chemical, biological, and physical scientific principles to protect human and ecological health. The goal of the Env…</summary>
   </entry>
 </feed>

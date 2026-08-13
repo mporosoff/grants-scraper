@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-08-12T13:09:49Z</updated>
+  <updated>2026-08-13T11:14:17Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -490,16 +490,6 @@
     <summary>National Institutes of Health | Closes 2027-06-01 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the support of the Clinical Data, Safety and Statistical Centers program. The overall objective of this program is to provide coordination and oversight for multiple activities in service to clinical research and mechanistic studies supported by NIAID, including all Division of Allergy, Immunolog…</summary>
   </entry>
   <entry>
-    <title>State Maternal Health Innovation Program (SMHI)</title>
-    <link href="https://www.grants.gov/search-results-detail/363408"/>
-    <id>urn:funding-finder:grants-gov:363408</id>
-    <updated>2027-01-29T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>Health Resources and Services Administration | Closes 2027-04-19 | The purpose of the State Maternal Health Innovation (SMHI) program is to build capacity in states to improve maternal health and address maternal health gaps. This is done through quality services, a skilled workforce, enhanced data quality and capacity, and innovative programming that reduces maternal mortality and severe maternal morbidity (SMM).</summary>
-  </entry>
-  <entry>
     <title>Advanced Laboratories for Accelerating the Reach and Impact of Treatments for Youth and Adults with Mental Illness (ALACRITY) Research Centers</title>
     <link href="https://www.grants.gov/search-results-detail/361521"/>
     <id>urn:funding-finder:grants-gov:361521</id>
@@ -981,5 +971,14 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Cancer"/>
     <summary>National Institutes of Health | Closes 2027-01-25 | The purpose of this Notice of Funding Opportunity (NOFO) is to support research that addresses the prevention, diagnosis, and treatment of cancers among American Indians and Alaska Natives (AI/AN), particularly those living in rural communities. The research objectives target overall cancer incidence and mortality, with the goal of making findings applicable and impactful in improving cancer outco…</summary>
+  </entry>
+  <entry>
+    <title>National Biomedical Research Centers (P50 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/362353"/>
+    <id>urn:funding-finder:grants-gov:362353</id>
+    <updated>2026-11-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Closes 2027-01-25 | The National Biomedical Research Centers (NBRCs) are expected to provide scientific expertise, advanced equipment, infrastructure, and a range of well-characterized research models to researchers across the nation. Research at the NBRCs is supported by almost all NIH Institutes, as well as other federal agencies, including those that safeguard US national security interests. This NOFO emphasizes d…</summary>
   </entry>
 </feed>

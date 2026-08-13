@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-08-12T13:09:49Z</updated>
+  <updated>2026-08-13T11:14:17Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -91,6 +91,29 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Agriculture and food"/>
     <summary>Health Resources and Services Administration | Closes 2026-10-20 | Fiscal Year (FY) 2027 Regional Nutrition Hubs (RNH) will support region-specific technical assistance (TA) on expanding high-quality nutrition services to the Health Resources and Services Administration's (HRSA) Health Center Program (H80) award recipients and look-alikes (health centers). Nutrition services prevent, manage, and treat diseases and conditions through nutritional and food-based int…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for Affiliated Partner with the Colorado Plateau Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/363544"/>
+    <id>urn:funding-finder:grants-gov:363544</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <summary>Geological Survey | Closes 2026-09-12 | The U.S. Geological Survey (USGS) Southwest Biological Science Center (SBSC) is offering a funding opportunity to a CESU partner for research in developing multi-month forecasts of management-relevant rangeland drought forecasts and improve a platform for delivering those forecasts to resource managers across western rangelands.Research Objectives:Wildfire and invasive species are transforming dry…</summary>
+  </entry>
+  <entry>
+    <title>Community Forest and Open Space Conservation Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363348"/>
+    <id>urn:funding-finder:grants-gov:363348</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <author><name>Forest Service</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>Forest Service | Closes 2026-10-13 | The U.S. Department of Agriculture (USDA), Forest Service, State, Private &amp; Tribal Forestry, is requesting applications for the Community Forest and Open Space Conservation Program (Community Forest Program or CFP). CFP is a competitive grant program that provides financial assistance to Indian Tribes, local governments, and qualified conservation non-profit organizations to establish community fo…</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Gulf Coast Cooperative Ecosystem Studies Unit (CESU)</title>
@@ -460,6 +483,19 @@
     <summary>Health Resources and Services Administration | Closes 2026-09-09 | The purpose of Fiscal Year (FY) 2027 Expanding Nutrition Services (ENS) funding is to increase access to nutrition services at HRSA-funded health centers. Nutrition services can help to prevent, manage, and treat diseases and conditions through nutritional and food-based interventions. Health centers will use ENS funding to increase the number of nutrition services patients or visits.</summary>
   </entry>
   <entry>
+    <title>Supply Chain Acceleration and Logistics Enablement (SCALE) Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363089"/>
+    <id>urn:funding-finder:grants-gov:363089</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>Small Business Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>Small Business Administration | Closes 2026-08-13 | The Supply Chain Acceleration and Logistics Enablement (SCALE) Program supports organizations that help small businesses overcome operational, technical, workforce, and market access barriers that limit their ability to participate and grow as suppliers within strategically important industries. Through technical assistance, industry engagement, and other implementation focused activities, SCALE h…</summary>
+  </entry>
+  <entry>
     <title>English Language Teaching and Learning Program</title>
     <link href="https://www.grants.gov/search-results-detail/363077"/>
     <id>urn:funding-finder:grants-gov:363077</id>
@@ -626,38 +662,5 @@
     <category term="Cancer"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health | Closes 2026-09-18 | This Notice of Funding Opportunity (NOFO) is one of three NOFOs for the National Cancer Institute (NCI) Community Oncology Research Program (NCORP). NCORP is designed to enhance generalizability and dissemination of clinical trial and other human subject research study results through accrual in a variety of community settings. The purpose of NCORP is to engage cancer patient populations, those at…</summary>
-  </entry>
-  <entry>
-    <title>WaterSMART Enhancing Water Resources Projects</title>
-    <link href="https://www.grants.gov/search-results-detail/362394"/>
-    <id>urn:funding-finder:grants-gov:362394</id>
-    <updated>2026-05-14T00:00:00Z</updated>
-    <author><name>Bureau of Reclamation</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Water"/>
-    <summary>Bureau of Reclamation | Closes 2027-09-08 | The objective of the WaterSMART Enhancing Water Resources Projects funding opportunity is to invite eligible entities to apply for funding to implement projects per the authorizing language referenced above that benefit water resource management for multiple uses, including water conservation and efficiency projects, water infrastructure improvements, and river and watershed restoration. Projects …</summary>
-  </entry>
-  <entry>
-    <title>DoW Multiple Sclerosis Clinical Trial Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362227"/>
-    <id>urn:funding-finder:grants-gov:362227</id>
-    <updated>2026-05-05T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-08-13 | Summary: The fiscal year 2026 (FY26) Multiple Sclerosis Research Program (MSRP) Clinical Trial Award (CTA) supports the rapid implementation of clinical trials with the potential to have a significant impact on the treatment or management of multiple sclerosis. All applications must address at least one of the FY26 MSRP CTA focus areas. Clinical trials may evaluate promising new products, pharmaco…</summary>
-  </entry>
-  <entry>
-    <title>DoW Amyotrophic Lateral Sclerosis Research Program, Pilot Clinical Trial Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362195"/>
-    <id>urn:funding-finder:grants-gov:362195</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Transportation"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-30 | Summary: The fiscal year 2026 (FY26) Amyotrophic Lateral Sclerosis Research Program (ALSRP) Pilot Clinical Trial Award (PCTA) supports the rapid implementation of clinical trials with the potential to have a significant impact on the treatment or management of amyotrophic lateral sclerosis (ALS). Projects may range from phase 1 to small-scale phase 2 trials.Applications must address one of the fol…</summary>
   </entry>
 </feed>

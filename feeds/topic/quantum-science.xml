@@ -4,8 +4,20 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml</id>
-  <updated>2026-08-12T13:09:49Z</updated>
+  <updated>2026-08-13T11:14:17Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Engineering (ENG): Electrical, Communications, and Computing Systems (ECCS)</title>
+    <link href="https://www.grants.gov/search-results-detail/363551"/>
+    <id>urn:funding-finder:grants-gov:363551</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Energy"/>
+    <category term="Quantum science"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-12 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research for electrical, communications and computing systems through the following programs: The Electronic, Photonic, Magnetic, and Quantum Devices (EPMQD) program supports foundational engineering research on novel classical and quantum devices, exploring matter’s electronic, photonic, and magnetic …</summary>
+  </entry>
   <entry>
     <title>FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) - RESEARCH COLLABORATION (RC)</title>
     <link href="https://www.grants.gov/search-results-detail/363526"/>
@@ -217,8 +229,7 @@ The goal of the Process Systems, Reaction Engineering, and Molecular Thermodynam
     <category term="Quantum science"/>
     <category term="Technology development"/>
     <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation | Posted | The Biophotonics program is part of the Engineering Biology and Health cluster, which also includes: 1) the Biosensing program; 2) the Cellular and Biochemical Engineering program; 3) the Disability and Rehabilitation Engineering program; and 4) the Engineering of Biomedical Systems program.
-The goal of the Biophotonics program is to explore the research frontiers in photonics principles, engineer…</summary>
+    <summary>U.S. National Science Foundation | Posted | The Biophotonics program is part of the Engineering Biology and Health cluster, which also includes: 1) the Biosensing program; 2) the Cellular and Biochemical Engineering program; 3) the Disability and Rehabilitation Engineering program; and 4) the Engineering of Biomedical Systems program. The goal of the Biophotonics program is to explore the research frontiers in photonics principles, engineer…</summary>
   </entry>
   <entry>
     <title>Nanoscale Interactions</title>
@@ -234,11 +245,10 @@ The goal of the Biophotonics program is to explore the research frontiers in pho
     <category term="Quantum science"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Posted | The Nanoscale Interactions program is part of the Environmental Engineering and Sustainability cluster, which also includes: 1) the Environmental Engineering program; and 2) the Environmental Sustainability program.
-The goal of the Nanoscale Interactions program is to support research to advance fundamental and quantitative understanding of the interactions of nanomaterials and nanosystems with bi…</summary>
+    <summary>U.S. National Science Foundation | Posted | The Nanoscale Interactions program is part of the Environmental Engineering and Sustainability cluster, which also includes: 1) the Environmental Engineering program; and 2) the Environmental Sustainability program. The goal of the Nanoscale Interactions program is to support research to advance fundamental and quantitative understanding of the interactions of nanomaterials and nanosystems with bi…</summary>
   </entry>
   <entry>
-    <title>Thermal Transport Processes</title>
+    <title>Thermal Transport Processes (TTP)</title>
     <link href="https://www.grants.gov/search-results-detail/347324"/>
     <id>urn:funding-finder:grants-gov:347324</id>
     <updated>2023-04-05T00:00:00Z</updated>
@@ -251,8 +261,7 @@ The goal of the Nanoscale Interactions program is to support research to advance
     <category term="Energy"/>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation | Posted | The Thermal Transport Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Particulate and Multiphase Processes program.
-The Thermal Transport Processes program supports engineering research projects that lay the foundation for new advances in thermal transport phenomena. These projec…</summary>
+    <summary>U.S. National Science Foundation | Posted | The Thermal Transport Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Particulate and Multiphase Processes program. The Thermal Transport Processes program supports engineering research projects that lay the foundation for new advances in thermal transport phenomena. These projec…</summary>
   </entry>
   <entry>
     <title>Communications, Circuits, and Sensing-Systems</title>

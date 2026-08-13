@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml</id>
-  <updated>2026-08-12T13:09:49Z</updated>
+  <updated>2026-08-13T11:14:17Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Veterans Legacy Grants Program</title>
@@ -357,16 +357,6 @@
     <summary>Foreign Agricultural Service | Closes 2026-08-17 | Modern agricultural biotechnology such as genome editing is a revolutionary tool that could transform the sustainability and viability of the agriculture sector. American farmers rely on agricultural biotechnology products, with over 90% of corn and soybeans derived from these technologies. In 2025, American farmers exported over $51 billion in agricultural biotechnology products worldwide. Howeve…</summary>
   </entry>
   <entry>
-    <title>Delta States Rural Development Network Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362942"/>
-    <id>urn:funding-finder:grants-gov:362942</id>
-    <updated>2026-07-13T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Community development"/>
-    <category term="Cybersecurity"/>
-    <summary>Health Resources and Services Administration | Closes 2026-08-12 | The Delta States Rural Development Network Program supports support the planning, development, and implementation of integrated health care networks that collaborate in order to (i) achieve efficiencies; (ii) expand access to, coordinate, and improve the quality of basic health care services and associated health outcomes in rural areas within the eight rural Mississippi Delta Region states (Alaba…</summary>
-  </entry>
-  <entry>
     <title>SERVICE CORP OF RET EXECUTIVES (SCORE) 2026-01</title>
     <link href="https://www.grants.gov/search-results-detail/363127"/>
     <id>urn:funding-finder:grants-gov:363127</id>
@@ -667,6 +657,17 @@
     <title>Denver FY 2021 - FY 2023 EDA Planning and Local Technical Assistance</title>
     <link href="https://www.grants.gov/search-results-detail/332126"/>
     <id>urn:funding-finder:grants-gov:332126</id>
+    <updated>2021-03-15T00:00:00Z</updated>
+    <author><name>Department of Commerce</name></author>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <summary>Department of Commerce | Posted | UPDATED NOTICE - PLEASE READ: April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
+  </entry>
+  <entry>
+    <title>Philadelphia FY 2021 - FY 2023 EDA Planning and Local Technical Assistance</title>
+    <link href="https://www.grants.gov/search-results-detail/332138"/>
+    <id>urn:funding-finder:grants-gov:332138</id>
     <updated>2021-03-15T00:00:00Z</updated>
     <author><name>Department of Commerce</name></author>
     <category term="Arts and culture"/>

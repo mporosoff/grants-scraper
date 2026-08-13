@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-08-12T13:09:49Z</updated>
+  <updated>2026-08-13T11:14:17Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Core State Injury Prevention Program (Core SIPP)</title>
@@ -135,6 +135,15 @@
     <category term="Public health"/>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Closes 2026-10-17 | The purpose of this NOFO is to enhance the capability of NCATS CTSA Program KL2 scholars supported by the CTSA Program to conduct research as they complete the transition to fully independent academic translational scientists. These small research grants will support different clinical and translational science research projects, including pilot and feasibility studies; secondary data analysis of …</summary>
+  </entry>
+  <entry>
+    <title>FY24 Little Rock Port Authority Transload Yard, AR</title>
+    <link href="https://www.grants.gov/search-results-detail/363542"/>
+    <id>urn:funding-finder:grants-gov:363542</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <author><name>DOT - Federal Railroad Administration</name></author>
+    <category term="Transportation"/>
+    <summary>DOT - Federal Railroad Administration | Closes 2026-08-18 | Little Rock Port Authority Transload Yard</summary>
   </entry>
   <entry>
     <title>Family Unification Program (FUP) Multi-Year NOFO</title>
@@ -588,6 +597,19 @@
     <summary>DOT - Federal Transit Administration | Closes 2026-09-09 | The Federal Transit Administration (FTA) announces the opportunity to apply for $11,959,671 million in Fiscal Year (FY) 2024, 2025, and 2026 competitive grant funding to support transit services for the FY 2026 Innovative Coordinated Access and Mobility (ICAM) pilot program. Under the ICAM pilot program, funds awarded will finance innovative capital projects for the transportation-disadvantaged, w…</summary>
   </entry>
   <entry>
+    <title>Supply Chain Acceleration and Logistics Enablement (SCALE) Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363089"/>
+    <id>urn:funding-finder:grants-gov:363089</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>Small Business Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>Small Business Administration | Closes 2026-08-13 | The Supply Chain Acceleration and Logistics Enablement (SCALE) Program supports organizations that help small businesses overcome operational, technical, workforce, and market access barriers that limit their ability to participate and grow as suppliers within strategically important industries. Through technical assistance, industry engagement, and other implementation focused activities, SCALE h…</summary>
+  </entry>
+  <entry>
     <title>Fiscal Year 2026 United States Marine Highway Program (USMHP)</title>
     <link href="https://www.grants.gov/search-results-detail/362478"/>
     <id>urn:funding-finder:grants-gov:362478</id>
@@ -634,31 +656,5 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>69A355 Research and Technology | Closes 2026-08-28 | he U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Tribal Transportation Safety Strategy Pilot Program. This three-year cooperative agreement is designed to address the critical public safety crisis in Tribal communities, as American Indian and Alaska Native populations experience…</summary>
-  </entry>
-  <entry>
-    <title>Disaster Assistance for State Units on Aging (SUAs) and Tribal Organizations</title>
-    <link href="https://www.grants.gov/search-results-detail/360510"/>
-    <id>urn:funding-finder:grants-gov:360510</id>
-    <updated>2026-06-26T00:00:00Z</updated>
-    <author><name>Administration for Community Living</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Transportation"/>
-    <summary>Administration for Community Living | Closes 2026-09-01 | Grants awarded under this announcement are to provide disaster reimbursement and assistance funds to those State Units on Aging (SUAs), and federally recognized Tribal Organizations who are currently receiving a grant under Title VI of the Older Americans Act (OAA), as amended. Total funding available for disaster assistance is subject to the availability of funds appropriated. The estimated numbe…</summary>
-  </entry>
-  <entry>
-    <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
-    <link href="https://www.grants.gov/search-results-detail/362900"/>
-    <id>urn:funding-finder:grants-gov:362900</id>
-    <updated>2026-06-22T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Cybersecurity"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <category term="Data science"/>
-    <category term="Energy"/>
-    <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | Project Background, Goals, and ObjectivesIn an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will leave…</summary>
   </entry>
 </feed>

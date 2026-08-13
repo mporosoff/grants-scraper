@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-08-12T13:09:49Z</updated>
+  <updated>2026-08-13T11:14:17Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -135,6 +135,40 @@
     <summary>National Institutes of Health | Closes 2027-01-25 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to continue to support the Radiation Oncology-Biology Integration Network (ROBIN) with applications from both new and renewing investigators. This network model will sustain an agile and effective national radiation oncology infrastructure that collectively addresses critical hypothesis-based translation…</summary>
   </entry>
   <entry>
+    <title>National Resource Centers</title>
+    <link href="https://www.grants.gov/search-results-detail/362377"/>
+    <id>urn:funding-finder:grants-gov:362377</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <author><name>Administration for Children and Families - OFVPS</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Administration for Children and Families - OFVPS | Closes 2026-09-08 | The Resource Centers support efforts to prevent and respond to family, domestic, and dating violence by providing information, training, and technical assistance to individuals, organizations, government agencies, and communities.The National Resource Centers on Domestic Violence focus on strengthening services and knowledge in the field. One center provides training and technical assistance on do…</summary>
+  </entry>
+  <entry>
+    <title>Pacific Disaster Center</title>
+    <link href="https://www.grants.gov/search-results-detail/363549"/>
+    <id>urn:funding-finder:grants-gov:363549</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <author><name>Washington Headquarters Services</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Washington Headquarters Services | Closes 2026-09-15 | On behalf of the Office of the Secretary of War/Office of the Under Secretary of War for Acquisition and Sustainment (OUSW(A&amp;S)) and the Office of the Under Secretary of War for Policy (OUSW(P)), the Washington Headquarters Services, Acquisition Directorate, (WHS/AD) seeks applications for sole-source awards from the University of Hawaii for the continuation of work for the Pacific Disaster Center…</summary>
+  </entry>
+  <entry>
+    <title>U.S.-Africa Strategic Investment Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363554"/>
+    <id>urn:funding-finder:grants-gov:363554</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <author><name>Bureau of African Affairs</name></author>
+    <category term="Environmental science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>Bureau of African Affairs | Closes 2027-05-27 | The U.S.-Africa Strategic Investment Program advances America's national interests by harnessing market-based, private sector-led growth across two strategic focus areas: Critical Minerals Investment and Commercial Diplomacy Acceleration. This program seeks market-based solutions that strengthen the environment for foreign investment in sub-Saharan Africa through transparent and competitive proces…</summary>
+  </entry>
+  <entry>
     <title>Fostering the Future Together: Empowering Youth for a Safe Digital World</title>
     <link href="https://www.grants.gov/search-results-detail/363426"/>
     <id>urn:funding-finder:grants-gov:363426</id>
@@ -142,7 +176,7 @@
     <author><name>Bureau of International Labor Affairs</name></author>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Bureau of International Labor Affairs | Closes 2026-09-10 | Questions regarding this Funding Opportunity Announcement (FOA) Forecast may be emailed to OGM_ILAB@dol.gov; however, please note there is limited information that may be shared with the public, as this FOA is currently under development. We encourage prospective applicants and interested parties to use the Grants.gov subscription option to register for future updates provided for this particular …</summary>
+    <summary>Bureau of International Labor Affairs | Closes 2026-09-10 | Questions regarding this Funding Opportunity Announcement (FOA) may be emailed to OGM_ILAB@dol.gov. We encourage prospective applicants and interested parties to use the Grants.gov subscription option to register for future updates provided for this particular FOA.</summary>
   </entry>
   <entry>
     <title>FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) - RESEARCH COLLABORATION (RC)</title>
@@ -472,18 +506,6 @@
     <summary>National Energy Technology Laboratory | Closes 2026-09-22 | Advancing Oil and Natural Gas Production and Delivery This Notice of Funding Opportunity (NOFO) is seeking proposals to advance cost-effective technologies for improving the efficiency, reliability, and resilience of the Unites States oil and natural gas supply chain. This funding opportunity spans research and development efforts focused on enhancing resource utilization, modernizing infrastructu…</summary>
   </entry>
   <entry>
-    <title>U.S.-Africa Strategic Investment Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363298"/>
-    <id>urn:funding-finder:grants-gov:363298</id>
-    <updated>2026-07-23T00:00:00Z</updated>
-    <author><name>Bureau of African Affairs</name></author>
-    <category term="Environmental science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>Bureau of African Affairs | Closes 2027-05-27 | The U.S.-Africa Strategic Investment Program advances America's national interests by harnessing market-based, private sector-led growth across two strategic focus areas: Critical Minerals Investment and Commercial Diplomacy Acceleration. This program seeks market-based solutions that strengthen the environment for foreign investment in sub-Saharan Africa through transparent and competitive proces…</summary>
-  </entry>
-  <entry>
     <title>Technology Enhanced Adoptive Family Recruiting and Matching</title>
     <link href="https://www.grants.gov/search-results-detail/361968"/>
     <id>urn:funding-finder:grants-gov:361968</id>
@@ -713,30 +735,5 @@
     <category term="Data science"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Closes 2026-10-22 | NIMH seeks applications for pilot research to adapt, optimize, and test behavioral interventions that address common sleep problems in adolescents and young adults with or at risk for a mental health disorder. This notice of funding opportunity (NOFO) supports pilot clinical trials designed to evaluate the feasibility, tolerability, acceptability, safety, and potential effectiveness of the approac…</summary>
-  </entry>
-  <entry>
-    <title>NSF Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs: A Pilot Emphasis on Scientific Instrumentation</title>
-    <link href="https://www.grants.gov/search-results-detail/362551"/>
-    <id>urn:funding-finder:grants-gov:362551</id>
-    <updated>2026-05-22T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Closes 2026-11-04 | NSF invests in scientific discoveries, technological breakthroughs, and transformative innovations that strengthen economic growth, enhance security, and improve the lives of Americans and people around the world. Our ability to support that mission requires a robust scientific and engineering (S&amp;E) enterprise in the United States that allows scientists to innovate at the frontier. In addition to …</summary>
-  </entry>
-  <entry>
-    <title>DoW Prostate Cancer, Data Science Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362259"/>
-    <id>urn:funding-finder:grants-gov:362259</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Data science"/>
-    <category term="Public health"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-02 | Summary: The fiscal year 2026 (FY26) Prostate Cancer Research Program (PCRP) Data Science Award (DSA) supports research that develops or uses quantitative and analytical approaches, processes and/or systems to obtain knowledge and insight from large and/or complex sets of prostate cancer data in one or more of the following research areas: Analysis of clinically annotated datasets; analysis of -om…</summary>
   </entry>
 </feed>

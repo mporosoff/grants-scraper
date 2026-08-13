@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml</id>
-  <updated>2026-08-12T13:09:49Z</updated>
+  <updated>2026-08-13T11:14:17Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) CAPACITY BUILDING (CB)</title>
@@ -191,7 +191,7 @@ The goal of the Process Systems, Reaction Engineering, and Molecular Thermodynam
     <summary>U.S. National Science Foundation | Closes 2026-09-30 | This solicitation applies to six (of the nine) CHE Disciplinary Research Programs: Chemical Catalysis (CAT); Chemical Measurement and Imaging (CMI); Chemical Mechanism, Function and Properties (CMFP); Chemical Synthesis (SYN); Environmental Chemical Sciences (ECS); and Macromolecular, Supramolecular and Nanochemistry (MSN). All proposals submitted to these six CHE Disciplinary Research Programs (o…</summary>
   </entry>
   <entry>
-    <title>Combustion and Fire Systems</title>
+    <title>Combustion and Fire Systems (CFS)</title>
     <link href="https://www.grants.gov/search-results-detail/347509"/>
     <id>urn:funding-finder:grants-gov:347509</id>
     <updated>2023-04-14T00:00:00Z</updated>
@@ -204,8 +204,7 @@ The goal of the Process Systems, Reaction Engineering, and Molecular Thermodynam
     <category term="Environmental science"/>
     <category term="Catalysis and reaction engineering"/>
     <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation | Posted | The Combustion and Fire Systems program is part of the Transport Phenomena cluster, which also includes 1) the Fluid Dynamics program; 2) the Particulate and Multiphase Processes program; and 3) the Thermal Transport Processes program.
-The goal of the Combustion and Fire Systems program is to create new knowledge to support advances in clean energy, climate change mitigation, a cleaner environment…</summary>
+    <summary>U.S. National Science Foundation | Posted | The Combustion and Fire Systems program is part of the Transport Phenomena cluster, which also includes 1) the Fluid Dynamics program; 2) the Particulate and Multiphase Processes program; and 3) the Thermal Transport Processes program. The goal of the Combustion and Fire Systems program is to create new knowledge to support advances in clean energy, climate change mitigation, a cleaner environment…</summary>
   </entry>
   <entry>
     <title>Electrochemical Systems</title>
@@ -238,8 +237,7 @@ The goal of the Electrochemical Systems program is to support fundamental engine
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <category term="Social and behavioral sciences"/>
-    <summary>U.S. National Science Foundation | Posted | The Environmental Sustainability program is part of the Environmental Engineering and Sustainability cluster together with 1) the Environmental Engineering program and 2) the Nanoscale Interactions program.
-The goal of the Environmental Sustainability program is to promote sustainable engineered systems that support human well-being and that are also compatible with sustaining natural (environment…</summary>
+    <summary>U.S. National Science Foundation | Posted | The Environmental Sustainability program is part of the Environmental Engineering and Sustainability cluster together with 1) the Environmental Engineering program and 2) the Nanoscale Interactions program. The goal of the Environmental Sustainability program is to promote sustainable engineered systems that support human well-being and that are also compatible with sustaining natural (environment…</summary>
   </entry>
   <entry>
     <title>Interfacial Engineering</title>
@@ -269,14 +267,13 @@ The goal of the Interfacial Engineering program is to support fundamental resear
     <category term="Energy"/>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
+    <category term="Materials science"/>
     <category term="Separations and membranes"/>
     <category term="Catalysis and reaction engineering"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation | Posted | The Particulate and Multiphase Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Thermal Transport Processes program.
-The goal of the Particulate and Multiphase Processes program is to support fundamental research on physico-chemical phenomena that govern particulate and multiphase…</summary>
+    <summary>U.S. National Science Foundation | Posted | The Particulate and Multiphase Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Thermal Transport Processes program. The goal of the Particulate and Multiphase Processes program is to support fundamental research on physico-chemical phenomena that govern particulate and multiphase…</summary>
   </entry>
   <entry>
-    <title>Thermal Transport Processes</title>
+    <title>Thermal Transport Processes (TTP)</title>
     <link href="https://www.grants.gov/search-results-detail/347324"/>
     <id>urn:funding-finder:grants-gov:347324</id>
     <updated>2023-04-05T00:00:00Z</updated>
@@ -289,8 +286,7 @@ The goal of the Particulate and Multiphase Processes program is to support funda
     <category term="Energy"/>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation | Posted | The Thermal Transport Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Particulate and Multiphase Processes program.
-The Thermal Transport Processes program supports engineering research projects that lay the foundation for new advances in thermal transport phenomena. These projec…</summary>
+    <summary>U.S. National Science Foundation | Posted | The Thermal Transport Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Particulate and Multiphase Processes program. The Thermal Transport Processes program supports engineering research projects that lay the foundation for new advances in thermal transport phenomena. These projec…</summary>
   </entry>
   <entry>
     <title>Fluid Dynamics</title>
@@ -306,8 +302,7 @@ The Thermal Transport Processes program supports engineering research projects t
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <category term="Technology development"/>
-    <summary>U.S. National Science Foundation | Posted | The Fluid Dynamics program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Particulate and Multiphase Processes program; and 3) the Thermal Transport Processes program.
-The Fluid Dynamics program supports fundamental research toward gaining an understanding of the physics of various fluid dynamics phenomena. Proposed research shoul…</summary>
+    <summary>U.S. National Science Foundation | Posted | The Fluid Dynamics program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Particulate and Multiphase Processes program; and 3) the Thermal Transport Processes program. The Fluid Dynamics program supports fundamental research toward gaining an understanding of the physics of various fluid dynamics phenomena. Proposed research shoul…</summary>
   </entry>
   <entry>
     <title>Division of Chemistry: Disciplinary Research Programs: No Deadline Pilot</title>
@@ -352,8 +347,6 @@ The Fluid Dynamics program supports fundamental research toward gaining an under
     <category term="Separations and membranes"/>
     <category term="Water"/>
     <category term="Catalysis and reaction engineering"/>
-    <summary>U.S. National Science Foundation | Posted | The Environmental Engineering program is part of the Environmental Engineering and Sustainability cluster, which also includes 1) the Nanoscale Interactions program; and 2) the Environmental Sustainability program.
-Environmental engineering is an interdisciplinary field that applies chemical, biological, and physical scientific principles to protect human and ecological health.
-The goal of the Env…</summary>
+    <summary>U.S. National Science Foundation | Posted | The Environmental Engineering program is part of the Environmental Engineering and Sustainability cluster, which also includes 1) the Nanoscale Interactions program; and 2) the Environmental Sustainability program. Environmental engineering is an interdisciplinary field that applies chemical, biological, and physical scientific principles to protect human and ecological health. The goal of the Env…</summary>
   </entry>
 </feed>

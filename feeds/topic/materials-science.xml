@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-08-12T13:09:49Z</updated>
+  <updated>2026-08-13T11:14:17Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Microplastics Research and Resource Coordination Center (U24 - Clinical Trial Not Allowed)</title>
@@ -362,8 +362,7 @@ The goal of the Process Systems, Reaction Engineering, and Molecular Thermodynam
     <category term="Quantum science"/>
     <category term="Technology development"/>
     <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation | Posted | The Biophotonics program is part of the Engineering Biology and Health cluster, which also includes: 1) the Biosensing program; 2) the Cellular and Biochemical Engineering program; 3) the Disability and Rehabilitation Engineering program; and 4) the Engineering of Biomedical Systems program.
-The goal of the Biophotonics program is to explore the research frontiers in photonics principles, engineer…</summary>
+    <summary>U.S. National Science Foundation | Posted | The Biophotonics program is part of the Engineering Biology and Health cluster, which also includes: 1) the Biosensing program; 2) the Cellular and Biochemical Engineering program; 3) the Disability and Rehabilitation Engineering program; and 4) the Engineering of Biomedical Systems program. The goal of the Biophotonics program is to explore the research frontiers in photonics principles, engineer…</summary>
   </entry>
   <entry>
     <title>Electrochemical Systems</title>
@@ -413,8 +412,23 @@ The goal of the Interfacial Engineering program is to support fundamental resear
     <category term="Quantum science"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Posted | The Nanoscale Interactions program is part of the Environmental Engineering and Sustainability cluster, which also includes: 1) the Environmental Engineering program; and 2) the Environmental Sustainability program.
-The goal of the Nanoscale Interactions program is to support research to advance fundamental and quantitative understanding of the interactions of nanomaterials and nanosystems with bi…</summary>
+    <summary>U.S. National Science Foundation | Posted | The Nanoscale Interactions program is part of the Environmental Engineering and Sustainability cluster, which also includes: 1) the Environmental Engineering program; and 2) the Environmental Sustainability program. The goal of the Nanoscale Interactions program is to support research to advance fundamental and quantitative understanding of the interactions of nanomaterials and nanosystems with bi…</summary>
+  </entry>
+  <entry>
+    <title>Particulate and Multiphase Processes</title>
+    <link href="https://www.grants.gov/search-results-detail/347325"/>
+    <id>urn:funding-finder:grants-gov:347325</id>
+    <updated>2023-04-05T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Catalysis and reaction engineering"/>
+    <summary>U.S. National Science Foundation | Posted | The Particulate and Multiphase Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Thermal Transport Processes program. The goal of the Particulate and Multiphase Processes program is to support fundamental research on physico-chemical phenomena that govern particulate and multiphase…</summary>
   </entry>
   <entry>
     <title>Electronics, Photonics and Magnetic Devices</title>
@@ -474,9 +488,7 @@ The goal of the Nanoscale Interactions program is to support research to advance
     <category term="Separations and membranes"/>
     <category term="Water"/>
     <category term="Catalysis and reaction engineering"/>
-    <summary>U.S. National Science Foundation | Posted | The Environmental Engineering program is part of the Environmental Engineering and Sustainability cluster, which also includes 1) the Nanoscale Interactions program; and 2) the Environmental Sustainability program.
-Environmental engineering is an interdisciplinary field that applies chemical, biological, and physical scientific principles to protect human and ecological health.
-The goal of the Env…</summary>
+    <summary>U.S. National Science Foundation | Posted | The Environmental Engineering program is part of the Environmental Engineering and Sustainability cluster, which also includes 1) the Nanoscale Interactions program; and 2) the Environmental Sustainability program. Environmental engineering is an interdisciplinary field that applies chemical, biological, and physical scientific principles to protect human and ecological health. The goal of the Env…</summary>
   </entry>
   <entry>
     <title>Crosscutting Activities in Materials Research</title>

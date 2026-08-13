@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-08-12T13:09:49Z</updated>
+  <updated>2026-08-13T11:14:17Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
@@ -70,6 +70,63 @@
     <summary>National Institutes of Health | Closes 2026-11-01 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop, operate, and sustain a cloud-based data storage and computing platform that democratizes access to large-scale Alzheimer’s disease (AD) and AD-related dementias (ADRD) genetic and genomic data. The platform must be secure, scalable, and interoperable. The platform wil…</summary>
   </entry>
   <entry>
+    <title>National Resource Centers</title>
+    <link href="https://www.grants.gov/search-results-detail/362377"/>
+    <id>urn:funding-finder:grants-gov:362377</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <author><name>Administration for Children and Families - OFVPS</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Administration for Children and Families - OFVPS | Closes 2026-09-08 | The Resource Centers support efforts to prevent and respond to family, domestic, and dating violence by providing information, training, and technical assistance to individuals, organizations, government agencies, and communities.The National Resource Centers on Domestic Violence focus on strengthening services and knowledge in the field. One center provides training and technical assistance on do…</summary>
+  </entry>
+  <entry>
+    <title>U.S. Mission Iraq EducationUSA Roadshow</title>
+    <link href="https://www.grants.gov/search-results-detail/363547"/>
+    <id>urn:funding-finder:grants-gov:363547</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <author><name>U.S. Mission to Iraq</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <summary>U.S. Mission to Iraq | Closes 2026-09-11 | The EducationUSA AI Roadshow brings U.S. higher education experts to Iraq, showcasing U.S. artificial intelligence programs to attract international students and to build partnerships between universities to drive trade with key tech companies. Academic engagement strengthens U.S. foreign policy in a region heavily influenced by competing global powers. This type of engagement promotes U.S. standa…</summary>
+  </entry>
+  <entry>
+    <title>Pacific Disaster Center</title>
+    <link href="https://www.grants.gov/search-results-detail/363549"/>
+    <id>urn:funding-finder:grants-gov:363549</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <author><name>Washington Headquarters Services</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Washington Headquarters Services | Closes 2026-09-15 | On behalf of the Office of the Secretary of War/Office of the Under Secretary of War for Acquisition and Sustainment (OUSW(A&amp;S)) and the Office of the Under Secretary of War for Policy (OUSW(P)), the Washington Headquarters Services, Acquisition Directorate, (WHS/AD) seeks applications for sole-source awards from the University of Hawaii for the continuation of work for the Pacific Disaster Center…</summary>
+  </entry>
+  <entry>
+    <title>U.S.-Africa Strategic Investment Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363554"/>
+    <id>urn:funding-finder:grants-gov:363554</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <author><name>Bureau of African Affairs</name></author>
+    <category term="Environmental science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>Bureau of African Affairs | Closes 2027-05-27 | The U.S.-Africa Strategic Investment Program advances America's national interests by harnessing market-based, private sector-led growth across two strategic focus areas: Critical Minerals Investment and Commercial Diplomacy Acceleration. This program seeks market-based solutions that strengthen the environment for foreign investment in sub-Saharan Africa through transparent and competitive proces…</summary>
+  </entry>
+  <entry>
+    <title>Engineering (ENG): Electrical, Communications, and Computing Systems (ECCS)</title>
+    <link href="https://www.grants.gov/search-results-detail/363551"/>
+    <id>urn:funding-finder:grants-gov:363551</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Energy"/>
+    <category term="Quantum science"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-12 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research for electrical, communications and computing systems through the following programs: The Electronic, Photonic, Magnetic, and Quantum Devices (EPMQD) program supports foundational engineering research on novel classical and quantum devices, exploring matter’s electronic, photonic, and magnetic …</summary>
+  </entry>
+  <entry>
     <title>Fostering the Future Together: Empowering Youth for a Safe Digital World</title>
     <link href="https://www.grants.gov/search-results-detail/363426"/>
     <id>urn:funding-finder:grants-gov:363426</id>
@@ -77,7 +134,7 @@
     <author><name>Bureau of International Labor Affairs</name></author>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Bureau of International Labor Affairs | Closes 2026-09-10 | Questions regarding this Funding Opportunity Announcement (FOA) Forecast may be emailed to OGM_ILAB@dol.gov; however, please note there is limited information that may be shared with the public, as this FOA is currently under development. We encourage prospective applicants and interested parties to use the Grants.gov subscription option to register for future updates provided for this particular …</summary>
+    <summary>Bureau of International Labor Affairs | Closes 2026-09-10 | Questions regarding this Funding Opportunity Announcement (FOA) may be emailed to OGM_ILAB@dol.gov. We encourage prospective applicants and interested parties to use the Grants.gov subscription option to register for future updates provided for this particular FOA.</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Alaska Cooperative Ecosystem Studies Unit (CESU)</title>
@@ -466,18 +523,6 @@
     <summary>National Energy Technology Laboratory | Closes 2026-09-22 | Advancing Oil and Natural Gas Production and Delivery This Notice of Funding Opportunity (NOFO) is seeking proposals to advance cost-effective technologies for improving the efficiency, reliability, and resilience of the Unites States oil and natural gas supply chain. This funding opportunity spans research and development efforts focused on enhancing resource utilization, modernizing infrastructu…</summary>
   </entry>
   <entry>
-    <title>U.S.-Africa Strategic Investment Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363298"/>
-    <id>urn:funding-finder:grants-gov:363298</id>
-    <updated>2026-07-23T00:00:00Z</updated>
-    <author><name>Bureau of African Affairs</name></author>
-    <category term="Environmental science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>Bureau of African Affairs | Closes 2027-05-27 | The U.S.-Africa Strategic Investment Program advances America's national interests by harnessing market-based, private sector-led growth across two strategic focus areas: Critical Minerals Investment and Commercial Diplomacy Acceleration. This program seeks market-based solutions that strengthen the environment for foreign investment in sub-Saharan Africa through transparent and competitive proces…</summary>
-  </entry>
-  <entry>
     <title>Technology Enhanced Adoptive Family Recruiting and Matching</title>
     <link href="https://www.grants.gov/search-results-detail/361968"/>
     <id>urn:funding-finder:grants-gov:361968</id>
@@ -711,57 +756,5 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Arts and culture"/>
     <summary>National Institutes of Health | Closes 2026-10-19 | The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
-  </entry>
-  <entry>
-    <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
-    <link href="https://www.grants.gov/search-results-detail/362900"/>
-    <id>urn:funding-finder:grants-gov:362900</id>
-    <updated>2026-06-22T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Cybersecurity"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <category term="Data science"/>
-    <category term="Energy"/>
-    <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | Project Background, Goals, and ObjectivesIn an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will leave…</summary>
-  </entry>
-  <entry>
-    <title>Tribal Colleges Extension Program - Capacity Applications</title>
-    <link href="https://www.grants.gov/search-results-detail/362780"/>
-    <id>urn:funding-finder:grants-gov:362780</id>
-    <updated>2026-06-12T00:00:00Z</updated>
-    <author><name>National Institute of Food and Agriculture</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Community development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>National Institute of Food and Agriculture | Closes 2026-08-14 | The TCEP-CA under assistance listing 10.517, supports informal, community-based extension projects that address agriculture, youths, economic development, healthy lifestyles, natural resources, or other topics important to Tribal communities. This NOFO will begin a new 4-year continuation funding cycle.</summary>
-  </entry>
-  <entry>
-    <title>HEAL Initiative: Optimization of Therapeutic Medical Devices through Team Science Mechanistic Research (RM1)</title>
-    <link href="https://www.grants.gov/search-results-detail/361520"/>
-    <id>urn:funding-finder:grants-gov:361520</id>
-    <updated>2026-06-11T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2026-10-30 | The National Institute of Neurological Disorders and Stroke (NINDS), with other NIH Institutes and Centers (ICs), intends to publish a Notice of Funding Opportunity (NOFO) to investigate the mechanisms of action of therapeutic medical devices with the overall goal of improving clinical outcomes with device-based approaches. Medical devices are essential in managing health conditions, complementing…</summary>
-  </entry>
-  <entry>
-    <title>Decentralized Artificial Intelligence through Controlled Emergence (DICE)</title>
-    <link href="https://www.grants.gov/search-results-detail/362743"/>
-    <id>urn:funding-finder:grants-gov:362743</id>
-    <updated>2026-06-10T00:00:00Z</updated>
-    <author><name>DARPA - Information Processing Technologies Office</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Environmental science"/>
-    <summary>DARPA - Information Processing Technologies Office | Closes 2026-08-25 | The DICE program seeks to develop the theory and algorithms for decentralized coordination and local inference control to enable a scalable, adaptive, and resilient collective of heterogeneous AI agents that can autonomously execute sustained long-time-horizon missions in contested environments while remaining under human control. In contrast to small-scale, rigid, and fragile centralized orchestr…</summary>
   </entry>
 </feed>
