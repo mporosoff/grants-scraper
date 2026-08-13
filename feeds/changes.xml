@@ -4,8 +4,24 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/changes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/changes.xml</id>
-  <updated>2026-08-13T11:14:25Z</updated>
+  <updated>2026-08-13T12:37:16Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Closing soon: Cooperative Agreement for Affiliated Partner with the Californian Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/363545"/>
+    <id>urn:funding-finder:change:f0193ddec6a49a8bf107</id>
+    <updated>2026-08-13T12:35:15.964883Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-12</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Cooperative Agreement for Affiliated Partner with the Colorado Plateau Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/363544"/>
+    <id>urn:funding-finder:change:515bad8571b4200eef76</id>
+    <updated>2026-08-13T12:35:15.964883Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-12</summary>
+  </entry>
   <entry>
     <title>Opportunity amended: Combustion and Fire Systems (CFS)</title>
     <link href="https://www.grants.gov/search-results-detail/347509"/>
@@ -13,14 +29,6 @@
     <updated>2026-08-13T11:11:42.582482Z</updated>
     <category term="amended"/>
     <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Cooperative Agreement for Affiliated Partner with the Californian Cooperative Ecosystem Studies Unit (CESU)</title>
-    <link href="https://www.grants.gov/search-results-detail/363545"/>
-    <id>urn:funding-finder:change:f0193ddec6a49a8bf107</id>
-    <updated>2026-08-13T11:11:42.582482Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-12</summary>
   </entry>
   <entry>
     <title>Opportunity amended: Forest Legacy Program - FY2028 Funding</title>
@@ -341,14 +349,6 @@
     <updated>2026-08-13T11:11:42.582482Z</updated>
     <category term="new"/>
     <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Cooperative Agreement for Affiliated Partner with the Colorado Plateau Cooperative Ecosystem Studies Unit (CESU)</title>
-    <link href="https://www.grants.gov/search-results-detail/363544"/>
-    <id>urn:funding-finder:change:515bad8571b4200eef76</id>
-    <updated>2026-08-13T11:11:42.582482Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-12</summary>
   </entry>
   <entry>
     <title>Opportunity amended: FY26 Bus Safety, Accessibility, and Innovation Notice of Funding Opportunity</title>
