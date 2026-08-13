@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/carbon-management.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/carbon-management.xml</id>
-  <updated>2026-08-13T11:14:17Z</updated>
+  <updated>2026-08-13T12:27:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NOI: PROSPECT Program: Providing Opportunities for Specialized Education in Critical Technologies</title>
@@ -19,6 +19,23 @@
     <category term="Carbon management"/>
     <category term="Climate change"/>
     <summary>Golden Field Office | Closes 2027-01-15 | The U.S Department of Energy (DOE)’s Office of Critical Minerals and Energy Innovation (CMEI) intends to establish, on behalf of the Analysis and Strategy Office (ASO), the PROSPECT Program-Providing Opportunities for Specialized Education in Critical Technologies-and anticipates investing up to $100 million, subject to the availability of appropriated funds, to strengthen the nation's educational…</summary>
+  </entry>
+  <entry>
+    <title>Energy, Water, and Resource Engineering (EWRE)</title>
+    <link href="https://www.nsf.gov/funding/opportunities/energy-water-resource-engineering"/>
+    <id>urn:funding-finder:u-s-national-science-foundation:nsf-cbet%3APD-26-370Y</id>
+    <updated>2026-04-24T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Infectious disease"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Technology development"/>
+    <category term="Carbon management"/>
+    <summary>U.S. National Science Foundation | Posted | The Energy, Water, and Resource Engineering (EWRE) program supports fundamental research to advance energy, water, and resource management and to safeguard health. Better use of domestic resources will make U.S. manufacturing, energy and water systems more efficient and secure.
+EWRE supports research that creates domestic sources of energy, advances water management, and recovers resources using c…</summary>
   </entry>
   <entry>
     <title>INSPIRING GENERATIONS OF NEW INNOVATORS TO IMPACT TECHNOLOGIES IN ENERGY 2026 (IGNIITE 2026)</title>
@@ -98,87 +115,6 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <summary>U.S. National Science Foundation | Closes 2026-09-29 | Plasma science is a transdisciplinary field of research where fundamental studies in many disciplines, including plasma physics, plasma chemistry, materials science, and space science, come together to advance knowledge for discovery and technological innovation. The primary goal of the ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) program is to identify and capitali…</summary>
   </entry>
   <entry>
-    <title>Combustion and Fire Systems (CFS)</title>
-    <link href="https://www.grants.gov/search-results-detail/347509"/>
-    <id>urn:funding-finder:grants-gov:347509</id>
-    <updated>2023-04-14T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Arts and culture"/>
-    <category term="Carbon management"/>
-    <category term="Climate change"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation | Posted | The Combustion and Fire Systems program is part of the Transport Phenomena cluster, which also includes 1) the Fluid Dynamics program; 2) the Particulate and Multiphase Processes program; and 3) the Thermal Transport Processes program. The goal of the Combustion and Fire Systems program is to create new knowledge to support advances in clean energy, climate change mitigation, a cleaner environment…</summary>
-  </entry>
-  <entry>
-    <title>Environmental Sustainability</title>
-    <link href="https://www.grants.gov/search-results-detail/347328"/>
-    <id>urn:funding-finder:grants-gov:347328</id>
-    <updated>2023-04-05T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Carbon management"/>
-    <category term="Climate change"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>U.S. National Science Foundation | Posted | The Environmental Sustainability program is part of the Environmental Engineering and Sustainability cluster together with 1) the Environmental Engineering program and 2) the Nanoscale Interactions program. The goal of the Environmental Sustainability program is to promote sustainable engineered systems that support human well-being and that are also compatible with sustaining natural (environment…</summary>
-  </entry>
-  <entry>
-    <title>Interfacial Engineering</title>
-    <link href="https://www.grants.gov/search-results-detail/347326"/>
-    <id>urn:funding-finder:grants-gov:347326</id>
-    <updated>2023-04-05T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Materials science"/>
-    <category term="Separations and membranes"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation | Posted | The Interfacial Engineering program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Electrochemical Systems program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
-The goal of the Interfacial Engineering program is to support fundamental research on atomic- and molecular-scale interfacial phenomena and …</summary>
-  </entry>
-  <entry>
-    <title>Particulate and Multiphase Processes</title>
-    <link href="https://www.grants.gov/search-results-detail/347325"/>
-    <id>urn:funding-finder:grants-gov:347325</id>
-    <updated>2023-04-05T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Separations and membranes"/>
-    <category term="Catalysis and reaction engineering"/>
-    <summary>U.S. National Science Foundation | Posted | The Particulate and Multiphase Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Thermal Transport Processes program. The goal of the Particulate and Multiphase Processes program is to support fundamental research on physico-chemical phenomena that govern particulate and multiphase…</summary>
-  </entry>
-  <entry>
-    <title>Thermal Transport Processes (TTP)</title>
-    <link href="https://www.grants.gov/search-results-detail/347324"/>
-    <id>urn:funding-finder:grants-gov:347324</id>
-    <updated>2023-04-05T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Climate change"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation | Posted | The Thermal Transport Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Particulate and Multiphase Processes program. The Thermal Transport Processes program supports engineering research projects that lay the foundation for new advances in thermal transport phenomena. These projec…</summary>
-  </entry>
-  <entry>
     <title>Foundational Research in Robotics</title>
     <link href="https://www.grants.gov/search-results-detail/324369"/>
     <id>urn:funding-finder:grants-gov:324369</id>
@@ -193,22 +129,6 @@ The goal of the Interfacial Engineering program is to support fundamental resear
     <category term="Carbon management"/>
     <category term="Climate change"/>
     <summary>U.S. National Science Foundation | Posted | The Foundational Research in Robotics (FRR) program, jointly led by the CISE and ENG Directorates, supports research on robotic systems that exhibit significant levels of both computational capability and physical complexity. For the purposes of this program, a robot is defined as intelligence embodied in an engineered construct, with the ability to process information, sense, plan, and move withi…</summary>
-  </entry>
-  <entry>
-    <title>Environmental Engineering</title>
-    <link href="https://www.grants.gov/search-results-detail/320490"/>
-    <id>urn:funding-finder:grants-gov:320490</id>
-    <updated>2019-09-11T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Materials science"/>
-    <category term="Separations and membranes"/>
-    <category term="Water"/>
-    <category term="Catalysis and reaction engineering"/>
-    <summary>U.S. National Science Foundation | Posted | The Environmental Engineering program is part of the Environmental Engineering and Sustainability cluster, which also includes 1) the Nanoscale Interactions program; and 2) the Environmental Sustainability program. Environmental engineering is an interdisciplinary field that applies chemical, biological, and physical scientific principles to protect human and ecological health. The goal of the Env…</summary>
   </entry>
   <entry>
     <title>Engineering Design and Systems Engineering</title>

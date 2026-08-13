@@ -889,6 +889,11 @@ textarea:focus {
   background: #fff2d7;
 }
 
+.badge.archived {
+  color: #5d477e;
+  background: #f1eafb;
+}
+
 .badge.warning {
   color: #8b4d00;
   background: #fff0df;

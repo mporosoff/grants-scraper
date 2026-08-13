@@ -10,6 +10,7 @@ from scripts.enrich_catalog import (
     merge_detail,
     select_primary_document,
 )
+from scripts.nsf_funding import parse_nsf_funding_page
 
 
 def base_record():
@@ -151,6 +152,40 @@ class EnrichmentTests(unittest.TestCase):
             ),
             0,
         )
+
+    def test_detects_archived_status_on_any_official_nsf_program_page(self):
+        html = """
+        <main>
+          <h1>Decision, Risk and Management Sciences</h1>
+          <h2>Status: Archived</h2>
+          <h2>Archived funding opportunity</h2>
+          <p>This document has been archived.</p>
+          <div class="field-funding-synopsis">
+            <h2>Synopsis</h2>
+            <p>This NSF program supported fundamental research on decisions,
+            risk, and management across social and economic systems.</p>
+          </div>
+          <h2>Program status: Archived</h2>
+        </main>
+        """
+
+        page = parse_nsf_funding_page(html)
+
+        self.assertEqual(page["status"], "archived")
+        self.assertIn("fundamental research", page["text"])
+
+    def test_checks_archive_marker_even_without_structured_synopsis(self):
+        html = """
+        <main>
+          <h1>NSF-wide funding opportunity</h1>
+          <p>Refer to the solicitation for the full program description.</p>
+        </main>
+        """
+
+        page = parse_nsf_funding_page(html, require_synopsis=False)
+
+        self.assertEqual(page["status"], "not_archived")
+        self.assertEqual(page["text"], "")
 
     def test_selects_explicit_revised_nofo_instead_of_supplement(self):
         attachments = [
@@ -406,15 +441,72 @@ class EnrichmentTests(unittest.TestCase):
         self.assertEqual(len(agency_calls), 1)
         self.assertEqual(
             first["diagnostics"]["detail_enrichment"][
-                "agency_synopsis_failed_count"
+                "agency_funding_page_failed_count"
             ],
             1,
         )
         self.assertEqual(
             second["diagnostics"]["detail_enrichment"][
-                "agency_synopsis_failed_count"
+                "agency_funding_page_failed_count"
             ],
             0,
+        )
+
+    def test_retains_nsf_archived_program_behind_an_archived_status(self):
+        record = base_record()
+        record.update(
+            {
+                "title": "Decision, Risk and Management Sciences",
+                "opportunity_number": "PD-XX-0001",
+                "agency": "U.S. National Science Foundation",
+                "agency_code": "NSF-SBE",
+                "description": "A current-looking Grants.gov description.",
+                "close_date": None,
+                "archive_date": None,
+                "status_verification_required": True,
+                "deadlines": [],
+            }
+        )
+        catalog = {
+            "generated_at": "2026-07-25T14:00:00Z",
+            "record_count": 1,
+            "source": {"name": "Grants.gov"},
+            "diagnostics": {},
+            "opportunities": [record],
+        }
+        detail = detail_response(close_date=None)
+        detail["synopsis"]["fundingDescLinkUrl"] = (
+            "https://www.nsf.gov/funding/opportunities/"
+            "decision-risk-management-sciences"
+        )
+
+        enriched, _ = enrich_catalog(
+            catalog,
+            empty_cache(),
+            max_updates=10,
+            max_agency_updates=10,
+            request_delay=0,
+            fetcher=lambda opportunity_id: {"data": detail},
+            agency_synopsis_fetcher=lambda url: {
+                "text": "",
+                "status": "archived",
+                "source_url": url,
+                "replacement_opportunity_number": None,
+            },
+            now=datetime(2026, 7, 25, 14, tzinfo=timezone.utc),
+        )
+
+        self.assertEqual(enriched["record_count"], 1)
+        archived = enriched["opportunities"][0]
+        self.assertEqual(archived["status"], "archived")
+        self.assertEqual(archived["actionability_status"], "archived_by_agency")
+        self.assertEqual(enriched["facets"]["status"]["archived"], 1)
+        self.assertIn("decision", enriched["search_index"]["postings"])
+        self.assertEqual(
+            enriched["diagnostics"]["detail_enrichment"][
+                "agency_archived_count"
+            ],
+            1,
         )
 
 

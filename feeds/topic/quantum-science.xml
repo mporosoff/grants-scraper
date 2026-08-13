@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml</id>
-  <updated>2026-08-13T11:14:17Z</updated>
+  <updated>2026-08-13T12:27:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Engineering (ENG): Electrical, Communications, and Computing Systems (ECCS)</title>
@@ -152,40 +152,6 @@
     <summary>U.S. National Science Foundation | Posted | CMMT supports theoretical and computational materials research in the topical areas represented in DMR's other Topical Materials Research Programs (these are also variously known as Individual Investigator Award (IIA) Programs, or Core Programs, or Disciplinary Programs), which are: Condensed Matter Physics (CMP), Biomaterials (BMAT), Ceramics (CER), Electronic and Photonic Materials (EPM), Metals…</summary>
   </entry>
   <entry>
-    <title>Catalysis</title>
-    <link href="https://www.grants.gov/search-results-detail/348932"/>
-    <id>urn:funding-finder:grants-gov:348932</id>
-    <updated>2023-06-27T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Climate change"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Quantum science"/>
-    <summary>U.S. National Science Foundation | Posted | The Catalysis program is part of the Chemical Process Systems cluster, which also includes: 1) the Electrochemical Systems program; 2) the Interfacial Engineering program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
-The goals of the Catalysis program are to increase fundamental understanding in catalytic engineering science and to advance the development…</summary>
-  </entry>
-  <entry>
-    <title>Process Systems, Reaction Engineering, and Molecular Thermodynamics</title>
-    <link href="https://www.grants.gov/search-results-detail/348793"/>
-    <id>urn:funding-finder:grants-gov:348793</id>
-    <updated>2023-06-18T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Quantum science"/>
-    <summary>U.S. National Science Foundation | Posted | The Process Systems, Reaction Engineering, and Molecular Thermodynamics program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Electrochemical Systems program; and 3) the Interfacial Engineering program.
-The goal of the Process Systems, Reaction Engineering, and Molecular Thermodynamics program is to advance fundamental engineering research o…</summary>
-  </entry>
-  <entry>
     <title>Centers of Research Excellence in Science and Technology</title>
     <link href="https://www.grants.gov/search-results-detail/348375"/>
     <id>urn:funding-finder:grants-gov:348375</id>
@@ -214,84 +180,6 @@ The goal of the Process Systems, Reaction Engineering, and Molecular Thermodynam
     <category term="Data science"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Closes 2026-09-30 | This solicitation applies to six (of the nine) CHE Disciplinary Research Programs: Chemical Catalysis (CAT); Chemical Measurement and Imaging (CMI); Chemical Mechanism, Function and Properties (CMFP); Chemical Synthesis (SYN); Environmental Chemical Sciences (ECS); and Macromolecular, Supramolecular and Nanochemistry (MSN). All proposals submitted to these six CHE Disciplinary Research Programs (o…</summary>
-  </entry>
-  <entry>
-    <title>Biophotonics</title>
-    <link href="https://www.grants.gov/search-results-detail/347327"/>
-    <id>urn:funding-finder:grants-gov:347327</id>
-    <updated>2023-04-05T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Education and workforce"/>
-    <category term="Materials science"/>
-    <category term="Neuroscience"/>
-    <category term="Quantum science"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation | Posted | The Biophotonics program is part of the Engineering Biology and Health cluster, which also includes: 1) the Biosensing program; 2) the Cellular and Biochemical Engineering program; 3) the Disability and Rehabilitation Engineering program; and 4) the Engineering of Biomedical Systems program. The goal of the Biophotonics program is to explore the research frontiers in photonics principles, engineer…</summary>
-  </entry>
-  <entry>
-    <title>Nanoscale Interactions</title>
-    <link href="https://www.grants.gov/search-results-detail/347323"/>
-    <id>urn:funding-finder:grants-gov:347323</id>
-    <updated>2023-04-05T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Quantum science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Posted | The Nanoscale Interactions program is part of the Environmental Engineering and Sustainability cluster, which also includes: 1) the Environmental Engineering program; and 2) the Environmental Sustainability program. The goal of the Nanoscale Interactions program is to support research to advance fundamental and quantitative understanding of the interactions of nanomaterials and nanosystems with bi…</summary>
-  </entry>
-  <entry>
-    <title>Thermal Transport Processes (TTP)</title>
-    <link href="https://www.grants.gov/search-results-detail/347324"/>
-    <id>urn:funding-finder:grants-gov:347324</id>
-    <updated>2023-04-05T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Climate change"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation | Posted | The Thermal Transport Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Particulate and Multiphase Processes program. The Thermal Transport Processes program supports engineering research projects that lay the foundation for new advances in thermal transport phenomena. These projec…</summary>
-  </entry>
-  <entry>
-    <title>Communications, Circuits, and Sensing-Systems</title>
-    <link href="https://www.grants.gov/search-results-detail/346204"/>
-    <id>urn:funding-finder:grants-gov:346204</id>
-    <updated>2023-02-17T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Neuroscience"/>
-    <category term="Quantum science"/>
-    <category term="Transportation"/>
-    <summary>U.S. National Science Foundation | Posted | The Communications, Circuits, and Sensing-Systems (CCSS) Program supports innovative research in circuit and system hardware and signal processing techniques. CCSS also supports system and network architectures for communications and sensing to enable the next-generation cyber-physical systems (CPS) that leverage computation, communication, and sensing integrated with physical domains. CCSS invest…</summary>
-  </entry>
-  <entry>
-    <title>Electronics, Photonics and Magnetic Devices</title>
-    <link href="https://www.grants.gov/search-results-detail/345872"/>
-    <id>urn:funding-finder:grants-gov:345872</id>
-    <updated>2023-02-08T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Quantum science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Materials science"/>
-    <summary>U.S. National Science Foundation | Posted | The Electronics, Photonics and Magnetic Devices (EPMD) Program supports innovative research on novel devices based on the principles of electronics, optics and photonics, optoelectronics, magnetics, opto- and electromechanics, electromagnetics, and related physical phenomena. EPMD’s goal is to advance the frontiers of micro-, nano- and quantum-based devices operating within the electromagnetic spe…</summary>
   </entry>
   <entry>
     <title>Division of Chemistry: Disciplinary Research Programs: No Deadline Pilot</title>

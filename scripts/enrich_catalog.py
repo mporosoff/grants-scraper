@@ -8,6 +8,7 @@ then caches a compact set of official detail fields:
 - agency notice and document links;
 - deadline notes, clock time, timezone, and preliminary-stage signals;
 - award fields that are missing from the XML extract; and
+- authoritative NSF page lifecycle, including explicit archived status;
 - authoritative NSF synopsis text when Grants.gov has dropped word spacing;
 - revision/history counters used to surface verification warnings.
 
@@ -16,9 +17,9 @@ deadlines remain visibly marked for verification.
 """
 
 import argparse
+from collections import Counter
 from copy import deepcopy
 from datetime import date, datetime, timezone
-from html.parser import HTMLParser
 import json
 from pathlib import Path
 import re
@@ -33,6 +34,7 @@ from scripts.build_catalog import (
     USER_AGENT,
     build_search_index,
     clean_text,
+    facet_counts,
     iso_utc,
     numeric,
     safe_http_url,
@@ -43,12 +45,16 @@ from scripts.pull_grants import (
     fetch_detail,
     normalize,
 )
+from scripts.nsf_funding import (
+    NSF_FUNDING_PAGE_PARSER_VERSION,
+    extract_nsf_synopsis as parse_nsf_synopsis,
+    parse_nsf_funding_page,
+)
 
 
 CACHE_SCHEMA_VERSION = 2
 CONTACT_SCHEMA_VERSION = 1
-NSF_SYNOPSIS_PARSER_VERSION = 1
-AGENCY_SYNOPSIS_RECHECK_DAYS = 14
+AGENCY_FUNDING_PAGE_RECHECK_DAYS = 14
 DEFAULT_CATALOG = Path("data/opportunities.js")
 DEFAULT_CACHE = Path("data/opportunity_enrichment.json")
 API_NOTICE = (
@@ -95,64 +101,6 @@ DESCRIPTION_SPACING_PATTERNS = (
     re.compile(r"[a-z]\)[A-Za-z]"),
     re.compile(r"[a-z]\([A-Z]{2,}\)"),
 )
-NSF_SYNOPSIS_BLOCK_TAGS = {
-    "address",
-    "article",
-    "blockquote",
-    "br",
-    "div",
-    "h1",
-    "h2",
-    "h3",
-    "h4",
-    "h5",
-    "h6",
-    "li",
-    "ol",
-    "p",
-    "section",
-    "table",
-    "tr",
-    "ul",
-}
-
-
-class NsfSynopsisParser(HTMLParser):
-    """Extract the official synopsis while preserving inline word boundaries."""
-
-    def __init__(self):
-        super().__init__(convert_charrefs=True)
-        self.capture_depth = 0
-        self.parts = []
-
-    def handle_starttag(self, tag, attrs):
-        classes = dict(attrs).get("class", "").split()
-        if not self.capture_depth:
-            if "field-funding-synopsis" in classes:
-                self.capture_depth = 1
-            return
-        self.capture_depth += 1
-        if tag in NSF_SYNOPSIS_BLOCK_TAGS:
-            self.parts.append("\n")
-        if tag == "li":
-            self.parts.append("• ")
-
-    def handle_endtag(self, tag):
-        if not self.capture_depth:
-            return
-        if tag in NSF_SYNOPSIS_BLOCK_TAGS:
-            self.parts.append("\n")
-        self.capture_depth -= 1
-
-    def handle_data(self, data):
-        if self.capture_depth:
-            self.parts.append(re.sub(r"\s+", " ", data))
-
-    def synopsis(self):
-        text = clean_text("".join(self.parts)) or ""
-        return re.sub(r"^Synopsis(?:\s+|$)", "", text, count=1).strip()
-
-
 def utc_now():
     return datetime.now(timezone.utc)
 
@@ -303,18 +251,12 @@ def is_nsf_url(value):
 
 
 def extract_nsf_synopsis(html):
-    parser = NsfSynopsisParser()
-    parser.feed(str(html or ""))
-    parser.close()
-    text = parser.synopsis()
-    if len(text) < 100:
-        raise RuntimeError("official NSF page did not contain a usable synopsis")
-    return text[:12000]
+    return parse_nsf_synopsis(html)
 
 
-def fetch_nsf_synopsis(url):
+def fetch_nsf_funding_page(url):
     if not is_nsf_url(url):
-        raise RuntimeError("agency synopsis URL is not an NSF page")
+        raise RuntimeError("agency funding-page URL is not an NSF page")
     response = requests.get(
         url,
         headers={"User-Agent": USER_AGENT},
@@ -322,22 +264,25 @@ def fetch_nsf_synopsis(url):
     )
     response.raise_for_status()
     if not is_nsf_url(response.url):
-        raise RuntimeError("NSF synopsis URL redirected outside nsf.gov")
+        raise RuntimeError("NSF funding-page URL redirected outside nsf.gov")
     content_type = response.headers.get("content-type", "").casefold()
     if "html" not in content_type:
-        raise RuntimeError("official NSF synopsis source is not HTML")
+        raise RuntimeError("official NSF funding-page source is not HTML")
     if len(response.content) > 5_000_000:
-        raise RuntimeError("official NSF synopsis page is unexpectedly large")
+        raise RuntimeError("official NSF funding page is unexpectedly large")
     return {
-        "text": extract_nsf_synopsis(response.text),
+        **parse_nsf_funding_page(response.text, require_synopsis=False),
         "source_url": response.url,
     }
 
 
-def agency_synopsis_due(record, detail_entry, as_of):
-    if not detail_entry or not description_spacing_issue_count(
-        record.get("description")
-    ):
+# Compatibility alias for integrations that imported the former helper.
+fetch_nsf_synopsis = fetch_nsf_funding_page
+
+
+def agency_funding_page_due(record, detail_entry, as_of):
+    """Return whether an undated NSF program needs an official status check."""
+    if not detail_entry:
         return False
     agency_url = (
         detail_entry.get("funding_opportunity_url")
@@ -345,23 +290,30 @@ def agency_synopsis_due(record, detail_entry, as_of):
     )
     if not is_nsf_url(agency_url):
         return False
-    last_error = detail_entry.get("agency_synopsis_error") or {}
+    is_nsf_record = (
+        str(record.get("agency_code") or "").casefold().startswith("nsf")
+        or "national science foundation"
+        in str(record.get("agency") or "").casefold()
+    )
+    if not is_nsf_record:
+        return False
+    last_error = detail_entry.get("agency_funding_page_error") or {}
     error_checked_at = parse_api_date(last_error.get("checked_at"))
     if (
-        last_error.get("parser_version") == NSF_SYNOPSIS_PARSER_VERSION
+        last_error.get("parser_version") == NSF_FUNDING_PAGE_PARSER_VERSION
         and error_checked_at
         and (as_of - date.fromisoformat(error_checked_at)).days
-        < AGENCY_SYNOPSIS_RECHECK_DAYS
+        < AGENCY_FUNDING_PAGE_RECHECK_DAYS
     ):
         return False
-    synopsis = detail_entry.get("agency_synopsis") or {}
-    if synopsis.get("parser_version") != NSF_SYNOPSIS_PARSER_VERSION:
+    page = detail_entry.get("agency_funding_page") or {}
+    if page.get("parser_version") != NSF_FUNDING_PAGE_PARSER_VERSION:
         return True
-    checked_at = parse_api_date(synopsis.get("fetched_at"))
+    checked_at = parse_api_date(page.get("fetched_at"))
     if not checked_at:
         return True
     return (as_of - date.fromisoformat(checked_at)).days >= (
-        AGENCY_SYNOPSIS_RECHECK_DAYS
+        AGENCY_FUNDING_PAGE_RECHECK_DAYS
     )
 
 
@@ -636,17 +588,23 @@ def merge_detail(record, detail_entry, as_of):
         or output.get("funding_opportunity_url")
     )
     output["funding_opportunity_url"] = agency_url
+    agency_page = detail_entry.get("agency_funding_page") or {}
     agency_synopsis = detail_entry.get("agency_synopsis") or {}
-    agency_description = clean_text(agency_synopsis.get("text"))
+    agency_description_source = agency_page or agency_synopsis
+    agency_description = clean_text(agency_description_source.get("text"))
     if (
         description_spacing_issue_count(output.get("description"))
         and agency_description
-        and is_nsf_url(agency_synopsis.get("source_url"))
+        and is_nsf_url(agency_description_source.get("source_url"))
     ):
         output["description"] = agency_description[:12000]
         output["description_source"] = "Official NSF funding page"
-        output["description_source_url"] = agency_synopsis["source_url"]
-        output["description_enriched_at"] = agency_synopsis.get("fetched_at")
+        output["description_source_url"] = agency_description_source[
+            "source_url"
+        ]
+        output["description_enriched_at"] = agency_description_source.get(
+            "fetched_at"
+        )
 
     primary = detail_entry.get("primary_document") or {}
     if primary.get("url"):
@@ -760,6 +718,24 @@ def merge_detail(record, detail_entry, as_of):
         output["actionability_status"] = "current_by_structured_date"
 
     output["deadlines"] = deadlines
+    if agency_page.get("status") in {
+        "current",
+        "archived",
+        "not_archived",
+    }:
+        output["agency_status"] = agency_page["status"]
+        output["agency_status_checked_at"] = agency_page.get("fetched_at")
+        output["agency_status_source_url"] = agency_page.get("source_url")
+        output["replacement_opportunity_number"] = agency_page.get(
+            "replacement_opportunity_number"
+        )
+    if agency_page.get("status") == "current" and not output.get("close_date"):
+        output["status_verification_required"] = False
+        output["actionability_status"] = "current_by_agency"
+    if agency_page.get("status") == "archived":
+        output["status"] = "archived"
+        output["status_verification_required"] = False
+        output["actionability_status"] = "archived_by_agency"
     return output
 
 
@@ -905,7 +881,7 @@ def enrich_catalog(
     agency_candidates = [
         record
         for record in records
-        if agency_synopsis_due(
+        if agency_funding_page_due(
             record,
             cached_records.get(str(record.get("opportunity_id"))),
             now.date(),
@@ -913,7 +889,9 @@ def enrich_catalog(
     ]
     agency_candidates.sort(
         key=lambda record: (
+            0 if record.get("status_verification_required") else 1,
             -description_spacing_issue_count(record.get("description")),
+            record.get("last_updated") or "",
             record.get("close_date") or "9999-12-31",
             record.get("title") or "",
         )
@@ -928,29 +906,44 @@ def enrich_catalog(
             or record.get("funding_opportunity_url")
         )
         try:
-            synopsis = agency_synopsis_fetcher(agency_url)
-            synopsis_text = clean_text(synopsis.get("text"))
-            source_url = safe_http_url(synopsis.get("source_url"))
-            if not synopsis_text or len(synopsis_text) < 100:
+            page = agency_synopsis_fetcher(agency_url)
+            synopsis_text = clean_text(
+                page.get("text") or page.get("synopsis")
+            )
+            source_url = safe_http_url(page.get("source_url"))
+            page_status = str(page.get("status") or "current").casefold()
+            if page_status not in {
+                "current",
+                "archived",
+                "not_archived",
+            }:
+                raise RuntimeError(
+                    "official agency page returned an invalid lifecycle status"
+                )
+            if page_status == "current" and len(synopsis_text) < 100:
                 raise RuntimeError(
                     "official agency page did not return a usable synopsis"
                 )
             if not is_nsf_url(source_url):
                 raise RuntimeError(
-                    "official agency synopsis source is not an NSF page"
+                    "official agency funding-page source is not an NSF page"
                 )
-            detail_entry["agency_synopsis"] = {
-                "text": synopsis_text[:12000],
+            detail_entry["agency_funding_page"] = {
+                "text": (synopsis_text or "")[:12000],
                 "source_url": source_url,
                 "fetched_at": iso_utc(now),
-                "parser_version": NSF_SYNOPSIS_PARSER_VERSION,
+                "parser_version": NSF_FUNDING_PAGE_PARSER_VERSION,
+                "status": page_status,
+                "replacement_opportunity_number": page.get(
+                    "replacement_opportunity_number"
+                ),
             }
-            detail_entry.pop("agency_synopsis_error", None)
+            detail_entry.pop("agency_funding_page_error", None)
             agency_refreshed += 1
         except Exception as exc:  # noqa: BLE001 - retain Grants.gov text
-            detail_entry["agency_synopsis_error"] = {
+            detail_entry["agency_funding_page_error"] = {
                 "checked_at": iso_utc(now),
-                "parser_version": NSF_SYNOPSIS_PARSER_VERSION,
+                "parser_version": NSF_FUNDING_PAGE_PARSER_VERSION,
                 "error": str(exc)[:300],
             }
             agency_failures.append(
@@ -962,7 +955,7 @@ def enrich_catalog(
         if request_delay:
             time.sleep(request_delay)
 
-    merged = [
+    merged_records = [
         merge_detail(
             record,
             cached_records.get(str(record.get("opportunity_id"))),
@@ -970,25 +963,48 @@ def enrich_catalog(
         )
         for record in records
     ]
+    archived_records = [
+        record
+        for record in merged_records
+        if record.get("status") == "archived"
+    ]
+    merged = merged_records
     output = deepcopy(catalog)
     output["opportunities"] = merged
     output["record_count"] = len(merged)
+    output["status_counts"] = dict(
+        sorted(Counter(record.get("status") for record in merged).items())
+    )
+    output["facets"] = facet_counts(merged)
     output["search_index"] = build_search_index(merged)
     output.setdefault("source", {})["api_enrichment"] = {
         "endpoint": "https://api.grants.gov/v1/api/fetchOpportunity",
         "notice": API_NOTICE,
     }
-    output["source"]["agency_synopsis_enrichment"] = {
+    output["source"]["agency_funding_page_enrichment"] = {
         "scope": (
-            "Official NSF funding pages when Grants.gov synopsis spacing "
-            "is damaged"
+            "Official NSF funding pages for undated program lifecycle "
+            "verification and damaged-synopsis repair"
         ),
-        "recheck_days": AGENCY_SYNOPSIS_RECHECK_DAYS,
-        "parser_version": NSF_SYNOPSIS_PARSER_VERSION,
+        "recheck_days": AGENCY_FUNDING_PAGE_RECHECK_DAYS,
+        "parser_version": NSF_FUNDING_PAGE_PARSER_VERSION,
     }
     output["detail_enrichment_generated_at"] = iso_utc(now)
     output.setdefault("diagnostics", {})["detail_enrichment"] = {
         **enrichment_metrics(merged),
+        "agency_archived_count": len(archived_records),
+        "agency_archived_records": [
+            {
+                "opportunity_id": record.get("opportunity_id"),
+                "opportunity_number": record.get("opportunity_number"),
+                "title": record.get("title"),
+                "source_url": record.get("agency_status_source_url"),
+                "replacement_opportunity_number": record.get(
+                    "replacement_opportunity_number"
+                ),
+            }
+            for record in archived_records
+        ],
         "refreshed_count": refreshed,
         "failed_count": len(failures),
         "remaining_update_count": max(
@@ -996,14 +1012,14 @@ def enrich_catalog(
             len(candidates) - min(len(candidates), max_updates),
         ),
         "failures": failures[:20],
-        "agency_synopsis_refreshed_count": agency_refreshed,
-        "agency_synopsis_failed_count": len(agency_failures),
-        "agency_synopsis_remaining_update_count": max(
+        "agency_funding_page_refreshed_count": agency_refreshed,
+        "agency_funding_page_failed_count": len(agency_failures),
+        "agency_funding_page_remaining_update_count": max(
             0,
             len(agency_candidates)
             - min(len(agency_candidates), max_agency_updates),
         ),
-        "agency_synopsis_failures": agency_failures[:20],
+        "agency_funding_page_failures": agency_failures[:20],
     }
     cache["generated_at"] = iso_utc(now)
     return output, cache
@@ -1034,10 +1050,10 @@ def parse_args(argv=None):
     parser.add_argument(
         "--max-agency-updates",
         type=int,
-        default=75,
+        default=125,
         help=(
-            "Maximum damaged NSF synopses to refresh from official agency "
-            "pages (default: 75)."
+            "Maximum undated NSF funding pages to verify for lifecycle and "
+            "synopsis quality (default: 125)."
         ),
     )
     parser.add_argument(

@@ -381,6 +381,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertTrue(
             all(
                 record.get("status_verification_required")
+                or record.get("agency_status") == "current"
                 for record in catalog["opportunities"]
                 if record.get("status") == "posted"
                 and not record.get("close_date")

@@ -322,8 +322,13 @@
     return status === "posted" || status === "forecasted";
   }
 
-  function currentRecords() {
-    return (catalog?.opportunities || []).filter(record => recordIsCurrent(record));
+  function recordIsAvailable(record) {
+    return String(record.status || "").toLowerCase() === "archived"
+      || recordIsCurrent(record);
+  }
+
+  function availableRecords() {
+    return (catalog?.opportunities || []).filter(record => recordIsAvailable(record));
   }
 
   function currentFacetCounts(records) {
@@ -482,7 +487,9 @@
       ? "unknown date"
       : new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric" }).format(generated);
     $("catalog-pill").classList.toggle("stale", stale);
-    const liveCount = state.runtimeCatalog.records.length;
+    const liveCount = (state.runtimeCatalog.statusCounts.posted || 0)
+      + (state.runtimeCatalog.statusCounts.forecasted || 0);
+    const archivedCount = state.runtimeCatalog.statusCounts.archived || 0;
     $("catalog-pill").setAttribute(
       "aria-label",
       `${liveCount.toLocaleString()} current opportunities; catalog updated ${dateText}`,
@@ -497,7 +504,7 @@
       ? ` Citation-backed notice evidence is currently available for ${evidenceCount.toLocaleString()} records and expands incrementally.`
       : " Citation-backed notice processing is queued and expands incrementally.";
     $("catalog-detail").textContent =
-      `${liveCount.toLocaleString()} current records (${(state.runtimeCatalog.statusCounts.posted || 0).toLocaleString()} open, ${(state.runtimeCatalog.statusCounts.forecasted || 0).toLocaleString()} forecasted). ${state.runtimeCatalog.excluded.toLocaleString()} non-current or informational records were hidden at runtime. Catalog generated ${generated.toLocaleString()}.${evidenceText}`;
+      `${liveCount.toLocaleString()} current records (${(state.runtimeCatalog.statusCounts.posted || 0).toLocaleString()} open, ${(state.runtimeCatalog.statusCounts.forecasted || 0).toLocaleString()} forecasted). ${archivedCount.toLocaleString()} NSF-verified archived records are available through the Archived filter. ${state.runtimeCatalog.excluded.toLocaleString()} other non-current or informational records were hidden at runtime. Catalog generated ${generated.toLocaleString()}.${evidenceText}`;
     if (stale) {
       $("stale-warning").textContent =
         "This catalog is more than three days old. Search still works, but verify status and deadlines at each opportunity’s official source.";
@@ -547,6 +554,7 @@
     });
     $("count-posted").textContent = (state.runtimeCatalog.statusCounts.posted || 0).toLocaleString();
     $("count-forecasted").textContent = (state.runtimeCatalog.statusCounts.forecasted || 0).toLocaleString();
+    $("count-archived").textContent = (state.runtimeCatalog.statusCounts.archived || 0).toLocaleString();
   }
 
   function hybridScores(query, options = {}) {
@@ -622,6 +630,7 @@
     return {
       status_posted: $("status-posted").checked,
       status_forecasted: $("status-forecasted").checked,
+      status_archived: $("status-archived").checked,
       deadline_from: $("deadline-from").value,
       deadline_to: $("deadline-to").value,
       minimum_award: $("award-min").value,
@@ -715,6 +724,7 @@
     const value = PROFILE_API.sanitizePreferences(preferences);
     $("status-posted").checked = value.status_posted;
     $("status-forecasted").checked = value.status_forecasted;
+    $("status-archived").checked = value.status_archived;
     $("deadline-from").value = value.deadline_from;
     $("deadline-to").value = value.deadline_to;
     $("award-min").value = value.minimum_award;
@@ -828,12 +838,17 @@
   }
 
   function recordPassesFilters(record) {
-    if (!recordIsCurrent(record)) return false;
+    const status = String(record.status || "").toLowerCase();
     const posted = $("status-posted").checked;
     const forecasted = $("status-forecasted").checked;
-    if (!posted && !forecasted) return false;
-    if ((posted || forecasted) && record.status === "posted" && !posted) return false;
-    if ((posted || forecasted) && record.status === "forecasted" && !forecasted) return false;
+    const archived = $("status-archived").checked;
+    if (status === "archived") {
+      if (!archived) return false;
+    } else {
+      if (!recordIsCurrent(record)) return false;
+      if (status === "posted" && !posted) return false;
+      if (status === "forecasted" && !forecasted) return false;
+    }
 
     for (const [name, config] of Object.entries(FACETS)) {
       if (!intersects(record[config.recordField], state.filters[name])) return false;
@@ -1017,8 +1032,12 @@
     const selectedStatuses = [
       $("status-posted").checked ? "open" : null,
       $("status-forecasted").checked ? "forecasted" : null,
+      $("status-archived").checked ? "archived" : null,
     ].filter(Boolean);
-    if (selectedStatuses.length !== 2) {
+    const defaultStatuses = selectedStatuses.length === 2
+      && selectedStatuses.includes("open")
+      && selectedStatuses.includes("forecasted");
+    if (!defaultStatuses) {
       selectedStatuses.forEach(value => url.searchParams.append("status", value));
       if (!selectedStatuses.length) url.searchParams.set("status", "none");
     }
@@ -1045,6 +1064,7 @@
     if (statuses.length) {
       $("status-posted").checked = statuses.includes("open");
       $("status-forecasted").checked = statuses.includes("forecasted");
+      $("status-archived").checked = statuses.includes("archived");
     }
     for (const name of Object.keys(FACETS)) {
       const validValues = new Set(Object.keys(catalog.facets[name] || {}));
@@ -1152,7 +1172,11 @@
       "flag-early-career",
       "flag-no-cost-share",
     ].filter(id => $(id).checked).length;
-    if (!$("status-posted").checked || !$("status-forecasted").checked) count += 1;
+    if (
+      !$("status-posted").checked
+      || !$("status-forecasted").checked
+      || $("status-archived").checked
+    ) count += 1;
     return count;
   }
 
@@ -1220,6 +1244,7 @@
     ["flag-evidence", "flag-preliminary", "flag-limited", "flag-early-career", "flag-no-cost-share"].forEach(id => { $(id).checked = false; });
     $("status-posted").checked = true;
     $("status-forecasted").checked = true;
+    $("status-archived").checked = false;
     if ($("audience-filter")) $("audience-filter").value = "all";
     document.querySelectorAll("[data-facet-search]").forEach(input => { input.value = ""; });
     renderAllFacets();
@@ -1710,11 +1735,21 @@
     );
     const compared = state.compareIds.has(id);
     const listedDate = record.posted_date || record.source_first_seen_date || "";
+    const statusClass = record.status === "posted"
+      ? "open"
+      : record.status === "archived"
+        ? "archived"
+        : "forecasted";
+    const statusLabel = record.status === "posted"
+      ? "Open"
+      : record.status === "archived"
+        ? "Archived"
+        : "Forecasted";
 
     return `<article class="result-card${assessment ? " ai-match" : ""}" data-opportunity-id="${escapeAttribute(id)}" tabindex="-1">
       <div class="card-topline">
         <span class="result-position">Result ${Number(resultPosition).toLocaleString()}</span>
-        <span class="badge ${record.status === "posted" ? "open" : "forecasted"}">${record.status === "posted" ? "Open" : "Forecasted"}</span>
+        <span class="badge ${statusClass}">${statusLabel}</span>
         ${assessment ? `<span class="badge ai">AI shortlist</span>` : ""}
         ${candidateReview && !assessment ? `<span class="badge candidate">Retrieved candidate</span>` : ""}
         ${listedDate ? `<span class="listed-date">Listed ${escapeHtml(formatDate(listedDate))}</span>` : ""}
@@ -2266,7 +2301,7 @@
     if (!panel) return;
     const records = [...state.compareIds]
       .map(recordById)
-      .filter(record => record && recordIsCurrent(record));
+      .filter(record => record && recordIsAvailable(record));
     state.compareIds = new Set(records.map(recordId));
     panel.classList.toggle("hidden", records.length === 0);
     if (!records.length) {
@@ -2579,6 +2614,9 @@
     if (state.profile.active) {
       chips.push(`<button class="filter-chip profile-chip" type="button" data-disable-profile="1">Profile relevance active <span aria-hidden="true">×</span></button>`);
     }
+    if ($("status-archived").checked) {
+      chips.push('<button class="filter-chip" type="button" data-clear-control="status-archived">Archived included <span aria-hidden="true">Ã—</span></button>');
+    }
     for (const [name, values] of Object.entries(state.filters)) {
       for (const value of values) {
         chips.push(`<button class="filter-chip" type="button" data-remove-facet="${escapeAttribute(name)}" data-remove-value="${escapeAttribute(value)}">${escapeHtml(value)} <span aria-hidden="true">×</span></button>`);
@@ -2717,6 +2755,7 @@
       status: [
         $("status-posted").checked ? "open" : null,
         $("status-forecasted").checked ? "forecasted" : null,
+        $("status-archived").checked ? "archived" : null,
       ].filter(Boolean),
     };
     for (const [name, values] of Object.entries(state.filters)) {
@@ -4060,7 +4099,7 @@
       if (!SAVED_API?.load || !SAVED_API?.toggle) {
         throw new Error("The saved-opportunities module did not load. Refresh the page and try again.");
       }
-      state.runtimeCatalog.records = currentRecords();
+      state.runtimeCatalog.records = availableRecords();
       state.runtimeCatalog.facets = currentFacetCounts(state.runtimeCatalog.records);
       state.runtimeCatalog.statusCounts = state.runtimeCatalog.records.reduce((counts, record) => {
         counts[record.status] = (counts[record.status] || 0) + 1;

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-08-13T11:14:17Z</updated>
+  <updated>2026-08-13T12:27:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Microplastics Research and Resource Coordination Center (U24 - Clinical Trial Not Allowed)</title>
@@ -117,6 +117,23 @@
     <category term="Manufacturing"/>
     <category term="Materials science"/>
     <summary>U.S. National Science Foundation | Posted | Society relies on chemical processes to turn raw materials into useful products. The Chemical Process Systems (CPS) program invests in fundamental research on chemical and biochemical processes to make them more efficient, sustainable, and resilient. New CPS technologies for manufacturing, biotechnology, critical minerals, energy, food, and other national priorities will help make the U.S. more co…</summary>
+  </entry>
+  <entry>
+    <title>Energy, Water, and Resource Engineering (EWRE)</title>
+    <link href="https://www.nsf.gov/funding/opportunities/energy-water-resource-engineering"/>
+    <id>urn:funding-finder:u-s-national-science-foundation:nsf-cbet%3APD-26-370Y</id>
+    <updated>2026-04-24T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Infectious disease"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Technology development"/>
+    <category term="Carbon management"/>
+    <summary>U.S. National Science Foundation | Posted | The Energy, Water, and Resource Engineering (EWRE) program supports fundamental research to advance energy, water, and resource management and to safeguard health. Better use of domestic resources will make U.S. manufacturing, energy and water systems more efficient and secure.
+EWRE supports research that creates domestic sources of energy, advances water management, and recovers resources using c…</summary>
   </entry>
   <entry>
     <title>Transport Phenomena (TP)</title>
@@ -305,23 +322,6 @@
     <summary>U.S. National Science Foundation | Posted | Materials Research is the field of science where physics, chemistry, materials science, and engineering naturally converge in the pursuit of the fundamental understanding of the properties of materials and the phenomena they host. Materials are abundant and pervasive, serving as critical building blocks in technology and innovation. Materials Research impacts life and society, as it shapes our und…</summary>
   </entry>
   <entry>
-    <title>Process Systems, Reaction Engineering, and Molecular Thermodynamics</title>
-    <link href="https://www.grants.gov/search-results-detail/348793"/>
-    <id>urn:funding-finder:grants-gov:348793</id>
-    <updated>2023-06-18T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Quantum science"/>
-    <summary>U.S. National Science Foundation | Posted | The Process Systems, Reaction Engineering, and Molecular Thermodynamics program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Electrochemical Systems program; and 3) the Interfacial Engineering program.
-The goal of the Process Systems, Reaction Engineering, and Molecular Thermodynamics program is to advance fundamental engineering research o…</summary>
-  </entry>
-  <entry>
     <title>Centers of Research Excellence in Science and Technology</title>
     <link href="https://www.grants.gov/search-results-detail/348375"/>
     <id>urn:funding-finder:grants-gov:348375</id>
@@ -347,102 +347,6 @@ The goal of the Process Systems, Reaction Engineering, and Molecular Thermodynam
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>U.S. National Science Foundation | Closes 2026-12-01 | The Archaeology Program administers an annual Archaeometry competition with a target date of December 1. The goal is to fund projects in two main categories: To develop or refine anthropologically relevant archaeometric techniques. Examples include the development of methods to identify specific types of organic residues on ceramics or development of field applicable analytic techniques. To suppor…</summary>
-  </entry>
-  <entry>
-    <title>Biophotonics</title>
-    <link href="https://www.grants.gov/search-results-detail/347327"/>
-    <id>urn:funding-finder:grants-gov:347327</id>
-    <updated>2023-04-05T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Education and workforce"/>
-    <category term="Materials science"/>
-    <category term="Neuroscience"/>
-    <category term="Quantum science"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation | Posted | The Biophotonics program is part of the Engineering Biology and Health cluster, which also includes: 1) the Biosensing program; 2) the Cellular and Biochemical Engineering program; 3) the Disability and Rehabilitation Engineering program; and 4) the Engineering of Biomedical Systems program. The goal of the Biophotonics program is to explore the research frontiers in photonics principles, engineer…</summary>
-  </entry>
-  <entry>
-    <title>Electrochemical Systems</title>
-    <link href="https://www.grants.gov/search-results-detail/347329"/>
-    <id>urn:funding-finder:grants-gov:347329</id>
-    <updated>2023-04-05T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Arts and culture"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Climate change"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Materials science"/>
-    <category term="Transportation"/>
-    <summary>U.S. National Science Foundation | Posted | The Electrochemical Systems program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Interfacial Engineering program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
-The goal of the Electrochemical Systems program is to support fundamental engineering science research that will enable innovative processes…</summary>
-  </entry>
-  <entry>
-    <title>Interfacial Engineering</title>
-    <link href="https://www.grants.gov/search-results-detail/347326"/>
-    <id>urn:funding-finder:grants-gov:347326</id>
-    <updated>2023-04-05T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Materials science"/>
-    <category term="Separations and membranes"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation | Posted | The Interfacial Engineering program is part of the Chemical Process Systems cluster, which also includes: 1) the Catalysis program; 2) the Electrochemical Systems program; and 3) the Process Systems, Reaction Engineering, and Molecular Thermodynamics program.
-The goal of the Interfacial Engineering program is to support fundamental research on atomic- and molecular-scale interfacial phenomena and …</summary>
-  </entry>
-  <entry>
-    <title>Nanoscale Interactions</title>
-    <link href="https://www.grants.gov/search-results-detail/347323"/>
-    <id>urn:funding-finder:grants-gov:347323</id>
-    <updated>2023-04-05T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Quantum science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Posted | The Nanoscale Interactions program is part of the Environmental Engineering and Sustainability cluster, which also includes: 1) the Environmental Engineering program; and 2) the Environmental Sustainability program. The goal of the Nanoscale Interactions program is to support research to advance fundamental and quantitative understanding of the interactions of nanomaterials and nanosystems with bi…</summary>
-  </entry>
-  <entry>
-    <title>Particulate and Multiphase Processes</title>
-    <link href="https://www.grants.gov/search-results-detail/347325"/>
-    <id>urn:funding-finder:grants-gov:347325</id>
-    <updated>2023-04-05T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Separations and membranes"/>
-    <category term="Catalysis and reaction engineering"/>
-    <summary>U.S. National Science Foundation | Posted | The Particulate and Multiphase Processes program is part of the Transport Phenomena cluster, which also includes 1) the Combustion and Fire Systems program; 2) the Fluid Dynamics program; and 3) the Thermal Transport Processes program. The goal of the Particulate and Multiphase Processes program is to support fundamental research on physico-chemical phenomena that govern particulate and multiphase…</summary>
-  </entry>
-  <entry>
-    <title>Electronics, Photonics and Magnetic Devices</title>
-    <link href="https://www.grants.gov/search-results-detail/345872"/>
-    <id>urn:funding-finder:grants-gov:345872</id>
-    <updated>2023-02-08T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Quantum science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Materials science"/>
-    <summary>U.S. National Science Foundation | Posted | The Electronics, Photonics and Magnetic Devices (EPMD) Program supports innovative research on novel devices based on the principles of electronics, optics and photonics, optoelectronics, magnetics, opto- and electromechanics, electromagnetics, and related physical phenomena. EPMD’s goal is to advance the frontiers of micro-, nano- and quantum-based devices operating within the electromagnetic spe…</summary>
   </entry>
   <entry>
     <title>Research Interests of the United States Air Force Academy (formerly USAFA-BAA-2021)</title>
@@ -473,22 +377,6 @@ The goal of the Interfacial Engineering program is to support fundamental resear
     <category term="Materials science"/>
     <category term="Technology development"/>
     <summary>Idaho Field Office | Closes 2030-10-14 | A. STATEMENT OF OBJECTIVESThis Funding Opportunity Announcement (FOA) is to award multiple cooperative agreements to accredited United States (U.S.) two- and four-year colleges and universities (Institutions of Higher Education (IHEs)) to receive and administer scholarship and fellowship funding-provided through the University Nuclear Leadership Program (UNLP) and as administered by the Department…</summary>
-  </entry>
-  <entry>
-    <title>Environmental Engineering</title>
-    <link href="https://www.grants.gov/search-results-detail/320490"/>
-    <id>urn:funding-finder:grants-gov:320490</id>
-    <updated>2019-09-11T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Materials science"/>
-    <category term="Separations and membranes"/>
-    <category term="Water"/>
-    <category term="Catalysis and reaction engineering"/>
-    <summary>U.S. National Science Foundation | Posted | The Environmental Engineering program is part of the Environmental Engineering and Sustainability cluster, which also includes 1) the Nanoscale Interactions program; and 2) the Environmental Sustainability program. Environmental engineering is an interdisciplinary field that applies chemical, biological, and physical scientific principles to protect human and ecological health. The goal of the Env…</summary>
   </entry>
   <entry>
     <title>Crosscutting Activities in Materials Research</title>

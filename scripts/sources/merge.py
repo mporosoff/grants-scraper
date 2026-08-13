@@ -336,12 +336,31 @@ def integrate(catalog_path: Path = DEFAULT_CATALOG,
         stamp = str(catalog.get("generated_at") or "")[:10]
         as_of = date.fromisoformat(stamp) if stamp else date.today()
 
+    selected_adapters = None if adapters is None else list(adapters)
+    selected_slugs = {
+        adapter.slug for adapter in (selected_adapters or [])
+    }
     base = [
-        record for record in (catalog.get("opportunities") or [])
-        if record.get("source") == "Grants.gov"
+        record
+        for record in (catalog.get("opportunities") or [])
+        if (
+            record.get("source") == "Grants.gov"
+            or (
+                selected_adapters is not None
+                and not any(
+                    str(record.get("opportunity_id") or "").startswith(
+                        f"{slug}:"
+                    )
+                    for slug in selected_slugs
+                )
+            )
+        )
     ]
     cache = load_source_cache(cache_path)
-    _, results = collect(adapters=adapters, include_disabled=include_disabled)
+    _, results = collect(
+        adapters=selected_adapters,
+        include_disabled=include_disabled,
+    )
     external, cache, source_summaries = resolve_live_records(results, cache, as_of)
     combined, stats = merge_records(base, external)
     # Discoverability: tag opaque umbrella FOAs (e.g. DOE Office of Science) with

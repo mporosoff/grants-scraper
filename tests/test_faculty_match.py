@@ -78,6 +78,34 @@ class FacultyMatchRelevanceTests(unittest.TestCase):
         self.assertGreater(porosoff[0]["relevance_score"], porosoff[1]["relevance_score"])
         self.assertGreater(porosoff[1]["recency_score"], porosoff[2]["recency_score"])
 
+    def test_archived_programs_do_not_enter_current_team_matches(self):
+        result = self._match([
+            {
+                "opportunity_id": "archived-catalysis",
+                "title": "Archived Catalysis Program",
+                "description": "Heterogeneous thermal catalysis research.",
+                "topic_areas": ["Catalysis and reaction engineering"],
+                "posted_date": "2026-04-01",
+                "status": "archived",
+            },
+            {
+                "opportunity_id": "current-catalysis",
+                "title": "Current Catalysis Research",
+                "description": "Heterogeneous thermal catalysis research.",
+                "topic_areas": ["Catalysis and reaction engineering"],
+                "posted_date": "2026-04-02",
+                "status": "posted",
+            },
+        ])
+
+        ids = {
+            match["id"]
+            for matches in result["pi_matches"].values()
+            for match in matches
+        }
+        self.assertIn("current-catalysis", ids)
+        self.assertNotIn("archived-catalysis", ids)
+
     def test_profiles_publish_summaries_and_focused_concepts(self):
         result = self._match([])
         generic = {"energy", "materials", "material science", "materials science"}
