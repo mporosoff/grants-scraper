@@ -272,3 +272,5 @@ and `docs/HOSTING.md` for the deployment boundary.
 ## Use and copyright
 
 Copyright (c) 2026 Marc D. Porosoff. All rights reserved. 
+
+Personal, non-commercial use is permitted. All other use, including modification, redistribution, and commercial or organizational use, requires written permission from the author. 
