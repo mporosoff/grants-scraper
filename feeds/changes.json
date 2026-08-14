@@ -1,8 +1,90 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-13T11:14:25Z",
+  "generated_at": "2026-08-13T17:08:41Z",
   "retention_days": 90,
   "events": [
+    {
+      "id": "f0193ddec6a49a8bf107",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-13T17:07:14.508208Z",
+      "opportunity_id": "363545",
+      "detail": "Deadline 2026-09-12",
+      "record": {
+        "opportunity_id": "363545",
+        "opportunity_number": "G26AS00159",
+        "title": "Cooperative Agreement for Affiliated Partner with the Californian Cooperative Ecosystem Studies Unit (CESU)",
+        "agency": "Geological Survey",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-12",
+        "close_date": "2026-09-12",
+        "last_updated": "2026-08-12",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Energy",
+          "Environmental science"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 1,
+        "award_ceiling": 250000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363545",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-12"
+    },
+    {
+      "id": "515bad8571b4200eef76",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-13T17:07:14.508208Z",
+      "opportunity_id": "363544",
+      "detail": "Deadline 2026-09-12",
+      "record": {
+        "opportunity_id": "363544",
+        "opportunity_number": "G26AS00157",
+        "title": "Cooperative Agreement for Affiliated Partner with the Colorado Plateau Cooperative Ecosystem Studies Unit (CESU)",
+        "agency": "Geological Survey",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-12",
+        "close_date": "2026-09-12",
+        "last_updated": "2026-08-12",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Agriculture and food",
+          "Biology and biotechnology",
+          "Energy",
+          "Environmental science"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 1,
+        "award_ceiling": 480000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363544",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-12"
+    },
     {
       "id": "ffa7d9775364c91d4c1d",
       "type": "amended",
@@ -48,46 +130,6 @@
         "funding_opportunity_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=231407",
         "primary_document_url": null
       }
-    },
-    {
-      "id": "f0193ddec6a49a8bf107",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-13T11:11:42.582482Z",
-      "opportunity_id": "363545",
-      "detail": "Deadline 2026-09-12",
-      "record": {
-        "opportunity_id": "363545",
-        "opportunity_number": "G26AS00159",
-        "title": "Cooperative Agreement for Affiliated Partner with the Californian Cooperative Ecosystem Studies Unit (CESU)",
-        "agency": "Geological Survey",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-08-12",
-        "close_date": "2026-09-12",
-        "last_updated": "2026-08-12",
-        "version": "Synopsis 1",
-        "topic_areas": [
-          "Energy",
-          "Environmental science"
-        ],
-        "disciplines": [
-          "Engineering and Physical Sciences"
-        ],
-        "applicant_types": [
-          "Other"
-        ],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "award_floor": 1,
-        "award_ceiling": 250000,
-        "detail_page": "https://www.grants.gov/search-results-detail/363545",
-        "funding_opportunity_url": null,
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-12"
     },
     {
       "id": "ef4abecbbc6ac73214ad",
@@ -1833,48 +1875,6 @@
         "funding_opportunity_url": "https://www.grantsolutions.gov/gs/preaward/previewPublicAnnouncement.do?id=127556",
         "primary_document_url": null
       }
-    },
-    {
-      "id": "515bad8571b4200eef76",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-13T11:11:42.582482Z",
-      "opportunity_id": "363544",
-      "detail": "Deadline 2026-09-12",
-      "record": {
-        "opportunity_id": "363544",
-        "opportunity_number": "G26AS00157",
-        "title": "Cooperative Agreement for Affiliated Partner with the Colorado Plateau Cooperative Ecosystem Studies Unit (CESU)",
-        "agency": "Geological Survey",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-08-12",
-        "close_date": "2026-09-12",
-        "last_updated": "2026-08-12",
-        "version": "Synopsis 1",
-        "topic_areas": [
-          "Agriculture and food",
-          "Biology and biotechnology",
-          "Energy",
-          "Environmental science"
-        ],
-        "disciplines": [
-          "Engineering and Physical Sciences"
-        ],
-        "applicant_types": [
-          "Other"
-        ],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "award_floor": 1,
-        "award_ceiling": 480000,
-        "detail_page": "https://www.grants.gov/search-results-detail/363544",
-        "funding_opportunity_url": null,
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-12"
     },
     {
       "id": "48d364cb999e485080ec",
