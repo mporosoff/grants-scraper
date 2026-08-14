@@ -4,6 +4,7 @@ from unittest.mock import patch
 
 from scripts.build_catalog import safe_http_url
 from scripts.check_links import (
+    annotate_catalog_link_health,
     catalog_urls,
     check_url,
     public_target,
@@ -14,6 +15,25 @@ from scripts.check_links import (
 
 
 class LinkHealthTests(unittest.TestCase):
+    def test_annotates_only_confirmed_missing_primary_links(self):
+        catalog = {"opportunities": [{
+            "opportunity_id": "1",
+            "primary_document_url": "https://agency.example/missing.pdf",
+            "funding_opportunity_url": "https://agency.example/timeout",
+            "detail_page": "https://grants.gov/1",
+        }]}
+        state = {"records": {
+            "https://agency.example/missing.pdf": {"ok": False, "status": 404},
+            "https://agency.example/timeout": {"ok": False, "status": None},
+            "https://grants.gov/1": {"ok": True, "status": 200},
+        }}
+
+        self.assertEqual(annotate_catalog_link_health(catalog, state), 1)
+        self.assertEqual(
+            catalog["opportunities"][0]["link_health_broken_urls"],
+            ["https://agency.example/missing.pdf"],
+        )
+
     def test_serialized_state_round_trips_with_one_line_per_url(self):
         state = {
             "schema_version": 1,

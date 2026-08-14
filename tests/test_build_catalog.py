@@ -8,6 +8,7 @@ from zipfile import ZipFile
 
 from scripts.build_catalog import (
     build_catalog,
+    clean_text,
     discover_latest_extract,
     is_current,
     iter_catalog_records,
@@ -137,6 +138,18 @@ class CatalogExtractTests(unittest.TestCase):
 
         self.assertFalse(is_current(values, "posted", date(2026, 7, 25)))
 
+    def test_noi_abbreviation_and_explicit_test_records_are_not_current(self):
+        self.assertFalse(is_current({
+            "OpportunityTitle": ["NOI: Future research program"],
+            "CloseDate": ["12312029"],
+        }, "posted", date(2026, 7, 25)))
+        self.assertFalse(is_current({
+            "OpportunityTitle": ["DEMO-123"],
+            "AgencyName": ["IV&V Test Agency"],
+            "Description": ["This is a test NOFO. Do not apply."],
+            "CloseDate": ["12312029"],
+        }, "posted", date(2026, 7, 25)))
+
     def test_reads_zip_and_builds_searchable_catalog(self):
         with TemporaryDirectory() as directory:
             archive_path = Path(directory) / "extract.zip"
@@ -183,6 +196,12 @@ class CatalogExtractTests(unittest.TestCase):
 
 
 class TokenTests(unittest.TestCase):
+    def test_repairs_flattened_description_boundaries(self):
+        self.assertEqual(
+            clean_text("Partner.Projects follow.ObjectivesEach project applies."),
+            "Partner. Projects follow. Objectives: Each project applies.",
+        )
+
     def test_tokenizer_removes_noise_and_normalizes_simple_inflections(self):
         self.assertEqual(
             tokenize("Catalytic materials and batteries for applications"),

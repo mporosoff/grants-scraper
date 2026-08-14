@@ -27,7 +27,7 @@
 <link rel="canonical" href="https://mporosoff.github.io/grants-scraper/team_match.html" />
 <link rel="icon" type="image/svg+xml" href="./assets/icons/faculty-pairing.svg?v=20260812" />
 <link rel="stylesheet" href="./assets/brand.css?v=20260812" />
-<link rel="stylesheet" href="./assets/app.css?v=legal-2026-08-13" />
+<link rel="stylesheet" href="./assets/app.css?v=audit-2026-08-13" />
 <link rel="stylesheet" href="./assets/site-nav.css?v=brand-2026-08-12" />
 <style>
   :root{
@@ -179,7 +179,7 @@
   <header class="page">
     <span class="internal-tag">Internal · UR ChemE Department</span>
     <h1>Research team and funding collaboration finder</h1>
-    <p>Pick two to four department faculty or saved external collaborators. The page computes their shared and complementary research themes, then scores the entire current catalog with graded research, theme, topic, agency-scope, and recency signals. Every result must fit everyone selected.</p>
+    <p>Pick two to four department faculty or saved external collaborators. The page computes their shared and complementary research themes, then screens the current catalog and scores research-focused opportunities with graded theme, topic, agency-scope, and recency signals. Every result must fit everyone selected.</p>
     <p class="meta-line" id="meta-line">Loading…</p>
   </header>
 
@@ -236,7 +236,7 @@
   <div id="view" class="result-list"></div>
 
   <footer class="note">
-    <p>Faculty interests and the hand-checked agency scope map are maintained in <code>scripts/faculty_match.py</code>. Matching runs live against the nightly-refreshed current catalog, and archived calls are always excluded. “Broad: verify fit” marks open-scope solicitations supported by the sponsor map. External profiles and imported public ORCID-linked publication metadata remain stored only in this browser. This internal tool remains marked no-index.</p>
+    <p>Faculty interests and the hand-checked agency scope map are maintained in <code>scripts/faculty_match.py</code>. Matching runs live against the nightly-refreshed current catalog, and archived calls are always excluded. “Broad / umbrella call” marks solicitations that span multiple sponsor topics and require subprogram-level verification. External profiles and imported public ORCID-linked publication metadata remain stored only in this browser. This internal tool remains marked no-index.</p>
     <section class="legal-notice" id="use-notice" aria-label="Use and copyright notice">
       <p><strong>Use notice:</strong> Team Match is an informational research-planning aid intended for individual and internal institutional use. It is not an official source of record, application or submission system, or legal, financial, compliance, or sponsor guidance.</p>
       <p>Opportunity and researcher-match information may be incomplete, outdated, or machine-generated. Before acting or applying, independently verify fit, eligibility, deadlines, requirements, and terms in the sponsor's official notice.</p>
@@ -245,13 +245,13 @@
   </footer>
 </div>
 
-<script src="data/opportunities.js"></script>
+<script src="./data/opportunities.js?v=catalog-20260814T022853Z"></script>
 <script src="data/faculty_matches.js?v=graded-team-themes-v1"></script>
-<script src="assets/search-query.js?v=acronym-2026-08-13"></script>
-<script src="assets/search-retrieval.js?v=acronym-2026-08-13"></script>
+<script src="assets/search-query.js?v=audit-2026-08-13"></script>
+<script src="assets/search-retrieval.js?v=audit-2026-08-13"></script>
 <script src="assets/orcid.js?v=orcid-2026-08-13"></script>
 <script src="assets/team-researchers.js?v=acronym-2026-08-13"></script>
-<script src="assets/team-matcher.js?v=acronym-2026-08-13"></script>
+<script src="assets/team-matcher.js?v=audit-2026-08-13"></script>
 <script src="assets/site-help.js?v=acronym-2026-08-13"></script>
 <script src="assets/site-nav.js?v=brand-2026-08-12"></script>
 <script>
@@ -429,12 +429,24 @@
     return "$" + amount.toLocaleString();
   }
   function perAwardLabel(record) {
-    var floor = Number(record.award_floor || 0);
-    var ceiling = Number(record.award_ceiling || 0);
+    var bounds = displayAwardBounds(record);
+    var floor = bounds.floor;
+    var ceiling = bounds.ceiling;
     if (floor && ceiling && floor !== ceiling) return formatMoney(floor) + " to " + formatMoney(ceiling);
     if (ceiling) return "Up to " + formatMoney(ceiling);
     if (floor) return "From " + formatMoney(floor);
     return "Not listed";
+  }
+  function displayAwardBounds(record) {
+    var floor = Number(record.award_floor || 0);
+    var ceiling = Number(record.award_ceiling || 0);
+    var preliminary = record.has_preliminary_stage || /\b(?:notice of intent|NOI)\b/i.test(record.title || "");
+    if (floor > 0 && floor <= 100 && ceiling >= 1000) floor = 0;
+    if (preliminary && ceiling > 0 && ceiling <= 100) {
+      floor = 0;
+      ceiling = 0;
+    }
+    return { floor: floor, ceiling: ceiling };
   }
   function programFundingLabel(record) {
     return record.total_program_funding ? formatMoney(record.total_program_funding) : "Not listed";
@@ -452,6 +464,35 @@
     return text.split(/\n{2,}/).filter(Boolean).map(function (paragraph) {
       return "<p>" + esc(paragraph) + "</p>";
     }).join("");
+  }
+  function teamOfficialActions(record) {
+    var broken = new Set(record.link_health_broken_urls || []);
+    var links = [];
+    var seen = new Set();
+    var add = function (value, label, primary) {
+      var actionUrl = String(value || "");
+      if (!/^https?:\/\//i.test(actionUrl) || broken.has(actionUrl) || seen.has(actionUrl)) return;
+      seen.add(actionUrl);
+      links.push('<a class="source-action' + (primary ? " primary" : "") + '" href="' + esc(actionUrl) + '" target="_blank" rel="noopener">' + esc(label) + "</a>");
+    };
+    add(record.primary_document_url, "Open official FOA", true);
+    var agencyUrl = String(record.funding_opportunity_url || "");
+    var grantsUrl = String(record.detail_page || "");
+    var genericAgency = false;
+    if (agencyUrl && grantsUrl) {
+      try {
+        var parsedAgency = new URL(agencyUrl);
+        genericAgency = (!parsedAgency.pathname || parsedAgency.pathname === "/") && !parsedAgency.search;
+      } catch (_error) { genericAgency = false; }
+    }
+    if (!links.length && genericAgency) {
+      add(grantsUrl, "Open official record", true);
+      add(agencyUrl, "Agency website", false);
+    } else {
+      add(agencyUrl, links.length ? "Agency notice" : "Open agency notice", !links.length);
+      add(grantsUrl, links.length ? (record.source || "Grants.gov") + " record" : "Open official record", !links.length);
+    }
+    return links.join("");
   }
   function opportunityCard(entry, position) {
     var d = entry.d;
@@ -473,7 +514,7 @@
     var flags = [
       d.department ? '<span class="badge fit">' + entry.totalN + " faculty</span>" : "",
       d.new ? '<span class="badge new">New</span>' : "",
-      d.broad ? '<span class="badge broad">broad · verify fit</span>' : "",
+      d.broad ? '<span class="badge broad">Broad / umbrella call</span>' : "",
       record.has_preliminary_stage ? '<span class="badge warning">LOI / preproposal</span>' : "",
       record.limited_submission ? '<span class="badge warning">Potential limited submission</span>' : "",
       record.cost_share_required === true ? '<span class="badge warning">Cost share</span>' : "",
@@ -491,7 +532,7 @@
       '<div class="key-facts">' +
         '<div class="key-fact"><span>' + esc(deadlineLabel) + '</span><strong>' + esc(deadlineValue) + '</strong><small>' + esc(record.close_date_note || "Confirm in official notice") + "</small></div>" +
         '<div class="key-fact"><span>Per-award amount</span><strong>' + esc(perAwardLabel(record)) + '</strong><small>' + (record.total_program_funding ? "Program total " + esc(programFundingLabel(record)) : "Verify in official notice") + "</small></div>" +
-        '<div class="key-fact"><span>Eligibility</span><strong>' + esc(eligibilityLabel(record)) + "</strong><small>Confirm in official notice</small></div>" +
+        '<div class="key-fact"><span>Eligibility</span><strong>' + esc(eligibilityLabel(record)) + "</strong><small>Catalog applicant types</small></div>" +
       "</div>" +
       teamChips(entry.fits) +
       (d.themeLabels && d.themeLabels.length ? '<p class="matched-themes">Matched team themes: ' + esc(d.themeLabels.join(" · ")) + "</p>" : "") +
@@ -511,7 +552,7 @@
         '<div><dt>Program contact</dt><dd>' + (contactEmail ? '<a href="mailto:' + esc(contactEmail) + '">' + esc(contactName) + "</a>" : esc(contactName)) + "</dd></div>" +
         '<div><dt>Source</dt><dd>' + esc(record.source || "Not listed") + "</dd></div>" +
       "</dl>" + (record.close_date_note ? '<p class="description"><strong>Deadline note:</strong> ' + esc(record.close_date_note) + "</p>" : "") + "</div></details>" +
-      '<div class="card-actions">' + (url ? '<a class="source-action primary" href="' + esc(url) + '" target="_blank" rel="noopener">Open official opportunity</a>' : "") +
+      '<div class="card-actions">' + teamOfficialActions(record) +
       '<a class="source-action" href="./match_explorer.html?q=' + encodeURIComponent(opportunityNumber) + '">Open in Funding Finder</a>' +
       '<button class="source-action" type="button" data-team-calendar="' + esc(d.id) + '"' + (closeDate ? "" : " disabled") + ">Add to calendar</button>" +
       (contactEmail ? '<a class="source-action" href="mailto:' + esc(contactEmail) + '">Program contact</a>' : "") + "</div></article>";
@@ -704,7 +745,7 @@
       ? " · " + externalResearchers.length + " external researcher" + (externalResearchers.length === 1 ? "" : "s")
       : "";
     $("meta-line").textContent = names.length + " faculty profiles" + externalLabel + " · " +
-      "live graded matching across " + (MATCH_ENGINE ? MATCH_ENGINE.records.length : 0) + " current opportunities";
+      "live graded matching across " + (MATCH_ENGINE ? MATCH_ENGINE.records.length : 0) + " screened current opportunities";
   }
 
   function renderExternalStatus(message, isError) {

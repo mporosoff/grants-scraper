@@ -5,12 +5,12 @@
     {
       "title": "All new opportunities",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/all.xml",
-      "count": 1479
+      "count": 1476
     },
     {
       "title": "Funding Finder | Federal",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml",
-      "count": 1424
+      "count": 1421
     },
     {
       "title": "Funding Finder | Internal",
@@ -25,7 +25,7 @@
     {
       "title": "Funding Finder | Agriculture and food",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml",
-      "count": 128
+      "count": 126
     },
     {
       "title": "Funding Finder | Artificial intelligence and machine learning",
@@ -50,7 +50,7 @@
     {
       "title": "Funding Finder | Carbon management",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/carbon-management.xml",
-      "count": 9
+      "count": 8
     },
     {
       "title": "Funding Finder | Catalysis and reaction engineering",
@@ -60,7 +60,7 @@
     {
       "title": "Funding Finder | Climate change",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/climate-change.xml",
-      "count": 21
+      "count": 20
     },
     {
       "title": "Funding Finder | Community development",
@@ -80,12 +80,12 @@
     {
       "title": "Funding Finder | Education and workforce",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml",
-      "count": 558
+      "count": 557
     },
     {
       "title": "Funding Finder | Energy",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml",
-      "count": 117
+      "count": 116
     },
     {
       "title": "Funding Finder | Environmental science",
@@ -105,7 +105,7 @@
     {
       "title": "Funding Finder | Manufacturing",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml",
-      "count": 77
+      "count": 76
     },
     {
       "title": "Funding Finder | Materials science",
@@ -145,7 +145,7 @@
     {
       "title": "Funding Finder | Technology development",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml",
-      "count": 181
+      "count": 180
     },
     {
       "title": "Funding Finder | Transportation",

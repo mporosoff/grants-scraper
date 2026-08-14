@@ -6,6 +6,7 @@
     "office of science financial assistance", "long[\\s-]?range",
     "research announcement", "\\broses\\b", "omnibus",
     "unsolicited proposal", "open topic", "financial assistance program",
+    "annual program statement", "office[ -]wide", "open[ -]scope solicitation",
   ].join("|");
   const COMMON_TOPICS = new Set([
     "Artificial intelligence and machine learning",
@@ -61,10 +62,26 @@
     return true;
   }
 
+  function recordIsTestOpportunity(record) {
+    const agency = String(record.agency || "");
+    const text = `${record.title || ""} ${String(record.description || "").slice(0, 500)}`;
+    return /\bIV&V Test Agency\b/i.test(agency)
+      || /\btest (?:NOFO|funding opportunity)\b[^.]{0,80}\bdo not apply\b/i.test(text);
+  }
+
   function bestUrl(record) {
-    for (const field of ["funding_opportunity_url", "primary_document_url", "detail_page", "url"]) {
+    const broken = new Set(record.link_health_broken_urls || []);
+    const genericAgency = (() => {
+      const value = String(record.funding_opportunity_url || "");
+      if (!value || !record.detail_page) return false;
+      return /^https?:\/\/[^/?#]+\/?(?:#.*)?$/i.test(value);
+    })();
+    const fields = genericAgency
+      ? ["primary_document_url", "detail_page", "funding_opportunity_url", "url"]
+      : ["primary_document_url", "funding_opportunity_url", "detail_page", "url"];
+    for (const field of fields) {
       const value = String(record[field] || "");
-      if (/^https?:\/\//i.test(value)) return value;
+      if (/^https?:\/\//i.test(value) && !broken.has(value)) return value;
     }
     return "";
   }
@@ -120,12 +137,14 @@
     const profileVocabularyCache = new WeakMap();
     const groupDefinitionCache = new Map();
     rawRecords.forEach(record => {
-      if (!recordIsCurrent(record, now)) return;
+      if (!recordIsCurrent(record, now) || recordIsTestOpportunity(record)) return;
       const identityText = `${record.agency || ""} ${record.title || ""}`;
       if (OUT_OF_SCOPE_RE.some(pattern => pattern.test(identityText))) return;
       const sourceText = [
         record.title || "",
         record.description || "",
+        String(record.document_search_text || "").slice(0, 16_000),
+        ...(record.topic_areas || []),
         ...(record.disciplines || []),
       ].join(" ");
       const sourceLower = sourceText.toLowerCase();
@@ -212,6 +231,9 @@
           source: group.source,
           terms: group.terms || [],
           minimumEvidence: Number(group.minimumEvidence || 0),
+          evidenceAlternatives: group.evidenceAlternatives || null,
+          requiredUnlessTopic: group.requiredUnlessTopic || "",
+          requiredAlways: group.requiredAlways === true,
           expansion: group.expansion || null,
         }));
       } else {
@@ -261,11 +283,17 @@
           item.term !== group.source && prepared.tokenSet.has(item.term));
         const minimumAliasEvidence = group.minimumEvidence
           || (group.terms.length >= 6 ? 2 : 1);
+        const alternativesSatisfied = !group.evidenceAlternatives?.length
+          || group.evidenceAlternatives.some(alternative =>
+            alternative.every(term => prepared.tokenSet.has(term))
+          )
+          || (group.requiredUnlessTopic && prepared.topics.has(group.requiredUnlessTopic));
         const contextual = !direct
           && (group.minimumEvidence > 0 || group.terms.length >= 6)
-          && aliasHits.length >= minimumAliasEvidence;
+          && aliasHits.length >= minimumAliasEvidence
+          && alternativesSatisfied;
         const alias = !direct && minimumAliasEvidence === 1 && !contextual && aliasHits.length > 0;
-        if (!direct && !contextual && !alias) return;
+        if ((!direct && !contextual && !alias) || !alternativesSatisfied) return;
         matchedGroups += 1;
         if (direct) directGroups += 1;
         if (contextual) contextualAlias = true;
@@ -510,7 +538,7 @@
         postedDate: cleanDate(prepared.record.posted_date || prepared.record.source_first_seen_date),
         updatedDate: cleanDate(prepared.record.last_updated),
         new: prepared.freshAge !== null && prepared.freshAge <= 14,
-        broad: prepared.isBroad && fits.some(fit => fit.scopeScore > 0),
+        broad: prepared.isBroad,
         relevanceScore,
         recencyBoost: recencyBoost(prepared),
         rankScore: relevanceScore * recencyBoost(prepared),

@@ -27,6 +27,7 @@
   const CHAT_UI = globalThis.FUNDING_CHAT_UI;
   const PREFERENCES_API = globalThis.FUNDING_PREFERENCES;
   const SAVED_API = globalThis.FUNDING_SAVED;
+  const BROAD_OPPORTUNITY_RE = /broad agency announcement|\bbaa\b|continuation of solicitation|office of science financial assistance|long[\s-]?range|research announcement|\broses\b|omnibus|unsolicited proposal|open topic|financial assistance program|annual program statement|office[ -]wide|open[ -]scope solicitation/i;
 
   // --- Anonymous usage logging (Cloudflare Worker + KV) --------------------
   // Fire-and-forget: counts searches, per-load sessions, and the visitor's
@@ -332,9 +333,16 @@
     return status === "posted" || status === "forecasted";
   }
 
+  function recordIsTestOpportunity(record) {
+    const agency = String(record.agency || "");
+    const text = `${record.title || ""} ${String(record.description || "").slice(0, 500)}`;
+    return /\bIV&V Test Agency\b/i.test(agency)
+      || /\btest (?:NOFO|funding opportunity)\b[^.]{0,80}\bdo not apply\b/i.test(text);
+  }
+
   function recordIsAvailable(record) {
-    return recordIsArchived(record)
-      || recordIsCurrent(record);
+    return !recordIsTestOpportunity(record) && (recordIsArchived(record)
+      || recordIsCurrent(record));
   }
 
   function availableRecords() {
@@ -371,12 +379,31 @@
   }
 
   function perAwardLabel(record) {
-    const floor = Number(record.award_floor || 0);
-    const ceiling = Number(record.award_ceiling || 0);
+    const { floor, ceiling } = displayAwardBounds(record);
     if (floor && ceiling && floor !== ceiling) return `${formatMoney(floor)} to ${formatMoney(ceiling)}`;
     if (ceiling) return `Up to ${formatMoney(ceiling)}`;
     if (floor) return `From ${formatMoney(floor)}`;
     return "Not listed";
+  }
+
+  function displayAwardBounds(record) {
+    let floor = Number(record.award_floor || 0);
+    let ceiling = Number(record.award_ceiling || 0);
+    const preliminaryNotice = record.has_preliminary_stage
+      || /\b(?:notice of intent|NOI)\b/i.test(record.title || "");
+    if (floor > 0 && floor <= 100 && ceiling >= 1_000) floor = 0;
+    if (preliminaryNotice && ceiling > 0 && ceiling <= 100) {
+      floor = 0;
+      ceiling = 0;
+    }
+    return { floor, ceiling };
+  }
+
+  function hasPlaceholderAward(record) {
+    const sourceFloor = Number(record.award_floor || 0);
+    const sourceCeiling = Number(record.award_ceiling || 0);
+    const display = displayAwardBounds(record);
+    return sourceFloor !== display.floor || sourceCeiling !== display.ceiling;
   }
 
   function programFundingLabel(record) {
@@ -386,8 +413,15 @@
   }
 
   function fundingEvidenceLabel(record) {
+    if (hasPlaceholderAward(record)) return "Placeholder source amount omitted; verify in notice";
     if (record.award_conflicts) return "Conflicting Grants.gov amount fields: verify";
     return record.award_source || "Grants.gov XML extract";
+  }
+
+  function isBroadOpportunity(record) {
+    return BROAD_OPPORTUNITY_RE.test(
+      `${record.title || ""} ${String(record.description || "").slice(0, 1_500)}`,
+    );
   }
 
   function deadlineLabel(record) {
@@ -1756,15 +1790,29 @@
   }
 
   function officialActions(record) {
+    const brokenUrls = new Set(record.link_health_broken_urls || []);
+    const usableUrl = value => {
+      const url = value ? safeUrl(value) : "";
+      return url && !brokenUrls.has(url) ? url : "";
+    };
     const primaryDocument = record.primary_document_url
-      ? safeUrl(record.primary_document_url)
+      ? usableUrl(record.primary_document_url)
       : "";
     const agencyNotice = record.funding_opportunity_url
-      ? safeUrl(record.funding_opportunity_url)
+      ? usableUrl(record.funding_opportunity_url)
       : "";
     const grantsRecord = record.detail_page
-      ? safeUrl(record.detail_page)
+      ? usableUrl(record.detail_page)
       : "";
+    const genericAgencyNotice = (() => {
+      if (!agencyNotice || !grantsRecord) return false;
+      try {
+        const parsed = new URL(agencyNotice);
+        return (!parsed.pathname || parsed.pathname === "/") && !parsed.search;
+      } catch {
+        return false;
+      }
+    })();
     const recordSourceName =
       record.source && record.source !== "Grants.gov" ? record.source : "Grants.gov";
     const recordSourceLabel = escapeHtml(recordSourceName);
@@ -1773,7 +1821,7 @@
     if (primaryDocument) {
       seen.add(primaryDocument);
       links.push(`<a class="source-action primary" data-source-open="foa" href="${escapeAttribute(primaryDocument)}" target="_blank" rel="noopener">Open official FOA ↗</a>`);
-    } else if (agencyNotice) {
+    } else if (agencyNotice && !genericAgencyNotice) {
       seen.add(agencyNotice);
       links.push(`<a class="source-action primary" data-source-open="agency" href="${escapeAttribute(agencyNotice)}" target="_blank" rel="noopener">Open agency notice ↗</a>`);
     } else if (grantsRecord) {
@@ -1787,11 +1835,14 @@
     if (agencyNotice && !seen.has(agencyNotice)) {
       links.push(`<a class="source-action" data-source-open="agency" href="${escapeAttribute(agencyNotice)}" target="_blank" rel="noopener">Agency notice ↗</a>`);
     }
-    const note = primaryDocument
+    const brokenNote = brokenUrls.size
+      ? " A link previously confirmed as missing was omitted."
+      : "";
+    const note = (primaryDocument
       ? `FOA selected from official ${recordSourceName === "Grants.gov" ? "Grants.gov attachment metadata" : `${recordSourceName} listing`} (${record.primary_document_confidence || "review"} confidence). Confirm that it is the current amended notice.`
-      : agencyNotice
+      : agencyNotice && !genericAgencyNotice
         ? "No primary FOA attachment was identified automatically; this opens the agency notice."
-        : `No primary FOA attachment was identified automatically; use the official ${recordSourceName} record.`;
+        : `No primary FOA attachment was identified automatically; use the official ${recordSourceName} record.`) + brokenNote;
     return {
       url: primaryDocument || agencyNotice || grantsRecord,
       html: links.join(""),
@@ -1866,6 +1917,7 @@
       || catalog?.source?.url
       || "https://www.grants.gov/";
     const flags = [
+      isBroadOpportunity(record) ? `<span class="badge broad">Broad / umbrella call</span>` : "",
       record.has_preliminary_stage ? `<span class="badge warning">LOI / preproposal</span>` : "",
       record.actionability_status === "preliminary_deadline_passed_verify"
         ? `<span class="badge warning">Preliminary deadline may have passed</span>`
@@ -1930,7 +1982,7 @@
       <div class="key-facts">
         <div class="key-fact"><span>${escapeHtml(deadline.label)}</span><strong>${escapeHtml(deadline.value)}</strong><small>${escapeHtml(deadline.detail)}</small></div>
         <div class="key-fact"><span>Per-award amount</span><strong>${escapeHtml(perAward)}</strong><small>${record.total_program_funding ? `Program total ${escapeHtml(programFunding)}` : escapeHtml(fundingEvidenceLabel(record))}</small></div>
-        <div class="key-fact"><span>Eligibility</span><strong>${escapeHtml(overviewEligibility)}</strong><small>Confirm in official notice</small></div>
+        <div class="key-fact"><span>Eligibility</span><strong>${escapeHtml(overviewEligibility)}</strong><small>Catalog applicant types</small></div>
       </div>
       ${aiBlock}
       <details class="record-details">
@@ -1940,6 +1992,7 @@
         </summary>
         <div class="details-body">
           <div class="full-description">${structuredDescription(record.description)}</div>
+          ${isBroadOpportunity(record) ? `<p class="scope-note"><strong>Broad / umbrella call:</strong> this notice spans multiple program areas. Confirm the specific topic, subprogram, and submission route in the official notice.</p>` : ""}
           <dl class="detail-grid">
             <div><dt>Eligible applicants</dt><dd>${escapeHtml(eligibility)}</dd></div>
             <div><dt>Funding instrument</dt><dd>${escapeHtml((record.funding_instruments || []).join("; ") || "Not listed")}</dd></div>
@@ -2782,7 +2835,7 @@
       chips.push(`<button class="filter-chip profile-chip" type="button" data-disable-profile="1">Profile relevance active <span aria-hidden="true">×</span></button>`);
     }
     if ($("status-archived").checked) {
-      chips.push('<button class="filter-chip" type="button" data-clear-control="status-archived">Archived included <span aria-hidden="true">Ã—</span></button>');
+      chips.push('<button class="filter-chip" type="button" data-clear-control="status-archived">Archived included <span aria-hidden="true">&times;</span></button>');
     }
     for (const [name, values] of Object.entries(state.filters)) {
       for (const value of values) {

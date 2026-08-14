@@ -93,7 +93,7 @@ test("persists a sanitized profile and preferences without credential fields", (
   const loaded = api.loadProfile(storage);
   assert.equal(loaded.research_description, "Electrochemical carbon dioxide conversion");
   assert.equal(loaded.preferences.profile_search_active, true);
-  assert.equal(loaded.preferences.status_archived, true);
+  assert.equal(loaded.preferences.status_archived, false, "archive opt-in must remain session-only");
   assert.equal(loaded.preferences.ai_provider, "anthropic");
   assert.equal(loaded.preferences.evidence, true);
   assert.equal(loaded.orcid_id, "0000-0002-1825-0097");

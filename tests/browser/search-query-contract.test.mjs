@@ -113,8 +113,8 @@ test("expands REE and ionic-liquid extraction language even when abbreviations a
     assert.equal(terms.rare, 0.86, form);
     assert.equal(terms.earth, 0.86, form);
     assert.equal(terms.lanthanide, form.toLowerCase().startsWith("lanthanide") ? 1 : 0.86, form);
-    assert.equal(terms.mineral, 0.86, form);
-    assert.equal(terms.recovery, 0.86, form);
+    assert.equal(terms.mineral, undefined, form);
+    assert.equal(terms.processing, undefined, form);
   }
 
   const indexed = Object.fromEntries(
@@ -126,6 +126,13 @@ test("expands REE and ionic-liquid extraction language even when abbreviations a
   assert.equal(indexed.solvent, 0.86);
   assert.equal(indexed.separation, 0.86);
   assert.equal(indexed.recovery, 0.86);
+
+  const abbreviated = api.expandGroups("REE extraction with ILs");
+  assert.equal(abbreviated.length, 3);
+  assert.equal(abbreviated[2].expansion.phrase, "ionic liquids");
+  assert.equal(abbreviated[2].requiredAlways, true);
+  assert.equal(abbreviated[2].minimumEvidence, 2);
+  assert.ok(abbreviated[2].terms.some(item => item.term === "solvent"));
 });
 
 test("does not expand short ambiguous terms", () => {
@@ -133,6 +140,26 @@ test("does not expand short ambiguous terms", () => {
   for (const term of ["ad", "am", "ar", "ms"]) {
     assert.equal(Object.hasOwn(api.aliases, term), false);
   }
+});
+
+test("treats broad-agency wording as one scoped concept", () => {
+  const api = loadApi();
+  const groups = api.expandGroups("broad agency announcement chemical separations");
+  assert.equal(groups.length, 3);
+  assert.equal(groups[0].expansion.phrase, "broad agency announcement");
+  assert.equal(groups[0].requiredAlways, true);
+  assert.ok(groups[0].evidenceAlternatives.some(items => items.join(" ") === "broad agency announcement"));
+});
+
+test("treats Basic Energy Sciences as one required DOE program concept", () => {
+  const api = loadApi();
+  const groups = api.expandGroups("DOE Basic Energy Sciences separations");
+  assert.equal(groups.length, 3);
+  assert.equal(groups[1].expansion.phrase, "basic energy sciences");
+  assert.equal(groups[1].requiredAlways, true);
+  assert.equal(groups[1].minimumEvidence, 1);
+  assert.ok(groups[1].evidenceAlternatives.some(items => items.join(" ") === "basic energy science"));
+  assert.deepEqual([...groups[1].evidencePhrases], ["basic energy science", "bes"]);
 });
 
 test("learns an unknown acronym from catalog wording and researcher context", () => {

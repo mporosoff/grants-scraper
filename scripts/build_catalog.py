@@ -261,10 +261,15 @@ PRELIMINARY_RE = re.compile(
 NON_FUNDING_TITLE_RE = re.compile(
     r"^(?:[A-Z0-9-]+\s+)?(?:"
     r"notice\s+of\s+intent(?:\s+to\s+issue)?\b|"
+    r"NOI\s*[-:]|"
     r"request\s+for\s+information\b|"
     r"RFI\s*[-:]"
     r")",
     re.I,
+)
+TEST_OPPORTUNITY_RE = re.compile(
+    r"\btest (?:NOFO|funding opportunity)\b.{0,120}\bdo not apply\b",
+    re.I | re.S,
 )
 NOT_ACCEPTING_RE = re.compile(
     r"\b(?:not|isn't|is\s+not)\s+accepting\s+applications?\b|"
@@ -333,7 +338,20 @@ def clean_text(value):
         re.sub(r"[ \t]+", " ", line).strip()
         for line in text.replace("\r", "\n").split("\n")
     ]
-    return "\n".join(line for line in lines if line).strip() or None
+    text = "\n".join(line for line in lines if line).strip()
+    # Grants.gov descriptions often flatten HTML block boundaries without a
+    # separating space ("partner.Projects" or "ObjectivesEach"). Repair only
+    # high-confidence boundaries so chemical names and ordinary punctuation
+    # remain untouched.
+    text = re.sub(r"(?<=[a-z0-9][.!?])(?=[A-Z])", " ", text)
+    text = re.sub(
+        r"\b(Objectives?|Background|Purpose|Overview|Eligibility|Description|"
+        r"Activities|Goals|Benefits)(?=[A-Z][a-z])",
+        r"\1: ",
+        text,
+    )
+    text = re.sub(r"(?<=[,:;])(?=[A-Za-z])", " ", text)
+    return text or None
 
 
 def safe_http_url(value):
@@ -448,12 +466,16 @@ def is_current(values, status, as_of):
     title = clean_text(first(values, "OpportunityTitle")) or ""
     if NON_FUNDING_TITLE_RE.search(title):
         return False
+    agency = clean_text(first(values, "AgencyName")) or ""
+    raw_description = " ".join(values.get("Description") or [])
+    if re.search(r"\bIV&V Test Agency\b", agency, re.I) or TEST_OPPORTUNITY_RE.search(raw_description):
+        return False
     instrument_codes = {
         value.casefold()
         for value in (values.get("FundingInstrumentType") or [])
         if value
     }
-    description = " ".join(values.get("Description") or [])
+    description = raw_description
     if (
         instrument_codes
         and instrument_codes <= {"o"}

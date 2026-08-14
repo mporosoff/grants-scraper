@@ -20,6 +20,7 @@ import math
 from datetime import date, datetime
 from pathlib import Path
 
+from .build_catalog import tokenize
 from .currentness import record_is_current
 from .search_query import expand_query_groups
 
@@ -145,17 +146,38 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
     semantic_scores = [0.0] * document_count
     lexical_coverage = [0] * document_count
     semantic_coverage = [0] * document_count
+    required_group_coverage = [0] * document_count
+    always_required_coverage = [0] * document_count
     query_groups = expand_query_groups(query, postings)
     records = catalog["opportunities"]
     document_topics = [list(dict.fromkeys(record.get("topic_areas") or [])) for record in records]
+    document_phrase_text = [
+        " ".join(tokenize(" ".join([
+            str(record.get("title") or ""),
+            str(record.get("opportunity_number") or ""),
+            str(record.get("description") or "")[:5_000],
+            str(record.get("document_search_text") or "")[:16_000],
+            *[str(item) for item in record.get("topic_areas") or []],
+        ])))
+        for record in records
+    ]
     topic_documents: dict[str, list[int]] = {}
     for document_id, topics in enumerate(document_topics):
         for topic in topics:
             topic_documents.setdefault(str(topic), []).append(document_id)
+    exact_document_cache: dict[str, set[int]] = {}
 
-    for _, group_terms in query_groups:
+    def exact_documents(term: str) -> set[int]:
+        if term not in exact_document_cache:
+            values = postings.get(term) or []
+            exact_document_cache[term] = set(values[::2])
+        return exact_document_cache[term]
+
+    for group in query_groups:
+        group_terms = group["terms"]
         group_documents: set[int] = set()
         group_evidence: dict[int, int] = {}
+        group_lexical_scores: dict[int, float] = {}
         for query_term, query_weight in group_terms:
             query_term_documents: set[int] = set()
             for term, resolution_weight in _posting_terms(
@@ -173,20 +195,54 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
                     denominator = frequency + _K1 * (
                         1 - _B + _B * (lengths[document_id] / average_length)
                     )
-                    lexical_scores[document_id] += term_weight * inverse_frequency * (
+                    group_lexical_scores[document_id] = (
+                        group_lexical_scores.get(document_id, 0.0)
+                        + term_weight * inverse_frequency * (
                         (frequency * (_K1 + 1)) / denominator
+                        )
                     )
                     query_term_documents.add(document_id)
             for document_id in query_term_documents:
                 group_evidence[document_id] = group_evidence.get(document_id, 0) + 1
-        required_evidence = 2 if len(group_terms) >= 6 else 1
+        required_evidence = (
+            int(group.get("minimum_evidence") or 0)
+            or (2 if len(group_terms) >= 6 else 1)
+        )
+        alternatives = group.get("evidence_alternatives") or ()
+        evidence_phrases = tuple(
+            " ".join(tokenize(value))
+            for value in group.get("evidence_phrases") or ()
+            if tokenize(value)
+        )
         group_documents = {
             document_id
             for document_id, evidence in group_evidence.items()
             if evidence >= required_evidence
+            and (
+                not alternatives
+                or any(
+                    all(
+                        document_id in exact_documents(term)
+                        for term in alternative
+                    )
+                    for alternative in alternatives
+                )
+            )
+            and (
+                not evidence_phrases
+                or any(
+                    f" {phrase} " in f" {document_phrase_text[document_id]} "
+                    for phrase in evidence_phrases
+                )
+            )
         }
         for document_id in group_documents:
+            lexical_scores[document_id] += group_lexical_scores.get(document_id, 0.0)
             lexical_coverage[document_id] += 1
+            if group.get("required_unless_topic"):
+                required_group_coverage[document_id] += 1
+            if group.get("required_always"):
+                always_required_coverage[document_id] += 1
 
         if len(group_documents) < 2:
             continue
@@ -232,10 +288,32 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
                 lexical_scores[i] += 50
                 exact_phrase_documents.add(i)
 
+    phrase_tokens = tokenize(query)[:12]
+    query_trigrams = [
+        " ".join(phrase_tokens[index:index + 3])
+        for index in range(max(0, len(phrase_tokens) - 2))
+        if all(len(term) >= 3 for term in phrase_tokens[index:index + 3])
+    ]
+    for document_id, source_text in enumerate(document_phrase_text):
+        for trigram in query_trigrams:
+            if trigram in source_text:
+                lexical_scores[document_id] += 40
+
     minimum_coverage = (
         max(2, math.ceil(len(query_groups) * 0.38))
-        if len(query_groups) >= 3 else 0
+        if len(query_groups) >= 3
+        else 2
+        if len(query_groups) >= 2 and any(
+            group.get("required_always") for group in query_groups
+        )
+        else 0
     )
+    required_groups = [
+        group for group in query_groups if group.get("required_unless_topic")
+    ]
+    always_required_groups = [
+        group for group in query_groups if group.get("required_always")
+    ]
     scores = [0.0] * document_count
     for document_id in range(document_count):
         combined = lexical_scores[document_id] + semantic_scores[document_id]
@@ -246,6 +324,20 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
             minimum_coverage
             and lexical_coverage[document_id] < minimum_coverage
             and document_id not in exact_phrase_documents
+        ):
+            continue
+        if (
+            required_groups
+            and required_group_coverage[document_id] < len(required_groups)
+            and not all(
+                group["required_unless_topic"] in document_topics[document_id]
+                for group in required_groups
+            )
+        ):
+            continue
+        if (
+            always_required_groups
+            and always_required_coverage[document_id] < len(always_required_groups)
         ):
             continue
         coverage_ratio = min(1.0, effective_coverage / len(query_groups)) if query_groups else 0.0

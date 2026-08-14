@@ -56,12 +56,20 @@
     const averageLength = index.average_document_length || 1;
     const termsByLength = new Map();
     const resolutionCache = new Map();
+    const exactDocumentsCache = new Map();
     const acronymResolver = queryApi.createAcronymResolver
       ? queryApi.createAcronymResolver(records)
       : null;
     const documentTopics = records.map(record => [
       ...new Set((record.topic_areas || []).filter(Boolean).map(String)),
     ]);
+    const documentPhraseText = records.map(record => queryApi.tokenize([
+      record.title || "",
+      record.opportunity_number || "",
+      String(record.description || "").slice(0, 5_000),
+      String(record.document_search_text || "").slice(0, 16_000),
+      ...(record.topic_areas || []),
+    ].join(" ")).join(" "));
     const topicDocuments = new Map();
 
     indexTerms.forEach(term => {
@@ -123,6 +131,17 @@
       return fuzzy;
     }
 
+    function exactDocuments(term) {
+      if (exactDocumentsCache.has(term)) return exactDocumentsCache.get(term);
+      const values = postings[term] || [];
+      const documents = new Set();
+      for (let cursor = 0; cursor < values.length; cursor += 2) {
+        documents.add(values[cursor]);
+      }
+      exactDocumentsCache.set(term, documents);
+      return documents;
+    }
+
     function inferTopics(documentIds) {
       if (documentIds.size < 2) return [];
       const counts = new Map();
@@ -162,6 +181,8 @@
       const semanticScores = new Float64Array(documentCount);
       const lexicalCoverage = new Uint16Array(documentCount);
       const semanticCoverage = new Uint16Array(documentCount);
+      const requiredGroupCoverage = new Uint8Array(documentCount);
+      const alwaysRequiredCoverage = new Uint8Array(documentCount);
       const fuzzyTerms = new Map();
       const inferredTopics = new Map();
       const exactPhraseDocuments = new Set();
@@ -203,12 +224,33 @@
         });
         const requiredEvidence = Number(group.minimumEvidence || 0)
           || (group.terms.length >= 6 ? 2 : 1);
+        const evidenceAlternatives = Array.isArray(group.evidenceAlternatives)
+          ? group.evidenceAlternatives
+          : [];
+        const evidencePhrases = Array.isArray(group.evidencePhrases)
+          ? group.evidencePhrases.map(value => queryApi.tokenize(value).join(" ")).filter(Boolean)
+          : [];
         groupEvidence.forEach((evidence, documentId) => {
-          if (evidence >= requiredEvidence) groupDocuments.add(documentId);
+          if (evidence < requiredEvidence) return;
+          if (
+            evidenceAlternatives.length
+            && !evidenceAlternatives.some(alternative =>
+              alternative.every(term => exactDocuments(term).has(documentId))
+            )
+          ) return;
+          if (
+            evidencePhrases.length
+            && !evidencePhrases.some(value =>
+              (` ${documentPhraseText[documentId]} `).includes(` ${value} `)
+            )
+          ) return;
+          groupDocuments.add(documentId);
         });
         groupDocuments.forEach(documentId => {
           lexicalScores[documentId] += groupLexicalScores.get(documentId) || 0;
           lexicalCoverage[documentId] += 1;
+          if (group.requiredUnlessTopic) requiredGroupCoverage[documentId] += 1;
+          if (group.requiredAlways) alwaysRequiredCoverage[documentId] += 1;
         });
 
         if (!semantic) return;
@@ -251,9 +293,29 @@
         });
       }
 
+      const phraseTokens = queryApi.tokenize(query).slice(0, 12);
+      const queryTrigrams = [];
+      for (let index = 0; index + 3 <= phraseTokens.length; index += 1) {
+        const terms = phraseTokens.slice(index, index + 3);
+        if (terms.every(term => term.length >= 3)) queryTrigrams.push(terms.join(" "));
+      }
+      if (queryTrigrams.length) {
+        records.forEach((_record, documentId) => {
+          queryTrigrams.forEach(trigram => {
+            if (documentPhraseText[documentId].includes(trigram)) {
+              lexicalScores[documentId] += 40;
+            }
+          });
+        });
+      }
+
       const minimumCoverage = coverage && groups.length >= 3
         ? Math.max(2, Math.ceil(groups.length * .38))
-        : 0;
+        : coverage && groups.length >= 2 && groups.some(group => group.requiredAlways)
+          ? 2
+          : 0;
+      const requiredGroups = groups.filter(group => group.requiredUnlessTopic);
+      const alwaysRequiredGroups = groups.filter(group => group.requiredAlways);
       for (let documentId = 0; documentId < documentCount; documentId += 1) {
         const combined = lexicalScores[documentId] + semanticScores[documentId];
         if (combined <= 0) continue;
@@ -262,6 +324,17 @@
           minimumCoverage
           && lexicalCoverage[documentId] < minimumCoverage
           && !exactPhraseDocuments.has(documentId)
+        ) continue;
+        if (
+          requiredGroups.length
+          && requiredGroupCoverage[documentId] < requiredGroups.length
+          && !requiredGroups.every(group =>
+            documentTopics[documentId].includes(group.requiredUnlessTopic)
+          )
+        ) continue;
+        if (
+          alwaysRequiredGroups.length
+          && alwaysRequiredCoverage[documentId] < alwaysRequiredGroups.length
         ) continue;
         const coverageRatio = groups.length
           ? Math.min(1, effectiveCoverage / groups.length)

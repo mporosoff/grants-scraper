@@ -10,13 +10,14 @@ from pathlib import Path
 import re
 import textwrap
 from typing import Any
+from urllib.parse import urlparse
 
 from scripts.currentness import filter_current
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 CATALOG_PREFIX = "globalThis.GRANT_CATALOG="
 CATALOG_SCRIPT_RE = re.compile(
-    r'<script src="\./data/opportunities\.js(?:\?v=[^"]+)?"></script>'
+    r'<script src="(?:\./)?data/opportunities\.js(?:\?v=[^"]+)?"></script>'
 )
 
 
@@ -36,18 +37,28 @@ def catalog_stats(catalog: dict[str, Any]) -> dict[str, Any]:
         catalog["generated_at"].replace("Z", "+00:00")
     ).date()
     records, excluded = filter_current(catalog["opportunities"], generated)
-    routes = Counter(
-        "direct"
-        if record.get("primary_document_url")
-        else "agency"
-        if record.get("funding_opportunity_url")
-        else "grants"
-        for record in records
-    )
+    def usable(record, field):
+        value = record.get(field)
+        return bool(value) and value not in set(record.get("link_health_broken_urls") or [])
+
+    def generic_agency_home(record):
+        if not usable(record, "funding_opportunity_url") or not usable(record, "detail_page"):
+            return False
+        parsed = urlparse(record["funding_opportunity_url"])
+        return parsed.path in {"", "/"} and not parsed.query
+
+    routes = Counter()
+    for record in records:
+        if usable(record, "primary_document_url"):
+            routes["direct"] += 1
+        elif usable(record, "funding_opportunity_url") and not generic_agency_home(record):
+            routes["agency"] += 1
+        else:
+            routes["grants"] += 1
     confidence = Counter(
         record.get("primary_document_confidence")
         for record in records
-        if record.get("primary_document_url")
+        if usable(record, "primary_document_url")
     )
     per_award = sum(
         record.get("award_floor") is not None
@@ -120,6 +131,8 @@ def catalog_asset_version(catalog: dict[str, Any]) -> str:
         catalog.get("generated_at"),
         catalog.get("detail_enrichment_generated_at"),
         catalog.get("document_evidence_generated_at"),
+        catalog.get("catalog_audit_generated_at"),
+        catalog.get("link_health_generated_at"),
         ((catalog.get("diagnostics") or {}).get("additional_sources") or {}).get(
             "merged_at"
         ),
@@ -302,17 +315,20 @@ def main() -> int:
     readme_path = REPOSITORY_ROOT / "README.md"
     project_path = REPOSITORY_ROOT / "PROJECT.md"
     explorer_path = REPOSITORY_ROOT / "match_explorer.html"
+    team_path = REPOSITORY_ROOT / "team_match.html"
     catalog = load_catalog(args.catalog)
     stats = catalog_stats(catalog)
     current_readme = readme_path.read_text(encoding="utf-8")
     current_project = project_path.read_text(encoding="utf-8")
     current_explorer = explorer_path.read_text(encoding="utf-8")
+    current_team = team_path.read_text(encoding="utf-8")
     next_readme, next_project = render_docs(
         current_readme, current_project, stats
     )
     next_explorer = update_catalog_asset_reference(
         current_explorer, catalog
     )
+    next_team = update_catalog_asset_reference(current_team, catalog)
     changed = []
     if current_readme != next_readme:
         changed.append(readme_path)
@@ -320,6 +336,8 @@ def main() -> int:
         changed.append(project_path)
     if current_explorer != next_explorer:
         changed.append(explorer_path)
+    if current_team != next_team:
+        changed.append(team_path)
     if args.check and changed:
         print("Catalog documentation is stale:")
         for path in changed:
@@ -331,6 +349,7 @@ def main() -> int:
         explorer_path.write_text(
             next_explorer, encoding="utf-8", newline="\n"
         )
+        team_path.write_text(next_team, encoding="utf-8", newline="\n")
     print(
         f"Catalog documentation is current for {stats['record_count']:,} "
         f"records ({format_date(stats['generated'])})."

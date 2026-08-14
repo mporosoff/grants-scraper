@@ -175,8 +175,8 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         )
         release_version = "filters-2026-08-13"
         feature_version = "orcid-2026-08-13"
-        search_version = "acronym-2026-08-13"
-        style_version = "legal-2026-08-13"
+        search_version = "audit-2026-08-13"
+        style_version = "audit-2026-08-13"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={style_version}">',
             explorer_html,
@@ -189,16 +189,24 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
                 f'<script src="./assets/{asset}?v={release_version}"></script>',
                 explorer_html,
             )
-        for asset in ("orcid.js", "profile.js"):
+        for asset in ("orcid.js",):
             self.assertIn(
                 f'<script src="./assets/{asset}?v={feature_version}"></script>',
                 explorer_html,
             )
-        for asset in ("search-query.js", "search-retrieval.js", "site-help.js", "app.js"):
+        self.assertIn(
+            '<script src="./assets/profile.js?v=audit-2026-08-13"></script>',
+            explorer_html,
+        )
+        for asset in ("search-query.js", "search-retrieval.js", "app.js"):
             self.assertIn(
                 f'<script src="./assets/{asset}?v={search_version}"></script>',
                 explorer_html,
             )
+        self.assertIn(
+            '<script src="./assets/site-help.js?v=acronym-2026-08-13"></script>',
+            explorer_html,
+        )
         self.assertIn("globalThis.GRANT_CATALOG", application_js)
         self.assertIn("globalThis.FUNDING_SEARCH_QUERY", application_js)
         self.assertIn("globalThis.FUNDING_RETRIEVAL", application_js)

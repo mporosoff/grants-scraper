@@ -5,7 +5,41 @@
   // of naming an individual compound. These terms keep searches useful against
   // catalogs that describe water contamination and remediation but omit PFAS.
   const PFAS_CONCEPT = "persistent contaminant contamination pollution remediation groundwater drinking wastewater water treatment purification";
-  const RARE_EARTH_CONCEPT = "rare earth element lanthanide scandium yttrium critical mineral extraction separation recovery recycling processing";
+  // Keep target materials separate from methods. The previous REE expansion
+  // included generic words such as "processing" and "critical mineral", which
+  // allowed diplomacy, education, and unrelated process notices to satisfy an
+  // REE query without mentioning a rare-earth material at all.
+  const RARE_EARTH_CONCEPT = "ree rare earth element lanthanide scandium yttrium";
+  const RARE_EARTH_EVIDENCE = Object.freeze([
+    Object.freeze(["ree"]),
+    Object.freeze(["rare", "earth"]),
+    Object.freeze(["lanthanide"]),
+    Object.freeze(["scandium"]),
+    Object.freeze(["yttrium"]),
+  ]);
+  const IONIC_LIQUID_CONCEPT = "ionic liquid solvent extraction separation membrane hydrometallurgy leaching";
+  const IONIC_LIQUID_EVIDENCE = Object.freeze([
+    Object.freeze(["ionic", "liquid"]),
+    Object.freeze(["solvent", "extraction"]),
+    Object.freeze(["solvent", "separation"]),
+    Object.freeze(["chemical", "separation"]),
+    Object.freeze(["desalination", "purification"]),
+    Object.freeze(["hydrometallurgy", "leaching"]),
+    Object.freeze(["ion", "exchange"]),
+  ]);
+  const BROAD_CALL_CONCEPT = "broad agency announcement baa long range office wide open scope";
+  const BROAD_CALL_EVIDENCE = Object.freeze([
+    Object.freeze(["broad", "agency", "announcement"]),
+    Object.freeze(["baa"]),
+    Object.freeze(["long", "range"]),
+    Object.freeze(["office", "wide"]),
+    Object.freeze(["open", "scope"]),
+  ]);
+  const BASIC_ENERGY_SCIENCES_CONCEPT = "basic energy science bes";
+  const BASIC_ENERGY_SCIENCES_EVIDENCE = Object.freeze([
+    Object.freeze(["basic", "energy", "science"]),
+    Object.freeze(["bes"]),
+  ]);
 
   // Keep this deliberately conservative. Ambiguous shorthand (for example,
   // AD, AM, or AR) creates worse search results than leaving it literal.
@@ -47,8 +81,7 @@
     rees: RARE_EARTH_CONCEPT,
     lanthanide: RARE_EARTH_CONCEPT,
     lanthanides: RARE_EARTH_CONCEPT,
-    ionic: "ion electrolyte solvent salt extraction separation",
-    extraction: "separation recovery recycling processing",
+    extraction: "separation recovery processing purification",
     pfas: PFAS_CONCEPT,
     pfoa: PFAS_CONCEPT,
     pfos: PFAS_CONCEPT,
@@ -85,7 +118,7 @@
     Object.keys(QUERY_ALIASES).filter(term => (
       QUERY_ALIASES[term] === PFAS_CONCEPT
       || QUERY_ALIASES[term] === RARE_EARTH_CONCEPT
-      || ["ionic", "extraction"].includes(term)
+      || term === "extraction"
     )),
   );
 
@@ -308,15 +341,141 @@
     return [term, ...(QUERY_VARIANTS[term] || [])];
   }
 
+  function conceptGroup(source, concept, directTermSet, options = {}) {
+    const literalTerms = new Set(options.literalTerms || [source]);
+    const weightedTerms = new Map();
+    tokenize(concept).forEach(term => {
+      const direct = literalTerms.has(term) || directTermSet.has(term);
+      weightedTerms.set(term, direct ? 1 : .86);
+    });
+    if (source && !/\s/.test(source) && !weightedTerms.has(source)) weightedTerms.set(source, 1);
+    return {
+      source,
+      terms: [...weightedTerms].map(([term, weight]) => ({ term, weight })),
+      minimumEvidence: Number(options.minimumEvidence || 1),
+      evidenceAlternatives: options.evidenceAlternatives || null,
+      evidencePhrases: options.evidencePhrases || null,
+      requiredUnlessTopic: options.requiredUnlessTopic || "",
+      requiredAlways: options.requiredAlways === true,
+      expansion: {
+        kind: "scientific_concept",
+        phrase: options.phrase || concept,
+        confidence: 1,
+        basis: options.basis || "deterministic scientific phrase",
+      },
+    };
+  }
+
+  function hasIonicLiquidContext(value, directTermSet, context = "") {
+    if (/ionic[\s-]+liquids?/i.test(value)) return true;
+    if (/ionic[\s-]+liquids?|solvent extraction/i.test(context)) return true;
+    if (directTermSet.has("rare") && directTermSet.has("earth")) return true;
+    return [
+      "ree", "lanthanide", "scandium", "yttrium", "extraction", "separation",
+      "recovery", "solvent", "leaching", "hydrometallurgy",
+    ].some(term => directTermSet.has(term));
+  }
+
   function expandGroups(value, hasIndexedTerm = () => false, options = {}) {
     const directTerms = [...new Set(tokenize(value))];
     const directTermSet = new Set(directTerms);
+    const normalizedValue = normalizeText(value);
+    const hasRareEarthPhrase = /\brare[\s-]+earth(?:[\s-]+elements?)?\b/i.test(normalizedValue);
+    const hasIonicLiquidPhrase = /\bionic[\s-]+liquids?\b/i.test(normalizedValue);
+    const hasBroadCallPhrase = /\bbroad[\s-]+agency[\s-]+announcements?\b|\bBAAs?\b/i.test(normalizedValue);
+    const hasBasicEnergySciences = /\bbasic[\s-]+energy[\s-]+sciences?\b|\bBES\b/i.test(normalizedValue);
+    // IL/ILs is far too ambiguous to expand globally. It is interpreted as
+    // ionic liquid only when the query or local researcher profile also
+    // supplies separations/solvent/rare-earth context.
+    const hasIlAbbreviation = /\bILs?\b/i.test(normalizedValue)
+      && hasIonicLiquidContext(normalizedValue, directTermSet, options.context || "");
     const uppercaseTerms = new Set(
       (normalizeText(value).match(/\b[A-Z][A-Z0-9]{2,8}s?\b/g) || [])
         .map(normalizeToken),
     );
     let acronymAttempts = 0;
-    return directTerms.map(term => {
+    const emittedConcepts = new Set();
+    return directTerms.flatMap(term => {
+      if (
+        (hasBasicEnergySciences && ["basic", "energy", "science"].includes(term))
+        || (hasBasicEnergySciences && term === "bes")
+      ) {
+        if (emittedConcepts.has("basic-energy-sciences")) return [];
+        emittedConcepts.add("basic-energy-sciences");
+        return [conceptGroup(
+          term === "bes" ? "bes" : "basic energy sciences",
+          BASIC_ENERGY_SCIENCES_CONCEPT,
+          directTermSet,
+          {
+            literalTerms: term === "bes" ? ["bes"] : ["basic", "energy", "science"],
+            minimumEvidence: 1,
+            evidenceAlternatives: BASIC_ENERGY_SCIENCES_EVIDENCE,
+            evidencePhrases: ["basic energy science", "bes"],
+            requiredAlways: true,
+            phrase: "basic energy sciences",
+          },
+        )];
+      }
+      if (
+        (hasBroadCallPhrase && ["broad", "agency", "announcement"].includes(term))
+        || (hasBroadCallPhrase && term === "baa")
+      ) {
+        if (emittedConcepts.has("broad-call")) return [];
+        emittedConcepts.add("broad-call");
+        return [conceptGroup(
+          term === "baa" ? "baa" : "broad agency announcement",
+          BROAD_CALL_CONCEPT,
+          directTermSet,
+          {
+            literalTerms: term === "baa" ? ["baa"] : ["broad", "agency", "announcement"],
+            minimumEvidence: 1,
+            evidenceAlternatives: BROAD_CALL_EVIDENCE,
+            requiredAlways: true,
+            phrase: "broad agency announcement",
+          },
+        )];
+      }
+      if (
+        (hasRareEarthPhrase && ["rare", "earth", "element"].includes(term))
+        || ["ree", "lanthanide"].includes(term)
+      ) {
+        if (emittedConcepts.has("rare-earth")) return [];
+        emittedConcepts.add("rare-earth");
+        return [conceptGroup(
+          hasRareEarthPhrase ? "rare earth" : term,
+          RARE_EARTH_CONCEPT,
+          directTermSet,
+          {
+            literalTerms: hasRareEarthPhrase ? ["rare", "earth", "element"] : [term],
+            evidenceAlternatives: RARE_EARTH_EVIDENCE,
+            requiredUnlessTopic: "Separations and membranes",
+            phrase: "rare earth elements",
+          },
+        )];
+      }
+      if (hasIonicLiquidPhrase && ["ionic", "liquid"].includes(term)) {
+        if (emittedConcepts.has("ionic-liquid")) return [];
+        emittedConcepts.add("ionic-liquid");
+        return [conceptGroup("ionic liquid", IONIC_LIQUID_CONCEPT, directTermSet, {
+          literalTerms: ["ionic", "liquid"],
+          minimumEvidence: 2,
+          evidenceAlternatives: IONIC_LIQUID_EVIDENCE,
+          requiredAlways: true,
+          phrase: "ionic liquids",
+        })];
+      }
+      if (hasIlAbbreviation && ["il", "ils"].includes(term)) {
+        if (emittedConcepts.has("ionic-liquid")) return [];
+        emittedConcepts.add("ionic-liquid");
+        return [conceptGroup(term, IONIC_LIQUID_CONCEPT, directTermSet, {
+          literalTerms: [term],
+          minimumEvidence: 2,
+          evidenceAlternatives: IONIC_LIQUID_EVIDENCE,
+          requiredAlways: true,
+          phrase: "ionic liquids",
+          basis: "contextual scientific abbreviation",
+        })];
+      }
       const weightedTerms = new Map([[term, 1]]);
       variants(term).slice(1).forEach(variant => weightedTerms.set(variant, .94));
       const indexed = hasIndexedTerm(term);
@@ -334,10 +493,10 @@
       // Literal matches are preferable to broader long-form expansions. The
       // glossary is a fallback for abbreviations absent from this catalog.
       if (indexed && !ALWAYS_EXPAND_ALIASES.has(term) && !acronymExpansion) {
-        return {
+        return [{
           source: term,
           terms: [...weightedTerms].map(([expanded, weight]) => ({ term: expanded, weight })),
-        };
+        }];
       }
       const expansion = acronymExpansion?.phrase || QUERY_ALIASES[term];
       const expansionWeight = acronymExpansion ? .9 : .86;
@@ -347,7 +506,7 @@
         if (expanded !== term && directTermSet.has(expanded)) return;
         if (!weightedTerms.has(expanded)) weightedTerms.set(expanded, expansionWeight);
       });
-      return {
+      return [{
         source: term,
         terms: [...weightedTerms].map(([expanded, weight]) => ({ term: expanded, weight })),
         minimumEvidence: acronymExpansion ? 2 : undefined,
@@ -357,7 +516,7 @@
           confidence: acronymExpansion.confidence,
           basis: acronymExpansion.basis,
         } : null,
-      };
+      }];
     });
   }
 

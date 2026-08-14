@@ -82,20 +82,6 @@
     <summary>Bureau of Economic and Business Affairs | Closes 2026-08-20 | Leveraging foreign assistance from the Pax Fund, this NOFO launches the Pax Silica Artificial Intelligence (AI) Assistance Project-a historic first-of-its-kind programmatic initiative to strengthen global AI supply chain security by creating a trusted supply chain credentialing and provenance platform to secure the AI supply chain in partner countries and economies. This NOFO seeks to fund the est…</summary>
   </entry>
   <entry>
-    <title>NOI: PROSPECT Program: Providing Opportunities for Specialized Education in Critical Technologies</title>
-    <link href="https://www.grants.gov/search-results-detail/363510"/>
-    <id>urn:funding-finder:grants-gov:363510</id>
-    <updated>2026-08-07T00:00:00Z</updated>
-    <author><name>Golden Field Office</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Carbon management"/>
-    <category term="Climate change"/>
-    <summary>Golden Field Office | Closes 2027-01-15 | The U.S Department of Energy (DOE)’s Office of Critical Minerals and Energy Innovation (CMEI) intends to establish, on behalf of the Analysis and Strategy Office (ASO), the PROSPECT Program-Providing Opportunities for Specialized Education in Critical Technologies-and anticipates investing up to $100 million, subject to the availability of appropriated funds, to strengthen the nation's educational…</summary>
-  </entry>
-  <entry>
     <title>DRL Ensuring Resilient Seafood Supply Chains: Countering Forced Labor and any associated Illegal, Unreported and Unregulated Fishing</title>
     <link href="https://www.grants.gov/search-results-detail/363486"/>
     <id>urn:funding-finder:grants-gov:363486</id>
@@ -426,7 +412,7 @@
     <category term="Transportation"/>
     <category term="Data science"/>
     <category term="Energy"/>
-    <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | Project Background, Goals, and ObjectivesIn an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will leave…</summary>
+    <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | Project Background, Goals, and Objectives: In an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will lea…</summary>
   </entry>
   <entry>
     <title>PD ANNUAL PROGRAM STATEMENT</title>
@@ -438,7 +424,7 @@
     <category term="Education and workforce"/>
     <category term="Manufacturing"/>
     <category term="Technology development"/>
-    <summary>U.S. Mission to Bolivia | Closes 2026-08-15 | Goals and Objectives• Celebrate American Excellence:o Showcase American innovation, technological leadership, and entrepreneurial spirit, celebrating American dynamism or telling America’s story of excellence.o Highlight U.S. achievements in science, technology, sports, industry, and culture.o Demonstrate the excellence and reliability of American products, services, and standards.o Promote Americ…</summary>
+    <summary>U.S. Mission to Bolivia | Closes 2026-08-15 | Goals and Objectives• Celebrate American Excellence: o Showcase American innovation, technological leadership, and entrepreneurial spirit, celebrating American dynamism or telling America’s story of excellence.o Highlight U.S. achievements in science, technology, sports, industry, and culture.o Demonstrate the excellence and reliability of American products, services, and standards.o Promote Ameri…</summary>
   </entry>
   <entry>
     <title>Chemical Process Systems (CPS)</title>
@@ -761,5 +747,20 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Education and workforce"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Closes 2026-10-01 | With a focus on two-year Institutions of Higher Education (IHEs), the Advanced Technological Education (ATE) program supports the education of technicians for the high-technology fields that drive our nation's economy. The program involves partnerships between academic institutions (grades 7-12, IHEs), industry, and economic development agencies to promote improvement in the education of science a…</summary>
+  </entry>
+  <entry>
+    <title>IUSE/Professional Formation of Engineers: Revolutionizing Engineering Departments</title>
+    <link href="https://www.grants.gov/search-results-detail/353413"/>
+    <id>urn:funding-finder:grants-gov:353413</id>
+    <updated>2024-04-05T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation | Closes 2026-09-08 | Revolutionizing Engineering Departments (hereinafter referred to as RED) is designed to build upon previous efforts in engineering education research. Specifically, previous and ongoing evaluations of the NSF Engineering Education and Centers Division program and its predecessors, as well as those related programs in the Directorate for STEM Education, have shown that prior investments have signif…</summary>
   </entry>
 </feed>

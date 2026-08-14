@@ -205,3 +205,37 @@ test("resolves CFD against the production catalog from researcher context", () =
   assert.ok(result.scores[targetIndex] > 0);
   assert.equal(result.diagnostics.acronymExpansions[0].phrase, "computational fluid dynamics");
 });
+
+test("production separation searches surface focused programs and the DOE umbrella call without policy noise", () => {
+  const apis = loadApis();
+  const catalog = assignmentJson(productionCatalogSource);
+  const engine = apis.retrieval.create(catalog, apis.query);
+  const ids = Object.fromEntries(
+    catalog.opportunities.map((record, index) => [record.opportunity_id, index]),
+  );
+
+  for (const query of ["separations with ionic liquids", "REE extraction with ILs"]) {
+    const result = engine.score(query);
+    for (const id of ["362061", "362063", "360678"]) {
+      assert.ok(result.scores[ids[id]] > 0, `${query}: ${id}`);
+    }
+    const workshop = catalog.opportunities.findIndex(record =>
+      /YSEALI Regional Workshop/i.test(record.title || "")
+    );
+    assert.ok(workshop >= 0);
+    assert.equal(result.scores[workshop], 0, `${query}: policy workshop noise`);
+  }
+});
+
+test("exact Basic Energy Sciences wording outranks generic new DOE notices", () => {
+  const apis = loadApis();
+  const catalog = assignmentJson(productionCatalogSource);
+  const result = apis.retrieval.create(catalog, apis.query)
+    .score("DOE Basic Energy Sciences separations");
+  const bes = catalog.opportunities.findIndex(record => record.opportunity_id === "360678");
+  const prospect = catalog.opportunities.findIndex(record => record.opportunity_id === "363510");
+
+  assert.ok(bes >= 0);
+  assert.ok(result.scores[bes] > 0);
+  if (prospect >= 0) assert.ok(result.scores[bes] > result.scores[prospect]);
+});

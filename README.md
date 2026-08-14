@@ -40,7 +40,12 @@ unambiguous abbreviations add query-side context without requiring a catalog
 rebuild. Unfamiliar acronyms can also be resolved from matching full phrases in
 the local catalog when the enabled research profile, CV, or ORCID publications
 provide enough context; ambiguous expansions are rejected. This path and
-profile relevance make zero AI calls.
+profile relevance make zero AI calls. Compound scientific concepts are kept
+distinct: for example, REE/rare-earth targets, extraction methods, and ionic
+liquids/ILs must provide compatible evidence instead of matching generic words
+such as “processing” or “critical.” Broad BAAs and umbrella solicitations are
+indexed from evidence-backed subprogram text when the official notice provides
+it.
 
 Ordinary and profile-ranked search make zero AI calls. A user may enter an
 OpenAI or Anthropic key to:
@@ -145,7 +150,9 @@ Feeds, email matching, and the browser independently reapply a runtime
 expiration/non-funding gate so an opportunity that ages out between catalog
 runs is not shown as active. The daily workflow also maintains a rolling
 change feed and rotates through official links, recording status, content
-type, redirect target, and last-check time.
+type, redirect target, and last-check time. Confirmed 404/410 routes are marked
+in the generated catalog so both card views omit them and fall back to another
+official route; timeouts and access restrictions are not treated as broken.
 For a small manually managed pilot, `docs/weekly-alerts/` contains a
 private-repository email-digest bundle. It now includes deadline-change,
 amendment, closing-soon, and closure events from the rolling change feed. The
@@ -156,12 +163,12 @@ self-service account, personalized RSS, and email-service architecture.
 
 <!-- catalog-stats:start -->
 This replaces the former 48-record Chemical and Sustainability Engineering feed. The
-August 13, 2026 build contains 1,479 current funding opportunities (1,188 posted and 291
-forecasted) from Grants.gov (1,423), NYSERDA (38), U.S. National Science Foundation (1),
+August 13, 2026 build contains 1,476 current funding opportunities (1,185 posted and 291
+forecasted) from Grants.gov (1,420), NYSERDA (38), U.S. National Science Foundation (1),
 UR VPR funding digest (limited submissions & foundations) (17), with no deadline before
 the catalog date. It provides a direct official announcement for 402 records, an
-official source-page route for another 617, and the official Grants.gov record for the
-remaining 460. Across all route types, 743 records also contain an official source URL.
+official source-page route for another 602, and the official Grants.gov record for the
+remaining 472. Across all route types, 742 records also contain an official source URL.
 <!-- catalog-stats:end -->
 
 Funding values are intentionally not conflated: award floor/ceiling drive

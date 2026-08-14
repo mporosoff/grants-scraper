@@ -899,6 +899,12 @@ textarea:focus {
   background: #fff0df;
 }
 
+.badge.broad {
+  color: #76510d;
+  background: #fff6d9;
+  border: 1px solid #ead7a4;
+}
+
 .badge.ai {
   color: #021bc3;
   background: #e5efff;
@@ -1261,6 +1267,17 @@ textarea:focus {
 
 .details-body {
   padding-top: 14px;
+}
+
+.scope-note {
+  margin: 0 0 14px;
+  padding: 10px 12px;
+  color: #65501e;
+  font-size: .8rem;
+  line-height: 1.45;
+  background: #fffaf0;
+  border-left: 3px solid #d3a83f;
+  border-radius: 6px;
 }
 
 .detail-grid {

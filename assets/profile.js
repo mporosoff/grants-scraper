@@ -96,7 +96,10 @@
     return {
       status_posted: source.status_posted !== false,
       status_forecasted: source.status_forecasted !== false,
-      status_archived: source.status_archived === true,
+      // Archived results are an explicit, session-only opt-in. Restoring this
+      // from a saved profile can silently contaminate an otherwise normal
+      // current-opportunity search after a later visit.
+      status_archived: false,
       deadline_from: cleanDate(source.deadline_from),
       deadline_to: cleanDate(source.deadline_to),
       minimum_award: Number.isFinite(minimumAward) && minimumAward > 0

@@ -19,7 +19,7 @@ from urllib.parse import urljoin, urlparse
 
 import requests
 
-from scripts.build_catalog import USER_AGENT, safe_http_url
+from scripts.build_catalog import USER_AGENT, safe_http_url, write_catalog
 from scripts.build_feeds import load_catalog
 
 
@@ -250,6 +250,33 @@ def serialize_state(state: dict) -> str:
     return "\n".join(lines) + "\n"
 
 
+def annotate_catalog_link_health(catalog: dict, state: dict) -> int:
+    """Mark only confirmed 404/410 links so cards can use a healthy fallback.
+
+    Timeouts, connection resets, and access restrictions are deliberately not
+    treated as broken because many sponsor sites block automated checks while
+    remaining usable in a normal browser.
+    """
+    health = state.get("records") or {}
+    catalog["link_health_generated_at"] = state.get("generated_at")
+    changed = 0
+    for record in catalog.get("opportunities") or []:
+        broken = sorted({
+            url
+            for field in URL_FIELDS
+            if (url := safe_http_url(record.get(field)))
+            and health.get(url, {}).get("status") in {404, 410}
+        })
+        previous = record.get("link_health_broken_urls") or []
+        if broken:
+            record["link_health_broken_urls"] = broken
+        else:
+            record.pop("link_health_broken_urls", None)
+        if list(previous) != broken:
+            changed += 1
+    return changed
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--catalog", default="data/opportunities.js")
@@ -284,13 +311,16 @@ def main(argv=None) -> int:
         serialize_state(state),
         encoding="utf-8",
     )
+    annotated = annotate_catalog_link_health(catalog, state)
+    write_catalog(catalog, Path(args.catalog))
     broken = state["broken_this_run"]
     checked = state["checked_this_run"]
     print(
         f"Checked {checked}/{state['url_count']} links: "
         f"{state['healthy_this_run']} healthy, {broken} broken, "
         f"{state['restricted_this_run']} access-restricted, "
-        f"{state['redirected_this_run']} redirected."
+        f"{state['redirected_this_run']} redirected; "
+        f"{annotated} catalog records updated with confirmed missing links."
     )
     if checked >= 20 and broken / checked > args.fail_threshold:
         print("Systemic link-health threshold exceeded.")

@@ -89,7 +89,7 @@ test("wires the external researcher editor into a syntactically valid page", () 
   assert.match(teamPage, /Show full description &amp; details/);
   assert.match(teamPage, /Per-award amount/);
   assert.match(teamPage, /Eligible applicants/);
-  assert.match(teamPage, /Open official opportunity/);
+  assert.match(teamPage, /Open official FOA/);
   assert.match(teamPage, /intended for individual and internal institutional use/);
   assert.match(teamPage, /not an official source of record/);
   assert.match(teamPage, /independently verify fit, eligibility, deadlines, requirements, and terms/);
@@ -440,7 +440,7 @@ test("presents one interactive full-team list with graded themes and broad-call 
   assert.match(teamPage, /Team themes · click to steer the search/);
   assert.match(teamPage, /Blue = shared research areas/);
   assert.match(teamPage, /Purple = complementary bridge themes/);
-  assert.match(teamPage, /broad · verify fit/);
+  assert.match(teamPage, /Broad \/ umbrella call/);
   assert.match(teamPage, /Broad sponsor-scope signal:/);
   assert.match(teamPage, /Broad sponsor-scope match/);
   assert.doesNotMatch(teamPage, /" of " \+ selected\.length/);

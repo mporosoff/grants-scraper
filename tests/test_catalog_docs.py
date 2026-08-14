@@ -32,9 +32,11 @@ class CatalogDocumentationTests(unittest.TestCase):
         readme_path = REPOSITORY_ROOT / "README.md"
         project_path = REPOSITORY_ROOT / "PROJECT.md"
         explorer_path = REPOSITORY_ROOT / "match_explorer.html"
+        team_path = REPOSITORY_ROOT / "team_match.html"
         readme = readme_path.read_text(encoding="utf-8")
         project = project_path.read_text(encoding="utf-8")
         explorer = explorer_path.read_text(encoding="utf-8")
+        team = team_path.read_text(encoding="utf-8")
         catalog = load_catalog(REPOSITORY_ROOT / "data" / "opportunities.js")
         stats = catalog_stats(catalog)
 
@@ -43,6 +45,7 @@ class CatalogDocumentationTests(unittest.TestCase):
             update_catalog_asset_reference(explorer, catalog),
             explorer,
         )
+        self.assertEqual(update_catalog_asset_reference(team, catalog), team)
 
     def test_generator_requires_unique_marker_pairs(self):
         stats = catalog_stats(
