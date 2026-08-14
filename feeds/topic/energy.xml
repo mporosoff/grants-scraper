@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-08-13T12:10:38Z</updated>
+  <updated>2026-08-13T12:27:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -17,6 +17,49 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>Rural Utilities Service | Closes 2027-05-03 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for Affiliated Partner with the Californian Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/363545"/>
+    <id>urn:funding-finder:grants-gov:363545</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <summary>Geological Survey | Closes 2026-09-12 | The U.S. Geological Survey's (USGS) Western Fisheries Research Center in partnership with the Grand Canyon Science Center and Wetland and Aquatic Research Center solicits technical assistance from a CESU partner to: a) integrate a novel road network model into an existing invasive quagga and zebra mussel risk assessment model for Washington State; and b) expand that model to establish a standardiz…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for Affiliated Partner with the Colorado Plateau Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/363544"/>
+    <id>urn:funding-finder:grants-gov:363544</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <summary>Geological Survey | Closes 2026-09-12 | The U.S. Geological Survey (USGS) Southwest Biological Science Center (SBSC) is offering a funding opportunity to a CESU partner for research in developing multi-month forecasts of management-relevant rangeland drought forecasts and improve a platform for delivering those forecasts to resource managers across western rangelands.Research Objectives:Wildfire and invasive species are transforming dry…</summary>
+  </entry>
+  <entry>
+    <title>Energy Economy Planning and Growth Program</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001COlXwAAL"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON6201</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <summary>NYSERDA | Closes 2026-10-21 | Provides funding for projects in three categories: Category A) Regional Planning - technical assistance for Regional Energy Economy strategies; Category B) Industry Plans- funding for plans designed to attract and grow a specific industry across several regions in New York; and Category C) Implementation Support - targeted investment for implementation activities. NYSERDA has prequalified firms ca…</summary>
+  </entry>
+  <entry>
+    <title>Engineering (ENG): Electrical, Communications, and Computing Systems (ECCS)</title>
+    <link href="https://www.grants.gov/search-results-detail/363551"/>
+    <id>urn:funding-finder:grants-gov:363551</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Energy"/>
+    <category term="Quantum science"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-12 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research for electrical, communications and computing systems through the following programs: The Electronic, Photonic, Magnetic, and Quantum Devices (EPMQD) program supports foundational engineering research on novel classical and quantum devices, exploring matter’s electronic, photonic, and magnetic …</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Alaska Cooperative Ecosystem Studies Unit (CESU)</title>
@@ -516,6 +559,19 @@
     <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination of the U.S. Department of State announces an open competition for organizations to submit a statement of interest (SOI) for innovative foreign assistance programs benefiting partner countries that also advance U.S. commercial diplomacy and put American interests first. SOI must demonstrate how projects will leverage foreign assi…</summary>
   </entry>
   <entry>
+    <title>Supply Chain Acceleration and Logistics Enablement (SCALE) Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363089"/>
+    <id>urn:funding-finder:grants-gov:363089</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>Small Business Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>Small Business Administration | Closes 2026-08-13 | The Supply Chain Acceleration and Logistics Enablement (SCALE) Program supports organizations that help small businesses overcome operational, technical, workforce, and market access barriers that limit their ability to participate and grow as suppliers within strategically important industries. Through technical assistance, industry engagement, and other implementation focused activities, SCALE h…</summary>
+  </entry>
+  <entry>
     <title>English Language Teaching and Learning Program</title>
     <link href="https://www.grants.gov/search-results-detail/363077"/>
     <id>urn:funding-finder:grants-gov:363077</id>
@@ -632,61 +688,5 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Bureau of Reclamation | Closes 2026-09-28 | The objectives of this NAA/TAP funding opportunity are to provide funding for drought relief actions/projects that mitigate drought impacts for designated federally recognized tribes within the Colorado River Basin (see Eligibility section for list of tribes), and which advance Presidential and Department of the Interior Priorities within the Basin.Proposals should meet one or more of the followin…</summary>
-  </entry>
-  <entry>
-    <title>FY 2026 Continuum of Care Competition and Youth Homelessness Demonstration Program Grants NOFO</title>
-    <link href="https://www.grants.gov/search-results-detail/361999"/>
-    <id>urn:funding-finder:grants-gov:361999</id>
-    <updated>2026-06-01T00:00:00Z</updated>
-    <author><name>Department of Housing and Urban Development</name></author>
-    <category term="Community development"/>
-    <category term="Energy"/>
-    <summary>Department of Housing and Urban Development | Closes 2026-08-26 | The Continuum of Care (CoC) Program is designed to:promote a community-wide commitment to the goal of ending homelessness;provide funding for efforts by nonprofit providers, States, Indian Tribes or Tribally Designated Housing Entities [as defined in section 4 of the Native American Housing Assistance and Self-Determination Act of 1996 (25 U.S.C. 4103) (TDHEs)], and local governments to quickly re…</summary>
-  </entry>
-  <entry>
-    <title>ROSES25: F.17 Research Initiation Awards</title>
-    <link href="https://www.grants.gov/search-results-detail/362495"/>
-    <id>urn:funding-finder:grants-gov:362495</id>
-    <updated>2026-05-20T00:00:00Z</updated>
-    <author><name>NASA Headquarters</name></author>
-    <category term="Energy"/>
-    <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Closes 2026-08-18 | NOTICE: Amended May 20, 2026. This amendment releases final text for this program element, which was previously TBD. Neither an NOI nor Step-1 proposal is requested. The due date for proposals is August 18, 2026. An informational webinar about this opportunity will occur at 1 p.m. Eastern Time on June 16. Register for the webinar at https://nasaevents.webex.com/weblink/register/r2fbc7ed95634bfe117…</summary>
-  </entry>
-  <entry>
-    <title>Title XVI Water Reclamation and Reuse Projects</title>
-    <link href="https://www.grants.gov/search-results-detail/362396"/>
-    <id>urn:funding-finder:grants-gov:362396</id>
-    <updated>2026-05-14T00:00:00Z</updated>
-    <author><name>Bureau of Reclamation</name></author>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Water"/>
-    <summary>Bureau of Reclamation | Closes 2027-08-26 | Through WaterSMART, the Bureau of Reclamation (Reclamation) leverages Federal and non- Federal funding to work cooperatively with States, Tribes, and other entities as they plan for and implement actions to increase water supply and hydropower reliability. The WaterSMART Program demonstrably advances Trump administration priorities, such as those identified in Presidential Executive Order 14154 (J…</summary>
-  </entry>
-  <entry>
-    <title>WaterSMART: Desalination Construction Projects</title>
-    <link href="https://www.grants.gov/search-results-detail/362395"/>
-    <id>urn:funding-finder:grants-gov:362395</id>
-    <updated>2026-05-14T00:00:00Z</updated>
-    <author><name>Bureau of Reclamation</name></author>
-    <category term="Energy"/>
-    <category term="Water"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Bureau of Reclamation | Closes 2027-08-26 | Through WaterSMART, the Bureau of Reclamation (Reclamation) leverages Federal and non-Federal funding to work cooperatively with States, Tribes, and other entities as they plan for and implement actions to increase water supply and hydropower reliability. The WaterSMART Program demonstrably advances Trump administration priorities, such as those identified in Presidential Executive Order 14154 (Ja…</summary>
-  </entry>
-  <entry>
-    <title>WaterSMART Enhancing Water Resources Projects</title>
-    <link href="https://www.grants.gov/search-results-detail/362394"/>
-    <id>urn:funding-finder:grants-gov:362394</id>
-    <updated>2026-05-14T00:00:00Z</updated>
-    <author><name>Bureau of Reclamation</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Water"/>
-    <summary>Bureau of Reclamation | Closes 2027-09-08 | The objective of the WaterSMART Enhancing Water Resources Projects funding opportunity is to invite eligible entities to apply for funding to implement projects per the authorizing language referenced above that benefit water resource management for multiple uses, including water conservation and efficiency projects, water infrastructure improvements, and river and watershed restoration. Projects …</summary>
   </entry>
 </feed>

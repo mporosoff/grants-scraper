@@ -107,7 +107,21 @@
         : createId(name, output);
       if (used.has(id)) id = createId(name, output);
       used.add(id);
-      output.push({ id, name, keywords });
+      const orcidId = /^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$/i.test(String(raw.orcid_id || ""))
+        ? String(raw.orcid_id).toUpperCase()
+        : "";
+      output.push({
+        id,
+        name,
+        keywords,
+        orcid_id: orcidId,
+        orcid_name: orcidId ? cleanText(raw.orcid_name, 160) : "",
+        orcid_text: orcidId ? cleanText(raw.orcid_text, 40_000) : "",
+        orcid_work_count: orcidId ? Math.max(0, Math.min(100, Number(raw.orcid_work_count) || 0)) : 0,
+        orcid_total_work_count: orcidId ? Math.max(0, Number(raw.orcid_total_work_count) || 0) : 0,
+        orcid_source: orcidId ? cleanText(raw.orcid_source, 200) : "",
+        orcid_updated_at: orcidId ? cleanText(raw.orcid_updated_at, 40) : "",
+      });
     }
     return output;
   }
@@ -167,6 +181,19 @@
       : 0;
   }
 
+  function recordIsCurrent(record, now = new Date()) {
+    const status = String(record?.status || "").trim().toLowerCase();
+    if (["archived", "closed", "cancelled", "canceled", "withdrawn", "expired"].includes(status)) {
+      return false;
+    }
+    const today = now.toISOString().slice(0, 10);
+    const archiveDate = String(record?.archive_date || "").slice(0, 10);
+    if (/^\d{4}-\d{2}-\d{2}$/.test(archiveDate) && archiveDate <= today) return false;
+    const closeDate = String(record?.close_date || "").slice(0, 10);
+    if (/^\d{4}-\d{2}-\d{2}$/.test(closeDate) && closeDate < today && !record?.rolling) return false;
+    return true;
+  }
+
   function recencyScore(value, newestValue) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(String(value || ""))
       || !/^\d{4}-\d{2}-\d{2}$/.test(String(newestValue || ""))) return 0;
@@ -177,7 +204,7 @@
     return 3 * Math.max(0, 1 - ageDays / 365);
   }
 
-  function keywordEvidence(keyword, record, searchApi, retrievalEngine) {
+  function keywordEvidence(keyword, record, searchApi, retrievalEngine, context = "") {
     // Validate retrieval against source wording, not derived topic facets. The
     // search index intentionally contains broad catalog topics, so trusting its
     // lexical score alone can turn a noisy "Materials science" tag into a
@@ -189,8 +216,10 @@
     ].join(" ");
     const rawTokenList = conceptTokens(rawText);
     const rawTokens = new Set(rawTokenList);
-    const groups = searchApi.expandGroups
-      ? searchApi.expandGroups(keyword, term => rawTokens.has(term))
+    const groups = typeof retrievalEngine?.expandGroups === "function"
+      ? retrievalEngine.expandGroups(keyword, { context })
+      : searchApi.expandGroups
+        ? searchApi.expandGroups(keyword, term => rawTokens.has(term))
       : searchApi.tokenize(keyword).map(term => ({
         source: term,
         terms: [{ term, weight: 1 }],
@@ -223,7 +252,8 @@
       groupTermSets[groupIndex].forEach(term => {
         if (rawTokens.has(term)) groupHits.add(term);
       });
-      if (groupHits.size) covered += 1;
+      const minimumEvidence = Number(group.minimumEvidence || 0) || 1;
+      if (groupHits.size >= minimumEvidence) covered += 1;
       if (rawTokens.has(group.source)) direct += 1;
       aliasHits += groupHits.size;
     });
@@ -237,7 +267,9 @@
     // at least two contextual words when the abbreviation itself is absent.
     const aliasEnough = groups.length !== 1
       || direct > 0
-      || groups[0].terms.length < 6
+      || (groups[0].minimumEvidence
+        ? aliasHits >= groups[0].minimumEvidence
+        : groups[0].terms.length < 6)
       || aliasHits >= 2;
     const windowSize = groups.length + 4;
     let proximityEnough = groups.length === 1;
@@ -273,6 +305,11 @@
     const focusedKeywords = (profile.keywords || []).filter(keyword =>
       !GENERIC_KEYWORDS.has(cleanText(keyword, 64).toLowerCase()),
     );
+    const context = [
+      ...focusedKeywords,
+      profile.research_summary || profile.summary || "",
+      cleanText(profile.publication_text, 12_000),
+    ].filter(Boolean).join(". ").slice(0, 24_000);
     const evidenceByDocument = new Map();
     function addEvidence(documentId, keyword, strength, lexical) {
       const evidence = evidenceByDocument.get(documentId) || [];
@@ -287,7 +324,7 @@
     }
     if (typeof retrievalEngine?.score === "function") {
       for (const keyword of focusedKeywords) {
-        const result = retrievalEngine.score(keyword);
+        const result = retrievalEngine.score(keyword, { context });
         const candidates = [];
         for (let documentId = 0; documentId < records.length; documentId += 1) {
           const score = Number(result.scores?.[documentId] || 0);
@@ -312,7 +349,7 @@
           if (semanticOnly && relativeScore < MIN_RELATIVE_SEMANTIC_SCORE) continue;
           if (semanticOnly && semanticMatches >= MAX_SEMANTIC_MATCHES_PER_KEYWORD) continue;
           const evidence = keywordEvidence(
-            keyword, records[candidate.documentId], searchApi, retrievalEngine,
+            keyword, records[candidate.documentId], searchApi, retrievalEngine, context,
           );
           if (!evidence.matched) continue;
           addEvidence(
@@ -353,7 +390,7 @@
         conceptCount.forEach((count, documentId) => {
           if (count < needed) return;
           const evidence = keywordEvidence(
-            keyword, records[documentId], searchApi, retrievalEngine,
+            keyword, records[documentId], searchApi, retrievalEngine, context,
           );
           if (!evidence.matched) return;
           addEvidence(
@@ -376,6 +413,7 @@
     }, "");
     const matches = [];
     records.forEach((record, documentId) => {
+      if (!recordIsCurrent(record)) return;
       const evidence = evidenceByDocument.get(documentId) || [];
       if (!evidence.length) return;
       if (evidence.length === 1 && !evidence[0].lexical

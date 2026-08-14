@@ -49,6 +49,18 @@
     return Math.floor((now.getTime() - timestamp) / 86400000);
   }
 
+  function recordIsCurrent(record, now) {
+    const status = String(record.status || "").trim().toLowerCase();
+    if (["archived", "closed", "cancelled", "canceled", "withdrawn", "expired"].includes(status)) {
+      return false;
+    }
+    const archiveAge = daysBetween(record.archive_date, now);
+    if (archiveAge !== null && archiveAge >= 0) return false;
+    const closeAge = daysBetween(record.close_date, now);
+    if (closeAge !== null && closeAge > 0 && !record.rolling) return false;
+    return true;
+  }
+
   function bestUrl(record) {
     for (const field of ["funding_opportunity_url", "primary_document_url", "detail_page", "url"]) {
       const value = String(record[field] || "");
@@ -77,6 +89,9 @@
     const lexicon = config.theme_lexicon || {};
     const bridgeDefinitions = config.bridge_themes || [];
     const commonTopics = new Set([...COMMON_TOPICS, ...(config.common_topics || [])]);
+    const acronymResolver = searchApi?.createAcronymResolver
+      ? searchApi.createAcronymResolver(rawRecords)
+      : null;
     let broadPattern;
     try {
       broadPattern = new RegExp(config.broad_pattern || DEFAULT_BROAD_PATTERN, "i");
@@ -103,9 +118,9 @@
     const wordFrequency = new Map();
     const topicFrequency = new Map();
     const profileVocabularyCache = new WeakMap();
+    const groupDefinitionCache = new Map();
     rawRecords.forEach(record => {
-      const closeAge = daysBetween(record.close_date, now);
-      if (closeAge !== null && closeAge > 0 && !record.rolling) return;
+      if (!recordIsCurrent(record, now)) return;
       const identityText = `${record.agency || ""} ${record.title || ""}`;
       if (OUT_OF_SCOPE_RE.some(pattern => pattern.test(identityText))) return;
       const sourceText = [
@@ -170,21 +185,51 @@
       return .15;
     }
 
-    function groupDefinitions(value) {
+    function profileContext(profile) {
+      return [
+        ...(profile.key_terms || []),
+        ...(profile.keywords || []),
+        profile.research_summary || profile.summary || "",
+        String(profile.publication_text || "").slice(0, 12_000),
+      ].filter(Boolean).join(". ").slice(0, 24_000);
+    }
+
+    function groupDefinitions(value, context = "") {
+      let contextCache = groupDefinitionCache.get(context);
+      if (!contextCache) {
+        contextCache = new Map();
+        groupDefinitionCache.set(context, contextCache);
+      }
+      const valueKey = String(value || "");
+      if (contextCache.has(valueKey)) return contextCache.get(valueKey);
+      let groups;
       if (searchApi?.expandGroups) {
-        return searchApi.expandGroups(value, term => wordFrequency.has(term)).map(group => ({
+        groups = searchApi.expandGroups(
+          value,
+          term => wordFrequency.has(term),
+          { acronymResolver, context },
+        ).map(group => ({
           source: group.source,
           terms: group.terms || [],
+          minimumEvidence: Number(group.minimumEvidence || 0),
+          expansion: group.expansion || null,
+        }));
+      } else {
+        groups = uniq(tokenize(value)).map(term => ({
+          source: term,
+          terms: [{ term, weight: 1 }],
         }));
       }
-      return uniq(tokenize(value)).map(term => ({ source: term, terms: [{ term, weight: 1 }] }));
+      contextCache.set(valueKey, groups);
+      return groups;
     }
 
     function profileVocabulary(profile) {
       if (profileVocabularyCache.has(profile)) return profileVocabularyCache.get(profile);
       const terms = new Set();
+      const context = profileContext(profile);
       for (const phrase of profile.key_terms || profile.keywords || []) {
-        groupDefinitions(phrase).forEach(group => {
+        groupDefinitions(phrase, context).forEach(group => {
           if (group.source) terms.add(group.source);
           (group.terms || []).forEach(item => {
             if (item.term) terms.add(item.term);
@@ -202,8 +247,8 @@
       return left.slice(0, 6) === right.slice(0, 6);
     }
 
-    function phraseEvidence(phrase, prepared) {
-      const groups = groupDefinitions(phrase);
+    function phraseEvidence(phrase, prepared, context = "") {
+      const groups = groupDefinitions(phrase, context);
       if (!groups.length) return null;
       const groupTermSets = groups.map(group => new Set(group.terms.map(item => item.term)));
       let matchedGroups = 0;
@@ -214,8 +259,12 @@
         const direct = prepared.tokenSet.has(group.source);
         const aliasHits = group.terms.filter(item =>
           item.term !== group.source && prepared.tokenSet.has(item.term));
-        const contextual = !direct && group.terms.length >= 6 && aliasHits.length >= 2;
-        const alias = !direct && !contextual && aliasHits.length > 0;
+        const minimumAliasEvidence = group.minimumEvidence
+          || (group.terms.length >= 6 ? 2 : 1);
+        const contextual = !direct
+          && (group.minimumEvidence > 0 || group.terms.length >= 6)
+          && aliasHits.length >= minimumAliasEvidence;
+        const alias = !direct && minimumAliasEvidence === 1 && !contextual && aliasHits.length > 0;
         if (!direct && !contextual && !alias) return;
         matchedGroups += 1;
         if (direct) directGroups += 1;
@@ -304,9 +353,10 @@
       let tagScore = 0;
       let strong = false;
       let signalCount = 0;
+      const context = profileContext(profile);
 
       for (const phrase of profile.key_terms || profile.keywords || []) {
-        const evidence = phraseEvidence(phrase, prepared);
+        const evidence = phraseEvidence(phrase, prepared, context);
         if (!evidence) continue;
         phraseScore += evidence.score;
         strong = strong || evidence.strong;

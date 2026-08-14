@@ -37,7 +37,10 @@ and topic relationships inferred from the current catalog. Exact titles and
 opportunity numbers remain highest priority. The postings index contains terms
 found in the records; it is not a pre-approved list of queries. Common,
 unambiguous abbreviations add query-side context without requiring a catalog
-rebuild. This path and profile relevance make zero AI calls.
+rebuild. Unfamiliar acronyms can also be resolved from matching full phrases in
+the local catalog when the enabled research profile, CV, or ORCID publications
+provide enough context; ambiguous expansions are rejected. This path and
+profile relevance make zero AI calls.
 
 Ordinary and profile-ranked search make zero AI calls. A user may enter an
 OpenAI or Anthropic key to:
@@ -153,12 +156,12 @@ self-service account, personalized RSS, and email-service architecture.
 
 <!-- catalog-stats:start -->
 This replaces the former 48-record Chemical and Sustainability Engineering feed. The
-August 12, 2026 build contains 1,469 current funding opportunities (1,179 posted and 290
-forecasted) from Grants.gov (1,414), NYSERDA (37), U.S. National Science Foundation (1),
+August 13, 2026 build contains 1,479 current funding opportunities (1,188 posted and 291
+forecasted) from Grants.gov (1,423), NYSERDA (38), U.S. National Science Foundation (1),
 UR VPR funding digest (limited submissions & foundations) (17), with no deadline before
-the catalog date. It provides a direct official announcement for 401 records, an
-official source-page route for another 613, and the official Grants.gov record for the
-remaining 455. Across all route types, 738 records also contain an official source URL.
+the catalog date. It provides a direct official announcement for 402 records, an
+official source-page route for another 617, and the official Grants.gov record for the
+remaining 460. Across all route types, 743 records also contain an official source URL.
 <!-- catalog-stats:end -->
 
 Funding values are intentionally not conflated: award floor/ceiling drive
@@ -258,3 +261,14 @@ subscriber data, SMTP credentials, and returned review files are not committed.
 See `PROJECT.md` for the completed Phase 1/1.5 scope, deferred Phase 2 pilot,
 and Phase 3 implementation,
 and `docs/HOSTING.md` for the deployment boundary.
+
+## Use and license
+
+The public site is an informational research-planning aid intended for
+individual and internal institutional use. It is not an official source of
+record or an application/submission system, and users must verify eligibility,
+deadlines, requirements, and terms in each sponsor's official notice.
+
+Copyright (c) 2026 Marc D. Porosoff. The software remains available under the
+[MIT License](LICENSE); the intended-use description above is not an additional
+restriction on the permissions granted by that license.

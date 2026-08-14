@@ -11,6 +11,14 @@ const retrievalSource = await readFile(
   new URL("../../assets/search-retrieval.js", import.meta.url),
   "utf8",
 );
+const productionCatalogSource = await readFile(
+  new URL("../../data/opportunities.js", import.meta.url),
+  "utf8",
+);
+
+function assignmentJson(source) {
+  return JSON.parse(source.slice(source.indexOf("{"), source.lastIndexOf(";")).trim());
+}
 
 function loadApis() {
   const context = { globalThis: {} };
@@ -130,4 +138,70 @@ test("preserves exact opportunity-number priority", () => {
   const rebuilt = catalogFor(catalog.opportunities, apis.query);
   const scores = apis.retrieval.create(rebuilt, apis.query).score("DE-FOA-123").scores;
   assert.ok(scores[0] > scores[1]);
+});
+
+test("retrieves rare-earth extraction opportunities from REE and ionic-liquid wording", () => {
+  const apis = loadApis();
+  const catalog = catalogFor([
+    record(
+      "ree",
+      "Critical minerals recovery and recycling",
+      "Solvent separation and processing of rare earth elements and lanthanides.",
+      ["Separations and membranes", "Materials science"],
+    ),
+    record("battery", "Battery electrolyte manufacturing", "Ionic conductivity in energy storage."),
+    record("arts", "Arts education", "Museum and cultural programming."),
+  ], apis.query);
+  const scores = apis.retrieval.create(catalog, apis.query)
+    .score("ionic liquids for REE extraction", { semantic: false }).scores;
+
+  assert.ok(scores[0] > 0);
+  assert.equal(scores[2], 0);
+  assert.ok(scores[0] > scores[1]);
+});
+
+test("uses researcher context to resolve an unknown acronym without AI", () => {
+  const apis = loadApis();
+  const catalog = catalogFor([
+    record(
+      "cfd",
+      "Hypersonic flow simulation",
+      "Computational fluid dynamics using advanced numerics for high-enthalpy flows.",
+      ["Space and aeronautics"],
+    ),
+    record("fluid", "Fluid film behavior", "Experimental fluid mechanics measurements."),
+    record("food", "Community food distribution", "Regional nutrition access."),
+  ], apis.query);
+  const engine = apis.retrieval.create(catalog, apis.query);
+  const withoutContext = engine.score("CFD", { semantic: false });
+  const withContext = engine.score("CFD", {
+    semantic: false,
+    context: "Transport phenomena and computational fluid dynamics for reacting flows.",
+  });
+
+  assert.equal(withoutContext.scores[0], 0);
+  assert.ok(withContext.scores[0] > 0);
+  assert.equal(withContext.scores[1], 0, "one shared word must not satisfy an acronym expansion");
+  assert.equal(withContext.scores[2], 0);
+  assert.deepEqual(
+    Array.from(
+      withContext.diagnostics.acronymExpansions,
+      item => [item.source, item.phrase],
+    ),
+    [["cfd", "computational fluid dynamics"]],
+  );
+});
+
+test("resolves CFD against the production catalog from researcher context", () => {
+  const apis = loadApis();
+  const catalog = assignmentJson(productionCatalogSource);
+  const targetIndex = catalog.opportunities.findIndex(record => record.opportunity_id === "363066");
+  const result = apis.retrieval.create(catalog, apis.query).score("CFD", {
+    semantic: false,
+    context: "Transport phenomena and computational fluid dynamics for reacting flows.",
+  });
+
+  assert.ok(targetIndex >= 0);
+  assert.ok(result.scores[targetIndex] > 0);
+  assert.equal(result.diagnostics.acronymExpansions[0].phrase, "computational fluid dynamics");
 });

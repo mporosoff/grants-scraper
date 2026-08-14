@@ -1,11 +1,491 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Funding Finder - opportunity changes</title>
+  <title>Funding Finder | opportunity changes</title>
   <link href="https://mporosoff.github.io/grants-scraper/feeds/changes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/changes.xml</id>
-  <updated>2026-08-12T11:12:57Z</updated>
+  <updated>2026-08-13T11:14:25Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Opportunity amended: Combustion and Fire Systems (CFS)</title>
+    <link href="https://www.grants.gov/search-results-detail/347509"/>
+    <id>urn:funding-finder:change:ffa7d9775364c91d4c1d</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Cooperative Agreement for Affiliated Partner with the Californian Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/363545"/>
+    <id>urn:funding-finder:change:f0193ddec6a49a8bf107</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-12</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Forest Legacy Program - FY2028 Funding</title>
+    <link href="https://www.grants.gov/search-results-detail/363363"/>
+    <id>urn:funding-finder:change:ef4abecbbc6ac73214ad</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Catalysis</title>
+    <link href="https://www.grants.gov/search-results-detail/348932"/>
+    <id>urn:funding-finder:change:edb7e310e47bef63e548</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: OJP FY 2026 Special Attorneys Program Round 7</title>
+    <link href="https://www.grants.gov/search-results-detail/363550"/>
+    <id>urn:funding-finder:change:ed54d2a90280624d899e</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: OJP FY 2026 Special Attorneys Program Round 7</title>
+    <link href="https://www.grants.gov/search-results-detail/363550"/>
+    <id>urn:funding-finder:change:ecdc8adb49c109ccf1e4</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-08-25</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: U.S.-Africa Strategic Investment Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363298"/>
+    <id>urn:funding-finder:change:ec391af72b6620edb3cf</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Particulate and Multiphase Processes</title>
+    <link href="https://www.grants.gov/search-results-detail/347325"/>
+    <id>urn:funding-finder:change:e5f485a6dae4f63ddbba</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Supply Chain Acceleration and Logistics Enablement (SCALE) Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363089"/>
+    <id>urn:funding-finder:change:e1941cba09f772654495</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-08-13</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: BJS FY 2026 National Incident-Based Reporting System Estimation Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363553"/>
+    <id>urn:funding-finder:change:d52680be538307ff9b6c</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Interfacial Engineering</title>
+    <link href="https://www.grants.gov/search-results-detail/347326"/>
+    <id>urn:funding-finder:change:d2a0a38b169a5f4ecea7</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Thermal Transport Processes (TTP)</title>
+    <link href="https://www.grants.gov/search-results-detail/347324"/>
+    <id>urn:funding-finder:change:d0df0f21606a41f19cbc</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Energy Economy Planning and Growth Program</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001COlXwAAL"/>
+    <id>urn:funding-finder:change:cee0e4aadc460f633a31</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: FY24 Little Rock Port Authority Transload Yard, AR</title>
+    <link href="https://www.grants.gov/search-results-detail/363542"/>
+    <id>urn:funding-finder:change:c927ac356ee94dfa9dbe</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-08-18</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Nonfatal Overdoses in Emergency Departments: Bridging Patient Characteristics, Biospecimen Toxicology, and Drug Supply Composition</title>
+    <link href="https://www.grants.gov/search-results-detail/363543"/>
+    <id>urn:funding-finder:change:c3ee0fe249c58e7051e8</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-08-31</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: National Resource Centers</title>
+    <link href="https://www.grants.gov/search-results-detail/362377"/>
+    <id>urn:funding-finder:change:c27896bbd85051c3cf9b</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Electrochemical Systems</title>
+    <link href="https://www.grants.gov/search-results-detail/347329"/>
+    <id>urn:funding-finder:change:bda34ca2e73d4e8f8ca0</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Environmental Engineering</title>
+    <link href="https://www.grants.gov/search-results-detail/320490"/>
+    <id>urn:funding-finder:change:bcfd3453400059cf2649</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Advancing Global Capacity to Detect and Respond to Fungal Diseases</title>
+    <link href="https://www.grants.gov/search-results-detail/361931"/>
+    <id>urn:funding-finder:change:bba63913180a4402a7f4</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Innovative Traffic Safety Enforcement (ITSE) Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363446"/>
+    <id>urn:funding-finder:change:bb801313b6840fa680b1</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: PROGRAM FOR INVESTMENT IN MICROENTREPRENEURS (PRIME) FY 2026</title>
+    <link href="https://www.grants.gov/search-results-detail/363196"/>
+    <id>urn:funding-finder:change:b404929ab5779c2eec8e</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: U.S.-Africa Strategic Investment Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363554"/>
+    <id>urn:funding-finder:change:b3b708307088b97d148f</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Process Systems, Reaction Engineering, and Molecular Thermodynamics</title>
+    <link href="https://www.grants.gov/search-results-detail/348793"/>
+    <id>urn:funding-finder:change:b2eb634b976cf5111165</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Biosensing</title>
+    <link href="https://www.grants.gov/search-results-detail/320536"/>
+    <id>urn:funding-finder:change:b17e999ac9d3b89c8b3d</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Fluid Dynamics</title>
+    <link href="https://www.grants.gov/search-results-detail/347020"/>
+    <id>urn:funding-finder:change:ae291fcb9b7b30a0cc59</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: U.S. Mission Iraq EducationUSA Roadshow</title>
+    <link href="https://www.grants.gov/search-results-detail/363547"/>
+    <id>urn:funding-finder:change:adf3de1a4b9e4ba2e6d5</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Engineering (ENG): Electrical, Communications, and Computing Systems (ECCS)</title>
+    <link href="https://www.grants.gov/search-results-detail/363551"/>
+    <id>urn:funding-finder:change:ad30fd595cbc2ee693b9</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Delta States Rural Development Network Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362942"/>
+    <id>urn:funding-finder:change:99a42e671a5e94114ed5</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: State Maternal Health Innovation Program (SMHI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363408"/>
+    <id>urn:funding-finder:change:9945ce712f0186b25b1c</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Disability and Rehabilitation Engineering (DARE)</title>
+    <link href="https://www.grants.gov/search-results-detail/348795"/>
+    <id>urn:funding-finder:change:98f8855cd2239ee3dbe4</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Cellular and Biochemical Engineering</title>
+    <link href="https://www.grants.gov/search-results-detail/348794"/>
+    <id>urn:funding-finder:change:8def72ec23fd4b79ec66</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Cooperative Agreement for Affiliated Partner with the Californian Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/363545"/>
+    <id>urn:funding-finder:change:8c85f9eee937c176081e</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Pacific Disaster Center</title>
+    <link href="https://www.grants.gov/search-results-detail/363549"/>
+    <id>urn:funding-finder:change:8a08ac1c20eee642c930</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Developing Civilizational Bonds, Democratic Resilience, and Rule of Law in Europe</title>
+    <link href="https://www.grants.gov/search-results-detail/363207"/>
+    <id>urn:funding-finder:change:8777998f2a9207ba1377</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Community Forest and Open Space Conservation Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363348"/>
+    <id>urn:funding-finder:change:83bbc7496d283ec6df0f</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Pediatric Disaster Care Centers of Excellence Program Cooperative Agreement</title>
+    <link href="https://www.grants.gov/search-results-detail/363404"/>
+    <id>urn:funding-finder:change:824a8543e576f4d1e592</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Engineering of Biomedical Systems</title>
+    <link href="https://www.grants.gov/search-results-detail/348796"/>
+    <id>urn:funding-finder:change:6a67776e6139fee86415</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: FY24 Little Rock Port Authority Transload Yard, AR</title>
+    <link href="https://www.grants.gov/search-results-detail/363542"/>
+    <id>urn:funding-finder:change:65c4a503ec1ac0aab146</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Safeguarding U.S. Critical Minerals Supply Chains- Tunisia</title>
+    <link href="https://www.grants.gov/search-results-detail/363536"/>
+    <id>urn:funding-finder:change:65b252bc15dca3a0b1a8</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: BJS FY 2026 Annual Surveys of Probation and Parole (ASPP) RY 2026-2030</title>
+    <link href="https://www.grants.gov/search-results-detail/363552"/>
+    <id>urn:funding-finder:change:603042c99cc1b90c0a76</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Biophotonics</title>
+    <link href="https://www.grants.gov/search-results-detail/347327"/>
+    <id>urn:funding-finder:change:5a688f8a98993100158a</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Nonfatal Overdoses in Emergency Departments: Bridging Patient Characteristics, Biospecimen Toxicology, and Drug Supply Composition</title>
+    <link href="https://www.grants.gov/search-results-detail/363543"/>
+    <id>urn:funding-finder:change:5a37a761826b31011b60</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Cooperative Agreement for Affiliated Partner with the Colorado Plateau Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/363544"/>
+    <id>urn:funding-finder:change:515bad8571b4200eef76</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-12</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: FY26 Bus Safety, Accessibility, and Innovation Notice of Funding Opportunity</title>
+    <link href="https://www.grants.gov/search-results-detail/363372"/>
+    <id>urn:funding-finder:change:48d364cb999e485080ec</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Women's Initiative for Screening and Health (WISH)</title>
+    <link href="https://www.grants.gov/search-results-detail/363546"/>
+    <id>urn:funding-finder:change:3ff65d487e26934abac6</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Environmental Sustainability</title>
+    <link href="https://www.grants.gov/search-results-detail/347328"/>
+    <id>urn:funding-finder:change:3efd59ab75f397a3b9b8</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Supply Chain Acceleration and Logistics Enablement (SCALE) Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363089"/>
+    <id>urn:funding-finder:change:3c75f2ef0cd44eefdc28</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Global Coalition Against Transnational Repression</title>
+    <link href="https://www.grants.gov/search-results-detail/363464"/>
+    <id>urn:funding-finder:change:3194b666e88a2d0ac63e</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: National Resource Centers</title>
+    <link href="https://www.grants.gov/search-results-detail/362377"/>
+    <id>urn:funding-finder:change:2d873c31de7832032321</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-08</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Fostering the Future Together: Empowering Youth for a Safe Digital World</title>
+    <link href="https://www.grants.gov/search-results-detail/363426"/>
+    <id>urn:funding-finder:change:142b0bd7c01c7b4601ad</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Nanoscale Interactions</title>
+    <link href="https://www.grants.gov/search-results-detail/347323"/>
+    <id>urn:funding-finder:change:12ddc93780d910bf18f8</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: 2026 National Urban and Community Forestry Challenge Cost Share Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/361315"/>
+    <id>urn:funding-finder:change:11c6a1abadc281ebe94e</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Cooperative Agreement for Affiliated Partner with the Colorado Plateau Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/363544"/>
+    <id>urn:funding-finder:change:0d2788810d8b46c787db</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: U.S. Mission Iraq EducationUSA Roadshow</title>
+    <link href="https://www.grants.gov/search-results-detail/363547"/>
+    <id>urn:funding-finder:change:0230a9319b265a3f436d</id>
+    <updated>2026-08-13T11:11:42.582482Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-11</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: FY26 Bureau of Land Management Wildlife Resource Management Program - Bureau wide</title>
+    <link href="https://www.grants.gov/search-results-detail/363535"/>
+    <id>urn:funding-finder:change:f3fbf14aeb73a1a0ee05</id>
+    <updated>2026-08-12T13:06:32.886816Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-11</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Schmidt Sciences</title>
+    <link href="https://airtable.com/appDCapaPF9M0iLQO/pagRxgvY9pCkOeaxx/form"/>
+    <id>urn:funding-finder:change:d35133e0c6c936171c41</id>
+    <updated>2026-08-12T13:06:32.886816Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-11</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Cooperative Agreement for Affiliated Partner with the Gulf Coast Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/363538"/>
+    <id>urn:funding-finder:change:d0fffb2d1086de66a16f</id>
+    <updated>2026-08-12T13:06:32.886816Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-11</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: FY26 Bureau of Land Management Threatened and Endangered Species - Bureau wide</title>
+    <link href="https://www.grants.gov/search-results-detail/363534"/>
+    <id>urn:funding-finder:change:c0e39183a2e919988ea1</id>
+    <updated>2026-08-12T13:06:32.886816Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-11</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Forest Legacy Program - FY2028 Funding</title>
+    <link href="https://www.grants.gov/search-results-detail/363363"/>
+    <id>urn:funding-finder:change:74e53670effa1183cb7d</id>
+    <updated>2026-08-12T13:06:32.886816Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-11</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Cooperative Agreement for Affiliated Partner with the Alaska Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/363537"/>
+    <id>urn:funding-finder:change:012244f776c783b2a7d5</id>
+    <updated>2026-08-12T13:06:32.886816Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-11</summary>
+  </entry>
   <entry>
     <title>Opportunity amended: Infant-Toddler Court Program-State Awards</title>
     <link href="https://www.grants.gov/search-results-detail/363512"/>
@@ -29,14 +509,6 @@
     <updated>2026-08-12T11:11:07.180373Z</updated>
     <category term="amended"/>
     <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: FY26 Bureau of Land Management Wildlife Resource Management Program - Bureau wide</title>
-    <link href="https://www.grants.gov/search-results-detail/363535"/>
-    <id>urn:funding-finder:change:f3fbf14aeb73a1a0ee05</id>
-    <updated>2026-08-12T11:11:07.180373Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-11</summary>
   </entry>
   <entry>
     <title>New opportunity: Culturally Specific Domestic Violence and Sexual Assault Services</title>
@@ -111,22 +583,6 @@
     <summary>No longer in the current catalog</summary>
   </entry>
   <entry>
-    <title>Closing soon: Schmidt Sciences</title>
-    <link href="https://airtable.com/appDCapaPF9M0iLQO/pagRxgvY9pCkOeaxx/form"/>
-    <id>urn:funding-finder:change:d35133e0c6c936171c41</id>
-    <updated>2026-08-12T11:11:07.180373Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-11</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Cooperative Agreement for Affiliated Partner with the Gulf Coast Cooperative Ecosystem Studies Unit (CESU)</title>
-    <link href="https://www.grants.gov/search-results-detail/363538"/>
-    <id>urn:funding-finder:change:d0fffb2d1086de66a16f</id>
-    <updated>2026-08-12T11:11:07.180373Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-11</summary>
-  </entry>
-  <entry>
     <title>Closing soon: Enhancing and Supporting the Network of American Spaces in Armenia</title>
     <link href="https://www.grants.gov/search-results-detail/363541"/>
     <id>urn:funding-finder:change:d0a125782d8f3086f967</id>
@@ -149,14 +605,6 @@
     <updated>2026-08-12T11:11:07.180373Z</updated>
     <category term="closing_soon"/>
     <summary>Deadline 2026-09-10</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: FY26 Bureau of Land Management Threatened and Endangered Species - Bureau wide</title>
-    <link href="https://www.grants.gov/search-results-detail/363534"/>
-    <id>urn:funding-finder:change:c0e39183a2e919988ea1</id>
-    <updated>2026-08-12T11:11:07.180373Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-11</summary>
   </entry>
   <entry>
     <title>New opportunity: Enhancing and Supporting the Network of American Spaces in Armenia</title>
@@ -205,14 +653,6 @@
     <updated>2026-08-12T11:11:07.180373Z</updated>
     <category term="amended"/>
     <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Forest Legacy Program - FY2028 Funding</title>
-    <link href="https://www.grants.gov/search-results-detail/363363"/>
-    <id>urn:funding-finder:change:74e53670effa1183cb7d</id>
-    <updated>2026-08-12T11:11:07.180373Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-11</summary>
   </entry>
   <entry>
     <title>Closed or removed: Research Training Groups in the Mathematical Sciences</title>
@@ -373,14 +813,6 @@
     <updated>2026-08-12T11:11:07.180373Z</updated>
     <category term="amended"/>
     <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Cooperative Agreement for Affiliated Partner with the Alaska Cooperative Ecosystem Studies Unit (CESU)</title>
-    <link href="https://www.grants.gov/search-results-detail/363537"/>
-    <id>urn:funding-finder:change:012244f776c783b2a7d5</id>
-    <updated>2026-08-12T11:11:07.180373Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-11</summary>
   </entry>
   <entry>
     <title>Closing soon: DoW Vision, Mentored Clinical Research Award</title>
@@ -1170,438 +1602,6 @@
     <title>Closed or removed: PCHPI Collaboration Development Pilot Program</title>
     <link href="http://www.hivppi.pitt.edu/index.php/funding-opportunitieshttp:/www.hivppi.pitt.edu/"/>
     <id>urn:funding-finder:change:f4a0d46f32851a5140f2</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Jean Hankin Nutritional Epidemiology Research Grant</title>
-    <link href="https://eatrightfoundation.secure-platform.com/a/"/>
-    <id>urn:funding-finder:change:f47feec32b7ab587ac49</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Postdoctoral Fellowship</title>
-    <link href="https://professional.diabetes.org/research-grants/current-funding-opportunities/postdoctoral-fellowships"/>
-    <id>urn:funding-finder:change:f47d157bef45a7501580</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: National Fellowship Program</title>
-    <link href="https://www.gwis.org/page/fellowship_program"/>
-    <id>urn:funding-finder:change:f46af4979505d2f836fb</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: AAAS Mass Media Science &amp; Engineering Fellowship</title>
-    <link href="https://www.aaas.org/programs/mass-media-science-engineering-fellows/about"/>
-    <id>urn:funding-finder:change:f41dda3a86144c163b91</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Career Awards at the Scientific Interface</title>
-    <link href="http://www.bwfund.org/grant-programs/interfaces-science/career-awards-scientific-interface"/>
-    <id>urn:funding-finder:change:f410b97b0e06a1a81d1b</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Career Transition Fellowships</title>
-    <link href="https://www.nationalmssociety.org/For-Professionals/Researchers/Society-Funding/Training-Grants-and-Fellowships/Career-Transition-Fellowships"/>
-    <id>urn:funding-finder:change:f362cb91b896c3e4dd45</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Apply for Funding</title>
-    <link href="https://rosemere.org.uk/apply-for-funding"/>
-    <id>urn:funding-finder:change:f2a16807e7bbb2740fbf</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: ARVO/ALCON Early Career Clinician-Scientist Research Awards</title>
-    <link href="https://www.arvo.org/awards-grants-and-fellowships/research-awards/alcon-early-career-clinician-scientist-research-awards/"/>
-    <id>urn:funding-finder:change:f278a8ecf2635a8caea0</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: AACR-Conquer Cancer Foundation of ASCO Young Investigator Award for Translational Cancer Research</title>
-    <link href="https://www.aacr.org/grants/aacr-conquer-cancer-the-asco-foundation-young-investigator-award-for-translational-cancer-research/"/>
-    <id>urn:funding-finder:change:f24260769a4cbd01fc9c</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: *Limited Submission* The 2019 International Future Energy Challenge (IFEC) Student Competition</title>
-    <link href="http://energychallenge.weebly.com/ifec-2019.html"/>
-    <id>urn:funding-finder:change:f23e721cfe02b36c138f</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Investigators in the Pathogenesis of Infectious Disease (PATH)</title>
-    <link href="https://www.bwfund.org/grant-programs/infectious-diseases/investigators-in-pathogenesis-of-infectious-disease"/>
-    <id>urn:funding-finder:change:f22076a66808bdae27f1</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: NARSAD Young Investigator Grants</title>
-    <link href="http://bbrfoundation.org/yi"/>
-    <id>urn:funding-finder:change:f20cf48d52cfab237a7c</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: NRC Research Associateship Programs</title>
-    <link href="https://sites.nationalacademies.org/PGA/RAP/index.htm"/>
-    <id>urn:funding-finder:change:f1fd7a8d18c6ea0326c2</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Lewis and Clark Fund in Exploration and Field Research</title>
-    <link href="https://amphilsoc.org/grants/lewisandclark"/>
-    <id>urn:funding-finder:change:f170f7cb762422d4051d</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Psychosocial Research Postdoctoral Fellowship</title>
-    <link href="https://chnfoundation.org/programs/psychosocial-research/"/>
-    <id>urn:funding-finder:change:f13d9dc101d1a13f6e63</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Research &amp; Development Grants - TOPIC: Preventing the Next Spill: Understanding Systemic Risk in the Offshore Oil and Gas Environment</title>
-    <link href="http://www.nationalacademies.org/gulf/grants/research-development-grants/index.htm"/>
-    <id>urn:funding-finder:change:f11f072206852535339b</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Young Investigator Award (YIA)</title>
-    <link href="https://www.ctf.org/research/young-investigator-award-yia"/>
-    <id>urn:funding-finder:change:efab5ea514695030eda1</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Bridge Grants</title>
-    <link href="https://www.psoriasis.org/bridge-grants/"/>
-    <id>urn:funding-finder:change:eeb2d90a75042eb10c5f</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Development Grant</title>
-    <link href="https://www.mda.org/research/grant-types"/>
-    <id>urn:funding-finder:change:edf1be436545815467e5</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Gulf Research Program Early-Career Research Fellowships</title>
-    <link href="http://www.nationalacademies.org/gulf/fellowships/early-career/index.htm"/>
-    <id>urn:funding-finder:change:edd39084dd6ff7b18e43</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: AACAP Pilot Research Award for Junior Faculty and Child and Adolescent Psychiatry Fellows, supported by AACAP</title>
-    <link href="https://www.aacap.org/AACAP/Awards/Resident_and_ECP_Awards/Pilot_Research_Award_Early_Career_Faculty_and_Child_and_Adolescent_Psychiatry_Fellows.aspx"/>
-    <id>urn:funding-finder:change:edbe14467f8ee47a23c9</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Blavatnik National Award for Young Scientists</title>
-    <link href="http://blavatnikawards.org/awards/national-awards/"/>
-    <id>urn:funding-finder:change:ed4a5d5e1d9c3038562b</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: AGA-Takeda Pharmaceuticals Research Scholar Award in Celiac Disease</title>
-    <link href="https://gastro.org/research-and-awards/apply-for-awards/award/aga-takeda-pharmaceuticals-research-scholar-award-in-celiac-disease/"/>
-    <id>urn:funding-finder:change:ecacc0e14130a80c9f67</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Lizette Peterson-Homer Injury Prevention Grant</title>
-    <link href="https://www.apa.org/apf/funding/peterson-homer"/>
-    <id>urn:funding-finder:change:ebde5eac7147df80e45f</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Long-term fellowship</title>
-    <link href="https://www.newberry.org/long-term-fellowships"/>
-    <id>urn:funding-finder:change:ebc256bf672215afd4e1</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Emerging Leader Award</title>
-    <link href="https://www.bayarealyme.org/our-research/emerging-leader-award/"/>
-    <id>urn:funding-finder:change:eb920f76f11706afb490</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: AHRQ Grants for Health Services Research Dissertation Program (R36)</title>
-    <link href="https://grants.nih.gov/grants/guide/pa-files/PA-23-196.html"/>
-    <id>urn:funding-finder:change:eb58cca69d990f714f80</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: William Weston Career Development Award</title>
-    <link href="https://pedraresearch.org/2022/06/20/william-weston-career-development-award/"/>
-    <id>urn:funding-finder:change:eaa83222b8f9ef8b7727</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Postdoctoral Research Fellowship</title>
-    <link href="https://www.aesnet.org/research-funding/funding/early-career/postdoctoral-research-fellowships"/>
-    <id>urn:funding-finder:change:ea716955d36238e61047</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Research and Training Fellowships for Clinicians</title>
-    <link href="https://www.aesnet.org/research-funding/funding/early-career/research-and-training-fellowships-for-clinicians"/>
-    <id>urn:funding-finder:change:e9f798dfd08b63685893</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Resident Research Scholarships</title>
-    <link href="https://www.facs.org/for-medical-professionals/professional-growth-and-wellness/scholarships-fellowships-and-awards/resident/resident-research/"/>
-    <id>urn:funding-finder:change:e9ab935827e3d85df505</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: EDU Australia to United States Fellowships</title>
-    <link href="https://www.americanaustralian.org/scholarships/education-fund/"/>
-    <id>urn:funding-finder:change:e92efdb830a3bf3fec8b</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Prostate Cancer Research Program (PCRP) Early Investigator Research Award</title>
-    <link href="https://simpler.grants.gov/opportunity/bea02ba4-24d6-45fe-8afe-b785ed15d3a2"/>
-    <id>urn:funding-finder:change:e9204d0073ab9c342a12</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: AMS-AAAS Mass Media Fellowship</title>
-    <link href="http://www.ams.org/programs/ams-fellowships/media-fellow/massmediafellow"/>
-    <id>urn:funding-finder:change:e8edd2b314597361dd08</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Carter Manny Award</title>
-    <link href="http://www.grahamfoundation.org/grant_programs/?mode=award"/>
-    <id>urn:funding-finder:change:e8a9fa9b09c5fbbed7f7</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Ricci Institute Travel Grants</title>
-    <link href="https://www.bc.edu/content/bc-web/centers/ricci/fellowships.html"/>
-    <id>urn:funding-finder:change:e87a092560945b36abaf</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Gina M. Finzi Memorial Student Summer Fellowship Program</title>
-    <link href="https://www.lupus.org/research/apply-for-funding"/>
-    <id>urn:funding-finder:change:e62408659a444fc1c06f</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Ciba Travel Awards in Green Chemistry</title>
-    <link href="https://www.acs.org/content/acs/en/funding/awards/ciba-travel-awards-in-green-chemistry.html"/>
-    <id>urn:funding-finder:change:e59d332d5f9988400698</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: In-Cycle Grants</title>
-    <link href="https://www.alpha1.org/Investigators/Grants/Grant-Opportunities"/>
-    <id>urn:funding-finder:change:e5758283046a4fb771f5</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: The Garden Club of America Fellowship</title>
-    <link href="https://www.developingcareer.com/garden-club-of-america-royal-horticultural-society-interchange-fellowships/?ar=1"/>
-    <id>urn:funding-finder:change:e52029460732ecac7bc4</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Luce Post-doctoral Research Fellowships</title>
-    <link href="http://www.ricci.usfca.edu/"/>
-    <id>urn:funding-finder:change:e4b29561d45715cffa72</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Research Grants - New Investigators</title>
-    <link href="https://dtrf.org/apply-for-a-grant/"/>
-    <id>urn:funding-finder:change:e49bf7a4bde45a5aa3fa</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Kenneth B. and Mamie P. Clark Fund</title>
-    <link href="http://www.apa.org/apf/funding/clark-fund.aspx?tab=1"/>
-    <id>urn:funding-finder:change:e436bd35eaf2fc7fb14d</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: SPIE Early Career Achievement Award - Academic</title>
-    <link href="https://spie.org/about-spie/awards-programs/awards-listing/spie-early-career-achievement-award---academic?SSO=1"/>
-    <id>urn:funding-finder:change:e3f7acdfd0aad6bfc08f</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Holloway Postdoctoral Fellowship</title>
-    <link href="https://www.theaftd.org/for-researchers/funding-opportunities/aftd-postdoctoral-fellowships/"/>
-    <id>urn:funding-finder:change:e3bb4ed5f52012fd8c12</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: *Limited Submission* Luce Scholars</title>
-    <link href="http://www.hluce.org/lsprogram.aspx"/>
-    <id>urn:funding-finder:change:e3b1f1ce30ca1cee95aa</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Steven P. Arnoczky Young Investigator Grant</title>
-    <link href="https://www.sportsmed.org/aossmimis/Members/Research/Steven_P._Arnoczky_Young_Investigator_Grant.aspx"/>
-    <id>urn:funding-finder:change:e3604b0236ba1dadfd87</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Lewis and Clark Fund for Exploration and Field Research in Astrobiology</title>
-    <link href="https://www.amphilsoc.org/grants/lewis-and-clark-fund-exploration-and-field-research-astrobiology"/>
-    <id>urn:funding-finder:change:e3526e806365c5f14221</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: New Therapy Commercialization Grant and Epilepsy Seal of Innovation Award</title>
-    <link href="https://www.epilepsy.com/make-difference/research-and-new-therapies/upcoming-grants"/>
-    <id>urn:funding-finder:change:e341db13e9527c6b4b32</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Career Development Bridge Funding Award: K Bridge</title>
-    <link href="https://www.rheumresearch.org/career-development-research-awards"/>
-    <id>urn:funding-finder:change:e317f9133feab277b99c</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: NCI Pathway to Independence Award for Outstanding Early Stage Postdoctoral Researchers (K99/R00 - Independent Basic Experimental Studies with Humans Required)</title>
-    <link href="https://research.jhu.edu/rdt/funding-opportunities/postdoctoral/"/>
-    <id>urn:funding-finder:change:e30ea54391c0bbce3d46</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Predoctoral Dissertation Fellowship Program</title>
-    <link href="https://www.nga.gov/research/casva/fellowships/predoctoral-dissertation-fellowships.html"/>
-    <id>urn:funding-finder:change:e2bbd645798fc75292a3</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Postdoctoral Fellowship Program</title>
-    <link href="http://lalorfound.org/postdoctoral-fellowship-program/"/>
-    <id>urn:funding-finder:change:e240088d7514b99661e3</id>
-    <updated>2026-08-10T19:25:04.391102Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: NSF Astronomy and Astrophysics Postdoctoral Fellowships (AAPF)</title>
-    <link href="https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf22621"/>
-    <id>urn:funding-finder:change:e1f2121d7c5d3f1124ac</id>
     <updated>2026-08-10T19:25:04.391102Z</updated>
     <category term="closed_or_removed"/>
     <summary>No longer in the current catalog</summary>

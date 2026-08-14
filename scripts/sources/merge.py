@@ -34,6 +34,7 @@ from scripts.build_catalog import (
     build_search_index,
     facet_counts,
     iso_utc,
+    normalize_record_facets,
     quality_metrics,
     record_identity,
     utc_now,
@@ -238,14 +239,15 @@ def _norm_title(record: dict) -> str:
 
 def merge_records(base: list[dict], external: list[dict]) -> tuple[list[dict], dict]:
     """Combine base (Grants.gov) and external records; base always wins."""
-    combined = list(base)
-    seen_identity = {record_identity(r) for r in base}
+    combined = [normalize_record_facets(dict(record)) for record in base]
+    external = [normalize_record_facets(dict(record)) for record in external]
+    seen_identity = {record_identity(r) for r in combined}
     base_titles = {
-        _norm_title(r) for r in base if r.get("title")
+        _norm_title(r) for r in combined if r.get("title")
     }
     base_numbers = {
         str(r.get("opportunity_number")).strip().casefold()
-        for r in base if r.get("opportunity_number")
+        for r in combined if r.get("opportunity_number")
     }
 
     added = dropped_identity = dropped_crossdup = 0
@@ -272,7 +274,7 @@ def merge_records(base: list[dict], external: list[dict]) -> tuple[list[dict], d
         )
     )
     stats = {
-        "base_count": len(base),
+        "base_count": len(combined) - added,
         "external_considered": len(external),
         "external_added": added,
         "dropped_duplicate_identity": dropped_identity,
@@ -287,6 +289,7 @@ def rebuild_catalog(catalog: dict, combined: list[dict],
                     lifecycle: list[dict] | None = None) -> dict:
     """Return a new catalog with combined records and rebuilt derived data."""
     catalog = dict(catalog)
+    combined = [normalize_record_facets(dict(record)) for record in combined]
     catalog["opportunities"] = combined
     catalog["record_count"] = len(combined)
     catalog["status_counts"] = dict(

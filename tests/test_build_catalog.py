@@ -11,6 +11,7 @@ from scripts.build_catalog import (
     discover_latest_extract,
     is_current,
     iter_catalog_records,
+    normalize_disciplines,
     read_archive,
     safe_http_url,
     tokenize,
@@ -27,6 +28,22 @@ FIXTURE = (
 
 
 class CatalogExtractTests(unittest.TestCase):
+    def test_free_form_disciplines_are_mapped_to_controlled_values(self):
+        raw = (
+            "chemistry, computer science, earth systems science, economics, "
+            "mathematics, neuroscience, physics, or a related field"
+        )
+
+        self.assertEqual(
+            normalize_disciplines([raw]),
+            [
+                "Engineering and Physical Sciences",
+                "Environmental and Life Sciences",
+                "Medical and Health",
+                "Business and Economic Development",
+            ],
+        )
+
     def test_streams_current_posted_and_forecast_records(self):
         with FIXTURE.open("rb") as xml_stream:
             records = list(

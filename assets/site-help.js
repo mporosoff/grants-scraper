@@ -52,6 +52,7 @@
               <li>Use a few concrete concepts, such as <em>PFAS water remediation</em> or <em>CO₂ electrocatalysis</em>.</li>
               <li>Exact opportunity numbers and distinctive titles receive the strongest priority.</li>
               <li>Common abbreviations, scientific word forms, and minor spelling variations are expanded conservatively.</li>
+              <li>For an unfamiliar acronym such as <em>CFD</em>, search can learn a matching full phrase from the local catalog and use the enabled research profile, CV, or ORCID publications to disambiguate it. Ambiguous acronyms are left unexpanded.</li>
               <li>If results are too broad, add a method, use case, population, or material instead of more generic field names.</li>
             </ul>
           </div>
@@ -60,6 +61,7 @@
             <ul>
               <li><strong>Profile:</strong> save a short research description and keywords on this device for reuse.</li>
               <li><strong>CV:</strong> extract a bounded excerpt in the browser; the original file is not retained.</li>
+              <li><strong>ORCID:</strong> import public Crossref publication metadata linked to an ORCID iD and combine its topics with your description, keywords, or CV.</li>
               <li><strong>Filters:</strong> narrow by status, discipline, agency, eligibility, deadline, award size, instrument, and more.</li>
               <li><strong>Browse the catalog:</strong> leave the query blank or use Public catalog when you want to scan everything current.</li>
             </ul>
@@ -102,11 +104,11 @@
         <div class="help-grid">
           <div class="help-card">
             <h4>Build a team</h4>
-            <p>Select two to four listed researchers. You can also save up to four external researchers by entering a name and roughly five specific research keywords.</p>
+            <p>Select two to four listed researchers. You can also save up to four external researchers using specific research keywords, an ORCID publication import, or both.</p>
           </div>
           <div class="help-card">
             <h4>Steer the themes</h4>
-            <p>Shared and complementary themes appear as interactive chips. Turn a theme off to refocus the ranking. Every displayed opportunity must have linked evidence for everyone selected.</p>
+            <p>Shared and complementary themes appear as interactive chips. Turn a theme off to refocus the ranking. Every displayed opportunity must be current and have linked evidence for everyone selected.</p>
           </div>
         </div>
             <p class="help-footnote">Results use graded research, theme, topic, agency-scope, and recency signals in one ranked list. A <strong>broad: verify fit</strong> label means an open-scope agency announcement was included with weaker evidence and deserves manual review.</p>
@@ -118,7 +120,7 @@
               <div><h3>What an API key is and why AI needs one</h3><p>A key is a private credential from an AI provider, not your account password.</p></div>
         </div>
         <div class="help-key-explanation">
-          <p>This is a static public site with no shared AI account. Your provider key authorizes optional model requests and associates any usage charges with your own API account. A key is needed only for AI terminology expansion, AI reranking, result chat, and uploaded-notice chat.</p>
+          <p>This is a static public site with no shared AI account. Your provider key authorizes optional model requests and associates any usage charges with your own API account. Local abbreviation and acronym handling is part of normal search and needs no key. A key is needed only for optional AI terminology expansion, AI reranking, result chat, and uploaded-notice chat.</p>
           <p><strong>Normal catalog search and the Team matcher do not need a key.</strong> Provider billing, credits, rate limits, and model availability are controlled by the provider, not Funding Finder.</p>
         </div>
         <div class="help-provider-grid">

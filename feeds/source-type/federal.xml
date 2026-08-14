@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml</id>
-  <updated>2026-08-13T12:10:38Z</updated>
+  <updated>2026-08-13T12:27:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -490,16 +490,6 @@
     <summary>National Institutes of Health | Closes 2027-06-01 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the support of the Clinical Data, Safety and Statistical Centers program. The overall objective of this program is to provide coordination and oversight for multiple activities in service to clinical research and mechanistic studies supported by NIAID, including all Division of Allergy, Immunolog…</summary>
   </entry>
   <entry>
-    <title>State Maternal Health Innovation Program (SMHI)</title>
-    <link href="https://www.grants.gov/search-results-detail/363408"/>
-    <id>urn:funding-finder:grants-gov:363408</id>
-    <updated>2027-01-29T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>Health Resources and Services Administration | Closes 2027-04-19 | The purpose of the State Maternal Health Innovation (SMHI) program is to build capacity in states to improve maternal health and address maternal health gaps. This is done through quality services, a skilled workforce, enhanced data quality and capacity, and innovative programming that reduces maternal mortality and severe maternal morbidity (SMM).</summary>
-  </entry>
-  <entry>
     <title>Advanced Laboratories for Accelerating the Reach and Impact of Treatments for Youth and Adults with Mental Illness (ALACRITY) Research Centers</title>
     <link href="https://www.grants.gov/search-results-detail/361521"/>
     <id>urn:funding-finder:grants-gov:361521</id>
@@ -580,5 +570,14 @@
     <updated>2027-01-19T00:00:00Z</updated>
     <author><name>Health Resources and Services Administration</name></author>
     <summary>Health Resources and Services Administration | Closes 2027-03-20 | The purpose of the Rural Health Value (RHV) Program is to fund one recipient to provide analysis and technical assistance (TA) for rural stakeholders to help them understand and engage in the value-based care landscape in the context of rural health care. The goal of this funding opportunity is to support the ability of rural providers to participate and succeed in current and emerging payment and…</summary>
+  </entry>
+  <entry>
+    <title>Ryan White HIV/AIDS Program Part C Capacity Development Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363166"/>
+    <id>urn:funding-finder:grants-gov:363166</id>
+    <updated>2027-01-15T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Technology development"/>
+    <summary>Health Resources and Services Administration | Closes 2027-03-16 | The purpose of the program is to strengthen the capacity of community-based organizations to improve health outcomes and reduce HIV transmission, especially for people not yet in regular HIV care. The activities fall under two categories: HIV Care Innovation and Infrastructure Development.</summary>
   </entry>
 </feed>

@@ -22,13 +22,13 @@
   <meta name="twitter:image" content="https://mporosoff.github.io/grants-scraper/assets/social/funding-finder-preview.jpg?v=20260812">
   <meta name="twitter:image:alt" content="Funding Finder: Find the right funding faster">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://api.openai.com https://api.anthropic.com https://cloudflareinsights.com https://funding-usage.urochestercheme.workers.dev; img-src 'self' data:; style-src 'self'; script-src 'self' https://static.cloudflareinsights.com; base-uri 'self'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://api.openai.com https://api.anthropic.com https://api.crossref.org https://cloudflareinsights.com https://funding-usage.urochestercheme.workers.dev; img-src 'self' data:; style-src 'self'; script-src 'self' https://static.cloudflareinsights.com; base-uri 'self'; form-action 'self'">
   <title>Funding Finder</title>
   <link rel="canonical" href="https://mporosoff.github.io/grants-scraper/">
   <link rel="icon" type="image/svg+xml" href="./assets/icons/funding-finder.svg?v=20260812">
   <link rel="stylesheet" href="./assets/brand.css?v=20260812">
-  <link rel="stylesheet" href="./assets/app.css?v=brand-2026-08-12">
-  <link rel="stylesheet" href="./assets/site-nav.css?v=brand-2026-08-12">
+  <link rel="stylesheet" href="./assets/app.css?v=legal-2026-08-13">
+  <link rel="stylesheet" href="./assets/site-nav.css?v=filters-2026-08-13">
 </head>
 <body>
   <a class="skip-link" href="#results">Skip to results</a>
@@ -117,8 +117,8 @@
             <details class="context-card profile-builder" id="profile-builder">
               <summary>
                 <span>
-                  <strong>Research profile and CV</strong>
-                  <small>Improve relevance using your expertise and applicant context</small>
+                  <strong>Research profile, ORCID, and CV</strong>
+                  <small>Improve relevance using your expertise, publications, and applicant context</small>
                 </span>
                 <span class="summary-action">Add or edit</span>
               </summary>
@@ -156,6 +156,20 @@
                   </label>
                 </div>
 
+                <div class="orcid-importer">
+                  <div>
+                    <strong>Import publications with an ORCID iD</strong>
+                    <span>Uses public Crossref metadata linked to the ORCID iD; imported topics supplement anything you enter above.</span>
+                  </div>
+                  <div class="orcid-input-row">
+                    <label class="sr-only" for="orcid-id">ORCID iD</label>
+                    <input id="orcid-id" type="text" inputmode="text" autocomplete="off" maxlength="40" placeholder="0000-0002-1825-0097">
+                    <button class="button secondary" id="import-orcid" type="button">Import ORCID</button>
+                  </div>
+                  <div class="orcid-status" id="orcid-status" aria-live="polite">No ORCID publications imported.</div>
+                  <button class="text-button hidden" id="remove-orcid" type="button">Remove ORCID publications</button>
+                </div>
+
                 <div class="cv-uploader">
                   <div>
                     <strong>Add a CV for better relevance</strong>
@@ -176,7 +190,7 @@
                     <span>Include a bounded CV excerpt only when I use AI</span>
                   </label>
                 </div>
-                <p class="profile-storage-note">Your current profile works in this tab. Saving is optional. When saved, only the extracted CV text is stored on this device, not the original file.</p>
+                <p class="profile-storage-note">Your current profile works in this tab. Saving is optional. When saved, extracted CV text and imported public publication metadata are stored on this device; original files are not retained.</p>
 
                 <div class="profile-actions">
                   <button class="button secondary" id="save-profile" type="button">Save profile on this device</button>
@@ -550,25 +564,31 @@
     <p><strong>Sources:</strong> <a href="https://www.grants.gov/xml-extract" target="_blank" rel="noopener">Grants.gov daily database extract</a> plus independently validated public listings (currently NSF, NYSERDA, ARPA-E eXCHANGE, and DOE EERE Exchange) and citation-backed facts from selected official notices. Machine-extracted facts always require notice verification.</p>
     <p>This product uses the Grants.gov API but is not endorsed or certified by the U.S. Department of Health and Human Services.</p>
     <p id="catalog-detail"></p>
+    <section class="legal-notice" id="use-notice" aria-label="Use and copyright notice">
+      <p><strong>Use notice:</strong> Funding Finder is an informational research-planning aid intended for individual and internal institutional use. It is not an official source of record, application or submission system, or legal, financial, compliance, or sponsor guidance.</p>
+      <p>Opportunity information may be incomplete, outdated, or machine-extracted. Before acting or applying, independently verify eligibility, deadlines, requirements, and terms in the sponsor's official notice.</p>
+      <p class="copyright-notice">&copy; 2026 Marc D. Porosoff. Software provided under the <a href="./LICENSE">MIT License</a>.</p>
+    </section>
   </footer>
 
   <noscript>
     <div class="notice error">JavaScript is required to search the opportunity catalog.</div>
   </noscript>
-  <script src="./data/opportunities.js?v=catalog-20260813T121038Z"></script>
-  <script src="./assets/profile.js?v=brand-2026-08-12"></script>
-  <script src="./assets/nofo.js?v=brand-2026-08-12"></script>
-  <script src="./assets/review.js?v=brand-2026-08-12"></script>
-  <script src="./assets/credentials.js?v=brand-2026-08-12"></script>
-  <script src="./assets/ai-provider.js?v=brand-2026-08-12"></script>
-  <script src="./assets/chat-ui.js?v=brand-2026-08-12"></script>
-  <script src="./assets/saved.js?v=brand-2026-08-12"></script>
-  <script src="./assets/preferences.js?v=brand-2026-08-12"></script>
-  <script src="./assets/search-query.js?v=brand-2026-08-12"></script>
-  <script src="./assets/search-retrieval.js?v=brand-2026-08-12"></script>
-  <script src="./assets/site-help.js?v=brand-2026-08-12"></script>
-  <script src="./assets/site-nav.js?v=brand-2026-08-12"></script>
-  <script src="./assets/app.js?v=brand-2026-08-12"></script>
+  <script src="./data/opportunities.js?v=catalog-20260813T122748Z"></script>
+  <script src="./assets/orcid.js?v=orcid-2026-08-13"></script>
+  <script src="./assets/profile.js?v=orcid-2026-08-13"></script>
+  <script src="./assets/nofo.js?v=filters-2026-08-13"></script>
+  <script src="./assets/review.js?v=filters-2026-08-13"></script>
+  <script src="./assets/credentials.js?v=filters-2026-08-13"></script>
+  <script src="./assets/ai-provider.js?v=filters-2026-08-13"></script>
+  <script src="./assets/chat-ui.js?v=filters-2026-08-13"></script>
+  <script src="./assets/saved.js?v=filters-2026-08-13"></script>
+  <script src="./assets/preferences.js?v=filters-2026-08-13"></script>
+  <script src="./assets/search-query.js?v=acronym-2026-08-13"></script>
+  <script src="./assets/search-retrieval.js?v=acronym-2026-08-13"></script>
+  <script src="./assets/site-help.js?v=acronym-2026-08-13"></script>
+  <script src="./assets/site-nav.js?v=filters-2026-08-13"></script>
+  <script src="./assets/app.js?v=acronym-2026-08-13"></script>
   <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "209e9983c16e4747947cf621792fe833"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>

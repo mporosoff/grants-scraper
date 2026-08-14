@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml</id>
-  <updated>2026-08-13T12:10:38Z</updated>
+  <updated>2026-08-13T12:27:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -277,6 +277,18 @@
     <summary>National Institutes of Health | Closes 2026-10-13 | The NIGMS Mature Synchrotron Resources for Structural Biology program supports mature technologies at synchrotron facilities that provide biomedical researchers with state-of-the-art X-ray beamlines, hands-on user training, and expert assistance to generate and analyze structural biology data. NIGMS intends to reissue a Notice of Funding Opportunity to continue to support these important national …</summary>
   </entry>
   <entry>
+    <title>National Resource Centers</title>
+    <link href="https://www.grants.gov/search-results-detail/362377"/>
+    <id>urn:funding-finder:grants-gov:362377</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <author><name>Administration for Children and Families - OFVPS</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Administration for Children and Families - OFVPS | Closes 2026-09-08 | The Resource Centers support efforts to prevent and respond to family, domestic, and dating violence by providing information, training, and technical assistance to individuals, organizations, government agencies, and communities.The National Resource Centers on Domestic Violence focus on strengthening services and knowledge in the field. One center provides training and technical assistance on do…</summary>
+  </entry>
+  <entry>
     <title>Enhancing and Supporting the Network of American Spaces in Armenia</title>
     <link href="https://www.grants.gov/search-results-detail/363541"/>
     <id>urn:funding-finder:grants-gov:363541</id>
@@ -287,6 +299,29 @@
     <category term="Environmental science"/>
     <category term="Technology development"/>
     <summary>U.S. Mission to Armenia | Closes 2026-09-10 | The American Spaces network in Armenia is one of the United States’ strongest and most trusted platforms for advancing education, innovation, and people‑to‑people engagement. These Spaces demonstrate American excellence through open, reliable environments and high‑quality programming shaped by U.S. educational and technological leadership. They provide direct access to reliable information, modern…</summary>
+  </entry>
+  <entry>
+    <title>U.S. Mission Iraq EducationUSA Roadshow</title>
+    <link href="https://www.grants.gov/search-results-detail/363547"/>
+    <id>urn:funding-finder:grants-gov:363547</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <author><name>U.S. Mission to Iraq</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <summary>U.S. Mission to Iraq | Closes 2026-09-11 | The EducationUSA AI Roadshow brings U.S. higher education experts to Iraq, showcasing U.S. artificial intelligence programs to attract international students and to build partnerships between universities to drive trade with key tech companies. Academic engagement strengthens U.S. foreign policy in a region heavily influenced by competing global powers. This type of engagement promotes U.S. standa…</summary>
+  </entry>
+  <entry>
+    <title>Engineering (ENG): Electrical, Communications, and Computing Systems (ECCS)</title>
+    <link href="https://www.grants.gov/search-results-detail/363551"/>
+    <id>urn:funding-finder:grants-gov:363551</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Energy"/>
+    <category term="Quantum science"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-12 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research for electrical, communications and computing systems through the following programs: The Electronic, Photonic, Magnetic, and Quantum Devices (EPMQD) program supports foundational engineering research on novel classical and quantum devices, exploring matter’s electronic, photonic, and magnetic …</summary>
   </entry>
   <entry>
     <title>Culturally Specific Domestic Violence and Sexual Assault Services</title>
@@ -653,44 +688,5 @@
     <category term="Arts and culture"/>
     <category term="Environmental science"/>
     <summary>Bureau of Land Management | Closes 2026-08-28 | Priority activities under this announcement include projects that support Executive Order (EO) 14225 Immediate Expansion of American Timber Production and Section 50301 of The One Big Beautiful Bill. This program focuses on activities that promote forest and woodland health, sustainable forest management, fire resiliency, biomass utilization for bioenergy, habitat conservation needs, and insect, d…</summary>
-  </entry>
-  <entry>
-    <title>AI Partnership &amp; Exchange for Tech Leaders (APEX)</title>
-    <link href="https://www.grants.gov/search-results-detail/363315"/>
-    <id>urn:funding-finder:grants-gov:363315</id>
-    <updated>2026-07-26T00:00:00Z</updated>
-    <author><name>U.S. Mission to Saudi Arabia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <summary>U.S. Mission to Saudi Arabia | Closes 2026-09-08 | Program PurposeThe U.S. Embassy Riyadh Public Diplomacy Section is accepting applications for a cooperative agreement to run the AI Partnership &amp; Exchange for Tech Leaders. The goal of this program is to connect rising Saudi Artificial Intelligence (AI) leaders with American experts in business, tech, and academia. This initiative helps participants build professional networks, study U.S. technolo…</summary>
-  </entry>
-  <entry>
-    <title>American Innovation Hub: AI &amp; Digital Skills for the Creative &amp; Tech Economy</title>
-    <link href="https://www.grants.gov/search-results-detail/363293"/>
-    <id>urn:funding-finder:grants-gov:363293</id>
-    <updated>2026-07-23T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Indonesia | Closes 2026-08-30 | Indonesia is ASEAN’s largest economy and most populous nation, with a young, fast-growing digital population that is rapidly adopting artificial intelligence and creative-technology tools. The choices this generation makes about which technologies, standards, and platforms to build on will shape Indonesia’s digital economy for decades. Demand for trusted, high-quality AI tools is outpacing access …</summary>
-  </entry>
-  <entry>
-    <title>NRCS' Feral Swine Eradication and Control Pilot Program Fiscal Year (FY) 2026</title>
-    <link href="https://www.grants.gov/search-results-detail/363285"/>
-    <id>urn:funding-finder:grants-gov:363285</id>
-    <updated>2026-07-23T00:00:00Z</updated>
-    <author><name>Natural Resources Conservation Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Environmental science"/>
-    <category term="Water"/>
-    <summary>Natural Resources Conservation Service | Closes 2026-09-21 | The purpose of the Feral Swine Eradication and Control Project (FSCP) is to respond to the threat feral swine pose to agriculture, native ecosystems, and human and animal health. Feral swine are a destructive, non-native, invasive species and their populations have expanded across the United States since the 1980’s. Over an estimated $3.4 billion in damage, including agricultural, is caused by fer…</summary>
   </entry>
 </feed>

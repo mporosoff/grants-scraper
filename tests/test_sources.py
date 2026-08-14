@@ -566,6 +566,23 @@ class SourceFacetTests(unittest.TestCase):
         self.assertIn("Federal", facets["source_type"])
         self.assertIn("State", facets["source_type"])
 
+    def test_official_federal_supplements_do_not_create_one_off_source_facets(self):
+        base = a_base_record()
+        external = an_external_record(
+            external_id="PD-26-370Y",
+            title="Energy, Water, and Resource Engineering (EWRE)",
+        )
+        external["source"] = "U.S. National Science Foundation"
+        external["source_type"] = "Federal"
+        from scripts.build_catalog import normalize_record_facets, facet_counts
+
+        normalize_record_facets(external)
+        facets = facet_counts([base, external])
+
+        self.assertEqual(external["source"], "U.S. National Science Foundation")
+        self.assertIsNone(external["source_facet"])
+        self.assertEqual(facets["source"], {"Grants.gov": 1})
+
 
 class NIHGuideFeedTests(unittest.TestCase):
     FEED = """<?xml version="1.0"?>
@@ -828,6 +845,8 @@ class NSFCBETSourceTests(unittest.TestCase):
         )
         self.assertTrue(record["rolling"])
         self.assertIn("Energy", record["topic_areas"])
+        self.assertEqual(record["source"], "U.S. National Science Foundation")
+        self.assertIsNone(record["source_facet"])
 
 
 class DoeExchangeParseTests(unittest.TestCase):

@@ -28,7 +28,7 @@ from .search_query import expand_query_groups
 FACET_FIELDS: dict[str, str] = {
     "status": "status",
     "source_type": "source_type",
-    "source": "source",
+    "source": "source_facet",
     "agency": "agency",
     "discipline": "disciplines",
     "topic": "topic_areas",
@@ -262,6 +262,8 @@ def bm25_scores(catalog: dict, query: str) -> tuple[list[float], bool]:
 
 def _facet_values(record: dict, field: str) -> set[str]:
     value = record.get(field)
+    if field == "source_facet" and field not in record:
+        value = record.get("source")
     if isinstance(value, list):
         return {str(v) for v in value}
     if value is None or value == "":

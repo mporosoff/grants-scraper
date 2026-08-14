@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-08-13T12:10:38Z</updated>
+  <updated>2026-08-13T12:27:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development</title>
@@ -333,6 +333,19 @@
     <category term="Data science"/>
     <category term="Manufacturing"/>
     <summary>Employment and Training Administration | Closes 2026-08-17 | Questions regarding this Training and Employment Guidance Letter (TEGL) may be emailed to Daniela Petchik, Grants Management Specialist at petchik.daniela.m@dol.gov and Brinda Ruggles, Grant Officer at ruggles.brinda@dol.gov. We encourage prospective applicants and interested parties to use the Grants.gov subscription option to register for future updates provided for this particular TEGL.</summary>
+  </entry>
+  <entry>
+    <title>Supply Chain Acceleration and Logistics Enablement (SCALE) Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363089"/>
+    <id>urn:funding-finder:grants-gov:363089</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>Small Business Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>Small Business Administration | Closes 2026-08-13 | The Supply Chain Acceleration and Logistics Enablement (SCALE) Program supports organizations that help small businesses overcome operational, technical, workforce, and market access barriers that limit their ability to participate and grow as suppliers within strategically important industries. Through technical assistance, industry engagement, and other implementation focused activities, SCALE h…</summary>
   </entry>
   <entry>
     <title>EARLY STAGE INNOVATIONS (ESI26)</title>
@@ -748,20 +761,5 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Education and workforce"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Closes 2026-10-01 | With a focus on two-year Institutions of Higher Education (IHEs), the Advanced Technological Education (ATE) program supports the education of technicians for the high-technology fields that drive our nation's economy. The program involves partnerships between academic institutions (grades 7-12, IHEs), industry, and economic development agencies to promote improvement in the education of science a…</summary>
-  </entry>
-  <entry>
-    <title>IUSE/Professional Formation of Engineers: Revolutionizing Engineering Departments</title>
-    <link href="https://www.grants.gov/search-results-detail/353413"/>
-    <id>urn:funding-finder:grants-gov:353413</id>
-    <updated>2024-04-05T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Manufacturing"/>
-    <category term="Quantum science"/>
-    <category term="Technology development"/>
-    <summary>U.S. National Science Foundation | Closes 2026-09-08 | Revolutionizing Engineering Departments (hereinafter referred to as RED) is designed to build upon previous efforts in engineering education research. Specifically, previous and ongoing evaluations of the NSF Engineering Education and Centers Division program and its predecessors, as well as those related programs in the Directorate for STEM Education, have shown that prior investments have signif…</summary>
   </entry>
 </feed>

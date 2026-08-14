@@ -56,6 +56,9 @@
     const averageLength = index.average_document_length || 1;
     const termsByLength = new Map();
     const resolutionCache = new Map();
+    const acronymResolver = queryApi.createAcronymResolver
+      ? queryApi.createAcronymResolver(records)
+      : null;
     const documentTopics = records.map(record => [
       ...new Set((record.topic_areas || []).filter(Boolean).map(String)),
     ]);
@@ -144,8 +147,16 @@
       ).slice(0, 3);
     }
 
-    function score(query, { semantic = true, coverage = true } = {}) {
-      const groups = queryApi.expandGroups(query, term => Boolean(postings[term]));
+    function expandedGroups(query, { context = "" } = {}) {
+      return queryApi.expandGroups(
+        query,
+        term => Boolean(postings[term]),
+        { acronymResolver, context },
+      );
+    }
+
+    function score(query, { semantic = true, coverage = true, context = "" } = {}) {
+      const groups = expandedGroups(query, { context });
       const scores = new Float64Array(documentCount);
       const lexicalScores = new Float64Array(documentCount);
       const semanticScores = new Float64Array(documentCount);
@@ -158,6 +169,7 @@
       groups.forEach(group => {
         const groupDocuments = new Set();
         const groupEvidence = new Map();
+        const groupLexicalScores = new Map();
         group.terms.forEach(({ term: queryTerm, weight: queryWeight }) => {
           const queryTermDocuments = new Set();
           resolveTerm(queryTerm).forEach(resolution => {
@@ -176,8 +188,12 @@
               const frequency = values[cursor + 1];
               const denominator = frequency
                 + K1 * (1 - B + B * (lengths[documentId] / averageLength));
-              lexicalScores[documentId] += termWeight * inverseFrequency
+              const contribution = termWeight * inverseFrequency
                 * ((frequency * (K1 + 1)) / denominator);
+              groupLexicalScores.set(
+                documentId,
+                (groupLexicalScores.get(documentId) || 0) + contribution,
+              );
               queryTermDocuments.add(documentId);
             }
           });
@@ -185,11 +201,15 @@
             groupEvidence.set(documentId, (groupEvidence.get(documentId) || 0) + 1);
           });
         });
-        const requiredEvidence = group.terms.length >= 6 ? 2 : 1;
+        const requiredEvidence = Number(group.minimumEvidence || 0)
+          || (group.terms.length >= 6 ? 2 : 1);
         groupEvidence.forEach((evidence, documentId) => {
           if (evidence >= requiredEvidence) groupDocuments.add(documentId);
         });
-        groupDocuments.forEach(documentId => { lexicalCoverage[documentId] += 1; });
+        groupDocuments.forEach(documentId => {
+          lexicalScores[documentId] += groupLexicalScores.get(documentId) || 0;
+          lexicalCoverage[documentId] += 1;
+        });
 
         if (!semantic) return;
         const topics = inferTopics(groupDocuments);
@@ -267,11 +287,19 @@
             .sort((left, right) => right[1] - left[1])
             .slice(0, 5)
             .map(([topic]) => topic),
+          acronymExpansions: groups
+            .filter(group => group.expansion?.kind === "contextual_acronym")
+            .map(group => ({
+              source: group.source,
+              phrase: group.expansion.phrase,
+              confidence: group.expansion.confidence,
+              basis: group.expansion.basis,
+            })),
         },
       };
     }
 
-    return Object.freeze({ score, resolveTerm });
+    return Object.freeze({ score, resolveTerm, expandGroups: expandedGroups });
   }
 
   globalThis.FUNDING_RETRIEVAL = Object.freeze({

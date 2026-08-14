@@ -19,6 +19,7 @@
   const REVIEW_EMAIL = "marc.porosoff@rochester.edu";
   const SEARCH_QUERY = globalThis.FUNDING_SEARCH_QUERY;
   const RETRIEVAL_API = globalThis.FUNDING_RETRIEVAL;
+  const ORCID_API = globalThis.FUNDING_ORCID;
   const PROFILE_API = globalThis.FUNDING_PROFILE;
   const NOFO_API = globalThis.FUNDING_NOFO;
   const REVIEW_API = globalThis.FUNDING_REVIEW;
@@ -55,7 +56,7 @@
   ];
 
   const FACETS = {
-    source: { recordField: "source", limit: 12 },
+    source: { recordField: "source_facet", fallbackRecordField: "source", limit: 12 },
     source_type: { recordField: "source_type", limit: 8 },
     discipline: { recordField: "disciplines", limit: 20 },
     topic: { recordField: "topic_areas", limit: 30 },
@@ -138,6 +139,7 @@
       active: false,
       query: "",
       terms: [],
+      acronymExpansions: [],
       saveTimer: null,
     },
     feedback: {},
@@ -309,21 +311,29 @@
     return "";
   }
 
+  function recordIsArchived(record, asOf = runtimeDateIso()) {
+    const status = String(record.status || "").trim().toLowerCase();
+    if (status === "archived") return true;
+    return /^\d{4}-\d{2}-\d{2}$/.test(record.archive_date || "")
+      && record.archive_date <= asOf;
+  }
+
   function recordIsCurrent(record, asOf = runtimeDateIso()) {
-    const status = String(record.status || "").toLowerCase();
+    const status = String(record.status || "").trim().toLowerCase();
     if (["closed", "archived", "cancelled", "canceled", "withdrawn", "expired"].includes(status)) {
       return false;
     }
+    if (recordIsArchived(record, asOf)) return false;
     if (nonFundingReason(record)) return false;
     if (record.close_date) {
       if (!/^\d{4}-\d{2}-\d{2}$/.test(record.close_date)) return false;
       if (record.close_date < asOf) return false;
-    } else if (record.archive_date && record.archive_date < asOf) return false;
+    }
     return status === "posted" || status === "forecasted";
   }
 
   function recordIsAvailable(record) {
-    return String(record.status || "").toLowerCase() === "archived"
+    return recordIsArchived(record)
       || recordIsCurrent(record);
   }
 
@@ -331,11 +341,17 @@
     return (catalog?.opportunities || []).filter(record => recordIsAvailable(record));
   }
 
+  function facetRecordValue(record, config) {
+    return Object.prototype.hasOwnProperty.call(record, config.recordField)
+      ? record[config.recordField]
+      : record[config.fallbackRecordField];
+  }
+
   function currentFacetCounts(records) {
     const output = Object.fromEntries(Object.keys(FACETS).map(name => [name, {}]));
     for (const record of records) {
       for (const [name, config] of Object.entries(FACETS)) {
-        const raw = record[config.recordField];
+        const raw = facetRecordValue(record, config);
         const values = Array.isArray(raw) ? raw : [raw];
         for (const value of new Set(values.filter(Boolean))) {
           output[name][value] = (output[name][value] || 0) + 1;
@@ -557,16 +573,47 @@
     $("count-archived").textContent = (state.runtimeCatalog.statusCounts.archived || 0).toLocaleString();
   }
 
+  function profileAcronymContext(profile = state.profile.value) {
+    if (!profile) return "";
+    return [
+      String(profile.research_description || "").slice(0, 6_000),
+      String(profile.expertise_keywords || "").slice(0, 4_000),
+      String(profile.cv_text || "").slice(0, 10_000),
+      String(profile.orcid_text || "").slice(0, 10_000),
+    ].filter(Boolean).join(". ").slice(0, 24_000);
+  }
+
   function hybridScores(query, options = {}) {
-    return searchEngine.score(query, options);
+    const context = Object.prototype.hasOwnProperty.call(options, "context")
+      ? options.context
+      : (state.profile.active ? profileAcronymContext() : "");
+    return searchEngine.score(query, { ...options, context });
   }
 
   function profileTermQuery(profile) {
-    if (!profile) return { query: "", terms: [] };
+    if (!profile) return { query: "", terms: [], acronymExpansions: [] };
     const weights = new Map();
+    const acronymExpansions = new Map();
+    const acronymContext = profileAcronymContext(profile);
     const addSource = (value, sourceWeight) => {
       const counts = new Map();
       tokenize(value).forEach(term => counts.set(term, (counts.get(term) || 0) + 1));
+      if (searchEngine?.expandGroups) {
+        searchEngine.expandGroups(value, { context: acronymContext }).forEach(group => {
+          if (group.expansion?.kind === "contextual_acronym") {
+            acronymExpansions.set(group.source, {
+              source: group.source,
+              phrase: group.expansion.phrase,
+              confidence: group.expansion.confidence,
+              basis: group.expansion.basis,
+            });
+          }
+          group.terms.forEach(item => {
+            if (item.term === group.source) return;
+            counts.set(item.term, (counts.get(item.term) || 0) + Number(item.weight || 0));
+          });
+        });
+      }
       for (const [term, count] of counts) {
         const postings = catalog.search_index.postings[term];
         if (!postings?.length) continue;
@@ -581,6 +628,7 @@
     addSource(profile.research_description, 2.2);
     addSource(profile.expertise_keywords, 5);
     addSource(profile.cv_text, .42);
+    addSource(profile.orcid_text, .72);
     if (profile.career_stage === "early_career") {
       addSource("early career investigator new investigator", 5);
     } else if (profile.career_stage === "trainee") {
@@ -590,7 +638,11 @@
       .sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0]))
       .slice(0, MAX_PROFILE_TERMS)
       .map(([term]) => term);
-    return { query: terms.join(" "), terms };
+    return {
+      query: terms.join(" "),
+      terms,
+      acronymExpansions: [...acronymExpansions.values()],
+    };
   }
 
   function applicantFitBonus(record, context) {
@@ -622,7 +674,8 @@
     return Boolean(
       profile?.research_description?.trim()
       || profile?.expertise_keywords?.trim()
-      || profile?.cv_text?.trim(),
+      || profile?.cv_text?.trim()
+      || profile?.orcid_text?.trim(),
     );
   }
 
@@ -651,10 +704,19 @@
 
   function currentProfile() {
     const previous = state.profile.value || PROFILE_API.emptyProfile();
+    const enteredOrcid = ORCID_API?.normalizeId($("orcid-id").value) || "";
+    const retainsOrcidImport = enteredOrcid && enteredOrcid === previous.orcid_id;
     return {
       ...previous,
       research_description: $("research-profile").value,
       expertise_keywords: $("expertise-keywords").value,
+      orcid_id: enteredOrcid,
+      orcid_name: retainsOrcidImport ? previous.orcid_name : "",
+      orcid_text: retainsOrcidImport ? previous.orcid_text : "",
+      orcid_work_count: retainsOrcidImport ? previous.orcid_work_count : 0,
+      orcid_total_work_count: retainsOrcidImport ? previous.orcid_total_work_count : 0,
+      orcid_source: retainsOrcidImport ? previous.orcid_source : "",
+      orcid_updated_at: retainsOrcidImport ? previous.orcid_updated_at : null,
       applicant_context: $("applicant-context").value,
       career_stage: $("career-stage").value,
       include_cv_in_ai: $("include-cv-ai").checked,
@@ -668,6 +730,7 @@
     const built = profileTermQuery(state.profile.value);
     state.profile.query = built.query;
     state.profile.terms = built.terms;
+    state.profile.acronymExpansions = built.acronymExpansions;
     return built;
   }
 
@@ -699,11 +762,102 @@
     $("remove-cv").classList.remove("hidden");
   }
 
+  function renderOrcidStatus(message = "", isError = false) {
+    const profile = state.profile.value || PROFILE_API.emptyProfile();
+    const status = $("orcid-status");
+    status.classList.toggle("error", isError);
+    if (message) {
+      status.textContent = message;
+    } else if (profile.orcid_text) {
+      const imported = Number(profile.orcid_work_count || 0).toLocaleString();
+      const total = Number(profile.orcid_total_work_count || 0);
+      const count = total > profile.orcid_work_count
+        ? `${imported} of ${total.toLocaleString()}`
+        : imported;
+      status.textContent = `${profile.orcid_name || profile.orcid_id} · ${count} public publications imported for relevance matching.`;
+    } else {
+      status.textContent = "No ORCID publications imported.";
+    }
+    $("remove-orcid").classList.toggle("hidden", !profile.orcid_text);
+  }
+
+  function mergeExpertiseKeywords(existing, additions) {
+    const values = [
+      ...String(existing || "").split(/[,;\n]+/),
+      ...(Array.isArray(additions) ? additions : []),
+    ];
+    const seen = new Set();
+    const output = [];
+    for (const raw of values) {
+      const value = String(raw || "").replace(/\s+/g, " ").trim();
+      const key = value.toLowerCase();
+      if (!value || seen.has(key)) continue;
+      seen.add(key);
+      output.push(value);
+    }
+    return output.join(", ").slice(0, 4_000);
+  }
+
+  async function importOrcidProfile() {
+    const button = $("import-orcid");
+    button.disabled = true;
+    renderOrcidStatus("Looking up public publications linked to this ORCID iD…");
+    try {
+      const imported = await ORCID_API.fetchProfile($("orcid-id").value);
+      $("orcid-id").value = imported.orcidId;
+      $("expertise-keywords").value = mergeExpertiseKeywords(
+        $("expertise-keywords").value,
+        imported.keywords.slice(0, 8),
+      );
+      state.profile.value = PROFILE_API.sanitizeProfile({
+        ...currentProfile(),
+        orcid_id: imported.orcidId,
+        orcid_name: imported.name,
+        orcid_text: imported.publicationText,
+        orcid_work_count: imported.importedWorkCount,
+        orcid_total_work_count: imported.totalWorkCount,
+        orcid_source: imported.source,
+        orcid_updated_at: imported.updatedAt,
+      });
+      refreshProfileQuery();
+      scheduleProfileSave();
+      renderOrcidStatus();
+      setProfileStatus(state.profile.saved
+        ? `ORCID publications added and saved. ${state.profile.terms.length} profile terms are ready for the next search.`
+        : `ORCID publications added for this tab. ${state.profile.terms.length} profile terms are ready; save the profile to reuse them later.`);
+    } catch (error) {
+      renderOrcidStatus(error?.message || String(error), true);
+    } finally {
+      button.disabled = false;
+    }
+  }
+
+  function removeOrcidProfile() {
+    $("orcid-id").value = "";
+    state.profile.value = PROFILE_API.sanitizeProfile({
+      ...currentProfile(),
+      orcid_id: "",
+      orcid_name: "",
+      orcid_text: "",
+      orcid_work_count: 0,
+      orcid_total_work_count: 0,
+      orcid_source: "",
+      orcid_updated_at: null,
+    });
+    refreshProfileQuery();
+    scheduleProfileSave();
+    renderOrcidStatus();
+    setProfileStatus(state.profile.saved
+      ? "ORCID publication metadata removed from the saved profile. Imported keyword text remains editable above."
+      : "ORCID publication metadata removed from this tab. Imported keyword text remains editable above.");
+  }
+
   function applyProfileToForm(profile) {
     state.profile.value = PROFILE_API.sanitizeProfile(profile);
     state.profile.saved = Boolean(state.profile.value.remember);
     $("research-profile").value = state.profile.value.research_description;
     $("expertise-keywords").value = state.profile.value.expertise_keywords;
+    $("orcid-id").value = state.profile.value.orcid_id;
     $("applicant-context").value = state.profile.value.applicant_context;
     $("career-stage").value = state.profile.value.career_stage;
     $("include-cv-ai").checked = state.profile.value.include_cv_in_ai;
@@ -716,7 +870,9 @@
     const built = profileTermQuery(state.profile.value);
     state.profile.query = built.query;
     state.profile.terms = built.terms;
+    state.profile.acronymExpansions = built.acronymExpansions;
     renderCvStatus();
+    renderOrcidStatus();
     renderProfileSaveState();
   }
 
@@ -842,7 +998,7 @@
     const posted = $("status-posted").checked;
     const forecasted = $("status-forecasted").checked;
     const archived = $("status-archived").checked;
-    if (status === "archived") {
+    if (recordIsArchived(record)) {
       if (!archived) return false;
     } else {
       if (!recordIsCurrent(record)) return false;
@@ -851,7 +1007,8 @@
     }
 
     for (const [name, config] of Object.entries(FACETS)) {
-      if (!intersects(record[config.recordField], state.filters[name])) return false;
+      const value = facetRecordValue(record, config);
+      if (!intersects(value, state.filters[name])) return false;
     }
 
     const deadlineFrom = $("deadline-from").value;
@@ -1006,11 +1163,8 @@
       ? state.ai.candidateIds
       : state.ai.currentIds;
     const matches = ids
-      .map(id => byId.get(id) || {
-        index: catalog.opportunities.findIndex(record => recordId(record) === id),
-        score: 0,
-      })
-      .filter(match => match.index >= 0);
+      .map(id => byId.get(id))
+      .filter(Boolean);
     if (state.ai.reviewCandidates) return matches;
     return matches.sort((a, b) => {
         const aId = recordId(catalog.opportunities[a.index]);
@@ -1233,8 +1387,21 @@
     const typoNote = typoSources.length
       ? ` Spelling-tolerant matching was used for ${typoSources.map(term => `“${term}”`).join(", ")}.`
       : "";
+    const acronymExpansions = [
+      ...(state.searchDiagnostics?.acronymExpansions || []),
+      ...(state.profile.active ? state.profile.acronymExpansions || [] : []),
+    ].filter((item, index, values) =>
+      values.findIndex(other =>
+        other.source === item.source && other.phrase === item.phrase) === index);
+    const acronymNotes = acronymExpansions
+      .map(item => `“${item.source.toUpperCase()}” as “${item.phrase}”`);
+    const usedResearcherContext = acronymExpansions.some(item =>
+      String(item.basis || "").includes("context"));
+    const acronymNote = acronymNotes.length
+      ? ` Interpreted ${acronymNotes.join(", ")} using ${usedResearcherContext ? "local catalog and researcher context" : "the local catalog"}; no AI call was made.`
+      : "";
     $("search-status").textContent =
-      `Search complete: ${state.matches.length.toLocaleString()} opportunities match the context above.${typoNote}`;
+      `Search complete: ${state.matches.length.toLocaleString()} opportunities match the context above.${typoNote}${acronymNote}`;
     $("results-heading").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
@@ -3705,6 +3872,31 @@
           : "Profile is ready for this search. Save it only if you want to reuse it later.");
       });
     });
+    $("orcid-id").addEventListener("input", () => {
+      const profile = state.profile.value || PROFILE_API.emptyProfile();
+      const normalized = ORCID_API.normalizeId($("orcid-id").value);
+      if (profile.orcid_text && normalized !== profile.orcid_id) {
+        state.profile.value = PROFILE_API.sanitizeProfile({
+          ...currentProfile(),
+          orcid_id: normalized,
+          orcid_name: "",
+          orcid_text: "",
+          orcid_work_count: 0,
+          orcid_total_work_count: 0,
+          orcid_source: "",
+          orcid_updated_at: null,
+        });
+        refreshProfileQuery();
+        scheduleProfileSave();
+      }
+      renderOrcidStatus(
+        $("orcid-id").value.trim()
+          ? "Select “Import ORCID” to add public publication topics to this profile."
+          : "No ORCID publications imported.",
+      );
+    });
+    $("import-orcid").addEventListener("click", importOrcidProfile);
+    $("remove-orcid").addEventListener("click", removeOrcidProfile);
     ["applicant-context", "career-stage", "include-cv-ai"].forEach(id => {
       $(id).addEventListener("change", () => {
         refreshProfileQuery();
@@ -3717,7 +3909,7 @@
     $("use-profile").addEventListener("change", () => {
       refreshProfileQuery();
       if ($("use-profile").checked && !profileHasContent()) {
-        setProfileStatus("Add a research description, expertise keywords, or a CV before using the profile.", true);
+        setProfileStatus("Add a research description, expertise keywords, a CV, or ORCID publications before using the profile.", true);
         $("profile-builder").open = true;
       } else {
         setProfileStatus($("use-profile").checked
@@ -3729,7 +3921,7 @@
     $("save-profile").addEventListener("click", () => {
       const built = refreshProfileQuery();
       if (!profileHasContent()) {
-        setProfileStatus("Add a research description, expertise keywords, or a CV first.", true);
+        setProfileStatus("Add a research description, expertise keywords, a CV, or ORCID publications first.", true);
         $("research-profile").focus();
         return;
       }
@@ -3754,7 +3946,7 @@
       $("use-profile").checked = false;
       $("cv-file").value = "";
       loadProviderKey();
-      setProfileStatus("Profile and CV extract cleared from this device.");
+      setProfileStatus("Profile, CV extract, and ORCID publication metadata cleared from this device.");
       if (state.searched) runSearch();
     });
     $("cv-file").addEventListener("change", async event => {
@@ -4080,6 +4272,9 @@
       searchEngine = RETRIEVAL_API.create(catalog, SEARCH_QUERY);
       if (!PROFILE_API?.loadProfile || !PROFILE_API?.extractCv) {
         throw new Error("The local profile module did not load. Refresh the page and try again.");
+      }
+      if (!ORCID_API?.normalizeId || !ORCID_API?.fetchProfile) {
+        throw new Error("The ORCID publication helper did not load. Refresh the page and try again.");
       }
       if (!NOFO_API?.extract || !NOFO_API?.matchCatalog) {
         throw new Error("The local NOFO reader did not load. Refresh the page and try again.");

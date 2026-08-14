@@ -75,12 +75,26 @@ function buildIndex(records, query) {
 test("wires the external researcher editor into a syntactically valid page", () => {
   assert.match(teamPage, /id="add-researcher"/);
   assert.match(teamPage, /id="external-researcher-form"/);
+  assert.match(teamPage, /id="external-orcid"/);
+  assert.match(teamPage, /id="import-external-orcid"/);
+  assert.match(teamPage, /assets\/orcid\.js/);
   assert.match(teamPage, /assets\/team-researchers\.js/);
   assert.match(teamPage, /assets\/team-matcher\.js/);
   assert.match(teamPage, /assets\/search-retrieval\.js/);
   assert.match(teamPage, /MATCHER_API\.create\(catalogData, M \|\| \{\}, SEARCH_API\)/);
   assert.match(teamPage, /function rebuildResearcherMatches/);
   assert.match(teamPage, /function memberProfile/);
+  assert.match(teamPage, /function opportunityCard/);
+  assert.match(teamPage, /Research overlap across this team/);
+  assert.match(teamPage, /Show full description &amp; details/);
+  assert.match(teamPage, /Per-award amount/);
+  assert.match(teamPage, /Eligible applicants/);
+  assert.match(teamPage, /Open official opportunity/);
+  assert.match(teamPage, /intended for individual and internal institutional use/);
+  assert.match(teamPage, /not an official source of record/);
+  assert.match(teamPage, /independently verify fit, eligibility, deadlines, requirements, and terms/);
+  assert.match(teamPage, /&copy; 2026 Marc D\. Porosoff/);
+  assert.match(teamPage, /href="\.\/LICENSE">MIT License/);
   const inlineScripts = [...teamPage.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)]
     .map(match => match[1].trim())
     .filter(Boolean);
@@ -106,6 +120,17 @@ test("normalizes and saves no more than four external researchers", () => {
     [...loaded.profiles[0].keywords],
     ["carbon capture", "catalysis", "membranes", "energy storage", "hydrogen"],
   );
+  const withOrcid = team.save(storage, [{
+    id: "ext-ada",
+    name: "Ada",
+    keywords: ["carbon capture", "catalysis", "membranes"],
+    orcid_id: "0000-0002-1825-0097",
+    orcid_name: "Ada Researcher",
+    orcid_text: "Ionic liquid separation publications",
+    orcid_work_count: 7,
+  }]);
+  assert.equal(withOrcid.profiles[0].orcid_id, "0000-0002-1825-0097");
+  assert.match(withOrcid.profiles[0].orcid_text, /Ionic liquid/);
 });
 
 test("drops standalone umbrella keywords from external profiles", () => {
@@ -220,6 +245,68 @@ test("graded team scoring combines evidence, supports scope-only BAAs, and rejec
   assert.ok(onr.fits.every(fit => fit.reasons.includes("Office of Naval Research")));
   assert.ok(result.themes.some(theme => theme.label === "Data-driven catalyst discovery"));
   assert.ok(result.results.every(item => item.fits.length === gradedTeam.length));
+});
+
+test("team matching never includes archived or otherwise expired catalog records", () => {
+  const { query, matcher } = loadApis();
+  const base = {
+    title: "Catalytic carbon conversion",
+    description: "Heterogeneous catalysis and carbon dioxide conversion.",
+    topic_areas: ["Catalysis and reaction engineering"],
+    close_date: "2026-12-31",
+  };
+  const catalog = { opportunities: [
+    { ...base, opportunity_id: "current", status: "posted" },
+    { ...base, opportunity_id: "archived", status: "archived" },
+    { ...base, opportunity_id: "archive-date", status: "posted", archive_date: "2026-08-10" },
+    { ...base, opportunity_id: "cancelled", status: "cancelled" },
+  ] };
+  const profile = {
+    name: "Catalysis PI",
+    key_terms: ["heterogeneous catalysis", "carbon dioxide conversion"],
+    domains: ["Catalysis and reaction engineering"],
+  };
+  const engine = matcher.create(catalog, {}, query, { now: new Date("2026-08-13T00:00:00Z") });
+  const ids = engine.matchProfile(profile).map(result => result.id);
+
+  assert.deepEqual(Array.from(ids), ["current"]);
+  assert.equal(engine.records.length, 1);
+});
+
+test("team matching resolves a researcher acronym from local profile context", () => {
+  const { query, matcher } = loadApis();
+  const catalog = { opportunities: [
+    {
+      opportunity_id: "cfd",
+      status: "posted",
+      title: "Hypersonic flow simulation",
+      description: "Computational fluid dynamics using advanced numerical methods.",
+      topic_areas: ["Space and aeronautics"],
+      close_date: "2026-12-31",
+    },
+    {
+      opportunity_id: "fluid-only",
+      status: "posted",
+      title: "Experimental fluid measurements",
+      description: "Fluid mechanics instrumentation and imaging.",
+      close_date: "2026-12-31",
+    },
+  ] };
+  const engine = matcher.create(catalog, {}, query, {
+    now: new Date("2026-08-13T00:00:00Z"),
+  });
+  const matches = engine.matchProfile({
+    name: "Contextual Researcher",
+    key_terms: ["CFD"],
+    research_summary: "Uses computational fluid dynamics to study transport phenomena.",
+    domains: ["Space and aeronautics"],
+  });
+
+  assert.deepEqual(Array.from(matches, item => item.id), ["cfd"]);
+  assert.deepEqual(
+    Array.from(matches[0].fits[0].researchReasons),
+    ["CFD", "Space and aeronautics"],
+  );
 });
 
 test("builds opportunity matches from an external researcher's keywords", () => {
@@ -379,9 +466,10 @@ test("production acceptance suite keeps required broad and focused calls while e
   const four = engine.matchTeam(profiles).results;
   const ids = new Set(four.map(item => item.id));
 
-  for (const required of ["360678", "356605", "348932", "363066"]) {
+  for (const required of ["360678", "356605", "363066"]) {
     assert.ok(ids.has(required), `expected production team results to include ${required}`);
   }
+  assert.equal(ids.has("348932"), false, "archived NSF Catalysis call must be excluded");
   assert.equal(ids.has("363347"), false, "Mexico public-diplomacy call must be excluded");
   assert.equal(ids.has("363024"), false, "mine-safety call must be excluded");
   assert.equal(
@@ -397,7 +485,6 @@ test("production acceptance suite keeps required broad and focused calls while e
   assert.equal(onr.broad, true);
   const nasa = four.find(item => item.id === "363066");
   assert.equal(nasa.closingSoon, true);
-  assert.ok(four.findIndex(item => item.id === "348932") < four.length - 1);
 
   Object.values(generated.faculty).forEach(metadata => {
     const count = engine.matchProfile({ name: metadata.resolved_name, ...metadata }).length;

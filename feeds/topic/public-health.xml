@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml</id>
-  <updated>2026-08-13T12:10:38Z</updated>
+  <updated>2026-08-13T12:27:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -614,6 +614,15 @@
     <summary>National Institutes of Health | Closes 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the National Institutes of Health (NIH) mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center (SDMC), and Laboratory Center (LC) working with Clinical Trials Units (CTUs), to advance prevention, treatment, and implement…</summary>
   </entry>
   <entry>
+    <title>Women's Initiative for Screening and Health (WISH)</title>
+    <link href="https://www.grants.gov/search-results-detail/363546"/>
+    <id>urn:funding-finder:grants-gov:363546</id>
+    <updated>2026-08-21T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Public health"/>
+    <summary>Health Resources and Services Administration | Closes 2026-09-20 | The purpose of Women's Initiative for Screening and Health (WISH) is to improve women’s health across the lifespan by increasing access to and availability of preventive health services. Through a multidisciplinary coalition of healthcare providers, academic institutions, and patient-centered organizations, WISH drives a comprehensive strategy to: (1) review and recommend evidence-based updates to…</summary>
+  </entry>
+  <entry>
     <title>Centers for Structural Biology of HIV and other Infectious Diseases</title>
     <link href="https://www.grants.gov/search-results-detail/361050"/>
     <id>urn:funding-finder:grants-gov:361050</id>
@@ -633,16 +642,5 @@
     <category term="Public health"/>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Closes 2026-10-17 | The purpose of this NOFO is to enhance the capability of NCATS CTSA Program KL2 scholars supported by the CTSA Program to conduct research as they complete the transition to fully independent academic translational scientists. These small research grants will support different clinical and translational science research projects, including pilot and feasibility studies; secondary data analysis of …</summary>
-  </entry>
-  <entry>
-    <title>Culturally Specific Domestic Violence and Sexual Assault Services</title>
-    <link href="https://www.grants.gov/search-results-detail/362378"/>
-    <id>urn:funding-finder:grants-gov:362378</id>
-    <updated>2026-08-11T00:00:00Z</updated>
-    <author><name>Administration for Children and Families - OFVPS</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <summary>Administration for Children and Families - OFVPS | Closes 2026-09-08 | The purpose of the Culturally Specific Services for Domestic Violence and Sexual Assault program is to provide culturally specific services for survivors of domestic violence and sexual assault. Objectives include services for survivors of sexual assault and domestic violence to address emergent needs resulting from a public health emergency and other public health concerns and support for organiz…</summary>
   </entry>
 </feed>

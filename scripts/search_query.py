@@ -15,6 +15,10 @@ PFAS_CONCEPT = (
     "persistent contaminant contamination pollution remediation groundwater "
     "drinking wastewater water treatment purification"
 )
+RARE_EARTH_CONCEPT = (
+    "rare earth element lanthanide scandium yttrium critical mineral extraction "
+    "separation recovery recycling processing"
+)
 
 QUERY_ALIASES: dict[str, str] = {
     "co2": "carbon dioxide",
@@ -50,6 +54,12 @@ QUERY_ALIASES: dict[str, str] = {
     "adhd": "attention deficit",
     "ckd": "kidney",
     "copd": "pulmonary",
+    "ree": RARE_EARTH_CONCEPT,
+    "rees": RARE_EARTH_CONCEPT,
+    "lanthanide": RARE_EARTH_CONCEPT,
+    "lanthanides": RARE_EARTH_CONCEPT,
+    "ionic": "ion electrolyte solvent salt extraction separation",
+    "extraction": "separation recovery recycling processing",
     "pfas": PFAS_CONCEPT,
     "pfoa": PFAS_CONCEPT,
     "pfos": PFAS_CONCEPT,
@@ -80,7 +90,10 @@ QUERY_ALIASES: dict[str, str] = {
 }
 
 ALWAYS_EXPAND_ALIASES = {
-    term for term, expansion in QUERY_ALIASES.items() if expansion == PFAS_CONCEPT
+    term
+    for term, expansion in QUERY_ALIASES.items()
+    if expansion in {PFAS_CONCEPT, RARE_EARTH_CONCEPT}
+    or term in {"ionic", "extraction"}
 }
 
 QUERY_VARIANTS: dict[str, tuple[str, ...]] = {

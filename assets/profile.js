@@ -7,6 +7,7 @@
   const FEEDBACK_STORAGE_KEY = "funding-finder.feedback.v1";
   const MAX_CV_FILE_BYTES = 10 * 1024 * 1024;
   const MAX_CV_TEXT_CHARS = 120_000;
+  const MAX_ORCID_TEXT_CHARS = 40_000;
   const MAX_PDF_PAGES = 80;
 
   const APPLICANT_CONTEXTS = new Set([
@@ -123,6 +124,13 @@
       schema_version: PROFILE_SCHEMA_VERSION,
       research_description: "",
       expertise_keywords: "",
+      orcid_id: "",
+      orcid_name: "",
+      orcid_text: "",
+      orcid_work_count: 0,
+      orcid_total_work_count: 0,
+      orcid_source: "",
+      orcid_updated_at: null,
       applicant_context: "higher_education",
       career_stage: "any",
       cv_name: "",
@@ -153,6 +161,13 @@
       ...emptyProfile(),
       research_description: cleanString(source.research_description, 20_000),
       expertise_keywords: cleanString(source.expertise_keywords, 4_000),
+      orcid_id: cleanString(source.orcid_id, 40),
+      orcid_name: cleanString(source.orcid_name, 160),
+      orcid_text: cleanString(source.orcid_text, MAX_ORCID_TEXT_CHARS),
+      orcid_work_count: Math.max(0, Math.min(100, Number(source.orcid_work_count) || 0)),
+      orcid_total_work_count: Math.max(0, Number(source.orcid_total_work_count) || 0),
+      orcid_source: cleanString(source.orcid_source, 200),
+      orcid_updated_at: cleanString(source.orcid_updated_at, 40) || null,
       applicant_context: applicantContext,
       career_stage: careerStage,
       cv_name: cleanString(source.cv_name, 260),
@@ -417,6 +432,8 @@
     return stableHash(JSON.stringify({
       research_description: value.research_description,
       expertise_keywords: value.expertise_keywords,
+      orcid_id: value.orcid_id,
+      orcid_text: value.orcid_text,
       applicant_context: value.applicant_context,
       career_stage: value.career_stage,
       cv_text: value.cv_text,
@@ -433,6 +450,7 @@
     const context = {
       research_description: profile.research_description || null,
       expertise_keywords: profile.expertise_keywords || null,
+      orcid_id: profile.orcid_id || null,
       applicant_context: profile.applicant_context,
       career_stage: profile.career_stage,
     };
@@ -441,6 +459,13 @@
       context.cv_excerpt_note = profile.cv_text.length > maximum
         ? `First ${maximum.toLocaleString()} characters of the locally extracted CV`
         : "Complete locally extracted CV text";
+    }
+    if (profile.orcid_text) {
+      const orcidMaximum = Math.min(maximum, 8_000);
+      context.orcid_publications_excerpt = profile.orcid_text.slice(0, orcidMaximum);
+      context.orcid_publications_note = profile.orcid_text.length > orcidMaximum
+        ? `First ${orcidMaximum.toLocaleString()} characters from public ORCID-linked publication metadata`
+        : "Public ORCID-linked publication metadata";
     }
     return context;
   }
@@ -542,6 +567,7 @@
     FEEDBACK_STORAGE_KEY,
     MAX_CV_FILE_BYTES,
     MAX_CV_TEXT_CHARS,
+    MAX_ORCID_TEXT_CHARS,
     PROFILE_SCHEMA_VERSION,
     PROFILE_STORAGE_KEY,
     aiProfileContext,

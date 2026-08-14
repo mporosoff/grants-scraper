@@ -76,6 +76,13 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn('assets/site-nav.js', team_html)
         self.assertIn('assets/site-help.js', explorer_html)
         self.assertIn('assets/site-help.js', team_html)
+        for page in (explorer_html, team_html):
+            self.assertIn(
+                "intended for individual and internal institutional use", page
+            )
+            self.assertIn("not an official source of record", page)
+            self.assertIn("&copy; 2026 Marc D. Porosoff", page)
+            self.assertIn('href="./LICENSE">MIT License', page)
         self.assertIn('MAX_EXTERNAL = 4', team_researchers_js)
         self.assertIn('funding-finder.external-researchers.v1', team_researchers_js)
         self.assertIn('function buildMatches', team_researchers_js)
@@ -134,6 +141,8 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn('id="k-key"', explorer_html)
         self.assertIn('id="research-profile"', explorer_html)
         self.assertIn('id="expertise-keywords"', explorer_html)
+        self.assertIn('id="orcid-id"', explorer_html)
+        self.assertIn('id="import-orcid"', explorer_html)
         self.assertIn('id="cv-file"', explorer_html)
         self.assertIn('id="save-profile"', explorer_html)
         self.assertIn('id="use-profile"', explorer_html)
@@ -164,27 +173,32 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             '<script src="./data/opportunities.js?v=catalog-',
             explorer_html,
         )
-        release_version = "brand-2026-08-12"
+        release_version = "filters-2026-08-13"
+        feature_version = "orcid-2026-08-13"
+        search_version = "acronym-2026-08-13"
+        style_version = "legal-2026-08-13"
         self.assertIn(
-            f'<link rel="stylesheet" href="./assets/app.css?v={release_version}">',
+            f'<link rel="stylesheet" href="./assets/app.css?v={style_version}">',
             explorer_html,
         )
         for asset in (
-            "profile.js", "nofo.js", "review.js", "ai-provider.js", "credentials.js",
-            "chat-ui.js", "saved.js", "preferences.js", "app.js",
+            "nofo.js", "review.js", "ai-provider.js", "credentials.js",
+            "chat-ui.js", "saved.js", "preferences.js",
         ):
             self.assertIn(
                 f'<script src="./assets/{asset}?v={release_version}"></script>',
                 explorer_html,
             )
-        self.assertIn(
-            f'<script src="./assets/search-query.js?v={release_version}"></script>',
-            explorer_html,
-        )
-        self.assertIn(
-            f'<script src="./assets/search-retrieval.js?v={release_version}"></script>',
-            explorer_html,
-        )
+        for asset in ("orcid.js", "profile.js"):
+            self.assertIn(
+                f'<script src="./assets/{asset}?v={feature_version}"></script>',
+                explorer_html,
+            )
+        for asset in ("search-query.js", "search-retrieval.js", "site-help.js", "app.js"):
+            self.assertIn(
+                f'<script src="./assets/{asset}?v={search_version}"></script>',
+                explorer_html,
+            )
         self.assertIn("globalThis.GRANT_CATALOG", application_js)
         self.assertIn("globalThis.FUNDING_SEARCH_QUERY", application_js)
         self.assertIn("globalThis.FUNDING_RETRIEVAL", application_js)

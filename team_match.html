@@ -21,12 +21,13 @@
 <meta name="twitter:image" content="https://mporosoff.github.io/grants-scraper/assets/social/faculty-pairing-preview.jpg?v=20260812" />
 <meta name="twitter:image:alt" content="Faculty and funding collaboration finder for UR ChemE" />
 <meta http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'" />
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://api.crossref.org; base-uri 'none'; form-action 'none'" />
 <meta name="robots" content="noindex, nofollow" />
 <title>ChemE faculty and funding | collaboration finder (internal)</title>
 <link rel="canonical" href="https://mporosoff.github.io/grants-scraper/team_match.html" />
 <link rel="icon" type="image/svg+xml" href="./assets/icons/faculty-pairing.svg?v=20260812" />
 <link rel="stylesheet" href="./assets/brand.css?v=20260812" />
+<link rel="stylesheet" href="./assets/app.css?v=legal-2026-08-13" />
 <link rel="stylesheet" href="./assets/site-nav.css?v=brand-2026-08-12" />
 <style>
   :root{
@@ -76,6 +77,13 @@
   .researcher-fields label{display:grid;gap:5px;color:var(--navy);font-size:.8rem;font-weight:700;}
   .researcher-fields input,.researcher-fields textarea{width:100%;padding:9px 11px;border:1px solid var(--line-strong);border-radius:9px;background:#fff;color:var(--ink);font:inherit;font-weight:400;}
   .researcher-fields textarea{resize:vertical;min-height:76px;}
+  .researcher-keywords{grid-column:1/-1;}
+  .team-orcid-row{display:flex;gap:7px;align-items:stretch;margin-top:5px;}
+  .team-orcid-row input{margin:0;min-width:0;}
+  .team-orcid-row button{flex:none;padding:8px 11px;border:1px solid #78ad96;border-radius:9px;background:#f2fbf7;color:#146143;font:inherit;font-size:.76rem;font-weight:800;cursor:pointer;}
+  .team-orcid-row button:disabled{cursor:wait;opacity:.65;}
+  .team-orcid-status{display:block;min-height:1.2em;margin-top:4px;color:#527367;font-size:.72rem;font-weight:400;}
+  .team-orcid-status.error{color:#9b2735;}
   .field-note{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:.73rem;font-weight:400;}
   .researcher-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:13px;}
   .researcher-actions button{border:1px solid var(--line-strong);border-radius:9px;padding:8px 13px;background:#fff;color:var(--ink);font:inherit;font-size:.82rem;font-weight:700;cursor:pointer;}
@@ -113,15 +121,21 @@
   .count{color:var(--muted);font-size:.85rem;margin:16px 2px 12px;}
   .section-label{margin:22px 2px 10px;font-size:.75rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
 
-  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 18px;margin-bottom:12px;}
-  .card.broad-card{border-left:4px solid var(--gold);}
-  .card h3{margin:0 0 4px;font-size:1.02rem;line-height:1.35;}
-  .card h3 a{text-decoration:none;}
-  .card h3 a:hover{text-decoration:underline;}
+  #view.result-list{padding-top:0;}
+  .team-result-card{margin-bottom:0;}
+  .team-result-card.broad-card{border-left:4px solid var(--gold);}
+  .team-result-card .agency{padding-bottom:10px;margin:0 0 10px;color:#516178;font-size:.84rem;font-weight:700;border-bottom:1px solid #dfe6ee;}
+  .team-result-card .badge{float:none;margin-left:0;text-align:left;}
+  .team-result-card .team-overlap{margin:12px 0 4px;padding:11px 12px;background:#f3f7fc;border:1px solid #d4dfeb;border-radius:9px;}
+  .team-result-card .team-overlap > strong{display:block;margin-bottom:7px;color:var(--navy);font-size:.75rem;}
+  .team-result-card .team{margin-top:0;}
+  .team-result-card .matched-themes{margin:8px 0 0;}
+  .team-result-card .scope-note{margin:9px 0 0;}
+  .team-result-card .detail-grid dt{color:#617087;font-size:.68rem;font-weight:850;text-transform:uppercase;}
+  .team-result-card .detail-grid dd{overflow-wrap:anywhere;}
   .agency{margin:0;color:var(--muted);font-size:.84rem;}
   .listed{margin:5px 0 0;font-size:.8rem;color:var(--blue-dark);font-weight:700;}
   .deadline{margin:4px 0 0;font-size:.8rem;color:var(--warning);}
-  .badges{float:right;margin-left:10px;text-align:right;}
   .badge{display:inline-block;border-radius:999px;padding:3px 11px;font-size:.72rem;font-weight:700;white-space:nowrap;}
   .badge.fit{background:var(--blue-soft);color:var(--blue-dark);border:1px solid #cfe0fb;}
   .badge.external{background:var(--success-soft);color:var(--success);border:1px solid #bfe6d5;margin-left:6px;}
@@ -137,7 +151,7 @@
   .empty code{background:var(--surface-alt);padding:2px 6px;border-radius:6px;}
   footer.note{margin-top:26px;color:var(--muted);font-size:.8rem;text-align:center;}
   .hide{display:none !important;}
-  @media (max-width:700px){.researcher-fields{grid-template-columns:1fr}.researcher-actions .delete-researcher{margin-left:0}}
+  @media (max-width:700px){.researcher-fields{grid-template-columns:1fr}.researcher-keywords{grid-column:auto}.researcher-actions .delete-researcher{margin-left:0}.team-orcid-row{flex-direction:column}.team-result-card .key-facts,.team-result-card .detail-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -181,13 +195,21 @@
     <p class="external-status" id="external-status" aria-live="polite">External researchers are saved only in this browser.</p>
     <form class="researcher-editor" id="external-researcher-form" hidden>
       <h3 id="external-editor-heading">Add an external researcher</h3>
-      <p>Add a name and three to eight specific research keywords; about five usually gives the best balance.</p>
+      <p>Add a name and three to eight specific research keywords, import public publication topics with an ORCID iD, or combine both.</p>
       <div class="researcher-fields">
         <label for="external-name">
           Researcher name
           <input id="external-name" type="text" maxlength="80" autocomplete="off" placeholder="Example: Ada Lovelace" required />
         </label>
-        <label for="external-keywords">
+        <label for="external-orcid">
+          ORCID iD <span class="field-note">optional publication import</span>
+          <span class="team-orcid-row">
+            <input id="external-orcid" type="text" maxlength="40" autocomplete="off" placeholder="0000-0002-1825-0097" />
+            <button id="import-external-orcid" type="button">Import ORCID</button>
+          </span>
+          <span class="team-orcid-status" id="external-orcid-status" aria-live="polite"></span>
+        </label>
+        <label class="researcher-keywords" for="external-keywords">
           Research keywords
           <textarea id="external-keywords" maxlength="520" placeholder="Example: carbon capture, heterogeneous catalysis, membrane separations, CO2 conversion, electrochemistry" required></textarea>
           <span class="field-note"><span>Separate keywords with commas or new lines.</span><span id="external-keyword-count">0 keywords</span></span>
@@ -211,20 +233,26 @@
   <div id="selected-terms" class="selected-terms"></div>
   <div id="themes" class="themes"></div>
   <p class="count" id="count"></p>
-  <div id="view"></div>
+  <div id="view" class="result-list"></div>
 
   <footer class="note">
-    Faculty interests and the hand-checked agency scope map are maintained in <code>scripts/faculty_match.py</code>. Matching runs live against the nightly-refreshed catalog, so new calls appear without manually rebuilding faculty matches. “Broad: verify fit” marks open-scope solicitations supported by the sponsor map. External researchers remain stored only in this browser. This internal tool remains marked no-index.
+    <p>Faculty interests and the hand-checked agency scope map are maintained in <code>scripts/faculty_match.py</code>. Matching runs live against the nightly-refreshed current catalog, and archived calls are always excluded. “Broad: verify fit” marks open-scope solicitations supported by the sponsor map. External profiles and imported public ORCID-linked publication metadata remain stored only in this browser. This internal tool remains marked no-index.</p>
+    <section class="legal-notice" id="use-notice" aria-label="Use and copyright notice">
+      <p><strong>Use notice:</strong> Team Match is an informational research-planning aid intended for individual and internal institutional use. It is not an official source of record, application or submission system, or legal, financial, compliance, or sponsor guidance.</p>
+      <p>Opportunity and researcher-match information may be incomplete, outdated, or machine-generated. Before acting or applying, independently verify fit, eligibility, deadlines, requirements, and terms in the sponsor's official notice.</p>
+      <p class="copyright-notice">&copy; 2026 Marc D. Porosoff. Software provided under the <a href="./LICENSE">MIT License</a>.</p>
+    </section>
   </footer>
 </div>
 
 <script src="data/opportunities.js"></script>
 <script src="data/faculty_matches.js?v=graded-team-themes-v1"></script>
-<script src="assets/search-query.js?v=release-2026-08-10-v13"></script>
-<script src="assets/search-retrieval.js?v=release-2026-08-10-v13"></script>
-<script src="assets/team-researchers.js?v=graded-team-themes-v1"></script>
-<script src="assets/team-matcher.js?v=graded-team-themes-v1"></script>
-<script src="assets/site-help.js?v=brand-2026-08-12"></script>
+<script src="assets/search-query.js?v=acronym-2026-08-13"></script>
+<script src="assets/search-retrieval.js?v=acronym-2026-08-13"></script>
+<script src="assets/orcid.js?v=orcid-2026-08-13"></script>
+<script src="assets/team-researchers.js?v=acronym-2026-08-13"></script>
+<script src="assets/team-matcher.js?v=acronym-2026-08-13"></script>
+<script src="assets/site-help.js?v=acronym-2026-08-13"></script>
 <script src="assets/site-nav.js?v=brand-2026-08-12"></script>
 <script>
 (function () {
@@ -234,6 +262,7 @@
   var catalogData = globalThis.GRANT_CATALOG || {};
   var catalog = catalogData.opportunities || [];
   var TEAM_API = globalThis.FUNDING_TEAM_RESEARCHERS || null;
+  var ORCID_API = globalThis.FUNDING_ORCID || null;
   var SEARCH_API = globalThis.FUNDING_SEARCH_QUERY || null;
   var RETRIEVAL_API = globalThis.FUNDING_RETRIEVAL || null;
   var MATCHER_API = globalThis.FUNDING_TEAM_MATCHER || null;
@@ -302,6 +331,7 @@
   });
   var externalStorage = null;
   var editingExternalId = "";
+  var editingOrcidData = null;
   var storageAvailable = true;
   var themeState = {};
 
@@ -321,6 +351,10 @@
     return profile ? profile.keywords : ((faculty[key] && faculty[key].key_terms) || []);
   }
   function memberSummary(key) {
+    var profile = externalProfile(key);
+    if (profile && profile.orcid_text) {
+      return profile.orcid_work_count + " ORCID-linked publications imported";
+    }
     return isExternalKey(key) ? "" : ((faculty[key] && faculty[key].research_summary) || "");
   }
   function memberProfile(key) {
@@ -330,6 +364,7 @@
         name: profile.name,
         key_terms: profile.keywords,
         keywords: profile.keywords,
+        publication_text: profile.orcid_text || "",
         domains: TEAM_API ? TEAM_API.inferDomains(profile.keywords) : []
       };
     }
@@ -337,6 +372,7 @@
     return {
       name: key,
       key_terms: metadata.key_terms || [],
+      research_summary: metadata.research_summary || "",
       domains: metadata.domains || []
     };
   }
@@ -368,32 +404,145 @@
       listingDateValue(b.d.listing_date) - listingDateValue(a.d.listing_date) ||
       b.totalN - a.totalN || b.sumScore - a.sumScore || a.d.title.localeCompare(b.d.title);
   }
-  function oppHead(d, fitCount) {
-    var url = d.url && /^https?:\/\//i.test(d.url) ? d.url : "";
-    var titleHtml = url
-      ? '<a href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(d.title) + " ↗</a>"
-      : esc(d.title);
-    var badges = '<span class="badges">' +
-      (d.department ? '<span class="badge fit">' + fitCount + " faculty</span>" : "") +
-      (d.new ? '<span class="badge new">NEW</span>' : "") +
-      (d.broad ? '<span class="badge broad">broad · verify fit</span>' : "") +
-      "</span>";
-    return badges + "<h3>" + titleHtml + "</h3>" +
-      (d.agency ? '<p class="agency">' + esc(d.agency) + "</p>" : "") +
-      (d.listing_date ? '<p class="listed">Listed ' + esc(listingDateText(d.listing_date)) + "</p>" : "") +
-      (d.deadline ? '<p class="deadline">' + (d.closingSoon ? '<span class="closing-soon">Closing soon: </span>' : "") + esc(d.deadline) + "</p>" : "") +
-      (d.themeLabels && d.themeLabels.length ? '<p class="matched-themes">Matched team themes: ' + esc(d.themeLabels.join(" · ")) + "</p>" : "") +
-      (d.scopeLabels && d.scopeLabels.length ? '<p class="scope-note"><strong>Broad sponsor-scope signal:</strong> ' +
-        esc(d.scopeLabels.join(" · ")) + ". This is fallback evidence for an open-scope solicitation; verify the specific research fit.</p>" : "");
-  }
   function teamChips(fits) {
-    return '<div class="team">' + fits.map(function (f) {
+    return '<div class="team-overlap"><strong>Research overlap across this team</strong><div class="team">' + fits.map(function (f) {
       var why = reasonText(f);
       return '<div class="pi"><span class="name">' + esc(last(f.name)) + "</span>" +
         (f.external ? '<span class="badge external">external</span>' : "") +
         (why ? '<div class="why">' + esc(why) + "</div>" :
           (f.scopeLabel ? '<div class="why">Broad sponsor-scope match</div>' : "")) + "</div>";
-    }).join("") + "</div>";
+    }).join("") + "</div></div>";
+  }
+  function formatDate(value) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(value || ""))) return value || "Not listed";
+    var parts = String(value).split("-").map(Number);
+    return new Date(Date.UTC(parts[0], parts[1] - 1, parts[2])).toLocaleDateString(undefined, {
+      month: "short", day: "numeric", year: "numeric", timeZone: "UTC"
+    });
+  }
+  function formatMoney(value) {
+    var amount = Number(value || 0);
+    if (!Number.isFinite(amount) || amount <= 0) return "Not listed";
+    if (amount >= 1000000000) return "$" + (amount / 1000000000).toFixed(amount >= 10000000000 ? 0 : 1) + "B";
+    if (amount >= 1000000) return "$" + (amount / 1000000).toFixed(amount >= 10000000 ? 0 : 1) + "M";
+    if (amount >= 1000) return "$" + (amount / 1000).toFixed(amount >= 100000 ? 0 : 1) + "K";
+    return "$" + amount.toLocaleString();
+  }
+  function perAwardLabel(record) {
+    var floor = Number(record.award_floor || 0);
+    var ceiling = Number(record.award_ceiling || 0);
+    if (floor && ceiling && floor !== ceiling) return formatMoney(floor) + " to " + formatMoney(ceiling);
+    if (ceiling) return "Up to " + formatMoney(ceiling);
+    if (floor) return "From " + formatMoney(floor);
+    return "Not listed";
+  }
+  function programFundingLabel(record) {
+    return record.total_program_funding ? formatMoney(record.total_program_funding) : "Not listed";
+  }
+  function eligibilityLabel(record) {
+    var types = record.applicant_types || [];
+    if (types.some(function (value) { return /higher education/i.test(value); })) return "Higher education eligible";
+    if (types.some(function (value) { return /unrestricted/i.test(value); })) return "Unrestricted";
+    if (types.length) return types.slice(0, 2).join("; ");
+    return record.eligibility_text ? "See eligibility details" : "Not listed";
+  }
+  function descriptionHtml(value) {
+    var text = String(value || "").trim();
+    if (!text) return "<p>No synopsis was included in the catalog.</p>";
+    return text.split(/\n{2,}/).filter(Boolean).map(function (paragraph) {
+      return "<p>" + esc(paragraph) + "</p>";
+    }).join("");
+  }
+  function opportunityCard(entry, position) {
+    var d = entry.d;
+    var record = d.record || {};
+    var url = d.url && /^https?:\/\//i.test(d.url) ? d.url : "";
+    var titleHtml = url
+      ? '<a href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(d.title) + "</a>"
+      : esc(d.title);
+    var status = String(record.status || "posted").toLowerCase() === "forecasted" ? "forecasted" : "open";
+    var statusLabel = status === "forecasted" ? "Forecasted" : "Open";
+    var listed = d.listing_date || record.posted_date || record.source_first_seen_date || "";
+    var closeDate = record.close_date || "";
+    var deadlineLabel = record.rolling ? "Rolling deadline" : closeDate ? "Application deadline" : "Deadline";
+    var deadlineValue = record.rolling ? "Rolling / ongoing" : closeDate ? formatDate(closeDate) : (d.deadline || "Not listed");
+    var eligibility = (record.applicant_types || []).join("; ") || record.eligibility_text || "Not listed";
+    var contact = record.contact || (record.contacts || [])[0] || {};
+    var contactName = contact.name || record.contact_name || "Not listed";
+    var contactEmail = contact.email || record.contact_email || "";
+    var flags = [
+      d.department ? '<span class="badge fit">' + entry.totalN + " faculty</span>" : "",
+      d.new ? '<span class="badge new">New</span>' : "",
+      d.broad ? '<span class="badge broad">broad · verify fit</span>' : "",
+      record.has_preliminary_stage ? '<span class="badge warning">LOI / preproposal</span>' : "",
+      record.limited_submission ? '<span class="badge warning">Potential limited submission</span>' : "",
+      record.cost_share_required === true ? '<span class="badge warning">Cost share</span>' : "",
+      d.closingSoon ? '<span class="badge warning">Closing soon</span>' : ""
+    ].filter(Boolean).join("");
+    var opportunityNumber = record.opportunity_number || record.opportunity_id || d.id || "";
+    return '<article class="result-card team-result-card' + (d.broad ? " broad-card" : "") + '" data-opportunity-id="' + esc(d.id) + '">' +
+      '<div class="card-topline"><span class="result-position">Team match ' + position + '</span>' +
+      '<span class="badge ' + status + '">' + statusLabel + "</span>" +
+      (listed ? '<span class="listed-date">Listed ' + esc(formatDate(listed)) + "</span>" : "") +
+      '<span class="opportunity-number">' + esc(opportunityNumber) + "</span></div>" +
+      "<h3>" + titleHtml + "</h3>" +
+      '<p class="agency">' + esc(d.agency || record.agency || "Agency not listed") + "</p>" +
+      (flags ? '<div class="card-alerts" aria-label="Important opportunity flags">' + flags + "</div>" : "") +
+      '<div class="key-facts">' +
+        '<div class="key-fact"><span>' + esc(deadlineLabel) + '</span><strong>' + esc(deadlineValue) + '</strong><small>' + esc(record.close_date_note || "Confirm in official notice") + "</small></div>" +
+        '<div class="key-fact"><span>Per-award amount</span><strong>' + esc(perAwardLabel(record)) + '</strong><small>' + (record.total_program_funding ? "Program total " + esc(programFundingLabel(record)) : "Verify in official notice") + "</small></div>" +
+        '<div class="key-fact"><span>Eligibility</span><strong>' + esc(eligibilityLabel(record)) + "</strong><small>Confirm in official notice</small></div>" +
+      "</div>" +
+      teamChips(entry.fits) +
+      (d.themeLabels && d.themeLabels.length ? '<p class="matched-themes">Matched team themes: ' + esc(d.themeLabels.join(" · ")) + "</p>" : "") +
+      (d.scopeLabels && d.scopeLabels.length ? '<p class="scope-note"><strong>Broad sponsor-scope signal:</strong> ' + esc(d.scopeLabels.join(" · ")) + ". Verify the specific research fit in the official notice.</p>" : "") +
+      '<details class="record-details"><summary><span class="description description-preview">' + esc(String(record.description || "No synopsis was included in the catalog.").slice(0, 300)) + '</span><span class="details-cue"><span class="cue-more">Show full description &amp; details</span><span class="cue-less">Show less</span></span></summary>' +
+      '<div class="details-body"><div class="full-description">' + descriptionHtml(record.description) + '</div><dl class="detail-grid">' +
+        '<div><dt>Eligible applicants</dt><dd>' + esc(eligibility) + "</dd></div>" +
+        '<div><dt>Funding instrument</dt><dd>' + esc((record.funding_instruments || []).join("; ") || "Not listed") + "</dd></div>" +
+        '<div><dt>Per-award amount</dt><dd>' + esc(perAwardLabel(record)) + "</dd></div>" +
+        '<div><dt>Expected awards</dt><dd>' + esc(record.expected_number_of_awards || "Not listed") + "</dd></div>" +
+        '<div><dt>Total program funding</dt><dd>' + esc(programFundingLabel(record)) + "</dd></div>" +
+        '<div><dt>Cost share</dt><dd>' + (record.cost_share_required == null ? "Not listed" : record.cost_share_required ? "Required" : "Not required") + "</dd></div>" +
+        '<div><dt>Assistance listing</dt><dd>' + esc((record.aln || []).join(", ") || "Not listed") + "</dd></div>" +
+        '<div><dt>Posted</dt><dd>' + esc(formatDate(record.posted_date)) + "</dd></div>" +
+        '<div><dt>Estimated award date</dt><dd>' + esc(formatDate(record.estimated_award_date)) + "</dd></div>" +
+        '<div><dt>Estimated project start</dt><dd>' + esc(formatDate(record.estimated_project_start)) + "</dd></div>" +
+        '<div><dt>Program contact</dt><dd>' + (contactEmail ? '<a href="mailto:' + esc(contactEmail) + '">' + esc(contactName) + "</a>" : esc(contactName)) + "</dd></div>" +
+        '<div><dt>Source</dt><dd>' + esc(record.source || "Not listed") + "</dd></div>" +
+      "</dl>" + (record.close_date_note ? '<p class="description"><strong>Deadline note:</strong> ' + esc(record.close_date_note) + "</p>" : "") + "</div></details>" +
+      '<div class="card-actions">' + (url ? '<a class="source-action primary" href="' + esc(url) + '" target="_blank" rel="noopener">Open official opportunity</a>' : "") +
+      '<a class="source-action" href="./match_explorer.html?q=' + encodeURIComponent(opportunityNumber) + '">Open in Funding Finder</a>' +
+      '<button class="source-action" type="button" data-team-calendar="' + esc(d.id) + '"' + (closeDate ? "" : " disabled") + ">Add to calendar</button>" +
+      (contactEmail ? '<a class="source-action" href="mailto:' + esc(contactEmail) + '">Program contact</a>' : "") + "</div></article>";
+  }
+  function calendarText(value) {
+    return String(value || "").replace(/\\/g, "\\\\").replace(/\r?\n/g, "\\n").replace(/([,;])/g, "\\$1");
+  }
+  function addTeamDeadlineToCalendar(id) {
+    var record = byId[id] || {};
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(record.close_date || ""))) return;
+    var compact = record.close_date.replace(/-/g, "");
+    var next = new Date(record.close_date + "T00:00:00Z");
+    next.setUTCDate(next.getUTCDate() + 1);
+    var nextCompact = next.toISOString().slice(0, 10).replace(/-/g, "");
+    var source = record.funding_opportunity_url || record.detail_page || record.url || "";
+    var ics = [
+      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Funding Finder//Team Match//EN",
+      "BEGIN:VEVENT", "UID:" + calendarText(id) + "@funding-finder",
+      "DTSTART;VALUE=DATE:" + compact, "DTEND;VALUE=DATE:" + nextCompact,
+      "SUMMARY:" + calendarText("Funding deadline: " + (record.title || id)),
+      "DESCRIPTION:" + calendarText("Opportunity " + (record.opportunity_number || id) + (source ? "\\n" + source : "")),
+      "END:VEVENT", "END:VCALENDAR", ""
+    ].join("\r\n");
+    var href = URL.createObjectURL(new Blob([ics], { type: "text/calendar;charset=utf-8" }));
+    var link = document.createElement("a");
+    link.href = href;
+    link.download = "funding-deadline-" + String(id).replace(/[^a-z0-9_.-]+/gi, "-") + ".ics";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(href);
   }
 
   // ---- team mode -------------------------------------------------------- //
@@ -427,6 +576,7 @@
   }
 
   function liveEntry(result, department) {
+    var record = result.record || byId[result.id] || {};
     return {
       d: {
         id: result.id,
@@ -442,7 +592,8 @@
         themeLabels: (result.themeHits || []).map(function (hit) { return hit.label; }),
         scopeLabels: Array.from(new Set(result.fits.map(function (fit) {
           return fit.scopeLabel || "";
-        }).filter(Boolean)))
+        }).filter(Boolean))),
+        record: record
       },
       fits: result.fits.map(function (fit) {
         return {
@@ -506,8 +657,8 @@
     var html = "";
     if (all.length) {
       html += '<div class="section-label">Opportunities matching the full selected team</div>' +
-        all.map(function (e) {
-          return '<div class="card' + (e.d.broad ? " broad-card" : "") + '">' + oppHead(e.d, e.totalN) + teamChips(e.fits) + "</div>";
+        all.map(function (e, index) {
+          return opportunityCard(e, index + 1);
         }).join("");
     }
     if (!html) {
@@ -533,12 +684,8 @@
       return;
     }
     $("view").innerHTML = '<div class="section-label">Best current department-wide collaboration opportunities</div>' +
-      list.map(function (entry) {
-        var d = entry.d;
-        var url = d.url && /^https?:\/\//i.test(d.url) ? d.url : "";
-        var titleHtml = url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(d.title) + " ↗</a>" : esc(d.title);
-        return '<div class="card' + (d.broad ? " broad-card" : "") + '">' +
-          oppHead(d, entry.totalN) + teamChips(entry.fits) + "</div>";
+      list.map(function (entry, index) {
+        return opportunityCard(entry, index + 1);
       }).join("");
   }
 
@@ -557,7 +704,7 @@
       ? " · " + externalResearchers.length + " external researcher" + (externalResearchers.length === 1 ? "" : "s")
       : "";
     $("meta-line").textContent = names.length + " faculty profiles" + externalLabel + " · " +
-      "live graded matching across " + catalog.length + " current opportunities";
+      "live graded matching across " + (MATCH_ENGINE ? MATCH_ENGINE.records.length : 0) + " current opportunities";
   }
 
   function renderExternalStatus(message, isError) {
@@ -610,6 +757,51 @@
   function keywordInput() {
     return TEAM_API ? TEAM_API.parseKeywords($("external-keywords").value, 50) : [];
   }
+  function renderExternalOrcidStatus(message, isError) {
+    var status = $("external-orcid-status");
+    status.textContent = message || "";
+    status.classList.toggle("error", Boolean(isError));
+  }
+  function mergeExternalKeywords(additions) {
+    var merged = TEAM_API.parseKeywords(keywordInput().concat(additions || []), TEAM_API.MAX_KEYWORDS);
+    $("external-keywords").value = merged.join(", ");
+    updateKeywordCount();
+    return merged;
+  }
+  async function importExternalOrcid() {
+    if (!ORCID_API) {
+      renderExternalOrcidStatus("The ORCID publication helper did not load. Refresh and try again.", true);
+      return;
+    }
+    var button = $("import-external-orcid");
+    button.disabled = true;
+    renderExternalOrcidStatus("Looking up public publications linked to this ORCID iD…", false);
+    try {
+      var imported = await ORCID_API.fetchProfile($("external-orcid").value);
+      $("external-orcid").value = imported.orcidId;
+      if (!$("external-name").value.trim() && imported.name) $("external-name").value = imported.name;
+      var merged = mergeExternalKeywords(imported.keywords);
+      editingOrcidData = {
+        orcid_id: imported.orcidId,
+        orcid_name: imported.name,
+        orcid_text: imported.publicationText,
+        orcid_work_count: imported.importedWorkCount,
+        orcid_total_work_count: imported.totalWorkCount,
+        orcid_source: imported.source,
+        orcid_updated_at: imported.updatedAt
+      };
+      renderExternalOrcidStatus(
+        imported.importedWorkCount + " public publications imported" +
+        (merged.length < TEAM_API.MIN_KEYWORDS ? "; add enough manual keywords to reach three." : "."),
+        false
+      );
+    } catch (error) {
+      editingOrcidData = null;
+      renderExternalOrcidStatus(error && error.message ? error.message : String(error), true);
+    } finally {
+      button.disabled = false;
+    }
+  }
 
   function updateKeywordCount() {
     var count = keywordInput().length;
@@ -618,9 +810,11 @@
 
   function closeExternalEditor() {
     editingExternalId = "";
+    editingOrcidData = null;
     $("external-researcher-form").hidden = true;
     $("external-researcher-form").reset();
     $("external-editor-message").textContent = "";
+    renderExternalOrcidStatus("", false);
     $("delete-external").hidden = true;
     $("add-researcher").setAttribute("aria-expanded", "false");
     updateKeywordCount();
@@ -640,6 +834,19 @@
     $("external-editor-heading").textContent = profile ? "Edit external researcher" : "Add an external researcher";
     $("external-name").value = profile ? profile.name : "";
     $("external-keywords").value = profile ? profile.keywords.join(", ") : "";
+    $("external-orcid").value = profile ? profile.orcid_id || "" : "";
+    editingOrcidData = profile && profile.orcid_text ? {
+      orcid_id: profile.orcid_id,
+      orcid_name: profile.orcid_name,
+      orcid_text: profile.orcid_text,
+      orcid_work_count: profile.orcid_work_count,
+      orcid_total_work_count: profile.orcid_total_work_count,
+      orcid_source: profile.orcid_source,
+      orcid_updated_at: profile.orcid_updated_at
+    } : null;
+    renderExternalOrcidStatus(editingOrcidData
+      ? profile.orcid_work_count + " ORCID-linked publications are included in this profile."
+      : "", false);
     $("delete-external").hidden = !profile;
     $("external-editor-message").textContent = "";
     $("external-researcher-form").hidden = false;
@@ -682,10 +889,23 @@
 
     var next = externalResearchers.slice(0);
     var savedId = editingExternalId;
+    var normalizedOrcid = ORCID_API ? ORCID_API.normalizeId($("external-orcid").value) : "";
+    var orcidData = editingOrcidData && editingOrcidData.orcid_id === normalizedOrcid
+      ? editingOrcidData
+      : {
+          orcid_id: normalizedOrcid,
+          orcid_name: "",
+          orcid_text: "",
+          orcid_work_count: 0,
+          orcid_total_work_count: 0,
+          orcid_source: "",
+          orcid_updated_at: ""
+        };
+    var savedProfile = Object.assign({ name: name, keywords: keywords }, orcidData);
     if (editingExternalId) {
       next = next.map(function (profile) {
         return profile.id === editingExternalId
-          ? { id: profile.id, name: name, keywords: keywords }
+          ? Object.assign({ id: profile.id }, savedProfile)
           : profile;
       });
     } else {
@@ -694,7 +914,7 @@
         return;
       }
       savedId = TEAM_API.createId(name, next);
-      next.push({ id: savedId, name: name, keywords: keywords });
+      next.push(Object.assign({ id: savedId }, savedProfile));
     }
 
     var wasEditing = Boolean(editingExternalId);
@@ -808,6 +1028,22 @@
     $("delete-external").addEventListener("click", deleteExternal);
     $("external-researcher-form").addEventListener("submit", saveExternal);
     $("external-keywords").addEventListener("input", updateKeywordCount);
+    $("import-external-orcid").addEventListener("click", importExternalOrcid);
+    $("external-orcid").addEventListener("input", function () {
+      var normalized = ORCID_API ? ORCID_API.normalizeId($("external-orcid").value) : "";
+      if (editingOrcidData && normalized !== editingOrcidData.orcid_id) editingOrcidData = null;
+      renderExternalOrcidStatus($("external-orcid").value.trim()
+        ? "Select “Import ORCID” to derive research topics from public publications."
+        : "", false);
+    });
+    $("view").addEventListener("click", function (event) {
+      var button = event.target.closest("[data-team-calendar]");
+      if (button) addTeamDeadlineToCalendar(button.getAttribute("data-team-calendar"));
+    });
+    if (!ORCID_API) {
+      $("import-external-orcid").disabled = true;
+      renderExternalOrcidStatus("ORCID import is unavailable because its helper did not load.", true);
+    }
     updateToggles();
     refresh();
   }

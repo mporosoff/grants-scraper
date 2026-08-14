@@ -41,6 +41,9 @@ test("shared Help explains the full workflow and optional provider keys", () => 
   assert.doesNotThrow(() => new Function(helpScript));
   assert.match(helpScript, /Search is free\. AI is optional\./);
   assert.match(helpScript, /Normal catalog search and the Team matcher do not need a key/);
+  assert.match(helpScript, /learn a matching full phrase from the local catalog/);
+  assert.match(helpScript, /Ambiguous acronyms are left unexpanded/);
+  assert.match(helpScript, /Local abbreviation and acronym handling is part of normal search and needs no key/);
   assert.match(helpScript, /Upload and chat with a NOFO/);
   assert.match(helpScript, /Create an OpenAI API key/);
   assert.match(helpScript, /https:\/\/platform\.openai\.com\/api-keys/);

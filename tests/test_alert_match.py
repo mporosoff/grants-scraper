@@ -87,6 +87,23 @@ class MatcherTests(unittest.TestCase):
         self.assertTrue(results)
         self.assertEqual(results[0]["opportunity_id"], "1")
 
+    def test_federal_supplement_is_not_mislabeled_as_grants_gov(self):
+        supplement = _base(
+            opportunity_id="ewre",
+            title="Energy, Water, and Resource Engineering",
+            source="U.S. National Science Foundation",
+            source_type="Federal",
+        )
+
+        supplement["source_facet"] = None
+        self.assertFalse(matches_filters(supplement, {"source": ["Grants.gov"]}))
+        self.assertFalse(
+            matches_filters(
+                supplement,
+                {"source": ["U.S. National Science Foundation"]},
+            )
+        )
+
     def test_common_abbreviation_finds_expanded_catalog_language(self):
         carbon = _base(
             opportunity_id="carbon",
@@ -107,6 +124,33 @@ class MatcherTests(unittest.TestCase):
                     [item["opportunity_id"] for item in results],
                     ["carbon"],
                 )
+
+    def test_ree_ionic_liquid_query_finds_rare_earth_extraction_language(self):
+        rare_earth = _base(
+            opportunity_id="rare-earth",
+            title="Critical minerals recovery and recycling",
+            description=(
+                "Solvent separation and processing of rare earth elements "
+                "and lanthanides."
+            ),
+        )
+        battery = _base(
+            opportunity_id="battery",
+            title="Battery electrolyte manufacturing",
+            description="Ionic conductivity in energy storage.",
+        )
+        unrelated = _base(
+            opportunity_id="unrelated",
+            title="Arts education",
+        )
+        results = search_catalog(
+            make_catalog([rare_earth, battery, unrelated]),
+            "ionic liquids for REE extraction",
+            as_of=self.as_of,
+        )
+
+        self.assertEqual(results[0]["opportunity_id"], "rare-earth")
+        self.assertNotIn("unrelated", [item["opportunity_id"] for item in results])
 
     def test_typo_tolerance_and_irregular_scientific_forms(self):
         catalysis = _base(

@@ -62,6 +62,10 @@ test("persists a sanitized profile and preferences without credential fields", (
     expertise_keywords: "catalysis, reactors",
     applicant_context: "higher_education",
     career_stage: "early_career",
+    orcid_id: "0000-0002-1825-0097",
+    orcid_name: "Josiah Carberry",
+    orcid_text: "Ionic liquid extraction and rare earth element recovery",
+    orcid_work_count: 12,
     cv_name: "researcher-cv.txt",
     cv_text: "Catalysis and electrochemistry ".repeat(20),
     include_cv_in_ai: true,
@@ -92,6 +96,8 @@ test("persists a sanitized profile and preferences without credential fields", (
   assert.equal(loaded.preferences.status_archived, true);
   assert.equal(loaded.preferences.ai_provider, "anthropic");
   assert.equal(loaded.preferences.evidence, true);
+  assert.equal(loaded.orcid_id, "0000-0002-1825-0097");
+  assert.match(loaded.orcid_text, /rare earth element/);
   assert.deepEqual([...loaded.preferences.facets.agency], ["Department of Energy"]);
   assert.deepEqual(
     [...loaded.preferences.facets.source],
@@ -230,10 +236,14 @@ test("builds a bounded opt-in CV context for AI calls", () => {
     career_stage: "early_career",
     cv_text: "0123456789".repeat(100),
     include_cv_in_ai: true,
+    orcid_id: "0000-0002-1825-0097",
+    orcid_text: "Ionic liquids and rare earth extraction. ".repeat(500),
   };
   const enabled = api.aiProfileContext(profile, 120);
   assert.equal(enabled.cv_excerpt.length, 120);
   assert.match(enabled.cv_excerpt_note, /First 120 characters/);
+  assert.equal(enabled.orcid_id, "0000-0002-1825-0097");
+  assert.equal(enabled.orcid_publications_excerpt.length, 120);
 
   const disabled = api.aiProfileContext({
     ...profile,
