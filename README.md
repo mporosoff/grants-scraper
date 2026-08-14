@@ -269,13 +269,6 @@ See `PROJECT.md` for the completed Phase 1/1.5 scope, deferred Phase 2 pilot,
 and Phase 3 implementation,
 and `docs/HOSTING.md` for the deployment boundary.
 
-## Use and license
+## Use and copyright
 
-The public site is an informational research-planning aid intended for
-individual and internal institutional use. It is not an official source of
-record or an application/submission system, and users must verify eligibility,
-deadlines, requirements, and terms in each sponsor's official notice.
-
-Copyright (c) 2026 Marc D. Porosoff. The software remains available under the
-[MIT License](LICENSE); the intended-use description above is not an additional
-restriction on the permissions granted by that license.
+Copyright (c) 2026 Marc D. Porosoff. All rights reserved. 
