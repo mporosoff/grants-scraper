@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-08-14T11:50:56Z</updated>
+  <updated>2026-08-14T11:58:24Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -61,6 +61,17 @@
     <category term="Data science"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Closes 2027-06-11 | NCI intends to release a Notice of Funding Opportunity (NOFO) that serves to continue the advancement and sustainment of informatics tools, software, and research resources that enable the acquisition, management, analysis, visualization, and interpretation of data across the cancer research continuum, including cancer biology, diagnosis and treatment, early detection, risk assessment and preventi…</summary>
+  </entry>
+  <entry>
+    <title>Alzheimer's Drug-Development Program (U01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/363557"/>
+    <id>urn:funding-finder:grants-gov:363557</id>
+    <updated>2027-03-10T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Closes 2027-06-18 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose pre-clinical and early-stage clinical (Phase I) development of novel small-molecule and biologic drug candidates that aim to prevent Alzheimer's disease (AD), slow its progression, or treat its cognitive and behavioral symptoms. Through the NOFO, NIA is continuing th…</summary>
   </entry>
   <entry>
     <title>BRAIN Initiative: Development and Validation of Novel Tools and New Approaches for Neuroscience Research</title>
@@ -660,15 +671,5 @@
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Biology and biotechnology"/>
     <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-22 | Summary: The fiscal year 2026 (FY26) Neurofibromatosis Research Program (NFRP) Investigator-Initiated Research Award (IIRA) supports high-impact research that addresses a critical need and has the potential to make important contributions to the field of neurofibromatosis disorders or advance patient care. Research projects may focus on any phase of research, excluding clinical trials. The rationa…</summary>
-  </entry>
-  <entry>
-    <title>DoW Neurofibromatosis Research Academy - Leadership Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362917"/>
-    <id>urn:funding-finder:grants-gov:362917</id>
-    <updated>2026-06-23T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-14 | Summary: The fiscal year 2026 (FY26) Neurofibromatosis Research Program (NFRP) Neurofibromatosis Research Academy - Leadership Award (NFRALA) supports visionary, established neurofibromatosis (NF) investigators with documented history of neurofibromatosis funding, publications, strong mentorship and commitment to leadership to serve as Director and Deputy Director of the Neurofibromatosis Research…</summary>
   </entry>
 </feed>

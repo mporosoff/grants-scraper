@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-08-14T11:50:56Z</updated>
+  <updated>2026-08-14T11:58:24Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -29,6 +29,15 @@
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Closes 2027-05-25 | The National Institute of Mental Health (NIMH) seeks research applications to support the NIMH HIV/AIDS Research Centers (ARC) program, including Developmental Centers (D-ARCs) and full AIDS Research Centers (ARCs). These Research Centers aim to capitalize on the coordinated infrastructure to advance high-impact, interdisciplinary HIV/AIDS research. The ARC program supports innovative research acr…</summary>
+  </entry>
+  <entry>
+    <title>Rural Maternity and Obstetrics Management Strategies Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363582"/>
+    <id>urn:funding-finder:grants-gov:363582</id>
+    <updated>2027-02-19T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Technology development"/>
+    <summary>Health Resources and Services Administration | Closes 2027-04-20 | The purpose of the Rural Maternity and Obstetrics Management Strategies (Rural MOMS) program is to support collaborative improvement and innovation networks to improve access to and delivery of maternity and obstetrics care in rural areas.</summary>
   </entry>
   <entry>
     <title>Ryan White HIV/AIDS Program Part C Capacity Development Program</title>
@@ -158,7 +167,7 @@
     <summary>Health Resources and Services Administration | Closes 2026-11-13 | The purpose of the Alliance for Innovation on Maternal Health (AIM) program is to provide technical assistance to support all 50 states, the District of Columbia (D.C.), jurisdictions, U.S. territories, tribal communities, and birthing facilities that are participating in the AIM program. AIM is a quality improvement initiative to support best practices that make birth safer, improve maternal heal…</summary>
   </entry>
   <entry>
-    <title>NIH Research Evaluation and Commercialization Hubs (REACH)</title>
+    <title>Limited Competition: NIH Research Evaluation and Commercialization Hubs (REACH) (SB0 Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/362965"/>
     <id>urn:funding-finder:grants-gov:362965</id>
     <updated>2026-09-30T00:00:00Z</updated>
@@ -166,7 +175,7 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2026-11-30 | The National Institutes of Health (NIH), including all of its Institutes and Centers, plans to publish a Notice of Funding Opportunity inviting eligible colleges, universities, and nonprofit organizations to apply for the NIH Research Evaluation and Commercialization Hub (REACH) program. The REACH program helps move promising biomedical discoveries from academic research into real-world products t…</summary>
+    <summary>National Institutes of Health | Closes 2026-11-10 | The National Institutes of Health (NIH), including all of its Institutes and Centers, plans to publish a Notice of Funding Opportunity inviting eligible colleges, universities, and nonprofit organizations to apply for the NIH Research Evaluation and Commercialization Hub (REACH) program. The REACH program helps move promising biomedical discoveries from academic research into real-world products t…</summary>
   </entry>
   <entry>
     <title>Controlling and Preventing STIs in US Health Departments (CAP-STIs)</title>
@@ -679,15 +688,5 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Biology and biotechnology"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Closes 2026-10-30 | The Genomics Research to Elucidate the Genetics of Rare Diseases: innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. This Notice of Funding Opportunity is intended to stimulate the development…</summary>
-  </entry>
-  <entry>
-    <title>GREGoRi Technology Integration Center (U01, Clinical Trials Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359280"/>
-    <id>urn:funding-finder:grants-gov:359280</id>
-    <updated>2026-06-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2026-10-30 | The Genomics Research to Elucidate the Genetics of Rare Diseases: innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. The purpose of this Notice of Funding Opportunity is to establish the GREGo…</summary>
   </entry>
 </feed>

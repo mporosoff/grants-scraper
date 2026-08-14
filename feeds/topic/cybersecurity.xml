@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-08-14T11:50:56Z</updated>
+  <updated>2026-08-14T11:58:24Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -17,6 +17,17 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>Rural Utilities Service | Closes 2027-05-03 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+  </entry>
+  <entry>
+    <title>MANUFACTURING AND SMALL BUSINESS CYBERSECURITY RESILIENCE PROGRAM 2026</title>
+    <link href="https://www.grants.gov/search-results-detail/363586"/>
+    <id>urn:funding-finder:grants-gov:363586</id>
+    <updated>2026-08-13T00:00:00Z</updated>
+    <author><name>Small Business Administration</name></author>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <summary>Small Business Administration | Closes 2026-09-04 | The purpose of this Funding Opportunity is to invite proposals for funding to deliver technical assistance to small businesses. Only applications from the states of Indiana, Ohio, or Virginia that have experience in managing a state-wide, regional or nationwide cybersecurity training program will be considered for funding via this announcement. Applicants must be states, state entities or designat…</summary>
   </entry>
   <entry>
     <title>U.S.-Africa Strategic Investment Program</title>
@@ -38,7 +49,7 @@
     <author><name>Small Business Administration</name></author>
     <category term="Education and workforce"/>
     <category term="Cybersecurity"/>
-    <summary>Small Business Administration | Closes 2026-09-09 | The purpose of this Funding Opportunity is to invite proposals for funding to deliver technical assistance to entrepreneurial development resource partners. Only an application from the states of Delaware, Michigan, and Ohio that have experience in managing a robust state-wide or nationwide cyber training program will be considered for funding via this announcement.</summary>
+    <summary>Small Business Administration | Closes 2026-09-01 | The purpose of this Funding Opportunity is to invite proposals for funding to deliver technical assistance to entrepreneurial development resource partners. Only an application from the states of Delaware, Michigan, and Ohio that have experience in managing a robust state-wide or nationwide cyber training program will be considered for funding via this announcement.</summary>
   </entry>
   <entry>
     <title>FY26 - Stopping Threats On Pedestrian Competitive Grant Program (Bollards)</title>
@@ -668,16 +679,5 @@
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
     <summary>69A355 Research and Technology | Closes 2026-08-28 | The U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Interdisciplinary Transportation Law and Policy Technology Training Development program. This 24-month cooperative agreement aims to bridge the critical knowledge gap between fast-changing transportation technologies and our Nati…</summary>
-  </entry>
-  <entry>
-    <title>FY 2027 International Visitor Leadership Program’s National Program Agencies</title>
-    <link href="https://www.grants.gov/search-results-detail/362943"/>
-    <id>urn:funding-finder:grants-gov:362943</id>
-    <updated>2026-06-24T00:00:00Z</updated>
-    <author><name>Bureau Of Educational and Cultural Affairs</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Cybersecurity"/>
-    <summary>Bureau Of Educational and Cultural Affairs | Closes 2026-08-24 | The United States Department of State’s Bureau of Educational and Cultural Affairs’ Office of International Visitors (ECA/PE/V) announces an open competition for approximately five cooperative agreements to support the staff expenses and overhead costs of the FY 2027 International Visitor Leadership Program’s (IVLP) National Program Agencies (NPAs). Launched in 1940, the IVLP is the Department of …</summary>
   </entry>
 </feed>

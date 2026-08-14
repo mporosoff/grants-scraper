@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml</id>
-  <updated>2026-08-14T11:50:56Z</updated>
+  <updated>2026-08-14T11:58:24Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -310,18 +310,6 @@
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <summary>U.S. Mission to Iraq | Closes 2026-09-11 | The EducationUSA AI Roadshow brings U.S. higher education experts to Iraq, showcasing U.S. artificial intelligence programs to attract international students and to build partnerships between universities to drive trade with key tech companies. Academic engagement strengthens U.S. foreign policy in a region heavily influenced by competing global powers. This type of engagement promotes U.S. standa…</summary>
-  </entry>
-  <entry>
-    <title>Engineering (ENG): Electrical, Communications, and Computing Systems (ECCS)</title>
-    <link href="https://www.grants.gov/search-results-detail/363551"/>
-    <id>urn:funding-finder:grants-gov:363551</id>
-    <updated>2026-08-12T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Energy"/>
-    <category term="Quantum science"/>
-    <summary>U.S. National Science Foundation | Closes 2076-08-12 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research for electrical, communications and computing systems through the following programs: The Electronic, Photonic, Magnetic, and Quantum Devices (EPMQD) program supports foundational engineering research on novel classical and quantum devices, exploring matter’s electronic, photonic, and magnetic …</summary>
   </entry>
   <entry>
     <title>Culturally Specific Domestic Violence and Sexual Assault Services</title>
@@ -688,5 +676,17 @@
     <category term="Arts and culture"/>
     <category term="Environmental science"/>
     <summary>Bureau of Land Management | Closes 2026-08-28 | Priority activities under this announcement include projects that support Executive Order (EO) 14225 Immediate Expansion of American Timber Production and Section 50301 of The One Big Beautiful Bill. This program focuses on activities that promote forest and woodland health, sustainable forest management, fire resiliency, biomass utilization for bioenergy, habitat conservation needs, and insect, d…</summary>
+  </entry>
+  <entry>
+    <title>AI Partnership &amp; Exchange for Tech Leaders (APEX)</title>
+    <link href="https://www.grants.gov/search-results-detail/363315"/>
+    <id>urn:funding-finder:grants-gov:363315</id>
+    <updated>2026-07-26T00:00:00Z</updated>
+    <author><name>U.S. Mission to Saudi Arabia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>U.S. Mission to Saudi Arabia | Closes 2026-09-08 | Program Purpose: The U.S. Embassy Riyadh Public Diplomacy Section is accepting applications for a cooperative agreement to run the AI Partnership &amp; Exchange for Tech Leaders. The goal of this program is to connect rising Saudi Artificial Intelligence (AI) leaders with American experts in business, tech, and academia. This initiative helps participants build professional networks, study U.S. techno…</summary>
   </entry>
 </feed>

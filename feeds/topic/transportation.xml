@@ -4,8 +4,17 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-08-14T11:50:56Z</updated>
+  <updated>2026-08-14T11:58:24Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Mentored Career Transition Award (KT1/R00)</title>
+    <link href="https://www.grants.gov/search-results-detail/363569"/>
+    <id>urn:funding-finder:grants-gov:363569</id>
+    <updated>2027-07-13T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Closes 2027-10-12 | The biphasic award will provide up to 5 years of support in two phases. The initial, mentored career development phase will provide 1-2 years of support for needed career development to facilitate a timely transition of promising postdoctoral researchers from their mentored postdoctoral research positions to independent, tenure-track or equivalent research-intensive faculty positions. The second p…</summary>
+  </entry>
   <entry>
     <title>Core State Injury Prevention Program (Core SIPP)</title>
     <link href="https://www.grants.gov/search-results-detail/363398"/>
@@ -135,6 +144,29 @@
     <category term="Public health"/>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Closes 2026-10-17 | The purpose of this NOFO is to enhance the capability of NCATS CTSA Program KL2 scholars supported by the CTSA Program to conduct research as they complete the transition to fully independent academic translational scientists. These small research grants will support different clinical and translational science research projects, including pilot and feasibility studies; secondary data analysis of …</summary>
+  </entry>
+  <entry>
+    <title>FY26 Transportation Emergency Response Training</title>
+    <link href="https://www.grants.gov/search-results-detail/363583"/>
+    <id>urn:funding-finder:grants-gov:363583</id>
+    <updated>2026-08-13T00:00:00Z</updated>
+    <author><name>DOT - Federal Railroad Administration</name></author>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>DOT - Federal Railroad Administration | Closes 2026-08-18 | This grant will fund training for emergency responders, emergency medical technicians, police/fire personnel, etc. of tank car nomenclature, railroad operations and other related matters useful to mitigate railroad emergencies.</summary>
+  </entry>
+  <entry>
+    <title>Syria Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363578"/>
+    <id>urn:funding-finder:grants-gov:363578</id>
+    <updated>2026-08-13T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination of the U.S. Department of State announces an open competition for organizations to submit a statement of interest (SOI) for innovative foreign assistance programs benefiting partner countries that also advance U.S. commercial diplomacy and put American interests first. SOI must demonstrate how projects will leverage foreign assi…</summary>
   </entry>
   <entry>
     <title>FY24 Little Rock Port Authority Transload Yard, AR</title>
@@ -575,19 +607,6 @@
     <summary>Washington Headquarters Services | Closes 2026-08-17 | Bridging foundational academic research and strategic innovation for the Defense enterprise, the Center for Foundational Academic Research and Strategic Innovation for the Defense Enterprise (C-FARSIDE) will facilitate deep transdisciplinary collaborations among top-tier scholars, informed by defense strategists, that will transform rigorous and blue-sky research into breakthrough national securit…</summary>
   </entry>
   <entry>
-    <title>Syria Annual Program Statement</title>
-    <link href="https://www.grants.gov/search-results-detail/363190"/>
-    <id>urn:funding-finder:grants-gov:363190</id>
-    <updated>2026-07-15T00:00:00Z</updated>
-    <author><name>Bureau of Near Eastern Affairs</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination of the U.S. Department of State announces an open competition for organizations to submit a statement of interest (SOI) for innovative foreign assistance programs benefiting partner countries that also advance U.S. commercial diplomacy and put American interests first. SOI must demonstrate how projects will leverage foreign assi…</summary>
-  </entry>
-  <entry>
     <title>FY 2026 Notice of Funding Opportunity: Innovative Coordinated Access and Mobility Pilot Program</title>
     <link href="https://www.grants.gov/search-results-detail/363122"/>
     <id>urn:funding-finder:grants-gov:363122</id>
@@ -630,28 +649,5 @@
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
     <summary>69A355 Research and Technology | Closes 2026-08-28 | The U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Interdisciplinary Transportation Law and Policy Technology Training Development program. This 24-month cooperative agreement aims to bridge the critical knowledge gap between fast-changing transportation technologies and our Nati…</summary>
-  </entry>
-  <entry>
-    <title>Tribal Transportation Safety Strategy Pilot Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362956"/>
-    <id>urn:funding-finder:grants-gov:362956</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>69A355 Research and Technology</name></author>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>69A355 Research and Technology | Closes 2026-08-28 | he U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Tribal Transportation Safety Strategy Pilot Program. This three-year cooperative agreement is designed to address the critical public safety crisis in Tribal communities, as American Indian and Alaska Native populations experience…</summary>
-  </entry>
-  <entry>
-    <title>Disaster Assistance for State Units on Aging (SUAs) and Tribal Organizations</title>
-    <link href="https://www.grants.gov/search-results-detail/360510"/>
-    <id>urn:funding-finder:grants-gov:360510</id>
-    <updated>2026-06-26T00:00:00Z</updated>
-    <author><name>Administration for Community Living</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Transportation"/>
-    <summary>Administration for Community Living | Closes 2026-09-01 | Grants awarded under this announcement are to provide disaster reimbursement and assistance funds to those State Units on Aging (SUAs), and federally recognized Tribal Organizations who are currently receiving a grant under Title VI of the Older Americans Act (OAA), as amended. Total funding available for disaster assistance is subject to the availability of funds appropriated. The estimated numbe…</summary>
   </entry>
 </feed>

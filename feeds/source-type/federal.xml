@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml</id>
-  <updated>2026-08-14T11:50:56Z</updated>
+  <updated>2026-08-14T11:58:24Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -76,6 +76,39 @@
     <category term="Neuroscience"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Closes 2027-10-20 | The Eunice Kennedy Shriver National Institute of Child Health and Human Development seeks to advance its mission of supporting maternal, fetal, and child health by continuing to enhance the understanding of maternal, fetal, and child exposure to nutrients, metabolites, medications, supplements, microbiome-derived products, and environmental chemicals. This will be done by supporting a second phase…</summary>
+  </entry>
+  <entry>
+    <title>Established Clinician Investigator Award to Support Mentoring (KS1)</title>
+    <link href="https://www.grants.gov/search-results-detail/363572"/>
+    <id>urn:funding-finder:grants-gov:363572</id>
+    <updated>2027-07-13T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <summary>National Institutes of Health | Closes 2027-10-12 | The Established Clinician Investigator Award to Support Mentoring provides support to established clinician investigators for a sustained period of protected time to provide high-quality mentoring to early-career clinician research scientists.</summary>
+  </entry>
+  <entry>
+    <title>Mentored Career Transition Award (KT1/R00)</title>
+    <link href="https://www.grants.gov/search-results-detail/363569"/>
+    <id>urn:funding-finder:grants-gov:363569</id>
+    <updated>2027-07-13T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Closes 2027-10-12 | The biphasic award will provide up to 5 years of support in two phases. The initial, mentored career development phase will provide 1-2 years of support for needed career development to facilitate a timely transition of promising postdoctoral researchers from their mentored postdoctoral research positions to independent, tenure-track or equivalent research-intensive faculty positions. The second p…</summary>
+  </entry>
+  <entry>
+    <title>Mentored Clinician Research Scientist Career Development Award (KC1)</title>
+    <link href="https://www.grants.gov/search-results-detail/363571"/>
+    <id>urn:funding-finder:grants-gov:363571</id>
+    <updated>2027-07-13T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <summary>National Institutes of Health | Closes 2027-10-12 | The Mentored Clinician Research Scientist Career Development Award provides support to clinician research scientists for a sustained period of protected time (up to five years) for intensive research career development under the guidance of an experienced mentor. The award is intended to prepare candidates with clinical doctoral degrees for future research independence.</summary>
+  </entry>
+  <entry>
+    <title>Mentored Research Scientist Career Development Award (KR1)</title>
+    <link href="https://www.grants.gov/search-results-detail/363570"/>
+    <id>urn:funding-finder:grants-gov:363570</id>
+    <updated>2027-07-13T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <summary>National Institutes of Health | Closes 2027-10-12 | The Mentored Research Scientist Career Development Award provides support for a sustained period of protected time (up to five years) for intensive research career development under the guidance of an experienced mentor. The award is expected to prepare candidates with research doctoral degrees for future research independence.</summary>
   </entry>
   <entry>
     <title>Limited Competition: Resources and Workforce Development for the Regional Biocontainment Laboratories</title>
@@ -177,6 +210,15 @@
     <summary>National Institutes of Health | Closes 2027-06-11 | NCI intends to release a Notice of Funding Opportunity (NOFO) that serves to continue the advancement and sustainment of informatics tools, software, and research resources that enable the acquisition, management, analysis, visualization, and interpretation of data across the cancer research continuum, including cancer biology, diagnosis and treatment, early detection, risk assessment and preventi…</summary>
   </entry>
   <entry>
+    <title>Radiation Exposure Screening and Education Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363577"/>
+    <id>urn:funding-finder:grants-gov:363577</id>
+    <updated>2027-03-30T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <summary>Health Resources and Services Administration | Closes 2027-05-25 | This program supports organizations to screen and educate people exposed to radiation related to the mining of uranium and U.S. testing of nuclear weapons.</summary>
+  </entry>
+  <entry>
     <title>National Viral Hepatitis Education, Awareness, and Capacity Building for Communities and Providers</title>
     <link href="https://www.grants.gov/search-results-detail/363142"/>
     <id>urn:funding-finder:grants-gov:363142</id>
@@ -254,6 +296,17 @@
     <summary>National Institutes of Health | Closes 2027-05-28 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting research to develop improved drug susceptibility tests (DSTs) for mycobacterial drugs, including those currently used for treatment of tuberculosis (TB) and clinically important non-tuberculous mycobacterial (NTM) infections, new drugs and drugs in late-stage clinical development. TB is a l…</summary>
   </entry>
   <entry>
+    <title>Alzheimer's Drug-Development Program (U01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/363557"/>
+    <id>urn:funding-finder:grants-gov:363557</id>
+    <updated>2027-03-10T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Closes 2027-06-18 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose pre-clinical and early-stage clinical (Phase I) development of novel small-molecule and biologic drug candidates that aim to prevent Alzheimer's disease (AD), slow its progression, or treat its cognitive and behavioral symptoms. Through the NOFO, NIA is continuing th…</summary>
+  </entry>
+  <entry>
     <title>Veterans Legacy Grants Program</title>
     <link href="https://www.grants.gov/search-results-detail/363069"/>
     <id>urn:funding-finder:grants-gov:363069</id>
@@ -291,6 +344,15 @@
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Closes 2027-05-25 | The National Institute of Mental Health (NIMH) seeks research applications to support the NIMH HIV/AIDS Research Centers (ARC) program, including Developmental Centers (D-ARCs) and full AIDS Research Centers (ARCs). These Research Centers aim to capitalize on the coordinated infrastructure to advance high-impact, interdisciplinary HIV/AIDS research. The ARC program supports innovative research acr…</summary>
+  </entry>
+  <entry>
+    <title>Rural Maternity and Obstetrics Management Strategies Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363582"/>
+    <id>urn:funding-finder:grants-gov:363582</id>
+    <updated>2027-02-19T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Technology development"/>
+    <summary>Health Resources and Services Administration | Closes 2027-04-20 | The purpose of the Rural Maternity and Obstetrics Management Strategies (Rural MOMS) program is to support collaborative improvement and innovation networks to improve access to and delivery of maternity and obstetrics care in rural areas.</summary>
   </entry>
   <entry>
     <title>IDeA Networks of Biomedical Research Excellence (INBRE)</title>
@@ -510,74 +572,11 @@
     <summary>Centers for Disease Control - NCIPC | Closes 2027-03-31 | The Drug-Free Communities (DFC) Support Program was created by the Drug-Free Communities Act of 1997 (Public Law 105-20). The Executive Office of the President, Office of National Drug Control Policy (ONDCP), and the Department of Health and Human Services (HHS), Centers for Disease Control and Prevention (CDC), National Center for Injury Prevention and Control (NCIPC) are accepting applications f…</summary>
   </entry>
   <entry>
-    <title>Implementation Research on Coordinated Combinations of Community-Clinical Linkage Strategies for Diabetes Prevention and Management</title>
-    <link href="https://www.grants.gov/search-results-detail/363360"/>
-    <id>urn:funding-finder:grants-gov:363360</id>
-    <updated>2027-01-21T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-03-22 | Diabetes causes illness and death in the United States. It leads to high health care costs. People who use Federally Qualified Health Centers (FQHCs) and other safety-net clinics face greater risks. Many community-clinical linkage (CCL) strategies show benefits when used alone. We know less about how several strategies can be combined and coordinated. Using multiple strategies together may improve…</summary>
-  </entry>
-  <entry>
-    <title>Health Promotion and Disease Prevention Research Centers: 2027 Special Interest Project Supplements (SIPS)</title>
-    <link href="https://www.grants.gov/search-results-detail/363341"/>
-    <id>urn:funding-finder:grants-gov:363341</id>
-    <updated>2027-01-21T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Cancer"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-03-23 | This NOFO will provide supplemental funding to the currently funding twenty (20) CDC Prevention Research Centers (PRCs) to conduct Special Interest Projects (SIPs). The purpose of the SIPs is to inform public health practice through high-quality applied health promotion and disease prevention public health research in real-world settings to identify, design, test, assess, evaluate, disseminate, an…</summary>
-  </entry>
-  <entry>
-    <title>Pilot Testing, Implementation, and Evaluation of the Cervical, Breast and Colorectal Cancer Clinical Decision Support Tools</title>
-    <link href="https://www.grants.gov/search-results-detail/363309"/>
-    <id>urn:funding-finder:grants-gov:363309</id>
-    <updated>2027-01-21T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Cancer"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-03-23 | The Centers for Disease Control and Prevention's (CDC) National Center for Chronic Disease Prevention and Health Promotion is advancing the development of clinical decision support (CDS) tools designed to facilitate evidence-based cancer screening and management at the point of care. These CDS tools integrate up-to-date, computable guidelines into electronic health records systems to support clini…</summary>
-  </entry>
-  <entry>
-    <title>Infant-Toddler Court Program-National Resource Center</title>
-    <link href="https://www.grants.gov/search-results-detail/363511"/>
-    <id>urn:funding-finder:grants-gov:363511</id>
-    <updated>2027-01-21T00:00:00Z</updated>
+    <title>Rural Health Network Development Planning Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363581"/>
+    <id>urn:funding-finder:grants-gov:363581</id>
+    <updated>2027-01-23T00:00:00Z</updated>
     <author><name>Health Resources and Services Administration</name></author>
-    <summary>Health Resources and Services Administration | Closes 2027-04-21 | The Infant-Toddler Court Program's (ITCP) National Resource Center (NRC) helps states and communities to strengthen and expand use of enhanced child welfare practices in communities across the country that bring together courts, social services, and families to improve the safety, healthy development, and nurturing relationships of families with young children involved with the child welfare syste…</summary>
-  </entry>
-  <entry>
-    <title>Infant-Toddler Court Program-State Awards</title>
-    <link href="https://www.grants.gov/search-results-detail/363512"/>
-    <id>urn:funding-finder:grants-gov:363512</id>
-    <updated>2027-01-21T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Education and workforce"/>
-    <summary>Health Resources and Services Administration | Closes 2027-04-21 | The Infant-Toddler Court Program (ITCP) State Awards allow states and communities to support and expand use of enhanced child welfare practices in communities across the country that bring together courts, social services, and families to improve the safety, healthy development, and nurturing relationships of families with young children involved with child welfare. The ITCP State Awards support i…</summary>
-  </entry>
-  <entry>
-    <title>Translational Transplantation Tolerance Cooperative Study Group</title>
-    <link href="https://www.grants.gov/search-results-detail/362958"/>
-    <id>urn:funding-finder:grants-gov:362958</id>
-    <updated>2027-01-21T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2027-05-21 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the support of the Translational Transplantation Tolerance Cooperative Study Group (TTTCSG) program. The overarching goal of this program is to facilitate clinical translation of safe and effective transplant tolerance regimens that achieve long-term graft survival without the need for life-long …</summary>
-  </entry>
-  <entry>
-    <title>Rural Health Value Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363509"/>
-    <id>urn:funding-finder:grants-gov:363509</id>
-    <updated>2027-01-19T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <summary>Health Resources and Services Administration | Closes 2027-03-20 | The purpose of the Rural Health Value (RHV) Program is to fund one recipient to provide analysis and technical assistance (TA) for rural stakeholders to help them understand and engage in the value-based care landscape in the context of rural health care. The goal of this funding opportunity is to support the ability of rural providers to participate and succeed in current and emerging payment and…</summary>
-  </entry>
-  <entry>
-    <title>Ryan White HIV/AIDS Program Part C Capacity Development Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363166"/>
-    <id>urn:funding-finder:grants-gov:363166</id>
-    <updated>2027-01-15T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Technology development"/>
-    <summary>Health Resources and Services Administration | Closes 2027-03-16 | The purpose of the program is to strengthen the capacity of community-based organizations to improve health outcomes and reduce HIV transmission, especially for people not yet in regular HIV care. The activities fall under two categories: HIV Care Innovation and Infrastructure Development.</summary>
+    <summary>Health Resources and Services Administration | Closes 2027-03-23 | The Rural Health Network Development Planning Program supports the planning and development of rural integrated health care networks with specific focus on collaboration of entities to establish or improve local capacity and care coordination in underserved communities. Specifically, the program uses the concept of developing networks as a strategy for linking rural health care network participant…</summary>
   </entry>
 </feed>

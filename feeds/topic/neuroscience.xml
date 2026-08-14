@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml</id>
-  <updated>2026-08-14T11:50:56Z</updated>
+  <updated>2026-08-14T11:58:24Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -29,6 +29,17 @@
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Closes 2027-10-15 | The National Institutes of Health (NIH) Tackling Acquisition of Language in Kids (TALK) initiative intends to publish a Notice of Funding Opportunity (NOFO) to solicit research grant applications to improve the earliest steps in clinical practice for late talking children. The overarching purpose of this funding opportunity is to inform, develop, and evaluate evidence-based practices and implement…</summary>
+  </entry>
+  <entry>
+    <title>Alzheimer's Drug-Development Program (U01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/363557"/>
+    <id>urn:funding-finder:grants-gov:363557</id>
+    <updated>2027-03-10T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Closes 2027-06-18 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose pre-clinical and early-stage clinical (Phase I) development of novel small-molecule and biologic drug candidates that aim to prevent Alzheimer's disease (AD), slow its progression, or treat its cognitive and behavioral symptoms. Through the NOFO, NIA is continuing th…</summary>
   </entry>
   <entry>
     <title>BRAIN Initiative: Development and Validation of Novel Tools and New Approaches for Neuroscience Research</title>
@@ -72,6 +83,24 @@
     <category term="Public health"/>
     <category term="Transportation"/>
     <summary>Centers for Disease Control - NCIPC | Closes 2027-03-08 | This forecast is for CDC's Core State Injury Prevention Program (Core SIPP), a cooperative agreement to support public health infrastructure, data, and partnerships to use data to identify potential risk and inform the implementation of strategies to prevent unintentional injury. Actions using the best available evidence are intended to increase protective factors and reduce risk factors for injur…</summary>
+  </entry>
+  <entry>
+    <title>Strategies to Innovate EmeRgENcy Care Clinical Trials Network (SIREN) Infrastructure - Clinical Coordinating Center (CCC) and Data Coordinating Center (DCC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363555"/>
+    <id>urn:funding-finder:grants-gov:363555</id>
+    <updated>2027-01-04T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Closes 2027-03-04 | The National Institute of Neurological Disorders and Stroke (NINDS), in conjunction with The National Heart, Lung and Blood Institute (NHLBI), at the National Institutes of Health (NIH) seek to continue support for the Infrastructure for the Strategies to Innovate EmeRgENcy Care Clinical Trials Network (SIREN). The SIREN Network performs clinical trials that impact the care of individuals with a n…</summary>
+  </entry>
+  <entry>
+    <title>Strategies to Innovate EmeRgENcy Care Clinical Trials Network (SIREN) Infrastructure - Clinical Enrollment Hubs</title>
+    <link href="https://www.grants.gov/search-results-detail/363556"/>
+    <id>urn:funding-finder:grants-gov:363556</id>
+    <updated>2027-01-04T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Closes 2027-03-04 | The National Institute of Neurological Disorders and Stroke (NINDS), in conjunction with The National Heart, Lung and Blood Institute (NHLBI), at the National Institutes of Health (NIH) seek to continue to support the Infrastructure for the Strategies to Innovate EmeRgENcy Care Clinical Trials Network (SIREN). The program will encourage applications for network clinical enrollment hubs to support …</summary>
   </entry>
   <entry>
     <title>Continuing Enhanced National Surveillance for Prion Diseases in the United States</title>
@@ -647,37 +676,5 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Technology development"/>
     <category term="Cybersecurity"/>
     <summary>National Institutes of Health | Closes 2027-05-07 | The purpose of this funding opportunity is to encourage multidisciplinary investigators to submit applications developing exploratory, highly novel new approaches, or innovative applications of existing approaches to measure brain activity, connectivity, genomics, or other aspects across the age spectrum of neurodevelopment. The overarching goal is to extend our understanding of brain development …</summary>
-  </entry>
-  <entry>
-    <title>Seamless Early-Stage Clinical Drug Development (Phase 1 to 2a) for Novel therapeutic Agents for the Spectrum of Alzheimer's Disease (AD) and AD-related Dementias (ADRD) (UG3/UH3 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/357343"/>
-    <id>urn:funding-finder:grants-gov:357343</id>
-    <updated>2024-11-22T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <category term="Cybersecurity"/>
-    <summary>National Institutes of Health | Closes 2026-11-19 | The purpose of this Notice of Funding Opportunity (NOFO) is to invite applications that bundle independent protocols for phase 1 clinical trials with phase 1b/phase 2a clinical trials to streamline the early-stage evaluation of promising pharmacological interventions for Alzheimer's disease (AD) and Alzheimer's disease-related Dementias (ADRD). Candidate interventions evaluated through this progra…</summary>
-  </entry>
-  <entry>
-    <title>Utilizing Invasive Recording and Stimulating Opportunities in Humans to Advance Neural Circuitry Understanding of Mental Health Disorders (R01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/357346"/>
-    <id>urn:funding-finder:grants-gov:357346</id>
-    <updated>2024-11-22T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>National Institutes of Health | Closes 2028-01-07 | The purpose of this Notice of Funding Opportunity (NOFO) is to encourage applications to pursue invasive neural recording studies focused on mental health-relevant questions. Invasive neural recordings provide an unparalleled window into the human brain to explore the neural circuitry and neural dynamics underlying complex moods, emotions, cognitive functions, and behaviors with high spatial and t…</summary>
-  </entry>
-  <entry>
-    <title>Utilizing Invasive Recording and Stimulating Opportunities in Humans to Advance Neural Circuitry Understanding of Mental Health Disorders (R21 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/357345"/>
-    <id>urn:funding-finder:grants-gov:357345</id>
-    <updated>2024-11-22T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2028-01-07 | Reissue of RFA-20-351. The purpose of this Notice of Funding Opportunity (NOFO) is to encourage applications to pursue invasive neural recording studies focused on mental health-relevant questions. Invasive neural recordings provide an unparalleled window into the human brain to explore the neural circuitry and neural dynamics underlying complex moods, emotions, cognitive functions, and behaviors …</summary>
   </entry>
 </feed>

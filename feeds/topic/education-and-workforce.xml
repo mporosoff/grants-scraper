@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml</id>
-  <updated>2026-08-14T11:50:56Z</updated>
+  <updated>2026-08-14T11:58:24Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -78,6 +78,15 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>National Institutes of Health | Closes 2027-06-01 | This Notice of Funding Opportunity (NOFO) invites applications for NIDDK Disease Research and Translational Core Centers (P30 Clinical Trial Optional). These Core Centers are part of an integrated program of biomedical and translational research supporting our cystic fibrosis, diabetes, nutrition, obesity, liver and digestive diseases research. They enhance multidisciplinary collaboration, rigor, …</summary>
+  </entry>
+  <entry>
+    <title>Radiation Exposure Screening and Education Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363577"/>
+    <id>urn:funding-finder:grants-gov:363577</id>
+    <updated>2027-03-30T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <summary>Health Resources and Services Administration | Closes 2027-05-25 | This program supports organizations to screen and educate people exposed to radiation related to the mining of uranium and U.S. testing of nuclear weapons.</summary>
   </entry>
   <entry>
     <title>National Viral Hepatitis Education, Awareness, and Capacity Building for Communities and Providers</title>
@@ -510,16 +519,7 @@
     <summary>National Institutes of Health | Closes 2027-02-01 | The NIH Common Fund, in partnership with other NIH Institutes and Centers, plans to issue Notices of Funding Opportunity (NOFOs) for the RNomics program, which seeks to develop tools for studying the full set of RNA molecules (the RNome) in cells and tissues. The program will support technologies and resources that enable integrated analysis of RNA sequences, modifications, structures, locations, …</summary>
   </entry>
   <entry>
-    <title>Comprehensive Housing Counseling (CHC) and the Housing Counseling Training (HCT) NOFO (FY2026)</title>
-    <link href="https://www.grants.gov/search-results-detail/362014"/>
-    <id>urn:funding-finder:grants-gov:362014</id>
-    <updated>2026-09-30T00:00:00Z</updated>
-    <author><name>Department of Housing and Urban Development</name></author>
-    <category term="Education and workforce"/>
-    <summary>Department of Housing and Urban Development | Closes 2026-11-30 | The purpose of HUD’s Housing Counseling Grant Program is to provide funds to HUD-approved housing counseling agencies that provide counseling and advice to tenants and homeowners, with respect to property maintenance, financial management and literacy, and other matters as may be appropriate to assist program clients in improving their housing conditions, meeting their financial needs, and fulfill…</summary>
-  </entry>
-  <entry>
-    <title>NIH Research Evaluation and Commercialization Hubs (REACH)</title>
+    <title>Limited Competition: NIH Research Evaluation and Commercialization Hubs (REACH) (SB0 Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/362965"/>
     <id>urn:funding-finder:grants-gov:362965</id>
     <updated>2026-09-30T00:00:00Z</updated>
@@ -527,7 +527,16 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2026-11-30 | The National Institutes of Health (NIH), including all of its Institutes and Centers, plans to publish a Notice of Funding Opportunity inviting eligible colleges, universities, and nonprofit organizations to apply for the NIH Research Evaluation and Commercialization Hub (REACH) program. The REACH program helps move promising biomedical discoveries from academic research into real-world products t…</summary>
+    <summary>National Institutes of Health | Closes 2026-11-10 | The National Institutes of Health (NIH), including all of its Institutes and Centers, plans to publish a Notice of Funding Opportunity inviting eligible colleges, universities, and nonprofit organizations to apply for the NIH Research Evaluation and Commercialization Hub (REACH) program. The REACH program helps move promising biomedical discoveries from academic research into real-world products t…</summary>
+  </entry>
+  <entry>
+    <title>Comprehensive Housing Counseling (CHC) and the Housing Counseling Training (HCT) NOFO (FY2026)</title>
+    <link href="https://www.grants.gov/search-results-detail/362014"/>
+    <id>urn:funding-finder:grants-gov:362014</id>
+    <updated>2026-09-30T00:00:00Z</updated>
+    <author><name>Department of Housing and Urban Development</name></author>
+    <category term="Education and workforce"/>
+    <summary>Department of Housing and Urban Development | Closes 2026-11-30 | The purpose of HUD’s Housing Counseling Grant Program is to provide funds to HUD-approved housing counseling agencies that provide counseling and advice to tenants and homeowners, with respect to property maintenance, financial management and literacy, and other matters as may be appropriate to assist program clients in improving their housing conditions, meeting their financial needs, and fulfill…</summary>
   </entry>
   <entry>
     <title>Preschool Development Grant Birth Through Five (PDG B-5) SMART Grant</title>
@@ -613,17 +622,5 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Closes 2027-01-25 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
-  </entry>
-  <entry>
-    <title>The Next Generation of the Clinical and Translational Science Awards Program Trial Innovation Network</title>
-    <link href="https://www.grants.gov/search-results-detail/363253"/>
-    <id>urn:funding-finder:grants-gov:363253</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2027-01-25 | The Clinical and Translational Science Awards Program Trial Innovation Network (TIN) is a collaborative initiative aimed at addressing critical roadblocks in the design and implementation of multi-center clinical trials. The goal of the TIN is to execute trials better, faster, and more cost-efficiently, as well as serve as a national laboratory to study, understand, and innovate the process of con…</summary>
   </entry>
 </feed>

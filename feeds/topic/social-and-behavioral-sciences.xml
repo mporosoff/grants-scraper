@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml</id>
-  <updated>2026-08-14T11:50:56Z</updated>
+  <updated>2026-08-14T11:58:24Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -36,6 +36,17 @@
     <category term="Education and workforce"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Closes 2027-05-25 | The overall goal of the NIH Ruth L. Kirschstein National Research Service Award (NRSA) program is to help ensure that a pool of highly trained scientists is available in appropriate scientific disciplines to address the Nation's biomedical, behavioral, and clinical research needs. In alignment with the goal of the NRSA program, the Medical Scientist Training Program (MSTP) supports the development…</summary>
+  </entry>
+  <entry>
+    <title>Alzheimer's Drug-Development Program (U01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/363557"/>
+    <id>urn:funding-finder:grants-gov:363557</id>
+    <updated>2027-03-10T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Closes 2027-06-18 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose pre-clinical and early-stage clinical (Phase I) development of novel small-molecule and biologic drug candidates that aim to prevent Alzheimer's disease (AD), slow its progression, or treat its cognitive and behavioral symptoms. Through the NOFO, NIA is continuing th…</summary>
   </entry>
   <entry>
     <title>AIDS Research Center on Mental Health and HIV/AIDS (P30 Clinical Trial Optional)</title>
@@ -646,15 +657,5 @@
     <category term="Social and behavioral sciences"/>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Closes 2027-05-26 | This Notice of Funding Opportunity Announcement (NOFO) invites R25 applications to support the development and implementation of research education programs for recent baccalaureates from all backgrounds, including those from groups underrepresented in the biomedical and behavioral sciences. It is essential to expand and broaden the skilled Alzheimers Disease (AD) and Alzheimers Disease and Relate…</summary>
-  </entry>
-  <entry>
-    <title>NIA Expanding Research in AD/ADRD (ERA) Summer Research Education Program (R25 Independent Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359655"/>
-    <id>urn:funding-finder:grants-gov:359655</id>
-    <updated>2025-09-02T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2027-05-26 | This Notice of Funding Opportunity (NOFO) invites R25 applications to support the development and implementation of summer research education programs for high school students, undergraduates, or science teachers from all backgrounds, including those from groups underrepresented in the biomedical and behavioral sciences. It is essential to expand and broaden the skilled Alzheimer's Disease (AD) an…</summary>
   </entry>
 </feed>

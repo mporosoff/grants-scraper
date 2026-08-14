@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-08-14T11:50:56Z</updated>
+  <updated>2026-08-14T11:58:24Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -91,6 +91,29 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Agriculture and food"/>
     <summary>Health Resources and Services Administration | Closes 2026-10-20 | Fiscal Year (FY) 2027 Regional Nutrition Hubs (RNH) will support region-specific technical assistance (TA) on expanding high-quality nutrition services to the Health Resources and Services Administration's (HRSA) Health Center Program (H80) award recipients and look-alikes (health centers). Nutrition services prevent, manage, and treat diseases and conditions through nutritional and food-based int…</summary>
+  </entry>
+  <entry>
+    <title>Syria Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363578"/>
+    <id>urn:funding-finder:grants-gov:363578</id>
+    <updated>2026-08-13T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination of the U.S. Department of State announces an open competition for organizations to submit a statement of interest (SOI) for innovative foreign assistance programs benefiting partner countries that also advance U.S. commercial diplomacy and put American interests first. SOI must demonstrate how projects will leverage foreign assi…</summary>
+  </entry>
+  <entry>
+    <title>Food and Agricultural Sciences National Needs Graduate and Postgraduate Fellowships</title>
+    <link href="https://www.grants.gov/search-results-detail/363559"/>
+    <id>urn:funding-finder:grants-gov:363559</id>
+    <updated>2026-08-13T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <summary>National Institute of Food and Agriculture | Closes 2026-10-15 | The purpose of the NNF program, Assistance Listing 10.210, is to provide funding to support new graduate (master’s, DVM, or doctoral) student training and completion of degree programs to develop human capital to participate in meeting the mission of the USDA to increase the pipeline of domestic agricultural students. The NNF program offers funding for eligible full-time students pursuing graduate…</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Colorado Plateau Cooperative Ecosystem Studies Unit (CESU)</title>
@@ -432,19 +455,6 @@
     <summary>Foreign Agricultural Service | Closes 2026-08-17 | Modern agricultural biotechnology such as genome editing is a revolutionary tool that could transform the sustainability and viability of the agriculture sector. American farmers rely on agricultural biotechnology products, with over 90% of corn and soybeans derived from these technologies. In 2025, American farmers exported over $51 billion in agricultural biotechnology products worldwide. Howeve…</summary>
   </entry>
   <entry>
-    <title>Syria Annual Program Statement</title>
-    <link href="https://www.grants.gov/search-results-detail/363190"/>
-    <id>urn:funding-finder:grants-gov:363190</id>
-    <updated>2026-07-15T00:00:00Z</updated>
-    <author><name>Bureau of Near Eastern Affairs</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination of the U.S. Department of State announces an open competition for organizations to submit a statement of interest (SOI) for innovative foreign assistance programs benefiting partner countries that also advance U.S. commercial diplomacy and put American interests first. SOI must demonstrate how projects will leverage foreign assi…</summary>
-  </entry>
-  <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Great Lakes Northern Forest Cooperative Ecosystem Studies Unit (CESU)</title>
     <link href="https://www.grants.gov/search-results-detail/363172"/>
     <id>urn:funding-finder:grants-gov:363172</id>
@@ -654,15 +664,5 @@
     <category term="Biology and biotechnology"/>
     <category term="Transportation"/>
     <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-30 | Summary: The fiscal year 2026 (FY26) Amyotrophic Lateral Sclerosis Research Program (ALSRP) Pilot Clinical Trial Award (PCTA) supports the rapid implementation of clinical trials with the potential to have a significant impact on the treatment or management of amyotrophic lateral sclerosis (ALS). Projects may range from phase 1 to small-scale phase 2 trials. Applications must address one of the fo…</summary>
-  </entry>
-  <entry>
-    <title>DoW Amyotrophic Lateral Sclerosis Research Program, Therapeutic Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362196"/>
-    <id>urn:funding-finder:grants-gov:362196</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-30 | Summary: The fiscal year 2026 (FY26) Amyotrophic Lateral Sclerosis Research Program (ALSRP) Therapeutic Development Award (TDA) supports research ranging from preclinical validation of therapeutic leads through U.S. Food and Drug Administration (FDA) Investigational New Drug (IND)-enabling studies. The proposed studies are expected to be empirical in nature and product-driven. Applicants with limi…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-08-14T11:50:56Z</updated>
+  <updated>2026-08-14T11:58:24Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development</title>
@@ -44,6 +44,30 @@
     <category term="Community development"/>
     <category term="Manufacturing"/>
     <summary>Department of Housing and Urban Development | Closes 2026-10-19 | HUD is issuing the Preservation and Reinvestment Initiative for Community Enhancement (PRICE) competition NOFO to preserve long-term housing affordability for residents of manufactured housing or an MHC, to redevelop MHCs, and to primarily benefit low- and moderate-income (LMI) residents. Congress appropriated in FY2025 these competitive grants to preserve and revitalize manufactured housing and e…</summary>
+  </entry>
+  <entry>
+    <title>Syria Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363578"/>
+    <id>urn:funding-finder:grants-gov:363578</id>
+    <updated>2026-08-13T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination of the U.S. Department of State announces an open competition for organizations to submit a statement of interest (SOI) for innovative foreign assistance programs benefiting partner countries that also advance U.S. commercial diplomacy and put American interests first. SOI must demonstrate how projects will leverage foreign assi…</summary>
+  </entry>
+  <entry>
+    <title>MANUFACTURING AND SMALL BUSINESS CYBERSECURITY RESILIENCE PROGRAM 2026</title>
+    <link href="https://www.grants.gov/search-results-detail/363586"/>
+    <id>urn:funding-finder:grants-gov:363586</id>
+    <updated>2026-08-13T00:00:00Z</updated>
+    <author><name>Small Business Administration</name></author>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <summary>Small Business Administration | Closes 2026-09-04 | The purpose of this Funding Opportunity is to invite proposals for funding to deliver technical assistance to small businesses. Only applications from the states of Indiana, Ohio, or Virginia that have experience in managing a state-wide, regional or nationwide cybersecurity training program will be considered for funding via this announcement. Applicants must be states, state entities or designat…</summary>
   </entry>
   <entry>
     <title>Safeguarding U.S. Critical Minerals Supply Chains- Tunisia</title>
@@ -281,19 +305,6 @@
     <category term="Materials science"/>
     <category term="Cybersecurity"/>
     <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
-  </entry>
-  <entry>
-    <title>Syria Annual Program Statement</title>
-    <link href="https://www.grants.gov/search-results-detail/363190"/>
-    <id>urn:funding-finder:grants-gov:363190</id>
-    <updated>2026-07-15T00:00:00Z</updated>
-    <author><name>Bureau of Near Eastern Affairs</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination of the U.S. Department of State announces an open competition for organizations to submit a statement of interest (SOI) for innovative foreign assistance programs benefiting partner countries that also advance U.S. commercial diplomacy and put American interests first. SOI must demonstrate how projects will leverage foreign assi…</summary>
   </entry>
   <entry>
     <title>Public Wireless Supply Chain Innovation Fund Grant Program - Solutions for AI-Native RAN</title>
@@ -751,17 +762,5 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Closes 2026-09-29 | Plasma science is a transdisciplinary field of research where fundamental studies in many disciplines, including plasma physics, plasma chemistry, materials science, and space science, come together to advance knowledge for discovery and technological innovation. The primary goal of the ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) program is to identify and capitali…</summary>
-  </entry>
-  <entry>
-    <title>Joint Center of Excellence for Advanced Materials Research</title>
-    <link href="https://www.grants.gov/search-results-detail/39841"/>
-    <id>urn:funding-finder:grants-gov:39841</id>
-    <updated>2023-11-01T00:00:00Z</updated>
-    <author><name>FAA-COE-JAMS</name></author>
-    <category term="Education and workforce"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Transportation"/>
-    <summary>FAA-COE-JAMS | Posted | The Joint Center of Excellence (COE) for Advanced Materials (JAMS) was established in January 2004 to assist in ensuring the safe and reliable application of composites and advanced materials to commercial aircraft. The Center is a joint effort of the Center of Excellence for Composite and Advanced Materials (CECAM) led by Wichita State University and the Center of Excellence for Advanced Material…</summary>
   </entry>
 </feed>

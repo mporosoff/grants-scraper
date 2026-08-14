@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-08-14T11:50:56Z</updated>
+  <updated>2026-08-14T11:58:24Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
@@ -113,18 +113,6 @@
     <category term="Data science"/>
     <category term="Cybersecurity"/>
     <summary>Bureau of African Affairs | Closes 2027-05-27 | The U.S.-Africa Strategic Investment Program advances America's national interests by harnessing market-based, private sector-led growth across two strategic focus areas: Critical Minerals Investment and Commercial Diplomacy Acceleration. This program seeks market-based solutions that strengthen the environment for foreign investment in sub-Saharan Africa through transparent and competitive proces…</summary>
-  </entry>
-  <entry>
-    <title>Engineering (ENG): Electrical, Communications, and Computing Systems (ECCS)</title>
-    <link href="https://www.grants.gov/search-results-detail/363551"/>
-    <id>urn:funding-finder:grants-gov:363551</id>
-    <updated>2026-08-12T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Energy"/>
-    <category term="Quantum science"/>
-    <summary>U.S. National Science Foundation | Closes 2076-08-12 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research for electrical, communications and computing systems through the following programs: The Electronic, Photonic, Magnetic, and Quantum Devices (EPMQD) program supports foundational engineering research on novel classical and quantum devices, exploring matter’s electronic, photonic, and magnetic …</summary>
   </entry>
   <entry>
     <title>Fostering the Future Together: Empowering Youth for a Safe Digital World</title>
@@ -759,5 +747,18 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>National Institute of Food and Agriculture | Closes 2026-08-14 | The TCEP-CA under assistance listing 10.517, supports informal, community-based extension projects that address agriculture, youths, economic development, healthy lifestyles, natural resources, or other topics important to Tribal communities. This NOFO will begin a new 4-year continuation funding cycle.</summary>
+  </entry>
+  <entry>
+    <title>HEAL Initiative: Optimization of Therapeutic Medical Devices through Team Science Mechanistic Research (RM1)</title>
+    <link href="https://www.grants.gov/search-results-detail/361520"/>
+    <id>urn:funding-finder:grants-gov:361520</id>
+    <updated>2026-06-11T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Closes 2026-10-30 | The National Institute of Neurological Disorders and Stroke (NINDS), with other NIH Institutes and Centers (ICs), intends to publish a Notice of Funding Opportunity (NOFO) to investigate the mechanisms of action of therapeutic medical devices with the overall goal of improving clinical outcomes with device-based approaches. Medical devices are essential in managing health conditions, complementing…</summary>
   </entry>
 </feed>
