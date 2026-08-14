@@ -99,7 +99,7 @@ test("wires the external researcher editor into a syntactically valid page", () 
   assert.match(teamPage, /including modification, redistribution, and commercial or organizational use/);
   assert.match(teamPage, /requires written permission from the author/);
   assert.doesNotMatch(teamPage, /MIT License|href="\.\/LICENSE"/);
-  assert.doesNotMatch(teamPage, /UR ChemE Department/);
+  assert.doesNotMatch(teamPage, /UR ChemE/i);
   const inlineScripts = [...teamPage.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)]
     .map(match => match[1].trim())
     .filter(Boolean);

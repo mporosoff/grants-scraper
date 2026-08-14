@@ -6,7 +6,8 @@ Two stages:
    member, resolve their OpenAlex author record (preferring University of
    Rochester affiliation) and build a research profile from their top OpenAlex
    concepts/topics and recent publication titles. Writes ``faculty_profiles.json``.
-   OpenAlex is free and needs no key; we pass a mailto for the polite pool.
+   OpenAlex is free and needs no key; ``OPENALEX_MAILTO`` can opt into its
+   polite pool without hard-coding a personal address.
 
 2. ``match_to_catalog`` — score every opportunity in ``data/opportunities.js``
    against each faculty profile by topic/keyword overlap, and emit
@@ -29,6 +30,7 @@ from __future__ import annotations
 import argparse
 from datetime import date
 import json
+import os
 import re
 import time
 import urllib.parse
@@ -37,7 +39,7 @@ import urllib.request
 from scripts.currentness import record_is_current
 
 OPENALEX = "https://api.openalex.org"
-MAILTO = "marc.porosoff@rochester.edu"           # OpenAlex polite pool
+OPENALEX_MAILTO = os.environ.get("OPENALEX_MAILTO", "").strip()
 ROCHESTER_HINT = "university of rochester"        # exclude "Rochester Institute of Technology"
 
 # Core Chemical & Sustainability Engineering faculty (Hajim, 2026).
@@ -51,10 +53,15 @@ FACULTY = [
 
 
 def _get(url: str) -> dict:
-    sep = "&" if "?" in url else "?"
+    request_url = url
+    user_agent = "Funding-Finder-FacultyMatch/1.0"
+    if OPENALEX_MAILTO:
+        sep = "&" if "?" in url else "?"
+        request_url = f"{url}{sep}mailto={urllib.parse.quote(OPENALEX_MAILTO)}"
+        user_agent = f"{user_agent} ({OPENALEX_MAILTO})"
     req = urllib.request.Request(
-        f"{url}{sep}mailto={MAILTO}",
-        headers={"User-Agent": f"Funding-Finder-FacultyMatch/1.0 ({MAILTO})"},
+        request_url,
+        headers={"User-Agent": user_agent},
     )
     with urllib.request.urlopen(req, timeout=60) as resp:
         return json.loads(resp.read().decode("utf-8"))

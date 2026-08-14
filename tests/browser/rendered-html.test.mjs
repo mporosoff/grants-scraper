@@ -139,6 +139,8 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(script, /a field-level diff was not provided/);
   assert.match(script, /function evidenceRows/);
   assert.match(script, /function sendDeploymentReview/);
+  assert.doesNotMatch(script, /REVIEW_EMAIL|@rochester\.edu|openReviewEmail/);
+  assert.match(prototype, /downloads the file for you to send separately/);
   assert.match(script, /citation_evidence_ids/);
   assert.match(css, /\.page-number\[aria-current="page"\]/);
   assert.match(css, /\.result-card:nth-child\(even\)/);

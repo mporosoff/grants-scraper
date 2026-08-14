@@ -622,7 +622,7 @@ def extract_opportunities(body: str) -> list[dict]:
 # --------------------------------------------------------------------------- #
 class VPREmailAdapter(SourceAdapter):
     slug = "vpr-email"
-    display_name = "UR VPR funding digest (limited submissions & foundations)"
+    display_name = "VPR funding digest (limited submissions & foundations)"
     source_type = "Internal"
     enabled = True           # validated against real Cindy (digest) + VPR (single) emails.
     min_records = 1

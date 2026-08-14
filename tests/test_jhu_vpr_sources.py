@@ -227,7 +227,7 @@ class VPREmailTests(unittest.TestCase):
         opportunity = VPREmailAdapter().parse_payload(sample)[0]
         record = opportunity.to_record(
             slug="vpr-email",
-            source="UR VPR funding digest (limited submissions & foundations)",
+            source="VPR funding digest (limited submissions & foundations)",
             source_type="Internal",
         )
 

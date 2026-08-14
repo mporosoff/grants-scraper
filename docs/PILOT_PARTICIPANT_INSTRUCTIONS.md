@@ -63,8 +63,8 @@ of you, and not a review of your research.
 9. **(Optional) Save a few** with the "☆ Save" button and check that the "★ Saved
    opportunities" list works for you.
 10. **Send your feedback.** Use **"Export match ratings"** (and optionally "Send
-    feedback") and return the file to **Marc Porosoff, marc.porosoff@rochester.edu**.
-    You can also jot a few words on what was confusing or slow.
+    feedback") and return the file to the project facilitator through the agreed
+    channel. You can also jot a few words on what was confusing or slow.
 
 There are no right or wrong ratings — rate based on your honest judgment for
 your own work.
@@ -130,4 +130,4 @@ tool evaluation as described above. This is an internal evaluation of the
 software, not a study of you or your research.
 
 Questions, problems, or to return your feedback file:
-**Marc Porosoff — marc.porosoff@rochester.edu**
+contact the project facilitator through the agreed channel.

@@ -91,7 +91,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             self.assertIn("requires written permission from the author", page)
             self.assertNotIn("MIT License", page)
             self.assertNotIn('href="./LICENSE"', page)
-        self.assertNotIn("UR ChemE Department", team_html)
+        self.assertNotIn("UR ChemE", team_html)
         self.assertIn('MAX_EXTERNAL = 4', team_researchers_js)
         self.assertIn('funding-finder.external-researchers.v1', team_researchers_js)
         self.assertIn('function buildMatches', team_researchers_js)

@@ -76,9 +76,9 @@ The August 14, 2026 build contains 1,462 open or current forecasted funding
 opportunities (1,171 posted and 291 forecasted) rather than the former 48-record
 engineering shortlist. It contains no record with a deadline before the catalog date.
 Current published sources are Grants.gov (1,406), NYSERDA (38), U.S. National Science
-Foundation (1), UR VPR funding digest (limited submissions & foundations) (17);
-additional sources are enabled only after a sustainable public ingestion path and health
-bounds are verified.
+Foundation (1), VPR funding digest (limited submissions & foundations) (17); additional
+sources are enabled only after a sustainable public ingestion path and health bounds are
+verified.
 <!-- catalog-summary:end -->
 
 ### 2.3 Search is the primary workflow

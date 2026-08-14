@@ -16,7 +16,6 @@
   const PROMPT_VERSION = "result-aware-chat-v1";
   const APP_VERSION = "layout-ai-recovery-v1";
   const CANONICAL_URL = "https://mporosoff.github.io/grants-scraper/";
-  const REVIEW_EMAIL = "marc.porosoff@rochester.edu";
   const SEARCH_QUERY = globalThis.FUNDING_SEARCH_QUERY;
   const RETRIEVAL_API = globalThis.FUNDING_RETRIEVAL;
   const ORCID_API = globalThis.FUNDING_ORCID;
@@ -2299,17 +2298,6 @@
     return bundle;
   }
 
-  function openReviewEmail(bundle) {
-    const subject = `Funding Finder reviewer feedback ${bundle.payload.review.review_id}`;
-    const body = `${REVIEW_API.handoffSummary(bundle.payload, bundle.filename)}\n\nPlease attach the downloaded JSON file before sending.`;
-    const link = document.createElement("a");
-    link.href = `mailto:${REVIEW_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    link.hidden = true;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-  }
-
   async function sendDeploymentReview() {
     const bundle = deploymentReviewFile();
     const canShareFile = Boolean(
@@ -2342,9 +2330,8 @@
       }
     }
     downloadBlob(bundle.blob, bundle.filename);
-    openReviewEmail(bundle);
     $("deployment-review-status").textContent =
-      "The review file was downloaded and an addressed email was opened. Attach the downloaded JSON file before sending.";
+      "The review file was downloaded. Send the JSON file to the project owner when ready.";
     renderDeploymentReview();
   }
 
