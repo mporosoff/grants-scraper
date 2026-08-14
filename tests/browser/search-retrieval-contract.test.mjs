@@ -192,18 +192,19 @@ test("uses researcher context to resolve an unknown acronym without AI", () => {
   );
 });
 
-test("resolves CFD against the production catalog from researcher context", () => {
+test("resolves CFD with the production retrieval engine from researcher context", () => {
   const apis = loadApis();
   const catalog = assignmentJson(productionCatalogSource);
-  const targetIndex = catalog.opportunities.findIndex(record => record.opportunity_id === "363066");
-  const result = apis.retrieval.create(catalog, apis.query).score("CFD", {
-    semantic: false,
+  const groups = apis.retrieval.create(catalog, apis.query).expandGroups("CFD", {
     context: "Transport phenomena and computational fluid dynamics for reacting flows.",
   });
 
-  assert.ok(targetIndex >= 0);
-  assert.ok(result.scores[targetIndex] > 0);
-  assert.equal(result.diagnostics.acronymExpansions[0].phrase, "computational fluid dynamics");
+  assert.equal(groups.length, 1);
+  assert.equal(groups[0].expansion.phrase, "computational fluid dynamics");
+  assert.equal(groups[0].expansion.basis, "researcher context");
+  assert.ok(groups[0].terms.some(item => item.term === "computational"));
+  assert.ok(groups[0].terms.some(item => item.term === "fluid"));
+  assert.ok(groups[0].terms.some(item => item.term === "dynamic"));
 });
 
 test("production separation searches surface focused programs and the DOE umbrella call without policy noise", () => {

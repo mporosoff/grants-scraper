@@ -70,7 +70,11 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(prototype, /not an official source of record/);
   assert.match(prototype, /independently verify eligibility, deadlines, requirements, and terms/);
   assert.match(prototype, /&copy; 2026 Marc D\. Porosoff/);
-  assert.match(prototype, /href="\.\/LICENSE">MIT License/);
+  assert.match(prototype, /All rights reserved/);
+  assert.match(prototype, /Personal, non-commercial use is permitted/);
+  assert.match(prototype, /including modification, redistribution, and commercial or organizational use/);
+  assert.match(prototype, /requires written permission from the author/);
+  assert.doesNotMatch(prototype, /MIT License|href="\.\/LICENSE"/);
   assert.match(css, /\.legal-notice/);
   assert.doesNotMatch(prototype, /class="chat hidden"/);
   assert.match(prototype, /data\/opportunities\.js/);

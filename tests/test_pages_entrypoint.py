@@ -82,7 +82,16 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             )
             self.assertIn("not an official source of record", page)
             self.assertIn("&copy; 2026 Marc D. Porosoff", page)
-            self.assertIn('href="./LICENSE">MIT License', page)
+            self.assertIn("All rights reserved", page)
+            self.assertIn("Personal, non-commercial use is permitted", page)
+            self.assertIn(
+                "including modification, redistribution, and commercial or organizational use",
+                page,
+            )
+            self.assertIn("requires written permission from the author", page)
+            self.assertNotIn("MIT License", page)
+            self.assertNotIn('href="./LICENSE"', page)
+        self.assertNotIn("UR ChemE Department", team_html)
         self.assertIn('MAX_EXTERNAL = 4', team_researchers_js)
         self.assertIn('funding-finder.external-researchers.v1', team_researchers_js)
         self.assertIn('function buildMatches', team_researchers_js)
