@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-08-13T17:08:32Z</updated>
+  <updated>2026-08-14T02:40:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development</title>
@@ -178,7 +178,7 @@
   </entry>
   <entry>
     <title>Upstate Through Wall Heat Pump Demonstration Program</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00000Vto2LAAR"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00000Vto2LAAR"/>
     <id>urn:funding-finder:nyserda:nyserda%3ARFQL5937</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -188,7 +188,7 @@
   </entry>
   <entry>
     <title>Window Heat Pump Demonstration Program - Phase I</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00000Xse5XAAR"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00000Xse5XAAR"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON6037-PhaseI</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -197,7 +197,7 @@
   </entry>
   <entry>
     <title>Window Heat Pump Demonstration Program - Phase II</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00000iqxxLAAQ"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00000iqxxLAAQ"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON6037-PhaseII</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -206,7 +206,7 @@
   </entry>
   <entry>
     <title>The New York Truck-Voucher Incentive Program</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt0000000Qp7PAAS"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rt0000000Qp7PAAS"/>
     <id>urn:funding-finder:nyserda:nyserda%3ANYT-VIP</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -216,7 +216,7 @@
   </entry>
   <entry>
     <title>Financing Arrangements for High-Performance Affordable Housing</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt000001GOHEzAAP"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rt000001GOHEzAAP"/>
     <id>urn:funding-finder:nyserda:nyserda%3ARFP18</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -226,7 +226,7 @@
   </entry>
   <entry>
     <title>New York School Bus Incentive Program</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z000000EMPCAA4"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0r8z000000EMPCAA4"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON5552</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -319,33 +319,6 @@
     <category term="Data science"/>
     <category term="Manufacturing"/>
     <summary>Employment and Training Administration | Closes 2026-08-17 | Questions regarding this Training and Employment Guidance Letter (TEGL) may be emailed to Daniela Petchik, Grants Management Specialist at petchik.daniela.m@dol.gov and Brinda Ruggles, Grant Officer at ruggles.brinda@dol.gov. We encourage prospective applicants and interested parties to use the Grants.gov subscription option to register for future updates provided for this particular TEGL.</summary>
-  </entry>
-  <entry>
-    <title>Supply Chain Acceleration and Logistics Enablement (SCALE) Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363089"/>
-    <id>urn:funding-finder:grants-gov:363089</id>
-    <updated>2026-07-07T00:00:00Z</updated>
-    <author><name>Small Business Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <summary>Small Business Administration | Closes 2026-08-13 | The Supply Chain Acceleration and Logistics Enablement (SCALE) Program supports organizations that help small businesses overcome operational, technical, workforce, and market access barriers that limit their ability to participate and grow as suppliers within strategically important industries. Through technical assistance, industry engagement, and other implementation focused activities, SCALE h…</summary>
-  </entry>
-  <entry>
-    <title>EARLY STAGE INNOVATIONS (ESI26)</title>
-    <link href="https://www.grants.gov/search-results-detail/363066"/>
-    <id>urn:funding-finder:grants-gov:363066</id>
-    <updated>2026-07-06T00:00:00Z</updated>
-    <author><name>NASA Headquarters</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Space and aeronautics"/>
-    <category term="Technology development"/>
-    <summary>NASA Headquarters | Closes 2026-08-13 | The National Aeronautics and Space Administration (NASA) Headquarters has released the solicitation Early Stage Innovations (ESI), as an appendix to the Research and Technology Mission Directorate (RTMD) umbrella NASA Research Announcement (NRA) titled "Space Technology Research, Development, Demonstration, and Infusion 2026 (SpaceTech REDDI 2026).”. The solicitation is available by opening the NS…</summary>
   </entry>
   <entry>
     <title>Improved Oil and Gas Recovery and Produced Water Management Technologies</title>
@@ -762,5 +735,33 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Quantum science"/>
     <category term="Technology development"/>
     <summary>U.S. National Science Foundation | Closes 2026-09-08 | Revolutionizing Engineering Departments (hereinafter referred to as RED) is designed to build upon previous efforts in engineering education research. Specifically, previous and ongoing evaluations of the NSF Engineering Education and Centers Division program and its predecessors, as well as those related programs in the Directorate for STEM Education, have shown that prior investments have signif…</summary>
+  </entry>
+  <entry>
+    <title>ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)</title>
+    <link href="https://www.grants.gov/search-results-detail/351715"/>
+    <id>urn:funding-finder:grants-gov:351715</id>
+    <updated>2024-01-06T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Climate change"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Closes 2026-09-29 | Plasma science is a transdisciplinary field of research where fundamental studies in many disciplines, including plasma physics, plasma chemistry, materials science, and space science, come together to advance knowledge for discovery and technological innovation. The primary goal of the ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) program is to identify and capitali…</summary>
+  </entry>
+  <entry>
+    <title>Joint Center of Excellence for Advanced Materials Research</title>
+    <link href="https://www.grants.gov/search-results-detail/39841"/>
+    <id>urn:funding-finder:grants-gov:39841</id>
+    <updated>2023-11-01T00:00:00Z</updated>
+    <author><name>FAA-COE-JAMS</name></author>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Transportation"/>
+    <summary>FAA-COE-JAMS | Posted | The Joint Center of Excellence (COE) for Advanced Materials (JAMS) was established in January 2004 to assist in ensuring the safe and reliable application of composites and advanced materials to commercial aircraft. The Center is a joint effort of the Center of Excellence for Composite and Advanced Materials (CECAM) led by Wichita State University and the Center of Excellence for Advanced Material…</summary>
   </entry>
 </feed>

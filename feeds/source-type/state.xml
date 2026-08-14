@@ -4,11 +4,11 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml</id>
-  <updated>2026-08-13T17:08:32Z</updated>
+  <updated>2026-08-14T02:40:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Energy Economy Planning and Growth Program</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001COlXwAAL"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001COlXwAAL"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON6201</id>
     <updated>2026-08-12T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -17,7 +17,7 @@
   </entry>
   <entry>
     <title>Clean Green Schools Initiative</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt000001Q0ClRAAV"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rt000001Q0ClRAAV"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON4924</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -29,7 +29,7 @@
   </entry>
   <entry>
     <title>Independent Internal Audit Services</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001AbghyAAB"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001AbghyAAB"/>
     <id>urn:funding-finder:nyserda:nyserda%3ARFP6197</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -38,7 +38,7 @@
   </entry>
   <entry>
     <title>Net-Zero Resilience Preparation for Municipal and Rural Electric Providers</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00000yipTDAAY"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00000yipTDAAY"/>
     <id>urn:funding-finder:nyserda:nyserda%3ARFP6129</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -47,7 +47,7 @@
   </entry>
   <entry>
     <title>New York State Clean Energy Internship Program</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt000000MdhViAAJ"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rt000000MdhViAAJ"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON4000</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -56,7 +56,7 @@
   </entry>
   <entry>
     <title>Empire Building Challenge: Hospitals</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00000IUDGnAAP"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00000IUDGnAAP"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON5989</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -65,7 +65,7 @@
   </entry>
   <entry>
     <title>Clean Energy Career Pathways Training</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr000012uHhNAAU"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr000012uHhNAAU"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON6121</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -75,7 +75,7 @@
   </entry>
   <entry>
     <title>Large Scale Non-drop-in Alternative Fuels Based Resources and Infrastructure</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr0000191nvfAAA"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr0000191nvfAAA"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON6161</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -84,7 +84,7 @@
   </entry>
   <entry>
     <title>Apprenticeship and Pre-apprenticeship Clean Energy Training</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z000000FOEyAAO"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0r8z000000FOEyAAO"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON5437</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -94,7 +94,7 @@
   </entry>
   <entry>
     <title>Disadvantaged Communities (DAC) Consultant Pool</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z0000007WGbAAM"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0r8z0000007WGbAAM"/>
     <id>urn:funding-finder:nyserda:nyserda%3ARFQL4922</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -102,7 +102,7 @@
   </entry>
   <entry>
     <title>Upstate Through Wall Heat Pump Demonstration Program</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00000Vto2LAAR"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00000Vto2LAAR"/>
     <id>urn:funding-finder:nyserda:nyserda%3ARFQL5937</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -112,7 +112,7 @@
   </entry>
   <entry>
     <title>Appliance Upgrade Program- Application for Retailer and Contractor Enrollment</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z000000IrwXAAS"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0r8z000000IrwXAAS"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON5859</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -121,7 +121,7 @@
   </entry>
   <entry>
     <title>Charge Ready NY 2.0</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z000000CVOdAAO"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0r8z000000CVOdAAO"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON5367</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -129,7 +129,7 @@
   </entry>
   <entry>
     <title>Charge Ready NY 2.0 Equipment and Network Qualification Process</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z000000CBXPAA4"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0r8z000000CBXPAA4"/>
     <id>urn:funding-finder:nyserda:nyserda%3ARFQL5312</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -138,7 +138,7 @@
   </entry>
   <entry>
     <title>Municipal Permitting Modernization Program</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001CXCB6AAP"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001CXCB6AAP"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON5862</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -147,7 +147,7 @@
   </entry>
   <entry>
     <title>New York State Flexible Energy Technical Analysis</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z000000Dk3yAAC"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0r8z000000Dk3yAAC"/>
     <id>urn:funding-finder:nyserda:nyserda%3ARFQL5548</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -157,7 +157,7 @@
   </entry>
   <entry>
     <title>Owner's Representative Services for Multifamily Buildings</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00000JFllRAAT"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00000JFllRAAT"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON5899</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -166,7 +166,7 @@
   </entry>
   <entry>
     <title>Window Heat Pump Demonstration Program - Phase I</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00000Xse5XAAR"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00000Xse5XAAR"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON6037-PhaseI</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -175,7 +175,7 @@
   </entry>
   <entry>
     <title>Window Heat Pump Demonstration Program - Phase II</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00000iqxxLAAQ"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00000iqxxLAAQ"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON6037-PhaseII</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -184,7 +184,7 @@
   </entry>
   <entry>
     <title>Port Infrastructure</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00000XCAa9AAH"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00000XCAa9AAH"/>
     <id>urn:funding-finder:nyserda:nyserda%3ARFP6041</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -193,7 +193,7 @@
   </entry>
   <entry>
     <title>Community Decarbonization Fund - Financing for Disadvantaged Community Lenders</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z000000CXHrAAO"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0r8z000000CXHrAAO"/>
     <id>urn:funding-finder:nyserda:nyserda%3ARFP23</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -204,7 +204,7 @@
   </entry>
   <entry>
     <title>Grid Modernization Grid Enhancing Technologies</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr0000181NQbAAM"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr0000181NQbAAM"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON6149</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -214,7 +214,7 @@
   </entry>
   <entry>
     <title>Affordable Solar and Storage Predevelopment and Technical Assistance</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt0000000QnFIAA0"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rt0000000QnFIAA0"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON3414</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -223,7 +223,7 @@
   </entry>
   <entry>
     <title>Clean Energy Training Services</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001AcPtcAAF"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001AcPtcAAF"/>
     <id>urn:funding-finder:nyserda:nyserda%3ARFQL6152</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -236,7 +236,7 @@
   </entry>
   <entry>
     <title>The New York Truck-Voucher Incentive Program</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt0000000Qp7PAAS"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rt0000000Qp7PAAS"/>
     <id>urn:funding-finder:nyserda:nyserda%3ANYT-VIP</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -246,7 +246,7 @@
   </entry>
   <entry>
     <title>Financing Arrangements for High-Performance Affordable Housing</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt000001GOHEzAAP"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rt000001GOHEzAAP"/>
     <id>urn:funding-finder:nyserda:nyserda%3ARFP18</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -256,7 +256,7 @@
   </entry>
   <entry>
     <title>Technical Skills Training and Upskilling</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr000012gizTAAQ"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr000012gizTAAQ"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON6122</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -267,7 +267,7 @@
   </entry>
   <entry>
     <title>On-the-Job Training for Energy Efficiency and Clean Technology</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt000000MdOBsAAN"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rt000000MdOBsAAN"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON3982</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -277,7 +277,7 @@
   </entry>
   <entry>
     <title>Clean Energy Financing Arrangements</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt0000000QnxtAAC"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rt0000000QnxtAAC"/>
     <id>urn:funding-finder:nyserda:nyserda%3ARFP1</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -286,7 +286,7 @@
   </entry>
   <entry>
     <title>New York School Bus Incentive Program</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z000000EMPCAA4"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0r8z000000EMPCAA4"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON5552</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -296,7 +296,7 @@
   </entry>
   <entry>
     <title>Affordable Multifamily Program Upstate</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00000oeLiVAAU"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00000oeLiVAAU"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON6088</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -305,7 +305,7 @@
   </entry>
   <entry>
     <title>FlexTech Program</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt000000kXV1yAAG"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rt000000kXV1yAAG"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON4192</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -314,7 +314,7 @@
   </entry>
   <entry>
     <title>Multifamily Contractor Network</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr000004RjWbAAK"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr000004RjWbAAK"/>
     <id>urn:funding-finder:nyserda:nyserda%3ARFQL5906</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -323,7 +323,7 @@
   </entry>
   <entry>
     <title>NY-Sun Commercial / Industrial Incentive Program</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt0000000QnDbAAK"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rt0000000QnDbAAK"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON3082</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -332,7 +332,7 @@
   </entry>
   <entry>
     <title>NY-Sun Residential/Nonresidential Incentive Program</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt0000000QnxFAAS"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rt0000000QnxFAAS"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON2112</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -341,7 +341,7 @@
   </entry>
   <entry>
     <title>On-site Energy Manager Program</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rt000000Bn1EnAAJ"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rt000000Bn1EnAAJ"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON3701</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -350,7 +350,7 @@
   </entry>
   <entry>
     <title>Residential and Retail Energy Storage Market Acceleration Incentives Programs</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00000NEwgbAAD"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00000NEwgbAAD"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON6004</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -359,7 +359,7 @@
   </entry>
   <entry>
     <title>Revolving Loan Fund</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00000R29hoAAB"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00000R29hoAAB"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON6025</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>

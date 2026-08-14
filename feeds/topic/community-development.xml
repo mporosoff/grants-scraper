@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml</id>
-  <updated>2026-08-13T17:08:32Z</updated>
+  <updated>2026-08-14T02:40:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Veterans Legacy Grants Program</title>
@@ -323,7 +323,7 @@
   </entry>
   <entry>
     <title>Community Decarbonization Fund - Financing for Disadvantaged Community Lenders</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z000000CXHrAAO"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0r8z000000CXHrAAO"/>
     <id>urn:funding-finder:nyserda:nyserda%3ARFP23</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -593,7 +593,7 @@
     <category term="Technology development"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Posted | NSF GRANTED supports innovative models of research enterprise administrative development and workforce training infrastructure that promote sustainable research capacity and opportunities for economic impact in U.S. organizations. The research enterprise, broadly defined, includes research development and administration, research analytics, technology transfer and commercialization, corporate rela…</summary>
+    <summary>U.S. National Science Foundation | Posted | NSF GRANTED supports innovative models of research enterprise administrative development and workforce training infrastructure that promote sustainable research capacity and opportunities for economic impactin U.S. organizations. The research enterprise, broadly defined, includes research development and administration, research analytics, technology transfer and commercialization, corporate relat…</summary>
   </entry>
   <entry>
     <title>Tribal Colleges and Universities Program</title>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-08-13T17:08:32Z</updated>
+  <updated>2026-08-14T02:40:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -372,7 +372,7 @@
   </entry>
   <entry>
     <title>Independent Internal Audit Services</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001AbghyAAB"/>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001AbghyAAB"/>
     <id>urn:funding-finder:nyserda:nyserda%3ARFP6197</id>
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
@@ -494,17 +494,6 @@
     <category term="Materials science"/>
     <category term="Cybersecurity"/>
     <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
-  </entry>
-  <entry>
-    <title>Global Digital Threat Lab</title>
-    <link href="https://www.grants.gov/search-results-detail/363201"/>
-    <id>urn:funding-finder:grants-gov:363201</id>
-    <updated>2026-07-15T00:00:00Z</updated>
-    <author><name>Bureau of Democracy Human Rights and Labor</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Cybersecurity"/>
-    <summary>Bureau of Democracy Human Rights and Labor | Closes 2026-08-13 | Freedom of expression online faces threats globally from authoritarian governments employing sophisticated technology to restrict speech, control the flow of information, and chill dissenting voices. These challenges infringe on privacy; access to information; and the exercise of freedoms of expression, peaceful assembly, association, and religion or belief online. The misuse of commercial spyware…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 National Earthquake Hazards Reduction Program Individual State Earthquake Assistance</title>
@@ -679,5 +668,16 @@
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
     <summary>69A355 Research and Technology | Closes 2026-08-28 | The U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Interdisciplinary Transportation Law and Policy Technology Training Development program. This 24-month cooperative agreement aims to bridge the critical knowledge gap between fast-changing transportation technologies and our Nati…</summary>
+  </entry>
+  <entry>
+    <title>FY 2027 International Visitor Leadership Program’s National Program Agencies</title>
+    <link href="https://www.grants.gov/search-results-detail/362943"/>
+    <id>urn:funding-finder:grants-gov:362943</id>
+    <updated>2026-06-24T00:00:00Z</updated>
+    <author><name>Bureau Of Educational and Cultural Affairs</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Cybersecurity"/>
+    <summary>Bureau Of Educational and Cultural Affairs | Closes 2026-08-24 | The United States Department of State’s Bureau of Educational and Cultural Affairs’ Office of International Visitors (ECA/PE/V) announces an open competition for approximately five cooperative agreements to support the staff expenses and overhead costs of the FY 2027 International Visitor Leadership Program’s (IVLP) National Program Agencies (NPAs). Launched in 1940, the IVLP is the Department of …</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-08-13T17:08:32Z</updated>
+  <updated>2026-08-14T02:40:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -587,32 +587,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <summary>National Telecommunications and Information Admini | Closes 2026-09-09 | This NOFO is the fourth issued under NTIA’s Public Wireless Supply Chain Innovation Fund (PWSCIF or Innovation Fund). Titled “Solutions for AI-Native RAN,” the goal of this NOFO is to support the development of a secure compute environment to enable or leverage native artificial intelligence (“AI”) capabilities in the Radio Access Network (RAN) that generate revenue for operators, cost savings, an…</summary>
   </entry>
   <entry>
-    <title>EARLY STAGE INNOVATIONS (ESI26)</title>
-    <link href="https://www.grants.gov/search-results-detail/363066"/>
-    <id>urn:funding-finder:grants-gov:363066</id>
-    <updated>2026-07-06T00:00:00Z</updated>
-    <author><name>NASA Headquarters</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Space and aeronautics"/>
-    <category term="Technology development"/>
-    <summary>NASA Headquarters | Closes 2026-08-13 | The National Aeronautics and Space Administration (NASA) Headquarters has released the solicitation Early Stage Innovations (ESI), as an appendix to the Research and Technology Mission Directorate (RTMD) umbrella NASA Research Announcement (NRA) titled "Space Technology Research, Development, Demonstration, and Infusion 2026 (SpaceTech REDDI 2026).”. The solicitation is available by opening the NS…</summary>
-  </entry>
-  <entry>
-    <title>EARLY STAGE INNOVATIONS FOR IN SITU RESOURCE UTILIZATION (ESI26-ISRU)</title>
-    <link href="https://www.grants.gov/search-results-detail/363067"/>
-    <id>urn:funding-finder:grants-gov:363067</id>
-    <updated>2026-07-06T00:00:00Z</updated>
-    <author><name>NASA Headquarters</name></author>
-    <category term="Education and workforce"/>
-    <category term="Separations and membranes"/>
-    <category term="Space and aeronautics"/>
-    <category term="Technology development"/>
-    <summary>NASA Headquarters | Closes 2026-08-13 | The National Aeronautics and Space Administration (NASA) Headquarters has released the solicitation Early Stage Innovations for In Situ Resource Utilization (ESI26-ISRU), as an appendix to the Research and Technology Mission Directorate (RTMD) umbrella NASA Research Announcement (NRA) titled "Space Technology Research, Development, Demonstration, and Infusion 2026 (SpaceTech REDDI 2026).”. The sol…</summary>
-  </entry>
-  <entry>
     <title>Middle East Regional Cooperation (MERC)</title>
     <link href="https://www.grants.gov/search-results-detail/363070"/>
     <id>urn:funding-finder:grants-gov:363070</id>
@@ -689,6 +663,27 @@ a high level of innovation and creativity. The goal is to support the best young
     <title>GREGoRi Data Coordination and Outreach Center (U01, Clinical Trials Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/359279"/>
     <id>urn:funding-finder:grants-gov:359279</id>
+    <updated>2026-06-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Closes 2026-10-30 | The Genomics Research to Elucidate the Genetics of Rare Diseases: innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. The purpose of this Notice of Funding Opportunity is to establish the GREGo…</summary>
+  </entry>
+  <entry>
+    <title>GREGoRi Innovation Projects (U01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/359644"/>
+    <id>urn:funding-finder:grants-gov:359644</id>
+    <updated>2026-06-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Closes 2026-10-30 | The Genomics Research to Elucidate the Genetics of Rare Diseases: innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. This Notice of Funding Opportunity is intended to stimulate the development…</summary>
+  </entry>
+  <entry>
+    <title>GREGoRi Technology Integration Center (U01, Clinical Trials Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/359280"/>
+    <id>urn:funding-finder:grants-gov:359280</id>
     <updated>2026-06-18T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-08-13T17:08:32Z</updated>
+  <updated>2026-08-14T02:40:48Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
@@ -588,17 +588,6 @@
     <summary>NASA Headquarters | Closes 2026-10-20 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by 8/20/2026. See the full posting on NSPIRES for details. ﻿NOTICE: August 4, 2026. Going forward, a $0.09/SBU charge now applies to all proposing to Earth Science (ROSES Appendix A) to use any NASA high-end computing resource. Proposers must account for this in their budget, per the instructions provided in Secti…</summary>
   </entry>
   <entry>
-    <title>Global Digital Threat Lab</title>
-    <link href="https://www.grants.gov/search-results-detail/363201"/>
-    <id>urn:funding-finder:grants-gov:363201</id>
-    <updated>2026-07-15T00:00:00Z</updated>
-    <author><name>Bureau of Democracy Human Rights and Labor</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Cybersecurity"/>
-    <summary>Bureau of Democracy Human Rights and Labor | Closes 2026-08-13 | Freedom of expression online faces threats globally from authoritarian governments employing sophisticated technology to restrict speech, control the flow of information, and chill dissenting voices. These challenges infringe on privacy; access to information; and the exercise of freedoms of expression, peaceful assembly, association, and religion or belief online. The misuse of commercial spyware…</summary>
-  </entry>
-  <entry>
     <title>Public Wireless Supply Chain Innovation Fund Grant Program - Solutions for AI-Native RAN</title>
     <link href="https://www.grants.gov/search-results-detail/363179"/>
     <id>urn:funding-finder:grants-gov:363179</id>
@@ -644,20 +633,6 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>National Endowment for the Humanities | Closes 2026-09-16 | The program supports groups of two or more scholars increasing humanistic knowledge through the preparation of a manuscript for print publication, the creation of a scholarly digital project, or the planning of an international collaboration. Projects must pursue significant research questions and lead toward an interpretive product. This year’s competition is limited to projects on American histo…</summary>
-  </entry>
-  <entry>
-    <title>EARLY STAGE INNOVATIONS (ESI26)</title>
-    <link href="https://www.grants.gov/search-results-detail/363066"/>
-    <id>urn:funding-finder:grants-gov:363066</id>
-    <updated>2026-07-06T00:00:00Z</updated>
-    <author><name>NASA Headquarters</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Space and aeronautics"/>
-    <category term="Technology development"/>
-    <summary>NASA Headquarters | Closes 2026-08-13 | The National Aeronautics and Space Administration (NASA) Headquarters has released the solicitation Early Stage Innovations (ESI), as an appendix to the Research and Technology Mission Directorate (RTMD) umbrella NASA Research Announcement (NRA) titled "Space Technology Research, Development, Demonstration, and Infusion 2026 (SpaceTech REDDI 2026).”. The solicitation is available by opening the NS…</summary>
   </entry>
   <entry>
     <title>Improved Oil and Gas Recovery and Produced Water Management Technologies</title>
@@ -756,5 +731,33 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Arts and culture"/>
     <summary>National Institutes of Health | Closes 2026-10-19 | The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
+  </entry>
+  <entry>
+    <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
+    <link href="https://www.grants.gov/search-results-detail/362900"/>
+    <id>urn:funding-finder:grants-gov:362900</id>
+    <updated>2026-06-22T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Cybersecurity"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <category term="Data science"/>
+    <category term="Energy"/>
+    <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | Project Background, Goals, and Objectives: In an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will lea…</summary>
+  </entry>
+  <entry>
+    <title>Tribal Colleges Extension Program - Capacity Applications</title>
+    <link href="https://www.grants.gov/search-results-detail/362780"/>
+    <id>urn:funding-finder:grants-gov:362780</id>
+    <updated>2026-06-12T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Community development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>National Institute of Food and Agriculture | Closes 2026-08-14 | The TCEP-CA under assistance listing 10.517, supports informal, community-based extension projects that address agriculture, youths, economic development, healthy lifestyles, natural resources, or other topics important to Tribal communities. This NOFO will begin a new 4-year continuation funding cycle.</summary>
   </entry>
 </feed>
