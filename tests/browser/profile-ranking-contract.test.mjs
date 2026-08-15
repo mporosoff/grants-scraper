@@ -82,6 +82,34 @@ test("extracts concrete profile evidence and removes generic CV language", () =>
   assert.equal(apis.profile.minimumCoverage(4), 3);
 });
 
+test("keeps CV and ORCID terms in reranking but out of manual-profile admission", () => {
+  const apis = loadApis();
+  const catalog = catalogFor([
+    { title: "Electrochemistry and catalysis" },
+    { title: "Genomics and proteomics platform" },
+  ], apis.query);
+  const engine = apis.retrieval.create(catalog, apis.query);
+  const richProfile = {
+    ...profile,
+    cv_text: "Genomics proteomics",
+    orcid_text: "Genomics methods",
+  };
+  const options = {
+    catalog,
+    tokenize: apis.query.tokenize,
+    expandGroups: (value, expandOptions) => engine.expandGroups(value, expandOptions),
+  };
+  const full = apis.profile.buildTermQuery(richProfile, options);
+  const admission = apis.profile.buildTermQuery(richProfile, {
+    ...options,
+    admissionOnly: true,
+  });
+  const cvTerms = apis.query.tokenize("genomics proteomics");
+
+  assert.equal(cvTerms.some(term => full.terms.includes(term)), true);
+  assert.equal(cvTerms.some(term => admission.terms.includes(term)), false);
+});
+
 test("profile-only retrieval requires multiple independent concepts", () => {
   const apis = loadApis();
   const records = [
@@ -96,6 +124,7 @@ test("profile-only retrieval requires multiple independent concepts", () => {
     catalog,
     tokenize: apis.query.tokenize,
     expandGroups: (value, options) => engine.expandGroups(value, options),
+    admissionOnly: true,
   });
   const result = engine.score(built.query, {
     semantic: false,

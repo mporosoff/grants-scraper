@@ -38,11 +38,12 @@ const representativeCv = [
   "Machine learning for catalyst structure property relationships.",
 ].join(" ");
 
-function build(profile) {
+function build(profile, options = {}) {
   return profileApi.buildTermQuery(profile, {
     catalog,
     tokenize: queryApi.tokenize,
     expandGroups: (value, options) => engine.expandGroups(value, options),
+    ...options,
   });
 }
 
@@ -80,7 +81,7 @@ function rank(query, profile = null) {
 }
 
 function profileOnlyCounts(profile) {
-  const built = build(profile);
+  const built = build(profile, { admissionOnly: true });
   const count = minimumCoverage => {
     const result = engine.score(built.query, {
       semantic: false,

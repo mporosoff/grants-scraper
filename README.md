@@ -55,7 +55,11 @@ query, that evidence can reorder the query's admitted candidates but cannot
 broaden the candidate set. With a blank query, profile-only retrieval requires
 multiple independent profile concepts so a single generic overlap cannot admit
 hundreds of opportunities. Generic CV verbs such as “use,” “develop,” and
-“research” are excluded from the profile term model.
+“research” are excluded from the profile term model. When a research description
+or expertise keywords are available, those higher-confidence fields form the
+profile-only admission gate; CV and ORCID terms still rerank the admitted set
+but cannot broaden it. CV/ORCID terms serve as the fallback gate only when the
+manual profile fields are blank.
 
 Ordinary and profile-ranked search make zero AI calls. A user may enter an
 OpenAI or Anthropic key to:

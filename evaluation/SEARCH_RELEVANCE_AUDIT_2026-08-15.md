@@ -2,7 +2,7 @@
 
 Date: 2026-08-15
 Catalog: 1,469 current opportunities, `catalog-20260815T183714Z`
-App version after fix: `search-relevance-v5`
+App version after fix: `search-relevance-v6`
 
 ## Reported case
 
@@ -149,6 +149,14 @@ The profile extractor now suppresses generic CV verbs and counts synonym
 variants as one concept, so `AI`/`artificial intelligence` cannot satisfy
 multiple profile-only requirements by itself. Richer profiles use a bounded
 50% concept floor (maximum four) rather than a fixed one-term match.
+
+Live verification with a saved 28-term CV exposed a further admission/reranking
+coupling: broad résumé vocabulary could still expand a blank-query result set.
+The final policy uses research-description and expertise terms as the
+profile-only admission gate whenever they exist. CV and ORCID evidence remains
+in the full ranking score and in optional AI context, but cannot add candidates
+to that manually grounded set. CV/ORCID becomes the admission fallback only
+when both manual fields are blank.
 
 No artificial 1–2 second delay was added. Local second-stage reranking is cheap;
 the probe's median was 2.5 ms for query-only ranking, 8.6 ms with the screenshot

@@ -13,7 +13,7 @@
   const NEW_RELEVANT_MIN_SCORE_RATIO = .2;
   const NEW_RELEVANT_MIN_BOOST = 8;
   const PROMPT_VERSION = "result-aware-chat-v1";
-  const APP_VERSION = "search-relevance-v5";
+  const APP_VERSION = "search-relevance-v6";
   const CANONICAL_URL = "https://mporosoff.github.io/grants-scraper/";
   const SEARCH_QUERY = globalThis.FUNDING_SEARCH_QUERY;
   const RETRIEVAL_API = globalThis.FUNDING_RETRIEVAL;
@@ -139,6 +139,8 @@
       active: false,
       query: "",
       terms: [],
+      admissionQuery: "",
+      admissionTerms: [],
       acronymExpansions: [],
       saveTimer: null,
     },
@@ -617,11 +619,12 @@
     return searchEngine.score(query, { ...options, context });
   }
 
-  function profileTermQuery(profile) {
+  function profileTermQuery(profile, options = {}) {
     return PROFILE_RANKING_API.buildTermQuery(profile, {
       catalog,
       tokenize,
       expandGroups: (value, options) => searchEngine.expandGroups(value, options),
+      ...options,
     });
   }
 
@@ -691,8 +694,11 @@
   function refreshProfileQuery() {
     state.profile.value = PROFILE_API.sanitizeProfile(currentProfile());
     const built = profileTermQuery(state.profile.value);
+    const admission = profileTermQuery(state.profile.value, { admissionOnly: true });
     state.profile.query = built.query;
     state.profile.terms = built.terms;
+    state.profile.admissionQuery = admission.query;
+    state.profile.admissionTerms = admission.terms;
     state.profile.acronymExpansions = built.acronymExpansions;
     return built;
   }
@@ -831,8 +837,11 @@
       ? "sk-ant-…"
       : "sk-…";
     const built = profileTermQuery(state.profile.value);
+    const admission = profileTermQuery(state.profile.value, { admissionOnly: true });
     state.profile.query = built.query;
     state.profile.terms = built.terms;
+    state.profile.admissionQuery = admission.query;
+    state.profile.admissionTerms = admission.terms;
     state.profile.acronymExpansions = built.acronymExpansions;
     renderCvStatus();
     renderOrcidStatus();
@@ -1068,16 +1077,27 @@
       ? hybridScores(state.profile.query, {
           semantic: false,
           coverage: false,
-          minimumCoverage: profileOnly
-            ? PROFILE_RANKING_API.minimumCoverage(state.profile.terms.length)
-            : 0,
+          minimumCoverage: 0,
         })
       : {
           scores: new Float64Array(catalog.record_count),
           lexicalScores: new Float64Array(catalog.record_count),
           hasTerms: false,
         };
-    const hasTerms = direct.hasTerms || profiled.hasTerms;
+    const gateTerms = state.profile.admissionTerms.length
+      ? state.profile.admissionTerms
+      : state.profile.terms;
+    const gateQuery = state.profile.admissionTerms.length
+      ? state.profile.admissionQuery
+      : state.profile.query;
+    const profileGate = profileOnly
+      ? hybridScores(gateQuery, {
+          semantic: false,
+          coverage: false,
+          minimumCoverage: PROFILE_RANKING_API.minimumCoverage(gateTerms.length),
+        })
+      : profiled;
+    const hasTerms = direct.hasTerms || profileGate.hasTerms;
     const model = buildPreferenceModel();
     state.preferenceModel = model;
     const matches = [];
@@ -1086,7 +1106,7 @@
       if (rejectedNofoIds.has(recordId(record))) return;
       if (!recordPassesFilters(record)) return;
       if (direct.hasTerms && direct.scores[index] <= 0) return;
-      if (!direct.hasTerms && profiled.hasTerms && profiled.scores[index] <= 0) return;
+      if (!direct.hasTerms && profileGate.hasTerms && profileGate.scores[index] <= 0) return;
       let score = direct.scores[index] * 2 + profiled.scores[index];
       const lexicalScore = direct.lexicalScores[index] * 2 + profiled.lexicalScores[index];
       if (state.profile.active) {
@@ -2721,12 +2741,14 @@
         ? "Profile-ranked catalog"
         : "Public catalog";
     $("results-toolbar").classList.remove("search-not-started");
+    const profileGateTermCount = state.profile.admissionTerms.length
+      || state.profile.terms.length;
     $("results-toolbar").dataset.profileTermCount = state.profile.active
-      ? String(state.profile.terms.length)
+      ? String(profileGateTermCount)
       : "0";
     $("results-toolbar").dataset.profileMinimumCoverage = state.profile.active
       && !state.query
-      ? String(PROFILE_RANKING_API.minimumCoverage(state.profile.terms.length))
+      ? String(PROFILE_RANKING_API.minimumCoverage(profileGateTermCount))
       : "0";
     $("result-range").textContent = display.length
       ? `Showing ${start + 1} to ${Math.min(start + PAGE_SIZE, display.length)} of ${display.length.toLocaleString()}`

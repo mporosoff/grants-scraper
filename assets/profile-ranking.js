@@ -19,7 +19,13 @@
 
   function buildTermQuery(
     profile,
-    { catalog, tokenize, expandGroups, maximumTerms = DEFAULT_MAXIMUM_TERMS } = {},
+    {
+      catalog,
+      tokenize,
+      expandGroups,
+      maximumTerms = DEFAULT_MAXIMUM_TERMS,
+      admissionOnly = false,
+    } = {},
   ) {
     if (!profile || !catalog?.search_index?.postings || !tokenize || !expandGroups) {
       return { query: "", terms: [], acronymExpansions: [] };
@@ -73,12 +79,14 @@
 
     addSource(profile.research_description, 2.2);
     addSource(profile.expertise_keywords, 5);
-    addSource(profile.cv_text, 0.42);
-    addSource(profile.orcid_text, 0.72);
-    if (profile.career_stage === "early_career") {
-      addSource("early career investigator new investigator", 5);
-    } else if (profile.career_stage === "trainee") {
-      addSource("trainee postdoctoral fellowship training", 5);
+    if (!admissionOnly) {
+      addSource(profile.cv_text, 0.42);
+      addSource(profile.orcid_text, 0.72);
+      if (profile.career_stage === "early_career") {
+        addSource("early career investigator new investigator", 5);
+      } else if (profile.career_stage === "trainee") {
+        addSource("trainee postdoctoral fellowship training", 5);
+      }
     }
 
     const terms = [...weights]
