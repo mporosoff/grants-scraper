@@ -760,6 +760,15 @@ class DiscoverabilityTests(unittest.TestCase):
         "topic_areas": [],
         "document_search_text": None,
     }
+    ONR_UMBRELLA = {
+        "opportunity_number": "N0001425SB001",
+        "title": "FY25 Long Range Broad Agency Announcement (BAA) for Navy "
+                 "and Marine Corps Science and Technology",
+        "agency": "Office of Naval Research",
+        "description": "Basic and applied scientific research.",
+        "topic_areas": [],
+        "document_search_text": None,
+    }
 
     def test_umbrella_foa_gains_program_topics_and_terms(self):
         from scripts.sources.discoverability import augment_records
@@ -799,6 +808,99 @@ class DiscoverabilityTests(unittest.TestCase):
         self.assertEqual(augment_records([record]), 0)
         self.assertEqual(record["topic_areas"], first_topics)
         self.assertEqual(record["document_search_text"], first_text)
+
+    def test_onr_long_range_baa_gains_official_program_scope(self):
+        from scripts.sources.discoverability import augment_records
+
+        record = dict(self.ONR_UMBRELLA)
+        self.assertEqual(augment_records([record]), 1)
+
+        text = (record["document_search_text"] or "").casefold()
+        for term in (
+            "catalysis", "electrochemistry", "selective extraction",
+            "artificial intelligence", "quantum sensing",
+        ):
+            self.assertIn(term, text)
+        self.assertIn("Catalysis and reaction engineering", record["topic_areas"])
+        self.assertIn("Quantum science", record["topic_areas"])
+        evidence = record["discoverability_evidence"][0]
+        self.assertEqual(evidence["rule_id"], "onr-long-range-baa")
+        self.assertTrue(all(url.startswith("https://www.onr.navy.mil/")
+                            for url in evidence["official_urls"]))
+
+    def test_generic_baa_label_does_not_trigger_umbrella_recall(self):
+        from scripts.sources.discoverability import augment_records
+
+        unrelated = {
+            "opportunity_number": "STATE-BAA-1",
+            "title": "Broad Agency Announcement for Public Diplomacy",
+            "agency": "Department of State",
+            "description": "Education and cultural exchange programs.",
+            "topic_areas": [],
+            "document_search_text": "",
+        }
+
+        self.assertEqual(augment_records([unrelated]), 0)
+        self.assertNotIn("discoverability_evidence", unrelated)
+
+    def test_onr_title_fallback_requires_agency_and_notice_wording(self):
+        from scripts.sources.discoverability import augment_records
+
+        for record in (
+            {
+                "title": self.ONR_UMBRELLA["title"],
+                "agency": "Another agency",
+                "topic_areas": [],
+            },
+            {
+                "title": "Focused naval materials opportunity",
+                "agency": "Office of Naval Research",
+                "topic_areas": [],
+            },
+        ):
+            with self.subTest(record=record):
+                self.assertEqual(augment_records([record]), 0)
+
+    def test_eere_acronym_requires_a_whole_token(self):
+        from scripts.sources.discoverability import augment_records
+
+        false_positive = {
+            "title": "Research on intelligent engineered systems",
+            "agency": "National Science Foundation",
+            "description": "Fundamental engineering research.",
+            "topic_areas": [],
+        }
+        true_positive = {
+            "title": "EERE advanced manufacturing program",
+            "agency": "Department of Energy",
+            "description": "Energy technology research.",
+            "topic_areas": [],
+        }
+
+        self.assertEqual(augment_records([false_positive]), 0)
+        self.assertEqual(augment_records([true_positive]), 1)
+        self.assertIn("Energy", true_positive["topic_areas"])
+
+    def test_rule_contributions_are_removed_when_record_stops_matching(self):
+        from scripts.sources.discoverability import augment_records
+
+        record = {
+            "title": "EERE advanced manufacturing program",
+            "agency": "Department of Energy",
+            "description": "Energy technology research.",
+            "topic_areas": ["Technology development"],
+            "document_search_text": "official source evidence",
+        }
+        self.assertEqual(augment_records([record]), 1)
+        self.assertIn("renewable energy", record["document_search_text"])
+        self.assertIn("Energy", record["topic_areas"])
+
+        record["title"] = "Focused engineering methods program"
+        self.assertEqual(augment_records([record]), 1)
+        self.assertEqual(record["document_search_text"], "official source evidence")
+        self.assertEqual(record["topic_areas"], ["Technology development"])
+        self.assertNotIn("discoverability_contribution", record)
+        self.assertNotIn("discoverability_augmented", record)
 
 
 class NSFCBETSourceTests(unittest.TestCase):

@@ -161,6 +161,7 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
         ])))
         for record in records
     ]
+    document_phrase_tokens = [value.split() for value in document_phrase_text]
     topic_documents: dict[str, list[int]] = {}
     for document_id, topics in enumerate(document_topics):
         for topic in topics:
@@ -173,6 +174,21 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
             exact_document_cache[term] = set(values[::2])
         return exact_document_cache[term]
 
+    def terms_within_window(
+        document_id: int,
+        terms: tuple[str, ...] | list[str],
+        maximum_span: int,
+    ) -> bool:
+        required = tuple(dict.fromkeys(term for term in terms if term))
+        span = max(len(required), int(maximum_span or len(required)))
+        tokens = document_phrase_tokens[document_id]
+        for start, token in enumerate(tokens):
+            if token not in required:
+                continue
+            if set(required) <= set(tokens[start:start + span]):
+                return True
+        return False
+
     for group in query_groups:
         group_terms = group["terms"]
         group_documents: set[int] = set()
@@ -183,6 +199,10 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
             for term, resolution_weight in _posting_terms(
                 query_term, postings, index_terms, terms_by_length
             ):
+                # Typo recovery applies to the user's term, not to controlled
+                # synonym/word-family alternatives inside the same concept.
+                if query_term != group["source"] and term != query_term:
+                    continue
                 values = postings[term]
                 document_frequency = len(values) // 2
                 inverse_frequency = math.log(
@@ -214,27 +234,42 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
             for value in group.get("evidence_phrases") or ()
             if tokenize(value)
         )
-        group_documents = {
-            document_id
-            for document_id, evidence in group_evidence.items()
-            if evidence >= required_evidence
-            and (
-                not alternatives
-                or any(
+        evidence_windows = tuple(group.get("evidence_windows") or ())
+        evidence_mode = group.get("evidence_mode") or "all"
+
+        def has_required_evidence(document_id: int) -> bool:
+            checks: list[bool] = []
+            if alternatives:
+                checks.append(any(
                     all(
                         document_id in exact_documents(term)
                         for term in alternative
                     )
                     for alternative in alternatives
-                )
-            )
-            and (
-                not evidence_phrases
-                or any(
+                ))
+            if evidence_phrases:
+                checks.append(any(
                     f" {phrase} " in f" {document_phrase_text[document_id]} "
                     for phrase in evidence_phrases
-                )
+                ))
+            if evidence_windows:
+                checks.append(any(
+                    terms_within_window(
+                        document_id,
+                        window.get("terms") or (),
+                        int(window.get("maximum_span") or 0),
+                    )
+                    for window in evidence_windows
+                ))
+            return not checks or (
+                any(checks) if evidence_mode == "any" else all(checks)
             )
+
+        group_documents = {
+            document_id
+            for document_id, evidence in group_evidence.items()
+            if evidence >= required_evidence
+            and has_required_evidence(document_id)
         }
         for document_id in group_documents:
             lexical_scores[document_id] += group_lexical_scores.get(document_id, 0.0)
@@ -299,14 +334,15 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
             if trigram in source_text:
                 lexical_scores[document_id] += 40
 
+    # Keep candidate admission lexical. Catalog topics can rerank a record
+    # that already satisfies the query, but cannot create topic-wide matches.
+    # Two concepts are conjunctive; longer searches keep a 60% coverage floor.
     minimum_coverage = (
-        max(2, math.ceil(len(query_groups) * 0.38))
-        if len(query_groups) >= 3
-        else 2
-        if len(query_groups) >= 2 and any(
-            group.get("required_always") for group in query_groups
-        )
-        else 0
+        0
+        if not query_groups
+        else len(query_groups)
+        if len(query_groups) <= 2
+        else math.ceil(len(query_groups) * 0.6)
     )
     required_groups = [
         group for group in query_groups if group.get("required_unless_topic")

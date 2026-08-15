@@ -50,6 +50,29 @@ BASIC_ENERGY_SCIENCES_EVIDENCE = (
     ("basic", "energy", "science"),
     ("bes",),
 )
+CATALYSIS_CONCEPT = (
+    "catalyst catalysis catalytic electrocatalysis photocatalysis thermocatalysis"
+)
+CATALYSIS_EVIDENCE = (
+    ("catalysi",),
+    ("catalytic",),
+    ("electrocatalysi",),
+    ("photocatalysi",),
+    ("thermocatalysi",),
+)
+CATALYST_CONTEXT_WINDOWS = tuple(
+    {"terms": ("catalyst", term), "maximum_span": 6}
+    for term in (
+        "chemical", "reaction", "reactor", "electrochemical", "heterogeneous",
+        "homogeneous", "synthesis", "enzyme", "design", "characterization",
+    )
+)
+AI_CONCEPT = "ai artificial intelligence machine learning"
+AI_EVIDENCE = (
+    ("ai",),
+    ("artificial", "intelligence"),
+    ("machine", "learn"),
+)
 
 QUERY_ALIASES: dict[str, str] = {
     "co2": "carbon dioxide",
@@ -125,6 +148,9 @@ ALWAYS_EXPAND_ALIASES = {
     if expansion in {PFAS_CONCEPT, RARE_EARTH_CONCEPT}
     or term == "extraction"
 }
+PFAS_DESCRIPTOR_TERMS = {
+    "acid", "chemical", "compound", "substance", "sulfonate",
+}
 
 QUERY_VARIANTS: dict[str, tuple[str, ...]] = {
     "analyse": ("analysi",),
@@ -168,6 +194,8 @@ def _concept_group(
     minimum_evidence: int = 1,
     evidence_alternatives: tuple[tuple[str, ...], ...] = (),
     evidence_phrases: tuple[str, ...] = (),
+    evidence_windows: tuple[dict, ...] = (),
+    evidence_mode: str = "all",
     required_unless_topic: str = "",
     required_always: bool = False,
 ) -> dict:
@@ -183,6 +211,8 @@ def _concept_group(
         "minimum_evidence": minimum_evidence,
         "evidence_alternatives": evidence_alternatives,
         "evidence_phrases": evidence_phrases,
+        "evidence_windows": evidence_windows,
+        "evidence_mode": evidence_mode,
         "required_unless_topic": required_unless_topic,
         "required_always": required_always,
     }
@@ -207,6 +237,9 @@ def expand_query_groups(
     groups: list[dict] = []
     direct_terms = list(dict.fromkeys(tokenize(value)))
     direct_term_set = set(direct_terms)
+    has_pfas_alias = any(
+        QUERY_ALIASES.get(term) == PFAS_CONCEPT for term in direct_terms
+    )
     rare_earth_phrase = bool(re.search(
         r"\brare[\s-]+earth(?:[\s-]+elements?)?\b", value, re.I
     ))
@@ -222,6 +255,36 @@ def expand_query_groups(
     )
     emitted: set[str] = set()
     for term in direct_terms:
+        if has_pfas_alias and term in PFAS_DESCRIPTOR_TERMS:
+            continue
+        if term in {"catalyst", "catalysi", "catalytic"}:
+            if "catalysis" in emitted:
+                continue
+            emitted.add("catalysis")
+            groups.append(_concept_group(
+                term,
+                CATALYSIS_CONCEPT,
+                direct_term_set,
+                literal_terms=(term,),
+                minimum_evidence=1,
+                evidence_alternatives=CATALYSIS_EVIDENCE,
+                evidence_windows=CATALYST_CONTEXT_WINDOWS,
+                evidence_mode="any",
+            ))
+            continue
+        if term == "ai":
+            if "artificial-intelligence" in emitted:
+                continue
+            emitted.add("artificial-intelligence")
+            groups.append(_concept_group(
+                term,
+                AI_CONCEPT,
+                direct_term_set,
+                literal_terms=("ai",),
+                minimum_evidence=1,
+                evidence_alternatives=AI_EVIDENCE,
+            ))
+            continue
         if (
             (basic_energy_sciences and term in {"basic", "energy", "science"})
             or (basic_energy_sciences and term == "bes")

@@ -40,6 +40,31 @@
     Object.freeze(["basic", "energy", "science"]),
     Object.freeze(["bes"]),
   ]);
+  // "Catalyst" is highly polysemous in funding notices: programs describe
+  // themselves as a catalyst for change, and BioData Catalyst is a platform.
+  // Treat the scientific word family as one concept, but require chemistry or
+  // reaction evidence before a literal "catalyst" occurrence can satisfy it.
+  const CATALYSIS_CONCEPT = "catalyst catalysis catalytic electrocatalysis photocatalysis thermocatalysis";
+  const CATALYSIS_EVIDENCE = Object.freeze([
+    Object.freeze(["catalysi"]),
+    Object.freeze(["catalytic"]),
+    Object.freeze(["electrocatalysi"]),
+    Object.freeze(["photocatalysi"]),
+    Object.freeze(["thermocatalysi"]),
+  ]);
+  const CATALYST_CONTEXT_WINDOWS = Object.freeze([
+    "chemical", "reaction", "reactor", "electrochemical", "heterogeneous",
+    "homogeneous", "synthesis", "enzyme", "design", "characterization",
+  ].map(term => Object.freeze({
+    terms: Object.freeze(["catalyst", term]),
+    maximumSpan: 6,
+  })));
+  const AI_CONCEPT = "ai artificial intelligence machine learning";
+  const AI_EVIDENCE = Object.freeze([
+    Object.freeze(["ai"]),
+    Object.freeze(["artificial", "intelligence"]),
+    Object.freeze(["machine", "learn"]),
+  ]);
 
   // Keep this deliberately conservative. Ambiguous shorthand (for example,
   // AD, AM, or AR) creates worse search results than leaving it literal.
@@ -121,6 +146,9 @@
       || term === "extraction"
     )),
   );
+  const PFAS_DESCRIPTOR_TERMS = new Set([
+    "acid", "chemical", "compound", "substance", "sulfonate",
+  ]);
 
   const STOP_WORDS = new Set([
     "a", "about", "after", "all", "also", "an", "and", "any", "application",
@@ -355,6 +383,8 @@
       minimumEvidence: Number(options.minimumEvidence || 1),
       evidenceAlternatives: options.evidenceAlternatives || null,
       evidencePhrases: options.evidencePhrases || null,
+      evidenceWindows: options.evidenceWindows || null,
+      evidenceMode: options.evidenceMode || "all",
       requiredUnlessTopic: options.requiredUnlessTopic || "",
       requiredAlways: options.requiredAlways === true,
       expansion: {
@@ -379,6 +409,7 @@
   function expandGroups(value, hasIndexedTerm = () => false, options = {}) {
     const directTerms = [...new Set(tokenize(value))];
     const directTermSet = new Set(directTerms);
+    const hasPfasAlias = directTerms.some(term => QUERY_ALIASES[term] === PFAS_CONCEPT);
     const normalizedValue = normalizeText(value);
     const hasRareEarthPhrase = /\brare[\s-]+earth(?:[\s-]+elements?)?\b/i.test(normalizedValue);
     const hasIonicLiquidPhrase = /\bionic[\s-]+liquids?\b/i.test(normalizedValue);
@@ -396,6 +427,33 @@
     let acronymAttempts = 0;
     const emittedConcepts = new Set();
     return directTerms.flatMap(term => {
+      // Recognized names such as "perfluorooctanoic acid" and "forever
+      // chemicals" are one PFAS concept, not two independent requirements.
+      if (hasPfasAlias && PFAS_DESCRIPTOR_TERMS.has(term)) return [];
+      if (["catalyst", "catalysi", "catalytic"].includes(term)) {
+        if (emittedConcepts.has("catalysis")) return [];
+        emittedConcepts.add("catalysis");
+        return [conceptGroup(term, CATALYSIS_CONCEPT, directTermSet, {
+          literalTerms: [term],
+          minimumEvidence: 1,
+          evidenceAlternatives: CATALYSIS_EVIDENCE,
+          evidenceWindows: CATALYST_CONTEXT_WINDOWS,
+          evidenceMode: "any",
+          phrase: "scientific catalysis",
+          basis: "guarded scientific word family",
+        })];
+      }
+      if (term === "ai") {
+        if (emittedConcepts.has("artificial-intelligence")) return [];
+        emittedConcepts.add("artificial-intelligence");
+        return [conceptGroup(term, AI_CONCEPT, directTermSet, {
+          literalTerms: ["ai"],
+          minimumEvidence: 1,
+          evidenceAlternatives: AI_EVIDENCE,
+          phrase: "artificial intelligence and machine learning",
+          basis: "deterministic technical abbreviation",
+        })];
+      }
       if (
         (hasBasicEnergySciences && ["basic", "energy", "science"].includes(term))
         || (hasBasicEnergySciences && term === "bes")

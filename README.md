@@ -33,8 +33,10 @@ funding” action. Users can explicitly save a reusable researcher profile on
 that device; saving it does not launch a competing search. Ordinary retrieval
 uses a local hybrid scorer: BM25 lexical relevance, conservative spelling and
 scientific-word-form recovery, meaningful coverage for multi-term searches,
-and topic relationships inferred from the current catalog. Exact titles and
-opportunity numbers remain highest priority. The postings index contains terms
+and catalog-topic signals that rerank—but never independently admit—lexical
+candidates. Two-concept searches require both concepts; longer searches use a
+60% concept-coverage floor. Exact titles and opportunity numbers remain highest
+priority. The postings index contains terms
 found in the records; it is not a pre-approved list of queries. Common,
 unambiguous abbreviations add query-side context without requiring a catalog
 rebuild. Unfamiliar acronyms can also be resolved from matching full phrases in
@@ -46,6 +48,14 @@ liquids/ILs must provide compatible evidence instead of matching generic words
 such as “processing” or “critical.” Broad BAAs and umbrella solicitations are
 indexed from evidence-backed subprogram text when the official notice provides
 it.
+
+Research descriptions, expertise keywords, CV text, ORCID topics, applicant
+type, and career stage feed a separate profile reranker. With an explicit
+query, that evidence can reorder the query's admitted candidates but cannot
+broaden the candidate set. With a blank query, profile-only retrieval requires
+multiple independent profile concepts so a single generic overlap cannot admit
+hundreds of opportunities. Generic CV verbs such as “use,” “develop,” and
+“research” are excluded from the profile term model.
 
 Ordinary and profile-ranked search make zero AI calls. A user may enter an
 OpenAI or Anthropic key to:
@@ -183,7 +193,8 @@ support it.
 | `index.html` | Redirects GitHub Pages to the application |
 | `match_explorer.html` | Public search and AI-refinement interface |
 | `assets/app.js` | Search, cited source evidence, review/export, profile ranking, AI matching, and chat |
-| `assets/search-retrieval.js` | Local hybrid BM25, fuzzy, coverage, and catalog-topic retrieval |
+| `assets/search-retrieval.js` | Local BM25 candidate retrieval, fuzzy matching, concept coverage, and topic reranking |
+| `assets/profile-ranking.js` | Weighted profile/CV terms, profile-only concept coverage, eligibility, and career-fit evidence |
 | `assets/team-researchers.js` | Device-local external researchers and shared hybrid researcher-to-opportunity matching |
 | `assets/search-query.js` | Conservative abbreviation and scientific word-form expansion |
 | `assets/profile.js` | Local profile/feedback storage and CV extraction |
@@ -202,6 +213,7 @@ support it.
 | `scripts/enrich_catalog.py` | Official detail reconciliation and FOA selection |
 | `scripts/extract_document_evidence.py` | Official PDF/HTML retrieval, versioning, deterministic fact extraction, and citations |
 | `scripts/program_areas.py` | Evidence-backed controlled vocabulary for discoverability in official notices |
+| `scripts/sources/discoverability.py` | Audited official-scope registry for opaque umbrella FOAs and BAAs |
 | `scripts/sources/` | Validated multi-source adapters, lifecycle, health gates, and merge |
 | `scripts/build_feeds.py` | Static all/topic/source-type Atom feed generator |
 | `scripts/build_changes.py` | Rolling new/deadline/amendment/closing/closure event feeds |

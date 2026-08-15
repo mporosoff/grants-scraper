@@ -242,6 +242,24 @@ class TokenTests(unittest.TestCase):
             ),
         )
 
+    def test_artificial_intelligence_is_not_tagged_as_arts(self):
+        self.assertNotIn(
+            "Arts and culture",
+            topic_areas(
+                "Artificial intelligence for scientific discovery",
+                "Develop reliable AI systems and machine learning methods.",
+                [],
+            ),
+        )
+        self.assertIn(
+            "Arts and culture",
+            topic_areas(
+                "Community arts program",
+                "Support museums, music, and cultural organizations.",
+                [],
+            ),
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -7,19 +7,19 @@
   const MAX_AI_CANDIDATES = 32;
   const MAX_AI_MATCHES = 12;
   const MAX_CHAT_RESULTS = 20;
-  const MAX_PROFILE_TERMS = 28;
   const MAX_AI_CV_CHARS = 12_000;
   const MAX_NOFO_AI_CHARS = 145_000;
   const NEW_RELEVANT_MAX_AGE_DAYS = 14;
   const NEW_RELEVANT_MIN_SCORE_RATIO = .2;
   const NEW_RELEVANT_MIN_BOOST = 8;
   const PROMPT_VERSION = "result-aware-chat-v1";
-  const APP_VERSION = "layout-ai-recovery-v1";
+  const APP_VERSION = "search-relevance-v3";
   const CANONICAL_URL = "https://mporosoff.github.io/grants-scraper/";
   const SEARCH_QUERY = globalThis.FUNDING_SEARCH_QUERY;
   const RETRIEVAL_API = globalThis.FUNDING_RETRIEVAL;
   const ORCID_API = globalThis.FUNDING_ORCID;
   const PROFILE_API = globalThis.FUNDING_PROFILE;
+  const PROFILE_RANKING_API = globalThis.FUNDING_PROFILE_RANKING;
   const NOFO_API = globalThis.FUNDING_NOFO;
   const REVIEW_API = globalThis.FUNDING_REVIEW;
   const CREDENTIAL_API = globalThis.FUNDING_CREDENTIALS;
@@ -607,13 +607,7 @@
   }
 
   function profileAcronymContext(profile = state.profile.value) {
-    if (!profile) return "";
-    return [
-      String(profile.research_description || "").slice(0, 6_000),
-      String(profile.expertise_keywords || "").slice(0, 4_000),
-      String(profile.cv_text || "").slice(0, 10_000),
-      String(profile.orcid_text || "").slice(0, 10_000),
-    ].filter(Boolean).join(". ").slice(0, 24_000);
+    return PROFILE_RANKING_API.context(profile);
   }
 
   function hybridScores(query, options = {}) {
@@ -624,83 +618,19 @@
   }
 
   function profileTermQuery(profile) {
-    if (!profile) return { query: "", terms: [], acronymExpansions: [] };
-    const weights = new Map();
-    const acronymExpansions = new Map();
-    const acronymContext = profileAcronymContext(profile);
-    const addSource = (value, sourceWeight) => {
-      const counts = new Map();
-      tokenize(value).forEach(term => counts.set(term, (counts.get(term) || 0) + 1));
-      if (searchEngine?.expandGroups) {
-        searchEngine.expandGroups(value, { context: acronymContext }).forEach(group => {
-          if (group.expansion?.kind === "contextual_acronym") {
-            acronymExpansions.set(group.source, {
-              source: group.source,
-              phrase: group.expansion.phrase,
-              confidence: group.expansion.confidence,
-              basis: group.expansion.basis,
-            });
-          }
-          group.terms.forEach(item => {
-            if (item.term === group.source) return;
-            counts.set(item.term, (counts.get(item.term) || 0) + Number(item.weight || 0));
-          });
-        });
-      }
-      for (const [term, count] of counts) {
-        const postings = catalog.search_index.postings[term];
-        if (!postings?.length) continue;
-        const documentFrequency = postings.length / 2;
-        const inverseFrequency = Math.log(
-          1 + ((catalog.record_count - documentFrequency + .5) / (documentFrequency + .5)),
-        );
-        const score = sourceWeight * (1 + Math.min(2.2, Math.log1p(count))) * inverseFrequency;
-        weights.set(term, (weights.get(term) || 0) + score);
-      }
-    };
-    addSource(profile.research_description, 2.2);
-    addSource(profile.expertise_keywords, 5);
-    addSource(profile.cv_text, .42);
-    addSource(profile.orcid_text, .72);
-    if (profile.career_stage === "early_career") {
-      addSource("early career investigator new investigator", 5);
-    } else if (profile.career_stage === "trainee") {
-      addSource("trainee postdoctoral fellowship training", 5);
-    }
-    const terms = [...weights]
-      .sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0]))
-      .slice(0, MAX_PROFILE_TERMS)
-      .map(([term]) => term);
-    return {
-      query: terms.join(" "),
-      terms,
-      acronymExpansions: [...acronymExpansions.values()],
-    };
+    return PROFILE_RANKING_API.buildTermQuery(profile, {
+      catalog,
+      tokenize,
+      expandGroups: (value, options) => searchEngine.expandGroups(value, options),
+    });
   }
 
   function applicantFitBonus(record, context) {
-    const values = (record.applicant_types || []).join(" ").toLowerCase();
-    if (!values) return 0;
-    if (values.includes("unrestricted")) return .8;
-    const patterns = {
-      higher_education: /institution(?:s)? of higher education/,
-      nonprofit: /nonprofit/,
-      small_business: /small business/,
-      individual: /individual/,
-      government: /government|county|city|township|school district|public housing|special district/,
-      tribal: /tribal|native american/,
-      other: /other|unrestricted/,
-    };
-    return patterns[context]?.test(values) ? 2.4 : -.8;
+    return PROFILE_RANKING_API.applicantFitBonus(record, context);
   }
 
   function careerFitBonus(record, stage) {
-    if (stage === "early_career") return record.career_stage_signal ? 2.6 : 0;
-    if (stage !== "trainee") return 0;
-    const text = `${record.title || ""} ${record.description || ""}`.toLowerCase();
-    return /\b(?:trainee|postdoc|postdoctoral|fellowship|graduate student)\b/.test(text)
-      ? 2.2
-      : 0;
+    return PROFILE_RANKING_API.careerFitBonus(record, stage);
   }
 
   function profileHasContent(profile = state.profile.value) {
@@ -1133,8 +1063,15 @@
 
   function computeMatches(query, sortMode = state.sort, retrievalOptions = {}) {
     const direct = hybridScores(query, retrievalOptions);
+    const profileOnly = state.profile.active && !direct.hasTerms;
     const profiled = state.profile.active
-      ? hybridScores(state.profile.query, { semantic: false, coverage: false })
+      ? hybridScores(state.profile.query, {
+          semantic: false,
+          coverage: false,
+          minimumCoverage: profileOnly
+            ? PROFILE_RANKING_API.minimumCoverage(state.profile.terms.length)
+            : 0,
+        })
       : {
           scores: new Float64Array(catalog.record_count),
           lexicalScores: new Float64Array(catalog.record_count),

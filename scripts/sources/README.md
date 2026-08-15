@@ -34,6 +34,7 @@ generated catalog.
 | `base.py` | `CanonicalOpportunity` model + `SourceAdapter` base class. Expands the few fields you have into a full catalog record. |
 | `registry.py` | Adapter registration + `collect()` with per-adapter error isolation. |
 | `merge.py` | Applies atomic per-source refresh/fallback, merges/dedups, rebuilds index/facets/counts, validates, and writes the catalog plus snapshot cache. `integrate()` is the entry point. |
+| `discoverability.py` | Evidence registry for opaque umbrella calls. Matches scoped identifiers/signals, records official source URLs, and makes injected terms reversible. |
 | `validate.py` | Currentness, official-link, date-plausibility, and source health gates. |
 | `http.py` | Polite HTTP client (UA, timeouts, size cap, pacing) for network adapters. |
 | `adapters/` | Bundled adapters. `_template.py` to copy; `rss.py`; `sample.py` (offline demo); verified `nyserda.py`; and the disabled `ur_infoready.py` shell. |
@@ -87,6 +88,16 @@ python -m scripts.sources merge --catalog data/opportunities.js --cache data/sou
 Because the merge step reuses `build_catalog`'s index/facet/writer functions and
 preserves every top-level catalog field, the existing "Run regression tests
 against generated asset" step still validates the result.
+
+### Opaque umbrella calls
+
+Some master FOAs and BAAs omit their program scope from the catalog synopsis.
+`discoverability.py` restores that scope before indexing, but does not grant a
+search-time exception to every broad call. Each registry rule must use a stable
+announcement number or tightly scoped agency/title signals and should cite the
+official program pages that support every added topic family. Acronym signals
+use whole-token matching. Registry-owned additions are recorded separately so
+a corrected or retired rule can remove its prior search terms and topic tags.
 
 ## Bundled adapters status
 

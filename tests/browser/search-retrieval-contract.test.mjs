@@ -106,10 +106,10 @@ test("requires meaningful coverage for longer searches", () => {
 
   assert.ok(result.scores[0] > 0);
   assert.equal(result.scores[1], 0);
-  assert.equal(result.diagnostics.minimumCoverage, 2);
+  assert.equal(result.diagnostics.minimumCoverage, 3);
 });
 
-test("uses catalog topics as a semantic bridge beyond literal summary terms", () => {
+test("uses catalog topics only to rerank lexical candidates", () => {
   const apis = loadApis();
   const catalog = catalogFor([
     record("seed-1", "Carbon dioxide capture", "industrial emissions", ["Carbon management"]),
@@ -123,9 +123,47 @@ test("uses catalog topics as a semantic bridge beyond literal summary terms", ()
   const result = engine.score("industrial emissions");
 
   assert.ok(result.semanticScores[2] > 0);
-  assert.ok(result.scores[2] > 0);
+  assert.equal(result.scores[2], 0, "a coarse topic must not create a candidate");
   assert.equal(result.lexicalScores[2], 0);
+  assert.ok(result.scores[0] > result.lexicalScores[0]);
   assert.ok(result.diagnostics.inferredTopics.includes("Carbon management"));
+});
+
+test("requires both concepts in a two-concept search", () => {
+  const apis = loadApis();
+  const catalog = catalogFor([
+    record("both", "AI for catalyst design", "Artificial intelligence for chemical catalyst design."),
+    record("ai-only", "AI journalism training", "Artificial intelligence for newsrooms."),
+    record("cat-only", "Catalysis research", "Chemical catalysis and reactor design."),
+  ], apis.query);
+  const result = apis.retrieval.create(catalog, apis.query)
+    .score("catalysts for AI");
+
+  assert.ok(result.scores[0] > 0);
+  assert.equal(result.scores[1], 0);
+  assert.equal(result.scores[2], 0);
+  assert.equal(result.diagnostics.minimumCoverage, 2);
+});
+
+test("reported catalyst and AI search is narrow without losing chemistry programs", () => {
+  const apis = loadApis();
+  const catalog = assignmentJson(productionCatalogSource);
+  const result = apis.retrieval.create(catalog, apis.query).score(
+    "catalysts for AI",
+    { context: "Electrochemistry, colloids, catalysis, AI, and chemical engineering." },
+  );
+  const matches = catalog.opportunities.filter((_record, index) => result.scores[index] > 0);
+  const matchedIds = new Set(matches.map(record => record.opportunity_id));
+
+  assert.ok(matchedIds.has("362061"), "Chemical Process Systems should remain retrievable");
+  assert.ok(matchedIds.has("360678"), "the evidence-backed DOE umbrella should remain retrievable");
+  assert.ok(matchedIds.has("356605"), "the evidence-backed ONR BAA should remain retrievable");
+  assert.ok(matchedIds.has("347749"), "the NSF chemistry program should remain retrievable");
+  assert.ok(matches.length >= 3 && matches.length <= 20, `unexpected candidate count: ${matches.length}`);
+  assert.equal(matchedIds.has("363440"), false, "AI journalism must not leak through");
+  assert.equal(matchedIds.has("363547"), false, "EducationUSA AI outreach must not leak through");
+  assert.equal(matchedIds.has("359949"), false, "metaphorical catalyst wording must not leak through");
+  assert.equal(matchedIds.has("359942"), false, "BioData Catalyst is not chemical catalysis");
 });
 
 test("preserves exact opportunity-number priority", () => {

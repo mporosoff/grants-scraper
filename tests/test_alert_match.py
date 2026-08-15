@@ -204,7 +204,7 @@ class MatcherTests(unittest.TestCase):
         )
         self.assertEqual([item["opportunity_id"] for item in results], ["complete"])
 
-    def test_catalog_topics_bridge_semantically_related_summaries(self):
+    def test_catalog_topics_do_not_create_candidates(self):
         records = [
             _base(
                 opportunity_id="seed-1",
@@ -232,10 +232,10 @@ class MatcherTests(unittest.TestCase):
 
         results = search_catalog(catalog, "industrial emissions", as_of=self.as_of)
         ids = [item["opportunity_id"] for item in results]
-        self.assertIn("related", ids)
+        self.assertNotIn("related", ids)
         self.assertNotIn("water", ids)
 
-    def test_existing_literal_abbreviation_is_not_broadened(self):
+    def test_ai_abbreviation_recovers_the_guarded_long_form(self):
         literal = _base(
             opportunity_id="literal",
             title="AI safety evaluation",
@@ -251,9 +251,97 @@ class MatcherTests(unittest.TestCase):
         results = search_catalog(catalog, "AI", as_of=self.as_of)
 
         self.assertEqual(
-            [item["opportunity_id"] for item in results],
-            ["literal"],
+            {item["opportunity_id"] for item in results},
+            {"literal", "long-form"},
         )
+
+    def test_two_concept_query_requires_both_and_rejects_catalyst_metaphors(self):
+        records = [
+            _base(
+                opportunity_id="both",
+                title="AI for catalyst design",
+                description=(
+                    "Artificial intelligence methods for chemical catalyst design."
+                ),
+            ),
+            _base(
+                opportunity_id="ai-only",
+                title="AI journalism training",
+                description="Artificial intelligence for newsrooms.",
+            ),
+            _base(
+                opportunity_id="metaphor",
+                title="AI learning hubs",
+                description="This artificial intelligence program is a catalyst for education.",
+            ),
+            _base(
+                opportunity_id="cat-only",
+                title="Catalysis research",
+                description="Chemical catalysis and reactor design.",
+            ),
+        ]
+
+        results = search_catalog(
+            make_catalog(records),
+            "catalysts for AI",
+            as_of=self.as_of,
+        )
+
+        self.assertEqual(
+            [item["opportunity_id"] for item in results],
+            ["both"],
+        )
+
+    def test_evidence_backed_umbrella_calls_survive_across_research_domains(self):
+        from scripts.sources.discoverability import augment_records
+
+        onr = _base(
+            opportunity_id="onr-baa",
+            opportunity_number="N0001425SB001",
+            title=(
+                "FY25 Long Range Broad Agency Announcement (BAA) for Navy "
+                "and Marine Corps Science and Technology"
+            ),
+            agency="Office of Naval Research",
+            description="Basic and applied scientific research.",
+        )
+        doe = _base(
+            opportunity_id="doe-sc",
+            opportunity_number="DE-FOA-0003600",
+            title=(
+                "FY 2026 Continuation of Solicitation for the Office of Science "
+                "Financial Assistance Program"
+            ),
+            agency="Office of Science",
+            description="Supports the Office of Science financial assistance program.",
+        )
+        unrelated = _base(
+            opportunity_id="diplomacy-baa",
+            opportunity_number="STATE-BAA-1",
+            title="Broad Agency Announcement for Public Diplomacy",
+            agency="Department of State",
+            description=(
+                "Artificial intelligence education is a catalyst for cultural exchange."
+            ),
+        )
+        records = [onr, doe, unrelated]
+        self.assertEqual(augment_records(records), 2)
+        catalog = make_catalog(records)
+
+        cases = {
+            "catalysts for AI": {"onr-baa", "doe-sc"},
+            "quantum materials": {"onr-baa", "doe-sc"},
+            "electrochemistry": {"onr-baa", "doe-sc"},
+            "selective extraction": {"onr-baa"},
+        }
+        for query, expected in cases.items():
+            with self.subTest(query=query):
+                found = {
+                    item["opportunity_id"]
+                    for item in search_catalog(catalog, query, as_of=self.as_of)
+                }
+                self.assertEqual(found, expected)
+                self.assertNotIn("diplomacy-baa", found)
 
     def test_pfas_forms_find_water_pollution_remediation(self):
         remediation = _base(

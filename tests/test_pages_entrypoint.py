@@ -214,7 +214,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         )
         release_version = "filters-2026-08-13"
         feature_version = "orcid-2026-08-13"
-        search_version = "audit-2026-08-13"
+        search_version = "relevance-2026-08-15-v3"
         style_version = "audit-2026-08-13"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={style_version}">',
@@ -237,7 +237,10 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             '<script src="./assets/profile.js?v=audit-2026-08-13"></script>',
             explorer_html,
         )
-        for asset in ("search-query.js", "search-retrieval.js", "app.js"):
+        for asset in (
+            "profile-ranking.js", "search-query.js", "search-retrieval.js",
+            "app.js",
+        ):
             self.assertIn(
                 f'<script src="./assets/{asset}?v={search_version}"></script>',
                 explorer_html,

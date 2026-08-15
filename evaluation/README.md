@@ -51,3 +51,19 @@ The synthetic regression fixture is
 but is not pilot evidence. Phase 2 is complete only after consented labels from
 3–5 researchers are aggregated and a short pilot report documents retrieval,
 reranking, and source-data failures separately.
+
+## Reproduce the profile-ranking probe
+
+The deterministic probe compares the reported catalyst/AI query with no
+profile, the screenshot profile, and that profile plus a representative CV. It
+also measures how many profile-only candidates survive each concept-coverage
+threshold:
+
+```powershell
+node evaluation/profile_relevance_probe.mjs
+```
+
+Rank movement proves that profile fields affect production scoring; it does not
+prove that the movement is better. Treat the probe as a regression and
+diagnostic. Precision/recall benefit still requires the consented human labels
+described above.

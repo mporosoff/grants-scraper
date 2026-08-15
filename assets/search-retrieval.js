@@ -63,13 +63,14 @@
     const documentTopics = records.map(record => [
       ...new Set((record.topic_areas || []).filter(Boolean).map(String)),
     ]);
-    const documentPhraseText = records.map(record => queryApi.tokenize([
+    const documentPhraseTokens = records.map(record => queryApi.tokenize([
       record.title || "",
       record.opportunity_number || "",
       String(record.description || "").slice(0, 5_000),
       String(record.document_search_text || "").slice(0, 16_000),
       ...(record.topic_areas || []),
-    ].join(" ")).join(" "));
+    ].join(" ")));
+    const documentPhraseText = documentPhraseTokens.map(terms => terms.join(" "));
     const topicDocuments = new Map();
 
     indexTerms.forEach(term => {
@@ -174,7 +175,28 @@
       );
     }
 
-    function score(query, { semantic = true, coverage = true, context = "" } = {}) {
+    function termsWithinWindow(documentId, terms, maximumSpan) {
+      const required = [...new Set((terms || []).filter(Boolean))];
+      const span = Math.max(required.length, Number(maximumSpan) || required.length);
+      if (!required.length) return false;
+      const tokens = documentPhraseTokens[documentId];
+      for (let start = 0; start < tokens.length; start += 1) {
+        if (!required.includes(tokens[start])) continue;
+        const present = new Set(tokens.slice(start, start + span));
+        if (required.every(term => present.has(term))) return true;
+      }
+      return false;
+    }
+
+    function score(
+      query,
+      {
+        semantic = true,
+        coverage = true,
+        context = "",
+        minimumCoverage: requestedMinimumCoverage = null,
+      } = {},
+    ) {
       const groups = expandedGroups(query, { context });
       const scores = new Float64Array(documentCount);
       const lexicalScores = new Float64Array(documentCount);
@@ -194,6 +216,10 @@
         group.terms.forEach(({ term: queryTerm, weight: queryWeight }) => {
           const queryTermDocuments = new Set();
           resolveTerm(queryTerm).forEach(resolution => {
+            // Fuzzy recovery is for the text the user entered. Controlled
+            // synonyms and scientific variants must match their indexed form
+            // instead of drifting through a second, implicit expansion.
+            if (queryTerm !== group.source && resolution.kind !== "exact") return;
             const values = postings[resolution.term];
             const documentFrequency = values.length / 2;
             const inverseFrequency = Math.log(
@@ -230,19 +256,32 @@
         const evidencePhrases = Array.isArray(group.evidencePhrases)
           ? group.evidencePhrases.map(value => queryApi.tokenize(value).join(" ")).filter(Boolean)
           : [];
+        const evidenceWindows = Array.isArray(group.evidenceWindows)
+          ? group.evidenceWindows.filter(item => Array.isArray(item?.terms))
+          : [];
         groupEvidence.forEach((evidence, documentId) => {
           if (evidence < requiredEvidence) return;
-          if (
-            evidenceAlternatives.length
-            && !evidenceAlternatives.some(alternative =>
+          const evidenceChecks = [];
+          if (evidenceAlternatives.length) {
+            evidenceChecks.push(evidenceAlternatives.some(alternative =>
               alternative.every(term => exactDocuments(term).has(documentId))
-            )
-          ) return;
-          if (
-            evidencePhrases.length
-            && !evidencePhrases.some(value =>
+            ));
+          }
+          if (evidencePhrases.length) {
+            evidenceChecks.push(evidencePhrases.some(value =>
               (` ${documentPhraseText[documentId]} `).includes(` ${value} `)
-            )
+            ));
+          }
+          if (evidenceWindows.length) {
+            evidenceChecks.push(evidenceWindows.some(item =>
+              termsWithinWindow(documentId, item.terms, item.maximumSpan)
+            ));
+          }
+          if (
+            evidenceChecks.length
+            && (group.evidenceMode === "any"
+              ? !evidenceChecks.some(Boolean)
+              : !evidenceChecks.every(Boolean))
           ) return;
           groupDocuments.add(documentId);
         });
@@ -309,11 +348,25 @@
         });
       }
 
-      const minimumCoverage = coverage && groups.length >= 3
-        ? Math.max(2, Math.ceil(groups.length * .38))
-        : coverage && groups.length >= 2 && groups.some(group => group.requiredAlways)
-          ? 2
-          : 0;
+      // Candidate admission is lexical. Topic inference may rerank a record
+      // that already matches the query, but it must never manufacture a large
+      // result set from a coarse catalog topic. Two-concept searches use AND;
+      // longer natural-language searches use a forgiving 60% concept floor.
+      const hasExplicitMinimumCoverage = requestedMinimumCoverage !== null
+        && requestedMinimumCoverage !== undefined
+        && Number.isFinite(Number(requestedMinimumCoverage));
+      const explicitMinimumCoverage = hasExplicitMinimumCoverage
+        ? Math.max(0, Math.min(groups.length, Math.floor(Number(requestedMinimumCoverage))))
+        : null;
+      const minimumCoverage = explicitMinimumCoverage ?? (
+        !groups.length
+          ? 0
+          : !coverage
+            ? 1
+            : groups.length <= 2
+              ? groups.length
+              : Math.ceil(groups.length * .6)
+      );
       const requiredGroups = groups.filter(group => group.requiredUnlessTopic);
       const alwaysRequiredGroups = groups.filter(group => group.requiredAlways);
       for (let documentId = 0; documentId < documentCount; documentId += 1) {

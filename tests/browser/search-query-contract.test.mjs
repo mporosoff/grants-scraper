@@ -49,13 +49,26 @@ test("expands common, unambiguous research abbreviations", () => {
   assert.equal(termWeights(api, "PTSD")["post-traumatic"], 0.86);
 });
 
-test("prefers an indexed literal abbreviation over broadening it", () => {
+test("keeps AI long-form alternatives inside one guarded concept", () => {
   const api = loadApi();
-  const terms = api.expandTerms("AI", term => term === "ai");
-  assert.deepEqual(
-    [...terms].map(({ term, weight }) => [term, weight]),
-    [["ai", 1]],
-  );
+  const group = api.expandGroups("AI", term => term === "ai")[0];
+  assert.equal(group.source, "ai");
+  assert.ok(group.terms.some(({ term }) => term === "artificial"));
+  assert.ok(group.terms.some(({ term }) => term === "intelligence"));
+  assert.ok(group.terms.some(({ term }) => term === "learn"));
+  assert.ok(group.evidenceAlternatives.some(items => items.join(" ") === "artificial intelligence"));
+});
+
+test("guards the scientific catalyst word family against metaphorical uses", () => {
+  const api = loadApi();
+  const groups = api.expandGroups("catalysts for AI");
+
+  assert.equal(groups.length, 2);
+  assert.equal(groups[0].expansion.phrase, "scientific catalysis");
+  assert.equal(groups[0].evidenceMode, "any");
+  assert.ok(groups[0].terms.some(({ term }) => term === "catalysi"));
+  assert.ok(groups[0].terms.some(({ term }) => term === "catalytic"));
+  assert.ok(groups[0].evidenceWindows.some(item => item.terms.join(" ") === "catalyst reaction"));
 });
 
 test("recognizes PFAS families and falls back to water remediation language", () => {

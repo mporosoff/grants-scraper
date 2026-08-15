@@ -170,7 +170,11 @@ TOPIC_RULES = {
         r"\b(?:artificial intelligence|machine learning|deep learning|"
         r"generative ai|AI/ML)\b"
     ),
-    "Arts and culture": r"\b(?:arts?|cultur|museum|music|theater|humanities)\w*",
+    # Keep "art" and "arts" as complete words. The former pattern allowed
+    # "artificial intelligence" to assign Arts and culture to AI notices.
+    "Arts and culture": (
+        r"\b(?:arts?\b|cultur\w*|museum\w*|music\w*|theater\w*|humanities\w*)"
+    ),
     "Biology and biotechnology": (
         r"\b(?:biolog|biotechnolog|genom|proteom|cellular|microbiom)\w*"
     ),
