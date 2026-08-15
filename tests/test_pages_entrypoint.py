@@ -30,31 +30,45 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
 
         main_image_url = (
             "https://mporosoff.github.io/grants-scraper/"
-            "assets/social/funding-finder-preview.jpg?v=20260812"
+            "assets/social/funding-finder-link-preview.jpg"
         )
         team_image_url = (
             "https://mporosoff.github.io/grants-scraper/"
-            "assets/social/faculty-pairing-preview.jpg?v=20260812"
+            "assets/social/faculty-pairing-link-preview.jpg"
         )
 
         for page in (index_html, explorer_html):
             with self.subTest(page="public matcher"):
                 self.assertIn('property="og:title"', page)
                 self.assertIn(f'property="og:image" content="{main_image_url}"', page)
+                self.assertIn(
+                    f'property="og:image:secure_url" content="{main_image_url}"',
+                    page,
+                )
+                self.assertIn(f'name="twitter:image" content="{main_image_url}"', page)
                 self.assertIn('name="twitter:card" content="summary_large_image"', page)
                 self.assertIn(
                     'rel="icon" type="image/svg+xml" '
-                    'href="./assets/icons/funding-finder.svg?v=20260812"',
+                    'href="./assets/icons/funding-finder.svg?v=20260815"',
                     page,
                 )
+                self.assertIn('rel="apple-touch-icon" sizes="180x180"', page)
+                self.assertIn('rel="manifest"', page)
 
         self.assertIn(f'property="og:image" content="{team_image_url}"', team_html)
+        self.assertIn(
+            f'property="og:image:secure_url" content="{team_image_url}"',
+            team_html,
+        )
+        self.assertIn(f'name="twitter:image" content="{team_image_url}"', team_html)
         self.assertIn('name="twitter:card" content="summary_large_image"', team_html)
         self.assertIn(
             'rel="icon" type="image/svg+xml" '
-            'href="./assets/icons/faculty-pairing.svg?v=20260812"',
+            'href="./assets/icons/faculty-pairing.svg?v=20260815"',
             team_html,
         )
+        self.assertIn('rel="apple-touch-icon" sizes="180x180"', team_html)
+        self.assertIn('rel="manifest"', team_html)
         self.assertIn('name="robots" content="noindex, nofollow"', team_html)
         self.assertIn('id="add-researcher"', team_html)
         self.assertIn('id="external-researcher-form"', team_html)
@@ -99,13 +113,29 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         for asset in (
             "assets/social/funding-finder-preview.jpg",
             "assets/social/faculty-pairing-preview.jpg",
+            "assets/social/funding-finder-link-preview.jpg",
+            "assets/social/faculty-pairing-link-preview.jpg",
             "assets/icons/funding-finder.svg",
             "assets/icons/faculty-pairing.svg",
+            "assets/icons/funding-finder-32.png",
+            "assets/icons/funding-finder-180.png",
+            "assets/icons/funding-finder-192.png",
+            "assets/icons/funding-finder-512.png",
+            "assets/icons/funding-finder.ico",
+            "assets/icons/funding-finder.webmanifest",
+            "assets/icons/faculty-pairing-32.png",
+            "assets/icons/faculty-pairing-180.png",
+            "assets/icons/faculty-pairing-192.png",
+            "assets/icons/faculty-pairing-512.png",
+            "assets/icons/faculty-pairing.ico",
+            "assets/icons/faculty-pairing.webmanifest",
+            "favicon.ico",
         ):
             path = REPOSITORY_ROOT / asset
             with self.subTest(asset=asset):
                 self.assertTrue(path.is_file())
-                self.assertGreater(path.stat().st_size, 500)
+                minimum_size = 100 if path.suffix == ".webmanifest" else 500
+                self.assertGreater(path.stat().st_size, minimum_size)
 
     def test_match_explorer_supports_public_search_and_optional_ai(self):
         explorer_html = (
