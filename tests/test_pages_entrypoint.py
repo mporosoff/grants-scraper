@@ -214,7 +214,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         )
         release_version = "filters-2026-08-13"
         feature_version = "orcid-2026-08-13"
-        search_version = "relevance-2026-08-15-v3"
+        search_version = "relevance-2026-08-15-v4"
         style_version = "audit-2026-08-13"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={style_version}">',

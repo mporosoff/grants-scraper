@@ -2,7 +2,7 @@
 
 Date: 2026-08-15
 Catalog: 1,469 current opportunities, `catalog-20260815T183714Z`
-App version after fix: `search-relevance-v3`
+App version after fix: `search-relevance-v4`
 
 ## Reported case
 
