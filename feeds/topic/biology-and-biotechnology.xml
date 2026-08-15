@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-08-14T11:58:24Z</updated>
+  <updated>2026-08-15T10:40:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -552,37 +552,6 @@
     <summary>Foreign Agricultural Service | Closes 2026-08-17 | Modern agricultural biotechnology such as genome editing is a revolutionary tool that could transform the sustainability and viability of the agriculture sector. American farmers rely on agricultural biotechnology products, with over 90% of corn and soybeans derived from these technologies. In 2025, American farmers exported over $51 billion in agricultural biotechnology products worldwide. Howeve…</summary>
   </entry>
   <entry>
-    <title>Advancing Outbreak Detection, Notification, and Response Capacity by Implementing 7-1-7 in Partner Countries</title>
-    <link href="https://www.grants.gov/search-results-detail/361093"/>
-    <id>urn:funding-finder:grants-gov:361093</id>
-    <updated>2026-07-14T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Biology and biotechnology"/>
-    <summary>Centers for Disease Control-GHC | Closes 2026-08-14 | This Notice of Funding Opportunity (NOFO) supports strengthening country systems to detect, notify, and respond to outbreaks in alignment with the 7-1-7 target. Activities under this award are intended for implementation outside the United States and its territories. Building on previous outbreak experience and other international health emergencies, this NOFO advances American interests by reinfo…</summary>
-  </entry>
-  <entry>
-    <title>Strengthening Global Health Security by improving public health capacity to detect, notify, and respond to disease outbreaks globally</title>
-    <link href="https://www.grants.gov/search-results-detail/360342"/>
-    <id>urn:funding-finder:grants-gov:360342</id>
-    <updated>2026-07-14T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control-GHC | Closes 2026-08-14 | This Notice of Funding Opportunity (NOFO) seeks to build upon activities funded by CDC to support Global Health Security (GHS) through implementation of programs and activities that focus on protecting and improving health globally through partnerships with Ministries of Health and other governmental institutions. This NOFO will build on lessons learned from the global COVID outbreak and other sig…</summary>
-  </entry>
-  <entry>
-    <title>Sustaining Global Health Security to protect and improve public health in Kenya</title>
-    <link href="https://www.grants.gov/search-results-detail/360341"/>
-    <id>urn:funding-finder:grants-gov:360341</id>
-    <updated>2026-07-14T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control-GHC | Closes 2026-08-14 | For over forty years, the U.S. Centers for Disease Control and Prevention (CDC) has partnered with the Government of Kenya (GoK) to protect the health of the Kenyan people and strengthen health systems. The United States Government remains the largest investor in Kenya"s health sector. This investment includes PEPFAR (President"s Emergency Plan for AIDS Relief), GHS (Global Health Security), Malar…</summary>
-  </entry>
-  <entry>
     <title>Cooperative Program for Modeling Clinical Transplantation</title>
     <link href="https://www.grants.gov/search-results-detail/361831"/>
     <id>urn:funding-finder:grants-gov:361831</id>
@@ -671,5 +640,36 @@
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Biology and biotechnology"/>
     <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-22 | Summary: The fiscal year 2026 (FY26) Neurofibromatosis Research Program (NFRP) Investigator-Initiated Research Award (IIRA) supports high-impact research that addresses a critical need and has the potential to make important contributions to the field of neurofibromatosis disorders or advance patient care. Research projects may focus on any phase of research, excluding clinical trials. The rationa…</summary>
+  </entry>
+  <entry>
+    <title>DoW Neurofibromatosis Research Academy - Leadership Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362917"/>
+    <id>urn:funding-finder:grants-gov:362917</id>
+    <updated>2026-06-23T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-14 | Summary: The fiscal year 2026 (FY26) Neurofibromatosis Research Program (NFRP) Neurofibromatosis Research Academy - Leadership Award (NFRALA) supports visionary, established neurofibromatosis (NF) investigators with documented history of neurofibromatosis funding, publications, strong mentorship and commitment to leadership to serve as Director and Deputy Director of the Neurofibromatosis Research…</summary>
+  </entry>
+  <entry>
+    <title>GREGoRi Data Coordination and Outreach Center (U01, Clinical Trials Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359279"/>
+    <id>urn:funding-finder:grants-gov:359279</id>
+    <updated>2026-06-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Closes 2026-10-30 | The Genomics Research to Elucidate the Genetics of Rare Diseases: innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. The purpose of this Notice of Funding Opportunity is to establish the GREGo…</summary>
+  </entry>
+  <entry>
+    <title>GREGoRi Innovation Projects (U01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/359644"/>
+    <id>urn:funding-finder:grants-gov:359644</id>
+    <updated>2026-06-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Closes 2026-10-30 | The Genomics Research to Elucidate the Genetics of Rare Diseases: innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. This Notice of Funding Opportunity is intended to stimulate the development…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml</id>
-  <updated>2026-08-14T11:58:24Z</updated>
+  <updated>2026-08-15T10:40:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Resources and Workforce Development for the Regional Biocontainment Laboratories</title>
@@ -435,38 +435,6 @@
     <summary>Food and Drug Administration | Closes 2026-08-21 | The purpose of this funding opportunity is to (1) improve information exchange and transfer among States, Federal and Foreign Agencies, industry, and consumers; (2) strengthen state activities through training, technical assistance, research, education, and support for States to participate in meetings that foster a cooperative shellfish program based on public health principles; and (3) promote e…</summary>
   </entry>
   <entry>
-    <title>Strengthening Global Health Security by improving public health capacity to detect, notify, and respond to disease outbreaks globally</title>
-    <link href="https://www.grants.gov/search-results-detail/360342"/>
-    <id>urn:funding-finder:grants-gov:360342</id>
-    <updated>2026-07-14T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control-GHC | Closes 2026-08-14 | This Notice of Funding Opportunity (NOFO) seeks to build upon activities funded by CDC to support Global Health Security (GHS) through implementation of programs and activities that focus on protecting and improving health globally through partnerships with Ministries of Health and other governmental institutions. This NOFO will build on lessons learned from the global COVID outbreak and other sig…</summary>
-  </entry>
-  <entry>
-    <title>Strengthening public health efforts to protect and improve health in the Democratic Republic of the Congo (DRC)</title>
-    <link href="https://www.grants.gov/search-results-detail/360331"/>
-    <id>urn:funding-finder:grants-gov:360331</id>
-    <updated>2026-07-14T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control-GHC | Closes 2026-08-14 | This Notice of Funding Opportunity (NOFO) seeks to build upon activities funded by CDC to support Global Health Security (GHS) in the Democratic Republic of Congo through implementation of programs and activities that focus on protecting and improving health globally through partnerships with Ministries of Health and other governmental institutions. The main outcomes of this NOFO are the following…</summary>
-  </entry>
-  <entry>
-    <title>Sustaining Global Health Security to protect and improve public health in Kenya</title>
-    <link href="https://www.grants.gov/search-results-detail/360341"/>
-    <id>urn:funding-finder:grants-gov:360341</id>
-    <updated>2026-07-14T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control-GHC | Closes 2026-08-14 | For over forty years, the U.S. Centers for Disease Control and Prevention (CDC) has partnered with the Government of Kenya (GoK) to protect the health of the Kenyan people and strengthen health systems. The United States Government remains the largest investor in Kenya"s health sector. This investment includes PEPFAR (President"s Emergency Plan for AIDS Relief), GHS (Global Health Security), Malar…</summary>
-  </entry>
-  <entry>
     <title>Cooperative Program for Modeling Clinical Transplantation</title>
     <link href="https://www.grants.gov/search-results-detail/361831"/>
     <id>urn:funding-finder:grants-gov:361831</id>
@@ -670,5 +638,40 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Infectious disease"/>
     <category term="Manufacturing"/>
     <summary>National Institutes of Health | Closes 2027-08-18 | The Blueprint Neurotherapeutics Network for Biologics (BPN-Biologics) provides support for biologic-based therapeutic discovery and development, from lead optimization through phase I clinical testing. This Funding Opportunity Announcement (FOA) supports preclinical discovery and development of potential therapeutic Biotechnology Products and Biologics including, but not limited to, large biologic…</summary>
+  </entry>
+  <entry>
+    <title>BRAIN Initiative: Reagent Resources for Brain Cell Type-Specific Access to Broaden Distribution of Enabling Technologies for Neuroscience (U24 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/356530"/>
+    <id>urn:funding-finder:grants-gov:356530</id>
+    <updated>2024-09-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Manufacturing"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Closes 2027-06-15 | This Notice of Funding Opportunity Announcement (NOFO) from the NIH Brain Research through Advancing Innovative Neurotechnologies (BRAIN) Initiative is intended to support establishment of facilities at minority-serving institutions (MSIs) and Institutional Development Award (IDeA)-eligible institutions for scaled production and distribution of brain cell type-specific access and manipulation reag…</summary>
+  </entry>
+  <entry>
+    <title>Animal and Veterinary Innovation Centers (U18)</title>
+    <link href="https://www.grants.gov/search-results-detail/355044"/>
+    <id>urn:funding-finder:grants-gov:355044</id>
+    <updated>2024-06-20T00:00:00Z</updated>
+    <author><name>Food and Drug Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Technology development"/>
+    <summary>Food and Drug Administration | Closes 2028-05-12 | The purpose of this Funding Opportunity Announcement (FOA) is to solicit applications for inclusion as Animal and Veterinary Innovation Centers, which are intended to form long-term partnerships to address priority areas for FDA's Center for Veterinary Medicine (CVM). This includes CVM developing cooperative agreement(s) with academic research institutions (public and private) to: 1. Drive researc…</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: Specific Pathogen Free Macaque Colonies to Support HIV/AIDS Research (U42 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/351920"/>
+    <id>urn:funding-finder:grants-gov:351920</id>
+    <updated>2024-01-22T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <summary>National Institutes of Health | Closes 2026-09-25 | The purpose of this Notice of Funding Opportunity (NOFO) is to provide continuing support for specific pathogen-free (SPF) macaque colonies previously funded under the auspices of PAR-21-089 and PAR-18-669 that support Human Immunodeficiency Virus (HIV)/Acquired Immunodeficiency Syndrome (AIDS) research. Breeding colonies are essential to sustain appropriate SPF macaques for research related to HI…</summary>
   </entry>
 </feed>

@@ -4,8 +4,17 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml</id>
-  <updated>2026-08-14T11:58:24Z</updated>
+  <updated>2026-08-15T10:40:44Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Charge Ready NY - Large Public Sector Project Program</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001AchJOAAZ"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON6141</id>
+    <updated>2026-08-14T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Transportation"/>
+    <summary>NYSERDA | Closes 2026-10-20 | Supports public sector organizations that aim to develop large portfolios of public Level 2 electric vehicle charging sites within their jurisdictions in New York State. Program Opportunity Notice (PON) 6141 makes up to $35 million available from the Sustainable Future Program, with a minimum of $1 million and a maximum of $15 million of NYSERDA funding per award.</summary>
+  </entry>
   <entry>
     <title>Energy Economy Planning and Growth Program</title>
     <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001COlXwAAL"/>

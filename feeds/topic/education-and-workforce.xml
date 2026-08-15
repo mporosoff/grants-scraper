@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml</id>
-  <updated>2026-08-14T11:58:24Z</updated>
+  <updated>2026-08-15T10:40:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -127,6 +127,16 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>Veterans Legacy Grants Program | Closes 2027-04-09 | VLGP will provide grants to eligible entities for the purpose of conducting cemetery research related to national, State, or Tribal Veterans’ cemeteries; producing educational materials that teach about the history of Veterans interred in national, State, or Tribal Veterans’ cemeteries; and promoting community engagement with the histories of Veterans interred in national, State, or Tribal Veteran…</summary>
+  </entry>
+  <entry>
+    <title>Promoting Population Health through Increased Capacity in Alcohol Epidemiology &amp; the Prevention of Excessive Alcohol Use</title>
+    <link href="https://www.grants.gov/search-results-detail/363592"/>
+    <id>urn:funding-finder:grants-gov:363592</id>
+    <updated>2027-03-01T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCCDPHP</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control - NCCDPHP | Closes 2027-04-30 | CDC announces the availability of fiscal year (FY) 2027 funds to implement CDC-RFA-DP-27-0072, Promoting Population Health through Increased Capacity in Alcohol Epidemiology and the Prevention of Excessive Alcohol Use. The purpose of this NOFO is to build state capacity in alcohol epidemiology and provide the tools and information needed to perform core public health functions related to excessive…</summary>
   </entry>
   <entry>
     <title>IDeA Networks of Biomedical Research Excellence (INBRE)</title>
@@ -611,16 +621,6 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2027-01-25 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: Ruth L. Kirschstein National Research Service Award (NRSA) Institutional Research Training Grant for the Clinical and Translational Science Awards Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363246"/>
-    <id>urn:funding-finder:grants-gov:363246</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
     <summary>National Institutes of Health | Closes 2027-01-25 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
   </entry>
 </feed>

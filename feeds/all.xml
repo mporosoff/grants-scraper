@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-08-14T11:58:24Z</updated>
+  <updated>2026-08-15T10:40:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -325,6 +325,16 @@
     <summary>Centers for Disease Control - NCCDPHP | Closes 2027-05-03 | The purpose of this multi-component NOFO is to improve the health of pregnant and postpartum women and their newborns through quality improvement. CDC will fund two components. Component A will support state Perinatal Quality Collaboratives (PQCs). PQCs are state-based organizations that support quality improvement (QI) efforts in health facilities and whose approach has been successful in improvi…</summary>
   </entry>
   <entry>
+    <title>Promoting Population Health through Increased Capacity in Alcohol Epidemiology &amp; the Prevention of Excessive Alcohol Use</title>
+    <link href="https://www.grants.gov/search-results-detail/363592"/>
+    <id>urn:funding-finder:grants-gov:363592</id>
+    <updated>2027-03-01T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCCDPHP</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control - NCCDPHP | Closes 2027-04-30 | CDC announces the availability of fiscal year (FY) 2027 funds to implement CDC-RFA-DP-27-0072, Promoting Population Health through Increased Capacity in Alcohol Epidemiology and the Prevention of Excessive Alcohol Use. The purpose of this NOFO is to build state capacity in alcohol epidemiology and provide the tools and information needed to perform core public health functions related to excessive…</summary>
+  </entry>
+  <entry>
     <title>Maternal-Child Surveillance and Partnerships for Action, Results, and Knowledge</title>
     <link href="https://www.grants.gov/search-results-detail/363313"/>
     <id>urn:funding-finder:grants-gov:363313</id>
@@ -382,6 +392,15 @@
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Closes 2027-06-10 | The Brain Research through Advancing Innovative Neurotechnologies (BRAIN) Initiative intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for research to develop novel tools and approaches that enable the interrogation of cell-specific and circuit-specific processes in the central nervous system. This NOFO consolidates three current BRAIN Initiative tool development pr…</summary>
+  </entry>
+  <entry>
+    <title>Rural Communities Opioid Response Program - Community Systems Development</title>
+    <link href="https://www.grants.gov/search-results-detail/363601"/>
+    <id>urn:funding-finder:grants-gov:363601</id>
+    <updated>2027-02-05T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Social and behavioral sciences"/>
+    <summary>Health Resources and Services Administration | Closes 2027-04-06 | The Rural Communities Opioid Response Program (RCORP) - Community Systems Development provides funding to communities in rural areas to develop and/or expand behavioral health systems of care through formalized networks that expand operational and clinical service capacity regionally through coordinated implementation of evidence-based SUD prevention, treatment, recovery, and related services.</summary>
   </entry>
   <entry>
     <title>NIOSH Support for Conferences and Scientific Meetings (R13 Clinical Trial Not Allowed)</title>
@@ -570,6 +589,15 @@
     <updated>2027-01-26T00:00:00Z</updated>
     <author><name>Centers for Disease Control - NCIPC</name></author>
     <summary>Centers for Disease Control - NCIPC | Closes 2027-03-31 | The Drug-Free Communities (DFC) Support Program was created by the Drug-Free Communities Act of 1997 (Public Law 105-20). The Executive Office of the President, Office of National Drug Control Policy (ONDCP), and the Department of Health and Human Services (HHS), Centers for Disease Control and Prevention (CDC), National Center for Injury Prevention and Control (NCIPC) are accepting applications f…</summary>
+  </entry>
+  <entry>
+    <title>Rural Communities Opioid Response Program - Evaluation</title>
+    <link href="https://www.grants.gov/search-results-detail/363600"/>
+    <id>urn:funding-finder:grants-gov:363600</id>
+    <updated>2027-01-23T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Social and behavioral sciences"/>
+    <summary>Health Resources and Services Administration | Closes 2027-03-23 | The purpose of the Rural Communities Opioid Response Program (RCORP) - Evaluation is to evaluate the impact of rural behavioral health strategies and methods employed under the RCORP initiative, and to develop evaluation tools and resources for use in rural communities to inform future community-led rural health initiatives</summary>
   </entry>
   <entry>
     <title>Rural Health Network Development Planning Program</title>
@@ -871,6 +899,14 @@
     <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-02-16 | The R21 grant program is designed to advance our understanding of occupational diseases and injuries by focusing on the following three objectives: Identify the risks and conditions linked to workplace health issues. Develop strategies to reduce risks and limit exposure to hazardous environments. Translate significant scientific discoveries into prevention measures and products that can effectivel…</summary>
   </entry>
   <entry>
+    <title>Capacity Building for Global, Regional, and National Immunization Programs</title>
+    <link href="https://www.grants.gov/search-results-detail/363591"/>
+    <id>urn:funding-finder:grants-gov:363591</id>
+    <updated>2026-12-14T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <summary>Centers for Disease Control-GHC | Closes 2027-02-12 | This award aims to strengthen immunization programs in priority countries so they can better prevent, control, and eliminate/eradicate vaccine-preventable diseases (VPDs) like polio, measles, and rubella, reduce illness and death from these diseases, and respond to emerging global health threats. The Recipient will build stronger systems in priority countries to prevent, detect, and respond to VPD…</summary>
+  </entry>
+  <entry>
     <title>Ryan White HIV/AIDS Program Part D - Women, Infants, Children and Youth Grant Supplemental Funding</title>
     <link href="https://www.grants.gov/search-results-detail/363415"/>
     <id>urn:funding-finder:grants-gov:363415</id>
@@ -925,48 +961,5 @@
     <updated>2026-12-01T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <summary>National Institutes of Health | Closes 2027-01-30 | This Notice of Funding Opportunity (NOFO) requests applications for Center Coordinating Hubs within the mission of NIDDK/Kidney, Urology, and Hematology (KUH) Diseases. Each Center Coordinating Hub will work collaboratively with a national network of funded Centers to develop and share unique research resources (e.g., data, reagents, models, tools, services, expertise) with the broader community.</summary>
-  </entry>
-  <entry>
-    <title>National Urban Indian Health Program (Education and Research)</title>
-    <link href="https://www.grants.gov/search-results-detail/363494"/>
-    <id>urn:funding-finder:grants-gov:363494</id>
-    <updated>2026-12-01T00:00:00Z</updated>
-    <author><name>Indian Health Service</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Indian Health Service | Closes 2027-02-01 | The purpose of the NUIBH program is to strengthen behavioral health services for Urban Indian communities by increasing awareness, advocacy, education, and collaboration nationwide. The program supports Urban Indian Organizations (UIOs) through technical assistance, training, information sharing, strategic planning, and quality improvement to expand culturally appropriate behavioral health service…</summary>
-  </entry>
-  <entry>
-    <title>Urban Indian Health 4-in-1 Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363501"/>
-    <id>urn:funding-finder:grants-gov:363501</id>
-    <updated>2026-12-01T00:00:00Z</updated>
-    <author><name>Indian Health Service</name></author>
-    <summary>Indian Health Service | Closes 2027-02-01 | To support urban Indians in four program areas - immunization, health promotion &amp; disease prevention, mental health, alcohol and substance abuse.</summary>
-  </entry>
-  <entry>
-    <title>Opportunities for Collaborative Research with the NIH Intramural Research Program (U01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/363204"/>
-    <id>urn:funding-finder:grants-gov:363204</id>
-    <updated>2026-12-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health | Closes 2027-02-05 | The goal of this program is to support collaborative translational research projects aligned with NIH efforts to enhance the translation of basic biological discoveries into clinical applications that improve health. It encourages high quality science demonstrating the potential to result in understanding an important disease process or lead to new therapeutic interventions, diagnostics, or preven…</summary>
-  </entry>
-  <entry>
-    <title>Establishing a Research Network to Guide Foundational Research on Human Consciousness</title>
-    <link href="https://www.grants.gov/search-results-detail/362097"/>
-    <id>urn:funding-finder:grants-gov:362097</id>
-    <updated>2026-12-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Neuroscience"/>
-    <category term="Public health"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health | Closes 2027-02-08 | This Funding Opportunity will establish the NIH Blueprint for Neuroscience Research Network to Guide Foundational Research on Human Consciousness, leveraging a trans-NIH collaboration of 14 Institutes, Centers, and Offices dedicated to reducing the burden of nervous system disorders. Consciousness is central to numerous serious biomedical conditions, including coma, delirium, dementia, traumatic b…</summary>
   </entry>
 </feed>

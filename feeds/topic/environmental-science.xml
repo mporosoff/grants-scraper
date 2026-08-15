@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml</id>
-  <updated>2026-08-14T11:58:24Z</updated>
+  <updated>2026-08-15T10:40:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
@@ -414,15 +414,6 @@
     <summary>Bureau of Land Management | Closes 2026-09-11 | The BLM Wildlife Program, including the Sage-Grouse Conservation Program, implements statutory authorities to address the management of wildlife resources on the public lands for the social and economic well-being of all Americans. Specific BLM Wildlife Program priorities include: 1. protection, maintenance, and development of wildlife habitat; 2. wildlife reintroduction and propagation; 3. field …</summary>
   </entry>
   <entry>
-    <title>Seabed Mapping, Exploration, and Characterization in the Pacific</title>
-    <link href="https://www.grants.gov/search-results-detail/363524"/>
-    <id>urn:funding-finder:grants-gov:363524</id>
-    <updated>2026-08-10T00:00:00Z</updated>
-    <author><name>Bureau of Oceans - Int. Environmental - Scientific</name></author>
-    <category term="Environmental science"/>
-    <summary>Bureau of Oceans - Int. Environmental - Scientific | Closes 2026-08-14 | The U.S. Department of State, Bureau of Oceans and International Environmental and Scientific Affairs (OES), Office of Ocean and Polar Affairs (OPA) announces an open competition for a U.S. institution, company, or organization (see eligibility information in B.1) interested in submitting an application to conduct ocean mapping, seabed exploration, habitat and resource characterization, and data m…</summary>
-  </entry>
-  <entry>
     <title>NSF DCL Advancing Artificial Intelligence (AI) Agent Ecosystems through the National Science Foundation Pathways to Enable Secure Open-Source Ecosystems (NSF PESOSE) Program | NSF 26-015</title>
     <link href="https://www.nsf.gov/funding/opportunities/dcl-advancing-artificial-intelligence-ai-agent-ecosystems"/>
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3ANSF26-015</id>
@@ -546,17 +537,6 @@
     <category term="Data science"/>
     <category term="Environmental science"/>
     <summary>National Institutes of Health | Closes 2026-11-01 | The National Institute of Diabetes and Digestive Diseases and Nutrition (NIDDK) seeks to advance its mission by continuing the NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC). The IBDGC has led collaborative efforts resulting in the identification of &gt;300 genetic risk loci for different IBD subtypes across patient populations and characterization of underlying biological mechanisms. D…</summary>
-  </entry>
-  <entry>
-    <title>U.S. Embassy Nassau Annual Program Statement for Public Diplomacy</title>
-    <link href="https://www.grants.gov/search-results-detail/363406"/>
-    <id>urn:funding-finder:grants-gov:363406</id>
-    <updated>2026-07-31T00:00:00Z</updated>
-    <author><name>U.S. Mission to the Bahamas</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>U.S. Mission to the Bahamas | Closes 2026-08-14 | The U.S. Embassy Nassau Public Diplomacy Section announces an open competition for grants to implement programs that strengthen bilateral relations and advance shared priorities between the United States and The Bahamas. Priority program areas include Freedom 250 (commemorating the 250th anniversary of American independence); Business Development and Entrepreneurship; Educational and Cultural Prog…</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Rocky Mountain Cooperative Ecosystem Studies Unit (CESU)</title>
@@ -696,5 +676,28 @@
     <author><name>Bureau of Land Management</name></author>
     <category term="Environmental science"/>
     <summary>Bureau of Land Management | Closes 2026-08-28 | Public lands managed by the BLM offer exceptional and unique recreational experiences that benefit the American public while supporting local communities and their economies. The Recreation and Visitor Services Program is prioritizing the implementation of Administration priorities and key legislation, including the Expanding Public Lands Outdoor Recreation Experiences Act (EXPLORE Act), the Great…</summary>
+  </entry>
+  <entry>
+    <title>National Disaster Coverage Training for Indonesian Journalists</title>
+    <link href="https://www.grants.gov/search-results-detail/363318"/>
+    <id>urn:funding-finder:grants-gov:363318</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>U.S. Mission to Indonesia | Closes 2026-08-28 | 1. Project Background, Goals, and Objectives Indonesia is one of the most disaster-prone nations on earth. Situated on the Pacific Ring of Fire and spanning more than 17,000 islands, the archipelago experiences an extraordinary frequency of natural hazards including earthquakes, volcanic eruptions, tsunamis, floods, and landslides affecting millions of people and causing billions of dollars in eco…</summary>
+  </entry>
+  <entry>
+    <title>FY26 Bureau of Land Management Invasive and Noxious Plant Management - Bureau wide</title>
+    <link href="https://www.grants.gov/search-results-detail/363335"/>
+    <id>urn:funding-finder:grants-gov:363335</id>
+    <updated>2026-07-27T00:00:00Z</updated>
+    <author><name>Bureau of Land Management</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Public health"/>
+    <summary>Bureau of Land Management | Closes 2026-09-25 | BLM Invasive and Noxious Plant Management Programs work to prevent, detect, inventory, control, and monitor weed populations on public lands. Invasive species cost the public millions of dollars in control and management each year and many invasive plants and noxious weeds are highly competitive and have the ability to permanently degrade our public lands. Noxious weeds and invasive species expans…</summary>
   </entry>
 </feed>

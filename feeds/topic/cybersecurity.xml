@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-08-14T11:58:24Z</updated>
+  <updated>2026-08-15T10:40:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -17,6 +17,34 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>Rural Utilities Service | Closes 2027-05-03 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+  </entry>
+  <entry>
+    <title>Promoting Responsible Investment and Rights-Respecting Production Models</title>
+    <link href="https://www.grants.gov/search-results-detail/363609"/>
+    <id>urn:funding-finder:grants-gov:363609</id>
+    <updated>2026-08-14T00:00:00Z</updated>
+    <author><name>Bureau of Democracy Human Rights and Labor</name></author>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Energy"/>
+    <category term="Materials science"/>
+    <category term="Cybersecurity"/>
+    <summary>Bureau of Democracy Human Rights and Labor | Closes 2026-08-31 | This program will help responsible businesses counter unfair competition from production models relying on forced labor, worker exploitation, and other violations or abuses of internationally recognized labor rights. The program will also promote worker upskilling by working with leading foreign companies in critical industries to develop and strengthen private-sector workforce development practic…</summary>
+  </entry>
+  <entry>
+    <title>Annual Recurring University Training and Research</title>
+    <link href="https://www.grants.gov/search-results-detail/363594"/>
+    <id>urn:funding-finder:grants-gov:363594</id>
+    <updated>2026-08-14T00:00:00Z</updated>
+    <author><name>National Energy Technology Laboratory</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>National Energy Technology Laboratory | Closes 2026-10-16 | Annual Recurring University Training and ResearchThe purpose of this funding opportunity is to solicit and award research and development grants to educate and train the next generation of engineers and scientists; to support novel, early-stage research at U.S. colleges and universities; to increase research and development opportunities for underrepresented and structurally marginalized communiti…</summary>
   </entry>
   <entry>
     <title>MANUFACTURING AND SMALL BUSINESS CYBERSECURITY RESILIENCE PROGRAM 2026</title>
@@ -507,36 +535,6 @@
     <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
   </entry>
   <entry>
-    <title>Fiscal Year 2026 National Earthquake Hazards Reduction Program Individual State Earthquake Assistance</title>
-    <link href="https://www.grants.gov/search-results-detail/363117"/>
-    <id>urn:funding-finder:grants-gov:363117</id>
-    <updated>2026-07-13T00:00:00Z</updated>
-    <author><name>Department of Homeland Security - FEMA</name></author>
-    <category term="Education and workforce"/>
-    <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA | Closes 2026-08-14 | The National Earthquake Hazards Reduction Program (NEHRP) is a coordinating program for earthquake monitoring, research, implementation, education, and outreach activities developed and conducted by these four agencies: • Federal Emergency Management Agency• National Institute of Standards and Technology• National Science Foundation, and• U.S. Geological SurveyFEMA awards non-competitive, grants t…</summary>
-  </entry>
-  <entry>
-    <title>Fiscal Year 2026 National Earthquake Hazards Reduction Program Multi-State and National Earthquake Assistance</title>
-    <link href="https://www.grants.gov/search-results-detail/363128"/>
-    <id>urn:funding-finder:grants-gov:363128</id>
-    <updated>2026-07-13T00:00:00Z</updated>
-    <author><name>Department of Homeland Security - FEMA</name></author>
-    <category term="Education and workforce"/>
-    <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA | Closes 2026-08-14 | The National Earthquake Hazards Reduction Program (NEHRP) is a coordinating program for earthquake monitoring, research, implementation, education, and outreach activities developed and conducted by these four agencies: • Federal Emergency Management Agency• National Institute of Standards and Technology• National Science Foundation, and• U.S. Geological SurveyFEMA awards competitive grants to non…</summary>
-  </entry>
-  <entry>
-    <title>SERVICE CORP OF RET EXECUTIVES (SCORE) 2026-01</title>
-    <link href="https://www.grants.gov/search-results-detail/363127"/>
-    <id>urn:funding-finder:grants-gov:363127</id>
-    <updated>2026-07-09T00:00:00Z</updated>
-    <author><name>Small Business Administration</name></author>
-    <category term="Community development"/>
-    <category term="Cybersecurity"/>
-    <summary>Small Business Administration | Closes 2026-08-14 | SCORE is the nation’s largest network of volunteer, expert business mentors, with more than 10,000 dedicated volunteers in more than 250 local chapters designed to provide high quality business and economic development assistance to existing small businesses and nascent (pre-venture) entrepreneurs.</summary>
-  </entry>
-  <entry>
     <title>Fiscal Year 2027 Expanding Nutrition Services</title>
     <link href="https://www.grants.gov/search-results-detail/362823"/>
     <id>urn:funding-finder:grants-gov:362823</id>
@@ -679,5 +677,16 @@
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
     <summary>69A355 Research and Technology | Closes 2026-08-28 | The U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Interdisciplinary Transportation Law and Policy Technology Training Development program. This 24-month cooperative agreement aims to bridge the critical knowledge gap between fast-changing transportation technologies and our Nati…</summary>
+  </entry>
+  <entry>
+    <title>FY 2027 International Visitor Leadership Program’s National Program Agencies</title>
+    <link href="https://www.grants.gov/search-results-detail/362943"/>
+    <id>urn:funding-finder:grants-gov:362943</id>
+    <updated>2026-06-24T00:00:00Z</updated>
+    <author><name>Bureau Of Educational and Cultural Affairs</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Cybersecurity"/>
+    <summary>Bureau Of Educational and Cultural Affairs | Closes 2026-08-24 | The United States Department of State’s Bureau of Educational and Cultural Affairs’ Office of International Visitors (ECA/PE/V) announces an open competition for approximately five cooperative agreements to support the staff expenses and overhead costs of the FY 2027 International Visitor Leadership Program’s (IVLP) National Program Agencies (NPAs). Launched in 1940, the IVLP is the Department of …</summary>
   </entry>
 </feed>

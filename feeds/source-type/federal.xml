@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml</id>
-  <updated>2026-08-14T11:58:24Z</updated>
+  <updated>2026-08-15T10:40:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -325,6 +325,16 @@
     <summary>Centers for Disease Control - NCCDPHP | Closes 2027-05-03 | The purpose of this multi-component NOFO is to improve the health of pregnant and postpartum women and their newborns through quality improvement. CDC will fund two components. Component A will support state Perinatal Quality Collaboratives (PQCs). PQCs are state-based organizations that support quality improvement (QI) efforts in health facilities and whose approach has been successful in improvi…</summary>
   </entry>
   <entry>
+    <title>Promoting Population Health through Increased Capacity in Alcohol Epidemiology &amp; the Prevention of Excessive Alcohol Use</title>
+    <link href="https://www.grants.gov/search-results-detail/363592"/>
+    <id>urn:funding-finder:grants-gov:363592</id>
+    <updated>2027-03-01T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCCDPHP</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control - NCCDPHP | Closes 2027-04-30 | CDC announces the availability of fiscal year (FY) 2027 funds to implement CDC-RFA-DP-27-0072, Promoting Population Health through Increased Capacity in Alcohol Epidemiology and the Prevention of Excessive Alcohol Use. The purpose of this NOFO is to build state capacity in alcohol epidemiology and provide the tools and information needed to perform core public health functions related to excessive…</summary>
+  </entry>
+  <entry>
     <title>Maternal-Child Surveillance and Partnerships for Action, Results, and Knowledge</title>
     <link href="https://www.grants.gov/search-results-detail/363313"/>
     <id>urn:funding-finder:grants-gov:363313</id>
@@ -382,6 +392,15 @@
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Closes 2027-06-10 | The Brain Research through Advancing Innovative Neurotechnologies (BRAIN) Initiative intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for research to develop novel tools and approaches that enable the interrogation of cell-specific and circuit-specific processes in the central nervous system. This NOFO consolidates three current BRAIN Initiative tool development pr…</summary>
+  </entry>
+  <entry>
+    <title>Rural Communities Opioid Response Program - Community Systems Development</title>
+    <link href="https://www.grants.gov/search-results-detail/363601"/>
+    <id>urn:funding-finder:grants-gov:363601</id>
+    <updated>2027-02-05T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Social and behavioral sciences"/>
+    <summary>Health Resources and Services Administration | Closes 2027-04-06 | The Rural Communities Opioid Response Program (RCORP) - Community Systems Development provides funding to communities in rural areas to develop and/or expand behavioral health systems of care through formalized networks that expand operational and clinical service capacity regionally through coordinated implementation of evidence-based SUD prevention, treatment, recovery, and related services.</summary>
   </entry>
   <entry>
     <title>NIOSH Support for Conferences and Scientific Meetings (R13 Clinical Trial Not Allowed)</title>
@@ -562,21 +581,5 @@
     <category term="Environmental science"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Closes 2027-05-27 | The National Institute of Mental Health (NIMH) intends to publish a notice of funding opportunity (NOFO) to solicit research applications for practice-based research centers to support interdisciplinary teams of mental health researchers to engage in high-impact studies that will significantly advance clinical practice and generate knowledge to fuel the transformation of mental health care in the …</summary>
-  </entry>
-  <entry>
-    <title>Drug-Free Communities (DFC) Support Program - NEW (Year 1)</title>
-    <link href="https://www.grants.gov/search-results-detail/363353"/>
-    <id>urn:funding-finder:grants-gov:363353</id>
-    <updated>2027-01-26T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCIPC</name></author>
-    <summary>Centers for Disease Control - NCIPC | Closes 2027-03-31 | The Drug-Free Communities (DFC) Support Program was created by the Drug-Free Communities Act of 1997 (Public Law 105-20). The Executive Office of the President, Office of National Drug Control Policy (ONDCP), and the Department of Health and Human Services (HHS), Centers for Disease Control and Prevention (CDC), National Center for Injury Prevention and Control (NCIPC) are accepting applications f…</summary>
-  </entry>
-  <entry>
-    <title>Rural Health Network Development Planning Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363581"/>
-    <id>urn:funding-finder:grants-gov:363581</id>
-    <updated>2027-01-23T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <summary>Health Resources and Services Administration | Closes 2027-03-23 | The Rural Health Network Development Planning Program supports the planning and development of rural integrated health care networks with specific focus on collaboration of entities to establish or improve local capacity and care coordination in underserved communities. Specifically, the program uses the concept of developing networks as a strategy for linking rural health care network participant…</summary>
   </entry>
 </feed>

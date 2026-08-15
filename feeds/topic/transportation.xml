@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-08-14T11:58:24Z</updated>
+  <updated>2026-08-15T10:40:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Mentored Career Transition Award (KT1/R00)</title>
@@ -146,6 +146,15 @@
     <summary>National Institutes of Health | Closes 2026-10-17 | The purpose of this NOFO is to enhance the capability of NCATS CTSA Program KL2 scholars supported by the CTSA Program to conduct research as they complete the transition to fully independent academic translational scientists. These small research grants will support different clinical and translational science research projects, including pilot and feasibility studies; secondary data analysis of …</summary>
   </entry>
   <entry>
+    <title>Charge Ready NY - Large Public Sector Project Program</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001AchJOAAZ"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON6141</id>
+    <updated>2026-08-14T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Transportation"/>
+    <summary>NYSERDA | Closes 2026-10-20 | Supports public sector organizations that aim to develop large portfolios of public Level 2 electric vehicle charging sites within their jurisdictions in New York State. Program Opportunity Notice (PON) 6141 makes up to $35 million available from the Sustainable Future Program, with a minimum of $1 million and a maximum of $15 million of NYSERDA funding per award.</summary>
+  </entry>
+  <entry>
     <title>FY26 Transportation Emergency Response Training</title>
     <link href="https://www.grants.gov/search-results-detail/363583"/>
     <id>urn:funding-finder:grants-gov:363583</id>
@@ -209,16 +218,6 @@
     <category term="Manufacturing"/>
     <category term="Transportation"/>
     <summary>Geological Survey | Closes 2026-09-11 | The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner for research in determining the effects that variations of spatial geotechnical sediment properties have on geomorphic response during storm impacts. This effort will advance capabilities to predict impacts of storms along the Nation's coastline. Hurricanes Ian and Fiona, which caused major damage ($50-65 billion…</summary>
-  </entry>
-  <entry>
-    <title>Public Diplomacy Grants/Small Grants Program - Ghana</title>
-    <link href="https://www.grants.gov/search-results-detail/363515"/>
-    <id>urn:funding-finder:grants-gov:363515</id>
-    <updated>2026-08-10T00:00:00Z</updated>
-    <author><name>U.S. Mission to Ghana</name></author>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <summary>U.S. Mission to Ghana | Closes 2026-08-14 | The U.S. Department of State's Embassy Accra, Ghana announces an open competition to implement programs that advance U.S.-Ghana bilateral relations and U.S. foreign policy priorities in Ghana and West Africa. This funding opportunity supports projects that align U.S.-Ghana economic and commercial engagement with core U.S. interests, secure U.S. borders through law enforcement collaboration and inf…</summary>
   </entry>
   <entry>
     <title>FY26 - Stopping Threats On Pedestrian Competitive Grant Program (Bollards)</title>
@@ -539,16 +538,6 @@
     <summary>Community Oriented Policing Services | Closes 2026-08-31 | The Office of Community Oriented Policing Services (COPS) is the component of the U.S. Department of Justice responsible for advancing the practice of community policing and the Administration’s priority of Making America Safe Again by supporting the nation’s state, local, territorial and Tribal law enforcement agencies through information and grant resources. The COPS Office / NHTSA Impaired Driv…</summary>
   </entry>
   <entry>
-    <title>The Primary Prevention Youth Homelessness Demonstration Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362099"/>
-    <id>urn:funding-finder:grants-gov:362099</id>
-    <updated>2026-07-23T00:00:00Z</updated>
-    <author><name>Administration for Children &amp; Families - ACYF/FYSB</name></author>
-    <category term="Social and behavioral sciences"/>
-    <category term="Transportation"/>
-    <summary>Administration for Children &amp; Families - ACYF/FYSB | Closes 2026-08-17 | The Primary Prevention Youth Homelessness Demonstration Program provides funding to identify and implement strategies and services for youth and young adults between ages 12 and 26 in order to prevent homelessness, including strategies designed to serve youth and young adult populations with a high likelihood of experiencing homelessness, housing instability, particularly among youth at risk of hu…</summary>
-  </entry>
-  <entry>
     <title>Legal Competency and Training Program in Southeast Asia and the Pacific</title>
     <link href="https://www.grants.gov/search-results-detail/363301"/>
     <id>urn:funding-finder:grants-gov:363301</id>
@@ -557,6 +546,16 @@
     <category term="Education and workforce"/>
     <category term="Transportation"/>
     <summary>Bureau of East Asian and Pacific Affairs | Closes 2026-08-25 | The overall goal of the project is to strengthen the legal capacity and proficiency of government officials, including policymakers, negotiators, legal experts and practitioners, and other relevant officials from Southeast Asian and Pacific Islands countries concerning the principles and practices of public international law, including, but not limited to, the law of the sea as reflected in the 19…</summary>
+  </entry>
+  <entry>
+    <title>The Primary Prevention Youth Homelessness Demonstration Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362099"/>
+    <id>urn:funding-finder:grants-gov:362099</id>
+    <updated>2026-07-23T00:00:00Z</updated>
+    <author><name>Administration for Children &amp; Families - ACYF/FYSB</name></author>
+    <category term="Social and behavioral sciences"/>
+    <category term="Transportation"/>
+    <summary>Administration for Children &amp; Families - ACYF/FYSB | Closes 2026-08-31 | The Primary Prevention Youth Homelessness Demonstration Program provides funding to identify and implement strategies and services for youth and young adults between ages 12 and 26 in order to prevent homelessness, including strategies designed to serve youth and young adult populations with a high likelihood of experiencing homelessness, housing instability, particularly among youth at risk of hu…</summary>
   </entry>
   <entry>
     <title>Egypt Annual Program Statement</title>

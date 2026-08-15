@@ -4,8 +4,66 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml</id>
-  <updated>2026-08-14T11:58:24Z</updated>
+  <updated>2026-08-15T10:40:44Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>DEFENSE ADVANCED RESEARCH PROJECTS AGENCY (DARPA)</title>
+    <link href="https://sam.gov/opp/a269e0efc8614bf5b9ea6628ae5f1ad7/view"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-a63ebf170f822213</id>
+    <updated>2026-08-14T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-08-27</summary>
+  </entry>
+  <entry>
+    <title>Simons Foundation’s Mathematics and Physical Sciences (MPS) Targeted Grants to Institutes</title>
+    <link href="https://www.simonsfoundation.org/grant/targeted-grants-to-institutes/"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-f068b41ca38718f9</id>
+    <updated>2026-08-14T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-30</summary>
+  </entry>
+  <entry>
+    <title>NSF Mathematical Foundations of Artificial Intelligence (MFAI) 24-569</title>
+    <link href="https://new.nsf.gov/funding/opportunities/mathematical-foundations-artificial-intelligence"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-dadbe58144e6e089</id>
+    <updated>2026-08-14T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-10-09</summary>
+  </entry>
+  <entry>
+    <title>PumpPrimer II Program for SAS and Hajim Tenure-track faculty</title>
+    <link href="https://rochester.infoready4.com/"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Ainfoready-1993899</id>
+    <updated>2026-08-14T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-10-23</summary>
+  </entry>
+  <entry>
+    <title>Simons Foundation Simons Collaborations in Mathematics and the Physical Sciences</title>
+    <link href="https://www.simonsfoundation.org/grant/simons-collaborations-in-mathematics-and-the-physical-sciences/"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-02ca89881582e10d</id>
+    <updated>2026-08-14T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-10-29</summary>
+  </entry>
+  <entry>
+    <title>NSF Plasma Physics</title>
+    <link href="https://beta.nsf.gov/funding/opportunities/plasma-physics"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-bd193799390f4580</id>
+    <updated>2026-08-14T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-11-16</summary>
+  </entry>
+  <entry>
+    <title>NSF Division of Physics: Investigator-Initiated Research Projects (PHY) 23-615</title>
+    <link href="https://new.nsf.gov/funding/opportunities/division-physics-investigator-initiated-research"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-ea71d76309a706c1</id>
+    <updated>2026-08-14T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
+  </entry>
   <entry>
     <title>NSF DCL Advancing Artificial Intelligence (AI) Agent Ecosystems through the National Science Foundation Pathways to Enable Secure Open-Source Ecosystems (NSF PESOSE) Program | NSF 26-015</title>
     <link href="https://www.nsf.gov/funding/opportunities/dcl-advancing-artificial-intelligence-ai-agent-ecosystems"/>

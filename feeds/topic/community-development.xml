@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml</id>
-  <updated>2026-08-14T11:58:24Z</updated>
+  <updated>2026-08-15T10:40:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Veterans Legacy Grants Program</title>
@@ -357,16 +357,6 @@
     <summary>Foreign Agricultural Service | Closes 2026-08-17 | Modern agricultural biotechnology such as genome editing is a revolutionary tool that could transform the sustainability and viability of the agriculture sector. American farmers rely on agricultural biotechnology products, with over 90% of corn and soybeans derived from these technologies. In 2025, American farmers exported over $51 billion in agricultural biotechnology products worldwide. Howeve…</summary>
   </entry>
   <entry>
-    <title>SERVICE CORP OF RET EXECUTIVES (SCORE) 2026-01</title>
-    <link href="https://www.grants.gov/search-results-detail/363127"/>
-    <id>urn:funding-finder:grants-gov:363127</id>
-    <updated>2026-07-09T00:00:00Z</updated>
-    <author><name>Small Business Administration</name></author>
-    <category term="Community development"/>
-    <category term="Cybersecurity"/>
-    <summary>Small Business Administration | Closes 2026-08-14 | SCORE is the nation’s largest network of volunteer, expert business mentors, with more than 10,000 dedicated volunteers in more than 250 local chapters designed to provide high quality business and economic development assistance to existing small businesses and nascent (pre-venture) entrepreneurs.</summary>
-  </entry>
-  <entry>
     <title>FAIR HOUSING INITIATIVES PROGRAM PRIVATE ENFORCEMENT INITIATIVE</title>
     <link href="https://www.grants.gov/search-results-detail/362827"/>
     <id>urn:funding-finder:grants-gov:362827</id>
@@ -398,18 +388,6 @@
     <category term="Cancer"/>
     <category term="Community development"/>
     <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-11-18 | Summary: The fiscal year 2026 (FY26) Rare Cancers Research Program (RCRP) Resource and Community Development Award (RCDA) supports the development of research resources and clinical or preclinical datasets that will advance the field of rare cancers research and ultimately improve outcomes for individuals with rare cancers. Research supporting this funding opportunity should fill one of the follow…</summary>
-  </entry>
-  <entry>
-    <title>Tribal Colleges Extension Program - Capacity Applications</title>
-    <link href="https://www.grants.gov/search-results-detail/362780"/>
-    <id>urn:funding-finder:grants-gov:362780</id>
-    <updated>2026-06-12T00:00:00Z</updated>
-    <author><name>National Institute of Food and Agriculture</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Community development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>National Institute of Food and Agriculture | Closes 2026-08-14 | The TCEP-CA under assistance listing 10.517, supports informal, community-based extension projects that address agriculture, youths, economic development, healthy lifestyles, natural resources, or other topics important to Tribal communities. This NOFO will begin a new 4-year continuation funding cycle.</summary>
   </entry>
   <entry>
     <title>Authority to Accept Unsolicited Proposals for Research Partnerships Notice of Intent (NOI)</title>
@@ -668,6 +646,17 @@
     <title>Philadelphia FY 2021 - FY 2023 EDA Planning and Local Technical Assistance</title>
     <link href="https://www.grants.gov/search-results-detail/332138"/>
     <id>urn:funding-finder:grants-gov:332138</id>
+    <updated>2021-03-15T00:00:00Z</updated>
+    <author><name>Department of Commerce</name></author>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <summary>Department of Commerce | Posted | UPDATED NOTICE - PLEASE READ: April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
+  </entry>
+  <entry>
+    <title>Seattle FY 2021 - FY 2023 EDA Planning and Local Technical Assistance</title>
+    <link href="https://www.grants.gov/search-results-detail/332127"/>
+    <id>urn:funding-finder:grants-gov:332127</id>
     <updated>2021-03-15T00:00:00Z</updated>
     <author><name>Department of Commerce</name></author>
     <category term="Arts and culture"/>

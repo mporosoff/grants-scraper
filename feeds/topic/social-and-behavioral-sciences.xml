@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml</id>
-  <updated>2026-08-14T11:58:24Z</updated>
+  <updated>2026-08-15T10:40:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -60,6 +60,15 @@
     <summary>National Institutes of Health | Closes 2027-05-25 | The National Institute of Mental Health (NIMH) seeks research applications to support the NIMH HIV/AIDS Research Centers (ARC) program, including Developmental Centers (D-ARCs) and full AIDS Research Centers (ARCs). These Research Centers aim to capitalize on the coordinated infrastructure to advance high-impact, interdisciplinary HIV/AIDS research. The ARC program supports innovative research acr…</summary>
   </entry>
   <entry>
+    <title>Rural Communities Opioid Response Program - Community Systems Development</title>
+    <link href="https://www.grants.gov/search-results-detail/363601"/>
+    <id>urn:funding-finder:grants-gov:363601</id>
+    <updated>2027-02-05T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Social and behavioral sciences"/>
+    <summary>Health Resources and Services Administration | Closes 2027-04-06 | The Rural Communities Opioid Response Program (RCORP) - Community Systems Development provides funding to communities in rural areas to develop and/or expand behavioral health systems of care through formalized networks that expand operational and clinical service capacity regionally through coordinated implementation of evidence-based SUD prevention, treatment, recovery, and related services.</summary>
+  </entry>
+  <entry>
     <title>Domestic Violence Prevention</title>
     <link href="https://www.grants.gov/search-results-detail/363491"/>
     <id>urn:funding-finder:grants-gov:363491</id>
@@ -92,6 +101,15 @@
     <category term="Environmental science"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Closes 2027-05-27 | The National Institute of Mental Health (NIMH) intends to publish a notice of funding opportunity (NOFO) to solicit research applications for practice-based research centers to support interdisciplinary teams of mental health researchers to engage in high-impact studies that will significantly advance clinical practice and generate knowledge to fuel the transformation of mental health care in the …</summary>
+  </entry>
+  <entry>
+    <title>Rural Communities Opioid Response Program - Evaluation</title>
+    <link href="https://www.grants.gov/search-results-detail/363600"/>
+    <id>urn:funding-finder:grants-gov:363600</id>
+    <updated>2027-01-23T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Social and behavioral sciences"/>
+    <summary>Health Resources and Services Administration | Closes 2027-03-23 | The purpose of the Rural Communities Opioid Response Program (RCORP) - Evaluation is to evaluate the impact of rural behavioral health strategies and methods employed under the RCORP initiative, and to develop evaluation tools and resources for use in rural communities to inform future community-led rural health initiatives</summary>
   </entry>
   <entry>
     <title>Demonstration Projects for Whole-Person Health Models for Women Living with HIV in the South</title>
@@ -216,16 +234,6 @@
     <summary>Administration for Children and Families - OCS | Closes 2026-08-24 | This NOFO is modified. The email address and phone number for the program office have been revised in the Contacts and Support section. The Community Services Block Grant (CSBG) Essentials for Improved Outcomes will fund an organization to help states, territories, and CSBG-eligible entities: 1) strengthen their understanding of CSBG statutory and regulatory requirements; 2) enhance their implemen…</summary>
   </entry>
   <entry>
-    <title>The Primary Prevention Youth Homelessness Demonstration Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362099"/>
-    <id>urn:funding-finder:grants-gov:362099</id>
-    <updated>2026-07-23T00:00:00Z</updated>
-    <author><name>Administration for Children &amp; Families - ACYF/FYSB</name></author>
-    <category term="Social and behavioral sciences"/>
-    <category term="Transportation"/>
-    <summary>Administration for Children &amp; Families - ACYF/FYSB | Closes 2026-08-17 | The Primary Prevention Youth Homelessness Demonstration Program provides funding to identify and implement strategies and services for youth and young adults between ages 12 and 26 in order to prevent homelessness, including strategies designed to serve youth and young adult populations with a high likelihood of experiencing homelessness, housing instability, particularly among youth at risk of hu…</summary>
-  </entry>
-  <entry>
     <title>American Innovation Hub: AI &amp; Digital Skills for the Creative &amp; Tech Economy</title>
     <link href="https://www.grants.gov/search-results-detail/363293"/>
     <id>urn:funding-finder:grants-gov:363293</id>
@@ -239,6 +247,16 @@
     <category term="Technology development"/>
     <category term="Data science"/>
     <summary>U.S. Mission to Indonesia | Closes 2026-08-30 | Indonesia is ASEAN’s largest economy and most populous nation, with a young, fast-growing digital population that is rapidly adopting artificial intelligence and creative-technology tools. The choices this generation makes about which technologies, standards, and platforms to build on will shape Indonesia’s digital economy for decades. Demand for trusted, high-quality AI tools is outpacing access …</summary>
+  </entry>
+  <entry>
+    <title>The Primary Prevention Youth Homelessness Demonstration Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362099"/>
+    <id>urn:funding-finder:grants-gov:362099</id>
+    <updated>2026-07-23T00:00:00Z</updated>
+    <author><name>Administration for Children &amp; Families - ACYF/FYSB</name></author>
+    <category term="Social and behavioral sciences"/>
+    <category term="Transportation"/>
+    <summary>Administration for Children &amp; Families - ACYF/FYSB | Closes 2026-08-31 | The Primary Prevention Youth Homelessness Demonstration Program provides funding to identify and implement strategies and services for youth and young adults between ages 12 and 26 in order to prevent homelessness, including strategies designed to serve youth and young adult populations with a high likelihood of experiencing homelessness, housing instability, particularly among youth at risk of hu…</summary>
   </entry>
   <entry>
     <title>Effects of International Parental Child Abduction on Abducted Children and Left-Behind Parents</title>
@@ -635,27 +653,5 @@
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
     <summary>U.S. National Science Foundation | Posted | The Collaboratory to Advance Mathematics Education and Learning (CAMEL) for K-12 initiative aims to advance mathematics learning and education through purposeful collaboration that draws on the interdisciplinary Science of Learning (including neuroscience; cognitive, developmental, and social sciences; computer science; machine learning; engineering; and education research), deep experiences in ed…</summary>
-  </entry>
-  <entry>
-    <title>Mind and Body Interventions to Restore Whole Person Health via Emotional Well-Being Mechanisms (R61/R33 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/359155"/>
-    <id>urn:funding-finder:grants-gov:359155</id>
-    <updated>2025-09-26T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Cybersecurity"/>
-    <summary>National Institutes of Health | Closes 2028-06-07 | The National Center for Complementary and Integrative Health (NCCIH) announces this Notice of Funding Opportunity (NOFO) to solicit applications for research on how mind and body interventions through psychological and/or physical inputs (e.g., mindfulness meditation, yoga, acupuncture, massage, and other brain and/or body based interventions) impact mechanisms of emotional well-being (EWB) and th…</summary>
-  </entry>
-  <entry>
-    <title>NIA Expanding Research in AD/ADRD (ERA) Postbaccalaureate Research Education Program (R25 Independent Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359653"/>
-    <id>urn:funding-finder:grants-gov:359653</id>
-    <updated>2025-09-02T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health | Closes 2027-05-26 | This Notice of Funding Opportunity Announcement (NOFO) invites R25 applications to support the development and implementation of research education programs for recent baccalaureates from all backgrounds, including those from groups underrepresented in the biomedical and behavioral sciences. It is essential to expand and broaden the skilled Alzheimers Disease (AD) and Alzheimers Disease and Relate…</summary>
   </entry>
 </feed>
