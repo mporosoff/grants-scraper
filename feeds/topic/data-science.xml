@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-08-15T10:40:44Z</updated>
+  <updated>2026-08-15T19:24:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -92,7 +92,6 @@
     <updated>2026-11-06T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Biology and biotechnology"/>
     <category term="Data science"/>
     <category term="Environmental science"/>
@@ -106,7 +105,6 @@
     <id>urn:funding-finder:grants-gov:361186</id>
     <updated>2026-10-01T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
     <category term="Data science"/>
     <summary>National Institutes of Health | Closes 2026-12-01 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS), in conjunction with other NIH Institutes and Centers (ICs) as a part of the congressionally mandated NIH Helping to End Addiction Long Term (HEAL) initiative intends to publish a Notice of Funding Opportunity (NOFO) to leverage and accelerate the progress achieved in the Restoring Joint Health and Function to Reduce…</summary>
   </entry>
@@ -141,7 +139,6 @@
     <updated>2026-08-14T00:00:00Z</updated>
     <author><name>Bureau of Economic and Business Affairs</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Manufacturing"/>
     <category term="Materials science"/>
     <category term="Data science"/>
@@ -264,7 +261,6 @@
     <id>urn:funding-finder:grants-gov:363468</id>
     <updated>2026-08-06T00:00:00Z</updated>
     <author><name>Department of Education</name></author>
-    <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
@@ -314,7 +310,6 @@
     <updated>2026-08-06T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Data science"/>
     <category term="Cybersecurity"/>
@@ -349,7 +344,6 @@
     <updated>2026-08-01T00:00:00Z</updated>
     <author><name>U.S. Mission to Ukraine</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Community development"/>
     <category term="Cybersecurity"/>
     <category term="Education and workforce"/>
@@ -365,7 +359,6 @@
     <updated>2026-08-01T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Data science"/>
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
@@ -400,7 +393,6 @@
     <updated>2026-07-30T00:00:00Z</updated>
     <author><name>Administration for Children and Families - ANA</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <category term="Data science"/>
@@ -450,7 +442,6 @@
     <updated>2026-07-28T00:00:00Z</updated>
     <author><name>U.S. Mission to Mexico</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
@@ -476,7 +467,6 @@
     <updated>2026-07-27T00:00:00Z</updated>
     <author><name>U.S. Mission to Argentina</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
@@ -552,7 +542,6 @@
     <updated>2026-07-21T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Technology development"/>
     <category term="Data science"/>
     <summary>U.S. National Science Foundation | Closes 2026-11-04 | This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
@@ -676,13 +665,13 @@
     <updated>2026-06-22T00:00:00Z</updated>
     <author><name>U.S. Mission to Indonesia</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Cybersecurity"/>
     <category term="Manufacturing"/>
     <category term="Technology development"/>
     <category term="Transportation"/>
     <category term="Data science"/>
     <category term="Energy"/>
+    <category term="Materials science"/>
     <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | Project Background, Goals, and Objectives: In an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will lea…</summary>
   </entry>
   <entry>
@@ -725,7 +714,6 @@
     <updated>2026-06-02T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health | Closes 2026-09-25 | The National Library of Medicine (NLM) invites applications for innovative predoctoral and postdoctoral training programs that prepare the next generation of researchers in biomedical informatics, data science, and artificial intelligence/machine learning (AI/ML). NLM emphasizes cutting-edge, forward-looking training experiences that equip trainees to address complex health and biomedical challeng…</summary>

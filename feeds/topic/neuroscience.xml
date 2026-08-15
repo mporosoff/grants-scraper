@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml</id>
-  <updated>2026-08-15T10:40:44Z</updated>
+  <updated>2026-08-15T19:24:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -221,7 +221,6 @@
     <updated>2026-08-06T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Closes 2026-10-06 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that develop or incorporate novel, cutting-edge study designs/methods/analytic approaches through the use of machine learning, artificial intelligence, and adaptive designs to allow the discovery of health/function profiles at the level of the individual and that could lead to th…</summary>
@@ -242,7 +241,6 @@
     <updated>2026-08-01T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Data science"/>
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
@@ -363,7 +361,6 @@
     <updated>2026-06-11T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
@@ -388,7 +385,6 @@
     <updated>2026-06-03T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Neuroscience"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Closes 2026-10-02 | This Notice of Funding Opportunity (NOFO) invites exploratory grant applications, hereafter referred to as the Novel Experiential Technologies Assisting Individual learning Hubs or NExT AI Hubs (formerly Learning Disabilities Innovation Hubs), to address the impact of Artificial Intelligence (AI) technologies on developmental outcomes in children diagnosed with or at risk for developing a specific…</summary>
@@ -491,7 +487,6 @@
     <id>urn:funding-finder:grants-gov:360048</id>
     <updated>2026-04-20T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Closes 2026-11-02 | Forty to sixty percent of individuals with opioid use disorder (OUD) have co-occurring chronic pain (CP), which impacts their ability to fully engage in treatment. Effective management of both conditions is hindered by siloed medical disciplines and health systems. HEAL Integrative Management of Chronic Pain and OUD for Whole Recovery (IMPOWR) was funded in FY21 to support 11 unique clinical trial…</summary>
   </entry>
@@ -501,7 +496,6 @@
     <id>urn:funding-finder:grants-gov:360366</id>
     <updated>2026-04-20T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Closes 2026-11-02 | 40-75% percent of individuals with opioid use disorder (OUD) have co-occurring chronic pain (CP), which impacts their ability to fully engage in treatment. Effective management of both conditions is hindered by siloed medical disciplines and health systems. HEAL Integrative Management of Chronic Pain and OUD for Whole Recovery (IMPOWR) was funded in FY21 to test novel interventions for the managem…</summary>
   </entry>
@@ -560,14 +554,11 @@
     <id>urn:funding-finder:grants-gov:358682</id>
     <updated>2025-04-16T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
-    <category term="Arts and culture"/>
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <category term="Technology development"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Posted | The Mind, Machine, and Motor Nexus (M3X) program supports fundamental research that enables intelligent engineered systems and humans to engage in bidirectional interaction in a physics-based environment, to enhance and ensure safety, productivity, and well-being.
 For the purpose of this program an intelligent engineered system is a human-designed system - physical, virtual, or a combination of bo…</summary>
   </entry>

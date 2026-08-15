@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml</id>
-  <updated>2026-08-15T10:40:44Z</updated>
+  <updated>2026-08-15T19:24:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -198,7 +198,6 @@
     <id>urn:funding-finder:grants-gov:362752</id>
     <updated>2026-09-01T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
     <category term="Biology and biotechnology"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Closes 2027-03-04 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for Exploratory Clinical Trials Grants Program in the mission areas of NIAMS. The goal of the NIAMS clinical trial program is to support research leading to the prevention or reduction of symptoms and improve outcomes and function in pa…</summary>
@@ -375,7 +374,6 @@
     <updated>2026-06-11T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
@@ -447,7 +445,6 @@
     <id>urn:funding-finder:grants-gov:361304</id>
     <updated>2026-05-31T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
     <category term="Biology and biotechnology"/>
     <category term="Environmental science"/>
     <category term="Social and behavioral sciences"/>
@@ -548,7 +545,6 @@
     <id>urn:funding-finder:grants-gov:360653</id>
     <updated>2026-05-12T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Closes 2028-06-15 | The NIH INvestigation of Co-occurring conditions across the Lifespan to Understand Down syndromE (INCLUDE) Project seeks to improve health and quality-of-life for individuals with Down syndrome. This Notice of Funding Opportunity (NOFO) invites researchers to submit applications for support of new exploratory and developmental research projects that address critical needs for Down syndrome project…</summary>
   </entry>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-08-15T10:40:44Z</updated>
+  <updated>2026-08-15T19:24:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -128,7 +128,6 @@
     <id>urn:funding-finder:grants-gov:363468</id>
     <updated>2026-08-06T00:00:00Z</updated>
     <author><name>Department of Education</name></author>
-    <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
@@ -178,7 +177,6 @@
     <updated>2026-08-06T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Data science"/>
     <category term="Cybersecurity"/>
@@ -316,7 +314,6 @@
     <updated>2026-08-01T00:00:00Z</updated>
     <author><name>U.S. Mission to Ukraine</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Community development"/>
     <category term="Cybersecurity"/>
     <category term="Education and workforce"/>
@@ -476,7 +473,6 @@
     <updated>2026-07-20T00:00:00Z</updated>
     <author><name>U.S. Mission to Albania</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Cybersecurity"/>
     <category term="Education and workforce"/>
     <category term="Technology development"/>
@@ -500,7 +496,6 @@
     <id>urn:funding-finder:grants-gov:363247</id>
     <updated>2026-07-20T00:00:00Z</updated>
     <author><name>U.S. Mission to Albania</name></author>
-    <category term="Arts and culture"/>
     <category term="Cybersecurity"/>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
@@ -672,7 +667,6 @@
     <updated>2026-06-30T00:00:00Z</updated>
     <author><name>69A355 Research and Technology</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Transportation"/>
     <category term="Cybersecurity"/>

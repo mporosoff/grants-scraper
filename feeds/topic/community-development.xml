@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml</id>
-  <updated>2026-08-15T10:40:44Z</updated>
+  <updated>2026-08-15T19:24:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Veterans Legacy Grants Program</title>
@@ -100,7 +100,6 @@
     <updated>2026-09-01T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Biology and biotechnology"/>
     <category term="Community development"/>
     <category term="Education and workforce"/>
@@ -216,7 +215,6 @@
     <updated>2026-08-01T00:00:00Z</updated>
     <author><name>U.S. Mission to Ukraine</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Community development"/>
     <category term="Cybersecurity"/>
     <category term="Education and workforce"/>
@@ -232,7 +230,6 @@
     <updated>2026-07-30T00:00:00Z</updated>
     <author><name>Administration for Children and Families - ANA</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <category term="Data science"/>
@@ -254,7 +251,6 @@
     <id>urn:funding-finder:grants-gov:363370</id>
     <updated>2026-07-29T00:00:00Z</updated>
     <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Arts and culture"/>
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | 1. Project Background, Goals, and Objectives: With over 270 million people and one of the world’s largest social media user bases, Indonesia’s citizens consume media content from a wide array of traditional and digital sources. Journalists and media professionals capable of reporting accurately and comprehensively on critical issues - including democratic governance, economic development, emerging…</summary>
@@ -266,7 +262,6 @@
     <updated>2026-07-28T00:00:00Z</updated>
     <author><name>U.S. Mission to Mexico</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
@@ -415,7 +410,6 @@
     <updated>2026-04-27T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Community development"/>
     <summary>National Institutes of Health | Closes 2026-10-19 | The purpose of this Notice of Funding Opportunity (NOFO) is to seek applications for a Community Engagement Evaluation and Data coordination hub (CEED) for the Community-Based Participatory Research (CBPR) consortium: Advancing Data and Practice Transformation (ADAPT) for Optimizing Oral Health for All. In addition to CEED, the ADAPT consortium will include separately funded CBPR projects, which w…</summary>
   </entry>
@@ -426,7 +420,6 @@
     <updated>2026-04-27T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Community development"/>
     <summary>National Institutes of Health | Closes 2028-11-16 | The purpose of this Notice of Funding Opportunity (NOFO) is to solicit UG3/UH3 phased, cooperative agreement research applications to evaluate, implement, and/or test population-based interventions to policies, programs, and/or practices for promoting integration of services, systems, and/or values by leveraging cross-sector partnerships in communities. Such interventions must address social and c…</summary>
   </entry>
@@ -580,13 +573,13 @@
     <updated>2021-06-24T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Community development"/>
     <category term="Cybersecurity"/>
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <category term="Quantum science"/>
     <category term="Social and behavioral sciences"/>
+    <category term="Technology development"/>
     <summary>U.S. National Science Foundation | Closes 2026-09-01 | The Tribal Colleges and Universities Program (TCUP) provides awards to federally recognized1 Tribal Colleges and Universities, Alaska Native-serving institutions, and Native Hawaiian-serving institutions to promote high quality science (including sociology, psychology, anthropology, linguistics, economics and bioeconomics, statistics, and other social and behavioral sciences; natural sciences; com…</summary>
   </entry>
   <entry>
@@ -604,7 +597,6 @@
     <id>urn:funding-finder:grants-gov:332052</id>
     <updated>2021-03-15T00:00:00Z</updated>
     <author><name>Department of Commerce</name></author>
-    <category term="Arts and culture"/>
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>Department of Commerce | Posted | NOTICE: Application Process as of April 6th EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
@@ -615,7 +607,6 @@
     <id>urn:funding-finder:grants-gov:332137</id>
     <updated>2021-03-15T00:00:00Z</updated>
     <author><name>Department of Commerce</name></author>
-    <category term="Arts and culture"/>
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>Department of Commerce | Posted | UPDATED NOTICE - PLEASE READ: April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
@@ -626,7 +617,6 @@
     <id>urn:funding-finder:grants-gov:332125</id>
     <updated>2021-03-15T00:00:00Z</updated>
     <author><name>Department of Commerce</name></author>
-    <category term="Arts and culture"/>
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>Department of Commerce | Posted | UPDATED NOTICE - PLEASE READ: April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
@@ -637,7 +627,6 @@
     <id>urn:funding-finder:grants-gov:332126</id>
     <updated>2021-03-15T00:00:00Z</updated>
     <author><name>Department of Commerce</name></author>
-    <category term="Arts and culture"/>
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>Department of Commerce | Posted | UPDATED NOTICE - PLEASE READ: April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
@@ -648,7 +637,6 @@
     <id>urn:funding-finder:grants-gov:332138</id>
     <updated>2021-03-15T00:00:00Z</updated>
     <author><name>Department of Commerce</name></author>
-    <category term="Arts and culture"/>
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>Department of Commerce | Posted | UPDATED NOTICE - PLEASE READ: April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>
@@ -659,7 +647,6 @@
     <id>urn:funding-finder:grants-gov:332127</id>
     <updated>2021-03-15T00:00:00Z</updated>
     <author><name>Department of Commerce</name></author>
-    <category term="Arts and culture"/>
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>Department of Commerce | Posted | UPDATED NOTICE - PLEASE READ: April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the enti…</summary>

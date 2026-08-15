@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/separations-and-membranes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/separations-and-membranes.xml</id>
-  <updated>2026-08-15T10:40:44Z</updated>
+  <updated>2026-08-15T19:24:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Strengthening Community-Backed Governance to Advance Stability and Peace in Burma</title>
@@ -39,12 +39,12 @@
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Agriculture and food"/>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Biology and biotechnology"/>
     <category term="Catalysis and reaction engineering"/>
     <category term="Energy"/>
     <category term="Manufacturing"/>
     <category term="Materials science"/>
+    <category term="Quantum science"/>
     <summary>U.S. National Science Foundation | Posted | Society relies on chemical processes to turn raw materials into useful products. The Chemical Process Systems (CPS) program invests in fundamental research on chemical and biochemical processes to make them more efficient, sustainable, and resilient. New CPS technologies for manufacturing, biotechnology, critical minerals, energy, food, and other national priorities will help make the U.S. more co…</summary>
   </entry>
   <entry>
@@ -54,13 +54,13 @@
     <updated>2026-04-24T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Biology and biotechnology"/>
     <category term="Energy"/>
     <category term="Manufacturing"/>
     <category term="Quantum science"/>
     <category term="Separations and membranes"/>
     <category term="Technology development"/>
+    <category term="Transportation"/>
     <summary>U.S. National Science Foundation | Posted | The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
   </entry>
   <entry>
@@ -97,7 +97,6 @@
     <id>urn:funding-finder:grants-gov:358021</id>
     <updated>2025-01-06T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
     <category term="Separations and membranes"/>
     <summary>National Institutes of Health | Closes 2026-10-01 | This funding opportunity aims to support high risk clinical trials for the development of in vivo high-resolution structural and functional imaging technologies for the living human inner ear. Proposed projects should focus on improving the resolution of current imaging techniques or developing new imaging techniques that can visualize inner ear structures in vivo with significantly greater detail…</summary>
   </entry>
@@ -107,8 +106,21 @@
     <id>urn:funding-finder:grants-gov:358022</id>
     <updated>2025-01-06T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
     <category term="Separations and membranes"/>
     <summary>National Institutes of Health | Closes 2026-10-01 | This funding opportunity aims to support the development of in vivo high-resolution structural and functional imaging technologies for the living human inner ear. Proposed projects should focus on improving the resolution of current imaging techniques or developing new imaging techniques that can visualize inner ear structures in vivo with significantly greater detail and accuracy than currently p…</summary>
+  </entry>
+  <entry>
+    <title>FY25 Long Range Broad Agency Announcement (BAA) for Navy and Marine Corps Science and Technology</title>
+    <link href="https://www.grants.gov/search-results-detail/356605"/>
+    <id>urn:funding-finder:grants-gov:356605</id>
+    <updated>2024-10-01T00:00:00Z</updated>
+    <author><name>Office of Naval Research</name></author>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Quantum science"/>
+    <summary>Office of Naval Research | Closes 2026-09-30 | ONR, ONRG, and MCWL are interested in receiving proposals for Long-Range S&amp;T Projects that offer potential for advancement and improvement of Navy and Marine Corps operations. Readers should note that this is an announcement to declare ONR, ONRG and MCWL’s broad role in competitive funding of meritorious research across a spectrum of science and engineering disciplines. All responsible sources fro…</summary>
   </entry>
 </feed>

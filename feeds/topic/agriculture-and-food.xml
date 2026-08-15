@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-08-15T10:40:44Z</updated>
+  <updated>2026-08-15T19:24:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -45,7 +45,6 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Agriculture and food"/>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Environmental science"/>
     <summary>Health Resources and Services Administration | Closes 2027-03-18 | The purpose of this program is to improve maternal and infant outcomes by preventing contact with harmful materials before, during, and after pregnancy. This program aims to improve maternal and infant health outcomes by preventing harmful exposures before, during, and after pregnancy. It supports a national expert-staffed call center that provides timely, evidence-based information and personaliz…</summary>
   </entry>
@@ -584,12 +583,12 @@
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Agriculture and food"/>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Biology and biotechnology"/>
     <category term="Catalysis and reaction engineering"/>
     <category term="Energy"/>
     <category term="Manufacturing"/>
     <category term="Materials science"/>
+    <category term="Quantum science"/>
     <summary>U.S. National Science Foundation | Posted | Society relies on chemical processes to turn raw materials into useful products. The Chemical Process Systems (CPS) program invests in fundamental research on chemical and biochemical processes to make them more efficient, sustainable, and resilient. New CPS technologies for manufacturing, biotechnology, critical minerals, energy, food, and other national priorities will help make the U.S. more co…</summary>
   </entry>
   <entry>
@@ -605,7 +604,6 @@
     <category term="Manufacturing"/>
     <category term="Materials science"/>
     <category term="Technology development"/>
-    <category term="Carbon management"/>
     <summary>U.S. National Science Foundation | Posted | The Energy, Water, and Resource Engineering (EWRE) program supports fundamental research to advance energy, water, and resource management and to safeguard health. Better use of domestic resources will make U.S. manufacturing, energy and water systems more efficient and secure.
 EWRE supports research that creates domestic sources of energy, advances water management, and recovers resources using c…</summary>
   </entry>
@@ -631,7 +629,6 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <author><name>National Institute of Food and Agriculture</name></author>
     <category term="Agriculture and food"/>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <summary>National Institute of Food and Agriculture | Closes 2026-12-31 | TCRGP focuses on development of research capacity at Tribal colleges, specifically in agriculture, natural resources, and human sciences. The program aims to teach leadership skills, knowledge, and qualities that are necessary to prepare students to be competitive with other students for agricultural and related careers in the private sector, government, and academia. Of interest are the projects …</summary>

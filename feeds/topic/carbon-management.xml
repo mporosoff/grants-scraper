@@ -4,25 +4,8 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/carbon-management.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/carbon-management.xml</id>
-  <updated>2026-08-15T10:40:44Z</updated>
+  <updated>2026-08-15T19:24:47Z</updated>
   <generator>Funding Finder</generator>
-  <entry>
-    <title>Energy, Water, and Resource Engineering (EWRE)</title>
-    <link href="https://www.nsf.gov/funding/opportunities/energy-water-resource-engineering"/>
-    <id>urn:funding-finder:u-s-national-science-foundation:nsf-cbet%3APD-26-370Y</id>
-    <updated>2026-04-24T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Energy"/>
-    <category term="Infectious disease"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Technology development"/>
-    <category term="Carbon management"/>
-    <summary>U.S. National Science Foundation | Posted | The Energy, Water, and Resource Engineering (EWRE) program supports fundamental research to advance energy, water, and resource management and to safeguard health. Better use of domestic resources will make U.S. manufacturing, energy and water systems more efficient and secure.
-EWRE supports research that creates domestic sources of energy, advances water management, and recovers resources using c…</summary>
-  </entry>
   <entry>
     <title>INSPIRING GENERATIONS OF NEW INNOVATORS TO IMPACT TECHNOLOGIES IN ENERGY 2026 (IGNIITE 2026)</title>
     <link href="https://www.grants.gov/search-results-detail/362036"/>
@@ -55,23 +38,6 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <summary>Office of Science | Closes 2026-09-30 | The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
   </entry>
   <entry>
-    <title>Mind, Machine and Motor Nexus</title>
-    <link href="https://www.grants.gov/search-results-detail/358682"/>
-    <id>urn:funding-finder:grants-gov:358682</id>
-    <updated>2025-04-16T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Arts and culture"/>
-    <category term="Environmental science"/>
-    <category term="Neuroscience"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation | Posted | The Mind, Machine, and Motor Nexus (M3X) program supports fundamental research that enables intelligent engineered systems and humans to engage in bidirectional interaction in a physics-based environment, to enhance and ensure safety, productivity, and well-being.
-For the purpose of this program an intelligent engineered system is a human-designed system - physical, virtual, or a combination of bo…</summary>
-  </entry>
-  <entry>
     <title>SEEDING CRITICAL ADVANCES FOR LEADING ENERGY TECHNOLOGIES WITH UNTAPPED POTENTIAL (SCALEUP) READY</title>
     <link href="https://www.grants.gov/search-results-detail/356623"/>
     <id>urn:funding-finder:grants-gov:356623</id>
@@ -91,45 +57,13 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <updated>2024-01-06T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
     <category term="Catalysis and reaction engineering"/>
     <category term="Climate change"/>
     <category term="Education and workforce"/>
     <category term="Energy"/>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
+    <category term="Materials science"/>
     <summary>U.S. National Science Foundation | Closes 2026-09-29 | Plasma science is a transdisciplinary field of research where fundamental studies in many disciplines, including plasma physics, plasma chemistry, materials science, and space science, come together to advance knowledge for discovery and technological innovation. The primary goal of the ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) program is to identify and capitali…</summary>
-  </entry>
-  <entry>
-    <title>Foundational Research in Robotics</title>
-    <link href="https://www.grants.gov/search-results-detail/324369"/>
-    <id>urn:funding-finder:grants-gov:324369</id>
-    <updated>2020-02-12T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Arts and culture"/>
-    <category term="Environmental science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Carbon management"/>
-    <category term="Climate change"/>
-    <summary>U.S. National Science Foundation | Posted | The Foundational Research in Robotics (FRR) program, jointly led by the CISE and ENG Directorates, supports research on robotic systems that exhibit significant levels of both computational capability and physical complexity. For the purposes of this program, a robot is defined as intelligence embodied in an engineered construct, with the ability to process information, sense, plan, and move withi…</summary>
-  </entry>
-  <entry>
-    <title>Engineering Design and Systems Engineering</title>
-    <link href="https://www.grants.gov/search-results-detail/306170"/>
-    <id>urn:funding-finder:grants-gov:306170</id>
-    <updated>2018-06-12T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation | Posted | The Engineering Design and Systems Engineering (EDSE) program supports fundamental research that advances design science and/or systems science through the creation of new knowledge about the design of engineered artifacts. Engineered artifacts include, but are not limited to, devices, products, processes, platforms, materials, organizations, systems, and systems of systems. The program focuses on…</summary>
   </entry>
 </feed>

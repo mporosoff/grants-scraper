@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml</id>
-  <updated>2026-08-15T10:40:44Z</updated>
+  <updated>2026-08-15T19:24:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>DEFENSE ADVANCED RESEARCH PROJECTS AGENCY (DARPA)</title>
@@ -29,7 +29,6 @@
     <updated>2026-08-14T00:00:00Z</updated>
     <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-10-09</summary>
   </entry>
   <entry>
@@ -71,7 +70,6 @@
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Environmental science"/>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-01</summary>
   </entry>

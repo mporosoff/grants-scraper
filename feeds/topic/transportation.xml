@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-08-15T10:40:44Z</updated>
+  <updated>2026-08-15T19:24:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Mentored Career Transition Award (KT1/R00)</title>
@@ -67,7 +67,6 @@
     <updated>2026-11-16T00:00:00Z</updated>
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Technology development"/>
     <category term="Transportation"/>
@@ -100,7 +99,6 @@
     <id>urn:funding-finder:grants-gov:362753</id>
     <updated>2026-11-02T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Closes 2027-07-02 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for the Clinical Trial Cooperative Agreement Program within the mission areas of the institute. This Notice of Funding Opportunity (NOFO) solicits cooperative agreement applications for implementation of investigator-initiated, single o…</summary>
   </entry>
@@ -643,7 +641,6 @@
     <updated>2026-06-30T00:00:00Z</updated>
     <author><name>69A355 Research and Technology</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Transportation"/>
     <category term="Cybersecurity"/>

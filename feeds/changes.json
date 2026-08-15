@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-15T10:40:54Z",
+  "generated_at": "2026-08-15T19:24:57Z",
   "retention_days": 90,
   "events": [
     {
       "id": "fab3d84a987b2cd01c9e",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-15T10:39:01.572818Z",
+      "changed_at": "2026-08-15T19:23:17.953114Z",
       "opportunity_id": "363478",
       "detail": "Deadline 2026-09-14",
       "record": {
@@ -38,6 +38,459 @@
         "award_ceiling": 1207403,
         "detail_page": "https://www.grants.gov/search-results-detail/363478",
         "funding_opportunity_url": "https://bja.ojp.gov/funding/opportunities/o-bja-2025-172672",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-14"
+    },
+    {
+      "id": "f551ab769afafa193978",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-15T19:23:17.953114Z",
+      "opportunity_id": "363421",
+      "detail": "Deadline 2026-09-14",
+      "record": {
+        "opportunity_id": "363421",
+        "opportunity_number": "HRSA-27-008",
+        "title": "Fiscal Year (FY) 2027 Service Area Competition (SAC)",
+        "agency": "Health Resources and Services Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-08-14",
+        "close_date": "2026-09-14",
+        "last_updated": "2026-07-31",
+        "version": "Forecast 1",
+        "topic_areas": [],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 650000,
+        "award_ceiling": 10117000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363421",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-14"
+    },
+    {
+      "id": "d50d9a3b3fa96dc4d95f",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-15T19:23:17.953114Z",
+      "opportunity_id": "362981",
+      "detail": "Deadline 2026-09-14",
+      "record": {
+        "opportunity_id": "362981",
+        "opportunity_number": "2027FCAH01",
+        "title": "NEA Arts and Artifacts International Indemnity Program 1, FY2027 (9/26)",
+        "agency": "National Endowment for the Arts",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-06-26",
+        "close_date": "2026-09-14",
+        "last_updated": "2026-06-26",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Arts and culture"
+        ],
+        "disciplines": [
+          "Arts and Humanities"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Nonprofits with 501(c)(3) status",
+          "Private institutions of higher education"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 1000,
+        "award_ceiling": 100000,
+        "detail_page": "https://www.grants.gov/search-results-detail/362981",
+        "funding_opportunity_url": "https://www.arts.gov/impact/arts-and-artifacts-indemnity-program",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-14"
+    },
+    {
+      "id": "cbea338cf4296a88acbc",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-15T19:23:17.953114Z",
+      "opportunity_id": "363423",
+      "detail": "Deadline 2026-09-14",
+      "record": {
+        "opportunity_id": "363423",
+        "opportunity_number": "HRSA-27-005",
+        "title": "Fiscal Year (FY) 2027 Service Area Competition (SAC)",
+        "agency": "Health Resources and Services Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-08-14",
+        "close_date": "2026-09-14",
+        "last_updated": "2026-08-07",
+        "version": "Forecast 3",
+        "topic_areas": [],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 1216000,
+        "award_ceiling": 19182000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363423",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-14"
+    },
+    {
+      "id": "c885e98406b83382c1c0",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-15T19:23:17.953114Z",
+      "opportunity_id": "362917",
+      "detail": "Deadline 2026-09-14",
+      "record": {
+        "opportunity_id": "362917",
+        "opportunity_number": "HT942526NFRPNFRALA",
+        "title": "DoW Neurofibromatosis Research Academy - Leadership Award",
+        "agency": "Defense Health Agency Contracting Activity - DHACA",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-06-23",
+        "close_date": "2026-09-14",
+        "last_updated": "2026-07-31",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Biology and biotechnology",
+          "Environmental science"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/362917",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353294"
+      },
+      "deadline": "2026-09-14"
+    },
+    {
+      "id": "a8be8980e6a9bd2d5f7d",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-15T19:23:17.953114Z",
+      "opportunity_id": "362370",
+      "detail": "Deadline 2026-09-14",
+      "record": {
+        "opportunity_id": "362370",
+        "opportunity_number": "LHC-2600-DC-0032",
+        "title": "Lead-Safe and Healthy Homes Financing Demonstration",
+        "agency": "Department of Housing and Urban Development",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-06-03",
+        "close_date": "2026-09-14",
+        "last_updated": "2026-07-28",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Environmental science"
+        ],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 10000000,
+        "award_ceiling": 10000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/362370",
+        "funding_opportunity_url": "https://www.hud.gov/contactus/healthy-homes",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-14"
+    },
+    {
+      "id": "99045d0d9948d99a7b1c",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-15T19:23:17.953114Z",
+      "opportunity_id": "vpr-email:vpr-e4ce54abf9b529bf",
+      "detail": "Deadline 2026-09-14",
+      "record": {
+        "opportunity_id": "vpr-email:vpr-e4ce54abf9b529bf",
+        "opportunity_number": null,
+        "title": "American Chemical Society, petroleum Research Fund New Directions (ND) Grants",
+        "agency": "VPR funding digest (limited submissions & foundations)",
+        "source": "VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-09-14",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": 125000,
+        "detail_page": "https://www.acs.org/funding/grants/petroleum-research-fund/programs/new-directions-grants.html",
+        "funding_opportunity_url": "https://www.acs.org/funding/grants/petroleum-research-fund/programs/new-directions-grants.html",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-14"
+    },
+    {
+      "id": "8c9ca92ed3597938a517",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-15T19:23:17.953114Z",
+      "opportunity_id": "363419",
+      "detail": "Deadline 2026-09-14",
+      "record": {
+        "opportunity_id": "363419",
+        "opportunity_number": "HRSA-27-006",
+        "title": "Fiscal Year (FY) 2027 Service Area Competition (SAC)",
+        "agency": "Health Resources and Services Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-08-14",
+        "close_date": "2026-09-14",
+        "last_updated": "2026-08-07",
+        "version": "Forecast 3",
+        "topic_areas": [],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 398400,
+        "award_ceiling": 22025000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363419",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-14"
+    },
+    {
+      "id": "4b6136cada414d4b59d9",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-15T19:23:17.953114Z",
+      "opportunity_id": "362012",
+      "detail": "Deadline 2026-09-14",
+      "record": {
+        "opportunity_id": "362012",
+        "opportunity_number": "PIH-2600-DC-0014",
+        "title": "Jobs Plus NOFO for FY2026",
+        "agency": "Department of Housing and Urban Development",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-07-14",
+        "close_date": "2026-09-14",
+        "last_updated": "2026-04-22",
+        "version": "Forecast 1",
+        "topic_areas": [
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 1600000,
+        "award_ceiling": 3700000,
+        "detail_page": "https://www.grants.gov/search-results-detail/362012",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-14"
+    },
+    {
+      "id": "3b5197c5fe0864111cff",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-15T19:23:17.953114Z",
+      "opportunity_id": "363331",
+      "detail": "Deadline 2026-09-14",
+      "record": {
+        "opportunity_id": "363331",
+        "opportunity_number": "O-OVW-2026-172663",
+        "title": "OVW Fiscal Year 2026 Training and Services to End Abuse in Later Life Program",
+        "agency": "Office on Violence Against Women",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-27",
+        "close_date": "2026-09-14",
+        "last_updated": "2026-07-27",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Federally recognized Native American tribal governments",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 450000,
+        "award_ceiling": 750000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363331",
+        "funding_opportunity_url": "https://www.justice.gov/ovw/media/1454331/dl?inline",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-14"
+    },
+    {
+      "id": "1136860c713006429766",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-15T19:23:17.953114Z",
+      "opportunity_id": "vpr-email:vpr-167136617b79dc5d",
+      "detail": "Deadline 2026-09-14",
+      "record": {
+        "opportunity_id": "vpr-email:vpr-167136617b79dc5d",
+        "opportunity_number": null,
+        "title": "ACS Petroleum Research Fund - 2 programs",
+        "agency": "VPR funding digest (limited submissions & foundations)",
+        "source": "VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-09-14",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.acs.org/funding/grants/petroleum-research-fund/programs.html",
+        "funding_opportunity_url": "https://www.acs.org/funding/grants/petroleum-research-fund/programs.html",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-14"
+    },
+    {
+      "id": "014c28095dec92649911",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-15T19:23:17.953114Z",
+      "opportunity_id": "363420",
+      "detail": "Deadline 2026-09-14",
+      "record": {
+        "opportunity_id": "363420",
+        "opportunity_number": "HRSA-27-007",
+        "title": "Fiscal Year (FY) Service Area Competition (SAC)",
+        "agency": "Health Resources and Services Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-08-14",
+        "close_date": "2026-09-14",
+        "last_updated": "2026-08-07",
+        "version": "Forecast 3",
+        "topic_areas": [],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 566100,
+        "award_ceiling": 15336000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363420",
+        "funding_opportunity_url": null,
         "primary_document_url": null
       },
       "deadline": "2026-09-14"
@@ -136,51 +589,6 @@
         "funding_opportunity_url": null,
         "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353770"
       }
-    },
-    {
-      "id": "f551ab769afafa193978",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-15T10:39:01.572818Z",
-      "opportunity_id": "363421",
-      "detail": "Deadline 2026-09-14",
-      "record": {
-        "opportunity_id": "363421",
-        "opportunity_number": "HRSA-27-008",
-        "title": "Fiscal Year (FY) 2027 Service Area Competition (SAC)",
-        "agency": "Health Resources and Services Administration",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "forecasted",
-        "posted_date": "2026-08-14",
-        "close_date": "2026-09-14",
-        "last_updated": "2026-07-31",
-        "version": "Forecast 1",
-        "topic_areas": [],
-        "disciplines": [
-          "Medical and Health"
-        ],
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Special district governments",
-          "Federally recognized Native American tribal governments",
-          "Public and Indian housing authorities",
-          "Other Native American tribal organizations",
-          "Nonprofits with 501(c)(3) status",
-          "Nonprofits without 501(c)(3) status"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": 650000,
-        "award_ceiling": 10117000,
-        "detail_page": "https://www.grants.gov/search-results-detail/363421",
-        "funding_opportunity_url": null,
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-14"
     },
     {
       "id": "f115b789acbe7372114f",
@@ -647,98 +1055,6 @@
       }
     },
     {
-      "id": "d50d9a3b3fa96dc4d95f",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-15T10:39:01.572818Z",
-      "opportunity_id": "362981",
-      "detail": "Deadline 2026-09-14",
-      "record": {
-        "opportunity_id": "362981",
-        "opportunity_number": "2027FCAH01",
-        "title": "NEA Arts and Artifacts International Indemnity Program 1, FY2027 (9/26)",
-        "agency": "National Endowment for the Arts",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-06-26",
-        "close_date": "2026-09-14",
-        "last_updated": "2026-06-26",
-        "version": "Synopsis 2",
-        "topic_areas": [
-          "Arts and culture"
-        ],
-        "disciplines": [
-          "Arts and Humanities"
-        ],
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Special district governments",
-          "Independent school districts",
-          "Public and state institutions of higher education",
-          "Federally recognized Native American tribal governments",
-          "Nonprofits with 501(c)(3) status",
-          "Private institutions of higher education"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": 1000,
-        "award_ceiling": 100000,
-        "detail_page": "https://www.grants.gov/search-results-detail/362981",
-        "funding_opportunity_url": "https://www.arts.gov/impact/arts-and-artifacts-indemnity-program",
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-14"
-    },
-    {
-      "id": "cbea338cf4296a88acbc",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-15T10:39:01.572818Z",
-      "opportunity_id": "363423",
-      "detail": "Deadline 2026-09-14",
-      "record": {
-        "opportunity_id": "363423",
-        "opportunity_number": "HRSA-27-005",
-        "title": "Fiscal Year (FY) 2027 Service Area Competition (SAC)",
-        "agency": "Health Resources and Services Administration",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "forecasted",
-        "posted_date": "2026-08-14",
-        "close_date": "2026-09-14",
-        "last_updated": "2026-08-07",
-        "version": "Forecast 3",
-        "topic_areas": [],
-        "disciplines": [
-          "Medical and Health"
-        ],
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Special district governments",
-          "Federally recognized Native American tribal governments",
-          "Public and Indian housing authorities",
-          "Other Native American tribal organizations",
-          "Nonprofits with 501(c)(3) status",
-          "Nonprofits without 501(c)(3) status"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": 1216000,
-        "award_ceiling": 19182000,
-        "detail_page": "https://www.grants.gov/search-results-detail/363423",
-        "funding_opportunity_url": null,
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-14"
-    },
-    {
       "id": "cacb511675000cfdbcbb",
       "type": "new",
       "label": "New opportunity",
@@ -779,46 +1095,6 @@
         "funding_opportunity_url": "https://bja.ojp.gov/funding/opportunities/o-bja-2026-172676",
         "primary_document_url": null
       }
-    },
-    {
-      "id": "c885e98406b83382c1c0",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-15T10:39:01.572818Z",
-      "opportunity_id": "362917",
-      "detail": "Deadline 2026-09-14",
-      "record": {
-        "opportunity_id": "362917",
-        "opportunity_number": "HT942526NFRPNFRALA",
-        "title": "DoW Neurofibromatosis Research Academy - Leadership Award",
-        "agency": "Defense Health Agency Contracting Activity - DHACA",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-06-23",
-        "close_date": "2026-09-14",
-        "last_updated": "2026-07-31",
-        "version": "Synopsis 1",
-        "topic_areas": [
-          "Biology and biotechnology",
-          "Environmental science"
-        ],
-        "disciplines": [
-          "Engineering and Physical Sciences"
-        ],
-        "applicant_types": [
-          "Unrestricted"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": null,
-        "award_ceiling": null,
-        "detail_page": "https://www.grants.gov/search-results-detail/362917",
-        "funding_opportunity_url": null,
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353294"
-      },
-      "deadline": "2026-09-14"
     },
     {
       "id": "c7d996b0ba261809d88e",
@@ -1183,46 +1459,6 @@
       }
     },
     {
-      "id": "a8be8980e6a9bd2d5f7d",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-15T10:39:01.572818Z",
-      "opportunity_id": "362370",
-      "detail": "Deadline 2026-09-14",
-      "record": {
-        "opportunity_id": "362370",
-        "opportunity_number": "LHC-2600-DC-0032",
-        "title": "Lead-Safe and Healthy Homes Financing Demonstration",
-        "agency": "Department of Housing and Urban Development",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-06-03",
-        "close_date": "2026-09-14",
-        "last_updated": "2026-07-28",
-        "version": "Synopsis 2",
-        "topic_areas": [
-          "Environmental science"
-        ],
-        "disciplines": [
-          "Community and Social Sciences"
-        ],
-        "applicant_types": [
-          "Nonprofits with 501(c)(3) status",
-          "Nonprofits without 501(c)(3) status"
-        ],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "award_floor": 10000000,
-        "award_ceiling": 10000000,
-        "detail_page": "https://www.grants.gov/search-results-detail/362370",
-        "funding_opportunity_url": "https://www.hud.gov/contactus/healthy-homes",
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-14"
-    },
-    {
       "id": "a6f427cd381ff1469b1e",
       "type": "closed_or_removed",
       "label": "Closed or removed",
@@ -1567,37 +1803,6 @@
       }
     },
     {
-      "id": "99045d0d9948d99a7b1c",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-15T10:39:01.572818Z",
-      "opportunity_id": "vpr-email:vpr-e4ce54abf9b529bf",
-      "detail": "Deadline 2026-09-14",
-      "record": {
-        "opportunity_id": "vpr-email:vpr-e4ce54abf9b529bf",
-        "opportunity_number": null,
-        "title": "American Chemical Society, petroleum Research Fund New Directions (ND) Grants",
-        "agency": "VPR funding digest (limited submissions & foundations)",
-        "source": "VPR funding digest (limited submissions & foundations)",
-        "source_type": "Internal",
-        "status": "posted",
-        "posted_date": null,
-        "close_date": "2026-09-14",
-        "last_updated": null,
-        "version": null,
-        "topic_areas": [],
-        "disciplines": [],
-        "applicant_types": [],
-        "funding_instruments": [],
-        "award_floor": null,
-        "award_ceiling": 125000,
-        "detail_page": "https://www.acs.org/funding/grants/petroleum-research-fund/programs/new-directions-grants.html",
-        "funding_opportunity_url": "https://www.acs.org/funding/grants/petroleum-research-fund/programs/new-directions-grants.html",
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-14"
-    },
-    {
       "id": "9728a29984b1786dfa0a",
       "type": "deadline_changed",
       "label": "Deadline changed",
@@ -1881,51 +2086,6 @@
         "funding_opportunity_url": "https://www.ojp.gov/funding/docs/bjs-2026-172685.pdf",
         "primary_document_url": null
       }
-    },
-    {
-      "id": "8c9ca92ed3597938a517",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-15T10:39:01.572818Z",
-      "opportunity_id": "363419",
-      "detail": "Deadline 2026-09-14",
-      "record": {
-        "opportunity_id": "363419",
-        "opportunity_number": "HRSA-27-006",
-        "title": "Fiscal Year (FY) 2027 Service Area Competition (SAC)",
-        "agency": "Health Resources and Services Administration",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "forecasted",
-        "posted_date": "2026-08-14",
-        "close_date": "2026-09-14",
-        "last_updated": "2026-08-07",
-        "version": "Forecast 3",
-        "topic_areas": [],
-        "disciplines": [
-          "Medical and Health"
-        ],
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Special district governments",
-          "Federally recognized Native American tribal governments",
-          "Public and Indian housing authorities",
-          "Other Native American tribal organizations",
-          "Nonprofits with 501(c)(3) status",
-          "Nonprofits without 501(c)(3) status"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": 398400,
-        "award_ceiling": 22025000,
-        "detail_page": "https://www.grants.gov/search-results-detail/363419",
-        "funding_opportunity_url": null,
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-14"
     },
     {
       "id": "897823aed744136797e9",
@@ -2589,45 +2749,6 @@
       }
     },
     {
-      "id": "4b6136cada414d4b59d9",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-15T10:39:01.572818Z",
-      "opportunity_id": "362012",
-      "detail": "Deadline 2026-09-14",
-      "record": {
-        "opportunity_id": "362012",
-        "opportunity_number": "PIH-2600-DC-0014",
-        "title": "Jobs Plus NOFO for FY2026",
-        "agency": "Department of Housing and Urban Development",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "forecasted",
-        "posted_date": "2026-07-14",
-        "close_date": "2026-09-14",
-        "last_updated": "2026-04-22",
-        "version": "Forecast 1",
-        "topic_areas": [
-          "Education and workforce"
-        ],
-        "disciplines": [
-          "Community and Social Sciences"
-        ],
-        "applicant_types": [
-          "Other"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": 1600000,
-        "award_ceiling": 3700000,
-        "detail_page": "https://www.grants.gov/search-results-detail/362012",
-        "funding_opportunity_url": null,
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-14"
-    },
-    {
       "id": "4885730503cacf5a555b",
       "type": "closed_or_removed",
       "label": "Closed or removed",
@@ -2822,51 +2943,6 @@
         "funding_opportunity_url": "https://www.ojp.gov/funding/docs/bjs-2026-172682.pdf",
         "primary_document_url": null
       }
-    },
-    {
-      "id": "3b5197c5fe0864111cff",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-15T10:39:01.572818Z",
-      "opportunity_id": "363331",
-      "detail": "Deadline 2026-09-14",
-      "record": {
-        "opportunity_id": "363331",
-        "opportunity_number": "O-OVW-2026-172663",
-        "title": "OVW Fiscal Year 2026 Training and Services to End Abuse in Later Life Program",
-        "agency": "Office on Violence Against Women",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-07-27",
-        "close_date": "2026-09-14",
-        "last_updated": "2026-07-27",
-        "version": "Synopsis 1",
-        "topic_areas": [
-          "Education and workforce"
-        ],
-        "disciplines": [
-          "Community and Social Sciences"
-        ],
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Federally recognized Native American tribal governments",
-          "Other Native American tribal organizations",
-          "Nonprofits with 501(c)(3) status",
-          "Other"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": 450000,
-        "award_ceiling": 750000,
-        "detail_page": "https://www.grants.gov/search-results-detail/363331",
-        "funding_opportunity_url": "https://www.justice.gov/ovw/media/1454331/dl?inline",
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-14"
     },
     {
       "id": "3872d8b2a63b508b0a5b",
@@ -3588,37 +3664,6 @@
       }
     },
     {
-      "id": "1136860c713006429766",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-15T10:39:01.572818Z",
-      "opportunity_id": "vpr-email:vpr-167136617b79dc5d",
-      "detail": "Deadline 2026-09-14",
-      "record": {
-        "opportunity_id": "vpr-email:vpr-167136617b79dc5d",
-        "opportunity_number": null,
-        "title": "ACS Petroleum Research Fund - 2 programs",
-        "agency": "VPR funding digest (limited submissions & foundations)",
-        "source": "VPR funding digest (limited submissions & foundations)",
-        "source_type": "Internal",
-        "status": "posted",
-        "posted_date": null,
-        "close_date": "2026-09-14",
-        "last_updated": null,
-        "version": null,
-        "topic_areas": [],
-        "disciplines": [],
-        "applicant_types": [],
-        "funding_instruments": [],
-        "award_floor": null,
-        "award_ceiling": null,
-        "detail_page": "https://www.acs.org/funding/grants/petroleum-research-fund/programs.html",
-        "funding_opportunity_url": "https://www.acs.org/funding/grants/petroleum-research-fund/programs.html",
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-14"
-    },
-    {
       "id": "109a7b33d7b36aa367ee",
       "type": "closing_soon",
       "label": "Closing soon",
@@ -3959,51 +4004,6 @@
         "funding_opportunity_url": "https://nij.ojp.gov/funding/opportunities/o-nij-2026-172659",
         "primary_document_url": null
       }
-    },
-    {
-      "id": "014c28095dec92649911",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-15T10:39:01.572818Z",
-      "opportunity_id": "363420",
-      "detail": "Deadline 2026-09-14",
-      "record": {
-        "opportunity_id": "363420",
-        "opportunity_number": "HRSA-27-007",
-        "title": "Fiscal Year (FY) Service Area Competition (SAC)",
-        "agency": "Health Resources and Services Administration",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "forecasted",
-        "posted_date": "2026-08-14",
-        "close_date": "2026-09-14",
-        "last_updated": "2026-08-07",
-        "version": "Forecast 3",
-        "topic_areas": [],
-        "disciplines": [
-          "Medical and Health"
-        ],
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Special district governments",
-          "Federally recognized Native American tribal governments",
-          "Public and Indian housing authorities",
-          "Other Native American tribal organizations",
-          "Nonprofits with 501(c)(3) status",
-          "Nonprofits without 501(c)(3) status"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": 566100,
-        "award_ceiling": 15336000,
-        "detail_page": "https://www.grants.gov/search-results-detail/363420",
-        "funding_opportunity_url": null,
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-14"
     },
     {
       "id": "fd1345de747a2cac47cb",

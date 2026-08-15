@@ -4,13 +4,101 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/changes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/changes.xml</id>
-  <updated>2026-08-15T10:40:54Z</updated>
+  <updated>2026-08-15T19:24:57Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Closing soon: BJA FY25 Forensic Ballistics and Higher Education Program</title>
     <link href="https://www.grants.gov/search-results-detail/363478"/>
     <id>urn:funding-finder:change:fab3d84a987b2cd01c9e</id>
-    <updated>2026-08-15T10:39:01.572818Z</updated>
+    <updated>2026-08-15T19:23:17.953114Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-14</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Fiscal Year (FY) 2027 Service Area Competition (SAC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363421"/>
+    <id>urn:funding-finder:change:f551ab769afafa193978</id>
+    <updated>2026-08-15T19:23:17.953114Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-14</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: NEA Arts and Artifacts International Indemnity Program 1, FY2027 (9/26)</title>
+    <link href="https://www.grants.gov/search-results-detail/362981"/>
+    <id>urn:funding-finder:change:d50d9a3b3fa96dc4d95f</id>
+    <updated>2026-08-15T19:23:17.953114Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-14</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Fiscal Year (FY) 2027 Service Area Competition (SAC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363423"/>
+    <id>urn:funding-finder:change:cbea338cf4296a88acbc</id>
+    <updated>2026-08-15T19:23:17.953114Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-14</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: DoW Neurofibromatosis Research Academy - Leadership Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362917"/>
+    <id>urn:funding-finder:change:c885e98406b83382c1c0</id>
+    <updated>2026-08-15T19:23:17.953114Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-14</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Lead-Safe and Healthy Homes Financing Demonstration</title>
+    <link href="https://www.grants.gov/search-results-detail/362370"/>
+    <id>urn:funding-finder:change:a8be8980e6a9bd2d5f7d</id>
+    <updated>2026-08-15T19:23:17.953114Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-14</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: American Chemical Society, petroleum Research Fund New Directions (ND) Grants</title>
+    <link href="https://www.acs.org/funding/grants/petroleum-research-fund/programs/new-directions-grants.html"/>
+    <id>urn:funding-finder:change:99045d0d9948d99a7b1c</id>
+    <updated>2026-08-15T19:23:17.953114Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-14</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Fiscal Year (FY) 2027 Service Area Competition (SAC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363419"/>
+    <id>urn:funding-finder:change:8c9ca92ed3597938a517</id>
+    <updated>2026-08-15T19:23:17.953114Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-14</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Jobs Plus NOFO for FY2026</title>
+    <link href="https://www.grants.gov/search-results-detail/362012"/>
+    <id>urn:funding-finder:change:4b6136cada414d4b59d9</id>
+    <updated>2026-08-15T19:23:17.953114Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-14</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: OVW Fiscal Year 2026 Training and Services to End Abuse in Later Life Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363331"/>
+    <id>urn:funding-finder:change:3b5197c5fe0864111cff</id>
+    <updated>2026-08-15T19:23:17.953114Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-14</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: ACS Petroleum Research Fund - 2 programs</title>
+    <link href="https://www.acs.org/funding/grants/petroleum-research-fund/programs.html"/>
+    <id>urn:funding-finder:change:1136860c713006429766</id>
+    <updated>2026-08-15T19:23:17.953114Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-14</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Fiscal Year (FY) Service Area Competition (SAC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363420"/>
+    <id>urn:funding-finder:change:014c28095dec92649911</id>
+    <updated>2026-08-15T19:23:17.953114Z</updated>
     <category term="closing_soon"/>
     <summary>Deadline 2026-09-14</summary>
   </entry>
@@ -29,14 +117,6 @@
     <updated>2026-08-15T10:39:01.572818Z</updated>
     <category term="closed_or_removed"/>
     <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Fiscal Year (FY) 2027 Service Area Competition (SAC)</title>
-    <link href="https://www.grants.gov/search-results-detail/363421"/>
-    <id>urn:funding-finder:change:f551ab769afafa193978</id>
-    <updated>2026-08-15T10:39:01.572818Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-14</summary>
   </entry>
   <entry>
     <title>Closed or removed: Advancing Global Health</title>
@@ -127,36 +207,12 @@
     <summary>Official source record changed</summary>
   </entry>
   <entry>
-    <title>Closing soon: NEA Arts and Artifacts International Indemnity Program 1, FY2027 (9/26)</title>
-    <link href="https://www.grants.gov/search-results-detail/362981"/>
-    <id>urn:funding-finder:change:d50d9a3b3fa96dc4d95f</id>
-    <updated>2026-08-15T10:39:01.572818Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-14</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Fiscal Year (FY) 2027 Service Area Competition (SAC)</title>
-    <link href="https://www.grants.gov/search-results-detail/363423"/>
-    <id>urn:funding-finder:change:cbea338cf4296a88acbc</id>
-    <updated>2026-08-15T10:39:01.572818Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-14</summary>
-  </entry>
-  <entry>
     <title>New opportunity: BJA FY 2026 Public Safety and Mental Health Initiative</title>
     <link href="https://www.grants.gov/search-results-detail/363602"/>
     <id>urn:funding-finder:change:cacb511675000cfdbcbb</id>
     <updated>2026-08-15T10:39:01.572818Z</updated>
     <category term="new"/>
     <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: DoW Neurofibromatosis Research Academy - Leadership Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362917"/>
-    <id>urn:funding-finder:change:c885e98406b83382c1c0</id>
-    <updated>2026-08-15T10:39:01.572818Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-14</summary>
   </entry>
   <entry>
     <title>Closed or removed: 2027 Market Access Program</title>
@@ -231,14 +287,6 @@
     <summary>No longer in the current catalog</summary>
   </entry>
   <entry>
-    <title>Closing soon: Lead-Safe and Healthy Homes Financing Demonstration</title>
-    <link href="https://www.grants.gov/search-results-detail/362370"/>
-    <id>urn:funding-finder:change:a8be8980e6a9bd2d5f7d</id>
-    <updated>2026-08-15T10:39:01.572818Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-14</summary>
-  </entry>
-  <entry>
     <title>Closed or removed: Fiscal Year 2026 National Earthquake Hazards Reduction Program Individual State Earthquake Assistance</title>
     <link href="https://www.grants.gov/search-results-detail/363117"/>
     <id>urn:funding-finder:change:a6f427cd381ff1469b1e</id>
@@ -303,14 +351,6 @@
     <summary>No longer in the current catalog</summary>
   </entry>
   <entry>
-    <title>Closing soon: American Chemical Society, petroleum Research Fund New Directions (ND) Grants</title>
-    <link href="https://www.acs.org/funding/grants/petroleum-research-fund/programs/new-directions-grants.html"/>
-    <id>urn:funding-finder:change:99045d0d9948d99a7b1c</id>
-    <updated>2026-08-15T10:39:01.572818Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-14</summary>
-  </entry>
-  <entry>
     <title>Deadline changed: Division of Materials Research: Condensed Matter and Materials Theory (CMMT)</title>
     <link href="https://www.grants.gov/search-results-detail/349654"/>
     <id>urn:funding-finder:change:9728a29984b1786dfa0a</id>
@@ -365,14 +405,6 @@
     <updated>2026-08-15T10:39:01.572818Z</updated>
     <category term="amended"/>
     <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Fiscal Year (FY) 2027 Service Area Competition (SAC)</title>
-    <link href="https://www.grants.gov/search-results-detail/363419"/>
-    <id>urn:funding-finder:change:8c9ca92ed3597938a517</id>
-    <updated>2026-08-15T10:39:01.572818Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-14</summary>
   </entry>
   <entry>
     <title>Opportunity amended: BJS FY 2026 National Incident-Based Reporting System Estimation Program</title>
@@ -511,14 +543,6 @@
     <summary>First appeared in the public catalog</summary>
   </entry>
   <entry>
-    <title>Closing soon: Jobs Plus NOFO for FY2026</title>
-    <link href="https://www.grants.gov/search-results-detail/362012"/>
-    <id>urn:funding-finder:change:4b6136cada414d4b59d9</id>
-    <updated>2026-08-15T10:39:01.572818Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-14</summary>
-  </entry>
-  <entry>
     <title>Closed or removed: Affiliate American Spaces PD Support Program FY 2026</title>
     <link href="https://www.grants.gov/search-results-detail/363443"/>
     <id>urn:funding-finder:change:4885730503cacf5a555b</id>
@@ -557,14 +581,6 @@
     <updated>2026-08-15T10:39:01.572818Z</updated>
     <category term="amended"/>
     <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: OVW Fiscal Year 2026 Training and Services to End Abuse in Later Life Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363331"/>
-    <id>urn:funding-finder:change:3b5197c5fe0864111cff</id>
-    <updated>2026-08-15T10:39:01.572818Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-14</summary>
   </entry>
   <entry>
     <title>Closed or removed: Norman E. Borlaug International Agricultural Science and Technology Fellowship Program FY2026</title>
@@ -719,14 +735,6 @@
     <summary>First appeared in the public catalog</summary>
   </entry>
   <entry>
-    <title>Closing soon: ACS Petroleum Research Fund - 2 programs</title>
-    <link href="https://www.acs.org/funding/grants/petroleum-research-fund/programs.html"/>
-    <id>urn:funding-finder:change:1136860c713006429766</id>
-    <updated>2026-08-15T10:39:01.572818Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-14</summary>
-  </entry>
-  <entry>
     <title>Closing soon: Improving The Capacity of Tribal Communities to Identify Emerging Drug Threats</title>
     <link href="https://www.grants.gov/search-results-detail/363593"/>
     <id>urn:funding-finder:change:109a7b33d7b36aa367ee</id>
@@ -789,14 +797,6 @@
     <updated>2026-08-15T10:39:01.572818Z</updated>
     <category term="closed_or_removed"/>
     <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Fiscal Year (FY) Service Area Competition (SAC)</title>
-    <link href="https://www.grants.gov/search-results-detail/363420"/>
-    <id>urn:funding-finder:change:014c28095dec92649911</id>
-    <updated>2026-08-15T10:39:01.572818Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-14</summary>
   </entry>
   <entry>
     <title>Opportunity amended: OJP FY 2026 Special Attorneys Program Round 7</title>
