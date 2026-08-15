@@ -13,7 +13,7 @@
   const NEW_RELEVANT_MIN_SCORE_RATIO = .2;
   const NEW_RELEVANT_MIN_BOOST = 8;
   const PROMPT_VERSION = "result-aware-chat-v1";
-  const APP_VERSION = "search-relevance-v4";
+  const APP_VERSION = "search-relevance-v5";
   const CANONICAL_URL = "https://mporosoff.github.io/grants-scraper/";
   const SEARCH_QUERY = globalThis.FUNDING_SEARCH_QUERY;
   const RETRIEVAL_API = globalThis.FUNDING_RETRIEVAL;
@@ -2721,6 +2721,13 @@
         ? "Profile-ranked catalog"
         : "Public catalog";
     $("results-toolbar").classList.remove("search-not-started");
+    $("results-toolbar").dataset.profileTermCount = state.profile.active
+      ? String(state.profile.terms.length)
+      : "0";
+    $("results-toolbar").dataset.profileMinimumCoverage = state.profile.active
+      && !state.query
+      ? String(PROFILE_RANKING_API.minimumCoverage(state.profile.terms.length))
+      : "0";
     $("result-range").textContent = display.length
       ? `Showing ${start + 1} to ${Math.min(start + PAGE_SIZE, display.length)} of ${display.length.toLocaleString()}`
       : "No records match the current search";

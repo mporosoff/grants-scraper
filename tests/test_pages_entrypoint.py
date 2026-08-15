@@ -214,7 +214,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         )
         release_version = "filters-2026-08-13"
         feature_version = "orcid-2026-08-13"
-        search_version = "relevance-2026-08-15-v4"
+        search_version = "relevance-2026-08-15-v5"
         style_version = "audit-2026-08-13"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={style_version}">',
@@ -286,6 +286,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("funding-finder.feedback.v1", profile_js)
         self.assertIn("async function extractCv", profile_js)
         self.assertIn("profileContext({ includeCv: true })", application_js)
+        self.assertIn("dataset.profileMinimumCoverage", application_js)
         self.assertIn("globalThis.FUNDING_PREFERENCES", application_js)
         self.assertIn("globalThis.FUNDING_SAVED", application_js)
         self.assertIn("function renderPreferenceStatus", application_js)

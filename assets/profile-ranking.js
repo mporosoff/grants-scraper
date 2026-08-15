@@ -94,8 +94,8 @@
 
   function minimumCoverage(termCount) {
     const count = Math.max(0, Number(termCount) || 0);
-    if (count <= 1) return count;
-    return Math.min(4, Math.max(2, Math.ceil(count * 0.5)));
+    if (count <= 2) return count;
+    return Math.min(4, Math.max(3, Math.ceil(count * 0.5)));
   }
 
   function applicantFitBonus(record, applicantContext) {

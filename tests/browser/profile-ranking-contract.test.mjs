@@ -79,6 +79,7 @@ test("extracts concrete profile evidence and removes generic CV language", () =>
   assert.equal(built.terms.includes("do"), false);
   assert.equal(built.terms.includes("develop"), false);
   assert.equal(apis.profile.minimumCoverage(built.terms.length), 3);
+  assert.equal(apis.profile.minimumCoverage(4), 3);
 });
 
 test("profile-only retrieval requires multiple independent concepts", () => {
