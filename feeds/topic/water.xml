@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml</id>
-  <updated>2026-08-15T19:24:47Z</updated>
+  <updated>2026-08-15T20:29:37Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Alaska Cooperative Ecosystem Studies Unit (CESU)</title>
@@ -326,6 +326,59 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>U.S. National Science Foundation | Posted | The Water, Landscape, and Critical Zone Processes program supports research on the Earth’s near-surface environment and how that environment responds to change. The Program focuses on the complex interplay amongst and between hydrologic, geomorphic, and geochemical processes and how they regulate the structure and function of the Earth’s near surface. These processes drive weathering and soil deve…</summary>
+  </entry>
+  <entry>
+    <title>FY 2024 - 2026 Broad Agency Announcement (BAA), Office of Oceanic and Atmospheric Research (OAR)</title>
+    <link href="https://www.grants.gov/search-results-detail/356669"/>
+    <id>urn:funding-finder:grants-gov:356669</id>
+    <updated>2024-10-09T00:00:00Z</updated>
+    <author><name>DOC NOAA - ERA Production</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Carbon management"/>
+    <category term="Climate change"/>
+    <category term="Data science"/>
+    <category term="Water"/>
+    <summary>DOC NOAA - ERA Production | Closes 2026-09-30 | This notice is not a mechanism to fund existing NOAA awards. The purpose of this notice is to request applications for special projects and programs associated with NOAA's strategic plan and mission goals, as well as to provide the general public with information and guidelines on how NOAA will select applications and administer discretionary Federal assistance under this Broad Agency Announcement…</summary>
+  </entry>
+  <entry>
+    <title>FY 2024 - 2026 - Broad Agency Announcement (BAA) for the Office of Education</title>
+    <link href="https://www.grants.gov/search-results-detail/356002"/>
+    <id>urn:funding-finder:grants-gov:356002</id>
+    <updated>2024-08-12T00:00:00Z</updated>
+    <author><name>DOC NOAA - ERA Production</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Climate change"/>
+    <category term="Water"/>
+    <summary>DOC NOAA - ERA Production | Closes 2026-09-30 | This notice is not a mechanism to fund existing NOAA awards. The purpose of this notice is to request applications for special projects and programs associated with NOAA's strategic plan and mission goals, as well as to provide the general public with information and guidelines on how NOAA will select applications and administer discretionary Federal assistance under this Broad Agency Announcement…</summary>
+  </entry>
+  <entry>
+    <title>FY 2024 - 2026 - Broad Agency Announcement (BAA)</title>
+    <link href="https://www.grants.gov/search-results-detail/355705"/>
+    <id>urn:funding-finder:grants-gov:355705</id>
+    <updated>2024-07-29T00:00:00Z</updated>
+    <author><name>DOC NOAA - ERA Production</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Climate change"/>
+    <category term="Data science"/>
+    <category term="Water"/>
+    <summary>DOC NOAA - ERA Production | Closes 2026-09-30 | This notice is not a mechanism to fund existing NWS awards. The purpose of this notice is to request applications for special projects and programs associated with NWS's strategic plan and mission goals, as well as to provide the general public with information and guidelines on how NWS will select applications and administer discretionary Federal assistance under this Broad Agency Announcement (B…</summary>
+  </entry>
+  <entry>
+    <title>FY 2024 - 2026 Broad Agency Announcement (BAA), National Marine Fisheries Service</title>
+    <link href="https://www.grants.gov/search-results-detail/355706"/>
+    <id>urn:funding-finder:grants-gov:355706</id>
+    <updated>2024-07-29T00:00:00Z</updated>
+    <author><name>DOC NOAA - ERA Production</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Climate change"/>
+    <category term="Water"/>
+    <summary>DOC NOAA - ERA Production | Closes 2026-09-30 | This BAA is for the National Marine Fisheries Service, also known as NOAA Fisheries. The purpose of this notice is to request applications for special projects and programs associated with the NOAA Fisheries strategic plan and mission goals, as well as to provide the general public with information and guidelines on how NOAA will select applications and administer discretionary Federal assistance …</summary>
   </entry>
   <entry>
     <title>Engineering for Civil Infrastructure</title>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-08-15T19:24:47Z</updated>
+  <updated>2026-08-15T20:29:37Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Microplastics Research and Resource Coordination Center (U24 - Clinical Trial Not Allowed)</title>
@@ -173,6 +173,21 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Technology development"/>
     <category term="Transportation"/>
     <summary>U.S. National Science Foundation | Posted | The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
+  </entry>
+  <entry>
+    <title>Space Technology Research, Development, Demonstration, and Infusion (SpaceTech REDDI-2026)</title>
+    <link href="https://www.grants.gov/search-results-detail/360954"/>
+    <id>urn:funding-finder:grants-gov:360954</id>
+    <updated>2025-12-09T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Space and aeronautics"/>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <summary>NASA Headquarters | Posted | The National Aeronautics and Space Administration (NASA) Headquarters, Space Technology Mission Directorate (STMD) will be releasing an Umbrella NASA Research Announcement (NRA) titled “Space Technology Research, Development, Demonstration, and Infusion-2026 (SpaceTech-REDDI-2026)” on or about December 9, 2025. The solicitation is available by opening the NSPIRES homepage at https://nspires.nasapr…</summary>
   </entry>
   <entry>
     <title>FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
@@ -384,6 +399,22 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>U.S. National Science Foundation | Closes 2026-12-01 | The Archaeology Program administers an annual Archaeometry competition with a target date of December 1. The goal is to fund projects in two main categories: To develop or refine anthropologically relevant archaeometric techniques. Examples include the development of methods to identify specific types of organic residues on ceramics or development of field applicable analytic techniques. To suppor…</summary>
+  </entry>
+  <entry>
+    <title>DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH</title>
+    <link href="https://www.grants.gov/search-results-detail/344592"/>
+    <id>urn:funding-finder:grants-gov:344592</id>
+    <updated>2022-11-21T00:00:00Z</updated>
+    <author><name>Dept of the Army -- Materiel Command</name></author>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Cybersecurity"/>
+    <category term="Data science"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <summary>Dept of the Army -- Materiel Command | Closes 2027-11-20 | The purpose of this combined Broad Agency Announcement (BAA) under Federal Acquisition Regulation (FAR) Part 35 and Funding Opportunity Announcement (FOA) under 2 Code of Federal Regulations (CFR) 200.204 (henceforth referred to as “BAA”) is to solicit research proposals for submission to the U.S. Army Combat Capabilities Development Command (DEVCOM) Army Research Laboratory (ARL) for funding cons…</summary>
   </entry>
   <entry>
     <title>Research Interests of the United States Air Force Academy (formerly USAFA-BAA-2021)</title>

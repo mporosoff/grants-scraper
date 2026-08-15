@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml</id>
-  <updated>2026-08-15T19:24:47Z</updated>
+  <updated>2026-08-15T20:29:37Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) - RESEARCH COLLABORATION (RC)</title>
@@ -181,6 +181,22 @@
     <category term="Data science"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Closes 2026-09-30 | This solicitation applies to six (of the nine) CHE Disciplinary Research Programs: Chemical Catalysis (CAT); Chemical Measurement and Imaging (CMI); Chemical Mechanism, Function and Properties (CMFP); Chemical Synthesis (SYN); Environmental Chemical Sciences (ECS); and Macromolecular, Supramolecular and Nanochemistry (MSN). All proposals submitted to these six CHE Disciplinary Research Programs (o…</summary>
+  </entry>
+  <entry>
+    <title>DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH</title>
+    <link href="https://www.grants.gov/search-results-detail/344592"/>
+    <id>urn:funding-finder:grants-gov:344592</id>
+    <updated>2022-11-21T00:00:00Z</updated>
+    <author><name>Dept of the Army -- Materiel Command</name></author>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Cybersecurity"/>
+    <category term="Data science"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <summary>Dept of the Army -- Materiel Command | Closes 2027-11-20 | The purpose of this combined Broad Agency Announcement (BAA) under Federal Acquisition Regulation (FAR) Part 35 and Funding Opportunity Announcement (FOA) under 2 Code of Federal Regulations (CFR) 200.204 (henceforth referred to as “BAA”) is to solicit research proposals for submission to the U.S. Army Combat Capabilities Development Command (DEVCOM) Army Research Laboratory (ARL) for funding cons…</summary>
   </entry>
   <entry>
     <title>Division of Chemistry: Disciplinary Research Programs: No Deadline Pilot</title>
