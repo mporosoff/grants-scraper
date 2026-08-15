@@ -343,6 +343,65 @@ class MatcherTests(unittest.TestCase):
                 self.assertEqual(found, expected)
                 self.assertNotIn("diplomacy-baa", found)
 
+    def test_exact_umbrella_scope_improves_recall_without_cross_call_leakage(self):
+        from scripts.sources.discoverability import augment_records
+
+        nasa = _base(
+            opportunity_id="nasa-reddi",
+            opportunity_number="NNH26ZTR001N",
+            title="SpaceTech REDDI-2026",
+            agency="NASA Headquarters",
+            description="Umbrella NASA Research Announcement.",
+        )
+        arl = _base(
+            opportunity_id="arl-baa",
+            opportunity_number="W911NF-23-S-0001",
+            title="ARL Broad Agency Announcement for Foundational Research",
+            agency="Dept of the Army -- Materiel Command",
+            description="See the separate ARL BAA topics website.",
+        )
+        weather = _base(
+            opportunity_id="noaa-weather",
+            opportunity_number="NOAA-NWS-2024-28059",
+            title="FY 2024-2026 Broad Agency Announcement",
+            agency="DOC NOAA",
+            description="Projects associated with the NWS mission.",
+        )
+        fisheries = _base(
+            opportunity_id="noaa-fisheries",
+            opportunity_number="NOAA-NMFS-FHQ-2024-27611",
+            title="FY 2024-2026 Broad Agency Announcement",
+            agency="DOC NOAA",
+            description="Projects associated with the NMFS mission.",
+        )
+        roses_element = _base(
+            opportunity_id="roses-atmosphere",
+            opportunity_number="NNH25ZDA001N-ATMOS",
+            title="ROSES-2025: A.14 Atmosphere",
+            agency="NASA Headquarters",
+            description="A specific atmosphere program element.",
+        )
+        records = [nasa, arl, weather, fisheries, roses_element]
+        self.assertEqual(augment_records(records), 4)
+        catalog = make_catalog(records)
+
+        cases = {
+            "space propulsion": {"nasa-reddi"},
+            "quantum sensing": {"arl-baa"},
+            "weather forecasting": {"noaa-weather"},
+            "sustainable fisheries": {"noaa-fisheries"},
+            "catalysts for AI": set(),
+        }
+        for query, expected in cases.items():
+            with self.subTest(query=query):
+                found = {
+                    item["opportunity_id"]
+                    for item in search_catalog(catalog, query, as_of=self.as_of)
+                }
+                self.assertEqual(found, expected)
+
+        self.assertNotIn("discoverability_contribution", roses_element)
+
     def test_pfas_forms_find_water_pollution_remediation(self):
         remediation = _base(
             opportunity_id="pfas-remediation",

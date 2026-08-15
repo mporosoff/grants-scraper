@@ -166,3 +166,41 @@ against labeled judgments. The existing optional AI pass
 is the appropriate bounded experiment, and the Phase 2 export/evaluator already
 separates 32-candidate recall from top-12 AI precision so the pilot can show
 whether its extra latency produces a real quality gain.
+
+## Final broad-announcement recall audit
+
+The final cross-agency pass reviewed every current catalog title containing
+`broad agency announcement`, `long range`, `umbrella`, or `omnibus`, plus NASA
+ROSES and SpaceTech REDDI records whose umbrella status appears in the synopsis.
+The outcome preserves the lexical admission gate and expands only seven records
+whose official scope lives outside their Grants.gov synopsis.
+
+- NASA says ROSES is an omnibus made up of individual program elements with
+  their own topics and due dates. The catalog already contains ten current
+  ROSES-2025 elements. Those elements remain independently searchable and do
+  **not** inherit every NASA Science topic; doing that would make a focused
+  Atmosphere or Solar System element match unrelated NASA research.
+- The exact SpaceTech REDDI-2026 umbrella (`NNH26ZTR001N`) now carries NASA's
+  official technology taxonomy vocabulary, including propulsion, power and
+  energy storage, robotics, communications/navigation, autonomy/AI, materials,
+  manufacturing, thermal systems, and entry/descent/landing.
+- The exact DEVCOM Army Research Laboratory foundational BAA
+  (`W911NF-23-S-0001`) now carries ARL's published fundamental competencies,
+  including biotechnology, energy, autonomy/AI, cyber and computing, photonics,
+  quantum, extreme materials, manufacturing, and weapons sciences.
+- NOAA's five current FY2024-2026 BAAs are enriched separately by exact notice
+  number for NWS, NESDIS/STAR, OAR, Fisheries, and the Office of Education.
+  Terms never cross line offices: for example, `weather forecasting` does not
+  make the Fisheries BAA a candidate, and `sustainable fisheries` does not make
+  the NWS BAA a candidate.
+- NRL, ERDC, West Point, DHA, NIST CHIPS, DEVCOM Soldier Center, and several
+  other broad calls already contain concrete technical scope in their catalog
+  description or extracted official-document evidence. Adding duplicate global
+  scope would increase false positives without improving recall, so they were
+  left unchanged.
+
+All new rules require an exact opportunity number. A generic `BAA`, `umbrella`,
+`NASA`, `Army`, or `NOAA` label remains insufficient to gain search terms. The
+reported `catalysts for AI` query therefore cannot admit these new broad calls
+unless the call independently covers both guarded concepts; none of the new
+rules invents a catalysis signal.

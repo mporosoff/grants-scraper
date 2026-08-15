@@ -509,8 +509,8 @@ The August 15, 2026 catalog contains 1,469 current posted or forecasted opportun
 
 - 373 have a defensible direct announcement attachment (236 high confidence, 137 medium
   confidence);
-- another 621 use an official source page as their primary route;
-- the remaining 475 use the official Grants.gov record as their primary route;
+- another 622 use an official source page as their primary route;
+- the remaining 474 use the official Grants.gov record as their primary route;
 - 756 contain an agency notice URL across all route types;
 - 466 preserve an official deadline time or timezone;
 - 147 carry a preliminary-stage signal, including 1 narrative dates visibly marked for

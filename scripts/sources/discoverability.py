@@ -37,6 +37,159 @@ DISCOVERABILITY_REGISTRY_VERSION = "2026-08-15"
 # "broad agency announcement" is deliberately insufficient by itself.
 PROGRAM_RULES: list[dict] = [
     {
+        "id": "nasa-spacetech-reddi-umbrella",
+        "identifiers": ["NNH26ZTR001N"],
+        "topics": [
+            "Artificial intelligence and machine learning", "Data science",
+            "Energy", "Manufacturing", "Materials science",
+            "Space and aeronautics", "Technology development",
+        ],
+        "terms": [
+            "space propulsion", "in-space propulsion", "flight computing",
+            "avionics", "aerospace power", "energy storage",
+            "robotic systems", "space robotics", "space communications",
+            "space navigation", "orbital debris", "life support",
+            "habitation systems", "in situ resource utilization",
+            "sensors and instruments", "entry descent and landing",
+            "autonomous systems", "artificial intelligence",
+            "modeling and simulation", "information processing",
+            "materials and structures", "mechanical systems",
+            "advanced manufacturing", "surface systems",
+            "thermal management", "flight vehicle systems",
+            "air traffic management", "guidance navigation and control",
+        ],
+        "evidence_urls": [
+            "https://www.nasa.gov/stmd-solicitations-and-opportunities/",
+            "https://www.nasa.gov/otps/2024-nasa-technology-taxonomy/",
+        ],
+    },
+    {
+        "id": "army-research-lab-foundational-baa",
+        "identifiers": ["W911NF-23-S-0001"],
+        "topics": [
+            "Artificial intelligence and machine learning",
+            "Biology and biotechnology", "Cybersecurity", "Data science",
+            "Energy", "Manufacturing", "Materials science",
+            "Quantum science", "Social and behavioral sciences",
+            "Technology development",
+        ],
+        "terms": [
+            "synthetic biology", "biological materials",
+            "electromagnetic spectrum", "radar", "electronic warfare",
+            "power conversion", "energy storage", "directed energy",
+            "human systems", "human autonomy", "autonomous systems",
+            "artificial intelligence", "machine learning", "network science",
+            "cybersecurity", "distributed computing", "photonics",
+            "electronics", "quantum science", "quantum sensing",
+            "extreme materials", "additive manufacturing",
+            "energetic materials", "ballistics", "propulsion",
+            "guidance navigation and control",
+        ],
+        "evidence_urls": [
+            "https://arl.devcom.army.mil/collaborate-with-us/opportunity/arl-baa/",
+            "https://arl.devcom.army.mil/what-we-do/",
+        ],
+    },
+    {
+        "id": "noaa-national-weather-service-baa",
+        "identifiers": ["NOAA-NWS-2024-28059"],
+        "topics": [
+            "Climate change", "Data science", "Environmental science", "Water",
+        ],
+        "terms": [
+            "meteorology", "weather forecasting", "hydrology",
+            "climate services", "severe weather", "hurricanes", "floods",
+            "drought", "weather observations", "weather radar",
+            "impact-based decision support", "numerical weather prediction",
+            "space weather",
+        ],
+        "evidence_urls": [
+            "https://www.weather.gov/about/",
+            "https://simpler.grants.gov/opportunity/d608e124-edb6-4788-85f1-65c924070f62",
+        ],
+    },
+    {
+        "id": "noaa-nesdis-star-baa",
+        "identifiers": ["NOAA-NESDISPO-STAR-2024-27967"],
+        "topics": [
+            "Climate change", "Data science", "Environmental science",
+            "Space and aeronautics",
+        ],
+        "terms": [
+            "satellite remote sensing", "Earth observations",
+            "environmental satellite data", "weather satellites",
+            "climate data", "environmental monitoring", "data products",
+            "satellite instruments", "atmospheric observations",
+            "ocean observations", "space weather",
+        ],
+        "evidence_urls": [
+            "https://www.nesdis.noaa.gov/about/our-mission",
+            "https://www.star.nesdis.noaa.gov/star/STARMissionVision.php",
+        ],
+    },
+    {
+        "id": "noaa-oceanic-atmospheric-research-baa",
+        "identifiers": ["NOAA-OAR-CPO-2024-28363"],
+        "topics": [
+            "Carbon management", "Climate change", "Data science",
+            "Environmental science", "Water",
+        ],
+        "terms": [
+            "climate research", "weather research", "ocean research",
+            "atmospheric research", "air quality", "ocean acidification",
+            "ocean observations", "Earth system modeling", "hurricanes",
+            "tornadoes", "coastal ecosystems", "Great Lakes",
+            "carbon cycle", "atmospheric chemistry", "forecasting",
+        ],
+        "evidence_urls": [
+            "https://research.noaa.gov/",
+            "https://research.noaa.gov/wp-content/uploads/2023/05/"
+            "OAR-Strategy-2020-2026-14.pdf",
+        ],
+    },
+    {
+        "id": "noaa-fisheries-baa",
+        "identifiers": ["NOAA-NMFS-FHQ-2024-27611"],
+        "topics": [
+            "Agriculture and food", "Biology and biotechnology",
+            "Climate change", "Environmental science", "Water",
+        ],
+        "terms": [
+            "fisheries science", "sustainable fisheries",
+            "fisheries management", "seafood", "aquaculture",
+            "fish stock assessment", "marine ecosystems",
+            "protected species", "marine mammals", "habitat conservation",
+            "bycatch", "coastal communities", "ocean resources",
+            "living marine resources", "climate-ready fisheries",
+        ],
+        "evidence_urls": [
+            "https://www.fisheries.noaa.gov/grant/"
+            "fiscal-year-2024-2026-broad-agency-announcement",
+            "https://www.fisheries.noaa.gov/about-us",
+        ],
+    },
+    {
+        "id": "noaa-office-education-baa",
+        "identifiers": ["NOAA-SEC-OED-2024-28060"],
+        "topics": [
+            "Climate change", "Education and workforce",
+            "Environmental science", "Water",
+        ],
+        "terms": [
+            "STEM education", "environmental literacy",
+            "teaching and learning", "ocean education", "coastal education",
+            "climate education", "weather education", "workforce development",
+            "career pathways", "student education", "community resilience",
+            "environmental hazards",
+        ],
+        "evidence_urls": [
+            "https://www.noaa.gov/office-education/noaa-education-council/"
+            "strategic-planning",
+            "https://simpler.grants.gov/opportunity/"
+            "a41c508c-e2c8-48bd-be6d-615027fca6b7",
+        ],
+    },
+    {
         "id": "doe-office-of-science-umbrella",
         "triggers": [
             "office of science financial assistance",

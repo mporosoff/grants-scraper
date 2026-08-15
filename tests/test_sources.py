@@ -769,6 +769,24 @@ class DiscoverabilityTests(unittest.TestCase):
         "topic_areas": [],
         "document_search_text": None,
     }
+    NASA_SPACETECH_UMBRELLA = {
+        "opportunity_number": "NNH26ZTR001N",
+        "title": "Space Technology Research, Development, Demonstration, "
+                 "and Infusion (SpaceTech REDDI-2026)",
+        "agency": "NASA Headquarters",
+        "description": "Umbrella NASA Research Announcement.",
+        "topic_areas": ["Space and aeronautics", "Technology development"],
+        "document_search_text": None,
+    }
+    ARL_UMBRELLA = {
+        "opportunity_number": "W911NF-23-S-0001",
+        "title": "DEVCOM Army Research Laboratory Broad Agency Announcement "
+                 "for Foundational Research",
+        "agency": "Dept of the Army -- Materiel Command",
+        "description": "See the separate ARL BAA topics website.",
+        "topic_areas": ["Technology development"],
+        "document_search_text": None,
+    }
 
     def test_umbrella_foa_gains_program_topics_and_terms(self):
         from scripts.sources.discoverability import augment_records
@@ -827,6 +845,89 @@ class DiscoverabilityTests(unittest.TestCase):
         self.assertEqual(evidence["rule_id"], "onr-long-range-baa")
         self.assertTrue(all(url.startswith("https://www.onr.navy.mil/")
                             for url in evidence["official_urls"]))
+
+    def test_spacetech_reddi_gains_taxonomy_scope_by_exact_number(self):
+        from scripts.sources.discoverability import augment_records
+
+        record = dict(self.NASA_SPACETECH_UMBRELLA)
+        self.assertEqual(augment_records([record]), 1)
+
+        text = (record["document_search_text"] or "").casefold()
+        for term in (
+            "space propulsion", "energy storage", "space robotics",
+            "artificial intelligence", "advanced manufacturing",
+            "entry descent and landing",
+        ):
+            self.assertIn(term, text)
+        self.assertNotIn("catalysis", text)
+        self.assertIn("Materials science", record["topic_areas"])
+        self.assertEqual(
+            record["discoverability_contribution"]["rule_ids"],
+            ["nasa-spacetech-reddi-umbrella"],
+        )
+
+    def test_arl_baa_gains_current_foundational_competencies(self):
+        from scripts.sources.discoverability import augment_records
+
+        record = dict(self.ARL_UMBRELLA)
+        self.assertEqual(augment_records([record]), 1)
+
+        text = (record["document_search_text"] or "").casefold()
+        for term in (
+            "synthetic biology", "energy storage", "human autonomy",
+            "cybersecurity", "quantum sensing", "extreme materials",
+        ):
+            self.assertIn(term, text)
+        self.assertNotIn("catalysis", text)
+        self.assertIn("Quantum science", record["topic_areas"])
+
+    def test_noaa_baa_scope_stays_with_its_exact_line_office(self):
+        from scripts.sources.discoverability import augment_records
+
+        weather = {
+            "opportunity_number": "NOAA-NWS-2024-28059",
+            "title": "FY 2024-2026 Broad Agency Announcement",
+            "agency": "DOC NOAA",
+            "description": "Projects associated with the NWS mission.",
+            "topic_areas": ["Environmental science"],
+        }
+        fisheries = {
+            "opportunity_number": "NOAA-NMFS-FHQ-2024-27611",
+            "title": "FY 2024-2026 Broad Agency Announcement",
+            "agency": "DOC NOAA",
+            "description": "Projects associated with the NMFS mission.",
+            "topic_areas": ["Environmental science"],
+        }
+        unknown = {
+            "opportunity_number": "NOAA-OTHER-BAA",
+            "title": "FY 2024-2026 Broad Agency Announcement",
+            "agency": "DOC NOAA",
+            "description": "Projects associated with NOAA's mission.",
+            "topic_areas": ["Environmental science"],
+        }
+
+        self.assertEqual(augment_records([weather, fisheries, unknown]), 2)
+        weather_text = (weather["document_search_text"] or "").casefold()
+        fisheries_text = (fisheries["document_search_text"] or "").casefold()
+        self.assertIn("weather forecasting", weather_text)
+        self.assertNotIn("sustainable fisheries", weather_text)
+        self.assertIn("sustainable fisheries", fisheries_text)
+        self.assertNotIn("weather forecasting", fisheries_text)
+        self.assertNotIn("discoverability_contribution", unknown)
+
+    def test_roses_program_element_does_not_inherit_omnibus_scope(self):
+        from scripts.sources.discoverability import augment_records
+
+        element = {
+            "opportunity_number": "NNH25ZDA001N-ATMOS",
+            "title": "ROSES-2025: A.14 Atmosphere Observing System",
+            "agency": "NASA Headquarters",
+            "description": "A specific ROSES program element.",
+            "topic_areas": ["Environmental science"],
+        }
+
+        self.assertEqual(augment_records([element]), 0)
+        self.assertNotIn("discoverability_contribution", element)
 
     def test_generic_baa_label_does_not_trigger_umbrella_recall(self):
         from scripts.sources.discoverability import augment_records
