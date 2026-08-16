@@ -1840,13 +1840,15 @@ One **package** per session (§0.4 rule 5). One **commit** per item, with the su
 
 ### Package A — Foundations completion
 
-- [ ] A1. **Populate the frozen fixtures** — three enrichment and three evidence entries keyed to ids `1001`/`1003`/`1005`, so the gate covers the populated `merge_document_entry` path (§8.4). **Do this first:** it is what makes every later gate meaningful
-- [ ] A2. Pin `pdfplumber`, `pdfminer.six`, `pypdf` (§6.1)
-- [ ] A3. `.gitignore` allowlist line for `data/subtopic_records.json` (§0.4 rule 11)
-- [ ] A4. Size-budget test — absolute limits, not a multiplier (§12)
-- [ ] A5. Heartbeat file `.github/last_build` (§16.3)
-- [ ] A6. Query set + `evaluation/query_baseline.json` (§8.5)
-- [ ] **GATE:** suite green, zero test-file edits · `verify_no_drift` green in CI **now covering populated evidence entries** · query baseline byte-identical across two consecutive runs
+**Complete 2026-08-16.** One commit per item, suite run between commits, pushed and green on `ubuntu-latest`.
+
+- [x] A1. **Populate the frozen fixtures** — three enrichment and three evidence entries keyed to ids `1001`/`1003`/`1005`, so the gate covers the populated `merge_document_entry` path (§8.4). **Do this first:** it is what makes every later gate meaningful — *12 cited facts across 3 records where there were none; baseline 20 → 22 artifacts; §17.6 rule 2 followed, two builds 78 s apart, 0/22 normalized differences*
+- [x] A2. Pin `pdfplumber`, `pdfminer.six`, `pypdf` (§6.1) — *all three of §6.1's version numbers were wrong; `pypdf==5.1.0` would have been a two-major-version downgrade. §6.1 corrected*
+- [x] A3. `.gitignore` allowlist line for `data/subtopic_records.json` (§0.4 rule 11) — *§9.4 item 7's `-v` check also corrected; it reports a pass as a failure*
+- [x] A4. Size-budget test — absolute limits, not a multiplier (§12) — *32 MiB fail / 28 MiB warn / 2 KiB per subtopic; each threshold proven to fire; 205 → 208 tests*
+- [x] A5. Heartbeat file `.github/last_build` (§16.3) — *written unconditionally before the commit step; deliberately outside the workflow's push path filter so it cannot self-trigger*
+- [x] A6. Query set + `evaluation/query_baseline.json` (§8.5) — *37 queries, byte-identical across two runs, wired into `tests.yml`. Found that top-10 churn is a weaker gate on the 5-record fixture than §8.5 implied; see the warning there*
+- [x] **GATE:** suite green, zero test-file edits · `verify_no_drift` green in CI **now covering populated evidence entries** · query baseline byte-identical across two consecutive runs
 
 ### Package B — Segmentation, offline and self-contained
 
@@ -1989,7 +1991,8 @@ Both are Phase 1 work and both fail loudly rather than silently, which is why th
 | 2 | Revise this plan against `docs/RECON.md`. Still no code changes. | Corrected `docs/TOPIC_LAYER_PLAN.md` | **done — this is 7.0** |
 | 3 | §8.4 hermetic no-drift gate. | `tools/`, frozen fixtures, baseline, wired into `tests.yml` | **done** |
 | 4 | Repair the gate after its first CI failure. | Line-ending normalization in `fingerprint.py` | **done** |
-| 5+ | **One §18 work package per session.** Each item inside it is its own commit, with the suite run between commits. | The package, its gate output, an updated §15, and a pushed branch | next: package A |
+| 5 | §18 package A — foundations completion. | Six commits, gates green, §15 updated, branch pushed | **done 2026-08-16** |
+| 6+ | **One §18 work package per session.** Each item inside it is its own commit, with the suite run between commits. | The package, its gate output, an updated §15, and a pushed branch | next: package B |
 
 Sessions 1 and 2 are not overhead. They are what makes the additive-edit discipline in §8 possible, because you cannot make a surgical edit to a file whose structure you inferred. Session 1 found that the single most consequential fact in this project — which PDF library the repository uses — was wrong in every prior version, and that error alone would have produced an unusable Layer C and an AGPL licensing problem.
 
