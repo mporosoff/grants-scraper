@@ -1328,6 +1328,25 @@ def download_document(
     raise RuntimeError("Official document redirected too many times.")
 
 
+def needs_subtopics(entry, enabled):
+    """Whether a cached entry needs backfill segmentation (§8.3 insertion 3).
+
+    Function-local import for the same reason as subtopic_fields: with the flag
+    off nothing under scripts.subtopic_* is ever imported. Returns False
+    immediately when disabled, so the hot path in the candidate loop costs one
+    boolean check per document.
+    """
+    if not enabled:
+        return False
+    from scripts import subtopic_records, subtopic_segmentation
+
+    return subtopic_records.needs_subtopic_extraction(
+        entry,
+        enabled=True,
+        extractor_version=subtopic_segmentation.extractor_version(),
+    )
+
+
 def subtopic_fields(record, content, containers, document, fetched_at, enabled):
     """Segmentation result for one document, or ``{}`` when the flag is off.
 
@@ -1377,7 +1396,14 @@ def subtopic_fields(record, content, containers, document, fetched_at, enabled):
 
 
 def build_document_entry(
-    record, source, response, previous, now, *, enable_subtopics=False
+    record,
+    source,
+    response,
+    previous,
+    now,
+    *,
+    enable_subtopics=False,
+    backfill_subtopics=False,
 ):
     fetched_at = iso_utc(now)
     content = response["content"]
@@ -1399,6 +1425,28 @@ def build_document_entry(
             response.get("last_modified")
             or entry["document"].get("last_modified")
         )
+        # §8.3 insertion 3, gate 3. The bytes are in hand -- downloaded and
+        # hashed -- so segmenting here is free. Deliberately NOT falling
+        # through to the full-extraction path: that would re-run fact
+        # extraction and rewrite facts, review_queue and version, churning the
+        # cache for no reason.
+        if enable_subtopics and backfill_subtopics:
+            containers, _extraction = extract_containers(
+                content,
+                response.get("content_type"),
+                source.get("name"),
+                entry["document"].get("url") or source["url"],
+            )
+            entry.update(
+                subtopic_fields(
+                    record,
+                    content,
+                    containers,
+                    entry["document"],
+                    fetched_at,
+                    True,
+                )
+            )
         return entry, False
 
     version_history = deepcopy((previous or {}).get("version_history") or [])
@@ -1470,8 +1518,13 @@ def build_document_entry(
     }, True
 
 
-def due_for_check(entry, signature, now, recheck_days):
+def due_for_check(entry, signature, now, recheck_days, *, needs_subtopics=False):
     if not entry:
+        return True
+    # §8.3 insertion 3, gate 1. On a steady-state night nearly every document
+    # takes one of §4's three skip gates, so without this the ~1,400 already
+    # cached documents are never even candidates and never get subtopics.
+    if needs_subtopics:
         return True
     if entry.get("source_signature") != signature:
         return True
@@ -1815,8 +1868,11 @@ def enrich_document_evidence(
             if source["kind"] == "primary_notice"
             else max(30, recheck_days)
         )
-        if due_for_check(entry, signature, now, source_recheck_days):
-            candidates.append((record, source, signature, entry))
+        backfill = needs_subtopics(entry, enable_subtopics)
+        if due_for_check(
+            entry, signature, now, source_recheck_days, needs_subtopics=backfill
+        ):
+            candidates.append((record, source, signature, entry, backfill))
     candidates.sort(
         key=lambda item: (
             0
@@ -1848,14 +1904,17 @@ def enrich_document_evidence(
     refreshed = 0
     not_modified = 0
     failures = []
-    for record, source, signature, previous in candidates[:max_documents]:
+    for record, source, signature, previous, backfill in candidates[:max_documents]:
         opportunity_id = str(
             record.get("opportunity_id")
             or record.get("opportunity_number")
         )
         headers = {}
         previous_document = (previous or {}).get("document") or {}
-        if previous and previous_document.get("url") == source["url"]:
+        # §8.3 insertion 3, gate 2. A 304 returns no body, and you cannot
+        # segment bytes you did not receive -- so a document needing backfill
+        # asks for the whole thing.
+        if previous and not backfill and previous_document.get("url") == source["url"]:
             if previous_document.get("etag"):
                 headers["If-None-Match"] = previous_document["etag"]
             if previous_document.get("last_modified"):
@@ -1878,6 +1937,7 @@ def enrich_document_evidence(
                     previous,
                     now,
                     enable_subtopics=enable_subtopics,
+                    backfill_subtopics=backfill,
                 )
                 cached_records[opportunity_id] = entry
                 refreshed += int(extracted)
