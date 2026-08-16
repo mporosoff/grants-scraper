@@ -462,15 +462,27 @@ The two libraries divide cleanly along what each layer needs:
 **Determinism.** Pin both exactly, and pin `pdfminer.six` too — it is a transitive dependency of `pdfplumber` and it is the component that actually decides character positions and font names. An unpinned minor bump shifts extraction, which shifts spans, which surfaces as a flood of phantom `subtopic_amended` events.
 
 ```
-# requirements.txt — additions and one tightening
-pdfplumber==0.11.4
-pdfminer.six==20240706        # transitive, pinned because it drives extraction
-pypdf==5.1.0                  # was: pypdf>=5.0.0,<7
+# requirements.txt — additions and one tightening (as committed, A2)
+pypdf==6.16.1                 # was: pypdf>=5.0.0,<7
+pdfplumber==0.11.10
+pdfminer.six==20260107        # transitive, pinned because it drives extraction
 ```
 
-Tightening `pypdf` from a range to a pin is a behavior-affecting change to an existing line, so it is its own commit with the existing suite run before and after. Verify the exact available versions at implementation time rather than trusting the numbers above — §0.4 rule 10 in spirit.
+**All three version numbers in versions 7.0–8.0 of this section were wrong, and one of them was dangerous.** They were written from library knowledge rather than resolved against PyPI. Corrected against `pip index versions` on 2026-08-16:
 
-The resolved versions go into `extractor_version` (`"1.0.0+pdfplumber0.11.4+pypdf5.1.0"`) so that when a phantom-amendment flood does happen, the cause is visible in the diff rather than requiring an investigation.
+| 8.0 said | Actual | Consequence of trusting 8.0 |
+|---|---|---|
+| `pdfplumber==0.11.4` | **0.11.10** | Stale by six patch releases |
+| `pdfminer.six==20240706` | **20260107** | Stale, *and* unsatisfiable — `pdfplumber` 0.11.10 hard-pins `pdfminer.six==20260107`, so the two lines together do not resolve |
+| `pypdf==5.1.0` | **6.16.1** | **A two-major-version downgrade.** `>=5.0.0,<7` resolves to 6.16.1 today, so "pinning" to 5.1.0 would have silently changed the library already parsing every notice in production, under a commit message claiming to change nothing |
+
+The rule this yields, which is more useful than any specific number: **pin the version the existing constraint already resolves to.** A pin is meant to freeze behavior, not change it. Confirm with `pip install --dry-run --ignore-installed --report` against the *current* constraint before writing the pin, and treat any version that differs from the resolved one as a behavior-affecting change needing its own justification.
+
+Tightening `pypdf` from a range to a pin is still a change to an existing line, so it is its own commit with the existing suite run before and after.
+
+`pdfplumber` 0.11.10 pulls `pypdfium2`, `Pillow` and `cryptography` transitively. Checked at implementation time: BSD-3-Clause/Apache-2.0, MIT-CMU, and Apache-2.0/BSD-3-Clause respectively. No AGPL enters the closure, so §6.1's licensing constraint holds through the transitive graph and not merely at the top level.
+
+The resolved versions go into `extractor_version` (`"1.0.0+pdfplumber0.11.10+pypdf6.16.1"`) so that when a phantom-amendment flood does happen, the cause is visible in the diff rather than requiring an investigation.
 
 **Cost, stated honestly.** `pdfplumber` is slower than `pypdf`, materially so on large documents, because `page.chars` materializes every character as a dict. On a 250-page BAA that is millions of dicts. Four mitigations, all mandatory:
 

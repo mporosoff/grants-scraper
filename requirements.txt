@@ -1,3 +1,9 @@
 requests>=2.31.0
-pypdf>=5.0.0,<7
+# Exact pins for the PDF toolchain. An unpinned minor bump shifts character
+# positions and font names, which shifts subtopic spans, which surfaces as a
+# flood of phantom subtopic_amended events. pdfminer.six drives extraction and
+# is pinned even though it is transitive. See docs/TOPIC_LAYER_PLAN.md §6.1.
+pypdf==6.16.1
+pdfplumber==0.11.10
+pdfminer.six==20260107
 openpyxl>=3.1.0
