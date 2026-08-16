@@ -1365,19 +1365,27 @@ def subtopic_fields(record, content, containers, document, fetched_at, enabled):
     """
     if not enabled:
         return {}
-    from scripts import subtopic_records, subtopic_segmentation
+    from scripts import subtopic_records, subtopic_segmentation, subtopic_sources
+    from scripts.pull_grants import collect_attachments, fetch_detail
 
     version = subtopic_segmentation.extractor_version()
     try:
-        result = subtopic_segmentation.segment_document(
+        # §6.6 multi-attachment. The primary is tried first from bytes already
+        # in hand, so a record whose topics are in the primary costs no extra
+        # fetch. source_for_record() is untouched: this path is parallel and
+        # subtopic-only, so fact extraction still reads exactly one document.
+        result, chosen, attempts = subtopic_sources.best_segmentation(
             record,
             content,
-            containers,
             document,
+            extract_containers=extract_containers,
+            download=download_document,
+            detail_fetcher=fetch_detail,
+            collector=collect_attachments,
             parent_deadline=record.get("close_date"),
         )
         built = subtopic_records.build_records(
-            record, result, document=document, as_of=fetched_at[:10]
+            record, result, document=chosen or document, as_of=fetched_at[:10]
         )
     except Exception as exc:  # noqa: BLE001 - never break the parent record
         return {
@@ -1389,7 +1397,17 @@ def subtopic_fields(record, content, containers, document, fetched_at, enabled):
         "subtopics": built,
         "subtopic_method": result.method,
         "subtopic_extractor_version": version,
+        "subtopic_attempts": attempts.get("attempts", ()),
     }
+    if chosen and (chosen.get("url") or None) != (document or {}).get("url"):
+        # The topic list came from a secondary attachment, not the notice the
+        # evidence cache records. Worth storing: it is the difference between
+        # "this record has no topics" and "its topics are in another file".
+        fields["subtopic_source_document"] = {
+            "url": chosen.get("url"),
+            "name": chosen.get("name"),
+            "sha256": chosen.get("sha256"),
+        }
     if result.reason:
         fields["subtopic_reason"] = result.reason
     return fields
