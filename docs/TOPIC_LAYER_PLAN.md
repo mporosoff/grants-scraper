@@ -1489,7 +1489,7 @@ When Phase 4 removes the containment, give step 10 an `id:` and route it to the 
 4. Confirm **no new issue number appears.** Record the highest existing issue number before the run and check it has not advanced afterwards. **Issue #30 receiving another comment is expected and is not a failure** — see below.
 5. Confirm `verify_no_drift` passed in `tests.yml` on the same commit (§8.4).
 6. Confirm `query_baseline.mjs --check` reports **zero top-10 churn** with the flag off (§8.5).
-7. Confirm `git check-ignore -v data/subtopic_records.json` returns nothing, i.e. the `.gitignore` allowlist line landed.
+7. Confirm the `.gitignore` allowlist line landed: `git check-ignore data/subtopic_records.json` must print nothing and **exit 1**. Use the plain form, not `-v` — earlier versions of this item said `-v` returns nothing, which is wrong. On a path rescued by a negation, `-v` prints the negating rule (`.gitignore:23:!/data/subtopic_records.json`) and exits **0**, so the `-v` form looks like a failure when it is a pass. Verified on this tree 2026-08-16.
 8. Only then open the PR.
 
 #### Why item 2 is an absolute ceiling, not a delta
