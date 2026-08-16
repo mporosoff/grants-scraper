@@ -239,6 +239,68 @@ three high-confidence records with titles, page spans, summaries, term maps and
 both topic vocabularies — so the pipeline is not the thing that is broken. The
 patterns and the TOC-duplication defect above are.
 
+## D2: the complete bookmark tree of `DE-FOA-0003600`
+
+§6.7 left one question open — the census read 26 of 286 bookmarks, so whether
+`Catalysis Science` is reachable *in the notice* was unverified, and that answer
+decides how much of §18.2's `program_taxonomy` deferral survives. Package D
+item D2 read all 286.
+
+**286 destinations, maximum depth 3.** Nodes per level: **9 / 46 / 167 / 64**.
+
+Level 0 is exactly the federal NOFO skeleton, which confirms §6.3a's
+depth-0 exclusion empirically:
+
+```
+I. Basic Information            VI.   Application Review Information
+II. Eligibility                 VII.  Award Notices
+III. Program Description        VIII. Post-Award Requirements and Administration
+IV. Application Contents        IX.   Other Information
+V. Submission Requirements
+```
+
+**`(q) Catalysis Science` is present: level 2, page 46, parent `2. Basic Energy
+Sciences (BES)`.** It is the only bookmark in the document matching `/catalys/i`.
+BES carries **24 sub-programs** at that level:
+
+```
+(a) Materials Chemistry              (m) Gas Phase Chemical Physics
+(c) Synthesis and Processing Science (o) Condensed Phase and Interfacial Molecular Science
+(d) Experimental Condensed Matter    (q) Catalysis Science
+(l) Atomic, Molecular, Optical       (r) Separation Science
+                                     (u) Photochemistry and Radiation Chemistry
+                                     (v) Photosynthetic Systems
+```
+
+So the answer to §6.7's open question is **yes** — the BES → program granularity
+this project's user actually needs is in the PDF, at a citable page.
+
+### What the tree also proves about §6.3a's selection rule
+
+Grouping every sibling set of ≥3 by its **level-0 ancestor** separates the
+document cleanly, and not the way §6.3a assumed:
+
+| Level-0 ancestor | Sibling sets | Nodes |
+|---|---|---|
+| `III. Program Description` | 10 | **93** — the real taxonomy (BES 24, FES 14, NP 11, HEP 9, IRP 5, BER 4, ASCR 4, …) |
+| All other sections | 23 | **159** — administrative (40 under *Administrative and National Policy Requirements*, 16 under *How-To Guides*, 14 form fields under *Research and Related Other Project Information*, 11 under *Component Pieces of the Application*) |
+
+Three findings, each of which forced a change to §6.3a:
+
+1. **The immediate-parent lexicon is too weak.** `C. Administrative and National
+   Policy Requirements` matches no lexicon term, and neither do most of its 40
+   children (*Availability of Funds*, *Buy America Preference*, *Conference
+   Spending*). The **level-0 ancestor** catches all 23 administrative sets
+   cleanly — structural, template-derived, and exactly the "primary exclusion is
+   structural, not lexical" §6.3a asked for and then failed to deliver.
+2. **"Deepest qualifying depth" selects the wrong level.** Under `III.`, level 3
+   holds 3 nodes (`Multi-Institutional Teams`) and would beat level 2's 77.
+   Selection must be **the admissible depth carrying the most nodes**.
+3. **The 60-node cap forces the wrong granularity.** Level 2 under `III.` is 77
+   nodes; level 1 is 16. At 60 the document yields 16 *program-office* children
+   and `Catalysis Science` disappears into the BES span — losing precisely the
+   record that motivated the whole §6.7 analysis.
+
 ## Method
 
 Documents were fetched from the attachment URLs already in

@@ -960,7 +960,9 @@ III. Program Description
 
 That is program-office → program granularity, in the notice, reachable by **Layer A today** once §6.3a's structural family exists. The claim that the text "genuinely is not there" was inferred from the document's reputation as an umbrella and never checked against the file. It is the most consequential factual error this plan has carried, because it is the basis on which the single most valuable case for this project's actual user was written off.
 
-**What the notice does *not* supply, and this part of the original claim survives:** program-manager identity and contact, stable per-program URLs under `science.osti.gov`, and any taxonomy level deeper than the notice prints. Whether the specific `BES → CSGB → Catalysis Science` program appears in the bookmark tree is **not yet established** — the census read the first 26 of 286 bookmarks. Package D must read the full tree and record the answer, because the depth actually available decides how much of §18.2's deferral survives.
+**What the notice does *not* supply, and this part of the original claim survives:** program-manager identity and contact, stable per-program URLs under `science.osti.gov`, and any taxonomy level deeper than the notice prints.
+
+**Resolved by measurement (D2, 2026-08-16).** All 286 bookmarks were read. The tree is **9 / 46 / 167 / 64 nodes across four levels**, and **`(q) Catalysis Science` is present at level 2, page 46, under `2. Basic Energy Sciences (BES)`** — the only `/catalys/i` bookmark in the document. BES carries 24 sub-programs at that level, including `Separation Science`, `Photochemistry and Radiation Chemistry` and `Photosynthetic Systems`. So the granularity this project's user needs is in the notice, at a citable page, and §18.2's reassessment below stands rather than being conditional. Full tree in `docs/CORPUS_CENSUS.md`.
 
 The row above has been narrowed to NSF division core solicitations, which remain genuinely outward-pointing and are unaffected by this correction.
 
