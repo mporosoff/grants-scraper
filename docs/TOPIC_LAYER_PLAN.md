@@ -452,12 +452,14 @@ The two libraries divide cleanly along what each layer needs:
 |---|---|---|
 | Bookmark / outline tree (Layer A) | **`pypdf`** — already a dependency | `reader.outline`, `reader.get_destination_page_number(dest)` |
 | Per-page text (Layers B and D, summaries) | **`pypdf`** — already used | `page.extract_text()` |
-| Per-character font name and size (Layer C) | **`pdfplumber`** — new | `page.chars` → dicts carrying `fontname`, `size`, `text`, `x0`, `top` |
+| Per-character font name and size (Layer C) | **`pdfplumber`** — new | `page.chars` → dicts carrying `fontname`, `size`, `text`, `x0`, `top` — all five confirmed present in 0.11.10 (B0) |
 | Encryption handling | **`pypdf`** — already used | `reader.is_encrypted` / `reader.decrypt("")` |
 
 `pdfplumber` is MIT-licensed and built on `pdfminer.six` (also MIT). It is the one new runtime dependency this plan authorizes.
 
 **Why this works where v6.2's design would not.** v6.2's Layer C tested `span['size'] >= 1.15 * median or span['flags'] & (1 << 4)` — a PyMuPDF span dict with a bitfield whose bit 4 means bold. `pdfplumber` has no `flags` bitfield. It gives you the **font name**, which is strictly better for this purpose: bold is detected from the name itself, and the same string also distinguishes the heading face from the body face even when both are the same point size. §6.2 Layer C is rewritten against `chars`.
+
+**Confirmed by measurement (B0), and more load-bearing than expected.** Real font names carry the weight exactly as claimed — `TimesNewRomanPS-BoldMT`, `BCDFEE+TimesNewRomanPS-BoldMT`, `HGOLHU+Calibri-Bold`, `Arial-BoldMT`. One example form above is wrong: the real ARPA-E name is `Calibri-Bold` with a hyphen, not `Calibri,Bold` with a comma; both match the regex. And the "even when both are the same point size" clause turns out to be the *whole* mechanism rather than a bonus — see §6.2, where the size branch admits 0.0% of lines on the AFOSR BAA.
 
 **Determinism.** Pin both exactly, and pin `pdfminer.six` too — it is a transitive dependency of `pdfplumber` and it is the component that actually decides character positions and font names. An unpinned minor bump shifts extraction, which shifts spans, which surfaces as a flood of phantom `subtopic_amended` events.
 
@@ -606,7 +608,27 @@ def _layer_outline(content, containers, deadline):
     return None
 ```
 
-Three `pypdf` specifics that will otherwise cost an afternoon: `get_destination_page_number` **raises** on destinations that point outside the document, so it needs the guard; page numbers come back **0-based** and every other page reference in this repository is 1-based; and a PDF with no bookmarks yields an empty list rather than an error, which is a normal outcome and not a failure.
+**Corrected against measurement (B0, 2026-08-16 — full output in `docs/PDF_API_NOTES.md`).** The nesting walk above is right and was confirmed on a 119-destination ARPA-E NOFO. The exception handling is wrong:
+
+**`get_destination_page_number` does not raise. It returns `None`.** Its signature is `-> Optional[int]` and its docstring says "The page number or None if page is not found". The sketch survives only because `None + 1` raises `TypeError`, which the bare `except Exception` then catches — it is correct by accident, via an arithmetic error on the next token, and the comment describes a mechanism that does not exist. Write it explicitly:
+
+```python
+page_index = reader.get_destination_page_number(item)
+if page_index is None:        # not found; pypdf returns None, it does not raise
+    continue
+page = page_index + 1         # pypdf is 0-based; this repository is 1-based
+```
+
+Keep a `try` around it as well, but for the *reader*, not for this call.
+
+Four further specifics, three measured and one still true as written:
+
+- **0-based page numbers**, confirmed — every other page reference in this repository is 1-based.
+- **No bookmarks yields an empty list, not an error**, confirmed on both DoD BAAs. A normal outcome, not a failure.
+- **A destination whose page is a bare integer is silently dropped.** `NumberObject(3)` returns `None` even when page 3 exists, because the lookup resolves indirect references and does not treat a literal integer as an index. A notice writing `/Dest [3 /Fit]` loses that entry with no error. None of six sampled documents do this; Layer A under-reports rather than fails if one does.
+- **A cross-document page reference returns a plausible wrong number**, matching on object number without checking ownership. Layer A cannot reach this — its destinations always come from the reader it queries — but it is a trap for anyone later constructing `Destination` objects by hand.
+
+Not every outline nests: `W81XWH-22-DHAPP.pdf` has 11 destinations, all at level 0, so the per-level loop gets exactly one attempt rather than several.
 
 **Layer B — table of contents** (`high`, text only). Find TOC pages in the already-extracted `containers`, then locate each title verbatim in the body; the TOC's own page number is never trusted as a boundary. Unchanged from v6.2 and needs no new library.
 
@@ -615,7 +637,9 @@ DOT_LEADER = re.compile(r'^(?P<title>.+?)\.{3,}\s*(?P<page>\d+)\s*$')
 # scan first max(3, 15% of pages); require >= 5 matching lines on a single page
 ```
 
-**Layer C — body heading sweep** (`medium`, `pdfplumber`). Most DoD BAAs are produced without bookmarks and resolve here. This is the only layer that opens `pdfplumber`, and it runs only after A and B have both declined.
+**Layer C — body heading sweep** (`medium`, `pdfplumber`). This is the only layer that opens `pdfplumber`, and it runs only after A and B have both declined.
+
+**Corrected (B0, 2026-08-16).** This paragraph used to open "Most DoD BAAs are produced without bookmarks and resolve here." The first half is confirmed — both DoD BAAs sampled carry **zero** bookmarks, so they do reach Layer C. The second half is **not supported**: neither produced a single match from any of the ten §6.3 families, so Layer C correctly declined and the documents yielded zero subtopics. See §6.3's coverage note and `docs/PDF_API_NOTES.md` §4.
 
 `pdfplumber` gives per-character dicts, so reassemble lines before matching. Bold is read from `fontname` — PDF font names carry the weight in the subset name, e.g. `ABCDEF+Arial-BoldMT`, `TimesNewRomanPS-BoldMT`, `Calibri,Bold`:
 
@@ -669,7 +693,23 @@ def _layer_headings(content, containers, deadline):
     return None
 ```
 
-`page.flush_cache()` is not optional on a 120-page document — without it `pdfplumber` retains every page's char list for the lifetime of the `with` block, and a large BAA will use well over a gigabyte on a runner that has seven.
+`page.flush_cache()` is not optional on a 120-page document — without it `pdfplumber` retains every page's char list for the lifetime of the `with` block, and a large BAA will use well over a gigabyte on a runner that has seven. Confirmed present on `pdfplumber.page.Page` in 0.11.10.
+
+**The size half of the candidate test does almost nothing, measured (B0).** Over the first 60 pages of each document, by branch:
+
+| Document | Lines | `size >= 1.15 × median` | `bold` | Either |
+|---|---|---|---|---|
+| ONR LRBAA | 2,315 | **4 (0.2%)** | 134 (5.8%) | 135 (5.8%) |
+| AFOSR Open BAA | 2,434 | **0 (0.0%)** | 145 (6.0%) | 145 (6.0%) |
+| ARPA-E SCALEUP | 2,849 | 120 (4.2%) | 545 (19.1%) | 545 (19.1%) |
+
+On both DoD BAAs — the corpus this layer exists for — the size branch contributes nothing: AFOSR has **three distinct font sizes in the whole document** and sets its headings at body size in bold. On the ARPA-E NOFO every size-qualifying line is also bold, so the union equals the bold set in all three. **Layer C is, on this evidence, a bold-detection layer.** Keep the size term — it costs nothing and will earn its place on notices that use display type — but do not rely on it, and do not describe the signal as size-or-weight when weight is doing all of the work.
+
+`BOLD_RE` itself is confirmed against real font names, including the six-letter subset prefixes (`BCDFEE+TimesNewRomanPS-BoldMT`, `HGOLHU+Calibri-Bold`). Two wrinkles: it also matches bold-italic, which is correct for heading detection; and subset prefixes are **not stable within a single document** (the same face appears as both `BCDEEE+` and `BCDHEE+`), so any future logic counting distinct fonts must strip `^[A-Z]{6}\+` first.
+
+Bold alone also over-admits — real AFOSR candidates include bolded body prose such as `'Hyperlinks have been embedded within this document…'`. The §6.4 acceptance rules, not the candidate test, are what keep this layer honest.
+
+**Cost, measured:** 60 pages take 5.8–6.9 s with `flush_cache()` per page, so 120 pages is roughly **12–14 s** against the 20 s per-document budget. That is under it with ~1.5× margin, not 10×. Layer C will legitimately exhaust `time_budget` on the largest documents on a slow runner, which is a designed non-fatal outcome — read `time_budget` counts in the package D histogram with that in mind rather than as evidence of pathology.
 
 Note the method name changed from v6.2's `heading_regex` to **`heading_font`**, because the signal is typographic and the stored `segmentation_method` should say so. Layer D is the regex-only one.
 
@@ -697,6 +737,16 @@ That is ten families. v6.2's Phase 2 step list said "the eight families"; ten is
 The eighth family was called `subtopic` in v6.2, which now collides with the name of the record type itself. It is **`sbir_subtopic`**. A grep for `subtopic` that returns both a record-type discriminator and a regex family is exactly the wrong-wiring hazard the naming-collision section exists to prevent.
 
 `best_family()` returns the family with the most matches, requiring a ≥2× margin over the runner-up so mixed-family segmentation is rejected rather than guessed.
+
+**⚠ Coverage, measured before any tuning (B0, 2026-08-16).** All ten families were run over the full text of three real notices — the ONR Long Range BAA, the AFOSR Open BAA and the ARPA-E SCALEUP NOFO. **Zero matches, in all three, from every family.**
+
+That is the correct outcome, not a bug: none of the three contains an enumerated topic list. What they contain is administrative NOFO section structure — `I.`/`II.`, `A.`/`B.`, `1.`/`2.` — at 47, 19 and 74 decimal-numbered lines respectively. The ONR LRBAA is structurally the **same shape as the DOE BES omnibus** in §6.7: an umbrella that points outward to research areas rather than enumerating them. §6.7 identifies that shape only for DOE. It is at least as common in DoD long-range BAAs, and that materially changes what package D should expect.
+
+**Two consequences, pointing in opposite directions, and both matter.**
+
+First, `no_layer_accepted` will dominate the histogram for the BAA corpus, and package D's per-agency-family acceptance rates should be set from measurement rather than hope. §18.1 package D already requires `no_layer_accepted` to be separated from genuine failures; this is the evidence for why that separation is load-bearing rather than bookkeeping.
+
+Second — and this is the one that will be tempting to get wrong — **do not add a generic numbered-section family to make these documents produce something.** On these three files that would manufacture subtopics titled *Federal Agency Name*, *Funding Opportunity Title* and *Announcement Type* from 47 and 74 matching lines. That is exactly the change §18.3 names as "the single most damaging change anyone could make to this design." The families are narrow deliberately. Three documents yielding zero subtopics is the fail-closed asymmetry working.
 
 **Tune against the corpus that already exists.** The catalog carries 31 records whose title or agency names a BAA, including DARPA office-wide BAAs (`HR001126S0003`, `S0010`, `S0011`, `S0013`, `S0016`), the ONR Long Range BAA (`N0001425SB001`), the DEVCOM ARL foundational BAA (`W911NF-23-S-0001`), AFOSR (`NOFOAFRLAFOSR20260001`), NRL (`N00173-24-S-BA01`) and ERDC (`W912HZ26S0001`). Their notice PDFs are reachable through the existing document-evidence path today. This is the development corpus, and it does not depend on SAM.gov existing (§10 Phase 1).
 
@@ -1978,7 +2028,7 @@ They were written from the repository's README and public description. File name
 
 Version 7.0 is the first version corrected against the code. It is not thereby *verified* — RECON.md read the repository at commit `b40d400`, and the repository keeps moving. Two specific things in 7.0 are still unverified by execution and should be treated as claims, not facts:
 
-- **The `pdfplumber` and `pypdf` API sketches in §6.1 and §6.2 have not been run.** They are written from knowledge of those libraries, not from output pasted from this repository. Verify `reader.outline`'s nesting, `get_destination_page_number`'s exceptions, and `page.chars`' `fontname` values against a real notice before trusting the code shapes.
+- ~~**The `pdfplumber` and `pypdf` API sketches in §6.1 and §6.2 have not been run.**~~ **Resolved 2026-08-16 (package B, commit B0).** All three were run against real notices; findings are in `docs/PDF_API_NOTES.md` and §6.1–§6.3 are corrected against them. `reader.outline`'s nesting was right; `get_destination_page_number`'s "raises" was **wrong** (it returns `None`); `page.chars`' `fontname` values were right, but the size half of Layer C's candidate test was shown to admit 0.0–0.2% of lines on the DoD BAAs it exists to serve.
 - **The offline-mode invocations in §8.4 were derived by reading argument parsers, not by running them.** `--max-documents 0` and friends are *accepted* by validation; that they produce a complete, network-free run is inferred.
 
 Both are Phase 1 work and both fail loudly rather than silently, which is why they are acceptable to carry as claims. Say so in the session report when you check them.
