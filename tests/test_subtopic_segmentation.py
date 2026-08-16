@@ -62,6 +62,9 @@ class PatternFamilyTests(unittest.TestCase):
     def test_every_family_matches_its_own_convention(self):
         samples = {
             "topic_area": "Topic Area 3 Electrocatalysis",
+            "focus_area": "Focus Area 3 Integrated Materials Analysis",
+            "component": "Component 3: Rapid Response Activities",
+            "technical_category": "Category 3: Building Efficiency",
             "area_of_interest": "Area of Interest 3 Water Reuse",
             "dod_topic": "Topic 3: Quantum Sensing",
             "technical_area": "Technical Area 3 Autonomy",
@@ -145,6 +148,24 @@ class EveryFamilySegmentsTests(unittest.TestCase):
             ("Topic Area 1 Electrocatalysis", "Electrocatalysis", "Topic Area 1"),
             ("Topic Area 2 Membranes", "Membranes", "Topic Area 2"),
             ("Topic Area 3 Materials", "Materials", "Topic Area 3"),
+        ],
+        "focus_area": [
+            ("Focus Area 1 Integrated Materials Analysis",
+             "Integrated Materials Analysis", "Focus Area 1"),
+            ("Focus Area 2 Surface Analysis", "Surface Analysis", "Focus Area 2"),
+            ("Focus Area 3 Data Fusion", "Data Fusion", "Focus Area 3"),
+        ],
+        "component": [
+            ("Component 1: Core Priorities", "Core Priorities", "Component 1"),
+            ("Component 2: Rapid Response", "Rapid Response", "Component 2"),
+            ("Component 3: Emerging Threats", "Emerging Threats", "Component 3"),
+        ],
+        "technical_category": [
+            ("Category 1: Grid Storage", "Grid Storage", "Category 1"),
+            ("Category 2: Transportation Fuels", "Transportation Fuels",
+             "Category 2"),
+            ("Category 3: Building Efficiency", "Building Efficiency",
+             "Category 3"),
         ],
         "area_of_interest": [
             ("Area of Interest 1 Water Reuse", "Water Reuse", "Area of Interest 1"),

@@ -657,13 +657,51 @@ def _candidates_from(hits, flat, pages, anchors, start_at=0):
                 code=hit.code,
                 ordinal=hit.ordinal,
                 ordinal_label=hit.ordinal_label,
-                title=hit.title,
+                title=hit.title or _title_on_next_line(flat, offset),
                 offset=offset,
                 page=flat.page_at(offset) if page is None else page,
                 anchor=anchors[hit.index] if hit.index < len(anchors) else None,
             )
         )
     return candidates
+
+
+def _title_on_next_line(flat, offset):
+    """Title for a code that sits alone on its own line (§6.5).
+
+    §6.5 takes "text after the code on the heading line", which assumes the
+    two share a line. Plenty of notices do not: ARPA-E SCALEUP writes
+
+        CATEGORY 1:
+        Advanced Energy Storage Systems
+
+    so every title came back empty and §6.4 rule 7 rejected a set whose
+    ordinals ran 1-7 cleanly with spans of 986-3,906 characters. Falling back
+    to the next non-empty line recovers the title without touching any pattern.
+    """
+    window = flat.text[offset:offset + 600]
+    parts = []
+    for line in window.splitlines()[1:]:
+        stripped = re.sub(r"\s+", " ", line).strip(" :.–—-")
+        if not stripped:
+            if parts:
+                break
+            continue
+        if not parts:
+            parts.append(stripped)
+            # A title that arrives in normal case is one line and done.
+            if any(character.islower() for character in stripped):
+                break
+            continue
+        # An all-caps heading often wraps across several lines -- ARPA-E writes
+        # "POWER / GENERATION AND / ENERGY / PRODUCTION" down four of them --
+        # so keep joining while the lines are still shouting.
+        if any(character.islower() for character in stripped):
+            break
+        parts.append(stripped)
+        if sum(len(part) for part in parts) >= MAX_TITLE_CHARS:
+            break
+    return re.sub(r"\s+", " ", " ".join(parts)).strip()[:MAX_TITLE_CHARS]
 
 
 # --- Layers (§6.2) ----------------------------------------------------------

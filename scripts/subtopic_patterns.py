@@ -78,11 +78,42 @@ FAMILIES: tuple[Family, ...] = (
         _DECIMAL,
         ("DOE BES", "EFRC"),
     ),
+    # Sub-lettered ordinals are real: DE-FOA-0003627 subdivides into Topic Area
+    # 1a, 1b, 1c and 2. The previous `(\d{1,2})\b` could not match `1a` at all
+    # -- \b fails between a digit and a letter -- so that notice yielded only
+    # its single `Topic Area 2` mention, eleven times, and was rejected on
+    # ordinal_sequence. sbir_subtopic already modelled `\d{1,2}[a-z]?`; the
+    # inconsistency was an oversight, not a decision (census, D3).
     Family(
         "topic_area",
-        re.compile(r"\bTopic\s+Area\s+(\d{1,2})\b", re.IGNORECASE),
+        re.compile(r"\bTopic\s+Area\s+(\d{1,2}[a-z]?)\b", re.IGNORECASE),
+        _ALNUM,
+        ("DOE EERE", "DOE FECM", "ARPA-E", "NETL"),
+    ),
+    # Observed in the census: DARPA MMoMA (HR001126S0013) enumerates Focus Area
+    # 1-4. No family covered it.
+    Family(
+        "focus_area",
+        re.compile(r"\bFocus\s+Area\s+(\d{1,2}[a-z]?)\b", re.IGNORECASE),
+        _ALNUM,
+        ("DARPA", "AFRL", "DoD"),
+    ),
+    # Observed in the census: CDC jg-26-0054 enumerates Component 1-5, each a
+    # separately fundable activity with its own budget.
+    Family(
+        "component",
+        re.compile(r"\bComponent\s+(\d{1,2})\s*[:.–—]", re.IGNORECASE),
         _DECIMAL,
-        ("DOE EERE", "DOE FECM", "ARPA-E"),
+        ("CDC", "HHS"),
+    ),
+    # Observed in the census: ARPA-E SCALEUP enumerates CATEGORY 1..7 as its
+    # Technical Categories of Interest. Requires the trailing colon so ordinary
+    # prose ("category 3 applicants") cannot match.
+    Family(
+        "technical_category",
+        re.compile(r"\bCategory\s+(\d{1,2})\s*[:–—]", re.IGNORECASE),
+        _DECIMAL,
+        ("ARPA-E", "DOE"),
     ),
     Family(
         "area_of_interest",
