@@ -2,7 +2,9 @@
 
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
-Status: proposal · Version 7.1 · Written 2026-08-15 · **Revised 2026-08-16 against `docs/RECON.md` and measured build data**
+Status: in progress · Version 8.0 · Written 2026-08-15 · **Revised 2026-08-16 against `docs/RECON.md`, measured build data, and two CI failures**
+
+> **Start at §18.** It defines the minimum path — the seven work packages that are actually being built — and lists what is deferred and what it costs. §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
 
 ---
 
@@ -34,6 +36,17 @@ Version 6.2 and earlier were written **without reading the code** (§17.2). Sess
 | Subtopic storage settled in §7.1 | **Open decision with a recommendation** (§13.1) | The catalog is 23.6 MB with `opportunities` at 22.54 MB. In-catalog children change what `record_count` means for five consumers. A sidecar is now the recommendation, conditional on cross-corpus scoring |
 
 7.1 also links the plan to issues **#7**, **#8** and **#9**, which cover overlapping ground (§13).
+
+**8.0 adds §18, the minimum path, after the gate's two CI failures showed the plan was larger than it was verified.** Four changes:
+
+| Was | Is |
+|---|---|
+| §10's four phases were the unit of work | **§18's seven packages are** (A–G). §10 is retained as background; §15 tracks §18 |
+| Everything in §10 was in scope | **Twelve areas are explicitly deferred with the cost of each written down** (§18.2). Deferring `program_taxonomy` means the DOE BES omnibus gets no child records in v1 |
+| One numbered step per session (§0.4 rule 5) | **One package per session; one commit per item**, suite between commits. Plus a new rule 5b: no session ends with a dirty tree |
+| Backfill drains over a month of nightlies; two-week parallel comparison; one week of observation | **Local backfill in one run; single build comparison; one nightly of observation** |
+
+§17.6 is new and records the two Phase 1 CI failures as standing rules: mark `tools/*.sh` executable at commit time, and verify any new fingerprinted artifact across two delayed builds *and* a green Linux run before committing its baseline. Both failures were invisible on Windows.
 
 ---
 
@@ -68,11 +81,11 @@ The existing subject-area meaning of "topic" is untouched. Do not rename anythin
 
 | When | Read | Why |
 |---|---|---|
-| Before anything | §0 **in full**, then `docs/RECON.md`, then §14 glossary | §0 is a gate. RECON is what the code actually does. §14 defines vocabulary used everywhere else. |
+| Before anything | §0 **in full**, then `docs/RECON.md`, then **§18**, then §14 glossary | §0 is a gate. RECON is what the code actually does. §18 is what is being built. §14 defines vocabulary used everywhere else. |
 | Deciding whether to proceed | §1–§4 | Problem, scope, and the constraints you cannot violate |
-| Starting Phase 1 | §8, §9, then §10 Phase 1, then §15 checklist | Discipline and Actions safety **before** the step list |
-| Starting Phase 2 | §5, §6 in full | Data model and segmentation. This is the densest material in the document. |
-| Starting Phase 3 | §7 in full | Every integration point |
+| Starting any package | §8, §9, §17.6, then §15 | Discipline, Actions safety and the cross-platform rules **before** the item list |
+| Package B or D | §5, §6 in full | Data model and segmentation. This is the densest material in the document. |
+| Package E or F | §7 and §13.1 in full | Every integration point, and the storage decision |
 | Stuck or unsure where you are | §15 checklist, then §12 risk register | The checklist is the single source of truth for progress |
 
 **If you only remember three things:** §0.5 (flag off means byte-identical output), §8.1 (additive only, never rewrite), §9.3 (new steps exit 0 on benign outcomes).
@@ -162,7 +175,8 @@ This plan will be executed by a capable language model. That changes the failure
 2. **Never run a formatter or autofixing linter** (`black`, `ruff --fix`, `prettier`) on any pre-existing file.
 3. **Never modify or delete an existing test to make it pass.** A pre-existing test that fails after your change means your change is wrong. Stop and report.
 4. **Never proceed past an unchecked gate in §15**, even when the next step looks independent.
-5. **Never implement more than one numbered step per session.** Complete it, verify it, commit it, stop.
+5. **Never implement more than one work package per session** (§18). A package is several related items; each item gets **its own commit**, and the test suite runs between commits. Reviewability is enforced per commit, not per session — a package of six one-commit items is as reviewable as six sessions of one, and far cheaper. Do not merge two items into one commit to save time, and do not start the next package because the current one finished early.
+5b. **Never end a session with a dirty working tree.** Every session ends with its work committed *and pushed*. A session that produces uncommitted changes has produced nothing durable: the next session inherits an ambiguous tree it did not create and cannot safely reason about. If work is incomplete, commit what is verified, and say plainly in the report what remains.
 6. **Never "improve" adjacent code** you notice while editing. Note it in your report and move on.
 7. **Never add a dependency** not named in this plan without stopping to ask. Exactly one new runtime dependency is authorized: **`pdfplumber`** (§6.1). Nothing else — and specifically **not PyMuPDF**, for the licensing reason in §6.1.
 8. **Never change a default value or CLI default to make something work.** Defaults are load-bearing (§8.1); the nightly workflow invokes these scripts with fixed arguments.
@@ -185,6 +199,8 @@ This plan will be executed by a capable language model. That changes the failure
 3. Commands run, with their real output
 4. Which §15 checklist item is now complete
 5. **What you did *not* do that a reader might assume you did**
+
+Everything else in this section stands unchanged, and **rules 1, 3 and 10 in particular**: never emit a whole-file replacement, never touch an existing test to make it pass, never infer an API's shape. Loosening the session boundary changes only how much work fits in a sitting, not how carefully any of it is done.
 
 **When blocked, stop and ask.** Do not improvise around a missing credential, an ambiguous schema, a failing gate, or an unexpected API response. An improvised workaround here publishes to a live site that faculty use to make funding decisions.
 
@@ -1180,7 +1196,16 @@ Applied at all three gates:
 
 Gate 3's placement is the subtle one. The bytes *are* in hand there — they were downloaded and hashed — so this is genuinely free. Gates 1 and 2 each cost one request per document, once, and then never again.
 
-**Backfill is therefore a bounded, finite campaign, not a steady-state cost.** With `--max-documents 45`, roughly 1,400 documents drain at about a month of nightly runs. That is acceptable and self-limiting, but it must be *stated* — otherwise Phase 2's "observe one week of cache output" (§10) will show subtopics on ~300 documents and look broken. Two options if a month is too slow: raise `--max-documents` temporarily on a `workflow_dispatch` run, or run the backfill locally against a copy and commit the resulting cache once. Prefer the second; it does not touch the nightly at all.
+**Backfill is a bounded, one-time campaign — and it is run locally, not through the nightly.**
+
+Earlier versions offered a choice: drain roughly 1,400 documents at `--max-documents 45` over about a month of nightly runs, or run it locally and commit the cache once. **The nightly option is withdrawn.** It is strictly worse on every axis that matters:
+
+- It puts the feature in a half-populated state for a month, during which every diagnostic reading is meaningless — an acceptance rate over 300 documents tells you nothing about the other 1,100.
+- It gives backfill suppression (§10 step 23) no single marker date, forcing a more complicated rule for a transient condition.
+- It adds ~1,400 document fetches to the nightly's budget spread over weeks, which is exactly the fetch pressure §4 exists to bound.
+- It couples a one-time migration to a daily production job, so a bug in segmentation is discovered on the live schedule rather than on a laptop.
+
+**Run it locally against a copy of `data/document_evidence.json`, with a high `--max-documents`, and commit the resulting cache in one reviewable commit.** The nightly is never involved, the cache arrives complete, diagnostics are readable immediately, and the marker date is a single day. This is §18 package D.
 
 **Insertion 4 — diagnostics.** Extend the existing `document_metrics` block with subtopic counts and a rejection-reason histogram, so Phase 2 has something to observe.
 
@@ -1485,6 +1510,8 @@ Two consequences worth stating plainly:
 
 ## 10. Phases
 
+> **§18 supersedes this section as the unit of work.** These four phases describe everything the project *could* include; §18 defines the seven packages actually being built and lists what is deferred with the cost of each. Read §10 for the reasoning behind an individual step — it is retained in full and still explains *why* each piece exists — but take the sequence and the checklist from §18 and §15.
+
 Reordered so everything large and additive lands before anything existing changes behavior. Four phases.
 
 ---
@@ -1533,8 +1560,8 @@ The subtopic pipeline runs daily and produces a cache. The published catalog doe
 15. **Write `scripts/sources/adapters/program_taxonomy.py`** (§6.7) emitting `subtopic_source: "referenced"` records — **after** the §6.7a option is decided by a human. Same adapter lifecycle, same health gates.
 16. **Tune offline** against the real corpus: the 31 BAA records already in the catalog (§6.3), plus anything SAM.gov added in Phase 1. Iterate on patterns until acceptance rates are acceptable per agency family. This is offline work against a local cache copy — never against `data/`.
 17. **Run once via `workflow_dispatch`** on your branch with the flag on and walk the §9.4 checklist before merging. No workflow step is added — segmentation is inside step 10 (§9.2).
-18. **Run the backfill** (§8.3). Decide between draining ~1,400 documents over roughly a month of nightly runs, or running it locally against a copy and committing the resulting cache once. Prefer the local run.
-19. **Observe one week** of cache output and diff churn before proceeding. Read the diagnostics block deliberately — a total segmentation failure inside step 10 is silent (§9.3).
+18. **Run the backfill locally** (§8.3) against a copy of the evidence cache with a high `--max-documents`, and commit the resulting cache once. The nightly is not used for backfill.
+19. **Observe one nightly** run of cache output and diff churn before proceeding. Read the diagnostics block deliberately — a total segmentation failure inside step 10 is silent (§9.3). One run is enough because the backfill already completed locally; what this checks is that the *steady state* is diff-stable, and that is visible on the first night.
 
 **Exit criteria:** ≥80% acceptance on documents that visibly contain topic lists; zero low-confidence records published; `subtopic_records.json` diff-stable day over day; backfill complete or its remaining depth known; published build unchanged.
 
@@ -1547,7 +1574,7 @@ Everything is built and running in parallel, off by default.
 20. **Write `assets/match-explain.js`** (§7.6) behind its own `FF_MATCH_EXPLAIN` flag. Ship this **first and independently** — it is lower risk than subtopics, valuable on ordinary records, and earns its own rollout.
 21. **`sources/merge.py --enable-subtopics`**: read `data/subtopic_records.json`, append children with `parent_id`, filter `confidence == "low"`, dedup on `source_document_hash`, rebuild the index including `subtopic_terms` — all in one write, so `record_count` and `search_index.document_count` move together (§4, §7.1).
 22. **Add `term_display`** to the subtopic builder in `scripts/subtopic_records.py`, capped at 60 stems. Without it the match chips render stems and look broken.
-23. **Backfill suppression**: subtopics whose `first_seen` equals the backfill marker date are excluded from `build_changes.py` on that build only — otherwise the first digest is entirely noise. Note this interacts with the §8.3 backfill campaign: if backfill drains over a month, there is no single marker date, so suppress on `first_seen == first_seen_of_that_parent` instead, or complete the backfill locally first.
+23. **Backfill suppression**: subtopics whose `first_seen` equals the backfill marker date are excluded from `build_changes.py` on that build only — otherwise the first digest is entirely noise. Because §8.3's backfill is a single local run, there is exactly one marker date and the rule stays simple.
 24. **Extend `currentness.py`** per §7.2 — `subtopic_status()` plus a `record_type` early return — **and the three browser re-implementations** in `app.js`, `team-matcher.js` and `team-researchers.js`. Dedicated parent/child interaction tests.
 25. **`assets/search-retrieval.js`**: max-score rollup (§7.3), guarded by `if (!globalThis.FF_SUBTOPICS_ENABLED)`.
 26. **`assets/app.js` + `match_explorer.html`**: collapsed subtopic rendering behind `FF_SUBTOPICS_ENABLED`. Do **not** relax `validateCatalog` (§4).
@@ -1558,7 +1585,7 @@ Everything is built and running in parallel, off by default.
 31. **Extend `build_changes.py`** with `subtopic_added` / `subtopic_amended` / `subtopic_closed` / `subtopic_removed`.
 32. **Confirm `build_feeds.py`** emits subtopic entries with stable ids, and **`alert_match.py`** matches subtopics with no modification. Note `alert_match.py` is not run by any workflow here — it is a library consumed by a separate private digest repository — so "confirm" means unit tests, not observing a run.
 33. **Extend `evaluate_phase2.py`** to report subtopic-level recall separately — **blocked on issue #9** (privacy-safe evaluation dataset export), which is itself blocked on **#8** (labels). Neither has shipped. If they still have not by the time you reach this step, skip it and say so rather than inventing a metric.
-34. **Run the parallel comparison for two weeks**: both catalogs built in CI, compared on the §8.5 query set (result-ID and rank movement), catalog size, and `opportunities.js` byte size.
+34. **Run a single build comparison**: both catalogs built once in CI from the same inputs, compared on the §8.5 query set (result-ID and rank movement), catalog size, and `opportunities.js` byte size. The comparison is deterministic — same frozen catalog, same query set, pure BM25 — so repeating it for two weeks produces the same numbers fourteen times. What a longer window would catch is *input* variation, and that is what the nightly's own diff churn already shows.
 
 **Exit criteria:** flag-on top-10 movement on the §8.5 query set is reviewed and accepted by a human, case by case; flag-off top-10 churn is zero; size budget held (§12); `verify_no_drift` still passing with the flag off.
 
@@ -1604,7 +1631,7 @@ Not built in v1. Recorded so the deterministic design does not preclude it.
 | Amendment renumbering produces false diffs | Title-first matching (§5.3) |
 | Git repository growth from daily cache commits | Sorted stable serialization; volatile fields updated only on real change (§5.4) |
 | `currentness.py` evicts parent and child inconsistently | Explicit rule (§7.2) plus interaction tests — in **four** places: the Python module and three browser re-implementations |
-| First run floods change feed and digest | Backfill suppression (Phase 3, step 23), adjusted for a backfill that drains over weeks |
+| First run floods change feed and digest | Backfill suppression (§10 step 23). The local single-run backfill (§8.3) gives one marker date, so the rule stays simple. Note the change-event work is deferred in the minimum path (§18.2), which removes this risk from v1 entirely |
 | **Segmentation fails on every document and nobody notices** | Step 10 is `continue-on-error` with no `id:`, so its failures open no issue at all (§9.3). Diagnostics block plus deliberate review during the Phase 2 observation window |
 | **Both auto-issue channels are already open and recurring — this predates the subtopic work entirely** | **#30 "External funding source refresh degraded"** has been open since 2026-08-09 with 19 comments and updates on essentially every run, because `jhu-fellowships` reports `failed_no_fallback`. **#29 "Automated Grants.gov refresh failed"** has been open since 2026-08-08 with 6 comments. Neither was caused by this project and neither is this project's to fix. Because the workflow comments on an existing open issue of the same title rather than opening a new one, **no new issue number will ever appear for either**, which is why §9.4 item 4 checks issue *numbers*. Resolve `jhu-fellowships` separately (§7.4); until then, watch the Actions run conclusion directly rather than trusting the issue channel |
 | **No recorded runtime baseline** | Total job wall-clock is not stored in the repository — only in Actions run history, which ages out. The 2:20–3:30 figure came from reading run summaries by hand. Record the absolute duration on every dispatch run (§9.4 item 2) so the trend toward the 15-minute ceiling is visible before it is breached |
@@ -1760,7 +1787,9 @@ Whichever is chosen, three things hold either way: the per-subtopic 2 KB cap (§
 | **Hermetic gate** | CI check that drives the whole five-script pipeline from frozen fixture inputs with every network bound set to zero, then diffs timestamp-normalized output hashes (§8.4). |
 | **Query gate** | CI check that scores a frozen query set against a frozen catalog and compares result IDs and ranks. Needs no relevance labels. Fails on top-10 churn with the flag off (§8.5). |
 | **Flag off parity** | With `--enable-subtopics` off, output must be byte-identical to pre-change. The core safety property. |
-| **Backfill** | The one-time campaign that adds subtopics to the ~1,400 documents already in the evidence cache. Requires the three-gate trigger in §8.3, without which the feature silently covers only newly-changed documents. |
+| **Backfill** | The one-time campaign that adds subtopics to the ~1,400 documents already in the evidence cache. Requires the three-gate trigger in §8.3, without which the feature silently covers only newly-changed documents. Run **locally in one pass** and committed once (§18 package D) — never drained through the nightly. |
+| **Work package** | The unit of work in §18: several related items, one session, one commit per item. Replaces §10's numbered step as the thing a session delivers. |
+| **Minimum path** | §18's packages A–G — the smallest version of this project worth shipping. Everything outside it is deferred with a stated cost (§18.2). |
 | **Backfill suppression** | Excluding first-seen subtopics from change events so the first digest is not entirely noise (Phase 3, step 23). Distinct from *backfill* itself. |
 | **Discoverability registry** | `scripts/sources/discoverability.py` — the eleven-rule umbrella registry that already exists, attaching program-area topics and search terms to opaque umbrella FOAs (§3). Not to be confused with the subtopic layer, which adds child *records*. |
 | **Gold set** | Auto-derived known-positives from past awards. The only way to judge whether a change *helped* rather than merely *changed*. Deferred; see §13 open decision 3. |
@@ -1769,57 +1798,91 @@ Whichever is chosen, three things hold either way: the per-subtopic 2 KB cap (§
 
 Copy into a tracking issue. **The gate lines are not steps — they are stops.** Do not cross one that is unchecked.
 
-Step numbers below match §10 exactly. Both were renumbered in 7.0 after four Phase 1 steps were deleted; a checklist copied from an earlier version will not line up.
+**This checklist tracks the §18 minimum path, which is what is being built.** It was renumbered in 8.0 around §18's packages; §10's phase numbering is retained there as background but is no longer the unit of work. A checklist copied from an earlier version will not line up.
 
-**Phase 0 — Reconnaissance and revision (complete)**
-- [x] 0. All **eleven** §0.1 questions answered from code → `docs/RECON.md`
-- [x] 0b. This plan corrected against RECON.md → version 7.0
+One **package** per session (§0.4 rule 5). One **commit** per item, with the suite run between commits. Every session ends pushed (§0.4 rule 5b).
 
-**Phase 1 — Foundations**
-- [x] 1. No-drift harness built and passing in `tests.yml` (§8.4) — 20 artifacts baselined, sensitivity proven, zero production-code changes. **Follow-up:** the frozen caches are empty (§8.4), so the populated fact-merge path is uncovered; author one `document_evidence` entry for fixture id `1001` before Phase 2 step 14
-- [ ] 1b. Heartbeat file `.github/last_build` written unconditionally every run (§16.3) — prevents silent 60-day schedule disabling
-- [ ] 2. Query set + `evaluation/query_baseline.json` committed, reproducible across two runs (§8.5)
-- [ ] 3. Size-budget test added — absolute limits, not a multiplier (§12)
-- [ ] 4. PDF toolchain pinned: `pdfplumber`, `pdfminer.six`, `pypdf` (§6.1)
-- [ ] 5. `sources/adapters/sam_gov.py` written and healthy
-- [ ] 6. `sources/adapters/nspires.py` activated
-- [ ] 7. Profiles rebuilt per §7.9 into `faculty_profiles_v2.json` (repo root, not `data/`)
-- [ ] 8. `expected_solicitations.json` + `check_expected.py` wired; `jhu-fellowships` degradation resolved first (§7.4)
-- [ ] **GATE:** existing tests green with zero test-file edits · no-drift passing · query baseline reproducible · new sources healthy · behavior otherwise identical
+---
 
-**Phase 2 — Extraction, offline**
-- [ ] 9–12. Patterns (ten families), segmentation layers A–D, synthetic fixtures, tests
-- [ ] 13. `scripts/subtopic_records.py` — identity matching, cache I/O, `needs_subtopic_extraction()`
-- [ ] 14. Call site added to `extract_document_evidence.py` (§8.3, four commits) · `.gitignore` allowlist lines · `git add` paths
-- [ ] 15. `sources/adapters/program_taxonomy.py` — **blocked on the §6.7a decision**
-- [ ] 16. Offline tuning against the 31 BAA records already in the catalog
-- [ ] 17. `workflow_dispatch` run with the flag on, §9.4 checklist walked
-- [ ] 18. Backfill run (§8.3) — local against a copy, or drained over ~a month of nightlies
-- [ ] 19. One week of observation, diagnostics block read deliberately (§9.3)
-- [ ] **GATE:** ≥80% acceptance where topic lists visibly exist · zero low-confidence published · cache diff-stable · backfill complete or remaining depth known · published build unchanged
+### Done
 
-**Phase 3 — Wiring, dark**
-- [ ] 20. `match-explain.js` behind `FF_MATCH_EXPLAIN` — ship this one first and independently
-- [ ] 21. Subtopic storage — **blocked on the §13.1 decision** (in-catalog child records vs. `data/subtopics.js` sidecar). If in-catalog: merge in `sources/merge.py`, one write, invariants preserved (§4, §7.1)
-- [ ] 22. `term_display` added to the subtopic builder
-- [ ] 23. Backfill suppression in `build_changes.py`
-- [ ] 24. `currentness.py` **plus all three browser re-implementations** (§7.2)
-- [ ] 25. Retrieval rollup in `search-retrieval.js`
-- [ ] 26. Search UI behind `FF_SUBTOPICS_ENABLED`
-- [ ] 27. Team match — **three** scorers, per-parent cap in each (§7.7)
-- [ ] 28. "Not relevant" control + **muted items panel** + local negative labels (§7.2b) — partially delivers **#8**
-- [ ] 29. Expired-subtopic archive, "include past cycles" filter, recurrence grouping (§7.2)
-- [ ] 30. Help page updated (§7.8)
-- [ ] 31–32. Change events, feeds, alerts
-- [ ] 33. `evaluate_phase2.py` extension — **blocked on #9** (itself blocked on #8); skip and say so if unshipped
-- [ ] 34. Two-week parallel comparison on the §8.5 query set
-- [ ] **GATE:** flag-on top-10 movement reviewed and accepted case by case · flag-off top-10 churn zero · size budget held · no-drift still passing with flag off
+- [x] **0.** All **eleven** §0.1 questions answered from code → `docs/RECON.md`
+- [x] **0b.** Plan corrected against RECON.md → 7.0; corrected again against measured build data → 7.1
+- [x] **A0.** §8.4 hermetic no-drift gate built, wired into `tests.yml`, green on `ubuntu-latest` — 20 artifacts baselined, sensitivity proven on both the catalog and feeds sides, zero production-code changes
 
-**Phase 4 — Enable**
-- [ ] 35. Flags flipped; step 10 given an `id:` and routed before `continue-on-error` is removed (§9.3)
-- [ ] 36. `PROJECT.md` updated with measured deltas
-- [ ] 37. Standing operations scheduled, including a quarterly check that the cron schedule is still enabled
-- [ ] 38. AI layer decision made on data, not intuition (§11)
+---
+
+### Package A — Foundations completion
+
+- [ ] A1. **Populate the frozen fixtures** — three enrichment and three evidence entries keyed to ids `1001`/`1003`/`1005`, so the gate covers the populated `merge_document_entry` path (§8.4). **Do this first:** it is what makes every later gate meaningful
+- [ ] A2. Pin `pdfplumber`, `pdfminer.six`, `pypdf` (§6.1)
+- [ ] A3. `.gitignore` allowlist line for `data/subtopic_records.json` (§0.4 rule 11)
+- [ ] A4. Size-budget test — absolute limits, not a multiplier (§12)
+- [ ] A5. Heartbeat file `.github/last_build` (§16.3)
+- [ ] A6. Query set + `evaluation/query_baseline.json` (§8.5)
+- [ ] **GATE:** suite green, zero test-file edits · `verify_no_drift` green in CI **now covering populated evidence entries** · query baseline byte-identical across two consecutive runs
+
+### Package B — Segmentation, offline and self-contained
+
+- [ ] B1. `scripts/subtopic_patterns.py` — ten families, `best_family()` (§6.3)
+- [ ] B2. `scripts/subtopic_segmentation.py` — layers A–D, acceptance rules, derived fields, time and page budgets (§6.1, §6.2, §6.4, §6.5)
+- [ ] B3. Synthetic fixtures + `tests/test_subtopic_segmentation.py`
+- [ ] **GATE:** new tests pass · suite green · `verify_no_drift` unchanged (nothing imports these yet, so nothing can regress)
+
+### Package C — Wire the call site, flag off
+
+- [ ] C1. `scripts/subtopic_records.py` — identity matching, term maps, cache I/O, `needs_subtopic_extraction()`
+- [ ] C2. Flag-guarded call site in `extract_document_evidence.py` (§8.3, four commits) — the only change to working production code in the minimum path
+- [ ] C3. `git add` paths in the workflow
+- [ ] **GATE:** flag **off** → `verify_no_drift` byte-identical and suite green with zero test-file edits (this is §0.5) · flag **on** → a cache produced for five documents copied out of the evidence cache locally
+
+### Package D — Tune and backfill
+
+- [ ] D1. Pattern tuning against the 31 BAA records and the DOE FOAs already in the catalog (§6.3)
+- [ ] D2. Full **local** backfill, high `--max-documents`, cache committed once (§8.3). The nightly is not used
+- [ ] **GATE:** acceptance rate reported **per agency family**, not aggregate · rejection histogram read, `no_layer_accepted` separated from failures and `run_budget` from `time_budget` · zero low-confidence published
+
+### Package E — Storage and scoring
+
+- [ ] E1. Prototype cross-corpus scoring on the frozen catalog — this resolves **§13.1**
+- [ ] E2. Implement the winner (sidecar or in-catalog children)
+- [ ] E3. **Minimal currentness only:** a subtopic is current **iff its parent is current**. Nothing else
+- [ ] **GATE:** query baseline run · flag-off top-10 churn **zero** · flag-on movement reviewed case by case
+
+### Package F — Make it visible
+
+- [ ] F1. Retrieval rollup in `assets/search-retrieval.js` (§7.3)
+- [ ] F2. `term_display` in the subtopic builder, capped at 60 stems
+- [ ] F3. `assets/match-explain.js` behind `FF_MATCH_EXPLAIN` (§7.6)
+- [ ] F4. Search UI behind `FF_SUBTOPICS_ENABLED` — `app.js` + `match_explorer.html`; do **not** relax `validateCatalog`
+- [ ] **GATE:** manual A/B with both flags off, byte-identical (browser code is outside the hermetic gate) · query baseline unchanged with flags off
+
+### Package G — Enable
+
+- [ ] G1. Flip `--enable-subtopics` and `FF_SUBTOPICS_ENABLED`
+- [ ] G2. Document-evidence step given an `id:` and routed **before** `continue-on-error` is removed (§9.3)
+- [ ] G3. `PROJECT.md` — decision, rationale, measured deltas
+- [ ] **GATE:** §9.4 dispatch checklist walked in full — runtime under 15 minutes, no new issue number, #30 updating expected
+
+---
+
+### Deferred — not part of the minimum path
+
+**Do not start any of these before package G is complete.** Each is a separate decision to be made with evidence from A–G. Costs are in §18.2; the DOE BES omnibus getting no child records in v1 is the most significant of them.
+
+- [ ] ~~SAM.gov adapter~~ (§7.5)
+- [ ] ~~NSPIRES activation~~
+- [ ] ~~`program_taxonomy` / referenced subtopics~~ (§6.7) — **blocked on §13.1 decision 2**
+- [ ] ~~`expected_solicitations.json` + `check_expected.py`~~ (§7.4)
+- [ ] ~~§7.9 profile rebuild~~ into `faculty_profiles_v2.json`
+- [ ] ~~Expired archive, "include past cycles", recurrence grouping, `own_deadline`~~ (§7.2)
+- [ ] ~~"Not relevant" control + muted-items panel~~ (§7.2b) — tracked as **#8**
+- [ ] ~~Team match: `faculty_match.py`, `team-matcher.js`, per-parent cap~~ (§7.7)
+- [ ] ~~Subtopic change events, Atom feeds, alerts~~
+- [ ] ~~Help page~~ (§7.8)
+- [ ] ~~`evaluate_phase2.py` extension~~ — blocked on **#9**, itself blocked on **#8**
+- [ ] ~~AI layer decision~~ (§11)
+- [ ] ~~Standing operations: monthly histogram review, quarterly cron check~~
 
 ---
 
@@ -1898,7 +1961,9 @@ Both are Phase 1 work and both fail loudly rather than silently, which is why th
 |---|---|---|---|
 | 1 | §0.1 reconnaissance **only** — all **eleven** questions. The human performs repo setup (clone, branch, commit this plan) beforehand; an agent's first action should not be repo surgery. No edits to existing files, no installs, no write-mode scripts. | `docs/RECON.md` — eleven answers with file/line citations, a "Plan discrepancies" section, a "Blocked" section | **done** |
 | 2 | Revise this plan against `docs/RECON.md`. Still no code changes. | Corrected `docs/TOPIC_LAYER_PLAN.md` | **done — this is 7.0** |
-| 3+ | **One numbered §15 checklist step per session.** | The step, its verification output, and an updated checklist | next: Phase 1 step 1 |
+| 3 | §8.4 hermetic no-drift gate. | `tools/`, frozen fixtures, baseline, wired into `tests.yml` | **done** |
+| 4 | Repair the gate after its first CI failure. | Line-ending normalization in `fingerprint.py` | **done** |
+| 5+ | **One §18 work package per session.** Each item inside it is its own commit, with the suite run between commits. | The package, its gate output, an updated §15, and a pushed branch | next: package A |
 
 Sessions 1 and 2 are not overhead. They are what makes the additive-edit discipline in §8 possible, because you cannot make a surgical edit to a file whose structure you inferred. Session 1 found that the single most consequential fact in this project — which PDF library the repository uses — was wrong in every prior version, and that error alone would have produced an unusable Layer C and an AGPL licensing problem.
 
@@ -1906,7 +1971,9 @@ Sessions 1 and 2 are not overhead. They are what makes the additive-edit discipl
 
 - State the intended diff **before** making it.
 - After editing, paste `git diff --stat` and the test suite output. Never assert a result you did not observe.
-- Stop at the end of the step. Do not begin the next one.
+- **One commit per §18 item, with the suite run between commits.** Not one commit per session.
+- **Commit and push before the session ends.** Never leave the tree dirty (§0.4 rule 5b).
+- Stop at the end of the package. Do not begin the next one.
 - Stop at any unchecked gate in §15.
 - When blocked, stop and ask. Do not improvise.
 - End with the §0.4 session report, including what you did *not* do.
@@ -1917,3 +1984,146 @@ Sessions 1 and 2 are not overhead. They are what makes the additive-edit discipl
 A proper `git clone`, on a branch, with the test suite runnable and `git diff` available. **Not a copied folder of files** — the constraints in §8 are enforced by diff review, and there is no diff without git history. Never push to `main` — which is what GitHub Pages serves — until the Phase 3 gate is cleared.
 
 If `git` reports "dubious ownership" on the checkout, prefix commands with `-c safe.directory="$PWD"` rather than changing global git config.
+
+### 17.6 Cross-platform rules — both Phase 1 failures were Windows blind spots
+
+Development happens on Windows; CI runs on `ubuntu-latest`. The §8.4 gate failed twice in Phase 1, and **neither failure was visible locally**. Both were platform gaps, and both cost a CI round-trip that these two rules would have prevented.
+
+**Rule 1 — mark every new `tools/*.sh` executable at commit time.**
+
+This checkout has `core.fileMode = false`, so `chmod +x` locally is not recorded and the file lands in git as mode `100644`. On a Linux runner it is then not executable. Either invoke it as `bash tools/foo.sh` in the workflow, or record the bit explicitly:
+
+```bash
+git update-index --chmod=+x tools/foo.sh
+```
+
+Do both, in fact — the workflow invocation is what actually matters, and the mode bit is what makes the script usable by hand on Linux. Verify with `git ls-files -s tools/` before pushing; the mode must read `100755`.
+
+**Rule 2 — any new artifact entering the fingerprint set needs two builds and a green Linux run before its baseline is committed.**
+
+The second failure was line endings: four artifacts are written through `NamedTemporaryFile(newline="\n")` and are LF everywhere, while sixteen go through `Path.write_text()` and take the platform default. A baseline recorded on Windows disagreed with Linux for exactly those sixteen. Nothing about that is visible from a Windows-only test, however many times you run it.
+
+So before committing any baseline that covers a new artifact:
+
+1. Run the producing build **twice, with a delay between**, into separate directories.
+2. Diff the **normalized** bytes, not the raw bytes and not the hashes — every artifact contains a timestamp, so a raw diff always reports everything as differing and tells you nothing. Import `normalize` from `tools/fingerprint.py`.
+3. Check the artifact's line endings explicitly.
+4. Push and confirm green on `ubuntu-latest` **before** treating the baseline as settled.
+
+The general form of the lesson: **a determinism gate is only as good as the axes you varied while testing it.** Time and platform are both axes. Testing repeatedly on one machine varies neither.
+
+---
+
+## 18. Minimum path
+
+§10's four phases describe everything this project could be. **This section describes the smallest version of it that is worth shipping**, and it is what should actually be built. Everything not listed in packages A–G is deferred, explicitly, with the cost of deferring it written down.
+
+The reason for cutting is not schedule pressure. It is that §10 bundles the core mechanism — *segment a notice into child records and make them findable* — with six or seven adjacent projects that each have their own failure modes, their own credentials, and their own tuning loops. Shipping them together means none of them is observable when something goes wrong. The minimum path isolates the mechanism, proves it, and leaves the rest as separate decisions to be made with evidence rather than in advance.
+
+**Sequencing rule:** one package per session (§0.4 rule 5). Each item inside a package is its own commit with the suite run between commits. A package is not complete until its gate is green and the branch is pushed.
+
+### 18.1 The packages
+
+#### Package A — Foundations completion
+
+| Item | Notes |
+|---|---|
+| **Populate the frozen fixtures** — three enrichment and three evidence entries keyed to ids `1001`, `1003`, `1005` | The gate currently covers only the *empty*-cache merge path, because the live cache keys do not intersect the fixture ids (§8.4). Hand-authored entries with facts, citations and a program area bring the populated `merge_document_entry` path under the gate — the exact path package C then modifies. **This is first for that reason: it is what makes every later gate meaningful.** |
+| Pin `pdfplumber`, `pdfminer.six`, `pypdf` | §6.1. Own commit; suite before and after |
+| `.gitignore` allowlist line for `data/subtopic_records.json` | Ahead of package C, so the cache cannot be silently untracked when it first appears (§0.4 rule 11) |
+| Size-budget test | Absolute limits, not a multiplier (§12) |
+| Heartbeat file `.github/last_build` | §16.3 — prevents silent 60-day schedule disabling |
+| Query set + `evaluation/query_baseline.json` | §8.5 |
+
+**Gate:** suite green with zero test-file edits · `verify_no_drift` green in CI, now covering populated evidence entries · query baseline byte-identical across two consecutive local runs.
+
+#### Package B — Segmentation, offline and self-contained
+
+| Item | Notes |
+|---|---|
+| `scripts/subtopic_patterns.py` | Ten families, `best_family()` (§6.3) |
+| `scripts/subtopic_segmentation.py` | Layers A–D against `pypdf` and `pdfplumber`; acceptance rules (§6.4); derived fields (§6.5); time and page budgets (§6.1) |
+| Synthetic fixtures + `tests/test_subtopic_segmentation.py` | One PDF per family, a bookmark-less variant, a TOC-only trap, a reference-list trap; golden outputs, idempotency, rejection cases, a `match_subtopics()` renumbering test, a Layer C bold-detection test |
+
+Nothing in this package is imported by any existing module, so nothing can regress. **Gate:** new tests pass · suite green · `verify_no_drift` unchanged.
+
+#### Package C — Wire the call site, flag off
+
+| Item | Notes |
+|---|---|
+| `scripts/subtopic_records.py` | Identity matching, term maps, cache I/O with §5.4 serialization, `needs_subtopic_extraction()` |
+| Flag-guarded call site in `extract_document_evidence.py` | §8.3, in its four-commit order. The only change to working production code in the whole minimum path |
+| `git add` paths in the workflow | Paired with package A's `.gitignore` line |
+
+**Gate:** with the flag **off**, `verify_no_drift` byte-identical and the suite green with zero test-file edits — this is §0.5, and it is the single most important gate in the project. With the flag **on**, run locally against five documents copied out of the cache and confirm a `data/subtopic_records.json` is produced with plausible spans.
+
+#### Package D — Tune and backfill
+
+| Item | Notes |
+|---|---|
+| Pattern tuning | Against the corpus already in the catalog: the 31 BAA records (DARPA, ONR, ARL, AFOSR, NRL, ERDC) and the DOE FOAs. No new source needed (§6.3) |
+| Full local backfill | High `--max-documents`, run against a copy, cache committed in one reviewable commit (§8.3). The nightly is not used |
+
+**Gate:** acceptance rate reported **per agency family**, not in aggregate — an 80% average hiding 0% on DoD is a failure, not a pass · rejection-reason histogram read deliberately, with `no_layer_accepted` separated from genuine failures and `run_budget` from `time_budget` · zero low-confidence records in the published set.
+
+#### Package E — Storage and scoring
+
+| Item | Notes |
+|---|---|
+| Prototype cross-corpus scoring on the frozen catalog | This is what resolves §13.1. Two BM25 indexes produce scores on different IDF scales; §7.3's max-score rollup is meaningless across them without normalization. **Prototype before choosing** — the decision is conditional on this working (§13.1) |
+| Implement the winner | Sidecar `data/subtopics.js` if normalization survives the query gate; in-catalog child records if it does not |
+| **Minimal currentness only** | A subtopic is current **iff its parent is current**. Nothing else. No `own_deadline`, no `closed`/`expired`/`removed` states, no archive. One rule, one place, trivially testable |
+
+**Gate:** §8.5 query baseline run · flag-off top-10 churn **zero** · flag-on movement reviewed case by case by a human.
+
+#### Package F — Make it visible
+
+| Item | Notes |
+|---|---|
+| Retrieval rollup in `assets/search-retrieval.js` | §7.3, guarded by `if (!globalThis.FF_SUBTOPICS_ENABLED)` |
+| `term_display` in the subtopic builder | Capped at 60 stems; without it the match chips render stems and look broken |
+| `assets/match-explain.js` | §7.6, behind its own `FF_MATCH_EXPLAIN`. Ships independently and is valuable on ordinary records |
+| Search UI behind `FF_SUBTOPICS_ENABLED` | `assets/app.js` + `match_explorer.html`. Collapsed children under the parent. Do **not** relax `validateCatalog` |
+
+**Gate:** manual A/B with both flags off — output byte-identical, verified by hand because the hermetic gate does not reach browser code · query baseline unchanged with flags off.
+
+#### Package G — Enable
+
+| Item | Notes |
+|---|---|
+| Flip `--enable-subtopics` and `FF_SUBTOPICS_ENABLED` | §9.3 |
+| Give the document-evidence step an `id:` and route it | Before removing `continue-on-error`, so a parsing failure reports as a degraded source rather than a broken build (§9.3) |
+| `PROJECT.md` | Decision, rationale, measured deltas |
+
+**Gate:** §9.4 dispatch checklist walked in full — total job runtime under 15 minutes, no new issue number, #30 updating expected.
+
+### 18.2 Explicitly deferred
+
+Each line states what is lost. None of this is abandoned; all of it is a later decision made with evidence from A–G.
+
+| Deferred | What is lost by deferring it |
+|---|---|
+| **SAM.gov adapter** (§7.5) | MURI specifically, and any SAM.gov-only notice. **Not** the development corpus — 31 BAA records are already in the catalog, which is why this was safe to cut |
+| **NSPIRES activation** (§10) | NASA ROSES program elements stay invisible as individual records. NASA remains partially covered via Grants.gov |
+| **`program_taxonomy` and all `referenced` subtopics** (§6.7) | **The DOE BES omnibus gets no child records in v1.** `DE-FOA-0003600` remains one record — findable, because `discoverability.py` already tags it with catalysis and BES terms (§3), but with no per-program children, no program managers, and no BES → CSGB → Catalysis Science granularity. For a catalysis group this is the most painful single deferral in this table, and it is deferred because it is a scraping project with its own linkage rules (§6.7a), not because it is unimportant |
+| **`expected_solicitations.json` + `check_expected.py`** (§7.4) | No assertion that a known umbrella silently vanished from a healthy source. Mitigated slightly by #30 already being noisy, which this would have made noisier |
+| **§7.9 profile rebuild** | Researcher profiles keep the current Crossref + CV + free-text representation. Rehydrated abstracts, recency weighting and the negative-term list all wait. The current representation works; it is just not measured |
+| **Expired archive, recurrence grouping, `own_deadline`** (§7.2) | No "include past cycles" view, no cross-cycle linking, no per-subtopic advisory deadline. Package E's minimal rule means an expired parent takes its children with it, which is correct but lossy — last year's MURI topic list is gone rather than archived |
+| **§7.2b "not relevant" suppression** | No mute control and no muted-items panel. Recall rises with no user-side way to prune it. This is also issue **#8**, so it has an owner outside this project |
+| **§7.7 team match** | Subtopics do not reach `faculty_match.py` or `team-matcher.js`. `team-researchers.js` gets them incidentally, since it scores through the shared BM25 index — so the team page will be *inconsistent* between its two paths until this is done. Worth stating in the help text if it ships that way |
+| **Subtopic change events, Atom feeds, alerts** (§10 steps 31–32) | A new topic under an existing umbrella — precisely the event the current feed misses — still does not appear in `changes.xml`, the feeds, or the weekly digest. Subtopics are findable by search only |
+| **Help page** (§7.8) | Users meet the parent/child hierarchy with no explanation of what a child card is or what its page anchor means |
+| **`evaluate_phase2.py` extension** | No subtopic-level recall metric. Already blocked on **#9** (itself blocked on **#8**), so deferring costs nothing that was available |
+| **The optional AI layer** (§11) | Summaries stay deterministic and occasionally clumsy. This was never in v1 |
+
+**§8.4 is not on this list.** The hermetic no-drift gate is **built and passing in CI** as of 2026-08-16 — 20 artifacts baselined, sensitivity proven on both the catalog and feeds sides, wired into `tests.yml`. It is the foundation the rest of the minimum path stands on, not a candidate for deferral.
+
+### 18.3 What is kept, and why
+
+Three things survive the cut that a schedule-driven trim would have taken first. Each is load-bearing.
+
+**Flag-off parity (§0.5) and the hermetic gate that enforces it (§8.4).** The entire safety argument for this project is that it can be turned off and the site returns to exactly what it does today. That claim is worthless as an intention and valuable as a mechanically checked invariant. It is also what makes a one-line rollback credible: if the flag is off and output is byte-identical, there is nothing to roll back *to* — the current behavior never left. Keep this even if everything else slips.
+
+**The §8.5 query baseline.** Without it, "did retrieval change?" is answered by looking at a few searches and forming an impression — which is how the OpenAlex concept representation was adopted, and how it survived being wrong for a long time (§7.9). The baseline needs no relevance labels, is deterministic, and turns a subjective question into a diff. It is cheap, and it is the only instrument that tells you package E did what it claimed.
+
+**§6.4 acceptance rules, with low-confidence-never-publishes (§6.2 Layer D).** These are what make "fail closed" real. A segmentation that does not satisfy all seven rules yields **zero** subtopics and leaves the parent untouched — never a partial or speculative list. The asymmetry is deliberate and worth restating: a missing subtopic costs a user one search that could have gone better; a *wrong* subtopic puts a plausible-looking card with a page anchor and a deadline in front of a PI who may spend weeks writing to it. Relaxing this to raise acceptance rates would be the single most damaging change anyone could make to this design.
