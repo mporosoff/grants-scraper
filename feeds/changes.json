@@ -1,8 +1,558 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-15T20:29:47Z",
+  "generated_at": "2026-08-16T10:42:22Z",
   "retention_days": 90,
   "events": [
+    {
+      "id": "ef7fdf604fbdfe222ff9",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-16T10:40:29.296493Z",
+      "opportunity_id": "vpr-email:vpr-ca54a2886f6fb184",
+      "detail": "Deadline 2026-09-15",
+      "record": {
+        "opportunity_id": "vpr-email:vpr-ca54a2886f6fb184",
+        "opportunity_number": null,
+        "title": "NSF Computational and Data-Enabled Science and Engineering (CDS&E) | NSF - National Science Foundation PD 24-8084",
+        "agency": "VPR funding digest (limited submissions & foundations)",
+        "source": "VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-09-15",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://new.nsf.gov/funding/opportunities/computational-data-enabled-science-engineering-0",
+        "funding_opportunity_url": "https://new.nsf.gov/funding/opportunities/computational-data-enabled-science-engineering-0",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-15"
+    },
+    {
+      "id": "e93d5583482c175be470",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-16T10:40:29.296493Z",
+      "opportunity_id": "362383",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "362383",
+        "opportunity_number": "PD-LAPAZ-FY26-01",
+        "title": "PD ANNUAL PROGRAM STATEMENT",
+        "agency": "U.S. Mission to Bolivia",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-05-13",
+        "close_date": "2026-08-15",
+        "last_updated": "2026-05-13",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Arts and culture",
+          "Education and workforce",
+          "Manufacturing",
+          "Technology development"
+        ],
+        "disciplines": [],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 5000,
+        "award_ceiling": 40000,
+        "detail_page": "https://www.grants.gov/search-results-detail/362383",
+        "funding_opportunity_url": "https://bo.usembassy.gov/grants-corner/",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/351979"
+      }
+    },
+    {
+      "id": "e91f6b5070e3e9a6d20e",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-16T10:40:29.296493Z",
+      "opportunity_id": "vpr-email:vpr-122b30a8725e40bf",
+      "detail": "Deadline 2026-09-15",
+      "record": {
+        "opportunity_id": "vpr-email:vpr-122b30a8725e40bf",
+        "opportunity_number": null,
+        "title": "SONY RESEARCH AWARD PROGRAM",
+        "agency": "VPR funding digest (limited submissions & foundations)",
+        "source": "VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-09-15",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": 150000,
+        "detail_page": "https://www.sony.com/en/SonyInfo/research-award-program/",
+        "funding_opportunity_url": "https://www.sony.com/en/SonyInfo/research-award-program/",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-15"
+    },
+    {
+      "id": "db9801ac12efa2f76b79",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-16T10:40:29.296493Z",
+      "opportunity_id": "361216",
+      "detail": "Deadline 2026-09-15",
+      "record": {
+        "opportunity_id": "361216",
+        "opportunity_number": "RFA-AA-27-001",
+        "title": "Specialized Alcohol Research Centers (P50 Clinical trial Optional)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-05-15",
+        "close_date": "2026-09-15",
+        "last_updated": "2026-01-30",
+        "version": "Forecast 1",
+        "topic_areas": [],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/361216",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-15"
+    },
+    {
+      "id": "d7213f73ecd7ed018d4d",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-16T10:40:29.296493Z",
+      "opportunity_id": "363549",
+      "detail": "Deadline 2026-09-15",
+      "record": {
+        "opportunity_id": "363549",
+        "opportunity_number": "HQ003426NFOECAD02",
+        "title": "Pacific Disaster Center",
+        "agency": "Washington Headquarters Services",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": null,
+        "close_date": "2026-09-15",
+        "last_updated": "2026-08-12",
+        "version": "Forecast 1",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "Public and state institutions of higher education"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/363549",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354544"
+      },
+      "deadline": "2026-09-15"
+    },
+    {
+      "id": "c9d9d458ba132be80226",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-16T10:40:29.296493Z",
+      "opportunity_id": "362430",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "362430",
+        "opportunity_number": "OFOP0002793",
+        "title": "U.S. Mission Iraq Public Diplomacy Annual Program Statement 2026",
+        "agency": "U.S. Mission to Iraq",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-05-18",
+        "close_date": "2026-08-15",
+        "last_updated": "2026-07-03",
+        "version": "Synopsis 1",
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 25000,
+        "award_ceiling": 500000,
+        "detail_page": "https://www.grants.gov/search-results-detail/362430",
+        "funding_opportunity_url": "https://mygrants.servicenowservices.com/mygrants?id=mygrants_form&table=x_g_usd4_o_grant_funding_opportunity&sys_id=ff17e72f47fc4b1067358810326d43b0&view=Default",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "b87424c92e6a1d79a727",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-16T10:40:29.296493Z",
+      "opportunity_id": "358955",
+      "detail": "Deadline 2026-09-15",
+      "record": {
+        "opportunity_id": "358955",
+        "opportunity_number": "2025-NIST-MSE-01",
+        "title": "Measurement Science and Engineering (MSE) Research Grant Programs",
+        "agency": "National Institute of Standards and Technology",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2025-05-14",
+        "close_date": "2026-09-15",
+        "last_updated": "2026-06-16",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Manufacturing",
+          "Technology development"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement",
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/358955",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/347648"
+      },
+      "deadline": "2026-09-15"
+    },
+    {
+      "id": "5489543c4e5a9e925260",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-16T10:40:29.296493Z",
+      "opportunity_id": "359198",
+      "detail": "Deadline 2026-09-15",
+      "record": {
+        "opportunity_id": "359198",
+        "opportunity_number": "NOT-DK-26-301",
+        "title": "Kidney Precision Medicine Project Recruitment Sites",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-05-05",
+        "close_date": "2026-09-15",
+        "last_updated": "2025-09-24",
+        "version": "Forecast 2",
+        "topic_areas": [
+          "Arts and culture"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/359198",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-15"
+    },
+    {
+      "id": "4ed9e29b268d8b8f6102",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-16T10:40:29.296493Z",
+      "opportunity_id": "363015",
+      "detail": "Deadline 2026-09-15",
+      "record": {
+        "opportunity_id": "363015",
+        "opportunity_number": "HHS-2026-ACF-OCS-EDA-0024",
+        "title": "Diaper Distribution Demonstration Research Pilot (DDDRP)",
+        "agency": "Administration for Children and Families - OCS",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-30",
+        "close_date": "2026-09-15",
+        "last_updated": "2026-07-30",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "Federally recognized Native American tribal governments",
+          "Nonprofits with 501(c)(3) status",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 1000000,
+        "award_ceiling": 2000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363015",
+        "funding_opportunity_url": "https://www.acf.hhs.gov/ocs/programs/diaper-distribution-pilot",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354284"
+      },
+      "deadline": "2026-09-15"
+    },
+    {
+      "id": "34273e1236eeb47bd763",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-16T10:40:29.296493Z",
+      "opportunity_id": "353353",
+      "detail": "Deadline 2026-09-15",
+      "record": {
+        "opportunity_id": "353353",
+        "opportunity_number": "PD-18-1263",
+        "title": "Probability",
+        "agency": "U.S. National Science Foundation",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2024-04-03",
+        "close_date": "2026-09-15",
+        "last_updated": "2025-10-02",
+        "version": "Synopsis 3",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/353353",
+        "funding_opportunity_url": "https://www.nsf.gov/funding/pgm_summ.jsp?pims_id=5555",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-15"
+    },
+    {
+      "id": "2c12ac021b4c1fee7036",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-16T10:40:29.296493Z",
+      "opportunity_id": "vpr-email:vpr-aed7d81578b24028",
+      "detail": "Deadline 2026-09-15",
+      "record": {
+        "opportunity_id": "vpr-email:vpr-aed7d81578b24028",
+        "opportunity_number": null,
+        "title": "Sloan Research Fellowships",
+        "agency": "VPR funding digest (limited submissions & foundations)",
+        "source": "VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-09-15",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [
+          "Engineering and Physical Sciences",
+          "Environmental and Life Sciences",
+          "Medical and Health",
+          "Business and Economic Development"
+        ],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": 75000,
+        "detail_page": "http://www.sloan.org/sloan-research-fellowships/",
+        "funding_opportunity_url": "http://www.sloan.org/sloan-research-fellowships/",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-15"
+    },
+    {
+      "id": "242097d29858e67e9601",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-16T10:40:29.296493Z",
+      "opportunity_id": "363105",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363105",
+        "opportunity_number": "OFOP0003244",
+        "title": "English Language Exchange Programs: AI and Educational Technology Integration",
+        "agency": "U.S. Mission to the Philippines",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-08",
+        "close_date": "2026-08-15",
+        "last_updated": "2026-08-04",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Education and workforce",
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ],
+        "disciplines": [
+          "Education"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 200000,
+        "award_ceiling": 250000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363105",
+        "funding_opportunity_url": "https://mygrants.servicenowservices.com/mygrants?id=mygrants_form&table=x_g_usd4_o_grant_funding_opportunity&sys_id=504b13af873dc35020b862060cbb35aa&view=Default",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353710"
+      }
+    },
+    {
+      "id": "19806aa0596173196176",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-16T10:40:29.296493Z",
+      "opportunity_id": "nyserda:PON5989",
+      "detail": "Deadline 2026-09-15",
+      "record": {
+        "opportunity_id": "nyserda:PON5989",
+        "opportunity_number": "PON 5989",
+        "title": "Empire Building Challenge: Hospitals",
+        "agency": "NYSERDA",
+        "source": "NYSERDA",
+        "source_type": "State",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-09-15",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [
+          "Energy"
+        ],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00000IUDGnAAP",
+        "funding_opportunity_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00000IUDGnAAP",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-15"
+    },
+    {
+      "id": "0d4b2746908563eb067a",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-16T10:40:29.296493Z",
+      "opportunity_id": "342475",
+      "detail": "Deadline 2026-09-15",
+      "record": {
+        "opportunity_id": "342475",
+        "opportunity_number": "22-615",
+        "title": "NSF Dynamic Language Infrastructure - NEH Documenting Endangered Languages",
+        "agency": "U.S. National Science Foundation",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2022-07-17",
+        "close_date": "2026-09-15",
+        "last_updated": "2026-03-18",
+        "version": "Synopsis 14",
+        "topic_areas": [
+          "Arts and culture",
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/342475",
+        "funding_opportunity_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf22615",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-15"
+    },
     {
       "id": "fab3d84a987b2cd01c9e",
       "type": "closing_soon",

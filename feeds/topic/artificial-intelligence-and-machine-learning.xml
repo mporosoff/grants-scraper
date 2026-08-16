@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-08-15T20:29:37Z</updated>
+  <updated>2026-08-16T10:42:12Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
@@ -604,17 +604,6 @@
     <summary>National Telecommunications and Information Admini | Closes 2026-09-09 | This NOFO is the fourth issued under NTIA’s Public Wireless Supply Chain Innovation Fund (PWSCIF or Innovation Fund). Titled “Solutions for AI-Native RAN,” the goal of this NOFO is to support the development of a secure compute environment to enable or leverage native artificial intelligence (“AI”) capabilities in the Radio Access Network (RAN) that generate revenue for operators, cost savings, an…</summary>
   </entry>
   <entry>
-    <title>English Language Exchange Programs: AI and Educational Technology Integration</title>
-    <link href="https://www.grants.gov/search-results-detail/363105"/>
-    <id>urn:funding-finder:grants-gov:363105</id>
-    <updated>2026-07-08T00:00:00Z</updated>
-    <author><name>U.S. Mission to the Philippines</name></author>
-    <category term="Education and workforce"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to the Philippines | Closes 2026-08-15 | The U.S. Department of State's Embassy in the Philippines announces an opportunity to implement a professional exchange program bringing approximately twelve high-merit educators from the Philippines, Japan, South Korea, Taiwan, and Brunei to the United States for direct, immersive exposure to American approaches to AI and educational technology integration in English language instruction. Partici…</summary>
-  </entry>
-  <entry>
     <title>Change 1 to Training and Employment Guidance Letter 02-25, Industry-Driven Skills Training Fund Grant Program</title>
     <link href="https://www.grants.gov/search-results-detail/363108"/>
     <id>urn:funding-finder:grants-gov:363108</id>
@@ -730,5 +719,21 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Artificial intelligence and machine learning"/>
     <summary>National Institutes of Health | Closes 2026-10-19 | The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
+  </entry>
+  <entry>
+    <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
+    <link href="https://www.grants.gov/search-results-detail/362900"/>
+    <id>urn:funding-finder:grants-gov:362900</id>
+    <updated>2026-06-22T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <category term="Data science"/>
+    <category term="Energy"/>
+    <category term="Materials science"/>
+    <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | Project Background, Goals, and Objectives: In an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will lea…</summary>
   </entry>
 </feed>

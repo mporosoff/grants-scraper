@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-08-15T20:29:37Z",
+  "generated_at": "2026-08-16T10:42:12Z",
   "excluded_noncurrent": 6,
   "feeds": [
     {
       "title": "All new opportunities",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/all.xml",
-      "count": 1469
+      "count": 1466
     },
     {
       "title": "Funding Finder | Federal",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml",
-      "count": 1406
+      "count": 1403
     },
     {
       "title": "Funding Finder | Internal",
@@ -30,12 +30,12 @@
     {
       "title": "Funding Finder | Artificial intelligence and machine learning",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml",
-      "count": 242
+      "count": 241
     },
     {
       "title": "Funding Finder | Arts and culture",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml",
-      "count": 112
+      "count": 111
     },
     {
       "title": "Funding Finder | Biology and biotechnology",
@@ -75,12 +75,12 @@
     {
       "title": "Funding Finder | Data science",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml",
-      "count": 239
+      "count": 238
     },
     {
       "title": "Funding Finder | Education and workforce",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml",
-      "count": 543
+      "count": 541
     },
     {
       "title": "Funding Finder | Energy",
@@ -105,7 +105,7 @@
     {
       "title": "Funding Finder | Manufacturing",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml",
-      "count": 75
+      "count": 74
     },
     {
       "title": "Funding Finder | Materials science",
@@ -145,7 +145,7 @@
     {
       "title": "Funding Finder | Technology development",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml",
-      "count": 179
+      "count": 178
     },
     {
       "title": "Funding Finder | Transportation",

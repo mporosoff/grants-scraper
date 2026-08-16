@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-08-15T20:29:37Z</updated>
+  <updated>2026-08-16T10:42:12Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development</title>
@@ -411,18 +411,6 @@
     <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | Project Background, Goals, and Objectives: In an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will lea…</summary>
   </entry>
   <entry>
-    <title>PD ANNUAL PROGRAM STATEMENT</title>
-    <link href="https://www.grants.gov/search-results-detail/362383"/>
-    <id>urn:funding-finder:grants-gov:362383</id>
-    <updated>2026-05-13T00:00:00Z</updated>
-    <author><name>U.S. Mission to Bolivia</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Bolivia | Closes 2026-08-15 | Goals and Objectives• Celebrate American Excellence: o Showcase American innovation, technological leadership, and entrepreneurial spirit, celebrating American dynamism or telling America’s story of excellence.o Highlight U.S. achievements in science, technology, sports, industry, and culture.o Demonstrate the excellence and reliability of American products, services, and standards.o Promote Ameri…</summary>
-  </entry>
-  <entry>
     <title>Chemical Process Systems (CPS)</title>
     <link href="https://www.grants.gov/search-results-detail/362061"/>
     <id>urn:funding-finder:grants-gov:362061</id>
@@ -751,5 +739,21 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Quantum science"/>
     <category term="Technology development"/>
     <summary>U.S. National Science Foundation | Closes 2026-09-08 | Revolutionizing Engineering Departments (hereinafter referred to as RED) is designed to build upon previous efforts in engineering education research. Specifically, previous and ongoing evaluations of the NSF Engineering Education and Centers Division program and its predecessors, as well as those related programs in the Directorate for STEM Education, have shown that prior investments have signif…</summary>
+  </entry>
+  <entry>
+    <title>ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)</title>
+    <link href="https://www.grants.gov/search-results-detail/351715"/>
+    <id>urn:funding-finder:grants-gov:351715</id>
+    <updated>2024-01-06T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Climate change"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <summary>U.S. National Science Foundation | Closes 2026-09-29 | Plasma science is a transdisciplinary field of research where fundamental studies in many disciplines, including plasma physics, plasma chemistry, materials science, and space science, come together to advance knowledge for discovery and technological innovation. The primary goal of the ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) program is to identify and capitali…</summary>
   </entry>
 </feed>

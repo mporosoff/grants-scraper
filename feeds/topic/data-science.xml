@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-08-15T20:29:37Z</updated>
+  <updated>2026-08-16T10:42:12Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -572,17 +572,6 @@
     <summary>Bureau of Arms Control and Nonproliferation | Closes 2026-08-21 | This effort seeks to address multiple facets of export control challenges. The first component will analyze trade data, create exemplary visualizations (e.g., dashboards), and train export control authorities to use data analysis for export control implementation. The second component will design, develop, and deploy a smartphone-accessible application for frontline officers to detect and identify…</summary>
   </entry>
   <entry>
-    <title>English Language Exchange Programs: AI and Educational Technology Integration</title>
-    <link href="https://www.grants.gov/search-results-detail/363105"/>
-    <id>urn:funding-finder:grants-gov:363105</id>
-    <updated>2026-07-08T00:00:00Z</updated>
-    <author><name>U.S. Mission to the Philippines</name></author>
-    <category term="Education and workforce"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to the Philippines | Closes 2026-08-15 | The U.S. Department of State's Embassy in the Philippines announces an opportunity to implement a professional exchange program bringing approximately twelve high-merit educators from the Philippines, Japan, South Korea, Taiwan, and Brunei to the United States for direct, immersive exposure to American approaches to AI and educational technology integration in English language instruction. Partici…</summary>
-  </entry>
-  <entry>
     <title>Change 1 to Training and Employment Guidance Letter 02-25, Industry-Driven Skills Training Fund Grant Program</title>
     <link href="https://www.grants.gov/search-results-detail/363108"/>
     <id>urn:funding-finder:grants-gov:363108</id>
@@ -729,5 +718,15 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Bureau of Reclamation | Closes 2026-09-28 | The objectives of this NAA/TAP funding opportunity are to provide funding for drought relief actions/projects that mitigate drought impacts for designated federally recognized tribes within the Colorado River Basin (see Eligibility section for list of tribes), and which advance Presidential and Department of the Interior Priorities within the Basin. Proposals should meet one or more of the followi…</summary>
+  </entry>
+  <entry>
+    <title>Optimizing Behavioral Sleep Interventions for Adolescents and Young Adults (R34 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/359159"/>
+    <id>urn:funding-finder:grants-gov:359159</id>
+    <updated>2026-05-28T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Data science"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Closes 2026-10-22 | NIMH seeks applications for pilot research to adapt, optimize, and test behavioral interventions that address common sleep problems in adolescents and young adults with or at risk for a mental health disorder. This notice of funding opportunity (NOFO) supports pilot clinical trials designed to evaluate the feasibility, tolerability, acceptability, safety, and potential effectiveness of the approac…</summary>
   </entry>
 </feed>
