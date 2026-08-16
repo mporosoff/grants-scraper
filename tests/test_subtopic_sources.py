@@ -159,6 +159,24 @@ class RankingTests(unittest.TestCase):
         self.assertEqual(len(result.subtopics), 4)
         self.assertEqual(document["name"], "big.pdf")
 
+    def test_a_secondary_won_result_is_capped_at_low_confidence(self):
+        # Measured precision of secondary-won lists is 0 of 1: CDC 360339
+        # segments its M&E indicator attachment, not its five Components. Too
+        # little evidence to publish on, and §18.3 says which way to err.
+        result, document, _diagnostics = run(
+            None, BLAND, ["appendix.pdf"], {"appendix.pdf": notice(TOPICS)}
+        )
+        self.assertEqual(len(result.subtopics), 3)
+        self.assertEqual(document["source_kind"], "secondary_attachment")
+        self.assertEqual(result.confidence, "low", "a secondary result may publish")
+
+    def test_a_primary_result_keeps_its_confidence(self):
+        result, document, _diagnostics = run(
+            None, notice(TOPICS), [], {}
+        )
+        self.assertEqual(result.confidence, "high")
+        self.assertEqual(document, PDF_DOC)
+
     def test_confidence_outranks_count(self):
         self.assertGreater(
             sources.CONFIDENCE_RANK["high"], sources.CONFIDENCE_RANK["medium"]

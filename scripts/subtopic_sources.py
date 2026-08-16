@@ -33,6 +33,7 @@ Two behaviours the census made non-negotiable (see docs/CORPUS_CENSUS.md):
 
 from __future__ import annotations
 
+import dataclasses
 import hashlib
 
 from scripts.subtopic_segmentation import SegmentationResult, segment_document
@@ -95,6 +96,32 @@ def _score(result):
     if result is None or not result.subtopics:
         return (0, 0)
     return (CONFIDENCE_RANK.get(result.confidence, 0), len(result.subtopics))
+
+
+def _demote(result):
+    """Cap a secondary-attachment result at `low`, so it never publishes.
+
+    Measured, and the only measurement available: exactly one census record
+    segments from a secondary attachment, and its result is **wrong**. CDC
+    `360339` yields 17 spans from `DGHP FY26 M&E Indicator List` -- entries like
+    `2.1. Point of Entry (POE) General Capacity` and `5.2. Laboratory Quality
+    Control` -- which are monitoring-and-evaluation indicator categories, not
+    the five fundable Components the record actually offers.
+
+    So the measured precision of secondary-won lists is 0 of 1. That is far too
+    little evidence to publish on, and §18.3's asymmetry is explicit about which
+    way to err: a missing subtopic costs one search, a wrong one puts a
+    plausible card with a page anchor in front of a PI. Demoting to `low` keeps
+    the result in the cache and the diagnostics -- so a later session can judge
+    whether secondary attachments are worth trusting -- while the §7.1 merge
+    filters it out of anything published.
+
+    Revisit when there is a corpus of secondary-won results to measure, not
+    before.
+    """
+    if result is None or not result.subtopics or result.confidence == "low":
+        return result
+    return dataclasses.replace(result, confidence="low")
 
 
 def best_segmentation(
@@ -186,6 +213,7 @@ def best_segmentation(
             "source_kind": "secondary_attachment",
         }
         outcome = consider(content, document, source["name"])
+        outcome = _demote(outcome)
         if _score(outcome) > _score(best_result):
             best_result, best_document = outcome, document
 

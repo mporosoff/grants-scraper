@@ -616,6 +616,60 @@ This matters because the notice permits **one application per focus area**, so
 the focus area, not the challenge area, is the unit a PI applies against. The
 layer currently exposes the 21 and cannot see the 98.
 
+## Multi-attachment segmentation, measured
+
+§6.6's multi-attachment path was implemented and all 20 records re-measured
+through it, using the real network path so this is what production would do.
+
+| Metric | Before | **After multi-attachment** |
+|---|---|---|
+| Correct-acceptance vs frozen 12 | 5/12 = 42% | **5/12 = 42%** |
+| Correct-acceptance vs 10 reachable | 4/10 = 40% | **4/10 = 40%** |
+| Won from a secondary attachment | — | **0** |
+| Wrong-list acceptances | 0 | **1** |
+| False positives vs live 6 | 0/6 | **0/6** |
+
+> **Multi-attachment gained no correct acceptances and introduced one
+> wrong-list.** That is the honest result, and it is worth more than the
+> implementation.
+
+**What happened.** Exactly one record segments from a secondary attachment:
+CDC `360339`, which yields 17 spans from `DGHP FY26 M&E Indicator List` —
+
+```
+2.1. Point of Entry (POE) General Capacity
+2.4. POE Risk Communication
+4.1. Strengthening of International Emergency Response Capacity
+5.2. Laboratory Quality Control/Quality Assurance
+6.4. One Health
+```
+
+— monitoring-and-evaluation indicator categories, **not** the five fundable
+`Component 1-5` the record actually offers. A loose marker (`global health`,
+`emergenc`) scored it as correct on the first pass; reading the spans showed it
+was the ARPA-E SCALEUP failure repeating, one layer out.
+
+**Why NRL still misses despite the fix.** `352741`'s topics *are* in
+`Amendment 0004.pdf`, the path now fetches it, and it still segments nothing —
+the `53-24-01 - HIGH FREQUENCY RADAR` code form has no family, and adding one
+for a single document is out of scope. Multi-attachment was necessary for that
+record but not sufficient.
+
+**The mechanism is therefore fail-closed by default.** A result won from a
+secondary attachment is **capped at `low` confidence**, which never publishes.
+Measured precision of secondary-won lists is **0 of 1** — far too little
+evidence to publish on, and §18.3 is explicit about which way to err. The result
+still lands in the cache and diagnostics so a later session can judge whether
+secondary attachments are worth trusting; it simply cannot reach a PI first.
+
+**The structural lesson.** More documents means more enumerated lists, and most
+enumerated lists in a funding notice are not the fundable subdivisions —
+indicator frameworks, review criteria, proposal components, cost categories.
+Widening the input widened the false-positive surface faster than it widened
+recall. That is an argument for keeping the fail-closed cap, not for reverting
+the path: NRL genuinely needs it, and the cap costs nothing while the evidence
+is this thin.
+
 ## Classifying every miss
 
 Six categories, one line each.
