@@ -5,13 +5,19 @@ Usage: python tools/fingerprint.py <dir>
 Prints ``<sha256>  <relative path>`` per artifact, sorted by path, so two runs
 of ``tools/hermetic_build.sh`` can be compared byte for byte.
 
-Why timestamps are normalized
------------------------------
-Four catalog fields plus several cache and feed fields carry the wall-clock
-time of the run. They change every time by design and carry no behavioral
-signal, so they are replaced with a constant before hashing. This keeps the
-gate installable with **zero production-code changes**, which matters for a
-safety net that has to exist before any behavior-affecting change.
+What is normalized, and why
+---------------------------
+Two things vary between runs without any change in behavior:
+
+1. **Wall-clock timestamps.** Four catalog fields plus several cache and feed
+   fields carry the time of the run.
+2. **Line endings.** The pipeline writes through two different APIs, one of
+   which takes the platform default, so 16 of the 20 artifacts are CRLF on
+   Windows and LF on Linux. See :func:`normalize`.
+
+Both are replaced before hashing. This keeps the gate installable with **zero
+production-code changes**, which matters for a safety net that has to exist
+before any behavior-affecting change.
 
 Normalization replaces every ISO-8601 *datetime* literal. Date-only values such
 as ``2026-09-30`` are untouched, so close dates, archive dates and every other
@@ -42,8 +48,24 @@ FROZEN_TIMESTAMP = "FROZEN-TIMESTAMP"
 
 
 def normalize(data: bytes) -> bytes:
-    """Replace every ISO-8601 datetime literal with a constant."""
+    """Canonicalize line endings, then replace every ISO-8601 datetime.
+
+    Line endings are normalized because the pipeline writes its artifacts
+    through two different APIs. ``build_catalog``, ``enrich_catalog``,
+    ``extract_document_evidence`` and ``sources/merge`` write through
+    ``tempfile.NamedTemporaryFile(..., newline="\\n")``, which is LF on every
+    platform. ``check_links``, ``build_changes`` and ``build_feeds`` write
+    through ``Path.write_text()`` with no ``newline`` argument, which takes the
+    platform default -- CRLF on Windows, LF on Linux.
+
+    A baseline recorded on Windows therefore disagrees with a CI run on Linux
+    for those artifacts and no others, which is a property of the developer's
+    operating system rather than of the code under test. Normalizing here keeps
+    the three downstream scripts untouched, so the nightly build goes on
+    emitting exactly the bytes it emits today.
+    """
     text = data.decode("utf-8", errors="surrogateescape")
+    text = text.replace("\r\n", "\n").replace("\r", "\n")
     return TIMESTAMP_RE.sub(FROZEN_TIMESTAMP, text).encode(
         "utf-8", errors="surrogateescape"
     )

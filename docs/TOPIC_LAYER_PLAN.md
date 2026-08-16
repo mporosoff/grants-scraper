@@ -1283,6 +1283,19 @@ TIMESTAMP_RE = re.compile(
 
 Date-only values such as `2026-09-30` are untouched, so every close date, archive date and other currentness input stays fingerprinted. The one thing this gives up is entry-level `<updated>` in `all.xml` and the facet feeds — but those are derived from record dates that are themselves fully fingerprinted inside `opportunities.js`, so no signal is lost from the gate as a whole.
 
+**Line endings must be normalized too — this is the second thing the gate has to absorb.** The pipeline writes its artifacts through two different APIs:
+
+| Artifacts | Writer | Result |
+|---|---|---|
+| `opportunities.js`, `opportunity_enrichment.json`, `document_evidence.json`, `source_records.json` | `tempfile.NamedTemporaryFile(..., newline="\n")` | **LF on every platform** |
+| all 15 `feeds/*` plus `link_health.json` | `Path.write_text()` with no `newline` argument (`check_links.py:310`, `build_changes.py:252` and `:256`, `build_feeds.py:172`) | **platform default** — CRLF on Windows, LF on Linux |
+
+A baseline recorded on Windows therefore disagrees with a Linux CI run for exactly those 16 artifacts and no others. That is a property of the developer's operating system, not of the code under test, and it is what broke the gate on its first CI run (2026-08-16). `normalize()` collapses CRLF and lone CR to LF before hashing.
+
+Normalizing rather than fixing the three writers is deliberate: `build_feeds.py`, `build_changes.py` and `check_links.py` stay untouched, so the nightly build goes on emitting exactly the bytes it emits today. The cost is that the gate cannot detect a change that *only* alters line endings — acceptable, because `.gitattributes` applies `* text=auto eol=lf` to the repository and the nightly runs on `ubuntu-latest`, so committed output is LF either way.
+
+**Diagnostic note for the next person who sees this fail.** Raw `diff -rq` between two builds always reports every artifact as differing, because every artifact contains a timestamp. That is not the signal. Diff the **normalized** bytes — import `normalize` from `tools/fingerprint.py` and compare its output — or you will chase a temporal cause that is not there. Two builds 65 seconds apart, crossing a minute boundary, produce zero normalized differences.
+
 `tools/verify_no_drift.sh` rebuilds into a `mktemp -d`, fingerprints, and `diff -u`s against the committed baseline, printing the §0.5 explanation on failure.
 
 `tools/hermetic_build.sh` is the seven-stage sequence from the table above, writing into the directory it is given and never touching `data/`. **That isolation is the point** — §0.3 forbids running write-mode scripts against the repo, and this gate runs on every build. Intermediates (the pre-build catalog snapshot `build_changes` diffs against) go in `<out>/.work/`, and `fingerprint.py` skips any dot-prefixed path component so they are not part of the baseline.
