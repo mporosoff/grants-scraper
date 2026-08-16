@@ -2,7 +2,7 @@
 
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
-Status: in progress · Version 8.0 · Written 2026-08-15 · **Revised 2026-08-16 against `docs/RECON.md`, measured build data, and two CI failures**
+Status: in progress · Version 8.1 · Written 2026-08-15 · **Revised 2026-08-16 against `docs/RECON.md`, measured build data, two CI failures, and `docs/CORPUS_CENSUS.md`**
 
 > **Start at §18.** It defines the minimum path — the seven work packages that are actually being built — and lists what is deferred and what it costs. §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
 
@@ -47,6 +47,23 @@ Version 6.2 and earlier were written **without reading the code** (§17.2). Sess
 | Backfill drains over a month of nightlies; two-week parallel comparison; one week of observation | **Local backfill in one run; single build comparison; one nightly of observation** |
 
 §17.6 is new and records the two Phase 1 CI failures as standing rules: mark `tools/*.sh` executable at commit time, and verify any new fingerprinted artifact across two delayed builds *and* a green Linux run before committing its baseline. Both failures were invisible on Windows.
+
+---
+
+## ⚠ What changed in 8.1 — the census revision
+
+Package C opened with a corpus census (`docs/CORPUS_CENSUS.md`): 20 notice documents, judged by **reading** rather than by pattern matching. It found that **12 enumerate fundable subdivisions, a family identifies the right list in 1 of those 12, and the segmenter produces subtopics for 0.** This revision is the design response. It changes no code.
+
+| Was | Is | Why |
+|---|---|---|
+| Ten families, all keyed on an ordinal | **Eleven.** `structural_siblings` (§6.3a) establishes siblinghood from **outline-tree position**, with no counter | Four of the twelve enumerating documents *name* their subdivisions. No tuning of an ordinal regex reaches them |
+| §6.4 rule 2: "ordinals monotonically increasing with ≤1 gap", universally | **Conditional on family type.** Ordinal families unchanged; structural families use §6.4a — sibling coherence, span-length distribution, title character, siblings-per-parent | A family with no ordinal cannot satisfy a rule about ordinals, and rule 2 is what proves a set "behaves like an enumeration" |
+| §6.7: `DE-FOA-0003600` "does not enumerate research areas… the text genuinely is not there" | **False.** It carries **286 bookmarks** including `2. Basic Energy Sciences (BES) → (a) Materials Chemistry … (c) Synthesis and Processing Science` | Nobody had opened the file. The claim was inferred from the document's reputation as an umbrella |
+| §18.2: the `program_taxonomy` deferral costs the DOE BES omnibus all child records — "the most painful single deferral in this table" | **Substantially reduced.** The children, their descriptions, their page anchors and their topic tagging are reachable by Layer A + §6.3a, as ordinary `inline` subtopics. Program managers, stable URLs, deeper taxonomy levels and cross-year identity still need the scraper | The premise the deferral rested on was the §6.7 error above |
+| Package D begins with pattern tuning | **Begins with two segmenter fixes** (D0a, D0b), gated before any tuning | Both defects currently present as *pattern* failures. Tuning against that reading would relax rule 2 or widen a family — §18.3's most damaging possible change |
+| `dod_topic` — "Typical source: MURI, ONR, ARO" | **MURI is absent from the corpus entirely** — zero mentions across 958 evidence entries. The family is validated only by the AFOSR DEPSCoR notice's identical `Topic N:` convention | MURI is SAM.gov-only, and that adapter is deferred (§18.2) |
+
+**Two things this revision deliberately does not do.** It does not cover the AFOSR shape — 39 named portfolios with no outline at all — which needs a different mechanism, sketched as `label_run` in §6.3a and left unbuilt with its risks stated. And it does not calibrate §6.4a's six numeric thresholds, which are reasoned starting points that package D must fit against the census corpus. This document has twice recorded numbers that proved wrong when run (§6.1's library versions, §6.2's font-size branch); these are flagged as unmeasured rather than presented as settled.
 
 ---
 
@@ -628,7 +645,11 @@ Four further specifics, three measured and one still true as written:
 - **A destination whose page is a bare integer is silently dropped.** `NumberObject(3)` returns `None` even when page 3 exists, because the lookup resolves indirect references and does not treat a literal integer as an index. A notice writing `/Dest [3 /Fit]` loses that entry with no error. None of six sampled documents do this; Layer A under-reports rather than fails if one does.
 - **A cross-document page reference returns a plausible wrong number**, matching on object number without checking ownership. Layer A cannot reach this — its destinations always come from the reader it queries — but it is a trap for anyone later constructing `Destination` objects by hand.
 
-Not every outline nests: `W81XWH-22-DHAPP.pdf` has 11 destinations, all at level 0, so the per-level loop gets exactly one attempt rather than several.
+Not every outline nests: `W81XWH-22-DHAPP.pdf` has 11 destinations, all at level 0, so the per-level loop gets exactly one attempt rather than several. Such a document is also **ineligible for the structural family**, which excludes depth 0 outright (§6.3a).
+
+**Layer A gains a second pass, and the walk gains a field (§6.3a).** After the ordinal loop above has declined at every level, Layer A tries `structural_siblings`. That family reasons about *siblinghood*, not equal depth, so the walk must carry **each node's parent** alongside its level — two nodes at level 2 under different level-1 parents are not siblings, and the per-level grouping above would wrongly treat them as one set. The tuple becomes `(level, parent_key, title, page)`; nothing else about the walk changes, and the ordinal pass ignores the new field.
+
+Order is fixed: **ordinal families first, structural only if all of them decline.** A label match is self-validating and a structural match is not, so the weaker signal never pre-empts the stronger one.
 
 **Layer B — table of contents** (`high`, text only). Find TOC pages in the already-extracted `containers`, then locate each title verbatim in the body; the TOC's own page number is never trusted as a boundary. Unchanged from v6.2 and needs no new library.
 
@@ -732,7 +753,11 @@ Note the method name changed from v6.2's `heading_regex` to **`heading_font`**, 
 | `priority_research` | `(?:Priority\s+Research\s+(?:Direction\|Opportunity)\|PRD)\s+(\d+)` | DOE BES targeted FOAs, EFRC |
 | `research_thrust` | `Research\s+Thrust\s+(\d+)` | DOE BES, EFRC |
 
-That is ten families. v6.2's Phase 2 step list said "the eight families"; ten is correct.
+That is ten **ordinal** families. v6.2's Phase 2 step list said "the eight families"; ten is correct.
+
+**All ten require a counter, and the census says that is the design's largest blind spot.** `docs/CORPUS_CENSUS.md` read 20 notices and found 12 that enumerate fundable subdivisions. **Four of the twelve name their subdivisions instead of numbering them** — including the two richest lists in the corpus, AFOSR's 39 research portfolios (32 distinct program-manager mailboxes) and the DOE Office of Science taxonomy in `DE-FOA-0003600`. No amount of tuning the ten reaches them, because there is no ordinal to capture. §6.3a adds a family that does not need one.
+
+**`dod_topic` is validated, but not by the agency it is named for.** MURI appears **zero times** across all 958 evidence entries — no title, no opportunity number, no description, no stored document text. That is §18.2's SAM.gov deferral arriving rather than a sampling gap: MURI is a SAM.gov-only notice. The family's only validating document is the AFOSR DEPSCoR notice (`363526`), which uses the identical `Topic N:` convention across twelve topics. **The convention is confirmed; the agency in the "Typical source" column is not, and cannot be until the SAM.gov adapter ships.** Do not read a green `dod_topic` result as evidence that MURI will segment.
 
 The eighth family was called `subtopic` in v6.2, which now collides with the name of the record type itself. It is **`sbir_subtopic`**. A grep for `subtopic` that returns both a record-type discriminator and a regex family is exactly the wrong-wiring hazard the naming-collision section exists to prevent.
 
@@ -750,17 +775,101 @@ Second — and this is the one that will be tempting to get wrong — **do not a
 
 **Tune against the corpus that already exists.** The catalog carries 31 records whose title or agency names a BAA, including DARPA office-wide BAAs (`HR001126S0003`, `S0010`, `S0011`, `S0013`, `S0016`), the ONR Long Range BAA (`N0001425SB001`), the DEVCOM ARL foundational BAA (`W911NF-23-S-0001`), AFOSR (`NOFOAFRLAFOSR20260001`), NRL (`N00173-24-S-BA01`) and ERDC (`W912HZ26S0001`). Their notice PDFs are reachable through the existing document-evidence path today. This is the development corpus, and it does not depend on SAM.gov existing (§10 Phase 1).
 
+### 6.3a `structural_siblings` — the eleventh family, and the only non-ordinal one
+
+**Family id: `structural_siblings`. Family type: `structural`. Source of evidence: the PDF outline tree. Layer A only. Confidence ceiling: `medium`.**
+
+Every family in §6.3 recognizes a *label*. This one recognizes a *position*: a set of outline nodes that are siblings under one parent is a candidate topic list, whatever those nodes are called. That is what reaches `DE-FOA-0003600`, whose subdivisions are named `(a) Materials Chemistry`, `(b) Biomolecular Materials`, `(c) Synthesis and Processing Science` — real fundable programs carrying no ordinal a regex could capture.
+
+#### The sibling criterion
+
+Layer A already flattens `reader.outline` into `(level, title, page)`. The structural family needs one more thing from that walk: **each node's parent**, so siblinghood is a fact rather than an inference from equal depth. Two nodes at level 2 under different level-1 parents are not siblings, and the current per-level grouping in §6.2 would wrongly treat them as such.
+
+A **depth** `d` qualifies when all of the following hold:
+
+1. **`d ≥ 1`.** Depth 0 is never eligible. The top level of a federal NOFO outline is the standard announcement skeleton, and it is administrative by construction.
+2. **Per-parent completeness.** For each parent that contributes candidates at depth `d`, *all* of that parent's children at `d` are taken. Cherry-picking a subset is forbidden — a partial sibling list is a segmentation that silently drops topics.
+3. **Cardinality.** The union across qualifying parents holds 3–60 nodes, matching §6.4 rules 1 and 5.
+4. **Parent admissibility.** Every contributing parent's own title must fail the administrative lexicon (below). A parent whose title matches `research|program description|topics?|areas? of interest|portfolio|technical|scope` is a positive signal but is **not** required — requiring it would exclude taxonomies that label the level implicitly.
+
+**Depth selection: take the deepest qualifying depth, and take it across all parents.** This matters more than it looks. `DE-FOA-0003600` has both `A. Purpose → {1. ASCR, 2. BES, …}` (the program offices) and `2. BES → {(a) Materials Chemistry, …}` (the programs inside them). The useful granularity for a catalysis group is the deeper one, and taking it across every parent yields the whole taxonomy — ASCR's children *and* BES's children *and* the rest — rather than one office's. A design that stopped at the first qualifying parent would return four subtopics from a 224-page notice and look like it had worked.
+
+#### Administrative-section exclusion
+
+**The primary exclusion is structural, not lexical**, because a blocklist is the weakest instrument available here and should carry as little load as possible.
+
+- **Position.** Depth 0 is excluded outright (criterion 1). The federal NOFO skeleton — Overview, Eligibility, Application Contents, Submission, Review, Award Notices, Post-Award, Other — is prescribed at the top level by the OMB standard announcement structure, so excluding depth 0 removes most of it without naming a single word.
+- **Parent title.** A list of children under `IV. Submission Requirements` is never a topic list (criterion 4).
+
+The lexical test is a **set-level veto**, deliberately not a per-item filter:
+
+> If **≥25%** of sibling titles contain a term from the administrative lexicon, reject the entire set.
+
+Lexicon: `eligibility`, `submission`, `application`, `award`, `review`, `reporting`, `contact`, `deadline`, `format`, `certification`, `appendix`, `definitions`, `acronym`, `checklist`, `registration`, `cost share`, `budget`, `provisions`, `clauses`.
+
+Set-level is the right shape because one `Budget` sibling among fifteen research programs is normal and should not veto a good list, while four of fifteen means the whole set is the admin skeleton. A per-item filter would quietly delete the odd one out and let the rest through — which is the failure mode that produces a plausible, wrong list.
+
+#### The false-positive risk, stated plainly
+
+**This family is materially weaker than the ten ordinal ones, and pretending otherwise would be the mistake.** `Topic Area 3` is self-validating: that phrase is used for topic areas and essentially nothing else, so a match is almost certainly a real topic. Structure carries no such guarantee. **An outline node with twelve children has twelve children, whatever they are** — a definitions glossary, a list of required forms, and a list of research programs are structurally identical.
+
+Three consequences follow, and all three are requirements rather than suggestions:
+
+1. **Confidence is capped at `medium`.** `structural_siblings` never emits `high`, even from Layer A, which otherwise yields `high`. It is a weaker signal and the stored `confidence` must say so.
+2. **The acceptance rules do the work the regex used to do.** §6.4's rule 2 replacement (§6.4a) is not a formality for this family — it is the *only* thing standing between an outline tree and a page of invented subtopics.
+3. **Ordinal families always win.** The structural family is tried **only** when no ordinal family has been accepted at any level of the outline. It never competes in `best_family()`'s ≥2× margin test, because that test arbitrates between label families; a structural match is a fallback, not a rival.
+
+#### Interaction with Layers A–D
+
+| Layer | Structural family runs? | Why |
+|---|---|---|
+| **A — outline** | **Yes**, after the ordinal pass declines at every level | This is the only layer with a real parent/child tree, which is the entire evidence base |
+| **B — table of contents** | **No, in v1** | A TOC is a flattened rendering of the outline, and depth would have to be recovered from leading whitespace in extracted text. B0 measured that whitespace in `pdfminer` output is unreliable enough that Layer C's line assembly needs positional rounding; inferring hierarchy from it would manufacture sibling sets. Recorded as a known gap, not an oversight |
+| **C — heading font** | **No, in v1** | Bold/not-bold is one bit and cannot establish a hierarchy. B0 measured the size branch admitting **0.0%** of lines on the AFOSR BAA and 0.2% on ONR, so there is not enough typographic level signal on the documents that reach Layer C to build a tree from |
+| **D — plain numbered** | **No, by definition** | Layer D is the ordinal-regex fallback and stays exactly that |
+
+So `structural_siblings` runs in exactly one place. That restriction is deliberate and is what keeps its false-positive surface bounded.
+
+#### What this does *not* solve: AFOSR
+
+The census names two documents. This family reaches one of them.
+
+**`DE-FOA-0003600` has 286 bookmarks and is reached.** **`FA955026S0001`, the AFOSR Open BAA, has zero bookmarks** — measured in B0 — so there is no outline tree, and a family defined by outline position cannot touch it. Its 39 portfolios are marked by a *repeated structural label*: each begins `Program Description:` and carries a program-manager mailbox.
+
+That is a different mechanism and needs its own family, provisionally `label_run`: a run of ≥3 body lines matching one repeated `^<Label>:` form, where the label is discovered from the document rather than listed in advance, with the preceding line taken as the title. It is **not added here**, for a reason worth stating: the discovered-label approach has a false-positive profile nobody has measured, and `Program Description:`, `Basic Research Objectives:` and `Contact Information:` all repeat 39 times in the same document — so the mechanism must also choose *which* repeated label delimits topics. That is package D work with its own validation, and it should not ride in on this section's coattings.
+
+**Until then, AFOSR-shaped notices — named subdivisions with no outline — remain uncovered, and that is roughly a third of the enumerating documents in the census.**
+
 ### 6.4 Acceptance rules
 
 Accept only if **all** hold. Any failure → zero topics, parent untouched, reason logged.
 
 1. ≥3 candidates from a single family
-2. Ordinals monotonically increasing with ≤1 gap
+2. **Ordinal families only:** ordinals monotonically increasing with ≤1 gap. **Structural families:** replaced by §6.4a
 3. Each span ≥200 and ≤40,000 characters
 4. Spans non-overlapping, page ranges contiguous
 5. Total candidates ≤60 (guards against reference lists and form indexes)
 6. Candidates not confined to the detected TOC page range
-7. ≥60% of candidates carry a non-empty title after the code
+7. **Ordinal families only:** ≥60% of candidates carry a non-empty title after the code. **Structural families:** there is no code, so this is subsumed by §6.4a's title tests
+
+### 6.4a Rule 2 for structural families
+
+Rule 2 exists to answer one question: *does this set behave like an enumeration?* For an ordinal family the counter answers it directly. A structural family has no counter, so the question has to be answered from the shape of the set itself. All four tests must hold.
+
+**2a — Sibling coherence.** Every candidate's parent is admissible (§6.3a criterion 4), and for each contributing parent the full child list is present. A set that is missing siblings is rejected rather than trimmed.
+
+**2b — Span-length distribution.** Across the candidate spans, the coefficient of variation (σ/μ) is **≤ 1.5**, and no single span exceeds **40%** of the union's total characters.
+
+This is the quantitative replacement for "the ordinals count up," and it is the strongest of the four. A real topic list is made of comparable things: twelve research programs get roughly comparable prose. An administrative skeleton is wildly uneven — a three-line *Agency Contact Information* sits beside a forty-page *Application Contents and Format*. That unevenness is measurable without knowing a single word of the content, which is exactly what is wanted from a language-independent structural test.
+
+**2c — Title character.** All three hold:
+- **≥60%** of titles carry **≥2 content tokens** after `build_catalog.tokenize` (which already drops stopwords). `Materials Chemistry` passes; `Purpose` does not.
+- **Type/token ratio ≥ 0.6** across the concatenated title set. Administrative outlines repeat their vocabulary relentlessly — *Application* Contents, *Application* Review, *Application* Submission — while a list of research programs mostly does not reuse words. This catches skeletons that survive the lexicon because they use unlisted synonyms.
+- Median title length **12–120 characters**. Below 12 is a label; above 120 is a sentence, and a sentence is prose that happens to be bookmarked.
+
+**2d — Siblings per parent.** Each contributing parent has **3–60** children at the chosen depth, and the union is 3–60. A parent with two children is not an enumeration; a parent with 200 is a glossary.
+
+> **These six thresholds — 1.5, 40%, 60%, 2 tokens, 0.6, 12–120 — are stated to be calibrated, not because they have been measured.** They are reasoned starting points, and this document has now twice recorded numbers that turned out wrong when run (§6.1's versions, §6.2's size branch). Package D must fit them against the census corpus in `docs/CORPUS_CENSUS.md` and record the fitted values here, with the false-positive count on the eight documents that enumerate nothing as the headline number. A structural family that admits any of those eight is worse than no structural family at all.
 
 ### 6.5 Derived fields
 
@@ -826,11 +935,34 @@ DOE Office of Science solicitations split into three shapes, and only two of the
 |---|---|---|
 | **Targeted FOA with enumerated directions** | BES "Chemical and Materials Sciences to Advance Clean Energy Technologies"; EFRC calls organized around Priority Research Directions | **Yes**, once the `priority_research` and `research_thrust` families are added (§6.3) |
 | **Multi-topic FOA with numbered topic areas** | Most EERE, FECM, ARPA-E | **Yes**, already |
-| **Annual omnibus that points outward** | "Continuation of Solicitation for the Office of Science Financial Assistance Program"; NSF division core solicitations | **No.** Segmentation returns zero topics, correctly, because there is no enumerated list in the document |
+| **Annual omnibus that points outward** | NSF division core solicitations | **No.** Segmentation returns zero topics, correctly, because there is no enumerated list in the document |
 
-The third shape is the important one for a catalysis group. The annual Office of Science continuation FOA is the vehicle through which BES core research is funded, but the FOA does not enumerate research areas — it refers the reader to the program's own web pages. The fundable granularity Marc actually cares about (**BES → CSGB → Chemical Transformations → Catalysis Science**, with a named program manager) exists only in the agency's published program taxonomy, never in the PDF.
+#### ⚠ Correction: `DE-FOA-0003600` is not an outward-pointing omnibus. The text is there.
 
-Segmentation cannot fix this, because the text genuinely is not there.
+Every prior version of this section — including the "corrected" 7.0 rewrite above — asserted the following, and it is **false**:
+
+> The annual Office of Science continuation FOA is the vehicle through which BES core research is funded, but the FOA does not enumerate research areas — it refers the reader to the program's own web pages. … Segmentation cannot fix this, because the text genuinely is not there.
+
+`docs/CORPUS_CENSUS.md` opened the document and read it. It carries **286 bookmarks**, including a complete program taxonomy:
+
+```
+III. Program Description
+  A. Purpose
+    1. Advanced Scientific Computing Research (ASCR)
+      (a) Applied Mathematics
+      (b) Computer Science
+    2. Basic Energy Sciences (BES)
+      (a) Materials Chemistry
+      (b) Biomolecular Materials
+      (c) Synthesis and Processing Science
+      (d) Experimental Condensed Matter Physics
+```
+
+That is program-office → program granularity, in the notice, reachable by **Layer A today** once §6.3a's structural family exists. The claim that the text "genuinely is not there" was inferred from the document's reputation as an umbrella and never checked against the file. It is the most consequential factual error this plan has carried, because it is the basis on which the single most valuable case for this project's actual user was written off.
+
+**What the notice does *not* supply, and this part of the original claim survives:** program-manager identity and contact, stable per-program URLs under `science.osti.gov`, and any taxonomy level deeper than the notice prints. Whether the specific `BES → CSGB → Catalysis Science` program appears in the bookmark tree is **not yet established** — the census read the first 26 of 286 bookmarks. Package D must read the full tree and record the answer, because the depth actually available decides how much of §18.2's deferral survives.
+
+The row above has been narrowed to NSF division core solicitations, which remain genuinely outward-pointing and are unaffected by this correction.
 
 **Solution: a third input to the same child-record model** — referenced subtopics, sourced from the agency's published program taxonomy rather than from the notice.
 
@@ -1924,9 +2056,16 @@ One **package** per session (§0.4 rule 5). One **commit** per item, with the su
 
 ### Package D — Tune and backfill
 
-- [ ] D1. Pattern tuning against the 31 BAA records and the DOE FOAs already in the catalog (§6.3)
-- [ ] D2. Full **local** backfill, high `--max-documents`, cache committed once (§8.3). The nightly is not used
-- [ ] **GATE:** acceptance rate reported **per agency family**, not aggregate · rejection histogram read, `no_layer_accepted` separated from failures and `run_budget` from `time_budget` · zero low-confidence published
+**Read `docs/CORPUS_CENSUS.md` before starting.** It is the measured picture this package tunes against: 12 of 20 documents enumerate, a family identifies the right list in 1 of those 12, and the segmenter produces subtopics for 0.
+
+- [ ] **D0a. Fix Layer B's body cutoff** — uses the TOC page's *start* offset where it must use its *end*, so TOC candidates survive the filter meant to remove them
+- [ ] **D0b. Fix Layer D's TOC/body co-collection** — exclude `detect_toc_pages()` output from candidate collection in Layers C and D, so ordinals cannot restart mid-set
+- [ ] **GATE:** **D0a and D0b land before any tuning.** Both currently present as pattern failures — `363526` is rejected with `('ordinal_sequence', 'span_length')` on a perfect twelve-topic `dod_topic` match — and tuning against that reading would relax rule 2 or widen a family, which §18.3 names as the most damaging possible change. Confirm `363526` segments after the fixes
+- [ ] D1. Implement `structural_siblings` (§6.3a) and calibrate §6.4a's six thresholds against the census corpus. **Report the false-positive count on the eight non-enumerating documents; any admission is a failure**
+- [ ] D2. Read all 286 bookmarks of `DE-FOA-0003600`; record whether `Catalysis Science` is reachable in the notice (§6.7, §18.2)
+- [ ] D3. Pattern tuning against the 31 BAA records and the DOE FOAs already in the catalog (§6.3). Census-named gaps: `Category N`, `Component N`, `Focus Area N`, bare `N - Title`, sub-lettered `1a`/`1b` in `topic_area`, `roses_element` false-positives on DoD `A.1`/`E.1`
+- [ ] D4. Full **local** backfill, high `--max-documents`, cache committed once (§8.3). The nightly is not used
+- [ ] **GATE:** acceptance rate reported **per agency family**, not aggregate · rejection histogram read, `no_layer_accepted` separated from failures and `run_budget` from `time_budget` · zero low-confidence published · **denominator is documents that actually enumerate, not all documents** — the census measured 12 of 20, and scoring against 20 understates the pattern set by 40%
 
 ### Package E — Storage and scoring
 
@@ -2150,8 +2289,14 @@ Nothing in this package is imported by any existing module, so nothing can regre
 
 | Item | Notes |
 |---|---|
-| Pattern tuning | Against the corpus already in the catalog: the 31 BAA records (DARPA, ONR, ARL, AFOSR, NRL, ERDC) and the DOE FOAs. No new source needed (§6.3) |
+| **Fix Layer B's body cutoff** — do this first | `body_start` is computed as `max(page_start_offset(p) for p in toc_pages)`, which is where the last TOC page *begins*. TOC candidates therefore sit *after* it and survive the `offset > body_start` filter that exists to remove them. It must be where the last TOC page **ends** |
+| **Fix Layer D's TOC/body co-collection** — also first | Layer D collects candidates from every container, TOC pages included. §6.4 rule 6 rejects candidates *confined* to the TOC, so a set mixing TOC and body passes rule 6 and fails rules 2 and 3 instead. Exclude `detect_toc_pages()` output from candidate collection in Layers C and D |
+| Implement `structural_siblings` (§6.3a) and calibrate §6.4a's six thresholds | Against `docs/CORPUS_CENSUS.md`. **The headline number is the false-positive count on the eight documents that enumerate nothing** — a structural family that admits any of them is worse than none |
+| Read all 286 bookmarks of `DE-FOA-0003600` | Records whether `Catalysis Science` is reachable in the notice, which decides how much of §18.2's `program_taxonomy` deferral survives (§6.7) |
+| Pattern tuning | Against the corpus already in the catalog: the 31 BAA records (DARPA, ONR, ARL, AFOSR, NRL, ERDC) and the DOE FOAs. No new source needed (§6.3). The census names the concrete gaps: `Category N`, `Component N`, `Focus Area N`, bare `N - Title`, `topic_area` unable to express sub-lettered `1a`/`1b`, and `roses_element` false-positiving on DoD `A.1`/`E.1` section numbers |
 | Full local backfill | High `--max-documents`, run against a copy, cache committed in one reviewable commit (§8.3). The nightly is not used |
+
+> **⚠ The two Layer B/D defects must be fixed before any tuning, because they currently masquerade as pattern failures and will mislead it.** The census's single best match — AFOSR DEPSCoR `363526`, where `dod_topic` correctly matched all twelve topics — is rejected today with `('ordinal_sequence', 'span_length')`. Both TOC copies and both body copies enter the candidate list, so ordinals run 1→12 then restart at 1, and the TOC spans are 120–230 characters against a 200-character minimum. Read without this note, that rejection says *"the ordinal rule is too strict"* or *"`dod_topic` is wrong"*, and the obvious response — relax rule 2, or widen the family — is exactly the change §18.3 names as the most damaging available. **A tuning session that starts before these two fixes will draw the wrong conclusion from its own histogram.**
 
 **Gate:** acceptance rate reported **per agency family**, not in aggregate — an 80% average hiding 0% on DoD is a failure, not a pass · rejection-reason histogram read deliberately, with `no_layer_accepted` separated from genuine failures and `run_budget` from `time_budget` · zero low-confidence records in the published set.
 
@@ -2192,9 +2337,9 @@ Each line states what is lost. None of this is abandoned; all of it is a later d
 
 | Deferred | What is lost by deferring it |
 |---|---|
-| **SAM.gov adapter** (§7.5) | MURI specifically, and any SAM.gov-only notice. **Not** the development corpus — 31 BAA records are already in the catalog, which is why this was safe to cut |
+| **SAM.gov adapter** (§7.5) | MURI specifically, and any SAM.gov-only notice. **Not** the development corpus — 31 BAA records are already in the catalog, which is why this was safe to cut. **One consequence the census made concrete:** MURI is absent from the corpus *entirely* — zero mentions across all 958 evidence entries — so `dod_topic`, the family §6.3 lists as serving it, has **no MURI document validating it**. It is validated instead by the AFOSR DEPSCoR notice's identical `Topic N:` convention across twelve topics, which confirms the *convention* but not the agency. Do not read a green `dod_topic` result as evidence MURI will segment |
 | **NSPIRES activation** (§10) | NASA ROSES program elements stay invisible as individual records. NASA remains partially covered via Grants.gov |
-| **`program_taxonomy` and all `referenced` subtopics** (§6.7) | **The DOE BES omnibus gets no child records in v1.** `DE-FOA-0003600` remains one record — findable, because `discoverability.py` already tags it with catalysis and BES terms (§3), but with no per-program children, no program managers, and no BES → CSGB → Catalysis Science granularity. For a catalysis group this is the most painful single deferral in this table, and it is deferred because it is a scraping project with its own linkage rules (§6.7a), not because it is unimportant |
+| **`program_taxonomy` and all `referenced` subtopics** (§6.7) | **Substantially reduced — see the reassessment below.** What is genuinely lost is now program-manager identity, stable per-program URLs, and taxonomy depth beyond what the notice prints. The per-program *children themselves* are no longer part of this deferral, because the census found them in the notice |
 | **`expected_solicitations.json` + `check_expected.py`** (§7.4) | No assertion that a known umbrella silently vanished from a healthy source. Mitigated slightly by #30 already being noisy, which this would have made noisier |
 | **§7.9 profile rebuild** | Researcher profiles keep the current Crossref + CV + free-text representation. Rehydrated abstracts, recency weighting and the negative-term list all wait. The current representation works; it is just not measured |
 | **Expired archive, recurrence grouping, `own_deadline`** (§7.2) | No "include past cycles" view, no cross-cycle linking, no per-subtopic advisory deadline. Package E's minimal rule means an expired parent takes its children with it, which is correct but lossy — last year's MURI topic list is gone rather than archived |
@@ -2206,6 +2351,32 @@ Each line states what is lost. None of this is abandoned; all of it is a later d
 | **The optional AI layer** (§11) | Summaries stay deterministic and occasionally clumsy. This was never in v1 |
 
 **§8.4 is not on this list.** The hermetic no-drift gate is **built and passing in CI** as of 2026-08-16 — 20 artifacts baselined, sensitivity proven on both the catalog and feeds sides, wired into `tests.yml`. It is the foundation the rest of the minimum path stands on, not a candidate for deferral.
+
+#### Reassessing the `program_taxonomy` deferral after the census
+
+This deferral was written on the premise §6.7 now corrects: that `DE-FOA-0003600` enumerates nothing, so per-program children could only come from scraping `science.osti.gov`. The census disproves the premise. The deferral therefore needs splitting rather than restating, because a scraping project and a pattern are very different amounts of work and only one of them is still required.
+
+**No longer needs a scraper — reachable by Layer A plus §6.3a, inside the minimum path:**
+
+| Now in reach | Why |
+|---|---|
+| **The existence and naming of per-program children** under the Office of Science omnibus | They are bookmark nodes: `(a) Materials Chemistry`, `(c) Synthesis and Processing Science`. `structural_siblings` selects them by position |
+| **A description for each** | The span between one bookmark and the next is exactly what §6.5 already summarizes and §5.2 already builds a term map from |
+| **A citable in-notice anchor** | `page_start` from `get_destination_page_number`, giving `p14`-style evidence links identical to every other `inline` subtopic |
+| **Topic-facet and program-area tagging per program** | §6.5 runs `program_areas.ENTRIES` over each span. A span for *Synthesis and Processing Science* is a far better input to that vocabulary than the whole 224-page notice, which is the argument §6.5 already makes in the abstract and this document makes concrete |
+
+That is the bulk of what "the DOE BES omnibus gets no child records" was costing, and it arrives with **`subtopic_source: "inline"`**, not `"referenced"` — no new record type, no new lifecycle, no adapter.
+
+**Still genuinely requires the scraper:**
+
+| Still deferred | Why the notice cannot supply it |
+|---|---|
+| **Program-manager identity and contact** | The Office of Science notice does not print them. AFOSR's does, which is why AFOSR is the *opposite* case — rich contacts, no outline |
+| **Stable per-program URLs** (`science.osti.gov/bes/csgb/…`) | The notice cites the program office, not per-program pages. These are what make a child linkable to something durable across FOA numbers |
+| **Taxonomy depth below what the notice prints** | If the bookmark tree stops at *Materials Chemistry* and never reaches *Catalysis Science*, only the web tree has that level. **Unverified** — the census read 26 of 286 bookmarks; package D must read all of them and record the answer |
+| **Cross-year program identity** | When the FOA number rolls over, matching this year's *Synthesis and Processing Science* to last year's needs a stable key the notice does not carry. §5.3's title-first matching covers renumbering *within* a document lineage, not across a re-issued omnibus |
+
+**The practical consequence for sequencing.** The most painful line in this table is no longer blocked on a scraping project with its own linkage rules. It is blocked on §6.3a working, which is package D pattern work against a corpus that already exists. **§13's open decision 2 — `discoverability.py` versus a `program_taxonomy` adapter — shrinks accordingly**: whichever wins now owns program managers, URLs and cross-year identity, not the children themselves. That is a materially smaller and less urgent decision than the one recorded, and it should be re-read with this in mind before anyone builds either option.
 
 ### 18.3 What is kept, and why
 
