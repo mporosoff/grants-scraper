@@ -137,6 +137,44 @@ FAMILIES: tuple[Family, ...] = (
 
 FAMILIES_BY_ID = {family.identifier: family for family in FAMILIES}
 
+# The eleventh family (§6.3a). It has no pattern: siblinghood is established by
+# outline-tree position, so it lives in subtopic_segmentation where the tree is.
+# Named here so best_family() callers and the diagnostics histogram share one
+# vocabulary of family identifiers.
+STRUCTURAL_FAMILY = "structural_siblings"
+
+# Administrative vocabulary for §6.3a's set-level veto and for ancestor-chain
+# admissibility.
+#
+# This is not an ad-hoc blocklist: it is the **standard federal announcement
+# section vocabulary**, which is a published finite list rather than a guess.
+# Every term here names a section or subsection the OMB announcement template
+# prescribes, which is why matching one is evidence about a heading's ROLE
+# rather than about its wording.
+#
+# Measured (D2, D1): applied to the immediate parent alone this catches none of
+# the 23 administrative sibling sets in DE-FOA-0003600, which is why §6.3a's
+# primary exclusion is the ancestor chain and this list is the secondary check.
+# `restriction` and `other information` were added after D1 measured ARPA-E
+# SCALEUP selecting the 13 children of `H. Funding Restrictions` -- Allowable
+# Costs, Foreign Travel, Lobbying -- as if they were fundable topics.
+ADMINISTRATIVE_TERMS = (
+    "eligibility", "eligible", "submission", "submit", "application", "award",
+    "review", "reporting", "contact", "deadline", "format", "certification",
+    "appendix", "definitions", "acronym", "checklist", "registration",
+    "register", "cost share", "cost sharing", "budget", "provisions",
+    "clauses", "administrative", "how-to", "how to", "requirements",
+    "compliance", "assurance", "restriction", "other information",
+    "national policy", "post-award", "reference material",
+)
+ADMINISTRATIVE_RE = re.compile(
+    "|".join(re.escape(term) for term in ADMINISTRATIVE_TERMS), re.IGNORECASE
+)
+
+
+def is_administrative(title: str) -> bool:
+    return bool(ADMINISTRATIVE_RE.search(title or ""))
+
 # Minimum candidates for a family to be considered at all (§6.4 rule 1).
 MINIMUM_CANDIDATES = 3
 # A family must beat the runner-up by this factor, or the set is mixed and is

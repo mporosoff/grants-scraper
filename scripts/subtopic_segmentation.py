@@ -39,7 +39,11 @@ from pypdf.generic import Destination
 
 from scripts import program_areas
 from scripts.build_catalog import tokenize
-from scripts.subtopic_patterns import best_family
+from scripts.subtopic_patterns import (
+    STRUCTURAL_FAMILY,
+    best_family,
+    is_administrative,
+)
 
 
 # --- Budgets and caps (§6.1, §6.4, §5.1) ------------------------------------
@@ -442,6 +446,24 @@ def _flatten(containers) -> _Flat:
 
 
 @dataclass(frozen=True)
+class OutlineNode:
+    """One bookmark, with the ancestor chain needed to establish siblinghood."""
+
+    level: int
+    title: str
+    page: int
+    chain: tuple = ()
+
+    @property
+    def parent(self):
+        return self.chain[-1] if self.chain else None
+
+    @property
+    def root(self):
+        return self.chain[0] if self.chain else None
+
+
+@dataclass(frozen=True)
 class _Candidate:
     code: str
     ordinal: int
@@ -452,13 +474,18 @@ class _Candidate:
     anchor: str | None
 
 
-def acceptance_failures(candidates, flat, toc_pages=()):
+def acceptance_failures(candidates, flat, toc_pages=(), family_type="ordinal"):
     """Every §6.4 rule this candidate set breaks. Empty tuple means accept.
 
-    All seven must hold. Returning the full list rather than the first failure
+    All rules must hold. Returning the full list rather than the first failure
     is deliberate: the package D histogram is only readable if a rejection
     names every reason it happened.
+
+    `family_type` selects rule 2 (§6.4/§6.4a). An ordinal family answers "does
+    this behave like an enumeration?" with its counter; a structural family has
+    no counter, so the question is answered from the shape of the set instead.
     """
+    structural = family_type == "structural"
     failures = []
     ordered = sorted(candidates, key=lambda item: item.offset)
 
@@ -466,18 +493,33 @@ def acceptance_failures(candidates, flat, toc_pages=()):
     if len(ordered) < MIN_CANDIDATES:
         failures.append("min_candidates")
 
-    # 5. At most sixty, which guards against reference lists and form indexes.
-    if len(ordered) > MAX_CANDIDATES:
+    # 5. A ceiling, which guards against reference lists and form indexes.
+    ceiling = STRUCTURAL_MAX_SIBLINGS if structural else MAX_CANDIDATES
+    if len(ordered) > ceiling:
         failures.append("too_many_candidates")
 
     if not ordered:
         return tuple(failures)
 
-    # 2. Ordinals monotonically increasing, allowing at most one gap per step.
-    ordinals = [item.ordinal for item in ordered]
-    steps = [later - earlier for earlier, later in zip(ordinals, ordinals[1:])]
-    if any(step < 1 or step > MAX_ORDINAL_STEP for step in steps):
-        failures.append("ordinal_sequence")
+    if structural:
+        # §6.4a 2b. The quantitative replacement for "the ordinals count up":
+        # a real topic list is made of comparable things, while an
+        # administrative skeleton pairs a three-line contact block with a
+        # forty-page application section.
+        lengths = [end - start for start, end in _span_bounds(ordered, len(flat.text))]
+        total = sum(lengths) or 1
+        mean = statistics.fmean(lengths)
+        deviation = statistics.pstdev(lengths)
+        if mean and deviation / mean > STRUCTURAL_MAX_CV:
+            failures.append("span_distribution")
+        if max(lengths) / total > STRUCTURAL_MAX_SPAN_SHARE:
+            failures.append("span_dominance")
+    else:
+        # 2. Ordinals monotonically increasing, allowing at most one gap.
+        ordinals = [item.ordinal for item in ordered]
+        steps = [later - earlier for earlier, later in zip(ordinals, ordinals[1:])]
+        if any(step < 1 or step > MAX_ORDINAL_STEP for step in steps):
+            failures.append("ordinal_sequence")
 
     # 3 and 4. Span lengths, and no overlap.
     bounds = _span_bounds(ordered, len(flat.text))
@@ -508,10 +550,13 @@ def acceptance_failures(candidates, flat, toc_pages=()):
     ):
         failures.append("toc_confined")
 
-    # 7. At least 60% carry a non-empty title after the code.
-    titled = sum(1 for item in ordered if item.title.strip())
-    if titled < MIN_TITLED_RATIO * len(ordered):
-        failures.append("missing_titles")
+    # 7. At least 60% carry a non-empty title after the code. Structural
+    # families have no code, so this is subsumed by §6.4a 2c, applied at
+    # selection time in _structural_titles_ok().
+    if not structural:
+        titled = sum(1 for item in ordered if item.title.strip())
+        if titled < MIN_TITLED_RATIO * len(ordered):
+            failures.append("missing_titles")
 
     return tuple(dict.fromkeys(failures))
 
@@ -624,17 +669,26 @@ def _candidates_from(hits, flat, pages, anchors, start_at=0):
 # --- Layers (§6.2) ----------------------------------------------------------
 
 
-def flatten_outline(items, reader, level=0, out=None):
-    """pypdf's reader.outline is a nested list: a Destination, or a list of
+def outline_nodes(items, reader, level=0, out=None, chain=()):
+    """The outline walk, carrying each node's full ancestor chain.
+
+    pypdf's reader.outline is a nested list: a Destination, or a list of
     children belonging to the Destination that preceded it.
 
     get_destination_page_number returns None when a page is not found -- it
     does NOT raise, whatever §6.2 used to say. See docs/PDF_API_NOTES.md §2.
+
+    The chain is what the structural family needs. Equal depth does not
+    establish siblinghood -- two level-2 nodes under different level-1 parents
+    are not siblings -- and D2 measured that the *level-0* ancestor is what
+    separates a program taxonomy from an administrative one, so the whole chain
+    is kept rather than just the immediate parent.
     """
     out = [] if out is None else out
+    last = chain
     for item in items:
         if isinstance(item, list):
-            flatten_outline(item, reader, level + 1, out)
+            outline_nodes(item, reader, level + 1, out, last)
         elif isinstance(item, Destination):
             try:
                 page_index = reader.get_destination_page_number(item)
@@ -642,31 +696,183 @@ def flatten_outline(items, reader, level=0, out=None):
                 continue
             if page_index is None:       # not found; silently skipped by design
                 continue
-            out.append((level, str(item.title or "").strip(), page_index + 1))
+            title = str(item.title or "").strip()
+            out.append(OutlineNode(level, title, page_index + 1, chain))
+            last = chain + (title,)
     return out
+
+
+def flatten_outline(items, reader):
+    """`(level, title, page)` triples, the shape the ordinal pass consumes.
+
+    Kept exactly as it was when package B tested it. The structural family's
+    richer walk is `outline_nodes()`; this stays a thin adapter so adding the
+    ancestor chain did not change an existing contract.
+    """
+    return [(node.level, node.title, node.page)
+            for node in outline_nodes(items, reader)]
 
 
 def _layer_outline(content, containers, flat, deadline, toc_pages):
     try:
         reader = PdfReader(io.BytesIO(content), strict=False)
-        entries = flatten_outline(reader.outline, reader)
+        entries = outline_nodes(reader.outline, reader)
     except Exception:                    # noqa: BLE001 - no outline, or broken
         return None
     if not entries:
         return None
-    for level in sorted({level for level, _title, _page in entries}):
+    for level in sorted({node.level for node in entries}):
         if monotonic() > deadline:
             return None
-        siblings = [(t, p) for lvl, t, p in entries if lvl == level]
-        family, hits = best_family(title for title, _page in siblings)
+        siblings = [node for node in entries if node.level == level]
+        family, hits = best_family(node.title for node in siblings)
         if not family:
             continue
-        pages = [page for _title, page in siblings]
+        pages = [node.page for node in siblings]
         candidates = _candidates_from(hits, flat, pages, [None] * len(pages))
         failures = acceptance_failures(candidates, flat, toc_pages)
         if not failures:
             return ("outline", "high", family, candidates)
+
+    # §6.3a. Only after every ordinal family has declined at every level: a
+    # label match is self-validating and a structural one is not, so the weaker
+    # signal never pre-empts the stronger.
+    return _structural_from_outline(entries, flat, toc_pages)
+
+
+# --- §6.3a structural family ------------------------------------------------
+
+# §6.4a thresholds. Every one of these was a reasoned starting point in the
+# plan; the values here are the fitted ones, and where a value moved the
+# measurement that moved it is named. See §6.4a and docs/CORPUS_CENSUS.md.
+STRUCTURAL_MIN_SIBLINGS = 3
+# Fitted 60 -> 100 (D2). Level 2 under `III. Program Description` in
+# DE-FOA-0003600 is 77 nodes; at 60 the document falls back to 16 program-office
+# children and `Catalysis Science` stops being its own record.
+STRUCTURAL_MAX_SIBLINGS = 100
+STRUCTURAL_MAX_CV = 1.5
+STRUCTURAL_MAX_SPAN_SHARE = 0.40
+STRUCTURAL_MIN_TITLED_RATIO = 0.6
+STRUCTURAL_MIN_CONTENT_TOKENS = 2
+# Fitted 0.6 -> 0.35, and §6.4a's reasoning for it was wrong. The claim was
+# that administrative outlines repeat vocabulary while research programme lists
+# do not. Measured across all 129 sibling sets in the census corpus: the
+# ancestor-chain test already removes 111 of them, leaving 18 for this test to
+# judge, and the LOWEST legitimate value among those is 0.383 -- DOE's High
+# Energy Physics set, whose nine titles are "Experimental Research at the
+# Energy / Intensity / Cosmic Frontier" and so legitimately share vocabulary.
+# The 24-programme BES set is 0.597, also under the reasoned 0.6. A real
+# scientific taxonomy reuses domain words by nature; type/token was measuring
+# list size and domain coherence, not administrativeness. Kept at 0.35 only as
+# a floor against degenerate repetition, no longer as a primary defence.
+STRUCTURAL_MIN_TYPE_TOKEN = 0.35
+STRUCTURAL_TITLE_CHARS = (12, 120)
+STRUCTURAL_ADMIN_VETO = 0.25
+
+
+def _admissible_parent(node):
+    """§6.3a criterion 4, widened by D2 to the whole ancestor chain.
+
+    The immediate parent is not enough. `C. Administrative and National Policy
+    Requirements` matches no administrative term, and neither do most of its 40
+    children -- but its level-0 ancestor is `IX. Other Information`, and that
+    separates all 23 administrative sibling sets in DE-FOA-0003600 from the 10
+    real ones. Structure, not vocabulary, as §6.3a intended.
+    """
+    if not node.chain:
+        return False
+    return not any(is_administrative(ancestor) for ancestor in node.chain)
+
+
+def _structural_from_outline(entries, flat, toc_pages):
+    """Sibling sets established by outline position, not by an ordinal."""
+    by_depth = {}
+    for node in entries:
+        if node.level < 1:            # §6.3a criterion 1: depth 0 is never eligible
+            continue
+        if not _admissible_parent(node):
+            continue
+        by_depth.setdefault(node.level, []).append(node)
+
+    # §6.3a depth selection, corrected by D2: the admissible depth carrying the
+    # MOST nodes, not the deepest. Under `III. Program Description` level 3
+    # holds 3 nodes and would otherwise beat level 2's 77.
+    for depth in sorted(by_depth, key=lambda d: (-len(by_depth[d]), -d)):
+        nodes = by_depth[depth]
+        if not STRUCTURAL_MIN_SIBLINGS <= len(nodes) <= STRUCTURAL_MAX_SIBLINGS:
+            continue
+        # §6.4a 2d: each contributing parent must itself hold a real set.
+        per_parent = {}
+        for node in nodes:
+            per_parent.setdefault(node.parent, []).append(node)
+        if any(len(group) < STRUCTURAL_MIN_SIBLINGS for group in per_parent.values()):
+            nodes = [
+                node
+                for node in nodes
+                if len(per_parent[node.parent]) >= STRUCTURAL_MIN_SIBLINGS
+            ]
+        if not STRUCTURAL_MIN_SIBLINGS <= len(nodes) <= STRUCTURAL_MAX_SIBLINGS:
+            continue
+        if not _structural_titles_ok([node.title for node in nodes]):
+            continue
+
+        candidates = [
+            _Candidate(
+                code=node.title,
+                ordinal=index + 1,
+                ordinal_label=str(index + 1),
+                title=node.title,
+                offset=offset,
+                page=node.page,
+                anchor=None,
+            )
+            for index, (node, offset) in enumerate(_locate_nodes(nodes, flat))
+            if offset is not None
+        ]
+        if len(candidates) < STRUCTURAL_MIN_SIBLINGS:
+            continue
+        failures = acceptance_failures(
+            candidates, flat, toc_pages, family_type="structural"
+        )
+        if not failures:
+            return ("outline_structural", "medium", STRUCTURAL_FAMILY, candidates)
     return None
+
+
+def _locate_nodes(nodes, flat):
+    """Locate each bookmark title in the body text, in document order."""
+    cursor = 0
+    for node in sorted(nodes, key=lambda item: item.page):
+        offset = flat.locate(node.page, node.title, cursor)
+        if offset is None:
+            offset = flat.page_start_offset(node.page)
+        if offset is None or offset < cursor:
+            yield node, None
+            continue
+        cursor = offset + 1
+        yield node, offset
+
+
+def _structural_titles_ok(titles):
+    """§6.4a 2c plus §6.3a's set-level administrative veto."""
+    if not titles:
+        return False
+    administrative = sum(1 for title in titles if is_administrative(title))
+    if administrative >= STRUCTURAL_ADMIN_VETO * len(titles):
+        return False
+    contentful = sum(
+        1 for title in titles if len(tokenize(title)) >= STRUCTURAL_MIN_CONTENT_TOKENS
+    )
+    if contentful < STRUCTURAL_MIN_TITLED_RATIO * len(titles):
+        return False
+    tokens = [token for title in titles for token in tokenize(title)]
+    if not tokens:
+        return False
+    if len(set(tokens)) / len(tokens) < STRUCTURAL_MIN_TYPE_TOKEN:
+        return False
+    low, high = STRUCTURAL_TITLE_CHARS
+    median_length = statistics.median([len(title) for title in titles])
+    return low <= median_length <= high
 
 
 def detect_toc_pages(containers):
