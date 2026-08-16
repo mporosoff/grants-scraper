@@ -517,11 +517,38 @@ def acceptance_failures(candidates, flat, toc_pages=()):
 
 
 def _span_bounds(ordered, total):
-    bounds = []
+    """Character bounds per candidate, with the final span capped.
+
+    Every span but the last is bounded by the next heading. The last one has no
+    successor, so running it to end-of-document swallows everything that
+    follows the topic list -- and a notice almost always continues with review
+    criteria, submission instructions and appendices. On the DEPSCoR notice
+    that made the final span 111,290 characters against §6.4 rule 3's 40,000
+    ceiling, rejecting a document whose other seven spans were 1,941-6,364.
+    Every notice whose list ends before the document does was unacceptable by
+    construction, which is very nearly all of them.
+
+    The cap comes from the siblings rather than a new constant: the last topic
+    is a peer of the others and should be about as long, so it gets twice the
+    median of its predecessors, clamped to rule 3's ceiling. That is §6.4a's
+    "comparable things" reasoning applied one span earlier.
+    """
+    plain = []
     for position, candidate in enumerate(ordered):
         start = candidate.offset
         end = ordered[position + 1].offset if position + 1 < len(ordered) else total
-        bounds.append((start, min(end, total)))
+        plain.append((start, min(end, total)))
+
+    bounds = []
+    for position, (start, end) in enumerate(plain):
+        if position == len(plain) - 1 and len(plain) > 1:
+            preceding = [stop - begin for begin, stop in plain[:-1]]
+            allowance = max(
+                MIN_SPAN_CHARS,
+                min(MAX_SPAN_CHARS, int(2 * statistics.median(preceding))),
+            )
+            end = min(end, start + allowance)
+        bounds.append((start, end))
     return bounds
 
 
