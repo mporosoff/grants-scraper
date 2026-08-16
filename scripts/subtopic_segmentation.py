@@ -1,0 +1,825 @@
+"""Deterministic segmentation of a funding notice into child topic records.
+
+Four layers, first success wins (§6.2). Every layer proposes candidate
+headings; the seven acceptance rules in §6.4 then decide whether the proposal
+becomes subtopics or nothing at all.
+
+**Failure is closed and total.** A proposal that misses any acceptance rule
+yields zero subtopics and leaves the parent record untouched -- never a partial
+or speculative list. The asymmetry is deliberate (§18.3): a missing subtopic
+costs a user one search that could have gone better, while a wrong subtopic
+puts a plausible-looking card with a page anchor and a deadline in front of a
+principal investigator who may spend weeks writing to a topic that does not
+exist.
+
+Nothing in this module imports ``extract_document_evidence``. That module will
+import *this* one at a flag-guarded call site in package C, and the dependency
+must run in exactly one direction.
+
+``pdfplumber`` is imported lazily inside Layer C so that importing this module
+-- or running Layers A, B and D -- never pays for it.
+
+See docs/TOPIC_LAYER_PLAN.md §6.1-§6.6, and docs/PDF_API_NOTES.md for the
+measured library behaviour this is written against.
+"""
+
+from __future__ import annotations
+
+from collections import Counter
+from dataclasses import dataclass, field
+from difflib import SequenceMatcher
+import hashlib
+import io
+import re
+import statistics
+from time import monotonic
+
+from pypdf import PdfReader
+from pypdf.generic import Destination
+
+from scripts import program_areas
+from scripts.build_catalog import tokenize
+from scripts.subtopic_patterns import best_family
+
+
+# --- Budgets and caps (§6.1, §6.4, §5.1) ------------------------------------
+
+# Layer C stops scanning here. An enumerated topic list that begins after page
+# 120 of a notice is not a real pattern.
+SUBTOPIC_CHAR_SCAN_PAGES = 120
+# Per document. Bounds one pathological PDF.
+SUBTOPIC_TIME_BUDGET_SECONDS = 20
+# Per run, across every document. This is the one that actually protects the
+# job: 45 documents x 20s of per-document budget is 15 minutes on its own.
+SUBTOPIC_RUN_BUDGET_SECONDS = 600
+
+MIN_CANDIDATES = 3
+MAX_CANDIDATES = 60
+MIN_SPAN_CHARS = 200
+MAX_SPAN_CHARS = 40_000
+MAX_ORDINAL_STEP = 2          # a step of 2 is "one gap"; 3+ is a real break
+MIN_TITLED_RATIO = 0.6
+MAX_TITLE_CHARS = 200
+MAX_SUMMARY_CHARS = 600
+MAX_TERMS = 400
+MAX_PROGRAM_AREA_LABELS = 14
+
+# Layer C candidate test. Measured (docs/PDF_API_NOTES.md §3): the size branch
+# admits 0.0-0.2% of lines on the DoD BAAs this layer exists for, and weight
+# carries the signal entirely. The term is kept because it costs nothing and
+# earns its place on notices that use display type -- it is not load-bearing.
+HEADING_SIZE_RATIO = 1.15
+MAX_HEADING_CHARS = 200
+BOLD_RE = re.compile(r"bold|black|heavy|semibold|demi", re.IGNORECASE)
+
+DOT_LEADER = re.compile(r"^(?P<title>.+?)\.{3,}\s*(?P<page>\d+)\s*$")
+TOC_MIN_LEADER_LINES = 5
+
+SENTENCE_END = re.compile(r"(?<=[.!?])\s+")
+ISO_DATE = re.compile(r"\b(\d{4})-(\d{2})-(\d{2})\b")
+MONTH_NAMES = (
+    "january february march april may june july august september october "
+    "november december"
+).split()
+TEXT_DATE = re.compile(
+    r"\b(" + "|".join(MONTH_NAMES) + r")\.?\s+(\d{1,2})(?:st|nd|rd|th)?,?\s+(\d{4})\b",
+    re.IGNORECASE,
+)
+
+
+def extractor_version() -> str:
+    """Toolchain identity, so a phantom-amendment flood names its own cause."""
+    from importlib.metadata import PackageNotFoundError, version
+
+    def resolved(name):
+        try:
+            return version(name)
+        except PackageNotFoundError:
+            return "unknown"
+
+    return f"1.0.0+pdfplumber{resolved('pdfplumber')}+pypdf{resolved('pypdf')}"
+
+
+# --- Result types -----------------------------------------------------------
+
+
+@dataclass(frozen=True)
+class Subtopic:
+    """One accepted child topic, before it is turned into a catalog record."""
+
+    subtopic_code: str
+    subtopic_code_norm: str
+    subtopic_ordinal: int
+    ordinal_label: str
+    title: str
+    title_fingerprint: str
+    summary: str
+    subtopic_terms: dict
+    page_start: int | None
+    page_end: int | None
+    anchor: str | None
+    char_start: int
+    char_end: int
+    program_area_labels: tuple
+    topic_areas: tuple
+    own_deadline: str | None
+
+
+@dataclass(frozen=True)
+class SegmentationResult:
+    subtopics: tuple = ()
+    method: str | None = None
+    confidence: str | None = None
+    family: str | None = None
+    reason: str | None = None
+    diagnostics: dict = field(default_factory=dict)
+
+    @classmethod
+    def empty(cls, reason, **diagnostics):
+        return cls(reason=reason, diagnostics=diagnostics)
+
+    def __bool__(self):
+        return bool(self.subtopics)
+
+
+class RunBudget:
+    """Wall-clock budget shared across every document in one run (§6.1).
+
+    Exhausting it is a normal, non-fatal outcome: it never raises. Documents
+    not reached record `run_budget` and are picked up on a later night through
+    the ordinary backfill path.
+    """
+
+    def __init__(self, seconds=SUBTOPIC_RUN_BUDGET_SECONDS, clock=monotonic):
+        self._clock = clock
+        self._deadline = clock() + seconds
+
+    def exhausted(self):
+        return self._clock() >= self._deadline
+
+    def remaining(self):
+        return max(0.0, self._deadline - self._clock())
+
+
+# --- Identity helpers (§5.3) ------------------------------------------------
+
+
+def normalize_code(code: str) -> str:
+    """'Topic Area 2' -> 'ta-2'; stable across capitalization and punctuation."""
+    lowered = (code or "").casefold()
+    lowered = re.sub(r"\barea of interest\b", "aoi", lowered)
+    words = re.findall(r"[a-z]+|\d+", lowered)
+    initials = "".join(word[0] for word in words if not word.isdigit())
+    numbers = "-".join(word for word in words if word.isdigit())
+    return f"{initials}-{numbers}".strip("-")
+
+
+def title_fingerprint(title: str) -> str:
+    normalized = re.sub(r"[^a-z0-9 ]+", "", (title or "").casefold())
+    normalized = " ".join(sorted(normalized.split()))   # word-order insensitive
+    return hashlib.blake2s(normalized.encode(), digest_size=4).hexdigest()
+
+
+def match_subtopics(old, new):
+    """Pair old subtopics to new ones so renumbering is not a false amendment.
+
+    Title match wins over code match: an amendment that *inserts* a topic
+    renumbers every topic below it, and keying on ordinal would report one
+    addition plus seventeen spurious amendments.
+    """
+    pairs, remaining_old, remaining_new = [], list(old), list(new)
+
+    for candidate in list(remaining_new):
+        hit = next(
+            (
+                item
+                for item in remaining_old
+                if item.get("title_fingerprint")
+                and item["title_fingerprint"] == candidate.get("title_fingerprint")
+            ),
+            None,
+        )
+        if hit:
+            pairs.append((hit, candidate))
+            remaining_old.remove(hit)
+            remaining_new.remove(candidate)
+
+    for candidate in list(remaining_new):
+        best, score = None, 0.0
+        for item in remaining_old:
+            ratio = SequenceMatcher(
+                None,
+                str(item.get("title") or "").casefold(),
+                str(candidate.get("title") or "").casefold(),
+            ).ratio()
+            if ratio > score:
+                best, score = item, ratio
+        if best and score >= 0.85:
+            pairs.append((best, candidate))
+            remaining_old.remove(best)
+            remaining_new.remove(candidate)
+
+    for candidate in list(remaining_new):
+        hit = next(
+            (
+                item
+                for item in remaining_old
+                if item.get("subtopic_code_norm")
+                and item["subtopic_code_norm"] == candidate.get("subtopic_code_norm")
+            ),
+            None,
+        )
+        if hit:
+            pairs.append((hit, candidate))
+            remaining_old.remove(hit)
+            remaining_new.remove(candidate)
+
+    pairs += [(item, None) for item in remaining_old]      # removed
+    pairs += [(None, item) for item in remaining_new]      # added
+    return pairs
+
+
+# --- Derived fields (§5.2, §6.5) --------------------------------------------
+
+
+def build_term_map(span_text: str, max_terms: int = MAX_TERMS) -> dict:
+    """Stemmed term frequencies in the catalog's own vector space.
+
+    Uses build_catalog.tokenize unmodified, which is required for correctness
+    rather than merely convenient: search_index.postings keys are the output of
+    exactly this function, so a term map built by any other tokenizer produces
+    keys that never collide with the index and the subtopic simply never
+    matches. Do not add a length filter -- 'co2' is three characters and is
+    precisely what this feature exists to retrieve.
+    """
+    return dict(Counter(tokenize(span_text)).most_common(max_terms))
+
+
+def running_lines(containers, threshold: float = 0.4) -> set:
+    """Header/footer lines repeated across pages, with page numbers masked.
+
+    Without this every summary opens with the solicitation number.
+    """
+    counts = Counter()
+    for container in containers:
+        lines = [line.strip() for line in (container.get("text") or "").splitlines()]
+        lines = [line for line in lines if line]
+        # §6.5's sketch counted `lines[:3] + lines[-3:]` directly, which counts
+        # every line TWICE on any page holding three or fewer lines -- head and
+        # tail are then the same list. At a 0.4 threshold that marks ordinary
+        # body text as a running header and strips it, leaving empty summaries.
+        # Deduplicate per container: a line is a header once per page, not
+        # twice for being near both ends of a short one.
+        for line in dict.fromkeys(lines[:3] + lines[-3:]):
+            counts[re.sub(r"\d+", "#", line)] += 1
+    cutoff = threshold * max(1, len(containers))
+    return {line for line, count in counts.items() if count >= cutoff}
+
+
+def strip_running_lines(text: str, running: set) -> str:
+    if not running:
+        return text
+    kept = [
+        line
+        for line in (text or "").splitlines()
+        if re.sub(r"\d+", "#", line.strip()) not in running
+    ]
+    return "\n".join(kept)
+
+
+def summarize(text: str, limit: int = MAX_SUMMARY_CHARS) -> str:
+    """Leading sentences, truncated at the last sentence boundary before limit."""
+    collapsed = re.sub(r"\s+", " ", text or "").strip()
+    if len(collapsed) <= limit:
+        return collapsed
+    window = collapsed[:limit]
+    boundaries = list(SENTENCE_END.finditer(window))
+    if boundaries:
+        return window[: boundaries[-1].start()].strip()
+    return window.rsplit(" ", 1)[0].strip()
+
+
+def _dates_in(text: str) -> set:
+    found = set()
+    for year, month, day in ISO_DATE.findall(text or ""):
+        found.add(f"{year}-{month}-{day}")
+    for name, day, year in TEXT_DATE.findall(text or ""):
+        month = MONTH_NAMES.index(name.casefold()) + 1
+        found.add(f"{year}-{month:02d}-{int(day):02d}")
+    return found
+
+
+def own_deadline_for(span_text: str, parent_deadline: str | None) -> str | None:
+    """Advisory per-span deadline, or None (§5.5, §6.5).
+
+    Set only when exactly one unambiguous date occurs in the span and it does
+    not contradict the parent's structured deadline. Two dates is ambiguous;
+    zero is nothing; one that disagrees with the parent is a conflict this
+    module refuses to adjudicate.
+    """
+    dates = _dates_in(span_text)
+    if len(dates) != 1:
+        return None
+    only = next(iter(dates))
+    if parent_deadline and only != str(parent_deadline)[:10]:
+        return None
+    return only
+
+
+def program_area_fields(span_text: str):
+    """(labels, topic_areas) from the two real controlled vocabularies (§6.5).
+
+    A span is a far better input to this vocabulary than a whole notice:
+    extract_program_areas currently attributes 'catalysis' to an entire
+    200-page BAA because the word appears once on page 147. Run against a
+    4-page span, the same vocabulary says which topic area is the catalysis one.
+    """
+    labels = [
+        label
+        for label, _topics, pattern in program_areas.ENTRIES
+        if pattern.search(span_text or "")
+    ][:MAX_PROGRAM_AREA_LABELS]
+    return tuple(labels), tuple(program_areas.topics_for(labels))
+
+
+# --- Document text assembly -------------------------------------------------
+
+
+@dataclass(frozen=True)
+class _Flat:
+    """Container text concatenated once, with an offset index back to pages."""
+
+    text: str
+    spans: tuple          # (page, anchor, start, end) per container
+
+    def locate(self, page, needle, search_from=0):
+        """Offset of `needle`, preferring its own page, else anywhere after."""
+        cleaned = re.sub(r"\s+", " ", needle or "").strip()
+        if not cleaned:
+            return None
+        for lower, upper in self._windows(page, search_from):
+            found = self._find(cleaned, lower, upper)
+            if found is not None:
+                return found
+        return None
+
+    def _windows(self, page, search_from):
+        if page is not None:
+            for container_page, _anchor, start, end in self.spans:
+                if container_page == page:
+                    yield (max(start, 0), end)
+        yield (search_from, len(self.text))
+
+    def _find(self, cleaned, lower, upper):
+        window = self.text[lower:upper]
+        direct = window.find(cleaned)
+        if direct >= 0:
+            return lower + direct
+        # Whitespace in extracted PDF text is unreliable; retry loosely.
+        loose = re.compile(
+            r"\s+".join(re.escape(part) for part in cleaned.split()),
+            re.IGNORECASE,
+        )
+        match = loose.search(window)
+        return lower + match.start() if match else None
+
+    def page_at(self, offset):
+        return self._container_at(offset, 0)
+
+    def anchor_at(self, offset):
+        return self._container_at(offset, 1)
+
+    def _container_at(self, offset, position):
+        """The container covering `offset`, or the last one starting before it.
+
+        The newline joining two containers sits in no container's range, so an
+        exact-containment test alone would fall through for the very offsets
+        span boundaries land on -- and returning the document's LAST page for a
+        boundary between pages 2 and 3 silently inflates every page_end.
+        """
+        found = None
+        for entry in self.spans:
+            start, end = entry[2], entry[3]
+            if start <= offset < end:
+                return entry[position]
+            if start <= offset:
+                found = entry[position]
+        return found
+
+    def page_start_offset(self, page):
+        for container_page, _anchor, start, _end in self.spans:
+            if container_page == page:
+                return start
+        return None
+
+
+def _flatten(containers) -> _Flat:
+    parts, spans, cursor = [], [], 0
+    for container in containers:
+        text = container.get("text") or ""
+        parts.append(text)
+        spans.append(
+            (container.get("page"), container.get("anchor"), cursor, cursor + len(text))
+        )
+        cursor += len(text) + 1        # +1 for the joining newline
+    return _Flat("\n".join(parts), tuple(spans))
+
+
+# --- Acceptance (§6.4) ------------------------------------------------------
+
+
+@dataclass(frozen=True)
+class _Candidate:
+    code: str
+    ordinal: int
+    ordinal_label: str
+    title: str
+    offset: int
+    page: int | None
+    anchor: str | None
+
+
+def acceptance_failures(candidates, flat, toc_pages=()):
+    """Every §6.4 rule this candidate set breaks. Empty tuple means accept.
+
+    All seven must hold. Returning the full list rather than the first failure
+    is deliberate: the package D histogram is only readable if a rejection
+    names every reason it happened.
+    """
+    failures = []
+    ordered = sorted(candidates, key=lambda item: item.offset)
+
+    # 1. At least three candidates from a single family.
+    if len(ordered) < MIN_CANDIDATES:
+        failures.append("min_candidates")
+
+    # 5. At most sixty, which guards against reference lists and form indexes.
+    if len(ordered) > MAX_CANDIDATES:
+        failures.append("too_many_candidates")
+
+    if not ordered:
+        return tuple(failures)
+
+    # 2. Ordinals monotonically increasing, allowing at most one gap per step.
+    ordinals = [item.ordinal for item in ordered]
+    steps = [later - earlier for earlier, later in zip(ordinals, ordinals[1:])]
+    if any(step < 1 or step > MAX_ORDINAL_STEP for step in steps):
+        failures.append("ordinal_sequence")
+
+    # 3 and 4. Span lengths, and no overlap.
+    bounds = _span_bounds(ordered, len(flat.text))
+    if any(
+        not MIN_SPAN_CHARS <= (end - start) <= MAX_SPAN_CHARS
+        for start, end in bounds
+    ):
+        failures.append("span_length")
+    if any(
+        previous_end > next_start
+        for (_s, previous_end), (next_start, _e) in zip(bounds, bounds[1:])
+    ):
+        failures.append("span_overlap")
+
+    # 4 (page half). Page ranges contiguous: the next span may start on the
+    # page the previous ended, or the one after it, but not further on.
+    pages = [item.page for item in ordered]
+    if all(page is not None for page in pages):
+        page_ends = [flat.page_at(end - 1) for _start, end in bounds]
+        for previous_end, next_start in zip(page_ends, pages[1:]):
+            if previous_end is not None and next_start - previous_end > 1:
+                failures.append("page_gap")
+                break
+
+    # 6. Candidates must not be confined to the table of contents.
+    if toc_pages and all(
+        item.page in toc_pages for item in ordered if item.page is not None
+    ):
+        failures.append("toc_confined")
+
+    # 7. At least 60% carry a non-empty title after the code.
+    titled = sum(1 for item in ordered if item.title.strip())
+    if titled < MIN_TITLED_RATIO * len(ordered):
+        failures.append("missing_titles")
+
+    return tuple(dict.fromkeys(failures))
+
+
+def _span_bounds(ordered, total):
+    bounds = []
+    for position, candidate in enumerate(ordered):
+        start = candidate.offset
+        end = ordered[position + 1].offset if position + 1 < len(ordered) else total
+        bounds.append((start, min(end, total)))
+    return bounds
+
+
+# --- Span construction ------------------------------------------------------
+
+
+def build_subtopics(candidates, flat, containers, parent_deadline=None):
+    ordered = sorted(candidates, key=lambda item: item.offset)
+    bounds = _span_bounds(ordered, len(flat.text))
+    running = running_lines(containers)
+    built = []
+    for candidate, (start, end) in zip(ordered, bounds):
+        raw = flat.text[start:end]
+        cleaned = strip_running_lines(raw, running)
+        # Drop the heading line itself from the summary, keeping it in the code.
+        body = cleaned.split("\n", 1)[1] if "\n" in cleaned else cleaned
+        labels, topics = program_area_fields(cleaned)
+        built.append(
+            Subtopic(
+                subtopic_code=candidate.code,
+                subtopic_code_norm=normalize_code(candidate.code),
+                subtopic_ordinal=candidate.ordinal,
+                ordinal_label=candidate.ordinal_label,
+                title=candidate.title[:MAX_TITLE_CHARS],
+                title_fingerprint=title_fingerprint(candidate.title),
+                summary=summarize(body),
+                subtopic_terms=build_term_map(cleaned),
+                page_start=candidate.page,
+                page_end=flat.page_at(end - 1),
+                anchor=candidate.anchor,
+                char_start=start,
+                char_end=end,
+                program_area_labels=labels,
+                topic_areas=topics,
+                own_deadline=own_deadline_for(cleaned, parent_deadline),
+            )
+        )
+    return tuple(built)
+
+
+def _candidates_from(hits, flat, pages, anchors):
+    """Turn pattern hits into positioned candidates, dropping unlocatable ones."""
+    candidates, cursor = [], 0
+    for hit in hits:
+        page = pages[hit.index] if hit.index < len(pages) else None
+        offset = flat.locate(page, hit.text, cursor)
+        if offset is None and page is not None:
+            offset = flat.page_start_offset(page)
+        if offset is None or offset < cursor:
+            continue
+        cursor = offset + 1
+        candidates.append(
+            _Candidate(
+                code=hit.code,
+                ordinal=hit.ordinal,
+                ordinal_label=hit.ordinal_label,
+                title=hit.title,
+                offset=offset,
+                page=flat.page_at(offset) if page is None else page,
+                anchor=anchors[hit.index] if hit.index < len(anchors) else None,
+            )
+        )
+    return candidates
+
+
+# --- Layers (§6.2) ----------------------------------------------------------
+
+
+def flatten_outline(items, reader, level=0, out=None):
+    """pypdf's reader.outline is a nested list: a Destination, or a list of
+    children belonging to the Destination that preceded it.
+
+    get_destination_page_number returns None when a page is not found -- it
+    does NOT raise, whatever §6.2 used to say. See docs/PDF_API_NOTES.md §2.
+    """
+    out = [] if out is None else out
+    for item in items:
+        if isinstance(item, list):
+            flatten_outline(item, reader, level + 1, out)
+        elif isinstance(item, Destination):
+            try:
+                page_index = reader.get_destination_page_number(item)
+            except Exception:            # noqa: BLE001 - malformed destination
+                continue
+            if page_index is None:       # not found; silently skipped by design
+                continue
+            out.append((level, str(item.title or "").strip(), page_index + 1))
+    return out
+
+
+def _layer_outline(content, containers, flat, deadline, toc_pages):
+    try:
+        reader = PdfReader(io.BytesIO(content), strict=False)
+        entries = flatten_outline(reader.outline, reader)
+    except Exception:                    # noqa: BLE001 - no outline, or broken
+        return None
+    if not entries:
+        return None
+    for level in sorted({level for level, _title, _page in entries}):
+        if monotonic() > deadline:
+            return None
+        siblings = [(t, p) for lvl, t, p in entries if lvl == level]
+        family, hits = best_family(title for title, _page in siblings)
+        if not family:
+            continue
+        pages = [page for _title, page in siblings]
+        candidates = _candidates_from(hits, flat, pages, [None] * len(pages))
+        failures = acceptance_failures(candidates, flat, toc_pages)
+        if not failures:
+            return ("outline", "high", family, candidates)
+    return None
+
+
+def detect_toc_pages(containers):
+    """Pages whose dot-leader density makes them a table of contents."""
+    horizon = max(3, int(0.15 * len(containers)))
+    pages = set()
+    for container in containers[:horizon]:
+        leaders = sum(
+            1
+            for line in (container.get("text") or "").splitlines()
+            if DOT_LEADER.match(line.strip())
+        )
+        if leaders >= TOC_MIN_LEADER_LINES and container.get("page") is not None:
+            pages.add(container["page"])
+    return pages
+
+
+def _layer_toc(content, containers, flat, deadline, toc_pages):
+    if not toc_pages:
+        return None
+    titles = []
+    for container in containers:
+        if container.get("page") not in toc_pages:
+            continue
+        for line in (container.get("text") or "").splitlines():
+            found = DOT_LEADER.match(line.strip())
+            if found:
+                titles.append(found.group("title").strip())
+    family, hits = best_family(titles)
+    if not family:
+        return None
+    # The TOC's own page numbers are never trusted as boundaries; each title is
+    # located verbatim in the body instead, outside the TOC page range.
+    body_start = max(
+        (flat.page_start_offset(page) or 0) for page in toc_pages
+    )
+    candidates = _candidates_from(
+        hits, flat, [None] * len(titles), [None] * len(titles)
+    )
+    candidates = [item for item in candidates if item.offset > body_start]
+    failures = acceptance_failures(candidates, flat, toc_pages)
+    if failures:
+        return None
+    return ("toc", "high", family, candidates)
+
+
+def page_lines(page, round_to=1):
+    """Group page.chars into lines by rounded vertical position."""
+    rows = {}
+    for char in page.chars:
+        rows.setdefault(round(char["top"] / round_to) * round_to, []).append(char)
+    lines = []
+    for top in sorted(rows):
+        chars = sorted(rows[top], key=lambda item: item["x0"])
+        text = "".join(item["text"] for item in chars).strip()
+        if not text:
+            continue
+        lines.append(
+            {
+                "text": text,
+                "size": statistics.median([item["size"] for item in chars]),
+                "bold": sum(
+                    bool(BOLD_RE.search(item.get("fontname") or "")) for item in chars
+                )
+                > len(chars) / 2,
+            }
+        )
+    return lines
+
+
+def _layer_headings(content, containers, flat, deadline, toc_pages):
+    import pdfplumber                    # lazy: Layers A, B and D never pay for it
+
+    all_lines, body_sizes = [], []
+    try:
+        with pdfplumber.open(io.BytesIO(content)) as pdf:
+            for index, page in enumerate(pdf.pages[:SUBTOPIC_CHAR_SCAN_PAGES], 1):
+                if monotonic() > deadline:
+                    return None          # budget spent; caller records the reason
+                for line in page_lines(page):
+                    body_sizes.append(line["size"])
+                    all_lines.append((index, line))
+                page.flush_cache()        # not optional on a 120-page document
+    except Exception:                     # noqa: BLE001 - falls through to Layer D
+        return None
+    if not body_sizes:
+        return None
+
+    median = statistics.median(body_sizes)
+    candidates_lines = [
+        (page, line)
+        for page, line in all_lines
+        if (line["size"] >= HEADING_SIZE_RATIO * median or line["bold"])
+        and len(line["text"]) <= MAX_HEADING_CHARS
+    ]
+    family, hits = best_family(line["text"] for _page, line in candidates_lines)
+    if not family:
+        return None
+    pages = [page for page, _line in candidates_lines]
+    candidates = _candidates_from(hits, flat, pages, [None] * len(pages))
+    failures = acceptance_failures(candidates, flat, toc_pages)
+    if failures:
+        return None
+    return ("heading_font", "medium", family, candidates)
+
+
+def _layer_numbered(content, containers, flat, deadline, toc_pages):
+    """Plain regex over container text, with no typographic signal at all.
+
+    Low confidence never publishes (§13). It is recorded for diagnostics and
+    routed to the review queue, and the §7.1 merge filters it out.
+    """
+    lines, pages, anchors = [], [], []
+    for container in containers:
+        for line in (container.get("text") or "").splitlines():
+            stripped = line.strip()
+            if not stripped:
+                continue
+            lines.append(stripped)
+            pages.append(container.get("page"))
+            anchors.append(container.get("anchor"))
+    family, hits = best_family(lines)
+    if not family:
+        return None
+    candidates = _candidates_from(hits, flat, pages, anchors)
+    failures = acceptance_failures(candidates, flat, toc_pages)
+    if failures:
+        return None
+    return ("numbered", "low", family, candidates)
+
+
+LAYERS = (_layer_outline, _layer_toc, _layer_headings, _layer_numbered)
+HTML_LAYERS = (_layer_numbered,)
+
+
+# --- Entry point ------------------------------------------------------------
+
+
+def document_is_html(document) -> bool:
+    kind = str((document or {}).get("content_type") or "").casefold()
+    return "html" in kind
+
+
+def segment_document(
+    record,
+    content,
+    containers,
+    document,
+    *,
+    parent_deadline=None,
+    run_budget=None,
+    clock=monotonic,
+):
+    """Segment one notice. Never raises; zero subtopics is a normal outcome.
+
+    Returns a SegmentationResult carrying either the accepted subtopics or the
+    reason there are none.
+    """
+    if run_budget is not None and run_budget.exhausted():
+        return SegmentationResult.empty("run_budget")
+
+    containers = list(containers or [])
+    if not any((container.get("text") or "").strip() for container in containers):
+        # Scanned or image-only. No OCR in v1.
+        return SegmentationResult.empty("no_extractable_text")
+
+    flat = _flatten(containers)
+    toc_pages = detect_toc_pages(containers)
+    deadline = clock() + SUBTOPIC_TIME_BUDGET_SECONDS
+    is_html = document_is_html(document)
+    layers = HTML_LAYERS if is_html else LAYERS
+
+    attempted = []
+    for layer in layers:
+        if clock() > deadline:
+            return SegmentationResult.empty(
+                "time_budget", layers_attempted=tuple(attempted)
+            )
+        attempted.append(layer.__name__)
+        try:
+            outcome = layer(content, containers, flat, deadline, toc_pages)
+        except Exception:                # noqa: BLE001 - never break the parent
+            continue
+        if not outcome:
+            continue
+        method, confidence, family, candidates = outcome
+        subtopics = build_subtopics(candidates, flat, containers, parent_deadline)
+        return SegmentationResult(
+            subtopics=subtopics,
+            method=method,
+            confidence=confidence,
+            family=family,
+            diagnostics={
+                "layers_attempted": tuple(attempted),
+                "candidate_count": len(candidates),
+                "toc_pages": tuple(sorted(toc_pages)),
+                "extractor_version": extractor_version(),
+            },
+        )
+
+    return SegmentationResult.empty(
+        "no_layer_accepted", layers_attempted=tuple(attempted)
+    )

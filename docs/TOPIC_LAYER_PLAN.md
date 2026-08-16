@@ -771,11 +771,13 @@ def running_lines(containers, threshold=0.4):
     c = Counter()
     for container in containers:
         lines = [l.strip() for l in container["text"].splitlines() if l.strip()]
-        for l in lines[:3] + lines[-3:]:
+        for l in dict.fromkeys(lines[:3] + lines[-3:]):   # <- dedupe, see below
             c[re.sub(r'\d+', '#', l)] += 1          # page numbers -> '#'
     cutoff = threshold * len(containers)
     return {l for l, n in c.items() if n >= cutoff}
 ```
+
+**Corrected (B2, 2026-08-16).** The sketch iterated `lines[:3] + lines[-3:]` directly, which counts **every line twice** on any page holding three or fewer lines, because head and tail are then the same list. At a 0.4 threshold that marks ordinary body prose as a running header and strips it — producing empty summaries and empty term maps on exactly the short spans a segmented topic tends to be. Found by the first end-to-end run; the fix is the `dict.fromkeys` above, which counts a line once per page rather than once per end it is near.
 
 - **Title:** text after the code on the heading line, whitespace-normalized, ≤200 chars.
 - **Summary:** leading sentences of the cleaned span, truncated at the last sentence boundary before 600 characters.
