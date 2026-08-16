@@ -37,3 +37,5 @@ jobs:
       - run: node --check assets/ai-provider.js
       - run: node --check assets/chat-ui.js
       - run: node --test tests/browser/*.test.mjs
+      - name: Verify retrieval has not regressed on the frozen query set
+        run: node tools/query_baseline.mjs --check

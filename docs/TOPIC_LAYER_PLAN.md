@@ -1399,6 +1399,20 @@ Three properties that make this work where the labelled baseline could not:
 
 **What it does not do.** It cannot tell you a change was an *improvement* — only that it was a change. Judging improvement still needs labels, and that remains true and unsolved. When Phase 3 shows the flag-on build moving top-10 results, a human has to look at the diff and decide. The gate's job is to guarantee that nobody has to *notice* the movement first.
 
+**⚠ On the frozen fixture, the top-10 gate is weaker than this section implies. Measured, not argued (A6, 2026-08-16).** The gate was built and then deliberately perturbed twice:
+
+| Perturbation | Set delta | Displacement | Top-10 churn | Result |
+|---|---|---|---|---|
+| Swap ranks 1 and 2 of `q002` | 0 | 2 | **0** | Reported, **exits 0** |
+| Drop a result from `q002`, add a phantom to `q030` | 1 each | 0 | **2** | **Exits 1**, naming both ids |
+
+The reason is arithmetic, not a bug: the frozen catalog holds **5 records**, so no matched record can ever fall past rank 10. "IDs entering or leaving the top 10" therefore collapses into "did the matched *set* change" — admission changes are gated, **pure reordering is not.** Churn as defined in the table above is the right gate for the ~1,475-record live catalog it was designed against; on a 5-record fixture it is a strictly weaker instrument than the surrounding prose suggests.
+
+Two consequences, both for later packages rather than for A6:
+
+- **Package E must not read a green flag-off gate as "ranking is unchanged."** E is where cross-corpus score normalization lands, and reordering is exactly the failure mode it risks. Read the reported **displacement** numbers there, and consider gating on non-zero displacement for the duration of E — the harness already computes and prints it, so this is a threshold decision, not new code.
+- The alternative — pointing the query set at a larger catalog — reintroduces the problem §8.5 exists to avoid, because the live catalog changes nightly and its baseline would drift every run. The frozen fixture is still the right catalog; it is the *gating metric* that needs a second look when scores start moving.
+
 **The labelled path is already tracked, and it is not this project's to build.** Two open issues cover exactly the ground `evaluate_phase2.py` needs and does not have:
 
 | Issue | Title | Relationship |
@@ -1859,7 +1873,7 @@ One **package** per session (§0.4 rule 5). One **commit** per item, with the su
 - [ ] E1. Prototype cross-corpus scoring on the frozen catalog — this resolves **§13.1**
 - [ ] E2. Implement the winner (sidecar or in-catalog children)
 - [ ] E3. **Minimal currentness only:** a subtopic is current **iff its parent is current**. Nothing else
-- [ ] **GATE:** query baseline run · flag-off top-10 churn **zero** · flag-on movement reviewed case by case
+- [ ] **GATE:** query baseline run · flag-off top-10 churn **zero** · flag-on movement reviewed case by case. **Read the displacement numbers too, not just churn** — on the 5-record frozen fixture nothing can fall past rank 10, so churn gates admission changes but not pure reordering, which is precisely what E risks (§8.5)
 
 ### Package F — Make it visible
 

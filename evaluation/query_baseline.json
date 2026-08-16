@@ -1,0 +1,414 @@
+{
+  "schema_version": 1,
+  "catalog": "tests/fixtures/frozen/opportunities.js",
+  "query_count": 37,
+  "top_n": 50,
+  "results": {
+    "q001": {
+      "kind": "keyword",
+      "query": "catalysis",
+      "results": [
+        {
+          "rank": 1,
+          "id": "sample:DEMO-001",
+          "score": 42.314447
+        },
+        {
+          "rank": 2,
+          "id": "1001",
+          "score": 10.343854
+        }
+      ]
+    },
+    "q002": {
+      "kind": "keyword",
+      "query": "carbon capture",
+      "results": [
+        {
+          "rank": 1,
+          "id": "sample:DEMO-001",
+          "score": 49.540368
+        },
+        {
+          "rank": 2,
+          "id": "1001",
+          "score": 49.142371
+        }
+      ]
+    },
+    "q003": {
+      "kind": "keyword",
+      "query": "membrane",
+      "results": [
+        {
+          "rank": 1,
+          "id": "1003",
+          "score": 37.872717
+        }
+      ]
+    },
+    "q004": {
+      "kind": "keyword",
+      "query": "separations",
+      "results": [
+        {
+          "rank": 1,
+          "id": "1003",
+          "score": 37.915829
+        }
+      ]
+    },
+    "q005": {
+      "kind": "keyword",
+      "query": "energy",
+      "results": [
+        {
+          "rank": 1,
+          "id": "1001",
+          "score": 9.251075
+        },
+        {
+          "rank": 2,
+          "id": "sample:DEMO-001",
+          "score": 8.648057
+        }
+      ]
+    },
+    "q006": {
+      "kind": "keyword",
+      "query": "materials",
+      "results": [
+        {
+          "rank": 1,
+          "id": "1001",
+          "score": 37.114738
+        }
+      ]
+    },
+    "q007": {
+      "kind": "keyword",
+      "query": "public health",
+      "results": [
+        {
+          "rank": 1,
+          "id": "sample:DEMO-002",
+          "score": 39.760808
+        }
+      ]
+    },
+    "q008": {
+      "kind": "keyword",
+      "query": "workforce",
+      "results": [
+        {
+          "rank": 1,
+          "id": "1005",
+          "score": 6.473656
+        }
+      ]
+    },
+    "q010": {
+      "kind": "keyword",
+      "query": "catalytic conversion of carbon dioxide",
+      "results": [
+        {
+          "rank": 1,
+          "id": "1001",
+          "score": 20.088112
+        }
+      ]
+    },
+    "q011": {
+      "kind": "keyword",
+      "query": "electrocatalysis CO2 reduction",
+      "results": [
+        {
+          "rank": 1,
+          "id": "sample:DEMO-001",
+          "score": 10.286233
+        }
+      ]
+    },
+    "q012": {
+      "kind": "keyword",
+      "query": "membrane separations and water purification",
+      "results": [
+        {
+          "rank": 1,
+          "id": "1003",
+          "score": 229.386194
+        }
+      ]
+    },
+    "q013": {
+      "kind": "keyword",
+      "query": "porous materials for carbon capture",
+      "results": [
+        {
+          "rank": 1,
+          "id": "1001",
+          "score": 27.638243
+        }
+      ]
+    },
+    "q014": {
+      "kind": "keyword",
+      "query": "rural community health outcomes",
+      "results": [
+        {
+          "rank": 1,
+          "id": "sample:DEMO-002",
+          "score": 21.380612
+        }
+      ]
+    },
+    "q015": {
+      "kind": "keyword",
+      "query": "undergraduate research program",
+      "results": [
+        {
+          "rank": 1,
+          "id": "1005",
+          "score": 5.153038
+        }
+      ]
+    },
+    "q020": {
+      "kind": "keyword",
+      "query": "catalyst",
+      "results": [
+        {
+          "rank": 1,
+          "id": "sample:DEMO-001",
+          "score": 14.403732
+        },
+        {
+          "rank": 2,
+          "id": "1001",
+          "score": 12.705217
+        }
+      ]
+    },
+    "q021": {
+      "kind": "keyword",
+      "query": "catalytic",
+      "results": [
+        {
+          "rank": 1,
+          "id": "sample:DEMO-001",
+          "score": 11.295491
+        },
+        {
+          "rank": 2,
+          "id": "1001",
+          "score": 10.060067
+        }
+      ]
+    },
+    "q022": {
+      "kind": "keyword",
+      "query": "separation",
+      "results": [
+        {
+          "rank": 1,
+          "id": "1003",
+          "score": 37.915829
+        }
+      ]
+    },
+    "q030": {
+      "kind": "acronym",
+      "query": "MOF",
+      "results": []
+    },
+    "q031": {
+      "kind": "acronym",
+      "query": "DOE",
+      "results": [
+        {
+          "rank": 1,
+          "id": "1001",
+          "score": 4.14467
+        }
+      ]
+    },
+    "q032": {
+      "kind": "acronym",
+      "query": "NSF",
+      "results": [
+        {
+          "rank": 1,
+          "id": "1003",
+          "score": 4.804529
+        }
+      ]
+    },
+    "q033": {
+      "kind": "acronym",
+      "query": "CO2",
+      "results": [
+        {
+          "rank": 1,
+          "id": "sample:DEMO-001",
+          "score": 3.793574
+        }
+      ]
+    },
+    "q034": {
+      "kind": "acronym",
+      "query": "AI",
+      "results": []
+    },
+    "q040": {
+      "kind": "number",
+      "query": "DOE-OPEN-1",
+      "results": [
+        {
+          "rank": 1,
+          "id": "1001",
+          "score": 134.23359
+        }
+      ]
+    },
+    "q041": {
+      "kind": "number",
+      "query": "NSF-FORECAST-1",
+      "results": [
+        {
+          "rank": 1,
+          "id": "1003",
+          "score": 134.672957
+        }
+      ]
+    },
+    "q042": {
+      "kind": "number",
+      "query": "OPEN-UNDATED-1",
+      "results": [
+        {
+          "rank": 1,
+          "id": "1005",
+          "score": 134.805887
+        }
+      ]
+    },
+    "q043": {
+      "kind": "number",
+      "query": "DE-FOA-0003600",
+      "results": []
+    },
+    "q050": {
+      "kind": "empty_expected",
+      "query": "zzzzqqqxyzzy",
+      "results": []
+    },
+    "q051": {
+      "kind": "empty_expected",
+      "query": "veterinary dentistry equipment",
+      "results": []
+    },
+    "q052": {
+      "kind": "empty_expected",
+      "query": "",
+      "results": []
+    },
+    "q060": {
+      "kind": "keyword",
+      "query": "letter of intent",
+      "results": [
+        {
+          "rank": 1,
+          "id": "sample:DEMO-001",
+          "score": 6.189282
+        }
+      ]
+    },
+    "q061": {
+      "kind": "keyword",
+      "query": "limited submission",
+      "results": [
+        {
+          "rank": 1,
+          "id": "1003",
+          "score": 7.985706
+        }
+      ]
+    },
+    "q062": {
+      "kind": "keyword",
+      "query": "cost sharing not required",
+      "results": [
+        {
+          "rank": 1,
+          "id": "1001",
+          "score": 117.752964
+        }
+      ]
+    },
+    "q063": {
+      "kind": "keyword",
+      "query": "concept paper deadline",
+      "results": [
+        {
+          "rank": 1,
+          "id": "1001",
+          "score": 113.30677
+        }
+      ]
+    },
+    "q064": {
+      "kind": "keyword",
+      "query": "early-career investigators",
+      "results": [
+        {
+          "rank": 1,
+          "id": "sample:DEMO-001",
+          "score": 7.587149
+        }
+      ]
+    },
+    "q070": {
+      "kind": "profile",
+      "query": "catalysis",
+      "results": [
+        {
+          "rank": 1,
+          "id": "sample:DEMO-001",
+          "score": 49.906941
+        },
+        {
+          "rank": 2,
+          "id": "1001",
+          "score": 14.8927
+        }
+      ]
+    },
+    "q071": {
+      "kind": "profile",
+      "query": "carbon capture",
+      "results": [
+        {
+          "rank": 1,
+          "id": "sample:DEMO-001",
+          "score": 74.394932
+        },
+        {
+          "rank": 2,
+          "id": "1001",
+          "score": 61.806285
+        }
+      ]
+    },
+    "q072": {
+      "kind": "profile",
+      "query": "membrane",
+      "results": [
+        {
+          "rank": 1,
+          "id": "1003",
+          "score": 100.383468
+        }
+      ]
+    }
+  }
+}
