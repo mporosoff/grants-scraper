@@ -2060,14 +2060,27 @@ One **package** per session (§0.4 rule 5). One **commit** per item, with the su
 
 **Read `docs/CORPUS_CENSUS.md` before starting.** It is the measured picture this package tunes against: 12 of 20 documents enumerate, a family identifies the right list in 1 of those 12, and the segmenter produces subtopics for 0.
 
-- [ ] **D0a. Fix Layer B's body cutoff** — uses the TOC page's *start* offset where it must use its *end*, so TOC candidates survive the filter meant to remove them
-- [ ] **D0b. Fix Layer D's TOC/body co-collection** — exclude `detect_toc_pages()` output from candidate collection in Layers C and D, so ordinals cannot restart mid-set
-- [ ] **GATE:** **D0a and D0b land before any tuning.** Both currently present as pattern failures — `363526` is rejected with `('ordinal_sequence', 'span_length')` on a perfect twelve-topic `dod_topic` match — and tuning against that reading would relax rule 2 or widen a family, which §18.3 names as the most damaging possible change. Confirm `363526` segments after the fixes
-- [ ] D1. Implement `structural_siblings` (§6.3a) and calibrate §6.4a's six thresholds against the census corpus. **Report the false-positive count on the eight non-enumerating documents; any admission is a failure**
-- [ ] D2. Read all 286 bookmarks of `DE-FOA-0003600`; record whether `Catalysis Science` is reachable in the notice (§6.7, §18.2)
-- [ ] D3. Pattern tuning against the 31 BAA records and the DOE FOAs already in the catalog (§6.3). Census-named gaps: `Category N`, `Component N`, `Focus Area N`, bare `N - Title`, sub-lettered `1a`/`1b` in `topic_area`, `roses_element` false-positives on DoD `A.1`/`E.1`
-- [ ] D4. Full **local** backfill, high `--max-documents`, cache committed once (§8.3). The nightly is not used
-- [ ] **GATE:** acceptance rate reported **per agency family**, not aggregate · rejection histogram read, `no_layer_accepted` separated from failures and `run_budget` from `time_budget` · zero low-confidence published · **denominator is documents that actually enumerate, not all documents** — the census measured 12 of 20, and scoring against 20 understates the pattern set by 40%
+- [x] **D0a. Fix Layer B's body cutoff** — *the defect was larger than the census recorded: `_candidates_from` also searched from offset 0, so it found the TOC copy of every title and never reached the body. The floor had to move to the search, not the results. 0 → 8 candidates located on `363526`*
+- [x] **D0c. Cap the final span** — *a THIRD defect, not in the census. The last span ran to end-of-document (111,290 chars on `363526` against a 40,000 ceiling), so any notice whose list ends before the document does was unacceptable by construction — which is nearly all of them*
+- [x] **D0b. Fix Layer C/D TOC co-collection** — *no corpus movement on its own, because Layer B now wins on the one document where it mattered; it removes a failure mode rather than fixing a current one*
+- [x] **GATE:** D0a/D0b landed before tuning · `363526` segments — 8 topics, `toc`, `dod_topic`, high confidence
+- [x] D1. `structural_siblings` (§6.3a) implemented; §6.4a thresholds fitted — **three moved, each with its measurement** (§6.3a, §6.4a). 0 false positives
+- [x] D2. All 286 bookmarks read — **`(q) Catalysis Science` is at level 2, page 46**; depth 3, 9/46/167/64 nodes (§6.7)
+- [x] D3. Census-named families added: `focus_area`, `component`, `technical_category`, and `topic_area` widened to sub-lettered ordinals
+- [ ] ~~D4. Full **local** backfill~~ — **not run. See the stop below**
+- [ ] **GATE — measured, and one clause not met.** Denominator is the **12 enumerating** documents, not 20 (`docs/CORPUS_CENSUS.md`):
+
+| Metric | Result |
+|---|---|
+| Acceptance | **5/12 = 42%** (baseline 0/12) |
+| **Publishable** (`zero low-confidence published`) | **3/12 = 25%** — `356623` and `362859` resolve at Layer D, which is low confidence and never publishes |
+| Wrong-list acceptances | **0** |
+| **False positives on the 8 non-enumerating** | **0/8** |
+| Rejection histogram | all 7 misses `no_layer_accepted`; no `run_budget`, no `time_budget` |
+
+**⚠ Tuning stopped at 42%, below the 50% threshold, deliberately.** Every remaining miss needs a new *mechanism*, not a wider regex: `label_run` for outline-less named portfolios (AFOSR, NRL), occurrence selection for patterns that match in several places (`360339`, `363065` — a front-matter summary list and 36 prose mentions respectively), or a generic numbered-section family for `332894`'s bare `1.)`. §6.3 and §18.3 both name that last one as the most damaging change available. **The 0/8 false-positive count is the number that should not be traded**, and reaching 50% by loosening would trade exactly that.
+
+Per-agency-family acceptance, as the gate requires rather than in aggregate: **DOE 3/5** (`360678`, `361526`, `356623`; missing `363065`, and `362329` is DHA not DOE) · **DoD 2/6** (`363526`, `362859`; missing `332894`, `343653`, `352741`, `362681`) · **HHS/CDC 0/1** · **NASA 0/0** (no ROSES document in the corpus; §18.2).
 
 ### Package E — Storage and scoring
 

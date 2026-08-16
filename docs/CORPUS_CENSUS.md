@@ -301,6 +301,70 @@ Three findings, each of which forced a change to §6.3a:
    and `Catalysis Science` disappears into the BES span — losing precisely the
    record that motivated the whole §6.7 analysis.
 
+## Package D results, measured against this census
+
+Every figure below is a rate against the **12 enumerating documents**, never a
+raw count, and the false-positive count on the **8 non-enumerating** documents
+is reported separately because it matters more: a false positive publishes a
+fabricated subtopic to a principal investigator, a miss publishes nothing.
+
+| Stage | Acceptance | Wrong list | False positives |
+|---|---|---|---|
+| Baseline (start of package D) | **0/12 = 0%** | 0 | 0/8 |
+| + D0a Layer B body cutoff | 0/12 = 0% | 0 | 0/8 |
+| + D0c final-span cap | **1/12 = 8%** | 0 | 0/8 |
+| + D0b Layer C/D TOC exclusion | 1/12 = 8% | 0 | 0/8 |
+| + D1 `structural_siblings` | **3/12 = 25%** | 0 | 0/8 |
+| + D3 census-named families | **5/12 = 42%** | 0 | 0/8 |
+
+**Of the 5 accepted, only 3 would publish.** `356623` and `362859` resolve at
+Layer D, which is low confidence, and low confidence never publishes (§6.2
+Layer D, §13). The figure the package D gate cares about — "zero
+low-confidence records in the published set" — is therefore **3/12 = 25%**.
+
+| Document | Result | Method | Confidence | Publishes |
+|---|---|---|---|---|
+| `363526` AFOSR DEPSCoR | 8 topics | `toc` | high | yes |
+| `360678` DOE Office of Science | **70 subtopics inc. `(q) Catalysis Science` p46** | `outline_structural` | medium | yes |
+| `361526` DOE Genesis Mission | 26 challenge areas | `outline_structural` | medium | yes |
+| `356623` ARPA-E SCALEUP | 7 technical categories | `numbered` | low | **no** |
+| `362859` DARPA MMoMA | 4 focus areas | `numbered` | low | **no** |
+
+### The seven remaining misses, and why none is a tuning problem
+
+| Document | Why it misses | Fixable by tuning? |
+|---|---|---|
+| `362681` AFOSR | 39 named portfolios, **zero bookmarks** | No — needs `label_run` (§6.3a), deferred with its risks stated |
+| `343653` DHAPP | 11 bookmarks, **all at level 0** | No — §6.3a excludes depth 0 by construction |
+| `352741` NRL LRBAA | 3 junk bookmarks; divisions are named in body prose | No — same shape as AFOSR |
+| `332894` Army LQC | 6 thrusts written as bare `1.)` | Only by a generic numbered family — §6.3/§18.3 forbid it |
+| `362329` DHA PRMRP | topic areas are **bulleted**, no ordinal, no outline | No mechanism covers this |
+| `360339` CDC | `Component 1-5` matches, but the located occurrences are a **front-matter summary list**, spans 88-239 chars against a 200 minimum | Needs occurrence selection, not pattern work |
+| `363065` DOE NETL | `Topic Area 1a/1b/1c/2` now matches, but 36 hits are prose mentions and amendment-log entries; ordinals read `1,2,1,1,1,…` | Needs heading-vs-mention discrimination |
+
+Two of these — `360339` and `363065` — are the same underlying problem in
+different clothes: **the pattern matches in several places and nothing chooses
+which occurrence is the heading.** That is the next real mechanism, and it is
+not a regex.
+
+### The stop
+
+**42% acceptance is below the 50% threshold set for this package, so tuning
+stopped here rather than continuing.** Every remaining miss needs either a new
+mechanism (`label_run`, occurrence selection) or a generic numbered-section
+family, and §6.3 and §18.3 both name that last one as the most damaging change
+available to this design — the one that manufactures subtopics titled *Federal
+Agency Name*. Loosening to reach an arbitrary number would trade the metric
+that matters (0 false positives) for the metric that does not.
+
+**The strongest evidence that the discipline is working is the zero.** Across
+five layers of change and four new families, no non-enumerating document ever
+produced a subtopic, and the one wrong-list acceptance that did appear — ARPA-E
+SCALEUP returning `Allowable Costs`, `Foreign Travel` and `Lobbying` from
+`H. Funding Restrictions` — was caught only because the harness checks *which*
+list was found rather than *whether* one was. A binary metric scored that
+fabrication as a success.
+
 ## Method
 
 Documents were fetched from the attachment URLs already in
