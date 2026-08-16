@@ -530,6 +530,40 @@ The primary notice the census judged contains none of this. **`352741` is not a
 pattern failure at all — it is a fetch-scope failure**, and it segments nothing
 today because the file holding its topics is never downloaded.
 
+### Every unsegmented secondary, opened
+
+The three above were chosen by judgment. **All 39 remaining unsegmented
+attachments were then opened and read** — not the 16 flagged ones, which was an
+undercount: 44 of the 62 attachments are non-primary, 5 had been opened, and 39
+had not. Readers: `pypdf` for PDF, `openpyxl` for spreadsheets, and `zipfile`
+plus a tag strip for `.docx`/`.pptx`, which needs no new dependency.
+
+> **No secondary attachment carries a topic list the primary does not.**
+
+Seven files tripped the detector, and **all seven are a different revision of a
+document already segmented**, not a new source:
+
+| File | What it is |
+|---|---|
+| `332894` `LQC BAA Final W911NF21S0009.pdf`, `V8 Amd 1`, `V8 Amd 2` | superseded versions of the same LQC BAA |
+| `363065` `FundOpp_DE-FOA-0003627.pdf`, `Amd_000001`, `Amd_000002` | earlier revisions of the NOFO whose `Amd_000003` is segmented |
+| `363526` `DEPSCoR-RC - Amendment 1.pdf` | a later revision of the segmented notice, same `Topic 1-12` list |
+
+The remaining 32 are proposal templates, cost spreadsheets, privacy and security
+appendices, indicator lists, model agreements, and nine ONR amendments — none
+containing an enumerated topic list.
+
+Two things this establishes for the implementation:
+
+- **Deduplication is not optional.** `363065` alone would otherwise contribute
+  the same `Topic Area` list four times from four revisions, and `363526` twice.
+  Content hashing is what stops a revision history becoming duplicate subtopics.
+- **A degraded attachment must not outrank a good one.** `332894`'s
+  `LQC BAA Final W911NF21S0009.pdf` is 887 KB across 55 pages but yields only
+  113 extractable lines, and `best_family` matched `technical_category` three
+  times inside ordinary prose. Selecting by result quality rather than by
+  attachment order is what keeps that from winning.
+
 ## `DE-FOA-0003612` — where the 99 focus areas actually are
 
 All five attachments, from the live API:
