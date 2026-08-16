@@ -1904,10 +1904,13 @@ One **package** per session (§0.4 rule 5). One **commit** per item, with the su
 
 ### Package B — Segmentation, offline and self-contained
 
-- [ ] B1. `scripts/subtopic_patterns.py` — ten families, `best_family()` (§6.3)
-- [ ] B2. `scripts/subtopic_segmentation.py` — layers A–D, acceptance rules, derived fields, time and page budgets (§6.1, §6.2, §6.4, §6.5)
-- [ ] B3. Synthetic fixtures + `tests/test_subtopic_segmentation.py`
-- [ ] **GATE:** new tests pass · suite green · `verify_no_drift` unchanged (nothing imports these yet, so nothing can regress)
+**Complete 2026-08-16.** One commit per item, suite run between commits, pushed and green on `ubuntu-latest`.
+
+- [x] B0. **Verify the §6.1–§6.2 API sketches against real notices** — added ahead of B1 because §17.2 flagged them as unverified claims and two turned out to be wrong. `docs/PDF_API_NOTES.md`; §6.1–§6.3 corrected. *Resolves the first of §17.2's two outstanding claims*
+- [x] B1. `scripts/subtopic_patterns.py` — ten families, `best_family()` (§6.3) — *specific-family-wins ordering added; without it "Research Thrust 3" is double-counted and trips its own margin test*
+- [x] B2. `scripts/subtopic_segmentation.py` — layers A–D, acceptance rules, derived fields, time and page budgets (§6.1, §6.2, §6.4, §6.5) — *two bugs found by running it, one inherited from §6.5's `running_lines` sketch; both corrected in code and plan*
+- [x] B3. Synthetic fixtures + `tests/test_subtopic_segmentation.py` — *57 tests; Layer C covered end to end through pdfplumber using base-14 fonts, so **no `requirements-dev.txt` was needed**; §9.3's reasoning corrected*
+- [x] **GATE:** new tests pass · suite green (208 → 265) · `verify_no_drift` unchanged at 22 artifacts (nothing imports these yet, so nothing can regress)
 
 ### Package C — Wire the call site, flag off
 
@@ -2044,7 +2047,8 @@ Both are Phase 1 work and both fail loudly rather than silently, which is why th
 | 3 | §8.4 hermetic no-drift gate. | `tools/`, frozen fixtures, baseline, wired into `tests.yml` | **done** |
 | 4 | Repair the gate after its first CI failure. | Line-ending normalization in `fingerprint.py` | **done** |
 | 5 | §18 package A — foundations completion. | Six commits, gates green, §15 updated, branch pushed | **done 2026-08-16** |
-| 6+ | **One §18 work package per session.** Each item inside it is its own commit, with the suite run between commits. | The package, its gate output, an updated §15, and a pushed branch | next: package B |
+| 6 | §18 package B — segmentation, offline and self-contained. Opened with an unplanned B0 verifying §17.2's API claims. | Four commits, gates green, §15 updated, branch pushed | **done 2026-08-16** |
+| 7+ | **One §18 work package per session.** Each item inside it is its own commit, with the suite run between commits. | The package, its gate output, an updated §15, and a pushed branch | next: package C |
 
 Sessions 1 and 2 are not overhead. They are what makes the additive-edit discipline in §8 possible, because you cannot make a surgical edit to a file whose structure you inferred. Session 1 found that the single most consequential fact in this project — which PDF library the repository uses — was wrong in every prior version, and that error alone would have produced an unusable Layer C and an AGPL licensing problem.
 
