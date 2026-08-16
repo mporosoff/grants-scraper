@@ -44,6 +44,7 @@ from scripts import program_areas
 EVIDENCE_SCHEMA_VERSION = 1
 DEFAULT_CATALOG = Path("data/opportunities.js")
 DEFAULT_CACHE = Path("data/document_evidence.json")
+DEFAULT_SUBTOPIC_CACHE = Path("data/subtopic_records.json")
 USER_AGENT = "Funding-Finder-Document-Evidence/1.0"
 MAX_DOWNLOAD_BYTES = 30 * 1024 * 1024
 MAX_PDF_PAGES = 250
@@ -1327,7 +1328,57 @@ def download_document(
     raise RuntimeError("Official document redirected too many times.")
 
 
-def build_document_entry(record, source, response, previous, now):
+def subtopic_fields(record, content, containers, document, fetched_at, enabled):
+    """Segmentation result for one document, or ``{}`` when the flag is off.
+
+    Returns a dict so the caller can splat it into the entry literal. With the
+    flag off nothing is added at all -- not even ``"subtopics": []`` -- because
+    the entry is serialized into data/document_evidence.json and an added empty
+    key on hundreds of entries is not byte-identical (§0.5, §8.3 insertion 2).
+
+    The import is function-local so that with the flag off `subtopic_*` is never
+    imported, `pdfplumber` is never loaded, and a broken new module cannot break
+    the nightly build by import error alone.
+
+    Zero subtopics is a normal outcome and never raises: the except is broad on
+    purpose, because a parsing failure here must not cost the parent record its
+    facts (§9.3).
+    """
+    if not enabled:
+        return {}
+    from scripts import subtopic_records, subtopic_segmentation
+
+    version = subtopic_segmentation.extractor_version()
+    try:
+        result = subtopic_segmentation.segment_document(
+            record,
+            content,
+            containers,
+            document,
+            parent_deadline=record.get("close_date"),
+        )
+        built = subtopic_records.build_records(
+            record, result, document=document, as_of=fetched_at[:10]
+        )
+    except Exception as exc:  # noqa: BLE001 - never break the parent record
+        return {
+            "subtopics": [],
+            "subtopic_reason": f"error_{type(exc).__name__}",
+            "subtopic_extractor_version": version,
+        }
+    fields = {
+        "subtopics": built,
+        "subtopic_method": result.method,
+        "subtopic_extractor_version": version,
+    }
+    if result.reason:
+        fields["subtopic_reason"] = result.reason
+    return fields
+
+
+def build_document_entry(
+    record, source, response, previous, now, *, enable_subtopics=False
+):
     fetched_at = iso_utc(now)
     content = response["content"]
     digest = hashlib.sha256(content).hexdigest()
@@ -1413,6 +1464,9 @@ def build_document_entry(record, source, response, previous, now):
         "review_queue": review_queue,
         "version_history": version_history,
         "archived_from_catalog_at": None,
+        **subtopic_fields(
+            record, content, containers, document, fetched_at, enable_subtopics
+        ),
     }, True
 
 
@@ -1664,6 +1718,46 @@ def document_metrics(records, cache, refreshed, not_modified, failures):
     }
 
 
+def subtopic_metrics(cached_records):
+    """Subtopic counts and a rejection histogram (§8.3 insertion 4).
+
+    `no_layer_accepted` is reported separately from genuine failures, and
+    `run_budget` separately from `time_budget`, because conflating them hides
+    the difference between "this corpus has no enumerated lists" and "the
+    pattern set needs work" (§6.1, §18.1 package D).
+    """
+    reasons, methods, confidences = {}, {}, {}
+    attempted = subtopic_count = 0
+    for entry in cached_records.values():
+        if "subtopics" not in entry:
+            continue
+        attempted += 1
+        subtopics = entry.get("subtopics") or []
+        subtopic_count += len(subtopics)
+        reason = entry.get("subtopic_reason")
+        if reason:
+            reasons[reason] = reasons.get(reason, 0) + 1
+        method = entry.get("subtopic_method")
+        if method:
+            methods[method] = methods.get(method, 0) + 1
+        for record in subtopics:
+            level = record.get("confidence")
+            if level:
+                confidences[level] = confidences.get(level, 0) + 1
+    return {
+        "documents_attempted": attempted,
+        "documents_with_subtopics": sum(
+            1
+            for entry in cached_records.values()
+            if entry.get("subtopics")
+        ),
+        "subtopic_record_count": subtopic_count,
+        "rejection_reasons": dict(sorted(reasons.items())),
+        "methods": dict(sorted(methods.items())),
+        "confidence_counts": dict(sorted(confidences.items())),
+    }
+
+
 def validate_refresh_health(metrics, minimum_attempts=5, maximum_failure_rate=0.8):
     attempted = (
         int(metrics.get("refreshed_count") or 0)
@@ -1689,6 +1783,7 @@ def enrich_document_evidence(
     recheck_days=14,
     fetcher=download_document,
     now=None,
+    enable_subtopics=False,
 ):
     now = now or utc_now()
     cached_records = cache.setdefault("records", {})
@@ -1782,6 +1877,7 @@ def enrich_document_evidence(
                     response,
                     previous,
                     now,
+                    enable_subtopics=enable_subtopics,
                 )
                 cached_records[opportunity_id] = entry
                 refreshed += int(extracted)
@@ -1850,6 +1946,10 @@ def enrich_document_evidence(
         0,
         len(candidates) - min(len(candidates), max_documents),
     )
+    if enable_subtopics:
+        # §8.3 insertion 4. Only present with the flag on, so the diagnostics
+        # block is byte-identical when it is off.
+        metrics["subtopics"] = subtopic_metrics(cached_records)
     output.setdefault("diagnostics", {})["document_evidence"] = metrics
     cache["generated_at"] = iso_utc(now)
     return output, cache
@@ -1889,6 +1989,20 @@ def parse_args(argv=None):
         default=14,
         help="Recheck unchanged source URLs after this many days (default: 14).",
     )
+    parser.add_argument(
+        "--enable-subtopics",
+        action="store_true",
+        help=(
+            "Segment official notices into child topic records. Off by "
+            "default; only the Phase 4 step turns this on."
+        ),
+    )
+    parser.add_argument(
+        "--subtopic-cache",
+        type=Path,
+        default=DEFAULT_SUBTOPIC_CACHE,
+        help="Subtopic record cache, written only with --enable-subtopics.",
+    )
     args = parser.parse_args(argv)
     if args.max_documents < 0:
         parser.error("--max-documents must be non-negative")
@@ -1909,8 +2023,27 @@ def main(argv=None):
         max_documents=args.max_documents,
         request_delay=args.request_delay,
         recheck_days=args.recheck_days,
+        enable_subtopics=args.enable_subtopics,
     )
     write_cache(cache, args.cache)
+    if args.enable_subtopics:
+        # Written only with the flag on, so the flag-off artifact set is
+        # unchanged and §0.5 byte-identity holds by construction.
+        from scripts import subtopic_records
+
+        subtopic_cache = subtopic_records.empty_cache()
+        for opportunity_id, entry in (cache.get("records") or {}).items():
+            if "subtopics" not in entry:
+                continue
+            subtopic_records.upsert_parent(
+                subtopic_cache,
+                opportunity_id,
+                entry.get("subtopics") or [],
+                as_of=iso_utc(utc_now())[:10],
+                reason=entry.get("subtopic_reason"),
+                method=entry.get("subtopic_method"),
+            )
+        subtopic_records.write_cache(subtopic_cache, args.subtopic_cache)
     write_catalog(enriched, args.catalog)
     metrics = enriched["diagnostics"]["document_evidence"]
     validate_refresh_health(metrics)
