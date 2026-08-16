@@ -2114,7 +2114,9 @@ One **package** per session (§0.4 rule 5). One **commit** per item, with the su
 - [x] D1. `structural_siblings` (§6.3a) implemented; §6.4a thresholds fitted — **three moved, each with its measurement** (§6.3a, §6.4a). 0 false positives
 - [x] D2. All 286 bookmarks read — **`(q) Catalysis Science` is at level 2, page 46**; depth 3, 9/46/167/64 nodes (§6.7)
 - [x] D3. Census-named families added: `focus_area`, `component`, `technical_category`, and `topic_area` widened to sub-lettered ordinals
-- [ ] ~~D4. Full **local** backfill~~ — **not run. See the stop below**
+- [ ] D4. Full **local** backfill — **RAN 2026-08-16 (53 min, 770 documents, 0 queued) and the cache was deliberately NOT committed.** Of the 12 documents whose subtopics would publish, **6 carry the wrong list, and 43 of 194 publishable records are fabricated** — `1. NOFO Summary`, `a. Narrative Section I: Project Description`, `1. Title X Statute`, `A. Short Description of Funding Opportunity`. §18.3's trade forbids shipping 43 wrong cards to gain 146 right ones. Histogram: `no_layer_accepted` 736 · accepted 22 · `no_extractable_text` 11 · `time_budget` 1 · `run_budget` 0. See `docs/CORPUS_CENSUS.md`
+- [ ] **D5. Give `structural_siblings` a positive test.** It admits any sibling set whose ancestors are not administrative, and the level-0 lexicon is keyed to DOE's `III. Program Description` convention. `362827`'s ancestor is `A. Summary`, `348830`'s is a bare `I.` — neither matches, so both publish their NOFO skeleton. **Until this exists `outline_structural` should emit `low`, not `medium`**
+- [ ] **D6. Re-measure precision on a random sample.** Every figure before D4 came from 20 records hand-picked to span shapes, on which this family scored 0 false positives. The backfill's 770 tell a materially worse story, and that gap is a property of the sample, not of the code
 - [ ] **GATE — measured, and one clause not met.** Denominator is the **12 enumerating** documents, not 20 (`docs/CORPUS_CENSUS.md`):
 
 | Metric | Result |

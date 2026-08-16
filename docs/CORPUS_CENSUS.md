@@ -670,6 +670,92 @@ recall. That is an argument for keeping the fail-closed cap, not for reverting
 the path: NRL genuinely needs it, and the cap costs nothing while the evidence
 is this thin.
 
+## D4: the backfill ran, and its cache must not be committed
+
+The full local backfill ran against a copy — never `data/` — with
+`--enable-subtopics --max-documents 1200`. **53 minutes, 770 documents
+attempted, 0 queued at the end.**
+
+```
+REJECTION HISTOGRAM
+   no_layer_accepted     736
+   ACCEPTED               22
+   no_extractable_text    11
+   time_budget             1
+```
+
+`run_budget` never fired and `time_budget` fired once, so §6.1's budgets are
+correctly sized. 22 documents produced 296 subtopic records.
+
+### Why it is not being committed
+
+**Of the 12 documents whose subtopics would publish, 6 carry the wrong list,
+and 43 of 194 publishable records — 22% — are fabricated.**
+
+| Publishing | Documents | Records |
+|---|---|---|
+| List is right | 5 | 146 |
+| **List is wrong** | **6** | **43** |
+| Partially right | 1 | 5 |
+
+What would reach a principal investigator as a topic card with a page anchor:
+
+```
+362827  1. NOFO Summary · 2. Funding Details · Available Funds · A. Purpose
+362880  1. NOFO Summary · 2. Funding Details · Available Funds · A. Purpose
+362036  A. Agency Overview · B. Program Overview · C. Program Objectives
+362478  a. Narrative Section I: Project Description · b. Narrative Section II
+361754  1. Title X Statute · 2. Title X Regulations · 3. Legislative Mandates
+348830  A. Short Description of Funding Opportunity · B. Background · E. Legal Requirements
+```
+
+Against the genuine results the same run produced:
+
+```
+360678  (a) Applied Mathematics … (q) Catalysis Science          70 records
+360205  1a. Foundational Knowledge of Agricultural Production…   37 records
+361526  1 - Reenvisioning Advanced Manufacturing …               26 records
+361169  Program Area 1. Professional Development for Agricultural Literacy…
+```
+
+§18.3 is unambiguous about the trade: *"a missing subtopic costs a user one
+search that could have gone better; a wrong subtopic puts a plausible-looking
+card with a page anchor and a deadline in front of a PI."* Committing 43 such
+cards to reach 146 good ones is the wrong side of that trade, so **the cache
+stays uncommitted and package D's gate is not met.**
+
+### What the backfill revealed that the census could not
+
+**The 20-document census over-estimated precision, and the reason is how it was
+built.** It was deliberately chosen to span shapes — big umbrella notices with
+rich outlines — and on that sample `structural_siblings` scored 0 false
+positives against 8 non-enumerating documents. The backfill is the first
+roughly-random sample of the catalog, and on it the same family produces an
+administrative list about as often as a real one.
+
+The failure is specific and fixable. `structural_siblings` excludes
+administrative sets by testing the **level-0 ancestor** against a lexicon, which
+works for DOE's `III. Program Description` and fails wherever a notice numbers
+its sections differently: `362827`'s real ancestor is `A. Summary`, `348830`'s
+is a bare `I.`, and neither matches. The test is keyed to one agency's outline
+convention and was validated against documents that share it.
+
+Three things follow, and none of them is more pattern tuning:
+
+1. **`structural_siblings` needs a positive test, not only a negative one.** It
+   currently admits any sibling set whose ancestors are not administrative.
+   Requiring evidence that the set *is* a topic list — parent title, sibling
+   title character, position relative to the eligibility and application
+   sections — is a different and stronger design.
+2. **Precision must be measured on a random sample, not a curated one.** Every
+   number in this document before this section came from 20 hand-picked
+   records. The backfill supplies 770.
+3. **The medium-confidence tier is doing work it has not earned.**
+   `outline_structural` emits `medium`, which publishes. On this evidence it
+   should emit `low` until the positive test exists — the same fail-closed move
+   already applied to secondary attachments, for the same reason and with far
+   more evidence behind it.
+
 ## Classifying every miss
 
 Six categories, one line each.
