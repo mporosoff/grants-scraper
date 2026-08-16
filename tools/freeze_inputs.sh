@@ -8,11 +8,16 @@
 #
 # The frozen caches are trimmed to the opportunity ids present in the frozen
 # XML archive. The live caches are keyed by real Grants.gov ids, which do not
-# intersect the fixture's ids, so the trim currently yields empty caches: the
-# gate covers each stage's merge and serialization path, not its populated
-# fact-merge path. See docs/TOPIC_LAYER_PLAN.md §8.4.
+# intersect the fixture's ids, so the trim itself yields empty caches.
 #
-# See docs/TOPIC_LAYER_PLAN.md §8.4.
+# The hand-authored entries in tests/fixtures/frozen/authored/ are then merged
+# on top. They are what brings the *populated* merge paths -- merge_detail and
+# merge_document_entry -- under the gate, and merging them here rather than
+# editing the frozen caches by hand means re-running this script cannot
+# silently delete that coverage. A live entry for the same id wins, so this
+# stays correct if the fixture ids ever do intersect the live caches.
+#
+# See docs/TOPIC_LAYER_PLAN.md §8.4 and §18.1 item A1.
 
 set -euo pipefail
 
@@ -48,13 +53,31 @@ python -m scripts.build_catalog \
   --as-of 2026-08-20 --min-records 1 \
   --output "$WORK/probe.js" >/dev/null
 
-# 3. Trim the live caches to those ids.
+# 3. Trim the live caches to those ids, then merge the hand-authored entries.
 python - "$WORK/probe.js" "$FROZEN" <<'PYTHON'
 import json
 import pathlib
 import sys
 
 probe, frozen = pathlib.Path(sys.argv[1]), pathlib.Path(sys.argv[2])
+
+
+def authored(name):
+    """Hand-authored entries for `name`, keyed by opportunity id.
+
+    Keys beginning with an underscore are documentation, not records.
+    """
+    source = frozen / "authored" / f"{name}.json"
+    if not source.exists():
+        return {}
+    payload = json.loads(source.read_text(encoding="utf-8"))
+    return {
+        key: value
+        for key, value in (payload.get("records") or {}).items()
+        if not key.startswith("_")
+    }
+
+
 payload = probe.read_text(encoding="utf-8")
 catalog = json.loads(
     payload.split("globalThis.GRANT_CATALOG=", 1)[1].strip().rsplit(";", 1)[0]
@@ -69,18 +92,29 @@ for name in ("opportunity_enrichment", "document_evidence"):
         pathlib.Path("data", f"{name}.json").read_text(encoding="utf-8")
     )
     before = len(data.get("records") or {})
-    data["records"] = {
+    trimmed = {
         key: value
         for key, value in (data.get("records") or {}).items()
         if key in keep
     }
+    hand_authored = {
+        key: value
+        for key, value in authored(name).items()
+        if key in keep and key not in trimmed
+    }
+    data["records"] = dict(
+        sorted({**trimmed, **hand_authored}.items())
+    )
     data["generated_at"] = "2026-08-20T00:00:00Z"
     (frozen / f"{name}.json").write_text(
         json.dumps(data, ensure_ascii=False, separators=(",", ":")) + "\n",
         encoding="utf-8",
         newline="\n",
     )
-    print(f"froze {name}.json ({before} -> {len(data['records'])} entries)")
+    print(
+        f"froze {name}.json ({before} live -> {len(trimmed)} trimmed "
+        f"+ {len(hand_authored)} hand-authored = {len(data['records'])})"
+    )
 
 # Source snapshots are per-adapter and the hermetic run uses only the fixture
 # adapter, so the cache starts empty and the run repopulates it.
