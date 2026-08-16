@@ -2073,10 +2073,15 @@ One **package** per session (§0.4 rule 5). One **commit** per item, with the su
 | Metric | Result |
 |---|---|
 | Acceptance | **5/12 = 42%** (baseline 0/12) |
+| **Correct-acceptance**, every span read | **5/12 = 42%** — all five accepted documents found the right list |
 | **Publishable** (`zero low-confidence published`) | **3/12 = 25%** — `356623` and `362859` resolve at Layer D, which is low confidence and never publishes |
-| Wrong-list acceptances | **0** |
 | **False positives on the 8 non-enumerating** | **0/8** |
+| Span-level precision | **108/115 = 94%** — and all 7 bad spans are in the publishable set (`Open Science`, `Annual Progress Reports`, `Teaming Arrangements`…) |
 | Rejection histogram | all 7 misses `no_layer_accepted`; no `run_budget`, no `time_budget` |
+
+**On the highest-value document, `DE-FOA-0003612` (Genesis Mission — live, closes 2026-12-17): 21 of 21 published challenge areas recovered exactly, 0 of 99 focus areas, 5 spurious administrative spans.** Full entry in `docs/CORPUS_CENSUS.md`.
+
+**Why more regexes are not the answer.** Of the seven misses, **four need one missing mechanism** (`label_run` for named subdivisions), **two need occurrence selection** — the pattern matches in several places and nothing decides which is the heading, the same class of defect as D0a/D0b — and **one is §6.3a's depth-0 rule refusing a legitimate list** (`343653`'s ten country FOAs). Only `332894` would require the loosening §18.3 forbids. Two mechanisms would address six of seven; more patterns would address one.
 
 **⚠ Tuning stopped at 42%, below the 50% threshold, deliberately.** Every remaining miss needs a new *mechanism*, not a wider regex: `label_run` for outline-less named portfolios (AFOSR, NRL), occurrence selection for patterns that match in several places (`360339`, `363065` — a front-matter summary list and 36 prose mentions respectively), or a generic numbered-section family for `332894`'s bare `1.)`. §6.3 and §18.3 both name that last one as the most damaging change available. **The 0/8 false-positive count is the number that should not be traded**, and reaching 50% by loosening would trade exactly that.
 

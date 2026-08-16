@@ -347,6 +347,106 @@ different clothes: **the pattern matches in several places and nothing chooses
 which occurrence is the heading.** That is the next real mechanism, and it is
 not a regex.
 
+### Correct-acceptance, judged by reading every span
+
+"Did it segment?" and "did it segment the right thing?" are different questions,
+and ARPA-E SCALEUP proved it: before the D3 lexicon fix it segmented the 13
+subsections of `H. Funding Restrictions` — *Allowable Costs*, *Foreign Travel*,
+*Lobbying* — and a binary metric scored that as a success. Every accepted
+document below was therefore re-scored by reading its spans.
+
+| Document | Spans | Spans that are fundable subdivisions | Recall of the real list | Publishes |
+|---|---|---|---|---|
+| `363526` AFOSR DEPSCoR | 8 | **8** | 8 of 12 topics = 67% | yes (high) |
+| `362859` DARPA MMoMA | 4 | **4** | 4 of 4 = 100% | no (low) |
+| `356623` ARPA-E SCALEUP | 7 | **7** | 7 of 7 = 100% | no (low) |
+| `360678` DOE Office of Science | 70 | **68** | 68 of 71 programmes = 96% | yes (medium) |
+| `361526` DOE Genesis Mission | 26 | **21** | 21 of 21 challenge areas = 100% | yes (medium) |
+
+> **Correct-acceptance rate: 5/12 = 42%.** Every accepted document found the
+> right list. **Publishable correct-acceptance: 3/12 = 25%**, because `356623`
+> and `362859` resolve at Layer D and low confidence never publishes.
+
+**Span-level precision is 108/115 = 94%, and all seven bad spans are in the
+publishable set.** They are not near-misses; they are administrative sections
+that happen to be outline siblings of real topics:
+
+| Document | Contaminating spans |
+|---|---|
+| `360678` | `Multi-Institutional Teams` (p118), `Open Science` (p120) |
+| `361526` | `Annual Meetings` (p60), `Annual Progress Reports` (p60), `Teaming Arrangements` (p60), `Joint Consideration` (p62), `Open Science` (p62) |
+
+Neither the §6.3a set-level veto nor the lexicon caught them: 5 of 26 is 19%,
+under the 25% threshold, and `Annual Progress Reports` does not match the term
+`reporting`. **Seven cards titled *Annual Progress Reports* and *Open Science*
+would reach a principal investigator with a page anchor**, which is §18.3's harm
+at small scale. This is a precision defect in `structural_siblings`, recorded
+and not fixed.
+
+### `DE-FOA-0003612` — Genesis Mission, in census format
+
+The highest-value document in the corpus: a **live, open** opportunity, not an
+archival test case.
+
+| Field | Value |
+|---|---|
+| Opportunity number | `DE-FOA-0003612` |
+| Title | The Genesis Mission: Transforming Science and Energy with AI |
+| Agency / status | Office of Science · **posted** |
+| Closes | **2026-12-17** (archive 2027-03-17) |
+| Evidence id | `361526` |
+| Notice | `DE-FOA-0003612.000003.pdf`, 166 pages, 1,321,107 bytes |
+| URL | live, `apply07.grants.gov/…/att/download/350588` |
+| Outline | 240 bookmarks |
+
+**Published ground truth: 21 challenge areas, drawn from 26 national
+challenges, reported elsewhere as 99 focus areas.**
+
+| Against | Spans | Result |
+|---|---|---|
+| **21 challenge areas** | 21 | **21/21 = 100% recall, exact** — spans 1–21 are the numbered challenge areas, `1 - Reenvisioning Advanced Manufacturing` through `21 - Artificial Intelligence in Fluid Flow for Energy Components` |
+| **99 focus areas** | 0 | **0/99 = 0%.** The focus areas sit one level below the challenge areas and are not bookmarked, so `structural_siblings` cannot see them. The segmenter operates at challenge-area granularity |
+| Precision | 26 emitted | **21/26 = 81%** — spans 22–26 are the five administrative siblings listed above |
+
+So on the single most valuable document the layer recovers the *entire*
+published challenge-area list exactly, at the wrong granularity for focus areas,
+with five spurious cards. The 99-focus-area level would need either a deeper
+bookmark tree than the notice has, or the occurrence-selection mechanism the
+misses below also need.
+
+### The seven misses, one line each
+
+| Document | Cause | Category |
+|---|---|---|
+| `362681` AFOSR Open BAA | 39 named portfolios with **zero bookmarks**; `structural_siblings` needs an outline tree | **missing family shape** — `label_run`, deferred in §6.3a |
+| `352741` NRL LRBAA | Divisions named in body prose; only 3 junk bookmarks | **missing family shape** — same `label_run` gap |
+| `362329` DHA PRMRP | Topic areas are **bulleted** under named portfolios, no ordinal and no outline depth | **missing family shape** |
+| `332894` Army LQC | Six Priority Research Thrusts written as bare `1.)` | **missing family shape**, and the only family that would catch it is the generic numbered one §6.3/§18.3 forbid |
+| `343653` DHAPP | Ten country FOAs are real fundable subdivisions but sit at **outline depth 0**, which §6.3a excludes by construction | **acceptance rule rejecting something legitimate** |
+| `360339` CDC | `Component 1-5` matches, but the located occurrences are a front-matter summary list — spans 88–239 chars against a 200 floor | **known defect** — occurrence selection |
+| `363065` DOE NETL | `Topic Area 1a/1b/1c/2` now matches, but 36 hits are prose mentions and amendment-log entries; ordinals read `1,2,1,1,1,…` | **known defect** — occurrence selection |
+
+**Four of seven are one missing mechanism** (`label_run` for named subdivisions,
+plus the bulleted variant). **Two are one known defect** — the pattern matches in
+several places and nothing decides which occurrence is the heading, the same
+class of bug as the table-of-contents duplication fixed in D0a/D0b. **One is an
+acceptance rule refusing a legitimate list.** Only `332894` would need the
+forbidden loosening.
+
+That distribution is the answer to whether more tuning is worth it: **more
+regexes buy almost nothing.** Two mechanisms — label runs and occurrence
+selection — would address six of the seven.
+
+### Two reachability findings
+
+- **`363526` is orphaned.** The one high-confidence acceptance in the corpus
+  cannot be reached by the production fetch path: its parent record has no
+  `primary_document_url` and needs no gap-fill, so `source_for_record()` returns
+  `None`. It segments when handed the bytes and **would never be handed them by
+  the nightly**.
+- **`360339` has left the catalog** since the census was taken, so one of the
+  twelve enumerating documents is no longer a live record at all.
+
 ### The stop
 
 **42% acceptance is below the 50% threshold set for this package, so tuning
