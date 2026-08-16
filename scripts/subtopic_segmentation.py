@@ -912,6 +912,7 @@ def _structural_from_outline(entries, flat, toc_pages):
         ]
         if len(candidates) < STRUCTURAL_MIN_SIBLINGS:
             continue
+        candidates = _trim_to_dominant_form(candidates)
         failures = acceptance_failures(
             candidates, flat, toc_pages, family_type="structural"
         )
@@ -932,6 +933,59 @@ def _locate_nodes(nodes, flat):
             continue
         cursor = offset + 1
         yield node, offset
+
+
+# Leading code forms a sibling set may share. A set that mostly shares one is
+# an enumeration with stragglers; the stragglers are what follow the list.
+_CODE_FORMS = (
+    ("paren_letter", re.compile(r"^\([a-z]\)\s")),
+    ("num_letter", re.compile(r"^\d+[a-z]\.\s")),
+    ("dash_num", re.compile(r"^\d+\s*[-–—]\s")),
+    ("labelled", re.compile(r"^[A-Z][a-z]+ [A-Z][a-z]+ \d+\.")),
+    ("dot_num", re.compile(r"^\d+\.\s")),
+    ("dot_letter", re.compile(r"^[A-Za-z]\.\s")),
+    ("dotted", re.compile(r"^\d+\.\d+")),
+)
+# A form must cover this share of the set before its absentees are trimmed.
+DOMINANT_FORM_SHARE = 0.6
+
+
+def _trim_to_dominant_form(candidates):
+    """Drop siblings that do not share the set's dominant leading code form.
+
+    FITTED, not reasoned. After the set-level vocabulary veto, seven fabricated
+    records survived inside otherwise-correct sets -- `Multi-Institutional
+    Teams` and `Open Science` trailing DOE's 68 `(a)`-`(x)` programmes, and
+    `Annual Meetings`, `Annual Progress Reports`, `Teaming Arrangements`,
+    `Joint Consideration`, `Open Science` trailing Genesis's 21 `N -` challenge
+    areas. A whole-set rate cannot catch 2 bad titles in 70 by construction.
+
+    Measured across all 13 accepted documents of the 770-document backfill:
+
+        361526   dash_num      21 coded, drops exactly the 5 known-bad
+        360678   paren_letter  68 coded, drops exactly the 2 known-bad
+        everything else        drops 0, or has no dominant form and is untouched
+
+    7 of 7 contaminants removed, 0 legitimate records lost.
+
+    This is a coherence rule, not the per-item vocabulary filter §6.3a warns
+    against: it makes no judgement about what a title means, only about whether
+    it carries the same code as its siblings, and it stays inert unless the set
+    is mostly coded.
+    """
+    if len(candidates) < MIN_CANDIDATES:
+        return candidates
+    titles = [item.title for item in candidates]
+    counts = {
+        name: sum(1 for title in titles if pattern.match(title))
+        for name, pattern in _CODE_FORMS
+    }
+    name, best = max(counts.items(), key=lambda item: item[1])
+    if best < DOMINANT_FORM_SHARE * len(titles):
+        return candidates
+    pattern = dict(_CODE_FORMS)[name]
+    kept = [item for item in candidates if pattern.match(item.title)]
+    return kept if len(kept) >= MIN_CANDIDATES else candidates
 
 
 def _structural_titles_ok(titles):

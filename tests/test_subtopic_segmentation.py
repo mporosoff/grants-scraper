@@ -545,6 +545,40 @@ class AcceptanceRuleTests(unittest.TestCase):
         failures = seg.acceptance_failures(candidates, self._flat())
         self.assertNotIn("administrative_vocabulary", failures)
 
+    def test_trailing_uncoded_siblings_are_trimmed(self):
+        # Fitted: DOE's 68 `(a)`-`(x)` programmes trailed by `Multi-
+        # Institutional Teams` and `Open Science`; Genesis's 21 `N -` challenge
+        # areas trailed by `Annual Meetings` and four more. A whole-set rate
+        # cannot catch 2 bad titles in 70.
+        titles = [f"({chr(97 + i)}) Subject {i}" for i in range(8)]
+        titles += ["Multi-Institutional Teams", "Open Science"]
+        candidates = [
+            seg._Candidate(code=t, ordinal=i + 1, ordinal_label=str(i + 1),
+                           title=t, offset=i * 400, page=i + 1, anchor=None)
+            for i, t in enumerate(titles)
+        ]
+        kept = seg._trim_to_dominant_form(candidates)
+        self.assertEqual(len(kept), 8)
+        self.assertNotIn("Open Science", [c.title for c in kept])
+
+    def test_a_set_with_no_dominant_form_is_left_alone(self):
+        titles = ["GRID", "TRANSPORTATION", "BIOENERGY", "BUILDING EFFICIENCY"]
+        candidates = [
+            seg._Candidate(code=t, ordinal=i + 1, ordinal_label=str(i + 1),
+                           title=t, offset=i * 400, page=i + 1, anchor=None)
+            for i, t in enumerate(titles)
+        ]
+        self.assertEqual(len(seg._trim_to_dominant_form(candidates)), 4)
+
+    def test_trimming_never_drops_below_the_minimum(self):
+        titles = ["(a) One", "Uncoded two", "Uncoded three", "Uncoded four"]
+        candidates = [
+            seg._Candidate(code=t, ordinal=i + 1, ordinal_label=str(i + 1),
+                           title=t, offset=i * 400, page=i + 1, anchor=None)
+            for i, t in enumerate(titles)
+        ]
+        self.assertEqual(len(seg._trim_to_dominant_form(candidates)), 4)
+
     def test_a_clean_set_passes_every_rule(self):
         self.assertEqual(
             seg.acceptance_failures(self._candidates([1, 2, 3]), self._flat()), ()
