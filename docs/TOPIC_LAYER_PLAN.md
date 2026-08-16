@@ -2,9 +2,21 @@
 
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
-Status: proposal · Version 6.1 · Written 2026-08-15
+Status: proposal · Version 6.2 · Written 2026-08-15
 
 ---
+
+## ⚠ Naming collision — read before writing any code
+
+This repository **already uses the word "topic"** to mean *subject area*: `feeds/topic/catalysis-and-reaction-engineering.xml`, `feeds/topic/carbon-management.xml`, and roughly two dozen more, backed by `scripts/program_areas.py`.
+
+This document uses "topic" throughout to mean something entirely different — a **fundable subdivision of an umbrella solicitation**, like Topic Area 3 of a DOE FOA or Topic 7 of a MURI BAA.
+
+**Resolution: in code, the new concept is called `subtopic`.** Everywhere this document says `topic_id`, `topic_terms`, `topic_records.json`, `record_type: "topic"`, `extract_topics.py`, `--enable-topics`, `FF_TOPICS_ENABLED`, and so on, the identifier written into the repository must be `subtopic_id`, `subtopic_terms`, `data/subtopic_records.json`, `record_type: "subtopic"`, `scripts/extract_subtopics.py`, `--enable-subtopics`, `FF_SUBTOPICS_ENABLED`.
+
+The existing subject-area meaning of "topic" is untouched. Do not rename anything that already exists.
+
+Prose in this document still reads "topic" for readability. The rule applies to **identifiers, filenames, flags, and user-facing labels**, and it is not optional — a codebase with two meanings of "topic" will produce wrong wiring.
 
 ## How to use this document
 
@@ -31,7 +43,7 @@ Status: proposal · Version 6.1 · Written 2026-08-15
 
 ### 0.1 The reconnaissance requirement
 
-**Do not edit a single line until you can answer all eight questions below from your own reading of the tree.** Not from this document — from the code. This plan describes intent; the repository is the truth, and it may have moved since this was written.
+**Do not edit a single line until you can answer all eleven questions below from your own reading of the tree.** Not from this document — from the code. This plan describes intent; the repository is the truth, and it may have moved since this was written.
 
 1. Which script writes each file in `data/`? Which of those are added by the workflow's `git add`, and which are build-local?
 2. What is the exact step order in `.github/workflows/`, and which steps are permitted to fail?
@@ -41,7 +53,9 @@ Status: proposal · Version 6.1 · Written 2026-08-15
 6. What is the total workflow runtime today, and what is the job timeout?
 7. Does the Pages deploy job depend on the build job succeeding?
 8. What exactly does `currentness.py` gate, and who calls it — build time, feed time, browser, or all three?
-9. Does `assets/team-researchers.js` score against the same BM25 index as `search-retrieval.js`, or does it run its own similarity? Does team match have its own export path?
+9. Team matching spans `scripts/faculty_match.py` (build time, producing `data/faculty_matches.js`), `assets/team-matcher.js`, and `assets/team-researchers.js`. Which of these scores, which renders, and does any of it share the BM25 index with `search-retrieval.js`?
+10. `assets/profile.js` and `tests/fixtures/browser_cv.txt` indicate CV upload already exists. What does the current CV path do with the text, and how does it combine with OpenAlex data?
+11. There are at least three workflow files — `.github/workflows/refresh-opportunities.yml`, `.github/workflows/tests.yml`, and `docs/weekly-alerts/weekly-digest.yml`. Which are active, which is the nightly build, and do any share state?
 
 ### 0.2 Commands to answer them
 
@@ -684,10 +698,10 @@ These are not style preferences. Each one exists because violating it has a spec
 | `scripts/topic_segmentation.py` | **new** | Anything | — | Fixture golden tests |
 | `scripts/extract_topics.py` | **new** | Anything | — | Cache diff stability |
 | `scripts/build_gold_set.py`, `check_expected.py` | **new** | Anything | — | Manual first run |
-| `scripts/sources/sam_gov.py` | **new** | Anything | — | Existing adapter-contract tests |
-| `scripts/sources/program_taxonomy.py` | **new** | Anything | — | Existing adapter-contract tests |
+| `scripts/sources/adapters/sam_gov.py` | **new** | Anything — follow `adapters/_template.py` | Deviate from the adapter interface | `tests/test_sources.py` |
+| `scripts/sources/adapters/program_taxonomy.py` | **new** | Anything — follow `adapters/_template.py` | Deviate from the adapter interface | `tests/test_sources.py` |
 | `assets/match-explain.js` | **new** | Anything | — | Manual A/B with `FF_MATCH_EXPLAIN` off |
-| `scripts/sources/nspires.py` | **activate shell** | Fill in the existing stub's contract | Change the adapter interface | Existing adapter-contract tests |
+| `scripts/sources/adapters/nspires.py` | **activate shell** | Fill in the existing stub's contract | Change the adapter interface | Existing adapter-contract tests |
 | `scripts/extract_document_evidence.py` | **modify** | Delete moved function bodies, import from `document_fetch`, keep module-level aliases | Change any public name, change output schema, change exit codes | Existing suite passes **unchanged** |
 | `scripts/build_catalog.py` | **modify** | Add `--enable-topics`; add one merge call at one insertion point; extend index build behind the flag | Restructure the build, reorder existing steps, change output with flag off | §8.4 hermetic gate |
 | `scripts/currentness.py` | **modify** | Add a new `topic_status()` function; add a `record_type` early-return in the existing gate | Change the existing function's signature or semantics for non-topic records | New interaction tests + §8.4 |
@@ -695,8 +709,8 @@ These are not style preferences. Each one exists because violating it has a spec
 | `scripts/evaluate_phase2.py` | **modify** | Add a topic-level metric block | Change existing metric definitions (breaks baseline comparability) | Re-run against frozen baseline |
 | `assets/search-retrieval.js` | **modify** | Add rollup guarded by `if (!window.FF_TOPICS_ENABLED) return <existing path>` | Change existing scoring math | Manual A/B with flag off |
 | `assets/app.js`, `match_explorer.html` | **modify** | Add rendering behind the flag; early-return on `record_type === 'topic'` when off | Restructure existing render path | Manual A/B with flag off |
-| `assets/team-researchers.js`, `team_match.html` | **modify** | Add topic handling + per-parent cap behind the flag; same `record_type` guard | Change existing similarity math or export column order | Manual A/B with flag off (§7.7) |
-| help / `docs/` page | **modify** | Append the three items in §7.8 | Restructure existing help content | Visual check |
+| `assets/team-researchers.js`, `assets/team-matcher.js`, `scripts/faculty_match.py`, `team_match.html` | **modify** | Add topic handling + per-parent cap behind the flag; same `record_type` guard | Change existing similarity math or export column order | Manual A/B with flag off (§7.7) |
+| `assets/site-help.js` | **modify** | Append the three items in §7.8 | Restructure existing help content | Visual check |
 | `requirements.txt` | **modify** | Pin `pymupdf` exactly; add runtime deps only | Add test-only deps (they go in `requirements-dev.txt`) | Clean install in CI |
 | `.github/workflows/*.yml` | **modify** | Insert new steps at the documented position (§9) | Reorder, rename, or alter existing steps; change `permissions:` or `concurrency:` | Dispatch run on branch |
 | `LICENSE`, `README.md` | **replace / edit** | Replace MIT with the all-rights-reserved notice | — | Visual check of the README badge |
@@ -733,7 +747,7 @@ Separating "move" from "improve" into two commits means that if something breaks
 
 The golden rule (§0.5) needs to be mechanically checkable, and it cannot be checked against live data because live data changes every night by design. So the check runs against **frozen inputs**.
 
-Set this up in Phase 1, *before* any behavior-affecting change:
+Set this up in Phase 1, *before* any behavior-affecting change. Note that `tests/fixtures/` already contains `grants_db_extract.xml`, `grants_gov_opportunities.json` and `phase2_evaluation_export.json` — reuse that infrastructure rather than inventing a parallel one:
 
 ```bash
 # tools/freeze_inputs.sh   (run once, in Phase 1)
@@ -765,7 +779,7 @@ This gate is what makes every subsequent phase safe. Build it first.
 
 ### 9.1 Read before you edit
 
-The workflow is the single most dangerous file in this repository, because a mistake there does not throw an error you see — it publishes wrong data, or silently stops publishing, or opens issues every night forever. Answer §0.1 questions 2, 3, 6 and 7 before opening it.
+The workflow is the single most dangerous file in this repository, because a mistake there does not throw an error you see — it publishes wrong data, or silently stops publishing, or opens issues every night forever. Answer §0.1 questions 2, 3, 6, 7 and 11 before opening it.
 
 ### 9.2 Where the new steps go
 
@@ -828,8 +842,8 @@ Everything here adds instrumentation, adds a new source, or refactors without ch
 4. **Add the size-budget test** to `tests/`: fail the build if `data/opportunities.js` exceeds 1.5× its pre-change byte size.
 5. **License housekeeping.** Replace `LICENSE` (MIT is leftover) with the all-rights-reserved notice used on the other deployed tool; update the README license line so the badge matches.
 6. **Extract `scripts/document_fetch.py`** from `extract_document_evidence.py` per §6.1, following the two-commit move-then-improve procedure in §8.3. Pin `pymupdf` exactly. **The existing test suite must pass unchanged** — this step is behavior-preserving by definition.
-7. **Write `scripts/sources/sam_gov.py`** inside the existing adapter lifecycle, per §7.5.
-8. **Activate `scripts/sources/nspires.py`**, anchored on the ROSES Table 2 / Table 3 HTML listings rather than PDF parsing.
+7. **Write `scripts/sources/adapters/sam_gov.py`**, modelled on `scripts/sources/adapters/_template.py`, inside the existing adapter lifecycle, per §7.5.
+8. **Activate `scripts/sources/adapters/nspires.py`**, anchored on the ROSES Table 2 / Table 3 HTML listings rather than PDF parsing.
 9. **Rebuild researcher profiles per §7.9**: OpenAlex works *text* (titles + rehydrated abstracts) rather than assigned concepts; ORCID demoted to identity resolution. Score the old and new representations against the gold set from step 10 before committing to either. Purely additive — write to a new `faculty_profiles_v2.json` and leave the existing file untouched until measured.
 10. **Write `scripts/build_gold_set.py`.** Pull awards to UR Chemical and Sustainability Engineering faculty from NSF Award Search, NIH RePORTER and USAspending over a 3-year window; map each back to its originating solicitation number; emit `evaluation/gold_set.json` as `{query_profile, expected_solicitation_numbers[]}`. Regenerate quarterly in the workflow.
 11. **Populate `data/expected_solicitations.json`** and wire `scripts/check_expected.py` into the workflow.
@@ -986,8 +1000,8 @@ Copy into a tracking issue. **The gate lines are not steps — they are stops.**
 - [ ] 4. Size-budget test added
 - [ ] 5. LICENSE and README updated
 - [ ] 6. `document_fetch.py` extracted — two commits, existing suite green with zero test edits
-- [ ] 7. `sources/sam_gov.py` written and healthy
-- [ ] 8. `sources/nspires.py` activated
+- [ ] 7. `sources/adapters/sam_gov.py` written and healthy
+- [ ] 8. `sources/adapters/nspires.py` activated
 - [ ] 9. Profiles rebuilt per §7.9 (OpenAlex works text; ORCID as key) into `faculty_profiles_v2.json`
 - [ ] 10. `build_gold_set.py` written, `gold_set.json` generated
 - [ ] 11. `expected_solicitations.json` + `check_expected.py` wired
@@ -1086,7 +1100,7 @@ It was written from the repository's README and public description. File names, 
 
 | Session | Scope | Deliverable |
 |---|---|---|
-| 1 | §0.1 reconnaissance **only**. The human performs repo setup (clone, branch, commit this plan) beforehand — an agent's first action should not be repo surgery. No edits to existing files, no installs, no write-mode scripts. | `docs/RECON.md` — nine answers with file/line citations, a "Plan discrepancies" section, a "Blocked" section |
+| 1 | §0.1 reconnaissance **only** (eleven questions). The human performs repo setup (clone, branch, commit this plan) beforehand — an agent's first action should not be repo surgery. No edits to existing files, no installs, no write-mode scripts. | `docs/RECON.md` — nine answers with file/line citations, a "Plan discrepancies" section, a "Blocked" section |
 | 2 | Revise this plan against `docs/RECON.md`. Still no code changes. | Corrected `docs/TOPIC_LAYER_PLAN.md` |
 | 3+ | **One numbered §15 checklist step per session.** | The step, its verification output, and an updated checklist |
 
