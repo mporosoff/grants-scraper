@@ -198,6 +198,47 @@ enumerates 39 portfolios with program managers in the document. B0 measured
 family matching and described it as document shape. This census separates the
 two, which is why it was worth doing before writing package C.
 
+## Postscript: two things the C2 flag-on run added
+
+The package C gate ran the real pipeline with `--enable-subtopics` against five
+documents copied out of the cache. It surfaced two findings the census pass
+could not.
+
+**The best segmentation candidate in the corpus is unreachable by the fetch
+path.** `363526` — the AFOSR DEPSCoR notice, the one document where a family
+matches correctly — was staged for the run and never fetched.
+`source_for_record()` returned `None` for it: its `primary_document_url` is
+absent, its `funding_opportunity_url` is the generic `https://www.grants.gov/`,
+and it needs no gap-fill because its close date and award range are already
+populated. Its evidence entry exists and names a real attachment URL, so the
+document *was* fetched at some earlier point and the record has since lost the
+link. That entry is now effectively orphaned: it will never be rechecked and
+can never be backfilled.
+
+This is pre-existing behaviour, not something package C introduced, and fixing
+it means changing `source_for_record`'s single-source contract — which §6.6
+explicitly defers. But it bounds backfill coverage in a way §8.3 does not
+mention: **a document is only reachable for segmentation if it still carries a
+usable source on the parent record**, and an unknown number of the ~1,400
+cached entries may be in the same state. Worth measuring before package D
+reports an acceptance rate, because those documents will silently never appear
+in the denominator at all.
+
+**The end-to-end machinery is proven; the corpus is what yields nothing.** With
+the flag on, five documents were fetched, segmented, and written to
+`data/subtopic_records.json` with diagnostics populated:
+
+```
+documents_attempted: 5, documents_with_subtopics: 0, subtopic_record_count: 0
+rejection_reasons: {"no_layer_accepted": 5}
+```
+
+Five `no_layer_accepted` results are exactly what this census predicts. The
+same production call site, given a document that *does* enumerate, produces
+three high-confidence records with titles, page spans, summaries, term maps and
+both topic vocabularies — so the pipeline is not the thing that is broken. The
+patterns and the TOC-duplication defect above are.
+
 ## Method
 
 Documents were fetched from the attachment URLs already in

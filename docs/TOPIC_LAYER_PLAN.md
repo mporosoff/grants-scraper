@@ -1914,10 +1914,13 @@ One **package** per session (§0.4 rule 5). One **commit** per item, with the su
 
 ### Package C — Wire the call site, flag off
 
-- [ ] C1. `scripts/subtopic_records.py` — identity matching, term maps, cache I/O, `needs_subtopic_extraction()`
-- [ ] C2. Flag-guarded call site in `extract_document_evidence.py` (§8.3, four commits) — the only change to working production code in the minimum path
-- [ ] C3. `git add` paths in the workflow
-- [ ] **GATE:** flag **off** → `verify_no_drift` byte-identical and suite green with zero test-file edits (this is §0.5) · flag **on** → a cache produced for five documents copied out of the evidence cache locally
+**Complete 2026-08-16.** One commit per item, suite run between commits, pushed and green on `ubuntu-latest`.
+
+- [x] C0. **Corpus shape census** — added ahead of C1. 20 notice documents judged by reading → `docs/CORPUS_CENSUS.md`. *12 of 20 enumerate fundable subdivisions; a family identifies the right list in 1 of those 12; the segmenter produces subtopics for 0. Found that the best match is blocked by a segmenter defect rather than a pattern gap, and that §6.7 is wrong about `DE-FOA-0003600`*
+- [x] C1. `scripts/subtopic_records.py` — identity matching, term maps, cache I/O, `needs_subtopic_extraction()` — *§5.3 matching and §5.2 term maps already landed in `subtopic_segmentation.py` during B, so this module imports them; §5.4 diff stability enforced by test*
+- [x] C2. Flag-guarded call site in `extract_document_evidence.py` (§8.3, four commits) — the only change to working production code in the minimum path — *two commits, insertions 1/2/4 then insertion 3. Exactly one line removed in the whole diff*
+- [x] C3. `git add` paths in the workflow — *guarded by a `-f` test, since the file does not exist until package G*
+- [x] **GATE:** flag **off** → `verify_no_drift` byte-identical and suite green with zero test-file edits (this is §0.5) · flag **on** → a cache produced for five documents copied out of the evidence cache locally. **Partial on one clause:** the cache was produced for five documents, but with **zero spans** — all five returned `no_layer_accepted`, which is exactly what C0's census predicts for this corpus. The production call site was separately shown to produce three high-confidence spans on a document that does enumerate, so the machinery is proven; the patterns are what do not yet reach real notices (package D)
 
 ### Package D — Tune and backfill
 
@@ -2048,7 +2051,8 @@ Both are Phase 1 work and both fail loudly rather than silently, which is why th
 | 4 | Repair the gate after its first CI failure. | Line-ending normalization in `fingerprint.py` | **done** |
 | 5 | §18 package A — foundations completion. | Six commits, gates green, §15 updated, branch pushed | **done 2026-08-16** |
 | 6 | §18 package B — segmentation, offline and self-contained. Opened with an unplanned B0 verifying §17.2's API claims. | Four commits, gates green, §15 updated, branch pushed | **done 2026-08-16** |
-| 7+ | **One §18 work package per session.** Each item inside it is its own commit, with the suite run between commits. | The package, its gate output, an updated §15, and a pushed branch | next: package C |
+| 7 | §18 package C — wire the call site, flag off. Opened with an unplanned C0 corpus census. | Five commits, §0.5 gate green, §15 updated, branch pushed | **done 2026-08-16** |
+| 8+ | **One §18 work package per session.** Each item inside it is its own commit, with the suite run between commits. | The package, its gate output, an updated §15, and a pushed branch | next: package D — **read `docs/CORPUS_CENSUS.md` first**; it is the measured picture D's pattern tuning is supposed to work against |
 
 Sessions 1 and 2 are not overhead. They are what makes the additive-edit discipline in §8 possible, because you cannot make a surgical edit to a file whose structure you inferred. Session 1 found that the single most consequential fact in this project — which PDF library the repository uses — was wrong in every prior version, and that error alone would have produced an unusable Layer C and an AGPL licensing problem.
 
