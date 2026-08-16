@@ -412,6 +412,19 @@ class _Flat:
                 return start
         return None
 
+    def page_end_offset(self, page):
+        """Offset just past the last character of `page`.
+
+        Layer B needs where a table-of-contents page *ends*, not where it
+        begins: candidates located inside the TOC sit after its start offset
+        and would survive a `> page_start_offset` filter, which is the whole
+        reason that filter exists.
+        """
+        for container_page, _anchor, _start, end in self.spans:
+            if container_page == page:
+                return end
+        return None
+
 
 def _flatten(containers) -> _Flat:
     parts, spans, cursor = [], [], 0
@@ -549,9 +562,16 @@ def build_subtopics(candidates, flat, containers, parent_deadline=None):
     return tuple(built)
 
 
-def _candidates_from(hits, flat, pages, anchors):
-    """Turn pattern hits into positioned candidates, dropping unlocatable ones."""
-    candidates, cursor = [], 0
+def _candidates_from(hits, flat, pages, anchors, start_at=0):
+    """Turn pattern hits into positioned candidates, dropping unlocatable ones.
+
+    `start_at` is a floor on where a candidate may be located. Layer B needs it
+    set past the table of contents: the TOC lists every heading verbatim and
+    comes first in the document, so a search from offset 0 finds the TOC copy
+    of each title and never reaches the body copy. Filtering those out
+    afterwards leaves nothing at all -- which is what happened before D0a.
+    """
+    candidates, cursor = [], start_at
     for hit in hits:
         page = pages[hit.index] if hit.index < len(pages) else None
         offset = flat.locate(page, hit.text, cursor)
@@ -652,14 +672,21 @@ def _layer_toc(content, containers, flat, deadline, toc_pages):
     if not family:
         return None
     # The TOC's own page numbers are never trusted as boundaries; each title is
-    # located verbatim in the body instead, outside the TOC page range.
+    # located verbatim in the body instead, outside the TOC page range. This is
+    # the END of the last TOC page, not its start -- using the start left every
+    # TOC candidate on the correct side of the filter meant to remove it, so
+    # both the TOC copy and the body copy of each heading entered the candidate
+    # list and the ordinal sequence restarted mid-set (§18.1 package D, D0a).
     body_start = max(
-        (flat.page_start_offset(page) or 0) for page in toc_pages
+        (flat.page_end_offset(page) or 0) for page in toc_pages
     )
     candidates = _candidates_from(
-        hits, flat, [None] * len(titles), [None] * len(titles)
+        hits, flat, [None] * len(titles), [None] * len(titles),
+        start_at=body_start,
     )
-    candidates = [item for item in candidates if item.offset > body_start]
+    # Belt and braces: the floor above should make this a no-op, but a title
+    # that appears only inside the TOC must never become a span.
+    candidates = [item for item in candidates if item.offset >= body_start]
     failures = acceptance_failures(candidates, flat, toc_pages)
     if failures:
         return None
