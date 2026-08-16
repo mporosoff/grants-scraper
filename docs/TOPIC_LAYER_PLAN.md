@@ -954,7 +954,7 @@ def running_lines(containers, threshold=0.4):
 | Encrypted PDF | **Do not add new handling.** `extract_pdf_pages` already calls `reader.decrypt("")` inside a bare `except` for empty-password encryption, and `extract_containers` has already run before segmentation is called. If containers came back empty, Layer A's own `PdfReader` will fail the same way; catch broadly, record `encrypted`, skip |
 | PDF that `pdfplumber` can open but `pypdf` cannot, or vice versa | Each layer guards its own open; a library failure in one layer falls through to the next rather than aborting the document |
 | Document exceeds the time budget | `time_budget` reason, zero subtopics, parent untouched (§6.1) |
-| Topics in a *separate* attachment (common for DOE "Topic Area Descriptions" appendices) | **Deferred past v1.** `source_for_record` returns exactly **one** source per record — `primary_document_url`, else the agency notice URL as a gap-fill. There is no multi-attachment fetch path, and building one means changing `source_for_record`'s contract, its cache key shape, and the `--max-documents` budget. Record it as a known coverage gap; do not smuggle it into this project |
+| Topics in a *separate* attachment (common for DOE "Topic Area Descriptions" appendices) | **Deferred past v1**, and **measured 2026-08-16 — the gap is much larger than "common for DOE appendices" suggested.** All 62 attachments across the 20 census records were enumerated: **12 of 20 records carry more than one attachment**, so the one-source assumption is wrong for 60% of the corpus. One miss is caused by it outright — NRL `352741`'s **32 research topics with 25 per-topic contact mailboxes** live in `Amendment 0004.pdf`, never fetched, while the primary notice it does fetch contains none of them. And the Genesis Mission's **98 focus areas** sit in a `.xlsx` attachment, which `extract_containers` could not parse even if it were fetched (it dispatches on `pdf`/`html`/`text` only, though `openpyxl` is already a runtime dependency). `source_for_record` returns exactly **one** source per record — `primary_document_url`, else the agency notice URL as a gap-fill. Building a multi-attachment path means changing its contract, its cache key shape, and the `--max-documents` budget. Still deferred; the cost is now quantified rather than guessed. See `docs/CORPUS_CENSUS.md` |
 | HTML notice (NSPIRES, agency pages) | `extract_html_sections` already returns section/anchor-keyed containers with no page numbers. Use the section tree as the outline equivalent; same families, same acceptance rules; `page_start`/`page_end` null and the anchor carries the evidence link |
 | Same FOA arriving via two sources (Grants.gov + EERE Exchange) | Dedup on `source_document_hash` before merge; first source wins |
 | Amendment renumbers topics | Title-first matching (§5.3) |
@@ -1855,6 +1855,15 @@ Two changes are **not** flag-reversible, and both are Phase 1: pinning the PDF t
 ---
 
 ## 11. Deferred optional AI layer
+
+**Status: closed, not deferred (2026-08-16).** Assessed against the measured causes of every segmentation miss (`docs/CORPUS_CENSUS.md`): **an LLM labeler under this section's own constraint reaches 0 of 7 misses.** In six of the seven, deterministic segmentation located *no spans at all* — three have no family shape, one was rejected by an acceptance rule, one has its list in an attachment that is never fetched — so there is nothing for a labeler to label. In the remaining two, candidates were located and then rejected, and having a model overturn that rejection is exactly the "discover topics" role this section forbids: the model would be deciding *whether a list exists*, not describing one that does.
+
+The original assessment below — "polish, not mechanism" — is confirmed. The misses are mechanism. **Do not revisit this to raise acceptance; it cannot.**
+
+Two narrower uses survive and are the only reasons to reopen it:
+
+- **Filtering contaminating spans.** Package D measured 7 bad spans in the publishable set — `Open Science`, `Annual Progress Reports`, `Teaming Arrangements`. A model shown those beside `Catalysis Science` would plausibly reject them. That is classification of *located* spans, inside the constraint, and it addresses precision rather than recall.
+- Nothing else. Reading the Genesis `Focus Areas` spreadsheet needs a spreadsheet reader, not a model.
 
 Not built in v1. Recorded so the deterministic design does not preclude it.
 

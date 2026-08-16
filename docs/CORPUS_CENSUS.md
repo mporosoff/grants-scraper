@@ -465,6 +465,257 @@ SCALEUP returning `Allowable Costs`, `Foreign Travel` and `Lobbying` from
 list was found rather than *whether* one was. A binary metric scored that
 fabrication as a success.
 
+## Attachment inventory — the assumption the census inherited
+
+§6.6 requires segmenting every attachment on a record. `source_for_record()`
+returns exactly one, and this census was built on whatever that one was. **No
+secondary attachment had ever been opened.** All 62 were enumerated from the
+live `fetchOpportunity` responses.
+
+> **62 attachments across the 20 records. 12 of 20 carry more than one.
+> Only 8 are genuinely single-attachment.**
+
+The one-source assumption is therefore wrong for **60% of the corpus**, and the
+census's per-document judgments were made against a fraction of each record.
+
+| Record | Attachments | Segmented | Notable secondaries |
+|---|---|---|---|
+| `332894` Army LQC | 5 | `LQC BAA W911NF-21-S-0009-3.pdf` | 3 older BAA versions + a Special Notice |
+| `343653` DHAPP | 2 | main PDF | `FY27 SOW_New Award_YR1.xlsx` |
+| `345241` Army DAC | 1 | main PDF | — |
+| `352741` NRL LRBAA | 3 | `FY24 BAA Announcement FINAL.pdf` | **`Amendment 0004.pdf` — see below** |
+| `355867` NIH | 1 | 429-byte HTML stub | — |
+| `356605` ONR LRBAA | **9** | base BAA | Amendments 0001–0007, none carrying topics |
+| `356623` ARPA-E | 1 | main NOFO | — |
+| `357305` NIH | **0** | — | not in the Grants.gov attachment system at all |
+| `360261` AFRL CHEERS | 2 | **the clauses list** | `Open Period Solicitation 1_BAA Amend 01.pdf` |
+| `360339` CDC | 2 | main PDF | M&E indicator list |
+| `360678` DOE Office of Science | 1 | main NOFO | — |
+| `361526` **Genesis Mission** | **5** | `DE-FOA-0003612.000003.pdf` | **3 `.xlsx` templates — see below** |
+| `362005` HUD | 1 | main PDF | — |
+| `362329` DHA PRMRP | 1 | main PDF | — |
+| `362681` AFOSR | 4 | main BAA | Appendices 1–2 (security/privacy), AFRL addendum |
+| `362711` Army ARL | 1 | main PDF | — |
+| `362859` DARPA MMoMA | 4 | main BAA | proposal templates (`.docx`, `.pptx`) |
+| `363065` DOE NETL | 5 | `Amd_000003` | **`NOFO_Part_2.pdf` — checked, see below** |
+| `363489` DARPA | **10** | main BAA | 9 proposal/cost templates |
+| `363526` AFOSR DEPSCoR | 4 | main NOFO | Amendment 1, Appendices 1–2 |
+
+Three secondaries were fetched and segmented. Two changed nothing; one changed a
+verdict.
+
+**`363065` — `DE-FOA-0003627_NOFO_Part_2.pdf` (1.85 MB, 49 pages): not a topic
+document.** It says so itself: *"Part 2 includes fixed DOE requirements that
+generally do not change from NOFO to NOFO."* Zero mentions of `Topic Area N`,
+zero bookmarks, `no_layer_accepted`. This record's topic areas really are in
+Part 1, drowned in prose mentions — its classification stands.
+
+**`352741` — `N00173-24-S-BA01 Amendment 0004.pdf` (1.18 MB, 49 pages): this is
+where the topic list lives.** The amendment's own purpose line reads *"revise
+Appendix 1 in it's entirety"*, and Appendix 1 is `RESEARCH DESCRIPTION -
+SUMMARY TOPICS`. It contains **32 numbered NRL research topics with 25 distinct
+per-topic contact mailboxes**, organized under four directorates:
+
+```
+A.  SYSTEMS DIRECTORATE - CODE 5000
+    53-24-01  - HIGH FREQUENCY RADAR
+    53-24-01C - HIGH FREQUENCY RADAR (CLASSIFIED)
+    53-24-02  - LOW-COST WIDEBAND ANTENNA ARRAY TECHNOLOGIES
+    55-24-01  - INFORMATION AND DECISION SCIENCES
+    ...
+    82-24-01  - SPACECRAFT & SPACE SYSTEMS TECHNOLOGY
+```
+
+The primary notice the census judged contains none of this. **`352741` is not a
+pattern failure at all — it is a fetch-scope failure**, and it segments nothing
+today because the file holding its topics is never downloaded.
+
+## `DE-FOA-0003612` — where the 99 focus areas actually are
+
+All five attachments, from the live API:
+
+| # | File | Size | Type |
+|---|---|---|---|
+| 1 | `DE-FOA-0003612.000003.pdf` | 1,321,107 B | PDF — **the one segmented**, folder *Full Announcement* |
+| 2 | `Sample OT and Project Agreements … REV2.pdf` | 1,346,203 B | PDF — legal templates |
+| 3 | **`Genesis Mission Phase I Application Template v2.xlsx`** | 28,058 B | **spreadsheet** |
+| 4 | **`Genesis Mission Phase II Application Template.xlsx`** | 35,219 B | **spreadsheet** |
+| 5 | `Genesis Mission Phase II LOI Template v2.xlsx` | 26,515 B | spreadsheet |
+
+**The 21 challenge areas are in attachment 1**, as bookmarks under
+`III. Program Description → A. Purpose`, and segmentation recovers all 21
+exactly.
+
+**The focus areas are in attachments 3 and 4, in a worksheet named
+`Focus Areas`** — the dropdown source list the applicant selects from on the
+`Phase I Summary` sheet (`Focus Area | Select from dropdown menu`).
+
+> **The count is 98, not 99.** The sheet is `A1:A99`: one header cell reading
+> `Topics`, then **98 focus areas**. The widely reported "99" is the row count.
+
+They are coded `<challenge>-<letter>`, and every one of the 21 challenges is
+represented:
+
+```
+1-A  Reenvisioning Advanced Manufacturing and Industrial Productivity | Agentic AI-Driven Chemical Manufacturing
+1-B  Reenvisioning Advanced Manufacturing and Industrial Productivity | AI-Driven Materials Processing
+…
+21-C Artificial Intelligence in Fluid Flow for Energy Components and Technologies | Data-Driven Operational Intelligence
+```
+
+Focus areas per challenge range from **2** (challenges 10, 13) to **10**
+(challenge 9), totalling 98 across 21.
+
+**No mechanism in the plan or on the deferred list reaches them.** Three
+independent barriers, and all three would have to fall:
+
+1. `source_for_record()` returns one attachment; §6.6 defers multi-attachment
+   fetch explicitly.
+2. `extract_containers()` dispatches on `pdf`, `html` and `text` only — a
+   spreadsheet produces no containers, so there is nothing to segment even if it
+   were fetched. (`openpyxl` is already a runtime dependency for other scripts,
+   so this is a dispatch gap, not a dependency one.)
+3. The content is a **dropdown source list**, not prose — there are no spans to
+   summarize, only cell values to read.
+
+This matters because the notice permits **one application per focus area**, so
+the focus area, not the challenge area, is the unit a PI applies against. The
+layer currently exposes the 21 and cannot see the 98.
+
+## Classifying every miss
+
+Six categories, one line each.
+
+| Miss | Cause | Category |
+|---|---|---|
+| `332894` Army LQC | Six thrusts bookmarked as `1.) Spin qubits, fast.` — a bare ordinal no family covers, and at outline depth 0 besides | **(b)** no family shape |
+| `362329` DHA PRMRP | Topic areas are bullets under a named portfolio heading, with no ordinal anywhere | **(b)** no family shape |
+| `362681` AFOSR | Portfolios coded `A.1.a.`, `A.1.b.`, `A.1.c.` followed by `Program Description:` — no family matches that form, and the document has zero bookmarks | **(b)** no family shape |
+| `343653` DHAPP | Ten country FOAs are correctly bookmarked but sit at **outline depth 0**, which §6.3a excludes by construction | **(c)** acceptance rule rejected a legitimate list |
+| `360339` CDC | `Component 1-5` matched cleanly; the located occurrences are a front-matter summary list, spans 88–239 chars against a 200 floor | **(d)** known defect — occurrence selection |
+| `363065` DOE NETL | `Topic Area 1a/1b/1c/2` matched 36 times, but the hits are prose mentions and amendment-log entries; ordinals read `1,2,1,1,1,…` | **(d)** known defect — occurrence selection |
+| `352741` NRL | 32 topics with 25 contact mailboxes live in `Amendment 0004.pdf`, which is never fetched | **(f)** list in a different attachment |
+
+> **(a) 0 · (b) 3 · (c) 1 · (d) 2 · (e) 0 · (f) 1**
+
+**No census judgment was wrong.** Every one of the twelve documents the census
+called enumerating does enumerate — the reading was sound, and category (a) is
+empty. That is worth stating because it means the 42% is a mechanism gap, not a
+measurement artifact.
+
+Separately, **`363526` is an (e) case that is not a miss**: it segments
+correctly at high confidence and is unreachable by the nightly.
+
+### The shapes, quoted
+
+**`332894` — bare `N.)` ordinals, at depth 0:**
+```
+A.1.1 LPS Qubit Collaboratory Priority Research Thrusts (FY 2021)
+1.) Spin qubits, fast.
+2.) More epitaxy, better qubits?
+3.) Voltage controllable superconducting qubits
+4.) Going hot and not looking back
+5.) Beyond Moore, Before Shor
+6.) Accelerated Learning of Quantum Information Concepts
+```
+
+**`362681` — `A.1.a.` codes plus a repeated label, no bookmarks:**
+```
+A.1.a. Energetic Solid-State Physics and Mechanochemistry
+Program Description: The objective of this portfolio is to understand critical…
+A.1.b. Energy, Combustion and Non-Equilibrium Thermodynamics
+Program Description: Majority of Air and Space Forces' system functions rely on…
+A.1.c. Aerodynamic Sciences
+Program Description: The Aerodynamic Sciences portfolio supports basic research…
+```
+An earlier version of this census described these as "39 named portfolios" with
+no ordinal. **That was wrong** — they carry a hierarchical `A.1.a.` code, which
+is a far more tractable shape than "named", and `label_run` may not even be the
+right mechanism for them.
+
+**`362329` — bulleted, under a named portfolio:**
+```
+AUTOIMMUNE DISORDERS AND IMMUNOLOGY
+All applications under this portfolio must be aligned to Autoimmune Disorders and
+Immunology by addressing one topic area and one strategic goal listed below.
+TOPIC AREAS
+• Celiac Disease
+• Eczema
+• Food Allergies
+• Inflammatory Bowel Disease
+```
+
+**`343653` — legitimate list, rejected by the depth-0 rule:**
+```
+L0 p 26  Angola_FOA_COP26_FY27_Final
+L0 p 45  Burundi_FOA_COP26_FY27_Final
+L0 p 63  Ethiopia_FOA_COP26_FY27_Final
+…
+L0 p197  Uganda_FOA_COP26_FY27_Final
+```
+
+## The denominator, re-derived against the live catalog
+
+The frozen 20 has drifted, in both directions.
+
+| | Census | Still in catalog | Reachable by the nightly |
+|---|---|---|---|
+| Enumerating | 12 | **11** (`360339` gone) | **10** (`363526` orphaned) |
+| Non-enumerating | 8 | **6** (`362005`, `362711` gone) | 6 |
+
+> **The correct denominator is 10, not 12**, and the false-positive denominator
+> is **6, not 8**.
+
+Restating the package D result against it:
+
+| Metric | Against 12 | **Against 10 reachable** |
+|---|---|---|
+| Correct-acceptance | 5/12 = 42% | **4/10 = 40%** (`363526` is unreachable) |
+| Publishable **and** reachable | 3/12 = 25% | **2/10 = 20%** — only `360678` and `361526` |
+| False positives | 0/8 | **0/6** |
+
+Three of twenty census records left the catalog within a day of the census being
+taken. Any future acceptance rate should be re-derived at the time it is quoted
+rather than compared against a figure from a previous session.
+
+## §11 — the deferred AI layer, assessed against these causes
+
+§11 constrains the model tightly: it *"would only label and summarize spans
+deterministic segmentation already located"*, and *"does not do: discover
+topics."*
+
+Applying that constraint to the seven misses:
+
+| Category | Misses | Spans located for a model to label | Reachable by §11? |
+|---|---|---|---|
+| **(b)** no family shape | 3 | **zero** — nothing matched | No |
+| **(c)** rule rejected | 1 | zero emitted | No |
+| **(d)** known defect | 2 | candidates located, then rejected | No — adjudicating a rejected set *is* discovery |
+| **(f)** wrong attachment | 1 | zero — file never fetched | No |
+
+> **An LLM labeler under §11's constraint reaches 0 of 7 misses.**
+
+The result is not close, and the reason is structural rather than a matter of
+model quality: **in six of the seven, segmentation located no spans at all**, so
+there is nothing for a labeler to label. In the remaining two, candidates were
+located and then rejected by acceptance — and having a model overturn that
+rejection is precisely the "discover topics" role §11 forbids, because the model
+would be deciding *whether a list exists*, not describing one that does.
+
+**This closes §11 rather than deferring it further.** It was recorded as polish —
+"cleaner human-readable summaries, normalized dates, consistent phrasing" — and
+that assessment is confirmed: it is polish, the misses are mechanism, and polish
+does not fix mechanism. Two narrower uses survive and are worth noting when §11
+is revisited:
+
+- **Filtering the seven contaminating spans.** A model shown `Open Science` and
+  `Annual Progress Reports` alongside `Catalysis Science` would plausibly reject
+  the first two. That is *classification of located spans*, squarely inside
+  §11's constraint, and it addresses the precision defect rather than the recall
+  gap.
+- **Reading the Genesis `Focus Areas` sheet.** Nothing about that requires a
+  model — it needs a spreadsheet reader.
+
 ## Method
 
 Documents were fetched from the attachment URLs already in
