@@ -304,10 +304,10 @@ So on a steady-state night, almost every document takes path 1 or 2, and segment
 ```json
 {
   "record_type": "subtopic",
-  "subtopic_id": "DE-FOA-0003646:ta-2",
-  "opportunity_id": "DE-FOA-0003646:ta-2",
-  "parent_id": "<parent opportunity_id>",
-  "parent_opportunity_number": "DE-FOA-0003646",
+  "subtopic_id": "361526:ta-2",
+  "opportunity_id": "361526:ta-2",
+  "parent_id": "361526",
+  "parent_opportunity_number": "DE-FOA-0003612",
   "subtopic_code": "Topic Area 2",
   "subtopic_code_norm": "ta-2",
   "subtopic_ordinal": 2,
@@ -335,7 +335,37 @@ So on a steady-state night, almost every document takes path 1 or 2, and segment
 }
 ```
 
-Four corrections to the v6.2 shape, all from reading the real catalog:
+**⚠ Identity keys on the parent's catalog `opportunity_id`, never on its opportunity number.** Earlier versions of this section built `subtopic_id` as `<parent_opportunity_number>:<code_norm>`, and that is unbuildable for part of the catalog. Measured 2026-08-16: **20 of 1,475 records carry a null `opportunity_number`** — every one of them from the VPR email digest (`vpr-email:` namespace), and the list is not marginal:
+
+```
+DEFENSE ADVANCED RESEARCH PROJECTS AGENCY (DARPA)     Schmidt Sciences
+NSF Computer and Information Science and Engineering  Sloan Research Fellowships
+NSF Computational and Data-Enabled Science            Simons Foundation collaborations
+NSF Mathematical Foundations of AI                    ACS Petroleum Research Fund
+NSF Plasma Physics · NSF Division of Physics          Camille & Henry Dreyfus Foundation
+```
+
+Several are exactly the umbrella shape this project targets, and a DARPA or NSF-core parent is a *better* segmentation candidate than average, not a worse one.
+
+**What the current implementation actually does, measured rather than assumed.** `scripts/subtopic_records.py` reads `opportunity_number or opportunity_id or ""`, so it does **not** emit `None:ta-2` and does **not** collide — an earlier draft of this section claimed both and was wrong. The fallback makes it safe today and wrong in two quieter ways:
+
+- **The key is mixed.** 1,455 records key on the opportunity number and 20 key on the id. If a VPR-digest record later gains an opportunity number — which is exactly what happens when a program is subsequently posted to Grants.gov — every child's `subtopic_id` changes from `vpr-email:…:ta-2` to `DE-FOA-…:ta-2`, and §5.3's carried-forward identity breaks precisely when the parent becomes more important, not less.
+- **The display field is polluted.** Those 20 records get `parent_opportunity_number` set to `vpr-email:vpr-a63ebf17…`, so a field that exists to show a PI a recognizable solicitation number instead shows an internal digest id.
+
+Every record has an `opportunity_id`; the browser already derives identity from `record.opportunity_id || record.opportunity_number` (`assets/app.js` `recordId`), and `extract_document_evidence` keys its cache the same way. So:
+
+| Field | Role |
+|---|---|
+| `parent_id` | **the parent's `opportunity_id`. The identity key.** |
+| `subtopic_id` | `<parent_id>:<subtopic_code_norm>` |
+| `opportunity_id` | equal to `subtopic_id`, so the browser can find the child at all |
+| `parent_opportunity_number` | **display only.** Retained because a card reading *DE-FOA-0003612 · Topic Area 2* is what a PI recognizes — but nothing keys on it, and it may be null |
+
+This is settled now rather than in package E, because E is where identity gets written into storage and a key change after a backfill means rewriting every record's `subtopic_id` and losing the first-seen dates §5.3 carries forward.
+
+> **⚠ `scripts/subtopic_records.py` still implements the superseded scheme** — `subtopic_id_for(parent_opportunity_number, code_norm)`, with the fallback described above, and `parent_opportunity_number` populated from the same fallback. **Changing it is the first item of package E**, before any cache is written. It is free to change today because no backfill has run and `data/subtopic_records.json` does not exist; it is expensive after. Two assertions in `tests/test_subtopic_records.py` pin the old shape (`DE-FOA-0003600:ta-1`) and will need updating with it — that is a specified design change, not a test bent to fit code.
+
+Four further corrections to the v6.2 shape, all from reading the real catalog:
 
 - **`opportunity_id` is required, not optional.** The browser derives every record's identity from `record.opportunity_id || record.opportunity_number` (`assets/app.js` `recordId`), and `extract_document_evidence` keys its cache the same way. A child with neither is invisible to half the system. Setting it equal to `subtopic_id` is the least surprising choice.
 - **`program_area_tags` was invented.** No such field exists, and the example values matched neither real vocabulary. There are two actual vocabularies and they are different things: `topic_areas` holds **Topic-facet display strings** like `"Catalysis and reaction engineering"` (this is the field that feeds facets and `feeds/topic/*.xml`), while `program_areas.py` labels are lowercase shorthand like `"catalysis"`, `"carbon management"`. A child record must populate `topic_areas` to appear under a facet at all. `co2_utilization` exists in neither vocabulary and has been removed.
@@ -426,6 +456,14 @@ def match_subtopics(old: list[dict], new: list[dict]) -> list[tuple]:
 ```
 
 `subtopic_id` is assigned once at first sight and **carried forward through matching**, so identity survives renumbering, retitling and repagination.
+
+**The key inside `subtopic_id` is the parent's `opportunity_id`, not its opportunity number (§5.1).** Twenty catalog records — DARPA, four NSF core programs, Schmidt Sciences, Sloan, Simons, ACS PRF and others from the VPR digest — have a null `opportunity_number`, so a number-keyed identity is `None:ta-2` for all of them at once: every such parent's children collide with every other's, and the collision is silent. `normalize_code` and `title_fingerprint` above are unaffected — they operate on the code and title, which exist regardless — and only the composition of `subtopic_id` changes:
+
+```python
+subtopic_id = f"{parent['opportunity_id']}:{normalize_code(code)}"
+```
+
+`match_subtopics` itself needs no change: it pairs on `title_fingerprint`, then fuzzy title, then `subtopic_code_norm`, none of which involve the parent key. What changes is only what the carried-forward `subtopic_id` is made of. Keep `parent_opportunity_number` on the record for display (§5.1), and never match on it.
 
 ### 5.4 Diff stability
 
@@ -2089,6 +2127,7 @@ Per-agency-family acceptance, as the gate requires rather than in aggregate: **D
 
 ### Package E — Storage and scoring
 
+- [ ] **E0. Re-key subtopic identity onto the parent's `opportunity_id`** (§5.1, §5.3). **Do this before anything writes a cache.** `subtopic_records.py` keys on `opportunity_number` with an `opportunity_id` fallback, so 1,455 records key one way and 20 key the other, and a VPR-digest parent that later gains an opportunity number silently re-identifies all its children. Free today — no backfill has run; expensive after E2
 - [ ] E1. Prototype cross-corpus scoring on the frozen catalog — this resolves **§13.1**
 - [ ] E2. Implement the winner (sidecar or in-catalog children)
 - [ ] E3. **Minimal currentness only:** a subtopic is current **iff its parent is current**. Nothing else
