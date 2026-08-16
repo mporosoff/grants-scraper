@@ -753,6 +753,9 @@ def _layer_headings(content, containers, flat, deadline, toc_pages):
             for index, page in enumerate(pdf.pages[:SUBTOPIC_CHAR_SCAN_PAGES], 1):
                 if monotonic() > deadline:
                     return None          # budget spent; caller records the reason
+                if index in toc_pages:   # §18.1 package D item D0b, as Layer D
+                    page.flush_cache()
+                    continue
                 for line in page_lines(page):
                     body_sizes.append(line["size"])
                     all_lines.append((index, line))
@@ -788,6 +791,15 @@ def _layer_numbered(content, containers, flat, deadline, toc_pages):
     """
     lines, pages, anchors = [], [], []
     for container in containers:
+        # §18.1 package D item D0b. Table-of-contents pages list every heading
+        # verbatim, so collecting them alongside the body puts two copies of
+        # each candidate in one set: the ordinal sequence runs 1..n and then
+        # restarts at 1, and the TOC copies are a few dozen characters long.
+        # §6.4 rule 6 only rejects candidates *confined* to the TOC, so a mixed
+        # set passes rule 6 and fails rules 2 and 3 instead -- which reads as a
+        # pattern failure and is not one.
+        if container.get("page") in toc_pages:
+            continue
         for line in (container.get("text") or "").splitlines():
             stripped = line.strip()
             if not stripped:
