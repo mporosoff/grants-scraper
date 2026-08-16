@@ -79,6 +79,37 @@ BOLD_RE = re.compile(r"bold|black|heavy|semibold|demi", re.IGNORECASE)
 DOT_LEADER = re.compile(r"^(?P<title>.+?)\.{3,}\s*(?P<page>\d+)\s*$")
 TOC_MIN_LEADER_LINES = 5
 
+# §6.4 rule 8 -- the announcement-furniture veto, FITTED not reasoned.
+#
+# Every word here is about the *process* of applying for or administering an
+# award, and none of them can name a research subject. The list deliberately
+# excludes `information`, `research`, `area`, `program`, `project`, `technology`
+# and similar: those appear in legitimate topic titles, and including
+# `information` alone moved the worst legitimate set from 0.008 to 0.043.
+#
+# Fitted against the 22 accepted documents of the 770-document backfill, each
+# labelled by reading every title (docs/CORPUS_CENSUS.md):
+#
+#   legitimate sets   process-token rate 0.000 - 0.008   (n=10, incl. 363526)
+#   furniture sets    process-token rate 0.133 - 0.889   (9 of 13 caught)
+#
+# The threshold sits mid-gap. The four furniture sets it does NOT catch score
+# 0.000 -- they are review criteria, programme phases, NEPA factors and M&E
+# workstreams, which share no vocabulary with the application process. They are
+# handled by confidence tiering instead, not by this rule.
+PROCESS_VOCABULARY = frozenset({
+    "summary", "detail", "fund", "funding", "award", "purpose", "goal",
+    "objective", "authority", "authorization", "cost", "indirect", "history",
+    "background", "context", "description", "narrative", "section", "criteria",
+    "consideration", "statute", "regulation", "mandate", "guidance",
+    "requirement", "legal", "eligible", "eligibility", "application",
+    "proposal", "example", "table", "plan", "contribution", "matching",
+    "overview", "statement", "oversight", "restriction", "law", "submission",
+    "deadline", "unallowable", "appendix", "checklist", "instruction",
+    "template", "form", "notice", "nofo", "solicitation", "attachment",
+})
+PROCESS_TOKEN_MAX = 0.07
+
 SENTENCE_END = re.compile(r"(?<=[.!?])\s+")
 ISO_DATE = re.compile(r"\b(\d{4})-(\d{2})-(\d{2})\b")
 MONTH_NAMES = (
@@ -543,6 +574,18 @@ def acceptance_failures(candidates, flat, toc_pages=(), family_type="ordinal"):
             if previous_end is not None and next_start - previous_end > 1:
                 failures.append("page_gap")
                 break
+
+    # 8. Announcement-furniture veto, applied to EVERY family. The backfill
+    # showed this failure is not specific to structural sets: a `component`
+    # match at Layer C produced `Monitoring, Evaluation, and Learning` just as
+    # an outline set produced `1. NOFO Summary`. See PROCESS_VOCABULARY.
+    tokens = [token for item in ordered for token in tokenize(item.title)]
+    if tokens:
+        process_rate = sum(
+            1 for token in tokens if token in PROCESS_VOCABULARY
+        ) / len(tokens)
+        if process_rate >= PROCESS_TOKEN_MAX:
+            failures.append("administrative_vocabulary")
 
     # 6. Candidates must not be confined to the table of contents.
     if toc_pages and all(
@@ -1024,7 +1067,12 @@ def _layer_headings(content, containers, flat, deadline, toc_pages):
     failures = acceptance_failures(candidates, flat, toc_pages)
     if failures:
         return None
-    return ("heading_font", "medium", family, candidates)
+    # `low`, not `medium`, and that is fitted rather than reasoned: across the
+    # 770-document backfill Layer C produced exactly ONE accepted result and it
+    # was wrong -- a `component` match yielding `Capacity Building`, `Strategic
+    # Communications`, `Monitoring, Evaluation, and Learning`. 0/1 precision is
+    # not enough to publish on, and low confidence never publishes (§13).
+    return ("heading_font", "low", family, candidates)
 
 
 def _layer_numbered(content, containers, flat, deadline, toc_pages):

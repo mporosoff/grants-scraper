@@ -756,6 +756,165 @@ Three things follow, and none of them is more pattern tuning:
    already applied to secondary attachments, for the same reason and with far
    more evidence behind it.
 
+## D5: fitting a precision fix against the backfill
+
+The backfill's 22 accepted documents were labelled by reading every title — **9
+right, 13 wrong** — and that labelled set is what the thresholds below are
+fitted to. Two reasoned thresholds have already failed at their stated purpose
+(§6.4a's type/token, §6.3a's ancestor lexicon), so nothing here is reasoned.
+
+### What separates a real topic list from announcement furniture
+
+Five candidate features were measured across all 22 sets. Four overlap and
+cannot separate at any threshold:
+
+| Feature | Legitimate range | Furniture range | Verdict |
+|---|---|---|---|
+| existing `is_administrative` rate | 0.00–0.07 | 0.00–0.20 | overlaps |
+| title-level process rate | 0.00–1.00 | 0.73–1.00 | overlaps |
+| type/token ratio | 0.46–0.85 | 0.42–1.00 | overlaps |
+| median title length | 19–66 | 17–72 | overlaps |
+| **process-vocabulary token rate** | **0.000–0.008** | **0.133–0.889** (9 of 13) | **separates** |
+
+The winning feature is the fraction of *tokens* — not titles — drawn from a
+vocabulary describing the **process of applying for an award**: `summary`,
+`purpose`, `authority`, `narrative`, `statute`, `eligibility`, `unallowable`.
+Nothing in that list can name a research subject.
+
+Two deliberate exclusions, both measured: `information`, `research`, `area`,
+`program`, `project` and `technology` are **out**, because they occur in
+legitimate titles. Adding `information` alone moved the worst legitimate set
+from 0.008 to 0.043 — still passing, but at four times the margin.
+
+> **Fitted threshold: 0.07**, sitting mid-gap between the highest legitimate
+> set (0.008, DOE Genesis) and the lowest furniture set it catches (0.133).
+> Applied to **every** family as §6.4 rule 8, not only structural ones —
+> the backfill showed Layer C producing `Monitoring, Evaluation, and Learning`
+> exactly as an outline set produced `1. NOFO Summary`.
+
+### The automatic check, scored
+
+Item 2 asked whether this can be detected without a human reading titles.
+
+```
+   true positives  (wrong, flagged)   9
+   false negatives (wrong, missed)    4
+   false positives (right, flagged)   0
+
+   PRECISION (of what it flags)  100%
+   RECALL    (of the wrong sets)  69%
+   COST      (legitimate sets lost)  0 of 9
+```
+
+**It flags nothing legitimate and catches roughly two-thirds of the
+fabrications.** That is useful separation, and it is honest about the third it
+misses. The four it misses score **0.000** — they share no vocabulary with the
+application process because they are not application furniture:
+
+| Missed | What it is | Caught instead by |
+|---|---|---|
+| `362823` | NEPA environmental review factors | `low` confidence |
+| `360378` | proposal rating scale | `low` confidence |
+| `363315` | programme phases of one project | `low` confidence |
+| `363470` | M&E workstreams (`Capacity Building`, `MEL`) | **nothing — see below** |
+
+**No vocabulary test can reach those four**, and saying so is the finding: they
+are wrong for semantic reasons — criteria, phases, factors, workstreams — that
+share no lexical signal with the failure the check was fitted to. Confidence
+tiering, not the check, is what contains them.
+
+### The second fitted change: Layer C demoted
+
+`363470` was the one fabrication surviving both the check and the tier, and it
+came from Layer C at `medium`. Measured across the whole backfill:
+
+> **Layer C (`heading_font`) produced exactly ONE accepted result in 770
+> documents, and it was wrong.** 0/1 precision.
+
+`heading_font` therefore emits `low`, which never publishes. That is fitted from
+770 documents, not reasoned from the design's intent for the layer.
+
+### Where this leaves the publishable set
+
+| | Before D5 | After D5 |
+|---|---|---|
+| Documents publishing | 12 | **4** |
+| Legitimate records | 140 | **140** |
+| **Fabricated records** | **54** | **0** |
+
+Every legitimate record survives. `361169`'s seven USDA Program Areas were the
+one legitimate set at risk under the first lexicon draft, and the narrower
+vocabulary keeps them.
+
+## The reachability ceiling
+
+Item 3: 246 of 1,016 evidence entries were never attempted — **16.7% of the
+catalog**. The breakdown matters more than the total, and most of it is not a
+reachability problem at all:
+
+| Cause | Count |
+|---|---|
+| **Stale cache entries** — the record has left the catalog | **213** |
+| Reachable, simply not reached before `--max-documents` ran out | 20 |
+| No document URL of any kind | 7 |
+| Agency URL present but no gap-fill needed, so `source_for_record` declines | 6 |
+
+**The genuine unreachable-by-design population is 13 records, not 246** — the
+7 with no URL and the 6 in `363526`'s orphan pattern. The 213 are cache residue
+and should be pruned, not fetched.
+
+**Nine plausible umbrellas sit in the unreached set, and all nine are NASA
+ROSES** — `ROSES25: A.13 Accelerating Earth Solutions`, `B.2 Heliophysics
+Foundational Research`, `C.4 Planetary Science Enabling Facilities`, `D.8`,
+`F.17`. They are *reachable* — `source_for_record` returns an `agency_notice`
+URL for each — and they fail at fetch time, not at resolution time. Their
+notices live on `nasaprs.com`, which is NSPIRES, whose activation §18.2 defers.
+They are also the exact shape `roses_element` exists to match. The family, the
+documents and the deferral are three parts of one gap.
+
+## The 20 request failures
+
+Item 4. The backfill recorded 25 entries carrying `last_error` across both runs:
+
+| Failure | Count | Detail |
+|---|---|---|
+| `ConnectionResetError` from `nasaprs.com` | 12 | NASA's NSPIRES host resets the connection; includes all 9 ROSES umbrellas above |
+| `403 Forbidden` from `transit.dot.gov` | 4 | DOT FTA refuses the client outright |
+| `403 Forbidden` from `rd.usda.gov` | 2 | USDA Rural Development, same pattern |
+| `ConnectionResetError`, record no longer in catalog | 5 | stale entries, failing against dead URLs |
+| `404 Not Found` | 2 | `bja.ojp.gov` and `nsf.gov/ods` — dead links |
+
+One line each, per record:
+
+```
+363224 NASA   ConnectionReset   ROSES25 A.13 Accelerating Earth Solutions
+362495 NASA   ConnectionReset   ROSES25 F.17 Research Initiation Awards
+360003 NASA   ConnectionReset   ROSES 2025 A.10 INNOVATE
+361234 NASA   ConnectionReset   ROSES25 B.2 Heliophysics Foundational Research
+363240 NASA   ConnectionReset   ROSES25 A.14 Atmosphere
+363325 NASA   ConnectionReset   ROSES25 D.8 Habitable Worlds Observatory
+363241 NASA   ConnectionReset   ROSES25 A.15 Biosphere
+363258 NASA   ConnectionReset   ROSES25 C.4 Planetary Science Enabling Facilities
+359996 NASA   ConnectionReset   ROSES 2025 A.4 Rapid Response and Novel Research
+360004 NASA   ConnectionReset   ROSES, unlabelled
+300997 NASA   ConnectionReset   legacy NASA record
+318918 NASA   ConnectionReset   legacy NASA record
+362568 DOT    403 Forbidden     transit.dot.gov
+363122 DOT    403 Forbidden     transit.dot.gov
+363321 DOT    403 Forbidden     transit.dot.gov
+363322 DOT    403 Forbidden     transit.dot.gov
+310029 USDA   403 Forbidden     rd.usda.gov
+363400 USDA   403 Forbidden     rd.usda.gov
+363550 BJA    404 Not Found     bja.ojp.gov/funding
+363551 NSF    404 Not Found     nsf.gov/ods
+363066 gone   ConnectionReset   record no longer in catalog
+363067 gone   ConnectionReset   record no longer in catalog
+362338 gone   ConnectionReset   record no longer in catalog
+362340 gone   ConnectionReset   record no longer in catalog
+```
+
+Two hosts account for 18 of 25. Neither is a segmentation problem.
+
 ## Classifying every miss
 
 Six categories, one line each.

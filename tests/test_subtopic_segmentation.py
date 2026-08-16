@@ -511,6 +511,40 @@ class AcceptanceRuleTests(unittest.TestCase):
         )
         self.assertIn("missing_titles", failures)
 
+    def test_rule_8_rejects_announcement_furniture(self):
+        # Fitted against the 770-document backfill: legitimate sets score
+        # 0.000-0.008 on process vocabulary, furniture sets 0.133-0.889.
+        furniture = [
+            "1. NOFO Summary",
+            "2. Funding Details",
+            "A. Purpose",
+            "B. Goals and Objectives",
+            "C. Authority",
+        ]
+        candidates = [
+            seg._Candidate(code=t, ordinal=i + 1, ordinal_label=str(i + 1),
+                           title=t, offset=i * 400, page=i + 1, anchor=None)
+            for i, t in enumerate(furniture)
+        ]
+        failures = seg.acceptance_failures(candidates, self._flat())
+        self.assertIn("administrative_vocabulary", failures)
+
+    def test_rule_8_leaves_real_topic_titles_alone(self):
+        real = [
+            "(q) Catalysis Science",
+            "(r) Separation Science",
+            "(a) Materials Chemistry",
+            "(c) Synthesis and Processing Science",
+            "(m) Gas Phase Chemical Physics",
+        ]
+        candidates = [
+            seg._Candidate(code=t, ordinal=i + 1, ordinal_label=str(i + 1),
+                           title=t, offset=i * 400, page=i + 1, anchor=None)
+            for i, t in enumerate(real)
+        ]
+        failures = seg.acceptance_failures(candidates, self._flat())
+        self.assertNotIn("administrative_vocabulary", failures)
+
     def test_a_clean_set_passes_every_rule(self):
         self.assertEqual(
             seg.acceptance_failures(self._candidates([1, 2, 3]), self._flat()), ()
