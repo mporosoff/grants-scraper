@@ -117,12 +117,20 @@ jobs:
         run: python -m scripts.update_catalog_docs
       - name: Run regression tests against generated asset
         run: python -m unittest discover -s tests -v
+      - name: Record the build heartbeat
+        shell: bash
+        # Scheduled workflows are disabled after 60 days without repository
+        # activity, and diff-stable serialization means a quiet stretch can
+        # produce no commit at all -- so the schedule can lapse with no error
+        # anywhere. Writing this unconditionally guarantees one commit per
+        # successful run. Nothing reads it. See docs/TOPIC_LAYER_PLAN.md §16.3.
+        run: date -u +"%Y-%m-%dT%H:%M:%SZ" > .github/last_build
       - name: Commit refreshed catalog
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md PROJECT.md match_explorer.html team_match.html data/opportunities.js data/opportunity_enrichment.json data/document_evidence.json data/source_records.json data/faculty_matches.js data/link_health.json feeds
+          git add README.md PROJECT.md match_explorer.html team_match.html data/opportunities.js data/opportunity_enrichment.json data/document_evidence.json data/source_records.json data/faculty_matches.js data/link_health.json feeds .github/last_build
           if git diff --cached --quiet; then
             echo "The generated catalog is unchanged."
           else
