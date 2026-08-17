@@ -4,8 +4,40 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/changes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/changes.xml</id>
-  <updated>2026-08-16T10:42:22Z</updated>
+  <updated>2026-08-17T10:50:34Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Closing soon: Effects of International Parental Child Abduction on Abducted Children and Left-Behind Parents</title>
+    <link href="https://www.grants.gov/search-results-detail/363297"/>
+    <id>urn:funding-finder:change:b9f0203ef2e3ab0af523</id>
+    <updated>2026-08-17T10:48:49.164794Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-16</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Collaborative Research</title>
+    <link href="https://www.grants.gov/search-results-detail/363084"/>
+    <id>urn:funding-finder:change:176b4ac6f66e3786b9ea</id>
+    <updated>2026-08-17T10:48:49.164794Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-16</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: DoW Reconstructive Transplant, Concept Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362607"/>
+    <id>urn:funding-finder:change:0ee4e131c40e416edbc0</id>
+    <updated>2026-08-17T10:48:49.164794Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-16</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Scholarly Editions and Translations</title>
+    <link href="https://www.grants.gov/search-results-detail/363014"/>
+    <id>urn:funding-finder:change:0775798536a11f5f2b0f</id>
+    <updated>2026-08-17T10:48:49.164794Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-16</summary>
+  </entry>
   <entry>
     <title>Closing soon: NSF Computational and Data-Enabled Science and Engineering (CDS&amp;E) | NSF - National Science Foundation PD 24-8084</title>
     <link href="https://new.nsf.gov/funding/opportunities/computational-data-enabled-science-engineering-0"/>
@@ -1570,38 +1602,6 @@
     <title>Opportunity amended: Innovative Traffic Safety Enforcement (ITSE) Grant Program</title>
     <link href="https://www.grants.gov/search-results-detail/363446"/>
     <id>urn:funding-finder:change:bb801313b6840fa680b1</id>
-    <updated>2026-08-13T11:11:42.582482Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: PROGRAM FOR INVESTMENT IN MICROENTREPRENEURS (PRIME) FY 2026</title>
-    <link href="https://www.grants.gov/search-results-detail/363196"/>
-    <id>urn:funding-finder:change:b404929ab5779c2eec8e</id>
-    <updated>2026-08-13T11:11:42.582482Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: U.S.-Africa Strategic Investment Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363554"/>
-    <id>urn:funding-finder:change:b3b708307088b97d148f</id>
-    <updated>2026-08-13T11:11:42.582482Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Process Systems, Reaction Engineering, and Molecular Thermodynamics</title>
-    <link href="https://www.grants.gov/search-results-detail/348793"/>
-    <id>urn:funding-finder:change:b2eb634b976cf5111165</id>
-    <updated>2026-08-13T11:11:42.582482Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Biosensing</title>
-    <link href="https://www.grants.gov/search-results-detail/320536"/>
-    <id>urn:funding-finder:change:b17e999ac9d3b89c8b3d</id>
     <updated>2026-08-13T11:11:42.582482Z</updated>
     <category term="amended"/>
     <summary>Official source record changed</summary>

@@ -177,7 +177,7 @@ self-service account, personalized RSS, and email-service architecture.
 
 <!-- catalog-stats:start -->
 This replaces the former 48-record Chemical and Sustainability Engineering feed. The
-August 16, 2026 build contains 1,466 current funding opportunities (1,160 posted and 306
+August 17, 2026 build contains 1,466 current funding opportunities (1,160 posted and 306
 forecasted) from Grants.gov (1,402), NYSERDA (39), U.S. National Science Foundation (1),
 VPR funding digest (limited submissions & foundations) (24), with no deadline before the
 catalog date. It provides a direct official announcement for 371 records, an official
