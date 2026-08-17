@@ -1499,7 +1499,47 @@ const parentScore = Math.max(scoreRecord(parent), ...childScores, 0);
 
 Children render collapsed under the parent, expandable, with a matched-topic count badge. Topic cards reuse the parent's save/calendar/source actions and carry a page anchor to their own evidence.
 
-### 7.4 Assertion-based regression detection
+### 7.4 Source-health canaries — detecting silent incompleteness
+
+**Reframed in 8.7, and the reframing is the point.** This was written as
+`expected_solicitations` — a curated list of notices that ought to exist, which
+reads as a registry and was deferred in §18.2 as one ("no assertion that a known
+umbrella silently vanished"). It is not a registry. **It is the only instrument
+in the plan that detects a parser succeeding at nothing.**
+
+**The failure mode it exists for.** A scraper against an agency page returns
+**HTTP 200**, the adapter reports healthy, the run is green, the diagnostics show
+no errors — and the parser extracted **zero rows** because the page was
+restyled. Every existing health check passes: the fetch worked, nothing raised,
+`no_layer_accepted` is a normal outcome (§9.3), and zero subtopics is
+indistinguishable from a notice that genuinely has none. **Silent incompleteness
+is the characteristic failure of structured sources**, and D⅝ is about to add
+three of them.
+
+A canary is therefore an assertion about **shape, not content**: not *"this
+notice should exist"* but *"if this source is healthy, it yields at least this
+much."*
+
+| Canary | Assertion | Catches |
+|---|---|---|
+| **ROSES** | **≥20 open program elements** | Table 3 restyled, moved, or paginated; NSPIRES auth wall; a parser matching a heading that no longer exists |
+| **DOE SC continuation** | the current Office of Science continuation notice **contains its BES children** | The program-page scraper silently losing one office; a taxonomy that stopped at program-office level |
+| **ONR LRBAA** | **a current parent exists** at all | The long-range BAA rolling to a new number and the source router matching nothing |
+
+Each states a floor an unhealthy source falls through, and none asserts an exact
+count — an exact count is a curated registry and goes stale on the agency's
+schedule, which is the objection that got this deferred in the first place.
+
+**Wiring.** A canary failure is a **source-health** failure, not a segmentation
+failure: it opens the existing owner issue through the channel §16.1 already
+uses, and it **publishes nothing new for that source** — the same fail-closed
+outcome as a classifier outage (§18.1 Cov4). It must not be `continue-on-error`,
+which is the defect §9.3 records for the document-evidence step.
+
+**This supersedes §18.2's deferral of `expected_solicitations`.** That line reads
+*"no assertion that a known umbrella silently vanished from a healthy source"* and
+treats it as a nice-to-have. With D⅝ adding native and referenced sources, it is
+the mitigation for §12's scraper-fragility row and ships **with S1**, not after.
 
 `data/expected_solicitations.json`:
 
@@ -2385,6 +2425,7 @@ Not built in v1. Recorded so the deterministic design does not preclude it.
 | Segmentation false positives on reference lists | Acceptance rules (§6.4); nothing below `high` publishes without an explicit hash-bound approval (§7.1, §18.1 Cov4) |
 | **REALIZED 2026-08-17 — a pattern family that never fires is invisible to every metric in this plan** | Seven of §6.3's ten families accumulated unmeasured across four work packages: **five never fired once across 170 real documents, and two fired only on documents carrying no list** (`roses_element` on `A.1 BACKGROUND AND OBJECTIVES`, `area_of_interest` on another opportunity's topics). Nothing caught it because acceptance rate, false-positive count and the rejection histogram are all computed **per document**, so a family contributing nothing contributes nothing to any of them, and a passing synthetic fixture (§10 step 11) looks identical to real coverage. Mitigation is §17.8: a validating document **quoted** per family, and **per-family fire counts reported including the zeros**. B0 had the evidence in 2026-08-16 — zero matches from all ten families on three notices — and read it as the families being appropriately narrow |
 | **A family matches the container instead of its members, which is worse than missing** | `thrust` fires on DTRA `356612` — a real hit — and matches `Thrust Area 1`, the umbrella, while the fundable list is `Topic A1`–`A7` beneath it. That segments one plausible card where seven belong, so it presents as a success in every count. Acceptance rules cannot see it: one candidate simply fails rule 1 and the set is silently declined, or worse, passes with the wrong granularity. Mitigation: §18.1 Fm4 scopes or retires it, and §17.8 requires the validating quote to be **at the granularity the family claims** |
+| **Agency-HTML scrapers break silently, and structured sources are where this hurts most** | A restyled page returns **HTTP 200 with zero rows**, and every existing check passes: the fetch worked, nothing raised, and zero subtopics is a normal outcome (§9.3). **This is a durability tradeoff and it should be stated plainly rather than assumed away.** Generic PDF parsing is robust to agency redesigns — a bookmark tree is a bookmark tree — and buys weak evidence: §6.3 measures the families at 10% of the enumerating population, and 7 of 10 were retired with no corpus support. A ROSES table parser is strong evidence and **brittle against a site redesign nobody warns us about**. D⅝ chooses the brittle-and-strong option deliberately, on the argument that a loud failure is recoverable and silent weak coverage is not — but the maintenance surface is real and grows per source, which is exactly why §18.1 D⅝ builds **one** adapter and re-measures rather than three. Mitigation: **§7.4 canaries**, one per source, asserting a floor rather than a count; a canary failure is a source-health failure that publishes nothing new for that source and opens the owner issue |
 | **`--max-documents` caps each pass, not the run — so the flag understates the work by 2× with subtopics on** | Measured by reading the call site: `refresh_subtopics_without_source` is passed **the same `max_documents` value** as the administrative pass (`extract_document_evidence.py`, the Cov1 insertion under `if enable_subtopics`), not a share of it. Each pass independently takes `candidates[:max_documents]`, so `--max-documents 45` can fetch up to **90** documents and the D4/D5 backfills' `--max-documents 1200` could attempt **2,400**. Nothing is wrong with the results; what is wrong is that the nightly's runtime headroom (§9's 15-minute ceiling) and every published backfill figure were reasoned against one pass. Either split one budget across both passes or give the subtopic pass its own named flag — **do not silently halve the existing default**, which is load-bearing (§0.4 rule 8) |
 | **An evidence entry outlives the record that produced it, and is then never rechecked** | Measured: **13 orphans** in the catalog — records carrying an evidence entry whose parent no longer resolves to a source, 12 of them `primary_notice`. `363526` is the named case and was the corpus's only high-confidence acceptance. Separately, **213 cache entries belong to records that have left the catalog entirely**. Neither population is pruned, neither is refetched, and both inflate any denominator computed from the cache rather than from the catalog — which is exactly the error `docs/COVERAGE_SURVEY.md` corrected when it replaced "246 of 1,016 evidence entries" with "685 of 1,475 catalog records". Mitigation: prune on the catalog, never on the cache, and compute every rate against the catalog (§15 debt) |
 | **A rate is quoted against a denominator that has since changed** | Measured, twice. `360339` — one of the census's twelve enumerating documents and the sole validating record for the `component` family — **left the catalog within a day of the census being taken**, along with `362005` and `362711`. Every acceptance rate quoted as "of 12" silently became "of 11". The corpus moves under the measurements: 3 of 20 census records were gone within 24 hours. Mitigation, already stated in `docs/CORPUS_CENSUS.md` and now a rule here: **re-derive a denominator at the moment you quote it, and name the date.** Do not compare a rate to a figure from a previous session without re-deriving both |
