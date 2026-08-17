@@ -1347,24 +1347,74 @@ example below, not the scope.
 #### 6.7·0 The source router — least-ambiguous source gets first refusal
 
 **The rule.** For any record, resolve its subdivisions from the *highest rung of
-the §5.1 provenance ladder that answers*, and stop there. Lower rungs are not
-consulted for that record unless the higher one **declines**, and a higher rung
-that answers *wrongly* is a canary failure (§7.4), never an invitation to fall
-back.
+the §5.1 provenance ladder that **answers credibly***, and stop there.
+
+**"Answers credibly" is the load-bearing qualifier, and an earlier draft of this
+section omitted it.** First refusal applies only to a source that passes its
+health and structure checks. **A rung that returns something implausible has not
+answered — it has failed, and it declines.** Otherwise the most damaging failure
+in this design becomes the quietest: a restyled agency page returns HTTP 200 and
+three rows where thirty-five belong, the router accepts three children, and a
+viable `inline` or `inferred` path that would have found more is suppressed by a
+source that looked authoritative. **A partial structured answer is worse than no
+structured answer**, because it is indistinguishable from a small parent.
 
 | Order | Rung | Asks | Declines when |
 |---|---|---|---|
-| 1 | **`native`** | Is there a published child list, table or API for this parent? | No registered native source matches this parent |
-| 2 | **`referenced`** | Does an agency program page establish this parent's children? | No program-page rule matches |
-| 3 | **`inline`** | Does the solicitation enumerate them in a recognised form? | No family accepts (§6.4) |
+| 1 | **`native`** | Is there a published child list, table or API for this parent? | No registered source matches · **the parse fails its structure checks** · **the row count falls below the source's canary floor (§7.4)** |
+| 2 | **`referenced`** | Does an agency program page establish this parent's children? | No rule matches · **the fetch failed or returned a shell** · **the child count is implausible for that parent** |
+| 3 | **`inline`** | Does the solicitation explicitly state the fundable child relationship? | No family accepts (§6.4), or the notice makes no such statement (§5.1) |
 | 4 | **`inferred`** | Can generic structural inference establish a set? | `no_layer_accepted` |
 
-**Why first refusal rather than merge.** Merging a native list with an inferred
-one produces a record whose provenance is not a single value and whose
-disagreements are invisible. Twelve ROSES elements and nine inferred spans is
-not twenty-one children and not a union — it is one right answer and one
-measurement that the parser or the notice has drifted. §5.1's rule 1 states it;
-this is where it is enforced.
+**Plausibility is per source and declared with the source, never global.** Each
+registered `native` or `referenced` source carries a minimum-yield floor and a
+shape assertion in `expected_solicitations` (§7.4) — ROSES ≥20 elements, DOE SC
+containing its BES children. **A rung falling through its own floor does two
+things at once:** it declines, so the router continues to the next rung, *and* it
+raises a source-health failure, so the degradation is visible rather than
+absorbed. Those are not alternatives. An earlier draft said a wrong answer was
+"a canary failure, never an invitation to fall back" — that is now wrong in both
+halves: it is a canary failure **and** the router must continue, because
+suppressing a working fallback is not fail-closed, it is silently degraded.
+
+**When a lower rung answers after a higher rung declined, the record's provenance
+is the rung that answered.** Provenance records what established the
+relationship, not what was attempted.
+
+#### Corroboration and dedup when two paths find the same child
+
+More than one rung may identify the same child — a ROSES element that also
+appears as an `inline` heading, a DOE programme found both on the program page
+and in the notice's bookmark tree. That is **corroboration, and it is worth
+recording rather than discarding.**
+
+**Matching.** Two candidates are the same child when they share a normalized
+identity: `subtopic_code_norm` if both carry a code, else `title_fingerprint`
+(§5.1, §5.3's title-first matching). Page anchors and URLs must **not** be part
+of the match key — the same child legitimately has a page anchor from the notice
+and a URL from the program page.
+
+**Resolution.** The higher rung's record is kept whole. From the lower rung's
+record, take only fields the winner lacks — most usefully a `page_start` anchor
+the notice supplies and a `native` table does not, which is how a ROSES element
+gains a citable in-notice location. Record `corroborated_by: [<rung>, …]` on the
+survivor. **Corroboration never raises confidence above the winning rung's
+ceiling**, because two paths reading the same drifted source agree just as
+readily as two paths reading a correct one.
+
+**Disagreement is a signal and must be surfaced.** If the higher rung yields
+twelve children and a lower rung yields nine of them plus three the higher rung
+never mentioned, the answer is still the higher rung's twelve — **and the three
+orphans are logged as a reconciliation warning against that source**, because
+they are the cheapest available evidence that a table has gone stale. Do not
+merge them in, and do not silently drop them.
+
+**Why first refusal rather than merge, still.** Merging by default produces a
+record whose provenance is not a single value and whose disagreements are
+invisible. Twelve ROSES elements and nine inferred spans is not twenty-one
+children and not a union. §5.1's rule 1 states it; this is where it is enforced —
+with the credibility gate above ensuring "the higher rung wins" cannot mean "a
+broken higher rung wins".
 
 **Why this changes the order of work and not just the vocabulary.** Every
 mechanism in §18.1's D¾ operates at rung 4. Rung 1 for a given parent is
