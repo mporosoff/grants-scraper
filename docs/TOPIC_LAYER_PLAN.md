@@ -2,13 +2,15 @@
 
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
-Status: in progress · Version 8.8 · Written 2026-08-15 · **Revised 2026-08-17 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
+Status: in progress · Version 8.9 · Written 2026-08-15 · **Revised 2026-08-17 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
 
 > **Start at §18.** It defines the minimum path — the **nine** work packages that are actually being built (A–G plus **D½ Coverage**, added in 8.2, and **D¾ Forms**, added in 8.5) — and lists what is deferred and what it costs. §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
 >
 > **8.3 changes one thing structurally: the unit of judgment moves from the sibling *set* to the individual *span* (§6.4b), because a set-level verdict lets two policy paragraphs delete 70 DOE programmes.** §11 is reopened for the precision half only, on a measured run; its recall argument is untouched.
 >
 > **8.4 closes the two blocking storage decisions.** `MAX_TERMS` stays at 400 and subtopics ship in a lazily-loaded `data/subtopics.js` sidecar — one question, not two, once you measure that 60.3% of a cache record is a term map the browser never reads as content. **Nothing now blocks committing a cache except running the backfill again.** Every rate quoted against `docs/CORPUS_CENSUS.md`'s 20 documents is still superseded by `docs/COVERAGE_SURVEY.md` (§1.1).
+>
+> **8.9 reconciles the code to the plan.** The seven unsupported families are **retired in `subtopic_patterns.py`**, with `roses_element`'s measured false positive kept as a *negative* fixture; Fm3 and Fm4 land together and take DTRA `356612` from `no_layer_accepted` to **7 correct topics**; and §5.1's provenance ladder is implemented. **Consequence: every record the pipeline builds is `inferred` and capped at `medium`, so nothing auto-publishes and Cov4 becomes load-bearing for all output.** §17.10 adds the verification rule three silent failures earned.
 >
 > **8.8 corrects 8.7 against a second audit pass.** Provenance is keyed on how the parent→child relationship was **established**, not on document format — so `structural_siblings`, F1/F4 and PACER stay `inferred` even on an official solicitation — and provenance now **bounds** confidence rather than setting it. The source router only gives first refusal to a source that **answers credibly**, so an implausibly small structured answer declines instead of suppressing a working fallback, and corroboration/dedup is defined. Two overreaches withdrawn: structured sources **may** reach part of the 62% category-(a) population (several of those records point outward explicitly), and **only retrieval evaluation** is discipline-biased — extraction figures are corpus measurements. MURI no longer justifies the SAM.gov adapter.
 >
@@ -472,6 +474,23 @@ So on a steady-state night, almost every document takes path 1 or 2, and segment
 
 #### `subtopic_source` — the provenance ladder
 
+**Implemented 2026-08-17.** `subtopic_records.classify_provenance` and
+`cap_confidence` carry the rules below; `build_records` takes a `provenance`
+override for adapters and defaults to `inferred`. **Correction to 8.7, which
+said the field emitted "only `inline` and `referenced`": it emitted the
+literal string `inline` for every record and `referenced` nowhere**, because
+no adapter exists (§18.1 item 15 is unstarted).
+
+> **⚠ The largest behavioural consequence, measured.** Nothing in the
+> segmentation pipeline can establish that a *notice* asserted a fundable
+> relationship, so every record it builds is `inferred` and therefore capped at
+> **`medium`**. Verified end to end on `363526`, the corpus's only
+> `high`-confidence segmentation: `segment_document` returns `toc` / `high`,
+> and `build_records` emits `subtopic_source: inferred`, `confidence: medium`.
+> Under §6.4b's tier gate that record now **queues for review instead of
+> publishing**. This is a tightening in the direction §18.3 prefers, and it
+> makes **Cov4 load-bearing for all output rather than for the low tier alone**.
+
 **Rewritten in 8.7 from a two-value field (`inline` / `referenced`) into a
 four-value ladder, after an outside audit found this plan over-weighting generic
 document inference relative to hierarchies agencies already publish.** The audit
@@ -573,6 +592,15 @@ a source; it bypasses the *inference-checking* of one. A `native` parser that
 returns zero rows on an HTTP 200 is a canary failure and publishes nothing
 (§7.4) — which is the same fail-closed outcome by a different route.
 
+> **⚠ Three fields the code emits that this JSON omits — reconciled
+> 2026-08-17 (code was ahead of spec).** `ordinal_label` carries the ordinal as
+> printed (`1a`, `A2`) and is what §5.3's renumbering match reads;
+> `evidence_anchor` is the `p14`-style link §7.6 requires; `pattern_family`
+> records which family matched and is asserted by
+> `tests/test_subtopic_records.py`. All three are load-bearing and none was
+> listed above. **`pattern_family` is not provenance** — it names the
+> recogniser, and every family match is `inferred` (§5.1's ladder).
+>
 > **⚠ `subtopic_terms` is NOT a field on this record — corrected 2026-08-17.** Earlier versions carried the term map inline, and it measured **60.3% of every serialized record**. It now folds into the sidecar's own search index, exactly as parent term frequencies already fold into `opportunities.js`'s `search_index.postings` rather than sitting on each opportunity. The record above is the **display payload**, and it measures median 942 B / max 1,218 B against §12's 2 KB ceiling. `term_display` **stays on the record** — it is what renders match chips as `electrocatalysis` instead of the stem `electrocataly` (§7.6), so it is display data, not retrieval data. See §5.2 for the index shape and §13's settled sidecar decision.
 
 **⚠ Identity keys on the parent's catalog `opportunity_id`, never on its opportunity number.** Earlier versions of this section built `subtopic_id` as `<parent_opportunity_number>:<code_norm>`, and that is unbuildable for part of the catalog. Measured 2026-08-16: **20 of 1,475 records carry a null `opportunity_number`** — every one of them from the VPR email digest (`vpr-email:` namespace), and the list is not marginal:
@@ -3441,6 +3469,54 @@ extraction-side measurements — fabricated records, span precision, acceptance
 rates, Cov5 prevalence — are judged against document content by reading it, and
 carry no discipline caveat. Overstating the debt is its own failure: it would
 put a caveat on figures that do not need one and blur where the real gap is.
+
+### 17.10 Verify every edit by its diff or its artifact, never by the absence of an error
+
+**Added in 8.9, from three silent failures in this repository. Each one
+"succeeded".**
+
+| What happened | What made it silent |
+|---|---|
+| `python -m unittest ... \| tail -6` reported a suite as green | A pipeline's exit status is its **last** command's, and `tail` returns 0 whatever it was fed. The suite genuinely passed; the evidence did not establish that (§17.7) |
+| `Path.write_text` converted ~3,000 plan lines from LF to CRLF | It translates newlines to `os.linesep` on Windows. `core.autocrlf` normalised it on commit, so the diff looked clean and the working tree was wrong |
+| A compound shell command with two heredocs ran **nothing** | The shell failed to parse it and exited before Python started. No file changed, no error looked unusual, and the next step would have built on an unmade edit |
+
+A fourth, caught while writing this rule: a verification script printed
+`LF=0` because the counting expression itself was wrong. **The check was broken,
+not the file** — which is the failure mode this rule is really about.
+
+> **After every write, produce positive evidence that the intended file changed
+> in the intended way, before running the next gate.** An operation that
+> reported no error has not been verified.
+
+What counts as positive evidence, in rough order of strength:
+
+1. **`git diff` / `git diff --stat`** — the change is present, and its size is
+   what you expected. A diff larger than intended is a defect, not a formatting
+   artifact (§0.4 rule 1).
+2. **Re-reading the artifact and asserting on its content** — grep for the
+   string you added *and* for the string you removed. Both, because an edit that
+   appends without replacing passes the first check alone.
+3. **Running the changed code and comparing outputs to a pre-change snapshot.**
+   Unchanged test results are **not** evidence that behaviour is unchanged: the
+   suite tests what someone thought to test. The 2026-08-17 reconciliation
+   snapshotted all 13 accepting documents before and after each commit for this
+   reason.
+4. **Byte-level properties that tooling can silently change** — line endings and
+   encoding, checked on the file, not on the writer's own report of what it did.
+
+Three corollaries:
+
+- **Never chain a write and its verification in one shell command.** If the
+  write fails to parse, the verification never runs and its silence reads as
+  success. Write, then verify in a separate invocation.
+- **Prefer a script file to an inline heredoc** for any multi-line edit. It is
+  re-runnable, diffable, and it fails loudly at a syntax error instead of being
+  swallowed by shell quoting.
+- **Assert before you replace.** Every edit script in this session asserts
+  `s.count(old) == 1` before substituting, so a stale anchor aborts rather than
+  silently matching nothing — which is how the §15 package block went missing in
+  8.7 and was only caught by grepping afterwards.
 
 ---
 
