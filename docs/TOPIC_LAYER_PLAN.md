@@ -2790,6 +2790,18 @@ Per-agency-family acceptance, as the gate requires rather than in aggregate: **D
 - [ ] **Cov7. Read 30 more stratum-D records** — **added 8.5.** The cheapest outstanding measurement: D is 483 records with 12 reads, contributes 40 of §1.1's 171 on one observation, spans 7–171 alone, and holds the only tabular list. Supersedes the survey's "sample C and E"; C is discharged at 18 of 27
 - [ ] **GATE:** unreachable count re-derived against the **catalog** · records *reached* and records *yielding an accepted list* reported **separately** for Cov1–Cov3 · fabricated publishable records still **0**, measured by reading every published title as D5 did · **Cov6 verified by re-running `363526` end to end, not by reading the code** · §0.5 byte-identical with the flag off · **every gate's exit code checked directly, not read through `tail` (§17.7)**
 
+### Package D⅝ — Structured Umbrellas
+
+**Added 8.7, and it precedes D¾.** Rung-1 and rung-2 sources (§6.7·0) — the
+hierarchies agencies publish as data — before any further generic inference.
+**Build S1 only, then re-measure.**
+
+- [ ] **S1a. Read NSPIRES ROSES Table 3 and record its shape** — §0.4 rule 10, before any parser is written. Row schema, element-code form, how continuation years are expressed
+- [ ] **S1b. `native` adapter for ROSES program elements** — ~35 elements across Earth science, heliophysics, planetary science, astrophysics and biological/physical sciences. Emits `subtopic_source: "native"`, `confidence: "high"`, bypassing Cov4 and the review queue (§5.1). Parent match by element code, never by FOA number
+- [ ] **S1c. Canaries** — `expected_solicitations`: **ROSES has ≥20 open elements**. Zero rows on an HTTP 200 fails loudly (§7.4)
+- [ ] **S1d. Re-measure and stop** — report **new parents**, not expanded coverage; re-run §8.5. **S2 (DOE SC referenced taxonomy, all six offices) and S3 (DoD source router) stay unscheduled until a human reads S1d**
+- [ ] **GATE:** S1 only · new parents reported separately · canary proven against a simulated zero-row 200 · `native` confirmed to bypass Cov4 in code · §0.5 byte-identical with the flag off
+
 ### Package D¾ — Forms
 
 **Added 8.5. Gated behind Cov4 and, from 8.7, behind package D⅝** — the two largest uncovered forms are both unsafe on structure alone (§18.1), and all four recogniser items are rung-4 inference whose yields were measured before any structured source was tried. **Fm1, Fm2, Fm5 and Fm6 build only against records still uncovered after D⅝, and their yields are re-measured on that residual.** Fm3, Fm4 and Fm7 are unaffected — two repairs and a decision not to build. Yields below are *records in the 90 read* · *catalog estimate*, **pre-D⅝**.
