@@ -2141,12 +2141,83 @@ Run 2026-08-17 against the 22 accepted sibling sets of the D4 backfill (9 legiti
 
 This variable did not exist on Sonnet 4.6, where thinking-off was the only available behaviour. A later session swapping the model string without carrying this setting would silently halve precision. **Set-level results are identical in both configurations**, so the requirement is span-level only; applying it everywhere is simpler and costs little.
 
+### The Cov5 re-run — measured effect on precision: zero
+
+**Run 2026-08-17 after Cov5 shipped, 6 calls, 0 errors, $0.25.** Prompts were
+*imported* from the same experiment rather than rewritten, so the arms are
+comparable by construction. Three sets, two arms each: `360678` (the only set
+carrying Cov5 spans) plus `349554` and `361526` as controls.
+
+**Exactly 6 of `360678`'s 68 excerpts changed** — the six Cov5 spans, no others.
+62 are byte-identical between arms. That is what makes the rest of this readable.
+
+| | Spans | Rejected before | Rejected after |
+|---|---|---|---|
+| `349554` control | 18 | 0 | 0 |
+| `361526` control | 21 | 0 | 0 |
+| `360678` affected | 68 → **69** | 1 | 1 |
+| **false-rejection rate** | 107 → 108 | **1 = 0.9%** | **1 = 0.9%** |
+
+> **The rate did not move. Cov5's measured effect on span-level precision is
+> zero** — and the *identity* of the rejected span changed, which is the
+> interesting part.
+
+**The controls did not move at all** — zero rejections in both arms, zero flips.
+That is the containment check passing: a fix to six excerpts in one document
+changed nothing in two documents that had none.
+
+**Two flips, in opposite directions, and only one of them is Cov5.**
+
+- **`(n) Public-Private Partnerships`: REJECT → accept.** One of the six. Its
+  excerpt went from *"simulation for fusion research, and using quantum
+  sensing…"* to *"Public-private partnerships (PPPs) enable greater resources to
+  be applied…"*.
+- **`(h) Quantum Information Science for High Energy Physics`: accept → REJECT
+  — on a byte-identical excerpt.** Not a Cov5 span, same input in both arms.
+  Its two reasons are also mutually incoherent: it was accepted as *"Named
+  technical research topic in quantum information for HEP"* and rejected as
+  *"Specific quantum information HEP research topic"*. **This is run-to-run
+  variance, and it is the first measurement of caveat 2 below.**
+
+**So the variance is the same magnitude as the effect.** One flip toward the fix,
+one away from it, at n=1 each. This run cannot separate Cov5's benefit from noise,
+and saying it improved precision would be reading a coin flip. What it does
+establish is the containment: nothing outside the six changed on purpose.
+
+**Five of the six were already accepted before the fix.** `(d)`, `(i)`, `(j)`,
+`(k)` and `(l)` were all accepted while carrying excerpts about application
+deadlines and relativistic physics, with reasons naming their *titles*
+(*"Named technical research topic in X-ray scattering"*). That is adaptive
+thinking doing exactly what this section predicted — reasoning past a corrupted
+excerpt to the title — and it is why Cov5 had little precision left to recover
+at this model and setting. **On `claude-sonnet-5` with thinking disabled, or on
+`claude-haiku-4-5`, the same six spans were rejected**, so the fix removes a
+dependency on that margin rather than improving the margin's own numbers.
+
+**The recovered 69th span is accepted.** `(m) Plasma Science and Technology—
+Quantum Information Science` — the candidate Cov5's fix recovered from being
+dropped outright — passes the filter. That is a recall gain of one real
+subdivision, and it is the clearest user-visible benefit in this run.
+
+**Cov4's gate is not unblocked.** It requires **zero** false rejections on
+verified-good spans, and the rate is 1 of 108. The one rejection is now a
+variance artifact rather than a corrupted excerpt, which is a different problem
+with a different fix — self-consistency, not span construction.
+
 ### Two open label questions
 
 Recorded, not resolved. Both are single-labelled by one reader, and both now have model evidence against them. Tracked as §13 open decision 11.
 
 - **`361876`** — labelled *furniture* in D5 (`3.3.1 Food safety` … `3.3.6 Projects and Activities Not Eligible`). Held out of every score above as contested. It is now called **furniture by three of four model-runs** — Haiku, and both Sonnet 5 configurations — against Sonnet 4.6's lone *legitimate*. Sonnet 5's reason is the sharpest given: *"Mixes distinct topic areas with an ineligibility exclusions section, not a coherent choose-one subdivision list."* **Scored rather than held out, Sonnet 5 would be 22/22 at set level.** It stays held out here: one model changing its mind does not settle a label, and reporting 22/22 on a set the corpus itself flags as ambiguous would overstate the result.
 - **`(n) Public-Private Partnerships`** in `360678` — carried as a *good* span, and therefore counted as a false rejection against every model that dropped it. **Haiku and both Sonnet 5 configurations rejected it independently.** Its excerpt is also Cov5-corrupted, but its title is plausibly a funding mechanism rather than a technical subject, which is a different objection from the corrupted-excerpt cases. If it is relabelled a contaminant, Sonnet 5 at default thinking becomes **8/8 with 0 false rejections** — but nobody has re-read it, and relabelling a span *because models rejected it* is exactly how an evaluation corpus stops being independent evidence. **A human reads it, or it stays as it is.**
+
+  **Updated 2026-08-17 by the Cov5 re-run, and deliberately NOT closed.** With a clean excerpt the span flips to **accept**. That is real evidence and it is not sufficient, for three reasons that all point the same way:
+
+  1. **The pre-fix rejection was never about the excerpt.** Its stated reason was *"Describes a funding mechanism/partnership type, not a subject"* — a judgement about the **title**, which did not change. So the flip is not the corrupted excerpt being cleared; it is the same title being judged differently with different surrounding text.
+  2. **The model's characterisation did not change, only its verdict.** It now accepts the span while calling it *"Specific public-private partnership funding activity"* — still a funding mechanism, which is precisely the objection.
+  3. **The same run measured a 1-in-108 flip on byte-identical input.** One flip is exactly the noise floor this run established, so a single flip cannot carry a label.
+
+  **And closing it here would break the rule this bullet exists to state.** Relabelling a span *good* because a model accepted it is the same error as relabelling it *contaminant* because models rejected it. The question is narrowed, not answered: **is `(n) Public-Private Partnerships` a subject an applicant applies against, or a mechanism through which any subject may be funded?** One person reading page 85 of `DE-FOA-0003600` settles it in a minute. Tracked as §13 open decision 11.
 
 ### 8.5 — the classifier's role changed, and it is now a precondition rather than a final gate
 
@@ -2162,7 +2233,7 @@ So the sequencing in §18.1 inverts: **Cov4 lands before any new family work**, 
 ### Three caveats that bound the result
 
 1. **The prompt names two of the four modes.** It was built around the discriminator *"subjects an applicant chooses among, versus what the awardee does or how a proposal is judged"* — which describes `360378` and `363470` fairly directly. Haiku still missed `363470`, and the lexicon missed both, so the effect is not decisive; but these two are an easier test than `363315` and `362823`.
-2. **One run, no self-consistency check.** Single-shot calls, no repeats, no temperature sweep. Run-to-run variance is unmeasured.
+2. **One run, no self-consistency check.** Single-shot calls, no repeats, no temperature sweep. ~~Run-to-run variance is unmeasured.~~ **Partially measured 2026-08-17, and it is not negligible.** The Cov5 re-run put 62 byte-identical excerpts through the same prompt twice and **one of them flipped** — `(h) Quantum Information Science for High Energy Physics`, accepted in one arm and rejected in the other, with mutually incoherent reasons. That is a **1.6% flip rate on identical input (1 of 62)**, against a false-rejection rate of 0.9% that the same run was trying to measure. **The noise is larger than the signal**, which means every span-level figure in this section carries an uncertainty of roughly one span, and Cov4's "zero false rejections" gate cannot be demonstrated by a single pass. Cov4 must specify repeats — majority-of-three is the obvious form and is what §18.1's adversarial-verify pattern already does elsewhere.
 3. **21 sets and 114 spans, one backfill, one labeller.** `361876` is openly contested. This is enough to justify building; it is not enough to trust unvalidated on new data, which is why Cov4's gate requires exactly that.
 
 ### What is still out of scope
