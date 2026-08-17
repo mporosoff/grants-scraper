@@ -1,5 +1,17 @@
 # Family taxonomy — does the corpus support §6.3's ten families?
 
+> **⚠ NASA reachability corrected 2026-08-17 — read `docs/ROSES_SOURCE_INSPECTION.md`.**
+> Every statement in this document that describes `nspires.nasaprs.com` or
+> `solicitation.nasaprs.com` as unreachable, resetting the connection, or
+> refusing this client is **a fact about our HTTP client, not about NASA**.
+> CPython's default TLS cipher list omits `AES256-GCM-SHA384`, which is the only
+> suite those hosts offer; adding it — security level untouched, certificate and
+> hostname verification intact — connects at `TLSv1.2`. **All 12 NASA records
+> previously recorded as unreachable were re-fetched successfully on 2026-08-17,
+> with zero failures.** The counts and classifications below are otherwise
+> unchanged; only the attributed cause is wrong.
+
+
 **§6.3's ten families were written from expectation, before any document in this
 catalog had been opened.** B0, the census and the survey have all measured
 acceptance *against* them; none has asked whether they are the right ten. This
