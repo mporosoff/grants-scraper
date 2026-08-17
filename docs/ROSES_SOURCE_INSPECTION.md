@@ -166,3 +166,94 @@ Two representations, at different granularities:
 - Preserve appendix order as given — do not sort.
 - Map statuses from NASA's own strings; derive `closed` from dates only.
 - Tolerate 3-cell rows, duplicate codes, missing codes and dirty dates.
+
+---
+
+# S1d — final yield
+
+**Measured 2026-08-17 against the committed catalog, after the reachability
+sweep.** Matching is on the **solicitation number** (`NNH\d{2}ZDA\d{3}N-<CODE>`),
+which is exact, with normalised-title matching as a fallback. The earlier
+checkpoint used titles alone and reported 9; **the corrected figure is 10.**
+`D.8 Habitable Worlds Observatory` (`363325`) matches on solicitation number and
+the title matcher had missed it.
+
+## The counts
+
+| | Count |
+|---|---|
+| Table 3 rows total | **69** |
+| Overview / container rows (not program elements) | **6** |
+| **Valid ROSES program elements** | **63** |
+| Open / current under the derived-currentness rule | **12** |
+
+Currentness is **derived, not native.** NASA publishes no closed status; the
+adapter compares the published due date to the run date and labels the result
+`derived_currentness`, kept in a separate field from `native_status` so a reader
+can never mistake our inference for NASA's statement.
+
+## The two populations, kept separate
+
+### A. Relationship recovery — 10 elements
+
+Ten of the 63 already exist as Funding Finder records. For these, S1 supplies
+something the segmentation path cannot: **an authoritative parent→child
+relationship, published by the awarding agency**, at the `native` rung.
+
+| Appendix | Element | Catalog record | Matched by |
+|---|---|---|---|
+| A.4 | Earth Science Applications: Water Resources | `359996` | title |
+| A.10 | Atmospheric Composition Modeling and Analysis | `360003` | solicitation number |
+| A.13 | Carbon Cycle Science | `363224` | solicitation number |
+| A.14 | Terrestrial Ecology | `363240` | title |
+| A.15 | Ocean Biology and Biogeochemistry | `363241` | solicitation number |
+| B.2 | Heliophysics Supporting Research | `361234` | title |
+| C.2 | Emerging Worlds | `360004` | solicitation number |
+| C.4 | Solar System Observations | `363258` | title |
+| D.8 | Habitable Worlds Observatory | `363325` | solicitation number |
+| F.17 | Support for Open Source Tools, Frameworks | `362495` | title |
+
+**All 10 are open now.** And all 10 are records the project had previously
+recorded as unreachable — the correspondence is exact, which is the practical
+payoff of the TLS fix (§17.11).
+
+**Five matched only by title.** That is worth recording as a caution rather than
+a success: title matching is the weaker key, and a future ingestion decision
+should not assume solicitation numbers are always present on both sides.
+
+### B. Potential catalog expansion — 53 elements, measured only
+
+Fifty-three program elements have no catalog record. They are **counted, and not
+emitted.** `parse()` returns nothing, so this population cannot reach
+`opportunities.js` structurally rather than by convention, and the adapter ships
+`enabled = False` on top of that.
+
+**Only 2 of the 53 are open.** The other 51 are `Not Solicited This Year`, TBD,
+or past their date. The headline number overstates the live opportunity by
+roughly 25×, and that is the figure §13 decision 13 should be decided on.
+
+## What this is not
+
+**B is not subtopic recall, and the two must not be added together.** §1.1's
+~171 records / 11.6% counts *catalog records that gain subtopic children*.
+Population B is *catalog records that do not exist yet* — a sourcing question
+about which opportunities the project lists at all. Combining them would count a
+sourcing gain as a segmentation gain.
+
+**§1.1 is unchanged by S1.** Population A recovers relationships for 10 records
+that were already inside the survey's denominator as non-hits; converting them
+from "unreadable" to "native children" is a provenance and quality improvement,
+not a change to any stratum rate, interval or denominator. If it moves §1.1 at
+all it does so through 10 records out of 1,472, which is inside the noise of a
+54–538 band.
+
+## Scope actually held
+
+- Adapter `enabled = False`; `tools/verify_no_drift.sh` exits 0, so
+  `opportunities.js` is byte-identical.
+- The 53 standalone elements were **not** emitted.
+- No cache committed.
+- S2 and S3 not started.
+- No pattern family added or resurrected; `roses_element` stays retired, and
+  the adapter never calls `segment_document` — proven by a test that patches it
+  and asserts zero calls.

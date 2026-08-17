@@ -2,13 +2,15 @@
 
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
-Status: in progress · Version 8.9 · Written 2026-08-15 · **Revised 2026-08-17 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
+Status: in progress · Version 8.10 · Written 2026-08-15 · **Revised 2026-08-17 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
 
 > **Start at §18.** It defines the minimum path — the **nine** work packages that are actually being built (A–G plus **D½ Coverage**, added in 8.2, and **D¾ Forms**, added in 8.5) — and lists what is deferred and what it costs. §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
 >
 > **8.3 changes one thing structurally: the unit of judgment moves from the sibling *set* to the individual *span* (§6.4b), because a set-level verdict lets two policy paragraphs delete 70 DOE programmes.** §11 is reopened for the precision half only, on a measured run; its recall argument is untouched.
 >
 > **8.4 closes the two blocking storage decisions.** `MAX_TERMS` stays at 400 and subtopics ship in a lazily-loaded `data/subtopics.js` sidecar — one question, not two, once you measure that 60.3% of a cache record is a term map the browser never reads as content. **Nothing now blocks committing a cache except running the backfill again.** Every rate quoted against `docs/CORPUS_CENSUS.md`'s 20 documents is still superseded by `docs/COVERAGE_SURVEY.md` (§1.1).
+>
+> **8.10 lands D⅝ S1 and corrects the reachability record.** A `native` ROSES adapter parses NASA's published hierarchy — 69 rows, 6 overview, **63 program elements** — with no family, no segmentation and no classifier, and ships **disabled**. **10 existing records gain authoritative ROSES relationships; 53 unmatched elements are measured inventory and deliberately not emitted** (§13 decision 13). Four sessions had recorded NASA as unreachable: **it was our TLS cipher list**, and a 14-host sweep found five distinct failure layers where the project had recorded one (§17.11).
 >
 > **8.9 reconciles the code to the plan.** The seven unsupported families are **retired in `subtopic_patterns.py`**, with `roses_element`'s measured false positive kept as a *negative* fixture; Fm3 and Fm4 land together and take DTRA `356612` from `no_layer_accepted` to **7 correct topics**; and §5.1's provenance ladder is implemented. **Consequence: every record the pipeline builds is `inferred` and capped at `medium`, so nothing auto-publishes and Cov4 becomes load-bearing for all output.** §17.10 adds the verification rule three silent failures earned.
 >
@@ -2826,6 +2828,35 @@ Not built in v1. Recorded so the deterministic design does not preclude it.
     a later session measuring catalog growth will find 17.5% in one field and
     should find this analysis with it rather than redoing it.
 
+13. **Whether to ingest the 53 standalone NASA ROSES program elements.**
+    **Opened by S1 (§18.1 D⅝), which deliberately did not take it.** The ROSES
+    adapter parses all 63 program elements and emits **none** of them as catalog
+    opportunities; `parse()` returns nothing, so the inventory cannot reach
+    `opportunities.js` structurally rather than by convention.
+
+    **What S1 measured.** 10 elements already exist as catalog records and get
+    authoritative ROSES relationship data. **53 do not** — and of those,
+    **only 2 are currently open** under the derived-currentness rule. The other
+    51 are `Not Solicited This Year`, TBD, or past their date. So the headline
+    "53 new opportunities" overstates the live value by roughly 25×, and that
+    asymmetry is the most decision-relevant number here.
+
+    **What ingesting them would require, none of which S1 built:**
+
+    | Question | Why it is not obvious |
+    |---|---|
+    | **Dedup and identity** | The 10 matched elements arrive from Grants.gov *and* NSPIRES. Identity is `(code, title)` in ROSES and `opportunity_number` in the catalog; `D.3C` proves the ROSES code is not unique, and 5 of the 10 matched only by title, not by solicitation number |
+    | **Source precedence and update ownership** | When Grants.gov and NSPIRES disagree on a close date, which wins, and which source may overwrite the other nightly? |
+    | **Catalog size and currentness** | +53 records is ~3.6% growth, and 51 of them are closed or unsolicited — they would need `currentness` handling or they inflate the catalog with things nobody can apply to |
+    | **§0.5** | Enabling the adapter changes `opportunities.js` **with `--enable-subtopics` off**, so the hermetic gate fails by construction. That is not a bug in the gate; it is the gate working |
+    | **Project ownership** | This is a **catalog-source** feature, not a subtopic one. It shares nothing with segmentation except the adapter lifecycle |
+
+    **Recommendation: not part of the subtopic project.** S1's value to D⅝ is
+    the 10 relationship recoveries and the proof that a `native` rung works end
+    to end. Standalone NASA ingestion is a separate catalog-source package with
+    its own gate, and it should be scheduled — or declined — on the strength of
+    "2 currently-open opportunities", not on "53 elements".
+
 
 *Removed from this list:* "confirm the exact all-rights-reserved notice" — the `copyright` file already carries it and the work is done.
 
@@ -3108,10 +3139,10 @@ Per-agency-family acceptance, as the gate requires rather than in aggregate: **D
 hierarchies agencies publish as data — before any further generic inference.
 **Build S1 only, then re-measure.**
 
-- [ ] **S1a. Read NSPIRES ROSES Table 3 and record its shape** — §0.4 rule 10, before any parser is written. Row schema, element-code form, how continuation years are expressed
-- [ ] **S1b. `native` adapter for ROSES program elements** — ~35 elements across Earth science, heliophysics, planetary science, astrophysics and biological/physical sciences. Emits `subtopic_source: "native"`, `confidence: "high"`, bypassing Cov4 and the review queue (§5.1). Parent match by element code, never by FOA number
-- [ ] **S1c. Canaries** — `expected_solicitations`: **ROSES has ≥20 open elements**. Zero rows on an HTTP 200 fails loudly (§7.4)
-- [ ] **S1d. Re-measure and stop** — report yield **against D⅝'s own denominator**, naming which records were previously category (a); never fold it into a segmentation acceptance rate (§17.8); re-run §8.5. **S2 (DOE SC referenced taxonomy, all six offices) and S3 (DoD source router) stay unscheduled until a human reads S1d**
+- [x] **S1a. Read NSPIRES ROSES Table 3 and record its shape** — *done; `docs/ROSES_SOURCE_INSPECTION.md`. 69 rows, 6 overview, 63 elements; identity `(code, title)`; no explicit closed status.*  Original: — §0.4 rule 10, before any parser is written. Row schema, element-code form, how continuation years are expressed
+- [x] **S1b. `native` adapter for ROSES program elements** — *done, `scripts/sources/adapters/nasa_roses.py`, **`enabled = False`**. Emits children only for matched parents; `parse()` returns nothing so the 53 unmatched cannot reach the catalog.*  Original: — ~35 elements across Earth science, heliophysics, planetary science, astrophysics and biological/physical sciences. Emits `subtopic_source: "native"`, `confidence: "high"`, bypassing Cov4 and the review queue (§5.1). Parent match by element code, never by FOA number
+- [x] **S1c. Canaries** — *done. Six-division sentinel, element floor 40 against a measured 63, Table 2/3 delta tolerance 5 against a measured 1. Eight tests incl. HTTP-200-zero-rows.*  Original: — `expected_solicitations`: **ROSES has ≥20 open elements**. Zero rows on an HTTP 200 fails loudly (§7.4)
+- [x] **S1d. Re-measure and stop** — *done. 63 elements, 12 open; **10** relationship recoveries, **53** measured-not-emitted of which only **2** are open. §13 decision 13 opened. S2/S3 not started.*  Original: — report yield **against D⅝'s own denominator**, naming which records were previously category (a); never fold it into a segmentation acceptance rate (§17.8); re-run §8.5. **S2 (DOE SC referenced taxonomy, all six offices) and S3 (DoD source router) stay unscheduled until a human reads S1d**
 - [ ] **GATE:** S1 only · yield against D⅝'s own denominator, previously-(a) records named, never folded into an acceptance rate · canary proven against a simulated zero-row 200 · `native` confirmed to bypass Cov4 in code · §0.5 byte-identical with the flag off
 
 ### Package D¾ — Forms
@@ -3525,6 +3556,64 @@ Three corollaries:
   `s.count(old) == 1` before substituting, so a stale anchor aborts rather than
   silently matching nothing — which is how the §15 package block went missing in
   8.7 and was only caught by grepping afterwards.
+
+### 17.11 A failed fetch is a fact about the client, not about the source
+
+**Added in 8.10. NASA is the motivating example and the 14-host sweep is the
+first application.**
+
+`nasaprs.com` was recorded as refusing this client across four sessions — 12
+`ConnectionReset` entries in the census, two in the survey, two in the taxonomy
+read — and §18.2's NSPIRES deferral was justified on it. **It was our TLS cipher
+list.** CPython's `create_default_context()` omits `AES256-GCM-SHA384`, the only
+suite those hosts offer. All 12 records re-fetched successfully once one suite
+was added.
+
+> **A failed fetch proves that a particular client, in a particular
+> configuration, failed to retrieve a resource. It does not by itself prove the
+> source is unavailable.** Before source unavailability is used to justify a
+> coverage estimate, an architecture, a deferral, a retirement or a priority,
+> **isolate the failure layer** — DNS, TCP, TLS, HTTP, application — and
+> distinguish *client incompatibility* from *intentional restriction* from
+> *actual source failure*.
+
+The sweep (`docs/SOURCE_REACHABILITY_SWEEP.md`) shows why one explanation is
+never enough: 14 hosts, **five distinct layers**, and only two were the NASA
+cause.
+
+| Layer | Hosts | What it means |
+|---|---|---|
+| TLS cipher negotiation | 2 | client incompatibility — ours to fix |
+| No longer reproduces | 4 | a real transient, recorded as permanent |
+| HTTP 403 | 2 | application-layer denial, reason not visible from outside |
+| HTTP 404 | 2 | a dead URL — a data problem, not a reachability one |
+| Client-rendered app | 4 | transport always worked; no content ever arrives |
+
+**Corollaries, each earned by something in that table.**
+
+- **Compatibility changes are evidence-based and as narrow as the evidence
+  supports.** The NASA fix adds exactly one cipher suite. The first draft
+  lowered the whole security level, which was sufficient and unnecessary —
+  measurement caught it.
+- **Certificate verification and hostname validation remain mandatory.** There
+  is no configuration in which turning them off is the fix.
+- **A fix for one host is never propagated to another without independent
+  evidence.** `PoliteClient(legacy_tls_ciphers=…)` is per-adapter and off by
+  default; sharing a client is not evidence.
+- **An HTTP denial is not a TLS failure.** `403` names the layer, not the
+  reason: it may be auth, WAF policy, rate limiting, geography, path rules or
+  something else, and guessing which is how a bypass gets built by accident.
+- **Intentional restrictions are recorded, not circumvented.** Two hosts return
+  a persistent 403 and two more sit behind credential walls. They stay that way.
+  No user-agent spoofing, no anti-bot evasion, no authentication.
+- **Historical observations are preserved; the conclusions drawn from them are
+  corrected.** "The client failed on 2026-08-16" stays true. "The source is
+  unavailable" was the inference, and that is what gets fixed — with enough
+  provenance that a later reader can see why the record changed.
+
+**The cheap habit this replaces:** one failed fetch, written down once, became a
+permanent property of a source in three documents and then justified deferring
+an entire adapter. Re-testing cost under an hour.
 
 ---
 
