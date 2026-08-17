@@ -34,6 +34,84 @@ from scripts.subtopic_segmentation import extractor_version, match_subtopics
 CACHE_SCHEMA_VERSION = 1
 DEFAULT_CACHE = Path("data/subtopic_records.json")
 
+# --- §5.1 provenance ladder ---------------------------------------------------
+#
+# Ordered by how much this project had to guess. **The test is how the
+# parent->child relationship was ESTABLISHED, never the document's format and
+# never which layer happened to read it.**
+#
+#   native      the agency published the children as data -- a table, an
+#               explicit child list, an API, one row per child
+#   referenced  an agency program page off the solicitation asserts that these
+#               programmes belong to this parent
+#   inline      the solicitation itself states the fundable child relationship
+#               -- text saying applicants apply to one of these, members named
+#   inferred    this project established it, from structure or position, with
+#               no such statement to rely on
+#
+# **Generic structural or pattern extraction is `inferred` even when it runs on
+# an official solicitation.** `structural_siblings` over a bookmark tree is
+# inferred: a bookmark tree is a layout artifact this project reads as a
+# hierarchy, and the notice never says those nodes are the fundable units. The
+# same holds for every ordinal family match, and for PACER's topics won from a
+# secondary attachment. Being in an authoritative document does not make an
+# inference authoritative.
+#
+# A family match is EVIDENCE for `inline`, not sufficient for it: the notice has
+# to do the asserting. Nothing in the pipeline can currently establish that, so
+# `classify_provenance` returns `inferred` for every segmentation result today
+# and `inline` is reachable only by an explicit caller override. That is
+# deliberate -- the ladder fails downward (§5.1).
+NATIVE = "native"
+REFERENCED = "referenced"
+INLINE = "inline"
+INFERRED = "inferred"
+PROVENANCE_VALUES = (NATIVE, REFERENCED, INLINE, INFERRED)
+
+# The ceiling each rung may reach. Not the value: §5.1 is explicit that
+# provenance BOUNDS confidence and does not set it, because `native` and
+# `referenced` have their own failure modes -- a restyled table, a stale page, a
+# mis-linked parent -- that a rung cannot vouch for.
+PROVENANCE_CEILING = {
+    NATIVE: "high",
+    REFERENCED: "high",
+    INLINE: "high",
+    INFERRED: "medium",     # never high, whatever the method (§6.3a, §5.1)
+}
+_CONFIDENCE_ORDER = ("low", "medium", "high")
+
+
+def classify_provenance(result, *, document=None, override=None):
+    """Which rung established this parent->child relationship (§5.1).
+
+    `override` is how a `native` or `referenced` adapter declares its own
+    provenance; it is validated rather than trusted blindly. Everything the
+    segmentation pipeline produces is `inferred`, including outline-structural
+    and every ordinal family, because the notice asserted nothing -- this
+    project did.
+    """
+    if override is not None:
+        if override not in PROVENANCE_VALUES:
+            raise ValueError(f"unknown provenance {override!r}")
+        return override
+    return INFERRED
+
+
+def cap_confidence(confidence, provenance):
+    """Lower `confidence` to the rung's ceiling. Never raises it.
+
+    A record is never promoted for sitting on a high rung -- §5.1's "provenance
+    is not a shortcut for validation". `native`'s own structure checks and
+    `referenced`'s parent-match/staleness checks belong to their adapters, which
+    pass the earned value in; this only enforces the bound.
+    """
+    ceiling = PROVENANCE_CEILING.get(provenance, "medium")
+    if confidence not in _CONFIDENCE_ORDER:
+        return confidence
+    if _CONFIDENCE_ORDER.index(confidence) <= _CONFIDENCE_ORDER.index(ceiling):
+        return confidence
+    return ceiling
+
 # Fields whose change means the record genuinely moved. `last_verified` is
 # excluded on purpose -- see `_content_key`.
 VOLATILE_FIELDS = ("last_verified",)
@@ -68,6 +146,7 @@ def build_records(
     *,
     document=None,
     as_of=None,
+    provenance=None,
 ):
     """§5.1 records for one parent, from an accepted SegmentationResult.
 
@@ -75,8 +154,16 @@ def build_records(
     award range, the deadline used for filtering -- are deliberately NOT copied
     here. The merge in package E attaches them; duplicating them would put two
     copies of the same fact in the catalog and let them disagree.
+
+    `provenance` is the §5.1 rung, passed in by a `native` or `referenced`
+    adapter. Left None it resolves to `inferred`, which is correct for
+    everything the segmentation pipeline produces. `segmentation_method` stays
+    orthogonal: provenance says who asserted the relationship, the method says
+    how this pipeline obtained the spans, and neither is derived from the other.
     """
     document = document or {}
+    rung = classify_provenance(result, document=document, override=provenance)
+    confidence = cap_confidence(result.confidence, rung)
     parent_number = (
         parent.get("opportunity_number")
         or parent.get("opportunity_id")
@@ -106,7 +193,7 @@ def build_records(
                 "title_fingerprint": subtopic.title_fingerprint,
                 "summary": subtopic.summary,
                 "subtopic_terms": dict(subtopic.subtopic_terms),
-                "subtopic_source": "inline",
+                "subtopic_source": rung,
                 # The catalog's own vocabulary, never a private one:
                 # currentness.record_is_current accepts only posted/forecasted,
                 # so a child emitting anything else is filtered out of every
@@ -121,7 +208,7 @@ def build_records(
                 "source_document_url": document.get("url"),
                 "source_document_hash": document.get("sha256"),
                 "segmentation_method": result.method,
-                "confidence": result.confidence,
+                "confidence": confidence,
                 "pattern_family": result.family,
                 "own_deadline": subtopic.own_deadline,
                 "own_deadline_is_advisory": True,

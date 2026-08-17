@@ -124,8 +124,48 @@ class RecordShapeTests(unittest.TestCase):
         self.assertEqual(first["source_document_url"], DOCUMENT["url"])
         self.assertEqual(first["source_document_hash"], DOCUMENT["sha256"])
         self.assertEqual(first["segmentation_method"], "outline")
-        self.assertEqual(first["confidence"], "high")
         self.assertEqual(first["pattern_family"], "topic_area")
+        # §5.1: everything the segmentation pipeline produces is `inferred`,
+        # because the recogniser did the asserting, not the notice. A Layer A
+        # `outline` match at `high` is therefore capped to the rung's ceiling.
+        # This assertion previously read "high"; the specification changed.
+        self.assertEqual(first["subtopic_source"], "inferred")
+        self.assertEqual(first["confidence"], "medium")
+
+    def test_provenance_is_orthogonal_to_segmentation_method(self):
+        """§5.1. Provenance says who asserted; the method says how we read it."""
+        first = self.records[0]
+        self.assertEqual(first["segmentation_method"], "outline")
+        self.assertEqual(first["subtopic_source"], "inferred")
+        # An adapter declaring `native` keeps its own method value untouched.
+        native = records.build_records(
+            PARENT, segmented(HEADINGS), document=DOCUMENT,
+            as_of="2026-08-20", provenance="native",
+        )
+        self.assertEqual(native[0]["subtopic_source"], "native")
+        self.assertEqual(native[0]["segmentation_method"], "outline")
+
+    def test_provenance_bounds_confidence_and_never_raises_it(self):
+        """§5.1: provenance supplies a ceiling, not a value."""
+        # `native` may keep a `high` the adapter earned...
+        native = records.build_records(
+            PARENT, segmented(HEADINGS), document=DOCUMENT,
+            as_of="2026-08-20", provenance="native",
+        )
+        self.assertEqual(native[0]["confidence"], "high")
+        # ...but a rung never promotes: a low result stays low on any rung.
+        self.assertEqual(records.cap_confidence("low", "native"), "low")
+        self.assertEqual(records.cap_confidence("low", "referenced"), "low")
+        # `inferred` is the one mechanical cap, and it is absolute.
+        self.assertEqual(records.cap_confidence("high", "inferred"), "medium")
+        self.assertEqual(records.cap_confidence("medium", "inferred"), "medium")
+
+    def test_unknown_provenance_is_rejected(self):
+        with self.assertRaises(ValueError):
+            records.build_records(
+                PARENT, segmented(HEADINGS), document=DOCUMENT,
+                as_of="2026-08-20", provenance="official",
+            )
 
     def test_both_vocabularies_are_populated(self):
         first = self.records[0]
@@ -308,7 +348,9 @@ class CacheIoTests(unittest.TestCase):
         self.assertEqual(metrics["subtopic_parent_count"], 1)
         self.assertEqual(metrics["subtopic_record_count"], 3)
         self.assertEqual(metrics["subtopic_methods"], {"outline": 1})
-        self.assertEqual(metrics["subtopic_confidence_counts"], {"high": 3})
+        # `inferred` caps at medium (§5.1); this read {"high": 3} before the
+        # ladder landed.
+        self.assertEqual(metrics["subtopic_confidence_counts"], {"medium": 3})
 
 
 if __name__ == "__main__":
