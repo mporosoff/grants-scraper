@@ -1198,7 +1198,7 @@ This is the quantitative replacement for "the ordinals count up," and it is the 
 
 **Added 8.3.** Everything above judges a **set**: rules 1–8 pass or fail all candidates together, and §6.2's confidence tier is likewise assigned to the whole result. That is the right granularity for *"did segmentation find an enumeration?"* and the wrong one for *"which of these should a PI see?"* — and the corpus shows the cost of conflating them in both directions.
 
-**The false-positive direction.** `360678` — DOE Office of Science, 70 programmes including `(q) Catalysis Science`, the single most valuable extraction in this corpus — contains two administrative siblings, `Multi-Institutional Teams` and `Open Science`. Package D measured them; §6.3a's set-level veto could not catch them without also rejecting the 68 real ones (5 of 26 is 19%, under the 25% threshold). A set-level classifier reading the same evidence **condemned the entire set over those two members** (§11, Haiku). The same model at span level isolated exactly the two and passed the other 68. **Two policy paragraphs should not be able to delete Catalysis Science, and under a set-level verdict they can.**
+**The false-positive direction.** `360678` — DOE Office of Science, **70 programmes spanning all six program offices: ASCR, BES, BER, FES, HEP and NP**, which is applied mathematics and computer science through materials chemistry, environmental and biological systems, plasma physics, particle physics and nuclear physics. It is the broadest single extraction in this corpus by disciplines served (§17.9), and `(q) Catalysis Science` is one of its 70 — contains two administrative siblings, `Multi-Institutional Teams` and `Open Science`. Package D measured them; §6.3a's set-level veto could not catch them without also rejecting the 68 real ones (5 of 26 is 19%, under the 25% threshold). A set-level classifier reading the same evidence **condemned the entire set over those two members** (§11, Haiku). The same model at span level isolated exactly the two and passed the other 68. **Two policy paragraphs should not be able to delete Catalysis Science, and under a set-level verdict they can.**
 
 **The false-negative direction.** `349554` (AFRL PACER) yields 18 correct topics at `low`, and `low` never publishes — so all 18 are suppressed to guard against fabrications that live in *other* `low` results. Judged individually, all 18 pass (18/18 on both models, §11).
 
@@ -1277,7 +1277,7 @@ def running_lines(containers, threshold=0.4):
 
   `program_areas.ENTRIES` is the compiled `(label, topics, pattern)` vocabulary; `topics_for()` maps labels to the **Topic-facet display strings** the catalog actually facets and feeds on. Populating `topic_areas` is what makes a subtopic appear under `feeds/topic/catalysis-and-reaction-engineering.xml` and in the Topic filter. Populating only the lowercase labels would produce a child that is searchable but invisible to every facet. No new vocabulary is invented in either field.
 
-  A subtopic span is a much better input to this vocabulary than a whole notice is, which is a real and independent argument for the feature: `extract_program_areas` currently attributes "catalysis" to an entire 200-page BAA because the word appears once on page 147. Run against a 4-page span, the same vocabulary says *which* topic area is the catalysis one.
+  A subtopic span is a much better input to this vocabulary than a whole notice is, which is a real and independent argument for the feature: `extract_program_areas` currently attributes a label to an entire 200-page BAA because the word appears once on page 147. Run against a 4-page span, the same vocabulary says *which* topic area carries it. **This benefit is discipline-neutral and that is the point** — it applies to every label in `program_areas.ENTRIES` and therefore to every facet a researcher filters on, not to any one field (§17.9). The failure mode it fixes — one incidental mention tagging a whole omnibus — is worst on exactly the large multi-topic notices that span the most disciplines.
 
 ### 6.6 Edge cases that must be handled
 
@@ -2002,6 +2002,44 @@ This gate is what makes every subsequent phase safe. Build it first.
 v6.2's Phase 1 step 3 said: "Run `evaluate_phase2.py` against the current catalog; commit `evaluation/baseline_pre_topics.json`." **This cannot be done.** `evaluate_phase2.py` takes one or more *exported human relevance-label files* as positional arguments and requires `schema_version == 1` with a `feedback` list. It never opens the catalog; its own docstring says it "never needs an API key, research description, or CV." Worse, the label corpus is deliberately private — `.gitignore` excludes `/evaluation/inbox/` and `/evaluation/reports/`, and the only committed sample is a 2.2 KB fixture.
 
 So there is no labelled baseline to freeze, and producing one means a labelling campaign that is not in this project's scope.
+
+> **⚠ The query set is single-discipline, and every retrieval figure in this plan
+> inherits that. Measured 2026-08-17 against the committed
+> `evaluation/query_set.json`.**
+>
+> | | Queries | Share |
+> |---|---|---|
+> | total | 37 | |
+> | chemistry / chemical engineering / materials | **18** | **49%** |
+> | any other named discipline (public health, workforce, undergraduate research) | 4 | 11% |
+> | discipline-neutral (acronyms, opportunity numbers, mechanism terms, empty-expected) | 15 | 40% |
+> | **profile queries** | **3, and all three are chemistry** | 100% |
+>
+> `catalysis`, `carbon capture`, `membrane`, `separations`, `catalytic conversion
+> of carbon dioxide`, `electrocatalysis CO2 reduction`, `porous materials for
+> carbon capture`, `MOF`, `CO2` — and the three profile probes carry
+> `research_description: "heterogeneous catalysis and CO2 hydrogenation"`.
+> **No query names biology, clinical research, physics, computing, social
+> science, humanities, earth science, or any engineering discipline other than
+> chemical.**
+>
+> **What this does and does not invalidate.** §8.5 is a *change-detection* gate —
+> it asks whether results moved, not whether they are good — and change detection
+> on a skewed query set still detects change on that slice. What it cannot do is
+> support any claim of the form *"retrieval did not regress"*, because a
+> regression confined to biology or clinical records would be invisible to all 37
+> queries. **Every recall and precision figure in this plan is scored against one
+> researcher's relevance**, and that caveat travels with them.
+>
+> **What a discipline-stratified set requires**, so it is costed rather than
+> aspired to: coverage of the catalog's own agency mix — NIH is 210 records and
+> NSF 149 against the DOE/DoD records this set favours — three to five queries
+> per discipline family drawn from real solicitation vocabulary rather than
+> invented, at least one profile probe per family, and the `empty_expected` and
+> mechanism-term groups left as they are, since those are genuinely
+> discipline-neutral. Roughly 40 additional queries. **It needs no relevance
+> labels** — that is the property that makes §8.5 cheap, and it survives
+> stratification. Tracked as §15 debt **M5**.
 
 **Replacement: a frozen query set, compared on result IDs and ranks.** This needs no relevance judgments at all. It does not measure whether the results are *good* — it measures whether they *changed*, which is the actual question §0.5 asks and the only one that can be answered without labels.
 
@@ -2857,7 +2895,7 @@ publishes unreviewed · **seven of §6.3's ten families are retired on measureme
 | Span-level precision | **108/115 = 94%** — and all 7 bad spans are in the publishable set (`Open Science`, `Annual Progress Reports`, `Teaming Arrangements`…) |
 | Rejection histogram | all 7 misses `no_layer_accepted`; no `run_budget`, no `time_budget` |
 
-**On the highest-value document, `DE-FOA-0003612` (Genesis Mission — live, closes 2026-12-17): 21 of 21 published challenge areas recovered exactly, 0 of 99 focus areas, 5 spurious administrative spans.** Full entry in `docs/CORPUS_CENSUS.md`.
+**On `DE-FOA-0003612` (Genesis Mission — live, closes 2026-12-17; 21 challenge areas spanning advanced manufacturing, biotechnology, fusion, materials, computing and fluid dynamics): 21 of 21 published challenge areas recovered exactly, 0 of 99 focus areas, 5 spurious administrative spans.** Full entry in `docs/CORPUS_CENSUS.md`.
 
 **Why more regexes are not the answer.** Of the seven misses, **four need one missing mechanism** (`label_run` for named subdivisions), **two need occurrence selection** — the pattern matches in several places and nothing decides which is the heading, the same class of defect as D0a/D0b — and **one is §6.3a's depth-0 rule refusing a legitimate list** (`343653`'s ten country FOAs). Only `332894` would require the loosening §18.3 forbids. Two mechanisms would address six of seven; more patterns would address one.
 
@@ -2991,6 +3029,7 @@ explicitly declined with a reason — never by being forgotten.
   that they still produce none, and still for the same recorded reason, is
   **asserted and not measured**. A widened title matcher could in principle
   locate a candidate that previously failed, which is how `360678` gained a span
+- [ ] **M5. Build a discipline-stratified query set.** Measured: **18 of 37 queries (49%) are chemistry/chemical engineering/materials, all 3 profile probes are, and 4 name any other discipline** (§8.5). No query names biology, clinical research, physics, computing, social science, humanities, earth science, or non-chemical engineering. **Every recall and precision figure in this plan is therefore scored against one researcher's relevance**, and a regression confined to biology or clinical records would be invisible to the whole gate. Needs ~40 more queries covering the catalog's actual agency mix (NIH 210 records, NSF 149), 3–5 per discipline family from real solicitation vocabulary, ≥1 profile probe each. **Requires no relevance labels**, which is what keeps §8.5 cheap. Until it exists, quote every retrieval figure with the caveat attached
 - [ ] **M4. Read `344592` (`W911NF-23-S-0001`, DEVCOM ARL BAA) for MURI topics.** A live Grants.gov search finds MURI in its full text; our stored description is truncated at 2,793 chars and does not contain it. **If that notice enumerates MURI topics inline, part of what §18.2's SAM.gov deferral is said to cost is already reachable** — the record is in the catalog and fetchable today. Cheap: one document, and it is already in the development corpus §6.3 names
 - [ ] **M2. Read 30 more stratum-D records** — the cheapest outstanding
   measurement in the project, and the one that closes over half of §1.1's
@@ -3206,6 +3245,46 @@ Three corollaries, each of which this project learned the hard way:
 3. **A retired family keeps its evidence.** Retirement is not deletion: record the shape, the reason and what would bring it back, so a later session does not rediscover the idea and re-add it unmeasured. §6.3's retirement table is the format.
 
 This rule governs §6.3, §6.3a, §6.4, §6.4a and any future recogniser, and it applies to *removals* too — `roses_element` is retired on six measured false positives and zero correct matches across 90 records, not because it looked wrong.
+
+### 17.9 Justify coverage and priority by breadth across disciplines, never by the maintainer's own field
+
+**Added in 8.7, from an audit finding this plan's priorities correlated with one
+research group's interests more closely than with the catalog's shape.**
+
+**This tool serves any academic researcher writing a grant.** The catalog is 1,475
+records across NIH, NSF, DoD, DOE, USDA, NASA, HHS, State, Interior, DOT and
+more; NIH alone is 210 records and NSF 149. A feature that reaches DOE Office of
+Science programmes and nothing else is not "high value" — it is high value *to
+one group*, and the plan must say which.
+
+> **Every coverage or priority decision is justified by the disciplines and
+> researcher populations it serves. Never by relevance to the maintainer's own
+> field, and never by a single worked example standing in for a population.**
+
+Three things this rule does **not** forbid, because the distinction is easy to
+lose:
+
+1. **Worked examples may come from anywhere.** `(q) Catalysis Science` is the
+   right example for §6.3a because it is a real span in a real bookmark tree that
+   was read end to end. Using it to *illustrate a mechanism* is fine. Using it to
+   *rank* that mechanism above another is what this rule forbids.
+2. **Agency-specific work is fine when the breadth is stated.** §18.1 D⅝ orders
+   its three sources by *disciplines served per unit of cost* and says what each
+   covers — ROSES spans Earth science, heliophysics, planetary science,
+   astrophysics and biological/physical sciences. That is a breadth argument, and
+   it is checkable.
+3. **Small populations may still win** on cost, risk or as a proof of a model —
+   D⅝ builds one adapter precisely to test the provenance argument cheaply. State
+   the reason, and state the population.
+
+**The practical test, before committing a priority:** name the disciplines it
+serves and roughly how many catalog records. If the honest answer is "chemistry,
+and the DOE records this maintainer applies to," the priority needs a different
+justification or a different rank.
+
+**Where this rule was already violated, and is now corrected:** §8.5's query set
+is 49% chemistry with all three profile probes in that field, so every retrieval
+figure is scored against one researcher's relevance (§15 debt M5).
 
 ---
 
