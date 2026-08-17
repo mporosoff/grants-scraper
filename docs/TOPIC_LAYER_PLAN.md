@@ -10,7 +10,7 @@ Status: in progress · Version 8.7 · Written 2026-08-15 · **Revised 2026-08-17
 >
 > **8.4 closes the two blocking storage decisions.** `MAX_TERMS` stays at 400 and subtopics ship in a lazily-loaded `data/subtopics.js` sidecar — one question, not two, once you measure that 60.3% of a cache record is a term map the browser never reads as content. **Nothing now blocks committing a cache except running the backfill again.** Every rate quoted against `docs/CORPUS_CENSUS.md`'s 20 documents is still superseded by `docs/COVERAGE_SURVEY.md` (§1.1).
 >
-> **8.7 accepts an outside provenance audit.** §5.1 replaces `subtopic_source` with a four-value ladder — `native` / `referenced` / `inline` / `inferred` — and derives confidence from provenance before method; §6.7 becomes a first-class ingestion path with a **source router** giving the least-ambiguous source first refusal; **package D⅝ Structured Umbrellas** lands before D¾ and builds **one** adapter (NSPIRES ROSES Table 3) before committing to more; Cov4 narrows to `inferred` and `inline`; and §17.9 forbids justifying priority by the maintainer's own field. **D⅝'s value is new parents, not expanded ones — 62% of non-accepting documents have no hierarchy in any source.**
+> **8.7 accepts an outside provenance audit.** §5.1 replaces `subtopic_source` with a four-value ladder — `native` / `referenced` / `inline` / `inferred` — and derives confidence from provenance before method; §6.7 becomes a first-class ingestion path with a **source router** giving the least-ambiguous source first refusal; **package D⅝ Structured Umbrellas** lands before D¾ and builds **one** adapter (NSPIRES ROSES Table 3) before committing to more; Cov4 narrows to `inferred` and `inline`; and §17.9 forbids justifying priority by the maintainer's own field. **D⅝ addresses an orthogonal population — records whose child structure is published more explicitly or externally — and its gains must not be counted as improved generic segmentation.**
 >
 > **8.6 makes §15 readable.** A new **Open state at a glance** table at the top of §15 indexes every open decision, unmet gate, unfixed defect and outstanding measurement, and §15 gains a **Debt** section for the twelve threads that previously lived only in session reports. §6.7a is surfaced as a real §13 decision after fifteen sessions behind a pointer. **The Cov5 classifier re-run measured a precision effect of zero — and measured run-to-run variance larger than the signal it was looking for (§11).**
 >
@@ -47,22 +47,36 @@ nobody had tried Table 3.
    conclusion survives its wrong number — it is stronger at 10% than at 42% — but
    the number should not be requoted.
 
-2. **Structured sources do not address the 62% (a) population, and nothing in
-   D⅝ should be read as claiming they do.** `docs/FAMILY_TAXONOMY.md` §1
-   classifies every non-accepting document across 60 read records: **33 of 53 —
-   62% — contain no enumerated list of fundable subdivisions in any source.**
-   They are single-project cooperative agreements, single-programme NOFOs and
-   formula allotments. There is no table to parse, no program page to follow, and
-   no hierarchy to import, because **there is no hierarchy.** A `native` adapter
-   changes nothing for them.
+2. **The 62% category-(a) population must not be read as "no hierarchy
+   exists".** `docs/FAMILY_TAXONOMY.md` §1 classifies 33 of 53 non-accepting
+   documents — 62% — as category (a). **What that measured is narrower than it
+   sounds: no enumerated list of fundable subdivisions was present *in the
+   material read*.** It did not survey agency program pages, APIs or published
+   tables, and it could not have — the sample read solicitations and their
+   attachments.
 
-   > **So D⅝'s value is new parents, not expanded ones.** It reaches umbrella
-   > records that generic inference currently misses entirely — ROSES elements
-   > that never get fetched, DOE programmes that live on program pages — and it
-   > does not widen coverage of records already read and found to enumerate
-   > nothing. Any measurement of D⅝ must report **new parents gained**, separately
-   > from any change to existing records, which is why S1d's gate says exactly
-   > that.
+   **Several (a) records point outward explicitly**, which the same document
+   records: `345241` (Army DAC — *"topics live on an external website"*),
+   `356605` (ONR LRBAA — *"technology areas on the ONR website"*), `362036`
+   (ARPA-E IGNIITE — *"categories live in ARPA-E eXCHANGE"*), `362711` (Army ARL
+   — *"points to agency documents"*). Those are (a) because the notice enumerates
+   nothing, **and they are precisely the shape a `referenced` or `native` source
+   is for.** Some of the 62% is genuinely flat — single-project cooperative
+   agreements, formula allotments — but **how much is unknown, and the earlier
+   claim that structured sources "do not address the 62%" was an overreach.**
+
+   > **So D⅝ addresses an orthogonal population**, not a subset and not a
+   > superset: records whose useful child structure is published **more
+   > explicitly or externally** than the solicitation states it. That includes
+   > umbrella parents generic inference misses entirely *and* an unmeasured share
+   > of the (a) records that point outward.
+   >
+   > **What must not happen is counting D⅝'s gains as improved generic
+   > segmentation.** They are a different mechanism reaching a different
+   > population, and folding them into an acceptance rate would make the
+   > recogniser work look better than it is — the exact error §17.8 exists to
+   > prevent. Report D⅝'s yield against its own denominator, and say which
+   > records were previously (a).
 
 ---
 
@@ -1423,9 +1437,16 @@ cheaper to parse — a table with one row per element against a heuristic over a
 200-page PDF. **The plan had rung 4 scheduled and rung 1 unscheduled.** That is
 the inversion, and §18.1 now fixes it.
 
-**What the router does not do.** It does not improve coverage of records that
-enumerate nothing anywhere. §18.1 D⅝ is explicit about this: its value is **new
-parents**, not expanded ones.
+**What the router does and does not reach.** It reaches records whose child
+structure is published somewhere — in a table, on a program page, or stated in
+the notice. It does **not** reach records that have no hierarchy at all, and a
+large share of the corpus is exactly that: single-project cooperative
+agreements, single-programme NOFOs, formula allotments. **What is not yet known
+is where the line falls.** `docs/FAMILY_TAXONOMY.md`'s 62% category-(a) figure
+measured the *material read* — solicitations and their attachments — and several
+of those records point outward explicitly (`345241`, `356605`, `362036`,
+`362711`). Whether an agency source exists for them is **unmeasured**, and D⅝'s
+S1d is the first evidence that will bear on it.
 
 
 **Correction to v6.2.** This section previously opened by calling the DOE Office of Science omnibus "the single largest remaining gap." It is not a gap — it is the single most-worked case in the repository. `scripts/sources/discoverability.py` carries two rules for it (`doe-office-of-science-umbrella`, `doe-basic-energy-sciences`), keyed on both `DE-FOA-0003600` and the title phrase "office of science financial assistance," attaching eleven Topic-facet tags and nineteen searchable terms, with `science.osti.gov/bes/Research` and `.../csgb/Research-Areas/Catalysis-Science` cited as evidence. A search for "catalysis" finds that FOA today.
@@ -3018,8 +3039,8 @@ hierarchies agencies publish as data — before any further generic inference.
 - [ ] **S1a. Read NSPIRES ROSES Table 3 and record its shape** — §0.4 rule 10, before any parser is written. Row schema, element-code form, how continuation years are expressed
 - [ ] **S1b. `native` adapter for ROSES program elements** — ~35 elements across Earth science, heliophysics, planetary science, astrophysics and biological/physical sciences. Emits `subtopic_source: "native"`, `confidence: "high"`, bypassing Cov4 and the review queue (§5.1). Parent match by element code, never by FOA number
 - [ ] **S1c. Canaries** — `expected_solicitations`: **ROSES has ≥20 open elements**. Zero rows on an HTTP 200 fails loudly (§7.4)
-- [ ] **S1d. Re-measure and stop** — report **new parents**, not expanded coverage; re-run §8.5. **S2 (DOE SC referenced taxonomy, all six offices) and S3 (DoD source router) stay unscheduled until a human reads S1d**
-- [ ] **GATE:** S1 only · new parents reported separately · canary proven against a simulated zero-row 200 · `native` confirmed to bypass Cov4 in code · §0.5 byte-identical with the flag off
+- [ ] **S1d. Re-measure and stop** — report yield **against D⅝'s own denominator**, naming which records were previously category (a); never fold it into a segmentation acceptance rate (§17.8); re-run §8.5. **S2 (DOE SC referenced taxonomy, all six offices) and S3 (DoD source router) stay unscheduled until a human reads S1d**
+- [ ] **GATE:** S1 only · yield against D⅝'s own denominator, previously-(a) records named, never folded into an acceptance rate · canary proven against a simulated zero-row 200 · `native` confirmed to bypass Cov4 in code · §0.5 byte-identical with the flag off
 
 ### Package D¾ — Forms
 
@@ -3606,9 +3627,9 @@ untried. That is the inversion in one agency.
 | **S1a. Read Table 3 and record its shape** | §0.4 rule 10: fetch one real response, print it, read it, write code against what was observed. **Do this before writing a parser** and record the row schema, the element-code form, and how continuation years are expressed |
 | **S1b. `native` adapter for ROSES program elements** | Adapter lifecycle per §6.7a's recommendation, emitting `subtopic_source: "native"`, `confidence: "high"`, bypassing Cov4 and the review queue (§5.1). Parent match by ROSES element code, never by FOA number |
 | **S1c. Canaries** | `expected_solicitations` entry: **ROSES has ≥20 open elements**. A parser returning zero rows on an HTTP 200 must fail loudly (§7.4) |
-| **S1d. Re-measure** | Report **new parents gained**, not expanded coverage of existing ones, and re-run §8.5's query baseline. **Then decide S2 and S3 on that evidence** |
+| **S1d. Re-measure** | Report yield **against D⅝'s own denominator** and name which records were previously category (a) — that is the number that says whether structured sources reach the outward-pointing (a) population, which is currently unmeasured. **Never fold it into a segmentation acceptance rate** (§17.8): a different mechanism reaching a different population would make the recogniser work look better than it is. Re-run §8.5's query baseline. **Then decide S2 and S3 on that evidence** |
 
-**Gate:** S1 only · new parents reported separately from any change to existing records · canary proven by simulating a zero-row HTTP 200 · `native` records confirmed to bypass Cov4 in code as well as in this document · §0.5 byte-identical with the flag off · **S2 and S3 remain unscheduled until S1d is read by a human**.
+**Gate:** S1 only · yield reported against D⅝'s own denominator, with previously-(a) records named, and never folded into a segmentation acceptance rate · canary proven by simulating a zero-row HTTP 200 · `native` records confirmed to bypass Cov4 in code as well as in this document · §0.5 byte-identical with the flag off · **S2 and S3 remain unscheduled until S1d is read by a human**.
 
 #### Package D¾ — Forms
 
