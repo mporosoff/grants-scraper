@@ -98,21 +98,36 @@ FAMILIES: tuple[Family, ...] = (
         _DECIMAL,
         ("ARPA-E", "DOE"),
     ),
-    Family(
-        "thrust",
-        re.compile(r"\bThrust\s+(?:Area\s+)?(\d{1,2})\b", re.IGNORECASE),
-        _DECIMAL,
-        ("DARPA", "ONR"),
-    ),
     # `\bTopic` does not match inside "Subtopic" -- there is no word boundary
     # between "Sub" and "topic" -- so a subtopic-style heading cannot be stolen
     # by this family. The trailing punctuation class is what separates a real
     # DoD topic heading from a prose mention of "topic 3 of the announcement".
     Family(
         "dod_topic",
-        re.compile(r"\bTopic\s+(\d{1,2})\s*[:.\u2013\u2014]", re.IGNORECASE),
-        _DECIMAL,
+        re.compile(r"\bTopic\s+([A-Za-z]?\d{1,2}[a-z]?)\s*[:.\u2013\u2014]", re.IGNORECASE),
+        _ALNUM,
         ("MURI", "ONR", "ARO"),
+    ),
+    # Fm4, and read this before changing the order or the lookbehind.
+    #
+    # Two defects, one family. First, `thrust` matched the CONTAINER: on
+    # DTRA `356612` every one of the seven fundable headings reads
+    # `Thrust Area 1, Topic A2: ...`, and because this family preceded
+    # `dod_topic` it owned all seven lines and emitted `Thrust Area 1`
+    # seven times with ordinal 1 -- which §6.4 rule 2 rejected, so the
+    # document yielded nothing. `dod_topic` now sits ABOVE it, so the item
+    # wins the line and the container does not.
+    #
+    # Second, retiring `research_thrust` (§6.3) handed `Research Thrust N`
+    # to this family -- a match surface widened with no validating
+    # document, which §17.8 forbids. The lookbehind restores the boundary
+    # `research_thrust` used to provide, without re-adding a family that
+    # never fired.
+    Family(
+        "thrust",
+        re.compile(r"(?<!research\s)\bThrust\s+(?:Area\s+)?(\d{1,2})\b", re.IGNORECASE),
+        _DECIMAL,
+        ("DARPA", "ONR"),
     ),
 )
 
@@ -230,10 +245,19 @@ def _ordinal_value(kind: str, match: re.Match) -> tuple[int, str] | None:
         return (int(raw), raw)
     if kind == _ALNUM:
         raw = match.group(1)
-        digits = re.match(r"(\d+)([a-z]?)", raw, re.IGNORECASE)
-        if not digits:
-            return None
-        return (int(digits.group(1)), raw)
+        digits = re.match(r"(\d+)([a-z]?)$", raw, re.IGNORECASE)
+        if digits:
+            return (int(digits.group(1)), raw)
+        # Fm3: a letter-PREFIXED ordinal, `Topic A2`. DTRA 356612 codes
+        # its seven fundable topics A1-A7, which `(\d+)` cannot match at
+        # all. Composite so A1 < A2 < B1 sorts correctly, the same way
+        # _LETTER_DECIMAL solved it for roses_element.
+        lettered = re.match(r"([A-Za-z])(\d{1,2})$", raw)
+        if lettered:
+            letter, number = lettered.group(1).upper(), lettered.group(2)
+            return ((ord(letter) - ord("A") + 1) * 100 + int(number),
+                    f"{letter}{number}")
+        return None
     if kind == _ROMAN_OR_DECIMAL:
         raw = match.group(1)
         if raw.isdigit():

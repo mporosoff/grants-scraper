@@ -101,21 +101,58 @@ class PatternFamilyTests(unittest.TestCase):
             with self.subTest(text=text):
                 self.assertIsNone(patterns._owning_family(text))
 
-    def test_retiring_research_thrust_widened_thrust(self):
-        """A measured side-effect of the retirement, pinned before it is fixed.
+    def test_retiring_research_thrust_did_not_widen_thrust(self):
+        """Fm4. The retirement's side-effect, closed.
 
-        `research_thrust` existed so that `thrust` would not claim
-        `Research Thrust N` -- the module's own ordering comment says so.
-        Retiring it hands those lines to `thrust`, which is a **widening of a
-        match surface with no validating document**, i.e. the thing §17.8
-        forbids, arriving as a side-effect rather than as a decision.
-
-        Pinned here as the current behaviour so the Fm4 commit that removes it
-        is visible in the diff rather than silent.
+        `research_thrust` existed so `thrust` would not claim
+        `Research Thrust N`. Retiring it briefly handed those lines over -- a
+        match surface widened with no validating document, which §17.8 forbids.
+        A negative lookbehind restores the boundary without re-adding a family
+        that never fired.
         """
-        owner = patterns._owning_family("Research Thrust 3 Interfacial Chemistry")
-        self.assertIsNotNone(owner)
-        self.assertEqual(owner.identifier, "thrust")
+        self.assertIsNone(
+            patterns._owning_family("Research Thrust 3 Interfacial Chemistry")
+        )
+        self.assertEqual(
+            patterns._owning_family("Thrust 3 Materials").identifier, "thrust"
+        )
+        self.assertEqual(
+            patterns._owning_family("Thrust Area 2 Sensing").identifier, "thrust"
+        )
+
+    def test_fm3_dod_topic_matches_a_letter_prefixed_ordinal(self):
+        """Fm3. DTRA 356612 codes its seven fundable topics A1-A7."""
+        hit = patterns.match_family(
+            patterns.FAMILIES_BY_ID["dod_topic"],
+            "Thrust Area 1, Topic A2: Exploring Quantum Computing Technology",
+        )
+        self.assertIsNotNone(hit)
+        self.assertEqual(hit.ordinal_label, "A2")
+        self.assertEqual(hit.title, "Exploring Quantum Computing Technology")
+        plain = patterns.match_family(
+            patterns.FAMILIES_BY_ID["dod_topic"], "Topic 3: Quantum Sensing"
+        )
+        self.assertEqual((plain.ordinal, plain.ordinal_label), (3, "3"))
+
+    def test_fm4_the_item_wins_the_line_not_the_container(self):
+        """Fm4. The measured defect on DTRA 356612.
+
+        Every fundable heading reads `Thrust Area 1, Topic AN: ...`. Before the
+        repair `thrust` preceded `dod_topic`, owned all seven lines and emitted
+        `Thrust Area 1` seven times with ordinal 1, which §6.4 rule 2 rejected.
+        """
+        headings = [f"Thrust Area 1, Topic A{n}: Title {n}" for n in range(1, 8)]
+        self.assertEqual(
+            patterns._owning_family(headings[0]).identifier, "dod_topic"
+        )
+        family, hits = patterns.best_family(headings)
+        self.assertEqual(family, "dod_topic")
+        self.assertEqual(len(hits), 7)
+        self.assertEqual([hit.ordinal_label for hit in hits],
+                         [f"A{n}" for n in range(1, 8)])
+        ordinals = [hit.ordinal for hit in hits]
+        self.assertEqual(ordinals, sorted(ordinals))
+        self.assertEqual(len(set(ordinals)), 7)
 
     def test_roses_element_false_positive_shape_yields_no_child(self):
         """The measured false positive, pinned as a negative fixture.
