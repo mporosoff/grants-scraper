@@ -2320,7 +2320,47 @@ Not built in v1. Recorded so the deterministic design does not preclude it.
 
 **Still open:**
 
-2. **Where referenced subtopics live** — extend `scripts/sources/discoverability.py` with child records, or a parallel `scripts/sources/adapters/program_taxonomy.py`. Full tradeoffs in **§6.7a**; recommendation is the adapter, importing the linkage rule from the registry rather than duplicating it. **Explicitly deferred to a human decision.**
+2. **Where referenced subtopics live.** **Surfaced in full in 8.6 — this was
+   recorded as "deferred to a human" fifteen sessions ago and has never been
+   decided, and a one-line pointer to §6.7a was not enough to get it decided.**
+
+   **The question.** RECON established that `discoverability.py` already owns the
+   linkage between an omnibus FOA and the program areas it funds, for exactly the
+   solicitations this feature targets. So the question is not "build an adapter or
+   not" — it is **whether referenced subtopics extend the existing registry or sit
+   beside it.**
+
+   | | Option 1 — extend `discoverability.py` | Option 2 — a new `adapters/program_taxonomy.py` |
+   |---|---|---|
+   | Linkage rule | Exists exactly once, in the file that already owns it | Exists in two files that can disagree, unless imported |
+   | Fetching | `discoverability.py` has **no fetch layer at all** today; adding one changes it from a pure function over records into a network client | Fetching is what adapters do — `PoliteClient`, retry, health bounds, last-known-good snapshots, degradation alerting, all free |
+   | Failure surface | Zero new adapters, zero new health-gate surface | A new enabled adapter is a new way for the nightly to report degraded, and that channel is already noisy (`jhu-fellowships` fails today) |
+   | Coupling | Couples umbrella tagging to the subtopic feature; a bug in one breaks the other | Independently switchable |
+   | Ordering | Child emission inside `merge.integrate` happens *after* `build_search_index` has run; the merge must rebuild the index, which it does, but the ordering becomes load-bearing and subtle | Matches how every other external source here is structured |
+   | Content | The registry becomes a content store — program descriptions are prose, and prose in a `.py` file does not scale | Emits *child* records, which no existing adapter does; `merge_records` and `validate` may need `parent_id` either way |
+
+   **Recommendation: Option 2, with the linkage rule imported rather than
+   duplicated.** The decisive argument is that this feature *fetches from the
+   network on a schedule*, and this repository has one well-tested pattern for
+   that. Rebuilding health bounds, snapshot retention and fail-closed behaviour
+   inside `discoverability.py` is strictly worse than reusing them. Option 2's
+   only real objection is duplicated linkage, and that dissolves if the adapter
+   reads umbrella identity **from** the registry — `from ...sources.discoverability
+   import PROGRAM_RULES`, matching the parent by asking which records a rule
+   matched, never by restating the FOA number. Detect the annual roll-over by
+   title pattern, as `discoverability.py`'s `triggers` already does.
+
+   **What has changed since this was deferred, and it shrinks the decision.**
+   §18.2's reassessment found that the *children themselves* are in the notice and
+   reachable by `structural_siblings` today — `(q) Catalysis Science` is a bookmark
+   at a citable page. So whichever option wins now owns only **program-manager
+   identity, stable per-program URLs, taxonomy depth below what the notice prints,
+   and cross-year program identity.** That is materially smaller and less urgent
+   than the decision as originally written.
+
+   **What would decide it:** nothing further needs measuring. This is a
+   human's architectural call, and it is not on the critical path — no package
+   A–G or D½/D¾ item depends on it. **Full tradeoff tables remain in §6.7a.**
 3. **Works-text provider** — add abstracts to the existing Crossref path, or switch the browser to OpenAlex for better abstract coverage (§7.9). Decide on measured results from the §8.5 gate, not on argument.
 4. **Whether to build `scripts/build_gold_set.py` at all.** Dropped from Phase 1 because §8.5 replaces it as a *regression* gate. It remains the only way to judge whether a change is an *improvement*. Tracked upstream by **#8** (produce labels) and **#9** (export them); a gold set is not buildable until at least #9 ships. Proposed: revisit after Phase 3, when there is a concrete question that rank movement alone cannot answer.
 5. **How archived subtopics are searched.** They sit outside `search_index`, so the "include past cycles" filter needs either a separately shipped index or substring matching (§7.2). **This decision largely collapses into the now-settled sidecar** — subtopics ship as a sidecar with their own index (§13 settled), so the archive is the same mechanism with a different retention window. What remains is only the retention window and whether the archive index ships at all.
@@ -2329,7 +2369,45 @@ Not built in v1. Recorded so the deterministic design does not preclude it.
 8. **Taxonomy depth for referenced topics.** Attach at program level (BES → Catalysis Science) or one level deeper? Proposed: program level, where the program manager and the funding decision sit.
 9. **Mute/alert split.** Accept that muted items still appear in alerts, or build the suppression-list export? Proposed: accept for v1, document it plainly, revisit if it annoys anyone. The mute control itself is **#8**.
 10. **OCR.** Deferred. Revisit only if `no_extractable_text` rejections prove material.
-11. **Two label questions in the §11 evaluation corpus**, recorded rather than resolved — `361876` and `(n) Public-Private Partnerships`. Both are single-labelled, and both now carry model evidence against the recorded label. Evidence in §11 § Two open label questions. Neither changes a published number; neither should be silently "corrected" by whoever next touches the corpus.
+11. **Two label questions in the §11 evaluation corpus**, recorded rather than resolved — `361876` and `(n) Public-Private Partnerships`. Both are single-labelled, and both carry model evidence against the recorded label. Neither changes a published number; neither should be silently "corrected" by whoever next touches the corpus. **Narrowed 2026-08-17 by the Cov5 re-run and still open.** `(n)` flips to *accept* once its excerpt is clean — but its pre-fix rejection reason was about the **title**, which did not change; the model still calls it a *"funding activity"* while accepting it; and the same run measured a 1-in-62 flip on byte-identical input, so one flip is the noise floor. **The decidable question is now one sentence: is `(n) Public-Private Partnerships` a subject an applicant applies against, or a mechanism through which any subject may be funded?** One person reading page 85 of `DE-FOA-0003600` settles it. Do not settle it from a model verdict in either direction — that is how an evaluation corpus stops being independent evidence.
+
+12. **The `deadlines` payload duplicates itself, and it is 17.5% of
+    `opportunities.js`.** **Measured 2026-08-17 against the committed catalog.
+    Independent of subtopics — this is pre-existing catalog cost that the sidecar
+    decision (§13 settled) does nothing about, and it is larger than anything the
+    subtopic layer proposes to add.**
+
+    | | Bytes | Share of `opportunities.js` |
+    |---|---|---|
+    | `deadlines` payload, all 1,393 records carrying one | **4,351,475 (4.35 MB)** | **17.5%** |
+    | of which: `note` byte-identical to `citation.quote` | 876,134 (0.84 MiB) | 3.5% |
+    | of which: identity fields cloned per date | 496,679 (0.47 MiB) | 2.0% |
+    | of which: quote text literally repeated across dates | 256 | ~0% |
+    | **removable duplication** | **1,373,069 (1.31 MiB)** | **5.5%** |
+
+    **Two distinct duplications, and the smaller one is the one usually named.**
+    `note` repeats `citation.quote` verbatim in **2,438 of 2,765 note fields
+    (88.2%)** — that is the dominant term. Separately, every date entry carries its
+    own full `citation` object, so `document_url`, `citation_url`, `document_name`
+    and `sha256` are cloned per date across **481 records with more than one dated
+    citation**; the distribution runs to **13 dates on one record**. The *quotes*
+    mostly differ per date, so "the full citation is cloned" is true of the
+    document-identity fields and not of the quote.
+
+    **Why this is a decision and not a defect fix.** Dropping a duplicated `note`
+    changes a **published artifact's shape**, which is §0.5 territory: the
+    hermetic gate will flag it, correctly, and the browser reads `note`. The three
+    options are (a) drop `note` when it equals `citation.quote` and have consumers
+    fall back to the quote, (b) hoist document identity to one per record and have
+    date entries reference it, (c) leave it and spend the 5.5%. **Proposed: (a)
+    then (b), in that order and in separate commits**, because (a) is 0.84 MiB for
+    one conditional and (b) is a schema change with a browser consumer.
+
+    **Not urgent.** 23.69 MiB sits under §12's 28 MiB warn line with room, and
+    subtopics ship in a sidecar so they do not add to this file. Recorded because
+    a later session measuring catalog growth will find 17.5% in one field and
+    should find this analysis with it rather than redoing it.
+
 
 *Removed from this list:* "confirm the exact all-rights-reserved notice" — the `copyright` file already carries it and the work is done.
 
