@@ -13,6 +13,7 @@ inducing a taxonomy from a fresh 50-record sample the families have never seen.
 | New sample | **50 records, 170 documents opened, 7 fetch failures.** Disjoint from all 60 by construction |
 | Code read | `scripts/subtopic_patterns.py`, `scripts/subtopic_segmentation.py`, `scripts/subtopic_sources.py`, `scripts/extract_document_evidence.py` at commit `2ececda` |
 | Model | `claude-sonnet-5`, `thinking` omitted → adaptive, per §11 |
+| Run | 170 calls, **0 errors, 0 unparseable.** 846,201 input / 51,952 output tokens, **$3.32 at list.** Verdicts: 24 yes · 133 no · 13 unclear; confidence 147 high / 13 medium / 10 low |
 | Written | `docs/FAMILY_TAXONOMY.md` only. **No code changed, no family added, no plan section edited** |
 
 ## Headline
@@ -22,16 +23,27 @@ inducing a taxonomy from a fresh 50-record sample the families have never seen.
 > the families.
 >
 > **Of the 15 documents where a list demonstrably exists and was read, 9 (60%)
-> fail because no family shape covers the form.** So both answers are true at
-> once, and they answer different questions: the corpus sets the ceiling, the
-> families decide how much of the ceiling is reached.
+> fail because no family shape covers the form.** Both answers are true at once
+> and they answer different questions: the corpus sets the ceiling, the families
+> decide how much of it is reached.
 >
-> **Category (f) is now empty and category (e) is down to 5.** Multi-attachment
-> fetch and Cov1 closed them. The remaining blockers are 9 missing shapes, 4
-> cardinality/depth rules, and 2 occurrence-selection defects.
+> **Six forms exist in the corpus. One is covered.** The ten §6.3 families reach
+> **~17 of ~171 umbrella records — 10% of the enumerating population.** The other
+> 90% use a form nothing recognises.
 >
-> **The code carries 13 ordinal families, not ten.** §6.3's table has been stale
-> since D3 added `focus_area`, `component` and `technical_category`.
+> **Run over 170 real documents, 8 of the 13 families in the code never fire at
+> all**, two fire only on documents that carry no list, and one fires on the right
+> document at the wrong granularity. Two capture a real list.
+>
+> **The largest single uncovered form is the one §6.3 forbids.** Bare numbered
+> (`N.` / `N)`) is carried by 8 of the 90 read records — the most stably measured
+> uncovered form in the corpus — and §6.3 and §18.3 both name a generic numbered
+> family as the most damaging change available to this design. That tension is
+> the substance of §5 and it does not resolve cleanly.
+>
+> **Category (f) is now empty and (e) is down to 5.** Multi-attachment and Cov1
+> closed them. **The code carries 13 ordinal families, not ten** — §6.3's table
+> has been stale since D3.
 
 ---
 
@@ -322,10 +334,12 @@ one-subdivision-per-attachment shape.** Its five files are named `PA1_Seventh
 Genera…`, `PA 2_Microgrids_…`, `PA 3_Welders to El…`, `PA 4_Tradition in …`,
 `PA5_IDEAS_…` — apparently Program Areas 1–5, one per file, each carrying the
 same 134-node outline. The survey found that shape once (`363607`, State's six
-Addenda) and called it unmodelled by any of §6.2's four layers. Two instances in
-90 records is no longer a curiosity.
+Addenda) and called it unmodelled by any of §6.2's four layers.
 
 Both are flagged here as *observations pending the classifier*, not findings.
+**The first survived and the second did not** — see §4.1: every one of `361908`'s
+five attachments carries the whole `PA 1`–`PA 5` list, so it is not a
+one-per-attachment case at all. `363607` remains the only one in 90 records.
 
 ---
 
@@ -404,58 +418,310 @@ the raw reply, the parsed answer, and token counts.
 
 ## 4. The induced taxonomy
 
-**Not yet run.** This section, §5 and §6 require `llm_taxonomy.json`, which
-needs the API calls in §3. Everything above is complete and independent of them.
+### The measurability filter, applied first
 
-When the JSON arrives, this section will report:
+**35 of 170 documents cannot support a verdict** and are excluded from every rate
+below: 7 fetch failures, 1 unopened zip, and 27 that yielded under 500
+characters and no outline — mostly SF-424-family AcroForms, whose text layer is
+344 characters of boilerplate.
 
-- every distinct form found, with the count of documents and of **records** each
-  covers, and the per-stratum rate weighted to the catalog population;
-- the model's own form names where it invented one, kept verbatim rather than
-  folded into my vocabulary;
-- a cross-check of the model's form judgments against `structure.py`'s
-  mechanical tags, with disagreements listed individually — the tags were hidden
-  from the prompt precisely so this comparison means something;
-- for each of §6.3's **ten** families: **supported** (a document in the new
-  sample carries that form), **contradicted** (the form appears and the family's
-  pattern demonstrably fails on it, as `topic_area` did on `Topic Area 1a`), or
-  **silent** (nothing in 90 read records exercises it);
-- the same verdict for the three families D3 added and for
-  `structural_siblings`, because §6.3's table does not list them and the code is
-  authoritative (§17.2);
-- **forms with no family** and **families with no corpus support**, named
-  explicitly.
+This filter is not a formality. The model answered `False` with **`high`**
+confidence on `224533#0`, a PDF yielding **zero** characters, and its own reason
+says *"no extractable text or headings at all"*. The prose is honest and the
+boolean is not, so the boolean is discarded wherever the bytes are empty. The
+filter is mechanical, from `structures.json`, not a self-report. Of the 35
+excluded documents the model called none of them a hit, so nothing is lost.
+
+**135 documents measured. 24 carry a subdivision set.** At record level, a
+record counts as a hit if any of its documents hits:
+
+| | Records |
+|---|---|
+| carry a subdivision set | **13** |
+| measured, no set | 34 |
+| no measurable document at all | 3 — `224533`, `360004`, `363241` |
+
+### The six forms
+
+The model produced **18 distinct label strings** for 24 documents —
+`numbered list`, `numbered`, `hierarchical numbered`, `hierarchical numbered
+lists` are one form under four names. Normalising on **mechanics** (marker shape,
+counter present, nesting, tabular) rather than on the label string collapses them
+to six. The model's own wording is kept in the last column rather than discarded.
+
+Pooled over all 90 read records — the census 20 contributes *form discovery*
+only, never a rate, for the reason in §4.2:
+
+| Form | Records (of 90) | Mechanics | Covered by a family today? | The model called it |
+|---|---|---|---|---|
+| **F4** named or bulleted, **no counter at all** | **9** | a bullet glyph or nothing marks each item; delimited by position or a repeated label | **No.** `label_run` deferred (§6.3a); `structural_siblings` only if bookmarked | *bulleted topic list, named list with bullets, bulleted named list, named list* |
+| **F2** labelled ordinal `<Label> N:` | **9** | a known label word plus a counter | **Yes** — the only covered form | *numbered components, hierarchical numbered/lettered* |
+| **F1** bare numbered `N.` / `N)` / `N -` | **8** | a bare counter plus a named title, no label word | **No** — this is the generic numbered family §6.3 and §18.3 forbid | *numbered list, numbered, numbered restarting per subsection, numbered grouped by category, hierarchical numbered* |
+| **F3** coded named list | **4** | a repeated non-standard code prefix: `PA 1:`, `53-24-01 -`, `A.1.a.`, `Topic A2` | **No** | *coded named list, lettered topics, named topics with letter-number codes* |
+| **F6** lettered `a.` / `(a)` / `a)` | **4** | a letter counter plus a named title | Only via `structural_siblings`, and only when bookmarked **and** ≥3 siblings | *lettered* |
+| **F5** **tabular** | **1** | items are **rows of a table**, keyed by a Topic Number column | **No — and no *layer* either.** `extract_containers` has no table path | *numbered table, numbered table rows* |
+
+**F5 is genuinely new.** No document in the census 20 or the survey 40 had it.
+`363530` (AFOSR DEPSCoR-CB, `NOFOAFRLAFOSR20260003`) presents 12 topics as table
+rows with `SECTION` / `SERVICE` / `TOPIC AREA` / `PROGRAM OFFICER` columns —
+and they are *the same topics* as census `363526`, the sibling notice, which
+presents them as headings. **One program office, two notices, two forms, and only
+one of them is reachable by any mechanism in the plan.**
+
+### 4.1 Every hit, with its quoted headings
+
+| Record | Agency | n | Form | Marker | Verdict |
+|---|---|---|---|---|---|
+| `330175` | Air Force Academy | 24 | F1 | `1. Aeronautics (Aeronautics Research Center)` | Genuine. Research centres and departments, **zero bookmarks**, counter **restarts at 1** in each of three groups |
+| `355150` | Army Applications Lab | 16 | F1 | `1.` | Genuine. 16 technology areas, `1.`–`16.` |
+| `328902` | FAA Aviation Research | 7 | F1 | `1.` | Genuine. Corroborated by a form asking for *"Title of Applicable FAA Program Area"* |
+| `362910` | NRCS RCPP | 2 | F1 | `1.` | **Borderline.** Two *funding pools* (CCA, State/Multi-State) — an allocation mechanism an applicant does choose among |
+| `362871` | ONR FY27 | 14 | F4 | `• Artificial Intelligence and Autonomy` | Genuine. 14 bulleted focus areas with nested sub-topics. Note the census judged a *different* ONR BAA as pointing outward; this one enumerates |
+| `363578` | State NEA (Syria APS) | 3 | F4 | `•` | Genuine. Each bullet carries its own Estimated Award Ceiling |
+| `358716` | HUD ICDBG | 2 | F4 | *(none)* | Genuine. `Community Facilities`, `Economic Development`. Found on the **agency page**, not an attachment |
+| `360333` | CDC-GHC | 5 | F2 | `Component 1:` | Genuine. `Component 1`–`5`, each with a funding ceiling |
+| `363302` | NETL `DE-FOA-0003634` | 5 | F2 | `Topic Area 1:` | Genuine. `Topic Area 1 / 1a / 1b / 2 / 3` |
+| `356612` | DTRA | 7 | F3 | `Thrust Area 1, Topic A2:` | Genuine, **partially quoted** — 5 of 7 quoted verbatim, 2 marked *"(implied by section on…)"*. The counter is a **letter** code `A1`–`A7` |
+| `361908` | ACF ANA | 5 | F3 | `PA 1:` | Genuine. `PA 1: Seventh-generation greenhouses` … `PA 5: IDEAS` |
+| `346815` | EDA Public Works | 2 | F6 | `a. Public Works` | Genuine. Same two-program shape as the survey's `332127` / `334079` |
+| `363530` | AFOSR DEPSCoR-CB | 12 | F5 | `I.C.1 1` | Genuine. 12 topics as table rows |
+
+**Twelve of the thirteen are unambiguous; `362910` is borderline.** Funding pools
+are an allocation mechanism rather than a research subject, but an applicant does
+select one, so it is counted and flagged rather than silently dropped.
+
+**A correction to §2.1 of this document.** I predicted `361908` was a second
+instance of the one-subdivision-per-attachment shape, from its filenames
+(`PA1_…`, `PA 2_Microgrids_…`). It is not: **each of the five attachments
+contains the whole `PA 1`–`PA 5` list.** The filenames are per-Program-Area but
+the content is not, which makes it *easier* than `363607`, not harder — any one
+attachment carries the full list. `363607` remains the only true
+one-per-attachment case in 90 records.
+
+### 4.2 Why the census is excluded from every rate
+
+The first version of this analysis pooled the census's 12 enumerating records
+into the per-stratum numerators while the denominators counted only the
+stratified draws. That inflated the catalog estimate from 171 to 230 and it is
+exactly the bias `docs/COVERAGE_SURVEY.md` warns about — *"the census's 12-of-20
+was a property of the sample, not of the corpus."* The census 20 was hand-picked
+to span shapes and enumerates at 60% against a corpus rate near 26%.
+
+So the two kinds of sample do two different jobs and are never mixed:
+
+- **Rates and catalog yield** use only the seeded stratified draws — the survey
+  40 and this session's 50, **87 of which carry a measurable document**.
+- **Form discovery** uses all 90. Whether a shape *exists* does not depend on how
+  its document was sampled, and the census holds `F3`'s `A.1.a.` and `53-24-01 -`
+  variants the random draws never hit.
+
+### 4.3 Rates and catalog extrapolation
+
+| Stratum | Catalog | Read | Hits | Rate | 95% Wilson | Catalog range | Forms found |
+|---|---|---|---|---|---|---|---|
+| A — 1 attachment | 215 | 22 | 4 | 18% | 7–39% | 16–83 | F1×2 F2×1 F4×1 |
+| B — 2–4 | 90 | 22 | 6 | 27% | 13–48% | 12–43 | F1×2 F2×1 F3×1 F4×2 |
+| C — 5+ | 27 | 18 | 11 | **61%** | 39–80% | 10–22 | F1×2 F2×2 F3×1 F4×3 F6×3 |
+| D — non-PDF | 483 | 12 | 1 | 8% | 1–35% | **7–171** | F5×1 |
+| E — zero attachments | 660 | 13 | 1 | 8% | 1–33% | **9–220** | F4×1 |
+| **total** | **1,475** | **87** | **23** | **26%** | | | |
+
+> **Point estimate: ~171 umbrella records, 11.6% of the catalog.**
+> **Plausible band: 54–538 records (3.7%–36.5%).**
+
+The band is enormous and the reason is specific: **D and E hold 1,143 of 1,475
+records and have 25 reads and 2 hits between them.** A and B and C are now
+reasonably measured; the two largest strata are not.
+
+### 4.4 Per-form catalog yield
+
+| Form | Catalog est. | Random observations | All 90 | Strata seen | Stability |
+|---|---|---|---|---|---|
+| **F4** named/bulleted | **~73** | 7 | 9 | A B C E | **~22 excluding stratum E.** 51 of the 73 rests on a *single* E observation against 660 records and 13 reads |
+| **F5** tabular | **~40** | 1 | 1 | D | **n=1.** Entirely one observation against 483 records and 12 reads. Order of magnitude at best |
+| **F1** bare numbered | **~31** | 6 | 8 | A B C | **The most stable uncovered form.** 6 independent observations across three strata; 6/87 overall = 6.9%, Wilson 3.2–14.2% → 47–210 records |
+| **F2** labelled ordinal | **~17** | 4 | 9 | A B C | The only covered form |
+| **F3** coded named list | ~6 | 2 | 4 | B C | |
+| **F6** lettered | ~4 | 3 | 4 | C | |
+
+> **Forms with a family today: ~17 records — 10% of the enumerating population.
+> Forms with no family: ~154 records — 90%.**
+
+### 4.5 Verdict on each family, measured
+
+Production's `FAMILIES` tuple was imported and each pattern run over every
+outline title, heading line, HTML heading and worksheet row of all 170 documents.
+
+| Family | §6.3? | Fires | Verdict |
+|---|---|---|---|
+| `topic_area` | ten | 3 docs, 2 records | **SUPPORTED.** Captures `Topic Area 1 / 1a / 1b / 2 / 3` on `363302` exactly — including the sub-lettered form D3 fixed. Third live validating record |
+| `component` | D3 | 1 doc, 1 record | **SUPPORTED.** `Component 1:`–`5:` on `360333`, captured exactly. **The census's validating record `360339` left the catalog, so this is now the family's only live evidence** |
+| `thrust` | ten | 3 docs, 2 hits | **CONTRADICTED at the granularity that matters.** It fires on `356612`, a real hit, but matches the *container* `Thrust Area 1` — one item — while the fundable list is `Topic A1`–`A7` beneath it. A family that matches the umbrella instead of the topics segments one span, not seven |
+| `dod_topic` | ten | **0 in 170 docs** | **SUPPORTED by prior corpora only** (`363526` Topic 1–12, `349554` Topic 1–18). **CONTRADICTED by `356612`**, whose topics are `Topic A2` — a letter ordinal the `(\d{1,2})` group cannot match. Still no MURI document anywhere |
+| `roses_element` | ten | **6 docs, 0 hits** | **FALSE-POSITIVE SURFACE, reproduced.** Fires on `A.1 BACKGROUND AND OBJECTIVES` across five revisions of one DOE Idaho FOA and on `C.3 Budget Documents` in a DRL instructions file. This is the census's `332894` failure mode on entirely new documents, and there is still **no document in 90 records that it correctly matches** |
+| `area_of_interest` | ten | 1 doc, 0 hits | **FALSE-POSITIVE SURFACE.** Its one fire is `Area of Interest 4: Process Diversification…` on NETL's aggregating agency page — belonging to a *different* opportunity. See §4.6 |
+| `focus_area` | D3 | 0 | **SILENT** here; supported by `362859` in the census. Note `362233`'s "Focus Areas" are bulleted, which it cannot match |
+| `technical_category` | D3 | 0 | **SILENT** here; supported by `356623` in the census |
+| `technical_area` | ten | 0 | **SILENT in 170 documents** |
+| `sbir_subtopic` | ten | 0 | **SILENT in 170 documents** |
+| `nsf_track` | ten | 0 | **SILENT in 170 documents**, including four NSF records read end to end |
+| `research_thrust` | ten | 0 | **SILENT in 170 documents** |
+| `priority_research` | ten | 0 | **SILENT in 170 documents.** `332894`'s heading is *Priority Research Thrusts*, which the `Direction\|Opportunity\|PRD` pattern does not match |
+| `structural_siblings` | §6.3a | n/a | **SUPPORTED** by `360678` and `361526`. Reaches F6 and hierarchical F1 **only when the PDF has bookmarks — and 71 of 129 PDFs in this sample have none** |
+
+**Summary of the ten:** 1 supported outright (`topic_area`), 1 supported only by
+prior corpora and contradicted here (`dod_topic`), 1 contradicted at granularity
+(`thrust`), 2 pure false-positive surfaces (`roses_element`,
+`area_of_interest`), **5 silent across 170 documents** (`technical_area`,
+`sbir_subtopic`, `nsf_track`, `research_thrust`, `priority_research`).
+
+**Families with no corpus support anywhere in 90 records:**
+`technical_area`, `sbir_subtopic`, `nsf_track`, `research_thrust`,
+`priority_research`, `area_of_interest`, `roses_element` — **7 of the ten.**
+Two of the seven are actively harmful.
+
+**Forms with no family:** F1, F3, F4, F5 outright; F6 only when bookmarked.
+**That is five of the six forms and ~90% of the enumerating population.**
+
+### 4.6 A new false-positive surface, and it is Cov1's
+
+`363594#2` is NETL's agency landing page. `topic_area` fires on it **10 times**
+and `area_of_interest` once — and every one of those topics belongs to a
+*different* opportunity (`DE-FOA-0003634`, `DE-FOA-0003627`). The page aggregates
+many FOAs. The model refused it for exactly that reason:
+
+> *"the Topic Area lists visible … belong to other, unrelated funding
+> opportunities, not to DE-FOA-0003215 itself"*
+
+**Cov1's `subtopic_only_primary` feeds precisely these pages to the segmenter**
+for the 221 records declined only for lack of gap-fill. An aggregating agency
+page is a document where the ordinal families fire cleanly, monotonically, with
+titled captures — and attach another opportunity's topics to this record. Nothing
+in §6.4 detects it, because the set is perfectly well-formed; it is simply about
+the wrong opportunity. This is a distinct failure mode from announcement
+furniture and no threshold in §6.4a addresses it.
+
+### 4.7 The cross-check against my own mechanical tags, and its result
+
+`structure.py` tagged every heading line with the form it matched, and those tags
+were withheld from the prompt so this comparison would mean something. **The
+comparison is largely uninformative, and that is the honest result.**
+`named_titlecase` and `bullet` dominate every document — 56 to 241 hits each —
+including all 24 hits and most non-hits. The tags confirm that *a* form is
+present and cannot indicate *which* list is the fundable one.
+
+That is the same lesson §6.4a already recorded about structure: an outline node
+with twelve children has twelve children, whatever they are. It applies to
+heading-shape tagging just as much, and it is an argument for the classifier
+rather than against it.
 
 ## 5. A recommended replacement §6.3
 
-**Not yet run.** Will be ordered by document coverage, with the yield each form
-would unlock stated as *records in the 90 read* · *catalog extrapolation per
-stratum*, and with the false-positive surface of each named — §18.3's asymmetry
-applies to every row. **Recommendation only; nothing implemented.**
+**Recommendation only. Nothing here is implemented, and §6.3 is unedited.**
+
+Ordered by catalog coverage, with the stability of each estimate stated because
+two of the six rows rest on a single observation.
+
+| # | Form | Catalog est. | Read evidence | Cost | What it buys, and what it risks |
+|---|---|---|---|---|---|
+| 1 | **F4 — named / bulleted, no counter** | ~73 (**~22 excluding the n=1 in stratum E**) | 9 of 90, strata A B C E | **Large** | The biggest population and the hardest problem. This is §6.3a's deferred `label_run` plus a bulleted variant. **Highest false-positive risk in the table** and the corpus proves it: `362233`'s five real Focus Areas sit two inches above five decoy bullets (*Innovation, Impact, Research Strategy…*) with no ordinal to separate them. Do not build this on structure alone — it is the row that most needs §11's classifier in front of it |
+| 2 | **F1 — bare numbered `N.` / `N)` / `N -`** | ~31 (Wilson 47–210 on the pooled rate) | **8 of 90, strata A B C — the most stable uncovered row** | **Small (regex), large (adjudication)** | **This is the row §6.3 and §18.3 forbid, and the corpus says it is the most common uncovered form.** See §5.1 — it should not be added as a bare family, and it should not stay unaddressed either |
+| 3 | **F5 — tabular** | ~40, **n=1** | 1 of 90, stratum D | **Medium** | Needs a table-extraction path in `extract_containers`, which has none — `pdfplumber` is already authorized (§6.1) and provides one. Yield is one observation against 483 records: **do not fund this row on this number.** Its real argument is qualitative — `363530` and census `363526` are the same 12 topics from the same office in two forms, so tabular is a *presentation variant* of an already-validated list, not a new population |
+| 4 | **F2 — labelled ordinal** | ~17 | 9 of 90 | **Already built** | Keep all six that fire. Two repairs the corpus names: extend the ordinal group to letters so `dod_topic` matches `Topic A2` (`356612`), and make `thrust` match the topics under a Thrust Area rather than the Thrust Area itself |
+| 5 | **F6 — lettered** | ~4 | 4 of 90 | **Trivial-to-medium** | `structural_siblings` already reaches it when bookmarks exist. The binding constraint is not the pattern: three of the four are **2-item lists** (`332127`, `334079`, `346815`) rejected by the 3-item floor, and lowering that floor is the change the survey explicitly declined to recommend |
+| 6 | **F3 — coded named list** | ~6 | 4 of 90 | **Medium** | `PA 1:`, `53-24-01 -`, `A.1.a.`, `Topic A2`. Each is agency-specific; a discovered-prefix recogniser is the general form and its false-positive profile is unmeasured. Smallest yield of the six |
+
+**Three structural changes matter more than any row above**, and all three came
+out of this session's measurements rather than out of the taxonomy:
+
+- **Delete or gate `roses_element` (§4.5).** In 90 read records it has matched
+  **zero** real lists and produced false positives in two independent samples.
+  It exists for NASA ROSES, every NASA record in the corpus is unreachable, and
+  until NSPIRES is solved the family is pure downside.
+- **Fix `_demote()` (§1.2).** It caps every result for the 46.4% of records where
+  `source_for_record` returns `None`, including lists read from the record's own
+  Full Announcement. No new family publishes anything for those records until
+  this changes.
+- **Judge the aggregating-agency-page case (§4.6)** before Cov1 feeds more of
+  them in. It is a well-formed-set failure that §6.4 cannot see.
+
+### 5.1 The F1 problem, stated rather than resolved
+
+§6.3 and §18.3 name a generic numbered family as *"the single most damaging change
+anyone could make to this design"* — the one that manufactures subtopics titled
+*Federal Agency Name* from 47 matching lines. **That judgment was correct on the
+evidence available and it is still correct.** B0 measured 47, 19 and 74
+decimal-numbered administrative lines in three notices.
+
+It is also now in tension with the corpus. F1 is carried by 8 of 90 read
+records — `332894`, `345938`, `361526`, `360205`, `328902`, `330175`, `355150`,
+`362910` — spanning Army, WHS, DOE, USDA, FAA, the Air Force Academy and NRCS.
+It is the most stably measured uncovered form there is.
+
+Both statements are true because they are about different things: **the form is
+common and the form is not a signal.** A bare `1.` says nothing about whether
+what follows is a research area or *Allowable Costs*.
+
+So the recommendation is **not** a bare F1 family. It is that F1 is the clearest
+case in the corpus for the architecture §6.4b already adopted: admit the set
+structurally, then classify its members individually, and let confidence gate
+review rather than publication. §11 measured that classifier at 100% precision
+and 100% recall on 21 sets and 7/7 contaminants on 114 spans, and the four
+semantic modes no vocabulary test can reach are exactly the modes an F1 family
+would otherwise emit. **F1 is the row that makes Cov4 load-bearing rather than
+optional** — and `330175` adds a second requirement, because its counter
+**restarts at 1** three times, which §6.4 rule 2's monotonic-ordinal test rejects
+outright.
 
 ## 6. Does §1.1's ~13% ceiling survive?
 
-**Not yet answerable.** §1.1 currently states a point estimate of ~128 umbrella
-parents (~8–9%) with a plausible top of ~200 records (~13%), resting on stratum
-rates of 6–10 records each.
+**Substantially, yes — but it is a central estimate, not a ceiling, and §1.1's
+point estimate is too low.**
 
-This sample changes the evidence underneath that figure in three ways, and they
-do not all push the same direction:
+§1.1 currently says: point estimate **~128 records (8–9%)**, with the top of the
+plausible range around **~200 records (~13%)**.
 
-- **Stratum C goes from 6 records to 18** — from a 5-of-6 estimate with a 95%
-  interval running roughly 36%–100% to something much tighter. C is only 27
-  records, so its effect on the total is bounded, but it is the stratum
-  contributing the highest rate.
-- **Strata A and B roughly double** (10→23, 9→22). Between them they carry 305
-  catalog records at measured rates of 20% and 22%, and they are where most of
-  §1.1's point estimate comes from.
-- **The five (e) reclassifications cut the other way.** Documents previously
-  counted as correct zeros are now unknowns, which means the *denominator* of
-  measured non-enumerating records was overstated. That pushes the ceiling up,
-  not down.
+Measured on 87 stratified-drawn records — more than twice the evidence §1.1
+rests on:
 
-The corrected figure and what it rests on will be stated here once the run
-completes, per stratum and with intervals rather than as a single number.
+| | §1.1 today | This session |
+|---|---|---|
+| Point estimate | ~128 records, 8–9% | **~171 records, 11.6%** |
+| Stated range | up to ~200 (~13%) | **54–538 records (3.7%–36.5%)** |
+| Records behind it | 40, 6–10 per stratum | **87, 12–22 per stratum** |
+
+Three things changed, and they do not all push the same way:
+
+- **A, B and C roughly doubled** (10→22, 9→22, 6→18). Their rates came in at
+  18%, 27% and 61% against the survey's 20%, 22% and 83% — **A and C both came
+  down**, C substantially, which is what a 6-record stratum estimate usually does
+  when you read twelve more.
+- **The five (e) reclassifications in §1 push the other way.** Records counted as
+  measured zeros are unknowns, so the non-enumerating denominator was overstated.
+- **D and E are still barely read** — 25 records against a combined population of
+  1,143, one hit each. They contribute 91 of the 171 and virtually all of the
+  interval width.
+
+**So: ~13% survives as a figure to quote, and should be quoted as the middle of a
+wide band rather than as its top.** The honest correction to §1.1 is to move the
+point estimate from 8–9% to **~11–12%**, and to say plainly that the interval
+runs from about 4% to about 36% because two strata holding 77% of the catalog have
+25 reads between them.
+
+**What it rests on**, precisely: 87 records drawn by seeded stratified sampling
+across attachment profile and agency family, each of whose documents was opened
+without filename filtering; 23 judged to carry a set of fundable subdivisions by
+`claude-sonnet-5` at adaptive thinking, of which 13 (this session's) were checked
+against their verbatim quoted headings by reading, with one borderline
+(`362910`). Stratum rates weighted by catalog population; Wilson intervals at
+95%.
+
+**The measurement that would tighten it** is unchanged from the survey's own
+recommendation, and this session narrows it to one stratum: **read 30 more
+stratum-D records.** D is 483 records, has 12 reads, produced the only tabular
+form in the corpus, and its interval alone spans 7–171 records. E is larger but
+its ceiling is bounded by reachability — 313 of its records have no fetchable
+source at all.
 
 ---
 
@@ -476,14 +742,36 @@ Probe scripts are not committed, for the same reason as B0, the census and the
 survey: they are one-shot instruments against network-fetched documents, and the
 test suite has no network path.
 
+The 170 classifications came from `claude-sonnet-5` with `thinking` omitted, one
+call per document, prompts built by `build_prompts.py` with the extractor's own
+form tags withheld. The run was made by the repository owner in a human shell,
+because Claude Code strips `ANTHROPIC_API_KEY` from tool subprocesses. Forms were
+normalised on mechanics by `family_verdict.py`; rates and yields were computed by
+`yields2.py` with the census excluded from every denominator (§4.2); the family
+verdicts in §4.5 come from importing production's `FAMILIES` tuple and running
+each pattern over all 170 documents.
+
 **Not done, and a reader might assume otherwise:**
 
-- **No code was changed, no family was added, no threshold was moved, and no
-  section of `docs/TOPIC_LAYER_PLAN.md` was edited** — including §6.3, §6.4a and
-  §1.1, which this document argues about. §15 gains no checked box; this is not a
-  §18 work package.
-- **The API calls in §3 have not been made.** Sections 4, 5 and 6 are open.
-- **The `_demote()` defect in §1.2 is recorded, not fixed.**
+- **No code was changed, no family was added or removed, no threshold was moved,
+  and no section of `docs/TOPIC_LAYER_PLAN.md` was edited** — including §6.3,
+  §6.4a and §1.1, which this document argues about and recommends changing. §15
+  gains no checked box; this is not a §18 work package.
+- **§5 is a recommendation.** Nothing in it is built, and the F1 question in §5.1
+  is deliberately left unresolved rather than decided here.
+- **The `_demote()` defect in §1.2 is recorded, not fixed**, as are the
+  `roses_element` and aggregating-agency-page findings.
+- **Only this session's 13 hits were checked by reading their quoted headings.**
+  The 133 negatives were not re-read; a negative rests on the model plus the
+  measurability filter. One hit (`362910`, funding pools) is flagged borderline
+  and counted, and `356612` was quoted only 5-of-7 verbatim with 2 items inferred.
+- **One run, single-shot, no self-consistency check** — the same caveat §11
+  records for its own measurement. Run-to-run variance is unmeasured here too.
+- **`llm_taxonomy.json`, `structures.json` and the 170 prompts are not
+  committed.** They are one-shot artifacts against network-fetched documents,
+  like every prior session's probes.
+- **The classifier's negatives on stratum D and E are the weakest part of this
+  document**, and §6 says so: 25 reads against 1,143 records.
 - **The 30 non-accepting survey documents whose category is (a) rest on the
   survey's reading, not on a re-read in this session.** What was re-derived here
   is reachability and the two blockers that changed. A second rater has never
