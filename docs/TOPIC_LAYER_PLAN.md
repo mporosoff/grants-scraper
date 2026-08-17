@@ -2,9 +2,11 @@
 
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
-Status: in progress · Version 8.2 · Written 2026-08-15 · **Revised 2026-08-16 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, and `docs/COVERAGE_SURVEY.md`**
+Status: in progress · Version 8.3 · Written 2026-08-15 · **Revised 2026-08-17 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, and a measured LLM span-classifier run (§11)**
 
 > **Start at §18.** It defines the minimum path — the **eight** work packages that are actually being built (A–G plus **D½ Coverage**, added in 8.2) — and lists what is deferred and what it costs. §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
+>
+> **8.3 changes one thing structurally: the unit of judgment moves from the sibling *set* to the individual *span* (§6.4b), because a set-level verdict lets two policy paragraphs delete 70 DOE programmes.** §11 is reopened for the precision half only, on a measured run; its recall argument is untouched.
 >
 > **Two things gate everything downstream right now:** §13 open decision **0** (the §12 budget versus `MAX_TERMS`) blocks committing any cache and needs a human; and every rate quoted against `docs/CORPUS_CENSUS.md`'s 20 documents is superseded by `docs/COVERAGE_SURVEY.md` (§1.1).
 
@@ -920,6 +922,9 @@ Accept only if **all** hold. Any failure → zero topics, parent untouched, reas
 5. Total candidates ≤60 (guards against reference lists and form indexes)
 6. Candidates not confined to the detected TOC page range
 7. **Ordinal families only:** ≥60% of candidates carry a non-empty title after the code. **Structural families:** there is no code, so this is subsumed by §6.4a's title tests
+8. **Announcement-furniture veto, every family.** The share of *tokens* across the candidate titles drawn from `PROCESS_VOCABULARY` is below `PROCESS_TOKEN_MAX = 0.07`. Fitted in D5, not reasoned — see §6.4a. *(This rule shipped in D5 and was missing from this list until 8.3; the code is `subtopic_segmentation.py` and it is authoritative — §17.2.)*
+
+> **Rules 1–8 judge a set. They are all-or-nothing by construction, and §6.4b changes what that verdict governs:** a set that passes is admitted, and its *members* are then filtered individually. Read §6.4b before treating this list as the last word on what publishes.
 
 ### 6.4a Rule 2 for structural families
 
@@ -944,9 +949,30 @@ This is the quantitative replacement for "the ordinals count up," and it is the 
 
 > **AFRL PACER (`349554`) yields 18 correct topics — `Topic 1 – Aero-Structures` through `Topic 18` — and every one of them is suppressed.** It resolves at Layer D (`numbered`), which is `low`; it would be won from a secondary attachment, which §6.6 caps at `low`; and `low` never publishes. The extraction is right, was read span by span, and is invisible.
 
-**No setting of these thresholds resolves that.** Raising Layer D's tier, or lifting the secondary-attachment cap, re-admits precisely the fabrications D5 removed — `1. NOFO Summary`, `a. Narrative Section I: Project Description` — because those come from the *same* tiers. The tiers are not mis-fitted; they are being asked to carry a decision they cannot make, which is *"is this particular list the fundable one?"* That question has one reliable answer, and it is a human reading the titles. See the Coverage package's confidence-model item (§18.1) and §13's revised settled decision.
+**No setting of these thresholds resolves that.** Raising Layer D's tier, or lifting the secondary-attachment cap, re-admits precisely the fabrications D5 removed — `1. NOFO Summary`, `a. Narrative Section I: Project Description` — because those come from the *same* tiers. The tiers are not mis-fitted; they are being asked to carry a decision they cannot make, which is *"is this particular list the fundable one?"* That question has one reliable answer — **and as of 8.3 there are two evaluators that give it, a human and a classifier measured at 100% on both axes (§11). See §6.4b, the Coverage package's Cov4 (§18.1), and §13's revised settled decision.**
+
+### 6.4b The unit of judgment is the span, not the set
+
+**Added 8.3.** Everything above judges a **set**: rules 1–8 pass or fail all candidates together, and §6.2's confidence tier is likewise assigned to the whole result. That is the right granularity for *"did segmentation find an enumeration?"* and the wrong one for *"which of these should a PI see?"* — and the corpus shows the cost of conflating them in both directions.
+
+**The false-positive direction.** `360678` — DOE Office of Science, 70 programmes including `(q) Catalysis Science`, the single most valuable extraction in this corpus — contains two administrative siblings, `Multi-Institutional Teams` and `Open Science`. Package D measured them; §6.3a's set-level veto could not catch them without also rejecting the 68 real ones (5 of 26 is 19%, under the 25% threshold). A set-level classifier reading the same evidence **condemned the entire set over those two members** (§11, Haiku). The same model at span level isolated exactly the two and passed the other 68. **Two policy paragraphs should not be able to delete Catalysis Science, and under a set-level verdict they can.**
+
+**The false-negative direction.** `349554` (AFRL PACER) yields 18 correct topics at `low`, and `low` never publishes — so all 18 are suppressed to guard against fabrications that live in *other* `low` results. Judged individually, all 18 pass (18/18 on both models, §11).
+
+**The rule.**
+
+> A set that satisfies §6.4 rules 1–8 is **admitted**. Its members are then classified **individually**, and only members that pass are published. A set is never published or suppressed wholesale on the strength of some of its members.
+
+Two consequences worth stating plainly, because they change what the tiers mean:
+
+- **Set-level acceptance keeps its current job** — *is there an enumeration here at all?* — and loses the job it was doing badly, which is *is every member of it fundable?*
+- **Confidence stops gating publication and starts gating review.** `high` publishes its surviving spans; `medium` and `low` publish their surviving spans **only once reviewed** (§18.1 Cov4). This is what makes PACER shippable without touching a threshold: its tier is unchanged, its spans are filtered, and the residual goes to a human. §18.3's asymmetry is preserved — nothing reaches a PI that has not survived both the filter and, below `high`, a person.
+
+**This does not relax §6.4.** A set that fails acceptance still yields zero subtopics and leaves the parent untouched. Span filtering only ever *removes* members from a set that already passed; it can never add one, and it can never rescue a rejected set. If every member of an admitted set is filtered out, the result is zero subtopics and the reason is logged — the same fail-closed outcome as a rejected set.
 
 ### 6.5 Derived fields
+
+> **⚠ Measured defect, 2026-08-17 — some summaries do not describe their span. Prevalence unmeasured.** Three spans in `360678` were handed excerpt text belonging to neither their title nor their subject: **`(i) X-Ray Scattering` carries the sentence *"Applications submitted by February 1, 2026, will be considered for funding in FY 2026"***; `(d) Earth-Energy Systems Modeling` carries text trailing off into *"Specific Instructions"*. This is span-boundary construction below — a span begins at its bookmark offset, so it can open mid-sentence inside the *previous* section's prose and a 240-character head then summarizes the wrong thing. **It degrades two consumers at once:** the §11 classifier judged those three by the text it was given and rejected them (correctly, for that text), and the same string is what a PI reads on the topic card. Tracked as **Cov5** in §18.1. Three cases are confirmed by reading; a start-of-sentence heuristic was tried as a prevalence estimate and discarded because its output contradicted the observed error pattern, so **how common this is remains unknown and must be measured before the summary is trusted for either purpose.**
 
 **Running header/footer removal** — required before summarizing, or every summary opens with the solicitation number:
 
@@ -1906,16 +1932,51 @@ Two changes are **not** flag-reversible, and both are Phase 1: pinning the PDF t
 
 ## 11. Deferred optional AI layer
 
-**Status: closed, not deferred (2026-08-16).** Assessed against the measured causes of every segmentation miss (`docs/CORPUS_CENSUS.md`): **an LLM labeler under this section's own constraint reaches 0 of 7 misses.** In six of the seven, deterministic segmentation located *no spans at all* — three have no family shape, one was rejected by an acceptance rule, one has its list in an attachment that is never fetched — so there is nothing for a labeler to label. In the remaining two, candidates were located and then rejected, and having a model overturn that rejection is exactly the "discover topics" role this section forbids: the model would be deciding *whether a list exists*, not describing one that does.
+**Status: reopened for one half, measured (2026-08-17).** This section had two halves. The **recall** half — *can a model rescue the misses?* — is closed, and nothing below disturbs it. The **precision** half — *can a model tell a fundable list from announcement furniture, given spans that already exist?* — was recorded as "plausible" and has now been run.
 
-The original assessment below — "polish, not mechanism" — is confirmed. The misses are mechanism. **Do not revisit this to raise acceptance; it cannot.**
+### The recall half stays closed, and this is not a re-argument
 
-Two narrower uses survive and are the only reasons to reopen it:
+Assessed against the measured causes of every segmentation miss (`docs/CORPUS_CENSUS.md`): **an LLM labeler under this section's own constraint reaches 0 of 7 misses.** In six of the seven, deterministic segmentation located *no spans at all* — three have no family shape, one was rejected by an acceptance rule, one has its list in an attachment that is never fetched — so there is nothing for a labeler to label. In the remaining two, candidates were located and then rejected, and having a model overturn that rejection is exactly the "discover topics" role this section forbids: the model would be deciding *whether a list exists*, not describing one that does.
 
-- **Filtering contaminating spans.** Package D measured 7 bad spans in the publishable set — `Open Science`, `Annual Progress Reports`, `Teaming Arrangements`. A model shown those beside `Catalysis Science` would plausibly reject them. That is classification of *located* spans, inside the constraint, and it addresses precision rather than recall.
-- Nothing else. Reading the Genesis `Focus Areas` spreadsheet needs a spreadsheet reader, not a model.
+**That argument is untouched by the measurement below and remains correct. Do not cite the new numbers to reopen acceptance; they are about a different question.**
 
-**8.2 note — the surviving use now has a non-AI implementation, and it ships first.** The one narrow use above is *"show a human-quality judgment the located titles and have it reject the furniture."* §18.1's Cov4 review queue does exactly that with an actual human, browser-local, using `assets/review.js`. Build that first and let it accumulate labelled approvals and rejections. If the queue proves the bottleneck is reviewer time rather than judgment, this section becomes worth reopening **for that one task only** — with the queue's own labels as its evaluation set, which is a far better position than reopening it today with none.
+### The precision half, measured
+
+Run 2026-08-17 against the 22 accepted sibling sets of the D4 backfill (9 legitimate / 13 furniture, labelled by reading every title in D5) and against 114 individual spans. Labels were never in the prompt. `361876` is held out of the set-level scoring as a contested label — both models reasoned to the same feature and weighted it oppositely — leaving 21 scored.
+
+**Set level — is this set the fundable list?**
+
+| | precision | recall | of the 4 modes the lexicon cannot see |
+|---|---|---|---|
+| §6.4 rule 8 lexicon | 100% | 67% (8/12) | 0/4 |
+| `claude-haiku-4-5` | 91% (10/11) | 83% (10/12) | 3/4 |
+| **`claude-sonnet-4-6`** | **100% (12/12)** | **100% (12/12)** | **4/4** |
+
+**Span level — is this individual span fundable, inside a set already judged correct?** 114 spans across `349554` (18, all verified good), `360678` (70, 2 known contaminants) and `361526` (26, 5 known contaminants).
+
+| | contaminants caught | good spans wrongly rejected | precision | recall |
+|---|---|---|---|---|
+| `claude-haiku-4-5` | 7/7 | 3 of 107 | 70% | 100% |
+| **`claude-sonnet-4-6`** | **7/7** | **0 of 107** | **100%** | **100%** |
+
+**Sonnet 4.6 strictly dominates the fitted lexicon** — everything rule 8 catches, plus all four semantic modes no vocabulary test can reach (`362823` NEPA factors, `360378` a rating scale, `363315` project phases, `363470` M&E workstreams), with zero false alarms at either unit. **PACER's 18 spans passed 18/18 on both models**, which is independent confirmation that the extraction §6.4a calls known-correct is in fact correct.
+
+**Haiku's three span-level false rejections are not model error.** All three were read: the excerpt the pipeline supplied does not describe the titled span. `(i) X-Ray Scattering` was handed *"Applications submitted by February 1, 2026, will be considered for funding in FY 2026"*. Haiku's stated reason — *"Application deadline and fiscal year funding policy"* — correctly describes **the text it was given**. That is the §6.5 summary defect recorded as Cov5, not a classifier limitation; Sonnet got the same three right by weighting the title over the excerpt.
+
+**Haiku's one set-level false positive is the argument for §6.4b.** It flagged `360678` — the DOE Office of Science set, 70 programmes including `(q) Catalysis Science` — reasoning *"List mixes distinct research areas with application requirements, team structures, and policy frameworks."* It was **right about the contamination** and wrong to condemn the set: those are the two members `Multi-Institutional Teams` and `Open Science`, and at span level the same model isolated exactly those two and left the other 68 alone. The set-level false positive and the span-level true positives are one observation at two granularities. See §6.4b.
+
+**Cost, measured rather than estimated.** The whole experiment — 50 calls across both models and both units — cost **$0.205**. Steady-state set-level classification is **$0.129 per 100 sets at Haiku ($0.065 batched)** and **$0.380 at Sonnet 4.6 ($0.190 batched)**. At ~115 umbrella parents catalog-wide (§1.1), a full pass is well under a dollar. **Cost is not a reason to defer this**, which is a change from what this section assumed.
+
+### Three caveats that bound the result
+
+1. **The prompt names two of the four modes.** It was built around the discriminator *"subjects an applicant chooses among, versus what the awardee does or how a proposal is judged"* — which describes `360378` and `363470` fairly directly. Haiku still missed `363470`, and the lexicon missed both, so the effect is not decisive; but these two are an easier test than `363315` and `362823`.
+2. **One run, no self-consistency check.** Single-shot calls, no repeats, no temperature sweep. Run-to-run variance is unmeasured.
+3. **21 sets and 114 spans, one backfill, one labeller.** `361876` is openly contested. This is enough to justify building; it is not enough to trust unvalidated on new data, which is why Cov4's gate requires exactly that.
+
+### What is still out of scope
+
+- **Discovering topics.** Unchanged and absolute. The model classifies spans deterministic segmentation already located, and may never emit a `subtopic_code` absent from the source span.
+- Reading the Genesis `Focus Areas` spreadsheet needs a spreadsheet reader, not a model.
 
 Not built in v1. Recorded so the deterministic design does not preclude it.
 
@@ -1976,7 +2037,7 @@ Not built in v1. Recorded so the deterministic design does not preclude it.
 
 - **PDF toolchain: `pdfplumber` (MIT) + the existing `pypdf`.** Not PyMuPDF, which is AGPL-3.0 and conflicts with this repository's all-rights-reserved posture and possible commercial licensing (§6.1).
 - **Segmentation runs inside `extract_document_evidence.py`'s existing pass**, at a minimal flag-guarded call site, with the logic in new modules (§6.1a, §8.3).
-- ~~**Low-confidence segmentations stay hidden**, not surfaced with a warning.~~ **Revised 2026-08-16 (8.2).** The principle is unchanged and the mechanism is not: **nothing below `high` auto-publishes, and `low` *and* `medium` are routed to a review queue** rather than discarded (§18.1 Cov4). The binary gate was changed because it was measured suppressing a known-correct 18-span extraction (AFRL PACER) while no threshold setting could admit it without re-admitting D4's fabrications. A wrong topic is still worse than a missing one; what changed is that a human, not a threshold, now decides which is which.
+- ~~**Low-confidence segmentations stay hidden**, not surfaced with a warning.~~ **Revised 2026-08-16 (8.2).** The principle is unchanged and the mechanism is not: **nothing below `high` auto-publishes, and `low` *and* `medium` are routed to a review queue** rather than discarded (§18.1 Cov4). The binary gate was changed because it was measured suppressing a known-correct 18-span extraction (AFRL PACER) while no threshold setting could admit it without re-admitting D4's fabrications. A wrong topic is still worse than a missing one; what changed is that a threshold no longer decides which is which. **Refined 2026-08-17 (8.3):** the decision is made per **span**, not per set (§6.4b), by a measured classifier first (§11) and a human on the residual — and when the classifier is unavailable the run publishes nothing new rather than publishing unfiltered.
 - **Expired topics are retained 3 years and flagged**, in a separate lazily-loaded `data/subtopic_archive.json`, excluded from default search and alerts (§7.2).
 - Team match takes **ORCIDs only**. Resume and free-text belong to the personal browser-local profile (§7.9).
 - Profiles are built from **works text, not assigned concepts**. ORCID is an identity key (§7.9).
@@ -2202,7 +2263,8 @@ Per-agency-family acceptance, as the gate requires rather than in aggregate: **D
 - [x] **Cov1. Fix the `source_for_record` selection gap** — *done 2026-08-16. Measured on the survey's 40: reachable **30/40 → 40/40**, correctly segmenting **2/40 → 2/40**, false positives **0**. All ten newly reached records return `no_layer_accepted`; Sloan's seven fields are now fetched and still not accepted, because they are named rather than numbered (`label_run`, deferred §18.2). Writes no evidence entry — a separate cache key, present only with the flag on.* Original note: 2/40 · ~48. **685 records (46.4%) never attempted; 672 have never been fetched once; 236 carry live attachments.** Extend the parallel subtopic-only path (`subtopic_sources.py`); do **not** change `source_for_record` itself
 - [x] **Cov2. HTML attachment support** — *done 2026-08-16. Stubs filtered at `MIN_HTML_BYTES = 2048`; **20 of the 111 non-stub NIH announcements read end to end**: 20/20 parsed (29–112 containers, 50–125 K chars), **0/20 produced a list, 0 false positives**. The plumbing is right and the population is empty. Gap found and deliberately not built: `extract_html_sections` keeps headings in `section`, so §6.6's "use the section tree as the outline equivalent" is unimplemented; a test pins it. Unmeasurable on the 40-record sample, which contains no non-stub HTML record.* Original note: 1/40 · ~43, plus **108 records reached whose yield is unmeasured**. 366 `.html` attachments, all NIH; 111 complete announcements; 255 sub-1 KB stubs that must not displace the agency URL. **Read 20 of the 108 first** — that measurement is inside this item, not after it
 - [x] **Cov3. Re-enable multi-attachment fetch** — *done 2026-08-16, **no code change**. Traced live: the furniture primary returns `no_layer_accepted`, `FA2391-23-S-2403.pdf` returns 18 spans and wins on score. Pinned by `FurniturePrimaryTests`. The winner is `low` and never publishes — Cov4's evidence. A 9.5 MB model contract ate the per-document time budget, recorded not fixed.* Original note: 1/40 · ~5. Already built and neutralized by its own `low` cap. Justified by **AFRL PACER `349554`**: selected primary is a one-page Security Program Questionnaire; `FA2391-23-S-2403.pdf` yields **18 correct topics**. Land selection-by-result-quality with it
-- [ ] **Cov4. Redesign the confidence model** — the review queue (§18.1). `medium` stops auto-publishing; `low` and `medium` queue; approval is explicit, hash-bound, and committed by a human. Reuses `assets/review.js` and **partially delivers issue #8**
+- [ ] **Cov4. Redesign the confidence model** — **two stages (§18.1, rewritten 8.3).** The unit moves from set to span (§6.4b); a classifier filters spans (§11: Sonnet 4.6 caught 7/7 contaminants with 0/107 false rejections, PACER 18/18); the review queue takes only the residual — abstentions and `medium`/`low` survivors. **Fail-closed: no classifier → no new subtopics, never unfiltered ones.** Key from GitHub Secrets; Claude Code strips it from tool subprocesses, so local testing needs a human to make the calls. Reuses `assets/review.js` and **partially delivers issue #8**
+- [ ] **Cov5. Fix span-summary alignment** — three spans in `360678` are summarized by text that does not describe them (`(i) X-Ray Scattering` → an application-deadline sentence). Degrades the Cov4 classifier *and* the user-facing card. **Prevalence unmeasured** (§6.5)
 - [ ] **GATE:** unreachable count re-derived against the **catalog** · records *reached* and records *yielding an accepted list* reported **separately** for Cov1–Cov3 · fabricated publishable records still **0**, measured by reading every published title as D5 did · §0.5 byte-identical with the flag off · **every gate's exit code checked directly, not read through `tail` (§17.7)**
 
 ### Package E — Storage and scoring
@@ -2487,23 +2549,43 @@ Every item states its expected yield from the survey's stratified sample — *sa
 | **Cov1. Fix the `source_for_record` selection gap** | **2/40 sampled · ~48 catalog** (overlaps Cov2 on one record) | `source_for_record()` returns `None` for **685 of 1,475 records — 46.4% of the catalog** — and **672 of those have no evidence entry at all**, so they have never been fetched even once. **236 of the 685 carry live Grants.gov attachments right now.** The rule declining them is `select_primary_document`, which accepts only a PDF carrying explicit NOFO/FOA/RFA/BAA language or a lone PDF in a Full Announcement folder. That is the right rule for **citation** — a wrong one-click link is worse than none — and the wrong rule for **segmentation**, which does not publish the link it read. Measured alternatives, against the 685: any PDF in a Full/Revised Announcement folder **46**; any PDF at all **57**; any non-stub HTML **108**; any attachment at all **236**; dropping the `needs_gap_fill` test on agency URLs **221**; union **372 = 25.2% of the catalog**. **Do not change `source_for_record` itself.** Extend the parallel subtopic-only path that `scripts/subtopic_sources.py` already establishes, so fact extraction, `document_evidence.json` and §0.5 are untouched by construction. 313 records have no source of any kind and stay out of reach under every rule |
 | **Cov2. HTML attachment support** | **1/40 sampled · ~43 catalog**, and **108 records reached** whose yield is unmeasured | **366 attachments are `.html`, all NIH; 111 are complete ~145 KB announcements across 108 records; 255 are sub-1 KB stubs.** All 108 are unselectable today purely because `attachment_is_pdf` gates the loop. `extract_html_sections` already produces section/anchor-keyed containers, so the segmentation side needs no new mechanism — this is a selection and dispatch change. **Measure before believing the yield:** the two NIH records and one FDA record on that template sampled by the survey enumerate nothing, so reading 20 of the 108 is the first task inside this item, not an afterthought. Also handle the stub: a 422-byte `.html` is not a document and must not displace the agency URL |
 | **Cov3. Re-enable multi-attachment fetch** — **done 2026-08-16, and it needed no code change** | **1/40 sampled · ~5 catalog** | **Traced against the live record before anything was written, which is why nothing was.** `source_for_record()` picks `Atch 10 BAA Attachment - Security Program Questionnaire.pdf`; `attachment_sources` offers 6 of the record's 17 attachments; `collect_attachments` ranks `FA2391-23-S-2403.pdf` **first**, because its description reads "PACER BAA" and the `\b(nofo\|foa\|rfa\|baa)\b` test fires; the primary returns `no_layer_accepted`, the BAA returns **18 spans**, and the better result wins on score rather than order. The path was already correct end to end. Two observations recorded instead of changes: the winning result is `low` (Layer D plus §6.6's secondary cap) and **never publishes**, which is Cov4's evidence and not a threshold to tune; and a 9.5 MB, 76-page `Model Contract` attachment consumed the **per-document time budget** — harmless here because the BAA had already won, but on a record whose topic list ranks later, a fat contract could eat the budget first. `tests/test_subtopic_sources.py::FurniturePrimaryTests` pins the ranking so a future change to `SKIP_TOKENS`, `MAX_ATTACHMENTS` or `_score` cannot silently un-win it. Original note follows.<br><br>Already built (`scripts/subtopic_sources.py`, §6.6) and currently neutralized by its own `low` cap. The census justified it on NRL `352741` alone, which it did **not** fix. The survey supplies the case that it does: **AFRL PACER `349554`, whose selected primary is a one-page Security Program Questionnaire while `FA2391-23-S-2403.pdf` yields 18 correct topics** through production's own segmenter. Two things must land with it — selection by *result quality* rather than attachment order (4 records of 1,475 have a furniture-named primary, and this is one), and the `low` cap, which Cov4 replaces rather than lifts |
-| **Cov4. Redesign the confidence model** | Unblocks **every** item above, and 2 of the survey's 10 enumerating records immediately | Its own item, specified in full below. The binary publish gate is replaced by a review queue for `low` and `medium` |
+| **Cov4. Redesign the confidence model** | Unblocks **every** item above, and 2 of the survey's 10 enumerating records immediately | Its own item, specified in full below. **Rewritten 8.3:** the unit of judgment moves from set to span (§6.4b), a classifier filters spans (§11: 7/7 contaminants, 0/107 false rejections at Sonnet 4.6), and the review queue handles only the residual — disagreements and abstentions. Fail-closed: no classifier means no new subtopics, never unfiltered ones |
+| **Cov5. Fix span-summary alignment** | Not a coverage item — a correctness one | **Measured 2026-08-17 (§6.5).** Three spans in `360678` carry excerpt text that describes neither their title nor their subject; `(i) X-Ray Scattering` is summarized by an application-deadline sentence. Span boundaries start at a bookmark offset, so a span can open mid-sentence inside the previous section and the 240-character head summarizes the wrong thing. **Degrades two consumers:** the Cov4 classifier judged those three by the text it was given, and the same string is what a PI reads on the card. **Prevalence unmeasured** — three confirmed by reading; a start-of-sentence heuristic was tried and discarded for contradicting the observed error pattern. Measure it before trusting the summary for either purpose |
 
 **Gate:** unreachable-record count re-derived and reported against the catalog, not the evidence cache · for each of Cov1–Cov3, records *reached* and records *yielding an accepted list* reported separately, because they are different numbers and conflating them is how the multi-attachment path was over-sold the first time · **fabricated publishable records still 0**, measured the way D5 measured it — by reading every title in the publishable set, not by sampling · §0.5 byte-identical with the flag off.
 
-##### Cov4 in full — the review queue
+##### Cov4 in full — span filtering, with a review queue for the residual
 
-**The problem is not a threshold, and this must be stated before the design or someone will tune instead.** D5's fitted tiers took fabricated publishable records from 54 to 0 and cost nothing legitimate. They also suppress a **known-correct** extraction: AFRL PACER's 18 topics resolve at Layer D (`numbered` → `low`), would be won from a secondary attachment (capped at `low` by §6.6), and `low` never publishes. Raising either tier re-admits the exact fabrications D5 removed, because those came from the same tiers. **No threshold setting separates them.** The distinguishing question — *is this the fundable list, or is it the application's furniture?* — is semantic, and the only reliable evaluator available is a human reading eight titles.
+**The problem is not a threshold, and this must be stated before the design or someone will tune instead.** D5's fitted tiers took fabricated publishable records from 54 to 0 and cost nothing legitimate. They also suppress a **known-correct** extraction: AFRL PACER's 18 topics resolve at Layer D (`numbered` → `low`), would be won from a secondary attachment (capped at `low` by §6.6), and `low` never publishes. Raising either tier re-admits the exact fabrications D5 removed, because those came from the same tiers. **No threshold setting separates them.** The distinguishing question — *is this the fundable list, or is it the application's furniture?* — is semantic.
 
-**The replacement.**
+**Rewritten 8.3, because that question now has two measured evaluators rather than one assumed one.** §11 records the run: at span level, `claude-sonnet-4-6` caught **7 of 7** known contaminants with **0 false rejections across 107 good spans**, and passed PACER 18/18. The original design put a human on every `low` and `medium` set. That is still the safety net, but it is no longer the filter — it is what handles what the filter will not decide.
+
+**The two-stage shape.** Judgement happens per span (§6.4b), not per set.
+
+| Stage | Does what | Outcome |
+|---|---|---|
+| 1. Acceptance (§6.4 rules 1–8) | *Is there an enumeration here?* | Fail → zero subtopics, parent untouched. Unchanged |
+| 2. Span filter (classifier) | *Is this member a fundable subdivision?* | `reject` → dropped, logged. `accept` → continues. `abstain` / malformed → treated as unresolved |
+| 3. Tier gate | *Does the survivor need a human?* | `high` → publishes. `medium` / `low` → queued |
+| 4. Review queue | Only **unresolved** spans and **queued** tiers | Approve → publishes. Reject → dropped, feeds the lexicon |
+
+**The queue's population shrinks from "every low and medium set" to "the residual".** That is the point of the rewrite: the reviewer sees disagreements and abstentions, not 115 parents' worth of obviously-correct spans.
 
 | Tier | Today | Under Cov4 |
 |---|---|---|
-| `high` | publishes | publishes, unchanged |
-| `medium` | publishes | **queued for review**, not published |
-| `low` | written to cache, never surfaced | **queued for review**, not published |
+| `high` | publishes | publishes **its surviving spans** |
+| `medium` | publishes | filtered, then **queued**, not published |
+| `low` | written to cache, never surfaced | filtered, then **queued**, not published |
 
-Nothing is published without either a `high` tier or an explicit approval. **This is strictly more conservative than today at `medium`**, which is deliberate: D4 showed `outline_structural` at `medium` producing an administrative skeleton about as often as a real list on a random sample.
+Nothing publishes without either a `high` tier *and* a passing filter verdict, or an explicit human approval. **This is strictly more conservative than today at `medium`** — deliberate: D4 showed `outline_structural` at `medium` producing an administrative skeleton about as often as a real list on a random sample.
+
+**Fail-closed contract — the single most important line in this item.** The classifier is a network dependency inside a nightly build, and network dependencies fail.
+
+> **When the classifier is unavailable, unauthenticated, rate-limited, times out, or returns anything unparseable, the run publishes NOTHING NEW. It never falls back to publishing unfiltered spans.**
+
+Concretely: an unresolved span is not a passing span. On any classifier failure the affected spans are marked unresolved, they route to the queue, and the previously published set is left exactly as it was — the same "parent untouched" outcome §6.4 already specifies for a failed acceptance, and the same shape as §9.3's rule that a benign outcome exits 0. A build that cannot reach the API is a build that adds no subtopics, and that must be visible in the diagnostics block rather than silent. **The failure mode this forbids — degrading to unfiltered publication — is precisely how 43 fabricated cards would reach a PI, so it is not a defensive nicety.**
+
+**Credentials.** The key lives in **GitHub Secrets**, injected into the workflow step's environment, with the §11 handling rules unchanged: protected environment, `schedule` and `workflow_dispatch` triggers only, never `pull_request_target`, no derived value echoed, key never in committed output. **Local testing has a wrinkle worth writing down, because it cost a session to diagnose:** Claude Code **strips `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN` and `CLAUDE_API_KEY` from tool subprocesses** while passing other user-scope variables through — deliberately, so an agent cannot spend or leak the operator's key. Setting it at user scope and restarting does not change this. **So an agent session cannot run this path itself; a human runs the script in their own terminal and hands back the output.** Design the classifier entry point as a standalone script with a file-based result, not as something only reachable from inside the build, or it cannot be tested at all without a live workflow run.
 
 **Surface.** Reuse `assets/review.js`, which already exists and already does the hard parts. It exposes `globalThis.FUNDING_REVIEW` — `loadReview`, `saveReview`, `sanitizeReview`, `buildPackage`, `recordUsage`, `handoffSummary` — over a browser-local store at `funding-finder.deployment-review.v1`, schema version 1, holding a `source_reviews` map keyed per opportunity with a status drawn from `accurate` / `incorrect` / `could_not_verify`, a field, a note, `document_url`, `document_sha256`, `document_version` and `evidence_ids`. A subtopic review is the same shape with the key extended to `subtopic_id` and the status vocabulary extended to `approve` / `reject` / `could_not_verify`. Bump `REVIEW_SCHEMA_VERSION` when the vocabulary changes — `loadReview` discards any store whose version does not match exactly, so an unbumped change silently drops a reviewer's labels.
 
@@ -2518,7 +2600,14 @@ Nothing is published without either a `high` tier or an explicit approval. **Thi
 
 **This partially delivers issue #8.** #8 asks for *useful* / *not relevant* / *pursue* labels with mismatch reasons on any card (§7.2b). The review queue is the same storage shape, the same browser-local discipline and the same export path, applied to a narrower population — queued subtopics rather than every result. Build the storage against #8's vocabulary and #9's export requirement so #8 is a widening of an existing control rather than a second one, and say plainly in the help text that approval affects only this browser until the labels are exported and committed.
 
-**What this does not solve.** It does not scale: a reviewer approving ~115 umbrella parents' worth of subtopics is a real afternoon, and there is no second reviewer, so inter-rater agreement is unmeasured. It also inverts the §18.3 asymmetry for anything approved — the queue's failure mode is an *approved* wrong list, which reaches a PI with a page anchor exactly as an auto-published one would. The queue's value is that a wrong list now has to survive a person reading its titles, which is the one filter D4 proved the thresholds do not replace.
+**What this does not solve.** The reviewer load is much smaller than the original design's but not zero, and there is still no second reviewer, so inter-rater agreement is unmeasured. It still inverts the §18.3 asymmetry for anything approved — the failure mode is now an *approved or filter-passed* wrong span, which reaches a PI with a page anchor exactly as an auto-published one would. And the filter's own measurement is thin: **21 sets, 114 spans, one backfill, one labeller, one run with no self-consistency check, and a prompt that names two of the four semantic modes** (§11's three caveats). What the two stages buy is that a wrong span now has to survive a classifier measured at 100% on held-out-from-prompt labels *and*, below `high`, a person reading its title.
+
+**Gate for Cov4** — in addition to the package gate above:
+
+- **Validation on unseen data, before the filter gates anything.** The D4 corpus fitted nothing here, but it *is* the corpus the discriminator was written from, so it is not a clean test. Label a fresh set of spans — the Coverage package's own backfill produces them — and report the same four numbers: contaminants caught, good spans wrongly rejected, and both rates. **A false-rejection rate above zero on verified-good spans blocks the item**, because that is `Catalysis Science` disappearing.
+- **The fail-closed path is tested, not asserted.** Run the build with the key absent and with it invalid; both must produce zero new subtopics, a logged reason, and an unchanged published set.
+- **Reviewer load reported as a count**, so the claim that the queue shrank is measured rather than assumed.
+- **Cost reported from real `usage` totals**, against §11's $0.190 per 100 sets batched at Sonnet 4.6.
 
 #### Package E — Storage and scoring
 
