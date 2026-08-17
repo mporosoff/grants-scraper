@@ -915,6 +915,107 @@ One line each, per record:
 
 Two hosts account for 18 of 25. Neither is a segmentation problem.
 
+## D5 re-run: fabrications reach zero, and the cache still cannot be committed
+
+The final backfill ran with all three fitted changes in place — 63 minutes, 770
+documents, 0 queued.
+
+```
+no_layer_accepted     745
+ACCEPTED               13
+no_extractable_text    11
+time_budget             1
+run_budget              0
+```
+
+| | Before D5 | **After D5** |
+|---|---|---|
+| Accepted documents | 22 | **13** |
+| Publishing documents | 12 | **4** |
+| Legitimate publishable records | 140 | **133** |
+| **Fabricated publishable records** | **54** | **0** |
+
+All 133 publishable records were read individually, not sampled and not left to
+the automatic check:
+
+| Document | Records | Content |
+|---|---|---|
+| `360678` | 68 | DOE Office of Science programmes, `(a) Applied Mathematics` … `(q) Catalysis Science` … `(x) BES Accelerator and Detector Research` |
+| `360205` | 37 | USDA AFRI programme areas, `1a. Foundational Knowledge of Agricultural Production Systems` … `7g. Rapid Response to Weather Events` |
+| `361526` | 21 | **exactly the 21 published Genesis Mission challenge areas** |
+| `361169` | 7 | USDA `Program Area 1` … `Program Area 7` |
+
+The count dropped 140 → 133 because the trim rule removed the seven
+contaminants, not because anything legitimate was lost.
+
+### Why it is still not committed: the §12 budget is arithmetically impossible
+
+The A4 size-budget test — added in package A precisely to catch this — fails:
+
+```
+Subtopic records over the 2048-byte serialized budget:
+  ('325932', 0, 2231) ('325932', 2, 6594) ('325932', 7, 6226) …
+```
+
+**202 of 223 records exceed the 2 KiB per-subtopic ceiling.** Median 3,824
+bytes, max 6,892. The composition of the largest:
+
+```
+subtopic_terms   5115      topic_areas          172
+summary           476      program_area_labels  120
+                           everything else     ~800
+```
+
+§12 specifies the 2 KB ceiling as *"600-char summary + 400-term map + 60-entry
+`term_display` + scalars"*. Measured, that composition is about **6.5 KB**, not
+2 KB:
+
+| Component | Budgeted | Actual |
+|---|---|---|
+| Summary | 600 chars | 476 bytes ✓ |
+| Term map at `MAX_TERMS = 400` | (assumed to fit) | **up to 5,147 bytes** |
+| Non-term overhead alone | — | **median 1,582, max 1,928** |
+
+The non-term overhead is already within 120 bytes of the entire ceiling before
+a single term is stored. At the measured **12.3 bytes per term entry**, only
+about **38 terms** fit inside 2,048 bytes — against a `MAX_TERMS` of 400.
+
+§12 says *"If a design needs more, cut `max_terms`, not the ceiling."* Cutting
+400 → 38 is not tuning; it is a redesign of §5.2, whose entire premise is that
+*"indexing only a 600-character summary discards most of the retrieval gain"*
+and that the term map is what carries retrieval. **This is a genuine conflict
+between two sections of the plan, and it is a design decision rather than an
+implementation one.** Three options, none taken here:
+
+1. **Cut `MAX_TERMS` to ~35–40.** Honours §12 literally, guts §5.2's retrieval
+   premise.
+2. **Raise the per-subtopic ceiling to ~4 KB.** 1,000 subtopics then cost about
+   4 MB against a 23.7 MiB catalog and a 32 MiB hard limit, so the *aggregate*
+   budget is not at risk — only §12's per-record figure, which was never
+   achievable.
+3. **Move the term map out of the per-record budget entirely.** It is retrieval
+   data, not display data, and §13.1's sidecar decision already contemplates
+   separating the two.
+
+The cache is complete, correct and sitting in the scratchpad. It is not
+committed because it fails a gate the plan asked for, and §0.4 rule 3 forbids
+editing that test to let it through.
+
+### A third defect, in the gate itself
+
+While verifying, `verify_no_drift` began failing with no code change: green in
+CI at 23:59 UTC, red locally at 01:04 UTC the next day. Four artifacts moved
+because `source_first_seen_date` is a **date-only** field holding "today", and
+`TIMESTAMP_RE` deliberately leaves bare dates alone so close dates stay
+fingerprinted.
+
+**Date rollover is a third axis alongside time and platform**, and §17.6 rule 2
+— two builds separated by a delay — cannot see it, because 78 seconds never
+crosses midnight. §8.4's own lesson, *"a determinism gate is only as good as the
+axes you varied while testing it,"* applied to §8.4 and went unnoticed for a
+day. Fixed in `tools/fingerprint.py` by normalizing that one named field, with
+the fix verified against a simulated rollover as well as a delay.
+
 ## Classifying every miss
 
 Six categories, one line each.
