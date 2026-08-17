@@ -2274,6 +2274,9 @@ Not built in v1. Recorded so the deterministic design does not preclude it.
 | Segmentation false positives on reference lists | Acceptance rules (§6.4); nothing below `high` publishes without an explicit hash-bound approval (§7.1, §18.1 Cov4) |
 | **REALIZED 2026-08-17 — a pattern family that never fires is invisible to every metric in this plan** | Seven of §6.3's ten families accumulated unmeasured across four work packages: **five never fired once across 170 real documents, and two fired only on documents carrying no list** (`roses_element` on `A.1 BACKGROUND AND OBJECTIVES`, `area_of_interest` on another opportunity's topics). Nothing caught it because acceptance rate, false-positive count and the rejection histogram are all computed **per document**, so a family contributing nothing contributes nothing to any of them, and a passing synthetic fixture (§10 step 11) looks identical to real coverage. Mitigation is §17.8: a validating document **quoted** per family, and **per-family fire counts reported including the zeros**. B0 had the evidence in 2026-08-16 — zero matches from all ten families on three notices — and read it as the families being appropriately narrow |
 | **A family matches the container instead of its members, which is worse than missing** | `thrust` fires on DTRA `356612` — a real hit — and matches `Thrust Area 1`, the umbrella, while the fundable list is `Topic A1`–`A7` beneath it. That segments one plausible card where seven belong, so it presents as a success in every count. Acceptance rules cannot see it: one candidate simply fails rule 1 and the set is silently declined, or worse, passes with the wrong granularity. Mitigation: §18.1 Fm4 scopes or retires it, and §17.8 requires the validating quote to be **at the granularity the family claims** |
+| **`--max-documents` caps each pass, not the run — so the flag understates the work by 2× with subtopics on** | Measured by reading the call site: `refresh_subtopics_without_source` is passed **the same `max_documents` value** as the administrative pass (`extract_document_evidence.py`, the Cov1 insertion under `if enable_subtopics`), not a share of it. Each pass independently takes `candidates[:max_documents]`, so `--max-documents 45` can fetch up to **90** documents and the D4/D5 backfills' `--max-documents 1200` could attempt **2,400**. Nothing is wrong with the results; what is wrong is that the nightly's runtime headroom (§9's 15-minute ceiling) and every published backfill figure were reasoned against one pass. Either split one budget across both passes or give the subtopic pass its own named flag — **do not silently halve the existing default**, which is load-bearing (§0.4 rule 8) |
+| **An evidence entry outlives the record that produced it, and is then never rechecked** | Measured: **13 orphans** in the catalog — records carrying an evidence entry whose parent no longer resolves to a source, 12 of them `primary_notice`. `363526` is the named case and was the corpus's only high-confidence acceptance. Separately, **213 cache entries belong to records that have left the catalog entirely**. Neither population is pruned, neither is refetched, and both inflate any denominator computed from the cache rather than from the catalog — which is exactly the error `docs/COVERAGE_SURVEY.md` corrected when it replaced "246 of 1,016 evidence entries" with "685 of 1,475 catalog records". Mitigation: prune on the catalog, never on the cache, and compute every rate against the catalog (§15 debt) |
+| **A rate is quoted against a denominator that has since changed** | Measured, twice. `360339` — one of the census's twelve enumerating documents and the sole validating record for the `component` family — **left the catalog within a day of the census being taken**, along with `362005` and `362711`. Every acceptance rate quoted as "of 12" silently became "of 11". The corpus moves under the measurements: 3 of 20 census records were gone within 24 hours. Mitigation, already stated in `docs/CORPUS_CENSUS.md` and now a rule here: **re-derive a denominator at the moment you quote it, and name the date.** Do not compare a rate to a figure from a previous session without re-deriving both |
 | **A summary that describes the wrong subject reaches a PI and a classifier at once** | Cov5, realized and fixed 2026-08-17 (§6.5). Six of 223 spans carried excerpt text from a neighbouring section because one loose regex could not bridge a `pdfminer`-inserted space beside a hyphen. **It was found by a classifier rejecting the spans and stating why, not by any check in this plan** — no test, gate or histogram covers "does this summary describe its own title?". The residual is the still-silent `page_start_offset` fallback; the mitigation available today is that Cov4's classifier reads the same string a PI would, so a corrupted excerpt shows up as a rejection rather than as a bad card |
 | New agency template breaks segmentation | Fails closed to zero topics; rejection reason logged and monitored (Phase 4, step 30) |
 | SAM.gov quota exhaustion | Prefilter before description calls; cache descriptions by notice id (§7.5) |
@@ -2578,6 +2581,83 @@ Per-agency-family acceptance, as the gate requires rather than in aggregate: **D
 - [ ] **GATE:** §9.4 dispatch checklist walked in full — runtime under 15 minutes, no new issue number, #30 updating expected
 
 ---
+
+### Debt — carried, not scheduled
+
+**Added 8.6. Everything here was previously live only in a session report.** None
+of it belongs to a package, none of it blocks a gate, and all of it is real. An
+item leaves this list by being done, by becoming a package item, or by being
+explicitly declined with a reason — never by being forgotten.
+
+**Defects, unfixed:**
+
+- [ ] **D0. `--max-documents` caps each pass rather than the run.** With
+  `--enable-subtopics` on, the subtopic pass receives the same value as the
+  administrative pass, so the run can fetch twice what the flag says (§12).
+  Decide between one shared budget and a second named flag; do **not** change the
+  existing default (§0.4 rule 8)
+- [ ] **D1. The D5 cache carries six summaries that describe the wrong subject.**
+  Cov5 fixed the extractor, not the artifact. The uncommitted cache at
+  `backfill3/` still holds the pre-fix text for `(d)`, `(i)`, `(j)`, `(k)`, `(l)`
+  and `(n)` of `360678`, and is missing `(m)` entirely. **Any figure computed from
+  that cache inherits the defect**, including §11's span-level table. Regenerate
+  before the cache is used for anything else — and note it is 68 spans where a
+  re-run gives 69
+- [ ] **D2. Three families reject an ASCII hyphen.** Measured by running the
+  patterns: `dod_topic`, `component` and `technical_category` all accept `:`,
+  en-dash and em-dash but **not `-`**, and `technical_category` also rejects `.`.
+  `Topic 1- Aero-Structures` does not match. PACER's `349554` happens to use an
+  en-dash, which is why this has never surfaced. Fold into **§18.1 Fm3**, whose
+  scope is currently only the letter-ordinal gap — and add the ASCII hyphen to
+  the same character class rather than filing a third variant later
+- [ ] **D3. §6.6's HTML outline layer is specified and unbuilt.**
+  `extract_html_sections` puts the heading in the container's `section` and the
+  prose in its `text`, so every text-scanning family looks past the headings and
+  §6.6's instruction to *"use the section tree as the outline equivalent"* is
+  unimplemented. Pinned by `tests/test_subtopic_sources.py::HtmlAttachmentTests`
+  so the gap is inherited as evidence. **Deliberately not built:** the measured
+  population is 0 lists in 20 NIH announcements (Cov2), so this is speculative
+  until some HTML source is measured to enumerate
+
+**Cache hygiene:**
+
+- [ ] **D4. Prune the 213 stale evidence entries** whose records have left the
+  catalog. They are cache residue, not a reachability problem, and they inflate
+  any denominator taken from the cache (§12)
+- [ ] **D5. Decide what to do with the 13 orphaned entries** — records whose
+  evidence entry names a real attachment but whose parent no longer resolves to a
+  source. Cov1 reaches most of them now, so this may already be closed by
+  measurement rather than by code; verify before writing anything
+- [ ] **D6. Triage the 25 recorded fetch failures.** `nasaprs.com` 12,
+  `transit.dot.gov` 4, `rd.usda.gov` 2, `bja.ojp.gov` 1, `nsf.gov` 2, plus 4
+  against dead URLs from records that have left the catalog. **Two hosts account
+  for 18 of 25 and neither is a segmentation problem** — NASA is §18.2's NSPIRES
+  deferral and DOT/USDA are 403s that a header change may or may not fix.
+  Independently reproduced on six further records in the taxonomy sample, so the
+  hosts are stable, not transient
+
+**Measurements outstanding:**
+
+- [ ] **M1. Verify Cov5's fix leaves the 757 no-span documents unchanged.** The
+  prevalence re-run covered the **13 accepted** documents (224 spans). The other
+  757 in the D5 backfill produced no spans, so there is nothing to misalign — but
+  that they still produce none, and still for the same recorded reason, is
+  **asserted and not measured**. A widened title matcher could in principle
+  locate a candidate that previously failed, which is how `360678` gained a span
+- [ ] **M2. Read 30 more stratum-D records** — the cheapest outstanding
+  measurement in the project, and the one that closes over half of §1.1's
+  interval. Tracked as **§18.1 Cov7**; listed here so it is visible without
+  reading §18
+- [ ] **M3. Establish the classifier's run-to-run variance.** Measured
+  incidentally at **1 of 62 byte-identical spans flipping (1.6%)**, against the
+  0.9% false-rejection rate it is meant to measure (§11 caveat 2). **The noise is
+  larger than the signal**, so Cov4's "zero false rejections" gate is not
+  demonstrable in a single pass and must specify repeats
+
+**Already tracked as package items, listed here only for visibility:**
+`_demote()`'s 46.4% publication cap is **§18.1 Cov6**; the rule 1 floor rejecting
+F6's two-item lists is **§18.1 Fm7** and §6.4a; the 30 stratum-D reads are
+**Cov7** (M2 above).
 
 ### Deferred — not part of the minimum path
 
