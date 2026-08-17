@@ -48,6 +48,17 @@ MAX_ATTACHMENTS = 6
 # high-confidence result from any attachment beats a low one from the primary.
 CONFIDENCE_RANK = {"high": 3, "medium": 2, "low": 1}
 
+# Below this, an .html attachment is a redirect stub rather than a document.
+# Measured (docs/COVERAGE_SURVEY.md stage 1): all 366 .html attachments in the
+# catalog belong to NIH and split hard by size -- **255 are stubs under 1 KB**
+# (the census's 355867 was 429 bytes) and **111 are complete announcements
+# averaging ~145 KB** across 108 records. There is nothing between the two
+# populations, so the threshold is not a tuned parameter; it sits in an empty
+# gap two orders of magnitude wide. A stub must be filtered rather than parsed:
+# parsed, it yields a container with no text and displaces nothing, but it
+# still costs a fetch and lands in the diagnostics as a document that failed.
+MIN_HTML_BYTES = 2048
+
 # Names that are never worth a fetch. Deliberately short: this skips obvious
 # proposal furniture, and anything not listed still gets tried and judged on its
 # content. The census found no topic list in any of these shapes.
@@ -62,6 +73,27 @@ SKIP_TOKENS = (
 def _skippable(name):
     lowered = (name or "").casefold()
     return any(token in lowered for token in SKIP_TOKENS)
+
+
+def _is_html_stub(name, size):
+    """True for an .html attachment too small to be an announcement.
+
+    §18.1 Cov2. Size is what separates the two NIH populations; the filename is
+    identical in both (`PAR-25-210-Full-Announcement.html` is a 422-byte stub,
+    and `RFA-RM-27-002-Full-Announcement.html` is 137 KB of announcement).
+    """
+    if not str(name or "").casefold().endswith((".html", ".htm")):
+        return False
+    if size is None:
+        # `size_bytes` is not guaranteed by the API. Unknown size must mean
+        # "not a stub": dropping an announcement because its metadata was
+        # missing loses a real document, while fetching a stub costs one
+        # request and is judged on its content anyway.
+        return False
+    try:
+        return int(size) < MIN_HTML_BYTES
+    except (TypeError, ValueError):
+        return False
 
 
 def subtopic_only_primary(record):
@@ -108,9 +140,15 @@ def attachment_sources(opportunity_id, *, detail_fetcher, collector):
     for attachment in attachments:
         url = attachment.get("download_url")
         name = attachment.get("file_name") or ""
-        if not url or _skippable(name):
+        size = attachment.get("size_bytes")
+        if not url or _skippable(name) or _is_html_stub(name, size):
             continue
-        sources.append({"url": url, "name": name, "id": attachment.get("id")})
+        sources.append({
+            "url": url,
+            "name": name,
+            "id": attachment.get("id"),
+            "size": size,
+        })
     return sources[:MAX_ATTACHMENTS]
 
 

@@ -261,6 +261,126 @@ class RobustnessTests(unittest.TestCase):
         )
 
 
+def html_notice(headings):
+    """An announcement delivered as HTML, the shape NIH posts 111 times.
+
+    Deliberately larger than MIN_HTML_BYTES: the real ones average ~145 KB, and
+    a fixture under the stub threshold is filtered before it is ever fetched --
+    which is how the first draft of this test failed.
+    """
+    prose = (
+        "Awards support single investigators and small teams working at "
+        "laboratory scale, with operando characterization and reactor design "
+        "throughout the period of performance. Applications are reviewed for "
+        "scientific merit and for the qualifications of the research team. "
+    ) * 3
+    body = [b"<!doctype html><html><body><h1>Funding opportunity</h1>"]
+    for text in headings:
+        # The code appears in the heading and NOWHERE in the prose, which is
+        # what makes this a test of the section tree rather than of the
+        # ordinary text-scanning layers.
+        body.append(f"<h2>{text}</h2><p>{prose}</p>".encode())
+    body.append(b"</body></html>")
+    return b"".join(body)
+
+
+class HtmlAttachmentTests(unittest.TestCase):
+    """§18.1 Cov2 -- 366 .html attachments, all NIH, 255 of them stubs."""
+
+    def test_a_sub_kilobyte_stub_is_never_offered(self):
+        def collector(data):
+            return [
+                {"download_url": "https://example.gov/PAR-25-210.html",
+                 "file_name": "PAR-25-210-Full-Announcement.html",
+                 "size_bytes": 422, "id": "1"},
+            ]
+
+        self.assertEqual(
+            sources.attachment_sources(
+                "1001", detail_fetcher=detail_with([]), collector=collector
+            ),
+            [],
+        )
+
+    def test_a_full_html_announcement_is_offered_and_carries_its_size(self):
+        def collector(data):
+            return [
+                {"download_url": "https://example.gov/RFA-RM-27-002.html",
+                 "file_name": "RFA-RM-27-002-Full-Announcement.html",
+                 "size_bytes": 137_389, "id": "1"},
+            ]
+
+        found = sources.attachment_sources(
+            "1001", detail_fetcher=detail_with([]), collector=collector
+        )
+        self.assertEqual(len(found), 1)
+        self.assertEqual(found[0]["size"], 137_389)
+
+    def test_html_bytes_reach_the_container_path_but_headings_are_not_an_outline(self):
+        """Cov2 selects and parses HTML. It does **not** yet segment it.
+
+        This test asserts a measured gap, not a desired behaviour, and it was
+        rewritten during the Cov2 commit when it failed: extract_html_sections
+        puts the heading in the container's ``section`` and the prose in its
+        ``text``, so every text-scanning family looks straight past the
+        headings. §6.6 says to "use the section tree as the outline equivalent"
+        and nothing does.
+
+        Not built here, deliberately. Cov2's own measurement is that **0 of 20
+        non-stub NIH HTML announcements contain a fundable list** -- so an HTML
+        outline layer would be speculative work against a population measured
+        to yield nothing. When something does need it, this test is the
+        record of what is missing; flip it and build the layer then.
+        """
+        page = html_notice(TOPICS)
+
+        def collector(data):
+            return [
+                {"download_url": "https://example.gov/notice.html",
+                 "file_name": "notice.html", "size_bytes": len(page), "id": "1"},
+            ]
+
+        fetched = []
+
+        def download(url, headers=None):
+            fetched.append(url)
+            return {"content": page, "content_type": "text/html", "url": url}
+
+        containers, extraction = extract_containers(
+            page, "text/html", "notice.html", "https://example.gov/notice.html"
+        )
+        self.assertEqual(extraction["content_kind"], "html")
+        self.assertEqual(len(containers), len(TOPICS))
+        self.assertIn(
+            TOPICS[0], [container.get("section") for container in containers],
+            "the h2 headings did not survive into the section tree",
+        )
+        self.assertTrue(
+            all(container.get("page") is None for container in containers)
+        )
+
+        result, _document, _diagnostics = sources.segment_without_primary(
+            {"opportunity_id": "1001"},
+            extract_containers=extract_containers,
+            download=download,
+            detail_fetcher=detail_with([]),
+            collector=collector,
+        )
+        self.assertEqual(
+            fetched, ["https://example.gov/notice.html"],
+            "the HTML attachment was not selected for a fetch",
+        )
+        self.assertEqual(
+            result.subtopics, (),
+            "HTML headings now segment -- delete this test and assert the list",
+        )
+
+    def test_the_stub_rule_touches_only_html(self):
+        self.assertFalse(sources._is_html_stub("tiny.pdf", 400))
+        self.assertFalse(sources._is_html_stub("notice.html", None))
+        self.assertTrue(sources._is_html_stub("notice.HTML", 400))
+
+
 class SubtopicOnlySourceTests(unittest.TestCase):
     """§18.1 Cov1 -- records source_for_record() declines.
 
