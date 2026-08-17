@@ -15,19 +15,41 @@ on it.
 
 **It is not the server. It is our TLS cipher policy.**
 
+> **⚠ Corrected 2026-08-17 by the item-1 isolation matrix. The first version of
+> this section said the fix was to lower the cipher security level to 1. That
+> was sufficient but *not necessary*, and stating it that way would have shipped
+> a wider change than the evidence supports.** The corrected diagnosis and the
+> full matrix are below.
+
 ```
-TCP 443 connect                                OK
-default SSL context                            FAIL  SSLEOFError: UNEXPECTED_EOF_WHILE_READING
-TLS1.2 only, verification off                  FAIL  ConnectionResetError 10054
-DEFAULT@SECLEVEL=1                             OK    TLSv1.2 / AES256-GCM-SHA384
-DEFAULT@SECLEVEL=1, verification ON, SNI ON    OK    verified CN=solicitation.nasaprs.com
+TCP 443 connect                                     OK
+1. default SSL context (verified)                   FAIL  SSLEOFError
+2. set_ciphers("AES256-GCM-SHA384"), normal level   OK    TLSv1.2 / AES256-GCM-SHA384
+3. set_ciphers("DEFAULT:AES256-GCM-SHA384")         OK    TLSv1.2 / AES256-GCM-SHA384
+4. set_ciphers("DEFAULT@SECLEVEL=2")  <- normal!    OK    TLSv1.2 / AES256-GCM-SHA384
+5. set_ciphers("AES256-GCM-SHA384@SECLEVEL=1")      OK    TLSv1.2 / AES256-GCM-SHA384
+6. set_ciphers("DEFAULT@SECLEVEL=1")                OK    TLSv1.2 / AES256-GCM-SHA384
 ```
 
-Both hosts negotiate only `AES256-GCM-SHA384` — a non-ECDHE, RSA-key-exchange
-suite that OpenSSL 3.x excludes at its default `SECLEVEL=2`. Lowering the cipher
-security level to 1 is sufficient. **Certificate verification and hostname
-checking stay fully enabled** — the working configuration was confirmed with
-`create_default_context()` untouched apart from `set_ciphers`.
+**Row 4 is the one that matters: the normal security level works.** So OpenSSL's
+`SECLEVEL` was never the blocker. What blocks the handshake is that CPython's
+`create_default_context()` curates a **14-suite** TLS≤1.2 list that omits
+`AES256-GCM-SHA384`, and these hosts offer nothing else — confirmed by
+enumerating the default context (`AES256-GCM-SHA384 present: False`).
+
+**The narrowest fix, and the one implemented:** take CPython's own default list
+and append that single suite. Measured — **exactly one suite added, none
+removed**, `SECLEVEL` untouched, `verify_mode=CERT_REQUIRED` and
+`check_hostname=True` both intact, negotiated as `TLSv1.2 /
+AES256-GCM-SHA384` with a verified `CN=solicitation.nasaprs.com`.
+
+**What it costs, stated rather than glossed.** `AES256-GCM-SHA384` uses static
+RSA key exchange (`kea=kx-rsa`), so traffic to an opted-in host has **no forward
+secrecy** — which is precisely why CPython drops it. Acceptable for these hosts:
+the request carries no secret, the response is a public solicitation table, and
+the certificate is still verified so the peer is authenticated. **Not**
+acceptable for any source carrying credentials, which is why the option is
+per-adapter and off by default (§17.11).
 
 So the recorded "NASA refuses the client" is a **client-side misdiagnosis**, and
 §18.2's NSPIRES deferral should be re-read with that in mind. This does not by
