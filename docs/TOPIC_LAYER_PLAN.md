@@ -2132,23 +2132,56 @@ So there is no labelled baseline to freeze, and producing one means a labelling 
 > science, humanities, earth science, or any engineering discipline other than
 > chemical.**
 >
-> **What this does and does not invalidate.** §8.5 is a *change-detection* gate —
-> it asks whether results moved, not whether they are good — and change detection
-> on a skewed query set still detects change on that slice. What it cannot do is
-> support any claim of the form *"retrieval did not regress"*, because a
-> regression confined to biology or clinical records would be invisible to all 37
-> queries. **Every recall and precision figure in this plan is scored against one
-> researcher's relevance**, and that caveat travels with them.
+> **What this does and does not invalidate — and an earlier draft of this note
+> overstated it.** §8.5 is a *change-detection* gate: it asks whether results
+> moved, not whether they are good, and it needs no relevance judgments at all.
+> Change detection on a skewed query set still detects change **on that slice**.
 >
-> **What a discipline-stratified set requires**, so it is costed rather than
-> aspired to: coverage of the catalog's own agency mix — NIH is 210 records and
-> NSF 149 against the DOE/DoD records this set favours — three to five queries
-> per discipline family drawn from real solicitation vocabulary rather than
-> invented, at least one profile probe per family, and the `empty_expected` and
-> mechanism-term groups left as they are, since those are genuinely
-> discipline-neutral. Roughly 40 additional queries. **It needs no relevance
-> labels** — that is the property that makes §8.5 cheap, and it survives
-> stratification. Tracked as §15 debt **M5**.
+> **What is affected:** any claim of the form *"retrieval did not regress."* A
+> ranking regression confined to biology, clinical or social-science records is
+> invisible to all 37 queries, so a green baseline is evidence about chemistry
+> retrieval and silence about everything else. The same limit will apply, more
+> sharply, to any future **labelled or gold relevance** evaluation built on this
+> query set (§13 decision 4) — relevance labels drawn from one discipline encode
+> one researcher's judgement of what is relevant.
+>
+> **What is NOT affected, and must not be described as biased:** the
+> extraction-side measurements. *"0 fabricated publishable records", "span-level
+> precision 108/115", "7 of 7 contaminants caught", "5 of 12 documents accept",
+> "6 of 223 spans carried a detached excerpt"* are **corpus measurements** —
+> judged against what a document says, by reading it, with no relevance
+> judgement anywhere. Whether `Annual Progress Reports` is a fundable
+> subdivision does not depend on who is searching. **Those figures carry no
+> discipline caveat**, and attaching one to them would obscure the real debt
+> rather than describe it.
+>
+> **What a discipline-stratified query and relevance set requires**, so it is
+> costed rather than aspired to. It should span the major academic research
+> populations this tool serves, not merely add a few queries:
+>
+> | Population | Anchor in the catalog | Needs |
+> |---|---|---|
+> | Biomedical and clinical | NIH, 210 records | 3–5 queries + 1 profile probe |
+> | Physical sciences and engineering (non-chemical) | NSF 149, DoD, DOE | 3–5 + 1 |
+> | Chemistry / ChemE / materials | present and over-weighted | **keep, do not grow** |
+> | Earth, space and environmental | NASA, NOAA, USGS | 3–5 + 1 |
+> | Computing and information | NSF, DARPA | 3–5 + 1 |
+> | Social, behavioural and economic | NSF SBE, DOJ, HHS | 3–5 + 1 |
+> | Education and workforce | NSF EDU, ED, IMLS | partially present |
+> | Agriculture and food | USDA NIFA | 3–5 + 1 |
+> | Public and global health | CDC, HRSA, State | partially present |
+>
+> Queries drawn from **real solicitation vocabulary** rather than invented, at
+> least one profile probe per population, and the `empty_expected` and
+> mechanism-term groups left alone since those are genuinely
+> discipline-neutral. Roughly 40 additional queries.
+>
+> **For the regression gate this needs no relevance labels** — that is the
+> property that makes §8.5 cheap, and it survives stratification. **A gold
+> relevance set does need labels**, and stratifying it is the harder half:
+> §13 decision 4 and issues #8/#9 own that, and it should be built against
+> these same populations rather than whoever is available to label. Tracked as
+> §15 debt **M5**.
 
 **Replacement: a frozen query set, compared on result IDs and ranks.** This needs no relevance judgments at all. It does not measure whether the results are *good* — it measures whether they *changed*, which is the actual question §0.5 asks and the only one that can be answered without labels.
 
@@ -2925,7 +2958,7 @@ this table.
 | M2 / Cov7 | **30 more stratum-D records** | Closes over half of §1.1's 54–538 interval. Cheapest measurement in the project |
 | M3 | **Classifier run-to-run variance** | Measured incidentally at 1.6% against a 0.9% signal. Cov4's gate is undemonstrable until this is bounded |
 | M1 | Cov5 leaves the 757 no-span documents unchanged | Asserted in a session report, never run |
-| **M5** | **Discipline-stratified query set** | **18 of 37 queries (49%) are chemistry; all 3 profile probes are. Every retrieval figure in the plan is scored against one researcher's relevance** (§8.5, §17.9) |
+| **M5** | **Discipline-stratified query and relevance set** | **18 of 37 queries (49%) are chemistry; all 3 profile probes are.** A ranking regression outside chemistry is invisible to §8.5, and any future gold relevance set built on it inherits one discipline's judgement. **Extraction-side figures are corpus measurements and are unaffected** (§8.5, §17.9) |
 | M4 | Read `344592` for MURI topics | Grants.gov finds MURI in its full text; part of §18.2's SAM.gov cost may already be reachable |
 | — | F1/F4 candidate sets in Cov4's validation | Neither resembles the 22 sibling sets §11 measured (§11) |
 
@@ -3142,7 +3175,7 @@ explicitly declined with a reason — never by being forgotten.
   that they still produce none, and still for the same recorded reason, is
   **asserted and not measured**. A widened title matcher could in principle
   locate a candidate that previously failed, which is how `360678` gained a span
-- [ ] **M5. Build a discipline-stratified query set.** Measured: **18 of 37 queries (49%) are chemistry/chemical engineering/materials, all 3 profile probes are, and 4 name any other discipline** (§8.5). No query names biology, clinical research, physics, computing, social science, humanities, earth science, or non-chemical engineering. **Every recall and precision figure in this plan is therefore scored against one researcher's relevance**, and a regression confined to biology or clinical records would be invisible to the whole gate. Needs ~40 more queries covering the catalog's actual agency mix (NIH 210 records, NSF 149), 3–5 per discipline family from real solicitation vocabulary, ≥1 profile probe each. **Requires no relevance labels**, which is what keeps §8.5 cheap. Until it exists, quote every retrieval figure with the caveat attached
+- [ ] **M5. Build a discipline-stratified query and relevance set.** Measured: **18 of 37 queries (49%) are chemistry/chemical engineering/materials, all 3 profile probes are, and 4 name any other discipline** (§8.5). No query names biology, clinical research, physics, computing, social science, humanities, earth science, or non-chemical engineering. **The debt is scoped: §8.5's frozen query set is single-discipline, so a ranking regression outside chemistry is invisible to it, and any future gold relevance set built on it inherits one researcher's judgement of relevance.** Extraction-side figures — fabricated records, span precision, acceptance rates — are corpus measurements and are **not** affected. Needs ~40 more queries across nine research populations (§8.5's table), from real solicitation vocabulary, ≥1 profile probe each. The regression half **requires no relevance labels**; the gold-set half does, and is §13 decision 4's problem
 - [ ] **M4. Read `344592` (`W911NF-23-S-0001`, DEVCOM ARL BAA) for MURI topics.** A live Grants.gov search finds MURI in its full text; our stored description is truncated at 2,793 chars and does not contain it. **If that notice enumerates MURI topics inline, part of what §18.2's SAM.gov deferral is said to cost is already reachable** — the record is in the catalog and fetchable today. Cheap: one document, and it is already in the development corpus §6.3 names
 - [ ] **M2. Read 30 more stratum-D records** — the cheapest outstanding
   measurement in the project, and the one that closes over half of §1.1's
@@ -3396,8 +3429,14 @@ and the DOE records this maintainer applies to," the priority needs a different
 justification or a different rank.
 
 **Where this rule was already violated, and is now corrected:** §8.5's query set
-is 49% chemistry with all three profile probes in that field, so every retrieval
-figure is scored against one researcher's relevance (§15 debt M5).
+is 49% chemistry with all three profile probes in that field, so **a ranking
+regression outside chemistry would not be detected** and any gold relevance set
+built on it would encode one discipline's judgement of relevance (§15 debt M5).
+Note the scope precisely: this is a **retrieval-evaluation** debt. The
+extraction-side measurements — fabricated records, span precision, acceptance
+rates, Cov5 prevalence — are judged against document content by reading it, and
+carry no discipline caveat. Overstating the debt is its own failure: it would
+put a caveat on figures that do not need one and blur where the real gap is.
 
 ---
 
