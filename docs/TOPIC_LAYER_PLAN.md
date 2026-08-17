@@ -385,7 +385,7 @@ So on a steady-state night, almost every document takes path 1 or 2, and segment
   "title_fingerprint": "3f9a1c02",
   "summary": "<= 600 chars, sentence-boundary truncated",
   "term_display": {"electrocataly": "electrocatalysis", "faradaic": "Faradaic"},
-  "subtopic_source": "inline",
+  "subtopic_source": "inline",          // provenance ladder, see below
   "recurrence_group": "muri:interfacial-charge-transfer",
   "status": "posted",
   "topic_areas": ["Catalysis and reaction engineering", "Carbon management"],
@@ -403,6 +403,73 @@ So on a steady-state night, almost every document takes path 1 or 2, and segment
   "extractor_version": "1.0.0+pdfplumber0.11.4+pypdf5.1.0"
 }
 ```
+
+#### `subtopic_source` — the provenance ladder
+
+**Rewritten in 8.7 from a two-value field (`inline` / `referenced`) into a
+four-value ladder, after an outside audit found this plan over-weighting generic
+document inference relative to hierarchies agencies already publish.** The audit
+is substantially accepted; §6.7 and §18.1 carry the structural consequences.
+
+The ladder is ordered by **how much this project had to guess**:
+
+| Value | The agency has… | Example |
+|---|---|---|
+| **`native`** | published an explicit child list, table or API — the subdivisions are *data*, not prose | NSPIRES ROSES Table 3; a program-element API; a solicitation table with one row per topic |
+| **`referenced`** | published a program page that establishes the parent→child relationship, off the solicitation | DOE Office of Science program pages under `science.osti.gov`; ONR department pages |
+| **`inline`** | enumerated the children **in** the solicitation, in a form a family recognises | `Topic Area 1 / 1a / 1b`; `(a) Materials Chemistry` under a bookmark tree |
+| **`inferred`** | enumerated nothing recognisable, and generic structural inference had to establish the set | `structural_siblings` over an outline; a bare-numbered run; a label run |
+
+**The distinction that matters is not format, it is who asserted the
+relationship.** A bookmark tree is a *layout* artifact that this project reads as
+a hierarchy; a ROSES table is the agency stating its own hierarchy. Both may
+produce identical-looking records, and they do not deserve identical trust.
+
+#### Confidence derives from provenance first, method second
+
+Confidence was previously a property of the **segmentation method** alone —
+Layer A `high`, `outline_structural` `medium`, Layer D `low`. That is now the
+second term, not the first:
+
+| Provenance | Ceiling | Floor | Rationale |
+|---|---|---|---|
+| `native` | `high` | `high` | There is nothing to be uncertain about. The agency published the list; a parser either read it or failed loudly |
+| `referenced` | `high` | `medium` | The relationship is asserted by the agency; the risk is staleness and mis-linkage, not invention. `medium` when the parent match is heuristic |
+| `inline` | `high` | `low` | Method decides within the band, exactly as today |
+| `inferred` | **`medium`** | `low` | **Never `high`.** §6.3a already caps `structural_siblings` at `medium`; this generalises that cap to the whole provenance class rather than to one family |
+
+**Two rules follow, and they are the point of the ladder:**
+
+1. **A higher rung is never downgraded by a lower rung's evidence.** If a `native`
+   source lists twelve elements and inference over the PDF finds nine, the answer
+   is twelve and the discrepancy is a **canary failure** (§7.4), not a merge.
+2. **`_demote()`'s secondary-attachment cap applies to `inline` and `inferred`
+   only.** A `native` list does not become less trustworthy for having been found
+   in the second attachment fetched.
+
+#### Interaction with §6.4b's span-level judgment
+
+§6.4b moved the unit of judgment from the set to the span. The ladder decides
+**which spans are judged at all**:
+
+| Provenance | Set acceptance (§6.4 1–8) | Span classifier (Cov4) | Review queue |
+|---|---|---|---|
+| `native` | **not applicable** — there is no set to accept, only a list to read | **bypassed** | bypassed |
+| `referenced` | not applicable | **bypassed** | bypassed |
+| `inline` | applies | applies | `medium`/`low` survivors |
+| `inferred` | applies | **applies — this is what Cov4 is for** | `medium`/`low` survivors |
+
+**Cov4 narrows to `inferred` and `inline`, and its purpose sharpens.** The
+classifier exists to answer *"did generic inference find the fundable list or the
+announcement's furniture?"* — a question that does not arise when an agency
+published the list itself. Running a semantic filter over a ROSES table would be
+spending money and adding a failure mode to second-guess an authoritative source.
+See §18.1 Cov4.
+
+**This does not weaken §18.3's asymmetry.** Nothing bypasses the *acceptance* of
+a source; it bypasses the *inference-checking* of one. A `native` parser that
+returns zero rows on an HTTP 200 is a canary failure and publishes nothing
+(§7.4) — which is the same fail-closed outcome by a different route.
 
 > **⚠ `subtopic_terms` is NOT a field on this record — corrected 2026-08-17.** Earlier versions carried the term map inline, and it measured **60.3% of every serialized record**. It now folds into the sidecar's own search index, exactly as parent term frequencies already fold into `opportunities.js`'s `search_index.postings` rather than sitting on each opportunity. The record above is the **display payload**, and it measures median 942 B / max 1,218 B against §12's 2 KB ceiling. `term_display` **stays on the record** — it is what renders match chips as `electrocatalysis` instead of the stem `electrocataly` (§7.6), so it is display data, not retrieval data. See §5.2 for the index shape and §13's settled sidecar decision.
 
