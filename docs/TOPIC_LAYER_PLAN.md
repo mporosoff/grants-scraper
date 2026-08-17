@@ -2792,7 +2792,7 @@ Per-agency-family acceptance, as the gate requires rather than in aggregate: **D
 
 ### Package D¾ — Forms
 
-**Added 8.5. Gated behind Cov4** — the two largest uncovered forms are both unsafe on structure alone (§18.1). Yields are *records in the 90 read* · *catalog estimate*.
+**Added 8.5. Gated behind Cov4 and, from 8.7, behind package D⅝** — the two largest uncovered forms are both unsafe on structure alone (§18.1), and all four recogniser items are rung-4 inference whose yields were measured before any structured source was tried. **Fm1, Fm2, Fm5 and Fm6 build only against records still uncovered after D⅝, and their yields are re-measured on that residual.** Fm3, Fm4 and Fm7 are unaffected — two repairs and a decision not to build. Yields below are *records in the 90 read* · *catalog estimate*, **pre-D⅝**.
 
 - [ ] **Fm1. F4 — named / bulleted, no counter** — 9 of 90 · **~73**, or ~22 excluding one stratum-E observation. `label_run` (§6.3a) plus a bulleted variant. Highest false-positive risk in the plan; `362233`'s five real Focus Areas sit one subsection above five decoy process bullets. **Do not build on structure alone**
 - [ ] **Fm2. F1 — bare numbered** — 8 of 90 · ~31, the most stable uncovered row. **Blocked by §18.3a's four exit criteria — read them first.** Needs grouped restarting counters (`330175`) and title extraction that survives a trailing em-dash clause (`355150`)
@@ -3263,9 +3263,67 @@ Concretely: an unresolved span is not a passing span. On any classifier failure 
 - **Cost reported from real `usage` totals**, against §11's $0.190 per 100 sets batched at Sonnet 4.6.
 - **Added 8.5 — the validation set must include the populations the filter will actually face.** The 22 sibling sets it was measured on are all outline-derived from documents with bookmarks. Cov4 now gates on at least: **one aggregating agency page** (§6.3b — `363594` is the measured case, where `topic_area` fires ten times on another opportunity's topics and every acceptance rule passes), **one grouped-restarting-counter document** (`330175`, whose 24 real subdivisions restart at `1.` three times), and **one bulleted set with an adjacent decoy** (`362233`, five real Focus Areas above five process bullets). None of the three resembles what §11 measured, and each is a form the recall work depends on.
 
+#### Package D⅝ — Structured Umbrellas
+
+**Added in 8.7, and it sits before D¾ deliberately.** An outside audit found this
+plan over-weighting generic document inference relative to hierarchies agencies
+already publish. Accepted: §5.1 now ranks provenance and §6.7·0 routes to the
+least-ambiguous source first, and this package is where the highest rung gets
+built. **Every D¾ item operates at rung 4 on a source that had to be guessed at;
+these operate at rung 1 on sources the agency publishes as data.**
+
+Ordered by **breadth of disciplines served per unit of implementation cost** —
+not by record count, which is the metric that produced the inversion.
+
+| # | Source | Disciplines served | Cost | Provenance |
+|---|---|---|---|---|
+| **S1** | **NSPIRES ROSES Table 3** | Earth science, heliophysics, planetary science, astrophysics, biological and physical sciences — **~35 program elements across essentially all of NASA science** | **Lowest available.** Table 3 is a published, structured table of program elements with dates: one row per element, no prose heuristic anywhere | `native` |
+| **S2** | **DOE Office of Science referenced taxonomy** | ASCR, BES, BER, FES, HEP, NP — **all six program offices**, ~70 programmes including the case that motivated §6.7 | Medium. Program pages under `science.osti.gov`, one scraper per office shape | `referenced` |
+| **S3** | **DoD source router** over Grants.gov, SAM.gov and the ONR/NRL/AFOSR indexes | Engineering, physics, materials, computing, and the DoD basic-research portfolio generally | Highest. Three source systems, a SAM.gov credential (§7.5), and per-lab index shapes that differ | mixed |
+
+> **Build S1 only, then re-measure. This is the gate, not a suggestion.**
+>
+> One adapter is enough to prove or disprove the provenance model end to end:
+> does a `native` source actually bypass Cov4 cleanly, do the canaries catch a
+> silent parser failure, does the router refuse lower rungs correctly, and do the
+> resulting records survive §8.5's query baseline. **Building all three commits to
+> a three-system maintenance surface on an argument nothing has tested yet** —
+> and this plan has now twice shipped a mechanism whose measured yield was zero
+> (Word parsing, spreadsheet parsing) and once retired seven families that were
+> specified from expectation (§17.8).
+>
+> S1 is also the cheapest thing to be wrong about. If ROSES Table 3 turns out to
+> be less parser-friendly than it looks, that is one adapter's cost and the
+> conclusion generalises to S2 and S3 before either is written.
+
+**Why S1 first on breadth, not just on cost.** NASA ROSES is the single largest
+concentration of *unreached* umbrella parents in the corpus that anyone has
+identified: the D5 backfill's nine plausible umbrellas were all ROSES, they
+resolve to `agency_notice` URLs and fail at fetch time on `nasaprs.com`
+(§18.2's NSPIRES deferral), and `roses_element` — the family named for them —
+was **retired in 8.5 with zero correct matches in 90 read records** (§6.3). So
+the generic path for NASA is measured at zero and the structured path is
+untried. That is the inversion in one agency.
+
+| Item | Notes |
+|---|---|
+| **S1a. Read Table 3 and record its shape** | §0.4 rule 10: fetch one real response, print it, read it, write code against what was observed. **Do this before writing a parser** and record the row schema, the element-code form, and how continuation years are expressed |
+| **S1b. `native` adapter for ROSES program elements** | Adapter lifecycle per §6.7a's recommendation, emitting `subtopic_source: "native"`, `confidence: "high"`, bypassing Cov4 and the review queue (§5.1). Parent match by ROSES element code, never by FOA number |
+| **S1c. Canaries** | `expected_solicitations` entry: **ROSES has ≥20 open elements**. A parser returning zero rows on an HTTP 200 must fail loudly (§7.4) |
+| **S1d. Re-measure** | Report **new parents gained**, not expanded coverage of existing ones, and re-run §8.5's query baseline. **Then decide S2 and S3 on that evidence** |
+
+**Gate:** S1 only · new parents reported separately from any change to existing records · canary proven by simulating a zero-row HTTP 200 · `native` records confirmed to bypass Cov4 in code as well as in this document · §0.5 byte-identical with the flag off · **S2 and S3 remain unscheduled until S1d is read by a human**.
+
 #### Package D¾ — Forms
 
-**Added in 8.5, ordered by `docs/FAMILY_TAXONOMY.md` §5. Gated behind Cov4's gate passing — see the ⚠ note under D½.** This is the recall work the taxonomy identified: five of six measured forms have no family, accounting for ~90% of the enumerating population.
+**Added in 8.5, ordered by `docs/FAMILY_TAXONOMY.md` §5. Gated behind Cov4's gate passing — see the ⚠ note under D½ — and, from 8.7, behind **package D⅝** as well.**
+
+> **⚠ Re-gated in 8.7. Fm1, Fm2, Fm5 and Fm6 do not start until D⅝'s S1d has been read.** These four are rung-4 generic inference (§6.7·0), and their measured yields were computed against a corpus in which **no structured source had been tried**. Two conditions, both binding:
+>
+> 1. **Build only against records still uncovered after structured sources.** A parent that D⅝ resolves at `native` or `referenced` is not a candidate for a recogniser, however well it would have matched. Recompute the uncovered population first.
+> 2. **Re-measure the yield on that residual.** Every figure in the table below is *records in the 90 read* against the whole corpus. If S1 lands ~35 NASA elements at rung 1, the residual F-form population is smaller and differently distributed, and the ordering below may not survive it.
+>
+> **Fm3, Fm4 and Fm7 are not re-gated.** Fm3 and Fm4 are repairs to families that already fire on live records, and Fm7 is a decision not to build anything — none of the three widens the inference surface. This is the recall work the taxonomy identified: five of six measured forms have no family, accounting for ~90% of the enumerating population.
 
 Every item carries its measured yield as *records in the 90 read* · *catalog extrapolation*, and **the stability of that extrapolation**, because two of the rows rest on a single observation and one of those is the largest number in the table.
 
