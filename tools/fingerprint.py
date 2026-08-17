@@ -46,6 +46,29 @@ TIMESTAMP_RE = re.compile(
 )
 FROZEN_TIMESTAMP = "FROZEN-TIMESTAMP"
 
+# A DATE-ONLY volatile field, normalized by name rather than by shape.
+#
+# `source_first_seen_date` records the day this build first saw a record, so it
+# is "today" on every run. It is date-only, so TIMESTAMP_RE deliberately does
+# not touch it -- that regex leaves bare dates alone precisely so close dates,
+# archive dates and every other currentness input stay fingerprinted.
+#
+# The consequence went unnoticed until it bit: the gate was green at 23:59 UTC
+# and failed at 01:04 UTC the next day, with no code change, because the field
+# rolled over. §17.6 rule 2 asks for two builds separated by a delay, and 78
+# seconds satisfies that while never crossing midnight. **Date rollover is a
+# third axis, alongside time and platform**, and the baseline had only ever
+# been varied along two.
+#
+# Normalizing one named field keeps every other bare date fingerprinted, which
+# is what §8.4 wants, and keeps the fix in the gate's tooling rather than in
+# production code -- `sources merge` has no `--as-of` to pin, and adding one
+# would be production surface added for a test.
+DATE_FIELD_RE = re.compile(
+    r'("source_first_seen_date"\s*:\s*")\d{4}-\d{2}-\d{2}(")'
+)
+FROZEN_DATE = r"\1FROZEN-DATE\2"
+
 
 def normalize(data: bytes) -> bytes:
     """Canonicalize line endings, then replace every ISO-8601 datetime.
@@ -66,9 +89,9 @@ def normalize(data: bytes) -> bytes:
     """
     text = data.decode("utf-8", errors="surrogateescape")
     text = text.replace("\r\n", "\n").replace("\r", "\n")
-    return TIMESTAMP_RE.sub(FROZEN_TIMESTAMP, text).encode(
-        "utf-8", errors="surrogateescape"
-    )
+    text = TIMESTAMP_RE.sub(FROZEN_TIMESTAMP, text)
+    text = DATE_FIELD_RE.sub(FROZEN_DATE, text)
+    return text.encode("utf-8", errors="surrogateescape")
 
 
 def artifacts(root: Path):
