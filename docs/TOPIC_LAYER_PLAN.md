@@ -2,13 +2,15 @@
 
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
-Status: in progress · Version 8.5 · Written 2026-08-15 · **Revised 2026-08-17 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
+Status: in progress · Version 8.6 · Written 2026-08-15 · **Revised 2026-08-17 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
 
 > **Start at §18.** It defines the minimum path — the **nine** work packages that are actually being built (A–G plus **D½ Coverage**, added in 8.2, and **D¾ Forms**, added in 8.5) — and lists what is deferred and what it costs. §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
 >
 > **8.3 changes one thing structurally: the unit of judgment moves from the sibling *set* to the individual *span* (§6.4b), because a set-level verdict lets two policy paragraphs delete 70 DOE programmes.** §11 is reopened for the precision half only, on a measured run; its recall argument is untouched.
 >
 > **8.4 closes the two blocking storage decisions.** `MAX_TERMS` stays at 400 and subtopics ship in a lazily-loaded `data/subtopics.js` sidecar — one question, not two, once you measure that 60.3% of a cache record is a term map the browser never reads as content. **Nothing now blocks committing a cache except running the backfill again.** Every rate quoted against `docs/CORPUS_CENSUS.md`'s 20 documents is still superseded by `docs/COVERAGE_SURVEY.md` (§1.1).
+>
+> **8.6 makes §15 readable.** A new **Open state at a glance** table at the top of §15 indexes every open decision, unmet gate, unfixed defect and outstanding measurement, and §15 gains a **Debt** section for the twelve threads that previously lived only in session reports. §6.7a is surfaced as a real §13 decision after fifteen sessions behind a pointer. **The Cov5 classifier re-run measured a precision effect of zero — and measured run-to-run variance larger than the signal it was looking for (§11).**
 >
 > **8.5 replaces §6.3.** The ten families were written from expectation and have now been tested against the corpus rather than measured against. **Seven are retired: five never fired across 170 real documents and two produced only false positives.** §6.3 is now an induced taxonomy of six *forms*, ordered by measured coverage, and **§18.1 is re-ordered so Cov4's classifier lands before any new family work** — the two largest uncovered forms are both unsafe on structure alone.
 
@@ -2528,6 +2530,63 @@ Copy into a tracking issue. **The gate lines are not steps — they are stops.**
 **This checklist tracks the §18 minimum path, which is what is being built.** It was renumbered in 8.0 around §18's packages; §10's phase numbering is retained there as background but is no longer the unit of work. A checklist copied from an earlier version will not line up.
 
 One **package** per session (§0.4 rule 5). One **commit** per item, with the suite run between commits. Every session ends pushed (§0.4 rule 5b).
+
+---
+
+## Open state at a glance
+
+**Added 8.6. This is the index, not the record** — every line points at the
+section that owns it. If something is open and not listed here, that is a bug in
+this table.
+
+### Blocking a human decision — nothing proceeds on these without an answer
+
+| # | Decision | Where | Open since |
+|---|---|---|---|
+| §13.2 | **Where referenced subtopics live** — extend `discoverability.py`, or a new `program_taxonomy` adapter. Recommendation stated (adapter, linkage imported); nothing on the critical path depends on it | §13, tradeoffs in §6.7a | 15 sessions |
+| §13.11 | **Is `(n) Public-Private Partnerships` a subject or a funding mechanism?** One person reading page 85 of `DE-FOA-0003600`. Do not settle it from a model verdict | §13, evidence in §11 | 2 sessions |
+| §13.12 | **Whether to de-duplicate the `deadlines` payload** — 1.31 MiB removable of a 4.35 MB field, 5.5% of `opportunities.js`. Changes a published artifact's shape, so §0.5 applies | §13 | new in 8.6 |
+| §18.3a | **Whether an F1 bare-numbered family may ever be added.** Four exit criteria stated; the prohibition stands until all four hold | §18.3a | new in 8.5 |
+| §13.3–13.10 | Works-text provider · gold set · archive search · summary length · feed inclusion · taxonomy depth · mute/alert split · OCR | §13 | various |
+
+### Gates not met — these stop work by design
+
+| Gate | Why it is not met |
+|---|---|
+| **Package D** | Correct-acceptance stopped at 42%, below the 50% threshold set for the package (§18.1) |
+| **Package D½** | Cov4, Cov5(done), Cov6 and Cov7 outstanding; **Cov4's "zero false rejections" cannot be shown in a single pass** — measured variance exceeds the measured rate (§11 caveat 2) |
+| **Any cache commit** | The D5 cache holds six pre-Cov5 summaries and is missing a span (§15 debt D1). Regenerate before committing anything derived from it |
+
+### Defects, unfixed
+
+| # | Defect | Owner |
+|---|---|---|
+| Cov6 | `_demote()` caps publication for **46.4% of the catalog** — Cov1 supplies the bytes, `_demote` guarantees they never publish | §18.1 |
+| D0 | `--max-documents` caps each **pass**, not the run, so the flag understates the work by 2× with subtopics on | §15 debt, §12 |
+| D1 | The D5 cache's six corrupted summaries, and one missing span | §15 debt |
+| D2 | **Three** families reject an ASCII hyphen — `dod_topic`, `component`, `technical_category`; the last also rejects `.` | §15 debt → Fm3 |
+| D3 | §6.6's HTML outline layer is specified and unbuilt; deliberately, on a population measured at 0 lists in 20 | §15 debt |
+| D4–D6 | 213 stale cache entries · 13 orphaned entries · 25 fetch failures across 5 hosts | §15 debt |
+| — | `structural_siblings` is blind to **55% of the corpus's PDFs** (71 of 129 have no bookmarks) | §6.3a |
+| — | The aggregating-agency-page false positive: every acceptance rule passes on another opportunity's topic list | §6.3b |
+| — | Cov5's residual: `_locate_nodes`' `page_start_offset` fallback is still silent | §6.5 |
+
+### Measurements outstanding
+
+| # | Measurement | Why it matters |
+|---|---|---|
+| M2 / Cov7 | **30 more stratum-D records** | Closes over half of §1.1's 54–538 interval. Cheapest measurement in the project |
+| M3 | **Classifier run-to-run variance** | Measured incidentally at 1.6% against a 0.9% signal. Cov4's gate is undemonstrable until this is bounded |
+| M1 | Cov5 leaves the 757 no-span documents unchanged | Asserted in a session report, never run |
+| — | F1/F4 candidate sets in Cov4's validation | Neither resembles the 22 sibling sets §11 measured (§11) |
+
+### What is true and settled, so it is not relitigated
+
+`MAX_TERMS` stays at 400 · subtopics ship in a `data/subtopics.js` sidecar · the
+PDF toolchain is `pdfplumber` + `pypdf`, never PyMuPDF · segmentation runs inside
+`extract_document_evidence.py` at a flag-guarded call site · nothing below `high`
+publishes unreviewed · **seven of §6.3's ten families are retired on measurement**
+(§6.3) · §11's recall half stays closed. Full list in §13 *Settled*.
 
 ---
 
