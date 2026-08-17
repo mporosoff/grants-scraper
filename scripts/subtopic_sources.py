@@ -64,6 +64,29 @@ def _skippable(name):
     return any(token in lowered for token in SKIP_TOKENS)
 
 
+def subtopic_only_primary(record):
+    """The first document to try for a record `source_for_record()` declines.
+
+    §18.1 Cov1. `source_for_record()` returns ``None`` for **685 of 1,475
+    catalog records -- 46.4%** -- and 672 of those have never been fetched even
+    once (docs/COVERAGE_SURVEY.md). Two measured populations sit inside that
+    number: **236 carry live Grants.gov attachments**, which
+    :func:`attachment_sources` already reaches, and **221 carry an agency URL
+    that is declined only because the record needs no gap-fill**. The second
+    group is what this function is for.
+
+    It is deliberately not a change to `source_for_record()`. That function
+    answers *"which document may this record cite?"* -- a question where a
+    wrong one-click link is worse than none -- and it must keep answering it
+    the same way. This answers *"which bytes may segmentation read?"*, which
+    publishes no link at all.
+    """
+    url = (record or {}).get("funding_opportunity_url")
+    if not url:
+        return None
+    return {"url": url, "name": None, "kind": "subtopic_agency_notice"}
+
+
 def attachment_sources(opportunity_id, *, detail_fetcher, collector):
     """Every Grants.gov attachment on a record, best candidates first.
 
@@ -222,3 +245,15 @@ def best_segmentation(
         best_document or primary_document,
         {"attempts": tuple(attempts)},
     )
+
+
+def segment_without_primary(record, **kwargs):
+    """:func:`best_segmentation` for a record that has no selected primary.
+
+    §18.1 Cov1. `best_segmentation` already tolerates a missing primary -- it
+    skips the empty content and goes straight to the attachment list -- so this
+    is a name for the case rather than a second implementation. It exists so
+    the call site reads as what it is, and so the behaviour has a test that
+    fails if the tolerance is ever removed.
+    """
+    return best_segmentation(record, None, None, **kwargs)

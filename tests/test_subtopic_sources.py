@@ -261,5 +261,47 @@ class RobustnessTests(unittest.TestCase):
         )
 
 
+class SubtopicOnlySourceTests(unittest.TestCase):
+    """§18.1 Cov1 -- records source_for_record() declines.
+
+    Measured: it declines 685 of 1,475 records, 236 of which carry live
+    attachments and 221 an agency URL declined only for needing no gap-fill
+    (docs/COVERAGE_SURVEY.md stage 3).
+    """
+
+    def test_an_attachment_is_segmented_with_no_primary_at_all(self):
+        result, document, _diagnostics = sources.segment_without_primary(
+            {"opportunity_id": "1001"},
+            extract_containers=extract_containers,
+            download=downloader({"appendix.pdf": notice(TOPICS)}),
+            detail_fetcher=detail_with(["appendix.pdf"]),
+            collector=collector_for(["appendix.pdf"]),
+        )
+        self.assertEqual(len(result.subtopics), 3)
+        self.assertEqual(document["name"], "appendix.pdf")
+
+    def test_no_attachments_and_no_primary_yields_nothing_and_never_raises(self):
+        result, document, _diagnostics = sources.segment_without_primary(
+            {"opportunity_id": "1001"},
+            extract_containers=extract_containers,
+            download=downloader({}),
+            detail_fetcher=detail_with([]),
+            collector=collector_for([]),
+        )
+        self.assertEqual(result.subtopics, ())
+        self.assertIsNone(document)
+
+    def test_the_agency_url_is_offered_only_when_the_record_carries_one(self):
+        self.assertIsNone(sources.subtopic_only_primary({}))
+        self.assertIsNone(
+            sources.subtopic_only_primary({"funding_opportunity_url": None})
+        )
+        source = sources.subtopic_only_primary(
+            {"funding_opportunity_url": "https://agency.example/program"}
+        )
+        self.assertEqual(source["url"], "https://agency.example/program")
+        self.assertEqual(source["kind"], "subtopic_agency_notice")
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -11,8 +11,10 @@ from scripts.extract_document_evidence import (
     extract_containers,
     extract_document_facts,
     merge_document_entry,
+    refresh_subtopics_without_source,
     source_for_record,
     source_signature,
+    subtopic_only_candidates,
     validate_refresh_health,
 )
 
@@ -390,6 +392,69 @@ class DocumentEvidenceTests(unittest.TestCase):
                 "failed_request_count": 2,
             }
         )
+
+
+class SubtopicOnlyCandidateTests(unittest.TestCase):
+    """§18.1 Cov1, and §0.5 -- the flag-off path must not notice this exists."""
+
+    def declined_record(self):
+        # No primary document and no gap-fill needed, so source_for_record()
+        # returns None: the shape of 685 catalog records.
+        record = base_record()
+        record["primary_document_url"] = None
+        record["primary_document_name"] = None
+        record["funding_opportunity_url"] = "https://agency.example/program"
+        record["award_floor"] = 100000
+        record["close_date"] = "2026-09-30"
+        return record
+
+    def test_a_declined_record_is_a_subtopic_only_candidate(self):
+        record = self.declined_record()
+        self.assertIsNone(source_for_record(record))
+        self.assertEqual(
+            [oid for oid, _ in subtopic_only_candidates([record], enabled=True)],
+            ["360001"],
+        )
+
+    def test_the_flag_off_produces_no_candidates_and_no_cache_key(self):
+        record = self.declined_record()
+        self.assertEqual(subtopic_only_candidates([record], enabled=False), [])
+        store, metrics = refresh_subtopics_without_source(
+            [record],
+            max_documents=5,
+            fetcher=lambda url, headers: response(),
+            now=datetime(2026, 7, 26, 12, tzinfo=timezone.utc),
+            enabled=False,
+        )
+        self.assertEqual(store, {})
+        self.assertEqual(metrics["attempted"], 0)
+
+    def test_a_reachable_record_is_never_a_subtopic_only_candidate(self):
+        # base_record() has a primary document, so the administrative path
+        # already fetches it and this path must not fetch it twice.
+        self.assertEqual(
+            subtopic_only_candidates([base_record()], enabled=True), []
+        )
+
+    def test_the_flag_off_refresh_adds_no_subtopic_only_key(self):
+        record = self.declined_record()
+        catalog = {
+            "schema_version": 3,
+            "record_count": 1,
+            "source": {"name": "Grants.gov"},
+            "diagnostics": {},
+            "opportunities": [record],
+        }
+        _output, cache = enrich_document_evidence(
+            catalog,
+            empty_cache(),
+            max_documents=5,
+            request_delay=0,
+            recheck_days=14,
+            fetcher=lambda url, headers: response(),
+            now=datetime(2026, 7, 26, 12, tzinfo=timezone.utc),
+        )
+        self.assertNotIn("subtopic_only", cache)
 
 
 if __name__ == "__main__":

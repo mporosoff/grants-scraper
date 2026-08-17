@@ -1536,6 +1536,97 @@ def build_document_entry(
     }, True
 
 
+def subtopic_only_candidates(records, *, enabled):
+    """Catalog records the administrative path never fetches (§18.1 Cov1).
+
+    Measured: `source_for_record()` declines **685 of 1,475 records**, and 672
+    of them have no evidence entry at all, so no pattern can reach them because
+    no bytes ever arrive (docs/COVERAGE_SURVEY.md stage 3).
+
+    Returns ``[]`` when the flag is off, so the flag-off candidate set -- and
+    therefore every flag-off artifact -- is untouched (§0.5).
+    """
+    if not enabled:
+        return []
+    candidates = []
+    for record in records:
+        opportunity_id = str(
+            record.get("opportunity_id")
+            or record.get("opportunity_number")
+            or ""
+        )
+        if not opportunity_id or source_for_record(record):
+            continue
+        candidates.append((opportunity_id, record))
+    return candidates
+
+
+def refresh_subtopics_without_source(
+    records,
+    *,
+    max_documents,
+    fetcher,
+    now,
+    request_delay=0.0,
+    enabled=False,
+):
+    """Segment the records `source_for_record()` declines. Subtopics only.
+
+    **Never writes a `records` entry**, and that is the whole design. These
+    documents were not vetted as the official notice -- `select_primary_document`
+    declined them on purpose -- so giving them an evidence entry would attach
+    `document_evidence` to the parent and publish exactly the wrong one-click
+    link that rule exists to prevent. Results go to a separate store the caller
+    puts under its own cache key, which exists only with the flag on.
+
+    Returns ``(store, metrics)``. Never raises: zero subtopics is normal (§9.3).
+    """
+    store, metrics = {}, {
+        "attempted": 0,
+        "with_subtopics": 0,
+        "remaining": 0,
+        "agency_url_tried": 0,
+    }
+    if not enabled:
+        return store, metrics
+    from scripts import subtopic_sources
+
+    candidates = subtopic_only_candidates(records, enabled=True)
+    metrics["remaining"] = max(
+        0, len(candidates) - min(len(candidates), max_documents)
+    )
+    fetched_at = iso_utc(now)
+    for opportunity_id, record in candidates[:max_documents]:
+        content, document = None, None
+        source = subtopic_sources.subtopic_only_primary(record)
+        if source:
+            metrics["agency_url_tried"] += 1
+            try:
+                response = fetcher(source["url"], {})
+                content = response.get("content")
+                document = {
+                    "url": response.get("url") or source["url"],
+                    "name": source.get("name"),
+                    "content_type": response.get("content_type"),
+                    "sha256": (
+                        hashlib.sha256(content).hexdigest() if content else None
+                    ),
+                    "source_kind": source["kind"],
+                }
+            except Exception:  # noqa: BLE001 - an agency page is optional here
+                content, document = None, None
+        fields = subtopic_fields(record, content, None, document, fetched_at, True)
+        if not fields:
+            continue
+        metrics["attempted"] += 1
+        if fields.get("subtopics"):
+            metrics["with_subtopics"] += 1
+        store[opportunity_id] = fields
+        if request_delay:
+            time.sleep(request_delay)
+    return store, metrics
+
+
 def due_for_check(entry, signature, now, recheck_days, *, needs_subtopics=False):
     if not entry:
         return True
@@ -2028,6 +2119,19 @@ def enrich_document_evidence(
         # §8.3 insertion 4. Only present with the flag on, so the diagnostics
         # block is byte-identical when it is off.
         metrics["subtopics"] = subtopic_metrics(cached_records)
+        # §18.1 Cov1. Runs after the administrative pass and writes nowhere
+        # near it: a separate store, a separate cache key, no record entry.
+        subtopic_only, subtopic_only_metrics = refresh_subtopics_without_source(
+            records,
+            max_documents=max_documents,
+            fetcher=fetcher,
+            now=now,
+            request_delay=request_delay,
+            enabled=True,
+        )
+        if subtopic_only:
+            cache["subtopic_only"] = subtopic_only
+        metrics["subtopics"]["subtopic_only"] = subtopic_only_metrics
     output.setdefault("diagnostics", {})["document_evidence"] = metrics
     cache["generated_at"] = iso_utc(now)
     return output, cache
@@ -2110,7 +2214,11 @@ def main(argv=None):
         from scripts import subtopic_records
 
         subtopic_cache = subtopic_records.empty_cache()
-        for opportunity_id, entry in (cache.get("records") or {}).items():
+        sources = list((cache.get("records") or {}).items())
+        # §18.1 Cov1 results carry no evidence entry by design, so they are a
+        # second source for the same cache rather than a second cache.
+        sources += list((cache.get("subtopic_only") or {}).items())
+        for opportunity_id, entry in sources:
             if "subtopics" not in entry:
                 continue
             subtopic_records.upsert_parent(
