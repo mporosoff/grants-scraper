@@ -28,6 +28,7 @@ from __future__ import annotations
 from collections import Counter
 from dataclasses import dataclass, field
 from difflib import SequenceMatcher
+from functools import lru_cache
 import hashlib
 import io
 import re
@@ -379,6 +380,77 @@ def program_area_fields(span_text: str):
 
 # --- Document text assembly -------------------------------------------------
 
+# Tokenizer for the loose title matcher: alphanumeric runs, whitespace runs, and
+# single other characters, in that precedence.
+_LOOSE_TOKENS = re.compile(r"\w+|\s+|.", re.DOTALL | re.UNICODE)
+
+
+@lru_cache(maxsize=2048)
+def _loose_matcher(cleaned: str):
+    """A pattern for `cleaned` that tolerates stray whitespace beside punctuation.
+
+    Cov5. The previous version split the needle on whitespace and rejoined with
+    `\\s+`, which tolerates whitespace *between* whitespace-delimited tokens and
+    not *inside* one. Every span in the D5 cache whose excerpt described the
+    wrong subject failed here, and all six failed the same way -- pdfminer emits
+    a space adjacent to a hyphen or em-dash that the PDF bookmark does not have:
+
+        bookmark  (i) X-Ray Scattering
+        body      (i) X -Ray Scattering
+
+        bookmark  (j) Plasma Science and Technology--General Plasma Science
+        body      (j) Plasma Science and Technology-- General Plasma Science
+
+    `X-Ray` is one token to `str.split()` and `X` / `-Ray` are two in the body,
+    so no amount of `\\s+` between tokens bridges it. The title was then
+    unlocatable, `_locate_nodes` fell back to `page_start_offset`, and the span
+    began at the top of the bookmark's page -- inside the previous section's
+    prose, which is what the summary then described.
+
+    So whitespace becomes optional around every non-alphanumeric character.
+    **This cannot match a different heading:** the alphanumeric runs must still
+    appear in order and in full, case-insensitively, and the punctuation is
+    preserved rather than wildcarded. The exact `str.find` fast path in `_find`
+    runs first, so documents that already matched are unaffected.
+    """
+    atoms = []
+    for token in _LOOSE_TOKENS.findall(cleaned):
+        if token.isspace():
+            atoms.append(("space", token))
+        elif token.isalnum():
+            atoms.append(("word", token))
+        else:
+            atoms.append(("punct", token))
+
+    parts = []
+    for index, (kind, token) in enumerate(atoms):
+        first, last = index == 0, index == len(atoms) - 1
+        if kind == "word":
+            parts.append(re.escape(token))
+        elif kind == "punct":
+            # Optional whitespace on BOTH sides: extraction inserts it before a
+            # hyphen (`X -Ray`) as readily as after an em-dash (`Technology— G`),
+            # and the six measured cases include both directions.
+            #
+            # Never at the pattern's edges, though. A leading `\s*` makes
+            # `re.search` start the match in the whitespace *before* the
+            # heading, which moves the span start a few characters early --
+            # enough that `build_subtopics`' "drop the heading line" step
+            # consumes that whitespace instead of the heading, and every
+            # summary then opens by repeating its own title.
+            parts.append(("" if first else r"\s*") + re.escape(token))
+            if not last and atoms[index + 1][0] == "word":
+                parts.append(r"\s*")
+        else:
+            beside_punct = (
+                (index and atoms[index - 1][0] == "punct")
+                or (index + 1 < len(atoms) and atoms[index + 1][0] == "punct")
+            )
+            # A space the bookmark has may be absent from the body when it sits
+            # next to punctuation, so it must be optional there too.
+            parts.append(r"\s*" if beside_punct else r"\s+")
+    return re.compile("".join(parts), re.IGNORECASE)
+
 
 @dataclass(frozen=True)
 class _Flat:
@@ -411,11 +483,7 @@ class _Flat:
         if direct >= 0:
             return lower + direct
         # Whitespace in extracted PDF text is unreliable; retry loosely.
-        loose = re.compile(
-            r"\s+".join(re.escape(part) for part in cleaned.split()),
-            re.IGNORECASE,
-        )
-        match = loose.search(window)
+        match = _loose_matcher(cleaned).search(window)
         return lower + match.start() if match else None
 
     def page_at(self, offset):

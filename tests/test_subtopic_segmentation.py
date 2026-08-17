@@ -335,6 +335,78 @@ class LayerOutlineTests(unittest.TestCase):
         )
         self.assertEqual(seg.flatten_outline([destination], Reader()), [])
 
+    def test_a_space_beside_punctuation_does_not_detach_the_span(self):
+        """Cov5. The measured cause of every misaligned summary in the D5 cache.
+
+        pdfminer emits a space adjacent to a hyphen or em-dash that the PDF
+        bookmark does not carry -- bookmark `(i) X-Ray Scattering`, body
+        `(i) X -Ray Scattering`. The loose title matcher used to split the
+        needle on whitespace and rejoin with `\\s+`, which bridges whitespace
+        BETWEEN tokens and not INSIDE one, so the title was unlocatable, the
+        candidate fell back to `page_start_offset`, and the span began at the
+        top of the page -- inside the previous section's prose. Six of 360678's
+        68 spans were built that way, including `(i) X-Ray Scattering`, whose
+        summary read "Applications submitted by February 1, 2026...".
+
+        The assertion is on the summary, not on the offset, because the summary
+        is what both consumers actually read (§6.5).
+        """
+        # Body headings carry the stray space; bookmarks do not. The em-dash
+        # direction (`Technology— General`) is covered in the matcher test
+        # below rather than here: tests/fixtures/minipdf.py writes objects as
+        # latin-1, so U+2014 cannot go into a bookmark title in a fixture PDF.
+        body_headings = [
+            "Topic Area 1 X -Ray Scattering",
+            "Topic Area 2 Public -Private Partnerships",
+            "Topic Area 3 Cross- Cutting Microelectronics",
+        ]
+        bookmark_titles = [
+            "Topic Area 1 X-Ray Scattering",
+            "Topic Area 2 Public-Private Partnerships",
+            "Topic Area 3 Cross-Cutting Microelectronics",
+        ]
+        pages = topic_pages(body_headings)
+        outline = [("Overview", 0, 0)] + [
+            (title, index + 1, 0) for index, title in enumerate(bookmark_titles)
+        ]
+        result = seg.segment_document(
+            {}, build_pdf(pages, outline=outline), containers_from(pages), PDF
+        )
+        self.assertEqual(len(result.subtopics), 3)
+        # Each span must describe its OWN subject. body_for() writes the heading
+        # text into the prose, so a detached span shows a neighbour's subject.
+        for subject, span in zip(body_headings, result.subtopics):
+            self.assertIn(
+                subject.split(" ", 3)[-1].casefold(),
+                span.summary.casefold(),
+                f"span {span.title!r} was handed text describing something else",
+            )
+
+    def test_loose_matcher_still_rejects_a_different_heading(self):
+        """The Cov5 fix must not make the matcher promiscuous.
+
+        Whitespace becomes optional around punctuation; the alphanumeric runs
+        must still appear in order and in full. Without this, a looser matcher
+        would let one sibling's title locate onto another's heading, which
+        silently mislabels a span rather than merely misaligning it.
+        """
+        matcher = seg._loose_matcher("(q) Catalysis Science")
+        self.assertIsNotNone(matcher.search("(q) Catalysis  Science"))
+        self.assertIsNotNone(matcher.search("(q)Catalysis Science"))
+        self.assertIsNone(matcher.search("(r) Separation Science"))
+        # Both em-dash directions, measured on 360678's (j), (k) and (l).
+        dash = seg._loose_matcher("Plasma Science and Technology—High Energy")
+        self.assertIsNotNone(
+            dash.search("(k) Plasma Science and Technology —High Energy"))
+        self.assertIsNotNone(
+            dash.search("(k) Plasma Science and Technology— High Energy"))
+        self.assertIsNone(
+            dash.search("(l) Plasma Science and Technology—Microelectronics"))
+        self.assertIsNone(seg._loose_matcher("Nuclear Data").search(
+            "Nuclear Physics Computing"))
+        self.assertIsNone(seg._loose_matcher("Applied Mathematics").search(
+            "Applied Mathematical Sciences"))
+
     def test_bookmarkless_notice_falls_through_to_a_later_layer(self):
         headings = [
             "Topic Area 1 Electrocatalysis",
