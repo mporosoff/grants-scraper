@@ -62,28 +62,11 @@ class Family:
 # count across two, which is exactly what best_family()'s margin test then
 # rejects. Specific before general, always.
 FAMILIES: tuple[Family, ...] = (
-    Family(
-        "research_thrust",
-        re.compile(r"\bResearch\s+Thrust\s+(\d{1,2})\b", re.IGNORECASE),
-        _DECIMAL,
-        ("DOE BES", "EFRC"),
-    ),
-    Family(
-        "priority_research",
-        re.compile(
-            r"\b(?:Priority\s+Research\s+(?:Direction|Opportunity)|PRD)"
-            r"\s+(\d{1,2})\b",
-            re.IGNORECASE,
-        ),
-        _DECIMAL,
-        ("DOE BES", "EFRC"),
-    ),
     # Sub-lettered ordinals are real: DE-FOA-0003627 subdivides into Topic Area
     # 1a, 1b, 1c and 2. The previous `(\d{1,2})\b` could not match `1a` at all
     # -- \b fails between a digit and a letter -- so that notice yielded only
     # its single `Topic Area 2` mention, eleven times, and was rejected on
-    # ordinal_sequence. sbir_subtopic already modelled `\d{1,2}[a-z]?`; the
-    # inconsistency was an oversight, not a decision (census, D3).
+    # ordinal_sequence (census, D3).
     Family(
         "topic_area",
         re.compile(r"\bTopic\s+Area\s+(\d{1,2}[a-z]?)\b", re.IGNORECASE),
@@ -102,7 +85,7 @@ FAMILIES: tuple[Family, ...] = (
     # separately fundable activity with its own budget.
     Family(
         "component",
-        re.compile(r"\bComponent\s+(\d{1,2})\s*[:.–—]", re.IGNORECASE),
+        re.compile(r"\bComponent\s+(\d{1,2})\s*[:.\u2013\u2014]", re.IGNORECASE),
         _DECIMAL,
         ("CDC", "HHS"),
     ),
@@ -111,23 +94,9 @@ FAMILIES: tuple[Family, ...] = (
     # prose ("category 3 applicants") cannot match.
     Family(
         "technical_category",
-        re.compile(r"\bCategory\s+(\d{1,2})\s*[:–—]", re.IGNORECASE),
+        re.compile(r"\bCategory\s+(\d{1,2})\s*[:\u2013\u2014]", re.IGNORECASE),
         _DECIMAL,
         ("ARPA-E", "DOE"),
-    ),
-    Family(
-        "area_of_interest",
-        re.compile(
-            r"\b(?:Area\s+of\s+Interest|AOI)\s+(\d{1,2})\b", re.IGNORECASE
-        ),
-        _DECIMAL,
-        ("DOE", "NETL"),
-    ),
-    Family(
-        "technical_area",
-        re.compile(r"\bTechnical\s+Area\s+(\d{1,2})\b", re.IGNORECASE),
-        _DECIMAL,
-        ("DARPA", "AFRL"),
     ),
     Family(
         "thrust",
@@ -135,36 +104,49 @@ FAMILIES: tuple[Family, ...] = (
         _DECIMAL,
         ("DARPA", "ONR"),
     ),
-    Family(
-        "sbir_subtopic",
-        re.compile(r"\bSubtopic\s+(\d{1,2}[a-z]?)\b", re.IGNORECASE),
-        _ALNUM,
-        ("DOE", "SBIR"),
-    ),
     # `\bTopic` does not match inside "Subtopic" -- there is no word boundary
-    # between "Sub" and "topic" -- so sbir_subtopic above cannot be stolen by
-    # this family. The trailing punctuation class is what separates a real DoD
-    # topic heading from a prose mention of "topic 3 of the announcement".
+    # between "Sub" and "topic" -- so a subtopic-style heading cannot be stolen
+    # by this family. The trailing punctuation class is what separates a real
+    # DoD topic heading from a prose mention of "topic 3 of the announcement".
     Family(
         "dod_topic",
-        re.compile(r"\bTopic\s+(\d{1,2})\s*[:.–—]", re.IGNORECASE),
+        re.compile(r"\bTopic\s+(\d{1,2})\s*[:.\u2013\u2014]", re.IGNORECASE),
         _DECIMAL,
         ("MURI", "ONR", "ARO"),
     ),
-    Family(
-        "nsf_track",
-        re.compile(r"\bTrack\s+([1-9]|[IVX]{1,4})\b"),
-        _ROMAN_OR_DECIMAL,
-        ("NSF",),
-    ),
-    Family(
-        "roses_element",
-        re.compile(r"^\s*([A-F])\.(\d{1,2})\s+(\S.*)$"),
-        _LETTER_DECIMAL,
-        ("NASA ROSES",),
-        title_group=3,
-    ),
 )
+
+# --- Retired 2026-08-17, §6.3 -------------------------------------------------
+#
+# Seven families were retired on measurement, not on judgement. Run over the 170
+# documents of `docs/FAMILY_TAXONOMY.md`'s stratified sample, and cross-checked
+# against the census 20 and survey 40:
+#
+#   technical_area      0 fires in 170 documents, no validating record in 90
+#   sbir_subtopic       0 fires
+#   nsf_track           0 fires, including four NSF records read at full text
+#   research_thrust     0 fires
+#   priority_research   0 fires. 332894's heading is "Priority Research
+#                       Thrusts", which `Direction|Opportunity|PRD` never
+#                       matched -- its one apparent validator was imaginary
+#   area_of_interest    1 fire, 0 real lists: an aggregating NETL agency page,
+#                       carrying another opportunity's topics (§6.3b)
+#   roses_element       6 fires, 0 real lists. Matched `A.1 BACKGROUND AND
+#                       OBJECTIVES` across five revisions of one DOE Idaho FOA
+#                       and `C.3 Budget Documents` in a DRL instructions file --
+#                       the census's 332894 false positive reproduced on new
+#                       documents, with no correct match anywhere in 90 records
+#
+# Five never fired; two were net-negative. Retirement is not deletion of the
+# knowledge: each shape is recorded above and in §6.3, and any of them may
+# return **with a validating document whose matched text is quoted** (§17.8).
+# `roses_element` in particular has a reason to return if §18.2's NSPIRES
+# deferral is resolved -- but ROSES is D⅝'s first structured source, and a
+# `native` adapter does not need a regex.
+#
+# The ordinal machinery they used (`_LETTER_DECIMAL`, `_ROMAN_OR_DECIMAL`,
+# `_roman_to_int`, `Family.title_group`) is deliberately left in place for the
+# same reason.
 
 FAMILIES_BY_ID = {family.identifier: family for family in FAMILIES}
 

@@ -65,15 +65,8 @@ class PatternFamilyTests(unittest.TestCase):
             "focus_area": "Focus Area 3 Integrated Materials Analysis",
             "component": "Component 3: Rapid Response Activities",
             "technical_category": "Category 3: Building Efficiency",
-            "area_of_interest": "Area of Interest 3 Water Reuse",
             "dod_topic": "Topic 3: Quantum Sensing",
-            "technical_area": "Technical Area 3 Autonomy",
             "thrust": "Thrust 3 Materials",
-            "roses_element": "B.3 Exoplanet Research Program",
-            "nsf_track": "Track 3 Design",
-            "sbir_subtopic": "Subtopic 3a Membrane Fabrication",
-            "priority_research": "Priority Research Direction 3 Charge Transfer",
-            "research_thrust": "Research Thrust 3 Interfacial Chemistry",
         }
         self.assertEqual(
             set(samples), {family.identifier for family in patterns.FAMILIES}
@@ -85,17 +78,73 @@ class PatternFamilyTests(unittest.TestCase):
                 self.assertEqual(owner.identifier, identifier)
 
     def test_specific_families_win_over_general_ones(self):
-        # "Research Thrust 3" also satisfies thrust's pattern; letting the
-        # looser family claim it would split one family's count across two.
-        self.assertEqual(
-            patterns._owning_family("Research Thrust 3 Interfaces").identifier,
-            "research_thrust",
+        # "Subtopic 3" contains "topic 3", but \bTopic cannot match inside it,
+        # so a subtopic-style heading is owned by nothing now that
+        # sbir_subtopic is retired -- and must not leak to dod_topic.
+        self.assertIsNone(patterns._owning_family("Subtopic 3: Fabrication"))
+
+    def test_retired_families_match_nothing(self):
+        """§6.3, retired 2026-08-17. Five never fired in 170 documents.
+
+        These are the conventions the retired families recognised. Nothing may
+        match them now: re-adding one requires a validating document with its
+        matched text quoted (§17.8), not a synthetic fixture.
+        """
+        for text in [
+            "Technical Area 3 Autonomy",
+            "Subtopic 3a Membrane Fabrication",
+            "Track 3 Design",
+            "Priority Research Direction 3 Charge Transfer",
+            "Area of Interest 3 Water Reuse",
+            "B.3 Exoplanet Research Program",
+        ]:
+            with self.subTest(text=text):
+                self.assertIsNone(patterns._owning_family(text))
+
+    def test_retiring_research_thrust_widened_thrust(self):
+        """A measured side-effect of the retirement, pinned before it is fixed.
+
+        `research_thrust` existed so that `thrust` would not claim
+        `Research Thrust N` -- the module's own ordering comment says so.
+        Retiring it hands those lines to `thrust`, which is a **widening of a
+        match surface with no validating document**, i.e. the thing §17.8
+        forbids, arriving as a side-effect rather than as a decision.
+
+        Pinned here as the current behaviour so the Fm4 commit that removes it
+        is visible in the diff rather than silent.
+        """
+        owner = patterns._owning_family("Research Thrust 3 Interfacial Chemistry")
+        self.assertIsNotNone(owner)
+        self.assertEqual(owner.identifier, "thrust")
+
+    def test_roses_element_false_positive_shape_yields_no_child(self):
+        """The measured false positive, pinned as a negative fixture.
+
+        `roses_element` fired on six documents and zero real lists. Its shape
+        was ordinary DoD/DOE lettered-decimal section numbering:
+        `A.1 BACKGROUND AND OBJECTIVES` across five revisions of one DOE Idaho
+        FOA, and `C.3 Budget Documents` in a DRL instructions file. This is
+        kept as a **negative** regression fixture -- the previous positive
+        fixture (`B.3 Exoplanet Research Program`) implied corpus support the
+        family never had.
+        """
+        headings = [
+            "A.1 BACKGROUND AND OBJECTIVES",
+            "A.2 AWARD INFORMATION",
+            "A.3 ELIGIBILITY INFORMATION",
+            "C.3 Budget Documents",
+        ]
+        for text in headings:
+            with self.subTest(text=text):
+                self.assertIsNone(patterns._owning_family(text))
+        self.assertEqual(patterns.best_family(headings), (None, ()))
+
+        pages = topic_pages(headings)
+        result = seg.segment_document(
+            {}, build_pdf(pages), containers_from(pages), PDF
         )
-        # "Subtopic 3" contains "topic 3", but \bTopic cannot match inside it.
-        self.assertEqual(
-            patterns._owning_family("Subtopic 3: Fabrication").identifier,
-            "sbir_subtopic",
-        )
+        self.assertEqual(result.subtopics, ())
+        self.assertEqual(result.reason, "no_layer_accepted")
 
     def test_administrative_section_headings_match_nothing(self):
         # Measured on three real notices (docs/PDF_API_NOTES.md §4): this is
@@ -114,11 +163,11 @@ class PatternFamilyTests(unittest.TestCase):
 
     def test_best_family_requires_a_margin_over_the_runner_up(self):
         topic = [f"Topic Area {n} Alpha" for n in range(1, 5)]
-        technical = [f"Technical Area {n} Beta" for n in range(1, 4)]
-        self.assertEqual(patterns.best_family(topic + technical), (None, ()))
+        focus = [f"Focus Area {n} Beta" for n in range(1, 4)]
+        self.assertEqual(patterns.best_family(topic + focus), (None, ()))
 
         wide = [f"Topic Area {n} Alpha" for n in range(1, 7)]
-        family, hits = patterns.best_family(wide + technical)
+        family, hits = patterns.best_family(wide + focus)
         self.assertEqual(family, "topic_area")
         self.assertEqual(len(hits), 6)
 
@@ -127,14 +176,12 @@ class PatternFamilyTests(unittest.TestCase):
             patterns.best_family(["Topic Area 1 A", "Topic Area 2 B"]), (None, ())
         )
 
-    def test_roman_and_alphanumeric_ordinals_parse(self):
+    def test_alphanumeric_ordinals_parse(self):
+        # Roman-ordinal coverage retired with nsf_track; sub-lettered coverage
+        # moves to topic_area, which is the family that measured a real one
+        # (DE-FOA-0003627's Topic Area 1a/1b/1c).
         _family, hits = patterns.best_family(
-            ["Track I Alpha", "Track II Beta", "Track III Gamma"]
-        )
-        self.assertEqual([hit.ordinal for hit in hits], [1, 2, 3])
-
-        _family, hits = patterns.best_family(
-            ["Subtopic 1a Alpha", "Subtopic 2b Beta", "Subtopic 3c Gamma"]
+            ["Topic Area 1a Alpha", "Topic Area 2b Beta", "Topic Area 3c Gamma"]
         )
         self.assertEqual([hit.ordinal_label for hit in hits], ["1a", "2b", "3c"])
 
@@ -167,57 +214,15 @@ class EveryFamilySegmentsTests(unittest.TestCase):
             ("Category 3: Building Efficiency", "Building Efficiency",
              "Category 3"),
         ],
-        "area_of_interest": [
-            ("Area of Interest 1 Water Reuse", "Water Reuse", "Area of Interest 1"),
-            ("Area of Interest 2 Desalination", "Desalination", "Area of Interest 2"),
-            ("Area of Interest 3 Sensing", "Sensing", "Area of Interest 3"),
-        ],
         "dod_topic": [
             ("Topic 1: Quantum Sensing", "Quantum Sensing", "Topic 1"),
             ("Topic 2: Autonomy", "Autonomy", "Topic 2"),
             ("Topic 3: Materials", "Materials", "Topic 3"),
         ],
-        "technical_area": [
-            ("Technical Area 1 Autonomy", "Autonomy", "Technical Area 1"),
-            ("Technical Area 2 Sensing", "Sensing", "Technical Area 2"),
-            ("Technical Area 3 Networks", "Networks", "Technical Area 3"),
-        ],
         "thrust": [
             ("Thrust 1 Materials", "Materials", "Thrust 1"),
             ("Thrust 2 Devices", "Devices", "Thrust 2"),
             ("Thrust 3 Systems", "Systems", "Thrust 3"),
-        ],
-        "roses_element": [
-            ("B.1 Exoplanet Research", "Exoplanet Research", "B.1 Exoplanet Research"),
-            ("B.2 Heliophysics Science", "Heliophysics Science",
-             "B.2 Heliophysics Science"),
-            ("B.3 Astrobiology Science", "Astrobiology Science",
-             "B.3 Astrobiology Science"),
-        ],
-        "nsf_track": [
-            ("Track 1 Design", "Design", "Track 1"),
-            ("Track 2 Scale", "Scale", "Track 2"),
-            ("Track 3 Transition", "Transition", "Track 3"),
-        ],
-        "sbir_subtopic": [
-            ("Subtopic 1a Membrane Fabrication", "Membrane Fabrication",
-             "Subtopic 1a"),
-            ("Subtopic 2b Catalyst Synthesis", "Catalyst Synthesis", "Subtopic 2b"),
-            ("Subtopic 3c Reactor Design", "Reactor Design", "Subtopic 3c"),
-        ],
-        "priority_research": [
-            ("Priority Research Direction 1 Charge Transfer", "Charge Transfer",
-             "Priority Research Direction 1"),
-            ("Priority Research Direction 2 Interfaces", "Interfaces",
-             "Priority Research Direction 2"),
-            ("Priority Research Direction 3 Transport", "Transport",
-             "Priority Research Direction 3"),
-        ],
-        "research_thrust": [
-            ("Research Thrust 1 Interfacial Chemistry", "Interfacial Chemistry",
-             "Research Thrust 1"),
-            ("Research Thrust 2 Separations", "Separations", "Research Thrust 2"),
-            ("Research Thrust 3 Catalysis", "Catalysis", "Research Thrust 3"),
         ],
     }
 
