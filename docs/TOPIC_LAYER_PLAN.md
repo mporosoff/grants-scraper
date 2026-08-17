@@ -2,13 +2,15 @@
 
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
-Status: in progress · Version 8.7 · Written 2026-08-15 · **Revised 2026-08-17 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
+Status: in progress · Version 8.8 · Written 2026-08-15 · **Revised 2026-08-17 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
 
 > **Start at §18.** It defines the minimum path — the **nine** work packages that are actually being built (A–G plus **D½ Coverage**, added in 8.2, and **D¾ Forms**, added in 8.5) — and lists what is deferred and what it costs. §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
 >
 > **8.3 changes one thing structurally: the unit of judgment moves from the sibling *set* to the individual *span* (§6.4b), because a set-level verdict lets two policy paragraphs delete 70 DOE programmes.** §11 is reopened for the precision half only, on a measured run; its recall argument is untouched.
 >
 > **8.4 closes the two blocking storage decisions.** `MAX_TERMS` stays at 400 and subtopics ship in a lazily-loaded `data/subtopics.js` sidecar — one question, not two, once you measure that 60.3% of a cache record is a term map the browser never reads as content. **Nothing now blocks committing a cache except running the backfill again.** Every rate quoted against `docs/CORPUS_CENSUS.md`'s 20 documents is still superseded by `docs/COVERAGE_SURVEY.md` (§1.1).
+>
+> **8.8 corrects 8.7 against a second audit pass.** Provenance is keyed on how the parent→child relationship was **established**, not on document format — so `structural_siblings`, F1/F4 and PACER stay `inferred` even on an official solicitation — and provenance now **bounds** confidence rather than setting it. The source router only gives first refusal to a source that **answers credibly**, so an implausibly small structured answer declines instead of suppressing a working fallback, and corroboration/dedup is defined. Two overreaches withdrawn: structured sources **may** reach part of the 62% category-(a) population (several of those records point outward explicitly), and **only retrieval evaluation** is discipline-biased — extraction figures are corpus measurements. MURI no longer justifies the SAM.gov adapter.
 >
 > **8.7 accepts an outside provenance audit.** §5.1 replaces `subtopic_source` with a four-value ladder — `native` / `referenced` / `inline` / `inferred` — and derives confidence from provenance before method; §6.7 becomes a first-class ingestion path with a **source router** giving the least-ambiguous source first refusal; **package D⅝ Structured Umbrellas** lands before D¾ and builds **one** adapter (NSPIRES ROSES Table 3) before committing to more; Cov4 narrows to `inferred` and `inline`; and §17.9 forbids justifying priority by the maintainer's own field. **D⅝ addresses an orthogonal population — records whose child structure is published more explicitly or externally — and its gains must not be counted as improved generic segmentation.**
 >
@@ -2960,6 +2962,7 @@ this table.
 | M1 | Cov5 leaves the 757 no-span documents unchanged | Asserted in a session report, never run |
 | **M5** | **Discipline-stratified query and relevance set** | **18 of 37 queries (49%) are chemistry; all 3 profile probes are.** A ranking regression outside chemistry is invisible to §8.5, and any future gold relevance set built on it inherits one discipline's judgement. **Extraction-side figures are corpus measurements and are unaffected** (§8.5, §17.9) |
 | M4 | Read `344592` for MURI topics | Grants.gov finds MURI in its full text; part of §18.2's SAM.gov cost may already be reachable |
+| **M6** | **Name a verified SAM-only opportunity** | §18.2's adapter was justified from MURI's absence in our corpus, which is a fact about what we store. **Inference withdrawn; the residual gap is real but unnamed.** Blocked on a credential — human task |
 | — | F1/F4 candidate sets in Cov4's validation | Neither resembles the 22 sibling sets §11 measured (§11) |
 
 ### What is true and settled, so it is not relitigated
@@ -2968,7 +2971,7 @@ this table.
 PDF toolchain is `pdfplumber` + `pypdf`, never PyMuPDF · segmentation runs inside
 `extract_document_evidence.py` at a flag-guarded call site · nothing below `high`
 publishes unreviewed · **seven of §6.3's ten families are retired on measurement**
-(§6.3) · §11's recall half stays closed. Full list in §13 *Settled*.
+(§6.3) · provenance is established-by, not format, and bounds confidence rather than setting it (§5.1) · §11's recall half stays closed. Full list in §13 *Settled*.
 
 ---
 
