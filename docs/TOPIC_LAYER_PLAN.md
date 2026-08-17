@@ -2,13 +2,15 @@
 
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
-Status: in progress · Version 8.6 · Written 2026-08-15 · **Revised 2026-08-17 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
+Status: in progress · Version 8.7 · Written 2026-08-15 · **Revised 2026-08-17 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
 
 > **Start at §18.** It defines the minimum path — the **nine** work packages that are actually being built (A–G plus **D½ Coverage**, added in 8.2, and **D¾ Forms**, added in 8.5) — and lists what is deferred and what it costs. §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
 >
 > **8.3 changes one thing structurally: the unit of judgment moves from the sibling *set* to the individual *span* (§6.4b), because a set-level verdict lets two policy paragraphs delete 70 DOE programmes.** §11 is reopened for the precision half only, on a measured run; its recall argument is untouched.
 >
 > **8.4 closes the two blocking storage decisions.** `MAX_TERMS` stays at 400 and subtopics ship in a lazily-loaded `data/subtopics.js` sidecar — one question, not two, once you measure that 60.3% of a cache record is a term map the browser never reads as content. **Nothing now blocks committing a cache except running the backfill again.** Every rate quoted against `docs/CORPUS_CENSUS.md`'s 20 documents is still superseded by `docs/COVERAGE_SURVEY.md` (§1.1).
+>
+> **8.7 accepts an outside provenance audit.** §5.1 replaces `subtopic_source` with a four-value ladder — `native` / `referenced` / `inline` / `inferred` — and derives confidence from provenance before method; §6.7 becomes a first-class ingestion path with a **source router** giving the least-ambiguous source first refusal; **package D⅝ Structured Umbrellas** lands before D¾ and builds **one** adapter (NSPIRES ROSES Table 3) before committing to more; Cov4 narrows to `inferred` and `inline`; and §17.9 forbids justifying priority by the maintainer's own field. **D⅝'s value is new parents, not expanded ones — 62% of non-accepting documents have no hierarchy in any source.**
 >
 > **8.6 makes §15 readable.** A new **Open state at a glance** table at the top of §15 indexes every open decision, unmet gate, unfixed defect and outstanding measurement, and §15 gains a **Debt** section for the twelve threads that previously lived only in session reports. §6.7a is surfaced as a real §13 decision after fifteen sessions behind a pointer. **The Cov5 classifier re-run measured a precision effect of zero — and measured run-to-run variance larger than the signal it was looking for (§11).**
 >
@@ -2790,6 +2792,7 @@ this table.
 | Gate | Why it is not met |
 |---|---|
 | **Package D** | Correct-acceptance stopped at 42%, below the 50% threshold set for the package (§18.1) |
+| **Package D⅝** | Not started. **S1 (ROSES) only, then re-measure** — S2 and S3 stay unscheduled until a human reads S1d (§18.1) |
 | **Package D½** | Cov4, Cov5(done), Cov6 and Cov7 outstanding; **Cov4's "zero false rejections" cannot be shown in a single pass** — measured variance exceeds the measured rate (§11 caveat 2) |
 | **Any cache commit** | The D5 cache holds six pre-Cov5 summaries and is missing a span (§15 debt D1). Regenerate before committing anything derived from it |
 
@@ -2803,6 +2806,7 @@ this table.
 | D2 | **Three** families reject an ASCII hyphen — `dod_topic`, `component`, `technical_category`; the last also rejects `.` | §15 debt → Fm3 |
 | D3 | §6.6's HTML outline layer is specified and unbuilt; deliberately, on a population measured at 0 lists in 20 | §15 debt |
 | D4–D6 | 213 stale cache entries · 13 orphaned entries · 25 fetch failures across 5 hosts | §15 debt |
+| — | **Agency-HTML scrapers fail silently — HTTP 200, zero rows.** The characteristic failure of the structured sources D⅝ adds; mitigated by §7.4 canaries, which ship with S1 | §12, §7.4 |
 | — | `structural_siblings` is blind to **55% of the corpus's PDFs** (71 of 129 have no bookmarks) | §6.3a |
 | — | The aggregating-agency-page false positive: every acceptance rule passes on another opportunity's topic list | §6.3b |
 | — | Cov5's residual: `_locate_nodes`' `page_start_offset` fallback is still silent | §6.5 |
@@ -2814,6 +2818,8 @@ this table.
 | M2 / Cov7 | **30 more stratum-D records** | Closes over half of §1.1's 54–538 interval. Cheapest measurement in the project |
 | M3 | **Classifier run-to-run variance** | Measured incidentally at 1.6% against a 0.9% signal. Cov4's gate is undemonstrable until this is bounded |
 | M1 | Cov5 leaves the 757 no-span documents unchanged | Asserted in a session report, never run |
+| **M5** | **Discipline-stratified query set** | **18 of 37 queries (49%) are chemistry; all 3 profile probes are. Every retrieval figure in the plan is scored against one researcher's relevance** (§8.5, §17.9) |
+| M4 | Read `344592` for MURI topics | Grants.gov finds MURI in its full text; part of §18.2's SAM.gov cost may already be reachable |
 | — | F1/F4 candidate sets in Cov4's validation | Neither resembles the 22 sibling sets §11 measured (§11) |
 
 ### What is true and settled, so it is not relitigated
