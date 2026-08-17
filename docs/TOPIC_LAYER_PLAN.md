@@ -16,6 +16,54 @@ Status: in progress · Version 8.6 · Written 2026-08-15 · **Revised 2026-08-17
 
 ---
 
+## ⚠ What changed in 8.7 — the provenance audit
+
+**An outside audit argued that this plan over-weights generic document inference
+relative to hierarchies agencies already publish. Substantially accepted**, and
+the acceptance is structural rather than cosmetic: §5.1 ranks provenance, §6.7·0
+routes to the least-ambiguous source first, §18.1 inserts package D⅝ ahead of
+all remaining recogniser work, and Cov4 narrows to the inference it was designed
+to check.
+
+**The audit was right about the ordering.** Every scheduled recogniser item
+operated at the bottom rung on sources that had to be guessed at, while the
+sources agencies publish as data were unscheduled. NASA is the case in one
+agency: the family named for ROSES was **retired with zero correct matches in 90
+read records** (§6.3), its nine plausible umbrellas all fail at fetch time, and
+nobody had tried Table 3.
+
+**Two corrections to the audit, recorded because they change what D⅝ can claim.**
+
+1. **It cites 42% correct-acceptance. That figure is superseded and was never a
+   corpus rate.** 42% was 5 of the **12 enumerating documents in the hand-picked
+   census 20**, measured at the end of package D. `docs/COVERAGE_SURVEY.md`
+   established that the census was chosen to span shapes and enumerates at 60%
+   against a corpus rate near 26%, so every rate against it flatters the design
+   by roughly 2×. The current figures are in `docs/FAMILY_TAXONOMY.md`: **the ten
+   families reach ~10% of the enumerating population**, and the enumerating
+   population is itself **~171 records, 11.6% of the catalog** (§1.1). The audit's
+   conclusion survives its wrong number — it is stronger at 10% than at 42% — but
+   the number should not be requoted.
+
+2. **Structured sources do not address the 62% (a) population, and nothing in
+   D⅝ should be read as claiming they do.** `docs/FAMILY_TAXONOMY.md` §1
+   classifies every non-accepting document across 60 read records: **33 of 53 —
+   62% — contain no enumerated list of fundable subdivisions in any source.**
+   They are single-project cooperative agreements, single-programme NOFOs and
+   formula allotments. There is no table to parse, no program page to follow, and
+   no hierarchy to import, because **there is no hierarchy.** A `native` adapter
+   changes nothing for them.
+
+   > **So D⅝'s value is new parents, not expanded ones.** It reaches umbrella
+   > records that generic inference currently misses entirely — ROSES elements
+   > that never get fetched, DOE programmes that live on program pages — and it
+   > does not widen coverage of records already read and found to enumerate
+   > nothing. Any measurement of D⅝ must report **new parents gained**, separately
+   > from any change to existing records, which is why S1d's gate says exactly
+   > that.
+
+---
+
 ## ⚠ What changed in 8.5 — the family taxonomy
 
 **`docs/FAMILY_TAXONOMY.md` (2026-08-17) asked the one question the census and the survey never did: are these the right families?** Both earlier documents measured acceptance *against* §6.3's ten. This one induced a taxonomy from a third stratified sample — **50 records, 170 documents opened, disjoint from the census 20 and the survey 40** — classified by `claude-sonnet-5` at adaptive thinking with the extractor's own form tags withheld from the prompt, and cross-checked by running production's `FAMILIES` tuple over every document.
@@ -88,7 +136,7 @@ Package C opened with a corpus census (`docs/CORPUS_CENSUS.md`): 20 notice docum
 | §6.7: `DE-FOA-0003600` "does not enumerate research areas… the text genuinely is not there" | **False.** It carries **286 bookmarks** including `2. Basic Energy Sciences (BES) → (a) Materials Chemistry … (c) Synthesis and Processing Science` | Nobody had opened the file. The claim was inferred from the document's reputation as an umbrella |
 | §18.2: the `program_taxonomy` deferral costs the DOE BES omnibus all child records — "the most painful single deferral in this table" | **Substantially reduced.** The children, their descriptions, their page anchors and their topic tagging are reachable by Layer A + §6.3a, as ordinary `inline` subtopics. Program managers, stable URLs, deeper taxonomy levels and cross-year identity still need the scraper | The premise the deferral rested on was the §6.7 error above |
 | Package D begins with pattern tuning | **Begins with two segmenter fixes** (D0a, D0b), gated before any tuning | Both defects currently present as *pattern* failures. Tuning against that reading would relax rule 2 or widen a family — §18.3's most damaging possible change |
-| `dod_topic` — "Typical source: MURI, ONR, ARO" | **MURI is absent from the corpus entirely** — zero mentions across 958 evidence entries. The family is validated only by the AFOSR DEPSCoR notice's identical `Topic N:` convention | MURI is SAM.gov-only, and that adapter is deferred (§18.2) |
+| `dod_topic` — "Typical source: MURI, ONR, ARO" | **Re-verified 2026-08-17 and the claim needs splitting.** MURI is absent from the *stored* corpus — zero matches across all 1,475 catalog records and all 958 evidence entries — but a **live Grants.gov search returns one record, `344592` (`W911NF-23-S-0001`, DEVCOM ARL BAA), which IS in the catalog**. MURI is in Grants.gov's full-text index for that notice and not in our stored fields, whose description is truncated at 2,793 characters. So "absent entirely" was an artifact of what we store. What is confirmed is narrower and still sufficient: **no MURI solicitation is posted on Grants.gov as its own notice**, and there is no MURI document validating this family. The family is validated only by the AFOSR DEPSCoR notice's identical `Topic N:` convention | MURI is SAM.gov-only, and that adapter is deferred (§18.2) |
 
 **Two things this revision deliberately does not do.** It does not cover the AFOSR shape — 39 named portfolios with no outline at all — which needs a different mechanism, sketched as `label_run` in §6.3a and left unbuilt with its risks stated. And it does not calibrate §6.4a's six numeric thresholds, which are reasoned starting points that package D must fit against the census corpus. This document has twice recorded numbers that proved wrong when run (§6.1's library versions, §6.2's font-size branch); these are flagged as unmeasured rather than presented as settled.
 
@@ -2943,6 +2991,7 @@ explicitly declined with a reason — never by being forgotten.
   that they still produce none, and still for the same recorded reason, is
   **asserted and not measured**. A widened title matcher could in principle
   locate a candidate that previously failed, which is how `360678` gained a span
+- [ ] **M4. Read `344592` (`W911NF-23-S-0001`, DEVCOM ARL BAA) for MURI topics.** A live Grants.gov search finds MURI in its full text; our stored description is truncated at 2,793 chars and does not contain it. **If that notice enumerates MURI topics inline, part of what §18.2's SAM.gov deferral is said to cost is already reachable** — the record is in the catalog and fetchable today. Cheap: one document, and it is already in the development corpus §6.3 names
 - [ ] **M2. Read 30 more stratum-D records** — the cheapest outstanding
   measurement in the project, and the one that closes over half of §1.1's
   interval. Tracked as **§18.1 Cov7**; listed here so it is visible without
@@ -3452,7 +3501,7 @@ Each line states what is lost. None of this is abandoned; all of it is a later d
 
 | Deferred | What is lost by deferring it |
 |---|---|
-| **SAM.gov adapter** (§7.5) | MURI specifically, and any SAM.gov-only notice. **Not** the development corpus — 31 BAA records are already in the catalog, which is why this was safe to cut. **One consequence the census made concrete:** MURI is absent from the corpus *entirely* — zero mentions across all 958 evidence entries — so `dod_topic`, the family §6.3 lists as serving it, has **no MURI document validating it**. It is validated instead by the AFOSR DEPSCoR notice's identical `Topic N:` convention across twelve topics, which confirms the *convention* but not the agency. Do not read a green `dod_topic` result as evidence MURI will segment |
+| **SAM.gov adapter** (§7.5) — **justification corrected 2026-08-17** | MURI specifically, and any SAM.gov-only notice. **The MURI half was verified this session and is upheld with a sharper basis.** A live Grants.gov search for `MURI` returns **exactly one record — `344592`, the DEVCOM ARL Broad Agency Announcement, which is already in the catalog** — and it is a general foundational BAA, not a MURI solicitation; a search for the expanded phrase returns 25 unrelated NIH, NSF and State records matching on the words. **There is no standalone MURI notice on Grants.gov, so the deferral's premise holds.** Two corrections to how it was argued, though: the supporting claim "MURI appears zero times across the corpus" measured **stored fields**, which are truncated — Grants.gov's own index finds MURI in `344592`'s full text, so the text exists in a document this project can already fetch. And it follows that **`344592` is worth reading before SAM.gov is built**: if the ARL BAA enumerates MURI topics inline, part of what this deferral is said to cost is already reachable at rung 3. Unmeasured; recorded as §15 debt M4. **Not** the development corpus — 31 BAA records are already in the catalog, which is why this was safe to cut. **One consequence the census made concrete:** MURI is absent from the corpus *entirely* — zero mentions across all 958 evidence entries — so `dod_topic`, the family §6.3 lists as serving it, has **no MURI document validating it**. It is validated instead by the AFOSR DEPSCoR notice's identical `Topic N:` convention across twelve topics, which confirms the *convention* but not the agency. Do not read a green `dod_topic` result as evidence MURI will segment |
 | **NSPIRES activation** (§10) | NASA ROSES program elements stay invisible as individual records. NASA remains partially covered via Grants.gov |
 | **`program_taxonomy` and all `referenced` subtopics** (§6.7) | **Substantially reduced — see the reassessment below.** What is genuinely lost is now program-manager identity, stable per-program URLs, and taxonomy depth beyond what the notice prints. The per-program *children themselves* are no longer part of this deferral, because the census found them in the notice |
 | **`expected_solicitations.json` + `check_expected.py`** (§7.4) | No assertion that a known umbrella silently vanished from a healthy source. Mitigated slightly by #30 already being noisy, which this would have made noisier |
