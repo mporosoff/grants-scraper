@@ -463,30 +463,64 @@ is substantially accepted; §6.7 and §18.1 carry the structural consequences.
 
 The ladder is ordered by **how much this project had to guess**:
 
-| Value | The agency has… | Example |
+**The test is how the parent→child relationship was established — never the
+document's format, and never which layer happened to read it.**
+
+| Value | The relationship is established by… | Example |
 |---|---|---|
-| **`native`** | published an explicit child list, table or API — the subdivisions are *data*, not prose | NSPIRES ROSES Table 3; a program-element API; a solicitation table with one row per topic |
-| **`referenced`** | published a program page that establishes the parent→child relationship, off the solicitation | DOE Office of Science program pages under `science.osti.gov`; ONR department pages |
-| **`inline`** | enumerated the children **in** the solicitation, in a form a family recognises | `Topic Area 1 / 1a / 1b`; `(a) Materials Chemistry` under a bookmark tree |
-| **`inferred`** | enumerated nothing recognisable, and generic structural inference had to establish the set | `structural_siblings` over an outline; a bare-numbered run; a label run |
+| **`native`** | the agency publishing the children **as data** — an explicit child list, table or API in which each row *is* a child | NSPIRES ROSES Table 3; a program-element API |
+| **`referenced`** | an agency **program page off the solicitation** asserting that these programmes belong to this parent | DOE Office of Science program pages under `science.osti.gov`; ONR department pages |
+| **`inline`** | the **solicitation itself explicitly stating the fundable child relationship** — text that says applicants apply to one of these, with the members named | *"Applications must address one of the following Topic Areas: Topic Area 1 … Topic Area 3"*; a labelled ordinal set whose label asserts fundability |
+| **`inferred`** | **this project**, from structure or position, with no such statement to rely on | `structural_siblings` over a bookmark tree; F1 bare-numbered runs; F4 label runs; PACER-style secondary-attachment inference |
 
-**The distinction that matters is not format, it is who asserted the
-relationship.** A bookmark tree is a *layout* artifact that this project reads as
-a hierarchy; a ROSES table is the agency stating its own hierarchy. Both may
-produce identical-looking records, and they do not deserve identical trust.
+**Three consequences, and they are the whole point of the distinction.**
 
-#### Confidence derives from provenance first, method second
+1. **Generic structural extraction is `inferred` even when it runs on an
+   official solicitation.** `structural_siblings` over `DE-FOA-0003600`'s
+   bookmark tree is `inferred`, not `inline` — a bookmark tree is a *layout*
+   artifact this project reads as a hierarchy, and the notice never says those
+   nodes are the fundable units. Same for every F1 and F4 recogniser, and for
+   PACER's 18 topics won from a secondary attachment. **Being in an authoritative
+   document does not make an inference authoritative.**
+2. **`inline` is narrower than "a family matched".** A family match is evidence
+   *for* `inline` and is not sufficient on its own: `Topic Area 1` in a heading is
+   `inline` when the notice states applicants choose among Topic Areas, and it is
+   `inferred` when the recogniser is doing the asserting. When it is unclear,
+   **record `inferred`** — the ladder fails downward.
+3. **The rungs are mutually exclusive.** Exactly one value per record, chosen by
+   the strongest *establishing* evidence, not by the number of paths that agree.
+   Corroboration is recorded separately (§6.7·0), never by promoting a rung.
+
+**`segmentation_method` stays a separate field and keeps its current meaning.**
+Provenance says *who asserted the relationship*; `segmentation_method` says *how
+this pipeline obtained the spans* (`outline`, `toc`, `heading_font`, `numbered`,
+`outline_structural`, or an adapter name). They vary independently: two records
+can share `outline_structural` and differ in provenance, and a `native` record
+has a provenance but no segmentation method at all. **Do not derive either from
+the other**, and do not collapse them in the cache or in diagnostics.
+
+#### Provenance bounds confidence; it does not set it
 
 Confidence was previously a property of the **segmentation method** alone —
-Layer A `high`, `outline_structural` `medium`, Layer D `low`. That is now the
-second term, not the first:
+Layer A `high`, `outline_structural` `medium`, Layer D `low`. Provenance now
+supplies a **ceiling**, and the value inside that ceiling is still earned by
+source-specific validation. **Provenance is not a shortcut for validation, and a
+record must never be promoted merely for sitting on a high rung.**
 
-| Provenance | Ceiling | Floor | Rationale |
-|---|---|---|---|
-| `native` | `high` | `high` | There is nothing to be uncertain about. The agency published the list; a parser either read it or failed loudly |
-| `referenced` | `high` | `medium` | The relationship is asserted by the agency; the risk is staleness and mis-linkage, not invention. `medium` when the parent match is heuristic |
-| `inline` | `high` | `low` | Method decides within the band, exactly as today |
-| `inferred` | **`medium`** | `low` | **Never `high`.** §6.3a already caps `structural_siblings` at `medium`; this generalises that cap to the whole provenance class rather than to one family |
+| Provenance | Ceiling | Reaches the ceiling only when… |
+|---|---|---|
+| `native` | `high` | the parser's own structure checks pass — expected columns present, row count plausible against the source's canary (§7.4), parent match exact. **A `native` parse that fails any of these is not `high`; it is a failed parse and publishes nothing** |
+| `referenced` | `high` | the parent match is exact rather than heuristic **and** the page was fetched this run. Heuristic parent match, or a stale snapshot, caps at `medium` |
+| `inline` | `high` | method decides within the band, exactly as today |
+| `inferred` | **`medium`** | **never `high`, whatever the method or the document.** §6.3a caps `structural_siblings` at `medium`; this generalises the cap from one family to the whole class, and it is the one mechanical rule here |
+
+**Why only the `inferred` cap is mechanical.** That cap encodes something
+measured: generic structure carries no evidence about fundability, which §6.4a
+states and D4 measured. The other three rows are ceilings precisely because
+`native` and `referenced` sources have their own failure modes — a restyled
+table, a stale program page, a mis-linked parent — and those are checked per
+source, not assumed away by the rung. **A high rung means the *relationship* is
+well-attested; it says nothing about whether this run read it correctly.**
 
 **Two rules follow, and they are the point of the ladder:**
 
@@ -495,7 +529,9 @@ second term, not the first:
    is twelve and the discrepancy is a **canary failure** (§7.4), not a merge.
 2. **`_demote()`'s secondary-attachment cap applies to `inline` and `inferred`
    only.** A `native` list does not become less trustworthy for having been found
-   in the second attachment fetched.
+   in the second attachment fetched. Note this does **not** rescue PACER: its 18
+   topics are `inferred` (consequence 1 above), so the cap still applies to them
+   and Cov4 is still what unblocks them (§18.1).
 
 #### Interaction with §6.4b's span-level judgment
 
