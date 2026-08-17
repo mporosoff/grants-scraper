@@ -16,6 +16,7 @@ from . import doe_exchange   # noqa: F401  (ARPA-E + DOE EERE Exchange; enabled)
 from . import nspires        # noqa: F401  (NASA NSPIRES; disabled shell)
 from . import vpr_email      # noqa: F401  (VPR email digest)
 from . import jhu_fellowships  # noqa: F401  (JHU RDT fellowship lists)
+from . import nasa_roses  # noqa: F401  (NASA ROSES native; disabled)
 
 __all__ = ["rss", "nsf_cbet", "sample", "nyserda", "ur_infoready", "doe_exchange",
-           "nspires", "vpr_email", "jhu_fellowships"]
+           "nspires", "vpr_email", "jhu_fellowships", "nasa_roses"]
