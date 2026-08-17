@@ -1248,7 +1248,49 @@ def running_lines(containers, threshold=0.4):
 | Amendment renumbers topics | Title-first matching (§5.3) |
 | **Subdivisions that are one-per-attachment** — new shape, 2026-08-16 | State's `363607` Advancing Global Health APS carries six Addenda — Cameroon, Côte d'Ivoire, Mozambique, NTDs, Nutrition, Surveys and Surveillance — **each a separate PDF and each a fundable subdivision**, with the APS itself only saying *"through specific Addenda, the Department will signal priorities."* Nothing in §6.2's four layers models a subdivision that **is** a whole document rather than a span inside one. Recorded, not designed; the record is also unreachable, so nothing is fetched for it today |
 
-### 6.7 Topics by reference — the DOE BES case
+### 6.7 Topics by reference — a first-class ingestion path
+
+**Retitled and promoted in 8.7.** This section was written as *"the DOE BES
+case"* and read as a one-agency workaround, which is how a whole class of
+authoritative sources came to sit behind every generic-inference item in the
+plan. An outside audit named that inversion and it is accepted. **Referenced —
+and above it `native` — are ingestion paths of the same standing as inline
+segmentation, not fallbacks for when segmentation fails.** DOE BES is the worked
+example below, not the scope.
+
+#### 6.7·0 The source router — least-ambiguous source gets first refusal
+
+**The rule.** For any record, resolve its subdivisions from the *highest rung of
+the §5.1 provenance ladder that answers*, and stop there. Lower rungs are not
+consulted for that record unless the higher one **declines**, and a higher rung
+that answers *wrongly* is a canary failure (§7.4), never an invitation to fall
+back.
+
+| Order | Rung | Asks | Declines when |
+|---|---|---|---|
+| 1 | **`native`** | Is there a published child list, table or API for this parent? | No registered native source matches this parent |
+| 2 | **`referenced`** | Does an agency program page establish this parent's children? | No program-page rule matches |
+| 3 | **`inline`** | Does the solicitation enumerate them in a recognised form? | No family accepts (§6.4) |
+| 4 | **`inferred`** | Can generic structural inference establish a set? | `no_layer_accepted` |
+
+**Why first refusal rather than merge.** Merging a native list with an inferred
+one produces a record whose provenance is not a single value and whose
+disagreements are invisible. Twelve ROSES elements and nine inferred spans is
+not twenty-one children and not a union — it is one right answer and one
+measurement that the parser or the notice has drifted. §5.1's rule 1 states it;
+this is where it is enforced.
+
+**Why this changes the order of work and not just the vocabulary.** Every
+mechanism in §18.1's D¾ operates at rung 4. Rung 1 for a given parent is
+strictly better evidence *and*, for the sources named in §18.1 D⅝, strictly
+cheaper to parse — a table with one row per element against a heuristic over a
+200-page PDF. **The plan had rung 4 scheduled and rung 1 unscheduled.** That is
+the inversion, and §18.1 now fixes it.
+
+**What the router does not do.** It does not improve coverage of records that
+enumerate nothing anywhere. §18.1 D⅝ is explicit about this: its value is **new
+parents**, not expanded ones.
+
 
 **Correction to v6.2.** This section previously opened by calling the DOE Office of Science omnibus "the single largest remaining gap." It is not a gap — it is the single most-worked case in the repository. `scripts/sources/discoverability.py` carries two rules for it (`doe-office-of-science-umbrella`, `doe-basic-energy-sciences`), keyed on both `DE-FOA-0003600` and the title phrase "office of science financial assistance," attaching eleven Topic-facet tags and nineteen searchable terms, with `science.osti.gov/bes/Research` and `.../csgb/Research-Areas/Catalysis-Science` cited as evidence. A search for "catalysis" finds that FOA today.
 
