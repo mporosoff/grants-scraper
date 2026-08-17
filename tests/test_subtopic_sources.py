@@ -381,6 +381,73 @@ class HtmlAttachmentTests(unittest.TestCase):
         self.assertTrue(sources._is_html_stub("notice.HTML", 400))
 
 
+# `Topic N:` rather than the real notice's `Topic N –`, for one reason that is
+# a fixture limit and not a product limit: tests/fixtures/minipdf.py writes
+# latin-1, which has no en-dash. `dod_topic` matches `[:.–—]`, so both forms
+# reach the same family and the ranking behaviour under test is unchanged.
+#
+# Two observations recorded rather than fixed, both out of scope here (§18.1
+# Cov3 adds no family and tunes no threshold): an **ASCII hyphen** does not
+# match `dod_topic` at all -- which is how the first draft of these tests
+# failed -- and whether any real notice writes `Topic 1 - Title` with a plain
+# hyphen is unmeasured.
+PACER_TOPICS = [
+    "Topic 1: Aero-Structures",
+    "Topic 2: Propulsion Technologies",
+    "Topic 3: Vehicle Integration and Analysis",
+    "Topic 4: Experimental Sciences",
+    "Topic 5: Autonomous Control Branch",
+]
+
+
+class FurniturePrimaryTests(unittest.TestCase):
+    """§18.1 Cov3 -- AFRL PACER `349554`, traced against the live record.
+
+    `source_for_record()` picks `Atch 10 BAA Attachment - Security Program
+    Questionnaire.pdf`, one page and 1,853 characters. `attachment_sources`
+    offers 6 of the record's 17 attachments and `collect_attachments` ranks the
+    real BAA first, because its description reads "PACER BAA". The primary
+    returns `no_layer_accepted`, `FA2391-23-S-2403.pdf` returns 18 spans, and
+    the better result wins on score rather than on order.
+
+    Cov3 needed no code change -- this test is why that claim is checkable.
+    """
+
+    def test_a_furniture_primary_loses_to_the_attachment_holding_the_topics(self):
+        result, document, diagnostics = run(
+            None, BLAND,
+            ["FA2391-23-S-2403.pdf", "Atch 3 Section K - Representations.pdf"],
+            {
+                "FA2391-23-S-2403.pdf": build_pdf(
+                    [[heading(text), line(body_for(text))] for text in PACER_TOPICS]
+                ),
+                "Atch 3 Section K - Representations.pdf": BLAND,
+            },
+        )
+        self.assertEqual(len(result.subtopics), len(PACER_TOPICS))
+        self.assertEqual(document["name"], "FA2391-23-S-2403.pdf")
+        self.assertEqual(document["source_kind"], "secondary_attachment")
+        self.assertEqual(
+            diagnostics["attempts"][0],
+            {"source": "primary", "outcome": "no_layer_accepted", "subtopics": 0},
+        )
+
+    def test_the_recovered_list_is_capped_at_low_and_never_publishes(self):
+        # Not a defect and not mine to change: the cap is §6.6's, on a measured
+        # secondary-won precision of 0 of 1, and lifting it re-admits D4's
+        # fabrications. PACER is the counter-example that makes the review
+        # queue (Cov4) worth building -- 18 correct spans, invisible.
+        result, _document, _diagnostics = run(
+            None, BLAND,
+            ["FA2391-23-S-2403.pdf"],
+            {"FA2391-23-S-2403.pdf": build_pdf(
+                [[heading(text), line(body_for(text))] for text in PACER_TOPICS]
+            )},
+        )
+        self.assertEqual(len(result.subtopics), len(PACER_TOPICS))
+        self.assertEqual(result.confidence, "low")
+
+
 class SubtopicOnlySourceTests(unittest.TestCase):
     """§18.1 Cov1 -- records source_for_record() declines.
 
