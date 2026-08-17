@@ -367,7 +367,7 @@ python ask_taxonomy.py
 | `thinking` | **omitted** | On Sonnet 5 that runs adaptive thinking. §11 measures the alternative — `{"type":"disabled"}` — as the whole difference between 88% and 54% span-level precision, and states the requirement as not optional |
 | `max_tokens` | 12,000 | Caps thinking *and* response text together on Sonnet 5. A `max_tokens` stop is recorded as an error, never parsed from a truncated object |
 | calls | 170, one per document | |
-| measured estimate | ~730 K input / ~153 K output tokens, **≈ $4.49 at list pricing** | The run prints measured token counts and actual cost at the end |
+| pre-run estimate | ~730 K input / ~153 K output tokens, ≈ $4.49 at list | **Actual: 846,201 in / 51,952 out, $3.32.** The input estimate was 14% low and the output estimate 3× high; the script prints measured totals at the end |
 
 The request shape follows `rebaseline.py` from the §11 session, which was run
 against the real API — it is observed, not inferred (§0.4 rule 10). Only `text`

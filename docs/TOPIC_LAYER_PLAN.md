@@ -2,13 +2,34 @@
 
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
-Status: in progress · Version 8.4 · Written 2026-08-15 · **Revised 2026-08-17 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), and a size/BM25 measurement that closed both blocking storage decisions (§12, §13)**
+Status: in progress · Version 8.5 · Written 2026-08-15 · **Revised 2026-08-17 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
 
-> **Start at §18.** It defines the minimum path — the **eight** work packages that are actually being built (A–G plus **D½ Coverage**, added in 8.2) — and lists what is deferred and what it costs. §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
+> **Start at §18.** It defines the minimum path — the **nine** work packages that are actually being built (A–G plus **D½ Coverage**, added in 8.2, and **D¾ Forms**, added in 8.5) — and lists what is deferred and what it costs. §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
 >
 > **8.3 changes one thing structurally: the unit of judgment moves from the sibling *set* to the individual *span* (§6.4b), because a set-level verdict lets two policy paragraphs delete 70 DOE programmes.** §11 is reopened for the precision half only, on a measured run; its recall argument is untouched.
 >
 > **8.4 closes the two blocking storage decisions.** `MAX_TERMS` stays at 400 and subtopics ship in a lazily-loaded `data/subtopics.js` sidecar — one question, not two, once you measure that 60.3% of a cache record is a term map the browser never reads as content. **Nothing now blocks committing a cache except running the backfill again.** Every rate quoted against `docs/CORPUS_CENSUS.md`'s 20 documents is still superseded by `docs/COVERAGE_SURVEY.md` (§1.1).
+>
+> **8.5 replaces §6.3.** The ten families were written from expectation and have now been tested against the corpus rather than measured against. **Seven are retired: five never fired across 170 real documents and two produced only false positives.** §6.3 is now an induced taxonomy of six *forms*, ordered by measured coverage, and **§18.1 is re-ordered so Cov4's classifier lands before any new family work** — the two largest uncovered forms are both unsafe on structure alone.
+
+---
+
+## ⚠ What changed in 8.5 — the family taxonomy
+
+**`docs/FAMILY_TAXONOMY.md` (2026-08-17) asked the one question the census and the survey never did: are these the right families?** Both earlier documents measured acceptance *against* §6.3's ten. This one induced a taxonomy from a third stratified sample — **50 records, 170 documents opened, disjoint from the census 20 and the survey 40** — classified by `claude-sonnet-5` at adaptive thinking with the extractor's own form tags withheld from the prompt, and cross-checked by running production's `FAMILIES` tuple over every document.
+
+**The result is that §6.3 was mostly wrong, and wrong in a way that was invisible to acceptance-rate measurement.** A family that never fires costs nothing and shows up nowhere; seven of the ten are in that state or worse.
+
+| Was (§6.3, written from expectation) | Is (measured over 170 documents / 90 read records) | Why it matters |
+|---|---|---|
+| Ten ordinal families, each with a "typical source" | **13 in code** (D3 added three, undocumented in §6.3 until now), of which **8 never fire** across 170 documents | §6.3's table has been stale since D3, and §17.2's "the code is authoritative" applied to it and went unchecked |
+| The families are narrow deliberately, and narrowness is the safety property | **Narrow is not the same as correct.** `roses_element` fired on **6 documents and 0 real lists** — `A.1 BACKGROUND AND OBJECTIVES`, `C.3 Budget Documents` — reproducing the census's `332894` false positive on new documents, with no correct match anywhere in 90 records | Two families are net-negative: they contribute only false-positive surface. Retiring them is a precision *gain*, not a recall cost |
+| The largest pattern blind spot is "named subdivisions with no ordinal" | Correct, and now sized: **F4 named/bulleted is 9 of 90 read records, ~73 catalog.** But **F1 bare-numbered is 8 of 90 and the most *stably* measured uncovered form** | The most common uncovered form is the one §6.3 and §18.3 forbid adding. §18.3 now carries exit criteria rather than a flat prohibition |
+| Six forms unknown; families assumed to span the space | **Six forms exist. One is covered.** The ten reach ~17 of ~171 umbrella records — **10% of the enumerating population** | 90% of umbrellas use a form nothing recognises. That is the recall gap, and it is not a tuning gap |
+| Tabular lists unconsidered | **F5 tabular is real and new** — `363530` presents 12 topics as table rows, and they are *the same 12 topics* as `363526`, which presents them as headings. `extract_containers` has no table path | One program office, two notices, two forms, one reachable. A presentation variant, not a new population |
+| ~128 umbrella parents, 8–9% | **~171 records, 11.6%**, on 87 stratified records at 12–22 per stratum. Band **54–538 (3.7%–36.5%)** | §1.1 corrected. The number to plan against is the A/B/C core — **~80 records, band 38–148** |
+
+**The methodological finding, stated because it generalizes past §6.3.** Three families were written *from measurement* — `focus_area`, `component` and `technical_category`, all added in D3 from documents the census had read. **All three have corpus support.** Seven of the ten written *from expectation* do not. That is a 3-for-3 record against a 3-for-10 one, and §17.8 now makes it a rule.
 
 ---
 
@@ -268,15 +289,29 @@ No retrieval tuning fixes this. The discriminating text is not in any indexed fi
 
 ### 1.1 How large is this problem, honestly
 
-**Most records in this catalog are not umbrellas, and this section previously implied otherwise by arguing from four vivid examples.** `docs/COVERAGE_SURVEY.md` measured it on a 40-record stratified sample, drawn across attachment profile and agency and deliberately disjoint from the census 20:
+**Most records in this catalog are not umbrellas, and this section previously implied otherwise by arguing from four vivid examples.** *(Revised 8.5. The figures below supersede the survey's ~128 / 8–9%, which rested on 40 records at 6–10 per stratum; `docs/FAMILY_TAXONOMY.md` adds 50 more and re-derives them on 87.)*
 
-> **10 of 40 sampled records (25%) carry an enumerated set of fundable subdivisions. 7 of the 10 clear §6.4 rule 1's three-item floor.**
+> **23 of 87 stratified-drawn records (26%) carry an enumerated set of fundable subdivisions.**
 
-Extrapolated per stratum — each stratum's hit rate against that stratum's catalog population — that is a point estimate of **~128 umbrella parents catalog-wide, ~115 of them with three or more subdivisions: roughly 8–9% of 1,475 records.** The stratum samples are 6–10 records each, so the interval is wide; the top of the plausible range is around **200 records, ~13%**. Quote the range, not a single number, and quote the survey rather than the census — the census's 12-of-20 was a property of a sample chosen to span shapes.
+Extrapolated per stratum — each stratum's hit rate against that stratum's catalog population — that is a point estimate of **~171 umbrella parents catalog-wide, 11.6% of 1,475 records**, with a 95% band of **54–538 records (3.7%–36.5%)**.
+
+**Quote the band, and know which part of it is real.** The width is not evenly distributed; it is almost entirely two strata:
+
+| | Catalog | Read | Hits | Rate | Catalog range |
+|---|---|---|---|---|---|
+| **A/B/C — records with PDF attachments** | 332 | 62 | 21 | 34% | **38–148** |
+| D — any non-PDF attachment | 483 | 12 | 1 | 8% | 7–171 |
+| E — zero attachments, agency URL | 660 | 13 | 1 | 8% | 9–220 |
+
+> **The number to plan against is the A/B/C core: ~80 records, band 38–148.** Those three strata are read at 22, 22 and 18 records against populations of 215, 90 and 27 — C is 67% censused. **Strata D and E contribute 91 of the 171 on a single hit each**, against a combined population of 1,143 with 25 reads between them. Any figure that leans on D or E is arithmetic on n=1.
+
+Two corrections to how this was previously stated. **The census 20 must never enter a rate** — it was hand-picked to span shapes and enumerates at 60%; pooling it into the stratified numerators inflates the estimate from 171 to 230, and `docs/FAMILY_TAXONOMY.md` §4.2 records making and catching that exact error. And **a record whose document was never retrieved is not a measured zero** — five survey records previously counted as non-enumerating are reclassified as unknown, because a JavaScript shell or a login wall is evidence of nothing (§18.1's miss taxonomy, category (e)).
 
 **The record count understates the stake, and that is the actual argument for building this.** Umbrellas are the multi-award programs: a single AFRI notice funds 37 program areas, DOE's Office of Science omnibus 70 sub-programs, the Genesis Mission 21 challenge areas across 98 focus areas, AFRL PACER 18 topics. A single-project cooperative agreement — which is what most of the other ~91% of records are — funds one award. So a tenth of the records covers a much larger share of the dollars a PI could actually apply for, and it is precisely the share where one record collapses many distinct opportunities into one lexically flat card.
 
-**What this bounds.** The ceiling on this feature is roughly one record in ten gaining children. It is not a catalog-wide transformation, and a design decision that trades precision on the other nine-tenths for recall on this tenth is a bad trade — which is what §18.3's asymmetry says in different words, now with a denominator behind it.
+**What this bounds.** The ceiling on this feature is roughly one record in eight or nine gaining children. It is not a catalog-wide transformation, and a design decision that trades precision on the other seven-eighths for recall on this eighth is a bad trade — which is what §18.3's asymmetry says in different words, now with a denominator behind it.
+
+**The cheapest measurement that would tighten this, and it is one thing:** **read 30 more stratum-D records.** D holds 483 records, has 12 reads, contributes 40 of the point estimate on one observation, spans 7–171 on its own, and produced the corpus's only tabular list. Stratum E is larger but its ceiling is bounded by reachability — 313 of its records have no fetchable source of any kind — so D is where the interval actually closes. This is the successor to the survey's own "sample C and E" recommendation, which C has now discharged.
 
 ## 2. Scope
 
@@ -832,34 +867,73 @@ Note the method name changed from v6.2's `heading_regex` to **`heading_font`**, 
 
 **Layer D — plain numbered fallback** (`low`, text only). Regex over `containers` text, no typographic signal. **Low confidence never publishes** — settled, see §13. It is written to the cache with `confidence: "low"` for diagnostics and routed to the review queue, and the merge in §7.1 filters it out. A wrong subtopic is worse than a missing one: it puts a plausible-looking card with a page anchor in front of a PI, and the cost of them writing a proposal against a topic that does not exist dwarfs the cost of them not seeing it.
 
-### 6.3 Pattern families
+### 6.3 The form taxonomy — induced, not assumed
 
-`scripts/subtopic_patterns.py`. Each family: id, regex with an ordinal capture group, expected agencies.
+**Rewritten in 8.5 from `docs/FAMILY_TAXONOMY.md`. Every earlier version of this section listed families this project expected to find; this one lists forms the corpus was measured to contain.** That distinction is the point of the rewrite, and §17.8 makes it a standing rule.
 
-| Family | Pattern (illustrative) | Typical source |
+`scripts/subtopic_patterns.py` holds the implementation. This section is now organized by **form** — a mechanical description of how a document delimits its subdivisions — with the families that serve each form named underneath. Forms are ordered by **measured catalog coverage**, which is also the order §18.1 works them in.
+
+#### The six forms
+
+Measured over **90 read records** — the census 20, the survey 40, and the taxonomy 50. Coverage estimates come only from the 87 stratified-drawn records; the census contributes form discovery and never a rate (§1.1).
+
+| Form | Records (of 90) | Catalog est. | How items are delimited | Served by |
+|---|---|---|---|---|
+| **F4** named or bulleted, **no counter at all** | **9** | **~73** — but ~22 excluding a single stratum-E observation | a bullet glyph, or nothing: position or a repeated label is the only delimiter | **nothing.** `label_run` (§6.3a) deferred; `structural_siblings` only when bookmarked |
+| **F2** labelled ordinal `<Label> N:` | **9** | ~17 | a label word from a known vocabulary plus a counter | **the six surviving families below** |
+| **F1** bare numbered `N.` / `N)` / `N -` | **8** | ~31 (Wilson 47–210 on the pooled rate) | a bare counter plus a named title, no label word | **nothing** — see §18.3 for why, and for the exit criteria |
+| **F3** coded named list | **4** | ~6 | a repeated non-standard code prefix: `PA 1:`, `53-24-01 -`, `A.1.a.`, `Topic A2` | **nothing** |
+| **F6** lettered `a.` / `(a)` / `a)` | **4** | ~4 | a letter counter plus a named title | `structural_siblings`, and **only** when bookmarked *and* ≥3 siblings |
+| **F5** **tabular** | **1** | ~40, **n=1** | items are **rows of a table**, keyed by a topic-number column | **nothing, and no *layer*** — `extract_containers` has no table path |
+
+> **Forms with a family: ~17 records. Forms without: ~154.** The families reach **10% of the enumerating population.**
+
+**F1 is the most stably measured uncovered form** — 6 independent stratified observations across three strata, against F4's 7 (one of which carries 51 of its 73 estimate) and F5's 1. It is also the form §18.3 forbids. That is not a contradiction, and §18.3 now says why.
+
+**F5 is a presentation variant, not a population.** `363530` (AFOSR DEPSCoR-CB) prints 12 topics as table rows with `SECTION` / `SERVICE` / `TOPIC AREA` / `PROGRAM OFFICER` columns. They are *the same 12 topics* as `363526` (DEPSCoR-RC), which prints them as headings and segments correctly. One program office, two notices, two forms, one reachable. Do not size F5 from its ~40 — size it from the fact that an already-validated list is invisible because of how it was laid out.
+
+#### The six families that fire, all serving F2
+
+Each: id, regex with an ordinal capture group, and **the record that validates it**. A family with no validating record does not belong in this table — that is §17.8.
+
+| Family | Pattern (illustrative) | Validated by |
 |---|---|---|
-| `topic_area` | `Topic\s+Area\s+(\d+)` | DOE EERE, FECM, ARPA-E |
-| `area_of_interest` | `(?:Area\s+of\s+Interest\|AOI)\s+(\d+)` | DOE, NETL |
-| `dod_topic` | `Topic\s+(\d+)\s*[:.\u2013\u2014]` | MURI, ONR, ARO |
-| `technical_area` | `Technical\s+Area\s+(\d+)` | DARPA, AFRL |
-| `thrust` | `Thrust\s+(?:Area\s+)?(\d+)` | DARPA, ONR |
-| `roses_element` | `^([A-F])\.(\d{1,2})\s+(\S.*)$` | NASA ROSES |
-| `nsf_track` | `Track\s+([1-9]\|[IVX]+)\b` | NSF |
-| `sbir_subtopic` | `Subtopic\s+(\d+[a-z]?)` | DOE, SBIR-style |
-| `priority_research` | `(?:Priority\s+Research\s+(?:Direction\|Opportunity)\|PRD)\s+(\d+)` | DOE BES targeted FOAs, EFRC |
-| `research_thrust` | `Research\s+Thrust\s+(\d+)` | DOE BES, EFRC |
+| `topic_area` | `Topic\s+Area\s+(\d{1,2}[a-z]?)` | `363302` (NETL, `Topic Area 1 / 1a / 1b / 2 / 3`), `363065`, `358100` |
+| `dod_topic` | `Topic\s+(\d{1,2})\s*[:.–—]` | `363526` (AFOSR DEPSCoR, Topic 1–12), `349554` (AFRL PACER, Topic 1–18) |
+| `component` | `Component\s+(\d{1,2})\s*[:.–—]` | `360333` (CDC-GHC, Component 1–5) — **the only live one; `360339` left the catalog** |
+| `focus_area` | `Focus\s+Area\s+(\d{1,2}[a-z]?)` | `362859` (DARPA MMoMA, Focus Area 1–4) |
+| `technical_category` | `Category\s+(\d{1,2})\s*[:–—]` | `356623` (ARPA-E SCALEUP, `CATEGORY 1:`–`CATEGORY 7:`) |
+| `thrust` | `Thrust\s+(?:Area\s+)?(\d{1,2})` | `356612` (DTRA) — **fires, but at the wrong granularity; see below** |
 
-That is ten **ordinal** families. v6.2's Phase 2 step list said "the eight families"; ten is correct.
+**Three of these six were written from measurement, in D3, from documents the census had already read: `component`, `focus_area`, `technical_category`. All three have corpus support.** That is the evidence behind §17.8.
 
-**All ten require a counter, and the census says that is the design's largest blind spot.** *(Revised 8.2: it is the largest **pattern** blind spot. The survey found two larger ones, and both are fetch plumbing — see §1.1 and §18.1's Coverage package.)* `docs/CORPUS_CENSUS.md` read 20 notices and found 12 that enumerate fundable subdivisions — a 60% rate that is **not** the corpus rate; the stratified figure is 25% (§1.1). **Four of the twelve name their subdivisions instead of numbering them** — including the two richest lists in the corpus, AFOSR's 39 research portfolios (32 distinct program-manager mailboxes) and the DOE Office of Science taxonomy in `DE-FOA-0003600`. No amount of tuning the ten reaches them, because there is no ordinal to capture. §6.3a adds a family that does not need one.
+**`thrust` is kept on notice, not on merit.** On `356612` it matches the *container* `Thrust Area 1` — one item — while the fundable list is `Topic A1` through `Topic A7` beneath it. A family that matches the umbrella instead of its topics segments one span where seven exist. §18.1 carries the repair as a work item; until then this row is a known-wrong-granularity match, not a validation.
 
-**`dod_topic` is validated, but not by the agency it is named for.** MURI appears **zero times** across all 958 evidence entries — no title, no opportunity number, no description, no stored document text. That is §18.2's SAM.gov deferral arriving rather than a sampling gap: MURI is a SAM.gov-only notice. The family's only validating document is the AFOSR DEPSCoR notice (`363526`), which uses the identical `Topic N:` convention across twelve topics. **The convention is confirmed; the agency in the "Typical source" column is not, and cannot be until the SAM.gov adapter ships.** Do not read a green `dod_topic` result as evidence that MURI will segment.
+**`dod_topic` is validated by convention and contradicted by an ordinal.** MURI still appears **zero times** across the corpus — §18.2's SAM.gov deferral arriving, not a sampling gap — so the family has no MURI document and cannot have one until that adapter ships. Its two validating records use `Topic N:`. **`356612` shows the limit: its topics are `Topic A2`, a letter ordinal the `(\d{1,2})` group cannot match at all.** §18.1 carries that repair too.
 
-The eighth family was called `subtopic` in v6.2, which now collides with the name of the record type itself. It is **`sbir_subtopic`**. A grep for `subtopic` that returns both a record-type discriminator and a regex family is exactly the wrong-wiring hazard the naming-collision section exists to prevent.
+#### The seven families retired in 8.5
 
-`best_family()` returns the family with the most matches, requiring a ≥2× margin over the runner-up so mixed-family segmentation is rejected rather than guessed.
+**Retired with their evidence, because a family that never fires is invisible to every acceptance-rate metric this project has and therefore accumulates silently.** Run over all 170 documents of the taxonomy sample, cross-referenced against the census 20 and survey 40:
 
-**⚠ Coverage, measured before any tuning (B0, 2026-08-16).** All ten families were run over the full text of three real notices — the ONR Long Range BAA, the AFOSR Open BAA and the ARPA-E SCALEUP NOFO. **Zero matches, in all three, from every family.**
+| Retired | Why |
+|---|---|
+| `technical_area` | **0 fires in 170 documents.** No validating record in 90 |
+| `sbir_subtopic` | **0 fires in 170 documents.** No validating record in 90 |
+| `nsf_track` | **0 fires in 170 documents**, including four NSF records read end to end at full solicitation text |
+| `research_thrust` | **0 fires in 170 documents.** No validating record in 90 |
+| `priority_research` | **0 fires in 170 documents.** `332894`'s heading is *Priority Research Thrusts*, which the `Direction\|Opportunity\|PRD` pattern does not match — the one document that looked like its case is not its case |
+| `area_of_interest` | **1 fire, 0 real lists.** Its only match is `Area of Interest 4: Process Diversification…` on NETL's *aggregating* agency page, belonging to a different opportunity entirely (§6.3b) |
+| `roses_element` | **6 fires, 0 real lists.** Matches `A.1 BACKGROUND AND OBJECTIVES` across five revisions of one DOE Idaho FOA and `C.3 Budget Documents` in a DRL instructions file. This is the census's `332894` false positive reproduced on entirely new documents, and there is **no document in 90 records it correctly matches** |
+
+**Five never fired; two produced only false positives.** The last two matter most: they are not neutral dead weight, they are net-negative. `roses_element` exists for NASA ROSES, every NASA record in the corpus is unreachable — NSPIRES refuses the client, reproduced on three records across two sessions — and until §18.2's NSPIRES deferral is resolved the family can only misfire on DoD and DOE lettered-decimal section numbering, which is near-universal.
+
+**Retiring is not deleting the knowledge.** If NSPIRES ships, `roses_element` has a documented shape and a reason to return — with a validating ROSES document, per §17.8. The same applies to the other six.
+
+`best_family()` is unchanged: it returns the family with the most matches, requiring a ≥2× margin over the runner-up so mixed-family segmentation is rejected rather than guessed.
+
+The family formerly called `subtopic` in v6.2 was **`sbir_subtopic`**, now retired. The naming-collision hazard it created — a grep for `subtopic` returning both a record-type discriminator and a regex family — retires with it.
+
+**⚠ Coverage, measured before any tuning (B0, 2026-08-16).** All ten families *as they then stood* were run over the full text of three real notices — the ONR Long Range BAA, the AFOSR Open BAA and the ARPA-E SCALEUP NOFO. **Zero matches, in all three, from every family.** *(8.5: B0's three-document zero is the first observation of what the taxonomy sample later measured at scale — 8 of 13 families never firing across 170 documents. It was read at the time as evidence the families were appropriately narrow. It was equally evidence that seven of them were inert, and nobody asked.)*
 
 That is the correct outcome, not a bug: none of the three contains an enumerated topic list. What they contain is administrative NOFO section structure — `I.`/`II.`, `A.`/`B.`, `1.`/`2.` — at 47, 19 and 74 decimal-numbered lines respectively. The ONR LRBAA is structurally the **same shape as the DOE BES omnibus** in §6.7: an umbrella that points outward to research areas rather than enumerating them. §6.7 identifies that shape only for DOE. It is at least as common in DoD long-range BAAs, and that materially changes what package D should expect.
 
@@ -869,7 +943,24 @@ First, `no_layer_accepted` will dominate the histogram for the BAA corpus, and p
 
 Second — and this is the one that will be tempting to get wrong — **do not add a generic numbered-section family to make these documents produce something.** On these three files that would manufacture subtopics titled *Federal Agency Name*, *Funding Opportunity Title* and *Announcement Type* from 47 and 74 matching lines. That is exactly the change §18.3 names as "the single most damaging change anyone could make to this design." The families are narrow deliberately. Three documents yielding zero subtopics is the fail-closed asymmetry working.
 
+*(8.5: this paragraph stands, and it is now half the picture. The same bare-numbered form — F1 — is carried by 8 of 90 read records and is the most stably measured **uncovered** form in the corpus. Both facts are true: the form is common and the form is not a signal. **§18.3 now states the conditions under which F1 becomes admissible rather than leaving a flat prohibition**, and the condition is a classifier in front of it, not a better regex.)*
+
 **Tune against the corpus that already exists.** The catalog carries 31 records whose title or agency names a BAA, including DARPA office-wide BAAs (`HR001126S0003`, `S0010`, `S0011`, `S0013`, `S0016`), the ONR Long Range BAA (`N0001425SB001`), the DEVCOM ARL foundational BAA (`W911NF-23-S-0001`), AFOSR (`NOFOAFRLAFOSR20260001`), NRL (`N00173-24-S-BA01`) and ERDC (`W912HZ26S0001`). Their notice PDFs are reachable through the existing document-evidence path today. This is the development corpus, and it does not depend on SAM.gov existing (§10 Phase 1).
+
+### 6.3b The aggregating agency page — a false-positive surface with no rule against it
+
+**Found in 8.5, and it belongs to Cov1 rather than to any pattern.** `363594`'s agency URL is NETL's funding landing page. `topic_area` fires on it **ten times** and `area_of_interest` once, and **every one of those topics belongs to a different opportunity** (`DE-FOA-0003634`, `DE-FOA-0003627`). The page aggregates many FOAs.
+
+This is a distinct failure mode from announcement furniture, and **nothing in §6.4 or §6.4a can see it**, because the set is not malformed. The ordinals count up. The titles are real research areas. The span lengths are comparable. The process-vocabulary rate is near zero. Every acceptance rule passes, and the result attaches another record's topic list to this one.
+
+**Cov1's `subtopic_only_primary` feeds exactly these pages to the segmenter** — that is its purpose, for the 221 records declined only for want of gap-fill. So widening reachability widened this surface, and the classifier is currently the only thing in the design that catches it: asked about `363594`, the model refused it for precisely the right reason — *"the Topic Area lists visible … belong to other, unrelated funding opportunities."*
+
+Two candidate mitigations, neither specified nor measured here:
+
+- **Require the opportunity's own number or title to appear near the candidate set** on any document reached through `subtopic_agency_notice`. Cheap, and it fails on agency pages that never restate the FOA number.
+- **Treat agency-page sources as classifier-mandatory** — never publishable on structural grounds alone, whatever the tier.
+
+Carried as a Cov4 gate item in §18.1, because it is an argument about what the classifier is *for* rather than about a threshold.
 
 ### 6.3a `structural_siblings` — the eleventh family, and the only non-ordinal one
 
@@ -936,6 +1027,10 @@ That is a different mechanism and needs its own family, provisionally `label_run
 
 **Until then, AFOSR-shaped notices — named subdivisions with no outline — remain uncovered, and that is roughly a third of the enumerating documents in the census.**
 
+**⚠ 8.5 — how much of the corpus this family can see, measured.** `structural_siblings` is the only mechanism serving F6 and hierarchical F1, and it is entirely dependent on the outline tree. In the taxonomy sample, **71 of 129 PDFs carry no bookmarks at all — 55%.** Every one of those documents is invisible to this family regardless of what form its list takes, and the corpus's two most striking F1 umbrellas are both in that group: `330175` (Air Force Academy, 24 research centres) and `355150` (Army Applications Lab, 16 technology areas) have zero bookmarks each.
+
+So the coverage claim for `structural_siblings` should be read as *"the qualifying half of the corpus that carries an outline"*, not as *"documents with a sibling set."* That halves its reach before any threshold is applied, and it is the strongest single argument for `label_run` and F1 — those are the mechanisms that work on the other 55%.
+
 ### 6.4 Acceptance rules
 
 Accept only if **all** hold. Any failure → zero topics, parent untouched, reason logged.
@@ -975,6 +1070,12 @@ This is the quantitative replacement for "the ordinals count up," and it is the 
 > **AFRL PACER (`349554`) yields 18 correct topics — `Topic 1 – Aero-Structures` through `Topic 18` — and every one of them is suppressed.** It resolves at Layer D (`numbered`), which is `low`; it would be won from a secondary attachment, which §6.6 caps at `low`; and `low` never publishes. The extraction is right, was read span by span, and is invisible.
 
 **No setting of these thresholds resolves that.** Raising Layer D's tier, or lifting the secondary-attachment cap, re-admits precisely the fabrications D5 removed — `1. NOFO Summary`, `a. Narrative Section I: Project Description` — because those come from the *same* tiers. The tiers are not mis-fitted; they are being asked to carry a decision they cannot make, which is *"is this particular list the fundable one?"* That question has one reliable answer — **and as of 8.3 there are two evaluators that give it, a human and a classifier measured at 100% on both axes (§11). See §6.4b, the Coverage package's Cov4 (§18.1), and §13's revised settled decision.**
+
+**⚠ 8.5 — two acceptance rules now have named corpus counter-examples, and neither is a threshold to tune.**
+
+**Rule 2's monotonic-ordinal test rejects a real list whose counter restarts.** `330175` (Air Force Academy) enumerates 24 research centres and departments in **three groups, each restarting at `1.`** — `1. Aeronautics` … `15. Center for Space Situational Awareness Research`, then `1. Reserved` … `3. Eisenhower Center`, then `1. Department of Behavioral Sciences and Leadership` onward. Read as one sequence the ordinals run 1→15, 1→3, 1→6, which rule 2 refuses outright. This is not the TOC-duplication artifact D0a/D0b fixed; the document genuinely restarts its counter per section, and any F1 mechanism has to model grouped sequences rather than one monotonic run.
+
+**Rule 1's three-item floor is the binding constraint on F6, not the pattern.** Three of the four F6 records in 90 are **two-item lists** — `332127` and `334079` (EDA regional programmes) and `346815` (`a. Public Works`, `b. Economic Adjustment Assistance`) — and `structural_siblings` already sees all three, bookmarked, and is refused by §6.4a rule 2d's 3–60 cardinality window and §6.4 rule 1 together. **So F6 pattern work buys nothing.** Lowering the floor to two remains **rejected** — `docs/COVERAGE_SURVEY.md` measured it as the cheapest and most dangerous change available, admitting every two-item administrative pair in 1,475 notices — which means F6's ~4 records are reachable only through the span-level architecture in §6.4b, where a two-item set can be admitted and then filtered member by member. Recorded so a later session does not spend pattern effort on it.
 
 ### 6.4b The unit of judgment is the span, not the set
 
@@ -1861,7 +1962,7 @@ Two consequences worth stating plainly:
 
 ## 10. Phases
 
-> **§18 supersedes this section as the unit of work.** These four phases describe everything the project *could* include; §18 defines the eight packages actually being built (A–G plus D½ Coverage) and lists what is deferred with the cost of each. Read §10 for the reasoning behind an individual step — it is retained in full and still explains *why* each piece exists — but take the sequence and the checklist from §18 and §15.
+> **§18 supersedes this section as the unit of work.** These four phases describe everything the project *could* include; §18 defines the nine packages actually being built (A–G plus D½ Coverage and D¾ Forms) and lists what is deferred with the cost of each. Read §10 for the reasoning behind an individual step — it is retained in full and still explains *why* each piece exists — but take the sequence and the checklist from §18 and §15.
 
 Reordered so everything large and additive lands before anything existing changes behavior. Four phases.
 
@@ -2019,6 +2120,17 @@ Recorded, not resolved. Both are single-labelled by one reader, and both now hav
 
 - **`361876`** — labelled *furniture* in D5 (`3.3.1 Food safety` … `3.3.6 Projects and Activities Not Eligible`). Held out of every score above as contested. It is now called **furniture by three of four model-runs** — Haiku, and both Sonnet 5 configurations — against Sonnet 4.6's lone *legitimate*. Sonnet 5's reason is the sharpest given: *"Mixes distinct topic areas with an ineligibility exclusions section, not a coherent choose-one subdivision list."* **Scored rather than held out, Sonnet 5 would be 22/22 at set level.** It stays held out here: one model changing its mind does not settle a label, and reporting 22/22 on a set the corpus itself flags as ambiguous would overstate the result.
 - **`(n) Public-Private Partnerships`** in `360678` — carried as a *good* span, and therefore counted as a false rejection against every model that dropped it. **Haiku and both Sonnet 5 configurations rejected it independently.** Its excerpt is also Cov5-corrupted, but its title is plausibly a funding mechanism rather than a technical subject, which is a different objection from the corrupted-excerpt cases. If it is relabelled a contaminant, Sonnet 5 at default thinking becomes **8/8 with 0 false rejections** — but nobody has re-read it, and relabelling a span *because models rejected it* is exactly how an evaluation corpus stops being independent evidence. **A human reads it, or it stays as it is.**
+
+### 8.5 — the classifier's role changed, and it is now a precondition rather than a final gate
+
+**Nothing measured in this section changed. What changed is what depends on it.** Through 8.4 the span filter was a precision improvement layered on top of families that already worked: it removed contaminants from `360678` and unsuppressed PACER. `docs/FAMILY_TAXONOMY.md` measured the families and found that they reach **10% of the enumerating population**, and that the two largest uncovered forms — **F4 named/bulleted (~73 records) and F1 bare numbered (~31)** — are both forms where structure carries no signal about whether a set is fundable:
+
+- **F4 is demonstrably unsafe on structure alone.** `362233`'s five real Focus Areas sit one subsection above five decoy bullets — *Innovation, Impact, Research Strategy, Focus Areas, Research Team* — with no ordinal, no outline and no lexical difference to separate them.
+- **F1 is unsafe by construction.** A bare `1.` says nothing about whether what follows is a research area or *Allowable Costs*; B0 measured 47, 19 and 74 administrative decimal-numbered lines in three notices.
+
+So the sequencing in §18.1 inverts: **Cov4 lands before any new family work**, because a recogniser for either form, shipped without a semantic filter in front of it, is the fabrication surface D5 spent a package closing. §18.3's exit criteria for F1 name this classifier explicitly.
+
+**One consequence for the gate.** Cov4's validation set was going to come from the Coverage backfill. It should now also include **F1 and F4 candidate sets specifically** — including at least one aggregating agency page (§6.3b) and one grouped-restarting-counter document (`330175`) — because those are the populations the filter will actually be asked to adjudicate, and neither resembles the 22 sibling sets it was measured on.
 
 ### Three caveats that bound the result
 
@@ -2222,7 +2334,7 @@ Whichever is chosen, three things hold either way: the per-subtopic 2 KB cap (§
 | **Flag off parity** | With `--enable-subtopics` off, output must be byte-identical to pre-change. The core safety property. |
 | **Backfill** | The one-time campaign that adds subtopics to the ~1,400 documents already in the evidence cache. Requires the three-gate trigger in §8.3, without which the feature silently covers only newly-changed documents. Run **locally in one pass** and committed once (§18 package D) — never drained through the nightly. |
 | **Work package** | The unit of work in §18: several related items, one session, one commit per item. Replaces §10's numbered step as the thing a session delivers. |
-| **Minimum path** | §18's packages A–G plus D½ Coverage — the smallest version of this project worth shipping. Everything outside it is deferred with a stated cost (§18.2). |
+| **Minimum path** | §18's packages A–G plus D½ Coverage and D¾ Forms — the smallest version of this project worth shipping. Everything outside it is deferred with a stated cost (§18.2). |
 | **Backfill suppression** | Excluding first-seen subtopics from change events so the first digest is not entirely noise (Phase 3, step 23). Distinct from *backfill* itself. |
 | **Discoverability registry** | `scripts/sources/discoverability.py` — the eleven-rule umbrella registry that already exists, attaching program-area topics and search terms to opaque umbrella FOAs (§3). Not to be confused with the subtopic layer, which adds child *records*. |
 | **Gold set** | Auto-derived known-positives from past awards. The only way to judge whether a change *helped* rather than merely *changed*. Deferred; see §13 open decision 3. |
@@ -2324,7 +2436,22 @@ Per-agency-family acceptance, as the gate requires rather than in aggregate: **D
 - [x] **Cov3. Re-enable multi-attachment fetch** — *done 2026-08-16, **no code change**. Traced live: the furniture primary returns `no_layer_accepted`, `FA2391-23-S-2403.pdf` returns 18 spans and wins on score. Pinned by `FurniturePrimaryTests`. The winner is `low` and never publishes — Cov4's evidence. A 9.5 MB model contract ate the per-document time budget, recorded not fixed.* Original note: 1/40 · ~5. Already built and neutralized by its own `low` cap. Justified by **AFRL PACER `349554`**: selected primary is a one-page Security Program Questionnaire; `FA2391-23-S-2403.pdf` yields **18 correct topics**. Land selection-by-result-quality with it
 - [ ] **Cov4. Redesign the confidence model** — **two stages (§18.1, rewritten 8.3).** The unit moves from set to span (§6.4b); a classifier filters spans (§11: Sonnet 4.6 caught 7/7 contaminants with 0/107 false rejections, PACER 18/18); the review queue takes only the residual — abstentions and `medium`/`low` survivors. **Fail-closed: no classifier → no new subtopics, never unfiltered ones.** Key from GitHub Secrets; Claude Code strips it from tool subprocesses, so local testing needs a human to make the calls. Reuses `assets/review.js` and **partially delivers issue #8**
 - [ ] **Cov5. Fix span-summary alignment** — **five** spans in `360678` (7% of its 70) are summarized by text that does not describe them (`(i) X-Ray Scattering` → an application-deadline sentence). Degrades the Cov4 classifier *and* the user-facing card, in the document carrying Catalysis Science. **Prevalence across the rest of the cache unmeasured** (§6.5)
-- [ ] **GATE:** unreachable count re-derived against the **catalog** · records *reached* and records *yielding an accepted list* reported **separately** for Cov1–Cov3 · fabricated publishable records still **0**, measured by reading every published title as D5 did · §0.5 byte-identical with the flag off · **every gate's exit code checked directly, not read through `tail` (§17.7)**
+- [ ] **Cov6. Fix `_demote()`'s blanket cap on no-primary records** — **added 8.5.** It decides "secondary" by whether `primary_content` was populated, and Cov1's path passes none, so a list read from a record's own Full Announcement is capped at `low`. Verified: `363526` gives `high` from `segment_document` and `low` through `segment_without_primary`. **Caps publication for 46.4% of the catalog** — every later recall item lands in the cache and reaches no PI until this is fixed (§18.1)
+- [ ] **Cov7. Read 30 more stratum-D records** — **added 8.5.** The cheapest outstanding measurement: D is 483 records with 12 reads, contributes 40 of §1.1's 171 on one observation, spans 7–171 alone, and holds the only tabular list. Supersedes the survey's "sample C and E"; C is discharged at 18 of 27
+- [ ] **GATE:** unreachable count re-derived against the **catalog** · records *reached* and records *yielding an accepted list* reported **separately** for Cov1–Cov3 · fabricated publishable records still **0**, measured by reading every published title as D5 did · **Cov6 verified by re-running `363526` end to end, not by reading the code** · §0.5 byte-identical with the flag off · **every gate's exit code checked directly, not read through `tail` (§17.7)**
+
+### Package D¾ — Forms
+
+**Added 8.5. Gated behind Cov4** — the two largest uncovered forms are both unsafe on structure alone (§18.1). Yields are *records in the 90 read* · *catalog estimate*.
+
+- [ ] **Fm1. F4 — named / bulleted, no counter** — 9 of 90 · **~73**, or ~22 excluding one stratum-E observation. `label_run` (§6.3a) plus a bulleted variant. Highest false-positive risk in the plan; `362233`'s five real Focus Areas sit one subsection above five decoy process bullets. **Do not build on structure alone**
+- [ ] **Fm2. F1 — bare numbered** — 8 of 90 · ~31, the most stable uncovered row. **Blocked by §18.3a's four exit criteria — read them first.** Needs grouped restarting counters (`330175`) and title extraction that survives a trailing em-dash clause (`355150`)
+- [ ] **Fm3. Repair `dod_topic`'s ordinal group** — widen `(\d{1,2})` to letters so `Topic A1`–`A7` matches (`356612`). Third appearance of the same oversight; `topic_area` got it in D3
+- [ ] **Fm4. Repair `thrust`'s granularity** — it matches the container `Thrust Area 1`, not the seven topics under it. Scope to the items or retire it under §17.8; it has **no record validating it at the right granularity**
+- [ ] **Fm5. F5 — table path in `extract_containers`** — 1 of 90 · ~40 **on n=1**. `pdfplumber` already authorized (§6.1). Fund on the qualitative argument — `363530` prints the same 12 topics as `363526` — not on the ~40. **Read Cov7 first**
+- [ ] **Fm6. F3 — coded named list** — 4 of 90 · ~6. `PA 1:`, `53-24-01 -`, `A.1.a.`. Discovered-prefix recogniser, false-positive profile unmeasured. Smallest yield; do last or not at all
+- [ ] **Fm7. F6 — record the verdict, write no pattern** — 4 of 90 · ~4. Three of four are two-item lists `structural_siblings` already sees and rule 1 / rule 2d reject on cardinality. Reachable only via §6.4b span-level admission, so it arrives with Cov4 or not at all
+- [ ] **GATE:** every new or repaired family names its validating document **and quotes the matched text** (§17.8) · acceptance rate reported **per form** · fabricated publishable records still **0** by reading every title · false positives reported on the **33 category-(a) documents** in `docs/FAMILY_TAXONOMY.md` §1 · §0.5 byte-identical with the flag off
 
 ### Package E — Storage and scoring
 
@@ -2453,7 +2580,10 @@ Both are Phase 1 work and both fail loudly rather than silently, which is why th
 | 7 | §18 package C — wire the call site, flag off. Opened with an unplanned C0 corpus census. | Five commits, §0.5 gate green, §15 updated, branch pushed | **done 2026-08-16** |
 | 8 | §18 package D — tune and backfill. | Nine commits; D4/D5 backfills run and the cache deliberately **not** committed; D7 opened (closed 2026-08-17 — see §13 settled) | **done 2026-08-16 — gate not met.** Fabricated publishable records reached 0, but the A4 size budget fails (§13 open decision 0) |
 | 9 | Coverage survey — research only, no code. | `docs/COVERAGE_SURVEY.md`; this revision (8.2) | **done 2026-08-16** |
-| 10+ | **One §18 work package per session.** Each item inside it is its own commit, with the suite run between commits. | The package, its gate output, an updated §15, and a pushed branch | next: **package D½ — Coverage**. Read `docs/COVERAGE_SURVEY.md` first; its ranked table is the package's ordering. Note §13 open decision 0 blocks committing any cache until a human resolves it |
+| 10 | Coverage package Cov1–Cov3, plus an unplanned §11 classifier measurement and re-baseline. | Four commits; §11 reopened on the precision half; this revision's 8.3 and 8.4 | **done 2026-08-16/17** |
+| 11 | Family taxonomy — research only, no code. Classified every miss across the census 20 and survey 40; drew and read a third stratified sample of 50 records / 170 documents; induced the taxonomy from a `claude-sonnet-5` run. | `docs/FAMILY_TAXONOMY.md`; two commits | **done 2026-08-17** |
+| 12 | Revise this plan against `docs/FAMILY_TAXONOMY.md`. No code. | This revision — **8.5**: §6.3 replaced, seven families retired, §17.8 added, §18.1 re-ordered, §18.3a's exit criteria | **done 2026-08-17** |
+| 13+ | **One §18 work package per session.** Each item inside it is its own commit, with the suite run between commits. | The package, its gate output, an updated §15, and a pushed branch | next: **finish package D½ — Cov4, then Cov5–Cov7**. Read `docs/FAMILY_TAXONOMY.md` first; §18.1's ⚠ note is why Cov4 precedes all form work, and package D¾ is gated behind it. §13 open decision 0 still blocks committing any cache until a human resolves it |
 
 Sessions 1 and 2 are not overhead. They are what makes the additive-edit discipline in §8 possible, because you cannot make a surgical edit to a file whose structure you inferred. Session 1 found that the single most consequential fact in this project — which PDF library the repository uses — was wrong in every prior version, and that error alone would have produced an unusable Layer C and an AGPL licensing problem.
 
@@ -2521,6 +2651,32 @@ python -m unittest discover -s tests 2>&1 | tail -6      # tells you nothing
 ```
 
 This is the same class of error as §9.4 item 7, where a `-v` check reported a pass as a failure: **a check whose result you have not verified is not a check.**
+
+### 17.8 No family, threshold or acceptance rule without corpus evidence behind it
+
+**Added in 8.5, from a 3-for-3 record against a 3-for-10 one.**
+
+Three families were written **from measurement** — `component`, `focus_area` and `technical_category`, added in D3 from documents the census had already read and quoted. **All three have corpus support.** Ten families were written **from expectation**, before any document in this catalog had been opened. **Seven have none**, and two of the seven produce only false positives (§6.3).
+
+That is not bad luck. It is what happens when a recogniser is specified from what a corpus *ought* to contain, and it has now happened three times in this document with three different instruments:
+
+| Specified from reasoning | What measurement said |
+|---|---|
+| §6.3's ten families | 7 of 10 have no corpus support; 5 never fire in 170 documents |
+| §6.4a's six structural thresholds | *"stated to be calibrated, not because they have been measured"* — D1 refitted three, D5 replaced the load-bearing one entirely |
+| §6.3a's ancestor lexicon | Caught 0 of 23 administrative sibling sets in `DE-FOA-0003600`; D4 found it keyed to one agency's outline convention |
+
+**The rule.**
+
+> **Do not add a pattern family, a threshold, or an acceptance rule to this plan or to the code without naming at least one document in the corpus that it matches, and quoting the text it matches.** A specification that cannot name its validating document is a hypothesis, and it must be labelled as one — recorded under "candidate", never in a table that reads as implemented behaviour.
+
+Three corollaries, each of which this project learned the hard way:
+
+1. **A validating document must be quoted, not cited.** `priority_research` looked validated by `332894`, whose heading is *Priority Research Thrusts* — and the pattern requires `Priority Research Direction|Opportunity|PRD`, which that heading does not match. The citation was right and the match was imaginary. Quoting the literal text is what would have caught it.
+2. **"Zero matches" is a result and must be read.** B0 measured zero matches from all ten families on three notices in 2026-08-16 and recorded it as the families being appropriately narrow. It was equally evidence that most of them were inert, and that reading was available at the time. **Whenever a family fires zero times over a sample, say so per family, not in aggregate.**
+3. **A retired family keeps its evidence.** Retirement is not deletion: record the shape, the reason and what would bring it back, so a later session does not rediscover the idea and re-add it unmeasured. §6.3's retirement table is the format.
+
+This rule governs §6.3, §6.3a, §6.4, §6.4a and any future recogniser, and it applies to *removals* too — `roses_element` is retired on six measured false positives and zero correct matches across 90 records, not because it looked wrong.
 
 ---
 
@@ -2603,6 +2759,14 @@ Nothing in this package is imported by any existing module, so nothing can regre
 
 Every item states its expected yield from the survey's stratified sample — *sampled records out of 40* and the *catalog extrapolation* — because two of the four are small and saying so up front is what stops a later session from over-investing in them.
 
+> **⚠ Re-ordered in 8.5: Cov4 comes before any new family work, and package D¾ is gated behind Cov4's gate passing.**
+>
+> `docs/FAMILY_TAXONOMY.md` measured the families at **10% of the enumerating population** and found the two largest uncovered forms to be **F4 named/bulleted (~73 records)** and **F1 bare numbered (~31)**. Both are forms where structure carries no signal about whether a set is fundable — F4 demonstrably so, since `362233`'s five real Focus Areas sit one subsection above five decoy bullets with no ordinal, no outline and no lexical difference between them.
+>
+> **So the classifier is the precondition for the recall work, not its final gate.** A recogniser for either form shipped without a semantic filter in front of it re-opens exactly the fabrication surface D5 spent a package closing — and this time at ~104 records of new input rather than the 22 sets D5 was fitted on. Building F4 or F1 first would be building the 43-fabricated-cards outcome deliberately.
+>
+> This inverts 8.2's ordering, which put all pattern work below all plumbing on the grounds that plumbing was larger. Plumbing *was* larger and Cov1–Cov3 are done. What 8.2 could not know is that the remaining pattern work is mostly unsafe rather than mostly small.
+
 | Item | Expected yield | Notes |
 |---|---|---|
 | **Cov1. Fix the `source_for_record` selection gap** | **2/40 sampled · ~48 catalog** (overlaps Cov2 on one record) | `source_for_record()` returns `None` for **685 of 1,475 records — 46.4% of the catalog** — and **672 of those have no evidence entry at all**, so they have never been fetched even once. **236 of the 685 carry live Grants.gov attachments right now.** The rule declining them is `select_primary_document`, which accepts only a PDF carrying explicit NOFO/FOA/RFA/BAA language or a lone PDF in a Full Announcement folder. That is the right rule for **citation** — a wrong one-click link is worse than none — and the wrong rule for **segmentation**, which does not publish the link it read. Measured alternatives, against the 685: any PDF in a Full/Revised Announcement folder **46**; any PDF at all **57**; any non-stub HTML **108**; any attachment at all **236**; dropping the `needs_gap_fill` test on agency URLs **221**; union **372 = 25.2% of the catalog**. **Do not change `source_for_record` itself.** Extend the parallel subtopic-only path that `scripts/subtopic_sources.py` already establishes, so fact extraction, `document_evidence.json` and §0.5 are untouched by construction. 313 records have no source of any kind and stay out of reach under every rule |
@@ -2611,7 +2775,10 @@ Every item states its expected yield from the survey's stratified sample — *sa
 | **Cov4. Redesign the confidence model** | Unblocks **every** item above, and 2 of the survey's 10 enumerating records immediately | Its own item, specified in full below. **Rewritten 8.3:** the unit of judgment moves from set to span (§6.4b), a classifier filters spans (§11: 7/7 contaminants, 0/107 false rejections at Sonnet 4.6), and the review queue handles only the residual — disagreements and abstentions. Fail-closed: no classifier means no new subtopics, never unfiltered ones |
 | **Cov5. Fix span-summary alignment** | Not a coverage item — a correctness one | **Measured 2026-08-17, revised upward the same day (§6.5).** **Five** spans in `360678` — **7% of its 70**, in the document carrying `(q) Catalysis Science` — carry excerpt text describing neither their title nor their subject; `(i) X-Ray Scattering` is summarized by an application-deadline sentence. Span boundaries start at a bookmark offset, so a span can open mid-sentence inside the previous section and the 240-character head summarizes the wrong thing. **Degrades two consumers:** the Cov4 classifier judged those three by the text it was given, and the same string is what a PI reads on the card. **Prevalence unmeasured** — five confirmed by reading, all in one document, all surfaced as a by-product of classifier rejections rather than by a search; nothing has examined the other 222 spans. A start-of-sentence heuristic was tried and discarded for contradicting the observed error pattern. Measure it before trusting the summary for either purpose |
 
-**Gate:** unreachable-record count re-derived and reported against the catalog, not the evidence cache · for each of Cov1–Cov3, records *reached* and records *yielding an accepted list* reported separately, because they are different numbers and conflating them is how the multi-attachment path was over-sold the first time · **fabricated publishable records still 0**, measured the way D5 measured it — by reading every title in the publishable set, not by sampling · §0.5 byte-identical with the flag off.
+| **Cov6. Fix `_demote()`'s blanket cap on no-primary records** — **added 8.5, and it caps the yield of everything above** | Unblocks publication for the **685 records — 46.4% of the catalog** — that Cov1 made reachable | **`_demote()` decides "secondary attachment" by asking whether a result came from the `primary_content` argument.** Cov1's path passes **no primary at all** when `source_for_record()` returns `None`, so a list read from the record's own `Full Announcement` PDF is treated as a secondary and capped at `low`, which never publishes. **Verified by running production this session:** `363526` — the corpus's *only* `high`-confidence acceptance — returns `8 subtopics, method='toc', confidence='high'` from `segment_document` directly and `confidence='low'` through `segment_without_primary`. The difference is `_demote()`, not the document. Cov1's own note reads *"All ten newly reached records return `no_layer_accepted`"*, which attributes the zero to the records and hides this cap; it bites the moment a reached record enumerates, and `363526` is already that case. **The test is whether the winning document is the record's own announcement, not whether an argument was populated.** Until this is fixed, every new family lands recall in the cache that cannot reach a PI |
+| **Cov7. Read 30 more stratum-D records** — **added 8.5** | Firms up **over half** the §1.1 interval | The cheapest outstanding measurement in the project. Stratum D — any non-PDF attachment — holds **483 records, has 12 reads, contributes 40 of §1.1's 171-record point estimate on a single observation, and spans 7–171 on its own.** It also produced the corpus's only tabular list (F5), so its one hit is carrying both a population estimate and a form. Stratum E is larger but its ceiling is bounded by reachability — 313 of its records have no fetchable source of any kind — so **D is where the interval actually closes.** This supersedes the survey's "sample C and E" recommendation, whose C half the taxonomy sample discharged (C is now 18 of 27 read). Reuse `pick50.py`'s stratification with a fresh seed and the 90 read records excluded |
+
+**Gate:** unreachable-record count re-derived and reported against the catalog, not the evidence cache · for each of Cov1–Cov3, records *reached* and records *yielding an accepted list* reported separately, because they are different numbers and conflating them is how the multi-attachment path was over-sold the first time · **fabricated publishable records still 0**, measured the way D5 measured it — by reading every title in the publishable set, not by sampling · **Cov6 verified by re-running `363526` end to end and observing `high`, not by reading the code** · §0.5 byte-identical with the flag off.
 
 ##### Cov4 in full — span filtering, with a review queue for the residual
 
@@ -2667,6 +2834,25 @@ Concretely: an unresolved span is not a passing span. On any classifier failure 
 - **The fail-closed path is tested, not asserted.** Run the build with the key absent and with it invalid; both must produce zero new subtopics, a logged reason, and an unchanged published set.
 - **Reviewer load reported as a count**, so the claim that the queue shrank is measured rather than assumed.
 - **Cost reported from real `usage` totals**, against §11's $0.190 per 100 sets batched at Sonnet 4.6.
+- **Added 8.5 — the validation set must include the populations the filter will actually face.** The 22 sibling sets it was measured on are all outline-derived from documents with bookmarks. Cov4 now gates on at least: **one aggregating agency page** (§6.3b — `363594` is the measured case, where `topic_area` fires ten times on another opportunity's topics and every acceptance rule passes), **one grouped-restarting-counter document** (`330175`, whose 24 real subdivisions restart at `1.` three times), and **one bulleted set with an adjacent decoy** (`362233`, five real Focus Areas above five process bullets). None of the three resembles what §11 measured, and each is a form the recall work depends on.
+
+#### Package D¾ — Forms
+
+**Added in 8.5, ordered by `docs/FAMILY_TAXONOMY.md` §5. Gated behind Cov4's gate passing — see the ⚠ note under D½.** This is the recall work the taxonomy identified: five of six measured forms have no family, accounting for ~90% of the enumerating population.
+
+Every item carries its measured yield as *records in the 90 read* · *catalog extrapolation*, and **the stability of that extrapolation**, because two of the rows rest on a single observation and one of those is the largest number in the table.
+
+| Item | Measured yield | Notes |
+|---|---|---|
+| **Fm1. F4 — named / bulleted, no counter** | 9 of 90 · **~73, but ~22 excluding one stratum-E observation** | The largest population and the hardest problem: §6.3a's deferred `label_run` plus a bulleted variant. **Highest false-positive risk in the plan**, and the corpus supplies the proof rather than the worry — `362233`'s five real Focus Areas sit one subsection above *Innovation, Impact, Research Strategy, Focus Areas, Research Team*, with no ordinal, no outline and no lexical separation. **Do not build this on structure alone.** Also note that `structural_siblings`, the only mechanism serving anything like it today, is blind to **55% of the corpus's PDFs** (§6.3a) |
+| **Fm2. F1 — bare numbered `N.` / `N)` / `N -`** | **8 of 90 · ~31** (Wilson 47–210 on the pooled rate) — **the most stable uncovered row** | **Blocked by §18.3's prohibition, which 8.5 converted from a flat refusal into exit criteria. Read §18.3 before starting this, and satisfy its four conditions.** Two mechanics the corpus requires beyond the regex: grouped sequences with **restarting counters** (`330175`, §6.4a) and title extraction that survives a trailing em-dash clause (`355150`'s `1. Autonomous platforms – The Army is particularly interested in`) |
+| **Fm3. Repair `dod_topic`'s ordinal group** | Recovers `356612` (7 topics) | The group is `(\d{1,2})` and DTRA's topics are `Topic A1` through `Topic A7` — a **letter** ordinal it cannot match at all. `sbir_subtopic` already modelled `\d{1,2}[a-z]?` before its retirement, and `topic_area` gained the same in D3; the inconsistency is an oversight, not a decision, and this is the third time it has appeared. Widen to letters **and** add the validating quote to §6.3's table per §17.8 |
+| **Fm4. Repair `thrust`'s granularity** | Same record, same 7 topics | `thrust` fires on `356612` and matches the **container** `Thrust Area 1`, not the seven `Topic AN` items beneath it, so it segments one span where seven exist. A family that matches the umbrella instead of its members is worse than one that misses, because it produces a plausible single card. Either scope `thrust` to the items or retire it under §17.8 — **it currently has no record validating it at the right granularity** |
+| **Fm5. F5 — a table path in `extract_containers`** | 1 of 90 · **~40, n=1** | `pdfplumber` is already an authorized dependency (§6.1) and supplies table extraction, so this is a dispatch item, not a dependency one. **Do not fund it on the ~40** — that is one stratum-D observation against 483 records and 12 reads. Fund it on the qualitative argument: `363530` prints the *same 12 topics* as `363526`, which segments correctly, so a validated list is invisible purely because of layout. **Cov7 should be read before sizing this item** |
+| **Fm6. F3 — coded named list** | 4 of 90 · ~6 | `PA 1:` (`361908`), `53-24-01 -` (`352741`), `A.1.a.` (`362681`), `Topic A2` (`356612`, which Fm3 covers). Each is agency-specific; a **discovered-prefix** recogniser is the general form and its false-positive profile is unmeasured. Smallest yield in the package — do this last, or not at all |
+| **Fm7. F6 — record the verdict, write no pattern** | 4 of 90 · ~4 | **There is nothing to build.** Three of the four are two-item lists (`332127`, `334079`, `346815`) that `structural_siblings` already sees, bookmarked, and that §6.4 rule 1 and §6.4a rule 2d reject on cardinality. Lowering the floor to two stays **rejected** (§18.2). F6 is reachable only through §6.4b's span-level admission, so it arrives free with Cov4 or not at all. Item exists so a later session does not spend pattern effort here |
+
+**Gate:** every new or repaired family names its validating document **and quotes the matched text** (§17.8) · acceptance rate reported per form, not in aggregate · **fabricated publishable records still 0**, by reading every published title · false-positive count reported on the **33 category-(a) documents** in `docs/FAMILY_TAXONOMY.md` §1, which are the measured correct zeros and therefore the right negative set · §0.5 byte-identical with the flag off.
 
 #### Package E — Storage and scoring
 
@@ -2720,7 +2906,7 @@ Each line states what is lost. None of this is abandoned; all of it is a later d
 
 #### Added in 8.2 — deferred *below* the Coverage package, with their measured yield
 
-These were the natural next pattern steps after D. They are not cancelled; they are ordered behind every plumbing item, because the survey measured them and they are smaller than the plumbing.
+**⚠ Superseded in 8.5. The first two rows are no longer deferred — they are package D¾ items Fm1 and Fm2, and their yields were roughly doubled by a larger sample:** `label_run` and the bulleted variant from ~32 to **~73**, bare `N)` from ~10 to **~31**. The reason for the change in standing is not the yield; it is that 8.2 deferred them for being *small* and they are not small. They are now ordered behind **Cov4** rather than behind all plumbing, because they are *unsafe without a classifier* — a different reason with a different exit condition. The third row's verdict is unchanged and still rejected. The original text is kept below because the reasoning it records is still correct.
 
 | Deferred | Measured yield | What is lost by deferring it |
 |---|---|---|
@@ -2775,3 +2961,24 @@ Three things survive the cut that a schedule-driven trim would have taken first.
 **The §8.5 query baseline.** Without it, "did retrieval change?" is answered by looking at a few searches and forming an impression — which is how the OpenAlex concept representation was adopted, and how it survived being wrong for a long time (§7.9). The baseline needs no relevance labels, is deterministic, and turns a subjective question into a diff. It is cheap, and it is the only instrument that tells you package E did what it claimed.
 
 **§6.4 acceptance rules, with nothing-below-`high`-publishes-unreviewed (§7.1, §18.1 Cov4 — until 8.2 this read "low-confidence never publishes"; the queue made it stricter at `medium`, not looser).** These are what make "fail closed" real. A segmentation that does not satisfy all seven rules yields **zero** subtopics and leaves the parent untouched — never a partial or speculative list. The asymmetry is deliberate and worth restating: a missing subtopic costs a user one search that could have gone better; a *wrong* subtopic puts a plausible-looking card with a page anchor and a deadline in front of a PI who may spend weeks writing to it. Relaxing this to raise acceptance rates would be the single most damaging change anyone could make to this design.
+
+### 18.3a The bare-numbered prohibition — exit criteria, not a permanent refusal
+
+**Revised in 8.5. The prohibition stands. What changes is that it now has a stated way out, because it was written when precision was deterministic and it no longer is.**
+
+**Why it was right.** §6.3 and §18.3 name a generic numbered family as *"the single most damaging change anyone could make to this design."* B0 measured the reason: 47, 19 and 74 decimal-numbered administrative lines in three notices, which a bare-`N.` family would have turned into subtopics titled *Federal Agency Name*, *Funding Opportunity Title* and *Announcement Type*. D4 then measured the same failure at scale — 43 of 194 publishable records fabricated, including `1. NOFO Summary` and `A. Purpose`. **Nothing in 8.5 contradicts any of that, and a reader looking for permission to add the family will not find it here.**
+
+**Why it can no longer simply stand.** F1 is carried by **8 of 90 read records** — `332894`, `345938`, `361526`, `360205`, `328902`, `330175`, `355150`, `362910` — across Army, WHS, DOE, USDA, FAA, the Air Force Academy and NRCS, and it is the **most stably measured uncovered form in the corpus** (6 independent stratified observations across three strata). A permanent refusal is a decision to leave ~31 records, the single largest reliably-measured uncovered population, permanently unreachable. That is a defensible decision, but it has to be made deliberately rather than inherited from a note written before the form was sized.
+
+**The two statements are compatible because they are about different things: the form is common, and the form is not a signal.** A bare `1.` carries no information about whether what follows is a research area or *Allowable Costs*. So the question is not "is the pattern safe" — it is not, and no version of it will be — but "is there something downstream that can carry the judgment the pattern cannot."
+
+**Exit criteria. All four must hold before an F1 recogniser may be added, and each is checkable.**
+
+1. **Cov4 shipped and gating, with span-level judgment per §6.4b.** An F1 set must be admitted structurally and then have **every member** classified individually, with only survivors published. Set-level acceptance may never publish an F1 set on its own evidence. The fail-closed contract applies unchanged: no classifier means no F1 subtopics, never unfiltered ones.
+2. **Validated on F1 candidates specifically, not on the 22 sibling sets §11 measured.** The validation set must include at least one grouped-restarting-counter document (`330175`) and one document whose numbered lines are predominantly administrative — B0's three notices are the obvious source, and their expected result is **zero published spans**. A false-rejection rate above zero on verified-good F1 spans blocks the item, on the same reasoning as Cov4's own gate.
+3. **Measured false positives of zero on the 33 category-(a) documents** in `docs/FAMILY_TAXONOMY.md` §1 — the documents measured to contain no list at all, which is the correct negative set and is larger and more representative than the census's 8 or the survey's 30.
+4. **Cov6 fixed**, or the recall is unpublishable anyway (§18.1). Adding F1 while `_demote()` caps 46.4% of the catalog produces cache entries and no user-visible gain, which would make the item look like a failure for an unrelated reason.
+
+**What would settle it either way.** A single measurement: run an F1 recogniser over the D4/D5 backfill corpus — 770 documents already fetched, already labelled for fabrication, already the corpus D5's thresholds were fitted against — with the Cov4 filter in front of it, and report the two numbers D5 reported: **fabricated publishable records (must be 0) and legitimate records lost (must be 0).** If the filter holds on that corpus, criterion 3 is satisfied on 770 documents rather than 33. If it does not, the prohibition becomes permanent on measured grounds rather than on B0's three documents, and this section should be rewritten to say so.
+
+**Until all four hold, F1 stays out.** `docs/FAMILY_TAXONOMY.md` §5.1 states the same conclusion and declines to resolve it; this section is the resolution — not a lift, a condition.
