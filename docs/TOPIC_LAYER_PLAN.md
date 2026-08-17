@@ -2,9 +2,11 @@
 
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
-Status: in progress · Version 8.1 · Written 2026-08-15 · **Revised 2026-08-16 against `docs/RECON.md`, measured build data, two CI failures, and `docs/CORPUS_CENSUS.md`**
+Status: in progress · Version 8.2 · Written 2026-08-15 · **Revised 2026-08-16 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, and `docs/COVERAGE_SURVEY.md`**
 
-> **Start at §18.** It defines the minimum path — the seven work packages that are actually being built — and lists what is deferred and what it costs. §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
+> **Start at §18.** It defines the minimum path — the **eight** work packages that are actually being built (A–G plus **D½ Coverage**, added in 8.2) — and lists what is deferred and what it costs. §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
+>
+> **Two things gate everything downstream right now:** §13 open decision **0** (the §12 budget versus `MAX_TERMS`) blocks committing any cache and needs a human; and every rate quoted against `docs/CORPUS_CENSUS.md`'s 20 documents is superseded by `docs/COVERAGE_SURVEY.md` (§1.1).
 
 ---
 
@@ -64,6 +66,23 @@ Package C opened with a corpus census (`docs/CORPUS_CENSUS.md`): 20 notice docum
 | `dod_topic` — "Typical source: MURI, ONR, ARO" | **MURI is absent from the corpus entirely** — zero mentions across 958 evidence entries. The family is validated only by the AFOSR DEPSCoR notice's identical `Topic N:` convention | MURI is SAM.gov-only, and that adapter is deferred (§18.2) |
 
 **Two things this revision deliberately does not do.** It does not cover the AFOSR shape — 39 named portfolios with no outline at all — which needs a different mechanism, sketched as `label_run` in §6.3a and left unbuilt with its risks stated. And it does not calibrate §6.4a's six numeric thresholds, which are reasoned starting points that package D must fit against the census corpus. This document has twice recorded numbers that proved wrong when run (§6.1's library versions, §6.2's font-size branch); these are flagged as unmeasured rather than presented as settled.
+
+---
+
+## ⚠ What changed in 8.2 — the coverage survey
+
+**`docs/CORPUS_CENSUS.md` is a non-representative sample and every rate derived from it is now superseded.** Its 20 documents were chosen to *span shapes*, which is the right way to find mechanisms and the wrong way to size them. `docs/COVERAGE_SURVEY.md` (2026-08-16) supplies the reference figures: attachment metadata for **all 1,635 attachments on all 1,475 catalog records**, a **40-record stratified read sample** disjoint from the census 20, and reachability re-derived against the catalog rather than against the evidence cache.
+
+**Where a rate appears in this document, the survey's figure is the one to quote.** The census remains the reference for *shapes* — which mechanisms exist, and what each miss is caused by — and its per-document judgments were all confirmed. It is not a denominator.
+
+| Was (census, 20 hand-picked) | Is (survey, 1,475 records / 40 stratified) | Why it matters |
+|---|---|---|
+| 12 of 20 documents enumerate = **60%** | **10 of 40 = 25%**; ~128 records catalog-wide, ~115 of them at three items or more | The 60% was a property of the sample. Every acceptance rate quoted against 12 flatters the design by roughly 2× |
+| The one-source assumption is wrong for **60% of the corpus** (12 of 20 carry >1 attachment) | **15.7% of the catalog** carries more than one attachment (232 of 1,475) | The census's records are far heavier than the corpus. Multi-attachment is still necessary — see AFRL PACER below — but it is not a majority case |
+| Reachability framed as **246 of 1,016 evidence entries** never attempted | **685 of 1,475 catalog records — 46.4% — are never attempted**, because `source_for_record()` returns `None`. 672 of them have no evidence entry at all | The old denominator counted only records that already had an entry, which is the population that by definition was reached |
+| The blind spots are pattern shapes | **The two largest blind spots are fetch plumbing**: 236 unreachable records carry live attachments, and 108 records carry a complete NIH announcement in an `.html` file `select_primary_document` cannot select because it is not a PDF | §18 is re-ordered accordingly: a new **Coverage** package sits between D and E, and all remaining pattern work is demoted below it |
+| Genesis Mission's `.xlsx` focus areas imply a spreadsheet class | **Measured zero.** Across 40 stratified records and 131 opened files, **no `.xlsx` and no `.docx` carried a subdivision list.** Genesis is an outlier, not a class | Word and spreadsheet parsing are downgraded to measured-zero in §18.2 — recorded, not deleted |
+| Low confidence never publishes, full stop | **Superseded by a review queue** (§13 settled list, new Coverage item). The tiers fitted in D5 suppress a *known-correct* 18-span extraction from AFRL PACER, and raising any of them re-admits the fabrications D5 removed | This is not a threshold problem and no threshold tuning resolves it. It needs a human in the loop |
 
 ---
 
@@ -244,6 +263,18 @@ Funding Finder's unit of record is the **opportunity**: one number, one synopsis
 - `document_evidence.json` extracts **administrative** facts (page limits, cost share, submission stages). That scope is correct and unchanged; it simply leaves this gap unfilled.
 
 No retrieval tuning fixes this. The discriminating text is not in any indexed field.
+
+### 1.1 How large is this problem, honestly
+
+**Most records in this catalog are not umbrellas, and this section previously implied otherwise by arguing from four vivid examples.** `docs/COVERAGE_SURVEY.md` measured it on a 40-record stratified sample, drawn across attachment profile and agency and deliberately disjoint from the census 20:
+
+> **10 of 40 sampled records (25%) carry an enumerated set of fundable subdivisions. 7 of the 10 clear §6.4 rule 1's three-item floor.**
+
+Extrapolated per stratum — each stratum's hit rate against that stratum's catalog population — that is a point estimate of **~128 umbrella parents catalog-wide, ~115 of them with three or more subdivisions: roughly 8–9% of 1,475 records.** The stratum samples are 6–10 records each, so the interval is wide; the top of the plausible range is around **200 records, ~13%**. Quote the range, not a single number, and quote the survey rather than the census — the census's 12-of-20 was a property of a sample chosen to span shapes.
+
+**The record count understates the stake, and that is the actual argument for building this.** Umbrellas are the multi-award programs: a single AFRI notice funds 37 program areas, DOE's Office of Science omnibus 70 sub-programs, the Genesis Mission 21 challenge areas across 98 focus areas, AFRL PACER 18 topics. A single-project cooperative agreement — which is what most of the other ~91% of records are — funds one award. So a tenth of the records covers a much larger share of the dollars a PI could actually apply for, and it is precisely the share where one record collapses many distinct opportunities into one lexically flat card.
+
+**What this bounds.** The ceiling on this feature is roughly one record in ten gaining children. It is not a catalog-wide transformation, and a design decision that trades precision on the other nine-tenths for recall on this tenth is a bad trade — which is what §18.3's asymmetry says in different words, now with a denominator behind it.
 
 ## 2. Scope
 
@@ -793,7 +824,7 @@ Note the method name changed from v6.2's `heading_regex` to **`heading_font`**, 
 
 That is ten **ordinal** families. v6.2's Phase 2 step list said "the eight families"; ten is correct.
 
-**All ten require a counter, and the census says that is the design's largest blind spot.** `docs/CORPUS_CENSUS.md` read 20 notices and found 12 that enumerate fundable subdivisions. **Four of the twelve name their subdivisions instead of numbering them** — including the two richest lists in the corpus, AFOSR's 39 research portfolios (32 distinct program-manager mailboxes) and the DOE Office of Science taxonomy in `DE-FOA-0003600`. No amount of tuning the ten reaches them, because there is no ordinal to capture. §6.3a adds a family that does not need one.
+**All ten require a counter, and the census says that is the design's largest blind spot.** *(Revised 8.2: it is the largest **pattern** blind spot. The survey found two larger ones, and both are fetch plumbing — see §1.1 and §18.1's Coverage package.)* `docs/CORPUS_CENSUS.md` read 20 notices and found 12 that enumerate fundable subdivisions — a 60% rate that is **not** the corpus rate; the stratified figure is 25% (§1.1). **Four of the twelve name their subdivisions instead of numbering them** — including the two richest lists in the corpus, AFOSR's 39 research portfolios (32 distinct program-manager mailboxes) and the DOE Office of Science taxonomy in `DE-FOA-0003600`. No amount of tuning the ten reaches them, because there is no ordinal to capture. §6.3a adds a family that does not need one.
 
 **`dod_topic` is validated, but not by the agency it is named for.** MURI appears **zero times** across all 958 evidence entries — no title, no opportunity number, no description, no stored document text. That is §18.2's SAM.gov deferral arriving rather than a sampling gap: MURI is a SAM.gov-only notice. The family's only validating document is the AFOSR DEPSCoR notice (`363526`), which uses the identical `Topic N:` convention across twelve topics. **The convention is confirmed; the agency in the "Typical source" column is not, and cannot be until the SAM.gov adapter ships.** Do not read a green `dod_topic` result as evidence that MURI will segment.
 
@@ -909,6 +940,12 @@ This is the quantitative replacement for "the ordinals count up," and it is the 
 
 > **These six thresholds — 1.5, 40%, 60%, 2 tokens, 0.6, 12–120 — are stated to be calibrated, not because they have been measured.** They are reasoned starting points, and this document has now twice recorded numbers that turned out wrong when run (§6.1's versions, §6.2's size branch). Package D must fit them against the census corpus in `docs/CORPUS_CENSUS.md` and record the fitted values here, with the false-positive count on the eight documents that enumerate nothing as the headline number. A structural family that admits any of those eight is worse than no structural family at all.
 
+**Fitted in D1 and D5, and then found to be the wrong instrument — read this before touching a threshold again.** D1 fitted three of the six; D5 fitted a process-vocabulary veto at 0.07 (§6.4 rule 8), demoted `heading_font` to `low` on 0/1 measured precision, and added a dominant-code-form trim. That work took fabricated publishable records from 54 to 0 and cost nothing legitimate, and it remains correct. What it cannot do is separate the last case:
+
+> **AFRL PACER (`349554`) yields 18 correct topics — `Topic 1 – Aero-Structures` through `Topic 18` — and every one of them is suppressed.** It resolves at Layer D (`numbered`), which is `low`; it would be won from a secondary attachment, which §6.6 caps at `low`; and `low` never publishes. The extraction is right, was read span by span, and is invisible.
+
+**No setting of these thresholds resolves that.** Raising Layer D's tier, or lifting the secondary-attachment cap, re-admits precisely the fabrications D5 removed — `1. NOFO Summary`, `a. Narrative Section I: Project Description` — because those come from the *same* tiers. The tiers are not mis-fitted; they are being asked to carry a decision they cannot make, which is *"is this particular list the fundable one?"* That question has one reliable answer, and it is a human reading the titles. See the Coverage package's confidence-model item (§18.1) and §13's revised settled decision.
+
 ### 6.5 Derived fields
 
 **Running header/footer removal** — required before summarizing, or every summary opens with the solicitation number:
@@ -954,10 +991,14 @@ def running_lines(containers, threshold=0.4):
 | Encrypted PDF | **Do not add new handling.** `extract_pdf_pages` already calls `reader.decrypt("")` inside a bare `except` for empty-password encryption, and `extract_containers` has already run before segmentation is called. If containers came back empty, Layer A's own `PdfReader` will fail the same way; catch broadly, record `encrypted`, skip |
 | PDF that `pdfplumber` can open but `pypdf` cannot, or vice versa | Each layer guards its own open; a library failure in one layer falls through to the next rather than aborting the document |
 | Document exceeds the time budget | `time_budget` reason, zero subtopics, parent untouched (§6.1) |
-| Topics in a *separate* attachment (common for DOE "Topic Area Descriptions" appendices) | **Implemented 2026-08-16 — `scripts/subtopic_sources.py`, and it bought nothing yet.** A parallel, subtopic-only path segments every attachment, dedups by content hash and keeps the best-scoring result; `source_for_record()` keeps its single-source contract so fact extraction is untouched and §0.5 holds by construction. **Measured across the census: zero correct acceptances gained, one wrong-list introduced.** CDC `360339` segmented its `M&E Indicator List` — `2.1. Point of Entry General Capacity`, `5.2. Laboratory Quality Control` — instead of its five fundable Components. So secondary-won results are **capped at `low` confidence and never publish**, on a measured precision of 0 of 1. NRL `352741` is the case that justified the work and it still misses: the path now fetches `Amendment 0004.pdf`, which really does hold its 32 topics, and the `53-24-01` code form has no family. Necessary but not sufficient. **The structural lesson: more documents means more enumerated lists, and most enumerated lists in a notice are not the fundable subdivisions** — indicator frameworks, review criteria, proposal components, cost categories. Widening the input widened the false-positive surface faster than it widened recall. Original measurement follows.<br><br>**Measured 2026-08-16 — the gap is much larger than "common for DOE appendices" suggested.** All 62 attachments across the 20 census records were enumerated: **12 of 20 records carry more than one attachment**, so the one-source assumption is wrong for 60% of the corpus. One miss is caused by it outright — NRL `352741`'s **32 research topics with 25 per-topic contact mailboxes** live in `Amendment 0004.pdf`, never fetched, while the primary notice it does fetch contains none of them. And the Genesis Mission's **98 focus areas** sit in a `.xlsx` attachment, which `extract_containers` could not parse even if it were fetched (it dispatches on `pdf`/`html`/`text` only, though `openpyxl` is already a runtime dependency). `source_for_record` returns exactly **one** source per record — `primary_document_url`, else the agency notice URL as a gap-fill. Building a multi-attachment path means changing its contract, its cache key shape, and the `--max-documents` budget. Still deferred; the cost is now quantified rather than guessed. See `docs/CORPUS_CENSUS.md` |
+| Topics in a *separate* attachment (common for DOE "Topic Area Descriptions" appendices) | **Re-justified 2026-08-16 by `docs/COVERAGE_SURVEY.md`, which found the case the census lacked.** AFRL PACER (`349554`) carries 17 attachments; the one `select_primary_document` picks is `Atch 10 BAA Attachment - Security Program Questionnaire.pdf`, a single page of 1,853 characters. The real BAA is `FA2391-23-S-2403.pdf`, and handed that file **production's own segmenter returns 18 correct topics**. So the mechanism now has a positive case, not only NRL's necessary-but-not-sufficient one — and it also has a corrected size: **15.7% of the catalog carries more than one attachment (232 of 1,475), not the 60% the census's heavier records implied.** Corpus-wide, only **4 records of 1,475** have a furniture-named selected primary, but `349554` and the census's `360261` are two of them. Expected yield, from the survey's stratified sample: **1 of 40 records, ~5 catalog-wide.** Small, real, and already built. Original entry follows.<br><br>**Implemented 2026-08-16 — `scripts/subtopic_sources.py`, and it bought nothing yet.** A parallel, subtopic-only path segments every attachment, dedups by content hash and keeps the best-scoring result; `source_for_record()` keeps its single-source contract so fact extraction is untouched and §0.5 holds by construction. **Measured across the census: zero correct acceptances gained, one wrong-list introduced.** CDC `360339` segmented its `M&E Indicator List` — `2.1. Point of Entry General Capacity`, `5.2. Laboratory Quality Control` — instead of its five fundable Components. So secondary-won results are **capped at `low` confidence and never publish**, on a measured precision of 0 of 1. NRL `352741` is the case that justified the work and it still misses: the path now fetches `Amendment 0004.pdf`, which really does hold its 32 topics, and the `53-24-01` code form has no family. Necessary but not sufficient. **The structural lesson: more documents means more enumerated lists, and most enumerated lists in a notice are not the fundable subdivisions** — indicator frameworks, review criteria, proposal components, cost categories. Widening the input widened the false-positive surface faster than it widened recall. Original measurement follows.<br><br>**Measured 2026-08-16 — the gap is much larger than "common for DOE appendices" suggested.** All 62 attachments across the 20 census records were enumerated: **12 of 20 records carry more than one attachment**, so the one-source assumption is wrong for 60% of the corpus. One miss is caused by it outright — NRL `352741`'s **32 research topics with 25 per-topic contact mailboxes** live in `Amendment 0004.pdf`, never fetched, while the primary notice it does fetch contains none of them. And the Genesis Mission's **98 focus areas** sit in a `.xlsx` attachment, which `extract_containers` could not parse even if it were fetched (it dispatches on `pdf`/`html`/`text` only, though `openpyxl` is already a runtime dependency). `source_for_record` returns exactly **one** source per record — `primary_document_url`, else the agency notice URL as a gap-fill. Building a multi-attachment path means changing its contract, its cache key shape, and the `--max-documents` budget. Still deferred; the cost is now quantified rather than guessed. See `docs/CORPUS_CENSUS.md` |
 | HTML notice (NSPIRES, agency pages) | `extract_html_sections` already returns section/anchor-keyed containers with no page numbers. Use the section tree as the outline equivalent; same families, same acceptance rules; `page_start`/`page_end` null and the anchor carries the evidence link |
+| **HTML as a Grants.gov *attachment*** — measured 2026-08-16, and unhandled | **366 of the 1,635 attachments in the catalog are `.html`, and every one belongs to NIH.** They split by size: **255 are stubs under 1 KB**, and **111 are complete announcements averaging ~145 KB, across 108 records**. `select_primary_document` requires a PDF (`attachment_is_pdf` gates the whole loop), so **not one of the 108 is selectable**, and all 108 sit in the unreachable population. This is the single largest clean fetch win in the survey's table. Temper it with what the survey also found: the two NIH records and one FDA record sampled on that same NIH template all enumerate **nothing**, so the yield per record reached is unknown and plausibly low. `docs/COVERAGE_SURVEY.md` names reading 20 of the 108 as the cheapest measurement that would settle it |
+| **A `.zip` attachment** — 15 records | Not handled, and probably not worth handling. `360003` (ROSES A.10 INNOVATE) has exactly one attachment, a zip; inside it is `INNOVATE25_PSD.pdf`, which is a *Program Specific Data* form, not the element text. NASA's element text really is only on NSPIRES |
+| **Image-only PDF, in the wild** | `363388` (ETA `UIPL 13-26.pdf`) is 18.7 MB across 49 pages and yields **48 characters**. The `no_extractable_text` path is correct and does fire; no OCR in v1 stands |
 | Same FOA arriving via two sources (Grants.gov + EERE Exchange) | Dedup on `source_document_hash` before merge; first source wins |
 | Amendment renumbers topics | Title-first matching (§5.3) |
+| **Subdivisions that are one-per-attachment** — new shape, 2026-08-16 | State's `363607` Advancing Global Health APS carries six Addenda — Cameroon, Côte d'Ivoire, Mozambique, NTDs, Nutrition, Surveys and Surveillance — **each a separate PDF and each a fundable subdivision**, with the APS itself only saying *"through specific Addenda, the Department will signal priorities."* Nothing in §6.2's four layers models a subdivision that **is** a whole document rather than a span inside one. Recorded, not designed; the record is also unreachable, so nothing is fetched for it today |
 
 ### 6.7 Topics by reference — the DOE BES case
 
@@ -1086,7 +1127,16 @@ Children must be appended **and** indexed in the same write, or `validateCatalog
 - **Step 4, `sources merge`** — the last step that rebuilds the index, so nothing downstream can drop the children. Requires reading `data/subtopic_records.json` from disk rather than from memory. **This is the recommended point**, and it is why the cache file exists at all rather than passing subtopics in memory.
 - **`build_catalog` (step 1)** — v6.2's choice. It cannot work: `build_catalog` runs before the documents have been fetched, so the subtopics for this run do not exist yet.
 
-Filter to `confidence != "low"` at the merge, not at write time. The cache keeps low-confidence rows for diagnostics; the catalog never sees them (§6.2 Layer D).
+Filter at the merge, not at write time. The cache keeps every row for diagnostics; the catalog sees only what passes. **Revised in 8.2 (§18.1 Cov4):** the test is no longer `confidence != "low"`. It is
+
+```
+publish  =  confidence == "high"
+         OR (confidence in {"medium", "low"}
+             AND an approval exists for this subtopic_id
+             AND that approval's document_sha256 == the current document's)
+```
+
+so `medium` no longer publishes unreviewed — strictly more conservative than the previous rule — and an approved `low` can. The hash clause is what makes an approval falsifiable: when the notice changes, its subtopics re-queue instead of inheriting yesterday's judgment.
 
 ### 7.2 Currentness
 
@@ -1760,7 +1810,7 @@ Two consequences worth stating plainly:
 
 ## 10. Phases
 
-> **§18 supersedes this section as the unit of work.** These four phases describe everything the project *could* include; §18 defines the seven packages actually being built and lists what is deferred with the cost of each. Read §10 for the reasoning behind an individual step — it is retained in full and still explains *why* each piece exists — but take the sequence and the checklist from §18 and §15.
+> **§18 supersedes this section as the unit of work.** These four phases describe everything the project *could* include; §18 defines the eight packages actually being built (A–G plus D½ Coverage) and lists what is deferred with the cost of each. Read §10 for the reasoning behind an individual step — it is retained in full and still explains *why* each piece exists — but take the sequence and the checklist from §18 and §15.
 
 Reordered so everything large and additive lands before anything existing changes behavior. Four phases.
 
@@ -1822,7 +1872,7 @@ The subtopic pipeline runs daily and produces a cache. The published catalog doe
 Everything is built and running in parallel, off by default.
 
 20. **Write `assets/match-explain.js`** (§7.6) behind its own `FF_MATCH_EXPLAIN` flag. Ship this **first and independently** — it is lower risk than subtopics, valuable on ordinary records, and earns its own rollout.
-21. **`sources/merge.py --enable-subtopics`**: read `data/subtopic_records.json`, append children with `parent_id`, filter `confidence == "low"`, dedup on `source_document_hash`, rebuild the index including `subtopic_terms` — all in one write, so `record_count` and `search_index.document_count` move together (§4, §7.1).
+21. **`sources/merge.py --enable-subtopics`**: read `data/subtopic_records.json`, append children with `parent_id`, filter by the §7.1 publish test (8.2: `high`, or `medium`/`low` with a hash-matched approval — no longer a bare `confidence != "low"`), dedup on `source_document_hash`, rebuild the index including `subtopic_terms` — all in one write, so `record_count` and `search_index.document_count` move together (§4, §7.1).
 22. **Add `term_display`** to the subtopic builder in `scripts/subtopic_records.py`, capped at 60 stems. Without it the match chips render stems and look broken.
 23. **Backfill suppression**: subtopics whose `first_seen` equals the backfill marker date are excluded from `build_changes.py` on that build only — otherwise the first digest is entirely noise. Because §8.3's backfill is a single local run, there is exactly one marker date and the rule stays simple.
 24. **Extend `currentness.py`** per §7.2 — `subtopic_status()` plus a `record_type` early return — **and the three browser re-implementations** in `app.js`, `team-matcher.js` and `team-researchers.js`. Dedicated parent/child interaction tests.
@@ -1865,6 +1915,8 @@ Two narrower uses survive and are the only reasons to reopen it:
 - **Filtering contaminating spans.** Package D measured 7 bad spans in the publishable set — `Open Science`, `Annual Progress Reports`, `Teaming Arrangements`. A model shown those beside `Catalysis Science` would plausibly reject them. That is classification of *located* spans, inside the constraint, and it addresses precision rather than recall.
 - Nothing else. Reading the Genesis `Focus Areas` spreadsheet needs a spreadsheet reader, not a model.
 
+**8.2 note — the surviving use now has a non-AI implementation, and it ships first.** The one narrow use above is *"show a human-quality judgment the located titles and have it reject the furniture."* §18.1's Cov4 review queue does exactly that with an actual human, browser-local, using `assets/review.js`. Build that first and let it accumulate labelled approvals and rejections. If the queue proves the bottleneck is reviewer time rather than judgment, this section becomes worth reopening **for that one task only** — with the queue's own labels as its evaluation set, which is a far better position than reopening it today with none.
+
 Not built in v1. Recorded so the deterministic design does not preclude it.
 
 **Adds:** cleaner human-readable summaries, normalized dates written in prose, consistent phrasing across agency formats. Polish, not mechanism.
@@ -1879,6 +1931,7 @@ Not built in v1. Recorded so the deterministic design does not preclude it.
 
 | Risk | Mitigation |
 |---|---|
+| **⚠ The per-subtopic 2 KiB ceiling is arithmetically impossible as written, and it currently blocks committing any cache at all** | **Measured, not predicted: 202 of 223 backfill records exceed it; the specified composition costs ~6.5 KB, and only ~38 terms fit against `MAX_TERMS = 400`.** This is a conflict between §12 and §5.2, not an implementation defect, and it is **open decision 0 in §13, awaiting a human.** Do not resolve it by editing the A4 test (§0.4 rule 3) |
 | **Catalog inflation — the numbers, since v6.2's budget was unusable** | `opportunities.js` measures **23.6–24.8 MB** across recent builds for ~1,475 records; it fluctuates nightly, so treat any single figure as a snapshot. A 1.5× multiplier would set a ~37 MB ceiling, which is not a budget — it is permission to nearly double. Use **absolute** limits instead: hard fail above **32 MB**; warn above **28 MB**; and cap *per-subtopic* cost at **2 KB** serialized (600-char summary + 400-term map + 60-entry `term_display` + scalars). At 2 KB, 1,000 subtopics cost ~2 MB, which is the real budget this feature has to live inside. If a design needs more, cut `max_terms`, not the ceiling. GitHub warns on files above 50 MB, so 32 MB also preserves headroom for ordinary catalog growth. §13 open decision 1 asks whether subtopics should be in this file at all |
 | Result pollution: 20 topics plus parent all match one query | Max-score rollup; collapsed rendering; no independent parent entry |
 | Phantom `subtopic_amended` flood after a library upgrade | Exact pins on `pdfplumber`, `pdfminer.six` **and** `pypdf` (§6.1) — `pdfminer.six` especially, since it is transitive and actually drives extraction; versions embedded in `extractor_version` make the cause visible in the diff |
@@ -1894,7 +1947,7 @@ Not built in v1. Recorded so the deterministic design does not preclude it.
 | **Segmentation fails on every document and nobody notices** | Step 10 is `continue-on-error` with no `id:`, so its failures open no issue at all (§9.3). Diagnostics block plus deliberate review during the Phase 2 observation window |
 | **Both auto-issue channels are already open and recurring — this predates the subtopic work entirely** | **#30 "External funding source refresh degraded"** has been open since 2026-08-09 with 19 comments and updates on essentially every run, because `jhu-fellowships` reports `failed_no_fallback`. **#29 "Automated Grants.gov refresh failed"** has been open since 2026-08-08 with 6 comments. Neither was caused by this project and neither is this project's to fix. Because the workflow comments on an existing open issue of the same title rather than opening a new one, **no new issue number will ever appear for either**, which is why §9.4 item 4 checks issue *numbers*. Resolve `jhu-fellowships` separately (§7.4); until then, watch the Actions run conclusion directly rather than trusting the issue channel |
 | **No recorded runtime baseline** | Total job wall-clock is not stored in the repository — only in Actions run history, which ages out. The 2:20–3:30 figure came from reading run summaries by hand. Record the absolute duration on every dispatch run (§9.4 item 2) so the trend toward the 15-minute ceiling is visible before it is breached |
-| Segmentation false positives on reference lists | Acceptance rules (§6.4); low confidence never publishes |
+| Segmentation false positives on reference lists | Acceptance rules (§6.4); nothing below `high` publishes without an explicit hash-bound approval (§7.1, §18.1 Cov4) |
 | New agency template breaks segmentation | Fails closed to zero topics; rejection reason logged and monitored (Phase 4, step 30) |
 | SAM.gov quota exhaustion | Prefilter before description calls; cache descriptions by notice id (§7.5) |
 | Eval discontinuity | Query baseline frozen before any change (Phase 1, step 2, §8.5) |
@@ -1923,7 +1976,7 @@ Not built in v1. Recorded so the deterministic design does not preclude it.
 
 - **PDF toolchain: `pdfplumber` (MIT) + the existing `pypdf`.** Not PyMuPDF, which is AGPL-3.0 and conflicts with this repository's all-rights-reserved posture and possible commercial licensing (§6.1).
 - **Segmentation runs inside `extract_document_evidence.py`'s existing pass**, at a minimal flag-guarded call site, with the logic in new modules (§6.1a, §8.3).
-- **Low-confidence segmentations stay hidden**, not surfaced with a warning. A wrong topic is worse than a missing one — it puts a plausible card with a page anchor in front of a PI (§6.2 Layer D).
+- ~~**Low-confidence segmentations stay hidden**, not surfaced with a warning.~~ **Revised 2026-08-16 (8.2).** The principle is unchanged and the mechanism is not: **nothing below `high` auto-publishes, and `low` *and* `medium` are routed to a review queue** rather than discarded (§18.1 Cov4). The binary gate was changed because it was measured suppressing a known-correct 18-span extraction (AFRL PACER) while no threshold setting could admit it without re-admitting D4's fabrications. A wrong topic is still worse than a missing one; what changed is that a human, not a threshold, now decides which is which.
 - **Expired topics are retained 3 years and flagged**, in a separate lazily-loaded `data/subtopic_archive.json`, excluded from default search and alerts (§7.2).
 - Team match takes **ORCIDs only**. Resume and free-text belong to the personal browser-local profile (§7.9).
 - Profiles are built from **works text, not assigned concepts**. ORCID is an identity key (§7.9).
@@ -1932,6 +1985,7 @@ Not built in v1. Recorded so the deterministic design does not preclude it.
 
 **Still open:**
 
+0. **⚠ BLOCKING — the §12 per-subtopic budget versus `MAX_TERMS` (§5.2). No cache can be committed until a human decides this.** The A4 size-budget test — added in package A precisely to catch this — **fails**: 202 of 223 backfill records exceed the 2 KiB per-subtopic ceiling, median 3,824 bytes, max 6,892. §12 specifies 2 KiB as "600-char summary + 400-term map + 60-entry `term_display` + scalars"; measured, that composition is about **6.5 KB**. Non-term overhead alone is a median 1,582 bytes, within 120 bytes of the entire ceiling before a single term is stored, and at 12.3 bytes per term entry only about **38 terms** fit against a `MAX_TERMS` of 400. §12 says *"if a design needs more, cut `max_terms`, not the ceiling"* — but cutting 400 → 38 is not tuning, it is a redesign of §5.2, whose whole premise is that *"indexing only a 600-character summary discards most of the retrieval gain."* **Two sections of this plan contradict each other and neither can be satisfied by an implementation choice.** Three options, none taken: cut `MAX_TERMS` to ~38 (honours §12 literally, guts §5.2); raise the per-subtopic ceiling to ~4 KB (aggregate is fine — 1,000 subtopics at 4 KB is ~4 MB against a 32 MiB hard limit, so only §12's per-record figure moves, and it was never achievable); or move the term map out of the per-record budget entirely, which §13.1's sidecar already contemplates since it is retrieval data rather than display data. **§0.4 rule 3 forbids editing the A4 test to let the cache through.** Tracked as D7 in §15; it blocks package D's close and everything downstream of it, including the Coverage package's own backfill.
 1. **Where subtopic records are stored — in `data/opportunities.js`, or in a lazily-loaded sidecar.** This is the largest open decision in the document and it should be settled before Phase 3 step 21. Full analysis below. Recommendation: **the sidecar**, but the case is close and the counter-argument is strong. **Explicitly deferred to a human decision.**
 2. **Where referenced subtopics live** — extend `scripts/sources/discoverability.py` with child records, or a parallel `scripts/sources/adapters/program_taxonomy.py`. Full tradeoffs in **§6.7a**; recommendation is the adapter, importing the linkage rule from the registry rather than duplicating it. **Explicitly deferred to a human decision.**
 3. **Works-text provider** — add abstracts to the existing Crossref path, or switch the browser to OpenAlex for better abstract coverage (§7.9). Decide on measured results from the §8.5 gate, not on argument.
@@ -2029,7 +2083,7 @@ The size argument is secondary and weaker than it first appears — 2 MB on a 23
 
 **The recommendation is conditional on one thing being resolved first.** Cross-corpus score normalization is the real cost of Option B, and it is the part most likely to be underestimated. Before committing, prototype §7.3's rollup across two indexes on the frozen catalog and check it against the §8.5 query set. If parent/child scores cannot be made comparable in a way that survives that gate, **Option A's single-index simplicity is worth its costs** and the recommendation flips. Do not choose the sidecar on architectural grounds and discover the ranking problem in Phase 3.
 
-Whichever is chosen, three things hold either way: the per-subtopic 2 KB cap (§12); the archive stays a separate lazily-loaded file (§7.2); and low-confidence segmentations never ship (§6.2).
+Whichever is chosen, three things hold either way: the per-subtopic 2 KB cap (§12); the archive stays a separate lazily-loaded file (§7.2); and nothing below `high` ships unreviewed (§7.1, §18.1 Cov4).
 
 ## 14. Glossary
 
@@ -2048,7 +2102,7 @@ Whichever is chosen, three things hold either way: the per-subtopic 2 KB cap (§
 | **Flag off parity** | With `--enable-subtopics` off, output must be byte-identical to pre-change. The core safety property. |
 | **Backfill** | The one-time campaign that adds subtopics to the ~1,400 documents already in the evidence cache. Requires the three-gate trigger in §8.3, without which the feature silently covers only newly-changed documents. Run **locally in one pass** and committed once (§18 package D) — never drained through the nightly. |
 | **Work package** | The unit of work in §18: several related items, one session, one commit per item. Replaces §10's numbered step as the thing a session delivers. |
-| **Minimum path** | §18's packages A–G — the smallest version of this project worth shipping. Everything outside it is deferred with a stated cost (§18.2). |
+| **Minimum path** | §18's packages A–G plus D½ Coverage — the smallest version of this project worth shipping. Everything outside it is deferred with a stated cost (§18.2). |
 | **Backfill suppression** | Excluding first-seen subtopics from change events so the first digest is not entirely noise (Phase 3, step 23). Distinct from *backfill* itself. |
 | **Discoverability registry** | `scripts/sources/discoverability.py` — the eleven-rule umbrella registry that already exists, attaching program-area topics and search terms to opaque umbrella FOAs (§3). Not to be confused with the subtopic layer, which adds child *records*. |
 | **Gold set** | Auto-derived known-positives from past awards. The only way to judge whether a change *helped* rather than merely *changed*. Deferred; see §13 open decision 3. |
@@ -2097,7 +2151,7 @@ One **package** per session (§0.4 rule 5). One **commit** per item, with the su
 
 **Complete 2026-08-16.** One commit per item, suite run between commits, pushed and green on `ubuntu-latest`.
 
-- [x] C0. **Corpus shape census** — added ahead of C1. 20 notice documents judged by reading → `docs/CORPUS_CENSUS.md`. *12 of 20 enumerate fundable subdivisions; a family identifies the right list in 1 of those 12; the segmenter produces subtopics for 0. Found that the best match is blocked by a segmenter defect rather than a pattern gap, and that §6.7 is wrong about `DE-FOA-0003600`*
+- [x] C0. **Corpus shape census** — added ahead of C1. 20 notice documents judged by reading → `docs/CORPUS_CENSUS.md`. *12 of 20 enumerate fundable subdivisions; a family identifies the right list in 1 of those 12; the segmenter produces subtopics for 0. Found that the best match is blocked by a segmenter defect rather than a pattern gap, and that §6.7 is wrong about `DE-FOA-0003600`.* **⚠ Non-representative by design — the 20 were chosen to span shapes. Its per-document judgments were all confirmed and it remains the reference for *shapes*; it is not a denominator. Use `docs/COVERAGE_SURVEY.md` for every rate (Cov0)**
 - [x] C1. `scripts/subtopic_records.py` — identity matching, term maps, cache I/O, `needs_subtopic_extraction()` — *§5.3 matching and §5.2 term maps already landed in `subtopic_segmentation.py` during B, so this module imports them; §5.4 diff stability enforced by test*
 - [x] C2. Flag-guarded call site in `extract_document_evidence.py` (§8.3, four commits) — the only change to working production code in the minimum path — *two commits, insertions 1/2/4 then insertion 3. Exactly one line removed in the whole diff*
 - [x] C3. `git add` paths in the workflow — *guarded by a `-f` test, since the file does not exist until package G*
@@ -2106,6 +2160,8 @@ One **package** per session (§0.4 rule 5). One **commit** per item, with the su
 ### Package D — Tune and backfill
 
 **Read `docs/CORPUS_CENSUS.md` before starting.** It is the measured picture this package tunes against: 12 of 20 documents enumerate, a family identifies the right list in 1 of those 12, and the segmenter produces subtopics for 0.
+
+> **⚠ Superseded denominator (8.2).** That 12-of-20 is a **non-representative** sample — the documents were chosen to span shapes. `docs/COVERAGE_SURVEY.md` is the reference: **10 of 40 stratified records enumerate (25%)**, ~128 catalog-wide. Every rate in this package's gate below is quoted against 12 and therefore reads roughly **twice** as favourably as the corpus supports. The gate is left as measured rather than restated, because it was a true measurement of that corpus; do not carry its percentages forward.
 
 - [x] **D0a. Fix Layer B's body cutoff** — *the defect was larger than the census recorded: `_candidates_from` also searched from offset 0, so it found the TOC copy of every title and never reached the body. The floor had to move to the search, not the results. 0 → 8 candidates located on `363526`*
 - [x] **D0c. Cap the final span** — *a THIRD defect, not in the census. The last span ran to end-of-document (111,290 chars on `363526` against a 40,000 ceiling), so any notice whose list ends before the document does was unacceptable by construction — which is nearly all of them*
@@ -2118,8 +2174,8 @@ One **package** per session (§0.4 rule 5). One **commit** per item, with the su
 - [ ] **D5. Give `structural_siblings` a positive test.** It admits any sibling set whose ancestors are not administrative, and the level-0 lexicon is keyed to DOE's `III. Program Description` convention. `362827`'s ancestor is `A. Summary`, `348830`'s is a bare `I.` — neither matches, so both publish their NOFO skeleton. **Until this exists `outline_structural` should emit `low`, not `medium`**
 - [x] **D5. Give `structural_siblings` a positive test** — done, and it took three fitted changes rather than one: a process-vocabulary veto at 0.07 applied to every family (§6.4 rule 8), `heading_font` demoted to `low` on 0/1 measured precision, and a dominant-code-form trim for contaminants inside otherwise-correct sets. **Fabricated publishable records 54 → 0**, legitimate 140 → 133, all 133 read individually
 - [ ] **D7. Resolve the §12 per-subtopic budget, which is arithmetically impossible as written.** It specifies 2 KiB as "600-char summary + 400-term map + scalars"; measured, that composition is ~6.5 KB, non-term overhead alone is a median 1,582 bytes, and only ~38 terms fit at 12.3 bytes each against `MAX_TERMS = 400`. **202 of 223 backfill records exceed the ceiling, so the A4 test fails and the cache cannot be committed.** Three options in `docs/CORPUS_CENSUS.md`: cut `MAX_TERMS` to ~38 (honours §12, guts §5.2), raise the ceiling to ~4 KB (aggregate is fine — 4 MB against a 32 MiB limit), or move the term map out of the per-record budget as §13.1's sidecar already contemplates. **A design decision, not an implementation one**
-- [ ] **D6. Re-measure precision on a random sample.** Every figure before D4 came from 20 records hand-picked to span shapes, on which this family scored 0 false positives. The backfill's 770 tell a materially worse story, and that gap is a property of the sample, not of the code
-- [ ] **GATE — measured, and one clause not met.** Denominator is the **12 enumerating** documents, not 20 (`docs/CORPUS_CENSUS.md`):
+- [x] **D6. Re-measure on a stratified sample — done 2026-08-16 → `docs/COVERAGE_SURVEY.md`.** 40 records stratified by attachment profile and agency, disjoint from the census 20; 131 files and pages opened with nothing skipped by name. **10 of 40 enumerate (25%), not 12 of 20 (60%)**; ~128 catalog-wide. *Partial: this measures **coverage**, not precision. The false-positive rate on a random sample — D6's original question — is still unmeasured, because the D5 changes were fitted after the backfill that would have to be re-run to measure them. Re-run the backfill and read the publishable titles again after the Coverage package*
+- [ ] **GATE — measured, and one clause not met.** Denominator is the **12 enumerating** documents, not 20 (`docs/CORPUS_CENSUS.md`). **⚠ 8.2: that denominator is a non-representative sample; the corpus rate is 25% (`docs/COVERAGE_SURVEY.md`). These figures stand as a true measurement of *this corpus* and must not be quoted as the design's coverage:**
 
 | Metric | Result |
 |---|---|
@@ -2137,6 +2193,17 @@ One **package** per session (§0.4 rule 5). One **commit** per item, with the su
 **⚠ Tuning stopped at 42%, below the 50% threshold, deliberately.** Every remaining miss needs a new *mechanism*, not a wider regex: `label_run` for outline-less named portfolios (AFOSR, NRL), occurrence selection for patterns that match in several places (`360339`, `363065` — a front-matter summary list and 36 prose mentions respectively), or a generic numbered-section family for `332894`'s bare `1.)`. §6.3 and §18.3 both name that last one as the most damaging change available. **The 0/8 false-positive count is the number that should not be traded**, and reaching 50% by loosening would trade exactly that.
 
 Per-agency-family acceptance, as the gate requires rather than in aggregate: **DOE 3/5** (`360678`, `361526`, `356623`; missing `363065`, and `362329` is DHA not DOE) · **DoD 2/6** (`363526`, `362859`; missing `332894`, `343653`, `352741`, `362681`) · **HHS/CDC 0/1** · **NASA 0/0** (no ROSES document in the corpus; §18.2).
+
+### Package D½ — Coverage
+
+**Read `docs/COVERAGE_SURVEY.md` before starting.** It is the measured picture this package works against, and its ranked table is this package's ordering. Every yield below is *sampled records out of 40* · *catalog extrapolation*.
+
+- [ ] **Cov0. Survey the corpus** — done 2026-08-16, ahead of the package → `docs/COVERAGE_SURVEY.md`. *1,635 attachments across all 1,475 records; 40-record stratified read sample; reachability re-derived. 44.7% of the catalog carries no attachment, 46.4% is never fetched, and 25% of sampled records enumerate — not 60%*
+- [ ] **Cov1. Fix the `source_for_record` selection gap** — 2/40 · ~48. **685 records (46.4%) never attempted; 672 have never been fetched once; 236 carry live attachments.** Extend the parallel subtopic-only path (`subtopic_sources.py`); do **not** change `source_for_record` itself
+- [ ] **Cov2. HTML attachment support** — 1/40 · ~43, plus **108 records reached whose yield is unmeasured**. 366 `.html` attachments, all NIH; 111 complete announcements; 255 sub-1 KB stubs that must not displace the agency URL. **Read 20 of the 108 first** — that measurement is inside this item, not after it
+- [ ] **Cov3. Re-enable multi-attachment fetch** — 1/40 · ~5. Already built and neutralized by its own `low` cap. Justified by **AFRL PACER `349554`**: selected primary is a one-page Security Program Questionnaire; `FA2391-23-S-2403.pdf` yields **18 correct topics**. Land selection-by-result-quality with it
+- [ ] **Cov4. Redesign the confidence model** — the review queue (§18.1). `medium` stops auto-publishing; `low` and `medium` queue; approval is explicit, hash-bound, and committed by a human. Reuses `assets/review.js` and **partially delivers issue #8**
+- [ ] **GATE:** unreachable count re-derived against the **catalog** · records *reached* and records *yielding an accepted list* reported **separately** for Cov1–Cov3 · fabricated publishable records still **0**, measured by reading every published title as D5 did · §0.5 byte-identical with the flag off · **every gate's exit code checked directly, not read through `tail` (§17.7)**
 
 ### Package E — Storage and scoring
 
@@ -2263,7 +2330,9 @@ Both are Phase 1 work and both fail loudly rather than silently, which is why th
 | 5 | §18 package A — foundations completion. | Six commits, gates green, §15 updated, branch pushed | **done 2026-08-16** |
 | 6 | §18 package B — segmentation, offline and self-contained. Opened with an unplanned B0 verifying §17.2's API claims. | Four commits, gates green, §15 updated, branch pushed | **done 2026-08-16** |
 | 7 | §18 package C — wire the call site, flag off. Opened with an unplanned C0 corpus census. | Five commits, §0.5 gate green, §15 updated, branch pushed | **done 2026-08-16** |
-| 8+ | **One §18 work package per session.** Each item inside it is its own commit, with the suite run between commits. | The package, its gate output, an updated §15, and a pushed branch | next: package D — **read `docs/CORPUS_CENSUS.md` first**; it is the measured picture D's pattern tuning is supposed to work against |
+| 8 | §18 package D — tune and backfill. | Nine commits; D4/D5 backfills run and the cache deliberately **not** committed; D7 opened | **done 2026-08-16 — gate not met.** Fabricated publishable records reached 0, but the A4 size budget fails (§13 open decision 0) |
+| 9 | Coverage survey — research only, no code. | `docs/COVERAGE_SURVEY.md`; this revision (8.2) | **done 2026-08-16** |
+| 10+ | **One §18 work package per session.** Each item inside it is its own commit, with the suite run between commits. | The package, its gate output, an updated §15, and a pushed branch | next: **package D½ — Coverage**. Read `docs/COVERAGE_SURVEY.md` first; its ranked table is the package's ordering. Note §13 open decision 0 blocks committing any cache until a human resolves it |
 
 Sessions 1 and 2 are not overhead. They are what makes the additive-edit discipline in §8 possible, because you cannot make a surgical edit to a file whose structure you inferred. Session 1 found that the single most consequential fact in this project — which PDF library the repository uses — was wrong in every prior version, and that error alone would have produced an unusable Layer C and an AGPL licensing problem.
 
@@ -2312,15 +2381,48 @@ So before committing any baseline that covers a new artifact:
 
 The general form of the lesson: **a determinism gate is only as good as the axes you varied while testing it.** Time and platform are both axes. Testing repeatedly on one machine varies neither.
 
+### 17.7 Never read a gate's result through `tail`, `head` or `grep`
+
+**A false green was reported this way during package D.** A gate was run as `<command> | tail -N`, the visible tail read as a pass, and the pass was reported — but a pipeline's exit status is the status of its **last** command, so `tail` returning 0 says nothing whatever about the command that fed it. `grep` is worse than useless here: it exits **1** when it matches nothing, so `... | grep FAIL` exits non-zero precisely when everything passed.
+
+The rule, for every gate in this document — the suite, `verify_no_drift`, the query baseline, the size budget:
+
+- **Check the exit code.** Run the command bare, or capture `$?` immediately, or use `set -o pipefail` before any pipeline. Never infer a result from what happened to be on screen.
+- **Truncation hides the failure by construction.** `unittest` prints its `FAILED (failures=N)` line last, which survives a tail — but a traceback, an import error, a `no tests ran`, or a crash before the summary does not. `verify_no_drift` prints its differing artifacts *before* its verdict, so a tail is exactly the wrong end.
+- **Paste the exit code in the session report**, not just the output. §0.4 already forbids asserting a pass you did not observe; observing the last ten lines is not observing the result.
+
+```bash
+python -m unittest discover -s tests; echo "exit=$?"     # correct
+bash tools/verify_no_drift.sh; echo "exit=$?"            # correct
+python -m unittest discover -s tests 2>&1 | tail -6      # tells you nothing
+```
+
+This is the same class of error as §9.4 item 7, where a `-v` check reported a pass as a failure: **a check whose result you have not verified is not a check.**
+
 ---
 
 ## 18. Minimum path
 
-§10's four phases describe everything this project could be. **This section describes the smallest version of it that is worth shipping**, and it is what should actually be built. Everything not listed in packages A–G is deferred, explicitly, with the cost of deferring it written down.
+§10's four phases describe everything this project could be. **This section describes the smallest version of it that is worth shipping**, and it is what should actually be built. Everything not listed in packages A–G and D½ is deferred, explicitly, with the cost of deferring it written down.
 
 The reason for cutting is not schedule pressure. It is that §10 bundles the core mechanism — *segment a notice into child records and make them findable* — with six or seven adjacent projects that each have their own failure modes, their own credentials, and their own tuning loops. Shipping them together means none of them is observable when something goes wrong. The minimum path isolates the mechanism, proves it, and leaves the rest as separate decisions to be made with evidence rather than in advance.
 
 **Sequencing rule:** one package per session (§0.4 rule 5). Each item inside a package is its own commit with the suite run between commits. A package is not complete until its gate is green and the branch is pushed.
+
+**Ordering rule, added in 8.2: plumbing before patterns, and no exceptions without a measurement.** `docs/COVERAGE_SURVEY.md` ranked every available mechanism by how many records it unlocks. The ordering is not close:
+
+| Rank | Mechanism | Sampled (of 40) | Catalog est. | Where it now lives |
+|---|---|---|---|---|
+| 1 | Fix the fetch-path gap | 2 | **~48** | **Cov1** |
+| 2 | HTML / external pages | 1 | **~43** | **Cov2** |
+| 3 | Named / structural unnumbered lists | 2 | ~32 | **deferred** (§18.2) |
+| 4 | Lower §6.4 rule 1's floor from 3 to 2 | 3 | ~14 | **rejected** (§18.2) |
+| 5 | New ordinal families (bare `N)`) | 1 | ~10 | **deferred** (§18.2) |
+| 6 | Multi-attachment fetch + quality ranking | 1 | ~5 | **Cov3** — already built |
+| 7 | Word (`.docx`) parsing | **0** | **0 lists** | **measured zero** (§18.2) |
+| 8 | Spreadsheet parsing | **0** | **0 lists in sample** | **measured zero** (§18.2) |
+
+Rows 1 and 2 overlap on one record, so their union is ~48, not ~91. **The top of the table is about which bytes arrive; rows 3–5 are about what to do with bytes that already arrive.** That is the opposite of where package D's effort went, and it is consistent with what D concluded on its own evidence: more regexes bought almost nothing. **Any future session proposing pattern work before the Coverage package is complete must first show a measurement that beats ~48 records.**
 
 ### 18.1 The packages
 
@@ -2372,6 +2474,50 @@ Nothing in this package is imported by any existing module, so nothing can regre
 
 **Gate:** acceptance rate reported **per agency family**, not in aggregate — an 80% average hiding 0% on DoD is a failure, not a pass · rejection-reason histogram read deliberately, with `no_layer_accepted` separated from genuine failures and `run_budget` from `time_budget` · zero low-confidence records in the published set.
 
+#### Package D½ — Coverage
+
+**Added in 8.2, ordered by `docs/COVERAGE_SURVEY.md`'s ranked table.** Package D asked *"can the segmenter find the list?"* and answered it. This package asks the question that turned out to be larger: **do the bytes holding the list ever arrive?** For 46.4% of the catalog they do not, and no pattern reaches a document that is never fetched.
+
+Every item states its expected yield from the survey's stratified sample — *sampled records out of 40* and the *catalog extrapolation* — because two of the four are small and saying so up front is what stops a later session from over-investing in them.
+
+| Item | Expected yield | Notes |
+|---|---|---|
+| **Cov1. Fix the `source_for_record` selection gap** | **2/40 sampled · ~48 catalog** (overlaps Cov2 on one record) | `source_for_record()` returns `None` for **685 of 1,475 records — 46.4% of the catalog** — and **672 of those have no evidence entry at all**, so they have never been fetched even once. **236 of the 685 carry live Grants.gov attachments right now.** The rule declining them is `select_primary_document`, which accepts only a PDF carrying explicit NOFO/FOA/RFA/BAA language or a lone PDF in a Full Announcement folder. That is the right rule for **citation** — a wrong one-click link is worse than none — and the wrong rule for **segmentation**, which does not publish the link it read. Measured alternatives, against the 685: any PDF in a Full/Revised Announcement folder **46**; any PDF at all **57**; any non-stub HTML **108**; any attachment at all **236**; dropping the `needs_gap_fill` test on agency URLs **221**; union **372 = 25.2% of the catalog**. **Do not change `source_for_record` itself.** Extend the parallel subtopic-only path that `scripts/subtopic_sources.py` already establishes, so fact extraction, `document_evidence.json` and §0.5 are untouched by construction. 313 records have no source of any kind and stay out of reach under every rule |
+| **Cov2. HTML attachment support** | **1/40 sampled · ~43 catalog**, and **108 records reached** whose yield is unmeasured | **366 attachments are `.html`, all NIH; 111 are complete ~145 KB announcements across 108 records; 255 are sub-1 KB stubs.** All 108 are unselectable today purely because `attachment_is_pdf` gates the loop. `extract_html_sections` already produces section/anchor-keyed containers, so the segmentation side needs no new mechanism — this is a selection and dispatch change. **Measure before believing the yield:** the two NIH records and one FDA record on that template sampled by the survey enumerate nothing, so reading 20 of the 108 is the first task inside this item, not an afterthought. Also handle the stub: a 422-byte `.html` is not a document and must not displace the agency URL |
+| **Cov3. Re-enable multi-attachment fetch** | **1/40 sampled · ~5 catalog** | Already built (`scripts/subtopic_sources.py`, §6.6) and currently neutralized by its own `low` cap. The census justified it on NRL `352741` alone, which it did **not** fix. The survey supplies the case that it does: **AFRL PACER `349554`, whose selected primary is a one-page Security Program Questionnaire while `FA2391-23-S-2403.pdf` yields 18 correct topics** through production's own segmenter. Two things must land with it — selection by *result quality* rather than attachment order (4 records of 1,475 have a furniture-named primary, and this is one), and the `low` cap, which Cov4 replaces rather than lifts |
+| **Cov4. Redesign the confidence model** | Unblocks **every** item above, and 2 of the survey's 10 enumerating records immediately | Its own item, specified in full below. The binary publish gate is replaced by a review queue for `low` and `medium` |
+
+**Gate:** unreachable-record count re-derived and reported against the catalog, not the evidence cache · for each of Cov1–Cov3, records *reached* and records *yielding an accepted list* reported separately, because they are different numbers and conflating them is how the multi-attachment path was over-sold the first time · **fabricated publishable records still 0**, measured the way D5 measured it — by reading every title in the publishable set, not by sampling · §0.5 byte-identical with the flag off.
+
+##### Cov4 in full — the review queue
+
+**The problem is not a threshold, and this must be stated before the design or someone will tune instead.** D5's fitted tiers took fabricated publishable records from 54 to 0 and cost nothing legitimate. They also suppress a **known-correct** extraction: AFRL PACER's 18 topics resolve at Layer D (`numbered` → `low`), would be won from a secondary attachment (capped at `low` by §6.6), and `low` never publishes. Raising either tier re-admits the exact fabrications D5 removed, because those came from the same tiers. **No threshold setting separates them.** The distinguishing question — *is this the fundable list, or is it the application's furniture?* — is semantic, and the only reliable evaluator available is a human reading eight titles.
+
+**The replacement.**
+
+| Tier | Today | Under Cov4 |
+|---|---|---|
+| `high` | publishes | publishes, unchanged |
+| `medium` | publishes | **queued for review**, not published |
+| `low` | written to cache, never surfaced | **queued for review**, not published |
+
+Nothing is published without either a `high` tier or an explicit approval. **This is strictly more conservative than today at `medium`**, which is deliberate: D4 showed `outline_structural` at `medium` producing an administrative skeleton about as often as a real list on a random sample.
+
+**Surface.** Reuse `assets/review.js`, which already exists and already does the hard parts. It exposes `globalThis.FUNDING_REVIEW` — `loadReview`, `saveReview`, `sanitizeReview`, `buildPackage`, `recordUsage`, `handoffSummary` — over a browser-local store at `funding-finder.deployment-review.v1`, schema version 1, holding a `source_reviews` map keyed per opportunity with a status drawn from `accurate` / `incorrect` / `could_not_verify`, a field, a note, `document_url`, `document_sha256`, `document_version` and `evidence_ids`. A subtopic review is the same shape with the key extended to `subtopic_id` and the status vocabulary extended to `approve` / `reject` / `could_not_verify`. Bump `REVIEW_SCHEMA_VERSION` when the vocabulary changes — `loadReview` discards any store whose version does not match exactly, so an unbumped change silently drops a reviewer's labels.
+
+**How approval promotes a record.** Labels are browser-local and the catalog is built in a workflow, so promotion cannot be automatic and must not pretend to be:
+
+1. The reviewer approves or rejects queued subtopics in the browser. Nothing about the published catalog changes at this point.
+2. `buildPackage` exports the labels — this is why it already carries `document_sha256` and `document_version`, which are exactly the fields that make a label falsifiable when the document changes.
+3. A human commits the exported approvals to a reviewed-labels file under `data/` — **which needs a `.gitignore` `!` line and a `git add` line in the same commit (§0.4 rule 11)**.
+4. The §7.1 merge admits a `medium` or `low` subtopic **iff** an approval exists whose `document_sha256` matches the current document. A changed document re-queues its subtopics rather than inheriting the old approval, which is the whole reason the hash is in the payload.
+
+**How rejections feed the lexicon.** A rejection is a labelled negative on a *set*, which is the scarcest input this project has — D5's vocabulary was fitted on 22 hand-labelled sets. Rejected titles feed `ADMINISTRATIVE_TERMS` (`scripts/subtopic_patterns.py`) and the §6.4 rule 8 process vocabulary. **Not automatically.** The vocabulary is fitted, and D5 measured what a careless addition costs: adding `information` alone moved the worst legitimate set from 0.008 to 0.043, four times closer to the 0.07 threshold. So rejections accumulate as evidence and a human re-fits, with the same two numbers reported as D5 reported them — legitimate sets lost (must stay 0) and fabrications caught.
+
+**This partially delivers issue #8.** #8 asks for *useful* / *not relevant* / *pursue* labels with mismatch reasons on any card (§7.2b). The review queue is the same storage shape, the same browser-local discipline and the same export path, applied to a narrower population — queued subtopics rather than every result. Build the storage against #8's vocabulary and #9's export requirement so #8 is a widening of an existing control rather than a second one, and say plainly in the help text that approval affects only this browser until the labels are exported and committed.
+
+**What this does not solve.** It does not scale: a reviewer approving ~115 umbrella parents' worth of subtopics is a real afternoon, and there is no second reviewer, so inter-rater agreement is unmeasured. It also inverts the §18.3 asymmetry for anything approved — the queue's failure mode is an *approved* wrong list, which reaches a PI with a page anchor exactly as an auto-published one would. The queue's value is that a wrong list now has to survive a person reading its titles, which is the one filter D4 proved the thresholds do not replace.
+
 #### Package E — Storage and scoring
 
 | Item | Notes |
@@ -2422,6 +2568,26 @@ Each line states what is lost. None of this is abandoned; all of it is a later d
 | **`evaluate_phase2.py` extension** | No subtopic-level recall metric. Already blocked on **#9** (itself blocked on **#8**), so deferring costs nothing that was available |
 | **The optional AI layer** (§11) | Summaries stay deterministic and occasionally clumsy. This was never in v1 |
 
+#### Added in 8.2 — deferred *below* the Coverage package, with their measured yield
+
+These were the natural next pattern steps after D. They are not cancelled; they are ordered behind every plumbing item, because the survey measured them and they are smaller than the plumbing.
+
+| Deferred | Measured yield | What is lost by deferring it |
+|---|---|---|
+| **Named / structural lists with no ordinal** (`label_run`, and the bulleted variant) | 2 of 40 sampled · **~32 catalog** | The largest remaining *pattern* gap and the highest false-positive risk in the table. DHA `362233`'s five real Focus Areas sit one subsection above five decoy bullets — *Innovation, Impact, Research Strategy, Focus Areas, Research Team* — with no ordinal to separate them. Deferring costs ~32 records and avoids re-opening the fabrication surface D5 just closed |
+| **New ordinal families for bare `N)`** | 1 of 40 sampled · **~10 catalog** | `345938`'s eight NDEP STEM program areas are written `1) … 8)`. This is precisely the generic numbered family §6.3 and §18.3 name as the most damaging change available — the one that manufactures a subtopic titled *Federal Agency Name*. Same verdict as `332894` |
+| **Lowering §6.4 rule 1's three-item floor to two** | 3 of 40 sampled · ~14 catalog | **Rejected, not deferred.** The cheapest change in the table (one constant) and the most dangerous: it would admit DOE `358100`'s real `Topic Area 1`/`2` and EDA's two-program notices, and every two-item administrative pair in 1,475 notices. Recorded because it is the third-largest sampled unlock, so a later session will find it independently and should find this verdict with it |
+
+#### Added in 8.2 — downgraded to **measured zero**, and kept on the record
+
+**Recorded, not deleted.** A measured zero is a result, and deleting it invites a later session to rediscover the idea and build it. In a 40-record stratified sample with **131 files and pages opened and nothing skipped by name**, these produced **no subdivision lists at all**.
+
+| Downgraded | Measurement | Standing |
+|---|---|---|
+| **Word (`.docx`) parsing** | **0 lists of 40 records.** 177 `.docx` across 88 records; 32 records carry Word and no selectable PDF. Four sampled records publish their announcement *only* as `.docx` — USGS `363537`/`363538`, Embassy Tirana `363247`, Embassy Yerevan `363541` — and **all four are single-project cooperative agreements that enumerate nothing** | Cheap (`zipfile` + a tag strip, no new dependency) and worth doing **for evidence coverage**, not for subtopics. Do not count it toward this feature's yield |
+| **Spreadsheet parsing** | **0 lists of 40 records.** 84 `.xlsx` across 64 records; every spreadsheet in the sample was a budget or application template | **The Genesis Mission's 98 focus areas are an outlier, not a class.** That case is real and large — one worksheet, 98 fundable units on a live notice — and it is now the *only* known instance in 1,475 records. Treat it as a per-document case, not a format capability |
+| **Per-document targeted extractors** (a reader written for one notice) | Implied zero: the only case that would justify one is Genesis | Deferred on the same evidence. One extractor per document does not generalize, and the survey found no second document that would reuse it. If Genesis is worth its own reader, write it as a per-document case with that framing stated, and never as "spreadsheet support" |
+
 **§8.4 is not on this list.** The hermetic no-drift gate is **built and passing in CI** as of 2026-08-16 — 20 artifacts baselined, sensitivity proven on both the catalog and feeds sides, wired into `tests.yml`. It is the foundation the rest of the minimum path stands on, not a candidate for deferral.
 
 #### Reassessing the `program_taxonomy` deferral after the census
@@ -2458,4 +2624,4 @@ Three things survive the cut that a schedule-driven trim would have taken first.
 
 **The §8.5 query baseline.** Without it, "did retrieval change?" is answered by looking at a few searches and forming an impression — which is how the OpenAlex concept representation was adopted, and how it survived being wrong for a long time (§7.9). The baseline needs no relevance labels, is deterministic, and turns a subjective question into a diff. It is cheap, and it is the only instrument that tells you package E did what it claimed.
 
-**§6.4 acceptance rules, with low-confidence-never-publishes (§6.2 Layer D).** These are what make "fail closed" real. A segmentation that does not satisfy all seven rules yields **zero** subtopics and leaves the parent untouched — never a partial or speculative list. The asymmetry is deliberate and worth restating: a missing subtopic costs a user one search that could have gone better; a *wrong* subtopic puts a plausible-looking card with a page anchor and a deadline in front of a PI who may spend weeks writing to it. Relaxing this to raise acceptance rates would be the single most damaging change anyone could make to this design.
+**§6.4 acceptance rules, with nothing-below-`high`-publishes-unreviewed (§7.1, §18.1 Cov4 — until 8.2 this read "low-confidence never publishes"; the queue made it stricter at `medium`, not looser).** These are what make "fail closed" real. A segmentation that does not satisfy all seven rules yields **zero** subtopics and leaves the parent untouched — never a partial or speculative list. The asymmetry is deliberate and worth restating: a missing subtopic costs a user one search that could have gone better; a *wrong* subtopic puts a plausible-looking card with a page anchor and a deadline in front of a PI who may spend weeks writing to it. Relaxing this to raise acceptance rates would be the single most damaging change anyone could make to this design.
