@@ -2,15 +2,30 @@
 
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
-Status: in progress · Version 8.16 · Written 2026-08-15 · **Revised 2026-08-22 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
+Status: in progress · Version 8.17 · Written 2026-08-15 · **Revised 2026-08-22 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
 
-> **Start at §18, and read §18.0 first.** §18 defines the minimum path — the **eleven** work packages **P1 … P11** — and lists what is deferred and what it costs. **§18.0 is the canonical namespace**: package IDs, the `BUG-*` / `MEAS-*` / `DEC-*` / `DEBT-*` prefixes, the migration table for every legacy label (`Package A–G`, `D½`, `D⅝`, `D¾`, `S1–S3`, `Package N`, bare `D#`, `M#`), the current ordered path, and a diagram. **P8 and P6.2 are complete; MEAS-7 is done and recommends a narrowly scoped P6.3 (Army/TDAC only)** (§18.0.4). §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
+> **Start at §18, and read §18.0 first.** §18 defines the minimum path — the **eleven** work packages **P1 … P11** — and lists what is deferred and what it costs. **§18.0 is the canonical namespace**: package IDs, the `BUG-*` / `MEAS-*` / `DEC-*` / `DEBT-*` prefixes, the migration table for every legacy label (`Package A–G`, `D½`, `D⅝`, `D¾`, `S1–S3`, `Package N`, bare `D#`, `M#`), the current ordered path, and a diagram. **P6 is closed (P6.1, P6.2 and P6.3 all measured) and P8 is complete; P5 remains open** (§18.0.4). §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
 >
 > **Legacy labels in the revision notes below are historical.** They record what a past session actually did and are left as written; translate any of them through §18.0.3 rather than assuming a bare `D5` or `S1` still names live work.
 >
 > **8.3 changes one thing structurally: the unit of judgment moves from the sibling *set* to the individual *span* (§6.4b), because a set-level verdict lets two policy paragraphs delete 70 DOE programmes.** §11 is reopened for the precision half only, on a measured run; its recall argument is untouched.
 >
 > **8.4 closes the two blocking storage decisions.** `MAX_TERMS` stays at 400 and subtopics ship in a lazily-loaded `data/subtopics.js` sidecar — one question, not two, once you measure that 60.3% of a cache record is a term map the browser never reads as content. **Nothing now blocks committing a cache except running the backfill again.** Every rate quoted against `docs/CORPUS_CENSUS.md`'s 20 documents is still superseded by `docs/COVERAGE_SURVEY.md` (§1.1).
+>
+> **8.17 builds P6.3 at the size MEAS-7 justified and closes P6.** One referenced
+> source, for one parent: the Army TDAC BAA topics page. Live measurement — **1 parent
+> eligible, 1 resolved, 14 children, 14 unique `Announcement ID`s, provenance
+> `referenced` ×14, 0 overlap with generic segmentation, so all 14 are net-new.** The
+> source declines rather than guesses: it answers only for `W911NF-23-S-0003`, only
+> while **the page still names that number**, and only above a topic floor of 8 against
+> a measured 14; every other case falls through to the generic path unchanged. **Not**
+> the three-system DoD router, **not** ONR (measured, failed), **not** SAM.gov.
+> **P6 is now closed on evidence, with a narrower conclusion than it began with:
+> structured and referenced sources are worthwhile when a solicitation deliberately
+> *delegates* its fundable-subdivision list to a stable external source — not merely
+> because an agency publishes a taxonomy.** DOE publishes an extensive taxonomy and it
+> bought nothing; the Army publishes a modest page and it bought 14 children.
+> **Delegation predicts value, not authority.** MEAS-8 stays deferred.
 >
 > **8.16 runs MEAS-7 and finds one real referenced hierarchy in two.** The Army
 > DEVCOM/TDAC BAA topics page publishes **14 applicant-selectable topics** — each with a
@@ -3191,10 +3206,10 @@ Legacy labels are translated once, in §18.0.3 — not repeated here.
 | **P3** | Flag-off integration | ✅ **complete** 2026-08-16 |
 | **P4** | Tune and backfill | ⚠️ **complete 2026-08-16, gate not met** — correct-acceptance stopped at **42%** against the 50% threshold, deliberately: every remaining miss needs a new mechanism, and reaching 50% by loosening would trade the 0/8 false-positive count. **P4.4**'s backfill ran and its cache was deliberately not committed |
 | **P5** | Coverage hardening | 🔄 **in progress** — Cov0–Cov3 and Cov5 done. **Open: Cov4, Cov6, Cov7.** Cov4's "zero false rejections" cannot be shown in a single pass until **MEAS-3** bounds the classifier's variance |
-| **P6** | Structured-source coverage | 🔄 **P6.1 and P6.2 complete; P6.3 unscheduled pending MEAS-7.** The package's hypothesis — that structured sources reach category (a) — is **still untested after two attempts**: P6.1 reached (e), P6.2 found no (a) to reach |
+| **P6** | Structured-source coverage | ✅ **complete 2026-08-22, all three items measured.** P6.1 `native` NASA (10 recoveries, category (e)); P6.2 DOE measured negative (category-(a) population empty); P6.3 `referenced` Army (1 parent, 14 external-only children, category (a)). **Conclusion: delegation predicts value, not authority** (§18.1) |
 | **P6.1** | NASA ROSES structured-source proof | ✅ **complete** 2026-08-18. Gate closed clause by clause against repository evidence: six clauses outright, one with a forward obligation (the Cov4 bypass), one on evidence (§0.5). **Previously-category-(a) records reached: 0** — P6.1 reached the **(e)** population |
 | **P6.2** | DOE Office of Science structured-source test | ✅ **complete 2026-08-21 — a measured negative, and no source was built.** It was the first real test of whether structured/referenced ingestion reaches category (a), and **the population was empty**: 2 Office of Science parents, **both already resolved** by generic parsing, **0** previously category (a), **0** net-new children, **3** non-fundable organizational labels rejected. Evidence: `docs/DOE_SOURCE_INSPECTION.md` |
-| **P6.3** | DoD structured-source test | ⛔ **not started; MEAS-7 is done and recommends PROCEED, scoped to Army/TDAC only.** Measured 1 of 2: `345241`'s TDAC page publishes **14** applicant-selectable topics with `Announcement ID`s and names the BAA number, and the notice says the website — not the BAA — carries them, so they are **external-only**. `356605`'s ONR technology areas are organizational taxonomy and were rejected. Scope is **one `referenced` source**, not a DoD router and not SAM.gov (`docs/DOD_MEAS7_INSPECTION.md`) |
+| **P6.3** | DoD structured-source test | ✅ **complete 2026-08-22, Army/TDAC only** — exactly what MEAS-7 justified. **1 parent (`345241`), 14 external-only children**, provenance `referenced`, confidence `high`, **0** generic overlap. Health: names the parent, 14 ≥ floor 8. ONR rejected on measurement; **no DoD router, no SAM.gov** |
 | **P7** | Residual generic forms | ⛔ **not started.** Gated on **P5's Cov4 gate** *and* on **P6 measurement**: Fm1/Fm2/Fm5/Fm6 build only against records still uncovered after structured sources, and their yields are re-measured on that residual. Fm3, Fm4 and Fm7 are not re-gated |
 | **P8** | NASA ROSES Catalog Source | ✅ **complete** 2026-08-20, own gate passed, **no open items** (§18.1). A **catalog-completeness branch**, not subtopic recall. The adapter is enabled and reconciles all **63** elements every refresh; the catalog-completeness gap is **closed** — the 2 actionable unmatched elements are emitted (**+0.136%**) and the other **51** stay inventory-only. Native identity `(cycle, code, title)` and the cross-source ambiguity rule were audited against the live source in P8.2a |
 | **P9** | Storage and scoring | ⛔ **not started.** **P9.0 must run before anything writes a cache** |
@@ -3662,7 +3677,7 @@ Both are Phase 1 work and both fail loudly rather than silently, which is why th
 | 10 | Coverage package Cov1–Cov3, plus an unplanned §11 classifier measurement and re-baseline. | Four commits; §11 reopened on the precision half; this revision's 8.3 and 8.4 | **done 2026-08-16/17** |
 | 11 | Family taxonomy — research only, no code. Classified every miss across the census 20 and survey 40; drew and read a third stratified sample of 50 records / 170 documents; induced the taxonomy from a `claude-sonnet-5` run. | `docs/FAMILY_TAXONOMY.md`; two commits | **done 2026-08-17** |
 | 12 | Revise this plan against `docs/FAMILY_TAXONOMY.md`. No code. | This revision — **8.5**: §6.3 replaced, seven families retired, §17.8 added, §18.1 re-ordered, §18.3a's exit criteria | **done 2026-08-17** |
-| 13+ | **One §18 work package per session.** Each item inside it is its own commit, with the suite run between commits. | The package, its gate output, an updated §15, and a pushed branch | **Delivered since session 12, in order: the 8.5–8.9 plan revisions, P5's Cov5, P6.1 (four items plus its gate), DEC-13 and P8's specification, BUG-7's fix, the 8.12 namespace normalization, P8 itself (P8.1–P8.6, gate passed), P8's identity-rule audit and closeout, P6.2's measurement, and MEAS-7.** For what is next, read **§18.0.4** — it is the single ordered path, and this cell deliberately does not keep a second copy of it |
+| 13+ | **One §18 work package per session.** Each item inside it is its own commit, with the suite run between commits. | The package, its gate output, an updated §15, and a pushed branch | **Delivered since session 12, in order: the 8.5–8.9 plan revisions, P5's Cov5, P6.1 (four items plus its gate), DEC-13 and P8's specification, BUG-7's fix, the 8.12 namespace normalization, P8 itself (P8.1–P8.6, gate passed), P8's identity-rule audit and closeout, P6.2's measurement, MEAS-7, and P6.3.** For what is next, read **§18.0.4** — it is the single ordered path, and this cell deliberately does not keep a second copy of it |
 
 Sessions 1 and 2 are not overhead. They are what makes the additive-edit discipline in §8 possible, because you cannot make a surgical edit to a file whose structure you inferred. Session 1 found that the single most consequential fact in this project — which PDF library the repository uses — was wrong in every prior version, and that error alone would have produced an unusable Layer C and an AGPL licensing problem.
 
@@ -3945,10 +3960,10 @@ it describes what a past session or commit actually did.
 | **P3** | Flag-off integration | Package C | **complete** 2026-08-16 |
 | **P4** | Tune and backfill | Package D | **complete 2026-08-16, gate not met** — correct-acceptance 42% against a 50% threshold, stopped deliberately |
 | **P5** | Coverage hardening | Package D½ | **in progress** — Cov0–Cov3 and Cov5 done; **Cov4, Cov6, Cov7 outstanding** |
-| **P6** | Structured-source coverage | Package D⅝ | **P6.1 and P6.2 complete; P6.3 unscheduled pending MEAS-7.** The package's own hypothesis — that structured sources reach category (a) — is **still untested**: P6.1 reached (e), P6.2 found no (a) to reach |
+| **P6** | Structured-source coverage | Package D⅝ | ✅ **complete 2026-08-22 — all three items measured.** P6.1 `native` (NASA, 10 recoveries), P6.2 measured negative (DOE, empty population), P6.3 `referenced` (Army, **1 parent / 14 external-only children**). Conclusion: **delegation predicts value, not authority** |
 | **P6.1** | NASA ROSES structured-source proof | D⅝ S1 | **complete** 2026-08-18, gate closed clause by clause |
 | **P6.2** | DOE Office of Science structured-source test | D⅝ S2 | ✅ **complete 2026-08-21 — measured, and no source built.** Category-(a) denominator was **0**; both Office of Science parents already resolved by generic parsing; 0 net-new children |
-| **P6.3** | DoD structured-source test | D⅝ S3 | **not started. MEAS-7 is done and the recommendation is PROCEED — scoped to Army/TDAC only:** one `referenced` source, one page, one parent, **14** external-only children. **Not** the broad DoD router, and **not** SAM.gov |
+| **P6.3** | DoD structured-source test | D⅝ S3 | ✅ **complete 2026-08-22, scoped to Army/TDAC only** as MEAS-7 justified. One `referenced` source: **1 parent, 14 external-only children**, 0 generic overlap. No DoD router, no ONR, no SAM.gov |
 | **P7** | Residual generic forms | Package D¾ | **not started** — gated on P5's Cov4 gate *and* on P6 measurement |
 | **P8** | NASA ROSES Catalog Source | Package N | ✅ **complete** 2026-08-20, own gate passed, **no caveats**. Adapter enabled; +2 records; 63 elements re-decided every refresh; identity model audited against the source (P8.2a) |
 | **P9** | Storage and scoring | Package E | **not started** |
@@ -4015,7 +4030,7 @@ notes elsewhere.
 | P6.1 | NASA ROSES structured-source proof | S1 | complete, gate closed |
 | P6.1a–P6.1d | Inspect · adapter · canaries · re-measure | S1a, S1b, S1c, S1d | complete |
 | P6.2 | DOE Office of Science structured-source test | S2 | **complete 2026-08-21** — measured negative, no source built |
-| P6.3 | DoD structured-source test | S3 | not started; **conditional on MEAS-7** |
+| P6.3 | DoD structured-source test | S3 | **complete 2026-08-22** — Army TDAC referenced source |
 | P7 | Residual generic forms | Package D¾, "Forms" | not started |
 | P7 items | Fm1 … Fm7 | unchanged | not started |
 | P8 | NASA ROSES Catalog Source | Package N | **complete** 2026-08-20 |
@@ -4070,7 +4085,7 @@ P4.3, P4.6 …).
 | 2 | **BUG-7** — restore the deterministic §0.5 gate | **prerequisite for P8's gate, and already satisfied** — fixed 2026-08-18, `verify_no_drift` exits 0 on the unchanged baseline (§8.4) |
 | 3 | **P8** — NASA ROSES Catalog Source | ✅ **complete** 2026-08-20, **no caveats**; own gate passed, adapter enabled, **+2 records (1,475 → 1,477, +0.136%)**, 63 elements re-decided every refresh, identity model audited against the live source (P8.2a) |
 | 4 | **P6.2** — DOE Office of Science structured-source test | ✅ **complete 2026-08-21.** It was the first real test of whether structured/referenced ingestion reaches category (a) — and **the population was empty**: 2 Office of Science parents, both already resolved by generic parsing, 0 previously category (a), 0 net-new children. **No source was built**, on measured grounds (§18.1 P6.2, `docs/DOE_SOURCE_INSPECTION.md`) |
-| 5 | **Human decision on P6.3** | **MEAS-7 is done (2026-08-22): 1 of 2.** Army's TDAC page carries **14 external-only, applicant-selectable topics** and names the BAA; ONR's technology areas are organizational taxonomy. **Recommendation: PROCEED, scoped to Army/TDAC only** — one `referenced` source, not a DoD router, not SAM.gov (`docs/DOD_MEAS7_INSPECTION.md`) |
+| 5 | **P6.3** — Army TDAC referenced source | ✅ **complete 2026-08-22**, scoped exactly as MEAS-7 justified. **1 parent, 14 external-only children**, provenance `referenced`, 0 generic overlap. **P6 is now closed on evidence** (§18.1 P6.3) |
 | 6 | **Recompute residual coverage** before any **P7** work | P7's yields were measured on a corpus where no structured source had been tried |
 | 7 | **P9 → P10 → P11** | only when the coverage evidence says the feature is worth shipping; each behind its own existing gate |
 
@@ -4109,7 +4124,11 @@ P1 → P2 → P3 → P4 → P5 → P6.1 ──┐   (BUG-7 fixed: §0.5 gate det
                        MEAS-7 ✅ 1 of 2 — Army yes, ONR no
                                           │
                                           ▼
-                     P6.3 (Army/TDAC only) / P7 only if justified
+                     P6.3 ✅ Army TDAC — 1 parent, 14 children
+                            (P6 closed: delegation, not authority)
+                                          │
+                                          ▼
+                          P7 only if justified · P5 still open
                                   (recompute residual coverage first)
                                           │
                                           ▼
@@ -4370,6 +4389,76 @@ untried. That is the inversion in one agency.
 > relationships at the `native` rung — but **P6.2 does not begin until P8's gate
 > is green**. **P6.3 remains unscheduled until P6.2 has been built and measured**,
 > and is then a human decision, not an automatic follow-on.
+
+##### P6.3 — the Army TDAC referenced source, built and measured 2026-08-22
+
+**Scope: one source, exactly what MEAS-7 justified.** Not the three-system DoD router
+the original concept imagined, not ONR (measured, failed), not SAM.gov (still gated by
+MEAS-6).
+
+**The source contract**, deterministic at both ends:
+
+| Concern | Rule |
+|---|---|
+| **Applicability** | The catalog parent's `opportunity_number` must normalise to `W911NF-23-S-0003`. Nothing else is offered the source, and declining costs no fetch |
+| **Parent assertion** | **The page must itself name `W911NF-23-S-0003`.** If it stops, the source declines rather than attaching topics to a guessed parent — this is the most important check in the module |
+| **Child structure** | The measured `Title:` / `Announcement ID:` / `TPOC:` blocks, nothing else |
+| **Child identity** | The normalised `Announcement ID` (`tdac-baa-001`), scoped to the parent → `W911NF-23-S-0003:tdac-baa-001`. **No fuzzy title matching** |
+| **Dedup** | By `Announcement ID`, keeping the **longer** block. The page publishes a 13-topic index and then 14 fuller entries, so the richer occurrence carries the description |
+| **Provenance** | **`referenced`**, never `native`. The Army publishes the *page*; the notice delegating to it is what establishes the relationship. `segmentation_method` and `pattern_family` are **`None`** — no layer and no family ran |
+| **Health** | Parent assertion · topic floor **8** against a measured **14** · every topic must carry a parseable `Announcement ID` |
+| **Failure** | **Decline, never publish zero.** `first_refusal` returns `None` and the generic path runs unchanged. A transport failure is reported as a fetch-path fact, not raised (§17.11) |
+
+**Where it sits.** `subtopic_fields` asks the referenced source **before**
+`best_segmentation` — §6.7·0's first refusal — and returns without invoking generic
+segmentation at all when the source answers credibly. With `--enable-subtopics` off
+the function still returns `{}`, so §0.5's artifacts cannot move.
+
+**Live measurement, 2026-08-22** (measured, not assumed — the figures below are what
+the run produced):
+
+| Measure | Value |
+|---|---|
+| Parent records eligible | **1** (`345241`) |
+| Parents resolved | **1** |
+| Children recovered | **14** |
+| Unique `Announcement ID`s | **14** |
+| Provenance split | **`referenced` 14 / `native` 0 / `inferred` 0** |
+| Confidence | `high` ×14 (the `referenced` ceiling) |
+| Overlap with generic segmentation | **0 of 14** — the generic path returns zero for this parent, recorded as a **correct zero** in `docs/CORPUS_CENSUS.md` after a direct read of the 61-page notice |
+| **Net-new parent coverage** | **1** — a parent that had no children now has 14 |
+| **Net-new child coverage** | **14** |
+| Rejected page elements | navigation, headings, TPOC emails, and any block without an `Announcement ID` |
+| Source health | **healthy** — names the parent, 14 ≥ floor 8, all IDs parseable |
+| Maintenance surface | **one URL, one page shape.** The risk is `army.mil/article/<id>` permalink drift, and the notice pins that id, so the notice is its own canary |
+
+**Honest sizing.** This is the smallest package in P6: one parent, 14 children. It is
+worth it because those 14 are **unreachable by any document parser** — the agency
+states the website, not the BAA, carries them.
+
+##### P6 — closed on evidence
+
+| Attempt | Population | Result |
+|---|---|---|
+| **P6.1 NASA ROSES** | category **(e)** — bytes that never arrived | **Strong, and exceptional.** A published table, 63 elements, 10 relationship recoveries at the `native` rung |
+| **P6.2 DOE Office of Science** | category **(a)** — but **empty** | **No applicable population and no incremental source.** Both parents already resolved by generic parsing; 5 of 6 office pages publish no deterministic list; the one clean list is 20% organizational labels |
+| **P6.3 Army TDAC** | category **(a)**, outward-pointing | **1 parent, 14 external-only children** at the `referenced` rung |
+
+> **The architectural conclusion, narrower than the one P6 started with.**
+> **Structured and referenced sources are worthwhile when a solicitation deliberately
+> delegates its fundable-subdivision list to a stable authoritative external source.
+> They are *not* justified merely because an agency publishes a program taxonomy.**
+>
+> DOE publishes an extensive taxonomy and it bought nothing, because the notice
+> already enumerated the same programmes. The Army publishes a modest page and it
+> bought 14 children, because the notice deliberately does not. **The predictor is
+> delegation, not authority.**
+
+**This does not generalise to other DoD agencies.** ONR was measured and failed in the
+same session that justified the Army. AFOSR was measured in `docs/CORPUS_CENSUS.md` and
+**enumerates 39 portfolios inside its own document** — a generic-parser case, not a
+source case. Any further agency needs its own measurement first; that is **MEAS-8**,
+and it stays deferred until the generic model is substantially working.
 
 ##### P6.2 — measured 2026-08-21, and the source was not built
 
