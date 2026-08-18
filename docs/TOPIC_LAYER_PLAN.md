@@ -2,15 +2,31 @@
 
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
-Status: in progress · Version 8.14 · Written 2026-08-15 · **Revised 2026-08-20 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
+Status: in progress · Version 8.15 · Written 2026-08-15 · **Revised 2026-08-21 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
 
-> **Start at §18, and read §18.0 first.** §18 defines the minimum path — the **eleven** work packages **P1 … P11** — and lists what is deferred and what it costs. **§18.0 is the canonical namespace**: package IDs, the `BUG-*` / `MEAS-*` / `DEC-*` / `DEBT-*` prefixes, the migration table for every legacy label (`Package A–G`, `D½`, `D⅝`, `D¾`, `S1–S3`, `Package N`, bare `D#`, `M#`), the current ordered path, and a diagram. **P8 is complete (2026-08-20, no caveats); the next implementation task is `P6.2`** (§18.0.4). §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
+> **Start at §18, and read §18.0 first.** §18 defines the minimum path — the **eleven** work packages **P1 … P11** — and lists what is deferred and what it costs. **§18.0 is the canonical namespace**: package IDs, the `BUG-*` / `MEAS-*` / `DEC-*` / `DEBT-*` prefixes, the migration table for every legacy label (`Package A–G`, `D½`, `D⅝`, `D¾`, `S1–S3`, `Package N`, bare `D#`, `M#`), the current ordered path, and a diagram. **P8 and P6.2 are complete; the next decision is P6.3, and it is gated on MEAS-7** (§18.0.4). §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
 >
 > **Legacy labels in the revision notes below are historical.** They record what a past session actually did and are left as written; translate any of them through §18.0.3 rather than assuming a bare `D5` or `S1` still names live work.
 >
 > **8.3 changes one thing structurally: the unit of judgment moves from the sibling *set* to the individual *span* (§6.4b), because a set-level verdict lets two policy paragraphs delete 70 DOE programmes.** §11 is reopened for the precision half only, on a measured run; its recall argument is untouched.
 >
 > **8.4 closes the two blocking storage decisions.** `MAX_TERMS` stays at 400 and subtopics ship in a lazily-loaded `data/subtopics.js` sidecar — one question, not two, once you measure that 60.3% of a cache record is a term map the browser never reads as content. **Nothing now blocks committing a cache except running the backfill again.** Every rate quoted against `docs/CORPUS_CENSUS.md`'s 20 documents is still superseded by `docs/COVERAGE_SURVEY.md` (§1.1).
+>
+> **8.15 measures P6.2 and does not build the DOE source.** P6.2 was scheduled as the
+> first real test of whether authoritative structure reaches the **category-(a)**
+> population. **That population is empty:** the catalog holds **2** Office of Science
+> parents, **both already resolved** by generic parsing — `360678` at **68 of 71
+> programmes (96%)**, including `(q) Catalysis Science` — and exactly **one** record
+> points at `science.osti.gov`. The result is **0 of 0**: a zero denominator, not a low
+> rate. **No adapter was written**, on measured grounds — five of six office pages
+> publish no deterministic program list (`click here`, `… Webpage »`), and the one
+> clean list, `/bes/csgb/Research-Areas`, **fails the fundability test on its own
+> markup**, since 3 of its 15 anchors are the page's `<h3>` team headings. What makes
+> the other 12 fundable is the **notice**, which already enumerates them. Nothing DOE
+> publishes qualifies as `native`. **Generalising from ROSES was wrong**, and that may
+> be the most useful thing P6.2 establishes. **P6.3 is not recommended to proceed:**
+> **MEAS-7** — read `345241` and `356605`, the only outward-pointing category-(a)
+> records left, both DoD — decides it. Evidence in `docs/DOE_SOURCE_INSPECTION.md`.
 >
 > **8.14 closes P8 by auditing its own identity rule against the source.** P8 stated
 > two things that could not both hold about the repeated appendix code `D.3C`: that
@@ -1554,7 +1570,12 @@ measured the *material read* — solicitations and their attachments — and sev
 of those records point outward explicitly (`345241`, `356605`, `362036`,
 `362711`). Whether an agency source exists for them is **unmeasured**. **P6.1d
 is the first evidence that bears on it, and it came back zero — P6.1 reached the
-(e) population, not (a) — so P6.2 is the first real test** (§18.0.4, §15).
+(e) population, not (a).** P6.2 was the first real test, and **it came back zero too,
+for a different reason: the DOE Office of Science category-(a) population is empty** —
+2 parents, both already resolved by generic inference (§18.1 P6.2,
+`docs/DOE_SOURCE_INSPECTION.md`). **So the claim in this section remains unmeasured
+after two attempts**, and the records that would test it — `345241`, `356605` — are
+**DoD**, which is MEAS-7 and the gate on P6.3.
 
 
 **Correction to v6.2.** This section previously opened by calling the DOE Office of Science omnibus "the single largest remaining gap." It is not a gap — it is the single most-worked case in the repository. `scripts/sources/discoverability.py` carries two rules for it (`doe-office-of-science-umbrella`, `doe-basic-energy-sciences`), keyed on both `DE-FOA-0003600` and the title phrase "office of science financial assistance," attaching eleven Topic-facet tags and nineteen searchable terms, with `science.osti.gov/bes/Research` and `.../csgb/Research-Areas/Catalysis-Science` cited as evidence. A search for "catalysis" finds that FOA today.
@@ -3154,10 +3175,10 @@ Legacy labels are translated once, in §18.0.3 — not repeated here.
 | **P3** | Flag-off integration | ✅ **complete** 2026-08-16 |
 | **P4** | Tune and backfill | ⚠️ **complete 2026-08-16, gate not met** — correct-acceptance stopped at **42%** against the 50% threshold, deliberately: every remaining miss needs a new mechanism, and reaching 50% by loosening would trade the 0/8 false-positive count. **P4.4**'s backfill ran and its cache was deliberately not committed |
 | **P5** | Coverage hardening | 🔄 **in progress** — Cov0–Cov3 and Cov5 done. **Open: Cov4, Cov6, Cov7.** Cov4's "zero false rejections" cannot be shown in a single pass until **MEAS-3** bounds the classifier's variance |
-| **P6** | Structured-source coverage | 🔄 **in progress** — P6.1 complete; P6.2 and P6.3 not started |
+| **P6** | Structured-source coverage | 🔄 **P6.1 and P6.2 complete; P6.3 unscheduled pending MEAS-7.** The package's hypothesis — that structured sources reach category (a) — is **still untested after two attempts**: P6.1 reached (e), P6.2 found no (a) to reach |
 | **P6.1** | NASA ROSES structured-source proof | ✅ **complete** 2026-08-18. Gate closed clause by clause against repository evidence: six clauses outright, one with a forward obligation (the Cov4 bypass), one on evidence (§0.5). **Previously-category-(a) records reached: 0** — P6.1 reached the **(e)** population |
-| **P6.2** | DOE Office of Science structured-source test | ⛔ **not started, and next by roadmap sequence** now that P8 is complete. Approved in principle — P6.1 showed measurable value from a structured source (10 open catalog records gained authoritative NASA relationships at the `native` rung). The P8-first ordering was **scheduling, never a technical dependency** (§18.0.4). **P6.2 remains the first real test of whether structured/referenced ingestion reaches the category-(a) umbrella population** |
-| **P6.3** | DoD structured-source test | ⛔ **not started and not scheduled.** A **human decision**, conditional on **measuring P6.2** first |
+| **P6.2** | DOE Office of Science structured-source test | ✅ **complete 2026-08-21 — a measured negative, and no source was built.** It was the first real test of whether structured/referenced ingestion reaches category (a), and **the population was empty**: 2 Office of Science parents, **both already resolved** by generic parsing, **0** previously category (a), **0** net-new children, **3** non-fundable organizational labels rejected. Evidence: `docs/DOE_SOURCE_INSPECTION.md` |
+| **P6.3** | DoD structured-source test | ⛔ **not started and not scheduled.** P6.2 is measured; the recommendation is **MEAS-7 first**, not "proceed". The one surviving argument is that the outward-pointing category-(a) records which actually exist — `345241` Army DEVCOM, `356605` ONR — are **DoD** |
 | **P7** | Residual generic forms | ⛔ **not started.** Gated on **P5's Cov4 gate** *and* on **P6 measurement**: Fm1/Fm2/Fm5/Fm6 build only against records still uncovered after structured sources, and their yields are re-measured on that residual. Fm3, Fm4 and Fm7 are not re-gated |
 | **P8** | NASA ROSES Catalog Source | ✅ **complete** 2026-08-20, own gate passed, **no open items** (§18.1). A **catalog-completeness branch**, not subtopic recall. The adapter is enabled and reconciles all **63** elements every refresh; the catalog-completeness gap is **closed** — the 2 actionable unmatched elements are emitted (**+0.136%**) and the other **51** stay inventory-only. Native identity `(cycle, code, title)` and the cross-source ambiguity rule were audited against the live source in P8.2a |
 | **P9** | Storage and scoring | ⛔ **not started.** **P9.0 must run before anything writes a cache** |
@@ -3194,6 +3215,7 @@ guarantees they never publish. It is listed once, under P5.
 | **MEAS-4** | Read `344592` for MURI topics | Grants.gov finds MURI in its full text; part of §18.2's SAM.gov cost may already be reachable |
 | **MEAS-5** | **Discipline-stratified query and relevance set** | **18 of 37 queries (49%) are chemistry; all 3 profile probes are.** A ranking regression outside chemistry is invisible to §8.5. **Extraction-side figures are corpus measurements and are unaffected** (§8.5, §17.9) |
 | **MEAS-6** | **Name a verified SAM-only opportunity** | §18.2's adapter was justified from MURI's absence in our corpus, which is a fact about what we store. **Inference withdrawn**; the residual gap is real but unnamed. **Blocked on a credential — human task** |
+| **MEAS-7** | **Read `345241` (Army DEVCOM BAA) and `356605` (ONR Long Range BAA) and record whether the pages they point at enumerate fundable subdivisions** | **The gate on the P6.3 decision** (§18.1). These are the only outward-pointing category-(a) records left in the catalog, and both are DoD. Two documents, no credential, no adapter. If either enumerates, P6.3 has a measured denominator; if neither does, P6.3 is declined on evidence |
 | *(part of Cov4)* | Form-F1 / form-F4 candidate sets in Cov4's validation | Neither resembles the 22 sibling sets §11 measured (§11). *Form names, not P10 items — see §18.0.1* |
 
 ### Decisions and debt — DEC-* / DEBT-*
@@ -3623,7 +3645,7 @@ Both are Phase 1 work and both fail loudly rather than silently, which is why th
 | 10 | Coverage package Cov1–Cov3, plus an unplanned §11 classifier measurement and re-baseline. | Four commits; §11 reopened on the precision half; this revision's 8.3 and 8.4 | **done 2026-08-16/17** |
 | 11 | Family taxonomy — research only, no code. Classified every miss across the census 20 and survey 40; drew and read a third stratified sample of 50 records / 170 documents; induced the taxonomy from a `claude-sonnet-5` run. | `docs/FAMILY_TAXONOMY.md`; two commits | **done 2026-08-17** |
 | 12 | Revise this plan against `docs/FAMILY_TAXONOMY.md`. No code. | This revision — **8.5**: §6.3 replaced, seven families retired, §17.8 added, §18.1 re-ordered, §18.3a's exit criteria | **done 2026-08-17** |
-| 13+ | **One §18 work package per session.** Each item inside it is its own commit, with the suite run between commits. | The package, its gate output, an updated §15, and a pushed branch | **Delivered since session 12, in order: the 8.5–8.9 plan revisions, P5's Cov5, P6.1 (four items plus its gate), DEC-13 and P8's specification, BUG-7's fix, the 8.12 namespace normalization, P8 itself (P8.1–P8.6, gate passed), and P8's identity-rule audit and closeout.** For what is next, read **§18.0.4** — it is the single ordered path, and this cell deliberately does not keep a second copy of it |
+| 13+ | **One §18 work package per session.** Each item inside it is its own commit, with the suite run between commits. | The package, its gate output, an updated §15, and a pushed branch | **Delivered since session 12, in order: the 8.5–8.9 plan revisions, P5's Cov5, P6.1 (four items plus its gate), DEC-13 and P8's specification, BUG-7's fix, the 8.12 namespace normalization, P8 itself (P8.1–P8.6, gate passed), P8's identity-rule audit and closeout, and P6.2's measurement.** For what is next, read **§18.0.4** — it is the single ordered path, and this cell deliberately does not keep a second copy of it |
 
 Sessions 1 and 2 are not overhead. They are what makes the additive-edit discipline in §8 possible, because you cannot make a surgical edit to a file whose structure you inferred. Session 1 found that the single most consequential fact in this project — which PDF library the repository uses — was wrong in every prior version, and that error alone would have produced an unusable Layer C and an AGPL licensing problem.
 
@@ -3906,10 +3928,10 @@ it describes what a past session or commit actually did.
 | **P3** | Flag-off integration | Package C | **complete** 2026-08-16 |
 | **P4** | Tune and backfill | Package D | **complete 2026-08-16, gate not met** — correct-acceptance 42% against a 50% threshold, stopped deliberately |
 | **P5** | Coverage hardening | Package D½ | **in progress** — Cov0–Cov3 and Cov5 done; **Cov4, Cov6, Cov7 outstanding** |
-| **P6** | Structured-source coverage | Package D⅝ | **in progress** — P6.1 complete and gated; P6.2 and P6.3 not started |
+| **P6** | Structured-source coverage | Package D⅝ | **P6.1 and P6.2 complete; P6.3 unscheduled pending MEAS-7.** The package's own hypothesis — that structured sources reach category (a) — is **still untested**: P6.1 reached (e), P6.2 found no (a) to reach |
 | **P6.1** | NASA ROSES structured-source proof | D⅝ S1 | **complete** 2026-08-18, gate closed clause by clause |
-| **P6.2** | DOE Office of Science structured-source test | D⅝ S2 | **not started, and next by roadmap sequence.** Approved in principle |
-| **P6.3** | DoD structured-source test | D⅝ S3 | **not started, and not scheduled** — a human decision after P6.2 is measured |
+| **P6.2** | DOE Office of Science structured-source test | D⅝ S2 | ✅ **complete 2026-08-21 — measured, and no source built.** Category-(a) denominator was **0**; both Office of Science parents already resolved by generic parsing; 0 net-new children |
+| **P6.3** | DoD structured-source test | D⅝ S3 | **not started, and not scheduled.** P6.2 is measured, and the recommendation is **one narrowly specified measurement first (MEAS-7)**, not "proceed" |
 | **P7** | Residual generic forms | Package D¾ | **not started** — gated on P5's Cov4 gate *and* on P6 measurement |
 | **P8** | NASA ROSES Catalog Source | Package N | ✅ **complete** 2026-08-20, own gate passed, **no caveats**. Adapter enabled; +2 records; 63 elements re-decided every refresh; identity model audited against the source (P8.2a) |
 | **P9** | Storage and scoring | Package E | **not started** |
@@ -3940,7 +3962,7 @@ Bare `D#` is retired for anything that is not a P4 item. Four prefixes, and the
 | Prefix | Meaning | Members |
 |---|---|---|
 | **BUG-#** | A defect in code or output — an item stays in this namespace after it is fixed, so its history stays citable | BUG-0, BUG-2, **BUG-7 (fixed)**, BUG-9, BUG-10, BUG-11 |
-| **MEAS-#** | A measurement still required before something can be concluded | MEAS-1 … MEAS-6 |
+| **MEAS-#** | A measurement still required before something can be concluded | MEAS-1 … MEAS-7 |
 | **DEC-#** | An architectural or product decision, open or taken | DEC-0 … DEC-14 |
 | **DEBT-#** | Carried work that is neither a defect nor a measurement — stale artifacts, cache hygiene, a deliberate non-build | DEBT-1, DEBT-3, DEBT-4, DEBT-5, DEBT-6, DEBT-8 |
 
@@ -3975,8 +3997,8 @@ notes elsewhere.
 | P6 | Structured-source coverage | Package D⅝, "Structured Umbrellas" | in progress |
 | P6.1 | NASA ROSES structured-source proof | S1 | complete, gate closed |
 | P6.1a–P6.1d | Inspect · adapter · canaries · re-measure | S1a, S1b, S1c, S1d | complete |
-| P6.2 | DOE Office of Science structured-source test | S2 | not started — **next** |
-| P6.3 | DoD structured-source test | S3 | not started, unscheduled |
+| P6.2 | DOE Office of Science structured-source test | S2 | **complete 2026-08-21** — measured negative, no source built |
+| P6.3 | DoD structured-source test | S3 | not started; **conditional on MEAS-7** |
 | P7 | Residual generic forms | Package D¾, "Forms" | not started |
 | P7 items | Fm1 … Fm7 | unchanged | not started |
 | P8 | NASA ROSES Catalog Source | Package N | **complete** 2026-08-20 |
@@ -4005,6 +4027,7 @@ notes elsewhere.
 | **MEAS-4** | Read `344592` for MURI topics | M4 | open |
 | **MEAS-5** | Discipline-stratified query and relevance set | M5 | open |
 | **MEAS-6** | Name a verified SAM-only opportunity | M6 | blocked on a credential — human task |
+| **MEAS-7** | Do `345241` and `356605` point at pages that enumerate? | *(new in 8.15; gates the P6.3 decision)* | open |
 | **DEC-0** | `MAX_TERMS` stays at 400 | §13 "former open decision 0" | settled 2026-08-17 |
 | **DEC-1** | Subtopics ship in a `data/subtopics.js` sidecar | §13.1, "former open decision 1" | settled 2026-08-17 |
 | **DEC-2 … DEC-12** | §13's remaining numbered decisions | §13 items 2–12 | open |
@@ -4028,8 +4051,8 @@ P4.3, P4.6 …).
 | 1 | **P6.1** — NASA ROSES structured-source proof | **complete** 2026-08-18; gate closed clause by clause (§18.1) |
 | 2 | **BUG-7** — restore the deterministic §0.5 gate | **prerequisite for P8's gate, and already satisfied** — fixed 2026-08-18, `verify_no_drift` exits 0 on the unchanged baseline (§8.4) |
 | 3 | **P8** — NASA ROSES Catalog Source | ✅ **complete** 2026-08-20, **no caveats**; own gate passed, adapter enabled, **+2 records (1,475 → 1,477, +0.136%)**, 63 elements re-decided every refresh, identity model audited against the live source (P8.2a) |
-| 4 | **P6.2** — DOE Office of Science structured-source test | **next by roadmap sequence.** It was sequenced after P8, and P8 is done — the ordering was **scheduling, never a technical dependency** (see the note below). **P6.2 remains the first real test of whether structured/referenced ingestion reaches the category-(a) umbrella population**, which P6.1 did not touch (it reached **(e)**) |
-| 5 | **Measure P6.2**, then a **human decision on P6.3** | measured against P6's own denominator, never folded into a segmentation acceptance rate (§17.8) |
+| 4 | **P6.2** — DOE Office of Science structured-source test | ✅ **complete 2026-08-21.** It was the first real test of whether structured/referenced ingestion reaches category (a) — and **the population was empty**: 2 Office of Science parents, both already resolved by generic parsing, 0 previously category (a), 0 net-new children. **No source was built**, on measured grounds (§18.1 P6.2, `docs/DOE_SOURCE_INSPECTION.md`) |
+| 5 | **Human decision on P6.3** | **Evidence-ready and the recommendation is not "proceed"** — run **MEAS-7** first: read `345241` (Army DEVCOM) and `356605` (ONR), the two outward-pointing category-(a) records that actually exist, and see whether the pages they point at enumerate anything. Two documents, no credential |
 | 6 | **Recompute residual coverage** before any **P7** work | P7's yields were measured on a corpus where no structured source had been tried |
 | 7 | **P9 → P10 → P11** | only when the coverage evidence says the feature is worth shipping; each behind its own existing gate |
 
@@ -4060,10 +4083,12 @@ P1 → P2 → P3 → P4 → P5 → P6.1 ──┐   (BUG-7 fixed: §0.5 gate det
                                 │        (branch: catalog completeness,
                                 │         not subtopic recall)
                                 │
-                                └── P6.2 DOE structured-source test  ← next
+                                └── P6.2 DOE structured-source test  ✅ complete
+                          (measured: 0 of 0 category-(a);
+                           no source built)
                                           │
                                           ▼
-                                  measure P6.2 · coverage decision
+                              MEAS-7 · then the P6.3 decision
                                           │
                                           ▼
                               P6.3 / P7 only if justified
@@ -4327,6 +4352,74 @@ untried. That is the inversion in one agency.
 > relationships at the `native` rung — but **P6.2 does not begin until P8's gate
 > is green**. **P6.3 remains unscheduled until P6.2 has been built and measured**,
 > and is then a human decision, not an automatic follow-on.
+
+##### P6.2 — measured 2026-08-21, and the source was not built
+
+**Full evidence in `docs/DOE_SOURCE_INSPECTION.md`.** P6.2 asked whether authoritative
+DOE Office of Science structure recovers fundable children that generic inference
+misses, **especially for category-(a) parents**. It was scheduled as the first real
+test of that hypothesis, because P6.1 reached category **(e)**, not **(a)**.
+
+**The test population turned out to be empty, and that is the result.**
+
+| Measure | Office of Science | All DOE |
+|---|---|---|
+| Candidate parent records | **2** | **9** |
+| Previously **category (a)** | **0** | 1 (`362036`, ARPA-E) |
+| Already accepted by generic parsing | **2 of 2** | 4 |
+| Catalog records pointing at `science.osti.gov` | **1** | — |
+| Parents resolved by P6.2 · children recovered | **0 · 0** | **0 · 0** |
+| Non-fundable structures rejected | **3** | 3 |
+| Source failures | **0** | 0 |
+
+> **P6.2 recovered 0 of 0 tested category-(a) Office of Science parents, producing 0
+> fundable children unavailable to generic document parsing.** The denominator is
+> **zero, not small**: both Office of Science parents were already resolved before the
+> package began — `360678` at **68 of 71 programmes (96%)**, including `(q) Catalysis
+> Science`, and `361526` at 21 of 21 challenge areas. This is an untestable hypothesis
+> in this population, not a low success rate, and the empty denominator is the honest
+> report.
+
+**Why no adapter was written**, against P6.2.5's own condition of *measured support*:
+
+- **Five of six office pages publish no deterministic program list.** ASCR's anchor
+  labels are `ASCR Applied Mathematics Webpage »` and `quantum computing`; NP's
+  include `click here`; BER's two links are divisions; BES's own Research page is
+  mostly dated CRA archives.
+- **The one clean list fails the fundability test on its own markup.**
+  `/bes/csgb/Research-Areas` has 15 anchors, and **3 are the page's `<h3>` team
+  headings** — organizational labels a naive parser would publish as fundable.
+- **What makes the other 12 fundable is the notice, not the site** — `DE-FOA-0003600`
+  enumerates them, and generic parsing already recovers them. **Overlap 12 of 12,
+  net-new children 0.**
+- **HEP publishes clean labels but has no parent** — the only Office of Science
+  parents are the two above.
+
+**Provenance ruling (§5.1):** nothing DOE publishes qualifies as `native`; the CSGB
+list is `referenced` at best, because DOE publishes the *page*, not the parent→child
+relationship. Extracting program names from `click here` anchors is `inferred`, and
+**official hosting does not promote a parsed textual pattern**.
+
+**What would reverse this** is listed in `docs/DOE_SOURCE_INSPECTION.md` §5 — chiefly
+a new Office of Science parent that generic parsing cannot resolve, or a
+machine-readable DOE taxonomy replacing six page shapes with one.
+
+##### P6.3 — the decision this leaves, and it is not "proceed"
+
+| P6.2 result | Implication | Case for P6.3 |
+|---|---|---|
+| Category-(a) penetration **0 of 0** | The structured-source claim is **still untested after two attempts** — P6.1 reached (e), P6.2 found no (a) | Neutral-to-negative |
+| Net-new children **0**; the one relevant parent is 96% covered | Structured sources pay where the **notice is silent**. DOE's is thorough | Conditional — DoD BAAs are where notices are thin |
+| Five of six offices publish nothing comparable to ROSES Table 3 | **Generalising from NASA was wrong.** Expect DoD to resemble DOE | Cautionary |
+| 6 page shapes, 3 labels needing notice-based filtering, 0 records gained | Per-agency maintenance is real and recurring | Negative on cost |
+| **The outward-pointing category-(a) records that exist are DoD** — `345241` Army DEVCOM, `356605` ONR | P6.3 targets the population that **actually contains** outward-pointing (a) records | **The strongest argument, and the only measured one** |
+
+**Recommendation: need one narrowly specified measurement before deciding — MEAS-7.**
+Open `345241` and `356605`, both category (a), both already in the catalog, both
+explicitly pointing outward, and answer one question: *does the page they point at
+enumerate fundable subdivisions, or point onward again?* Two documents, no credential,
+no adapter. If either enumerates, P6.3 has a measured target and a real denominator;
+if neither does, P6.3 should be **declined on evidence** rather than deferred.
 
 #### P8 — NASA ROSES Catalog Source *(legacy Package N)*
 
