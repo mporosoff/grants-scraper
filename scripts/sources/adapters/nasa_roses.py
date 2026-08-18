@@ -9,25 +9,26 @@ Everything here was measured against the live source on 2026-08-17 and is
 recorded in `docs/ROSES_SOURCE_INSPECTION.md`. Read that before changing a
 selector.
 
-**Emission boundary — the most important thing in this file.**
-Table 3 holds 69 rows: 6 overview/container rows and 63 program elements. Only
-**10** of those elements exist as Funding Finder catalog records today -- matched
-on solicitation number, with normalised title as a weaker fallback. S1's scope is
-deliberately narrow:
+**Two outputs, two packages, one parser.**
 
-* the 10 matched elements yield authoritative ROSES relationship data
-  (`subtopic_children`), and
-* the other **53 are measured inventory only** (`standalone_inventory`), of which
-  only **2 are currently open**.
+*P6.1 (subtopics).* `subtopic_children` returns `native`-provenance child records
+for elements that already have a catalog parent. Unchanged by P8.
 
-The 53 are **not** emitted as catalog opportunities *by this module*. Ingesting
-them is a catalog-expansion decision with dedup, precedence and §0.5
-consequences. **That decision is now taken (§13 decision 13, 2026-08-18): it is
-built as `Package N -- NASA ROSES Catalog Source`, which is separate work with
-its own gate.** Until Package N lands, `parse()` returns nothing at all, which is
-what keeps the inventory out of `opportunities.js` structurally rather than by
-convention -- and the 2 currently open unmatched elements are a recorded
-catalog-completeness gap.
+*P8 (catalog source).* `parse()` emits **standalone catalog opportunities for
+actionable unmatched elements only**, which is DEC-13. Every refresh re-reads the
+whole published inventory and decides again, so an element enters the catalog when
+it becomes actionable and stays out while it is inactive, past, TBD or
+`Not Solicited This Year` -- with no human follow-up (§18.1 P8.4).
+
+**Emission requires the catalog.** `parse()` cannot know what is already published
+unless the merge tells it, so it emits **nothing** without a `catalog_records`
+context (`set_context`, §18.1 P8.1). That is deliberate fail-closed behaviour: a
+caller that forgets the context gets zero records, never duplicates.
+
+**Reconciliation is deterministic and uses no fuzzy title matching** (§18.1 P8.2).
+Measured against the committed catalog: exactly 10 records carry an
+`NNH<yy>ZDA<nnn>[A-Z]-` opportunity number, all 10 embed their appendix code in the
+title, and matching on that code alone reproduces P6.1d's 63/10/53 split exactly.
 
 The adapter also stays `enabled = False`: a new enabled source changes catalog
 output with `--enable-subtopics` off, which §0.5 forbids.
@@ -38,6 +39,8 @@ from __future__ import annotations
 import datetime as _dt
 import re
 from typing import Iterable
+
+import hashlib
 
 from ..base import CanonicalOpportunity, SourceAdapter
 from ..http import PoliteClient
@@ -72,6 +75,41 @@ DERIVED_OPEN = "open"
 DERIVED_CLOSED = "closed"
 DERIVED_UNDATED = "undated"
 
+# --- cross-source identity (§18.1 P8.2), measured, not assumed -------------
+# A catalog record that represents a ROSES element announces it two ways, and both
+# were verified against every one of the 10 matched records in the committed
+# catalog: the solicitation number, and the appendix code printed in the title.
+#
+#   NNH25ZDA001N-ATMOS        "ROSES25: A.14 Atmosphere"
+#   NNH25ZDA001N-RRNES        "ROSES 2025: A.4 Rapid Response and Novel Research…"
+#
+# Both are exact string forms. There is deliberately **no** fuzzy-title matching:
+# a normalised-title comparison is the framework's existing last-resort collision
+# test in `merge_records`, not this module's identity rule.
+ROSES_SOLICITATION_RE = re.compile(r"^\s*NNH(\d{2})ZDA\d{3}[A-Z]", re.IGNORECASE)
+CATALOG_CODE_RE = re.compile(
+    r"ROSES[\s-]*(?:20)?(\d{2})\s*:\s*([A-F]\.\d+[A-Z]?)\b", re.IGNORECASE
+)
+# The solicitation number is only published in Table 3 for the handful of rows
+# that carry a short link or a solNum link (measured: 4 + 2 of 69). It is read
+# when present and left empty otherwise -- never synthesised.
+SHORT_LINK_RE = re.compile(
+    r"solicitation\.nasaprs\.com/(NNH\d{2}ZDA\d{3}[A-Z][A-Za-z0-9_-]*)",
+    re.IGNORECASE,
+)
+SOLNUM_PARAM_RE = re.compile(r"solNum=([A-Za-z0-9_-]+)", re.IGNORECASE)
+
+
+class RosesReconciliationError(RuntimeError):
+    """Raised when the inventory cannot be reconciled safely, so nothing is emitted.
+
+    Routed through the registry's per-adapter isolation, which means the source is
+    marked unhealthy and its last-known-good snapshot is retained -- previously
+    published NASA records survive an ambiguity instead of being deleted by it
+    (§18.1 P8.5 case 6).
+    """
+
+
 _DATE_RE = re.compile(r"(\d{1,2})\s*/\s*(\d{1,2})\s*/\s*(\d{4})")
 _TAG_RE = re.compile(r"<[^>]+>")
 _ROW_RE = re.compile(r"(?is)<tr[^>]*>(.*?)</tr>")
@@ -97,6 +135,14 @@ def parse_dates(cell: str):
         except ValueError:                  # a malformed date is not a crash
             continue
     return found
+
+
+def _counts(values) -> dict:
+    """Deterministic {value: count}, sorted, for diagnostics."""
+    tally: dict = {}
+    for value in values:
+        tally[value] = tally.get(value, 0) + 1
+    return dict(sorted(tally.items()))
 
 
 def classify_native_status(date_cells, is_overview: bool) -> str:
@@ -134,6 +180,79 @@ def derive_currentness(element, today=None) -> str:
     if not dates:
         return DERIVED_UNDATED
     return DERIVED_OPEN if max(dates) >= today else DERIVED_CLOSED
+
+
+def cycle_of(year) -> str:
+    """Two-digit ROSES cycle, e.g. 2025 -> "25". The cycle is part of identity."""
+    return f"{int(year) % 100:02d}"
+
+
+def element_solicitation_number(element: dict):
+    """The solicitation number **as published**, or None. Never synthesised."""
+    url = element.get("element_url") or ""
+    match = SHORT_LINK_RE.search(url) or SOLNUM_PARAM_RE.search(url)
+    return match.group(1).upper() if match else None
+
+
+def _title_fingerprint(title: str) -> str:
+    seed = re.sub(r"[^a-z0-9]+", " ", (title or "").casefold()).strip()
+    return hashlib.sha1(seed.encode("utf-8")).hexdigest()[:10]
+
+
+def element_external_id(element: dict, year) -> str:
+    """Stable per-element id: cycle + appendix code + title fingerprint.
+
+    Three properties, each required by §18.1 P8.2:
+
+    * **distinct for same code, different title** -- `D.3C` occurs twice in the
+      measured source (XRISM Type 1 and Type 2), so the code alone is not a key;
+      NASA's own identity is `(code, title)`.
+    * **stable across ordinary updates** -- a changed due date, a changed status or
+      an amendment flag does not touch either component, so a re-run re-identifies
+      the same element rather than minting a second one.
+    * **cycle-scoped** -- ROSES-2026 re-soliciting the same programme is a new
+      opportunity with a new deadline, exactly as Grants.gov treats it.
+    """
+    return (
+        f"{cycle_of(year)}-{element['appendix_code'].upper()}"
+        f"-{_title_fingerprint(element['title'])}"
+    )
+
+
+def catalog_roses_index(records) -> dict:
+    """Index the catalog's existing ROSES records by ``(cycle, appendix code)``.
+
+    Returns ``{"by_code": {(cycle, code): [ids]}, "unresolved": [...]}``.
+    ``unresolved`` holds records that announce themselves as ROSES through their
+    solicitation number but whose appendix code cannot be parsed -- an ambiguity
+    that must fail closed rather than risk a duplicate.
+    """
+    by_code: dict = {}
+    unresolved: list = []
+    for record in records or []:
+        number = str(record.get("opportunity_number") or "")
+        title = str(record.get("title") or "")
+        number_match = ROSES_SOLICITATION_RE.match(number)
+        code_match = CATALOG_CODE_RE.search(title)
+        if not number_match and not code_match:
+            continue
+        identity = str(record.get("opportunity_id") or number or title)
+        if code_match:
+            key = (
+                f"{int(code_match.group(1)) % 100:02d}",
+                code_match.group(2).upper(),
+            )
+            by_code.setdefault(key, []).append(identity)
+        else:
+            unresolved.append(
+                {
+                    "opportunity_id": identity,
+                    "opportunity_number": number,
+                    "title": title[:120],
+                    "reason": "roses_number_without_parseable_appendix_code",
+                }
+            )
+    return {"by_code": by_code, "unresolved": unresolved}
 
 
 def parse_table(html: str) -> list[dict]:
@@ -185,15 +304,37 @@ class NasaRosesAdapter(SourceAdapter):
     slug = "nasa-roses"
     display_name = "NASA ROSES"
     source_type = "Federal"
-    enabled = False                 # §0.5: enabling this changes catalog output
-    min_records = 1
-    max_records = 200
+    #: Enabled by P8. This adds *catalog* records, which is the package's purpose;
+    #: it does not touch `--enable-subtopics`, and §8.4's hermetic gate selects
+    #: `--adapter sample`, so §0.5's artifacts are unaffected (§18.1 P8.1).
+    enabled = True
+    #: **Zero is healthy.** The emitted count is the number of *actionable
+    #: unmatched* elements, and the steady state everyone should want is that
+    #: Grants.gov already carries them all. Source health is asserted on the
+    #: parsed **inventory** instead -- see `check_health`, whose failure raises and
+    #: therefore retains the last-known-good snapshot (§18.1 P8.5 case 6).
+    min_records = 0
+    #: Above the measured element count (63) so it can never bind on a healthy
+    #: cycle, but bounded so a runaway parse cannot flood the catalog.
+    max_records = 120
+    #: A parser or reconciliation failure must not delete NASA records.
+    retain_on_failure = True
 
     # §7.4 canary floors, derived from the measured source rather than guessed.
     EXPECTED_DIVISIONS = ("A", "B", "C", "D", "E", "F")
     MEASURED_ELEMENT_COUNT = 63     # 2026-08-17, ROSES-2025 Amendment 69
     MIN_ELEMENTS = 40               # see check_health for the derivation
     MAX_CROSS_TABLE_DELTA = 5
+
+    def set_context(self, context: dict) -> None:
+        """Take the catalog this run reconciles against (§18.1 P8.1).
+
+        Without it `parse()` emits nothing, because "unmatched" is undecidable.
+        """
+        super().set_context(context)
+
+    def _context_records(self) -> list:
+        return list((self.context or {}).get("catalog_records") or [])
 
     def __init__(self, client=None):
         super().__init__()
@@ -259,18 +400,185 @@ class NasaRosesAdapter(SourceAdapter):
         elements = [r for r in rows if not r["is_overview"]]
         return overview, elements
 
-    def parse(self, payload) -> Iterable[CanonicalOpportunity]:
-        """**Deliberately empty. This is the S1 emission boundary.**
+    # --- P8 reconciliation and emission ---------------------------------
+    def reconcile(self, rows, *, catalog_records, year, today=None) -> dict:
+        """Decide, for every program element, what this refresh should do with it.
 
-        The 53 program elements with no catalog record are *measured inventory*
-        (`standalone_inventory`), not opportunities this module publishes.
-        Emitting them is a catalog-expansion decision -- dedup against
-        Grants.gov, source precedence, update ownership, catalog size, §0.5 --
-        taken as §13 decision 13 and scheduled as `Package N`, which is separate
-        work with its own gate. Returning nothing keeps them out of
-        `opportunities.js` structurally, not by convention.
+        Pure and deterministic: same inventory plus same catalog gives the same
+        answer. Returns counts and the element lists behind them, which become the
+        source diagnostics and the product-gain measurement (§18.1 P8).
         """
-        return []
+        today = today or _dt.date.today()
+        _overview, elements = self.split_rows(rows)
+        index = catalog_roses_index(catalog_records)
+        cycle = cycle_of(year)
+
+        # An appendix code that occurs twice in one cycle cannot be used as a
+        # cross-source key for either occurrence. Measured: `D.3C` does exactly
+        # this. Such elements are never emitted; they are reported for review.
+        seen_codes: dict = {}
+        for element in elements:
+            seen_codes.setdefault(element["appendix_code"].upper(), 0)
+            seen_codes[element["appendix_code"].upper()] += 1
+        ambiguous_codes = sorted(
+            code for code, count in seen_codes.items() if count > 1
+        )
+
+        matched, unmatched, actionable, inactive, review = [], [], [], [], []
+        for element in elements:
+            code = element["appendix_code"].upper()
+            currentness = derive_currentness(element, today)
+            element = dict(element, derived_currentness=currentness)
+            if index["by_code"].get((cycle, code)):
+                element["matched_catalog_ids"] = index["by_code"][(cycle, code)]
+                matched.append(element)
+                continue
+            unmatched.append(element)
+            if code in ambiguous_codes:
+                element["review_reason"] = "duplicate_appendix_code_in_source"
+                review.append(element)
+            elif currentness == DERIVED_OPEN:
+                actionable.append(element)
+            else:
+                inactive.append(element)
+
+        return {
+            "elements": len(elements),
+            "matched": matched,
+            "unmatched": unmatched,
+            "actionable_unmatched": actionable,
+            "inactive_unmatched": inactive,
+            "review": review,
+            "ambiguous_source_codes": ambiguous_codes,
+            "unresolved_catalog_records": index["unresolved"],
+            "catalog_roses_records": sum(
+                len(ids) for ids in index["by_code"].values()
+            ),
+            "cycle": cycle,
+            "as_of": today.isoformat(),
+        }
+
+    def opportunity_for(self, element, year) -> CanonicalOpportunity:
+        """One actionable unmatched element as a catalog opportunity.
+
+        Every field comes from NASA's own table. Nothing is inferred, and the
+        title follows the convention the catalog already uses for ROSES records
+        (`ROSES25: A.14 Atmosphere`) so a later Grants.gov arrival collides on the
+        framework's normalised-title test as well as on the code (§18.1 P8.3).
+        """
+        dates = [d for cell in element["due_date_cells"] for d in parse_dates(cell)]
+        close_date = max(dates) if dates else None
+        return CanonicalOpportunity(
+            title=(
+                f"ROSES{cycle_of(year)}: {element['appendix_code']} "
+                f"{element['title']}"
+            ),
+            external_id=element_external_id(element, year),
+            # Published only for the rows that carry it; never synthesised.
+            opportunity_number=element_solicitation_number(element),
+            url=element["element_url"],
+            agency="NASA Headquarters",
+            status="posted",
+            close_date=close_date,
+            # NASA's own wording, qualifiers intact: "(Step-1)", "(Mandatory NOI)",
+            # "(Phase-1 via ARK RPS)", "No Due Date [3]".
+            deadline_note=element["native_deadline_text"] or None,
+            description=(
+                f"NASA ROSES-{year} program element {element['appendix_code']}, "
+                f"appendix division {element['division']}. Published status: "
+                f"{element['native_status']}; due dates as printed: "
+                f"{element['native_deadline_text'] or 'none'}. "
+                "Source: ROSES Table 3 (SOLICITED RESEARCH PROGRAMS)."
+            ),
+        )
+
+    def parse(self, payload) -> Iterable[CanonicalOpportunity]:
+        """Emit **actionable unmatched** elements only. DEC-13, in code.
+
+        Order of operations matters and is the point of the method:
+
+        1. health first, so missing rows can never be read as removals;
+        2. reconcile against the catalog handed in by the merge;
+        3. refuse to emit anything if reconciliation is ambiguous;
+        4. emit the actionable unmatched elements, in appendix order.
+
+        Inactive elements never reach this list, so they cannot enter the public
+        catalog; they stay visible as inventory in `self.diagnostics`.
+        """
+        rows = self.rows(payload)
+        health = self.check_health(payload, rows)
+        catalog_records = self._context_records()
+        report = self.reconcile(
+            rows,
+            catalog_records=catalog_records,
+            year=payload.get("year"),
+            today=(self.context or {}).get("as_of"),
+        )
+        self.diagnostics = {
+            "health": health,
+            "year": payload.get("year"),
+            "amendment": payload.get("amendment"),
+            "elements": report["elements"],
+            "overview_rows": len(self.split_rows(rows)[0]),
+            "catalog_roses_records": report["catalog_roses_records"],
+            "matched": len(report["matched"]),
+            "unmatched": len(report["unmatched"]),
+            "actionable_unmatched": len(report["actionable_unmatched"]),
+            "inactive_unmatched": len(report["inactive_unmatched"]),
+            "native_status_counts": _counts(
+                element["native_status"] for element in report["unmatched"]
+            ),
+            "derived_currentness_counts": _counts(
+                element["derived_currentness"] for element in report["unmatched"]
+            ),
+            # The inventory itself, so the 51 inactive elements are visible
+            # without being publishable.
+            "inactive_inventory": [
+                {
+                    "appendix_code": element["appendix_code"],
+                    "title": element["title"],
+                    "native_status": element["native_status"],
+                    "derived_currentness": element["derived_currentness"],
+                    "native_deadline_text": element["native_deadline_text"],
+                }
+                for element in report["inactive_unmatched"]
+            ],
+            "review": [
+                {
+                    "appendix_code": element["appendix_code"],
+                    "title": element["title"],
+                    "reason": element.get("review_reason"),
+                }
+                for element in report["review"]
+            ],
+            "ambiguous_source_codes": report["ambiguous_source_codes"],
+            "unresolved_catalog_records": report["unresolved_catalog_records"],
+            "context_supplied": bool(catalog_records),
+        }
+
+        if not health["healthy"]:
+            raise RosesReconciliationError(
+                "ROSES source health failed, so nothing is emitted and the last "
+                f"known good snapshot is retained: {'; '.join(health['failures'])}"
+            )
+        if report["unresolved_catalog_records"]:
+            raise RosesReconciliationError(
+                "catalog holds ROSES-numbered records whose appendix code cannot "
+                "be parsed, so non-duplication cannot be proven: "
+                + ", ".join(
+                    str(item["opportunity_number"])
+                    for item in report["unresolved_catalog_records"][:5]
+                )
+            )
+        if not catalog_records:
+            # Fail closed: without the catalog, "unmatched" is undecidable.
+            return []
+
+        year = payload.get("year")
+        return [
+            self.opportunity_for(element, year)
+            for element in report["actionable_unmatched"]
+        ]
 
     # --- the two S1 outputs ---------------------------------------------
     def standalone_inventory(self, rows, *, catalog_matches=()) -> list[dict]:

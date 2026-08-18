@@ -334,6 +334,19 @@ class SourceAdapter:
         if not self.display_name:
             self.display_name = self.slug
         self.diagnostics: dict = {}
+        #: Optional per-run context supplied by the merge (see ``set_context``).
+        self.context: dict = {}
+
+    def set_context(self, context: dict) -> None:
+        """Receive per-run context before :meth:`collect` (default: just store it).
+
+        The merge passes ``{"catalog_records": [...], "as_of": date}`` so an
+        adapter that must reconcile against the existing catalog -- rather than
+        merely add to it -- can do so deterministically instead of guessing.
+        Adapters that do not need it are unaffected: the default implementation
+        stores the dict and changes nothing (§18.1 P8.1).
+        """
+        self.context = dict(context or {})
 
     # --- implement these two in a subclass -------------------------------
     def fetch(self) -> Any:

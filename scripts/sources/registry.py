@@ -44,11 +44,16 @@ class AdapterResult:
 
 
 def collect(adapters: Optional[list[SourceAdapter]] = None,
-            include_disabled: bool = False) -> tuple[list[dict], list[AdapterResult]]:
+            include_disabled: bool = False,
+            context: Optional[dict] = None) -> tuple[list[dict], list[AdapterResult]]:
     """Run adapters and return ``(records, per_adapter_results)``.
 
     - ``adapters`` defaults to the global REGISTRY.
     - Disabled adapters are skipped unless ``include_disabled`` is True.
+    - ``context``, when given, is handed to each adapter's ``set_context`` before
+      it collects. It carries the catalog the run is reconciling against, for
+      adapters that must not duplicate what is already published (§18.1 P8).
+      Omitted, nothing is passed and behaviour is unchanged.
     - Any adapter that raises is captured in its result with ``ok=False``; its
       records are omitted but every other adapter still contributes.
     """
@@ -59,6 +64,8 @@ def collect(adapters: Optional[list[SourceAdapter]] = None,
         if not adapter.enabled and not include_disabled:
             continue
         try:
+            if context is not None:
+                adapter.set_context(context)
             records = adapter.collect()
         except Exception as exc:  # noqa: BLE001 - deliberate per-source isolation
             results.append(

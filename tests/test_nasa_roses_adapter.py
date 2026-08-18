@@ -151,16 +151,25 @@ class NativeStatusTests(unittest.TestCase):
 
 
 class EmissionBoundaryTests(unittest.TestCase):
-    """S1's scope decision, enforced in code rather than by convention."""
+    """P6.1's scope decision, enforced in code rather than by convention.
 
-    def test_the_adapter_is_disabled(self):
-        self.assertFalse(NasaRosesAdapter.enabled)
+    **Changed once, by P8, and only this class's first test.** P6.1 pinned
+    `enabled is False` because standalone ingestion was an open decision; DEC-13
+    took that decision and P8 built it, so the adapter is now an enabled catalog
+    source. The other assertions in this class did **not** need changing, which is
+    the useful part: without the merge's catalog context `parse()` still emits
+    nothing, so P6.1's boundary survives as P8's fail-closed default.
+    """
 
-    def test_parse_emits_no_catalog_opportunities(self):
+    def test_the_adapter_is_enabled_by_p8(self):
+        """Was `test_the_adapter_is_disabled`; see the class docstring (DEC-13)."""
+        self.assertTrue(NasaRosesAdapter.enabled)
+
+    def test_parse_emits_nothing_without_catalog_context(self):
         self.assertEqual(list(adapter().parse(payload())), [])
 
-    def test_collect_produces_no_catalog_records(self):
-        """The 54 standalone elements cannot leak into opportunities.js."""
+    def test_collect_produces_no_catalog_records_without_context(self):
+        """Unmatched elements cannot leak into opportunities.js by accident."""
         instance = adapter()
         instance.fetch = lambda: payload()
         self.assertEqual(instance.collect(), [])
