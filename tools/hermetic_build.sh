@@ -25,6 +25,17 @@ FROZEN="$ROOT/tests/fixtures/frozen"
 # The catalog date is fixed so currentness gates resolve identically every run.
 AS_OF="2026-08-20"
 
+# The change feed derives every event's `changed_at` -- and therefore its event
+# id, which is a SHA-1 over `changed_at[:10]` -- from the CURRENT catalog's
+# `generated_at`. AS_OF does not reach that value, so before this pin the gate
+# was green only on the UTC day its baseline was frozen (docs/TOPIC_LAYER_PLAN.md
+# §15 debt D7).
+#
+# The value is the UTC date the committed baseline was frozen on, chosen so the
+# fix costs no re-freeze: the existing fingerprints stay valid. Changing it
+# changes every event id and therefore requires tools/freeze_inputs.sh.
+GENERATED_AT="2026-08-17T00:00:00Z"
+
 rm -rf "$OUT"
 mkdir -p "$OUT/.work"
 
@@ -71,9 +82,17 @@ python -m scripts.check_links \
   --max-checks 0 >/dev/null
 
 # 6. Change events, diffing the post-build snapshot against the final catalog.
+#    build_changes reads `generated_at` off --current, so it is given a pinned
+#    copy in .work/ rather than the artifact itself. .work/ is excluded from
+#    fingerprinting, so opportunities.js stays exactly what the pipeline wrote
+#    and only the event stamps become deterministic.
+python "$ROOT/tools/pin_generated_at.py" \
+  "$OUT/opportunities.js" \
+  "$OUT/.work/opportunities.pinned.js" \
+  "$GENERATED_AT"
 python -m scripts.build_changes \
   --previous "$OUT/.work/opportunities.previous.js" \
-  --current "$OUT/opportunities.js" \
+  --current "$OUT/.work/opportunities.pinned.js" \
   --out "$OUT/feeds" \
   --as-of "$AS_OF" >/dev/null
 

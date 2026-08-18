@@ -298,14 +298,13 @@ all it does so through 10 records out of 1,472, which is inside the noise of a
 ## Scope actually held
 
 - Adapter `enabled = False`, so `opportunities.js` is byte-identical.
-  **Re-verified 2026-08-18, and the verification method changed** — see the note
-  below: `tools/verify_no_drift.sh` exited 0 on 2026-08-17 and exits **1** on any
-  later calendar day for a reason that has nothing to do with S1. S1's §0.5
-  parity is established instead by (i) 18 of 20 artifacts matching the baseline
-  unchanged, (ii) the two that differ producing **byte-identical** hashes on the
-  pre-S1 tree at `7cece6b`, and (iii) pinning the build's UTC date to the
-  baseline's freeze date reproducing **all 20** committed fingerprints exactly on
-  the current tree.
+  **Re-verified 2026-08-18 three ways**, because the gate script was red that day
+  for a reason that has nothing to do with S1 (see the D7 note below): (i) 18 of
+  20 artifacts matched the baseline unchanged, (ii) the two that differed produced
+  **byte-identical** hashes on the pre-S1 tree at `7cece6b`, and (iii) pinning the
+  build's UTC date to the baseline's freeze date reproduced **all 20** committed
+  fingerprints exactly. **With D7 fixed, `tools/verify_no_drift.sh` exits 0
+  directly — 22 artifacts unchanged, baseline never re-frozen.**
 - The 53 standalone elements were **not** emitted.
 - No cache committed.
 - S2 and S3 not started.
@@ -337,6 +336,13 @@ axis on the same day boundary that the fix did not reach.**
 **This is a gate-tooling defect, not a production defect and not a drift.** The
 nightly is supposed to emit a new event id for a new day. What is broken is the
 gate's hermeticity: it can only be green on the day its baseline was frozen.
-Carried as **§15 debt D7**, and it is a **precondition for `Package N`'s gate**,
-which has to review an *intentional* change to the same artifacts and cannot do
-that against a baseline that drifts on its own.
+
+**Fixed 2026-08-18 (§15 debt D7, full record in `docs/TOPIC_LAYER_PLAN.md` §8.4).**
+`tools/hermetic_build.sh` now writes a `.work/` copy of the catalog with
+`generated_at` pinned and hands that to `build_changes`, so `changed_at` and every
+event id are deterministic. Production semantics are unchanged, no `scripts/` file
+was touched, the event ids are still **not** normalized in `fingerprint.py` — an
+opaque content hash must stay opaque — and the pin is the baseline's own UTC
+freeze date, so **no re-freeze was needed**: `tools/verify_no_drift.sh` returns
+**exit 0, 22 artifacts unchanged**. `Package N`'s gate can now tell an intentional
+catalog change from manufactured drift.

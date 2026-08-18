@@ -22,7 +22,10 @@ Status: in progress · Version 8.11 · Written 2026-08-15 · **Revised 2026-08-1
 > clause against repository evidence, which produced two corrections: the
 > previously-**(a)** count is **0** (S1 reached the **(e)** population), and the
 > no-drift gate is **date-dependent** and red on any day after its freeze —
-> **debt D7**, not S1's doing, and a precondition for `Package N`'s gate.
+> **debt D7**, not S1's doing, and a precondition for `Package N`'s gate. **D7 is
+> fixed in the same session** by pinning `generated_at` in the hermetic build's
+> `.work/` copy, with production semantics and the committed baseline both
+> untouched (§8.4).
 > `docs/ROSES_SOURCE_INSPECTION.md`'s stale `SECLEVEL=1` parser consequence is
 > corrected to the narrow one-suite fix that was actually implemented.
 >
@@ -2149,6 +2152,49 @@ Normalizing rather than fixing the three writers is deliberate: `build_feeds.py`
 
 **Diagnostic note for the next person who sees this fail.** Raw `diff -rq` between two builds always reports every artifact as differing, because every artifact contains a timestamp. That is not the signal. Diff the **normalized** bytes — import `normalize` from `tools/fingerprint.py` and compare its output — or you will chase a temporal cause that is not there. Two builds 65 seconds apart, crossing a minute boundary, produce zero normalized differences.
 
+#### The third axis: a date baked into a hash, fixed at the input
+
+**Added 2026-08-18, closing debt D7.** Time, platform and *date rollover* are three
+separate axes, and the gate has now been broken by each. `fingerprint.py` handles
+the first two by normalizing what it can see. The third defeated it:
+
+`build_changes.py::_event_id` seeds its SHA-1 with `changed_at[:10]`, and
+`changed_at` is the **current catalog's `generated_at`** — a wall-clock stamp that
+**`--as-of` does not reach**, because `--as-of` controls currentness evaluation and
+retention rather than the stamp the catalog was built with. So every event id
+turned over at midnight UTC and the gate was green only on the UTC day its
+baseline was frozen.
+
+**Two fixes were available and one of them is wrong.** Normalizing the ids in
+`fingerprint.py` would work and must not be done: **an event id is an opaque hash
+over content, so blanking it out would blind the gate to real content changes** —
+the precise opposite of what it exists for. Re-freezing the baseline buys exactly
+one day.
+
+**What was done instead: pin the input.** `tools/hermetic_build.sh` writes a copy
+of the catalog with `generated_at` pinned to a fixed hermetic stamp
+(`GENERATED_AT`) into `.work/`, via `tools/pin_generated_at.py`, and hands *that*
+to `build_changes` as `--current`. Three properties make it the right shape:
+
+- **Production semantics are unchanged.** The nightly still stamps the real clock
+  and still mints a new event id for a new day, which is correct behaviour. No
+  file under `scripts/` was touched.
+- **`opportunities.js` is still exactly what the pipeline wrote.** The pinned copy
+  lives in `.work/`, which `fingerprint.py` skips, so it is never an artifact.
+- **The existing baseline stayed valid.** `GENERATED_AT` is the UTC date the
+  committed fingerprints were frozen on, so the fix required **no re-freeze**.
+  Changing that value changes every event id and does require one.
+
+The substitution replaces exactly one field and errors on zero or multiple
+matches, so it cannot silently pin the wrong thing — the catalog also carries
+`detail_enrichment_generated_at`, `document_evidence_generated_at` and
+`link_health_generated_at`. Regression coverage is
+`tests/test_no_drift_hermeticity.py`: 17 tests, including the change feed being
+**byte-identical across a simulated UTC-date rollover**, the unpinned case still
+differing so the test cannot pass vacuously, the ids remaining **un-normalized**
+in `fingerprint.py`, and the wiring in `hermetic_build.sh` itself. Reverting the
+pin fails 4 of them and returns the gate to exit 1.
+
 `tools/verify_no_drift.sh` rebuilds into a `mktemp -d`, fingerprints, and `diff -u`s against the committed baseline, printing the §0.5 explanation on failure.
 
 `tools/hermetic_build.sh` is the seven-stage sequence from the table above, writing into the directory it is given and never touching `data/`. **That isolation is the point** — §0.3 forbids running write-mode scripts against the repo, and this gate runs on every build. Intermediates (the pre-build catalog snapshot `build_changes` diffs against) go in `<out>/.work/`, and `fingerprint.py` skips any dot-prefixed path component so they are not part of the baseline.
@@ -3070,7 +3116,6 @@ after D⅝ S1 and **before** D⅝ S2 (§13 decision 13, §18.1).
 | # | Defect | Owner |
 |---|---|---|
 | Cov6 | `_demote()` caps publication for **46.4% of the catalog** — Cov1 supplies the bytes, `_demote` guarantees they never publish | §18.1 |
-| **D7** | **The no-drift gate is date-dependent and red on any day after its baseline was frozen.** `build_changes.py::_event_id` seeds on the build's UTC calendar date; `tools/fingerprint.py` cannot un-hash it. Diagnosed 2026-08-18, reproduced exactly. **Precondition for `Package N`'s gate** | §15 debt, `docs/ROSES_SOURCE_INSPECTION.md` |
 | D0 | `--max-documents` caps each **pass**, not the run, so the flag understates the work by 2× with subtopics on | §15 debt, §12 |
 | D1 | The D5 cache's six corrupted summaries, and one missing span | §15 debt |
 | D2 | **Three** families reject an ASCII hyphen — `dod_topic`, `component`, `technical_category`; the last also rejects `.` | §15 debt → Fm3 |
@@ -3206,7 +3251,7 @@ hierarchies agencies publish as data — before any further generic inference.
 - [x] **S1b. `native` adapter for ROSES program elements** — *done, `scripts/sources/adapters/nasa_roses.py`, **`enabled = False`**. Emits children only for matched parents; `parse()` returns nothing so the 53 unmatched cannot reach the catalog.*  Original: — ~35 elements across Earth science, heliophysics, planetary science, astrophysics and biological/physical sciences. Emits `subtopic_source: "native"`, `confidence: "high"`, bypassing Cov4 and the review queue (§5.1). Parent match by element code, never by FOA number
 - [x] **S1c. Canaries** — *done. Six-division sentinel, element floor 40 against a measured 63, Table 2/3 delta tolerance 5 against a measured 1. Eight tests incl. HTTP-200-zero-rows.*  Original: — `expected_solicitations`: **ROSES has ≥20 open elements**. Zero rows on an HTTP 200 fails loudly (§7.4)
 - [x] **S1d. Re-measure and stop** — *done. 63 elements, 12 open; **10** relationship recoveries, **53** measured-not-emitted of which only **2** are open. **§13 decision 13 opened by S1 and taken 2026-08-18: `Package N` next, then S2.** S2/S3 not started.*  Original: — report yield **against D⅝'s own denominator**, naming which records were previously category (a); never fold it into a segmentation acceptance rate (§17.8); re-run §8.5. **S2 (DOE SC referenced taxonomy, all six offices) and S3 (DoD source router) stay unscheduled until a human reads S1d** — *superseded 2026-08-18: S1d has been read, and the resulting order is `Package N` → S2 → measure S2 → human decision on S3. S2 does not follow S1 directly.*
-- [x] **GATE:** S1 only · yield against D⅝'s own denominator, previously-(a) records named, never folded into an acceptance rate · canary proven against a simulated zero-row 200 · `native` confirmed to bypass Cov4 in code · §0.5 byte-identical with the flag off — *closed 2026-08-18 clause by clause against repository evidence, not against the session report (§18.1). Six clauses closed outright. **Previously-(a) count is 0** — S1 reached the (e) population, so the (a) claim is still untested. The Cov4 bypass is proven at the provenance/segmentation boundary and must be re-checked when Cov4's classifier lands. §0.5 parity is proven by equivalence with the pre-S1 tree plus exact baseline reproduction under a pinned build date; the gate **script** is red for **debt D7**, which is not S1's.*
+- [x] **GATE:** S1 only · yield against D⅝'s own denominator, previously-(a) records named, never folded into an acceptance rate · canary proven against a simulated zero-row 200 · `native` confirmed to bypass Cov4 in code · §0.5 byte-identical with the flag off — *closed 2026-08-18 clause by clause against repository evidence, not against the session report (§18.1). Six clauses closed outright. **Previously-(a) count is 0** — S1 reached the (e) population, so the (a) claim is still untested. The Cov4 bypass is proven at the provenance/segmentation boundary and must be re-checked when Cov4's classifier lands. §0.5 parity is proven by equivalence with the pre-S1 tree plus exact baseline reproduction under a pinned build date; the gate **script** was red for **debt D7**, which is not S1's, and **D7 is now fixed — `verify_no_drift` exits 0 on the unchanged baseline** (§8.4).*
 
 ---
 
@@ -3285,8 +3330,19 @@ explicitly declined with a reason — never by being forgotten.
   that cache inherits the defect**, including §11's span-level table. Regenerate
   before the cache is used for anything else — and note it is 68 spans where a
   re-run gives 69
-- [ ] **D7. The no-drift gate is date-dependent, so it is red on every day
-  except the one its baseline was frozen on.** Diagnosed 2026-08-18 while closing
+- [x] **D7. The no-drift gate is date-dependent, so it is red on every day
+  except the one its baseline was frozen on.** **Fixed 2026-08-18** —
+  `tools/hermetic_build.sh` now pins `generated_at` in a `.work/` copy via
+  `tools/pin_generated_at.py` and feeds that to `build_changes`, so event
+  `changed_at` and every event id are deterministic. **Production semantics
+  unchanged**, no `scripts/` file touched, **no re-freeze** (the pin is the
+  baseline's own UTC freeze date), and the ids stay **un-normalized** in
+  `fingerprint.py` because blanking a content hash would blind the gate.
+  `tools/verify_no_drift.sh` returns **exit 0 against the existing committed
+  fingerprints — 22 artifacts unchanged**; `tests/test_no_drift_hermeticity.py`
+  adds 17 tests including byte-identical change-feed output across a simulated UTC
+  rollover, and reverting the pin fails 4 of them. Full record in §8.4. Original
+  diagnosis follows. Diagnosed 2026-08-18 while closing
   D⅝'s §0.5 clause, and reproduced exactly: `scripts/build_changes.py::_event_id`
   seeds its SHA-1 with `changed_at[:10]`, the build's **UTC calendar date**, so
   every event id turns over at midnight UTC, and `tools/fingerprint.py` — which
@@ -3973,7 +4029,7 @@ untried. That is the inversion in one agency.
 > | **Not folded into a segmentation acceptance rate** | **closed** | `docs/ROSES_SOURCE_INSPECTION.md` *What this is not* states the separation and §1.1 is left unchanged; no acceptance rate anywhere in the plan absorbed the 10 |
 > | **HTTP-200-zero-rows canary demonstrated** | **closed** | `tests/test_nasa_roses_adapter.py::CanaryTests::test_http_200_with_zero_rows_fails_loudly` asserts `healthy is False` and **both** failure strings; sibling tests cover a missing division and catastrophic shrinkage |
 > | **`native` bypasses Cov4 in code** | **closed, with one forward obligation** | `subtopic_children` sets `subtopic_source: "native"` with `pattern_family`/`segmentation_method` both `None`; `classify_provenance`'s override is validated not trusted; `cap_confidence` treats provenance as a ceiling; and `test_the_segmenter_is_never_invoked_for_roses` patches `segment_document` and asserts **zero** calls across all three entry points. **Obligation: Cov4's classifier does not exist yet, so the bypass is proven at the provenance/segmentation boundary. When Cov4 lands, its call site must be gated on provenance and this clause re-checked against it** |
-> | **§0.5 byte-identical with the flag off** | **closed on evidence; the gate script is red for an unrelated defect** | The adapter is `enabled = False` and 18 of 20 artifacts match the baseline. The two that differ — `feeds/changes.json`, `feeds/changes.xml` — produce **byte-identical hashes on the pre-S1 tree at `7cece6b`**, and pinning the build's UTC date to the baseline's freeze date reproduces **all 20 committed fingerprints exactly** on the current tree. Cause: `build_changes.py::_event_id` seeds on the build's UTC calendar date. **Carried as debt D7; it is a precondition for `Package N`'s gate** |
+> | **§0.5 byte-identical with the flag off** | **closed on evidence; the gate script is red for an unrelated defect** | The adapter is `enabled = False` and 18 of 20 artifacts match the baseline. The two that differ — `feeds/changes.json`, `feeds/changes.xml` — produce **byte-identical hashes on the pre-S1 tree at `7cece6b`**, and pinning the build's UTC date to the baseline's freeze date reproduces **all 20 committed fingerprints exactly** on the current tree. Cause: `build_changes.py::_event_id` seeds on the build's UTC calendar date. **Debt D7, and fixed the same day: the gate script now returns exit 0 against the unchanged committed fingerprints** (§8.4) |
 > | **S2/S3 not started before human review** | **closed** | No S2 or S3 code exists; both are re-gated below |
 >
 > **S2 is now gated behind `Package N`, not behind S1 alone.** S2 remains
@@ -4042,13 +4098,14 @@ change the base catalog**, so §0.5 cannot express whether it changed it
 - **intentional review of the generated-catalog change**, line by line, before any
   new fingerprints are frozen.
 
-> **⚠ Precondition: §15 debt D7.** The no-drift gate is currently **date-dependent
-> and fails on any day after its baseline was frozen** — `build_changes.py`'s event
-> ids are seeded with the build's UTC calendar date, which `tools/fingerprint.py`
-> cannot normalize away (full diagnosis in `docs/ROSES_SOURCE_INSPECTION.md`).
-> This package has to review an **intentional** change to the generated artifacts
-> and re-freeze the baseline. **Fix D7 first**, or the review cannot distinguish
-> the change it is approving from the drift the gate manufactures on its own.
+> **✅ Precondition met: §15 debt D7 is fixed (2026-08-18).** The no-drift gate was
+> date-dependent — `build_changes.py`'s event ids are seeded with the build's UTC
+> calendar date — so it could not have told this package's **intentional** change
+> to the generated artifacts apart from drift it manufactured on its own. The
+> hermetic build now pins `generated_at` in a `.work/` copy (§8.4), and the gate
+> returns **exit 0 against the existing committed fingerprints**. So when this
+> package re-freezes the baseline, every line of that diff is a change someone
+> chose.
 
 #### Package D¾ — Forms
 
