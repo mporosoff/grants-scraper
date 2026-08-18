@@ -11,18 +11,23 @@ selector.
 
 **Emission boundary — the most important thing in this file.**
 Table 3 holds 69 rows: 6 overview/container rows and 63 program elements. Only
-**9** of those elements exist as Funding Finder catalog records today. S1's
-scope is deliberately narrow:
+**10** of those elements exist as Funding Finder catalog records today -- matched
+on solicitation number, with normalised title as a weaker fallback. S1's scope is
+deliberately narrow:
 
-* the 9 matched elements yield authoritative ROSES relationship data
+* the 10 matched elements yield authoritative ROSES relationship data
   (`subtopic_children`), and
-* the other **54 are measured inventory only** (`standalone_inventory`).
+* the other **53 are measured inventory only** (`standalone_inventory`), of which
+  only **2 are currently open**.
 
-The 54 are **not** emitted as catalog opportunities. Ingesting them is a
-catalog-expansion decision with dedup, precedence and §0.5 consequences, and it
-is recorded as a §13 open decision rather than taken here. `parse()` therefore
-returns nothing at all, which is what keeps the inventory out of
-`opportunities.js` structurally rather than by convention.
+The 53 are **not** emitted as catalog opportunities *by this module*. Ingesting
+them is a catalog-expansion decision with dedup, precedence and §0.5
+consequences. **That decision is now taken (§13 decision 13, 2026-08-18): it is
+built as `Package N -- NASA ROSES Catalog Source`, which is separate work with
+its own gate.** Until Package N lands, `parse()` returns nothing at all, which is
+what keeps the inventory out of `opportunities.js` structurally rather than by
+convention -- and the 2 currently open unmatched elements are a recorded
+catalog-completeness gap.
 
 The adapter also stays `enabled = False`: a new enabled source changes catalog
 output with `--enable-subtopics` off, which §0.5 forbids.
@@ -257,12 +262,13 @@ class NasaRosesAdapter(SourceAdapter):
     def parse(self, payload) -> Iterable[CanonicalOpportunity]:
         """**Deliberately empty. This is the S1 emission boundary.**
 
-        The 54 program elements with no catalog record are *measured inventory*
-        (`standalone_inventory`), not opportunities to publish. Emitting them is
-        a catalog-expansion decision -- dedup against Grants.gov, source
-        precedence, update ownership, catalog size, §0.5 -- recorded as a §13
-        open decision. Returning nothing keeps them out of `opportunities.js`
-        structurally, not by convention.
+        The 53 program elements with no catalog record are *measured inventory*
+        (`standalone_inventory`), not opportunities this module publishes.
+        Emitting them is a catalog-expansion decision -- dedup against
+        Grants.gov, source precedence, update ownership, catalog size, §0.5 --
+        taken as §13 decision 13 and scheduled as `Package N`, which is separate
+        work with its own gate. Returning nothing keeps them out of
+        `opportunities.js` structurally, not by convention.
         """
         return []
 

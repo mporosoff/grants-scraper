@@ -160,7 +160,17 @@ Two representations, at different granularities:
 ## 6. Consequences for the parser
 
 - Enter through the SARA page; discover the year; never hard-code it.
-- Use a `SECLEVEL=1` HTTPS adapter with verification intact.
+- **Use the per-adapter compatible-cipher opt-in, not a security-level change.**
+  `SECLEVEL` was **not** the blocker (§0, row 4: the normal security level
+  works). CPython's curated TLS≤1.2 list omits `AES256-GCM-SHA384` and these
+  hosts offer nothing else, so the implemented fix takes CPython's own default
+  list and appends **that one suite** — nothing removed, `SECLEVEL` untouched,
+  `verify_mode=CERT_REQUIRED` and `check_hostname=True` both intact. The
+  behaviour is `PoliteClient(legacy_tls_ciphers=True)`, **opt-in per adapter and
+  off by default**; do not broaden it to other adapters without independent
+  evidence for each host (§17.11). Pinned by
+  `tests/test_sources_http_tls.py` — one suite added, none removed, list derived
+  from the live default context rather than hard-coded.
 - Parse Table 3 only; fetch Table 2 for corroboration and health.
 - Identity = `(appendix_code, program_title)`; carry `solId` when present.
 - Preserve appendix order as given — do not sort.
@@ -221,6 +231,30 @@ payoff of the TLS fix (§17.11).
 a success: title matching is the weaker key, and a future ingestion decision
 should not assume solicitation numbers are always present on both sides.
 
+### The previously-category-(a) question, answered — the number is zero
+
+D⅝'s gate asks which of the recovered records were previously **category (a)**
+(`docs/FAMILY_TAXONOMY.md` §1: *read, and no list of fundable subdivisions
+exists*), because that is the number that says whether structured sources reach
+the outward-pointing (a) population. **Verified against the classification
+records 2026-08-18: none of the 10 were (a).**
+
+| Evidence | Finding |
+|---|---|
+| `docs/FAMILY_TAXONOMY.md` §1 miss-cause table | **1 of the 10 is classified there at all** — `360003`, and it is **(e)** *unreachable fetch path*, not (a) |
+| `docs/FAMILY_TAXONOMY.md` reachability tables | `360004` and `363241` appear as `nspires.nasaprs.com` SSL-EOF failures and as "no measurable document at all" — (e) in substance |
+| `docs/CORPUS_CENSUS.md` fetch-failure list | **all 10** appear as `ConnectionReset` rows against NASA hosts — again (e), and this is the list the (e) judgement rests on |
+| The 53-document miss-cause sample | The other 9 were never inside it, so they carried **no** category at all — which is why the answer is 0 rather than a small number |
+
+**So S1 reached 0 previously-(a) records, and the (a) population remains
+unmeasured by structured sources.** What S1 reached is the **(e)** population —
+records whose bytes never arrived — which is exactly what the TLS
+misdiagnosis had created. That is a real result and a *different* result from the
+one the gate was written to look for: §6.7·0's claim that structured sources
+*may* reach part of the 62% (a) population is still **untested**, and S2 is the
+next chance to test it. Recorded here so no later session reads "10 recoveries"
+as evidence about (a).
+
 ### B. Potential catalog expansion — 53 elements, measured only
 
 Fifty-three program elements have no catalog record. They are **counted, and not
@@ -230,7 +264,21 @@ emitted.** `parse()` returns nothing, so this population cannot reach
 
 **Only 2 of the 53 are open.** The other 51 are `Not Solicited This Year`, TBD,
 or past their date. The headline number overstates the live opportunity by
-roughly 25×, and that is the figure §13 decision 13 should be decided on.
+roughly 25×, and that asymmetry is what §13 decision 13 was decided on.
+
+> **§13 decision 13 is TAKEN (2026-08-18): build it, as
+> `Package N — NASA ROSES Catalog Source` (§18.1), immediately after S1 and
+> before D⅝ S2.** The conclusion is **not** "add 53 records". It is that the
+> complete program-element inventory is **re-evaluated automatically on every
+> scheduled catalog refresh**: an unmatched element enters the catalog when it
+> becomes current/actionable and stays out of the public current catalog while
+> inactive. The 53 are therefore a **maintained candidate inventory**, not a
+> backlog awaiting a human. Today that makes **2** of them candidates for
+> inclusion; if any of the other 51 is solicited in a later amendment or cycle,
+> the scheduled refresh finds it without anyone remembering to look.
+>
+> **Known gap until Package N ships:** those **2 currently open unmatched
+> elements** are NASA solicitations that Funding Finder does not list.
 
 ## What this is not
 
@@ -249,11 +297,46 @@ all it does so through 10 records out of 1,472, which is inside the noise of a
 
 ## Scope actually held
 
-- Adapter `enabled = False`; `tools/verify_no_drift.sh` exits 0, so
-  `opportunities.js` is byte-identical.
+- Adapter `enabled = False`, so `opportunities.js` is byte-identical.
+  **Re-verified 2026-08-18, and the verification method changed** — see the note
+  below: `tools/verify_no_drift.sh` exited 0 on 2026-08-17 and exits **1** on any
+  later calendar day for a reason that has nothing to do with S1. S1's §0.5
+  parity is established instead by (i) 18 of 20 artifacts matching the baseline
+  unchanged, (ii) the two that differ producing **byte-identical** hashes on the
+  pre-S1 tree at `7cece6b`, and (iii) pinning the build's UTC date to the
+  baseline's freeze date reproducing **all 20** committed fingerprints exactly on
+  the current tree.
 - The 53 standalone elements were **not** emitted.
 - No cache committed.
 - S2 and S3 not started.
 - No pattern family added or resurrected; `roses_element` stays retired, and
   the adapter never calls `segment_document` — proven by a test that patches it
   and asserts zero calls.
+
+## The no-drift gate is date-dependent, and S1 is not the cause
+
+**Diagnosed 2026-08-18 while closing D⅝'s §0.5 clause.** `tools/verify_no_drift.sh`
+fails on a clean tree with exactly two artifacts differing — `feeds/changes.json`
+and `feeds/changes.xml` — and it fails the same way at the pre-S1 commit.
+
+| Step | Result |
+|---|---|
+| Drift gate on `topic-layer` (`c64576e`) | exit **1**, `feeds/changes.json` + `feeds/changes.xml` differ |
+| Same gate in a worktree at `7cece6b` (pre-S1) | exit **1**, **the same two hashes**, `4e21a05f…` / `9795c888…` |
+| Normalized text diff, restamped build vs today's build | **only two lines differ** — two event `id` values |
+| Rebuild with the catalog's `generated_at` date pinned to the baseline's UTC freeze date (`2026-08-17`) | all 20 fingerprints match the committed baseline **exactly**, including `0f2f6160…` / `605b38c8…` |
+
+**Cause.** `scripts/build_changes.py::_event_id` seeds its SHA-1 with
+`changed_at[:10]` — the build's **UTC calendar date** — so every event id changes
+at midnight UTC. `tools/fingerprint.py` normalizes the ISO-8601 timestamp
+literals and the one named date-only field, but it cannot un-hash an id that a
+date was baked into. Commit `fc844e6` ("Make the no-drift gate stable across a
+UTC date rollover") fixed `source_first_seen_date`; **this is a second rollover
+axis on the same day boundary that the fix did not reach.**
+
+**This is a gate-tooling defect, not a production defect and not a drift.** The
+nightly is supposed to emit a new event id for a new day. What is broken is the
+gate's hermeticity: it can only be green on the day its baseline was frozen.
+Carried as **§15 debt D7**, and it is a **precondition for `Package N`'s gate**,
+which has to review an *intentional* change to the same artifacts and cannot do
+that against a baseline that drifts on its own.

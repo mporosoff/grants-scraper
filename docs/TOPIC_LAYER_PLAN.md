@@ -2,13 +2,29 @@
 
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
-Status: in progress · Version 8.10 · Written 2026-08-15 · **Revised 2026-08-17 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
+Status: in progress · Version 8.11 · Written 2026-08-15 · **Revised 2026-08-18 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
 
-> **Start at §18.** It defines the minimum path — the **nine** work packages that are actually being built (A–G plus **D½ Coverage**, added in 8.2, and **D¾ Forms**, added in 8.5) — and lists what is deferred and what it costs. §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
+> **Start at §18.** It defines the minimum path — the **ten** work packages that are actually being built (A–G plus **D½ Coverage**, added in 8.2, **D¾ Forms**, added in 8.5, and **N NASA ROSES Catalog Source**, added in 8.11) — and lists what is deferred and what it costs. **The next implementation task is `Package N`** (§13 decision 13, §18.1). §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
 >
 > **8.3 changes one thing structurally: the unit of judgment moves from the sibling *set* to the individual *span* (§6.4b), because a set-level verdict lets two policy paragraphs delete 70 DOE programmes.** §11 is reopened for the precision half only, on a measured run; its recall argument is untouched.
 >
 > **8.4 closes the two blocking storage decisions.** `MAX_TERMS` stays at 400 and subtopics ship in a lazily-loaded `data/subtopics.js` sidecar — one question, not two, once you measure that 60.3% of a cache record is a term map the browser never reads as content. **Nothing now blocks committing a cache except running the backfill again.** Every rate quoted against `docs/CORPUS_CENSUS.md`'s 20 documents is still superseded by `docs/COVERAGE_SURVEY.md` (§1.1).
+>
+> **8.11 takes §13 decision 13 and schedules it as a named package.** NASA ROSES
+> standalone ingestion is **built**, as **`Package N — NASA ROSES Catalog Source`**,
+> **after D⅝ S1 and before D⅝ S2** (§18.1). The conclusion is *not* "add 53
+> records": the **whole 63-element inventory is re-evaluated on every scheduled
+> refresh**, so an element enters when it becomes actionable and stays out while it
+> is not — which makes the 53 a **maintained candidate inventory** rather than a
+> backlog awaiting a human, and makes **2** of them today's candidates. **S2 is
+> approved in principle and blocked until `Package N` is complete; S3 stays
+> unscheduled until S2 is built and measured.** D⅝'s gate is closed clause by
+> clause against repository evidence, which produced two corrections: the
+> previously-**(a)** count is **0** (S1 reached the **(e)** population), and the
+> no-drift gate is **date-dependent** and red on any day after its freeze —
+> **debt D7**, not S1's doing, and a precondition for `Package N`'s gate.
+> `docs/ROSES_SOURCE_INSPECTION.md`'s stale `SECLEVEL=1` parser consequence is
+> corrected to the narrow one-suite fix that was actually implemented.
 >
 > **8.10 lands D⅝ S1 and corrects the reachability record.** A `native` ROSES adapter parses NASA's published hierarchy — 69 rows, 6 overview, **63 program elements** — with no family, no segmentation and no classifier, and ships **disabled**. **10 existing records gain authoritative ROSES relationships; 53 unmatched elements are measured inventory and deliberately not emitted** (§13 decision 13). Four sessions had recorded NASA as unreachable: **it was our TLS cipher list**, and a 14-host sweep found five distinct failure layers where the project had recorded one (§17.11).
 >
@@ -2407,7 +2423,7 @@ Two consequences worth stating plainly:
 
 ## 10. Phases
 
-> **§18 supersedes this section as the unit of work.** These four phases describe everything the project *could* include; §18 defines the nine packages actually being built (A–G plus D½ Coverage and D¾ Forms) and lists what is deferred with the cost of each. Read §10 for the reasoning behind an individual step — it is retained in full and still explains *why* each piece exists — but take the sequence and the checklist from §18 and §15.
+> **§18 supersedes this section as the unit of work.** These four phases describe everything the project *could* include; §18 defines the ten packages actually being built (A–G plus D½ Coverage, D¾ Forms and N NASA ROSES Catalog Source) and lists what is deferred with the cost of each. Read §10 for the reasoning behind an individual step — it is retained in full and still explains *why* each piece exists — but take the sequence and the checklist from §18 and §15.
 
 Reordered so everything large and additive lands before anything existing changes behavior. Four phases.
 
@@ -2693,7 +2709,7 @@ Not built in v1. Recorded so the deterministic design does not preclude it.
 | **REALIZED 2026-08-17 — a pattern family that never fires is invisible to every metric in this plan** | Seven of §6.3's ten families accumulated unmeasured across four work packages: **five never fired once across 170 real documents, and two fired only on documents carrying no list** (`roses_element` on `A.1 BACKGROUND AND OBJECTIVES`, `area_of_interest` on another opportunity's topics). Nothing caught it because acceptance rate, false-positive count and the rejection histogram are all computed **per document**, so a family contributing nothing contributes nothing to any of them, and a passing synthetic fixture (§10 step 11) looks identical to real coverage. Mitigation is §17.8: a validating document **quoted** per family, and **per-family fire counts reported including the zeros**. B0 had the evidence in 2026-08-16 — zero matches from all ten families on three notices — and read it as the families being appropriately narrow |
 | **A family matches the container instead of its members, which is worse than missing** | `thrust` fires on DTRA `356612` — a real hit — and matches `Thrust Area 1`, the umbrella, while the fundable list is `Topic A1`–`A7` beneath it. That segments one plausible card where seven belong, so it presents as a success in every count. Acceptance rules cannot see it: one candidate simply fails rule 1 and the set is silently declined, or worse, passes with the wrong granularity. Mitigation: §18.1 Fm4 scopes or retires it, and §17.8 requires the validating quote to be **at the granularity the family claims** |
 | **A single failed fetch becomes a permanent fact about a source** | **Realized, and measured across 14 hosts on 2026-08-17** (`docs/SOURCE_REACHABILITY_SWEEP.md`). Of the hosts this project had recorded as unreachable: **2 were our own TLS cipher list**, **4 no longer reproduce at all** with no client change (`fema.gov`, `aphis.usda.gov`, `nrcs.usda.gov`, `bja.ojp.gov`), 2 are persistent HTTP 403s whose reason is not visible from outside, 2 are dead URLs, and 4 are client-rendered apps where transport always worked. **Five distinct layers where the project had recorded one.** The transient four are the sharpest lesson: a real failure, observed once, was written into three documents as a property of the source and then used to justify a deferral. Mitigation: **§17.11** — isolate the failure layer before unavailability justifies architecture, and re-test before citing an old observation |
-| **Agency-HTML scrapers break silently, and structured sources are where this hurts most** | A restyled page returns **HTTP 200 with zero rows**, and every existing check passes: the fetch worked, nothing raised, and zero subtopics is a normal outcome (§9.3). **This is a durability tradeoff and it should be stated plainly rather than assumed away.** Generic PDF parsing is robust to agency redesigns — a bookmark tree is a bookmark tree — and buys weak evidence: §6.3 measures the families at 10% of the enumerating population, and 7 of 10 were retired with no corpus support. A ROSES table parser is strong evidence and **brittle against a site redesign nobody warns us about**. D⅝ chooses the brittle-and-strong option deliberately, on the argument that a loud failure is recoverable and silent weak coverage is not — but the maintenance surface is real and grows per source, which is exactly why §18.1 D⅝ builds **one** adapter and re-measures rather than three. Mitigation: **§7.4 canaries**, one per source, asserting a floor rather than a count; a canary failure is a source-health failure that publishes nothing new for that source and opens the owner issue |
+| **Agency-HTML scrapers break silently, and structured sources are where this hurts most** | A restyled page returns **HTTP 200 with zero rows**, and every existing check passes: the fetch worked, nothing raised, and zero subtopics is a normal outcome (§9.3). **This is a durability tradeoff and it should be stated plainly rather than assumed away.** Generic PDF parsing is robust to agency redesigns — a bookmark tree is a bookmark tree — and buys weak evidence: §6.3 measures the families at 10% of the enumerating population, and 7 of 10 were retired with no corpus support. A ROSES table parser is strong evidence and **brittle against a site redesign nobody warns us about**. D⅝ chooses the brittle-and-strong option deliberately, on the argument that a loud failure is recoverable and silent weak coverage is not — but the maintenance surface is real and grows per source, which is exactly why §18.1 D⅝ builds **one** adapter and re-measures rather than three. Mitigation: **§7.4 canaries**, one per source, asserting a floor rather than a count; a canary failure is a source-health failure that publishes nothing new for that source and opens the owner issue. **Raised in 8.11: `Package N` makes ROSES a *catalog* source, so a silent collapse would stop merely failing to add records and start removing them. That is why N5.6 extends the zero-row canary to the emission path and why N6 gates on loud failure** |
 | **`--max-documents` caps each pass, not the run — so the flag understates the work by 2× with subtopics on** | Measured by reading the call site: `refresh_subtopics_without_source` is passed **the same `max_documents` value** as the administrative pass (`extract_document_evidence.py`, the Cov1 insertion under `if enable_subtopics`), not a share of it. Each pass independently takes `candidates[:max_documents]`, so `--max-documents 45` can fetch up to **90** documents and the D4/D5 backfills' `--max-documents 1200` could attempt **2,400**. Nothing is wrong with the results; what is wrong is that the nightly's runtime headroom (§9's 15-minute ceiling) and every published backfill figure were reasoned against one pass. Either split one budget across both passes or give the subtopic pass its own named flag — **do not silently halve the existing default**, which is load-bearing (§0.4 rule 8) |
 | **An evidence entry outlives the record that produced it, and is then never rechecked** | Measured: **13 orphans** in the catalog — records carrying an evidence entry whose parent no longer resolves to a source, 12 of them `primary_notice`. `363526` is the named case and was the corpus's only high-confidence acceptance. Separately, **213 cache entries belong to records that have left the catalog entirely**. Neither population is pruned, neither is refetched, and both inflate any denominator computed from the cache rather than from the catalog — which is exactly the error `docs/COVERAGE_SURVEY.md` corrected when it replaced "246 of 1,016 evidence entries" with "685 of 1,475 catalog records". Mitigation: prune on the catalog, never on the cache, and compute every rate against the catalog (§15 debt) |
 | **A rate is quoted against a denominator that has since changed** | Measured, twice. `360339` — one of the census's twelve enumerating documents and the sole validating record for the `component` family — **left the catalog within a day of the census being taken**, along with `362005` and `362711`. Every acceptance rate quoted as "of 12" silently became "of 11". The corpus moves under the measurements: 3 of 20 census records were gone within 24 hours. Mitigation, already stated in `docs/CORPUS_CENSUS.md` and now a rule here: **re-derive a denominator at the moment you quote it, and name the date.** Do not compare a rate to a figure from a previous session without re-deriving both |
@@ -2828,34 +2844,73 @@ Not built in v1. Recorded so the deterministic design does not preclude it.
     a later session measuring catalog growth will find 17.5% in one field and
     should find this analysis with it rather than redoing it.
 
-13. **Whether to ingest the 53 standalone NASA ROSES program elements.**
-    **Opened by S1 (§18.1 D⅝), which deliberately did not take it.** The ROSES
-    adapter parses all 63 program elements and emits **none** of them as catalog
-    opportunities; `parse()` returns nothing, so the inventory cannot reach
-    `opportunities.js` structurally rather than by convention.
+13. ~~**Whether to ingest the 53 standalone NASA ROSES program elements.**~~
+    **TAKEN 2026-08-18. Build it, as a first-class catalog-source package,
+    immediately after S1 and before S2.** Kept in this list rather than moved to
+    *Settled* because it schedules work, and the argument below is what a later
+    session will want when it reads the package.
 
-    **What S1 measured.** 10 elements already exist as catalog records and get
-    authoritative ROSES relationship data. **53 do not** — and of those,
-    **only 2 are currently open** under the derived-currentness rule. The other
-    51 are `Not Solicited This Year`, TBD, or past their date. So the headline
-    "53 new opportunities" overstates the live value by roughly 25×, and that
-    asymmetry is the most decision-relevant number here.
+    **The decision.** NASA ROSES standalone ingestion is built as
+    **`Package N — NASA ROSES Catalog Source`** (§18.1), scheduled **immediately
+    after D⅝ S1 closes and before D⅝ S2**. It is a **catalog-source** feature,
+    not a subtopic one, and it carries **its own gate** — §0.5 is not weakened or
+    reinterpreted to accommodate it (§0.5, and `Package N`'s gate).
 
-    **What ingesting them would require, none of which S1 built:**
+    **The product conclusion is not "add 53 records."** It is this:
 
-    | Question | Why it is not obvious |
+    > **The complete ROSES program-element inventory is re-evaluated
+    > automatically during every scheduled catalog refresh.** An unmatched ROSES
+    > element **enters** the catalog when it becomes current/actionable, and
+    > **remains absent from the public current catalog** while it is inactive,
+    > past, TBD or `Not Solicited This Year`.
+
+    So the 53 unmatched elements become a **maintained candidate inventory, not a
+    one-time backlog** that depends on a future human remembering to revisit it.
+    That is the whole point of building it as a source rather than as a data
+    entry task.
+
+    **What S1 measured**, and it is the reason the framing above matters:
+
+    | | Count |
     |---|---|
-    | **Dedup and identity** | The 10 matched elements arrive from Grants.gov *and* NSPIRES. Identity is `(code, title)` in ROSES and `opportunity_number` in the catalog; `D.3C` proves the ROSES code is not unique, and 5 of the 10 matched only by title, not by solicitation number |
-    | **Source precedence and update ownership** | When Grants.gov and NSPIRES disagree on a close date, which wins, and which source may overwrite the other nightly? |
-    | **Catalog size and currentness** | +53 records is ~3.6% growth, and 51 of them are closed or unsolicited — they would need `currentness` handling or they inflate the catalog with things nobody can apply to |
-    | **§0.5** | Enabling the adapter changes `opportunities.js` **with `--enable-subtopics` off**, so the hermetic gate fails by construction. That is not a bug in the gate; it is the gate working |
-    | **Project ownership** | This is a **catalog-source** feature, not a subtopic one. It shares nothing with segmentation except the adapter lifecycle |
+    | Valid ROSES program elements | **63** |
+    | Already represented by catalog records | **10** |
+    | Unmatched to the current catalog | **53** |
+    | of the 53, currently open / actionable | **2** |
+    | of the 53, currently inactive, past, TBD or `Not Solicited This Year` | **51** |
 
-    **Recommendation: not part of the subtopic project.** S1's value to D⅝ is
-    the 10 relationship recoveries and the proof that a `native` rung works end
-    to end. Standalone NASA ingestion is a separate catalog-source package with
-    its own gate, and it should be scheduled — or declined — on the strength of
-    "2 currently-open opportunities", not on "53 elements".
+    **Therefore only the 2 currently actionable unmatched elements are candidates
+    for standalone catalog inclusion today.** The other 51 are not deferred work
+    and not a backlog item: if one becomes solicited next month or in a later
+    ROSES amendment or cycle, the scheduled refresh discovers that on its own and
+    the element becomes eligible then. If an emitted ROSES opportunity later
+    closes or goes inactive, ordinary catalog currentness handling removes it from
+    the public current/searchable population. **Nobody has to remember anything.**
+
+    **Recorded explicitly: until `Package N` is implemented, the 2 currently open
+    unmatched ROSES elements are a known catalog-completeness gap** — NASA is
+    soliciting them now and Funding Finder does not list them. That is the cost of
+    the scheduling, stated rather than glossed.
+
+    **What ingesting them requires, none of which S1 built** — every row is now a
+    named `Package N` item rather than an open question:
+
+    | Question | Why it is not obvious | Item |
+    |---|---|---|
+    | **Dedup and identity** | The 10 matched elements arrive from Grants.gov *and* NSPIRES. `D.3C` proves the ROSES appendix code is not unique, native identity is `(appendix_code, program_title)`, and **5 of the 10 matched only by normalized title** | **N2** |
+    | **Source precedence and update ownership** | When Grants.gov and ROSES disagree on a close date, which wins, and which source may overwrite the other nightly? | **N3** |
+    | **Catalog size and currentness** | 51 of the 53 are closed or unsolicited; they need currentness handling or they inflate the catalog with things nobody can apply to | **N4** |
+    | **§0.5** | Enabling the adapter changes `opportunities.js` **with `--enable-subtopics` off**. That is not a bug in the gate; it is the gate working — so the package gets **its own** gate and §0.5 keeps its current meaning | **N6** |
+    | **Project ownership** | This is a catalog-source feature. It shares nothing with segmentation except the adapter lifecycle | the package itself |
+
+    **What is kept from S1's recommendation, and what is withdrawn.** Kept: this
+    is **not part of the subtopic project** — which is precisely why it is its own
+    package with its own gate rather than a D⅝ item, and why its yield is never
+    added to subtopic recall (§17.8, `docs/ROSES_SOURCE_INSPECTION.md` *What this
+    is not*). Withdrawn: the implication that it should be **decided later** on
+    the strength of "2 currently-open opportunities". The value being bought is
+    not the 2 records; it is the standing re-evaluation of all 63, which is what
+    makes the 51 stop being a human obligation.
 
 
 *Removed from this list:* "confirm the exact all-rights-reserved notice" — the `copyright` file already carries it and the work is done.
@@ -2996,12 +3051,17 @@ this table.
 | §18.3a | **Whether an F1 bare-numbered family may ever be added.** Four exit criteria stated; the prohibition stands until all four hold | §18.3a | new in 8.5 |
 | §13.3–13.10 | Works-text provider · gold set · archive search · summary length · feed inclusion · taxonomy depth · mute/alert split · OCR | §13 | various |
 
+**Taken, so no longer blocking:** **§13.13 — NASA ROSES standalone ingestion.**
+Taken 2026-08-18. It is built as **`Package N — NASA ROSES Catalog Source`**,
+after D⅝ S1 and **before** D⅝ S2 (§13 decision 13, §18.1).
+
 ### Gates not met — these stop work by design
 
 | Gate | Why it is not met |
 |---|---|
 | **Package D** | Correct-acceptance stopped at 42%, below the 50% threshold set for the package (§18.1) |
-| **Package D⅝** | Not started. **S1 (ROSES) only, then re-measure** — S2 and S3 stay unscheduled until a human reads S1d (§18.1) |
+| **Package D⅝** | **S1 complete and its gate closed clause by clause 2026-08-18** (§18.1). **S2 is now blocked on `Package N`**, not on S1; **S3 stays unscheduled until S2 is built and measured** |
+| **Package N — NASA ROSES Catalog Source** | **Not started, and it is the next implementation task** (§13 decision 13, §18.1). Until it ships, the **2 currently open unmatched ROSES elements are a known catalog-completeness gap** |
 | **Package D½** | Cov4, Cov5(done), Cov6 and Cov7 outstanding; **Cov4's "zero false rejections" cannot be shown in a single pass** — measured variance exceeds the measured rate (§11 caveat 2) |
 | **Any cache commit** | The D5 cache holds six pre-Cov5 summaries and is missing a span (§15 debt D1). Regenerate before committing anything derived from it |
 
@@ -3010,6 +3070,7 @@ this table.
 | # | Defect | Owner |
 |---|---|---|
 | Cov6 | `_demote()` caps publication for **46.4% of the catalog** — Cov1 supplies the bytes, `_demote` guarantees they never publish | §18.1 |
+| **D7** | **The no-drift gate is date-dependent and red on any day after its baseline was frozen.** `build_changes.py::_event_id` seeds on the build's UTC calendar date; `tools/fingerprint.py` cannot un-hash it. Diagnosed 2026-08-18, reproduced exactly. **Precondition for `Package N`'s gate** | §15 debt, `docs/ROSES_SOURCE_INSPECTION.md` |
 | D0 | `--max-documents` caps each **pass**, not the run, so the flag understates the work by 2× with subtopics on | §15 debt, §12 |
 | D1 | The D5 cache's six corrupted summaries, and one missing span | §15 debt |
 | D2 | **Three** families reject an ASCII hyphen — `dod_topic`, `component`, `technical_category`; the last also rejects `.` | §15 debt → Fm3 |
@@ -3137,13 +3198,33 @@ Per-agency-family acceptance, as the gate requires rather than in aggregate: **D
 
 **Added 8.7, and it precedes D¾.** Rung-1 and rung-2 sources (§6.7·0) — the
 hierarchies agencies publish as data — before any further generic inference.
-**Build S1 only, then re-measure.**
+**Build S1 only, then re-measure.** **S1 is complete and its gate is closed
+(2026-08-18); the next work is `Package N` below, and S2 does not begin until
+`Package N`'s gate is green.**
 
 - [x] **S1a. Read NSPIRES ROSES Table 3 and record its shape** — *done; `docs/ROSES_SOURCE_INSPECTION.md`. 69 rows, 6 overview, 63 elements; identity `(code, title)`; no explicit closed status.*  Original: — §0.4 rule 10, before any parser is written. Row schema, element-code form, how continuation years are expressed
 - [x] **S1b. `native` adapter for ROSES program elements** — *done, `scripts/sources/adapters/nasa_roses.py`, **`enabled = False`**. Emits children only for matched parents; `parse()` returns nothing so the 53 unmatched cannot reach the catalog.*  Original: — ~35 elements across Earth science, heliophysics, planetary science, astrophysics and biological/physical sciences. Emits `subtopic_source: "native"`, `confidence: "high"`, bypassing Cov4 and the review queue (§5.1). Parent match by element code, never by FOA number
 - [x] **S1c. Canaries** — *done. Six-division sentinel, element floor 40 against a measured 63, Table 2/3 delta tolerance 5 against a measured 1. Eight tests incl. HTTP-200-zero-rows.*  Original: — `expected_solicitations`: **ROSES has ≥20 open elements**. Zero rows on an HTTP 200 fails loudly (§7.4)
-- [x] **S1d. Re-measure and stop** — *done. 63 elements, 12 open; **10** relationship recoveries, **53** measured-not-emitted of which only **2** are open. §13 decision 13 opened. S2/S3 not started.*  Original: — report yield **against D⅝'s own denominator**, naming which records were previously category (a); never fold it into a segmentation acceptance rate (§17.8); re-run §8.5. **S2 (DOE SC referenced taxonomy, all six offices) and S3 (DoD source router) stay unscheduled until a human reads S1d**
-- [ ] **GATE:** S1 only · yield against D⅝'s own denominator, previously-(a) records named, never folded into an acceptance rate · canary proven against a simulated zero-row 200 · `native` confirmed to bypass Cov4 in code · §0.5 byte-identical with the flag off
+- [x] **S1d. Re-measure and stop** — *done. 63 elements, 12 open; **10** relationship recoveries, **53** measured-not-emitted of which only **2** are open. **§13 decision 13 opened by S1 and taken 2026-08-18: `Package N` next, then S2.** S2/S3 not started.*  Original: — report yield **against D⅝'s own denominator**, naming which records were previously category (a); never fold it into a segmentation acceptance rate (§17.8); re-run §8.5. **S2 (DOE SC referenced taxonomy, all six offices) and S3 (DoD source router) stay unscheduled until a human reads S1d** — *superseded 2026-08-18: S1d has been read, and the resulting order is `Package N` → S2 → measure S2 → human decision on S3. S2 does not follow S1 directly.*
+- [x] **GATE:** S1 only · yield against D⅝'s own denominator, previously-(a) records named, never folded into an acceptance rate · canary proven against a simulated zero-row 200 · `native` confirmed to bypass Cov4 in code · §0.5 byte-identical with the flag off — *closed 2026-08-18 clause by clause against repository evidence, not against the session report (§18.1). Six clauses closed outright. **Previously-(a) count is 0** — S1 reached the (e) population, so the (a) claim is still untested. The Cov4 bypass is proven at the provenance/segmentation boundary and must be re-checked when Cov4's classifier lands. §0.5 parity is proven by equivalence with the pre-S1 tree plus exact baseline reproduction under a pinned build date; the gate **script** is red for **debt D7**, which is not S1's.*
+
+---
+
+### Package N — NASA ROSES Catalog Source
+
+**Added 8.11. This is the next implementation task, and it is a catalog-source
+package, not a subtopic one** (§13 decision 13, §18.1). It **deliberately changes
+the base catalog**, so it carries **its own gate** and §0.5 keeps its current
+meaning. **Do not start S2 until this package's gate is green.**
+
+- [ ] **N1. Source lifecycle** — reuse S1's ROSES Table 3 discovery and parsing unchanged: year discovered from the stable SARA landing page; nothing transient hard-coded (year, amendment, `solId`, `cmdocumentid`, versioned URLs); Table 3 authoritative, Table 2 corroboration/health only; TLS compatibility stays **per-adapter and off by default**
+- [ ] **N2. Identity and deduplication** — deterministic identity across ROSES and existing sources. Appendix code is **not** unique (`D.3C` twice); native identity is `(appendix_code, program_title)`; solicitation number is the strongest cross-source key; **5 of 10 current matches needed normalized-title fallback**, which is a **weaker** key and must never be treated as an exact match. **No opportunity already represented via Grants.gov may reappear as a separate ROSES record**
+- [ ] **N3. Source precedence and update ownership** — deterministic ownership for title · opportunity number · dates · official URL · agency/program metadata · currentness/status. **Last adapter to run must not silently overwrite the other source**; include identity stability across the ROSES-only → Grants.gov-carried transition
+- [ ] **N4. Currentness** — align with `currentness.py`'s existing actionable model; keep `derived_currentness` distinguishable from `native_status`, because NASA publishes no native `closed`; inactive elements stay **known to the adapter and absent from the public current catalog**
+- [ ] **N5. Lifecycle tests** — the six in §18.1: inactive stays out · becomes open and enters on the next build · closes and leaves the public current population · no duplicate against Grants.gov · a new unmatched open element is emitted · HTTP-200-zero-rows or an implausibly small result fails loudly rather than silently removing NASA coverage
+- [ ] **N6 / GATE:** no duplicate catalog records · stable identity · deterministic source precedence · correct currentness transitions · expected currently open unmatched NASA records present (**2** today, re-derived not hard-coded) · inactive elements absent from the public current catalog · loud failure on source/parser collapse · full suite green with exit codes checked directly · **intentional line-by-line review of the generated-catalog change before any re-freeze** · **§0.5 is not weakened or reinterpreted** · **debt D7 fixed first**
+
+---
 
 ### Package D¾ — Forms
 
@@ -3204,6 +3285,23 @@ explicitly declined with a reason — never by being forgotten.
   that cache inherits the defect**, including §11's span-level table. Regenerate
   before the cache is used for anything else — and note it is 68 spans where a
   re-run gives 69
+- [ ] **D7. The no-drift gate is date-dependent, so it is red on every day
+  except the one its baseline was frozen on.** Diagnosed 2026-08-18 while closing
+  D⅝'s §0.5 clause, and reproduced exactly: `scripts/build_changes.py::_event_id`
+  seeds its SHA-1 with `changed_at[:10]`, the build's **UTC calendar date**, so
+  every event id turns over at midnight UTC, and `tools/fingerprint.py` — which
+  normalizes ISO-8601 datetime literals and the one named date-only field —
+  cannot un-hash a date baked into an id. Evidence: the same two artifacts differ
+  with the **same hashes** at the pre-S1 commit `7cece6b`; the normalized text
+  diff is **two lines, both event ids**; and pinning `generated_at`'s date to the
+  baseline's UTC freeze date reproduces **all 20** committed fingerprints exactly.
+  Commit `fc844e6` fixed the same rollover for `source_first_seen_date` and did
+  not reach this second axis. **Production is correct** — a new day *should* mint
+  a new event id — so the fix belongs in the gate's tooling: either normalize the
+  event id, or pin the changes step's clock the way `AS_OF` already pins the
+  catalog date. **Do not "fix" it by re-freezing the baseline**, which buys one
+  day. **Precondition for `Package N`'s gate**, which must review an intentional
+  change to these same two artifacts
 - [ ] **D2. Three families reject an ASCII hyphen.** Measured by running the
   patterns: `dod_topic`, `component` and `technical_category` all accept `:`,
   en-dash and em-dash but **not `-`**, and `technical_category` also rejects `.`.
@@ -3268,7 +3366,7 @@ F6's two-item lists is **§18.1 Fm7** and §6.4a; the 30 stratum-D reads are
 **Do not start any of these before package G is complete.** Each is a separate decision to be made with evidence from A–G. Costs are in §18.2; the DOE BES omnibus getting no child records in v1 is the most significant of them.
 
 - [ ] ~~SAM.gov adapter~~ (§7.5)
-- [ ] ~~NSPIRES activation~~
+- [ ] ~~NSPIRES activation~~ — **the ROSES table half is no longer deferred: it is `Package N`, scheduled next (§13 decision 13).** What stays deferred is only the session-gated open-solicitations list (§18.2)
 - [ ] ~~`program_taxonomy` / referenced subtopics~~ (§6.7) — **blocked on §13.1 decision 2**
 - [ ] ~~`expected_solicitations.json` + `check_expected.py`~~ (§7.4)
 - [ ] ~~§7.9 profile rebuild~~ into `faculty_profiles_v2.json`
@@ -3625,6 +3723,20 @@ The reason for cutting is not schedule pressure. It is that §10 bundles the cor
 
 **Sequencing rule:** one package per session (§0.4 rule 5). Each item inside a package is its own commit with the suite run between commits. A package is not complete until its gate is green and the branch is pushed.
 
+**The ordered path, as of 8.11.** This is the sequence, not a menu:
+
+| # | Step | State |
+|---|---|---|
+| 1 | **D⅝ S1 closure / §13 decision 13** | **done 2026-08-18** — gate closed clause by clause, decision taken |
+| 2 | **`Package N` — NASA ROSES catalog source** | **next.** A first-class catalog source with **its own gate** (§18.1) |
+| 3 | **D⅝ S2** — DOE Office of Science referenced taxonomy | approved in principle, **blocked until `Package N` is complete** |
+| 4 | **Measure S2** | against D⅝'s own denominator, never folded into a segmentation acceptance rate (§17.8) |
+| 5 | **Human decision on D⅝ S3** | **unscheduled** until S2 is built and measured |
+| 6 | Remaining **Coverage (Cov4, Cov6, Cov7)** · **D¾ Forms** · **E Storage** · **F Visible** · **G Enable** | each behind its own existing gate, in the order those gates already state |
+
+**`Package N` is in the implementation path, not in Debt and not in a narrative
+note.** It is the one clear next implementation task.
+
 **Ordering rule, added in 8.2: plumbing before patterns, and no exceptions without a measurement.** `docs/COVERAGE_SURVEY.md` ranked every available mechanism by how many records it unlocks. The ordering is not close:
 
 | Rank | Mechanism | Sampled (of 40) | Catalog est. | Where it now lives |
@@ -3811,8 +3923,8 @@ not by record count, which is the metric that produced the inversion.
 | # | Source | Disciplines served | Cost | Provenance |
 |---|---|---|---|---|
 | **S1** | **NSPIRES ROSES Table 3** | Earth science, heliophysics, planetary science, astrophysics, biological and physical sciences — **~35 program elements across essentially all of NASA science** | **Lowest available.** Table 3 is a published, structured table of program elements with dates: one row per element, no prose heuristic anywhere | `native` |
-| **S2** | **DOE Office of Science referenced taxonomy** | ASCR, BES, BER, FES, HEP, NP — **all six program offices**, ~70 programmes including the case that motivated §6.7 | Medium. Program pages under `science.osti.gov`, one scraper per office shape | `referenced` |
-| **S3** | **DoD source router** over Grants.gov, SAM.gov and the ONR/NRL/AFOSR indexes | Engineering, physics, materials, computing, and the DoD basic-research portfolio generally | Highest. Three source systems, a SAM.gov credential (§7.5), and per-lab index shapes that differ | mixed |
+| **S2** | **DOE Office of Science referenced taxonomy** — **approved in principle, blocked until `Package N` is complete** | ASCR, BES, BER, FES, HEP, NP — **all six program offices**, ~70 programmes including the case that motivated §6.7 | Medium. Program pages under `science.osti.gov`, one scraper per office shape | `referenced` |
+| **S3** | **DoD source router** over Grants.gov, SAM.gov and the ONR/NRL/AFOSR indexes — **unscheduled until S2 is built and measured** | Engineering, physics, materials, computing, and the DoD basic-research portfolio generally | Highest. Three source systems, a SAM.gov credential (§7.5), and per-lab index shapes that differ | mixed |
 
 > **Build S1 only, then re-measure. This is the gate, not a suggestion.**
 >
@@ -3843,15 +3955,106 @@ untried. That is the inversion in one agency.
 | **S1a. Read Table 3 and record its shape** | §0.4 rule 10: fetch one real response, print it, read it, write code against what was observed. **Do this before writing a parser** and record the row schema, the element-code form, and how continuation years are expressed |
 | **S1b. `native` adapter for ROSES program elements** | Adapter lifecycle per §6.7a's recommendation, emitting `subtopic_source: "native"`, `confidence: "high"`, bypassing Cov4 and the review queue (§5.1). Parent match by ROSES element code, never by FOA number |
 | **S1c. Canaries** | `expected_solicitations` entry: **ROSES has ≥20 open elements**. A parser returning zero rows on an HTTP 200 must fail loudly (§7.4) |
-| **S1d. Re-measure** | Report yield **against D⅝'s own denominator** and name which records were previously category (a) — that is the number that says whether structured sources reach the outward-pointing (a) population, which is currently unmeasured. **Never fold it into a segmentation acceptance rate** (§17.8): a different mechanism reaching a different population would make the recogniser work look better than it is. Re-run §8.5's query baseline. **Then decide S2 and S3 on that evidence** |
+| **S1d. Re-measure** | **Done, and §13 decision 13 is taken on it: `Package N` is next, then S2** (see the gate note below). **The (a) question below is now answered and the answer is 0** — S1 reached the **(e)** population, not the (a) one, so the (a) claim stays untested and S2 is its first test. Report yield **against D⅝'s own denominator** and name which records were previously category (a) — that is the number that says whether structured sources reach the outward-pointing (a) population, which is currently unmeasured. **Never fold it into a segmentation acceptance rate** (§17.8): a different mechanism reaching a different population would make the recogniser work look better than it is. Re-run §8.5's query baseline. **Then decide S2 and S3 on that evidence** |
 
 **Gate:** S1 only · yield reported against D⅝'s own denominator, with previously-(a) records named, and never folded into a segmentation acceptance rate · canary proven by simulating a zero-row HTTP 200 · `native` records confirmed to bypass Cov4 in code as well as in this document · §0.5 byte-identical with the flag off · **S2 and S3 remain unscheduled until S1d is read by a human**.
+
+> **S1 closed 2026-08-18, clause by clause against repository evidence rather
+> than against the session report** (§17.10). **Eight clauses: six closed
+> outright, one closed with a forward obligation (the Cov4 bypass), and one
+> closed on evidence while the gate *script* stays red for a defect that is not
+> S1's.**
+>
+> | Clause | Verdict | Evidence |
+> |---|---|---|
+> | **S1 only was built** | **closed** | `git diff --name-status 7cece6b..c64576e` adds exactly one adapter, three ROSES fixtures and three test files. No `science.osti.gov` scraper, no DoD router. `discoverability.py`'s osti references are pre-existing and untouched |
+> | **Yield against D⅝'s own denominator** | **closed** | 63 valid program elements as the denominator; 10 / 53 / 2 reported against it, never against 1,475 or against §1.1's 171 |
+> | **Previously-(a) records named** | **closed, and the answer is zero** | Verified against the classification records: **0 of the 10 were (a)**. `360003` is classified **(e)**; `360004`/`363241` appear as SSL failures and "no measurable document"; 8 of 10 are `ConnectionReset` rows in the census; the rest were never in the 53-document classified sample. **S1 reached the (e) population, not the (a) population** — so §6.7·0's claim that structured sources may reach part of the 62% (a) population is still **untested**, and S2 is the first test of it |
+> | **Not folded into a segmentation acceptance rate** | **closed** | `docs/ROSES_SOURCE_INSPECTION.md` *What this is not* states the separation and §1.1 is left unchanged; no acceptance rate anywhere in the plan absorbed the 10 |
+> | **HTTP-200-zero-rows canary demonstrated** | **closed** | `tests/test_nasa_roses_adapter.py::CanaryTests::test_http_200_with_zero_rows_fails_loudly` asserts `healthy is False` and **both** failure strings; sibling tests cover a missing division and catastrophic shrinkage |
+> | **`native` bypasses Cov4 in code** | **closed, with one forward obligation** | `subtopic_children` sets `subtopic_source: "native"` with `pattern_family`/`segmentation_method` both `None`; `classify_provenance`'s override is validated not trusted; `cap_confidence` treats provenance as a ceiling; and `test_the_segmenter_is_never_invoked_for_roses` patches `segment_document` and asserts **zero** calls across all three entry points. **Obligation: Cov4's classifier does not exist yet, so the bypass is proven at the provenance/segmentation boundary. When Cov4 lands, its call site must be gated on provenance and this clause re-checked against it** |
+> | **§0.5 byte-identical with the flag off** | **closed on evidence; the gate script is red for an unrelated defect** | The adapter is `enabled = False` and 18 of 20 artifacts match the baseline. The two that differ — `feeds/changes.json`, `feeds/changes.xml` — produce **byte-identical hashes on the pre-S1 tree at `7cece6b`**, and pinning the build's UTC date to the baseline's freeze date reproduces **all 20 committed fingerprints exactly** on the current tree. Cause: `build_changes.py::_event_id` seeds on the build's UTC calendar date. **Carried as debt D7; it is a precondition for `Package N`'s gate** |
+> | **S2/S3 not started before human review** | **closed** | No S2 or S3 code exists; both are re-gated below |
+>
+> **S2 is now gated behind `Package N`, not behind S1 alone.** S2 remains
+> approved in principle — S1 demonstrated measurable value from structured
+> sources, in that 10 existing open catalog records gained authoritative NASA
+> relationships at the `native` rung — but **S2 does not begin until `Package N`
+> is complete**. **S3 remains unscheduled until S2 has been built and measured**,
+> and is then a human decision, not an automatic follow-on.
+
+#### Package N — NASA ROSES Catalog Source
+
+**Added in 8.11, and it is the next implementation task.** §13 decision 13 is
+**taken**: ROSES standalone ingestion is built now, as a **first-class catalog
+source**, **after D⅝ S1 and before D⅝ S2**. This is not a subtopic package. It
+adds *opportunities*, not children, and it is the first work in this plan that
+**deliberately changes the base catalog** — which is why it has its own gate
+(**N6**) and why §0.5 keeps its current meaning untouched.
+
+**What is being bought.** Not 53 records. **A standing re-evaluation of NASA's
+whole published program-element inventory on every scheduled refresh**, so that:
+
+- an unmatched element **enters** the catalog when it becomes current/actionable;
+- an unmatched element **stays out of the public current catalog** while it is
+  inactive, past, TBD or `Not Solicited This Year`;
+- an emitted element **leaves** the public current population when it closes.
+
+**Today that means 2 records, not 53** — 51 of the 53 are inactive, and the point
+of the package is that those 51 need **no future human attention**: the refresh
+re-reads all 63 every run. Until this package ships, the **2 currently open
+unmatched elements are a known catalog-completeness gap** (§13 decision 13).
+
+**Do not restate S1's measurements as this package's yield.** S1's 10
+relationship recoveries are a *subtopic* result at the `native` rung; N's output
+is a *sourcing* result. They are never added together (§17.8).
+
+| Item | Notes |
+|---|---|
+| **N1. Source lifecycle — reuse S1's discovery and parsing** | `scripts/sources/adapters/nasa_roses.py` already does this and its design is **measured, not assumed** (`docs/ROSES_SOURCE_INSPECTION.md`). Preserve all of it: discover the active ROSES year from the **stable SARA landing page**; **hard-code nothing transient** — not the year, not the amendment number, not `solId`, not `cmdocumentid`, not a versioned document URL; keep **Table 3 as the authoritative hierarchy substrate** and **Table 2 for corroboration/health only**; keep appendix order rather than sorting; keep the tolerance for 3-cell rows, duplicate codes, missing codes and dirty dates. **Keep the TLS compatibility behaviour per-adapter and off by default** (`PoliteClient(legacy_tls_ciphers=True)`, §17.11) — do **not** broaden it to other adapters as part of this work |
+| **N2. Identity and deduplication** | Define **deterministic** identity between ROSES and existing catalog sources, against S1's measured facts: the appendix code alone is **not unique** (`D.3C` occurs twice), native ROSES identity is **`(appendix_code, program_title)`**, the **solicitation number is the strongest cross-source key** when present (`NNH<yy>ZDA<nnn>N-<CODE>`), and **5 of the 10 current matches required normalized-title fallback**. **An opportunity already represented through Grants.gov must not appear again as a separate ROSES record.** `sources/merge.py::merge_records` already drops an external record that collides with base by identity, by casefolded `opportunity_number`, or by normalized title — start there, and note that its title test carries exactly the weakness S1 measured. **Normalized-title matching is a weaker fallback and must be recorded as one** — never treated as equivalent to an exact solicitation-number match, and never used to *overwrite* a base field |
+| **N3. Source precedence and update ownership** | Define what happens when Grants.gov and ROSES represent the same opportunity **and disagree**. Establish deterministic ownership/precedence for at least **title · opportunity number · dates · official URL · agency/program metadata · currentness/status**. **Whichever adapter runs last must not silently overwrite the other source.** Two specific hazards to resolve rather than discover: `merge_records`'s rule is *"base always wins"*, which decides **whether an external record is added** and says nothing about **field-level ownership**; and an element emitted as ROSES-only that Grants.gov later starts carrying will flip which source owns it, so **identity stability across that transition** is part of this item, not a follow-up |
+| **N4. Currentness** | Align standalone ROSES records with the catalog's **existing** actionable/currentness model — `scripts/currentness.py::record_is_current` plus `filter_current`, which gate on `status` and `close_date`/`archive_date`. **NASA publishes no native `closed` status**, so `derived_currentness` must stay **distinguishable from `native_status`** in the emitted record, exactly as S1 keeps them (`docs/ROSES_SOURCE_INSPECTION.md` §4). **Inactive elements remain known to the source adapter and absent from the public current catalog** — they are inventory, not hidden records, and they must not be emitted with a fabricated `posted` status merely to satisfy the currentness filter |
+| **N5. Lifecycle tests** | Six, and they are what prove the 51 need no manual attention: **(1)** an unmatched `Not Solicited This Year` element does **not** enter the current catalog; **(2)** the same element changes to an open/future date and **enters on the next build**; **(3)** it later expires/closes and **leaves the public current population**; **(4)** an element already represented by Grants.gov creates **no duplicate**; **(5)** a new unmatched **open** element **is emitted**; **(6)** an **HTTP-200 response with zero rows, or an implausibly small ROSES result, fails loudly** rather than silently removing NASA coverage — S1's canaries already do the zero-row half (`test_http_200_with_zero_rows_fails_loudly`), and this extends them to the *emission* path, where a silent collapse would now delete records rather than merely add none |
+| **N6. The gate — see below** | A catalog source needs its own gate, because §0.5 answers a different question |
+
+##### N6 — the catalog-source gate, and why §0.5 cannot be it
+
+**§0.5 is not weakened, reinterpreted, or re-baselined to accommodate this
+package.** §0.5 proves that **enabling or disabling the subtopic layer does not
+change the base catalog.** That is still exactly true and still the most
+important gate in the project. **A first-class catalog source is *supposed* to
+change the base catalog**, so §0.5 cannot express whether it changed it
+*correctly* — hence a separate gate, covering at minimum:
+
+- **no duplicate catalog records** (N2), measured by reading the emitted set
+  against the base rather than by trusting the dedup rule that produced it;
+- **stable identity** across runs, and across the ROSES-only → Grants.gov-carried
+  transition (N3);
+- **deterministic source precedence** — demonstrated by constructing a
+  disagreement, not by asserting a policy (N3);
+- **correct currentness transitions** — all three directions of N5's (1)/(2)/(3);
+- **the expected currently open unmatched NASA records present** — 2 at the time
+  of writing, re-derived at build time rather than hard-coded;
+- **inactive ROSES elements absent from the public current catalog**;
+- **loud failure on source or parser collapse** (N5.6);
+- **full test suite green**, with exit codes checked directly (§17.7);
+- **intentional review of the generated-catalog change**, line by line, before any
+  new fingerprints are frozen.
+
+> **⚠ Precondition: §15 debt D7.** The no-drift gate is currently **date-dependent
+> and fails on any day after its baseline was frozen** — `build_changes.py`'s event
+> ids are seeded with the build's UTC calendar date, which `tools/fingerprint.py`
+> cannot normalize away (full diagnosis in `docs/ROSES_SOURCE_INSPECTION.md`).
+> This package has to review an **intentional** change to the generated artifacts
+> and re-freeze the baseline. **Fix D7 first**, or the review cannot distinguish
+> the change it is approving from the drift the gate manufactures on its own.
 
 #### Package D¾ — Forms
 
 **Added in 8.5, ordered by `docs/FAMILY_TAXONOMY.md` §5. Gated behind Cov4's gate passing — see the ⚠ note under D½ — and, from 8.7, behind **package D⅝** as well.**
 
-> **⚠ Re-gated in 8.7. Fm1, Fm2, Fm5 and Fm6 do not start until D⅝'s S1d has been read.** These four are rung-4 generic inference (§6.7·0), and their measured yields were computed against a corpus in which **no structured source had been tried**. Two conditions, both binding:
+> **⚠ Re-gated in 8.7, restated in 8.11. Fm1, Fm2, Fm5 and Fm6 do not start until the structured sources ahead of them in §18's ordered path have landed — `Package N`, then D⅝ S2 and its measurement.** S1d has now been read (2026-08-18), so that clause no longer gates anything; what gates these four is that the *residual* uncovered population is not yet known, and S2 is the step that changes it most. These four are rung-4 generic inference (§6.7·0), and their measured yields were computed against a corpus in which **no structured source had been tried**. Two conditions, both binding:
 >
 > 1. **Build only against records still uncovered after structured sources.** A parent that D⅝ resolves at `native` or `referenced` is not a candidate for a recogniser, however well it would have matched. Recompute the uncovered population first.
 > 2. **Re-measure the yield on that residual.** Every figure in the table below is *records in the 90 read* against the whole corpus. If S1 lands ~35 NASA elements at rung 1, the residual F-form population is smaller and differently distributed, and the ordering below may not survive it.
@@ -3910,7 +4113,7 @@ Each line states what is lost. None of this is abandoned; all of it is a later d
 | Deferred | What is lost by deferring it |
 |---|---|
 | **SAM.gov adapter** (§7.5) — **justification rebuilt 2026-08-17; the MURI argument does not support it** | **What is verified.** A live Grants.gov search for `MURI` returns **exactly one record — `344592`, the DEVCOM ARL Broad Agency Announcement — and it is already in this catalog.** `fetchOpportunity` for that record returns **zero** MURI occurrences against a 2,900-character description, so the term lives in the **attachment text** that Grants.gov indexes and the detail API does not expose. **MURI-related content is therefore demonstrably reachable through Grants.gov, inside a document this project already holds.** Multi-word searches (`MURI FY26`, the expanded phrase) are fuzzy OR-matches — they return COPS policing grants — and are evidence of nothing.<br><br>**What the old justification got wrong, logically.** "MURI appears zero times across 958 evidence entries" is a **fact about this project's corpus and stored fields**, not about where MURI is published. Our descriptions are truncated and our evidence cache stores extracted facts rather than full text, so a zero there cannot establish that MURI requires SAM.gov. **That inference is withdrawn.**<br><br>**What is still unknown:** whether the FY26 MURI *competition* posts a standalone notice to Grants.gov. The search above does not settle it — absence from a keyword index is weak evidence, and MURI is administered across ARO, ONR and AFOSR, whose vehicles differ. **Do not assert either direction from this row.**<br><br>**So what does justify the adapter?** Genuinely SAM-only DoD opportunities — solicitations posted to SAM.gov contract opportunities and never to Grants.gov. **This deferral currently names none, and that is the gap.** Before SAM.gov is scheduled, §15 debt **M6** requires at least one verified SAM-only opportunity relevant to academic researchers, named with its notice ID. Until then the adapter's cost is known and its benefit is asserted. Note this cannot be verified from inside this project today: SAM.gov needs a credential (§7.5) that does not exist yet.<br><br>**Not** the development corpus — 31 BAA records are already in the catalog, which is why this was safe to cut. **And `dod_topic` still has no MURI document validating it**, which is unchanged and independent of the above: it is validated by the AFOSR DEPSCoR notice's identical `Topic N:` convention across twelve topics, confirming the *convention* and not the agency. Do not read a green `dod_topic` result as evidence MURI will segment. **`344592` is worth reading before SAM.gov is built** — if that BAA enumerates MURI topics inline, part of what this deferral is said to cost is already reachable at rung 3 (§15 debt M4) |
-| **NSPIRES activation** (§10) — **premise corrected 2026-08-17** | NASA ROSES program elements stay invisible as individual records. NASA remains partially covered via Grants.gov. **The reachability half of this deferral was wrong.** `nasaprs.com` was recorded as refusing this client across four sessions — 12 `ConnectionReset` entries in the census, two in the survey, two in the taxonomy read. Measured: **it is CPython's default cipher list**, which omits the only suite those hosts offer. With one suite added and verification intact, **all 12 previously-unreachable NASA records re-fetched successfully, 0 failures** (`docs/ROSES_SOURCE_INSPECTION.md`, §17.11). What survives of the deferral is narrower and still real: NSPIRES's *open-solicitations list* is session-gated behind a POST search flow, which is what `adapters/nspires.py` documents. The **ROSES table surface is reachable**, which is what §18.1 D⅝ S1 needs, and S1 does not require NSPIRES activation |
+| **NSPIRES activation** (§10) — **premise corrected 2026-08-17; partially superseded 2026-08-18 by §13 decision 13 and `Package N`** | NASA ROSES program elements stay invisible as individual records **until `Package N` ships** — that is now scheduled work rather than a deferral, and the residual deferral below is only the session-gated open-solicitations list. NASA remains partially covered via Grants.gov. **The reachability half of this deferral was wrong.** `nasaprs.com` was recorded as refusing this client across four sessions — 12 `ConnectionReset` entries in the census, two in the survey, two in the taxonomy read. Measured: **it is CPython's default cipher list**, which omits the only suite those hosts offer. With one suite added and verification intact, **all 12 previously-unreachable NASA records re-fetched successfully, 0 failures** (`docs/ROSES_SOURCE_INSPECTION.md`, §17.11). What survives of the deferral is narrower and still real: NSPIRES's *open-solicitations list* is session-gated behind a POST search flow, which is what `adapters/nspires.py` documents. The **ROSES table surface is reachable**, which is what §18.1 D⅝ S1 needs, and S1 does not require NSPIRES activation |
 | **`program_taxonomy` and all `referenced` subtopics** (§6.7) | **Substantially reduced — see the reassessment below.** What is genuinely lost is now program-manager identity, stable per-program URLs, and taxonomy depth beyond what the notice prints. The per-program *children themselves* are no longer part of this deferral, because the census found them in the notice |
 | **`expected_solicitations.json` + `check_expected.py`** (§7.4) | No assertion that a known umbrella silently vanished from a healthy source. Mitigated slightly by #30 already being noisy, which this would have made noisier |
 | **§7.9 profile rebuild** | Researcher profiles keep the current Crossref + CV + free-text representation. Rehydrated abstracts, recency weighting and the negative-term list all wait. The current representation works; it is just not measured |
