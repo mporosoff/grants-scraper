@@ -1347,6 +1347,19 @@ def needs_subtopics(entry, enabled):
     )
 
 
+def referenced_fetch(url):
+    """Fetch a referenced source page as text, politely (§6.7, P6.3).
+
+    Function-local import cost is why this is a module-level helper rather than a
+    closure: `scripts.sources.http` is the project's one polite client, and using
+    it keeps retry, delay and User-Agent behaviour identical to every other
+    source. Tests inject their own fetcher and never touch the network.
+    """
+    from scripts.sources.http import PoliteClient
+
+    return PoliteClient().get_text(url)
+
+
 def subtopic_fields(record, content, containers, document, fetched_at, enabled):
     """Segmentation result for one document, or ``{}`` when the flag is off.
 
@@ -1365,10 +1378,50 @@ def subtopic_fields(record, content, containers, document, fetched_at, enabled):
     """
     if not enabled:
         return {}
-    from scripts import subtopic_records, subtopic_segmentation, subtopic_sources
+    from scripts import (
+        subtopic_records,
+        subtopic_referenced,
+        subtopic_segmentation,
+        subtopic_sources,
+    )
     from scripts.pull_grants import collect_attachments, fetch_detail
 
     version = subtopic_segmentation.extractor_version()
+
+    # §6.7·0 first refusal: a source that *asserts* the parent→child relationship
+    # is asked before one that infers it. Today that is exactly one measured
+    # source (P6.3, MEAS-7). It answers for one parent and declines for every
+    # other record, and declining costs nothing -- the generic path below runs
+    # unchanged, so an unhealthy referenced source can never suppress an answer
+    # inference would have found.
+    referenced_result, referenced_document, referenced_diagnostics = (
+        subtopic_referenced.first_refusal(record, fetch=referenced_fetch)
+    )
+    if referenced_result is not None:
+        return {
+            "subtopics": subtopic_records.build_records(
+                record,
+                referenced_result,
+                document=referenced_document,
+                as_of=fetched_at[:10],
+                # §5.1: the notice delegates to this page, so the rung is
+                # `referenced`. Never `native` -- the Army publishes the page,
+                # not the relationship.
+                provenance=subtopic_records.REFERENCED,
+            ),
+            # Orthogonal to provenance, and genuinely absent: no segmentation
+            # layer and no pattern family ran (§5.1).
+            "subtopic_method": referenced_result.method,
+            "subtopic_extractor_version": version,
+            "subtopic_attempts": (),
+            "subtopic_source_document": {
+                "url": (referenced_document or {}).get("url"),
+                "name": (referenced_document or {}).get("name"),
+                "sha256": (referenced_document or {}).get("sha256"),
+            },
+            "subtopic_referenced": referenced_diagnostics,
+        }
+
     try:
         # §6.6 multi-attachment. The primary is tried first from bytes already
         # in hand, so a record whose topics are in the primary costs no extra
