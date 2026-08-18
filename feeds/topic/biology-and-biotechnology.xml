@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-08-17T10:50:28Z</updated>
+  <updated>2026-08-18T10:48:43Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -345,6 +345,51 @@
     <summary>National Institutes of Health | Closes 2026-10-15 | This Notice of Funding Opportunity (NOFO) solicits applications that propose to conduct time-sensitive ancillary studies in conjunction with privately or publicly funded, active, ongoing clinical projects (parent projects). The parent project can be an interventional clinical trial, or a clinical study such as an observational study, or a disease-specific repository that will be actively collectin…</summary>
   </entry>
   <entry>
+    <title>Core Research in Biological Sciences (BIO Core)</title>
+    <link href="https://www.grants.gov/search-results-detail/363615"/>
+    <id>urn:funding-finder:grants-gov:363615</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation's Directorate for Biological Sciences (NSF BIO) Core Research in Biological Sciences (BIO Core) funding opportunity supports foundational and interdisciplinary research projects that expand knowledge of biology at any level of organization, from the molecular to the biome scale. We accept proposals that cover scientific topics associated with legacy programs hi…</summary>
+  </entry>
+  <entry>
+    <title>Engineering (ENG): Chemical, Bioengineering, Energy, and Transport Systems (CBET)</title>
+    <link href="https://www.grants.gov/search-results-detail/363616"/>
+    <id>urn:funding-finder:grants-gov:363616</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational engineering research for chemical, bioengineering, energy, and transport systems through the following programs:  The Chemical Process Systems (CPS) program supports foundational engineering research in chemical and biochemical processes for chemicals, fuels, energy, and materials. The Engineering Biol…</summary>
+  </entry>
+  <entry>
+    <title>Engineering (ENG): Civil, Mechanical and Manufacturing Innovation (CMMI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363614"/>
+    <id>urn:funding-finder:grants-gov:363614</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Technology development"/>
+    <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
+  </entry>
+  <entry>
+    <title>MPS Mathematical Sciences Research Programs (MPS MathSci)</title>
+    <link href="https://www.grants.gov/search-results-detail/363612"/>
+    <id>urn:funding-finder:grants-gov:363612</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs at the frontiers of discovery in theoretical and applied mathematical sciences. Programs include: Algebra and Number TheoryAnalysisApplied MathematicsCombinatoricsComputational MathematicsFoundationsGeometric AnalysisMathematical BiologyProbabilityStatisticsTopology…</summary>
+  </entry>
+  <entry>
     <title>Limited Competition: NIGMS Mature Synchrotron Resources (MSR) for Structural Biology (P30 - Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/360947"/>
     <id>urn:funding-finder:grants-gov:360947</id>
@@ -534,19 +579,6 @@
     <summary>Food and Drug Administration | Closes 2026-08-20 | The purpose of this Notice of Funding Opportunity (NOFO) is to address topics related to the use of digital health technologies (DHTs) for remote data acquisition in clinical investigations to support drug development.</summary>
   </entry>
   <entry>
-    <title>Enhancing Biotechnology Market Opportunities for U.S. Exporters and American Farmers</title>
-    <link href="https://www.grants.gov/search-results-detail/363193"/>
-    <id>urn:funding-finder:grants-gov:363193</id>
-    <updated>2026-07-15T00:00:00Z</updated>
-    <author><name>Foreign Agricultural Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>Foreign Agricultural Service | Closes 2026-08-17 | Modern agricultural biotechnology such as genome editing is a revolutionary tool that could transform the sustainability and viability of the agriculture sector. American farmers rely on agricultural biotechnology products, with over 90% of corn and soybeans derived from these technologies. In 2025, American farmers exported over $51 billion in agricultural biotechnology products worldwide. Howeve…</summary>
-  </entry>
-  <entry>
     <title>Cooperative Program for Modeling Clinical Transplantation</title>
     <link href="https://www.grants.gov/search-results-detail/361831"/>
     <id>urn:funding-finder:grants-gov:361831</id>
@@ -635,36 +667,5 @@
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Biology and biotechnology"/>
     <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-22 | Summary: The fiscal year 2026 (FY26) Neurofibromatosis Research Program (NFRP) Investigator-Initiated Research Award (IIRA) supports high-impact research that addresses a critical need and has the potential to make important contributions to the field of neurofibromatosis disorders or advance patient care. Research projects may focus on any phase of research, excluding clinical trials. The rationa…</summary>
-  </entry>
-  <entry>
-    <title>DoW Neurofibromatosis Research Academy - Leadership Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362917"/>
-    <id>urn:funding-finder:grants-gov:362917</id>
-    <updated>2026-06-23T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-14 | Summary: The fiscal year 2026 (FY26) Neurofibromatosis Research Program (NFRP) Neurofibromatosis Research Academy - Leadership Award (NFRALA) supports visionary, established neurofibromatosis (NF) investigators with documented history of neurofibromatosis funding, publications, strong mentorship and commitment to leadership to serve as Director and Deputy Director of the Neurofibromatosis Research…</summary>
-  </entry>
-  <entry>
-    <title>GREGoRi Data Coordination and Outreach Center (U01, Clinical Trials Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359279"/>
-    <id>urn:funding-finder:grants-gov:359279</id>
-    <updated>2026-06-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2026-10-30 | The Genomics Research to Elucidate the Genetics of Rare Diseases: innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. The purpose of this Notice of Funding Opportunity is to establish the GREGo…</summary>
-  </entry>
-  <entry>
-    <title>GREGoRi Innovation Projects (U01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359644"/>
-    <id>urn:funding-finder:grants-gov:359644</id>
-    <updated>2026-06-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2026-10-30 | The Genomics Research to Elucidate the Genetics of Rare Diseases: innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. This Notice of Funding Opportunity is intended to stimulate the development…</summary>
   </entry>
 </feed>

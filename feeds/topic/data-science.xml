@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-08-17T10:50:28Z</updated>
+  <updated>2026-08-18T10:48:43Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -131,6 +131,129 @@
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health | Closes 2027-01-25 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to continue to support the Radiation Oncology-Biology Integration Network (ROBIN) with applications from both new and renewing investigators. This network model will sustain an agile and effective national radiation oncology infrastructure that collectively addresses critical hypothesis-based translation…</summary>
+  </entry>
+  <entry>
+    <title>Egypt Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363633"/>
+    <id>urn:funding-finder:grants-gov:363633</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <category term="Materials science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
+    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
+  </entry>
+  <entry>
+    <title>ONR FY27 NOFO for Young Investigator Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363632"/>
+    <id>urn:funding-finder:grants-gov:363632</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>Office of Naval Research</name></author>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Energy"/>
+    <summary>Office of Naval Research | Closes 2026-10-30 | The Office of Naval Research Young Investigator Program seeks proposals addressing research areas (as described in the ONR Science and Technology Department section of ONR's website at https://www.onr.navy.mil) which are of interest to ONR Program Officers will be considered. Contact information for each division (a subgroup of an S&amp;T Department) is also listed within the S&amp;T section of the websit…</summary>
+  </entry>
+  <entry>
+    <title>MPS Astronomical Sciences Research Programs (MPS Astro)</title>
+    <link href="https://www.grants.gov/search-results-detail/363620"/>
+    <id>urn:funding-finder:grants-gov:363620</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Energy"/>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Closes 2026-11-16 | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs in the astronomical sciences. NSF MPS funds foundational astronomical sciences research and instrumentation focused on exploring space and advancing fundamental understanding of the universe. The programs covered by this funding opportunity are: Astronomical Science…</summary>
+  </entry>
+  <entry>
+    <title>EMERGING FRONTIERS IN RESEARCH AND INNOVATION (EFRI-2026/27): Wave-Based Computing ( EFRI-WBC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363622"/>
+    <id>urn:funding-finder:grants-gov:363622</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>U.S. National Science Foundation | Closes 2027-02-11 | The Emerging Frontiers in Research and Innovation (EFRI) program serves a critical role in helping the NSF Directorate for Engineering focus on important emerging areas in a timely way. The EFRI program invests in potentially transformative ideas that offer the opportunity for significant shifts in foundational engineering knowledge. EFRI-funded research must have strong potential for long-term im…</summary>
+  </entry>
+  <entry>
+    <title>Engineering (ENG): Civil, Mechanical and Manufacturing Innovation (CMMI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363614"/>
+    <id>urn:funding-finder:grants-gov:363614</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Technology development"/>
+    <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
+  </entry>
+  <entry>
+    <title>Engineering (ENG): Electrical, Communications, and Computing Systems (ECCS)</title>
+    <link href="https://www.grants.gov/search-results-detail/363613"/>
+    <id>urn:funding-finder:grants-gov:363613</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Energy"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research for electrical, communications and computing systems through the following programs: The Electronic, Photonic, Magnetic, and Quantum Devices (EPMQD) program supports foundational engineering research on novel classical and quantum devices, exploring matter’s electronic, photonic, and magnetic …</summary>
+  </entry>
+  <entry>
+    <title>MPS Chemistry Research Programs (MPS Chem)</title>
+    <link href="https://www.grants.gov/search-results-detail/363617"/>
+    <id>urn:funding-finder:grants-gov:363617</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports foundational research through multiple programs in the chemical sciences. Programs include: Chemical CatalysisChemical Measurement and ImagingChemical Mechanism, Function, and PropertiesChemical Structure and DynamicsChemical SynthesisChemical Systems and SolutionsChemical Theory, Models and …</summary>
+  </entry>
+  <entry>
+    <title>MPS Materials Research Programs (MPS Materials)</title>
+    <link href="https://www.grants.gov/search-results-detail/363618"/>
+    <id>urn:funding-finder:grants-gov:363618</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple materials research programs that advance fundamental understanding of materials, their properties, and their potential applications. The programs covered by this solicitation are: BiomaterialsCeramicsCondensed Matter and Materials TheoryCondensed Matter PhysicsElectronic and Photonic…</summary>
+  </entry>
+  <entry>
+    <title>MPS Physics Research Programs (MPS Physics)</title>
+    <link href="https://www.grants.gov/search-results-detail/363621"/>
+    <id>urn:funding-finder:grants-gov:363621</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Energy"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs at the frontiers of discovery in physics. Physics research supported by NSF MPS enables understanding of the fundamental aspects of nature at all scales, from the quantum effects inside atoms to the mysterious dark energy spanning the entire universe. The core resea…</summary>
   </entry>
   <entry>
     <title>Pax Silica Artificial Intelligence Assistance Project</title>
@@ -547,22 +670,6 @@
     <summary>U.S. National Science Foundation | Closes 2026-11-04 | This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
   </entry>
   <entry>
-    <title>Egypt Annual Program Statement</title>
-    <link href="https://www.grants.gov/search-results-detail/363252"/>
-    <id>urn:funding-finder:grants-gov:363252</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>Bureau of Near Eastern Affairs</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <category term="Data science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Materials science"/>
-    <category term="Cybersecurity"/>
-    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
-  </entry>
-  <entry>
     <title>Data Analytics &amp; AI to Counter Global Diversion</title>
     <link href="https://www.grants.gov/search-results-detail/363221"/>
     <id>urn:funding-finder:grants-gov:363221</id>
@@ -570,18 +677,6 @@
     <author><name>Bureau of Arms Control and Nonproliferation</name></author>
     <category term="Data science"/>
     <summary>Bureau of Arms Control and Nonproliferation | Closes 2026-08-21 | This effort seeks to address multiple facets of export control challenges. The first component will analyze trade data, create exemplary visualizations (e.g., dashboards), and train export control authorities to use data analysis for export control implementation. The second component will design, develop, and deploy a smartphone-accessible application for frontline officers to detect and identify…</summary>
-  </entry>
-  <entry>
-    <title>Change 1 to Training and Employment Guidance Letter 02-25, Industry-Driven Skills Training Fund Grant Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363108"/>
-    <id>urn:funding-finder:grants-gov:363108</id>
-    <updated>2026-07-08T00:00:00Z</updated>
-    <author><name>Employment and Training Administration</name></author>
-    <category term="Education and workforce"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Manufacturing"/>
-    <summary>Employment and Training Administration | Closes 2026-08-17 | Questions regarding this Training and Employment Guidance Letter (TEGL) may be emailed to Daniela Petchik, Grants Management Specialist at petchik.daniela.m@dol.gov and Brinda Ruggles, Grant Officer at ruggles.brinda@dol.gov. We encourage prospective applicants and interested parties to use the Grants.gov subscription option to register for future updates provided for this particular TEGL.</summary>
   </entry>
   <entry>
     <title>Collaborative Research</title>
@@ -646,87 +741,5 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>National Endowment for the Humanities | Closes 2026-09-16 | The National Endowment for the Humanities (NEH) Division of Research is accepting applications for the Scholarly Editions and Translations program. The purpose of this program is to support collaborative teams who edit, annotate, and translate foundational humanities texts that are vital to generating new scholarship but are not available in adequate editions or translations. This year’s competiti…</summary>
-  </entry>
-  <entry>
-    <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
-    <link href="https://www.grants.gov/search-results-detail/362900"/>
-    <id>urn:funding-finder:grants-gov:362900</id>
-    <updated>2026-06-22T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Cybersecurity"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <category term="Data science"/>
-    <category term="Energy"/>
-    <category term="Materials science"/>
-    <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | Project Background, Goals, and Objectives: In an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will lea…</summary>
-  </entry>
-  <entry>
-    <title>WaterSMART Cooperative Watershed Management Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362755"/>
-    <id>urn:funding-finder:grants-gov:362755</id>
-    <updated>2026-06-10T00:00:00Z</updated>
-    <author><name>Bureau of Reclamation</name></author>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Water"/>
-    <summary>Bureau of Reclamation | Closes 2028-02-15 | The WaterSMART Cooperative Watershed Management Program funding opportunity invites eligible entities to apply for funding to develop local solutions to address their water management needs. This opportunity provides funding for watershed group development, restoration planning, and watershed management project planning and design. By providing this funding, Reclamation promotes water reliability …</summary>
-  </entry>
-  <entry>
-    <title>GlobalX Challenge 26.1: AI-Native Air Interface for Tactical Communication Networks</title>
-    <link href="https://www.grants.gov/search-results-detail/362721"/>
-    <id>urn:funding-finder:grants-gov:362721</id>
-    <updated>2026-06-09T00:00:00Z</updated>
-    <author><name>Office of Naval Research</name></author>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Office of Naval Research | Closes 2026-08-31 | The purpose of the GlobalX Innovation Challenge is to accelerate the traditional knowledge generation cycle, rapidly testing applied research theories to enable the discovery of revolutionary dual-use capabilities for the benefit of the U.S. Navy and Marine Corps, the commercial marketplace, and the public. Led by the Office of Naval Research Global and targeted at researchers in the Indian subcon…</summary>
-  </entry>
-  <entry>
-    <title>HEAL Initiative: Translating Addiction Epidemiology, Prevention, Treatment, and Recovery Research into Practice (R61/R33 - Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/362672"/>
-    <id>urn:funding-finder:grants-gov:362672</id>
-    <updated>2026-06-04T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Data science"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2029-02-09 | The goal of this notice of funding opportunity (NOFO) is to address the opioid crisis and/or overdose events by supporting action-oriented research, accelerating the translation of addiction epidemiology, prevention, treatment services, and recovery research to practice. Proposed studies may target the individual, provider, organizational, community, or system level. This initiative prioritizes re…</summary>
-  </entry>
-  <entry>
-    <title>NLM Institutional Grants for Research Training in Biomedical Informatics, Data Science, and AI</title>
-    <link href="https://www.grants.gov/search-results-detail/361318"/>
-    <id>urn:funding-finder:grants-gov:361318</id>
-    <updated>2026-06-02T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <summary>National Institutes of Health | Closes 2026-09-25 | The National Library of Medicine (NLM) invites applications for innovative predoctoral and postdoctoral training programs that prepare the next generation of researchers in biomedical informatics, data science, and artificial intelligence/machine learning (AI/ML). NLM emphasizes cutting-edge, forward-looking training experiences that equip trainees to address complex health and biomedical challeng…</summary>
-  </entry>
-  <entry>
-    <title>Native American Affairs: Fiscal Year 2025 Colorado River Basin Tribal Drought Resiliency Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362644"/>
-    <id>urn:funding-finder:grants-gov:362644</id>
-    <updated>2026-06-02T00:00:00Z</updated>
-    <author><name>Bureau of Reclamation</name></author>
-    <category term="Energy"/>
-    <category term="Water"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Bureau of Reclamation | Closes 2026-09-28 | The objectives of this NAA/TAP funding opportunity are to provide funding for drought relief actions/projects that mitigate drought impacts for designated federally recognized tribes within the Colorado River Basin (see Eligibility section for list of tribes), and which advance Presidential and Department of the Interior Priorities within the Basin. Proposals should meet one or more of the followi…</summary>
-  </entry>
-  <entry>
-    <title>Optimizing Behavioral Sleep Interventions for Adolescents and Young Adults (R34 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/359159"/>
-    <id>urn:funding-finder:grants-gov:359159</id>
-    <updated>2026-05-28T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Data science"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2026-10-22 | NIMH seeks applications for pilot research to adapt, optimize, and test behavioral interventions that address common sleep problems in adolescents and young adults with or at risk for a mental health disorder. This notice of funding opportunity (NOFO) supports pilot clinical trials designed to evaluate the feasibility, tolerability, acceptability, safety, and potential effectiveness of the approac…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-08-17T10:50:28Z</updated>
+  <updated>2026-08-18T10:48:43Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development</title>
@@ -36,6 +36,33 @@
     <summary>Bureau of International Labor Affairs | Closes 2026-10-17 | The Bureau of International Labor Affairs (ILAB), U.S. Department of Labor (USDOL, or the Department), announces the availability of approximately $11,000,000 total costs (subject to the availability of Federal funds) for 1 cooperative agreement(s) to fund a technical assistance project aimed at addressing abusive labor practices associated with Illegal, Unreported, and Unregulated (IUU) fishing i…</summary>
   </entry>
   <entry>
+    <title>Egypt Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363633"/>
+    <id>urn:funding-finder:grants-gov:363633</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <category term="Materials science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
+    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
+  </entry>
+  <entry>
+    <title>Cold Chain Grants for Emergency Food Assistance</title>
+    <link href="https://www.grants.gov/search-results-detail/363631"/>
+    <id>urn:funding-finder:grants-gov:363631</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>Agricultural Marketing Service</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Manufacturing"/>
+    <category term="Energy"/>
+    <summary>Agricultural Marketing Service | Closes 2026-10-01 | AMS will award these funds competitively to at least one eligible organization that meets program requirements and whose expertise is consistent with the purpose of the grant program. The selected grant recipient(s) will provide management, oversight, consultation and expertise necessary to advance the purpose and activities of the program, primarily through a subaward program to support cold stor…</summary>
+  </entry>
+  <entry>
     <title>Preservation and Reinvestment Initiative for Community Enhancement (PRICE)</title>
     <link href="https://www.grants.gov/search-results-detail/362077"/>
     <id>urn:funding-finder:grants-gov:362077</id>
@@ -44,6 +71,76 @@
     <category term="Community development"/>
     <category term="Manufacturing"/>
     <summary>Department of Housing and Urban Development | Closes 2026-10-19 | HUD is issuing the Preservation and Reinvestment Initiative for Community Enhancement (PRICE) competition NOFO to preserve long-term housing affordability for residents of manufactured housing or an MHC, to redevelop MHCs, and to primarily benefit low- and moderate-income (LMI) residents. Congress appropriated in FY2025 these competitive grants to preserve and revitalize manufactured housing and e…</summary>
+  </entry>
+  <entry>
+    <title>Engineering (ENG): Civil, Mechanical and Manufacturing Innovation (CMMI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363614"/>
+    <id>urn:funding-finder:grants-gov:363614</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Technology development"/>
+    <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
+  </entry>
+  <entry>
+    <title>Engineering (ENG): Electrical, Communications, and Computing Systems (ECCS)</title>
+    <link href="https://www.grants.gov/search-results-detail/363613"/>
+    <id>urn:funding-finder:grants-gov:363613</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Energy"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research for electrical, communications and computing systems through the following programs: The Electronic, Photonic, Magnetic, and Quantum Devices (EPMQD) program supports foundational engineering research on novel classical and quantum devices, exploring matter’s electronic, photonic, and magnetic …</summary>
+  </entry>
+  <entry>
+    <title>MPS Chemistry Research Programs (MPS Chem)</title>
+    <link href="https://www.grants.gov/search-results-detail/363617"/>
+    <id>urn:funding-finder:grants-gov:363617</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports foundational research through multiple programs in the chemical sciences. Programs include: Chemical CatalysisChemical Measurement and ImagingChemical Mechanism, Function, and PropertiesChemical Structure and DynamicsChemical SynthesisChemical Systems and SolutionsChemical Theory, Models and …</summary>
+  </entry>
+  <entry>
+    <title>MPS Materials Research Programs (MPS Materials)</title>
+    <link href="https://www.grants.gov/search-results-detail/363618"/>
+    <id>urn:funding-finder:grants-gov:363618</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple materials research programs that advance fundamental understanding of materials, their properties, and their potential applications. The programs covered by this solicitation are: BiomaterialsCeramicsCondensed Matter and Materials TheoryCondensed Matter PhysicsElectronic and Photonic…</summary>
+  </entry>
+  <entry>
+    <title>MPS Physics Research Programs (MPS Physics)</title>
+    <link href="https://www.grants.gov/search-results-detail/363621"/>
+    <id>urn:funding-finder:grants-gov:363621</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Energy"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs at the frontiers of discovery in physics. Physics research supported by NSF MPS enables understanding of the fundamental aspects of nature at all scales, from the quantum effects inside atoms to the mysterious dark energy spanning the entire universe. The core resea…</summary>
   </entry>
   <entry>
     <title>Pax Silica Artificial Intelligence Assistance Project</title>
@@ -304,22 +401,6 @@
     <summary>National Institute of Standards and Technology | Closes 2026-08-21 | The NIST Hollings Manufacturing Extension Partnership (NIST MEP) is seeking applications from eligible applicants to establish and operate a MEP Center in the States of Alabama, Alaska, Arkansas, California, Georgia, Louisiana, Massachusetts, Missouri, Montana, Ohio, Pennsylvania, Utah and Vermont, and in the U.S. Territory of Puerto Rico.</summary>
   </entry>
   <entry>
-    <title>Egypt Annual Program Statement</title>
-    <link href="https://www.grants.gov/search-results-detail/363252"/>
-    <id>urn:funding-finder:grants-gov:363252</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>Bureau of Near Eastern Affairs</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <category term="Data science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Materials science"/>
-    <category term="Cybersecurity"/>
-    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
-  </entry>
-  <entry>
     <title>Public Wireless Supply Chain Innovation Fund Grant Program - Solutions for AI-Native RAN</title>
     <link href="https://www.grants.gov/search-results-detail/363179"/>
     <id>urn:funding-finder:grants-gov:363179</id>
@@ -330,18 +411,6 @@
     <category term="Manufacturing"/>
     <category term="Technology development"/>
     <summary>National Telecommunications and Information Admini | Closes 2026-09-09 | This NOFO is the fourth issued under NTIA’s Public Wireless Supply Chain Innovation Fund (PWSCIF or Innovation Fund). Titled “Solutions for AI-Native RAN,” the goal of this NOFO is to support the development of a secure compute environment to enable or leverage native artificial intelligence (“AI”) capabilities in the Radio Access Network (RAN) that generate revenue for operators, cost savings, an…</summary>
-  </entry>
-  <entry>
-    <title>Change 1 to Training and Employment Guidance Letter 02-25, Industry-Driven Skills Training Fund Grant Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363108"/>
-    <id>urn:funding-finder:grants-gov:363108</id>
-    <updated>2026-07-08T00:00:00Z</updated>
-    <author><name>Employment and Training Administration</name></author>
-    <category term="Education and workforce"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Manufacturing"/>
-    <summary>Employment and Training Administration | Closes 2026-08-17 | Questions regarding this Training and Employment Guidance Letter (TEGL) may be emailed to Daniela Petchik, Grants Management Specialist at petchik.daniela.m@dol.gov and Brinda Ruggles, Grant Officer at ruggles.brinda@dol.gov. We encourage prospective applicants and interested parties to use the Grants.gov subscription option to register for future updates provided for this particular TEGL.</summary>
   </entry>
   <entry>
     <title>Improved Oil and Gas Recovery and Produced Water Management Technologies</title>
@@ -371,17 +440,6 @@
     <category term="Cybersecurity"/>
     <category term="Water"/>
     <summary>Assistance Coordination | Closes 2026-09-30 | The Middle East Regional Cooperation (MERC) Program supports joint scientific research and innovation partnerships between the United States, Israel, and countries across the Middle East and North Africa (MENA). The program funds applied research projects that address shared regional challenges while advancing U.S. economic, technological, and strategic interests. MERC is designed to bring togethe…</summary>
-  </entry>
-  <entry>
-    <title>Fertilizer Investment &amp; Expansion for Long-term Domestic Supply (FIELDS)</title>
-    <link href="https://www.grants.gov/search-results-detail/363038"/>
-    <id>urn:funding-finder:grants-gov:363038</id>
-    <updated>2026-07-01T00:00:00Z</updated>
-    <author><name>Rural Business-Cooperative Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <summary>Rural Business-Cooperative Service | Closes 2026-08-17 | Fertilizer Investment &amp; Expansion for Long-term Domestic Supply (FIELDS) Program The Fertilizer Investment &amp; Expansion for Long-term Domestic Supply (FIELDS) Program is intended to expand or bring into operation new, independent domestic fertilizer production capacity in order to provide agricultural producers with additional domestic fertilizer options and strengthen the U.S. fertilizer supply ch…</summary>
   </entry>
   <entry>
     <title>Genomic and Biologic Therapies for ADRD (U01 Clinical Trial Optional)</title>
@@ -697,63 +755,5 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Manufacturing"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Closes 2027-06-15 | This Notice of Funding Opportunity Announcement (NOFO) from the NIH Brain Research through Advancing Innovative Neurotechnologies (BRAIN) Initiative is intended to support establishment of facilities at minority-serving institutions (MSIs) and Institutional Development Award (IDeA)-eligible institutions for scaled production and distribution of brain cell type-specific access and manipulation reag…</summary>
-  </entry>
-  <entry>
-    <title>Computational and Data-Enabled Science and Engineering</title>
-    <link href="https://www.grants.gov/search-results-detail/356055"/>
-    <id>urn:funding-finder:grants-gov:356055</id>
-    <updated>2024-08-15T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Data science"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Materials science"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation | Posted | Large-scale simulations and the ability to accumulate massive amounts of data have revolutionized science and engineering. The goal of the Computational and Data-enabled Science and Engineering (CDS&amp;E) meta-program is to identify and capitalize on opportunities for major scientific and engineering breakthroughs through new computational and data-analysis approaches and best practices. The CDS&amp;E me…</summary>
-  </entry>
-  <entry>
-    <title>Advanced Technological Education</title>
-    <link href="https://www.grants.gov/search-results-detail/355100"/>
-    <id>urn:funding-finder:grants-gov:355100</id>
-    <updated>2024-06-25T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation | Closes 2026-10-01 | With a focus on two-year Institutions of Higher Education (IHEs), the Advanced Technological Education (ATE) program supports the education of technicians for the high-technology fields that drive our nation's economy. The program involves partnerships between academic institutions (grades 7-12, IHEs), industry, and economic development agencies to promote improvement in the education of science a…</summary>
-  </entry>
-  <entry>
-    <title>IUSE/Professional Formation of Engineers: Revolutionizing Engineering Departments</title>
-    <link href="https://www.grants.gov/search-results-detail/353413"/>
-    <id>urn:funding-finder:grants-gov:353413</id>
-    <updated>2024-04-05T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Manufacturing"/>
-    <category term="Quantum science"/>
-    <category term="Technology development"/>
-    <summary>U.S. National Science Foundation | Closes 2026-09-08 | Revolutionizing Engineering Departments (hereinafter referred to as RED) is designed to build upon previous efforts in engineering education research. Specifically, previous and ongoing evaluations of the NSF Engineering Education and Centers Division program and its predecessors, as well as those related programs in the Directorate for STEM Education, have shown that prior investments have signif…</summary>
-  </entry>
-  <entry>
-    <title>ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)</title>
-    <link href="https://www.grants.gov/search-results-detail/351715"/>
-    <id>urn:funding-finder:grants-gov:351715</id>
-    <updated>2024-01-06T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Climate change"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <summary>U.S. National Science Foundation | Closes 2026-09-29 | Plasma science is a transdisciplinary field of research where fundamental studies in many disciplines, including plasma physics, plasma chemistry, materials science, and space science, come together to advance knowledge for discovery and technological innovation. The primary goal of the ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) program is to identify and capitali…</summary>
   </entry>
 </feed>

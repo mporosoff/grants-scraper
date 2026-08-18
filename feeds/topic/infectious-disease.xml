@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml</id>
-  <updated>2026-08-17T10:50:28Z</updated>
+  <updated>2026-08-18T10:48:43Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Resources and Workforce Development for the Regional Biocontainment Laboratories</title>
@@ -269,6 +269,28 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Closes 2026-12-18 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting the Centers for Structural Biology of HIV and other Infectious Diseases. This solicitation will support multidisciplinary groups of scientists to determine the 3-dimensional structures of molecules and molecular complexes involved in priority infectious diseases. The effort focuses on explo…</summary>
+  </entry>
+  <entry>
+    <title>Ending HIV and TB as public health threats through an accelerated and sustained comprehensive response in India</title>
+    <link href="https://www.grants.gov/search-results-detail/360710"/>
+    <id>urn:funding-finder:grants-gov:360710</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Transportation"/>
+    <category term="Cybersecurity"/>
+    <summary>Centers for Disease Control-GHC | Closes 2026-09-16 | The Award Ceiling for Year 1 is 0 (none). CDC anticipates an Approximate Total Fiscal Year Funding amount of $6,000,000 for Year 1, subject to the availability of funds. This NOFO supports India"s National AIDS Control Organization (NACO), Central Tuberculosis Division (CTD), and other departments in the Ministry of Health and Family Welfare (MoHFW). The goal is to enhance systems that accelerate …</summary>
+  </entry>
+  <entry>
+    <title>Strengthening Ghana Health Service laboratory services, diagnostic networks, and systems for a more effective, efficient, and sustainable response to HIV, TB, and other priority health threats</title>
+    <link href="https://www.grants.gov/search-results-detail/360759"/>
+    <id>urn:funding-finder:grants-gov:360759</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Infectious disease"/>
+    <category term="Cybersecurity"/>
+    <summary>Centers for Disease Control-GHC | Closes 2026-10-16 | The Award Ceiling for Year 1 is 0 (none). CDC anticipates an Approximate Total Fiscal Year Funding amount of $500,000 for Year 1, subject to the availability of funds. This NOFO provides operational support through financial and technical resources to the Ghana Health Service (GHS)/Ministry of Health (MoH). The goal is to help them coordinate and improve laboratory capacity so they can deliver hig…</summary>
   </entry>
   <entry>
     <title>Impact of Immunotherapies on CNS Outcomes in People with HIV: Potential Benefits, Challenges and Risks</title>
@@ -648,28 +670,5 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Manufacturing"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Closes 2027-06-15 | This Notice of Funding Opportunity Announcement (NOFO) from the NIH Brain Research through Advancing Innovative Neurotechnologies (BRAIN) Initiative is intended to support establishment of facilities at minority-serving institutions (MSIs) and Institutional Development Award (IDeA)-eligible institutions for scaled production and distribution of brain cell type-specific access and manipulation reag…</summary>
-  </entry>
-  <entry>
-    <title>Animal and Veterinary Innovation Centers (U18)</title>
-    <link href="https://www.grants.gov/search-results-detail/355044"/>
-    <id>urn:funding-finder:grants-gov:355044</id>
-    <updated>2024-06-20T00:00:00Z</updated>
-    <author><name>Food and Drug Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>Food and Drug Administration | Closes 2028-05-12 | The purpose of this Funding Opportunity Announcement (FOA) is to solicit applications for inclusion as Animal and Veterinary Innovation Centers, which are intended to form long-term partnerships to address priority areas for FDA's Center for Veterinary Medicine (CVM). This includes CVM developing cooperative agreement(s) with academic research institutions (public and private) to: 1. Drive researc…</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: Specific Pathogen Free Macaque Colonies to Support HIV/AIDS Research (U42 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/351920"/>
-    <id>urn:funding-finder:grants-gov:351920</id>
-    <updated>2024-01-22T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Infectious disease"/>
-    <summary>National Institutes of Health | Closes 2026-09-25 | The purpose of this Notice of Funding Opportunity (NOFO) is to provide continuing support for specific pathogen-free (SPF) macaque colonies previously funded under the auspices of PAR-21-089 and PAR-18-669 that support Human Immunodeficiency Virus (HIV)/Acquired Immunodeficiency Syndrome (AIDS) research. Breeding colonies are essential to sustain appropriate SPF macaques for research related to HI…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-08-17T10:50:28Z</updated>
+  <updated>2026-08-18T10:48:43Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Mentored Career Transition Award (KT1/R00)</title>
@@ -132,6 +132,46 @@
     <category term="Education and workforce"/>
     <category term="Transportation"/>
     <summary>69A345 Office of the Under Secretary for Policy | Closes 2026-11-15 | The Drone Infrastructure Inspection Grants (DIIG) Program will provide grants to eligible government entities to facilitate the use of small Unmanned Aircraft Systems (UAS), referred to herein as drones, in critical infrastructure inspection. The objective is to increase the widespread adoption of drones and relevant technologies in support of more efficient Inspection, Operation, Construction, Ma…</summary>
+  </entry>
+  <entry>
+    <title>Egypt Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363633"/>
+    <id>urn:funding-finder:grants-gov:363633</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <category term="Materials science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
+    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
+  </entry>
+  <entry>
+    <title>Ending HIV and TB as public health threats through an accelerated and sustained comprehensive response in India</title>
+    <link href="https://www.grants.gov/search-results-detail/360710"/>
+    <id>urn:funding-finder:grants-gov:360710</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Transportation"/>
+    <category term="Cybersecurity"/>
+    <summary>Centers for Disease Control-GHC | Closes 2026-09-16 | The Award Ceiling for Year 1 is 0 (none). CDC anticipates an Approximate Total Fiscal Year Funding amount of $6,000,000 for Year 1, subject to the availability of funds. This NOFO supports India"s National AIDS Control Organization (NACO), Central Tuberculosis Division (CTD), and other departments in the Ministry of Health and Family Welfare (MoHFW). The goal is to enhance systems that accelerate …</summary>
+  </entry>
+  <entry>
+    <title>FY25 and FY26 Advanced Digital Construction Management Systems (ADCMS)</title>
+    <link href="https://www.grants.gov/search-results-detail/363628"/>
+    <id>urn:funding-finder:grants-gov:363628</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>DOT Federal Highway Administration</name></author>
+    <category term="Transportation"/>
+    <category term="Separations and membranes"/>
+    <category term="Materials science"/>
+    <category term="Cybersecurity"/>
+    <summary>DOT Federal Highway Administration | Closes 2026-09-16 | The purpose of the ADCMS Competitive Grant Program is to provide incentives for eligible applicants to promote, implement, deploy, demonstrate, showcase, support, and document the application of new technology in construction projects at a program level. Eligible applicants under the ADCMS Competitive Grant Program are State Departments of Transportation (State DOT), including the District of Colu…</summary>
   </entry>
   <entry>
     <title>Limited Competition: Small Grant Program for the NCATS Clinical and Translational Science Award (CTSA) Program (Clinical Trial Optional)</title>
@@ -556,31 +596,6 @@
     <summary>Administration for Children &amp; Families - ACYF/FYSB | Closes 2026-08-31 | The Primary Prevention Youth Homelessness Demonstration Program provides funding to identify and implement strategies and services for youth and young adults between ages 12 and 26 in order to prevent homelessness, including strategies designed to serve youth and young adult populations with a high likelihood of experiencing homelessness, housing instability, particularly among youth at risk of hu…</summary>
   </entry>
   <entry>
-    <title>Egypt Annual Program Statement</title>
-    <link href="https://www.grants.gov/search-results-detail/363252"/>
-    <id>urn:funding-finder:grants-gov:363252</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>Bureau of Near Eastern Affairs</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <category term="Data science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Materials science"/>
-    <category term="Cybersecurity"/>
-    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
-  </entry>
-  <entry>
-    <title>Title IV-E Prevention Accelerator Grants</title>
-    <link href="https://www.grants.gov/search-results-detail/362890"/>
-    <id>urn:funding-finder:grants-gov:362890</id>
-    <updated>2026-07-17T00:00:00Z</updated>
-    <author><name>Administration for Children and Families - ACYF/CB</name></author>
-    <category term="Transportation"/>
-    <summary>Administration for Children and Families - ACYF/CB | Closes 2026-08-17 | Despite expanded authority under the Family First Prevention Services Act, title IV-E prevention services account for less than 2% of total program claims. Many title IV-E agencies face implementation barriers including limited infrastructure, provider readiness, evaluation capacity, and complex claiming requirements. To overcome these barriers, the Children's Bureau will fund projects to accelera…</summary>
-  </entry>
-  <entry>
     <title>National Estuarine Research Reserve System (NERRS) Land Acquisition and Construction Program for Fiscal Year 2026</title>
     <link href="https://www.grants.gov/search-results-detail/363229"/>
     <id>urn:funding-finder:grants-gov:363229</id>
@@ -591,17 +606,6 @@
     <category term="Transportation"/>
     <category term="Water"/>
     <summary>DOC NOAA - ERA Production | Closes 2026-09-18 | The National Estuarine Research Reserve System (NERRS) consists of estuarine areas of the United States and its territories designated and managed for research and educational purposes (Reserve) as specified in 15 C.F.R. Part 921. By funding Reserve lead agencies and universities to conduct land acquisition and construction projects that support the NERRS mission, NOAA will strengthen protection o…</summary>
-  </entry>
-  <entry>
-    <title>Center for Foundational Academic Research and Strategic Innovation for the Defense Enterprise (C-FARSIDE)</title>
-    <link href="https://www.grants.gov/search-results-detail/363091"/>
-    <id>urn:funding-finder:grants-gov:363091</id>
-    <updated>2026-07-16T00:00:00Z</updated>
-    <author><name>Washington Headquarters Services</name></author>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>Washington Headquarters Services | Closes 2026-08-17 | Bridging foundational academic research and strategic innovation for the Defense enterprise, the Center for Foundational Academic Research and Strategic Innovation for the Defense Enterprise (C-FARSIDE) will facilitate deep transdisciplinary collaborations among top-tier scholars, informed by defense strategists, that will transform rigorous and blue-sky research into breakthrough national securit…</summary>
   </entry>
   <entry>
     <title>FY 2026 Notice of Funding Opportunity: Innovative Coordinated Access and Mobility Pilot Program</title>
@@ -624,17 +628,6 @@
     <summary>Maritime Administration | Closes 2026-08-31 | The United States Marine Highway Program (USMHP), codified at 46 U.S.C. 55601, was originally established by Section 1121 of the Energy Independence and Security Act of 2007 to reduce landside congestion through the designation of Marine Highway Routes. The USMHP statute authorizes the U.S. Department of Transportation (“Department” or “DOT”) to make grants to implement Projects or components of P…</summary>
   </entry>
   <entry>
-    <title>Fertilizer Investment &amp; Expansion for Long-term Domestic Supply (FIELDS)</title>
-    <link href="https://www.grants.gov/search-results-detail/363038"/>
-    <id>urn:funding-finder:grants-gov:363038</id>
-    <updated>2026-07-01T00:00:00Z</updated>
-    <author><name>Rural Business-Cooperative Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <summary>Rural Business-Cooperative Service | Closes 2026-08-17 | Fertilizer Investment &amp; Expansion for Long-term Domestic Supply (FIELDS) Program The Fertilizer Investment &amp; Expansion for Long-term Domestic Supply (FIELDS) Program is intended to expand or bring into operation new, independent domestic fertilizer production capacity in order to provide agricultural producers with additional domestic fertilizer options and strengthen the U.S. fertilizer supply ch…</summary>
-  </entry>
-  <entry>
     <title>Interdisciplinary Transportation Law and Policy Technology Training Development</title>
     <link href="https://www.grants.gov/search-results-detail/362960"/>
     <id>urn:funding-finder:grants-gov:362960</id>
@@ -645,5 +638,18 @@
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
     <summary>69A355 Research and Technology | Closes 2026-08-28 | The U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Interdisciplinary Transportation Law and Policy Technology Training Development program. This 24-month cooperative agreement aims to bridge the critical knowledge gap between fast-changing transportation technologies and our Nati…</summary>
+  </entry>
+  <entry>
+    <title>Tribal Transportation Safety Strategy Pilot Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362956"/>
+    <id>urn:funding-finder:grants-gov:362956</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>69A355 Research and Technology</name></author>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>69A355 Research and Technology | Closes 2026-08-28 | he U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Tribal Transportation Safety Strategy Pilot Program. This three-year cooperative agreement is designed to address the critical public safety crisis in Tribal communities, as American Indian and Alaska Native populations experience…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml</id>
-  <updated>2026-08-17T10:50:28Z</updated>
+  <updated>2026-08-18T10:48:43Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -181,6 +181,17 @@
     <category term="Infectious disease"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Closes 2026-10-22 | The National Institute of Mental Health (NIMH) intends to publish a notice of funding opportunity (NOFO) to solicit biphasic research applications to evaluate the impact of HIV immunotherapies on central nervous system (CNS) outcomes in people with HIV and to identify mechanisms, benefits, and risks associated with their use in the CNS compartment. The primary goal is to generate evidence that inf…</summary>
+  </entry>
+  <entry>
+    <title>Expeditions in Computing (Expeditions)</title>
+    <link href="https://www.grants.gov/search-results-detail/363623"/>
+    <id>urn:funding-finder:grants-gov:363623</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation | Closes 2027-07-27 | The far-reaching impact and rate of innovation in the computer and information science and engineering ﬁelds has been remarkable, generating economic prosperity, and enhancing the quality of life for people. More than a decade ago, the NSF Directorate for Computer and Information Science and Engineering (NSF CISE) established the NSF Expeditions program to provide the NSF CISE research community w…</summary>
   </entry>
   <entry>
     <title>Global Brain and Nervous System Disorders Research Across the Lifespan - Exploratory Grants</title>
@@ -654,18 +665,5 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Technology development"/>
     <category term="Cybersecurity"/>
     <summary>National Institutes of Health | Closes 2027-05-07 | The purpose of this funding opportunity is to encourage multidisciplinary investigators to develop new approaches or apply existing approaches in novel ways to measure brain activity, connectivity, genomics, or other aspects across the age spectrum of neurodevelopment. The overarching goal is to extend our understanding of brain development and aging, including studies of the neurodevelopmental or…</summary>
-  </entry>
-  <entry>
-    <title>New Approaches for Measuring Brain Changes Across Longer Timespans (R21 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/357377"/>
-    <id>urn:funding-finder:grants-gov:357377</id>
-    <updated>2024-11-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Neuroscience"/>
-    <category term="Technology development"/>
-    <category term="Cybersecurity"/>
-    <summary>National Institutes of Health | Closes 2027-05-07 | The purpose of this funding opportunity is to encourage multidisciplinary investigators to submit applications developing exploratory, highly novel new approaches, or innovative applications of existing approaches to measure brain activity, connectivity, genomics, or other aspects across the age spectrum of neurodevelopment. The overarching goal is to extend our understanding of brain development …</summary>
   </entry>
 </feed>

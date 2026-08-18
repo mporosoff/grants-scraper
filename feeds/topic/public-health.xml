@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml</id>
-  <updated>2026-08-17T10:50:28Z</updated>
+  <updated>2026-08-18T10:48:43Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -171,6 +171,15 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Closes 2027-06-01 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the support of the Clinical Data, Safety and Statistical Centers program. The overall objective of this program is to provide coordination and oversight for multiple activities in service to clinical research and mechanistic studies supported by NIAID, including all Division of Allergy, Immunolog…</summary>
+  </entry>
+  <entry>
+    <title>Surveillance and Case Control Study of Stillbirth and Birth Defects (SUCCSSBD)</title>
+    <link href="https://www.grants.gov/search-results-detail/363625"/>
+    <id>urn:funding-finder:grants-gov:363625</id>
+    <updated>2027-01-29T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCBDDD</name></author>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control - NCBDDD | Closes 2027-03-31 | Birth defects affect about three percent of all births in the United States and are a leading cause of infant mortality, morbidity, and healthcare costs; the causes of two-thirds of birth defects remain unknown. In addition, stillbirths (pregnancy loss at 20 or more weeks of gestation) are an under-evaluated public health issue. Over 20,000 pregnancies in the U.S. end in a stillbirth each year. Th…</summary>
   </entry>
   <entry>
     <title>Health Promotion and Disease Prevention Research Centers: 2027 Special Interest Project Supplements (SIPS)</title>
@@ -629,16 +638,5 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Public health"/>
     <summary>Health Resources and Services Administration | Closes 2026-09-20 | The purpose of Women's Initiative for Screening and Health (WISH) is to improve women’s health across the lifespan by increasing access to and availability of preventive health services. Through a multidisciplinary coalition of healthcare providers, academic institutions, and patient-centered organizations, WISH drives a comprehensive strategy to: (1) review and recommend evidence-based updates to…</summary>
-  </entry>
-  <entry>
-    <title>Centers for Structural Biology of HIV and other Infectious Diseases</title>
-    <link href="https://www.grants.gov/search-results-detail/361050"/>
-    <id>urn:funding-finder:grants-gov:361050</id>
-    <updated>2026-08-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2026-12-18 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting the Centers for Structural Biology of HIV and other Infectious Diseases. This solicitation will support multidisciplinary groups of scientists to determine the 3-dimensional structures of molecules and molecular complexes involved in priority infectious diseases. The effort focuses on explo…</summary>
   </entry>
 </feed>

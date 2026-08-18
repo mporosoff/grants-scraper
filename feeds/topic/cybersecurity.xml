@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-08-17T10:50:28Z</updated>
+  <updated>2026-08-18T10:48:43Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -17,6 +17,56 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>Rural Utilities Service | Closes 2027-05-03 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+  </entry>
+  <entry>
+    <title>Egypt Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363633"/>
+    <id>urn:funding-finder:grants-gov:363633</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <category term="Materials science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
+    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
+  </entry>
+  <entry>
+    <title>Ending HIV and TB as public health threats through an accelerated and sustained comprehensive response in India</title>
+    <link href="https://www.grants.gov/search-results-detail/360710"/>
+    <id>urn:funding-finder:grants-gov:360710</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Transportation"/>
+    <category term="Cybersecurity"/>
+    <summary>Centers for Disease Control-GHC | Closes 2026-09-16 | The Award Ceiling for Year 1 is 0 (none). CDC anticipates an Approximate Total Fiscal Year Funding amount of $6,000,000 for Year 1, subject to the availability of funds. This NOFO supports India"s National AIDS Control Organization (NACO), Central Tuberculosis Division (CTD), and other departments in the Ministry of Health and Family Welfare (MoHFW). The goal is to enhance systems that accelerate …</summary>
+  </entry>
+  <entry>
+    <title>FY25 and FY26 Advanced Digital Construction Management Systems (ADCMS)</title>
+    <link href="https://www.grants.gov/search-results-detail/363628"/>
+    <id>urn:funding-finder:grants-gov:363628</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>DOT Federal Highway Administration</name></author>
+    <category term="Transportation"/>
+    <category term="Separations and membranes"/>
+    <category term="Materials science"/>
+    <category term="Cybersecurity"/>
+    <summary>DOT Federal Highway Administration | Closes 2026-09-16 | The purpose of the ADCMS Competitive Grant Program is to provide incentives for eligible applicants to promote, implement, deploy, demonstrate, showcase, support, and document the application of new technology in construction projects at a program level. Eligible applicants under the ADCMS Competitive Grant Program are State Departments of Transportation (State DOT), including the District of Colu…</summary>
+  </entry>
+  <entry>
+    <title>Strengthening Ghana Health Service laboratory services, diagnostic networks, and systems for a more effective, efficient, and sustainable response to HIV, TB, and other priority health threats</title>
+    <link href="https://www.grants.gov/search-results-detail/360759"/>
+    <id>urn:funding-finder:grants-gov:360759</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Infectious disease"/>
+    <category term="Cybersecurity"/>
+    <summary>Centers for Disease Control-GHC | Closes 2026-10-16 | The Award Ceiling for Year 1 is 0 (none). CDC anticipates an Approximate Total Fiscal Year Funding amount of $500,000 for Year 1, subject to the availability of funds. This NOFO provides operational support through financial and technical resources to the Ghana Health Service (GHS)/Ministry of Health (MoH). The goal is to help them coordinate and improve laboratory capacity so they can deliver hig…</summary>
   </entry>
   <entry>
     <title>Promoting Responsible Investment and Rights-Respecting Production Models</title>
@@ -514,22 +564,6 @@
     <summary>Food and Drug Administration | Closes 2026-08-20 | The purpose of this Notice of Funding Opportunity (NOFO) is to address topics related to the use of digital health technologies (DHTs) for remote data acquisition in clinical investigations to support drug development.</summary>
   </entry>
   <entry>
-    <title>Egypt Annual Program Statement</title>
-    <link href="https://www.grants.gov/search-results-detail/363252"/>
-    <id>urn:funding-finder:grants-gov:363252</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>Bureau of Near Eastern Affairs</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <category term="Data science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Materials science"/>
-    <category term="Cybersecurity"/>
-    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
-  </entry>
-  <entry>
     <title>Fiscal Year 2027 Expanding Nutrition Services</title>
     <link href="https://www.grants.gov/search-results-detail/362823"/>
     <id>urn:funding-finder:grants-gov:362823</id>
@@ -580,87 +614,6 @@
     <summary>Assistance Coordination | Closes 2026-09-30 | The Middle East Regional Cooperation (MERC) Program supports joint scientific research and innovation partnerships between the United States, Israel, and countries across the Middle East and North Africa (MENA). The program funds applied research projects that address shared regional challenges while advancing U.S. economic, technological, and strategic interests. MERC is designed to bring togethe…</summary>
   </entry>
   <entry>
-    <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 10</title>
-    <link href="https://www.grants.gov/search-results-detail/363007"/>
-    <id>urn:funding-finder:grants-gov:363007</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>Department of Homeland Security - FEMA</name></author>
-    <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA | Closes 2026-08-17 | The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
-  </entry>
-  <entry>
-    <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 2</title>
-    <link href="https://www.grants.gov/search-results-detail/362994"/>
-    <id>urn:funding-finder:grants-gov:362994</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>Department of Homeland Security - FEMA</name></author>
-    <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA | Closes 2026-08-17 | The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
-  </entry>
-  <entry>
-    <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 3</title>
-    <link href="https://www.grants.gov/search-results-detail/362995"/>
-    <id>urn:funding-finder:grants-gov:362995</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>Department of Homeland Security - FEMA</name></author>
-    <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA | Closes 2026-08-17 | The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
-  </entry>
-  <entry>
-    <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 4</title>
-    <link href="https://www.grants.gov/search-results-detail/362998"/>
-    <id>urn:funding-finder:grants-gov:362998</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>Department of Homeland Security - FEMA</name></author>
-    <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA | Closes 2026-08-17 | The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
-  </entry>
-  <entry>
-    <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 5</title>
-    <link href="https://www.grants.gov/search-results-detail/362999"/>
-    <id>urn:funding-finder:grants-gov:362999</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>Department of Homeland Security - FEMA</name></author>
-    <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA | Closes 2026-08-17 | The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
-  </entry>
-  <entry>
-    <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 6</title>
-    <link href="https://www.grants.gov/search-results-detail/363000"/>
-    <id>urn:funding-finder:grants-gov:363000</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>Department of Homeland Security - FEMA</name></author>
-    <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA | Closes 2026-08-17 | The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
-  </entry>
-  <entry>
-    <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 7</title>
-    <link href="https://www.grants.gov/search-results-detail/363001"/>
-    <id>urn:funding-finder:grants-gov:363001</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>Department of Homeland Security - FEMA</name></author>
-    <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA | Closes 2026-08-17 | The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
-  </entry>
-  <entry>
-    <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 8</title>
-    <link href="https://www.grants.gov/search-results-detail/363002"/>
-    <id>urn:funding-finder:grants-gov:363002</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>Department of Homeland Security - FEMA</name></author>
-    <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA | Closes 2026-08-17 | The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
-  </entry>
-  <entry>
-    <title>Fiscal Year 2026 Cooperating Technical Partners (CTP) Program - Region 9</title>
-    <link href="https://www.grants.gov/search-results-detail/363006"/>
-    <id>urn:funding-finder:grants-gov:363006</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>Department of Homeland Security - FEMA</name></author>
-    <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA | Closes 2026-08-17 | The Cooperating Technical Partners Program (CTP) is one mechanism that FEMA and the National Flood Insurance Program (NFIP) use to deliver flood information to communities. CTP recipients develop flood hazard data and maps for communities to increase public awareness of flood risk and potential actions to reduce that risk. With flood mapping capacity and capabilities, CTPs strengthen the local abi…</summary>
-  </entry>
-  <entry>
     <title>Interdisciplinary Transportation Law and Policy Technology Training Development</title>
     <link href="https://www.grants.gov/search-results-detail/362960"/>
     <id>urn:funding-finder:grants-gov:362960</id>
@@ -682,5 +635,82 @@
     <category term="Education and workforce"/>
     <category term="Cybersecurity"/>
     <summary>Bureau Of Educational and Cultural Affairs | Closes 2026-08-24 | The United States Department of State’s Bureau of Educational and Cultural Affairs’ Office of International Visitors (ECA/PE/V) announces an open competition for approximately five cooperative agreements to support the staff expenses and overhead costs of the FY 2027 International Visitor Leadership Program’s (IVLP) National Program Agencies (NPAs). Launched in 1940, the IVLP is the Department of …</summary>
+  </entry>
+  <entry>
+    <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
+    <link href="https://www.grants.gov/search-results-detail/362900"/>
+    <id>urn:funding-finder:grants-gov:362900</id>
+    <updated>2026-06-22T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <category term="Data science"/>
+    <category term="Energy"/>
+    <category term="Materials science"/>
+    <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | Project Background, Goals, and Objectives: In an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will lea…</summary>
+  </entry>
+  <entry>
+    <title>State Border Security Reinforcement Fund</title>
+    <link href="https://www.grants.gov/search-results-detail/362671"/>
+    <id>urn:funding-finder:grants-gov:362671</id>
+    <updated>2026-06-03T00:00:00Z</updated>
+    <author><name>Department of Homeland Security - FEMA</name></author>
+    <category term="Cybersecurity"/>
+    <summary>Department of Homeland Security - FEMA | Closes 2026-09-17 | SBSRF, authorized by the One Big Beautiful Bill Act of 2025 (Public Law 119-21), was established to address the urgent need for robust and adaptable border security solutions at the state and local levels. SBSRF is a flexible hybrid program designed to reinforce the nation’s border by empowering states and local governments to meet evolving security challenges. Program objectives include:• Constru…</summary>
+  </entry>
+  <entry>
+    <title>Pathways to Enable Secure Open-Source Ecosystems</title>
+    <link href="https://www.grants.gov/search-results-detail/361333"/>
+    <id>urn:funding-finder:grants-gov:361333</id>
+    <updated>2026-02-19T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Closes 2026-09-01 | The Pathways to Enable Secure Open-Source Ecosystems (PESOSE) program supports the translation of open-source science and engineering-focused research products into safe and sustainable ecosystems that address national and societal challenges. Open-source tools such as software, hardware, machine learning models, languages, and data platforms are designed to be shared as they are publicly-accessib…</summary>
+  </entry>
+  <entry>
+    <title>Artificial Intelligence and Cybersecurity Education Innovation and Scholarship for Service (CyberAI SFS)</title>
+    <link href="https://www.grants.gov/search-results-detail/361238"/>
+    <id>urn:funding-finder:grants-gov:361238</id>
+    <updated>2026-02-04T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation | Closes 2027-04-05 | Government and the nation face a talent shortfall in artificial intelligence (AI) and cybersecurity. The CyberAICorps Scholarship for Service (CyberAI SFS) program welcomes proposals that address AI and cybersecurity education and workforce development. CyberAI refers to using AI in cybersecurity as well as providing security and resilience for AI systems. The Scholarship Track provides funding to…</summary>
+  </entry>
+  <entry>
+    <title>Mind and Body Interventions to Restore Whole Person Health via Emotional Well-Being Mechanisms (R61/R33 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/359155"/>
+    <id>urn:funding-finder:grants-gov:359155</id>
+    <updated>2025-09-26T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Cybersecurity"/>
+    <summary>National Institutes of Health | Closes 2028-06-07 | The National Center for Complementary and Integrative Health (NCCIH) announces this Notice of Funding Opportunity (NOFO) to solicit applications for research on how mind and body interventions through psychological and/or physical inputs (e.g., mindfulness meditation, yoga, acupuncture, massage, and other brain and/or body based interventions) impact mechanisms of emotional well-being (EWB) and th…</summary>
+  </entry>
+  <entry>
+    <title>CHIPS Research and Development Office (CRDO) Broad Agency Announcement (BAA)</title>
+    <link href="https://www.grants.gov/search-results-detail/360651"/>
+    <id>urn:funding-finder:grants-gov:360651</id>
+    <updated>2025-09-24T00:00:00Z</updated>
+    <author><name>National Institute of Standards and Technology</name></author>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <category term="Cybersecurity"/>
+    <summary>National Institute of Standards and Technology | Closes 2029-09-30 | NIST is soliciting proposals from eligible applicants for research, prototyping, and commercial solutions that advance microelectronics technology in the U.S., to be considered for funding by the CHIPS Research and Development Office (CRDO).</summary>
   </entry>
 </feed>

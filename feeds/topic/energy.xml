@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-08-17T10:50:28Z</updated>
+  <updated>2026-08-18T10:48:43Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -17,6 +17,111 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>Rural Utilities Service | Closes 2027-05-03 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+  </entry>
+  <entry>
+    <title>Egypt Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363633"/>
+    <id>urn:funding-finder:grants-gov:363633</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <category term="Materials science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
+    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
+  </entry>
+  <entry>
+    <title>Cold Chain Grants for Emergency Food Assistance</title>
+    <link href="https://www.grants.gov/search-results-detail/363631"/>
+    <id>urn:funding-finder:grants-gov:363631</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>Agricultural Marketing Service</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Manufacturing"/>
+    <category term="Energy"/>
+    <summary>Agricultural Marketing Service | Closes 2026-10-01 | AMS will award these funds competitively to at least one eligible organization that meets program requirements and whose expertise is consistent with the purpose of the grant program. The selected grant recipient(s) will provide management, oversight, consultation and expertise necessary to advance the purpose and activities of the program, primarily through a subaward program to support cold stor…</summary>
+  </entry>
+  <entry>
+    <title>ONR FY27 NOFO for Young Investigator Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363632"/>
+    <id>urn:funding-finder:grants-gov:363632</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>Office of Naval Research</name></author>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Energy"/>
+    <summary>Office of Naval Research | Closes 2026-10-30 | The Office of Naval Research Young Investigator Program seeks proposals addressing research areas (as described in the ONR Science and Technology Department section of ONR's website at https://www.onr.navy.mil) which are of interest to ONR Program Officers will be considered. Contact information for each division (a subgroup of an S&amp;T Department) is also listed within the S&amp;T section of the websit…</summary>
+  </entry>
+  <entry>
+    <title>MPS Astronomical Sciences Research Programs (MPS Astro)</title>
+    <link href="https://www.grants.gov/search-results-detail/363620"/>
+    <id>urn:funding-finder:grants-gov:363620</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Energy"/>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Closes 2026-11-16 | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs in the astronomical sciences. NSF MPS funds foundational astronomical sciences research and instrumentation focused on exploring space and advancing fundamental understanding of the universe. The programs covered by this funding opportunity are: Astronomical Science…</summary>
+  </entry>
+  <entry>
+    <title>Engineering (ENG): Chemical, Bioengineering, Energy, and Transport Systems (CBET)</title>
+    <link href="https://www.grants.gov/search-results-detail/363616"/>
+    <id>urn:funding-finder:grants-gov:363616</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational engineering research for chemical, bioengineering, energy, and transport systems through the following programs:  The Chemical Process Systems (CPS) program supports foundational engineering research in chemical and biochemical processes for chemicals, fuels, energy, and materials. The Engineering Biol…</summary>
+  </entry>
+  <entry>
+    <title>Engineering (ENG): Civil, Mechanical and Manufacturing Innovation (CMMI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363614"/>
+    <id>urn:funding-finder:grants-gov:363614</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Technology development"/>
+    <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
+  </entry>
+  <entry>
+    <title>Engineering (ENG): Electrical, Communications, and Computing Systems (ECCS)</title>
+    <link href="https://www.grants.gov/search-results-detail/363613"/>
+    <id>urn:funding-finder:grants-gov:363613</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Energy"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research for electrical, communications and computing systems through the following programs: The Electronic, Photonic, Magnetic, and Quantum Devices (EPMQD) program supports foundational engineering research on novel classical and quantum devices, exploring matter’s electronic, photonic, and magnetic …</summary>
+  </entry>
+  <entry>
+    <title>MPS Physics Research Programs (MPS Physics)</title>
+    <link href="https://www.grants.gov/search-results-detail/363621"/>
+    <id>urn:funding-finder:grants-gov:363621</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Energy"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs at the frontiers of discovery in physics. Physics research supported by NSF MPS enables understanding of the fundamental aspects of nature at all scales, from the quantum effects inside atoms to the mysterious dark energy spanning the entire universe. The core resea…</summary>
   </entry>
   <entry>
     <title>Promoting Responsible Investment and Rights-Respecting Production Models</title>
@@ -126,16 +231,6 @@
     <category term="Energy"/>
     <category term="Environmental science"/>
     <summary>Bureau of Land Management | Closes 2026-09-11 | The BLM Threatened and Endangered Species Program (T&amp;E) focuses on conservation and recovery of endangered, threatened and BLM Sensitive Species (collectively referred to as BLM Special Status Species) and their habitats to help inform a balance of multiple uses of BLM-managed lands, including the Nation"s need for domestic sources of energy, minerals, timber, grazing, recreation, and fish and wil…</summary>
-  </entry>
-  <entry>
-    <title>Sun Grant Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363424"/>
-    <id>urn:funding-finder:grants-gov:363424</id>
-    <updated>2026-07-31T00:00:00Z</updated>
-    <author><name>National Institute of Food and Agriculture</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Energy"/>
-    <summary>National Institute of Food and Agriculture | Closes 2026-08-17 | In carrying out the SGP, under Assistance Listing Number 10.320, NIFA is authorized to make awards to fund subgrants and activities that: 1. Enhance national energy security through the development, distribution, and implementation of biobased energy technologies; 2. Promote varied agricultural production systems in the U.S. through biobased energy and product technologies; 3. Promote economic gro…</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Rocky Mountain Cooperative Ecosystem Studies Unit (CESU)</title>
@@ -497,22 +592,6 @@
     <summary>NASA Headquarters | Closes 2026-11-10 | ﻿NOTICE: Corrected July 29, 2026. Accidentally omitted standard budget requirements have been added to Table C.4-3 and Sections 3.3.3 and 3.5. New text is in bold and deleted text is struck through. The due date remains unchanged: Proposals are due November 10, 2026. NOTICE: Amended July 21, 2026. This amendment adds to ROSES-2025 this program element which was previously listed as not solicited t…</summary>
   </entry>
   <entry>
-    <title>Egypt Annual Program Statement</title>
-    <link href="https://www.grants.gov/search-results-detail/363252"/>
-    <id>urn:funding-finder:grants-gov:363252</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>Bureau of Near Eastern Affairs</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <category term="Data science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Materials science"/>
-    <category term="Cybersecurity"/>
-    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
-  </entry>
-  <entry>
     <title>ROSES25: A.14 Atmosphere</title>
     <link href="https://www.grants.gov/search-results-detail/363240"/>
     <id>urn:funding-finder:grants-gov:363240</id>
@@ -557,19 +636,6 @@
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
     <summary>NASA Headquarters | Closes 2026-10-15 | NOTICE: August 4, 2026. Going forward, a $0.09/SBU charge now applies to all proposing to Earth Science (ROSES Appendix A) to use any NASA high-end computing resource. Proposers must account for this in their budget, per the instructions provided in Section 7.3 of ROSES-25 A.1 Earth Science Research Overview. NOTICE: July 28, 2026. A set of slides describing the Application Readiness Levels (ARLs)…</summary>
-  </entry>
-  <entry>
-    <title>English Language Teaching and Learning Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363077"/>
-    <id>urn:funding-finder:grants-gov:363077</id>
-    <updated>2026-07-07T00:00:00Z</updated>
-    <author><name>U.S. Mission to Uzbekistan</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <summary>U.S. Mission to Uzbekistan | Closes 2026-08-17 | The U.S. Department of State announces an open competition to deliver in-person, specialized English language teacher training and direct student instruction aligned with priority sectors such as space, critical minerals, rare earths, energy, high technology, business and trade, agriculture, media, and security. As U.S. engagement with Uzbekistan increases, English proficiency has become a strateg…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 United States Marine Highway Program (USMHP)</title>
@@ -626,60 +692,5 @@
     <category term="Energy"/>
     <category term="Materials science"/>
     <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | Project Background, Goals, and Objectives: In an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will lea…</summary>
-  </entry>
-  <entry>
-    <title>Special Program Announcement for Office of Naval Research Research Opportunity: FY27 Communications and Networking Applied Research</title>
-    <link href="https://www.grants.gov/search-results-detail/362836"/>
-    <id>urn:funding-finder:grants-gov:362836</id>
-    <updated>2026-06-16T00:00:00Z</updated>
-    <author><name>Office of Naval Research</name></author>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Transportation"/>
-    <summary>Office of Naval Research | Closes 2026-11-16 | The proposed topic will develop and mature Communications and Networking technologies for Naval operations. Background: A Design for Maritime Superiority (2018) describes an operational architecture for distributed maritime operations (DMO) that "... will provide accurate, timely, and analyzed information to units, warfighting groups, and fleets." A critical component of this architecture is the N…</summary>
-  </entry>
-  <entry>
-    <title>WaterSMART Cooperative Watershed Management Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362755"/>
-    <id>urn:funding-finder:grants-gov:362755</id>
-    <updated>2026-06-10T00:00:00Z</updated>
-    <author><name>Bureau of Reclamation</name></author>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Water"/>
-    <summary>Bureau of Reclamation | Closes 2028-02-15 | The WaterSMART Cooperative Watershed Management Program funding opportunity invites eligible entities to apply for funding to develop local solutions to address their water management needs. This opportunity provides funding for watershed group development, restoration planning, and watershed management project planning and design. By providing this funding, Reclamation promotes water reliability …</summary>
-  </entry>
-  <entry>
-    <title>Native American Affairs: Fiscal Year 2025 Colorado River Basin Tribal Drought Resiliency Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362644"/>
-    <id>urn:funding-finder:grants-gov:362644</id>
-    <updated>2026-06-02T00:00:00Z</updated>
-    <author><name>Bureau of Reclamation</name></author>
-    <category term="Energy"/>
-    <category term="Water"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Bureau of Reclamation | Closes 2026-09-28 | The objectives of this NAA/TAP funding opportunity are to provide funding for drought relief actions/projects that mitigate drought impacts for designated federally recognized tribes within the Colorado River Basin (see Eligibility section for list of tribes), and which advance Presidential and Department of the Interior Priorities within the Basin. Proposals should meet one or more of the followi…</summary>
-  </entry>
-  <entry>
-    <title>FY 2026 Continuum of Care Competition and Youth Homelessness Demonstration Program Grants NOFO</title>
-    <link href="https://www.grants.gov/search-results-detail/361999"/>
-    <id>urn:funding-finder:grants-gov:361999</id>
-    <updated>2026-06-01T00:00:00Z</updated>
-    <author><name>Department of Housing and Urban Development</name></author>
-    <category term="Community development"/>
-    <category term="Energy"/>
-    <summary>Department of Housing and Urban Development | Closes 2026-08-26 | The Continuum of Care (CoC) Program is designed to: promote a community-wide commitment to the goal of ending homelessness; provide funding for efforts by nonprofit providers, States, Indian Tribes or Tribally Designated Housing Entities [as defined in section 4 of the Native American Housing Assistance and Self-Determination Act of 1996 (25 U.S.C. 4103) (TDHEs)], and local governments to quickly …</summary>
-  </entry>
-  <entry>
-    <title>ROSES25: F.17 Research Initiation Awards</title>
-    <link href="https://www.grants.gov/search-results-detail/362495"/>
-    <id>urn:funding-finder:grants-gov:362495</id>
-    <updated>2026-05-20T00:00:00Z</updated>
-    <author><name>NASA Headquarters</name></author>
-    <category term="Energy"/>
-    <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Closes 2026-08-18 | NOTICE: Amended May 20, 2026. This amendment releases final text for this program element, which was previously TBD. Neither an NOI nor Step-1 proposal is requested. The due date for proposals is August 18, 2026. An informational webinar about this opportunity will occur at 1 p.m. Eastern Time on June 16. Register for the webinar at https://nasaevents.webex.com/weblink/register/r2fbc7ed95634bfe117…</summary>
   </entry>
 </feed>

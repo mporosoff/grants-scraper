@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml</id>
-  <updated>2026-08-17T10:50:28Z</updated>
+  <updated>2026-08-18T10:48:43Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -203,6 +203,17 @@
     <summary>National Institutes of Health | Closes 2027-03-04 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for Exploratory Clinical Trials Grants Program in the mission areas of NIAMS. The goal of the NIAMS clinical trial program is to support research leading to the prevention or reduction of symptoms and improve outcomes and function in pa…</summary>
   </entry>
   <entry>
+    <title>Expeditions in Computing (Expeditions)</title>
+    <link href="https://www.grants.gov/search-results-detail/363623"/>
+    <id>urn:funding-finder:grants-gov:363623</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation | Closes 2027-07-27 | The far-reaching impact and rate of innovation in the computer and information science and engineering ﬁelds has been remarkable, generating economic prosperity, and enhancing the quality of life for people. More than a decade ago, the NSF Directorate for Computer and Information Science and Engineering (NSF CISE) established the NSF Expeditions program to provide the NSF CISE research community w…</summary>
+  </entry>
+  <entry>
     <title>Global Brain and Nervous System Disorders Research Across the Lifespan - Exploratory Grants</title>
     <link href="https://www.grants.gov/search-results-detail/360660"/>
     <id>urn:funding-finder:grants-gov:360660</id>
@@ -328,35 +339,6 @@
     <category term="Infectious disease"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Closes 2026-08-20 | This is a Forecast for a Limited Competition Notice of Funding Opportunity (NOFO) that will invite application(s) from eligible organization(s) to apply. Please see the Eligibility Section for additional information. In accordance with NIH standard peer-review processes, the application(s) will be peer-reviewed, and only meritorious application(s) will be considered for funding. It is anticipated …</summary>
-  </entry>
-  <entry>
-    <title>Certified Community Behavioral Health Clinic (CCBHC) Improvement and Advancement Grant</title>
-    <link href="https://www.grants.gov/search-results-detail/360978"/>
-    <id>urn:funding-finder:grants-gov:360978</id>
-    <updated>2026-06-17T00:00:00Z</updated>
-    <author><name>Substance Abuse and Mental Health Services Adminis</name></author>
-    <category term="Social and behavioral sciences"/>
-    <summary>Substance Abuse and Mental Health Services Adminis | Closes 2026-08-17 | The purpose of this program is to sustain and enhance services at existing Certified Community Behavioral Health Clinics (CCBHCs). This includes serving individuals across the lifespan with or at risk for mental health and/or substance use disorders (SUDs). CCBHCs are community-based clinics that offer coordinated, evidence-based outpatient services, including crisis services, while also enhancing…</summary>
-  </entry>
-  <entry>
-    <title>Certified Community Behavioral Health Clinics (CCBHCs) Planning, Development, and Implementation Grant</title>
-    <link href="https://www.grants.gov/search-results-detail/360977"/>
-    <id>urn:funding-finder:grants-gov:360977</id>
-    <updated>2026-06-17T00:00:00Z</updated>
-    <author><name>Substance Abuse and Mental Health Services Adminis</name></author>
-    <category term="Public health"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Substance Abuse and Mental Health Services Adminis | Closes 2026-08-17 | The purpose of this program is to develop and establish new Community Behavioral Health Clinics to address gaps in behavioral health services and improve the wellbeing of persons with mental health and substance use disorders.</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreements for Certified Community Behavioral Health Clinic (CCBHC) Planning Grants</title>
-    <link href="https://www.grants.gov/search-results-detail/360982"/>
-    <id>urn:funding-finder:grants-gov:360982</id>
-    <updated>2026-06-17T00:00:00Z</updated>
-    <author><name>Substance Abuse and Mental Health Services Adminis</name></author>
-    <category term="Public health"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Substance Abuse and Mental Health Services Adminis | Closes 2026-08-17 | The purpose of the CCBHC State Planning Grants is to support states in: developing and implementing certification systems for CCBHCs; establishing Prospective Payment Systems (PPS) for Medicaid reimbursable behavioral health services; and preparing an application to participate in a four-year Section 223 CCBHC Demonstration program.</summary>
   </entry>
   <entry>
     <title>DoW Orthopaedic, Applied Research Award</title>
@@ -649,5 +631,27 @@
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
     <summary>U.S. National Science Foundation | Posted | The Collaboratory to Advance Mathematics Education and Learning (CAMEL) for K-12 initiative aims to advance mathematics learning and education through purposeful collaboration that draws on the interdisciplinary Science of Learning (including neuroscience; cognitive, developmental, and social sciences; computer science; machine learning; engineering; and education research), deep experiences in ed…</summary>
+  </entry>
+  <entry>
+    <title>Mind and Body Interventions to Restore Whole Person Health via Emotional Well-Being Mechanisms (R61/R33 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/359155"/>
+    <id>urn:funding-finder:grants-gov:359155</id>
+    <updated>2025-09-26T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Cybersecurity"/>
+    <summary>National Institutes of Health | Closes 2028-06-07 | The National Center for Complementary and Integrative Health (NCCIH) announces this Notice of Funding Opportunity (NOFO) to solicit applications for research on how mind and body interventions through psychological and/or physical inputs (e.g., mindfulness meditation, yoga, acupuncture, massage, and other brain and/or body based interventions) impact mechanisms of emotional well-being (EWB) and th…</summary>
+  </entry>
+  <entry>
+    <title>NIA Expanding Research in AD/ADRD (ERA) Postbaccalaureate Research Education Program (R25 Independent Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359653"/>
+    <id>urn:funding-finder:grants-gov:359653</id>
+    <updated>2025-09-02T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Closes 2027-05-26 | This Notice of Funding Opportunity Announcement (NOFO) invites R25 applications to support the development and implementation of research education programs for recent baccalaureates from all backgrounds, including those from groups underrepresented in the biomedical and behavioral sciences. It is essential to expand and broaden the skilled Alzheimers Disease (AD) and Alzheimers Disease and Relate…</summary>
   </entry>
 </feed>

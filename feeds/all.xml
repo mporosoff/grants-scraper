@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-08-17T10:50:28Z</updated>
+  <updated>2026-08-18T10:48:43Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -325,6 +325,15 @@
     <summary>Centers for Disease Control - NCCDPHP | Closes 2027-05-03 | The purpose of this multi-component NOFO is to improve the health of pregnant and postpartum women and their newborns through quality improvement. CDC will fund two components. Component A will support state Perinatal Quality Collaboratives (PQCs). PQCs are state-based organizations that support quality improvement (QI) efforts in health facilities and whose approach has been successful in improvi…</summary>
   </entry>
   <entry>
+    <title>Preventing Violence Affecting Young Lives (PREVAYL 2.0)</title>
+    <link href="https://www.grants.gov/search-results-detail/363634"/>
+    <id>urn:funding-finder:grants-gov:363634</id>
+    <updated>2027-03-03T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCIPC</name></author>
+    <category term="Education and workforce"/>
+    <summary>Centers for Disease Control - NCIPC | Closes 2027-05-03 | The purpose of this NOFO is to provide multiyear funding to state, territorial, tribal, and local health departments to implement and evaluate comprehensive primary prevention strategies that prevent multiple forms of violence and promote healthy development among adolescents and young adults. Building on the prior PREVAYL cooperative agreement, this NOFO emphasizes: Improving data-driven decision…</summary>
+  </entry>
+  <entry>
     <title>Promoting Population Health through Increased Capacity in Alcohol Epidemiology &amp; the Prevention of Excessive Alcohol Use</title>
     <link href="https://www.grants.gov/search-results-detail/363592"/>
     <id>urn:funding-finder:grants-gov:363592</id>
@@ -569,6 +578,15 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Closes 2027-06-01 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the support of the Clinical Data, Safety and Statistical Centers program. The overall objective of this program is to provide coordination and oversight for multiple activities in service to clinical research and mechanistic studies supported by NIAID, including all Division of Allergy, Immunolog…</summary>
+  </entry>
+  <entry>
+    <title>Surveillance and Case Control Study of Stillbirth and Birth Defects (SUCCSSBD)</title>
+    <link href="https://www.grants.gov/search-results-detail/363625"/>
+    <id>urn:funding-finder:grants-gov:363625</id>
+    <updated>2027-01-29T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCBDDD</name></author>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control - NCBDDD | Closes 2027-03-31 | Birth defects affect about three percent of all births in the United States and are a leading cause of infant mortality, morbidity, and healthcare costs; the causes of two-thirds of birth defects remain unknown. In addition, stillbirths (pregnancy loss at 20 or more weeks of gestation) are an under-evaluated public health issue. Over 20,000 pregnancies in the U.S. end in a stillbirth each year. Th…</summary>
   </entry>
   <entry>
     <title>Advanced Laboratories for Accelerating the Reach and Impact of Treatments for Youth and Adults with Mental Illness (ALACRITY) Research Centers</title>
@@ -943,21 +961,5 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Education and workforce"/>
     <summary>Health Resources and Services Administration | Closes 2027-02-02 | The Centers of Excellence Program provides grants to health professions schools and other public and nonprofit health or educational entities to assist schools in supporting programs of excellence in health professions education for under-represented minority individuals. By statute, the Centers of Excellence Program awards funding to organizations to operate programs that establish, strengthen, a…</summary>
-  </entry>
-  <entry>
-    <title>KUH P30 Resource Core Center (P30 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/363036"/>
-    <id>urn:funding-finder:grants-gov:363036</id>
-    <updated>2026-12-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <summary>National Institutes of Health | Closes 2027-01-30 | This Notice of Funding Opportunity (NOFO) requests applications for Resource Core Centers within the mission of NIDDK/Kidney, Urology, and Hematology (KUH) Diseases. Each Center is designed to advance national research efforts by sharing unique research resources (e.g., data, reagents, models, tools, services, expertise) with the broader community. The Resource Core Centers are expected to work co…</summary>
-  </entry>
-  <entry>
-    <title>KUH U24 Center Coordinating Hub (U24 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/363039"/>
-    <id>urn:funding-finder:grants-gov:363039</id>
-    <updated>2026-12-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <summary>National Institutes of Health | Closes 2027-01-30 | This Notice of Funding Opportunity (NOFO) requests applications for Center Coordinating Hubs within the mission of NIDDK/Kidney, Urology, and Hematology (KUH) Diseases. Each Center Coordinating Hub will work collaboratively with a national network of funded Centers to develop and share unique research resources (e.g., data, reagents, models, tools, services, expertise) with the broader community.</summary>
   </entry>
 </feed>

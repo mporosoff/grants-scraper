@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml</id>
-  <updated>2026-08-17T10:50:28Z</updated>
+  <updated>2026-08-18T10:48:43Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -448,29 +448,6 @@
     <summary>Bureau Of Educational and Cultural Affairs | Closes 2099-01-01 | The U.S. Department of State, Bureau of Educational and Cultural Affairs, Cultural Programs Division (ECA/PE/C/CU) seeks to advance international understanding of American values by exposing foreign audiences to innovative and compelling architectural designs that reflect U.S. foreign policy and foster international dialogue on shared global challenges.</summary>
   </entry>
   <entry>
-    <title>Title V Competitive Sexual Risk Avoidance Education</title>
-    <link href="https://www.grants.gov/search-results-detail/362128"/>
-    <id>urn:funding-finder:grants-gov:362128</id>
-    <updated>2026-07-16T00:00:00Z</updated>
-    <author><name>Administration for Children &amp; Families - ACYF/FYSB</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <summary>Administration for Children &amp; Families - ACYF/FYSB | Closes 2026-08-17 | This NOFO is modified. Changes are made to Step 1: Review the Opportunity, Eligibility: Locality restrictions. The state of New Hampshire was added. The Title V Competitive SRAE program competitively funds projects to implement sexual risk avoidance education that teaches youth ages 10-19 how to voluntarily refrain from non-marital sexual activity. Projects must: 1) use medically accurate informat…</summary>
-  </entry>
-  <entry>
-    <title>English Language Teaching and Learning Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363077"/>
-    <id>urn:funding-finder:grants-gov:363077</id>
-    <updated>2026-07-07T00:00:00Z</updated>
-    <author><name>U.S. Mission to Uzbekistan</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <summary>U.S. Mission to Uzbekistan | Closes 2026-08-17 | The U.S. Department of State announces an open competition to deliver in-person, specialized English language teacher training and direct student instruction aligned with priority sectors such as space, critical minerals, rare earths, energy, high technology, business and trade, agriculture, media, and security. As U.S. engagement with Uzbekistan increases, English proficiency has become a strateg…</summary>
-  </entry>
-  <entry>
     <title>Collaborative Research</title>
     <link href="https://www.grants.gov/search-results-detail/363084"/>
     <id>urn:funding-finder:grants-gov:363084</id>
@@ -644,5 +621,26 @@
     <author><name>National Endowment for the Arts</name></author>
     <category term="Arts and culture"/>
     <summary>National Endowment for the Arts | Closes 2026-09-29 | The National Endowment for the Arts’ State &amp; Regional Partnership Agreement grants are awarded to the nation’s 56 state and jurisdictional arts agencies (SAAs), and the six regional arts organizations (RAOs) whose members comprise SAAs.</summary>
+  </entry>
+  <entry>
+    <title>Biological Testing Facility for Contraception &amp; Reproductive Health (X01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/360583"/>
+    <id>urn:funding-finder:grants-gov:360583</id>
+    <updated>2026-06-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <summary>National Institutes of Health | Closes 2029-05-07 | The purpose of this notice of funding opportunity (NOFO) is to provide investigators with a mechanism to request services from the state-of-the-art Biological Testing Facility that would advance their contraceptive development or reproductive health programs. This NOFO aims to position innovative and validated methods for future regulatory submission and/or clinical development. Applicants do not …</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: Instrumentation Grant Program for Resource-Limited Institutions (S10 - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/360364"/>
+    <id>urn:funding-finder:grants-gov:360364</id>
+    <updated>2026-05-27T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Closes 2029-01-26 | The Instrumentation Grant Program for Resource-Limited Institutions supports the purchase of state-of-the-art scientific instruments to enhance the research and educational missions of resource-limited institutions. Requested instruments may support biomedical research and education in basic, translational, biomedically-related behavioral or clinical fields. This is a Notice of Funding Opportunity…</summary>
   </entry>
 </feed>
