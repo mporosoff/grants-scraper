@@ -263,6 +263,12 @@ as evidence about (a).
 
 ### B. Potential catalog expansion — 53 elements, measured only
 
+> **Superseded by P8 (2026-08-19) for the emission half, and still correct for the
+> measurement.** The 53 remain the unmatched inventory; what changed is that the
+> **2 actionable** ones are now emitted as catalog records and the rest are
+> re-evaluated every refresh (§18.1 P8). The paragraph below describes P6.1's
+> deliberate boundary, which P8 was chartered to remove.
+
 Fifty-three program elements have no catalog record. They are **counted, and not
 emitted.** `parse()` returns nothing, so this population cannot reach
 `opportunities.js` structurally rather than by convention, and the adapter ships
@@ -283,8 +289,12 @@ roughly 25×, and that asymmetry is what DEC-13 was decided on.
 > inclusion; if any of the other 51 is solicited in a later amendment or cycle,
 > the scheduled refresh finds it without anyone remembering to look.
 >
-> **Known gap until P8 ships:** those **2 currently open unmatched
-> elements** are NASA solicitations that Funding Finder does not list.
+> ~~**Known gap until P8 ships:** those **2 currently open unmatched elements** are
+> NASA solicitations that Funding Finder does not list.~~ **Closed 2026-08-19: P8
+> shipped.** Both are emitted — `D.3E` IXPE Cycle 4 / NICER Cycle 9 General
+> Observer and `D.9` Habitable Worlds Observatory Instrument Concept Assessments —
+> and all 63 elements are re-decided on every scheduled refresh, so the other 51
+> need no human follow-up. Net **+2 records, 1,475 → 1,477**.
 
 ## What this is not
 
@@ -311,7 +321,7 @@ all it does so through 10 records out of 1,472, which is inside the noise of a
   build's UTC date to the baseline's freeze date reproduced **all 20** committed
   fingerprints exactly. **With BUG-7 fixed, `tools/verify_no_drift.sh` exits 0
   directly — 22 artifacts unchanged, baseline never re-frozen.**
-- The 53 standalone elements were **not** emitted.
+- The 53 standalone elements were **not** emitted *(P6.1's boundary; P8 now emits the actionable subset — 2 today)*.
 - No cache committed.
 - P6.2 and P6.3 not started.
 - No pattern family added or resurrected; `roses_element` stays retired, and
