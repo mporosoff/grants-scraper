@@ -30,6 +30,15 @@ Measured against the committed catalog: exactly 10 records carry an
 `NNH<yy>ZDA<nnn>[A-Z]-` opportunity number, all 10 embed their appendix code in the
 title, and matching on that code alone reproduces P6.1d's 63/10/53 split exactly.
 
+**Two identities, and only one of them can be ambiguous.** Native ROSES identity is
+`(cycle, appendix_code, program_title)` and always distinguishes two rows, because
+NASA gives them different titles. The *cross-source* key is the appendix code alone,
+and that is the one a repeated code breaks. So a duplicate code suppresses an element
+**only when a catalog record also carries that code** -- otherwise both rows are
+ordinary unmatched elements, each publishable on its own currentness. Measured:
+`D.3C` is the only repeated code, no catalog record carries it, and both of its rows
+are past their date today.
+
 The adapter also stays `enabled = False`: a new enabled source changes catalog
 output with `--enable-subtopics` off, which §0.5 forbids.
 """
@@ -413,9 +422,14 @@ class NasaRosesAdapter(SourceAdapter):
         index = catalog_roses_index(catalog_records)
         cycle = cycle_of(year)
 
-        # An appendix code that occurs twice in one cycle cannot be used as a
-        # cross-source key for either occurrence. Measured: `D.3C` does exactly
-        # this. Such elements are never emitted; they are reported for review.
+        # A code that occurs twice in one cycle cannot be used as a *cross-source*
+        # key for either occurrence -- measured: `D.3C` does exactly this, and it is
+        # the only such code in the live source. It does **not** make the two rows
+        # one element: they carry different titles, sit at different appendix
+        # positions, offer different submission routes ("Phase-1 via ARK RPS" vs
+        # "via NSPIRES"), and appear independently in Table 2 as well as Table 3.
+        # Native identity is `(cycle, code, title)`, which separates them cleanly,
+        # so a duplicate code alone must never make either row unpublishable.
         seen_codes: dict = {}
         for element in elements:
             seen_codes.setdefault(element["appendix_code"].upper(), 0)
@@ -429,15 +443,28 @@ class NasaRosesAdapter(SourceAdapter):
             code = element["appendix_code"].upper()
             currentness = derive_currentness(element, today)
             element = dict(element, derived_currentness=currentness)
-            if index["by_code"].get((cycle, code)):
-                element["matched_catalog_ids"] = index["by_code"][(cycle, code)]
+            catalog_ids = index["by_code"].get((cycle, code))
+            duplicated_in_source = code in ambiguous_codes
+
+            if catalog_ids and duplicated_in_source:
+                # **The only genuinely ambiguous case.** A catalog record parses to
+                # a code that names two native elements, so the code cannot say
+                # which one it is. Fail closed: neither is emitted, and the reason
+                # is recorded rather than being silently filed as "matched".
+                element["matched_catalog_ids"] = catalog_ids
+                element["review_reason"] = "ambiguous_code_matches_catalog_record"
+                review.append(element)
+                continue
+            if catalog_ids:
+                element["matched_catalog_ids"] = catalog_ids
                 matched.append(element)
                 continue
+
+            # No catalog record carries this code, so nothing is ambiguous even if
+            # the code is duplicated in the source: the two rows are two distinct
+            # unmatched elements and each is judged on its own currentness.
             unmatched.append(element)
-            if code in ambiguous_codes:
-                element["review_reason"] = "duplicate_appendix_code_in_source"
-                review.append(element)
-            elif currentness == DERIVED_OPEN:
+            if currentness == DERIVED_OPEN:
                 actionable.append(element)
             else:
                 inactive.append(element)
@@ -449,6 +476,8 @@ class NasaRosesAdapter(SourceAdapter):
             "actionable_unmatched": actionable,
             "inactive_unmatched": inactive,
             "review": review,
+            # Informational: codes the source repeats. Reported even when they
+            # suppress nothing, because it is a fact about the source.
             "ambiguous_source_codes": ambiguous_codes,
             "unresolved_catalog_records": index["unresolved"],
             "catalog_roses_records": sum(

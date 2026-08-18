@@ -276,6 +276,53 @@ class HealthIsEvaluatedBeforeRemovalTests(LifecycleHarness):
         self.assertConsistent(catalog)
 
 
+class DuplicateAppendixCodeLifecycleTests(LifecycleHarness):
+    """A repeated appendix code must not cost the public catalog an opportunity.
+
+    Added 2026-08-20. The measured source repeats `D.3C` across two distinct program
+    elements, and both are past-dated today, so this is a forward guard: if an
+    amendment ever repeats a code on two open elements, they publish as two records.
+    """
+
+    TWINS = [
+        _row("D.3C", "XRISM General Observer - Type 1",
+             ["N/A", f"{FUTURE} (Phase-1 via ARK RPS)"]),
+        _row("D.3C", "XRISM General Observer - Type 2",
+             ["N/A", f"{FUTURE} (via NSPIRES)"]),
+    ]
+
+    def test_two_same_code_actionable_elements_publish_as_two_records(self):
+        _summary, catalog, roses = self.refresh(payload(self.TWINS))
+        self.assertEqual(len(roses), 2)
+        self.assertEqual(
+            {record["title"] for record in roses},
+            {"ROSES25: D.3C XRISM General Observer - Type 1",
+             "ROSES25: D.3C XRISM General Observer - Type 2"},
+        )
+        self.assertEqual(len({record["opportunity_id"] for record in roses}), 2)
+        # One shared NSPIRES page, two distinct opportunities.
+        self.assertEqual(len({record["detail_page"] for record in roses}), 1)
+        self.assertConsistent(catalog)
+
+    def test_a_catalog_record_on_the_duplicated_code_fails_closed(self):
+        existing = grants_gov_record(
+            opportunity_id="333333",
+            opportunity_number="NNH25ZDA001N-XRISM",
+            title="ROSES25: D.3C XRISM General Observer",
+        )
+        _summary, catalog, roses = self.refresh(
+            payload(self.TWINS), catalog_extra=[existing]
+        )
+        self.assertEqual(roses, [])
+        surviving = [
+            record for record in catalog["opportunities"]
+            if "D.3C" in str(record.get("title"))
+        ]
+        self.assertEqual(len(surviving), 1)
+        self.assertEqual(surviving[0]["source"], "Grants.gov")
+        self.assertConsistent(catalog)
+
+
 class InventoryVisibilityTests(LifecycleHarness):
     """The inactive inventory must be inspectable without being publishable."""
 

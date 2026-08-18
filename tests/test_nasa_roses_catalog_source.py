@@ -222,12 +222,46 @@ class ReconciliationTests(unittest.TestCase):
         self.assertEqual(len(ids), len(set(ids)))
         self.assertTrue(all(i.startswith("nasa-roses:") for i in ids))
 
-    def test_a_duplicate_source_code_is_held_for_review_not_emitted(self):
+    def test_a_duplicate_source_code_alone_suppresses_nothing(self):
+        """Corrected 2026-08-20 against the source, and this test was the defect.
+
+        It previously asserted that a repeated appendix code held **both** rows for
+        review. The measured source says otherwise: `D.3C` names two distinct
+        program elements -- different titles, appendix positions 38 and 39,
+        different submission routes, and both listed independently in Table 2 as
+        well as Table 3 -- so `(cycle, code, title)` separates them and the repeated
+        code only breaks the *cross-source* key. With no catalog record carrying
+        `D.3C`, nothing is ambiguous and neither row may be suppressed.
+        """
         instance, _opportunities = reconciled()
-        self.assertEqual(instance.diagnostics["ambiguous_source_codes"], ["D.3C"])
-        self.assertEqual(len(instance.diagnostics["review"]), 2)
-        for item in instance.diagnostics["review"]:
-            self.assertEqual(item["reason"], "duplicate_appendix_code_in_source")
+        diagnostics = instance.diagnostics
+        # Still reported as a source fact, because it is one.
+        self.assertEqual(diagnostics["ambiguous_source_codes"], ["D.3C"])
+        # But it suppresses nothing: no catalog record carries D.3C.
+        self.assertEqual(diagnostics["review"], [])
+        inventory = [
+            item for item in diagnostics["inactive_inventory"]
+            if item["appendix_code"].upper() == "D.3C"
+        ]
+        self.assertEqual(len(inventory), 2)
+        self.assertEqual(
+            {item["title"] for item in inventory},
+            {"XRISM General Observer - Type 1", "XRISM General Observer - Type 2"},
+        )
+        # They are absent from the catalog because they are past their date, which
+        # is the only reason that applies to them today.
+        for item in inventory:
+            self.assertEqual(item["derived_currentness"], nasa_roses.DERIVED_CLOSED)
+
+    def test_the_accounting_closes(self):
+        """63 = matched + unmatched + held-for-review, and unmatched splits cleanly."""
+        instance, _ = reconciled()
+        d = instance.diagnostics
+        self.assertEqual(d["matched"] + d["unmatched"] + len(d["review"]), 63)
+        self.assertEqual(
+            d["actionable_unmatched"] + d["inactive_unmatched"], d["unmatched"]
+        )
+        self.assertEqual(d["inactive_unmatched"], 51)
 
     def test_an_unresolvable_catalog_record_fails_closed(self):
         """Cannot prove non-duplication -> emit nothing, loudly, and keep the snapshot."""
@@ -257,6 +291,116 @@ class ReconciliationTests(unittest.TestCase):
         # are withheld, so the emitted count is the open set minus those.
         self.assertEqual(len(opportunities), instance.diagnostics["actionable_unmatched"])
         self.assertGreater(len(opportunities), 2)
+
+
+class DuplicateAppendixCodeTests(unittest.TestCase):
+    """The two identities, and which one a repeated code can actually break.
+
+    **Added 2026-08-20 as a forward guard.** `D.3C`'s rows are past-dated today, so
+    nothing live depends on this — which is exactly why it needs a deterministic
+    test. If a future amendment repeats a code on two *open* elements, they must
+    publish as two records, not vanish.
+    """
+
+    TWINS = [
+        {"appendix_code": "D.3C", "title": "XRISM General Observer - Type 1",
+         "due_date_cells": ["N/A", "12/03/2026 (Phase-1 via ARK RPS)"],
+         "native_deadline_text": "N/A | 12/03/2026 (Phase-1 via ARK RPS)",
+         "element_url": "https://nspires.nasaprs.com/x/summary.do?solId={SHARED}",
+         "is_overview": False, "appendix_order": 38, "division": "D",
+         "amended": True, "native_status": nasa_roses.NATIVE_DATED},
+        {"appendix_code": "D.3C", "title": "XRISM General Observer - Type 2",
+         "due_date_cells": ["N/A", "12/03/2026 (via NSPIRES)"],
+         "native_deadline_text": "N/A | 12/03/2026 (via NSPIRES)",
+         "element_url": "https://nspires.nasaprs.com/x/summary.do?solId={SHARED}",
+         "is_overview": False, "appendix_order": 39, "division": "D",
+         "amended": True, "native_status": nasa_roses.NATIVE_DATED},
+    ]
+
+    def _report(self, catalog):
+        return NasaRosesAdapter().reconcile(
+            self.TWINS, catalog_records=catalog, year=2025, today=TODAY
+        )
+
+    def test_two_unmatched_actionable_twins_are_both_publishable(self):
+        """The case the old behaviour would have silently suppressed."""
+        report = self._report([])
+        self.assertEqual(len(report["actionable_unmatched"]), 2)
+        self.assertEqual(report["review"], [])
+        self.assertEqual(report["ambiguous_source_codes"], ["D.3C"])
+
+    def test_they_emit_as_two_distinct_records(self):
+        instance = NasaRosesAdapter()
+        report = self._report([])
+        records = [
+            instance.opportunity_for(element, 2025).to_record(
+                slug=instance.slug, source=instance.display_name,
+                source_type=instance.source_type,
+            )
+            for element in report["actionable_unmatched"]
+        ]
+        self.assertEqual(len({r["opportunity_id"] for r in records}), 2)
+        self.assertEqual(len({r["title"] for r in records}), 2)
+        # A shared solId does not collapse them, because it is not the key.
+        self.assertEqual(len({r["detail_page"] for r in records}), 1)
+
+    def test_they_survive_the_merge_as_two_records(self):
+        instance = NasaRosesAdapter()
+        report = self._report([])
+        external = [
+            instance.opportunity_for(element, 2025).to_record(
+                slug=instance.slug, source=instance.display_name,
+                source_type=instance.source_type,
+            )
+            for element in report["actionable_unmatched"]
+        ]
+        combined, stats = merge_records(CATALOG_ROSES, external)
+        self.assertEqual(stats["external_added"], 2)
+        self.assertEqual(stats["dropped_cross_source_duplicate"], 0)
+        self.assertEqual(stats["dropped_duplicate_identity"], 0)
+        emitted = [r for r in combined if r["source"] == "NASA ROSES"]
+        self.assertEqual(len(emitted), 2)
+
+    def test_a_catalog_record_on_the_duplicated_code_fails_closed(self):
+        """The genuinely ambiguous case: which of the two is the catalog record?"""
+        catalog = [catalog_record("NNH25ZDA001N-XRISM", "ROSES25: D.3C XRISM General Observer")]
+        report = self._report(catalog)
+        self.assertEqual(len(report["review"]), 2)
+        self.assertEqual(report["actionable_unmatched"], [])
+        self.assertEqual(report["matched"], [])
+        self.assertEqual(report["unmatched"], [])
+        for element in report["review"]:
+            self.assertEqual(
+                element["review_reason"], "ambiguous_code_matches_catalog_record"
+            )
+            self.assertEqual(element["matched_catalog_ids"], ["NNH25ZDA001N-XRISM"])
+
+    def test_the_ambiguous_case_emits_nothing_through_parse(self):
+        """End to end: fail closed means zero records, not a guess."""
+        instance = NasaRosesAdapter()
+        html = (FIXTURES / "table3.html").read_text(encoding="utf-8")
+        instance.set_context({
+            "catalog_records": CATALOG_ROSES + [
+                catalog_record("NNH25ZDA001N-XRISM", "ROSES25: D.3C XRISM General Observer")
+            ],
+            "as_of": TODAY,
+        })
+        opportunities = list(instance.parse(payload(table3_html=html)))
+        emitted_codes = {
+            opportunity.title.split(":")[1].strip().split(" ")[0]
+            for opportunity in opportunities
+        }
+        self.assertNotIn("D.3C", emitted_codes)
+        self.assertEqual(len(instance.diagnostics["review"]), 2)
+
+    def test_an_unrepeated_code_is_never_routed_to_review(self):
+        single = [dict(self.TWINS[0], appendix_code="D.3Z")]
+        report = NasaRosesAdapter().reconcile(
+            single, catalog_records=[], year=2025, today=TODAY
+        )
+        self.assertEqual(report["ambiguous_source_codes"], [])
+        self.assertEqual(report["review"], [])
+        self.assertEqual(len(report["actionable_unmatched"]), 1)
 
 
 class EmittedRecordShapeTests(unittest.TestCase):
