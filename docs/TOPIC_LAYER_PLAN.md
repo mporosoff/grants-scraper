@@ -2,9 +2,9 @@
 
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
-Status: in progress · Version 8.13 · Written 2026-08-15 · **Revised 2026-08-19 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
+Status: in progress · Version 8.14 · Written 2026-08-15 · **Revised 2026-08-20 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
 
-> **Start at §18, and read §18.0 first.** §18 defines the minimum path — the **eleven** work packages **P1 … P11** — and lists what is deferred and what it costs. **§18.0 is the canonical namespace**: package IDs, the `BUG-*` / `MEAS-*` / `DEC-*` / `DEBT-*` prefixes, the migration table for every legacy label (`Package A–G`, `D½`, `D⅝`, `D¾`, `S1–S3`, `Package N`, bare `D#`, `M#`), the current ordered path, and a diagram. **P8 is complete (2026-08-19); the next implementation task is `P6.2`** (§18.0.4). §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
+> **Start at §18, and read §18.0 first.** §18 defines the minimum path — the **eleven** work packages **P1 … P11** — and lists what is deferred and what it costs. **§18.0 is the canonical namespace**: package IDs, the `BUG-*` / `MEAS-*` / `DEC-*` / `DEBT-*` prefixes, the migration table for every legacy label (`Package A–G`, `D½`, `D⅝`, `D¾`, `S1–S3`, `Package N`, bare `D#`, `M#`), the current ordered path, and a diagram. **P8 is complete (2026-08-20, no caveats); the next implementation task is `P6.2`** (§18.0.4). §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
 >
 > **Legacy labels in the revision notes below are historical.** They record what a past session actually did and are left as written; translate any of them through §18.0.3 rather than assuming a bare `D5` or `S1` still names live work.
 >
@@ -12,12 +12,32 @@ Status: in progress · Version 8.13 · Written 2026-08-15 · **Revised 2026-08-1
 >
 > **8.4 closes the two blocking storage decisions.** `MAX_TERMS` stays at 400 and subtopics ship in a lazily-loaded `data/subtopics.js` sidecar — one question, not two, once you measure that 60.3% of a cache record is a term map the browser never reads as content. **Nothing now blocks committing a cache except running the backfill again.** Every rate quoted against `docs/CORPUS_CENSUS.md`'s 20 documents is still superseded by `docs/COVERAGE_SURVEY.md` (§1.1).
 >
+> **8.14 closes P8 by auditing its own identity rule against the source.** P8 stated
+> two things that could not both hold about the repeated appendix code `D.3C`: that
+> native identity is `(code, title)`, and that a repeated code holds both rows for
+> review. The source settles it — the two rows are **distinct program elements**
+> (different titles, appendix positions 38 and 39, different proposal routes, and both
+> listed independently in Table 2 as well as Table 3), so `(cycle, code, title)`
+> separates them and the repeated code breaks only the **cross-source** key. **The
+> defect was in the code:** `reconcile()` suppressed both rows whenever a code
+> repeated, even when no catalog record carried it, which would have silently withheld
+> two publishable opportunities after a future amendment. Fixed, with nine regression
+> tests. **No public yield change** — both `D.3C` rows are past-dated, so today is
+> still +2 records — but the bookkeeping is corrected to **51 inactive, 0 held for
+> review**, restoring agreement with P6.1d. Full evidence in §18.1 **P8.2a**. Two
+> non-blockers were found and filed rather than left in a session report: **DEC-14**
+> (should divisions A–F map to `disciplines`?) and **BUG-11** (`_amendment_of` reads
+> the fetched body, not the resolved URL). **P8 is closed without caveat; P6.2 is
+> next.**
+>
 > **8.13 ships P8 — NASA ROSES is a catalog source.** DEC-13 is implemented, not
 > just taken. The adapter is **enabled** and every scheduled refresh re-decides the
 > whole published inventory: **63 program elements, 10 matched, 53 unmatched, 2
-> actionable and emitted, 49 inactive kept as inventory only, 2 held for review on
-> an ambiguous appendix code.** Net **+2 records, 1,475 → 1,477, +0.136%** — and the
-> point is not the 2, it is that the 49 need no human follow-up. Cross-source
+> actionable and emitted, 51 inactive kept as inventory only** *(as first written this
+> read "49 inactive, 2 held for review on an ambiguous appendix code"; **corrected in
+> 8.14** — the repeated code suppressed nothing, see §18.1 P8.2a)*. Net **+2 records,
+> 1,475 → 1,477, +0.136%** — and the point is not the 2, it is that the 51 need no
+> human follow-up. Cross-source
 > matching is deterministic on the appendix code printed in a catalog record's
 > title, corroborated by the `NNH<yy>ZDA<nnn>[A-Z]-` solicitation number; **no
 > fuzzy-title matching was introduced.** Ambiguity fails closed, and a broken parse
@@ -2971,15 +2991,15 @@ Not built in v1. Recorded so the deterministic design does not preclude it.
     on every scheduled refresh, and the two actionable unmatched elements
     (`D.3E` IXPE/NICER General Observer, `D.9` Habitable Worlds Observatory
     Instrument Concept Assessments) are emitted — **+2 records, 1,475 → 1,477,
-    +0.136%**. The 49 inactive elements stay inventory-only and 2 ambiguous-code
-    elements are held for review; none of them can reach the public catalog.
+    +0.136%**. The other **51** stay inventory-only and cannot reach the public
+    catalog.
 
     **What ingesting them requires, none of which P6.1 built** — every row is now a
     named P8 item rather than an open question:
 
     | Question | Why it is not obvious | Item |
     |---|---|---|
-    | **Dedup and identity** | The 10 matched elements arrive from Grants.gov *and* NSPIRES. `D.3C` proves the ROSES appendix code is not unique, native identity is `(appendix_code, program_title)`, and **5 of the 10 matched only by normalized title** | **P8.2** |
+    | **Dedup and identity** | The 10 matched elements arrive from Grants.gov *and* NSPIRES. `D.3C` proves the ROSES appendix code is not unique — so native identity is `(cycle, appendix_code, program_title)` and the bare code is only a *cross-source* key — and **5 of the 10 matched only by normalized title** | **P8.2** |
     | **Source precedence and update ownership** | When Grants.gov and ROSES disagree on a close date, which wins, and which source may overwrite the other nightly? | **P8.3** |
     | **Catalog size and currentness** | 51 of the 53 are closed or unsolicited; they need currentness handling or they inflate the catalog with things nobody can apply to | **P8.4** |
     | **§0.5** | Enabling the adapter changes `opportunities.js` **with `--enable-subtopics` off**. That is not a bug in the gate; it is the gate working — so the package gets **its own** gate and §0.5 keeps its current meaning | **P8.6** |
@@ -3139,7 +3159,7 @@ Legacy labels are translated once, in §18.0.3 — not repeated here.
 | **P6.2** | DOE Office of Science structured-source test | ⛔ **not started, and next by roadmap sequence** now that P8 is complete. Approved in principle — P6.1 showed measurable value from a structured source (10 open catalog records gained authoritative NASA relationships at the `native` rung). The P8-first ordering was **scheduling, never a technical dependency** (§18.0.4). **P6.2 remains the first real test of whether structured/referenced ingestion reaches the category-(a) umbrella population** |
 | **P6.3** | DoD structured-source test | ⛔ **not started and not scheduled.** A **human decision**, conditional on **measuring P6.2** first |
 | **P7** | Residual generic forms | ⛔ **not started.** Gated on **P5's Cov4 gate** *and* on **P6 measurement**: Fm1/Fm2/Fm5/Fm6 build only against records still uncovered after structured sources, and their yields are re-measured on that residual. Fm3, Fm4 and Fm7 are not re-gated |
-| **P8** | NASA ROSES Catalog Source | ✅ **complete** 2026-08-19, own gate passed (§18.1). A **catalog-completeness branch**, not subtopic recall. The adapter is enabled and reconciles all **63** elements every refresh; the catalog-completeness gap is **closed** — the 2 actionable unmatched elements are emitted (**+0.136%**), the 49 inactive stay inventory-only, and 2 ambiguous-code elements are held for review |
+| **P8** | NASA ROSES Catalog Source | ✅ **complete** 2026-08-20, own gate passed, **no open items** (§18.1). A **catalog-completeness branch**, not subtopic recall. The adapter is enabled and reconciles all **63** elements every refresh; the catalog-completeness gap is **closed** — the 2 actionable unmatched elements are emitted (**+0.136%**) and the other **51** stay inventory-only. Native identity `(cycle, code, title)` and the cross-source ambiguity rule were audited against the live source in P8.2a |
 | **P9** | Storage and scoring | ⛔ **not started.** **P9.0 must run before anything writes a cache** |
 | **P10** | Retrieval and UI | ⛔ **not started** |
 | **P11** | Enable and ship | ⛔ **not started.** The only package that flips a flag (§0.4 rule 9) |
@@ -3157,6 +3177,7 @@ D5 backfill generation holds six pre-Cov5 summaries and is missing a span.
 | **BUG-7** | The hermetic §0.5 gate was date-dependent: `build_changes._event_id` seeds on the build's UTC calendar date | ✅ **fixed 2026-08-18** (`d735142`) — the hermetic build pins `generated_at` in a `.work/` copy; `verify_no_drift` exits 0 on the **unchanged** committed baseline (§8.4). **Prerequisite for P8's gate, and satisfied** |
 | **BUG-9** | The aggregating-agency page: every acceptance rule passes on **another opportunity's** topic list | §6.3b; a required case in Cov4's validation set |
 | **BUG-10** | Cov5's residual — `_locate_nodes`' `page_start_offset` fallback is still silent | §6.5 |
+| **BUG-11** | `nasa_roses._amendment_of` searches the fetched HTML, but the amendment number lives in the **resolved URL**, so a live run records `amendment: None` | §18.1 P8. **Diagnostics only** — it does not affect emission, identity, currentness or the gate, so it is **not a P8 blocker** |
 | *(no ID)* | **Agency-HTML scrapers fail silently — HTTP 200, zero rows.** Classified as a **risk, not a defect in our code**: it is §12's risk row, mitigated by §7.4 canaries, which shipped with P6.1 and which **P8.5** extends to the emission path | §12, §7.4 |
 
 **Owned as a package item, not as a bug:** `_demote()`'s cap on publication for
@@ -3190,6 +3211,12 @@ guarantees they never publish. It is listed once, under P5.
 **Taken:** **DEC-13 — NASA ROSES standalone ingestion.** Taken 2026-08-18: build
 it as **P8**, sequenced after P6.1 and before P6.2. **DEC-0** (`MAX_TERMS` stays at
 400) and **DEC-1** (subtopics ship in a sidecar) are settled — full text in §13.
+
+**Decisions opened while closing P8, and neither reopens it:**
+
+| ID | Decision | Note |
+|---|---|---|
+| **DEC-14** | **Should ROSES appendix divisions A–F map to `disciplines` facet values?** The two emitted records carry `disciplines: []` because Grants.gov derives that facet from category codes ROSES does not publish; `topic_areas` *is* derived (*Space and aeronautics*), so the records remain searchable and topically filterable. Mapping division → discipline would be a **new inference**, which is a decision rather than a fix (§17.8) | **Not a P8 blocker.** P8's gate covers identity, precedence, currentness, dedup and loud failure; facet richness is not one of its clauses |
 
 **Debt — carried, neither a defect nor a measurement:**
 
@@ -3596,7 +3623,7 @@ Both are Phase 1 work and both fail loudly rather than silently, which is why th
 | 10 | Coverage package Cov1–Cov3, plus an unplanned §11 classifier measurement and re-baseline. | Four commits; §11 reopened on the precision half; this revision's 8.3 and 8.4 | **done 2026-08-16/17** |
 | 11 | Family taxonomy — research only, no code. Classified every miss across the census 20 and survey 40; drew and read a third stratified sample of 50 records / 170 documents; induced the taxonomy from a `claude-sonnet-5` run. | `docs/FAMILY_TAXONOMY.md`; two commits | **done 2026-08-17** |
 | 12 | Revise this plan against `docs/FAMILY_TAXONOMY.md`. No code. | This revision — **8.5**: §6.3 replaced, seven families retired, §17.8 added, §18.1 re-ordered, §18.3a's exit criteria | **done 2026-08-17** |
-| 13+ | **One §18 work package per session.** Each item inside it is its own commit, with the suite run between commits. | The package, its gate output, an updated §15, and a pushed branch | **Delivered since session 12, in order: the 8.5–8.9 plan revisions, P5's Cov5, P6.1 (four items plus its gate), DEC-13 and P8's specification, BUG-7's fix, the 8.12 namespace normalization, and P8 itself (P8.1–P8.6, gate passed).** For what is next, read **§18.0.4** — it is the single ordered path, and this cell deliberately does not keep a second copy of it |
+| 13+ | **One §18 work package per session.** Each item inside it is its own commit, with the suite run between commits. | The package, its gate output, an updated §15, and a pushed branch | **Delivered since session 12, in order: the 8.5–8.9 plan revisions, P5's Cov5, P6.1 (four items plus its gate), DEC-13 and P8's specification, BUG-7's fix, the 8.12 namespace normalization, P8 itself (P8.1–P8.6, gate passed), and P8's identity-rule audit and closeout.** For what is next, read **§18.0.4** — it is the single ordered path, and this cell deliberately does not keep a second copy of it |
 
 Sessions 1 and 2 are not overhead. They are what makes the additive-edit discipline in §8 possible, because you cannot make a surgical edit to a file whose structure you inferred. Session 1 found that the single most consequential fact in this project — which PDF library the repository uses — was wrong in every prior version, and that error alone would have produced an unusable Layer C and an AGPL licensing problem.
 
@@ -3884,7 +3911,7 @@ it describes what a past session or commit actually did.
 | **P6.2** | DOE Office of Science structured-source test | D⅝ S2 | **not started, and next by roadmap sequence.** Approved in principle |
 | **P6.3** | DoD structured-source test | D⅝ S3 | **not started, and not scheduled** — a human decision after P6.2 is measured |
 | **P7** | Residual generic forms | Package D¾ | **not started** — gated on P5's Cov4 gate *and* on P6 measurement |
-| **P8** | NASA ROSES Catalog Source | Package N | ✅ **complete** 2026-08-19, own gate passed. Adapter enabled; +2 records; 63 elements re-decided every refresh |
+| **P8** | NASA ROSES Catalog Source | Package N | ✅ **complete** 2026-08-20, own gate passed, **no caveats**. Adapter enabled; +2 records; 63 elements re-decided every refresh; identity model audited against the source (P8.2a) |
 | **P9** | Storage and scoring | Package E | **not started** |
 | **P10** | Retrieval and UI | Package F | **not started** |
 | **P11** | Enable and ship | Package G | **not started** |
@@ -3912,9 +3939,9 @@ Bare `D#` is retired for anything that is not a P4 item. Four prefixes, and the
 
 | Prefix | Meaning | Members |
 |---|---|---|
-| **BUG-#** | A defect in code or output — an item stays in this namespace after it is fixed, so its history stays citable | BUG-0, BUG-2, **BUG-7 (fixed)**, BUG-9, BUG-10 |
+| **BUG-#** | A defect in code or output — an item stays in this namespace after it is fixed, so its history stays citable | BUG-0, BUG-2, **BUG-7 (fixed)**, BUG-9, BUG-10, BUG-11 |
 | **MEAS-#** | A measurement still required before something can be concluded | MEAS-1 … MEAS-6 |
-| **DEC-#** | An architectural or product decision, open or taken | DEC-0 … DEC-13 |
+| **DEC-#** | An architectural or product decision, open or taken | DEC-0 … DEC-14 |
 | **DEBT-#** | Carried work that is neither a defect nor a measurement — stale artifacts, cache hygiene, a deliberate non-build | DEBT-1, DEBT-3, DEBT-4, DEBT-5, DEBT-6, DEBT-8 |
 
 **Categories were assigned by reading each item, not by its old prefix.** Three
@@ -3952,7 +3979,7 @@ notes elsewhere.
 | P6.3 | DoD structured-source test | S3 | not started, unscheduled |
 | P7 | Residual generic forms | Package D¾, "Forms" | not started |
 | P7 items | Fm1 … Fm7 | unchanged | not started |
-| P8 | NASA ROSES Catalog Source | Package N | **complete** 2026-08-19 |
+| P8 | NASA ROSES Catalog Source | Package N | **complete** 2026-08-20 |
 | P8.1–P8.6 | Lifecycle · identity · precedence · currentness · tests · gate | N1 … N6 | complete |
 | P9 | Storage and scoring | Package E | not started |
 | P9.0–P9.3 | Re-key identity · scoring prototype · implement · currentness | E0, E1, E2, E3 | not started |
@@ -3965,6 +3992,7 @@ notes elsewhere.
 | **BUG-7** | The hermetic gate was date-dependent through the event-ID seed | **formerly D7** *(debt; distinct from P4.7)* | **fixed 2026-08-18** (`d735142`) |
 | **BUG-9** | The aggregating-agency page passes every acceptance rule | *(previously unnumbered, §6.3b)* | open |
 | **BUG-10** | Cov5's residual: the `page_start_offset` fallback is silent | *(previously unnumbered, §6.5)* | open |
+| **BUG-11** | `nasa_roses._amendment_of` searches the HTML body, so the live fetch reports `amendment: None` | *(new in 8.14; found closing P8)* | open — **diagnostics only, not a P8 blocker** |
 | **DEBT-1** | The backfill cache holds six wrong-subject summaries and misses a span | D1 *(debt)* | open |
 | **DEBT-3** | §6.6's HTML outline layer is specified and unbuilt, deliberately | D3 *(debt)* | open by choice |
 | **DEBT-4** | 213 stale evidence entries | D4 *(debt)* | open |
@@ -3980,7 +4008,8 @@ notes elsewhere.
 | **DEC-0** | `MAX_TERMS` stays at 400 | §13 "former open decision 0" | settled 2026-08-17 |
 | **DEC-1** | Subtopics ship in a `data/subtopics.js` sidecar | §13.1, "former open decision 1" | settled 2026-08-17 |
 | **DEC-2 … DEC-12** | §13's remaining numbered decisions | §13 items 2–12 | open |
-| **DEC-13** | NASA ROSES standalone ingestion → build it as P8 | §13 item 13, "decision 13" | **taken 2026-08-18, implemented 2026-08-19** |
+| **DEC-13** | NASA ROSES standalone ingestion → build it as P8 | §13 item 13, "decision 13" | **taken 2026-08-18, implemented 2026-08-20** |
+| **DEC-14** | Whether ROSES appendix divisions A–F should map to `disciplines` facet values | *(new in 8.14; found closing P8)* | open — **not a P8 blocker** |
 
 *Not renumbered, deliberately:* **§18.3a**'s bare-numbered-family prohibition is a
 gate with four exit criteria rather than a §13-numbered decision, and it keeps its
@@ -3998,7 +4027,7 @@ P4.3, P4.6 …).
 |---|---|---|
 | 1 | **P6.1** — NASA ROSES structured-source proof | **complete** 2026-08-18; gate closed clause by clause (§18.1) |
 | 2 | **BUG-7** — restore the deterministic §0.5 gate | **prerequisite for P8's gate, and already satisfied** — fixed 2026-08-18, `verify_no_drift` exits 0 on the unchanged baseline (§8.4) |
-| 3 | **P8** — NASA ROSES Catalog Source | ✅ **complete** 2026-08-19; own gate passed, adapter enabled, **+2 records (1,475 → 1,477, +0.136%)**, 63 elements re-decided every refresh |
+| 3 | **P8** — NASA ROSES Catalog Source | ✅ **complete** 2026-08-20, **no caveats**; own gate passed, adapter enabled, **+2 records (1,475 → 1,477, +0.136%)**, 63 elements re-decided every refresh, identity model audited against the live source (P8.2a) |
 | 4 | **P6.2** — DOE Office of Science structured-source test | **next by roadmap sequence.** It was sequenced after P8, and P8 is done — the ordering was **scheduling, never a technical dependency** (see the note below). **P6.2 remains the first real test of whether structured/referenced ingestion reaches the category-(a) umbrella population**, which P6.1 did not touch (it reached **(e)**) |
 | 5 | **Measure P6.2**, then a **human decision on P6.3** | measured against P6's own denominator, never folded into a segmentation acceptance rate (§17.8) |
 | 6 | **Recompute residual coverage** before any **P7** work | P7's yields were measured on a corpus where no structured source had been tried |
@@ -4328,7 +4357,7 @@ is a *sourcing* result. They are never added together (§17.8).
 | Item | Notes |
 |---|---|
 | **P8.1. Source lifecycle — reuse P6.1's discovery and parsing** | `scripts/sources/adapters/nasa_roses.py` already does this and its design is **measured, not assumed** (`docs/ROSES_SOURCE_INSPECTION.md`). Preserve all of it: discover the active ROSES year from the **stable SARA landing page**; **hard-code nothing transient** — not the year, not the amendment number, not `solId`, not `cmdocumentid`, not a versioned document URL; keep **Table 3 as the authoritative hierarchy substrate** and **Table 2 for corroboration/health only**; keep appendix order rather than sorting; keep the tolerance for 3-cell rows, duplicate codes, missing codes and dirty dates. **Keep the TLS compatibility behaviour per-adapter and off by default** (`PoliteClient(legacy_tls_ciphers=True)`, §17.11) — do **not** broaden it to other adapters as part of this work |
-| **P8.2. Identity and deduplication** | Define **deterministic** identity between ROSES and existing catalog sources, against P6.1's measured facts: the appendix code alone is **not unique** (`D.3C` occurs twice), native ROSES identity is **`(appendix_code, program_title)`**, the **solicitation number is the strongest cross-source key** when present (`NNH<yy>ZDA<nnn>N-<CODE>`), and **5 of the 10 current matches required normalized-title fallback**. **An opportunity already represented through Grants.gov must not appear again as a separate ROSES record.** `sources/merge.py::merge_records` already drops an external record that collides with base by identity, by casefolded `opportunity_number`, or by normalized title — start there, and note that its title test carries exactly the weakness P6.1 measured. **Normalized-title matching is a weaker fallback and must be recorded as one** — never treated as equivalent to an exact solicitation-number match, and never used to *overwrite* a base field |
+| **P8.2. Identity and deduplication** | Define **deterministic** identity between ROSES and existing catalog sources, against P6.1's measured facts: the appendix code alone is **not unique** (`D.3C` occurs twice), native ROSES identity is **`(cycle, appendix_code, program_title)`** — which *does* separate the two `D.3C` rows, so a repeated code never invalidates a native identity — the **solicitation number is the strongest cross-source key** when present (`NNH<yy>ZDA<nnn>N-<CODE>`), and **5 of the 10 current matches required normalized-title fallback**. **An opportunity already represented through Grants.gov must not appear again as a separate ROSES record.** `sources/merge.py::merge_records` already drops an external record that collides with base by identity, by casefolded `opportunity_number`, or by normalized title — start there, and note that its title test carries exactly the weakness P6.1 measured. **Normalized-title matching is a weaker fallback and must be recorded as one** — never treated as equivalent to an exact solicitation-number match, and never used to *overwrite* a base field |
 | **P8.3. Source precedence and update ownership** | Define what happens when Grants.gov and ROSES represent the same opportunity **and disagree**. Establish deterministic ownership/precedence for at least **title · opportunity number · dates · official URL · agency/program metadata · currentness/status**. **Whichever adapter runs last must not silently overwrite the other source.** Two specific hazards to resolve rather than discover: `merge_records`'s rule is *"base always wins"*, which decides **whether an external record is added** and says nothing about **field-level ownership**; and an element emitted as ROSES-only that Grants.gov later starts carrying will flip which source owns it, so **identity stability across that transition** is part of this item, not a follow-up |
 | **P8.4. Currentness** | Align standalone ROSES records with the catalog's **existing** actionable/currentness model — `scripts/currentness.py::record_is_current` plus `filter_current`, which gate on `status` and `close_date`/`archive_date`. **NASA publishes no native `closed` status**, so `derived_currentness` must stay **distinguishable from `native_status`** in the emitted record, exactly as P6.1 keeps them (`docs/ROSES_SOURCE_INSPECTION.md` §4). **Inactive elements remain known to the source adapter and absent from the public current catalog** — they are inventory, not hidden records, and they must not be emitted with a fabricated `posted` status merely to satisfy the currentness filter |
 | **P8.5. Lifecycle tests** | Six, and they are what prove the 51 need no manual attention: **(1)** an unmatched `Not Solicited This Year` element does **not** enter the current catalog; **(2)** the same element changes to an open/future date and **enters on the next build**; **(3)** it later expires/closes and **leaves the public current population**; **(4)** an element already represented by Grants.gov creates **no duplicate**; **(5)** a new unmatched **open** element **is emitted**; **(6)** an **HTTP-200 response with zero rows, or an implausibly small ROSES result, fails loudly** rather than silently removing NASA coverage — P6.1's canaries already do the zero-row half (`test_http_200_with_zero_rows_fails_loudly`), and this extends them to the *emission* path, where a silent collapse would now delete records rather than merely add none |
@@ -4400,6 +4429,60 @@ change the base catalog**, so §0.5 cannot express whether it changed it
 > package re-freezes the baseline, every line of that diff is a change someone
 > chose.
 
+##### P8.2a — the `D.3C` audit, and the over-suppression it found
+
+**Audited 2026-08-20 against the live source and the committed capture, which agree
+exactly.** The question was whether "native identity is `(code, title)`" and
+"a duplicate code holds both rows for review" can both be true. They cannot, and the
+source settles which one was wrong.
+
+| Evidence | `D.3C` row 1 | `D.3C` row 2 |
+|---|---|---|
+| Title | `XRISM General Observer - Type 1` | `XRISM General Observer - Type 2` |
+| Appendix order | 38 | 39 |
+| Printed dates | `02/27/2026 (Phase-1 via ARK RPS)` | `02/27/2026 (via NSPIRES)` |
+| `solId` / element URL | `A952E51B-7AD4-B180-2F8C-4E8A79AFFAED` | **the same** |
+| Solicitation number | none published | none published |
+| Amended flag | true | true |
+| Present in **Table 2** as well as Table 3 | **yes, independently** | **yes, independently** |
+
+**What the two rows represent: two distinct program elements** — the same XRISM
+General Observer programme offered as two types with two different proposal routes.
+Both of NASA's own tables list them separately, which is what rules out a parsing
+artifact. `D.3C` is the **only** repeated element code in the live source.
+
+**Where the ambiguity actually lives.**
+
+| Identity | Ambiguous? | Why |
+|---|---|---|
+| **Native ROSES** — `(cycle, code, title)` | **No** | The titles differ, so the two rows are cleanly separable. This is the rule P6.1 chose and it holds |
+| **Cross-source** — the bare appendix code parsed from a catalog record's title | **Only conditionally** | If a catalog record parses to `D.3C`, the code cannot say *which* of the two it is. **No catalog record carries `D.3C` today**, so nothing is ambiguous right now |
+| Shared `solId` / URL | not used as a key | Would be ambiguous if it were; it is not |
+
+**The defect was in the code, not in the stated identity rule.** `reconcile()` routed
+both rows to review whenever a code repeated, **regardless of whether any catalog
+record carried it** — so a future amendment repeating a code on two *open* elements
+would have suppressed two publishable opportunities silently. A quieter second defect:
+when a catalog record *did* carry a repeated code, both elements were filed as
+`matched` with no reason recorded.
+
+**Corrected rule, now the only ambiguity test:**
+
+- catalog record on that code **and** code repeated in source → **fail closed**, both
+  held for review with reason `ambiguous_code_matches_catalog_record`;
+- catalog record on that code, code unique → **matched**;
+- no catalog record → **unmatched**, and each row is judged on its **own**
+  currentness, so two same-code/different-title elements can publish as two records.
+
+**Accounting closes:** 63 = matched + unmatched + held-for-review, and unmatched
+splits into actionable + inactive.
+
+**Yield effect: none on the public catalog.** Both `D.3C` rows are past their date, so
+today's output is still **+2 records**. The bookkeeping changed and now agrees with
+P6.1d's original figure: **inactive unmatched 49 → 51, held for review 2 → 0.**
+Nine regression tests guard it, including the twins publishing as two records through
+`reconcile`, through `merge_records` and through the full `integrate()` path.
+
 ##### P8.6 — the gate, run 2026-08-19
 
 **Both halves passed, and the baseline was not re-frozen because nothing in it
@@ -4427,7 +4510,7 @@ with `--adapter nasa-roses --write`:
 | — added | `nasa-roses:25-D.3E-…` **ROSES25: D.3E IXPE Cycle 4 and NICER Cycle 9 General Observer**, closes 2026-09-17, no published solicitation number (solId-only row) | Actionable, unmatched |
 | — added | `nasa-roses:25-D.9-…` **ROSES25: D.9 Habitable Worlds Observatory Instrument Concept Assessments**, closes 2026-10-14, `NNH25ZDA001N-HWOICA` | Actionable, unmatched |
 | — removed | **none** | Nothing ceased to be actionable in this run |
-| `source_records.json` (copy) | one `nasa-roses` entry: 2 records, plus the full inventory in `diagnostics` | The 49 inactive elements and the 2 review items live here, not in the catalog |
+| `source_records.json` (copy) | one `nasa-roses` entry: 2 records, plus the full inventory in `diagnostics` | The 51 inactive elements live here, not in the catalog *(re-measured 2026-08-20 — see P8.2a; the earlier "49 inactive + 2 review" split was the over-suppression, now fixed)* |
 | `feeds/changes.{json,xml}` | **+2 `new`**, **+1 `closing_soon`** (D.3E's deadline is inside the window) | Correct events for two additions |
 | `feeds/changes.{json,xml}`, reversed pair | **2 `closed_or_removed`** — *"No longer in the current catalog"* | The removal path, proven on the same records |
 
@@ -4456,8 +4539,8 @@ listed at all. The two denominators are different and are never added.
 | Matched to existing catalog records | **10** |
 | Unmatched inventory | **53** |
 | **Actionable unmatched emitted today** | **2** |
-| Inactive unmatched retained as inventory only | **49** (32 past-dated, 17 undated: `Not Solicited This Year`, `TBD`, `Follow link from title`, bare `N/A`) |
-| Held for review, not emitted | **2** — both `D.3C` occurrences, ambiguous code; both are past their date, so **no live opportunity is withheld** |
+| Inactive unmatched retained as inventory only | **51** (32 past-dated, 19 undated: `Not Solicited This Year`, `TBD`, `Follow link from title`, bare `N/A`) — *corrected 2026-08-20 from 49; see P8.2a* |
+| Held for review, not emitted | **0.** The repeated `D.3C` code suppresses nothing, because no catalog record carries that code; both rows sit in the inactive inventory on their **dates**, which is the only reason that applies to them |
 | Duplicate records prevented | **10**, by the code key before emission; `merge_records` is the second line and dropped 0 because none reached it |
 | Records removed for ceasing to be actionable | **0 this run** (the mechanism is proven by P8.5 case 4) |
 | Net public catalog size change | **+2 records: 1,475 → 1,477** |
@@ -4465,7 +4548,7 @@ listed at all. The two denominators are different and are never added.
 | Disciplines / populations served | Both are NASA **Astrophysics** (appendix division D): high-energy astrophysics observing programmes (IXPE X-ray polarimetry, NICER neutron-star interiors) and **space-flight instrument concept development** for the Habitable Worlds Observatory. Both carry the derived topic *Space and aeronautics* |
 
 **The number that matters is not 2.** It is that **63 elements are re-decided every
-scheduled refresh**, so the 49 inactive ones need no human follow-up: DEC-13's rule
+scheduled refresh**, so the 51 inactive ones need no human follow-up: DEC-13's rule
 is now executable code with six lifecycle tests behind it.
 
 #### P7 — Residual generic forms *(legacy Package D¾)*
