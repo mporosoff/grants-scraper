@@ -2,15 +2,37 @@
 
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
-Status: in progress · Version 8.17 · Written 2026-08-15 · **Revised 2026-08-22 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
+Status: in progress · Version 8.18 · Written 2026-08-15 · **Revised 2026-08-23 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
 
-> **Start at §18, and read §18.0 first.** §18 defines the minimum path — the **eleven** work packages **P1 … P11** — and lists what is deferred and what it costs. **§18.0 is the canonical namespace**: package IDs, the `BUG-*` / `MEAS-*` / `DEC-*` / `DEBT-*` prefixes, the migration table for every legacy label (`Package A–G`, `D½`, `D⅝`, `D¾`, `S1–S3`, `Package N`, bare `D#`, `M#`), the current ordered path, and a diagram. **P6 is closed (P6.1, P6.2 and P6.3 all measured) and P8 is complete; P5 remains open** (§18.0.4). §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
+> **Start at §18, and read §18.0 first.** §18 defines the minimum path — the **eleven** work packages **P1 … P11** — and lists what is deferred and what it costs. **§18.0 is the canonical namespace**: package IDs, the `BUG-*` / `MEAS-*` / `DEC-*` / `DEBT-*` prefixes, the migration table for every legacy label (`Package A–G`, `D½`, `D⅝`, `D¾`, `S1–S3`, `Package N`, bare `D#`, `M#`), the current ordered path, and a diagram. **P6 is closed and P8 is complete; P5 remains open, and Cov4 is now blocked on MEAS-3** (§18.0.4, `docs/MEAS3_RUN_DESIGN.md`). §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
 >
 > **Legacy labels in the revision notes below are historical.** They record what a past session actually did and are left as written; translate any of them through §18.0.3 rather than assuming a bare `D5` or `S1` still names live work.
 >
 > **8.3 changes one thing structurally: the unit of judgment moves from the sibling *set* to the individual *span* (§6.4b), because a set-level verdict lets two policy paragraphs delete 70 DOE programmes.** §11 is reopened for the precision half only, on a measured run; its recall argument is untouched.
 >
 > **8.4 closes the two blocking storage decisions.** `MAX_TERMS` stays at 400 and subtopics ship in a lazily-loaded `data/subtopics.js` sidecar — one question, not two, once you measure that 60.3% of a cache record is a term map the browser never reads as content. **Nothing now blocks committing a cache except running the backfill again.** Every rate quoted against `docs/CORPUS_CENSUS.md`'s 20 documents is still superseded by `docs/COVERAGE_SURVEY.md` (§1.1).
+>
+> **8.18 attempts MEAS-3 first, and stops rather than forcing Cov4.** The package
+> said to measure classifier repeatability before building the gate, and the
+> measurement cannot be run here. **Three blockers, each isolated rather than
+> inferred:** no classifier credential — SDK present, endpoint present,
+> `ANTHROPIC_API_KEY` absent, failing with *"Could not resolve authentication
+> method"*; **no committed candidate population**, because §11's 114 spans came from
+> the uncommitted D4/D5 backfill (**DEBT-9**); and **`anthropic` is not an authorized
+> dependency** (§0.4 rule 7 — **DEC-15**). An `OPENAI_API_KEY` is present and was
+> deliberately not used: §11's result is specific to `claude-sonnet-5` with adaptive
+> thinking, and swapping model families would answer a different question while
+> looking like an answer to this one. **What was established without the key:** the
+> existing 1-of-62 observation has a **Wilson 95% CI of [0.29%, 8.59%]**, which
+> straddles the 0.9% signal — so the gate's *"zero false rejections"* wording is
+> unsatisfiable in any single pass, however careful. `docs/MEAS3_RUN_DESIGN.md`
+> specifies the replacement: two arms (§11's 114 spans for comparability, plus the
+> F1/F4/aggregating-page shapes Cov4 will actually face and which arm A does not
+> contain), **R=5** justified arithmetically, raw per-call verdicts recorded before
+> any vote, and a **decision table fixed before the run**. **Cov4 is blocked, not
+> deferred**, and the P6 bypass obligation is explicitly *not* discharged: `native`
+> and `referenced` bypass a classifier that does not exist yet, which is not the same
+> as proven.
 >
 > **8.17 builds P6.3 at the size MEAS-7 justified and closes P6.** One referenced
 > source, for one parent: the Army TDAC BAA topics page. Live measurement — **1 parent
@@ -3205,7 +3227,7 @@ Legacy labels are translated once, in §18.0.3 — not repeated here.
 | **P2** | Segmentation engine | ✅ **complete** 2026-08-16 |
 | **P3** | Flag-off integration | ✅ **complete** 2026-08-16 |
 | **P4** | Tune and backfill | ⚠️ **complete 2026-08-16, gate not met** — correct-acceptance stopped at **42%** against the 50% threshold, deliberately: every remaining miss needs a new mechanism, and reaching 50% by loosening would trade the 0/8 false-positive count. **P4.4**'s backfill ran and its cache was deliberately not committed |
-| **P5** | Coverage hardening | 🔄 **in progress** — Cov0–Cov3 and Cov5 done. **Open: Cov4, Cov6, Cov7.** Cov4's "zero false rejections" cannot be shown in a single pass until **MEAS-3** bounds the classifier's variance |
+| **P5** | Coverage hardening | 🔄 **in progress** — Cov0–Cov3 and Cov5 done. **Open: Cov4, Cov6, Cov7.** **Cov4 is blocked, not merely unstarted (2026-08-23):** MEAS-3 is specified but unrunnable here — no classifier credential, no committed candidate population, and `anthropic` is not an authorized dependency (**DEC-15**). The gate's own wording is also now known to be unsatisfiable in one pass: the measured flip rate's 95% CI is [0.29%, 8.59%] against a 0.9% signal (`docs/MEAS3_RUN_DESIGN.md`) |
 | **P6** | Structured-source coverage | ✅ **complete 2026-08-22, all three items measured.** P6.1 `native` NASA (10 recoveries, category (e)); P6.2 DOE measured negative (category-(a) population empty); P6.3 `referenced` Army (1 parent, 14 external-only children, category (a)). **Conclusion: delegation predicts value, not authority** (§18.1) |
 | **P6.1** | NASA ROSES structured-source proof | ✅ **complete** 2026-08-18. Gate closed clause by clause against repository evidence: six clauses outright, one with a forward obligation (the Cov4 bypass), one on evidence (§0.5). **Previously-category-(a) records reached: 0** — P6.1 reached the **(e)** population |
 | **P6.2** | DOE Office of Science structured-source test | ✅ **complete 2026-08-21 — a measured negative, and no source was built.** It was the first real test of whether structured/referenced ingestion reaches category (a), and **the population was empty**: 2 Office of Science parents, **both already resolved** by generic parsing, **0** previously category (a), **0** net-new children, **3** non-fundable organizational labels rejected. Evidence: `docs/DOE_SOURCE_INSPECTION.md` |
@@ -3242,7 +3264,7 @@ guarantees they never publish. It is listed once, under P5.
 |---|---|---|
 | **MEAS-1** | Cov5 leaves the 757 no-span documents unchanged | Asserted in a session report, never run |
 | **MEAS-2** | **30 more stratum-D records** | Closes over half of §1.1's 54–538 interval — the cheapest measurement in the project. **Delivered by P5's Cov7**; this is the same work, not a second copy |
-| **MEAS-3** | **Classifier run-to-run variance** | Measured incidentally at 1.6% against a 0.9% signal. **P5's Cov4 gate is undemonstrable in a single pass until this is bounded** |
+| **MEAS-3** | **Classifier run-to-run variance** | **Specified 2026-08-23 → `docs/MEAS3_RUN_DESIGN.md`; not run, and it blocks Cov4.** The existing 1-of-62 observation has a **Wilson 95% CI of [0.29%, 8.59%]**, which straddles the 0.9% signal — that is the arithmetic form of "one pass cannot demonstrate the gate". The design is two arms (§11's 114 spans for comparability, plus the F1/F4/aggregating-page shapes Cov4 will actually face) at **R=5**, with a decision table written before the run. **Three blockers, each isolated: no credential (Blocker A), no committed candidate population (Blocker B), `anthropic` unauthorized (DEC-15)** |
 | **MEAS-4** | Read `344592` for MURI topics | Grants.gov finds MURI in its full text; part of §18.2's SAM.gov cost may already be reachable |
 | **MEAS-5** | **Discipline-stratified query and relevance set** | **18 of 37 queries (49%) are chemistry; all 3 profile probes are.** A ranking regression outside chemistry is invisible to §8.5. **Extraction-side figures are corpus measurements and are unaffected** (§8.5, §17.9) |
 | **MEAS-6** | **Name a verified SAM-only opportunity** | §18.2's adapter was justified from MURI's absence in our corpus, which is a fact about what we store. **Inference withdrawn**; the residual gap is real but unnamed. **Blocked on a credential — human task** |
@@ -3270,6 +3292,7 @@ it as **P8**, sequenced after P6.1 and before P6.2. **DEC-0** (`MAX_TERMS` stays
 
 | ID | Decision | Note |
 |---|---|---|
+| **DEC-15** | **Authorize `anthropic` as a project dependency?** §0.4 rule 7 names exactly one permitted new runtime dependency (`pdfplumber`), and `anthropic` is in no requirements file. **Both the MEAS-3 harness and Cov4's production path need it**, so this is a plan-level decision to take before either is written — not an implementation detail | **Blocks MEAS-3 and therefore Cov4** |
 | **DEC-14** | **Should ROSES appendix divisions A–F map to `disciplines` facet values?** The two emitted records carry `disciplines: []` because Grants.gov derives that facet from category codes ROSES does not publish; `topic_areas` *is* derived (*Space and aeronautics*), so the records remain searchable and topically filterable. Mapping division → discipline would be a **new inference**, which is a decision rather than a fix (§17.8) | **Not a P8 blocker.** P8's gate covers identity, precedence, currentness, dedup and loud failure; facet richness is not one of its clauses |
 
 **Debt — carried, neither a defect nor a measurement:**
@@ -3282,6 +3305,7 @@ it as **P8**, sequenced after P6.1 and before P6.2. **DEC-0** (`MAX_TERMS` stays
 | **DEBT-5** | 13 orphaned evidence entries | Cov1 may already have closed this by measurement; verify before writing anything |
 | **DEBT-6** | 25 recorded fetch failures across five hosts | Two hosts account for 18, and neither is a segmentation problem |
 | **DEBT-8** | `structural_siblings` is blind to **55% of the corpus's PDFs** (71 of 129 carry no bookmarks) | A measured limitation of the mechanism, not a defect in it (§6.3a) |
+| **DEBT-9** | **No candidate span population is committed anywhere.** §11's 114 spans came from the uncommitted D4/D5 backfill generation, which **DEBT-1** also records as defective. Verified 2026-08-23: no `data/subtopic_records.json`, no span artifact under `evaluation/`, nothing in `git ls-files` | **Blocks MEAS-3.** Regenerating produces a *different* population — Cov5 moved one document 68 → 69 spans — so a fresh backfill is not comparable to §11's baseline. Fix DEBT-1 first, then commit a frozen evaluation artifact |
 
 ### What is true and settled, so it is not relitigated
 
@@ -3378,7 +3402,7 @@ Per-agency-family acceptance, as the gate requires rather than in aggregate: **D
 - [x] **Cov1. Fix the `source_for_record` selection gap** — *done 2026-08-16. Measured on the survey's 40: reachable **30/40 → 40/40**, correctly segmenting **2/40 → 2/40**, false positives **0**. All ten newly reached records return `no_layer_accepted`; Sloan's seven fields are now fetched and still not accepted, because they are named rather than numbered (`label_run`, deferred §18.2). Writes no evidence entry — a separate cache key, present only with the flag on.* Original note: 2/40 · ~48. **685 records (46.4%) never attempted; 672 have never been fetched once; 236 carry live attachments.** Extend the parallel subtopic-only path (`subtopic_sources.py`); do **not** change `source_for_record` itself
 - [x] **Cov2. HTML attachment support** — *done 2026-08-16. Stubs filtered at `MIN_HTML_BYTES = 2048`; **20 of the 111 non-stub NIH announcements read end to end**: 20/20 parsed (29–112 containers, 50–125 K chars), **0/20 produced a list, 0 false positives**. The plumbing is right and the population is empty. Gap found and deliberately not built: `extract_html_sections` keeps headings in `section`, so §6.6's "use the section tree as the outline equivalent" is unimplemented; a test pins it. Unmeasurable on the 40-record sample, which contains no non-stub HTML record.* Original note: 1/40 · ~43, plus **108 records reached whose yield is unmeasured**. 366 `.html` attachments, all NIH; 111 complete announcements; 255 sub-1 KB stubs that must not displace the agency URL. **Read 20 of the 108 first** — that measurement is inside this item, not after it
 - [x] **Cov3. Re-enable multi-attachment fetch** — *done 2026-08-16, **no code change**. Traced live: the furniture primary returns `no_layer_accepted`, `FA2391-23-S-2403.pdf` returns 18 spans and wins on score. Pinned by `FurniturePrimaryTests`. The winner is `low` and never publishes — Cov4's evidence. A 9.5 MB model contract ate the per-document time budget, recorded not fixed.* Original note: 1/40 · ~5. Already built and neutralized by its own `low` cap. Justified by **AFRL PACER `349554`**: selected primary is a one-page Security Program Questionnaire; `FA2391-23-S-2403.pdf` yields **18 correct topics**. Land selection-by-result-quality with it
-- [ ] **Cov4. Redesign the confidence model** — **two stages (§18.1, rewritten 8.3), narrowed in 8.7 to `inferred` and `inline` provenance only — `native` and `referenced` children bypass the classifier and the queue (§5.1). Still required: PACER is `inferred` and no structured source covers it. Draw the validation set after the structured sources (P6), not before.** The unit moves from set to span (§6.4b); a classifier filters spans (§11: Sonnet 4.6 caught 7/7 contaminants with 0/107 false rejections, PACER 18/18); the review queue takes only the residual — abstentions and `medium`/`low` survivors. **Fail-closed: no classifier → no new subtopics, never unfiltered ones.** Key from GitHub Secrets; Claude Code strips it from tool subprocesses, so local testing needs a human to make the calls. Reuses `assets/review.js` and **partially delivers issue #8**
+- [ ] **Cov4. Redesign the confidence model** — **⚠ BLOCKED 2026-08-23 on MEAS-3** (no credential · no committed span population, DEBT-9 · `anthropic` unauthorized, DEC-15). The gate's "zero false rejections" wording is unsatisfiable in one pass: the measured flip rate's 95% CI is [0.29%, 8.59%] against a 0.9% signal. Experiment specified in `docs/MEAS3_RUN_DESIGN.md`. — **two stages (§18.1, rewritten 8.3), narrowed in 8.7 to `inferred` and `inline` provenance only — `native` and `referenced` children bypass the classifier and the queue (§5.1). Still required: PACER is `inferred` and no structured source covers it. Draw the validation set after the structured sources (P6), not before.** The unit moves from set to span (§6.4b); a classifier filters spans (§11: Sonnet 4.6 caught 7/7 contaminants with 0/107 false rejections, PACER 18/18); the review queue takes only the residual — abstentions and `medium`/`low` survivors. **Fail-closed: no classifier → no new subtopics, never unfiltered ones.** Key from GitHub Secrets; Claude Code strips it from tool subprocesses, so local testing needs a human to make the calls. Reuses `assets/review.js` and **partially delivers issue #8**
 - [x] **Cov5. Fix span-summary alignment** — *done 2026-08-17. One cause for all six: a `pdfminer`-inserted space beside a hyphen or em-dash made the bookmark title unlocatable, and `_locate_nodes` substituted the top of the page. **6 of 223 spans = 2.7% → 0 of 224**, measured by re-running all 13 accepted documents. Clustered by document (`360678` only), not by method. `360678` 68 → 69 spans. Two tests added, none modified; suite 321 green, `verify_no_drift` green. Residual: the `page_start_offset` fallback stays silent (§6.5).*
 - [ ] **Cov6. Fix `_demote()`'s blanket cap on no-primary records** — **added 8.5.** It decides "secondary" by whether `primary_content` was populated, and Cov1's path passes none, so a list read from a record's own Full Announcement is capped at `low`. Verified: `363526` gives `high` from `segment_document` and `low` through `segment_without_primary`. **Caps publication for 46.4% of the catalog** — every later recall item lands in the cache and reaches no PI until this is fixed (§18.1)
 - [ ] **Cov7. Read 30 more stratum-D records** — **added 8.5.** The cheapest outstanding measurement: D is 483 records with 12 reads, contributes 40 of §1.1's 171 on one observation, spans 7–171 alone, and holds the only tabular list. Supersedes the survey's "sample C and E"; C is discharged at 18 of 27
@@ -3677,7 +3701,7 @@ Both are Phase 1 work and both fail loudly rather than silently, which is why th
 | 10 | Coverage package Cov1–Cov3, plus an unplanned §11 classifier measurement and re-baseline. | Four commits; §11 reopened on the precision half; this revision's 8.3 and 8.4 | **done 2026-08-16/17** |
 | 11 | Family taxonomy — research only, no code. Classified every miss across the census 20 and survey 40; drew and read a third stratified sample of 50 records / 170 documents; induced the taxonomy from a `claude-sonnet-5` run. | `docs/FAMILY_TAXONOMY.md`; two commits | **done 2026-08-17** |
 | 12 | Revise this plan against `docs/FAMILY_TAXONOMY.md`. No code. | This revision — **8.5**: §6.3 replaced, seven families retired, §17.8 added, §18.1 re-ordered, §18.3a's exit criteria | **done 2026-08-17** |
-| 13+ | **One §18 work package per session.** Each item inside it is its own commit, with the suite run between commits. | The package, its gate output, an updated §15, and a pushed branch | **Delivered since session 12, in order: the 8.5–8.9 plan revisions, P5's Cov5, P6.1 (four items plus its gate), DEC-13 and P8's specification, BUG-7's fix, the 8.12 namespace normalization, P8 itself (P8.1–P8.6, gate passed), P8's identity-rule audit and closeout, P6.2's measurement, MEAS-7, and P6.3.** For what is next, read **§18.0.4** — it is the single ordered path, and this cell deliberately does not keep a second copy of it |
+| 13+ | **One §18 work package per session.** Each item inside it is its own commit, with the suite run between commits. | The package, its gate output, an updated §15, and a pushed branch | **Delivered since session 12, in order: the 8.5–8.9 plan revisions, P5's Cov5, P6.1 (four items plus its gate), DEC-13 and P8's specification, BUG-7's fix, the 8.12 namespace normalization, P8 itself (P8.1–P8.6, gate passed), P8's identity-rule audit and closeout, P6.2's measurement, MEAS-7, P6.3, and MEAS-3's specification.** For what is next, read **§18.0.4** — it is the single ordered path, and this cell deliberately does not keep a second copy of it |
 
 Sessions 1 and 2 are not overhead. They are what makes the additive-edit discipline in §8 possible, because you cannot make a surgical edit to a file whose structure you inferred. Session 1 found that the single most consequential fact in this project — which PDF library the repository uses — was wrong in every prior version, and that error alone would have produced an unusable Layer C and an AGPL licensing problem.
 
@@ -3995,8 +4019,8 @@ Bare `D#` is retired for anything that is not a P4 item. Four prefixes, and the
 |---|---|---|
 | **BUG-#** | A defect in code or output — an item stays in this namespace after it is fixed, so its history stays citable | BUG-0, BUG-2, **BUG-7 (fixed)**, BUG-9, BUG-10, BUG-11 |
 | **MEAS-#** | A measurement still required before something can be concluded | MEAS-1 … MEAS-8 |
-| **DEC-#** | An architectural or product decision, open or taken | DEC-0 … DEC-14 |
-| **DEBT-#** | Carried work that is neither a defect nor a measurement — stale artifacts, cache hygiene, a deliberate non-build | DEBT-1, DEBT-3, DEBT-4, DEBT-5, DEBT-6, DEBT-8 |
+| **DEC-#** | An architectural or product decision, open or taken | DEC-0 … DEC-15 |
+| **DEBT-#** | Carried work that is neither a defect nor a measurement — stale artifacts, cache hygiene, a deliberate non-build | DEBT-1, DEBT-3, DEBT-4, DEBT-5, DEBT-6, DEBT-8, DEBT-9 |
 
 **Categories were assigned by reading each item, not by its old prefix.** Three
 legacy `D#` debt entries are **not** defects and are labelled `DEBT-`: DEBT-1 is a
@@ -4053,9 +4077,10 @@ notes elsewhere.
 | **DEBT-5** | 13 orphaned evidence entries | D5 *(debt)* | open |
 | **DEBT-6** | 25 recorded fetch failures across five hosts | D6 *(debt)* | open |
 | **DEBT-8** | `structural_siblings` is blind to 55% of the corpus's PDFs | *(previously unnumbered, §6.3a)* | carried limitation |
+| **DEBT-9** | No candidate span population is committed anywhere | *(new in 8.18)* | open — **blocks MEAS-3** |
 | **MEAS-1** | Cov5 leaves the 757 no-span documents unchanged | M1 | asserted, never run |
 | **MEAS-2** | 30 more stratum-D records | M2 | delivered by P5's Cov7 |
-| **MEAS-3** | Classifier run-to-run variance | M3 | required before Cov4's gate can be judged |
+| **MEAS-3** | Classifier run-to-run variance | M3 | **specified 2026-08-23, not run — blocks Cov4** |
 | **MEAS-4** | Read `344592` for MURI topics | M4 | open |
 | **MEAS-5** | Discipline-stratified query and relevance set | M5 | open |
 | **MEAS-6** | Name a verified SAM-only opportunity | M6 | blocked on a credential — human task |
@@ -4066,6 +4091,7 @@ notes elsewhere.
 | **DEC-2 … DEC-12** | §13's remaining numbered decisions | §13 items 2–12 | open |
 | **DEC-13** | NASA ROSES standalone ingestion → build it as P8 | §13 item 13, "decision 13" | **taken 2026-08-18, implemented 2026-08-20** |
 | **DEC-14** | Whether ROSES appendix divisions A–F should map to `disciplines` facet values | *(new in 8.14; found closing P8)* | open — **not a P8 blocker** |
+| **DEC-15** | Authorize `anthropic` as a dependency | *(new in 8.18)* | open — **blocks MEAS-3 and Cov4** |
 
 *Not renumbered, deliberately:* **§18.3a**'s bare-numbered-family prohibition is a
 gate with four exit criteria rather than a §13-numbered decision, and it keeps its
@@ -4235,6 +4261,28 @@ Every item states its expected yield from the survey's stratified sample — *sa
 **Gate:** unreachable-record count re-derived and reported against the catalog, not the evidence cache · for each of Cov1–Cov3, records *reached* and records *yielding an accepted list* reported separately, because they are different numbers and conflating them is how the multi-attachment path was over-sold the first time · **fabricated publishable records still 0**, measured the way the D5 backfill generation measured it — by reading every title in the publishable set, not by sampling · **Cov6 verified by re-running `363526` end to end and observing `high`, not by reading the code** · §0.5 byte-identical with the flag off.
 
 ##### Cov4 in full — span filtering, with a review queue for the residual
+
+> **⚠ Blocked 2026-08-23, and the block is on evidence rather than effort.** MEAS-3
+> was attempted first, as the package requires, and cannot be run in this
+> environment: **no classifier credential** (isolated to the layer — SDK present,
+> endpoint present, `ANTHROPIC_API_KEY` absent), **no committed candidate population**
+> (§11's 114 spans came from the uncommitted D4/D5 backfill — **DEBT-9**), and
+> **`anthropic` is not an authorized dependency** (§0.4 rule 7 — **DEC-15**).
+>
+> **The gate's original wording is also now known to be unsatisfiable as written.**
+> The measured 1-of-62 flip rate carries a **Wilson 95% CI of [0.29%, 8.59%]**, which
+> straddles the 0.9% signal, so *"zero false rejections"* cannot be claimed from any
+> single pass however carefully run. `docs/MEAS3_RUN_DESIGN.md` specifies the
+> two-arm, R=5 experiment that replaces it, computes why R=5 (majority vote takes a
+> 1.6% per-call error to 0.076%; unanimity-to-accept takes it to 0.0004%), and fixes
+> the decision table **before** the run so the result cannot be reinterpreted
+> afterwards. **Cov4 stays unimplemented until that runs.**
+>
+> **The P6 bypass obligation is unchanged and explicitly not discharged.** `native`
+> (NASA ROSES) and `referenced` (Army TDAC) children bypass the classifier today only
+> because no classifier exists. That is not the same as proven, and when Cov4 lands
+> the boundary must be demonstrated **at the production call site**.
+
 
 **⚠ Narrowed in 8.7 to `inferred` and `inline` provenance only.** §5.1's ladder
 decides which spans reach this filter at all, and **`native` and `referenced`
