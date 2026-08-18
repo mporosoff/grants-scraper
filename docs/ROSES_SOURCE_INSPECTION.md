@@ -1,4 +1,10 @@
-# ROSES structured-source inspection — S1a
+# ROSES structured-source inspection — P6.1a *(legacy S1a)*
+
+> **Canonical IDs.** This document was written as `D⅝ S1` and is now **P6.1**;
+> its sections are **P6.1a** (source inspection) and **P6.1d** (final yield).
+> Standalone ROSES ingestion is **P8** (legacy `Package N`), taken as **DEC-13**.
+> The drift-gate defect is **BUG-7** (formerly debt `D7`). The single translation
+> table is `docs/TOPIC_LAYER_PLAN.md` §18.0.3.
 
 **Read before touching `scripts/sources/adapters/nasa_roses.py`.** §6.1's PDF
 sketches were written from assumption and were wrong twice; §0.4 rule 10 exists
@@ -56,7 +62,7 @@ So the recorded "NASA refuses the client" is a **client-side misdiagnosis**, and
 itself reopen the deferral: NSPIRES's *open-solicitations list* is still
 session-gated (`solicitations!init.do` returns a splash), which is what
 `adapters/nspires.py` documents. What is now reachable is the ROSES table
-surface, which is all S1 needs.
+surface, which is all P6.1 needs.
 
 ## 1. Stable discovery path — no year, no GUID, no amendment number
 
@@ -82,7 +88,7 @@ authoritative year. **Nothing transient is hard-coded**: not the year, not
 | `<tr>` | 70 (1 header + **69** elements) | 71 (1 header + **70**) |
 | Columns | `APPENDIX` · `PROGRAM` · `NOI or Step-1 Due Date [2]` · `(Step-2) Proposal Due Date` | identical |
 
-**Table 3 is the substrate**, because appendix order *is* the hierarchy S1 is
+**Table 3 is the substrate**, because appendix order *is* the hierarchy P6.1 is
 meant to preserve. Table 2 carries the same element set in a different order and
 is used **only for corroboration and health checking** — never parsed into
 records.
@@ -179,7 +185,7 @@ Two representations, at different granularities:
 
 ---
 
-# S1d — final yield
+# P6.1d — final yield
 
 **Measured 2026-08-17 against the committed catalog, after the reachability
 sweep.** Matching is on the **solicitation number** (`NNH\d{2}ZDA\d{3}N-<CODE>`),
@@ -206,7 +212,7 @@ can never mistake our inference for NASA's statement.
 
 ### A. Relationship recovery — 10 elements
 
-Ten of the 63 already exist as Funding Finder records. For these, S1 supplies
+Ten of the 63 already exist as Funding Finder records. For these, P6.1 supplies
 something the segmentation path cannot: **an authoritative parent→child
 relationship, published by the awarding agency**, at the `native` rung.
 
@@ -233,7 +239,7 @@ should not assume solicitation numbers are always present on both sides.
 
 ### The previously-category-(a) question, answered — the number is zero
 
-D⅝'s gate asks which of the recovered records were previously **category (a)**
+P6's gate asks which of the recovered records were previously **category (a)**
 (`docs/FAMILY_TAXONOMY.md` §1: *read, and no list of fundable subdivisions
 exists*), because that is the number that says whether structured sources reach
 the outward-pointing (a) population. **Verified against the classification
@@ -246,12 +252,12 @@ records 2026-08-18: none of the 10 were (a).**
 | `docs/CORPUS_CENSUS.md` fetch-failure list | **all 10** appear as `ConnectionReset` rows against NASA hosts — again (e), and this is the list the (e) judgement rests on |
 | The 53-document miss-cause sample | The other 9 were never inside it, so they carried **no** category at all — which is why the answer is 0 rather than a small number |
 
-**So S1 reached 0 previously-(a) records, and the (a) population remains
-unmeasured by structured sources.** What S1 reached is the **(e)** population —
+**So P6.1 reached 0 previously-(a) records, and the (a) population remains
+unmeasured by structured sources.** What P6.1 reached is the **(e)** population —
 records whose bytes never arrived — which is exactly what the TLS
 misdiagnosis had created. That is a real result and a *different* result from the
 one the gate was written to look for: §6.7·0's claim that structured sources
-*may* reach part of the 62% (a) population is still **untested**, and S2 is the
+*may* reach part of the 62% (a) population is still **untested**, and **P6.2** is the
 next chance to test it. Recorded here so no later session reads "10 recoveries"
 as evidence about (a).
 
@@ -264,11 +270,11 @@ emitted.** `parse()` returns nothing, so this population cannot reach
 
 **Only 2 of the 53 are open.** The other 51 are `Not Solicited This Year`, TBD,
 or past their date. The headline number overstates the live opportunity by
-roughly 25×, and that asymmetry is what §13 decision 13 was decided on.
+roughly 25×, and that asymmetry is what DEC-13 was decided on.
 
-> **§13 decision 13 is TAKEN (2026-08-18): build it, as
-> `Package N — NASA ROSES Catalog Source` (§18.1), immediately after S1 and
-> before D⅝ S2.** The conclusion is **not** "add 53 records". It is that the
+> **DEC-13 is TAKEN (2026-08-18): build it, as
+> **P8** — NASA ROSES Catalog Source (§18.1), immediately after P6.1 and
+> before P6.2.** The conclusion is **not** "add 53 records". It is that the
 > complete program-element inventory is **re-evaluated automatically on every
 > scheduled catalog refresh**: an unmatched element enters the catalog when it
 > becomes current/actionable and stays out of the public current catalog while
@@ -277,7 +283,7 @@ roughly 25×, and that asymmetry is what §13 decision 13 was decided on.
 > inclusion; if any of the other 51 is solicited in a later amendment or cycle,
 > the scheduled refresh finds it without anyone remembering to look.
 >
-> **Known gap until Package N ships:** those **2 currently open unmatched
+> **Known gap until P8 ships:** those **2 currently open unmatched
 > elements** are NASA solicitations that Funding Finder does not list.
 
 ## What this is not
@@ -288,7 +294,7 @@ Population B is *catalog records that do not exist yet* — a sourcing question
 about which opportunities the project lists at all. Combining them would count a
 sourcing gain as a segmentation gain.
 
-**§1.1 is unchanged by S1.** Population A recovers relationships for 10 records
+**§1.1 is unchanged by P6.1.** Population A recovers relationships for 10 records
 that were already inside the survey's denominator as non-hits; converting them
 from "unreadable" to "native children" is a provenance and quality improvement,
 not a change to any stratum rate, interval or denominator. If it moves §1.1 at
@@ -299,29 +305,29 @@ all it does so through 10 records out of 1,472, which is inside the noise of a
 
 - Adapter `enabled = False`, so `opportunities.js` is byte-identical.
   **Re-verified 2026-08-18 three ways**, because the gate script was red that day
-  for a reason that has nothing to do with S1 (see the D7 note below): (i) 18 of
+  for a reason that has nothing to do with P6.1 (see the BUG-7 note below): (i) 18 of
   20 artifacts matched the baseline unchanged, (ii) the two that differed produced
-  **byte-identical** hashes on the pre-S1 tree at `7cece6b`, and (iii) pinning the
+  **byte-identical** hashes on the pre-P6.1 tree at `7cece6b`, and (iii) pinning the
   build's UTC date to the baseline's freeze date reproduced **all 20** committed
-  fingerprints exactly. **With D7 fixed, `tools/verify_no_drift.sh` exits 0
+  fingerprints exactly. **With BUG-7 fixed, `tools/verify_no_drift.sh` exits 0
   directly — 22 artifacts unchanged, baseline never re-frozen.**
 - The 53 standalone elements were **not** emitted.
 - No cache committed.
-- S2 and S3 not started.
+- P6.2 and P6.3 not started.
 - No pattern family added or resurrected; `roses_element` stays retired, and
   the adapter never calls `segment_document` — proven by a test that patches it
   and asserts zero calls.
 
-## The no-drift gate is date-dependent, and S1 is not the cause
+## BUG-7 — the no-drift gate was date-dependent, and P6.1 is not the cause
 
-**Diagnosed 2026-08-18 while closing D⅝'s §0.5 clause.** `tools/verify_no_drift.sh`
+**Diagnosed 2026-08-18 while closing P6.1's §0.5 clause.** `tools/verify_no_drift.sh`
 fails on a clean tree with exactly two artifacts differing — `feeds/changes.json`
-and `feeds/changes.xml` — and it fails the same way at the pre-S1 commit.
+and `feeds/changes.xml` — and it fails the same way at the pre-P6.1 commit.
 
 | Step | Result |
 |---|---|
 | Drift gate on `topic-layer` (`c64576e`) | exit **1**, `feeds/changes.json` + `feeds/changes.xml` differ |
-| Same gate in a worktree at `7cece6b` (pre-S1) | exit **1**, **the same two hashes**, `4e21a05f…` / `9795c888…` |
+| Same gate in a worktree at `7cece6b` (pre-P6.1) | exit **1**, **the same two hashes**, `4e21a05f…` / `9795c888…` |
 | Normalized text diff, restamped build vs today's build | **only two lines differ** — two event `id` values |
 | Rebuild with the catalog's `generated_at` date pinned to the baseline's UTC freeze date (`2026-08-17`) | all 20 fingerprints match the committed baseline **exactly**, including `0f2f6160…` / `605b38c8…` |
 
@@ -337,12 +343,12 @@ axis on the same day boundary that the fix did not reach.**
 nightly is supposed to emit a new event id for a new day. What is broken is the
 gate's hermeticity: it can only be green on the day its baseline was frozen.
 
-**Fixed 2026-08-18 (§15 debt D7, full record in `docs/TOPIC_LAYER_PLAN.md` §8.4).**
+**Fixed 2026-08-18 (BUG-7, full record in `docs/TOPIC_LAYER_PLAN.md` §8.4).**
 `tools/hermetic_build.sh` now writes a `.work/` copy of the catalog with
 `generated_at` pinned and hands that to `build_changes`, so `changed_at` and every
 event id are deterministic. Production semantics are unchanged, no `scripts/` file
 was touched, the event ids are still **not** normalized in `fingerprint.py` — an
 opaque content hash must stay opaque — and the pin is the baseline's own UTC
 freeze date, so **no re-freeze was needed**: `tools/verify_no_drift.sh` returns
-**exit 0, 22 artifacts unchanged**. `Package N`'s gate can now tell an intentional
+**exit 0, 22 artifacts unchanged**. P8's gate can now tell an intentional
 catalog change from manufactured drift.

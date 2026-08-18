@@ -2,28 +2,42 @@
 
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
-Status: in progress · Version 8.11 · Written 2026-08-15 · **Revised 2026-08-18 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
+Status: in progress · Version 8.12 · Written 2026-08-15 · **Revised 2026-08-18 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
 
-> **Start at §18.** It defines the minimum path — the **ten** work packages that are actually being built (A–G plus **D½ Coverage**, added in 8.2, **D¾ Forms**, added in 8.5, and **N NASA ROSES Catalog Source**, added in 8.11) — and lists what is deferred and what it costs. **The next implementation task is `Package N`** (§13 decision 13, §18.1). §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
+> **Start at §18, and read §18.0 first.** §18 defines the minimum path — the **eleven** work packages **P1 … P11** — and lists what is deferred and what it costs. **§18.0 is the canonical namespace**: package IDs, the `BUG-*` / `MEAS-*` / `DEC-*` / `DEBT-*` prefixes, the migration table for every legacy label (`Package A–G`, `D½`, `D⅝`, `D¾`, `S1–S3`, `Package N`, bare `D#`, `M#`), the current ordered path, and a diagram. **The next implementation task is `P8` — NASA ROSES Catalog Source** (DEC-13). §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
+>
+> **Legacy labels in the revision notes below are historical.** They record what a past session actually did and are left as written; translate any of them through §18.0.3 rather than assuming a bare `D5` or `S1` still names live work.
 >
 > **8.3 changes one thing structurally: the unit of judgment moves from the sibling *set* to the individual *span* (§6.4b), because a set-level verdict lets two policy paragraphs delete 70 DOE programmes.** §11 is reopened for the precision half only, on a measured run; its recall argument is untouched.
 >
 > **8.4 closes the two blocking storage decisions.** `MAX_TERMS` stays at 400 and subtopics ship in a lazily-loaded `data/subtopics.js` sidecar — one question, not two, once you measure that 60.3% of a cache record is a term map the browser never reads as content. **Nothing now blocks committing a cache except running the backfill again.** Every rate quoted against `docs/CORPUS_CENSUS.md`'s 20 documents is still superseded by `docs/COVERAGE_SURVEY.md` (§1.1).
 >
-> **8.11 takes §13 decision 13 and schedules it as a named package.** NASA ROSES
-> standalone ingestion is **built**, as **`Package N — NASA ROSES Catalog Source`**,
-> **after D⅝ S1 and before D⅝ S2** (§18.1). The conclusion is *not* "add 53
+> **8.12 replaces five competing label namespaces with one.** Packages are now
+> **P1 … P11** (§18.0.1), with **P6.1/P6.2/P6.3** for the structured-source items and
+> **P8** for the NASA catalog source; non-package items are **BUG-\*** / **MEAS-\*** /
+> **DEC-\*** / **DEBT-\***, preserving the legacy digit. §18.0.3 is the single
+> migration table, §18.0.4 the single ordered path, §18.0.5 a diagram, and §15 is one
+> ledger with exactly one authoritative entry per item. **Nomenclature only — no
+> priority, gate, measured number or conclusion moved.** Two collisions found while
+> doing it, both recorded rather than papered over: legacy `D7` named **both** a
+> closed P4 item **and** the gate defect now called **BUG-7**, and legacy `F1`–`F4`
+> named **both** Package F's items **and** the measured *form* names. A stale
+> duplicate P4.5 line that read as open work is re-marked done.
+>
+> **8.11 takes DEC-13 and schedules it as a named package.** NASA ROSES
+> standalone ingestion is **built**, as **`P8` — NASA ROSES Catalog Source**
+> (legacy `Package N`), **after P6.1 and before P6.2** (§18.1). The conclusion is *not* "add 53
 > records": the **whole 63-element inventory is re-evaluated on every scheduled
 > refresh**, so an element enters when it becomes actionable and stays out while it
 > is not — which makes the 53 a **maintained candidate inventory** rather than a
-> backlog awaiting a human, and makes **2** of them today's candidates. **S2 is
-> approved in principle and blocked until `Package N` is complete; S3 stays
-> unscheduled until S2 is built and measured.** D⅝'s gate is closed clause by
+> backlog awaiting a human, and makes **2** of them today's candidates. **P6.2 is
+> approved in principle and sequenced after P8; P6.3 stays
+> unscheduled until P6.2 is built and measured.** P6.1's gate is closed clause by
 > clause against repository evidence, which produced two corrections: the
-> previously-**(a)** count is **0** (S1 reached the **(e)** population), and the
+> previously-**(a)** count is **0** (P6.1 reached the **(e)** population), and the
 > no-drift gate is **date-dependent** and red on any day after its freeze —
-> **debt D7**, not S1's doing, and a precondition for `Package N`'s gate. **D7 is
-> fixed in the same session** by pinning `generated_at` in the hermetic build's
+> **BUG-7** (formerly debt `D7`), not P6.1's doing, and a prerequisite for P8's
+> gate. **BUG-7 is fixed in the same session** by pinning `generated_at` in the hermetic build's
 > `.work/` copy, with production semantics and the committed baseline both
 > untouched (§8.4).
 > `docs/ROSES_SOURCE_INSPECTION.md`'s stale `SECLEVEL=1` parser consequence is
@@ -48,7 +62,7 @@ Status: in progress · Version 8.11 · Written 2026-08-15 · **Revised 2026-08-1
 **An outside audit argued that this plan over-weights generic document inference
 relative to hierarchies agencies already publish. Substantially accepted**, and
 the acceptance is structural rather than cosmetic: §5.1 ranks provenance, §6.7·0
-routes to the least-ambiguous source first, §18.1 inserts package D⅝ ahead of
+routes to the least-ambiguous source first, §18.1 inserts package D⅝ (**now P6**) ahead of
 all remaining recogniser work, and Cov4 narrows to the inference it was designed
 to check.
 
@@ -59,7 +73,7 @@ agency: the family named for ROSES was **retired with zero correct matches in 90
 read records** (§6.3), its nine plausible umbrellas all fail at fetch time, and
 nobody had tried Table 3.
 
-**Two corrections to the audit, recorded because they change what D⅝ can claim.**
+**Two corrections to the audit, recorded because they change what P6 (legacy D⅝) can claim.**
 
 1. **It cites 42% correct-acceptance. That figure is superseded and was never a
    corpus rate.** 42% was 5 of the **12 enumerating documents in the hand-picked
@@ -90,17 +104,17 @@ nobody had tried Table 3.
    agreements, formula allotments — but **how much is unknown, and the earlier
    claim that structured sources "do not address the 62%" was an overreach.**
 
-   > **So D⅝ addresses an orthogonal population**, not a subset and not a
+   > **So P6 addresses an orthogonal population**, not a subset and not a
    > superset: records whose useful child structure is published **more
    > explicitly or externally** than the solicitation states it. That includes
    > umbrella parents generic inference misses entirely *and* an unmeasured share
    > of the (a) records that point outward.
    >
-   > **What must not happen is counting D⅝'s gains as improved generic
+   > **What must not happen is counting P6's gains as improved generic
    > segmentation.** They are a different mechanism reaching a different
    > population, and folding them into an acceptance rate would make the
    > recogniser work look better than it is — the exact error §17.8 exists to
-   > prevent. Report D⅝'s yield against its own denominator, and say which
+   > prevent. Report P6's yield against its own denominator, and say which
    > records were previously (a).
 
 ---
@@ -176,7 +190,7 @@ Package C opened with a corpus census (`docs/CORPUS_CENSUS.md`): 20 notice docum
 | §6.4 rule 2: "ordinals monotonically increasing with ≤1 gap", universally | **Conditional on family type.** Ordinal families unchanged; structural families use §6.4a — sibling coherence, span-length distribution, title character, siblings-per-parent | A family with no ordinal cannot satisfy a rule about ordinals, and rule 2 is what proves a set "behaves like an enumeration" |
 | §6.7: `DE-FOA-0003600` "does not enumerate research areas… the text genuinely is not there" | **False.** It carries **286 bookmarks** including `2. Basic Energy Sciences (BES) → (a) Materials Chemistry … (c) Synthesis and Processing Science` | Nobody had opened the file. The claim was inferred from the document's reputation as an umbrella |
 | §18.2: the `program_taxonomy` deferral costs the DOE BES omnibus all child records — "the most painful single deferral in this table" | **Substantially reduced.** The children, their descriptions, their page anchors and their topic tagging are reachable by Layer A + §6.3a, as ordinary `inline` subtopics. Program managers, stable URLs, deeper taxonomy levels and cross-year identity still need the scraper | The premise the deferral rested on was the §6.7 error above |
-| Package D begins with pattern tuning | **Begins with two segmenter fixes** (D0a, D0b), gated before any tuning | Both defects currently present as *pattern* failures. Tuning against that reading would relax rule 2 or widen a family — §18.3's most damaging possible change |
+| Package D begins with pattern tuning | **Begins with two segmenter fixes** (D0a, D0b — now **P4.0a**, **P4.0b**), gated before any tuning | Both defects currently present as *pattern* failures. Tuning against that reading would relax rule 2 or widen a family — §18.3's most damaging possible change |
 | `dod_topic` — "Typical source: MURI, ONR, ARO" | **Re-verified 2026-08-17.** MURI is absent from the *stored* corpus — zero matches across all 1,475 catalog records and all 958 evidence entries — but a **live Grants.gov search returns one record, `344592` (`W911NF-23-S-0001`, DEVCOM ARL BAA), which IS in the catalog**, with the term in the attachment text rather than in the detail API. So "absent entirely" was an artifact of what we store, and it is **a fact about this corpus, not evidence that MURI requires SAM.gov** (§18.2). What stands, and is all this row needs: **there is no MURI document validating this family.** The family is validated only by the AFOSR DEPSCoR notice's identical `Topic N:` convention | MURI is SAM.gov-only, and that adapter is deferred (§18.2) |
 
 **Two things this revision deliberately does not do.** It does not cover the AFOSR shape — 39 named portfolios with no outline at all — which needs a different mechanism, sketched as `label_run` in §6.3a and left unbuilt with its risks stated. And it does not calibrate §6.4a's six numeric thresholds, which are reasoned starting points that package D must fit against the census corpus. This document has twice recorded numbers that proved wrong when run (§6.1's library versions, §6.2's font-size branch); these are flagged as unmeasured rather than presented as settled.
@@ -234,8 +248,8 @@ The existing subject-area meaning of "topic" is untouched. Do not rename anythin
 | Before anything | §0 **in full**, then `docs/RECON.md`, then **§18**, then §14 glossary | §0 is a gate. RECON is what the code actually does. §18 is what is being built. §14 defines vocabulary used everywhere else. |
 | Deciding whether to proceed | §1–§4 | Problem, scope, and the constraints you cannot violate |
 | Starting any package | §8, §9, §17.6, then §15 | Discipline, Actions safety and the cross-platform rules **before** the item list |
-| Package B or D | §5, §6 in full | Data model and segmentation. This is the densest material in the document. |
-| Package E or F | §7 and §13.1 in full | Every integration point, and the storage decision |
+| P2 or P4 | §5, §6 in full | Data model and segmentation. This is the densest material in the document. |
+| P9 or P10 | §7 and §13.1 in full | Every integration point, and the storage decision |
 | Stuck or unsure where you are | §15 checklist, then §12 risk register | The checklist is the single source of truth for progress |
 
 **If you only remember three things:** §0.5 (flag off means byte-identical output), §8.1 (additive only, never rewrite), §9.3 (new steps exit 0 on benign outcomes).
@@ -705,7 +719,7 @@ globalThis.FF_SUBTOPICS = {
 
 Three reasons this is the right shape, and one hazard it inherits:
 
-- **It is the same structure the browser already knows how to score.** `assets/search-retrieval.js` reads `postings`, `document_lengths`, `average_document_length` and `document_count`; a second index of that shape needs no new scorer, only the cross-corpus normalization E1 must prototype (§13.1).
+- **It is the same structure the browser already knows how to score.** `assets/search-retrieval.js` reads `postings`, `document_lengths`, `average_document_length` and `document_count`; a second index of that shape needs no new scorer, only the cross-corpus normalization P9.1 must prototype (§13.1).
 - **It is much smaller than storing the map per record.** A term appearing in forty spans is one posting list, not forty dictionary entries — and the tokenizer contract in this section is what makes those keys collide correctly in the first place.
 - **It keeps §12's ceiling meaningful.** The ceiling bounds what a card costs; retrieval data measured in a separate index against a separate budget is the only way that number stays honest.
 - **Hazard, inherited from `build_catalog`:** `postings` and `document_lengths` are **positional** into `records`. Anything that sorts, filters or dedups `records` between index build and serialization silently corrupts every posting. Build and serialize in one write, and never re-order afterwards (§4 records the same trap for the parent catalog).
@@ -1125,7 +1139,7 @@ Each: id, regex with an ordinal capture group, and **the record that validates i
 | `technical_category` | `Category\s+(\d{1,2})\s*[:–—]` | `356623` (ARPA-E SCALEUP, `CATEGORY 1:`–`CATEGORY 7:`) |
 | `thrust` | `Thrust\s+(?:Area\s+)?(\d{1,2})` | `356612` (DTRA) — **fires, but at the wrong granularity; see below** |
 
-**Three of these six were written from measurement, in D3, from documents the census had already read: `component`, `focus_area`, `technical_category`. All three have corpus support.** That is the evidence behind §17.8.
+**Three of these six were written from measurement, in P4.3, from documents the census had already read: `component`, `focus_area`, `technical_category`. All three have corpus support.** That is the evidence behind §17.8.
 
 **`thrust` is kept on notice, not on merit.** On `356612` it matches the *container* `Thrust Area 1` — one item — while the fundable list is `Topic A1` through `Topic A7` beneath it. A family that matches the umbrella instead of its topics segments one span where seven exist. §18.1 carries the repair as a work item; until then this row is a known-wrong-granularity match, not a validation.
 
@@ -1152,7 +1166,7 @@ Each: id, regex with an ordinal capture group, and **the record that validates i
 > - **11 of the 12 re-fetched ROSES element pages reach §6.4 rule 1's three-candidate floor** — and every match is wrong. A page for element `A.13` matches `A.13 Accelerating Earth Solutions Close` (a button), `A.1 Earth Science Research Program Overview (.pdf)` (a download link) and its own PDF link. Each page **is** one element and cannot contain a sibling set, so the family would emit UI chrome as subtopics on a record with no subdivisions.
 > - **Table 3 — the one surface where the codes genuinely form a set — yields `roses_element` matches: 0.** The codes sit in table cells, not line-initial with a title following.
 >
-> **No real document validates the family under §17.8. Retirement stands, on better evidence than before**: the earlier case was zero correct matches in 90 read records, and it is now zero correct matches plus a fresh 11-of-12 false-positive rate on the exact corpus the family exists for. The set of ROSES codes is reached by §18.1 D⅝'s `native` adapter, which needs no regex.
+> **No real document validates the family under §17.8. Retirement stands, on better evidence than before**: the earlier case was zero correct matches in 90 read records, and it is now zero correct matches plus a fresh 11-of-12 false-positive rate on the exact corpus the family exists for. The set of ROSES codes is reached by **P6.1**'s `native` adapter (§18.1), which needs no regex.
 
 **Retiring is not deleting the knowledge.** If NSPIRES ships, `roses_element` has a documented shape and a reason to return — with a validating ROSES document, per §17.8. The same applies to the other six.
 
@@ -1290,9 +1304,9 @@ This is the quantitative replacement for "the ordinals count up," and it is the 
 
 **2d — Siblings per parent.** Each contributing parent has **3–60** children at the chosen depth, and the union is 3–60. A parent with two children is not an enumeration; a parent with 200 is a glossary.
 
-> **These six thresholds — 1.5, 40%, 60%, 2 tokens, 0.6, 12–120 — are stated to be calibrated, not because they have been measured.** They are reasoned starting points, and this document has now twice recorded numbers that turned out wrong when run (§6.1's versions, §6.2's size branch). Package D must fit them against the census corpus in `docs/CORPUS_CENSUS.md` and record the fitted values here, with the false-positive count on the eight documents that enumerate nothing as the headline number. A structural family that admits any of those eight is worse than no structural family at all.
+> **These six thresholds — 1.5, 40%, 60%, 2 tokens, 0.6, 12–120 — are stated to be calibrated, not because they have been measured.** They are reasoned starting points, and this document has now twice recorded numbers that turned out wrong when run (§6.1's versions, §6.2's size branch). P4 must fit them against the census corpus in `docs/CORPUS_CENSUS.md` and record the fitted values here, with the false-positive count on the eight documents that enumerate nothing as the headline number. A structural family that admits any of those eight is worse than no structural family at all.
 
-**Fitted in D1 and D5, and then found to be the wrong instrument — read this before touching a threshold again.** D1 fitted three of the six; D5 fitted a process-vocabulary veto at 0.07 (§6.4 rule 8), demoted `heading_font` to `low` on 0/1 measured precision, and added a dominant-code-form trim. That work took fabricated publishable records from 54 to 0 and cost nothing legitimate, and it remains correct. What it cannot do is separate the last case:
+**Fitted in P4.1 and the D5 backfill generation, and then found to be the wrong instrument — read this before touching a threshold again.** P4.1 fitted three of the six; the D5 backfill fitted a process-vocabulary veto at 0.07 (§6.4 rule 8), demoted `heading_font` to `low` on 0/1 measured precision, and added a dominant-code-form trim. That work took fabricated publishable records from 54 to 0 and cost nothing legitimate, and it remains correct. What it cannot do is separate the last case:
 
 > **AFRL PACER (`349554`) yields 18 correct topics — `Topic 1 – Aero-Structures` through `Topic 18` — and every one of them is suppressed.** It resolves at Layer D (`numbered`), which is `low`; it would be won from a secondary attachment, which §6.6 caps at `low`; and `low` never publishes. The extraction is right, was read span by span, and is invisible.
 
@@ -1300,7 +1314,7 @@ This is the quantitative replacement for "the ordinals count up," and it is the 
 
 **⚠ 8.5 — two acceptance rules now have named corpus counter-examples, and neither is a threshold to tune.**
 
-**Rule 2's monotonic-ordinal test rejects a real list whose counter restarts.** `330175` (Air Force Academy) enumerates 24 research centres and departments in **three groups, each restarting at `1.`** — `1. Aeronautics` … `15. Center for Space Situational Awareness Research`, then `1. Reserved` … `3. Eisenhower Center`, then `1. Department of Behavioral Sciences and Leadership` onward. Read as one sequence the ordinals run 1→15, 1→3, 1→6, which rule 2 refuses outright. This is not the TOC-duplication artifact D0a/D0b fixed; the document genuinely restarts its counter per section, and any F1 mechanism has to model grouped sequences rather than one monotonic run.
+**Rule 2's monotonic-ordinal test rejects a real list whose counter restarts.** `330175` (Air Force Academy) enumerates 24 research centres and departments in **three groups, each restarting at `1.`** — `1. Aeronautics` … `15. Center for Space Situational Awareness Research`, then `1. Reserved` … `3. Eisenhower Center`, then `1. Department of Behavioral Sciences and Leadership` onward. Read as one sequence the ordinals run 1→15, 1→3, 1→6, which rule 2 refuses outright. This is not the TOC-duplication artifact P4.0a/P4.0b fixed; the document genuinely restarts its counter per section, and any F1 mechanism has to model grouped sequences rather than one monotonic run.
 
 **Rule 1's three-item floor is the binding constraint on F6, not the pattern.** Three of the four F6 records in 90 are **two-item lists** — `332127` and `334079` (EDA regional programmes) and `346815` (`a. Public Works`, `b. Economic Adjustment Assistance`) — and `structural_siblings` already sees all three, bookmarked, and is refused by §6.4a rule 2d's 3–60 cardinality window and §6.4 rule 1 together. **So F6 pattern work buys nothing.** Lowering the floor to two remains **rejected** — `docs/COVERAGE_SURVEY.md` measured it as the cheapest and most dangerous change available, admitting every two-item administrative pair in 1,475 notices — which means F6's ~4 records are reachable only through the span-level architecture in §6.4b, where a two-item set can be admitted and then filtered member by member. Recorded so a later session does not spend pattern effort on it.
 
@@ -1308,7 +1322,7 @@ This is the quantitative replacement for "the ordinals count up," and it is the 
 
 **Added 8.3.** Everything above judges a **set**: rules 1–8 pass or fail all candidates together, and §6.2's confidence tier is likewise assigned to the whole result. That is the right granularity for *"did segmentation find an enumeration?"* and the wrong one for *"which of these should a PI see?"* — and the corpus shows the cost of conflating them in both directions.
 
-**The false-positive direction.** `360678` — DOE Office of Science, **70 programmes spanning all six program offices: ASCR, BES, BER, FES, HEP and NP**, which is applied mathematics and computer science through materials chemistry, environmental and biological systems, plasma physics, particle physics and nuclear physics. It is the broadest single extraction in this corpus by disciplines served (§17.9), and `(q) Catalysis Science` is one of its 70 — contains two administrative siblings, `Multi-Institutional Teams` and `Open Science`. Package D measured them; §6.3a's set-level veto could not catch them without also rejecting the 68 real ones (5 of 26 is 19%, under the 25% threshold). A set-level classifier reading the same evidence **condemned the entire set over those two members** (§11, Haiku). The same model at span level isolated exactly the two and passed the other 68. **Two policy paragraphs should not be able to delete Catalysis Science, and under a set-level verdict they can.**
+**The false-positive direction.** `360678` — DOE Office of Science, **70 programmes spanning all six program offices: ASCR, BES, BER, FES, HEP and NP**, which is applied mathematics and computer science through materials chemistry, environmental and biological systems, plasma physics, particle physics and nuclear physics. It is the broadest single extraction in this corpus by disciplines served (§17.9), and `(q) Catalysis Science` is one of its 70 — contains two administrative siblings, `Multi-Institutional Teams` and `Open Science`. P4 measured them; §6.3a's set-level veto could not catch them without also rejecting the 68 real ones (5 of 26 is 19%, under the 25% threshold). A set-level classifier reading the same evidence **condemned the entire set over those two members** (§11, Haiku). The same model at span level isolated exactly the two and passed the other 68. **Two policy paragraphs should not be able to delete Catalysis Science, and under a set-level verdict they can.**
 
 **The false-negative direction.** `349554` (AFRL PACER) yields 18 correct topics at `low`, and `low` never publishes — so all 18 are suppressed to guard against fabrications that live in *other* `low` results. Judged individually, all 18 pass (18/18 on both models, §11).
 
@@ -1489,8 +1503,8 @@ with the credibility gate above ensuring "the higher rung wins" cannot mean "a
 broken higher rung wins".
 
 **Why this changes the order of work and not just the vocabulary.** Every
-mechanism in §18.1's D¾ operates at rung 4. Rung 1 for a given parent is
-strictly better evidence *and*, for the sources named in §18.1 D⅝, strictly
+mechanism in **P7** (§18.1) operates at rung 4. Rung 1 for a given parent is
+strictly better evidence *and*, for the sources named in **P6**, strictly
 cheaper to parse — a table with one row per element against a heuristic over a
 200-page PDF. **The plan had rung 4 scheduled and rung 1 unscheduled.** That is
 the inversion, and §18.1 now fixes it.
@@ -1503,8 +1517,9 @@ agreements, single-programme NOFOs, formula allotments. **What is not yet known
 is where the line falls.** `docs/FAMILY_TAXONOMY.md`'s 62% category-(a) figure
 measured the *material read* — solicitations and their attachments — and several
 of those records point outward explicitly (`345241`, `356605`, `362036`,
-`362711`). Whether an agency source exists for them is **unmeasured**, and D⅝'s
-S1d is the first evidence that will bear on it.
+`362711`). Whether an agency source exists for them is **unmeasured**. **P6.1d
+is the first evidence that bears on it, and it came back zero — P6.1 reached the
+(e) population, not (a) — so P6.2 is the first real test** (§18.0.4, §15).
 
 
 **Correction to v6.2.** This section previously opened by calling the DOE Office of Science omnibus "the single largest remaining gap." It is not a gap — it is the single most-worked case in the repository. `scripts/sources/discoverability.py` carries two rules for it (`doe-office-of-science-umbrella`, `doe-basic-energy-sciences`), keyed on both `DE-FOA-0003600` and the title phrase "office of science financial assistance," attaching eleven Topic-facet tags and nineteen searchable terms, with `science.osti.gov/bes/Research` and `.../csgb/Research-Areas/Catalysis-Science` cited as evidence. A search for "catalysis" finds that FOA today.
@@ -1546,7 +1561,7 @@ That is program-office → program granularity, in the notice, reachable by **La
 
 **What the notice does *not* supply, and this part of the original claim survives:** program-manager identity and contact, stable per-program URLs under `science.osti.gov`, and any taxonomy level deeper than the notice prints.
 
-**Resolved by measurement (D2, 2026-08-16).** All 286 bookmarks were read. The tree is **9 / 46 / 167 / 64 nodes across four levels**, and **`(q) Catalysis Science` is present at level 2, page 46, under `2. Basic Energy Sciences (BES)`** — the only `/catalys/i` bookmark in the document. BES carries 24 sub-programs at that level, including `Separation Science`, `Photochemistry and Radiation Chemistry` and `Photosynthetic Systems`. So the granularity this project's user needs is in the notice, at a citable page, and §18.2's reassessment below stands rather than being conditional. Full tree in `docs/CORPUS_CENSUS.md`.
+**Resolved by measurement (P4.2, 2026-08-16).** All 286 bookmarks were read. The tree is **9 / 46 / 167 / 64 nodes across four levels**, and **`(q) Catalysis Science` is present at level 2, page 46, under `2. Basic Energy Sciences (BES)`** — the only `/catalys/i` bookmark in the document. BES carries 24 sub-programs at that level, including `Separation Science`, `Photochemistry and Radiation Chemistry` and `Photosynthetic Systems`. So the granularity this project's user needs is in the notice, at a citable page, and §18.2's reassessment below stands rather than being conditional. Full tree in `docs/CORPUS_CENSUS.md`.
 
 The row above has been narrowed to NSF division core solicitations, which remain genuinely outward-pointing and are unaffected by this correction.
 
@@ -1728,7 +1743,7 @@ no errors — and the parser extracted **zero rows** because the page was
 restyled. Every existing health check passes: the fetch worked, nothing raised,
 `no_layer_accepted` is a normal outcome (§9.3), and zero subtopics is
 indistinguishable from a notice that genuinely has none. **Silent incompleteness
-is the characteristic failure of structured sources**, and D⅝ is about to add
+is the characteristic failure of structured sources**, and P6 is about to add
 three of them.
 
 A canary is therefore an assertion about **shape, not content**: not *"this
@@ -1753,8 +1768,8 @@ which is the defect §9.3 records for the document-evidence step.
 
 **This supersedes §18.2's deferral of `expected_solicitations`.** That line reads
 *"no assertion that a known umbrella silently vanished from a healthy source"* and
-treats it as a nice-to-have. With D⅝ adding native and referenced sources, it is
-the mitigation for §12's scraper-fragility row and ships **with S1**, not after.
+treats it as a nice-to-have. With P6 adding native and referenced sources, it is
+the mitigation for §12's scraper-fragility row and shipped **with P6.1**, not after.
 
 `data/expected_solicitations.json`:
 
@@ -2154,7 +2169,7 @@ Normalizing rather than fixing the three writers is deliberate: `build_feeds.py`
 
 #### The third axis: a date baked into a hash, fixed at the input
 
-**Added 2026-08-18, closing debt D7.** Time, platform and *date rollover* are three
+**Added 2026-08-18, closing BUG-7** (formerly debt `D7`; not P4.7)**.** Time, platform and *date rollover* are three
 separate axes, and the gate has now been broken by each. `fingerprint.py` handles
 the first two by normalizing what it can see. The third defeated it:
 
@@ -2282,7 +2297,7 @@ So there is no labelled baseline to freeze, and producing one means a labelling 
 > relevance set does need labels**, and stratifying it is the harder half:
 > §13 decision 4 and issues #8/#9 own that, and it should be built against
 > these same populations rather than whoever is available to label. Tracked as
-> §15 debt **M5**.
+> §15 **MEAS-5**.
 
 **Replacement: a frozen query set, compared on result IDs and ranks.** This needs no relevance judgments at all. It does not measure whether the results are *good* — it measures whether they *changed*, which is the actual question §0.5 asks and the only one that can be answered without labels.
 
@@ -2343,7 +2358,7 @@ The reason is arithmetic, not a bug: the frozen catalog holds **5 records**, so 
 
 Two consequences, both for later packages rather than for A6:
 
-- **Package E must not read a green flag-off gate as "ranking is unchanged."** E is where cross-corpus score normalization lands, and reordering is exactly the failure mode it risks. Read the reported **displacement** numbers there, and consider gating on non-zero displacement for the duration of E — the harness already computes and prints it, so this is a threshold decision, not new code.
+- **P9 must not read a green flag-off gate as "ranking is unchanged."** E is where cross-corpus score normalization lands, and reordering is exactly the failure mode it risks. Read the reported **displacement** numbers there, and consider gating on non-zero displacement for the duration of E — the harness already computes and prints it, so this is a threshold decision, not new code.
 - The alternative — pointing the query set at a larger catalog — reintroduces the problem §8.5 exists to avoid, because the live catalog changes nightly and its baseline would drift every run. The frozen fixture is still the right catalog; it is the *gating metric* that needs a second look when scores start moving.
 
 **The labelled path is already tracked, and it is not this project's to build.** Two open issues cover exactly the ground `evaluate_phase2.py` needs and does not have:
@@ -2469,7 +2484,7 @@ Two consequences worth stating plainly:
 
 ## 10. Phases
 
-> **§18 supersedes this section as the unit of work.** These four phases describe everything the project *could* include; §18 defines the ten packages actually being built (A–G plus D½ Coverage, D¾ Forms and N NASA ROSES Catalog Source) and lists what is deferred with the cost of each. Read §10 for the reasoning behind an individual step — it is retained in full and still explains *why* each piece exists — but take the sequence and the checklist from §18 and §15.
+> **§18 supersedes this section as the unit of work.** These four phases describe everything the project *could* include; §18 defines the eleven packages actually being built (**P1 … P11**, §18.0) and lists what is deferred with the cost of each. Read §10 for the reasoning behind an individual step — it is retained in full and still explains *why* each piece exists — but take the sequence and the checklist from §18 and §15.
 
 Reordered so everything large and additive lands before anything existing changes behavior. Four phases.
 
@@ -2500,7 +2515,7 @@ One honest exception to "purely additive," which v6.2 claimed: **step 4 tightens
 
 *`scripts/build_gold_set.py` has also moved out of Phase 1.* It was the instrument for a labelled evaluation that step 2 now replaces for regression purposes. Deriving known-positives from past awards is still worth doing — it is the only way to judge whether a change is an *improvement* rather than merely a change (§8.5) — but it is a multi-source scraping project in its own right, and gating this work on it was the wrong dependency. It is recorded in §13 as an open decision.
 
-> **Why SAM.gov is still in Phase 1**, with a corrected justification. v6.2 argued that the canonical DoD umbrellas "never appear on Grants.gov" and are "absent from the catalog entirely." **That is false**: 31 BAA records are in the catalog today, including the ONR Long Range BAA, the DEVCOM ARL foundational BAA, five DARPA office BAAs, AFOSR, NRL and ERDC. The Phase 2 development corpus therefore already exists and is reachable through the existing document-evidence path — SAM.gov is **not** a blocker for the segmenter, and Phase 2 can start without it. It stays in Phase 1 on the weaker grounds that it closes a residual gap — **SAM-only opportunities** — and is independently valuable whether or not subtopics ever ship. If Phase 1 runs long, this is the step to defer. *(Corrected 8.8: this previously read "MURI specifically, and SAM.gov-only notices". **MURI no longer carries the argument.** Its absence from our corpus is a fact about what this project stores, not about where MURI is published, and a live Grants.gov search finds MURI in an attachment on a record we already hold — §18.2. The residual gap is real but currently **unnamed**: no verified SAM-only opportunity appears anywhere in this plan. §15 debt M6 requires one before the adapter is scheduled.)*
+> **Why SAM.gov is still in Phase 1**, with a corrected justification. v6.2 argued that the canonical DoD umbrellas "never appear on Grants.gov" and are "absent from the catalog entirely." **That is false**: 31 BAA records are in the catalog today, including the ONR Long Range BAA, the DEVCOM ARL foundational BAA, five DARPA office BAAs, AFOSR, NRL and ERDC. The Phase 2 development corpus therefore already exists and is reachable through the existing document-evidence path — SAM.gov is **not** a blocker for the segmenter, and Phase 2 can start without it. It stays in Phase 1 on the weaker grounds that it closes a residual gap — **SAM-only opportunities** — and is independently valuable whether or not subtopics ever ship. If Phase 1 runs long, this is the step to defer. *(Corrected 8.8: this previously read "MURI specifically, and SAM.gov-only notices". **MURI no longer carries the argument.** Its absence from our corpus is a fact about what this project stores, not about where MURI is published, and a live Grants.gov search finds MURI in an attachment on a record we already hold — §18.2. The residual gap is real but currently **unnamed**: no verified SAM-only opportunity appears anywhere in this plan. **MEAS-6** requires one before the adapter is scheduled.)*
 
 **Exit criteria:** existing tests green **with zero test-file edits**; `verify_no_drift` passing in CI; query baseline committed and reproducible; PDF toolchain pinned; new sources reporting healthy through the existing gates; catalog record count up, behavior otherwise identical.
 
@@ -2755,7 +2770,7 @@ Not built in v1. Recorded so the deterministic design does not preclude it.
 | **REALIZED 2026-08-17 — a pattern family that never fires is invisible to every metric in this plan** | Seven of §6.3's ten families accumulated unmeasured across four work packages: **five never fired once across 170 real documents, and two fired only on documents carrying no list** (`roses_element` on `A.1 BACKGROUND AND OBJECTIVES`, `area_of_interest` on another opportunity's topics). Nothing caught it because acceptance rate, false-positive count and the rejection histogram are all computed **per document**, so a family contributing nothing contributes nothing to any of them, and a passing synthetic fixture (§10 step 11) looks identical to real coverage. Mitigation is §17.8: a validating document **quoted** per family, and **per-family fire counts reported including the zeros**. B0 had the evidence in 2026-08-16 — zero matches from all ten families on three notices — and read it as the families being appropriately narrow |
 | **A family matches the container instead of its members, which is worse than missing** | `thrust` fires on DTRA `356612` — a real hit — and matches `Thrust Area 1`, the umbrella, while the fundable list is `Topic A1`–`A7` beneath it. That segments one plausible card where seven belong, so it presents as a success in every count. Acceptance rules cannot see it: one candidate simply fails rule 1 and the set is silently declined, or worse, passes with the wrong granularity. Mitigation: §18.1 Fm4 scopes or retires it, and §17.8 requires the validating quote to be **at the granularity the family claims** |
 | **A single failed fetch becomes a permanent fact about a source** | **Realized, and measured across 14 hosts on 2026-08-17** (`docs/SOURCE_REACHABILITY_SWEEP.md`). Of the hosts this project had recorded as unreachable: **2 were our own TLS cipher list**, **4 no longer reproduce at all** with no client change (`fema.gov`, `aphis.usda.gov`, `nrcs.usda.gov`, `bja.ojp.gov`), 2 are persistent HTTP 403s whose reason is not visible from outside, 2 are dead URLs, and 4 are client-rendered apps where transport always worked. **Five distinct layers where the project had recorded one.** The transient four are the sharpest lesson: a real failure, observed once, was written into three documents as a property of the source and then used to justify a deferral. Mitigation: **§17.11** — isolate the failure layer before unavailability justifies architecture, and re-test before citing an old observation |
-| **Agency-HTML scrapers break silently, and structured sources are where this hurts most** | A restyled page returns **HTTP 200 with zero rows**, and every existing check passes: the fetch worked, nothing raised, and zero subtopics is a normal outcome (§9.3). **This is a durability tradeoff and it should be stated plainly rather than assumed away.** Generic PDF parsing is robust to agency redesigns — a bookmark tree is a bookmark tree — and buys weak evidence: §6.3 measures the families at 10% of the enumerating population, and 7 of 10 were retired with no corpus support. A ROSES table parser is strong evidence and **brittle against a site redesign nobody warns us about**. D⅝ chooses the brittle-and-strong option deliberately, on the argument that a loud failure is recoverable and silent weak coverage is not — but the maintenance surface is real and grows per source, which is exactly why §18.1 D⅝ builds **one** adapter and re-measures rather than three. Mitigation: **§7.4 canaries**, one per source, asserting a floor rather than a count; a canary failure is a source-health failure that publishes nothing new for that source and opens the owner issue. **Raised in 8.11: `Package N` makes ROSES a *catalog* source, so a silent collapse would stop merely failing to add records and start removing them. That is why N5.6 extends the zero-row canary to the emission path and why N6 gates on loud failure** |
+| **Agency-HTML scrapers break silently, and structured sources are where this hurts most** | A restyled page returns **HTTP 200 with zero rows**, and every existing check passes: the fetch worked, nothing raised, and zero subtopics is a normal outcome (§9.3). **This is a durability tradeoff and it should be stated plainly rather than assumed away.** Generic PDF parsing is robust to agency redesigns — a bookmark tree is a bookmark tree — and buys weak evidence: §6.3 measures the families at 10% of the enumerating population, and 7 of 10 were retired with no corpus support. A ROSES table parser is strong evidence and **brittle against a site redesign nobody warns us about**. P6 chooses the brittle-and-strong option deliberately, on the argument that a loud failure is recoverable and silent weak coverage is not — but the maintenance surface is real and grows per source, which is exactly why **P6** builds **one** adapter (P6.1) and re-measures rather than three. Mitigation: **§7.4 canaries**, one per source, asserting a floor rather than a count; a canary failure is a source-health failure that publishes nothing new for that source and opens the owner issue. **Raised in 8.11: `P8` makes ROSES a *catalog* source, so a silent collapse would stop merely failing to add records and start removing them. That is why **P8.5**'s sixth test extends the zero-row canary to the emission path and why **P8.6** gates on loud failure** |
 | **`--max-documents` caps each pass, not the run — so the flag understates the work by 2× with subtopics on** | Measured by reading the call site: `refresh_subtopics_without_source` is passed **the same `max_documents` value** as the administrative pass (`extract_document_evidence.py`, the Cov1 insertion under `if enable_subtopics`), not a share of it. Each pass independently takes `candidates[:max_documents]`, so `--max-documents 45` can fetch up to **90** documents and the D4/D5 backfills' `--max-documents 1200` could attempt **2,400**. Nothing is wrong with the results; what is wrong is that the nightly's runtime headroom (§9's 15-minute ceiling) and every published backfill figure were reasoned against one pass. Either split one budget across both passes or give the subtopic pass its own named flag — **do not silently halve the existing default**, which is load-bearing (§0.4 rule 8) |
 | **An evidence entry outlives the record that produced it, and is then never rechecked** | Measured: **13 orphans** in the catalog — records carrying an evidence entry whose parent no longer resolves to a source, 12 of them `primary_notice`. `363526` is the named case and was the corpus's only high-confidence acceptance. Separately, **213 cache entries belong to records that have left the catalog entirely**. Neither population is pruned, neither is refetched, and both inflate any denominator computed from the cache rather than from the catalog — which is exactly the error `docs/COVERAGE_SURVEY.md` corrected when it replaced "246 of 1,016 evidence entries" with "685 of 1,475 catalog records". Mitigation: prune on the catalog, never on the cache, and compute every rate against the catalog (§15 debt) |
 | **A rate is quoted against a denominator that has since changed** | Measured, twice. `360339` — one of the census's twelve enumerating documents and the sole validating record for the `component` family — **left the catalog within a day of the census being taken**, along with `362005` and `362711`. Every acceptance rate quoted as "of 12" silently became "of 11". The corpus moves under the measurements: 3 of 20 census records were gone within 24 hours. Mitigation, already stated in `docs/CORPUS_CENSUS.md` and now a rule here: **re-derive a denominator at the moment you quote it, and name the date.** Do not compare a rate to a figure from a previous session without re-deriving both |
@@ -2782,7 +2797,9 @@ Not built in v1. Recorded so the deterministic design does not preclude it.
 | Formatter run buries a small change in an unreviewable diff | Explicit no-reformat rule (§8.1) |
 | **A later session reintroduces a corrected error** | This plan's own §17.2 loop: RECON.md is the evidence, the "What changed in 7.0" table is the index of what was wrong, and both stay in the repository |
 
-## 13. Open decisions
+## 13. Open decisions — DEC-*
+
+**Canonical IDs (8.12).** The numbered items below are **DEC-0 … DEC-13**; §18.0.3 is the translation table. `DEC-<n>` and "decision \<n\>" are the same item, and forward-looking text should use the DEC form.
 
 **Settled** — recorded here so they are not relitigated:
 
@@ -2793,16 +2810,16 @@ Not built in v1. Recorded so the deterministic design does not preclude it.
 - Team match takes **ORCIDs only**. Resume and free-text belong to the personal browser-local profile (§7.9).
 - Profiles are built from **works text, not assigned concepts**. ORCID is an identity key (§7.9).
 - **The regression gate is a frozen query set compared on result IDs and ranks**, not a labelled baseline (§8.5).
-- **`MAX_TERMS` stays at 400 — closes former open decision 0 (2026-08-17).** Measured against the uncommitted D5 cache (223 spans): the 2 KiB per-record ceiling is violated **identically at every cap from 400 down to 100 — 202 of 223 in all four cases**. Cutting terms does not move that number, because the term map is not what breaches it. The test passes only at **5 terms per span, costing 74.8% of BM25 mass** on the §8.5 query set. At **cap 0 — no term map at all — it passes with the largest record at 1,930 B**, i.e. the entire term map has **118 bytes**, about 6% of the ceiling, to live in. So **§12's instruction "cut `max_terms`, not the ceiling" is not a hard trade, it is unachievable**, and that sentence is corrected in §12. The cap also barely binds today: median map is **185 terms**, only 15 of 223 spans (7%) reach 400, and none exceeds it. *If a cut is ever wanted for an unrelated reason, **200 is the defensible one** — 3.8% BM25 loss for 14% of cache size; **100 is a poor trade** at 13.7% for 33%.* The real fix is the budget's subject, not its value — see the next bullet and §12.
-- **Subtopics ship in a lazily-loaded `data/subtopics.js` sidecar — closes former open decision 1 (2026-08-17).** Two independent arguments converge, which is why this is now settled rather than recommended:
+- **DEC-0: `MAX_TERMS` stays at 400 — closes former open decision 0 (2026-08-17).** Measured against the uncommitted D5 cache (223 spans): the 2 KiB per-record ceiling is violated **identically at every cap from 400 down to 100 — 202 of 223 in all four cases**. Cutting terms does not move that number, because the term map is not what breaches it. The test passes only at **5 terms per span, costing 74.8% of BM25 mass** on the §8.5 query set. At **cap 0 — no term map at all — it passes with the largest record at 1,930 B**, i.e. the entire term map has **118 bytes**, about 6% of the ceiling, to live in. So **§12's instruction "cut `max_terms`, not the ceiling" is not a hard trade, it is unachievable**, and that sentence is corrected in §12. The cap also barely binds today: median map is **185 terms**, only 15 of 223 spans (7%) reach 400, and none exceeds it. *If a cut is ever wanted for an unrelated reason, **200 is the defensible one** — 3.8% BM25 loss for 14% of cache size; **100 is a poor trade** at 13.7% for 33%.* The real fix is the budget's subject, not its value — see the next bullet and §12.
+- **DEC-1: subtopics ship in a lazily-loaded `data/subtopics.js` sidecar — closes former open decision 1 (2026-08-17).** Two independent arguments converge, which is why this is now settled rather than recommended:
   1. **`record_count` (§13.1).** In-catalog children force `opportunities.length === record_count` to include subtopics, silently changing the meaning of a **published** number with at least five consumers — README/PROJECT badges, `--min-records`/`--max-record-count`, the browser's small-catalog assertion, and `validate_catalog`'s growth bound. "1,475 opportunities" becoming "2,400" is a schema change in substance.
   2. **The display/retrieval split (measured 2026-08-17).** **60.3% of every cache record is `subtopic_terms`** — retrieval data the browser consumes through an index, never as card content. Strip it and the fingerprints, and the display payload is **median 942 B, max 1,218 B, 0 of 223 over the 2 KiB ceiling**. The budget and the storage question are the same question: the term map does not belong on the record.
-  **§13.1's flip condition is retired.** It said the recommendation flips to Option A if cross-corpus scoring cannot be normalized. That was written when `record_count` was the only argument; the display/retrieval split is independent of scoring and holds regardless. **Cross-corpus normalization does not go away — it is package E's E1, and it is now a "make this work" task rather than a "decide this" one.** If E1's prototype fails the §8.5 gate, the answer is normalization work, not re-merging into `opportunities.js`.
+  **§13.1's flip condition is retired.** It said the recommendation flips to Option A if cross-corpus scoring cannot be normalized. That was written when `record_count` was the only argument; the display/retrieval split is independent of scoring and holds regardless. **Cross-corpus normalization does not go away — it is P9.1, and it is now a "make this work" task rather than a "decide this" one.** If P9.1's prototype fails the §8.5 gate, the answer is normalization work, not re-merging into `opportunities.js`.
 - No external deadline. Sequence for safety, not speed.
 
 **Still open:**
 
-2. **Where referenced subtopics live.** **Surfaced in full in 8.6 — this was
+2. **DEC-2 — where referenced subtopics live.** **Surfaced in full in 8.6 — this was
    recorded as "deferred to a human" fifteen sessions ago and has never been
    decided, and a one-line pointer to §6.7a was not enough to get it decided.**
 
@@ -2842,18 +2859,18 @@ Not built in v1. Recorded so the deterministic design does not preclude it.
 
    **What would decide it:** nothing further needs measuring. This is a
    human's architectural call, and it is not on the critical path — no package
-   A–G or D½/D¾ item depends on it. **Full tradeoff tables remain in §6.7a.**
-3. **Works-text provider** — add abstracts to the existing Crossref path, or switch the browser to OpenAlex for better abstract coverage (§7.9). Decide on measured results from the §8.5 gate, not on argument.
-4. **Whether to build `scripts/build_gold_set.py` at all.** Dropped from Phase 1 because §8.5 replaces it as a *regression* gate. It remains the only way to judge whether a change is an *improvement*. Tracked upstream by **#8** (produce labels) and **#9** (export them); a gold set is not buildable until at least #9 ships. Proposed: revisit after Phase 3, when there is a concrete question that rank movement alone cannot answer.
-5. **How archived subtopics are searched.** They sit outside `search_index`, so the "include past cycles" filter needs either a separately shipped index or substring matching (§7.2). **This decision largely collapses into the now-settled sidecar** — subtopics ship as a sidecar with their own index (§13 settled), so the archive is the same mechanism with a different retention window. What remains is only the retention window and whether the archive index ships at all.
-6. **Summary length.** 600 chars proposed. The term map carries retrieval, so this is purely a display-quality call.
-7. **Topics in Atom feeds.** Proposed: include, since a new topic under an existing umbrella is exactly the event the current feed misses.
-8. **Taxonomy depth for referenced topics.** Attach at program level (BES → Catalysis Science) or one level deeper? Proposed: program level, where the program manager and the funding decision sit.
-9. **Mute/alert split.** Accept that muted items still appear in alerts, or build the suppression-list export? Proposed: accept for v1, document it plainly, revisit if it annoys anyone. The mute control itself is **#8**.
-10. **OCR.** Deferred. Revisit only if `no_extractable_text` rejections prove material.
-11. **Two label questions in the §11 evaluation corpus**, recorded rather than resolved — `361876` and `(n) Public-Private Partnerships`. Both are single-labelled, and both carry model evidence against the recorded label. Neither changes a published number; neither should be silently "corrected" by whoever next touches the corpus. **Narrowed 2026-08-17 by the Cov5 re-run and still open.** `(n)` flips to *accept* once its excerpt is clean — but its pre-fix rejection reason was about the **title**, which did not change; the model still calls it a *"funding activity"* while accepting it; and the same run measured a 1-in-62 flip on byte-identical input, so one flip is the noise floor. **The decidable question is now one sentence: is `(n) Public-Private Partnerships` a subject an applicant applies against, or a mechanism through which any subject may be funded?** One person reading page 85 of `DE-FOA-0003600` settles it. Do not settle it from a model verdict in either direction — that is how an evaluation corpus stops being independent evidence.
+   P1–P11 item depends on it. **Full tradeoff tables remain in §6.7a.**
+3. **DEC-3 — works-text provider** — add abstracts to the existing Crossref path, or switch the browser to OpenAlex for better abstract coverage (§7.9). Decide on measured results from the §8.5 gate, not on argument.
+4. **DEC-4 — whether to build `scripts/build_gold_set.py` at all.** Dropped from Phase 1 because §8.5 replaces it as a *regression* gate. It remains the only way to judge whether a change is an *improvement*. Tracked upstream by **#8** (produce labels) and **#9** (export them); a gold set is not buildable until at least #9 ships. Proposed: revisit after Phase 3, when there is a concrete question that rank movement alone cannot answer.
+5. **DEC-5 — how archived subtopics are searched.** They sit outside `search_index`, so the "include past cycles" filter needs either a separately shipped index or substring matching (§7.2). **This decision largely collapses into the now-settled sidecar** — subtopics ship as a sidecar with their own index (§13 settled), so the archive is the same mechanism with a different retention window. What remains is only the retention window and whether the archive index ships at all.
+6. **DEC-6 — summary length.** 600 chars proposed. The term map carries retrieval, so this is purely a display-quality call.
+7. **DEC-7 — topics in Atom feeds.** Proposed: include, since a new topic under an existing umbrella is exactly the event the current feed misses.
+8. **DEC-8 — taxonomy depth for referenced topics.** Attach at program level (BES → Catalysis Science) or one level deeper? Proposed: program level, where the program manager and the funding decision sit.
+9. **DEC-9 — mute/alert split.** Accept that muted items still appear in alerts, or build the suppression-list export? Proposed: accept for v1, document it plainly, revisit if it annoys anyone. The mute control itself is **#8**.
+10. **DEC-10 — OCR.** Deferred. Revisit only if `no_extractable_text` rejections prove material.
+11. **DEC-11 — two label questions in the §11 evaluation corpus**, recorded rather than resolved — `361876` and `(n) Public-Private Partnerships`. Both are single-labelled, and both carry model evidence against the recorded label. Neither changes a published number; neither should be silently "corrected" by whoever next touches the corpus. **Narrowed 2026-08-17 by the Cov5 re-run and still open.** `(n)` flips to *accept* once its excerpt is clean — but its pre-fix rejection reason was about the **title**, which did not change; the model still calls it a *"funding activity"* while accepting it; and the same run measured a 1-in-62 flip on byte-identical input, so one flip is the noise floor. **The decidable question is now one sentence: is `(n) Public-Private Partnerships` a subject an applicant applies against, or a mechanism through which any subject may be funded?** One person reading page 85 of `DE-FOA-0003600` settles it. Do not settle it from a model verdict in either direction — that is how an evaluation corpus stops being independent evidence.
 
-12. **The `deadlines` payload duplicates itself, and it is 17.5% of
+12. **DEC-12 — the `deadlines` payload duplicates itself, and it is 17.5% of
     `opportunities.js`.** **Measured 2026-08-17 against the committed catalog.
     Independent of subtopics — this is pre-existing catalog cost that the sidecar
     decision (§13 settled) does nothing about, and it is larger than anything the
@@ -2890,17 +2907,17 @@ Not built in v1. Recorded so the deterministic design does not preclude it.
     a later session measuring catalog growth will find 17.5% in one field and
     should find this analysis with it rather than redoing it.
 
-13. ~~**Whether to ingest the 53 standalone NASA ROSES program elements.**~~
+13. ~~**DEC-13 — whether to ingest the 53 standalone NASA ROSES program elements.**~~
     **TAKEN 2026-08-18. Build it, as a first-class catalog-source package,
-    immediately after S1 and before S2.** Kept in this list rather than moved to
+    immediately after P6.1 and before P6.2.** Kept in this list rather than moved to
     *Settled* because it schedules work, and the argument below is what a later
     session will want when it reads the package.
 
     **The decision.** NASA ROSES standalone ingestion is built as
-    **`Package N — NASA ROSES Catalog Source`** (§18.1), scheduled **immediately
-    after D⅝ S1 closes and before D⅝ S2**. It is a **catalog-source** feature,
+    **`P8` — NASA ROSES Catalog Source** (§18.1), scheduled **immediately
+    after P6.1 closes and before P6.2**. It is a **catalog-source** feature,
     not a subtopic one, and it carries **its own gate** — §0.5 is not weakened or
-    reinterpreted to accommodate it (§0.5, and `Package N`'s gate).
+    reinterpreted to accommodate it (§0.5, and P8's own gate, P8.6).
 
     **The product conclusion is not "add 53 records."** It is this:
 
@@ -2915,7 +2932,7 @@ Not built in v1. Recorded so the deterministic design does not preclude it.
     That is the whole point of building it as a source rather than as a data
     entry task.
 
-    **What S1 measured**, and it is the reason the framing above matters:
+    **What P6.1 measured**, and it is the reason the framing above matters:
 
     | | Count |
     |---|---|
@@ -2933,25 +2950,25 @@ Not built in v1. Recorded so the deterministic design does not preclude it.
     closes or goes inactive, ordinary catalog currentness handling removes it from
     the public current/searchable population. **Nobody has to remember anything.**
 
-    **Recorded explicitly: until `Package N` is implemented, the 2 currently open
+    **Recorded explicitly: until P8 is implemented, the 2 currently open
     unmatched ROSES elements are a known catalog-completeness gap** — NASA is
     soliciting them now and Funding Finder does not list them. That is the cost of
     the scheduling, stated rather than glossed.
 
-    **What ingesting them requires, none of which S1 built** — every row is now a
-    named `Package N` item rather than an open question:
+    **What ingesting them requires, none of which P6.1 built** — every row is now a
+    named P8 item rather than an open question:
 
     | Question | Why it is not obvious | Item |
     |---|---|---|
-    | **Dedup and identity** | The 10 matched elements arrive from Grants.gov *and* NSPIRES. `D.3C` proves the ROSES appendix code is not unique, native identity is `(appendix_code, program_title)`, and **5 of the 10 matched only by normalized title** | **N2** |
-    | **Source precedence and update ownership** | When Grants.gov and ROSES disagree on a close date, which wins, and which source may overwrite the other nightly? | **N3** |
-    | **Catalog size and currentness** | 51 of the 53 are closed or unsolicited; they need currentness handling or they inflate the catalog with things nobody can apply to | **N4** |
-    | **§0.5** | Enabling the adapter changes `opportunities.js` **with `--enable-subtopics` off**. That is not a bug in the gate; it is the gate working — so the package gets **its own** gate and §0.5 keeps its current meaning | **N6** |
+    | **Dedup and identity** | The 10 matched elements arrive from Grants.gov *and* NSPIRES. `D.3C` proves the ROSES appendix code is not unique, native identity is `(appendix_code, program_title)`, and **5 of the 10 matched only by normalized title** | **P8.2** |
+    | **Source precedence and update ownership** | When Grants.gov and ROSES disagree on a close date, which wins, and which source may overwrite the other nightly? | **P8.3** |
+    | **Catalog size and currentness** | 51 of the 53 are closed or unsolicited; they need currentness handling or they inflate the catalog with things nobody can apply to | **P8.4** |
+    | **§0.5** | Enabling the adapter changes `opportunities.js` **with `--enable-subtopics` off**. That is not a bug in the gate; it is the gate working — so the package gets **its own** gate and §0.5 keeps its current meaning | **P8.6** |
     | **Project ownership** | This is a catalog-source feature. It shares nothing with segmentation except the adapter lifecycle | the package itself |
 
-    **What is kept from S1's recommendation, and what is withdrawn.** Kept: this
+    **What is kept from P6.1's recommendation, and what is withdrawn.** Kept: this
     is **not part of the subtopic project** — which is precisely why it is its own
-    package with its own gate rather than a D⅝ item, and why its yield is never
+    package with its own gate rather than a P6 item, and why its yield is never
     added to subtopic recall (§17.8, `docs/ROSES_SOURCE_INSPECTION.md` *What this
     is not*). Withdrawn: the implication that it should be **decided later** on
     the strength of "2 currently-open opportunities". The value being bought is
@@ -2971,9 +2988,9 @@ Not built in v1. Recorded so the deterministic design does not preclude it.
 
 Two consequences worth acting on: **§7.2b should be designed against #8's stated vocabulary** ("useful, not relevant, pursue" plus mismatch reasons — topic, eligibility, award size, deadline, career stage, already known) rather than inventing one; and **§10 step 33 should be marked blocked on #9** rather than merely conditional, since that is where the dependency actually sits.
 
-### 13.1 Former open decision 1, in full — catalog child records vs. a lazily-loaded sidecar
+### 13.1 DEC-1 in full — catalog child records vs. a lazily-loaded sidecar
 
-> **Settled 2026-08-17: the sidecar.** The analysis below is retained because it is the argument, and because a later session deserves to see why rather than be told. Two things in it are now superseded: the "Recommendation" heading is a decision, and its **flip condition — revert to Option A if cross-corpus scoring cannot be normalized — is retired**, because the display/retrieval split measured in §12 is independent of scoring and settles the question on its own. Cross-corpus normalization remains real work; it is package E's E1, and it is now a task rather than a fork in the road.
+> **Settled 2026-08-17: the sidecar.** The analysis below is retained because it is the argument, and because a later session deserves to see why rather than be told. Two things in it are now superseded: the "Recommendation" heading is a decision, and its **flip condition — revert to Option A if cross-corpus scoring cannot be normalized — is retired**, because the display/retrieval split measured in §12 is independent of scoring and settles the question on its own. Cross-corpus normalization remains real work; it is P9.1, and it is now a task rather than a fork in the road.
 
 §7.1 asserts that subtopics enter `data/opportunities.js` as child records, and calls it "the single most important structural decision." It is, which is why it deserves an argued alternative rather than an assertion. The measurements below were not available when §7.1 was written.
 
@@ -3065,8 +3082,8 @@ Whichever is chosen, three things hold either way: the per-subtopic 2 KB cap (§
 | **Query gate** | CI check that scores a frozen query set against a frozen catalog and compares result IDs and ranks. Needs no relevance labels. Fails on top-10 churn with the flag off (§8.5). |
 | **Flag off parity** | With `--enable-subtopics` off, output must be byte-identical to pre-change. The core safety property. |
 | **Backfill** | The one-time campaign that adds subtopics to the ~1,400 documents already in the evidence cache. Requires the three-gate trigger in §8.3, without which the feature silently covers only newly-changed documents. Run **locally in one pass** and committed once (§18 package D) — never drained through the nightly. |
-| **Work package** | The unit of work in §18: several related items, one session, one commit per item. Replaces §10's numbered step as the thing a session delivers. |
-| **Minimum path** | §18's packages A–G plus D½ Coverage and D¾ Forms — the smallest version of this project worth shipping. Everything outside it is deferred with a stated cost (§18.2). |
+| **Work package** | The unit of work in §18: several related items, one session, one commit per item. Named **P1 … P11** (§18.0). Replaces §10's numbered step as the thing a session delivers. |
+| **Minimum path** | §18's packages **P1 … P11** — the smallest version of this project worth shipping. Everything outside it is deferred with a stated cost (§18.2); the canonical namespace is §18.0. |
 | **Backfill suppression** | Excluding first-seen subtopics from change events so the first digest is not entirely noise (Phase 3, step 23). Distinct from *backfill* itself. |
 | **Discoverability registry** | `scripts/sources/discoverability.py` — the eleven-rule umbrella registry that already exists, attaching program-area topics and search terms to opaque umbrella FOAs (§3). Not to be confused with the subtopic layer, which adds child *records*. |
 | **Gold set** | Auto-derived known-positives from past awards. The only way to judge whether a change *helped* rather than merely *changed*. Deferred; see §13 open decision 3. |
@@ -3081,62 +3098,90 @@ One **package** per session (§0.4 rule 5). One **commit** per item, with the su
 
 ---
 
-## Open state at a glance
+## Open state at a glance — the ledger
 
-**Added 8.6. This is the index, not the record** — every line points at the
-section that owns it. If something is open and not listed here, that is a bug in
-this table.
+**Added 8.6; reorganized 8.12 into one actionable ledger under §18.0's canonical
+namespace.** Four headings, and **every item has exactly one authoritative entry
+here**. Other sections may reference an item; none of them keeps a competing status
+for it. If something is open and not listed here, that is a bug in this table.
+Legacy labels are translated once, in §18.0.3 — not repeated here.
 
-### Blocking a human decision — nothing proceeds on these without an answer
+### Packages — P1 … P11
 
-| # | Decision | Where | Open since |
+| ID | Package | Status |
+|---|---|---|
+| **P1** | Foundations | ✅ **complete** 2026-08-16 |
+| **P2** | Segmentation engine | ✅ **complete** 2026-08-16 |
+| **P3** | Flag-off integration | ✅ **complete** 2026-08-16 |
+| **P4** | Tune and backfill | ⚠️ **complete 2026-08-16, gate not met** — correct-acceptance stopped at **42%** against the 50% threshold, deliberately: every remaining miss needs a new mechanism, and reaching 50% by loosening would trade the 0/8 false-positive count. **P4.4**'s backfill ran and its cache was deliberately not committed |
+| **P5** | Coverage hardening | 🔄 **in progress** — Cov0–Cov3 and Cov5 done. **Open: Cov4, Cov6, Cov7.** Cov4's "zero false rejections" cannot be shown in a single pass until **MEAS-3** bounds the classifier's variance |
+| **P6** | Structured-source coverage | 🔄 **in progress** — P6.1 complete; P6.2 and P6.3 not started |
+| **P6.1** | NASA ROSES structured-source proof | ✅ **complete** 2026-08-18. Gate closed clause by clause against repository evidence: six clauses outright, one with a forward obligation (the Cov4 bypass), one on evidence (§0.5). **Previously-category-(a) records reached: 0** — P6.1 reached the **(e)** population |
+| **P6.2** | DOE Office of Science structured-source test | ⛔ **not started.** Approved in principle — P6.1 showed measurable value from a structured source (10 open catalog records gained authoritative NASA relationships at the `native` rung). **Sequenced after P8** (DEC-13); **not technically dependent on it** (§18.0.4). **P6.2 is the first real test of whether structured sources penetrate the category-(a) population** |
+| **P6.3** | DoD structured-source test | ⛔ **not started and not scheduled.** A **human decision** after P6.2 is built and measured |
+| **P7** | Residual generic forms | ⛔ **not started.** Gated on **P5's Cov4 gate** *and* on **P6 measurement**: Fm1/Fm2/Fm5/Fm6 build only against records still uncovered after structured sources, and their yields are re-measured on that residual. Fm3, Fm4 and Fm7 are not re-gated |
+| **P8** | NASA ROSES Catalog Source | ⛔ **not started, and it is the next implementation task** (DEC-13). A **catalog-completeness branch**, not subtopic recall. Until it ships, the **2 currently open unmatched ROSES elements are a known catalog-completeness gap** |
+| **P9** | Storage and scoring | ⛔ **not started.** **P9.0 must run before anything writes a cache** |
+| **P10** | Retrieval and UI | ⛔ **not started** |
+| **P11** | Enable and ship | ⛔ **not started.** The only package that flips a flag (§0.4 rule 9) |
+
+**Gates that stop work by design:** P4's gate (42% < 50%) · P5's Cov4 gate ·
+P7 behind P5 and P6 · **any cache commit**, which is blocked by **DEBT-1** — the
+D5 backfill generation holds six pre-Cov5 summaries and is missing a span.
+
+### Bugs — BUG-*
+
+| ID | Defect | Where it is owned |
+|---|---|---|
+| **BUG-0** | `--max-documents` caps each **pass**, not the run, so with subtopics on the flag understates the work by 2× | §15 debt, §12 |
+| **BUG-2** | **Three** families reject an ASCII hyphen — `dod_topic`, `component`, `technical_category`; the last also rejects `.` | §15 debt → repaired by **P7's Fm3** |
+| **BUG-7** | The hermetic §0.5 gate was date-dependent: `build_changes._event_id` seeds on the build's UTC calendar date | ✅ **fixed 2026-08-18** (`d735142`) — the hermetic build pins `generated_at` in a `.work/` copy; `verify_no_drift` exits 0 on the **unchanged** committed baseline (§8.4). **Prerequisite for P8's gate, and satisfied** |
+| **BUG-9** | The aggregating-agency page: every acceptance rule passes on **another opportunity's** topic list | §6.3b; a required case in Cov4's validation set |
+| **BUG-10** | Cov5's residual — `_locate_nodes`' `page_start_offset` fallback is still silent | §6.5 |
+| *(no ID)* | **Agency-HTML scrapers fail silently — HTTP 200, zero rows.** Classified as a **risk, not a defect in our code**: it is §12's risk row, mitigated by §7.4 canaries, which shipped with P6.1 and which **P8.5** extends to the emission path | §12, §7.4 |
+
+**Owned as a package item, not as a bug:** `_demote()`'s cap on publication for
+**46.4% of the catalog** is **P5's Cov6** — Cov1 supplies the bytes and `_demote`
+guarantees they never publish. It is listed once, under P5.
+
+### Measurements — MEAS-*
+
+| ID | Measurement | Why it matters |
+|---|---|---|
+| **MEAS-1** | Cov5 leaves the 757 no-span documents unchanged | Asserted in a session report, never run |
+| **MEAS-2** | **30 more stratum-D records** | Closes over half of §1.1's 54–538 interval — the cheapest measurement in the project. **Delivered by P5's Cov7**; this is the same work, not a second copy |
+| **MEAS-3** | **Classifier run-to-run variance** | Measured incidentally at 1.6% against a 0.9% signal. **P5's Cov4 gate is undemonstrable in a single pass until this is bounded** |
+| **MEAS-4** | Read `344592` for MURI topics | Grants.gov finds MURI in its full text; part of §18.2's SAM.gov cost may already be reachable |
+| **MEAS-5** | **Discipline-stratified query and relevance set** | **18 of 37 queries (49%) are chemistry; all 3 profile probes are.** A ranking regression outside chemistry is invisible to §8.5. **Extraction-side figures are corpus measurements and are unaffected** (§8.5, §17.9) |
+| **MEAS-6** | **Name a verified SAM-only opportunity** | §18.2's adapter was justified from MURI's absence in our corpus, which is a fact about what we store. **Inference withdrawn**; the residual gap is real but unnamed. **Blocked on a credential — human task** |
+| *(part of Cov4)* | Form-F1 / form-F4 candidate sets in Cov4's validation | Neither resembles the 22 sibling sets §11 measured (§11). *Form names, not P10 items — see §18.0.1* |
+
+### Decisions and debt — DEC-* / DEBT-*
+
+**Blocking a human decision — nothing proceeds on these without an answer:**
+
+| ID | Decision | Where | Open since |
 |---|---|---|---|
-| §13.2 | **Where referenced subtopics live** — extend `discoverability.py`, or a new `program_taxonomy` adapter. Recommendation stated (adapter, linkage imported); nothing on the critical path depends on it | §13, tradeoffs in §6.7a | 15 sessions |
-| §13.11 | **Is `(n) Public-Private Partnerships` a subject or a funding mechanism?** One person reading page 85 of `DE-FOA-0003600`. Do not settle it from a model verdict | §13, evidence in §11 | 2 sessions |
-| §13.12 | **Whether to de-duplicate the `deadlines` payload** — 1.31 MiB removable of a 4.35 MB field, 5.5% of `opportunities.js`. Changes a published artifact's shape, so §0.5 applies | §13 | new in 8.6 |
-| §18.3a | **Whether an F1 bare-numbered family may ever be added.** Four exit criteria stated; the prohibition stands until all four hold | §18.3a | new in 8.5 |
-| §13.3–13.10 | Works-text provider · gold set · archive search · summary length · feed inclusion · taxonomy depth · mute/alert split · OCR | §13 | various |
+| **DEC-2** | **Where referenced subtopics live** — extend `discoverability.py`, or a new `program_taxonomy` adapter. Recommendation stated (adapter, linkage imported); nothing on the critical path depends on it | §13, tradeoffs in §6.7a | 15 sessions |
+| **DEC-11** | **Is `(n) Public-Private Partnerships` a subject or a funding mechanism?** One person reading page 85 of `DE-FOA-0003600`. Do not settle it from a model verdict | §13, evidence in §11 | 2 sessions |
+| **DEC-12** | **Whether to de-duplicate the `deadlines` payload** — 1.31 MiB removable of a 4.35 MB field, 5.5% of `opportunities.js`. Changes a published artifact's shape, so §0.5 applies | §13 | new in 8.6 |
+| **DEC-3 … DEC-10** | Works-text provider · gold set · archive search · summary length · feed inclusion · taxonomy depth · mute/alert split · OCR | §13 | various |
+| §18.3a | **Whether a bare-numbered (form F1) family may ever be added.** Four exit criteria stated; the prohibition stands until all four hold. *Not a §13-numbered decision — it keeps its section reference* | §18.3a | new in 8.5 |
 
-**Taken, so no longer blocking:** **§13.13 — NASA ROSES standalone ingestion.**
-Taken 2026-08-18. It is built as **`Package N — NASA ROSES Catalog Source`**,
-after D⅝ S1 and **before** D⅝ S2 (§13 decision 13, §18.1).
+**Taken:** **DEC-13 — NASA ROSES standalone ingestion.** Taken 2026-08-18: build
+it as **P8**, sequenced after P6.1 and before P6.2. **DEC-0** (`MAX_TERMS` stays at
+400) and **DEC-1** (subtopics ship in a sidecar) are settled — full text in §13.
 
-### Gates not met — these stop work by design
+**Debt — carried, neither a defect nor a measurement:**
 
-| Gate | Why it is not met |
-|---|---|
-| **Package D** | Correct-acceptance stopped at 42%, below the 50% threshold set for the package (§18.1) |
-| **Package D⅝** | **S1 complete and its gate closed clause by clause 2026-08-18** (§18.1). **S2 is now blocked on `Package N`**, not on S1; **S3 stays unscheduled until S2 is built and measured** |
-| **Package N — NASA ROSES Catalog Source** | **Not started, and it is the next implementation task** (§13 decision 13, §18.1). Until it ships, the **2 currently open unmatched ROSES elements are a known catalog-completeness gap** |
-| **Package D½** | Cov4, Cov5(done), Cov6 and Cov7 outstanding; **Cov4's "zero false rejections" cannot be shown in a single pass** — measured variance exceeds the measured rate (§11 caveat 2) |
-| **Any cache commit** | The D5 cache holds six pre-Cov5 summaries and is missing a span (§15 debt D1). Regenerate before committing anything derived from it |
-
-### Defects, unfixed
-
-| # | Defect | Owner |
+| ID | Debt | Note |
 |---|---|---|
-| Cov6 | `_demote()` caps publication for **46.4% of the catalog** — Cov1 supplies the bytes, `_demote` guarantees they never publish | §18.1 |
-| D0 | `--max-documents` caps each **pass**, not the run, so the flag understates the work by 2× with subtopics on | §15 debt, §12 |
-| D1 | The D5 cache's six corrupted summaries, and one missing span | §15 debt |
-| D2 | **Three** families reject an ASCII hyphen — `dod_topic`, `component`, `technical_category`; the last also rejects `.` | §15 debt → Fm3 |
-| D3 | §6.6's HTML outline layer is specified and unbuilt; deliberately, on a population measured at 0 lists in 20 | §15 debt |
-| D4–D6 | 213 stale cache entries · 13 orphaned entries · 25 fetch failures across 5 hosts | §15 debt |
-| — | **Agency-HTML scrapers fail silently — HTTP 200, zero rows.** The characteristic failure of the structured sources D⅝ adds; mitigated by §7.4 canaries, which ship with S1 | §12, §7.4 |
-| — | `structural_siblings` is blind to **55% of the corpus's PDFs** (71 of 129 have no bookmarks) | §6.3a |
-| — | The aggregating-agency-page false positive: every acceptance rule passes on another opportunity's topic list | §6.3b |
-| — | Cov5's residual: `_locate_nodes`' `page_start_offset` fallback is still silent | §6.5 |
-
-### Measurements outstanding
-
-| # | Measurement | Why it matters |
-|---|---|---|
-| M2 / Cov7 | **30 more stratum-D records** | Closes over half of §1.1's 54–538 interval. Cheapest measurement in the project |
-| M3 | **Classifier run-to-run variance** | Measured incidentally at 1.6% against a 0.9% signal. Cov4's gate is undemonstrable until this is bounded |
-| M1 | Cov5 leaves the 757 no-span documents unchanged | Asserted in a session report, never run |
-| **M5** | **Discipline-stratified query and relevance set** | **18 of 37 queries (49%) are chemistry; all 3 profile probes are.** A ranking regression outside chemistry is invisible to §8.5, and any future gold relevance set built on it inherits one discipline's judgement. **Extraction-side figures are corpus measurements and are unaffected** (§8.5, §17.9) |
-| M4 | Read `344592` for MURI topics | Grants.gov finds MURI in its full text; part of §18.2's SAM.gov cost may already be reachable |
-| **M6** | **Name a verified SAM-only opportunity** | §18.2's adapter was justified from MURI's absence in our corpus, which is a fact about what we store. **Inference withdrawn; the residual gap is real but unnamed.** Blocked on a credential — human task |
-| — | F1/F4 candidate sets in Cov4's validation | Neither resembles the 22 sibling sets §11 measured (§11) |
+| **DEBT-1** | The D5 backfill generation carries six wrong-subject summaries and is missing a span | Cov5 fixed the **extractor**, not the **artifact**. **Blocks any cache commit** |
+| **DEBT-3** | §6.6's HTML outline layer is specified and unbuilt | **Deliberate** — measured population is 0 lists in 20 NIH announcements |
+| **DEBT-4** | 213 stale evidence entries whose records have left the catalog | Cache residue; inflates any denominator taken from the cache |
+| **DEBT-5** | 13 orphaned evidence entries | Cov1 may already have closed this by measurement; verify before writing anything |
+| **DEBT-6** | 25 recorded fetch failures across five hosts | Two hosts account for 18, and neither is a segmentation problem |
+| **DEBT-8** | `structural_siblings` is blind to **55% of the corpus's PDFs** (71 of 129 carry no bookmarks) | A measured limitation of the mechanism, not a defect in it (§6.3a) |
 
 ### What is true and settled, so it is not relitigated
 
@@ -3156,7 +3201,7 @@ publishes unreviewed · **seven of §6.3's ten families are retired on measureme
 
 ---
 
-### Package A — Foundations completion
+### P1 — Foundations *(legacy Package A)*
 
 **Complete 2026-08-16.** One commit per item, suite run between commits, pushed and green on `ubuntu-latest`.
 
@@ -3168,7 +3213,7 @@ publishes unreviewed · **seven of §6.3's ten families are retired on measureme
 - [x] A6. Query set + `evaluation/query_baseline.json` (§8.5) — *37 queries, byte-identical across two runs, wired into `tests.yml`. Found that top-10 churn is a weaker gate on the 5-record fixture than §8.5 implied; see the warning there*
 - [x] **GATE:** suite green, zero test-file edits · `verify_no_drift` green in CI **now covering populated evidence entries** · query baseline byte-identical across two consecutive runs
 
-### Package B — Segmentation, offline and self-contained
+### P2 — Segmentation engine *(legacy Package B)* — offline and self-contained
 
 **Complete 2026-08-16.** One commit per item, suite run between commits, pushed and green on `ubuntu-latest`.
 
@@ -3178,7 +3223,7 @@ publishes unreviewed · **seven of §6.3's ten families are retired on measureme
 - [x] B3. Synthetic fixtures + `tests/test_subtopic_segmentation.py` — *57 tests; Layer C covered end to end through pdfplumber using base-14 fonts, so **no `requirements-dev.txt` was needed**; §9.3's reasoning corrected*
 - [x] **GATE:** new tests pass · suite green (208 → 265) · `verify_no_drift` unchanged at 22 artifacts (nothing imports these yet, so nothing can regress)
 
-### Package C — Wire the call site, flag off
+### P3 — Flag-off integration *(legacy Package C)* — wire the call site
 
 **Complete 2026-08-16.** One commit per item, suite run between commits, pushed and green on `ubuntu-latest`.
 
@@ -3188,24 +3233,24 @@ publishes unreviewed · **seven of §6.3's ten families are retired on measureme
 - [x] C3. `git add` paths in the workflow — *guarded by a `-f` test, since the file does not exist until package G*
 - [x] **GATE:** flag **off** → `verify_no_drift` byte-identical and suite green with zero test-file edits (this is §0.5) · flag **on** → a cache produced for five documents copied out of the evidence cache locally. **Partial on one clause:** the cache was produced for five documents, but with **zero spans** — all five returned `no_layer_accepted`, which is exactly what C0's census predicts for this corpus. The production call site was separately shown to produce three high-confidence spans on a document that does enumerate, so the machinery is proven; the patterns are what do not yet reach real notices (package D)
 
-### Package D — Tune and backfill
+### P4 — Tune and backfill *(legacy Package D)*
 
 **Read `docs/CORPUS_CENSUS.md` before starting.** It is the measured picture this package tunes against: 12 of 20 documents enumerate, a family identifies the right list in 1 of those 12, and the segmenter produces subtopics for 0.
 
 > **⚠ Superseded denominator (8.2).** That 12-of-20 is a **non-representative** sample — the documents were chosen to span shapes. `docs/COVERAGE_SURVEY.md` is the reference: **10 of 40 stratified records enumerate (25%)**, ~128 catalog-wide. Every rate in this package's gate below is quoted against 12 and therefore reads roughly **twice** as favourably as the corpus supports. The gate is left as measured rather than restated, because it was a true measurement of that corpus; do not carry its percentages forward.
 
-- [x] **D0a. Fix Layer B's body cutoff** — *the defect was larger than the census recorded: `_candidates_from` also searched from offset 0, so it found the TOC copy of every title and never reached the body. The floor had to move to the search, not the results. 0 → 8 candidates located on `363526`*
-- [x] **D0c. Cap the final span** — *a THIRD defect, not in the census. The last span ran to end-of-document (111,290 chars on `363526` against a 40,000 ceiling), so any notice whose list ends before the document does was unacceptable by construction — which is nearly all of them*
-- [x] **D0b. Fix Layer C/D TOC co-collection** — *no corpus movement on its own, because Layer B now wins on the one document where it mattered; it removes a failure mode rather than fixing a current one*
-- [x] **GATE:** D0a/D0b landed before tuning · `363526` segments — 8 topics, `toc`, `dod_topic`, high confidence
-- [x] D1. `structural_siblings` (§6.3a) implemented; §6.4a thresholds fitted — **three moved, each with its measurement** (§6.3a, §6.4a). 0 false positives
-- [x] D2. All 286 bookmarks read — **`(q) Catalysis Science` is at level 2, page 46**; depth 3, 9/46/167/64 nodes (§6.7)
-- [x] D3. Census-named families added: `focus_area`, `component`, `technical_category`, and `topic_area` widened to sub-lettered ordinals
-- [ ] D4. Full **local** backfill — **RAN 2026-08-16 (53 min, 770 documents, 0 queued) and the cache was deliberately NOT committed.** Of the 12 documents whose subtopics would publish, **6 carry the wrong list, and 43 of 194 publishable records are fabricated** — `1. NOFO Summary`, `a. Narrative Section I: Project Description`, `1. Title X Statute`, `A. Short Description of Funding Opportunity`. §18.3's trade forbids shipping 43 wrong cards to gain 146 right ones. Histogram: `no_layer_accepted` 736 · accepted 22 · `no_extractable_text` 11 · `time_budget` 1 · `run_budget` 0. See `docs/CORPUS_CENSUS.md`
-- [ ] **D5. Give `structural_siblings` a positive test.** It admits any sibling set whose ancestors are not administrative, and the level-0 lexicon is keyed to DOE's `III. Program Description` convention. `362827`'s ancestor is `A. Summary`, `348830`'s is a bare `I.` — neither matches, so both publish their NOFO skeleton. **Until this exists `outline_structural` should emit `low`, not `medium`**
-- [x] **D5. Give `structural_siblings` a positive test** — done, and it took three fitted changes rather than one: a process-vocabulary veto at 0.07 applied to every family (§6.4 rule 8), `heading_font` demoted to `low` on 0/1 measured precision, and a dominant-code-form trim for contaminants inside otherwise-correct sets. **Fabricated publishable records 54 → 0**, legitimate 140 → 133, all 133 read individually
-- [x] **D7. Resolve the §12 per-subtopic budget** — **closed 2026-08-17, and the premise was wrong.** The ceiling was measuring the build-time cache record, 60.3% of which is `subtopic_terms` that never reaches the browser. Measured: the ceiling is violated identically at every cap from 400 to 100 (202/223), passes only at 5 terms (74.8% BM25 loss), and at *zero* terms the largest record still occupies 1,930 of 2,048 bytes — so §12's *"cut `max_terms`, not the ceiling"* was unachievable and is withdrawn. **`MAX_TERMS` stays at 400**; the ceiling now bounds the **display payload** (median 942 B, max 1,218 B, 0/223 over); the term map folds into the sidecar index (§5.2). Both former §13 decisions 0 and 1 are settled together, because they were one question
-- [x] **D6. Re-measure on a stratified sample — done 2026-08-16 → `docs/COVERAGE_SURVEY.md`.** 40 records stratified by attachment profile and agency, disjoint from the census 20; 131 files and pages opened with nothing skipped by name. **10 of 40 enumerate (25%), not 12 of 20 (60%)**; ~128 catalog-wide. *Partial: this measures **coverage**, not precision. The false-positive rate on a random sample — D6's original question — is still unmeasured, because the D5 changes were fitted after the backfill that would have to be re-run to measure them. Re-run the backfill and read the publishable titles again after the Coverage package*
+- [x] **P4.0a. Fix Layer B's body cutoff** — *the defect was larger than the census recorded: `_candidates_from` also searched from offset 0, so it found the TOC copy of every title and never reached the body. The floor had to move to the search, not the results. 0 → 8 candidates located on `363526`*
+- [x] **P4.0c. Cap the final span** — *a THIRD defect, not in the census. The last span ran to end-of-document (111,290 chars on `363526` against a 40,000 ceiling), so any notice whose list ends before the document does was unacceptable by construction — which is nearly all of them*
+- [x] **P4.0b. Fix Layer C/D TOC co-collection** — *no corpus movement on its own, because Layer B now wins on the one document where it mattered; it removes a failure mode rather than fixing a current one*
+- [x] **GATE:** P4.0a/P4.0b landed before tuning · `363526` segments — 8 topics, `toc`, `dod_topic`, high confidence
+- [x] **P4.1.** `structural_siblings` (§6.3a) implemented; §6.4a thresholds fitted — **three moved, each with its measurement** (§6.3a, §6.4a). 0 false positives
+- [x] **P4.2.** All 286 bookmarks read — **`(q) Catalysis Science` is at level 2, page 46**; depth 3, 9/46/167/64 nodes (§6.7)
+- [x] **P4.3.** Census-named families added: `focus_area`, `component`, `technical_category`, and `topic_area` widened to sub-lettered ordinals
+- [ ] **P4.4.** Full **local** backfill — **RAN 2026-08-16 (53 min, 770 documents, 0 queued) and the cache was deliberately NOT committed.** Of the 12 documents whose subtopics would publish, **6 carry the wrong list, and 43 of 194 publishable records are fabricated** — `1. NOFO Summary`, `a. Narrative Section I: Project Description`, `1. Title X Statute`, `A. Short Description of Funding Opportunity`. §18.3's trade forbids shipping 43 wrong cards to gain 146 right ones. Histogram: `no_layer_accepted` 736 · accepted 22 · `no_extractable_text` 11 · `time_budget` 1 · `run_budget` 0. See `docs/CORPUS_CENSUS.md`
+- [x] ~~**P4.5. Give `structural_siblings` a positive test.**~~ **This is the original specification, superseded by the completed entry below; re-checked and re-marked 8.12, because leaving it unticked made finished work read as outstanding.** It admits any sibling set whose ancestors are not administrative, and the level-0 lexicon is keyed to DOE's `III. Program Description` convention. `362827`'s ancestor is `A. Summary`, `348830`'s is a bare `I.` — neither matches, so both publish their NOFO skeleton. **Until this exists `outline_structural` should emit `low`, not `medium`**
+- [x] **P4.5. Give `structural_siblings` a positive test** — done, and it took three fitted changes rather than one: a process-vocabulary veto at 0.07 applied to every family (§6.4 rule 8), `heading_font` demoted to `low` on 0/1 measured precision, and a dominant-code-form trim for contaminants inside otherwise-correct sets. **Fabricated publishable records 54 → 0**, legitimate 140 → 133, all 133 read individually
+- [x] **P4.7. Resolve the §12 per-subtopic budget** — **closed 2026-08-17, and the premise was wrong.** The ceiling was measuring the build-time cache record, 60.3% of which is `subtopic_terms` that never reaches the browser. Measured: the ceiling is violated identically at every cap from 400 to 100 (202/223), passes only at 5 terms (74.8% BM25 loss), and at *zero* terms the largest record still occupies 1,930 of 2,048 bytes — so §12's *"cut `max_terms`, not the ceiling"* was unachievable and is withdrawn. **`MAX_TERMS` stays at 400**; the ceiling now bounds the **display payload** (median 942 B, max 1,218 B, 0/223 over); the term map folds into the sidecar index (§5.2). Both former §13 decisions 0 and 1 are settled together, because they were one question
+- [x] **P4.6. Re-measure on a stratified sample — done 2026-08-16 → `docs/COVERAGE_SURVEY.md`.** 40 records stratified by attachment profile and agency, disjoint from the census 20; 131 files and pages opened with nothing skipped by name. **10 of 40 enumerate (25%), not 12 of 20 (60%)**; ~128 catalog-wide. *Partial: this measures **coverage**, not precision. The false-positive rate on a random sample — P4.6's original question — is still unmeasured, because the D5 changes were fitted after the backfill that would have to be re-run to measure them. Re-run the backfill and read the publishable titles again after the Coverage package*
 - [ ] **GATE — measured, and one clause not met.** Denominator is the **12 enumerating** documents, not 20 (`docs/CORPUS_CENSUS.md`). **⚠ 8.2: that denominator is a non-representative sample; the corpus rate is 25% (`docs/COVERAGE_SURVEY.md`). These figures stand as a true measurement of *this corpus* and must not be quoted as the design's coverage:**
 
 | Metric | Result |
@@ -3219,13 +3264,13 @@ publishes unreviewed · **seven of §6.3's ten families are retired on measureme
 
 **On `DE-FOA-0003612` (Genesis Mission — live, closes 2026-12-17; 21 challenge areas spanning advanced manufacturing, biotechnology, fusion, materials, computing and fluid dynamics): 21 of 21 published challenge areas recovered exactly, 0 of 99 focus areas, 5 spurious administrative spans.** Full entry in `docs/CORPUS_CENSUS.md`.
 
-**Why more regexes are not the answer.** Of the seven misses, **four need one missing mechanism** (`label_run` for named subdivisions), **two need occurrence selection** — the pattern matches in several places and nothing decides which is the heading, the same class of defect as D0a/D0b — and **one is §6.3a's depth-0 rule refusing a legitimate list** (`343653`'s ten country FOAs). Only `332894` would require the loosening §18.3 forbids. Two mechanisms would address six of seven; more patterns would address one.
+**Why more regexes are not the answer.** Of the seven misses, **four need one missing mechanism** (`label_run` for named subdivisions), **two need occurrence selection** — the pattern matches in several places and nothing decides which is the heading, the same class of defect as P4.0a/P4.0b — and **one is §6.3a's depth-0 rule refusing a legitimate list** (`343653`'s ten country FOAs). Only `332894` would require the loosening §18.3 forbids. Two mechanisms would address six of seven; more patterns would address one.
 
 **⚠ Tuning stopped at 42%, below the 50% threshold, deliberately.** Every remaining miss needs a new *mechanism*, not a wider regex: `label_run` for outline-less named portfolios (AFOSR, NRL), occurrence selection for patterns that match in several places (`360339`, `363065` — a front-matter summary list and 36 prose mentions respectively), or a generic numbered-section family for `332894`'s bare `1.)`. §6.3 and §18.3 both name that last one as the most damaging change available. **The 0/8 false-positive count is the number that should not be traded**, and reaching 50% by loosening would trade exactly that.
 
 Per-agency-family acceptance, as the gate requires rather than in aggregate: **DOE 3/5** (`360678`, `361526`, `356623`; missing `363065`, and `362329` is DHA not DOE) · **DoD 2/6** (`363526`, `362859`; missing `332894`, `343653`, `352741`, `362681`) · **HHS/CDC 0/1** · **NASA 0/0** (no ROSES document in the corpus; §18.2).
 
-### Package D½ — Coverage
+### P5 — Coverage hardening *(legacy Package D½)*
 
 **Read `docs/COVERAGE_SURVEY.md` before starting.** It is the measured picture this package works against, and its ranked table is this package's ordering. Every yield below is *sampled records out of 40* · *catalog extrapolation*.
 
@@ -3233,78 +3278,80 @@ Per-agency-family acceptance, as the gate requires rather than in aggregate: **D
 - [x] **Cov1. Fix the `source_for_record` selection gap** — *done 2026-08-16. Measured on the survey's 40: reachable **30/40 → 40/40**, correctly segmenting **2/40 → 2/40**, false positives **0**. All ten newly reached records return `no_layer_accepted`; Sloan's seven fields are now fetched and still not accepted, because they are named rather than numbered (`label_run`, deferred §18.2). Writes no evidence entry — a separate cache key, present only with the flag on.* Original note: 2/40 · ~48. **685 records (46.4%) never attempted; 672 have never been fetched once; 236 carry live attachments.** Extend the parallel subtopic-only path (`subtopic_sources.py`); do **not** change `source_for_record` itself
 - [x] **Cov2. HTML attachment support** — *done 2026-08-16. Stubs filtered at `MIN_HTML_BYTES = 2048`; **20 of the 111 non-stub NIH announcements read end to end**: 20/20 parsed (29–112 containers, 50–125 K chars), **0/20 produced a list, 0 false positives**. The plumbing is right and the population is empty. Gap found and deliberately not built: `extract_html_sections` keeps headings in `section`, so §6.6's "use the section tree as the outline equivalent" is unimplemented; a test pins it. Unmeasurable on the 40-record sample, which contains no non-stub HTML record.* Original note: 1/40 · ~43, plus **108 records reached whose yield is unmeasured**. 366 `.html` attachments, all NIH; 111 complete announcements; 255 sub-1 KB stubs that must not displace the agency URL. **Read 20 of the 108 first** — that measurement is inside this item, not after it
 - [x] **Cov3. Re-enable multi-attachment fetch** — *done 2026-08-16, **no code change**. Traced live: the furniture primary returns `no_layer_accepted`, `FA2391-23-S-2403.pdf` returns 18 spans and wins on score. Pinned by `FurniturePrimaryTests`. The winner is `low` and never publishes — Cov4's evidence. A 9.5 MB model contract ate the per-document time budget, recorded not fixed.* Original note: 1/40 · ~5. Already built and neutralized by its own `low` cap. Justified by **AFRL PACER `349554`**: selected primary is a one-page Security Program Questionnaire; `FA2391-23-S-2403.pdf` yields **18 correct topics**. Land selection-by-result-quality with it
-- [ ] **Cov4. Redesign the confidence model** — **two stages (§18.1, rewritten 8.3), narrowed in 8.7 to `inferred` and `inline` provenance only — `native` and `referenced` children bypass the classifier and the queue (§5.1). Still required: PACER is `inferred` and no structured source covers it. Draw the validation set after D⅝, not before.** The unit moves from set to span (§6.4b); a classifier filters spans (§11: Sonnet 4.6 caught 7/7 contaminants with 0/107 false rejections, PACER 18/18); the review queue takes only the residual — abstentions and `medium`/`low` survivors. **Fail-closed: no classifier → no new subtopics, never unfiltered ones.** Key from GitHub Secrets; Claude Code strips it from tool subprocesses, so local testing needs a human to make the calls. Reuses `assets/review.js` and **partially delivers issue #8**
+- [ ] **Cov4. Redesign the confidence model** — **two stages (§18.1, rewritten 8.3), narrowed in 8.7 to `inferred` and `inline` provenance only — `native` and `referenced` children bypass the classifier and the queue (§5.1). Still required: PACER is `inferred` and no structured source covers it. Draw the validation set after the structured sources (P6), not before.** The unit moves from set to span (§6.4b); a classifier filters spans (§11: Sonnet 4.6 caught 7/7 contaminants with 0/107 false rejections, PACER 18/18); the review queue takes only the residual — abstentions and `medium`/`low` survivors. **Fail-closed: no classifier → no new subtopics, never unfiltered ones.** Key from GitHub Secrets; Claude Code strips it from tool subprocesses, so local testing needs a human to make the calls. Reuses `assets/review.js` and **partially delivers issue #8**
 - [x] **Cov5. Fix span-summary alignment** — *done 2026-08-17. One cause for all six: a `pdfminer`-inserted space beside a hyphen or em-dash made the bookmark title unlocatable, and `_locate_nodes` substituted the top of the page. **6 of 223 spans = 2.7% → 0 of 224**, measured by re-running all 13 accepted documents. Clustered by document (`360678` only), not by method. `360678` 68 → 69 spans. Two tests added, none modified; suite 321 green, `verify_no_drift` green. Residual: the `page_start_offset` fallback stays silent (§6.5).*
 - [ ] **Cov6. Fix `_demote()`'s blanket cap on no-primary records** — **added 8.5.** It decides "secondary" by whether `primary_content` was populated, and Cov1's path passes none, so a list read from a record's own Full Announcement is capped at `low`. Verified: `363526` gives `high` from `segment_document` and `low` through `segment_without_primary`. **Caps publication for 46.4% of the catalog** — every later recall item lands in the cache and reaches no PI until this is fixed (§18.1)
 - [ ] **Cov7. Read 30 more stratum-D records** — **added 8.5.** The cheapest outstanding measurement: D is 483 records with 12 reads, contributes 40 of §1.1's 171 on one observation, spans 7–171 alone, and holds the only tabular list. Supersedes the survey's "sample C and E"; C is discharged at 18 of 27
-- [ ] **GATE:** unreachable count re-derived against the **catalog** · records *reached* and records *yielding an accepted list* reported **separately** for Cov1–Cov3 · fabricated publishable records still **0**, measured by reading every published title as D5 did · **Cov6 verified by re-running `363526` end to end, not by reading the code** · §0.5 byte-identical with the flag off · **every gate's exit code checked directly, not read through `tail` (§17.7)**
+- [ ] **GATE:** unreachable count re-derived against the **catalog** · records *reached* and records *yielding an accepted list* reported **separately** for Cov1–Cov3 · fabricated publishable records still **0**, measured by reading every published title as the D5 backfill generation did · **Cov6 verified by re-running `363526` end to end, not by reading the code** · §0.5 byte-identical with the flag off · **every gate's exit code checked directly, not read through `tail` (§17.7)**
 
-### Package D⅝ — Structured Umbrellas
+### P6 — Structured-source coverage *(legacy Package D⅝, "Structured Umbrellas")*
 
-**Added 8.7, and it precedes D¾.** Rung-1 and rung-2 sources (§6.7·0) — the
-hierarchies agencies publish as data — before any further generic inference.
-**Build S1 only, then re-measure.** **S1 is complete and its gate is closed
-(2026-08-18); the next work is `Package N` below, and S2 does not begin until
-`Package N`'s gate is green.**
+**Added 8.7 (as legacy `D⅝`), and it precedes P7.** Rung-1 and rung-2 sources
+(§6.7·0) — the hierarchies agencies publish as data — before any further generic
+inference. **Build P6.1 only, then re-measure.** **P6.1 is complete and its gate is
+closed (2026-08-18); the next work is P8 below, and P6.2 does not begin until P8's
+gate is green** — that is sequencing, not a technical dependency (§18.0.4).
 
-- [x] **S1a. Read NSPIRES ROSES Table 3 and record its shape** — *done; `docs/ROSES_SOURCE_INSPECTION.md`. 69 rows, 6 overview, 63 elements; identity `(code, title)`; no explicit closed status.*  Original: — §0.4 rule 10, before any parser is written. Row schema, element-code form, how continuation years are expressed
-- [x] **S1b. `native` adapter for ROSES program elements** — *done, `scripts/sources/adapters/nasa_roses.py`, **`enabled = False`**. Emits children only for matched parents; `parse()` returns nothing so the 53 unmatched cannot reach the catalog.*  Original: — ~35 elements across Earth science, heliophysics, planetary science, astrophysics and biological/physical sciences. Emits `subtopic_source: "native"`, `confidence: "high"`, bypassing Cov4 and the review queue (§5.1). Parent match by element code, never by FOA number
-- [x] **S1c. Canaries** — *done. Six-division sentinel, element floor 40 against a measured 63, Table 2/3 delta tolerance 5 against a measured 1. Eight tests incl. HTTP-200-zero-rows.*  Original: — `expected_solicitations`: **ROSES has ≥20 open elements**. Zero rows on an HTTP 200 fails loudly (§7.4)
-- [x] **S1d. Re-measure and stop** — *done. 63 elements, 12 open; **10** relationship recoveries, **53** measured-not-emitted of which only **2** are open. **§13 decision 13 opened by S1 and taken 2026-08-18: `Package N` next, then S2.** S2/S3 not started.*  Original: — report yield **against D⅝'s own denominator**, naming which records were previously category (a); never fold it into a segmentation acceptance rate (§17.8); re-run §8.5. **S2 (DOE SC referenced taxonomy, all six offices) and S3 (DoD source router) stay unscheduled until a human reads S1d** — *superseded 2026-08-18: S1d has been read, and the resulting order is `Package N` → S2 → measure S2 → human decision on S3. S2 does not follow S1 directly.*
-- [x] **GATE:** S1 only · yield against D⅝'s own denominator, previously-(a) records named, never folded into an acceptance rate · canary proven against a simulated zero-row 200 · `native` confirmed to bypass Cov4 in code · §0.5 byte-identical with the flag off — *closed 2026-08-18 clause by clause against repository evidence, not against the session report (§18.1). Six clauses closed outright. **Previously-(a) count is 0** — S1 reached the (e) population, so the (a) claim is still untested. The Cov4 bypass is proven at the provenance/segmentation boundary and must be re-checked when Cov4's classifier lands. §0.5 parity is proven by equivalence with the pre-S1 tree plus exact baseline reproduction under a pinned build date; the gate **script** was red for **debt D7**, which is not S1's, and **D7 is now fixed — `verify_no_drift` exits 0 on the unchanged baseline** (§8.4).*
-
----
-
-### Package N — NASA ROSES Catalog Source
-
-**Added 8.11. This is the next implementation task, and it is a catalog-source
-package, not a subtopic one** (§13 decision 13, §18.1). It **deliberately changes
-the base catalog**, so it carries **its own gate** and §0.5 keeps its current
-meaning. **Do not start S2 until this package's gate is green.**
-
-- [ ] **N1. Source lifecycle** — reuse S1's ROSES Table 3 discovery and parsing unchanged: year discovered from the stable SARA landing page; nothing transient hard-coded (year, amendment, `solId`, `cmdocumentid`, versioned URLs); Table 3 authoritative, Table 2 corroboration/health only; TLS compatibility stays **per-adapter and off by default**
-- [ ] **N2. Identity and deduplication** — deterministic identity across ROSES and existing sources. Appendix code is **not** unique (`D.3C` twice); native identity is `(appendix_code, program_title)`; solicitation number is the strongest cross-source key; **5 of 10 current matches needed normalized-title fallback**, which is a **weaker** key and must never be treated as an exact match. **No opportunity already represented via Grants.gov may reappear as a separate ROSES record**
-- [ ] **N3. Source precedence and update ownership** — deterministic ownership for title · opportunity number · dates · official URL · agency/program metadata · currentness/status. **Last adapter to run must not silently overwrite the other source**; include identity stability across the ROSES-only → Grants.gov-carried transition
-- [ ] **N4. Currentness** — align with `currentness.py`'s existing actionable model; keep `derived_currentness` distinguishable from `native_status`, because NASA publishes no native `closed`; inactive elements stay **known to the adapter and absent from the public current catalog**
-- [ ] **N5. Lifecycle tests** — the six in §18.1: inactive stays out · becomes open and enters on the next build · closes and leaves the public current population · no duplicate against Grants.gov · a new unmatched open element is emitted · HTTP-200-zero-rows or an implausibly small result fails loudly rather than silently removing NASA coverage
-- [ ] **N6 / GATE:** no duplicate catalog records · stable identity · deterministic source precedence · correct currentness transitions · expected currently open unmatched NASA records present (**2** today, re-derived not hard-coded) · inactive elements absent from the public current catalog · loud failure on source/parser collapse · full suite green with exit codes checked directly · **intentional line-by-line review of the generated-catalog change before any re-freeze** · **§0.5 is not weakened or reinterpreted** · **debt D7 fixed first**
+- [x] **P6.1a. Read NSPIRES ROSES Table 3 and record its shape** — *done; `docs/ROSES_SOURCE_INSPECTION.md`. 69 rows, 6 overview, 63 elements; identity `(code, title)`; no explicit closed status.*  Original: — §0.4 rule 10, before any parser is written. Row schema, element-code form, how continuation years are expressed
+- [x] **P6.1b. `native` adapter for ROSES program elements** — *done, `scripts/sources/adapters/nasa_roses.py`, **`enabled = False`**. Emits children only for matched parents; `parse()` returns nothing so the 53 unmatched cannot reach the catalog.*  Original: — ~35 elements across Earth science, heliophysics, planetary science, astrophysics and biological/physical sciences. Emits `subtopic_source: "native"`, `confidence: "high"`, bypassing Cov4 and the review queue (§5.1). Parent match by element code, never by FOA number
+- [x] **P6.1c. Canaries** — *done. Six-division sentinel, element floor 40 against a measured 63, Table 2/3 delta tolerance 5 against a measured 1. Eight tests incl. HTTP-200-zero-rows.*  Original: — `expected_solicitations`: **ROSES has ≥20 open elements**. Zero rows on an HTTP 200 fails loudly (§7.4)
+- [x] **P6.1d. Re-measure and stop** — *done. 63 elements, 12 open; **10** relationship recoveries, **53** measured-not-emitted of which only **2** are open. **DEC-13 opened by P6.1 and taken 2026-08-18: P8 next, then P6.2.** P6.2/P6.3 not started.*  Original: — report yield **against P6's own denominator**, naming which records were previously category (a); never fold it into a segmentation acceptance rate (§17.8); re-run §8.5. **S2 (DOE SC referenced taxonomy, all six offices) and S3 (DoD source router) stay unscheduled until a human reads S1d** *(legacy labels: now P6.2, P6.3 and P6.1d)* — *superseded 2026-08-18: P6.1d has been read, and the resulting order is **P8 → P6.2 → measure P6.2 → human decision on P6.3** (§18.0.4). P6.2 does not follow P6.1 directly.*
+- [x] **P6.1 GATE:** P6.1 only · yield against P6's own denominator, previously-(a) records named, never folded into an acceptance rate · canary proven against a simulated zero-row 200 · `native` confirmed to bypass Cov4 in code · §0.5 byte-identical with the flag off — *closed 2026-08-18 clause by clause against repository evidence, not against the session report (§18.1). Six clauses closed outright. **Previously-(a) count is 0** — P6.1 reached the (e) population, so the (a) claim is still untested. The Cov4 bypass is proven at the provenance/segmentation boundary and must be re-checked when Cov4's classifier lands. §0.5 parity is proven by equivalence with the pre-P6.1 tree plus exact baseline reproduction under a pinned build date; the gate **script** was red for **BUG-7**, which is not P6.1's, and **BUG-7 is now fixed — `verify_no_drift` exits 0 on the unchanged baseline** (§8.4).*
 
 ---
 
-### Package D¾ — Forms
+### P8 — NASA ROSES Catalog Source *(legacy Package N)*
 
-**Added 8.5. Gated behind Cov4 and, from 8.7, behind package D⅝** — the two largest uncovered forms are both unsafe on structure alone (§18.1), and all four recogniser items are rung-4 inference whose yields were measured before any structured source was tried. **Fm1, Fm2, Fm5 and Fm6 build only against records still uncovered after D⅝, and their yields are re-measured on that residual.** Fm3, Fm4 and Fm7 are unaffected — two repairs and a decision not to build. Yields below are *records in the 90 read* · *catalog estimate*, **pre-D⅝**.
+**Added 8.11 (as legacy `Package N`). This is the next implementation task, and it
+is a catalog-source package, not a subtopic one** (DEC-13, §18.1). It
+**deliberately changes the base catalog**, so it carries **its own gate** (P8.6) and
+§0.5 keeps its current meaning. **Do not start P6.2 until P8's gate is green.**
+P8 is numbered by identity rather than by position: it sits here, between P6 and
+P7, because that is where it falls in the ordered path (§18.0.4).
+
+- [ ] **P8.1. Source lifecycle** — reuse P6.1's ROSES Table 3 discovery and parsing unchanged: year discovered from the stable SARA landing page; nothing transient hard-coded (year, amendment, `solId`, `cmdocumentid`, versioned URLs); Table 3 authoritative, Table 2 corroboration/health only; TLS compatibility stays **per-adapter and off by default**
+- [ ] **P8.2. Identity and deduplication** — deterministic identity across ROSES and existing sources. Appendix code is **not** unique (`D.3C` twice); native identity is `(appendix_code, program_title)`; solicitation number is the strongest cross-source key; **5 of 10 current matches needed normalized-title fallback**, which is a **weaker** key and must never be treated as an exact match. **No opportunity already represented via Grants.gov may reappear as a separate ROSES record**
+- [ ] **P8.3. Source precedence and update ownership** — deterministic ownership for title · opportunity number · dates · official URL · agency/program metadata · currentness/status. **Last adapter to run must not silently overwrite the other source**; include identity stability across the ROSES-only → Grants.gov-carried transition
+- [ ] **P8.4. Currentness** — align with `currentness.py`'s existing actionable model; keep `derived_currentness` distinguishable from `native_status`, because NASA publishes no native `closed`; inactive elements stay **known to the adapter and absent from the public current catalog**
+- [ ] **P8.5. Lifecycle tests** — the six in §18.1: inactive stays out · becomes open and enters on the next build · closes and leaves the public current population · no duplicate against Grants.gov · a new unmatched open element is emitted · HTTP-200-zero-rows or an implausibly small result fails loudly rather than silently removing NASA coverage
+- [ ] **P8.6 / GATE:** no duplicate catalog records · stable identity · deterministic source precedence · correct currentness transitions · expected currently open unmatched NASA records present (**2** today, re-derived not hard-coded) · inactive elements absent from the public current catalog · loud failure on source/parser collapse · full suite green with exit codes checked directly · **intentional line-by-line review of the generated-catalog change before any re-freeze** · **§0.5 is not weakened or reinterpreted** · **BUG-7 fixed first — satisfied 2026-08-18**
+
+---
+
+### P7 — Residual generic forms *(legacy Package D¾)*
+
+**Added 8.5. Gated behind P5's Cov4 gate and, from 8.7, behind P6** — the two largest uncovered forms are both unsafe on structure alone (§18.1), and all four recogniser items are rung-4 inference whose yields were measured before any structured source was tried. **Fm1, Fm2, Fm5 and Fm6 build only against records still uncovered after the structured sources land, and their yields are re-measured on that residual — recompute it before starting** (§18.0.4 step 6). Fm3, Fm4 and Fm7 are unaffected — two repairs and a decision not to build. Yields below are *records in the 90 read* · *catalog estimate*, measured **before any structured source existed**.
 
 - [ ] **Fm1. F4 — named / bulleted, no counter** — 9 of 90 · **~73**, or ~22 excluding one stratum-E observation. `label_run` (§6.3a) plus a bulleted variant. Highest false-positive risk in the plan; `362233`'s five real Focus Areas sit one subsection above five decoy process bullets. **Do not build on structure alone**
 - [ ] **Fm2. F1 — bare numbered** — 8 of 90 · ~31, the most stable uncovered row. **Blocked by §18.3a's four exit criteria — read them first.** Needs grouped restarting counters (`330175`) and title extraction that survives a trailing em-dash clause (`355150`)
-- [ ] **Fm3. Repair `dod_topic`'s ordinal group** — widen `(\d{1,2})` to letters so `Topic A1`–`A7` matches (`356612`). Third appearance of the same oversight; `topic_area` got it in D3
+- [ ] **Fm3. Repair `dod_topic`'s ordinal group** — widen `(\d{1,2})` to letters so `Topic A1`–`A7` matches (`356612`). Third appearance of the same oversight; `topic_area` got it in P4.3
 - [ ] **Fm4. Repair `thrust`'s granularity** — it matches the container `Thrust Area 1`, not the seven topics under it. Scope to the items or retire it under §17.8; it has **no record validating it at the right granularity**
 - [ ] **Fm5. F5 — table path in `extract_containers`** — 1 of 90 · ~40 **on n=1**. `pdfplumber` already authorized (§6.1). Fund on the qualitative argument — `363530` prints the same 12 topics as `363526` — not on the ~40. **Read Cov7 first**
 - [ ] **Fm6. F3 — coded named list** — 4 of 90 · ~6. `PA 1:`, `53-24-01 -`, `A.1.a.`. Discovered-prefix recogniser, false-positive profile unmeasured. Smallest yield; do last or not at all
 - [ ] **Fm7. F6 — record the verdict, write no pattern** — 4 of 90 · ~4. Three of four are two-item lists `structural_siblings` already sees and rule 1 / rule 2d reject on cardinality. Reachable only via §6.4b span-level admission, so it arrives with Cov4 or not at all
 - [ ] **GATE:** every new or repaired family names its validating document **and quotes the matched text** (§17.8) · acceptance rate reported **per form** · fabricated publishable records still **0** by reading every title · false positives reported on the **33 category-(a) documents** in `docs/FAMILY_TAXONOMY.md` §1 · §0.5 byte-identical with the flag off
 
-### Package E — Storage and scoring
+### P9 — Storage and scoring *(legacy Package E)*
 
-- [ ] **E0. Re-key subtopic identity onto the parent's `opportunity_id`** (§5.1, §5.3). **Do this before anything writes a cache.** `subtopic_records.py` keys on `opportunity_number` with an `opportunity_id` fallback, so 1,455 records key one way and 20 key the other, and a VPR-digest parent that later gains an opportunity number silently re-identifies all its children. Free today — no backfill has run; expensive after E2
-- [ ] E1. Prototype cross-corpus scoring on the frozen catalog — this resolves **§13.1**
-- [ ] E2. Implement the winner (sidecar or in-catalog children)
-- [ ] E3. **Minimal currentness only:** a subtopic is current **iff its parent is current**. Nothing else
+- [ ] **P9.0. Re-key subtopic identity onto the parent's `opportunity_id`** (§5.1, §5.3). **Do this before anything writes a cache.** `subtopic_records.py` keys on `opportunity_number` with an `opportunity_id` fallback, so 1,455 records key one way and 20 key the other, and a VPR-digest parent that later gains an opportunity number silently re-identifies all its children. Free today — no backfill has run; expensive after P9.2
+- [ ] **P9.1.** Prototype cross-corpus scoring on the frozen catalog — this resolves **DEC-1** (§13.1)
+- [ ] **P9.2.** Implement the winner (sidecar or in-catalog children)
+- [ ] **P9.3. Minimal currentness only:** a subtopic is current **iff its parent is current**. Nothing else
 - [ ] **GATE:** query baseline run · flag-off top-10 churn **zero** · flag-on movement reviewed case by case. **Read the displacement numbers too, not just churn** — on the 5-record frozen fixture nothing can fall past rank 10, so churn gates admission changes but not pure reordering, which is precisely what E risks (§8.5)
 
-### Package F — Make it visible
+### P10 — Retrieval and UI *(legacy Package F)* — make it visible
 
-- [ ] F1. Retrieval rollup in `assets/search-retrieval.js` (§7.3)
-- [ ] F2. `term_display` in the subtopic builder, capped at 60 stems
-- [ ] F3. `assets/match-explain.js` behind `FF_MATCH_EXPLAIN` (§7.6)
-- [ ] F4. Search UI behind `FF_SUBTOPICS_ENABLED` — `app.js` + `match_explorer.html`; do **not** relax `validateCatalog`
+- [ ] **P10.1.** Retrieval rollup in `assets/search-retrieval.js` (§7.3)
+- [ ] **P10.2.** `term_display` in the subtopic builder, capped at 60 stems
+- [ ] **P10.3.** `assets/match-explain.js` behind `FF_MATCH_EXPLAIN` (§7.6)
+- [ ] **P10.4.** Search UI behind `FF_SUBTOPICS_ENABLED` — `app.js` + `match_explorer.html`; do **not** relax `validateCatalog`
 - [ ] **GATE:** manual A/B with both flags off, byte-identical (browser code is outside the hermetic gate) · query baseline unchanged with flags off
 
-### Package G — Enable
+### P11 — Enable and ship *(legacy Package G)*
 
-- [ ] G1. Flip `--enable-subtopics` and `FF_SUBTOPICS_ENABLED`
-- [ ] G2. Document-evidence step given an `id:` and routed **before** `continue-on-error` is removed (§9.3)
-- [ ] G3. `PROJECT.md` — decision, rationale, measured deltas
+- [ ] **P11.1.** Flip `--enable-subtopics` and `FF_SUBTOPICS_ENABLED`
+- [ ] **P11.2.** Document-evidence step given an `id:` and routed **before** `continue-on-error` is removed (§9.3)
+- [ ] **P11.3.** `PROJECT.md` — decision, rationale, measured deltas
 - [ ] **GATE:** §9.4 dispatch checklist walked in full — runtime under 15 minutes, no new issue number, #30 updating expected
 
 ---
@@ -3316,21 +3363,29 @@ of it belongs to a package, none of it blocks a gate, and all of it is real. An
 item leaves this list by being done, by becoming a package item, or by being
 explicitly declined with a reason — never by being forgotten.
 
+**Renamed in 8.12 into §18.0.2's namespaces — BUG-* for defects, DEBT-* for carried
+work that is neither a defect nor a measurement, MEAS-* for measurements. The legacy
+digit is preserved, so `D4` → `DEBT-4` and the old bare `D#` labels translate
+mechanically in §18.0.3.** The headings below keep their original wording; the
+categories in the IDs are what §15's ledger sorts on. Note that **BUG-7 is the
+former *debt* D7 and is unrelated to *P4.7*, which was Package D's own item D7** —
+that collision is exactly why the namespaces were split.
+
 **Defects, unfixed:**
 
-- [ ] **D0. `--max-documents` caps each pass rather than the run.** With
+- [ ] **BUG-0. `--max-documents` caps each pass rather than the run.** With
   `--enable-subtopics` on, the subtopic pass receives the same value as the
   administrative pass, so the run can fetch twice what the flag says (§12).
   Decide between one shared budget and a second named flag; do **not** change the
   existing default (§0.4 rule 8)
-- [ ] **D1. The D5 cache carries six summaries that describe the wrong subject.**
+- [ ] **DEBT-1. The D5 backfill generation carries six summaries that describe the wrong subject.**
   Cov5 fixed the extractor, not the artifact. The uncommitted cache at
   `backfill3/` still holds the pre-fix text for `(d)`, `(i)`, `(j)`, `(k)`, `(l)`
   and `(n)` of `360678`, and is missing `(m)` entirely. **Any figure computed from
   that cache inherits the defect**, including §11's span-level table. Regenerate
   before the cache is used for anything else — and note it is 68 spans where a
   re-run gives 69
-- [x] **D7. The no-drift gate is date-dependent, so it is red on every day
+- [x] **BUG-7 (formerly debt D7). The no-drift gate is date-dependent, so it is red on every day
   except the one its baseline was frozen on.** **Fixed 2026-08-18** —
   `tools/hermetic_build.sh` now pins `generated_at` in a `.work/` copy via
   `tools/pin_generated_at.py` and feeds that to `build_changes`, so event
@@ -3343,12 +3398,12 @@ explicitly declined with a reason — never by being forgotten.
   adds 17 tests including byte-identical change-feed output across a simulated UTC
   rollover, and reverting the pin fails 4 of them. Full record in §8.4. Original
   diagnosis follows. Diagnosed 2026-08-18 while closing
-  D⅝'s §0.5 clause, and reproduced exactly: `scripts/build_changes.py::_event_id`
+  P6.1's §0.5 clause, and reproduced exactly: `scripts/build_changes.py::_event_id`
   seeds its SHA-1 with `changed_at[:10]`, the build's **UTC calendar date**, so
   every event id turns over at midnight UTC, and `tools/fingerprint.py` — which
   normalizes ISO-8601 datetime literals and the one named date-only field —
   cannot un-hash a date baked into an id. Evidence: the same two artifacts differ
-  with the **same hashes** at the pre-S1 commit `7cece6b`; the normalized text
+  with the **same hashes** at the pre-P6.1 commit `7cece6b`; the normalized text
   diff is **two lines, both event ids**; and pinning `generated_at`'s date to the
   baseline's UTC freeze date reproduces **all 20** committed fingerprints exactly.
   Commit `fc844e6` fixed the same rollover for `source_first_seen_date` and did
@@ -3356,16 +3411,16 @@ explicitly declined with a reason — never by being forgotten.
   a new event id — so the fix belongs in the gate's tooling: either normalize the
   event id, or pin the changes step's clock the way `AS_OF` already pins the
   catalog date. **Do not "fix" it by re-freezing the baseline**, which buys one
-  day. **Precondition for `Package N`'s gate**, which must review an intentional
+  day. **Prerequisite for P8's gate**, which must review an intentional
   change to these same two artifacts
-- [ ] **D2. Three families reject an ASCII hyphen.** Measured by running the
+- [ ] **BUG-2. Three families reject an ASCII hyphen.** Measured by running the
   patterns: `dod_topic`, `component` and `technical_category` all accept `:`,
   en-dash and em-dash but **not `-`**, and `technical_category` also rejects `.`.
   `Topic 1- Aero-Structures` does not match. PACER's `349554` happens to use an
   en-dash, which is why this has never surfaced. Fold into **§18.1 Fm3**, whose
   scope is currently only the letter-ordinal gap — and add the ASCII hyphen to
   the same character class rather than filing a third variant later
-- [ ] **D3. §6.6's HTML outline layer is specified and unbuilt.**
+- [ ] **DEBT-3. §6.6's HTML outline layer is specified and unbuilt.**
   `extract_html_sections` puts the heading in the container's `section` and the
   prose in its `text`, so every text-scanning family looks past the headings and
   §6.6's instruction to *"use the section tree as the outline equivalent"* is
@@ -3376,14 +3431,14 @@ explicitly declined with a reason — never by being forgotten.
 
 **Cache hygiene:**
 
-- [ ] **D4. Prune the 213 stale evidence entries** whose records have left the
+- [ ] **DEBT-4. Prune the 213 stale evidence entries** whose records have left the
   catalog. They are cache residue, not a reachability problem, and they inflate
   any denominator taken from the cache (§12)
-- [ ] **D5. Decide what to do with the 13 orphaned entries** — records whose
+- [ ] **DEBT-5. Decide what to do with the 13 orphaned entries** — records whose
   evidence entry names a real attachment but whose parent no longer resolves to a
   source. Cov1 reaches most of them now, so this may already be closed by
   measurement rather than by code; verify before writing anything
-- [ ] **D6. Triage the 25 recorded fetch failures.** `nasaprs.com` 12,
+- [ ] **DEBT-6. Triage the 25 recorded fetch failures.** `nasaprs.com` 12,
   `transit.dot.gov` 4, `rd.usda.gov` 2, `bja.ojp.gov` 1, `nsf.gov` 2, plus 4
   against dead URLs from records that have left the catalog. **Two hosts account
   for 18 of 25 and neither is a segmentation problem** — NASA is §18.2's NSPIRES
@@ -3393,37 +3448,37 @@ explicitly declined with a reason — never by being forgotten.
 
 **Measurements outstanding:**
 
-- [ ] **M1. Verify Cov5's fix leaves the 757 no-span documents unchanged.** The
+- [ ] **MEAS-1. Verify Cov5's fix leaves the 757 no-span documents unchanged.** The
   prevalence re-run covered the **13 accepted** documents (224 spans). The other
   757 in the D5 backfill produced no spans, so there is nothing to misalign — but
   that they still produce none, and still for the same recorded reason, is
   **asserted and not measured**. A widened title matcher could in principle
   locate a candidate that previously failed, which is how `360678` gained a span
-- [ ] **M6. Name at least one verified SAM-only opportunity, or re-justify the SAM.gov adapter.** §18.2's deferral was argued from MURI's absence in our corpus, which is a fact about what we store and not about where MURI is published — that inference is withdrawn. The adapter needs a genuinely SAM-only DoD opportunity relevant to academic researchers, named with its notice ID. **Blocked on a credential:** SAM.gov access does not exist in this project (§7.5), so this is a human task, not an agent one. Until it is done, the adapter's cost is known and its benefit is asserted
-- [ ] **M5. Build a discipline-stratified query and relevance set.** Measured: **18 of 37 queries (49%) are chemistry/chemical engineering/materials, all 3 profile probes are, and 4 name any other discipline** (§8.5). No query names biology, clinical research, physics, computing, social science, humanities, earth science, or non-chemical engineering. **The debt is scoped: §8.5's frozen query set is single-discipline, so a ranking regression outside chemistry is invisible to it, and any future gold relevance set built on it inherits one researcher's judgement of relevance.** Extraction-side figures — fabricated records, span precision, acceptance rates — are corpus measurements and are **not** affected. Needs ~40 more queries across nine research populations (§8.5's table), from real solicitation vocabulary, ≥1 profile probe each. The regression half **requires no relevance labels**; the gold-set half does, and is §13 decision 4's problem
-- [ ] **M4. Read `344592` (`W911NF-23-S-0001`, DEVCOM ARL BAA) for MURI topics.** A live Grants.gov search finds MURI in its full text; our stored description is truncated at 2,793 chars and does not contain it. **If that notice enumerates MURI topics inline, part of what §18.2's SAM.gov deferral is said to cost is already reachable** — the record is in the catalog and fetchable today. Cheap: one document, and it is already in the development corpus §6.3 names
-- [ ] **M2. Read 30 more stratum-D records** — the cheapest outstanding
+- [ ] **MEAS-6. Name at least one verified SAM-only opportunity, or re-justify the SAM.gov adapter.** §18.2's deferral was argued from MURI's absence in our corpus, which is a fact about what we store and not about where MURI is published — that inference is withdrawn. The adapter needs a genuinely SAM-only DoD opportunity relevant to academic researchers, named with its notice ID. **Blocked on a credential:** SAM.gov access does not exist in this project (§7.5), so this is a human task, not an agent one. Until it is done, the adapter's cost is known and its benefit is asserted
+- [ ] **MEAS-5. Build a discipline-stratified query and relevance set.** Measured: **18 of 37 queries (49%) are chemistry/chemical engineering/materials, all 3 profile probes are, and 4 name any other discipline** (§8.5). No query names biology, clinical research, physics, computing, social science, humanities, earth science, or non-chemical engineering. **The debt is scoped: §8.5's frozen query set is single-discipline, so a ranking regression outside chemistry is invisible to it, and any future gold relevance set built on it inherits one researcher's judgement of relevance.** Extraction-side figures — fabricated records, span precision, acceptance rates — are corpus measurements and are **not** affected. Needs ~40 more queries across nine research populations (§8.5's table), from real solicitation vocabulary, ≥1 profile probe each. The regression half **requires no relevance labels**; the gold-set half does, and is §13 decision 4's problem
+- [ ] **MEAS-4. Read `344592` (`W911NF-23-S-0001`, DEVCOM ARL BAA) for MURI topics.** A live Grants.gov search finds MURI in its full text; our stored description is truncated at 2,793 chars and does not contain it. **If that notice enumerates MURI topics inline, part of what §18.2's SAM.gov deferral is said to cost is already reachable** — the record is in the catalog and fetchable today. Cheap: one document, and it is already in the development corpus §6.3 names
+- [ ] **MEAS-2. Read 30 more stratum-D records** — the cheapest outstanding
   measurement in the project, and the one that closes over half of §1.1's
   interval. Tracked as **§18.1 Cov7**; listed here so it is visible without
   reading §18
-- [ ] **M3. Establish the classifier's run-to-run variance.** Measured
+- [ ] **MEAS-3. Establish the classifier's run-to-run variance.** Measured
   incidentally at **1 of 62 byte-identical spans flipping (1.6%)**, against the
   0.9% false-rejection rate it is meant to measure (§11 caveat 2). **The noise is
   larger than the signal**, so Cov4's "zero false rejections" gate is not
   demonstrable in a single pass and must specify repeats
 
 **Already tracked as package items, listed here only for visibility:**
-`_demote()`'s 46.4% publication cap is **§18.1 Cov6**; the rule 1 floor rejecting
-F6's two-item lists is **§18.1 Fm7** and §6.4a; the 30 stratum-D reads are
-**Cov7** (M2 above).
+`_demote()`'s 46.4% publication cap is **P5's Cov6**; the rule 1 floor rejecting
+form F6's two-item lists is **P7's Fm7** and §6.4a; the 30 stratum-D reads are
+**P5's Cov7**, which is the same work as **MEAS-2** above and not a second copy.
 
 ### Deferred — not part of the minimum path
 
 **Do not start any of these before package G is complete.** Each is a separate decision to be made with evidence from A–G. Costs are in §18.2; the DOE BES omnibus getting no child records in v1 is the most significant of them.
 
 - [ ] ~~SAM.gov adapter~~ (§7.5)
-- [ ] ~~NSPIRES activation~~ — **the ROSES table half is no longer deferred: it is `Package N`, scheduled next (§13 decision 13).** What stays deferred is only the session-gated open-solicitations list (§18.2)
-- [ ] ~~`program_taxonomy` / referenced subtopics~~ (§6.7) — **blocked on §13.1 decision 2**
+- [ ] ~~NSPIRES activation~~ — **the ROSES table half is no longer deferred: it is P8, scheduled next (DEC-13).** What stays deferred is only the session-gated open-solicitations list (§18.2)
+- [ ] ~~`program_taxonomy` / referenced subtopics~~ (§6.7) — **blocked on DEC-2**
 - [ ] ~~`expected_solicitations.json` + `check_expected.py`~~ (§7.4)
 - [ ] ~~§7.9 profile rebuild~~ into `faculty_profiles_v2.json`
 - [ ] ~~Expired archive, "include past cycles", recurrence grouping, `own_deadline`~~ (§7.2)
@@ -3517,12 +3572,12 @@ Both are Phase 1 work and both fail loudly rather than silently, which is why th
 | 5 | §18 package A — foundations completion. | Six commits, gates green, §15 updated, branch pushed | **done 2026-08-16** |
 | 6 | §18 package B — segmentation, offline and self-contained. Opened with an unplanned B0 verifying §17.2's API claims. | Four commits, gates green, §15 updated, branch pushed | **done 2026-08-16** |
 | 7 | §18 package C — wire the call site, flag off. Opened with an unplanned C0 corpus census. | Five commits, §0.5 gate green, §15 updated, branch pushed | **done 2026-08-16** |
-| 8 | §18 package D — tune and backfill. | Nine commits; D4/D5 backfills run and the cache deliberately **not** committed; D7 opened (closed 2026-08-17 — see §13 settled) | **done 2026-08-16 — gate not met.** Fabricated publishable records reached 0, but the A4 size budget fails (§13 open decision 0) |
+| 8 | §18 package D — tune and backfill *(now **P4**)*. | Nine commits; the D4/D5 backfill generations run and the cache deliberately **not** committed; **P4.7** opened, then closed 2026-08-17 (legacy "D7" — **not** BUG-7; see §18.0.3) | **done 2026-08-16 — gate not met.** Fabricated publishable records reached 0, but the A4 size budget fails (§13 open decision 0) |
 | 9 | Coverage survey — research only, no code. | `docs/COVERAGE_SURVEY.md`; this revision (8.2) | **done 2026-08-16** |
 | 10 | Coverage package Cov1–Cov3, plus an unplanned §11 classifier measurement and re-baseline. | Four commits; §11 reopened on the precision half; this revision's 8.3 and 8.4 | **done 2026-08-16/17** |
 | 11 | Family taxonomy — research only, no code. Classified every miss across the census 20 and survey 40; drew and read a third stratified sample of 50 records / 170 documents; induced the taxonomy from a `claude-sonnet-5` run. | `docs/FAMILY_TAXONOMY.md`; two commits | **done 2026-08-17** |
 | 12 | Revise this plan against `docs/FAMILY_TAXONOMY.md`. No code. | This revision — **8.5**: §6.3 replaced, seven families retired, §17.8 added, §18.1 re-ordered, §18.3a's exit criteria | **done 2026-08-17** |
-| 13+ | **One §18 work package per session.** Each item inside it is its own commit, with the suite run between commits. | The package, its gate output, an updated §15, and a pushed branch | next: **finish package D½ — Cov4, then Cov5–Cov7**. Read `docs/FAMILY_TAXONOMY.md` first; §18.1's ⚠ note is why Cov4 precedes all form work, and package D¾ is gated behind it. §13 open decision 0 still blocks committing any cache until a human resolves it |
+| 13+ | **One §18 work package per session.** Each item inside it is its own commit, with the suite run between commits. | The package, its gate output, an updated §15, and a pushed branch | **Delivered since session 12, in order: the 8.5–8.9 plan revisions, P5's Cov5, P6.1 (four items plus its gate), DEC-13 and P8's specification, BUG-7's fix, and this 8.12 namespace normalization.** For what is next, read **§18.0.4** — it is the single ordered path, and this cell deliberately does not keep a second copy of it |
 
 Sessions 1 and 2 are not overhead. They are what makes the additive-edit discipline in §8 possible, because you cannot make a surgical edit to a file whose structure you inferred. Session 1 found that the single most consequential fact in this project — which PDF library the repository uses — was wrong in every prior version, and that error alone would have produced an unusable Layer C and an AGPL licensing problem.
 
@@ -3595,14 +3650,14 @@ This is the same class of error as §9.4 item 7, where a `-v` check reported a p
 
 **Added in 8.5, from a 3-for-3 record against a 3-for-10 one.**
 
-Three families were written **from measurement** — `component`, `focus_area` and `technical_category`, added in D3 from documents the census had already read and quoted. **All three have corpus support.** Ten families were written **from expectation**, before any document in this catalog had been opened. **Seven have none**, and two of the seven produce only false positives (§6.3).
+Three families were written **from measurement** — `component`, `focus_area` and `technical_category`, added in P4.3 from documents the census had already read and quoted. **All three have corpus support.** Ten families were written **from expectation**, before any document in this catalog had been opened. **Seven have none**, and two of the seven produce only false positives (§6.3).
 
 That is not bad luck. It is what happens when a recogniser is specified from what a corpus *ought* to contain, and it has now happened three times in this document with three different instruments:
 
 | Specified from reasoning | What measurement said |
 |---|---|
 | §6.3's ten families | 7 of 10 have no corpus support; 5 never fire in 170 documents |
-| §6.4a's six structural thresholds | *"stated to be calibrated, not because they have been measured"* — D1 refitted three, D5 replaced the load-bearing one entirely |
+| §6.4a's six structural thresholds | *"stated to be calibrated, not because they have been measured"* — P4.1 refitted three, the D5 backfill replaced the load-bearing one entirely |
 | §6.3a's ancestor lexicon | Caught 0 of 23 administrative sibling sets in `DE-FOA-0003600`; D4 found it keyed to one agency's outline convention |
 
 **The rule.**
@@ -3639,13 +3694,13 @@ lose:
    right example for §6.3a because it is a real span in a real bookmark tree that
    was read end to end. Using it to *illustrate a mechanism* is fine. Using it to
    *rank* that mechanism above another is what this rule forbids.
-2. **Agency-specific work is fine when the breadth is stated.** §18.1 D⅝ orders
+2. **Agency-specific work is fine when the breadth is stated.** **P6** orders
    its three sources by *disciplines served per unit of cost* and says what each
    covers — ROSES spans Earth science, heliophysics, planetary science,
    astrophysics and biological/physical sciences. That is a breadth argument, and
    it is checkable.
 3. **Small populations may still win** on cost, risk or as a proof of a model —
-   D⅝ builds one adapter precisely to test the provenance argument cheaply. State
+   P6 builds one adapter precisely to test the provenance argument cheaply. State
    the reason, and state the population.
 
 **The practical test, before committing a priority:** name the disciplines it
@@ -3656,7 +3711,7 @@ justification or a different rank.
 **Where this rule was already violated, and is now corrected:** §8.5's query set
 is 49% chemistry with all three profile probes in that field, so **a ranking
 regression outside chemistry would not be detected** and any gold relevance set
-built on it would encode one discipline's judgement of relevance (§15 debt M5).
+built on it would encode one discipline's judgement of relevance (**MEAS-5**).
 Note the scope precisely: this is a **retrieval-evaluation** debt. The
 extraction-side measurements — fabricated records, span precision, acceptance
 rates, Cov5 prevalence — are judged against document content by reading it, and
@@ -3773,25 +3828,207 @@ an entire adapter. Re-testing cost under an hour.
 
 ## 18. Minimum path
 
-§10's four phases describe everything this project could be. **This section describes the smallest version of it that is worth shipping**, and it is what should actually be built. Everything not listed in packages A–G and D½ is deferred, explicitly, with the cost of deferring it written down.
+§10's four phases describe everything this project could be. **This section describes the smallest version of it that is worth shipping**, and it is what should actually be built. Everything not listed in **P1–P11** below is deferred, explicitly, with the cost of deferring it written down.
 
 The reason for cutting is not schedule pressure. It is that §10 bundles the core mechanism — *segment a notice into child records and make them findable* — with six or seven adjacent projects that each have their own failure modes, their own credentials, and their own tuning loops. Shipping them together means none of them is observable when something goes wrong. The minimum path isolates the mechanism, proves it, and leaves the rest as separate decisions to be made with evidence rather than in advance.
 
 **Sequencing rule:** one package per session (§0.4 rule 5). Each item inside a package is its own commit with the suite run between commits. A package is not complete until its gate is green and the branch is pushed.
 
-**The ordered path, as of 8.11.** This is the sequence, not a menu:
+---
+
+## 18.0 Canonical implementation roadmap
+
+**Added 8.12, and it is a nomenclature change only — no priority, gate, measured
+number or conclusion moved.** Successive insertions left five namespaces
+competing for the same characters: original packages **A–G**, inserted packages
+**D½ / D⅝ / D¾**, **S1–S3** inside D⅝, **Package N**, and a bare **D#** series
+used simultaneously for *Package D's own items*, for *defects*, for *debt* and for
+*backfill generations*. `D5` meant three different things in three different
+tables. **This section is the single authoritative namespace.**
+
+**Rule going forward: every forward-looking instruction, gate, checklist entry,
+dependency and session direction uses the canonical ID first.** A legacy label may
+follow in parentheses on first mention in a section, and may stand alone only where
+it describes what a past session or commit actually did.
+
+### 18.0.1 Packages — P1 … P11
+
+| Canonical ID | Canonical name | Legacy label | Status |
+|---|---|---|---|
+| **P1** | Foundations | Package A | **complete** 2026-08-16 |
+| **P2** | Segmentation engine | Package B | **complete** 2026-08-16 |
+| **P3** | Flag-off integration | Package C | **complete** 2026-08-16 |
+| **P4** | Tune and backfill | Package D | **complete 2026-08-16, gate not met** — correct-acceptance 42% against a 50% threshold, stopped deliberately |
+| **P5** | Coverage hardening | Package D½ | **in progress** — Cov0–Cov3 and Cov5 done; **Cov4, Cov6, Cov7 outstanding** |
+| **P6** | Structured-source coverage | Package D⅝ | **in progress** — P6.1 complete and gated; P6.2 and P6.3 not started |
+| **P6.1** | NASA ROSES structured-source proof | D⅝ S1 | **complete** 2026-08-18, gate closed clause by clause |
+| **P6.2** | DOE Office of Science structured-source test | D⅝ S2 | **not started.** Approved in principle; sequenced after P8 |
+| **P6.3** | DoD structured-source test | D⅝ S3 | **not started, and not scheduled** — a human decision after P6.2 is measured |
+| **P7** | Residual generic forms | Package D¾ | **not started** — gated on P5's Cov4 gate *and* on P6 measurement |
+| **P8** | NASA ROSES Catalog Source | Package N | **not started, and it is the next implementation task** (DEC-13) |
+| **P9** | Storage and scoring | Package E | **not started** |
+| **P10** | Retrieval and UI | Package F | **not started** |
+| **P11** | Enable and ship | Package G | **not started** |
+
+**Item labels inside a package.** Renamed **only where the legacy label was
+ambiguous**, because churn in an unambiguous label buys nothing and costs
+traceability:
+
+| Package | Item labels | Why |
+|---|---|---|
+| P1, P2, P3 | **unchanged** — A0–A4, B0–B3, C0–C3 | Unambiguous, and **three test docstrings cite them by name** (`tests/test_size_budget.py` "item A4", `tests/test_subtopic_segmentation.py` "item B3", `tests/test_subtopic_records.py` "item C1"), as do two frozen fixtures. Renaming them would either break the citation or require editing tests and generated inputs, which this session may not do |
+| P4 | **renamed** → P4.0a, P4.0b, P4.0c, P4.1 … P4.7 (legacy D0a–D0c, D1–D7) | **This is the collision.** Legacy `D5`/`D6`/`D7` each named a P4 item *and* a debt item *and*, for D4/D5, a backfill generation |
+| P5 | **unchanged** — Cov0 … Cov7 | Unambiguous and cross-referenced from §5.1, §6.3a, §6.4b, §11 and §12 |
+| P6.1 | **renamed** → P6.1a … P6.1d (legacy S1a–S1d) | `S1`–`S3` are mapped to P6.1–P6.3, so their sub-items follow |
+| P7 | **unchanged** — Fm1 … Fm7 | Unambiguous |
+| P8 | **renamed** → P8.1 … P8.6 (legacy N1–N6) | `Package N` is retired as a label |
+| P9 | **renamed** → P9.0 … P9.3 (legacy E0–E3) | Bare `E` also names a corpus **stratum** |
+| P10 | **renamed** → P10.1 … P10.4 (legacy F1–F4) | **Bare `F1`–`F6` are the measured *form* names** in `docs/FAMILY_TAXONOMY.md` and §18.3a. Package F's item `F1` and form `F1` were different things with the same label |
+| P11 | **renamed** → P11.1 … P11.3 (legacy G1–G3) | Consistency with the forward-looking packages |
+
+### 18.0.2 Non-package namespaces
+
+Bare `D#` is retired for anything that is not a P4 item. Four prefixes, and the
+**legacy digit is preserved** so translation is mechanical:
+
+| Prefix | Meaning | Members |
+|---|---|---|
+| **BUG-#** | A defect in code or output — an item stays in this namespace after it is fixed, so its history stays citable | BUG-0, BUG-2, **BUG-7 (fixed)**, BUG-9, BUG-10 |
+| **MEAS-#** | A measurement still required before something can be concluded | MEAS-1 … MEAS-6 |
+| **DEC-#** | An architectural or product decision, open or taken | DEC-0 … DEC-13 |
+| **DEBT-#** | Carried work that is neither a defect nor a measurement — stale artifacts, cache hygiene, a deliberate non-build | DEBT-1, DEBT-3, DEBT-4, DEBT-5, DEBT-6, DEBT-8 |
+
+**Categories were assigned by reading each item, not by its old prefix.** Three
+legacy `D#` debt entries are **not** defects and are labelled `DEBT-`: DEBT-1 is a
+stale *artifact* (the extractor was fixed by Cov5; the cache was not), DEBT-3 is a
+**deliberate** non-build on a population measured at zero, and DEBT-4/5/6 are cache
+and fetch hygiene. Conversely three items that had **no** identifier at all now have
+one — **BUG-9** and **BUG-10** as defects, **DEBT-8** as a measured limitation of a
+mechanism rather than a fault in it — because a ledger entry that cannot be cited is
+not an entry.
+
+### 18.0.3 Migration table — the authoritative translation layer
+
+**This table is the only place aliases are explained.** Do not add competing alias
+notes elsewhere.
+
+| Canonical ID | Canonical name | Legacy label(s) | Status |
+|---|---|---|---|
+| P1 | Foundations | Package A | complete |
+| P2 | Segmentation engine | Package B | complete |
+| P3 | Flag-off integration | Package C | complete |
+| P4 | Tune and backfill | Package D | complete, gate not met |
+| P4.0a–P4.0c | Layer B/C/D defect fixes | D0a, D0b, D0c | complete |
+| P4.1–P4.3 | `structural_siblings`, the 286 bookmarks, census families | D1, D2, D3 | complete |
+| P4.4 | Full local backfill | D4 | **ran, cache deliberately not committed** |
+| P4.5 | `structural_siblings` positive test | D5 *(listed twice, once stale-open)* | complete |
+| P4.6 | Re-measure on a stratified sample | D6 | complete |
+| P4.7 | Resolve the §12 per-subtopic budget | D7 *(P4's D7 — **not** the gate defect)* | closed 2026-08-17 |
+| P5 | Coverage hardening | Package D½ | in progress |
+| P5 items | Cov0 … Cov7 | unchanged | Cov4/Cov6/Cov7 open |
+| P6 | Structured-source coverage | Package D⅝, "Structured Umbrellas" | in progress |
+| P6.1 | NASA ROSES structured-source proof | S1 | complete, gate closed |
+| P6.1a–P6.1d | Inspect · adapter · canaries · re-measure | S1a, S1b, S1c, S1d | complete |
+| P6.2 | DOE Office of Science structured-source test | S2 | not started |
+| P6.3 | DoD structured-source test | S3 | not started, unscheduled |
+| P7 | Residual generic forms | Package D¾, "Forms" | not started |
+| P7 items | Fm1 … Fm7 | unchanged | not started |
+| P8 | NASA ROSES Catalog Source | Package N | **next** |
+| P8.1–P8.6 | Lifecycle · identity · precedence · currentness · tests · gate | N1 … N6 | not started |
+| P9 | Storage and scoring | Package E | not started |
+| P9.0–P9.3 | Re-key identity · scoring prototype · implement · currentness | E0, E1, E2, E3 | not started |
+| P10 | Retrieval and UI | Package F | not started |
+| P10.1–P10.4 | Rollup · `term_display` · match-explain · search UI | F1, F2, F3, F4 *(package items, **not** the F1–F6 form names)* | not started |
+| P11 | Enable and ship | Package G | not started |
+| P11.1–P11.3 | Flip the flags · route the step · `PROJECT.md` | G1, G2, G3 | not started |
+| **BUG-0** | `--max-documents` caps each pass, not the run | D0 *(debt)* | open |
+| **BUG-2** | Three families reject an ASCII hyphen | D2 *(debt)* | open — folded into P7's Fm3 |
+| **BUG-7** | The hermetic gate was date-dependent through the event-ID seed | **formerly D7** *(debt; distinct from P4.7)* | **fixed 2026-08-18** (`d735142`) |
+| **BUG-9** | The aggregating-agency page passes every acceptance rule | *(previously unnumbered, §6.3b)* | open |
+| **BUG-10** | Cov5's residual: the `page_start_offset` fallback is silent | *(previously unnumbered, §6.5)* | open |
+| **DEBT-1** | The backfill cache holds six wrong-subject summaries and misses a span | D1 *(debt)* | open |
+| **DEBT-3** | §6.6's HTML outline layer is specified and unbuilt, deliberately | D3 *(debt)* | open by choice |
+| **DEBT-4** | 213 stale evidence entries | D4 *(debt)* | open |
+| **DEBT-5** | 13 orphaned evidence entries | D5 *(debt)* | open |
+| **DEBT-6** | 25 recorded fetch failures across five hosts | D6 *(debt)* | open |
+| **DEBT-8** | `structural_siblings` is blind to 55% of the corpus's PDFs | *(previously unnumbered, §6.3a)* | carried limitation |
+| **MEAS-1** | Cov5 leaves the 757 no-span documents unchanged | M1 | asserted, never run |
+| **MEAS-2** | 30 more stratum-D records | M2 | delivered by P5's Cov7 |
+| **MEAS-3** | Classifier run-to-run variance | M3 | required before Cov4's gate can be judged |
+| **MEAS-4** | Read `344592` for MURI topics | M4 | open |
+| **MEAS-5** | Discipline-stratified query and relevance set | M5 | open |
+| **MEAS-6** | Name a verified SAM-only opportunity | M6 | blocked on a credential — human task |
+| **DEC-0** | `MAX_TERMS` stays at 400 | §13 "former open decision 0" | settled 2026-08-17 |
+| **DEC-1** | Subtopics ship in a `data/subtopics.js` sidecar | §13.1, "former open decision 1" | settled 2026-08-17 |
+| **DEC-2 … DEC-12** | §13's remaining numbered decisions | §13 items 2–12 | open |
+| **DEC-13** | NASA ROSES standalone ingestion → build it as P8 | §13 item 13, "decision 13" | **taken 2026-08-18** |
+
+*Not renumbered, deliberately:* **§18.3a**'s bare-numbered-family prohibition is a
+gate with four exit criteria rather than a §13-numbered decision, and it keeps its
+section reference. The **backfill generations** named "the D4 backfill" and "the D5
+cache" are historical **run** names, not items, and they are left as written
+because they name a corpus that measurements were taken against. **Disambiguation
+rule: a bare `D4`/`D5` in prose about a backfill, a cache, a corpus or a fitted
+threshold is the backfill generation — never P4.4/P4.5 and never DEBT-4/5.**
+Where the same characters meant a *package item*, they were renamed (P4.1, P4.2,
+P4.3, P4.6 …).
+
+### 18.0.4 The current ordered path
 
 | # | Step | State |
 |---|---|---|
-| 1 | **D⅝ S1 closure / §13 decision 13** | **done 2026-08-18** — gate closed clause by clause, decision taken |
-| 2 | **`Package N` — NASA ROSES catalog source** | **next.** A first-class catalog source with **its own gate** (§18.1) |
-| 3 | **D⅝ S2** — DOE Office of Science referenced taxonomy | approved in principle, **blocked until `Package N` is complete** |
-| 4 | **Measure S2** | against D⅝'s own denominator, never folded into a segmentation acceptance rate (§17.8) |
-| 5 | **Human decision on D⅝ S3** | **unscheduled** until S2 is built and measured |
-| 6 | Remaining **Coverage (Cov4, Cov6, Cov7)** · **D¾ Forms** · **E Storage** · **F Visible** · **G Enable** | each behind its own existing gate, in the order those gates already state |
+| 1 | **P6.1** — NASA ROSES structured-source proof | **complete** 2026-08-18; gate closed clause by clause (§18.1) |
+| 2 | **BUG-7** — restore the deterministic §0.5 gate | **prerequisite for P8's gate, and already satisfied** — fixed 2026-08-18, `verify_no_drift` exits 0 on the unchanged baseline (§8.4) |
+| 3 | **P8** — NASA ROSES Catalog Source | **next implementation task** (DEC-13) |
+| 4 | **P6.2** — DOE Office of Science structured-source test | after P8 by **sequencing**, not by technical dependency — see the note below |
+| 5 | **Measure P6.2**, then a **human decision on P6.3** | measured against P6's own denominator, never folded into a segmentation acceptance rate (§17.8) |
+| 6 | **Recompute residual coverage** before any **P7** work | P7's yields were measured on a corpus where no structured source had been tried |
+| 7 | **P9 → P10 → P11** | only when the coverage evidence says the feature is worth shipping; each behind its own existing gate |
 
-**`Package N` is in the implementation path, not in Debt and not in a narrative
-note.** It is the one clear next implementation task.
+**P8 is a branch, not a stage of the subtopic feature.** P6.1 *discovered* it — 53
+ROSES program elements with no catalog record — but P8 adds **opportunities**,
+where P5/P6/P7 add **children**. Its yield is a catalog-completeness result and is
+**never added to subtopic recall** (§17.8, `docs/ROSES_SOURCE_INSPECTION.md` *What
+this is not*).
+
+> **Sequencing, not a technical dependency — stated precisely because the earlier
+> wording blurred it.** DEC-13 puts P8 before P6.2, and that is a **scheduling
+> choice**: P8 closes a live catalog-completeness gap (2 currently open NASA
+> elements the catalog does not list) and it is the cheapest place to settle
+> cross-source identity and precedence while only one structured source exists.
+> **P6.2 has no code dependency on P8.** P6.2 emits `referenced` *children* through
+> the subtopic path; P8 emits *opportunities* through `sources/merge.py`. They share
+> the adapter lifecycle and nothing else. If a human re-orders them, P6.2 does not
+> become unbuildable — the cost is only that cross-source precedence gets decided
+> with two sources in flight instead of one. Earlier text read "P6.2 is blocked
+> until P8 is complete"; read that as **sequenced after**, not **dependent on**.
+
+### 18.0.5 The path, drawn
+
+```
+P1 → P2 → P3 → P4 → P5 → P6.1 ──┐   (BUG-7 fixed: §0.5 gate deterministic again)
+                                │
+                                ├── P8   NASA ROSES catalog source   ← next
+                                │        (branch: catalog completeness,
+                                │         not subtopic recall)
+                                │
+                                └── P6.2 DOE structured-source test
+                                          │
+                                          ▼
+                                  measure P6.2 · coverage decision
+                                          │
+                                          ▼
+                              P6.3 / P7 only if justified
+                                  (recompute residual coverage first)
+                                          │
+                                          ▼
+                                   P9 → P10 → P11
+```
+
+**BUG-7 is a prerequisite, not a package.** It gates P8's ability to review an
+intentional catalog change against a stable baseline, and it is closed.
+
+---
 
 **Ordering rule, added in 8.2: plumbing before patterns, and no exceptions without a measurement.** `docs/COVERAGE_SURVEY.md` ranked every available mechanism by how many records it unlocks. The ordering is not close:
 
@@ -3810,7 +4047,7 @@ Rows 1 and 2 overlap on one record, so their union is ~48, not ~91. **The top of
 
 ### 18.1 The packages
 
-#### Package A — Foundations completion
+#### P1 — Foundations *(legacy Package A)*
 
 | Item | Notes |
 |---|---|
@@ -3823,7 +4060,7 @@ Rows 1 and 2 overlap on one record, so their union is ~48, not ~91. **The top of
 
 **Gate:** suite green with zero test-file edits · `verify_no_drift` green in CI, now covering populated evidence entries · query baseline byte-identical across two consecutive local runs.
 
-#### Package B — Segmentation, offline and self-contained
+#### P2 — Segmentation engine *(legacy Package B)* — offline and self-contained
 
 | Item | Notes |
 |---|---|
@@ -3833,7 +4070,7 @@ Rows 1 and 2 overlap on one record, so their union is ~48, not ~91. **The top of
 
 Nothing in this package is imported by any existing module, so nothing can regress. **Gate:** new tests pass · suite green · `verify_no_drift` unchanged.
 
-#### Package C — Wire the call site, flag off
+#### P3 — Flag-off integration *(legacy Package C)* — wire the call site
 
 | Item | Notes |
 |---|---|
@@ -3843,7 +4080,7 @@ Nothing in this package is imported by any existing module, so nothing can regre
 
 **Gate:** with the flag **off**, `verify_no_drift` byte-identical and the suite green with zero test-file edits — this is §0.5, and it is the single most important gate in the project. With the flag **on**, run locally against five documents copied out of the cache and confirm a `data/subtopic_records.json` is produced with plausible spans.
 
-#### Package D — Tune and backfill
+#### P4 — Tune and backfill *(legacy Package D)*
 
 | Item | Notes |
 |---|---|
@@ -3851,20 +4088,20 @@ Nothing in this package is imported by any existing module, so nothing can regre
 | **Fix Layer D's TOC/body co-collection** — also first | Layer D collects candidates from every container, TOC pages included. §6.4 rule 6 rejects candidates *confined* to the TOC, so a set mixing TOC and body passes rule 6 and fails rules 2 and 3 instead. Exclude `detect_toc_pages()` output from candidate collection in Layers C and D |
 | Implement `structural_siblings` (§6.3a) and calibrate §6.4a's six thresholds | Against `docs/CORPUS_CENSUS.md`. **The headline number is the false-positive count on the eight documents that enumerate nothing** — a structural family that admits any of them is worse than none |
 | Read all 286 bookmarks of `DE-FOA-0003600` | Records whether `Catalysis Science` is reachable in the notice, which decides how much of §18.2's `program_taxonomy` deferral survives (§6.7) |
-| Pattern tuning | Against the corpus already in the catalog: the 31 BAA records (DARPA, ONR, ARL, AFOSR, NRL, ERDC) and the DOE FOAs. No new source needed (§6.3). The census names the concrete gaps: `Category N`, `Component N`, `Focus Area N`, bare `N - Title`, `topic_area` unable to express sub-lettered `1a`/`1b`, and `roses_element` false-positiving on DoD `A.1`/`E.1` section numbers. *(8.5: package D is complete and this row is history. Three of the four named gaps were closed by D3's `technical_category`, `component` and `focus_area`, and `topic_area` gained its sub-lettered ordinal. The fourth — `roses_element`'s false positives — was never fixed and the family is now **retired** on six further false positives across new documents and zero correct matches in 90 records (§6.3). Do not read this row as work outstanding.)* |
+| Pattern tuning | Against the corpus already in the catalog: the 31 BAA records (DARPA, ONR, ARL, AFOSR, NRL, ERDC) and the DOE FOAs. No new source needed (§6.3). The census names the concrete gaps: `Category N`, `Component N`, `Focus Area N`, bare `N - Title`, `topic_area` unable to express sub-lettered `1a`/`1b`, and `roses_element` false-positiving on DoD `A.1`/`E.1` section numbers. *(8.5: package D is complete and this row is history. Three of the four named gaps were closed by P4.3's `technical_category`, `component` and `focus_area`, and `topic_area` gained its sub-lettered ordinal. The fourth — `roses_element`'s false positives — was never fixed and the family is now **retired** on six further false positives across new documents and zero correct matches in 90 records (§6.3). Do not read this row as work outstanding.)* |
 | Full local backfill | High `--max-documents`, run against a copy, cache committed in one reviewable commit (§8.3). The nightly is not used |
 
 > **⚠ The two Layer B/D defects must be fixed before any tuning, because they currently masquerade as pattern failures and will mislead it.** The census's single best match — AFOSR DEPSCoR `363526`, where `dod_topic` correctly matched all twelve topics — is rejected today with `('ordinal_sequence', 'span_length')`. Both TOC copies and both body copies enter the candidate list, so ordinals run 1→12 then restart at 1, and the TOC spans are 120–230 characters against a 200-character minimum. Read without this note, that rejection says *"the ordinal rule is too strict"* or *"`dod_topic` is wrong"*, and the obvious response — relax rule 2, or widen the family — is exactly the change §18.3 names as the most damaging available. **A tuning session that starts before these two fixes will draw the wrong conclusion from its own histogram.**
 
 **Gate:** acceptance rate reported **per agency family**, not in aggregate — an 80% average hiding 0% on DoD is a failure, not a pass · rejection-reason histogram read deliberately, with `no_layer_accepted` separated from genuine failures and `run_budget` from `time_budget` · zero low-confidence records in the published set.
 
-#### Package D½ — Coverage
+#### P5 — Coverage hardening *(legacy Package D½)*
 
-**Added in 8.2, ordered by `docs/COVERAGE_SURVEY.md`'s ranked table.** Package D asked *"can the segmenter find the list?"* and answered it. This package asks the question that turned out to be larger: **do the bytes holding the list ever arrive?** For 46.4% of the catalog they do not, and no pattern reaches a document that is never fetched.
+**Added in 8.2, ordered by `docs/COVERAGE_SURVEY.md`'s ranked table.** P4 asked *"can the segmenter find the list?"* and answered it. This package asks the question that turned out to be larger: **do the bytes holding the list ever arrive?** For 46.4% of the catalog they do not, and no pattern reaches a document that is never fetched.
 
 Every item states its expected yield from the survey's stratified sample — *sampled records out of 40* and the *catalog extrapolation* — because two of the four are small and saying so up front is what stops a later session from over-investing in them.
 
-> **⚠ Re-ordered in 8.5: Cov4 comes before any new family work, and package D¾ is gated behind Cov4's gate passing.**
+> **⚠ Re-ordered in 8.5: Cov4 comes before any new family work, and P7 is gated behind Cov4's gate passing.**
 >
 > `docs/FAMILY_TAXONOMY.md` measured the families at **10% of the enumerating population** and found the two largest uncovered forms to be **F4 named/bulleted (~73 records)** and **F1 bare numbered (~31)**. Both are forms where structure carries no signal about whether a set is fundable — F4 demonstrably so, since `362233`'s five real Focus Areas sit one subsection above five decoy bullets with no ordinal, no outline and no lexical difference between them.
 >
@@ -3883,7 +4120,7 @@ Every item states its expected yield from the survey's stratified sample — *sa
 | **Cov6. Fix `_demote()`'s blanket cap on no-primary records** — **added 8.5, and it caps the yield of everything above** | Unblocks publication for the **685 records — 46.4% of the catalog** — that Cov1 made reachable | **`_demote()` decides "secondary attachment" by asking whether a result came from the `primary_content` argument.** Cov1's path passes **no primary at all** when `source_for_record()` returns `None`, so a list read from the record's own `Full Announcement` PDF is treated as a secondary and capped at `low`, which never publishes. **Verified by running production this session:** `363526` — the corpus's *only* `high`-confidence acceptance — returns `8 subtopics, method='toc', confidence='high'` from `segment_document` directly and `confidence='low'` through `segment_without_primary`. The difference is `_demote()`, not the document. Cov1's own note reads *"All ten newly reached records return `no_layer_accepted`"*, which attributes the zero to the records and hides this cap; it bites the moment a reached record enumerates, and `363526` is already that case. **The test is whether the winning document is the record's own announcement, not whether an argument was populated.** Until this is fixed, every new family lands recall in the cache that cannot reach a PI |
 | **Cov7. Read 30 more stratum-D records** — **added 8.5** | Firms up **over half** the §1.1 interval | The cheapest outstanding measurement in the project. Stratum D — any non-PDF attachment — holds **483 records, has 12 reads, contributes 40 of §1.1's 171-record point estimate on a single observation, and spans 7–171 on its own.** It also produced the corpus's only tabular list (F5), so its one hit is carrying both a population estimate and a form. Stratum E is larger but its ceiling is bounded by reachability — 313 of its records have no fetchable source of any kind — so **D is where the interval actually closes.** This supersedes the survey's "sample C and E" recommendation, whose C half the taxonomy sample discharged (C is now 18 of 27 read). Reuse `pick50.py`'s stratification with a fresh seed and the 90 read records excluded |
 
-**Gate:** unreachable-record count re-derived and reported against the catalog, not the evidence cache · for each of Cov1–Cov3, records *reached* and records *yielding an accepted list* reported separately, because they are different numbers and conflating them is how the multi-attachment path was over-sold the first time · **fabricated publishable records still 0**, measured the way D5 measured it — by reading every title in the publishable set, not by sampling · **Cov6 verified by re-running `363526` end to end and observing `high`, not by reading the code** · §0.5 byte-identical with the flag off.
+**Gate:** unreachable-record count re-derived and reported against the catalog, not the evidence cache · for each of Cov1–Cov3, records *reached* and records *yielding an accepted list* reported separately, because they are different numbers and conflating them is how the multi-attachment path was over-sold the first time · **fabricated publishable records still 0**, measured the way the D5 backfill generation measured it — by reading every title in the publishable set, not by sampling · **Cov6 verified by re-running `363526` end to end and observing `high`, not by reading the code** · §0.5 byte-identical with the flag off.
 
 ##### Cov4 in full — span filtering, with a review queue for the residual
 
@@ -3900,15 +4137,16 @@ authoritative source, and a disagreement between the two is a **canary failure**
 **Cov4 is still required, and the reason is PACER.** `349554`'s 18 topics resolve
 at Layer D over a secondary attachment — **`inferred` provenance, no structured
 source, and the extraction is known-correct** (18/18 in every model run, §11). No
-structured source covers AFRL PACER and none is proposed in D⅝. So this item is
+structured source covers AFRL PACER and none is proposed in P6. So this item is
 smaller, not gone: it keeps exactly the population that generic inference
 produced, which is the population it was designed for.
 
 **What this changes about the gate.** Cov4's validation set must now be drawn
 from `inferred` and `inline` records specifically, not from whatever the backfill
-happens to accept. If D⅝'s S1 lands first, the ROSES parents leave the
+happens to accept. **P6.1 has now landed**, so the ROSES parents have left the
 classifier's population entirely and the residual is smaller and differently
-distributed — so **re-derive the validation set after D⅝, not before**.
+distributed — so **re-derive the validation set after the structured sources, not
+before** (§18.0.4 step 6).
 
 **The problem is not a threshold, and this must be stated before the design or someone will tune instead.** D5's fitted tiers took fabricated publishable records from 54 to 0 and cost nothing legitimate. They also suppress a **known-correct** extraction: AFRL PACER's 18 topics resolve at Layer D (`numbered` → `low`), would be won from a secondary attachment (capped at `low` by §6.6), and `low` never publishes. Raising either tier re-admits the exact fabrications D5 removed, because those came from the same tiers. **No threshold setting separates them.** The distinguishing question — *is this the fundable list, or is it the application's furniture?* — is semantic.
 
@@ -3964,13 +4202,13 @@ Concretely: an unresolved span is not a passing span. On any classifier failure 
 - **Cost reported from real `usage` totals**, against §11's $0.190 per 100 sets batched at Sonnet 4.6.
 - **Added 8.5 — the validation set must include the populations the filter will actually face.** The 22 sibling sets it was measured on are all outline-derived from documents with bookmarks. Cov4 now gates on at least: **one aggregating agency page** (§6.3b — `363594` is the measured case, where `topic_area` fires ten times on another opportunity's topics and every acceptance rule passes), **one grouped-restarting-counter document** (`330175`, whose 24 real subdivisions restart at `1.` three times), and **one bulleted set with an adjacent decoy** (`362233`, five real Focus Areas above five process bullets). None of the three resembles what §11 measured, and each is a form the recall work depends on.
 
-#### Package D⅝ — Structured Umbrellas
+#### P6 — Structured-source coverage *(legacy Package D⅝, "Structured Umbrellas")*
 
-**Added in 8.7, and it sits before D¾ deliberately.** An outside audit found this
+**Added in 8.7 as legacy `Package D⅝`, and it sits before P7 deliberately.** An outside audit found this
 plan over-weighting generic document inference relative to hierarchies agencies
 already publish. Accepted: §5.1 now ranks provenance and §6.7·0 routes to the
 least-ambiguous source first, and this package is where the highest rung gets
-built. **Every D¾ item operates at rung 4 on a source that had to be guessed at;
+built. **Every P7 item operates at rung 4 on a source that had to be guessed at;
 these operate at rung 1 on sources the agency publishes as data.**
 
 Ordered by **breadth of disciplines served per unit of implementation cost** —
@@ -3978,11 +4216,11 @@ not by record count, which is the metric that produced the inversion.
 
 | # | Source | Disciplines served | Cost | Provenance |
 |---|---|---|---|---|
-| **S1** | **NSPIRES ROSES Table 3** | Earth science, heliophysics, planetary science, astrophysics, biological and physical sciences — **~35 program elements across essentially all of NASA science** | **Lowest available.** Table 3 is a published, structured table of program elements with dates: one row per element, no prose heuristic anywhere | `native` |
-| **S2** | **DOE Office of Science referenced taxonomy** — **approved in principle, blocked until `Package N` is complete** | ASCR, BES, BER, FES, HEP, NP — **all six program offices**, ~70 programmes including the case that motivated §6.7 | Medium. Program pages under `science.osti.gov`, one scraper per office shape | `referenced` |
-| **S3** | **DoD source router** over Grants.gov, SAM.gov and the ONR/NRL/AFOSR indexes — **unscheduled until S2 is built and measured** | Engineering, physics, materials, computing, and the DoD basic-research portfolio generally | Highest. Three source systems, a SAM.gov credential (§7.5), and per-lab index shapes that differ | mixed |
+| **P6.1** *(legacy S1)* | **NSPIRES ROSES Table 3** | Earth science, heliophysics, planetary science, astrophysics, biological and physical sciences — **~35 program elements across essentially all of NASA science** | **Lowest available.** Table 3 is a published, structured table of program elements with dates: one row per element, no prose heuristic anywhere | `native` |
+| **P6.2** *(legacy S2)* | **DOE Office of Science referenced taxonomy** — **approved in principle, sequenced after P8** | ASCR, BES, BER, FES, HEP, NP — **all six program offices**, ~70 programmes including the case that motivated §6.7 | Medium. Program pages under `science.osti.gov`, one scraper per office shape | `referenced` |
+| **P6.3** *(legacy S3)* | **DoD source router** over Grants.gov, SAM.gov and the ONR/NRL/AFOSR indexes — **unscheduled until P6.2 is built and measured** | Engineering, physics, materials, computing, and the DoD basic-research portfolio generally | Highest. Three source systems, a SAM.gov credential (§7.5), and per-lab index shapes that differ | mixed |
 
-> **Build S1 only, then re-measure. This is the gate, not a suggestion.**
+> **Build P6.1 only, then re-measure. This is the gate, not a suggestion.**
 >
 > One adapter is enough to prove or disprove the provenance model end to end:
 > does a `native` source actually bypass Cov4 cleanly, do the canaries catch a
@@ -3993,11 +4231,11 @@ not by record count, which is the metric that produced the inversion.
 > (Word parsing, spreadsheet parsing) and once retired seven families that were
 > specified from expectation (§17.8).
 >
-> S1 is also the cheapest thing to be wrong about. If ROSES Table 3 turns out to
+> P6.1 is also the cheapest thing to be wrong about. If ROSES Table 3 turns out to
 > be less parser-friendly than it looks, that is one adapter's cost and the
-> conclusion generalises to S2 and S3 before either is written.
+> conclusion generalises to P6.2 and P6.3 before either is written.
 
-**Why S1 first on breadth, not just on cost.** NASA ROSES is the single largest
+**Why P6.1 first on breadth, not just on cost.** NASA ROSES is the single largest
 concentration of *unreached* umbrella parents in the corpus that anyone has
 identified: the D5 backfill's nine plausible umbrellas were all ROSES, they
 resolve to `agency_notice` URLs and fail at fetch time on `nasaprs.com`
@@ -4008,45 +4246,46 @@ untried. That is the inversion in one agency.
 
 | Item | Notes |
 |---|---|
-| **S1a. Read Table 3 and record its shape** | §0.4 rule 10: fetch one real response, print it, read it, write code against what was observed. **Do this before writing a parser** and record the row schema, the element-code form, and how continuation years are expressed |
-| **S1b. `native` adapter for ROSES program elements** | Adapter lifecycle per §6.7a's recommendation, emitting `subtopic_source: "native"`, `confidence: "high"`, bypassing Cov4 and the review queue (§5.1). Parent match by ROSES element code, never by FOA number |
-| **S1c. Canaries** | `expected_solicitations` entry: **ROSES has ≥20 open elements**. A parser returning zero rows on an HTTP 200 must fail loudly (§7.4) |
-| **S1d. Re-measure** | **Done, and §13 decision 13 is taken on it: `Package N` is next, then S2** (see the gate note below). **The (a) question below is now answered and the answer is 0** — S1 reached the **(e)** population, not the (a) one, so the (a) claim stays untested and S2 is its first test. Report yield **against D⅝'s own denominator** and name which records were previously category (a) — that is the number that says whether structured sources reach the outward-pointing (a) population, which is currently unmeasured. **Never fold it into a segmentation acceptance rate** (§17.8): a different mechanism reaching a different population would make the recogniser work look better than it is. Re-run §8.5's query baseline. **Then decide S2 and S3 on that evidence** |
+| **P6.1a. Read Table 3 and record its shape** | §0.4 rule 10: fetch one real response, print it, read it, write code against what was observed. **Do this before writing a parser** and record the row schema, the element-code form, and how continuation years are expressed |
+| **P6.1b. `native` adapter for ROSES program elements** | Adapter lifecycle per §6.7a's recommendation, emitting `subtopic_source: "native"`, `confidence: "high"`, bypassing Cov4 and the review queue (§5.1). Parent match by ROSES element code, never by FOA number |
+| **P6.1c. Canaries** | `expected_solicitations` entry: **ROSES has ≥20 open elements**. A parser returning zero rows on an HTTP 200 must fail loudly (§7.4) |
+| **P6.1d. Re-measure** | **Done, and DEC-13 is taken on it: P8 is next, then P6.2** (see the gate note below). **The (a) question below is now answered and the answer is 0** — P6.1 reached the **(e)** population, not the (a) one, so the (a) claim stays untested and P6.2 is its first test. Report yield **against P6's own denominator** and name which records were previously category (a) — that is the number that says whether structured sources reach the outward-pointing (a) population, which is currently unmeasured. **Never fold it into a segmentation acceptance rate** (§17.8): a different mechanism reaching a different population would make the recogniser work look better than it is. Re-run §8.5's query baseline. **Then decide P6.2 and P6.3 on that evidence** |
 
-**Gate:** S1 only · yield reported against D⅝'s own denominator, with previously-(a) records named, and never folded into a segmentation acceptance rate · canary proven by simulating a zero-row HTTP 200 · `native` records confirmed to bypass Cov4 in code as well as in this document · §0.5 byte-identical with the flag off · **S2 and S3 remain unscheduled until S1d is read by a human**.
+**P6.1 gate:** P6.1 only · yield reported against P6's own denominator, with previously-(a) records named, and never folded into a segmentation acceptance rate · canary proven by simulating a zero-row HTTP 200 · `native` records confirmed to bypass Cov4 in code as well as in this document · §0.5 byte-identical with the flag off · **P6.2 and P6.3 remain unscheduled until P6.1d is read by a human**.
 
-> **S1 closed 2026-08-18, clause by clause against repository evidence rather
+> **P6.1 closed 2026-08-18, clause by clause against repository evidence rather
 > than against the session report** (§17.10). **Eight clauses: six closed
 > outright, one closed with a forward obligation (the Cov4 bypass), and one
 > closed on evidence while the gate *script* stays red for a defect that is not
-> S1's.**
+> P6.1's.**
 >
 > | Clause | Verdict | Evidence |
 > |---|---|---|
-> | **S1 only was built** | **closed** | `git diff --name-status 7cece6b..c64576e` adds exactly one adapter, three ROSES fixtures and three test files. No `science.osti.gov` scraper, no DoD router. `discoverability.py`'s osti references are pre-existing and untouched |
-> | **Yield against D⅝'s own denominator** | **closed** | 63 valid program elements as the denominator; 10 / 53 / 2 reported against it, never against 1,475 or against §1.1's 171 |
-> | **Previously-(a) records named** | **closed, and the answer is zero** | Verified against the classification records: **0 of the 10 were (a)**. `360003` is classified **(e)**; `360004`/`363241` appear as SSL failures and "no measurable document"; 8 of 10 are `ConnectionReset` rows in the census; the rest were never in the 53-document classified sample. **S1 reached the (e) population, not the (a) population** — so §6.7·0's claim that structured sources may reach part of the 62% (a) population is still **untested**, and S2 is the first test of it |
+> | **P6.1 only was built** | **closed** | `git diff --name-status 7cece6b..c64576e` adds exactly one adapter, three ROSES fixtures and three test files. No `science.osti.gov` scraper, no DoD router. `discoverability.py`'s osti references are pre-existing and untouched |
+> | **Yield against P6's own denominator** | **closed** | 63 valid program elements as the denominator; 10 / 53 / 2 reported against it, never against 1,475 or against §1.1's 171 |
+> | **Previously-(a) records named** | **closed, and the answer is zero** | Verified against the classification records: **0 of the 10 were (a)**. `360003` is classified **(e)**; `360004`/`363241` appear as SSL failures and "no measurable document"; 8 of 10 are `ConnectionReset` rows in the census; the rest were never in the 53-document classified sample. **P6.1 reached the (e) population, not the (a) population** — so §6.7·0's claim that structured sources may reach part of the 62% (a) population is still **untested**, and P6.2 is the first test of it |
 > | **Not folded into a segmentation acceptance rate** | **closed** | `docs/ROSES_SOURCE_INSPECTION.md` *What this is not* states the separation and §1.1 is left unchanged; no acceptance rate anywhere in the plan absorbed the 10 |
 > | **HTTP-200-zero-rows canary demonstrated** | **closed** | `tests/test_nasa_roses_adapter.py::CanaryTests::test_http_200_with_zero_rows_fails_loudly` asserts `healthy is False` and **both** failure strings; sibling tests cover a missing division and catastrophic shrinkage |
 > | **`native` bypasses Cov4 in code** | **closed, with one forward obligation** | `subtopic_children` sets `subtopic_source: "native"` with `pattern_family`/`segmentation_method` both `None`; `classify_provenance`'s override is validated not trusted; `cap_confidence` treats provenance as a ceiling; and `test_the_segmenter_is_never_invoked_for_roses` patches `segment_document` and asserts **zero** calls across all three entry points. **Obligation: Cov4's classifier does not exist yet, so the bypass is proven at the provenance/segmentation boundary. When Cov4 lands, its call site must be gated on provenance and this clause re-checked against it** |
-> | **§0.5 byte-identical with the flag off** | **closed on evidence; the gate script is red for an unrelated defect** | The adapter is `enabled = False` and 18 of 20 artifacts match the baseline. The two that differ — `feeds/changes.json`, `feeds/changes.xml` — produce **byte-identical hashes on the pre-S1 tree at `7cece6b`**, and pinning the build's UTC date to the baseline's freeze date reproduces **all 20 committed fingerprints exactly** on the current tree. Cause: `build_changes.py::_event_id` seeds on the build's UTC calendar date. **Debt D7, and fixed the same day: the gate script now returns exit 0 against the unchanged committed fingerprints** (§8.4) |
-> | **S2/S3 not started before human review** | **closed** | No S2 or S3 code exists; both are re-gated below |
+> | **§0.5 byte-identical with the flag off** | **closed on evidence; the gate *script* was red for an unrelated defect, since fixed** | The adapter is `enabled = False` and 18 of 20 artifacts match the baseline. The two that differ — `feeds/changes.json`, `feeds/changes.xml` — produce **byte-identical hashes on the pre-P6.1 tree at `7cece6b`**, and pinning the build's UTC date to the baseline's freeze date reproduces **all 20 committed fingerprints exactly** on the current tree. Cause: `build_changes.py::_event_id` seeds on the build's UTC calendar date. **BUG-7, and fixed the same day: the gate script now returns exit 0 against the unchanged committed fingerprints** (§8.4) |
+> | **P6.2/P6.3 not started before human review** | **closed** | No P6.2 or P6.3 code exists; both are re-gated below |
 >
-> **S2 is now gated behind `Package N`, not behind S1 alone.** S2 remains
-> approved in principle — S1 demonstrated measurable value from structured
+> **P6.2 is now sequenced behind P8, not behind P6.1 alone — and that is a
+> scheduling choice, not a code dependency (§18.0.4).** P6.2 remains
+> approved in principle — P6.1 demonstrated measurable value from structured
 > sources, in that 10 existing open catalog records gained authoritative NASA
-> relationships at the `native` rung — but **S2 does not begin until `Package N`
-> is complete**. **S3 remains unscheduled until S2 has been built and measured**,
+> relationships at the `native` rung — but **P6.2 does not begin until P8's gate
+> is green**. **P6.3 remains unscheduled until P6.2 has been built and measured**,
 > and is then a human decision, not an automatic follow-on.
 
-#### Package N — NASA ROSES Catalog Source
+#### P8 — NASA ROSES Catalog Source *(legacy Package N)*
 
 **Added in 8.11, and it is the next implementation task.** §13 decision 13 is
 **taken**: ROSES standalone ingestion is built now, as a **first-class catalog
-source**, **after D⅝ S1 and before D⅝ S2**. This is not a subtopic package. It
+source**, **after P6.1 and before P6.2**. This is not a subtopic package. It
 adds *opportunities*, not children, and it is the first work in this plan that
 **deliberately changes the base catalog** — which is why it has its own gate
-(**N6**) and why §0.5 keeps its current meaning untouched.
+(**P8.6**) and why §0.5 keeps its current meaning untouched.
 
 **What is being bought.** Not 53 records. **A standing re-evaluation of NASA's
 whole published program-element inventory on every scheduled refresh**, so that:
@@ -4061,20 +4300,20 @@ of the package is that those 51 need **no future human attention**: the refresh
 re-reads all 63 every run. Until this package ships, the **2 currently open
 unmatched elements are a known catalog-completeness gap** (§13 decision 13).
 
-**Do not restate S1's measurements as this package's yield.** S1's 10
+**Do not restate P6.1's measurements as this package's yield.** P6.1's 10
 relationship recoveries are a *subtopic* result at the `native` rung; N's output
 is a *sourcing* result. They are never added together (§17.8).
 
 | Item | Notes |
 |---|---|
-| **N1. Source lifecycle — reuse S1's discovery and parsing** | `scripts/sources/adapters/nasa_roses.py` already does this and its design is **measured, not assumed** (`docs/ROSES_SOURCE_INSPECTION.md`). Preserve all of it: discover the active ROSES year from the **stable SARA landing page**; **hard-code nothing transient** — not the year, not the amendment number, not `solId`, not `cmdocumentid`, not a versioned document URL; keep **Table 3 as the authoritative hierarchy substrate** and **Table 2 for corroboration/health only**; keep appendix order rather than sorting; keep the tolerance for 3-cell rows, duplicate codes, missing codes and dirty dates. **Keep the TLS compatibility behaviour per-adapter and off by default** (`PoliteClient(legacy_tls_ciphers=True)`, §17.11) — do **not** broaden it to other adapters as part of this work |
-| **N2. Identity and deduplication** | Define **deterministic** identity between ROSES and existing catalog sources, against S1's measured facts: the appendix code alone is **not unique** (`D.3C` occurs twice), native ROSES identity is **`(appendix_code, program_title)`**, the **solicitation number is the strongest cross-source key** when present (`NNH<yy>ZDA<nnn>N-<CODE>`), and **5 of the 10 current matches required normalized-title fallback**. **An opportunity already represented through Grants.gov must not appear again as a separate ROSES record.** `sources/merge.py::merge_records` already drops an external record that collides with base by identity, by casefolded `opportunity_number`, or by normalized title — start there, and note that its title test carries exactly the weakness S1 measured. **Normalized-title matching is a weaker fallback and must be recorded as one** — never treated as equivalent to an exact solicitation-number match, and never used to *overwrite* a base field |
-| **N3. Source precedence and update ownership** | Define what happens when Grants.gov and ROSES represent the same opportunity **and disagree**. Establish deterministic ownership/precedence for at least **title · opportunity number · dates · official URL · agency/program metadata · currentness/status**. **Whichever adapter runs last must not silently overwrite the other source.** Two specific hazards to resolve rather than discover: `merge_records`'s rule is *"base always wins"*, which decides **whether an external record is added** and says nothing about **field-level ownership**; and an element emitted as ROSES-only that Grants.gov later starts carrying will flip which source owns it, so **identity stability across that transition** is part of this item, not a follow-up |
-| **N4. Currentness** | Align standalone ROSES records with the catalog's **existing** actionable/currentness model — `scripts/currentness.py::record_is_current` plus `filter_current`, which gate on `status` and `close_date`/`archive_date`. **NASA publishes no native `closed` status**, so `derived_currentness` must stay **distinguishable from `native_status`** in the emitted record, exactly as S1 keeps them (`docs/ROSES_SOURCE_INSPECTION.md` §4). **Inactive elements remain known to the source adapter and absent from the public current catalog** — they are inventory, not hidden records, and they must not be emitted with a fabricated `posted` status merely to satisfy the currentness filter |
-| **N5. Lifecycle tests** | Six, and they are what prove the 51 need no manual attention: **(1)** an unmatched `Not Solicited This Year` element does **not** enter the current catalog; **(2)** the same element changes to an open/future date and **enters on the next build**; **(3)** it later expires/closes and **leaves the public current population**; **(4)** an element already represented by Grants.gov creates **no duplicate**; **(5)** a new unmatched **open** element **is emitted**; **(6)** an **HTTP-200 response with zero rows, or an implausibly small ROSES result, fails loudly** rather than silently removing NASA coverage — S1's canaries already do the zero-row half (`test_http_200_with_zero_rows_fails_loudly`), and this extends them to the *emission* path, where a silent collapse would now delete records rather than merely add none |
-| **N6. The gate — see below** | A catalog source needs its own gate, because §0.5 answers a different question |
+| **P8.1. Source lifecycle — reuse P6.1's discovery and parsing** | `scripts/sources/adapters/nasa_roses.py` already does this and its design is **measured, not assumed** (`docs/ROSES_SOURCE_INSPECTION.md`). Preserve all of it: discover the active ROSES year from the **stable SARA landing page**; **hard-code nothing transient** — not the year, not the amendment number, not `solId`, not `cmdocumentid`, not a versioned document URL; keep **Table 3 as the authoritative hierarchy substrate** and **Table 2 for corroboration/health only**; keep appendix order rather than sorting; keep the tolerance for 3-cell rows, duplicate codes, missing codes and dirty dates. **Keep the TLS compatibility behaviour per-adapter and off by default** (`PoliteClient(legacy_tls_ciphers=True)`, §17.11) — do **not** broaden it to other adapters as part of this work |
+| **P8.2. Identity and deduplication** | Define **deterministic** identity between ROSES and existing catalog sources, against P6.1's measured facts: the appendix code alone is **not unique** (`D.3C` occurs twice), native ROSES identity is **`(appendix_code, program_title)`**, the **solicitation number is the strongest cross-source key** when present (`NNH<yy>ZDA<nnn>N-<CODE>`), and **5 of the 10 current matches required normalized-title fallback**. **An opportunity already represented through Grants.gov must not appear again as a separate ROSES record.** `sources/merge.py::merge_records` already drops an external record that collides with base by identity, by casefolded `opportunity_number`, or by normalized title — start there, and note that its title test carries exactly the weakness P6.1 measured. **Normalized-title matching is a weaker fallback and must be recorded as one** — never treated as equivalent to an exact solicitation-number match, and never used to *overwrite* a base field |
+| **P8.3. Source precedence and update ownership** | Define what happens when Grants.gov and ROSES represent the same opportunity **and disagree**. Establish deterministic ownership/precedence for at least **title · opportunity number · dates · official URL · agency/program metadata · currentness/status**. **Whichever adapter runs last must not silently overwrite the other source.** Two specific hazards to resolve rather than discover: `merge_records`'s rule is *"base always wins"*, which decides **whether an external record is added** and says nothing about **field-level ownership**; and an element emitted as ROSES-only that Grants.gov later starts carrying will flip which source owns it, so **identity stability across that transition** is part of this item, not a follow-up |
+| **P8.4. Currentness** | Align standalone ROSES records with the catalog's **existing** actionable/currentness model — `scripts/currentness.py::record_is_current` plus `filter_current`, which gate on `status` and `close_date`/`archive_date`. **NASA publishes no native `closed` status**, so `derived_currentness` must stay **distinguishable from `native_status`** in the emitted record, exactly as P6.1 keeps them (`docs/ROSES_SOURCE_INSPECTION.md` §4). **Inactive elements remain known to the source adapter and absent from the public current catalog** — they are inventory, not hidden records, and they must not be emitted with a fabricated `posted` status merely to satisfy the currentness filter |
+| **P8.5. Lifecycle tests** | Six, and they are what prove the 51 need no manual attention: **(1)** an unmatched `Not Solicited This Year` element does **not** enter the current catalog; **(2)** the same element changes to an open/future date and **enters on the next build**; **(3)** it later expires/closes and **leaves the public current population**; **(4)** an element already represented by Grants.gov creates **no duplicate**; **(5)** a new unmatched **open** element **is emitted**; **(6)** an **HTTP-200 response with zero rows, or an implausibly small ROSES result, fails loudly** rather than silently removing NASA coverage — P6.1's canaries already do the zero-row half (`test_http_200_with_zero_rows_fails_loudly`), and this extends them to the *emission* path, where a silent collapse would now delete records rather than merely add none |
+| **P8.6. The gate — see below** | A catalog source needs its own gate, because §0.5 answers a different question |
 
-##### N6 — the catalog-source gate, and why §0.5 cannot be it
+##### P8.6 — the catalog-source gate, and why §0.5 cannot be it
 
 **§0.5 is not weakened, reinterpreted, or re-baselined to accommodate this
 package.** §0.5 proves that **enabling or disabling the subtopic layer does not
@@ -4083,22 +4322,22 @@ important gate in the project. **A first-class catalog source is *supposed* to
 change the base catalog**, so §0.5 cannot express whether it changed it
 *correctly* — hence a separate gate, covering at minimum:
 
-- **no duplicate catalog records** (N2), measured by reading the emitted set
+- **no duplicate catalog records** (P8.2), measured by reading the emitted set
   against the base rather than by trusting the dedup rule that produced it;
 - **stable identity** across runs, and across the ROSES-only → Grants.gov-carried
-  transition (N3);
+  transition (P8.3);
 - **deterministic source precedence** — demonstrated by constructing a
-  disagreement, not by asserting a policy (N3);
-- **correct currentness transitions** — all three directions of N5's (1)/(2)/(3);
+  disagreement, not by asserting a policy (P8.3);
+- **correct currentness transitions** — all three directions of P8.5's (1)/(2)/(3);
 - **the expected currently open unmatched NASA records present** — 2 at the time
   of writing, re-derived at build time rather than hard-coded;
 - **inactive ROSES elements absent from the public current catalog**;
-- **loud failure on source or parser collapse** (N5.6);
+- **loud failure on source or parser collapse** (P8.5's sixth test);
 - **full test suite green**, with exit codes checked directly (§17.7);
 - **intentional review of the generated-catalog change**, line by line, before any
   new fingerprints are frozen.
 
-> **✅ Precondition met: §15 debt D7 is fixed (2026-08-18).** The no-drift gate was
+> **✅ Precondition met: BUG-7 is fixed (2026-08-18).** The no-drift gate was
 > date-dependent — `build_changes.py`'s event ids are seeded with the build's UTC
 > calendar date — so it could not have told this package's **intentional** change
 > to the generated artifacts apart from drift it manufactured on its own. The
@@ -4107,14 +4346,14 @@ change the base catalog**, so §0.5 cannot express whether it changed it
 > package re-freezes the baseline, every line of that diff is a change someone
 > chose.
 
-#### Package D¾ — Forms
+#### P7 — Residual generic forms *(legacy Package D¾)*
 
-**Added in 8.5, ordered by `docs/FAMILY_TAXONOMY.md` §5. Gated behind Cov4's gate passing — see the ⚠ note under D½ — and, from 8.7, behind **package D⅝** as well.**
+**Added in 8.5, ordered by `docs/FAMILY_TAXONOMY.md` §5. Gated behind P5's Cov4 gate — see the ⚠ note under P5 — and, from 8.7, behind **P6** as well.**
 
-> **⚠ Re-gated in 8.7, restated in 8.11. Fm1, Fm2, Fm5 and Fm6 do not start until the structured sources ahead of them in §18's ordered path have landed — `Package N`, then D⅝ S2 and its measurement.** S1d has now been read (2026-08-18), so that clause no longer gates anything; what gates these four is that the *residual* uncovered population is not yet known, and S2 is the step that changes it most. These four are rung-4 generic inference (§6.7·0), and their measured yields were computed against a corpus in which **no structured source had been tried**. Two conditions, both binding:
+> **⚠ Re-gated in 8.7, restated in 8.12. Fm1, Fm2, Fm5 and Fm6 do not start until the structured sources ahead of them in §18.0.4 have landed — P8, then P6.2 and its measurement.** P6.1d has now been read (2026-08-18), so that clause no longer gates anything; what gates these four is that the *residual* uncovered population is not yet known, and P6.2 is the step that changes it most. These four are rung-4 generic inference (§6.7·0), and their measured yields were computed against a corpus in which **no structured source had been tried**. Two conditions, both binding:
 >
-> 1. **Build only against records still uncovered after structured sources.** A parent that D⅝ resolves at `native` or `referenced` is not a candidate for a recogniser, however well it would have matched. Recompute the uncovered population first.
-> 2. **Re-measure the yield on that residual.** Every figure in the table below is *records in the 90 read* against the whole corpus. If S1 lands ~35 NASA elements at rung 1, the residual F-form population is smaller and differently distributed, and the ordering below may not survive it.
+> 1. **Build only against records still uncovered after structured sources.** A parent that P6 resolves at `native` or `referenced` is not a candidate for a recogniser, however well it would have matched. Recompute the uncovered population first.
+> 2. **Re-measure the yield on that residual.** Every figure in the table below is *records in the 90 read* against the whole corpus. The original wording read *"if S1 lands ~35 NASA elements at rung 1"*; **P6.1 has now landed and the measured figure is 63 elements parsed and 10 catalog parents resolved at the `native` rung**, so the residual form population is already smaller and differently distributed, and the ordering below may not survive re-measurement.
 >
 > **Fm3, Fm4 and Fm7 are not re-gated.** Fm3 and Fm4 are repairs to families that already fire on live records, and Fm7 is a decision not to build anything — none of the three widens the inference surface. This is the recall work the taxonomy identified: five of six measured forms have no family, accounting for ~90% of the enumerating population.
 
@@ -4124,7 +4363,7 @@ Every item carries its measured yield as *records in the 90 read* · *catalog ex
 |---|---|---|
 | **Fm1. F4 — named / bulleted, no counter** | 9 of 90 · **~73, but ~22 excluding one stratum-E observation** | The largest population and the hardest problem: §6.3a's deferred `label_run` plus a bulleted variant. **Highest false-positive risk in the plan**, and the corpus supplies the proof rather than the worry — `362233`'s five real Focus Areas sit one subsection above *Innovation, Impact, Research Strategy, Focus Areas, Research Team*, with no ordinal, no outline and no lexical separation. **Do not build this on structure alone.** Also note that `structural_siblings`, the only mechanism serving anything like it today, is blind to **55% of the corpus's PDFs** (§6.3a) |
 | **Fm2. F1 — bare numbered `N.` / `N)` / `N -`** | **8 of 90 · ~31** (Wilson 47–210 on the pooled rate) — **the most stable uncovered row** | **Blocked by §18.3's prohibition, which 8.5 converted from a flat refusal into exit criteria. Read §18.3 before starting this, and satisfy its four conditions.** Two mechanics the corpus requires beyond the regex: grouped sequences with **restarting counters** (`330175`, §6.4a) and title extraction that survives a trailing em-dash clause (`355150`'s `1. Autonomous platforms – The Army is particularly interested in`) |
-| **Fm3. Repair `dod_topic`'s ordinal group** | Recovers `356612` (7 topics) | The group is `(\d{1,2})` and DTRA's topics are `Topic A1` through `Topic A7` — a **letter** ordinal it cannot match at all. `sbir_subtopic` already modelled `\d{1,2}[a-z]?` before its retirement, and `topic_area` gained the same in D3; the inconsistency is an oversight, not a decision, and this is the third time it has appeared. Widen to letters **and** add the validating quote to §6.3's table per §17.8 |
+| **Fm3. Repair `dod_topic`'s ordinal group** | Recovers `356612` (7 topics) | The group is `(\d{1,2})` and DTRA's topics are `Topic A1` through `Topic A7` — a **letter** ordinal it cannot match at all. `sbir_subtopic` already modelled `\d{1,2}[a-z]?` before its retirement, and `topic_area` gained the same in P4.3; the inconsistency is an oversight, not a decision, and this is the third time it has appeared. Widen to letters **and** add the validating quote to §6.3's table per §17.8 |
 | **Fm4. Repair `thrust`'s granularity** | Same record, same 7 topics | `thrust` fires on `356612` and matches the **container** `Thrust Area 1`, not the seven `Topic AN` items beneath it, so it segments one span where seven exist. A family that matches the umbrella instead of its members is worse than one that misses, because it produces a plausible single card. Either scope `thrust` to the items or retire it under §17.8 — **it currently has no record validating it at the right granularity** |
 | **Fm5. F5 — a table path in `extract_containers`** | 1 of 90 · **~40, n=1** | `pdfplumber` is already an authorized dependency (§6.1) and supplies table extraction, so this is a dispatch item, not a dependency one. **Do not fund it on the ~40** — that is one stratum-D observation against 483 records and 12 reads. Fund it on the qualitative argument: `363530` prints the *same 12 topics* as `363526`, which segments correctly, so a validated list is invisible purely because of layout. **Cov7 should be read before sizing this item** |
 | **Fm6. F3 — coded named list** | 4 of 90 · ~6 | `PA 1:` (`361908`), `53-24-01 -` (`352741`), `A.1.a.` (`362681`), `Topic A2` (`356612`, which Fm3 covers). Each is agency-specific; a **discovered-prefix** recogniser is the general form and its false-positive profile is unmeasured. Smallest yield in the package — do this last, or not at all |
@@ -4132,7 +4371,7 @@ Every item carries its measured yield as *records in the 90 read* · *catalog ex
 
 **Gate:** every new or repaired family names its validating document **and quotes the matched text** (§17.8) · acceptance rate reported per form, not in aggregate · **fabricated publishable records still 0**, by reading every published title · false-positive count reported on the **33 category-(a) documents** in `docs/FAMILY_TAXONOMY.md` §1, which are the measured correct zeros and therefore the right negative set · §0.5 byte-identical with the flag off.
 
-#### Package E — Storage and scoring
+#### P9 — Storage and scoring *(legacy Package E)*
 
 | Item | Notes |
 |---|---|
@@ -4142,7 +4381,7 @@ Every item carries its measured yield as *records in the 90 read* · *catalog ex
 
 **Gate:** §8.5 query baseline run · flag-off top-10 churn **zero** · flag-on movement reviewed case by case by a human.
 
-#### Package F — Make it visible
+#### P10 — Retrieval and UI *(legacy Package F)* — make it visible
 
 | Item | Notes |
 |---|---|
@@ -4153,7 +4392,7 @@ Every item carries its measured yield as *records in the 90 read* · *catalog ex
 
 **Gate:** manual A/B with both flags off — output byte-identical, verified by hand because the hermetic gate does not reach browser code · query baseline unchanged with flags off.
 
-#### Package G — Enable
+#### P11 — Enable and ship *(legacy Package G)*
 
 | Item | Notes |
 |---|---|
@@ -4169,12 +4408,12 @@ Each line states what is lost. None of this is abandoned; all of it is a later d
 
 | Deferred | What is lost by deferring it |
 |---|---|
-| **SAM.gov adapter** (§7.5) — **justification rebuilt 2026-08-17; the MURI argument does not support it** | **What is verified.** A live Grants.gov search for `MURI` returns **exactly one record — `344592`, the DEVCOM ARL Broad Agency Announcement — and it is already in this catalog.** `fetchOpportunity` for that record returns **zero** MURI occurrences against a 2,900-character description, so the term lives in the **attachment text** that Grants.gov indexes and the detail API does not expose. **MURI-related content is therefore demonstrably reachable through Grants.gov, inside a document this project already holds.** Multi-word searches (`MURI FY26`, the expanded phrase) are fuzzy OR-matches — they return COPS policing grants — and are evidence of nothing.<br><br>**What the old justification got wrong, logically.** "MURI appears zero times across 958 evidence entries" is a **fact about this project's corpus and stored fields**, not about where MURI is published. Our descriptions are truncated and our evidence cache stores extracted facts rather than full text, so a zero there cannot establish that MURI requires SAM.gov. **That inference is withdrawn.**<br><br>**What is still unknown:** whether the FY26 MURI *competition* posts a standalone notice to Grants.gov. The search above does not settle it — absence from a keyword index is weak evidence, and MURI is administered across ARO, ONR and AFOSR, whose vehicles differ. **Do not assert either direction from this row.**<br><br>**So what does justify the adapter?** Genuinely SAM-only DoD opportunities — solicitations posted to SAM.gov contract opportunities and never to Grants.gov. **This deferral currently names none, and that is the gap.** Before SAM.gov is scheduled, §15 debt **M6** requires at least one verified SAM-only opportunity relevant to academic researchers, named with its notice ID. Until then the adapter's cost is known and its benefit is asserted. Note this cannot be verified from inside this project today: SAM.gov needs a credential (§7.5) that does not exist yet.<br><br>**Not** the development corpus — 31 BAA records are already in the catalog, which is why this was safe to cut. **And `dod_topic` still has no MURI document validating it**, which is unchanged and independent of the above: it is validated by the AFOSR DEPSCoR notice's identical `Topic N:` convention across twelve topics, confirming the *convention* and not the agency. Do not read a green `dod_topic` result as evidence MURI will segment. **`344592` is worth reading before SAM.gov is built** — if that BAA enumerates MURI topics inline, part of what this deferral is said to cost is already reachable at rung 3 (§15 debt M4) |
-| **NSPIRES activation** (§10) — **premise corrected 2026-08-17; partially superseded 2026-08-18 by §13 decision 13 and `Package N`** | NASA ROSES program elements stay invisible as individual records **until `Package N` ships** — that is now scheduled work rather than a deferral, and the residual deferral below is only the session-gated open-solicitations list. NASA remains partially covered via Grants.gov. **The reachability half of this deferral was wrong.** `nasaprs.com` was recorded as refusing this client across four sessions — 12 `ConnectionReset` entries in the census, two in the survey, two in the taxonomy read. Measured: **it is CPython's default cipher list**, which omits the only suite those hosts offer. With one suite added and verification intact, **all 12 previously-unreachable NASA records re-fetched successfully, 0 failures** (`docs/ROSES_SOURCE_INSPECTION.md`, §17.11). What survives of the deferral is narrower and still real: NSPIRES's *open-solicitations list* is session-gated behind a POST search flow, which is what `adapters/nspires.py` documents. The **ROSES table surface is reachable**, which is what §18.1 D⅝ S1 needs, and S1 does not require NSPIRES activation |
+| **SAM.gov adapter** (§7.5) — **justification rebuilt 2026-08-17; the MURI argument does not support it** | **What is verified.** A live Grants.gov search for `MURI` returns **exactly one record — `344592`, the DEVCOM ARL Broad Agency Announcement — and it is already in this catalog.** `fetchOpportunity` for that record returns **zero** MURI occurrences against a 2,900-character description, so the term lives in the **attachment text** that Grants.gov indexes and the detail API does not expose. **MURI-related content is therefore demonstrably reachable through Grants.gov, inside a document this project already holds.** Multi-word searches (`MURI FY26`, the expanded phrase) are fuzzy OR-matches — they return COPS policing grants — and are evidence of nothing.<br><br>**What the old justification got wrong, logically.** "MURI appears zero times across 958 evidence entries" is a **fact about this project's corpus and stored fields**, not about where MURI is published. Our descriptions are truncated and our evidence cache stores extracted facts rather than full text, so a zero there cannot establish that MURI requires SAM.gov. **That inference is withdrawn.**<br><br>**What is still unknown:** whether the FY26 MURI *competition* posts a standalone notice to Grants.gov. The search above does not settle it — absence from a keyword index is weak evidence, and MURI is administered across ARO, ONR and AFOSR, whose vehicles differ. **Do not assert either direction from this row.**<br><br>**So what does justify the adapter?** Genuinely SAM-only DoD opportunities — solicitations posted to SAM.gov contract opportunities and never to Grants.gov. **This deferral currently names none, and that is the gap.** Before SAM.gov is scheduled, **MEAS-6** requires at least one verified SAM-only opportunity relevant to academic researchers, named with its notice ID. Until then the adapter's cost is known and its benefit is asserted. Note this cannot be verified from inside this project today: SAM.gov needs a credential (§7.5) that does not exist yet.<br><br>**Not** the development corpus — 31 BAA records are already in the catalog, which is why this was safe to cut. **And `dod_topic` still has no MURI document validating it**, which is unchanged and independent of the above: it is validated by the AFOSR DEPSCoR notice's identical `Topic N:` convention across twelve topics, confirming the *convention* and not the agency. Do not read a green `dod_topic` result as evidence MURI will segment. **`344592` is worth reading before SAM.gov is built** — if that BAA enumerates MURI topics inline, part of what this deferral is said to cost is already reachable at rung 3 (**MEAS-4**) |
+| **NSPIRES activation** (§10) — **premise corrected 2026-08-17; partially superseded 2026-08-18 by DEC-13 and P8** | NASA ROSES program elements stay invisible as individual records **until P8 ships** — that is now scheduled work rather than a deferral, and the residual deferral below is only the session-gated open-solicitations list. NASA remains partially covered via Grants.gov. **The reachability half of this deferral was wrong.** `nasaprs.com` was recorded as refusing this client across four sessions — 12 `ConnectionReset` entries in the census, two in the survey, two in the taxonomy read. Measured: **it is CPython's default cipher list**, which omits the only suite those hosts offer. With one suite added and verification intact, **all 12 previously-unreachable NASA records re-fetched successfully, 0 failures** (`docs/ROSES_SOURCE_INSPECTION.md`, §17.11). What survives of the deferral is narrower and still real: NSPIRES's *open-solicitations list* is session-gated behind a POST search flow, which is what `adapters/nspires.py` documents. The **ROSES table surface is reachable**, which is what P6.1 needed, and P6.1 did not require NSPIRES activation |
 | **`program_taxonomy` and all `referenced` subtopics** (§6.7) | **Substantially reduced — see the reassessment below.** What is genuinely lost is now program-manager identity, stable per-program URLs, and taxonomy depth beyond what the notice prints. The per-program *children themselves* are no longer part of this deferral, because the census found them in the notice |
 | **`expected_solicitations.json` + `check_expected.py`** (§7.4) | No assertion that a known umbrella silently vanished from a healthy source. Mitigated slightly by #30 already being noisy, which this would have made noisier |
 | **§7.9 profile rebuild** | Researcher profiles keep the current Crossref + CV + free-text representation. Rehydrated abstracts, recency weighting and the negative-term list all wait. The current representation works; it is just not measured |
-| **Expired archive, recurrence grouping, `own_deadline`** (§7.2) | No "include past cycles" view, no cross-cycle linking, no per-subtopic advisory deadline. Package E's minimal rule means an expired parent takes its children with it, which is correct but lossy — last year's MURI topic list is gone rather than archived |
+| **Expired archive, recurrence grouping, `own_deadline`** (§7.2) | No "include past cycles" view, no cross-cycle linking, no per-subtopic advisory deadline. P9's minimal rule means an expired parent takes its children with it, which is correct but lossy — last year's MURI topic list is gone rather than archived |
 | **§7.2b "not relevant" suppression** | No mute control and no muted-items panel. Recall rises with no user-side way to prune it. This is also issue **#8**, so it has an owner outside this project |
 | **§7.7 team match** | Subtopics do not reach `faculty_match.py` or `team-matcher.js`. `team-researchers.js` gets them incidentally, since it scores through the shared BM25 index — so the team page will be *inconsistent* between its two paths until this is done. Worth stating in the help text if it ships that way |
 | **Subtopic change events, Atom feeds, alerts** (§10 steps 31–32) | A new topic under an existing umbrella — precisely the event the current feed misses — still does not appear in `changes.xml`, the feeds, or the weekly digest. Subtopics are findable by search only |
@@ -4184,7 +4423,7 @@ Each line states what is lost. None of this is abandoned; all of it is a later d
 
 #### Added in 8.2 — deferred *below* the Coverage package, with their measured yield
 
-**⚠ Superseded in 8.5. The first two rows are no longer deferred — they are package D¾ items Fm1 and Fm2, and their yields were roughly doubled by a larger sample:** `label_run` and the bulleted variant from ~32 to **~73**, bare `N)` from ~10 to **~31**. The reason for the change in standing is not the yield; it is that 8.2 deferred them for being *small* and they are not small. They are now ordered behind **Cov4** rather than behind all plumbing, because they are *unsafe without a classifier* — a different reason with a different exit condition. The third row's verdict is unchanged and still rejected. The original text is kept below because the reasoning it records is still correct.
+**⚠ Superseded in 8.5. The first two rows are no longer deferred — they are P7's items Fm1 and Fm2, and their yields were roughly doubled by a larger sample:** `label_run` and the bulleted variant from ~32 to **~73**, bare `N)` from ~10 to **~31**. The reason for the change in standing is not the yield; it is that 8.2 deferred them for being *small* and they are not small. They are now ordered behind **Cov4** rather than behind all plumbing, because they are *unsafe without a classifier* — a different reason with a different exit condition. The third row's verdict is unchanged and still rejected. The original text is kept below because the reasoning it records is still correct.
 
 | Deferred | Measured yield | What is lost by deferring it |
 |---|---|---|
