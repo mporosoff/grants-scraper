@@ -4313,6 +4313,39 @@ is a *sourcing* result. They are never added together (§17.8).
 | **P8.5. Lifecycle tests** | Six, and they are what prove the 51 need no manual attention: **(1)** an unmatched `Not Solicited This Year` element does **not** enter the current catalog; **(2)** the same element changes to an open/future date and **enters on the next build**; **(3)** it later expires/closes and **leaves the public current population**; **(4)** an element already represented by Grants.gov creates **no duplicate**; **(5)** a new unmatched **open** element **is emitted**; **(6)** an **HTTP-200 response with zero rows, or an implausibly small ROSES result, fails loudly** rather than silently removing NASA coverage — P6.1's canaries already do the zero-row half (`test_http_200_with_zero_rows_fails_loudly`), and this extends them to the *emission* path, where a silent collapse would now delete records rather than merely add none |
 | **P8.6. The gate — see below** | A catalog source needs its own gate, because §0.5 answers a different question |
 
+##### P8.1 — the source framework, inventoried before editing it
+
+**Measured 2026-08-19 by reading the code, per §0.4 rule 10 and §17.10.** P8 needs
+almost no new machinery: the lifecycle it requires already exists and is used by
+every other adapter. The table is the map, and the last column is what P8 adds.
+
+| Concern | Where it actually lives | What P8 adds |
+|---|---|---|
+| **Adapter discovery / fetch** | `SourceAdapter.fetch()` / `.parse()` / `.collect()` (`scripts/sources/base.py`); adapters self-register at import via `registry.register()` | Nothing. P6.1's `fetch`/`rows`/`split_rows`/`check_health` are reused verbatim — **no second ROSES parser** |
+| **Source record creation** | `CanonicalOpportunity.to_record()` expands ~50 fields into the exact Grants.gov record shape, reusing `build_catalog`'s own `topic_areas`, `normalize_disciplines`, `normalize_record_facets` | A `parse()` that yields `CanonicalOpportunity` for **actionable unmatched elements only** |
+| **Error isolation** | `registry.collect()` catches any adapter exception into `AdapterResult(ok=False)`; one broken source can never abort the merge | A **raise** on unhealthy source, so a broken parse takes the `ok=False` path instead of emitting zero rows |
+| **Source health** | `validate.within_health_bounds(count, min_records, max_records)` on the **published** count | `check_health()` on the **parsed inventory** — division sentinel, element floor, Table 2/3 cross-check — evaluated *before* emission |
+| **Last-known-good** | `merge.resolve_live_records()`: `retain_on_failure` republishes the filtered snapshot from `data/source_records.json`; `fallback_grace_days` marks a recent snapshot healthy; `_clear_failed_source` is the fail-closed alternative | `retain_on_failure = True`, which is what makes a parser failure unable to delete NASA records |
+| **Merge into the catalog** | `merge.merge_records(base, external)` — **base always wins**; an external record is dropped when it collides with base by `record_identity`, by casefolded `opportunity_number`, or by normalized title. `rebuild_catalog()` then rebuilds `search_index`, `facets`, `record_count`, `quality` and `diagnostics` with Grants.gov's own functions | Nothing. This is the precedence rule P8.3 pins with tests rather than replaces |
+| **Currentness filtering** | `validate.filter_publishable()` drops any external record that is expired, undated-and-unverifiable, missing a URL, or absurdly future-dated — **including from a retained snapshot**. `scripts/currentness.py::record_is_current` is the catalog-wide rule the browser, feeds, alerts and digests all read | An emission rule that only ever offers actionable elements, so the two agree by construction |
+| **Removal of records that disappear** | `merge.integrate()` rebuilds `base` from **Grants.gov records only** when no `--adapter` is selected, so every external record must be re-supplied each run. A record not re-emitted is simply gone — atomic per-source replace | Nothing. Ceasing to emit **is** the removal path |
+| **Generated artifacts / change feed** | `write_catalog()` writes `data/opportunities.js`; `build_changes.py` diffs the pre/post snapshots into `feeds/changes.{json,xml}` with `new` / `deadline_changed` / `amended` / `closing_soon` / `closed_or_removed`; `build_feeds.py` writes the Atom set | Nothing. A new ROSES record raises `new`; one that stops being actionable raises `closed_or_removed` |
+| **Hermetic gate insulation** | `tools/hermetic_build.sh` step 4 runs `sources merge --adapter sample --include-disabled`, so the §8.4 baseline sees **only** the `sample` adapter | Nothing — and this is why P8 changes the live catalog without touching §0.5's artifacts |
+
+**One framework change, additive.** The adapter cannot decide "unmatched" without
+seeing the catalog, and `collect()` has no catalog argument. `registry.collect()`
+gains an optional `context=None`, `SourceAdapter.set_context()` is a no-op by
+default, and `merge.integrate()` passes `{"catalog_records": base}`. Every existing
+call site keeps its behaviour, per §8.1.
+
+**Measured identifier evidence for P8.2, taken from the committed catalog rather
+than assumed:** exactly **10** catalog records carry an `NNH<yy>ZDA<nnn>[A-Z]-…`
+opportunity number, all 10 are ROSES elements, **all 10 embed their appendix code
+in the title** (`ROSES25: A.14 Atmosphere`, `ROSES 2025: A.4 …`), the 10 parsed
+codes are **distinct**, and reconciling on that code alone reproduces P6.1d's split
+exactly — **63 elements, 10 matched, 53 unmatched, 2 actionable** — with **no
+fuzzy-title matching anywhere**.
+
 ##### P8.6 — the catalog-source gate, and why §0.5 cannot be it
 
 **§0.5 is not weakened, reinterpreted, or re-baselined to accommodate this
