@@ -510,6 +510,134 @@ a genuine focus area from the review criterion printed beside it.
 **Cov4's gate no longer requires production F1/F4 recognisers to exist.** P7 is not
 started, and nothing here licenses starting it.
 
+## 5d. The ownership experiment — pre-registered and run 2026-08-26
+
+### 5d.1 The production ownership inventory
+
+Traced through `source_for_record`, `subtopic_sources`, `segment_document` and
+`build_records`. **Exactly four document kinds reach segmentation, and two carry
+ownership by construction:**
+
+| `source_kind` | Origin | Ownership evidence |
+|---|---|---|
+| `primary_notice` (565 records) | a Grants.gov attachment of this record | **bound by Grants.gov** |
+| `secondary_attachment` | §6.6's multi-attachment path — also this record's attachment | **bound by Grants.gov** |
+| `agency_notice` (393 records) | the record's own agency URL | **not guaranteed** |
+| `subtopic_agency_notice` | Cov1's `subtopic_only_primary` | **not guaranteed — BUG-9's path** |
+
+Available for **every** candidate at the Cov4 call site: parent record id, parent
+opportunity number, parent title, source-document URL, name and `sha256`, the
+`source_kind` above, and the excerpt. **The pipeline already holds deterministic
+ownership evidence, so the classifier does not need to solve ownership at all.**
+
+### 5d.2 The invariant
+
+> A candidate may be **semantically fundable and still invalid for this parent** if
+> the evidence establishes it belongs to another opportunity. **Ownership and
+> fundability are two axes**; a candidate must pass both, and one verdict must not
+> silently combine them when ownership is deterministically decidable.
+
+### 5d.3 Results — O1 43 calls, O2/O3 deterministic
+
+| Strategy | true-owned accepted | true-owned rejected | cross-opportunity rejected | cross-opportunity **accepted** | ambiguous |
+|---|---|---|---|---|---|
+| **O1** classifier context | 39 | **1** | **2/2** | 0 | 1 |
+| **O2** deterministic guard | **40/40** | 0 | **2/2** | 0 | 1 |
+| **O3** guard + classifier residue | **40/40** | 0 | **2/2** | 0 | 1 |
+
+**My pre-registered expectation for O1 was falsified, and that is worth stating.** I
+predicted O1 would fail the aggregating page because the earlier variants already
+received `Parent number:` and accepted it anyway. **O1 rejected it, 5/5 on re-test** —
+*"Excerpt explicitly attributes this topic area to DE-FOA-0003627, not the unnamed
+parent opportunity."* Asking ownership as **its own question** was the difference, not
+supplying more identity.
+
+**O2 still wins on the criterion that matters for a gate: determinism.** It settles
+**42 of 43** candidates with **zero API calls** and **without reading prose at all**
+for the 40 attachment-sourced ones — which is what makes the over-aggression trap
+safe. O1's one true-owned rejection shows a model verdict can err in the costly
+direction; a guard cannot.
+
+**The over-aggression trap held.** `own:360678-predecessor-citation` — a genuine HEP
+programme quoted from page 96 of the parent's own notice, whose text cites predecessor
+`DE-FOA-0003354` — passes as **owned** under O2 with `consulted_prose: False`. The
+amendment-history case (`FundOpp_DE-FOA-0003627_Amd_000003.pdf`) passes the same way.
+A rule of the form *"a foreign number anywhere means reject"* would have destroyed
+both.
+
+### 5d.4 Stability of the decisive verdicts (R=5)
+
+| Candidate | Truth | O1 verdicts ×5 |
+|---|---|---|
+| `360678:x-org-bes` | owned, **not** fundable | `yes/no` ×5 — **stably rejects the office container** |
+| `360678:x-org-office-of-science` | owned, not fundable | `yes/no` ×5 |
+| `363594:x-other-foa-topic` | **not owned**, fundable | `no/yes` ×5 — both axes right |
+| `360678:qcs` Catalysis Science | owned, fundable | `yes/yes` ×5 |
+| `330175:f1-aeronautics-arc` | owned, fundable | `yes/yes` ×5 |
+
+The office-container rejection is **not an n=1 fluke** — it was re-tested precisely
+because a single call is not evidence, and it held 5/5.
+
+### 5d.5 The specified configuration, scored
+
+**Cov4 = O3 deterministic ownership guard + the O1 two-axis semantic prompt.**
+
+| Axis | Result |
+|---|---|
+| Fundability | **TP=30 · FN=0 · TN=11 · FP=0** · unresolved 2 |
+| Ownership | **40/40** owned accepted · **2/2** cross-opportunity rejected · deterministic for **42/43** |
+| **Combined gate** | **28 published correctly · 0 FABRICATIONS · 0 GENUINE CHILDREN LOST** |
+
+**A label precedence to disclose.** `363594:x-other-foa-topic` carries
+`truth_label: contaminant` in the challenge set, written *before* the axes were
+separated, and `owned: no / fundable: yes` in the ownership set, written *after*. The
+two-axis label is used above because it is the more precise one and was still
+committed **before** this run. On the one-axis label the same configuration scores
+FP=1; the difference is bookkeeping about which axis the row fails, not about whether
+it publishes — **it does not publish under either reading.**
+
+### 5d.6 BUG-9 — fix defined, not implemented
+
+The deterministic guard eliminates the aggregating-page fabrication **without
+rejecting a single legitimate child**. BUG-9's fix is therefore specified as:
+
+> **Ownership guard, evaluated before semantic classification.** A span whose source
+> document is a Grants.gov attachment of the record (`primary_notice`,
+> `secondary_attachment`) is owned, and its prose is never inspected. A span from an
+> agency-hosted page (`agency_notice`, `subtopic_agency_notice`) is owned only if the
+> parent's own solicitation number appears in the document identity or the span text;
+> it is a **conflict** if some other measured solicitation number appears instead; and
+> **unestablished** otherwise — which does not publish and routes to review.
+
+**Not implemented in production this session**, per the package's own instruction to
+end with a frozen decision Cov4's implementation can consume. `tools/cov4_ownership.py`
+is that frozen specification.
+
+---
+
+## 5e. Decision
+
+> ### COV4 FULLY SPECIFIED — IMPLEMENTATION NEXT
+>
+> Every clause of the stated criterion is met **on measured real-document evidence**:
+>
+> | Clause | Result |
+> |---|---|
+> | zero known genuine children rejected | ✅ **FN=0**, 0 lost at the combined gate |
+> | known cross-opportunity fabrication rejected | ✅ **2/2**, by a deterministic guard |
+> | measured contaminants rejected at the required gate | ✅ **TN=11, FP=0**, office containers stably rejected 5/5 |
+> | ownership deterministic / reproducible | ✅ **42/43** decided by the guard with **zero API calls** |
+>
+> **What implementation consumes, all frozen:** the guard in
+> `tools/cov4_ownership.py`; the two-axis prompt `O1_PROMPT`; **R=1**, licensed by
+> MEAS-3; and the two evaluation artifacts as the regression set.
+>
+> **What implementation must still prove at its own gate**, and what this session did
+> not touch: the production call site — `native` (NASA) and `referenced` (Army TDAC)
+> records bypassing Cov4, only `inferred`/`inline` entering it, provenance never
+> upgraded by classifier approval, classifier failure failing closed, and §0.5
+> byte-identical with the flag off.
+
 ## 5. What this session did not do, and why
 
 * **Cov4 was not implemented.** Its repeatability rule is the thing MEAS-3 exists to
