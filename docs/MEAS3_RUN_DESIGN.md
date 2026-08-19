@@ -286,13 +286,15 @@ distinction — *propose against* versus *formally select* — and lands differe
 
 Adding the unstable span, which rejects in 4 of 5 runs:
 
-> **Measured false-rejection rate: 4 of 104 scoreable candidates = 3.8% stable, rising
-> to 5 of 104 = 4.8% if `(i) X-Ray Scattering` is counted at its majority verdict.**
-> **Cov4's gate requires zero.**
+> **Measured false-negative (recall) rate: 4 of 104 scoreable candidates = 3.8%
+> stable, rising to 5 of 104 = 4.8% if `(i) X-Ray Scattering` is counted at its
+> majority verdict. Cov4's gate requires zero.** **Precision is unmeasured** — the
+> population holds no contaminants to accept wrongly.
 
 **No contaminants were available to catch.** The producible population contains none
-(§3.1), so this run measures only the false-rejection direction — which is the
-direction that costs real opportunities.
+(§3.1), so this run measures only the recall direction — the one that costs real
+opportunities. **Precision and specificity were unmeasurable here**, which is exactly
+why the Cov4 challenge set (§5a) was built.
 
 ### 4a.3 Repetition cannot fix this, and that is the structural point
 
@@ -343,16 +345,170 @@ rule, no majority vote — the measured instability does not justify one.**
 **But Cov4 is not thereby unblocked**, because the decision table governs *only* the
 repeatability mechanism, and the binding failure is elsewhere:
 
-> **MEAS-3 is complete. Cov4 remains blocked — on precision, not on variance.**
-> The gate's *"zero false rejections"* clause fails at **3.8%** with the committed
-> prompt, and **repetition cannot repair a stable error**. What changed is which
-> problem Cov4 has: it is now a task-definition problem, and it is cheap to attack
-> because the population is frozen and the harness exists.
+> **MEAS-3 is complete. Cov4 remains blocked — on task definition and validation
+> coverage, not on variance.** The gate's *"zero false rejections"* clause fails at
+> **3.8%**, and **repetition cannot repair a stable error**.
+>
+> **Terminology, corrected 2026-08-25.** Those four rejected programmes are **false
+> negatives — a recall failure**, not a precision failure. **Precision was and remains
+> unmeasured on this population**, which holds no contaminants. An earlier revision
+> called it "precision", inverting the direction of the error.
 
 **Deliberately not done here:** the prompt was **not** tuned after seeing these
 results. Doing so would convert a pre-registered measurement into a fitted one. The
 next session should treat prompt/task definition as its own pre-registered
 experiment against this same frozen population — and it now costs one command.
+
+## 5a. The Cov4 prompt experiment — pre-registered 2026-08-25, run the same day
+
+**MEAS-3 is untouched.** Its population, prompt, raw R=5 outputs, decision table and
+105-candidate result are immutable. This is a *new* experiment that reuses the frozen
+population as one of two arms.
+
+### 5a.1 Diagnosis — the smallest common failure
+
+All 25 rejection reasons behind MEAS-3's four stable false negatives repeat two moves:
+
+> *"This is **descriptive background** on a research area…"*
+> *"…not a distinct fundable subdivision applicants **select against**."*
+
+The MEAS-3 prompt asks for *"something an applicant would actually apply against or
+**select**"*. The model reads **select** as requiring a **formal application
+category**, and reads a prose programme description as **background**. In a DOE
+omnibus every genuine programme is precisely that — a named research area described in
+prose that you propose work against.
+
+**The model states the correct rule itself** in the single accepting run of the one
+unstable span: *"Names a specific research program area (X-Ray Scattering) under BES
+that **applicants can propose research against**."* So the decision rule is what
+rejected them, not the model's capability.
+
+`(n) Public-Private Partnerships` is **kept unresolved**: run 4 called it *"a general
+funding mechanism"*, which is exactly DEC-11's open question, and DEC-11 says a human
+settles it and **not from a model verdict**. It is excluded from every score below.
+
+### 5a.2 The two populations
+
+* **A** — the frozen MEAS-3 population, 105 candidates. Scored only where a committed
+  label exists (19 copied into the challenge set); the other 86 are reported as a
+  **descriptive accept-rate**, not as a score.
+* **B** — `evaluation/cov4_challenge.json`, **36 real-document candidates: 23
+  fundable, 12 contaminant, 1 unresolved**, every excerpt quoted from a
+  digest-verified document, every label carrying its evidence, **all committed before
+  any variant ran**.
+
+### 5a.3 Results — 564 calls at R=1, 0 API errors, 0 unparseable
+
+| Variant | A: recall | A: accept-rate (unlabelled) | B: TP | B: FN | B: TN | B: FP | B: recall | B: specificity |
+|---|---|---|---|---|---|---|---|---|
+| `V0_control` (MEAS-3 prompt) | **77.8%** (4 FN) | 96.5% | 16 | **7** | 11 | 1 | 69.6% | 91.7% |
+| **`V1_propose_against`** | **100%** | 98.8% | **23** | **0** | 10 | 2 | **100%** | 83.3% |
+| `V2_subject_vs_process` | **100%** | 100% | 22 | 1 | 11 | 1 | 95.7% | 91.7% |
+| **`V3_subject_with_tiebreak`** | **100%** | **100%** | **23** | **0** | 10 | 2 | **100%** | 83.3% |
+
+**The recall half is solved.** V1 and V3 keep **every** known genuine child on **both**
+populations, including all four of MEAS-3's stable false negatives and the unstable
+`(i) X-Ray Scattering`. The control loses 7 of 23 on the challenge set.
+
+**By shape, on population B** (V1 and V3 identical except where noted):
+
+| Shape | Truth | V0 | V1 | V2 | V3 |
+|---|---|---|---|---|---|
+| `f4_named_bulleted` (3) | fundable | **0/3** | 3/3 | 3/3 | 3/3 |
+| `f1_bare_numbered` (2) | fundable | 2/2 | 2/2 | **1/2** | 2/2 |
+| `f4_adjacent_decoy` (3) | contaminant | 3/3 | 3/3 | 3/3 | 3/3 |
+| `f1_bare_numbered_decoy` (1) | contaminant | 1/1 | 1/1 | 1/1 | 1/1 |
+| `navigation_toc` (1) | contaminant | 1/1 | 1/1 | 1/1 | 1/1 |
+| `administrative_heading` (2) | contaminant | 2/2 | 2/2 | 2/2 | 2/2 |
+| `policy_prose` · `eligibility_policy_prose` (2) | contaminant | 2/2 | 2/2 | 2/2 | 2/2 |
+| `organizational_heading` (2) | contaminant | 2/2 | **1/2** | 2/2 | **1/2** |
+| `aggregating_agency_page` (1) | contaminant | **0/1** | **0/1** | **0/1** | **0/1** |
+
+**The F1/F4 answer is encouraging and is the point of the challenge set:** V1 and V3
+separate genuine F4 focus areas from their adjacent review-criterion and
+attachment-checklist decoys **3/3 and 3/3**, and genuine F1 research centres from the
+document's own `3. Reserved` placeholder and its table-of-contents line **2/2 and
+2/2**. The control got **0 of 3** F4 positives.
+
+### 5a.4 The two contaminant classes that survive
+
+1. **Cross-opportunity ownership — every variant fails, including the control.**
+   `363594:x-other-foa-topic` is a topic whose own excerpt says it belongs to
+   `DE-FOA-0003627` while the parent is `DE-FOA-0003215`. **4 of 4 variants accepted
+   it**, two of them under prompts that state an explicit ownership rule. This is
+   **BUG-9's exact fabrication surface**, and stating the rule in the prompt did not
+   close it.
+2. **Office/division granularity — a genuine trade-off, not an oversight.**
+   `360678:x-org-bes` is *Basic Energy Sciences*, the office that **contains** the
+   (a)–(x) programmes. **V2's explicit granularity rule rejects it correctly — and
+   that same rule costs V2 a genuine F1 research centre**, which it also called an
+   organizational unit. V1 and V3 keep every positive and accept the office.
+
+**No variant achieves zero false negatives *and* zero fabrications.** V1/V3 trade 2 FP
+for 0 FN; V2 trades 1 FN for 1 FP.
+
+### 5a.5 Thinking behaviour — diagnostic only
+
+Thinking tokens were **0 on 562 of 564 calls**; the two exceptions were V1 on
+population B. Consistent with MEAS-3, and **not** treated as a defect: adaptive
+thinking legitimately elects not to think, and §11's expectation of nonzero thinking
+was formed on a population whose excerpts Cov5 has since repaired. No artificial
+thinking budget was imposed to reproduce §11.
+
+---
+
+## 5b. Decision
+
+> ### COV4 TASK DEFINITION STILL BLOCKED
+>
+> **What is now settled and should not be re-derived:** the recall failure is solved.
+> `V1_propose_against` and `V3_subject_with_tiebreak` preserve **100%** of known
+> genuine children on both populations — 4/4 of MEAS-3's stable false negatives
+> recovered, the unstable span recovered, and F1/F4 genuine-versus-decoy separation
+> at 5/5 positives and 4/4 decoys.
+>
+> **Why it is still blocked:** Cov4's gate carries a fabrication constraint as well as
+> a zero-false-rejection constraint, and **no variant meets both**. Accepting another
+> opportunity's topic (`363594`) is precisely the fabricated-publishable-record
+> failure the gate exists to prevent, and it survived **all four** prompts including
+> two that state an ownership rule explicitly.
+>
+> **This is not a case for relaxing the gate.** The zero-false-rejection requirement
+> was *met*, so §"COV4 GATE REQUIRES PLAN DECISION" does not apply.
+
+**What the next experiment should test, stated now so it is pre-registered rather than
+fitted:** ownership is plausibly not a prompt problem at all. The classifier is handed
+a title and an excerpt with no reliable statement of *which* opportunity the span was
+extracted from, so "does this belong to the parent?" may be **unanswerable from the
+input** rather than mis-instructed. The candidate fix is **structural** — supply the
+parent's own identifiers and require the span's source document to match — and it
+should be measured against this same frozen challenge set.
+
+---
+
+## 5c. The Cov4 ↔ P7 circularity, removed
+
+**The problem.** P7's admission of F1/F4 forms is gated on Cov4 proving it can guard
+them; Cov4's validation was gated on production emitting F1/F4 candidates; only a P7
+recogniser emits those. Each waited for the other.
+
+**The break, and it is already demonstrated above.** *Evaluation candidates are not
+production candidates.* A candidate span hand-extracted from a document this project
+has already read, with a human truth label and a page cite, validates Cov4 perfectly
+well — no recogniser needs to exist for the classifier to be asked whether it can tell
+a genuine focus area from the review criterion printed beside it.
+
+**The ordering is therefore:**
+
+1. **real F1/F4 documents establish candidate truth** — done: `330175` and `362233`,
+   quoted, labelled, committed;
+2. **manually frozen candidate spans validate Cov4** — done for these shapes: 5/5
+   genuine kept, 4/4 decoys rejected under V1/V3;
+3. **only then may P7 implement the recogniser** that would generate those spans
+   automatically.
+
+**Cov4's gate no longer requires production F1/F4 recognisers to exist.** P7 is not
+started, and nothing here licenses starting it.
 
 ## 5. What this session did not do, and why
 
