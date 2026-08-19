@@ -1004,7 +1004,75 @@ class FrozenRegressionTests(unittest.TestCase):
         self.assertNotIn("f1_bare_numbered", patterns)
 
 
-# --- 9. the flag-off path ---------------------------------------------------
+# --- 9. the live-validation harness -----------------------------------------
+
+class ValidationHarnessTests(unittest.TestCase):
+    """`tools/run_cov4_validation.py` must validate production, not a copy."""
+
+    def source(self):
+        return (ROOT / "tools" / "run_cov4_validation.py").read_text(
+            encoding="utf-8")
+
+    def code(self):
+        """The source with its module docstring removed.
+
+        The docstring legitimately quotes the model name and the PowerShell line
+        that loads the credential; what must not appear is a *restatement in
+        code*, which could drift from the frozen configuration.
+        """
+        return self.source().split('"""', 2)[-1]
+
+    def test_the_harness_drives_the_production_gate(self):
+        source = self.source()
+        self.assertIn("from scripts import subtopic_cov4 as cov4", source)
+        self.assertIn("cov4.apply_gate(", source)
+        self.assertIn("records.build_records(", source)
+
+    def test_the_harness_states_no_prompt_and_no_model_of_its_own(self):
+        """Anything it restated could drift from the frozen configuration."""
+        code = self.code()
+        self.assertNotIn("PROMPT", code)
+        self.assertNotIn("api.anthropic.com", code)
+        self.assertNotIn("claude-sonnet", code)
+        self.assertIn("cov4.MODEL", code)
+        self.assertIn("cov4.REPEATS", code)
+
+    def test_the_harness_never_embeds_or_reads_a_credential_itself(self):
+        """The key is loaded by the shell and consumed by production only."""
+        code = self.code()
+        self.assertNotIn("sk-ant", code)
+        self.assertNotIn("ANTHROPIC_API_KEY", code)
+        self.assertNotIn("os.environ", code)
+
+    def test_the_committed_validation_run_reproduces_the_gate_figures(self):
+        """The live run is evidence, so it is committed and asserted."""
+        path = EVALUATION / "cov4_validation_runs.jsonl"
+        rows = [json.loads(line) for line in
+                path.read_text(encoding="utf-8").splitlines() if line.strip()]
+        self.assertEqual(len(rows), 43)
+        self.assertEqual(
+            sorted({row["provenance"] for row in rows}), [records.INFERRED]
+        )
+        self.assertEqual(sum(1 for row in rows if row["classifier_errors"]), 0)
+        published = [row for row in rows if row["published"]]
+        self.assertEqual(len(published), 28)
+        for row in published:
+            self.assertEqual(row["cov4_ownership"], cov4.OWNED)
+            self.assertEqual(row["cov4_fundability"], cov4.ACCEPT)
+            self.assertEqual(row["truth_owned"], "yes")
+            self.assertEqual(row["truth_fundable"], "yes")
+        lost = [row for row in rows
+                if row["truth_owned"] == "yes" and row["truth_fundable"] == "yes"
+                and not row["published"]]
+        self.assertEqual(lost, [])
+        cross = [row for row in rows if row["truth_owned"] == "no"]
+        self.assertEqual(len(cross), 2)
+        for row in cross:
+            self.assertEqual(row["cov4_ownership"], cov4.NOT_OWNED)
+            self.assertFalse(row["published"])
+
+
+# --- 10. the flag-off path --------------------------------------------------
 
 class FlagOffTests(unittest.TestCase):
     def test_the_flag_off_path_still_adds_nothing_at_all(self):
