@@ -1,0 +1,149 @@
+{
+  "calls": 525,
+  "candidates": 105,
+  "repeats": 5,
+  "by_arm": {
+    "A": {
+      "stable_accept": 99,
+      "stable_reject": 5,
+      "unstable": 1
+    }
+  },
+  "pooled_flip_calls": 1,
+  "pooled_calls": 525,
+  "pooled_flip_rate": 0.0019047619047619048,
+  "pooled_flip_wilson95": [
+    0.0003363077631967108,
+    0.010709721898615066
+  ],
+  "usage": {
+    "input_tokens": 287350,
+    "output_tokens": 25826,
+    "thinking_tokens": 0
+  },
+  "unstable": {
+    "360678:ixrs": {
+      "arm": "A",
+      "parent": "360678",
+      "verdicts": [
+        "reject",
+        "reject",
+        "accept",
+        "reject",
+        "reject"
+      ],
+      "reasons": [
+        "This is a description of a research program area/topic rather than a distinct fundable subdivision an applicant selects within this FOA.",
+        "This is a program/research area description under BES, not a distinct fundable subdivision applicants select in this FOA.",
+        "Names a specific research program area (X-Ray Scattering) under BES that applicants can propose research against.",
+        "This is a research area/topic description under a program, not a distinct fundable subdivision applicants formally apply against.",
+        "This is a research topic/program description within BES, not a distinct fundable subdivision applicants select in this FOA."
+      ],
+      "classification": "unstable",
+      "title": "(i) X-Ray Scattering"
+    }
+  },
+  "stable_rejects": {
+    "360678:amr": {
+      "arm": "A",
+      "parent": "360678",
+      "verdicts": [
+        "reject",
+        "reject",
+        "reject",
+        "reject",
+        "reject"
+      ],
+      "reasons": [
+        "This is descriptive background on a research area rather than a distinct fundable topic/subtopic applicants select.",
+        "This is a program area description/background text, not a specific fundable topic subdivision an applicant selects.",
+        "This is descriptive background on a research area, not a distinct fundable topic/subtopic an applicant selects.",
+        "This is background/program description text, not a specific fundable topic area applicants select against.",
+        "This is background/program description text, not a distinct fundable topic area an applicant selects."
+      ],
+      "classification": "stable_reject",
+      "title": "(a) Microbiome Research"
+    },
+    "360678:bhinp": {
+      "arm": "A",
+      "parent": "360678",
+      "verdicts": [
+        "reject",
+        "reject",
+        "reject",
+        "reject",
+        "reject"
+      ],
+      "reasons": [
+        "This is descriptive background on a research subprogram area, not a distinct fundable subdivision applicants select against.",
+        "This is descriptive background on a research subprogram area, not a distinct fundable subtopic applicants select against.",
+        "This is a descriptive subprogram/topic area, not a distinct fundable subdivision applicants select in this FOA.",
+        "This is descriptive background on a research subprogram area, not a distinct fundable subdivision applicants select against.",
+        "This is a descriptive subprogram background section, not a distinct fundable subdivision an applicant selects against."
+      ],
+      "classification": "stable_reject",
+      "title": "(b) Heavy Ion Nuclear Physics"
+    },
+    "360678:dfs": {
+      "arm": "A",
+      "parent": "360678",
+      "verdicts": [
+        "reject",
+        "reject",
+        "reject",
+        "reject",
+        "reject"
+      ],
+      "reasons": [
+        "This is a subprogram/topical research area description, not a distinct fundable subdivision applicants select against.",
+        "This is a subprogram/topic description within a research area, not a distinct fundable application category in the FOA structure.",
+        "This is a scientific subprogram description providing background/topic scope, not a fundable subdivision applicants select against within this FOA.",
+        "This is a description of a scientific subprogram/research area, not a distinct fundable subdivision or topic applicants select in this FOA.",
+        "This is a subprogram/topic description providing background on research areas, not a distinct fundable subdivision applicants select."
+      ],
+      "classification": "stable_reject",
+      "title": "(d) Fundamental Symmetries"
+    },
+    "360678:nppp": {
+      "arm": "A",
+      "parent": "360678",
+      "verdicts": [
+        "reject",
+        "reject",
+        "reject",
+        "reject",
+        "reject"
+      ],
+      "reasons": [
+        "This is background/policy narrative about public-private partnerships, not a specific fundable topic area applicants select.",
+        "This is background/policy narrative about public-private partnerships, not a specific fundable topic area applicants select.",
+        "This is background/policy description of a partnership approach, not a specific fundable topic area applicants select.",
+        "This is descriptive background text about a general funding mechanism, not a specific fundable topic area applicants select.",
+        "This is background/policy narrative about public-private partnerships, not a specific fundable topic area applicants select."
+      ],
+      "classification": "stable_reject",
+      "title": "(n) Public-Private Partnerships"
+    },
+    "361526:suslidc-10": {
+      "arm": "A",
+      "parent": "361526",
+      "verdicts": [
+        "reject",
+        "reject",
+        "reject",
+        "reject",
+        "reject"
+      ],
+      "reasons": [
+        "This is a thematic challenge/priority area description, not a specific fundable subdivision applicants select against.",
+        "This is a thematic challenge area/background description with participating offices, not a fundable topic applicants select against.",
+        "This is a listed challenge/priority area with participating offices, not a discrete fundable topic applicants select against.",
+        "This is a thematic challenge area description with participating offices, not a distinct fundable topic applicants select against.",
+        "This is a challenge/topic area description with participating offices, not a specific fundable subdivision applicants select against."
+      ],
+      "classification": "stable_reject",
+      "title": "10 - Securing U.S. Leadership in Data Centers"
+    }
+  },
+  "note": "Repeatability measured; see docs/MEAS3_RUN_DESIGN.md. Truth labels for the rejects are assessed in that document, not encoded here."
+}
