@@ -1379,6 +1379,7 @@ def subtopic_fields(record, content, containers, document, fetched_at, enabled):
     if not enabled:
         return {}
     from scripts import (
+        subtopic_cov4,
         subtopic_records,
         subtopic_referenced,
         subtopic_segmentation,
@@ -1398,8 +1399,15 @@ def subtopic_fields(record, content, containers, document, fetched_at, enabled):
         subtopic_referenced.first_refusal(record, fetch=referenced_fetch)
     )
     if referenced_result is not None:
-        return {
-            "subtopics": subtopic_records.build_records(
+        # Cov4 is applied here too, and it is *supposed* to do nothing. The P6
+        # forward obligation is that `referenced` children bypass the classifier
+        # at the production call site rather than by never reaching it, so the
+        # gate is invoked and its own provenance boundary declines them --
+        # `bypassed: 14, classifier_calls: 0` in the diagnostics below is the
+        # proof, and a regression test reads exactly that.
+        referenced_records, referenced_cov4 = subtopic_cov4.apply_gate(
+            record,
+            subtopic_records.build_records(
                 record,
                 referenced_result,
                 document=referenced_document,
@@ -1409,6 +1417,10 @@ def subtopic_fields(record, content, containers, document, fetched_at, enabled):
                 # not the relationship.
                 provenance=subtopic_records.REFERENCED,
             ),
+            referenced_document,
+        )
+        return {
+            "subtopics": referenced_records,
             # Orthogonal to provenance, and genuinely absent: no segmentation
             # layer and no pattern family ran (§5.1).
             "subtopic_method": referenced_result.method,
@@ -1420,6 +1432,7 @@ def subtopic_fields(record, content, containers, document, fetched_at, enabled):
                 "sha256": (referenced_document or {}).get("sha256"),
             },
             "subtopic_referenced": referenced_diagnostics,
+            "subtopic_cov4": referenced_cov4,
         }
 
     try:
@@ -1440,6 +1453,13 @@ def subtopic_fields(record, content, containers, document, fetched_at, enabled):
         built = subtopic_records.build_records(
             record, result, document=chosen or document, as_of=fetched_at[:10]
         )
+        # §18.1 Cov4. The narrowest point that already holds everything the gate
+        # needs: `built` carries the parent id, the parent opportunity number,
+        # the §5.1 rung, the candidate title and its excerpt; `chosen or
+        # document` carries the source URL, name, sha256 and `source_kind`, which
+        # is the ownership evidence. No second candidate pipeline is created --
+        # this filters the spans `build_records` just produced.
+        built, cov4 = subtopic_cov4.apply_gate(record, built, chosen or document)
     except Exception as exc:  # noqa: BLE001 - never break the parent record
         return {
             "subtopics": [],
@@ -1451,6 +1471,7 @@ def subtopic_fields(record, content, containers, document, fetched_at, enabled):
         "subtopic_method": result.method,
         "subtopic_extractor_version": version,
         "subtopic_attempts": attempts.get("attempts", ()),
+        "subtopic_cov4": cov4,
     }
     if chosen and (chosen.get("url") or None) != (document or {}).get("url"):
         # The topic list came from a secondary attachment, not the notice the
