@@ -2,7 +2,7 @@
 
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
-Status: in progress · Version 8.21 · Written 2026-08-15 · **Revised 2026-08-26 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
+Status: in progress · Version 8.22 · Written 2026-08-15 · **Revised 2026-08-26 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
 
 > **Start at §18, and read §18.0 first.** §18 defines the minimum path — the **eleven** work packages **P1 … P11** — and lists what is deferred and what it costs. **§18.0 is the canonical namespace**: package IDs, the `BUG-*` / `MEAS-*` / `DEC-*` / `DEBT-*` prefixes, the migration table for every legacy label (`Package A–G`, `D½`, `D⅝`, `D¾`, `S1–S3`, `Package N`, bare `D#`, `M#`), the current ordered path, and a diagram. **P6 is closed and P8 is complete; P5 remains open. Cov4 is now fully specified and implementation is the next step; Cov6 and Cov7 are untouched** (`docs/MEAS3_RUN_DESIGN.md` §5d–5e). §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
 >
@@ -11,6 +11,34 @@ Status: in progress · Version 8.21 · Written 2026-08-15 · **Revised 2026-08-2
 > **8.3 changes one thing structurally: the unit of judgment moves from the sibling *set* to the individual *span* (§6.4b), because a set-level verdict lets two policy paragraphs delete 70 DOE programmes.** §11 is reopened for the precision half only, on a measured run; its recall argument is untouched.
 >
 > **8.4 closes the two blocking storage decisions.** `MAX_TERMS` stays at 400 and subtopics ship in a lazily-loaded `data/subtopics.js` sidecar — one question, not two, once you measure that 60.3% of a cache record is a term map the browser never reads as content. **Nothing now blocks committing a cache except running the backfill again.** Every rate quoted against `docs/CORPUS_CENSUS.md`'s 20 documents is still superseded by `docs/COVERAGE_SURVEY.md` (§1.1).
+>
+> **8.22 implements Cov4 and closes it, and closes BUG-9 with it.** Nothing was
+> designed this session: `scripts/subtopic_cov4.py` is the frozen specification
+> made executable, and two tests assert the prompt and the solicitation-number
+> regex are **byte-identical** to `tools/cov4_ownership.py`'s. The production call
+> site is `subtopic_fields`, the narrowest point that already holds the parent id,
+> the parent number, the parent title, the source URL/name/sha256, the
+> `source_kind` and the §5.1 rung — so the gate **filters the spans
+> `build_records` just produced** rather than starting a second candidate
+> pipeline. **The two axes stay two axes:** a deterministic ownership guard runs
+> first with **zero API calls**, and the O1 two-axis prompt at `claude-sonnet-5`,
+> **R=1**, answers fundability over direct HTTP through the already-pinned
+> `requests`. **Bounded live validation, 43 frozen candidates through production's
+> own gate:** ownership **40 owned / 2 not_owned / 1 unestablished** — identical to
+> the frozen O2 row — fundability **30 accept / 13 reject / 0 API errors**,
+> **28 genuine children retained, 0 lost, 11 contaminants rejected, 2
+> cross-opportunity fabrications prevented, 0 published**. **19 children bypassed
+> by provenance with 0 classifier calls** — 5 NASA `native` and 14 Army TDAC
+> `referenced` — which **discharges P6's forward obligation at the call site**.
+> Net auto-publishable generic children **43 → 28**. Exactly one live verdict
+> differs from the committed run, on the candidate whose ownership truth is
+> `unresolved`; it publishes under neither reading, and **nothing was re-tuned in
+> response**. Fail-closed is tested rather than asserted: missing credential,
+> timeout, non-2xx, malformed JSON, unparseable body and out-of-enum answer all
+> demote to `low` and route to review, and an outage never fails the catalog
+> build. **Classifier approval never upgrades provenance** and never lifts §5.1's
+> ceiling. §0.5 byte-identical, 566 tests green.
+> **Decision: COV4 CLOSED. BUG-9 CLOSED. P5's remaining items are Cov6 and Cov7.**
 >
 > **8.21 closes Cov4's ownership blocker with a deterministic guard, and specifies the
 > gate.** The pipeline turned out to already hold the answer: exactly four document
@@ -3288,19 +3316,19 @@ Legacy labels are translated once, in §18.0.3 — not repeated here.
 | **P2** | Segmentation engine | ✅ **complete** 2026-08-16 |
 | **P3** | Flag-off integration | ✅ **complete** 2026-08-16 |
 | **P4** | Tune and backfill | ⚠️ **complete 2026-08-16, gate not met** — correct-acceptance stopped at **42%** against the 50% threshold, deliberately: every remaining miss needs a new mechanism, and reaching 50% by loosening would trade the 0/8 false-positive count. **P4.4**'s backfill ran and its cache was deliberately not committed |
-| **P5** | Coverage hardening | 🔄 **in progress** — Cov0–Cov3 and Cov5 done. **Open: Cov4, Cov6, Cov7.** **Cov4 is blocked, not merely unstarted (2026-08-23):** MEAS-3 is specified but unrunnable here — no classifier credential, no committed candidate population, and `anthropic` is not an authorized dependency (**DEC-15**). The gate's own wording is also now known to be unsatisfiable in one pass: the measured flip rate's 95% CI is [0.29%, 8.59%] against a 0.9% signal (`docs/MEAS3_RUN_DESIGN.md`) |
+| **P5** | Coverage hardening | 🔄 **in progress** — Cov0–Cov5 done. **Open: Cov6, Cov7 only.** **Cov4 closed 2026-08-26**: the two-axis gate is implemented at the production call site (`scripts/subtopic_cov4.py`, `subtopic_fields`), every gate clause is demonstrated, and **BUG-9 is closed with it**. Live validation on the 43 frozen candidates: 28 genuine children retained, **0 lost**, 11 contaminants rejected, **2 cross-opportunity fabrications prevented**, 19 children bypassed by provenance with **0 classifier calls**, §0.5 byte-identical |
 | **P6** | Structured-source coverage | ✅ **complete 2026-08-22, all three items measured.** P6.1 `native` NASA (10 recoveries, category (e)); P6.2 DOE measured negative (category-(a) population empty); P6.3 `referenced` Army (1 parent, 14 external-only children, category (a)). **Conclusion: delegation predicts value, not authority** (§18.1) |
 | **P6.1** | NASA ROSES structured-source proof | ✅ **complete** 2026-08-18. Gate closed clause by clause against repository evidence: six clauses outright, one with a forward obligation (the Cov4 bypass), one on evidence (§0.5). **Previously-category-(a) records reached: 0** — P6.1 reached the **(e)** population |
 | **P6.2** | DOE Office of Science structured-source test | ✅ **complete 2026-08-21 — a measured negative, and no source was built.** It was the first real test of whether structured/referenced ingestion reaches category (a), and **the population was empty**: 2 Office of Science parents, **both already resolved** by generic parsing, **0** previously category (a), **0** net-new children, **3** non-fundable organizational labels rejected. Evidence: `docs/DOE_SOURCE_INSPECTION.md` |
 | **P6.3** | DoD structured-source test | ✅ **complete 2026-08-22, Army/TDAC only** — exactly what MEAS-7 justified. **1 parent (`345241`), 14 external-only children**, provenance `referenced`, confidence `high`, **0** generic overlap. Health: names the parent, 14 ≥ floor 8. ONR rejected on measurement; **no DoD router, no SAM.gov** |
-| **P7** | Residual generic forms | ⛔ **not started.** Gated on **P5's Cov4 gate** *and* on **P6 measurement**: Fm1/Fm2/Fm5/Fm6 build only against records still uncovered after structured sources, and their yields are re-measured on that residual. Fm3, Fm4 and Fm7 are not re-gated |
+| **P7** | Residual generic forms | ⛔ **not started, and not started this session.** Its **Cov4 gate is now passed** (2026-08-26) and its **P6 measurement** is done, so what remains blocking it is §18.0.4 step 6 — recomputing residual coverage — not Cov4: Fm1/Fm2/Fm5/Fm6 build only against records still uncovered after structured sources, and their yields are re-measured on that residual. Fm3, Fm4 and Fm7 are not re-gated |
 | **P8** | NASA ROSES Catalog Source | ✅ **complete** 2026-08-20, own gate passed, **no open items** (§18.1). A **catalog-completeness branch**, not subtopic recall. The adapter is enabled and reconciles all **63** elements every refresh; the catalog-completeness gap is **closed** — the 2 actionable unmatched elements are emitted (**+0.136%**) and the other **51** stay inventory-only. Native identity `(cycle, code, title)` and the cross-source ambiguity rule were audited against the live source in P8.2a |
 | **P9** | Storage and scoring | ⛔ **not started.** **P9.0 must run before anything writes a cache** |
 | **P10** | Retrieval and UI | ⛔ **not started** |
 | **P11** | Enable and ship | ⛔ **not started.** The only package that flips a flag (§0.4 rule 9) |
 
-**Gates that stop work by design:** P4's gate (42% < 50%) · P5's Cov4 gate ·
-P7 behind P5 and P6 · **any cache commit**, which is blocked by **DEBT-1** — the
+**Gates that stop work by design:** P4's gate (42% < 50%) · ~~P5's Cov4 gate~~
+(**passed 2026-08-26**) · P7 behind P5's remaining items and P6 · **any cache commit**, which is blocked by **DEBT-1** — the
 D5 backfill generation holds six pre-Cov5 summaries and is missing a span.
 
 ### Bugs — BUG-*
@@ -3310,7 +3338,7 @@ D5 backfill generation holds six pre-Cov5 summaries and is missing a span.
 | **BUG-0** | `--max-documents` caps each **pass**, not the run, so with subtopics on the flag understates the work by 2× | §15 debt, §12 |
 | **BUG-2** | **Three** families reject an ASCII hyphen — `dod_topic`, `component`, `technical_category`; the last also rejects `.` | §15 debt → repaired by **P7's Fm3** |
 | **BUG-7** | The hermetic §0.5 gate was date-dependent: `build_changes._event_id` seeds on the build's UTC calendar date | ✅ **fixed 2026-08-18** (`d735142`) — the hermetic build pins `generated_at` in a `.work/` copy; `verify_no_drift` exits 0 on the **unchanged** committed baseline (§8.4). **Prerequisite for P8's gate, and satisfied** |
-| **BUG-9** | The aggregating-agency page: every acceptance rule passes on **another opportunity's** topic list | §6.3b. **Fix specified 2026-08-26, not yet implemented**: an ownership guard evaluated *before* semantic classification — a Grants.gov attachment of the record is owned and its prose is never inspected; an agency-hosted page is owned only if the parent's own solicitation number appears, a **conflict** if only another's does, and **unestablished** otherwise, which does not publish. Measured to eliminate the fabrication **without rejecting any legitimate child**, including a genuine programme that cites a predecessor NOFO (`docs/MEAS3_RUN_DESIGN.md` §5d.6) |
+| **BUG-9** | The aggregating-agency page: every acceptance rule passes on **another opportunity's** topic list | §6.3b. ✅ **fixed 2026-08-26** in `scripts.subtopic_cov4.determine_ownership`, enforced at the production call site. A Grants.gov attachment of the record (`primary_notice`, `secondary_attachment`) is owned and **its prose is never inspected**; an agency-hosted page (`agency_notice`, `subtopic_agency_notice`) is owned only if the parent's own solicitation number appears, **`not_owned`** if only another's does, and **`unestablished`** otherwise — which routes to review and never publishes. **Regression:** parent `DE-FOA-0003215` with a candidate whose text attributes it to `DE-FOA-0003627` returns `not_owned` and does not publish **even with the classifier accepting it as fundable**, driven through both `subtopic_fields` and Cov1's `refresh_subtopics_without_source`. The over-aggression trap is pinned in the same file: the genuine HEP programme citing predecessor `DE-FOA-0003354` and the `DE-FOA-0003627` amendment history both pass with `consulted_prose: False` (`docs/MEAS3_RUN_DESIGN.md` §5d.6) |
 | **BUG-10** | Cov5's residual — `_locate_nodes`' `page_start_offset` fallback is still silent | §6.5 |
 | **BUG-11** | `nasa_roses._amendment_of` searches the fetched HTML, but the amendment number lives in the **resolved URL**, so a live run records `amendment: None` | §18.1 P8. **Diagnostics only** — it does not affect emission, identity, currentness or the gate, so it is **not a P8 blocker** |
 | *(no ID)* | **Agency-HTML scrapers fail silently — HTTP 200, zero rows.** Classified as a **risk, not a defect in our code**: it is §12's risk row, mitigated by §7.4 canaries, which shipped with P6.1 and which **P8.5** extends to the emission path | §12, §7.4 |
@@ -4058,7 +4086,7 @@ it describes what a past session or commit actually did.
 | **P6.1** | NASA ROSES structured-source proof | D⅝ S1 | **complete** 2026-08-18, gate closed clause by clause |
 | **P6.2** | DOE Office of Science structured-source test | D⅝ S2 | ✅ **complete 2026-08-21 — measured, and no source built.** Category-(a) denominator was **0**; both Office of Science parents already resolved by generic parsing; 0 net-new children |
 | **P6.3** | DoD structured-source test | D⅝ S3 | ✅ **complete 2026-08-22, scoped to Army/TDAC only** as MEAS-7 justified. One `referenced` source: **1 parent, 14 external-only children**, 0 generic overlap. No DoD router, no ONR, no SAM.gov |
-| **P7** | Residual generic forms | Package D¾ | **not started** — gated on P5's Cov4 gate *and* on P6 measurement |
+| **P7** | Residual generic forms | Package D¾ | **not started** — Cov4's gate passed 2026-08-26 and P6 is measured; still gated on §18.0.4 step 6, the residual-coverage recomputation |
 | **P8** | NASA ROSES Catalog Source | Package N | ✅ **complete** 2026-08-20, own gate passed, **no caveats**. Adapter enabled; +2 records; 63 elements re-decided every refresh; identity model audited against the source (P8.2a) |
 | **P9** | Storage and scoring | Package E | **not started** |
 | **P10** | Retrieval and UI | Package F | **not started** |
@@ -4087,7 +4115,7 @@ Bare `D#` is retired for anything that is not a P4 item. Four prefixes, and the
 
 | Prefix | Meaning | Members |
 |---|---|---|
-| **BUG-#** | A defect in code or output — an item stays in this namespace after it is fixed, so its history stays citable | BUG-0, BUG-2, **BUG-7 (fixed)**, BUG-9, BUG-10, BUG-11 |
+| **BUG-#** | A defect in code or output — an item stays in this namespace after it is fixed, so its history stays citable | BUG-0, BUG-2, **BUG-7 (fixed)**, **BUG-9 (fixed)**, BUG-10, BUG-11 |
 | **MEAS-#** | A measurement still required before something can be concluded | MEAS-1 … MEAS-8 |
 | **DEC-#** | An architectural or product decision, open or taken | DEC-0 … DEC-15 |
 | **DEBT-#** | Carried work that is neither a defect nor a measurement — stale artifacts, cache hygiene, a deliberate non-build | DEBT-1, DEBT-3, DEBT-4, DEBT-5, DEBT-6, DEBT-8, DEBT-9 |
@@ -4138,7 +4166,7 @@ notes elsewhere.
 | **BUG-0** | `--max-documents` caps each pass, not the run | D0 *(debt)* | open |
 | **BUG-2** | Three families reject an ASCII hyphen | D2 *(debt)* | open — folded into P7's Fm3 |
 | **BUG-7** | The hermetic gate was date-dependent through the event-ID seed | **formerly D7** *(debt; distinct from P4.7)* | **fixed 2026-08-18** (`d735142`) |
-| **BUG-9** | The aggregating-agency page passes every acceptance rule | *(previously unnumbered, §6.3b)* | open |
+| **BUG-9** | The aggregating-agency page passes every acceptance rule | *(previously unnumbered, §6.3b)* | ✅ fixed 2026-08-26 with Cov4 |
 | **BUG-10** | Cov5's residual: the `page_start_offset` fallback is silent | *(previously unnumbered, §6.5)* | open |
 | **BUG-11** | `nasa_roses._amendment_of` searches the HTML body, so the live fetch reports `amendment: None` | *(new in 8.14; found closing P8)* | open — **diagnostics only, not a P8 blocker** |
 | **DEBT-1** | The backfill cache holds six wrong-subject summaries and misses a span | D1 *(debt)* | open |
@@ -4182,8 +4210,9 @@ P4.3, P4.6 …).
 | 3 | **P8** — NASA ROSES Catalog Source | ✅ **complete** 2026-08-20, **no caveats**; own gate passed, adapter enabled, **+2 records (1,475 → 1,477, +0.136%)**, 63 elements re-decided every refresh, identity model audited against the live source (P8.2a) |
 | 4 | **P6.2** — DOE Office of Science structured-source test | ✅ **complete 2026-08-21.** It was the first real test of whether structured/referenced ingestion reaches category (a) — and **the population was empty**: 2 Office of Science parents, both already resolved by generic parsing, 0 previously category (a), 0 net-new children. **No source was built**, on measured grounds (§18.1 P6.2, `docs/DOE_SOURCE_INSPECTION.md`) |
 | 5 | **P6.3** — Army TDAC referenced source | ✅ **complete 2026-08-22**, scoped exactly as MEAS-7 justified. **1 parent, 14 external-only children**, provenance `referenced`, 0 generic overlap. **P6 is now closed on evidence** (§18.1 P6.3) |
-| 6 | **Recompute residual coverage** before any **P7** work | P7's yields were measured on a corpus where no structured source had been tried |
-| 7 | **P9 → P10 → P11** | only when the coverage evidence says the feature is worth shipping; each behind its own existing gate |
+| 6 | **Cov4** — the two-axis gate | ✅ **complete 2026-08-26.** Deterministic ownership guard plus the frozen O1 prompt at `claude-sonnet-5`, R=1, wired into `subtopic_fields`. Live validation: 28 genuine children retained, **0 lost**, 11 contaminants and 2 cross-opportunity fabrications rejected, 19 children bypassed by provenance with **0 classifier calls**. **BUG-9 closed**; **P6's forward obligation discharged at the call site** |
+| 7 | **Recompute residual coverage** before any **P7** work | P7's yields were measured on a corpus where no structured source had been tried. **This, not Cov4, is what now blocks P7** |
+| 8 | **P9 → P10 → P11** | only when the coverage evidence says the feature is worth shipping; each behind its own existing gate |
 
 **P8 is a branch, not a stage of the subtopic feature.** P6.1 *discovered* it — 53
 ROSES program elements with no catalog record — but P8 adds **opportunities**,
@@ -4332,6 +4361,11 @@ Every item states its expected yield from the survey's stratified sample — *sa
 
 ##### Cov4 in full — span filtering, with a review queue for the residual
 
+> **⚠ Superseded 2026-08-26 by "Cov4 — implemented and closed", below.** Cov4 is
+> **implemented, gated and closed**; the design record here and the blocked
+> notices under it are kept as written because they record how the item was
+> reasoned about, not what its state is. Read the closure record for the state.
+
 > **⚠ Was blocked 2026-08-23; unblocked 2026-08-24, and one of the three blockers
 > turned out to be a misdiagnosis.** **The credential was never absent from the
 > machine** — it is in the Windows *User* environment, and Claude Code's tool
@@ -4434,6 +4468,144 @@ Concretely: an unresolved span is not a passing span. On any classifier failure 
 - **Reviewer load reported as a count**, so the claim that the queue shrank is measured rather than assumed.
 - **Cost reported from real `usage` totals**, against §11's $0.190 per 100 sets batched at Sonnet 4.6.
 - **Added 8.5 — the validation set must include the populations the filter will actually face.** The 22 sibling sets it was measured on are all outline-derived from documents with bookmarks. Cov4 now gates on at least: **one aggregating agency page** (§6.3b — `363594` is the measured case, where `topic_area` fires ten times on another opportunity's topics and every acceptance rule passes), **one grouped-restarting-counter document** (`330175`, whose 24 real subdivisions restart at `1.` three times), and **one bulleted set with an adjacent decoy** (`362233`, five real Focus Areas above five process bullets). None of the three resembles what §11 measured, and each is a form the recall work depends on.
+
+##### Cov4 — implemented and closed 2026-08-26
+
+> ### COV4 CLOSED · BUG-9 CLOSED
+>
+> **Nothing was designed this session.** `scripts/subtopic_cov4.py` is §5d's
+> frozen specification made executable, and two committed tests assert that the
+> prompt and the solicitation-number regex are **byte-identical** to
+> `tools/cov4_ownership.py`'s, so a later edit to either cannot drift silently. A
+> third asserts the guard decides all **43** committed candidates identically to
+> frozen O2 — including `consulted_prose` on every one.
+
+**The production call site, inventoried before anything was edited.** The path is
+`source_for_record` → source selection → `subtopic_sources.best_segmentation` →
+`segment_document` → `subtopic_records.build_records` → `subtopic_fields`. The
+narrowest point that already holds everything the gate needs is **inside
+`subtopic_fields`, immediately after `build_records`**: the built records carry
+the parent id, the parent opportunity number, the candidate title, the excerpt
+and the §5.1 rung, and `chosen or document` carries the source URL, name,
+`sha256` and **`source_kind`** — which is the ownership evidence. So the gate
+**filters the spans `build_records` just produced**, and no second candidate
+pipeline exists. Three callers reach it and all three are covered: the ordinary
+`build_document_entry` path, its unchanged-hash backfill branch, and Cov1's
+`refresh_subtopics_without_source`.
+
+**The two axes, kept apart.**
+
+| Axis | Mechanism | API calls |
+|---|---|---|
+| Ownership | `determine_ownership` — the frozen O2 guard | **zero** |
+| Fundability | `classify_fundability` — the frozen O1 two-axis prompt, `claude-sonnet-5`, **R=1**, direct HTTP over the pinned `requests` | one per candidate |
+
+`primary_notice` and `secondary_attachment` are **owned by Grants.gov binding and
+their prose is never read** — which is exactly what keeps the guard away from
+amendment histories, predecessor citations and ordinary cross-references.
+`agency_notice` and `subtopic_agency_notice` must name the parent; naming only
+another opportunity is **`not_owned`**, and naming none is **`unestablished`**.
+An unrecognised or absent `source_kind` is `unestablished`, never owned, so an old
+cache entry fails closed. **`not_owned` never publishes. `unestablished` never
+collapses into `owned`** — it demotes to `low`, the tier that has never published,
+and routes to review.
+
+**The provenance boundary, proven at the call site rather than asserted.** The
+gate is *invoked* on the `referenced` branch and declines it on its own boundary,
+so the bypass is a measurement and not an absence:
+
+| Case | Result |
+|---|---|
+| NASA ROSES `native` child | **0 classifier calls**, returned unannotated; the adapter never reaches `subtopic_fields` at all, and a test holds a counting classifier over the whole adapter path to show it |
+| Army TDAC `referenced` child, through `subtopic_fields` | **14 children, 0 classifier calls**, `bypassed_provenance: {referenced: 14}` |
+| ordinary generic `inferred` child | **enters**, `offered: 1`, `classifier_calls: 1` |
+| `inline` child | **enters**, judged exactly as `inferred` is |
+
+**This discharges the P6 forward obligation.** It was explicitly *not* discharged
+by "there is no classifier to enter"; it is discharged now by a call site that
+has one and does not call it.
+
+**Provenance is never upgraded by approval.** An approved `inferred` child stays
+`inferred` and stays capped at `medium`; an approved `inline` child stays
+`inline`. A regression test walks the whole chain — candidate → provenance →
+ownership → classifier → confidence/publication eligibility — and asserts the
+ceiling is the same before and after the gate.
+
+**Fail-closed, tested rather than asserted.** Missing credential, request
+timeout, non-2xx (401/429/500/503), malformed JSON, unparseable body and an
+out-of-enum answer each land on `unresolved`; none publishes, each demotes to
+`low`, each is counted in `subtopic_cov4.classifier_errors`, and none raises —
+so a classifier outage costs recall, never the catalog build or the parent's
+facts. The diagnostics record an exception's **type** and never its message,
+because the message can quote a request that carried the key; a test asserts no
+`sk-ant` and no `x-api-key` reaches the output.
+
+**Bounded live validation — 43 frozen candidates through production's own gate**
+(`tools/run_cov4_validation.py`, raw rows in
+`evaluation/cov4_validation_runs.jsonl`):
+
+| Reported figure | Result |
+|---|---|
+| candidates offered to Cov4 | **43** |
+| candidates bypassed by provenance | **19** — 5 `native`, 14 `referenced` — with **0 classifier calls** |
+| ownership outcomes | **40 `owned` · 2 `not_owned` · 1 `unestablished`** — identical to §5d.3's O2 row |
+| semantic accepts / rejects / errors | **30 / 13 / 0** |
+| genuine children retained | **28** |
+| genuine children lost | **0** |
+| contaminants rejected | **11**, 0 published |
+| cross-opportunity fabrications prevented | **2**, 0 published |
+| unresolved / review cases | 2 unresolved-truth candidates, **neither published** |
+| API errors | **0** |
+| net auto-publishable generic children | **43 → 28** |
+
+**One live verdict differs from the committed run and it is disclosed rather than
+smoothed:** `own:363594-aggregator-unnumbered` moved `accept` → `reject`. It is
+the candidate whose **ownership truth is `unresolved`**, it is excluded from
+scoring under both readings, and it publishes under neither. One flip in 43 calls
+is what MEAS-3's 0.190% pooled disagreement predicts. **Nothing was re-tuned in
+response**, per the package's own instruction.
+
+**Reviewer load, as a count.** **0** in the live run — the single `unestablished`
+candidate was also rejected on fundability, so it dropped rather than queued —
+and **41** in the `--offline` fail-closed run, which is the shape of a build that
+cannot reach the API. This is a much smaller number than the original design's
+"every `low` and `medium` set", and it is now measured rather than assumed. It is
+also thin evidence: one population, one run.
+
+**Cost, from real `usage` totals.** The committed 43-call run over this exact
+prompt and model used **29,679 input and 2,628 output tokens** — ~690 in / ~61
+out per candidate, so **~69.0k in / ~6.1k out per 100 candidates**, about
+**$0.30 per 100** at $3/$15 per MTok. Judgement is **per span**, not per set, so
+this is not directly comparable with §11's $0.190 per 100 *sets*. `thinking`
+tokens were nonzero on **1 of 43** calls, consistent with §5a.5 and MEAS-3.
+
+**Gate for Cov4, clause by clause.**
+
+| Clause | Result |
+|---|---|
+| production call-site implementation exists | ✅ `subtopic_fields`, after `build_records`, all three callers |
+| ownership and fundability are separate | ✅ deterministic guard first, zero API calls; the model's ownership opinion is recorded and **never** decides publication |
+| BUG-9 fabrication prevented | ✅ `not_owned`, does not publish, **with fundability `accept`** — through `subtopic_fields` and through Cov1's refresh path |
+| zero measured genuine-child loss on the committed gate set | ✅ **0** |
+| zero measured fabrication on the committed gate set | ✅ **0** |
+| `native` NASA bypass proven | ✅ 0 calls, unannotated, adapter path covered |
+| `referenced` Army bypass proven | ✅ 14 children, 0 calls, at the call site |
+| only intended generic provenance classes enter | ✅ boundary tested against the rung that ships |
+| provenance never upgraded by approval | ✅ rung and ceiling unchanged across the gate |
+| classifier/API failure fails closed | ✅ six failure modes, none publishes, none raises |
+| feature-off/default path byte-identical | ✅ `tools/verify_no_drift.sh` exit 0, 22 artifacts unchanged |
+
+**Still true, and not solved by this item.** The reviewer surface itself
+(`assets/review.js`, the export/commit path, the §7.1 merge that admits an
+approved `medium` or `low`) is **P9/P10 work and was not built**: today
+"queued" is expressed as the existing `low` tier plus a `cov4_review` flag, which
+never publishes, and no new publication state was invented. The filter's
+measurement is still one labeller, one run, R=1. And the §18.3 asymmetry is still
+inverted for anything the filter passes.
+
+**Explicitly not started this session:** Cov6, Cov7, P7, MEAS-8, P9. No F1/F4
+recogniser was added, the O1 prompt was not changed, R stayed 1, no dependency
+was added, and §0.5 was not re-frozen.
 
 #### P6 — Structured-source coverage *(legacy Package D⅝, "Structured Umbrellas")*
 
