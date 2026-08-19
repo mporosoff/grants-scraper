@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml</id>
-  <updated>2026-08-18T10:48:43Z</updated>
+  <updated>2026-08-19T10:48:59Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Charge Ready NY - Large Public Sector Project Program</title>
@@ -23,18 +23,6 @@
     <author><name>NYSERDA</name></author>
     <category term="Energy"/>
     <summary>NYSERDA | Closes 2026-10-21 | Provides funding for projects in three categories: Category A) Regional Planning - technical assistance for Regional Energy Economy strategies; Category B) Industry Plans- funding for plans designed to attract and grow a specific industry across several regions in New York; and Category C) Implementation Support - targeted investment for implementation activities. NYSERDA has prequalified firms ca…</summary>
-  </entry>
-  <entry>
-    <title>Clean Green Schools Initiative</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rt000001Q0ClRAAV"/>
-    <id>urn:funding-finder:nyserda:nyserda%3APON4924</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>NYSERDA</name></author>
-    <category term="Climate change"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <summary>NYSERDA | Closes 2026-08-18 | The P-12 Schools: Clean Green Schools Initiative is available to help public schools that traditionally lack resources to invest in infrastructure improvements become healthier, more productive learning environments. The program provides funding for schools to implement construction projects that decarbonize their building portfolio and enhance extreme heat resilience, such as comprehensive retrof…</summary>
   </entry>
   <entry>
     <title>Independent Internal Audit Services</title>

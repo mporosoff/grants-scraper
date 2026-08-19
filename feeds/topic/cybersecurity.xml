@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-08-18T10:48:43Z</updated>
+  <updated>2026-08-19T10:48:59Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -17,6 +17,30 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>Rural Utilities Service | Closes 2027-05-03 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+  </entry>
+  <entry>
+    <title>FY26 National Dam Safety Program State Assistance Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363603"/>
+    <id>urn:funding-finder:grants-gov:363603</id>
+    <updated>2026-08-18T00:00:00Z</updated>
+    <author><name>Department of Homeland Security - FEMA</name></author>
+    <category term="Environmental science"/>
+    <category term="Cybersecurity"/>
+    <summary>Department of Homeland Security - FEMA | Closes 2026-09-02 | The National Dam Safety Program (NDSP) is a partnership of states, federal agencies, and other stakeholders to promote the establishment and maintenance of effective federal and state dam safety programs to reduce the risk to human life, property, and the environment from dam related hazards.</summary>
+  </entry>
+  <entry>
+    <title>University-led Networks for Innovation, Technology, and Expertise (UNITE)</title>
+    <link href="https://www.grants.gov/search-results-detail/363645"/>
+    <id>urn:funding-finder:grants-gov:363645</id>
+    <updated>2026-08-18T00:00:00Z</updated>
+    <author><name>U.S. Mission to Saudi Arabia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Saudi Arabia | Closes 2026-09-17 | The U.S. Embassy Riyadh Public Diplomacy Section is accepting applications for a cooperative agreement to run the University-led Networks for Innovation, Technology, and Expertise (UNITE) program. UNITE will support approximately four to five applied project teams - university-industry partnerships between U.S. universities, U.S. companies or technical partners, and Saudi institutions - through pr…</summary>
   </entry>
   <entry>
     <title>Egypt Annual Program Statement</title>
@@ -687,30 +711,5 @@
     <category term="Education and workforce"/>
     <category term="Technology development"/>
     <summary>U.S. National Science Foundation | Closes 2027-04-05 | Government and the nation face a talent shortfall in artificial intelligence (AI) and cybersecurity. The CyberAICorps Scholarship for Service (CyberAI SFS) program welcomes proposals that address AI and cybersecurity education and workforce development. CyberAI refers to using AI in cybersecurity as well as providing security and resilience for AI systems. The Scholarship Track provides funding to…</summary>
-  </entry>
-  <entry>
-    <title>Mind and Body Interventions to Restore Whole Person Health via Emotional Well-Being Mechanisms (R61/R33 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/359155"/>
-    <id>urn:funding-finder:grants-gov:359155</id>
-    <updated>2025-09-26T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Cybersecurity"/>
-    <summary>National Institutes of Health | Closes 2028-06-07 | The National Center for Complementary and Integrative Health (NCCIH) announces this Notice of Funding Opportunity (NOFO) to solicit applications for research on how mind and body interventions through psychological and/or physical inputs (e.g., mindfulness meditation, yoga, acupuncture, massage, and other brain and/or body based interventions) impact mechanisms of emotional well-being (EWB) and th…</summary>
-  </entry>
-  <entry>
-    <title>CHIPS Research and Development Office (CRDO) Broad Agency Announcement (BAA)</title>
-    <link href="https://www.grants.gov/search-results-detail/360651"/>
-    <id>urn:funding-finder:grants-gov:360651</id>
-    <updated>2025-09-24T00:00:00Z</updated>
-    <author><name>National Institute of Standards and Technology</name></author>
-    <category term="Quantum science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <category term="Cybersecurity"/>
-    <summary>National Institute of Standards and Technology | Closes 2029-09-30 | NIST is soliciting proposals from eligible applicants for research, prototyping, and commercial solutions that advance microelectronics technology in the U.S., to be considered for funding by the CHIPS Research and Development Office (CRDO).</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-08-18T10:48:43Z</updated>
+  <updated>2026-08-19T10:48:59Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -133,6 +133,20 @@
     <summary>National Institutes of Health | Closes 2027-01-25 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to continue to support the Radiation Oncology-Biology Integration Network (ROBIN) with applications from both new and renewing investigators. This network model will sustain an agile and effective national radiation oncology infrastructure that collectively addresses critical hypothesis-based translation…</summary>
   </entry>
   <entry>
+    <title>University-led Networks for Innovation, Technology, and Expertise (UNITE)</title>
+    <link href="https://www.grants.gov/search-results-detail/363645"/>
+    <id>urn:funding-finder:grants-gov:363645</id>
+    <updated>2026-08-18T00:00:00Z</updated>
+    <author><name>U.S. Mission to Saudi Arabia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Saudi Arabia | Closes 2026-09-17 | The U.S. Embassy Riyadh Public Diplomacy Section is accepting applications for a cooperative agreement to run the University-led Networks for Innovation, Technology, and Expertise (UNITE) program. UNITE will support approximately four to five applied project teams - university-industry partnerships between U.S. universities, U.S. companies or technical partners, and Saudi institutions - through pr…</summary>
+  </entry>
+  <entry>
     <title>Egypt Annual Program Statement</title>
     <link href="https://www.grants.gov/search-results-detail/363633"/>
     <id>urn:funding-finder:grants-gov:363633</id>
@@ -184,22 +198,6 @@
     <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
     <summary>U.S. National Science Foundation | Closes 2027-02-11 | The Emerging Frontiers in Research and Innovation (EFRI) program serves a critical role in helping the NSF Directorate for Engineering focus on important emerging areas in a timely way. The EFRI program invests in potentially transformative ideas that offer the opportunity for significant shifts in foundational engineering knowledge. EFRI-funded research must have strong potential for long-term im…</summary>
-  </entry>
-  <entry>
-    <title>Engineering (ENG): Civil, Mechanical and Manufacturing Innovation (CMMI)</title>
-    <link href="https://www.grants.gov/search-results-detail/363614"/>
-    <id>urn:funding-finder:grants-gov:363614</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Technology development"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
   </entry>
   <entry>
     <title>Engineering (ENG): Electrical, Communications, and Computing Systems (ECCS)</title>
@@ -254,6 +252,22 @@
     <category term="Materials science"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs at the frontiers of discovery in physics. Physics research supported by NSF MPS enables understanding of the fundamental aspects of nature at all scales, from the quantum effects inside atoms to the mysterious dark energy spanning the entire universe. The core resea…</summary>
+  </entry>
+  <entry>
+    <title>Engineering (ENG): Civil, Mechanical and Manufacturing Innovation (CMMI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363614"/>
+    <id>urn:funding-finder:grants-gov:363614</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Technology development"/>
+    <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-18 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
   </entry>
   <entry>
     <title>Pax Silica Artificial Intelligence Assistance Project</title>
@@ -730,16 +744,5 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>69A355 Research and Technology | Closes 2026-08-28 | he U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Tribal Transportation Safety Strategy Pilot Program. This three-year cooperative agreement is designed to address the critical public safety crisis in Tribal communities, as American Indian and Alaska Native populations experience…</summary>
-  </entry>
-  <entry>
-    <title>Scholarly Editions and Translations</title>
-    <link href="https://www.grants.gov/search-results-detail/363014"/>
-    <id>urn:funding-finder:grants-gov:363014</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>National Endowment for the Humanities</name></author>
-    <category term="Arts and culture"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>National Endowment for the Humanities | Closes 2026-09-16 | The National Endowment for the Humanities (NEH) Division of Research is accepting applications for the Scholarly Editions and Translations program. The purpose of this program is to support collaborative teams who edit, annotate, and translate foundational humanities texts that are vital to generating new scholarship but are not available in adequate editions or translations. This year’s competiti…</summary>
   </entry>
 </feed>

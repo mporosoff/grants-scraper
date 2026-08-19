@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml</id>
-  <updated>2026-08-18T10:48:43Z</updated>
+  <updated>2026-08-19T10:48:59Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Egypt Annual Program Statement</title>
@@ -310,21 +310,6 @@
     <summary>National Institute of Food and Agriculture | Closes 2026-12-31 | The AFRI Foundational and Applied Science Program supports grants in six AFRI priority areas to advance knowledge in both fundamental and applied sciences important to agriculture. The six priority areas are: Plant Health and Production and Plant Products; Animal Health and Production and Animal Products; Food Safety, Nutrition, and Health; Bioenergy, Natural Resources, and Environment; Agricultur…</summary>
   </entry>
   <entry>
-    <title>Infrastructure Systems and People</title>
-    <link href="https://www.grants.gov/search-results-detail/358397"/>
-    <id>urn:funding-finder:grants-gov:358397</id>
-    <updated>2025-01-25T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Data science"/>
-    <category term="Environmental science"/>
-    <category term="Materials science"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <category term="Water"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation | Posted | Infrastructure systems comprise complex connections between physical components, organizational structures and operational methods that support the needs of people and communities at the local, regional, national, and global scales. Such systems form the backbone of society, providing essential services as well as ensuring public health and welfare, economic prosperity and national security, and a…</summary>
-  </entry>
-  <entry>
     <title>Water, Landscape, and Critical Zone Processes</title>
     <link href="https://www.grants.gov/search-results-detail/357579"/>
     <id>urn:funding-finder:grants-gov:357579</id>
@@ -389,20 +374,5 @@
     <category term="Climate change"/>
     <category term="Water"/>
     <summary>DOC NOAA - ERA Production | Closes 2026-09-30 | This BAA is for the National Marine Fisheries Service, also known as NOAA Fisheries. The purpose of this notice is to request applications for special projects and programs associated with the NOAA Fisheries strategic plan and mission goals, as well as to provide the general public with information and guidelines on how NOAA will select applications and administer discretionary Federal assistance …</summary>
-  </entry>
-  <entry>
-    <title>Engineering for Civil Infrastructure</title>
-    <link href="https://www.grants.gov/search-results-detail/306169"/>
-    <id>urn:funding-finder:grants-gov:306169</id>
-    <updated>2018-06-12T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Climate change"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Transportation"/>
-    <category term="Water"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Posted | The Engineering for Civil Infrastructure (ECI) program supports fundamental research in geotechnical, structural, materials, architectural, and coastal engineering. The ECI program promotes research that can shape the future of the nation’s physical civil infrastructure and that can contribute to climate change adaptation and mitigation, and hazards and disaster resilience. Types of civil infrastr…</summary>
   </entry>
 </feed>

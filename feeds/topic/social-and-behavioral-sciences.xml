@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml</id>
-  <updated>2026-08-18T10:48:43Z</updated>
+  <updated>2026-08-19T10:48:59Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -80,6 +80,17 @@
     <summary>Indian Health Service | Closes 2027-04-01 | The purpose of this IHS grant is to support the development and expansion of Domestic Violence Prevention (DVP) programs that integrate culturally appropriate, trauma-informed prevention and victim services for Tribes, Tribal organizations, and Urban Indian Organizations serving AI/AN communities. The program will address domestic and sexual violence, sexual exploitation and human trafficking, Mis…</summary>
   </entry>
   <entry>
+    <title>Substance Abuse Prevention, Treatment, and Aftercare</title>
+    <link href="https://www.grants.gov/search-results-detail/363652"/>
+    <id>urn:funding-finder:grants-gov:363652</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Indian Health Service | Closes 2027-04-01 | The primary purpose of this program is to reduce substance abuse among American Indian and Alaska Native (AI/AN) populations by improving care coordination, expanding culturally appropriate behavioral health services, and implementing early intervention strategies for at-risk AI/AN youth. The program supports Tribal, community-driven prevention, treatment, and recovery efforts that promote cross-s…</summary>
+  </entry>
+  <entry>
     <title>Suicide Prevention, Intervention, and Postvention</title>
     <link href="https://www.grants.gov/search-results-detail/363496"/>
     <id>urn:funding-finder:grants-gov:363496</id>
@@ -123,6 +134,17 @@
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
     <summary>Centers for Disease Control - NCHHSTP | Closes 2027-03-15 | The purpose of this demonstration project is to support coordinated Clinic and Community Collaboratives (CCCs) to integrate HIV care with broader women's health services in jurisdictions with disproportionately high HIV disease burden to improve HIV-related outcomes, overall health, and quality of life among WWH. Organizations will be funded to implement 4 strategies: (1) Integrate HIV care with b…</summary>
+  </entry>
+  <entry>
+    <title>Behavioral Health Integration Initiative</title>
+    <link href="https://www.grants.gov/search-results-detail/363650"/>
+    <id>urn:funding-finder:grants-gov:363650</id>
+    <updated>2027-01-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Indian Health Service | Closes 2027-03-01 | The purpose of the BH2I program is to improve the physical, mental, social, and spiritual health of American Indian and Alaska Native (AI/AN) individuals by expanding integrated, coordinated behavioral health care. The program supports Tribal and Urban Indian Organization (UIO) health systems in delivering culturally responsive, trauma-informed services that integrate behavioral health with primar…</summary>
   </entry>
   <entry>
     <title>Bridge2AI Network for AI Health Science</title>
@@ -631,27 +653,5 @@
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
     <summary>U.S. National Science Foundation | Posted | The Collaboratory to Advance Mathematics Education and Learning (CAMEL) for K-12 initiative aims to advance mathematics learning and education through purposeful collaboration that draws on the interdisciplinary Science of Learning (including neuroscience; cognitive, developmental, and social sciences; computer science; machine learning; engineering; and education research), deep experiences in ed…</summary>
-  </entry>
-  <entry>
-    <title>Mind and Body Interventions to Restore Whole Person Health via Emotional Well-Being Mechanisms (R61/R33 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/359155"/>
-    <id>urn:funding-finder:grants-gov:359155</id>
-    <updated>2025-09-26T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Cybersecurity"/>
-    <summary>National Institutes of Health | Closes 2028-06-07 | The National Center for Complementary and Integrative Health (NCCIH) announces this Notice of Funding Opportunity (NOFO) to solicit applications for research on how mind and body interventions through psychological and/or physical inputs (e.g., mindfulness meditation, yoga, acupuncture, massage, and other brain and/or body based interventions) impact mechanisms of emotional well-being (EWB) and th…</summary>
-  </entry>
-  <entry>
-    <title>NIA Expanding Research in AD/ADRD (ERA) Postbaccalaureate Research Education Program (R25 Independent Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359653"/>
-    <id>urn:funding-finder:grants-gov:359653</id>
-    <updated>2025-09-02T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health | Closes 2027-05-26 | This Notice of Funding Opportunity Announcement (NOFO) invites R25 applications to support the development and implementation of research education programs for recent baccalaureates from all backgrounds, including those from groups underrepresented in the biomedical and behavioral sciences. It is essential to expand and broaden the skilled Alzheimers Disease (AD) and Alzheimers Disease and Relate…</summary>
   </entry>
 </feed>

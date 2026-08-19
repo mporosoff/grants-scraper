@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml</id>
-  <updated>2026-08-18T10:48:43Z</updated>
+  <updated>2026-08-19T10:48:59Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -15,6 +15,15 @@
     <category term="Education and workforce"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Closes 2028-05-30 | The National Institute on Deafness and Other Communication Disorders (NIDCD) intends to publish a Notice of Funding Opportunity (NOFO) for clinical audiologists currently enrolled in Ph. D. programs. NIDCD encourages audiologists with strong research potential to integrate clinical and translational research into their career paths. A strong research foundation is essential for advancing hearing h…</summary>
+  </entry>
+  <entry>
+    <title>Healthy Lifestyles in Youth</title>
+    <link href="https://www.grants.gov/search-results-detail/363651"/>
+    <id>urn:funding-finder:grants-gov:363651</id>
+    <updated>2028-04-28T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Public health"/>
+    <summary>Indian Health Service | Closes 2028-06-30 | New cohort of NPHR awards designed to fund Tribes and Tribal Orgs to provide Essential Public Health Services</summary>
   </entry>
   <entry>
     <title>Public Health Nursing</title>
@@ -476,6 +485,17 @@
     <summary>Indian Health Service | Closes 2027-04-01 | The purpose of this IHS grant is to expand access to culturally appropriate, trauma-informed forensic healthcare (FHC) services for American Indian/Alaska Native (AI/AN) victims of domestic violence, sexual violence, child maltreatment, and human trafficking. The grant supports the development and expansion of FHC services across IHS Areas while promoting coordinated treatment, intervention, preve…</summary>
   </entry>
   <entry>
+    <title>Substance Abuse Prevention, Treatment, and Aftercare</title>
+    <link href="https://www.grants.gov/search-results-detail/363652"/>
+    <id>urn:funding-finder:grants-gov:363652</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Indian Health Service | Closes 2027-04-01 | The primary purpose of this program is to reduce substance abuse among American Indian and Alaska Native (AI/AN) populations by improving care coordination, expanding culturally appropriate behavioral health services, and implementing early intervention strategies for at-risk AI/AN youth. The program supports Tribal, community-driven prevention, treatment, and recovery efforts that promote cross-s…</summary>
+  </entry>
+  <entry>
     <title>Suicide Prevention, Intervention, and Postvention</title>
     <link href="https://www.grants.gov/search-results-detail/363496"/>
     <id>urn:funding-finder:grants-gov:363496</id>
@@ -558,25 +578,5 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>National Institutes of Health | Closes 2027-05-25 | The National Human Genome Research Institute (NHGRI) intends to issue a Notice of Funding Opportunity (NOFO) to support a limited competition renewal of the Analysis, Visualization, and Informatics Lab-space (AnVIL) program. AnVIL is a secure, cloud-based platform that enables researchers to access, share, and analyze large-scale genomic datasets without relying on local infrastructure. Currently,…</summary>
-  </entry>
-  <entry>
-    <title>BRAIN Initiative: Data Archives for the BRAIN Initiative</title>
-    <link href="https://www.grants.gov/search-results-detail/361448"/>
-    <id>urn:funding-finder:grants-gov:361448</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Environmental science"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2027-06-01 | The National Institute of Mental Health (NIMH), with other NIH Institutes and Centers (ICs), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop web-accessible data archives to capture, store, and curate data related to the Brain Research Through Advancing Innovative Neurotechnologies® (BRAIN) Initiative activities. The data archives teams will work with th…</summary>
-  </entry>
-  <entry>
-    <title>Clinical Data, Safety and Statistical Centers (CDSSC)</title>
-    <link href="https://www.grants.gov/search-results-detail/362957"/>
-    <id>urn:funding-finder:grants-gov:362957</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2027-06-01 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the support of the Clinical Data, Safety and Statistical Centers program. The overall objective of this program is to provide coordination and oversight for multiple activities in service to clinical research and mechanistic studies supported by NIAID, including all Division of Allergy, Immunolog…</summary>
   </entry>
 </feed>

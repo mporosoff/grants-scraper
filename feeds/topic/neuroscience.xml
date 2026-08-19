@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml</id>
-  <updated>2026-08-18T10:48:43Z</updated>
+  <updated>2026-08-19T10:48:59Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -560,20 +560,6 @@
     <summary>National Institutes of Health | Closes 2027-11-08 | The Theories, Models and Methods (TMM) initiative will support the development of computational tools for understanding dynamic brain circuits that are made broadly accessible to the greater research community. This program supports applications focused on tool building and dissemination in the domain of theories about neural circuit mechanisms, models of circuit structure and function, and/or com…</summary>
   </entry>
   <entry>
-    <title>Mind, Machine and Motor Nexus</title>
-    <link href="https://www.grants.gov/search-results-detail/358682"/>
-    <id>urn:funding-finder:grants-gov:358682</id>
-    <updated>2025-04-16T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Environmental science"/>
-    <category term="Neuroscience"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Posted | The Mind, Machine, and Motor Nexus (M3X) program supports fundamental research that enables intelligent engineered systems and humans to engage in bidirectional interaction in a physics-based environment, to enhance and ensure safety, productivity, and well-being.
-For the purpose of this program an intelligent engineered system is a human-designed system - physical, virtual, or a combination of bo…</summary>
-  </entry>
-  <entry>
     <title>Translational Efforts to Advance Gene-based Therapies for Ultra-Rare Neurological and Neuromuscular Disorders (U01 - Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/357817"/>
     <id>urn:funding-finder:grants-gov:357817</id>
@@ -665,5 +651,18 @@ For the purpose of this program an intelligent engineered system is a human-desi
     <category term="Technology development"/>
     <category term="Cybersecurity"/>
     <summary>National Institutes of Health | Closes 2027-05-07 | The purpose of this funding opportunity is to encourage multidisciplinary investigators to develop new approaches or apply existing approaches in novel ways to measure brain activity, connectivity, genomics, or other aspects across the age spectrum of neurodevelopment. The overarching goal is to extend our understanding of brain development and aging, including studies of the neurodevelopmental or…</summary>
+  </entry>
+  <entry>
+    <title>New Approaches for Measuring Brain Changes Across Longer Timespans (R21 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357377"/>
+    <id>urn:funding-finder:grants-gov:357377</id>
+    <updated>2024-11-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Neuroscience"/>
+    <category term="Technology development"/>
+    <category term="Cybersecurity"/>
+    <summary>National Institutes of Health | Closes 2027-05-07 | The purpose of this funding opportunity is to encourage multidisciplinary investigators to submit applications developing exploratory, highly novel new approaches, or innovative applications of existing approaches to measure brain activity, connectivity, genomics, or other aspects across the age spectrum of neurodevelopment. The overarching goal is to extend our understanding of brain development …</summary>
   </entry>
 </feed>

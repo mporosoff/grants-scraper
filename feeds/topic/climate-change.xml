@@ -4,20 +4,8 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/climate-change.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/climate-change.xml</id>
-  <updated>2026-08-18T10:48:43Z</updated>
+  <updated>2026-08-19T10:48:59Z</updated>
   <generator>Funding Finder</generator>
-  <entry>
-    <title>Clean Green Schools Initiative</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rt000001Q0ClRAAV"/>
-    <id>urn:funding-finder:nyserda:nyserda%3APON4924</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>NYSERDA</name></author>
-    <category term="Climate change"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <summary>NYSERDA | Closes 2026-08-18 | The P-12 Schools: Clean Green Schools Initiative is available to help public schools that traditionally lack resources to invest in infrastructure improvements become healthier, more productive learning environments. The program provides funding for schools to implement construction projects that decarbonize their building portfolio and enhance extreme heat resilience, such as comprehensive retrof…</summary>
-  </entry>
   <entry>
     <title>Net-Zero Resilience Preparation for Municipal and Rural Electric Providers</title>
     <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00000yipTDAAY"/>
@@ -246,21 +234,6 @@
     <category term="Environmental science"/>
     <category term="Public health"/>
     <summary>U.S. Mission to the United Nations | Posted | This Notice of Funding Opportunity (NOFO) outlines funding priorities, strategic areas of focus, and instructions for submitting requests for funding. Please follow all instructions carefully. Through its Small Grants Program, the United States Mission in Geneva is accepting project proposals that promote U.S. policy priorities in the multilateral sphere. Project should be aimed at international (…</summary>
-  </entry>
-  <entry>
-    <title>Engineering for Civil Infrastructure</title>
-    <link href="https://www.grants.gov/search-results-detail/306169"/>
-    <id>urn:funding-finder:grants-gov:306169</id>
-    <updated>2018-06-12T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Climate change"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Transportation"/>
-    <category term="Water"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Posted | The Engineering for Civil Infrastructure (ECI) program supports fundamental research in geotechnical, structural, materials, architectural, and coastal engineering. The ECI program promotes research that can shape the future of the nation’s physical civil infrastructure and that can contribute to climate change adaptation and mitigation, and hazards and disaster resilience. Types of civil infrastr…</summary>
   </entry>
   <entry>
     <title>Climate Program Office for FY 2012</title>

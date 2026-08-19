@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-08-18T10:48:43Z</updated>
+  <updated>2026-08-19T10:48:59Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -209,6 +209,20 @@
     <summary>National Institutes of Health | Closes 2027-01-25 | The Clinical and Translational Science Awards Program Trial Innovation Network (TIN) is a collaborative initiative aimed at addressing critical roadblocks in the design and implementation of multi-center clinical trials. The goal of the TIN is to execute trials better, faster, and more cost-efficiently, as well as serve as a national laboratory to study, understand, and innovate the process of con…</summary>
   </entry>
   <entry>
+    <title>University-led Networks for Innovation, Technology, and Expertise (UNITE)</title>
+    <link href="https://www.grants.gov/search-results-detail/363645"/>
+    <id>urn:funding-finder:grants-gov:363645</id>
+    <updated>2026-08-18T00:00:00Z</updated>
+    <author><name>U.S. Mission to Saudi Arabia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Saudi Arabia | Closes 2026-09-17 | The U.S. Embassy Riyadh Public Diplomacy Section is accepting applications for a cooperative agreement to run the University-led Networks for Innovation, Technology, and Expertise (UNITE) program. UNITE will support approximately four to five applied project teams - university-industry partnerships between U.S. universities, U.S. companies or technical partners, and Saudi institutions - through pr…</summary>
+  </entry>
+  <entry>
     <title>MPS Astronomical Sciences Research Programs (MPS Astro)</title>
     <link href="https://www.grants.gov/search-results-detail/363620"/>
     <id>urn:funding-finder:grants-gov:363620</id>
@@ -258,7 +272,7 @@
     <category term="Energy"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
+    <summary>U.S. National Science Foundation | Closes 2076-08-18 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
   </entry>
   <entry>
     <title>Enhancing and Supporting the Network of American Spaces in Armenia</title>
@@ -669,21 +683,5 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Education and workforce"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Closes 2026-10-01 | This notice of funding opportunity (NOFO) seeks to establish a course to equip researchers studying drug use, drug misuse, and drug addiction with the skills, knowledge, and practical tools needed to translate their scientific discoveries into impactful real world solutions. The course is envisioned to focus on building capacity in product development, entrepreneurship, and innovation pathways so …</summary>
-  </entry>
-  <entry>
-    <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
-    <link href="https://www.grants.gov/search-results-detail/362900"/>
-    <id>urn:funding-finder:grants-gov:362900</id>
-    <updated>2026-06-22T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Cybersecurity"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <category term="Data science"/>
-    <category term="Energy"/>
-    <category term="Materials science"/>
-    <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | Project Background, Goals, and Objectives: In an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will lea…</summary>
   </entry>
 </feed>

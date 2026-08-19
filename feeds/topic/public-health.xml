@@ -4,8 +4,17 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml</id>
-  <updated>2026-08-18T10:48:43Z</updated>
+  <updated>2026-08-19T10:48:59Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Healthy Lifestyles in Youth</title>
+    <link href="https://www.grants.gov/search-results-detail/363651"/>
+    <id>urn:funding-finder:grants-gov:363651</id>
+    <updated>2028-04-28T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Public health"/>
+    <summary>Indian Health Service | Closes 2028-06-30 | New cohort of NPHR awards designed to fund Tribes and Tribal Orgs to provide Essential Public Health Services</summary>
+  </entry>
   <entry>
     <title>Public Health Nursing</title>
     <link href="https://www.grants.gov/search-results-detail/363495"/>
@@ -131,6 +140,17 @@
     <category term="Agriculture and food"/>
     <category term="Public health"/>
     <summary>Centers for Disease Control - NCIPC | Closes 2027-04-17 | This forecast is for CDC's Comprehensive Suicide Prevention Program for States, a cooperative agreement intended to support implementation and evaluation of a comprehensive public health approach to suicide prevention in the United States. Funded recipients will focus on one or more Focus Prevention Areas (FPAs), groups or settings identified through available data as experiencing a significant su…</summary>
+  </entry>
+  <entry>
+    <title>Substance Abuse Prevention, Treatment, and Aftercare</title>
+    <link href="https://www.grants.gov/search-results-detail/363652"/>
+    <id>urn:funding-finder:grants-gov:363652</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Indian Health Service | Closes 2027-04-01 | The primary purpose of this program is to reduce substance abuse among American Indian and Alaska Native (AI/AN) populations by improving care coordination, expanding culturally appropriate behavioral health services, and implementing early intervention strategies for at-risk AI/AN youth. The program supports Tribal, community-driven prevention, treatment, and recovery efforts that promote cross-s…</summary>
   </entry>
   <entry>
     <title>Suicide Prevention, Intervention, and Postvention</title>
@@ -270,6 +290,17 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Closes 2027-05-21 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Asthma and Allergic Diseases Cooperative Research Centers (AADCRC). The AADCRC program serves as the cornerstone of NIAID's efforts to promote clinical and basic research in diseases including asthma, upper airway allergic/inflammatory diseases, food and drug allergie…</summary>
+  </entry>
+  <entry>
+    <title>Behavioral Health Integration Initiative</title>
+    <link href="https://www.grants.gov/search-results-detail/363650"/>
+    <id>urn:funding-finder:grants-gov:363650</id>
+    <updated>2027-01-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Indian Health Service | Closes 2027-03-01 | The purpose of the BH2I program is to improve the physical, mental, social, and spiritual health of American Indian and Alaska Native (AI/AN) individuals by expanding integrated, coordinated behavioral health care. The program supports Tribal and Urban Indian Organization (UIO) health systems in delivering culturally responsive, trauma-informed services that integrate behavioral health with primar…</summary>
   </entry>
   <entry>
     <title>Continuing Enhanced National Surveillance for Prion Diseases in the United States</title>
@@ -609,34 +640,5 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Closes 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center, and Laboratory Center (LC) working with Clinical Trials Units, to test prevention and treatment strategies and conduct implementation research designed to end t…</summary>
-  </entry>
-  <entry>
-    <title>HIV/AIDS Clinical Trials Network Leadership and Operations Centers</title>
-    <link href="https://www.grants.gov/search-results-detail/361815"/>
-    <id>urn:funding-finder:grants-gov:361815</id>
-    <updated>2026-08-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the National Institutes of Health (NIH) mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center (LOC), Statistical and Data Management Center, and Laboratory Center working with Clinical Trials Units to advance prevention, treatment, and implementation research…</summary>
-  </entry>
-  <entry>
-    <title>HIV/AIDS Clinical Trials Network Statistical and Data Management Centers</title>
-    <link href="https://www.grants.gov/search-results-detail/361816"/>
-    <id>urn:funding-finder:grants-gov:361816</id>
-    <updated>2026-08-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the National Institutes of Health (NIH) mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center (SDMC), and Laboratory Center (LC) working with Clinical Trials Units (CTUs), to advance prevention, treatment, and implement…</summary>
-  </entry>
-  <entry>
-    <title>Women's Initiative for Screening and Health (WISH)</title>
-    <link href="https://www.grants.gov/search-results-detail/363546"/>
-    <id>urn:funding-finder:grants-gov:363546</id>
-    <updated>2026-08-21T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Public health"/>
-    <summary>Health Resources and Services Administration | Closes 2026-09-20 | The purpose of Women's Initiative for Screening and Health (WISH) is to improve women’s health across the lifespan by increasing access to and availability of preventive health services. Through a multidisciplinary coalition of healthcare providers, academic institutions, and patient-centered organizations, WISH drives a comprehensive strategy to: (1) review and recommend evidence-based updates to…</summary>
   </entry>
 </feed>

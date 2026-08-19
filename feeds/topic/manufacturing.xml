@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-08-18T10:48:43Z</updated>
+  <updated>2026-08-19T10:48:59Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development</title>
@@ -73,22 +73,6 @@
     <summary>Department of Housing and Urban Development | Closes 2026-10-19 | HUD is issuing the Preservation and Reinvestment Initiative for Community Enhancement (PRICE) competition NOFO to preserve long-term housing affordability for residents of manufactured housing or an MHC, to redevelop MHCs, and to primarily benefit low- and moderate-income (LMI) residents. Congress appropriated in FY2025 these competitive grants to preserve and revitalize manufactured housing and e…</summary>
   </entry>
   <entry>
-    <title>Engineering (ENG): Civil, Mechanical and Manufacturing Innovation (CMMI)</title>
-    <link href="https://www.grants.gov/search-results-detail/363614"/>
-    <id>urn:funding-finder:grants-gov:363614</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Technology development"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
-  </entry>
-  <entry>
     <title>Engineering (ENG): Electrical, Communications, and Computing Systems (ECCS)</title>
     <link href="https://www.grants.gov/search-results-detail/363613"/>
     <id>urn:funding-finder:grants-gov:363613</id>
@@ -141,6 +125,22 @@
     <category term="Materials science"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs at the frontiers of discovery in physics. Physics research supported by NSF MPS enables understanding of the fundamental aspects of nature at all scales, from the quantum effects inside atoms to the mysterious dark energy spanning the entire universe. The core resea…</summary>
+  </entry>
+  <entry>
+    <title>Engineering (ENG): Civil, Mechanical and Manufacturing Innovation (CMMI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363614"/>
+    <id>urn:funding-finder:grants-gov:363614</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Technology development"/>
+    <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-18 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
   </entry>
   <entry>
     <title>Pax Silica Artificial Intelligence Assistance Project</title>
@@ -734,17 +734,6 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <summary>National Institutes of Health | Closes 2027-08-18 | The Blueprint Neurotherapeutics Network for Biologics (BPN-Biologics) provides support for biologic-based therapeutic discovery and development, from lead optimization through phase I clinical testing. This Funding Opportunity Announcement (FOA) supports preclinical discovery and development of potential therapeutic Biotechnology Products and Biologics including, but not limited to, large biologic…</summary>
   </entry>
   <entry>
-    <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development of Disorders of the Nervous System (UG3/UH3 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/356531"/>
-    <id>urn:funding-finder:grants-gov:356531</id>
-    <updated>2024-09-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Manufacturing"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2026-08-18 | The Blueprint Neurotherapeutics Network (BPN) invites applications from neuroscience investigators seeking support to advance their small molecule drug discovery and development projects into the clinic. Participants in the BPN are responsible for conducting all studies that involve disease- or target-specific assays, models, and other research tools and receive funding for all activities to be co…</summary>
-  </entry>
-  <entry>
     <title>BRAIN Initiative: Reagent Resources for Brain Cell Type-Specific Access to Broaden Distribution of Enabling Technologies for Neuroscience (U24 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/356530"/>
     <id>urn:funding-finder:grants-gov:356530</id>
@@ -755,5 +744,21 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Manufacturing"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Closes 2027-06-15 | This Notice of Funding Opportunity Announcement (NOFO) from the NIH Brain Research through Advancing Innovative Neurotechnologies (BRAIN) Initiative is intended to support establishment of facilities at minority-serving institutions (MSIs) and Institutional Development Award (IDeA)-eligible institutions for scaled production and distribution of brain cell type-specific access and manipulation reag…</summary>
+  </entry>
+  <entry>
+    <title>Computational and Data-Enabled Science and Engineering</title>
+    <link href="https://www.grants.gov/search-results-detail/356055"/>
+    <id>urn:funding-finder:grants-gov:356055</id>
+    <updated>2024-08-15T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Data science"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>U.S. National Science Foundation | Posted | Large-scale simulations and the ability to accumulate massive amounts of data have revolutionized science and engineering. The goal of the Computational and Data-enabled Science and Engineering (CDS&amp;E) meta-program is to identify and capitalize on opportunities for major scientific and engineering breakthroughs through new computational and data-analysis approaches and best practices. The CDS&amp;E me…</summary>
   </entry>
 </feed>

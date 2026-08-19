@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-08-18T10:48:43Z</updated>
+  <updated>2026-08-19T10:48:59Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -15,6 +15,15 @@
     <category term="Education and workforce"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Closes 2028-05-30 | The National Institute on Deafness and Other Communication Disorders (NIDCD) intends to publish a Notice of Funding Opportunity (NOFO) for clinical audiologists currently enrolled in Ph. D. programs. NIDCD encourages audiologists with strong research potential to integrate clinical and translational research into their career paths. A strong research foundation is essential for advancing hearing h…</summary>
+  </entry>
+  <entry>
+    <title>Healthy Lifestyles in Youth</title>
+    <link href="https://www.grants.gov/search-results-detail/363651"/>
+    <id>urn:funding-finder:grants-gov:363651</id>
+    <updated>2028-04-28T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Public health"/>
+    <summary>Indian Health Service | Closes 2028-06-30 | New cohort of NPHR awards designed to fund Tribes and Tribal Orgs to provide Essential Public Health Services</summary>
   </entry>
   <entry>
     <title>Public Health Nursing</title>
@@ -476,6 +485,17 @@
     <summary>Indian Health Service | Closes 2027-04-01 | The purpose of this IHS grant is to expand access to culturally appropriate, trauma-informed forensic healthcare (FHC) services for American Indian/Alaska Native (AI/AN) victims of domestic violence, sexual violence, child maltreatment, and human trafficking. The grant supports the development and expansion of FHC services across IHS Areas while promoting coordinated treatment, intervention, preve…</summary>
   </entry>
   <entry>
+    <title>Substance Abuse Prevention, Treatment, and Aftercare</title>
+    <link href="https://www.grants.gov/search-results-detail/363652"/>
+    <id>urn:funding-finder:grants-gov:363652</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Indian Health Service | Closes 2027-04-01 | The primary purpose of this program is to reduce substance abuse among American Indian and Alaska Native (AI/AN) populations by improving care coordination, expanding culturally appropriate behavioral health services, and implementing early intervention strategies for at-risk AI/AN youth. The program supports Tribal, community-driven prevention, treatment, and recovery efforts that promote cross-s…</summary>
+  </entry>
+  <entry>
     <title>Suicide Prevention, Intervention, and Postvention</title>
     <link href="https://www.grants.gov/search-results-detail/363496"/>
     <id>urn:funding-finder:grants-gov:363496</id>
@@ -831,6 +851,17 @@
     <summary>National Institutes of Health | Closes 2027-03-04 | The National Institute of Neurological Disorders and Stroke (NINDS), in conjunction with The National Heart, Lung and Blood Institute (NHLBI), at the National Institutes of Health (NIH) seek to continue to support the Infrastructure for the Strategies to Innovate EmeRgENcy Care Clinical Trials Network (SIREN). The program will encourage applications for network clinical enrollment hubs to support …</summary>
   </entry>
   <entry>
+    <title>Behavioral Health Integration Initiative</title>
+    <link href="https://www.grants.gov/search-results-detail/363650"/>
+    <id>urn:funding-finder:grants-gov:363650</id>
+    <updated>2027-01-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Indian Health Service | Closes 2027-03-01 | The purpose of the BH2I program is to improve the physical, mental, social, and spiritual health of American Indian and Alaska Native (AI/AN) individuals by expanding integrated, coordinated behavioral health care. The program supports Tribal and Urban Indian Organization (UIO) health systems in delivering culturally responsive, trauma-informed services that integrate behavioral health with primar…</summary>
+  </entry>
+  <entry>
     <title>Bridge2AI Network for AI Health Science</title>
     <link href="https://www.grants.gov/search-results-detail/363107"/>
     <id>urn:funding-finder:grants-gov:363107</id>
@@ -840,6 +871,16 @@
     <category term="Education and workforce"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Closes 2027-03-01 | The purpose of this forecast is to inform the research community that the NIH Common Fund, along with its partner NIH Institutes, Centers, and Offices, is planning to issue a notice of funding opportunity (NOFO) to support the continuation of the Bridge2AI program. Stage 1 of the Bridge2AI program produced unique, large-scale, valuable, and open resource, AI-ready datasets and best practices that …</summary>
+  </entry>
+  <entry>
+    <title>Zero Suicide Initiative</title>
+    <link href="https://www.grants.gov/search-results-detail/363653"/>
+    <id>urn:funding-finder:grants-gov:363653</id>
+    <updated>2027-01-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <summary>Indian Health Service | Closes 2027-03-01 | The purpose of this program is to strengthen suicide prevention in Indian health systems by implementing the Zero Suicide framework through a comprehensive, culturally informed approach. The program supports Tribal health systems in building leadership, workforce capacity, systematic suicide risk identification, timely engagement and evidence-based treatment, continuity of care, and quality improv…</summary>
   </entry>
   <entry>
     <title>Continuing Enhanced National Surveillance for Prion Diseases in the United States</title>
@@ -921,45 +962,5 @@
     <updated>2026-12-14T00:00:00Z</updated>
     <author><name>Centers for Disease Control-GHC</name></author>
     <summary>Centers for Disease Control-GHC | Closes 2027-02-12 | This award aims to strengthen immunization programs in priority countries so they can better prevent, control, and eliminate/eradicate vaccine-preventable diseases (VPDs) like polio, measles, and rubella, reduce illness and death from these diseases, and respond to emerging global health threats. The Recipient will build stronger systems in priority countries to prevent, detect, and respond to VPD…</summary>
-  </entry>
-  <entry>
-    <title>Ryan White HIV/AIDS Program Part D - Women, Infants, Children and Youth Grant Supplemental Funding</title>
-    <link href="https://www.grants.gov/search-results-detail/363415"/>
-    <id>urn:funding-finder:grants-gov:363415</id>
-    <updated>2026-12-04T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Technology development"/>
-    <summary>Health Resources and Services Administration | Closes 2027-02-02 | The purpose of this supplemental funding is to strengthen organizational infrastructure and increase capacity to develop, enhance, or expand access to high quality family-centered HIV care services. The activities fall under two categories: HIV Care Innovation and Infrastructure Development.</summary>
-  </entry>
-  <entry>
-    <title>NIOSH Centers for Agriculture, Forestry, and Fishing Safety and Health (U54)</title>
-    <link href="https://www.grants.gov/search-results-detail/363195"/>
-    <id>urn:funding-finder:grants-gov:363195</id>
-    <updated>2026-12-04T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-03-03 | The Agriculture, Forestry, and Fishing (AgFF) sector is essential to the safety, security, and economic stability of the U.S. because it produces the nation's food, fuel, and fiber. At the same time, AgFF workers experience some of the highest occupational fatality and non-fatal injury rates of any sector. AgFF workers also face increased risk of poor mental health, death by suicide, and substance…</summary>
-  </entry>
-  <entry>
-    <title>NIOSH National Center of Excellence for the Prevention of Childhood Agricultural Injury (U54)</title>
-    <link href="https://www.grants.gov/search-results-detail/363189"/>
-    <id>urn:funding-finder:grants-gov:363189</id>
-    <updated>2026-12-04T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-03-03 | The National Institute for Occupational Safety and Health (NIOSH) is committed to addressing a wide range of occupational health and safety hazards affecting those who work in the agriculture, forestry, and fishing (AgFF) sector. Children and adolescents ("youth") are consistently more likely to be fatally injured working in agriculture compared to other industries. While many steps have been take…</summary>
-  </entry>
-  <entry>
-    <title>Centers of Excellence (COE)</title>
-    <link href="https://www.grants.gov/search-results-detail/363272"/>
-    <id>urn:funding-finder:grants-gov:363272</id>
-    <updated>2026-12-02T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Education and workforce"/>
-    <summary>Health Resources and Services Administration | Closes 2027-02-02 | The Centers of Excellence Program provides grants to health professions schools and other public and nonprofit health or educational entities to assist schools in supporting programs of excellence in health professions education for under-represented minority individuals. By statute, the Centers of Excellence Program awards funding to organizations to operate programs that establish, strengthen, a…</summary>
   </entry>
 </feed>
