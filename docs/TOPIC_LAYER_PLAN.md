@@ -2,11 +2,24 @@
 
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
-Status: in progress · Version 8.33 · Written 2026-08-15 · **Revised 2026-08-20 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
+Status: in progress · Version 8.34 · Written 2026-08-15 · **Revised 2026-08-20 through MEAS-8's frozen two-arm cross-agency audit (`evaluation/meas8_frame.json`, `evaluation/meas8_results.json`)**
 
-> **Start at §18, and read §18.0 first.** §18 defines the minimum path — the **eleven** work packages **P1 … P11** — and lists what is deferred and what it costs. **§18.0 is the canonical namespace**: package IDs, the `BUG-*` / `MEAS-*` / `DEC-*` / `DEBT-*` prefixes, the migration table for every legacy label (`Package A–G`, `D½`, `D⅝`, `D¾`, `S1–S3`, `Package N`, bare `D#`, `M#`), the current ordered path, and a diagram. **P5, P6 and P7 are CLOSED; P8 is complete. Cov4, Cov6 and Cov7 are all closed. NEXT: MEAS-8 — cross-agency residual coverage audit.** **P7 closed 2026-08-20 below P4's unchanged 50% target: final comparable correct-acceptance remains 5/12 = 42%, while its finished form dispositions establish that the remaining generic mechanisms are prohibited, deferred, declined or deliberately left fail-closed rather than loosened for the number. `Fm1` is BUILT; `Fm2` REMAINS PROHIBITED.** **DEC-11 is CLOSED by the user (2026-08-20): subject-only children now, typed children later (DEC-18).** **§18.0.6 is the canonical Open Obligations Register** — every unresolved `DEC-*`, `BUG-*`, `DEBT-*` and `MEAS-*` in the project, each with an owner and a gate. §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
+> **Start at §18, and read §18.0 first.** §18 defines the minimum path — the **eleven** work packages **P1 … P11** — and lists what is deferred and what it costs. **§18.0 is the canonical namespace**: package IDs, the `BUG-*` / `MEAS-*` / `DEC-*` / `DEBT-*` prefixes, the migration table for every legacy label (`Package A–G`, `D½`, `D⅝`, `D¾`, `S1–S3`, `Package N`, bare `D#`, `M#`), the current ordered path, and a diagram. **P5, P6, P7 and MEAS-8 are CLOSED; P8 is complete. Cov4, Cov6 and Cov7 are all closed. NEXT: P9.0.** MEAS-8 promotes four bounded pre-storage questions as **DEC-19–DEC-22** and changes no production behavior. **P7 closed 2026-08-20 below P4's unchanged 50% target: final comparable correct-acceptance remains 5/12 = 42%, while its finished form dispositions establish that the remaining generic mechanisms are prohibited, deferred, declined or deliberately left fail-closed rather than loosened for the number. `Fm1` is BUILT; `Fm2` REMAINS PROHIBITED.** **DEC-11 is CLOSED by the user (2026-08-20): subject-only children now, typed children later (DEC-18).** **§18.0.6 is the canonical Open Obligations Register** — every unresolved `DEC-*`, `BUG-*`, `DEBT-*` and `MEAS-*` in the project, each with an owner and a gate. §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
 >
 > **Legacy labels in the revision notes below are historical.** They record what a past session actually did and are left as written; translate any of them through §18.0.3 rather than assuming a bare `D5` or `S1` still names live work.
+>
+> **8.34 closes MEAS-8 without implementation.** The outcome-blind frame was
+> committed first at `16b765f`; Arm A then measured 28 probability-sampled
+> residual records and Arm B audited 17 named hierarchies separately. Arm A had
+> **20 measurable, 8 unmeasurable, 4 truth-positive and 3 missed records**;
+> production recovered **9 of 45** adjudicated children, all review-only and none
+> publishable. Unequal-weight estimates are reported only among measurable
+> records, with full-frame nonresponse bounds rather than converting unknowns to
+> zero. Arm B promotes four bounded decisions before P9: public ARPA-H parent
+> ingestion, HGEO/NETL child recovery, versioned ARL topic recovery and a narrow
+> Genesis workbook handler. Generic bare-number, Word, spreadsheet, NSPIRES and
+> `program_taxonomy` expansion remain prohibited, deferred or falsifier-gated.
+> **MEAS-8 is CLOSED. NEXT: P9.0.**
 >
 > **8.3 changes one thing structurally: the unit of judgment moves from the sibling *set* to the individual *span* (§6.4b), because a set-level verdict lets two policy paragraphs delete 70 DOE programmes.** §11 is reopened for the precision half only, on a measured run; its recall argument is untouched.
 >
@@ -3778,9 +3791,9 @@ Legacy labels are translated once, in §18.0.3 — not repeated here.
 | **P6.1** | NASA ROSES structured-source proof | ✅ **complete** 2026-08-18. Gate closed clause by clause against repository evidence: six clauses outright, one with a forward obligation (the Cov4 bypass), one on evidence (§0.5). **Previously-category-(a) records reached: 0** — P6.1 reached the **(e)** population |
 | **P6.2** | DOE Office of Science structured-source test | ✅ **complete 2026-08-21 — a measured negative, and no source was built.** It was the first real test of whether structured/referenced ingestion reaches category (a), and **the population was empty**: 2 Office of Science parents, **both already resolved** by generic parsing, **0** previously category (a), **0** net-new children, **3** non-fundable organizational labels rejected. Evidence: `docs/DOE_SOURCE_INSPECTION.md` |
 | **P6.3** | DoD structured-source test | ✅ **complete 2026-08-22, Army/TDAC only** — exactly what MEAS-7 justified. **1 parent (`345241`), 14 external-only children**, provenance `referenced`, confidence `high`, **0** generic overlap. Health: names the parent, 14 ≥ floor 8. ONR rejected on measurement; **no DoD router, no SAM.gov** |
-| **P7** | Residual generic forms | ✅ **CLOSED 2026-08-20, below P4's unchanged target.** Final comparable correct-acceptance is **5/12 = 42%**, still below 50%; the remaining mechanisms are prohibited, deferred, declined or deliberately fail-closed. Final form disposition: `Fm1` BUILT · `Fm2` PROHIBITED · `Fm3`/`Fm4` landed · `Fm5` DEFERRED · `Fm6`/`Fm7` DECLINED · `Fm8` DECLINED after measurement. Final production replay on the exact 33 category-(a) negatives: **33 attempted · 26 hash-verified (22 readable + 4 unsupported DOCX) · 7 source-hash drift · 0 candidate sets · 0 false-positive children · 0 publishable**. Due P7 obligations reconciled; no backfill or cache committed. **NEXT: MEAS-8** |
+| **P7** | Residual generic forms | ✅ **CLOSED 2026-08-20, below P4's unchanged target.** Final comparable correct-acceptance is **5/12 = 42%**, still below 50%; the remaining mechanisms are prohibited, deferred, declined or deliberately fail-closed. Final form disposition: `Fm1` BUILT · `Fm2` PROHIBITED · `Fm3`/`Fm4` landed · `Fm5` DEFERRED · `Fm6`/`Fm7` DECLINED · `Fm8` DECLINED after measurement. Final production replay on the exact 33 category-(a) negatives: **33 attempted · 26 hash-verified (22 readable + 4 unsupported DOCX) · 7 source-hash drift · 0 candidate sets · 0 false-positive children · 0 publishable**. Due P7 obligations reconciled; no backfill or cache committed. MEAS-8 subsequently closed (§18.1) |
 | **P8** | NASA ROSES Catalog Source | ✅ **complete** 2026-08-20, own gate passed, **no open items** (§18.1). A **catalog-completeness branch**, not subtopic recall. The adapter is enabled and reconciles all **63** elements every refresh; the catalog-completeness gap is **closed** — the 2 actionable unmatched elements are emitted (**+0.136%**) and the other **51** stay inventory-only. Native identity `(cycle, code, title)` and the cross-source ambiguity rule were audited against the live source in P8.2a |
-| **P9** | Storage and scoring | ⛔ **not started.** **P9.0 must run before anything writes a cache** |
+| **P9** | Storage and scoring | ⛔ **not started. NEXT: P9.0.** P9.0 must first resolve or brief its package-start decisions, including MEAS-8's DEC-19–DEC-22, before anything writes a cache |
 | **P10** | Retrieval and UI | ⛔ **not started** |
 | **P11** | Enable and ship | ⛔ **not started.** The only package that flips a flag (§0.4 rule 9) |
 
@@ -3809,11 +3822,11 @@ guarantees they never publish. It is listed once, under P5.
 | **MEAS-1** | Cov5 leaves the 757 no-span documents unchanged | Asserted in a session report, never run |
 | **MEAS-2** | ~~30 more stratum-D records~~ | ✅ **DONE 2026-08-27 by P5's Cov7** → `evaluation/cov7_stratum_d.json`. 30 reads, **2 misses, 1 unresolved, 27 genuine no-list**. D: **1/12 → 3/42**; sub-stratified point **40 → 10**, band **7–171 → 3–75**. Catalog-wide **171 → 165 records**, band **54–538 → 59–459**. **The interval did not close as much as hoped, and the reason is now known**: D was wide because it is large and unread, not because it is rich. **E is the remaining source of width** — 660 records, 13 reads |
 | **MEAS-3** | ~~Classifier run-to-run variance~~ | ✅ **DONE 2026-08-24 → `docs/MEAS3_RUN_DESIGN.md` §4a.** 105 candidates × R=5 = **525 calls**, 0 errors: **99 stable accept · 5 stable reject · 1 unstable · 0 error**; per-span instability **0.95%**, pooled per-call disagreement **1/525 = 0.190%** [0.034%, 1.071%]. **The classifier is repeatable, so R=1 is licensed and no ensemble is justified.** But **Cov4 stays blocked on task definition and validation coverage** — *not* variance, and *not* precision: 4 of the 5 stable rejects are genuine programmes, a **3.8% false-negative (recall) failure against a gate requiring zero**; **precision was unmeasured**, the population holding no contaminants. Repetition cannot repair a *stable* error. Also measured: `thinking_tokens` was **0 on all 525 calls**, so "adaptive" did not engage. Superseded original entry: The existing 1-of-62 observation has a **Wilson 95% CI of [0.29%, 8.59%]**, which straddles the 0.9% signal — that is the arithmetic form of "one pass cannot demonstrate the gate". The design is two arms (§11's 114 spans for comparability, plus the F1/F4/aggregating-page shapes Cov4 will actually face) at **R=5**, with a decision table written before the run. **Three blockers, each isolated: no credential (Blocker A), no committed candidate population (Blocker B), `anthropic` unauthorized (DEC-15)** |
-| **MEAS-4** | Read `344592` for MURI topics | Grants.gov finds MURI in its full text; part of §18.2's SAM.gov cost may already be reachable |
+| **MEAS-4** | ~~Read `344592` for MURI topics~~ | ✅ **DONE by MEAS-8.** The current attachments contain 82 ARL topic IDs and zero MURI topic truth; MURI appears only as a mechanism/team exception. DEC-21 owns the real ARL gap |
 | **MEAS-5** | **Discipline-stratified query and relevance set** | **18 of 37 queries (49%) are chemistry; all 3 profile probes are.** A ranking regression outside chemistry is invisible to §8.5. **Extraction-side figures are corpus measurements and are unaffected** (§8.5, §17.9) |
-| **MEAS-6** | **Name a verified SAM-only opportunity** | §18.2's adapter was justified from MURI's absence in our corpus, which is a fact about what we store. **Inference withdrawn**; the residual gap is real but unnamed. **Blocked on a credential — human task** |
+| **MEAS-6** | **Name a verified SAM-only opportunity** | **Still blocked on a credential — human task.** MEAS-8 does not claim a SAM-only universe; DEC-19's independently public ARPA-H gap does not substitute for this measurement |
 | **MEAS-7** | ~~Read `345241` and `356605` and record whether the pages they point at enumerate fundable subdivisions~~ | ✅ **done 2026-08-22 → `docs/DOD_MEAS7_INSPECTION.md`. 1 of 2.** Army's TDAC BAA topics page publishes **14** applicant-selectable topics (`Title:` / `Announcement ID: TDAC BAA-0NN` / `TPOC:`) and **names the BAA number itself**; the notice states the website — not the BAA — carries them, so they are **external-only**. ONR's "technology areas" are an A–Z research-interest list that names neither the BAA nor any way to apply against an area: **organizational taxonomy, rejected** |
-| **MEAS-8** | **Cross-agency residual coverage audit — deferred, and recorded so it cannot disappear** | **Do not run now.** After the generic subtopic model is substantially working, re-measure what remains missing per agency family: **Army/DEVCOM/ARL/ARO · ONR/NRL · Air Force/AFOSR/AFRL · DARPA · DTRA and other DoD research organizations · ARPA-E/eXCHANGE · ARPA-H · NASA · DOE Office of Science**, plus a **corpus-driven sample of other major academic/research funders** so the audit is not limited to agencies named by hand. Per agency ask: (1) which umbrella opportunities are actually in the catalog; (2) which contain or reference fundable child structure; (3) what fraction the final generic model recovers; (4) what useful structure remains missing; (5) whether the residual is a **generic-form gap**, a **source-access gap**, or an **authoritative external hierarchy**; (6) whether an agency-specific source would add enough net-new coverage to justify its maintenance |
+| **MEAS-8** | ~~Cross-agency residual coverage audit~~ | ✅ **CLOSED 2026-08-20.** Frozen Arm A 28 and Arm B 17; complete results in `evaluation/meas8_results.json`; DEC-19–DEC-22 promoted; no production change. **NEXT: P9.0** |
 | *(part of Cov4)* | Form-F1 / form-F4 candidate sets in Cov4's validation | Neither resembles the 22 sibling sets §11 measured (§11). *Form names, not P10 items — see §18.0.1* |
 
 ### Decisions and debt — DEC-* / DEBT-*
@@ -4013,6 +4026,7 @@ P7, because that is where it falls in the ordered path (§18.0.4).
 
 ### P9 — Storage and scoring *(legacy Package E)*
 
+- [ ] **P9.0 package-start decision gate.** Read §18.0.6 before implementation. Resolve the engineering questions and return the required user/mixed decision briefs, including MEAS-8's **DEC-19–DEC-22**, before fixing storage shape or writing a cache. A promoted measurement gap is not authorization to build it.
 - [ ] **P9.0. Re-key subtopic identity onto the parent's `opportunity_id`** (§5.1, §5.3). **Do this before anything writes a cache.** `subtopic_records.py` keys on `opportunity_number` with an `opportunity_id` fallback, so 1,455 records key one way and 20 key the other, and a VPR-digest parent that later gains an opportunity number silently re-identifies all its children. Free today — no backfill has run; expensive after P9.2
 - [ ] **P9.1.** Prototype cross-corpus scoring on the frozen catalog — this resolves **DEC-1** (§13.1)
 - [ ] **P9.2.** Implement the winner (sidecar or in-catalog children)
@@ -4650,17 +4664,17 @@ notes elsewhere.
 | **DEBT-3** | §6.6's HTML outline layer is specified and unbuilt, deliberately | D3 *(debt)* | open by choice |
 | **DEBT-4** | 213 stale evidence entries | D4 *(debt)* | open |
 | **DEBT-5** | 13 orphaned evidence entries | D5 *(debt)* | open |
-| **DEBT-6** | 25 recorded fetch failures across five hosts | D6 *(debt)* | open |
+| **DEBT-6** | 25 recorded fetch failures across five hosts | D6 *(debt)* | **closed by MEAS-8 — failure layers characterized** |
 | **DEBT-8** | `structural_siblings` is blind to 55% of the corpus's PDFs | *(previously unnumbered, §6.3a)* | carried limitation |
 | **DEBT-9** | No candidate span population is committed anywhere | *(new in 8.18)* | open — **blocks MEAS-3** |
 | **MEAS-1** | Cov5 leaves the 757 no-span documents unchanged | M1 | asserted, never run |
 | **MEAS-2** | 30 more stratum-D records | M2 | delivered by P5's Cov7 |
 | **MEAS-3** | Classifier run-to-run variance | M3 | **specified 2026-08-23, not run — blocks Cov4** |
-| **MEAS-4** | Read `344592` for MURI topics | M4 | open |
+| **MEAS-4** | Read `344592` for MURI topics | M4 | **closed by MEAS-8 — zero MURI topics; 82 ARL topics** |
 | **MEAS-5** | Discipline-stratified query and relevance set | M5 | open |
 | **MEAS-6** | Name a verified SAM-only opportunity | M6 | blocked on a credential — human task |
 | **MEAS-7** | Do `345241` and `356605` point at pages that enumerate? | *(new in 8.15)* | **done 2026-08-22 — 1 of 2; Army yes, ONR no** |
-| **MEAS-8** | Cross-agency residual coverage audit | *(new in 8.16)* | **deferred by design** — run after the generic model works |
+| **MEAS-8** | Cross-agency residual coverage audit | *(new in 8.16)* | **closed 2026-08-20** |
 | **DEC-0** | `MAX_TERMS` stays at 400 | §13 "former open decision 0" | settled 2026-08-17 |
 | **DEC-1** | Subtopics ship in a `data/subtopics.js` sidecar | §13.1, "former open decision 1" | settled 2026-08-17 |
 | **DEC-2 … DEC-12** | §13's remaining numbered decisions | §13 items 2–12 | open |
@@ -4668,6 +4682,8 @@ notes elsewhere.
 | **DEC-14** | Whether ROSES appendix divisions A–F should map to `disciplines` facet values | *(new in 8.14; found closing P8)* | open — **not a P8 blocker** |
 | **DEC-15** | Authorize `anthropic` as a dependency | *(new in 8.18)* | **resolved 2026-08-24 — no dependency added** |
 | **DEC-16** | Do generic subtopics ever publish without a human approval? | *(new in 8.23; found closing Cov6)* | **open — destination P9.0** |
+| **DEC-18** | Typed children — DEC-11's "C later" half | *(new in 8.29)* | **deferred — MIXED, destination P9.0/P10** |
+| **DEC-19 … DEC-22** | MEAS-8 bounded pre-storage decisions: ARPA-H public source · HGEO/NETL children · ARL topic attachment · Genesis focus depth | *(new in 8.34)* | **open — destination P9.0** |
 
 *Not renumbered, deliberately:* **§18.3a**'s bare-numbered-family prohibition is a
 gate with four exit criteria rather than a §13-numbered decision, and it keeps its
@@ -4693,8 +4709,8 @@ P4.3, P4.6 …).
 | 8 | **Cov7** — 30 more stratum-D reads | ✅ **complete 2026-08-27**, MEAS-2 delivered. 2 misses in 30 (**F4 bulleted** at DARPA, **`Priority Area N`** at State), D re-estimated to point 10 / band 3–75, F5 re-sized ~40 → ~12. **P5's items are all done; its closeout is next** |
 | 9 | **P5 closeout** — package gate, coverage reconciliation, P7 definition, obligations register | ✅ **complete 2026-08-27. P5 CLOSED.** All five gate clauses pass; final estimate **~141 records (9.5%), band 50–443**; **§18.0.6** opened as the canonical Open Obligations Register |
 | 10 | **P7** — residual generic forms, scope defined by P5's closeout | ✅ **CLOSED 2026-08-20** (§18.1 P7.1–P7 closeout). Structured/referenced sources removed 0 records from the residual; `Fm1` built narrowly, Fm3/Fm4 and BUG-2 landed, `Fm2` failed its gate and remains prohibited, Fm5 deferred, Fm6/Fm7/Fm8 declined. Final comparable P4 correct-acceptance **5/12 = 42%**, still below the unchanged 50% target; remaining mechanisms were not loosened to clear it. Final production replay on the exact 33 category-(a) negatives: 26 hash-verified, 7 source drift, **0 false-positive children and 0 publishable**. Due P7 obligations reconciled; no backfill/cache committed |
-| 11 | **MEAS-8** — cross-agency residual coverage audit | **pinned here deliberately: P7 → MEAS-8 → P9.** MEAS-8's own wording is *"after the generic subtopic model is substantially working"*, so it must evaluate the model we intend to ship rather than an intermediate one — and P9 must design storage for a measured model, not an unmeasured one. It inherits **DEBT-11**'s frozen-artifact requirement and must re-derive rather than trust **DEBT-10**'s field |
-| 12 | **P9 / P9.0** — subtopic-aware storage and scoring | due `DEC-*` resolve here: **DEC-16 (USER)**, DEC-2, DEC-8, DEC-12; **BUG-12**, DEBT-4, DEBT-5, DEBT-10, DEBT-12 |
+| 11 | **MEAS-8** — cross-agency residual coverage audit | ✅ **CLOSED 2026-08-20.** Outcome-blind frame committed first at `16b765f`; Arm A 28 / Arm B 17; DEBT-6 and DEBT-11 closed; DEBT-10 consumer gate satisfied; DEC-19–DEC-22 promoted. No production change |
+| 12 | **P9 / P9.0** — subtopic-aware storage and scoring | **NEXT.** Package-start decisions: **DEC-16 (USER)**, **DEC-18 (MIXED)**, **DEC-19–DEC-21 (ENGINEERING)**, **DEC-22 (MIXED)**, DEC-2, DEC-8, DEC-12; correctness: **BUG-12, BUG-14**, DEBT-4, DEBT-5, DEBT-10, DEBT-12, **DEBT-13**. Resolve/brief these before re-key/storage implementation or any cache write |
 | 13 | **P10** — retrieval and UI | **MEAS-9** post-P9 manual-profile / CV / ORCID relevance regression, including the real ORCID validation · **MEAS-10** the multi-researcher pilot · MEAS-5 · retrieval and UI work · due `DEC-*`: DEC-3, DEC-4, DEC-5, DEC-6, DEC-7 (USER), DEC-9 (USER), DEC-14 |
 | 14 | **P11** — enable and ship | **the final zero-unresolved-obligation gate** (§18.0.6 rule 3) · due `DEC-*`: **DEC-17 (USER)** · BUG-0, BUG-11 | only when the coverage evidence says the feature is worth shipping; each behind its own existing gate |
 
@@ -4818,6 +4834,10 @@ reopened to add one.
 | **DEC-10** | OCR | **CLOSED — measured no-build** | **ENGINEERING** | — | — | Decided at P7 closeout from the already-recorded evidence, with denominators kept separate: **1/151** P7.1-frame documents, historical **11/770** D5 documents, and **9/726** current catalog-restricted evidence entries. P7.1 found **0 genuinely scanned/image-only PDFs** in its measured frames; the observed failures were source/network, empty portal, or unsupported-format problems that OCR would recover **0** times. **Falsifier:** a future reproducible population of genuinely scanned/image-only notices causing material recall loss |
 | **DEC-11** | Where is the boundary between a **fundable subdivision** and a **funding mechanism / programme track**? | **CLOSED — USER decision 2026-08-20** | — | — | — | **Subject-only children, and typed children later.** The user's wording: *a normal Funding Finder subtopic represents a research, technical, programmatic or other substantive subject area that the work is **about**; a child is not a normal subtopic merely because it is selectable.* Excluded from ordinary `subtopic` treatment: funding mechanisms, partnership modes, award/instrument mechanisms, degree or delivery pathways, applicant categories, administrative or programme tracks whose meaning is *how the applicant participates* rather than *what the funded work is about*, and analogous non-subject structures. **"Subject-only" is not "scientific-topic-only"** — *Food Safety*, *Manufacturing Innovation*, a technical or mission programme area all remain subtopics. **Applied:** `(n) Public-Private Partnerships` in `360678` is **not** an ordinary subtopic under v1; `358380`'s three degree-delivery program tracks are **not**; and `361876` is **not a DEC-11 case** — its first five entries are subject areas and `3.3.6 Projects and Activities Not Eligible for Funding` is a member contaminant for §6.4b to filter. **Evidence:** §18.1 P7.3a read all three from source; §18.1 P7.3b records the decision. **Enforced by** one clause appended to Cov4's fundability question (`DEC11_FUNDABILITY_CLAUSE`), with `evaluation/cov4_dec11_cases.json` as its regression arm. **The "C later" half is DEC-18** |
 | **DEC-18** | **Typed children — DEC-11's "C later" half.** What child *types* exist, how each is scored, and how each is rendered so a mechanism or a track is never presented as though it were a research subject | **DEFERRED — assigned** | **MIXED** | **P9.0 package start, before the stored subtopic shape is fixed — and P10 before any child is rendered** | **P9.0** | **The direction is already decided and is not reopened here**: the user chose *A now, C later* at DEC-11 (2026-08-20), so meaningful selectable non-subject structures should eventually be representable as **typed** children rather than discarded forever or flattened into ordinary subtopics. `subject`, `mechanism` and `track` are **illustrative semantics, not authorisation to proliferate types.** What remains is the shape, and it splits cleanly: **P9 must determine and store an explicit child type and its scoring semantics** — §5.1's record has no such field and DEC-1's sidecar is where it would live — and **P10 must render types distinctly**. One retrieval requirement is already fixed by DEC-11's reasoning and is the concrete cost of getting this wrong: **ordinary subject retrieval must not be polluted by mechanism vocabulary merely because the mechanism is selectable** — a mechanism child's term map is procurement language (*Other Transactions*, *Technology Investment Agreements*), and §6.5 derives `subtopic_terms`, `program_area_labels` and `topic_areas` from the span's own prose. **Must not block P7**: under DEC-11's v1 rule these candidates are still extracted and still land in the cache with their diagnostics, so nothing has to be re-read later. `MIXED` because evidence can show what each type would yield and how it ranks, and **which types a PI should be shown is the user's call** |
+| **DEC-19** | **Add a bounded public ARPA-H opportunity source before storage?** | **OPEN — assigned** | **ENGINEERING** | **P9.0 package start, before the source surface feeding the first cache is fixed** | **P9.0** | MEAS-8 found **11/11 current official parents absent**: four programs, two initiatives, FY26 SBIR/STTR and four rolling mission-office ISOs. Gate: reconcile all 11 frozen official rows with dates and stable IDs, deduplicate against Grants.gov and add zero false parents. Stop if the public page cannot establish stable identity/currentness without SAM-only data. This does **not** authorize or substitute for a SAM.gov adapter |
+| **DEC-20** | **Add a bounded HGEO/NETL child route for the three current captured parents?** | **OPEN — assigned** | **ENGINEERING** | **P9.0 package start, before the child source surface and cache shape are fixed** | **P9.0** | MEAS-8 reconciled the official HGEO and NETL lists to three already-captured parents and found **12/12 useful children missed** (4/5/3). Gate: reproduce those adjudicated counts from the three hashed notices with provenance and zero mechanism children; stop if successor notices do not preserve the applicant-selectable topic/subtopic structure. No parent adapter is justified |
+| **DEC-21** | **Add a version-aware DEVCOM ARL topic-attachment handler?** | **OPEN — assigned** | **ENGINEERING** | **P9.0 package start, before the child source surface and identity shape are fixed** | **P9.0** | The current hashed attachment for `344592` has **82 unique applicant-selectable `ARL-BAA-*` topic IDs** and production recovers zero. Gate: reproduce exactly 82 IDs with attachment-version provenance and introduce zero MURI topics. Stop if the authoritative current-topic attachment loses stable unique IDs. MEAS-4 separately closes the MURI hypothesis as false for this parent |
+| **DEC-22** | **Add a narrow Genesis focus-area workbook handler and parent search terms, without generic spreadsheet parsing?** | **OPEN — assigned** | **MIXED** | **P9.0 package start, before child depth and stored hierarchy are fixed** | **P9.0** | The Phase I workbook has **98 distinct focus areas under all 21 challenges**; production recovers only the 21 top-level challenges, and **87/98** focus labels fail top-50 parent retrieval. Engineering gate: reproduce the 21 group counts totaling 98, preserve group relationships and put at least 95/98 exact labels in the parent's top 50 without changing generic spreadsheet policy. Then stop for the product choice whether this deeper granularity should be stored/shown. Stop entirely if the live application path does not treat rows as selectable focus areas |
 | **DEC-12** | The `deadlines` payload duplicates itself — 17.5% of `opportunities.js` | **DEFERRED — assigned** | **ENGINEERING** | **P9.2, before the storage winner is implemented** | **P9.0** | A serialization-cost question with a measured answer and no user-visible surface. Pre-existing catalog cost, larger than anything subtopics add, and independent of them |
 | **DEC-13** | NASA ROSES standalone ingestion | **CLOSED** | — | — | — | Taken 2026-08-18, implemented as P8, complete 2026-08-20 |
 | **DEC-14** | Should ROSES appendix divisions A–F map to `disciplines` facet values? | **DEFERRED — assigned** | **MIXED** | **P10, before facet rendering ships** | **P10** | Mapping division → discipline is a **new inference** (§17.8), so evidence must first show what it would produce; **whether to present an inferred facet as though it were published data is a product choice**. Not a P8 blocker, and P8 closed without it |
@@ -4848,11 +4868,11 @@ reopened to add one.
 | **DEBT-3** | §6.6's HTML outline layer is specified and unbuilt | **WONTFIX — accepted until falsified** | — | — | Measured **0 fundable lists in 22 non-stub NIH HTML announcements**. No HTML outline layer was built. **Falsifier:** a reproducible fundable list whose hierarchy is present in a non-stub HTML notice, is not recovered by current production behavior, and causes material recall loss |
 | **DEBT-4** | 213 stale evidence entries whose records have left the catalog | **OPEN — assigned** | **P9.0** | any rate is computed from the cache rather than the catalog | Cache residue; inflates any cache-derived denominator. **Prune on the catalog, never on the cache** |
 | **DEBT-5** | 13 orphaned evidence entries | **OPEN — assigned** | **P9.0** | anything writes a cache | **Re-measured 2026-08-27 and still exactly 13.** Cov1 did not close it |
-| **DEBT-6** | 25 recorded fetch failures across five hosts | **OPEN — assigned** | **MEAS-8** | any of them is cited as a reason to defer work | §17.11: a failed fetch is a fact about the client until the layer is isolated. The reachability sweep already showed 4 of 14 hosts no longer reproduce |
+| **DEBT-6** | 25 recorded fetch failures across five hosts | **CLOSED — failure layers characterized** | — | — | MEAS-8 rechecked the relevant live routes under the existing production client. NASA and NSF transport works, including NSPIRES under the narrow legacy-cipher policy with certificate and hostname verification intact. NYSERDA and NSPIRES residuals are application/client-rendering conditions; NIAC is a source-selection mismatch; SAM remains credential/client limited. No failed fetch is used as a parser zero or as an undifferentiated reason to defer work |
 | **DEBT-8** | `structural_siblings` is blind to **55% of the corpus's PDFs** (71 of 129 carry no bookmarks) | **CLOSED — limitation characterized and accepted** | — | — | P7.1 showed bookmark absence is not the general residual: **12 of 19** residual records have bookmarks and still miss, while only 7 lack them. `Fm1` proved a body-text route by recovering bookmark-less `359782`; bookmark-based production already recovers `330175` and `361526`. The remaining constraint is heterogeneous representation and admissible hierarchy, not one missing bookmark mechanism. MEAS-8 may measure new residual representation, but no parser debt is carried forward from this row |
 | **DEBT-9** | No candidate span population is committed anywhere | **CLOSED** | — | — | Closed 2026-08-24 by `evaluation/meas3_population.json`, pinned by 15 tests |
-| **DEBT-10** | **`attachment_count` in the enrichment cache can outlive the API's own attachment list** — 4 of 815 records, including `363607`, which the survey recorded as *enumerating* and which is now unreachable | **OPEN — assigned** | **P9.0** | any code computes a population from `attachment_count` | Not a parser defect: `synopsisAttachmentFolders` now returns empty and nothing compares the two. **Verified against the roadmap**: §7.4's canaries are implemented per-source inside adapters and **no scheduled package owns §7.4 generically**, so the canary framing has no home — the actionable half is cache hygiene, which is P9.0's stated remit ("must run before anything writes a cache"). **MEAS-8 is its first consumer** and must re-derive rather than trust the field. **Reproduced live on its own named example at P7.1** (2026-08-20): `363607`'s catalog `attachment_count` is 10, the committed census records 0, and Grants.gov offered **no attachment at all**, so one of `Fm1`'s ten historical observations is now **unreachable rather than residual** |
-| **DEBT-11** | The stratified sampling instrument was never committed | **OPEN — assigned** | **MEAS-8** | **MEAS-8 draws its first sample** | **Substantially repaired at this closeout**: `evaluation/attachment_census.jsonl` (815 records, 1,633 attachments) is committed, `tools/p5_coverage_report.py` recomputes the frame offline, and `tests/test_p5_closeout.py` pins it. **What remains** is that `pick50.py`'s draw and the taxonomy's 50-record selection are still unenumerated, so an exclusion set is still imperfect. **MEAS-8 must commit its own sample selection and its truth labels as a frozen artifact before drawing** — that is the specific requirement, and it is what stops MEAS-8 repeating the mistake |
+| **DEBT-10** | **`attachment_count` in the enrichment cache can outlive the API's own attachment list** — 4 of 815 records, including `363607`, which the survey recorded as *enumerating* and which is now unreachable | **OPEN — assigned** | **P9.0** | any code computes a population from `attachment_count` | Not a parser defect: `synopsisAttachmentFolders` now returns empty and nothing compares the two. **MEAS-8 satisfied its consumer gate** by re-deriving every sampled and named-parent attachment list from the live Grants.gov detail before measuring; no stale cached count entered a denominator. The underlying cache-hygiene debt remains P9.0-owned before a cache write. **Reproduced live on its own named example at P7.1** (2026-08-20): `363607`'s catalog `attachment_count` is 10, the committed census records 0, and Grants.gov offered **no attachment at all** |
+| **DEBT-11** | The stratified sampling instrument was never committed | **CLOSED — MEAS-8 froze its own two-arm frame before outcomes** | — | — | `evaluation/meas8_frame.json` was generated deterministically and committed at `16b765f` before source truth was read. It enumerates all 28 Arm A records, all 17 Arm B cases, routes and queries. `evaluation/meas8_results.json` preserves the separate denominators; no sample or case replacement occurred. The legacy survey/taxonomy frames remain imperfect history and are not reused as MEAS-8 denominators |
 | **DEBT-13** | **The ROSES adapter's `native` children never reach the production subtopic path.** `nasa_roses.subtopic_children` is called only from `tests/` and `tools/run_cov4_validation.py`; `subtopic_fields` asks `subtopic_referenced.first_refusal` and nothing else before falling through to generic segmentation | **OPEN — assigned** | **P9.0** | **the §7.1 merge admits `native` children** | **Found at P7.1** (2026-08-20) while establishing what "already covered by a structured source" means today. The answer is **the one Army TDAC parent and nothing else** — P6.1's 10 `native` parent relationships exist in the adapter and are exercised by tests, and no production path asks for them. Harmless today because nothing merges subtopics, and it is the same shape of latent hole as **BUG-12**: both bite the moment P9 wires the merge, and they should be fixed together. **Not a P7 item** — P7 builds rung-4 inference and cannot reach this |
 | **DEBT-12** | A no-primary record's own announcement carries `source_kind: secondary_attachment` | **OPEN — assigned** | **P9.0** | **a reviewer surface displays provenance to a human** | **Classified at this closeout: benign representational debt, not a bug.** Verified: Cov4's `ATTACHMENT_KINDS` treats `primary_notice` and `secondary_attachment` identically, so ownership is unaffected; Cov6's `_demote()` keys on the announcement URL and no longer reads `source_kind` at all; no other consumer distinguishes them; and Cov1 writes no evidence entry, so it never reaches `document_evidence.json`. **It is not WONTFIX** because the string is user-facing the moment a reviewer reads it — "secondary attachment" beside a record's own announcement would mislead a human judging that child |
 
@@ -4863,24 +4883,24 @@ reopened to add one.
 | **MEAS-1** | Cov5 leaves the 757 no-span documents unchanged | **CLOSED — trigger did not fire; claim retired unproved** | — | — | P7 required no fresh backfill and quotes **no new backfill figure**, so the measurement's only trigger did not fire. The dated D5 histogram remains history and is not promoted to a current result. A future cache run must freeze and verify its own population under the then-current P9 obligations; it may not cite this unrun assertion |
 | **MEAS-2** | 30 more stratum-D records | **CLOSED** | — | — | Delivered 2026-08-27 by Cov7 → `evaluation/cov7_stratum_d.json` |
 | **MEAS-3** | Classifier run-to-run variance | **CLOSED** | — | — | Run 2026-08-24: 525 calls, pooled disagreement 0.190%, R=1 licensed |
-| **MEAS-4** | Read `344592` for MURI topics | **DEFERRED — assigned** | **MEAS-8** | the SAM.gov deferral is re-argued | Part of §18.2's SAM.gov cost may already be reachable through Grants.gov full text |
+| **MEAS-4** | Read `344592` for MURI topics | **CLOSED** | — | — | MEAS-8 read all current attachments. The current topic PDF contains **82 ARL topics and zero MURI topics**; amendments mention MURI only as an award mechanism/team-size exception. The MURI hypothesis does not justify SAM.gov. The real ARL child gap is DEC-21 |
 | **MEAS-5** | Discipline-stratified query and relevance set | **OPEN — assigned** | **P10** | the §8.5 retrieval gate is trusted outside chemistry | **18 of 37 queries (49%) are chemistry; all 3 profile probes are.** A ranking regression outside chemistry is currently invisible. **Extraction figures are unaffected** — they are corpus measurements |
-| **MEAS-6** | Name a verified SAM-only opportunity, or re-justify the SAM.gov adapter | **DEFERRED — assigned** | **MEAS-8** | SAM.gov work is scheduled | **Blocked on a credential — a human task, not an agent one.** Until it is done the adapter's cost is known and its benefit is asserted |
+| **MEAS-6** | Name a verified SAM-only opportunity, or re-justify the SAM.gov adapter | **DEFERRED — assigned** | **USER / credentialed operator** | SAM.gov work is scheduled | **HUMAN BLOCKER: no SAM.gov API credential was available.** MEAS-8 does not claim a complete SAM-only universe. ARPA-H's independently verified public-source gap is DEC-19 and does not authorize a SAM adapter. Until a credentialed operator names at least one relevant SAM-only opportunity with its notice ID, the adapter's cost is known and its benefit remains unproved |
 | **MEAS-7** | Do `345241` and `356605`'s referenced pages enumerate fundable subdivisions? | **CLOSED** | — | — | Done 2026-08-22: 1 of 2. Army yes, ONR no |
 | **MEAS-9** | **Post-P9 profile / CV / ORCID relevance revalidation.** *Does the completed subtopic-aware retrieval model preserve the existing precision-first admission behaviour while letting manual profile, CV-derived and ORCID-derived evidence improve ranking appropriately?* | **DEFERRED — assigned** | **P10** | **P11** | **Added 8.26; see §18.0.7.** The August 15 work is completed evidence for manual fields and representative CV text — **it never exercised a real ORCID-derived publication profile**, and it pre-dates the topic layer. **P9 changes the retrieval surface those terms rank against**, so the findings need revalidation rather than assumption. **Deterministic scope, all eight arms:** manual research-description/expertise · CV-derived · ORCID-derived · manual+CV · manual+ORCID · manual+CV+ORCID · profile-only fallback where the product permits it · post-P9 parent/subtopic-aware ranking. **Evaluate separately:** candidate admission · candidate-set expansion · ranking movement · false-positive expansion · known recall anchors · parent-versus-subtopic ranking behaviour. **At least one real ORCID profile obtained through the actual ORCID → Crossref path — synthetic text in `orcid_text` does not satisfy this.** Carry the August regression anchors (NSF CPS `362061`, NSF Chemistry `347749`, DOE `DE-FOA-0003600`, ONR `N0001425SB001`) so pre- and post-topic-layer behaviour is comparable. **Sets no thresholds** — it measures. Distinct from **MEAS-5**, which is about the *query* set's discipline coverage |
 | **MEAS-10** | **Multi-researcher human relevance pilot (Phase 2C).** *Does profile-assisted Funding Finder ranking improve the usefulness and relevance of funding results for multiple real researchers across different research domains?* | **DEFERRED — assigned** | **P10** | **P11**, unless **DEC-17** explicitly accepts shipping without it | **Added 8.26 — it existed as a plan and had no canonical ID.** Written up in `docs/PILOT_PARTICIPANT_INSTRUCTIONS.md` and `evaluation/README.md` (*"complete only after consented labels from 3–5 researchers are aggregated"*), and `docs/PHASE2_COVERAGE_ROLLOUT.md` calls it **"the highest product risk"**. **Not the same measurement as MEAS-9**: MEAS-9 is a deterministic regression an agent can re-run and verifies *engineering behaviour*; this measures *real-user usefulness* with consented human labels and cannot be automated. Report retrieval, reranking and source-data failures separately, per `evaluation/README.md` |
-| **MEAS-8** | **Cross-agency residual coverage audit** | **DEFERRED — assigned** | **itself, scheduled between P7 and P9** | **P9 designs storage for the model we intend to ship** | See §18.0.4. Its own wording — *"after the generic subtopic model is substantially working"* — is why it sits after P7 and not before. It must satisfy **DEBT-11**'s frozen-artifact requirement and re-derive rather than trust **DEBT-10**'s field |
+| **MEAS-8** | **Cross-agency residual coverage audit** | **CLOSED 2026-08-20** | — | — | Frozen frame `16b765f`; results `evaluation/meas8_results.json`. Arm A: 28 sampled, 20 measurable, 8 unmeasurable, 4 truth-positive, 3 missed; 9/45 truth children recovered, all review-only, 0 publishable. Weighted truth-positive rate among measurable 11.25%; full-frame nonresponse bounds 10.24%–19.22%, with no full-frame point estimate. Arm B: 17 separate purposive cases; DEC-19–DEC-22 promoted before P9. No production change. **NEXT: P9.0** |
 
 #### Deferred scope with no ID, given one here
 
 | Item | Status | Owner | Must resolve before | Rationale |
 |---|---|---|---|---|
-| **Word / OOXML parsing in `extract_containers`** | **WONTFIX — accepted with rationale** | — | — | **Measured zero, twice.** 0 lists in 40 survey records, and Cov7 read 6 further `.docx`-only announcements out-of-band and found **0**, so the evidence is 0 lists across 10 such records. Cov7 also measured the cost: **6 of its 30 stratum-D records are entirely unreadable by production**, and it cost **no recall**. Revisit only if a future sample finds a list in one — that is the falsifier, and it is cheap to check inside MEAS-8 |
-| **Spreadsheet parsing** | **WONTFIX — accepted with rationale** | — | — | The Genesis Mission's 98 focus areas are **one instance in 1,475 records**. Treat as a per-document case, never a format capability |
-| **SAM.gov adapter** | **DEFERRED — assigned** | **MEAS-8** (via MEAS-6) | it is built | MURI no longer justifies it (8.8); the residual gap is real but **unnamed**, and naming it is MEAS-6 |
+| **Word / OOXML parsing in `extract_containers`** | **WONTFIX — accepted with rationale** | — | — | **Measured zero, now three times.** The survey/Cov7 evidence remains 0 lists across 10 `.docx` cases; MEAS-8 read current DOCX attachments in Arm A out of band and found only forms. **Falsifier:** a hashed current DOCX with a genuine missed applicant-selectable list |
+| **Spreadsheet parsing** | **WONTFIX — accepted with rationale** | — | — | MEAS-8 again found only budget/template sheets outside Genesis. Genesis's 98 focus areas are real but remain a **named narrow exception** under DEC-22, never evidence for a generic format capability. **Falsifier for generic support:** two independently sampled authoritative spreadsheets with the same bounded selectable-list shape |
+| **SAM.gov adapter** | **DEFERRED — assigned** | **USER / credentialed operator** (via MEAS-6) | it is built | MURI does not justify it; MEAS-8 closed that hypothesis. No credential was available, so at least one verified relevant SAM-only opportunity with its notice ID is still required before scheduling |
 | **§18.3a's bare-numbered prohibition** | **CLOSED — prohibition upheld** | — | — | P7.4a measured all four criteria on 2026-08-20: 1 and 4 passed; 2 failed with one Cov4 false rejection plus one exact-title miss among 58 verified subjects; 3 failed with 11 false-positive review children among 26 hash-verified category-(a) negatives. `Fm2` remains prohibited and was not built |
-| **NSPIRES open-solicitations list** | **DEFERRED — assigned** | **MEAS-8** | any NASA gap is re-argued | Session-gated behind a POST search flow. The **ROSES table half is done** (P8); only this remains |
-| **`program_taxonomy` adapter** | **DEFERRED — assigned** | **MEAS-8** | it is re-argued | Downgraded to measured zero in 8.2 and unchanged by P6.2's negative |
+| **NSPIRES open-solicitations list** | **WONTFIX — accepted until falsified** | — | — | MEAS-8 verified transport/TLS but found only a client-driven search shell and no stable public list endpoint; it did not automate the session flow. ROSES is already covered by P8. **Falsifier:** a stable public authoritative list with at least two verifiable net-new current actionable parents |
+| **`program_taxonomy` adapter** | **WONTFIX — accepted until falsified** | — | — | MEAS-8 established zero current actionable parent gain. **Falsifier:** a stable authoritative external child population with at least two current actionable parents not otherwise reachable |
 | **P4's unmet gate — 42% correct acceptance against a 50% threshold** | **CLOSED — reconciled below target** | — | — | Original **5/12 = 42%**; final comparable **5/12 = 42%**, still below the unchanged **50%** target. P7 recovered records outside the frozen twelve but none inside it. The seven misses remain behind prohibited F1, declined coded-list, deliberately narrow F4, unchanged occurrence-selection/depth rules, or another-attachment-plus-declined-code mechanisms. P7 closes on measured dispositions, not by claiming the target passed |
 
 ### 18.0.7 Profile, CV and ORCID — what is built, and what evidence is still owed
@@ -7439,9 +7459,111 @@ threshold or acceptance rule; no backfill or production cache; no production
 extraction, Cov4, scoring, storage, UI or source-adapter change; MEAS-8, P9 and
 P10 not started.
 
+### MEAS-8 — cross-agency residual coverage audit — CLOSED 2026-08-20
+
+**Measurement only.** The outcome-blind frame was generated from committed
+inputs and pushed at commit `16b765f` before source truth was inspected. It
+freezes a 28-record disproportionate stratified probability sample in Arm A and
+17 named hierarchy/source/discoverability cases in Arm B. The arms never share a
+denominator. `tools/run_meas8.py --check` and `tools/build_meas8_results.py
+--check` reproduce the two committed artifacts; live and browser-rank probe
+tools preserve the exact production call order without changing production.
+
+**Arm A result.** Eight records remain unknown at an identified source layer and
+are not zeros: one client-rendered SAM notice, four NYSERDA application shells,
+one NASA source-selection mismatch and two changed JFSP application pages. The
+remaining 20 are measurable.
+
+| Result | Unweighted | Weighted / bounded interpretation |
+|---|---:|---|
+| sampled / measurable / unmeasurable | **28 / 20 / 8** | 849.25 / 933 population-equivalent measurable; 83.75 unknown |
+| truth-positive records | **4 / 20** | 95.571 / 849.25 = **11.25% among measurable** |
+| missed truth-positive records | **3 / 20** | 68.821 / 849.25 = **8.10% among measurable** |
+| record recovery among observed positives | **1 / 4 = 25%** | **27.99%** weighted |
+| child recovery | **9 / 45 = 20%** | 36 adjudicated children missed |
+| full-frame truth prevalence | — | **10.24%–19.22% identification bounds** |
+| full-frame miss prevalence | — | **7.38%–16.35% identification bounds** |
+
+No full-frame point estimate is claimed because every sampled DOE residual and
+the NASA residual were unmeasurable. The one producing record (`343725`) yielded
+9 medium-confidence children; Cov4 made exactly 9 calls with 0 errors and
+accepted all 9. Cov6 still makes all 9 review-only and 0 publishable. The three
+missed records are `362268` (20 cancer topic areas), `363479` (3 educational
+need areas) and `358955` (13 NIST grant programs). They do **not** authorize a
+generic bare-number family: the shapes are unrelated and the existing Fm2
+negative gate remains binding.
+
+**Arm B result.** Every case answers B1 parent capture/currentness, B2 useful
+child recovery and B3 exact-query discoverability in
+`evaluation/meas8_results.json`. The high-value current findings are:
+
+- Office Science: 68 genuine subject children survive DEC-11; all are
+  review-only today; 3/3 parent queries retrieve at ranks 2/6/2.
+- Genesis: 21 top-level challenges recover, but the authoritative workbook has
+  98 deeper focus areas; only 11/98 exact labels retrieve the parent in the top
+  50 and only 3/98 in the top 10.
+- ARPA-E and EERE adapters are healthy: ARPA-E has two current rows, both
+  deduplicated against Grants.gov; EERE has zero current rows.
+- HGEO/NETL has exactly three current official parents, all already captured,
+  and 12 useful topic/subtopic children missed across them (4/5/3).
+- ARPA-H's public official page has 11 current program/initiative/ISO parents,
+  none in the catalog. This is a bounded public-source gap and is not evidence
+  for a general SAM.gov adapter.
+- NASA ROSES' enabled adapter reconciles all 63 current elements; two actionable
+  unmatched elements are refresh-due, not a new adapter gap. NSPIRES transport
+  works but the residual open-list shell exposes no stable server-rendered list.
+- `344592` contains 82 current ARL topic IDs and zero MURI topic truth. MURI is
+  mentioned only as an award mechanism/team exception. MEAS-4 closes; the ARL
+  gap moves to DEC-21; MEAS-6 remains a credentialed human blocker.
+- TDAC recovers 14 high-confidence publishable children; DARPA recovers 4
+  low-confidence review-only children. Their remaining work belongs to P9/P10.
+- AFOSR has 36 ordinary subject portfolios and production recovers zero, but one
+  coded current BAA does not justify a generic family; it is deferred until a
+  second bounded repetition.
+- NOAA's five current BAA parents are captured, have no adjudicated useful
+  internal ordinary-child list, and the three frozen technical queries all rank
+  their parent first.
+
+**Promotion matrix.** Promotion means a due P9.0 decision, not authorization to
+implement.
+
+| Obligation | Evidence | Decision authority | Gate |
+|---|---|---|---|
+| **DEC-19 — ARPA-H public source** | 11/11 current official parents absent | ENGINEERING | stable IDs/dates, all 11 reconciled, deduplicated, 0 false parents |
+| **DEC-20 — HGEO/NETL children** | 3/3 parents captured; 12/12 useful children missed | ENGINEERING | reproduce 4/5/3 from hashed notices with provenance, 0 mechanisms |
+| **DEC-21 — ARL current topics** | 82/82 unique current topic IDs missed | ENGINEERING | exactly 82 with attachment-version provenance, 0 MURI topics |
+| **DEC-22 — Genesis focus depth** | 98/98 deeper focus areas unstored; 87/98 top-50 misses | MIXED | reproduce 21 groups / 98 rows and ≥95/98 top-50 retrieval, then user depth choice |
+
+**Explicit dispositions.** Arm A's unrelated generic missed shapes, the
+NSPIRES list residual, generic Word/OOXML, generic spreadsheet parsing and
+`program_taxonomy` are WONTFIX-until-falsified with the reversal conditions in
+§18.0.6 and the results artifact. AFOSR, Office of Electricity edge mechanisms
+and Nuclear's two-item/industry cases are deferred post-P11 with explicit
+falsifiers. TDAC/DARPA review, storage and indexing are assigned to P9/P10.
+DEBT-6 and DEBT-11 close; DEBT-10's MEAS-8 consumer gate is satisfied while its
+underlying cache-hygiene work remains P9.0-owned.
+
+**No production work occurred.** No parser, family, threshold, acceptance rule,
+source adapter, catalog, ranking, generated site, storage, review or publication
+behavior changed; no cache or backfill was written. The complete artifacts and
+all 28 record-level / 17 case-level adjudications are in
+`evaluation/meas8_results.json`.
+
+**MEAS-8 CLOSED. NEXT: P9.0 — re-key the hierarchy identity model from slug-only
+to canonical `opportunity_id` (`DEC-16`, `BUG-14`, `DEBT-13`) and resolve the
+pre-storage MEAS-8 decisions/correctness obligations before changing storage
+shape.**
+
 ### 18.2 Explicitly deferred
 
 Each line states what is lost. None of this is abandoned; all of it is a later decision made with evidence from A–G.
+
+> **MEAS-8 status correction (8.34).** This section preserves the historical
+> cost arguments below, but §18.0.6 is authoritative for current status. MEAS-4
+> is closed; SAM.gov remains deferred to credentialed-human MEAS-6; the NSPIRES
+> open list and `program_taxonomy` are WONTFIX-until-falsified; generic Word and
+> spreadsheet parsing remain WONTFIX, with Genesis carried only as narrow
+> DEC-22. Do not infer an open MEAS-8 item from the older prose below.
 
 | Deferred | What is lost by deferring it |
 |---|---|
