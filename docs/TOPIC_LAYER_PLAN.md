@@ -3605,7 +3605,7 @@ Legacy labels are translated once, in §18.0.3 — not repeated here.
 | **P6.1** | NASA ROSES structured-source proof | ✅ **complete** 2026-08-18. Gate closed clause by clause against repository evidence: six clauses outright, one with a forward obligation (the Cov4 bypass), one on evidence (§0.5). **Previously-category-(a) records reached: 0** — P6.1 reached the **(e)** population |
 | **P6.2** | DOE Office of Science structured-source test | ✅ **complete 2026-08-21 — a measured negative, and no source was built.** It was the first real test of whether structured/referenced ingestion reaches category (a), and **the population was empty**: 2 Office of Science parents, **both already resolved** by generic parsing, **0** previously category (a), **0** net-new children, **3** non-fundable organizational labels rejected. Evidence: `docs/DOE_SOURCE_INSPECTION.md` |
 | **P6.3** | DoD structured-source test | ✅ **complete 2026-08-22, Army/TDAC only** — exactly what MEAS-7 justified. **1 parent (`345241`), 14 external-only children**, provenance `referenced`, confidence `high`, **0** generic overlap. Health: names the parent, 14 ≥ floor 8. ONR rejected on measurement; **no DoD router, no SAM.gov** |
-| **P7** | Residual generic forms | 🔄 **open; P7.1 and P7.2 complete 2026-08-20, P7.3 next (DEC-11 triggers there).** Every gate ahead of it is passed: Cov4 2026-08-26, P6 measured, **P5 closed 2026-08-27**. Its scope is **defined** by P5's closeout — BUILD `Fm1`/`Fm2`/`Fm3`/`Fm4`, MEASURE FIRST `Fm8`, DEFER `Fm5`, DECLINE `Fm6`/`Fm7` — and its first item **P7.1 is done** — the residual is recomputed and frozen in `evaluation/p7_residual.json`, structured/referenced sources removed **0** records from it, `Fm8` is measured and **DECLINED**, and `Fm3`/`Fm4` turn out to have landed already in `d85e2df`, so **P7.2 reduces to BUG-2**. Recommendation after P7.1: `Fm1` BUILD AS ALREADY PLANNED · `Fm2` BUILD ONLY IF EXISTING GATE PASSES · `Fm5` DEFER · `Fm6` DECLINE · `Fm8` DECLINE |
+| **P7** | Residual generic forms | 🔄 **open; P7.1, P7.2 and P7.3a complete 2026-08-20. P7.3 is BLOCKED on DEC-11 — a `MIXED` decision whose product half is the user's.** Every gate ahead of it is passed: Cov4 2026-08-26, P6 measured, **P5 closed 2026-08-27**. Its scope is **defined** by P5's closeout — BUILD `Fm1`/`Fm2`/`Fm3`/`Fm4`, MEASURE FIRST `Fm8`, DEFER `Fm5`, DECLINE `Fm6`/`Fm7` — and its first item **P7.1 is done** — the residual is recomputed and frozen in `evaluation/p7_residual.json`, structured/referenced sources removed **0** records from it, `Fm8` is measured and **DECLINED**, and `Fm3`/`Fm4` turn out to have landed already in `d85e2df`, so **P7.2 reduces to BUG-2**. Recommendation after P7.1: `Fm1` BUILD AS ALREADY PLANNED · `Fm2` BUILD ONLY IF EXISTING GATE PASSES · `Fm5` DEFER · `Fm6` DECLINE · `Fm8` DECLINE |
 | **P8** | NASA ROSES Catalog Source | ✅ **complete** 2026-08-20, own gate passed, **no open items** (§18.1). A **catalog-completeness branch**, not subtopic recall. The adapter is enabled and reconciles all **63** elements every refresh; the catalog-completeness gap is **closed** — the 2 actionable unmatched elements are emitted (**+0.136%**) and the other **51** stay inventory-only. Native identity `(cycle, code, title)` and the cross-source ambiguity rule were audited against the live source in P8.2a |
 | **P9** | Storage and scoring | ⛔ **not started.** **P9.0 must run before anything writes a cache** |
 | **P10** | Retrieval and UI | ⛔ **not started** |
@@ -3680,6 +3680,8 @@ it as **P8**, sequenced after P6.1 and before P6.2. **DEC-0** (`MAX_TERMS` stays
 | **DEBT-11** | **The stratified sampling instrument is not committed.** `pick50.py`, `attach_meta.jsonl`, `build_prompts.py`, `family_verdict.py` and `yields2.py` are all one-shot probes, and the committed caches keep only `attachment_count` — no per-attachment metadata. Cov7 therefore could not reproduce the prior frame and had to rebuild it from **815 live detail fetches**, and could exclude only the **107** record ids the documents happen to name, not the taxonomy's full 50-record draw | Every future stratified read pays the same cost and inherits the same imperfect exclusion set. Committing `attach_meta.jsonl` alone would fix both |
 | **DEBT-12** | **A no-primary record's own announcement is labelled `source_kind: secondary_attachment`.** Carried forward from Cov6, which found it and deliberately did not fix it. Harmless to Cov4 today — both attachment kinds are owned-by-binding in `ATTACHMENT_KINDS`, so ownership is unaffected — and Cov7 confirmed it blocks no measurement. **Classification deferred to the P5 closeout obligation audit**: `BUG-*`, `DEBT-*`, or explicit harmless/WONTFIX | Verified on `363526`, whose winning document is its own `NOFOAFRLAFOSR20260004 DEPSCoR-RC.pdf` |
 | **DEBT-8** | `structural_siblings` is blind to **55% of the corpus's PDFs** (71 of 129 carry no bookmarks) | A measured limitation of the mechanism, not a defect in it (§6.3a). **P7.1 sharpened it**: 12 of its 19 residual records *have* bookmarks and still miss |
+| **BUG-13** | ~~`is_administrative` substring-matches "format" inside "information"~~ ✅ **CLOSED 2026-08-20 (P7.3a)** — one leading word boundary; five real DOE QIS programme titles recovered | §18.1 P7.3a |
+| **BUG-14** | **A placeholder `funding_opportunity_url` is treated as a record's announcement, so `_demote()` caps its own notice at `low`.** Found P7.2, diagnosed P7.3a on `363526` (`https://www.grants.gov/`) | Owner **P9.0**; status in §18.0.6 |
 | **DEBT-13** | **The ROSES adapter's `native` children never reach the production subtopic path** — `subtopic_children` is called only from tests and `tools/run_cov4_validation.py`. Found at P7.1 while establishing what "already covered by a structured source" means today | Latent, same shape as **BUG-12**; both bite when P9 wires the merge. Status and owner in §18.0.6 |
 | **DEBT-9** | ~~No candidate span population is committed anywhere.~~ ✅ **CLOSED 2026-08-24.** `evaluation/meas3_population.json` is a frozen **post-Cov5** population — **105 candidates** from four accepting records — built by `tools/build_meas3_population.py` from committed evidence (pinned URL **and** `sha256`, verified on fetch) through the unmodified production path, and pinned by 15 tests in `tests/test_meas3_population.py`: canonical ordering, byte-identical round trip, semantic input carried inline so classification needs no network, arms separately identifiable. **This does not recover §11's 114 spans** — those are gone and Cov5 changed extraction — it stops the loss recurring | ✅ closed |
 
@@ -3824,7 +3826,8 @@ P7, because that is where it falls in the ordered path (§18.0.4).
 
 - [x] **P7.1. Recompute the residual, and give `Fm8` a denominator** — ✅ **done 2026-08-20**, `evaluation/p7_residual.json`, `tools/p7_frame.py`, `tools/p7_residual_report.py`, 51 tests. **Structured/referenced sources removed 0 records**; `Fm2` ~31 → ~21, `Fm6` random observations 2 → 1, `Fm1` 10 → 9 residual, `Fm5` unchanged, **`Fm8` measured and DECLINED**. `no_extractable_text` reported for DEC-10 **without deciding it**; both required fixtures pinned. **Read §18.1 P7.1 before starting any item below — the yields there supersede the ones in this list.**
 
-- [ ] **Fm1. F4 — named / bulleted, no counter** — 9 of 90 · **~73**, or ~22 excluding one stratum-E observation. `label_run` (§6.3a) plus a bulleted variant. Highest false-positive risk in the plan; `362233`'s five real Focus Areas sit one subsection above five decoy process bullets. **Do not build on structure alone**
+- [x] **P7.3a — BUG-13, and DEC-11's evidence.** ✅ **done 2026-08-20.** `is_administrative` now matches at a word start, recovering five real DOE Quantum Information Science titles; every accepting document span-identical. DEC-11's three cases read from source and briefed: `(n)` PPP is a selectable **mechanism container** with its own application process and award instrument, `358380`'s tracks are **degree-delivery pathways**, and `361876` is **not the same question** — five genuine subjects plus one exclusions heading, rejected today by §6.4 rule 8 at 0.100 against a 0.07 ceiling. **DEC-11 awaits the user**; recommendation Option A for P7, C as the destination
+- [ ] **Fm1. F4 — named / bulleted, no counter** — **BLOCKED on DEC-11** (§18.1 P7.3a). 9 of 90 · **~73**, or ~22 excluding one stratum-E observation; residual **8 records / 45 children** after P7.2. `label_run` (§6.3a) plus a bulleted variant. Highest false-positive risk in the plan; `362233`'s five real Focus Areas sit one subsection above five decoy process bullets. **Do not build on structure alone**
 - [ ] **Fm2. F1 — bare numbered** — 8 of 90 · ~31, the most stable uncovered row. **Blocked by §18.3a's four exit criteria — read them first.** Needs grouped restarting counters (`330175`) and title extraction that survives a trailing em-dash clause (`355150`)
 - [x] **Fm3. Repair `dod_topic`'s ordinal group** — widen `(\d{1,2})` to letters so `Topic A1`–`A7` matches (`356612`). **ALREADY LANDED in `d85e2df`, 2026-08-17**, and verified live at P7.1: `356612` returns 7 correct spans, family `dod_topic`. This box was unchecked because §8.9's note recorded the work and the checklist did not
 - [x] **Fm4. Repair `thrust`'s granularity** — it matched the container `Thrust Area 1`, not the seven topics under it. **ALREADY LANDED in `d85e2df`**: `dod_topic` now sits above `thrust` and a negative lookbehind restores the `research_thrust` boundary. Verified live at P7.1 by the same run
@@ -4515,7 +4518,7 @@ P4.3, P4.6 …).
 | 7 | **Cov6** — publication semantics and `_demote()` | ✅ **complete 2026-08-27.** §7.1's rule implemented as the one authority; the four concepts separated; a tier-only fail-closed hole closed; `_demote()` narrowed to its measured risk. **No generic child auto-publishes** — the review queue, not the catalog, is where Cov4's 28 land |
 | 8 | **Cov7** — 30 more stratum-D reads | ✅ **complete 2026-08-27**, MEAS-2 delivered. 2 misses in 30 (**F4 bulleted** at DARPA, **`Priority Area N`** at State), D re-estimated to point 10 / band 3–75, F5 re-sized ~40 → ~12. **P5's items are all done; its closeout is next** |
 | 9 | **P5 closeout** — package gate, coverage reconciliation, P7 definition, obligations register | ✅ **complete 2026-08-27. P5 CLOSED.** All five gate clauses pass; final estimate **~141 records (9.5%), band 50–443**; **§18.0.6** opened as the canonical Open Obligations Register |
-| 10 | **P7** — residual generic forms, scope defined by P5's closeout | **OPEN, and P7.1 is ✅ complete 2026-08-20** (§18.1 P7.1, `evaluation/p7_residual.json`). Structured/referenced sources removed **0** records from the generic residual; what moved the yields is the current generic model plus a repair already in the code. `Fm2` **~31 → ~21** · `Fm6` random observations **2 → 1** · `Fm1` **10 → 9 residual**, its one loss unreachable rather than covered · `Fm5` unchanged · **`Fm8` measured and DECLINED — P7.5 is not scheduled**. **P7.2 ✅ complete 2026-08-20**: BUG-10 closed at its trigger (the guess is gone from *both* call sites, and the one the register named was not the one that fired) and BUG-2 closed with a real validating document, which recovered **3 children in 2 records** and moved `Fm1`'s residual to **8 records / 45 children**. **Next: P7.3 `Fm1`** — and **DEC-11 (`MIXED`) triggers inside it**, so that session produces a decision brief and stops before `Fm1`'s acceptance rule admits its first named/bulleted set. Then P7.4 `Fm2` behind §18.3a's four unwaived exit criteria |
+| 10 | **P7** — residual generic forms, scope defined by P5's closeout | **OPEN, and P7.1 is ✅ complete 2026-08-20** (§18.1 P7.1, `evaluation/p7_residual.json`). Structured/referenced sources removed **0** records from the generic residual; what moved the yields is the current generic model plus a repair already in the code. `Fm2` **~31 → ~21** · `Fm6` random observations **2 → 1** · `Fm1` **10 → 9 residual**, its one loss unreachable rather than covered · `Fm5` unchanged · **`Fm8` measured and DECLINED — P7.5 is not scheduled**. **P7.2 ✅ complete 2026-08-20**: BUG-10 closed at its trigger (the guess is gone from *both* call sites, and the one the register named was not the one that fired) and BUG-2 closed with a real validating document, which recovered **3 children in 2 records** and moved `Fm1`'s residual to **8 records / 45 children**. **P7.3a ✅ complete 2026-08-20**: **BUG-13 closed** and **DEC-11's bounded evidence read and briefed** (§18.1 P7.3a). All three named cases characterised from their sources; Case C (`361876`) is **removed from DEC-11's evidence base** as a contamination problem rather than a boundary one. **P7.3 is BLOCKED on DEC-11**, which is `USER`'s half of a `MIXED` decision — recommendation **Option A for P7, Option C as the destination**. **BUG-14** opened. Then P7.4 `Fm2` behind §18.3a's four unwaived exit criteria |
 | 11 | **MEAS-8** — cross-agency residual coverage audit | **pinned here deliberately: P7 → MEAS-8 → P9.** MEAS-8's own wording is *"after the generic subtopic model is substantially working"*, so it must evaluate the model we intend to ship rather than an intermediate one — and P9 must design storage for a measured model, not an unmeasured one. It inherits **DEBT-11**'s frozen-artifact requirement and must re-derive rather than trust **DEBT-10**'s field |
 | 12 | **P9 / P9.0** — subtopic-aware storage and scoring | due `DEC-*` resolve here: **DEC-16 (USER)**, DEC-2, DEC-8, DEC-12; **BUG-12**, DEBT-4, DEBT-5, DEBT-10, DEBT-12 |
 | 13 | **P10** — retrieval and UI | **MEAS-9** post-P9 manual-profile / CV / ORCID relevance regression, including the real ORCID validation · **MEAS-10** the multi-researcher pilot · MEAS-5 · retrieval and UI work · due `DEC-*`: DEC-3, DEC-4, DEC-5, DEC-6, DEC-7 (USER), DEC-9 (USER), DEC-14 |
@@ -4656,8 +4659,9 @@ reopened to add one.
 | **BUG-7** | The hermetic §0.5 gate was date-dependent | **CLOSED** | — | — | Fixed 2026-08-18 (`d735142`) |
 | **BUG-9** | The aggregating-agency page fabricated another opportunity's children | **CLOSED** | — | — | Fixed 2026-08-26 by Cov4's deterministic ownership guard, enforced at the production call site and regression-tested through two paths |
 | **BUG-10** | Cov5's residual — the `page_start_offset` fallback is silent | **CLOSED** | — | — | **Fixed 2026-08-20 in P7.2** (`a9190ef`), at its trigger, because BUG-2 is the widening. **This row and §6.5 were both wrong about it twice**: the fallback lived at **two** call sites and the one that fires is `_candidates_from`, not `_locate_nodes`, and it fires **6 times in 152 documents** with **4 wrong guesses kept**, not zero. Invariant: *a title-location failure never yields a substitute offset* — structural sets fail whole per **§6.4a rule 2a** (the old code trimmed), ordinal hits drop as they always did, and both are reported as `diagnostics["unlocated_headings"]`. **No `DEC-*` needed**: an existing rule settled it. Measured effect on the corpus: **zero spans changed**; `360678` still 69, all six Cov5 cases aligned. 7 direct tests |
-| **BUG-13** | **`is_administrative` substring-matches "format" inside "information"**, so a real programme title containing *Information* is flagged administrative | **OPEN — assigned** | **P7.3** | **`Fm1`'s set-level rule is designed** | **Found at P7.2** (2026-08-20). Five real DOE programme titles in `360678` are flagged — Quantum Information Science across **BES, FES, HEP and NP**, so this is four program offices rather than one field (§17.9). **Costs nothing today**: 5 of 69 is under §6.3a's 0.25 set-level veto and none of their ancestors carries the word, so all five are still emitted. **Fatal on a small set** — three QIS programmes in a twelve-item list would delete the whole list. A false-**negative** surface. Not fixed in P7.2, which is a punctuation-and-alignment repair; widening a veto needs its own measurement |
-| **BUG-11** | `nasa_roses._amendment_of` searches the fetched HTML, the ROSES source's diagnostics are trusted operationally | **Diagnostics only** — it does not affect emission, identity, currentness or any gate, which is why P8 closed with it open |
+| **BUG-13** | **`is_administrative` substring-matched "format" inside "information"**, so a real programme title containing *Information* was flagged administrative | **CLOSED** | — | — | **Found at P7.2** (2026-08-20). Five real DOE programme titles in `360678` are flagged — Quantum Information Science across **BES, FES, HEP and NP**, so this is four program offices rather than one field (§17.9). **Costs nothing today**: 5 of 69 is under §6.3a's 0.25 set-level veto and none of their ancestors carries the word, so all five are still emitted. **Fatal on a small set** — three QIS programmes in a twelve-item list would delete the whole list. A false-**negative** surface. **Fixed 2026-08-20 in P7.3a** (`1f3955d`): one leading word boundary, plus `basic information` as a phrase so §6.3a's admissible-node count stays at exactly 90 / 16-71-3. The trailing side is left open on measured grounds — a trailing `\b` would stop flagging 13 further genuinely-administrative `360678` headings. Every accepting document is span- and title-identical; `360678` still 69. **Residual, reported not fixed:** `\bformat` still matches *Formation*, unobserved in the corpus; closing it needs a suffix whitelist |
+| **BUG-14** | **A placeholder agency URL is treated as a record's announcement, so `_demote()` caps the record's OWN notice at `low`.** For the 685 records `source_for_record` declines, Cov1's `subtopic_only_primary` hands `funding_opportunity_url` to `best_segmentation` as the primary document; `_announcement_url` then returns it; and every real attachment is "secondary" to it | **OPEN — assigned** | **P9.0** | **§7.1's merge reads `confidence`, or any subtopic cache is committed carrying one** | **Found in P7.2, diagnosed in P7.3a — and P7.2's guess was wrong.** The cause is not a redirected URL. **`363526`'s `funding_opportunity_url` is literally `https://www.grants.gov/`**, the site's home page, so its own `NOFOAFRLAFOSR20260004 DEPSCoR-RC.pdf` is judged secondary to it and demoted. Measured three ways on one document: `segment_document` on that file alone returns **`high`**, Cov6's `segment_without_primary` re-run measured **`medium`**, and the production Cov1 path returns **`low`**. It contradicts `_announcement_url`'s own docstring — *"`None` means the record has no announcement at all — neither designated nor supplied"* — because Cov1 supplies one that is not an announcement. **Confidence gates review versus publication through `publication_eligibility`, so this first becomes consequential where P9.0 wires the merge**; same gate family as **BUG-12**, and they should be fixed together. **Not a P7 item**: P7 builds recognisers, and Cov6 is closed |
+| **BUG-11** | `nasa_roses._amendment_of` searches the fetched HTML, but the amendment number lives in the resolved URL | **OPEN — assigned** | **P11** | the ROSES source's diagnostics are trusted operationally | **Diagnostics only** — it does not affect emission, identity, currentness or any gate, which is why P8 closed with it open |
 | **BUG-12** | **The ROSES adapter assigns no `confidence` to its `native` children**, so §5.1's `high` ceiling is unreachable and `publication_eligibility` returns `tier_None` — a native child cannot publish at all | **OPEN — assigned** | **P9.0** | the §7.1 merge admits `native` children | **Found at this closeout** while reading clause 3's publishable set. Harmless today because nothing merges subtopics; it becomes a silent total suppression of the ROSES children the moment P9 wires the merge. §5.1 says a `native` parse that fails its structure checks *"is a failed parse and publishes nothing"* — the adapter runs `check_health` but never passes an earned confidence through |
 | *(no ID)* | Agency-HTML scrapers fail silently — HTTP 200, zero rows | **not an obligation** | — | — | A **§12 risk**, not a defect in this project's code, mitigated by §7.4 canaries. Recorded here so a future sweep does not re-file it as a bug |
 
@@ -6559,6 +6563,276 @@ touched; no OCR, Word, spreadsheet or SAM.gov work; P6/P8 adapters untouched;
 Cov4's prompt/model/`R`/ownership guard and Cov6's predicate untouched; §0.5 not
 re-frozen; Cov5's loose matcher unchanged; no threshold moved; no other family
 widened.
+
+##### P7.3a — BUG-13 fixed, and DEC-11's evidence read, 2026-08-20
+
+**Pre-implementation only. `Fm1` is not started.** Two substantive items: BUG-13
+narrowly, and the bounded evidence §18.0.6's `MIXED` rule requires before DEC-11
+can be put to the user.
+
+**Obligation check at package start.**
+
+| Obligation | Trigger | In P7.3a? |
+|---|---|---|
+| **BUG-13** | before `Fm1`'s set-level rule is designed | **yes — fixed and closed** |
+| **DEC-11** (`MIXED`) | P7.3, before `Fm1`'s first named/bulleted set is admitted | **yes — bounded evidence gathered, brief below, NOT decided** |
+| **DEBT-8** | `Fm1` is designed | read only as a constraint on `Fm1`; broader bookmark/reachability questions untouched |
+| **DEC-10** | P7 closeout | no |
+| **§18.3a** / `Fm2` | P7.4 | no |
+
+---
+
+#### BUG-13 — closed
+
+**Root cause.** `ADMINISTRATIVE_RE` was an unanchored alternation, so `format`
+matched inside *in-format-ion*. Five real DOE programme titles in `360678` were
+flagged administrative — Quantum Information Science in **BES, FES, HEP and NP**,
+four program offices rather than one field (§17.9). §6.3a's veto rejects a whole
+sibling set once **0.25** of its titles look administrative, so at 5 of 69 this
+cost nothing and on a twelve-item list carrying three QIS programmes it would
+have deleted the list outright.
+
+**Fix.** One leading word boundary — `\b(?:` … `)` — so a term matches at a word
+start and never inside an unrelated word.
+
+**The trailing side is deliberately left open, and the corpus is the reason.**
+These terms are stems that must still reach their inflections. Measured on
+`360678`, adding a trailing `\b` as well would stop flagging **13 further
+headings**, every one genuinely administrative — `A. Preliminary Submissions`,
+`Required Certifications`, `Renewal Applications`, `Improper Contents of
+Applications`, `14. Funding Restrictions`, `Registering in Grants.gov`,
+`8. Identification of Merit Reviewer Conflicts`. That would trade one false
+negative for a worse set of them. Those thirteen are now a test.
+
+**One vocabulary change, and it was necessary.** `basic information` joins
+`other information` as a phrase. `I. Basic Information` was reached *only* by the
+`format` accident; without a phrase to replace it, that section's six children —
+`Executive Summary`, `Funding Details`, `Key Facts`, `Key Dates` — become
+**admissible** parents for §6.3a, a new false-**positive** surface in the
+direction §18.3 calls expensive:
+
+| Variant | administrative titles | admissible nodes | depths |
+|---|---|---|---|
+| before | 114 | 90 | 16 / 71 / 3 |
+| leading `\b` only | 106 | **96** | **22** / 71 / 3 |
+| leading `\b` + the phrase | 107 | **90** | **16 / 71 / 3** — today exactly |
+
+**Regression: every document in the P7.1/P7.2 cache that accepts anything is
+span-for-span and title-for-title identical**, including `360678` at **69 spans**
+and both FEMA CTP records at 3. `format` still catches both headings it exists
+for — `IV. Application Contents and Format` and `23. Portable Document Format
+(PDF) Generation`.
+
+**Residual, measured and reported rather than fixed.** A leading boundary does
+not stop a term matching a word it is a *prefix* of, so `\bformat` still matches
+*Formation*. **No such title exists in `360678`** — its 13 `formation`
+occurrences are all `Information` — so this is unobserved rather than
+harmless-by-luck. Closing it needs a per-term inflectional suffix whitelist,
+which is the classifier redesign this session is scoped out of. Falsifier: one
+real programme title carrying *Formation*, or *Formats* as a subject.
+
+---
+
+#### DEC-11 — the bounded evidence, read from the sources
+
+**The three cases the plan names, and nothing wider.** Source facts first; the
+product question is separated below, because §18.0.6's `MIXED` rule is precisely
+that engineering evidence may characterise the class and may not choose it.
+
+##### Case A — `(n) Public-Private Partnerships`, `360678` page 85
+
+| Fact | Reading |
+|---|---|
+| position | outline **level 2**, chain `III. Program Description` → `4. Fusion Energy Sciences (FES)` |
+| siblings | **14th of 14** under that parent. The other 13 are unambiguous research subjects — `(a) Theory & Simulation`, `(c) Fusion Materials and Internal Components`, `(f) Inertial Fusion Energy`, `(j)`–`(m) Plasma Science and Technology—…` |
+| does an applicant apply against it? | **yes, explicitly**: *"Applicants must contact the relevant subprogram contact listed below before submitting an application **under the PPP program**"* |
+| is it a technical/research subject? | **no, by its own words**: *"Public-private partnerships (PPPs) **enable greater resources to be applied** to help achieve technical goals and accelerate commercialization timelines… Within the PPP space, **multiple avenues exist** for the public and private sector to cooperate on **research of mutual interest**."* It is a container for research, not a research area |
+| is it a mechanism? | **yes** — and the section names three of them, each with its own scope, contact and *award machinery*: **INFUSE** (*"Partnership awards … follow a **unique application process**"*), the **Milestone-Based Fusion Development Program** (*"DOE may award **Other Transactions (OT)** agreements via **Technology Investment Agreements**"*), and the **Private Facilities Research Program** |
+| distinct scope / funding / contact / application treatment? | **all four.** Its own appropriations caveat (*"All activities in this space are contingent on future appropriations"*), its own contacts (Colleen Nehl ×2, Josh King — distinct from `(m)`'s Riq Parra), and a different application process and award instrument from its 13 siblings |
+
+**So the factual answer to the sentence §13 said one reader could settle: it is a
+mechanism through which any subject may be funded, and it is also genuinely
+selectable.** Both halves are true, which is why this is a policy question and
+not a reading error. One further fact the brief needs: `(n)` is a
+**mechanism-level container one level above three named, separately-administered
+programmes**, so if mechanisms are ever represented, `INFUSE` / `Milestone` /
+`Private Facilities` are the better-shaped children, not `(n)` itself. *(No model
+verdict was used; §13's rule that a classifier may not settle this label is
+observed.)*
+
+##### Case B — `358380`, "one of the following program tracks"
+
+Found in `H08 Application Instructions 20260319.pdf`, inside the **RETENTION
+SCHOLARSHIP** section:
+
+> *"The Institutions will provide a technical approach that communicates **one of
+> the following program tracks**. … 1. Two-Year Community College Program
+> 2. DoW Partnership Transfer Credit Programs 3. Graduate Certificate Program"*
+
+| Fact | Reading |
+|---|---|
+| what they are | **degree-delivery pathways** for DoW-selected students. The applicant is an **institution**, not a researcher |
+| selectable? | **yes** — one of three, stated by the notice |
+| research subjects? | **no.** What follows them is credit hours, months to degree completion, prerequisites, and on-campus versus distance learning |
+| what changes on selection | the institution's *delivery model*. No separate ceiling, no separate deadline, no separate award instrument |
+| where they sit | **nested inside one section of one scholarship type**, not at the notice's top level. The record's own money is split elsewhere and by activity — *Faculty / Curriculum / Facility Development $150,000 · INSuRE Summer Camps $125,000 · Community Cyber Outreach $125,000 · DoW CSA Boot Camp $500,000* |
+
+**So Case B is a weaker instance of the same class than Case A**: selectable, not
+a research subject, and — unlike `(n)` — carrying no distinct funding or
+application machinery. Cov7 recorded it as unresolved and declined to count it;
+that remains the right treatment of the *count* whichever way the policy goes.
+
+##### Case C — `361876`, and it is **not** the same question
+
+`SCMP NOFO`, outline `3.3 Project Area Types` (level 1) with six level-2
+children:
+
+```
+3.3.1 Food safety
+3.3.2 Plant Pests and Disease
+3.3.3 Research
+3.3.4 Crop-specific projects Addressing Common Issues
+3.3.5 Marketing and promotion
+3.3.6 Projects and Activities Not Eligible for Funding
+```
+
+| Question | Answer |
+|---|---|
+| one coherent choose-among list? | **the first five are**, and the parent says so: *"Multi-state partners must develop projects that … address the needs of specialty crop growers **in the areas described below**"* |
+| does it mix in furniture? | **yes, exactly one member.** `3.3.6` is the **negation** of the list: *"Projects are **not eligible** for funding if the proposed activities: Duplicate the content of food safety training curricula…"* |
+| should the set be a candidate child structure at all? | **yes, minus that member.** All five are research/programmatic subjects; none is a mechanism or a track |
+| same policy class as A and B? | **No.** No mechanism, no pathway, no applicant category is involved |
+
+**What the current code does with it, measured:** depth 2 selects exactly those
+six nodes, all six locate, and the set is refused by **§6.4 rule 8**, the
+process-vocabulary veto — **not** by the `is_administrative` set veto, which sees
+1 of 6 = 0.167 against 0.25. The arithmetic is stark:
+
+| Set | process tokens | rate | rule 8 ceiling |
+|---|---|---|---|
+| all six | `eligible`, `fund` | **0.100** | 0.07 → **rejected** |
+| the five | — | **0.000** | 0.07 → passes |
+
+> **One exclusions heading rejects five genuine project-area types.** That is
+> §6.4b's case, word for word — *admit the set, then classify its members
+> individually* — and it is a **contamination** problem, not DEC-11's boundary
+> problem. **Case C should be removed from DEC-11's evidence base**: it belongs to
+> `Fm1`'s span-level admission and Cov4, and using it to argue a policy option
+> would confuse two different failures. It also means §11's held-out label for
+> `361876` is answerable on reading: the *set* is legitimate and `3.3.6` is the
+> contaminant, which is what one of the four model runs said and three did not.
+
+##### The three layers, kept apart
+
+| | Case A `(n)` PPP | Case B `358380` tracks | Case C `361876` |
+|---|---|---|---|
+| **what the document is** | selectable mechanism container with its own process and instrument | selectable delivery pathway inside one section | five genuine subjects + one exclusions heading |
+| **what the code does today** | emitted as 1 of `360678`'s 69 spans, `inferred`/`medium`, review-gated | never reached — no family, no accepted set | whole set rejected on rule 8 |
+| **what product policy must decide** | is a mechanism a child? | is a non-research selectable a child? | **nothing** — this is a rule question |
+
+##### Options
+
+**Option A — subject-only children.** A child represents a research or
+programmatic **subject** subdivision. Mechanisms, partnership modes, degree
+pathways, tracks and applicant categories are excluded *even when selectable*.
+
+**Option B — any meaningful selectable sub-opportunity.** A child represents any
+choice an applicant selects under the parent, provided it has distinct
+application consequences.
+
+**Option C — typed hybrid.** Subjects are ordinary subtopics; other genuinely
+selectable structures are admitted **only** when carried as a distinguishable
+*type* rather than presented as a research topic.
+
+##### Consequences, per option
+
+| | **A — subject only** | **B — any selectable** | **C — typed hybrid** |
+|---|---|---|---|
+| `(n)` Public-Private Partnerships | **excluded.** `360678` goes 69 → 68 spans | **included** as a topic card | admitted **as `mechanism`**; and its three sub-programmes are the better children |
+| `358380` program tracks | excluded | **included** — three degree pathways become children of a cyber-education record | admitted as `track` |
+| `361876` | **unaffected in all three** — it is a rule question, not a policy one | unaffected | unaffected |
+| `Fm1`'s **structural** acceptance rule | **unchanged** | unchanged | unchanged |
+| what actually changes | **Cov4's per-span criterion.** F4 has no counter and no label, so structure cannot tell a subject from a mechanism; only §6.4b's span-level judgment can | same mechanism, looser criterion | same, **plus** a type output |
+| Cov4 contract | **must be narrowed**: today the prompt asks for *"subdivisions an applicant chooses among"*, which is choosability, not subjecthood | **must be widened or at least clarified** — see the instability below | **new output field** required |
+| recall effect | smallest. 1 of 69 measured spans today; unknown-but-small on `Fm1`'s 8 residual records, none of which is *known* to carry a mechanism-shaped member | largest | between the two |
+| false-positive / confusion risk | lowest. A child card means one thing | highest: a PI reads *Graduate Certificate Program* as a topic with a deadline and a page anchor (§18.3's asymmetry) | low **once typed**; equal to B until then |
+| meaning of `subtopic` | unchanged, and made explicit | **widened** — from *fundable research/programme area* to *selectable sub-opportunity* | **split into two kinds** |
+| new schema / storage / UI | **none** | none required, but the card is ambiguous with no way to say so | **yes**: a `subtopic_kind` field (§5.1 has none), sidecar storage (DEC-1/P9), a UI affordance (P10), and a scoring answer for whether a mechanism child ranks against research text (P9) |
+| implementable inside P7? | yes | yes | **no** |
+
+**Two findings that bear on the choice and are not opinions.**
+
+1. **Cov4 is already unstable on exactly this class, so the decision is needed
+   *before* `Fm1`, not after.** Pre-Cov5 the classifier rejected `(n)` with the
+   reason *"Describes a funding mechanism/partnership type, not a subject"* —
+   Option A's rule, unprompted. Post-Cov5 it accepts the same title while still
+   calling it a *"funding activity"*. §11 measured a 1-in-108 flip rate on
+   byte-identical input, so neither verdict is a label. **Whichever option is
+   chosen, Cov4's fundability prompt needs one clarifying sentence** — and that
+   is a gated change, because MEAS-3's `R=1` licence was measured on the frozen
+   O1 prompt and would need re-validating.
+2. **Option C is not a third choice for P7.** It cannot be built before P9/P10
+   exist, so choosing it still requires an interim policy — exclude until typed
+   (behaves as A) or include untyped (behaves as B). The real question put to the
+   user is therefore *A-now* or *B-now*, with C available as the destination.
+
+##### Recommendation
+
+**Option A for P7, with Option C recorded as the destination.** Four reasons, in
+order of weight:
+
+1. **The architecture already assumes subject text.** A child's `subtopic_terms`
+   map, its `program_area_labels` and its `topic_areas` facet values are all
+   derived from the span's prose (§6.5). A mechanism span's vocabulary is
+   procurement language — *Other Transactions*, *Technology Investment
+   Agreements* — so a mechanism child does not merely look odd on a card, it
+   **injects non-research vocabulary into the retrieval surface** the whole
+   feature exists to improve. That is a concrete cost, not a matter of taste.
+2. **§18.3's asymmetry.** A missing child costs one search that could have gone
+   better; a child a PI misreads as a fundable research area costs weeks.
+3. **It is the smaller Cov4 change.** A narrows an existing question; C adds a
+   new output field and B has to define *"distinct application consequences"*
+   well enough to keep `358380`'s three delivery pathways out while letting
+   `(n)`'s three award instruments in — a line the evidence does not draw for us.
+4. **It composes forward.** Nothing in A forecloses C: the excluded spans are
+   still extracted and still land in the cache with their diagnostics, so P9/P10
+   can type and admit them later without re-reading a single document.
+
+**The cost of the recommendation, stated plainly:** `360678` loses one correct
+span of 69, `358380` stays at zero, and any future notice whose fundable unit
+genuinely *is* a mechanism is unreachable until C exists.
+
+**DEC-11 USER DECISION REQUIRED**
+
+- **Option A — subject-only children** *(recommended for P7)*
+- **Option B — any meaningful selectable sub-opportunity**
+- **Option C — typed hybrid** *(recommended as the destination; needs P9/P10, so
+  it still requires A-now or B-now as the interim)*
+
+**Nothing dependent on this is built.** P7.3 does not start until a later prompt
+records the choice, per §18.0.6 rule 5.
+
+---
+
+**BUG-14 opened**, from P7.2's loose end and with a corrected diagnosis — see the
+register. P7.2 guessed the cause was a redirected attachment URL; it is not.
+`363526`'s `funding_opportunity_url` is literally **`https://www.grants.gov/`**,
+the site's home page, and Cov1's `subtopic_only_primary` hands that to
+`best_segmentation` as the record's primary document. `_announcement_url` then
+returns it, so the record's **own** `NOFOAFRLAFOSR20260004 DEPSCoR-RC.pdf` is
+"secondary to" the Grants.gov home page and `_demote()` caps it at `low`. That
+contradicts `_announcement_url`'s own docstring — *"`None` means the record has
+no announcement at all"* — and it is why a record Cov6 measured at `medium`
+reads `low` through the production Cov1 path. **Not debugged further here, and no
+production code changed for it.**
+
+**Explicitly not done:** `Fm1` not started — no `label_run`, no bulleted
+recogniser, no family code, no acceptance rule, no thresholds touched, no run
+over the residual population, no new fixtures; **DEC-11 not resolved**; DEC-10
+untouched (P7 closeout); `Fm2`/§18.3a untouched (P7.4); Cov4's prompt, model,
+`R` and ownership guard untouched; Cov6's predicate untouched; no backfill; no
+cache written; MEAS-8, P9 and P10 not started; DEBT-8's broader
+bookmark/reachability questions not opened; §0.5 not re-frozen.
 
 #### P9 — Storage and scoring *(legacy Package E)*
 
