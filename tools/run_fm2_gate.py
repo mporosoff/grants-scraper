@@ -387,8 +387,9 @@ def aggregate(frame, documents):
         rows = [by_id[rid] for rid in ids]
         outcomes = [item for row in rows for item in row.get("outcomes", [])]
         return {
-            "documents": len(rows),
-            "document_errors": sum(bool(row.get("error")) for row in rows),
+            "documents_attempted": len(rows),
+            "documents_scanned": sum(not row.get("error") for row in rows),
+            "source_errors": sum(bool(row.get("error")) for row in rows),
             "raw_numbered_candidate_sets": sum(row.get("raw_groups", 0) for row in rows),
             "raw_candidate_spans": sum(row.get("raw_occurrences", 0) for row in rows),
             "structurally_admitted_sets": sum(
@@ -415,12 +416,12 @@ def aggregate(frame, documents):
     groups_330175 = []
     for group in by_id["330175"].get("groups", []):
         if group["selected"]:
-            subject_count = sum(
+            contains_subject = any(
                 normalise_title(title) in truth_titles(frame, "330175")
                 for title in group["titles"]
             )
-            if subject_count:
-                groups_330175.append(subject_count)
+            if contains_subject:
+                groups_330175.append(len(group["titles"]))
 
     title_355150 = {
         row["title"]: row["survived_cov4"]

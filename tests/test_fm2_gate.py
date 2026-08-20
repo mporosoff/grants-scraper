@@ -114,5 +114,42 @@ class FrozenFrameTests(unittest.TestCase):
             self.assertNotIn("run_fm2_gate", source)
 
 
+class CommittedOutcomeTests(unittest.TestCase):
+    """The first frozen run is evidence and must not drift into a pass."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.path = ROOT / "evaluation" / "fm2_gate_results.json"
+        cls.result = json.loads(cls.path.read_text(encoding="utf-8"))
+        cls.summary = cls.result["summary"]
+
+    def test_the_live_run_had_no_classifier_api_errors(self):
+        self.assertEqual(self.summary["api_errors"], 0)
+
+    def test_criterion_2_failed_on_one_cov4_reject_and_one_title_miss(self):
+        self.assertEqual(self.summary["verified_subjects"], 58)
+        self.assertEqual(self.summary["verified_subjects_accepted"], 56)
+        self.assertEqual(self.summary["verified_subjects_cov4_rejected"], 1)
+        self.assertEqual(self.summary["verified_subjects_structurally_missed"], 1)
+        self.assertEqual(self.summary["restart_groups_330175"], [15, 3, 6])
+        self.assertTrue(self.summary["restart_groups_correct"])
+        self.assertTrue(self.summary["title_355150_correct"])
+
+    def test_criterion_3_failed_before_the_seven_source_misses_matter(self):
+        negative = self.summary["category_a_33"]
+        self.assertEqual(negative["documents_attempted"], 33)
+        self.assertEqual(negative["documents_scanned"], 26)
+        self.assertEqual(negative["source_errors"], 7)
+        self.assertEqual(negative["spans_surviving_cov4"], 11)
+        self.assertEqual(negative["publishable"], 0)
+        self.assertEqual(negative["review"], 11)
+
+    def test_the_required_adversarial_surfaces_did_not_survive(self):
+        self.assertEqual(
+            self.summary["b0_administrative"]["spans_surviving_cov4"], 0
+        )
+        self.assertEqual(self.summary["eda_347414"]["spans_surviving_cov4"], 0)
+
+
 if __name__ == "__main__":
     unittest.main()
