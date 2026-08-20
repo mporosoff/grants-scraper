@@ -10,7 +10,7 @@
 
 **Initial audience:** University of Rochester researchers, with a design that remains useful to any public user
 
-**Last updated:** August 10, 2026
+**Last updated:** August 20, 2026
 
 ---
 
@@ -139,6 +139,12 @@ AI output is advisory. It must:
 - call missing data “not listed”;
 - never invent deadlines, amounts, eligibility, or requirements; and
 - direct users to the official notice for final verification.
+
+**Planned in Phase 3E:** document chat will let the user explicitly export an
+already-generated answer or the current transcript as PDF or DOCX, without a
+second model call, and will support cited governing/parent documents with
+explicit provenance and precedence rather than assuming the uploaded notice is
+the complete rule set.
 
 ### 2.5 Explicit device-local profiles, not a local funding database
 
@@ -339,6 +345,10 @@ catalog or a shared institutional record.
 4. If no key is configured, enter and optionally save one in the chat prompt.
 5. Ask document-grounded questions and verify the returned page references in
    the original notice.
+6. **Planned in Phase 3E:** explicitly export a useful answer or current chat as
+   PDF/DOCX, and distinguish rules stated by the notice from rules inherited
+   from governing or supplemental documents. See Phase 3E for the preservation,
+   privacy, provenance, and precedence requirements.
 
 ### Verify an actual FOA
 
@@ -707,6 +717,67 @@ verifiable source evidence in the deployed site, document changes remain
 traceable, and at least one privacy-safe deployment review can be returned to
 the owner and reproduced as a private report.
 
+#### 3E. Document-chat preservation and governing context — planned
+
+This is future document-chat work. It does not change Phase 3D's state or the
+current next implementation phase, and neither capability is implemented yet.
+
+**Export useful chat output.** A NOFO-chat analysis can itself become a useful
+working document; forcing the user to regenerate it later can change the answer
+or lose a useful synthesis. The user must therefore be able to explicitly choose
+at least **Export this answer** or **Export chat**, in either **PDF or DOCX**.
+
+- Export the response already generated; never call a model again to recreate
+  it.
+- Preserve the user's question and AI answer, useful formatting, page/source
+  citations and links, the matched opportunity/document identity, and the
+  document version/hash where already available.
+- Export only on explicit user action. Normal chat and uploaded-notice text
+  remain page-memory only and may disappear on reload; export introduces no
+  automatic server-side persistence.
+- Include only visible chat content plus public/source metadata. Never export
+  API keys or hidden profile/CV context.
+- Library and implementation choices remain open; this section defines behavior,
+  not a PDF/DOCX stack.
+
+**Governing/parent document context.** “Chat with the NOFO” must not assume the
+uploaded child notice contains every rule governing a proposal. The architecture
+must eventually represent an agency-generic relationship such as:
+
+```text
+specific solicitation / NOFO
+       ↓
+applicable governing policy / guide
+       ↓
+applicable supplements / amendments
+```
+
+The relationship may contain zero, one, or multiple governing documents. Each
+document needs explicit authority, provenance, applicability, and precedence;
+the system must not silently concatenate sources into one unattributed answer.
+Answers must distinguish and cite facts from the specific solicitation, facts
+inherited from a governing document, and facts supplied by a supplement or
+amendment. A useful answer can therefore say, conceptually, “The solicitation
+does not state this directly; the applicable governing guide supplies the
+general rule,” or “The guide gives the general rule, but this solicitation
+modifies it; the solicitation-specific instruction controls.”
+
+NSF is the first concrete case. The official
+[PAPPG 24-1 page](https://www.nsf.gov/policies/pappg/24-1) identifies that guide
+as effective for proposals submitted or due on or after May 20, 2024, identifies
+later supplemental policy notices, and states that some program solicitations
+modify the PAPPG's general provisions and that the solicitation guidelines must
+then be followed. Phase 3E must preserve that authority/precedence relationship.
+`PAPPG 24-1` is a motivating example, not a permanently hard-coded version: the
+applicable PAPPG and supplements must eventually be resolved from the proposal
+or solicitation's applicable date and official NSF guidance.
+
+The same architecture must allow analogous agency proposal guides, general
+terms/instructions, umbrella-program guidance, incorporated documents, and
+supplements/amendments elsewhere without asserting that every agency uses the
+same hierarchy. Complete schema and retrieval design are deferred to the future
+implementation package.
+
 ### Phase 4 — Expand the funding universe
 
 Add one maintainable public source at a time, prioritizing gaps reported in the pilot:
@@ -799,6 +870,12 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 - API keys never enter source control, URLs, exports, profile storage, or
   review/evaluation storage. Optional browser credential storage requires an
   explicit save action and has a visible removal control.
+- Document-chat export preserves already-generated visible output; it must not
+  regenerate the answer, and it must exclude API keys and hidden profile/CV
+  context.
+- Governing-document answers retain source-level provenance and explicit
+  precedence; solicitation, governing-guide, and supplement/amendment facts
+  must not be silently merged or cited as though they came from one document.
 - The application remains usable on current mobile and desktop browsers.
 - Every added source has an identified maintenance strategy.
 
@@ -889,3 +966,5 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | July 2026 | Enable NOFO-only ARPA-E and DOE EERE Exchange adapters; keep NASA NSPIRES disabled until a stable public list route exists. |
 | July 2026 | Publish no-account Atom feeds and provide a fail-closed, consent-based weekly digest bundle for a separate private repository; keep public subscriber data out of GitHub Pages. |
 | August 2026 | Resolve unfamiliar research acronyms locally by matching catalog phrases against enabled researcher context; require multiple expansion-term hits and fail closed on ambiguity. |
+| August 20, 2026 | Plan explicit PDF/DOCX export of an already-generated document-chat answer or current transcript, preserving visible questions, answers, citations, links, formatting, and available document identity/version metadata without regeneration, hidden context, or automatic persistence. |
+| August 20, 2026 | Plan agency-generic governing-document context with explicit provenance, applicability, and precedence; use NSF PAPPG 24-1 as the first dated example while resolving the applicable guide and supplements from official guidance rather than hard-coding one version. |
