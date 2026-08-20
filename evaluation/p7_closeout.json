@@ -1,0 +1,1484 @@
+{
+  "schema_version": 1,
+  "purpose": "P7 final production-only gate on the frozen category-(a) negatives",
+  "frame": "evaluation/fm2_gate_frame.json",
+  "frame_sha256": "fec9e8733ef909ddc4a7284b7aa54e9a814eaa4a402520cf160e35238affae0c",
+  "production_cov4_model": "claude-sonnet-5",
+  "production_cov4_repeats": 1,
+  "documents": [
+    {
+      "opportunity_id": "345241",
+      "status": "hash_verified_scanned",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/323211",
+        "name": "DAC BAA W911NF23S0003_20230105 FINAL.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "c711d9732ff2e014963f51601bf65e6020bd3b02f1ca98973666be01046be173",
+        "bytes": 612182,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-07-26T17:56:06.367881Z",
+        "last_seen_at": "2026-08-10T11:21:14.909304Z",
+        "changed_since_previous": false
+      },
+      "extraction": {
+        "method": "pypdf",
+        "page_count": 61,
+        "pages_read": 61,
+        "pages_with_text": 61,
+        "truncated": false,
+        "content_kind": "pdf",
+        "text_characters": 133207
+      },
+      "segmentation": {
+        "method": null,
+        "family": null,
+        "confidence": null,
+        "reason": "no_layer_accepted",
+        "layers_attempted": [
+          "_layer_outline",
+          "_layer_toc",
+          "_layer_headings",
+          "_layer_numbered",
+          "_layer_label_run"
+        ]
+      },
+      "structural_titles": [],
+      "cov4_titles": [],
+      "cov4_diagnostics": {
+        "model": "claude-sonnet-5",
+        "repeats": 1,
+        "offered": 0,
+        "bypassed": 0,
+        "bypassed_provenance": {},
+        "ownership": {},
+        "fundability": {},
+        "published": 0,
+        "dropped": 0,
+        "review": 0,
+        "classifier_calls": 0,
+        "classifier_errors": {}
+      },
+      "publication": []
+    },
+    {
+      "opportunity_id": "355867",
+      "status": "source_hash_drift",
+      "expected_sha256": "1718d38704869909dbc5ce74b17be1ed5584b5b3b2ed7cd51bf8280278b2b666",
+      "received_sha256": "51e647233a695378faf1fb617d06aac41f92216629a748f0fe01809ba7f8f29e",
+      "document": {
+        "url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-DA-25-024.html",
+        "name": null,
+        "source_kind": "agency_notice",
+        "content_type": "text/html;charset=UTF-8",
+        "sha256": "1718d38704869909dbc5ce74b17be1ed5584b5b3b2ed7cd51bf8280278b2b666",
+        "bytes": 113700,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-08-05T12:17:14.658820Z",
+        "last_seen_at": "2026-08-05T12:17:14.658820Z",
+        "changed_since_previous": false
+      }
+    },
+    {
+      "opportunity_id": "356605",
+      "status": "hash_verified_scanned",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/342968",
+        "name": "N0001425SB001.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "999cbcd34332872edfa5afb57709a0515de4072cc835c1c8430f3587c8cf7c27",
+        "bytes": 810412,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-07-26T17:56:06.367881Z",
+        "last_seen_at": "2026-08-10T11:21:14.909304Z",
+        "changed_since_previous": false
+      },
+      "extraction": {
+        "method": "pypdf",
+        "page_count": 74,
+        "pages_read": 74,
+        "pages_with_text": 74,
+        "truncated": false,
+        "content_kind": "pdf",
+        "text_characters": 165893
+      },
+      "segmentation": {
+        "method": null,
+        "family": null,
+        "confidence": null,
+        "reason": "no_layer_accepted",
+        "layers_attempted": [
+          "_layer_outline",
+          "_layer_toc",
+          "_layer_headings",
+          "_layer_numbered",
+          "_layer_label_run"
+        ]
+      },
+      "structural_titles": [],
+      "cov4_titles": [],
+      "cov4_diagnostics": {
+        "model": "claude-sonnet-5",
+        "repeats": 1,
+        "offered": 0,
+        "bypassed": 0,
+        "bypassed_provenance": {},
+        "ownership": {},
+        "fundability": {},
+        "published": 0,
+        "dropped": 0,
+        "review": 0,
+        "classifier_calls": 0,
+        "classifier_errors": {}
+      },
+      "publication": []
+    },
+    {
+      "opportunity_id": "357305",
+      "status": "source_hash_drift",
+      "expected_sha256": "e1e563236db4827200c50b08858756d3ccd827eb3495f4b0778cf00bec3d7dea",
+      "received_sha256": "b0e53185d6c701fe381c610290fc5bf3e14daa029e1dec10c8d80ef4bb41fd26",
+      "document": {
+        "url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-274.html",
+        "name": null,
+        "source_kind": "agency_notice",
+        "content_type": "text/html;charset=UTF-8",
+        "sha256": "e1e563236db4827200c50b08858756d3ccd827eb3495f4b0778cf00bec3d7dea",
+        "bytes": 153408,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-08-03T13:23:20.671443Z",
+        "last_seen_at": "2026-08-03T13:23:20.671443Z",
+        "changed_since_previous": false
+      }
+    },
+    {
+      "opportunity_id": "360261",
+      "status": "hash_verified_scanned",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/349101",
+        "name": "Attachment 1 - List of Provisions and Clauses (BAA)_20Nov2025.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "6fa22f0c3a4f7d41c4193f87c6c1476e2ee17dbcc0b0ea61ba29d04958f3c527",
+        "bytes": 609746,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-07-26T17:56:06.367881Z",
+        "last_seen_at": "2026-08-10T11:21:14.909304Z",
+        "changed_since_previous": false
+      },
+      "extraction": {
+        "method": "pypdf",
+        "page_count": 58,
+        "pages_read": 58,
+        "pages_with_text": 58,
+        "truncated": false,
+        "content_kind": "pdf",
+        "text_characters": 151367
+      },
+      "segmentation": {
+        "method": null,
+        "family": null,
+        "confidence": null,
+        "reason": "no_layer_accepted",
+        "layers_attempted": [
+          "_layer_outline",
+          "_layer_toc",
+          "_layer_headings",
+          "_layer_numbered",
+          "_layer_label_run"
+        ]
+      },
+      "structural_titles": [],
+      "cov4_titles": [],
+      "cov4_diagnostics": {
+        "model": "claude-sonnet-5",
+        "repeats": 1,
+        "offered": 0,
+        "bypassed": 0,
+        "bypassed_provenance": {},
+        "ownership": {},
+        "fundability": {},
+        "published": 0,
+        "dropped": 0,
+        "review": 0,
+        "classifier_calls": 0,
+        "classifier_errors": {}
+      },
+      "publication": []
+    },
+    {
+      "opportunity_id": "362005",
+      "status": "hash_verified_scanned",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/352667",
+        "name": "Foa_Content_of_CPD-2600-DC-0098.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "34ee87a9e299f97cde4bccd0d8f60a5b94b7f1fcbad25473fd2a93b2adaba558",
+        "bytes": 4039349,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-07-27T13:54:21.202946Z",
+        "last_seen_at": "2026-07-27T13:54:21.202946Z",
+        "changed_since_previous": false
+      },
+      "extraction": {
+        "method": "pypdf",
+        "page_count": 107,
+        "pages_read": 107,
+        "pages_with_text": 107,
+        "truncated": false,
+        "content_kind": "pdf",
+        "text_characters": 266679
+      },
+      "segmentation": {
+        "method": null,
+        "family": null,
+        "confidence": null,
+        "reason": "no_layer_accepted",
+        "layers_attempted": [
+          "_layer_outline",
+          "_layer_toc",
+          "_layer_headings",
+          "_layer_numbered",
+          "_layer_label_run"
+        ]
+      },
+      "structural_titles": [],
+      "cov4_titles": [],
+      "cov4_diagnostics": {
+        "model": "claude-sonnet-5",
+        "repeats": 1,
+        "offered": 0,
+        "bypassed": 0,
+        "bypassed_provenance": {},
+        "ownership": {},
+        "fundability": {},
+        "published": 0,
+        "dropped": 0,
+        "review": 0,
+        "classifier_calls": 0,
+        "classifier_errors": {}
+      },
+      "publication": []
+    },
+    {
+      "opportunity_id": "362711",
+      "status": "hash_verified_scanned",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/352807",
+        "name": "W911NF26S0085.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "d6bef068dab6cd0b3f5ae40309b5568f9482848d4cfc92b1b13eb6d5eedf4c78",
+        "bytes": 588013,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-07-27T14:00:11.813891Z",
+        "last_seen_at": "2026-08-10T18:52:06.532562Z",
+        "changed_since_previous": false
+      },
+      "extraction": {
+        "method": "pypdf",
+        "page_count": 30,
+        "pages_read": 30,
+        "pages_with_text": 30,
+        "truncated": false,
+        "content_kind": "pdf",
+        "text_characters": 85758
+      },
+      "segmentation": {
+        "method": null,
+        "family": null,
+        "confidence": null,
+        "reason": "no_layer_accepted",
+        "layers_attempted": [
+          "_layer_outline",
+          "_layer_toc",
+          "_layer_headings",
+          "_layer_numbered",
+          "_layer_label_run"
+        ]
+      },
+      "structural_titles": [],
+      "cov4_titles": [],
+      "cov4_diagnostics": {
+        "model": "claude-sonnet-5",
+        "repeats": 1,
+        "offered": 0,
+        "bypassed": 0,
+        "bypassed_provenance": {},
+        "ownership": {},
+        "fundability": {},
+        "published": 0,
+        "dropped": 0,
+        "review": 0,
+        "classifier_calls": 0,
+        "classifier_errors": {}
+      },
+      "publication": []
+    },
+    {
+      "opportunity_id": "363489",
+      "status": "hash_verified_scanned",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354434",
+        "name": "HR001126S0016.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/octet-stream",
+        "sha256": "8ab8ee60befd85dc43a9107f011571a21194c2add1781ee055571cf65640fbb6",
+        "bytes": 330110,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-08-07T11:07:56.290112Z",
+        "last_seen_at": "2026-08-07T11:07:56.290112Z",
+        "changed_since_previous": false
+      },
+      "extraction": {
+        "method": "pypdf",
+        "page_count": 18,
+        "pages_read": 18,
+        "pages_with_text": 18,
+        "truncated": false,
+        "content_kind": "pdf",
+        "text_characters": 47094
+      },
+      "segmentation": {
+        "method": null,
+        "family": null,
+        "confidence": null,
+        "reason": "no_layer_accepted",
+        "layers_attempted": [
+          "_layer_outline",
+          "_layer_toc",
+          "_layer_headings",
+          "_layer_numbered",
+          "_layer_label_run"
+        ]
+      },
+      "structural_titles": [],
+      "cov4_titles": [],
+      "cov4_diagnostics": {
+        "model": "claude-sonnet-5",
+        "repeats": 1,
+        "offered": 0,
+        "bypassed": 0,
+        "bypassed_provenance": {},
+        "ownership": {},
+        "fundability": {},
+        "published": 0,
+        "dropped": 0,
+        "review": 0,
+        "classifier_calls": 0,
+        "classifier_errors": {}
+      },
+      "publication": []
+    },
+    {
+      "opportunity_id": "334971",
+      "status": "hash_verified_scanned",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/319693",
+        "name": "Foa_Content_of_RFA-OH-22-005.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "ed7b40d5b7f89f5199a89777acb6f6da65752ecf166fe374d9a69d16ef3978c8",
+        "bytes": 941767,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-07-29T12:21:41.359843Z",
+        "last_seen_at": "2026-08-12T13:06:47.726081Z",
+        "changed_since_previous": false
+      },
+      "extraction": {
+        "method": "pypdf",
+        "page_count": 52,
+        "pages_read": 52,
+        "pages_with_text": 52,
+        "truncated": false,
+        "content_kind": "pdf",
+        "text_characters": 144637
+      },
+      "segmentation": {
+        "method": null,
+        "family": null,
+        "confidence": null,
+        "reason": "no_layer_accepted",
+        "layers_attempted": [
+          "_layer_outline",
+          "_layer_toc",
+          "_layer_headings",
+          "_layer_numbered",
+          "_layer_label_run"
+        ]
+      },
+      "structural_titles": [],
+      "cov4_titles": [],
+      "cov4_diagnostics": {
+        "model": "claude-sonnet-5",
+        "repeats": 1,
+        "offered": 0,
+        "bypassed": 0,
+        "bypassed_provenance": {},
+        "ownership": {},
+        "fundability": {},
+        "published": 0,
+        "dropped": 0,
+        "review": 0,
+        "classifier_calls": 0,
+        "classifier_errors": {}
+      },
+      "publication": []
+    },
+    {
+      "opportunity_id": "339728",
+      "status": "hash_verified_scanned",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/317312",
+        "name": "W911NF-22-S-0011 CYCLE 2 Tactical Behaviors FOA Amendment.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "3ac0c24f193b75363285403129cc9bd0e4bc630856516ca9ce3216eee617fd2c",
+        "bytes": 372246,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-07-26T18:37:51.451981Z",
+        "last_seen_at": "2026-08-10T13:58:01.855182Z",
+        "changed_since_previous": false
+      },
+      "extraction": {
+        "method": "pypdf",
+        "page_count": 39,
+        "pages_read": 39,
+        "pages_with_text": 39,
+        "truncated": false,
+        "content_kind": "pdf",
+        "text_characters": 116749
+      },
+      "segmentation": {
+        "method": null,
+        "family": null,
+        "confidence": null,
+        "reason": "no_layer_accepted",
+        "layers_attempted": [
+          "_layer_outline",
+          "_layer_toc",
+          "_layer_headings",
+          "_layer_numbered",
+          "_layer_label_run"
+        ]
+      },
+      "structural_titles": [],
+      "cov4_titles": [],
+      "cov4_diagnostics": {
+        "model": "claude-sonnet-5",
+        "repeats": 1,
+        "offered": 0,
+        "bypassed": 0,
+        "bypassed_provenance": {},
+        "ownership": {},
+        "fundability": {},
+        "published": 0,
+        "dropped": 0,
+        "review": 0,
+        "classifier_calls": 0,
+        "classifier_errors": {}
+      },
+      "publication": []
+    },
+    {
+      "opportunity_id": "348923",
+      "status": "hash_verified_scanned",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/330027",
+        "name": "693JJ323NF00014.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "42f23cd3d47ce03600701d05deedd05db4a353a8621f6067b19469bdfc213f84",
+        "bytes": 300915,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-07-26T18:37:51.451981Z",
+        "last_seen_at": "2026-08-10T13:58:01.855182Z",
+        "changed_since_previous": false
+      },
+      "extraction": {
+        "method": "pypdf",
+        "page_count": 30,
+        "pages_read": 30,
+        "pages_with_text": 30,
+        "truncated": false,
+        "content_kind": "pdf",
+        "text_characters": 62725
+      },
+      "segmentation": {
+        "method": null,
+        "family": null,
+        "confidence": null,
+        "reason": "no_layer_accepted",
+        "layers_attempted": [
+          "_layer_outline",
+          "_layer_toc",
+          "_layer_headings",
+          "_layer_numbered",
+          "_layer_label_run"
+        ]
+      },
+      "structural_titles": [],
+      "cov4_titles": [],
+      "cov4_diagnostics": {
+        "model": "claude-sonnet-5",
+        "repeats": 1,
+        "offered": 0,
+        "bypassed": 0,
+        "bypassed_provenance": {},
+        "ownership": {},
+        "fundability": {},
+        "published": 0,
+        "dropped": 0,
+        "review": 0,
+        "classifier_calls": 0,
+        "classifier_errors": {}
+      },
+      "publication": []
+    },
+    {
+      "opportunity_id": "349976",
+      "status": "source_hash_drift",
+      "expected_sha256": "51a31eafa8ba58ce4787d441ad05312cab1a79ab858633170b8ef13c05dfc140",
+      "received_sha256": "4a440a98dc0d15d653d5bf148cdf2ee560b893fd663e09db97c6ef810e935052",
+      "document": {
+        "url": "https://grants.nih.gov/grants/guide/pa-files/PAR-24-027.html",
+        "name": null,
+        "source_kind": "agency_notice",
+        "content_type": "text/html;charset=UTF-8",
+        "sha256": "51a31eafa8ba58ce4787d441ad05312cab1a79ab858633170b8ef13c05dfc140",
+        "bytes": 117727,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-08-03T13:23:20.671443Z",
+        "last_seen_at": "2026-08-03T13:23:20.671443Z",
+        "changed_since_previous": false
+      }
+    },
+    {
+      "opportunity_id": "356927",
+      "status": "source_hash_drift",
+      "expected_sha256": "afffe4e8edcc8d61096c11a5478748236a965a80f4476f2f91dd10e01f04b464",
+      "received_sha256": "2470aae32547e27051884c083e763bbf64063e31b51a2162f2753de9c919b859",
+      "document": {
+        "url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-210.html",
+        "name": null,
+        "source_kind": "agency_notice",
+        "content_type": "text/html;charset=UTF-8",
+        "sha256": "afffe4e8edcc8d61096c11a5478748236a965a80f4476f2f91dd10e01f04b464",
+        "bytes": 136823,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-08-06T10:33:14.856349Z",
+        "last_seen_at": "2026-08-06T10:33:14.856349Z",
+        "changed_since_previous": false
+      }
+    },
+    {
+      "opportunity_id": "359236",
+      "status": "hash_verified_scanned",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/347995",
+        "name": "W911NF25S0007 Staff Research Program.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "8ffdd6aedd5526639253cb4892a5b1be9f2693e6816218f6da39d88f4e8a96f3",
+        "bytes": 303942,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-07-29T12:21:41.359843Z",
+        "last_seen_at": "2026-08-12T13:06:47.726081Z",
+        "changed_since_previous": false
+      },
+      "extraction": {
+        "method": "pypdf",
+        "page_count": 28,
+        "pages_read": 28,
+        "pages_with_text": 28,
+        "truncated": false,
+        "content_kind": "pdf",
+        "text_characters": 68363
+      },
+      "segmentation": {
+        "method": null,
+        "family": null,
+        "confidence": null,
+        "reason": "no_layer_accepted",
+        "layers_attempted": [
+          "_layer_outline",
+          "_layer_toc",
+          "_layer_headings",
+          "_layer_numbered",
+          "_layer_label_run"
+        ]
+      },
+      "structural_titles": [],
+      "cov4_titles": [],
+      "cov4_diagnostics": {
+        "model": "claude-sonnet-5",
+        "repeats": 1,
+        "offered": 0,
+        "bypassed": 0,
+        "bypassed_provenance": {},
+        "ownership": {},
+        "fundability": {},
+        "published": 0,
+        "dropped": 0,
+        "review": 0,
+        "classifier_calls": 0,
+        "classifier_errors": {}
+      },
+      "publication": []
+    },
+    {
+      "opportunity_id": "359816",
+      "status": "source_hash_drift",
+      "expected_sha256": "0ddf5ceb4fa68c9136183a872d6e31c375baea514c67327d24be3946a67ce8c1",
+      "received_sha256": "79425ee6aa8ee486afe87b9847a0692aa9b06a99a3743d20394cb2fb4f67131a",
+      "document": {
+        "url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-003.html",
+        "name": "PAR-25-003.html",
+        "source_kind": "primary_notice",
+        "content_type": "text/html;charset=UTF-8",
+        "sha256": "0ddf5ceb4fa68c9136183a872d6e31c375baea514c67327d24be3946a67ce8c1"
+      }
+    },
+    {
+      "opportunity_id": "362036",
+      "status": "hash_verified_scanned",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354174",
+        "name": "NOFO_DE-FOA-0003624_IGNIITE 2026_Modification 01.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/octet-stream",
+        "sha256": "8b051570dfaff6bd759c0f6154b0fcd47ad8b3cc8ee2a25a49a83039985fe4b1",
+        "bytes": 683537,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-07-28T12:14:44.323320Z",
+        "last_seen_at": "2026-08-11T14:09:52.126616Z",
+        "changed_since_previous": false
+      },
+      "extraction": {
+        "method": "pypdf",
+        "page_count": 57,
+        "pages_read": 57,
+        "pages_with_text": 57,
+        "truncated": false,
+        "content_kind": "pdf",
+        "text_characters": 141148
+      },
+      "segmentation": {
+        "method": null,
+        "family": null,
+        "confidence": null,
+        "reason": "no_layer_accepted",
+        "layers_attempted": [
+          "_layer_outline",
+          "_layer_toc",
+          "_layer_headings",
+          "_layer_numbered",
+          "_layer_label_run"
+        ]
+      },
+      "structural_titles": [],
+      "cov4_titles": [],
+      "cov4_diagnostics": {
+        "model": "claude-sonnet-5",
+        "repeats": 1,
+        "offered": 0,
+        "bypassed": 0,
+        "bypassed_provenance": {},
+        "ownership": {},
+        "fundability": {},
+        "published": 0,
+        "dropped": 0,
+        "review": 0,
+        "classifier_calls": 0,
+        "classifier_errors": {}
+      },
+      "publication": []
+    },
+    {
+      "opportunity_id": "362070",
+      "status": "hash_verified_scanned",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354145",
+        "name": "HHS-2026-ACF-OCS-ET-0028.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "fa78670c069f07f1c1d1486cdd6a50c2c2f170461db09f410c75b8bfa5d126c8",
+        "bytes": 383297,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-07-27T14:17:05.080489Z",
+        "last_seen_at": "2026-08-10T19:25:21.507676Z",
+        "changed_since_previous": false
+      },
+      "extraction": {
+        "method": "pypdf",
+        "page_count": 62,
+        "pages_read": 62,
+        "pages_with_text": 62,
+        "truncated": false,
+        "content_kind": "pdf",
+        "text_characters": 92949
+      },
+      "segmentation": {
+        "method": null,
+        "family": null,
+        "confidence": null,
+        "reason": "no_layer_accepted",
+        "layers_attempted": [
+          "_layer_outline",
+          "_layer_toc",
+          "_layer_headings",
+          "_layer_numbered",
+          "_layer_label_run"
+        ]
+      },
+      "structural_titles": [],
+      "cov4_titles": [],
+      "cov4_diagnostics": {
+        "model": "claude-sonnet-5",
+        "repeats": 1,
+        "offered": 0,
+        "bypassed": 0,
+        "bypassed_provenance": {},
+        "ownership": {},
+        "fundability": {},
+        "published": 0,
+        "dropped": 0,
+        "review": 0,
+        "classifier_calls": 0,
+        "classifier_errors": {}
+      },
+      "publication": []
+    },
+    {
+      "opportunity_id": "362839",
+      "status": "hash_verified_scanned",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354136",
+        "name": "hhs-2026-acf-ocs-eah-0027.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "f39b9ddba2f7e873650e7e5c4c5df43c610c0df5d0ffe80e9bf149898d1f1fa1",
+        "bytes": 303791,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-07-27T14:09:27.406400Z",
+        "last_seen_at": "2026-08-10T19:25:21.507676Z",
+        "changed_since_previous": false
+      },
+      "extraction": {
+        "method": "pypdf",
+        "page_count": 62,
+        "pages_read": 62,
+        "pages_with_text": 62,
+        "truncated": false,
+        "content_kind": "pdf",
+        "text_characters": 92553
+      },
+      "segmentation": {
+        "method": null,
+        "family": null,
+        "confidence": null,
+        "reason": "no_layer_accepted",
+        "layers_attempted": [
+          "_layer_outline",
+          "_layer_toc",
+          "_layer_headings",
+          "_layer_numbered",
+          "_layer_label_run"
+        ]
+      },
+      "structural_titles": [],
+      "cov4_titles": [],
+      "cov4_diagnostics": {
+        "model": "claude-sonnet-5",
+        "repeats": 1,
+        "offered": 0,
+        "bypassed": 0,
+        "bypassed_provenance": {},
+        "ownership": {},
+        "fundability": {},
+        "published": 0,
+        "dropped": 0,
+        "review": 0,
+        "classifier_calls": 0,
+        "classifier_errors": {}
+      },
+      "publication": []
+    },
+    {
+      "opportunity_id": "362848",
+      "status": "hash_verified_scanned",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353123",
+        "name": "HT9425FY26DMDRPIDA_for GG.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "9e97f5a15a409746b42bbbdabcd2b617dba5ba68f025f1308d589789d3b4aba2",
+        "bytes": 659766,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-07-26T19:41:23.121484Z",
+        "last_seen_at": "2026-08-10T17:34:54.743883Z",
+        "changed_since_previous": false
+      },
+      "extraction": {
+        "method": "pypdf",
+        "page_count": 30,
+        "pages_read": 30,
+        "pages_with_text": 30,
+        "truncated": false,
+        "content_kind": "pdf",
+        "text_characters": 71033
+      },
+      "segmentation": {
+        "method": null,
+        "family": null,
+        "confidence": null,
+        "reason": "no_layer_accepted",
+        "layers_attempted": [
+          "_layer_outline",
+          "_layer_toc",
+          "_layer_headings",
+          "_layer_numbered",
+          "_layer_label_run"
+        ]
+      },
+      "structural_titles": [],
+      "cov4_titles": [],
+      "cov4_diagnostics": {
+        "model": "claude-sonnet-5",
+        "repeats": 1,
+        "offered": 0,
+        "bypassed": 0,
+        "bypassed_provenance": {},
+        "ownership": {},
+        "fundability": {},
+        "published": 0,
+        "dropped": 0,
+        "review": 0,
+        "classifier_calls": 0,
+        "classifier_errors": {}
+      },
+      "publication": []
+    },
+    {
+      "opportunity_id": "363038",
+      "status": "hash_verified_scanned",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353544",
+        "name": "FY 26 FIELDS NOFO 6.30.26 Updated 7.7.26.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "b3810f7e17df65c9ab822161c8f43c40bd79af2b5fe46fb006dc4f13cec5ac41",
+        "bytes": 541765,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-07-27T14:09:27.406400Z",
+        "last_seen_at": "2026-08-10T18:52:06.532562Z",
+        "changed_since_previous": false
+      },
+      "extraction": {
+        "method": "pypdf",
+        "page_count": 29,
+        "pages_read": 29,
+        "pages_with_text": 29,
+        "truncated": false,
+        "content_kind": "pdf",
+        "text_characters": 77024
+      },
+      "segmentation": {
+        "method": null,
+        "family": null,
+        "confidence": null,
+        "reason": "no_layer_accepted",
+        "layers_attempted": [
+          "_layer_outline",
+          "_layer_toc",
+          "_layer_headings",
+          "_layer_numbered",
+          "_layer_label_run"
+        ]
+      },
+      "structural_titles": [],
+      "cov4_titles": [],
+      "cov4_diagnostics": {
+        "model": "claude-sonnet-5",
+        "repeats": 1,
+        "offered": 0,
+        "bypassed": 0,
+        "bypassed_provenance": {},
+        "ownership": {},
+        "fundability": {},
+        "published": 0,
+        "dropped": 0,
+        "review": 0,
+        "classifier_calls": 0,
+        "classifier_errors": {}
+      },
+      "publication": []
+    },
+    {
+      "opportunity_id": "363180",
+      "status": "hash_verified_scanned",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353848",
+        "name": "7.14.2026 Foa_Content_of_F26AS00051.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "5c6da6d2abb7ce2aaf39991f9f346961908df3ad38806b34a9c53f73de66b182",
+        "bytes": 239158,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-07-27T14:17:05.080489Z",
+        "last_seen_at": "2026-08-10T19:32:37.244531Z",
+        "changed_since_previous": false
+      },
+      "extraction": {
+        "method": "pypdf",
+        "page_count": 30,
+        "pages_read": 30,
+        "pages_with_text": 30,
+        "truncated": false,
+        "content_kind": "pdf",
+        "text_characters": 72117
+      },
+      "segmentation": {
+        "method": null,
+        "family": null,
+        "confidence": null,
+        "reason": "no_layer_accepted",
+        "layers_attempted": [
+          "_layer_outline",
+          "_layer_toc",
+          "_layer_headings",
+          "_layer_numbered",
+          "_layer_label_run"
+        ]
+      },
+      "structural_titles": [],
+      "cov4_titles": [],
+      "cov4_diagnostics": {
+        "model": "claude-sonnet-5",
+        "repeats": 1,
+        "offered": 0,
+        "bypassed": 0,
+        "bypassed_provenance": {},
+        "ownership": {},
+        "fundability": {},
+        "published": 0,
+        "dropped": 0,
+        "review": 0,
+        "classifier_calls": 0,
+        "classifier_errors": {}
+      },
+      "publication": []
+    },
+    {
+      "opportunity_id": "363247",
+      "status": "hash_verified_unsupported_format",
+      "detail": "Unsupported official-document content type: application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "document": {
+        "url": "https://grants.gov/grantsws/rest/opportunity/att/download/353998",
+        "name": "AC NOFO game on (2).docx",
+        "source_kind": "primary_notice",
+        "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "sha256": "5560fc3df9ab59fd612cf2c6527a206d2f563127e216f57012fdc87fbf89f3ae"
+      },
+      "segmentation": null,
+      "structural_titles": [],
+      "cov4_titles": [],
+      "publication": []
+    },
+    {
+      "opportunity_id": "363259",
+      "status": "hash_verified_scanned",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354033",
+        "name": "Leveraging Academic Institutions and Judicial Professional Bodies to Document TNR - NOFO.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "ff302facaa5086342ed48cbd2369ce3e52a7a5bf91cfd37a6bfc518b2e0a53b9",
+        "bytes": 470624,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-07-27T14:09:27.406400Z",
+        "last_seen_at": "2026-08-10T19:25:21.507676Z",
+        "changed_since_previous": false
+      },
+      "extraction": {
+        "method": "pypdf",
+        "page_count": 24,
+        "pages_read": 24,
+        "pages_with_text": 24,
+        "truncated": false,
+        "content_kind": "pdf",
+        "text_characters": 40777
+      },
+      "segmentation": {
+        "method": null,
+        "family": null,
+        "confidence": null,
+        "reason": "no_layer_accepted",
+        "layers_attempted": [
+          "_layer_outline",
+          "_layer_toc",
+          "_layer_headings",
+          "_layer_numbered",
+          "_layer_label_run"
+        ]
+      },
+      "structural_titles": [],
+      "cov4_titles": [],
+      "cov4_diagnostics": {
+        "model": "claude-sonnet-5",
+        "repeats": 1,
+        "offered": 0,
+        "bypassed": 0,
+        "bypassed_provenance": {},
+        "ownership": {},
+        "fundability": {},
+        "published": 0,
+        "dropped": 0,
+        "review": 0,
+        "classifier_calls": 0,
+        "classifier_errors": {}
+      },
+      "publication": []
+    },
+    {
+      "opportunity_id": "363370",
+      "status": "hash_verified_scanned",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354229",
+        "name": "2026 NOFO proposal journalism alumni fund.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "58951788cd5401b8468aa170ea2e89c51c19a2bdf945d33b4b666287dd3b8a37",
+        "bytes": 397205,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-07-29T12:21:41.359843Z",
+        "last_seen_at": "2026-08-12T13:06:47.726081Z",
+        "changed_since_previous": false
+      },
+      "extraction": {
+        "method": "pypdf",
+        "page_count": 15,
+        "pages_read": 15,
+        "pages_with_text": 15,
+        "truncated": false,
+        "content_kind": "pdf",
+        "text_characters": 29684
+      },
+      "segmentation": {
+        "method": null,
+        "family": null,
+        "confidence": null,
+        "reason": "no_layer_accepted",
+        "layers_attempted": [
+          "_layer_outline",
+          "_layer_toc",
+          "_layer_headings",
+          "_layer_numbered",
+          "_layer_label_run"
+        ]
+      },
+      "structural_titles": [],
+      "cov4_titles": [],
+      "cov4_diagnostics": {
+        "model": "claude-sonnet-5",
+        "repeats": 1,
+        "offered": 0,
+        "bypassed": 0,
+        "bypassed_provenance": {},
+        "ownership": {},
+        "fundability": {},
+        "published": 0,
+        "dropped": 0,
+        "review": 0,
+        "classifier_calls": 0,
+        "classifier_errors": {}
+      },
+      "publication": []
+    },
+    {
+      "opportunity_id": "363388",
+      "status": "hash_verified_scanned",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354262",
+        "name": "UIPL 13-26.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "263d5c53705767a5f65d78f9e5745331011695bac32627c24692f508fa4f5aed",
+        "bytes": 18705501,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-07-30T12:04:39.333303Z",
+        "last_seen_at": "2026-08-13T12:35:35.047564Z",
+        "changed_since_previous": false
+      },
+      "extraction": {
+        "method": "pypdf",
+        "page_count": 49,
+        "pages_read": 49,
+        "pages_with_text": 0,
+        "truncated": false,
+        "content_kind": "pdf",
+        "text_characters": 0
+      },
+      "segmentation": {
+        "method": null,
+        "family": null,
+        "confidence": null,
+        "reason": "no_extractable_text",
+        "layers_attempted": []
+      },
+      "structural_titles": [],
+      "cov4_titles": [],
+      "cov4_diagnostics": {
+        "model": "claude-sonnet-5",
+        "repeats": 1,
+        "offered": 0,
+        "bypassed": 0,
+        "bypassed_provenance": {},
+        "ownership": {},
+        "fundability": {},
+        "published": 0,
+        "dropped": 0,
+        "review": 0,
+        "classifier_calls": 0,
+        "classifier_errors": {}
+      },
+      "publication": []
+    },
+    {
+      "opportunity_id": "363396",
+      "status": "hash_verified_scanned",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354275",
+        "name": "PART 2026 NOFO v2.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "03d318c53dcf2114abf77ae56f3a840153fa089f27e0ecc366c4ffe1a842d7be",
+        "bytes": 463475,
+        "etag": null,
+        "last_modified": null,
+        "version": 2,
+        "first_seen_at": "2026-08-06T10:33:14.856349Z",
+        "last_seen_at": "2026-08-06T10:33:14.856349Z",
+        "changed_since_previous": true
+      },
+      "extraction": {
+        "method": "pypdf",
+        "page_count": 26,
+        "pages_read": 26,
+        "pages_with_text": 26,
+        "truncated": false,
+        "content_kind": "pdf",
+        "text_characters": 76159
+      },
+      "segmentation": {
+        "method": null,
+        "family": null,
+        "confidence": null,
+        "reason": "no_layer_accepted",
+        "layers_attempted": [
+          "_layer_outline",
+          "_layer_toc",
+          "_layer_headings",
+          "_layer_numbered",
+          "_layer_label_run"
+        ]
+      },
+      "structural_titles": [],
+      "cov4_titles": [],
+      "cov4_diagnostics": {
+        "model": "claude-sonnet-5",
+        "repeats": 1,
+        "offered": 0,
+        "bypassed": 0,
+        "bypassed_provenance": {},
+        "ownership": {},
+        "fundability": {},
+        "published": 0,
+        "dropped": 0,
+        "review": 0,
+        "classifier_calls": 0,
+        "classifier_errors": {}
+      },
+      "publication": []
+    },
+    {
+      "opportunity_id": "363446",
+      "status": "hash_verified_scanned",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354313",
+        "name": "NHTSA ITSE NOFO 8.3.2026.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "de1fc960841b6064d9e8bcf05fbfd99fcc341251964ceee6e45a32413c033212",
+        "bytes": 624057,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-08-04T12:22:29.523883Z",
+        "last_seen_at": "2026-08-13T11:12:25.948354Z",
+        "changed_since_previous": false
+      },
+      "extraction": {
+        "method": "pypdf",
+        "page_count": 32,
+        "pages_read": 32,
+        "pages_with_text": 32,
+        "truncated": false,
+        "content_kind": "pdf",
+        "text_characters": 77461
+      },
+      "segmentation": {
+        "method": null,
+        "family": null,
+        "confidence": null,
+        "reason": "no_layer_accepted",
+        "layers_attempted": [
+          "_layer_outline",
+          "_layer_toc",
+          "_layer_headings",
+          "_layer_numbered",
+          "_layer_label_run"
+        ]
+      },
+      "structural_titles": [],
+      "cov4_titles": [],
+      "cov4_diagnostics": {
+        "model": "claude-sonnet-5",
+        "repeats": 1,
+        "offered": 0,
+        "bypassed": 0,
+        "bypassed_provenance": {},
+        "ownership": {},
+        "fundability": {},
+        "published": 0,
+        "dropped": 0,
+        "review": 0,
+        "classifier_calls": 0,
+        "classifier_errors": {}
+      },
+      "publication": []
+    },
+    {
+      "opportunity_id": "363537",
+      "status": "hash_verified_unsupported_format",
+      "detail": "Unsupported official-document content type: application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "document": {
+        "url": "https://grants.gov/grantsws/rest/opportunity/att/download/354502",
+        "name": "Full Announcement.docx",
+        "source_kind": "primary_notice",
+        "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "sha256": "88ff4b7c6313d081d267384ded9754853ac40340498561e44b9ab72e82d76898"
+      },
+      "segmentation": null,
+      "structural_titles": [],
+      "cov4_titles": [],
+      "publication": []
+    },
+    {
+      "opportunity_id": "363538",
+      "status": "hash_verified_unsupported_format",
+      "detail": "Unsupported official-document content type: application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "document": {
+        "url": "https://grants.gov/grantsws/rest/opportunity/att/download/354507",
+        "name": "Full Announcement.docx",
+        "source_kind": "primary_notice",
+        "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "sha256": "c5d19131038e0c24495dc6c55cce00228251d0e0c32451e1f95aa749ffe86f39"
+      },
+      "segmentation": null,
+      "structural_titles": [],
+      "cov4_titles": [],
+      "publication": []
+    },
+    {
+      "opportunity_id": "363541",
+      "status": "hash_verified_unsupported_format",
+      "detail": "Unsupported official-document content type: application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "document": {
+        "url": "https://grants.gov/grantsws/rest/opportunity/att/download/354517",
+        "name": "Embassy Yerevan_NOFO_ASSF-FY26-ARM-2.docx",
+        "source_kind": "primary_notice",
+        "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "sha256": "3a7d17cc0291e18c695f48dc256653fa8a599a84b113ec04f4ae62058bf21ef3"
+      },
+      "segmentation": null,
+      "structural_titles": [],
+      "cov4_titles": [],
+      "publication": []
+    },
+    {
+      "opportunity_id": "363586",
+      "status": "hash_verified_scanned",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354562",
+        "name": "2026 OSBDC NOFO Synopsis - Close Date - September 4.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "42063943245812ef6fcae0cc8ae9ddeb7fae2da371047412ef48baacdf5b9f1a",
+        "bytes": 112365,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-08-14T11:57:16.449245Z",
+        "last_seen_at": "2026-08-14T11:57:16.449245Z",
+        "changed_since_previous": false
+      },
+      "extraction": {
+        "method": "pypdf",
+        "page_count": 2,
+        "pages_read": 2,
+        "pages_with_text": 2,
+        "truncated": false,
+        "content_kind": "pdf",
+        "text_characters": 2097
+      },
+      "segmentation": {
+        "method": null,
+        "family": null,
+        "confidence": null,
+        "reason": "no_layer_accepted",
+        "layers_attempted": [
+          "_layer_outline",
+          "_layer_toc",
+          "_layer_headings",
+          "_layer_numbered",
+          "_layer_label_run"
+        ]
+      },
+      "structural_titles": [],
+      "cov4_titles": [],
+      "cov4_diagnostics": {
+        "model": "claude-sonnet-5",
+        "repeats": 1,
+        "offered": 0,
+        "bypassed": 0,
+        "bypassed_provenance": {},
+        "ownership": {},
+        "fundability": {},
+        "published": 0,
+        "dropped": 0,
+        "review": 0,
+        "classifier_calls": 0,
+        "classifier_errors": {}
+      },
+      "publication": []
+    },
+    {
+      "opportunity_id": "45810",
+      "status": "source_hash_drift",
+      "expected_sha256": "3fd08558fba88c636517555c97098e8e01135c9c557104106ebbbbe66848e237",
+      "received_sha256": "870fdada010db3c81245f22d22a23309583b97c6b53bbcb80e7d8bb56b671db8",
+      "document": {
+        "url": "https://www.nsf.gov/funding/opportunities/sociology",
+        "name": null,
+        "source_kind": "agency_notice",
+        "content_type": "text/html; charset=UTF-8",
+        "sha256": "3fd08558fba88c636517555c97098e8e01135c9c557104106ebbbbe66848e237",
+        "bytes": 78952,
+        "etag": "\"1785500381-gzip\"",
+        "last_modified": "Fri, 31 Jul 2026 12:19:41 GMT",
+        "version": 1,
+        "first_seen_at": "2026-07-31T12:19:26.251797Z",
+        "last_seen_at": "2026-07-31T12:19:26.251797Z",
+        "changed_since_previous": false
+      }
+    },
+    {
+      "opportunity_id": "351923",
+      "status": "source_hash_drift",
+      "expected_sha256": "b83fac6b9ae4435481591a3d15bea8716ea5869ef09b409624750e605f26be6b",
+      "received_sha256": "19ad5843e18ed48c04460fa70fd35545519c3118d9b7a47b364d4ea3e4b27859",
+      "document": {
+        "url": "https://www.nsf.gov/funding/opportunities/epscor-research-infrastructure-improvement-epscor-research/nsf24-528/solicitation",
+        "name": null,
+        "source_kind": "agency_notice",
+        "content_type": "text/html; charset=UTF-8",
+        "sha256": "b83fac6b9ae4435481591a3d15bea8716ea5869ef09b409624750e605f26be6b",
+        "bytes": 147619,
+        "etag": "\"1785929697-gzip\"",
+        "last_modified": "Wed, 05 Aug 2026 11:34:57 GMT",
+        "version": 1,
+        "first_seen_at": "2026-08-05T12:17:14.658820Z",
+        "last_seen_at": "2026-08-05T12:17:14.658820Z",
+        "changed_since_previous": false
+      }
+    }
+  ],
+  "summary": {
+    "documents_attempted": 33,
+    "documents_hash_verified": 26,
+    "documents_scanned_by_production": 22,
+    "unsupported_formats": 4,
+    "source_hash_drift": 7,
+    "source_errors": 0,
+    "processing_errors": 0,
+    "structural_candidate_sets": 0,
+    "structural_false_positive_children": 0,
+    "cov4_false_positive_children": 0,
+    "review_children": 0,
+    "publishable_children": 0,
+    "publishable_titles": [],
+    "classifier_calls": 0,
+    "classifier_errors": 0,
+    "drift_ids": [
+      "355867",
+      "357305",
+      "349976",
+      "356927",
+      "359816",
+      "45810",
+      "351923"
+    ],
+    "source_error_ids": [],
+    "processing_error_ids": [],
+    "structural_false_positive_ids": []
+  }
+}
