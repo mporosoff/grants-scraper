@@ -159,28 +159,87 @@ def _score(result):
     return (CONFIDENCE_RANK.get(result.confidence, 0), len(result.subtopics))
 
 
-def _demote(result):
-    """Cap a secondary-attachment result at `low`, so it never publishes.
+def _announcement_url(record, primary_document):
+    """The URL of the document this record's announcement *is*, or None.
 
-    Measured, and the only measurement available: exactly one census record
-    segments from a secondary attachment, and its result is **wrong**. CDC
-    `360339` yields 17 spans from `DGHP FY26 M&E Indicator List` -- entries like
-    `2.1. Point of Entry (POE) General Capacity` and `5.2. Laboratory Quality
-    Control` -- which are monitoring-and-evaluation indicator categories, not
-    the five fundable Components the record actually offers.
+    Two sources, in order, and both name a **document** rather than describing
+    how :func:`best_segmentation` was called:
 
-    So the measured precision of secondary-won lists is 0 of 1. That is far too
-    little evidence to publish on, and §18.3's asymmetry is explicit about which
-    way to err: a missing subtopic costs one search, a wrong one puts a
-    plausible card with a page anchor in front of a PI. Demoting to `low` keeps
-    the result in the cache and the diagnostics -- so a later session can judge
-    whether secondary attachments are worth trusting -- while the §7.1 merge
-    filters it out of anything published.
+    1. `primary_document_url` -- what `select_primary_document` designated for
+       this record, and the field `source_for_record` reads. It is the record's
+       own answer to "which document is my announcement?".
+    2. failing that, the primary document this run was actually handed. A record
+       reached through the ordinary path has one even when enrichment stored no
+       URL, and it is that run's announcement by construction.
 
-    Revisit when there is a corpus of secondary-won results to measure, not
-    before.
+    ``None`` means **the record has no announcement at all** -- neither
+    designated nor supplied. That is the shape of the 685 records
+    `source_for_record` declines, and it is the case §18.1 Cov6 is about.
+    """
+    designated = (record or {}).get("primary_document_url")
+    if designated:
+        return designated
+    return (primary_document or {}).get("url") or None
+
+
+def _is_secondary_to(document, announcement_url):
+    """Is this document *secondary* to the record's own announcement?
+
+    §18.1 Cov6, and this is the whole fix. **The test is whether the winning
+    document is the record's own announcement -- not whether an argument was
+    populated**, which is what the previous implementation asked and is why it
+    was wrong.
+
+    1. **A record with no announcement has nothing to be secondary to.** Its own
+       Grants.gov attachments are then the best announcement material it has,
+       and Grants.gov bound every one of them to this record -- the same binding
+       Cov4's ownership guard relies on. Calling such a document "secondary"
+       names a relationship that does not exist.
+    2. **A record that does have one is secondary exactly when the winning
+       document is a different file.** That is the measured risk, preserved
+       unchanged: CDC `360339` and AFRL PACER `349554` both have an
+       announcement and both win from another attachment, so both still demote.
+    """
+    if not announcement_url:
+        return False
+    return (document or {}).get("url") != announcement_url
+
+
+def _demote(result, document=None, announcement_url=None):
+    """Cap a genuinely-secondary result at `low`. See :func:`_is_secondary_to`.
+
+    Measured, and still the only measurement available for the risk this
+    protects against: exactly one census record segmented from a secondary
+    attachment and its result was **wrong**. CDC `360339` yielded 17 spans from
+    `DGHP FY26 M&E Indicator List` -- entries like `2.1. Point of Entry (POE)
+    General Capacity` and `5.2. Laboratory Quality Control` -- which are
+    monitoring-and-evaluation indicator categories, not the five fundable
+    Components the record actually offers. **That record has since left the
+    catalog**, so the 0-of-1 figure can no longer be re-run; it is retained as
+    the reason for the rule rather than refreshed.
+
+    §18.3's asymmetry is explicit about which way to err: a missing subtopic
+    costs one search, a wrong one puts a plausible card with a page anchor in
+    front of a PI. So the cap stays wherever the risk it was fitted to is
+    present, and is **narrowed** -- not lifted -- where that risk is absent.
+
+    **Measured effect of the narrowing (§18.1 Cov6, live 2026-08-27):** across a
+    50-record sample of the 236 no-primary records carrying attachments, exactly
+    one enumerates -- `363526`, whose own `NOFOAFRLAFOSR20260004 DEPSCoR-RC.pdf`
+    yields 8 spans at method `toc`. Before: `low`. After: `medium`, which is the
+    §5.1 `inferred` ceiling and is what `segment_document` earns on that
+    document directly. **Neither value auto-publishes** (§7.1), so the narrowing
+    buys a truthful confidence and correct ranking, not publication.
+
+    Ranking is the substantive half. `_score` reads confidence, so when every
+    candidate is flattened to `low` the comparison degenerates to span count and
+    a wrong 17-span list beats a right 8-span one -- defeating the census's
+    non-negotiable "rank by result quality, not attachment order" for exactly
+    the population that has no primary to rank against.
     """
     if result is None or not result.subtopics or result.confidence == "low":
+        return result
+    if not _is_secondary_to(document, announcement_url):
         return result
     return dataclasses.replace(result, confidence="low")
 
@@ -253,6 +312,9 @@ def best_segmentation(
     if _score(best_result) >= (CONFIDENCE_RANK["high"], 1):
         return best_result, primary_document, {"attempts": tuple(attempts)}
 
+    # §18.1 Cov6: resolved once, before the loop, so every attachment is
+    # judged against the same answer to "which document is the announcement?".
+    announcement = _announcement_url(record, primary_document)
     opportunity_id = record.get("opportunity_id") or record.get("opportunity_number")
     for source in attachment_sources(
         opportunity_id, detail_fetcher=detail_fetcher, collector=collector
@@ -274,7 +336,7 @@ def best_segmentation(
             "source_kind": "secondary_attachment",
         }
         outcome = consider(content, document, source["name"])
-        outcome = _demote(outcome)
+        outcome = _demote(outcome, document, announcement)
         if _score(outcome) > _score(best_result):
             best_result, best_document = outcome, document
 

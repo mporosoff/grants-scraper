@@ -112,6 +112,89 @@ def cap_confidence(confidence, provenance):
         return confidence
     return ceiling
 
+# --- §7.1 publication eligibility --------------------------------------------
+#
+# **Three concepts, and Cov6 exists partly because two of them had been encoded
+# in one field.** They are kept apart deliberately:
+#
+#   provenance (`subtopic_source`)  WHO asserted the parent->child relationship.
+#                                   §5.1's ladder. Never changed by a verdict.
+#   confidence                      HOW WELL THIS RUN READ IT. Earned by the
+#                                   segmentation method, bounded by the rung's
+#                                   ceiling, lowered by `_demote()` when the
+#                                   document is secondary to the announcement.
+#                                   **Not a review flag and not a permission.**
+#   review state (`cov4_*`)         WHAT COV4 DECIDED, on two axes. Recorded by
+#                                   `subtopic_cov4.apply_gate`.
+#   publication eligibility         DERIVED FROM ALL THREE, right here. Stored
+#                                   nowhere, so it cannot drift from its inputs.
+#
+# The rule is §7.1's, unchanged and now stated once in code rather than in prose:
+#
+#     publish = confidence == "high"
+#            OR (confidence in {"medium", "low"}
+#                AND an approval exists for this subtopic_id
+#                AND that approval's document_sha256 == the current document's)
+#
+# with Cov4's fail-closed contract layered on top for the rungs Cov4 judges.
+PUBLISHABLE = "publishable"
+REVIEW = "review"
+
+# Cov4's field names and verdict values, restated rather than imported:
+# `subtopic_cov4` imports *this* module, so importing it back would be a cycle.
+# `tests/test_subtopic_cov6.py` asserts these equal `subtopic_cov4`'s constants,
+# so the restatement cannot drift silently.
+_COV4_JUDGED_PROVENANCE = frozenset({INLINE, INFERRED})
+_COV4_OWNED = "owned"
+_COV4_ACCEPT = "accept"
+
+
+def publication_eligibility(record, *, approvals=None):
+    """May this subtopic reach a PI unattended? Returns ``(state, reason)``.
+
+    **This function is the single authority on the question**, and it is
+    deliberately a pure predicate over a record: P9's merge applies it, no
+    caller stores its answer, and nothing downstream may re-derive publication
+    from `confidence` alone. That last point is the fail-closed hole Cov6
+    closed -- `inline`'s ceiling is `high`, so a bare ``confidence == "high"``
+    test would publish an `inline` span whose classifier call had failed.
+
+    `approvals` is the reviewed-labels map §7.1 describes, keyed by
+    `subtopic_id`, each value carrying a `status` and the `document_sha256` the
+    label was made against. **Building the surface that produces it is P9/P10
+    work and is not done here**; Cov6's job is to define the state it consumes.
+    An approval whose hash no longer matches the record's `source_document_hash`
+    is stale and does not count -- which is the whole reason the hash is in the
+    payload, because a changed notice must re-queue rather than inherit
+    yesterday's judgment.
+    """
+    # Cov4's two axes first: an unresolved or failed classification is not a
+    # passing one, whatever tier the span carries and whatever a human said.
+    if record.get("subtopic_source") in _COV4_JUDGED_PROVENANCE:
+        if record.get("cov4_ownership") != _COV4_OWNED:
+            return REVIEW, f"cov4_ownership_{record.get('cov4_ownership')}"
+        if record.get("cov4_fundability") != _COV4_ACCEPT:
+            return REVIEW, f"cov4_fundability_{record.get('cov4_fundability')}"
+
+    approval = (approvals or {}).get(record.get("subtopic_id"))
+    if approval:
+        if str(approval.get("status")) != "approve":
+            return REVIEW, "approval_not_granted"
+        if approval.get("document_sha256") != record.get("source_document_hash"):
+            # §7.1: the notice moved under the label, so the label is void.
+            return REVIEW, "approval_stale"
+        return PUBLISHABLE, "approved"
+
+    if record.get("confidence") == "high":
+        return PUBLISHABLE, "high_confidence"
+    return REVIEW, f"tier_{record.get('confidence')}"
+
+
+def is_publishable(record, *, approvals=None):
+    """:func:`publication_eligibility` as a boolean, for filtering."""
+    return publication_eligibility(record, approvals=approvals)[0] == PUBLISHABLE
+
+
 # Fields whose change means the record genuinely moved. `last_verified` is
 # excluded on purpose -- see `_content_key`.
 VOLATILE_FIELDS = ("last_verified",)
@@ -365,6 +448,13 @@ def cache_metrics(cache):
     reasons = {}
     methods = {}
     confidences = {}
+    # §18.1 Cov6. Reported next to the tiers rather than instead of them,
+    # because they answer different questions: the tier says how well the run
+    # read the document, and this says whether anything may reach a PI without
+    # a human. A build where every span is `medium` and every span is `review`
+    # is the expected steady state for generic inference, not a fault.
+    publication = {}
+    publication_reasons = {}
     for entry in entries:
         reason = entry.get("subtopic_reason")
         if reason:
@@ -376,6 +466,9 @@ def cache_metrics(cache):
             level = record.get("confidence")
             if level:
                 confidences[level] = confidences.get(level, 0) + 1
+            state, reason = publication_eligibility(record)
+            publication[state] = publication.get(state, 0) + 1
+            publication_reasons[reason] = publication_reasons.get(reason, 0) + 1
     return {
         "subtopic_parent_count": sum(
             1 for entry in entries if entry.get("subtopics")
@@ -384,4 +477,6 @@ def cache_metrics(cache):
         "subtopic_rejection_reasons": dict(sorted(reasons.items())),
         "subtopic_methods": dict(sorted(methods.items())),
         "subtopic_confidence_counts": dict(sorted(confidences.items())),
+        "subtopic_publication_counts": dict(sorted(publication.items())),
+        "subtopic_publication_reasons": dict(sorted(publication_reasons.items())),
     }

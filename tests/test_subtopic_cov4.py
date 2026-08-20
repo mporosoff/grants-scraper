@@ -675,8 +675,12 @@ class FailClosedTests(unittest.TestCase):
             self.assertEqual(diagnostics["published"], 0)
             self.assertEqual(diagnostics["review"], 1)
             self.assertTrue(kept[0]["cov4_review"])
-            # `low` has never published (§13), which is what "queued" means here.
-            self.assertEqual(kept[0]["confidence"], "low")
+            # Cov6 moved this assertion from the representation to the
+            # guarantee. It used to read `confidence == "low"`; the span now
+            # keeps the tier its evidence earned and is refused by the
+            # publication predicate instead, which is the stronger claim.
+            self.assertFalse(records.is_publishable(kept[0]))
+            self.assertEqual(kept[0]["confidence"], "medium")
 
     def test_a_classifier_outage_does_not_fail_the_catalog_build(self):
         """An unreachable API costs recall, never the parent's facts (§9.3)."""
@@ -705,7 +709,10 @@ class FailClosedTests(unittest.TestCase):
         self.assertEqual(
             fields["subtopic_cov4"]["classifier_errors"], {"request_failed": 1}
         )
-        self.assertEqual(fields["subtopics"][0]["confidence"], "low")
+        # Cov6: the tier is untouched by the outage and the span is refused by
+        # `publication_eligibility`, not by having been overwritten with `low`.
+        self.assertFalse(records.is_publishable(fields["subtopics"][0]))
+        self.assertEqual(fields["subtopics"][0]["confidence"], "medium")
 
     def test_diagnostics_never_carry_a_credential_or_a_request_header(self):
         verdict = cov4.classify_fundability(
@@ -990,7 +997,7 @@ class FrozenRegressionTests(unittest.TestCase):
         self.assertEqual(diagnostics["review"], 1)
         self.assertEqual(diagnostics["dropped"], 0)
         self.assertEqual(diagnostics["published"], 0)
-        self.assertEqual(kept[0]["confidence"], "low")
+        self.assertFalse(records.is_publishable(kept[0]))          # Cov6
         self.assertEqual(kept[0]["cov4_ownership"], cov4.UNESTABLISHED)
 
     def test_no_f1_or_f4_recogniser_was_added(self):

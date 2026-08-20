@@ -489,10 +489,15 @@ def apply_gate(parent, records, document, *, classifier=None, api_key=None,
             continue
         if ownership["ownership"] != OWNED or verdict["fundability"] != ACCEPT:
             annotated["cov4_review"] = True
-            # `low` is the existing never-publishes tier (section 13, and the
-            # same demotion `subtopic_sources._demote` already applies). No new
-            # publication state is invented to express "queued".
-            annotated["confidence"] = "low"
+            # **Confidence is deliberately NOT touched here (Cov6).** It records
+            # how well this run read the document, and overwriting it with `low`
+            # to mean "queued" destroyed that -- a `toc` span whose API call
+            # timed out became indistinguishable from a `numbered` one. The
+            # non-publication guarantee lives in
+            # `subtopic_records.publication_eligibility`, which refuses any span
+            # this branch reaches, at any tier. That is strictly safer than the
+            # demotion was: `inline`'s §5.1 ceiling is `high`, so a tier-only
+            # rule would have published an unresolved `inline` span.
             diagnostics["review"] += 1
             kept.append(annotated)
             continue
