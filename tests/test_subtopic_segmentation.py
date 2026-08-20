@@ -1158,12 +1158,13 @@ class LocationFailureTests(unittest.TestCase):
             "Catalysis Science Research",
             "Photon Materials Chemistry",
             "Plasma Physics Frontiers",
-            # NOT "Quantum Information Systems": `is_administrative` matches
-            # the substring "format" inside "information", and one flagged
-            # title in a four-item set already trips §6.3a's 0.25 set-level
-            # administrative veto. A pre-existing quirk of the substring test,
-            # noted rather than fixed here -- it is a false-NEGATIVE surface
-            # and P7.2 is a punctuation-and-alignment repair.
+            # This read "Quantum Information Systems" until P7.2 found that
+            # `is_administrative` matched the substring "format" inside
+            # "information", and one flagged title in a four-item set trips
+            # §6.3a's 0.25 veto. **That is BUG-13, closed in P7.3a** -- see
+            # AdministrativeLexiconTests, which pins the repair on the five real
+            # DOE titles. The fixture keeps this title so it tests the location
+            # invariant and nothing else.
             "Quantum Sensing Devices",
         ]
         body_titles = list(titles)
@@ -1517,6 +1518,124 @@ class RequiredP7FixtureTests(unittest.TestCase):
             with self.subTest(text=text):
                 self.assertIsNone(patterns._owning_family(text))
         self.assertEqual(patterns.best_family(lines), (None, ()))
+
+
+
+class AdministrativeLexiconTests(unittest.TestCase):
+    """BUG-13. An administrative term matches at a word start, never inside an
+    unrelated word.
+
+    The alternation was unanchored, so `format` matched inside *in-format-ion*
+    and flagged five real DOE programme titles in `360678` as administrative.
+    That is a false-NEGATIVE surface: §6.3a's set-level veto rejects a whole
+    sibling set once a quarter of its titles look administrative, so on a
+    twelve-item list carrying three Quantum Information Science programmes it
+    would have deleted the list. At 5 of 69 it cost nothing, which is why it
+    survived.
+    """
+
+    #: The five titles `360678` actually carries, verbatim from its bookmarks.
+    QIS_TITLES = (
+        "(h) Quantum Information Science in Materials Sciences and Engineering",
+        "(p) Quantum Information Science Research in Chemical Sciences, "
+        "Geosciences, and Biosciences",
+        "(m) Plasma Science and Technology\u2014Quantum Information Science",
+        "(h) Quantum Information Science for High Energy Physics Research",
+        "(j) Quantum Information Science for Nuclear Physics Research",
+    )
+
+    def test_the_five_real_qis_programme_titles_are_not_administrative(self):
+        """Four DOE program offices -- BES, FES, HEP and NP -- not one field."""
+        for title in self.QIS_TITLES:
+            with self.subTest(title=title):
+                self.assertFalse(patterns.is_administrative(title))
+
+    def test_a_term_never_matches_inside_an_unrelated_word(self):
+        """The invariant, stated as the cases that motivated it."""
+        for text in (
+            "Quantum Information Science",
+            "Agency Information Collection",   # `format` inside `information`
+            "Nuclear Physics Information",
+        ):
+            with self.subTest(text=text):
+                self.assertFalse(patterns.is_administrative(text))
+
+    def test_genuine_administrative_uses_of_format_still_match(self):
+        """Both real `360678` headings that `format` is in the lexicon for."""
+        for text in (
+            "IV. Application Contents and Format",
+            "23. Portable Document Format (PDF) Generation",
+            "Formatting Requirements",
+            "Page Formats",
+        ):
+            with self.subTest(text=text):
+                self.assertTrue(patterns.is_administrative(text))
+
+    def test_the_inflections_the_lexicon_depends_on_still_match(self):
+        """Why the trailing side is deliberately left open.
+
+        Measured on `360678`: a trailing `\\b` as well would stop flagging 13
+        further headings, and every one of them is genuinely administrative.
+        These are those headings, verbatim.
+        """
+        for text in (
+            "A. Preliminary Submissions",
+            "Required Certifications",
+            "Renewal Applications",
+            "Improper Contents of Applications",
+            "Resubmission of Applications",
+            "14. Funding Restrictions",
+            "Registering in Grants.gov",
+            "8. Identification of Merit Reviewer Conflicts",
+            "Important Guidance for Company Submitters:",
+            "Collaborative Applications",
+        ):
+            with self.subTest(text=text):
+                self.assertTrue(patterns.is_administrative(text))
+
+    def test_every_term_in_the_lexicon_still_matches_itself(self):
+        """A boundary change must not silently retire a term."""
+        for term in patterns.ADMINISTRATIVE_TERMS:
+            with self.subTest(term=term):
+                self.assertTrue(patterns.is_administrative(f"C. {term.title()}"))
+
+    def test_basic_information_is_still_caught_as_a_phrase(self):
+        """The one vocabulary change the boundary fix required.
+
+        `I. Basic Information` used to be caught only by the `format` accident.
+        Without the phrase its six children -- `Executive Summary`,
+        `Funding Details`, `Key Facts`, `Key Dates` -- become ADMISSIBLE parents
+        for §6.3a, which is a new false-POSITIVE surface. Measured on `360678`:
+        with the phrase, admissible nodes are 90 at depths 16/71/3, exactly as
+        before the fix; without it, 96 at 22/71/3.
+        """
+        self.assertTrue(patterns.is_administrative("I. Basic Information"))
+        self.assertTrue(patterns.is_administrative("IX. Other Information"))
+        # And the phrase must not make bare `Information` administrative again.
+        self.assertFalse(patterns.is_administrative("Quantum Information"))
+
+    def test_the_administrative_veto_still_rejects_an_administrative_set(self):
+        """§6.3a's set-level veto, end to end, on the shape it exists for."""
+        self.assertFalse(seg._structural_titles_ok([
+            "Application Contents and Format",
+            "Submission Deadlines",
+            "Award Administration Information",
+            "Agency Contacts",
+        ]))
+
+    def test_a_genuine_qis_set_now_survives_the_veto(self):
+        """The recall BUG-13 was costing, on a set small enough to feel it.
+
+        Three of these four titles were administrative before the fix -- 0.75
+        against §6.3a's 0.25 veto -- so this set was rejected outright.
+        """
+        titles = [
+            "Quantum Information Science for High Energy Physics Research",
+            "Quantum Information Science for Nuclear Physics Research",
+            "Quantum Information Science in Materials Sciences and Engineering",
+            "Catalysis Science Research",
+        ]
+        self.assertTrue(seg._structural_titles_ok(titles))
 
 
 

@@ -230,10 +230,41 @@ ADMINISTRATIVE_TERMS = (
     "register", "cost share", "cost sharing", "budget", "provisions",
     "clauses", "administrative", "how-to", "how to", "requirements",
     "compliance", "assurance", "restriction", "other information",
+    # BUG-13. `basic information` joins `other information` as a PHRASE, and it
+    # is the one vocabulary change the boundary fix below required. `I. Basic
+    # Information` used to be caught by `format` matching inside
+    # *in-format-ion*; once that accident is gone, only the phrase reaches it,
+    # and without it the six children of that section -- `Executive Summary`,
+    # `Funding Details`, `Key Facts`, `Key Dates` ... -- become ADMISSIBLE
+    # parents for §6.3a, which is a new false-POSITIVE surface in the direction
+    # §18.3 says is expensive. Measured on `360678`: with the phrase, admissible
+    # nodes are 90 at depths 16/71/3, exactly today's numbers; without it, 96 at
+    # 22/71/3. Like `other information`, it is an OMB announcement-template
+    # section name rather than a guess.
+    "basic information",
     "national policy", "post-award", "reference material",
 )
+# BUG-13, repaired in P7.3a. **A term matches at a word start, never inside an
+# unrelated word.**
+#
+# The alternation used to be unanchored, so `format` matched inside
+# *in-format-ion* and flagged five real DOE programme titles in `360678` as
+# administrative -- Quantum Information Science in BES, FES, HEP and NP. That is
+# a false-NEGATIVE surface: at 5 of 69 it stayed under §6.3a's 0.25 set-level
+# veto and cost nothing, and on a twelve-item list with three QIS programmes it
+# would have deleted the whole list.
+#
+# **The leading `\b` is the whole fix, and the trailing side is deliberately
+# left open.** These terms are stems that must still reach their inflections,
+# and the corpus says so: adding a trailing `\b` as well would stop flagging
+# 13 further `360678` headings, among them `A. Preliminary Submissions`,
+# `Required Certifications`, `Renewal Applications`, `Improper Contents of
+# Applications`, `14. Funding Restrictions` and `Registering in Grants.gov`.
+# Every one of those is genuinely administrative, so a trailing boundary would
+# trade this false negative for a worse set of them.
 ADMINISTRATIVE_RE = re.compile(
-    "|".join(re.escape(term) for term in ADMINISTRATIVE_TERMS), re.IGNORECASE
+    r"\b(?:" + "|".join(re.escape(term) for term in ADMINISTRATIVE_TERMS) + r")",
+    re.IGNORECASE,
 )
 
 
