@@ -39,6 +39,23 @@ _LETTER_DECIMAL = "letter_decimal"   # NASA ROSES "B.7"
 
 _ROMAN_VALUES = {"i": 1, "v": 5, "x": 10, "l": 50, "c": 100}
 
+# BUG-2, repaired in P7.2. The delimiter that separates a code from its title.
+#
+# Three families -- `component`, `technical_category` and `dod_topic` -- each
+# spelled this class out inline and each spelled it DIFFERENTLY, and all three
+# omitted the ASCII hyphen. Measured by running the patterns: `Topic 1- Aero-
+# Structures` matched nothing, and AFRL PACER's `349554` happens to use an
+# en-dash, which is why it never surfaced. `technical_category` also omitted the
+# period, so FEMA's `Category 3. Project Management` matched nothing either.
+#
+# It is one constant now so a fourth variant cannot be filed later. The class is
+# a REPAIR, not a widening: the delimiter is still REQUIRED -- `Category 3
+# applicants` still matches nothing, which is the invariant §6.3 states -- and
+# the ordinal group, the title extraction and the family order are untouched.
+#
+# The hyphen sits last inside the class so it is a literal, never a range.
+_DELIMITERS = r"[:.\u2013\u2014-]"
+
 
 @dataclass(frozen=True)
 class Family:
@@ -85,18 +102,37 @@ FAMILIES: tuple[Family, ...] = (
     # separately fundable activity with its own budget.
     Family(
         "component",
-        re.compile(r"\bComponent\s+(\d{1,2})\s*[:.\u2013\u2014]", re.IGNORECASE),
+        re.compile(r"\bComponent\s+(\d{1,2})\s*" + _DELIMITERS, re.IGNORECASE),
         _DECIMAL,
         ("CDC", "HHS"),
     ),
     # Observed in the census: ARPA-E SCALEUP enumerates CATEGORY 1..7 as its
-    # Technical Categories of Interest. Requires the trailing colon so ordinary
-    # prose ("category 3 applicants") cannot match.
+    # Technical Categories of Interest. Requires a trailing DELIMITER so
+    # ordinary prose ("category 3 applicants") cannot match -- that invariant is
+    # unchanged by BUG-2; what changed is that the period and the ASCII hyphen
+    # are now in the class, because a real notice uses both.
+    #
+    # §17.8, second validating document, found in P7.2's corpus search and read
+    # end to end: FEMA's FY 2026 CTP NOFO (`363000`, and `362999` carries the
+    # same file) prints its three allowable project types as
+    #
+    #     Category 1- Technical Hazard Identification, Risk Analysis and Mapping
+    #                 or Flood Risk Projects (FRP)
+    #     Category 2 - Letter of Map Revision (LOMR) Review
+    #     Category 3. Project Management
+    #
+    # -- one ASCII hyphen with no leading space, one with spaces either side, and
+    # one period. The notice calls them *"the allowable project types under this
+    # NOFO"*, gives each its own MAS/SOW template, scores them differently ("15
+    # points maximum for FRP and PM Project Types and 20 points for" LOMR), and
+    # sets a different eligibility for one of them (*"LOMR Review is not an
+    # eligible activity for non-profit recipients"*). Applicant-selectable
+    # fundable subdivisions, not furniture.
     Family(
         "technical_category",
-        re.compile(r"\bCategory\s+(\d{1,2})\s*[:\u2013\u2014]", re.IGNORECASE),
+        re.compile(r"\bCategory\s+(\d{1,2})\s*" + _DELIMITERS, re.IGNORECASE),
         _DECIMAL,
-        ("ARPA-E", "DOE"),
+        ("ARPA-E", "DOE", "FEMA"),
     ),
     # `\bTopic` does not match inside "Subtopic" -- there is no word boundary
     # between "Sub" and "topic" -- so a subtopic-style heading cannot be stolen
@@ -104,7 +140,8 @@ FAMILIES: tuple[Family, ...] = (
     # DoD topic heading from a prose mention of "topic 3 of the announcement".
     Family(
         "dod_topic",
-        re.compile(r"\bTopic\s+([A-Za-z]?\d{1,2}[a-z]?)\s*[:.\u2013\u2014]", re.IGNORECASE),
+        re.compile(r"\bTopic\s+([A-Za-z]?\d{1,2}[a-z]?)\s*" + _DELIMITERS,
+                   re.IGNORECASE),
         _ALNUM,
         ("MURI", "ONR", "ARO"),
     ),
@@ -297,7 +334,12 @@ def match_family(family: Family, text: str, index: int = 0) -> PatternMatch | No
     return PatternMatch(
         index=index,
         text=text,
-        code=re.sub(r"\s+", " ", found.group(0)).strip(" :.–—"),
+        # BUG-2: the ASCII hyphen joins the delimiters stripped from the code,
+        # or `Category 1-` keeps its hyphen as a `subtopic_code` while
+        # `Category 1:` does not -- and `normalize_code`, and therefore
+        # identity, would differ by the punctuation the notice happened to use.
+        # Inert for every delimiter that already matched.
+        code=re.sub(r"\s+", " ", found.group(0)).strip(" :.–—-"),
         ordinal=ordinal,
         ordinal_label=label,
         title=_title_after(text, found, family),

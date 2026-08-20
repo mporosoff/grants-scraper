@@ -1257,5 +1257,268 @@ class LocationFailureTests(unittest.TestCase):
 
 
 
+class DelimiterRepairTests(unittest.TestCase):
+    """BUG-2. Three families rejected the ASCII hyphen; one also rejected `.`.
+
+    A punctuation repair, and the tests are organised as a bounded equivalence
+    class per family: everything that matched before must still match, the two
+    newly authorised forms must match, and the family must still REQUIRE a
+    delimiter -- which is the invariant §6.3 actually states, and which is what
+    keeps `Category 3 applicants` out.
+
+    Whitespace variants are only those a real notice prints. They are named per
+    case rather than generalised into a permissive grammar.
+    """
+
+    #: Every delimiter the three repaired families accept, after BUG-2.
+    DELIMITERS = (":", ".", "\u2013", "\u2014", "-")
+
+    REPAIRED = {
+        "dod_topic": ("Topic 1", "Aero-Structures"),
+        "component": ("Component 1", "Core Global Health Security"),
+        "technical_category": ("Category 1", "Advanced Energy Storage"),
+    }
+
+    def test_the_three_repaired_families_accept_the_same_five_delimiters(self):
+        for identifier, (code, title) in self.REPAIRED.items():
+            family = patterns.FAMILIES_BY_ID[identifier]
+            for delimiter in self.DELIMITERS:
+                for spacing in (f"{code}{delimiter} {title}",
+                                f"{code} {delimiter} {title}"):
+                    with self.subTest(family=identifier, text=spacing):
+                        hit = patterns.match_family(family, spacing)
+                        self.assertIsNotNone(hit, spacing)
+                        self.assertEqual(hit.ordinal, 1)
+                        self.assertEqual(hit.code, code)
+                        self.assertEqual(hit.title, title)
+
+    def test_the_delimiter_is_still_required(self):
+        """The invariant §6.3 states, and the reason these families are narrow.
+
+        Widening punctuation must not make the delimiter optional: without it,
+        `category 3 applicants` becomes a subtopic.
+        """
+        for identifier, (code, title) in self.REPAIRED.items():
+            with self.subTest(family=identifier):
+                self.assertIsNone(
+                    patterns.match_family(
+                        patterns.FAMILIES_BY_ID[identifier], f"{code} {title}")
+                )
+        self.assertIsNone(patterns._owning_family("Category 3 applicants"))
+        self.assertIsNone(patterns._owning_family("Component 1 Core"))
+        self.assertIsNone(patterns._owning_family("Topic 1 Aero"))
+
+    def test_the_code_never_keeps_the_delimiter_it_matched(self):
+        """Identity must not depend on which punctuation the notice used."""
+        for delimiter in self.DELIMITERS:
+            for spacing in (f"Category 2{delimiter} LOMR Review",
+                            f"Category 2 {delimiter} LOMR Review"):
+                with self.subTest(text=spacing):
+                    hit = patterns.match_family(
+                        patterns.FAMILIES_BY_ID["technical_category"], spacing)
+                    self.assertEqual(hit.code, "Category 2")
+                    self.assertEqual(
+                        seg.normalize_code(hit.code),
+                        seg.normalize_code("Category 2:"),
+                    )
+
+    def test_the_families_that_require_no_delimiter_did_not_gain_one(self):
+        """`topic_area`, `focus_area` and `thrust` are out of BUG-2's scope."""
+        for text, identifier in (
+            ("Topic Area 3 Electrocatalysis", "topic_area"),
+            ("Focus Area 3 Integrated Materials Analysis", "focus_area"),
+            ("Thrust 3 Materials", "thrust"),
+        ):
+            with self.subTest(text=text):
+                owner = patterns._owning_family(text)
+                self.assertEqual(owner.identifier, identifier)
+
+    def test_one_delimiter_class_serves_all_three(self):
+        """So a fourth variant cannot be filed later, which is how BUG-2 arose."""
+        for identifier in self.REPAIRED:
+            self.assertIn(
+                patterns._DELIMITERS,
+                patterns.FAMILIES_BY_ID[identifier].pattern.pattern,
+                identifier,
+            )
+
+    # --- §17.8: what is validated by a real document, and what is not --------
+
+    def test_technical_category_s_second_validating_document_is_real(self):
+        """FEMA FY 2026 CTP NOFO -- `363000`, and `362999` carries the same file.
+
+        Found by searching P7.1's frozen corpus, then READ: the notice calls
+        these *"the allowable project types under this NOFO"*, gives each its own
+        MAS/SOW template, scores them differently, and makes one ineligible for
+        non-profits. Verbatim, including its punctuation and its spacing:
+        """
+        headings = [
+            "Category 1- Technical Hazard Identification, Risk Analysis and "
+            "Mapping or Flood Risk Projects (FRP)",
+            "Category 2 - Letter of Map Revision (LOMR) Review",
+            "Category 3. Project Management",
+        ]
+        family, hits = patterns.best_family(headings)
+        self.assertEqual(family, "technical_category")
+        self.assertEqual([hit.ordinal for hit in hits], [1, 2, 3])
+        self.assertEqual([hit.code for hit in hits],
+                         ["Category 1", "Category 2", "Category 3"])
+        self.assertEqual(hits[2].title, "Project Management")
+
+    def test_arpa_e_scaleup_still_validates_technical_category(self):
+        """`356623`'s colon form is the family's original validating document."""
+        headings = [f"CATEGORY {n}: Advanced Energy Systems {n}" for n in (1, 2, 3)]
+        family, hits = patterns.best_family(headings)
+        self.assertEqual(family, "technical_category")
+        self.assertEqual(len(hits), 3)
+
+    def test_the_ascii_hyphen_is_a_parser_contract_not_a_measured_form(self):
+        """Honesty about what is measured, per §17.8.
+
+        For `technical_category` the ASCII hyphen AND the period are validated by
+        a real document (above). For `dod_topic` and `component` they are **not**:
+        searching every document P7.1 cached found ZERO `Component N-` headings,
+        and the only real `Topic N-` occurrence is a prose one -- NRL `352741`'s
+        amendment log, quoted in the negative test below. So the hyphen for those
+        two families is a **parser contract**, tested synthetically here and
+        labelled as synthetic, while each family keeps its own real-document
+        validation: `dod_topic` on `363526` (`Topic 1`-`12`), `349554`
+        (`Topic 1`-`18`) and `356612` (`Topic A1`-`A7`); `component` on `360333`
+        (`Component 1:`-`5:`).
+        """
+        synthetic = patterns.match_family(
+            patterns.FAMILIES_BY_ID["dod_topic"], "Topic 1- Aero-Structures")
+        self.assertIsNotNone(synthetic)
+        self.assertEqual(synthetic.title, "Aero-Structures")
+        # The en-dash form PACER actually prints, which is why BUG-2 never
+        # surfaced in production.
+        real = patterns.match_family(
+            patterns.FAMILIES_BY_ID["dod_topic"],
+            "Topic 1 \u2013 Aero-Structures")
+        self.assertEqual(real.code, synthetic.code)
+        self.assertEqual(real.title, synthetic.title)
+
+    # --- negatives: the widened class must not turn prose into a set ---------
+
+    def test_a_real_prose_period_form_yields_no_subtopic(self):
+        """DTRA `356612`'s notice, verbatim. `Category 6.1` is a DoD budget
+        activity code, and with `.` in the class the pattern DOES match it -- so
+        the honest assertion is the end-to-end one: two occurrences in a
+        document are below §6.4 rule 1's three-item floor and nothing is built.
+        """
+        lines = [
+            "funded by budget Category 6.1 (Basic Research), whether performed "
+            "by universities or industry",
+            "or (b) funded by budget Category 6.2 (Applied Research) performed "
+            "on-campus at a university.",
+        ]
+        family, hits = patterns.best_family(lines)
+        self.assertIsNone(family, "two prose hits must not form a family set")
+        containers = [
+            {"page": index + 1, "section": None, "anchor": None,
+             "text": f"{text}\n{BODY}"}
+            for index, text in enumerate(lines)
+        ]
+        result = seg.segment_document({}, b"", containers, PDF)
+        self.assertEqual(result.subtopics, ())
+
+    def test_a_real_prose_hyphen_form_yields_no_subtopic(self):
+        """NRL `352741`'s amendment log, verbatim. `Topic 61-24-26` is an agency
+        code in a sentence, and it is the ONLY real `Topic N-` in the corpus."""
+        line = ("The purpose of this amendment is to add Summary Topic 61-24-26 "
+                "to Appendix 1 as well as to update the point of contact.")
+        hit = patterns.match_family(patterns.FAMILIES_BY_ID["dod_topic"], line)
+        self.assertIsNotNone(hit, "the pattern does match it; the set rules refuse it")
+        containers = [{"page": 1, "section": None, "anchor": None,
+                       "text": f"{line}\n{BODY}"}]
+        result = seg.segment_document({}, b"", containers, PDF)
+        self.assertEqual(result.subtopics, ())
+        self.assertEqual(result.reason, "no_layer_accepted")
+
+    def test_administrative_prose_with_the_new_delimiters_stays_out(self):
+        """§18.3's most damaging change, re-checked against the widened class."""
+        lines = [
+            "1. Federal Agency Name",
+            "2. Funding Opportunity Title",
+            "3. Announcement Type",
+            "Applications in Category 3 - see Section IV for submission dates.",
+            "Component 2 - Reporting requirements are described in Appendix B.",
+        ]
+        containers = [
+            {"page": index + 1, "section": None, "anchor": None,
+             "text": f"{text}\n{BODY}"}
+            for index, text in enumerate(lines)
+        ]
+        result = seg.segment_document({}, b"", containers, PDF)
+        self.assertEqual(result.subtopics, ())
+
+
+class RequiredP7FixtureTests(unittest.TestCase):
+    """The two false-positive surfaces P5's closeout makes required P7 fixtures.
+
+    `evaluation/p7_false_positive_fixtures.json` carries the verbatim evidence
+    and the document hashes; this pins the *shape* against the live patterns, so
+    a widening that would admit either surface fails here rather than in a
+    backfill. Neither was tuned against -- P7.2 changed punctuation and nothing
+    else, and both are still refused for the reason P7.1 measured.
+    """
+
+    def test_cdc_component_funding_is_still_refused(self):
+        """`360335` lists four components, `360334` three. `component` MATCHES
+        them -- it always has -- and the set is refused on span length, because
+        the headings sit in a dense bulleted block. Adding the ASCII hyphen
+        changes neither half of that.
+        """
+        headings = [
+            "Component 1: Core Global Health Security Priorities",
+            "Component 2: Rapid Small-Scale Response to Infectious Disease "
+            "Outbreaks or other Public Health Emergencies",
+            "Component 3: Rapid Large-Scale Response to Infectious Disease "
+            "Outbreaks or other Public Health Emergencies",
+            "Component 4: Emerging Infectious Disease Threats",
+        ]
+        family, hits = patterns.best_family(headings)
+        self.assertEqual(family, "component")
+        self.assertEqual(len(hits), 4)
+        # The measured rejection: every heading is followed by its ceiling on
+        # the same dense page, so no span reaches §6.4 rule 3's 200 characters.
+        containers = [{"page": 1, "section": None, "anchor": None,
+                       "text": "\n".join(
+                           f"{heading}\nComponent {index + 1} Ceiling: 1,000,000"
+                           for index, heading in enumerate(headings))}]
+        flat = seg._flatten(containers)
+        candidates = seg._candidates_from(
+            hits, flat, [1] * len(hits), [None] * len(hits))
+        self.assertIn("span_length",
+                      seg.acceptance_failures(candidates, flat, set()))
+        result = seg.segment_document({}, b"", containers, PDF)
+        self.assertEqual(result.subtopics, ())
+
+    def test_eda_investment_priorities_match_no_family_at_all(self):
+        """`347414`, verbatim. Seven named priorities, bare-numbered, of which
+        *"each project must be consistent with #2"* and which *"are also
+        evaluation factors"*. P7.1 measured that NO family fires here; the
+        widened delimiter class must not change that. This is an Fm2 hazard, and
+        the fixture exists so P7.4 meets it deliberately.
+        """
+        lines = [
+            "EDA's Investment Priorities are:",
+            "1. Equity",
+            "2. Recovery & Resilience",
+            "3. Workforce Development",
+            "4. Manufacturing",
+            "5. Technology-Based Economic Development",
+            "6. Environmentally-Sustainable Development",
+            "7. Exports & Foreign Direct Investment",
+            "Under this NOFO, each project must be consistent with #2, "
+            "Recovery & Resilience.",
+        ]
+        for text in lines:
+            with self.subTest(text=text):
+                self.assertIsNone(patterns._owning_family(text))
+        self.assertEqual(patterns.best_family(lines), (None, ()))
+
+
+
 if __name__ == "__main__":
     unittest.main()
