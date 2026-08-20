@@ -290,24 +290,30 @@ class CacheIoTests(unittest.TestCase):
                               method="outline")
 
         with tempfile.TemporaryDirectory() as directory:
-            path = Path(directory) / "subtopic_records.json"
+            path = Path(directory) / "subtopics.js"
             records.write_cache(cache, path)
             raw = path.read_bytes()
 
             # §5.4: indented and key-sorted, because a human reads this diff.
+            self.assertIn(b"globalThis.SUBTOPIC_CATALOG=", raw)
             self.assertIn(b'\n "records": {', raw)
             # LF on every platform, like write_catalog and write_cache already do.
             self.assertNotIn(b"\r\n", raw)
             self.assertTrue(raw.endswith(b"\n"))
 
             text = raw.decode("utf-8")
-            payload = json.loads(text)
+            payload = json.loads(
+                text.split(records.SIDECAR_GLOBAL, 1)[1].rstrip(";\n")
+            )
             self.assertEqual(payload["schema_version"], 1)
             self.assertEqual(len(payload["records"]["360678"]["subtopics"]), 3)
 
             # Keys sorted throughout.
             first = payload["records"]["360678"]["subtopics"][0]
             self.assertEqual(list(first), sorted(first))
+            self.assertEqual(first["publication_state"], "review")
+            self.assertLessEqual(len(first["subtopic_terms"]), 400)
+            self.assertEqual(payload["search_index"]["document_count"], 0)
 
             reread = records.read_cache(path)
             self.assertEqual(reread, payload)
@@ -320,8 +326,8 @@ class CacheIoTests(unittest.TestCase):
         records.upsert_parent(cache, "360678", built, as_of="2026-08-20",
                               method="outline")
         with tempfile.TemporaryDirectory() as directory:
-            first = Path(directory) / "a.json"
-            second = Path(directory) / "b.json"
+            first = Path(directory) / "a.js"
+            second = Path(directory) / "b.js"
             records.write_cache(cache, first)
             records.write_cache(cache, second)
             self.assertEqual(first.read_bytes(), second.read_bytes())
@@ -333,6 +339,24 @@ class CacheIoTests(unittest.TestCase):
             corrupt = Path(directory) / "bad.json"
             corrupt.write_text("{not json", encoding="utf-8")
             self.assertEqual(records.read_cache(corrupt), records.empty_cache())
+
+    def test_parent_membership_is_the_only_child_currentness_axis(self):
+        cache = records.empty_cache()
+        cache["records"] = {
+            "active": {
+                "subtopics": [{
+                    "subtopic_id": "active:a",
+                    "own_deadline": "2000-01-01",
+                }]
+            },
+            "departed": {"subtopics": [{"subtopic_id": "departed:a"}]},
+        }
+        removed = records.retain_current_parents(cache, {"active"})
+        self.assertEqual(removed, ["departed"])
+        self.assertEqual(
+            cache["records"]["active"]["subtopics"][0]["own_deadline"],
+            "2000-01-01",
+        )
 
     def test_rejection_reasons_are_recorded_for_diagnostics(self):
         cache = records.empty_cache()

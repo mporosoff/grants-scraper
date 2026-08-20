@@ -130,15 +130,15 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # data/subtopic_records.json is paired with its !/data/ allowlist
+          # data/subtopics.js is paired with its !/data/ allowlist
           # line in .gitignore. `git add` on an ignored path exits non-zero and
           # this step runs under bash -eo pipefail, so a missing allowlist line
           # would abort the commit and stop the nightly publishing entirely.
           # The file does not exist until --enable-subtopics is on, so the path
           # is passed through git ls-files to stay a no-op until then.
           git add README.md PROJECT.md match_explorer.html team_match.html data/opportunities.js data/opportunity_enrichment.json data/document_evidence.json data/source_records.json data/faculty_matches.js data/link_health.json feeds .github/last_build
-          if [ -f data/subtopic_records.json ]; then
-            git add data/subtopic_records.json
+          if [ -f data/subtopics.js ]; then
+            git add data/subtopics.js
           fi
           if git diff --cached --quiet; then
             echo "The generated catalog is unchanged."

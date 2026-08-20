@@ -35,7 +35,7 @@ CATALOG_WARN_LIMIT_BYTES = 28 * MIB
 SUBTOPIC_RECORD_LIMIT_BYTES = 2 * 1024
 
 CATALOG = REPOSITORY_ROOT / "data" / "opportunities.js"
-SUBTOPIC_RECORDS = REPOSITORY_ROOT / "data" / "subtopic_records.json"
+SUBTOPIC_RECORDS = REPOSITORY_ROOT / "data" / "subtopics.js"
 
 
 def _megabytes(value):
@@ -83,11 +83,14 @@ class SubtopicRecordSizeBudgetTests(unittest.TestCase):
     def test_each_subtopic_record_stays_within_its_serialized_budget(self):
         if not SUBTOPIC_RECORDS.exists():
             self.skipTest(
-                "data/subtopic_records.json does not exist yet; the cache "
+                "data/subtopics.js does not exist yet; the cache "
                 "arrives with package C"
             )
 
-        payload = json.loads(SUBTOPIC_RECORDS.read_text(encoding="utf-8"))
+        text = SUBTOPIC_RECORDS.read_text(encoding="utf-8")
+        payload = json.loads(
+            text.split("globalThis.SUBTOPIC_CATALOG=", 1)[1].rstrip(";\n")
+        )
         records = payload.get("records") or {}
 
         oversized = []
