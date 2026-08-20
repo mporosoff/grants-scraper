@@ -1,0 +1,103 @@
+{
+ "schema_version": 1,
+ "purpose": "The two false-positive surfaces P5's closeout makes REQUIRED P7 fixtures, pinned as evidence rather than left in prose so P7.2-P7.4 cannot forget them.",
+ "not_a_recogniser": "Nothing here implements or tunes anything. P7.1 is a measurement session: these rows record what production does with these documents TODAY, verbatim quotes from the documents, and a human label for what each list actually is. No recogniser was tuned against them and no guard was written.",
+ "labels_are_human": "Every `truth_label` was assigned by reading the quoted text in the named document. No label derives from a classifier; Cov4 was not invoked in this session.",
+ "how_to_use_these": "P7.2-P7.4 must assert, for each surface, that the deliverable does NOT emit these lists as fundable children. The `production_today` block is the baseline a later session diffs against -- if it changes without a recogniser being added, something else regressed.",
+ "measured_at": "2026-08-20",
+ "surfaces": [
+  {
+   "surface": "cdc_component_funding",
+   "records": ["360335", "360334"],
+   "why_it_is_dangerous": "The `component` family in FAMILIES already matches these headings, and each component carries its own funding ceiling, so the set looks exactly like a fundable subdivision list. It is not: the notice requires every applicant to apply for all components. They are funding tranches, not alternatives. A family that already fires is the worst place for this.",
+   "truth_label": "not_a_fundable_subdivision_list",
+   "truth_evidence": [
+    "\"We fund all Global Health Security (GHS) cooperative agreements using component funding. You must apply for all components and include a budget and work plan for each.\"",
+    "\"This does not change the requirement that applicants apply for all components.\"",
+    "\"CDC may fund one or more of your components\" -- the AGENCY chooses which tranche to release, not the applicant"
+   ],
+   "documents": [
+    {
+     "opportunity_id": "360335",
+     "name": "cdc-rfa-jg-26-0050_mod.pdf",
+     "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354710",
+     "sha256": "6cc3eba7e3d0d2bb29f463ae86e6605353bff7a58478f0a64961b813bb093a27",
+     "bytes": 1188401,
+     "component_list_page": 7,
+     "components": [
+      "Component 1: Core Global Health Security Priorities -- Component 1 Ceiling: 1,000,000",
+      "Component 2: Rapid Small-Scale Response to Infectious Disease Outbreaks or other Public Health Emergencies -- Component 2 Ceiling: 10,000,000",
+      "Component 3: Rapid Large-Scale Response to Infectious Disease Outbreaks or other Public Health Emergencies -- Component 3 Ceiling: 15,000,000",
+      "Component 4: Emerging Infectious Disease Threats -- Component 4 Ceiling: 20,000,000"
+     ]
+    },
+    {
+     "opportunity_id": "360334",
+     "name": "cdc-rfa-jg-26-0048_mod.pdf",
+     "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354709",
+     "sha256": "e69920891fcf31ad2311f2c0d8b70fe4ab5e73123e2757ca95830c7ff3fefb9c",
+     "bytes": 1180265,
+     "component_list_page": 7,
+     "components": [
+      "Component 1: Core Global Health Security Priorities -- Component 1 ceiling: $500,000",
+      "Component 2: Rapid Small-Scale Response to Infectious Disease Outbreaks or other Public Health Emergencies -- Component 2 ceiling: $1,000,000",
+      "Component 3: Rapid Large-Scale Response to Infectious Disease Outbreaks or other Public Health Emergencies -- Component 3 ceiling: $2,000,000"
+     ],
+     "correction_to_the_plan": "P5's closeout describes both CDC records as carrying `Component 1`-`4`. Measured: 360335 lists FOUR components, 360334 lists THREE. The shape is identical; the cardinality is not, and 360334's three sits exactly on §6.4 rule 1's floor."
+    }
+   ],
+   "production_today": {
+    "spans": 0,
+    "families_firing": {"360335": {"component": 4}, "360334": {"component": 3}},
+    "best_family_selects": "component, on both records",
+    "refused_by": ["span_length"],
+    "reading": "This surface is LIVE at the family layer and is blocked today by exactly one §6.4 rule -- rule 3's 200-character span floor -- because the component headings sit in a dense bulleted block. It is one threshold or one new layer away from firing. That is a sharper statement than P5's closeout could make, and it is the reason this record is a fixture rather than a footnote.",
+    "designated_primary_fetch": "HTTP 500 from apply07.grants.gov for both records' `primary_document_url` on 2026-08-20; the same notice PDF was reachable through the attachment list, which is how it was read here"
+   }
+  },
+  {
+   "surface": "eda_investment_priorities",
+   "records": ["347414"],
+   "why_it_is_dangerous": "Seven named priorities printed as a clean bare-numbered list. They are alignment and evaluation criteria, not selectable subdivisions: one of the seven is mandatory for every project and the others only make an application more competitive.",
+   "truth_label": "evaluation_and_alignment_criteria",
+   "truth_evidence": [
+    "\"EDA's Investment Priorities are: 1. Equity 2. Recovery & Resilience 3. Workforce Development 4. Manufacturing 5. Technology-Based Economic Development 6. Environmentally-Sustainable Development 7. Exports & Foreign Direct Investment\"",
+    "\"Under this NOFO, each project must be consistent with #2, Recovery & Resilience. Consistency with additional Investment Priorities may make a project more competitive.\"",
+    "\"While all are important, equity and recovery and resilience are also evaluation factors\""
+   ],
+   "documents": [
+    {
+     "opportunity_id": "347414",
+     "name": "FY23 EDA Disaster Supplemental NOFO.pdf",
+     "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/327078",
+     "sha256": "233e84614e5602d8694ba687cb7c18145f605e6a951a6e67f9a40b18df0617d4",
+     "bytes": 479692,
+     "list_page": 10,
+     "items": [
+      "1. Equity",
+      "2. Recovery & Resilience",
+      "3. Workforce Development",
+      "4. Manufacturing",
+      "5. Technology-Based Economic Development",
+      "6. Environmentally-Sustainable Development",
+      "7. Exports & Foreign Direct Investment"
+     ]
+    }
+   ],
+   "production_today": {
+    "spans": 0,
+    "families_firing": {},
+    "best_family_selects": null,
+    "refused_by": [],
+    "reading": "The opposite hazard from CDC's, and the plan's prose treats the two as one thing. NO family fires here at all, on any of the record's six readable documents -- the list is bare-numbered prose, so it is invisible to every family in FAMILIES today. It is a LATENT surface, and it sits squarely in the path of Fm2 (bare numbered) and, because the items are also named title-case phrases under a heading, of Fm1. It is the negative case those two items must be measured against.",
+    "also_present": "five of this record's fifteen attachments are SF-424-family AcroForms yielding 146-342 characters each -- the measurability floor `FAMILY_TAXONOMY.md` §4 excludes, seen again"
+   }
+  }
+ ],
+ "explicitly_not_done": [
+  "no guard, veto or acceptance rule was written or changed",
+  "no recogniser was tuned against these documents",
+  "Cov4's challenge set was NOT extended -- P5's closeout suggests adding the EDA shape as a Cov4 negative when that set is next extended, and P7.1 is not that session",
+  "the documents themselves are not committed: they are 1.1 MB, 1.1 MB and 0.5 MB of Grants.gov attachment, and the sha256 plus the quoted text is what makes this fixture deterministic"
+ ]
+}
