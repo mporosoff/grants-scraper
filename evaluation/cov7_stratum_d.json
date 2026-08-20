@@ -1,0 +1,823 @@
+{
+ "schema_version": 1,
+ "purpose": "Cov7 -- 30 additional stratum-D reads, to tighten the residual-coverage interval (MEAS-2).",
+ "method": "attach_meta.jsonl was never committed, so the A/B/C/D strata were re-derived from live Grants.gov attachment metadata for all 815 records carrying attachments. The reconstruction reproduces the committed frame to within 4 records (A 214/215, B 89/90, C 26/27, D 482/483) and reproduces the survey's D-html count exactly (363).",
+ "frame": {
+  "definition": "stratum D = a record with at least one non-PDF attachment",
+  "population": {
+   "D": 482,
+   "D-NIH": 363,
+   "D-other": 119
+  },
+  "eligible_after_exclusions": {
+   "D-NIH": 358,
+   "D-other": 105
+  },
+  "seed": 20260827,
+  "cap_per_agency": 2,
+  "seats": {
+   "D-other": 28,
+   "D-NIH": 2
+  },
+  "exclusion_basis": "every opportunity id named in the committed census, survey, taxonomy, plan and inspection documents",
+  "exclusion_limitation": "the taxonomy's 50-record sample is not enumerated in any committed artifact, so records it drew but never named by id could not be excluded. 19 of the drawn-from pool were excludable by name."
+ },
+ "records": [
+  {
+   "opportunity_id": "363457",
+   "opportunity_number": "G26AS00155",
+   "agency": "Geological Survey",
+   "title": "Cooperative Agreement for Affiliated Partner with the Great Lakes – Northern Forest Cooper",
+   "sub_stratum": "D-other",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "USGS. `Full Annoucement.docx`: (1)-(5) are scope items of one cooperative agreement (molecular parasitology diagnostics); 1./2./3. are review criteria worth 40/30/30 points",
+   "production_format_blind": true,
+   "pipeline": {
+    "source_available": false,
+    "source_kind": null,
+    "documents_opened": 5,
+    "documents_unreadable_by_production": 3,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "347414",
+   "opportunity_number": "EDA-DISASTER-2023",
+   "agency": "Economic Development Administration",
+   "title": "FY 2023 Disaster Supplemental",
+   "sub_stratum": "D-other",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "EDA. 'EDA's Investment Priorities are: 1. Equity ... 7. Exports & FDI' -- but 'each project must be consistent with #2, Recovery & Resilience' and they 'are also evaluation factors'. Alignment criteria, not selectable subdivisions",
+   "production_format_blind": false,
+   "pipeline": {
+    "source_available": true,
+    "source_kind": "primary_notice",
+    "documents_opened": 8,
+    "documents_unreadable_by_production": 1,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "360335",
+   "opportunity_number": "CDC-RFA-JG-26-0050",
+   "agency": "Centers for Disease Control-GHC",
+   "title": "Strengthening Global Health Security through local partnerships in Sierra Leone",
+   "sub_stratum": "D-other",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "CDC Sierra Leone. Component 1-4 with ceilings, but 'You must apply for all components' and 'This does not change the requirement that applicants apply for all components'. Funding tranches, not alternatives",
+   "production_format_blind": false,
+   "pipeline": {
+    "source_available": true,
+    "source_kind": "primary_notice",
+    "documents_opened": 2,
+    "documents_unreadable_by_production": 1,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "361554",
+   "opportunity_number": "DFOP0017204",
+   "agency": "Bureau Of Educational and Cultural Affairs",
+   "title": "Annual Program Statement for U.S. Presentation at International Art Biennales",
+   "sub_stratum": "D-other",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "ECA Art Biennale APS. Objective 1-3 / Activity N.N are the objectives and workplan of one exhibition project",
+   "production_format_blind": true,
+   "pipeline": {
+    "source_available": true,
+    "source_kind": null,
+    "documents_opened": 6,
+    "documents_unreadable_by_production": 5,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "363375",
+   "opportunity_number": "R26AS00052",
+   "agency": "Bureau of Reclamation",
+   "title": "Desalination and Water Purification Research Program: Research Projects",
+   "sub_stratum": "D-other",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "Reclamation DWPR. Single research-projects programme; cue lines are budget-narrative and Grants.gov submission instructions",
+   "production_format_blind": false,
+   "pipeline": {
+    "source_available": true,
+    "source_kind": "primary_notice",
+    "documents_opened": 6,
+    "documents_unreadable_by_production": 2,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "363009",
+   "opportunity_number": "OFOP0003144",
+   "agency": "Bureau of International Narcotics-Law Enforcement",
+   "title": "Enhancing Prison Population Management Through Expanded Probation in Tunisia",
+   "sub_stratum": "D-other",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "INL Tunisia. Single cooperative agreement; numbered items are period/assistance-type/eligibility sections",
+   "production_format_blind": false,
+   "pipeline": {
+    "source_available": true,
+    "source_kind": "primary_notice",
+    "documents_opened": 5,
+    "documents_unreadable_by_production": 1,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "363381",
+   "opportunity_number": "DFOP0018770",
+   "agency": "Office to Monitor-Combat Trafficking in Persons",
+   "title": "Program to End Modern Slavery Annual Program Statement",
+   "sub_stratum": "D-other",
+   "category": "list_exists_generic_model_misses",
+   "evidence": "State PEMS Annual Program Statement. 'Priority Program Areas:' then PRIORITY AREA 1: PROBLEM ANALYSIS AND PROGRAM DEVELOPMENT / 2: PILOTING & TESTING / 3: FULL-SCALE IMPLEMENTATION AND EVALUATION / 4: LEVERAGE TECHNOLOGICAL INNOVATIONS AND PRIVATE SECTOR. Prose confirms 'Priority Areas 1-3 span the continuum ... Priority area 4 leverages'. 4 selectable areas",
+   "production_format_blind": false,
+   "pipeline": {
+    "source_available": true,
+    "source_kind": null,
+    "documents_opened": 3,
+    "documents_unreadable_by_production": 1,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "363340",
+   "opportunity_number": "PDS-PORTUGAL-FY26-01",
+   "agency": "U.S. Mission to Portugal",
+   "title": "American Corners Portugal Operational Funding",
+   "sub_stratum": "D-other",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "US Mission Portugal. American Corners operational funding, one project",
+   "production_format_blind": true,
+   "pipeline": {
+    "source_available": true,
+    "source_kind": "primary_notice",
+    "documents_opened": 3,
+    "documents_unreadable_by_production": 2,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "362805",
+   "opportunity_number": "OFOP0003000",
+   "agency": "Bureau of International Narcotics-Law Enforcement",
+   "title": "Combating Transnational Criminal Organizations through Data-Driven Analysis and Customized",
+   "sub_stratum": "D-other",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "INL Bosnia. (1)-(5) are the five objectives of one cooperative agreement, not alternatives",
+   "production_format_blind": false,
+   "pipeline": {
+    "source_available": true,
+    "source_kind": "primary_notice",
+    "documents_opened": 5,
+    "documents_unreadable_by_production": 1,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "360334",
+   "opportunity_number": "CDC-RFA-JG-26-0048",
+   "agency": "Centers for Disease Control-GHC",
+   "title": "Expanding Global Health Security through local partnerships in Senegal",
+   "sub_stratum": "D-other",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "CDC Senegal. Identical Component-funding structure to 360335",
+   "production_format_blind": false,
+   "pipeline": {
+    "source_available": true,
+    "source_kind": "primary_notice",
+    "documents_opened": 2,
+    "documents_unreadable_by_production": 1,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "362755",
+   "opportunity_number": "R26AS00349",
+   "agency": "Bureau of Reclamation",
+   "title": "WaterSMART Cooperative Watershed Management Program",
+   "sub_stratum": "D-other",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "Reclamation WaterSMART CWMP. Numbered items are watershed-group eligibility tests",
+   "production_format_blind": false,
+   "pipeline": {
+    "source_available": true,
+    "source_kind": "primary_notice",
+    "documents_opened": 7,
+    "documents_unreadable_by_production": 0,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "363347",
+   "opportunity_number": "PD-TIJUANA-NOGALES-HERMOSILLO-FY2026-01",
+   "agency": "U.S. Mission to Mexico",
+   "title": "Building Skills, Strengthening Communities, and Advancing Innovation in Northwest Mexico",
+   "sub_stratum": "D-other",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "US Mission Mexico. Single public-diplomacy project; numbered items are application contents and funding restrictions",
+   "production_format_blind": false,
+   "pipeline": {
+    "source_available": true,
+    "source_kind": "primary_notice",
+    "documents_opened": 4,
+    "documents_unreadable_by_production": 2,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "362715",
+   "opportunity_number": "P26AS00125",
+   "agency": "National Park Service",
+   "title": "Outdoor Recreation Legacy Partnership Program (ORLP) Recurring Notice 5 Year",
+   "sub_stratum": "D-other",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "NPS ORLP. `ORLP_NOFO_071526.docx` read out-of-band: 'Project Type: land acquisition, new development, renovation, combination' is a form field, not a subdivision list",
+   "production_format_blind": true,
+   "pipeline": {
+    "source_available": true,
+    "source_kind": null,
+    "documents_opened": 4,
+    "documents_unreadable_by_production": 2,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "363545",
+   "opportunity_number": "G26AS00159",
+   "agency": "Geological Survey",
+   "title": "Cooperative Agreement for Affiliated Partner with the Californian Cooperative Ecosystem St",
+   "sub_stratum": "D-other",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "USGS, sibling of 363457. Same template, same absence",
+   "production_format_blind": true,
+   "pipeline": {
+    "source_available": false,
+    "source_kind": null,
+    "documents_opened": 5,
+    "documents_unreadable_by_production": 3,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "363249",
+   "opportunity_number": "AMERICANSPACESCYBERNEXT-2026",
+   "agency": "U.S. Mission to Albania",
+   "title": "CyberNext: Advance Cybersecurity and AI Readiness",
+   "sub_stratum": "D-other",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "US Mission Albania CyberNext. All five documents are .docx/.xlsx; read out-of-band, the NOFO has 'Project Background, Goals, and Objectives' for one project",
+   "production_format_blind": true,
+   "pipeline": {
+    "source_available": false,
+    "source_kind": null,
+    "documents_opened": 5,
+    "documents_unreadable_by_production": 5,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "362754",
+   "opportunity_number": "P26AS00060",
+   "agency": "National Park Service",
+   "title": "Southwest Border Resource Protection Program",
+   "sub_stratum": "D-other",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "NPS Southwest Border. Only document is `P26AS00060 SWBRPP NOFO.docx`; read out-of-band, (a)-(c) are budget information and a.-d. are review stages",
+   "production_format_blind": true,
+   "pipeline": {
+    "source_available": false,
+    "source_kind": null,
+    "documents_opened": 1,
+    "documents_unreadable_by_production": 1,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "363534",
+   "opportunity_number": "L26AS00043",
+   "agency": "Bureau of Land Management",
+   "title": "FY26 Bureau of Land Management Threatened and Endangered Species - Bureau wide",
+   "sub_stratum": "D-other",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "BLM T&E Species. Cue lines are SF-424A object-class budget categories",
+   "production_format_blind": false,
+   "pipeline": {
+    "source_available": true,
+    "source_kind": "primary_notice",
+    "documents_opened": 5,
+    "documents_unreadable_by_production": 3,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "359782",
+   "opportunity_number": "HR001125S0011",
+   "agency": "DARPA - Tactical Technology Office",
+   "title": "TTO Office Wide (OW) BAA 2025",
+   "sub_stratum": "D-other",
+   "category": "list_exists_generic_model_misses",
+   "evidence": "DARPA TTO Office-Wide BAA HR001125S0011. 'TTO is soliciting innovative executive summaries and proposals in the following focus areas:' then bulleted Design/Build/Buy, Surge and Sustain, Long Range Effects, Disruptive Innovation. 4 items, no ordinal. SECTION II: EVALUATION CRITERIA repeats the identical bullet form immediately below -- an adjacent decoy",
+   "production_format_blind": false,
+   "pipeline": {
+    "source_available": true,
+    "source_kind": "agency_notice",
+    "documents_opened": 8,
+    "documents_unreadable_by_production": 5,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_extractable_text",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "358380",
+   "opportunity_number": "HQ003425NFOEASD03",
+   "agency": "Washington Headquarters Services",
+   "title": "Department of War Cyber Service Academy (DoW CSA)",
+   "sub_stratum": "D-other",
+   "category": "ambiguous_unresolved",
+   "evidence": "WHS DoW Cyber Service Academy. 'The Institutions will provide a technical approach that communicates one of the following program tracks: 1. Two-Year Community College Program 2. DoW Partnership Transfer Credit Programs 3. Graduate Certificate Program'. Selectable and three-strong, but degree-delivery pathways rather than research subdivisions -- DEC-11's class. Excluded from the rate; sensitivity reported",
+   "production_format_blind": false,
+   "pipeline": {
+    "source_available": false,
+    "source_kind": null,
+    "documents_opened": 6,
+    "documents_unreadable_by_production": 0,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "58617",
+   "opportunity_number": "VA-GRANTS-112508-002",
+   "agency": "Construction of State Home Facilities",
+   "title": "State Veterans Home Construction Grant Program",
+   "sub_stratum": "D-other",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "VA State Veterans Home Construction. Cue lines are space-program analysis form sections and safety-grant priorities",
+   "production_format_blind": false,
+   "pipeline": {
+    "source_available": false,
+    "source_kind": null,
+    "documents_opened": 6,
+    "documents_unreadable_by_production": 1,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "363522",
+   "opportunity_number": "DFOP0019570",
+   "agency": "Bureau of Democracy Human Rights and Labor",
+   "title": "Early Warning and Response in Nigeria",
+   "sub_stratum": "D-other",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "DRL Nigeria. 'Objective 1: Civil society operationalizes early warning...' is the single project's objective",
+   "production_format_blind": false,
+   "pipeline": {
+    "source_available": true,
+    "source_kind": "primary_notice",
+    "documents_opened": 6,
+    "documents_unreadable_by_production": 2,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "363271",
+   "opportunity_number": "PAS-JOR-FY26-004",
+   "agency": "U.S. Mission to Jordan",
+   "title": "Reel American: The Road to the Olympic Rings",
+   "sub_stratum": "D-other",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "PD Jordan. One project; '1. Project Background, Goals, and Objectives' is a NOFO section header",
+   "production_format_blind": false,
+   "pipeline": {
+    "source_available": true,
+    "source_kind": "primary_notice",
+    "documents_opened": 5,
+    "documents_unreadable_by_production": 3,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "362749",
+   "opportunity_number": "F26AS00083",
+   "agency": "Fish and Wildlife Service",
+   "title": "F26AS00083 Aquatic Invasive Species Grants to Great Lakes States - Fiscal Year 2026 Great ",
+   "sub_stratum": "D-other",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "FWS Aquatic Invasive Species. Formula-style grants to Great Lakes states; no subdivision list",
+   "production_format_blind": false,
+   "pipeline": {
+    "source_available": true,
+    "source_kind": "primary_notice",
+    "documents_opened": 5,
+    "documents_unreadable_by_production": 1,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "362325",
+   "opportunity_number": "ETA-TEGL-09-24-CH1",
+   "agency": "Employment and Training Administration",
+   "title": "Updated National Dislocated Worker Grant Program Guidance and Application Information",
+   "sub_stratum": "D-other",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "ETA National Dislocated Worker Grant guidance. Numbered items are disaster-eligibility definitions and allowable activities",
+   "production_format_blind": false,
+   "pipeline": {
+    "source_available": true,
+    "source_kind": "primary_notice",
+    "documents_opened": 6,
+    "documents_unreadable_by_production": 4,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "361418",
+   "opportunity_number": "USDA-FS-2026-GLRI-CFP",
+   "agency": "Forest Service",
+   "title": "Great Lakes Restoration Initiative: Community Forest and Open Space Conservation Program",
+   "sub_stratum": "D-other",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "Forest Service GLRI Community Forests. Only document is `GLRI CFP FS-2026-06_OMB.docx`; read out-of-band, I.-IX. are the standard NOFO section skeleton",
+   "production_format_blind": true,
+   "pipeline": {
+    "source_available": false,
+    "source_kind": null,
+    "documents_opened": 1,
+    "documents_unreadable_by_production": 1,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "363270",
+   "opportunity_number": "PAS-JOR-FY26-003",
+   "agency": "U.S. Mission to Jordan",
+   "title": "Qissati ma3 America",
+   "sub_stratum": "D-other",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "PD Jordan Qissati. Objective 1-2 of one media project",
+   "production_format_blind": false,
+   "pipeline": {
+    "source_available": true,
+    "source_kind": "primary_notice",
+    "documents_opened": 5,
+    "documents_unreadable_by_production": 3,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "363105",
+   "opportunity_number": "OFOP0003244",
+   "agency": "U.S. Mission to the Philippines",
+   "title": "English Language Exchange Programs: AI and Educational Technology Integration",
+   "sub_stratum": "D-other",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "PD Philippines. One English-language exchange project",
+   "production_format_blind": false,
+   "pipeline": {
+    "source_available": true,
+    "source_kind": "primary_notice",
+    "documents_opened": 4,
+    "documents_unreadable_by_production": 1,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "363595",
+   "opportunity_number": "DFOP0019631",
+   "agency": "Bureau of Democracy Human Rights and Labor",
+   "title": "DRL Promoting Sovereignty and Rule of Law in Europe",
+   "sub_stratum": "D-other",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "DRL Europe. Objective 1-2 of one rule-of-law project",
+   "production_format_blind": false,
+   "pipeline": {
+    "source_available": true,
+    "source_kind": "primary_notice",
+    "documents_opened": 6,
+    "documents_unreadable_by_production": 2,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "358875",
+   "opportunity_number": "PAR-25-415",
+   "agency": "National Institutes of Health",
+   "title": "Support for Research Excellence First Independent Research (SuRE-First) Award (R16 - Clini",
+   "sub_stratum": "D-NIH",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "NIH SuRE-First R16. Single award mechanism; numbered items are institutional-letter requirements",
+   "production_format_blind": false,
+   "pipeline": {
+    "source_available": true,
+    "source_kind": null,
+    "documents_opened": 1,
+    "documents_unreadable_by_production": 0,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  },
+  {
+   "opportunity_id": "359757",
+   "opportunity_number": "PA-27-102",
+   "agency": "National Institutes of Health",
+   "title": "NIH Small Business Technology Transfer Grant (Parent STTR [R41/R42] Clinical Trial Optiona",
+   "sub_stratum": "D-NIH",
+   "category": "genuine_no_enumerated_list",
+   "evidence": "NIH Parent STTR R41/R42. Parent announcement; participating-IC topics live outside the NOFO, and none is enumerated in it",
+   "production_format_blind": false,
+   "pipeline": {
+    "source_available": false,
+    "source_kind": null,
+    "documents_opened": 1,
+    "documents_unreadable_by_production": 0,
+    "segmentation_spans": 0,
+    "segmentation_reason": "no_layer_accepted",
+    "ownership": null,
+    "cov4_invoked": false,
+    "cov4_fundability": null,
+    "provenance": null,
+    "confidence": null,
+    "publication_eligibility": null
+   }
+  }
+ ],
+ "category_counts": {
+  "genuine_no_enumerated_list": 27,
+  "list_exists_generic_model_misses": 2,
+  "ambiguous_unresolved": 1
+ },
+ "measurement": {
+  "cov7_only": {
+   "read": 30,
+   "hits": 2,
+   "unresolved": 1
+  },
+  "prior_committed": {
+   "read": 12,
+   "hits": 1,
+   "source": "docs/FAMILY_TAXONOMY.md 4.3"
+  },
+  "combined_pooled": {
+   "read": 42,
+   "hits": 3,
+   "rate": 0.0714,
+   "wilson": [
+    0.0246,
+    0.1901
+   ],
+   "catalog_range": [
+    12,
+    92
+   ],
+   "caveat": "Cov7 deliberately over-sampled D-other, so the pooled rate is not a simple random sample of D"
+  },
+  "sub_stratified": {
+   "D-NIH": {
+    "catalog": 363,
+    "read": 24,
+    "hits": 0,
+    "wilson": [
+     0,
+     0.138
+    ],
+    "catalog_range": [
+     0,
+     50
+    ],
+    "reads_source": "2 survey + 20 Cov2 + 2 Cov7"
+   },
+   "D-other": {
+    "catalog": 119,
+    "read": 37,
+    "hits": 3,
+    "wilson": [
+     0.028,
+     0.213
+    ],
+    "catalog_range": [
+     3,
+     25
+    ],
+    "reads_source": "5 survey + 4 taxonomy + 28 Cov7"
+   },
+   "D_total_catalog_range": [
+    3,
+    75
+   ],
+   "D_total_point": 10
+  },
+  "bookkeeping_discrepancy": "the plan's Cov7 row says stratum D has 12 reads; the taxonomy's own sample table sums to 13 (survey 7 + taxonomy 6). The committed 4.3 rate table says 12, and 12 is used here. The difference moves no conclusion."
+ },
+ "regressions": {
+  "cov4_invoked_on": 0,
+  "cov4_rejections_of_valid_segmentation": 0,
+  "ownership_unestablished_on_valid_children": 0,
+  "classifier_or_api_failures": 0,
+  "cov6_caused_confidence_changes": 0,
+  "children_lost_rather_than_queued": 0,
+  "note": "No record in the sample produced a span, so Cov4 was never invoked and Cov6's publication predicate was never reached. This sample cannot exercise either gate; it also cannot have been harmed by one."
+ }
+}
