@@ -2,9 +2,9 @@
 
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
-Status: in progress · Version 8.26 · Written 2026-08-15 · **Revised 2026-08-26 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
+Status: in progress · Version 8.27 · Written 2026-08-15 · **Revised 2026-08-20 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
 
-> **Start at §18, and read §18.0 first.** §18 defines the minimum path — the **eleven** work packages **P1 … P11** — and lists what is deferred and what it costs. **§18.0 is the canonical namespace**: package IDs, the `BUG-*` / `MEAS-*` / `DEC-*` / `DEBT-*` prefixes, the migration table for every legacy label (`Package A–G`, `D½`, `D⅝`, `D¾`, `S1–S3`, `Package N`, bare `D#`, `M#`), the current ordered path, and a diagram. **P5 is CLOSED (2026-08-27), P6 is closed and P8 is complete. Cov4, Cov6 and Cov7 are all closed. P7 is next, and §18.1 defines its scope from measured evidence rather than from the old form taxonomy.** **§18.0.6 is the canonical Open Obligations Register** — every unresolved `DEC-*`, `BUG-*`, `DEBT-*` and `MEAS-*` in the project, each with an owner and a gate. §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
+> **Start at §18, and read §18.0 first.** §18 defines the minimum path — the **eleven** work packages **P1 … P11** — and lists what is deferred and what it costs. **§18.0 is the canonical namespace**: package IDs, the `BUG-*` / `MEAS-*` / `DEC-*` / `DEBT-*` prefixes, the migration table for every legacy label (`Package A–G`, `D½`, `D⅝`, `D¾`, `S1–S3`, `Package N`, bare `D#`, `M#`), the current ordered path, and a diagram. **P5 is CLOSED (2026-08-27), P6 is closed and P8 is complete. Cov4, Cov6 and Cov7 are all closed. P7 is OPEN and its first item is done: P7.1 recomputed the residual on 2026-08-20 (§18.1 P7.1), and §18.1 carries the recomputed recommendation table rather than the pre-P6 yields.** **§18.0.6 is the canonical Open Obligations Register** — every unresolved `DEC-*`, `BUG-*`, `DEBT-*` and `MEAS-*` in the project, each with an owner and a gate. §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
 >
 > **Legacy labels in the revision notes below are historical.** They record what a past session actually did and are left as written; translate any of them through §18.0.3 rather than assuming a bare `D5` or `S1` still names live work.
 >
@@ -12,6 +12,72 @@ Status: in progress · Version 8.26 · Written 2026-08-15 · **Revised 2026-08-2
 >
 > **8.4 closes the two blocking storage decisions.** `MAX_TERMS` stays at 400 and subtopics ship in a lazily-loaded `data/subtopics.js` sidecar — one question, not two, once you measure that 60.3% of a cache record is a term map the browser never reads as content. **Nothing now blocks committing a cache except running the backfill again.** Every rate quoted against `docs/CORPUS_CENSUS.md`'s 20 documents is still superseded by `docs/COVERAGE_SURVEY.md` (§1.1).
 >
+> **8.27 recomputes P7's residual, and the premise it was built on did not
+> hold.** A measurement patch only — **no recogniser was implemented, no family,
+> threshold or acceptance rule changed, Cov4 was not invoked, no cache was
+> written, and neither DEC-10 nor DEC-11 was decided.** P7.1 ran production's own
+> subtopic path over a **27-record census of every historically form-bearing
+> record** and a **60-record seeded document sample**, both enumerated and pinned
+> *before* any outcome was read (`tools/p7_frame.py`,
+> `tests/test_p7_frame.py` — DEBT-11's lesson applied prospectively), and froze
+> the outcomes in `evaluation/p7_residual.json`.
+>
+> **Structured and referenced sources removed ZERO records from the generic
+> residual.** `first_refusal` declined all 27; the ROSES `native` path is **not
+> wired into `subtopic_fields` at all** (`subtopic_children` is called only from
+> tests and `tools/run_cov4_validation.py` — **DEBT-13**, opened here, owner
+> P9.0); and no form-bearing record is a ROSES element. So the thing that moved
+> the yields is **the current generic model plus a repair already in the code**,
+> not P6 or P8.
+>
+> **Three of the four re-gated forms move.** `Fm2`'s F1 basis falls from 8
+> observations to **5 residual** — `361526`, `360205` and **`330175`** are
+> already recovered, and `330175` is the record §18.3a leans on hardest:
+> `outline_structural` reads all **24** of its research centres *including the
+> three restarting counter groups*, so that mechanical requirement is already met
+> for that document by a structural family. Estimate **~31 → ~21**. `Fm6`'s F3
+> random observations **halve, 2 → 1**, because `356612` now segments its seven
+> DTRA topics: **`Fm3` and `Fm4` are already implemented** (commit `d85e2df`,
+> 2026-08-17), which 8.9's note records and every P7 table still contradicted —
+> **P7.2's remaining content is BUG-2 alone**. `Fm1`'s F4 basis barely moves,
+> 10 → **9 residual**, and its one loss is `363607` going **unreachable**
+> (**DEBT-10** reproduced live on its own named example) rather than covered.
+> `Fm5` is unchanged at 1 of 1.
+>
+> **`Fm8` was MEASURE FIRST and is now measured: it has no population.** 0 of
+> **1,475** records in an offline catalog text census, 0 of **60** in the document
+> sample (Wilson 0–6.0% → 0–68 of the 1,134 eligible), 1 in Cov7's 42 stratum-D
+> reads. Its one document is verified genuine — `PRIORITY AREA 1`–`4` as headings
+> with their own Purpose, Funding Amount and Period of Performance — and **10 of
+> its 14 occurrences are prose**. The State APS template it belongs to renders
+> the same list **named** (`331306`), **bare-parenthesised** (`363120`) and
+> **bare-numbered** (`362383`) elsewhere in the catalog, so `Fm1` and `Fm2`
+> already target its population. **`Fm8` → DECLINE with a falsifier recorded;
+> P7.5 is not scheduled.**
+>
+> **Recommendation after P7.1: `Fm1` BUILD AS ALREADY PLANNED · `Fm2` BUILD ONLY
+> IF EXISTING GATE PASSES (§18.3a is not waived) · `Fm5` DEFER · `Fm6` DECLINE ·
+> `Fm8` DECLINE.**
+>
+> **`no_extractable_text`, for DEC-10 at P7 closeout and not decided here:** **1
+> of 151 documents** read across both frames, and its cause is a content-free
+> agency page, not a scanned PDF. Reported beside the committed historical rate
+> (**11 of 770**, D5, with its MEAS-1 and BUG-0 caveats) and the
+> catalog-restricted cache rate (**9 of 726**, after excluding DEBT-4's 213), with
+> network failures, empty portal shells, unsupported file types,
+> extraction-library failures, budgets and genuinely image-only PDFs counted
+> **separately**. **Zero image-only PDFs in either frame**, which is the only
+> thing OCR would fix.
+>
+> **Both required P7 fixtures are pinned** (`evaluation/p7_false_positive_fixtures.json`)
+> and they are **different hazards**, which the prose treated as one: CDC's
+> `component` family **fires** on both records and `best_family` selects it,
+> refused today by exactly one §6.4 rule (`span_length`), while EDA's seven
+> Investment Priorities fire **nothing** because they are bare-numbered prose.
+> Correction: `360335` lists **four** components, `360334` lists **three**.
+>
+> 681 tests green, `verify_no_drift` exit 0, §0.5 byte-identical.
+
 > **8.26 gives decisions an author and profile relevance an owner.** A
 > documentation and governance patch only — **no production behaviour changed,
 > and no decision was made.** Two gaps the P5 closeout left: the register said
@@ -3463,7 +3529,7 @@ Legacy labels are translated once, in §18.0.3 — not repeated here.
 | **P6.1** | NASA ROSES structured-source proof | ✅ **complete** 2026-08-18. Gate closed clause by clause against repository evidence: six clauses outright, one with a forward obligation (the Cov4 bypass), one on evidence (§0.5). **Previously-category-(a) records reached: 0** — P6.1 reached the **(e)** population |
 | **P6.2** | DOE Office of Science structured-source test | ✅ **complete 2026-08-21 — a measured negative, and no source was built.** It was the first real test of whether structured/referenced ingestion reaches category (a), and **the population was empty**: 2 Office of Science parents, **both already resolved** by generic parsing, **0** previously category (a), **0** net-new children, **3** non-fundable organizational labels rejected. Evidence: `docs/DOE_SOURCE_INSPECTION.md` |
 | **P6.3** | DoD structured-source test | ✅ **complete 2026-08-22, Army/TDAC only** — exactly what MEAS-7 justified. **1 parent (`345241`), 14 external-only children**, provenance `referenced`, confidence `high`, **0** generic overlap. Health: names the parent, 14 ≥ floor 8. ONR rejected on measurement; **no DoD router, no SAM.gov** |
-| **P7** | Residual generic forms | ⛔ **not started — and it is now the next package.** Every gate ahead of it is passed: Cov4 2026-08-26, P6 measured, **P5 closed 2026-08-27**. Its scope is **defined** by P5's closeout — BUILD `Fm1`/`Fm2`/`Fm3`/`Fm4`, MEASURE FIRST `Fm8`, DEFER `Fm5`, DECLINE `Fm6`/`Fm7` — and its first item is **P7.1, recomputing residual coverage**: Fm1/Fm2/Fm5/Fm6 build only against records still uncovered after structured sources, and their yields are re-measured on that residual. Fm3, Fm4 and Fm7 are not re-gated |
+| **P7** | Residual generic forms | 🔄 **open; P7.1 complete 2026-08-20, P7.2 next.** Every gate ahead of it is passed: Cov4 2026-08-26, P6 measured, **P5 closed 2026-08-27**. Its scope is **defined** by P5's closeout — BUILD `Fm1`/`Fm2`/`Fm3`/`Fm4`, MEASURE FIRST `Fm8`, DEFER `Fm5`, DECLINE `Fm6`/`Fm7` — and its first item **P7.1 is done** — the residual is recomputed and frozen in `evaluation/p7_residual.json`, structured/referenced sources removed **0** records from it, `Fm8` is measured and **DECLINED**, and `Fm3`/`Fm4` turn out to have landed already in `d85e2df`, so **P7.2 reduces to BUG-2**. Recommendation after P7.1: `Fm1` BUILD AS ALREADY PLANNED · `Fm2` BUILD ONLY IF EXISTING GATE PASSES · `Fm5` DEFER · `Fm6` DECLINE · `Fm8` DECLINE |
 | **P8** | NASA ROSES Catalog Source | ✅ **complete** 2026-08-20, own gate passed, **no open items** (§18.1). A **catalog-completeness branch**, not subtopic recall. The adapter is enabled and reconciles all **63** elements every refresh; the catalog-completeness gap is **closed** — the 2 actionable unmatched elements are emitted (**+0.136%**) and the other **51** stay inventory-only. Native identity `(cycle, code, title)` and the cross-source ambiguity rule were audited against the live source in P8.2a |
 | **P9** | Storage and scoring | ⛔ **not started.** **P9.0 must run before anything writes a cache** |
 | **P10** | Retrieval and UI | ⛔ **not started** |
@@ -3537,7 +3603,8 @@ it as **P8**, sequenced after P6.1 and before P6.2. **DEC-0** (`MAX_TERMS` stays
 | **DEBT-10** | **`attachment_count` in the enrichment cache can outlive the API's own attachment list.** Measured by Cov7 across all 815 records carrying attachments: **4** report a non-zero count while `synopsisAttachmentFolders` now returns empty — `356127`, `363252`, `363554` and **`363607`**, the last of which the survey recorded as *enumerating* (6 Addenda, one subdivision per file). Not a parser defect: the live response changed and nothing compares the two. **Natural home is a §7.4 canary.** It is also the whole of the 4-record gap between Cov7's rebuilt strata and the committed ones | Cache/source staleness; **a known enumerating record has become unreachable**, so it is not cosmetic |
 | **DEBT-11** | **The stratified sampling instrument is not committed.** `pick50.py`, `attach_meta.jsonl`, `build_prompts.py`, `family_verdict.py` and `yields2.py` are all one-shot probes, and the committed caches keep only `attachment_count` — no per-attachment metadata. Cov7 therefore could not reproduce the prior frame and had to rebuild it from **815 live detail fetches**, and could exclude only the **107** record ids the documents happen to name, not the taxonomy's full 50-record draw | Every future stratified read pays the same cost and inherits the same imperfect exclusion set. Committing `attach_meta.jsonl` alone would fix both |
 | **DEBT-12** | **A no-primary record's own announcement is labelled `source_kind: secondary_attachment`.** Carried forward from Cov6, which found it and deliberately did not fix it. Harmless to Cov4 today — both attachment kinds are owned-by-binding in `ATTACHMENT_KINDS`, so ownership is unaffected — and Cov7 confirmed it blocks no measurement. **Classification deferred to the P5 closeout obligation audit**: `BUG-*`, `DEBT-*`, or explicit harmless/WONTFIX | Verified on `363526`, whose winning document is its own `NOFOAFRLAFOSR20260004 DEPSCoR-RC.pdf` |
-| **DEBT-8** | `structural_siblings` is blind to **55% of the corpus's PDFs** (71 of 129 carry no bookmarks) | A measured limitation of the mechanism, not a defect in it (§6.3a) |
+| **DEBT-8** | `structural_siblings` is blind to **55% of the corpus's PDFs** (71 of 129 carry no bookmarks) | A measured limitation of the mechanism, not a defect in it (§6.3a). **P7.1 sharpened it**: 12 of its 19 residual records *have* bookmarks and still miss |
+| **DEBT-13** | **The ROSES adapter's `native` children never reach the production subtopic path** — `subtopic_children` is called only from tests and `tools/run_cov4_validation.py`. Found at P7.1 while establishing what "already covered by a structured source" means today | Latent, same shape as **BUG-12**; both bite when P9 wires the merge. Status and owner in §18.0.6 |
 | **DEBT-9** | ~~No candidate span population is committed anywhere.~~ ✅ **CLOSED 2026-08-24.** `evaluation/meas3_population.json` is a frozen **post-Cov5** population — **105 candidates** from four accepting records — built by `tools/build_meas3_population.py` from committed evidence (pinned URL **and** `sha256`, verified on fetch) through the unmodified production path, and pinned by 15 tests in `tests/test_meas3_population.py`: canonical ordering, byte-identical round trip, semantic input carried inline so classification needs no network, arms separately identifiable. **This does not recover §11's 114 spans** — those are gone and Cov5 changed extraction — it stops the loss recurring | ✅ closed |
 
 ### What is true and settled, so it is not relitigated
@@ -3679,10 +3746,13 @@ P7, because that is where it falls in the ordered path (§18.0.4).
 
 **Added 8.5. Gated behind P5's Cov4 gate and, from 8.7, behind P6** — the two largest uncovered forms are both unsafe on structure alone (§18.1), and all four recogniser items are rung-4 inference whose yields were measured before any structured source was tried. **Fm1, Fm2, Fm5 and Fm6 build only against records still uncovered after the structured sources land, and their yields are re-measured on that residual — recompute it before starting** (§18.0.4 step 6). Fm3, Fm4 and Fm7 are unaffected — two repairs and a decision not to build. Yields below are *records in the 90 read* · *catalog estimate*, measured **before any structured source existed**.
 
+- [x] **P7.1. Recompute the residual, and give `Fm8` a denominator** — ✅ **done 2026-08-20**, `evaluation/p7_residual.json`, `tools/p7_frame.py`, `tools/p7_residual_report.py`, 51 tests. **Structured/referenced sources removed 0 records**; `Fm2` ~31 → ~21, `Fm6` random observations 2 → 1, `Fm1` 10 → 9 residual, `Fm5` unchanged, **`Fm8` measured and DECLINED**. `no_extractable_text` reported for DEC-10 **without deciding it**; both required fixtures pinned. **Read §18.1 P7.1 before starting any item below — the yields there supersede the ones in this list.**
+
 - [ ] **Fm1. F4 — named / bulleted, no counter** — 9 of 90 · **~73**, or ~22 excluding one stratum-E observation. `label_run` (§6.3a) plus a bulleted variant. Highest false-positive risk in the plan; `362233`'s five real Focus Areas sit one subsection above five decoy process bullets. **Do not build on structure alone**
 - [ ] **Fm2. F1 — bare numbered** — 8 of 90 · ~31, the most stable uncovered row. **Blocked by §18.3a's four exit criteria — read them first.** Needs grouped restarting counters (`330175`) and title extraction that survives a trailing em-dash clause (`355150`)
-- [ ] **Fm3. Repair `dod_topic`'s ordinal group** — widen `(\d{1,2})` to letters so `Topic A1`–`A7` matches (`356612`). Third appearance of the same oversight; `topic_area` got it in P4.3
-- [ ] **Fm4. Repair `thrust`'s granularity** — it matches the container `Thrust Area 1`, not the seven topics under it. Scope to the items or retire it under §17.8; it has **no record validating it at the right granularity**
+- [x] **Fm3. Repair `dod_topic`'s ordinal group** — widen `(\d{1,2})` to letters so `Topic A1`–`A7` matches (`356612`). **ALREADY LANDED in `d85e2df`, 2026-08-17**, and verified live at P7.1: `356612` returns 7 correct spans, family `dod_topic`. This box was unchecked because §8.9's note recorded the work and the checklist did not
+- [x] **Fm4. Repair `thrust`'s granularity** — it matched the container `Thrust Area 1`, not the seven topics under it. **ALREADY LANDED in `d85e2df`**: `dod_topic` now sits above `thrust` and a negative lookbehind restores the `research_thrust` boundary. Verified live at P7.1 by the same run
+- [ ] **BUG-2 — the ASCII hyphen, which is now the whole of P7.2.** `dod_topic`, `component` and `technical_category` admit `:`, `.`, en-dash and em-dash and not `-`; `technical_category` also rejects `.`. Verified still open at P7.1
 - [ ] **Fm5. F5 — table path in `extract_containers`** — **re-sized by Cov7 2026-08-27: ~40 → ~12 records (Wilson 0.4–12.3%, band 2–60)**, because the same single observation now sits in **42** stratum-D reads rather than 12 and Cov7 found no further F5. `pdfplumber` already authorized (§6.1). **Cov7 has now been read, and it strengthens rather than changes the advice**: fund this on the qualitative argument — `363530` prints the same 12 topics as `363526` — and never on a yield number
 - [ ] **Fm6. F3 — coded named list** — 4 of 90 · ~6. `PA 1:`, `53-24-01 -`, `A.1.a.`. Discovered-prefix recogniser, false-positive profile unmeasured. Smallest yield; do last or not at all
 - [ ] **Fm7. F6 — record the verdict, write no pattern** — 4 of 90 · ~4. Three of four are two-item lists `structural_siblings` already sees and rule 1 / rule 2d reject on cardinality. Reachable only via §6.4b span-level admission, so it arrives with Cov4 or not at all
@@ -4369,7 +4439,7 @@ P4.3, P4.6 …).
 | 7 | **Cov6** — publication semantics and `_demote()` | ✅ **complete 2026-08-27.** §7.1's rule implemented as the one authority; the four concepts separated; a tier-only fail-closed hole closed; `_demote()` narrowed to its measured risk. **No generic child auto-publishes** — the review queue, not the catalog, is where Cov4's 28 land |
 | 8 | **Cov7** — 30 more stratum-D reads | ✅ **complete 2026-08-27**, MEAS-2 delivered. 2 misses in 30 (**F4 bulleted** at DARPA, **`Priority Area N`** at State), D re-estimated to point 10 / band 3–75, F5 re-sized ~40 → ~12. **P5's items are all done; its closeout is next** |
 | 9 | **P5 closeout** — package gate, coverage reconciliation, P7 definition, obligations register | ✅ **complete 2026-08-27. P5 CLOSED.** All five gate clauses pass; final estimate **~141 records (9.5%), band 50–443**; **§18.0.6** opened as the canonical Open Obligations Register |
-| 10 | **P7** — residual generic forms, scope defined by P5's closeout | **next.** P7.1 recomputes residual coverage (and measures `Fm8`'s label); P7.2 lands the `Fm3`/`Fm4`/BUG-2 repairs; P7.3 builds `Fm1` named/bulleted; P7.4 builds `Fm2` bare numbered behind §18.3a; P7.5 builds `Fm8` only if P7.1 supports it |
+| 10 | **P7** — residual generic forms, scope defined by P5's closeout | **OPEN, and P7.1 is ✅ complete 2026-08-20** (§18.1 P7.1, `evaluation/p7_residual.json`). Structured/referenced sources removed **0** records from the generic residual; what moved the yields is the current generic model plus a repair already in the code. `Fm2` **~31 → ~21** · `Fm6` random observations **2 → 1** · `Fm1` **10 → 9 residual**, its one loss unreachable rather than covered · `Fm5` unchanged · **`Fm8` measured and DECLINED — P7.5 is not scheduled**. **Next: P7.2, whose remaining content is BUG-2 alone** because `Fm3` and `Fm4` are already in the code (`d85e2df`); then P7.3 `Fm1`; then P7.4 `Fm2` behind §18.3a's four unwaived exit criteria |
 | 11 | **MEAS-8** — cross-agency residual coverage audit | **pinned here deliberately: P7 → MEAS-8 → P9.** MEAS-8's own wording is *"after the generic subtopic model is substantially working"*, so it must evaluate the model we intend to ship rather than an intermediate one — and P9 must design storage for a measured model, not an unmeasured one. It inherits **DEBT-11**'s frozen-artifact requirement and must re-derive rather than trust **DEBT-10**'s field |
 | 12 | **P9 / P9.0** — subtopic-aware storage and scoring | due `DEC-*` resolve here: **DEC-16 (USER)**, DEC-2, DEC-8, DEC-12; **BUG-12**, DEBT-4, DEBT-5, DEBT-10, DEBT-12 |
 | 13 | **P10** — retrieval and UI | **MEAS-9** post-P9 manual-profile / CV / ORCID relevance regression, including the real ORCID validation · **MEAS-10** the multi-researcher pilot · MEAS-5 · retrieval and UI work · due `DEC-*`: DEC-3, DEC-4, DEC-5, DEC-6, DEC-7 (USER), DEC-9 (USER), DEC-14 |
@@ -4492,8 +4562,8 @@ reopened to add one.
 | **DEC-7** | Topics in Atom feeds | **DEFERRED — assigned** | **USER** | **P10, before `build_feeds.py` changes what subscribers receive** | **P10** | Feeds are **outward-facing**: this changes what already-subscribed people are sent, which is a policy choice about communication and not a ranking parameter. Proposed: include |
 | **DEC-8** | Taxonomy depth for referenced topics — attach at program level, or one level deeper? | **DEFERRED — assigned** | **MIXED** | **P9.0 package start, before the stored child shape is fixed** | **P9.0** | Evidence can show how many children each depth yields and how they rank; **which granularity a PI should be shown is a product choice**. P6.3 attaches at topic level today; the plan proposes program level, "where the program manager and the funding decision sit" |
 | **DEC-9** | Mute/alert split — accept that muted items still appear in alerts, or build the suppression export? | **DEFERRED — assigned** | **USER** | **P10, before the mute control (issue #8) ships** | **P10** | A known, deliberate inconsistency in what a user is sent after they have asked not to see something. **Accepting it is a policy choice, not an engineering one.** Proposed: accept for v1 and document it plainly |
-| **DEC-10** | OCR | **DEFERRED — assigned** | **ENGINEERING** | **P7 closeout, when P7.1 reports the `no_extractable_text` rate** | **P7** | The plan fixes the trigger as a measurement: *"Revisit only if `no_extractable_text` rejections prove material."* **Cov7 measured 1 of 30**, and its cause was a SAM.gov page returning 0 characters rather than a scanned PDF, so the threshold has still not fired |
-| **DEC-11** | Where is the boundary between a **fundable subdivision** and a **funding mechanism / programme track**? | **OPEN — assigned** | **MIXED** | **P7.3, before `Fm1`'s acceptance rule admits its first named/bulleted set** | **P7** | **Evidence can characterise the class exactly and cannot decide it.** Three real instances now: `361876`; `(n) Public-Private Partnerships`, which one person reading page 85 of `DE-FOA-0003600` can classify; and Cov7's `358380`, whose notice says *"one of the following program tracks"* over three degree pathways — selectable, three-strong, and not research subdivisions. Reading settles what each **is**; **whether a PI should be shown a mechanism as a child of an opportunity is a product judgment about the card surface**. `Fm1` is where a mechanism-shaped label would first be admitted, which is why the trigger sits there and not at P7's start. **Do not settle it from a model verdict in either direction** (§17.8) |
+| **DEC-10** | OCR | **DEFERRED — assigned** | **ENGINEERING** | **P7 closeout, when P7.1 reports the `no_extractable_text` rate** | **P7** | The plan fixes the trigger as a measurement: *"Revisit only if `no_extractable_text` rejections prove material."* **Cov7 measured 1 of 30**, and its cause was a SAM.gov page returning 0 characters rather than a scanned PDF. **P7.1 delivered the rate on 2026-08-20 and did NOT decide this** — the trigger is the closeout, not P7.1. Three denominators, never pooled: **1 of 151 documents** read across P7.1's two frames (cause: a content-free DARPA agency page), **11 of 770** in the committed D5 backfill, **9 of 726** current evidence-cache entries after excluding DEBT-4's 213. Causes are broken out in §18.1 P7.1 and **zero instances in either frame are image-only or scanned PDFs**, which is the only thing OCR would fix. On this evidence the threshold has still not fired |
+| **DEC-11** | Where is the boundary between a **fundable subdivision** and a **funding mechanism / programme track**? | **OPEN — assigned** | **MIXED** | **P7.3, before `Fm1`'s acceptance rule admits its first named/bulleted set** | **P7** | **Evidence can characterise the class exactly and cannot decide it.** Three real instances now: `361876`; `(n) Public-Private Partnerships`, which one person reading page 85 of `DE-FOA-0003600` can classify; and Cov7's `358380`, whose notice says *"one of the following program tracks"* over three degree pathways — selectable, three-strong, and not research subdivisions. Reading settles what each **is**; **whether a PI should be shown a mechanism as a child of an opportunity is a product judgment about the card surface**. `Fm1` is where a mechanism-shaped label would first be admitted, which is why the trigger sits there and not at P7's start. **Do not settle it from a model verdict in either direction** (§17.8). **P7.1 did not touch it** (2026-08-20) — it collected no new instance of the class and took no step toward the choice; the trigger remains P7.3 |
 | **DEC-12** | The `deadlines` payload duplicates itself — 17.5% of `opportunities.js` | **DEFERRED — assigned** | **ENGINEERING** | **P9.2, before the storage winner is implemented** | **P9.0** | A serialization-cost question with a measured answer and no user-visible surface. Pre-existing catalog cost, larger than anything subtopics add, and independent of them |
 | **DEC-13** | NASA ROSES standalone ingestion | **CLOSED** | — | — | — | Taken 2026-08-18, implemented as P8, complete 2026-08-20 |
 | **DEC-14** | Should ROSES appendix divisions A–F map to `disciplines` facet values? | **DEFERRED — assigned** | **MIXED** | **P10, before facet rendering ships** | **P10** | Mapping division → discipline is a **new inference** (§17.8), so evidence must first show what it would produce; **whether to present an inferred facet as though it were published data is a product choice**. Not a P8 blocker, and P8 closed without it |
@@ -4506,7 +4576,7 @@ reopened to add one.
 | ID | Defect | Status | Owner | Must resolve before | Rationale / evidence |
 |---|---|---|---|---|---|
 | **BUG-0** | `--max-documents` caps each **pass**, not the run, so with subtopics on the flag understates the work by 2× | **OPEN — assigned** | **P11** | the nightly runs with the flag on | Nothing is wrong with the results; the §9 15-minute ceiling and every published backfill figure were reasoned against one pass. **P7 must not quote a backfill figure without accounting for it.** Do not silently halve the default (§0.4 rule 8) |
-| **BUG-2** | Three families reject an ASCII hyphen — `dod_topic`, `component`, `technical_category`; the last also rejects `.` | **OPEN — assigned** | **P7 (P7.2 / `Fm3`)** | P7 closes | A repair, not a widening |
+| **BUG-2** | Three families reject an ASCII hyphen — `dod_topic`, `component`, `technical_category`; the last also rejects `.` | **OPEN — assigned** | **P7 (P7.2)** | P7 closes | A repair, not a widening. **P7.1 verified it is still real** and, separately, that **`Fm3` and `Fm4` already landed in `d85e2df` (2026-08-17)** — measured live, `356612` returns 7 correct spans — so **BUG-2 is now the whole of P7.2** |
 | **BUG-7** | The hermetic §0.5 gate was date-dependent | **CLOSED** | — | — | Fixed 2026-08-18 (`d735142`) |
 | **BUG-9** | The aggregating-agency page fabricated another opportunity's children | **CLOSED** | — | — | Fixed 2026-08-26 by Cov4's deterministic ownership guard, enforced at the production call site and regression-tested through two paths |
 | **BUG-10** | Cov5's residual — `_locate_nodes`' `page_start_offset` fallback is still silent | **OPEN — assigned** | **P7** | P7 widens the recogniser surface | It fires zero times today **only because nothing currently fails to locate**. More recognisers means more spans means more chances to fire silently, so P7 is the right gate |
@@ -4523,17 +4593,18 @@ reopened to add one.
 | **DEBT-4** | 213 stale evidence entries whose records have left the catalog | **OPEN — assigned** | **P9.0** | any rate is computed from the cache rather than the catalog | Cache residue; inflates any cache-derived denominator. **Prune on the catalog, never on the cache** |
 | **DEBT-5** | 13 orphaned evidence entries | **OPEN — assigned** | **P9.0** | anything writes a cache | **Re-measured 2026-08-27 and still exactly 13.** Cov1 did not close it |
 | **DEBT-6** | 25 recorded fetch failures across five hosts | **OPEN — assigned** | **MEAS-8** | any of them is cited as a reason to defer work | §17.11: a failed fetch is a fact about the client until the layer is isolated. The reachability sweep already showed 4 of 14 hosts no longer reproduce |
-| **DEBT-8** | `structural_siblings` is blind to **55% of the corpus's PDFs** (71 of 129 carry no bookmarks) | **DEFERRED — assigned** | **P7** | `Fm1` is designed | A measured limitation, not a defect. **`Fm1` must not assume `structural_siblings` reaches F4** — it is the only mechanism serving anything like it and it cannot see over half the corpus |
+| **DEBT-8** | `structural_siblings` is blind to **55% of the corpus's PDFs** (71 of 129 carry no bookmarks) | **DEFERRED — assigned** | **P7** | `Fm1` is designed | A measured limitation, not a defect. **`Fm1` must not assume `structural_siblings` reaches F4** — it is the only mechanism serving anything like it and it cannot see over half the corpus. **Sharpened by P7.1**: across its 19 residual records only **7** carry no bookmarks anywhere, and the other **12 do and still miss**, so for this population the binding constraint is not bookmark *absence* but that the outline **does not carry the fundable list at an admissible depth**. It cuts the other way too — `330175`'s 24 spans and `361526`'s 21 are recovered *by* bookmarks in a secondary attachment |
 | **DEBT-9** | No candidate span population is committed anywhere | **CLOSED** | — | — | Closed 2026-08-24 by `evaluation/meas3_population.json`, pinned by 15 tests |
-| **DEBT-10** | **`attachment_count` in the enrichment cache can outlive the API's own attachment list** — 4 of 815 records, including `363607`, which the survey recorded as *enumerating* and which is now unreachable | **OPEN — assigned** | **P9.0** | any code computes a population from `attachment_count` | Not a parser defect: `synopsisAttachmentFolders` now returns empty and nothing compares the two. **Verified against the roadmap**: §7.4's canaries are implemented per-source inside adapters and **no scheduled package owns §7.4 generically**, so the canary framing has no home — the actionable half is cache hygiene, which is P9.0's stated remit ("must run before anything writes a cache"). **MEAS-8 is its first consumer** and must re-derive rather than trust the field |
+| **DEBT-10** | **`attachment_count` in the enrichment cache can outlive the API's own attachment list** — 4 of 815 records, including `363607`, which the survey recorded as *enumerating* and which is now unreachable | **OPEN — assigned** | **P9.0** | any code computes a population from `attachment_count` | Not a parser defect: `synopsisAttachmentFolders` now returns empty and nothing compares the two. **Verified against the roadmap**: §7.4's canaries are implemented per-source inside adapters and **no scheduled package owns §7.4 generically**, so the canary framing has no home — the actionable half is cache hygiene, which is P9.0's stated remit ("must run before anything writes a cache"). **MEAS-8 is its first consumer** and must re-derive rather than trust the field. **Reproduced live on its own named example at P7.1** (2026-08-20): `363607`'s catalog `attachment_count` is 10, the committed census records 0, and Grants.gov offered **no attachment at all**, so one of `Fm1`'s ten historical observations is now **unreachable rather than residual** |
 | **DEBT-11** | The stratified sampling instrument was never committed | **OPEN — assigned** | **MEAS-8** | **MEAS-8 draws its first sample** | **Substantially repaired at this closeout**: `evaluation/attachment_census.jsonl` (815 records, 1,633 attachments) is committed, `tools/p5_coverage_report.py` recomputes the frame offline, and `tests/test_p5_closeout.py` pins it. **What remains** is that `pick50.py`'s draw and the taxonomy's 50-record selection are still unenumerated, so an exclusion set is still imperfect. **MEAS-8 must commit its own sample selection and its truth labels as a frozen artifact before drawing** — that is the specific requirement, and it is what stops MEAS-8 repeating the mistake |
+| **DEBT-13** | **The ROSES adapter's `native` children never reach the production subtopic path.** `nasa_roses.subtopic_children` is called only from `tests/` and `tools/run_cov4_validation.py`; `subtopic_fields` asks `subtopic_referenced.first_refusal` and nothing else before falling through to generic segmentation | **OPEN — assigned** | **P9.0** | **the §7.1 merge admits `native` children** | **Found at P7.1** (2026-08-20) while establishing what "already covered by a structured source" means today. The answer is **the one Army TDAC parent and nothing else** — P6.1's 10 `native` parent relationships exist in the adapter and are exercised by tests, and no production path asks for them. Harmless today because nothing merges subtopics, and it is the same shape of latent hole as **BUG-12**: both bite the moment P9 wires the merge, and they should be fixed together. **Not a P7 item** — P7 builds rung-4 inference and cannot reach this |
 | **DEBT-12** | A no-primary record's own announcement carries `source_kind: secondary_attachment` | **OPEN — assigned** | **P9.0** | **a reviewer surface displays provenance to a human** | **Classified at this closeout: benign representational debt, not a bug.** Verified: Cov4's `ATTACHMENT_KINDS` treats `primary_notice` and `secondary_attachment` identically, so ownership is unaffected; Cov6's `_demote()` keys on the announcement URL and no longer reads `source_kind` at all; no other consumer distinguishes them; and Cov1 writes no evidence entry, so it never reaches `document_evidence.json`. **It is not WONTFIX** because the string is user-facing the moment a reviewer reads it — "secondary attachment" beside a record's own announcement would mislead a human judging that child |
 
 #### Measurements
 
 | ID | Measurement | Status | Owner | Must resolve before | Rationale / evidence |
 |---|---|---|---|---|---|
-| **MEAS-1** | Cov5 leaves the 757 no-span documents unchanged | **OPEN — assigned** | **P7** | P7's backfill figures are quoted | **Asserted in a session report, never run.** P7 re-runs the backfill, which is the only cheap moment to check it |
+| **MEAS-1** | Cov5 leaves the 757 no-span documents unchanged | **OPEN — assigned** | **P7** | P7's backfill figures are quoted | **Asserted in a session report, never run.** P7 re-runs the backfill, which is the only cheap moment to check it. **P7.1 ran no backfill and wrote no cache**, so this is undischarged; where P7.1 quotes the D5 histogram it quotes it **as history, with its date**, which is not the same as quoting a P7 backfill figure |
 | **MEAS-2** | 30 more stratum-D records | **CLOSED** | — | — | Delivered 2026-08-27 by Cov7 → `evaluation/cov7_stratum_d.json` |
 | **MEAS-3** | Classifier run-to-run variance | **CLOSED** | — | — | Run 2026-08-24: 525 calls, pooled disagreement 0.190%, R=1 licensed |
 | **MEAS-4** | Read `344592` for MURI topics | **DEFERRED — assigned** | **MEAS-8** | the SAM.gov deferral is re-argued | Part of §18.2's SAM.gov cost may already be reachable through Grants.gov full text |
@@ -5432,6 +5503,15 @@ out.**
 | **coded named list (F3)** — `Fm6` | 4 of 90 | — | ~6 | each agency-specific | unmeasured, and a discovered-prefix recogniser is the general form | no | High | **DECLINE** |
 | **lettered (F6)** — `Fm7` | 4 of 90 | 2 each | ~4 | EDA and others | n/a | n/a | none | **DECLINE — there is nothing to build.** Three of four are two-item lists §6.4 rule 1 rejects on cardinality; F6 arrives free through §6.4b or not at all. Unchanged verdict |
 
+> **⚠ Superseded in part by P7.1 (2026-08-20), which is the measurement item 1
+> below asks for.** The table above is left as written — it is the record of
+> what this closeout decided on the evidence it had. **The current residual
+> yields, the `Fm8` verdict and the fixture measurements are in §18.1 P7.1**,
+> and three rows moved: `Fm2` ~31 → ~21 · `Fm6` random observations 2 → 1 ·
+> `Fm1` 10 → 9 residual. `Fm3` and `Fm4` read *BUILD IN P7* here and were
+> **already in the code** when this was written. **`Fm8` is DECLINED**, so
+> item 5 below is dropped unless its falsifier fires.
+
 **P7's ordered items, as this closeout defines them:**
 
 1. **P7.1 — recompute residual coverage** (§18.0.4's long-standing step). Every
@@ -5915,13 +5995,222 @@ Every item carries its measured yield as *records in the 90 read* · *catalog ex
 |---|---|---|
 | **Fm1. F4 — named / bulleted, no counter** | 9 of 90 · **~73, but ~22 excluding one stratum-E observation** | The largest population and the hardest problem: §6.3a's deferred `label_run` plus a bulleted variant. **Highest false-positive risk in the plan**, and the corpus supplies the proof rather than the worry — `362233`'s five real Focus Areas sit one subsection above *Innovation, Impact, Research Strategy, Focus Areas, Research Team*, with no ordinal, no outline and no lexical separation. **Do not build this on structure alone.** Also note that `structural_siblings`, the only mechanism serving anything like it today, is blind to **55% of the corpus's PDFs** (§6.3a) |
 | **Fm2. F1 — bare numbered `N.` / `N)` / `N -`** | **8 of 90 · ~31** (Wilson 47–210 on the pooled rate) — **the most stable uncovered row** | **Blocked by §18.3's prohibition, which 8.5 converted from a flat refusal into exit criteria. Read §18.3 before starting this, and satisfy its four conditions.** Two mechanics the corpus requires beyond the regex: grouped sequences with **restarting counters** (`330175`, §6.4a) and title extraction that survives a trailing em-dash clause (`355150`'s `1. Autonomous platforms – The Army is particularly interested in`) |
-| **Fm3. Repair `dod_topic`'s ordinal group** | Recovers `356612` (7 topics) | The group is `(\d{1,2})` and DTRA's topics are `Topic A1` through `Topic A7` — a **letter** ordinal it cannot match at all. `sbir_subtopic` already modelled `\d{1,2}[a-z]?` before its retirement, and `topic_area` gained the same in P4.3; the inconsistency is an oversight, not a decision, and this is the third time it has appeared. Widen to letters **and** add the validating quote to §6.3's table per §17.8 |
-| **Fm4. Repair `thrust`'s granularity** | Same record, same 7 topics | `thrust` fires on `356612` and matches the **container** `Thrust Area 1`, not the seven `Topic AN` items beneath it, so it segments one span where seven exist. A family that matches the umbrella instead of its members is worse than one that misses, because it produces a plausible single card. Either scope `thrust` to the items or retire it under §17.8 — **it currently has no record validating it at the right granularity** |
+| **Fm3. Repair `dod_topic`'s ordinal group** — ✅ **already landed `d85e2df`, verified live at P7.1** | Recovers `356612` (7 topics) | The group is `(\d{1,2})` and DTRA's topics are `Topic A1` through `Topic A7` — a **letter** ordinal it cannot match at all. `sbir_subtopic` already modelled `\d{1,2}[a-z]?` before its retirement, and `topic_area` gained the same in P4.3; the inconsistency is an oversight, not a decision, and this is the third time it has appeared. Widen to letters **and** add the validating quote to §6.3's table per §17.8 |
+| **Fm4. Repair `thrust`'s granularity** — ✅ **already landed `d85e2df`, verified live at P7.1** | Same record, same 7 topics | `thrust` fires on `356612` and matches the **container** `Thrust Area 1`, not the seven `Topic AN` items beneath it, so it segments one span where seven exist. A family that matches the umbrella instead of its members is worse than one that misses, because it produces a plausible single card. Either scope `thrust` to the items or retire it under §17.8 — **it currently has no record validating it at the right granularity** |
 | **Fm5. F5 — a table path in `extract_containers`** | 1 of 90 · **~40, n=1** | `pdfplumber` is already an authorized dependency (§6.1) and supplies table extraction, so this is a dispatch item, not a dependency one. **Do not fund it on the ~40** — that is one stratum-D observation against 483 records and 12 reads. Fund it on the qualitative argument: `363530` prints the *same 12 topics* as `363526`, which segments correctly, so a validated list is invisible purely because of layout. **Cov7 should be read before sizing this item** |
 | **Fm6. F3 — coded named list** | 4 of 90 · ~6 | `PA 1:` (`361908`), `53-24-01 -` (`352741`), `A.1.a.` (`362681`), `Topic A2` (`356612`, which Fm3 covers). Each is agency-specific; a **discovered-prefix** recogniser is the general form and its false-positive profile is unmeasured. Smallest yield in the package — do this last, or not at all |
 | **Fm7. F6 — record the verdict, write no pattern** | 4 of 90 · ~4 | **There is nothing to build.** Three of the four are two-item lists (`332127`, `334079`, `346815`) that `structural_siblings` already sees, bookmarked, and that §6.4 rule 1 and §6.4a rule 2d reject on cardinality. Lowering the floor to two stays **rejected** (§18.2). F6 is reachable only through §6.4b's span-level admission, so it arrives free with Cov4 or not at all. Item exists so a later session does not spend pattern effort here |
 
 **Gate:** every new or repaired family names its validating document **and quotes the matched text** (§17.8) · acceptance rate reported per form, not in aggregate · **fabricated publishable records still 0**, by reading every published title · false-positive count reported on the **33 category-(a) documents** in `docs/FAMILY_TAXONOMY.md` §1, which are the measured correct zeros and therefore the right negative set · §0.5 byte-identical with the flag off.
+
+##### P7.1 — the residual recomputed, measured 2026-08-20
+
+> ### THE PREMISE DID NOT HOLD
+>
+> **P7.1 was scheduled because every yield in the table above was measured on a
+> corpus in which no structured source had been tried. It ran, and structured and
+> referenced sources removed *zero* records from the generic residual.** What
+> actually moved three of the four yields is **the current generic model plus a
+> repair that is already in the code**. Evidence:
+> `evaluation/p7_residual.json`, pinned by `tests/test_p7_residual.py`;
+> recompute with `python tools/p7_residual_report.py`.
+
+**The frame, frozen before any outcome was read** (`tools/p7_frame.py`, pinned by
+`tests/test_p7_frame.py`, committed one commit *ahead* of the outcomes). This is
+**DEBT-11's** lesson applied prospectively: inclusion rules first, ids enumerated
+deterministically, frame pinned, only then interpret.
+
+| Frame | What it is | Size | Is it a rate? |
+|---|---|---|---|
+| **R** | census of every catalog record a **committed** artifact names as carrying F1/F3/F4/F5, plus `Fm8`'s one observation and P5's three required fixtures. Each row names its source document and quotes a marker (§17.8), and carries the draw it came from so §4.2's census-never-enters-a-rate rule stays enforceable | **27 records, 74 documents read** | **No.** Its denominator is "records previously observed to carry this form" |
+| **S** | seeded simple random draw from every catalog record with a fetchable text surface under production's own rules, **uncapped by agency** — a cap protects a *form* estimate from reading one template three times, and biases a *label-prevalence* estimate against exactly the template families the label might belong to | **60 of 1,134 eligible, seed 20260820, 77 documents read** | **Yes** |
+| **C** | offline census of every committed catalog record's `title`, `description` and `document_search_text`. Zero fetches | **1,475 records** | Yes, on the **synopsis** surface only — none of those fields is document text |
+
+**Two arithmetic cross-checks fell out of building the frame**, and both reproduce
+committed figures exactly: the eligibility rule is production's own union of
+`source_for_record`, `subtopic_only_primary` and fetchable attachments, and its
+complement over the catalog gives **1,161 reachable / 314 unreachable** — P5
+clause 1's number; and the evidence cache holds **958** entries of which **745**
+belong to live catalog records, reproducing **DEBT-4's 213** stale entries.
+
+**How each record was measured.** Production's own path, in order:
+`source_for_record` or `subtopic_only_primary` for the first document →
+`subtopic_referenced.first_refusal` (§6.7·0) → `best_segmentation` over the
+primary and every fetchable attachment → `build_records`. **Cov4's `apply_gate`
+was deliberately not invoked**: it is a separate axis, no credential exists in the
+agent environment, and its documented behaviour on a missing credential is to
+**retain and demote**, never to drop — so no child can have been lost by leaving
+it out. Document text was then re-read offline from the probe's cache to record
+which families fire, what `best_family` decides, which §6.4 rules refuse a
+winning set, and whether the PDF carries bookmarks at all.
+
+**Why the structured-source correction matters, stated precisely.**
+`first_refusal` declined **all 27** records — it answers for one parent,
+`W911NF-23-S-0003`, and nothing in Frame R is that parent. And the ROSES `native`
+path **is not wired into `subtopic_fields` at all**: `nasa_roses.subtopic_children`
+is called only from tests and `tools/run_cov4_validation.py`. That is **DEBT-13**,
+opened at this measurement and owned by P9.0. It changes no arithmetic here — no
+form-bearing record is a ROSES element — but "already covered by a structured
+source" currently means **the one Army TDAC parent and nothing else**. P6's
+conclusion is preserved and not extended: **delegation predicts value, not
+authority**, and no residual record earned a new adapter here.
+
+**Per-form residual, recomputed. The four states are different things** and
+instruction 9's separation is kept: a correct extraction queued for review is a
+**recovery**; manually seeing a list is not.
+
+| Form → item | Historical | Recovered today, and by what | Residual | Residual children | Agencies | Recomputed catalog opportunity |
+|---|---|---|---|---|---|---|
+| **F4 → `Fm1`** | 10 observations (9 in the 90 + Cov7's `359782`), 7 random · ~73, ~22 excluding one stratum-E observation | **0** | **9** | **48** | 7 — DHA/CDMRP ×3, DHS/FEMA, Sloan, ONR, State NEA, HUD, DARPA TTO | **~63** (~18 ex-E). 6/87 = 6.9%, Wilson 3.2–14.2% → **47–210** |
+| **F1 → `Fm2`** | 8 observations, 6 random · ~31, Wilson 47–210 pooled | **3 — all `recovered_generic`**: `361526` 21 spans · `360205` 37 spans · **`330175` 24 spans** | **5** | **39** | 5 — Army LQC, WHS NDEP, FAA, Army AAL, NRCS | **~21**. 4/87 = 4.6%, Wilson 1.8–11.2% → **27–166** |
+| **F3 → `Fm6`** | 4 observations, 2 random · ~6 | **1 — `356612`, 7 spans**, family `dod_topic` | **3** | 76 (two records carry 32 and 39) | 3 — ACF ANA, NRL, AFOSR | **~3**. 1/87 = 1.1%, Wilson 0.2–6.2% → 3–92 |
+| **F5 → `Fm5`** | 1 observation · ~12 (2–60), Cov7's re-size | **0** | **1** | 12 | AFOSR | **~12 (2–60), unchanged** |
+| **`Fm8`** | 1 observation · n=1, no estimate supportable | **0** | **1** | 4 | State J/TIP | **none supportable** — see below |
+
+**One record left the residual without being covered.** `363607` is now
+**unreachable**: the catalog says `attachment_count` 10, the committed attachment
+census says 0, and Grants.gov offered **no attachment at all** this session, so
+the only readable surface is a 74-character `mygrants` JavaScript shell. That is
+**DEBT-10** reproduced live on its own named example, and §1's `(a)`-versus-`(e)`
+rule forbids counting it as either an opportunity or a measured zero.
+
+**`Fm2`'s reduction is the substantive one, and it lands on §18.3a's own
+argument.** `330175` is the document §18.3a leans on hardest — its counter
+restarts at `1.` three times, which §6.4 rule 2 refuses outright — and
+`outline_structural` now reads **all 24** of its research centres and departments
+*including all three groups*, from bookmarks in `Amend 0001.pdf`. So the
+grouped-restarting-counter requirement §18.3a places on any F1 mechanism is
+already satisfied for that record **by a structural family rather than an ordinal
+one**. It arrives at `low` because `_demote()` caps a secondary win, so it does
+not publish; it is an **extraction** recovery, which is what P7.1 is sizing.
+**§18.3a's four exit criteria are not waived by this measurement**, and a yield a
+third smaller makes them more binding, not less.
+
+**`Fm3` and `Fm4` are already implemented, and every P7 table said otherwise.**
+Commit **`d85e2df`** (2026-08-17) widened `dod_topic`'s ordinal group to
+`([A-Za-z]?\d{1,2}[a-z]?)` and moved it above `thrust` behind a negative
+lookbehind. §8.9's what-changed note records this; §15's P7 checklist, the P7 item
+table above and P5's closeout recommendation table all still read *BUILD IN P7*.
+**Verified live, not read off the diff**: `356612` returns **7 spans, method
+`heading_font`, family `dod_topic`, confidence `low`** — the seven topics
+`docs/FAMILY_TAXONOMY.md` §4.1 recorded. **BUG-2 is untouched and still real**:
+`dod_topic`, `component` and `technical_category` admit `:`, `.`, en-dash and
+em-dash and **not an ASCII hyphen**. **So P7.2's remaining content is BUG-2
+alone.**
+
+**`Fm8` — MEASURE FIRST, now measured, and it has no population.**
+
+| Denominator | Records searched | Matching the shape | Label without an ordinal |
+|---|---|---|---|
+| Frame C — catalog text census | **1,475** | **0** | 21 |
+| Frame S — document sample | **60** (55 with a readable document, 77 documents) | **0** — Wilson 0–6.0% → **0–68** of the 1,134 eligible | 2 |
+| Frame R — form-bearing census | 27 | 2 | 8 |
+| Cov7 stratum D, committed | 30 | 1 | — |
+
+The shape searched is the one `363381` prints — case-insensitive
+`Priority Area[s] <integer>` with ordinary punctuation or spacing — and it is
+**tested not to reach** `Focus Area N`, `Topic Area N`, `Program Area N`,
+`Technical Area N` or `Thrust Area N`. It was not broadened after the results
+were seen.
+
+- **The one true case is genuine and still residual.** `FY 2026 PEMS Annual
+  Program Statement (1).pdf` prints `PRIORITY AREA 1: PROBLEM ANALYSIS AND
+  PROGRAM DEVELOPMENT` through `PRIORITY AREA 4: LEVERAGE TECHNOLOGICAL
+  INNOVATIONS …`, each with its own **Purpose**, **Funding Amount** and **Period
+  of Performance**, and the notice says applicants may work in *"one or more
+  identified priority areas"* and *"may submit a total of no more than four
+  applications as a prime."* Production returns `no_layer_accepted`.
+  **4 children, 1 agency.**
+- **The false-positive surface is measured, and it is the finding.** **10 of the
+  14 occurrences in that document are prose**, not headings — *"Priority Areas
+  1-3 span the continuum"*, *"External Evaluator Engagement (Priority Areas 1 and
+  2)"*. `360205`'s two occurrences are a **prose lead-in to a bare-numbered
+  list**, so the shape matches and identifies no heading at all.
+- **The label belongs to a template whose general form `Fm1` and `Fm2` already
+  target.** The same State APS heading `Priority Program Areas:` renders its items
+  **named** (`331306`, U.S. Mission to Italy), **bare-parenthesised** (`363120`,
+  Cambodia: *"(1) Freedom 250 … (6) Countering Malign Influence"*) and
+  **bare-numbered** (`362383`, Bolivia: *"Priority Program Areas: 1. Support
+  Bolivia's Economic Opening …"*) in committed catalog synopses.
+- **Cov4 has no validation on this shape** and none was attempted.
+- **§17.8's verdict: satisfied on naming and quoting, failed on population.**
+
+**`no_extractable_text`, reported for DEC-10 and *not* decided here.** DEC-10's
+`decision_trigger` is **P7 closeout**; P7.1 supplies the evidence and stops.
+Three denominators, never pooled:
+
+| Denominator | Documents | `no_extractable_text` | Rate |
+|---|---|---|---|
+| **P7.1 frames**, segmentation | **151 read** (87 records) | **1** | 0.66% per document, 1.15% per record |
+| **D5 full backfill**, committed, 2026-08-16 | 770 | 11 | 1.43% |
+| **Evidence cache**, catalog-restricted, `text_characters == 0` | 726 current entries | 9 | 1.24% |
+
+**Causes kept apart, because collapsing them into "an OCR problem" is the error
+the brief names:**
+
+| Cause | Count and detail |
+|---|---|
+| network / source unavailable | **7** — Grants.gov `apply07` HTTP 500 on `360335` and `360334`'s **designated primary** (the same PDF was reachable through the attachment list); `363224` NASA `ConnectionReset` (§17.11's legacy-cipher case — the fix lives in the adapters' `PoliteClient`, not in `download_document`); `363321` DOT 403; `363407` and `363532` HRSA 403; `363550` BJA 404 |
+| empty agency / portal page, read successfully | **5** — two `mygrants` shells at **74 characters**, three NYSERDA portals at **487**. None reaches 0, so none is `no_extractable_text` |
+| unsupported file type | **23** — `.docx` ×12 and `.xlsx` ×7 across the two frames; §18.2's WONTFIX, unchanged |
+| extraction-library failure | **0** — `pypdf` warned on several files and returned text for all of them |
+| time budget · run budget | **0 · 0** |
+| **genuinely image-only / scanned PDF** | **0 in either frame.** The corpus's known image-only PDF, `363388`, is in neither frame and is not even a `no_extractable_text` case — 48 characters is not 0 |
+| the one actual instance | `359782`'s Cov1 agency page returns **0 characters**. Same class as Cov7's single instance, which was a SAM.gov page returning 0 |
+
+> **On these numbers the threshold DEC-10 names has still not fired, and in every
+> frame examined *zero* instances are the thing OCR would fix. The decision is
+> still P7 closeout's to take.**
+
+**The two required fixtures are pinned, and they are different hazards** —
+`evaluation/p7_false_positive_fixtures.json`, with each document identified by
+`sha256` and each list quoted verbatim and labelled by reading.
+
+| Surface | Records | What production does **today** | Why it is a fixture |
+|---|---|---|---|
+| **CDC component funding** | `360335`, `360334` | **`component` fires — 4 hits and 3 hits — and `best_family` SELECTS it.** The set is refused by **exactly one** §6.4 rule, `span_length` | **Live at the family layer**, one threshold or one new layer from firing. The notice says *"You must apply for all components"* and *"CDC may fund one or more of your components"* — the agency chooses the tranche, not the applicant |
+| **EDA Investment Priorities** | `347414` | **No family fires at all**, on any of its six readable documents | **Latent**, and squarely in `Fm2`'s path: the seven priorities are bare-numbered prose, *"each project must be consistent with #2"*, and they *"are also evaluation factors"* |
+
+**Correction to P5's closeout:** it describes both CDC records as carrying
+`Component 1`–`4`. Measured: **`360335` lists four, `360334` lists three** — and
+three sits exactly on §6.4 rule 1's floor. Nothing was tuned against either
+document, and **Cov4's challenge set was not extended**; P5's suggestion to add
+the EDA shape as a Cov4 negative belongs to the session that next extends it.
+
+**One more thing the residual measurement says, and it sharpens DEBT-8.** Across
+the 19 residual records, **7 carry no bookmarks anywhere** — but the other 12
+**do**, and still miss. So `structural_siblings`' limitation is not primarily
+bookmark *absence*: for this population the binding constraint is that the
+bookmark tree **does not carry the fundable list at an admissible depth**.
+`Fm1`'s design must assume that, not merely that half the corpus lacks an outline.
+
+**Frame S incidentally measured generic acceptance on a fresh random sample: 0 of
+60 records produced any span.** Consistent with a ~9.5% enumerating rate and a
+~29% recovery rate among records where a list exists, and reported here rather
+than folded into any acceptance figure (§17.8).
+
+**P7.1's gate, clause by clause.**
+
+| Clause | Result |
+|---|---|
+| historical form-yield basis reconstructed | ✅ 24 observations, each with its committed source, its draw and a quoted marker; the reconstruction is `tools/p7_frame.py`'s `FORM_OBSERVATIONS` and it reconciles with §4.4's random-observation counts (6/7/2/1) |
+| measurement frame deterministic and reproducible | ✅ enumerated offline, pinned by 20 tests, **committed one commit before the outcomes**; Frame S redraws identically from seed 20260820 |
+| structured/referenced recoveries removed from the residual | ✅ and the answer is **0** — with DEBT-13 opened for why `native` reaches nothing today |
+| `Fm1`/`Fm2`/`Fm5`/`Fm6` residual yields recomputed | ✅ table above, per form, with denominators and Wilson intervals |
+| `Fm8` given a real denominator and a false-positive measurement | ✅ 1,475 + 60 + 27, with the prose-versus-heading split and the three sibling renderings |
+| `no_extractable_text` reported with causes and denominators | ✅ three denominators, seven causes, **DEC-10 not decided** |
+| the two required fixtures pinned | ✅ committed with hashes and verbatim quotes, and measured as **different** hazards |
+| next P7 steps proceed from current evidence | ✅ P7.2 reduces to BUG-2; P7.3 and P7.4 keep their gates; **P7.5 is dropped** unless `Fm8`'s falsifier fires |
+
+**Explicitly not done:** no recogniser implemented; no family, threshold or
+acceptance rule added, removed or moved; Cov4 and its prompt/model/`R` untouched
+and `apply_gate` not invoked; Cov6 untouched; `Fm3`/`Fm4` not modified; P6/P8
+adapters untouched; no OCR, no Word or spreadsheet parsing, no SAM.gov; no
+backfill run and **no cache written or committed** (so **DEBT-1** and **MEAS-1**
+are untouched and still open — the D5 figures above are quoted as history, with
+their date); **DEC-10 not decided** (trigger: P7 closeout); **DEC-11 not
+touched** (trigger: P7.3); §0.5 not re-frozen; P7.2, MEAS-8, P9 and P10 not
+started.
 
 #### P9 — Storage and scoring *(legacy Package E)*
 
@@ -6051,3 +6340,25 @@ Three things survive the cut that a schedule-driven trim would have taken first.
 **What would settle it either way.** A single measurement: run an F1 recogniser over the D4/D5 backfill corpus — 770 documents already fetched, already labelled for fabrication, already the corpus D5's thresholds were fitted against — with the Cov4 filter in front of it, and report the two numbers D5 reported: **fabricated publishable records (must be 0) and legitimate records lost (must be 0).** If the filter holds on that corpus, criterion 3 is satisfied on 770 documents rather than 33. If it does not, the prohibition becomes permanent on measured grounds rather than on B0's three documents, and this section should be rewritten to say so.
 
 **Until all four hold, F1 stays out.** `docs/FAMILY_TAXONOMY.md` §5.1 states the same conclusion and declines to resolve it; this section is the resolution — not a lift, a condition.
+
+> **Measured update, P7.1, 2026-08-20 — the prohibition is unchanged and the
+> population behind it is smaller.** Of the eight records named above, **three
+> are already recovered by the current generic model**: `361526` (21 spans),
+> `360205` (37 spans) and **`330175` (24 spans)**. So F1's residual is **5
+> records, 39 children**, and the catalog estimate falls from ~31 to **~21**
+> (4 of 87 stratified reads, Wilson 1.8–11.2% → 27–166).
+>
+> **The `330175` recovery lands directly on this section's mechanics list.**
+> `outline_structural` reads all 24 of its research centres and departments
+> **including all three restarting-counter groups**, from bookmarks in
+> `Amend 0001.pdf` — so the grouped-sequence requirement this section places on
+> any F1 mechanism is already met for that document, by a **structural** family
+> rather than an ordinal one. It resolves at `low` (a secondary win, capped by
+> `_demote()`), so it does not publish; it is an **extraction** recovery.
+>
+> **None of the four exit criteria is waived, and P7.1 did not attempt any of
+> them.** What changed is the size of the prize: a third less recall for the
+> same false-positive risk, which makes criterion 3's *zero* on the 33
+> category-(a) documents and the 770-document settling measurement more
+> load-bearing, not less. `355150`'s trailing-em-dash title requirement is
+> untouched — that record is still residual.
