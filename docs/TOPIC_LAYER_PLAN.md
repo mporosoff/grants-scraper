@@ -4047,6 +4047,7 @@ P7, because that is where it falls in the ordered path (§18.0.4).
 - [ ] **P11.2.** Document-evidence step given an `id:` and routed **before** `continue-on-error` is removed (§9.3)
 - [ ] **P11.3.** `PROJECT.md` — decision, rationale, measured deltas
 - [ ] **GATE:** §9.4 dispatch checklist walked in full — runtime under 15 minutes, no new issue number, #30 updating expected
+- [ ] **SHIP GATE:** after P11's feature/configuration gates pass on `topic-layer`, fetch the latest `main`, reconcile it into `topic-layer`, resolve conflicts there, rerun every affected/full gate when reconciliation changes bytes, and review the final `main..topic-layer` diff. Then use the repository's normal history-preserving merge workflow to merge `topic-layer` into `main`, push `main`, verify the `main` CI/refresh succeeds, and verify the live GitHub Pages Funding Finder. **Only then is P11 CLOSED.** Do not rename or swap the default branch; `main` remains the authoritative default/live branch. Do not squash away the P1–P11 history merely to shorten it. A green feature branch is not shipped.
 
 ---
 
@@ -7343,6 +7344,16 @@ corpus investigation.
 | `PROJECT.md` | Decision, rationale, measured deltas |
 
 **Gate:** §9.4 dispatch checklist walked in full — total job runtime under 15 minutes, no new issue number, #30 updating expected.
+
+**Final branch/publication gate.** Once those P11 gates pass on `topic-layer`:
+fetch the latest `main` → reconcile `topic-layer` with it and resolve conflicts on
+`topic-layer` → rerun affected/full gates if the reconciliation changes bytes →
+review the final `main..topic-layer` diff → merge `topic-layer` into `main` with
+the repository's normal history-preserving workflow → push `main` → verify the
+`main` CI/refresh succeeds → verify the live GitHub Pages Funding Finder → only
+then mark P11 CLOSED. `main` remains the authoritative default/live branch; do
+not rename or swap it, and do not squash away the P1–P11 history merely to
+shorten it. A green feature branch is not shipped.
 
 #### P7 — package closeout, measured 2026-08-20
 
