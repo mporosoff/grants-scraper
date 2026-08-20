@@ -136,10 +136,46 @@ TIMEOUT_SECONDS = 120
 REPEATS = 1
 API_KEY_ENV = "ANTHROPIC_API_KEY"
 
+#: DEC-11's clarification, and the ONLY difference between the prompt below and
+#: the frozen O1 prompt in `tools/cov4_ownership.py`.
+#:
+#: **Why the prompt had to change at all.** O1 asks whether *"an applicant could
+#: propose research work against this candidate"* -- a **choosability** test. The
+#: user's DEC-11 decision (2026-08-20, recorded in §18.1 P7.3b) is that
+#: choosability is not sufficient: a child represents what the funded work is
+#: **about**, not the mechanism or pathway through which the applicant
+#: participates. O1 could not encode that, and it showed: the classifier
+#: rejected `(n) Public-Private Partnerships` saying *"Describes a funding
+#: mechanism/partnership type, not a subject"*, then later accepted the same
+#: title while still calling it a *"funding activity"* -- unstable on exactly
+#: this class, against a measured 1-in-108 flip floor (§11).
+#:
+#: **It is one paragraph, appended to question 2 and nothing else.** The
+#: ownership axis, the JSON contract, the model, `MAX_TOKENS`, `REPEATS` and the
+#: excerpt cap are untouched. `tools/cov4_ownership.py`'s `O1_PROMPT` is left
+#: **exactly as the experiment froze it** -- rewriting a measurement's own input
+#: would destroy its provenance -- and a test asserts that this prompt is O1
+#: plus this clause and nothing more.
+#:
+#: The subject-side example is deliberate: "subject-only" is not
+#: "scientific-topic-only", and a reader of this prompt must not be able to make
+#: that mistake.
+DEC11_FUNDABILITY_CLAUSE = """
+   Judge what the funded work would be ABOUT, not merely whether an applicant
+   selects it. A substantive research, technical, programmatic or mission subject
+   area is fundable -- "Food Safety" and "Manufacturing Innovation" are subject
+   areas as much as "Catalysis Science" is. Answer "no" when the candidate
+   instead describes how an applicant participates or is funded rather than what
+   the work studies or does: a funding mechanism, a partnership mode, an award
+   instrument, a degree or delivery pathway, an applicant category, or an
+   analogous non-subject participation structure. Selectability alone is not
+   fundability."""
+
 #: The O1 two-axis prompt, selected by the ownership experiment and frozen in
-#: `tools/cov4_ownership.py`. **Do not tune it.** A test asserts byte-equality
-#: with the frozen copy; if this string is edited the test fails, which is the
-#: point.
+#: `tools/cov4_ownership.py`, **plus DEC-11's clause and nothing else**. Do not
+#: tune it. A test asserts byte-equality with the frozen copy reconstructed from
+#: `O1_PROMPT` and `DEC11_FUNDABILITY_CLAUSE`; if either string is edited the
+#: test fails, which is the point.
 PROMPT = """\
 You are judging one candidate heading extracted from a US federal funding notice, on
 behalf of ONE specific parent opportunity.
@@ -176,6 +212,7 @@ Answer TWO questions about this candidate.
    contents, submission or reporting requirements, review criteria, eligibility or
    teaming rules, general policy, navigation or table-of-contents text, placeholders,
    or the awarding agency, office or division itself.
+{dec11}
 
 Answer with a single JSON object and nothing else:
 {{"owned": "yes" | "no", "fundable": "yes" | "no", "reason": "<one short sentence>"}}"""
@@ -273,6 +310,7 @@ def determine_ownership(candidate) -> dict:
 def render_prompt(candidate) -> str:
     """The frozen prompt for one candidate. Pure, and makes no request."""
     return PROMPT.format(
+        dec11=DEC11_FUNDABILITY_CLAUSE,
         parent_number=candidate.get("parent_opportunity_number") or "(not stated)",
         parent_title=candidate.get("parent_title") or "",
         source_document_name=candidate.get("source_document_name") or "(not stated)",

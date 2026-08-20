@@ -24,6 +24,7 @@ are never rewritten. Where a number is asserted it is the number
 """
 
 import json
+import re
 import pathlib
 import sys
 import unittest
@@ -138,9 +139,64 @@ class FrozenSpecificationTests(unittest.TestCase):
         import tools.cov4_ownership as frozen_spec
         return frozen_spec
 
-    def test_the_prompt_is_byte_identical_to_the_frozen_o1_prompt(self):
-        """Cov4 ships the prompt the experiment selected, untuned."""
-        self.assertEqual(cov4.PROMPT, self.frozen().O1_PROMPT)
+    #: Where DEC-11's clause is allowed to appear, and nowhere else.
+    DEC11_ANCHOR = "   or the awarding agency, office or division itself.\n"
+
+    def test_the_prompt_is_the_frozen_o1_prompt_plus_dec_11_and_nothing_else(self):
+        """Cov4 ships the prompt the experiment selected, plus ONE clause.
+
+        **This test was `..._is_byte_identical_to_the_frozen_o1_prompt` until
+        P7.3b, and it is stricter now, not looser.** The user's DEC-11 decision
+        (2026-08-20) is that a child represents what the funded work is *about*
+        rather than merely something an applicant selects, and O1 asks a
+        choosability question that cannot encode it. So the specification moved,
+        by an explicit product decision, and the test moves with it — but it
+        pins the **delta** rather than dropping the constraint: `PROMPT` must be
+        `O1_PROMPT` with `{dec11}` substituted at exactly one place, and
+        `tools/cov4_ownership.py` keeps `O1_PROMPT` exactly as the experiment
+        froze it, because rewriting a measurement's own input would destroy its
+        provenance.
+        """
+        expected = self.frozen().O1_PROMPT.replace(
+            self.DEC11_ANCHOR, self.DEC11_ANCHOR + "{dec11}\n"
+        )
+        self.assertEqual(cov4.PROMPT, expected)
+        # The frozen copy is untouched: it must NOT carry the clause.
+        self.assertNotIn("{dec11}", self.frozen().O1_PROMPT)
+        self.assertNotIn("Selectability alone", self.frozen().O1_PROMPT)
+
+    def test_the_dec_11_clause_says_what_the_user_decided(self):
+        """The words that carry the decision, so a later edit cannot soften it."""
+        # Whitespace-normalised, because the clause is wrapped for the prompt's
+        # layout and the last sentence straddles a line break.
+        clause = re.sub(r"\s+", " ", cov4.DEC11_FUNDABILITY_CLAUSE)
+        for phrase in ("what the funded work would be ABOUT",
+                       "Selectability alone is not fundability",
+                       "funding mechanism", "partnership mode",
+                       "award instrument", "degree or delivery pathway",
+                       "applicant category"):
+            self.assertIn(phrase, clause)
+        # "Subject-only" is not "scientific-topic-only", and the prompt must not
+        # be readable that way.
+        self.assertIn("Food Safety", clause)
+        self.assertIn("Manufacturing Innovation", clause)
+
+    def test_the_rendered_prompt_carries_the_clause_inside_question_two(self):
+        rendered = cov4.render_prompt({
+            "parent_opportunity_number": "DE-FOA-0003600",
+            "parent_title": "DOE Office of Science",
+            "source_document_name": "notice.pdf",
+            "source_document_url": "https://example.gov/notice.pdf",
+            "subtopic_code": "(n)",
+            "title": "Public-Private Partnerships",
+            "excerpt": "Public-private partnerships (PPPs) enable greater "
+                       "resources to be applied to help achieve technical goals.",
+        })
+        flat = re.sub(r"\s+", " ", rendered)
+        self.assertIn("Selectability alone is not fundability", flat)
+        self.assertLess(flat.index("Selectability alone"),
+                        flat.index("Answer with a single JSON object"))
+        self.assertNotIn("{dec11}", rendered)
 
     def test_the_solicitation_regex_is_byte_identical_to_the_frozen_one(self):
         self.assertEqual(
