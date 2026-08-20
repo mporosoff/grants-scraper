@@ -2,9 +2,9 @@
 
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
-Status: in progress · Version 8.28 · Written 2026-08-15 · **Revised 2026-08-20 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
+Status: in progress · Version 8.30 · Written 2026-08-15 · **Revised 2026-08-20 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
 
-> **Start at §18, and read §18.0 first.** §18 defines the minimum path — the **eleven** work packages **P1 … P11** — and lists what is deferred and what it costs. **§18.0 is the canonical namespace**: package IDs, the `BUG-*` / `MEAS-*` / `DEC-*` / `DEBT-*` prefixes, the migration table for every legacy label (`Package A–G`, `D½`, `D⅝`, `D¾`, `S1–S3`, `Package N`, bare `D#`, `M#`), the current ordered path, and a diagram. **P5 is CLOSED (2026-08-27), P6 is closed and P8 is complete. Cov4, Cov6 and Cov7 are all closed. P7 is OPEN: P7.1 recomputed the residual (§18.1 P7.1) and **P7.2 closed BUG-10 and BUG-2** (§18.1 P7.2), both on 2026-08-20. **P7.3 — `Fm1` — is next, and DEC-11 triggers inside it**, so that session stops and briefs before `Fm1`'s acceptance rule admits its first named/bulleted set.** **§18.0.6 is the canonical Open Obligations Register** — every unresolved `DEC-*`, `BUG-*`, `DEBT-*` and `MEAS-*` in the project, each with an owner and a gate. §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
+> **Start at §18, and read §18.0 first.** §18 defines the minimum path — the **eleven** work packages **P1 … P11** — and lists what is deferred and what it costs. **§18.0 is the canonical namespace**: package IDs, the `BUG-*` / `MEAS-*` / `DEC-*` / `DEBT-*` prefixes, the migration table for every legacy label (`Package A–G`, `D½`, `D⅝`, `D¾`, `S1–S3`, `Package N`, bare `D#`, `M#`), the current ordered path, and a diagram. **P5 is CLOSED (2026-08-27), P6 is closed and P8 is complete. Cov4, Cov6 and Cov7 are all closed. P7 is OPEN: P7.1 recomputed the residual (§18.1 P7.1) and **P7.2 closed BUG-10 and BUG-2** (§18.1 P7.2), both on 2026-08-20. **DEC-11 is CLOSED by the user (2026-08-20): subject-only children now, typed children later (DEC-18). `Fm1` is BUILT — one record, four children, `low`, review-gated. P7.3 stays open on one clause: the changed Cov4 prompt's bounded regression needs an API credential this environment does not have.** **§18.0.6 is the canonical Open Obligations Register** — every unresolved `DEC-*`, `BUG-*`, `DEBT-*` and `MEAS-*` in the project, each with an owner and a gate. §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
 >
 > **Legacy labels in the revision notes below are historical.** They record what a past session actually did and are left as written; translate any of them through §18.0.3 rather than assuming a bare `D5` or `S1` still names live work.
 >
@@ -12,6 +12,74 @@ Status: in progress · Version 8.28 · Written 2026-08-15 · **Revised 2026-08-2
 >
 > **8.4 closes the two blocking storage decisions.** `MAX_TERMS` stays at 400 and subtopics ship in a lazily-loaded `data/subtopics.js` sidecar — one question, not two, once you measure that 60.3% of a cache record is a term map the browser never reads as content. **Nothing now blocks committing a cache except running the backfill again.** Every rate quoted against `docs/CORPUS_CENSUS.md`'s 20 documents is still superseded by `docs/COVERAGE_SURVEY.md` (§1.1).
 >
+> **8.30 closes DEC-11 and builds `Fm1`.** **The user decided: A now, C later.**
+> A child represents **what the funded work is about**; it is not a child merely
+> because it is selectable. Funding mechanisms, partnership modes, award
+> instruments, degree or delivery pathways, applicant categories and analogous
+> non-subject participation structures are excluded from ordinary `subtopic`
+> treatment. **"Subject-only" is not "scientific-topic-only"** — *Food Safety*
+> and *Manufacturing Innovation* are subject areas as much as *Catalysis
+> Science* is; the discriminator is **what the work is about versus the
+> mechanism or pathway through which it is funded, organised or delivered**.
+> Applied: `(n) Public-Private Partnerships` is **out**, `358380`'s three
+> degree-delivery tracks are **out**, and `361876` was never a DEC-11 case at
+> all. **DEC-18 is opened** to carry the "C later" half — explicit child *type*,
+> its scoring semantics and its rendering — owner **P9.0**, and it must not
+> block P7.
+>
+> **`Fm1` is built, and the design came out of measuring three candidates
+> against the real documents rather than out of the plan's sketch.** "Any bullet
+> run" finds **10 runs in `362233` alone**, one of which merges the five real
+> Focus Areas with their five adjacent decoys. A line-gap window is a threshold
+> fitted to whichever document you are looking at — `359782`'s four focus areas
+> are 6, 9 and 7 wrapped lines apart, so any window wide enough for them
+> swallows its front matter. **What works is grouping by the marker the document
+> repeats**: a run of ≥3 body lines of the form `<marker><Name><dash><prose>`,
+> document-wide, no window, marker **discovered** from the document — which is
+> what §6.3a asked of `label_run`, and which separates `359782`'s `o` focus
+> areas from its U+F0B7 front matter for free.
+>
+> **`Fm1` adds no threshold of its own.** Discovery is structural; every
+> rejection is §6.4/§6.4a as already fitted for `structural_siblings`. Tier
+> **`low`** — weaker than `structural_siblings`, which at least has an outline
+> asserting siblinghood. Two qualifying marker groups fail closed.
+>
+> **Measured on the frozen corpus, 172 documents: exactly one document changes**
+> — `359782` → **4 spans**, `label_run`, `low`: `Design/Build/Buy`, `Surge and
+> Sustain`, `Long Range Effects`, `Disruptive Innovation`. Every previously
+> accepting document is span- and title-identical. **False-positive sets
+> introduced: 0.** Residual yield: **1 record of 8 attempted, 4 children** —
+> smaller than the dated 8/45, and that is a valid result.
+>
+> **Two shapes deliberately not reached, recorded rather than tuned around.**
+> `362233`'s five *genuine* Focus Areas are **sentences**, not named
+> subdivisions, so there is no title for §5.1's child to carry — the thing
+> missing is a title, not a threshold. Its five *decoys* are colon-delimited,
+> a form with no validating document anywhere, so `Fm1` requires a dash and that
+> document yields **nothing at all, decoys included**. And AFOSR `362681`'s
+> repeated `Program Description:` label stays unimplemented for the reason
+> §6.3a already gives.
+>
+> **DEC-11 is enforced in Cov4, not in `Fm1`** — one paragraph appended inside
+> question 2, model/`R`/ownership/JSON contract untouched, and
+> `tools/cov4_ownership.py`'s `O1_PROMPT` left exactly as the experiment froze
+> it. The byte-identity test now pins the **delta**, which is stricter than what
+> it replaced. `evaluation/cov4_dec11_cases.json` adds **16** real-document
+> candidates with human labels (1 mechanism · 3 pathways · 1 exclusions
+> contaminant · 11 subjects) while `cov4_challenge.json` stays frozen at 36.
+>
+> **⚠ P7.3 does NOT close.** The bounded Cov4 regression needs
+> `ANTHROPIC_API_KEY`, which Claude Code strips from tool subprocesses — the
+> constraint §18.1 Cov4 and `docs/FAMILY_TAXONOMY.md` §3 already record. The
+> clause *"the changed Cov4 prompt passes bounded regression on its existing
+> frozen validation set"* is **unmet**, and every other clause passes. Fm1's
+> children are `inferred`/`low`/review-gated, so nothing ships in the meantime.
+>
+> 729 tests green, `verify_no_drift` exit 0, §0.5 byte-identical.
+>
+> *(The version line jumps 8.28 → 8.30: P7.3a's record landed as commit 8.29
+> without bumping the header, and that is corrected here rather than hidden.)*
+
 > **8.28 closes BUG-10 and BUG-2, and P7.2 is done.** **No product policy was
 > chosen, no threshold moved, no family widened beyond the punctuation BUG-2
 > names, Cov4 and Cov6 untouched, no cache written, and neither DEC-10 nor
@@ -1613,6 +1681,33 @@ Each: id, regex with an ordinal capture group, and **the record that validates i
 | `focus_area` | `Focus\s+Area\s+(\d{1,2}[a-z]?)` | `362859` (DARPA MMoMA, Focus Area 1–4) |
 | `technical_category` | `Category\s+(\d{1,2})\s*[:–—]` | `356623` (ARPA-E SCALEUP, `CATEGORY 1:`–`CATEGORY 7:`) |
 | `thrust` | `Thrust\s+(?:Area\s+)?(\d{1,2})` | `356612` (DTRA) — **fires, but at the wrong granularity; see below** |
+
+**The twelfth family, added in P7.3b: `label_run` (Fm1).** It has no regex in
+`FAMILIES` because membership is established by a marker the *document* repeats
+rather than by a label this project lists in advance — like
+`structural_siblings`, its recogniser lives in `subtopic_segmentation`. Shape:
+a run of ≥3 body lines of the form `<marker><Name><dash><prose>`, grouped **by
+the marker, document-wide**.
+
+| Family | Shape | Validated by |
+|---|---|---|
+| `label_run` | `<marker><Name>` `<dash>` `<prose>`, grouped by marker | **`359782`** (DARPA TTO, `HR001125S0011.pdf`), quoted below |
+
+```
+DARPA ... is soliciting innovative executive summaries and proposals in the
+following focus areas:
+  oDesign/Build/Buy – Using innovative design approaches throughout the system
+  oSurge and Sustain – Developing technologies that make existing military
+  oLong Range Effects – Creating new systems and approaches that enable
+  oDisruptive Innovation – Rapidly fielding novel engineering, technologies
+```
+
+**It adds no threshold**: discovery is structural and every rejection comes from
+§6.4/§6.4a as fitted for `structural_siblings`. Tier **`low`** — weaker than
+`structural_siblings`, which at least has an outline tree asserting siblinghood.
+Two qualifying marker groups in one document **fail closed**. Measured across
+the 172 documents P7.1/P7.2 froze: **one admitted set, 0 false-positive sets**
+(§18.1 P7.3b).
 
 **Three of these six were written from measurement, in P4.3, from documents the census had already read: `component`, `focus_area`, `technical_category`. All three have corpus support.** That is the evidence behind §17.8.
 
@@ -3605,7 +3700,7 @@ Legacy labels are translated once, in §18.0.3 — not repeated here.
 | **P6.1** | NASA ROSES structured-source proof | ✅ **complete** 2026-08-18. Gate closed clause by clause against repository evidence: six clauses outright, one with a forward obligation (the Cov4 bypass), one on evidence (§0.5). **Previously-category-(a) records reached: 0** — P6.1 reached the **(e)** population |
 | **P6.2** | DOE Office of Science structured-source test | ✅ **complete 2026-08-21 — a measured negative, and no source was built.** It was the first real test of whether structured/referenced ingestion reaches category (a), and **the population was empty**: 2 Office of Science parents, **both already resolved** by generic parsing, **0** previously category (a), **0** net-new children, **3** non-fundable organizational labels rejected. Evidence: `docs/DOE_SOURCE_INSPECTION.md` |
 | **P6.3** | DoD structured-source test | ✅ **complete 2026-08-22, Army/TDAC only** — exactly what MEAS-7 justified. **1 parent (`345241`), 14 external-only children**, provenance `referenced`, confidence `high`, **0** generic overlap. Health: names the parent, 14 ≥ floor 8. ONR rejected on measurement; **no DoD router, no SAM.gov** |
-| **P7** | Residual generic forms | 🔄 **open; P7.1, P7.2 and P7.3a complete 2026-08-20. P7.3 is BLOCKED on DEC-11 — a `MIXED` decision whose product half is the user's.** Every gate ahead of it is passed: Cov4 2026-08-26, P6 measured, **P5 closed 2026-08-27**. Its scope is **defined** by P5's closeout — BUILD `Fm1`/`Fm2`/`Fm3`/`Fm4`, MEASURE FIRST `Fm8`, DEFER `Fm5`, DECLINE `Fm6`/`Fm7` — and its first item **P7.1 is done** — the residual is recomputed and frozen in `evaluation/p7_residual.json`, structured/referenced sources removed **0** records from it, `Fm8` is measured and **DECLINED**, and `Fm3`/`Fm4` turn out to have landed already in `d85e2df`, so **P7.2 reduces to BUG-2**. Recommendation after P7.1: `Fm1` BUILD AS ALREADY PLANNED · `Fm2` BUILD ONLY IF EXISTING GATE PASSES · `Fm5` DEFER · `Fm6` DECLINE · `Fm8` DECLINE |
+| **P7** | Residual generic forms | 🔄 **open; P7.1, P7.2, P7.3a and P7.3b complete 2026-08-20. DEC-11 is CLOSED (user: subject-only now, typed later — DEC-18) and `Fm1` is BUILT. P7.3 awaits one bounded Cov4 regression that needs an API credential.** Every gate ahead of it is passed: Cov4 2026-08-26, P6 measured, **P5 closed 2026-08-27**. Its scope is **defined** by P5's closeout — BUILD `Fm1`/`Fm2`/`Fm3`/`Fm4`, MEASURE FIRST `Fm8`, DEFER `Fm5`, DECLINE `Fm6`/`Fm7` — and its first item **P7.1 is done** — the residual is recomputed and frozen in `evaluation/p7_residual.json`, structured/referenced sources removed **0** records from it, `Fm8` is measured and **DECLINED**, and `Fm3`/`Fm4` turn out to have landed already in `d85e2df`, so **P7.2 reduces to BUG-2**. Recommendation after P7.1: `Fm1` BUILD AS ALREADY PLANNED · `Fm2` BUILD ONLY IF EXISTING GATE PASSES · `Fm5` DEFER · `Fm6` DECLINE · `Fm8` DECLINE |
 | **P8** | NASA ROSES Catalog Source | ✅ **complete** 2026-08-20, own gate passed, **no open items** (§18.1). A **catalog-completeness branch**, not subtopic recall. The adapter is enabled and reconciles all **63** elements every refresh; the catalog-completeness gap is **closed** — the 2 actionable unmatched elements are emitted (**+0.136%**) and the other **51** stay inventory-only. Native identity `(cycle, code, title)` and the cross-source ambiguity rule were audited against the live source in P8.2a |
 | **P9** | Storage and scoring | ⛔ **not started.** **P9.0 must run before anything writes a cache** |
 | **P10** | Retrieval and UI | ⛔ **not started** |
@@ -3650,7 +3745,7 @@ guarantees they never publish. It is listed once, under P5.
 | ID | Decision | Where | Open since |
 |---|---|---|---|
 | **DEC-2** | **Where referenced subtopics live** — extend `discoverability.py`, or a new `program_taxonomy` adapter. Recommendation stated (adapter, linkage imported); nothing on the critical path depends on it | §13, tradeoffs in §6.7a | 15 sessions |
-| **DEC-11** | **Is `(n) Public-Private Partnerships` a subject or a funding mechanism?** One person reading page 85 of `DE-FOA-0003600`. Do not settle it from a model verdict | §13, evidence in §11 | 2 sessions |
+| **DEC-11** | ~~**Is `(n) Public-Private Partnerships` a subject or a funding mechanism?**~~ ✅ **CLOSED 2026-08-20 by the user: subject-only children now, typed children later.** It is a mechanism, read from page 85, and it is out. Typed children are **DEC-18** | §13, decision in §18.1 P7.3b | closed |
 | **DEC-12** | **Whether to de-duplicate the `deadlines` payload** — 1.31 MiB removable of a 4.35 MB field, 5.5% of `opportunities.js`. Changes a published artifact's shape, so §0.5 applies | §13 | new in 8.6 |
 | **DEC-3 … DEC-10** | Works-text provider · gold set · archive search · summary length · feed inclusion · taxonomy depth · mute/alert split · OCR | §13 | various |
 | §18.3a | **Whether a bare-numbered (form F1) family may ever be added.** Four exit criteria stated; the prohibition stands until all four hold. *Not a §13-numbered decision — it keeps its section reference* | §18.3a | new in 8.5 |
@@ -3827,7 +3922,8 @@ P7, because that is where it falls in the ordered path (§18.0.4).
 - [x] **P7.1. Recompute the residual, and give `Fm8` a denominator** — ✅ **done 2026-08-20**, `evaluation/p7_residual.json`, `tools/p7_frame.py`, `tools/p7_residual_report.py`, 51 tests. **Structured/referenced sources removed 0 records**; `Fm2` ~31 → ~21, `Fm6` random observations 2 → 1, `Fm1` 10 → 9 residual, `Fm5` unchanged, **`Fm8` measured and DECLINED**. `no_extractable_text` reported for DEC-10 **without deciding it**; both required fixtures pinned. **Read §18.1 P7.1 before starting any item below — the yields there supersede the ones in this list.**
 
 - [x] **P7.3a — BUG-13, and DEC-11's evidence.** ✅ **done 2026-08-20.** `is_administrative` now matches at a word start, recovering five real DOE Quantum Information Science titles; every accepting document span-identical. DEC-11's three cases read from source and briefed: `(n)` PPP is a selectable **mechanism container** with its own application process and award instrument, `358380`'s tracks are **degree-delivery pathways**, and `361876` is **not the same question** — five genuine subjects plus one exclusions heading, rejected today by §6.4 rule 8 at 0.100 against a 0.07 ceiling. **DEC-11 awaits the user**; recommendation Option A for P7, C as the destination
-- [ ] **Fm1. F4 — named / bulleted, no counter** — **BLOCKED on DEC-11** (§18.1 P7.3a). 9 of 90 · **~73**, or ~22 excluding one stratum-E observation; residual **8 records / 45 children** after P7.2. `label_run` (§6.3a) plus a bulleted variant. Highest false-positive risk in the plan; `362233`'s five real Focus Areas sit one subsection above five decoy process bullets. **Do not build on structure alone**
+- [x] **P7.3b — DEC-11 recorded, `Fm1` built.** ✅ **2026-08-20.** DEC-11 CLOSED by the user (subject-only children now; typed children later as **DEC-18**). `Fm1` = `label_run`: `<marker><Name><dash><prose>`, grouped by the marker the document repeats, document-wide, **no new threshold**, tier `low`, two qualifying groups fail closed. Validated on `359782`. **1 record / 4 children recovered; 0 false-positive sets across 172 documents; every previously accepting document span-identical.** DEC-11 enforced by one clause in Cov4's fundability question, with `evaluation/cov4_dec11_cases.json` as its regression arm. **⚠ that regression is owed and needs `ANTHROPIC_API_KEY`** — the one P7.3 clause still unmet
+- [x] **Fm1. F4 — named / bulleted, no counter** — built in P7.3b (§18.1 P7.3b). 9 of 90 · **~73**, or ~22 excluding one stratum-E observation; residual **8 records / 45 children** after P7.2. `label_run` (§6.3a) plus a bulleted variant. Highest false-positive risk in the plan; `362233`'s five real Focus Areas sit one subsection above five decoy process bullets. **Do not build on structure alone**
 - [ ] **Fm2. F1 — bare numbered** — 8 of 90 · ~31, the most stable uncovered row. **Blocked by §18.3a's four exit criteria — read them first.** Needs grouped restarting counters (`330175`) and title extraction that survives a trailing em-dash clause (`355150`)
 - [x] **Fm3. Repair `dod_topic`'s ordinal group** — widen `(\d{1,2})` to letters so `Topic A1`–`A7` matches (`356612`). **ALREADY LANDED in `d85e2df`, 2026-08-17**, and verified live at P7.1: `356612` returns 7 correct spans, family `dod_topic`. This box was unchecked because §8.9's note recorded the work and the checklist did not
 - [x] **Fm4. Repair `thrust`'s granularity** — it matched the container `Thrust Area 1`, not the seven topics under it. **ALREADY LANDED in `d85e2df`**: `dod_topic` now sits above `thrust` and a negative lookbehind restores the `research_thrust` boundary. Verified live at P7.1 by the same run
@@ -4518,7 +4614,7 @@ P4.3, P4.6 …).
 | 7 | **Cov6** — publication semantics and `_demote()` | ✅ **complete 2026-08-27.** §7.1's rule implemented as the one authority; the four concepts separated; a tier-only fail-closed hole closed; `_demote()` narrowed to its measured risk. **No generic child auto-publishes** — the review queue, not the catalog, is where Cov4's 28 land |
 | 8 | **Cov7** — 30 more stratum-D reads | ✅ **complete 2026-08-27**, MEAS-2 delivered. 2 misses in 30 (**F4 bulleted** at DARPA, **`Priority Area N`** at State), D re-estimated to point 10 / band 3–75, F5 re-sized ~40 → ~12. **P5's items are all done; its closeout is next** |
 | 9 | **P5 closeout** — package gate, coverage reconciliation, P7 definition, obligations register | ✅ **complete 2026-08-27. P5 CLOSED.** All five gate clauses pass; final estimate **~141 records (9.5%), band 50–443**; **§18.0.6** opened as the canonical Open Obligations Register |
-| 10 | **P7** — residual generic forms, scope defined by P5's closeout | **OPEN, and P7.1 is ✅ complete 2026-08-20** (§18.1 P7.1, `evaluation/p7_residual.json`). Structured/referenced sources removed **0** records from the generic residual; what moved the yields is the current generic model plus a repair already in the code. `Fm2` **~31 → ~21** · `Fm6` random observations **2 → 1** · `Fm1` **10 → 9 residual**, its one loss unreachable rather than covered · `Fm5` unchanged · **`Fm8` measured and DECLINED — P7.5 is not scheduled**. **P7.2 ✅ complete 2026-08-20**: BUG-10 closed at its trigger (the guess is gone from *both* call sites, and the one the register named was not the one that fired) and BUG-2 closed with a real validating document, which recovered **3 children in 2 records** and moved `Fm1`'s residual to **8 records / 45 children**. **P7.3a ✅ complete 2026-08-20**: **BUG-13 closed** and **DEC-11's bounded evidence read and briefed** (§18.1 P7.3a). All three named cases characterised from their sources; Case C (`361876`) is **removed from DEC-11's evidence base** as a contamination problem rather than a boundary one. **P7.3 is BLOCKED on DEC-11**, which is `USER`'s half of a `MIXED` decision — recommendation **Option A for P7, Option C as the destination**. **BUG-14** opened. Then P7.4 `Fm2` behind §18.3a's four unwaived exit criteria |
+| 10 | **P7** — residual generic forms, scope defined by P5's closeout | **OPEN, and P7.1 is ✅ complete 2026-08-20** (§18.1 P7.1, `evaluation/p7_residual.json`). Structured/referenced sources removed **0** records from the generic residual; what moved the yields is the current generic model plus a repair already in the code. `Fm2` **~31 → ~21** · `Fm6` random observations **2 → 1** · `Fm1` **10 → 9 residual**, its one loss unreachable rather than covered · `Fm5` unchanged · **`Fm8` measured and DECLINED — P7.5 is not scheduled**. **P7.2 ✅ complete 2026-08-20**: BUG-10 closed at its trigger (the guess is gone from *both* call sites, and the one the register named was not the one that fired) and BUG-2 closed with a real validating document, which recovered **3 children in 2 records** and moved `Fm1`'s residual to **8 records / 45 children**. **P7.3a ✅ complete 2026-08-20**: **BUG-13 closed** and **DEC-11's bounded evidence read and briefed** (§18.1 P7.3a). All three named cases characterised from their sources; Case C (`361876`) is **removed from DEC-11's evidence base** as a contamination problem rather than a boundary one. **P7.3b ✅ complete 2026-08-20**: **DEC-11 CLOSED by the user** — subject-only children now, typed children later as **DEC-18** — and **`Fm1` is BUILT** (`label_run`: 1 record, 4 children, `low`, **0 false-positive sets** across 172 documents, no new threshold). **BUG-14** opened at P7.3a. **P7.3 itself stays OPEN on exactly one clause**: the changed Cov4 prompt's bounded regression needs `ANTHROPIC_API_KEY`, which Claude Code strips from tool subprocesses. Then P7.4 `Fm2` behind §18.3a's four unwaived exit criteria |
 | 11 | **MEAS-8** — cross-agency residual coverage audit | **pinned here deliberately: P7 → MEAS-8 → P9.** MEAS-8's own wording is *"after the generic subtopic model is substantially working"*, so it must evaluate the model we intend to ship rather than an intermediate one — and P9 must design storage for a measured model, not an unmeasured one. It inherits **DEBT-11**'s frozen-artifact requirement and must re-derive rather than trust **DEBT-10**'s field |
 | 12 | **P9 / P9.0** — subtopic-aware storage and scoring | due `DEC-*` resolve here: **DEC-16 (USER)**, DEC-2, DEC-8, DEC-12; **BUG-12**, DEBT-4, DEBT-5, DEBT-10, DEBT-12 |
 | 13 | **P10** — retrieval and UI | **MEAS-9** post-P9 manual-profile / CV / ORCID relevance regression, including the real ORCID validation · **MEAS-10** the multi-researcher pilot · MEAS-5 · retrieval and UI work · due `DEC-*`: DEC-3, DEC-4, DEC-5, DEC-6, DEC-7 (USER), DEC-9 (USER), DEC-14 |
@@ -4642,7 +4738,8 @@ reopened to add one.
 | **DEC-8** | Taxonomy depth for referenced topics — attach at program level, or one level deeper? | **DEFERRED — assigned** | **MIXED** | **P9.0 package start, before the stored child shape is fixed** | **P9.0** | Evidence can show how many children each depth yields and how they rank; **which granularity a PI should be shown is a product choice**. P6.3 attaches at topic level today; the plan proposes program level, "where the program manager and the funding decision sit" |
 | **DEC-9** | Mute/alert split — accept that muted items still appear in alerts, or build the suppression export? | **DEFERRED — assigned** | **USER** | **P10, before the mute control (issue #8) ships** | **P10** | A known, deliberate inconsistency in what a user is sent after they have asked not to see something. **Accepting it is a policy choice, not an engineering one.** Proposed: accept for v1 and document it plainly |
 | **DEC-10** | OCR | **DEFERRED — assigned** | **ENGINEERING** | **P7 closeout, when P7.1 reports the `no_extractable_text` rate** | **P7** | The plan fixes the trigger as a measurement: *"Revisit only if `no_extractable_text` rejections prove material."* **Cov7 measured 1 of 30**, and its cause was a SAM.gov page returning 0 characters rather than a scanned PDF. **P7.1 delivered the rate on 2026-08-20 and did NOT decide this** — the trigger is the closeout, not P7.1. Three denominators, never pooled: **1 of 151 documents** read across P7.1's two frames (cause: a content-free DARPA agency page), **11 of 770** in the committed D5 backfill, **9 of 726** current evidence-cache entries after excluding DEBT-4's 213. Causes are broken out in §18.1 P7.1 and **zero instances in either frame are image-only or scanned PDFs**, which is the only thing OCR would fix. On this evidence the threshold has still not fired |
-| **DEC-11** | Where is the boundary between a **fundable subdivision** and a **funding mechanism / programme track**? | **OPEN — assigned** | **MIXED** | **P7.3, before `Fm1`'s acceptance rule admits its first named/bulleted set** | **P7** | **Evidence can characterise the class exactly and cannot decide it.** Three real instances now: `361876`; `(n) Public-Private Partnerships`, which one person reading page 85 of `DE-FOA-0003600` can classify; and Cov7's `358380`, whose notice says *"one of the following program tracks"* over three degree pathways — selectable, three-strong, and not research subdivisions. Reading settles what each **is**; **whether a PI should be shown a mechanism as a child of an opportunity is a product judgment about the card surface**. `Fm1` is where a mechanism-shaped label would first be admitted, which is why the trigger sits there and not at P7's start. **Do not settle it from a model verdict in either direction** (§17.8). **P7.1 did not touch it** (2026-08-20) — it collected no new instance of the class and took no step toward the choice; the trigger remains P7.3 |
+| **DEC-11** | Where is the boundary between a **fundable subdivision** and a **funding mechanism / programme track**? | **CLOSED — USER decision 2026-08-20** | — | — | — | **Subject-only children, and typed children later.** The user's wording: *a normal Funding Finder subtopic represents a research, technical, programmatic or other substantive subject area that the work is **about**; a child is not a normal subtopic merely because it is selectable.* Excluded from ordinary `subtopic` treatment: funding mechanisms, partnership modes, award/instrument mechanisms, degree or delivery pathways, applicant categories, administrative or programme tracks whose meaning is *how the applicant participates* rather than *what the funded work is about*, and analogous non-subject structures. **"Subject-only" is not "scientific-topic-only"** — *Food Safety*, *Manufacturing Innovation*, a technical or mission programme area all remain subtopics. **Applied:** `(n) Public-Private Partnerships` in `360678` is **not** an ordinary subtopic under v1; `358380`'s three degree-delivery program tracks are **not**; and `361876` is **not a DEC-11 case** — its first five entries are subject areas and `3.3.6 Projects and Activities Not Eligible for Funding` is a member contaminant for §6.4b to filter. **Evidence:** §18.1 P7.3a read all three from source; §18.1 P7.3b records the decision. **Enforced by** one clause appended to Cov4's fundability question (`DEC11_FUNDABILITY_CLAUSE`), with `evaluation/cov4_dec11_cases.json` as its regression arm. **The "C later" half is DEC-18** |
+| **DEC-18** | **Typed children — DEC-11's "C later" half.** What child *types* exist, how each is scored, and how each is rendered so a mechanism or a track is never presented as though it were a research subject | **DEFERRED — assigned** | **MIXED** | **P9.0 package start, before the stored subtopic shape is fixed — and P10 before any child is rendered** | **P9.0** | **The direction is already decided and is not reopened here**: the user chose *A now, C later* at DEC-11 (2026-08-20), so meaningful selectable non-subject structures should eventually be representable as **typed** children rather than discarded forever or flattened into ordinary subtopics. `subject`, `mechanism` and `track` are **illustrative semantics, not authorisation to proliferate types.** What remains is the shape, and it splits cleanly: **P9 must determine and store an explicit child type and its scoring semantics** — §5.1's record has no such field and DEC-1's sidecar is where it would live — and **P10 must render types distinctly**. One retrieval requirement is already fixed by DEC-11's reasoning and is the concrete cost of getting this wrong: **ordinary subject retrieval must not be polluted by mechanism vocabulary merely because the mechanism is selectable** — a mechanism child's term map is procurement language (*Other Transactions*, *Technology Investment Agreements*), and §6.5 derives `subtopic_terms`, `program_area_labels` and `topic_areas` from the span's own prose. **Must not block P7**: under DEC-11's v1 rule these candidates are still extracted and still land in the cache with their diagnostics, so nothing has to be re-read later. `MIXED` because evidence can show what each type would yield and how it ranks, and **which types a PI should be shown is the user's call** |
 | **DEC-12** | The `deadlines` payload duplicates itself — 17.5% of `opportunities.js` | **DEFERRED — assigned** | **ENGINEERING** | **P9.2, before the storage winner is implemented** | **P9.0** | A serialization-cost question with a measured answer and no user-visible surface. Pre-existing catalog cost, larger than anything subtopics add, and independent of them |
 | **DEC-13** | NASA ROSES standalone ingestion | **CLOSED** | — | — | — | Taken 2026-08-18, implemented as P8, complete 2026-08-20 |
 | **DEC-14** | Should ROSES appendix divisions A–F map to `disciplines` facet values? | **DEFERRED — assigned** | **MIXED** | **P10, before facet rendering ships** | **P10** | Mapping division → discipline is a **new inference** (§17.8), so evidence must first show what it would produce; **whether to present an inferred facet as though it were published data is a product choice**. Not a P8 blocker, and P8 closed without it |
@@ -4674,7 +4771,7 @@ reopened to add one.
 | **DEBT-4** | 213 stale evidence entries whose records have left the catalog | **OPEN — assigned** | **P9.0** | any rate is computed from the cache rather than the catalog | Cache residue; inflates any cache-derived denominator. **Prune on the catalog, never on the cache** |
 | **DEBT-5** | 13 orphaned evidence entries | **OPEN — assigned** | **P9.0** | anything writes a cache | **Re-measured 2026-08-27 and still exactly 13.** Cov1 did not close it |
 | **DEBT-6** | 25 recorded fetch failures across five hosts | **OPEN — assigned** | **MEAS-8** | any of them is cited as a reason to defer work | §17.11: a failed fetch is a fact about the client until the layer is isolated. The reachability sweep already showed 4 of 14 hosts no longer reproduce |
-| **DEBT-8** | `structural_siblings` is blind to **55% of the corpus's PDFs** (71 of 129 carry no bookmarks) | **DEFERRED — assigned** | **P7** | `Fm1` is designed | A measured limitation, not a defect. **`Fm1` must not assume `structural_siblings` reaches F4** — it is the only mechanism serving anything like it and it cannot see over half the corpus. **Sharpened by P7.1**: across its 19 residual records only **7** carry no bookmarks anywhere, and the other **12 do and still miss**, so for this population the binding constraint is not bookmark *absence* but that the outline **does not carry the fundable list at an admissible depth**. It cuts the other way too — `330175`'s 24 spans and `361526`'s 21 are recovered *by* bookmarks in a secondary attachment |
+| **DEBT-8** | `structural_siblings` is blind to **55% of the corpus's PDFs** (71 of 129 carry no bookmarks) | **DEFERRED — assigned** | **P7** | `Fm1` is designed | A measured limitation, not a defect. **`Fm1` must not assume `structural_siblings` reaches F4** — it is the only mechanism serving anything like it and it cannot see over half the corpus. **Sharpened by P7.1**: across its 19 residual records only **7** carry no bookmarks anywhere, and the other **12 do and still miss**, so for this population the binding constraint is not bookmark *absence* but that the outline **does not carry the fundable list at an admissible depth**. It cuts the other way too — `330175`'s 24 spans and `361526`'s 21 are recovered *by* bookmarks in a secondary attachment. **Narrowed, not closed, by `Fm1` (P7.3b):** `Fm1` reads body text and needs no outline at all, and it recovered `359782`, whose notice PDFs carry **zero** bookmarks — so one of the 7 bookmark-less residual records is now covered. The other 6 and the 12 that *have* bookmarks and still miss are unchanged, and the framing stands: the constraint is that the fundable list does not appear at an admissible outline depth, not that the outline is absent |
 | **DEBT-9** | No candidate span population is committed anywhere | **CLOSED** | — | — | Closed 2026-08-24 by `evaluation/meas3_population.json`, pinned by 15 tests |
 | **DEBT-10** | **`attachment_count` in the enrichment cache can outlive the API's own attachment list** — 4 of 815 records, including `363607`, which the survey recorded as *enumerating* and which is now unreachable | **OPEN — assigned** | **P9.0** | any code computes a population from `attachment_count` | Not a parser defect: `synopsisAttachmentFolders` now returns empty and nothing compares the two. **Verified against the roadmap**: §7.4's canaries are implemented per-source inside adapters and **no scheduled package owns §7.4 generically**, so the canary framing has no home — the actionable half is cache hygiene, which is P9.0's stated remit ("must run before anything writes a cache"). **MEAS-8 is its first consumer** and must re-derive rather than trust the field. **Reproduced live on its own named example at P7.1** (2026-08-20): `363607`'s catalog `attachment_count` is 10, the committed census records 0, and Grants.gov offered **no attachment at all**, so one of `Fm1`'s ten historical observations is now **unreachable rather than residual** |
 | **DEBT-11** | The stratified sampling instrument was never committed | **OPEN — assigned** | **MEAS-8** | **MEAS-8 draws its first sample** | **Substantially repaired at this closeout**: `evaluation/attachment_census.jsonl` (815 records, 1,633 attachments) is committed, `tools/p5_coverage_report.py` recomputes the frame offline, and `tests/test_p5_closeout.py` pins it. **What remains** is that `pick50.py`'s draw and the taxonomy's 50-record selection are still unenumerated, so an exclusion set is still imperfect. **MEAS-8 must commit its own sample selection and its truth labels as a frozen artifact before drawing** — that is the specific requirement, and it is what stops MEAS-8 repeating the mistake |
@@ -6833,6 +6930,242 @@ untouched (P7 closeout); `Fm2`/§18.3a untouched (P7.4); Cov4's prompt, model,
 `R` and ownership guard untouched; Cov6's predicate untouched; no backfill; no
 cache written; MEAS-8, P9 and P10 not started; DEBT-8's broader
 bookmark/reachability questions not opened; §0.5 not re-frozen.
+
+##### P7.3b — DEC-11 recorded, `Fm1` built, 2026-08-20
+
+#### DEC-11 — CLOSED, by the user
+
+> **A now, C later.**
+>
+> **Current / v1 rule — subject-only children.** A normal Funding Finder
+> subtopic represents a **research, technical, programmatic or other substantive
+> subject area that the work is about**. A child is **not** a normal subtopic
+> merely because it is selectable. Excluded from ordinary `subtopic` treatment:
+> funding mechanisms · partnership modes · award/instrument mechanisms · degree
+> or delivery pathways · applicant categories · administrative or programme
+> tracks whose meaning is *how the applicant participates* rather than *what the
+> funded work is about* · analogous non-subject structures.
+>
+> **"Subject-only" does NOT mean "scientific-topic-only."** *Food Safety*,
+> *Manufacturing Innovation*, a technical programme area, a mission or programme
+> area — all remain subtopics. **The discriminator is what the work is about
+> versus the mechanism or pathway through which the work or applicant is funded,
+> organised or delivered.**
+
+**Applied to P7.3a's three cases:**
+
+| Case | Under v1 |
+|---|---|
+| `(n) Public-Private Partnerships`, `360678` | **not an ordinary subtopic.** `360678` goes 69 → 68 published-eligible spans once Cov4 rejects it |
+| `358380`'s three degree-delivery program tracks | **not ordinary subtopics** |
+| `361876` | **not a DEC-11 case at all.** Its first five `3.3.x` entries are subject areas; `3.3.6 Projects and Activities Not Eligible for Funding` is a **member contaminant** for §6.4b to filter |
+
+**The "C later" half is recorded as DEC-18**, not left in prose: explicit child
+*type*, its scoring semantics and its rendering, owner **P9.0**, triggered at
+P9.0's package start and again at P10 before anything is rendered. `subject`,
+`mechanism`, `track` are illustrative semantics, **not authorisation to
+proliferate types**, and one retrieval requirement is already fixed by DEC-11's
+own reasoning: **ordinary subject retrieval must not be polluted by mechanism
+vocabulary merely because the mechanism is selectable.** It must not block P7,
+and it does not: under the v1 rule these candidates are still extracted and
+still land in the cache with their diagnostics, so nothing needs re-reading.
+
+---
+
+#### `Fm1` — the design came out of measurement, not out of the sketch
+
+**Three candidate designs, each killed by the corpus.**
+
+| Design | What the documents said |
+|---|---|
+| any bullet run | **10 runs in `362233` alone**, one of which *merges* the five real Focus Areas with their five adjacent decoys. All 10 rejected by the existing rules — **including the two real sets**, which fail rule 3's 200-character floor because a bullet is not a section |
+| a line-gap window | `359782`'s four focus areas are **6, 9 and 7 wrapped lines apart**, so any window wide enough for them also swallows its front-matter list, and any window narrow enough to exclude the front matter splits the focus areas. A window is a threshold fitted to whichever document you are looking at |
+| **grouped by marker, document-wide** | **one admitted set across 172 documents, and it is the right one.** Chosen |
+
+**The shape.** A run of ≥3 body lines of the form
+`<marker><Name><dash><prose>`, grouped **by the marker**, document-wide, with no
+proximity window. The marker is **discovered from the document** — which is what
+§6.3a asked of `label_run` — and it is what separates `359782`'s `o` focus areas
+from its U+F0B7 front matter for free. **Two qualifying marker groups fail
+closed**, the same way `best_family` refuses an ambiguous family.
+
+Markers are measured rather than guessed: U+2022 / U+25CB / U+25AA in `362233`,
+the Symbol-font private-use U+F0B7 / U+F0A7 that a Word-produced PDF emits, and
+a bare `o` glued to a capital — which is how `pdfminer` flattens Word's
+second-level bullet, and how `359782` prints its four focus areas.
+
+**`Fm1` adds no threshold of its own.** Discovery is structural; every rejection
+comes from §6.4 and §6.4a exactly as fitted for `structural_siblings`. Tier
+**`low`** — weaker than `structural_siblings`, which at least has an outline tree
+asserting siblinghood — so nothing `Fm1` finds can publish unreviewed.
+
+**§17.8, and the validating document is real.** `359782` (DARPA TTO,
+`HR001125S0011.pdf`), read in Cov7 and again here:
+
+```
+DARPA ... is soliciting innovative executive summaries and proposals in the
+following focus areas:
+  oDesign/Build/Buy – Using innovative design approaches throughout the system
+  oSurge and Sustain – Developing technologies that make existing military
+  oLong Range Effects – Creating new systems and approaches that enable
+  oDisruptive Innovation – Rapidly fielding novel engineering, technologies
+```
+
+**Structure does not establish fundability and `Fm1` does not claim to.** It
+admits a *set*; §6.4b classifies each member individually. **No lexical
+whitelist of research words was added, and no threshold was moved.**
+
+---
+
+#### Measured on the frozen P7 evidence
+
+**Per form, not mixed with `Fm2` or with structured-source yield.**
+
+| | Records | Children |
+|---|---|---|
+| `Fm1` residual attempted (P7.2's dated figure) | **8** | 45 |
+| **newly recovered** | **1** — `359782` | **4** |
+| true subject children | 4, read: `Design/Build/Buy`, `Surge and Sustain`, `Long Range Effects`, `Disruptive Innovation` | |
+| mechanism/track candidates rejected under DEC-11 | **0 reached candidacy** — `Fm1` never forms a set on `358380`, so its tracks are not even offered | |
+| contaminant sets rejected | every other marker group in 172 documents | |
+| ambiguous | 0 | |
+
+**Documents whose result changed across all 172 cached documents: one.** Every
+previously accepting document is span- and title-identical — `360678` 69,
+`360205` 37, `330175` 24 and 18, `361526` 21, `363526` 8, `349554` 18, `356623`
+7, `356612` 7, FEMA CTP 3 + 3. **False-positive sets introduced: 0.** No new
+catalog estimate is extrapolated: one recovery on a post-hoc denominator of 8
+does not support one.
+
+**The seven records still missed, and why.**
+
+| Record | Cause |
+|---|---|
+| `362233` (DHA CDMRP) | its five genuine Focus Areas are **sentences**, not named subdivisions — no title for §5.1's child to carry. The thing missing is a title, not a threshold |
+| `362329` (DHA PRMRP) | same shape, same cause |
+| `343653` (DHAPP) | ten country FOAs at outline **depth 0**, which §6.3a criterion 1 excludes by construction |
+| `362871` (ONR) | 41 bulleted lines in one marker group; refused on `span_distribution` and `span_length` |
+| `363578` (State NEA) | 7 bulleted lines; refused on distribution, dominance and length |
+| `358716` (HUD) | the list is on the **agency page**, and `Fm1` is not in `HTML_LAYERS` — no validating HTML document exists, so adding it there would be a widening §17.8 forbids |
+| `vpr-email:…78b24028` (Sloan) | seven named fellowship fields on a foundation page, same HTML gap |
+
+**Two shapes deliberately not reached.** `362233`'s five *decoys* are
+colon-delimited (`Innovation: …`, `Impact: …`), and the colon form has **no
+validating document anywhere in the corpus** — so `Fm1` requires a dash and that
+document yields **nothing at all, decoys included**. That is not a special case
+for `362233`: it is the absence of evidence for that shape. And AFOSR `362681`'s
+repeated `Program Description:` label — §6.3a's other `label_run` variant —
+stays unimplemented for the reason §6.3a already gives: `Program Description:`,
+`Basic Research Objectives:` and `Contact Information:` each repeat 39 times in
+that one document.
+
+---
+
+#### DEC-11 in the gate, and the regression it owes
+
+**One paragraph, appended inside Cov4's question 2.** O1 asks whether *"an
+applicant could propose research work against this candidate"* — a
+**choosability** test, which cannot encode DEC-11. And it showed: the classifier
+rejected `(n)` saying *"Describes a funding mechanism/partnership type, not a
+subject"*, then later accepted the same title while still calling it a *"funding
+activity"*, against §11's measured 1-in-108 flip floor. The clause:
+
+> *Judge what the funded work would be ABOUT, not merely whether an applicant
+> selects it. A substantive research, technical, programmatic or mission subject
+> area is fundable — "Food Safety" and "Manufacturing Innovation" are subject
+> areas as much as "Catalysis Science" is. Answer "no" when the candidate
+> instead describes how an applicant participates or is funded rather than what
+> the work studies or does: a funding mechanism, a partnership mode, an award
+> instrument, a degree or delivery pathway, an applicant category, or an
+> analogous non-subject participation structure. Selectability alone is not
+> fundability.*
+
+**Model, `R`, `MAX_TOKENS`, the excerpt cap, the ownership axis and the JSON
+contract are untouched.** `tools/cov4_ownership.py` keeps `O1_PROMPT` **exactly
+as the experiment froze it** — rewriting a measurement's own input would destroy
+its provenance — and production's `PROMPT` is O1 with `{dec11}` substituted at
+one place. **The test that asserted byte-identity with O1 now asserts the
+delta**, which is stricter than what it replaced, and it is the one existing test
+this session modified.
+
+**`evaluation/cov4_dec11_cases.json` — additive, 16 real-document candidates.**
+`cov4_challenge.json` stays frozen at 36 candidates and 23/12/1, asserted by a
+test.
+
+| Class | Rows | Expected |
+|---|---|---|
+| `mechanism` | 1 — `(n) Public-Private Partnerships` | reject |
+| `delivery_pathway` | 3 — `358380`'s tracks | reject |
+| `exclusions_contaminant` | 1 — `361876`'s `3.3.6` | reject **without costing its five siblings** (§6.4b) |
+| `subject` | 11 — `361876`'s five incl. *Food safety* and *Marketing and promotion*, `Fm1`'s four, `360678`'s `(q)` and `(j)` | accept |
+
+> **⚠ THE BOUNDED REGRESSION IS OWED AND WAS NOT RUN.** It needs
+> `ANTHROPIC_API_KEY`, which **Claude Code strips from tool subprocesses** — the
+> same constraint §18.1 Cov4 and `docs/FAMILY_TAXONOMY.md` §3 record for every
+> classifier run in this project. Verified absent in this session's environment.
+> **So P7.3's clause *"the changed Cov4 prompt passes bounded regression on its
+> existing frozen validation set"* is UNMET and P7.3 does not close.** The
+> command and the required result are in the artifact; the required result is
+> **0 genuine subject children lost, contaminants still rejected, ownership
+> unchanged, and the DEC-11 classes behaving as the user decided.**
+
+---
+
+#### Publication safety, traced
+
+`candidate → segmentation → provenance → confidence ceiling → Cov4 →
+publication_eligibility`, run on the four new children:
+
+| Field | Value |
+|---|---|
+| `subtopic_source` | **`inferred`** — unchanged rung |
+| `confidence` | **`low`** — `label_run`'s own tier, below §5.1's `inferred` ceiling of `medium` |
+| offered to Cov4? | **yes** — `inferred` is in `CLASSIFIED_PROVENANCE`, so §6.4b classifies each member |
+| `publication_eligibility` | **`("review", "cov4_ownership_None")`** |
+
+**No new generic child auto-publishes because `Fm1` was added. Fabricated
+publishable records introduced: 0** — the shipped publishable set is still empty
+because no cache is committed. **DEC-16 is untouched and still unresolved at
+P9.0.**
+
+**One `Fm1` quality limitation, recorded because DEC-6 bakes summaries into the
+cache.** `build_subtopics` drops the span's first *line* to remove the heading,
+which for a bullet removes the name **and the first clause of its description**
+— `Design/Build/Buy`'s summary opens *"to acquire new defense systems…"*. The
+excerpt still describes the right subject, and Cov4 also sees the title
+separately, so nothing is misclassified; but it should be fixed before any cache
+is committed, and that is P9.0's gate, not P7's.
+
+---
+
+**P7.3's gate, clause by clause.**
+
+| Clause | Result |
+|---|---|
+| DEC-11 recorded CLOSED with *A now, C later* | ✅ with the user's wording, applied to all three cases |
+| the typed-hybrid future has an owner and a gate | ✅ **DEC-18**, owner P9.0, `MIXED`, triggered at P9.0 start and P10 |
+| `Fm1` deterministic named/bulleted candidate recognition implemented | ✅ `label_run`, one new layer, last in `LAYERS` |
+| `Fm1` does not rely on structure alone for fundability | ✅ set-level admission only; §6.4b + Cov4 judge members; tier `low` |
+| the DEC-11 subject/mechanism distinction is enforced | ✅ in Cov4's prompt, not in `Fm1` |
+| the changed Cov4 prompt passes bounded regression | ❌ **UNMET — no API credential in this environment.** The only unmet clause |
+| 0 false rejections of verified genuine spans in that regression | ⏳ pending the run above |
+| `362233`'s decoys remain rejected | ✅ and more strongly than required — that document yields **no candidate set at all** |
+| CDC and EDA fixtures remain protected | ✅ `360335`, `360334`, `347414` all still 0 spans |
+| DEC-11 mechanism/pathway cases not emitted as ordinary subjects | ✅ `358380` forms no set; `(n)` is Cov4's to reject and is in the case file |
+| per-span filtering preserves legitimate siblings in mixed sets | ✅ `361876`'s five subjects and one contaminant are separate rows with separate expected verdicts |
+| `Fm1`'s residual yield measured and reported | ✅ 1 record / 4 children of 8 attempted |
+| fabricated publishable records introduced | ✅ **0** |
+| §0.5 byte-identical | ✅ `verify_no_drift` exit 0, 22 artifacts unchanged |
+
+**Explicitly not done:** typed children / Option C not implemented (DEC-18);
+`Fm2` not implemented and §18.3a untouched; `Fm5`/`Fm6`/`Fm8` untouched; P7.4 not
+started; MEAS-8, P9, P10 not started; **DEC-10 not resolved** (P7 closeout);
+**DEC-16 not resolved** (P9.0); **BUG-14 not investigated and no `_demote()`,
+source-selection or confidence-semantics change made**; BUG-12 and DEBT-13
+untouched; no backfill; **no cache written or committed**; no OCR, Word,
+spreadsheet or SAM.gov work; Cov4's model, `R`, ownership guard and JSON
+contract untouched; Cov6's predicate untouched; §0.5 not re-frozen; no new broad
+corpus investigation.
 
 #### P9 — Storage and scoring *(legacy Package E)*
 
