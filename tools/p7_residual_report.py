@@ -27,6 +27,17 @@ historical per-form catalog extrapolations came from the stratified draws' rates
 by the measured residual share **of the same random observations**, never of the
 hand-picked census 20 (`FAMILY_TAXONOMY.md` §4.2).
 
+**One row has moved since, and the artifact is deliberately not rewritten.**
+`evaluation/p7_residual.json` is a dated record of what production returned on
+2026-08-20 *before* P7.2. **P7.2's BUG-2 repair recovered `363000`** — FEMA's CTP
+NOFO prints its three allowable project types as `Category 1-` / `Category 2 -` /
+`Category 3.`, which `technical_category` could not match until the ASCII hyphen
+and the period entered its delimiter class — so `Fm1`'s residual is **8 records /
+45 children**, not the 9 / 48 this script prints from the frozen rows. The survey
+had also labelled that record F4 on a *bulleted* rendering of the same three
+types; the coded rendering in Appendix C is the one a family can reach. See
+§18.1 P7.2.
+
 Usage::
 
     python tools/p7_residual_report.py
