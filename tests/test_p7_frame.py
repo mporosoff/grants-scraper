@@ -175,18 +175,18 @@ class FrameCTests(unittest.TestCase):
 
 
 class ExtractionCauseTests(unittest.TestCase):
-    """DEC-10's evidence base, and the DEBT-4 residue it has to exclude."""
+    """DEC-10's evidence base after P9 removes DEBT-4 cache residue."""
 
     @classmethod
     def setUpClass(cls):
         cls.causes = p7_frame.extraction_causes()
 
-    def test_the_cache_residue_reproduces_debt_4_exactly(self):
-        self.assertEqual(self.causes["entries_in_cache"], 958)
+    def test_the_current_cache_contains_only_current_catalog_parents(self):
+        self.assertEqual(self.causes["entries_in_cache"], 745)
         self.assertEqual(self.causes["entries_for_live_records"], 745)
         self.assertEqual(
             self.causes["entries_in_cache"] - self.causes["entries_for_live_records"],
-            213,
+            0,
         )
 
     def test_zero_character_extractions_are_reported_with_their_cause_split(self):

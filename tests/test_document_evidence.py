@@ -290,7 +290,7 @@ class DocumentEvidenceTests(unittest.TestCase):
             revised["record_count"],
         )
 
-    def test_marks_cached_records_absent_from_the_current_catalog(self):
+    def test_prunes_cached_records_absent_from_the_current_catalog(self):
         cache = empty_cache()
         cache["records"]["old"] = {
             "status": "current",
@@ -314,10 +314,7 @@ class DocumentEvidenceTests(unittest.TestCase):
             now=datetime(2026, 7, 26, 12, tzinfo=timezone.utc),
         )
 
-        self.assertEqual(
-            cache["records"]["old"]["archived_from_catalog_at"],
-            "2026-07-26T12:00:00Z",
-        )
+        self.assertNotIn("old", cache["records"])
 
     def test_never_processed_agency_pages_are_not_starved_by_rechecks(self):
         primary = base_record()
