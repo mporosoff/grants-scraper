@@ -44,7 +44,7 @@ from scripts import program_areas
 EVIDENCE_SCHEMA_VERSION = 1
 DEFAULT_CATALOG = Path("data/opportunities.js")
 DEFAULT_CACHE = Path("data/document_evidence.json")
-DEFAULT_SUBTOPIC_CACHE = Path("data/subtopic_records.json")
+DEFAULT_SUBTOPIC_CACHE = Path("data/subtopics.js")
 USER_AGENT = "Funding-Finder-Document-Evidence/1.0"
 MAX_DOWNLOAD_BYTES = 30 * 1024 * 1024
 MAX_PDF_PAGES = 250
@@ -263,6 +263,34 @@ def write_cache(cache, path):
     finally:
         if temporary_path and temporary_path.exists():
             temporary_path.unlink()
+
+
+def prune_cache_to_catalog(cache, catalog):
+    """Remove evidence state whose stable parent is absent from the catalog.
+
+    The catalog is the currentness authority. Keeping an ``archived`` evidence
+    entry in the current cache made cache-derived denominators silently include
+    departed opportunities (DEBT-4). This mutates ``cache`` and returns the
+    sorted removed identifiers so a one-time campaign can preserve its frame.
+    """
+    current_ids = {
+        str(record.get("opportunity_id") or record.get("opportunity_number") or "")
+        for record in catalog.get("opportunities") or []
+    }
+    current_ids.discard("")
+    removed = set()
+    for key in ("records", "subtopic_only"):
+        entries = cache.get(key)
+        if not isinstance(entries, dict):
+            continue
+        stale = set(entries) - current_ids
+        removed.update(stale)
+        cache[key] = {
+            identifier: entry
+            for identifier, entry in entries.items()
+            if identifier in current_ids
+        }
+    return sorted(removed)
 
 
 def clean_document_text(value):
@@ -1384,10 +1412,51 @@ def subtopic_fields(record, content, containers, document, fetched_at, enabled):
         subtopic_referenced,
         subtopic_segmentation,
         subtopic_sources,
+        subtopic_structured,
     )
     from scripts.pull_grants import collect_attachments, fetch_detail
 
     version = subtopic_segmentation.extractor_version()
+
+    # P9.0 first refusal. These are bounded, agency-declared routes over named
+    # parents and current attachment lists. A claimed route that collapses
+    # returns zero and does not fall through to generic inference; a higher rung
+    # is never unioned with a weaker one.
+    structured = subtopic_structured.first_refusal(
+        record,
+        content,
+        document,
+        detail_fetcher=fetch_detail,
+        collector=collect_attachments,
+        download=download_document,
+        extract_containers=extract_containers,
+        as_of=fetched_at[:10],
+    )
+    if structured is not None:
+        gated, structured_cov4 = subtopic_cov4.apply_gate(
+            record,
+            list(structured.records),
+            structured.document or document or {},
+        )
+        fields = {
+            "subtopics": gated,
+            "subtopic_method": structured.method,
+            "subtopic_extractor_version": version,
+            "subtopic_attempts": (),
+            "subtopic_cov4": structured_cov4,
+            "subtopic_structured": structured.diagnostics,
+        }
+        if structured.document:
+            fields["subtopic_source_document"] = {
+                "url": structured.document.get("url"),
+                "name": structured.document.get("name"),
+                "sha256": structured.document.get("sha256"),
+                "source_kind": structured.document.get("source_kind"),
+                "attachment_id": structured.document.get("attachment_id"),
+            }
+        if structured.reason:
+            fields["subtopic_reason"] = structured.reason
+        return fields
 
     # §6.7·0 first refusal: a source that *asserts* the parent→child relationship
     # is asked before one that infers it. Today that is exactly one measured
@@ -2022,17 +2091,11 @@ def enrich_document_evidence(
     enable_subtopics=False,
 ):
     now = now or utc_now()
+    prune_cache_to_catalog(cache, catalog)
     cached_records = cache.setdefault("records", {})
     records = catalog["opportunities"]
-    current_ids = {
-        str(record.get("opportunity_id") or record.get("opportunity_number"))
-        for record in records
-    }
-    for opportunity_id, entry in cached_records.items():
-        if opportunity_id not in current_ids:
-            entry.setdefault("archived_from_catalog_at", iso_utc(now))
-        else:
-            entry["archived_from_catalog_at"] = None
+    for entry in cached_records.values():
+        entry["archived_from_catalog_at"] = None
 
     candidates = []
     for record in records:

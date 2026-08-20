@@ -35,6 +35,7 @@ from __future__ import annotations
 
 import dataclasses
 import hashlib
+from urllib.parse import urlparse
 
 from scripts.subtopic_segmentation import SegmentationResult, segment_document
 
@@ -179,7 +180,54 @@ def _announcement_url(record, primary_document):
     designated = (record or {}).get("primary_document_url")
     if designated:
         return designated
-    return (primary_document or {}).get("url") or None
+    supplied = (primary_document or {}).get("url") or None
+    if supplied:
+        return supplied
+    agency_url = (record or {}).get("funding_opportunity_url")
+    return agency_url if _is_announcement_url(agency_url) else None
+
+
+def _is_announcement_url(url):
+    """Whether a URL identifies a notice rather than a generic portal.
+
+    BUG-14's live case stores ``https://www.grants.gov/`` as the agency URL.
+    Root, search and generic landing pages do not identify an announcement and
+    therefore cannot make a Grants.gov-bound notice look secondary. The rule is
+    intentionally host/path narrow; an actual agency page remains authoritative.
+    """
+    if not url:
+        return False
+    parsed = urlparse(str(url))
+    host = (parsed.hostname or "").casefold()
+    path = (parsed.path or "/").rstrip("/").casefold()
+    if host in {"grants.gov", "www.grants.gov"}:
+        if path in {"", "/", "/search-results", "/search"}:
+            return False
+    return True
+
+
+def _attachment_source_kind(record, source, announcement_url):
+    """Truthful source role without changing attachment ownership semantics."""
+    if announcement_url:
+        return (
+            "primary_notice"
+            if source.get("url") == announcement_url
+            else "secondary_attachment"
+        )
+    number = "".join(
+        char for char in str((record or {}).get("opportunity_number") or "").casefold()
+        if char.isalnum()
+    )
+    name = "".join(
+        char for char in str(source.get("name") or "").casefold()
+        if char.isalnum()
+    )
+    notice_words = ("nofo", "fundopp", "announcement", "solicitation")
+    if (number and number in name) or any(word in name for word in notice_words):
+        return "authoritative_notice"
+    # There is no identified announcement to which this can truthfully be
+    # secondary. Grants.gov still establishes ownership for Cov4.
+    return "attached_source"
 
 
 def _is_secondary_to(document, announcement_url):
@@ -333,7 +381,11 @@ def best_segmentation(
             "name": source["name"],
             "content_type": response.get("content_type"),
             "sha256": hashlib.sha256(content).hexdigest() if content else None,
-            "source_kind": "secondary_attachment",
+            "source_kind": _attachment_source_kind(
+                record,
+                {**source, "url": response.get("url") or source["url"]},
+                announcement,
+            ),
         }
         outcome = consider(content, document, source["name"])
         outcome = _demote(outcome, document, announcement)

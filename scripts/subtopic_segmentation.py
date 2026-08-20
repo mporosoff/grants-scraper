@@ -733,8 +733,22 @@ def build_subtopics(candidates, flat, containers, parent_deadline=None):
     for candidate, (start, end) in zip(ordered, bounds):
         raw = flat.text[start:end]
         cleaned = strip_running_lines(raw, running)
-        # Drop the heading line itself from the summary, keeping it in the code.
-        body = cleaned.split("\n", 1)[1] if "\n" in cleaned else cleaned
+        # Drop the heading itself from the summary, keeping prose that follows
+        # it on the same line. Fm1's measured shape is
+        # ``oName - first clause ...``; dropping the whole first line erased
+        # that clause (and, for a one-line span, the entire summary).
+        first, separator, remainder = cleaned.partition("\n")
+        label_run = _LABEL_RUN_LINE.match(first)
+        if (
+            label_run
+            and re.sub(r"\s+", " ", label_run.group("name")).strip()
+            == candidate.title
+        ):
+            body = label_run.group("rest")
+            if separator and remainder:
+                body = f"{body}\n{remainder}"
+        else:
+            body = remainder if separator else cleaned
         labels, topics = program_area_fields(cleaned)
         built.append(
             Subtopic(

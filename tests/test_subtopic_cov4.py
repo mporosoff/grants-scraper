@@ -465,7 +465,7 @@ class ProvenanceBoundaryTests(unittest.TestCase):
         cov4.classify_fundability = classifier
         try:
             fields = ede.subtopic_fields(
-                parent(number="DE-FOA-0003215"), b"", [], document,
+                parent(number="DE-FOA-0003215", identifier="synthetic-parent"), b"", [], document,
                 f"{AS_OF}T00:00:00Z", True,
             )
         finally:
@@ -755,7 +755,8 @@ class FailClosedTests(unittest.TestCase):
         )
         try:
             fields = ede.subtopic_fields(
-                parent(), b"", [], document, f"{AS_OF}T00:00:00Z", True)
+                parent(identifier="synthetic-parent"), b"", [], document,
+                f"{AS_OF}T00:00:00Z", True)
         finally:
             subtopic_sources.best_segmentation = original
             cov4.classify_fundability = original_classify
@@ -824,7 +825,8 @@ class Bug9Tests(unittest.TestCase):
         cov4.classify_fundability = classifier
         try:
             fields = ede.subtopic_fields(
-                parent(), b"", [], document, f"{AS_OF}T00:00:00Z", True)
+                parent(identifier="synthetic-363594"), b"", [], document,
+                f"{AS_OF}T00:00:00Z", True)
         finally:
             subtopic_sources.best_segmentation = original
             cov4.classify_fundability = original_classify
@@ -845,7 +847,7 @@ class Bug9Tests(unittest.TestCase):
         from scripts import extract_document_evidence as ede
         from scripts import subtopic_sources
 
-        record = parent()
+        record = parent(identifier="synthetic-363594")
         record["primary_document_url"] = None
         record["primary_document_name"] = None
         record["funding_opportunity_url"] = (
@@ -884,7 +886,7 @@ class Bug9Tests(unittest.TestCase):
         self.assertEqual(captured["source_kind"], "subtopic_agency_notice")
         self.assertEqual(metrics["attempted"], 1)
         self.assertEqual(metrics["with_subtopics"], 0)
-        fields = store["363594"]
+        fields = store["synthetic-363594"]
         self.assertEqual(fields["subtopics"], [])
         self.assertEqual(fields["subtopic_cov4"]["ownership"],
                          {cov4.NOT_OWNED: 1})

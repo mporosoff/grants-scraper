@@ -119,7 +119,7 @@ class NativeBypassesCov4Tests(unittest.TestCase):
             self.assertIsNone(child["pattern_family"])
             self.assertIsNone(child["segmentation_method"])
 
-    def test_native_status_is_nasas_and_currentness_is_marked_derived(self):
+    def test_native_status_is_preserved_but_child_currentness_is_not_invented(self):
         children = adapter().subtopic_children(
             self.rows, parent_matches=self.parents)
         native_values = {
@@ -129,11 +129,10 @@ class NativeBypassesCov4Tests(unittest.TestCase):
         }
         for child in children:
             self.assertIn(child["native_status"], native_values)
-            self.assertIn(child["derived_currentness"],
-                          {nasa_roses.DERIVED_OPEN, nasa_roses.DERIVED_CLOSED,
-                           nasa_roses.DERIVED_UNDATED})
+            self.assertNotIn("derived_currentness", child)
             # "closed" is derived and must never appear as a NASA status.
             self.assertNotEqual(child["native_status"], "closed")
+            self.assertEqual(child["child_type"], "subject")
 
     def test_the_segmenter_is_never_invoked_for_roses(self):
         """If ROSES ever routed through segmentation, this would fail."""

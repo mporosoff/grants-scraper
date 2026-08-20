@@ -229,7 +229,7 @@ class ProvenanceTests(unittest.TestCase):
     def test_child_identity_is_the_announcement_id_scoped_to_the_parent(self):
         ids = [record["subtopic_id"] for record in self.records]
         self.assertEqual(len(ids), len(set(ids)))
-        self.assertIn("W911NF-23-S-0003:tdac-baa-001", ids)
+        self.assertIn("345241:tdac-baa-001", ids)
         for record in self.records:
             self.assertEqual(record["parent_opportunity_number"], "W911NF-23-S-0003")
             self.assertEqual(record["parent_id"], "345241")

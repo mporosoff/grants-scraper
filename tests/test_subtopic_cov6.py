@@ -468,7 +468,7 @@ class UnchangedNeighboursTests(unittest.TestCase):
             # Not judged by Cov4, so the predicate falls through to the tier.
             self.assertEqual(
                 records.publication_eligibility(record)[1],
-                f"tier_{record.get('confidence')}",
+                "high_confidence",
             )
 
     def test_army_referenced_children_still_publish_on_their_own_tier(self):

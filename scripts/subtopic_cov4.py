@@ -94,7 +94,12 @@ UNESTABLISHED = "unestablished"
 
 #: Kinds whose documents Grants.gov itself attaches to the record. For these the
 #: attachment binding *is* the ownership evidence, and prose is never consulted.
-ATTACHMENT_KINDS = frozenset({"primary_notice", "secondary_attachment"})
+ATTACHMENT_KINDS = frozenset({
+    "primary_notice",
+    "authoritative_notice",
+    "secondary_attachment",
+    "attached_source",
+})
 
 #: Kinds fetched from an agency-hosted page, which may legitimately describe many
 #: opportunities. Ownership must be corroborated for these.

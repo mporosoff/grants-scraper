@@ -128,9 +128,8 @@ class GateClauseThreeTests(unittest.TestCase):
             self.assertEqual(record["parent_opportunity_number"],
                              "W911NF-23-S-0003")
 
-    def test_a_native_child_cannot_publish_today(self):
-        """BUG-12: the ROSES adapter assigns no `confidence`, so §5.1's `high`
-        ceiling is unreachable and the predicate falls through to `tier_None`."""
+    def test_a_healthy_native_child_now_earns_publication_confidence(self):
+        """P9 closes BUG-12 only after the native structure canary passes."""
         from tests.test_nasa_roses_provenance import adapter, roses_rows
 
         rows = roses_rows()
@@ -139,10 +138,10 @@ class GateClauseThreeTests(unittest.TestCase):
             rows, parent_matches={elements[0]["identity"]: "363224"})
         self.assertTrue(children)
         for child in children:
-            self.assertIsNone(child.get("confidence"))
-            self.assertFalse(records.is_publishable(child))
+            self.assertEqual(child.get("confidence"), "high")
+            self.assertTrue(records.is_publishable(child))
             self.assertEqual(records.publication_eligibility(child)[1],
-                             "tier_None")
+                             "high_confidence")
 
 
 if __name__ == "__main__":

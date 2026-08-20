@@ -106,11 +106,12 @@ class RecordShapeTests(unittest.TestCase):
     def test_identity_fields(self):
         first = self.records[0]
         self.assertEqual(first["record_type"], "subtopic")
-        self.assertEqual(first["subtopic_id"], "DE-FOA-0003600:ta-1")
+        self.assertEqual(first["subtopic_id"], "360678:ta-1")
         # The browser derives identity from opportunity_id || opportunity_number.
         self.assertEqual(first["opportunity_id"], first["subtopic_id"])
         self.assertEqual(first["parent_id"], "360678")
         self.assertEqual(first["parent_opportunity_number"], "DE-FOA-0003600")
+        self.assertEqual(first["child_type"], "subject")
 
     def test_status_uses_the_catalog_vocabulary(self):
         # currentness.record_is_current accepts only posted/forecasted; a child
@@ -252,9 +253,19 @@ class DiffStabilityTests(unittest.TestCase):
         # Membrane Separations moved from ordinal 2 to 3 but keeps its identity
         # and its original first_seen.
         membranes = stored["Membrane Separations"]
-        self.assertEqual(membranes["subtopic_id"], "DE-FOA-0003600:ta-2")
+        self.assertEqual(membranes["subtopic_id"], "360678:ta-2")
         self.assertEqual(membranes["subtopic_ordinal"], 3)
         self.assertEqual(membranes["first_seen"], "2026-08-20")
+
+    def test_identity_does_not_change_when_the_parent_number_changes(self):
+        renamed = dict(PARENT, opportunity_number="DE-FOA-0003600-AMENDMENT")
+        later = records.build_records(
+            renamed, segmented(HEADINGS), document=DOCUMENT, as_of="2026-09-01"
+        )
+        self.assertEqual(
+            [item["subtopic_id"] for item in later],
+            [item["subtopic_id"] for item in self.built],
+        )
 
     def test_records_are_sorted_by_ordinal(self):
         cache = records.empty_cache()

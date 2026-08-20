@@ -388,6 +388,7 @@ class NasaRosesAdapter(SourceAdapter):
                 table2 = None
         return {
             "year": discovered["year"],
+            "table3_url": discovered["table3"],
             "table3_html": table3,
             "table2_html": table2,
             "amendment": self._amendment_of(table3),
@@ -616,38 +617,75 @@ class NasaRosesAdapter(SourceAdapter):
         _overview, elements = self.split_rows(rows)
         return [e for e in elements if e["identity"] not in matched]
 
-    def subtopic_children(self, rows, *, parent_matches, as_of=None):
+    def subtopic_children(
+        self,
+        rows,
+        *,
+        parent_matches,
+        as_of=None,
+        health=None,
+        document=None,
+        source_version=None,
+    ):
         """§5.1 `native` child records for elements that DO have a parent.
 
         `parent_matches` maps an element identity to the catalog
         `opportunity_id` it belongs to. Nothing is invented: every field comes
         from NASA's table.
         """
+        # A native rung earns high confidence only after the existing source
+        # canaries pass. Missing health is not permission to guess.
+        if health is None:
+            health = self.check_health({"table2_html": None}, rows)
+        if not health.get("healthy"):
+            return []
+        from scripts import subtopic_records
+
         _overview, elements = self.split_rows(rows)
-        children = []
+        by_parent = {}
         for element in elements:
             parent = parent_matches.get(element["identity"])
             if not parent:
                 continue
-            children.append({
-                "record_type": "subtopic",
-                "parent_id": parent,
-                "subtopic_code": element["appendix_code"],
+            parent_record = parent if isinstance(parent, dict) else {
+                "opportunity_id": str(parent),
+                "status": "posted",
+            }
+            by_parent.setdefault(str(parent_record["opportunity_id"]), (
+                parent_record,
+                [],
+            ))[1].append({
+                "code": element["appendix_code"],
                 "title": element["title"],
-                "subtopic_ordinal": element["appendix_order"],
-                "subtopic_source": "native",          # §5.1 provenance ladder
-                "segmentation_method": None,          # orthogonal, and unused
-                "pattern_family": None,               # no family was involved
-                "source_document_url": element["element_url"],
+                "ordinal": element["appendix_order"],
+                "summary": (
+                    f"NASA ROSES program element {element['appendix_code']}: "
+                    f"{element['title']}."
+                ),
+                "text": " ".join(filter(None, (
+                    element["title"],
+                    element["native_deadline_text"],
+                    f"ROSES division {element['division']}",
+                ))),
                 "native_status": element["native_status"],
                 "native_deadline_text": element["native_deadline_text"],
-                "derived_currentness": derive_currentness(element),
                 "division": element["division"],
                 "amended": element["amended"],
-                "first_seen": as_of,
-                "last_verified": as_of,
+                "child_source_url": element["element_url"],
             })
-        return children
+        built = []
+        for parent_record, children in by_parent.values():
+            built.extend(subtopic_records.build_structured_records(
+                parent_record,
+                children,
+                document=document or {},
+                as_of=as_of,
+                provenance=subtopic_records.NATIVE,
+                confidence="high",
+                method=None,
+                source_version=source_version,
+            ))
+        return built
 
     # --- §7.4 health ----------------------------------------------------
     def check_health(self, payload, rows=None) -> dict:

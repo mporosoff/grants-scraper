@@ -490,5 +490,40 @@ class SubtopicOnlySourceTests(unittest.TestCase):
         self.assertEqual(source["kind"], "subtopic_agency_notice")
 
 
+class AnnouncementRoleTests(unittest.TestCase):
+    """BUG-14: a generic Grants.gov portal is not an announcement."""
+
+    def test_the_grants_portal_root_is_not_an_announcement(self):
+        record = {
+            "funding_opportunity_url": "https://www.grants.gov/",
+            "opportunity_number": "DE-FOA-0003634",
+        }
+        self.assertIsNone(sources._announcement_url(record, None))
+
+    def test_a_specific_agency_notice_remains_an_announcement(self):
+        url = "https://agency.example/notices/de-foa-0003634"
+        self.assertEqual(
+            sources._announcement_url({"funding_opportunity_url": url}, None),
+            url,
+        )
+
+    def test_a_numbered_grants_attachment_is_authoritative_without_a_notice_url(self):
+        record = {"opportunity_number": "DE-FOA-0003634"}
+        source = {
+            "url": "https://apply07.grants.gov/apply/opportunities/instructions/123",
+            "name": "FundOpp_DE-FOA-0003634.pdf",
+        }
+        self.assertEqual(
+            sources._attachment_source_kind(record, source, None),
+            "authoritative_notice",
+        )
+
+    def test_an_unlabelled_bound_attachment_is_not_called_secondary(self):
+        source = {"url": "https://apply07.grants.gov/files/123", "name": "appendix.pdf"}
+        self.assertEqual(
+            sources._attachment_source_kind({}, source, None), "attached_source"
+        )
+
+
 if __name__ == "__main__":
     unittest.main()

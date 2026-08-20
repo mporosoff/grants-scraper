@@ -196,7 +196,9 @@ def build_result(topics, *, url=ARMY_TDAC_TOPICS_URL):
 
     subtopics = []
     for ordinal, topic in enumerate(topics, start=1):
-        summary = topic["detail_text"][:600]
+        from scripts.subtopic_segmentation import summarize
+
+        summary = summarize(topic["detail_text"])
         subtopics.append(
             Subtopic(
                 subtopic_code=topic["announcement_id"],

@@ -32,7 +32,7 @@ from scripts.subtopic_segmentation import extractor_version, match_subtopics
 
 
 CACHE_SCHEMA_VERSION = 1
-DEFAULT_CACHE = Path("data/subtopic_records.json")
+DEFAULT_CACHE = Path("data/subtopics.js")
 
 # --- §5.1 provenance ladder ---------------------------------------------------
 #
@@ -219,8 +219,23 @@ def needs_subtopic_extraction(entry, *, enabled, extractor_version):
     return False
 
 
-def subtopic_id_for(parent_opportunity_number, subtopic_code_norm):
-    return f"{parent_opportunity_number}:{subtopic_code_norm}"
+def subtopic_id_for(parent_opportunity_id, subtopic_code_norm):
+    """Stable child identity anchored only to the parent's canonical id."""
+    return f"{parent_opportunity_id}:{subtopic_code_norm}"
+
+
+def source_role(document):
+    """Truthful reviewer-facing role, orthogonal to ownership/provenance."""
+    kind = (document or {}).get("source_kind")
+    if kind in {"primary_notice", "authoritative_notice"}:
+        return "authoritative_announcement"
+    if kind == "secondary_attachment":
+        return "secondary_attachment"
+    if kind == "attached_source":
+        return "attached_source"
+    if kind in {"agency_notice", "subtopic_agency_notice"}:
+        return "agency_page"
+    return "unknown"
 
 
 def build_records(
@@ -257,10 +272,11 @@ def build_records(
 
     records = []
     for subtopic in result.subtopics:
-        identifier = subtopic_id_for(parent_number, subtopic.subtopic_code_norm)
+        identifier = subtopic_id_for(parent_id, subtopic.subtopic_code_norm)
         records.append(
             {
                 "record_type": "subtopic",
+                "child_type": "subject",
                 "subtopic_id": identifier,
                 # The browser derives identity from opportunity_id ||
                 # opportunity_number (assets/app.js recordId), so a child with
@@ -290,6 +306,7 @@ def build_records(
                 or (f"p{subtopic.page_start}" if subtopic.page_start else None),
                 "source_document_url": document.get("url"),
                 "source_document_hash": document.get("sha256"),
+                "source_role": source_role(document),
                 "segmentation_method": result.method,
                 "confidence": confidence,
                 "pattern_family": result.family,
@@ -301,6 +318,100 @@ def build_records(
             }
         )
     return records
+
+
+def build_structured_records(
+    parent,
+    children,
+    *,
+    document,
+    as_of,
+    provenance,
+    confidence,
+    method,
+    source_version=None,
+):
+    """Build records from an agency-declared child list, without segmentation.
+
+    ``children`` is deliberately a tiny adapter contract: code, title and
+    optional summary/terms/evidence/hierarchy fields. Source-specific parsers
+    retain their stable codes while every common publication field is written
+    in one place.
+    """
+    from scripts.subtopic_segmentation import (
+        build_term_map,
+        normalize_code,
+        program_area_fields,
+        summarize,
+        title_fingerprint,
+    )
+
+    parent_id = str(
+        parent.get("opportunity_id")
+        or parent.get("opportunity_number")
+        or ""
+    )
+    parent_number = parent.get("opportunity_number") or parent_id
+    rung = classify_provenance(None, document=document, override=provenance)
+    earned = cap_confidence(confidence, rung)
+    built = []
+    for ordinal, child in enumerate(children, start=1):
+        code = str(child.get("code") or ordinal).strip()
+        code_norm = str(child.get("code_norm") or normalize_code(code))
+        title = str(child.get("title") or "").strip()[:200]
+        full_text = str(child.get("text") or child.get("summary") or title)
+        labels, topics = program_area_fields(full_text)
+        record = {
+            "record_type": "subtopic",
+            "child_type": "subject",
+            "subtopic_id": subtopic_id_for(parent_id, code_norm),
+            "opportunity_id": subtopic_id_for(parent_id, code_norm),
+            "parent_id": parent_id,
+            "parent_opportunity_number": parent_number,
+            "subtopic_code": code,
+            "subtopic_code_norm": code_norm,
+            "subtopic_ordinal": int(child.get("ordinal") or ordinal),
+            "ordinal_label": str(child.get("ordinal_label") or code),
+            "title": title,
+            "title_fingerprint": title_fingerprint(title),
+            "summary": summarize(str(child.get("summary") or full_text)),
+            "subtopic_terms": dict(child.get("terms") or build_term_map(full_text)),
+            "subtopic_source": rung,
+            "status": parent.get("status"),
+            "topic_areas": list(child.get("topic_areas") or topics),
+            "program_area_labels": list(
+                child.get("program_area_labels") or labels
+            ),
+            "page_start": child.get("page_start"),
+            "page_end": child.get("page_end"),
+            "evidence_anchor": child.get("anchor"),
+            "source_document_url": (document or {}).get("url"),
+            "source_document_hash": (document or {}).get("sha256"),
+            "source_role": source_role(document),
+            "source_version": source_version,
+            "segmentation_method": method,
+            "confidence": earned,
+            "pattern_family": None,
+            "own_deadline": None,
+            "own_deadline_is_advisory": True,
+            "first_seen": as_of,
+            "last_verified": as_of,
+            "extractor_version": extractor_version(),
+        }
+        for field in ("group_id", "parent_subtopic_id"):
+            if child.get(field):
+                record[field] = child[field]
+        for field in (
+            "native_status",
+            "native_deadline_text",
+            "division",
+            "amended",
+            "child_source_url",
+        ):
+            if child.get(field) not in (None, ""):
+                record[field] = child[field]
+        built.append(record)
+    return built
 
 
 def _content_key(record):
