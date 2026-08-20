@@ -8,6 +8,8 @@ needed.
 See docs/TOPIC_LAYER_PLAN.md §6.2-§6.5 and §18.1 item B3.
 """
 
+import json
+import pathlib
 from pathlib import Path
 import sys
 import unittest
@@ -1636,6 +1638,279 @@ class AdministrativeLexiconTests(unittest.TestCase):
             "Catalysis Science Research",
         ]
         self.assertTrue(seg._structural_titles_ok(titles))
+
+
+
+class Fm1LabelRunTests(unittest.TestCase):
+    """Fm1. F4 -- named / bulleted with no counter, §6.3a's `label_run`.
+
+    **The validating document is `359782`** (DARPA TTO, `HR001125S0011.pdf`),
+    read in Cov7 and again in P7.3b. Verbatim, including its punctuation:
+
+        oDesign/Build/Buy - Using innovative design approaches throughout the
+        oSurge and Sustain - Developing technologies that make existing military
+        oLong Range Effects - Creating new systems and approaches that enable
+        oDisruptive Innovation - Rapidly fielding novel engineering, technolog...
+
+    introduced by *"DARPA ... is soliciting innovative executive summaries and
+    proposals in the following focus areas:"*. The real document uses an EN DASH;
+    these fixtures use an ASCII hyphen because `tests/fixtures/minipdf.py` writes
+    latin-1 and because both are in the family's dash class either way.
+
+    **Fm1 adds no threshold.** Every rejection below comes from §6.4 and §6.4a as
+    already fitted for `structural_siblings`.
+    """
+
+    PROSE = ("Using innovative design approaches throughout the system lifecycle "
+             "to acquire new defense systems, from disrupting systems engineering "
+             "processes to reimagining test, certification and accreditation, "
+             "including new approaches to fabrication that enable rapid start-up "
+             "and frequent changes to fielded military systems at scale.")
+
+    def containers(self, lines, per_page=1, intro="Program announcement overview."):
+        """One container per page; `lines` are distributed across them."""
+        pages = [[intro]]
+        for index in range(0, len(lines), per_page):
+            pages.append(lines[index:index + per_page])
+        return [
+            {"page": number + 1, "section": None, "anchor": None,
+             "text": "\n".join(page)}
+            for number, page in enumerate(pages)
+        ]
+
+    def focus_area_lines(self, marker="o"):
+        """The measured shape: marker + Name + dash + a paragraph of prose."""
+        return [
+            f"{marker}{name} - {self.PROSE} It concerns {name.lower()} throughout."
+            for name in ("Design/Build/Buy", "Surge and Sustain",
+                         "Long Range Effects", "Disruptive Innovation")
+        ]
+
+    # --- the positive --------------------------------------------------------
+
+    def test_the_measured_darpa_shape_yields_its_four_focus_areas(self):
+        containers = self.containers(self.focus_area_lines())
+        result = seg.segment_document({}, b"", containers, PDF)
+        self.assertEqual(result.method, "label_run")
+        self.assertEqual(result.family, patterns.LABEL_RUN_FAMILY)
+        self.assertEqual(result.confidence, "low")
+        self.assertEqual([item.title for item in result.subtopics],
+                         ["Design/Build/Buy", "Surge and Sustain",
+                          "Long Range Effects", "Disruptive Innovation"])
+
+    def test_it_works_for_every_measured_marker(self):
+        """U+2022/25CB/25AA from `362233`, U+F0B7 from `359782`, and bare `o`."""
+        for marker in ("\u2022", "\u25cb", "\u25aa", "\uf0b7", "o"):
+            with self.subTest(marker=hex(ord(marker))):
+                containers = self.containers(self.focus_area_lines(marker))
+                result = seg.segment_document({}, b"", containers, PDF)
+                self.assertEqual(len(result.subtopics), 4, marker)
+
+    def test_the_tier_is_low_and_that_is_deliberate(self):
+        """Weaker than `structural_siblings`: no outline asserts siblinghood."""
+        containers = self.containers(self.focus_area_lines())
+        result = seg.segment_document({}, b"", containers, PDF)
+        self.assertEqual(result.confidence, "low")
+
+    # --- the shape requirements, each of which is load-bearing ---------------
+
+    def test_a_sentence_shaped_bullet_yields_nothing(self):
+        """`362233`'s five GENUINE Focus Areas, and why Fm1 cannot reach them.
+
+        They are sentences, not named subdivisions -- *"Understanding the
+        biological mechanisms of lupus disease including, but not limited to,
+        studies of informative/rare patients."* -- so there is no title for
+        §5.1's child to carry. A real recall limitation, recorded rather than
+        tuned away: the thing missing is a title, not a threshold.
+        """
+        lines = [
+            "\u2022 Understanding how lupus disease heterogeneity impacts risk of "
+            "disease, disease presentation, clinical course and outcomes using a "
+            "diverse range of research disciplines including biopsychosocial "
+            "studies and personalized medicine across many populations.",
+            "\u2022 Understanding the biological mechanisms of lupus disease "
+            "including, but not limited to, studies of informative and rare "
+            "patients drawn from several clinical cohorts over many years.",
+            "\u2022 Determining the pathobiology of end organ injury related to "
+            "lupus disease in target human tissues using a range of methods.",
+        ]
+        result = seg.segment_document({}, b"", self.containers(lines), PDF)
+        self.assertEqual(result.subtopics, ())
+
+    def test_the_colon_decoy_shape_yields_nothing(self):
+        """`362233`'s adjacent decoys, which a colon variant would admit.
+
+        *"Innovation: Innovative research may introduce a new paradigm..."*,
+        *"Impact: The proposed research should impact an area of importance..."*.
+        Fm1 requires a DASH, and the colon form has no validating document
+        anywhere in the corpus (§17.8). This is not a special case for this
+        document -- it is the absence of evidence for that shape.
+        """
+        lines = [
+            f"\u2022 {name}: {self.PROSE}"
+            for name in ("Innovation", "Impact", "Research Strategy",
+                         "Focus Areas", "Research Team")
+        ]
+        result = seg.segment_document({}, b"", self.containers(lines), PDF)
+        self.assertEqual(result.subtopics, ())
+
+    def test_an_administrative_run_is_refused(self):
+        """`359782`'s own front matter, in the same document as the positive.
+
+        U+F0B7 + `Federal Agency Name` + dash + value, eight of them. §18.3's
+        canonical fabrication shape, arriving as bullets.
+        """
+        lines = [
+            "\uf0b7Federal Agency Name - Defense Advanced Research Projects Agency",
+            "\uf0b7Funding Opportunity Title - TTO Office Wide (OW) BAA",
+            "\uf0b7Announcement Type - Initial Announcement",
+            "\uf0b7Funding Opportunity Number - HR001125S0011",
+            "\uf0b7NAICS Code - 541715",
+        ]
+        result = seg.segment_document({}, b"", self.containers(lines), PDF)
+        self.assertEqual(result.subtopics, ())
+
+    def test_two_qualifying_marker_groups_fail_closed(self):
+        """Ambiguity is refused, not guessed -- `best_family`'s rule, restated.
+
+        If a document offers two marker groups that both survive acceptance,
+        nothing tells us which one delimits its topics.
+        """
+        first = self.focus_area_lines("\u2022")
+        second = [
+            f"\u25cb{name} - {self.PROSE} It concerns {name.lower()} throughout."
+            for name in ("Materials Chemistry", "Separation Science",
+                         "Catalysis Science", "Photon Physics")
+        ]
+        containers = self.containers(first + second)
+        # Both groups qualify on their own...
+        self.assertEqual(
+            len(seg.segment_document({}, b"", self.containers(first), PDF).subtopics), 4)
+        self.assertEqual(
+            len(seg.segment_document({}, b"", self.containers(second), PDF).subtopics), 4)
+        # ...so together they must yield nothing.
+        self.assertEqual(seg.segment_document({}, b"", containers, PDF).subtopics, ())
+
+    def test_the_marker_separates_a_real_run_from_front_matter(self):
+        """Why grouping is by marker and not by a proximity window.
+
+        `359782` carries both: U+F0B7 front matter and `o` focus areas. Grouping
+        by marker keeps them apart for free, and a line-gap window cannot -- the
+        four focus areas are 6, 9 and 7 wrapped lines apart, so any window wide
+        enough for them also swallows the front matter.
+        """
+        admin = [
+            "\uf0b7Federal Agency Name - Defense Advanced Research Projects Agency",
+            "\uf0b7Funding Opportunity Title - TTO Office Wide (OW) BAA",
+            "\uf0b7Announcement Type - Initial Announcement",
+        ]
+        result = seg.segment_document(
+            {}, b"", self.containers(admin + self.focus_area_lines()), PDF)
+        self.assertEqual([item.title for item in result.subtopics],
+                         ["Design/Build/Buy", "Surge and Sustain",
+                          "Long Range Effects", "Disruptive Innovation"])
+
+    # --- placement in the architecture --------------------------------------
+
+    def test_fm1_is_the_last_layer_and_never_pre_empts_a_stronger_one(self):
+        self.assertIs(seg.LAYERS[-1], seg._layer_label_run)
+        self.assertNotIn(seg._layer_label_run, seg.HTML_LAYERS)
+        # An ordinal family in the same document still wins.
+        containers = self.containers(
+            [f"Topic Area {n} Electrocatalysis {n}\n{BODY}" for n in (1, 2, 3)]
+            + self.focus_area_lines())
+        result = seg.segment_document({}, b"", containers, PDF)
+        self.assertEqual(result.family, "topic_area")
+
+    def test_a_span_is_located_exactly_and_never_guessed(self):
+        """BUG-10 cannot arise here: offsets come from the scan, not `locate()`."""
+        containers = self.containers(self.focus_area_lines())
+        result = seg.segment_document({}, b"", containers, PDF)
+        flat = seg._flatten(containers)
+        self.assertEqual(result.diagnostics["unlocated_headings"], 0)
+        for span in result.subtopics:
+            self.assertIn(span.title, flat.text[span.char_start:span.char_start + 120])
+
+
+class Dec11CaseArtifactTests(unittest.TestCase):
+    """The DEC-11 arm of Cov4's bounded regression, pinned but not run here.
+
+    Offline. Running it needs `ANTHROPIC_API_KEY`, which Claude Code strips from
+    tool subprocesses -- the same constraint §18.1 Cov4 and
+    `docs/FAMILY_TAXONOMY.md` §3 already record. These tests pin the cases and
+    their human labels so the run has something fixed to score against.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        path = (pathlib.Path(__file__).resolve().parents[1]
+                / "evaluation" / "cov4_dec11_cases.json")
+        cls.payload = json.loads(path.read_text(encoding="utf-8"))
+        cls.rows = cls.payload["candidates"]
+
+    def test_it_is_additive_and_leaves_the_frozen_challenge_set_alone(self):
+        challenge = json.loads(
+            (pathlib.Path(__file__).resolve().parents[1]
+             / "evaluation" / "cov4_challenge.json").read_text(encoding="utf-8"))
+        self.assertEqual(challenge["candidate_count"], 36)
+        self.assertEqual(challenge["label_counts"],
+                         {"fundable": 23, "contaminant": 12, "unresolved": 1})
+        self.assertIn("ADDITIVE", self.payload["relationship_to_cov4_challenge"])
+
+    def test_every_dec_11_class_the_user_decided_has_a_case(self):
+        classes = {row["dec11_class"] for row in self.rows}
+        self.assertIn("mechanism", classes)          # (n) Public-Private Partnerships
+        self.assertIn("delivery_pathway", classes)   # 358380's program tracks
+        self.assertIn("exclusions_contaminant", classes)   # 361876's 3.3.6
+        self.assertIn("subject", classes)            # the positive controls
+
+    def test_the_mechanism_case_is_the_one_dec_11_names(self):
+        mechanism = [r for r in self.rows if r["dec11_class"] == "mechanism"]
+        self.assertEqual(len(mechanism), 1)
+        self.assertEqual(mechanism[0]["title"], "(n) Public-Private Partnerships")
+        self.assertEqual(mechanism[0]["parent_opportunity_id"], "360678")
+        self.assertEqual(mechanism[0]["expected_fundable"], "no")
+        self.assertIn("INFUSE", mechanism[0]["truth_evidence"])
+
+    def test_the_pathway_cases_are_358380_s_three_tracks(self):
+        pathways = [r for r in self.rows if r["dec11_class"] == "delivery_pathway"]
+        self.assertEqual(len(pathways), 3)
+        self.assertEqual({r["parent_opportunity_id"] for r in pathways}, {"358380"})
+        for row in pathways:
+            self.assertEqual(row["expected_fundable"], "no")
+
+    def test_361876_keeps_five_subjects_and_one_contaminant(self):
+        """§6.4b: one exclusions heading must not cost five legitimate siblings."""
+        rows = [r for r in self.rows if r["parent_opportunity_id"] == "361876"]
+        self.assertEqual(len(rows), 6)
+        self.assertEqual(sum(1 for r in rows if r["expected_fundable"] == "yes"), 5)
+        contaminant = [r for r in rows if r["expected_fundable"] == "no"]
+        self.assertEqual(len(contaminant), 1)
+        self.assertTrue(contaminant[0]["title"].startswith(
+            "Projects and Activities Not Eligible"))
+
+    def test_the_positive_controls_include_a_non_scientific_subject(self):
+        """"Subject-only" is not "scientific-topic-only", and the cases say so."""
+        titles = {r["title"] for r in self.rows if r["expected_fundable"] == "yes"}
+        self.assertIn("Food safety", titles)
+        self.assertIn("Marketing and promotion", titles)
+        self.assertIn("(q) Catalysis Science", titles)
+
+    def test_fm1_s_four_recovered_children_are_in_the_set(self):
+        titles = {r["title"] for r in self.rows
+                  if r["parent_opportunity_id"] == "359782"}
+        self.assertEqual(titles, {"Design/Build/Buy", "Surge and Sustain",
+                                  "Long Range Effects", "Disruptive Innovation"})
+
+    def test_every_row_carries_real_document_provenance_and_a_human_label(self):
+        for row in self.rows:
+            self.assertIn(row["origin"],
+                          {"production_span", "hand_extracted_real_document"})
+            self.assertRegex(row["source_document_sha256"], r"^[0-9a-f]{64}$")
+            self.assertIn(row["expected_fundable"], {"yes", "no"})
+            self.assertTrue(row["truth_evidence"])
+        self.assertIn("No label derives from a model verdict",
+                      self.payload["labels_are_human"])
 
 
 

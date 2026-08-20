@@ -208,6 +208,23 @@ FAMILIES_BY_ID = {family.identifier: family for family in FAMILIES}
 # vocabulary of family identifiers.
 STRUCTURAL_FAMILY = "structural_siblings"
 
+# The twelfth family (Fm1, P7.3b). Like `structural_siblings` it has no pattern
+# here: membership is established by a marker the DOCUMENT repeats, so the
+# recogniser lives in subtopic_segmentation where the flattened text is. Named
+# here so best_family()'s callers and the diagnostics histogram share one
+# vocabulary of family identifiers.
+#
+# The plan reserves the name `label_run` for F4 -- named/bulleted with no
+# counter (§6.3a, §6.3's form table). This implements the **named-run** variant
+# of it: a run of body lines of the form `<marker><Name><dash><prose>`. The
+# other variant §6.3a sketched -- AFOSR's 39 portfolios each opening
+# `Program Description:`, with the PRECEDING line as the title -- is **not**
+# implemented, for the reason §6.3a already gives: `Program Description:`,
+# `Basic Research Objectives:` and `Contact Information:` all repeat 39 times in
+# that one document, so the mechanism would have to choose which repeated label
+# delimits topics, and that choice has no measured false-positive profile.
+LABEL_RUN_FAMILY = "label_run"
+
 # Administrative vocabulary for §6.3a's set-level veto and for ancestor-chain
 # admissibility.
 #

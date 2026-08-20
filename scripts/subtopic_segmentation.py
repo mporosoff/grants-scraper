@@ -41,6 +41,7 @@ from pypdf.generic import Destination
 from scripts import program_areas
 from scripts.build_catalog import tokenize
 from scripts.subtopic_patterns import (
+    LABEL_RUN_FAMILY,
     STRUCTURAL_FAMILY,
     best_family,
     is_administrative,
@@ -1286,7 +1287,127 @@ def _layer_numbered(content, containers, flat, deadline, toc_pages):
     return ("numbered", "low", family, candidates)
 
 
-LAYERS = (_layer_outline, _layer_toc, _layer_headings, _layer_numbered)
+# --- Fm1: F4 named / bulleted, no counter (§6.3a's `label_run`) --------------
+
+# Markers measured in the corpus, not guessed. `362233` prints U+2022, U+25CB
+# and U+25AA; `359782`'s front matter prints U+F0B7 and U+F0A7 -- Symbol-font
+# private-use bullets, which is what a Word-produced PDF emits -- and its four
+# focus areas print a bare `o` glued to the name, which is how pdfminer
+# flattens Word's SECOND-level bullet.
+_RUN_MARKERS = "\u2022\u25cf\u25cb\u25aa\u25a0\u2023\u2043\uf0a7\uf0b7\uf0fc\uf06c"
+
+# `<marker><Name><dash><prose>`, and every part is load-bearing.
+#
+# The NAME is what makes this family safe enough to exist, and it is a
+# structural requirement rather than a lexical one: §5.1's child carries a
+# title, and a bullet that is a whole sentence has no title to carry. Measured
+# on `362233`, whose five genuine Focus Areas are sentences -- *"Understanding
+# the biological mechanisms of lupus disease including, but not limited to,
+# studies of informative/rare patients."* -- and therefore produce **no
+# candidate at all** here. That is a real recall limitation and it is recorded
+# as one (§18.1 P7.3b); it is not a threshold to relax, because the thing
+# missing is a title.
+#
+# The DASH is the document's own separator between the name and its
+# description. A colon variant is deliberately absent: `362233`'s decoy bullets
+# read `Innovation: Innovative research may introduce a new paradigm...` and
+# `Impact: The proposed research should impact an area of importance...`, so a
+# colon form would admit exactly the set §18.1 names as F4's canonical decoys.
+# **Not** a special case for that document -- the colon form has no validating
+# document anywhere in the corpus, and §17.8 forbids adding a shape without one.
+_LABEL_RUN_LINE = re.compile(
+    r"^(?P<marker>[" + _RUN_MARKERS + r"]|o(?=[A-Z]))\s*"
+    r"(?P<name>[^\s][^\n]{2,78}?)\s*[\u2013\u2014\u2212-]\s+(?P<rest>\S[^\n]*)$"
+)
+
+
+def _run_lines(flat):
+    """Every non-blank line of the flattened text with its exact offset.
+
+    **BUG-10 cannot arise here.** The offsets come from the scan itself rather
+    than from `locate()`, so there is nothing to fail to find and no substitute
+    offset to invent.
+    """
+    out, cursor = [], 0
+    for line in flat.text.split("\n"):
+        stripped = line.strip()
+        if stripped:
+            out.append((cursor + (len(line) - len(line.lstrip())), stripped))
+        cursor += len(line) + 1
+    return out
+
+
+def _layer_label_run(content, containers, flat, deadline, toc_pages):
+    """Fm1. A run of named lines sharing one marker the document repeats.
+
+    **Grouped by marker, document-wide, with no proximity window** -- and that
+    is the design decision that makes it work. A line-gap window is a threshold
+    fitted to whichever document is in front of you: `359782`'s four focus areas
+    are 6, 9 and 7 wrapped lines apart, so any window wide enough to hold them
+    also merges its front-matter list, and any window narrow enough to exclude
+    the front matter splits the focus areas. The marker separates them for free
+    -- the front matter is U+F0B7 and the focus areas are `o` -- and grouping by
+    it is the same move `best_family` makes for ordinal families, which also
+    collect document-wide and let the acceptance rules reject the scatter.
+    **The marker is discovered from the document, never listed in advance**,
+    which is what §6.3a asked of this family.
+
+    **Fm1 adds no threshold of its own.** Discovery is structural; every
+    rejection below comes from §6.4 and §6.4a exactly as fitted for
+    `structural_siblings`. Measured over the 180 documents P7.1 and P7.2 froze:
+    **one admitted set, and it is the right one** -- `359782`'s four DARPA TTO
+    focus areas. Every other marker group in that corpus is refused, most of
+    them on `span_length` and `administrative_vocabulary`.
+
+    **Structure does not establish fundability, and this family does not claim
+    to.** It admits a *set*; §6.4b then classifies each member individually and
+    only survivors publish. That is why the tier is `low` -- weaker than
+    `structural_siblings`, which at least has an outline tree asserting
+    siblinghood -- and why DEC-11's subject/mechanism boundary is enforced in
+    Cov4 rather than here.
+
+    Returns the ordinary layer 4-tuple, or None.
+    """
+    grouped = {}
+    for offset, text in _run_lines(flat):
+        match = _LABEL_RUN_LINE.match(text)
+        if match:
+            grouped.setdefault(match.group("marker"), []).append((offset, match))
+
+    admitted = []
+    for marker in sorted(grouped):
+        hits = grouped[marker]
+        if not MIN_CANDIDATES <= len(hits) <= STRUCTURAL_MAX_SIBLINGS:
+            continue
+        candidates = [
+            _Candidate(
+                code=re.sub(r"\s+", " ", match.group("name")).strip()[:MAX_TITLE_CHARS],
+                ordinal=index + 1,
+                ordinal_label=str(index + 1),
+                title=re.sub(r"\s+", " ", match.group("name")).strip()[:MAX_TITLE_CHARS],
+                offset=offset,
+                page=flat.page_at(offset),
+                anchor=flat.anchor_at(offset),
+            )
+            for index, (offset, match) in enumerate(hits)
+        ]
+        if not _structural_titles_ok([item.title for item in candidates]):
+            continue
+        if acceptance_failures(candidates, flat, toc_pages,
+                               family_type="structural"):
+            continue
+        admitted.append(candidates)
+
+    # Two markers both yielding an acceptable set means the document does not
+    # tell us which run delimits its topics, so neither is trusted. Fail closed,
+    # the same way `best_family` refuses a set whose family is ambiguous.
+    if len(admitted) != 1:
+        return None
+    return ("label_run", "low", LABEL_RUN_FAMILY, admitted[0])
+
+
+LAYERS = (_layer_outline, _layer_toc, _layer_headings, _layer_numbered,
+          _layer_label_run)
 HTML_LAYERS = (_layer_numbered,)
 
 
