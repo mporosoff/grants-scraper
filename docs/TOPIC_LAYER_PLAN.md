@@ -2,7 +2,7 @@
 
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
-Status: in progress · Version 8.22 · Written 2026-08-15 · **Revised 2026-08-26 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
+Status: in progress · Version 8.23 · Written 2026-08-15 · **Revised 2026-08-26 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
 
 > **Start at §18, and read §18.0 first.** §18 defines the minimum path — the **eleven** work packages **P1 … P11** — and lists what is deferred and what it costs. **§18.0 is the canonical namespace**: package IDs, the `BUG-*` / `MEAS-*` / `DEC-*` / `DEBT-*` prefixes, the migration table for every legacy label (`Package A–G`, `D½`, `D⅝`, `D¾`, `S1–S3`, `Package N`, bare `D#`, `M#`), the current ordered path, and a diagram. **P6 is closed and P8 is complete; P5 remains open. Cov4 is now fully specified and implementation is the next step; Cov6 and Cov7 are untouched** (`docs/MEAS3_RUN_DESIGN.md` §5d–5e). §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
 >
@@ -11,6 +11,39 @@ Status: in progress · Version 8.22 · Written 2026-08-15 · **Revised 2026-08-2
 > **8.3 changes one thing structurally: the unit of judgment moves from the sibling *set* to the individual *span* (§6.4b), because a set-level verdict lets two policy paragraphs delete 70 DOE programmes.** §11 is reopened for the precision half only, on a measured run; its recall argument is untouched.
 >
 > **8.4 closes the two blocking storage decisions.** `MAX_TERMS` stays at 400 and subtopics ship in a lazily-loaded `data/subtopics.js` sidecar — one question, not two, once you measure that 60.3% of a cache record is a term map the browser never reads as content. **Nothing now blocks committing a cache except running the backfill again.** Every rate quoted against `docs/CORPUS_CENSUS.md`'s 20 documents is still superseded by `docs/COVERAGE_SURVEY.md` (§1.1).
+>
+> **8.23 implements Cov6, and the "contradiction" turns out to be a correct
+> design with one stale word in front of it.** Read together, §5.1, §6.4b and
+> §7.1 already say one coherent thing, and §5.1 says the consequence in its own
+> words: a generic child *"queues for review instead of publishing"*. **No `DEC-*`
+> was needed to establish the rule**; §7.1's predicate is now implemented verbatim
+> as `subtopic_records.publication_eligibility`, the single authority on the
+> question, derived from provenance + confidence + Cov4 state and **stored
+> nowhere**. **Four concepts are now four things in code**: who asserted the
+> relationship, how well this run read it, what Cov4 decided, and whether it may
+> reach a PI unattended. **A fail-closed hole was found and closed on the way:**
+> Cov4 had expressed "queued" by overwriting `confidence` with `low`, which
+> destroyed evidence and made the guarantee depend on a tier — and `inline`'s
+> ceiling is `high`, so a tier-only rule would have published an unresolved
+> `inline` span. **`_demote()` was reconstructed, re-measured and narrowed rather
+> than deleted:** it asked whether an *argument* was populated, so a record whose
+> own announcement is reachable only through its attachments had that announcement
+> treated as an appendix. It now asks whether the winning document differs from
+> the record's announcement. Live: `363526` returns method `toc`, confidence
+> **`high`** through `segment_without_primary`, matching `segment_document` on the
+> same document, where it previously returned `low`. **The measured protection is
+> untouched** — CDC `360339` and AFRL PACER `349554` both still demote. **Measured
+> on the frozen population: 43 generic children in, all `inferred`, all `medium`;
+> 28 Cov4-approved; auto-publishable 0; review 28; 0 genuine children incorrectly
+> suppressed; 0 contaminants exposed.** **8.22's phrase "net auto-publishable
+> generic children 43 → 28" is corrected** — the measurement is unchanged, but it
+> means **Cov4-approved / publication-eligible subject to §7.1's approval clause**,
+> and none of the 28 auto-publishes. Cov6's own row claimed it would "unblock
+> publication for 685 records"; it unblocks publication for **nothing**, because
+> §7.1 treats `low` and `medium` alike — what it buys is a truthful tier and
+> **quality-based ranking restored** for the no-primary population. §0.5
+> byte-identical, 599 tests green.
+> **Decision: COV6 CLOSED. P5's only remaining item is Cov7. DEC-16 opened.**
 >
 > **8.22 implements Cov4 and closes it, and closes BUG-9 with it.** Nothing was
 > designed this session: `scripts/subtopic_cov4.py` is the frozen specification
@@ -30,7 +63,9 @@ Status: in progress · Version 8.22 · Written 2026-08-15 · **Revised 2026-08-2
 > cross-opportunity fabrications prevented, 0 published**. **19 children bypassed
 > by provenance with 0 classifier calls** — 5 NASA `native` and 14 Army TDAC
 > `referenced` — which **discharges P6's forward obligation at the call site**.
-> Net auto-publishable generic children **43 → 28**. Exactly one live verdict
+> Net generic children through the gate **43 → 28** — **corrected in 8.23:
+> that is Cov4-*approved*, i.e. publication-eligible subject to §7.1's
+> approval clause, not auto-published.** Exactly one live verdict
 > differs from the committed run, on the candidate whose ownership truth is
 > `unresolved`; it publishes under neither reading, and **nothing was re-tuned in
 > response**. Fail-closed is tested rather than asserted: missing credential,
@@ -3316,7 +3351,7 @@ Legacy labels are translated once, in §18.0.3 — not repeated here.
 | **P2** | Segmentation engine | ✅ **complete** 2026-08-16 |
 | **P3** | Flag-off integration | ✅ **complete** 2026-08-16 |
 | **P4** | Tune and backfill | ⚠️ **complete 2026-08-16, gate not met** — correct-acceptance stopped at **42%** against the 50% threshold, deliberately: every remaining miss needs a new mechanism, and reaching 50% by loosening would trade the 0/8 false-positive count. **P4.4**'s backfill ran and its cache was deliberately not committed |
-| **P5** | Coverage hardening | 🔄 **in progress** — Cov0–Cov5 done. **Open: Cov6, Cov7 only.** **Cov4 closed 2026-08-26**: the two-axis gate is implemented at the production call site (`scripts/subtopic_cov4.py`, `subtopic_fields`), every gate clause is demonstrated, and **BUG-9 is closed with it**. Live validation on the 43 frozen candidates: 28 genuine children retained, **0 lost**, 11 contaminants rejected, **2 cross-opportunity fabrications prevented**, 19 children bypassed by provenance with **0 classifier calls**, §0.5 byte-identical |
+| **P5** | Coverage hardening | 🔄 **in progress** — Cov0–Cov6 done. **Open: Cov7 only.** **Cov6 closed 2026-08-27**: §7.1's publication rule implemented verbatim as `publication_eligibility`, confidence/review state/eligibility separated, `_demote()` narrowed to the risk it was measured against. **No generic child auto-publishes, by design** (§5.1). **Cov4 closed 2026-08-26**: the two-axis gate is implemented at the production call site (`scripts/subtopic_cov4.py`, `subtopic_fields`), every gate clause is demonstrated, and **BUG-9 is closed with it**. Live validation on the 43 frozen candidates: 28 genuine children retained, **0 lost**, 11 contaminants rejected, **2 cross-opportunity fabrications prevented**, 19 children bypassed by provenance with **0 classifier calls**, §0.5 byte-identical |
 | **P6** | Structured-source coverage | ✅ **complete 2026-08-22, all three items measured.** P6.1 `native` NASA (10 recoveries, category (e)); P6.2 DOE measured negative (category-(a) population empty); P6.3 `referenced` Army (1 parent, 14 external-only children, category (a)). **Conclusion: delegation predicts value, not authority** (§18.1) |
 | **P6.1** | NASA ROSES structured-source proof | ✅ **complete** 2026-08-18. Gate closed clause by clause against repository evidence: six clauses outright, one with a forward obligation (the Cov4 bypass), one on evidence (§0.5). **Previously-category-(a) records reached: 0** — P6.1 reached the **(e)** population |
 | **P6.2** | DOE Office of Science structured-source test | ✅ **complete 2026-08-21 — a measured negative, and no source was built.** It was the first real test of whether structured/referenced ingestion reaches category (a), and **the population was empty**: 2 Office of Science parents, **both already resolved** by generic parsing, **0** previously category (a), **0** net-new children, **3** non-fundable organizational labels rejected. Evidence: `docs/DOE_SOURCE_INSPECTION.md` |
@@ -3381,6 +3416,7 @@ it as **P8**, sequenced after P6.1 and before P6.2. **DEC-0** (`MAX_TERMS` stays
 
 | ID | Decision | Note |
 |---|---|---|
+| **DEC-16** | **Do generic (`inferred`) subtopics ever reach a PI without a human approving them?** Surfaced by Cov6, and it is a **product** question rather than an engineering one, so it is recorded rather than decided here. Today the answer is **no**: §5.1 caps `inferred` at `medium`, §7.1 requires a hash-matched approval below `high`, and the measured consequence is that **0 of Cov4's 28 approved children auto-publish**. That is deliberate and §18.3's asymmetry supports it — but it means the feature's generic half ships **only** with a reviewer in the loop, and the reviewer surface is P9/P10. The alternatives are to accept that permanently, to admit Cov4-approved children at `medium` once the classifier has a second labeller and a repeat measurement, or to ship generic children behind an explicit "unreviewed" UI affordance. **Do not decide this from a model verdict** (§17.8) | open — **not a Cov6 blocker**; Cov6 implements today's answer |
 | **DEC-15** | ~~Authorize `anthropic` as a project dependency?~~ **RESOLVED 2026-08-24: no dependency added.** The classifier is called as **one POST to `/v1/messages` through the already-pinned `requests`**, so §0.4 rule 7 stands **unamended rather than excepted**. Reasoning, and it is engineering rather than rule-avoidance: the repo already owns an HTTP client with retry and delay (`scripts/sources/http.py`), so the SDK would install a *second* retry implementation beside it; `anthropic` pulls httpx, pydantic, anyio, distro, jiter and sniffio into a runtime whose whole dependency list is five lines; and direct HTTP returns `usage.output_tokens_details.thinking_tokens`, which makes §11's adaptive-thinking requirement **verifiable per call** rather than assumed. **Revisit if** Cov4's production path needs the Message Batches API for §11's batched pricing | ✅ resolved |
 | **DEC-14** | **Should ROSES appendix divisions A–F map to `disciplines` facet values?** The two emitted records carry `disciplines: []` because Grants.gov derives that facet from category codes ROSES does not publish; `topic_areas` *is* derived (*Space and aeronautics*), so the records remain searchable and topically filterable. Mapping division → discipline would be a **new inference**, which is a decision rather than a fix (§17.8) | **Not a P8 blocker.** P8's gate covers identity, precedence, currentness, dedup and loud failure; facet richness is not one of its clauses |
 
@@ -4117,7 +4153,7 @@ Bare `D#` is retired for anything that is not a P4 item. Four prefixes, and the
 |---|---|---|
 | **BUG-#** | A defect in code or output — an item stays in this namespace after it is fixed, so its history stays citable | BUG-0, BUG-2, **BUG-7 (fixed)**, **BUG-9 (fixed)**, BUG-10, BUG-11 |
 | **MEAS-#** | A measurement still required before something can be concluded | MEAS-1 … MEAS-8 |
-| **DEC-#** | An architectural or product decision, open or taken | DEC-0 … DEC-15 |
+| **DEC-#** | An architectural or product decision, open or taken | DEC-0 … DEC-16 |
 | **DEBT-#** | Carried work that is neither a defect nor a measurement — stale artifacts, cache hygiene, a deliberate non-build | DEBT-1, DEBT-3, DEBT-4, DEBT-5, DEBT-6, DEBT-8, DEBT-9 |
 
 **Categories were assigned by reading each item, not by its old prefix.** Three
@@ -4189,7 +4225,8 @@ notes elsewhere.
 | **DEC-2 … DEC-12** | §13's remaining numbered decisions | §13 items 2–12 | open |
 | **DEC-13** | NASA ROSES standalone ingestion → build it as P8 | §13 item 13, "decision 13" | **taken 2026-08-18, implemented 2026-08-20** |
 | **DEC-14** | Whether ROSES appendix divisions A–F should map to `disciplines` facet values | *(new in 8.14; found closing P8)* | open — **not a P8 blocker** |
-| **DEC-15** | Authorize `anthropic` as a dependency | *(new in 8.18)* | open — **blocks MEAS-3 and Cov4** |
+| **DEC-15** | Authorize `anthropic` as a dependency | *(new in 8.18)* | **resolved 2026-08-24 — no dependency added** |
+| **DEC-16** | Do generic subtopics ever publish without a human approval? | *(new in 8.23; found closing Cov6)* | open — **not a Cov6 blocker** |
 
 *Not renumbered, deliberately:* **§18.3a**'s bare-numbered-family prohibition is a
 gate with four exit criteria rather than a §13-numbered decision, and it keeps its
@@ -4211,8 +4248,9 @@ P4.3, P4.6 …).
 | 4 | **P6.2** — DOE Office of Science structured-source test | ✅ **complete 2026-08-21.** It was the first real test of whether structured/referenced ingestion reaches category (a) — and **the population was empty**: 2 Office of Science parents, both already resolved by generic parsing, 0 previously category (a), 0 net-new children. **No source was built**, on measured grounds (§18.1 P6.2, `docs/DOE_SOURCE_INSPECTION.md`) |
 | 5 | **P6.3** — Army TDAC referenced source | ✅ **complete 2026-08-22**, scoped exactly as MEAS-7 justified. **1 parent, 14 external-only children**, provenance `referenced`, 0 generic overlap. **P6 is now closed on evidence** (§18.1 P6.3) |
 | 6 | **Cov4** — the two-axis gate | ✅ **complete 2026-08-26.** Deterministic ownership guard plus the frozen O1 prompt at `claude-sonnet-5`, R=1, wired into `subtopic_fields`. Live validation: 28 genuine children retained, **0 lost**, 11 contaminants and 2 cross-opportunity fabrications rejected, 19 children bypassed by provenance with **0 classifier calls**. **BUG-9 closed**; **P6's forward obligation discharged at the call site** |
-| 7 | **Recompute residual coverage** before any **P7** work | P7's yields were measured on a corpus where no structured source had been tried. **This, not Cov4, is what now blocks P7** |
-| 8 | **P9 → P10 → P11** | only when the coverage evidence says the feature is worth shipping; each behind its own existing gate |
+| 7 | **Cov6** — publication semantics and `_demote()` | ✅ **complete 2026-08-27.** §7.1's rule implemented as the one authority; the four concepts separated; a tier-only fail-closed hole closed; `_demote()` narrowed to its measured risk. **No generic child auto-publishes** — the review queue, not the catalog, is where Cov4's 28 land |
+| 8 | **Recompute residual coverage** before any **P7** work | P7's yields were measured on a corpus where no structured source had been tried. **This, not Cov4, is what now blocks P7** |
+| 9 | **P9 → P10 → P11** | only when the coverage evidence says the feature is worth shipping; each behind its own existing gate |
 
 **P8 is a branch, not a stage of the subtopic feature.** P6.1 *discovered* it — 53
 ROSES program elements with no catalog record — but P8 adds **opportunities**,
@@ -4354,7 +4392,7 @@ Every item states its expected yield from the survey's stratified sample — *sa
 | **Cov4. Redesign the confidence model** — **narrowed 8.7 to `inferred` and `inline` provenance** | Unblocks **every** item above, and 2 of the survey's 10 enumerating records immediately | Its own item, specified in full below. **Rewritten 8.3:** the unit of judgment moves from set to span (§6.4b), a classifier filters spans (§11: 7/7 contaminants, 0/107 false rejections at Sonnet 4.6), and the review queue handles only the residual — disagreements and abstentions. Fail-closed: no classifier means no new subtopics, never unfiltered ones |
 | **Cov5. Fix span-summary alignment** — **done 2026-08-17** | Not a coverage item — a correctness one | **Diagnosed, measured and fixed; §6.5 carries the full record and corrects the mechanism this plan previously named.** One cause for all six cases: `_Flat._find`'s loose title matcher tolerated whitespace *between* tokens and not *inside* one, so a `pdfminer`-inserted space beside a hyphen or em-dash (`X -Ray` for `X-Ray`) made the bookmark title unlocatable, and `_locate_nodes` silently substituted the top of the page. **Prevalence 6 of 223 spans = 2.7% before, 0 of 224 after**, measured by re-running segmentation on all 13 accepted documents rather than by a text heuristic. **Clustered by document, not by method** — all six in `360678` (8.8% of its spans), zero everywhere else. A sixth case was found that nobody had listed. `360678` gains a span (68 → 69): one candidate had been dropped outright, not merely misaligned. **Residual, not fixed:** the `page_start_offset` fallback is still silent, and fires zero times today only because nothing currently fails to locate. Original note follows.<br><br>**Measured 2026-08-17, revised upward the same day (§6.5).** **Five** spans in `360678` — **7% of its 70**, in the document carrying `(q) Catalysis Science` — carry excerpt text describing neither their title nor their subject; `(i) X-Ray Scattering` is summarized by an application-deadline sentence. Span boundaries start at a bookmark offset, so a span can open mid-sentence inside the previous section and the 240-character head summarizes the wrong thing. **Degrades two consumers:** the Cov4 classifier judged those three by the text it was given, and the same string is what a PI reads on the card. **Prevalence unmeasured** — five confirmed by reading, all in one document, all surfaced as a by-product of classifier rejections rather than by a search; nothing has examined the other 222 spans. A start-of-sentence heuristic was tried and discarded for contradicting the observed error pattern. Measure it before trusting the summary for either purpose |
 
-| **Cov6. Fix `_demote()`'s blanket cap on no-primary records** — **added 8.5, and it caps the yield of everything above** | Unblocks publication for the **685 records — 46.4% of the catalog** — that Cov1 made reachable | **`_demote()` decides "secondary attachment" by asking whether a result came from the `primary_content` argument.** Cov1's path passes **no primary at all** when `source_for_record()` returns `None`, so a list read from the record's own `Full Announcement` PDF is treated as a secondary and capped at `low`, which never publishes. **Verified by running production this session:** `363526` — the corpus's *only* `high`-confidence acceptance — returns `8 subtopics, method='toc', confidence='high'` from `segment_document` directly and `confidence='low'` through `segment_without_primary`. The difference is `_demote()`, not the document. Cov1's own note reads *"All ten newly reached records return `no_layer_accepted`"*, which attributes the zero to the records and hides this cap; it bites the moment a reached record enumerates, and `363526` is already that case. **The test is whether the winning document is the record's own announcement, not whether an argument was populated.** Until this is fixed, every new family lands recall in the cache that cannot reach a PI |
+| **Cov6. Fix `_demote()`'s blanket cap on no-primary records** — **done 2026-08-27; see the closure record below** | ⚠ **This cell's original yield claim was wrong and is kept for the record.** It reads *"Unblocks publication for the 685 records — 46.4% of the catalog"*. It unblocks publication for **none of them**: §7.1 requires an approval for `low` *and* `medium` alike, so the cap it lifts changes no publication decision. What it buys is a truthful confidence value and quality-based ranking | **`_demote()` decides "secondary attachment" by asking whether a result came from the `primary_content` argument.** Cov1's path passes **no primary at all** when `source_for_record()` returns `None`, so a list read from the record's own `Full Announcement` PDF is treated as a secondary and capped at `low`, which never publishes. **Verified by running production this session:** `363526` — the corpus's *only* `high`-confidence acceptance — returns `8 subtopics, method='toc', confidence='high'` from `segment_document` directly and `confidence='low'` through `segment_without_primary`. The difference is `_demote()`, not the document. Cov1's own note reads *"All ten newly reached records return `no_layer_accepted`"*, which attributes the zero to the records and hides this cap; it bites the moment a reached record enumerates, and `363526` is already that case. **The test is whether the winning document is the record's own announcement, not whether an argument was populated.** Until this is fixed, every new family lands recall in the cache that cannot reach a PI |
 | **Cov7. Read 30 more stratum-D records** — **added 8.5** | Firms up **over half** the §1.1 interval | The cheapest outstanding measurement in the project. Stratum D — any non-PDF attachment — holds **483 records, has 12 reads, contributes 40 of §1.1's 171-record point estimate on a single observation, and spans 7–171 on its own.** It also produced the corpus's only tabular list (F5), so its one hit is carrying both a population estimate and a form. Stratum E is larger but its ceiling is bounded by reachability — 313 of its records have no fetchable source of any kind — so **D is where the interval actually closes.** This supersedes the survey's "sample C and E" recommendation, whose C half the taxonomy sample discharged (C is now 18 of 27 read). Reuse `pick50.py`'s stratification with a fresh seed and the 90 read records excluded |
 
 **Gate:** unreachable-record count re-derived and reported against the catalog, not the evidence cache · for each of Cov1–Cov3, records *reached* and records *yielding an accepted list* reported separately, because they are different numbers and conflating them is how the multi-attachment path was over-sold the first time · **fabricated publishable records still 0**, measured the way the D5 backfill generation measured it — by reading every title in the publishable set, not by sampling · **Cov6 verified by re-running `363526` end to end and observing `high`, not by reading the code** · §0.5 byte-identical with the flag off.
@@ -4556,7 +4594,7 @@ because the message can quote a request that carried the key; a test asserts no
 | cross-opportunity fabrications prevented | **2**, 0 published |
 | unresolved / review cases | 2 unresolved-truth candidates, **neither published** |
 | API errors | **0** |
-| net auto-publishable generic children | **43 → 28** |
+| net generic children through the gate | **43 → 28** — **corrected in 8.23:** Cov4-*approved* / publication-eligible subject to §7.1, **not** auto-published; 0 of the 28 reaches a PI unattended |
 
 **One live verdict differs from the committed run and it is disclosed rather than
 smoothed:** `own:363594-aggregator-unnumbered` moved `accept` → `reject`. It is
@@ -4606,6 +4644,164 @@ inverted for anything the filter passes.
 **Explicitly not started this session:** Cov6, Cov7, P7, MEAS-8, P9. No F1/F4
 recogniser was added, the O1 prompt was not changed, R stayed 1, no dependency
 was added, and §0.5 was not re-frozen.
+
+##### Cov6 — implemented and closed 2026-08-27
+
+> ### COV6 CLOSED
+>
+> **The `medium → queued` reading and §5.1's `inferred → medium` ceiling were
+> never in conflict.** Read together with §7.1 they say one coherent thing, and
+> §5.1 already states the consequence in its own words: *"Under §6.4b's tier gate
+> that record now **queues for review instead of publishing**. This is a
+> tightening in the direction §18.3 prefers."* **No generic child auto-publishes.
+> That is the design, not a bug in it**, and no `DEC-*` was needed to establish
+> it. What was stale was one word in 8.22's Cov4 report — *auto-publishable* —
+> and that is corrected below.
+
+**The inventory, traced before editing.** `build_records` → `classify_provenance`
+→ `cap_confidence` (the §5.1 ceiling) → `_demote()` → Cov4 → `upsert_parent` →
+`write_cache`. What each tier means **in code today**, which is not what the
+prose assumed:
+
+| Tier | Serialized? | Publishable? | In a sidecar? | For review? | Needs P9/P10? |
+|---|---|---|---|---|---|
+| `high` | yes | **yes**, by §7.1 | `data/subtopic_records.json` only | no | **yes** — nothing applies §7.1 yet |
+| `medium` | yes | only on a hash-matched approval | same | yes | yes |
+| `low` | yes | only on a hash-matched approval | same | yes | yes |
+
+**Two facts the table understates and that bound every claim below.** First,
+`subtopic` appears **nowhere** in `assets/`, `build_catalog.py`, `build_feeds.py`
+or `currentness.py` — there is **no publication filter in code at all**, and
+`opportunities.js` has never contained a child. Every tier is written to the
+cache unconditionally. Second, the only rung that reaches `high` today is
+`referenced`: `inferred` is capped at `medium` by §5.1, and `inline` is
+unreachable because nothing overrides to it. So §7.1's `high` clause admits
+**exactly the Army TDAC children and nothing else**, which is the intended shape.
+
+**The three concepts, now separate in code and not only in prose.**
+
+| Concept | Field | Means | Changed by |
+|---|---|---|---|
+| Provenance | `subtopic_source` | **who asserted** the parent→child relationship (§5.1) | the adapter, once. Never by a verdict |
+| Confidence | `confidence` | **how well this run read it** — method-earned, rung-capped, `_demote()`-lowered | segmentation and `_demote()` only |
+| Review state | `cov4_ownership` / `cov4_fundability` / `cov4_review` | **what Cov4 decided**, on two axes | `subtopic_cov4.apply_gate` |
+| Publication eligibility | *(none — derived)* | **may this reach a PI unattended** | `subtopic_records.publication_eligibility`, the single authority |
+
+**Model B was rejected and Model C was not needed.** Model B — "Cov4 approval
+makes a generic child publication-eligible" — would make the classifier the
+product's only guard on 28 real children, against §18.3's asymmetry and against
+§11's own three caveats (one labeller, one run, R=1). Model C's separate stored
+state was unnecessary: Cov4's fields *are* the review state, so eligibility is
+**derived and stored nowhere**, which is one fewer thing that can disagree with
+itself. What shipped is §7.1's rule verbatim, with Cov4's axes checked first.
+
+**One fail-closed hole was found and closed while doing this.** Cov4 expressed
+"queued" by overwriting `confidence` with `low`. That overloaded the evidence
+field — a `toc` span whose API call timed out became indistinguishable from a
+`numbered` one — and it made the guarantee depend on a tier. `inline`'s ceiling
+is `high`, so a publication rule reading only the tier would have **published an
+unresolved `inline` span**. Confidence is now left alone and
+`publication_eligibility` refuses the span directly, which is strictly safer. A
+record built outside the gate carries no verdict and is refused for that reason,
+so anything cached before Cov4 existed also fails closed.
+
+**`_demote()` — reconstructed, re-measured, and narrowed rather than deleted.**
+
+*Why it exists.* One measured case: CDC `360339` yielded 17 spans from
+`DGHP FY26 M&E Indicator List` — `2.1. Point of Entry (POE) General Capacity`,
+`5.2. Laboratory Quality Control` — instead of the five fundable Components.
+Measured precision of secondary-won lists: **0 of 1**. **That record has since
+left the catalog**, so the figure cannot be refreshed; it is kept as the reason
+for the rule, not as live evidence.
+
+*What was wrong with it.* It decided "secondary" by asking whether the
+`primary_content` **argument** was populated. Cov1's path passes no primary, so a
+record's own announcement — reached only through its own Grants.gov attachments —
+was treated as somebody's appendix.
+
+*The fix.* It now asks what §18.1 specified: **is the winning document different
+from the record's own announcement**, where the announcement is
+`primary_document_url` if the record designates one and the primary this run was
+handed otherwise. A record with no announcement has nothing to be secondary to.
+The measured protection is untouched — CDC `360339` and AFRL PACER `349554` both
+have an announcement and both win elsewhere, so both still demote.
+
+*Measured effect, live 2026-08-27.*
+
+| | |
+|---|---|
+| candidate population | **236** records that `source_for_record` declines and that carry attachments (of **685 declined**, **46.4%** of 1,475 — denominator unchanged) |
+| sampled | **50** — a 20-record prefix and a 30-record stride across the whole population |
+| before demotion | **1** record enumerates: `363526`, 8 spans, method `toc`, `high` |
+| after demotion | that record capped at **`low`** |
+| after the fix | **`medium`** — the §5.1 `inferred` ceiling, identical to `segment_document` on the same document |
+| Cov4 pass | not applicable at this stage; the tier is set before the gate runs |
+| correctly suppressed | **0 observed** in the sample — the risk case needs a designated primary, and this population has none by definition |
+| incorrectly suppressed | **1 of 1** enumerating records, i.e. every record the rule fired on here |
+| unresolved | **49 of 50** yield no spans at all; 14 of the first 20 reach no document because their only attachment is a sub-1 KB NIH stub (Cov2's measured filter working correctly) |
+
+**So the headline in Cov6's own row was wrong and is corrected here.** Fixing
+`_demote()` **unblocks publication for nothing**, because `low` and `medium` are
+treated identically by §7.1 — both need an approval. What it buys is real but
+different: a **truthful confidence value**, and **quality-based ranking restored**
+for the no-primary population. `_score` reads confidence, so flattening every
+candidate to `low` made span count the only tiebreak and let a wrong 17-span list
+beat a right 8-span one — defeating the census's non-negotiable *"rank by result
+quality, not attachment order"* for exactly the records that have no primary to
+rank against. A regression test pins that.
+
+**The Cov6 measurement, on the frozen Cov4 population through the final rule.**
+Committed verdicts replayed, nothing re-run:
+
+| Figure | Result |
+|---|---|
+| generic children entering the path | **43** |
+| provenance split | `inferred` **43** |
+| confidence split before Cov6 | `medium` **43** (a `toc`/`high` read, capped by §5.1) |
+| Cov4-approved | **28** · dropped **15** |
+| auto-publishable under the final rule | **0** |
+| review | **28** |
+| rejected / fail-closed | **15** |
+| correctly retained genuine children | **28**, all routed to review |
+| incorrectly suppressed genuine children | **0** |
+| contaminants exposed | **0** |
+| effect attributable to `_demote()` | **none on this population** — it fires only on the attachment path, and every one of these 43 is judged at the tier its method earned |
+
+**The historical 46.4% figure, named correctly.** 46.4% is the share of the
+catalog `source_for_record` declines — **685 of 1,475** — and it is unchanged.
+It was never the share `_demote()` caps, and it is not a publication figure.
+The publication cap today is **100% of generic children**, by §7.1's design, and
+its denominator is *every* `inferred` child rather than a reachability
+population. Those are three different numbers and this row previously ran them
+together.
+
+**Terminology correction to 8.22.** Cov4's live validation reported *"net
+auto-publishable generic children 43 → 28"*. **The measured result is unchanged
+and is not restated**; only its interpretation is corrected:
+
+> **43 → 28 Cov4-approved, i.e. publication-eligible subject to §7.1's approval
+> clause.** None of the 28 auto-publishes. Cov4's product effect is that the
+> review queue contains 28 candidates instead of 43, with 0 fabrications and 0
+> genuine children lost from it.
+
+**Gate for Cov6, clause by clause.**
+
+| Clause | Result |
+|---|---|
+| confidence / provenance / review state / publication eligibility unambiguous | ✅ four concepts, three fields and one derived predicate; table above |
+| the stale `medium → queued` contradiction resolved | ✅ resolved as **not a contradiction**; §7.1 implemented verbatim, stale prose corrected |
+| `_demote()` justified against current evidence | ✅ retained where its measured risk exists, narrowed where it cannot |
+| valid Cov4-approved children not suppressed by a historical mechanism | ✅ `363526` recovers `medium`; 0 incorrectly suppressed on the frozen population |
+| unsafe/unresolved children still fail closed | ✅ six classifier failure modes, `not_owned`, `unestablished`, an ungated record, and an approval that contradicts a failed axis |
+| no provenance inflation | ✅ rung untouched; §5.1 ceilings untouched; a `high` rung with a weak read stays weak |
+| §0.5 green | ✅ `verify_no_drift` exit 0, 22 artifacts unchanged |
+
+**Handed forward to P9/P10, and deliberately not built here.** The reviewer
+surface, the exported approvals artifact under `data/` (with its `.gitignore` `!`
+line and `git add` line, §0.4 rule 11), and the merge that *applies*
+`publication_eligibility` are P9/P10. Cov6's contract to them is exactly one
+function and the record fields it reads. **DEC-16** records the product question
+this surfaced.
 
 #### P6 — Structured-source coverage *(legacy Package D⅝, "Structured Umbrellas")*
 
