@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-08-19T10:48:59Z</updated>
+  <updated>2026-08-20T10:49:33Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -90,6 +90,16 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Agriculture and food"/>
     <summary>Health Resources and Services Administration | Closes 2026-10-20 | Fiscal Year (FY) 2027 Regional Nutrition Hubs (RNH) will support region-specific technical assistance (TA) on expanding high-quality nutrition services to the Health Resources and Services Administration's (HRSA) Health Center Program (H80) award recipients and look-alikes (health centers). Nutrition services prevent, manage, and treat diseases and conditions through nutritional and food-based int…</summary>
+  </entry>
+  <entry>
+    <title>Food and Agriculture Defense Initiative Extension Disaster Education Network</title>
+    <link href="https://www.grants.gov/search-results-detail/363663"/>
+    <id>urn:funding-finder:grants-gov:363663</id>
+    <updated>2026-08-19T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <summary>National Institute of Food and Agriculture | Closes 2026-09-21 | The goal of the FADI-EDEN program, under assistance listing 10.304, is to support CES’s ability to maximize the resilience of the U.S. food and agriculture sector to biosecurity risks, weather events and disasters, cyber threats, and other shocks through the Extension Disaster Education Network (EDEN). EDEN is a national, collaborative network of CES professionals who are dedicated to improved all…</summary>
   </entry>
   <entry>
     <title>Cold Chain Grants for Emergency Food Assistance</title>
@@ -403,15 +413,6 @@
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
     <summary>NASA Headquarters | Closes 2026-10-15 | NOTICE: August 4, 2026. Going forward, a $0.09/SBU charge now applies to all proposing to Earth Science (ROSES Appendix A) to use any NASA high-end computing resource. Proposers must account for this in their budget, per the instructions provided in Section 7.3 of ROSES-25 A.1 Earth Science Research Overview. NOTICE: July 28, 2026. A set of slides describing the Application Readiness Levels (ARLs)…</summary>
-  </entry>
-  <entry>
-    <title>FY 2026 SNAP Earnings Verification Support Grant</title>
-    <link href="https://www.grants.gov/search-results-detail/363216"/>
-    <id>urn:funding-finder:grants-gov:363216</id>
-    <updated>2026-07-16T00:00:00Z</updated>
-    <author><name>Food and Nutrition Service</name></author>
-    <category term="Agriculture and food"/>
-    <summary>Food and Nutrition Service | Closes 2026-08-19 | The USDA’s Food and Nutrition Administration (FNA) works to nourish those in need through financially sound programs that promote health and work, as well as champion the productivity of American agriculture. The purpose of these grants is to support SNAP State agencies in meeting these requirements and testing different income verification services to determine the most cost-effective solution. T…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2027 Expanding Nutrition Services</title>

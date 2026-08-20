@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-08-19T10:48:59Z</updated>
+  <updated>2026-08-20T10:49:33Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -200,20 +200,6 @@
     <summary>U.S. National Science Foundation | Closes 2027-02-11 | The Emerging Frontiers in Research and Innovation (EFRI) program serves a critical role in helping the NSF Directorate for Engineering focus on important emerging areas in a timely way. The EFRI program invests in potentially transformative ideas that offer the opportunity for significant shifts in foundational engineering knowledge. EFRI-funded research must have strong potential for long-term im…</summary>
   </entry>
   <entry>
-    <title>Engineering (ENG): Electrical, Communications, and Computing Systems (ECCS)</title>
-    <link href="https://www.grants.gov/search-results-detail/363613"/>
-    <id>urn:funding-finder:grants-gov:363613</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Energy"/>
-    <category term="Quantum science"/>
-    <category term="Data science"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research for electrical, communications and computing systems through the following programs: The Electronic, Photonic, Magnetic, and Quantum Devices (EPMQD) program supports foundational engineering research on novel classical and quantum devices, exploring matter’s electronic, photonic, and magnetic …</summary>
-  </entry>
-  <entry>
     <title>MPS Chemistry Research Programs (MPS Chem)</title>
     <link href="https://www.grants.gov/search-results-detail/363617"/>
     <id>urn:funding-finder:grants-gov:363617</id>
@@ -268,6 +254,20 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>U.S. National Science Foundation | Closes 2076-08-18 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
+  </entry>
+  <entry>
+    <title>Engineering (ENG): Electrical, Communications, and Computing Systems (ECCS)</title>
+    <link href="https://www.grants.gov/search-results-detail/363613"/>
+    <id>urn:funding-finder:grants-gov:363613</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Energy"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-19 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research for electrical, communications and computing systems through the following programs: The Electronic, Photonic, Magnetic, and Quantum Devices (EPMQD) program supports foundational engineering research on novel classical and quantum devices, exploring matter’s electronic, photonic, and magnetic …</summary>
   </entry>
   <entry>
     <title>Pax Silica Artificial Intelligence Assistance Project</title>
@@ -332,18 +332,6 @@
     <summary>Washington Headquarters Services | Closes 2026-09-15 | On behalf of the Office of the Secretary of War/Office of the Under Secretary of War for Acquisition and Sustainment (OUSW(A&amp;S)) and the Office of the Under Secretary of War for Policy (OUSW(P)), the Washington Headquarters Services, Acquisition Directorate, (WHS/AD) seeks applications for sole-source awards from the University of Hawaii for the continuation of work for the Pacific Disaster Center…</summary>
   </entry>
   <entry>
-    <title>U.S.-Africa Strategic Investment Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363554"/>
-    <id>urn:funding-finder:grants-gov:363554</id>
-    <updated>2026-08-12T00:00:00Z</updated>
-    <author><name>Bureau of African Affairs</name></author>
-    <category term="Environmental science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>Bureau of African Affairs | Closes 2027-05-27 | The U.S.-Africa Strategic Investment Program advances America's national interests by harnessing market-based, private sector-led growth across two strategic focus areas: Critical Minerals Investment and Commercial Diplomacy Acceleration. This program seeks market-based solutions that strengthen the environment for foreign investment in sub-Saharan Africa through transparent and competitive proces…</summary>
-  </entry>
-  <entry>
     <title>Fostering the Future Together: Empowering Youth for a Safe Digital World</title>
     <link href="https://www.grants.gov/search-results-detail/363426"/>
     <id>urn:funding-finder:grants-gov:363426</id>
@@ -366,6 +354,18 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Air Force Office of Scientific Research | Closes 2027-04-05 | The Department of Defense (DoD) announces the fiscal year 2026 (FY26) Defense Established Program to Stimulate Competitive Research (DEPSCoR) - Research Collaboration (RC) opportunity. The program is sponsored and managed by the Basic Research Office, Office of the Under Secretary of Defense for Research and Engineering (OUSD [R&amp;E]), awarded by the Air Force Office of Scientific Research (AFOSR), …</summary>
+  </entry>
+  <entry>
+    <title>Lewis-Houghton Civics and Democracy Initiative: New Awards for 2027-2029</title>
+    <link href="https://www.grants.gov/search-results-detail/363514"/>
+    <id>urn:funding-finder:grants-gov:363514</id>
+    <updated>2026-08-07T00:00:00Z</updated>
+    <author><name>Library of Congress</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Library of Congress | Closes 2026-09-18 | This funding opportunity is authorized under the “Legislative Branch Appropriations Act of 2023” (Pub. L. 117-389 (H.R. 8237)), subject to availability of funding. The resulting awards will be subject to the Library of Congress Regulation (LCR) 7-310. In addition, while the Library, as a legislative agency, is not subject to 2 CFR 200 - Uniform Administrative Requirements, Costs Principles and Aud…</summary>
   </entry>
   <entry>
     <title>DRL Ensuring Resilient Seafood Supply Chains: Countering Forced Labor and any associated Illegal, Unreported and Unregulated Fishing</title>

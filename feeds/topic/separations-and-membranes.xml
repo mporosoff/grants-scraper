@@ -4,8 +4,19 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/separations-and-membranes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/separations-and-membranes.xml</id>
-  <updated>2026-08-19T10:48:59Z</updated>
+  <updated>2026-08-20T10:49:33Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Trauma Care Readiness and Coordination Cooperative Agreement</title>
+    <link href="https://www.grants.gov/search-results-detail/363662"/>
+    <id>urn:funding-finder:grants-gov:363662</id>
+    <updated>2026-08-19T00:00:00Z</updated>
+    <author><name>Assistant Secretary for Preparedness and Response</name></author>
+    <category term="Separations and membranes"/>
+    <category term="Materials science"/>
+    <category term="Cybersecurity"/>
+    <summary>Assistant Secretary for Preparedness and Response | Closes 2026-09-18 | A trauma system is, “…an organized, inclusive approach to facilitating and coordinating a multidisciplinary system response to severely injured patients.”[14] Coordination across prehospital entities (e.g., EMS) and hospitals signal an effective trauma system, where patients can get the right level of care they need. Access to trauma care in the United States is inconsistent. For example, 1 in 3 A…</summary>
+  </entry>
   <entry>
     <title>FY25 and FY26 Advanced Digital Construction Management Systems (ADCMS)</title>
     <link href="https://www.grants.gov/search-results-detail/363628"/>
@@ -27,6 +38,19 @@
     <category term="Separations and membranes"/>
     <category term="Materials science"/>
     <summary>Bureau of Democracy Human Rights and Labor | Closes 2026-08-31 | The U.S. Department of State, Bureau of Democracy, Human Rights, and Labor (DRL) announces an open competition for organizations interested in submitting applications for a program to advance peace process prospects by positioning Ethnic Resistance Organizations (EROs), civil society, and state-level actors as credible, unified, and community-backed participants in future peace negotiations.</summary>
+  </entry>
+  <entry>
+    <title>Expanding global health security through local partnerships in Ethiopia</title>
+    <link href="https://www.grants.gov/search-results-detail/360333"/>
+    <id>urn:funding-finder:grants-gov:360333</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <category term="Separations and membranes"/>
+    <category term="Materials science"/>
+    <category term="Cybersecurity"/>
+    <summary>Centers for Disease Control-GHC | Closes 2026-10-02 | The CDC office in Ethiopia was established in 2001 and works closely with the Ministry of Health (MOH), the Ethiopian Public Health Institute (EPHI), and other Government of Ethiopia (GOE) agencies to develop the capacity to prevent, detect, and respond to priority diseases. In 2014, CDC began coordination with the GOE to build Ethiopia's capacity to achieve the International Health Regulation (IH…</summary>
   </entry>
   <entry>
     <title>Desalination and Water Purification Research Program: Research Projects</title>

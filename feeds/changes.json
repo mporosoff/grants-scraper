@@ -1,8 +1,2141 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-19T10:49:08Z",
+  "generated_at": "2026-08-20T10:49:40Z",
   "retention_days": 90,
   "events": [
+    {
+      "id": "fee304e8c9a0622110ef",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "363660",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "363660",
+        "opportunity_number": "DFOP0019410",
+        "title": "U.S.-Africa Strategic Investment Program",
+        "agency": "Bureau of African Affairs",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-19",
+        "close_date": "2027-05-31",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Environmental science"
+        ],
+        "disciplines": [
+          "Business and Economic Development"
+        ],
+        "applicant_types": [
+          "Public and state institutions of higher education",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 5000000,
+        "award_ceiling": 50000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363660",
+        "funding_opportunity_url": "https://mygrants.servicenowservices.com/mygrants?id=mygrants_form&table=x_g_usd4_d_grant_funding_opportunity&sys_id=9b532e8f1b0e87502405ea85624bcbf0&view=Default",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "f36c1937606002c464fb",
+      "type": "deadline_changed",
+      "label": "Deadline changed",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "363613",
+      "detail": "2076-08-17 → 2076-08-19",
+      "record": {
+        "opportunity_id": "363613",
+        "opportunity_number": "26-514",
+        "title": "Engineering (ENG): Electrical, Communications, and Computing Systems (ECCS)",
+        "agency": "U.S. National Science Foundation",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-17",
+        "close_date": "2076-08-19",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Energy",
+          "Quantum science",
+          "Data science",
+          "Materials science",
+          "Manufacturing"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/363613",
+        "funding_opportunity_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf26514",
+        "primary_document_url": null
+      },
+      "old_deadline": "2076-08-17",
+      "new_deadline": "2076-08-19"
+    },
+    {
+      "id": "f065b3b1681ce1d54681",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "363654",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "363654",
+        "opportunity_number": "O-OVC-2026-172692",
+        "title": "OVC FY 2026 Housing Assistance for Victims of Human Trafficking",
+        "agency": "Office for Victims of Crime",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-19",
+        "close_date": "2026-09-28",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Transportation"
+        ],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": 1200000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363654",
+        "funding_opportunity_url": "https://ovc.ojp.gov/funding/current-funding-opportunities",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "eb53d0e3a7c19f6544d3",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "363656",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "363656",
+        "opportunity_number": "O-OVC-2026-172693",
+        "title": "OVC FY 2026 Integrated Services for Minor Victims of Human Trafficking",
+        "agency": "Office for Victims of Crime",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-19",
+        "close_date": "2026-09-28",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": 950000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363656",
+        "funding_opportunity_url": "https://ovc.ojp.gov/funding/current-funding-opportunities",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "e91c072ff023f7d2d5ea",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "360611",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "360611",
+        "opportunity_number": "PAR-27-054",
+        "title": "Limited Competition: Centers of Biomedical Research Excellence: Development Phase (COBRE-D) (P30 - Clinical Trial Not Allowed)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-19",
+        "close_date": "2029-05-26",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "Public and state institutions of higher education",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/360611",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "e8f18b04e72f1f8a16eb",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "363380",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363380",
+        "opportunity_number": "DFOP0019468",
+        "title": "Global Cybercrime and Cryptocurrency Assessment and Intelligence Gathering",
+        "agency": "Bureau of International Narcotics-Law Enforcement",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-29",
+        "close_date": "2026-08-31",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 200000,
+        "award_ceiling": 2196890,
+        "detail_page": "https://www.grants.gov/search-results-detail/363380",
+        "funding_opportunity_url": "https://mygrants.servicenowservices.com/mygrants?id=mygrants_form&table=x_g_usd4_d_grant_funding_opportunity&sys_id=7d26deee1b920f10baa70fe4604bcbdb&view=Default",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354245"
+      }
+    },
+    {
+      "id": "db634830b727dc8a2932",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "363661",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "363661",
+        "opportunity_number": "O-OVW-2026-172703",
+        "title": "OVW Fiscal Year 2026 Violence Against Women Act Measuring Effectiveness Initiative - Request for Required Documents",
+        "agency": "Office on Violence Against Women",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-19",
+        "close_date": "2026-08-20",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "Public and state institutions of higher education",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 3600000,
+        "award_ceiling": 3600000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363661",
+        "funding_opportunity_url": "https://www.justice.gov/ovw",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "d5fe53d139fb4ff44a47",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "363663",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "363663",
+        "opportunity_number": "USDA-NIFA-ES-011939",
+        "title": "Food and Agriculture Defense Initiative Extension Disaster Education Network",
+        "agency": "National Institute of Food and Agriculture",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-19",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Agriculture and food",
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 382400,
+        "award_ceiling": 382400,
+        "detail_page": "https://www.grants.gov/search-results-detail/363663",
+        "funding_opportunity_url": "https://www.nifa.usda.gov/grants/funding-opportunities/food-agriculture-defense-initiative-extension-disaster-education-0",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354716"
+      }
+    },
+    {
+      "id": "cc0f7c20288801f727ab",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "359663",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "359663",
+        "opportunity_number": "FOR-AI-27-001",
+        "title": "Martin Delaney Collaboratories for HIV Cure Research",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-04-21",
+        "close_date": "2026-08-19",
+        "last_updated": "2025-06-10",
+        "version": "Forecast 1",
+        "topic_areas": [
+          "Infectious disease",
+          "Public health"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/359663",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "ca6cff44c4568da76825",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "360205",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "360205",
+        "opportunity_number": "USDA-NIFA-AFRI-011134",
+        "title": "Agriculture and Food Research Initiative Competitive Grants Program Foundational and Applied Science Program",
+        "agency": "National Institute of Food and Agriculture",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2025-08-01",
+        "close_date": "2026-12-31",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Agriculture and food",
+          "Education and workforce",
+          "Environmental science",
+          "Artificial intelligence and machine learning",
+          "Data science",
+          "Biology and biotechnology",
+          "Energy",
+          "Cybersecurity",
+          "Water"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 10000,
+        "award_ceiling": 10000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/360205",
+        "funding_opportunity_url": "https://www.nifa.usda.gov/grants/funding-opportunities/agriculture-food-research-initiative-foundational-applied-science",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/349216"
+      }
+    },
+    {
+      "id": "c0cf3884249020ec4563",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "362544",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "362544",
+        "opportunity_number": "PA-FPT-26-001",
+        "title": "National Training Center for Family Planning",
+        "agency": "Office of the Assistant Secretary for Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-02",
+        "close_date": "2026-08-19",
+        "last_updated": "2026-08-05",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": 3000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/362544",
+        "funding_opportunity_url": "https://opa.hhs.gov/grant-programs/funding-opportunities",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "bdbae1d8db65d1a1fe5f",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "360332",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "360332",
+        "opportunity_number": "CDC-RFA-JG-26-0043",
+        "title": "Expanding global health security through local partnerships in Nigeria",
+        "agency": "Centers for Disease Control-GHC",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-03",
+        "close_date": "2026-10-02",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce",
+          "Public health",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/360332",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354704"
+      }
+    },
+    {
+      "id": "b8cc9ae69b240387368b",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "360334",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "360334",
+        "opportunity_number": "CDC-RFA-JG-26-0048",
+        "title": "Expanding Global Health Security through local partnerships in Senegal",
+        "agency": "Centers for Disease Control-GHC",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-03",
+        "close_date": "2026-10-02",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce",
+          "Infectious disease",
+          "Public health",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/360334",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354709"
+      }
+    },
+    {
+      "id": "b6fb5ac57dd617da1ea5",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "360869",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "360869",
+        "opportunity_number": "PAR-26-056",
+        "title": "Centers for AIDS Research (CFAR)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-05-21",
+        "close_date": "2026-08-19",
+        "last_updated": "2025-11-18",
+        "version": "Forecast 1",
+        "topic_areas": [
+          "Biology and biotechnology",
+          "Infectious disease",
+          "Public health"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/360869",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "b6d2c9d9cab79e451850",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "363665",
+      "detail": "Deadline 2026-08-31",
+      "record": {
+        "opportunity_id": "363665",
+        "opportunity_number": "OFOP0003636",
+        "title": "Mi Tierra, Mi Triunfo: Colombians Thriving After Their Return",
+        "agency": "U.S. Mission to Colombia",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-19",
+        "close_date": "2026-08-31",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 40000,
+        "award_ceiling": 50000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363665",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354718"
+      },
+      "deadline": "2026-08-31"
+    },
+    {
+      "id": "a23e8ca2f35c87f5a2f0",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "nyserda:RFP6197",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "nyserda:RFP6197",
+        "opportunity_number": "RFP 6197",
+        "title": "Independent Internal Audit Services",
+        "agency": "NYSERDA",
+        "source": "NYSERDA",
+        "source_type": "State",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-08-19",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [
+          "Cybersecurity"
+        ],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001AbghyAAB",
+        "funding_opportunity_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001AbghyAAB",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "965cdbe0e1a5e9d2fef9",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "360336",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "360336",
+        "opportunity_number": "CDC-RFA-JG-26-0051",
+        "title": "Strengthening global health security in India to contain public health threats and accelerate outbreak response",
+        "agency": "Centers for Disease Control-GHC",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-03",
+        "close_date": "2026-10-02",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce",
+          "Infectious disease",
+          "Public health",
+          "Transportation",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/360336",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354712"
+      }
+    },
+    {
+      "id": "93c3ab0d2be1c6699bbe",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "363662",
+      "detail": "Deadline 2026-09-18",
+      "record": {
+        "opportunity_id": "363662",
+        "opportunity_number": "EP-U3R-26-002",
+        "title": "Trauma Care Readiness and Coordination Cooperative Agreement",
+        "agency": "Assistant Secretary for Preparedness and Response",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-19",
+        "close_date": "2026-09-18",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Separations and membranes",
+          "Materials science",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "Federally recognized Native American tribal governments"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 300000,
+        "award_ceiling": 500000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363662",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354711"
+      },
+      "deadline": "2026-09-18"
+    },
+    {
+      "id": "92c7fc1a0ad8a363291d",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "356127",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "356127",
+        "opportunity_number": "NOAA-NESDISPO-STAR-2024-27967",
+        "title": "FY 2024 - 2026 - Broad Agency Announcement (BAA) Announcement Type: Initial",
+        "agency": "DOC NOAA - ERA Production",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2024-08-19",
+        "close_date": "2026-09-30",
+        "last_updated": "2024-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Community development",
+          "Education and workforce",
+          "Environmental science",
+          "Climate change",
+          "Data science",
+          "Space and aeronautics"
+        ],
+        "disciplines": [
+          "Community and Social Sciences",
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement",
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/356127",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "8e09fa8c96b8dcdb7ae0",
+      "type": "deadline_changed",
+      "label": "Deadline changed",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "363616",
+      "detail": "2076-08-17 → 2076-08-19",
+      "record": {
+        "opportunity_id": "363616",
+        "opportunity_number": "26-518",
+        "title": "Engineering (ENG): Chemical, Bioengineering, Energy, and Transport Systems (CBET)",
+        "agency": "U.S. National Science Foundation",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-17",
+        "close_date": "2076-08-19",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 3",
+        "topic_areas": [
+          "Biology and biotechnology",
+          "Energy"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 500000,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/363616",
+        "funding_opportunity_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf26518",
+        "primary_document_url": null
+      },
+      "old_deadline": "2076-08-17",
+      "new_deadline": "2076-08-19"
+    },
+    {
+      "id": "8a8bf6fa16f1a0f8b02f",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "363662",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "363662",
+        "opportunity_number": "EP-U3R-26-002",
+        "title": "Trauma Care Readiness and Coordination Cooperative Agreement",
+        "agency": "Assistant Secretary for Preparedness and Response",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-19",
+        "close_date": "2026-09-18",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Separations and membranes",
+          "Materials science",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "Federally recognized Native American tribal governments"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 300000,
+        "award_ceiling": 500000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363662",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354711"
+      }
+    },
+    {
+      "id": "8a2b3c7cc0dbeb19aaa1",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "363655",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "363655",
+        "opportunity_number": "O-OVC-2026-172699",
+        "title": "OVC FY 2026 Enhanced Collaborative Model (ECM) Task Force to Combat Human Trafficking",
+        "agency": "Office for Victims of Crime",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-19",
+        "close_date": "2026-10-14",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": 1000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363655",
+        "funding_opportunity_url": "https://ovc.ojp.gov/funding/current-funding-opportunities",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "87f80c1662527039e6d2",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "363666",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "363666",
+        "opportunity_number": "OFOP0003648",
+        "title": "Sin Rutas, Sin Recursos: Hitting Criminal Networks Where It Hurts",
+        "agency": "U.S. Mission to Colombia",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-19",
+        "close_date": "2026-08-31",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Environmental science",
+          "Transportation"
+        ],
+        "disciplines": [],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 40000,
+        "award_ceiling": 50000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363666",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354726"
+      }
+    },
+    {
+      "id": "86bc942175e23bd29bee",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "360455",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "360455",
+        "opportunity_number": "CDC-RFA-JG-26-0047",
+        "title": "Protecting and Improving Global Health Security by Engaging Local Partners: Strengthening and Sustaining Public Health Systems in Ghana",
+        "agency": "Centers for Disease Control-GHC",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-03",
+        "close_date": "2026-10-02",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce",
+          "Infectious disease",
+          "Public health",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/360455",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354708"
+      }
+    },
+    {
+      "id": "823bd88ee575ce31e03d",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "363633",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363633",
+        "opportunity_number": "DFOP0018819",
+        "title": "Egypt Annual Program Statement",
+        "agency": "Bureau of Near Eastern Affairs",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-17",
+        "close_date": "2026-08-31",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 3",
+        "topic_areas": [
+          "Education and workforce",
+          "Energy",
+          "Manufacturing",
+          "Transportation",
+          "Materials science",
+          "Data science",
+          "Artificial intelligence and machine learning",
+          "Cybersecurity",
+          "Water"
+        ],
+        "disciplines": [],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": 25000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363633",
+        "funding_opportunity_url": "https://mygrants.servicenowservices.com/mygrants?id=mygrants_form&table=x_g_usd4_d_grant_funding_opportunity&sys_id=8b7e22e7876d8350203441d6cebb35ff&view=Default",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354647"
+      }
+    },
+    {
+      "id": "7038c28d411c5b8e1a74",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "363666",
+      "detail": "Deadline 2026-08-31",
+      "record": {
+        "opportunity_id": "363666",
+        "opportunity_number": "OFOP0003648",
+        "title": "Sin Rutas, Sin Recursos: Hitting Criminal Networks Where It Hurts",
+        "agency": "U.S. Mission to Colombia",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-19",
+        "close_date": "2026-08-31",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Environmental science",
+          "Transportation"
+        ],
+        "disciplines": [],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 40000,
+        "award_ceiling": 50000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363666",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354726"
+      },
+      "deadline": "2026-08-31"
+    },
+    {
+      "id": "6e1d7c5cca742704ccc0",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "360338",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "360338",
+        "opportunity_number": "CDC-RFA-JG-26-0053",
+        "title": "Expanding global health security through local partnerships in Indonesia",
+        "agency": "Centers for Disease Control-GHC",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-03",
+        "close_date": "2026-10-02",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce",
+          "Public health",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/360338",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354714"
+      }
+    },
+    {
+      "id": "69f35003be63a452525e",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "363489",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363489",
+        "opportunity_number": "HR001126S0016",
+        "title": "Precision Inertial Navigation & Positioning On an Integrated Tesseract (PINPOINT)",
+        "agency": "DARPA - Defense Sciences Office",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-06",
+        "close_date": "2026-09-25",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 2",
+        "topic_areas": [],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement",
+          "Other",
+          "Procurement Contract"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/363489",
+        "funding_opportunity_url": "https://sam.gov/opp/966ffe20bcc3435cb3d0027c1ac08416/view",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "5ccc45ead445e9f201e6",
+      "type": "deadline_changed",
+      "label": "Deadline changed",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "360883",
+      "detail": "2026-10-09 → 2029-05-30",
+      "record": {
+        "opportunity_id": "360883",
+        "opportunity_number": "PAR-27-056",
+        "title": "Limited Competition: Institutional Development Award (IDeA) for Clinical & Translational Research (CTR) (P30 - CT Optional)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-19",
+        "close_date": "2029-05-30",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/360883",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "old_deadline": "2026-10-09",
+      "new_deadline": "2029-05-30"
+    },
+    {
+      "id": "57e51d2c3dec7f15412c",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "vpr-email:infoready-2028013",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "vpr-email:infoready-2028013",
+        "opportunity_number": null,
+        "title": "W. M. KECK Foundation Research Program",
+        "agency": "VPR funding digest (limited submissions & foundations)",
+        "source": "VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-12-04",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "http://rochester.infoready4.com/CompetitionSpace/",
+        "funding_opportunity_url": "http://rochester.infoready4.com/CompetitionSpace/",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "52a114cbdef01db2ab24",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "363665",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "363665",
+        "opportunity_number": "OFOP0003636",
+        "title": "Mi Tierra, Mi Triunfo: Colombians Thriving After Their Return",
+        "agency": "U.S. Mission to Colombia",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-19",
+        "close_date": "2026-08-31",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 40000,
+        "award_ceiling": 50000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363665",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354718"
+      }
+    },
+    {
+      "id": "51d7eabc47150339d859",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "363613",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363613",
+        "opportunity_number": "26-514",
+        "title": "Engineering (ENG): Electrical, Communications, and Computing Systems (ECCS)",
+        "agency": "U.S. National Science Foundation",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-17",
+        "close_date": "2076-08-19",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Energy",
+          "Quantum science",
+          "Data science",
+          "Materials science",
+          "Manufacturing"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/363613",
+        "funding_opportunity_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf26514",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "4e34c678b3b7477a36cd",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "348985",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "348985",
+        "opportunity_number": "23-601",
+        "title": "Research Experiences for Undergraduates",
+        "agency": "U.S. National Science Foundation",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2023-06-29",
+        "close_date": "2026-08-19",
+        "last_updated": "2025-08-28",
+        "version": "Synopsis 5",
+        "topic_areas": [
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 5000,
+        "award_ceiling": 500000,
+        "detail_page": "https://www.grants.gov/search-results-detail/348985",
+        "funding_opportunity_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf23601",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "4d43a6fffb8358953974",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "360337",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "360337",
+        "opportunity_number": "CDC-RFA-JG-26-0052",
+        "title": "Expanding global health security though local partnerships in Tanzania",
+        "agency": "Centers for Disease Control-GHC",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-03",
+        "close_date": "2026-10-02",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/360337",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354713"
+      }
+    },
+    {
+      "id": "4d1a1c2ed866978bf749",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "360324",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "360324",
+        "opportunity_number": "CDC-RFA-JG-26-0042",
+        "title": "Improving global health security in Côte d'Ivoire to stop the spread of infectious disease",
+        "agency": "Centers for Disease Control-GHC",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-03",
+        "close_date": "2026-10-02",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Infectious disease",
+          "Public health",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/360324",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354703"
+      }
+    },
+    {
+      "id": "4a862af8560486a3a4cb",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "360333",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "360333",
+        "opportunity_number": "CDC-RFA-JG-26-0046",
+        "title": "Expanding global health security through local partnerships in Ethiopia",
+        "agency": "Centers for Disease Control-GHC",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-03",
+        "close_date": "2026-10-02",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce",
+          "Public health",
+          "Separations and membranes",
+          "Materials science",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/360333",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354707"
+      }
+    },
+    {
+      "id": "3daa1aeb59caafe11d45",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "363616",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363616",
+        "opportunity_number": "26-518",
+        "title": "Engineering (ENG): Chemical, Bioengineering, Energy, and Transport Systems (CBET)",
+        "agency": "U.S. National Science Foundation",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-17",
+        "close_date": "2076-08-19",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 3",
+        "topic_areas": [
+          "Biology and biotechnology",
+          "Energy"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 500000,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/363616",
+        "funding_opportunity_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf26518",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "3a91cbb1b74a9d2044f1",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "363657",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "363657",
+        "opportunity_number": "EPA-OW-OWM-26-03",
+        "title": "Innovative Water Infrastructure Workforce Development Grant",
+        "agency": "Environmental Protection Agency",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-19",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce",
+          "Environmental science",
+          "Public health",
+          "Water"
+        ],
+        "disciplines": [
+          "Education"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": 7800000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363657",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354700"
+      }
+    },
+    {
+      "id": "35aec84c49a52285f15c",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "363514",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363514",
+        "opportunity_number": "030ADV26R0050",
+        "title": "Lewis-Houghton Civics and Democracy Initiative: New Awards for 2027-2029",
+        "agency": "Library of Congress",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-07",
+        "close_date": "2026-09-18",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 7",
+        "topic_areas": [
+          "Arts and culture",
+          "Education and workforce",
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ],
+        "disciplines": [
+          "Education"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": 100000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363514",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354731"
+      }
+    },
+    {
+      "id": "2cde94c68932cb835277",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "363661",
+      "detail": "Deadline 2026-08-20",
+      "record": {
+        "opportunity_id": "363661",
+        "opportunity_number": "O-OVW-2026-172703",
+        "title": "OVW Fiscal Year 2026 Violence Against Women Act Measuring Effectiveness Initiative - Request for Required Documents",
+        "agency": "Office on Violence Against Women",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-19",
+        "close_date": "2026-08-20",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "Public and state institutions of higher education",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 3600000,
+        "award_ceiling": 3600000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363661",
+        "funding_opportunity_url": "https://www.justice.gov/ovw",
+        "primary_document_url": null
+      },
+      "deadline": "2026-08-20"
+    },
+    {
+      "id": "27ea3f65d4f8247b321d",
+      "type": "deadline_changed",
+      "label": "Deadline changed",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "360611",
+      "detail": "2026-09-28 → 2029-05-26",
+      "record": {
+        "opportunity_id": "360611",
+        "opportunity_number": "PAR-27-054",
+        "title": "Limited Competition: Centers of Biomedical Research Excellence: Development Phase (COBRE-D) (P30 - Clinical Trial Not Allowed)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-19",
+        "close_date": "2029-05-26",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "Public and state institutions of higher education",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/360611",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "old_deadline": "2026-09-28",
+      "new_deadline": "2029-05-26"
+    },
+    {
+      "id": "2423fe0f910982b5ff3f",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "363216",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363216",
+        "opportunity_number": "USDA-FNA-SNAP-2026-EVS",
+        "title": "FY 2026 SNAP Earnings Verification Support Grant",
+        "agency": "Food and Nutrition Service",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-16",
+        "close_date": "2026-08-19",
+        "last_updated": "2026-07-16",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Agriculture and food"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "State governments"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 1,
+        "award_ceiling": 4300000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363216",
+        "funding_opportunity_url": "https://www.fna.usda.gov/grants",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353918"
+      }
+    },
+    {
+      "id": "1fdd544b3467576ef4a8",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "360883",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "360883",
+        "opportunity_number": "PAR-27-056",
+        "title": "Limited Competition: Institutional Development Award (IDeA) for Clinical & Translational Research (CTR) (P30 - CT Optional)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-19",
+        "close_date": "2029-05-30",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/360883",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "1deb8437763b32e7943f",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "359860",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "359860",
+        "opportunity_number": "FOR-AI-27-017",
+        "title": "Multidisciplinary Research to Accelerate Hepatitis B Cure in Persons Living with HIV and HBV (MRA-HBV)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-05-21",
+        "close_date": "2026-08-19",
+        "last_updated": "2025-06-27",
+        "version": "Forecast 1",
+        "topic_areas": [
+          "Infectious disease",
+          "Public health"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/359860",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "11aa0c3c967e838e2728",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "362072",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "362072",
+        "opportunity_number": "HHS-2026-ACF-ACYF-CY-0160",
+        "title": "National Communication System for Runaway and Homeless Youth Program",
+        "agency": "Administration for Children & Families - ACYF/FYSB",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-21",
+        "close_date": "2026-08-19",
+        "last_updated": "2026-07-21",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 1000000,
+        "award_ceiling": 1800000,
+        "detail_page": "https://www.grants.gov/search-results-detail/362072",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354045"
+      }
+    },
+    {
+      "id": "0f5019bec69d4da3b7e6",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "363554",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363554",
+        "opportunity_number": "DFOP0019410",
+        "title": "U.S.-Africa Strategic Investment Program",
+        "agency": "Bureau of African Affairs",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-12",
+        "close_date": "2027-05-27",
+        "last_updated": "2026-08-12",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Environmental science",
+          "Artificial intelligence and machine learning",
+          "Data science",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Business and Economic Development"
+        ],
+        "applicant_types": [
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 5000000,
+        "award_ceiling": 50000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363554",
+        "funding_opportunity_url": "https://mygrants.servicenowservices.com/mygrants?id=mygrants_form&table=x_g_usd4_d_grant_funding_opportunity&sys_id=9b532e8f1b0e87502405ea85624bcbf0&view=Default",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354546"
+      }
+    },
+    {
+      "id": "0c65b8eb095da7af1329",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "363664",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "363664",
+        "opportunity_number": "O-OVW-2026-172651",
+        "title": "OVW Fiscal Year 2026 Electronic Service Protection Order Court Pilot Program",
+        "agency": "Office on Violence Against Women",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-19",
+        "close_date": "2026-10-06",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 1500000,
+        "award_ceiling": 1500000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363664",
+        "funding_opportunity_url": "https://www.justice.gov/ovw/media/1458651/dl?inline",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "039fafa69fd36fcf6778",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-20T10:47:27.209316Z",
+      "opportunity_id": "360335",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "360335",
+        "opportunity_number": "CDC-RFA-JG-26-0050",
+        "title": "Strengthening Global Health Security through local partnerships in Sierra Leone",
+        "agency": "Centers for Disease Control-GHC",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-03",
+        "close_date": "2026-10-02",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce",
+          "Infectious disease",
+          "Public health",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/360335",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354710"
+      }
+    },
     {
       "id": "f9c80f1b97b5a8519154",
       "type": "closing_soon",
