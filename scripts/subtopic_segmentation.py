@@ -454,10 +454,23 @@ def _loose_matcher(cleaned: str):
 
 @dataclass(frozen=True)
 class _Flat:
-    """Container text concatenated once, with an offset index back to pages."""
+    """Container text concatenated once, with an offset index back to pages.
+
+    `misses` records every heading this document could not locate, so a
+    location failure is reportable rather than silent (**BUG-10**). It is a
+    mutable field on a frozen dataclass on purpose: one list per
+    `segment_document` call, created by `_flatten`, shared by every layer that
+    call runs, and never global.
+    """
 
     text: str
     spans: tuple          # (page, anchor, start, end) per container
+    misses: list = field(default_factory=list)
+
+    def record_miss(self, site, page, title):
+        """A heading that could not be located. See BUG-10 in `_locate_nodes`."""
+        self.misses.append({"site": site, "page": page,
+                            "title": (title or "")[:120]})
 
     def locate(self, page, needle, search_from=0):
         """Offset of `needle`, preferring its own page, else anywhere after."""
@@ -758,9 +771,21 @@ def _candidates_from(hits, flat, pages, anchors, start_at=0):
     for hit in hits:
         page = pages[hit.index] if hit.index < len(pages) else None
         offset = flat.locate(page, hit.text, cursor)
-        if offset is None and page is not None:
-            offset = flat.page_start_offset(page)
+        # BUG-10, second call site -- and this is the one that actually fires.
+        # The register names `_locate_nodes`; §6.5 says the fallback "fires zero
+        # times across the D5 corpus". Measured at P7.2 over 152 cached
+        # documents: `_locate_nodes` never falls back, and THIS line fell back
+        # six times, kept four guesses, and every one of the four was wrong --
+        # the heading did not begin the page. None reached an accepted set on
+        # that corpus, which was ranking luck rather than a guarantee.
+        #
+        # An ordinal hit that cannot be located is dropped, which is exactly
+        # what the `offset < cursor` case below has always done, and §6.4
+        # rule 2's ordinal test then sees the gap. §18.3's asymmetry says which
+        # way to err: a missing subtopic costs one search, a misaligned one puts
+        # the wrong subject on a card with a page anchor.
         if offset is None or offset < cursor:
+            flat.record_miss("pattern_hit", page, hit.text)
             continue
         cursor = offset + 1
         candidates.append(
@@ -965,6 +990,15 @@ def _structural_from_outline(entries, flat, toc_pages):
         if not _structural_titles_ok([node.title for node in nodes]):
             continue
 
+        # BUG-10 and §6.4a rule 2a together. Every node of the chosen sibling
+        # set must be locatable; one that is not makes the set INCOMPLETE, and
+        # rule 2a says an incomplete set is rejected rather than trimmed. The
+        # previous code filtered `offset is None` out of the list, which
+        # emitted a trimmed set as though it were the whole one -- and before
+        # that the offset would have been guessed instead of missing at all.
+        located = list(_locate_nodes(nodes, flat))
+        if any(offset is None for _node, offset in located):
+            continue
         candidates = [
             _Candidate(
                 code=node.title,
@@ -975,8 +1009,7 @@ def _structural_from_outline(entries, flat, toc_pages):
                 page=node.page,
                 anchor=None,
             )
-            for index, (node, offset) in enumerate(_locate_nodes(nodes, flat))
-            if offset is not None
+            for index, (node, offset) in enumerate(located)
         ]
         if len(candidates) < STRUCTURAL_MIN_SIBLINGS:
             continue
@@ -990,13 +1023,35 @@ def _structural_from_outline(entries, flat, toc_pages):
 
 
 def _locate_nodes(nodes, flat):
-    """Locate each bookmark title in the body text, in document order."""
+    """Locate each bookmark title in the body text, in document order.
+
+    **BUG-10, closed in P7.2. There is no substitute offset any more.**
+
+    This function used to fall back to `flat.page_start_offset(node.page)` when
+    a title could not be located, and that guess was indistinguishable from a
+    real location downstream: `candidate.offset` sets the span's `char_start`,
+    the *previous* sibling's `char_end`, the page range, the excerpt the
+    summary is cut from, the text Cov4 classifies -- and, where a code sits
+    alone on its line, the title itself through `_title_on_next_line`, and
+    therefore `title_fingerprint` and identity. Cov5 measured what that costs:
+    six spans in `360678` opened at the top of a page, inside the previous
+    section's prose, and both consumers read the wrong subject (§6.5).
+
+    Cov5 fixed the *cause* of those six failures (the loose title matcher) and
+    left the fallback in place, recording it as the residual risk. P7.2 removes
+    it, because a guessed offset is not evidence and nothing downstream can
+    tell that it was guessed.
+
+    Yielding ``None`` is what the caller acts on, and for a structural set the
+    answer is fixed by **§6.4a rule 2a** -- *"a set that is missing siblings is
+    rejected rather than trimmed"* -- so `_structural_from_outline` refuses the
+    whole depth. That is an existing rule, not a new policy.
+    """
     cursor = 0
     for node in sorted(nodes, key=lambda item: item.page):
         offset = flat.locate(node.page, node.title, cursor)
-        if offset is None:
-            offset = flat.page_start_offset(node.page)
         if offset is None or offset < cursor:
+            flat.record_miss("outline_node", node.page, node.title)
             yield node, None
             continue
         cursor = offset + 1
@@ -1297,6 +1352,12 @@ def segment_document(
                 "candidate_count": len(candidates),
                 "toc_pages": tuple(sorted(toc_pages)),
                 "extractor_version": extractor_version(),
+                # BUG-10. A heading that could not be located no longer gets a
+                # guessed offset, so the only thing left to do about it is to
+                # say it happened. Zero on every accepted document measured so
+                # far; a non-zero count on an accepted set means candidates were
+                # dropped, which is a reason to read the document.
+                "unlocated_headings": len(flat.misses),
             },
         )
 

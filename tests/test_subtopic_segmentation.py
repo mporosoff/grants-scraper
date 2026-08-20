@@ -1063,5 +1063,199 @@ class BudgetAndEdgeCaseTests(unittest.TestCase):
         self.assertEqual(result.confidence, "low")
 
 
+class LocationFailureTests(unittest.TestCase):
+    """BUG-10. A heading that cannot be located never gets a substitute offset.
+
+    Cov5 found the damage and fixed its *cause*; the `page_start_offset`
+    fallback survived and §6.5 recorded it as the residual. These tests exercise
+    the fallback path **directly** rather than relying on a corpus that happens
+    not to reach it -- which was the whole problem, and which was not even true:
+    measured over 152 cached documents at P7.2, `_locate_nodes` never fell back
+    and `_candidates_from` fell back six times, kept four guesses, and every one
+    of the four was wrong.
+
+    Each test asserts that the *old* fallback was reachable -- that
+    `page_start_offset` would have returned a number -- so none of them can pass
+    vacuously.
+    """
+
+    PROSE = (
+        "This element supports fundamental studies of catalytic conversion and "
+        "separation chemistry, including operando characterization and reactor "
+        "design at laboratory scale, with awards to single investigators and "
+        "small teams working across the relevant disciplines throughout. "
+    )
+
+    def _flat(self, headings):
+        """One container per heading, each holding that heading and its prose."""
+        containers = [
+            {"page": index + 1, "section": None, "anchor": None,
+             "text": f"{title}\n{self.PROSE}{title.split()[0]} recurs here."}
+            for index, title in enumerate(headings)
+        ]
+        return seg._flatten(containers), containers
+
+    # --- the ordinal call site, which is the one that actually fires ---------
+
+    def test_an_unlocatable_pattern_hit_is_dropped_and_never_guessed(self):
+        headings = ["Topic Area 1 Electrocatalysis",
+                    "Topic Area 2 Photon Materials",
+                    "Topic Area 3 Plasma Frontiers"]
+        flat, _containers = self._flat(headings)
+        # A fourth hit whose text is nowhere in the document -- the shape of a
+        # prose line the extractor joined differently from the container copy.
+        absent = "Topic Area 4 Ghost Programme That Was Never Extracted"
+        hits = [
+            patterns.match_family(patterns.FAMILIES_BY_ID["topic_area"], text, index)
+            for index, text in enumerate(headings + [absent])
+        ]
+        self.assertTrue(all(hits))
+        pages = [1, 2, 3, 3]
+
+        # The removed fallback WAS reachable: page 3 has a start offset.
+        self.assertIsNotNone(flat.page_start_offset(3))
+
+        candidates = seg._candidates_from(hits, flat, pages, [None] * 4)
+        self.assertEqual(len(candidates), 3)
+        self.assertEqual([item.ordinal for item in candidates], [1, 2, 3])
+        # Every surviving candidate sits exactly on its own heading.
+        for candidate, title in zip(candidates, headings):
+            self.assertTrue(
+                flat.text[candidate.offset:].startswith(title),
+                f"{candidate.title!r} was not located on its own heading",
+            )
+        self.assertEqual(
+            [miss["site"] for miss in flat.misses], ["pattern_hit"]
+        )
+        self.assertIn("Ghost Programme", flat.misses[0]["title"])
+
+    def test_a_locatable_hit_after_an_unlocatable_one_still_lands(self):
+        """The drop must not consume the cursor or the siblings behind it."""
+        headings = ["Topic Area 1 Electrocatalysis",
+                    "Topic Area 2 Photon Materials",
+                    "Topic Area 3 Plasma Frontiers"]
+        flat, _containers = self._flat(headings)
+        absent = "Topic Area 9 Ghost Programme Never Extracted Anywhere"
+        texts = [headings[0], absent, headings[1], headings[2]]
+        hits = [
+            patterns.match_family(patterns.FAMILIES_BY_ID["topic_area"], text, index)
+            for index, text in enumerate(texts)
+        ]
+        candidates = seg._candidates_from(hits, flat, [1, 1, 2, 3], [None] * 4)
+        self.assertEqual([item.ordinal for item in candidates], [1, 2, 3])
+        self.assertEqual(len(flat.misses), 1)
+
+    # --- the structural call site, and §6.4a rule 2a -------------------------
+
+    def _structural_fixture(self, ghost=None):
+        """Four sibling programme titles, one per page, plus an intro page.
+
+        Returns (entries, flat, containers). With `ghost` set, that title is
+        given to the bookmark and NOT written into the body, so `locate` fails
+        for exactly one node of an otherwise admissible set.
+        """
+        titles = [
+            "Catalysis Science Research",
+            "Photon Materials Chemistry",
+            "Plasma Physics Frontiers",
+            # NOT "Quantum Information Systems": `is_administrative` matches
+            # the substring "format" inside "information", and one flagged
+            # title in a four-item set already trips §6.3a's 0.25 set-level
+            # administrative veto. A pre-existing quirk of the substring test,
+            # noted rather than fixed here -- it is a false-NEGATIVE surface
+            # and P7.2 is a punctuation-and-alignment repair.
+            "Quantum Sensing Devices",
+        ]
+        body_titles = list(titles)
+        if ghost is not None:
+            body_titles[ghost] = "Some Other Heading Entirely Different"
+        containers = [
+            {"page": index + 1, "section": None, "anchor": None,
+             "text": f"{title}\n{self.PROSE}{title.split()[0]} recurs here."}
+            for index, title in enumerate(body_titles)
+        ]
+        flat = seg._flatten(containers)
+        entries = [
+            seg.OutlineNode(level=1, title=title, page=index + 1,
+                            chain=("Program Description",))
+            for index, title in enumerate(titles)
+        ]
+        return entries, flat, containers
+
+    def test_a_fully_locatable_structural_set_is_admitted(self):
+        """The control. Without it the rejection test below proves nothing."""
+        entries, flat, _containers = self._structural_fixture()
+        outcome = seg._structural_from_outline(entries, flat, set())
+        self.assertIsNotNone(outcome, "the control set must be admitted")
+        method, confidence, family, candidates = outcome
+        self.assertEqual(method, "outline_structural")
+        self.assertEqual(family, patterns.STRUCTURAL_FAMILY)
+        self.assertEqual(len(candidates), 4)
+        self.assertEqual(flat.misses, [])
+
+    def test_one_unlocatable_sibling_rejects_the_whole_structural_set(self):
+        """§6.4a rule 2a: a set missing a sibling is rejected, never trimmed.
+
+        Before P7.2 this set came back with the missing node's offset GUESSED at
+        the top of its page -- or, where the guess fell behind the cursor,
+        trimmed to three siblings and emitted as though it were the whole list.
+        """
+        entries, flat, _containers = self._structural_fixture(ghost=2)
+        # The removed fallback was reachable for that node.
+        self.assertIsNotNone(flat.page_start_offset(3))
+        self.assertIsNone(seg._structural_from_outline(entries, flat, set()))
+        self.assertEqual([miss["site"] for miss in flat.misses], ["outline_node"])
+        self.assertIn("Plasma Physics Frontiers", flat.misses[0]["title"])
+
+    def test_locate_nodes_yields_none_rather_than_a_page_start(self):
+        """The narrowest statement of the fix, on the function BUG-10 names."""
+        entries, flat, _containers = self._structural_fixture(ghost=0)
+        located = list(seg._locate_nodes(entries, flat))
+        offsets = [offset for _node, offset in located]
+        self.assertIsNone(offsets[0])
+        self.assertNotIn(flat.page_start_offset(1), offsets)
+        self.assertTrue(all(offset is not None for offset in offsets[1:]))
+
+    # --- the drop is reportable, which is the other half of "not silent" ----
+
+    def test_the_diagnostics_report_unlocated_headings(self):
+        containers = [
+            {"page": n, "section": None, "anchor": None,
+             "text": f"Topic Area {n} Area {n}\n{BODY}"}
+            for n in range(1, 4)
+        ]
+        result = seg.segment_document({}, b"", containers, PDF)
+        self.assertEqual(len(result.subtopics), 3)
+        self.assertEqual(result.diagnostics["unlocated_headings"], 0)
+
+    def test_a_span_is_never_built_on_a_page_start_guess(self):
+        """End to end: no accepted span may open at a page boundary it guessed.
+
+        The assertion is on the text at `char_start`, because that is what both
+        consumers read -- a guessed span opens inside the previous section's
+        prose, which is exactly the Cov5 damage (§6.5).
+        """
+        headings = ["Topic Area 1 Electrocatalysis",
+                    "Topic Area 2 Photon Materials",
+                    "Topic Area 3 Plasma Frontiers"]
+        pages = topic_pages(headings)
+        result = seg.segment_document(
+            {}, build_pdf(pages), containers_from(pages), PDF
+        )
+        self.assertEqual(len(result.subtopics), 3)
+        self.assertEqual(result.diagnostics["unlocated_headings"], 0)
+        flat = seg._flatten(containers_from(pages))
+        for span, title in zip(result.subtopics, headings):
+            # The span opens ON its heading. A guessed offset opens at the top
+            # of the page instead, which on a real notice is the previous
+            # section's prose -- the Cov5 damage (§6.5). Coinciding with a page
+            # start is not itself the defect: in this fixture, as in most
+            # notices, the heading legitimately begins its page.
+            self.assertTrue(flat.text[span.char_start:].startswith(title))
+            self.assertIn(span.title.split()[0].casefold(),
+                          span.summary.casefold())
+
+
+
 if __name__ == "__main__":
     unittest.main()
