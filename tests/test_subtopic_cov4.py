@@ -1161,6 +1161,27 @@ class ValidationHarnessTests(unittest.TestCase):
             self.assertEqual(row["cov4_ownership"], cov4.NOT_OWNED)
             self.assertFalse(row["published"])
 
+    def test_the_committed_dec_11_run_matches_every_human_label(self):
+        """The additive live arm keeps every subject and rejects every non-subject."""
+        path = EVALUATION / "cov4_dec11_validation_runs.jsonl"
+        rows = [json.loads(line) for line in
+                path.read_text(encoding="utf-8").splitlines() if line.strip()]
+        self.assertEqual(len(rows), 16)
+        self.assertEqual(sum(1 for row in rows if row["classifier_errors"]), 0)
+        self.assertEqual({row["cov4_ownership"] for row in rows}, {cov4.OWNED})
+        for row in rows:
+            expected = (cov4.ACCEPT if row["truth_fundable"] == "yes"
+                        else cov4.REJECT)
+            self.assertEqual(row["cov4_fundability"], expected,
+                             row["candidate_id"])
+            self.assertEqual(row["published"], expected == cov4.ACCEPT,
+                             row["candidate_id"])
+        rejected_classes = [row["dec11_class"] for row in rows
+                            if not row["published"]]
+        self.assertEqual(rejected_classes.count("mechanism"), 1)
+        self.assertEqual(rejected_classes.count("delivery_pathway"), 3)
+        self.assertEqual(rejected_classes.count("exclusions_contaminant"), 1)
+
 
 # --- 10. the flag-off path --------------------------------------------------
 

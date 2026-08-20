@@ -1835,10 +1835,10 @@ class Fm1LabelRunTests(unittest.TestCase):
 class Dec11CaseArtifactTests(unittest.TestCase):
     """The DEC-11 arm of Cov4's bounded regression, pinned but not run here.
 
-    Offline. Running it needs `ANTHROPIC_API_KEY`, which Claude Code strips from
-    tool subprocesses -- the same constraint §18.1 Cov4 and
-    `docs/FAMILY_TAXONOMY.md` §3 already record. These tests pin the cases and
-    their human labels so the run has something fixed to score against.
+    Offline. A live run loads `ANTHROPIC_API_KEY` from the Windows User
+    environment into the same invocation because tool subprocesses do not
+    inherit it automatically. These tests pin the cases and their human labels
+    so the run has something fixed to score against.
     """
 
     @classmethod

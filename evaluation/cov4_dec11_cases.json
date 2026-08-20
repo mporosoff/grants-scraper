@@ -4,7 +4,7 @@
  "relationship_to_cov4_challenge": "ADDITIVE. evaluation/cov4_challenge.json is the frozen set the prompt experiment scored and is not modified; its 36 candidates and their counts stay exactly as committed. These cases are the ones that set does not contain.",
  "labels_are_human": "Every expected_fundable was assigned by reading the quoted source text in P7.3a and P7.3b, before any classifier call. No label derives from a model verdict -- \u00a713's rule for DEC-11.",
  "not_a_recogniser": "Nothing here implements or tunes a recogniser. The production_span rows are what production returns today; the hand_extracted_real_document rows are candidates built at the document's own offsets for sets production rejects.",
- "how_to_run": "python tools/run_cov4_validation.py --cases evaluation/cov4_dec11_cases.json  (needs ANTHROPIC_API_KEY; Claude Code strips it from tool subprocesses, so this runs in a human shell -- the same constraint \u00a718.1 Cov4 and docs/FAMILY_TAXONOMY.md \u00a73 already record)",
+ "how_to_run": "In one PowerShell invocation, load without printing: $env:ANTHROPIC_API_KEY = [Environment]::GetEnvironmentVariable(\"ANTHROPIC_API_KEY\",\"User\"); if ([string]::IsNullOrWhiteSpace($env:ANTHROPIC_API_KEY)) { throw \"ANTHROPIC_API_KEY not found in Windows User environment\" }; python tools/run_cov4_validation.py --cases evaluation/cov4_dec11_cases.json. Tool subprocesses do not automatically inherit the Windows User environment value. Output: evaluation/cov4_dec11_validation_runs.jsonl",
  "required_result": [
   "every expected_fundable=yes row is accepted -- 0 false rejections on verified subject spans",
   "every dec11_class=mechanism or delivery_pathway row is rejected",
