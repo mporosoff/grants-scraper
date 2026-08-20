@@ -73,6 +73,18 @@ def source_result(record_id, document, response):
     return content, None
 
 
+def segmentation_summary(result):
+    return {
+        "method": result.method,
+        "family": result.family,
+        "confidence": result.confidence,
+        "reason": result.reason,
+        "layers_attempted": list(
+            result.diagnostics.get("layers_attempted", ())
+        ),
+    }
+
+
 def measure_document(record_id, frame, evidence, catalog, *, session=None):
     document = resolve_document(record_id, frame, evidence)
     parent = resolve_parent(record_id, frame, catalog)
@@ -133,13 +145,7 @@ def measure_document(record_id, frame, evidence, catalog, *, session=None):
         "status": "hash_verified_scanned",
         "document": document,
         "extraction": extraction,
-        "segmentation": {
-            "method": result.method,
-            "family": result.family,
-            "confidence": result.confidence,
-            "reason": result.reason,
-            "layers_attempted": list(result.layers_attempted),
-        },
+        "segmentation": segmentation_summary(result),
         "structural_titles": [record["title"] for record in built],
         "cov4_titles": [record["title"] for record in kept],
         "cov4_diagnostics": diagnostics,

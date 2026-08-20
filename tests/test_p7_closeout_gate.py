@@ -2,6 +2,9 @@ import json
 from pathlib import Path
 import unittest
 
+from scripts.subtopic_segmentation import SegmentationResult
+from tools.run_p7_closeout import segmentation_summary
+
 
 ROOT = Path(__file__).resolve().parents[1]
 FRAME = ROOT / "evaluation" / "fm2_gate_frame.json"
@@ -43,6 +46,15 @@ class P7CloseoutRunnerTests(unittest.TestCase):
         source = RUNNER.read_text(encoding="utf-8")
         self.assertIn('OUT = ROOT / "evaluation" / "p7_closeout.json"', source)
         self.assertNotIn('ROOT / "data" / "subtopic', source)
+
+    def test_empty_result_reads_layers_from_diagnostics(self):
+        result = SegmentationResult.empty(
+            "no_layer_accepted", layers_attempted=("toc", "numbered")
+        )
+        self.assertEqual(
+            segmentation_summary(result)["layers_attempted"],
+            ["toc", "numbered"],
+        )
 
 
 if __name__ == "__main__":
