@@ -2,7 +2,7 @@
 
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
-Status: in progress · Version 8.23 · Written 2026-08-15 · **Revised 2026-08-26 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
+Status: in progress · Version 8.24 · Written 2026-08-15 · **Revised 2026-08-26 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
 
 > **Start at §18, and read §18.0 first.** §18 defines the minimum path — the **eleven** work packages **P1 … P11** — and lists what is deferred and what it costs. **§18.0 is the canonical namespace**: package IDs, the `BUG-*` / `MEAS-*` / `DEC-*` / `DEBT-*` prefixes, the migration table for every legacy label (`Package A–G`, `D½`, `D⅝`, `D¾`, `S1–S3`, `Package N`, bare `D#`, `M#`), the current ordered path, and a diagram. **P6 is closed and P8 is complete; P5 remains open. Cov4 is now fully specified and implementation is the next step; Cov6 and Cov7 are untouched** (`docs/MEAS3_RUN_DESIGN.md` §5d–5e). §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
 >
@@ -11,6 +11,42 @@ Status: in progress · Version 8.23 · Written 2026-08-15 · **Revised 2026-08-2
 > **8.3 changes one thing structurally: the unit of judgment moves from the sibling *set* to the individual *span* (§6.4b), because a set-level verdict lets two policy paragraphs delete 70 DOE programmes.** §11 is reopened for the precision half only, on a measured run; its recall argument is untouched.
 >
 > **8.4 closes the two blocking storage decisions.** `MAX_TERMS` stays at 400 and subtopics ship in a lazily-loaded `data/subtopics.js` sidecar — one question, not two, once you measure that 60.3% of a cache record is a term map the browser never reads as content. **Nothing now blocks committing a cache except running the backfill again.** Every rate quoted against `docs/CORPUS_CENSUS.md`'s 20 documents is still superseded by `docs/COVERAGE_SURVEY.md` (§1.1).
+>
+> **8.24 runs Cov7, and stratum D turns out not to be where the recall is.**
+> MEAS-2 delivered: **30 additional stratum-D reads — 27 genuine no-list, 2
+> misses, 1 unresolved.** The frame had to be **rebuilt from 815 live detail
+> fetches**, because `pick50.py` and `attach_meta.jsonl` were never committed and
+> the caches keep only `attachment_count` (**DEBT-11**); the reconstruction lands
+> within 4 records of the committed frame and reproduces the survey's D-html
+> count exactly at 363, which is what licenses pooling. Draw: seed `20260827`,
+> 2-per-agency cap, 107 already-named ids excluded, seats **D-other 28 / D-NIH
+> 2** — forced by the cap, since all 363 D-NIH records share one agency string.
+> **Stratum D moves from 1 hit in 12 reads to 3 in 42.** Weighted by sub-stratum
+> — D-NIH **0/24**, D-other **3/37** — D's catalog estimate moves from **point 40,
+> band 7–171** to **point 10, band 3–75**, and **D's share of the catalog-wide
+> band halves, 164 records of width to 80**. §1.1's point estimate moves 171 →
+> **165 records (11.6% → 11.2%)** and the band narrows to **59–459**. **E is now
+> the dominant source of width**: 660 records, 13 reads, one hit. **The two
+> misses are both residual generic forms** — `359782` DARPA TTO's four bulleted
+> focus areas (**F4 named/bulleted**, with the same document's evaluation
+> criteria printed as the identical bullets one section below, which is exactly
+> the decoy shape Cov4 already separates 3/3) and `363381` State J/TIP's
+> `PRIORITY AREA 1–4` (**a labelled ordinal no family covers**). **F5 tabular is
+> re-sized down**: the same single observation now sits in 42 D reads rather than
+> 12, so **~40 becomes ~12 (band 2–60)** — the read Fm5 was told to wait for.
+> **Every one of the 30 produced zero spans, so Cov4 was never invoked and Cov6's
+> predicate was never reached**: no child was lost, queued or exposed by either,
+> and equally this sample cannot exercise either. **6 of 30 are format-blind** —
+> `.docx`-only announcements that `extract_containers` refuses — all read
+> out-of-band, none carrying a list, which corroborates §18.2's measured zero and
+> raises its evidence from 4 records to 10. **Two false-positive surfaces
+> recorded**: CDC component funding, which the `component` family matches and
+> which the notice says every applicant must apply to, and EDA Investment
+> Priorities, which are evaluation factors. **DEBT-10, DEBT-11 and DEBT-12
+> opened; DEC-16 given its destination (P9.0) and left open.** §0.5
+> byte-identical, 616 tests green.
+> **Decision: COV7 CLOSED. Every P5 item is done; the package closeout and its
+> P7 recommendation are their own session.**
 >
 > **8.23 implements Cov6, and the "contradiction" turns out to be a correct
 > design with one stale word in front of it.** Read together, §5.1, §6.4b and
@@ -3351,7 +3387,7 @@ Legacy labels are translated once, in §18.0.3 — not repeated here.
 | **P2** | Segmentation engine | ✅ **complete** 2026-08-16 |
 | **P3** | Flag-off integration | ✅ **complete** 2026-08-16 |
 | **P4** | Tune and backfill | ⚠️ **complete 2026-08-16, gate not met** — correct-acceptance stopped at **42%** against the 50% threshold, deliberately: every remaining miss needs a new mechanism, and reaching 50% by loosening would trade the 0/8 false-positive count. **P4.4**'s backfill ran and its cache was deliberately not committed |
-| **P5** | Coverage hardening | 🔄 **in progress** — Cov0–Cov6 done. **Open: Cov7 only.** **Cov6 closed 2026-08-27**: §7.1's publication rule implemented verbatim as `publication_eligibility`, confidence/review state/eligibility separated, `_demote()` narrowed to the risk it was measured against. **No generic child auto-publishes, by design** (§5.1). **Cov4 closed 2026-08-26**: the two-axis gate is implemented at the production call site (`scripts/subtopic_cov4.py`, `subtopic_fields`), every gate clause is demonstrated, and **BUG-9 is closed with it**. Live validation on the 43 frozen candidates: 28 genuine children retained, **0 lost**, 11 contaminants rejected, **2 cross-opportunity fabrications prevented**, 19 children bypassed by provenance with **0 classifier calls**, §0.5 byte-identical |
+| **P5** | Coverage hardening | 🔄 **every item done 2026-08-27; package closeout pending.** Cov0–Cov7 complete. **Cov7 closed 2026-08-27** (MEAS-2 delivered): 30 more stratum-D reads, 2 misses, D re-estimated from point 40 / band 7–171 to **point 10 / band 3–75**, F5 re-sized ~40 → ~12. **The package-level closeout — the P5 gate's own clauses and the P7 recommendation — is a separate session and was not done here.** **Cov6 closed 2026-08-27**: §7.1's publication rule implemented verbatim as `publication_eligibility`, confidence/review state/eligibility separated, `_demote()` narrowed to the risk it was measured against. **No generic child auto-publishes, by design** (§5.1). **Cov4 closed 2026-08-26**: the two-axis gate is implemented at the production call site (`scripts/subtopic_cov4.py`, `subtopic_fields`), every gate clause is demonstrated, and **BUG-9 is closed with it**. Live validation on the 43 frozen candidates: 28 genuine children retained, **0 lost**, 11 contaminants rejected, **2 cross-opportunity fabrications prevented**, 19 children bypassed by provenance with **0 classifier calls**, §0.5 byte-identical |
 | **P6** | Structured-source coverage | ✅ **complete 2026-08-22, all three items measured.** P6.1 `native` NASA (10 recoveries, category (e)); P6.2 DOE measured negative (category-(a) population empty); P6.3 `referenced` Army (1 parent, 14 external-only children, category (a)). **Conclusion: delegation predicts value, not authority** (§18.1) |
 | **P6.1** | NASA ROSES structured-source proof | ✅ **complete** 2026-08-18. Gate closed clause by clause against repository evidence: six clauses outright, one with a forward obligation (the Cov4 bypass), one on evidence (§0.5). **Previously-category-(a) records reached: 0** — P6.1 reached the **(e)** population |
 | **P6.2** | DOE Office of Science structured-source test | ✅ **complete 2026-08-21 — a measured negative, and no source was built.** It was the first real test of whether structured/referenced ingestion reaches category (a), and **the population was empty**: 2 Office of Science parents, **both already resolved** by generic parsing, **0** previously category (a), **0** net-new children, **3** non-fundable organizational labels rejected. Evidence: `docs/DOE_SOURCE_INSPECTION.md` |
@@ -3387,7 +3423,7 @@ guarantees they never publish. It is listed once, under P5.
 | ID | Measurement | Why it matters |
 |---|---|---|
 | **MEAS-1** | Cov5 leaves the 757 no-span documents unchanged | Asserted in a session report, never run |
-| **MEAS-2** | **30 more stratum-D records** | Closes over half of §1.1's 54–538 interval — the cheapest measurement in the project. **Delivered by P5's Cov7**; this is the same work, not a second copy |
+| **MEAS-2** | ~~30 more stratum-D records~~ | ✅ **DONE 2026-08-27 by P5's Cov7** → `evaluation/cov7_stratum_d.json`. 30 reads, **2 misses, 1 unresolved, 27 genuine no-list**. D: **1/12 → 3/42**; sub-stratified point **40 → 10**, band **7–171 → 3–75**. Catalog-wide **171 → 165 records**, band **54–538 → 59–459**. **The interval did not close as much as hoped, and the reason is now known**: D was wide because it is large and unread, not because it is rich. **E is the remaining source of width** — 660 records, 13 reads |
 | **MEAS-3** | ~~Classifier run-to-run variance~~ | ✅ **DONE 2026-08-24 → `docs/MEAS3_RUN_DESIGN.md` §4a.** 105 candidates × R=5 = **525 calls**, 0 errors: **99 stable accept · 5 stable reject · 1 unstable · 0 error**; per-span instability **0.95%**, pooled per-call disagreement **1/525 = 0.190%** [0.034%, 1.071%]. **The classifier is repeatable, so R=1 is licensed and no ensemble is justified.** But **Cov4 stays blocked on task definition and validation coverage** — *not* variance, and *not* precision: 4 of the 5 stable rejects are genuine programmes, a **3.8% false-negative (recall) failure against a gate requiring zero**; **precision was unmeasured**, the population holding no contaminants. Repetition cannot repair a *stable* error. Also measured: `thinking_tokens` was **0 on all 525 calls**, so "adaptive" did not engage. Superseded original entry: The existing 1-of-62 observation has a **Wilson 95% CI of [0.29%, 8.59%]**, which straddles the 0.9% signal — that is the arithmetic form of "one pass cannot demonstrate the gate". The design is two arms (§11's 114 spans for comparability, plus the F1/F4/aggregating-page shapes Cov4 will actually face) at **R=5**, with a decision table written before the run. **Three blockers, each isolated: no credential (Blocker A), no committed candidate population (Blocker B), `anthropic` unauthorized (DEC-15)** |
 | **MEAS-4** | Read `344592` for MURI topics | Grants.gov finds MURI in its full text; part of §18.2's SAM.gov cost may already be reachable |
 | **MEAS-5** | **Discipline-stratified query and relevance set** | **18 of 37 queries (49%) are chemistry; all 3 profile probes are.** A ranking regression outside chemistry is invisible to §8.5. **Extraction-side figures are corpus measurements and are unaffected** (§8.5, §17.9) |
@@ -3416,7 +3452,7 @@ it as **P8**, sequenced after P6.1 and before P6.2. **DEC-0** (`MAX_TERMS` stays
 
 | ID | Decision | Note |
 |---|---|---|
-| **DEC-16** | **Do generic (`inferred`) subtopics ever reach a PI without a human approving them?** Surfaced by Cov6, and it is a **product** question rather than an engineering one, so it is recorded rather than decided here. Today the answer is **no**: §5.1 caps `inferred` at `medium`, §7.1 requires a hash-matched approval below `high`, and the measured consequence is that **0 of Cov4's 28 approved children auto-publish**. That is deliberate and §18.3's asymmetry supports it — but it means the feature's generic half ships **only** with a reviewer in the loop, and the reviewer surface is P9/P10. The alternatives are to accept that permanently, to admit Cov4-approved children at `medium` once the classifier has a second labeller and a repeat measurement, or to ship generic children behind an explicit "unreviewed" UI affordance. **Do not decide this from a model verdict** (§17.8) | open — **not a Cov6 blocker**; Cov6 implements today's answer |
+| **DEC-16** | **Do generic (`inferred`) subtopics ever reach a PI without a human approving them?** Surfaced by Cov6, and it is a **product** question rather than an engineering one, so it is recorded rather than decided here. Today the answer is **no**: §5.1 caps `inferred` at `medium`, §7.1 requires a hash-matched approval below `high`, and the measured consequence is that **0 of Cov4's 28 approved children auto-publish**. That is deliberate and §18.3's asymmetry supports it — but it means the feature's generic half ships **only** with a reviewer in the loop, and the reviewer surface is P9/P10. The alternatives are to accept that permanently, to admit Cov4-approved children at `medium` once the classifier has a second labeller and a repeat measurement, or to ship generic children behind an explicit "unreviewed" UI affordance. **Do not decide this from a model verdict** (§17.8) | **OPEN.** **Destination: P9.0**, before the production storage and approval workflow is finalized. Not a Cov6 blocker and not a Cov7 blocker; Cov6 implements today's answer and Cov7 did not touch it |
 | **DEC-15** | ~~Authorize `anthropic` as a project dependency?~~ **RESOLVED 2026-08-24: no dependency added.** The classifier is called as **one POST to `/v1/messages` through the already-pinned `requests`**, so §0.4 rule 7 stands **unamended rather than excepted**. Reasoning, and it is engineering rather than rule-avoidance: the repo already owns an HTTP client with retry and delay (`scripts/sources/http.py`), so the SDK would install a *second* retry implementation beside it; `anthropic` pulls httpx, pydantic, anyio, distro, jiter and sniffio into a runtime whose whole dependency list is five lines; and direct HTTP returns `usage.output_tokens_details.thinking_tokens`, which makes §11's adaptive-thinking requirement **verifiable per call** rather than assumed. **Revisit if** Cov4's production path needs the Message Batches API for §11's batched pricing | ✅ resolved |
 | **DEC-14** | **Should ROSES appendix divisions A–F map to `disciplines` facet values?** The two emitted records carry `disciplines: []` because Grants.gov derives that facet from category codes ROSES does not publish; `topic_areas` *is* derived (*Space and aeronautics*), so the records remain searchable and topically filterable. Mapping division → discipline would be a **new inference**, which is a decision rather than a fix (§17.8) | **Not a P8 blocker.** P8's gate covers identity, precedence, currentness, dedup and loud failure; facet richness is not one of its clauses |
 
@@ -3429,6 +3465,9 @@ it as **P8**, sequenced after P6.1 and before P6.2. **DEC-0** (`MAX_TERMS` stays
 | **DEBT-4** | 213 stale evidence entries whose records have left the catalog | Cache residue; inflates any denominator taken from the cache |
 | **DEBT-5** | 13 orphaned evidence entries | Cov1 may already have closed this by measurement; verify before writing anything |
 | **DEBT-6** | 25 recorded fetch failures across five hosts | Two hosts account for 18, and neither is a segmentation problem |
+| **DEBT-10** | **`attachment_count` in the enrichment cache can outlive the API's own attachment list.** Measured by Cov7 across all 815 records carrying attachments: **4** report a non-zero count while `synopsisAttachmentFolders` now returns empty — `356127`, `363252`, `363554` and **`363607`**, the last of which the survey recorded as *enumerating* (6 Addenda, one subdivision per file). Not a parser defect: the live response changed and nothing compares the two. **Natural home is a §7.4 canary.** It is also the whole of the 4-record gap between Cov7's rebuilt strata and the committed ones | Cache/source staleness; **a known enumerating record has become unreachable**, so it is not cosmetic |
+| **DEBT-11** | **The stratified sampling instrument is not committed.** `pick50.py`, `attach_meta.jsonl`, `build_prompts.py`, `family_verdict.py` and `yields2.py` are all one-shot probes, and the committed caches keep only `attachment_count` — no per-attachment metadata. Cov7 therefore could not reproduce the prior frame and had to rebuild it from **815 live detail fetches**, and could exclude only the **107** record ids the documents happen to name, not the taxonomy's full 50-record draw | Every future stratified read pays the same cost and inherits the same imperfect exclusion set. Committing `attach_meta.jsonl` alone would fix both |
+| **DEBT-12** | **A no-primary record's own announcement is labelled `source_kind: secondary_attachment`.** Carried forward from Cov6, which found it and deliberately did not fix it. Harmless to Cov4 today — both attachment kinds are owned-by-binding in `ATTACHMENT_KINDS`, so ownership is unaffected — and Cov7 confirmed it blocks no measurement. **Classification deferred to the P5 closeout obligation audit**: `BUG-*`, `DEBT-*`, or explicit harmless/WONTFIX | Verified on `363526`, whose winning document is its own `NOFOAFRLAFOSR20260004 DEPSCoR-RC.pdf` |
 | **DEBT-8** | `structural_siblings` is blind to **55% of the corpus's PDFs** (71 of 129 carry no bookmarks) | A measured limitation of the mechanism, not a defect in it (§6.3a) |
 | **DEBT-9** | ~~No candidate span population is committed anywhere.~~ ✅ **CLOSED 2026-08-24.** `evaluation/meas3_population.json` is a frozen **post-Cov5** population — **105 candidates** from four accepting records — built by `tools/build_meas3_population.py` from committed evidence (pinned URL **and** `sha256`, verified on fetch) through the unmodified production path, and pinned by 15 tests in `tests/test_meas3_population.py`: canonical ordering, byte-identical round trip, semantic input carried inline so classification needs no network, arms separately identifiable. **This does not recover §11's 114 spans** — those are gone and Cov5 changed extraction — it stops the loss recurring | ✅ closed |
 
@@ -3575,7 +3614,7 @@ P7, because that is where it falls in the ordered path (§18.0.4).
 - [ ] **Fm2. F1 — bare numbered** — 8 of 90 · ~31, the most stable uncovered row. **Blocked by §18.3a's four exit criteria — read them first.** Needs grouped restarting counters (`330175`) and title extraction that survives a trailing em-dash clause (`355150`)
 - [ ] **Fm3. Repair `dod_topic`'s ordinal group** — widen `(\d{1,2})` to letters so `Topic A1`–`A7` matches (`356612`). Third appearance of the same oversight; `topic_area` got it in P4.3
 - [ ] **Fm4. Repair `thrust`'s granularity** — it matches the container `Thrust Area 1`, not the seven topics under it. Scope to the items or retire it under §17.8; it has **no record validating it at the right granularity**
-- [ ] **Fm5. F5 — table path in `extract_containers`** — 1 of 90 · ~40 **on n=1**. `pdfplumber` already authorized (§6.1). Fund on the qualitative argument — `363530` prints the same 12 topics as `363526` — not on the ~40. **Read Cov7 first**
+- [ ] **Fm5. F5 — table path in `extract_containers`** — **re-sized by Cov7 2026-08-27: ~40 → ~12 records (Wilson 0.4–12.3%, band 2–60)**, because the same single observation now sits in **42** stratum-D reads rather than 12 and Cov7 found no further F5. `pdfplumber` already authorized (§6.1). **Cov7 has now been read, and it strengthens rather than changes the advice**: fund this on the qualitative argument — `363530` prints the same 12 topics as `363526` — and never on a yield number
 - [ ] **Fm6. F3 — coded named list** — 4 of 90 · ~6. `PA 1:`, `53-24-01 -`, `A.1.a.`. Discovered-prefix recogniser, false-positive profile unmeasured. Smallest yield; do last or not at all
 - [ ] **Fm7. F6 — record the verdict, write no pattern** — 4 of 90 · ~4. Three of four are two-item lists `structural_siblings` already sees and rule 1 / rule 2d reject on cardinality. Reachable only via §6.4b span-level admission, so it arrives with Cov4 or not at all
 - [ ] **GATE:** every new or repaired family names its validating document **and quotes the matched text** (§17.8) · acceptance rate reported **per form** · fabricated publishable records still **0** by reading every title · false positives reported on the **33 category-(a) documents** in `docs/FAMILY_TAXONOMY.md` §1 · §0.5 byte-identical with the flag off
@@ -4154,7 +4193,7 @@ Bare `D#` is retired for anything that is not a P4 item. Four prefixes, and the
 | **BUG-#** | A defect in code or output — an item stays in this namespace after it is fixed, so its history stays citable | BUG-0, BUG-2, **BUG-7 (fixed)**, **BUG-9 (fixed)**, BUG-10, BUG-11 |
 | **MEAS-#** | A measurement still required before something can be concluded | MEAS-1 … MEAS-8 |
 | **DEC-#** | An architectural or product decision, open or taken | DEC-0 … DEC-16 |
-| **DEBT-#** | Carried work that is neither a defect nor a measurement — stale artifacts, cache hygiene, a deliberate non-build | DEBT-1, DEBT-3, DEBT-4, DEBT-5, DEBT-6, DEBT-8, DEBT-9 |
+| **DEBT-#** | Carried work that is neither a defect nor a measurement — stale artifacts, cache hygiene, a deliberate non-build | DEBT-1, DEBT-3, DEBT-4, DEBT-5, DEBT-6, DEBT-8, DEBT-9, DEBT-10, DEBT-11, DEBT-12 |
 
 **Categories were assigned by reading each item, not by its old prefix.** Three
 legacy `D#` debt entries are **not** defects and are labelled `DEBT-`: DEBT-1 is a
@@ -4226,7 +4265,7 @@ notes elsewhere.
 | **DEC-13** | NASA ROSES standalone ingestion → build it as P8 | §13 item 13, "decision 13" | **taken 2026-08-18, implemented 2026-08-20** |
 | **DEC-14** | Whether ROSES appendix divisions A–F should map to `disciplines` facet values | *(new in 8.14; found closing P8)* | open — **not a P8 blocker** |
 | **DEC-15** | Authorize `anthropic` as a dependency | *(new in 8.18)* | **resolved 2026-08-24 — no dependency added** |
-| **DEC-16** | Do generic subtopics ever publish without a human approval? | *(new in 8.23; found closing Cov6)* | open — **not a Cov6 blocker** |
+| **DEC-16** | Do generic subtopics ever publish without a human approval? | *(new in 8.23; found closing Cov6)* | **open — destination P9.0** |
 
 *Not renumbered, deliberately:* **§18.3a**'s bare-numbered-family prohibition is a
 gate with four exit criteria rather than a §13-numbered decision, and it keeps its
@@ -4249,8 +4288,9 @@ P4.3, P4.6 …).
 | 5 | **P6.3** — Army TDAC referenced source | ✅ **complete 2026-08-22**, scoped exactly as MEAS-7 justified. **1 parent, 14 external-only children**, provenance `referenced`, 0 generic overlap. **P6 is now closed on evidence** (§18.1 P6.3) |
 | 6 | **Cov4** — the two-axis gate | ✅ **complete 2026-08-26.** Deterministic ownership guard plus the frozen O1 prompt at `claude-sonnet-5`, R=1, wired into `subtopic_fields`. Live validation: 28 genuine children retained, **0 lost**, 11 contaminants and 2 cross-opportunity fabrications rejected, 19 children bypassed by provenance with **0 classifier calls**. **BUG-9 closed**; **P6's forward obligation discharged at the call site** |
 | 7 | **Cov6** — publication semantics and `_demote()` | ✅ **complete 2026-08-27.** §7.1's rule implemented as the one authority; the four concepts separated; a tier-only fail-closed hole closed; `_demote()` narrowed to its measured risk. **No generic child auto-publishes** — the review queue, not the catalog, is where Cov4's 28 land |
-| 8 | **Recompute residual coverage** before any **P7** work | P7's yields were measured on a corpus where no structured source had been tried. **This, not Cov4, is what now blocks P7** |
-| 9 | **P9 → P10 → P11** | only when the coverage evidence says the feature is worth shipping; each behind its own existing gate |
+| 8 | **Cov7** — 30 more stratum-D reads | ✅ **complete 2026-08-27**, MEAS-2 delivered. 2 misses in 30 (**F4 bulleted** at DARPA, **`Priority Area N`** at State), D re-estimated to point 10 / band 3–75, F5 re-sized ~40 → ~12. **P5's items are all done; its closeout is next** |
+| 9 | **Recompute residual coverage** before any **P7** work | P7's yields were measured on a corpus where no structured source had been tried. **This, not Cov4, is what now blocks P7** |
+| 10 | **P9 → P10 → P11** | only when the coverage evidence says the feature is worth shipping; each behind its own existing gate |
 
 **P8 is a branch, not a stage of the subtopic feature.** P6.1 *discovered* it — 53
 ROSES program elements with no catalog record — but P8 adds **opportunities**,
@@ -4393,7 +4433,7 @@ Every item states its expected yield from the survey's stratified sample — *sa
 | **Cov5. Fix span-summary alignment** — **done 2026-08-17** | Not a coverage item — a correctness one | **Diagnosed, measured and fixed; §6.5 carries the full record and corrects the mechanism this plan previously named.** One cause for all six cases: `_Flat._find`'s loose title matcher tolerated whitespace *between* tokens and not *inside* one, so a `pdfminer`-inserted space beside a hyphen or em-dash (`X -Ray` for `X-Ray`) made the bookmark title unlocatable, and `_locate_nodes` silently substituted the top of the page. **Prevalence 6 of 223 spans = 2.7% before, 0 of 224 after**, measured by re-running segmentation on all 13 accepted documents rather than by a text heuristic. **Clustered by document, not by method** — all six in `360678` (8.8% of its spans), zero everywhere else. A sixth case was found that nobody had listed. `360678` gains a span (68 → 69): one candidate had been dropped outright, not merely misaligned. **Residual, not fixed:** the `page_start_offset` fallback is still silent, and fires zero times today only because nothing currently fails to locate. Original note follows.<br><br>**Measured 2026-08-17, revised upward the same day (§6.5).** **Five** spans in `360678` — **7% of its 70**, in the document carrying `(q) Catalysis Science` — carry excerpt text describing neither their title nor their subject; `(i) X-Ray Scattering` is summarized by an application-deadline sentence. Span boundaries start at a bookmark offset, so a span can open mid-sentence inside the previous section and the 240-character head summarizes the wrong thing. **Degrades two consumers:** the Cov4 classifier judged those three by the text it was given, and the same string is what a PI reads on the card. **Prevalence unmeasured** — five confirmed by reading, all in one document, all surfaced as a by-product of classifier rejections rather than by a search; nothing has examined the other 222 spans. A start-of-sentence heuristic was tried and discarded for contradicting the observed error pattern. Measure it before trusting the summary for either purpose |
 
 | **Cov6. Fix `_demote()`'s blanket cap on no-primary records** — **done 2026-08-27; see the closure record below** | ⚠ **This cell's original yield claim was wrong and is kept for the record.** It reads *"Unblocks publication for the 685 records — 46.4% of the catalog"*. It unblocks publication for **none of them**: §7.1 requires an approval for `low` *and* `medium` alike, so the cap it lifts changes no publication decision. What it buys is a truthful confidence value and quality-based ranking | **`_demote()` decides "secondary attachment" by asking whether a result came from the `primary_content` argument.** Cov1's path passes **no primary at all** when `source_for_record()` returns `None`, so a list read from the record's own `Full Announcement` PDF is treated as a secondary and capped at `low`, which never publishes. **Verified by running production this session:** `363526` — the corpus's *only* `high`-confidence acceptance — returns `8 subtopics, method='toc', confidence='high'` from `segment_document` directly and `confidence='low'` through `segment_without_primary`. The difference is `_demote()`, not the document. Cov1's own note reads *"All ten newly reached records return `no_layer_accepted`"*, which attributes the zero to the records and hides this cap; it bites the moment a reached record enumerates, and `363526` is already that case. **The test is whether the winning document is the record's own announcement, not whether an argument was populated.** Until this is fixed, every new family lands recall in the cache that cannot reach a PI |
-| **Cov7. Read 30 more stratum-D records** — **added 8.5** | Firms up **over half** the §1.1 interval | The cheapest outstanding measurement in the project. Stratum D — any non-PDF attachment — holds **483 records, has 12 reads, contributes 40 of §1.1's 171-record point estimate on a single observation, and spans 7–171 on its own.** It also produced the corpus's only tabular list (F5), so its one hit is carrying both a population estimate and a form. Stratum E is larger but its ceiling is bounded by reachability — 313 of its records have no fetchable source of any kind — so **D is where the interval actually closes.** This supersedes the survey's "sample C and E" recommendation, whose C half the taxonomy sample discharged (C is now 18 of 27 read). Reuse `pick50.py`'s stratification with a fresh seed and the 90 read records excluded |
+| **Cov7. Read 30 more stratum-D records** — ✅ **done 2026-08-27; see the closure record below** | **Delivered: D's share of the band halved, 164 records of width → 80.** The *"over half"* claim holds for **D's own contribution**, not for the whole §1.1 interval, which narrows 484 → 400 records wide. **D is not where the recall is**: ~10 records of the enumerating population against 33% of the catalog's records | The cheapest outstanding measurement in the project. Stratum D — any non-PDF attachment — holds **483 records, has 12 reads, contributes 40 of §1.1's 171-record point estimate on a single observation, and spans 7–171 on its own.** It also produced the corpus's only tabular list (F5), so its one hit is carrying both a population estimate and a form. Stratum E is larger but its ceiling is bounded by reachability — 313 of its records have no fetchable source of any kind — so **D is where the interval actually closes.** This supersedes the survey's "sample C and E" recommendation, whose C half the taxonomy sample discharged (C is now 18 of 27 read). Reuse `pick50.py`'s stratification with a fresh seed and the 90 read records excluded |
 
 **Gate:** unreachable-record count re-derived and reported against the catalog, not the evidence cache · for each of Cov1–Cov3, records *reached* and records *yielding an accepted list* reported separately, because they are different numbers and conflating them is how the multi-attachment path was over-sold the first time · **fabricated publishable records still 0**, measured the way the D5 backfill generation measured it — by reading every title in the publishable set, not by sampling · **Cov6 verified by re-running `363526` end to end and observing `high`, not by reading the code** · §0.5 byte-identical with the flag off.
 
@@ -4802,6 +4842,174 @@ line and `git add` line, §0.4 rule 11), and the merge that *applies*
 `publication_eligibility` are P9/P10. Cov6's contract to them is exactly one
 function and the record fields it reads. **DEC-16** records the product question
 this surfaced.
+
+##### Cov7 — run and closed 2026-08-27
+
+> ### COV7 CLOSED · MEAS-2 DELIVERED
+>
+> **30 additional stratum-D reads. 27 genuine no-list, 2 misses, 1 unresolved.**
+> Stratum D moves from **1 hit in 12 reads** to **3 in 42**, and — weighted the
+> honest way, by sub-stratum — its catalog estimate moves from a point of **40
+> with a band of 7–171** to a point of **10 with a band of 3–75**. **D's share
+> of the catalog-wide band halves, from 164 records of width to 80.** Evidence:
+> `evaluation/cov7_stratum_d.json`, pinned by 17 tests.
+
+**The sampling frame had to be rebuilt, and that is worth stating first.**
+`pick50.py` and `attach_meta.jsonl` were never committed (**DEBT-11**), and the
+committed caches keep only `attachment_count` — no per-attachment metadata — so
+the A/B/C/D strata could not be reproduced from the repository. They were
+re-derived from **815 live Grants.gov detail fetches**, one per record carrying
+attachments. The reconstruction lands within 4 records of the committed frame
+(**A 214/215 · B 89/90 · C 26/27 · D 482/483**) and reproduces the survey's
+D-html count **exactly at 363**, which is what licenses pooling the samples. The
+4-record gap is **DEBT-10**.
+
+| Frame | |
+|---|---|
+| definition | stratum D = a record with at least one non-PDF attachment |
+| population | **482** — D-NIH (carries an `.html` attachment) **363**, D-other **119** |
+| prior reads | **12**, 1 hit (`docs/FAMILY_TAXONOMY.md` §4.3) |
+| excluded | 107 opportunity ids named in the committed census, survey, taxonomy, plan and inspection documents — 19 of them in D |
+| left the catalog | none of the excluded ids; the E/F split (347/313) is unchanged from the survey |
+| entered since | not separable — the frame is rebuilt from today's catalog, and the prior frame was never committed |
+| seed | **20260827**, 2-per-agency cap |
+| seats | **D-other 28 · D-NIH 2** |
+
+**The seat split is forced, not chosen.** All 363 D-NIH records carry the agency
+string *National Institutes of Health*, so the 2-per-agency cap the survey and
+the taxonomy both applied admits exactly two. A first draft of 20/10 was
+discarded **before any document was opened** for that mechanical reason. D-NIH
+already stands at 22 reads and 0 hits (2 survey + 20 Cov2), so two seats permit
+refutation rather than re-confirmation.
+
+**Every one of the 30 produced zero spans.** So the pipeline separation Cov7 was
+asked to preserve resolves trivially and completely:
+
+| Stage | Records |
+|---|---|
+| source available | 30 |
+| segmentation produced a candidate | **0** |
+| ownership evaluated | 0 |
+| Cov4 fundability evaluated | **0 — the classifier was never called** |
+| publication eligibility evaluated | 0 |
+
+**No child was lost, queued, rejected or exposed by Cov4 or Cov6 in this sample,
+because neither was reached.** Every failure is upstream of the gate. That is
+also a limitation and is recorded as one: **this sample cannot exercise Cov4 or
+Cov6**, so it is not evidence that they are well-behaved.
+
+**6 of 30 records are format-blind to production** — `363457`, `363545`,
+`363249`, `362754`, `361418`, `362715`, whose announcement is `.docx` and whose
+every document raises *"Unsupported official-document content type"* in
+`extract_containers`. All six were read out-of-band (`zipfile` plus a tag strip,
+the taxonomy's instrument) and **none carries a list**, so the blindness cost no
+recall here. It **corroborates §18.2's measured zero for Word parsing** and
+raises that item's evidence from 4 records to 10.
+
+**The two misses, with their forms named.**
+
+| Record | Agency | Structure | Form | Why production missed it |
+|---|---|---|---|---|
+| **`359782`** | DARPA TTO | *"soliciting … proposals in the following focus areas:"* → **Design/Build/Buy · Surge and Sustain · Long Range Effects · Disruptive Innovation** | **named/bulleted (F4)** | no ordinal, no outline, no family. `focus_area` requires `Focus Area <digit>` |
+| **`363381`** | State J/TIP | *"Priority Program Areas:"* → **PRIORITY AREA 1–4** | **labelled ordinal, no family** | no `FAMILIES` entry covers `Priority Area N`; not F1 (it is labelled) and not F2 (F2's labels are the six that exist) |
+
+**`359782` carries its own adjacent decoy in the identical form.** `SECTION II:
+EVALUATION CRITERIA` immediately below prints *Overall Scientific and Technical
+Merit* and *Potential Contribution and Relevance to the DARPA Mission* as the
+same bullets. That is exactly the F4 genuine-versus-decoy separation Cov4 was
+measured on (`362233`: **3/3 genuine kept, 3/3 decoys rejected**), on a different
+agency and a different document.
+
+**One record is unresolved and is not counted.** `358380` (WHS DoW Cyber Service
+Academy) states *"one of the following program tracks: 1. Two-Year Community
+College Program 2. DoW Partnership Transfer Credit Programs 3. Graduate
+Certificate Program"* — selectable, three-strong, and **degree-delivery pathways
+rather than research subdivisions**, which is **DEC-11**'s open class. Counted as
+a hit it would put Cov7 at 3/30 and D at 4/42 (9.5%, Wilson 3.8–22.1%, catalog
+18–107). Excluded, as here, D is 3/42.
+
+**Two shapes that look like lists and are not**, both worth recording because a
+recogniser would fire on them:
+
+- **CDC component funding** (`360335`, `360334`). `Component 1`–`4` have their
+  own ceilings and their own budgets, and the notice says *"You must apply for
+  all components"* and *"This does not change the requirement that applicants
+  apply for all components."* They are **funding tranches, not alternatives** —
+  and the `component` family in `FAMILIES` matches them. This is a live
+  false-positive surface for an existing family.
+- **EDA Investment Priorities** (`347414`). Seven named priorities, of which
+  *"each project must be consistent with #2"* and which *"are also evaluation
+  factors"*. Alignment criteria, not subdivisions.
+
+**The measurement.**
+
+| | read | hits | rate | 95% Wilson | catalog |
+|---|---|---|---|---|---|
+| D, prior (committed) | 12 | 1 | 8.3% | 1.5–35.4% | **7–171** (point 40) |
+| D, Cov7 only | 30 | 2 | 6.7% | 1.8–21.3% | 9–103 |
+| D, pooled | **42** | **3** | 7.1% | 2.5–19.0% | 12–92 (point 34) |
+| **D-NIH** (363) | 24 | 0 | 0.0% | 0.0–13.8% | **0–50** |
+| **D-other** (119) | 37 | 3 | 8.1% | 2.8–21.3% | **3–25** |
+| **D, sub-stratified** | | | | | **3–75, point 10** |
+
+**The sub-stratified row is the one to quote.** Cov7 deliberately over-sampled
+D-other (28 of 30 against 25% of the population), so the pooled 3/42 is not a
+simple random sample of D and would overstate it. Weighting each sub-stratum by
+its own population is what the survey's own extrapolation table already did.
+
+**Catalog-wide, with every other stratum unchanged:**
+
+| | point | band |
+|---|---|---|
+| before Cov7 | **171** records (11.6%) | 54–538 (3.7–36.5%) |
+| after Cov7 (pooled D) | **165** records (11.2%) | **59–459** (4.0–31.1%) |
+
+**§1.1's ~11–12% point estimate survives; the band narrows and its centre moves
+down slightly.** D's own contribution to the width falls from 164 records to
+80 — which is the *"firms up over half"* Cov7 promised, and it applies to **D's
+share**, not to the whole interval. **E is now the dominant source of width**:
+660 records, 13 reads, one hit.
+
+**F5 tabular is re-sized, and this is the handoff Fm5 asked for.** The committed
+~40 rested on **1 observation in 12 D reads**. Cov7 adds 30 D reads and **no
+further F5**, so the same single observation now sits in 42: **~12 records,
+Wilson 0.4–12.3%, catalog 2–60.** `docs/FAMILY_TAXONOMY.md` §5's advice stands
+and is strengthened — **do not fund Fm5 on a yield number**; its argument is
+qualitative (`363530` and `363526` are the same 12 AFOSR topics in two layouts).
+
+**The residual opportunity for P7, quantified. Cov7 supplies this; it does not
+make the call.**
+
+| Form | Records in Cov7 | Agencies | Children each | False-positive surface | Cov4 validated on it? | Worth P7? |
+|---|---|---|---|---|---|---|
+| **named/bulleted (F4)** | 1 (`359782`) | DARPA | 4 | **High** — the same document's evaluation criteria are the same bullets | **Yes — 3/3 genuine, 3/3 decoys** (`362233`) | The taxonomy already put F4 at ~73 records catalog-wide and it is the largest uncovered form. Cov7 adds a second agency and a second decoy pattern. **Evidence supports consideration** |
+| **labelled ordinal with no family** (`Priority Area N`) | 1 (`363381`) | State | 4 | **Low** — the label is explicit and rare | **Not directly.** Cov4 was measured on F1/F4 and production spans, not on this label | A one-family addition in the shape `FAMILIES` already uses. **Cheap; evidence is n=1** |
+| **tabular (F5)** | 0 | — | — | unmeasured | no | **Re-sized down to ~12.** Cov7 is the read Fm5 was told to wait for |
+
+**Stratum D is not where the remaining recall is.** That is Cov7's real finding
+and it inverts the reason D was chosen: D was picked because its *interval* was
+widest, and the interval was wide because the stratum is large and unread, not
+because it is rich. At a point estimate of ~10 records, **D holds roughly 6% of
+the catalog-wide enumerating population while holding 33% of its records.**
+
+**Gate for Cov7, clause by clause.**
+
+| Clause | Result |
+|---|---|
+| 30 additional deterministic stratum-D reads completed | ✅ seed 20260827, frame and exclusions recorded in the artifact |
+| every record has an evidence-backed category | ✅ 30 of 30, each with quoted document evidence |
+| extraction coverage distinguished from review/publication state | ✅ all six stages recorded per record; 0 reached Cov4, so no miss is a gating artefact |
+| residual misses classified by cause | ✅ both are residual generic document forms, named F4 and labelled-ordinal |
+| combined coverage estimates recomputed | ✅ pooled and sub-stratified, with Wilson intervals and explicit denominators |
+| residual generic-form opportunity quantified for P5 closeout / P7 | ✅ table above; **no P7 decision taken** |
+| no obligation left untracked | ✅ **DEBT-10, DEBT-11, DEBT-12** opened; DEC-11, DEC-16, §7.5 and §18.2 linked |
+
+**Explicitly not done:** no recogniser was implemented, no family was added or
+changed, P7 was not started, MEAS-8 was not run, P9/P10 were not started, no
+reviewer surface was built, DEC-16 was not decided, Cov4 and Cov6 were not
+changed, P6/P8 semantics were not touched, and §0.5 was not re-frozen. **P5 is
+not closed here** — every Cov item is now done, and the package-level closeout
+and its P7 recommendation are their own session.
 
 #### P6 — Structured-source coverage *(legacy Package D⅝, "Structured Umbrellas")*
 
@@ -5331,7 +5539,7 @@ Each line states what is lost. None of this is abandoned; all of it is a later d
 
 | Downgraded | Measurement | Standing |
 |---|---|---|
-| **Word (`.docx`) parsing** | **0 lists of 40 records.** 177 `.docx` across 88 records; 32 records carry Word and no selectable PDF. Four sampled records publish their announcement *only* as `.docx` — USGS `363537`/`363538`, Embassy Tirana `363247`, Embassy Yerevan `363541` — and **all four are single-project cooperative agreements that enumerate nothing** | Cheap (`zipfile` + a tag strip, no new dependency) and worth doing **for evidence coverage**, not for subtopics. Do not count it toward this feature's yield |
+| **Word (`.docx`) parsing** | **Corroborated by Cov7 2026-08-27: 6 further records whose announcement is `.docx`-only, read out-of-band, 0 lists — so the evidence is now 0 lists across 10 such records.** Cov7 also measured the cost precisely: **6 of its 30 stratum-D records are entirely unreadable by production**, every document raising *"Unsupported official-document content type"*. It cost no recall in that sample. Original entry follows.<br><br>**0 lists of 40 records.** 177 `.docx` across 88 records; 32 records carry Word and no selectable PDF. Four sampled records publish their announcement *only* as `.docx` — USGS `363537`/`363538`, Embassy Tirana `363247`, Embassy Yerevan `363541` — and **all four are single-project cooperative agreements that enumerate nothing** | Cheap (`zipfile` + a tag strip, no new dependency) and worth doing **for evidence coverage**, not for subtopics. Do not count it toward this feature's yield |
 | **Spreadsheet parsing** | **0 lists of 40 records.** 84 `.xlsx` across 64 records; every spreadsheet in the sample was a budget or application template | **The Genesis Mission's 98 focus areas are an outlier, not a class.** That case is real and large — one worksheet, 98 fundable units on a live notice — and it is now the *only* known instance in 1,475 records. Treat it as a per-document case, not a format capability |
 | **Per-document targeted extractors** (a reader written for one notice) | Implied zero: the only case that would justify one is Genesis | Deferred on the same evidence. One extractor per document does not generalize, and the survey found no second document that would reuse it. If Genesis is worth its own reader, write it as a per-document case with that framing stated, and never as "spreadsheet support" |
 
