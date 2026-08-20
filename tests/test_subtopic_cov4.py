@@ -28,6 +28,7 @@ import re
 import pathlib
 import sys
 import unittest
+from unittest import mock
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
@@ -1106,6 +1107,32 @@ class ValidationHarnessTests(unittest.TestCase):
         self.assertNotIn("sk-ant", code)
         self.assertNotIn("ANTHROPIC_API_KEY", code)
         self.assertNotIn("os.environ", code)
+
+    def test_the_additive_case_artifact_is_loaded_without_relabelling_it(self):
+        from tools import run_cov4_validation as harness
+
+        path = EVALUATION / "cov4_dec11_cases.json"
+        source = json.loads(path.read_text(encoding="utf-8"))["candidates"]
+        loaded = harness.load_case_candidates(path)
+        self.assertEqual(len(loaded), 16)
+        self.assertEqual(
+            [row["expected_fundable"] for row in source],
+            [row["fundable"] for row in loaded],
+        )
+        self.assertEqual({row["owned"] for row in loaded}, {"yes"})
+
+    def test_cases_argument_routes_to_a_separate_result_artifact(self):
+        from tools import run_cov4_validation as harness
+
+        cases = EVALUATION / "cov4_dec11_cases.json"
+        with mock.patch.object(harness, "run") as run:
+            result = harness.main(["--cases", str(cases), "--offline"])
+        self.assertEqual(result, 0)
+        args, kwargs = run.call_args
+        self.assertEqual(
+            args[0], EVALUATION / "cov4_dec11_validation_runs.jsonl")
+        self.assertFalse(kwargs["live"])
+        self.assertEqual(len(kwargs["candidates"]), 16)
 
     def test_the_committed_validation_run_reproduces_the_gate_figures(self):
         """The live run is evidence, so it is committed and asserted."""

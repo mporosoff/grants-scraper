@@ -4,14 +4,16 @@ Usage (the credential is loaded in the same invocation, per section 18.1 Cov4):
 
     $env:ANTHROPIC_API_KEY = [Environment]::GetEnvironmentVariable("ANTHROPIC_API_KEY","User")
     python tools/run_cov4_validation.py
+    python tools/run_cov4_validation.py --cases evaluation/cov4_dec11_cases.json
 
 **This is validation, not an experiment.** Nothing here re-tunes anything: the
 prompt is `scripts.subtopic_cov4.PROMPT` (the frozen O1 two-axis prompt), the
-model is `claude-sonnet-5`, R=1, and the ownership guard is production's. The
-candidate population is the **frozen** one -- `evaluation/cov4_ownership.json`
-plus `evaluation/cov4_challenge.json`, with the same `source_kind` assignment
-rule `tools/run_cov4_ownership.py` committed -- and its truth labels are read,
-never rewritten.
+model is `claude-sonnet-5`, R=1, and the ownership guard is production's. With
+no `--cases`, the candidate population is the **frozen** one --
+`evaluation/cov4_ownership.json` plus `evaluation/cov4_challenge.json`, with the
+same `source_kind` assignment rule `tools/run_cov4_ownership.py` committed.
+`--cases` runs an additive human-labelled case artifact through the same path;
+truth labels are read, never rewritten.
 
 **Why it drives `apply_gate` rather than a private loop.** The point of the
 exercise is that *production's* gate behaves as measured, so every candidate is
@@ -21,8 +23,8 @@ in the same run, using the real NASA ROSES rows and the real Army TDAC fixture,
 so "bypassed by provenance" is a count from the same code path rather than a
 separate claim.
 
-Bounded: 43 generic candidates, one call each, plus zero calls for the bypassed
-children.
+Bounded: either the 43 frozen generic candidates or the explicitly supplied
+additive case artifact, one call each, plus zero calls for the bypassed children.
 """
 
 from __future__ import annotations
@@ -46,6 +48,39 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 FIXTURES = ROOT / "tests" / "fixtures"
 DEFAULT_OUT = ROOT / "evaluation" / "cov4_validation_runs.jsonl"
 AS_OF = "2026-08-26"
+
+
+def load_case_candidates(path):
+    """Load one additive case artifact into the frozen harness contract."""
+    path = pathlib.Path(path)
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    candidates = []
+    for candidate in payload["candidates"]:
+        expected = candidate.get("expected_fundable")
+        if expected not in {"yes", "no"}:
+            raise ValueError(
+                f"{candidate.get('candidate_id')}: expected_fundable must be yes/no"
+            )
+        # The DEC-11 artifact's required result states that every row belongs to
+        # its named parent. Keep that human truth separate from the model verdict.
+        candidates.append(dict(
+            candidate,
+            set_name=path.stem,
+            owned="yes",
+            fundable=expected,
+        ))
+    if payload.get("candidate_count") != len(candidates):
+        raise ValueError("candidate_count does not match the case rows")
+    return candidates
+
+
+def default_case_out(path):
+    """Keep additive results beside their artifact without overwriting baseline."""
+    path = pathlib.Path(path)
+    stem = path.stem
+    if stem.endswith("_cases"):
+        stem = stem[:-len("_cases")]
+    return path.with_name(f"{stem}_validation_runs.jsonl")
 
 
 def _span(candidate, ordinal):
@@ -72,14 +107,15 @@ def _span(candidate, ordinal):
     )
 
 
-def generic_records():
-    """The 43 frozen candidates as real section 5.1 `inferred` records.
+def generic_records(candidates=None):
+    """Validation candidates as real section 5.1 `inferred` records.
 
     One record per candidate, each with its own single-span parent, because the
     gate judges spans and the frozen set mixes parents freely.
     """
     prepared = []
-    for candidate in load_candidates():
+    candidates = load_candidates() if candidates is None else candidates
+    for candidate in candidates:
         parent = {
             "opportunity_id": candidate.get("parent_opportunity_id"),
             "opportunity_number": candidate.get("parent_opportunity_number"),
@@ -89,7 +125,7 @@ def generic_records():
         document = {
             "url": candidate.get("source_document_url"),
             "name": candidate.get("source_document_name"),
-            "sha256": None,
+            "sha256": candidate.get("source_document_sha256"),
             "source_kind": candidate.get("source_kind"),
         }
         built = records.build_records(
@@ -141,7 +177,7 @@ def bypassed_records():
     return native, (army_parent, document, referenced_children)
 
 
-def run(out_path=DEFAULT_OUT, live=True):
+def run(out_path=DEFAULT_OUT, live=True, candidates=None):
     import requests
 
     session = requests.Session() if live else None
@@ -162,13 +198,13 @@ def run(out_path=DEFAULT_OUT, live=True):
         bypassed.update(diagnostics["bypassed_provenance"])
         totals["bypass_classifier_calls"] += diagnostics["classifier_calls"]
 
-    # --- the 43 generic candidates ---------------------------------------
+    # --- the generic validation candidates -------------------------------
     genuine_kept = genuine_lost = 0
     contaminants_rejected = contaminants_published = 0
     cross_prevented = cross_published = 0
     unresolved_truth = 0
 
-    for candidate, parent, document, built in generic_records():
+    for candidate, parent, document, built in generic_records(candidates):
         kept, diagnostics = cov4.apply_gate(
             parent, built, document, session=session)
         record = (kept or [None])[0]
@@ -193,6 +229,7 @@ def run(out_path=DEFAULT_OUT, live=True):
 
         truth_owned = candidate["owned"]
         truth_fundable = candidate["fundable"]
+        dec11_class = candidate.get("dec11_class")
         if "unresolved" in (truth_owned, truth_fundable):
             unresolved_truth += 1
         elif truth_owned == "yes" and truth_fundable == "yes":
@@ -205,7 +242,7 @@ def run(out_path=DEFAULT_OUT, live=True):
             contaminants_rejected += not published
             contaminants_published += published
 
-        rows.append({
+        row = {
             "candidate_id": candidate["candidate_id"],
             "set_name": candidate["set_name"],
             "source_kind": candidate.get("source_kind"),
@@ -217,7 +254,10 @@ def run(out_path=DEFAULT_OUT, live=True):
             "published": published,
             "review": review,
             "classifier_errors": diagnostics["classifier_errors"],
-        })
+        }
+        if dec11_class:
+            row["dec11_class"] = dec11_class
+        rows.append(row)
 
     out_path = pathlib.Path(out_path)
     with out_path.open("w", encoding="utf-8", newline="\n") as handle:
@@ -256,14 +296,22 @@ def run(out_path=DEFAULT_OUT, live=True):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--out", type=pathlib.Path, default=DEFAULT_OUT)
+    parser.add_argument("--out", type=pathlib.Path)
+    parser.add_argument(
+        "--cases", type=pathlib.Path,
+        help="Run an additive human-labelled case artifact through production Cov4.",
+    )
     parser.add_argument(
         "--offline", action="store_true",
         help="Exercise the harness with no credential; every span goes to "
              "review, which is the fail-closed outcome and not a result.",
     )
     args = parser.parse_args(argv)
-    run(args.out, live=not args.offline)
+    candidates = load_case_candidates(args.cases) if args.cases else None
+    out_path = args.out or (
+        default_case_out(args.cases) if args.cases else DEFAULT_OUT
+    )
+    run(out_path, live=not args.offline, candidates=candidates)
     return 0
 
 
