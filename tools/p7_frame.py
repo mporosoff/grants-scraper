@@ -126,7 +126,13 @@ FORM_OBSERVATIONS: tuple[dict, ...] = (
      "source": "FAMILY_TAXONOMY.md §1 census 20", "marker": "53-24-01 - HIGH FREQUENCY RADAR"},
     {"id": "362681", "form": "F3", "sample": "census",   "n": 39,
      "source": "FAMILY_TAXONOMY.md §1 census 20", "marker": "A.1.a."},
-    {"id": "356612", "form": "F3", "sample": "census",   "n": 7,
+    # Corrected after the frame commit: `356612` is one of the taxonomy's own 13
+    # hits (FAMILY_TAXONOMY.md §4.1 is that session's 50-record draw), and it is
+    # NOT in the census 20 list in §1. The first pass labelled it `census`, which
+    # would have kept it out of every rate -- and §4.4's "F3 random observations
+    # 2" only reconciles with `361908` AND `356612` both being random. The record
+    # set is unchanged; only this provenance label is.
+    {"id": "356612", "form": "F3", "sample": "taxonomy", "n": 7,
      "source": "FAMILY_TAXONOMY.md §4.1", "marker": "Thrust Area 1, Topic A2:"},
 
     # Fm8 labelled ordinal. One observation, which is why P7.1 must size it.

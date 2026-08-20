@@ -70,7 +70,23 @@ class FrameRTests(unittest.TestCase):
                   if r["sample"] == "census"]
         self.assertEqual(sorted(census),
                          sorted(["332894", "361526", "343653", "362329",
-                                 "352741", "362681", "356612"]))
+                                 "352741", "362681"]))
+
+    def test_the_random_observation_counts_reconcile_with_4_4(self):
+        """FAMILY_TAXONOMY.md §4.4's "random observations" column, per form.
+
+        This is the check that caught `356612` being labelled `census` when it is
+        one of the taxonomy's own 13 hits: §4.4 says F3 has 2 random observations,
+        and only `361908` plus `356612` make that number.
+        """
+        random_by_form = {}
+        for row in p7_frame.FORM_OBSERVATIONS:
+            if row["sample"] in {"survey", "taxonomy"}:
+                random_by_form.setdefault(row["form"], []).append(row["id"])
+        self.assertEqual(len(random_by_form["F1"]), 6)
+        self.assertEqual(len(random_by_form["F4"]), 7)
+        self.assertEqual(len(random_by_form["F3"]), 2)
+        self.assertEqual(len(random_by_form["F5"]), 1)
 
 
 class FrameSTests(unittest.TestCase):
