@@ -2,7 +2,7 @@
 
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
-Status: in progress · Version 8.25 · Written 2026-08-15 · **Revised 2026-08-26 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
+Status: in progress · Version 8.26 · Written 2026-08-15 · **Revised 2026-08-26 against `docs/RECON.md`, measured build data, two CI failures, `docs/CORPUS_CENSUS.md`, `docs/COVERAGE_SURVEY.md`, a measured LLM span-classifier run re-baselined on `claude-sonnet-5` (§11), a size/BM25 measurement that closed both blocking storage decisions (§12, §13), and `docs/FAMILY_TAXONOMY.md` — which induced the pattern taxonomy from a third stratified sample and retired seven of the ten families in §6.3**
 
 > **Start at §18, and read §18.0 first.** §18 defines the minimum path — the **eleven** work packages **P1 … P11** — and lists what is deferred and what it costs. **§18.0 is the canonical namespace**: package IDs, the `BUG-*` / `MEAS-*` / `DEC-*` / `DEBT-*` prefixes, the migration table for every legacy label (`Package A–G`, `D½`, `D⅝`, `D¾`, `S1–S3`, `Package N`, bare `D#`, `M#`), the current ordered path, and a diagram. **P5 is CLOSED (2026-08-27), P6 is closed and P8 is complete. Cov4, Cov6 and Cov7 are all closed. P7 is next, and §18.1 defines its scope from measured evidence rather than from the old form taxonomy.** **§18.0.6 is the canonical Open Obligations Register** — every unresolved `DEC-*`, `BUG-*`, `DEBT-*` and `MEAS-*` in the project, each with an owner and a gate. §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
 >
@@ -11,6 +11,39 @@ Status: in progress · Version 8.25 · Written 2026-08-15 · **Revised 2026-08-2
 > **8.3 changes one thing structurally: the unit of judgment moves from the sibling *set* to the individual *span* (§6.4b), because a set-level verdict lets two policy paragraphs delete 70 DOE programmes.** §11 is reopened for the precision half only, on a measured run; its recall argument is untouched.
 >
 > **8.4 closes the two blocking storage decisions.** `MAX_TERMS` stays at 400 and subtopics ship in a lazily-loaded `data/subtopics.js` sidecar — one question, not two, once you measure that 60.3% of a cache record is a term map the browser never reads as content. **Nothing now blocks committing a cache except running the backfill again.** Every rate quoted against `docs/CORPUS_CENSUS.md`'s 20 documents is still superseded by `docs/COVERAGE_SURVEY.md` (§1.1).
+>
+> **8.26 gives decisions an author and profile relevance an owner.** A
+> documentation and governance patch only — **no production behaviour changed,
+> and no decision was made.** Two gaps the P5 closeout left: the register said
+> *who owns* each obligation but never *who may choose*, and the profile/CV/ORCID
+> relevance work had completed evidence with no home and an unowned residue.
+> **Every active `DEC-*` now carries `decision_authority` and
+> `decision_trigger`** — `ENGINEERING` (resolve from evidence, record it),
+> `USER` (stop and produce a decision brief), `MIXED` (bounded evidence first,
+> then stop) — with triggers naming a package **and stage**, never "later" or
+> "before ship". **DEC-16 is `USER`, triggered at P9.0 package start**, and is
+> **not decided here**. **DEC-11 is `MIXED`, triggered at P7.3 before `Fm1`'s
+> acceptance rule admits its first named/bulleted set**: reading settles what
+> `(n) Public-Private Partnerships` and Cov7's `358380` *are*, but whether a PI
+> should be shown a funding mechanism as a child is a product judgment.
+> **DEC-17 is new** — may we ship without the Phase 2C pilot? — added so
+> MEAS-10's gate has an explicit escape hatch rather than a loophole.
+> **§18.0.7 is new**: it records the August 15 relevance work as **completed
+> engineering and completed evidence** — manual-field admission gating,
+> CV/ORCID as ranking-only evidence, the blank-field fallback, generic-verb
+> suppression, synonyms as one concept, multi-concept admission (541 → 19
+> records with all four recall anchors kept), and ORCID's implemented and tested
+> plumbing — and separates from it the **three** things actually owed.
+> **MEAS-9** is post-P9 profile/CV/ORCID relevance revalidation, including at
+> least one **real** ORCID-derived publication profile through the actual
+> ORCID → Crossref path; **MEAS-10** is the multi-researcher human pilot, which
+> had **no canonical ID until now** despite being called the highest product
+> risk. Both are `DEFERRED — assigned`, owner **P10**, must resolve before
+> **P11**, and both sit after P9 deliberately because MEAS-9 exists to test the
+> *completed* subtopic-aware scoring surface. **A stop-and-brief rule is added
+> to the package-governance discipline**, with the decision flow drawn.
+> **P5 stays closed and P7 is unchanged and unstarted.** §0.5 byte-identical,
+> 630 tests green.
 >
 > **8.25 closes P5, defines P7, and gives every loose end an owner.** The
 > package gate is audited clause by clause against committed evidence and
@@ -4338,7 +4371,9 @@ P4.3, P4.6 …).
 | 9 | **P5 closeout** — package gate, coverage reconciliation, P7 definition, obligations register | ✅ **complete 2026-08-27. P5 CLOSED.** All five gate clauses pass; final estimate **~141 records (9.5%), band 50–443**; **§18.0.6** opened as the canonical Open Obligations Register |
 | 10 | **P7** — residual generic forms, scope defined by P5's closeout | **next.** P7.1 recomputes residual coverage (and measures `Fm8`'s label); P7.2 lands the `Fm3`/`Fm4`/BUG-2 repairs; P7.3 builds `Fm1` named/bulleted; P7.4 builds `Fm2` bare numbered behind §18.3a; P7.5 builds `Fm8` only if P7.1 supports it |
 | 11 | **MEAS-8** — cross-agency residual coverage audit | **pinned here deliberately: P7 → MEAS-8 → P9.** MEAS-8's own wording is *"after the generic subtopic model is substantially working"*, so it must evaluate the model we intend to ship rather than an intermediate one — and P9 must design storage for a measured model, not an unmeasured one. It inherits **DEBT-11**'s frozen-artifact requirement and must re-derive rather than trust **DEBT-10**'s field |
-| 12 | **P9 → P10 → P11** | only when the coverage evidence says the feature is worth shipping; each behind its own existing gate |
+| 12 | **P9 / P9.0** — subtopic-aware storage and scoring | due `DEC-*` resolve here: **DEC-16 (USER)**, DEC-2, DEC-8, DEC-12; **BUG-12**, DEBT-4, DEBT-5, DEBT-10, DEBT-12 |
+| 13 | **P10** — retrieval and UI | **MEAS-9** post-P9 manual-profile / CV / ORCID relevance regression, including the real ORCID validation · **MEAS-10** the multi-researcher pilot · MEAS-5 · retrieval and UI work · due `DEC-*`: DEC-3, DEC-4, DEC-5, DEC-6, DEC-7 (USER), DEC-9 (USER), DEC-14 |
+| 14 | **P11** — enable and ship | **the final zero-unresolved-obligation gate** (§18.0.6 rule 3) · due `DEC-*`: **DEC-17 (USER)** · BUG-0, BUG-11 | only when the coverage evidence says the feature is worth shipping; each behind its own existing gate |
 
 **P8 is a branch, not a stage of the subtopic feature.** P6.1 *discovered* it — 53
 ROSES program elements with no catalog record — but P8 adds **opportunities**,
@@ -4371,38 +4406,100 @@ keeps a competing status for it.**
 sit at "nonblocking", "later" or a bare "open" without an owner and a gate.**
 
 > **Governance rule, binding from here (§0.4 addendum).**
-> 1. **Every package start** reads this register and lists the items it owns.
+> 1. **Every package start** reads this register and lists the items it owns,
+>    **and every obligation whose `decision_trigger` falls inside that package**.
 > 2. **Every package closeout** updates the status of every item it owns, and
 >    adds any it discovered.
 > 3. **P11 may not close** while any item carries `OPEN — assigned` or
 >    `DEFERRED — assigned`. Closing P11 means every row reads `CLOSED`,
 >    `SUPERSEDED` or `WONTFIX`.
+> 4. **Decision authority is binding (added 8.26).** At a due `DEC-*`:
+>    - **`ENGINEERING`** — the session **may resolve it**, but only when the
+>      recorded evidence supports it, and it **must write the evidence and the
+>      result into this register** in the same session.
+>    - **`USER`** — the session **must not proceed past it**. It stops the
+>      dependent implementation and returns a **decision brief**: the exact
+>      question · current behaviour · realistic options · measured evidence ·
+>      the important tradeoffs · downstream consequences. Nothing dependent is
+>      built until a later prompt records the user's explicit choice.
+>    - **`MIXED`** — the session may do **only the bounded evidence work needed
+>      to frame the choice**, then stops before the dependent product-policy
+>      implementation and returns the same brief.
+> 5. **A decision is recorded before dependent work resumes.** The next
+>    implementation prompt states the user's choice, and that session writes it
+>    into this register with its date.
+>
+> **Decisions become due incrementally, at the stage where their outcome first
+> affects implementation — they are not bundled into one future session.**
+>
+> ```
+> package starts
+>      |
+>      v
+> inspect the Open Obligations Register
+>      |
+>      v
+> any DEC-* whose trigger falls in this package?
+>      |
+>      +-- ENGINEERING --> resolve from evidence --> record result --> continue
+>      |
+>      +-- USER --------> decision brief --> STOP dependent work
+>      |                        |
+>      |                        v
+>      |               explicit user decision
+>      |                        |
+>      |                        v
+>      |            next prompt records it --> continue
+>      |
+>      +-- MIXED -------> bounded evidence --> decision brief --> STOP
+>                               |
+>                               v
+>                      explicit user decision
+>                               |
+>                               v
+>                     continue in the next session
+> ```
 >
 > This is documentation discipline, not production behaviour. It exists because
 > three obligations discovered during P5 were sitting in prose in prior session
-> reports with no ID at all.
+> reports with no ID at all — and because ownership alone never said who was
+> allowed to choose.
 
 #### Decisions
 
-| ID | Question | Status | Owner | Must resolve before | Rationale / evidence |
-|---|---|---|---|---|---|
-| **DEC-0** | `MAX_TERMS` value | **CLOSED** | — | — | Settled 2026-08-17 at 400; the ceiling is not what the term map breaches |
-| **DEC-1** | Child records in the catalog vs a sidecar | **CLOSED** | — | — | Settled 2026-08-17: lazily-loaded `data/subtopics.js` sidecar. §13.1's flip condition retired |
-| **DEC-2** | Do referenced subtopics extend `discoverability.py`'s registry or sit beside it? | **OPEN — assigned** | **P9.0** | any code writes a subtopic cache | **P6.3 answered it in practice** — `subtopic_referenced.py` emits through `build_records` into the subtopic cache, beside the registry. P9.0 must **ratify or reverse** that, not inherit it silently. Open since 8.6 |
-| **DEC-3** | Works-text provider: Crossref abstracts or OpenAlex | **DEFERRED — assigned** | **P10** | the §8.5 retrieval gate is re-run | Decide on measured rank movement, not argument |
-| **DEC-4** | Build `scripts/build_gold_set.py` at all? | **DEFERRED — assigned** | **P10** | any claim that a change is an *improvement* rather than a non-regression | Not buildable until issue #9 ships an export path |
-| **DEC-5** | How archived subtopics are searched | **DEFERRED — assigned** | **P10** | the "include past cycles" filter ships | Largely collapsed into DEC-1's sidecar; what remains is the retention window and whether the archive index ships |
-| **DEC-6** | Summary length (600 chars proposed) | **DEFERRED — assigned** | **P10** | cards render | Pure display quality — the term map carries retrieval |
-| **DEC-7** | Topics in Atom feeds | **DEFERRED — assigned** | **P10** | feeds change | Proposed: include |
-| **DEC-8** | Taxonomy depth for referenced topics | **DEFERRED — assigned** | **P9.0** | the stored child shape is fixed | P6.3 attaches at topic level today; proposed: program level |
-| **DEC-9** | Mute/alert split | **DEFERRED — assigned** | **P10** | the mute control ships (issue #8) | Proposed: accept for v1 and document it |
-| **DEC-10** | OCR | **DEFERRED — assigned** | **P7** | P7 closes | Revisit only if `no_extractable_text` proves material. **Cov7 measured 1 of 30**, and its cause was a SAM.gov page returning 0 characters, not a scanned PDF — so the trigger has still not fired |
-| **DEC-11** | Is `(n) Public-Private Partnerships` a subject applicants apply against, or a mechanism through which any subject is funded? | **OPEN — assigned** | **P7** | `Fm1` or `Fm2` admits any form that could match a mechanism | One person reading page 85 of `DE-FOA-0003600` settles it. **Do not settle it from a model verdict.** **Cov7 added a second instance of the same class**: `358380`'s *"one of the following program tracks"* — three degree pathways, selectable, not research subdivisions. The class is now n=3 (`361876`, `(n)`, `358380`) and it directly bounds what P7 may accept |
-| **DEC-12** | The `deadlines` payload duplicates itself — 17.5% of `opportunities.js` | **DEFERRED — assigned** | **P9.0** | storage sizing is fixed | Pre-existing catalog cost, larger than anything subtopics add, and independent of them |
-| **DEC-13** | NASA ROSES standalone ingestion | **CLOSED** | — | — | Taken 2026-08-18, implemented as P8, complete 2026-08-20 |
-| **DEC-14** | Should ROSES divisions A–F map to `disciplines` facet values? | **DEFERRED — assigned** | **P10** | facet rendering ships | Mapping division → discipline is a **new inference**, so it is a decision rather than a fix (§17.8). Not a P8 blocker and P8 closed without it |
-| **DEC-15** | Authorize `anthropic` as a dependency | **CLOSED** | — | — | Resolved 2026-08-24: **no dependency added**; direct HTTP over the pinned `requests` |
-| **DEC-16** | **Do generic (`inferred`) subtopics ever reach a PI without a human approving them?** | **OPEN — assigned** | **P9.0** | **the production storage and approval workflow is implemented** | Today's answer is **no** — §5.1 caps `inferred` at `medium`, §7.1 requires a hash-matched approval below `high`, and **0 of Cov4's 28 approved children auto-publish**. Cov6 implements that answer; it does not ratify it. **Not decided in Cov7 and not decided at this closeout** |
+**Schema, added 2026-08-27.** Every **active** `DEC-*` carries two further
+fields, because ownership alone never said *who may choose* or *when the choice
+becomes blocking* — and an implementation session that cannot tell the
+difference will quietly choose for the user.
+
+| Field | Meaning |
+|---|---|
+| **`decision_authority`** | **`ENGINEERING`** — the implementation agent may resolve it from measured evidence, existing invariants and already-established product requirements, and **must record the evidence and the result here**. · **`USER`** — a product or policy choice; the agent **must not choose silently**. · **`MIXED`** — engineering evidence must first narrow the options; the final product choice is the user's |
+| **`decision_trigger`** | The **package and stage** at which the decision becomes blocking. This *is* the must-resolve-before gate for a decision, so the Decisions table carries one column, not two. Triggers name a stage — never "later", "during P9" or "before ship" when a more specific stage is knowable |
+
+**Closed and superseded decisions carry no authority or trigger**, and are not
+reopened to add one.
+
+| ID | Question | Status | **Authority** | **Decision trigger — the stage at which it blocks** | Owner | Rationale / evidence |
+|---|---|---|---|---|---|---|
+| **DEC-0** | `MAX_TERMS` value | **CLOSED** | — | — | — | Settled 2026-08-17 at 400; the ceiling is not what the term map breaches |
+| **DEC-1** | Child records in the catalog vs a sidecar | **CLOSED** | — | — | — | Settled 2026-08-17: lazily-loaded `data/subtopics.js` sidecar. §13.1's flip condition retired |
+| **DEC-2** | Do referenced subtopics extend `discoverability.py`'s registry or sit beside it? | **OPEN — assigned** | **ENGINEERING** | **P9.0 package start, before the stored subtopic shape is fixed** | **P9.0** | **P6.3 answered it in practice** — `subtopic_referenced.py` emits through `build_records` into the subtopic cache, beside the registry — and DEC-1's sidecar settles where that cache lives. Both are engineering facts already on the record, so P9.0 may **ratify or reverse from evidence**; what it may not do is inherit the answer without saying so. Open since 8.6 |
+| **DEC-3** | Works-text provider: Crossref abstracts, or switch the browser to OpenAlex for better abstract coverage | **DEFERRED — assigned** | **ENGINEERING** | **P10 package start, before MEAS-9 is run** | **P10** | **The trigger sits before MEAS-9, not after it**: a provider swap changes the ORCID-derived terms MEAS-9 measures, so deciding afterwards would invalidate the measurement. The plan already fixes the deciding evidence: *"Decide on measured results from the §8.5 gate, not on argument."* A provider swap that measurably improves abstract coverage without moving the query baseline is an engineering call |
+| **DEC-4** | Build `scripts/build_gold_set.py` at all? | **DEFERRED — assigned** | **MIXED** | **P10 closeout, before P11 ship-readiness is claimed** | **P10** | Evidence can show whether rank movement alone answers the questions being asked; **whether to invest in a labelled gold set before shipping is a product call**. Not buildable until issue #9 ships an export path |
+| **DEC-5** | How archived subtopics are searched, and for how long they are kept | **DEFERRED — assigned** | **MIXED** | **P10, before the "include past cycles" filter is implemented** | **P10** | The mechanism half collapsed into DEC-1's sidecar and is engineering. **The retention window is a product choice** — three years of past cycles is a judgment about what a PI should still see, not a measurement |
+| **DEC-6** | Summary length (600 chars proposed) | **DEFERRED — assigned** | **ENGINEERING** | **P9.0 package start, before the first subtopic cache is committed** | **P9.0** | **Already implemented at the proposed value** — `subtopic_segmentation.MAX_SUMMARY_CHARS = 600` — and the summary is baked into the cache at extraction, so changing it later invalidates every cached record. That is why the trigger sits at the cache commit and not at render. The term map carries retrieval, so this is bounded and reversible up to that point. **Escalate to `USER` if measurement shows truncation harming comprehension** — that would make it a product question rather than a display parameter |
+| **DEC-7** | Topics in Atom feeds | **DEFERRED — assigned** | **USER** | **P10, before `build_feeds.py` changes what subscribers receive** | **P10** | Feeds are **outward-facing**: this changes what already-subscribed people are sent, which is a policy choice about communication and not a ranking parameter. Proposed: include |
+| **DEC-8** | Taxonomy depth for referenced topics — attach at program level, or one level deeper? | **DEFERRED — assigned** | **MIXED** | **P9.0 package start, before the stored child shape is fixed** | **P9.0** | Evidence can show how many children each depth yields and how they rank; **which granularity a PI should be shown is a product choice**. P6.3 attaches at topic level today; the plan proposes program level, "where the program manager and the funding decision sit" |
+| **DEC-9** | Mute/alert split — accept that muted items still appear in alerts, or build the suppression export? | **DEFERRED — assigned** | **USER** | **P10, before the mute control (issue #8) ships** | **P10** | A known, deliberate inconsistency in what a user is sent after they have asked not to see something. **Accepting it is a policy choice, not an engineering one.** Proposed: accept for v1 and document it plainly |
+| **DEC-10** | OCR | **DEFERRED — assigned** | **ENGINEERING** | **P7 closeout, when P7.1 reports the `no_extractable_text` rate** | **P7** | The plan fixes the trigger as a measurement: *"Revisit only if `no_extractable_text` rejections prove material."* **Cov7 measured 1 of 30**, and its cause was a SAM.gov page returning 0 characters rather than a scanned PDF, so the threshold has still not fired |
+| **DEC-11** | Where is the boundary between a **fundable subdivision** and a **funding mechanism / programme track**? | **OPEN — assigned** | **MIXED** | **P7.3, before `Fm1`'s acceptance rule admits its first named/bulleted set** | **P7** | **Evidence can characterise the class exactly and cannot decide it.** Three real instances now: `361876`; `(n) Public-Private Partnerships`, which one person reading page 85 of `DE-FOA-0003600` can classify; and Cov7's `358380`, whose notice says *"one of the following program tracks"* over three degree pathways — selectable, three-strong, and not research subdivisions. Reading settles what each **is**; **whether a PI should be shown a mechanism as a child of an opportunity is a product judgment about the card surface**. `Fm1` is where a mechanism-shaped label would first be admitted, which is why the trigger sits there and not at P7's start. **Do not settle it from a model verdict in either direction** (§17.8) |
+| **DEC-12** | The `deadlines` payload duplicates itself — 17.5% of `opportunities.js` | **DEFERRED — assigned** | **ENGINEERING** | **P9.2, before the storage winner is implemented** | **P9.0** | A serialization-cost question with a measured answer and no user-visible surface. Pre-existing catalog cost, larger than anything subtopics add, and independent of them |
+| **DEC-13** | NASA ROSES standalone ingestion | **CLOSED** | — | — | — | Taken 2026-08-18, implemented as P8, complete 2026-08-20 |
+| **DEC-14** | Should ROSES appendix divisions A–F map to `disciplines` facet values? | **DEFERRED — assigned** | **MIXED** | **P10, before facet rendering ships** | **P10** | Mapping division → discipline is a **new inference** (§17.8), so evidence must first show what it would produce; **whether to present an inferred facet as though it were published data is a product choice**. Not a P8 blocker, and P8 closed without it |
+| **DEC-15** | Authorize `anthropic` as a dependency | **CLOSED** | — | — | — | Resolved 2026-08-24: **no dependency added**; direct HTTP over the pinned `requests` |
+| **DEC-16** | **Do generic (`inferred`) subtopics ever reach a PI without a human approving them?** | **OPEN — assigned** | **USER** | **P9.0 package start, before the production approval/storage workflow is implemented** | **P9.0** | Today's answer is **no** — §5.1 caps `inferred` at `medium`, §7.1 requires a hash-matched approval below `high`, and **0 of Cov4's 28 approved children auto-publish**. Cov6 implements that answer; it does not ratify it. **The choice is what a PI is allowed to see unreviewed, which is the product's core safety posture** — §18.3's asymmetry argues for the status quo but does not decide it. **Not decided in Cov7, not decided at P5's closeout, and not decided by this patch** |
+| **DEC-17** | **May Funding Finder ship without completing the Phase 2C multi-researcher relevance pilot (MEAS-10)?** | **OPEN — assigned** | **USER** | **P11 closeout** | **P11** | **Added 2026-08-27 so MEAS-10's gate has an explicit escape hatch rather than a loophole.** `docs/PHASE2_COVERAGE_ROLLOUT.md` calls the unrun pilot *"the highest product risk"*, and `evaluation/README.md` says Phase 2 *"is complete only after consented labels from 3–5 researchers are aggregated"*. If the pilot cannot be run, **shipping anyway is a product decision the user must take explicitly**, not something an implementation session may infer from schedule pressure |
 
 #### Bugs
 
@@ -4443,6 +4540,8 @@ sit at "nonblocking", "later" or a bare "open" without an owner and a gate.**
 | **MEAS-5** | Discipline-stratified query and relevance set | **OPEN — assigned** | **P10** | the §8.5 retrieval gate is trusted outside chemistry | **18 of 37 queries (49%) are chemistry; all 3 profile probes are.** A ranking regression outside chemistry is currently invisible. **Extraction figures are unaffected** — they are corpus measurements |
 | **MEAS-6** | Name a verified SAM-only opportunity, or re-justify the SAM.gov adapter | **DEFERRED — assigned** | **MEAS-8** | SAM.gov work is scheduled | **Blocked on a credential — a human task, not an agent one.** Until it is done the adapter's cost is known and its benefit is asserted |
 | **MEAS-7** | Do `345241` and `356605`'s referenced pages enumerate fundable subdivisions? | **CLOSED** | — | — | Done 2026-08-22: 1 of 2. Army yes, ONR no |
+| **MEAS-9** | **Post-P9 profile / CV / ORCID relevance revalidation.** *Does the completed subtopic-aware retrieval model preserve the existing precision-first admission behaviour while letting manual profile, CV-derived and ORCID-derived evidence improve ranking appropriately?* | **DEFERRED — assigned** | **P10** | **P11** | **Added 8.26; see §18.0.7.** The August 15 work is completed evidence for manual fields and representative CV text — **it never exercised a real ORCID-derived publication profile**, and it pre-dates the topic layer. **P9 changes the retrieval surface those terms rank against**, so the findings need revalidation rather than assumption. **Deterministic scope, all eight arms:** manual research-description/expertise · CV-derived · ORCID-derived · manual+CV · manual+ORCID · manual+CV+ORCID · profile-only fallback where the product permits it · post-P9 parent/subtopic-aware ranking. **Evaluate separately:** candidate admission · candidate-set expansion · ranking movement · false-positive expansion · known recall anchors · parent-versus-subtopic ranking behaviour. **At least one real ORCID profile obtained through the actual ORCID → Crossref path — synthetic text in `orcid_text` does not satisfy this.** Carry the August regression anchors (NSF CPS `362061`, NSF Chemistry `347749`, DOE `DE-FOA-0003600`, ONR `N0001425SB001`) so pre- and post-topic-layer behaviour is comparable. **Sets no thresholds** — it measures. Distinct from **MEAS-5**, which is about the *query* set's discipline coverage |
+| **MEAS-10** | **Multi-researcher human relevance pilot (Phase 2C).** *Does profile-assisted Funding Finder ranking improve the usefulness and relevance of funding results for multiple real researchers across different research domains?* | **DEFERRED — assigned** | **P10** | **P11**, unless **DEC-17** explicitly accepts shipping without it | **Added 8.26 — it existed as a plan and had no canonical ID.** Written up in `docs/PILOT_PARTICIPANT_INSTRUCTIONS.md` and `evaluation/README.md` (*"complete only after consented labels from 3–5 researchers are aggregated"*), and `docs/PHASE2_COVERAGE_ROLLOUT.md` calls it **"the highest product risk"**. **Not the same measurement as MEAS-9**: MEAS-9 is a deterministic regression an agent can re-run and verifies *engineering behaviour*; this measures *real-user usefulness* with consented human labels and cannot be automated. Report retrieval, reranking and source-data failures separately, per `evaluation/README.md` |
 | **MEAS-8** | **Cross-agency residual coverage audit** | **DEFERRED — assigned** | **itself, scheduled between P7 and P9** | **P9 designs storage for the model we intend to ship** | See §18.0.4. Its own wording — *"after the generic subtopic model is substantially working"* — is why it sits after P7 and not before. It must satisfy **DEBT-11**'s frozen-artifact requirement and re-derive rather than trust **DEBT-10**'s field |
 
 #### Deferred scope with no ID, given one here
@@ -4456,6 +4555,61 @@ sit at "nonblocking", "later" or a bare "open" without an owner and a gate.**
 | **NSPIRES open-solicitations list** | **DEFERRED — assigned** | **MEAS-8** | any NASA gap is re-argued | Session-gated behind a POST search flow. The **ROSES table half is done** (P8); only this remains |
 | **`program_taxonomy` adapter** | **DEFERRED — assigned** | **MEAS-8** | it is re-argued | Downgraded to measured zero in 8.2 and unchanged by P6.2's negative |
 | **P4's unmet gate — 42% correct acceptance against a 50% threshold** | **OPEN — assigned** | **P7** | P7 closes | Accepted deliberately: every remaining miss needs a new *mechanism*, and P7 is that mechanism. **P7's closeout must re-report this number** |
+
+### 18.0.7 Profile, CV and ORCID — what is built, and what evidence is still owed
+
+**Added 2026-08-27, before P7 starts, because the two are routinely conflated
+and the plan had no single place saying which was which.** The August 15
+search-relevance work (`evaluation/SEARCH_RELEVANCE_AUDIT_2026-08-15.md`) is
+**completed engineering and completed relevance evidence**, not an open
+investigation. What remains is narrower and specific.
+
+#### Built, measured and pinned by tests — do not re-open as design work
+
+| Capability | Where | Evidence |
+|---|---|---|
+| **Manual `research_description` + `expertise_keywords` are the profile-only admission gate** whenever either is present | `assets/profile-ranking.js` (`admissionOnly`) | Audit *Profile and added-latency evaluation*; `profile-ranking-contract.test.mjs` *"keeps CV and ORCID terms in reranking but out of manual-profile admission"* |
+| **CV and ORCID evidence rank but cannot broaden a manually grounded candidate set** | same | same test; audit: *"CV and ORCID evidence remains in the full ranking score … but cannot add candidates to that manually grounded set"* |
+| **CV/ORCID admission fallback only when both manual fields are blank** | same | audit, final policy paragraph |
+| **Generic résumé vocabulary suppressed** — `research`, `develop`, `use`, `study`, `method`, `project`, … | `GENERIC_PROFILE_TERMS` | `profile-ranking-contract.test.mjs` *"extracts concrete profile evidence and removes generic CV language"* |
+| **Synonym variants count as one independent concept** — `AI`/`artificial intelligence` cannot satisfy several profile-only requirements alone | `expandGroups` grouping | audit, *Profile and added-latency evaluation* |
+| **Multi-concept profile-only admission**, not a one-term overlap — 50% concept floor, maximum four | same | audit: the screenshot profile admitted **541** records under the old one-term rule and **19** under the new one, **retaining all four recall anchors** |
+| **CV changes ranking without expanding the query candidate set** | probe | audit: `catalysts for AI` admits **the same 12** with and without the profile; a representative electrochemical-catalysis CV moved NSF Transport Phenomena from rank 4 to rank 2 |
+| **Representative-CV and live-CV probing** | `evaluation/profile_relevance_probe.mjs` | reproducible; the live 28-term CV run is what exposed the admission/reranking coupling the final policy fixed |
+| **August regression anchors** | production-catalog tests | NSF CPS `362061`, NSF Chemistry `347749`, DOE `DE-FOA-0003600`, ONR `N0001425SB001`; four labelled false positives excluded |
+| **ORCID engineering contract** — checksum/format validation, Crossref lookup **by ORCID filter**, returned-author ORCID filtering, bounded work count (50), bounded publication text (40 000), derived keyword extraction (12) | `assets/orcid.js` | `orcid-contract.test.mjs`: normalisation and invalid-checksum rejection, bounded parsing into matching context, Crossref fetch using an ORCID filter |
+| **CV parsing and normalisation** — PDF/DOCX/TXT/Markdown, bounded storage and text | `assets/profile.js` (`extractCv`, vendored pdf.js + mammoth, 120 000-char cap, browser-local) | `profile-contract.test.mjs` |
+
+#### Owed — three items, and only three
+
+1. **A real ORCID-derived publication profile has never been run through the
+   full ranking/retrieval evaluation.** The August work exercised manual
+   research description, expertise keywords and representative CV text. ORCID's
+   *plumbing* is implemented and tested; what is missing is **relevance
+   validation of ORCID-derived terms**, and it must come through the real
+   ORCID → Crossref path. **Putting synthetic text into `orcid_text` does not
+   satisfy it.** → **MEAS-9**
+2. **The August findings pre-date the topic layer.** **P9 adds subtopic-aware
+   searchable and scoring evidence**, which changes the retrieval surface that
+   manual, CV-derived and ORCID-derived terms rank against — parents and
+   children now compete, and a profile term can match a child its parent does
+   not carry. The pre-topic-layer results therefore need **post-P9 regression
+   revalidation** and may not be assumed to transfer. → **MEAS-9**
+3. **No multi-researcher human relevance validation has been run.** The Phase 2C
+   pilot is written (`docs/PILOT_PARTICIPANT_INSTRUCTIONS.md`,
+   `evaluation/README.md`) and deferred; `docs/PHASE2_COVERAGE_ROLLOUT.md` calls
+   it *"the highest product risk"*. It had **no canonical obligation ID until
+   2026-08-27**. → **MEAS-10**
+
+> **Keep the two measurements apart.** **MEAS-9 is a deterministic regression**
+> that verifies engineering behaviour and can be re-run by an agent.
+> **MEAS-10 measures real-user usefulness** with consented human labels and
+> cannot. Neither substitutes for the other, and satisfying one does not
+> discharge the other.
+
+**Neither is scheduled before P9, deliberately.** MEAS-9 exists specifically to
+test the *completed* subtopic-aware scoring system; running it earlier would
+measure something the product will not ship.
 
 ### 18.0.5 The path, drawn
 
