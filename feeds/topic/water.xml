@@ -4,8 +4,36 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml</id>
-  <updated>2026-08-15T20:29:37Z</updated>
+  <updated>2026-08-21T16:48:00Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Innovative Water Infrastructure Workforce Development Grant</title>
+    <link href="https://www.grants.gov/search-results-detail/363657"/>
+    <id>urn:funding-finder:grants-gov:363657</id>
+    <updated>2026-08-19T00:00:00Z</updated>
+    <author><name>Environmental Protection Agency</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Public health"/>
+    <category term="Water"/>
+    <summary>Environmental Protection Agency | Closes 2026-10-05 | The U.S. Environmental Protection Agency (EPA) is soliciting applications under the authority of the Safe Drinking Water Act (SDWA) section 1459E to accelerate career pipelines in the water utilities sector and provide access to water utility workforce opportunities. This action advances the Administration’s priorities, including the goals of Make America Healthy Again, by focusing on building the…</summary>
+  </entry>
+  <entry>
+    <title>Egypt Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363633"/>
+    <id>urn:funding-finder:grants-gov:363633</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <category term="Materials science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
+    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
+  </entry>
   <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Alaska Cooperative Ecosystem Studies Unit (CESU)</title>
     <link href="https://www.grants.gov/search-results-detail/363537"/>
@@ -88,22 +116,6 @@
     <category term="Environmental science"/>
     <category term="Water"/>
     <summary>Natural Resources Conservation Service | Closes 2026-09-21 | The purpose of the Feral Swine Eradication and Control Project (FSCP) is to respond to the threat feral swine pose to agriculture, native ecosystems, and human and animal health. Feral swine are a destructive, non-native, invasive species and their populations have expanded across the United States since the 1980’s. Over an estimated $3.4 billion in damage, including agricultural, is caused by fer…</summary>
-  </entry>
-  <entry>
-    <title>Egypt Annual Program Statement</title>
-    <link href="https://www.grants.gov/search-results-detail/363252"/>
-    <id>urn:funding-finder:grants-gov:363252</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>Bureau of Near Eastern Affairs</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <category term="Data science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Materials science"/>
-    <category term="Cybersecurity"/>
-    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
   </entry>
   <entry>
     <title>National Estuarine Research Reserve System (NERRS) Land Acquisition and Construction Program for Fiscal Year 2026</title>
@@ -300,21 +312,6 @@
     <summary>National Institute of Food and Agriculture | Closes 2026-12-31 | The AFRI Foundational and Applied Science Program supports grants in six AFRI priority areas to advance knowledge in both fundamental and applied sciences important to agriculture. The six priority areas are: Plant Health and Production and Plant Products; Animal Health and Production and Animal Products; Food Safety, Nutrition, and Health; Bioenergy, Natural Resources, and Environment; Agricultur…</summary>
   </entry>
   <entry>
-    <title>Infrastructure Systems and People</title>
-    <link href="https://www.grants.gov/search-results-detail/358397"/>
-    <id>urn:funding-finder:grants-gov:358397</id>
-    <updated>2025-01-25T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Data science"/>
-    <category term="Environmental science"/>
-    <category term="Materials science"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <category term="Water"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation | Posted | Infrastructure systems comprise complex connections between physical components, organizational structures and operational methods that support the needs of people and communities at the local, regional, national, and global scales. Such systems form the backbone of society, providing essential services as well as ensuring public health and welfare, economic prosperity and national security, and a…</summary>
-  </entry>
-  <entry>
     <title>Water, Landscape, and Critical Zone Processes</title>
     <link href="https://www.grants.gov/search-results-detail/357579"/>
     <id>urn:funding-finder:grants-gov:357579</id>
@@ -379,20 +376,5 @@
     <category term="Climate change"/>
     <category term="Water"/>
     <summary>DOC NOAA - ERA Production | Closes 2026-09-30 | This BAA is for the National Marine Fisheries Service, also known as NOAA Fisheries. The purpose of this notice is to request applications for special projects and programs associated with the NOAA Fisheries strategic plan and mission goals, as well as to provide the general public with information and guidelines on how NOAA will select applications and administer discretionary Federal assistance …</summary>
-  </entry>
-  <entry>
-    <title>Engineering for Civil Infrastructure</title>
-    <link href="https://www.grants.gov/search-results-detail/306169"/>
-    <id>urn:funding-finder:grants-gov:306169</id>
-    <updated>2018-06-12T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Climate change"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Transportation"/>
-    <category term="Water"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Posted | The Engineering for Civil Infrastructure (ECI) program supports fundamental research in geotechnical, structural, materials, architectural, and coastal engineering. The ECI program promotes research that can shape the future of the nation’s physical civil infrastructure and that can contribute to climate change adaptation and mitigation, and hazards and disaster resilience. Types of civil infrastr…</summary>
   </entry>
 </feed>

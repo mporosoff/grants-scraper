@@ -4,8 +4,17 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml</id>
-  <updated>2026-08-15T20:29:37Z</updated>
+  <updated>2026-08-21T16:48:00Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Energy-Focused Air Quality and Health Effects Research</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001H35P3AAJ"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON6220</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <summary>NYSERDA | Closes 2026-10-28 | Supporting research to improve the scientific and technical foundation for addressing key policy-relevant questions related to air quality and health effects research, Program Opportunity Notice (PON) 6220, Energy-Related Air Quality and Health Effects Research, is available through NYSERDA.rnPON 6220 focuses on: 1) pollutant trends analysis, source apportionment, and accountability studies; 2) po…</summary>
+  </entry>
   <entry>
     <title>Charge Ready NY - Large Public Sector Project Program</title>
     <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001AchJOAAZ"/>
@@ -23,27 +32,6 @@
     <author><name>NYSERDA</name></author>
     <category term="Energy"/>
     <summary>NYSERDA | Closes 2026-10-21 | Provides funding for projects in three categories: Category A) Regional Planning - technical assistance for Regional Energy Economy strategies; Category B) Industry Plans- funding for plans designed to attract and grow a specific industry across several regions in New York; and Category C) Implementation Support - targeted investment for implementation activities. NYSERDA has prequalified firms ca…</summary>
-  </entry>
-  <entry>
-    <title>Clean Green Schools Initiative</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rt000001Q0ClRAAV"/>
-    <id>urn:funding-finder:nyserda:nyserda%3APON4924</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>NYSERDA</name></author>
-    <category term="Climate change"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <summary>NYSERDA | Closes 2026-08-18 | The P-12 Schools: Clean Green Schools Initiative is available to help public schools that traditionally lack resources to invest in infrastructure improvements become healthier, more productive learning environments. The program provides funding for schools to implement construction projects that decarbonize their building portfolio and enhance extreme heat resilience, such as comprehensive retrof…</summary>
-  </entry>
-  <entry>
-    <title>Independent Internal Audit Services</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001AbghyAAB"/>
-    <id>urn:funding-finder:nyserda:nyserda%3ARFP6197</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>NYSERDA</name></author>
-    <category term="Cybersecurity"/>
-    <summary>NYSERDA | Closes 2026-08-19 | Seeking proposals from qualified firms to provide independent internal audit, advisory, compliance, investigative, technology, cybersecurity, and related professional services to support NYSERDA’s Internal Audit function under a five-year umbrella contract.</summary>
   </entry>
   <entry>
     <title>Net-Zero Resilience Preparation for Municipal and Rural Electric Providers</title>

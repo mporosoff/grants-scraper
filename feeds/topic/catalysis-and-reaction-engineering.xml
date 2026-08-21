@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml</id>
-  <updated>2026-08-15T20:29:37Z</updated>
+  <updated>2026-08-21T16:48:00Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) CAPACITY BUILDING (CB)</title>
@@ -33,6 +33,22 @@
     <summary>Air Force Office of Scientific Research | Closes 2027-04-05 | The Department of Defense (DoD) announces the fiscal year 2026 (FY26) Defense Established Program to Stimulate Competitive Research (DEPSCoR) - Research Collaboration (RC) opportunity. The program is sponsored and managed by the Basic Research Office, Office of the Under Secretary of Defense for Research and Engineering (OUSD [R&amp;E]), awarded by the Air Force Office of Scientific Research (AFOSR), …</summary>
   </entry>
   <entry>
+    <title>Transport Phenomena (TP)</title>
+    <link href="https://www.grants.gov/search-results-detail/362063"/>
+    <id>urn:funding-finder:grants-gov:362063</id>
+    <updated>2026-04-24T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Separations and membranes"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-20 | The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
+  </entry>
+  <entry>
     <title>Chemical Process Systems (CPS)</title>
     <link href="https://www.grants.gov/search-results-detail/362061"/>
     <id>urn:funding-finder:grants-gov:362061</id>
@@ -47,22 +63,6 @@
     <category term="Materials science"/>
     <category term="Quantum science"/>
     <summary>U.S. National Science Foundation | Posted | Society relies on chemical processes to turn raw materials into useful products. The Chemical Process Systems (CPS) program invests in fundamental research on chemical and biochemical processes to make them more efficient, sustainable, and resilient. New CPS technologies for manufacturing, biotechnology, critical minerals, energy, food, and other national priorities will help make the U.S. more co…</summary>
-  </entry>
-  <entry>
-    <title>Transport Phenomena (TP)</title>
-    <link href="https://www.grants.gov/search-results-detail/362063"/>
-    <id>urn:funding-finder:grants-gov:362063</id>
-    <updated>2026-04-24T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Quantum science"/>
-    <category term="Separations and membranes"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>U.S. National Science Foundation | Posted | The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
   </entry>
   <entry>
     <title>FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml</id>
-  <updated>2026-08-15T20:29:37Z</updated>
+  <updated>2026-08-21T16:48:00Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -57,6 +57,17 @@
     <summary>Indian Health Service | Closes 2027-04-01 | The purpose of this IHS grant is to expand access to culturally appropriate, trauma-informed forensic healthcare (FHC) services for American Indian/Alaska Native (AI/AN) victims of domestic violence, sexual violence, child maltreatment, and human trafficking. The grant supports the development and expansion of FHC services across IHS Areas while promoting coordinated treatment, intervention, preve…</summary>
   </entry>
   <entry>
+    <title>Substance Abuse Prevention, Treatment, and Aftercare</title>
+    <link href="https://www.grants.gov/search-results-detail/363652"/>
+    <id>urn:funding-finder:grants-gov:363652</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Indian Health Service | Closes 2027-04-01 | The primary purpose of this program is to reduce substance abuse among American Indian and Alaska Native (AI/AN) populations by improving care coordination, expanding culturally appropriate behavioral health services, and implementing early intervention strategies for at-risk AI/AN youth. The program supports Tribal, community-driven prevention, treatment, and recovery efforts that promote cross-s…</summary>
+  </entry>
+  <entry>
     <title>Suicide Prevention, Intervention, and Postvention</title>
     <link href="https://www.grants.gov/search-results-detail/363496"/>
     <id>urn:funding-finder:grants-gov:363496</id>
@@ -66,6 +77,17 @@
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
     <summary>Indian Health Service | Closes 2027-04-01 | The primary purpose of this program is to reduce suicide among American Indian and Alaska Native (AI/AN) populations by improving care coordination, expanding culturally appropriate behavioral health services, and implementing early intervention strategies for at-risk AI/AN youth. The program supports Tribal, community-driven suicide prevention, intervention, and postvention efforts that promote c…</summary>
+  </entry>
+  <entry>
+    <title>Single Cell Opioid Responses in the Context of HIV (SCORCH) Program: Phase 2</title>
+    <link href="https://www.grants.gov/search-results-detail/363680"/>
+    <id>urn:funding-finder:grants-gov:363680</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Closes 2027-06-08 | NIDA seeks to further advance its mission in the area of single cell biology. Since 2020, the NIDA-funded Single Cell Opioid Responses in the Context of HIV (SCORCH) consortium has generated single-nucleus datasets from human and animal postmortem brain tissue under conditions of HIV infection, antiretroviral therapy (ART), and/or substance exposure (e.g. opioids, cocaine, methamphetamine, and can…</summary>
   </entry>
   <entry>
     <title>Demonstration Projects for Whole-Person Health Models for Women Living with HIV in the South</title>
@@ -79,6 +101,27 @@
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
     <summary>Centers for Disease Control - NCHHSTP | Closes 2027-03-15 | The purpose of this demonstration project is to support coordinated Clinic and Community Collaboratives (CCCs) to integrate HIV care with broader women's health services in jurisdictions with disproportionately high HIV disease burden to improve HIV-related outcomes, overall health, and quality of life among WWH. Organizations will be funded to implement 4 strategies: (1) Integrate HIV care with b…</summary>
+  </entry>
+  <entry>
+    <title>Behavioral Health Integration Initiative</title>
+    <link href="https://www.grants.gov/search-results-detail/363650"/>
+    <id>urn:funding-finder:grants-gov:363650</id>
+    <updated>2027-01-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Indian Health Service | Closes 2027-03-01 | The purpose of the BH2I program is to improve the physical, mental, social, and spiritual health of American Indian and Alaska Native (AI/AN) individuals by expanding integrated, coordinated behavioral health care. The program supports Tribal and Urban Indian Organization (UIO) health systems in delivering culturally responsive, trauma-informed services that integrate behavioral health with primar…</summary>
+  </entry>
+  <entry>
+    <title>Zero Suicide Initiative</title>
+    <link href="https://www.grants.gov/search-results-detail/363653"/>
+    <id>urn:funding-finder:grants-gov:363653</id>
+    <updated>2027-01-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <summary>Indian Health Service | Closes 2027-03-01 | The purpose of this program is to strengthen suicide prevention in Indian health systems by implementing the Zero Suicide framework through a comprehensive, culturally informed approach. The program supports Tribal health systems in building leadership, workforce capacity, systematic suicide risk identification, timely engagement and evidence-based treatment, continuity of care, and quality improv…</summary>
   </entry>
   <entry>
     <title>Continuing Enhanced National Surveillance for Prion Diseases in the United States</title>
@@ -142,6 +185,20 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Closes 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center, and Laboratory Center (LC) working with Clinical Trials Units, to test prevention and treatment strategies and conduct implementation research designed to end t…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year (FY) 2027 AmeriCorps Seniors RSVP Competition</title>
+    <link href="https://www.grants.gov/search-results-detail/363482"/>
+    <id>urn:funding-finder:grants-gov:363482</id>
+    <updated>2026-08-20T00:00:00Z</updated>
+    <author><name>AmeriCorps</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Transportation"/>
+    <summary>AmeriCorps | Closes 2026-10-20 | AmeriCorps improves lives, strengthens communities, and fosters civic engagement through service and volunteering. AmeriCorps brings people together to tackle some of the country’s most pressing challenges through national service and volunteerism. AmeriCorps members and AmeriCorps Seniors volunteers serve with organizations dedicated to the improvement of communities and those serving. AmeriCorps…</summary>
   </entry>
   <entry>
     <title>Freedom Shield: Global Forced Labor Import Prohibition Initiative</title>
@@ -216,6 +273,8 @@
     <author><name>Library of Congress</name></author>
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>Library of Congress | Closes 2026-09-18 | This funding opportunity is authorized under the “Legislative Branch Appropriations Act of 2023” (Pub. L. 117-389 (H.R. 8237)), subject to availability of funding. The resulting awards will be subject to the Library of Congress Regulation (LCR) 7-310. In addition, while the Library, as a legislative agency, is not subject to 2 CFR 200 - Uniform Administrative Requirements, Costs Principles and Aud…</summary>
   </entry>
   <entry>
@@ -377,17 +436,6 @@
     <summary>Natural Resources Conservation Service | Closes 2026-09-21 | The purpose of the Feral Swine Eradication and Control Project (FSCP) is to respond to the threat feral swine pose to agriculture, native ecosystems, and human and animal health. Feral swine are a destructive, non-native, invasive species and their populations have expanded across the United States since the 1980’s. Over an estimated $3.4 billion in damage, including agricultural, is caused by fer…</summary>
   </entry>
   <entry>
-    <title>U.S-Nigeria Creative, Digital, &amp; Innovation Economy Initiative</title>
-    <link href="https://www.grants.gov/search-results-detail/363269"/>
-    <id>urn:funding-finder:grants-gov:363269</id>
-    <updated>2026-07-22T00:00:00Z</updated>
-    <author><name>U.S. Mission to Nigeria</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Nigeria | Closes 2026-08-20 | The U.S. Department of State’s U.S. Consulate General Lagos announces an open competition to implement a program to increase two-way trade and investment between the United States and Nigeria by building commercial relationships, professional knowledge, legal infrastructure, and institutional connections that enable U.S. companies and Nigerian creative/digital professionals to partner and grow tog…</summary>
-  </entry>
-  <entry>
     <title>Qissati ma3 America</title>
     <link href="https://www.grants.gov/search-results-detail/363270"/>
     <id>urn:funding-finder:grants-gov:363270</id>
@@ -416,28 +464,6 @@
     <summary>U.S. Mission to Kazakhstan | Closes 2026-08-21 | Funding Instrument Type: Cooperative agreement. PDS will be involved in the selection of participants, review of proposed publications, or more. Project Performance Period: Proposed projects should be completed in 20 months or less. This notice is subject to availability of funding. The Public Diplomacy Section reserves the right to award less or more than the funds described under circumstances d…</summary>
   </entry>
   <entry>
-    <title>Education and Outreach to Tribal Producers through the Tribal Food Safety Alliance</title>
-    <link href="https://www.grants.gov/search-results-detail/363239"/>
-    <id>urn:funding-finder:grants-gov:363239</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>Food and Drug Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Cybersecurity"/>
-    <summary>Food and Drug Administration | Closes 2026-08-20 | The primary purpose of this program is to develop and provide education and/or training, and outreach regarding FDA's Produce Safety Rule to produce farmers who are members of federally recognized Tribes. The program is expected to help Tribal farmers access appropriate technical assistance and may include Tribal farmers who are not currently required to comply with the rule but are interested in …</summary>
-  </entry>
-  <entry>
-    <title>Personal Responsibility Education Innovative Strategies (PREIS)</title>
-    <link href="https://www.grants.gov/search-results-detail/361986"/>
-    <id>urn:funding-finder:grants-gov:361986</id>
-    <updated>2026-07-17T00:00:00Z</updated>
-    <author><name>Administration for Children &amp; Families - ACYF/FYSB</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <summary>Administration for Children &amp; Families - ACYF/FYSB | Closes 2026-08-18 | The Personal Responsibility Education Program-Innovative Strategies (PREIS) builds the evidence base for adolescent pregnancy prevention interventions that are effective with high risk and vulnerable youth populations and addresses gaps with new promising program models. PREIS funds rigorous impact evaluations of innovative youth pregnancy prevention interventions that target services to high-risk…</summary>
-  </entry>
-  <entry>
     <title>Annual Program Statement for U.S. Presentation at International Architecture Biennales</title>
     <link href="https://www.grants.gov/search-results-detail/363225"/>
     <id>urn:funding-finder:grants-gov:363225</id>
@@ -446,29 +472,6 @@
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <summary>Bureau Of Educational and Cultural Affairs | Closes 2099-01-01 | The U.S. Department of State, Bureau of Educational and Cultural Affairs, Cultural Programs Division (ECA/PE/C/CU) seeks to advance international understanding of American values by exposing foreign audiences to innovative and compelling architectural designs that reflect U.S. foreign policy and foster international dialogue on shared global challenges.</summary>
-  </entry>
-  <entry>
-    <title>Title V Competitive Sexual Risk Avoidance Education</title>
-    <link href="https://www.grants.gov/search-results-detail/362128"/>
-    <id>urn:funding-finder:grants-gov:362128</id>
-    <updated>2026-07-16T00:00:00Z</updated>
-    <author><name>Administration for Children &amp; Families - ACYF/FYSB</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <summary>Administration for Children &amp; Families - ACYF/FYSB | Closes 2026-08-17 | This NOFO is modified. Changes are made to Step 1: Review the Opportunity, Eligibility: Locality restrictions. The state of New Hampshire was added. The Title V Competitive SRAE program competitively funds projects to implement sexual risk avoidance education that teaches youth ages 10-19 how to voluntarily refrain from non-marital sexual activity. Projects must: 1) use medically accurate informat…</summary>
-  </entry>
-  <entry>
-    <title>English Language Teaching and Learning Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363077"/>
-    <id>urn:funding-finder:grants-gov:363077</id>
-    <updated>2026-07-07T00:00:00Z</updated>
-    <author><name>U.S. Mission to Uzbekistan</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <summary>U.S. Mission to Uzbekistan | Closes 2026-08-17 | The U.S. Department of State announces an open competition to deliver in-person, specialized English language teacher training and direct student instruction aligned with priority sectors such as space, critical minerals, rare earths, energy, high technology, business and trade, agriculture, media, and security. As U.S. engagement with Uzbekistan increases, English proficiency has become a strateg…</summary>
   </entry>
   <entry>
     <title>Collaborative Research</title>

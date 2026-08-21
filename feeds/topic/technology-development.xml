@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-08-15T20:29:37Z</updated>
+  <updated>2026-08-21T16:48:00Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -209,6 +209,136 @@
     <summary>National Institutes of Health | Closes 2027-01-25 | The Clinical and Translational Science Awards Program Trial Innovation Network (TIN) is a collaborative initiative aimed at addressing critical roadblocks in the design and implementation of multi-center clinical trials. The goal of the TIN is to execute trials better, faster, and more cost-efficiently, as well as serve as a national laboratory to study, understand, and innovate the process of con…</summary>
   </entry>
   <entry>
+    <title>University-led Networks for Innovation, Technology, and Expertise (UNITE)</title>
+    <link href="https://www.grants.gov/search-results-detail/363645"/>
+    <id>urn:funding-finder:grants-gov:363645</id>
+    <updated>2026-08-18T00:00:00Z</updated>
+    <author><name>U.S. Mission to Saudi Arabia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Saudi Arabia | Closes 2026-09-17 | The U.S. Embassy Riyadh Public Diplomacy Section is accepting applications for a cooperative agreement to run the University-led Networks for Innovation, Technology, and Expertise (UNITE) program. UNITE will support approximately four to five applied project teams - university-industry partnerships between U.S. universities, U.S. companies or technical partners, and Saudi institutions - through pr…</summary>
+  </entry>
+  <entry>
+    <title>MPS Astronomical Sciences Research Programs (MPS Astro)</title>
+    <link href="https://www.grants.gov/search-results-detail/363620"/>
+    <id>urn:funding-finder:grants-gov:363620</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Energy"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation | Closes 2026-11-16 | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs in the astronomical sciences. NSF MPS funds foundational astronomical sciences research and instrumentation focused on exploring space and advancing fundamental understanding of the universe. The programs covered by this funding opportunity are: Astronomical Science…</summary>
+  </entry>
+  <entry>
+    <title>EMERGING FRONTIERS IN RESEARCH AND INNOVATION (EFRI-2026/27): Wave-Based Computing ( EFRI-WBC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363622"/>
+    <id>urn:funding-finder:grants-gov:363622</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation | Closes 2027-02-11 | The Emerging Frontiers in Research and Innovation (EFRI) program serves a critical role in helping the NSF Directorate for Engineering focus on important emerging areas in a timely way. The EFRI program invests in potentially transformative ideas that offer the opportunity for significant shifts in foundational engineering knowledge. EFRI-funded research must have strong potential for long-term im…</summary>
+  </entry>
+  <entry>
+    <title>Expeditions in Computing (Expeditions)</title>
+    <link href="https://www.grants.gov/search-results-detail/363623"/>
+    <id>urn:funding-finder:grants-gov:363623</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation | Closes 2027-07-27 | The far-reaching impact and rate of innovation in the computer and information science and engineering ﬁelds has been remarkable, generating economic prosperity, and enhancing the quality of life for people. More than a decade ago, the NSF Directorate for Computer and Information Science and Engineering (NSF CISE) established the NSF Expeditions program to provide the NSF CISE research community w…</summary>
+  </entry>
+  <entry>
+    <title>Engineering (ENG): Civil, Mechanical and Manufacturing Innovation (CMMI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363614"/>
+    <id>urn:funding-finder:grants-gov:363614</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-18 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
+  </entry>
+  <entry>
+    <title>2026 SBIR/STTR topics</title>
+    <link href="https://arpa-h.gov/explore-funding/sbir"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Asbir</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Technology development"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Closes 2026-09-11 | Current ARPA-H small business. For Small Businesses | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer',…</summary>
+  </entry>
+  <entry>
+    <title>Systems for Tracking and Resilience in Efficient Agricultural-input Management (STREAM)</title>
+    <link href="https://arpa-h.gov/explore-funding/programs/stream"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Astream</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Technology development"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Closes 2026-09-14 | Current ARPA-H program. STREAM | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wind…</summary>
+  </entry>
+  <entry>
+    <title>Technology InteGrator and AcceleratoR (TIGAR) Exploratory Topic</title>
+    <link href="https://arpa-h.gov/explore-funding/initiatives-and-sprints/tigar"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Atigar</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Technology development"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Closes 2026-09-17 | Current ARPA-H initiative. TIGAR Exploratory Topic | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','…</summary>
+  </entry>
+  <entry>
+    <title>ASCENT-IBO</title>
+    <link href="https://arpa-h.gov/explore-funding/initiatives-and-sprints/ascent-ibo"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Aascent-ibo</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Technology development"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Closes 2026-10-15 | Current ARPA-H initiative. ASCENT-IBO | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'…</summary>
+  </entry>
+  <entry>
+    <title>Fast Assessment of Solutions, Therapeutics, Pharmaceuticals, and Supplies (FASTPASS)</title>
+    <link href="https://arpa-h.gov/explore-funding/programs/fastpass"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Afastpass</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Technology development"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Closes 2026-11-10 | Current ARPA-H program. FASTPASS | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wi…</summary>
+  </entry>
+  <entry>
+    <title>Limited Submission Opportunity: $700,000 - The G. Harold and Leila Y. Mathers Foundation - Research Grant (Spring 2027 Cycle)</title>
+    <link href="http://rochester.infoready4.com/CompetitionSpace/"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Ainfoready-2028504</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Climate change"/>
+    <category term="Infectious disease"/>
+    <category term="Neuroscience"/>
+    <category term="Technology development"/>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2027-02-12 | The Foundation primarily
+supports basic science, ideally with potential translational applications. Examples of current research areas we support include
+immunology, microbiome, structural biology, cellular physiology, cancer biology, genetics, genomics, microbiology and infectious diseases, stem cell biology, and neuroscience. Research areas
+we will not consider for support include Covid-19 relat…</summary>
+  </entry>
+  <entry>
+    <title>Restorative &amp; health-Enhancing Sleep Time (REST)</title>
+    <link href="https://arpa-h.gov/explore-funding/programs/rest"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Arest</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Technology development"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Posted | Current ARPA-H program. REST | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); window…</summary>
+  </entry>
+  <entry>
     <title>Enhancing and Supporting the Network of American Spaces in Armenia</title>
     <link href="https://www.grants.gov/search-results-detail/363541"/>
     <id>urn:funding-finder:grants-gov:363541</id>
@@ -402,32 +532,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <summary>Bureau of Land Management | Closes 2026-09-28 | The Bureau of Land Management"s Plant Conservation and Restoration Program (PCRP) is a national leader in building the native seed supply chain essential for restoring resilient public lands and supporting multiple use and sustained yield. PCRP advances Department of the Interior mission to protect and manage America's natural resources. The native seed PCRP adds to the commercial market enables r…</summary>
   </entry>
   <entry>
-    <title>Subnational Industrial Innovation and Resilient Entrepreneurship Accelerator</title>
-    <link href="https://www.grants.gov/search-results-detail/363319"/>
-    <id>urn:funding-finder:grants-gov:363319</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>U.S. Mission to Argentina</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Argentina | Closes 2026-08-20 | The U.S. Embassy Buenos Aires announces an open competition to support subnational economic growth and operational modernization in Argentina's strategic manufacturing and resource corridors. This program will establish a competitive business acceleration program designed to provide next-generation entrepreneurs in industrial and mining provinces with practical management tools, strategic scaling …</summary>
-  </entry>
-  <entry>
-    <title>U.S.-Argentina Alumni Summit</title>
-    <link href="https://www.grants.gov/search-results-detail/363320"/>
-    <id>urn:funding-finder:grants-gov:363320</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>U.S. Mission to Argentina</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Argentina | Closes 2026-08-20 | The U.S. Embassy Buenos Aires announces an open competition to strengthen civic leadership, good governance, and institutional resilience across Argentina. This program will organize a national cross-sector Alumni Summit to equip emerging leaders from the public, academic, and non-governmental organization (NGO) sectors with practical tools, strategic insights, and ethical frameworks regarding inn…</summary>
-  </entry>
-  <entry>
     <title>Collaborative Approaches to Adoption for Children with Complex Needs</title>
     <link href="https://www.grants.gov/search-results-detail/362891"/>
     <id>urn:funding-finder:grants-gov:362891</id>
@@ -473,17 +577,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <summary>U.S. Mission to Indonesia | Closes 2026-08-30 | Indonesia is ASEAN’s largest economy and most populous nation, with a young, fast-growing digital population that is rapidly adopting artificial intelligence and creative-technology tools. The choices this generation makes about which technologies, standards, and platforms to build on will shape Indonesia’s digital economy for decades. Demand for trusted, high-quality AI tools is outpacing access …</summary>
   </entry>
   <entry>
-    <title>U.S-Nigeria Creative, Digital, &amp; Innovation Economy Initiative</title>
-    <link href="https://www.grants.gov/search-results-detail/363269"/>
-    <id>urn:funding-finder:grants-gov:363269</id>
-    <updated>2026-07-22T00:00:00Z</updated>
-    <author><name>U.S. Mission to Nigeria</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Nigeria | Closes 2026-08-20 | The U.S. Department of State’s U.S. Consulate General Lagos announces an open competition to implement a program to increase two-way trade and investment between the United States and Nigeria by building commercial relationships, professional knowledge, legal infrastructure, and institutional connections that enable U.S. companies and Nigerian creative/digital professionals to partner and grow tog…</summary>
-  </entry>
-  <entry>
     <title>Technology Enhanced Adoptive Family Recruiting and Matching</title>
     <link href="https://www.grants.gov/search-results-detail/361968"/>
     <id>urn:funding-finder:grants-gov:361968</id>
@@ -507,40 +600,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <summary>U.S. National Science Foundation | Closes 2026-11-04 | This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
   </entry>
   <entry>
-    <title>CyberNext: Advance Cybersecurity and AI Readiness</title>
-    <link href="https://www.grants.gov/search-results-detail/363249"/>
-    <id>urn:funding-finder:grants-gov:363249</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>U.S. Mission to Albania</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Cybersecurity"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Albania | Closes 2026-08-20 | Project Background, Goals, and Objectives Albania has experienced multiple cyberattacks in recent years, placing increasingly digital government services and critical institutions at significant risk. While Albania is actively embracing AI, substantial skill gaps remain - gaps that American expertise is uniquely positioned to address. The “CyberNext: Advanced Cybersecurity and AI Readiness” progra…</summary>
-  </entry>
-  <entry>
-    <title>GameON - U.S.-Albania E-Sports and Innovation</title>
-    <link href="https://www.grants.gov/search-results-detail/363247"/>
-    <id>urn:funding-finder:grants-gov:363247</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>U.S. Mission to Albania</name></author>
-    <category term="Cybersecurity"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Albania | Closes 2026-08-20 | 1. Project Background, Goals, and Objectives Albania's youth face a rapidly evolving digital economy that demands advanced technical skills, entrepreneurial mindsets, and exposure to international industry standards. Albanian interest in gaming - a global market forecasted to surpass $745 billion by 2030, in which the United States is leading - is high, presenting an opportunity to increase Albani…</summary>
-  </entry>
-  <entry>
-    <title>StartUP Lab: U.S.-Albania Economic Leadership &amp; Innovation Exchange</title>
-    <link href="https://www.grants.gov/search-results-detail/363243"/>
-    <id>urn:funding-finder:grants-gov:363243</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>U.S. Mission to Albania</name></author>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Albania | Closes 2026-08-20 | 1. Project Background, Goals, and Objectives American Corners in Albania have a consistent record of delivering youth entrepreneurship and economic advancement programming - from English language courses designed to build employability, to coding and tech skills bootcamps, to structured entrepreneurship incubators - each iteration reaching more participants year after year, expanding through all t…</summary>
-  </entry>
-  <entry>
     <title>NextTech: Translational Development of Next-Generation Diagnostic and Therapeutic Devices (R18 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/361380"/>
     <id>urn:funding-finder:grants-gov:361380</id>
@@ -549,30 +608,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Neuroscience"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Closes 2026-09-18 | This Notice of Funding Opportunity (NOFO) is to encourage applications from investigators to advance the development and translation of next-generation technologies to prevent, monitor, diagnose, and treat disorders within the missions of the NIH Brain Research through Advancing Innovative Neurotechnologies (BRAIN) and The Helping to End Addiction Long-term (HEAL) Initiatives. Awarded activities w…</summary>
-  </entry>
-  <entry>
-    <title>Center for Foundational Academic Research and Strategic Innovation for the Defense Enterprise (C-FARSIDE)</title>
-    <link href="https://www.grants.gov/search-results-detail/363091"/>
-    <id>urn:funding-finder:grants-gov:363091</id>
-    <updated>2026-07-16T00:00:00Z</updated>
-    <author><name>Washington Headquarters Services</name></author>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>Washington Headquarters Services | Closes 2026-08-17 | Bridging foundational academic research and strategic innovation for the Defense enterprise, the Center for Foundational Academic Research and Strategic Innovation for the Defense Enterprise (C-FARSIDE) will facilitate deep transdisciplinary collaborations among top-tier scholars, informed by defense strategists, that will transform rigorous and blue-sky research into breakthrough national securit…</summary>
-  </entry>
-  <entry>
-    <title>Enhancing Biotechnology Market Opportunities for U.S. Exporters and American Farmers</title>
-    <link href="https://www.grants.gov/search-results-detail/363193"/>
-    <id>urn:funding-finder:grants-gov:363193</id>
-    <updated>2026-07-15T00:00:00Z</updated>
-    <author><name>Foreign Agricultural Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>Foreign Agricultural Service | Closes 2026-08-17 | Modern agricultural biotechnology such as genome editing is a revolutionary tool that could transform the sustainability and viability of the agriculture sector. American farmers rely on agricultural biotechnology products, with over 90% of corn and soybeans derived from these technologies. In 2025, American farmers exported over $51 billion in agricultural biotechnology products worldwide. Howeve…</summary>
   </entry>
   <entry>
     <title>Public Wireless Supply Chain Innovation Fund Grant Program - Solutions for AI-Native RAN</title>
@@ -631,52 +666,5 @@ a high level of innovation and creativity. The goal is to support the best young
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Technology development"/>
     <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-22 | Summary: The fiscal year 2026 (FY26) Neurofibromatosis Research Program (NFRP) Exploration-Hypothesis Development Award (EHDA) supports the initial exploration of innovative, high-risk, high-gain, and potentially groundbreaking concepts in neurofibromatosis (NF) research. Studies supported by this award mechanism should lay the groundwork for future avenues of scientific investigation. The propose…</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: Growing Great Ideas: Research Education Course in Entrepreneurship and Product Development for Researchers Studying Drug Use, Drug Misuse, and Drug Addiction (UE5 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360561"/>
-    <id>urn:funding-finder:grants-gov:360561</id>
-    <updated>2026-06-23T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2026-10-01 | This notice of funding opportunity (NOFO) seeks to establish a course to equip researchers studying drug use, drug misuse, and drug addiction with the skills, knowledge, and practical tools needed to translate their scientific discoveries into impactful real world solutions. The course is envisioned to focus on building capacity in product development, entrepreneurship, and innovation pathways so …</summary>
-  </entry>
-  <entry>
-    <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
-    <link href="https://www.grants.gov/search-results-detail/362900"/>
-    <id>urn:funding-finder:grants-gov:362900</id>
-    <updated>2026-06-22T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Cybersecurity"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <category term="Data science"/>
-    <category term="Energy"/>
-    <category term="Materials science"/>
-    <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | Project Background, Goals, and Objectives: In an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will lea…</summary>
-  </entry>
-  <entry>
-    <title>GREGoRi Data Coordination and Outreach Center (U01, Clinical Trials Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359279"/>
-    <id>urn:funding-finder:grants-gov:359279</id>
-    <updated>2026-06-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2026-10-30 | The Genomics Research to Elucidate the Genetics of Rare Diseases: innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. The purpose of this Notice of Funding Opportunity is to establish the GREGo…</summary>
-  </entry>
-  <entry>
-    <title>GREGoRi Innovation Projects (U01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359644"/>
-    <id>urn:funding-finder:grants-gov:359644</id>
-    <updated>2026-06-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2026-10-30 | The Genomics Research to Elucidate the Genetics of Rare Diseases: innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. This Notice of Funding Opportunity is intended to stimulate the development…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml</id>
-  <updated>2026-08-15T20:29:37Z</updated>
+  <updated>2026-08-21T16:48:00Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Resources and Workforce Development for the Regional Biocontainment Laboratories</title>
@@ -271,6 +271,28 @@
     <summary>National Institutes of Health | Closes 2026-12-18 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting the Centers for Structural Biology of HIV and other Infectious Diseases. This solicitation will support multidisciplinary groups of scientists to determine the 3-dimensional structures of molecules and molecular complexes involved in priority infectious diseases. The effort focuses on explo…</summary>
   </entry>
   <entry>
+    <title>Ending HIV and TB as public health threats through an accelerated and sustained comprehensive response in India</title>
+    <link href="https://www.grants.gov/search-results-detail/360710"/>
+    <id>urn:funding-finder:grants-gov:360710</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Transportation"/>
+    <category term="Cybersecurity"/>
+    <summary>Centers for Disease Control-GHC | Closes 2026-09-16 | The Award Ceiling for Year 1 is 0 (none). CDC anticipates an Approximate Total Fiscal Year Funding amount of $6,000,000 for Year 1, subject to the availability of funds. This NOFO supports India"s National AIDS Control Organization (NACO), Central Tuberculosis Division (CTD), and other departments in the Ministry of Health and Family Welfare (MoHFW). The goal is to enhance systems that accelerate …</summary>
+  </entry>
+  <entry>
+    <title>Strengthening Ghana Health Service laboratory services, diagnostic networks, and systems for a more effective, efficient, and sustainable response to HIV, TB, and other priority health threats</title>
+    <link href="https://www.grants.gov/search-results-detail/360759"/>
+    <id>urn:funding-finder:grants-gov:360759</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Infectious disease"/>
+    <category term="Cybersecurity"/>
+    <summary>Centers for Disease Control-GHC | Closes 2026-10-16 | The Award Ceiling for Year 1 is 0 (none). CDC anticipates an Approximate Total Fiscal Year Funding amount of $500,000 for Year 1, subject to the availability of funds. This NOFO provides operational support through financial and technical resources to the Ghana Health Service (GHS)/Ministry of Health (MoH). The goal is to help them coordinate and improve laboratory capacity so they can deliver hig…</summary>
+  </entry>
+  <entry>
     <title>Impact of Immunotherapies on CNS Outcomes in People with HIV: Potential Benefits, Challenges and Risks</title>
     <link href="https://www.grants.gov/search-results-detail/361519"/>
     <id>urn:funding-finder:grants-gov:361519</id>
@@ -279,6 +301,23 @@
     <category term="Infectious disease"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Closes 2026-10-22 | The National Institute of Mental Health (NIMH) intends to publish a notice of funding opportunity (NOFO) to solicit biphasic research applications to evaluate the impact of HIV immunotherapies on central nervous system (CNS) outcomes in people with HIV and to identify mechanisms, benefits, and risks associated with their use in the CNS compartment. The primary goal is to generate evidence that inf…</summary>
+  </entry>
+  <entry>
+    <title>Limited Submission Opportunity: $700,000 - The G. Harold and Leila Y. Mathers Foundation - Research Grant (Spring 2027 Cycle)</title>
+    <link href="http://rochester.infoready4.com/CompetitionSpace/"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Ainfoready-2028504</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Climate change"/>
+    <category term="Infectious disease"/>
+    <category term="Neuroscience"/>
+    <category term="Technology development"/>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2027-02-12 | The Foundation primarily
+supports basic science, ideally with potential translational applications. Examples of current research areas we support include
+immunology, microbiome, structural biology, cellular physiology, cancer biology, genetics, genomics, microbiology and infectious diseases, stem cell biology, and neuroscience. Research areas
+we will not consider for support include Covid-19 relat…</summary>
   </entry>
   <entry>
     <title>Illuminating AD/ADRD Genome to Enable Precision Genomic Medicine</title>
@@ -466,16 +505,6 @@
     <summary>National Institutes of Health | Closes 2026-09-29 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by continuing support for a Clinical Research Network on Antimicrobial Resistance (AMR). AMR is a major health challenge that limits treatment options and allows resistant infections to persist. Individuals with chronic conditions like diabetes and cancer are particularly vulnerable, resulting in increas…</summary>
   </entry>
   <entry>
-    <title>Limited Competition: Social, Behavioral, &amp; Economic (SBE) Coordinating Center</title>
-    <link href="https://www.grants.gov/search-results-detail/360159"/>
-    <id>urn:funding-finder:grants-gov:360159</id>
-    <updated>2026-06-20T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Infectious disease"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2026-08-20 | This is a Forecast for a Limited Competition Notice of Funding Opportunity (NOFO) that will invite application(s) from eligible organization(s) to apply. Please see the Eligibility Section for additional information. In accordance with NIH standard peer-review processes, the application(s) will be peer-reviewed, and only meritorious application(s) will be considered for funding. It is anticipated …</summary>
-  </entry>
-  <entry>
     <title>Avant Garde/Avenir Awards for Investigators Conducting High Risk/High Reward Research on HIV and Substance Use (or Substance Use Disorders) (DP1 Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/358991"/>
     <id>urn:funding-finder:grants-gov:358991</id>
@@ -483,27 +512,6 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Infectious disease"/>
     <summary>National Institutes of Health | Closes 2028-09-25 | The purpose of this notice of funding opportunity (NOFO) is to support innovative basic, clinical, translational, and implementation science research relevant to HIV and substance use. This initiative encourages high risk high impact transformative studies that advance knowledge and strategies for HIV prevention, diagnosis, treatment and virus suppression in people who use substances and/or have a…</summary>
-  </entry>
-  <entry>
-    <title>Centers for AIDS Research (CFAR)</title>
-    <link href="https://www.grants.gov/search-results-detail/360869"/>
-    <id>urn:funding-finder:grants-gov:360869</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2026-08-19 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by continuing support for the Centers for AIDS Research (CFAR). The national network of CFARs cooperates with other HHS-funded HIV/AIDS programs to establish and maintain the collaborations and infrastructure required to carry out innovative implementation science research for ending the HIV epidemic dom…</summary>
-  </entry>
-  <entry>
-    <title>Multidisciplinary Research to Accelerate Hepatitis B Cure in Persons Living with HIV and HBV (MRA-HBV)</title>
-    <link href="https://www.grants.gov/search-results-detail/359860"/>
-    <id>urn:funding-finder:grants-gov:359860</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2026-08-19 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by soliciting applications to support Multidisciplinary Research to Accelerate Hepatitis B Cure in Persons Living with HIV (PLWH) and Hepatitis B Virus (HBV). This program will focus on: elucidating mechanisms of persistence and pathogenesis; discovering and developing clinically relevant biomarkers; dis…</summary>
   </entry>
   <entry>
     <title>Using Archived Data and Specimen Collections to Advance Maternal and Pediatric HIV/AIDS Research (R21 CT Not Allowed)</title>
@@ -550,16 +558,6 @@
     <category term="Technology development"/>
     <summary>U.S. National Science Foundation | Posted | The Energy, Water, and Resource Engineering (EWRE) program supports fundamental research to advance energy, water, and resource management and to safeguard health. Better use of domestic resources will make U.S. manufacturing, energy and water systems more efficient and secure.
 EWRE supports research that creates domestic sources of energy, advances water management, and recovers resources using c…</summary>
-  </entry>
-  <entry>
-    <title>Martin Delaney Collaboratories for HIV Cure Research</title>
-    <link href="https://www.grants.gov/search-results-detail/359663"/>
-    <id>urn:funding-finder:grants-gov:359663</id>
-    <updated>2026-04-21T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2026-08-19 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by continuing support for the Martin Delaney Collaboratories (MDCs) for HIV Cure Research. The goal of the MDC program is to develop strategies to control viral replication without the need for lifelong antiretroviral therapy, with an ultimate goal of completely eradicating HIV reservoirs from the indivi…</summary>
   </entry>
   <entry>
     <title>NIDCD Clinical Research Center Grant (P50 Clinical Trial Optional)</title>
@@ -671,5 +669,17 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <author><name>National Institutes of Health</name></author>
     <category term="Infectious disease"/>
     <summary>National Institutes of Health | Closes 2026-09-25 | The purpose of this Notice of Funding Opportunity (NOFO) is to provide continuing support for specific pathogen-free (SPF) macaque colonies previously funded under the auspices of PAR-21-089 and PAR-18-669 that support Human Immunodeficiency Virus (HIV)/Acquired Immunodeficiency Syndrome (AIDS) research. Breeding colonies are essential to sustain appropriate SPF macaques for research related to HI…</summary>
+  </entry>
+  <entry>
+    <title>Department of Defense HIV/AIDS Prevention Program</title>
+    <link href="https://www.grants.gov/search-results-detail/343653"/>
+    <id>urn:funding-finder:grants-gov:343653</id>
+    <updated>2022-09-19T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Cancer"/>
+    <category term="Infectious disease"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Transportation"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2027-09-18 | ATTENTION: This announcement will be revised regularly to incorporate country specific narratives (Attachment 1 of the announcement) with information vital to the content of application. Potential applicants interested in applying to this announcement should click 'Subscribe' to be notified of future revisions. DoD HIV/AID Prevention Program's (DHAPP) objective, through the PEPFAR program, is to s…</summary>
   </entry>
 </feed>

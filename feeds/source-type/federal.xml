@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml</id>
-  <updated>2026-08-15T20:29:37Z</updated>
+  <updated>2026-08-21T16:48:00Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -15,6 +15,15 @@
     <category term="Education and workforce"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Closes 2028-05-30 | The National Institute on Deafness and Other Communication Disorders (NIDCD) intends to publish a Notice of Funding Opportunity (NOFO) for clinical audiologists currently enrolled in Ph. D. programs. NIDCD encourages audiologists with strong research potential to integrate clinical and translational research into their career paths. A strong research foundation is essential for advancing hearing h…</summary>
+  </entry>
+  <entry>
+    <title>Healthy Lifestyles in Youth</title>
+    <link href="https://www.grants.gov/search-results-detail/363651"/>
+    <id>urn:funding-finder:grants-gov:363651</id>
+    <updated>2028-04-28T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Public health"/>
+    <summary>Indian Health Service | Closes 2028-06-30 | New cohort of NPHR awards designed to fund Tribes and Tribal Orgs to provide Essential Public Health Services</summary>
   </entry>
   <entry>
     <title>Public Health Nursing</title>
@@ -54,6 +63,16 @@
     <author><name>Indian Health Service</name></author>
     <category term="Arts and culture"/>
     <summary>Indian Health Service | Closes 2027-10-01 | The goal of the Youth Aftercare cooperative agreement is to help American Indian and Alaska Native (AI/AN) youth achieve and sustain safety, sobriety, and long-term success after discharge from a Youth Regional Treatment Center (YRTC). The program strengthens culturally appropriate, community-based aftercare services by improving care coordination, building partnerships across the continuum of car…</summary>
+  </entry>
+  <entry>
+    <title>Senator Paul D. Wellstone Muscular Dystrophy Specialized Research Centers (MDSRC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363681"/>
+    <id>urn:funding-finder:grants-gov:363681</id>
+    <updated>2027-07-30T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health | Closes 2027-10-01 | This renewal of the Senator Paul D. Wellstone Muscular Dystrophy Specialized Research Centers (MDSRCs) continues a legislatively-mandated Centers of Excellence program, which aims to expand and intensify research on muscular dystrophy. The Centers advance basic, translational, and clinical muscular dystrophy research through interdisciplinary collaboration and shared resources for the research com…</summary>
   </entry>
   <entry>
     <title>Single Source: Institutional Development Award (IDeA) Clinical Research Resource Center (I-CRRC)</title>
@@ -210,6 +229,14 @@
     <summary>National Institutes of Health | Closes 2027-06-11 | NCI intends to release a Notice of Funding Opportunity (NOFO) that serves to continue the advancement and sustainment of informatics tools, software, and research resources that enable the acquisition, management, analysis, visualization, and interpretation of data across the cancer research continuum, including cancer biology, diagnosis and treatment, early detection, risk assessment and preventi…</summary>
   </entry>
   <entry>
+    <title>Translational Research in Maternal and Pediatric Pharmacology and Therapeutics</title>
+    <link href="https://www.grants.gov/search-results-detail/363679"/>
+    <id>urn:funding-finder:grants-gov:363679</id>
+    <updated>2027-03-31T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <summary>National Institutes of Health | Closes 2027-07-09 | The Eunice Kennedy Shriver National Institute of Child Health and Human Development (NICHD), as part of its stewardship of Congressionally-mandated activities under the Best Pharmaceuticals for Children Act (BPCA) and implementation of recommendations of the Task Force on Research Specific to Pregnant Women and Lactating Women (PRGLAC), intends to renew and publish a Notice of Funding Opportunity …</summary>
+  </entry>
+  <entry>
     <title>Radiation Exposure Screening and Education Program</title>
     <link href="https://www.grants.gov/search-results-detail/363577"/>
     <id>urn:funding-finder:grants-gov:363577</id>
@@ -323,6 +350,15 @@
     <updated>2027-03-04T00:00:00Z</updated>
     <author><name>Centers for Disease Control - NCCDPHP</name></author>
     <summary>Centers for Disease Control - NCCDPHP | Closes 2027-05-03 | The purpose of this multi-component NOFO is to improve the health of pregnant and postpartum women and their newborns through quality improvement. CDC will fund two components. Component A will support state Perinatal Quality Collaboratives (PQCs). PQCs are state-based organizations that support quality improvement (QI) efforts in health facilities and whose approach has been successful in improvi…</summary>
+  </entry>
+  <entry>
+    <title>Preventing Violence Affecting Young Lives (PREVAYL 2.0)</title>
+    <link href="https://www.grants.gov/search-results-detail/363634"/>
+    <id>urn:funding-finder:grants-gov:363634</id>
+    <updated>2027-03-03T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCIPC</name></author>
+    <category term="Education and workforce"/>
+    <summary>Centers for Disease Control - NCIPC | Closes 2027-05-03 | The purpose of this NOFO is to provide multiyear funding to state, territorial, tribal, and local health departments to implement and evaluate comprehensive primary prevention strategies that prevent multiple forms of violence and promote healthy development among adolescents and young adults. Building on the prior PREVAYL cooperative agreement, this NOFO emphasizes: Improving data-driven decision…</summary>
   </entry>
   <entry>
     <title>Promoting Population Health through Increased Capacity in Alcohol Epidemiology &amp; the Prevention of Excessive Alcohol Use</title>
@@ -467,6 +503,17 @@
     <summary>Indian Health Service | Closes 2027-04-01 | The purpose of this IHS grant is to expand access to culturally appropriate, trauma-informed forensic healthcare (FHC) services for American Indian/Alaska Native (AI/AN) victims of domestic violence, sexual violence, child maltreatment, and human trafficking. The grant supports the development and expansion of FHC services across IHS Areas while promoting coordinated treatment, intervention, preve…</summary>
   </entry>
   <entry>
+    <title>Substance Abuse Prevention, Treatment, and Aftercare</title>
+    <link href="https://www.grants.gov/search-results-detail/363652"/>
+    <id>urn:funding-finder:grants-gov:363652</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Indian Health Service | Closes 2027-04-01 | The primary purpose of this program is to reduce substance abuse among American Indian and Alaska Native (AI/AN) populations by improving care coordination, expanding culturally appropriate behavioral health services, and implementing early intervention strategies for at-risk AI/AN youth. The program supports Tribal, community-driven prevention, treatment, and recovery efforts that promote cross-s…</summary>
+  </entry>
+  <entry>
     <title>Suicide Prevention, Intervention, and Postvention</title>
     <link href="https://www.grants.gov/search-results-detail/363496"/>
     <id>urn:funding-finder:grants-gov:363496</id>
@@ -529,57 +576,5 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <summary>CENTERS FOR DISEASE CONTROL CSTLTS | Closes 2027-04-02 | CDC announces the availability of supplemental funding for the 34 American Indian and Alaska Native (AI/AN) Tribes and regional AI/AN tribally designated organizations awarded funding under CDC-RFA-TO-23-0001: Strengthening Public Health Systems and Services in Indian Country. The CDC-RFA-TO-23-0001 recipients are eligible to submit applications for new FY 2027 Centers, Institute, and Offices (CIO…</summary>
-  </entry>
-  <entry>
-    <title>Chronic Care Telehealth Centers of Excellence Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363274"/>
-    <id>urn:funding-finder:grants-gov:363274</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <summary>Health Resources and Services Administration | Closes 2027-05-03 | The Chronic Care Telehealth Centers for Excellence Program will fund academic medical centers to integrate innovative telehealth technologies into the full spectrum of services included in chronic care models, including but not limited to, chronic disease prevention and management, and the treatment for acute episodes that result from long-term morbidity. These centers will disseminate findings th…</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: The NHGRI Analysis, Visualization, and Informatics Lab-space (AnVIL) (U54 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/362638"/>
-    <id>urn:funding-finder:grants-gov:362638</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>National Institutes of Health | Closes 2027-05-25 | The National Human Genome Research Institute (NHGRI) intends to issue a Notice of Funding Opportunity (NOFO) to support a limited competition renewal of the Analysis, Visualization, and Informatics Lab-space (AnVIL) program. AnVIL is a secure, cloud-based platform that enables researchers to access, share, and analyze large-scale genomic datasets without relying on local infrastructure. Currently,…</summary>
-  </entry>
-  <entry>
-    <title>BRAIN Initiative: Data Archives for the BRAIN Initiative</title>
-    <link href="https://www.grants.gov/search-results-detail/361448"/>
-    <id>urn:funding-finder:grants-gov:361448</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Environmental science"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2027-06-01 | The National Institute of Mental Health (NIMH), with other NIH Institutes and Centers (ICs), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop web-accessible data archives to capture, store, and curate data related to the Brain Research Through Advancing Innovative Neurotechnologies® (BRAIN) Initiative activities. The data archives teams will work with th…</summary>
-  </entry>
-  <entry>
-    <title>Clinical Data, Safety and Statistical Centers (CDSSC)</title>
-    <link href="https://www.grants.gov/search-results-detail/362957"/>
-    <id>urn:funding-finder:grants-gov:362957</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2027-06-01 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the support of the Clinical Data, Safety and Statistical Centers program. The overall objective of this program is to provide coordination and oversight for multiple activities in service to clinical research and mechanistic studies supported by NIAID, including all Division of Allergy, Immunolog…</summary>
-  </entry>
-  <entry>
-    <title>Advanced Laboratories for Accelerating the Reach and Impact of Treatments for Youth and Adults with Mental Illness (ALACRITY) Research Centers</title>
-    <link href="https://www.grants.gov/search-results-detail/361521"/>
-    <id>urn:funding-finder:grants-gov:361521</id>
-    <updated>2027-01-27T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2027-05-27 | The National Institute of Mental Health (NIMH) intends to publish a notice of funding opportunity (NOFO) to solicit research applications for practice-based research centers to support interdisciplinary teams of mental health researchers to engage in high-impact studies that will significantly advance clinical practice and generate knowledge to fuel the transformation of mental health care in the …</summary>
   </entry>
 </feed>

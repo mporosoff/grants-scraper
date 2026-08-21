@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml</id>
-  <updated>2026-08-15T20:29:37Z</updated>
+  <updated>2026-08-21T16:48:00Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -15,6 +15,16 @@
     <category term="Education and workforce"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Closes 2028-05-30 | The National Institute on Deafness and Other Communication Disorders (NIDCD) intends to publish a Notice of Funding Opportunity (NOFO) for clinical audiologists currently enrolled in Ph. D. programs. NIDCD encourages audiologists with strong research potential to integrate clinical and translational research into their career paths. A strong research foundation is essential for advancing hearing h…</summary>
+  </entry>
+  <entry>
+    <title>Senator Paul D. Wellstone Muscular Dystrophy Specialized Research Centers (MDSRC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363681"/>
+    <id>urn:funding-finder:grants-gov:363681</id>
+    <updated>2027-07-30T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health | Closes 2027-10-01 | This renewal of the Senator Paul D. Wellstone Muscular Dystrophy Specialized Research Centers (MDSRCs) continues a legislatively-mandated Centers of Excellence program, which aims to expand and intensify research on muscular dystrophy. The Centers advance basic, translational, and clinical muscular dystrophy research through interdisciplinary collaboration and shared resources for the research com…</summary>
   </entry>
   <entry>
     <title>Single Source: Institutional Development Award (IDeA) Clinical Research Resource Center (I-CRRC)</title>
@@ -127,6 +137,15 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>Veterans Legacy Grants Program | Closes 2027-04-09 | VLGP will provide grants to eligible entities for the purpose of conducting cemetery research related to national, State, or Tribal Veterans’ cemeteries; producing educational materials that teach about the history of Veterans interred in national, State, or Tribal Veterans’ cemeteries; and promoting community engagement with the histories of Veterans interred in national, State, or Tribal Veteran…</summary>
+  </entry>
+  <entry>
+    <title>Preventing Violence Affecting Young Lives (PREVAYL 2.0)</title>
+    <link href="https://www.grants.gov/search-results-detail/363634"/>
+    <id>urn:funding-finder:grants-gov:363634</id>
+    <updated>2027-03-03T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCIPC</name></author>
+    <category term="Education and workforce"/>
+    <summary>Centers for Disease Control - NCIPC | Closes 2027-05-03 | The purpose of this NOFO is to provide multiyear funding to state, territorial, tribal, and local health departments to implement and evaluate comprehensive primary prevention strategies that prevent multiple forms of violence and promote healthy development among adolescents and young adults. Building on the prior PREVAYL cooperative agreement, this NOFO emphasizes: Improving data-driven decision…</summary>
   </entry>
   <entry>
     <title>Promoting Population Health through Increased Capacity in Alcohol Epidemiology &amp; the Prevention of Excessive Alcohol Use</title>
@@ -256,6 +275,16 @@
     <category term="Education and workforce"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Closes 2027-03-01 | The purpose of this forecast is to inform the research community that the NIH Common Fund, along with its partner NIH Institutes, Centers, and Offices, is planning to issue a notice of funding opportunity (NOFO) to support the continuation of the Bridge2AI program. Stage 1 of the Bridge2AI program produced unique, large-scale, valuable, and open resource, AI-ready datasets and best practices that …</summary>
+  </entry>
+  <entry>
+    <title>Zero Suicide Initiative</title>
+    <link href="https://www.grants.gov/search-results-detail/363653"/>
+    <id>urn:funding-finder:grants-gov:363653</id>
+    <updated>2027-01-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <summary>Indian Health Service | Closes 2027-03-01 | The purpose of this program is to strengthen suicide prevention in Indian health systems by implementing the Zero Suicide framework through a comprehensive, culturally informed approach. The program supports Tribal health systems in building leadership, workforce capacity, systematic suicide risk identification, timely engagement and evidence-based treatment, continuity of care, and quality improv…</summary>
   </entry>
   <entry>
     <title>The National Network of STI Prevention Training Centers (NNPTC)</title>
@@ -587,38 +616,5 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health | Closes 2026-11-01 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop, operate, and sustain a cloud-based data storage and computing platform that democratizes access to large-scale Alzheimer’s disease (AD) and AD-related dementias (ADRD) genetic and genomic data. The platform must be secure, scalable, and interoperable. The platform wil…</summary>
-  </entry>
-  <entry>
-    <title>Clinical and Translational Science Award</title>
-    <link href="https://www.grants.gov/search-results-detail/363244"/>
-    <id>urn:funding-finder:grants-gov:363244</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2027-01-25 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: High Impact Specialized Innovation Programs in Clinical and Translational Science</title>
-    <link href="https://www.grants.gov/search-results-detail/363250"/>
-    <id>urn:funding-finder:grants-gov:363250</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2027-01-25 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: Research Education Program for the Clinical and Translational Science Awards Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363248"/>
-    <id>urn:funding-finder:grants-gov:363248</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2027-01-25 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-08-15T20:29:37Z</updated>
+  <updated>2026-08-21T16:48:00Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -80,7 +80,7 @@
     <category term="Community development"/>
     <category term="Energy"/>
     <category term="Cybersecurity"/>
-    <summary>Rural Utilities Service | Closes 2027-05-03 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+    <summary>Rural Utilities Service | Closes 2026-10-09 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2027 Regional Nutrition Hubs</title>
@@ -90,6 +90,70 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Agriculture and food"/>
     <summary>Health Resources and Services Administration | Closes 2026-10-20 | Fiscal Year (FY) 2027 Regional Nutrition Hubs (RNH) will support region-specific technical assistance (TA) on expanding high-quality nutrition services to the Health Resources and Services Administration's (HRSA) Health Center Program (H80) award recipients and look-alikes (health centers). Nutrition services prevent, manage, and treat diseases and conditions through nutritional and food-based int…</summary>
+  </entry>
+  <entry>
+    <title>Children, Youth, and Families At-Risk Professional Development and Technical Assistance Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363675"/>
+    <id>urn:funding-finder:grants-gov:363675</id>
+    <updated>2026-08-20T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <summary>National Institute of Food and Agriculture | Closes 2026-09-01 | CYFAR marshals the resources of the Land-grant and the Cooperative Extension Systems so that, in collaboration with other organizations, they can develop and deliver educational programs to youth who are at risk for not meeting basic human needs. These programs provide youth with the skills they need to lead positive, productive, and contributing lives; participating youth make a difference social…</summary>
+  </entry>
+  <entry>
+    <title>Agriculture Risk Management Education Partnerships Competitive Grants Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363682"/>
+    <id>urn:funding-finder:grants-gov:363682</id>
+    <updated>2026-08-20T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <summary>National Institute of Food and Agriculture | Closes 2026-09-21 | The purpose of ARME, Assistance Listing 10.520, is to educate agricultural producers about the full range of risk management activities. These activities include futures, options, agricultural trade options, crop insurance, cash forward contracting, debt reduction, production diversification, marketing plans and tactics, farm resources risk reduction, and other appropriate risk management strategi…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year (FY) 2027 AmeriCorps Seniors RSVP Competition</title>
+    <link href="https://www.grants.gov/search-results-detail/363482"/>
+    <id>urn:funding-finder:grants-gov:363482</id>
+    <updated>2026-08-20T00:00:00Z</updated>
+    <author><name>AmeriCorps</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Transportation"/>
+    <summary>AmeriCorps | Closes 2026-10-20 | AmeriCorps improves lives, strengthens communities, and fosters civic engagement through service and volunteering. AmeriCorps brings people together to tackle some of the country’s most pressing challenges through national service and volunteerism. AmeriCorps members and AmeriCorps Seniors volunteers serve with organizations dedicated to the improvement of communities and those serving. AmeriCorps…</summary>
+  </entry>
+  <entry>
+    <title>Food and Agriculture Defense Initiative Extension Disaster Education Network</title>
+    <link href="https://www.grants.gov/search-results-detail/363663"/>
+    <id>urn:funding-finder:grants-gov:363663</id>
+    <updated>2026-08-19T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <summary>National Institute of Food and Agriculture | Closes 2026-09-21 | The goal of the FADI-EDEN program, under assistance listing 10.304, is to support CES’s ability to maximize the resilience of the U.S. food and agriculture sector to biosecurity risks, weather events and disasters, cyber threats, and other shocks through the Extension Disaster Education Network (EDEN). EDEN is a national, collaborative network of CES professionals who are dedicated to improved all…</summary>
+  </entry>
+  <entry>
+    <title>Cold Chain Grants for Emergency Food Assistance</title>
+    <link href="https://www.grants.gov/search-results-detail/363631"/>
+    <id>urn:funding-finder:grants-gov:363631</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>Agricultural Marketing Service</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Manufacturing"/>
+    <summary>Agricultural Marketing Service | Closes 2026-10-01 | AMS will award these funds competitively to at least one eligible organization that meets program requirements and whose expertise is consistent with the purpose of the grant program. The selected grant recipient(s) will provide management, oversight, consultation and expertise necessary to advance the purpose and activities of the program, primarily through a subaward program to support cold stor…</summary>
+  </entry>
+  <entry>
+    <title>Systems for Tracking and Resilience in Efficient Agricultural-input Management (STREAM)</title>
+    <link href="https://arpa-h.gov/explore-funding/programs/stream"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Astream</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Technology development"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Closes 2026-09-14 | Current ARPA-H program. STREAM | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wind…</summary>
   </entry>
   <entry>
     <title>Syria Annual Program Statement</title>
@@ -202,16 +266,6 @@
     <summary>Forest Service | Closes 2026-09-30 | Through this NOFO, IPT’s Invasive Species program aims to support projects that advance tangible improvements in invasive species prevention by utilizing existing research knowledge on invasive species risks and pathways to produce actionable outcomes that protect American agriculture from invasive species. For example, past and current research has built important pre-invasion knowledge of proble…</summary>
   </entry>
   <entry>
-    <title>Sun Grant Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363424"/>
-    <id>urn:funding-finder:grants-gov:363424</id>
-    <updated>2026-07-31T00:00:00Z</updated>
-    <author><name>National Institute of Food and Agriculture</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Energy"/>
-    <summary>National Institute of Food and Agriculture | Closes 2026-08-17 | In carrying out the SGP, under Assistance Listing Number 10.320, NIFA is authorized to make awards to fund subgrants and activities that: 1. Enhance national energy security through the development, distribution, and implementation of biobased energy technologies; 2. Promote varied agricultural production systems in the U.S. through biobased energy and product technologies; 3. Promote economic gro…</summary>
-  </entry>
-  <entry>
     <title>Sheep Production and Marketing Grant Program FY 2026</title>
     <link href="https://www.grants.gov/search-results-detail/363376"/>
     <id>urn:funding-finder:grants-gov:363376</id>
@@ -309,24 +363,6 @@
     <summary>Animal and Plant Health Inspection Service | Closes 2026-10-19 | The U.S. Department of Agriculture, Animal and Plant Health Inspection Service announce this funding opportunity to carry out the Plant Protection Act Section 7721 (PPA 7721) National Clean Plant Network (NCPN) program. APHIS will consider project proposals that clearly and directly support the strategic goals and objectives of the National Clean Plant Network as described in the NCPN Strategic Pl…</summary>
   </entry>
   <entry>
-    <title>Street Outreach Program (SOP)</title>
-    <link href="https://www.grants.gov/search-results-detail/362088"/>
-    <id>urn:funding-finder:grants-gov:362088</id>
-    <updated>2026-07-23T00:00:00Z</updated>
-    <author><name>Administration for Children &amp; Families - ACYF/FYSB</name></author>
-    <category term="Agriculture and food"/>
-    <summary>Administration for Children &amp; Families - ACYF/FYSB | Closes 2026-08-17 | The Street Outreach Program (SOP) provides street-based services to runaway, homeless, and street youth who have been subjected to, or are at risk of being subjected to, sexual abuse, prostitution, sexual exploitation, and severe forms of human trafficking in persons. These services, targeted in areas where street youth congregate, are designed to assist such youth in making healthy choices and pr…</summary>
-  </entry>
-  <entry>
-    <title>​​FY 2026 Basic Center Program​</title>
-    <link href="https://www.grants.gov/search-results-detail/362071"/>
-    <id>urn:funding-finder:grants-gov:362071</id>
-    <updated>2026-07-23T00:00:00Z</updated>
-    <author><name>Administration for Children &amp; Families - ACYF/FYSB</name></author>
-    <category term="Agriculture and food"/>
-    <summary>Administration for Children &amp; Families - ACYF/FYSB | Closes 2026-08-17 | The Basic Center Program (BCP) provides temporary, emergency shelter; and counseling services to youth who have left home without permission of their parents or guardians, have been forced to leave home, or other homeless youth who might otherwise end up in the law enforcement or in the child welfare, mental health, or juvenile justice systems. BCPs work to establish or strengthen community-based …</summary>
-  </entry>
-  <entry>
     <title>Federal and University Partnership to Improve the Safety of Seafood from the Gulf of America</title>
     <link href="https://www.grants.gov/search-results-detail/363304"/>
     <id>urn:funding-finder:grants-gov:363304</id>
@@ -387,29 +423,6 @@
     <summary>Food and Drug Administration | Closes 2026-08-21 | The purpose of this funding opportunity is to provide continued support to: (1) assist in the identification and development of a prioritized list of botanical ingredients based on safety concerns, trends and knowledge of botanical ingredients in foods, dietary supplements, and cosmetics marketed in the U.S.; (2) acquire, validate and characterize authenticated reference materials, including raw a…</summary>
   </entry>
   <entry>
-    <title>Education and Outreach to Tribal Producers through the Tribal Food Safety Alliance</title>
-    <link href="https://www.grants.gov/search-results-detail/363239"/>
-    <id>urn:funding-finder:grants-gov:363239</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>Food and Drug Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Cybersecurity"/>
-    <summary>Food and Drug Administration | Closes 2026-08-20 | The primary purpose of this program is to develop and provide education and/or training, and outreach regarding FDA's Produce Safety Rule to produce farmers who are members of federally recognized Tribes. The program is expected to help Tribal farmers access appropriate technical assistance and may include Tribal farmers who are not currently required to comply with the rule but are interested in …</summary>
-  </entry>
-  <entry>
-    <title>Use of Digital Health Technologies in Clinical Investigations to Support Drug and Biological Product Development (U01) Clinical Trials Optional</title>
-    <link href="https://www.grants.gov/search-results-detail/363255"/>
-    <id>urn:funding-finder:grants-gov:363255</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>Food and Drug Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Cybersecurity"/>
-    <summary>Food and Drug Administration | Closes 2026-08-20 | The purpose of this Notice of Funding Opportunity (NOFO) is to address topics related to the use of digital health technologies (DHTs) for remote data acquisition in clinical investigations to support drug development.</summary>
-  </entry>
-  <entry>
     <title>ROSES25: A.13 Accelerating Earth Solutions</title>
     <link href="https://www.grants.gov/search-results-detail/363224"/>
     <id>urn:funding-finder:grants-gov:363224</id>
@@ -422,28 +435,6 @@
     <summary>NASA Headquarters | Closes 2026-10-15 | NOTICE: August 4, 2026. Going forward, a $0.09/SBU charge now applies to all proposing to Earth Science (ROSES Appendix A) to use any NASA high-end computing resource. Proposers must account for this in their budget, per the instructions provided in Section 7.3 of ROSES-25 A.1 Earth Science Research Overview. NOTICE: July 28, 2026. A set of slides describing the Application Readiness Levels (ARLs)…</summary>
   </entry>
   <entry>
-    <title>FY 2026 SNAP Earnings Verification Support Grant</title>
-    <link href="https://www.grants.gov/search-results-detail/363216"/>
-    <id>urn:funding-finder:grants-gov:363216</id>
-    <updated>2026-07-16T00:00:00Z</updated>
-    <author><name>Food and Nutrition Service</name></author>
-    <category term="Agriculture and food"/>
-    <summary>Food and Nutrition Service | Closes 2026-08-19 | The USDA’s Food and Nutrition Administration (FNA) works to nourish those in need through financially sound programs that promote health and work, as well as champion the productivity of American agriculture. The purpose of these grants is to support SNAP State agencies in meeting these requirements and testing different income verification services to determine the most cost-effective solution. T…</summary>
-  </entry>
-  <entry>
-    <title>Enhancing Biotechnology Market Opportunities for U.S. Exporters and American Farmers</title>
-    <link href="https://www.grants.gov/search-results-detail/363193"/>
-    <id>urn:funding-finder:grants-gov:363193</id>
-    <updated>2026-07-15T00:00:00Z</updated>
-    <author><name>Foreign Agricultural Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>Foreign Agricultural Service | Closes 2026-08-17 | Modern agricultural biotechnology such as genome editing is a revolutionary tool that could transform the sustainability and viability of the agriculture sector. American farmers rely on agricultural biotechnology products, with over 90% of corn and soybeans derived from these technologies. In 2025, American farmers exported over $51 billion in agricultural biotechnology products worldwide. Howeve…</summary>
-  </entry>
-  <entry>
     <title>Fiscal Year 2027 Expanding Nutrition Services</title>
     <link href="https://www.grants.gov/search-results-detail/362823"/>
     <id>urn:funding-finder:grants-gov:362823</id>
@@ -452,30 +443,6 @@
     <category term="Agriculture and food"/>
     <category term="Cybersecurity"/>
     <summary>Health Resources and Services Administration | Closes 2026-09-09 | The purpose of Fiscal Year (FY) 2027 Expanding Nutrition Services (ENS) funding is to increase access to nutrition services at HRSA-funded health centers. Nutrition services can help to prevent, manage, and treat diseases and conditions through nutritional and food-based interventions. Health centers will use ENS funding to increase the number of nutrition services patients or visits.</summary>
-  </entry>
-  <entry>
-    <title>English Language Teaching and Learning Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363077"/>
-    <id>urn:funding-finder:grants-gov:363077</id>
-    <updated>2026-07-07T00:00:00Z</updated>
-    <author><name>U.S. Mission to Uzbekistan</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <summary>U.S. Mission to Uzbekistan | Closes 2026-08-17 | The U.S. Department of State announces an open competition to deliver in-person, specialized English language teacher training and direct student instruction aligned with priority sectors such as space, critical minerals, rare earths, energy, high technology, business and trade, agriculture, media, and security. As U.S. engagement with Uzbekistan increases, English proficiency has become a strateg…</summary>
-  </entry>
-  <entry>
-    <title>Fertilizer Investment &amp; Expansion for Long-term Domestic Supply (FIELDS)</title>
-    <link href="https://www.grants.gov/search-results-detail/363038"/>
-    <id>urn:funding-finder:grants-gov:363038</id>
-    <updated>2026-07-01T00:00:00Z</updated>
-    <author><name>Rural Business-Cooperative Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <summary>Rural Business-Cooperative Service | Closes 2026-08-17 | Fertilizer Investment &amp; Expansion for Long-term Domestic Supply (FIELDS) Program The Fertilizer Investment &amp; Expansion for Long-term Domestic Supply (FIELDS) Program is intended to expand or bring into operation new, independent domestic fertilizer production capacity in order to provide agricultural producers with additional domestic fertilizer options and strengthen the U.S. fertilizer supply ch…</summary>
   </entry>
   <entry>
     <title>Disaster Assistance for State Units on Aging (SUAs) and Tribal Organizations</title>
@@ -688,5 +655,42 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Agriculture and food"/>
     <category term="Cybersecurity"/>
     <summary>National Institutes of Health | Closes 2026-10-06 | This notice of funding opportunity (NOFO) invites applications designed to examine the efficacy and clinical effectiveness of multimodality digital health technology approaches to the remote management of diabetes.</summary>
+  </entry>
+  <entry>
+    <title>Stephen I. Katz Early Stage Investigator Research Project Grant (R01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/358879"/>
+    <id>urn:funding-finder:grants-gov:358879</id>
+    <updated>2025-08-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Cybersecurity"/>
+    <summary>National Institutes of Health | Closes 2028-08-25 | The Stephen I. Katz Early Stage Investigator Research Project Grant supports an innovative project that represents a change in research direction for an early stage investigator (ESI) and for which no preliminary data exist. Applications submitted to this Notice of Funding Opportunity (NOFO) must not include preliminary data. Applications must include a separate attachment describing the change in…</summary>
+  </entry>
+  <entry>
+    <title>Retail Food Safety Regulatory Association Collaboration</title>
+    <link href="https://www.grants.gov/search-results-detail/360182"/>
+    <id>urn:funding-finder:grants-gov:360182</id>
+    <updated>2025-08-04T00:00:00Z</updated>
+    <author><name>Food and Drug Administration</name></author>
+    <category term="Agriculture and food"/>
+    <summary>Food and Drug Administration | Forecasted | The program furthers the FDA's support of state, local, tribal, and territorial (SLTT) retail food safety programs in their efforts to reduce the occurrence of food-borne illness risk factors for the benefit of the public. Recipients of this funding will assist SLTT agencies in conducting research, implementing intervention strategies, and performing other activities to reduce the occurrence of fo…</summary>
+  </entry>
+  <entry>
+    <title>Agriculture and Food Research Initiative Competitive Grants Program Foundational and Applied Science Program</title>
+    <link href="https://www.grants.gov/search-results-detail/360205"/>
+    <id>urn:funding-finder:grants-gov:360205</id>
+    <updated>2025-08-01T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Cybersecurity"/>
+    <summary>National Institute of Food and Agriculture | Closes 2026-12-31 | The AFRI Foundational and Applied Science Program supports grants in six AFRI priority areas to advance knowledge in both fundamental and applied sciences important to agriculture. The six priority areas are: Plant Health and Production and Plant Products; Animal Health and Production and Animal Products; Food Safety, Nutrition, and Health; Bioenergy, Natural Resources, and Environment; Agricultur…</summary>
   </entry>
 </feed>

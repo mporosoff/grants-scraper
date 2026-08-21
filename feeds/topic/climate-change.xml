@@ -4,19 +4,24 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/climate-change.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/climate-change.xml</id>
-  <updated>2026-08-15T20:29:37Z</updated>
+  <updated>2026-08-21T16:48:00Z</updated>
   <generator>Funding Finder</generator>
   <entry>
-    <title>Clean Green Schools Initiative</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rt000001Q0ClRAAV"/>
-    <id>urn:funding-finder:nyserda:nyserda%3APON4924</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>NYSERDA</name></author>
+    <title>Limited Submission Opportunity: $700,000 - The G. Harold and Leila Y. Mathers Foundation - Research Grant (Spring 2027 Cycle)</title>
+    <link href="http://rochester.infoready4.com/CompetitionSpace/"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Ainfoready-2028504</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
     <category term="Climate change"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <summary>NYSERDA | Closes 2026-08-18 | The P-12 Schools: Clean Green Schools Initiative is available to help public schools that traditionally lack resources to invest in infrastructure improvements become healthier, more productive learning environments. The program provides funding for schools to implement construction projects that decarbonize their building portfolio and enhance extreme heat resilience, such as comprehensive retrof…</summary>
+    <category term="Infectious disease"/>
+    <category term="Neuroscience"/>
+    <category term="Technology development"/>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2027-02-12 | The Foundation primarily
+supports basic science, ideally with potential translational applications. Examples of current research areas we support include
+immunology, microbiome, structural biology, cellular physiology, cancer biology, genetics, genomics, microbiology and infectious diseases, stem cell biology, and neuroscience. Research areas
+we will not consider for support include Covid-19 relat…</summary>
   </entry>
   <entry>
     <title>Net-Zero Resilience Preparation for Municipal and Rural Electric Providers</title>
@@ -156,20 +161,6 @@
     <summary>U.S. National Science Foundation | Posted | The Geospace Cluster (GC) in the Division of Atmospheric and Geospace Sciences (AGS) supports fundamental and solutions-oriented research, technology development and education related to the Earth's near-space environment (including the mesosphere, thermosphere, ionosphere, exosphere, magnetosphere and radiation belts) and the inner heliosphere and solar atmosphere. The GC advances knowledge of th…</summary>
   </entry>
   <entry>
-    <title>FY 2024 - 2026 - Broad Agency Announcement (BAA) Announcement Type: Initial</title>
-    <link href="https://www.grants.gov/search-results-detail/356127"/>
-    <id>urn:funding-finder:grants-gov:356127</id>
-    <updated>2024-08-19T00:00:00Z</updated>
-    <author><name>DOC NOAA - ERA Production</name></author>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Climate change"/>
-    <category term="Data science"/>
-    <category term="Space and aeronautics"/>
-    <summary>DOC NOAA - ERA Production | Closes 2026-09-30 | This notice is not a mechanism to fund existing NOAA awards. The purpose of this notice is to request applications for special projects and programs associated with NOAA's strategic plan and mission goals, as well as to provide the general public with information and guidelines on how NOAA will select applications and administer discretionary Federal assistance under this Broad Agency Announcement…</summary>
-  </entry>
-  <entry>
     <title>FY 2024 - 2026 - Broad Agency Announcement (BAA) for the Office of Education</title>
     <link href="https://www.grants.gov/search-results-detail/356002"/>
     <id>urn:funding-finder:grants-gov:356002</id>
@@ -246,21 +237,6 @@
     <category term="Environmental science"/>
     <category term="Public health"/>
     <summary>U.S. Mission to the United Nations | Posted | This Notice of Funding Opportunity (NOFO) outlines funding priorities, strategic areas of focus, and instructions for submitting requests for funding. Please follow all instructions carefully. Through its Small Grants Program, the United States Mission in Geneva is accepting project proposals that promote U.S. policy priorities in the multilateral sphere. Project should be aimed at international (…</summary>
-  </entry>
-  <entry>
-    <title>Engineering for Civil Infrastructure</title>
-    <link href="https://www.grants.gov/search-results-detail/306169"/>
-    <id>urn:funding-finder:grants-gov:306169</id>
-    <updated>2018-06-12T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Climate change"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Transportation"/>
-    <category term="Water"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Posted | The Engineering for Civil Infrastructure (ECI) program supports fundamental research in geotechnical, structural, materials, architectural, and coastal engineering. The ECI program promotes research that can shape the future of the nation’s physical civil infrastructure and that can contribute to climate change adaptation and mitigation, and hazards and disaster resilience. Types of civil infrastr…</summary>
   </entry>
   <entry>
     <title>Climate Program Office for FY 2012</title>

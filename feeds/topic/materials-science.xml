@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-08-15T20:29:37Z</updated>
+  <updated>2026-08-21T16:48:00Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Microplastics Research and Resource Coordination Center (U24 - Clinical Trial Not Allowed)</title>
@@ -16,16 +16,70 @@
     <summary>National Institutes of Health | Closes 2026-12-01 | The goal of the Micro/Nanoplastics (M/NPs) Research and Resource Coordination Center initiative is to establish a robust center that will coordinate and advance multidisciplinary efforts among biomedical and material science researchers to gain a comprehensive understanding of the health effects of M/NPs. This coordination center will accelerate the development and dissemination of sampling and an…</summary>
   </entry>
   <entry>
-    <title>Pax Silica Artificial Intelligence Assistance Project</title>
-    <link href="https://www.grants.gov/search-results-detail/363596"/>
-    <id>urn:funding-finder:grants-gov:363596</id>
-    <updated>2026-08-14T00:00:00Z</updated>
-    <author><name>Bureau of Economic and Business Affairs</name></author>
+    <title>Trauma Care Readiness and Coordination Cooperative Agreement</title>
+    <link href="https://www.grants.gov/search-results-detail/363662"/>
+    <id>urn:funding-finder:grants-gov:363662</id>
+    <updated>2026-08-19T00:00:00Z</updated>
+    <author><name>Assistant Secretary for Preparedness and Response</name></author>
+    <category term="Separations and membranes"/>
+    <category term="Materials science"/>
+    <category term="Cybersecurity"/>
+    <summary>Assistant Secretary for Preparedness and Response | Closes 2026-09-18 | A trauma system is, “…an organized, inclusive approach to facilitating and coordinating a multidisciplinary system response to severely injured patients.”[14] Coordination across prehospital entities (e.g., EMS) and hospitals signal an effective trauma system, where patients can get the right level of care they need. Access to trauma care in the United States is inconsistent. For example, 1 in 3 A…</summary>
+  </entry>
+  <entry>
+    <title>University-led Networks for Innovation, Technology, and Expertise (UNITE)</title>
+    <link href="https://www.grants.gov/search-results-detail/363645"/>
+    <id>urn:funding-finder:grants-gov:363645</id>
+    <updated>2026-08-18T00:00:00Z</updated>
+    <author><name>U.S. Mission to Saudi Arabia</name></author>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Manufacturing"/>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
     <category term="Materials science"/>
     <category term="Data science"/>
-    <summary>Bureau of Economic and Business Affairs | Closes 2026-08-20 | Leveraging foreign assistance from the Pax Fund, this NOFO launches the Pax Silica Artificial Intelligence (AI) Assistance Project-a historic first-of-its-kind programmatic initiative to strengthen global AI supply chain security by creating a trusted supply chain credentialing and provenance platform to secure the AI supply chain in partner countries and economies. This NOFO seeks to fund the est…</summary>
+    <summary>U.S. Mission to Saudi Arabia | Closes 2026-09-17 | The U.S. Embassy Riyadh Public Diplomacy Section is accepting applications for a cooperative agreement to run the University-led Networks for Innovation, Technology, and Expertise (UNITE) program. UNITE will support approximately four to five applied project teams - university-industry partnerships between U.S. universities, U.S. companies or technical partners, and Saudi institutions - through pr…</summary>
+  </entry>
+  <entry>
+    <title>Egypt Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363633"/>
+    <id>urn:funding-finder:grants-gov:363633</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <category term="Materials science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
+    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
+  </entry>
+  <entry>
+    <title>FY25 and FY26 Advanced Digital Construction Management Systems (ADCMS)</title>
+    <link href="https://www.grants.gov/search-results-detail/363628"/>
+    <id>urn:funding-finder:grants-gov:363628</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>DOT Federal Highway Administration</name></author>
+    <category term="Transportation"/>
+    <category term="Separations and membranes"/>
+    <category term="Materials science"/>
+    <category term="Cybersecurity"/>
+    <summary>DOT Federal Highway Administration | Closes 2026-09-16 | The purpose of the ADCMS Competitive Grant Program is to provide incentives for eligible applicants to promote, implement, deploy, demonstrate, showcase, support, and document the application of new technology in construction projects at a program level. Eligible applicants under the ADCMS Competitive Grant Program are State Departments of Transportation (State DOT), including the District of Colu…</summary>
+  </entry>
+  <entry>
+    <title>Engineering (ENG): Civil, Mechanical and Manufacturing Innovation (CMMI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363614"/>
+    <id>urn:funding-finder:grants-gov:363614</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-18 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
   </entry>
   <entry>
     <title>Promoting Responsible Investment and Rights-Respecting Production Models</title>
@@ -79,20 +133,17 @@
     <summary>Air Force Office of Scientific Research | Closes 2027-04-05 | The Department of Defense (DoD) announces the fiscal year 2026 (FY26) Defense Established Program to Stimulate Competitive Research (DEPSCoR) - Research Collaboration (RC) opportunity. The program is sponsored and managed by the Basic Research Office, Office of the Under Secretary of Defense for Research and Engineering (OUSD [R&amp;E]), awarded by the Air Force Office of Scientific Research (AFOSR), …</summary>
   </entry>
   <entry>
-    <title>Egypt Annual Program Statement</title>
-    <link href="https://www.grants.gov/search-results-detail/363252"/>
-    <id>urn:funding-finder:grants-gov:363252</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <title>Expanding global health security through local partnerships in Ethiopia</title>
+    <link href="https://www.grants.gov/search-results-detail/360333"/>
+    <id>urn:funding-finder:grants-gov:360333</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
     <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <category term="Data science"/>
-    <category term="Artificial intelligence and machine learning"/>
+    <category term="Public health"/>
+    <category term="Separations and membranes"/>
     <category term="Materials science"/>
     <category term="Cybersecurity"/>
-    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
+    <summary>Centers for Disease Control-GHC | Closes 2026-10-02 | The CDC office in Ethiopia was established in 2001 and works closely with the Ministry of Health (MOH), the Ethiopian Public Health Institute (EPHI), and other Government of Ethiopia (GOE) agencies to develop the capacity to prevent, detect, and respond to priority diseases. In 2014, CDC began coordination with the GOE to build Ethiopia's capacity to achieve the International Health Regulation (IH…</summary>
   </entry>
   <entry>
     <title>Improved Oil and Gas Recovery and Produced Water Management Technologies</title>
@@ -127,6 +178,22 @@
     <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | Project Background, Goals, and Objectives: In an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will lea…</summary>
   </entry>
   <entry>
+    <title>Transport Phenomena (TP)</title>
+    <link href="https://www.grants.gov/search-results-detail/362063"/>
+    <id>urn:funding-finder:grants-gov:362063</id>
+    <updated>2026-04-24T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Separations and membranes"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-20 | The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
+  </entry>
+  <entry>
     <title>Chemical Process Systems (CPS)</title>
     <link href="https://www.grants.gov/search-results-detail/362061"/>
     <id>urn:funding-finder:grants-gov:362061</id>
@@ -157,22 +224,6 @@
     <category term="Technology development"/>
     <summary>U.S. National Science Foundation | Posted | The Energy, Water, and Resource Engineering (EWRE) program supports fundamental research to advance energy, water, and resource management and to safeguard health. Better use of domestic resources will make U.S. manufacturing, energy and water systems more efficient and secure.
 EWRE supports research that creates domestic sources of energy, advances water management, and recovers resources using c…</summary>
-  </entry>
-  <entry>
-    <title>Transport Phenomena (TP)</title>
-    <link href="https://www.grants.gov/search-results-detail/362063"/>
-    <id>urn:funding-finder:grants-gov:362063</id>
-    <updated>2026-04-24T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Quantum science"/>
-    <category term="Separations and membranes"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>U.S. National Science Foundation | Posted | The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
   </entry>
   <entry>
     <title>Space Technology Research, Development, Demonstration, and Infusion (SpaceTech REDDI-2026)</title>
@@ -229,21 +280,6 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Education and workforce"/>
     <category term="Materials science"/>
     <summary>Dept of the Army -- Materiel Command | Closes 2030-06-02 | The ARO is soliciting proposals for Staff Research Program opportunities. The purpose of the program is to enable ARO scientific staff to maintain and expand professional competence in support of fulfilling the ARO mission through the conduct of hands-on, basic research. The staff research will be performed collaboratively with institutions external to ARO. Staff research efforts will involve scie…</summary>
-  </entry>
-  <entry>
-    <title>Infrastructure Systems and People</title>
-    <link href="https://www.grants.gov/search-results-detail/358397"/>
-    <id>urn:funding-finder:grants-gov:358397</id>
-    <updated>2025-01-25T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Data science"/>
-    <category term="Environmental science"/>
-    <category term="Materials science"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <category term="Water"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation | Posted | Infrastructure systems comprise complex connections between physical components, organizational structures and operational methods that support the needs of people and communities at the local, regional, national, and global scales. Such systems form the backbone of society, providing essential services as well as ensuring public health and welfare, economic prosperity and national security, and a…</summary>
   </entry>
   <entry>
     <title>BRAIN Initiative: Brain Behavior Quantification and Synchronization- Next Generation Sensor Technology Development (U01 Clinical Trial Optional)</title>
@@ -348,20 +384,6 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <summary>U.S. National Science Foundation | Closes 2026-11-16 | Proposals in the area of plasma physics submitted to the Division of Physics that are not governed by another solicitation (such as CAREER), should be submitted to the Division-wide solicitation: Division of Physics: Investigator-Initiated Research Projects. The Plasma Physics program participates in multiple NSF meta-programs such as the ECosytem for Leading Innovation in Plasma Science and Engin…</summary>
   </entry>
   <entry>
-    <title>Division of Materials Research: Condensed Matter and Materials Theory (CMMT)</title>
-    <link href="https://www.grants.gov/search-results-detail/349654"/>
-    <id>urn:funding-finder:grants-gov:349654</id>
-    <updated>2023-08-01T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Materials science"/>
-    <category term="Quantum science"/>
-    <category term="Transportation"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Closes 2076-08-14 | CMMT supports theoretical and computational materials research in the topical areas represented in DMR's other Topical Materials Research Programs (these are also variously known as Individual Investigator Award (IIA) Programs, or Core Programs, or Disciplinary Programs), which are: Condensed Matter Physics (CMP), Biomaterials (BMAT), Ceramics (CER), Electronic and Photonic Materials (EPM), Metals…</summary>
-  </entry>
-  <entry>
     <title>Division of Materials Research: Topical Materials Research Programs</title>
     <link href="https://www.grants.gov/search-results-detail/349655"/>
     <id>urn:funding-finder:grants-gov:349655</id>
@@ -459,16 +481,5 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Artificial intelligence and machine learning"/>
     <summary>U.S. National Science Foundation | Posted | Crosscutting Activities in Materials Research (XC) coordinates and supports crosscutting activities within the Division of Materials Research (DMR) and more broadly across NSF.
 The emphasis within XC is diversity and inclusion, international cooperation, and education (including experiential learning at REU/RET Sites). Additionally, activities that broadly engage the community, such as summer scho…</summary>
-  </entry>
-  <entry>
-    <title>Mechanics of Materials and Structures</title>
-    <link href="https://www.grants.gov/search-results-detail/306172"/>
-    <id>urn:funding-finder:grants-gov:306172</id>
-    <updated>2018-06-12T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Data science"/>
-    <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation | Posted | The Mechanics of Materials and Structures program supports fundamental research in mechanics as related to the behavior of deformable solid materials and structures under internal and external actions. The program supports a diverse spectrum of research with emphasis on transformative advances in experimental, theoretical, and computational methods. Submitted proposals should clearly emphasize the…</summary>
   </entry>
 </feed>
