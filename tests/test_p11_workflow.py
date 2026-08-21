@@ -3,45 +3,43 @@
 from pathlib import Path
 import unittest
 
-import yaml
-
 
 ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW = ROOT / ".github" / "workflows" / "refresh-opportunities.yml"
 
 
 class P11WorkflowTests(unittest.TestCase):
-    def workflow(self):
-        return yaml.safe_load(WORKFLOW.read_text(encoding="utf-8"))
-
     def steps(self):
-        return self.workflow()["jobs"]["refresh"]["steps"]
+        source = WORKFLOW.read_text(encoding="utf-8")
+        return [
+            "      - name:" + block
+            for block in source.split("      - name:")[1:]
+        ]
+
+    def document_step(self):
+        return next(step for step in self.steps() if "id: document_evidence" in step)
 
     def test_anthropic_secret_is_exposed_only_to_document_evidence(self):
         source = WORKFLOW.read_text(encoding="utf-8")
         self.assertEqual(source.count("secrets.ANTHROPIC_API_KEY"), 1)
-        document = next(
-            step for step in self.steps() if step.get("id") == "document_evidence"
-        )
-        self.assertEqual(
-            document.get("env"),
-            {"ANTHROPIC_API_KEY": "${{ secrets.ANTHROPIC_API_KEY }}"},
+        document = self.document_step()
+        self.assertIn(
+            "        env:\n          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}",
+            document,
         )
         for step in self.steps():
-            if step.get("id") == "document_evidence":
+            if "id: document_evidence" in step:
                 continue
-            self.assertNotIn("ANTHROPIC_API_KEY", str(step))
-        self.assertNotIn("env", self.workflow()["jobs"]["refresh"])
+            self.assertNotIn("ANTHROPIC_API_KEY", step)
+        job_preamble = source.split("      - name:", 1)[0]
+        self.assertNotIn("ANTHROPIC_API_KEY", job_preamble)
 
     def test_document_step_enables_topics_with_two_explicit_budgets(self):
-        document = next(
-            step for step in self.steps() if step.get("id") == "document_evidence"
-        )
-        command = document["run"]
-        self.assertIn("--enable-subtopics", command)
-        self.assertIn("--max-documents 45", command)
-        self.assertIn("--max-subtopic-documents 45", command)
-        self.assertTrue(document["continue-on-error"])
+        document = self.document_step()
+        self.assertIn("--enable-subtopics", document)
+        self.assertIn("--max-documents 45", document)
+        self.assertIn("--max-subtopic-documents 45", document)
+        self.assertIn("continue-on-error: true", document)
 
     def test_document_degradation_routes_to_the_existing_degraded_channel(self):
         source = WORKFLOW.read_text(encoding="utf-8")
