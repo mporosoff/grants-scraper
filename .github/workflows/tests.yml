@@ -39,3 +39,5 @@ jobs:
       - run: node --test tests/browser/*.test.mjs
       - name: Verify retrieval has not regressed on the frozen query set
         run: node tools/query_baseline.mjs --check
+      - name: Verify frozen P9 cross-corpus scoring prototype
+        run: node tools/p9_scoring_probe.mjs --check

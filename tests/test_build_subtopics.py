@@ -77,6 +77,39 @@ class CampaignTests(unittest.TestCase):
             subtopic_records.sidecar_payload(cache)["searchable_record_count"], 2
         )
 
+    def test_campaign_resumes_without_repeating_completed_parents(self):
+        calls = []
+
+        def fields(record, *_args):
+            calls.append(record["opportunity_id"])
+            return {"subtopics": [], "subtopic_reason": "no_children"}
+
+        snapshots = []
+        first_cache, first_metrics = build_subtopics.run_campaign(
+            [parent("a")],
+            fetcher=lambda url, headers: {"content": b"", "url": url},
+            container_extractor=lambda *_args: ([], {}),
+            field_builder=fields,
+            request_delay=0,
+            checkpoint=lambda cache, metrics, completed: snapshots.append({
+                "cache": cache,
+                "metrics": dict(metrics),
+                "completed_parent_ids": completed,
+            }),
+        )
+        self.assertEqual(first_metrics["attempted_parent_count"], 1)
+        resumed_cache, resumed_metrics = build_subtopics.run_campaign(
+            [parent("a"), parent("b")],
+            fetcher=lambda url, headers: {"content": b"", "url": url},
+            container_extractor=lambda *_args: ([], {}),
+            field_builder=fields,
+            request_delay=0,
+            resume=snapshots[-1],
+        )
+        self.assertEqual(calls, ["a", "b"])
+        self.assertEqual(resumed_metrics["attempted_parent_count"], 2)
+        self.assertEqual(sorted(resumed_cache["records"]), ["a", "b"])
+
     def test_validation_rejects_a_child_bound_to_another_parent(self):
         cache = {
             "records": {

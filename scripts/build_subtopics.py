@@ -35,10 +35,29 @@ AS_OF = "2026-08-20"
 FRAME_SCHEMA_VERSION = 1
 DEFAULT_FRAME = Path("evaluation/p9_backfill_frame.json")
 DEFAULT_RESULTS = Path("evaluation/p9_backfill_results.json")
+CAMPAIGN_IMPLEMENTATION = (
+    Path("scripts/build_subtopics.py"),
+    Path("scripts/subtopic_records.py"),
+    Path("scripts/subtopic_fields.py"),
+    Path("scripts/subtopic_referenced.py"),
+    Path("scripts/subtopic_sources.py"),
+    Path("scripts/subtopic_segmentation.py"),
+    Path("scripts/subtopic_structured.py"),
+)
 
 
 def file_sha256(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def implementation_sha256(paths=CAMPAIGN_IMPLEMENTATION):
+    digest = hashlib.sha256()
+    for path in sorted(map(Path, paths), key=lambda item: item.as_posix()):
+        digest.update(path.as_posix().encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(path.read_bytes())
+        digest.update(b"\0")
+    return digest.hexdigest()
 
 
 def atomic_json(payload, path):
@@ -114,20 +133,29 @@ def run_campaign(
     field_builder=subtopic_fields,
     request_delay=0.05,
     progress=None,
+    resume=None,
+    checkpoint=None,
 ):
-    cache = subtopic_records.empty_cache()
+    resume = resume or {}
+    cache = resume.get("cache") or subtopic_records.empty_cache()
+    saved_metrics = resume.get("metrics") or {}
     metrics = {
-        "attempted_parent_count": 0,
-        "top_level_fetch_failures": [],
-        "field_errors": [],
-        "cov4_offered": 0,
-        "cov4_classifier_calls": 0,
-        "cov4_classifier_errors": Counter(),
-        "structured_failure_reasons": Counter(),
+        "attempted_parent_count": int(saved_metrics.get("attempted_parent_count") or 0),
+        "top_level_fetch_failures": list(saved_metrics.get("top_level_fetch_failures") or []),
+        "field_errors": list(saved_metrics.get("field_errors") or []),
+        "cov4_offered": int(saved_metrics.get("cov4_offered") or 0),
+        "cov4_classifier_calls": int(saved_metrics.get("cov4_classifier_calls") or 0),
+        "cov4_classifier_errors": Counter(saved_metrics.get("cov4_classifier_errors") or {}),
+        "structured_failure_reasons": Counter(
+            saved_metrics.get("structured_failure_reasons") or {}
+        ),
     }
+    completed = {str(value) for value in resume.get("completed_parent_ids") or []}
     ordered = sorted(records, key=parent_id)
     for index, record in enumerate(ordered, start=1):
         identifier = parent_id(record)
+        if identifier in completed:
+            continue
         metrics["attempted_parent_count"] += 1
         source = source_for_record(record) or subtopic_sources.subtopic_only_primary(record)
         content = b""
@@ -186,6 +214,9 @@ def run_campaign(
             ),
             method=fields.get("subtopic_method"),
         )
+        completed.add(identifier)
+        if checkpoint:
+            checkpoint(cache, metrics, sorted(completed))
         if progress:
             progress(index, len(ordered), identifier, len(fields.get("subtopics") or []))
         if request_delay:
@@ -228,6 +259,10 @@ def parse_args(argv=None):
     parser.add_argument("--frame", type=Path, default=DEFAULT_FRAME)
     parser.add_argument("--output", type=Path, default=subtopic_records.DEFAULT_CACHE)
     parser.add_argument("--results", type=Path, default=DEFAULT_RESULTS)
+    parser.add_argument(
+        "--checkpoint", type=Path,
+        help="resumable scratch state (default: beside --output, ignored by git)",
+    )
     parser.add_argument("--write-frame", action="store_true")
     parser.add_argument("--build", action="store_true")
     parser.add_argument("--request-delay", type=float, default=0.05)
@@ -257,17 +292,45 @@ def main(argv=None):
         raise RuntimeError("current catalog/evidence population differs from frozen frame")
     by_id = {parent_id(record): record for record in catalog["opportunities"]}
     current_records = [by_id[item["opportunity_id"]] for item in frozen["population"]]
+    current_parent_ids = {parent_id(record) for record in current_records}
+    checkpoint_path = args.checkpoint or args.output.with_suffix(".checkpoint.json")
+    checkpoint_identity = {
+        "schema_version": 1,
+        "frame_catalog_sha256": frozen["catalog_sha256"],
+        "frame_evidence_cache_sha256": frozen["evidence_cache_sha256"],
+        "implementation_sha256": implementation_sha256(),
+    }
+    resume = None
+    if checkpoint_path.exists():
+        candidate = json.loads(checkpoint_path.read_text(encoding="utf-8"))
+        actual_identity = {key: candidate.get(key) for key in checkpoint_identity}
+        if actual_identity != checkpoint_identity:
+            raise RuntimeError(
+                "P9 checkpoint does not match the frozen frame/current implementation; "
+                "remove the stale scratch checkpoint before rebuilding"
+            )
+        resume = candidate
 
     def progress(index, total, identifier, children):
         if index == 1 or index % 25 == 0 or index == total:
             print(f"p9-backfill {index}/{total} parent={identifier} children={children}", flush=True)
 
+    def save_checkpoint(cache, metrics, completed):
+        atomic_json({
+            **checkpoint_identity,
+            "completed_parent_ids": completed,
+            "cache": cache,
+            "metrics": metrics,
+        }, checkpoint_path)
+
     cache, campaign = run_campaign(
         current_records,
         request_delay=args.request_delay,
         progress=progress,
+        resume=resume,
+        checkpoint=save_checkpoint,
     )
-    anomalies = validate_cache(cache, by_id)
+    anomalies = validate_cache(cache, current_parent_ids)
     if anomalies:
         raise RuntimeError("sidecar validation failed: " + ", ".join(anomalies[:20]))
     metrics = subtopic_records.cache_metrics(cache)
@@ -298,6 +361,8 @@ def main(argv=None):
         "validation_anomalies": anomalies,
     }
     atomic_json(results, args.results)
+    if checkpoint_path.exists():
+        checkpoint_path.unlink()
     print(json.dumps({
         "parents": results["sidecar_parent_count"],
         "children": results["sidecar_record_count"],
