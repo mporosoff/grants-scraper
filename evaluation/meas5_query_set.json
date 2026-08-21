@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "frozen_at": "2026-08-21",
+  "catalog": "data/opportunities.js",
+  "purpose": "Additive discipline-stratified retrieval regression instrument for MEAS-5. It does not replace evaluation/query_set.json and contains no relevance judgments.",
+  "freeze_rule": "Queries and profile inputs were frozen before any flag-on or flag-off outcomes from this instrument were calculated.",
+  "source_basis": "Queries use recurring vocabulary from NIH/HHS, NSF, DOE, USDA, NASA, DOD, EPA/NOAA/USGS, and Department of Education solicitations represented in the current catalog.",
+  "queries": [
+    {"id":"m5_bio_01","discipline":"biomedical","kind":"keyword","query":"translational biomedical research"},
+    {"id":"m5_bio_02","discipline":"biomedical","kind":"keyword","query":"cancer prevention and control"},
+    {"id":"m5_bio_03","discipline":"biomedical","kind":"keyword","query":"infectious disease therapeutics"},
+    {"id":"m5_bio_04","discipline":"biomedical","kind":"keyword","query":"neurological disorders"},
+    {"id":"m5_bio_05","discipline":"biomedical","kind":"keyword","query":"health disparities"},
+    {"id":"m5_bio_06","discipline":"biomedical","kind":"profile","query":"biomedical research","profile":{"research_description":"translational research on cancer biology and precision therapeutics","expertise_keywords":"tumor microenvironment, biomarkers, drug response","applicant_context":"higher_education","career_stage":"any"}},
+
+    {"id":"m5_health_01","discipline":"public_health","kind":"keyword","query":"rural health outcomes"},
+    {"id":"m5_health_02","discipline":"public_health","kind":"keyword","query":"maternal and child health"},
+    {"id":"m5_health_03","discipline":"public_health","kind":"keyword","query":"substance use disorder prevention"},
+    {"id":"m5_health_04","discipline":"public_health","kind":"keyword","query":"community health workers"},
+    {"id":"m5_health_05","discipline":"public_health","kind":"profile","query":"population health","profile":{"research_description":"community-based interventions to reduce rural and maternal health disparities","expertise_keywords":"implementation science, health services, epidemiology","applicant_context":"higher_education","career_stage":"any"}},
+
+    {"id":"m5_chem_01","discipline":"chemistry_materials","kind":"keyword","query":"catalysis science"},
+    {"id":"m5_chem_02","discipline":"chemistry_materials","kind":"keyword","query":"polymer materials"},
+    {"id":"m5_chem_03","discipline":"chemistry_materials","kind":"keyword","query":"electrochemistry"},
+    {"id":"m5_chem_04","discipline":"chemistry_materials","kind":"profile","query":"materials research","profile":{"research_description":"synthesis and characterization of quantum and functional materials","expertise_keywords":"condensed matter, spectroscopy, materials chemistry","applicant_context":"higher_education","career_stage":"any"}},
+
+    {"id":"m5_eng_01","discipline":"engineering_manufacturing","kind":"keyword","query":"advanced manufacturing"},
+    {"id":"m5_eng_02","discipline":"engineering_manufacturing","kind":"keyword","query":"cyber-physical systems"},
+    {"id":"m5_eng_03","discipline":"engineering_manufacturing","kind":"keyword","query":"resilient infrastructure"},
+    {"id":"m5_eng_04","discipline":"engineering_manufacturing","kind":"profile","query":"robotics and manufacturing","profile":{"research_description":"autonomous robotic systems for advanced manufacturing and resilient infrastructure","expertise_keywords":"robotics, controls, additive manufacturing","applicant_context":"higher_education","career_stage":"any"}},
+
+    {"id":"m5_energy_01","discipline":"energy_climate","kind":"keyword","query":"carbon management"},
+    {"id":"m5_energy_02","discipline":"energy_climate","kind":"keyword","query":"grid resilience"},
+    {"id":"m5_energy_03","discipline":"energy_climate","kind":"keyword","query":"energy storage"},
+    {"id":"m5_energy_04","discipline":"energy_climate","kind":"keyword","query":"clean hydrogen"},
+    {"id":"m5_energy_05","discipline":"energy_climate","kind":"profile","query":"building decarbonization","profile":{"research_description":"decarbonization of buildings and electric power systems","expertise_keywords":"energy efficiency, grid modernization, demand flexibility","applicant_context":"higher_education","career_stage":"any"}},
+
+    {"id":"m5_ag_01","discipline":"agriculture_food","kind":"keyword","query":"crop improvement"},
+    {"id":"m5_ag_02","discipline":"agriculture_food","kind":"keyword","query":"sustainable agriculture"},
+    {"id":"m5_ag_03","discipline":"agriculture_food","kind":"keyword","query":"food safety"},
+    {"id":"m5_ag_04","discipline":"agriculture_food","kind":"profile","query":"forest health","profile":{"research_description":"plant resilience and forest ecosystem health under climate stress","expertise_keywords":"plant pathology, crop genetics, forest management","applicant_context":"higher_education","career_stage":"any"}},
+
+    {"id":"m5_earth_01","discipline":"earth_environmental","kind":"keyword","query":"atmospheric chemistry"},
+    {"id":"m5_earth_02","discipline":"earth_environmental","kind":"keyword","query":"geosciences"},
+    {"id":"m5_earth_03","discipline":"earth_environmental","kind":"keyword","query":"ocean sciences"},
+    {"id":"m5_earth_04","discipline":"earth_environmental","kind":"profile","query":"water quality","profile":{"research_description":"watershed processes and contaminant transport in freshwater systems","expertise_keywords":"hydrology, water quality, environmental monitoring","applicant_context":"higher_education","career_stage":"any"}},
+
+    {"id":"m5_space_01","discipline":"nasa_space","kind":"keyword","query":"heliophysics"},
+    {"id":"m5_space_02","discipline":"nasa_space","kind":"keyword","query":"planetary science"},
+    {"id":"m5_space_03","discipline":"nasa_space","kind":"keyword","query":"Earth science satellite observations"},
+    {"id":"m5_space_04","discipline":"nasa_space","kind":"profile","query":"space biology","profile":{"research_description":"biological responses to radiation and microgravity during spaceflight","expertise_keywords":"space biology, radiation biology, human spaceflight","applicant_context":"higher_education","career_stage":"any"}},
+
+    {"id":"m5_defense_01","discipline":"defense_research","kind":"keyword","query":"hypersonics"},
+    {"id":"m5_defense_02","discipline":"defense_research","kind":"keyword","query":"electronic warfare"},
+    {"id":"m5_defense_03","discipline":"defense_research","kind":"keyword","query":"autonomous systems"},
+    {"id":"m5_defense_04","discipline":"defense_research","kind":"profile","query":"human performance","profile":{"research_description":"human performance and decision making in complex operational environments","expertise_keywords":"cognitive science, human systems integration, training","applicant_context":"higher_education","career_stage":"any"}},
+
+    {"id":"m5_ai_01","discipline":"computing_ai","kind":"keyword","query":"trustworthy artificial intelligence"},
+    {"id":"m5_ai_02","discipline":"computing_ai","kind":"keyword","query":"cybersecurity"},
+    {"id":"m5_ai_03","discipline":"computing_ai","kind":"keyword","query":"quantum information science"},
+    {"id":"m5_ai_04","discipline":"computing_ai","kind":"profile","query":"high performance computing","profile":{"research_description":"scalable algorithms for high performance computing and scientific artificial intelligence","expertise_keywords":"parallel computing, machine learning, numerical methods","applicant_context":"higher_education","career_stage":"any"}},
+
+    {"id":"m5_social_01","discipline":"social_behavioral_education","kind":"keyword","query":"STEM education"},
+    {"id":"m5_social_02","discipline":"social_behavioral_education","kind":"keyword","query":"behavioral health"},
+    {"id":"m5_social_03","discipline":"social_behavioral_education","kind":"keyword","query":"workforce development"},
+    {"id":"m5_social_04","discipline":"social_behavioral_education","kind":"profile","query":"social science research","profile":{"research_description":"education policy and workforce participation across diverse communities","expertise_keywords":"program evaluation, learning sciences, labor economics","applicant_context":"higher_education","career_stage":"any"}}
+  ]
+}
