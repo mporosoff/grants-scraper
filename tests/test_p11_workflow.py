@@ -44,7 +44,11 @@ class P11WorkflowTests(unittest.TestCase):
 
     def test_post_refresh_gate_preserves_closed_measurement_frames(self):
         source = WORKFLOW.read_text(encoding="utf-8")
-        self.assertIn("python -m tools.run_refresh_validation", source)
+        self.assertEqual(
+            source.count("python -m tools.run_refresh_validation"),
+            2,
+        )
+        self.assertNotIn("unittest discover", source)
         self.assertIn('"tools/run_refresh_validation.py"', source)
 
     def test_push_ci_uses_the_same_live_product_measurement_boundary(self):
