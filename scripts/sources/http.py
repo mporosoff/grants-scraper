@@ -110,6 +110,7 @@ class PoliteClient:
         if legacy_tls_ciphers:
             self._session.mount("https://", _LegacyCipherAdapter())
         self._last_call = 0.0
+        self.last_url: Optional[str] = None
 
     def _pace(self) -> None:
         wait = self.request_delay - (time.monotonic() - self._last_call)
@@ -124,6 +125,9 @@ class PoliteClient:
             url, headers=headers, timeout=self.timeout, stream=True
         )
         response.raise_for_status()
+        # Preserve the authoritative post-redirect URL for adapters whose
+        # source publishes version information in the resolved document name.
+        self.last_url = response.url
         chunks: list[bytes] = []
         total = 0
         for chunk in response.iter_content(chunk_size=64 * 1024):

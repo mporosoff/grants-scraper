@@ -57,6 +57,65 @@ class DiscoveryTests(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             adapter().discover_table_urls("<html><body>nothing</body></html>")
 
+    def test_amendment_is_read_from_the_resolved_url(self):
+        resolved = (
+            "https://nspires.nasaprs.com/external/viewrepositorydocument/"
+            "Table%203%20ROSES-2025_Amend%2070.html"
+        )
+        self.assertEqual(adapter()._amendment_of(resolved), 70)
+
+    def test_html_without_an_amendment_cannot_erase_the_resolved_url_signal(self):
+        short = "https://solicitation.nasaprs.com/ROSES2025table3"
+        resolved = (
+            "https://nspires.nasaprs.com/external/viewrepositorydocument/"
+            "Table%203%20ROSES-2025_Amend%2070.html"
+        )
+
+        class Client:
+            last_url = None
+
+            def get_text(self, url):
+                self.last_url = resolved if url == short else url
+                return "<html><body>no amendment text here</body></html>"
+
+        instance = adapter()
+        instance._client = Client()
+        instance.discover_table_urls = lambda: {
+            "year": 2025,
+            "table3": short,
+            "table2": None,
+        }
+        fetched = instance.fetch()
+        self.assertNotIn("Amend", fetched["table3_html"])
+        self.assertEqual(fetched["table3_url"], resolved)
+        self.assertEqual(fetched["amendment"], 70)
+
+    def test_a_non_amended_url_has_no_amendment_diagnostic(self):
+        self.assertIsNone(
+            adapter()._amendment_of(
+                "https://solicitation.nasaprs.com/ROSES2025table3"
+            )
+        )
+
+    def test_amendment_changes_only_diagnostics_not_emitted_records(self):
+        first = adapter()
+        first.set_context({
+            "catalog_records": [], "as_of": datetime.date(2025, 1, 1)
+        })
+        payload_69 = payload()
+        records_69 = list(first.parse(payload_69))
+
+        second = adapter()
+        second.set_context({
+            "catalog_records": [], "as_of": datetime.date(2025, 1, 1)
+        })
+        payload_70 = {**payload_69, "amendment": 70}
+        records_70 = list(second.parse(payload_70))
+
+        self.assertEqual(records_69, records_70)
+        self.assertEqual(first.diagnostics["amendment"], 69)
+        self.assertEqual(second.diagnostics["amendment"], 70)
+
 
 class ParseTests(unittest.TestCase):
     def setUp(self):

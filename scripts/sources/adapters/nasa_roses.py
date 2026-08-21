@@ -48,6 +48,7 @@ from __future__ import annotations
 import datetime as _dt
 import re
 from typing import Iterable
+from urllib.parse import unquote
 
 import hashlib
 
@@ -380,6 +381,7 @@ class NasaRosesAdapter(SourceAdapter):
         """Table 3 (substrate) plus Table 2 (corroboration only)."""
         discovered = self.discover_table_urls()
         table3 = self._client.get_text(discovered["table3"])
+        table3_url = getattr(self._client, "last_url", None) or discovered["table3"]
         table2 = None
         if discovered["table2"]:
             try:
@@ -388,15 +390,15 @@ class NasaRosesAdapter(SourceAdapter):
                 table2 = None
         return {
             "year": discovered["year"],
-            "table3_url": discovered["table3"],
+            "table3_url": table3_url,
             "table3_html": table3,
             "table2_html": table2,
-            "amendment": self._amendment_of(table3),
+            "amendment": self._amendment_of(table3_url),
         }
 
     @staticmethod
-    def _amendment_of(html: str):
-        match = _AMEND_RE.search(html or "")
+    def _amendment_of(resolved_url: str):
+        match = _AMEND_RE.search(unquote(resolved_url or ""))
         return int(match.group(1)) if match else None
 
     # --- parsing --------------------------------------------------------
