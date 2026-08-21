@@ -2,12 +2,12 @@
   "use strict";
 
   const release = Object.freeze({
-    version: "1.0.0",
+    version: "1.1.0",
     updated: "2026-08-21",
   });
   const productionFlags = Object.freeze({
-    subtopics: false,
-    matchExplanations: false,
+    subtopics: true,
+    matchExplanations: true,
   });
   const localHosts = new Set(["localhost", "127.0.0.1", "[::1]"]);
   const local = localHosts.has(globalThis.location?.hostname || "");

@@ -25,15 +25,15 @@ function loadConfig(url) {
   return context.globalThis.FUNDING_FINDER_APP;
 }
 
-test("production feature flags remain off while loopback overrides are bounded", () => {
+test("P11 production feature flags enable topics and explanations", () => {
   const production = loadConfig("https://mporosoff.github.io/?ff-subtopics=1&ff-explain=1");
   assert.deepEqual(
     { ...production.productionFlags },
-    { subtopics: false, matchExplanations: false },
+    { subtopics: true, matchExplanations: true },
   );
   assert.deepEqual(
     { ...production.flags },
-    { subtopics: false, matchExplanations: false },
+    { subtopics: true, matchExplanations: true },
   );
 
   const local = loadConfig("http://127.0.0.1:8765/?ff-subtopics=1&ff-explain=1");
@@ -41,7 +41,7 @@ test("production feature flags remain off while loopback overrides are bounded",
     { ...local.flags },
     { subtopics: true, matchExplanations: true },
   );
-  assert.equal(local.release.version, "1.0.0");
+  assert.equal(local.release.version, "1.1.0");
   assert.equal(local.release.updated, "2026-08-21");
 });
 
@@ -51,7 +51,7 @@ test("sidecar is lazy and normal pages share one app release source", () => {
   assert.doesNotMatch(mainHtml, /<script src="\.\/data\/subtopics\.js/);
   assert.doesNotMatch(teamHtml, /<script src="(?:\.\/)?data\/subtopics\.js/);
   for (const page of [mainHtml, teamHtml]) {
-    assert.match(page, /assets\/app-config\.js\?v=app-1\.0\.0/);
+    assert.match(page, /assets\/app-config\.js\?v=app-1\.1\.0/);
     assert.match(page, /data-app-version/);
   }
 });

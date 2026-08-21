@@ -218,7 +218,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         release_version = "filters-2026-08-13"
         feature_version = "orcid-2026-08-13"
         search_version = "relevance-2026-08-15-v6"
-        style_version = "app-1.0.0"
+        style_version = "app-1.1.0"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={style_version}">',
             explorer_html,
@@ -240,9 +240,9 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             '<script src="./assets/profile.js?v=audit-2026-08-13"></script>',
             explorer_html,
         )
-        self.assertIn('assets/app-config.js?v=app-1.0.0', explorer_html)
-        self.assertIn('assets/subtopic-runtime.js?v=app-1.0.0', explorer_html)
-        self.assertIn('assets/match-explain.js?v=app-1.0.0', explorer_html)
+        self.assertIn('assets/app-config.js?v=app-1.1.0', explorer_html)
+        self.assertIn('assets/subtopic-runtime.js?v=app-1.1.0', explorer_html)
+        self.assertIn('assets/match-explain.js?v=app-1.1.0', explorer_html)
         self.assertIn("data-app-version", explorer_html)
         self.assertNotIn("assets/preferences.js", explorer_html)
         for asset in ("profile-ranking.js", "search-query.js"):
@@ -252,11 +252,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             )
         for asset in ("search-retrieval.js", "app.js"):
             self.assertIn(
-                f'<script src="./assets/{asset}?v=app-1.0.0"></script>',
+                f'<script src="./assets/{asset}?v=app-1.1.0"></script>',
                 explorer_html,
             )
         self.assertIn(
-            '<script src="./assets/site-help.js?v=app-1.0.0"></script>',
+            '<script src="./assets/site-help.js?v=app-1.1.0"></script>',
             explorer_html,
         )
         self.assertIn("globalThis.GRANT_CATALOG", application_js)

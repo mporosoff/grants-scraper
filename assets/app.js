@@ -14,7 +14,7 @@
   const NEW_RELEVANT_MIN_BOOST = 8;
   const PROMPT_VERSION = "result-aware-chat-v1";
   const APP_CONFIG = globalThis.FUNDING_FINDER_APP;
-  const APP_VERSION = APP_CONFIG?.release?.version || "1.0.0";
+  const APP_VERSION = APP_CONFIG?.release?.version || "1.1.0";
   const CANONICAL_URL = "https://mporosoff.github.io/grants-scraper/";
   const SEARCH_QUERY = globalThis.FUNDING_SEARCH_QUERY;
   const RETRIEVAL_API = globalThis.FUNDING_RETRIEVAL;
