@@ -4,9 +4,9 @@
 start. It explains what to do, what we collect, what we do not, and why.*
 
 **Time:** about 30–45 minutes · **Where:** any current web browser (desktop or
-mobile) · **Tool:** https://mporosoff.github.io/grants-scraper/match_explorer.html
+mobile) · **Tool:** https://mporosoff.github.io/grants-scraper/match_explorer.html?evaluation=1
 
-> **AI test key** (for the optional AI step in #7 — the facilitator fills this in):
+> **AI test key** (for the optional AI step in #6 — the facilitator fills this in):
 >
 > - Provider (OpenAI or Anthropic): _______________________________
 > - Key: ______________________________________________________________
@@ -43,26 +43,24 @@ of you, and not a review of your research.
    CV is read inside your own browser to pull out text; the file itself is never
    uploaded or saved by us.)*
 4. **Select "Find funding."** Review the results.
-5. **Rate the opportunities you review.** Rating controls appear directly on
-   each result card. For each one, answer *"How well does
+5. **Rate the opportunities you review in evaluation mode.** The dedicated
+   pilot link above adds rating controls to result cards; normal Funding Finder
+   search does not show them. For each one, answer *"How well does
    this match your work?"* — **Not a fit / Somewhat / Good fit / Strong fit /
    Can't tell** — and, when it isn't a good fit, pick a short reason (wrong
    topic, eligibility, career stage, deadline, award size, too much application
    burden, already known to you, or not enough detail to judge).
-6. **Test personalization.** After three graded ratings, turn on
-   **“Personalize from my ratings.”** Relevance sorting should update using only
-   the ratings stored in your browser.
-7. **Test the AI step (optional but valuable).** In the optional AI section,
+6. **Test the AI step (optional but valuable).** In the optional AI section,
    choose the provider shown in the box above, paste the test key, then select
    "Refine these results with AI" and rate the AI's top matches. Then use the
    **"Review AI candidates"** toggle and rate that pre-AI list too. *(This lets
    us tell "search missed it" apart from "AI ranked it poorly.")*
-8. **Tell us what's missing.** If you know of an opportunity that is relevant to
+7. **Tell us what's missing.** If you know of an opportunity that is relevant to
    you but did **not** appear, note it in the "Overall note" box or tell the
    facilitator. Misses are some of the most valuable feedback.
-9. **(Optional) Save a few** with the "☆ Save" button and check that the "★ Saved
+8. **(Optional) Save a few** with the "☆ Save" button and check that the "★ Saved
    opportunities" list works for you.
-10. **Send your feedback.** Use **"Export match ratings"** (and optionally "Send
+9. **Send your feedback.** Use **"Export match ratings"** (and optionally "Send
     feedback") and return the file to the project facilitator through the agreed
     channel. You can also jot a few words on what was confusing or slow.
 

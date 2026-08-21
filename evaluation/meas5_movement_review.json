@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-08-21",
+  "source": "evaluation/meas5_results.json",
+  "scope": "Every MEAS-5 query with flag-on top-10 movement, reviewed after the query frame was frozen and outcomes were generated.",
+  "classifications": {
+    "child_topic_improves_specificity": 10,
+    "neutral_reorder_or_bounded_expansion": 2,
+    "suspicious_child_match": 1,
+    "regression": 0
+  },
+  "reviews": [
+    {"query_id":"m5_chem_02","query":"polymer materials","entering":"W911NF-23-S-0001 / Polymer Chemistry","leaving":null,"classification":"child_topic_improves_specificity","rationale":"The exact applicant-facing Polymer Chemistry topic supplies both query concepts and makes the umbrella discoverable."},
+    {"query_id":"m5_chem_03","query":"electrochemistry","entering":"W911NF-23-S-0001 / Electrochemistry","leaving":null,"classification":"child_topic_improves_specificity","rationale":"The exact Electrochemistry topic is more specific than the parent synopsis and is a valid child-only admission."},
+    {"query_id":"m5_chem_04","query":"materials research","entering":"W911NF-23-S-0001 / Super-Materials Research in support of the Sciences of Extreme Materials Competency","leaving":"PD-23-1242 / Plasma Physics","classification":"child_topic_improves_specificity","rationale":"A named materials-research program replaces a generic plasma program at the bottom of the top ten."},
+    {"query_id":"m5_eng_01","query":"advanced manufacturing","entering":"DE-FOA-0003612 / Reenvisioning Advanced Manufacturing and Industrial Productivity","leaving":"PD-26-370Y / Energy, Water, and Resource Engineering","classification":"child_topic_improves_specificity","rationale":"The Genesis focus area exactly names advanced manufacturing and is more specific than the displaced broad engineering result."},
+    {"query_id":"m5_eng_02","query":"cyber-physical systems","entering":"W911NF-23-S-0001 / Information Assurance","leaving":null,"classification":"neutral_reorder_or_bounded_expansion","rationale":"The topic explicitly covers autonomous cyber systems, but the physical-systems signal is less visible; it expands a three-result set without displacing a result."},
+    {"query_id":"m5_eng_03","query":"resilient infrastructure","entering":"DE-FOA-0003634 / Resilient Infrastructure Technologies Enhancement (RITE)","leaving":null,"classification":"child_topic_improves_specificity","rationale":"The child title exactly matches both query concepts."},
+    {"query_id":"m5_earth_01","query":"atmospheric chemistry","entering":"W911NF-23-S-0001 / Tactical Heterogeneous Sensing in Complex Environments, Aerosols, and Impacts","leaving":null,"classification":"neutral_reorder_or_bounded_expansion","rationale":"Aerosol science and complex-environment sensing are adjacent to atmospheric chemistry; the result enters only at rank eight and displaces nothing."},
+    {"query_id":"m5_space_04","query":"space biology","entering":"W911NF-23-S-0001 / Bionic Electronics","leaving":null,"classification":"suspicious_child_match","rationale":"The child is about biology-electronics convergence, not spaceflight. The indexed word 'space' is likely conceptual wording rather than the research domain. This is one bounded false-positive expansion, not a cardinality effect, and production flags remain off for P11 review."},
+    {"query_id":"m5_defense_01","query":"hypersonics","entering":"W911NF-23-S-0003 / Artillery - Hypersonics Data and Analysis","leaving":null,"classification":"child_topic_improves_specificity","rationale":"The child title exactly names hypersonics."},
+    {"query_id":"m5_defense_02","query":"electronic warfare","entering":"W911NF-23-S-0003 / Network Vulnerability and Effects Assessment Methodology (N-VEAM)","leaving":null,"classification":"child_topic_improves_specificity","rationale":"The authoritative topic terms connect the network-vulnerability effects method to electronic-warfare analysis; it expands a five-result set without displacement."},
+    {"query_id":"m5_defense_03","query":"autonomous systems","entering":"W911NF-23-S-0003 / Methodologies and Techniques to Analyze Assistive Automation and AI-enabled systems","leaving":null,"classification":"child_topic_improves_specificity","rationale":"The child explicitly targets AI-enabled automated systems."},
+    {"query_id":"m5_defense_04","query":"human performance","entering":"W911NF-23-S-0003 / Human Systems Integration Modeling and Analysis","leaving":"HHS-2026-ACF-ACYF-YO-0044 / Street Outreach Program","classification":"child_topic_improves_specificity","rationale":"A human-systems analysis topic is more relevant to the profile probe than the displaced social-services program."},
+    {"query_id":"m5_ai_04","query":"high performance computing","entering":"W911NF-23-S-0001 / Novel Computing Architecture and Algorithm Co-design","leaving":"W911NF21S0009 / LPS Qubit Collaboratory","classification":"child_topic_improves_specificity","rationale":"The computing-architecture topic is a direct high-performance-computing fit and is more specific than the displaced quantum collaboration program."}
+  ],
+  "conclusion": "MEAS-5 now exposes regressions across 11 disciplines. Twelve of thirteen top-10 movements are intended or neutral; one child-only space-biology match is suspicious and is carried explicitly into the P11 flag-enable review. No query exhibits child-count flooding, duplicate parent cards, or a confirmed ranking regression."
+}

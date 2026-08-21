@@ -4,7 +4,9 @@ The human Phase 2C pilot is deferred until the Phase 3 source-evidence
 deployment gate passes. See `PHASE3_REVIEW.md` for the current explicit file
 handoff, private inbox, and reporting workflow.
 
-Funding Finder keeps pilot ratings on the researcher's device. A participant
+Open the dedicated pilot route by adding `?evaluation=1` to Funding Finder's
+URL. Normal search does not show rating controls. In evaluation mode, Funding
+Finder keeps pilot ratings on the researcher's device. A participant
 can label result cards as `not relevant`, `partial`, `useful`, `strong`, or
 `needs verification`, optionally choose a reason, and explicitly export one
 JSON file.
@@ -29,6 +31,9 @@ Start each participant/session with cleared labels, label both the AI shortlist
 and the “Review retrieved candidates” view, then export once. The evaluator
 uses the exported candidate identifiers—not only displayed rank—to determine
 candidate-set membership.
+
+The old “Personalize from my ratings” product experiment is retired for v1.
+Pilot labels remain measurement evidence only and never alter search ranking.
 
 ## Aggregate a pilot
 
