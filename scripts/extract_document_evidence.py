@@ -1713,6 +1713,9 @@ def refresh_subtopics_without_source(
     now,
     request_delay=0.0,
     enabled=False,
+    previous_store=None,
+    prior_checked_at=None,
+    recheck_days=14,
 ):
     """Segment the records `source_for_record()` declines. Subtopics only.
 
@@ -1730,18 +1733,54 @@ def refresh_subtopics_without_source(
         "with_subtopics": 0,
         "remaining_update_count": 0,
         "agency_url_tried": 0,
+        "cached_count": 0,
+        "queued_new_count": 0,
+        "queued_recheck_count": 0,
+        "classifier_run": classifier_run_metrics([]),
     }
     if not enabled:
         return store, metrics
     from scripts import subtopic_sources
 
     candidates = subtopic_only_candidates(records, enabled=True)
+    candidate_ids = {opportunity_id for opportunity_id, _ in candidates}
+    store = {
+        opportunity_id: deepcopy(entry)
+        for opportunity_id, entry in (previous_store or {}).items()
+        if opportunity_id in candidate_ids
+    }
+    if prior_checked_at:
+        for entry in store.values():
+            entry.setdefault("checked_at", prior_checked_at)
+    metrics["cached_count"] = len(store)
+    unseen = [item for item in candidates if item[0] not in store]
+    due = []
+    for item in candidates:
+        opportunity_id = item[0]
+        if opportunity_id not in store:
+            continue
+        checked_at = store[opportunity_id].get("checked_at")
+        try:
+            checked = datetime.fromisoformat(
+                str(checked_at or "").replace("Z", "+00:00")
+            )
+        except ValueError:
+            due.append(item)
+            continue
+        if checked.tzinfo is None:
+            checked = checked.replace(tzinfo=timezone.utc)
+        if checked <= now - timedelta(days=recheck_days):
+            due.append(item)
+    queue = unseen + due
+    metrics["queued_new_count"] = len(unseen)
+    metrics["queued_recheck_count"] = len(due)
     metrics["remaining_update_count"] = max(
         0,
-        len(candidates) - min(len(candidates), max_documents),
+        len(queue) - min(len(queue), max_documents),
     )
     fetched_at = iso_utc(now)
-    for opportunity_id, record in candidates[:max_documents]:
+    run_entries = []
+    for opportunity_id, record in queue[:max_documents]:
         content, document = None, None
         source = subtopic_sources.subtopic_only_primary(record)
         if source:
@@ -1760,15 +1799,22 @@ def refresh_subtopics_without_source(
                 }
             except Exception:  # noqa: BLE001 - an agency page is optional here
                 content, document = None, None
-        fields = subtopic_fields(record, content, None, document, fetched_at, True)
-        if not fields:
-            continue
+        fields = subtopic_fields(
+            record, content, None, document, fetched_at, True
+        ) or {
+            "subtopics": [],
+            "subtopic_reason": "no_source_or_extractable_text",
+            "subtopic_method": "none",
+        }
+        fields["checked_at"] = fetched_at
         metrics["attempted"] += 1
         if fields.get("subtopics"):
             metrics["with_subtopics"] += 1
         store[opportunity_id] = fields
+        run_entries.append(fields)
         if request_delay:
             time.sleep(request_delay)
+    metrics["classifier_run"] = classifier_run_metrics(run_entries)
     return store, metrics
 
 
@@ -2361,12 +2407,16 @@ def enrich_document_evidence(
             now=now,
             request_delay=request_delay,
             enabled=True,
+            previous_store=cache.get("subtopic_only"),
+            prior_checked_at=cache.get("generated_at"),
+            recheck_days=recheck_days,
         )
-        if subtopic_only:
-            cache["subtopic_only"] = subtopic_only
+        cache["subtopic_only"] = subtopic_only
         metrics["subtopics"]["subtopic_only"] = subtopic_only_metrics
+        subtopic_classifier = subtopic_only_metrics["classifier_run"]
         metrics["subtopics"]["classifier_run"] = classifier_run_metrics(
-            classifier_run_entries + list(subtopic_only.values())
+            classifier_run_entries
+            + [{"subtopic_cov4": subtopic_classifier}]
         )
     output.setdefault("diagnostics", {})["document_evidence"] = metrics
     cache["generated_at"] = iso_utc(now)

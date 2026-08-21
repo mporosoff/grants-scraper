@@ -577,6 +577,84 @@ class DocumentBudgetTests(unittest.TestCase):
         self.assertEqual(metrics["attempted"], 2)
         self.assertEqual(metrics["remaining_update_count"], 1)
 
+    def test_subtopic_only_budget_rotates_past_cached_recent_records(self):
+        calls = []
+        records = self.declined_records(3)
+        previous = {
+            "declined-0": {
+                "subtopics": [],
+                "checked_at": "2026-07-26T11:00:00Z",
+                "subtopic_cov4": {
+                    "classifier_calls": 9,
+                    "api_requests": 9,
+                    "input_tokens": 900,
+                    "output_tokens": 90,
+                    "usage_reported_calls": 9,
+                    "usage_unreported_requests": 0,
+                    "classifier_errors": {},
+                },
+            },
+        }
+
+        def fetcher(url, _headers):
+            calls.append(url)
+            return response()
+
+        current = {
+            "subtopics": [],
+            "subtopic_cov4": {
+                "classifier_calls": 1,
+                "api_requests": 1,
+                "input_tokens": 100,
+                "output_tokens": 10,
+                "usage_reported_calls": 1,
+                "usage_unreported_requests": 0,
+                "classifier_errors": {},
+            },
+        }
+        with mock.patch(
+            "scripts.extract_document_evidence.subtopic_fields",
+            return_value=current,
+        ):
+            store, metrics = refresh_subtopics_without_source(
+                records,
+                max_documents=1,
+                fetcher=fetcher,
+                now=datetime(2026, 7, 26, 12, tzinfo=timezone.utc),
+                enabled=True,
+                previous_store=previous,
+                recheck_days=14,
+            )
+
+        self.assertEqual(calls, ["https://agency.example/program/1"])
+        self.assertEqual(set(store), {"declined-0", "declined-1"})
+        self.assertEqual(metrics["cached_count"], 1)
+        self.assertEqual(metrics["queued_new_count"], 2)
+        self.assertEqual(metrics["queued_recheck_count"], 0)
+        self.assertEqual(metrics["remaining_update_count"], 1)
+        self.assertEqual(metrics["classifier_run"]["classifier_calls"], 1)
+
+    def test_prior_generation_dates_legacy_cache_without_repeating_it(self):
+        calls = []
+        records = self.declined_records(1)
+        previous = {"declined-0": {"subtopics": []}}
+
+        store, metrics = refresh_subtopics_without_source(
+            records,
+            max_documents=1,
+            fetcher=lambda url, headers: calls.append(url),
+            now=datetime(2026, 7, 26, 12, tzinfo=timezone.utc),
+            enabled=True,
+            previous_store=previous,
+            prior_checked_at="2026-07-26T11:00:00Z",
+            recheck_days=14,
+        )
+
+        self.assertEqual(calls, [])
+        self.assertEqual(store["declined-0"]["checked_at"], "2026-07-26T11:00:00Z")
+        self.assertEqual(metrics["attempted"], 0)
+        self.assertEqual(metrics["classifier_run"]["classifier_calls"], 0)
+
 
 class ClassifierOperationalDiagnosticsTests(unittest.TestCase):
     def test_run_metrics_aggregate_calls_tokens_and_errors(self):
