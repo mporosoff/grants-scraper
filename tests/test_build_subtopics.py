@@ -31,6 +31,26 @@ class FrameTests(unittest.TestCase):
         self.assertEqual(frame["excluded_parent_count"], 1)
         self.assertEqual(frame["population"][0]["opportunity_id"], "active")
 
+    def test_first_cache_refuses_a_catalog_missing_the_new_parent_source(self):
+        catalog = {"opportunities": [parent("active")]}
+        self.assertEqual(
+            build_subtopics.validate_parent_source_surface(catalog),
+            ["arpa_h_current_parent_floor:0<6"],
+        )
+
+    def test_parent_source_floor_is_shape_based_not_an_exact_registry(self):
+        records = [parent("active")]
+        for index in range(build_subtopics.MIN_CURRENT_ARPA_H_PARENTS):
+            record = parent(f"arpa-{index}")
+            record["source"] = "ARPA-H"
+            records.append(record)
+        self.assertEqual(
+            build_subtopics.validate_parent_source_surface(
+                {"opportunities": records}
+            ),
+            [],
+        )
+
 
 class CampaignTests(unittest.TestCase):
     def test_campaign_walks_each_frozen_parent_once(self):

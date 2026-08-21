@@ -35,6 +35,7 @@ AS_OF = "2026-08-20"
 FRAME_SCHEMA_VERSION = 1
 DEFAULT_FRAME = Path("evaluation/p9_backfill_frame.json")
 DEFAULT_RESULTS = Path("evaluation/p9_backfill_results.json")
+MIN_CURRENT_ARPA_H_PARENTS = 6
 CAMPAIGN_IMPLEMENTATION = (
     Path("scripts/build_subtopics.py"),
     Path("scripts/subtopic_records.py"),
@@ -80,6 +81,20 @@ def atomic_json(payload, path):
 
 def parent_id(record):
     return str(record.get("opportunity_id") or record.get("opportunity_number") or "")
+
+
+def validate_parent_source_surface(catalog, *, as_of=AS_OF):
+    """The first cache must follow P9.0's newly admitted parent sources."""
+    current, _excluded = filter_current(
+        catalog.get("opportunities") or [], date.fromisoformat(as_of)
+    )
+    counts = Counter(str(record.get("source") or "") for record in current)
+    if counts["ARPA-H"] < MIN_CURRENT_ARPA_H_PARENTS:
+        return [
+            "arpa_h_current_parent_floor:"
+            f"{counts['ARPA-H']}<{MIN_CURRENT_ARPA_H_PARENTS}"
+        ]
+    return []
 
 
 def frame_payload(catalog, evidence_cache, *, as_of=AS_OF):
@@ -276,6 +291,13 @@ def main(argv=None):
     args = parse_args(argv)
     catalog = read_catalog(args.catalog)
     evidence = read_evidence_cache(args.evidence_cache)
+    source_anomalies = validate_parent_source_surface(catalog)
+    if source_anomalies:
+        raise RuntimeError(
+            "catalog does not contain P9.0's required current parent-source "
+            "surface; rebuild it before freezing/running the first cache: "
+            + ", ".join(source_anomalies)
+        )
     frame = frame_payload(catalog, evidence)
     frame["catalog_sha256"] = file_sha256(args.catalog)
     frame["evidence_cache_sha256"] = file_sha256(args.evidence_cache)
