@@ -28,7 +28,13 @@ import json
 from pathlib import Path
 import tempfile
 
-from scripts.subtopic_segmentation import MAX_TERMS, extractor_version, match_subtopics
+from scripts.subtopic_segmentation import (
+    MAX_TERM_DISPLAY,
+    MAX_TERMS,
+    build_term_display,
+    extractor_version,
+    match_subtopics,
+)
 
 
 CACHE_SCHEMA_VERSION = 1
@@ -296,6 +302,13 @@ def build_records(
                 "title_fingerprint": subtopic.title_fingerprint,
                 "summary": subtopic.summary,
                 "subtopic_terms": dict(subtopic.subtopic_terms),
+                "term_display": dict(
+                    subtopic.term_display
+                    or build_term_display(
+                        f"{subtopic.title} {subtopic.summary}",
+                        subtopic.subtopic_terms,
+                    )
+                ),
                 "subtopic_source": rung,
                 # The catalog's own vocabulary, never a private one:
                 # currentness.record_is_current accepts only posted/forecasted,
@@ -365,6 +378,7 @@ def build_structured_records(
         title = str(child.get("title") or "").strip()[:200]
         full_text = str(child.get("text") or child.get("summary") or title)
         labels, topics = program_area_fields(full_text)
+        child_terms = dict(child.get("terms") or build_term_map(full_text))
         record = {
             "record_type": "subtopic",
             "child_type": "subject",
@@ -379,7 +393,8 @@ def build_structured_records(
             "title": title,
             "title_fingerprint": title_fingerprint(title),
             "summary": summarize(str(child.get("summary") or full_text)),
-            "subtopic_terms": dict(child.get("terms") or build_term_map(full_text)),
+            "subtopic_terms": child_terms,
+            "term_display": build_term_display(full_text, child_terms),
             "subtopic_source": rung,
             "status": parent.get("status"),
             "topic_areas": list(child.get("topic_areas") or topics),
@@ -541,6 +556,12 @@ def sidecar_payload(cache, *, approvals=None):
                 key: value for key, value in child.items()
                 if key != "subtopic_terms"
             }
+            if not stored.get("term_display"):
+                stored["term_display"] = build_term_display(
+                    f"{stored.get('title') or ''} {stored.get('summary') or ''}",
+                    terms or None,
+                    MAX_TERM_DISPLAY,
+                )
             state, reason = publication_eligibility(stored, approvals=approvals)
             stored["publication_state"] = state
             stored["publication_reason"] = reason
@@ -617,6 +638,12 @@ def read_cache(path=DEFAULT_CACHE):
             terms = terms_by_id.get(str(child.get("subtopic_id") or ""))
             if terms is not None:
                 child["subtopic_terms"] = terms
+            if not child.get("term_display"):
+                child["term_display"] = build_term_display(
+                    f"{child.get('title') or ''} {child.get('summary') or ''}",
+                    terms or child.get("subtopic_terms") or None,
+                    MAX_TERM_DISPLAY,
+                )
     return payload
 
 

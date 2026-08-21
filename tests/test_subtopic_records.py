@@ -173,6 +173,15 @@ class RecordShapeTests(unittest.TestCase):
         self.assertIn("Catalysis and reaction engineering", first["topic_areas"])
         self.assertIn("catalysis", first["program_area_labels"])
 
+    def test_term_display_is_bounded_readable_and_display_only(self):
+        first = self.records[0]
+        self.assertLessEqual(len(first["term_display"]), 60)
+        self.assertIn("electrocatalysi", first["term_display"])
+        self.assertEqual(
+            first["term_display"]["electrocatalysi"], "Electrocatalysis"
+        )
+        self.assertTrue(set(first["term_display"]).issubset(first["subtopic_terms"]))
+
     def test_parent_inherited_fields_are_not_duplicated(self):
         # §5.5: agency, award range and the filtering deadline are inherited by
         # the package E merge, never copied here, so they cannot disagree.
@@ -313,6 +322,8 @@ class CacheIoTests(unittest.TestCase):
             self.assertEqual(list(first), sorted(first))
             self.assertEqual(first["publication_state"], "review")
             self.assertNotIn("subtopic_terms", first)
+            self.assertIn("term_display", first)
+            self.assertLessEqual(len(first["term_display"]), 60)
             self.assertEqual(payload["search_index"]["document_count"], 0)
 
             reread = records.read_cache(path)

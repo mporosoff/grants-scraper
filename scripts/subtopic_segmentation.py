@@ -39,7 +39,7 @@ from pypdf import PdfReader
 from pypdf.generic import Destination
 
 from scripts import program_areas
-from scripts.build_catalog import tokenize
+from scripts.build_catalog import STOP_WORDS, TOKEN_RE, normalize_token, tokenize
 from scripts.subtopic_patterns import (
     LABEL_RUN_FAMILY,
     STRUCTURAL_FAMILY,
@@ -68,6 +68,7 @@ MIN_TITLED_RATIO = 0.6
 MAX_TITLE_CHARS = 200
 MAX_SUMMARY_CHARS = 600
 MAX_TERMS = 400
+MAX_TERM_DISPLAY = 60
 MAX_PROGRAM_AREA_LABELS = 14
 
 # Layer C candidate test. Measured (docs/PDF_API_NOTES.md §3): the size branch
@@ -160,6 +161,7 @@ class Subtopic:
     program_area_labels: tuple
     topic_areas: tuple
     own_deadline: str | None
+    term_display: dict = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
@@ -290,6 +292,46 @@ def build_term_map(span_text: str, max_terms: int = MAX_TERMS) -> dict:
     precisely what this feature exists to retrieve.
     """
     return dict(Counter(tokenize(span_text)).most_common(max_terms))
+
+
+def build_term_display(
+    span_text: str,
+    terms: dict | None = None,
+    max_terms: int = MAX_TERM_DISPLAY,
+) -> dict:
+    """Readable surface forms for the highest-weight retrieval stems.
+
+    The child index must remain in the catalog tokenizer's stem space, while
+    match explanations should never expose those stems as if they were words.
+    This bounded map is display-only: each stem resolves to its most frequent
+    source spelling, with deterministic lexical tie-breaking. Stems not seen
+    in the supplied display text are omitted instead of inventing a label.
+    """
+    source = str(span_text or "")
+    surfaces = {}
+    for raw in re.findall(TOKEN_RE.pattern, source, flags=re.IGNORECASE):
+        raw = raw.strip(".-")
+        stem = normalize_token(raw)
+        if not stem or stem in STOP_WORDS or len(stem) <= 1:
+            continue
+        surfaces.setdefault(stem, Counter())[raw] += 1
+
+    ranked = terms if terms is not None else build_term_map(source)
+    ordered = sorted(
+        (
+            (str(stem), int(frequency))
+            for stem, frequency in (ranked or {}).items()
+            if stem in surfaces and int(frequency) > 0
+        ),
+        key=lambda item: (-item[1], item[0]),
+    )[:max_terms]
+    display = {}
+    for stem, _frequency in ordered:
+        display[stem] = sorted(
+            surfaces[stem].items(),
+            key=lambda item: (-item[1], item[0].casefold(), item[0]),
+        )[0][0]
+    return display
 
 
 def running_lines(containers, threshold: float = 0.4) -> set:
@@ -750,6 +792,7 @@ def build_subtopics(candidates, flat, containers, parent_deadline=None):
         else:
             body = remainder if separator else cleaned
         labels, topics = program_area_fields(cleaned)
+        subtopic_terms = build_term_map(cleaned)
         built.append(
             Subtopic(
                 subtopic_code=candidate.code,
@@ -759,7 +802,7 @@ def build_subtopics(candidates, flat, containers, parent_deadline=None):
                 title=candidate.title[:MAX_TITLE_CHARS],
                 title_fingerprint=title_fingerprint(candidate.title),
                 summary=summarize(body),
-                subtopic_terms=build_term_map(cleaned),
+                subtopic_terms=subtopic_terms,
                 page_start=candidate.page,
                 page_end=flat.page_at(end - 1),
                 anchor=candidate.anchor,
@@ -768,6 +811,7 @@ def build_subtopics(candidates, flat, containers, parent_deadline=None):
                 program_area_labels=labels,
                 topic_areas=topics,
                 own_deadline=own_deadline_for(cleaned, parent_deadline),
+                term_display=build_term_display(cleaned, subtopic_terms),
             )
         )
     return tuple(built)

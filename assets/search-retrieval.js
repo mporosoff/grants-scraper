@@ -6,6 +6,136 @@
   const PREFIX_LIMIT = 12;
   const FUZZY_LIMIT = 6;
 
+  function compareIds(left, right) {
+    return String(left).localeCompare(String(right), undefined, {
+      numeric: true,
+      sensitivity: "base",
+    });
+  }
+
+  function positiveScale(values) {
+    const positive = Array.from(values || [])
+      .filter(value => Number(value) > 0)
+      .map(Number)
+      .sort((left, right) => left - right);
+    if (!positive.length) return 1;
+    return positive[Math.max(0, Math.ceil(positive.length * .9) - 1)];
+  }
+
+  function createChildCatalog(sidecar) {
+    const index = sidecar?.search_index;
+    const recordIds = index?.record_ids || [];
+    const recordsById = new Map();
+    Object.values(sidecar?.records || {}).forEach(entry => {
+      (entry?.subtopics || []).forEach(record => {
+        if (record?.subtopic_id) recordsById.set(String(record.subtopic_id), record);
+      });
+    });
+    if (!index?.postings || Number(index.document_count) !== recordIds.length) {
+      throw new Error("The topic sidecar search index is incomplete.");
+    }
+    const opportunities = recordIds.map(identifier => {
+      const record = recordsById.get(String(identifier));
+      if (
+        !record
+        || record.publication_state !== "publishable"
+        || record.child_type !== "subject"
+      ) {
+        throw new Error(`Topic index record ${identifier} is not a publishable subject.`);
+      }
+      return {
+        ...record,
+        opportunity_id: String(record.subtopic_id),
+        opportunity_number: "",
+        description: record.summary || "",
+        document_search_text: "",
+      };
+    });
+    return Object.freeze({
+      schema_version: sidecar.schema_version,
+      opportunities,
+      search_index: index,
+    });
+  }
+
+  function rollupScores({
+    parentCatalog,
+    childCatalog,
+    parentDirect,
+    parentProfile,
+    childDirect,
+    childProfile,
+    eligibilityBonuses,
+  }) {
+    const parentRecords = parentCatalog?.opportunities || [];
+    const childRecords = childCatalog?.opportunities || [];
+    const parentRaw = parentRecords.map((_record, index) => (
+      Number(parentDirect?.scores?.[index]) > 0
+        ? (2 * Number(parentDirect.scores[index])) + Number(parentProfile?.scores?.[index] || 0)
+        : 0
+    ));
+    const childRaw = childRecords.map((_record, index) => (
+      Number(childDirect?.scores?.[index]) > 0
+        ? (2 * Number(childDirect.scores[index])) + Number(childProfile?.scores?.[index] || 0)
+        : 0
+    ));
+    const parentScale = positiveScale(parentRaw);
+    const childNativeScale = positiveScale(childRaw);
+    const childScale = Math.max(parentScale, childNativeScale);
+    const childrenByParent = new Map();
+
+    childRecords.forEach((record, index) => {
+      if (!(Number(childDirect?.scores?.[index]) > 0)) return;
+      const parentId = String(record.parent_id || "");
+      if (!childrenByParent.has(parentId)) childrenByParent.set(parentId, []);
+      childrenByParent.get(parentId).push({
+        id: String(record.subtopic_id || record.opportunity_id),
+        record,
+        raw: childRaw[index],
+        normalized: childRaw[index] / childScale,
+        directEvidence: childDirect?.evidence?.[index] || null,
+        profileEvidence: childProfile?.evidence?.[index] || null,
+      });
+    });
+    childrenByParent.forEach(children => children.sort((left, right) => (
+      right.normalized - left.normalized || compareIds(left.id, right.id)
+    )));
+
+    const rows = [];
+    parentRecords.forEach((record, index) => {
+      const id = String(record.opportunity_id || record.opportunity_number || "");
+      const matchingChildren = childrenByParent.get(id) || [];
+      const parentAdmitted = Number(parentDirect?.scores?.[index]) > 0;
+      if (!parentAdmitted && !matchingChildren.length) return;
+      const parentNormalized = parentRaw[index] / parentScale;
+      const childNormalized = matchingChildren[0]?.normalized || 0;
+      const relevance = Math.max(parentNormalized, childNormalized);
+      const eligibility = Number(eligibilityBonuses?.[index] || 0) / parentScale;
+      rows.push({
+        id,
+        record,
+        score: relevance + eligibility,
+        relevance,
+        eligibility,
+        parentAdmitted,
+        parentRaw: parentRaw[index],
+        parentNormalized,
+        parentDirectEvidence: parentDirect?.evidence?.[index] || null,
+        parentProfileEvidence: parentProfile?.evidence?.[index] || null,
+        bestChild: matchingChildren[0] || null,
+        matchingChildren,
+        matchingChildCount: matchingChildren.length,
+      });
+    });
+    return {
+      rows,
+      parentRaw,
+      childRaw,
+      scales: { parent: parentScale, childNative: childNativeScale, child: childScale },
+      cardinalityBonus: 0,
+    };
+  }
+
   function boundedDamerauLevenshtein(left, right, maximum) {
     if (left === right) return 0;
     if (Math.abs(left.length - right.length) > maximum) return maximum + 1;
@@ -195,6 +325,7 @@
         coverage = true,
         context = "",
         minimumCoverage: requestedMinimumCoverage = null,
+        evidence: collectEvidence = false,
       } = {},
     ) {
       const groups = expandedGroups(query, { context });
@@ -208,11 +339,15 @@
       const fuzzyTerms = new Map();
       const inferredTopics = new Map();
       const exactPhraseDocuments = new Set();
+      const evidence = collectEvidence
+        ? Array.from({ length: documentCount }, () => ({ groups: [], exactPhrase: false, trigrams: [] }))
+        : null;
 
       groups.forEach(group => {
         const groupDocuments = new Set();
         const groupEvidence = new Map();
         const groupLexicalScores = new Map();
+        const groupMatchedTerms = collectEvidence ? new Map() : null;
         group.terms.forEach(({ term: queryTerm, weight: queryWeight }) => {
           const queryTermDocuments = new Set();
           resolveTerm(queryTerm).forEach(resolution => {
@@ -241,6 +376,14 @@
                 documentId,
                 (groupLexicalScores.get(documentId) || 0) + contribution,
               );
+              if (collectEvidence) {
+                if (!groupMatchedTerms.has(documentId)) groupMatchedTerms.set(documentId, new Map());
+                const matches = groupMatchedTerms.get(documentId);
+                matches.set(
+                  resolution.term,
+                  (matches.get(resolution.term) || 0) + contribution,
+                );
+              }
               queryTermDocuments.add(documentId);
             }
           });
@@ -290,6 +433,15 @@
           lexicalCoverage[documentId] += 1;
           if (group.requiredUnlessTopic) requiredGroupCoverage[documentId] += 1;
           if (group.requiredAlways) alwaysRequiredCoverage[documentId] += 1;
+          if (collectEvidence) {
+            evidence[documentId].groups.push({
+              source: group.source,
+              contribution: groupLexicalScores.get(documentId) || 0,
+              matchedTerms: [...(groupMatchedTerms.get(documentId) || new Map())]
+                .sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0]))
+                .map(([term]) => term),
+            });
+          }
         });
 
         if (!semantic) return;
@@ -324,10 +476,12 @@
           if (title.includes(phrase)) {
             lexicalScores[documentId] += title === phrase ? 24 : 12;
             exactPhraseDocuments.add(documentId);
+            if (collectEvidence) evidence[documentId].exactPhrase = true;
           }
           if (opportunityNumber === phrase) {
             lexicalScores[documentId] += 50;
             exactPhraseDocuments.add(documentId);
+            if (collectEvidence) evidence[documentId].exactPhrase = true;
           }
         });
       }
@@ -343,6 +497,7 @@
           queryTrigrams.forEach(trigram => {
             if (documentPhraseText[documentId].includes(trigram)) {
               lexicalScores[documentId] += 40;
+              if (collectEvidence) evidence[documentId].trigrams.push(trigram);
             }
           });
         });
@@ -401,6 +556,7 @@
         semanticScores,
         lexicalCoverage,
         semanticCoverage,
+        evidence,
         hasTerms: groups.length > 0,
         diagnostics: {
           queryGroups: groups.length,
@@ -431,5 +587,8 @@
   globalThis.FUNDING_RETRIEVAL = Object.freeze({
     boundedDamerauLevenshtein,
     create,
+    createChildCatalog,
+    positiveScale,
+    rollupScores,
   });
 })();

@@ -278,3 +278,111 @@ test("exact Basic Energy Sciences wording outranks generic new DOE notices", () 
   assert.ok(result.scores[bes] > 0);
   if (prospect >= 0) assert.ok(result.scores[bes] > result.scores[prospect]);
 });
+
+test("topic catalog admits only search-indexed publishable subject children", () => {
+  const { retrieval } = loadApis();
+  const sidecar = {
+    schema_version: 1,
+    records: {
+      parent: {
+        subtopics: [
+          {
+            subtopic_id: "p:public",
+            parent_id: "p",
+            child_type: "subject",
+            publication_state: "publishable",
+            title: "Public topic",
+            summary: "Catalysis",
+          },
+          {
+            subtopic_id: "p:review",
+            parent_id: "p",
+            child_type: "subject",
+            publication_state: "review",
+            title: "Review topic",
+          },
+        ],
+      },
+    },
+    search_index: {
+      document_count: 1,
+      record_ids: ["p:public"],
+      document_lengths: [1],
+      average_document_length: 1,
+      postings: { catalysi: [0, 1] },
+    },
+  };
+  const childCatalog = retrieval.createChildCatalog(sidecar);
+  assert.deepEqual(
+    Array.from(childCatalog.opportunities, record => record.opportunity_id),
+    ["p:public"],
+  );
+
+  sidecar.search_index = { ...sidecar.search_index, record_ids: ["p:review"] };
+  assert.throws(
+    () => retrieval.createChildCatalog(sidecar),
+    /not a publishable subject/,
+  );
+});
+
+test("P9 rollup uses anchored P90 max scoring with zero cardinality bonus", () => {
+  const { retrieval } = loadApis();
+  const parentCatalog = {
+    opportunities: [record("p1", "Parent one"), record("p2", "Parent two")],
+  };
+  const childCatalog = {
+    opportunities: [
+      { subtopic_id: "p1:c1", parent_id: "p1", title: "Child one" },
+      { subtopic_id: "p1:c2", parent_id: "p1", title: "Child two" },
+      { subtopic_id: "p2:c1", parent_id: "p2", title: "Child three" },
+    ],
+  };
+  const scored = retrieval.rollupScores({
+    parentCatalog,
+    childCatalog,
+    parentDirect: { scores: Float64Array.from([10, 0]) },
+    parentProfile: { scores: Float64Array.from([2, 0]) },
+    childDirect: { scores: Float64Array.from([15, 12, 4]) },
+    childProfile: { scores: Float64Array.from([3, 0, 0]) },
+    eligibilityBonuses: [2, 0],
+  });
+
+  assert.equal(scored.scales.parent, 22);
+  assert.equal(scored.scales.childNative, 33);
+  assert.equal(scored.scales.child, 33);
+  assert.equal(scored.cardinalityBonus, 0);
+  assert.equal(scored.rows.length, 2, "a direct child may admit its parent");
+  assert.equal(scored.rows[0].matchingChildCount, 2);
+  assert.equal(scored.rows[0].bestChild.id, "p1:c1");
+  assert.equal(scored.rows[0].relevance, 1);
+  assert.equal(scored.rows[0].eligibility, 2 / 22);
+  assert.equal(scored.rows[1].parentAdmitted, false);
+
+  const one = retrieval.rollupScores({
+    parentCatalog: { opportunities: [parentCatalog.opportunities[0]] },
+    childCatalog: { opportunities: [childCatalog.opportunities[0]] },
+    parentDirect: { scores: Float64Array.from([10]) },
+    childDirect: { scores: Float64Array.from([15]) },
+  });
+  assert.equal(one.rows[0].relevance, 1);
+  assert.equal(scored.rows[0].relevance, one.rows[0].relevance);
+});
+
+test("explanation evidence reports only terms that contributed", () => {
+  const apis = loadApis();
+  const catalog = catalogFor([
+    record("fit", "Carbon capture membranes"),
+    record("other", "Arts education"),
+  ], apis.query);
+  const result = apis.retrieval.create(catalog, apis.query).score(
+    "carbon capture",
+    { semantic: false, evidence: true },
+  );
+
+  assert.ok(result.scores[0] > 0);
+  assert.deepEqual(
+    Array.from(result.evidence[0].groups, group => [group.source, ...group.matchedTerms]),
+    [["carbon", "carbon"], ["capture", "capture"]],
+  );
+  assert.deepEqual(Array.from(result.evidence[1].groups), []);
+});
