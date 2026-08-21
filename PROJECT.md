@@ -1,8 +1,8 @@
 # Funding Finder — Product Plan
 
-**Status:** Phase 1 and 1.5 complete; Phase 2 engineering complete with its human pilot deferred; Phase 3 deployed with its first production evidence batch successful; unified search, uploaded-NOFO chat, result-aware chat, local personalization/saved opportunities, and monitored NSF/NYSERDA source ingestion implemented
+**Status:** P10 retrieval and UI engineering complete on `topic-layer`; production topic/explanation flags remain off pending the P11 enable, merge, CI, and live-site gate; the consented multi-researcher pilot remains open
 
-**Next implementation phase:** Phase 3D — complete the returned-review and citation-landing dry run, then run the deferred multi-researcher pilot
+**Next implementation phase:** P11 — enable the prepared topic/explanation path, reconcile and merge `topic-layer`, then verify CI, refresh, and the live site
 
 **Canonical application:** https://mporosoff.github.io/grants-scraper/
 
@@ -10,7 +10,7 @@
 
 **Initial audience:** University of Rochester researchers, with a design that remains useful to any public user
 
-**Last updated:** August 20, 2026
+**Last updated:** August 21, 2026
 
 ---
 
@@ -23,7 +23,7 @@ The base product should provide the useful parts of the [Duke Research Funding d
 The product answers three related questions:
 
 1. **What funding opportunities are available?** Search the comprehensive catalog directly.
-2. **Which of these are most relevant to my work?** Let AI expand a research description, rerank a bounded candidate set, explain the matches, and answer follow-up questions about that shortlist.
+2. **Which of these are most relevant to my work?** Use deterministic keyword, profile, CV, ORCID-publication, and topic evidence first; optionally let AI rerank a bounded candidate set and answer follow-up questions.
 3. **What does this funding notice require?** Drop a NOFO/FOA PDF into the main search box, connect it to a matching catalog record when possible, and ask document-grounded questions with page references.
 
 The system must not make a model call for ordinary search. It must not hide the catalog behind an API key.
@@ -96,12 +96,26 @@ Anyone can use, without an API key:
 - relevance, deadline, posted-date, award, agency, and title sorting;
 - pagination and expandable record details;
 - a compact deadline/award/eligibility/contact overview with mailto POC links;
-- side-by-side comparison and device-local saved opportunities;
+- device-local saved opportunities;
+- compact matched-topic evidence and a collapsed deterministic “Why this match” explanation when the P11 feature flags are enabled;
 - per-opportunity and result-set calendar export;
 - one-click official FOA, agency-notice, or Grants.gov record links; and
 - CSV export of the complete current result set.
 
 Search and filtering execute in the browser over the prebuilt index. They make zero AI calls and have no per-search infrastructure cost.
+
+The parent opportunity remains the result unit. The optional topic sidecar is
+loaded lazily, indexes only publishable `subject` children, rolls the strongest
+child evidence up to its parent with no child-count bonus, and shows at most
+three matched topics before deliberate expansion. Review-only children never
+enter ordinary retrieval, rendering, or explanations.
+
+`assets/app-config.js` is the single source for the visible application release
+(`Funding Finder v1.0.0 · Updated Aug 21, 2026`) used by Funding Finder and Team
+Matcher. That date changes only for a deliberate app release: patch versions
+cover bug fixes/small UI updates, minor versions cover user-visible features,
+and major versions cover intentional breaking product or schema experiences.
+The separate Catalog status continues to report nightly data freshness.
 
 The public page begins with no opportunity cards. One guided workflow combines
 keywords, optional profile/CV context, and optional filters under “Find
@@ -159,8 +173,9 @@ research profile on that device. The saved record contains:
 - applicant context and career stage;
 - extracted CV text and file metadata, bounded to 120,000 characters;
 - the user's current filters, sort, selected provider (never its key), and
-  profile-ranking preference;
-- Phase 2 usefulness labels and reason codes in a separate local record;
+  profile-search preference;
+- Phase 2 usefulness labels and reason codes in a separate local record only
+  when the dedicated `?evaluation=1` workflow is used;
 - saved-opportunity snapshots in another compact device-local record.
 
 PDF, DOCX, TXT, and Markdown CVs are parsed in the browser. The original file
@@ -168,15 +183,9 @@ is never saved or uploaded by the application. The user can disable
 profile use, remove the CV extract, clear the saved profile, or clear
 evaluation labels at any time.
 
-After three graded ratings, the user can explicitly enable a deterministic
-local preference model that gently reranks Relevance results from source,
-agency, topic, discipline, and applicant-type signals. Prioritized cards show
-why, a small exploration section surfaces related unseen opportunities, and
-the model can be switched off or cleared without changing the public catalog.
-Its on/off choice is stored independently from the research profile, so it
-survives reload even when the user chooses not to save profile or CV content.
-Shared search URLs still begin with the public base ranking until the user
-explicitly turns personalization on for that search.
+Normal search no longer includes a permanent rating panel or rating-trained
+reranking. Invited pilot participants use `?evaluation=1`; those labels remain
+measurement evidence only and never alter the deterministic product ranking.
 
 The AI shortlist, chat, and extracted uploaded-notice text remain page-memory
 only and disappear on reload. The uploaded file itself is never stored; its
@@ -304,14 +313,13 @@ catalog or a shared institutional record.
 5. Select the same “Find funding” action used for keyword/filter searches.
 6. Remove the CV extract or clear the profile at any time.
 
-### Save opportunities and personalize from ratings
+### Save opportunities and run a dedicated relevance evaluation
 
 1. Select “Save” on any result to keep a compact device-local shortcut.
-2. Rate opportunities directly on their cards.
-3. After three graded ratings, enable “Personalize from my ratings.”
-4. Relevance sorting gently prioritizes matching local signals and labels the
-   reason; switch personalization off or clear ratings to restore the base
-   ranking.
+2. Normal search keeps rating controls absent.
+3. Invited pilot participants open `match_explorer.html?evaluation=1`, label
+   results locally, and explicitly export one evaluation file.
+4. Evaluation labels do not change retrieval or ranking.
 
 ### Add AI refinement
 
@@ -441,8 +449,8 @@ Phase 1 now includes both the catalog foundation and the first optional refineme
   a removal control;
 - monitored NSF/NYSERDA ingestion with source-aware facets and provenance;
 - atomic external-source refresh with still-current last-known-good fallback;
-- direct saved-opportunity controls and optional device-local preference
-  reranking after three graded ratings; and
+- direct saved-opportunity controls and a separate, explicit evaluation mode;
+  and
 - regression coverage for forecasts, expired records, ambiguous rolling
   language, source lifecycles, indexing, generated assets, and workflow
   safeguards.
@@ -686,9 +694,8 @@ visitor reuses the compact output.
 
 #### 3D. Deployment review, storage, return, and reporting
 
-- **Implemented:** remove phase/deployment terminology from the normal search
-  path and place invited-tester controls in one collapsed, clearly labeled
-  “Help improve Funding Finder” area that does not affect searching.
+- **Implemented:** keep invited-tester controls out of normal search and expose
+  them only through the dedicated `?evaluation=1` workflow.
 - **Implemented:** autosave source verdicts (`accurate`, `incorrect`,
   `couldn’t verify`), checked field, optional note, deployment checklist, and
   coarse action counts in a separate device-local record.
