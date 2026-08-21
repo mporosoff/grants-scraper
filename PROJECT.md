@@ -1,8 +1,8 @@
 # Funding Finder — Product Plan
 
-**Status:** P10 retrieval and UI engineering complete on `topic-layer`; production topic/explanation flags remain off pending the P11 enable, merge, CI, and live-site gate; the consented multi-researcher pilot remains open
+**Status:** P11 feature/configuration and `topic-layer` dispatch gates passed; topic-aware retrieval and explanations are enabled on the feature branch, with the history-preserving `main` merge, main CI/refresh, and live-site verification still pending; MEAS-10 remains unperformed post-launch human validation
 
-**Next implementation phase:** P11 — enable the prepared topic/explanation path, reconcile and merge `topic-layer`, then verify CI, refresh, and the live site
+**Next implementation phase:** P11 ship gate — reconcile the latest `main`, merge `topic-layer` without squashing, then verify main CI, the production refresh, and the live site
 
 **Canonical application:** https://mporosoff.github.io/grants-scraper/
 
@@ -97,7 +97,7 @@ Anyone can use, without an API key:
 - pagination and expandable record details;
 - a compact deadline/award/eligibility/contact overview with mailto POC links;
 - device-local saved opportunities;
-- compact matched-topic evidence and a collapsed deterministic “Why this match” explanation when the P11 feature flags are enabled;
+- compact matched-topic evidence and a collapsed deterministic “Why this match” explanation;
 - per-opportunity and result-set calendar export;
 - one-click official FOA, agency-notice, or Grants.gov record links; and
 - CSV export of the complete current result set.
@@ -111,11 +111,14 @@ three matched topics before deliberate expansion. Review-only children never
 enter ordinary retrieval, rendering, or explanations.
 
 `assets/app-config.js` is the single source for the visible application release
-(`Funding Finder v1.0.0 · Updated Aug 21, 2026`) used by Funding Finder and Team
-Matcher. That date changes only for a deliberate app release: patch versions
-cover bug fixes/small UI updates, minor versions cover user-visible features,
-and major versions cover intentional breaking product or schema experiences.
-The separate Catalog status continues to report nightly data freshness.
+(`Funding Finder v1.1.0 · Updated Aug 21, 2026`) used by Funding Finder and Team
+Matcher. Visible version numbering is introduced with v1.1.0 for the
+topic-aware retrieval release; the earlier live production baseline remains
+intentionally unnumbered, with no invented v1.0.0 release. The release date
+changes only for a deliberate app release: patch versions cover bug fixes/small
+UI updates, minor versions cover user-visible features, and major versions
+cover intentional breaking product or schema experiences. The separate Catalog
+status continues to report nightly data freshness.
 
 The public page begins with no opportunity cards. One guided workflow combines
 keywords, optional profile/CV context, and optional filters under “Find
@@ -234,6 +237,35 @@ on desktop it downloads the file and opens an addressed email to the project
 owner. The export excludes API keys, profile/CV text, search text, Funding
 Finder search URL/parameters, and chat. Returned files are kept in gitignored `evaluation/inbox/`
 and aggregated into private Markdown, JSON, and CSV reports.
+
+### 2.7 Topic-aware retrieval release
+
+The v1.1.0 release candidate enables the already-measured topic and deterministic
+match-explanation paths. Its August 21 feature-branch dispatch retained all 446
+stored subject children across 29 publishing parents: 236 are publishable and
+210 inferred children remain review-only. Normal search admits only publishable
+`subject` children, keeps the parent opportunity as the result unit, rolls up
+only the strongest child with zero child-cardinality bonus, and exposes no
+review-only child in ranking, rendering, or explanations.
+
+MEAS-5 covered 48 queries across 11 disciplines: 10 movements were specificity
+improvements, two were neutral/bounded, one (`space biology` → `Bionic
+Electronics`) remains a bounded known lexical limitation, and none was a
+confirmed regression. MEAS-9 completed all eight profile/CV/ORCID arms with the
+real Crossref route, preserved the historical admission anchors, and found no
+unsupported explanation. DEC-17 permits shipment without MEAS-10; no 3–5
+researcher pilot occurred, and MEAS-10 remains explicitly unperformed
+post-launch human validation.
+
+Recurring scheduled classification uses only the dedicated GitHub Actions
+secret `ANTHROPIC_API_KEY`, exposed to the document-evidence step alone. It
+fails closed and records aggregate call and token usage; the cache-aware warm
+dispatch made zero classifier/API calls and used zero tokens. Compare and the
+permanent rating/personalization surface remain absent; invited evaluation mode
+is separate. Rollback requires only disabling the two browser flags and
+removing scheduled `--enable-subtopics`: the sidecar is additive, the parent
+catalog remains authoritative, the last successful site is recoverable from
+git, and no database migration is involved.
 
 ---
 
@@ -909,6 +941,9 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | `index.html` | GitHub Pages entry point |
 | `match_explorer.html` | Public search and refinement interface |
 | `assets/app.js` | Browser search, cited source evidence, review/export, profile ranking, AI matching, and chat |
+| `assets/app-config.js` | Shared Funding Finder release metadata and production feature flags |
+| `assets/subtopic-runtime.js` | Lazy publishable-subject loading and parent-level child-score rollup |
+| `assets/match-explain.js` | Local deterministic, evidence-bounded match explanations |
 | `assets/profile.js` | Device-local profile/feedback boundary and browser CV extraction |
 | `assets/nofo.js` | Browser-only NOFO PDF extraction, opportunity-number detection, and catalog matching |
 | `assets/review.js` | Device-local Phase 3 deployment-review boundary and privacy-safe handoff package |
@@ -918,6 +953,7 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | `data/opportunities.js` | Generated catalog, facets, and BM25 index |
 | `data/opportunity_enrichment.json` | Compact official-detail cache for incremental refresh |
 | `data/document_evidence.json` | Compact document hash/version, citations, extracted facts, and review-queue cache |
+| `data/subtopics.js` | Lazy public sidecar for publishable and review-gated subject-child records and their search index |
 | `data/source_records.json` | Per-source records, first-seen dates, and refresh diagnostics |
 | `scripts/build_catalog.py` | Complete XML ingestion, normalization, validation, and index build |
 | `scripts/enrich_catalog.py` | Official detail enrichment, evidence reconciliation, and FOA selection |
@@ -975,3 +1011,4 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | August 2026 | Resolve unfamiliar research acronyms locally by matching catalog phrases against enabled researcher context; require multiple expansion-term hits and fail closed on ambiguity. |
 | August 20, 2026 | Plan explicit PDF/DOCX export of an already-generated document-chat answer or current transcript, preserving visible questions, answers, citations, links, formatting, and available document identity/version metadata without regeneration, hidden context, or automatic persistence. |
 | August 20, 2026 | Plan agency-generic governing-document context with explicit provenance, applicability, and precedence; use NSF PAPPG 24-1 as the first dated example while resolving the applicable guide and supplements from official guidance rather than hard-coding one version. |
+| August 21, 2026 | Accept DEC-17 and ship the topic layer before the unperformed MEAS-10 researcher pilot; authorize recurring, step-local, fail-closed Anthropic classification with auditable aggregate usage; introduce visible version numbering with Funding Finder v1.1.0 and leave the earlier production baseline unnumbered. |

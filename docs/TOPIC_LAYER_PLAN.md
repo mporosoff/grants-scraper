@@ -2,11 +2,13 @@
 
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
-Status: in progress · Version 8.38 · Written 2026-08-15 · **Revised 2026-08-21 through the P11 decision gate**
+Status: in progress · Version 8.39 · Written 2026-08-15 · **Revised 2026-08-21 through the P11 feature/configuration gate**
 
-> **Start at §18, and read §18.0 first.** §18 defines the minimum path — the **eleven** work packages **P1 … P11** — and lists what is deferred and what it costs. **§18.0 is the canonical namespace**: package IDs, the `BUG-*` / `MEAS-*` / `DEC-*` / `DEBT-*` prefixes, the migration table for every legacy label (`Package A–G`, `D½`, `D⅝`, `D¾`, `S1–S3`, `Package N`, bare `D#`, `M#`), the current ordered path, and a diagram. **P5, P6, P7, P9 and P10 are CLOSED; P8 is complete; MEAS-8 and MEAS-9 are CLOSED. P11 is in progress.** DEC-17 is closed by the user's explicit ship-without-pilot decision; MEAS-10 remains unperformed and is deferred to post-launch human product validation. Production feature flags remain off until P11's implementation and dispatch gates pass. **§18.0.6 is the canonical Open Obligations Register** — every unresolved `DEC-*`, `BUG-*`, `DEBT-*` and `MEAS-*` in the project, each with an owner and a gate. §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
+> **Start at §18, and read §18.0 first.** §18 defines the minimum path — the **eleven** work packages **P1 … P11** — and lists what is deferred and what it costs. **§18.0 is the canonical namespace**: package IDs, the `BUG-*` / `MEAS-*` / `DEC-*` / `DEBT-*` prefixes, the migration table for every legacy label (`Package A–G`, `D½`, `D⅝`, `D¾`, `S1–S3`, `Package N`, bare `D#`, `M#`), the current ordered path, and a diagram. **P5, P6, P7, P9 and P10 are CLOSED; P8 is complete; MEAS-8 and MEAS-9 are CLOSED. P11 is SHIP-READY on `topic-layer`, with the main reconciliation/merge/CI/refresh/live gate still pending.** DEC-17 is closed by the user's explicit ship-without-pilot decision; MEAS-10 remains unperformed post-launch human product validation. Production feature flags are enabled on the feature branch only; the existing `main` site remains the unnumbered production baseline until the ship gate completes. **§18.0.6 is the canonical Open Obligations Register** — every unresolved `DEC-*`, `BUG-*`, `DEBT-*` and `MEAS-*` in the project, each with an owner and a gate. §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
 >
 > **Legacy labels in the revision notes below are historical.** They record what a past session actually did and are left as written; translate any of them through §18.0.3 rather than assuming a bare `D5` or `S1` still names live work.
+>
+> **8.39 makes P11 SHIP-READY, not CLOSED.** BUG-0 is closed by independent, explicit `--max-documents 45` and `--max-subtopic-documents 30` workflow budgets; BUG-11 is closed by reading the resolved ROSES URL without changing emission. The document-evidence step has a stable id, retains `continue-on-error`, and routes contained failures to the existing degraded-source issue. Production topics and deterministic explanations are enabled, while the dedicated `ANTHROPIC_API_KEY` remains step-local and fail-closed. The canonical feature-branch dispatch, Actions run **32506795756**, succeeded in **7m27s** and produced bot commit `21332e9`; steady-state diagnostics were **0 classifier calls / 0 API requests / 0 input tokens / 0 output tokens / 0 errors**. The sidecar retained **446 children / 29 publishing parents / 236 publishable / 210 review-only / 0 orphan parents / 0 normal-browser leakage** at **1,845,103 bytes**, SHA-256 `6504510743bf1074e367393ee3df7028a15dcec5756a65334b1d6f36ce083e26`. The final catalog contains **1,473 stored / 1,463 current** parents; P10→dispatch churn was 73 additions and 85 removals, while no child-bearing sidecar parent changed. The exact `space biology` case remains one bounded sixth result driven by literal `space` + `biology` overlap in *Bionic Electronics*, displacing nothing. Highest issue number remained **#31**; #30 received the expected external-source comment for the known JHU 403, and the successful run did not use #29. Verification: **751 live-product Python tests, 98 browser tests, 37-query zero flag-off churn, 50-case P9 byte identity/cardinality invariance, and 22/22 no-drift artifacts**. **SHIP GATE PENDING: latest-main reconciliation, main merge/CI/refresh, live Pages verification, then the docs-only closeout.**
 >
 > **8.38 records P11's two explicit user decisions and the release-version correction.** DEC-17 = **YES**: P11 may ship without MEAS-10, which remains unperformed and moves to explicit post-launch human product validation; no 3–5 researcher pilot is claimed. Recurring scheduled classification is authorized only with a dedicated Funding Finder Anthropic Workspace/API key stored as the GitHub Actions secret `ANTHROPIC_API_KEY`, exposed only to the document-evidence/subtopic step, fail-closed on every credential, credit, spend/rate-limit or API failure, and accompanied by aggregate classifier call and input/output-token diagnostics. Unexpected steady-state classifier volume is a stop-before-`main` review gate. Funding Finder was already live on `main` before visible version numbering; that production state is the unnumbered baseline. The topic-aware retrieval release introduces visible numbering as **Funding Finder v1.1.0** on its actual P11 ship date. No historical v1.0.0 release is invented or backfilled.
 >
@@ -18,7 +20,7 @@ Status: in progress · Version 8.38 · Written 2026-08-15 · **Revised 2026-08-2
 >
 > MEAS-9 ran all eight arms through the production retrieval/profile modules. The real route was `assets/orcid.js` → Crossref `filter=orcid:0000-0003-3066-0029`, resolving Marc D. Porosoff and **16/16 public works**. Arms 1–6 retained the exact **12-candidate** query admission set, all four historical recall anchors and **0/4 historical false positives**; CV and ORCID changed ranks without broadening admission. Profile-only CV+ORCID fallback admitted 5 focused candidates and retained CPS, DOE and ONR; NSF Chemistry did not meet that fallback's four-concept floor. The historical combined topic arm had no movement; three child-sensitive probes demonstrated child-only parent admission and supplied the explanation sample. A bounded OpenAlex comparison found 54 works / 34 abstracts, but no OpenAlex adapter was run and no ranking gain was demonstrated, so DEC-3 retains the working Crossref path rather than changing provider on coverage alone.
 >
-> MEAS-10 remains **unperformed on an exact human dependency**: no consented exports from 3–5 real researchers were supplied or present. The dedicated evaluation workflow, privacy-preserving export and synthetic evaluator are ready; normal ratings remain absent. The user accepted DEC-17 on 2026-08-21, so MEAS-10 is explicit post-launch human product validation and does not block P11; it is not complete and no pilot is implied. User decisions close/defer the other P10 branches: no general gold-set pipeline (DEC-4), archive retention/search post-P11 (DEC-5), no topic-change Atom events (DEC-7), DEC-9 retired because its mute/rating trigger disappeared, no ROSES division→discipline inference (DEC-14), and v1 typed rendering remains `subject` only (DEC-18). **P10 is CLOSED. P11 is in progress; production flags are still off pending its gates.**
+> MEAS-10 remains **unperformed on an exact human dependency**: no consented exports from 3–5 real researchers were supplied or present. The dedicated evaluation workflow, privacy-preserving export and synthetic evaluator are ready; normal ratings remain absent. The user accepted DEC-17 on 2026-08-21, so MEAS-10 is explicit post-launch human product validation and does not block P11; it is not complete and no pilot is implied. User decisions close/defer the other P10 branches: no general gold-set pipeline (DEC-4), archive retention/search post-P11 (DEC-5), no topic-change Atom events (DEC-7), DEC-9 retired because its mute/rating trigger disappeared, no ROSES division→discipline inference (DEC-14), and v1 typed rendering remains `subject` only (DEC-18). **P10 is CLOSED. P11 is SHIP-READY on `topic-layer`; its production flags are enabled there, while main/live verification remains pending.**
 >
 > **8.36 closes P9.** The bounded ARPA-H source emitted 10 healthy current official parents, bringing the generated catalog to **1,485 records**. The frozen one-time campaign then covered **1,415 current parents** and excluded 70 under P9's parent-only currentness rule. It attempted every frozen parent and produced **446 subject children across 29 parents**: **210 native, 14 referenced, 12 inline and 210 inferred**; **236 high, 119 medium and 91 low confidence**; **236 publishable and 210 review-only**. The public/searchable set reconciles exactly to bounded authoritative routes: Genesis 119, ARL 82, TDAC 14, HGEO 12 and current ROSES 9. All 210 inferred generic children remain review-only under DEC-16. The run made 243 classifier calls with 0 classifier errors, recorded 0 field errors and 0 validation/publication anomalies, and failed closed on 51 top-level fetches plus one per-document time guard without invalidating the complete attempted frame. The compact sidecar is **1,532,202 bytes**, stores display/provenance records separately from the bounded `MAX_TERMS=400` inverted index, and is byte-identical on fixed-input regeneration at SHA-256 `fb726ad3b4d40b78993834981f53c4b5f89975152f5ee817d36fcc88ab050e6a`.
 >
@@ -3141,7 +3143,7 @@ When Phase 4 removes the containment, give step 10 an `id:` and route it to the 
 4. Confirm **no new issue number appears.** Record the highest existing issue number before the run and check it has not advanced afterwards. **Issue #30 receiving another comment is expected and is not a failure** — see below.
 5. Confirm `verify_no_drift` passed in `tests.yml` on the same commit (§8.4).
 6. Confirm `query_baseline.mjs --check` reports **zero top-10 churn** with the flag off (§8.5).
-7. Confirm the `.gitignore` allowlist line landed: `git check-ignore data/subtopic_records.json` must print nothing and **exit 1**. Use the plain form, not `-v` — earlier versions of this item said `-v` returns nothing, which is wrong. On a path rescued by a negation, `-v` prints the negating rule (`.gitignore:23:!/data/subtopic_records.json`) and exits **0**, so the `-v` form looks like a failure when it is a pass. Verified on this tree 2026-08-16.
+7. Confirm the shipped sidecar is both allowlisted and tracked: `git check-ignore data/subtopics.js` must print nothing and **exit 1**, while `git ls-files --error-unmatch data/subtopics.js` must print the path and **exit 0**. `data/subtopic_records.json` is the intentionally ignored maintenance/cache name and is not the public P9/P10 sidecar. Earlier versions of this item named that superseded path and also used `-v`; both are wrong for the shipped design. Verified on this tree 2026-08-21.
 8. Only then open the PR.
 
 #### Why item 2 is an absolute ceiling, not a delta
@@ -3817,7 +3819,7 @@ Legacy labels are translated once, in §18.0.3 — not repeated here.
 | **P8** | NASA ROSES Catalog Source | ✅ **complete** 2026-08-20, own gate passed, **no open items** (§18.1). A **catalog-completeness branch**, not subtopic recall. The adapter is enabled and reconciles all **63** elements every refresh; the catalog-completeness gap is **closed** — the 2 actionable unmatched elements are emitted (**+0.136%**) and the other **51** stay inventory-only. Native identity `(cycle, code, title)` and the cross-source ambiguity rule were audited against the live source in P8.2a |
 | **P9** | Storage and scoring | ✅ **CLOSED 2026-08-21.** Final 1,415-current / 70-excluded frame fully attempted; deterministic validated sidecar has 446 subject children, 236 publishable and 210 review-only; scoring, currentness, flag-off, browser, unit and no-drift gates pass (§18.1) |
 | **P10** | Retrieval and UI | ✅ **CLOSED 2026-08-21.** Lazy P9 rollup, readable explanations/topics, compact Funding Finder and Team Matcher UI, app release source, MEAS-5 and MEAS-9 complete; MEAS-10 carried explicitly to P11/DEC-17 |
-| **P11** | Enable and ship | ⛔ **not started.** The only package that flips a flag (§0.4 rule 9) |
+| **P11** | Enable and ship | 🟡 **SHIP-READY 2026-08-21.** Feature/configuration and dispatch gates passed on `topic-layer`; main reconciliation/merge/CI/refresh/live verification pending |
 
 **Gates that stop work by design:** ~~P4's gate~~ (**reconciled at P7 closeout: final 42% < 50%, target not lowered**) · ~~P5's Cov4 gate~~ (**passed 2026-08-26**) · ~~P7 behind P5 and P6~~ (**P7 closed**) · ~~P9's validated first current sidecar/results pair~~ (**passed 2026-08-21**) · ~~P10 retrieval/UI and deterministic relevance gate~~ (**passed 2026-08-21**) · **P11 cannot close while §18.0.6 holds an open obligation.**
 
@@ -3825,12 +3827,12 @@ Legacy labels are translated once, in §18.0.3 — not repeated here.
 
 | ID | Defect | Where it is owned |
 |---|---|---|
-| **BUG-0** | `--max-documents` caps each **pass**, not the run, so with subtopics on the flag understates the work by 2× | §15 debt, §12 |
+| **BUG-0** | ~~`--max-documents` ambiguously caps each pass~~ ✅ **CLOSED 2026-08-21** — separate named administrative/subtopic budgets are explicit in CLI, metrics and workflow; enabled dispatch completed in 7m27s | §15 debt, §12 → repaired in P11 |
 | **BUG-2** | ~~**Three** families reject an ASCII hyphen~~ ✅ **CLOSED 2026-08-20 (P7.2)** — one `_DELIMITERS` constant, and it recovered 3 real FEMA children | §15 debt → repaired in **P7.2** |
 | **BUG-7** | The hermetic §0.5 gate was date-dependent: `build_changes._event_id` seeds on the build's UTC calendar date | ✅ **fixed 2026-08-18** (`d735142`) — the hermetic build pins `generated_at` in a `.work/` copy; `verify_no_drift` exits 0 on the **unchanged** committed baseline (§8.4). **Prerequisite for P8's gate, and satisfied** |
 | **BUG-9** | The aggregating-agency page: every acceptance rule passes on **another opportunity's** topic list | §6.3b. ✅ **fixed 2026-08-26** in `scripts.subtopic_cov4.determine_ownership`, enforced at the production call site. A Grants.gov attachment of the record (`primary_notice`, `secondary_attachment`) is owned and **its prose is never inspected**; an agency-hosted page (`agency_notice`, `subtopic_agency_notice`) is owned only if the parent's own solicitation number appears, **`not_owned`** if only another's does, and **`unestablished`** otherwise — which routes to review and never publishes. **Regression:** parent `DE-FOA-0003215` with a candidate whose text attributes it to `DE-FOA-0003627` returns `not_owned` and does not publish **even with the classifier accepting it as fundable**, driven through both `subtopic_fields` and Cov1's `refresh_subtopics_without_source`. The over-aggression trap is pinned in the same file: the genuine HEP programme citing predecessor `DE-FOA-0003354` and the `DE-FOA-0003627` amendment history both pass with `consulted_prose: False` (`docs/MEAS3_RUN_DESIGN.md` §5d.6) |
 | **BUG-10** | ~~Cov5's residual — the `page_start_offset` fallback is silent~~ ✅ **CLOSED 2026-08-20 (P7.2)**, at **both** call sites; the register named the one that never fired | §6.5, corrected in §18.1 P7.2 |
-| **BUG-11** | `nasa_roses._amendment_of` searches the fetched HTML, but the amendment number lives in the **resolved URL**, so a live run records `amendment: None` | §18.1 P8. **Diagnostics only** — it does not affect emission, identity, currentness or the gate, so it is **not a P8 blocker** |
+| **BUG-11** | ~~`nasa_roses._amendment_of` searched fetched HTML instead of the resolved URL~~ ✅ **CLOSED 2026-08-21** — resolved URL now supplies the amendment diagnostic; emitted catalog/subtopic sets remain unchanged | §18.1 P8 → repaired in P11 |
 | *(no ID)* | **Agency-HTML scrapers fail silently — HTTP 200, zero rows.** Classified as a **risk, not a defect in our code**: it is §12's risk row, mitigated by §7.4 canaries, which shipped with P6.1 and which **P8.5** extends to the emission path | §12, §7.4 |
 
 **Owned as a package item, not as a bug:** `_demote()`'s cap on publication for
@@ -3846,16 +3848,16 @@ guarantees they never publish. It is listed once, under P5.
 | **MEAS-3** | ~~Classifier run-to-run variance~~ | ✅ **DONE 2026-08-24 → `docs/MEAS3_RUN_DESIGN.md` §4a.** 105 candidates × R=5 = **525 calls**, 0 errors: **99 stable accept · 5 stable reject · 1 unstable · 0 error**; per-span instability **0.95%**, pooled per-call disagreement **1/525 = 0.190%** [0.034%, 1.071%]. **The classifier is repeatable, so R=1 is licensed and no ensemble is justified.** But **Cov4 stays blocked on task definition and validation coverage** — *not* variance, and *not* precision: 4 of the 5 stable rejects are genuine programmes, a **3.8% false-negative (recall) failure against a gate requiring zero**; **precision was unmeasured**, the population holding no contaminants. Repetition cannot repair a *stable* error. Also measured: `thinking_tokens` was **0 on all 525 calls**, so "adaptive" did not engage. Superseded original entry: The existing 1-of-62 observation has a **Wilson 95% CI of [0.29%, 8.59%]**, which straddles the 0.9% signal — that is the arithmetic form of "one pass cannot demonstrate the gate". The design is two arms (§11's 114 spans for comparability, plus the F1/F4/aggregating-page shapes Cov4 will actually face) at **R=5**, with a decision table written before the run. **Three blockers, each isolated: no credential (Blocker A), no committed candidate population (Blocker B), `anthropic` unauthorized (DEC-15)** |
 | **MEAS-4** | ~~Read `344592` for MURI topics~~ | ✅ **DONE by MEAS-8.** The current attachments contain 82 ARL topic IDs and zero MURI topic truth; MURI appears only as a mechanism/team exception. DEC-21 owns the real ARL gap |
 | **MEAS-5** | ~~**Discipline-stratified query and relevance set**~~ | ✅ **CLOSED 2026-08-21.** 48 additive queries across 11 disciplines, with 11 profile probes, frozen at `0a9f92a` before outcomes. Thirteen top-10 movement cases: 10 specificity improvements, 2 neutral, 1 suspicious, 0 confirmed regressions |
-| **MEAS-6** | **Name a verified SAM-only opportunity** | **Still blocked on a credential — human task.** MEAS-8 does not claim a SAM-only universe; DEC-19's independently public ARPA-H gap does not substitute for this measurement |
+| **MEAS-6** | **Name a verified SAM-only opportunity** | **POST-LAUNCH — accepted/assigned; credentialed human task.** MEAS-8 does not claim a SAM-only universe; DEC-19's independently public ARPA-H gap does not substitute for this measurement |
 | **MEAS-7** | ~~Read `345241` and `356605` and record whether the pages they point at enumerate fundable subdivisions~~ | ✅ **done 2026-08-22 → `docs/DOD_MEAS7_INSPECTION.md`. 1 of 2.** Army's TDAC BAA topics page publishes **14** applicant-selectable topics (`Title:` / `Announcement ID: TDAC BAA-0NN` / `TPOC:`) and **names the BAA number itself**; the notice states the website — not the BAA — carries them, so they are **external-only**. ONR's "technology areas" are an A–Z research-interest list that names neither the BAA nor any way to apply against an area: **organizational taxonomy, rejected** |
 | **MEAS-8** | ~~Cross-agency residual coverage audit~~ | ✅ **CLOSED 2026-08-20.** Frozen Arm A 28 and Arm B 17; complete results in `evaluation/meas8_results.json`; DEC-19–DEC-22 promoted and subsequently closed in P9.0 |
 | **MEAS-9** | ~~Post-P9 profile/CV/ORCID regression~~ | ✅ **CLOSED 2026-08-21.** Eight arms, real ORCID→Crossref path, 12-candidate query admission preserved, 0/4 historical false positives, 0 unsupported explanations |
-| **MEAS-10** | **Multi-researcher human relevance pilot** | **OPEN — HUMAN DEPENDENCY.** No consented exports from 3–5 real researchers are available; engineering workflow ready; DEC-17 owns P11's explicit ship-without-pilot decision |
+| **MEAS-10** | **Multi-researcher human relevance pilot** | **POST-LAUNCH — accepted/assigned; UNPERFORMED.** No consented exports from 3–5 real researchers are available; engineering workflow ready; DEC-17 explicitly permits P11 to ship first without implying a pilot occurred |
 | *(part of Cov4)* | Form-F1 / form-F4 candidate sets in Cov4's validation | Neither resembles the 22 sibling sets §11 measured (§11). *Form names, not P10 items — see §18.0.1* |
 
 ### Decisions and debt — DEC-* / DEBT-*
 
-**Blocking a human decision — nothing proceeds on these without an answer:**
+**Decision history — the canonical current disposition is in §18.0.6:**
 
 | ID | Decision | Where | Open since |
 |---|---|---|---|
@@ -3919,7 +3921,7 @@ publishes unreviewed · **seven of §6.3's ten families are retired on measureme
 
 - [x] A1. **Populate the frozen fixtures** — three enrichment and three evidence entries keyed to ids `1001`/`1003`/`1005`, so the gate covers the populated `merge_document_entry` path (§8.4). **Do this first:** it is what makes every later gate meaningful — *12 cited facts across 3 records where there were none; baseline 20 → 22 artifacts; §17.6 rule 2 followed, two builds 78 s apart, 0/22 normalized differences*
 - [x] A2. Pin `pdfplumber`, `pdfminer.six`, `pypdf` (§6.1) — *all three of §6.1's version numbers were wrong; `pypdf==5.1.0` would have been a two-major-version downgrade. §6.1 corrected*
-- [x] A3. `.gitignore` allowlist line for `data/subtopic_records.json` (§0.4 rule 11) — *§9.4 item 7's `-v` check also corrected; it reports a pass as a failure*
+- [x] A3. `.gitignore` allowlist foundation — *the shipped design ultimately uses tracked `data/subtopics.js`; §9.4 item 7 now checks that real sidecar and treats `data/subtopic_records.json` as intentionally ignored maintenance state*
 - [x] A4. Size-budget test — absolute limits, not a multiplier (§12) — *32 MiB fail / 28 MiB warn / 2 KiB per subtopic; each threshold proven to fire; 205 → 208 tests*
 - [x] A5. Heartbeat file `.github/last_build` (§16.3) — *written unconditionally before the commit step; deliberately outside the workflow's push path filter so it cannot self-trigger*
 - [x] A6. Query set + `evaluation/query_baseline.json` (§8.5) — *37 queries, byte-identical across two runs, wired into `tests.yml`. Found that top-10 churn is a weaker gate on the 5-record fixture than §8.5 implied; see the warning there*
@@ -4110,11 +4112,11 @@ P7, because that is where it falls in the ordered path (§18.0.4).
 
 ### P11 — Enable and ship *(legacy Package G)*
 
-- [ ] **P11.1.** Flip `--enable-subtopics` and `FF_SUBTOPICS_ENABLED`
-- [ ] **P11.2.** Document-evidence step given an `id:` and routed **before** `continue-on-error` is removed (§9.3)
-- [ ] **P11.3.** `PROJECT.md` — decision, rationale, measured deltas
-- [ ] **GATE:** §9.4 dispatch checklist walked in full — runtime under 15 minutes, no new issue number, #30 updating expected
-- [ ] **SHIP GATE:** after P11's feature/configuration gates pass on `topic-layer`, fetch the latest `main`, reconcile it into `topic-layer`, resolve conflicts there, rerun every affected/full gate when reconciliation changes bytes, and review the final `main..topic-layer` diff. Then use the repository's normal history-preserving merge workflow to merge `topic-layer` into `main`, push `main`, verify the `main` CI/refresh succeeds, and verify the live GitHub Pages Funding Finder. **Only then is P11 CLOSED.** Do not rename or swap the default branch; `main` remains the authoritative default/live branch. Do not squash away the P1–P11 history merely to shorten it. A green feature branch is not shipped.
+- [x] **P11.1.** Enable scheduled `--enable-subtopics` plus both browser flags: topics and deterministic match explanations
+- [x] **P11.2.** Give document evidence a stable id and route contained degradation while retaining `continue-on-error`
+- [x] **P11.3.** `PROJECT.md` — decision, rationale, measured deltas, MEAS-10 honesty, release/version boundary and rollback
+- [x] **GATE:** §9.4 dispatch checklist walked in full on run `32506795756` — 7m27s, highest issue remained #31, expected #30 update, generated diff reviewed
+- [ ] **SHIP GATE:** **PENDING MERGE/LIVE VERIFICATION.** Fetch the latest `main`, reconcile it into `topic-layer`, resolve conflicts there, rerun every affected/full gate when reconciliation changes bytes, and review the final `main..topic-layer` diff. Then use the repository's normal history-preserving merge workflow to merge `topic-layer` into `main`, push `main`, verify the `main` CI/refresh succeeds, and verify the live GitHub Pages Funding Finder. **Only then is P11 CLOSED.** Do not rename or swap the default branch; `main` remains the authoritative default/live branch. Do not squash away the P1–P11 history merely to shorten it. A green feature branch is not shipped.
 
 ---
 
@@ -4139,13 +4141,14 @@ that collision is exactly why the namespaces were split.
 > Register**. Read that first; the entries below carry the detail, not the
 > status.
 
-**Defects, unfixed:**
+**Defects and their retained history:**
 
-- [ ] **BUG-0. `--max-documents` caps each pass rather than the run.** With
-  `--enable-subtopics` on, the subtopic pass receives the same value as the
-  administrative pass, so the run can fetch twice what the flag says (§12).
-  Decide between one shared budget and a second named flag; do **not** change the
-  existing default (§0.4 rule 8)
+- [x] **BUG-0. `--max-documents` used to cap each pass rather than the run.**
+  **✅ Closed in P11 on 2026-08-21.** The administrative pass retains its
+  existing `--max-documents 45` default and the subtopic pass now has the
+  independent, explicit `--max-subtopic-documents 30` budget. CLI help,
+  workflow arguments and diagnostics name both budgets. The enabled dispatch
+  exercised 45/30 and completed in 7m27s.
 - [x] **DEBT-1. The D5 backfill generation carries six summaries that describe the wrong subject.**
   **✅ Superseded 2026-08-24, and verified rather than assumed.** The defective
   artifact was the uncommitted `backfill3/` cache, which no longer exists, and Cov5
@@ -4649,7 +4652,7 @@ it describes what a past session or commit actually did.
 | **P8** | NASA ROSES Catalog Source | Package N | ✅ **complete** 2026-08-20, own gate passed, **no caveats**. Adapter enabled; +2 records; 63 elements re-decided every refresh; identity model audited against the source (P8.2a) |
 | **P9** | Storage and scoring | Package E | ✅ **CLOSED 2026-08-21** |
 | **P10** | Retrieval and UI | Package F | ✅ **CLOSED 2026-08-21** |
-| **P11** | Enable and ship | Package G | **not started** |
+| **P11** | Enable and ship | Package G | 🟡 **SHIP-READY 2026-08-21; main/live ship gate pending** |
 
 **Item labels inside a package.** Renamed **only where the legacy label was
 ambiguous**, because churn in an unambiguous label buys nothing and costs
@@ -4720,14 +4723,14 @@ notes elsewhere.
 | P9.0–P9.3 | Re-key identity · scoring prototype · implement · currentness | E0, E1, E2, E3 | **all complete; package gate passed 2026-08-21** |
 | P10 | Retrieval and UI | Package F | **CLOSED 2026-08-21** |
 | P10.1–P10.4 | Rollup · `term_display` · match-explain · search UI | F1, F2, F3, F4 *(package items, **not** the F1–F6 form names)* | **complete; package gate passed 2026-08-21** |
-| P11 | Enable and ship | Package G | not started |
-| P11.1–P11.3 | Flip the flags · route the step · `PROJECT.md` | G1, G2, G3 | not started |
-| **BUG-0** | `--max-documents` caps each pass, not the run | D0 *(debt)* | open |
+| P11 | Enable and ship | Package G | **SHIP-READY 2026-08-21; main/live gate pending** |
+| P11.1–P11.3 | Flip the flags · route the step · `PROJECT.md` | G1, G2, G3 | **complete on `topic-layer`** |
+| **BUG-0** | `--max-documents` caps each pass, not the run | D0 *(debt)* | **closed in P11 — two explicit named budgets** |
 | **BUG-2** | Three families reject an ASCII hyphen | D2 *(debt)* | open — folded into P7's Fm3 |
 | **BUG-7** | The hermetic gate was date-dependent through the event-ID seed | **formerly D7** *(debt; distinct from P4.7)* | **fixed 2026-08-18** (`d735142`) |
 | **BUG-9** | The aggregating-agency page passes every acceptance rule | *(previously unnumbered, §6.3b)* | ✅ fixed 2026-08-26 with Cov4 |
 | **BUG-10** | Cov5's residual: the `page_start_offset` fallback is silent | *(previously unnumbered, §6.5)* | open |
-| **BUG-11** | `nasa_roses._amendment_of` searches the HTML body, so the live fetch reports `amendment: None` | *(new in 8.14; found closing P8)* | open — **diagnostics only, not a P8 blocker** |
+| **BUG-11** | `nasa_roses._amendment_of` searches the HTML body, so the live fetch reports `amendment: None` | *(new in 8.14; found closing P8)* | **closed in P11 — resolved URL diagnostic fixed** |
 | **DEBT-1** | The backfill cache holds six wrong-subject summaries and misses a span | D1 *(debt)* | open |
 | **DEBT-3** | §6.6's HTML outline layer is specified and unbuilt, deliberately | D3 *(debt)* | open by choice |
 | **DEBT-4** | 213 stale evidence entries | D4 *(debt)* | **closed in P9.0; pruned** |
@@ -4808,9 +4811,12 @@ and `MEAS-*`, and for every occurrence of *open*, *deferred*, *nonblocking*,
 *revisit*, *later* and *TODO*. Other sections may discuss an item; **none of them
 keeps a competing status for it.**
 
-**Statuses, and there are only five.** `OPEN — assigned` · `DEFERRED — assigned`
-· `CLOSED` · `SUPERSEDED` · `WONTFIX — accepted with rationale`. **No item may
-sit at "nonblocking", "later" or a bare "open" without an owner and a gate.**
+**Statuses.** `OPEN — assigned` · `DEFERRED — assigned` · `POST-LAUNCH —
+accepted/assigned` · `CLOSED` · `SUPERSEDED` · `WONTFIX — accepted with
+rationale`. `POST-LAUNCH` is reserved for work the user explicitly accepted
+beyond the P1–P11 release boundary; it must retain its owner/trigger and is not
+a claim of completion. **No item may sit at "nonblocking", "later" or a bare
+"open" without an owner and a gate.**
 
 > **Governance rule, binding from here (§0.4 addendum).**
 > 1. **Every package start** reads this register and lists the items it owns,
@@ -4819,7 +4825,8 @@ sit at "nonblocking", "later" or a bare "open" without an owner and a gate.**
 >    adds any it discovered.
 > 3. **P11 may not close** while any item carries `OPEN — assigned` or
 >    `DEFERRED — assigned`. Closing P11 means every row reads `CLOSED`,
->    `SUPERSEDED` or `WONTFIX`.
+>    `SUPERSEDED`, `WONTFIX`, or an explicitly user-accepted `POST-LAUNCH`
+>    disposition that remains truthful about unfinished work.
 > 4. **Decision authority is binding (added 8.26).** At a due `DEC-*`:
 >    - **`ENGINEERING`** — the session **may resolve it**, but only when the
 >      recorded evidence supports it, and it **must write the evidence and the
@@ -4894,9 +4901,9 @@ reopened to add one.
 | **DEC-2** | Do referenced subtopics extend `discoverability.py`'s registry or sit beside it? | **CLOSED** | — | — | — | **Ratified in P9.0:** referenced children sit beside the discoverability registry and flow through the same child merge/cache contract. `discoverability.py` remains catalog-discovery configuration; child-source delegation stays in `subtopic_referenced.py` / bounded structured routes |
 | **DEC-3** | Works-text provider: Crossref abstracts, or switch the browser to OpenAlex for better abstract coverage | **CLOSED — retain Crossref** | — | — | — | MEAS-9 exercised the actual `assets/orcid.js` Crossref filter route: 16/16 works resolved, all six query-bearing arms kept exact admission and the historical anchors. OpenAlex exposed 54 works / 34 abstracts in a bounded comparison, but no adapter/ranking gain was demonstrated. Coverage alone does not justify replacing a working credential-free path |
 | **DEC-4** | Build `scripts/build_gold_set.py` at all? | **CLOSED — no general v1 pipeline** | — | — | — | User accepted the no-build recommendation. MEAS-9 answered its deterministic questions without an unmet need; MEAS-10 retains its consented export/evaluator path. The one explicit MEAS-5 suspicious case does not justify a general label-pipeline subsystem |
-| **DEC-5** | How archived subtopics are searched, and for how long they are kept | **DEFERRED post-P11 — USER decision** | — | — | — | User accepted current-only parent membership through P11. P10 adds no archive index, retention policy or past-cycle UI |
+| **DEC-5** | How archived subtopics are searched, and for how long they are kept | **POST-LAUNCH — accepted USER decision** | — | post-v1 archive/search work is proposed | **User / future product owner** | User accepted current-only parent membership through P11. P10/P11 add no archive index, retention policy or past-cycle UI; this is unfinished post-launch scope, not a P11 blocker |
 | **DEC-6** | Summary length (600 chars proposed) | **CLOSED** | — | — | — | **Retained at 600 in P9.0.** Retrieval terms remain separate, summaries are sentence/first-clause bounded without mid-word truncation, and validation rejects any over-length child. Fm1's first-clause defect was repaired before the scoring/cache work |
-| **DEC-7** | Topics in Atom feeds | **DEFERRED — USER decision** | — | — | — | User explicitly deferred topic-change Atom events. P10 changes no subscriber-facing feed behavior |
+| **DEC-7** | Topics in Atom feeds | **POST-LAUNCH — accepted USER decision** | — | topic-change subscriber behavior is proposed | **User / future product owner** | User explicitly deferred topic-change Atom events beyond P11. The v1.1 release changes no subscriber-facing feed behavior |
 | **DEC-8** | Taxonomy depth for referenced topics — attach at program level, or one level deeper? | **CLOSED — USER decision 2026-08-20** | — | — | — | Store the **applicant-selectable funding unit**, not an arbitrary taxonomy depth. Do not descend merely because a hierarchy has another level. Genesis is the bounded two-level exception because its application workbook makes the 98 focus areas selectable under 21 challenge groups; P10 owns collapse/display, not storage truth |
 | **DEC-9** | Mute/alert split — accept that muted items still appear in alerts, or build the suppression export? | **CLOSED — NOT APPLICABLE for v1** | — | — | — | The permanent rating/personalization/mute branch was removed in P10. No independent mute control remains in HEAD, so the trigger disappeared; the historical decision is retained rather than silently deleted |
 | **DEC-10** | OCR | **CLOSED — measured no-build** | **ENGINEERING** | — | — | Decided at P7 closeout from the already-recorded evidence, with denominators kept separate: **1/151** P7.1-frame documents, historical **11/770** D5 documents, and **9/726** current catalog-restricted evidence entries. P7.1 found **0 genuinely scanned/image-only PDFs** in its measured frames; the observed failures were source/network, empty portal, or unsupported-format problems that OCR would recover **0** times. **Falsifier:** a future reproducible population of genuinely scanned/image-only notices causing material recall loss |
@@ -4917,14 +4924,14 @@ reopened to add one.
 
 | ID | Defect | Status | Owner | Must resolve before | Rationale / evidence |
 |---|---|---|---|---|---|
-| **BUG-0** | `--max-documents` caps each **pass**, not the run, so with subtopics on the flag understates the work by 2× | **OPEN — assigned** | **P11** | the nightly runs with the flag on | Nothing is wrong with the results; the §9 15-minute ceiling and every published backfill figure were reasoned against one pass. **P7 must not quote a backfill figure without accounting for it.** Do not silently halve the default (§0.4 rule 8) |
+| **BUG-0** | `--max-documents` caps each **pass**, not the run, so with subtopics on the flag understates the work by 2× | **CLOSED 2026-08-21** | — | — | P11 retained the existing administrative default and added explicit `--max-subtopic-documents`; CLI help, diagnostics and workflow name both budgets separately. The enabled dispatch used 45/30 and finished in 7m27s |
 | **BUG-2** | Three families reject an ASCII hyphen — `dod_topic`, `component`, `technical_category`; the last also rejects `.` | **CLOSED** | — | — | **Fixed 2026-08-20 in P7.2** (`608604f`). One shared `_DELIMITERS` constant for all three; `-` added to each and `.` to `technical_category`; the delimiter stays **required**; the hyphen also joins the characters stripped from `code` so identity does not depend on a notice's punctuation. **It had a real validating document after all** — FEMA's FY 2026 CTP NOFO (`363000`, `362999`), read and judged: 3 genuine children, review-gated at `medium`. Movement on the 152-document frozen corpus: **2 documents, every other one byte-identical**. Hyphen support for `dod_topic`/`component` is labelled a **parser contract**, not a measured form. 13 tests |
 | **BUG-7** | The hermetic §0.5 gate was date-dependent | **CLOSED** | — | — | Fixed 2026-08-18 (`d735142`) |
 | **BUG-9** | The aggregating-agency page fabricated another opportunity's children | **CLOSED** | — | — | Fixed 2026-08-26 by Cov4's deterministic ownership guard, enforced at the production call site and regression-tested through two paths |
 | **BUG-10** | Cov5's residual — the `page_start_offset` fallback is silent | **CLOSED** | — | — | **Fixed 2026-08-20 in P7.2** (`a9190ef`), at its trigger, because BUG-2 is the widening. **This row and §6.5 were both wrong about it twice**: the fallback lived at **two** call sites and the one that fires is `_candidates_from`, not `_locate_nodes`, and it fires **6 times in 152 documents** with **4 wrong guesses kept**, not zero. Invariant: *a title-location failure never yields a substitute offset* — structural sets fail whole per **§6.4a rule 2a** (the old code trimmed), ordinal hits drop as they always did, and both are reported as `diagnostics["unlocated_headings"]`. **No `DEC-*` needed**: an existing rule settled it. Measured effect on the corpus: **zero spans changed**; `360678` still 69, all six Cov5 cases aligned. 7 direct tests |
 | **BUG-13** | **`is_administrative` substring-matched "format" inside "information"**, so a real programme title containing *Information* was flagged administrative | **CLOSED** | — | — | **Found at P7.2** (2026-08-20). Five real DOE programme titles in `360678` are flagged — Quantum Information Science across **BES, FES, HEP and NP**, so this is four program offices rather than one field (§17.9). **Costs nothing today**: 5 of 69 is under §6.3a's 0.25 set-level veto and none of their ancestors carries the word, so all five are still emitted. **Fatal on a small set** — three QIS programmes in a twelve-item list would delete the whole list. A false-**negative** surface. **Fixed 2026-08-20 in P7.3a** (`1f3955d`): one leading word boundary, plus `basic information` as a phrase so §6.3a's admissible-node count stays at exactly 90 / 16-71-3. The trailing side is left open on measured grounds — a trailing `\b` would stop flagging 13 further genuinely-administrative `360678` headings. Every accepting document is span- and title-identical; `360678` still 69. **Residual, reported not fixed:** `\bformat` still matches *Formation*, unobserved in the corpus; closing it needs a suffix whitelist |
 | **BUG-14** | Placeholder Grants.gov root URL treated as the announcement and demoted the real notice | **CLOSED** | — | — | P9.0 rejects placeholder portal roots as announcements before source selection. `363526`'s own NOFO now keeps its earned confidence; regression tests pin the root-URL case without weakening other secondary-source demotion |
-| **BUG-11** | `nasa_roses._amendment_of` searches the fetched HTML, but the amendment number lives in the resolved URL | **OPEN — assigned** | **P11** | the ROSES source's diagnostics are trusted operationally | **Diagnostics only** — it does not affect emission, identity, currentness or any gate, which is why P8 closed with it open |
+| **BUG-11** | `nasa_roses._amendment_of` searches the fetched HTML, but the amendment number lives in the resolved URL | **CLOSED 2026-08-21** | — | — | P11 reads the already-authoritative resolved/discovered URL. Tests pin amended/non-amended URLs and prove HTML absence does not erase the diagnostic; emitted catalog/subtopic sets are unchanged |
 | **BUG-12** | ROSES native children had no earned confidence and could never publish | **CLOSED** | — | — | ROSES now earns `high` only after its production source-health and reconciliation checks pass; unhealthy/undersized input emits nothing. The production first-refusal path is wired and tests cover the fail-closed path |
 | *(no ID)* | Agency-HTML scrapers fail silently — HTTP 200, zero rows | **not an obligation** | — | — | A **§12 risk**, not a defect in this project's code, mitigated by §7.4 canaries. Recorded here so a future sweep does not re-file it as a bug |
 
@@ -4953,10 +4960,10 @@ reopened to add one.
 | **MEAS-3** | Classifier run-to-run variance | **CLOSED** | — | — | Run 2026-08-24: 525 calls, pooled disagreement 0.190%, R=1 licensed |
 | **MEAS-4** | Read `344592` for MURI topics | **CLOSED** | — | — | MEAS-8 read all current attachments. The current topic PDF contains **82 ARL topics and zero MURI topics**; amendments mention MURI only as an award mechanism/team-size exception. The MURI hypothesis does not justify SAM.gov. The real ARL child gap is DEC-21 |
 | **MEAS-5** | Discipline-stratified query and relevance set | **CLOSED** | — | — | Outcome-blind frame frozen first at `0a9f92a`: 48 additive queries, 11 disciplines, 11 profile probes. Thirteen queries have top-10 movement: 10 specificity improvements, 2 neutral/bounded expansions, 1 suspicious child match, 0 confirmed regressions. Evidence: `evaluation/meas5_query_set.json`, `meas5_results.json`, `meas5_movement_review.json` |
-| **MEAS-6** | Name a verified SAM-only opportunity, or re-justify the SAM.gov adapter | **DEFERRED — assigned** | **USER / credentialed operator** | SAM.gov work is scheduled | **HUMAN BLOCKER: no SAM.gov API credential was available.** MEAS-8 does not claim a complete SAM-only universe. ARPA-H's independently verified public-source gap is DEC-19 and does not authorize a SAM adapter. Until a credentialed operator names at least one relevant SAM-only opportunity with its notice ID, the adapter's cost is known and its benefit remains unproved |
+| **MEAS-6** | Name a verified SAM-only opportunity, or re-justify the SAM.gov adapter | **POST-LAUNCH — accepted/assigned** | **USER / credentialed operator** | SAM.gov work is proposed | **HUMAN BLOCKER: no SAM.gov API credential was available.** MEAS-8 does not claim a complete SAM-only universe. ARPA-H's independently verified public-source gap is DEC-19 and does not authorize a SAM adapter. Until a credentialed operator names at least one relevant SAM-only opportunity with its notice ID, no adapter is scheduled; this does not block P11 |
 | **MEAS-7** | Do `345241` and `356605`'s referenced pages enumerate fundable subdivisions? | **CLOSED** | — | — | Done 2026-08-22: 1 of 2. Army yes, ONR no |
 | **MEAS-9** | **Post-P9 profile / CV / ORCID relevance revalidation.** | **CLOSED** | — | — | Eight arms complete in `evaluation/meas9_results.json`. Real `assets/orcid.js` → Crossref path resolved 16 works for `0000-0003-3066-0029`. Arms 1–6 kept 12 candidates, all four anchors and 0/4 historical false positives; profile-only fallback admitted 5; child-sensitive probes validate parent/child behavior. Nine moved explanations: 0 misleading/unsupported/disabled-source/non-contributing-child mentions |
-| **MEAS-10** | **Multi-researcher human relevance pilot (Phase 2C).** | **DEFERRED post-launch — assigned; UNPERFORMED** | **Human product-validation participants/operator** | before any claim that the 3–5 researcher pilot validated product usefulness | No consented exports from 3–5 researchers were supplied or present. `?evaluation=1`, local labels, explicit privacy-preserving export, participant instructions and synthetic evaluator are ready; normal product ratings remain absent. DEC-17 explicitly permits P11 to ship first. This row is not complete and must never be cited as though the pilot occurred |
+| **MEAS-10** | **Multi-researcher human relevance pilot (Phase 2C).** | **POST-LAUNCH — accepted/assigned; UNPERFORMED** | **Human product-validation participants/operator** | before any claim that the 3–5 researcher pilot validated product usefulness | No consented exports from 3–5 researchers were supplied or present. `?evaluation=1`, local labels, explicit privacy-preserving export, participant instructions and synthetic evaluator are ready; normal product ratings remain absent. DEC-17 explicitly permits P11 to ship first. This row is not complete and must never be cited as though the pilot occurred |
 | **MEAS-8** | **Cross-agency residual coverage audit** | **CLOSED 2026-08-20** | — | — | Frozen frame `16b765f`; results `evaluation/meas8_results.json`. Arm A: 28 sampled, 20 measurable, 8 unmeasurable, 4 truth-positive, 3 missed; 9/45 truth children recovered, all review-only, 0 publishable. Weighted truth-positive rate among measurable 11.25%; full-frame nonresponse bounds 10.24%–19.22%, with no full-frame point estimate. Arm B: 17 separate purposive cases; DEC-19–DEC-22 promoted before P9. No production change. **NEXT: P9.0** |
 
 #### Deferred scope with no ID, given one here
@@ -4965,7 +4972,7 @@ reopened to add one.
 |---|---|---|---|---|
 | **Word / OOXML parsing in `extract_containers`** | **WONTFIX — accepted with rationale** | — | — | **Measured zero, now three times.** The survey/Cov7 evidence remains 0 lists across 10 `.docx` cases; MEAS-8 read current DOCX attachments in Arm A out of band and found only forms. **Falsifier:** a hashed current DOCX with a genuine missed applicant-selectable list |
 | **Spreadsheet parsing** | **WONTFIX — accepted with rationale** | — | — | MEAS-8 again found only budget/template sheets outside Genesis. Genesis's 98 focus areas are real but remain a **named narrow exception** under DEC-22, never evidence for a generic format capability. **Falsifier for generic support:** two independently sampled authoritative spreadsheets with the same bounded selectable-list shape |
-| **SAM.gov adapter** | **DEFERRED — assigned** | **USER / credentialed operator** (via MEAS-6) | it is built | MURI does not justify it; MEAS-8 closed that hypothesis. No credential was available, so at least one verified relevant SAM-only opportunity with its notice ID is still required before scheduling |
+| **SAM.gov adapter** | **POST-LAUNCH — accepted/assigned** | **USER / credentialed operator** (via MEAS-6) | it is proposed | MURI does not justify it; MEAS-8 closed that hypothesis. No credential was available, so at least one verified relevant SAM-only opportunity with its notice ID is still required before scheduling; no P1–P11 work depends on it |
 | **§18.3a's bare-numbered prohibition** | **CLOSED — prohibition upheld** | — | — | P7.4a measured all four criteria on 2026-08-20: 1 and 4 passed; 2 failed with one Cov4 false rejection plus one exact-title miss among 58 verified subjects; 3 failed with 11 false-positive review children among 26 hash-verified category-(a) negatives. `Fm2` remains prohibited and was not built |
 | **NSPIRES open-solicitations list** | **WONTFIX — accepted until falsified** | — | — | MEAS-8 verified transport/TLS but found only a client-driven search shell and no stable public list endpoint; it did not automate the session flow. ROSES is already covered by P8. **Falsifier:** a stable public authoritative list with at least two verifiable net-new current actionable parents |
 | **`program_taxonomy` adapter** | **WONTFIX — accepted until falsified** | — | — | MEAS-8 established zero current actionable parent gain. **Falsifier:** a stable authoritative external child population with at least two current actionable parents not otherwise reachable |
@@ -7400,7 +7407,7 @@ corpus investigation.
 | `assets/match-explain.js` | ✅ Behind `FF_MATCH_EXPLAIN`; collapsed; max three evidence-backed reasons; source-specific manual/CV/ORCID attribution |
 | Search UI behind `FF_SUBTOPICS_ENABLED` | ✅ Lazy sidecar; max three topics before native-details expansion; normal Compare/rating/personalization removed; reviewer mode preserved separately |
 | Team Matcher | ✅ Consumes the shared rollup; max three default researchers and topics; remaining evidence behind one expansion |
-| Application release | ✅ One `assets/app-config.js` source; both pages render `v1.0.0 · Updated Aug 21, 2026`; catalog freshness stays separate |
+| Application release | ✅ One `assets/app-config.js` source; both pages are ready to render `v1.1.0 · Updated Aug 21, 2026`; catalog freshness stays separate. Visible numbering is introduced with v1.1.0; the earlier live production baseline remains unnumbered and no v1.0.0 release is backfilled |
 
 **Corrected flag-off gate:** catalog bytes, candidate admission, ranking/top-10, filters, deadlines/status, links and profile/CV/ORCID behavior remain invariant; no child script/content loads. The only approved DOM differences are Compare removal, permanent rating/personalization removal, the shared app-version line, and layout closure required by those removals. Verified by the 37-query zero-churn gate, browser contract tests and manual desktop/mobile A/B.
 
@@ -7419,11 +7426,51 @@ pre-version-counter production baseline; P11 introduces visible versioning as
 
 | Item | Notes |
 |---|---|
-| Flip `--enable-subtopics` and `FF_SUBTOPICS_ENABLED` | §9.3 |
-| Give the document-evidence step an `id:` and route it | Before removing `continue-on-error`, so a parsing failure reports as a degraded source rather than a broken build (§9.3) |
-| `PROJECT.md` | Decision, rationale, measured deltas |
+| Enable scheduled subtopic refresh and both browser features | ✅ Workflow uses independent 45-document administrative and 30-document subtopic budgets; `FF_SUBTOPICS_ENABLED` and `FF_MATCH_EXPLAIN` are enabled in the shared v1.1.0 application configuration |
+| Isolate and audit the recurring classifier | ✅ `ANTHROPIC_API_KEY` is exposed only to the document-evidence/subtopic step. Missing credentials, exhausted credit, spend/rate limits, API failures and unreported usage remain fail-closed. Actions summaries report aggregate calls, requests and input/output tokens |
+| Route contained document-evidence degradation | ✅ The step has a stable id, retains `continue-on-error`, and its outcome feeds the existing degraded-source issue path. The canonical run updated #30 for the known JHU 403; it created no issue and did not use #29 |
+| Fix inherited release defects | ✅ BUG-0 uses separate named budgets. BUG-11 reads the authoritative resolved ROSES URL. Tests pin both fixes without changing emitted catalog/subtopic semantics |
+| Record release boundary and rollback | ✅ `PROJECT.md` records the decision, measured deltas, MEAS-10 honesty, v1.1.0 boundary and feature-flag rollback |
 
-**Gate:** §9.4 dispatch checklist walked in full — total job runtime under 15 minutes, no new issue number, #30 updating expected.
+**Feature/configuration gate: ✅ PASSED on `topic-layer`.** Canonical Actions run
+`32506795756` completed successfully in **7m27s** and produced bot commit
+`21332e9`. Its warm recurring-classifier diagnostics were **0 calls / 0 API
+requests / 0 input tokens / 0 output tokens / 0 errors**. The generated catalog
+contains **1,473 stored / 1,463 current** parents. The tracked public sidecar is
+**1,845,103 bytes**, SHA-256
+`6504510743bf1074e367393ee3df7028a15dcec5756a65334b1d6f36ce083e26`, with
+**446 children / 29 publishing parents / 236 publishable / 210 review-only / 0
+orphan parents / 0 normal-browser review leakage**.
+
+The §9.4 checklist was walked against that actual output:
+
+1. Branch push and enabled dispatch succeeded.
+2. Total runtime was 7m27s, below the absolute 15-minute ceiling.
+3. The bot commit contained only the expected 45 generated/catalog/document,
+   HTML and feed files; no executable source changed.
+4. The highest issue number stayed #31. #30 received the expected degraded
+   external-source comment for the known JHU 403; no new issue appeared.
+5. The same commit passed **22/22** no-drift artifacts.
+6. The frozen 37-query flag-off baseline had zero candidate/ranking/top-10
+   churn; the 50-case P9 scorer remained byte-identical and
+   cardinality-invariant.
+7. `data/subtopics.js` is the real public sidecar and is tracked; the maintenance
+   cache `data/subtopic_records.json` remains intentionally ignored.
+8. Only after those checks did the branch become ship-ready.
+
+The complete post-dispatch verification was **751 live-product Python tests and
+98 browser tests**, plus the query, P9 and no-drift gates above. P10→dispatch
+catalog churn was 73 additions and 85 removals. Sidecar reconciliation removed
+103 currentness/diagnostic-only parent entries and added 33, while removing and
+adding **zero child-bearing parents**; the 446-child publication population did
+not change. The exact `space biology` probe adds one sixth-place ARL parent via
+literal *space* + *biology* overlap in *Bionic Electronics*, displacing nothing.
+It remains a bounded, truthful but semantically suspicious lexical result, not a
+hidden relevance win.
+
+**MEAS-10 remains UNPERFORMED.** No 3–5 researcher pilot occurred. DEC-17 makes
+that explicit post-launch human validation non-blocking; it does not convert the
+measurement into a success claim.
 
 **Final branch/publication gate.** Once those P11 gates pass on `topic-layer`:
 fetch the latest `main` → reconcile `topic-layer` with it and resolve conflicts on
