@@ -7,6 +7,7 @@ from pypdf import PdfWriter
 
 from scripts.extract_document_evidence import (
     build_document_entry,
+    classifier_run_metrics,
     empty_cache,
     enrich_document_evidence,
     extract_containers,
@@ -527,6 +528,39 @@ class DocumentBudgetTests(unittest.TestCase):
         self.assertEqual(len(calls), 2)
         self.assertEqual(metrics["attempted"], 2)
         self.assertEqual(metrics["remaining_update_count"], 1)
+
+
+class ClassifierOperationalDiagnosticsTests(unittest.TestCase):
+    def test_run_metrics_aggregate_calls_tokens_and_errors(self):
+        totals = classifier_run_metrics([
+            {"subtopic_cov4": {
+                "classifier_calls": 2,
+                "api_requests": 2,
+                "input_tokens": 500,
+                "output_tokens": 40,
+                "usage_reported_calls": 2,
+                "usage_unreported_requests": 0,
+                "classifier_errors": {},
+            }},
+            {"subtopic_cov4": {
+                "classifier_calls": 1,
+                "api_requests": 0,
+                "input_tokens": 0,
+                "output_tokens": 0,
+                "usage_reported_calls": 0,
+                "usage_unreported_requests": 0,
+                "classifier_errors": {"missing_credential": 1},
+            }},
+        ])
+        self.assertEqual(totals["classifier_calls"], 3)
+        self.assertEqual(totals["api_requests"], 2)
+        self.assertEqual(totals["input_tokens"], 500)
+        self.assertEqual(totals["output_tokens"], 40)
+        self.assertEqual(totals["usage_reported_calls"], 2)
+        self.assertEqual(totals["usage_unreported_requests"], 0)
+        self.assertEqual(
+            totals["classifier_errors"], {"missing_credential": 1}
+        )
 
 
 if __name__ == "__main__":

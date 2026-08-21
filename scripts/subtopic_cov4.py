@@ -326,7 +326,14 @@ def render_prompt(candidate) -> str:
     )
 
 
-def _unresolved(error, *, detail=None):
+def _unresolved(
+    error,
+    *,
+    detail=None,
+    api_request=False,
+    usage=None,
+    usage_reported=False,
+):
     """The one shape every failure takes. Never carries a credential."""
     return {
         "fundability": UNRESOLVED,
@@ -334,6 +341,9 @@ def _unresolved(error, *, detail=None):
         "reason": None,
         "error": error,
         "detail": detail,
+        "api_request": bool(api_request),
+        "usage_reported": bool(usage_reported),
+        "usage": usage or {"input_tokens": 0, "output_tokens": 0},
     }
 
 
@@ -386,11 +396,15 @@ def classify_fundability(candidate, *, api_key=None, session=None):
     except Exception as exc:                # noqa: BLE001 - network, DNS, timeout
         # The exception *type* is a useful diagnostic; its message can quote the
         # request that carried the key, so it is deliberately not recorded.
-        return _unresolved("request_failed", detail=type(exc).__name__)
+        return _unresolved(
+            "request_failed", detail=type(exc).__name__, api_request=True
+        )
 
     status = getattr(response, "status_code", None)
     if status != 200:
-        return _unresolved("http_error", detail=f"status_{status}")
+        return _unresolved(
+            "http_error", detail=f"status_{status}", api_request=True
+        )
 
     try:
         payload = response.json()
@@ -400,26 +414,67 @@ def classify_fundability(candidate, *, api_key=None, session=None):
             if block.get("type") == "text"
         ).strip()
     except Exception:                       # noqa: BLE001 - malformed body
-        return _unresolved("malformed_response")
+        return _unresolved("malformed_response", api_request=True)
+
+    usage = payload.get("usage") or {}
+    if not isinstance(usage, dict):
+        usage = {}
+    try:
+        input_tokens = max(0, int(usage.get("input_tokens") or 0))
+        output_tokens = max(0, int(usage.get("output_tokens") or 0))
+    except (TypeError, ValueError):
+        input_tokens = output_tokens = 0
+    usage_reported = "input_tokens" in usage and "output_tokens" in usage
 
     try:
         start, end = text.index("{"), text.rindex("}") + 1
         parsed = json.loads(text[start:end])
     except Exception:                       # noqa: BLE001 - no JSON object in it
-        return _unresolved("unparseable_response")
+        return _unresolved(
+            "unparseable_response",
+            api_request=True,
+            usage={
+                "input_tokens": input_tokens,
+                "output_tokens": output_tokens,
+            },
+            usage_reported=usage_reported,
+        )
     if not isinstance(parsed, dict):
-        return _unresolved("unparseable_response")
+        return _unresolved(
+            "unparseable_response",
+            api_request=True,
+            usage={
+                "input_tokens": input_tokens,
+                "output_tokens": output_tokens,
+            },
+            usage_reported=usage_reported,
+        )
 
     fundable = str(parsed.get("fundable", "")).strip().lower()
     owned = str(parsed.get("owned", "")).strip().lower()
     if fundable not in {"yes", "no"}:
-        return _unresolved("unexpected_enum", detail=f"fundable={fundable[:20]!r}")
+        return _unresolved(
+            "unexpected_enum",
+            detail=f"fundable={fundable[:20]!r}",
+            api_request=True,
+            usage={
+                "input_tokens": input_tokens,
+                "output_tokens": output_tokens,
+            },
+            usage_reported=usage_reported,
+        )
     return {
         "fundability": ACCEPT if fundable == "yes" else REJECT,
         "classifier_owned": {"yes": True, "no": False}.get(owned),
         "reason": str(parsed.get("reason", ""))[:300] or None,
         "error": None,
         "detail": None,
+        "api_request": True,
+        "usage_reported": usage_reported,
+        "usage": {
+            "input_tokens": input_tokens,
+            "output_tokens": output_tokens,
+        },
     }
 
 
@@ -496,6 +551,11 @@ def apply_gate(parent, records, document, *, classifier=None, api_key=None,
         "dropped": 0,
         "review": 0,
         "classifier_calls": 0,
+        "api_requests": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "usage_reported_calls": 0,
+        "usage_unreported_requests": 0,
         "classifier_errors": {},
     }
     kept = []
@@ -515,6 +575,18 @@ def apply_gate(parent, records, document, *, classifier=None, api_key=None,
 
         verdict = classify(candidate, api_key=api_key, session=session)
         diagnostics["classifier_calls"] += 1
+        if verdict.get("api_request"):
+            diagnostics["api_requests"] += 1
+            if verdict.get("usage_reported"):
+                diagnostics["usage_reported_calls"] += 1
+            else:
+                diagnostics["usage_unreported_requests"] += 1
+        usage = verdict.get("usage") or {}
+        for key in ("input_tokens", "output_tokens"):
+            try:
+                diagnostics[key] += max(0, int(usage.get(key) or 0))
+            except (AttributeError, TypeError, ValueError):
+                continue
         _counter(diagnostics["fundability"], verdict["fundability"])
         if verdict.get("error"):
             _counter(diagnostics["classifier_errors"], verdict["error"])

@@ -67,14 +67,19 @@ jobs:
           --max-updates 250
           --request-delay 0.25
       - name: Extract citation-backed facts from official notices
+        id: document_evidence
         continue-on-error: true
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: >-
           python -m scripts.extract_document_evidence
           --catalog data/opportunities.js
           --cache data/document_evidence.json
           --max-documents 45
+          --max-subtopic-documents 45
           --request-delay 0.2
           --recheck-days 14
+          --enable-subtopics
       - name: Merge additional (non-Grants.gov) sources
         id: additional-sources
         continue-on-error: true
@@ -161,7 +166,10 @@ jobs:
             fi
           fi
       - name: Alert the project owner about a degraded external source
-        if: always() && steps.additional-sources.outcome == 'failure'
+        if: >-
+          always() &&
+          (steps.additional-sources.outcome == 'failure' ||
+          steps.document_evidence.outcome == 'failure')
         uses: actions/github-script@v8
         with:
           script: |
@@ -169,12 +177,21 @@ jobs:
             const runUrl =
               `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}` +
               `/actions/runs/${context.runId}`;
+            const externalDegraded =
+              "${{ steps.additional-sources.outcome }}" === "failure";
+            const documentEvidenceDegraded =
+              "${{ steps.document_evidence.outcome }}" === "failure";
+            const affected = [
+              externalDegraded ? "external sources" : null,
+              documentEvidenceDegraded ? "document evidence/subtopic classification" : null,
+            ].filter(Boolean).join(", ");
             const body =
-              `At least one enabled non-Grants.gov source failed its refresh, ` +
-              `health bounds, or post-merge validation on ${new Date().toISOString()}.\n\n` +
+              `The degraded refresh layer(s) were: ${affected}. ` +
+              `This occurred on ${new Date().toISOString()}.\n\n` +
               `Healthy sources were still refreshed. Sources configured to retain ` +
               `last-known-good data kept only publishable records; fail-closed sources ` +
-              `published zero.\n\nInspect the source summary: ${runUrl}`;
+              `published zero. Document-evidence or classifier degradation cannot ` +
+              `publish unchecked generic children.\n\nInspect the run summary: ${runUrl}`;
             const { data: issues } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,

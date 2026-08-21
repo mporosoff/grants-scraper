@@ -716,6 +716,53 @@ class FailClosedTests(unittest.TestCase):
         self.assertTrue(verdict["classifier_owned"])
         self.assertIsNone(verdict["error"])
 
+    def test_success_records_anthropic_input_and_output_token_usage(self):
+        verdict = cov4.classify_fundability(
+            {},
+            api_key="k",
+            session=self.session(self.Response(payload={
+                "content": [{
+                    "type": "text",
+                    "text": (
+                        '{"owned": "yes", "fundable": "yes", '
+                        '"reason": "a programme"}'
+                    ),
+                }],
+                "usage": {"input_tokens": 321, "output_tokens": 17},
+            })),
+        )
+        self.assertTrue(verdict["api_request"])
+        self.assertTrue(verdict["usage_reported"])
+        self.assertEqual(
+            verdict["usage"], {"input_tokens": 321, "output_tokens": 17}
+        )
+
+    def test_gate_aggregates_calls_requests_and_token_usage(self):
+        document = attachment_document()
+        built = build(parent(), [span()], document)
+
+        def classifier(*_args, **_kwargs):
+            return {
+                "fundability": cov4.ACCEPT,
+                "classifier_owned": True,
+                "reason": "stub",
+                "error": None,
+                "detail": None,
+                "api_request": True,
+                "usage_reported": True,
+                "usage": {"input_tokens": 210, "output_tokens": 14},
+            }
+
+        _kept, diagnostics = cov4.apply_gate(
+            parent(), built, document, classifier=classifier
+        )
+        self.assertEqual(diagnostics["classifier_calls"], 1)
+        self.assertEqual(diagnostics["api_requests"], 1)
+        self.assertEqual(diagnostics["input_tokens"], 210)
+        self.assertEqual(diagnostics["output_tokens"], 14)
+        self.assertEqual(diagnostics["usage_reported_calls"], 1)
+        self.assertEqual(diagnostics["usage_unreported_requests"], 0)
+
     def test_no_failure_mode_lets_an_unchecked_span_publish(self):
         document = attachment_document()
         built = build(parent(), [span()], document)
