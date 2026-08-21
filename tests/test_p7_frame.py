@@ -35,6 +35,24 @@ class FrameRTests(unittest.TestCase):
         self.assertEqual(len(p7_frame.FIXTURE_RECORDS), 3)
         self.assertEqual(len(p7_frame.frame_r()), 27)
 
+    def test_the_only_post_measurement_catalog_delta_is_dec19_arpa_h(self):
+        historical = p7_frame.load_catalog()
+        current = p7_frame.load_catalog(include_post_measurement=True)
+        historical_ids = {
+            str(record["opportunity_id"])
+            for record in historical["opportunities"]
+        }
+        added = [
+            record for record in current["opportunities"]
+            if str(record["opportunity_id"]) not in historical_ids
+        ]
+        self.assertEqual(len(added), 10)
+        self.assertTrue(all(
+            str(record["opportunity_id"]).startswith("arpa-h:")
+            and record.get("source") == "ARPA-H"
+            for record in added
+        ))
+
     def test_the_per_form_counts_match_the_committed_evidence(self):
         """Each count is a figure a committed document states in words.
 

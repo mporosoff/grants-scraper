@@ -1,8 +1,8 @@
 {
   "as_of": "2026-08-20",
-  "catalog_record_count": 1475,
-  "catalog_sha256": "ba26face670c06763524bd8190acb0bff9bd4509440bf9f5a1ee2921b4bb1bbe",
-  "current_parent_count": 1405,
+  "catalog_record_count": 1485,
+  "catalog_sha256": "2322b2f6e4f7b009b8d518ae4d5d241fcf8fe6fdab88f192cae284bf9d207c29",
+  "current_parent_count": 1415,
   "evidence_cache_record_count": 745,
   "evidence_cache_sha256": "2e5196fceba24921b486dce76a29f5759f642ce207fa65fc9bb9a11632a1a71c",
   "excluded_parent_count": 70,
@@ -9411,6 +9411,76 @@
       "opportunity_number": "VA-GRANTS-112508-002",
       "source_route": "current_detail_attachments",
       "source_url": null
+    },
+    {
+      "evidence_cached": false,
+      "opportunity_id": "arpa-h:ARPA-H-SOL-24-103",
+      "opportunity_number": "ARPA-H-SOL-24-103",
+      "source_route": "agency_notice",
+      "source_url": "https://arpa-h.gov/explore-funding/open-funding-opportunities"
+    },
+    {
+      "evidence_cached": false,
+      "opportunity_id": "arpa-h:ARPA-H-SOL-24-104",
+      "opportunity_number": "ARPA-H-SOL-24-104",
+      "source_route": "agency_notice",
+      "source_url": "https://arpa-h.gov/explore-funding/open-funding-opportunities"
+    },
+    {
+      "evidence_cached": false,
+      "opportunity_id": "arpa-h:ARPA-H-SOL-24-105",
+      "opportunity_number": "ARPA-H-SOL-24-105",
+      "source_route": "agency_notice",
+      "source_url": "https://arpa-h.gov/explore-funding/open-funding-opportunities"
+    },
+    {
+      "evidence_cached": false,
+      "opportunity_id": "arpa-h:ARPA-H-SOL-24-106",
+      "opportunity_number": "ARPA-H-SOL-24-106",
+      "source_route": "agency_notice",
+      "source_url": "https://arpa-h.gov/explore-funding/open-funding-opportunities"
+    },
+    {
+      "evidence_cached": false,
+      "opportunity_id": "arpa-h:ascent-ibo",
+      "opportunity_number": null,
+      "source_route": "agency_notice",
+      "source_url": "https://arpa-h.gov/explore-funding/initiatives-and-sprints/ascent-ibo"
+    },
+    {
+      "evidence_cached": false,
+      "opportunity_id": "arpa-h:fastpass",
+      "opportunity_number": "ARPA-H-SOL-26-160",
+      "source_route": "agency_notice",
+      "source_url": "https://arpa-h.gov/explore-funding/programs/fastpass"
+    },
+    {
+      "evidence_cached": false,
+      "opportunity_id": "arpa-h:rest",
+      "opportunity_number": "ARPA-H-SOL-26-159",
+      "source_route": "agency_notice",
+      "source_url": "https://arpa-h.gov/explore-funding/programs/rest"
+    },
+    {
+      "evidence_cached": false,
+      "opportunity_id": "arpa-h:sbir",
+      "opportunity_number": "7599226SN106",
+      "source_route": "agency_notice",
+      "source_url": "https://arpa-h.gov/explore-funding/sbir"
+    },
+    {
+      "evidence_cached": false,
+      "opportunity_id": "arpa-h:stream",
+      "opportunity_number": null,
+      "source_route": "agency_notice",
+      "source_url": "https://arpa-h.gov/explore-funding/programs/stream"
+    },
+    {
+      "evidence_cached": false,
+      "opportunity_id": "arpa-h:tigar",
+      "opportunity_number": "ARPA-H-SOL-26-144",
+      "source_route": "agency_notice",
+      "source_url": "https://arpa-h.gov/explore-funding/initiatives-and-sprints/tigar"
     },
     {
       "evidence_cached": false,

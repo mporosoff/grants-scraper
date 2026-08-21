@@ -43,6 +43,7 @@ CATALOG = ROOT / "data" / "opportunities.js"
 COV1_READS, COV1_HITS = 60, 1        # 10 Cov1 trial + 50 Cov7 stratum-D sample
 COV2_READS, COV2_HITS = 22, 0        # 20 Cov2 + 2 Cov7 D-NIH seats
 COV3_SECONDARY_WINS = ("349554",)    # AFRL PACER, 18 spans
+POST_MEASUREMENT_ID_PREFIXES = ("arpa-h:",)
 
 
 def wilson(hits, n, z=1.96):
@@ -56,9 +57,15 @@ def wilson(hits, n, z=1.96):
 
 
 def load_catalog():
+    """P5's frozen catalog surface, excluding DEC-19's later additions."""
     raw = CATALOG.read_text(encoding="utf-8")
     payload = json.loads(raw[raw.index("{"):raw.rindex("}") + 1])
-    return payload["opportunities"]
+    return [
+        record for record in payload["opportunities"]
+        if not str(record.get("opportunity_id") or "").startswith(
+            POST_MEASUREMENT_ID_PREFIXES
+        )
+    ]
 
 
 def load_census():

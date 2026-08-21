@@ -55,6 +55,11 @@ CATALOG = ROOT / "data" / "opportunities.js"
 CENSUS = ROOT / "evaluation" / "attachment_census.jsonl"
 EVIDENCE = ROOT / "data" / "document_evidence.json"
 
+# P7 and MEAS-8 froze their frames before DEC-19 materialized ARPA-H. Historical
+# re-derivations must not silently redraw those samples from the later catalog.
+# The current-catalog delta is asserted explicitly in tests.
+POST_MEASUREMENT_ID_PREFIXES = ("arpa-h:",)
+
 # --- Frame R -----------------------------------------------------------------
 #
 # Every entry names the committed artifact that observed the form, because §17.8
@@ -178,9 +183,17 @@ FM8_LABEL_ONLY = re.compile(r"priority\s+(?:program\s+)?areas?\b", re.IGNORECASE
 FRAME_C_FIELDS = ("title", "description", "document_search_text")
 
 
-def load_catalog():
+def load_catalog(*, include_post_measurement=False):
     raw = CATALOG.read_text(encoding="utf-8")
     payload = json.loads(raw[raw.index("{"):raw.rindex("}") + 1])
+    if not include_post_measurement:
+        payload = dict(payload)
+        payload["opportunities"] = [
+            record for record in payload["opportunities"]
+            if not str(record.get("opportunity_id") or "").startswith(
+                POST_MEASUREMENT_ID_PREFIXES
+            )
+        ]
     return payload
 
 
