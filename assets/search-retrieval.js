@@ -58,6 +58,66 @@
     });
   }
 
+  function rollupRankedRecords({
+    parentRows = [],
+    childRows = [],
+    parentId = row => row?.id,
+    childParentId = row => row?.parent_id,
+    childId = row => row?.id,
+    score = row => row?.score,
+  } = {}) {
+    const parentScale = positiveScale(parentRows.map(score));
+    const childNativeScale = positiveScale(childRows.map(score));
+    const childScale = Math.max(parentScale, childNativeScale);
+    const childrenByParent = new Map();
+    childRows.forEach(row => {
+      const value = Number(score(row) || 0);
+      if (!(value > 0)) return;
+      const identifier = String(childParentId(row) || "");
+      if (!identifier) return;
+      if (!childrenByParent.has(identifier)) childrenByParent.set(identifier, []);
+      childrenByParent.get(identifier).push({
+        row,
+        id: String(childId(row) || ""),
+        raw: value,
+        normalized: value / childScale,
+      });
+    });
+    childrenByParent.forEach(children => children.sort((left, right) => (
+      right.normalized - left.normalized || compareIds(left.id, right.id)
+    )));
+
+    const parentById = new Map(parentRows.map(row => [String(parentId(row) || ""), row]));
+    const ids = [...new Set([
+      ...parentRows.map(row => String(parentId(row) || "")),
+      ...childrenByParent.keys(),
+    ].filter(Boolean))];
+    return {
+      rows: ids.map(id => {
+        const parent = parentById.get(id) || null;
+        const parentRaw = Number(score(parent) || 0);
+        const children = childrenByParent.get(id) || [];
+        const parentNormalized = parentRaw > 0 ? parentRaw / parentScale : 0;
+        const childNormalized = children[0]?.normalized || 0;
+        const childDroveMatch = childNormalized > parentNormalized;
+        return {
+          id,
+          parent,
+          parentRaw,
+          parentNormalized,
+          bestChild: children[0] || null,
+          children,
+          childNormalized,
+          childDroveMatch,
+          relevance: Math.max(parentNormalized, childNormalized),
+          matchingChildCount: children.length,
+        };
+      }),
+      scales: { parent: parentScale, childNative: childNativeScale, child: childScale },
+      cardinalityBonus: 0,
+    };
+  }
+
   function rollupScores({
     parentCatalog,
     childCatalog,
@@ -109,6 +169,7 @@
       if (!parentAdmitted && !matchingChildren.length) return;
       const parentNormalized = parentRaw[index] / parentScale;
       const childNormalized = matchingChildren[0]?.normalized || 0;
+      const childDroveMatch = childNormalized > parentNormalized;
       const relevance = Math.max(parentNormalized, childNormalized);
       const eligibility = Number(eligibilityBonuses?.[index] || 0) / parentScale;
       rows.push({
@@ -120,6 +181,7 @@
         parentAdmitted,
         parentRaw: parentRaw[index],
         parentNormalized,
+        childDroveMatch,
         parentDirectEvidence: parentDirect?.evidence?.[index] || null,
         parentProfileEvidence: parentProfile?.evidence?.[index] || null,
         bestChild: matchingChildren[0] || null,
@@ -180,6 +242,29 @@
     }
 
     const postings = index.postings;
+    const displayTermCache = new Map();
+    function displayTerm(documentId, term) {
+      const record = records[documentId] || {};
+      const explicit = record.term_display?.[term];
+      if (explicit) return explicit;
+      if (!displayTermCache.has(documentId)) {
+        const values = new Map();
+        const text = [
+          record.title,
+          record.description,
+          record.document_search_text,
+          ...(record.topic_areas || []),
+          ...(record.disciplines || []),
+        ].filter(Boolean).join(" ");
+        (text.match(/[A-Za-z0-9][A-Za-z0-9+.'-]*/g) || []).forEach(value => {
+          queryApi.tokenize(value).forEach(normalized => {
+            if (!values.has(normalized)) values.set(normalized, value);
+          });
+        });
+        displayTermCache.set(documentId, values);
+      }
+      return displayTermCache.get(documentId).get(term) || "";
+    }
     const indexTerms = Object.keys(postings);
     const documentCount = index.document_count;
     const lengths = index.document_lengths;
@@ -340,7 +425,13 @@
       const inferredTopics = new Map();
       const exactPhraseDocuments = new Set();
       const evidence = collectEvidence
-        ? Array.from({ length: documentCount }, () => ({ groups: [], exactPhrase: false, trigrams: [] }))
+        ? Array.from({ length: documentCount }, () => ({
+          groups: [],
+          exactPhrase: false,
+          exactTitlePhrase: false,
+          exactOpportunityNumber: false,
+          trigrams: [],
+        }))
         : null;
 
       groups.forEach(group => {
@@ -441,6 +532,9 @@
                 .sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0]))
                 .map(([term]) => term),
             });
+            evidence[documentId].groups.at(-1).matchedDisplayTerms = evidence[
+              documentId
+            ].groups.at(-1).matchedTerms.map(term => displayTerm(documentId, term));
           }
         });
 
@@ -476,12 +570,18 @@
           if (title.includes(phrase)) {
             lexicalScores[documentId] += title === phrase ? 24 : 12;
             exactPhraseDocuments.add(documentId);
-            if (collectEvidence) evidence[documentId].exactPhrase = true;
+            if (collectEvidence) {
+              evidence[documentId].exactPhrase = true;
+              evidence[documentId].exactTitlePhrase = true;
+            }
           }
           if (opportunityNumber === phrase) {
             lexicalScores[documentId] += 50;
             exactPhraseDocuments.add(documentId);
-            if (collectEvidence) evidence[documentId].exactPhrase = true;
+            if (collectEvidence) {
+              evidence[documentId].exactPhrase = true;
+              evidence[documentId].exactOpportunityNumber = true;
+            }
           }
         });
       }
@@ -589,6 +689,7 @@
     create,
     createChildCatalog,
     positiveScale,
+    rollupRankedRecords,
     rollupScores,
   });
 })();

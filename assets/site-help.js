@@ -21,7 +21,7 @@
         <div>
           <span class="help-kicker">Start here</span>
           <h3 id="help-start-title">Search is free. AI is optional.</h3>
-          <p>Funding Finder searches the current public opportunity catalog in your browser. You do not need an account or API key to search, filter, save, compare, export, use the team matcher, or open official sources.</p>
+          <p>Funding Finder searches the current public opportunity catalog in your browser. You do not need an account or API key to search, filter, save, export, use the team matcher, or open official sources.</p>
         </div>
         <ol class="help-steps">
           <li><span>1</span><div><strong>Describe what you want to fund</strong><small>Use a topic, method, population, goal, or opportunity number. You may also upload a funding-notice PDF.</small></div></li>
@@ -88,7 +88,8 @@
         <div class="help-feature-list">
           <div><strong>Save</strong><span>Keep promising opportunities on this device.</span></div>
           <div><strong>Calendar</strong><span>Export deadlines to an ICS calendar file.</span></div>
-          <div><strong>Compare</strong><span>Review selected opportunities side by side.</span></div>
+          <div><strong>Matched topics</strong><span>See the few specific solicitation topics that caused an umbrella opportunity to match; expand the list only when needed.</span></div>
+          <div><strong>Why this match</strong><span>Open a short evidence-based explanation when that feature is enabled.</span></div>
           <div><strong>Export CSV</strong><span>Download the current result set for further review.</span></div>
           <div><strong>Official source</strong><span>Open the agency notice, FOA, or Grants.gov record.</span></div>
           <div><strong>Ask AI</strong><span>Discuss one opportunity or the leading results after connecting a provider.</span></div>
@@ -169,7 +170,7 @@
         <div class="help-grid">
           <div class="help-card">
             <h4>Stays in this browser</h4>
-            <p>Saved opportunities, profiles, ratings, external researchers, extracted upload text, and chat state stay on the device. Original CV and notice files are not retained.</p>
+            <p>Saved opportunities, profiles, external researchers, extracted upload text, and chat state stay on the device. Invited-reviewer ratings also stay local until explicitly exported. Original CV and notice files are not retained.</p>
           </div>
           <div class="help-card">
             <h4>Sent only when you use AI</h4>
@@ -194,11 +195,11 @@
         </details>
         <details class="help-faq">
           <summary>A catalog match or extracted fact looks wrong.</summary>
-          <p>Reject an incorrect uploaded-notice match, use the card's feedback controls when available, and rely on the linked official notice. Machine-extracted summaries are aids, not authoritative program instructions.</p>
+          <p>Reject an incorrect uploaded-notice match and rely on the linked official notice. Invited reviewers can use the separate evaluation mode. Machine-extracted summaries are aids, not authoritative program instructions.</p>
         </details>
         <details class="help-faq">
           <summary>How current is the catalog?</summary>
-          <p>The status pill in the header shows the current catalog size and update date. Expired opportunities are filtered at runtime, while scheduled refreshes add and update records from the enabled public sources.</p>
+          <p>The status pill in the header shows catalog freshness. The version in the footer identifies the application release; it changes when the product changes, not whenever catalog data refreshes. Expired opportunities are filtered at runtime, while scheduled refreshes add and update records from the enabled public sources.</p>
         </details>
       </section>
     </div>

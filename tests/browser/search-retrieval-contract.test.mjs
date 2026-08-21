@@ -354,6 +354,7 @@ test("P9 rollup uses anchored P90 max scoring with zero cardinality bonus", () =
   assert.equal(scored.rows.length, 2, "a direct child may admit its parent");
   assert.equal(scored.rows[0].matchingChildCount, 2);
   assert.equal(scored.rows[0].bestChild.id, "p1:c1");
+  assert.equal(scored.rows[0].childDroveMatch, false, "equal normalized maxima do not need child display evidence");
   assert.equal(scored.rows[0].relevance, 1);
   assert.equal(scored.rows[0].eligibility, 2 / 22);
   assert.equal(scored.rows[1].parentAdmitted, false);
@@ -384,5 +385,44 @@ test("explanation evidence reports only terms that contributed", () => {
     Array.from(result.evidence[0].groups, group => [group.source, ...group.matchedTerms]),
     [["carbon", "carbon"], ["capture", "capture"]],
   );
+  assert.deepEqual(
+    Array.from(result.evidence[0].groups, group => [...group.matchedDisplayTerms]),
+    [["Carbon"], ["capture"]],
+  );
   assert.deepEqual(Array.from(result.evidence[1].groups), []);
+});
+
+test("generic parent-child rollup is deterministic and cardinality-neutral", () => {
+  const { retrieval } = loadApis();
+  const parent = [{ id: "p", score: 10 }];
+  const child = { id: "p:c", parent: "p", score: 20 };
+  const options = children => ({
+    parentRows: parent,
+    childRows: children,
+    childParentId: row => row.parent,
+  });
+  const one = retrieval.rollupRankedRecords(options([child]));
+  const hundred = retrieval.rollupRankedRecords(options(
+    Array.from({ length: 100 }, (_value, index) => ({
+      ...child,
+      id: `${child.id}:${index}`,
+    })),
+  ));
+
+  assert.equal(one.rows[0].relevance, hundred.rows[0].relevance);
+  assert.equal(one.cardinalityBonus, 0);
+  assert.equal(hundred.cardinalityBonus, 0);
+  assert.equal(one.rows[0].bestChild.row.id, "p:c");
+  assert.equal(one.rows[0].childDroveMatch, false);
+});
+
+test("matched child evidence is marked displayable only when it drives the max", () => {
+  const { retrieval } = loadApis();
+  const rolled = retrieval.rollupRankedRecords({
+    parentRows: [{ id: "p", score: 20 }],
+    childRows: [{ id: "p:c", parent: "p", score: 5 }],
+    childParentId: row => row.parent,
+  });
+  assert.equal(rolled.rows[0].bestChild.row.id, "p:c");
+  assert.equal(rolled.rows[0].childDroveMatch, false);
 });

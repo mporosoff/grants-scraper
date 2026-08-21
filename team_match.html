@@ -32,7 +32,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/faculty-pairing-180.png?v=20260815" />
 <link rel="manifest" href="./assets/icons/faculty-pairing.webmanifest?v=20260815" />
 <link rel="stylesheet" href="./assets/brand.css?v=20260812" />
-<link rel="stylesheet" href="./assets/app.css?v=audit-2026-08-13" />
+<link rel="stylesheet" href="./assets/app.css?v=app-1.0.0" />
 <link rel="stylesheet" href="./assets/site-nav.css?v=brand-2026-08-12" />
 <style>
   :root{
@@ -133,6 +133,8 @@
   .team-result-card .team-overlap{margin:12px 0 4px;padding:11px 12px;background:#f3f7fc;border:1px solid #d4dfeb;border-radius:9px;}
   .team-result-card .team-overlap > strong{display:block;margin-bottom:7px;color:var(--navy);font-size:.75rem;}
   .team-result-card .team{margin-top:0;}
+  .team-result-card .team-overlap details{margin-top:8px;}
+  .team-result-card .team-overlap summary{width:max-content;color:var(--blue-dark);font-size:.72rem;font-weight:750;cursor:pointer;}
   .team-result-card .matched-themes{margin:8px 0 0;}
   .team-result-card .scope-note{margin:9px 0 0;}
   .team-result-card .detail-grid dt{color:#617087;font-size:.68rem;font-weight:850;text-transform:uppercase;}
@@ -147,6 +149,12 @@
   .badge.broad{background:var(--warning-soft);color:var(--warning);border:1px solid #f0d9a8;margin-left:6px;}
   .closing-soon{font-weight:800;}
   .matched-themes{margin:9px 0 0;color:var(--purple);font-size:.76rem;font-weight:650;}
+  .team-topic-matches{margin:9px 0 0;padding:10px 12px;background:#f4f8fd;border:1px solid #d5e2f0;border-radius:9px;text-align:left;}
+  .team-topic-matches ul{margin:0;padding-left:18px;}
+  .team-topic-matches li{margin:3px 0;color:#344d69;font-size:.76rem;}
+  .team-topic-matches li span{margin-left:7px;color:var(--muted);font-size:.68rem;}
+  .team-topic-matches details{margin-top:5px;}
+  .team-topic-matches summary{width:max-content;color:var(--blue-dark);font-size:.72rem;font-weight:750;cursor:pointer;}
   .team{margin-top:11px;display:flex;flex-wrap:wrap;gap:8px;}
   .pi{background:var(--surface-alt);border:1px solid var(--line);border-radius:10px;padding:8px 11px;font-size:.82rem;max-width:100%;}
   .pi .name{font-weight:700;color:var(--navy);}
@@ -154,6 +162,7 @@
   .empty{background:var(--surface);border:1px dashed var(--line-strong);border-radius:var(--radius);padding:32px 22px;text-align:center;color:var(--muted);}
   .empty code{background:var(--surface-alt);padding:2px 6px;border-radius:6px;}
   footer.note{margin-top:26px;color:var(--muted);font-size:.8rem;text-align:center;}
+  footer.note .app-version{font-weight:800;}
   .hide{display:none !important;}
   @media (max-width:700px){.researcher-fields{grid-template-columns:1fr}.researcher-keywords{grid-column:auto}.researcher-actions .delete-researcher{margin-left:0}.team-orcid-row{flex-direction:column}.team-result-card .key-facts,.team-result-card .detail-grid{grid-template-columns:1fr}}
 </style>
@@ -240,6 +249,7 @@
 
   <footer class="note">
     <p>Faculty interests and the hand-checked agency scope map are maintained in <code>scripts/faculty_match.py</code>. Matching runs live against the nightly-refreshed current catalog, and archived calls are always excluded. “Broad / umbrella call” marks solicitations that span multiple sponsor topics and require subprogram-level verification. External profiles and imported public ORCID-linked publication metadata remain stored only in this browser. This internal tool remains marked no-index.</p>
+    <p class="app-version" data-app-version></p>
     <section class="legal-notice" id="use-notice" aria-label="Use and copyright notice">
       <p><strong>Use notice:</strong> Team Match is an informational research-planning aid intended for individual and internal institutional use. It is not an official source of record, application or submission system, or legal, financial, compliance, or sponsor guidance.</p>
       <p>Opportunity and researcher-match information may be incomplete, outdated, or machine-generated. Before acting or applying, independently verify fit, eligibility, deadlines, requirements, and terms in the sponsor's official notice.</p>
@@ -248,14 +258,16 @@
   </footer>
 </div>
 
+<script src="assets/app-config.js?v=app-1.0.0"></script>
 <script src="./data/opportunities.js?v=catalog-20260821T012551Z"></script>
 <script src="data/faculty_matches.js?v=graded-team-themes-v1"></script>
 <script src="assets/search-query.js?v=relevance-2026-08-15-v6"></script>
-<script src="assets/search-retrieval.js?v=relevance-2026-08-15-v6"></script>
+<script src="assets/search-retrieval.js?v=app-1.0.0"></script>
+<script src="assets/subtopic-runtime.js?v=app-1.0.0"></script>
 <script src="assets/orcid.js?v=orcid-2026-08-13"></script>
 <script src="assets/team-researchers.js?v=acronym-2026-08-13"></script>
 <script src="assets/team-matcher.js?v=audit-2026-08-13"></script>
-<script src="assets/site-help.js?v=acronym-2026-08-13"></script>
+<script src="assets/site-help.js?v=app-1.0.0"></script>
 <script src="assets/site-nav.js?v=brand-2026-08-12"></script>
 <script>
 (function () {
@@ -268,8 +280,12 @@
   var ORCID_API = globalThis.FUNDING_ORCID || null;
   var SEARCH_API = globalThis.FUNDING_SEARCH_QUERY || null;
   var RETRIEVAL_API = globalThis.FUNDING_RETRIEVAL || null;
+  var APP_CONFIG = globalThis.FUNDING_FINDER_APP || null;
+  var SUBTOPIC_API = globalThis.FUNDING_SUBTOPICS || null;
   var MATCHER_API = globalThis.FUNDING_TEAM_MATCHER || null;
   var MATCH_ENGINE = null;
+  var CHILD_MATCH_ENGINE = null;
+  var CHILD_CATALOG = null;
   var SEARCH_ENGINE = null;
   try {
     SEARCH_ENGINE = RETRIEVAL_API && SEARCH_API
@@ -383,12 +399,12 @@
     return researcherMatches[key] || (isExternalKey(key) ? [] : (piMatches[key] || []));
   }
 
-  function reasonText(fit) {
+  function reasonText(fit, maximum) {
     var parts = (fit.terms || []).slice(0);
     (fit.shared_topics || []).forEach(function (t) {
       if (parts.indexOf(t) === -1) parts.push(t);
     });
-    return parts.join(" · ");
+    return parts.slice(0, maximum || 2).join(" · ");
   }
   function listingDateValue(value) {
     return /^\d{4}-\d{2}-\d{2}$/.test(String(value || ""))
@@ -408,13 +424,32 @@
       b.totalN - a.totalN || b.sumScore - a.sumScore || a.d.title.localeCompare(b.d.title);
   }
   function teamChips(fits) {
-    return '<div class="team-overlap"><strong>Research overlap across this team</strong><div class="team">' + fits.map(function (f) {
+    var renderFit = function (f) {
       var why = reasonText(f);
       return '<div class="pi"><span class="name">' + esc(last(f.name)) + "</span>" +
         (f.external ? '<span class="badge external">external</span>' : "") +
         (why ? '<div class="why">' + esc(why) + "</div>" :
           (f.scopeLabel ? '<div class="why">Broad sponsor-scope match</div>' : "")) + "</div>";
-    }).join("") + "</div></div>";
+    };
+    var visible = fits.slice(0, 3);
+    var remaining = fits.slice(3);
+    return '<div class="team-overlap"><strong>Research overlap across this team</strong><div class="team">' + visible.map(renderFit).join("") + "</div>" +
+      (remaining.length ? '<details><summary>Show ' + remaining.length + ' more researcher</summary><div class="team">' + remaining.map(renderFit).join("") + "</div></details>" : "") +
+      "</div>";
+  }
+
+  function teamTopicSummary(topics) {
+    var values = topics || [];
+    if (!values.length) return "";
+    var item = function (topic) {
+      var record = topic.record || {};
+      return '<li><strong>' + esc(record.title || topic.title || "Matched topic") + '</strong>' +
+        (record.subtopic_code ? '<span>' + esc(record.subtopic_code) + '</span>' : "") + "</li>";
+    };
+    var visible = values.slice(0, 3);
+    var remaining = values.slice(3);
+    return '<section class="team-topic-matches"><p class="themes-head">Matched ' + values.length + (values.length === 1 ? " topic" : " topics") + '</p><ul>' + visible.map(item).join("") + '</ul>' +
+      (remaining.length ? '<details><summary>Show ' + remaining.length + ' more</summary><ul>' + remaining.map(item).join("") + "</ul></details>" : "") + "</section>";
   }
   function formatDate(value) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(String(value || ""))) return value || "Not listed";
@@ -538,7 +573,8 @@
         '<div class="key-fact"><span>Eligibility</span><strong>' + esc(eligibilityLabel(record)) + "</strong><small>Catalog applicant types</small></div>" +
       "</div>" +
       teamChips(entry.fits) +
-      (d.themeLabels && d.themeLabels.length ? '<p class="matched-themes">Matched team themes: ' + esc(d.themeLabels.join(" · ")) + "</p>" : "") +
+      teamTopicSummary(d.topicMatches) +
+      (d.themeLabels && d.themeLabels.length ? '<p class="matched-themes">Team themes: ' + esc(d.themeLabels.slice(0, 3).join(" · ")) + (d.themeLabels.length > 3 ? " · more" : "") + "</p>" : "") +
       (d.scopeLabels && d.scopeLabels.length ? '<p class="scope-note"><strong>Broad sponsor-scope signal:</strong> ' + esc(d.scopeLabels.join(" · ")) + ". Verify the specific research fit in the official notice.</p>" : "") +
       '<details class="record-details"><summary><span class="description description-preview">' + esc(String(record.description || "No synopsis was included in the catalog.").slice(0, 300)) + '</span><span class="details-cue"><span class="cue-more">Show full description &amp; details</span><span class="cue-less">Show less</span></span></summary>' +
       '<div class="details-body"><div class="full-description">' + descriptionHtml(record.description) + '</div><dl class="detail-grid">' +
@@ -634,6 +670,7 @@
         closingSoon: result.closingSoon,
         department: Boolean(department),
         themeLabels: (result.themeHits || []).map(function (hit) { return hit.label; }),
+        topicMatches: result.topicMatches || [],
         scopeLabels: Array.from(new Set(result.fits.map(function (fit) {
           return fit.scopeLabel || "";
         }).filter(Boolean))),
@@ -666,7 +703,45 @@
     }).map(function (theme) { return theme.label; }));
     var outcome = MATCH_ENGINE.matchTeam(profiles, activeLabels);
     renderThemes(outcome.themes);
-    return outcome.results.map(function (result) { return liveEntry(result, false); });
+    if (!CHILD_MATCH_ENGINE || !RETRIEVAL_API || !CHILD_CATALOG) {
+      return outcome.results.map(function (result) { return liveEntry(result, false); });
+    }
+    var childOutcome = CHILD_MATCH_ENGINE.matchTeam(profiles, activeLabels);
+    var rolled = RETRIEVAL_API.rollupRankedRecords({
+      parentRows: outcome.results,
+      childRows: childOutcome.results,
+      parentId: function (row) { return row.id; },
+      childParentId: function (row) { return row.record && row.record.parent_id; },
+      childId: function (row) { return row.id; },
+      score: function (row) { return row && row.relevanceScore; }
+    });
+    return rolled.rows.map(function (row) {
+      var parentRecord = byId[row.id];
+      if (!parentRecord) return null;
+      var parentResult = row.parent;
+      var bestTopic = row.bestChild && row.bestChild.row;
+      var evidence = row.childNormalized > row.parentNormalized ? bestTopic : parentResult;
+      return liveEntry({
+        id: row.id,
+        title: parentRecord.title,
+        agency: parentRecord.agency,
+        url: parentRecord.primary_document_url || parentRecord.funding_opportunity_url || parentRecord.detail_page || "",
+        deadline: parentRecord.close_date ? "Closes " + parentRecord.close_date : "",
+        postedDate: parentRecord.posted_date || parentRecord.source_first_seen_date || "",
+        updatedDate: parentRecord.last_updated || "",
+        new: Boolean(parentResult && parentResult.new),
+        broad: Boolean(parentResult && parentResult.broad),
+        closingSoon: Boolean(parentResult && parentResult.closingSoon),
+        relevanceScore: row.relevance,
+        rankScore: row.relevance * Number((parentResult && parentResult.recencyBoost) || 1),
+        fits: (evidence && evidence.fits) || [],
+        themeHits: (evidence && evidence.themeHits) || [],
+        topicMatches: row.childDroveMatch
+          ? row.children.map(function (child) { return child.row; })
+          : [],
+        record: parentRecord
+      }, false);
+    }).filter(Boolean);
   }
   function matchesQuery(e, q) {
     if (!q) return true;
@@ -680,8 +755,8 @@
       var summary = memberSummary(member);
       return '<div class="st-card"><span class="who">' + esc(last(memberName(member))) + "</span>" +
         (isExternalKey(member) ? ' <span class="badge external">external</span>' : "") +
-        (kt.length ? '<div class="terms">' + esc(kt.slice(0, 6).join(" · ")) + "</div>" : "") +
-        (summary ? '<div class="summary">' + esc(summary) + "</div>" : "") + "</div>";
+        (kt.length ? '<div class="terms">' + esc(kt.slice(0, 3).join(" · ")) + "</div>" : "") +
+        (summary ? '<div class="summary" title="' + esc(summary) + '">' + esc(summary.slice(0, 90)) + (summary.length > 90 ? "…" : "") + "</div>" : "") + "</div>";
     }).join("");
 
     if (selected.length < 2) {
@@ -1033,7 +1108,7 @@
     refresh();
   }
 
-  function init() {
+  async function init() {
     if (!M) {
       $("meta-line").textContent = "No match data found.";
       $("view").innerHTML = '<div class="empty">Couldn\'t find <code>data/faculty_matches.js</code>.<br>' +
@@ -1049,6 +1124,16 @@
       storageAvailable = loaded.available;
       rebuildResearcherMatches();
       renderExternalStatus(loaded.error, Boolean(loaded.error));
+    }
+    if (APP_CONFIG && APP_CONFIG.flags.subtopics) {
+      try {
+        var sidecar = await SUBTOPIC_API.loadSidecar();
+        CHILD_CATALOG = RETRIEVAL_API.createChildCatalog(sidecar);
+        CHILD_MATCH_ENGINE = MATCHER_API.create(CHILD_CATALOG, M || {}, SEARCH_API);
+      } catch (error) {
+        $("view").innerHTML = '<div class="empty">Topic-aware team matching could not initialize. ' + esc(error && error.message || error) + "</div>";
+        return;
+      }
     }
     updateMetaLine();
 

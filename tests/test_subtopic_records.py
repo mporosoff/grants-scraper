@@ -289,6 +289,37 @@ class DiffStabilityTests(unittest.TestCase):
 
 
 class CacheIoTests(unittest.TestCase):
+    def test_sidecar_trims_readable_terms_to_the_display_record_budget(self):
+        cache = records.empty_cache()
+        built = records.build_records(
+            PARENT, segmented(HEADINGS), document=DOCUMENT, as_of="2026-08-20"
+        )
+        built[0]["summary"] = "A" * 600
+        built[0]["term_display"] = {
+            f"stem{index}": f"Readable scientific term {index}"
+            for index in range(60)
+        }
+        built[0]["subtopic_terms"] = {
+            f"stem{index}": 60 - index
+            for index in range(60)
+        }
+        records.upsert_parent(
+            cache, "360678", built, as_of="2026-08-20", method="outline"
+        )
+
+        stored = records.sidecar_payload(cache)["records"]["360678"]["subtopics"][0]
+        display = {
+            key: value for key, value in stored.items()
+            if key in records.DISPLAY_RECORD_FIELDS
+        }
+        size = len(json.dumps(
+            display, ensure_ascii=False, separators=(",", ":")
+        ).encode("utf-8"))
+        self.assertLessEqual(size, records.DISPLAY_RECORD_LIMIT_BYTES)
+        self.assertLess(len(stored["term_display"]), 60)
+        self.assertIn("stem0", stored["term_display"])
+        self.assertNotIn("stem59", stored["term_display"])
+
     def test_round_trip_and_serialization_style(self):
         cache = records.empty_cache()
         result = segmented(HEADINGS)

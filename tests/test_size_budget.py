@@ -30,8 +30,9 @@ CATALOG_HARD_LIMIT_BYTES = 32 * MIB
 # Advisory. Above this the build still passes but says so, because the gap
 # between warn and fail is the only room left to react in.
 CATALOG_WARN_LIMIT_BYTES = 28 * MIB
-# Per display record: 600-char summary + (in P10) 60-entry term_display +
-# scalars. The 400-term retrieval map lives only in search_index.
+# Per display record: 600-char summary + (in P10) up to 60 term_display entries
+# that are trimmed to the remaining room + scalars. The 400-term retrieval map
+# lives only in search_index.
 SUBTOPIC_RECORD_LIMIT_BYTES = 2 * 1024
 
 # §12 budgets what a card can render, not maintenance-only provenance and

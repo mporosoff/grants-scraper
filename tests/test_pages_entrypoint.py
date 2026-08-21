@@ -190,7 +190,10 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn('id="key-storage-status"', explorer_html)
         self.assertIn("OpenAI key and project limits", explorer_html)
         self.assertIn("Anthropic key safety and limits", explorer_html)
-        self.assertIn('id="feedback-tools"', explorer_html)
+        self.assertIn('id="evaluation-tools" hidden', explorer_html)
+        self.assertNotIn("Help improve Funding Finder", explorer_html)
+        self.assertNotIn('id="use-preferences"', explorer_html)
+        self.assertNotIn('id="compare-panel"', explorer_html)
         self.assertIn('id="result-assistant"', explorer_html)
         self.assertIn('id="export-evaluation"', explorer_html)
         self.assertIn('id="review-candidates"', explorer_html)
@@ -215,14 +218,14 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         release_version = "filters-2026-08-13"
         feature_version = "orcid-2026-08-13"
         search_version = "relevance-2026-08-15-v6"
-        style_version = "audit-2026-08-13"
+        style_version = "app-1.0.0"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={style_version}">',
             explorer_html,
         )
         for asset in (
             "nofo.js", "review.js", "ai-provider.js", "credentials.js",
-            "chat-ui.js", "saved.js", "preferences.js",
+            "chat-ui.js", "saved.js",
         ):
             self.assertIn(
                 f'<script src="./assets/{asset}?v={release_version}"></script>',
@@ -237,16 +240,23 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             '<script src="./assets/profile.js?v=audit-2026-08-13"></script>',
             explorer_html,
         )
-        for asset in (
-            "profile-ranking.js", "search-query.js", "search-retrieval.js",
-            "app.js",
-        ):
+        self.assertIn('assets/app-config.js?v=app-1.0.0', explorer_html)
+        self.assertIn('assets/subtopic-runtime.js?v=app-1.0.0', explorer_html)
+        self.assertIn('assets/match-explain.js?v=app-1.0.0', explorer_html)
+        self.assertIn("data-app-version", explorer_html)
+        self.assertNotIn("assets/preferences.js", explorer_html)
+        for asset in ("profile-ranking.js", "search-query.js"):
             self.assertIn(
                 f'<script src="./assets/{asset}?v={search_version}"></script>',
                 explorer_html,
             )
+        for asset in ("search-retrieval.js", "app.js"):
+            self.assertIn(
+                f'<script src="./assets/{asset}?v=app-1.0.0"></script>',
+                explorer_html,
+            )
         self.assertIn(
-            '<script src="./assets/site-help.js?v=acronym-2026-08-13"></script>',
+            '<script src="./assets/site-help.js?v=app-1.0.0"></script>',
             explorer_html,
         )
         self.assertIn("globalThis.GRANT_CATALOG", application_js)
@@ -287,9 +297,9 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("async function extractCv", profile_js)
         self.assertIn("profileContext({ includeCv: true })", application_js)
         self.assertIn("dataset.profileMinimumCoverage", application_js)
-        self.assertIn("globalThis.FUNDING_PREFERENCES", application_js)
+        self.assertNotIn("globalThis.FUNDING_PREFERENCES", application_js)
         self.assertIn("globalThis.FUNDING_SAVED", application_js)
-        self.assertIn("function renderPreferenceStatus", application_js)
+        self.assertNotIn("function renderPreferenceStatus", application_js)
         self.assertIn("function renderSaved", application_js)
         self.assertIn("function exportEvaluation", application_js)
         self.assertIn("function evidenceRows", application_js)
@@ -312,10 +322,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn(".full-description li + li", application_css)
         self.assertNotIn("Prioritized from your ratings", application_js)
         self.assertNotIn("Verify current status", application_js)
-        self.assertNotIn("Why this matched", application_js)
+        self.assertIn("Why this match", application_js)
         self.assertNotIn("Official notice analyzed", application_js)
         self.assertNotIn(".card-contact", application_css)
-        self.assertNotIn(".match-explanation", application_css)
+        self.assertIn(".match-explanation", application_css)
+        self.assertIn(".matched-topics", application_css)
         self.assertNotIn(".evidence-summary", application_css)
         self.assertIn("function sendDeploymentReview", application_js)
         self.assertIn("citation_evidence_ids", application_js)

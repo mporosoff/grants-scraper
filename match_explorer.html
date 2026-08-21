@@ -32,7 +32,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/funding-finder-180.png?v=20260815">
   <link rel="manifest" href="./assets/icons/funding-finder.webmanifest?v=20260815">
   <link rel="stylesheet" href="./assets/brand.css?v=20260812">
-  <link rel="stylesheet" href="./assets/app.css?v=audit-2026-08-13">
+  <link rel="stylesheet" href="./assets/app.css?v=app-1.0.0">
   <link rel="stylesheet" href="./assets/site-nav.css?v=filters-2026-08-13">
 </head>
 <body>
@@ -408,20 +408,12 @@
                   <option value="title">Title</option>
                 </select>
               </label>
-              <label class="personalize-toggle" title="Prioritize results using ratings stored only on this device">
-                <input type="checkbox" id="use-preferences">
-                <span>
-                  Personalize from my ratings
-                  <small id="preference-status" aria-live="polite">Rate 3 opportunities to personalize.</small>
-                </span>
-              </label>
             </div>
           </div>
         </div>
 
         <div class="active-filters hidden" id="active-filters" aria-label="Active search context"></div>
         <div class="notice warning hidden" id="stale-warning"></div>
-        <section class="compare-panel hidden" id="compare-panel" aria-labelledby="compare-heading"></section>
 
         <section class="ai-panel result-assistant hidden" id="result-assistant" role="dialog" aria-modal="true" aria-labelledby="chat-heading">
           <div class="ai-heading">
@@ -477,7 +469,6 @@
         </section>
 
         <div class="result-list" id="results" aria-live="polite"></div>
-        <aside class="exploration hidden" id="exploration" aria-label="Suggested from your ratings"></aside>
 
         <nav class="pagination hidden" id="pagination" aria-label="Results pages">
           <button class="button secondary page-step" id="page-prev" type="button" aria-label="Previous results page">&larr; Previous</button>
@@ -490,16 +481,16 @@
       </section>
     </div>
 
-    <details class="feedback-tools" id="feedback-tools">
+    <details class="evaluation-tools" id="evaluation-tools" hidden>
       <summary>
         <span>
-          <strong>Help improve Funding Finder</strong>
-          <small>Optional match-quality rating export for invited testers</small>
+          <strong>Evaluation tools</strong>
+          <small>Dedicated source and match-quality workflow for invited reviewers</small>
         </span>
-        <span class="summary-action"><span class="sa-open">Open feedback tools</span><span class="sa-close">Close feedback tools</span></span>
+        <span class="summary-action"><span class="sa-open">Open evaluation tools</span><span class="sa-close">Close evaluation tools</span></span>
       </summary>
-      <div class="feedback-tools-body">
-        <p class="feedback-intro">Opportunity ratings are available directly on result cards and stay on this device. Invited testers can use this area to export match-quality data. Nothing is sent automatically.</p>
+      <div class="evaluation-tools-body">
+        <p class="evaluation-intro">This mode is reserved for invited reviewers. Ratings and source checks stay on this device until a reviewer explicitly exports or shares them.</p>
 
         <section class="evaluation-panel deployment-review-panel" aria-labelledby="deployment-review-heading" hidden>
           <div class="evaluation-heading">
@@ -552,7 +543,7 @@
             </div>
             <strong id="feedback-progress">0 reviewed</strong>
           </div>
-          <p>Ratings stay on this device and can personalize Relevance sorting after three graded opportunities. The optional export includes your current search text, filters, rankings, and ratings; it excludes API keys, profile/CV text, and chat.</p>
+          <p>Ratings stay on this device. The optional export includes the current search text, filters, rankings, and ratings; it excludes API keys, profile/CV text, and chat.</p>
           <div class="evaluation-metrics" id="evaluation-metrics"></div>
           <div class="evaluation-actions">
             <button class="button secondary" id="export-evaluation" type="button">Export match ratings</button>
@@ -569,6 +560,7 @@
     <p><strong>Sources:</strong> <a href="https://www.grants.gov/xml-extract" target="_blank" rel="noopener">Grants.gov daily database extract</a> plus independently validated public listings (currently NSF, NYSERDA, ARPA-E eXCHANGE, and DOE EERE Exchange) and citation-backed facts from selected official notices. Machine-extracted facts always require notice verification.</p>
     <p>This product uses the Grants.gov API but is not endorsed or certified by the U.S. Department of Health and Human Services.</p>
     <p id="catalog-detail"></p>
+    <p class="app-version" data-app-version></p>
     <section class="legal-notice" id="use-notice" aria-label="Use and copyright notice">
       <p><strong>Use notice:</strong> Funding Finder is an informational research-planning aid intended for individual and internal institutional use. It is not an official source of record, application or submission system, or legal, financial, compliance, or sponsor guidance.</p>
       <p>Opportunity information may be incomplete, outdated, or machine-extracted. Before acting or applying, independently verify eligibility, deadlines, requirements, and terms in the sponsor's official notice.</p>
@@ -579,6 +571,7 @@
   <noscript>
     <div class="notice error">JavaScript is required to search the opportunity catalog.</div>
   </noscript>
+  <script src="./assets/app-config.js?v=app-1.0.0"></script>
   <script src="./data/opportunities.js?v=catalog-20260821T012551Z"></script>
   <script src="./assets/orcid.js?v=orcid-2026-08-13"></script>
   <script src="./assets/profile.js?v=audit-2026-08-13"></script>
@@ -589,12 +582,13 @@
   <script src="./assets/ai-provider.js?v=filters-2026-08-13"></script>
   <script src="./assets/chat-ui.js?v=filters-2026-08-13"></script>
   <script src="./assets/saved.js?v=filters-2026-08-13"></script>
-  <script src="./assets/preferences.js?v=filters-2026-08-13"></script>
   <script src="./assets/search-query.js?v=relevance-2026-08-15-v6"></script>
-  <script src="./assets/search-retrieval.js?v=relevance-2026-08-15-v6"></script>
-  <script src="./assets/site-help.js?v=acronym-2026-08-13"></script>
+  <script src="./assets/search-retrieval.js?v=app-1.0.0"></script>
+  <script src="./assets/subtopic-runtime.js?v=app-1.0.0"></script>
+  <script src="./assets/match-explain.js?v=app-1.0.0"></script>
+  <script src="./assets/site-help.js?v=app-1.0.0"></script>
   <script src="./assets/site-nav.js?v=filters-2026-08-13"></script>
-  <script src="./assets/app.js?v=relevance-2026-08-15-v6"></script>
+  <script src="./assets/app.js?v=app-1.0.0"></script>
   <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "209e9983c16e4747947cf621792fe833"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
