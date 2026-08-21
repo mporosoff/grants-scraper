@@ -34,7 +34,7 @@ HGEO_PARENT_IDS = {
 ARL_PARENT_ID = "344592"
 GENESIS_PARENT_ID = "361526"
 ROSES_NUMBER_RE = re.compile(r"^NNH\d{2}ZDA\d{3}[A-Z]", re.IGNORECASE)
-ARL_TOPIC_RE = re.compile(r"\bARL-BAA-\d{4}\b")
+ARL_TOPIC_RE = re.compile(r"(?<![A-Za-z0-9])ARL-BAA-\d{4}(?!\d)")
 
 KNOWN_ARL_VERSIONS = {
     "c9ab5dd5a95c0f40f68fa4af8b4600c4534e26a15f09a16662e53fb795ba8b24": 82,

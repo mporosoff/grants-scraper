@@ -126,6 +126,21 @@ class ArlTests(unittest.TestCase):
         )
         self.assertEqual(structured.parse_arl_topics(text), [])
 
+    def test_pdf_text_may_join_announcement_label_to_topic_id(self):
+        text = (
+            "===== 3 =====\nQuantum SensingTitle:  \n"
+            "ARL-BAA-0001Announcement ID:  \n"
+            "Description: Sensors and systems."
+        )
+        children = structured.parse_arl_topics(text)
+        self.assertEqual(len(children), 1)
+        self.assertEqual(children[0]["code"], "ARL-BAA-0001")
+        self.assertEqual(children[0]["title"], "Quantum Sensing")
+
+    def test_topic_id_must_not_be_prefix_of_longer_numeric_id(self):
+        text = "Title: Invalid ARL-BAA-00012\nDescription: Not a topic."
+        self.assertEqual(structured.parse_arl_topics(text), [])
+
 
 def genesis_workbook():
     book = Workbook()
