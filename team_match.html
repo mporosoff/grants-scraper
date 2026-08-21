@@ -98,8 +98,6 @@
   .toolrow .search{flex:1;min-width:220px;}
   .toolrow input[type=search]{width:100%;padding:10px 13px;font:inherit;color:var(--ink);background:var(--surface-alt);border:1px solid var(--line-strong);border-radius:10px;}
   .linkbtn{background:none;border:none;color:var(--blue-dark);font:inherit;font-size:.84rem;cursor:pointer;padding:6px 4px;text-decoration:underline;}
-  .deptbar{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted);}
-
   .selected-terms{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px;}
   .st-card{background:var(--blue-soft);border:1px solid #cfe0fb;border-radius:12px;padding:9px 13px;font-size:.8rem;max-width:100%;}
   .st-card .who{font-weight:700;color:var(--navy);}
@@ -122,7 +120,8 @@
   .scope-note{margin:10px 0 0;padding:9px 11px;border:1px solid #f0d79c;border-radius:10px;background:#fff9ea;color:#72510c;font-size:.78rem;line-height:1.4;}
   .scope-note strong{color:#563b05;}
 
-  .count{color:var(--muted);font-size:.85rem;margin:16px 2px 12px;}
+  .count{margin:16px 0 12px;padding:10px 12px;color:var(--navy);font-size:.88rem;font-weight:750;line-height:1.45;background:var(--blue-soft);border:1px solid #cfe0fb;border-radius:10px;}
+  .count:empty{display:none;}
   .section-label{margin:22px 2px 10px;font-size:.75rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
 
   #view.result-list{padding-top:0;}
@@ -182,7 +181,6 @@
       <a href="./team_match.html" aria-current="page">Team matcher</a>
       <button class="site-help-button" type="button" data-help-open aria-haspopup="dialog" aria-controls="help-guide"><span aria-hidden="true">?</span> Help</button>
     </nav>
-    <span class="header-context-pill">Internal tool</span>
     <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu">
       <span class="nav-toggle-lines" aria-hidden="true"></span>
     </button>
@@ -236,9 +234,6 @@
     </form>
     <div class="toolrow">
       <div class="search"><input id="filter" type="search" placeholder="Filter results by title, agency, or keyword…" autocomplete="off" /></div>
-      <div class="deptbar">
-        <label><input type="checkbox" id="dept-toggle" /> Department-wide overview (department faculty only)</label>
-      </div>
     </div>
   </div>
 
@@ -594,7 +589,7 @@
         '<div><dt>Source</dt><dd>' + esc(record.source || "Not listed") + "</dd></div>" +
       "</dl>" + (record.close_date_note ? '<p class="description"><strong>Deadline note:</strong> ' + esc(record.close_date_note) + "</p>" : "") + "</div></details>" +
       '<div class="card-actions">' + teamOfficialActions(record) +
-      '<a class="source-action" href="./match_explorer.html?q=' + encodeURIComponent(opportunityNumber) + '">Open in Funding Finder</a>' +
+      '<a class="source-action" href="./match_explorer.html?q=' + encodeURIComponent(opportunityNumber) + '&amp;focus=' + encodeURIComponent(d.id) + '">Open in Funding Finder</a>' +
       '<button class="source-action" type="button" data-team-calendar="' + esc(d.id) + '"' + (closeDate ? "" : " disabled") + ">Add to calendar</button>" +
       (contactEmail ? '<a class="source-action" href="mailto:' + esc(contactEmail) + '">Program contact</a>' : "") + "</div></article>";
   }
@@ -773,7 +768,7 @@
     var picked = selected.map(function (member) { return last(memberName(member)); }).join(" + ");
     $("count").textContent = all.length + " call" + (all.length === 1 ? "" : "s") + " fit every selected researcher {" + picked + "}" +
       (q ? " (filtered)" : "") + " · " + all.filter(function (entry) { return entry.d.new; }).length +
-      " new or substantively updated in the last 14 days · newest relevant first";
+      " new or substantively updated in the last 14 days · ordered by relevance and recency";
 
     var html = "";
     if (all.length) {
@@ -789,30 +784,9 @@
     $("view").innerHTML = html;
   }
 
-  // ---- department overview --------------------------------------------- //
-  function renderDept(q) {
-    $("selected-terms").innerHTML = "";
-    $("themes").innerHTML = "";
-    var list = MATCH_ENGINE ? MATCH_ENGINE.matchDepartment(names.map(memberProfile)).map(function (result) {
-      return liveEntry(result, true);
-    }).filter(function (entry) { return matchesQuery(entry, q); }) : [];
-    list.sort(balancedRanking);
-    $("count").textContent = list.length + " department-wide collaboration group" +
-      (list.length === 1 ? "" : "s") + " (2+ faculty overlap)" + (q ? " (filtered)" : "") +
-      " · live graded relevance and recency ranking";
-    if (!list.length) {
-      $("view").innerHTML = '<div class="empty">No collaboration groups' + (q ? " match that filter." : " in the current data.") + "</div>";
-      return;
-    }
-    $("view").innerHTML = '<div class="section-label">Best current department-wide collaboration opportunities</div>' +
-      list.map(function (entry, index) {
-        return opportunityCard(entry, index + 1);
-      }).join("");
-  }
-
   function refresh() {
     var q = ($("filter").value || "").trim().toLowerCase();
-    if ($("dept-toggle").checked) renderDept(q); else renderTeam(q);
+    renderTeam(q);
   }
 
   function safeStorage() {
@@ -1087,17 +1061,15 @@
       var on = selected.indexOf(member) !== -1;
       btn.classList.toggle("on", on);
       btn.setAttribute("aria-pressed", on ? "true" : "false");
-      btn.disabled = !on && (atMax || $("dept-toggle").checked);
+      btn.disabled = !on && atMax;
     });
-    $("add-researcher").disabled = $("dept-toggle").checked || externalResearchers.length >= MAX_EXTERNAL;
+    $("add-researcher").disabled = externalResearchers.length >= MAX_EXTERNAL;
     $("add-researcher").title = externalResearchers.length >= MAX_EXTERNAL
       ? "Four external researchers are already saved"
       : "Add and save an external researcher";
-    $("team-hint").textContent = $("dept-toggle").checked
-      ? "Showing every pair/group of department faculty. Uncheck to build a custom team."
-      : (selected.length < 2
-          ? "Pick two to four researchers, including saved external collaborators, to see calls that fit everyone selected."
-          : "Showing only calls that fit all " + selected.length + " selected researchers. Adding a researcher can only narrow these results.");
+    $("team-hint").textContent = selected.length < 2
+      ? "Pick two to four researchers, including saved external collaborators, to see calls that fit everyone selected."
+      : "Showing only calls that fit all " + selected.length + " selected researchers. Adding a researcher can only narrow these results.";
   }
   function btnId(n) { return n.replace(/[^a-z0-9]/gi, ""); }
 
@@ -1153,7 +1125,6 @@
     renderExternalButtons();
 
     $("filter").addEventListener("input", refresh);
-    $("dept-toggle").addEventListener("change", function () { updateToggles(); refresh(); });
     $("add-researcher").addEventListener("click", function () { openExternalEditor(""); });
     $("cancel-external").addEventListener("click", closeExternalEditor);
     $("delete-external").addEventListener("click", deleteExternal);

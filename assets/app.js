@@ -28,7 +28,9 @@
   const CREDENTIAL_API = globalThis.FUNDING_CREDENTIALS;
   const CHAT_UI = globalThis.FUNDING_CHAT_UI;
   const SAVED_API = globalThis.FUNDING_SAVED;
-  const EVALUATION_MODE = new URLSearchParams(location.search).get("evaluation") === "1";
+  const INITIAL_URL_PARAMS = new URLSearchParams(location.search);
+  const EVALUATION_MODE = INITIAL_URL_PARAMS.get("evaluation") === "1";
+  let pendingLinkedOpportunityId = INITIAL_URL_PARAMS.get("focus") || "";
   const BROAD_OPPORTUNITY_RE = /broad agency announcement|\bbaa\b|continuation of solicitation|office of science financial assistance|long[\s-]?range|research announcement|\broses\b|omnibus|unsolicited proposal|open topic|financial assistance program|annual program statement|office[ -]wide|open[ -]scope solicitation/i;
 
   // --- Anonymous usage logging (Cloudflare Worker + KV) --------------------
@@ -2762,6 +2764,26 @@
     jumpToResultsTop();
   }
 
+  function focusLinkedOpportunity(display) {
+    if (!pendingLinkedOpportunityId) return;
+    const targetIndex = display.findIndex(match =>
+      recordId(catalog.opportunities[match.index]) === pendingLinkedOpportunityId
+    );
+    if (targetIndex < 0) return;
+    state.page = Math.floor(targetIndex / PAGE_SIZE) + 1;
+    const targetId = pendingLinkedOpportunityId;
+    pendingLinkedOpportunityId = "";
+    globalThis.requestAnimationFrame(() => {
+      const card = [...document.querySelectorAll("[data-opportunity-id]")]
+        .find(item => item.dataset.opportunityId === targetId);
+      if (!card) return;
+      card.classList.add("chat-target");
+      card.scrollIntoView({ behavior: "smooth", block: "center" });
+      card.focus({ preventScroll: true });
+      globalThis.setTimeout(() => card.classList.remove("chat-target"), 2200);
+    });
+  }
+
   function renderResults() {
     if (!state.searched) {
       $("results-toolbar").classList.add("search-not-started");
@@ -2790,6 +2812,7 @@
     }
 
     const display = currentDisplayMatches();
+    focusLinkedOpportunity(display);
     const totalPages = Math.max(1, Math.ceil(display.length / PAGE_SIZE));
     state.page = Math.min(state.page, totalPages);
     const start = (state.page - 1) * PAGE_SIZE;

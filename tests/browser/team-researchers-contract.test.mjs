@@ -453,6 +453,12 @@ test("presents one interactive full-team list with graded themes and broad-call 
   assert.match(teamPage, /Broad sponsor-scope match/);
   assert.doesNotMatch(teamPage, /" of " \+ selected\.length/);
   assert.match(teamPage, /new or substantively updated in the last 14 days/);
+  assert.match(teamPage, /ordered by relevance and recency/);
+  assert.match(teamPage, /\.count\{[^}]*font-weight:750/);
+  assert.match(teamPage, /\.count:empty\{display:none;\}/);
+  assert.match(teamPage, /&amp;focus=/);
+  assert.doesNotMatch(teamPage, /Internal tool/);
+  assert.doesNotMatch(teamPage, /dept-toggle|Department-wide overview|function renderDept/);
   assert.match(teamPage, /Closing soon/);
   assert.match(teamPage, /MATCH_ENGINE\.matchTeam/);
   assert.doesNotMatch(teamPage, /fit 2\+ of \{/);
