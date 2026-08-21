@@ -3,6 +3,9 @@
   "as_of": "2026-08-21",
   "measurement": "MEAS-10 multi-researcher human relevance pilot",
   "status": "open_human_dependency",
+  "disposition": "post_launch_human_validation_non_blocking_for_p11_under_dec_17",
+  "pilot_completed": false,
+  "participants_completed": 0,
   "engineering_readiness": {
     "dedicated_route": "match_explorer.html?evaluation=1",
     "normal_product_rating_surface_absent": true,
@@ -16,6 +19,6 @@
   "labels_available": false,
   "exact_blocker": "No consented evaluation exports from the intended 3-5 real researchers are available in the repository or supplied to this P10 session. An implementation agent cannot fabricate human relevance labels.",
   "completion_requirement": "Aggregate consented exports from 3-5 researchers and report retrieval, reranking, and source-data failures separately.",
-  "p11_gate": "DEC-17 remains the explicit user decision on whether Funding Finder may ship without the completed pilot.",
+  "p11_gate": "DEC-17 was accepted by the user on 2026-08-21. P11 may ship before this pilot; the measurement remains unperformed post-launch human product validation.",
   "privacy": "No participant-private data is committed in this status artifact."
 }
