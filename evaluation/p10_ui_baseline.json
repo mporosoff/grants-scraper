@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-08-21",
+  "head": "e3c28deac542e9f8a1719391f897dc003a42a529",
+  "flag_off_ui_difference_allowlist": [
+    "remove the funding-card Compare feature and its user-facing surface",
+    "remove the permanent result-rating and Help improve Funding Finder surface",
+    "add one shared application-version indicator",
+    "apply only the styling and layout changes needed to close the space left by those three changes"
+  ],
+  "flag_off_invariants": [
+    "catalog data",
+    "candidate admission",
+    "ranking and top-10 order",
+    "filters",
+    "deadlines and status",
+    "opportunity links",
+    "profile, CV, and ORCID ranking behavior",
+    "no subtopic rendering or hidden child-text contribution"
+  ],
+  "main_funding_finder": {
+    "scenario": "carbon capture with the restored local profile active",
+    "result_id": "356623",
+    "desktop": {
+      "viewport": [1280, 720],
+      "card_height_px": 548,
+      "buttons": 9,
+      "details": 2,
+      "compare_controls": 1,
+      "rating_nodes": 2
+    },
+    "mobile": {
+      "viewport": [375, 800],
+      "document_client_width_px": 360,
+      "document_scroll_width_px": 360,
+      "card_width_px": 298,
+      "card_height_px": 1141,
+      "buttons": 9,
+      "details": 2,
+      "compare_controls": 1,
+      "rating_nodes": 2
+    }
+  },
+  "team_matcher": {
+    "scenario": "Marc D. Porosoff plus Yasemin Basdogan",
+    "desktop": {
+      "viewport": [1280, 720],
+      "document_client_width_px": 1265,
+      "document_scroll_width_px": 1265,
+      "first_five_card_heights_px": [676, 658, 641, 723, 748],
+      "default_researchers_per_card": 2,
+      "details_per_card": 1
+    },
+    "mobile": {
+      "viewport": [375, 800],
+      "document_client_width_px": 360,
+      "document_scroll_width_px": 360,
+      "first_three_card_widths_px": [320, 320, 320],
+      "first_three_card_heights_px": [1275, 1223, 1182],
+      "default_researchers_per_card": 2,
+      "details_per_card": 1
+    }
+  }
+}
