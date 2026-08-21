@@ -589,7 +589,7 @@
         '<div><dt>Source</dt><dd>' + esc(record.source || "Not listed") + "</dd></div>" +
       "</dl>" + (record.close_date_note ? '<p class="description"><strong>Deadline note:</strong> ' + esc(record.close_date_note) + "</p>" : "") + "</div></details>" +
       '<div class="card-actions">' + teamOfficialActions(record) +
-      '<a class="source-action" href="./match_explorer.html?q=' + encodeURIComponent(opportunityNumber) + '&amp;focus=' + encodeURIComponent(d.id) + '">Open in Funding Finder</a>' +
+      '<a class="source-action" href="./match_explorer.html?q=' + encodeURIComponent(opportunityNumber) + '&amp;focus=' + encodeURIComponent(d.id) + '" target="_blank" rel="noopener">Open in Funding Finder</a>' +
       '<button class="source-action" type="button" data-team-calendar="' + esc(d.id) + '"' + (closeDate ? "" : " disabled") + ">Add to calendar</button>" +
       (contactEmail ? '<a class="source-action" href="mailto:' + esc(contactEmail) + '">Program contact</a>' : "") + "</div></article>";
   }
@@ -768,11 +768,11 @@
     var picked = selected.map(function (member) { return last(memberName(member)); }).join(" + ");
     $("count").textContent = all.length + " call" + (all.length === 1 ? "" : "s") + " fit every selected researcher {" + picked + "}" +
       (q ? " (filtered)" : "") + " · " + all.filter(function (entry) { return entry.d.new; }).length +
-      " new or substantively updated in the last 14 days · ordered by relevance and recency";
+      " new or substantively updated in the last 14 days";
 
     var html = "";
     if (all.length) {
-      html += '<div class="section-label">Opportunities matching the full selected team</div>' +
+      html += '<div class="section-label">Opportunities matching the full selected team · ordered by relevance and recency</div>' +
         all.map(function (e, index) {
           return opportunityCard(e, index + 1);
         }).join("");

@@ -194,6 +194,7 @@ test("Team Matcher uses the shared rollup and a restrained default view", () => 
 
 test("Team Matcher links focus the corresponding Funding Finder card", () => {
   assert.match(teamHtml, /&amp;focus=' \+ encodeURIComponent\(d\.id\)/);
+  assert.match(teamHtml, /target="_blank" rel="noopener">Open in Funding Finder/);
   assert.match(appSource, /INITIAL_URL_PARAMS\.get\("focus"\)/);
   assert.match(appSource, /state\.page = Math\.floor\(targetIndex \/ PAGE_SIZE\) \+ 1/);
   assert.match(appSource, /card\.scrollIntoView\(\{ behavior: "smooth", block: "center" \}\)/);
