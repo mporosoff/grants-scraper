@@ -1,13 +1,14 @@
-"""Run post-refresh tests without redrawing closed measurement frames.
+"""Test live product assets without redrawing closed measurement frames.
 
 The scheduled refresh changes the live catalog and evidence cache.  P5, P7 and
 MEAS-8 deliberately freeze historical sampling frames against the committed
 pre-refresh inputs, so rerunning those modules after replacing their inputs
 asks a different question and eventually fails as the funding universe moves.
 
-The workflow runs the complete suite before refresh.  This runner then repeats
-every non-historical test against the newly generated assets while leaving the
-closed measurement artifacts and their assertions untouched.
+The refresh workflow runs the complete suite before replacing generated data.
+This runner validates every non-historical test against the live generated
+assets, both after refresh and in ordinary push/PR CI, while leaving the closed
+measurement artifacts and their assertions untouched.
 """
 
 from __future__ import annotations
@@ -46,7 +47,7 @@ def main():
     suite = live_refresh_suite()
     excluded = ", ".join(sorted(FROZEN_MEASUREMENT_MODULES))
     print(
-        "Post-refresh validation excludes closed frozen-measurement modules "
+        "Live-product validation excludes closed frozen-measurement modules "
         f"already verified before refresh: {excluded}"
     )
     result = unittest.TextTestRunner(verbosity=2).run(suite)

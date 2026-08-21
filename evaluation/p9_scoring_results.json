@@ -2,7 +2,7 @@
   "schema_version": 1,
   "as_of": "2026-08-20",
   "inputs": {
-    "parent_catalog": "data/opportunities.js",
+    "parent_catalog": "evaluation/p9_scoring_parent_catalog.json.gz",
     "parent_records": 1485,
     "child_fixture": "evaluation/p9_scoring_children.json",
     "child_records": 306,

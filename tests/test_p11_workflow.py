@@ -6,6 +6,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW = ROOT / ".github" / "workflows" / "refresh-opportunities.yml"
+TEST_WORKFLOW = ROOT / ".github" / "workflows" / "tests.yml"
 
 
 class P11WorkflowTests(unittest.TestCase):
@@ -45,6 +46,11 @@ class P11WorkflowTests(unittest.TestCase):
         source = WORKFLOW.read_text(encoding="utf-8")
         self.assertIn("python -m tools.run_refresh_validation", source)
         self.assertIn('"tools/run_refresh_validation.py"', source)
+
+    def test_push_ci_uses_the_same_live_product_measurement_boundary(self):
+        source = TEST_WORKFLOW.read_text(encoding="utf-8")
+        self.assertIn("python -m tools.run_refresh_validation", source)
+        self.assertNotIn("unittest discover", source)
 
     def test_document_degradation_routes_to_the_existing_degraded_channel(self):
         source = WORKFLOW.read_text(encoding="utf-8")

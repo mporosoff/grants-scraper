@@ -6,12 +6,16 @@
 import { readFile, writeFile } from "node:fs/promises";
 import process from "node:process";
 import vm from "node:vm";
+import { gunzipSync } from "node:zlib";
 
 const ROOT = new URL("../", import.meta.url);
 const QUERY_SET = "evaluation/query_set.json";
 const CHILDREN = "evaluation/p9_scoring_children.json";
 const OUTPUT = "evaluation/p9_scoring_results.json";
-const PARENT_CATALOG = "data/opportunities.js";
+// P9 is a closed, human-reviewed scoring measurement.  Its parent corpus must
+// be frozen just like its child and query fixtures; the moving live catalog is
+// validated separately by the browser and query-baseline gates.
+const PARENT_CATALOG = "evaluation/p9_scoring_parent_catalog.json.gz";
 const TOP_N = 50;
 const TOP_GATE = 10;
 
@@ -125,12 +129,9 @@ async function loadApis() {
   };
 }
 
-async function loadParentCatalog(context) {
-  vm.runInNewContext(
-    await readFile(new URL(PARENT_CATALOG, ROOT), "utf8"),
-    context,
-  );
-  const catalog = context.globalThis.GRANT_CATALOG;
+async function loadParentCatalog() {
+  const compressed = await readFile(new URL(PARENT_CATALOG, ROOT));
+  const catalog = JSON.parse(gunzipSync(compressed).toString("utf8"));
   if (!catalog?.opportunities || !catalog?.search_index) {
     throw new Error(`${PARENT_CATALOG} did not define a searchable GRANT_CATALOG`);
   }
@@ -397,7 +398,7 @@ function cardinalityChecks(cases) {
 
 async function collect() {
   const apis = await loadApis();
-  const parentCatalog = await loadParentCatalog(apis.context);
+  const parentCatalog = await loadParentCatalog();
   const fixture = JSON.parse(await readFile(new URL(CHILDREN, ROOT), "utf8"));
   const children = childCatalog(fixture);
   const parent = {
