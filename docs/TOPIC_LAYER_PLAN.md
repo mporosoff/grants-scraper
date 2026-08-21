@@ -4073,7 +4073,7 @@ P7, because that is where it falls in the ordered path (§18.0.4).
 | DEC-12 | retain parent deadline payload unchanged in P9 | no | measured 1.31 MiB / ~5.5%; migration risk exceeds sidecar coupling | no |
 | DEC-16 | inferred children require hash-matched human approval | retained | central publication predicate; credential/API failure fails closed | no — user accepted |
 | DEC-18 | explicit `child_type`; v1 emits/indexes `subject` only | yes | schema/validation/scoring fixture | future enum/rendering returns in P10 |
-| DEC-19 | bounded public ARPA-H source | yes | adapter/canary: 10 current official rows; 11 frozen reconciled; 3 frozen now closed. Catalog materialization is part of the still-open P9.2 live gate | no |
+| DEC-19 | bounded public ARPA-H source | yes | adapter/canary: 10 current official rows; 11 frozen reconciled; 3 frozen now closed. The 10 current rows were materialized before the final P9.2 frame/cache run | no |
 | DEC-20 | three HGEO/NETL named routes | yes | exact **4/5/3**, zero mechanisms | no |
 | DEC-21 | version-aware ARL current-topics route | yes | exact **82** unique IDs, zero MURI; joined-delimiter regression pinned | no |
 | DEC-22 | Genesis 21 challenge groups + 98 focus subjects | yes | explicit dropdown; 98/98 top 50, 97/98 top 10, median rank 1 | no — user accepted storage; display is P10 |
