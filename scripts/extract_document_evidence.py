@@ -1727,7 +1727,7 @@ def refresh_subtopics_without_source(
     store, metrics = {}, {
         "attempted": 0,
         "with_subtopics": 0,
-        "remaining": 0,
+        "remaining_update_count": 0,
         "agency_url_tried": 0,
     }
     if not enabled:
@@ -1735,8 +1735,9 @@ def refresh_subtopics_without_source(
     from scripts import subtopic_sources
 
     candidates = subtopic_only_candidates(records, enabled=True)
-    metrics["remaining"] = max(
-        0, len(candidates) - min(len(candidates), max_documents)
+    metrics["remaining_update_count"] = max(
+        0,
+        len(candidates) - min(len(candidates), max_documents),
     )
     fetched_at = iso_utc(now)
     for opportunity_id, record in candidates[:max_documents]:
@@ -2084,6 +2085,7 @@ def enrich_document_evidence(
     cache,
     *,
     max_documents=45,
+    max_subtopic_documents=45,
     request_delay=0.2,
     recheck_days=14,
     fetcher=download_document,
@@ -2260,7 +2262,7 @@ def enrich_document_evidence(
         # near it: a separate store, a separate cache key, no record entry.
         subtopic_only, subtopic_only_metrics = refresh_subtopics_without_source(
             records,
-            max_documents=max_documents,
+            max_documents=max_subtopic_documents,
             fetcher=fetcher,
             now=now,
             request_delay=request_delay,
@@ -2294,7 +2296,19 @@ def parse_args(argv=None):
         "--max-documents",
         type=int,
         default=45,
-        help="Maximum new or due official sources to retrieve (default: 45).",
+        help=(
+            "Maximum new or due official sources to retrieve in the "
+            "administrative evidence pass (default: 45)."
+        ),
+    )
+    parser.add_argument(
+        "--max-subtopic-documents",
+        type=int,
+        default=45,
+        help=(
+            "Maximum sources to retrieve in the separate subtopic-only pass "
+            "when --enable-subtopics is set (default: 45)."
+        ),
     )
     parser.add_argument(
         "--request-delay",
@@ -2325,6 +2339,8 @@ def parse_args(argv=None):
     args = parser.parse_args(argv)
     if args.max_documents < 0:
         parser.error("--max-documents must be non-negative")
+    if args.max_subtopic_documents < 0:
+        parser.error("--max-subtopic-documents must be non-negative")
     if args.request_delay < 0:
         parser.error("--request-delay must be non-negative")
     if args.recheck_days < 1:
@@ -2340,6 +2356,7 @@ def main(argv=None):
         catalog,
         cache,
         max_documents=args.max_documents,
+        max_subtopic_documents=args.max_subtopic_documents,
         request_delay=args.request_delay,
         recheck_days=args.recheck_days,
         enable_subtopics=args.enable_subtopics,

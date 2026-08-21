@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta, timezone
 import io
 import unittest
+from unittest import mock
 
 from pypdf import PdfWriter
 
@@ -11,6 +12,7 @@ from scripts.extract_document_evidence import (
     extract_containers,
     extract_document_facts,
     merge_document_entry,
+    parse_args,
     refresh_subtopics_without_source,
     source_for_record,
     source_signature,
@@ -452,6 +454,79 @@ class SubtopicOnlyCandidateTests(unittest.TestCase):
             now=datetime(2026, 7, 26, 12, tzinfo=timezone.utc),
         )
         self.assertNotIn("subtopic_only", cache)
+
+
+class DocumentBudgetTests(unittest.TestCase):
+    def declined_records(self, count):
+        records = []
+        for index in range(count):
+            record = base_record()
+            record["opportunity_id"] = f"declined-{index}"
+            record["opportunity_number"] = f"DECLINED-{index}"
+            record["primary_document_url"] = None
+            record["primary_document_name"] = None
+            record["funding_opportunity_url"] = (
+                f"https://agency.example/program/{index}"
+            )
+            record["award_floor"] = 100000
+            records.append(record)
+        return records
+
+    def test_default_budgets_preserve_both_established_pass_limits(self):
+        args = parse_args([])
+        self.assertEqual(args.max_documents, 45)
+        self.assertEqual(args.max_subtopic_documents, 45)
+
+    def test_explicit_budgets_are_independent(self):
+        args = parse_args([
+            "--max-documents", "3",
+            "--max-subtopic-documents", "7",
+        ])
+        self.assertEqual(args.max_documents, 3)
+        self.assertEqual(args.max_subtopic_documents, 7)
+
+    def test_zero_subtopic_budget_attempts_nothing_and_reports_all_remaining(self):
+        calls = []
+        records = self.declined_records(3)
+        with mock.patch(
+            "scripts.extract_document_evidence.subtopic_fields",
+            return_value={"subtopics": []},
+        ):
+            store, metrics = refresh_subtopics_without_source(
+                records,
+                max_documents=0,
+                fetcher=lambda url, headers: calls.append(url),
+                now=datetime(2026, 7, 26, 12, tzinfo=timezone.utc),
+                enabled=True,
+            )
+        self.assertEqual(store, {})
+        self.assertEqual(calls, [])
+        self.assertEqual(metrics["attempted"], 0)
+        self.assertEqual(metrics["remaining_update_count"], 3)
+
+    def test_small_subtopic_budget_is_honored_and_accounted_separately(self):
+        calls = []
+        records = self.declined_records(3)
+
+        def fetcher(url, _headers):
+            calls.append(url)
+            return response()
+
+        with mock.patch(
+            "scripts.extract_document_evidence.subtopic_fields",
+            return_value={"subtopics": []},
+        ):
+            store, metrics = refresh_subtopics_without_source(
+                records,
+                max_documents=2,
+                fetcher=fetcher,
+                now=datetime(2026, 7, 26, 12, tzinfo=timezone.utc),
+                enabled=True,
+            )
+        self.assertEqual(len(store), 2)
+        self.assertEqual(len(calls), 2)
+        self.assertEqual(metrics["attempted"], 2)
+        self.assertEqual(metrics["remaining_update_count"], 1)
 
 
 if __name__ == "__main__":
