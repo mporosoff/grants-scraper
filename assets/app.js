@@ -1221,6 +1221,7 @@
       if (!Number.isInteger(index)) return [];
       const record = catalog.opportunities[index];
       if (rejectedNofoIds.has(row.id) || !recordPassesFilters(record)) return [];
+      const displayBestChild = row.bestChild || null;
       const activeBestChild = row.childDroveMatch ? row.bestChild : null;
       const bestChildIndex = activeBestChild
         ? childCatalog.opportunities.indexOf(activeBestChild.record)
@@ -1254,9 +1255,9 @@
         parentDirectEvidence: row.parentDirectEvidence,
         parentProfileEvidence: row.parentProfileEvidence,
         profileSources,
-        bestChild: activeBestChild,
-        matchingChildren: row.childDroveMatch ? row.matchingChildren : [],
-        matchingChildCount: row.childDroveMatch ? row.matchingChildCount : 0,
+        bestChild: displayBestChild,
+        matchingChildren: row.matchingChildren,
+        matchingChildCount: row.matchingChildCount,
       }];
     });
     return {
@@ -2011,6 +2012,7 @@
     const reasons = MATCH_EXPLAIN_API.build({
       parent: {
         record,
+        broad: isBroadOpportunity(record),
         directEvidence: match.parentDirectEvidence,
         profileEvidence: match.parentProfileEvidence,
       },
@@ -2019,7 +2021,7 @@
       eligibility: match.eligibility,
     });
     if (!reasons.length) return "";
-    return `<details class="match-explanation"><summary>Why this match</summary><ul>${reasons.map(reason => `<li>${escapeHtml(reason)}</li>`).join("")}</ul></details>`;
+    return `<details class="match-explanation"><summary>Why this matched</summary><ul>${reasons.map(reason => `<li>${escapeHtml(reason)}</li>`).join("")}</ul></details>`;
   }
 
   function resultCard(match, resultPosition) {
@@ -2097,7 +2099,6 @@
       ${flags ? `<div class="card-alerts" aria-label="Important opportunity flags">${flags}</div>` : ""}
       ${amendmentNotice(record)}
       ${matchedTopics(match)}
-      ${matchExplanation(match, record)}
       <div class="key-facts">
         <div class="key-fact"><span>${escapeHtml(deadline.label)}</span><strong>${escapeHtml(deadline.value)}</strong><small>${escapeHtml(deadline.detail)}</small></div>
         <div class="key-fact"><span>Per-award amount</span><strong>${escapeHtml(perAward)}</strong><small>${record.total_program_funding ? `Program total ${escapeHtml(programFunding)}` : escapeHtml(fundingEvidenceLabel(record))}</small></div>
@@ -2144,6 +2145,7 @@
         <summary>Rate this result</summary>
         ${feedbackControls(record)}
       </details>` : ""}
+      ${matchExplanation(match, record)}
     </article>`;
   }
 

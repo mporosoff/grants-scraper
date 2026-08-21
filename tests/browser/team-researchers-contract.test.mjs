@@ -444,6 +444,8 @@ test("presents one interactive full-team list with graded themes and broad-call 
   assert.match(teamPage, /fit every selected researcher/);
   assert.match(teamPage, /Adding a researcher can only narrow these results/);
   assert.match(teamPage, /Team themes · click to steer the search/);
+  assert.match(teamPage, /function teamChips\(fits, themeLabels\)/);
+  assert.match(teamPage, /teamChips\(entry\.fits, d\.themeLabels\)/);
   assert.match(teamPage, /Blue = shared research areas/);
   assert.match(teamPage, /Purple = complementary bridge themes/);
   assert.match(teamPage, /Broad \/ umbrella call/);

@@ -88,8 +88,8 @@
         <div class="help-feature-list">
           <div><strong>Save</strong><span>Keep promising opportunities on this device.</span></div>
           <div><strong>Calendar</strong><span>Export deadlines to an ICS calendar file.</span></div>
-          <div><strong>Matched topics</strong><span>See the few specific solicitation topics that caused an umbrella opportunity to match; expand the list only when needed.</span></div>
-          <div><strong>Why this match</strong><span>Open a short evidence-based explanation when that feature is enabled.</span></div>
+          <div><strong>Matched topics</strong><span>See the specific solicitation topics or sub-programs that matched your search; expand the list only when needed.</span></div>
+          <div><strong>Why this matched</strong><span>Open a short evidence-based explanation when that feature is enabled.</span></div>
           <div><strong>Export CSV</strong><span>Download the current result set for further review.</span></div>
           <div><strong>Official source</strong><span>Open the agency notice, FOA, or Grants.gov record.</span></div>
           <div><strong>Ask AI</strong><span>Discuss one opportunity or the leading results after connecting a provider.</span></div>

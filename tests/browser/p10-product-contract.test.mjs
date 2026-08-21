@@ -99,6 +99,68 @@ test("explanations are evidence-only, source-aware, and capped at three", () => 
   assert.doesNotMatch(reasons.join(" "), /CV|ORCID|career-stage/);
 });
 
+test("broad-call explanations prefer a matched sub-program or notice program area", () => {
+  const context = { globalThis: {} };
+  vm.runInNewContext(explainSource, context);
+  const explain = context.globalThis.FUNDING_MATCH_EXPLAIN;
+  const parent = {
+    broad: true,
+    record: {
+      title: "DOE Office of Science umbrella",
+      document_program_areas: ["catalysis", "chemical sciences"],
+    },
+    directEvidence: {
+      groups: [{
+        source: "catalyst",
+        contribution: 2,
+        matchedTerms: ["catalysi"],
+        matchedDisplayTerms: ["Catalysis"],
+      }],
+    },
+  };
+
+  assert.equal(
+    explain.build({ parent })[0],
+    "Matched notice program area: Catalysis.",
+  );
+  assert.equal(
+    explain.build({
+      parent,
+      bestChild: {
+        record: { title: "(q) Catalysis Science" },
+        directEvidence: parent.directEvidence,
+      },
+    })[0],
+    "Matched sub-program: (q) Catalysis Science (Catalysis).",
+  );
+  assert.deepEqual(
+    Array.from(explain.matchedProgramAreas({
+      groups: [{ source: "science", matchedTerms: ["science"] }],
+    }, parent.record)),
+    [],
+    "a generic word must not invent a specific program-area explanation",
+  );
+});
+
+test("match explanations render at the bottom of each result card", () => {
+  const cardStart = appSource.indexOf("function resultCard(match, resultPosition)");
+  const cardEnd = appSource.indexOf("function currentModel()", cardStart);
+  const cardSource = appSource.slice(cardStart, cardEnd);
+  assert.match(appSource, /Why this matched/);
+  assert.doesNotMatch(appSource, /Why this match<\/summary>/);
+  assert.ok(
+    cardSource.indexOf("matchExplanation(match, record)")
+      > cardSource.indexOf("class=\"card-actions\""),
+    "the explanation belongs after the card actions",
+  );
+  assert.match(appSource, /bestChild: displayBestChild/);
+  assert.match(appSource, /matchingChildren: row\.matchingChildren/);
+  assert.doesNotMatch(
+    appSource,
+    /matchingChildren: row\.childDroveMatch \? row\.matchingChildren : \[\]/,
+  );
+});
+
 test("normal UI has no compare or rating surface and reviewer mode stays dedicated", () => {
   assert.doesNotMatch(mainHtml, /id="compare-panel"|data-compare=|Help improve Funding Finder/);
   assert.doesNotMatch(mainHtml, /id="use-preferences"|assets\/preferences\.js/);
@@ -126,5 +188,6 @@ test("Team Matcher uses the shared rollup and a restrained default view", () => 
   assert.match(teamHtml, /fits\.slice\(0, 3\)/);
   assert.match(teamHtml, /parts\.slice\(0, maximum \|\| 2\)/);
   assert.match(teamHtml, /teamTopicSummary\(d\.topicMatches\)/);
+  assert.match(teamHtml, /teamChips\(entry\.fits, d\.themeLabels\)/);
   assert.match(teamHtml, /APP_CONFIG\.flags\.subtopics/);
 });

@@ -32,7 +32,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/faculty-pairing-180.png?v=20260815" />
 <link rel="manifest" href="./assets/icons/faculty-pairing.webmanifest?v=20260815" />
 <link rel="stylesheet" href="./assets/brand.css?v=20260812" />
-<link rel="stylesheet" href="./assets/app.css?v=app-1.1.0" />
+<link rel="stylesheet" href="./assets/app.css?v=match-ux-20260821" />
 <link rel="stylesheet" href="./assets/site-nav.css?v=brand-2026-08-12" />
 <style>
   :root{
@@ -135,7 +135,7 @@
   .team-result-card .team{margin-top:0;}
   .team-result-card .team-overlap details{margin-top:8px;}
   .team-result-card .team-overlap summary{width:max-content;color:var(--blue-dark);font-size:.72rem;font-weight:750;cursor:pointer;}
-  .team-result-card .matched-themes{margin:8px 0 0;}
+  .team-result-card .matched-themes{margin:10px 0 0;padding-top:9px;border-top:1px solid #d4dfeb;}
   .team-result-card .scope-note{margin:9px 0 0;}
   .team-result-card .detail-grid dt{color:#617087;font-size:.68rem;font-weight:850;text-transform:uppercase;}
   .team-result-card .detail-grid dd{overflow-wrap:anywhere;}
@@ -267,7 +267,7 @@
 <script src="assets/orcid.js?v=orcid-2026-08-13"></script>
 <script src="assets/team-researchers.js?v=acronym-2026-08-13"></script>
 <script src="assets/team-matcher.js?v=audit-2026-08-13"></script>
-<script src="assets/site-help.js?v=app-1.1.0"></script>
+<script src="assets/site-help.js?v=match-ux-20260821"></script>
 <script src="assets/site-nav.js?v=brand-2026-08-12"></script>
 <script>
 (function () {
@@ -423,7 +423,7 @@
       listingDateValue(b.d.listing_date) - listingDateValue(a.d.listing_date) ||
       b.totalN - a.totalN || b.sumScore - a.sumScore || a.d.title.localeCompare(b.d.title);
   }
-  function teamChips(fits) {
+  function teamChips(fits, themeLabels) {
     var renderFit = function (f) {
       var why = reasonText(f);
       return '<div class="pi"><span class="name">' + esc(last(f.name)) + "</span>" +
@@ -433,9 +433,12 @@
     };
     var visible = fits.slice(0, 3);
     var remaining = fits.slice(3);
+    var themes = themeLabels && themeLabels.length
+      ? '<p class="matched-themes">Team themes: ' + esc(themeLabels.slice(0, 3).join(" · ")) + (themeLabels.length > 3 ? " · more" : "") + "</p>"
+      : "";
     return '<div class="team-overlap"><strong>Research overlap across this team</strong><div class="team">' + visible.map(renderFit).join("") + "</div>" +
       (remaining.length ? '<details><summary>Show ' + remaining.length + ' more researcher</summary><div class="team">' + remaining.map(renderFit).join("") + "</div></details>" : "") +
-      "</div>";
+      themes + "</div>";
   }
 
   function teamTopicSummary(topics) {
@@ -572,9 +575,8 @@
         '<div class="key-fact"><span>Per-award amount</span><strong>' + esc(perAwardLabel(record)) + '</strong><small>' + (record.total_program_funding ? "Program total " + esc(programFundingLabel(record)) : "Verify in official notice") + "</small></div>" +
         '<div class="key-fact"><span>Eligibility</span><strong>' + esc(eligibilityLabel(record)) + "</strong><small>Catalog applicant types</small></div>" +
       "</div>" +
-      teamChips(entry.fits) +
+      teamChips(entry.fits, d.themeLabels) +
       teamTopicSummary(d.topicMatches) +
-      (d.themeLabels && d.themeLabels.length ? '<p class="matched-themes">Team themes: ' + esc(d.themeLabels.slice(0, 3).join(" · ")) + (d.themeLabels.length > 3 ? " · more" : "") + "</p>" : "") +
       (d.scopeLabels && d.scopeLabels.length ? '<p class="scope-note"><strong>Broad sponsor-scope signal:</strong> ' + esc(d.scopeLabels.join(" · ")) + ". Verify the specific research fit in the official notice.</p>" : "") +
       '<details class="record-details"><summary><span class="description description-preview">' + esc(String(record.description || "No synopsis was included in the catalog.").slice(0, 300)) + '</span><span class="details-cue"><span class="cue-more">Show full description &amp; details</span><span class="cue-less">Show less</span></span></summary>' +
       '<div class="details-body"><div class="full-description">' + descriptionHtml(record.description) + '</div><dl class="detail-grid">' +

@@ -164,7 +164,7 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(css, /\.full-description li \+ li/);
   assert.doesNotMatch(script, /Prioritized from your ratings/);
   assert.doesNotMatch(script, /Verify current status/);
-  assert.match(script, /Why this match/);
+  assert.match(script, /Why this matched/);
   assert.doesNotMatch(script, /Official notice analyzed/);
   assert.doesNotMatch(css, /\.card-contact|\.evidence-summary/);
   assert.match(css, /\.match-explanation/);
