@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-21T17:17:48Z",
+  "generated_at": "2026-08-21T17:45:12Z",
   "retention_days": 90,
   "events": [
     {
       "id": "ec05272902198c87177b",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-21T17:11:21.596828Z",
+      "changed_at": "2026-08-21T17:38:11.134572Z",
       "opportunity_id": "363546",
       "detail": "Deadline 2026-09-20",
       "record": {
@@ -59,7 +59,7 @@
       "id": "e68568979507389a6aa5",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-21T17:11:21.596828Z",
+      "changed_at": "2026-08-21T17:38:11.134572Z",
       "opportunity_id": "363672",
       "detail": "Deadline 2026-09-20",
       "record": {
