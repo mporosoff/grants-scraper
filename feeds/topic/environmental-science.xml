@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml</id>
-  <updated>2026-08-21T16:48:00Z</updated>
+  <updated>2026-08-21T17:17:39Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
@@ -406,6 +406,7 @@
     <updated>2026-08-17T00:00:00Z</updated>
     <author><name>Environmental Protection Agency</name></author>
     <category term="Environmental science"/>
+    <category term="Water"/>
     <summary>Environmental Protection Agency | Closes 2026-11-09 | The purpose of this Notice of Funding Opportunity (NOFO) is to support eligible Tribes and intertribal consortia to implement approved Nonpoint Source (NPS) management programs developed pursuant to CWA Section 319(b)(1). The Clean Water Act (CWA) Section 319(h) authorizes the EPA to award grants to eligible Tribes and intertribal consortia to implement approved NPS management programs. This NOFO …</summary>
   </entry>
   <entry>
@@ -419,6 +420,9 @@
     <category term="Manufacturing"/>
     <category term="Materials science"/>
     <category term="Technology development"/>
+    <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>U.S. National Science Foundation | Closes 2076-08-18 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
   </entry>
   <entry>

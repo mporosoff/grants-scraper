@@ -4,8 +4,24 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/changes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/changes.xml</id>
-  <updated>2026-08-21T16:48:09Z</updated>
+  <updated>2026-08-21T17:17:48Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Closing soon: Women's Initiative for Screening and Health (WISH)</title>
+    <link href="https://www.grants.gov/search-results-detail/363546"/>
+    <id>urn:funding-finder:change:ec05272902198c87177b</id>
+    <updated>2026-08-21T17:11:21.596828Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-20</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Cooperative Agreement for Affiliated Partner with the Hawaii- Pacific Islands Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/363672"/>
+    <id>urn:funding-finder:change:e68568979507389a6aa5</id>
+    <updated>2026-08-21T17:11:21.596828Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-20</summary>
+  </entry>
   <entry>
     <title>Opportunity amended: Expanding global health security through local partnerships in Indonesia</title>
     <link href="https://www.grants.gov/search-results-detail/360338"/>
@@ -103,14 +119,6 @@
     <summary>First appeared in the public catalog</summary>
   </entry>
   <entry>
-    <title>Closing soon: Women's Initiative for Screening and Health (WISH)</title>
-    <link href="https://www.grants.gov/search-results-detail/363546"/>
-    <id>urn:funding-finder:change:ec05272902198c87177b</id>
-    <updated>2026-08-21T16:38:03.218829Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-20</summary>
-  </entry>
-  <entry>
     <title>Opportunity amended: BJA FY 2026 Daniel Anderl Judicial Security and Privacy Program</title>
     <link href="https://www.grants.gov/search-results-detail/363296"/>
     <id>urn:funding-finder:change:eae5361d86473d09f4a0</id>
@@ -133,14 +141,6 @@
     <updated>2026-08-21T16:38:03.218829Z</updated>
     <category term="new"/>
     <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Cooperative Agreement for Affiliated Partner with the Hawaii- Pacific Islands Cooperative Ecosystem Studies Unit (CESU)</title>
-    <link href="https://www.grants.gov/search-results-detail/363672"/>
-    <id>urn:funding-finder:change:e68568979507389a6aa5</id>
-    <updated>2026-08-21T16:38:03.218829Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-20</summary>
   </entry>
   <entry>
     <title>Closing soon: FY26-22-Baltimore Penn Station Facility Improvements</title>
