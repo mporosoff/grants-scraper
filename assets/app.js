@@ -13,10 +13,13 @@
   const NEW_RELEVANT_MIN_SCORE_RATIO = .2;
   const NEW_RELEVANT_MIN_BOOST = 8;
   const PROMPT_VERSION = "result-aware-chat-v1";
-  const APP_VERSION = "search-relevance-v6";
+  const APP_CONFIG = globalThis.FUNDING_FINDER_APP;
+  const APP_VERSION = APP_CONFIG?.release?.version || "1.1.0";
   const CANONICAL_URL = "https://mporosoff.github.io/grants-scraper/";
   const SEARCH_QUERY = globalThis.FUNDING_SEARCH_QUERY;
   const RETRIEVAL_API = globalThis.FUNDING_RETRIEVAL;
+  const SUBTOPIC_API = globalThis.FUNDING_SUBTOPICS;
+  const MATCH_EXPLAIN_API = globalThis.FUNDING_MATCH_EXPLAIN;
   const ORCID_API = globalThis.FUNDING_ORCID;
   const PROFILE_API = globalThis.FUNDING_PROFILE;
   const PROFILE_RANKING_API = globalThis.FUNDING_PROFILE_RANKING;
@@ -24,8 +27,8 @@
   const REVIEW_API = globalThis.FUNDING_REVIEW;
   const CREDENTIAL_API = globalThis.FUNDING_CREDENTIALS;
   const CHAT_UI = globalThis.FUNDING_CHAT_UI;
-  const PREFERENCES_API = globalThis.FUNDING_PREFERENCES;
   const SAVED_API = globalThis.FUNDING_SAVED;
+  const EVALUATION_MODE = new URLSearchParams(location.search).get("evaluation") === "1";
   const BROAD_OPPORTUNITY_RE = /broad agency announcement|\bbaa\b|continuation of solicitation|office of science financial assistance|long[\s-]?range|research announcement|\broses\b|omnibus|unsolicited proposal|open topic|financial assistance program|annual program statement|office[ -]wide|open[ -]scope solicitation/i;
 
   // --- Anonymous usage logging (Cloudflare Worker + KV) --------------------
@@ -121,12 +124,9 @@
     sort: "deadline",
     filters: Object.fromEntries(Object.keys(FACETS).map(name => [name, new Set()])),
     matches: [],
-    personalize: false,
-    preferenceModel: null,
     searchDiagnostics: null,
     savedItems: [],
     savedIds: new Set(),
-    compareIds: new Set(),
     runtimeCatalog: {
       records: [],
       facets: {},
@@ -179,6 +179,8 @@
   };
   let chatReturnFocus = null;
   let searchEngine = null;
+  let childCatalog = null;
+  let childSearchEngine = null;
 
   function escapeHtml(value) {
     return String(value ?? "")
@@ -620,12 +622,49 @@
   }
 
   function profileTermQuery(profile, options = {}) {
+    return profileTermQueryFor(profile, catalog, searchEngine, options);
+  }
+
+  function profileTermQueryFor(profile, targetCatalog, engine, options = {}) {
     return PROFILE_RANKING_API.buildTermQuery(profile, {
-      catalog,
+      catalog: targetCatalog,
       tokenize,
-      expandGroups: (value, options) => searchEngine.expandGroups(value, options),
+      expandGroups: (value, expandOptions) => engine.expandGroups(value, expandOptions),
       ...options,
     });
+  }
+
+  function emptyScoreResult(count) {
+    return {
+      scores: new Float64Array(count),
+      lexicalScores: new Float64Array(count),
+      hasTerms: false,
+      evidence: null,
+    };
+  }
+
+  function scoreProfileSources(targetCatalog, engine) {
+    if (!APP_CONFIG?.flags?.matchExplanations || !state.profile.active) return {};
+    const profile = currentProfile();
+    const sources = {
+      manual: {
+        research_description: profile.research_description,
+        expertise_keywords: profile.expertise_keywords,
+      },
+      cv: { cv_text: profile.cv_text },
+      orcid: { orcid_text: profile.orcid_text },
+    };
+    return Object.fromEntries(Object.entries(sources).flatMap(([source, values]) => {
+      if (!Object.values(values).some(value => String(value || "").trim())) return [];
+      const built = profileTermQueryFor(values, targetCatalog, engine);
+      if (!built.query) return [];
+      return [[source, engine.score(built.query, {
+        semantic: false,
+        coverage: false,
+        minimumCoverage: 0,
+        evidence: true,
+      })]];
+    }));
   }
 
   function applicantFitBonus(record, context) {
@@ -659,7 +698,6 @@
       early_career: $("flag-early-career").checked,
       no_cost_share: $("flag-no-cost-share").checked,
       profile_search_active: $("use-profile").checked,
-      personalize: $("use-preferences")?.checked || false,
       ai_provider: $("k-provider").value,
       sort: $("sort").value,
       facets: Object.fromEntries(
@@ -750,23 +788,6 @@
     $("remove-orcid").classList.toggle("hidden", !profile.orcid_text);
   }
 
-  function mergeExpertiseKeywords(existing, additions) {
-    const values = [
-      ...String(existing || "").split(/[,;\n]+/),
-      ...(Array.isArray(additions) ? additions : []),
-    ];
-    const seen = new Set();
-    const output = [];
-    for (const raw of values) {
-      const value = String(raw || "").replace(/\s+/g, " ").trim();
-      const key = value.toLowerCase();
-      if (!value || seen.has(key)) continue;
-      seen.add(key);
-      output.push(value);
-    }
-    return output.join(", ").slice(0, 4_000);
-  }
-
   async function importOrcidProfile() {
     const button = $("import-orcid");
     button.disabled = true;
@@ -774,10 +795,6 @@
     try {
       const imported = await ORCID_API.fetchProfile($("orcid-id").value);
       $("orcid-id").value = imported.orcidId;
-      $("expertise-keywords").value = mergeExpertiseKeywords(
-        $("expertise-keywords").value,
-        imported.keywords.slice(0, 8),
-      );
       state.profile.value = PROFILE_API.sanitizeProfile({
         ...currentProfile(),
         orcid_id: imported.orcidId,
@@ -863,8 +880,6 @@
     $("flag-no-cost-share").checked = value.no_cost_share;
     $("k-provider").value = value.ai_provider;
     $("sort").value = value.sort;
-    if ($("use-preferences")) $("use-preferences").checked = value.personalize;
-    state.personalize = value.personalize;
     for (const name of Object.keys(FACETS)) {
       const validValues = new Set(Object.keys(catalog.facets[name] || {}));
       state.filters[name] = new Set(
@@ -1037,53 +1052,18 @@
     return matches;
   }
 
-  function preferenceTrainingModel() {
-    if (!PREFERENCES_API) return null;
-    const labeled = [];
-    for (const [id, entry] of Object.entries(state.feedback)) {
-      if (!entry || !entry.label) continue;
-      const record = catalog.opportunities.find(item => recordId(item) === id);
-      if (record) labeled.push({ label: entry.label, record });
-    }
-    return PREFERENCES_API.buildModel(labeled);
-  }
-
-  function buildPreferenceModel() {
-    if (!state.personalize) return null;
-    const model = preferenceTrainingModel();
-    return model?.ready ? model : null;
-  }
-
-  function renderPreferenceStatus() {
-    const status = $("preference-status");
-    if (!status) return;
-    const model = preferenceTrainingModel();
-    const used = model?.used || 0;
-    const remaining = Math.max(0, (PREFERENCES_API?.MIN_LABELS || 3) - used);
-    if (remaining) {
-      status.textContent =
-        `Rate ${remaining} more ${remaining === 1 ? "opportunity" : "opportunities"} to personalize.`;
-      return;
-    }
-    status.textContent = state.personalize
-      ? `Prioritizing Relevance using ${used} local ratings.`
-      : `${used} local ratings ready; turn this on to personalize.`;
-  }
-
-  function computeMatches(query, sortMode = state.sort, retrievalOptions = {}) {
-    const direct = hybridScores(query, retrievalOptions);
+  function computeParentMatches(query, sortMode = state.sort, retrievalOptions = {}) {
+    const explain = Boolean(APP_CONFIG?.flags?.matchExplanations);
+    const direct = hybridScores(query, { ...retrievalOptions, evidence: explain });
     const profileOnly = state.profile.active && !direct.hasTerms;
     const profiled = state.profile.active
       ? hybridScores(state.profile.query, {
           semantic: false,
           coverage: false,
           minimumCoverage: 0,
+          evidence: explain,
         })
-      : {
-          scores: new Float64Array(catalog.record_count),
-          lexicalScores: new Float64Array(catalog.record_count),
-          hasTerms: false,
-        };
+      : emptyScoreResult(catalog.record_count);
     const gateTerms = state.profile.admissionTerms.length
       ? state.profile.admissionTerms
       : state.profile.terms;
@@ -1095,11 +1075,11 @@
           semantic: false,
           coverage: false,
           minimumCoverage: PROFILE_RANKING_API.minimumCoverage(gateTerms.length),
+          evidence: explain,
         })
       : profiled;
     const hasTerms = direct.hasTerms || profileGate.hasTerms;
-    const model = buildPreferenceModel();
-    state.preferenceModel = model;
+    const profileSources = scoreProfileSources(catalog, searchEngine);
     const matches = [];
     const rejectedNofoIds = new Set(state.nofo.rejectedIds || []);
     catalog.opportunities.forEach((record, index) => {
@@ -1109,19 +1089,29 @@
       if (!direct.hasTerms && profileGate.hasTerms && profileGate.scores[index] <= 0) return;
       let score = direct.scores[index] * 2 + profiled.scores[index];
       const lexicalScore = direct.lexicalScores[index] * 2 + profiled.lexicalScores[index];
-      if (state.profile.active) {
-        score += applicantFitBonus(record, state.profile.value.applicant_context);
-        score += careerFitBonus(record, state.profile.value.career_stage);
-      }
-      if (model) {
-        const preference = PREFERENCES_API.factor(record, model);
-        score = score
-          ? score * (1 + preference)
-          : preference;
-      }
-      matches.push({ index, score, lexicalScore });
+      const eligibility = state.profile.active
+        ? applicantFitBonus(record, state.profile.value.applicant_context)
+          + careerFitBonus(record, state.profile.value.career_stage)
+        : 0;
+      score += eligibility;
+      matches.push({
+        index,
+        score,
+        lexicalScore,
+        eligibility,
+        parentDirectEvidence: direct.evidence?.[index] || null,
+        parentProfileEvidence: profiled.evidence?.[index] || null,
+        profileSources: Object.fromEntries(Object.entries(profileSources).map(([source, result]) => [
+          source,
+          {
+            score: result.scores[index],
+            evidence: result.evidence?.[index] || null,
+            record,
+          },
+        ])),
+      });
     });
-    if (hasTerms || model) {
+    if (hasTerms) {
       const peakLexicalScore = matches.reduce(
         (maximum, match) => Math.max(maximum, match.lexicalScore),
         0,
@@ -1137,10 +1127,151 @@
       });
     }
     return {
-      matches: sortMatches(matches, hasTerms, sortMode, Boolean(model)),
+      matches: sortMatches(matches, hasTerms, sortMode, false),
       hasTerms,
       diagnostics: direct.diagnostics || null,
     };
+  }
+
+  function computeTopicMatches(query, sortMode = state.sort, retrievalOptions = {}) {
+    const explain = Boolean(APP_CONFIG?.flags?.matchExplanations);
+    const context = state.profile.active ? profileAcronymContext() : "";
+    const directOptions = { ...retrievalOptions, context, evidence: explain };
+    const parentDirect = hybridScores(query, directOptions);
+    const childDirect = childSearchEngine.score(query, directOptions);
+    if (!parentDirect.hasTerms && !state.profile.active) {
+      return computeParentMatches(query, sortMode, retrievalOptions);
+    }
+
+    const parentProfile = state.profile.active
+      ? hybridScores(state.profile.query, {
+          semantic: false,
+          coverage: false,
+          minimumCoverage: 0,
+          evidence: explain,
+        })
+      : emptyScoreResult(catalog.record_count);
+    const childProfileQuery = state.profile.active
+      ? profileTermQueryFor(state.profile.value, childCatalog, childSearchEngine)
+      : { query: "", terms: [] };
+    const childProfile = state.profile.active
+      ? childSearchEngine.score(childProfileQuery.query, {
+          semantic: false,
+          coverage: false,
+          minimumCoverage: 0,
+          evidence: explain,
+        })
+      : emptyScoreResult(childCatalog.opportunities.length);
+
+    const profileOnly = state.profile.active && !parentDirect.hasTerms;
+    let effectiveParentDirect = parentDirect;
+    let effectiveChildDirect = childDirect;
+    if (profileOnly) {
+      const manualParentAdmission = profileTermQuery(
+        state.profile.value,
+        { admissionOnly: true },
+      );
+      const manualChildAdmission = profileTermQueryFor(
+        state.profile.value,
+        childCatalog,
+        childSearchEngine,
+        { admissionOnly: true },
+      );
+      const parentAdmission = manualParentAdmission.terms.length
+        ? manualParentAdmission
+        : profileTermQuery(state.profile.value);
+      const childAdmission = manualChildAdmission.terms.length
+        ? manualChildAdmission
+        : childProfileQuery;
+      effectiveParentDirect = hybridScores(parentAdmission.query, {
+        semantic: false,
+        coverage: false,
+        minimumCoverage: PROFILE_RANKING_API.minimumCoverage(parentAdmission.terms.length),
+        evidence: explain,
+      });
+      effectiveChildDirect = childSearchEngine.score(childAdmission.query, {
+        semantic: false,
+        coverage: false,
+        minimumCoverage: PROFILE_RANKING_API.minimumCoverage(childAdmission.terms.length),
+        evidence: explain,
+      });
+    }
+
+    const eligibilityBonuses = catalog.opportunities.map(record => (
+      state.profile.active
+        ? applicantFitBonus(record, state.profile.value.applicant_context)
+          + careerFitBonus(record, state.profile.value.career_stage)
+        : 0
+    ));
+    const rolled = RETRIEVAL_API.rollupScores({
+      parentCatalog: catalog,
+      childCatalog,
+      parentDirect: effectiveParentDirect,
+      parentProfile,
+      childDirect: effectiveChildDirect,
+      childProfile,
+      eligibilityBonuses,
+    });
+    const parentById = new Map(catalog.opportunities.map((record, index) => [recordId(record), index]));
+    const parentSources = scoreProfileSources(catalog, searchEngine);
+    const childSources = scoreProfileSources(childCatalog, childSearchEngine);
+    const rejectedNofoIds = new Set(state.nofo.rejectedIds || []);
+    const matches = rolled.rows.flatMap(row => {
+      const index = parentById.get(row.id);
+      if (!Number.isInteger(index)) return [];
+      const record = catalog.opportunities[index];
+      if (rejectedNofoIds.has(row.id) || !recordPassesFilters(record)) return [];
+      const activeBestChild = row.childDroveMatch ? row.bestChild : null;
+      const bestChildIndex = activeBestChild
+        ? childCatalog.opportunities.indexOf(activeBestChild.record)
+        : -1;
+      const profileSources = Object.fromEntries(
+        ["manual", "cv", "orcid"].map(source => {
+          const parentResult = parentSources[source];
+          const childResult = childSources[source];
+          const parentScore = Number(parentResult?.scores?.[index] || 0);
+          const childScore = bestChildIndex >= 0
+            ? Number(childResult?.scores?.[bestChildIndex] || 0)
+            : 0;
+          return [source, childScore > parentScore
+            ? {
+                score: childScore,
+                evidence: childResult?.evidence?.[bestChildIndex] || null,
+                record: activeBestChild?.record,
+              }
+            : {
+                score: parentScore,
+                evidence: parentResult?.evidence?.[index] || null,
+                record,
+              }];
+        }),
+      );
+      return [{
+        index,
+        score: row.score,
+        lexicalScore: row.relevance,
+        eligibility: eligibilityBonuses[index],
+        parentDirectEvidence: row.parentDirectEvidence,
+        parentProfileEvidence: row.parentProfileEvidence,
+        profileSources,
+        bestChild: activeBestChild,
+        matchingChildren: row.childDroveMatch ? row.matchingChildren : [],
+        matchingChildCount: row.childDroveMatch ? row.matchingChildCount : 0,
+      }];
+    });
+    return {
+      matches: sortMatches(matches, true, sortMode, false),
+      hasTerms: true,
+      diagnostics: parentDirect.diagnostics || null,
+      scales: rolled.scales,
+    };
+  }
+
+  function computeMatches(query, sortMode = state.sort, retrievalOptions = {}) {
+    if (APP_CONFIG?.flags?.subtopics && childSearchEngine) {
+      return computeTopicMatches(query, sortMode, retrievalOptions);
+    }
+    return computeParentMatches(query, sortMode, retrievalOptions);
   }
 
   function currentDisplayMatches() {
@@ -1363,9 +1494,8 @@
       return;
     }
     state.searched = true;
-    const personalized = state.personalize && preferenceTrainingModel()?.ready;
     $("sort").value =
-      $("query").value.trim() || state.profile.active || personalized
+      $("query").value.trim() || state.profile.active
         ? "relevance"
         : "deadline";
     recordDeploymentUsage(state.profile.active ? "profile_searches" : "searches");
@@ -1412,8 +1542,7 @@
     $("use-profile").checked = false;
     state.profile.active = false;
     resetFilterControls();
-    const personalized = state.personalize && preferenceTrainingModel()?.ready;
-    $("sort").value = personalized ? "relevance" : "deadline";
+    $("sort").value = "deadline";
     state.searched = true;
     recordDeploymentUsage("searches");
     logUsage("browse-all");
@@ -1442,9 +1571,8 @@
     state.profile.active = $("use-profile").checked && profileHasContent();
     const nextQuery = $("query").value.trim();
     if (autoSort && nextQuery !== state.query) {
-      const personalized = state.personalize && preferenceTrainingModel()?.ready;
       $("sort").value =
-        nextQuery || state.profile.active || personalized
+        nextQuery || state.profile.active
           ? "relevance"
           : "deadline";
     }
@@ -1816,7 +1944,7 @@
         `<option value="${escapeAttribute(value)}"${entry.reason === value ? " selected" : ""}>${escapeHtml(label)}</option>`)
       .join("");
     return `<div class="result-feedback" aria-label="Rate this funding opportunity">
-      <span>Rate this result to improve future searches</span>
+      <span>Rate this result for the evaluation pilot</span>
       <div class="feedback-buttons feedback-grades">
         ${button("not_relevant", "Not a fit")}
         ${button("partial", "Somewhat")}
@@ -1858,6 +1986,40 @@
         <input type="text" maxlength="800" data-source-review-note="${escapeAttribute(id)}" value="${escapeAttribute(entry.note || "")}"${entry.status ? "" : " disabled"} placeholder="Example: LOI date on page 4 was wrong">
       </label>
     </div>`;
+  }
+
+  function matchedTopics(match) {
+    const topics = (match.matchingChildren || [])
+      .filter(item => item?.record?.child_type === "subject");
+    if (!topics.length) return "";
+    const item = topic => {
+      const record = topic.record;
+      const code = record.subtopic_code || record.ordinal_label || "";
+      return `<li><strong>${escapeHtml(record.title)}</strong>${code ? `<span>${escapeHtml(code)}</span>` : ""}</li>`;
+    };
+    const visible = topics.slice(0, 3);
+    const remaining = topics.slice(3);
+    return `<section class="matched-topics" aria-label="Matched opportunity topics">
+      <p class="eyebrow">Matched ${topics.length === 1 ? "topic" : `${topics.length} topics`}</p>
+      <ul>${visible.map(item).join("")}</ul>
+      ${remaining.length ? `<details><summary>Show ${remaining.length} more matched ${remaining.length === 1 ? "topic" : "topics"}</summary><ul>${remaining.map(item).join("")}</ul></details>` : ""}
+    </section>`;
+  }
+
+  function matchExplanation(match, record) {
+    if (!APP_CONFIG?.flags?.matchExplanations || !MATCH_EXPLAIN_API?.build) return "";
+    const reasons = MATCH_EXPLAIN_API.build({
+      parent: {
+        record,
+        directEvidence: match.parentDirectEvidence,
+        profileEvidence: match.parentProfileEvidence,
+      },
+      bestChild: match.bestChild,
+      profileSources: match.profileSources,
+      eligibility: match.eligibility,
+    });
+    if (!reasons.length) return "";
+    return `<details class="match-explanation"><summary>Why this match</summary><ul>${reasons.map(reason => `<li>${escapeHtml(reason)}</li>`).join("")}</ul></details>`;
   }
 
   function resultCard(match, resultPosition) {
@@ -1908,7 +2070,6 @@
       record.document_evidence
       && record.document_evidence_status === "current",
     );
-    const compared = state.compareIds.has(id);
     const listedDate = record.posted_date || record.source_first_seen_date || "";
     const statusClass = record.status === "posted"
       ? "open"
@@ -1935,6 +2096,8 @@
       <p class="agency">${escapeHtml(record.agency || "Agency not listed")}</p>
       ${flags ? `<div class="card-alerts" aria-label="Important opportunity flags">${flags}</div>` : ""}
       ${amendmentNotice(record)}
+      ${matchedTopics(match)}
+      ${matchExplanation(match, record)}
       <div class="key-facts">
         <div class="key-fact"><span>${escapeHtml(deadline.label)}</span><strong>${escapeHtml(deadline.value)}</strong><small>${escapeHtml(deadline.detail)}</small></div>
         <div class="key-fact"><span>Per-award amount</span><strong>${escapeHtml(perAward)}</strong><small>${record.total_program_funding ? `Program total ${escapeHtml(programFunding)}` : escapeHtml(fundingEvidenceLabel(record))}</small></div>
@@ -1975,12 +2138,12 @@
         <button class="source-action" type="button" data-chat-record="${escapeAttribute(id)}">Ask AI</button>
         ${contactAction}
         <button type="button" class="source-action" data-calendar="${escapeAttribute(id)}"${record.close_date ? "" : " disabled"}>Add to calendar</button>
-        <button type="button" class="source-action${compared ? " selected" : ""}" data-compare="${escapeAttribute(id)}" aria-pressed="${compared}">${compared ? "✓ Comparing" : "Compare"}</button>
       </div>
-      <details class="result-feedback-toggle">
+      ${EVALUATION_MODE ? sourceReviewControls(record) : ""}
+      ${EVALUATION_MODE ? `<details class="result-feedback-toggle">
         <summary>Rate this result</summary>
         ${feedbackControls(record)}
-      </details>
+      </details>` : ""}
     </article>`;
   }
 
@@ -2041,15 +2204,6 @@
       $("evaluation-status").textContent = "Rating saved on this device.";
     }
     PROFILE_API.saveFeedback(state.feedback);
-    if (state.personalize && state.searched) {
-      const model = preferenceTrainingModel();
-      if (model?.ready) {
-        state.sort = "relevance";
-        $("sort").value = "relevance";
-      }
-      state.matches = computeMatches(state.query, state.sort).matches;
-      state.page = 1;
-    }
     renderResults();
   }
 
@@ -2338,7 +2492,6 @@
       .join("");
     $("export-evaluation").disabled = !metrics.reviewed;
     $("clear-feedback").disabled = !metrics.reviewed;
-    renderPreferenceStatus();
     const reviewCandidates = $("review-candidates");
     reviewCandidates.classList.toggle(
       "hidden",
@@ -2448,54 +2601,6 @@
     return catalog.opportunities.find(record => recordId(record) === id);
   }
 
-  function toggleCompare(id) {
-    if (state.compareIds.has(id)) {
-      state.compareIds.delete(id);
-    } else if (state.compareIds.size >= 4) {
-      $("search-status").textContent = "You can compare up to four opportunities at once.";
-      return;
-    } else {
-      state.compareIds.add(id);
-    }
-    renderResults();
-  }
-
-  function renderComparePanel() {
-    const panel = $("compare-panel");
-    if (!panel) return;
-    const records = [...state.compareIds]
-      .map(recordById)
-      .filter(record => record && recordIsAvailable(record));
-    state.compareIds = new Set(records.map(recordId));
-    panel.classList.toggle("hidden", records.length === 0);
-    if (!records.length) {
-      panel.innerHTML = "";
-      return;
-    }
-    const rows = [
-      ["Deadline", record => deadlineOverview(record).value],
-      ["Per-award amount", perAwardLabel],
-      ["Eligibility", eligibilityOverview],
-      ["Contact", record => contactOverview(record).label],
-      ["Agency", record => record.agency || "Not listed"],
-      ["Funding instrument", record => (record.funding_instruments || []).join("; ") || "Not listed"],
-    ];
-    panel.innerHTML = `
-      <div class="compare-heading">
-        <div><p class="eyebrow">Side-by-side review</p><h2 id="compare-heading">Compare ${records.length} opportunities</h2></div>
-        <button type="button" class="text-button" data-clear-compare>Clear comparison</button>
-      </div>
-      <div class="compare-scroll"><table>
-        <thead><tr><th scope="col">Field</th>${records.map(record => {
-          const url = officialActions(record).url;
-          return `<th scope="col">${url ? `<a href="${escapeAttribute(url)}" target="_blank" rel="noopener">${escapeHtml(truncate(record.title, 80))}</a>` : escapeHtml(truncate(record.title, 80))}<button class="text-button compare-remove" type="button" data-compare="${escapeAttribute(recordId(record))}">Remove</button></th>`;
-        }).join("")}</tr></thead>
-        <tbody>${rows.map(([label, getter]) =>
-          `<tr><th scope="row">${escapeHtml(label)}</th>${records.map(record => `<td>${escapeHtml(getter(record))}</td>`).join("")}</tr>`
-        ).join("")}</tbody>
-      </table></div>`;
-  }
-
   function exportEvaluation() {
     const metrics = feedbackMetrics();
     if (!metrics.reviewed) return;
@@ -2595,38 +2700,6 @@
     renderResults();
   }
 
-  function renderExploration() {
-    const container = $("exploration");
-    if (!container) return;
-    const model = state.preferenceModel;
-    if (!state.searched || !state.personalize || !model || state.ai.active) {
-      container.classList.add("hidden");
-      container.innerHTML = "";
-      return;
-    }
-    const shown = new Set(
-      state.matches.map(match => recordId(catalog.opportunities[match.index])));
-    const candidates = catalog.opportunities.filter(
-      record => recordPassesFilters(record) && !shown.has(recordId(record)));
-    const picks = PREFERENCES_API.selectExploration(model, candidates, 3);
-    if (!picks.length) {
-      container.classList.add("hidden");
-      container.innerHTML = "";
-      return;
-    }
-    container.classList.remove("hidden");
-    container.innerHTML =
-      `<p class="eyebrow">Suggested from your ratings: related opportunities outside your current results</p>`
-      + picks.map(record => {
-        const url = safeUrl(record.detail_page || record.funding_opportunity_url) || "";
-        const why = PREFERENCES_API.explain(record, model);
-        const link = url
-          ? `<a href="${escapeAttribute(url)}" target="_blank" rel="noopener">${escapeHtml(record.title)}</a>`
-          : escapeHtml(record.title);
-        return `<div class="exploration-item">${link}<small>${escapeHtml(record.agency || "")}${why ? ` · matches ${escapeHtml(why.value)}` : ""}</small></div>`;
-      }).join("");
-  }
-
   function paginationItems(currentPage, totalPages) {
     if (totalPages <= 7) {
       return Array.from({ length: totalPages }, (_, index) => index + 1);
@@ -2709,8 +2782,6 @@
       $("open-results-chat").disabled = true;
       updateAiRefineControl();
       closeExpandedChat({ restoreFocus: false });
-      renderComparePanel();
-      renderExploration();
       renderDeploymentReview();
       renderEvaluation();
       return;
@@ -2768,15 +2839,12 @@
         .map((match, index) => resultCard(match, start + index + 1))
         .join("");
     }
-    renderExploration();
-
     renderPagination(totalPages, Boolean(display.length));
     $("export-csv").disabled = !display.length;
     $("export-ics").disabled = !display.some(match =>
       calendarEvents(catalog.opportunities[match.index]).length
     );
     updateAiRefineControl();
-    renderComparePanel();
     renderDeploymentReview();
     renderEvaluation();
     renderChat();
@@ -3825,20 +3893,6 @@
       const pageButton = event.target.closest("[data-page]");
       if (pageButton) goToResultsPage(pageButton.dataset.page);
     });
-    $("use-preferences")?.addEventListener("change", () => {
-      state.personalize = $("use-preferences").checked;
-      PREFERENCES_API.saveEnabled(state.personalize);
-      if (state.personalize && preferenceTrainingModel()?.ready) {
-        state.sort = "relevance";
-        $("sort").value = "relevance";
-      }
-      scheduleProfileSave();
-      if (state.searched) {
-        state.matches = computeMatches(state.query, state.sort).matches;
-        state.page = 1;
-      }
-      renderResults();
-    });
     $("export-ics").addEventListener("click", () => {
       const records = currentDisplayMatches().map(match => catalog.opportunities[match.index]);
       exportCalendar(
@@ -3855,14 +3909,6 @@
       if (calendar) {
         const record = recordById(calendar.dataset.calendar);
         if (record) exportCalendar([record], `funding-deadline-${recordId(record)}.ics`);
-        return;
-      }
-      const compare = event.target.closest("[data-compare]");
-      if (compare) { toggleCompare(compare.dataset.compare); return; }
-      const clearCompare = event.target.closest("[data-clear-compare]");
-      if (clearCompare) {
-        state.compareIds.clear();
-        renderResults();
         return;
       }
       const remove = event.target.closest("[data-remove-saved]");
@@ -4098,7 +4144,6 @@
     $("clear-feedback").addEventListener("click", () => {
       if (!globalThis.confirm("Clear all locally saved opportunity ratings from this device?")) return;
       state.feedback = {};
-      state.preferenceModel = null;
       PROFILE_API.clearFeedback();
       $("evaluation-status").textContent = "All locally saved ratings were cleared.";
       if (state.searched) {
@@ -4131,10 +4176,10 @@
       renderResults();
     });
 
-    $("feedback-tools").addEventListener("toggle", () => {
+    $("evaluation-tools").addEventListener("toggle", () => {
       document.body.classList.toggle(
-        "feedback-mode",
-        $("feedback-tools").open,
+        "evaluation-mode",
+        $("evaluation-tools").open,
       );
     });
 
@@ -4266,7 +4311,7 @@
     });
   }
 
-  function initialize() {
+  async function initialize() {
     try {
       validateCatalog(catalog);
       if (!SEARCH_QUERY?.tokenize || !SEARCH_QUERY?.expandGroups) {
@@ -4276,6 +4321,14 @@
         throw new Error("The hybrid retrieval helper did not load. Refresh the page and try again.");
       }
       searchEngine = RETRIEVAL_API.create(catalog, SEARCH_QUERY);
+      if (APP_CONFIG?.flags?.subtopics) {
+        if (!SUBTOPIC_API?.loadSidecar || !RETRIEVAL_API?.createChildCatalog) {
+          throw new Error("The topic search helper did not load. Refresh the page and try again.");
+        }
+        const sidecar = await SUBTOPIC_API.loadSidecar();
+        childCatalog = RETRIEVAL_API.createChildCatalog(sidecar);
+        childSearchEngine = RETRIEVAL_API.create(childCatalog, SEARCH_QUERY);
+      }
       if (!PROFILE_API?.loadProfile || !PROFILE_API?.extractCv) {
         throw new Error("The local profile module did not load. Refresh the page and try again.");
       }
@@ -4294,9 +4347,6 @@
       if (!CHAT_UI?.renderRichText || !CHAT_UI?.knownResultIds) {
         throw new Error("The chat display module did not load. Refresh the page and try again.");
       }
-      if (!PREFERENCES_API?.buildModel || !PREFERENCES_API?.factor) {
-        throw new Error("The local preference module did not load. Refresh the page and try again.");
-      }
       if (!SAVED_API?.load || !SAVED_API?.toggle) {
         throw new Error("The saved-opportunities module did not load. Refresh the page and try again.");
       }
@@ -4309,6 +4359,7 @@
       state.runtimeCatalog.excluded =
         catalog.opportunities.length - state.runtimeCatalog.records.length;
       state.ready = true;
+      $("evaluation-tools").hidden = !EVALUATION_MODE;
       updateCatalogStatus();
       hydrateStateFromUrl();
       const savedProfile = PROFILE_API.loadProfile();
@@ -4328,15 +4379,8 @@
             : "Saved profile restored but is not currently selected for searching.");
         }
       }
-      if (!hasManagedUrlState()) {
-        const savedPersonalization = PREFERENCES_API.loadEnabled();
-        if (typeof savedPersonalization === "boolean") {
-          state.personalize = savedPersonalization;
-          $("use-preferences").checked = savedPersonalization;
-        }
-      }
       loadProviderKey({ announce: true });
-      state.feedback = PROFILE_API.loadFeedback();
+      state.feedback = EVALUATION_MODE ? PROFILE_API.loadFeedback() : {};
       refreshSavedState(SAVED_API.load());
       renderSaved();
       applyDeploymentReviewToForm(REVIEW_API.loadReview());

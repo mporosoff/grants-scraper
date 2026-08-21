@@ -18,7 +18,10 @@ jobs:
           python-version: "3.13"
           cache: pip
       - run: python -m pip install -r requirements.txt
-      - run: python -m unittest discover -s tests -v
+      - name: Test live product without redrawing closed measurement frames
+        run: python -m tools.run_refresh_validation
+      - name: Verify flag-off output has not drifted
+        run: bash tools/verify_no_drift.sh
 
   browser:
     runs-on: ubuntu-latest
@@ -35,3 +38,7 @@ jobs:
       - run: node --check assets/ai-provider.js
       - run: node --check assets/chat-ui.js
       - run: node --test tests/browser/*.test.mjs
+      - name: Verify retrieval has not regressed on the frozen query set
+        run: node tools/query_baseline.mjs --check
+      - name: Verify frozen P9 cross-corpus scoring prototype
+        run: node tools/p9_scoring_probe.mjs --check

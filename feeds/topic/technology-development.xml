@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-08-21T10:49:44Z</updated>
+  <updated>2026-08-21T17:17:39Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -273,6 +273,79 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>U.S. National Science Foundation | Closes 2076-08-18 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
+  </entry>
+  <entry>
+    <title>2026 SBIR/STTR topics</title>
+    <link href="https://arpa-h.gov/explore-funding/sbir"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Asbir</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Technology development"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Closes 2026-09-11 | Current ARPA-H small business. For Small Businesses | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer',…</summary>
+  </entry>
+  <entry>
+    <title>Systems for Tracking and Resilience in Efficient Agricultural-input Management (STREAM)</title>
+    <link href="https://arpa-h.gov/explore-funding/programs/stream"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Astream</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Technology development"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Closes 2026-09-14 | Current ARPA-H program. STREAM | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wind…</summary>
+  </entry>
+  <entry>
+    <title>Technology InteGrator and AcceleratoR (TIGAR) Exploratory Topic</title>
+    <link href="https://arpa-h.gov/explore-funding/initiatives-and-sprints/tigar"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Atigar</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Technology development"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Closes 2026-09-17 | Current ARPA-H initiative. TIGAR Exploratory Topic | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','…</summary>
+  </entry>
+  <entry>
+    <title>ASCENT-IBO</title>
+    <link href="https://arpa-h.gov/explore-funding/initiatives-and-sprints/ascent-ibo"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Aascent-ibo</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Technology development"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Closes 2026-10-15 | Current ARPA-H initiative. ASCENT-IBO | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'…</summary>
+  </entry>
+  <entry>
+    <title>Fast Assessment of Solutions, Therapeutics, Pharmaceuticals, and Supplies (FASTPASS)</title>
+    <link href="https://arpa-h.gov/explore-funding/programs/fastpass"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Afastpass</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Technology development"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Closes 2026-11-10 | Current ARPA-H program. FASTPASS | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wi…</summary>
+  </entry>
+  <entry>
+    <title>Limited Submission Opportunity: $700,000 - The G. Harold and Leila Y. Mathers Foundation - Research Grant (Spring 2027 Cycle)</title>
+    <link href="http://rochester.infoready4.com/CompetitionSpace/"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Ainfoready-2028504</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Climate change"/>
+    <category term="Infectious disease"/>
+    <category term="Neuroscience"/>
+    <category term="Technology development"/>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2027-02-12 | The Foundation primarily
+supports basic science, ideally with potential translational applications. Examples of current research areas we support include
+immunology, microbiome, structural biology, cellular physiology, cancer biology, genetics, genomics, microbiology and infectious diseases, stem cell biology, and neuroscience. Research areas
+we will not consider for support include Covid-19 relat…</summary>
+  </entry>
+  <entry>
+    <title>Restorative &amp; health-Enhancing Sleep Time (REST)</title>
+    <link href="https://arpa-h.gov/explore-funding/programs/rest"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Arest</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Technology development"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Posted | Current ARPA-H program. REST | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); window…</summary>
   </entry>
   <entry>
     <title>Enhancing and Supporting the Network of American Spaces in Armenia</title>
@@ -602,81 +675,5 @@ a high level of innovation and creativity. The goal is to support the best young
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Technology development"/>
     <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-22 | Summary: The fiscal year 2026 (FY26) Neurofibromatosis Research Program (NFRP) Exploration-Hypothesis Development Award (EHDA) supports the initial exploration of innovative, high-risk, high-gain, and potentially groundbreaking concepts in neurofibromatosis (NF) research. Studies supported by this award mechanism should lay the groundwork for future avenues of scientific investigation. The propose…</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: Growing Great Ideas: Research Education Course in Entrepreneurship and Product Development for Researchers Studying Drug Use, Drug Misuse, and Drug Addiction (UE5 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360561"/>
-    <id>urn:funding-finder:grants-gov:360561</id>
-    <updated>2026-06-23T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2026-10-01 | This notice of funding opportunity (NOFO) seeks to establish a course to equip researchers studying drug use, drug misuse, and drug addiction with the skills, knowledge, and practical tools needed to translate their scientific discoveries into impactful real world solutions. The course is envisioned to focus on building capacity in product development, entrepreneurship, and innovation pathways so …</summary>
-  </entry>
-  <entry>
-    <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
-    <link href="https://www.grants.gov/search-results-detail/362900"/>
-    <id>urn:funding-finder:grants-gov:362900</id>
-    <updated>2026-06-22T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Cybersecurity"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <category term="Data science"/>
-    <category term="Energy"/>
-    <category term="Materials science"/>
-    <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | Project Background, Goals, and Objectives: In an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will lea…</summary>
-  </entry>
-  <entry>
-    <title>GREGoRi Data Coordination and Outreach Center (U01, Clinical Trials Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359279"/>
-    <id>urn:funding-finder:grants-gov:359279</id>
-    <updated>2026-06-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2026-10-30 | The Genomics Research to Elucidate the Genetics of Rare Diseases: innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. The purpose of this Notice of Funding Opportunity is to establish the GREGo…</summary>
-  </entry>
-  <entry>
-    <title>GREGoRi Innovation Projects (U01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359644"/>
-    <id>urn:funding-finder:grants-gov:359644</id>
-    <updated>2026-06-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2026-10-30 | The Genomics Research to Elucidate the Genetics of Rare Diseases: innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. This Notice of Funding Opportunity is intended to stimulate the development…</summary>
-  </entry>
-  <entry>
-    <title>GREGoRi Technology Integration Center (U01, Clinical Trials Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359280"/>
-    <id>urn:funding-finder:grants-gov:359280</id>
-    <updated>2026-06-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2026-10-30 | The Genomics Research to Elucidate the Genetics of Rare Diseases: innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. The purpose of this Notice of Funding Opportunity is to establish the GREGo…</summary>
-  </entry>
-  <entry>
-    <title>DoW Reconstructive Transplant, Concept Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362607"/>
-    <id>urn:funding-finder:grants-gov:362607</id>
-    <updated>2026-06-17T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Technology development"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-16 | Summary: The fiscal year 2026 (FY26) Reconstructive Transplant Research Program (RTRP) Concept Award supports the exploration of highly innovative new concepts or untested theories that address an important problem relevant to reconstructive transplantation. The Concept Award does not support clinical trials. Distinctive Features: · Innovation: Innovative research may introduce a new paradigm, cha…</summary>
-  </entry>
-  <entry>
-    <title>DoW Joint Warfighter Medical, Military Medical Research and Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362857"/>
-    <id>urn:funding-finder:grants-gov:362857</id>
-    <updated>2026-06-17T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Technology development"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-11-16 | Summary: The fiscal year 2026 (FY26) Joint Warfighter Medical Research Program (JWMRP) Military Medical Research and Development Award (MMRDA) mechanism is intended to fund the logical continuation of previous Department of War (DOW)-funded research and development efforts relevant to the FY26 JWMRP that augment and accelerate high-priority medical requirements to meet the needs of Service Members…</summary>
   </entry>
 </feed>

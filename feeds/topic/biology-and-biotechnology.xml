@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-08-21T10:49:44Z</updated>
+  <updated>2026-08-21T17:17:39Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -422,6 +422,33 @@
     <summary>U.S. National Science Foundation | Closes 2076-08-19 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational engineering research for chemical, bioengineering, energy, and transport systems through the following programs:  The Chemical Process Systems (CPS) program supports foundational engineering research in chemical and biochemical processes for chemicals, fuels, energy, and materials. The Engineering Biol…</summary>
   </entry>
   <entry>
+    <title>Limited Submission Opportunity: $700,000 - The G. Harold and Leila Y. Mathers Foundation - Research Grant (Spring 2027 Cycle)</title>
+    <link href="http://rochester.infoready4.com/CompetitionSpace/"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Ainfoready-2028504</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Climate change"/>
+    <category term="Infectious disease"/>
+    <category term="Neuroscience"/>
+    <category term="Technology development"/>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2027-02-12 | The Foundation primarily
+supports basic science, ideally with potential translational applications. Examples of current research areas we support include
+immunology, microbiome, structural biology, cellular physiology, cancer biology, genetics, genomics, microbiology and infectious diseases, stem cell biology, and neuroscience. Research areas
+we will not consider for support include Covid-19 relat…</summary>
+  </entry>
+  <entry>
+    <title>Restorative &amp; health-Enhancing Sleep Time (REST)</title>
+    <link href="https://arpa-h.gov/explore-funding/programs/rest"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Arest</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Technology development"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Posted | Current ARPA-H program. REST | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); window…</summary>
+  </entry>
+  <entry>
     <title>Limited Competition: NIGMS Mature Synchrotron Resources (MSR) for Structural Biology (P30 - Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/360947"/>
     <id>urn:funding-finder:grants-gov:360947</id>
@@ -647,27 +674,5 @@
     <category term="Health equity"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Closes 2026-10-05 | The National Institute of Neurological Disorders and Stroke (NINDS) is interested in supporting research projects that investigate how specific neural exposome factors contribute mechanistically to Alzheimer’s disease-related dementias (ADRD) pathology and resilience. For the purposes of this program, exposome factors of interest include, but are not limited to, environmental toxins, sleep and cir…</summary>
-  </entry>
-  <entry>
-    <title>HEAL Initiative: Program to Reveal and Evaluate Cells-to-gene Information that Specify Intricacies, Origins and the Nature of (PRECISION) Human Pain Network</title>
-    <link href="https://www.grants.gov/search-results-detail/361334"/>
-    <id>urn:funding-finder:grants-gov:361334</id>
-    <updated>2026-07-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2026-10-12 | The National Institute of Neurological Disorders and Stroke, in conjunction with other NIH Institutes and Centers (ICs) as a part of the congressionally mandated NIH Helping to End Addiction Long Term (HEAL) initiative intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for comprehensive ‘omics and physiology dataset generation using primary human tissue across the pa…</summary>
-  </entry>
-  <entry>
-    <title>Genomic and Biologic Therapies for ADRD (U01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/361287"/>
-    <id>urn:funding-finder:grants-gov:361287</id>
-    <updated>2026-07-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Manufacturing"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2026-11-10 | The National Institutes of Neurological Disorders and Stroke (NINDS) is interested in supporting research projects proposing the optimization and translational development of genomic and biologic therapeutic candidates for Alzheimer’s Disease-Related Dementias (ADRD). Breakthroughs in genomic and biologic therapies are creating new opportunities to treat, prevent, and potentially modify the course…</summary>
   </entry>
 </feed>

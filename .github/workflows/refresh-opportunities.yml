@@ -19,6 +19,7 @@ on:
       - "scripts/check_links.py"
       - "scripts/currentness.py"
       - "scripts/alert_match.py"
+      - "tools/run_refresh_validation.py"
   schedule:
     - cron: "17 10 * * *"
   workflow_dispatch:
@@ -49,8 +50,8 @@ jobs:
         shell: bash
         run: cp data/opportunities.js "$RUNNER_TEMP/opportunities.previous.js"
       - run: python -m pip install -r requirements.txt
-      - name: Run regression tests before refresh
-        run: python -m unittest discover -s tests -v
+      - name: Test live product before refresh
+        run: python -m tools.run_refresh_validation
       - name: Test canonical browser application
         run: node --test tests/browser/*.test.mjs
       - name: Build and validate complete public opportunity catalog
@@ -67,14 +68,19 @@ jobs:
           --max-updates 250
           --request-delay 0.25
       - name: Extract citation-backed facts from official notices
+        id: document_evidence
         continue-on-error: true
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: >-
           python -m scripts.extract_document_evidence
           --catalog data/opportunities.js
           --cache data/document_evidence.json
           --max-documents 45
+          --max-subtopic-documents 30
           --request-delay 0.2
           --recheck-days 14
+          --enable-subtopics
       - name: Merge additional (non-Grants.gov) sources
         id: additional-sources
         continue-on-error: true
@@ -116,13 +122,30 @@ jobs:
       - name: Regenerate catalog statistics in project documentation
         run: python -m scripts.update_catalog_docs
       - name: Run regression tests against generated asset
-        run: python -m unittest discover -s tests -v
+        run: python -m tools.run_refresh_validation
+      - name: Record the build heartbeat
+        shell: bash
+        # Scheduled workflows are disabled after 60 days without repository
+        # activity, and diff-stable serialization means a quiet stretch can
+        # produce no commit at all -- so the schedule can lapse with no error
+        # anywhere. Writing this unconditionally guarantees one commit per
+        # successful run. Nothing reads it. See docs/TOPIC_LAYER_PLAN.md §16.3.
+        run: date -u +"%Y-%m-%dT%H:%M:%SZ" > .github/last_build
       - name: Commit refreshed catalog
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md PROJECT.md match_explorer.html team_match.html data/opportunities.js data/opportunity_enrichment.json data/document_evidence.json data/source_records.json data/faculty_matches.js data/link_health.json feeds
+          # data/subtopics.js is paired with its !/data/ allowlist
+          # line in .gitignore. `git add` on an ignored path exits non-zero and
+          # this step runs under bash -eo pipefail, so a missing allowlist line
+          # would abort the commit and stop the nightly publishing entirely.
+          # The file does not exist until --enable-subtopics is on, so the path
+          # is passed through git ls-files to stay a no-op until then.
+          git add README.md PROJECT.md match_explorer.html team_match.html data/opportunities.js data/opportunity_enrichment.json data/document_evidence.json data/source_records.json data/faculty_matches.js data/link_health.json feeds .github/last_build
+          if [ -f data/subtopics.js ]; then
+            git add data/subtopics.js
+          fi
           if git diff --cached --quiet; then
             echo "The generated catalog is unchanged."
           else
@@ -144,7 +167,10 @@ jobs:
             fi
           fi
       - name: Alert the project owner about a degraded external source
-        if: always() && steps.additional-sources.outcome == 'failure'
+        if: >-
+          always() &&
+          (steps.additional-sources.outcome == 'failure' ||
+          steps.document_evidence.outcome == 'failure')
         uses: actions/github-script@v8
         with:
           script: |
@@ -152,12 +178,21 @@ jobs:
             const runUrl =
               `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}` +
               `/actions/runs/${context.runId}`;
+            const externalDegraded =
+              "${{ steps.additional-sources.outcome }}" === "failure";
+            const documentEvidenceDegraded =
+              "${{ steps.document_evidence.outcome }}" === "failure";
+            const affected = [
+              externalDegraded ? "external sources" : null,
+              documentEvidenceDegraded ? "document evidence/subtopic classification" : null,
+            ].filter(Boolean).join(", ");
             const body =
-              `At least one enabled non-Grants.gov source failed its refresh, ` +
-              `health bounds, or post-merge validation on ${new Date().toISOString()}.\n\n` +
+              `The degraded refresh layer(s) were: ${affected}. ` +
+              `This occurred on ${new Date().toISOString()}.\n\n` +
               `Healthy sources were still refreshed. Sources configured to retain ` +
               `last-known-good data kept only publishable records; fail-closed sources ` +
-              `published zero.\n\nInspect the source summary: ${runUrl}`;
+              `published zero. Document-evidence or classifier degradation cannot ` +
+              `publish unchecked generic children.\n\nInspect the run summary: ${runUrl}`;
             const { data: issues } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,

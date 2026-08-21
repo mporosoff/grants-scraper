@@ -21,6 +21,7 @@ import hashlib
 import io
 import ipaddress
 import json
+import os
 from pathlib import Path
 import re
 import socket
@@ -44,6 +45,7 @@ from scripts import program_areas
 EVIDENCE_SCHEMA_VERSION = 1
 DEFAULT_CATALOG = Path("data/opportunities.js")
 DEFAULT_CACHE = Path("data/document_evidence.json")
+DEFAULT_SUBTOPIC_CACHE = Path("data/subtopics.js")
 USER_AGENT = "Funding-Finder-Document-Evidence/1.0"
 MAX_DOWNLOAD_BYTES = 30 * 1024 * 1024
 MAX_PDF_PAGES = 250
@@ -262,6 +264,34 @@ def write_cache(cache, path):
     finally:
         if temporary_path and temporary_path.exists():
             temporary_path.unlink()
+
+
+def prune_cache_to_catalog(cache, catalog):
+    """Remove evidence state whose stable parent is absent from the catalog.
+
+    The catalog is the currentness authority. Keeping an ``archived`` evidence
+    entry in the current cache made cache-derived denominators silently include
+    departed opportunities (DEBT-4). This mutates ``cache`` and returns the
+    sorted removed identifiers so a one-time campaign can preserve its frame.
+    """
+    current_ids = {
+        str(record.get("opportunity_id") or record.get("opportunity_number") or "")
+        for record in catalog.get("opportunities") or []
+    }
+    current_ids.discard("")
+    removed = set()
+    for key in ("records", "subtopic_only"):
+        entries = cache.get(key)
+        if not isinstance(entries, dict):
+            continue
+        stale = set(entries) - current_ids
+        removed.update(stale)
+        cache[key] = {
+            identifier: entry
+            for identifier, entry in entries.items()
+            if identifier in current_ids
+        }
+    return sorted(removed)
 
 
 def clean_document_text(value):
@@ -1327,7 +1357,216 @@ def download_document(
     raise RuntimeError("Official document redirected too many times.")
 
 
-def build_document_entry(record, source, response, previous, now):
+def needs_subtopics(entry, enabled):
+    """Whether a cached entry needs backfill segmentation (§8.3 insertion 3).
+
+    Function-local import for the same reason as subtopic_fields: with the flag
+    off nothing under scripts.subtopic_* is ever imported. Returns False
+    immediately when disabled, so the hot path in the candidate loop costs one
+    boolean check per document.
+    """
+    if not enabled:
+        return False
+    from scripts import subtopic_records, subtopic_segmentation
+
+    return subtopic_records.needs_subtopic_extraction(
+        entry,
+        enabled=True,
+        extractor_version=subtopic_segmentation.extractor_version(),
+    )
+
+
+def referenced_fetch(url):
+    """Fetch a referenced source page as text, politely (§6.7, P6.3).
+
+    Function-local import cost is why this is a module-level helper rather than a
+    closure: `scripts.sources.http` is the project's one polite client, and using
+    it keeps retry, delay and User-Agent behaviour identical to every other
+    source. Tests inject their own fetcher and never touch the network.
+    """
+    from scripts.sources.http import PoliteClient
+
+    return PoliteClient().get_text(url)
+
+
+def subtopic_fields(record, content, containers, document, fetched_at, enabled):
+    """Segmentation result for one document, or ``{}`` when the flag is off.
+
+    Returns a dict so the caller can splat it into the entry literal. With the
+    flag off nothing is added at all -- not even ``"subtopics": []`` -- because
+    the entry is serialized into data/document_evidence.json and an added empty
+    key on hundreds of entries is not byte-identical (§0.5, §8.3 insertion 2).
+
+    The import is function-local so that with the flag off `subtopic_*` is never
+    imported, `pdfplumber` is never loaded, and a broken new module cannot break
+    the nightly build by import error alone.
+
+    Zero subtopics is a normal outcome and never raises: the except is broad on
+    purpose, because a parsing failure here must not cost the parent record its
+    facts (§9.3).
+    """
+    if not enabled:
+        return {}
+    from scripts import (
+        subtopic_cov4,
+        subtopic_records,
+        subtopic_referenced,
+        subtopic_segmentation,
+        subtopic_sources,
+        subtopic_structured,
+    )
+    from scripts.pull_grants import collect_attachments, fetch_detail
+
+    version = subtopic_segmentation.extractor_version()
+
+    # P9.0 first refusal. These are bounded, agency-declared routes over named
+    # parents and current attachment lists. A claimed route that collapses
+    # returns zero and does not fall through to generic inference; a higher rung
+    # is never unioned with a weaker one.
+    structured = subtopic_structured.first_refusal(
+        record,
+        content,
+        document,
+        detail_fetcher=fetch_detail,
+        collector=collect_attachments,
+        download=download_document,
+        extract_containers=extract_containers,
+        as_of=fetched_at[:10],
+    )
+    if structured is not None:
+        gated, structured_cov4 = subtopic_cov4.apply_gate(
+            record,
+            list(structured.records),
+            structured.document or document or {},
+        )
+        fields = {
+            "subtopics": gated,
+            "subtopic_method": structured.method,
+            "subtopic_extractor_version": version,
+            "subtopic_attempts": (),
+            "subtopic_cov4": structured_cov4,
+            "subtopic_structured": structured.diagnostics,
+        }
+        if structured.document:
+            fields["subtopic_source_document"] = {
+                "url": structured.document.get("url"),
+                "name": structured.document.get("name"),
+                "sha256": structured.document.get("sha256"),
+                "source_kind": structured.document.get("source_kind"),
+                "attachment_id": structured.document.get("attachment_id"),
+            }
+        if structured.reason:
+            fields["subtopic_reason"] = structured.reason
+        return fields
+
+    # §6.7·0 first refusal: a source that *asserts* the parent→child relationship
+    # is asked before one that infers it. Today that is exactly one measured
+    # source (P6.3, MEAS-7). It answers for one parent and declines for every
+    # other record, and declining costs nothing -- the generic path below runs
+    # unchanged, so an unhealthy referenced source can never suppress an answer
+    # inference would have found.
+    referenced_result, referenced_document, referenced_diagnostics = (
+        subtopic_referenced.first_refusal(record, fetch=referenced_fetch)
+    )
+    if referenced_result is not None:
+        # Cov4 is applied here too, and it is *supposed* to do nothing. The P6
+        # forward obligation is that `referenced` children bypass the classifier
+        # at the production call site rather than by never reaching it, so the
+        # gate is invoked and its own provenance boundary declines them --
+        # `bypassed: 14, classifier_calls: 0` in the diagnostics below is the
+        # proof, and a regression test reads exactly that.
+        referenced_records, referenced_cov4 = subtopic_cov4.apply_gate(
+            record,
+            subtopic_records.build_records(
+                record,
+                referenced_result,
+                document=referenced_document,
+                as_of=fetched_at[:10],
+                # §5.1: the notice delegates to this page, so the rung is
+                # `referenced`. Never `native` -- the Army publishes the page,
+                # not the relationship.
+                provenance=subtopic_records.REFERENCED,
+            ),
+            referenced_document,
+        )
+        return {
+            "subtopics": referenced_records,
+            # Orthogonal to provenance, and genuinely absent: no segmentation
+            # layer and no pattern family ran (§5.1).
+            "subtopic_method": referenced_result.method,
+            "subtopic_extractor_version": version,
+            "subtopic_attempts": (),
+            "subtopic_source_document": {
+                "url": (referenced_document or {}).get("url"),
+                "name": (referenced_document or {}).get("name"),
+                "sha256": (referenced_document or {}).get("sha256"),
+            },
+            "subtopic_referenced": referenced_diagnostics,
+            "subtopic_cov4": referenced_cov4,
+        }
+
+    try:
+        # §6.6 multi-attachment. The primary is tried first from bytes already
+        # in hand, so a record whose topics are in the primary costs no extra
+        # fetch. source_for_record() is untouched: this path is parallel and
+        # subtopic-only, so fact extraction still reads exactly one document.
+        result, chosen, attempts = subtopic_sources.best_segmentation(
+            record,
+            content,
+            document,
+            extract_containers=extract_containers,
+            download=download_document,
+            detail_fetcher=fetch_detail,
+            collector=collect_attachments,
+            parent_deadline=record.get("close_date"),
+        )
+        built = subtopic_records.build_records(
+            record, result, document=chosen or document, as_of=fetched_at[:10]
+        )
+        # §18.1 Cov4. The narrowest point that already holds everything the gate
+        # needs: `built` carries the parent id, the parent opportunity number,
+        # the §5.1 rung, the candidate title and its excerpt; `chosen or
+        # document` carries the source URL, name, sha256 and `source_kind`, which
+        # is the ownership evidence. No second candidate pipeline is created --
+        # this filters the spans `build_records` just produced.
+        built, cov4 = subtopic_cov4.apply_gate(record, built, chosen or document)
+    except Exception as exc:  # noqa: BLE001 - never break the parent record
+        return {
+            "subtopics": [],
+            "subtopic_reason": f"error_{type(exc).__name__}",
+            "subtopic_extractor_version": version,
+        }
+    fields = {
+        "subtopics": built,
+        "subtopic_method": result.method,
+        "subtopic_extractor_version": version,
+        "subtopic_attempts": attempts.get("attempts", ()),
+        "subtopic_cov4": cov4,
+    }
+    if chosen and (chosen.get("url") or None) != (document or {}).get("url"):
+        # The topic list came from a secondary attachment, not the notice the
+        # evidence cache records. Worth storing: it is the difference between
+        # "this record has no topics" and "its topics are in another file".
+        fields["subtopic_source_document"] = {
+            "url": chosen.get("url"),
+            "name": chosen.get("name"),
+            "sha256": chosen.get("sha256"),
+        }
+    if result.reason:
+        fields["subtopic_reason"] = result.reason
+    return fields
+
+
+def build_document_entry(
+    record,
+    source,
+    response,
+    previous,
+    now,
+    *,
+    enable_subtopics=False,
+    backfill_subtopics=False,
+):
     fetched_at = iso_utc(now)
     content = response["content"]
     digest = hashlib.sha256(content).hexdigest()
@@ -1348,6 +1587,28 @@ def build_document_entry(record, source, response, previous, now):
             response.get("last_modified")
             or entry["document"].get("last_modified")
         )
+        # §8.3 insertion 3, gate 3. The bytes are in hand -- downloaded and
+        # hashed -- so segmenting here is free. Deliberately NOT falling
+        # through to the full-extraction path: that would re-run fact
+        # extraction and rewrite facts, review_queue and version, churning the
+        # cache for no reason.
+        if enable_subtopics and backfill_subtopics:
+            containers, _extraction = extract_containers(
+                content,
+                response.get("content_type"),
+                source.get("name"),
+                entry["document"].get("url") or source["url"],
+            )
+            entry.update(
+                subtopic_fields(
+                    record,
+                    content,
+                    containers,
+                    entry["document"],
+                    fetched_at,
+                    True,
+                )
+            )
         return entry, False
 
     version_history = deepcopy((previous or {}).get("version_history") or [])
@@ -1413,11 +1674,189 @@ def build_document_entry(record, source, response, previous, now):
         "review_queue": review_queue,
         "version_history": version_history,
         "archived_from_catalog_at": None,
+        **subtopic_fields(
+            record, content, containers, document, fetched_at, enable_subtopics
+        ),
     }, True
 
 
-def due_for_check(entry, signature, now, recheck_days):
+def subtopic_only_candidates(records, *, enabled):
+    """Catalog records the administrative path never fetches (§18.1 Cov1).
+
+    Measured: `source_for_record()` declines **685 of 1,475 records**, and 672
+    of them have no evidence entry at all, so no pattern can reach them because
+    no bytes ever arrive (docs/COVERAGE_SURVEY.md stage 3).
+
+    Returns ``[]`` when the flag is off, so the flag-off candidate set -- and
+    therefore every flag-off artifact -- is untouched (§0.5).
+    """
+    if not enabled:
+        return []
+    candidates = []
+    for record in records:
+        opportunity_id = str(
+            record.get("opportunity_id")
+            or record.get("opportunity_number")
+            or ""
+        )
+        if not opportunity_id or source_for_record(record):
+            continue
+        candidates.append((opportunity_id, record))
+    return candidates
+
+
+def refresh_subtopics_without_source(
+    records,
+    *,
+    max_documents,
+    fetcher,
+    now,
+    request_delay=0.0,
+    enabled=False,
+    previous_store=None,
+    prior_checked_at=None,
+    recheck_days=14,
+):
+    """Segment the records `source_for_record()` declines. Subtopics only.
+
+    **Never writes a `records` entry**, and that is the whole design. These
+    documents were not vetted as the official notice -- `select_primary_document`
+    declined them on purpose -- so giving them an evidence entry would attach
+    `document_evidence` to the parent and publish exactly the wrong one-click
+    link that rule exists to prevent. Results go to a separate store the caller
+    puts under its own cache key, which exists only with the flag on.
+
+    Returns ``(store, metrics)``. Never raises: zero subtopics is normal (§9.3).
+    """
+    store, metrics = {}, {
+        "attempted": 0,
+        "with_subtopics": 0,
+        "remaining_update_count": 0,
+        "agency_url_tried": 0,
+        "cached_count": 0,
+        "queued_new_count": 0,
+        "queued_recheck_count": 0,
+        "classifier_run": classifier_run_metrics([]),
+    }
+    if not enabled:
+        return store, metrics
+    from scripts import subtopic_sources
+
+    candidates = subtopic_only_candidates(records, enabled=True)
+    candidate_ids = {opportunity_id for opportunity_id, _ in candidates}
+    store = {
+        opportunity_id: deepcopy(entry)
+        for opportunity_id, entry in (previous_store or {}).items()
+        if opportunity_id in candidate_ids
+    }
+    if prior_checked_at:
+        for entry in store.values():
+            entry.setdefault("checked_at", prior_checked_at)
+    metrics["cached_count"] = len(store)
+    unseen = [item for item in candidates if item[0] not in store]
+    due = []
+    for item in candidates:
+        opportunity_id = item[0]
+        if opportunity_id not in store:
+            continue
+        checked_at = store[opportunity_id].get("checked_at")
+        try:
+            checked = datetime.fromisoformat(
+                str(checked_at or "").replace("Z", "+00:00")
+            )
+        except ValueError:
+            due.append(item)
+            continue
+        if checked.tzinfo is None:
+            checked = checked.replace(tzinfo=timezone.utc)
+        if checked <= now - timedelta(days=recheck_days):
+            due.append(item)
+    queue = unseen + due
+    metrics["queued_new_count"] = len(unseen)
+    metrics["queued_recheck_count"] = len(due)
+    metrics["remaining_update_count"] = max(
+        0,
+        len(queue) - min(len(queue), max_documents),
+    )
+    fetched_at = iso_utc(now)
+    run_entries = []
+    for opportunity_id, record in queue[:max_documents]:
+        content, document = None, None
+        source = subtopic_sources.subtopic_only_primary(record)
+        if source:
+            metrics["agency_url_tried"] += 1
+            try:
+                response = fetcher(source["url"], {})
+                content = response.get("content")
+                document = {
+                    "url": response.get("url") or source["url"],
+                    "name": source.get("name"),
+                    "content_type": response.get("content_type"),
+                    "sha256": (
+                        hashlib.sha256(content).hexdigest() if content else None
+                    ),
+                    "source_kind": source["kind"],
+                }
+            except Exception:  # noqa: BLE001 - an agency page is optional here
+                content, document = None, None
+        fields = subtopic_fields(
+            record, content, None, document, fetched_at, True
+        ) or {
+            "subtopics": [],
+            "subtopic_reason": "no_source_or_extractable_text",
+            "subtopic_method": "none",
+        }
+        fields["checked_at"] = fetched_at
+        metrics["attempted"] += 1
+        if fields.get("subtopics"):
+            metrics["with_subtopics"] += 1
+        store[opportunity_id] = fields
+        run_entries.append(fields)
+        if request_delay:
+            time.sleep(request_delay)
+    metrics["classifier_run"] = classifier_run_metrics(run_entries)
+    return store, metrics
+
+
+def merge_subtopic_sidecar(cache, sources, current_parent_ids, *, as_of):
+    """Preserve untouched P9 children while applying this refresh's results.
+
+    The recurring document pass is deliberately budgeted, so ``sources`` is
+    only the subset inspected in this run.  Starting from an empty cache would
+    therefore erase every uninspected parent.  Current parent membership is
+    the sidecar's only currentness axis; prune on that axis, then upsert only
+    the parents for which this run produced a subtopic decision.
+    """
+    from scripts import subtopic_records
+
+    current_parent_ids = {
+        str(identifier) for identifier in current_parent_ids
+    }
+    subtopic_records.retain_current_parents(cache, current_parent_ids)
+    for opportunity_id, entry in sources:
+        opportunity_id = str(opportunity_id)
+        if opportunity_id not in current_parent_ids:
+            continue
+        if "subtopics" not in entry:
+            continue
+        subtopic_records.upsert_parent(
+            cache,
+            opportunity_id,
+            entry.get("subtopics") or [],
+            as_of=as_of,
+            reason=entry.get("subtopic_reason"),
+            method=entry.get("subtopic_method"),
+        )
+    return cache
+
+
+def due_for_check(entry, signature, now, recheck_days, *, needs_subtopics=False):
     if not entry:
+        return True
+    # §8.3 insertion 3, gate 1. On a steady-state night nearly every document
+    # takes one of §4's three skip gates, so without this the ~1,400 already
+    # cached documents are never even candidates and never get subtopics.
+    if needs_subtopics:
         return True
     if entry.get("source_signature") != signature:
         return True
@@ -1664,7 +2103,105 @@ def document_metrics(records, cache, refreshed, not_modified, failures):
     }
 
 
+def subtopic_metrics(cached_records):
+    """Subtopic counts and a rejection histogram (§8.3 insertion 4).
+
+    `no_layer_accepted` is reported separately from genuine failures, and
+    `run_budget` separately from `time_budget`, because conflating them hides
+    the difference between "this corpus has no enumerated lists" and "the
+    pattern set needs work" (§6.1, §18.1 package D).
+    """
+    reasons, methods, confidences = {}, {}, {}
+    attempted = subtopic_count = 0
+    for entry in cached_records.values():
+        if "subtopics" not in entry:
+            continue
+        attempted += 1
+        subtopics = entry.get("subtopics") or []
+        subtopic_count += len(subtopics)
+        reason = entry.get("subtopic_reason")
+        if reason:
+            reasons[reason] = reasons.get(reason, 0) + 1
+        method = entry.get("subtopic_method")
+        if method:
+            methods[method] = methods.get(method, 0) + 1
+        for record in subtopics:
+            level = record.get("confidence")
+            if level:
+                confidences[level] = confidences.get(level, 0) + 1
+    return {
+        "documents_attempted": attempted,
+        "documents_with_subtopics": sum(
+            1
+            for entry in cached_records.values()
+            if entry.get("subtopics")
+        ),
+        "subtopic_record_count": subtopic_count,
+        "rejection_reasons": dict(sorted(reasons.items())),
+        "methods": dict(sorted(methods.items())),
+        "confidence_counts": dict(sorted(confidences.items())),
+    }
+
+
+def classifier_run_metrics(entries):
+    """Aggregate the classifier usage generated by this refresh only."""
+    totals = {
+        "classifier_calls": 0,
+        "api_requests": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "usage_reported_calls": 0,
+        "usage_unreported_requests": 0,
+        "classifier_errors": {},
+    }
+    for entry in entries:
+        diagnostics = (entry or {}).get("subtopic_cov4") or {}
+        for key in (
+            "classifier_calls",
+            "api_requests",
+            "input_tokens",
+            "output_tokens",
+            "usage_reported_calls",
+            "usage_unreported_requests",
+        ):
+            try:
+                totals[key] += max(0, int(diagnostics.get(key) or 0))
+            except (TypeError, ValueError):
+                continue
+        for error, count in (diagnostics.get("classifier_errors") or {}).items():
+            try:
+                amount = max(0, int(count or 0))
+            except (TypeError, ValueError):
+                continue
+            totals["classifier_errors"][str(error)] = (
+                totals["classifier_errors"].get(str(error), 0) + amount
+            )
+    totals["classifier_errors"] = dict(
+        sorted(totals["classifier_errors"].items())
+    )
+    return totals
+
+
 def validate_refresh_health(metrics, minimum_attempts=5, maximum_failure_rate=0.8):
+    classifier = (metrics.get("subtopics") or {}).get("classifier_run") or {}
+    classifier_errors = sum(
+        max(0, int(count or 0))
+        for count in (classifier.get("classifier_errors") or {}).values()
+    )
+    if classifier_errors:
+        raise RuntimeError(
+            "Subtopic classifier failed closed: "
+            f"{classifier_errors} call(s) reported errors."
+        )
+    usage_unreported = max(
+        0, int(classifier.get("usage_unreported_requests") or 0)
+    )
+    if usage_unreported:
+        raise RuntimeError(
+            "Subtopic classifier usage is not fully auditable: "
+            f"{usage_unreported} API request(s) omitted token usage."
+        )
+
     attempted = (
         int(metrics.get("refreshed_count") or 0)
         + int(metrics.get("not_modified_count") or 0)
@@ -1685,23 +2222,20 @@ def enrich_document_evidence(
     cache,
     *,
     max_documents=45,
+    max_subtopic_documents=45,
     request_delay=0.2,
     recheck_days=14,
     fetcher=download_document,
     now=None,
+    enable_subtopics=False,
 ):
     now = now or utc_now()
+    prune_cache_to_catalog(cache, catalog)
     cached_records = cache.setdefault("records", {})
     records = catalog["opportunities"]
-    current_ids = {
-        str(record.get("opportunity_id") or record.get("opportunity_number"))
-        for record in records
-    }
-    for opportunity_id, entry in cached_records.items():
-        if opportunity_id not in current_ids:
-            entry.setdefault("archived_from_catalog_at", iso_utc(now))
-        else:
-            entry["archived_from_catalog_at"] = None
+    classifier_run_entries = []
+    for entry in cached_records.values():
+        entry["archived_from_catalog_at"] = None
 
     candidates = []
     for record in records:
@@ -1720,8 +2254,11 @@ def enrich_document_evidence(
             if source["kind"] == "primary_notice"
             else max(30, recheck_days)
         )
-        if due_for_check(entry, signature, now, source_recheck_days):
-            candidates.append((record, source, signature, entry))
+        backfill = needs_subtopics(entry, enable_subtopics)
+        if due_for_check(
+            entry, signature, now, source_recheck_days, needs_subtopics=backfill
+        ):
+            candidates.append((record, source, signature, entry, backfill))
     candidates.sort(
         key=lambda item: (
             0
@@ -1753,14 +2290,17 @@ def enrich_document_evidence(
     refreshed = 0
     not_modified = 0
     failures = []
-    for record, source, signature, previous in candidates[:max_documents]:
+    for record, source, signature, previous, backfill in candidates[:max_documents]:
         opportunity_id = str(
             record.get("opportunity_id")
             or record.get("opportunity_number")
         )
         headers = {}
         previous_document = (previous or {}).get("document") or {}
-        if previous and previous_document.get("url") == source["url"]:
+        # §8.3 insertion 3, gate 2. A 304 returns no body, and you cannot
+        # segment bytes you did not receive -- so a document needing backfill
+        # asks for the whole thing.
+        if previous and not backfill and previous_document.get("url") == source["url"]:
             if previous_document.get("etag"):
                 headers["If-None-Match"] = previous_document["etag"]
             if previous_document.get("last_modified"):
@@ -1782,8 +2322,12 @@ def enrich_document_evidence(
                     response,
                     previous,
                     now,
+                    enable_subtopics=enable_subtopics,
+                    backfill_subtopics=backfill,
                 )
                 cached_records[opportunity_id] = entry
+                if enable_subtopics:
+                    classifier_run_entries.append(entry)
                 refreshed += int(extracted)
                 not_modified += int(not extracted)
         except Exception as exc:  # noqa: BLE001 - retain other records
@@ -1850,6 +2394,30 @@ def enrich_document_evidence(
         0,
         len(candidates) - min(len(candidates), max_documents),
     )
+    if enable_subtopics:
+        # §8.3 insertion 4. Only present with the flag on, so the diagnostics
+        # block is byte-identical when it is off.
+        metrics["subtopics"] = subtopic_metrics(cached_records)
+        # §18.1 Cov1. Runs after the administrative pass and writes nowhere
+        # near it: a separate store, a separate cache key, no record entry.
+        subtopic_only, subtopic_only_metrics = refresh_subtopics_without_source(
+            records,
+            max_documents=max_subtopic_documents,
+            fetcher=fetcher,
+            now=now,
+            request_delay=request_delay,
+            enabled=True,
+            previous_store=cache.get("subtopic_only"),
+            prior_checked_at=cache.get("generated_at"),
+            recheck_days=recheck_days,
+        )
+        cache["subtopic_only"] = subtopic_only
+        metrics["subtopics"]["subtopic_only"] = subtopic_only_metrics
+        subtopic_classifier = subtopic_only_metrics["classifier_run"]
+        metrics["subtopics"]["classifier_run"] = classifier_run_metrics(
+            classifier_run_entries
+            + [{"subtopic_cov4": subtopic_classifier}]
+        )
     output.setdefault("diagnostics", {})["document_evidence"] = metrics
     cache["generated_at"] = iso_utc(now)
     return output, cache
@@ -1875,7 +2443,19 @@ def parse_args(argv=None):
         "--max-documents",
         type=int,
         default=45,
-        help="Maximum new or due official sources to retrieve (default: 45).",
+        help=(
+            "Maximum new or due official sources to retrieve in the "
+            "administrative evidence pass (default: 45)."
+        ),
+    )
+    parser.add_argument(
+        "--max-subtopic-documents",
+        type=int,
+        default=45,
+        help=(
+            "Maximum sources to retrieve in the separate subtopic-only pass "
+            "when --enable-subtopics is set (default: 45)."
+        ),
     )
     parser.add_argument(
         "--request-delay",
@@ -1889,9 +2469,25 @@ def parse_args(argv=None):
         default=14,
         help="Recheck unchanged source URLs after this many days (default: 14).",
     )
+    parser.add_argument(
+        "--enable-subtopics",
+        action="store_true",
+        help=(
+            "Segment official notices into child topic records. Off by "
+            "default; only the Phase 4 step turns this on."
+        ),
+    )
+    parser.add_argument(
+        "--subtopic-cache",
+        type=Path,
+        default=DEFAULT_SUBTOPIC_CACHE,
+        help="Subtopic record cache, written only with --enable-subtopics.",
+    )
     args = parser.parse_args(argv)
     if args.max_documents < 0:
         parser.error("--max-documents must be non-negative")
+    if args.max_subtopic_documents < 0:
+        parser.error("--max-subtopic-documents must be non-negative")
     if args.request_delay < 0:
         parser.error("--request-delay must be non-negative")
     if args.recheck_days < 1:
@@ -1907,12 +2503,54 @@ def main(argv=None):
         catalog,
         cache,
         max_documents=args.max_documents,
+        max_subtopic_documents=args.max_subtopic_documents,
         request_delay=args.request_delay,
         recheck_days=args.recheck_days,
+        enable_subtopics=args.enable_subtopics,
     )
     write_cache(cache, args.cache)
+    if args.enable_subtopics:
+        # Written only with the flag on, so the flag-off artifact set is
+        # unchanged and §0.5 byte-identity holds by construction.
+        from scripts import subtopic_records
+        from scripts.currentness import filter_current
+
+        as_of = iso_utc(utc_now())[:10]
+        current_records, _ = filter_current(
+            enriched["opportunities"], date.fromisoformat(as_of)
+        )
+        current_parent_ids = {
+            str(
+                record.get("opportunity_id")
+                or record.get("opportunity_number")
+                or ""
+            )
+            for record in current_records
+        }
+        current_parent_ids.discard("")
+        subtopic_cache = subtopic_records.read_cache(args.subtopic_cache)
+        sources = list((cache.get("records") or {}).items())
+        # §18.1 Cov1 results carry no evidence entry by design, so they are a
+        # second source for the same cache rather than a second cache.
+        sources += list((cache.get("subtopic_only") or {}).items())
+        merge_subtopic_sidecar(
+            subtopic_cache,
+            sources,
+            current_parent_ids,
+            as_of=as_of,
+        )
+        subtopic_records.write_cache(subtopic_cache, args.subtopic_cache)
     write_catalog(enriched, args.catalog)
     metrics = enriched["diagnostics"]["document_evidence"]
+    classifier = (metrics.get("subtopics") or {}).get("classifier_run")
+    if classifier is not None:
+        payload = json.dumps(classifier, sort_keys=True, separators=(",", ":"))
+        print(f"Classifier operational diagnostics: {payload}")
+        summary_path = os.environ.get("GITHUB_STEP_SUMMARY")
+        if summary_path:
+            with Path(summary_path).open("a", encoding="utf-8") as summary:
+                summary.write("### Classifier operational diagnostics\n\n")
+                summary.write(f"```json\n{payload}\n```\n\n")
     validate_refresh_health(metrics)
     print(
         "Document evidence current for "

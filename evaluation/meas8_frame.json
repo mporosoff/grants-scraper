@@ -1,0 +1,1124 @@
+{
+  "arm_a": {
+    "design": "disproportionate stratified probability sample; four per stratum, the one-record NASA residual as a census, and the three released places assigned to the large residual other stratum; rates use eligible-population weights",
+    "eligibility": "committed catalog record with status=posted, at least one text surface under the existing production source-selection contract, and not named in the committed prior-read artifacts or reports",
+    "eligible_population": 933,
+    "prior_read_exclusion_count": 216,
+    "prior_read_exclusion_sources": [
+      "evaluation/p7_residual.json",
+      "evaluation/p7_closeout.json",
+      "evaluation/fm2_gate_frame.json",
+      "evaluation/cov7_stratum_d.json",
+      "evaluation/meas3_population.json",
+      "evaluation/cov4_dec11_cases.json",
+      "evaluation/cov4_challenge.json",
+      "docs/COVERAGE_SURVEY.md",
+      "docs/FAMILY_TAXONOMY.md",
+      "docs/CORPUS_CENSUS.md",
+      "docs/SOURCE_REACHABILITY_SWEEP.md",
+      "docs/ROSES_SOURCE_INSPECTION.md",
+      "docs/DOE_SOURCE_INSPECTION.md",
+      "docs/DOD_MEAS7_INSPECTION.md"
+    ],
+    "prior_read_limitation": "The legacy 40-record survey and 50-record taxonomy draws were never fully enumerated; named IDs in their reports are excluded, but DEBT-11 makes the exclusion set necessarily imperfect. No outcome-driven replacement is allowed.",
+    "rate_rule": "Arm A record rates use stratum eligible_population/sample_size weights; unreachable, unsupported, moved, or changed sources remain separate unmeasurable states and are never converted to zero.",
+    "sample_size": 28,
+    "seed": "MEAS-8:2026-08-20:arm-a:v1",
+    "selection_rule": "ascending sha256(seed + NUL + stratum + NUL + opportunity_id), taking the frozen TARGET_BY_STRATUM allocation (4/4/4/4/1/4/7)",
+    "strata": [
+      {
+        "eligible_population": 392,
+        "name": "biomedical_health",
+        "records": [
+          {
+            "agency": "National Institutes of Health",
+            "document_surface_at_selection": [
+              "source_for_record"
+            ],
+            "frozen_source_hash": "1969c7aa57ee4772a6b53cc6589b8a75aa662a78fca9fe1e3b057402fab47e78",
+            "opportunity_id": "353633",
+            "opportunity_number": "PAR-24-153",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "Grants.gov",
+            "source_type": "Federal",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "agency_notice",
+                "name": null,
+                "route": "source_for_record",
+                "url": "https://grants.nih.gov/grants/guide/pa-files/PAR-24-153.html"
+              }
+            ],
+            "title": "The NCI Worta McCaskill-Stevens Career Development Award for Community Oncology and Prevention Research (K12 Clinical Trial Optional)"
+          },
+          {
+            "agency": "National Institutes of Health",
+            "document_surface_at_selection": [
+              "source_for_record"
+            ],
+            "frozen_source_hash": "ad0e711870c355ddccd32f8ab1b85678a056a60493ea57517cc75f7bd4dc86de",
+            "opportunity_id": "356018",
+            "opportunity_number": "PAR-24-269",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "Grants.gov",
+            "source_type": "Federal",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "agency_notice",
+                "name": null,
+                "route": "source_for_record",
+                "url": "https://grants.nih.gov/grants/guide/pa-files/PAR-24-269.html"
+              }
+            ],
+            "title": "NIDA Animal Genomics Program (U01 Clinical Trial Not Allowed)"
+          },
+          {
+            "agency": "National Institutes of Health",
+            "document_surface_at_selection": [
+              "subtopic_only_primary"
+            ],
+            "frozen_source_hash": null,
+            "opportunity_id": "357003",
+            "opportunity_number": "PAR-25-175",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "Grants.gov",
+            "source_type": "Federal",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "subtopic_agency_notice",
+                "name": null,
+                "route": "subtopic_only_primary",
+                "url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-175.html"
+              }
+            ],
+            "title": "Integration of Imaging and Fluid-Based Tumor Monitoring in Cancer Therapy (R01 Clinical Trial Optional)"
+          },
+          {
+            "agency": "National Institutes of Health",
+            "document_surface_at_selection": [
+              "attachment_sources"
+            ],
+            "frozen_source_hash": null,
+            "opportunity_id": "358864",
+            "opportunity_number": "PAR-27-015",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "Grants.gov",
+            "source_type": "Federal",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "grants_gov_attachment",
+                "name": "PAR-27-015-Full-Announcement.html",
+                "route": "attachment_sources",
+                "url": null
+              }
+            ],
+            "title": "Community-Based Participatory Research to Advance Data and Practice Transformation (ADAPT) for Optimizing Oral Health for All (UG3/UH3 Clinical Trial Optional)"
+          }
+        ],
+        "sample_size": 4,
+        "selection_weight_per_record": 98.0
+      },
+      {
+        "eligible_population": 140,
+        "name": "nsf",
+        "records": [
+          {
+            "agency": "U.S. National Science Foundation",
+            "document_surface_at_selection": [
+              "source_for_record"
+            ],
+            "frozen_source_hash": "3d0754660ab9181864f889e90ad4f104efd9ff91b231f3625406da69d60f8363",
+            "opportunity_id": "348599",
+            "opportunity_number": "23-598",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "Grants.gov",
+            "source_type": "Federal",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "agency_notice",
+                "name": null,
+                "route": "source_for_record",
+                "url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf23598"
+              }
+            ],
+            "title": "Historically Black Colleges and Universities - Excellence in Research"
+          },
+          {
+            "agency": "U.S. National Science Foundation",
+            "document_surface_at_selection": [
+              "source_for_record"
+            ],
+            "frozen_source_hash": "75c4bca18aa8a3f5ba003d1d56ab6fe65d4a43f7112dfb7097b01b9f7ce51f08",
+            "opportunity_id": "329432",
+            "opportunity_number": "PD-21-128Y",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "Grants.gov",
+            "source_type": "Federal",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "agency_notice",
+                "name": null,
+                "route": "source_for_record",
+                "url": "https://www.nsf.gov/funding/pgm_summ.jsp?pims_id=505704"
+              }
+            ],
+            "title": "Law & Science"
+          },
+          {
+            "agency": "U.S. National Science Foundation",
+            "document_surface_at_selection": [
+              "source_for_record"
+            ],
+            "frozen_source_hash": "175d6e9d78274b8a1298060ea3181a9ae85b43fcb79c2aa35b63276ed46f5a03",
+            "opportunity_id": "338558",
+            "opportunity_number": "PD-22-1529",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "Grants.gov",
+            "source_type": "Federal",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "agency_notice",
+                "name": null,
+                "route": "source_for_record",
+                "url": "https://www.nsf.gov/funding/pgm_summ.jsp?pims_id=506047"
+              }
+            ],
+            "title": "Facilities for Atmospheric Research and Education"
+          },
+          {
+            "agency": "U.S. National Science Foundation",
+            "document_surface_at_selection": [
+              "subtopic_only_primary"
+            ],
+            "frozen_source_hash": null,
+            "opportunity_id": "342747",
+            "opportunity_number": "22-621",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "Grants.gov",
+            "source_type": "Federal",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "subtopic_agency_notice",
+                "name": null,
+                "route": "subtopic_only_primary",
+                "url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf22621"
+              }
+            ],
+            "title": "NSF Astronomy and Astrophysics Postdoctoral Fellowships"
+          }
+        ],
+        "sample_size": 4,
+        "selection_weight_per_record": 35.0
+      },
+      {
+        "eligible_population": 107,
+        "name": "dod",
+        "records": [
+          {
+            "agency": "Air Force -- Research Lab",
+            "document_surface_at_selection": [
+              "subtopic_only_primary"
+            ],
+            "frozen_source_hash": null,
+            "opportunity_id": "351240",
+            "opportunity_number": "FA875021S7006",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "Grants.gov",
+            "source_type": "Federal",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "subtopic_agency_notice",
+                "name": null,
+                "route": "subtopic_only_primary",
+                "url": "https://sam.gov/opp/f6dac217c58545578b6dff242335e997/view"
+              }
+            ],
+            "title": "GEOSPATIAL INTELLIGENCE PROCESSING AND EXPLOITATION (GeoPEX)"
+          },
+          {
+            "agency": "Defense Health Agency Contracting Activity - DHACA",
+            "document_surface_at_selection": [
+              "source_for_record",
+              "attachment_sources"
+            ],
+            "frozen_source_hash": "dcc28795dc8ef5253966d3029b80d1c90dd4f3c477f8c54ba340398245e054b3",
+            "opportunity_id": "343725",
+            "opportunity_number": "HT942523SBAA1",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "Grants.gov",
+            "source_type": "Federal",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "primary_notice",
+                "name": "HT942523SBAA1_27Jan2026.pdf",
+                "route": "source_for_record",
+                "url": "https://grants.gov/grantsws/rest/opportunity/att/download/343209"
+              },
+              {
+                "kind": "grants_gov_attachment",
+                "name": "HT942523SBAA1_27Jan2026.pdf",
+                "route": "attachment_sources",
+                "url": null
+              }
+            ],
+            "title": "DOD Defense Health Agency (DHA) Research & Development FY23-FY27 BROAD AGENCY ANNOUNCEMENT for Extramural Medical Research"
+          },
+          {
+            "agency": "Dept of the Army -- Materiel Command",
+            "document_surface_at_selection": [
+              "attachment_sources",
+              "attachment_sources",
+              "attachment_sources"
+            ],
+            "frozen_source_hash": null,
+            "opportunity_id": "326841",
+            "opportunity_number": "W911NF-17-S-0003-SPECIALNOTICE-LC-CSAC",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "Grants.gov",
+            "source_type": "Federal",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "grants_gov_attachment",
+                "name": "W911NF-17-S-0003 SPECIAL NOTICE LC CSAC.pdf",
+                "route": "attachment_sources",
+                "url": null
+              },
+              {
+                "kind": "grants_gov_attachment",
+                "name": "LC CSAC Q&amp;A 5-27-20.docx",
+                "route": "attachment_sources",
+                "url": null
+              },
+              {
+                "kind": "grants_gov_attachment",
+                "name": "W911NF-17-S-0003 SPECIAL NOTICE LC CSAC.docx",
+                "route": "attachment_sources",
+                "url": null
+              }
+            ],
+            "title": "Low-Cost Chip-Scale Atomic Clock (LC CSAC)"
+          },
+          {
+            "agency": "Defense Health Agency Contracting Activity - DHACA",
+            "document_surface_at_selection": [
+              "source_for_record",
+              "attachment_sources"
+            ],
+            "frozen_source_hash": "e42fd281ebc850c809844f228dbc4b6da167dda2e744170b3ee05dceeacaa36e",
+            "opportunity_id": "362268",
+            "opportunity_number": "HT942526PRCRPCTA",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "Grants.gov",
+            "source_type": "Federal",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "primary_notice",
+                "name": "HT942526PRCRPCTA_GG.pdf",
+                "route": "source_for_record",
+                "url": "https://grants.gov/grantsws/rest/opportunity/att/download/351813"
+              },
+              {
+                "kind": "grants_gov_attachment",
+                "name": "HT942526PRCRPCTA_GG.pdf",
+                "route": "attachment_sources",
+                "url": null
+              }
+            ],
+            "title": "DoW Peer Reviewed Cancer, Clinical Trial Award"
+          }
+        ],
+        "sample_size": 4,
+        "selection_weight_per_record": 26.75
+      },
+      {
+        "eligible_population": 33,
+        "name": "doe_energy",
+        "records": [
+          {
+            "agency": "NYSERDA",
+            "document_surface_at_selection": [
+              "source_for_record"
+            ],
+            "frozen_source_hash": null,
+            "opportunity_id": "nyserda:PON3982",
+            "opportunity_number": "PON 3982",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "NYSERDA",
+            "source_type": "State",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "agency_notice",
+                "name": null,
+                "route": "source_for_record",
+                "url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rt000000MdOBsAAN"
+              }
+            ],
+            "title": "On-the-Job Training for Energy Efficiency and Clean Technology"
+          },
+          {
+            "agency": "NYSERDA",
+            "document_surface_at_selection": [
+              "source_for_record"
+            ],
+            "frozen_source_hash": null,
+            "opportunity_id": "nyserda:RFQL5548",
+            "opportunity_number": "RFQL 5548",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "NYSERDA",
+            "source_type": "State",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "agency_notice",
+                "name": null,
+                "route": "source_for_record",
+                "url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0r8z000000Dk3yAAC"
+              }
+            ],
+            "title": "New York State Flexible Energy Technical Analysis"
+          },
+          {
+            "agency": "NYSERDA",
+            "document_surface_at_selection": [
+              "source_for_record"
+            ],
+            "frozen_source_hash": null,
+            "opportunity_id": "nyserda:PON6037-PhaseII",
+            "opportunity_number": "PON 6037 - Phase II",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "NYSERDA",
+            "source_type": "State",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "agency_notice",
+                "name": null,
+                "route": "source_for_record",
+                "url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00000iqxxLAAQ"
+              }
+            ],
+            "title": "Window Heat Pump Demonstration Program - Phase II"
+          },
+          {
+            "agency": "NYSERDA",
+            "document_surface_at_selection": [
+              "source_for_record"
+            ],
+            "frozen_source_hash": null,
+            "opportunity_id": "nyserda:RFP18",
+            "opportunity_number": "RFP 18",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "NYSERDA",
+            "source_type": "State",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "agency_notice",
+                "name": null,
+                "route": "source_for_record",
+                "url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rt000001GOHEzAAP"
+              }
+            ],
+            "title": "Financing Arrangements for High-Performance Affordable Housing"
+          }
+        ],
+        "sample_size": 4,
+        "selection_weight_per_record": 8.25
+      },
+      {
+        "eligible_population": 1,
+        "name": "nasa_space",
+        "records": [
+          {
+            "agency": "NASA Headquarters",
+            "document_surface_at_selection": [
+              "source_for_record"
+            ],
+            "frozen_source_hash": "b40918532c5ab5b39032b8663e820ecb0e7696c25c9409b6916dc4ac53d085b2",
+            "opportunity_id": "362393",
+            "opportunity_number": "NNH26ZTR001N-26NIAC-A2",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "Grants.gov",
+            "source_type": "Federal",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "agency_notice",
+                "name": null,
+                "route": "source_for_record",
+                "url": "https://www.nasa.gov/wp-content/uploads/2025/03/gcam-mar-2025.pdf?emrc=982b64"
+              }
+            ],
+            "title": "NASA Innovative Advanced Concepts (NIAC) Phase II"
+          }
+        ],
+        "sample_size": 1,
+        "selection_weight_per_record": 1.0
+      },
+      {
+        "eligible_population": 46,
+        "name": "agriculture_environment",
+        "records": [
+          {
+            "agency": "Bureau of Land Management",
+            "document_surface_at_selection": [
+              "subtopic_only_primary"
+            ],
+            "frozen_source_hash": null,
+            "opportunity_id": "363101",
+            "opportunity_number": "FA-NOFO0027-001",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "Grants.gov",
+            "source_type": "Federal",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "subtopic_agency_notice",
+                "name": null,
+                "route": "subtopic_only_primary",
+                "url": "https://www.firescience.gov/"
+              }
+            ],
+            "title": "Department of Interior Wildland Fire Service BLM-National Interagency Fire Center (NIFC) Joint Fire Science Program (JFSP)Fire Leaders And Managers, Emerging Scientists (FLAMES)"
+          },
+          {
+            "agency": "Bureau of Land Management",
+            "document_surface_at_selection": [
+              "subtopic_only_primary"
+            ],
+            "frozen_source_hash": null,
+            "opportunity_id": "363102",
+            "opportunity_number": "FA-NOFO0027-003",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "Grants.gov",
+            "source_type": "Federal",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "subtopic_agency_notice",
+                "name": null,
+                "route": "subtopic_only_primary",
+                "url": "https://www.firescience.gov/"
+              }
+            ],
+            "title": "U.S Wildland Fire Service BLM-National Interagency Fire Center (NIFC) Joint Fire Science Program (JFSP) Regional Fire Science Exchange Announcement"
+          },
+          {
+            "agency": "National Institute of Food and Agriculture",
+            "document_surface_at_selection": [
+              "source_for_record",
+              "attachment_sources"
+            ],
+            "frozen_source_hash": "fcf056cf4cab1cff660d9d8219804416ca8c699fb33326cd06b091dae5d9a9b6",
+            "opportunity_id": "363479",
+            "opportunity_number": "USDA-NIFA-CGP-011315",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "Grants.gov",
+            "source_type": "Federal",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "primary_notice",
+                "name": "FY26-HEC-NOFO-P.pdf",
+                "route": "source_for_record",
+                "url": "https://grants.gov/grantsws/rest/opportunity/att/download/354401"
+              },
+              {
+                "kind": "grants_gov_attachment",
+                "name": "FY26-HEC-NOFO-P.pdf",
+                "route": "attachment_sources",
+                "url": null
+              }
+            ],
+            "title": "Higher Education Challenge Grants Program"
+          },
+          {
+            "agency": "Bureau of Land Management",
+            "document_surface_at_selection": [
+              "source_for_record",
+              "attachment_sources",
+              "attachment_sources",
+              "attachment_sources",
+              "attachment_sources"
+            ],
+            "frozen_source_hash": "9c2d5d053e948fbd6486f3eaa6d27df7152c6809fa76e7dc3af51ca098e1dc82",
+            "opportunity_id": "363535",
+            "opportunity_number": "L26AS00045",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "Grants.gov",
+            "source_type": "Federal",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "primary_notice",
+                "name": "Foa_Content_of_L26AS00045 Wildlife.pdf",
+                "route": "source_for_record",
+                "url": "https://grants.gov/grantsws/rest/opportunity/att/download/354500"
+              },
+              {
+                "kind": "grants_gov_attachment",
+                "name": "Foa_Content_of_L26AS00045 Wildlife.pdf",
+                "route": "attachment_sources",
+                "url": null
+              },
+              {
+                "kind": "grants_gov_attachment",
+                "name": "(O) Attachment B Budget Detail Narrative - 02.09.2026.xlsx",
+                "route": "attachment_sources",
+                "url": null
+              },
+              {
+                "kind": "grants_gov_attachment",
+                "name": "03 (M) 15.247 Attachment A Wildlife.docx",
+                "route": "attachment_sources",
+                "url": null
+              },
+              {
+                "kind": "grants_gov_attachment",
+                "name": "Map of BLM Lands and State Office Boundaries.jpg",
+                "route": "attachment_sources",
+                "url": null
+              }
+            ],
+            "title": "FY26 Bureau of Land Management Wildlife Resource Management Program - Bureau wide"
+          }
+        ],
+        "sample_size": 4,
+        "selection_weight_per_record": 11.5
+      },
+      {
+        "eligible_population": 214,
+        "name": "other_research_funders",
+        "records": [
+          {
+            "agency": "National Endowment for the Arts",
+            "document_surface_at_selection": [
+              "subtopic_only_primary"
+            ],
+            "frozen_source_hash": null,
+            "opportunity_id": "362983",
+            "opportunity_number": "2027FCAH02",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "Grants.gov",
+            "source_type": "Federal",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "subtopic_agency_notice",
+                "name": null,
+                "route": "subtopic_only_primary",
+                "url": "https://www.arts.gov/impact/arts-and-artifacts-indemnity-program"
+              }
+            ],
+            "title": "NEA Arts and Artifacts International Indemnity Program 2, FY2027 (3/27)"
+          },
+          {
+            "agency": "National Institute of Standards and Technology",
+            "document_surface_at_selection": [
+              "source_for_record",
+              "attachment_sources",
+              "attachment_sources"
+            ],
+            "frozen_source_hash": "6314ba155e4302ac9b4dd60a2f969aaae7a62899ac295ca3a0d39cbec59d13e3",
+            "opportunity_id": "358955",
+            "opportunity_number": "2025-NIST-MSE-01",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "Grants.gov",
+            "source_type": "Federal",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "primary_notice",
+                "name": "FY25 MSE NOFO Amendment.pdf",
+                "route": "source_for_record",
+                "url": "https://grants.gov/grantsws/rest/opportunity/att/download/347648"
+              },
+              {
+                "kind": "grants_gov_attachment",
+                "name": "FY25 MSE NOFO Amendment.pdf",
+                "route": "attachment_sources",
+                "url": null
+              },
+              {
+                "kind": "grants_gov_attachment",
+                "name": "Coversheet_Amendment_FY25 MSE.pdf",
+                "route": "attachment_sources",
+                "url": null
+              }
+            ],
+            "title": "Measurement Science and Engineering (MSE) Research Grant Programs"
+          },
+          {
+            "agency": "Administration for Children & Families - ACYF/FYSB",
+            "document_surface_at_selection": [
+              "source_for_record",
+              "attachment_sources"
+            ],
+            "frozen_source_hash": "0195c78b06bb3678d60eca4898a43891a9d03815dd8f5f65f6ced04dc72ef8df",
+            "opportunity_id": "362071",
+            "opportunity_number": "HHS-2026-ACF-ACYF-CY-0016",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "Grants.gov",
+            "source_type": "Federal",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "primary_notice",
+                "name": "hhs-2026-acf-acyf-cy-0016.pdf",
+                "route": "source_for_record",
+                "url": "https://grants.gov/grantsws/rest/opportunity/att/download/354106"
+              },
+              {
+                "kind": "grants_gov_attachment",
+                "name": "hhs-2026-acf-acyf-cy-0016.pdf",
+                "route": "attachment_sources",
+                "url": null
+              }
+            ],
+            "title": "​​FY 2026 Basic Center Program​"
+          },
+          {
+            "agency": "Administration for Children & Families - ACYF/FYSB",
+            "document_surface_at_selection": [
+              "attachment_sources",
+              "attachment_sources"
+            ],
+            "frozen_source_hash": "89a7d7ffc3adb8c1ad0060351189abf973662f4571f94b08c9356255d7079f53",
+            "opportunity_id": "362099",
+            "opportunity_number": "HHS-2026-ACF-ACYF-YY-0119",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "Grants.gov",
+            "source_type": "Federal",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "grants_gov_attachment",
+                "name": "hhs-2026-acf-acyf-yy-0119 Modified 8.14.26.pdf",
+                "route": "attachment_sources",
+                "url": null
+              },
+              {
+                "kind": "grants_gov_attachment",
+                "name": "hhs-2026-acf-acyf-yy-0119.pdf",
+                "route": "attachment_sources",
+                "url": null
+              }
+            ],
+            "title": "The Primary Prevention Youth Homelessness Demonstration Program"
+          },
+          {
+            "agency": "Department of Commerce",
+            "document_surface_at_selection": [
+              "source_for_record",
+              "attachment_sources",
+              "attachment_sources",
+              "attachment_sources",
+              "attachment_sources",
+              "attachment_sources"
+            ],
+            "frozen_source_hash": "4e0dccbcf5d84aa759687d1ee5da936cfc4994843735a5ae712ee069a90faf9d",
+            "opportunity_id": "332125",
+            "opportunity_number": "EDA-CHI-TA-CRO-2021-2006849",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "Grants.gov",
+            "source_type": "Federal",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "primary_notice",
+                "name": "FY21-23 Planning and LTA NOFO - Updates for EDGE - March 2023.pdf",
+                "route": "source_for_record",
+                "url": "https://grants.gov/grantsws/rest/opportunity/att/download/325601"
+              },
+              {
+                "kind": "grants_gov_attachment",
+                "name": "FY21-23 Planning and LTA NOFO - Updates for EDGE - March 2023.pdf",
+                "route": "attachment_sources",
+                "url": null
+              },
+              {
+                "kind": "grants_gov_attachment",
+                "name": "FY21-23 Planning and LTA NOFO_FINAL.pdf",
+                "route": "attachment_sources",
+                "url": null
+              },
+              {
+                "kind": "grants_gov_attachment",
+                "name": "CD511-V1.1.pdf",
+                "route": "attachment_sources",
+                "url": null
+              },
+              {
+                "kind": "grants_gov_attachment",
+                "name": "ED_900_GA_1_2-V1.2.pdf",
+                "route": "attachment_sources",
+                "url": null
+              },
+              {
+                "kind": "grants_gov_attachment",
+                "name": "SFLLL_2_0-V2.0.pdf",
+                "route": "attachment_sources",
+                "url": null
+              }
+            ],
+            "title": "Chicago FY 2021 – FY 2023 EDA Planning and Local Technical Assistance"
+          },
+          {
+            "agency": "69A350 OSDBU",
+            "document_surface_at_selection": [
+              "source_for_record",
+              "attachment_sources"
+            ],
+            "frozen_source_hash": "5a4d9dfdd32df4e4ade01a60b888f0435370893a00d96abb24e52afae05242f4",
+            "opportunity_id": "363425",
+            "opportunity_number": "OST-OSDBU-2026-SBTTAC-REGION1-FY2026-1",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "Grants.gov",
+            "source_type": "Federal",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "primary_notice",
+                "name": "OST-OSDBU-2026-SBTTAC-Region1-FY2026-1 GRANT.pdf",
+                "route": "source_for_record",
+                "url": "https://grants.gov/grantsws/rest/opportunity/att/download/354298"
+              },
+              {
+                "kind": "grants_gov_attachment",
+                "name": "OST-OSDBU-2026-SBTTAC-Region1-FY2026-1 GRANT.pdf",
+                "route": "attachment_sources",
+                "url": null
+              }
+            ],
+            "title": "Small Business Transportation Technical Assistance Center (Region 1)"
+          },
+          {
+            "agency": "Bureau of International Narcotics-Law Enforcement",
+            "document_surface_at_selection": [
+              "source_for_record",
+              "attachment_sources",
+              "attachment_sources",
+              "attachment_sources"
+            ],
+            "frozen_source_hash": "745c8dcfd649aa7f2f9e49c168a2f4cecf31ebf55da5c72add35d4799bb90fba",
+            "opportunity_id": "363040",
+            "opportunity_number": "OFOP0003184",
+            "prior_read_status": "not_named_in_committed_prior-read artifacts or reports",
+            "reason_for_inclusion": "deterministic hash-ranked draw within agency stratum",
+            "source": "Grants.gov",
+            "source_type": "Federal",
+            "source_urls_known_at_selection": [
+              {
+                "kind": "primary_notice",
+                "name": "NOFO-Disrupting TCOs OFOP0003184 (FINAL).pdf",
+                "route": "source_for_record",
+                "url": "https://grants.gov/grantsws/rest/opportunity/att/download/353549"
+              },
+              {
+                "kind": "grants_gov_attachment",
+                "name": "NOFO-Disrupting TCOs OFOP0003184 (FINAL).pdf",
+                "route": "attachment_sources",
+                "url": null
+              },
+              {
+                "kind": "grants_gov_attachment",
+                "name": "Questions and Answers-OFOP0003184.pdf",
+                "route": "attachment_sources",
+                "url": null
+              },
+              {
+                "kind": "grants_gov_attachment",
+                "name": "FY2026 v.1 Open-Source Templates (Grants.gov).zip",
+                "route": "attachment_sources",
+                "url": null
+              }
+            ],
+            "title": "Disrupting TCOs through Evidence Reform"
+          }
+        ],
+        "sample_size": 7,
+        "selection_weight_per_record": 30.571428571428573
+      }
+    ]
+  },
+  "arm_b": {
+    "additional_case_rule": "Add no case after source inspection. A second additive frame commit is allowed only for an authoritative successor redirect or for a catalog-evidenced umbrella satisfying the prompt's pre-frozen inclusion conditions; record the reason and keep the original case.",
+    "cases": [
+      {
+        "case_id": "doe-office-science",
+        "discoverability_queries": [
+          "catalysis",
+          "plasma physics",
+          "isotope research"
+        ],
+        "expected_routes": [
+          "catalog and current Grants.gov detail/attachments for DE-FOA-0003600",
+          "https://science.osti.gov/grants/FOAs/FOAs/2026/DE-FOA-0003600",
+          "https://science.osti.gov/bes/Research"
+        ],
+        "hierarchy": "DOE Office of Science continuation solicitation / BES and sibling offices",
+        "selected_parent_ids": [
+          "360678"
+        ]
+      },
+      {
+        "case_id": "doe-genesis",
+        "discoverability_queries": [
+          "autonomous laboratories",
+          "quantum algorithms",
+          "subsurface strategic energy"
+        ],
+        "expected_routes": [
+          "catalog and current Grants.gov detail/attachments for DE-FOA-0003612"
+        ],
+        "hierarchy": "DOE Genesis Mission challenge areas and workbook focus areas",
+        "selected_parent_ids": [
+          "361526"
+        ]
+      },
+      {
+        "case_id": "doe-arpa-e",
+        "discoverability_queries": [
+          "SCALEUP energy technology",
+          "energy innovators"
+        ],
+        "expected_routes": [
+          "https://arpa-e-foa.energy.gov/",
+          "catalog and Grants.gov reconciliation"
+        ],
+        "hierarchy": "DOE ARPA-E eXCHANGE",
+        "selected_parent_ids": [
+          "356623",
+          "362036"
+        ]
+      },
+      {
+        "case_id": "doe-eere",
+        "discoverability_queries": [
+          "industrial decarbonization",
+          "vehicle technologies",
+          "renewable energy"
+        ],
+        "expected_routes": [
+          "https://eere-exchange.energy.gov/",
+          "catalog and Grants.gov reconciliation"
+        ],
+        "hierarchy": "DOE EERE Exchange",
+        "selected_parent_ids": []
+      },
+      {
+        "case_id": "doe-netl-hgeo",
+        "discoverability_queries": [
+          "carbon storage",
+          "geothermal",
+          "hydrocarbons"
+        ],
+        "expected_routes": [
+          "catalog and current Grants.gov detail/attachments for DE-FOA-0003627",
+          "current official DOE/NETL funding-opportunity and eXCHANGE surfaces"
+        ],
+        "hierarchy": "DOE HGEO / former FECM / NETL funding",
+        "selected_parent_ids": [
+          "363065"
+        ]
+      },
+      {
+        "case_id": "doe-critical-minerals",
+        "discoverability_queries": [
+          "critical minerals processing",
+          "critical minerals recycling"
+        ],
+        "expected_routes": [
+          "current official DOE organization/program pages",
+          "catalog and Grants.gov"
+        ],
+        "hierarchy": "DOE current critical-minerals organization and funding surface",
+        "selected_parent_ids": []
+      },
+      {
+        "case_id": "doe-office-electricity",
+        "discoverability_queries": [
+          "grid resilience",
+          "energy storage"
+        ],
+        "expected_routes": [
+          "current official Office of Electricity funding page",
+          "catalog and Grants.gov"
+        ],
+        "hierarchy": "DOE Office of Electricity",
+        "selected_parent_ids": []
+      },
+      {
+        "case_id": "doe-nuclear-energy",
+        "discoverability_queries": [
+          "advanced reactor licensing",
+          "nuclear energy research"
+        ],
+        "expected_routes": [
+          "current official Office of Nuclear Energy funding page",
+          "catalog and Grants.gov"
+        ],
+        "hierarchy": "DOE Office of Nuclear Energy",
+        "selected_parent_ids": [
+          "358100"
+        ]
+      },
+      {
+        "case_id": "arpa-h",
+        "discoverability_queries": [
+          "derive up to three exact technical queries from the current authoritative ISO/program titles before catalog retrieval"
+        ],
+        "expected_routes": [
+          "current official ARPA-H funding opportunities",
+          "catalog and Grants.gov"
+        ],
+        "hierarchy": "ARPA-H mission-office / ISO funding structure",
+        "selected_parent_ids": []
+      },
+      {
+        "case_id": "nasa-roses",
+        "discoverability_queries": [
+          "derive exact program-element-title queries from the frozen current Table 3 rows"
+        ],
+        "expected_routes": [
+          "https://science.nasa.gov/researchers/sara/grant-solicitations/",
+          "discovered current solicitation.nasaprs.com ROSES Table 3",
+          "catalog and Grants.gov reconciliation"
+        ],
+        "hierarchy": "NASA ROSES native Table 3 path",
+        "selected_parent_ids": []
+      },
+      {
+        "case_id": "nasa-nspires-open-list",
+        "discoverability_queries": [
+          "not applicable unless a verifiable net-new actionable parent is established"
+        ],
+        "expected_routes": [
+          "https://nspires.nasaprs.com/external/solicitations/solicitations!init.do",
+          "catalog"
+        ],
+        "hierarchy": "NASA NSPIRES open-solicitations list residual",
+        "selected_parent_ids": []
+      },
+      {
+        "case_id": "dod-muri",
+        "discoverability_queries": [
+          "multidisciplinary university research initiative",
+          "quantum sensing",
+          "energetic materials"
+        ],
+        "expected_routes": [
+          "catalog and current Grants.gov detail/attachments for W911NF-23-S-0001",
+          "official ARL BAA page"
+        ],
+        "hierarchy": "DoD Army MURI / DEVCOM ARL foundational BAA",
+        "selected_parent_ids": [
+          "344592"
+        ]
+      },
+      {
+        "case_id": "dod-army-tdac",
+        "discoverability_queries": [
+          "derive exact applicant-selectable TDAC topic titles from the authoritative page"
+        ],
+        "expected_routes": [
+          "catalog and Grants.gov",
+          "https://www.army.mil/article/261533"
+        ],
+        "hierarchy": "DoD Army TDAC referenced topics",
+        "selected_parent_ids": [
+          "345241"
+        ]
+      },
+      {
+        "case_id": "dod-onr",
+        "discoverability_queries": [
+          "catalyst design",
+          "quantum sensing",
+          "power and energy"
+        ],
+        "expected_routes": [
+          "catalog and Grants.gov",
+          "https://www.onr.navy.mil/work-with-us/funding-opportunities"
+        ],
+        "hierarchy": "DoD ONR long-range BAA",
+        "selected_parent_ids": [
+          "356605"
+        ]
+      },
+      {
+        "case_id": "dod-darpa",
+        "discoverability_queries": [
+          "derive exact focus-area-title queries from the authoritative notice"
+        ],
+        "expected_routes": [
+          "catalog and current Grants.gov detail/attachments for HR001126S0013"
+        ],
+        "hierarchy": "DoD DARPA office-wide / multi-focus BAA",
+        "selected_parent_ids": [
+          "362859"
+        ]
+      },
+      {
+        "case_id": "dod-afosr",
+        "discoverability_queries": [
+          "derive exact portfolio-title queries from the authoritative notice"
+        ],
+        "expected_routes": [
+          "catalog and current Grants.gov detail/attachments for FA955026S0001"
+        ],
+        "hierarchy": "DoD AFOSR research-interest BAA",
+        "selected_parent_ids": [
+          "362681"
+        ]
+      },
+      {
+        "case_id": "noaa-baas",
+        "discoverability_queries": [
+          "weather radar",
+          "satellite remote sensing",
+          "fisheries science"
+        ],
+        "expected_routes": [
+          "catalog and Grants.gov",
+          "current official NOAA office/funding pages"
+        ],
+        "hierarchy": "NOAA multi-office FY2024-2026 BAAs",
+        "selected_parent_ids": [
+          "355705",
+          "356127",
+          "356002",
+          "355706",
+          "356669"
+        ]
+      }
+    ],
+    "design": "purposive named hierarchy/discoverability sanity audit; no prevalence or confidence interval",
+    "questions": {
+      "B1": "Is the current actionable parent captured, deduplicated, and current?",
+      "B2": "Are genuine fundable subject subdivisions recovered usefully by final production?",
+      "B3": "Can current catalog/discoverability text surface an opaque parent for source-grounded technical queries?"
+    }
+  },
+  "catalog_commit": "a2fdd2b1a7db10a0b435dc6a56ee13f54c34374c",
+  "catalog_date": "2026-08-15T20:28:20.685912Z",
+  "catalog_extract": "GrantsDBExtract20260815v2.zip",
+  "catalog_record_count": 1475,
+  "frozen_at": "2026-08-20",
+  "outcome_blindness": "Generated without network access or source-text inspection. Selected records and named hierarchy questions may not be replaced after outcomes are known.",
+  "purpose": "MEAS-8 outcome-blind frozen selection frame; Arm A and Arm B are separate denominators",
+  "schema_version": 1
+}

@@ -32,7 +32,7 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(prototype, /id="sort"/);
   assert.match(prototype, /id="export-csv"/);
   assert.match(prototype, /id="export-ics"/);
-  assert.match(prototype, /id="compare-panel"/);
+  assert.doesNotMatch(prototype, /id="compare-panel"|data-compare=/);
   assert.match(prototype, /id="k-provider"/);
   assert.match(prototype, /id="k-key"/);
   assert.match(prototype, /id="research-profile"/);
@@ -48,7 +48,8 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(prototype, /id="key-storage-status"/);
   assert.match(prototype, /OpenAI key and project limits/);
   assert.match(prototype, /Anthropic key safety and limits/);
-  assert.match(prototype, /id="feedback-tools"/);
+  assert.match(prototype, /id="evaluation-tools" hidden/);
+  assert.doesNotMatch(prototype, /Help improve Funding Finder|id="use-preferences"/);
   assert.match(prototype, /id="result-assistant"/);
   assert.match(prototype, /id="export-evaluation"/);
   assert.match(prototype, /id="review-candidates"/);
@@ -85,6 +86,11 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(prototype, /assets\/ai-provider\.js/);
   assert.match(prototype, /assets\/chat-ui\.js/);
   assert.match(prototype, /assets\/search-retrieval\.js/);
+  assert.match(prototype, /assets\/app-config\.js/);
+  assert.match(prototype, /assets\/subtopic-runtime\.js/);
+  assert.match(prototype, /assets\/match-explain\.js/);
+  assert.match(prototype, /data-app-version/);
+  assert.doesNotMatch(prototype, /assets\/preferences\.js/);
   assert.match(prototype, /assets\/app\.js/);
   assert.match(providerScript, /gpt-5\.6-luna/);
   assert.match(providerScript, /claude-sonnet-5/);
@@ -122,7 +128,7 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(script, /function goToResultsPage/);
   assert.match(script, /data-page=/);
   assert.match(script, /function exportCalendar/);
-  assert.match(script, /function renderComparePanel/);
+  assert.doesNotMatch(script, /function renderComparePanel|data-compare|compareIds/);
   assert.match(script, /Program contact/);
   assert.match(script, /const listedDate = record\.posted_date \|\| record\.source_first_seen_date \|\| ""/);
   assert.match(script, /class="listed-date">Listed/);
@@ -148,6 +154,7 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(css, /\.card-actions/);
   assert.match(css, /\.source-action\.primary/);
   assert.match(css, /\.result-feedback-toggle/);
+  assert.match(script, /EVALUATION_MODE \? `<details class="result-feedback-toggle">/);
   assert.ok(
     script.indexOf('<details class="record-details">')
       < script.indexOf('<details class="result-feedback-toggle">'),
@@ -157,9 +164,11 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(css, /\.full-description li \+ li/);
   assert.doesNotMatch(script, /Prioritized from your ratings/);
   assert.doesNotMatch(script, /Verify current status/);
-  assert.doesNotMatch(script, /Why this matched/);
+  assert.match(script, /Why this match/);
   assert.doesNotMatch(script, /Official notice analyzed/);
-  assert.doesNotMatch(css, /\.card-contact|\.match-explanation|\.evidence-summary/);
+  assert.doesNotMatch(css, /\.card-contact|\.evidence-summary/);
+  assert.match(css, /\.match-explanation/);
+  assert.match(css, /\.matched-topics/);
   assert.doesNotMatch(script, />FOA changed</);
   assert.match(script, /AI retrieval candidate set/);
   assert.match(script, /result-label/);

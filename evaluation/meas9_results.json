@@ -1,0 +1,1847 @@
+{
+  "schema_version": 1,
+  "measured_at": "2026-08-21T14:49:49.645Z",
+  "sidecar_sha256": "70c0d7a3b04d6445c7e6ca3b66af4abfc78c06e75f0033139ca4099ba7551b44",
+  "product_query": "catalysts for AI",
+  "baseline_query_only": {
+    "candidate_count": 12,
+    "known_recall_anchors": {
+      "nsf_cps": {
+        "id": "362061",
+        "number": "PD-26-367Y",
+        "admitted": true,
+        "rank": 1
+      },
+      "nsf_chemistry": {
+        "id": "347749",
+        "number": "22-605",
+        "admitted": true,
+        "rank": 5
+      },
+      "doe_office_of_science": {
+        "id": "360678",
+        "number": "DE-FOA-0003600",
+        "admitted": true,
+        "rank": 3
+      },
+      "onr_long_range_baa": {
+        "id": "356605",
+        "number": "N0001425SB001",
+        "admitted": true,
+        "rank": 2
+      }
+    },
+    "top_results": [
+      {
+        "rank": 1,
+        "id": "362061",
+        "number": "PD-26-367Y",
+        "title": "Chemical Process Systems (CPS)",
+        "score": 102.523243,
+        "matched_child": null
+      },
+      {
+        "rank": 2,
+        "id": "356605",
+        "number": "N0001425SB001",
+        "title": "FY25 Long Range Broad Agency Announcement (BAA) for Navy and Marine Corps Science and Technology",
+        "score": 90.8167,
+        "matched_child": null
+      },
+      {
+        "rank": 3,
+        "id": "360678",
+        "number": "DE-FOA-0003600",
+        "title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+        "score": 89.662124,
+        "matched_child": null
+      },
+      {
+        "rank": 4,
+        "id": "362063",
+        "number": "PD-26-366Y",
+        "title": "Transport Phenomena (TP)",
+        "score": 83.632255,
+        "matched_child": null
+      },
+      {
+        "rank": 5,
+        "id": "347749",
+        "number": "22-605",
+        "title": "Division of Chemistry: Disciplinary Research Programs",
+        "score": 82.797345,
+        "matched_child": null
+      },
+      {
+        "rank": 6,
+        "id": "356055",
+        "number": "PD-24-8084",
+        "title": "Computational and Data-Enabled Science and Engineering",
+        "score": 81.641654,
+        "matched_child": null
+      },
+      {
+        "rank": 7,
+        "id": "341244",
+        "number": "22-606",
+        "title": "Division of Chemistry: Disciplinary Research Programs: No Deadline Pilot",
+        "score": 81.501096,
+        "matched_child": null
+      },
+      {
+        "rank": 8,
+        "id": "350018",
+        "number": "PD-23-1242",
+        "title": "Plasma Physics",
+        "score": 80.494271,
+        "matched_child": null
+      },
+      {
+        "rank": 9,
+        "id": "330175",
+        "number": "FA7000-21-S-0001",
+        "title": "Research Interests of the United States Air Force Academy (formerly USAFA-BAA-2021)",
+        "score": 79.794117,
+        "matched_child": null
+      },
+      {
+        "rank": 10,
+        "id": "363526",
+        "number": "NOFOAFRLAFOSR20260004",
+        "title": "FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) – RESEARCH COLLABORATION (RC)",
+        "score": 78.814841,
+        "matched_child": null
+      },
+      {
+        "rank": 11,
+        "id": "351715",
+        "number": "PD-24-110Z",
+        "title": "ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)",
+        "score": 77.701653,
+        "matched_child": null
+      },
+      {
+        "rank": 12,
+        "id": "357014",
+        "number": "PAR-25-153",
+        "title": "Assay development and screening for discovery of chemical probes, drugs or immunomodulators (R01 Clinical Trial Not Allowed)",
+        "score": 77.387875,
+        "matched_child": null
+      }
+    ]
+  },
+  "real_orcid_route": {
+    "orcid": "0000-0003-3066-0029",
+    "provider": "Crossref",
+    "endpoint_contract": "assets/orcid.js fetchProfile -> /works?filter=orcid:<id>",
+    "source": "Crossref metadata linked to the supplied ORCID iD",
+    "resolved_name": "Marc D. Porosoff",
+    "imported_work_count": 16,
+    "total_work_count": 16,
+    "works_with_title": 16,
+    "works_with_subjects": 0,
+    "works_with_container": 16,
+    "derived_keyword_count": 12,
+    "derived_keywords": [
+      "tungsten carbide catalysts",
+      "fischer tropsch synthesis",
+      "co 2 hydrogenation",
+      "reverse water gas",
+      "catalysts for co",
+      "water gas shift",
+      "tandem catalysts",
+      "pvc-compatible polyolefin hydrocracking",
+      "understanding fundamental principles",
+      "efficient pvc-compatible polyolefin",
+      "dynamic corrugated ultramicropores",
+      "structure function relationships"
+    ],
+    "publication_text_sha256": "50497beac7a0453195d029602767456c51100873e11ebf57d9f069cdb56d1a87",
+    "first_five_public_titles": [
+      "Screening Co-Based Single-Atom Alloys for Fischer–Tropsch Synthesis: Identifying Linear Scaling Relationships",
+      "Leveraging Large Language Models for Understanding Fundamental Principles of Catalysis",
+      "Bayesian Optimization of Catalysis with In-Context Learning",
+      "Achieving Phase Control of Polymorphic Tungsten Carbide Catalysts",
+      "Structure–function relationships in bimetallic tungsten carbide catalysts for the reverse water–gas shift reaction"
+    ],
+    "elapsed_ms": 626,
+    "error": null
+  },
+  "provider_comparison": {
+    "crossref": {
+      "usable": true,
+      "imported_work_count": 16,
+      "works_with_subjects": 0,
+      "elapsed_ms": 626
+    },
+    "openalex": {
+      "attempted": true,
+      "usable": true,
+      "status": 200,
+      "elapsed_ms": 401,
+      "work_count": 50,
+      "total_work_count": 54,
+      "titles": 50,
+      "abstracts": 34
+    },
+    "decision": "retain_crossref",
+    "rationale": "Crossref completed the actual product route; OpenAlex produced no demonstrated ranking gain in this bounded probe, so the provider was not changed."
+  },
+  "arms": [
+    {
+      "id": "arm_1_manual",
+      "label": "manual research description and expertise",
+      "query": "catalysts for AI",
+      "enabled_sources": [
+        "manual"
+      ],
+      "topics_enabled": false,
+      "candidate_count": 12,
+      "candidate_expansion_vs_query_only": 0,
+      "common_candidate_rank_displacement": 8,
+      "entering_top_10_vs_query_only": [
+        "357014",
+        "351715"
+      ],
+      "leaving_top_10_vs_query_only": [
+        "330175",
+        "363526"
+      ],
+      "false_positives_admitted": {
+        "ai_journalism": false,
+        "educationusa_ai_outreach": false,
+        "metaphorical_catalyst": false,
+        "biodata_catalyst": false
+      },
+      "known_recall_anchors": {
+        "nsf_cps": {
+          "id": "362061",
+          "number": "PD-26-367Y",
+          "admitted": true,
+          "rank": 1
+        },
+        "nsf_chemistry": {
+          "id": "347749",
+          "number": "22-605",
+          "admitted": true,
+          "rank": 5
+        },
+        "doe_office_of_science": {
+          "id": "360678",
+          "number": "DE-FOA-0003600",
+          "admitted": true,
+          "rank": 3
+        },
+        "onr_long_range_baa": {
+          "id": "356605",
+          "number": "N0001425SB001",
+          "admitted": true,
+          "rank": 2
+        }
+      },
+      "profile_terms": [
+        "catalysi",
+        "chemical",
+        "colloid",
+        "electrochemistry",
+        "ai",
+        "engineer"
+      ],
+      "top_results": [
+        {
+          "rank": 1,
+          "id": "362061",
+          "number": "PD-26-367Y",
+          "title": "Chemical Process Systems (CPS)",
+          "score": 144.234075,
+          "matched_child": null
+        },
+        {
+          "rank": 2,
+          "id": "356605",
+          "number": "N0001425SB001",
+          "title": "FY25 Long Range Broad Agency Announcement (BAA) for Navy and Marine Corps Science and Technology",
+          "score": 128.341417,
+          "matched_child": null
+        },
+        {
+          "rank": 3,
+          "id": "360678",
+          "number": "DE-FOA-0003600",
+          "title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+          "score": 125.980584,
+          "matched_child": null
+        },
+        {
+          "rank": 4,
+          "id": "362063",
+          "number": "PD-26-366Y",
+          "title": "Transport Phenomena (TP)",
+          "score": 125.816685,
+          "matched_child": null
+        },
+        {
+          "rank": 5,
+          "id": "347749",
+          "number": "22-605",
+          "title": "Division of Chemistry: Disciplinary Research Programs",
+          "score": 114.145211,
+          "matched_child": null
+        },
+        {
+          "rank": 6,
+          "id": "356055",
+          "number": "PD-24-8084",
+          "title": "Computational and Data-Enabled Science and Engineering",
+          "score": 113.649659,
+          "matched_child": null
+        },
+        {
+          "rank": 7,
+          "id": "341244",
+          "number": "22-606",
+          "title": "Division of Chemistry: Disciplinary Research Programs: No Deadline Pilot",
+          "score": 110.100459,
+          "matched_child": null
+        },
+        {
+          "rank": 8,
+          "id": "350018",
+          "number": "PD-23-1242",
+          "title": "Plasma Physics",
+          "score": 109.457933,
+          "matched_child": null
+        },
+        {
+          "rank": 9,
+          "id": "357014",
+          "number": "PAR-25-153",
+          "title": "Assay development and screening for discovery of chemical probes, drugs or immunomodulators (R01 Clinical Trial Not Allowed)",
+          "score": 108.326931,
+          "matched_child": null
+        },
+        {
+          "rank": 10,
+          "id": "351715",
+          "number": "PD-24-110Z",
+          "title": "ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)",
+          "score": 107.615069,
+          "matched_child": null
+        },
+        {
+          "rank": 11,
+          "id": "330175",
+          "number": "FA7000-21-S-0001",
+          "title": "Research Interests of the United States Air Force Academy (formerly USAFA-BAA-2021)",
+          "score": 106.507721,
+          "matched_child": null
+        },
+        {
+          "rank": 12,
+          "id": "363526",
+          "number": "NOFOAFRLAFOSR20260004",
+          "title": "FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) – RESEARCH COLLABORATION (RC)",
+          "score": 98.654717,
+          "matched_child": null
+        }
+      ]
+    },
+    {
+      "id": "arm_2_cv",
+      "label": "CV-derived",
+      "query": "catalysts for AI",
+      "enabled_sources": [
+        "cv"
+      ],
+      "topics_enabled": false,
+      "candidate_count": 12,
+      "candidate_expansion_vs_query_only": 0,
+      "common_candidate_rank_displacement": 22,
+      "entering_top_10_vs_query_only": [
+        "351715"
+      ],
+      "leaving_top_10_vs_query_only": [
+        "363526"
+      ],
+      "false_positives_admitted": {
+        "ai_journalism": false,
+        "educationusa_ai_outreach": false,
+        "metaphorical_catalyst": false,
+        "biodata_catalyst": false
+      },
+      "known_recall_anchors": {
+        "nsf_cps": {
+          "id": "362061",
+          "number": "PD-26-367Y",
+          "admitted": true,
+          "rank": 1
+        },
+        "nsf_chemistry": {
+          "id": "347749",
+          "number": "22-605",
+          "admitted": true,
+          "rank": 7
+        },
+        "doe_office_of_science": {
+          "id": "360678",
+          "number": "DE-FOA-0003600",
+          "admitted": true,
+          "rank": 4
+        },
+        "onr_long_range_baa": {
+          "id": "356605",
+          "number": "N0001425SB001",
+          "admitted": true,
+          "rank": 5
+        }
+      },
+      "profile_terms": [
+        "low-carbon",
+        "carbon",
+        "electrochemical",
+        "heterogeneou",
+        "jordan",
+        "reactor",
+        "capture",
+        "conversion",
+        "synthesi",
+        "experiment",
+        "supervis",
+        "fuel",
+        "catalysi",
+        "utilization",
+        "led",
+        "chemical",
+        "sustainable",
+        "material",
+        "manufactur",
+        "select",
+        "analysi",
+        "researcher",
+        "experience",
+        "design",
+        "interest",
+        "university"
+      ],
+      "top_results": [
+        {
+          "rank": 1,
+          "id": "362061",
+          "number": "PD-26-367Y",
+          "title": "Chemical Process Systems (CPS)",
+          "score": 166.921394,
+          "matched_child": null
+        },
+        {
+          "rank": 2,
+          "id": "362063",
+          "number": "PD-26-366Y",
+          "title": "Transport Phenomena (TP)",
+          "score": 127.530027,
+          "matched_child": null
+        },
+        {
+          "rank": 3,
+          "id": "351715",
+          "number": "PD-24-110Z",
+          "title": "ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)",
+          "score": 121.49689,
+          "matched_child": null
+        },
+        {
+          "rank": 4,
+          "id": "360678",
+          "number": "DE-FOA-0003600",
+          "title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+          "score": 121.160508,
+          "matched_child": null
+        },
+        {
+          "rank": 5,
+          "id": "356605",
+          "number": "N0001425SB001",
+          "title": "FY25 Long Range Broad Agency Announcement (BAA) for Navy and Marine Corps Science and Technology",
+          "score": 119.677217,
+          "matched_child": null
+        },
+        {
+          "rank": 6,
+          "id": "356055",
+          "number": "PD-24-8084",
+          "title": "Computational and Data-Enabled Science and Engineering",
+          "score": 114.689465,
+          "matched_child": null
+        },
+        {
+          "rank": 7,
+          "id": "347749",
+          "number": "22-605",
+          "title": "Division of Chemistry: Disciplinary Research Programs",
+          "score": 106.390246,
+          "matched_child": null
+        },
+        {
+          "rank": 8,
+          "id": "350018",
+          "number": "PD-23-1242",
+          "title": "Plasma Physics",
+          "score": 103.414799,
+          "matched_child": null
+        },
+        {
+          "rank": 9,
+          "id": "330175",
+          "number": "FA7000-21-S-0001",
+          "title": "Research Interests of the United States Air Force Academy (formerly USAFA-BAA-2021)",
+          "score": 98.085512,
+          "matched_child": null
+        },
+        {
+          "rank": 10,
+          "id": "341244",
+          "number": "22-606",
+          "title": "Division of Chemistry: Disciplinary Research Programs: No Deadline Pilot",
+          "score": 96.420883,
+          "matched_child": null
+        },
+        {
+          "rank": 11,
+          "id": "357014",
+          "number": "PAR-25-153",
+          "title": "Assay development and screening for discovery of chemical probes, drugs or immunomodulators (R01 Clinical Trial Not Allowed)",
+          "score": 94.583767,
+          "matched_child": null
+        },
+        {
+          "rank": 12,
+          "id": "363526",
+          "number": "NOFOAFRLAFOSR20260004",
+          "title": "FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) – RESEARCH COLLABORATION (RC)",
+          "score": 91.612661,
+          "matched_child": null
+        }
+      ]
+    },
+    {
+      "id": "arm_3_orcid",
+      "label": "real ORCID-derived",
+      "query": "catalysts for AI",
+      "enabled_sources": [
+        "orcid"
+      ],
+      "topics_enabled": false,
+      "candidate_count": 12,
+      "candidate_expansion_vs_query_only": 0,
+      "common_candidate_rank_displacement": 16,
+      "entering_top_10_vs_query_only": [
+        "351715"
+      ],
+      "leaving_top_10_vs_query_only": [
+        "363526"
+      ],
+      "false_positives_admitted": {
+        "ai_journalism": false,
+        "educationusa_ai_outreach": false,
+        "metaphorical_catalyst": false,
+        "biodata_catalyst": false
+      },
+      "known_recall_anchors": {
+        "nsf_cps": {
+          "id": "362061",
+          "number": "PD-26-367Y",
+          "admitted": true,
+          "rank": 1
+        },
+        "nsf_chemistry": {
+          "id": "347749",
+          "number": "22-605",
+          "admitted": true,
+          "rank": 5
+        },
+        "doe_office_of_science": {
+          "id": "360678",
+          "number": "DE-FOA-0003600",
+          "admitted": true,
+          "rank": 4
+        },
+        "onr_long_range_baa": {
+          "id": "356605",
+          "number": "N0001425SB001",
+          "admitted": true,
+          "rank": 3
+        }
+      },
+      "profile_terms": [
+        "acs",
+        "reverse",
+        "catalysi",
+        "metal",
+        "tandem",
+        "journal",
+        "adsorption",
+        "fe",
+        "mixture",
+        "nanoscale",
+        "reactive",
+        "single-atom",
+        "super",
+        "synthesi",
+        "gas",
+        "co",
+        "organic",
+        "separation",
+        "shift",
+        "bayesian",
+        "ees",
+        "greenhouse",
+        "atom",
+        "composite",
+        "gase",
+        "selective",
+        "reaction",
+        "situ"
+      ],
+      "top_results": [
+        {
+          "rank": 1,
+          "id": "362061",
+          "number": "PD-26-367Y",
+          "title": "Chemical Process Systems (CPS)",
+          "score": 143.835037,
+          "matched_child": null
+        },
+        {
+          "rank": 2,
+          "id": "362063",
+          "number": "PD-26-366Y",
+          "title": "Transport Phenomena (TP)",
+          "score": 132.389726,
+          "matched_child": null
+        },
+        {
+          "rank": 3,
+          "id": "356605",
+          "number": "N0001425SB001",
+          "title": "FY25 Long Range Broad Agency Announcement (BAA) for Navy and Marine Corps Science and Technology",
+          "score": 117.694745,
+          "matched_child": null
+        },
+        {
+          "rank": 4,
+          "id": "360678",
+          "number": "DE-FOA-0003600",
+          "title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+          "score": 117.224903,
+          "matched_child": null
+        },
+        {
+          "rank": 5,
+          "id": "347749",
+          "number": "22-605",
+          "title": "Division of Chemistry: Disciplinary Research Programs",
+          "score": 101.998164,
+          "matched_child": null
+        },
+        {
+          "rank": 6,
+          "id": "351715",
+          "number": "PD-24-110Z",
+          "title": "ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)",
+          "score": 99.733328,
+          "matched_child": null
+        },
+        {
+          "rank": 7,
+          "id": "356055",
+          "number": "PD-24-8084",
+          "title": "Computational and Data-Enabled Science and Engineering",
+          "score": 99.650029,
+          "matched_child": null
+        },
+        {
+          "rank": 8,
+          "id": "350018",
+          "number": "PD-23-1242",
+          "title": "Plasma Physics",
+          "score": 99.033625,
+          "matched_child": null
+        },
+        {
+          "rank": 9,
+          "id": "330175",
+          "number": "FA7000-21-S-0001",
+          "title": "Research Interests of the United States Air Force Academy (formerly USAFA-BAA-2021)",
+          "score": 98.205212,
+          "matched_child": null
+        },
+        {
+          "rank": 10,
+          "id": "341244",
+          "number": "22-606",
+          "title": "Division of Chemistry: Disciplinary Research Programs: No Deadline Pilot",
+          "score": 93.927682,
+          "matched_child": null
+        },
+        {
+          "rank": 11,
+          "id": "357014",
+          "number": "PAR-25-153",
+          "title": "Assay development and screening for discovery of chemical probes, drugs or immunomodulators (R01 Clinical Trial Not Allowed)",
+          "score": 91.712463,
+          "matched_child": null
+        },
+        {
+          "rank": 12,
+          "id": "363526",
+          "number": "NOFOAFRLAFOSR20260004",
+          "title": "FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) – RESEARCH COLLABORATION (RC)",
+          "score": 90.42619,
+          "matched_child": null
+        }
+      ]
+    },
+    {
+      "id": "arm_4_manual_cv",
+      "label": "manual plus CV",
+      "query": "catalysts for AI",
+      "enabled_sources": [
+        "manual",
+        "cv"
+      ],
+      "topics_enabled": false,
+      "candidate_count": 12,
+      "candidate_expansion_vs_query_only": 0,
+      "common_candidate_rank_displacement": 18,
+      "entering_top_10_vs_query_only": [
+        "351715"
+      ],
+      "leaving_top_10_vs_query_only": [
+        "363526"
+      ],
+      "false_positives_admitted": {
+        "ai_journalism": false,
+        "educationusa_ai_outreach": false,
+        "metaphorical_catalyst": false,
+        "biodata_catalyst": false
+      },
+      "known_recall_anchors": {
+        "nsf_cps": {
+          "id": "362061",
+          "number": "PD-26-367Y",
+          "admitted": true,
+          "rank": 1
+        },
+        "nsf_chemistry": {
+          "id": "347749",
+          "number": "22-605",
+          "admitted": true,
+          "rank": 7
+        },
+        "doe_office_of_science": {
+          "id": "360678",
+          "number": "DE-FOA-0003600",
+          "admitted": true,
+          "rank": 3
+        },
+        "onr_long_range_baa": {
+          "id": "356605",
+          "number": "N0001425SB001",
+          "admitted": true,
+          "rank": 4
+        }
+      },
+      "profile_terms": [
+        "catalysi",
+        "chemical",
+        "colloid",
+        "electrochemistry",
+        "ai",
+        "engineer",
+        "low-carbon",
+        "carbon",
+        "electrochemical",
+        "heterogeneou",
+        "jordan",
+        "reactor",
+        "capture",
+        "conversion",
+        "synthesi",
+        "experiment",
+        "supervis",
+        "fuel",
+        "utilization",
+        "led",
+        "sustainable",
+        "material",
+        "manufactur",
+        "select",
+        "analysi",
+        "researcher",
+        "experience",
+        "design"
+      ],
+      "top_results": [
+        {
+          "rank": 1,
+          "id": "362061",
+          "number": "PD-26-367Y",
+          "title": "Chemical Process Systems (CPS)",
+          "score": 179.158774,
+          "matched_child": null
+        },
+        {
+          "rank": 2,
+          "id": "362063",
+          "number": "PD-26-366Y",
+          "title": "Transport Phenomena (TP)",
+          "score": 146.780145,
+          "matched_child": null
+        },
+        {
+          "rank": 3,
+          "id": "360678",
+          "number": "DE-FOA-0003600",
+          "title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+          "score": 135.680939,
+          "matched_child": null
+        },
+        {
+          "rank": 4,
+          "id": "356605",
+          "number": "N0001425SB001",
+          "title": "FY25 Long Range Broad Agency Announcement (BAA) for Navy and Marine Corps Science and Technology",
+          "score": 132.544258,
+          "matched_child": null
+        },
+        {
+          "rank": 5,
+          "id": "351715",
+          "number": "PD-24-110Z",
+          "title": "ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)",
+          "score": 131.150138,
+          "matched_child": null
+        },
+        {
+          "rank": 6,
+          "id": "356055",
+          "number": "PD-24-8084",
+          "title": "Computational and Data-Enabled Science and Engineering",
+          "score": 127.771624,
+          "matched_child": null
+        },
+        {
+          "rank": 7,
+          "id": "347749",
+          "number": "22-605",
+          "title": "Division of Chemistry: Disciplinary Research Programs",
+          "score": 118.514989,
+          "matched_child": null
+        },
+        {
+          "rank": 8,
+          "id": "350018",
+          "number": "PD-23-1242",
+          "title": "Plasma Physics",
+          "score": 115.797089,
+          "matched_child": null
+        },
+        {
+          "rank": 9,
+          "id": "341244",
+          "number": "22-606",
+          "title": "Division of Chemistry: Disciplinary Research Programs: No Deadline Pilot",
+          "score": 108.173379,
+          "matched_child": null
+        },
+        {
+          "rank": 10,
+          "id": "330175",
+          "number": "FA7000-21-S-0001",
+          "title": "Research Interests of the United States Air Force Academy (formerly USAFA-BAA-2021)",
+          "score": 107.137668,
+          "matched_child": null
+        },
+        {
+          "rank": 11,
+          "id": "357014",
+          "number": "PAR-25-153",
+          "title": "Assay development and screening for discovery of chemical probes, drugs or immunomodulators (R01 Clinical Trial Not Allowed)",
+          "score": 103.553662,
+          "matched_child": null
+        },
+        {
+          "rank": 12,
+          "id": "363526",
+          "number": "NOFOAFRLAFOSR20260004",
+          "title": "FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) – RESEARCH COLLABORATION (RC)",
+          "score": 101.443299,
+          "matched_child": null
+        }
+      ]
+    },
+    {
+      "id": "arm_5_manual_orcid",
+      "label": "manual plus real ORCID",
+      "query": "catalysts for AI",
+      "enabled_sources": [
+        "manual",
+        "orcid"
+      ],
+      "topics_enabled": false,
+      "candidate_count": 12,
+      "candidate_expansion_vs_query_only": 0,
+      "common_candidate_rank_displacement": 14,
+      "entering_top_10_vs_query_only": [
+        "351715"
+      ],
+      "leaving_top_10_vs_query_only": [
+        "363526"
+      ],
+      "false_positives_admitted": {
+        "ai_journalism": false,
+        "educationusa_ai_outreach": false,
+        "metaphorical_catalyst": false,
+        "biodata_catalyst": false
+      },
+      "known_recall_anchors": {
+        "nsf_cps": {
+          "id": "362061",
+          "number": "PD-26-367Y",
+          "admitted": true,
+          "rank": 1
+        },
+        "nsf_chemistry": {
+          "id": "347749",
+          "number": "22-605",
+          "admitted": true,
+          "rank": 5
+        },
+        "doe_office_of_science": {
+          "id": "360678",
+          "number": "DE-FOA-0003600",
+          "admitted": true,
+          "rank": 3
+        },
+        "onr_long_range_baa": {
+          "id": "356605",
+          "number": "N0001425SB001",
+          "admitted": true,
+          "rank": 4
+        }
+      },
+      "profile_terms": [
+        "catalysi",
+        "chemical",
+        "colloid",
+        "electrochemistry",
+        "acs",
+        "engineer",
+        "ai",
+        "reverse",
+        "metal",
+        "tandem",
+        "journal",
+        "adsorption",
+        "fe",
+        "mixture",
+        "nanoscale",
+        "reactive",
+        "single-atom",
+        "super",
+        "synthesi",
+        "gas",
+        "co",
+        "organic",
+        "separation",
+        "shift",
+        "bayesian",
+        "ees",
+        "greenhouse",
+        "atom"
+      ],
+      "top_results": [
+        {
+          "rank": 1,
+          "id": "362061",
+          "number": "PD-26-367Y",
+          "title": "Chemical Process Systems (CPS)",
+          "score": 149.967964,
+          "matched_child": null
+        },
+        {
+          "rank": 2,
+          "id": "362063",
+          "number": "PD-26-366Y",
+          "title": "Transport Phenomena (TP)",
+          "score": 145.109822,
+          "matched_child": null
+        },
+        {
+          "rank": 3,
+          "id": "360678",
+          "number": "DE-FOA-0003600",
+          "title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+          "score": 128.438803,
+          "matched_child": null
+        },
+        {
+          "rank": 4,
+          "id": "356605",
+          "number": "N0001425SB001",
+          "title": "FY25 Long Range Broad Agency Announcement (BAA) for Navy and Marine Corps Science and Technology",
+          "score": 125.914107,
+          "matched_child": null
+        },
+        {
+          "rank": 5,
+          "id": "347749",
+          "number": "22-605",
+          "title": "Division of Chemistry: Disciplinary Research Programs",
+          "score": 113.312375,
+          "matched_child": null
+        },
+        {
+          "rank": 6,
+          "id": "356055",
+          "number": "PD-24-8084",
+          "title": "Computational and Data-Enabled Science and Engineering",
+          "score": 110.576153,
+          "matched_child": null
+        },
+        {
+          "rank": 7,
+          "id": "351715",
+          "number": "PD-24-110Z",
+          "title": "ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)",
+          "score": 110.310381,
+          "matched_child": null
+        },
+        {
+          "rank": 8,
+          "id": "350018",
+          "number": "PD-23-1242",
+          "title": "Plasma Physics",
+          "score": 107.799484,
+          "matched_child": null
+        },
+        {
+          "rank": 9,
+          "id": "330175",
+          "number": "FA7000-21-S-0001",
+          "title": "Research Interests of the United States Air Force Academy (formerly USAFA-BAA-2021)",
+          "score": 105.837805,
+          "matched_child": null
+        },
+        {
+          "rank": 10,
+          "id": "341244",
+          "number": "22-606",
+          "title": "Division of Chemistry: Disciplinary Research Programs: No Deadline Pilot",
+          "score": 103.184441,
+          "matched_child": null
+        },
+        {
+          "rank": 11,
+          "id": "357014",
+          "number": "PAR-25-153",
+          "title": "Assay development and screening for discovery of chemical probes, drugs or immunomodulators (R01 Clinical Trial Not Allowed)",
+          "score": 101.613295,
+          "matched_child": null
+        },
+        {
+          "rank": 12,
+          "id": "363526",
+          "number": "NOFOAFRLAFOSR20260004",
+          "title": "FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) – RESEARCH COLLABORATION (RC)",
+          "score": 94.718541,
+          "matched_child": null
+        }
+      ]
+    },
+    {
+      "id": "arm_6_manual_cv_orcid",
+      "label": "manual plus CV plus real ORCID",
+      "query": "catalysts for AI",
+      "enabled_sources": [
+        "manual",
+        "cv",
+        "orcid"
+      ],
+      "topics_enabled": false,
+      "candidate_count": 12,
+      "candidate_expansion_vs_query_only": 0,
+      "common_candidate_rank_displacement": 16,
+      "entering_top_10_vs_query_only": [
+        "351715"
+      ],
+      "leaving_top_10_vs_query_only": [
+        "363526"
+      ],
+      "false_positives_admitted": {
+        "ai_journalism": false,
+        "educationusa_ai_outreach": false,
+        "metaphorical_catalyst": false,
+        "biodata_catalyst": false
+      },
+      "known_recall_anchors": {
+        "nsf_cps": {
+          "id": "362061",
+          "number": "PD-26-367Y",
+          "admitted": true,
+          "rank": 1
+        },
+        "nsf_chemistry": {
+          "id": "347749",
+          "number": "22-605",
+          "admitted": true,
+          "rank": 5
+        },
+        "doe_office_of_science": {
+          "id": "360678",
+          "number": "DE-FOA-0003600",
+          "admitted": true,
+          "rank": 3
+        },
+        "onr_long_range_baa": {
+          "id": "356605",
+          "number": "N0001425SB001",
+          "admitted": true,
+          "rank": 4
+        }
+      },
+      "profile_terms": [
+        "catalysi",
+        "chemical",
+        "colloid",
+        "electrochemistry",
+        "acs",
+        "engineer",
+        "ai",
+        "synthesi",
+        "reverse",
+        "metal",
+        "tandem",
+        "journal",
+        "fuel",
+        "adsorption",
+        "fe",
+        "mixture",
+        "nanoscale",
+        "reactive",
+        "single-atom",
+        "super",
+        "gas",
+        "co",
+        "organic",
+        "separation",
+        "shift",
+        "bayesian",
+        "ees",
+        "greenhouse"
+      ],
+      "top_results": [
+        {
+          "rank": 1,
+          "id": "362061",
+          "number": "PD-26-367Y",
+          "title": "Chemical Process Systems (CPS)",
+          "score": 156.827742,
+          "matched_child": null
+        },
+        {
+          "rank": 2,
+          "id": "362063",
+          "number": "PD-26-366Y",
+          "title": "Transport Phenomena (TP)",
+          "score": 152.405564,
+          "matched_child": null
+        },
+        {
+          "rank": 3,
+          "id": "360678",
+          "number": "DE-FOA-0003600",
+          "title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+          "score": 128.438803,
+          "matched_child": null
+        },
+        {
+          "rank": 4,
+          "id": "356605",
+          "number": "N0001425SB001",
+          "title": "FY25 Long Range Broad Agency Announcement (BAA) for Navy and Marine Corps Science and Technology",
+          "score": 125.914107,
+          "matched_child": null
+        },
+        {
+          "rank": 5,
+          "id": "347749",
+          "number": "22-605",
+          "title": "Division of Chemistry: Disciplinary Research Programs",
+          "score": 113.312375,
+          "matched_child": null
+        },
+        {
+          "rank": 6,
+          "id": "356055",
+          "number": "PD-24-8084",
+          "title": "Computational and Data-Enabled Science and Engineering",
+          "score": 110.576153,
+          "matched_child": null
+        },
+        {
+          "rank": 7,
+          "id": "351715",
+          "number": "PD-24-110Z",
+          "title": "ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)",
+          "score": 110.310381,
+          "matched_child": null
+        },
+        {
+          "rank": 8,
+          "id": "330175",
+          "number": "FA7000-21-S-0001",
+          "title": "Research Interests of the United States Air Force Academy (formerly USAFA-BAA-2021)",
+          "score": 105.837805,
+          "matched_child": null
+        },
+        {
+          "rank": 9,
+          "id": "341244",
+          "number": "22-606",
+          "title": "Division of Chemistry: Disciplinary Research Programs: No Deadline Pilot",
+          "score": 103.184441,
+          "matched_child": null
+        },
+        {
+          "rank": 10,
+          "id": "350018",
+          "number": "PD-23-1242",
+          "title": "Plasma Physics",
+          "score": 102.832606,
+          "matched_child": null
+        },
+        {
+          "rank": 11,
+          "id": "357014",
+          "number": "PAR-25-153",
+          "title": "Assay development and screening for discovery of chemical probes, drugs or immunomodulators (R01 Clinical Trial Not Allowed)",
+          "score": 101.613295,
+          "matched_child": null
+        },
+        {
+          "rank": 12,
+          "id": "363526",
+          "number": "NOFOAFRLAFOSR20260004",
+          "title": "FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) – RESEARCH COLLABORATION (RC)",
+          "score": 94.718541,
+          "matched_child": null
+        }
+      ]
+    },
+    {
+      "id": "arm_7_profile_only_fallback",
+      "label": "profile-only CV and ORCID fallback",
+      "query": "",
+      "enabled_sources": [
+        "cv",
+        "orcid"
+      ],
+      "topics_enabled": false,
+      "candidate_count": 5,
+      "candidate_expansion_vs_query_only": -7,
+      "common_candidate_rank_displacement": 12,
+      "entering_top_10_vs_query_only": [
+        "351715"
+      ],
+      "leaving_top_10_vs_query_only": [
+        "347749",
+        "356055",
+        "341244",
+        "350018",
+        "330175",
+        "363526"
+      ],
+      "false_positives_admitted": {
+        "ai_journalism": false,
+        "educationusa_ai_outreach": false,
+        "metaphorical_catalyst": false,
+        "biodata_catalyst": false
+      },
+      "known_recall_anchors": {
+        "nsf_cps": {
+          "id": "362061",
+          "number": "PD-26-367Y",
+          "admitted": true,
+          "rank": 2
+        },
+        "nsf_chemistry": {
+          "id": "347749",
+          "number": "22-605",
+          "admitted": false,
+          "rank": null
+        },
+        "doe_office_of_science": {
+          "id": "360678",
+          "number": "DE-FOA-0003600",
+          "admitted": true,
+          "rank": 4
+        },
+        "onr_long_range_baa": {
+          "id": "356605",
+          "number": "N0001425SB001",
+          "admitted": true,
+          "rank": 3
+        }
+      },
+      "profile_terms": [
+        "catalysi",
+        "acs",
+        "synthesi",
+        "reverse",
+        "metal",
+        "tandem",
+        "journal",
+        "fuel",
+        "adsorption",
+        "fe",
+        "mixture",
+        "nanoscale",
+        "reactive",
+        "single-atom",
+        "super",
+        "gas",
+        "co",
+        "organic",
+        "chemical",
+        "separation",
+        "shift",
+        "bayesian",
+        "ees",
+        "greenhouse",
+        "atom",
+        "composite",
+        "gase",
+        "selective"
+      ],
+      "top_results": [
+        {
+          "rank": 1,
+          "id": "362063",
+          "number": "PD-26-366Y",
+          "title": "Transport Phenomena (TP)",
+          "score": 156.12466,
+          "matched_child": null
+        },
+        {
+          "rank": 2,
+          "id": "362061",
+          "number": "PD-26-367Y",
+          "title": "Chemical Process Systems (CPS)",
+          "score": 118.761221,
+          "matched_child": null
+        },
+        {
+          "rank": 3,
+          "id": "356605",
+          "number": "N0001425SB001",
+          "title": "FY25 Long Range Broad Agency Announcement (BAA) for Navy and Marine Corps Science and Technology",
+          "score": 69.461944,
+          "matched_child": null
+        },
+        {
+          "rank": 4,
+          "id": "360678",
+          "number": "DE-FOA-0003600",
+          "title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+          "score": 68.490982,
+          "matched_child": null
+        },
+        {
+          "rank": 5,
+          "id": "351715",
+          "number": "PD-24-110Z",
+          "title": "ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)",
+          "score": 61.94629,
+          "matched_child": null
+        }
+      ]
+    },
+    {
+      "id": "arm_8_topic_aware",
+      "label": "post-P9 parent/subtopic-aware ranking",
+      "query": "catalysts for AI",
+      "enabled_sources": [
+        "manual",
+        "cv",
+        "orcid"
+      ],
+      "topics_enabled": true,
+      "candidate_count": 12,
+      "candidate_expansion_vs_query_only": 0,
+      "common_candidate_rank_displacement": 16,
+      "entering_top_10_vs_query_only": [
+        "351715"
+      ],
+      "leaving_top_10_vs_query_only": [
+        "363526"
+      ],
+      "false_positives_admitted": {
+        "ai_journalism": false,
+        "educationusa_ai_outreach": false,
+        "metaphorical_catalyst": false,
+        "biodata_catalyst": false
+      },
+      "known_recall_anchors": {
+        "nsf_cps": {
+          "id": "362061",
+          "number": "PD-26-367Y",
+          "admitted": true,
+          "rank": 1
+        },
+        "nsf_chemistry": {
+          "id": "347749",
+          "number": "22-605",
+          "admitted": true,
+          "rank": 5
+        },
+        "doe_office_of_science": {
+          "id": "360678",
+          "number": "DE-FOA-0003600",
+          "admitted": true,
+          "rank": 3
+        },
+        "onr_long_range_baa": {
+          "id": "356605",
+          "number": "N0001425SB001",
+          "admitted": true,
+          "rank": 4
+        }
+      },
+      "profile_terms": [
+        "catalysi",
+        "chemical",
+        "colloid",
+        "electrochemistry",
+        "acs",
+        "engineer",
+        "ai",
+        "synthesi",
+        "reverse",
+        "metal",
+        "tandem",
+        "journal",
+        "fuel",
+        "adsorption",
+        "fe",
+        "mixture",
+        "nanoscale",
+        "reactive",
+        "single-atom",
+        "super",
+        "gas",
+        "co",
+        "organic",
+        "separation",
+        "shift",
+        "bayesian",
+        "ees",
+        "greenhouse"
+      ],
+      "top_results": [
+        {
+          "rank": 1,
+          "id": "362061",
+          "number": "PD-26-367Y",
+          "title": "Chemical Process Systems (CPS)",
+          "score": 1.034446,
+          "matched_child": null
+        },
+        {
+          "rank": 2,
+          "id": "362063",
+          "number": "PD-26-366Y",
+          "title": "Transport Phenomena (TP)",
+          "score": 1.005277,
+          "matched_child": null
+        },
+        {
+          "rank": 3,
+          "id": "360678",
+          "number": "DE-FOA-0003600",
+          "title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+          "score": 0.847191,
+          "matched_child": null
+        },
+        {
+          "rank": 4,
+          "id": "356605",
+          "number": "N0001425SB001",
+          "title": "FY25 Long Range Broad Agency Announcement (BAA) for Navy and Marine Corps Science and Technology",
+          "score": 0.830538,
+          "matched_child": null
+        },
+        {
+          "rank": 5,
+          "id": "347749",
+          "number": "22-605",
+          "title": "Division of Chemistry: Disciplinary Research Programs",
+          "score": 0.747416,
+          "matched_child": null
+        },
+        {
+          "rank": 6,
+          "id": "356055",
+          "number": "PD-24-8084",
+          "title": "Computational and Data-Enabled Science and Engineering",
+          "score": 0.729367,
+          "matched_child": null
+        },
+        {
+          "rank": 7,
+          "id": "351715",
+          "number": "PD-24-110Z",
+          "title": "ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)",
+          "score": 0.727614,
+          "matched_child": null
+        },
+        {
+          "rank": 8,
+          "id": "330175",
+          "number": "FA7000-21-S-0001",
+          "title": "Research Interests of the United States Air Force Academy (formerly USAFA-BAA-2021)",
+          "score": 0.698113,
+          "matched_child": null
+        },
+        {
+          "rank": 9,
+          "id": "341244",
+          "number": "22-606",
+          "title": "Division of Chemistry: Disciplinary Research Programs: No Deadline Pilot",
+          "score": 0.680611,
+          "matched_child": null
+        },
+        {
+          "rank": 10,
+          "id": "350018",
+          "number": "PD-23-1242",
+          "title": "Plasma Physics",
+          "score": 0.67829,
+          "matched_child": null
+        },
+        {
+          "rank": 11,
+          "id": "357014",
+          "number": "PAR-25-153",
+          "title": "Assay development and screening for discovery of chemical probes, drugs or immunomodulators (R01 Clinical Trial Not Allowed)",
+          "score": 0.670248,
+          "matched_child": null
+        },
+        {
+          "rank": 12,
+          "id": "363526",
+          "number": "NOFOAFRLAFOSR20260004",
+          "title": "FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) – RESEARCH COLLABORATION (RC)",
+          "score": 0.62477,
+          "matched_child": null
+        }
+      ]
+    }
+  ],
+  "parent_vs_subtopic_behavior": {
+    "historical_anchor_arm_moved_results": 0,
+    "probes": [
+      {
+        "query": "electrochemistry",
+        "parent_candidate_count": 2,
+        "topic_candidate_count": 3,
+        "entering_top_10": [
+          {
+            "rank": 2,
+            "id": "344592",
+            "number": "W911NF-23-S-0001",
+            "title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
+            "score": 0.989593,
+            "matched_child": {
+              "id": "344592:ab-0025",
+              "title": "Electrochemistry"
+            }
+          }
+        ],
+        "leaving_top_10": [],
+        "child_driven_top_10": [
+          {
+            "rank": 2,
+            "id": "344592",
+            "number": "W911NF-23-S-0001",
+            "title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
+            "score": 0.989593,
+            "matched_child": {
+              "id": "344592:ab-0025",
+              "title": "Electrochemistry"
+            }
+          }
+        ],
+        "explanation_sample_count": 2
+      },
+      {
+        "query": "polymer materials",
+        "parent_candidate_count": 2,
+        "topic_candidate_count": 3,
+        "entering_top_10": [
+          {
+            "rank": 3,
+            "id": "344592",
+            "number": "W911NF-23-S-0001",
+            "title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
+            "score": 0.446907,
+            "matched_child": {
+              "id": "344592:ab-0002",
+              "title": "Polymer Chemistry"
+            }
+          }
+        ],
+        "leaving_top_10": [],
+        "child_driven_top_10": [
+          {
+            "rank": 3,
+            "id": "344592",
+            "number": "W911NF-23-S-0001",
+            "title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
+            "score": 0.446907,
+            "matched_child": {
+              "id": "344592:ab-0002",
+              "title": "Polymer Chemistry"
+            }
+          }
+        ],
+        "explanation_sample_count": 1
+      },
+      {
+        "query": "advanced manufacturing",
+        "parent_candidate_count": 33,
+        "topic_candidate_count": 34,
+        "entering_top_10": [
+          {
+            "rank": 7,
+            "id": "344592",
+            "number": "W911NF-23-S-0001",
+            "title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
+            "score": 0.902436,
+            "matched_child": {
+              "id": "344592:ab-0075",
+              "title": "Advanced Manufacturing Research in support of the Sciences of Extreme Materials Competency"
+            }
+          },
+          {
+            "rank": 9,
+            "id": "361526",
+            "number": "DE-FOA-0003612",
+            "title": "The Genesis Mission: Transforming Science and Energy with AI",
+            "score": 0.805869,
+            "matched_child": {
+              "id": "361526:challenge-1",
+              "title": "Reenvisioning Advanced Manufacturing and Industrial Productivity"
+            }
+          }
+        ],
+        "leaving_top_10": [
+          {
+            "rank": 9,
+            "id": "306171",
+            "number": "PD-19-7479",
+            "title": "Biomechanics and Mechanobiology",
+            "score": 54.22778,
+            "matched_child": null
+          },
+          {
+            "rank": 10,
+            "id": "306167",
+            "number": "PD-19-006Y",
+            "title": "Operations Engineering",
+            "score": 53.842906,
+            "matched_child": null
+          }
+        ],
+        "child_driven_top_10": [
+          {
+            "rank": 7,
+            "id": "344592",
+            "number": "W911NF-23-S-0001",
+            "title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
+            "score": 0.902436,
+            "matched_child": {
+              "id": "344592:ab-0075",
+              "title": "Advanced Manufacturing Research in support of the Sciences of Extreme Materials Competency"
+            }
+          },
+          {
+            "rank": 9,
+            "id": "361526",
+            "number": "DE-FOA-0003612",
+            "title": "The Genesis Mission: Transforming Science and Energy with AI",
+            "score": 0.805869,
+            "matched_child": {
+              "id": "361526:challenge-1",
+              "title": "Reenvisioning Advanced Manufacturing and Industrial Productivity"
+            }
+          }
+        ],
+        "explanation_sample_count": 6
+      }
+    ]
+  },
+  "explanation_validation": {
+    "sample_count": 9,
+    "moved_result_sample_count": 9,
+    "correct_and_sufficient": 0,
+    "correct_but_incomplete": 9,
+    "misleading": 0,
+    "unsupported": 0,
+    "disabled_source_mentions": 0,
+    "noncontributing_child_mentions": 0,
+    "samples": [
+      {
+        "id": "344592",
+        "number": "W911NF-23-S-0001",
+        "title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
+        "parent_only_rank": null,
+        "topic_aware_rank": 2,
+        "matched_child": "Electrochemistry",
+        "reasons": [
+          "Matched topic: Electrochemistry (Electrochemistry).",
+          "Your research profile matched: electrocatalysis, catalysis, Electrochemistry.",
+          "Your CV matched: electrocatalysis, catalysis, electrochemical."
+        ],
+        "classification": "correct_but_incomplete",
+        "unsupported_reasons": []
+      },
+      {
+        "id": "356605",
+        "number": "N0001425SB001",
+        "title": "FY25 Long Range Broad Agency Announcement (BAA) for Navy and Marine Corps Science and Technology",
+        "parent_only_rank": 2,
+        "topic_aware_rank": 3,
+        "matched_child": null,
+        "reasons": [
+          "Search terms matched: electrochemistry.",
+          "Your research profile matched: catalysis, catalyst, artificial.",
+          "Your CV matched: catalysis, catalyst, electrochemical."
+        ],
+        "classification": "correct_but_incomplete",
+        "unsupported_reasons": []
+      },
+      {
+        "id": "344592",
+        "number": "W911NF-23-S-0001",
+        "title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
+        "parent_only_rank": null,
+        "topic_aware_rank": 3,
+        "matched_child": "Polymer Chemistry",
+        "reasons": [
+          "Matched topic: Polymer Chemistry (Polymer, Materials).",
+          "Search terms matched: materials.",
+          "Your research profile matched: artificial, machine, intelligence."
+        ],
+        "classification": "correct_but_incomplete",
+        "unsupported_reasons": []
+      },
+      {
+        "id": "344592",
+        "number": "W911NF-23-S-0001",
+        "title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
+        "parent_only_rank": 16,
+        "topic_aware_rank": 7,
+        "matched_child": "Advanced Manufacturing Research in support of the Sciences of Extreme Materials Competency",
+        "reasons": [
+          "Matched topic: Advanced Manufacturing Research in support of the Sciences of Extreme Materials Competency (manufacturing, Advanced).",
+          "Search terms matched: manufacturing, advanced.",
+          "Your research profile matched: artificial, machine, intelligence."
+        ],
+        "classification": "correct_but_incomplete",
+        "unsupported_reasons": []
+      },
+      {
+        "id": "341244",
+        "number": "22-606",
+        "title": "Division of Chemistry: Disciplinary Research Programs: No Deadline Pilot",
+        "parent_only_rank": 7,
+        "topic_aware_rank": 8,
+        "matched_child": null,
+        "reasons": [
+          "Search terms matched: manufacturing, Advanced.",
+          "Your research profile matched: artificial, intelligence, machine.",
+          "Your CV matched: catalysis, manufacturing, Chemical."
+        ],
+        "classification": "correct_but_incomplete",
+        "unsupported_reasons": []
+      },
+      {
+        "id": "361526",
+        "number": "DE-FOA-0003612",
+        "title": "The Genesis Mission: Transforming Science and Energy with AI",
+        "parent_only_rank": 13,
+        "topic_aware_rank": 9,
+        "matched_child": "Reenvisioning Advanced Manufacturing and Industrial Productivity",
+        "reasons": [
+          "Matched topic: Reenvisioning Advanced Manufacturing and Industrial Productivity (Manufacturing, Advanced).",
+          "Search terms matched: manufacturing, advanced.",
+          "Your research profile matched: AI, artificial, intelligence."
+        ],
+        "classification": "correct_but_incomplete",
+        "unsupported_reasons": []
+      },
+      {
+        "id": "362036",
+        "number": "DE-FOA-0003624",
+        "title": "INSPIRING GENERATIONS OF NEW INNOVATORS TO IMPACT TECHNOLOGIES IN ENERGY 2026 (IGNIITE 2026)",
+        "parent_only_rank": 8,
+        "topic_aware_rank": 10,
+        "matched_child": null,
+        "reasons": [
+          "Search terms matched: manufacturing, Advanced.",
+          "Your research profile matched: artificial, intelligence, learning.",
+          "Your CV matched: Carbon, manufacturing, researchers."
+        ],
+        "classification": "correct_but_incomplete",
+        "unsupported_reasons": []
+      },
+      {
+        "id": "306171",
+        "number": "PD-19-7479",
+        "title": "Biomechanics and Mechanobiology",
+        "parent_only_rank": 9,
+        "topic_aware_rank": 11,
+        "matched_child": null,
+        "reasons": [
+          "Search terms matched: Manufacturing, Advanced.",
+          "Your research profile matched: artificial, Machine, intelligence.",
+          "Your CV matched: Manufacturing, Materials, Researchers."
+        ],
+        "classification": "correct_but_incomplete",
+        "unsupported_reasons": []
+      },
+      {
+        "id": "306167",
+        "number": "PD-19-006Y",
+        "title": "Operations Engineering",
+        "parent_only_rank": 10,
+        "topic_aware_rank": 12,
+        "matched_child": null,
+        "reasons": [
+          "Search terms matched: manufacturing, advanced.",
+          "Your research profile matched: artificial, intelligence, machine.",
+          "Your CV matched: manufacturing, analysis, interest."
+        ],
+        "classification": "correct_but_incomplete",
+        "unsupported_reasons": []
+      }
+    ]
+  },
+  "elapsed_ms": 3567,
+  "notes": [
+    "The explicit query remains the admission gate in arms 1-6; CV and ORCID evidence may rerank but may not broaden that candidate set.",
+    "Arm 7 deliberately leaves both manual fields blank so CV/ORCID terms exercise the product's documented profile-only fallback.",
+    "Arm 8 uses the production P9 rollup exported by assets/search-retrieval.js; it does not implement a second topic formula.",
+    "No relevance labels are inferred by this deterministic regression."
+  ]
+}

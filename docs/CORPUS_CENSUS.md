@@ -1,0 +1,1174 @@
+# Corpus shape census
+
+> **⚠ NASA reachability corrected 2026-08-17 — read `docs/ROSES_SOURCE_INSPECTION.md`.**
+> Every statement in this document that describes `nspires.nasaprs.com` or
+> `solicitation.nasaprs.com` as unreachable, resetting the connection, or
+> refusing this client is **a fact about our HTTP client, not about NASA**.
+> CPython's default TLS cipher list omits `AES256-GCM-SHA384`, which is the only
+> suite those hosts offer; adding it — security level untouched, certificate and
+> hostname verification intact — connects at `TLSv1.2`. **All 12 NASA records
+> previously recorded as unreachable were re-fetched successfully on 2026-08-17,
+> with zero failures.** The counts and classifications below are otherwise
+> unchanged; only the attributed cause is wrong.
+
+
+**20 notice documents, judged by reading, against the ten §6.3 families.**
+
+§6.3's families were designed from expectation. B0 (`docs/PDF_API_NOTES.md`)
+tested three documents and found zero family matches; this census widens that
+to twenty chosen to span shapes rather than sampled at random, and separates
+two questions the earlier work conflated:
+
+1. **Does the document enumerate fundable subdivisions at all?** — judged by
+   reading the document, not by running a regex over it.
+2. **If so, does a family match?** — measured by running the real segmenter
+   through production's own `extract_containers()`.
+
+| Field | Value |
+|---|---|
+| Date | 2026-08-16 |
+| Documents | 20 (18 PDF, 2 HTML), all from `data/document_evidence.json` |
+| Segmenter | `scripts/subtopic_segmentation.py` at commit `248925d` |
+| Families | ten, `scripts/subtopic_patterns.py`, unmodified |
+
+## Headline
+
+> **12 of 20 documents enumerate fundable subdivisions.**
+> **A family identifies the right list in 1 of those 12.**
+> **The segmenter produces subtopics for 0 of them.**
+
+The denominator that matters is **12**, not 20. The eight that enumerate
+nothing are correct zeroes and should never be counted against acceptance.
+
+## ⚠ MURI is not in this corpus, and could not be
+
+`MURI` appears **zero times** across all 958 evidence entries — no title, no
+opportunity number, no description, no stored document text. This is not an
+oversight in the sample; it is the deferral in §18.2 arriving:
+
+> **SAM.gov adapter** (§7.5) — what is lost: *MURI specifically, and any
+> SAM.gov-only notice.*
+
+`dod_topic` is the family §6.3 lists as serving MURI. It therefore has **no
+MURI document validating it**. It is, however, the one family this census
+found working correctly — on an AFOSR DEPSCoR notice (`363526`), which uses
+the identical `Topic N:` convention. So the family shape is validated; the
+specific agency it was named for is not, and cannot be until SAM.gov ships.
+
+## The table
+
+`list?` = does the document enumerate fundable subdivisions, judged by reading.
+`should` = the family that ought to claim it. `does` = what the segmenter did.
+
+| # | id | Notice | Pages | list? | should match | does |
+|---|---|---|---|---|---|---|
+| 1 | `332894` | Army LQC BAA `W911NF21S0009` | 55 | **yes** — 6 Priority Research Thrusts | none — items are bare `1.)` | ✗ **false positive**: `roses_element`×3 on `A.1`/`E.1` section numbers |
+| 2 | `343653` | DHAPP `W81XWH-22` | 219 | **yes** — 10 country FOAs | none — named, not numbered | ✗ no match |
+| 3 | `345241` | Army DAC BAA `W911NF-23-S-0003` | 61 | no — topics live on an external website | — | ✓ correct zero |
+| 4 | `352741` | NRL Long Range BAA | 114 | **yes** — per-Division research areas | none — named divisions | ✗ no match |
+| 5 | `355867` | NIH `RFA-DA-25-024` (HTML) | — | no | — | ✓ correct zero |
+| 6 | `356605` | ONR Long Range BAA | 74 | no — technology areas on ONR website | — | ✓ correct zero |
+| 7 | `356623` | ARPA-E SCALEUP `DE-FOA-0003467` | 65 | **yes** — `CATEGORY 1:`–`CATEGORY 7:` | none — no `Category N` family | ✗ no match |
+| 8 | `357305` | NIH `PAR-25-274` (HTML) | — | no | — | ✓ correct zero |
+| 9 | `360261` | AFRL CHEERS `FA238424S2334` | 58 | no — **wrong attachment** (clauses list) | — | ✓ correct zero, wrong document |
+| 10 | `360339` | CDC global health `jg-26-0054` | 70 | **yes** — Components 1–5 | none — no `Component N` family | ✗ no match |
+| 11 | `360678` | **DOE Office of Science `DE-FOA-0003600`** | 224 | **yes** — full program taxonomy | none — hierarchical named + `(a)(b)(c)` | ✗ no match |
+| 12 | `361526` | DOE Genesis Mission `DE-FOA-0003612` | 166 | **yes** — `1 - `, `2 - `, `3 – ` | none — bare `N - Title` | ✗ no match |
+| 13 | `362005` | HUD PRO Housing | 107 | no — four goals, not fundable units | — | ✓ correct zero |
+| 14 | `362329` | DHA PRMRP `HT942526PRMRPPCTA` | 57 | **yes** — portfolios × bulleted topic areas | `topic_area` by name only | ✗ bulleted, unnumbered |
+| 15 | `362681` | AFOSR Open BAA `FA955026S0001` | 102 | **yes** — 39 named portfolios, 32 PM emails | none — named, not numbered | ✗ no match |
+| 16 | `362711` | Army ARL NOFO `W911NF26S0085` | 30 | no — points to agency documents | — | ✓ correct zero |
+| 17 | `362859` | DARPA MMoMA `HR001126S0013` | 22 | **yes** — Focus Area 1–4 | **`focus_area` — no such family** | ✗ missing family |
+| 18 | `363065` | DOE NETL `DE-FOA-0003627` | 58 | **yes** — Topic Area 1a/1b/1c/2 | `topic_area` | ✗ **partial**: `1a`/`1b`/`1c` unmatched |
+| 19 | `363489` | DARPA `HR001126S0016` | 18 | no — one technical area | — | ✓ correct zero |
+| 20 | `363526` | AFOSR DEPSCoR-RC | 68 | **yes** — Topic 1–12 | `dod_topic` | ✓ **family correct**, ✗ rejected by acceptance |
+
+**Yes-count: 12.** Correct family identified: **1/12** (`363526`). Subtopics
+produced: **0/12**.
+
+## Per-document notes where a list exists but no family matches
+
+### The two that reached `best_family` and were rejected anyway
+
+These are the most valuable rows in the table, because the failure is **not**
+in the patterns.
+
+**`363526` AFOSR DEPSCoR — `dod_topic` matched all 12 topics, twice.**
+
+```
+ACCEPTANCE FAILURES: ('ordinal_sequence', 'span_length')
+ordinals    : [1,2,3,4,5,6,7,8,9,10,11,12, 1,2,3,4,5,6,7,8,9,10,11,12]
+pages       : [4,4,4,4,4,4,4,4,4,4,4,4,    12,13,14,15,16,17,18,19,20,21,22,23]
+span lengths: [143,122,135,120,133,126,127,144,121,125,231,15483, 3814,...,102719]
+```
+
+The first twelve are the **table of contents on page 4**; the second twelve are
+the real headings on pages 12–23. Both sets enter the candidate list, so the
+ordinal sequence runs 1→12 then drops back to 1, and the TOC spans are 120–230
+characters — under the 200-character minimum. Two acceptance rules fire on what
+is otherwise a textbook-perfect match.
+
+**This is a segmenter defect, not a pattern gap**, and it has two parts:
+
+- Layer D collects candidates from **every** container including TOC pages.
+  §6.4 rule 6 rejects candidates *confined* to the TOC, but a set that mixes
+  TOC and body passes rule 6 and then fails rules 2 and 3 instead.
+- Layer B — which exists precisely for this document shape — computes its body
+  cutoff as `max(page_start_offset(p) for p in toc_pages)`. That is the offset
+  where the TOC page *begins*, so TOC candidates sit after it and survive the
+  `offset > body_start` filter. It should be the offset where the last TOC page
+  **ends**.
+
+`detect_toc_pages` correctly identified page 4. The information needed to fix
+this is already computed and simply not used. **Not fixed here** — this session
+is C0–C3 and the fix belongs with package D's tuning, done against the whole
+corpus. It is called out because it means package D's acceptance rate will read
+**0%** until it is addressed, which will look like a pattern problem and is not.
+
+**`363065` DOE NETL — `topic_area` matched only one of four topics.**
+
+```
+ordinals: [2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2]
+```
+
+The document's subdivisions are **Topic Area 1a, 1b, 1c and 2**. The family
+pattern is `\bTopic\s+Area\s+(\d{1,2})\b`, and `\b` fails between `1` and `a`,
+so `Topic Area 1a` does not match at all. Only `Topic Area 2` does, eleven
+times, from prose mentions and the amendment log. This is a genuine **pattern**
+gap: `sbir_subtopic` already models sub-lettered ordinals as `\d{1,2}[a-z]?`,
+and `topic_area` does not. The inconsistency is not deliberate.
+
+### Missing families, in frequency order
+
+| Shape | Documents | Example |
+|---|---|---|
+| **Named subdivisions with a label** (no ordinal at all) | `362681`, `352741`, `360678`, `343653` | `Program Description:` × 39 with 32 program-manager emails (AFOSR) |
+| **`Category N`** | `356623` | `CATEGORY 1:` … `CATEGORY 7:` |
+| **`Component N`** | `360339` | `Component 1: Core Global Health Security Priorities` |
+| **`Focus Area N`** | `362859` | `Focus Area 1: Integrated Materials Analysis` |
+| **`N - Title`** (bare ordinal, dash) | `361526` | `2 - Scaling the Biotechnology Revolution` |
+| **Bulleted topic areas under a named portfolio** | `362329` | `AUTOIMMUNE DISORDERS AND IMMUNOLOGY` → `• Celiac Disease` |
+
+**The single largest gap is that every one of the ten families requires an
+ordinal.** Four of the twelve enumerating documents — including the two richest,
+AFOSR's 39 portfolios and DOE's Office of Science taxonomy — name their
+subdivisions instead of numbering them. No amount of tuning to the existing
+families reaches them; it needs a different recognizer keyed on a repeated
+structural label (`Program Description:`, a program-manager email, a division
+heading) rather than on a counter.
+
+### False positives, which matter more than misses
+
+`332894` matched `roses_element` three times on **`A.1 Funding Opportunity
+Description`** and **`E.1 (Criteria)`** — ordinary DoD lettered-decimal section
+numbering, not NASA ROSES elements. The pattern `^\s*([A-F])\.(\d{1,2})\s+(\S.*)$`
+cannot distinguish them, and `A.`–`E.` section numbering is near-universal in
+DoD BAAs.
+
+Acceptance caught it. That is the design working — but it caught it via
+`ordinal_sequence` and `span_length`, the same two rules that rejected the
+*correct* match on `363526`. The rules are currently doing double duty as both
+a precision filter and an accident, and only one of those is by design.
+
+## What this changes
+
+**§6.7 is wrong about the DOE Office of Science omnibus, and it is the most
+consequential error in the plan for this user.** §6.7 states:
+
+> the FOA does not enumerate research areas — it refers the reader to the
+> program's own web pages … Segmentation cannot fix this, because the text
+> genuinely is not there.
+
+The text *is* there. `DE-FOA-0003600` carries **286 bookmarks** including a
+complete program taxonomy:
+
+```
+III. Program Description
+  A. Purpose
+    1. Advanced Scientific Computing Research (ASCR)
+      (a) Applied Mathematics
+      (b) Computer Science
+    2. Basic Energy Sciences (BES)
+      (a) Materials Chemistry
+      (b) Biomolecular Materials
+      (c) Synthesis and Processing Science
+      (d) Experimental Condensed Matter Physics
+```
+
+That is BES → sub-program granularity, in the notice, reachable by Layer A
+today. §18.2 lists "the DOE BES omnibus gets no child records in v1" as "the
+most painful single deferral in this table" and attributes it to needing a
+web-scraping project (§6.7's `program_taxonomy` adapter). On this evidence a
+large part of it needs a **pattern**, not a scraper. Recorded, not acted on —
+but §6.7 and §18.2 should be revisited before package D commits to its scope.
+
+**My own B0 conclusion was too strong.** `docs/PDF_API_NOTES.md` §4 reported
+zero family matches on three notices and framed AFOSR and ONR as
+outward-pointing umbrellas. That is right for ONR (`356605`, confirmed here:
+technology areas live on a website) and **wrong for AFOSR** (`362681`), which
+enumerates 39 portfolios with program managers in the document. B0 measured
+family matching and described it as document shape. This census separates the
+two, which is why it was worth doing before writing package C.
+
+## Postscript: two things the C2 flag-on run added
+
+The package C gate ran the real pipeline with `--enable-subtopics` against five
+documents copied out of the cache. It surfaced two findings the census pass
+could not.
+
+**The best segmentation candidate in the corpus is unreachable by the fetch
+path.** `363526` — the AFOSR DEPSCoR notice, the one document where a family
+matches correctly — was staged for the run and never fetched.
+`source_for_record()` returned `None` for it: its `primary_document_url` is
+absent, its `funding_opportunity_url` is the generic `https://www.grants.gov/`,
+and it needs no gap-fill because its close date and award range are already
+populated. Its evidence entry exists and names a real attachment URL, so the
+document *was* fetched at some earlier point and the record has since lost the
+link. That entry is now effectively orphaned: it will never be rechecked and
+can never be backfilled.
+
+This is pre-existing behaviour, not something package C introduced, and fixing
+it means changing `source_for_record`'s single-source contract — which §6.6
+explicitly defers. But it bounds backfill coverage in a way §8.3 does not
+mention: **a document is only reachable for segmentation if it still carries a
+usable source on the parent record**, and an unknown number of the ~1,400
+cached entries may be in the same state. Worth measuring before package D
+reports an acceptance rate, because those documents will silently never appear
+in the denominator at all.
+
+**The end-to-end machinery is proven; the corpus is what yields nothing.** With
+the flag on, five documents were fetched, segmented, and written to
+`data/subtopic_records.json` with diagnostics populated:
+
+```
+documents_attempted: 5, documents_with_subtopics: 0, subtopic_record_count: 0
+rejection_reasons: {"no_layer_accepted": 5}
+```
+
+Five `no_layer_accepted` results are exactly what this census predicts. The
+same production call site, given a document that *does* enumerate, produces
+three high-confidence records with titles, page spans, summaries, term maps and
+both topic vocabularies — so the pipeline is not the thing that is broken. The
+patterns and the TOC-duplication defect above are.
+
+## D2: the complete bookmark tree of `DE-FOA-0003600`
+
+§6.7 left one question open — the census read 26 of 286 bookmarks, so whether
+`Catalysis Science` is reachable *in the notice* was unverified, and that answer
+decides how much of §18.2's `program_taxonomy` deferral survives. Package D
+item D2 read all 286.
+
+**286 destinations, maximum depth 3.** Nodes per level: **9 / 46 / 167 / 64**.
+
+Level 0 is exactly the federal NOFO skeleton, which confirms §6.3a's
+depth-0 exclusion empirically:
+
+```
+I. Basic Information            VI.   Application Review Information
+II. Eligibility                 VII.  Award Notices
+III. Program Description        VIII. Post-Award Requirements and Administration
+IV. Application Contents        IX.   Other Information
+V. Submission Requirements
+```
+
+**`(q) Catalysis Science` is present: level 2, page 46, parent `2. Basic Energy
+Sciences (BES)`.** It is the only bookmark in the document matching `/catalys/i`.
+BES carries **24 sub-programs** at that level:
+
+```
+(a) Materials Chemistry              (m) Gas Phase Chemical Physics
+(c) Synthesis and Processing Science (o) Condensed Phase and Interfacial Molecular Science
+(d) Experimental Condensed Matter    (q) Catalysis Science
+(l) Atomic, Molecular, Optical       (r) Separation Science
+                                     (u) Photochemistry and Radiation Chemistry
+                                     (v) Photosynthetic Systems
+```
+
+So the answer to §6.7's open question is **yes** — the BES → program granularity
+this project's user actually needs is in the PDF, at a citable page.
+
+### What the tree also proves about §6.3a's selection rule
+
+Grouping every sibling set of ≥3 by its **level-0 ancestor** separates the
+document cleanly, and not the way §6.3a assumed:
+
+| Level-0 ancestor | Sibling sets | Nodes |
+|---|---|---|
+| `III. Program Description` | 10 | **93** — the real taxonomy (BES 24, FES 14, NP 11, HEP 9, IRP 5, BER 4, ASCR 4, …) |
+| All other sections | 23 | **159** — administrative (40 under *Administrative and National Policy Requirements*, 16 under *How-To Guides*, 14 form fields under *Research and Related Other Project Information*, 11 under *Component Pieces of the Application*) |
+
+Three findings, each of which forced a change to §6.3a:
+
+1. **The immediate-parent lexicon is too weak.** `C. Administrative and National
+   Policy Requirements` matches no lexicon term, and neither do most of its 40
+   children (*Availability of Funds*, *Buy America Preference*, *Conference
+   Spending*). The **level-0 ancestor** catches all 23 administrative sets
+   cleanly — structural, template-derived, and exactly the "primary exclusion is
+   structural, not lexical" §6.3a asked for and then failed to deliver.
+2. **"Deepest qualifying depth" selects the wrong level.** Under `III.`, level 3
+   holds 3 nodes (`Multi-Institutional Teams`) and would beat level 2's 77.
+   Selection must be **the admissible depth carrying the most nodes**.
+3. **The 60-node cap forces the wrong granularity.** Level 2 under `III.` is 77
+   nodes; level 1 is 16. At 60 the document yields 16 *program-office* children
+   and `Catalysis Science` disappears into the BES span — losing precisely the
+   record that motivated the whole §6.7 analysis.
+
+## Package D results, measured against this census
+
+Every figure below is a rate against the **12 enumerating documents**, never a
+raw count, and the false-positive count on the **8 non-enumerating** documents
+is reported separately because it matters more: a false positive publishes a
+fabricated subtopic to a principal investigator, a miss publishes nothing.
+
+| Stage | Acceptance | Wrong list | False positives |
+|---|---|---|---|
+| Baseline (start of package D) | **0/12 = 0%** | 0 | 0/8 |
+| + D0a Layer B body cutoff | 0/12 = 0% | 0 | 0/8 |
+| + D0c final-span cap | **1/12 = 8%** | 0 | 0/8 |
+| + D0b Layer C/D TOC exclusion | 1/12 = 8% | 0 | 0/8 |
+| + D1 `structural_siblings` | **3/12 = 25%** | 0 | 0/8 |
+| + D3 census-named families | **5/12 = 42%** | 0 | 0/8 |
+
+**Of the 5 accepted, only 3 would publish.** `356623` and `362859` resolve at
+Layer D, which is low confidence, and low confidence never publishes (§6.2
+Layer D, §13). The figure the package D gate cares about — "zero
+low-confidence records in the published set" — is therefore **3/12 = 25%**.
+
+| Document | Result | Method | Confidence | Publishes |
+|---|---|---|---|---|
+| `363526` AFOSR DEPSCoR | 8 topics | `toc` | high | yes |
+| `360678` DOE Office of Science | **70 subtopics inc. `(q) Catalysis Science` p46** | `outline_structural` | medium | yes |
+| `361526` DOE Genesis Mission | 26 challenge areas | `outline_structural` | medium | yes |
+| `356623` ARPA-E SCALEUP | 7 technical categories | `numbered` | low | **no** |
+| `362859` DARPA MMoMA | 4 focus areas | `numbered` | low | **no** |
+
+### The seven remaining misses, and why none is a tuning problem
+
+| Document | Why it misses | Fixable by tuning? |
+|---|---|---|
+| `362681` AFOSR | 39 named portfolios, **zero bookmarks** | No — needs `label_run` (§6.3a), deferred with its risks stated |
+| `343653` DHAPP | 11 bookmarks, **all at level 0** | No — §6.3a excludes depth 0 by construction |
+| `352741` NRL LRBAA | 3 junk bookmarks; divisions are named in body prose | No — same shape as AFOSR |
+| `332894` Army LQC | 6 thrusts written as bare `1.)` | Only by a generic numbered family — §6.3/§18.3 forbid it |
+| `362329` DHA PRMRP | topic areas are **bulleted**, no ordinal, no outline | No mechanism covers this |
+| `360339` CDC | `Component 1-5` matches, but the located occurrences are a **front-matter summary list**, spans 88-239 chars against a 200 minimum | Needs occurrence selection, not pattern work |
+| `363065` DOE NETL | `Topic Area 1a/1b/1c/2` now matches, but 36 hits are prose mentions and amendment-log entries; ordinals read `1,2,1,1,1,…` | Needs heading-vs-mention discrimination |
+
+Two of these — `360339` and `363065` — are the same underlying problem in
+different clothes: **the pattern matches in several places and nothing chooses
+which occurrence is the heading.** That is the next real mechanism, and it is
+not a regex.
+
+### Correct-acceptance, judged by reading every span
+
+"Did it segment?" and "did it segment the right thing?" are different questions,
+and ARPA-E SCALEUP proved it: before the D3 lexicon fix it segmented the 13
+subsections of `H. Funding Restrictions` — *Allowable Costs*, *Foreign Travel*,
+*Lobbying* — and a binary metric scored that as a success. Every accepted
+document below was therefore re-scored by reading its spans.
+
+| Document | Spans | Spans that are fundable subdivisions | Recall of the real list | Publishes |
+|---|---|---|---|---|
+| `363526` AFOSR DEPSCoR | 8 | **8** | 8 of 12 topics = 67% | yes (high) |
+| `362859` DARPA MMoMA | 4 | **4** | 4 of 4 = 100% | no (low) |
+| `356623` ARPA-E SCALEUP | 7 | **7** | 7 of 7 = 100% | no (low) |
+| `360678` DOE Office of Science | 70 | **68** | 68 of 71 programmes = 96% | yes (medium) |
+| `361526` DOE Genesis Mission | 26 | **21** | 21 of 21 challenge areas = 100% | yes (medium) |
+
+> **Correct-acceptance rate: 5/12 = 42%.** Every accepted document found the
+> right list. **Publishable correct-acceptance: 3/12 = 25%**, because `356623`
+> and `362859` resolve at Layer D and low confidence never publishes.
+
+**Span-level precision is 108/115 = 94%, and all seven bad spans are in the
+publishable set.** They are not near-misses; they are administrative sections
+that happen to be outline siblings of real topics:
+
+| Document | Contaminating spans |
+|---|---|
+| `360678` | `Multi-Institutional Teams` (p118), `Open Science` (p120) |
+| `361526` | `Annual Meetings` (p60), `Annual Progress Reports` (p60), `Teaming Arrangements` (p60), `Joint Consideration` (p62), `Open Science` (p62) |
+
+Neither the §6.3a set-level veto nor the lexicon caught them: 5 of 26 is 19%,
+under the 25% threshold, and `Annual Progress Reports` does not match the term
+`reporting`. **Seven cards titled *Annual Progress Reports* and *Open Science*
+would reach a principal investigator with a page anchor**, which is §18.3's harm
+at small scale. This is a precision defect in `structural_siblings`, recorded
+and not fixed.
+
+### `DE-FOA-0003612` — Genesis Mission, in census format
+
+The highest-value document in the corpus: a **live, open** opportunity, not an
+archival test case.
+
+| Field | Value |
+|---|---|
+| Opportunity number | `DE-FOA-0003612` |
+| Title | The Genesis Mission: Transforming Science and Energy with AI |
+| Agency / status | Office of Science · **posted** |
+| Closes | **2026-12-17** (archive 2027-03-17) |
+| Evidence id | `361526` |
+| Notice | `DE-FOA-0003612.000003.pdf`, 166 pages, 1,321,107 bytes |
+| URL | live, `apply07.grants.gov/…/att/download/350588` |
+| Outline | 240 bookmarks |
+
+**Published ground truth: 21 challenge areas, drawn from 26 national
+challenges, reported elsewhere as 99 focus areas.**
+
+| Against | Spans | Result |
+|---|---|---|
+| **21 challenge areas** | 21 | **21/21 = 100% recall, exact** — spans 1–21 are the numbered challenge areas, `1 - Reenvisioning Advanced Manufacturing` through `21 - Artificial Intelligence in Fluid Flow for Energy Components` |
+| **99 focus areas** | 0 | **0/99 = 0%.** The focus areas sit one level below the challenge areas and are not bookmarked, so `structural_siblings` cannot see them. The segmenter operates at challenge-area granularity |
+| Precision | 26 emitted | **21/26 = 81%** — spans 22–26 are the five administrative siblings listed above |
+
+So on the single most valuable document the layer recovers the *entire*
+published challenge-area list exactly, at the wrong granularity for focus areas,
+with five spurious cards. The 99-focus-area level would need either a deeper
+bookmark tree than the notice has, or the occurrence-selection mechanism the
+misses below also need.
+
+### The seven misses, one line each
+
+| Document | Cause | Category |
+|---|---|---|
+| `362681` AFOSR Open BAA | 39 named portfolios with **zero bookmarks**; `structural_siblings` needs an outline tree | **missing family shape** — `label_run`, deferred in §6.3a |
+| `352741` NRL LRBAA | Divisions named in body prose; only 3 junk bookmarks | **missing family shape** — same `label_run` gap |
+| `362329` DHA PRMRP | Topic areas are **bulleted** under named portfolios, no ordinal and no outline depth | **missing family shape** |
+| `332894` Army LQC | Six Priority Research Thrusts written as bare `1.)` | **missing family shape**, and the only family that would catch it is the generic numbered one §6.3/§18.3 forbid |
+| `343653` DHAPP | Ten country FOAs are real fundable subdivisions but sit at **outline depth 0**, which §6.3a excludes by construction | **acceptance rule rejecting something legitimate** |
+| `360339` CDC | `Component 1-5` matches, but the located occurrences are a front-matter summary list — spans 88–239 chars against a 200 floor | **known defect** — occurrence selection |
+| `363065` DOE NETL | `Topic Area 1a/1b/1c/2` now matches, but 36 hits are prose mentions and amendment-log entries; ordinals read `1,2,1,1,1,…` | **known defect** — occurrence selection |
+
+**Four of seven are one missing mechanism** (`label_run` for named subdivisions,
+plus the bulleted variant). **Two are one known defect** — the pattern matches in
+several places and nothing decides which occurrence is the heading, the same
+class of bug as the table-of-contents duplication fixed in D0a/D0b. **One is an
+acceptance rule refusing a legitimate list.** Only `332894` would need the
+forbidden loosening.
+
+That distribution is the answer to whether more tuning is worth it: **more
+regexes buy almost nothing.** Two mechanisms — label runs and occurrence
+selection — would address six of the seven.
+
+### Two reachability findings
+
+- **`363526` is orphaned.** The one high-confidence acceptance in the corpus
+  cannot be reached by the production fetch path: its parent record has no
+  `primary_document_url` and needs no gap-fill, so `source_for_record()` returns
+  `None`. It segments when handed the bytes and **would never be handed them by
+  the nightly**.
+- **`360339` has left the catalog** since the census was taken, so one of the
+  twelve enumerating documents is no longer a live record at all.
+
+### The stop
+
+**42% acceptance is below the 50% threshold set for this package, so tuning
+stopped here rather than continuing.** Every remaining miss needs either a new
+mechanism (`label_run`, occurrence selection) or a generic numbered-section
+family, and §6.3 and §18.3 both name that last one as the most damaging change
+available to this design — the one that manufactures subtopics titled *Federal
+Agency Name*. Loosening to reach an arbitrary number would trade the metric
+that matters (0 false positives) for the metric that does not.
+
+**The strongest evidence that the discipline is working is the zero.** Across
+five layers of change and four new families, no non-enumerating document ever
+produced a subtopic, and the one wrong-list acceptance that did appear — ARPA-E
+SCALEUP returning `Allowable Costs`, `Foreign Travel` and `Lobbying` from
+`H. Funding Restrictions` — was caught only because the harness checks *which*
+list was found rather than *whether* one was. A binary metric scored that
+fabrication as a success.
+
+## Attachment inventory — the assumption the census inherited
+
+§6.6 requires segmenting every attachment on a record. `source_for_record()`
+returns exactly one, and this census was built on whatever that one was. **No
+secondary attachment had ever been opened.** All 62 were enumerated from the
+live `fetchOpportunity` responses.
+
+> **62 attachments across the 20 records. 12 of 20 carry more than one.
+> Only 8 are genuinely single-attachment.**
+
+The one-source assumption is therefore wrong for **60% of the corpus**, and the
+census's per-document judgments were made against a fraction of each record.
+
+| Record | Attachments | Segmented | Notable secondaries |
+|---|---|---|---|
+| `332894` Army LQC | 5 | `LQC BAA W911NF-21-S-0009-3.pdf` | 3 older BAA versions + a Special Notice |
+| `343653` DHAPP | 2 | main PDF | `FY27 SOW_New Award_YR1.xlsx` |
+| `345241` Army DAC | 1 | main PDF | — |
+| `352741` NRL LRBAA | 3 | `FY24 BAA Announcement FINAL.pdf` | **`Amendment 0004.pdf` — see below** |
+| `355867` NIH | 1 | 429-byte HTML stub | — |
+| `356605` ONR LRBAA | **9** | base BAA | Amendments 0001–0007, none carrying topics |
+| `356623` ARPA-E | 1 | main NOFO | — |
+| `357305` NIH | **0** | — | not in the Grants.gov attachment system at all |
+| `360261` AFRL CHEERS | 2 | **the clauses list** | `Open Period Solicitation 1_BAA Amend 01.pdf` |
+| `360339` CDC | 2 | main PDF | M&E indicator list |
+| `360678` DOE Office of Science | 1 | main NOFO | — |
+| `361526` **Genesis Mission** | **5** | `DE-FOA-0003612.000003.pdf` | **3 `.xlsx` templates — see below** |
+| `362005` HUD | 1 | main PDF | — |
+| `362329` DHA PRMRP | 1 | main PDF | — |
+| `362681` AFOSR | 4 | main BAA | Appendices 1–2 (security/privacy), AFRL addendum |
+| `362711` Army ARL | 1 | main PDF | — |
+| `362859` DARPA MMoMA | 4 | main BAA | proposal templates (`.docx`, `.pptx`) |
+| `363065` DOE NETL | 5 | `Amd_000003` | **`NOFO_Part_2.pdf` — checked, see below** |
+| `363489` DARPA | **10** | main BAA | 9 proposal/cost templates |
+| `363526` AFOSR DEPSCoR | 4 | main NOFO | Amendment 1, Appendices 1–2 |
+
+Three secondaries were fetched and segmented. Two changed nothing; one changed a
+verdict.
+
+**`363065` — `DE-FOA-0003627_NOFO_Part_2.pdf` (1.85 MB, 49 pages): not a topic
+document.** It says so itself: *"Part 2 includes fixed DOE requirements that
+generally do not change from NOFO to NOFO."* Zero mentions of `Topic Area N`,
+zero bookmarks, `no_layer_accepted`. This record's topic areas really are in
+Part 1, drowned in prose mentions — its classification stands.
+
+**`352741` — `N00173-24-S-BA01 Amendment 0004.pdf` (1.18 MB, 49 pages): this is
+where the topic list lives.** The amendment's own purpose line reads *"revise
+Appendix 1 in it's entirety"*, and Appendix 1 is `RESEARCH DESCRIPTION -
+SUMMARY TOPICS`. It contains **32 numbered NRL research topics with 25 distinct
+per-topic contact mailboxes**, organized under four directorates:
+
+```
+A.  SYSTEMS DIRECTORATE - CODE 5000
+    53-24-01  - HIGH FREQUENCY RADAR
+    53-24-01C - HIGH FREQUENCY RADAR (CLASSIFIED)
+    53-24-02  - LOW-COST WIDEBAND ANTENNA ARRAY TECHNOLOGIES
+    55-24-01  - INFORMATION AND DECISION SCIENCES
+    ...
+    82-24-01  - SPACECRAFT & SPACE SYSTEMS TECHNOLOGY
+```
+
+The primary notice the census judged contains none of this. **`352741` is not a
+pattern failure at all — it is a fetch-scope failure**, and it segments nothing
+today because the file holding its topics is never downloaded.
+
+### Every unsegmented secondary, opened
+
+The three above were chosen by judgment. **All 39 remaining unsegmented
+attachments were then opened and read** — not the 16 flagged ones, which was an
+undercount: 44 of the 62 attachments are non-primary, 5 had been opened, and 39
+had not. Readers: `pypdf` for PDF, `openpyxl` for spreadsheets, and `zipfile`
+plus a tag strip for `.docx`/`.pptx`, which needs no new dependency.
+
+> **No secondary attachment carries a topic list the primary does not.**
+
+Seven files tripped the detector, and **all seven are a different revision of a
+document already segmented**, not a new source:
+
+| File | What it is |
+|---|---|
+| `332894` `LQC BAA Final W911NF21S0009.pdf`, `V8 Amd 1`, `V8 Amd 2` | superseded versions of the same LQC BAA |
+| `363065` `FundOpp_DE-FOA-0003627.pdf`, `Amd_000001`, `Amd_000002` | earlier revisions of the NOFO whose `Amd_000003` is segmented |
+| `363526` `DEPSCoR-RC - Amendment 1.pdf` | a later revision of the segmented notice, same `Topic 1-12` list |
+
+The remaining 32 are proposal templates, cost spreadsheets, privacy and security
+appendices, indicator lists, model agreements, and nine ONR amendments — none
+containing an enumerated topic list.
+
+Two things this establishes for the implementation:
+
+- **Deduplication is not optional.** `363065` alone would otherwise contribute
+  the same `Topic Area` list four times from four revisions, and `363526` twice.
+  Content hashing is what stops a revision history becoming duplicate subtopics.
+- **A degraded attachment must not outrank a good one.** `332894`'s
+  `LQC BAA Final W911NF21S0009.pdf` is 887 KB across 55 pages but yields only
+  113 extractable lines, and `best_family` matched `technical_category` three
+  times inside ordinary prose. Selecting by result quality rather than by
+  attachment order is what keeps that from winning.
+
+## `DE-FOA-0003612` — where the 99 focus areas actually are
+
+All five attachments, from the live API:
+
+| # | File | Size | Type |
+|---|---|---|---|
+| 1 | `DE-FOA-0003612.000003.pdf` | 1,321,107 B | PDF — **the one segmented**, folder *Full Announcement* |
+| 2 | `Sample OT and Project Agreements … REV2.pdf` | 1,346,203 B | PDF — legal templates |
+| 3 | **`Genesis Mission Phase I Application Template v2.xlsx`** | 28,058 B | **spreadsheet** |
+| 4 | **`Genesis Mission Phase II Application Template.xlsx`** | 35,219 B | **spreadsheet** |
+| 5 | `Genesis Mission Phase II LOI Template v2.xlsx` | 26,515 B | spreadsheet |
+
+**The 21 challenge areas are in attachment 1**, as bookmarks under
+`III. Program Description → A. Purpose`, and segmentation recovers all 21
+exactly.
+
+**The focus areas are in attachments 3 and 4, in a worksheet named
+`Focus Areas`** — the dropdown source list the applicant selects from on the
+`Phase I Summary` sheet (`Focus Area | Select from dropdown menu`).
+
+> **The count is 98, not 99.** The sheet is `A1:A99`: one header cell reading
+> `Topics`, then **98 focus areas**. The widely reported "99" is the row count.
+
+They are coded `<challenge>-<letter>`, and every one of the 21 challenges is
+represented:
+
+```
+1-A  Reenvisioning Advanced Manufacturing and Industrial Productivity | Agentic AI-Driven Chemical Manufacturing
+1-B  Reenvisioning Advanced Manufacturing and Industrial Productivity | AI-Driven Materials Processing
+…
+21-C Artificial Intelligence in Fluid Flow for Energy Components and Technologies | Data-Driven Operational Intelligence
+```
+
+Focus areas per challenge range from **2** (challenges 10, 13) to **10**
+(challenge 9), totalling 98 across 21.
+
+**No mechanism in the plan or on the deferred list reaches them.** Three
+independent barriers, and all three would have to fall:
+
+1. `source_for_record()` returns one attachment; §6.6 defers multi-attachment
+   fetch explicitly.
+2. `extract_containers()` dispatches on `pdf`, `html` and `text` only — a
+   spreadsheet produces no containers, so there is nothing to segment even if it
+   were fetched. (`openpyxl` is already a runtime dependency for other scripts,
+   so this is a dispatch gap, not a dependency one.)
+3. The content is a **dropdown source list**, not prose — there are no spans to
+   summarize, only cell values to read.
+
+This matters because the notice permits **one application per focus area**, so
+the focus area, not the challenge area, is the unit a PI applies against. The
+layer currently exposes the 21 and cannot see the 98.
+
+## Multi-attachment segmentation, measured
+
+§6.6's multi-attachment path was implemented and all 20 records re-measured
+through it, using the real network path so this is what production would do.
+
+| Metric | Before | **After multi-attachment** |
+|---|---|---|
+| Correct-acceptance vs frozen 12 | 5/12 = 42% | **5/12 = 42%** |
+| Correct-acceptance vs 10 reachable | 4/10 = 40% | **4/10 = 40%** |
+| Won from a secondary attachment | — | **0** |
+| Wrong-list acceptances | 0 | **1** |
+| False positives vs live 6 | 0/6 | **0/6** |
+
+> **Multi-attachment gained no correct acceptances and introduced one
+> wrong-list.** That is the honest result, and it is worth more than the
+> implementation.
+
+**What happened.** Exactly one record segments from a secondary attachment:
+CDC `360339`, which yields 17 spans from `DGHP FY26 M&E Indicator List` —
+
+```
+2.1. Point of Entry (POE) General Capacity
+2.4. POE Risk Communication
+4.1. Strengthening of International Emergency Response Capacity
+5.2. Laboratory Quality Control/Quality Assurance
+6.4. One Health
+```
+
+— monitoring-and-evaluation indicator categories, **not** the five fundable
+`Component 1-5` the record actually offers. A loose marker (`global health`,
+`emergenc`) scored it as correct on the first pass; reading the spans showed it
+was the ARPA-E SCALEUP failure repeating, one layer out.
+
+**Why NRL still misses despite the fix.** `352741`'s topics *are* in
+`Amendment 0004.pdf`, the path now fetches it, and it still segments nothing —
+the `53-24-01 - HIGH FREQUENCY RADAR` code form has no family, and adding one
+for a single document is out of scope. Multi-attachment was necessary for that
+record but not sufficient.
+
+**The mechanism is therefore fail-closed by default.** A result won from a
+secondary attachment is **capped at `low` confidence**, which never publishes.
+Measured precision of secondary-won lists is **0 of 1** — far too little
+evidence to publish on, and §18.3 is explicit about which way to err. The result
+still lands in the cache and diagnostics so a later session can judge whether
+secondary attachments are worth trusting; it simply cannot reach a PI first.
+
+**The structural lesson.** More documents means more enumerated lists, and most
+enumerated lists in a funding notice are not the fundable subdivisions —
+indicator frameworks, review criteria, proposal components, cost categories.
+Widening the input widened the false-positive surface faster than it widened
+recall. That is an argument for keeping the fail-closed cap, not for reverting
+the path: NRL genuinely needs it, and the cap costs nothing while the evidence
+is this thin.
+
+## D4: the backfill ran, and its cache must not be committed
+
+The full local backfill ran against a copy — never `data/` — with
+`--enable-subtopics --max-documents 1200`. **53 minutes, 770 documents
+attempted, 0 queued at the end.**
+
+```
+REJECTION HISTOGRAM
+   no_layer_accepted     736
+   ACCEPTED               22
+   no_extractable_text    11
+   time_budget             1
+```
+
+`run_budget` never fired and `time_budget` fired once, so §6.1's budgets are
+correctly sized. 22 documents produced 296 subtopic records.
+
+### Why it is not being committed
+
+**Of the 12 documents whose subtopics would publish, 6 carry the wrong list,
+and 43 of 194 publishable records — 22% — are fabricated.**
+
+| Publishing | Documents | Records |
+|---|---|---|
+| List is right | 5 | 146 |
+| **List is wrong** | **6** | **43** |
+| Partially right | 1 | 5 |
+
+What would reach a principal investigator as a topic card with a page anchor:
+
+```
+362827  1. NOFO Summary · 2. Funding Details · Available Funds · A. Purpose
+362880  1. NOFO Summary · 2. Funding Details · Available Funds · A. Purpose
+362036  A. Agency Overview · B. Program Overview · C. Program Objectives
+362478  a. Narrative Section I: Project Description · b. Narrative Section II
+361754  1. Title X Statute · 2. Title X Regulations · 3. Legislative Mandates
+348830  A. Short Description of Funding Opportunity · B. Background · E. Legal Requirements
+```
+
+Against the genuine results the same run produced:
+
+```
+360678  (a) Applied Mathematics … (q) Catalysis Science          70 records
+360205  1a. Foundational Knowledge of Agricultural Production…   37 records
+361526  1 - Reenvisioning Advanced Manufacturing …               26 records
+361169  Program Area 1. Professional Development for Agricultural Literacy…
+```
+
+§18.3 is unambiguous about the trade: *"a missing subtopic costs a user one
+search that could have gone better; a wrong subtopic puts a plausible-looking
+card with a page anchor and a deadline in front of a PI."* Committing 43 such
+cards to reach 146 good ones is the wrong side of that trade, so **the cache
+stays uncommitted and package D's gate is not met.**
+
+### What the backfill revealed that the census could not
+
+**The 20-document census over-estimated precision, and the reason is how it was
+built.** It was deliberately chosen to span shapes — big umbrella notices with
+rich outlines — and on that sample `structural_siblings` scored 0 false
+positives against 8 non-enumerating documents. The backfill is the first
+roughly-random sample of the catalog, and on it the same family produces an
+administrative list about as often as a real one.
+
+The failure is specific and fixable. `structural_siblings` excludes
+administrative sets by testing the **level-0 ancestor** against a lexicon, which
+works for DOE's `III. Program Description` and fails wherever a notice numbers
+its sections differently: `362827`'s real ancestor is `A. Summary`, `348830`'s
+is a bare `I.`, and neither matches. The test is keyed to one agency's outline
+convention and was validated against documents that share it.
+
+Three things follow, and none of them is more pattern tuning:
+
+1. **`structural_siblings` needs a positive test, not only a negative one.** It
+   currently admits any sibling set whose ancestors are not administrative.
+   Requiring evidence that the set *is* a topic list — parent title, sibling
+   title character, position relative to the eligibility and application
+   sections — is a different and stronger design.
+2. **Precision must be measured on a random sample, not a curated one.** Every
+   number in this document before this section came from 20 hand-picked
+   records. The backfill supplies 770.
+3. **The medium-confidence tier is doing work it has not earned.**
+   `outline_structural` emits `medium`, which publishes. On this evidence it
+   should emit `low` until the positive test exists — the same fail-closed move
+   already applied to secondary attachments, for the same reason and with far
+   more evidence behind it.
+
+## D5: fitting a precision fix against the backfill
+
+The backfill's 22 accepted documents were labelled by reading every title — **9
+right, 13 wrong** — and that labelled set is what the thresholds below are
+fitted to. Two reasoned thresholds have already failed at their stated purpose
+(§6.4a's type/token, §6.3a's ancestor lexicon), so nothing here is reasoned.
+
+### What separates a real topic list from announcement furniture
+
+Five candidate features were measured across all 22 sets. Four overlap and
+cannot separate at any threshold:
+
+| Feature | Legitimate range | Furniture range | Verdict |
+|---|---|---|---|
+| existing `is_administrative` rate | 0.00–0.07 | 0.00–0.20 | overlaps |
+| title-level process rate | 0.00–1.00 | 0.73–1.00 | overlaps |
+| type/token ratio | 0.46–0.85 | 0.42–1.00 | overlaps |
+| median title length | 19–66 | 17–72 | overlaps |
+| **process-vocabulary token rate** | **0.000–0.008** | **0.133–0.889** (9 of 13) | **separates** |
+
+The winning feature is the fraction of *tokens* — not titles — drawn from a
+vocabulary describing the **process of applying for an award**: `summary`,
+`purpose`, `authority`, `narrative`, `statute`, `eligibility`, `unallowable`.
+Nothing in that list can name a research subject.
+
+Two deliberate exclusions, both measured: `information`, `research`, `area`,
+`program`, `project` and `technology` are **out**, because they occur in
+legitimate titles. Adding `information` alone moved the worst legitimate set
+from 0.008 to 0.043 — still passing, but at four times the margin.
+
+> **Fitted threshold: 0.07**, sitting mid-gap between the highest legitimate
+> set (0.008, DOE Genesis) and the lowest furniture set it catches (0.133).
+> Applied to **every** family as §6.4 rule 8, not only structural ones —
+> the backfill showed Layer C producing `Monitoring, Evaluation, and Learning`
+> exactly as an outline set produced `1. NOFO Summary`.
+
+### The automatic check, scored
+
+Item 2 asked whether this can be detected without a human reading titles.
+
+```
+   true positives  (wrong, flagged)   9
+   false negatives (wrong, missed)    4
+   false positives (right, flagged)   0
+
+   PRECISION (of what it flags)  100%
+   RECALL    (of the wrong sets)  69%
+   COST      (legitimate sets lost)  0 of 9
+```
+
+**It flags nothing legitimate and catches roughly two-thirds of the
+fabrications.** That is useful separation, and it is honest about the third it
+misses. The four it misses score **0.000** — they share no vocabulary with the
+application process because they are not application furniture:
+
+| Missed | What it is | Caught instead by |
+|---|---|---|
+| `362823` | NEPA environmental review factors | `low` confidence |
+| `360378` | proposal rating scale | `low` confidence |
+| `363315` | programme phases of one project | `low` confidence |
+| `363470` | M&E workstreams (`Capacity Building`, `MEL`) | **nothing — see below** |
+
+**No vocabulary test can reach those four**, and saying so is the finding: they
+are wrong for semantic reasons — criteria, phases, factors, workstreams — that
+share no lexical signal with the failure the check was fitted to. Confidence
+tiering, not the check, is what contains them.
+
+### The second fitted change: Layer C demoted
+
+`363470` was the one fabrication surviving both the check and the tier, and it
+came from Layer C at `medium`. Measured across the whole backfill:
+
+> **Layer C (`heading_font`) produced exactly ONE accepted result in 770
+> documents, and it was wrong.** 0/1 precision.
+
+`heading_font` therefore emits `low`, which never publishes. That is fitted from
+770 documents, not reasoned from the design's intent for the layer.
+
+### Where this leaves the publishable set
+
+| | Before D5 | After D5 |
+|---|---|---|
+| Documents publishing | 12 | **4** |
+| Legitimate records | 140 | **140** |
+| **Fabricated records** | **54** | **0** |
+
+Every legitimate record survives. `361169`'s seven USDA Program Areas were the
+one legitimate set at risk under the first lexicon draft, and the narrower
+vocabulary keeps them.
+
+## The reachability ceiling
+
+Item 3: 246 of 1,016 evidence entries were never attempted — **16.7% of the
+catalog**. The breakdown matters more than the total, and most of it is not a
+reachability problem at all:
+
+| Cause | Count |
+|---|---|
+| **Stale cache entries** — the record has left the catalog | **213** |
+| Reachable, simply not reached before `--max-documents` ran out | 20 |
+| No document URL of any kind | 7 |
+| Agency URL present but no gap-fill needed, so `source_for_record` declines | 6 |
+
+**The genuine unreachable-by-design population is 13 records, not 246** — the
+7 with no URL and the 6 in `363526`'s orphan pattern. The 213 are cache residue
+and should be pruned, not fetched.
+
+**Nine plausible umbrellas sit in the unreached set, and all nine are NASA
+ROSES** — `ROSES25: A.13 Accelerating Earth Solutions`, `B.2 Heliophysics
+Foundational Research`, `C.4 Planetary Science Enabling Facilities`, `D.8`,
+`F.17`. They are *reachable* — `source_for_record` returns an `agency_notice`
+URL for each — and they fail at fetch time, not at resolution time. Their
+notices live on `nasaprs.com`, which is NSPIRES, whose activation §18.2 defers.
+They are also the exact shape `roses_element` exists to match. The family, the
+documents and the deferral are three parts of one gap.
+
+## The 20 request failures
+
+Item 4. The backfill recorded 25 entries carrying `last_error` across both runs:
+
+| Failure | Count | Detail |
+|---|---|---|
+| `ConnectionResetError` from `nasaprs.com` | 12 | NASA's NSPIRES host resets the connection; includes all 9 ROSES umbrellas above |
+| `403 Forbidden` from `transit.dot.gov` | 4 | DOT FTA refuses the client outright |
+| `403 Forbidden` from `rd.usda.gov` | 2 | USDA Rural Development, same pattern |
+| `ConnectionResetError`, record no longer in catalog | 5 | stale entries, failing against dead URLs |
+| `404 Not Found` | 2 | `bja.ojp.gov` and `nsf.gov/ods` — dead links |
+
+One line each, per record:
+
+```
+363224 NASA   ConnectionReset   ROSES25 A.13 Accelerating Earth Solutions
+362495 NASA   ConnectionReset   ROSES25 F.17 Research Initiation Awards
+360003 NASA   ConnectionReset   ROSES 2025 A.10 INNOVATE
+361234 NASA   ConnectionReset   ROSES25 B.2 Heliophysics Foundational Research
+363240 NASA   ConnectionReset   ROSES25 A.14 Atmosphere
+363325 NASA   ConnectionReset   ROSES25 D.8 Habitable Worlds Observatory
+363241 NASA   ConnectionReset   ROSES25 A.15 Biosphere
+363258 NASA   ConnectionReset   ROSES25 C.4 Planetary Science Enabling Facilities
+359996 NASA   ConnectionReset   ROSES 2025 A.4 Rapid Response and Novel Research
+360004 NASA   ConnectionReset   ROSES, unlabelled
+300997 NASA   ConnectionReset   legacy NASA record
+318918 NASA   ConnectionReset   legacy NASA record
+362568 DOT    403 Forbidden     transit.dot.gov
+363122 DOT    403 Forbidden     transit.dot.gov
+363321 DOT    403 Forbidden     transit.dot.gov
+363322 DOT    403 Forbidden     transit.dot.gov
+310029 USDA   403 Forbidden     rd.usda.gov
+363400 USDA   403 Forbidden     rd.usda.gov
+363550 BJA    404 Not Found     bja.ojp.gov/funding
+363551 NSF    404 Not Found     nsf.gov/ods
+363066 gone   ConnectionReset   record no longer in catalog
+363067 gone   ConnectionReset   record no longer in catalog
+362338 gone   ConnectionReset   record no longer in catalog
+362340 gone   ConnectionReset   record no longer in catalog
+```
+
+Two hosts account for 18 of 25. Neither is a segmentation problem.
+
+## D5 re-run: fabrications reach zero, and the cache still cannot be committed
+
+The final backfill ran with all three fitted changes in place — 63 minutes, 770
+documents, 0 queued.
+
+```
+no_layer_accepted     745
+ACCEPTED               13
+no_extractable_text    11
+time_budget             1
+run_budget              0
+```
+
+| | Before D5 | **After D5** |
+|---|---|---|
+| Accepted documents | 22 | **13** |
+| Publishing documents | 12 | **4** |
+| Legitimate publishable records | 140 | **133** |
+| **Fabricated publishable records** | **54** | **0** |
+
+All 133 publishable records were read individually, not sampled and not left to
+the automatic check:
+
+| Document | Records | Content |
+|---|---|---|
+| `360678` | 68 | DOE Office of Science programmes, `(a) Applied Mathematics` … `(q) Catalysis Science` … `(x) BES Accelerator and Detector Research` |
+| `360205` | 37 | USDA AFRI programme areas, `1a. Foundational Knowledge of Agricultural Production Systems` … `7g. Rapid Response to Weather Events` |
+| `361526` | 21 | **exactly the 21 published Genesis Mission challenge areas** |
+| `361169` | 7 | USDA `Program Area 1` … `Program Area 7` |
+
+The count dropped 140 → 133 because the trim rule removed the seven
+contaminants, not because anything legitimate was lost.
+
+### Why it is still not committed: the §12 budget is arithmetically impossible
+
+The A4 size-budget test — added in package A precisely to catch this — fails:
+
+```
+Subtopic records over the 2048-byte serialized budget:
+  ('325932', 0, 2231) ('325932', 2, 6594) ('325932', 7, 6226) …
+```
+
+**202 of 223 records exceed the 2 KiB per-subtopic ceiling.** Median 3,824
+bytes, max 6,892. The composition of the largest:
+
+```
+subtopic_terms   5115      topic_areas          172
+summary           476      program_area_labels  120
+                           everything else     ~800
+```
+
+§12 specifies the 2 KB ceiling as *"600-char summary + 400-term map + 60-entry
+`term_display` + scalars"*. Measured, that composition is about **6.5 KB**, not
+2 KB:
+
+| Component | Budgeted | Actual |
+|---|---|---|
+| Summary | 600 chars | 476 bytes ✓ |
+| Term map at `MAX_TERMS = 400` | (assumed to fit) | **up to 5,147 bytes** |
+| Non-term overhead alone | — | **median 1,582, max 1,928** |
+
+The non-term overhead is already within 120 bytes of the entire ceiling before
+a single term is stored. At the measured **12.3 bytes per term entry**, only
+about **38 terms** fit inside 2,048 bytes — against a `MAX_TERMS` of 400.
+
+§12 says *"If a design needs more, cut `max_terms`, not the ceiling."* Cutting
+400 → 38 is not tuning; it is a redesign of §5.2, whose entire premise is that
+*"indexing only a 600-character summary discards most of the retrieval gain"*
+and that the term map is what carries retrieval. **This is a genuine conflict
+between two sections of the plan, and it is a design decision rather than an
+implementation one.** Three options, none taken here:
+
+1. **Cut `MAX_TERMS` to ~35–40.** Honours §12 literally, guts §5.2's retrieval
+   premise.
+2. **Raise the per-subtopic ceiling to ~4 KB.** 1,000 subtopics then cost about
+   4 MB against a 23.7 MiB catalog and a 32 MiB hard limit, so the *aggregate*
+   budget is not at risk — only §12's per-record figure, which was never
+   achievable.
+3. **Move the term map out of the per-record budget entirely.** It is retrieval
+   data, not display data, and §13.1's sidecar decision already contemplates
+   separating the two.
+
+The cache is complete, correct and sitting in the scratchpad. It is not
+committed because it fails a gate the plan asked for, and §0.4 rule 3 forbids
+editing that test to let it through.
+
+### A third defect, in the gate itself
+
+While verifying, `verify_no_drift` began failing with no code change: green in
+CI at 23:59 UTC, red locally at 01:04 UTC the next day. Four artifacts moved
+because `source_first_seen_date` is a **date-only** field holding "today", and
+`TIMESTAMP_RE` deliberately leaves bare dates alone so close dates stay
+fingerprinted.
+
+**Date rollover is a third axis alongside time and platform**, and §17.6 rule 2
+— two builds separated by a delay — cannot see it, because 78 seconds never
+crosses midnight. §8.4's own lesson, *"a determinism gate is only as good as the
+axes you varied while testing it,"* applied to §8.4 and went unnoticed for a
+day. Fixed in `tools/fingerprint.py` by normalizing that one named field, with
+the fix verified against a simulated rollover as well as a delay.
+
+## Classifying every miss
+
+Six categories, one line each.
+
+| Miss | Cause | Category |
+|---|---|---|
+| `332894` Army LQC | Six thrusts bookmarked as `1.) Spin qubits, fast.` — a bare ordinal no family covers, and at outline depth 0 besides | **(b)** no family shape |
+| `362329` DHA PRMRP | Topic areas are bullets under a named portfolio heading, with no ordinal anywhere | **(b)** no family shape |
+| `362681` AFOSR | Portfolios coded `A.1.a.`, `A.1.b.`, `A.1.c.` followed by `Program Description:` — no family matches that form, and the document has zero bookmarks | **(b)** no family shape |
+| `343653` DHAPP | Ten country FOAs are correctly bookmarked but sit at **outline depth 0**, which §6.3a excludes by construction | **(c)** acceptance rule rejected a legitimate list |
+| `360339` CDC | `Component 1-5` matched cleanly; the located occurrences are a front-matter summary list, spans 88–239 chars against a 200 floor | **(d)** known defect — occurrence selection |
+| `363065` DOE NETL | `Topic Area 1a/1b/1c/2` matched 36 times, but the hits are prose mentions and amendment-log entries; ordinals read `1,2,1,1,1,…` | **(d)** known defect — occurrence selection |
+| `352741` NRL | 32 topics with 25 contact mailboxes live in `Amendment 0004.pdf`, which is never fetched | **(f)** list in a different attachment |
+
+> **(a) 0 · (b) 3 · (c) 1 · (d) 2 · (e) 0 · (f) 1**
+
+**No census judgment was wrong.** Every one of the twelve documents the census
+called enumerating does enumerate — the reading was sound, and category (a) is
+empty. That is worth stating because it means the 42% is a mechanism gap, not a
+measurement artifact.
+
+Separately, **`363526` is an (e) case that is not a miss**: it segments
+correctly at high confidence and is unreachable by the nightly.
+
+### The shapes, quoted
+
+**`332894` — bare `N.)` ordinals, at depth 0:**
+```
+A.1.1 LPS Qubit Collaboratory Priority Research Thrusts (FY 2021)
+1.) Spin qubits, fast.
+2.) More epitaxy, better qubits?
+3.) Voltage controllable superconducting qubits
+4.) Going hot and not looking back
+5.) Beyond Moore, Before Shor
+6.) Accelerated Learning of Quantum Information Concepts
+```
+
+**`362681` — `A.1.a.` codes plus a repeated label, no bookmarks:**
+```
+A.1.a. Energetic Solid-State Physics and Mechanochemistry
+Program Description: The objective of this portfolio is to understand critical…
+A.1.b. Energy, Combustion and Non-Equilibrium Thermodynamics
+Program Description: Majority of Air and Space Forces' system functions rely on…
+A.1.c. Aerodynamic Sciences
+Program Description: The Aerodynamic Sciences portfolio supports basic research…
+```
+An earlier version of this census described these as "39 named portfolios" with
+no ordinal. **That was wrong** — they carry a hierarchical `A.1.a.` code, which
+is a far more tractable shape than "named", and `label_run` may not even be the
+right mechanism for them.
+
+**`362329` — bulleted, under a named portfolio:**
+```
+AUTOIMMUNE DISORDERS AND IMMUNOLOGY
+All applications under this portfolio must be aligned to Autoimmune Disorders and
+Immunology by addressing one topic area and one strategic goal listed below.
+TOPIC AREAS
+• Celiac Disease
+• Eczema
+• Food Allergies
+• Inflammatory Bowel Disease
+```
+
+**`343653` — legitimate list, rejected by the depth-0 rule:**
+```
+L0 p 26  Angola_FOA_COP26_FY27_Final
+L0 p 45  Burundi_FOA_COP26_FY27_Final
+L0 p 63  Ethiopia_FOA_COP26_FY27_Final
+…
+L0 p197  Uganda_FOA_COP26_FY27_Final
+```
+
+## The denominator, re-derived against the live catalog
+
+The frozen 20 has drifted, in both directions.
+
+| | Census | Still in catalog | Reachable by the nightly |
+|---|---|---|---|
+| Enumerating | 12 | **11** (`360339` gone) | **10** (`363526` orphaned) |
+| Non-enumerating | 8 | **6** (`362005`, `362711` gone) | 6 |
+
+> **The correct denominator is 10, not 12**, and the false-positive denominator
+> is **6, not 8**.
+
+Restating the package D result against it:
+
+| Metric | Against 12 | **Against 10 reachable** |
+|---|---|---|
+| Correct-acceptance | 5/12 = 42% | **4/10 = 40%** (`363526` is unreachable) |
+| Publishable **and** reachable | 3/12 = 25% | **2/10 = 20%** — only `360678` and `361526` |
+| False positives | 0/8 | **0/6** |
+
+Three of twenty census records left the catalog within a day of the census being
+taken. Any future acceptance rate should be re-derived at the time it is quoted
+rather than compared against a figure from a previous session.
+
+## §11 — the deferred AI layer, assessed against these causes
+
+§11 constrains the model tightly: it *"would only label and summarize spans
+deterministic segmentation already located"*, and *"does not do: discover
+topics."*
+
+Applying that constraint to the seven misses:
+
+| Category | Misses | Spans located for a model to label | Reachable by §11? |
+|---|---|---|---|
+| **(b)** no family shape | 3 | **zero** — nothing matched | No |
+| **(c)** rule rejected | 1 | zero emitted | No |
+| **(d)** known defect | 2 | candidates located, then rejected | No — adjudicating a rejected set *is* discovery |
+| **(f)** wrong attachment | 1 | zero — file never fetched | No |
+
+> **An LLM labeler under §11's constraint reaches 0 of 7 misses.**
+
+The result is not close, and the reason is structural rather than a matter of
+model quality: **in six of the seven, segmentation located no spans at all**, so
+there is nothing for a labeler to label. In the remaining two, candidates were
+located and then rejected by acceptance — and having a model overturn that
+rejection is precisely the "discover topics" role §11 forbids, because the model
+would be deciding *whether a list exists*, not describing one that does.
+
+**This closes §11 rather than deferring it further.** It was recorded as polish —
+"cleaner human-readable summaries, normalized dates, consistent phrasing" — and
+that assessment is confirmed: it is polish, the misses are mechanism, and polish
+does not fix mechanism. Two narrower uses survive and are worth noting when §11
+is revisited:
+
+- **Filtering the seven contaminating spans.** A model shown `Open Science` and
+  `Annual Progress Reports` alongside `Catalysis Science` would plausibly reject
+  the first two. That is *classification of located spans*, squarely inside
+  §11's constraint, and it addresses the precision defect rather than the recall
+  gap.
+- **Reading the Genesis `Focus Areas` sheet.** Nothing about that requires a
+  model — it needs a spreadsheet reader.
+
+## Method
+
+Documents were fetched from the attachment URLs already in
+`data/document_evidence.json`, parsed through production's own
+`extract_containers()`, and passed to `segment_document()` unmodified. The
+`list?` column was judged by reading bookmark trees, section headings and the
+neighbourhoods of enumeration cues — not by pattern matching, which is the
+thing under test. Probe scripts are not committed, for the same reason as B0:
+they are one-shot instruments against network-fetched documents, and the test
+suite has no network path.

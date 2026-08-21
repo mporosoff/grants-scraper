@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "catalog": "tests/fixtures/frozen/opportunities.js",
+  "_comment": [
+    "Frozen query set for the retrieval regression gate. See",
+    "docs/TOPIC_LAYER_PLAN.md 8.5 and 18.1 item A6.",
+    "",
+    "This replaces the labelled baseline v6.2 asked for, which cannot be",
+    "built: evaluate_phase2.py consumes exported human relevance labels, the",
+    "label corpus is deliberately private, and producing one means a labelling",
+    "campaign outside this project's scope. This set needs no judgments. It",
+    "compares a build against its own prior self, so it answers 'did retrieval",
+    "change?' -- which is the question 0.5 actually asks -- and says nothing",
+    "about whether a change was an improvement. Judging improvement still needs",
+    "labels, and that is still unsolved (issues #8 and #9).",
+    "",
+    "The catalog is the 8.4 hermetic build's output, so both gates run over one",
+    "fixture set. Stated plainly: it holds 5 records, so 'top 50' and 'top 10'",
+    "are in practice 'everything that matched'. The value here is breadth of",
+    "CODE PATH -- tokenizer, stemmer, acronym resolver, exact-number match,",
+    "coverage gating, profile term building, applicant-fit bonus -- not",
+    "statistical power over a large corpus. A query that returns nothing is",
+    "carrying real signal: it proves the admission rules still reject.",
+    "",
+    "kinds: keyword | acronym | number | empty_expected | profile"
+  ],
+  "queries": [
+    {"id": "q001", "kind": "keyword", "query": "catalysis"},
+    {"id": "q002", "kind": "keyword", "query": "carbon capture"},
+    {"id": "q003", "kind": "keyword", "query": "membrane"},
+    {"id": "q004", "kind": "keyword", "query": "separations"},
+    {"id": "q005", "kind": "keyword", "query": "energy"},
+    {"id": "q006", "kind": "keyword", "query": "materials"},
+    {"id": "q007", "kind": "keyword", "query": "public health"},
+    {"id": "q008", "kind": "keyword", "query": "workforce"},
+
+    {"id": "q010", "kind": "keyword", "query": "catalytic conversion of carbon dioxide"},
+    {"id": "q011", "kind": "keyword", "query": "electrocatalysis CO2 reduction"},
+    {"id": "q012", "kind": "keyword", "query": "membrane separations and water purification"},
+    {"id": "q013", "kind": "keyword", "query": "porous materials for carbon capture"},
+    {"id": "q014", "kind": "keyword", "query": "rural community health outcomes"},
+    {"id": "q015", "kind": "keyword", "query": "undergraduate research program"},
+
+    {"id": "q020", "kind": "keyword", "query": "catalyst"},
+    {"id": "q021", "kind": "keyword", "query": "catalytic"},
+    {"id": "q022", "kind": "keyword", "query": "separation"},
+
+    {"id": "q030", "kind": "acronym", "query": "MOF"},
+    {"id": "q031", "kind": "acronym", "query": "DOE"},
+    {"id": "q032", "kind": "acronym", "query": "NSF"},
+    {"id": "q033", "kind": "acronym", "query": "CO2"},
+    {"id": "q034", "kind": "acronym", "query": "AI"},
+
+    {"id": "q040", "kind": "number", "query": "DOE-OPEN-1"},
+    {"id": "q041", "kind": "number", "query": "NSF-FORECAST-1"},
+    {"id": "q042", "kind": "number", "query": "OPEN-UNDATED-1"},
+    {"id": "q043", "kind": "number", "query": "DE-FOA-0003600"},
+
+    {"id": "q050", "kind": "empty_expected", "query": "zzzzqqqxyzzy"},
+    {"id": "q051", "kind": "empty_expected", "query": "veterinary dentistry equipment"},
+    {"id": "q052", "kind": "empty_expected", "query": ""},
+
+    {"id": "q060", "kind": "keyword", "query": "letter of intent"},
+    {"id": "q061", "kind": "keyword", "query": "limited submission"},
+    {"id": "q062", "kind": "keyword", "query": "cost sharing not required"},
+    {"id": "q063", "kind": "keyword", "query": "concept paper deadline"},
+    {"id": "q064", "kind": "keyword", "query": "early-career investigators"},
+
+    {
+      "id": "q070",
+      "kind": "profile",
+      "query": "catalysis",
+      "profile": {
+        "research_description": "heterogeneous catalysis and CO2 hydrogenation",
+        "expertise_keywords": "catalysis, reactor design",
+        "applicant_context": "higher_education",
+        "career_stage": "any"
+      }
+    },
+    {
+      "id": "q071",
+      "kind": "profile",
+      "query": "carbon capture",
+      "profile": {
+        "research_description": "We do electrochemistry and can develop well-controlled colloids",
+        "expertise_keywords": "Catalysis, AI, chemical engineering",
+        "cv_text": "@tests/fixtures/browser_cv.txt",
+        "applicant_context": "higher_education",
+        "career_stage": "early_career"
+      }
+    },
+    {
+      "id": "q072",
+      "kind": "profile",
+      "query": "membrane",
+      "profile": {
+        "research_description": "membrane transport and water treatment",
+        "expertise_keywords": "separations, polymer membranes",
+        "applicant_context": "nonprofit",
+        "career_stage": "any"
+      }
+    }
+  ]
+}

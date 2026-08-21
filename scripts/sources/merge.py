@@ -360,9 +360,14 @@ def integrate(catalog_path: Path = DEFAULT_CATALOG,
         )
     ]
     cache = load_source_cache(cache_path)
+    # Adapters that must reconcile against what is already published -- rather
+    # than only add to it -- read the base records from here (§18.1 P8.2). `base`
+    # is the right input: it is Grants.gov plus every record this run is not
+    # itself responsible for re-supplying.
     _, results = collect(
         adapters=selected_adapters,
         include_disabled=include_disabled,
+        context={"catalog_records": base, "as_of": as_of},
     )
     external, cache, source_summaries = resolve_live_records(results, cache, as_of)
     combined, stats = merge_records(base, external)

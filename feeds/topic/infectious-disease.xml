@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml</id>
-  <updated>2026-08-21T10:49:44Z</updated>
+  <updated>2026-08-21T17:17:39Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Resources and Workforce Development for the Regional Biocontainment Laboratories</title>
@@ -301,6 +301,23 @@
     <category term="Infectious disease"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Closes 2026-10-22 | The National Institute of Mental Health (NIMH) intends to publish a notice of funding opportunity (NOFO) to solicit biphasic research applications to evaluate the impact of HIV immunotherapies on central nervous system (CNS) outcomes in people with HIV and to identify mechanisms, benefits, and risks associated with their use in the CNS compartment. The primary goal is to generate evidence that inf…</summary>
+  </entry>
+  <entry>
+    <title>Limited Submission Opportunity: $700,000 - The G. Harold and Leila Y. Mathers Foundation - Research Grant (Spring 2027 Cycle)</title>
+    <link href="http://rochester.infoready4.com/CompetitionSpace/"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Ainfoready-2028504</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Climate change"/>
+    <category term="Infectious disease"/>
+    <category term="Neuroscience"/>
+    <category term="Technology development"/>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2027-02-12 | The Foundation primarily
+supports basic science, ideally with potential translational applications. Examples of current research areas we support include
+immunology, microbiome, structural biology, cellular physiology, cancer biology, genetics, genomics, microbiology and infectious diseases, stem cell biology, and neuroscience. Research areas
+we will not consider for support include Covid-19 relat…</summary>
   </entry>
   <entry>
     <title>Illuminating AD/ADRD Genome to Enable Precision Genomic Medicine</title>
@@ -664,19 +681,5 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Social and behavioral sciences"/>
     <category term="Transportation"/>
     <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2027-09-18 | ATTENTION: This announcement will be revised regularly to incorporate country specific narratives (Attachment 1 of the announcement) with information vital to the content of application. Potential applicants interested in applying to this announcement should click 'Subscribe' to be notified of future revisions. DoD HIV/AID Prevention Program's (DHAPP) objective, through the PEPFAR program, is to s…</summary>
-  </entry>
-  <entry>
-    <title>Plant Biotic Interactions</title>
-    <link href="https://www.grants.gov/search-results-detail/327047"/>
-    <id>urn:funding-finder:grants-gov:327047</id>
-    <updated>2020-05-14T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <category term="Infectious disease"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Posted | The Plant Biotic Interactions (PBI) program supports research on the processes that mediate beneficial and antagonistic interactions between plants and their viral, bacterial, oomycete, fungal, plant, and invertebrate symbionts, pathogens and pests. This joint NSF/NIFA program supports projects focused on current and emerging model and non-model systems, and agriculturally relevant plants. The pro…</summary>
   </entry>
 </feed>

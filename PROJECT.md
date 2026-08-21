@@ -1,8 +1,8 @@
 # Funding Finder — Product Plan
 
-**Status:** Phase 1 and 1.5 complete; Phase 2 engineering complete with its human pilot deferred; Phase 3 deployed with its first production evidence batch successful; unified search, uploaded-NOFO chat, result-aware chat, local personalization/saved opportunities, and monitored NSF/NYSERDA source ingestion implemented
+**Status:** P11 feature/configuration and `topic-layer` dispatch gates passed; topic-aware retrieval and explanations are enabled on the feature branch, with the history-preserving `main` merge, main CI/refresh, and live-site verification still pending; MEAS-10 remains unperformed post-launch human validation
 
-**Next implementation phase:** Phase 3D — complete the returned-review and citation-landing dry run, then run the deferred multi-researcher pilot
+**Next implementation phase:** P11 ship gate — reconcile the latest `main`, merge `topic-layer` without squashing, then verify main CI, the production refresh, and the live site
 
 **Canonical application:** https://mporosoff.github.io/grants-scraper/
 
@@ -10,7 +10,7 @@
 
 **Initial audience:** University of Rochester researchers, with a design that remains useful to any public user
 
-**Last updated:** August 10, 2026
+**Last updated:** August 21, 2026
 
 ---
 
@@ -23,7 +23,7 @@ The base product should provide the useful parts of the [Duke Research Funding d
 The product answers three related questions:
 
 1. **What funding opportunities are available?** Search the comprehensive catalog directly.
-2. **Which of these are most relevant to my work?** Let AI expand a research description, rerank a bounded candidate set, explain the matches, and answer follow-up questions about that shortlist.
+2. **Which of these are most relevant to my work?** Use deterministic keyword, profile, CV, ORCID-publication, and topic evidence first; optionally let AI rerank a bounded candidate set and answer follow-up questions.
 3. **What does this funding notice require?** Drop a NOFO/FOA PDF into the main search box, connect it to a matching catalog record when possible, and ask document-grounded questions with page references.
 
 The system must not make a model call for ordinary search. It must not hide the catalog behind an API key.
@@ -72,13 +72,13 @@ verified. Degradation exits visibly and opens or updates an owner-facing GitHub
 issue. UR InfoReady is a disabled shell pending a stable permissioned route.
 
 <!-- catalog-summary:start -->
-The August 21, 2026 build contains 1,450 open or current forecasted funding
-opportunities (1,136 posted and 314 forecasted) rather than the former 48-record
+The August 21, 2026 build contains 1,463 open or current forecasted funding
+opportunities (1,149 posted and 314 forecasted) rather than the former 48-record
 engineering shortlist. It contains no record with a deadline before the catalog date.
-Current published sources are Grants.gov (1,386), NYSERDA (38), U.S. National Science
-Foundation (1), VPR funding digest (limited submissions & foundations) (25); additional
-sources are enabled only after a sustainable public ingestion path and health bounds are
-verified.
+Current published sources are ARPA-H (10), Grants.gov (1,386), NASA ROSES (2), NYSERDA
+(38), U.S. National Science Foundation (1), VPR funding digest (limited submissions &
+foundations) (26); additional sources are enabled only after a sustainable public
+ingestion path and health bounds are verified.
 <!-- catalog-summary:end -->
 
 ### 2.3 Search is the primary workflow
@@ -96,12 +96,29 @@ Anyone can use, without an API key:
 - relevance, deadline, posted-date, award, agency, and title sorting;
 - pagination and expandable record details;
 - a compact deadline/award/eligibility/contact overview with mailto POC links;
-- side-by-side comparison and device-local saved opportunities;
+- device-local saved opportunities;
+- compact matched-topic evidence and a collapsed deterministic “Why this match” explanation;
 - per-opportunity and result-set calendar export;
 - one-click official FOA, agency-notice, or Grants.gov record links; and
 - CSV export of the complete current result set.
 
 Search and filtering execute in the browser over the prebuilt index. They make zero AI calls and have no per-search infrastructure cost.
+
+The parent opportunity remains the result unit. The optional topic sidecar is
+loaded lazily, indexes only publishable `subject` children, rolls the strongest
+child evidence up to its parent with no child-count bonus, and shows at most
+three matched topics before deliberate expansion. Review-only children never
+enter ordinary retrieval, rendering, or explanations.
+
+`assets/app-config.js` is the single source for the visible application release
+(`Funding Finder v1.1.0 · Updated Aug 21, 2026`) used by Funding Finder and Team
+Matcher. Visible version numbering is introduced with v1.1.0 for the
+topic-aware retrieval release; the earlier live production baseline remains
+intentionally unnumbered, with no invented v1.0.0 release. The release date
+changes only for a deliberate app release: patch versions cover bug fixes/small
+UI updates, minor versions cover user-visible features, and major versions
+cover intentional breaking product or schema experiences. The separate Catalog
+status continues to report nightly data freshness.
 
 The public page begins with no opportunity cards. One guided workflow combines
 keywords, optional profile/CV context, and optional filters under “Find
@@ -140,6 +157,12 @@ AI output is advisory. It must:
 - never invent deadlines, amounts, eligibility, or requirements; and
 - direct users to the official notice for final verification.
 
+**Planned in Phase 3E:** document chat will let the user explicitly export an
+already-generated answer or the current transcript as PDF or DOCX, without a
+second model call, and will support cited governing/parent documents with
+explicit provenance and precedence rather than assuming the uploaded notice is
+the complete rule set.
+
 ### 2.5 Explicit device-local profiles, not a local funding database
 
 The search catalog remains a published static asset. It is not copied into a
@@ -153,8 +176,9 @@ research profile on that device. The saved record contains:
 - applicant context and career stage;
 - extracted CV text and file metadata, bounded to 120,000 characters;
 - the user's current filters, sort, selected provider (never its key), and
-  profile-ranking preference;
-- Phase 2 usefulness labels and reason codes in a separate local record;
+  profile-search preference;
+- Phase 2 usefulness labels and reason codes in a separate local record only
+  when the dedicated `?evaluation=1` workflow is used;
 - saved-opportunity snapshots in another compact device-local record.
 
 PDF, DOCX, TXT, and Markdown CVs are parsed in the browser. The original file
@@ -162,15 +186,9 @@ is never saved or uploaded by the application. The user can disable
 profile use, remove the CV extract, clear the saved profile, or clear
 evaluation labels at any time.
 
-After three graded ratings, the user can explicitly enable a deterministic
-local preference model that gently reranks Relevance results from source,
-agency, topic, discipline, and applicant-type signals. Prioritized cards show
-why, a small exploration section surfaces related unseen opportunities, and
-the model can be switched off or cleared without changing the public catalog.
-Its on/off choice is stored independently from the research profile, so it
-survives reload even when the user chooses not to save profile or CV content.
-Shared search URLs still begin with the public base ranking until the user
-explicitly turns personalization on for that search.
+Normal search no longer includes a permanent rating panel or rating-trained
+reranking. Invited pilot participants use `?evaluation=1`; those labels remain
+measurement evidence only and never alter the deterministic product ranking.
 
 The AI shortlist, chat, and extracted uploaded-notice text remain page-memory
 only and disappear on reload. The uploaded file itself is never stored; its
@@ -219,6 +237,35 @@ on desktop it downloads the file and opens an addressed email to the project
 owner. The export excludes API keys, profile/CV text, search text, Funding
 Finder search URL/parameters, and chat. Returned files are kept in gitignored `evaluation/inbox/`
 and aggregated into private Markdown, JSON, and CSV reports.
+
+### 2.7 Topic-aware retrieval release
+
+The v1.1.0 release candidate enables the already-measured topic and deterministic
+match-explanation paths. Its August 21 feature-branch dispatch retained all 446
+stored subject children across 29 publishing parents: 236 are publishable and
+210 inferred children remain review-only. Normal search admits only publishable
+`subject` children, keeps the parent opportunity as the result unit, rolls up
+only the strongest child with zero child-cardinality bonus, and exposes no
+review-only child in ranking, rendering, or explanations.
+
+MEAS-5 covered 48 queries across 11 disciplines: 10 movements were specificity
+improvements, two were neutral/bounded, one (`space biology` → `Bionic
+Electronics`) remains a bounded known lexical limitation, and none was a
+confirmed regression. MEAS-9 completed all eight profile/CV/ORCID arms with the
+real Crossref route, preserved the historical admission anchors, and found no
+unsupported explanation. DEC-17 permits shipment without MEAS-10; no 3–5
+researcher pilot occurred, and MEAS-10 remains explicitly unperformed
+post-launch human validation.
+
+Recurring scheduled classification uses only the dedicated GitHub Actions
+secret `ANTHROPIC_API_KEY`, exposed to the document-evidence step alone. It
+fails closed and records aggregate call and token usage; the cache-aware warm
+dispatch made zero classifier/API calls and used zero tokens. Compare and the
+permanent rating/personalization surface remain absent; invited evaluation mode
+is separate. Rollback requires only disabling the two browser flags and
+removing scheduled `--enable-subtopics`: the sidecar is additive, the parent
+catalog remains authoritative, the last successful site is recoverable from
+git, and no database migration is involved.
 
 ---
 
@@ -298,14 +345,13 @@ catalog or a shared institutional record.
 5. Select the same “Find funding” action used for keyword/filter searches.
 6. Remove the CV extract or clear the profile at any time.
 
-### Save opportunities and personalize from ratings
+### Save opportunities and run a dedicated relevance evaluation
 
 1. Select “Save” on any result to keep a compact device-local shortcut.
-2. Rate opportunities directly on their cards.
-3. After three graded ratings, enable “Personalize from my ratings.”
-4. Relevance sorting gently prioritizes matching local signals and labels the
-   reason; switch personalization off or clear ratings to restore the base
-   ranking.
+2. Normal search keeps rating controls absent.
+3. Invited pilot participants open `match_explorer.html?evaluation=1`, label
+   results locally, and explicitly export one evaluation file.
+4. Evaluation labels do not change retrieval or ranking.
 
 ### Add AI refinement
 
@@ -339,6 +385,10 @@ catalog or a shared institutional record.
 4. If no key is configured, enter and optionally save one in the chat prompt.
 5. Ask document-grounded questions and verify the returned page references in
    the original notice.
+6. **Planned in Phase 3E:** explicitly export a useful answer or current chat as
+   PDF/DOCX, and distinguish rules stated by the notice from rules inherited
+   from governing or supplemental documents. See Phase 3E for the preservation,
+   privacy, provenance, and precedence requirements.
 
 ### Verify an actual FOA
 
@@ -431,8 +481,8 @@ Phase 1 now includes both the catalog foundation and the first optional refineme
   a removal control;
 - monitored NSF/NYSERDA ingestion with source-aware facets and provenance;
 - atomic external-source refresh with still-current last-known-good fallback;
-- direct saved-opportunity controls and optional device-local preference
-  reranking after three graded ratings; and
+- direct saved-opportunity controls and a separate, explicit evaluation mode;
+  and
 - regression coverage for forecasts, expired records, ambiguous rolling
   language, source lifecycles, indexing, generated assets, and workflow
   safeguards.
@@ -505,18 +555,18 @@ presented as the FOA.
 ### Current evidence baseline
 
 <!-- catalog-evidence:start -->
-The August 21, 2026 catalog contains 1,450 current posted or forecasted opportunities:
+The August 21, 2026 catalog contains 1,463 current posted or forecasted opportunities:
 
 - 348 have a defensible direct announcement attachment (225 high confidence, 123 medium
   confidence);
-- another 622 use an official source page as their primary route;
+- another 635 use an official source page as their primary route;
 - the remaining 480 use the official Grants.gov record as their primary route;
-- 739 contain an agency notice URL across all route types;
+- 752 contain an agency notice URL across all route types;
 - 471 preserve an official deadline time or timezone;
 - 143 carry a preliminary-stage signal, including 1 narrative dates visibly marked for
   verification;
-- 655 (45.2%) have an official per-award floor or ceiling;
-- 929 (64.1%) have at least one structured funding amount; and
+- 655 (44.8%) have an official per-award floor or ceiling;
+- 929 (63.5%) have at least one structured funding amount; and
 - zero have a past structured close date and zero have a detected XML/detail-API
   deadline conflict in this build.
 <!-- catalog-evidence:end -->
@@ -676,9 +726,8 @@ visitor reuses the compact output.
 
 #### 3D. Deployment review, storage, return, and reporting
 
-- **Implemented:** remove phase/deployment terminology from the normal search
-  path and place invited-tester controls in one collapsed, clearly labeled
-  “Help improve Funding Finder” area that does not affect searching.
+- **Implemented:** keep invited-tester controls out of normal search and expose
+  them only through the dedicated `?evaluation=1` workflow.
 - **Implemented:** autosave source verdicts (`accurate`, `incorrect`,
   `couldn’t verify`), checked field, optional note, deployment checklist, and
   coarse action counts in a separate device-local record.
@@ -706,6 +755,67 @@ visitor reuses the compact output.
 verifiable source evidence in the deployed site, document changes remain
 traceable, and at least one privacy-safe deployment review can be returned to
 the owner and reproduced as a private report.
+
+#### 3E. Document-chat preservation and governing context — planned
+
+This is future document-chat work. It does not change Phase 3D's state or the
+current next implementation phase, and neither capability is implemented yet.
+
+**Export useful chat output.** A NOFO-chat analysis can itself become a useful
+working document; forcing the user to regenerate it later can change the answer
+or lose a useful synthesis. The user must therefore be able to explicitly choose
+at least **Export this answer** or **Export chat**, in either **PDF or DOCX**.
+
+- Export the response already generated; never call a model again to recreate
+  it.
+- Preserve the user's question and AI answer, useful formatting, page/source
+  citations and links, the matched opportunity/document identity, and the
+  document version/hash where already available.
+- Export only on explicit user action. Normal chat and uploaded-notice text
+  remain page-memory only and may disappear on reload; export introduces no
+  automatic server-side persistence.
+- Include only visible chat content plus public/source metadata. Never export
+  API keys or hidden profile/CV context.
+- Library and implementation choices remain open; this section defines behavior,
+  not a PDF/DOCX stack.
+
+**Governing/parent document context.** “Chat with the NOFO” must not assume the
+uploaded child notice contains every rule governing a proposal. The architecture
+must eventually represent an agency-generic relationship such as:
+
+```text
+specific solicitation / NOFO
+       ↓
+applicable governing policy / guide
+       ↓
+applicable supplements / amendments
+```
+
+The relationship may contain zero, one, or multiple governing documents. Each
+document needs explicit authority, provenance, applicability, and precedence;
+the system must not silently concatenate sources into one unattributed answer.
+Answers must distinguish and cite facts from the specific solicitation, facts
+inherited from a governing document, and facts supplied by a supplement or
+amendment. A useful answer can therefore say, conceptually, “The solicitation
+does not state this directly; the applicable governing guide supplies the
+general rule,” or “The guide gives the general rule, but this solicitation
+modifies it; the solicitation-specific instruction controls.”
+
+NSF is the first concrete case. The official
+[PAPPG 24-1 page](https://www.nsf.gov/policies/pappg/24-1) identifies that guide
+as effective for proposals submitted or due on or after May 20, 2024, identifies
+later supplemental policy notices, and states that some program solicitations
+modify the PAPPG's general provisions and that the solicitation guidelines must
+then be followed. Phase 3E must preserve that authority/precedence relationship.
+`PAPPG 24-1` is a motivating example, not a permanently hard-coded version: the
+applicable PAPPG and supplements must eventually be resolved from the proposal
+or solicitation's applicable date and official NSF guidance.
+
+The same architecture must allow analogous agency proposal guides, general
+terms/instructions, umbrella-program guidance, incorporated documents, and
+supplements/amendments elsewhere without asserting that every agency uses the
+same hierarchy. Complete schema and retrieval design are deferred to the future
+implementation package.
 
 ### Phase 4 — Expand the funding universe
 
@@ -799,6 +909,12 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 - API keys never enter source control, URLs, exports, profile storage, or
   review/evaluation storage. Optional browser credential storage requires an
   explicit save action and has a visible removal control.
+- Document-chat export preserves already-generated visible output; it must not
+  regenerate the answer, and it must exclude API keys and hidden profile/CV
+  context.
+- Governing-document answers retain source-level provenance and explicit
+  precedence; solicitation, governing-guide, and supplement/amendment facts
+  must not be silently merged or cited as though they came from one document.
 - The application remains usable on current mobile and desktop browsers.
 - Every added source has an identified maintenance strategy.
 
@@ -825,6 +941,9 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | `index.html` | GitHub Pages entry point |
 | `match_explorer.html` | Public search and refinement interface |
 | `assets/app.js` | Browser search, cited source evidence, review/export, profile ranking, AI matching, and chat |
+| `assets/app-config.js` | Shared Funding Finder release metadata and production feature flags |
+| `assets/subtopic-runtime.js` | Lazy publishable-subject loading and parent-level child-score rollup |
+| `assets/match-explain.js` | Local deterministic, evidence-bounded match explanations |
 | `assets/profile.js` | Device-local profile/feedback boundary and browser CV extraction |
 | `assets/nofo.js` | Browser-only NOFO PDF extraction, opportunity-number detection, and catalog matching |
 | `assets/review.js` | Device-local Phase 3 deployment-review boundary and privacy-safe handoff package |
@@ -834,6 +953,7 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | `data/opportunities.js` | Generated catalog, facets, and BM25 index |
 | `data/opportunity_enrichment.json` | Compact official-detail cache for incremental refresh |
 | `data/document_evidence.json` | Compact document hash/version, citations, extracted facts, and review-queue cache |
+| `data/subtopics.js` | Lazy public sidecar for publishable and review-gated subject-child records and their search index |
 | `data/source_records.json` | Per-source records, first-seen dates, and refresh diagnostics |
 | `scripts/build_catalog.py` | Complete XML ingestion, normalization, validation, and index build |
 | `scripts/enrich_catalog.py` | Official detail enrichment, evidence reconciliation, and FOA selection |
@@ -889,3 +1009,6 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | July 2026 | Enable NOFO-only ARPA-E and DOE EERE Exchange adapters; keep NASA NSPIRES disabled until a stable public list route exists. |
 | July 2026 | Publish no-account Atom feeds and provide a fail-closed, consent-based weekly digest bundle for a separate private repository; keep public subscriber data out of GitHub Pages. |
 | August 2026 | Resolve unfamiliar research acronyms locally by matching catalog phrases against enabled researcher context; require multiple expansion-term hits and fail closed on ambiguity. |
+| August 20, 2026 | Plan explicit PDF/DOCX export of an already-generated document-chat answer or current transcript, preserving visible questions, answers, citations, links, formatting, and available document identity/version metadata without regeneration, hidden context, or automatic persistence. |
+| August 20, 2026 | Plan agency-generic governing-document context with explicit provenance, applicability, and precedence; use NSF PAPPG 24-1 as the first dated example while resolving the applicable guide and supplements from official guidance rather than hard-coding one version. |
+| August 21, 2026 | Accept DEC-17 and ship the topic layer before the unperformed MEAS-10 researcher pilot; authorize recurring, step-local, fail-closed Anthropic classification with auditable aggregate usage; introduce visible version numbering with Funding Finder v1.1.0 and leave the earlier production baseline unnumbered. |

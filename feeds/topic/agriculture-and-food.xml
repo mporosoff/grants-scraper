@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-08-21T10:49:44Z</updated>
+  <updated>2026-08-21T17:17:39Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -145,6 +145,16 @@
     <category term="Manufacturing"/>
     <category term="Energy"/>
     <summary>Agricultural Marketing Service | Closes 2026-10-01 | AMS will award these funds competitively to at least one eligible organization that meets program requirements and whose expertise is consistent with the purpose of the grant program. The selected grant recipient(s) will provide management, oversight, consultation and expertise necessary to advance the purpose and activities of the program, primarily through a subaward program to support cold stor…</summary>
+  </entry>
+  <entry>
+    <title>Systems for Tracking and Resilience in Efficient Agricultural-input Management (STREAM)</title>
+    <link href="https://arpa-h.gov/explore-funding/programs/stream"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Astream</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Technology development"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Closes 2026-09-14 | Current ARPA-H program. STREAM | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wind…</summary>
   </entry>
   <entry>
     <title>Syria Annual Program Statement</title>
@@ -683,16 +693,5 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>National Institute of Food and Agriculture | Closes 2026-12-31 | The AFRI Foundational and Applied Science Program supports grants in six AFRI priority areas to advance knowledge in both fundamental and applied sciences important to agriculture. The six priority areas are: Plant Health and Production and Plant Products; Animal Health and Production and Animal Products; Food Safety, Nutrition, and Health; Bioenergy, Natural Resources, and Environment; Agricultur…</summary>
-  </entry>
-  <entry>
-    <title>NARMS Cooperative Agreement Program to Strengthen Antibiotic Resistance Surveillance in Retail Food Specimens</title>
-    <link href="https://www.grants.gov/search-results-detail/360006"/>
-    <id>urn:funding-finder:grants-gov:360006</id>
-    <updated>2025-07-11T00:00:00Z</updated>
-    <author><name>Food and Drug Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>Food and Drug Administration | Closes 2027-04-01 | This Funding Opportunity Announcement (FOA) issued by the Food and Drug Administration (FDA), Center for Veterinary Medicine (CVM), builds upon the National Antimicrobial Resistance Monitoring System (NARMS) which was initiated in 1996 as one of the key activities in a national action plan to combat antibiotic resistance threats. The purpose of this FOA is to protect and promote public health by e…</summary>
   </entry>
 </feed>

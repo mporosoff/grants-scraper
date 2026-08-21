@@ -1,18 +1,24 @@
 from datetime import datetime, timedelta, timezone
 import io
 import unittest
+from unittest import mock
 
 from pypdf import PdfWriter
 
 from scripts.extract_document_evidence import (
     build_document_entry,
+    classifier_run_metrics,
     empty_cache,
     enrich_document_evidence,
     extract_containers,
     extract_document_facts,
+    merge_subtopic_sidecar,
     merge_document_entry,
+    parse_args,
+    refresh_subtopics_without_source,
     source_for_record,
     source_signature,
+    subtopic_only_candidates,
     validate_refresh_health,
 )
 
@@ -288,7 +294,7 @@ class DocumentEvidenceTests(unittest.TestCase):
             revised["record_count"],
         )
 
-    def test_marks_cached_records_absent_from_the_current_catalog(self):
+    def test_prunes_cached_records_absent_from_the_current_catalog(self):
         cache = empty_cache()
         cache["records"]["old"] = {
             "status": "current",
@@ -312,9 +318,53 @@ class DocumentEvidenceTests(unittest.TestCase):
             now=datetime(2026, 7, 26, 12, tzinfo=timezone.utc),
         )
 
+        self.assertNotIn("old", cache["records"])
+
+    def test_recurring_subtopic_merge_preserves_uninspected_current_parents(self):
+        untouched = {
+            "subtopics": [{"subtopic_id": "keep-child"}],
+            "subtopic_count": 1,
+            "segmentation_method": "campaign",
+            "subtopic_extractor_version": "p9",
+        }
+        cache = {
+            "schema_version": 1,
+            "records": {
+                "keep": untouched.copy(),
+                "update": {
+                    "subtopics": [],
+                    "subtopic_count": 0,
+                    "segmentation_method": "old",
+                    "subtopic_extractor_version": "old",
+                },
+                "stale": untouched.copy(),
+            },
+        }
+
+        merged = merge_subtopic_sidecar(
+            cache,
+            [
+                ("update", {
+                    "subtopics": [],
+                    "subtopic_reason": "checked_no_children",
+                    "subtopic_method": "document_evidence",
+                }),
+                ("stale", {
+                    "subtopics": [],
+                    "subtopic_reason": "cached_old_result",
+                    "subtopic_method": "document_evidence",
+                }),
+            ],
+            {"keep", "update"},
+            as_of="2026-08-21",
+        )
+
+        self.assertIs(merged, cache)
+        self.assertEqual(merged["records"]["keep"], untouched)
+        self.assertNotIn("stale", merged["records"])
         self.assertEqual(
-            cache["records"]["old"]["archived_from_catalog_at"],
-            "2026-07-26T12:00:00Z",
+            merged["records"]["update"]["subtopic_reason"],
+            "checked_no_children",
         )
 
     def test_never_processed_agency_pages_are_not_starved_by_rechecks(self):
@@ -390,6 +440,288 @@ class DocumentEvidenceTests(unittest.TestCase):
                 "failed_request_count": 2,
             }
         )
+
+
+class SubtopicOnlyCandidateTests(unittest.TestCase):
+    """§18.1 Cov1, and §0.5 -- the flag-off path must not notice this exists."""
+
+    def declined_record(self):
+        # No primary document and no gap-fill needed, so source_for_record()
+        # returns None: the shape of 685 catalog records.
+        record = base_record()
+        record["primary_document_url"] = None
+        record["primary_document_name"] = None
+        record["funding_opportunity_url"] = "https://agency.example/program"
+        record["award_floor"] = 100000
+        record["close_date"] = "2026-09-30"
+        return record
+
+    def test_a_declined_record_is_a_subtopic_only_candidate(self):
+        record = self.declined_record()
+        self.assertIsNone(source_for_record(record))
+        self.assertEqual(
+            [oid for oid, _ in subtopic_only_candidates([record], enabled=True)],
+            ["360001"],
+        )
+
+    def test_the_flag_off_produces_no_candidates_and_no_cache_key(self):
+        record = self.declined_record()
+        self.assertEqual(subtopic_only_candidates([record], enabled=False), [])
+        store, metrics = refresh_subtopics_without_source(
+            [record],
+            max_documents=5,
+            fetcher=lambda url, headers: response(),
+            now=datetime(2026, 7, 26, 12, tzinfo=timezone.utc),
+            enabled=False,
+        )
+        self.assertEqual(store, {})
+        self.assertEqual(metrics["attempted"], 0)
+
+    def test_a_reachable_record_is_never_a_subtopic_only_candidate(self):
+        # base_record() has a primary document, so the administrative path
+        # already fetches it and this path must not fetch it twice.
+        self.assertEqual(
+            subtopic_only_candidates([base_record()], enabled=True), []
+        )
+
+    def test_the_flag_off_refresh_adds_no_subtopic_only_key(self):
+        record = self.declined_record()
+        catalog = {
+            "schema_version": 3,
+            "record_count": 1,
+            "source": {"name": "Grants.gov"},
+            "diagnostics": {},
+            "opportunities": [record],
+        }
+        _output, cache = enrich_document_evidence(
+            catalog,
+            empty_cache(),
+            max_documents=5,
+            request_delay=0,
+            recheck_days=14,
+            fetcher=lambda url, headers: response(),
+            now=datetime(2026, 7, 26, 12, tzinfo=timezone.utc),
+        )
+        self.assertNotIn("subtopic_only", cache)
+
+
+class DocumentBudgetTests(unittest.TestCase):
+    def declined_records(self, count):
+        records = []
+        for index in range(count):
+            record = base_record()
+            record["opportunity_id"] = f"declined-{index}"
+            record["opportunity_number"] = f"DECLINED-{index}"
+            record["primary_document_url"] = None
+            record["primary_document_name"] = None
+            record["funding_opportunity_url"] = (
+                f"https://agency.example/program/{index}"
+            )
+            record["award_floor"] = 100000
+            records.append(record)
+        return records
+
+    def test_default_budgets_preserve_both_established_pass_limits(self):
+        args = parse_args([])
+        self.assertEqual(args.max_documents, 45)
+        self.assertEqual(args.max_subtopic_documents, 45)
+
+    def test_explicit_budgets_are_independent(self):
+        args = parse_args([
+            "--max-documents", "3",
+            "--max-subtopic-documents", "7",
+        ])
+        self.assertEqual(args.max_documents, 3)
+        self.assertEqual(args.max_subtopic_documents, 7)
+
+    def test_zero_subtopic_budget_attempts_nothing_and_reports_all_remaining(self):
+        calls = []
+        records = self.declined_records(3)
+        with mock.patch(
+            "scripts.extract_document_evidence.subtopic_fields",
+            return_value={"subtopics": []},
+        ):
+            store, metrics = refresh_subtopics_without_source(
+                records,
+                max_documents=0,
+                fetcher=lambda url, headers: calls.append(url),
+                now=datetime(2026, 7, 26, 12, tzinfo=timezone.utc),
+                enabled=True,
+            )
+        self.assertEqual(store, {})
+        self.assertEqual(calls, [])
+        self.assertEqual(metrics["attempted"], 0)
+        self.assertEqual(metrics["remaining_update_count"], 3)
+
+    def test_small_subtopic_budget_is_honored_and_accounted_separately(self):
+        calls = []
+        records = self.declined_records(3)
+
+        def fetcher(url, _headers):
+            calls.append(url)
+            return response()
+
+        with mock.patch(
+            "scripts.extract_document_evidence.subtopic_fields",
+            return_value={"subtopics": []},
+        ):
+            store, metrics = refresh_subtopics_without_source(
+                records,
+                max_documents=2,
+                fetcher=fetcher,
+                now=datetime(2026, 7, 26, 12, tzinfo=timezone.utc),
+                enabled=True,
+            )
+        self.assertEqual(len(store), 2)
+        self.assertEqual(len(calls), 2)
+        self.assertEqual(metrics["attempted"], 2)
+        self.assertEqual(metrics["remaining_update_count"], 1)
+
+    def test_subtopic_only_budget_rotates_past_cached_recent_records(self):
+        calls = []
+        records = self.declined_records(3)
+        previous = {
+            "declined-0": {
+                "subtopics": [],
+                "checked_at": "2026-07-26T11:00:00Z",
+                "subtopic_cov4": {
+                    "classifier_calls": 9,
+                    "api_requests": 9,
+                    "input_tokens": 900,
+                    "output_tokens": 90,
+                    "usage_reported_calls": 9,
+                    "usage_unreported_requests": 0,
+                    "classifier_errors": {},
+                },
+            },
+        }
+
+        def fetcher(url, _headers):
+            calls.append(url)
+            return response()
+
+        current = {
+            "subtopics": [],
+            "subtopic_cov4": {
+                "classifier_calls": 1,
+                "api_requests": 1,
+                "input_tokens": 100,
+                "output_tokens": 10,
+                "usage_reported_calls": 1,
+                "usage_unreported_requests": 0,
+                "classifier_errors": {},
+            },
+        }
+        with mock.patch(
+            "scripts.extract_document_evidence.subtopic_fields",
+            return_value=current,
+        ):
+            store, metrics = refresh_subtopics_without_source(
+                records,
+                max_documents=1,
+                fetcher=fetcher,
+                now=datetime(2026, 7, 26, 12, tzinfo=timezone.utc),
+                enabled=True,
+                previous_store=previous,
+                recheck_days=14,
+            )
+
+        self.assertEqual(calls, ["https://agency.example/program/1"])
+        self.assertEqual(set(store), {"declined-0", "declined-1"})
+        self.assertEqual(metrics["cached_count"], 1)
+        self.assertEqual(metrics["queued_new_count"], 2)
+        self.assertEqual(metrics["queued_recheck_count"], 0)
+        self.assertEqual(metrics["remaining_update_count"], 1)
+        self.assertEqual(metrics["classifier_run"]["classifier_calls"], 1)
+
+    def test_prior_generation_dates_legacy_cache_without_repeating_it(self):
+        calls = []
+        records = self.declined_records(1)
+        previous = {"declined-0": {"subtopics": []}}
+
+        store, metrics = refresh_subtopics_without_source(
+            records,
+            max_documents=1,
+            fetcher=lambda url, headers: calls.append(url),
+            now=datetime(2026, 7, 26, 12, tzinfo=timezone.utc),
+            enabled=True,
+            previous_store=previous,
+            prior_checked_at="2026-07-26T11:00:00Z",
+            recheck_days=14,
+        )
+
+        self.assertEqual(calls, [])
+        self.assertEqual(store["declined-0"]["checked_at"], "2026-07-26T11:00:00Z")
+        self.assertEqual(metrics["attempted"], 0)
+        self.assertEqual(metrics["classifier_run"]["classifier_calls"], 0)
+
+
+class ClassifierOperationalDiagnosticsTests(unittest.TestCase):
+    def test_run_metrics_aggregate_calls_tokens_and_errors(self):
+        totals = classifier_run_metrics([
+            {"subtopic_cov4": {
+                "classifier_calls": 2,
+                "api_requests": 2,
+                "input_tokens": 500,
+                "output_tokens": 40,
+                "usage_reported_calls": 2,
+                "usage_unreported_requests": 0,
+                "classifier_errors": {},
+            }},
+            {"subtopic_cov4": {
+                "classifier_calls": 1,
+                "api_requests": 0,
+                "input_tokens": 0,
+                "output_tokens": 0,
+                "usage_reported_calls": 0,
+                "usage_unreported_requests": 0,
+                "classifier_errors": {"missing_credential": 1},
+            }},
+        ])
+        self.assertEqual(totals["classifier_calls"], 3)
+        self.assertEqual(totals["api_requests"], 2)
+        self.assertEqual(totals["input_tokens"], 500)
+        self.assertEqual(totals["output_tokens"], 40)
+        self.assertEqual(totals["usage_reported_calls"], 2)
+        self.assertEqual(totals["usage_unreported_requests"], 0)
+        self.assertEqual(
+            totals["classifier_errors"], {"missing_credential": 1}
+        )
+
+    def test_refresh_health_fails_closed_on_any_classifier_error(self):
+        with self.assertRaisesRegex(RuntimeError, "classifier failed closed"):
+            validate_refresh_health({
+                "subtopics": {
+                    "classifier_run": {
+                        "classifier_errors": {"missing_credential": 1},
+                    }
+                }
+            })
+
+    def test_refresh_health_requires_complete_token_usage(self):
+        with self.assertRaisesRegex(RuntimeError, "not fully auditable"):
+            validate_refresh_health({
+                "subtopics": {
+                    "classifier_run": {
+                        "usage_unreported_requests": 1,
+                    }
+                }
+            })
+
+    def test_refresh_health_accepts_audited_classifier_usage(self):
+        validate_refresh_health({
+            "subtopics": {
+                "classifier_run": {
+                    "classifier_calls": 3,
+                    "api_requests": 3,
+                    "input_tokens": 900,
+                    "output_tokens": 60,
+                    "usage_reported_calls": 3,
+                    "usage_unreported_requests": 0,
+                    "classifier_errors": {},
+                }
+            }
+        })
 
 
 if __name__ == "__main__":

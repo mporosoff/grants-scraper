@@ -16,6 +16,11 @@ faculty.csv
 !/data/source_records.json
 !/data/link_health.json
 !/data/faculty_matches.js
+# Added ahead of the cache itself: /data/* is deny-by-default, so a new cache
+# file is invisible to git, and `git add` on an ignored path exits non-zero --
+# which aborts the workflow's commit step and stops the nightly publishing
+# entirely. See docs/TOPIC_LAYER_PLAN.md §0.4 rule 11 and §9.3.
+!/data/subtopics.js
 /GrantsDBExtract*.zip
 
 # Human deployment-review files stay private and out of source control

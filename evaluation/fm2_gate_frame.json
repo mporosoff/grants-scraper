@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "plan_version": "8.31",
+  "frozen_before_outcomes": true,
+  "purpose": "P7.4a Fm2/F1 gate evaluation only; this is not a production recognizer or authorization to implement one.",
+  "grammar": {
+    "line_shape": "body line beginning with a bare integer 1-60 followed by '.', ')', '.)', or a spaced dash and a non-empty title",
+    "title_rule": "retain the source title; remove only a same-line explanatory clause introduced by a spaced hyphen, en dash, or em dash",
+    "grouping": "group document-wide by the document's exact marker; begin at 1; advance by 1 or 2 under the existing one-gap rule; split every restart at 1",
+    "acceptance": "scripts.subtopic_segmentation.acceptance_failures, ordinal mode, unchanged",
+    "duplicate_rule": "for identical admitted title sequences, select the occurrence with richer total spans (normally body over TOC)",
+    "no_tuning_rule": "the grammar, grouping, thresholds, source frame, and truth labels are frozen before aggregate or classifier outcomes"
+  },
+  "populations": {
+    "f1_validation_ids": ["332894", "345938", "328902", "330175", "355150", "362910"],
+    "residual_f1_ids": ["332894", "345938", "328902", "355150", "362910"],
+    "category_a_negative_ids": [
+      "345241", "355867", "356605", "357305", "360261", "362005", "362711", "363489",
+      "334971", "339728", "348923", "349976", "356927", "359236", "359816", "362036",
+      "362070", "362839", "362848", "363038", "363180", "363247", "363259", "363370",
+      "363388", "363396", "363446", "363537", "363538", "363541", "363586", "45810", "351923"
+    ],
+    "b0_administrative_ids": ["356605", "362681", "356623"],
+    "eda_hazard_id": "347414"
+  },
+  "source_policy": "Use each record's pinned data/document_evidence.json document unless overridden below. Every download must match the committed SHA-256 before scanning.",
+  "source_overrides": {
+    "330175": {
+      "url": "https://grants.gov/grantsws/rest/opportunity/att/download/312054",
+      "name": "FA7000-21-S-0001 (formerly USAFA-BAA-2021) Amend 0001.pdf",
+      "source_kind": "primary_notice",
+      "content_type": "application/pdf",
+      "sha256": "fc03832d05c6a6dc4d57b1ae15fe7c46050a8a6fb6c43e9177afbf9c8e490e38"
+    },
+    "359816": {
+      "url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-003.html",
+      "name": "PAR-25-003.html",
+      "source_kind": "primary_notice",
+      "content_type": "text/html;charset=UTF-8",
+      "sha256": "0ddf5ceb4fa68c9136183a872d6e31c375baea514c67327d24be3946a67ce8c1"
+    },
+    "363247": {
+      "url": "https://grants.gov/grantsws/rest/opportunity/att/download/353998",
+      "name": "AC NOFO game on (2).docx",
+      "source_kind": "primary_notice",
+      "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "sha256": "5560fc3df9ab59fd612cf2c6527a206d2f563127e216f57012fdc87fbf89f3ae"
+    },
+    "363537": {
+      "url": "https://grants.gov/grantsws/rest/opportunity/att/download/354502",
+      "name": "Full Announcement.docx",
+      "source_kind": "primary_notice",
+      "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "sha256": "88ff4b7c6313d081d267384ded9754853ac40340498561e44b9ab72e82d76898"
+    },
+    "363538": {
+      "url": "https://grants.gov/grantsws/rest/opportunity/att/download/354507",
+      "name": "Full Announcement.docx",
+      "source_kind": "primary_notice",
+      "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "sha256": "c5d19131038e0c24495dc6c55cce00228251d0e0c32451e1f95aa749ffe86f39"
+    },
+    "363541": {
+      "url": "https://grants.gov/grantsws/rest/opportunity/att/download/354517",
+      "name": "Embassy Yerevan_NOFO_ASSF-FY26-ARM-2.docx",
+      "source_kind": "primary_notice",
+      "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "sha256": "3a7d17cc0291e18c695f48dc256653fa8a599a84b113ec04f4ae62058bf21ef3"
+    }
+  },
+  "archived_parents": {
+    "362005": {
+      "opportunity_id": "362005",
+      "opportunity_number": "CPD-2600-DC-0098",
+      "title": "FY26 Pathways to Removing Obstacles to Housing (PRO Housing)",
+      "close_date": "2026-08-03"
+    },
+    "362711": {
+      "opportunity_id": "362711",
+      "opportunity_number": "W911NF26S0085",
+      "title": "Research and Education Program for Historically Black Colleges and Universities (HBCU) and Tribal Colleges and Universities (TCU)",
+      "close_date": "2026-08-11"
+    }
+  },
+  "truth_policy": "The titles below are human truth, frozen independently of model output. They are the complete ordinary subject set for each named positive record; every other proposed F1 candidate is non-subject announcement furniture or a DEC-11 mechanism/pathway. Every category-(a), B0, and EDA record has an empty ordinary-subject set.",
+  "truth": {
+    "332894": {
+      "basis": "LQC BAA pages 6-8; the notice says proposals are sought for the following priority research areas.",
+      "fundable_subjects": [
+        {"parsed_title": "Spin qubits, fast.", "page": 6, "source_quote": "1.) Spin qubits, fast."},
+        {"parsed_title": "More epitaxy, better qubits?", "page": 7, "source_quote": "2.) More epitaxy, better qubits?"},
+        {"parsed_title": "Voltage controllable superconducting qubits", "page": 7, "source_quote": "3.) Voltage controllable superconducting qubits"},
+        {"parsed_title": "Going hot and not looking back", "page": 7, "source_quote": "4.) Going hot and not looking back"},
+        {"parsed_title": "Beyond Moore, Before Shor", "page": 8, "source_quote": "5.) Beyond Moore, Before Shor"},
+        {"parsed_title": "Accelerated Learning of Quantum Information Concepts", "page": 8, "source_quote": "6.) Accelerated Learning of Quantum Information Concepts"}
+      ]
+    },
+    "345938": {
+      "basis": "NDEP STEM NFO pages 6-10. DEC-11 is applied per span: substantive STEM/education/evaluation subjects are ordinary subjects; scholarships, partnership mode, and a catch-all initiatives track are not.",
+      "fundable_subjects": [
+        {"parsed_title": "Science, Technology, Engineering, and Mathematics (STEM) Education,", "page": 6, "source_quote": "1) Science, Technology, Engineering, and Mathematics (STEM) Education, Outreach, and Workforce Development"},
+        {"parsed_title": "Support for STEM Education and Workforce Development at Two-Year", "page": 6, "source_quote": "2) Support for STEM Education and Workforce Development at Two-Year Institutions/Community Colleges (2YI/CCs)"},
+        {"parsed_title": "Manufacturing Engineering Education Program", "page": 7, "source_quote": "3) Manufacturing Engineering Education Program"},
+        {"parsed_title": "Education and Workforce Development Aligned to the Critical and Emerging", "page": 8, "source_quote": "4) Education and Workforce Development Aligned to the Critical and Emerging Technologies."},
+        {"parsed_title": "Program Evaluations, Assessments, Data Analytics and Visualizations", "page": 10, "source_quote": "7) Program Evaluations, Assessments, Data Analytics and Visualizations"}
+      ],
+      "expected_non_subjects": [
+        {"parsed_title": "STEM Scholarship Programs", "page": 9, "dec11_class": "funding_or_delivery_pathway"},
+        {"parsed_title": "Strategic Partnerships", "page": 9, "dec11_class": "partnership_mode"},
+        {"parsed_title": "Other NDEP Congressional Initiatives and Programs", "page": 10, "dec11_class": "administrative_catch_all"}
+      ]
+    },
+    "328902": {
+      "basis": "FAA NOFO page 6 lists seven program areas and page 14 instructs each applicant to select the topic most relevant to the proposed research and name the applicable FAA Program Area.",
+      "fundable_subjects": [
+        {"parsed_title": "Capacity and Air Traffic Control Technology", "page": 6, "source_quote": "1. Capacity and Air Traffic Control Technology"},
+        {"parsed_title": "Communications, Navigation, and Surveillance", "page": 6, "source_quote": "2. Communications, Navigation, and Surveillance"},
+        {"parsed_title": "Aviation Weather", "page": 6, "source_quote": "3. Aviation Weather"},
+        {"parsed_title": "Airports", "page": 6, "source_quote": "4. Airports"},
+        {"parsed_title": "Aircraft Safety Technology", "page": 6, "source_quote": "5. Aircraft Safety Technology"},
+        {"parsed_title": "Human Factors and Aviation Medicine", "page": 6, "source_quote": "6. Human Factors and Aviation Medicine"},
+        {"parsed_title": "Systems Science/Operations Research", "page": 6, "source_quote": "7. Systems Science/Operations Research"}
+      ]
+    },
+    "330175": {
+      "basis": "evaluation/p7_residual.json records the 24 titles read from the pinned amendment and verifies the three restarting groups 1-15, 1-3, and 1-6.",
+      "fundable_subjects": [
+        {"parsed_title": "Aeronautics (Aeronautics Research Center)", "source_quote": "1. Aeronautics (Aeronautics Research Center)"},
+        {"parsed_title": "Aeronautics (High Performance Computing Research Center)", "source_quote": "2. Aeronautics (High Performance Computing Research Center)"},
+        {"parsed_title": "Aeronautics (Hypersonic Vehicle Simulation Institute)", "source_quote": "3. Aeronautics (Hypersonic Vehicle Simulation Institute)"},
+        {"parsed_title": "Astronautics (Space Systems Research Center)", "source_quote": "4. Astronautics (Space Systems Research Center)"},
+        {"parsed_title": "Biosystems and Natural Materials (Life Sciences Research Center)", "source_quote": "5. Biosystems and Natural Materials (Life Sciences Research Center)"},
+        {"parsed_title": "Chemistry (Chemistry Research Center)", "source_quote": "6. Chemistry (Chemistry Research Center)"},
+        {"parsed_title": "Computer Science (Academy Center for Cyberspace Research)", "source_quote": "7. Computer Science (Academy Center for Cyberspace Research)"},
+        {"parsed_title": "Mechanical Engineering (Center for Aircraft Structural Life Extension)", "source_quote": "8. Mechanical Engineering (Center for Aircraft Structural Life Extension)"},
+        {"parsed_title": "Laser Optics Research Center (LORC)", "source_quote": "9. Laser Optics Research Center (LORC)"},
+        {"parsed_title": "Space Physics & Atmospheric Research Center (SPARC)", "source_quote": "10. Space Physics & Atmospheric Research Center (SPARC)"},
+        {"parsed_title": "Physics Education Research", "source_quote": "11. Physics Education Research"},
+        {"parsed_title": "Center for Unmanned Aircraft Systems Research (UAS)", "source_quote": "12. Center for Unmanned Aircraft Systems Research (UAS)"},
+        {"parsed_title": "Civil and Environmental Engineering Research", "source_quote": "13. Civil and Environmental Engineering Research"},
+        {"parsed_title": "Electrical and Computer Engineering Research", "source_quote": "14. Electrical and Computer Engineering Research"},
+        {"parsed_title": "Center for Space Situational Awareness Research (CSSAR)", "source_quote": "15. Center for Space Situational Awareness Research (CSSAR)"},
+        {"parsed_title": "Institute for Information Technology Applications", "source_quote": "1. Institute for Information Technology Applications"},
+        {"parsed_title": "Institute for National Security Studies", "source_quote": "2. Institute for National Security Studies"},
+        {"parsed_title": "Eisenhower Center for Space and Defense Studies", "source_quote": "3. Eisenhower Center for Space and Defense Studies"},
+        {"parsed_title": "Department of Behavioral Sciences and Leadership Warfighter Effectiveness Research Center (WERC)", "source_quote": "1. Department of Behavioral Sciences and Leadership Warfighter Effectiveness Research Center (WERC)"},
+        {"parsed_title": "Department of Foreign Languages and the Office of International Programs", "source_quote": "2. Department of Foreign Languages and the Office of International Programs"},
+        {"parsed_title": "Air Force (AF) CyberWorx", "source_quote": "3. Air Force (AF) CyberWorx"},
+        {"parsed_title": "Digital Humanities Center", "source_quote": "4. Digital Humanities Center"},
+        {"parsed_title": "Military and Strategic Studies (Center for Airpower Studies)", "source_quote": "5. Military and Strategic Studies (Center for Airpower Studies)"},
+        {"parsed_title": "Nuclear Enterprise Research Center (NERC)", "source_quote": "6. Nuclear Enterprise Research Center (NERC)"}
+      ]
+    },
+    "355150": {
+      "basis": "AAL BAA pages 12-16. Each source heading is followed on the same line by a spaced dash and explanatory prose; the parsed title must stop before that clause.",
+      "fundable_subjects": [
+        {"parsed_title": "Autonomous platforms", "page": 12, "source_quote": "1. Autonomous platforms – The Army is particularly interested in research in autonomous ground and air vehicles"},
+        {"parsed_title": "Artificial Intelligence and Machine Learning (AI/ML)", "page": 12, "source_quote": "2. Artificial Intelligence and Machine Learning (AI/ML) - The Army is interested in AI/ML research"},
+        {"parsed_title": "Data visualization and synthetic environments", "page": 13, "source_quote": "3. Data visualization and synthetic environments – The Army is interested in research"},
+        {"parsed_title": "Assured Position, Navigation, and Timing (PNT)", "page": 13, "source_quote": "4. Assured Position, Navigation, and Timing (PNT) – The Army is interested in research"},
+        {"parsed_title": "Power generation and management technologies", "page": 13, "source_quote": "5. Power generation and management technologies – The Army frequently must operate where power infrastructure is not available"},
+        {"parsed_title": "Sensing", "page": 13, "source_quote": "6. Sensing – The Army is interested in developing a detailed understanding of the environment"},
+        {"parsed_title": "Communications & networks", "page": 14, "source_quote": "7. Communications & networks – It is critical the Army maintain secure, reliable communications"},
+        {"parsed_title": "Computation", "page": 14, "source_quote": "8. Computation – The Army has a growing need for high performance computational capabilities"},
+        {"parsed_title": "Space", "page": 14, "source_quote": "9. Space – Like many commercial interests, the Army is interested in exploiting space assets"},
+        {"parsed_title": "Internet of Things (IoT)", "page": 14, "source_quote": "10. Internet of Things (IoT) – The Army needs to better integrate a wide range of capabilities"},
+        {"parsed_title": "Quantum Technologies", "page": 15, "source_quote": "11. Quantum Technologies – The Army seeks to better employ quantum sciences"},
+        {"parsed_title": "Signature reduction", "page": 15, "source_quote": "12. Signature reduction – The Army needs to protect its Soldiers by making them harder to detect and locate"},
+        {"parsed_title": "Protection", "page": 15, "source_quote": "13. Protection – The Army faces a number of current and future threats"},
+        {"parsed_title": "Human Performance", "page": 15, "source_quote": "14. Human Performance – The Soldier is the foundation of all Army capabilities"},
+        {"parsed_title": "Contested Logistics", "page": 16, "source_quote": "15. Contested Logistics – The Army is interested in research in contested logistics technology"},
+        {"parsed_title": "Kinetic Payload", "page": 16, "source_quote": "16. Kinetic Payload – Kinetic payload technologies should provide scalable effects"}
+      ]
+    },
+    "362910": {
+      "basis": "RCPP NOFO pages 8 and 10. The two choices are funding pools, a DEC-11 funding/allocation mechanism rather than subjects.",
+      "fundable_subjects": [],
+      "expected_non_subjects": [
+        {"parsed_title": "Critical Conservation Area (CCA) Funding Pool", "page": 8, "dec11_class": "funding_mechanism"},
+        {"parsed_title": "State and Multi-State Funding Pool", "page": 10, "dec11_class": "funding_mechanism"}
+      ]
+    }
+  },
+  "negative_truth": {
+    "source": "docs/FAMILY_TAXONOMY.md §1, category (a): documents were read and no fundable subdivision list exists",
+    "all_33_expected_fundable_subjects": 0,
+    "b0_source": "docs/TOPIC_LAYER_PLAN.md §6.3 coverage note: the three notices contain 47, 19, and 74 decimal-numbered administrative lines and must yield zero F1 children",
+    "eda_source": "evaluation/p7_false_positive_fixtures.json: 347414's seven Investment Priorities are alignment/evaluation criteria, not selectable subjects"
+  },
+  "stronger_770_precheck": {
+    "committed_evidence": "evaluation/p7_residual.json preserves only a 770-document aggregate rejection histogram, not the document IDs, source identities, text, truth labels, or the one-shot probe",
+    "reproducible_without_reconstruction": false,
+    "owner": "No single open debt owns recovery of the historical 770-document frame. DEBT-1 owns regenerating the obsolete D5 cache before any cache commit; closed DEBT-9 explicitly says its new post-Cov5 population does not recover the old spans; DEBT-11 supplies the freeze-before-outcomes discipline but owns MEAS-8 sampling, not this historical backfill."
+  }
+}

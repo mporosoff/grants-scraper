@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-08-21T10:49:44Z</updated>
+  <updated>2026-08-21T17:17:39Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -17,15 +17,6 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>Rural Utilities Service | Closes 2026-10-09 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
-  </entry>
-  <entry>
-    <title>Energy-Focused Air Quality and Health Effects Research</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001H35P3AAJ"/>
-    <id>urn:funding-finder:nyserda:nyserda%3APON6220</id>
-    <updated>2026-08-20T00:00:00Z</updated>
-    <author><name>NYSERDA</name></author>
-    <category term="Energy"/>
-    <summary>NYSERDA | Closes 2026-10-28 | Supporting research to improve the scientific and technical foundation for addressing key policy-relevant questions related to air quality and health effects research, Program Opportunity Notice (PON) 6220, Energy-Related Air Quality and Health Effects Research, is available through NYSERDA.rnPON 6220 focuses on: 1) pollutant trends analysis, source apportionment, and accountability studies; 2) po…</summary>
   </entry>
   <entry>
     <title>Egypt Annual Program Statement</title>
@@ -131,6 +122,15 @@
     <category term="Materials science"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Closes 2076-08-19 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research for electrical, communications and computing systems through the following programs: The Electronic, Photonic, Magnetic, and Quantum Devices (EPMQD) program supports foundational engineering research on novel classical and quantum devices, exploring matter’s electronic, photonic, and magnetic …</summary>
+  </entry>
+  <entry>
+    <title>Energy-Focused Air Quality and Health Effects Research</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001H35P3AAJ"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON6220</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <summary>NYSERDA | Closes 2026-10-28 | Supporting research to improve the scientific and technical foundation for addressing key policy-relevant questions related to air quality and health effects research, Program Opportunity Notice (PON) 6220, Energy-Related Air Quality and Health Effects Research, is available through NYSERDA.rnPON 6220 focuses on: 1) pollutant trends analysis, source apportionment, and accountability studies; 2) po…</summary>
   </entry>
   <entry>
     <title>Promoting Responsible Investment and Rights-Respecting Production Models</title>

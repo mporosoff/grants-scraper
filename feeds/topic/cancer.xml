@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml</id>
-  <updated>2026-08-21T10:49:44Z</updated>
+  <updated>2026-08-21T17:17:39Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -202,6 +202,23 @@
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health | Closes 2027-01-25 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to continue to support the Radiation Oncology-Biology Integration Network (ROBIN) with applications from both new and renewing investigators. This network model will sustain an agile and effective national radiation oncology infrastructure that collectively addresses critical hypothesis-based translation…</summary>
+  </entry>
+  <entry>
+    <title>Limited Submission Opportunity: $700,000 - The G. Harold and Leila Y. Mathers Foundation - Research Grant (Spring 2027 Cycle)</title>
+    <link href="http://rochester.infoready4.com/CompetitionSpace/"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Ainfoready-2028504</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Climate change"/>
+    <category term="Infectious disease"/>
+    <category term="Neuroscience"/>
+    <category term="Technology development"/>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2027-02-12 | The Foundation primarily
+supports basic science, ideally with potential translational applications. Examples of current research areas we support include
+immunology, microbiome, structural biology, cellular physiology, cancer biology, genetics, genomics, microbiology and infectious diseases, stem cell biology, and neuroscience. Research areas
+we will not consider for support include Covid-19 relat…</summary>
   </entry>
   <entry>
     <title>Damon Runyon Cancer Research Foundation Clinical Investigator Award 2027</title>
@@ -606,14 +623,5 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Cancer"/>
     <category term="Technology development"/>
     <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-01 | Summary: The Ovarian Cancer Pilot Award supports research that expands or modifies current thinking about and/or approaches in ovarian cancer, exploring innovative concepts or theories in ovarian cancer that could ultimately lead to critical discoveries or major advancements that will drive the field forward. Distinctive Features: Innovation is key. Research projects that demonstrate exceptional s…</summary>
-  </entry>
-  <entry>
-    <title>DoW Pancreatic Cancer Research Program, Focused Pilot Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362193"/>
-    <id>urn:funding-finder:grants-gov:362193</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-07 | Summary: The fiscal year 2026 (FY26) Pancreatic Cancer Research Program (PCARP) Focused Pilot Award supports the exploration and development of impactful and innovative concepts under a patient-centered focus area of pancreatic cancer research that could ultimately lead to major advancements that will have a profound effect on patients’ overall quality of life. The research this award supports sho…</summary>
   </entry>
 </feed>
