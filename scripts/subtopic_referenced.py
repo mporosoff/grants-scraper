@@ -35,6 +35,7 @@ suppress the answer something else could give (§6.7·0, §7.4).
 
 from __future__ import annotations
 
+import hashlib
 import re
 
 # --- the measured source contract -------------------------------------------
@@ -268,6 +269,11 @@ def first_refusal(record, *, fetch, url=ARMY_TDAC_TOPICS_URL,
         return None, None, diagnostics
 
     result = build_result(topics, url=url)
-    document = {"url": url, "sha256": None, "name": "TDAC BAA Research Topics"}
+    document = {
+        "url": url,
+        "sha256": hashlib.sha256(html.encode("utf-8")).hexdigest(),
+        "name": "TDAC BAA Research Topics",
+        "source_kind": "referenced_page",
+    }
     diagnostics["reason"] = "answered"
     return result, document, diagnostics

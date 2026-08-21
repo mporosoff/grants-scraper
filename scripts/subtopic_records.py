@@ -235,6 +235,8 @@ def source_role(document):
         return "secondary_attachment"
     if kind == "attached_source":
         return "attached_source"
+    if kind == "referenced_page":
+        return "referenced_program_page"
     if kind in {"agency_notice", "subtopic_agency_notice"}:
         return "agency_page"
     return "unknown"

@@ -225,6 +225,8 @@ class ProvenanceTests(unittest.TestCase):
             self.assertIsNone(record["page_start"])
             self.assertIsNone(record["page_end"])
             self.assertEqual(record["source_document_url"], ref.ARMY_TDAC_TOPICS_URL)
+            self.assertRegex(record["source_document_hash"], r"^[0-9a-f]{64}$")
+            self.assertEqual(record["source_role"], "referenced_program_page")
 
     def test_child_identity_is_the_announcement_id_scoped_to_the_parent(self):
         ids = [record["subtopic_id"] for record in self.records]
