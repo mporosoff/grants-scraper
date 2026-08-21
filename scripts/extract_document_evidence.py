@@ -1772,6 +1772,38 @@ def refresh_subtopics_without_source(
     return store, metrics
 
 
+def merge_subtopic_sidecar(cache, sources, current_parent_ids, *, as_of):
+    """Preserve untouched P9 children while applying this refresh's results.
+
+    The recurring document pass is deliberately budgeted, so ``sources`` is
+    only the subset inspected in this run.  Starting from an empty cache would
+    therefore erase every uninspected parent.  Current parent membership is
+    the sidecar's only currentness axis; prune on that axis, then upsert only
+    the parents for which this run produced a subtopic decision.
+    """
+    from scripts import subtopic_records
+
+    current_parent_ids = {
+        str(identifier) for identifier in current_parent_ids
+    }
+    subtopic_records.retain_current_parents(cache, current_parent_ids)
+    for opportunity_id, entry in sources:
+        opportunity_id = str(opportunity_id)
+        if opportunity_id not in current_parent_ids:
+            continue
+        if "subtopics" not in entry:
+            continue
+        subtopic_records.upsert_parent(
+            cache,
+            opportunity_id,
+            entry.get("subtopics") or [],
+            as_of=as_of,
+            reason=entry.get("subtopic_reason"),
+            method=entry.get("subtopic_method"),
+        )
+    return cache
+
+
 def due_for_check(entry, signature, now, recheck_days, *, needs_subtopics=False):
     if not entry:
         return True
@@ -2431,23 +2463,32 @@ def main(argv=None):
         # Written only with the flag on, so the flag-off artifact set is
         # unchanged and §0.5 byte-identity holds by construction.
         from scripts import subtopic_records
+        from scripts.currentness import filter_current
 
-        subtopic_cache = subtopic_records.empty_cache()
+        as_of = iso_utc(utc_now())[:10]
+        current_records, _ = filter_current(
+            enriched["opportunities"], date.fromisoformat(as_of)
+        )
+        current_parent_ids = {
+            str(
+                record.get("opportunity_id")
+                or record.get("opportunity_number")
+                or ""
+            )
+            for record in current_records
+        }
+        current_parent_ids.discard("")
+        subtopic_cache = subtopic_records.read_cache(args.subtopic_cache)
         sources = list((cache.get("records") or {}).items())
         # §18.1 Cov1 results carry no evidence entry by design, so they are a
         # second source for the same cache rather than a second cache.
         sources += list((cache.get("subtopic_only") or {}).items())
-        for opportunity_id, entry in sources:
-            if "subtopics" not in entry:
-                continue
-            subtopic_records.upsert_parent(
-                subtopic_cache,
-                opportunity_id,
-                entry.get("subtopics") or [],
-                as_of=iso_utc(utc_now())[:10],
-                reason=entry.get("subtopic_reason"),
-                method=entry.get("subtopic_method"),
-            )
+        merge_subtopic_sidecar(
+            subtopic_cache,
+            sources,
+            current_parent_ids,
+            as_of=as_of,
+        )
         subtopic_records.write_cache(subtopic_cache, args.subtopic_cache)
     write_catalog(enriched, args.catalog)
     metrics = enriched["diagnostics"]["document_evidence"]

@@ -12,6 +12,7 @@ from scripts.extract_document_evidence import (
     enrich_document_evidence,
     extract_containers,
     extract_document_facts,
+    merge_subtopic_sidecar,
     merge_document_entry,
     parse_args,
     refresh_subtopics_without_source,
@@ -318,6 +319,53 @@ class DocumentEvidenceTests(unittest.TestCase):
         )
 
         self.assertNotIn("old", cache["records"])
+
+    def test_recurring_subtopic_merge_preserves_uninspected_current_parents(self):
+        untouched = {
+            "subtopics": [{"subtopic_id": "keep-child"}],
+            "subtopic_count": 1,
+            "segmentation_method": "campaign",
+            "subtopic_extractor_version": "p9",
+        }
+        cache = {
+            "schema_version": 1,
+            "records": {
+                "keep": untouched.copy(),
+                "update": {
+                    "subtopics": [],
+                    "subtopic_count": 0,
+                    "segmentation_method": "old",
+                    "subtopic_extractor_version": "old",
+                },
+                "stale": untouched.copy(),
+            },
+        }
+
+        merged = merge_subtopic_sidecar(
+            cache,
+            [
+                ("update", {
+                    "subtopics": [],
+                    "subtopic_reason": "checked_no_children",
+                    "subtopic_method": "document_evidence",
+                }),
+                ("stale", {
+                    "subtopics": [],
+                    "subtopic_reason": "cached_old_result",
+                    "subtopic_method": "document_evidence",
+                }),
+            ],
+            {"keep", "update"},
+            as_of="2026-08-21",
+        )
+
+        self.assertIs(merged, cache)
+        self.assertEqual(merged["records"]["keep"], untouched)
+        self.assertNotIn("stale", merged["records"])
+        self.assertEqual(
+            merged["records"]["update"]["subtopic_reason"],
+            "checked_no_children",
+        )
 
     def test_never_processed_agency_pages_are_not_starved_by_rechecks(self):
         primary = base_record()
