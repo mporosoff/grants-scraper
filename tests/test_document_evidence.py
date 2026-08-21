@@ -562,6 +562,41 @@ class ClassifierOperationalDiagnosticsTests(unittest.TestCase):
             totals["classifier_errors"], {"missing_credential": 1}
         )
 
+    def test_refresh_health_fails_closed_on_any_classifier_error(self):
+        with self.assertRaisesRegex(RuntimeError, "classifier failed closed"):
+            validate_refresh_health({
+                "subtopics": {
+                    "classifier_run": {
+                        "classifier_errors": {"missing_credential": 1},
+                    }
+                }
+            })
+
+    def test_refresh_health_requires_complete_token_usage(self):
+        with self.assertRaisesRegex(RuntimeError, "not fully auditable"):
+            validate_refresh_health({
+                "subtopics": {
+                    "classifier_run": {
+                        "usage_unreported_requests": 1,
+                    }
+                }
+            })
+
+    def test_refresh_health_accepts_audited_classifier_usage(self):
+        validate_refresh_health({
+            "subtopics": {
+                "classifier_run": {
+                    "classifier_calls": 3,
+                    "api_requests": 3,
+                    "input_tokens": 900,
+                    "output_tokens": 60,
+                    "usage_reported_calls": 3,
+                    "usage_unreported_requests": 0,
+                    "classifier_errors": {},
+                }
+            }
+        })
+
 
 if __name__ == "__main__":
     unittest.main()

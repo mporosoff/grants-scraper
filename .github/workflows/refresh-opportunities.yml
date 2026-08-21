@@ -19,6 +19,7 @@ on:
       - "scripts/check_links.py"
       - "scripts/currentness.py"
       - "scripts/alert_match.py"
+      - "tools/run_refresh_validation.py"
   schedule:
     - cron: "17 10 * * *"
   workflow_dispatch:
@@ -76,7 +77,7 @@ jobs:
           --catalog data/opportunities.js
           --cache data/document_evidence.json
           --max-documents 45
-          --max-subtopic-documents 45
+          --max-subtopic-documents 30
           --request-delay 0.2
           --recheck-days 14
           --enable-subtopics
@@ -121,7 +122,7 @@ jobs:
       - name: Regenerate catalog statistics in project documentation
         run: python -m scripts.update_catalog_docs
       - name: Run regression tests against generated asset
-        run: python -m unittest discover -s tests -v
+        run: python -m tools.run_refresh_validation
       - name: Record the build heartbeat
         shell: bash
         # Scheduled workflows are disabled after 60 days without repository

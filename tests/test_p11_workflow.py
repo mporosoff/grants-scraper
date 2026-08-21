@@ -38,8 +38,13 @@ class P11WorkflowTests(unittest.TestCase):
         document = self.document_step()
         self.assertIn("--enable-subtopics", document)
         self.assertIn("--max-documents 45", document)
-        self.assertIn("--max-subtopic-documents 45", document)
+        self.assertIn("--max-subtopic-documents 30", document)
         self.assertIn("continue-on-error: true", document)
+
+    def test_post_refresh_gate_preserves_closed_measurement_frames(self):
+        source = WORKFLOW.read_text(encoding="utf-8")
+        self.assertIn("python -m tools.run_refresh_validation", source)
+        self.assertIn('"tools/run_refresh_validation.py"', source)
 
     def test_document_degradation_routes_to_the_existing_degraded_channel(self):
         source = WORKFLOW.read_text(encoding="utf-8")

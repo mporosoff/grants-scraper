@@ -21,6 +21,7 @@ import hashlib
 import io
 import ipaddress
 import json
+import os
 from pathlib import Path
 import re
 import socket
@@ -2104,6 +2105,25 @@ def classifier_run_metrics(entries):
 
 
 def validate_refresh_health(metrics, minimum_attempts=5, maximum_failure_rate=0.8):
+    classifier = (metrics.get("subtopics") or {}).get("classifier_run") or {}
+    classifier_errors = sum(
+        max(0, int(count or 0))
+        for count in (classifier.get("classifier_errors") or {}).values()
+    )
+    if classifier_errors:
+        raise RuntimeError(
+            "Subtopic classifier failed closed: "
+            f"{classifier_errors} call(s) reported errors."
+        )
+    usage_unreported = max(
+        0, int(classifier.get("usage_unreported_requests") or 0)
+    )
+    if usage_unreported:
+        raise RuntimeError(
+            "Subtopic classifier usage is not fully auditable: "
+            f"{usage_unreported} API request(s) omitted token usage."
+        )
+
     attempted = (
         int(metrics.get("refreshed_count") or 0)
         + int(metrics.get("not_modified_count") or 0)
@@ -2431,6 +2451,15 @@ def main(argv=None):
         subtopic_records.write_cache(subtopic_cache, args.subtopic_cache)
     write_catalog(enriched, args.catalog)
     metrics = enriched["diagnostics"]["document_evidence"]
+    classifier = (metrics.get("subtopics") or {}).get("classifier_run")
+    if classifier is not None:
+        payload = json.dumps(classifier, sort_keys=True, separators=(",", ":"))
+        print(f"Classifier operational diagnostics: {payload}")
+        summary_path = os.environ.get("GITHUB_STEP_SUMMARY")
+        if summary_path:
+            with Path(summary_path).open("a", encoding="utf-8") as summary:
+                summary.write("### Classifier operational diagnostics\n\n")
+                summary.write(f"```json\n{payload}\n```\n\n")
     validate_refresh_health(metrics)
     print(
         "Document evidence current for "
