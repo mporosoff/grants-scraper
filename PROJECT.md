@@ -1,8 +1,8 @@
 # Funding Finder — Product Plan
 
-**Status:** P11 feature/configuration and `topic-layer` dispatch gates passed; topic-aware retrieval and explanations are enabled on the feature branch, with the history-preserving `main` merge, main CI/refresh, and live-site verification still pending; MEAS-10 remains unperformed post-launch human validation
+**Status:** Funding Finder v1.1.0 is live on `main`; P11 and the P1–P11 topic-layer release path are closed; MEAS-10 remains unperformed post-launch human validation
 
-**Next implementation phase:** P11 ship gate — reconcile the latest `main`, merge `topic-layer` without squashing, then verify main CI, the production refresh, and the live site
+**Next implementation phase:** Post-launch operations and explicitly accepted follow-up work; do not treat MEAS-10, archive/search retention, topic-change feed events, or a SAM.gov adapter as completed or scheduled without their recorded human/product triggers
 
 **Canonical application:** https://mporosoff.github.io/grants-scraper/
 
@@ -240,7 +240,7 @@ and aggregated into private Markdown, JSON, and CSV reports.
 
 ### 2.7 Topic-aware retrieval release
 
-The v1.1.0 release candidate enables the already-measured topic and deterministic
+The v1.1.0 release enables the already-measured topic and deterministic
 match-explanation paths. Its August 21 feature-branch dispatch retained all 446
 stored subject children across 29 publishing parents: 236 are publishable and
 210 inferred children remain review-only. Normal search admits only publishable
@@ -259,13 +259,29 @@ post-launch human validation.
 
 Recurring scheduled classification uses only the dedicated GitHub Actions
 secret `ANTHROPIC_API_KEY`, exposed to the document-evidence step alone. It
-fails closed and records aggregate call and token usage; the cache-aware warm
-dispatch made zero classifier/API calls and used zero tokens. Compare and the
-permanent rating/personalization surface remain absent; invited evaluation mode
-is separate. Rollback requires only disabling the two browser flags and
-removing scheduled `--enable-subtopics`: the sidecar is additive, the parent
-catalog remains authoritative, the last successful site is recoverable from
-git, and no database migration is involved.
+fails closed and records aggregate call and token usage. The cache-aware warm
+feature dispatch made zero classifier/API calls and used zero tokens. The first
+production refresh made 23 calls for exactly 23 candidate spans across three of
+45 administrative documents; each span made one request, all usage was
+reported, and there were no API errors or retries. Its separate 30-document
+subtopic rotation made zero calls. No child ID or publication count changed, so
+this was bounded revalidation rather than an unexpected volume spike. Compare
+and the permanent rating/personalization surface remain absent; invited
+evaluation mode is separate. Rollback requires only disabling the two browser
+flags and removing scheduled `--enable-subtopics`: the sidecar is additive, the
+parent catalog remains authoritative, the last successful site is recoverable
+from git, and no database migration is involved.
+
+P11 shipped on August 21, 2026 through history-preserving `main` merge
+`bca8e03`, followed by successful production refresh `32509140933` in 8m1s and
+bot commit `347ed9d`. Main CI, the refresh's post-generation gates, and final
+Pages deployment all passed. The deployed `assets/app-config.js` and
+`data/subtopics.js` bytes match final `main`; live Funding Finder and Team
+Matcher smoke tests confirmed v1.1.0, topic-driven Genesis and ARL retrieval,
+bounded explanations and team-topic evidence, the normal-mode evaluation
+boundary, profile controls, and zero console errors. The highest issue number
+remained #31; the known JHU workbook 403 updated existing degraded-source issue
+#30, while generic failure issue #29 was untouched.
 
 ---
 

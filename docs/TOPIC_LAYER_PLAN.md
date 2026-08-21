@@ -2,11 +2,13 @@
 
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
-Status: in progress · Version 8.39 · Written 2026-08-15 · **Revised 2026-08-21 through the P11 feature/configuration gate**
+Status: complete · Version 8.40 · Written 2026-08-15 · **Revised 2026-08-21 through the P11 production closeout**
 
-> **Start at §18, and read §18.0 first.** §18 defines the minimum path — the **eleven** work packages **P1 … P11** — and lists what is deferred and what it costs. **§18.0 is the canonical namespace**: package IDs, the `BUG-*` / `MEAS-*` / `DEC-*` / `DEBT-*` prefixes, the migration table for every legacy label (`Package A–G`, `D½`, `D⅝`, `D¾`, `S1–S3`, `Package N`, bare `D#`, `M#`), the current ordered path, and a diagram. **P5, P6, P7, P9 and P10 are CLOSED; P8 is complete; MEAS-8 and MEAS-9 are CLOSED. P11 is SHIP-READY on `topic-layer`, with the main reconciliation/merge/CI/refresh/live gate still pending.** DEC-17 is closed by the user's explicit ship-without-pilot decision; MEAS-10 remains unperformed post-launch human product validation. Production feature flags are enabled on the feature branch only; the existing `main` site remains the unnumbered production baseline until the ship gate completes. **§18.0.6 is the canonical Open Obligations Register** — every unresolved `DEC-*`, `BUG-*`, `DEBT-*` and `MEAS-*` in the project, each with an owner and a gate. §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
+> **Start at §18, and read §18.0 first.** §18 defines the minimum path — the **eleven** work packages **P1 … P11** — and lists what is deferred and what it costs. **§18.0 is the canonical namespace**: package IDs, the `BUG-*` / `MEAS-*` / `DEC-*` / `DEBT-*` prefixes, the migration table for every legacy label (`Package A–G`, `D½`, `D⅝`, `D¾`, `S1–S3`, `Package N`, bare `D#`, `M#`), the current ordered path, and a diagram. **The P1–P11 topic-layer release path is complete; P11 CLOSED on 2026-08-21 with Funding Finder v1.1.0 live on `main`.** DEC-17 is closed by the user's explicit ship-without-pilot decision; MEAS-10 remains unperformed post-launch human product validation. The production topic and explanation flags are enabled on `main` and live Pages. The pre-release production site remains the intentionally unnumbered baseline; visible numbering begins with v1.1.0. **§18.0.6 is the canonical Open Obligations Register** — every unresolved `DEC-*`, `BUG-*`, `DEBT-*` and `MEAS-*` in the project, each with an owner and a gate. §10's four phases remain as background; §18 supersedes them as the unit of work, and §15 tracks §18.
 >
 > **Legacy labels in the revision notes below are historical.** They record what a past session actually did and are left as written; translate any of them through §18.0.3 rather than assuming a bare `D5` or `S1` still names live work.
+>
+> **8.40 closes P11 and the P1–P11 release path.** `topic-layer` reconciled the six latest production refresh commits in merge `899c592` without changing a single tree byte. Reconciled Tests run **32508993884** passed. The normal history-preserving production merge is `bca8e03`; `main` Tests run **32509140928** passed. The automatically triggered production refresh, run **32509140933**, succeeded in **8m1s** and produced bot commit `347ed9d`. Its classifier audit was **23 calls / 23 API requests / 23,950 input tokens / 1,571 output tokens / 0 API errors / complete usage reporting**. That volume was bounded and expected: exactly 23 offered spans across three of 45 administrative documents, one request per span with no retry amplification; the independent 30-document subtopic rotation made zero calls. The revalidation added and removed **zero child IDs** and left **446 children / 29 publishing parents / 236 searchable / 210 review-only** unchanged. Pages deployment **32509830499** passed. Exact live/local byte checks matched `assets/app-config.js` (**1,543 bytes**, SHA-256 `ef7976cc7cff975b4696f65fc71db03630517dfc27bf50062a14a923cc8bc569`) and `data/subtopics.js` (**1,849,278 bytes**, SHA-256 `d4d239cc2b7ad2314eb48a59e8e5259dd5bef66bff37058c8f3067e688780f60`). Live in-app-browser smoke checks confirmed the v1.1.0 label, initial no-results state, normal-mode evaluation/rating/Compare boundary, profile/ORCID/CV controls, Genesis focus-area retrieval, the bounded sixth-place `space biology` ARL result and evidence-backed explanation, Team Matcher ARL topics, and zero console errors. Highest issue stayed **#31**; #30 received the expected JHU degraded-source comment and #29 was untouched. **P11 CLOSED 2026-08-21. MEAS-10 remains UNPERFORMED post-launch human validation.**
 >
 > **8.39 makes P11 SHIP-READY, not CLOSED.** BUG-0 is closed by independent, explicit `--max-documents 45` and `--max-subtopic-documents 30` workflow budgets; BUG-11 is closed by reading the resolved ROSES URL without changing emission. The document-evidence step has a stable id, retains `continue-on-error`, and routes contained failures to the existing degraded-source issue. Production topics and deterministic explanations are enabled, while the dedicated `ANTHROPIC_API_KEY` remains step-local and fail-closed. The canonical feature-branch dispatch, Actions run **32506795756**, succeeded in **7m27s** and produced bot commit `21332e9`; steady-state diagnostics were **0 classifier calls / 0 API requests / 0 input tokens / 0 output tokens / 0 errors**. The sidecar retained **446 children / 29 publishing parents / 236 publishable / 210 review-only / 0 orphan parents / 0 normal-browser leakage** at **1,845,103 bytes**, SHA-256 `6504510743bf1074e367393ee3df7028a15dcec5756a65334b1d6f36ce083e26`. The final catalog contains **1,473 stored / 1,463 current** parents; P10→dispatch churn was 73 additions and 85 removals, while no child-bearing sidecar parent changed. The exact `space biology` case remains one bounded sixth result driven by literal `space` + `biology` overlap in *Bionic Electronics*, displacing nothing. Highest issue number remained **#31**; #30 received the expected external-source comment for the known JHU 403, and the successful run did not use #29. Verification: **751 live-product Python tests, 98 browser tests, 37-query zero flag-off churn, 50-case P9 byte identity/cardinality invariance, and 22/22 no-drift artifacts**. **SHIP GATE PENDING: latest-main reconciliation, main merge/CI/refresh, live Pages verification, then the docs-only closeout.**
 >
@@ -20,7 +22,7 @@ Status: in progress · Version 8.39 · Written 2026-08-15 · **Revised 2026-08-2
 >
 > MEAS-9 ran all eight arms through the production retrieval/profile modules. The real route was `assets/orcid.js` → Crossref `filter=orcid:0000-0003-3066-0029`, resolving Marc D. Porosoff and **16/16 public works**. Arms 1–6 retained the exact **12-candidate** query admission set, all four historical recall anchors and **0/4 historical false positives**; CV and ORCID changed ranks without broadening admission. Profile-only CV+ORCID fallback admitted 5 focused candidates and retained CPS, DOE and ONR; NSF Chemistry did not meet that fallback's four-concept floor. The historical combined topic arm had no movement; three child-sensitive probes demonstrated child-only parent admission and supplied the explanation sample. A bounded OpenAlex comparison found 54 works / 34 abstracts, but no OpenAlex adapter was run and no ranking gain was demonstrated, so DEC-3 retains the working Crossref path rather than changing provider on coverage alone.
 >
-> MEAS-10 remains **unperformed on an exact human dependency**: no consented exports from 3–5 real researchers were supplied or present. The dedicated evaluation workflow, privacy-preserving export and synthetic evaluator are ready; normal ratings remain absent. The user accepted DEC-17 on 2026-08-21, so MEAS-10 is explicit post-launch human product validation and does not block P11; it is not complete and no pilot is implied. User decisions close/defer the other P10 branches: no general gold-set pipeline (DEC-4), archive retention/search post-P11 (DEC-5), no topic-change Atom events (DEC-7), DEC-9 retired because its mute/rating trigger disappeared, no ROSES division→discipline inference (DEC-14), and v1 typed rendering remains `subject` only (DEC-18). **P10 is CLOSED. P11 is SHIP-READY on `topic-layer`; its production flags are enabled there, while main/live verification remains pending.**
+> MEAS-10 remains **unperformed on an exact human dependency**: no consented exports from 3–5 real researchers were supplied or present. The dedicated evaluation workflow, privacy-preserving export and synthetic evaluator are ready; normal ratings remain absent. The user accepted DEC-17 on 2026-08-21, so MEAS-10 is explicit post-launch human product validation and did not block P11; it is not complete and no pilot is implied. User decisions close/defer the other P10 branches: no general gold-set pipeline (DEC-4), archive retention/search post-P11 (DEC-5), no topic-change Atom events (DEC-7), DEC-9 retired because its mute/rating trigger disappeared, no ROSES division→discipline inference (DEC-14), and v1 typed rendering remains `subject` only (DEC-18). **P10 and P11 are CLOSED; Funding Finder v1.1.0 is live on `main`.**
 >
 > **8.36 closes P9.** The bounded ARPA-H source emitted 10 healthy current official parents, bringing the generated catalog to **1,485 records**. The frozen one-time campaign then covered **1,415 current parents** and excluded 70 under P9's parent-only currentness rule. It attempted every frozen parent and produced **446 subject children across 29 parents**: **210 native, 14 referenced, 12 inline and 210 inferred**; **236 high, 119 medium and 91 low confidence**; **236 publishable and 210 review-only**. The public/searchable set reconciles exactly to bounded authoritative routes: Genesis 119, ARL 82, TDAC 14, HGEO 12 and current ROSES 9. All 210 inferred generic children remain review-only under DEC-16. The run made 243 classifier calls with 0 classifier errors, recorded 0 field errors and 0 validation/publication anomalies, and failed closed on 51 top-level fetches plus one per-document time guard without invalidating the complete attempted frame. The compact sidecar is **1,532,202 bytes**, stores display/provenance records separately from the bounded `MAX_TERMS=400` inverted index, and is byte-identical on fixed-input regeneration at SHA-256 `fb726ad3b4d40b78993834981f53c4b5f89975152f5ee817d36fcc88ab050e6a`.
 >
@@ -3819,9 +3821,9 @@ Legacy labels are translated once, in §18.0.3 — not repeated here.
 | **P8** | NASA ROSES Catalog Source | ✅ **complete** 2026-08-20, own gate passed, **no open items** (§18.1). A **catalog-completeness branch**, not subtopic recall. The adapter is enabled and reconciles all **63** elements every refresh; the catalog-completeness gap is **closed** — the 2 actionable unmatched elements are emitted (**+0.136%**) and the other **51** stay inventory-only. Native identity `(cycle, code, title)` and the cross-source ambiguity rule were audited against the live source in P8.2a |
 | **P9** | Storage and scoring | ✅ **CLOSED 2026-08-21.** Final 1,415-current / 70-excluded frame fully attempted; deterministic validated sidecar has 446 subject children, 236 publishable and 210 review-only; scoring, currentness, flag-off, browser, unit and no-drift gates pass (§18.1) |
 | **P10** | Retrieval and UI | ✅ **CLOSED 2026-08-21.** Lazy P9 rollup, readable explanations/topics, compact Funding Finder and Team Matcher UI, app release source, MEAS-5 and MEAS-9 complete; MEAS-10 carried explicitly to P11/DEC-17 |
-| **P11** | Enable and ship | 🟡 **SHIP-READY 2026-08-21.** Feature/configuration and dispatch gates passed on `topic-layer`; main reconciliation/merge/CI/refresh/live verification pending |
+| **P11** | Enable and ship | ✅ **CLOSED 2026-08-21.** History-preserving merge `bca8e03`; main CI and 8m1 production refresh passed; bot commit `347ed9d` deployed and verified live as Funding Finder v1.1.0 |
 
-**Gates that stop work by design:** ~~P4's gate~~ (**reconciled at P7 closeout: final 42% < 50%, target not lowered**) · ~~P5's Cov4 gate~~ (**passed 2026-08-26**) · ~~P7 behind P5 and P6~~ (**P7 closed**) · ~~P9's validated first current sidecar/results pair~~ (**passed 2026-08-21**) · ~~P10 retrieval/UI and deterministic relevance gate~~ (**passed 2026-08-21**) · **P11 cannot close while §18.0.6 holds an open obligation.**
+**Gates that stop work by design:** ~~P4's gate~~ (**reconciled at P7 closeout: final 42% < 50%, target not lowered**) · ~~P5's Cov4 gate~~ (**passed 2026-08-26**) · ~~P7 behind P5 and P6~~ (**P7 closed**) · ~~P9's validated first current sidecar/results pair~~ (**passed 2026-08-21**) · ~~P10 retrieval/UI and deterministic relevance gate~~ (**passed 2026-08-21**) · ~~P11 open-obligation and production ship gate~~ (**passed 2026-08-21; explicitly accepted post-launch items remain truthful and assigned**).
 
 ### Bugs — BUG-*
 
@@ -4116,7 +4118,7 @@ P7, because that is where it falls in the ordered path (§18.0.4).
 - [x] **P11.2.** Give document evidence a stable id and route contained degradation while retaining `continue-on-error`
 - [x] **P11.3.** `PROJECT.md` — decision, rationale, measured deltas, MEAS-10 honesty, release/version boundary and rollback
 - [x] **GATE:** §9.4 dispatch checklist walked in full on run `32506795756` — 7m27s, highest issue remained #31, expected #30 update, generated diff reviewed
-- [ ] **SHIP GATE:** **PENDING MERGE/LIVE VERIFICATION.** Fetch the latest `main`, reconcile it into `topic-layer`, resolve conflicts there, rerun every affected/full gate when reconciliation changes bytes, and review the final `main..topic-layer` diff. Then use the repository's normal history-preserving merge workflow to merge `topic-layer` into `main`, push `main`, verify the `main` CI/refresh succeeds, and verify the live GitHub Pages Funding Finder. **Only then is P11 CLOSED.** Do not rename or swap the default branch; `main` remains the authoritative default/live branch. Do not squash away the P1–P11 history merely to shorten it. A green feature branch is not shipped.
+- [x] **SHIP GATE:** **PASSED 2026-08-21.** Latest `main` reconciled into `topic-layer` as `899c592` with an identical result tree; final diff and secret exposure reviewed; reconciled Tests run `32508993884` passed. History-preserving production merge `bca8e03` pushed to the unchanged default/live `main`; main Tests `32509140928`, production refresh `32509140933` (8m1s), bot commit `347ed9d`, and Pages deployment `32509830499` all passed. Live asset hashes and in-app-browser product smoke checks matched final `main`. **P11 CLOSED.**
 
 ---
 
@@ -4652,7 +4654,7 @@ it describes what a past session or commit actually did.
 | **P8** | NASA ROSES Catalog Source | Package N | ✅ **complete** 2026-08-20, own gate passed, **no caveats**. Adapter enabled; +2 records; 63 elements re-decided every refresh; identity model audited against the source (P8.2a) |
 | **P9** | Storage and scoring | Package E | ✅ **CLOSED 2026-08-21** |
 | **P10** | Retrieval and UI | Package F | ✅ **CLOSED 2026-08-21** |
-| **P11** | Enable and ship | Package G | 🟡 **SHIP-READY 2026-08-21; main/live ship gate pending** |
+| **P11** | Enable and ship | Package G | ✅ **CLOSED 2026-08-21; Funding Finder v1.1.0 live on `main`** |
 
 **Item labels inside a package.** Renamed **only where the legacy label was
 ambiguous**, because churn in an unambiguous label buys nothing and costs
@@ -4723,8 +4725,8 @@ notes elsewhere.
 | P9.0–P9.3 | Re-key identity · scoring prototype · implement · currentness | E0, E1, E2, E3 | **all complete; package gate passed 2026-08-21** |
 | P10 | Retrieval and UI | Package F | **CLOSED 2026-08-21** |
 | P10.1–P10.4 | Rollup · `term_display` · match-explain · search UI | F1, F2, F3, F4 *(package items, **not** the F1–F6 form names)* | **complete; package gate passed 2026-08-21** |
-| P11 | Enable and ship | Package G | **SHIP-READY 2026-08-21; main/live gate pending** |
-| P11.1–P11.3 | Flip the flags · route the step · `PROJECT.md` | G1, G2, G3 | **complete on `topic-layer`** |
+| P11 | Enable and ship | Package G | **CLOSED 2026-08-21; v1.1.0 live on `main`** |
+| P11.1–P11.3 | Flip the flags · route the step · `PROJECT.md` | G1, G2, G3 | **complete and shipped** |
 | **BUG-0** | `--max-documents` caps each pass, not the run | D0 *(debt)* | **closed in P11 — two explicit named budgets** |
 | **BUG-2** | Three families reject an ASCII hyphen | D2 *(debt)* | open — folded into P7's Fm3 |
 | **BUG-7** | The hermetic gate was date-dependent through the event-ID seed | **formerly D7** *(debt; distinct from P4.7)* | **fixed 2026-08-18** (`d735142`) |
@@ -4783,7 +4785,7 @@ P4.3, P4.6 …).
 | 11 | **MEAS-8** — cross-agency residual coverage audit | ✅ **CLOSED 2026-08-20.** Outcome-blind frame committed first at `16b765f`; Arm A 28 / Arm B 17; DEBT-6 and DEBT-11 closed; DEBT-10 consumer gate satisfied; DEC-19–DEC-22 promoted. No production change |
 | 12 | **P9** — subtopic-aware storage and scoring | ✅ **CLOSED 2026-08-21.** Final 1,415-current / 70-excluded campaign fully attempted; validated 446-child sidecar and results committed; 236 publishable authoritative children, 210 inferred review-only; accepted 50-case scoring and every unit/browser/query/no-drift gate pass |
 | 13 | **P10** — retrieval and UI | ✅ **CLOSED 2026-08-21.** Retrieval/UI, MEAS-5 and MEAS-9 complete; MEAS-10 remains the explicit human/DEC-17 gate for P11 |
-| 14 | **P11** — enable and ship | **the final zero-unresolved-obligation gate** (§18.0.6 rule 3) · due `DEC-*`: **DEC-17 (USER)** · BUG-0, BUG-11 | only when the coverage evidence says the feature is worth shipping; each behind its own existing gate |
+| 14 | **P11** — enable and ship | ✅ **CLOSED 2026-08-21.** DEC-17 resolved by the user; BUG-0/BUG-11 closed; accepted post-launch obligations assigned; v1.1.0 merged, refreshed, deployed and verified live |
 
 **P8 is a branch, not a stage of the subtopic feature.** P6.1 *discovered* it — 53
 ROSES program elements with no catalog record — but P8 adds **opportunities**,
@@ -7472,15 +7474,39 @@ hidden relevance win.
 that explicit post-launch human validation non-blocking; it does not convert the
 measurement into a success claim.
 
-**Final branch/publication gate.** Once those P11 gates pass on `topic-layer`:
-fetch the latest `main` → reconcile `topic-layer` with it and resolve conflicts on
-`topic-layer` → rerun affected/full gates if the reconciliation changes bytes →
-review the final `main..topic-layer` diff → merge `topic-layer` into `main` with
-the repository's normal history-preserving workflow → push `main` → verify the
-`main` CI/refresh succeeds → verify the live GitHub Pages Funding Finder → only
-then mark P11 CLOSED. `main` remains the authoritative default/live branch; do
-not rename or swap it, and do not squash away the P1–P11 history merely to
-shorten it. A green feature branch is not shipped.
+**Final branch/publication gate: ✅ PASSED 2026-08-21.** The six latest
+production refresh commits were reconciled into `topic-layer` as merge `899c592`.
+All overlaps were older generated/publication artifacts or release docs; the
+validated feature artifacts were newer, and the resulting merge tree was
+byte-identical to its first parent. Reconciled Tests run `32508993884` passed.
+The reviewed 203-file P1–P11 diff contained no credential value and exactly one
+workflow reference to `secrets.ANTHROPIC_API_KEY`, scoped to the document-evidence
+step.
+
+The normal history-preserving merge to the unchanged default/live `main` is
+`bca8e03`. Main Tests run `32509140928` passed. The automatically triggered
+production refresh `32509140933` passed in **8m1s**, including all post-generated
+Python, browser, query, P9 and no-drift gates, and pushed bot commit `347ed9d`.
+Classifier use was **23 calls / 23 requests / 23,950 input tokens / 1,571 output
+tokens / zero API errors / zero unreported requests**. Those calls were exactly
+one per offered span across three of 45 administrative documents (9 + 7 + 7),
+with no retry or repeat amplification. The separate 30-document subtopic
+rotation made zero calls. All 23 revalidated children remained review-gated;
+no child ID was added or removed and the public population stayed **446 / 29 /
+236 searchable / 210 review-only**.
+
+Pages deployment `32509830499` passed. Live/local hashes matched exactly:
+`assets/app-config.js` = **1,543 bytes**, SHA-256
+`ef7976cc7cff975b4696f65fc71db03630517dfc27bf50062a14a923cc8bc569`;
+`data/subtopics.js` = **1,849,278 bytes**, SHA-256
+`d4d239cc2b7ad2314eb48a59e8e5259dd5bef66bff37058c8f3067e688780f60`.
+The live browser showed v1.1.0 on Funding Finder and Team Matcher, no cards before
+search, no normal-mode evaluation/rating/Compare surface, intact profile/ORCID/CV
+controls, Genesis focus-area retrieval, the known sixth-place `space biology`
+ARL result with its evidence-bounded explanation, bounded ARL topic evidence in
+Team Matcher, and zero console errors. Highest issue remained #31; the known JHU
+403 updated #30, and #29 was untouched. `main` remains authoritative, and the
+P1–P11 history was neither squashed nor rewritten. **P11 CLOSED.**
 
 #### P7 — package closeout, measured 2026-08-20
 
