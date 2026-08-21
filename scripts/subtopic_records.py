@@ -533,26 +533,32 @@ def sidecar_payload(cache, *, approvals=None):
                 item.get("subtopic_id") or "",
             ),
         ):
-            stored = dict(child)
-            stored["subtopic_terms"] = _bounded_terms(child.get("subtopic_terms"))
+            terms = _bounded_terms(child.get("subtopic_terms"))
+            # Retrieval data belongs in the compact inverted index, never in
+            # the display record (§5.1/§5.2). Keeping both copies was the exact
+            # duplication the sidecar decision was meant to remove.
+            stored = {
+                key: value for key, value in child.items()
+                if key != "subtopic_terms"
+            }
             state, reason = publication_eligibility(stored, approvals=approvals)
             stored["publication_state"] = state
             stored["publication_reason"] = reason
             children.append(stored)
             flat.append(stored)
             if state == PUBLISHABLE and stored.get("child_type") == "subject":
-                searchable.append(stored)
+                searchable.append((stored, terms))
         parents[parent] = {
             **entry,
             "subtopics": children,
             "subtopic_count": len(children),
         }
 
-    record_ids = [child.get("subtopic_id") for child in searchable]
-    lengths = [sum(child.get("subtopic_terms", {}).values()) for child in searchable]
+    record_ids = [child.get("subtopic_id") for child, _terms in searchable]
+    lengths = [sum(terms.values()) for _child, terms in searchable]
     postings = {}
-    for document_id, child in enumerate(searchable):
-        for term, frequency in child.get("subtopic_terms", {}).items():
+    for document_id, (_child, terms) in enumerate(searchable):
+        for term, frequency in terms.items():
             postings.setdefault(term, []).extend((document_id, frequency))
     payload = {
         "schema_version": cache.get("schema_version", CACHE_SCHEMA_VERSION),
@@ -592,6 +598,25 @@ def read_cache(path=DEFAULT_CACHE):
         return empty_cache()
     payload.setdefault("schema_version", CACHE_SCHEMA_VERSION)
     payload.setdefault("records", {})
+    # The public sidecar stores term frequencies once, in the inverted index.
+    # Rehydrate the publishable records when the same artifact is used as the
+    # next maintenance run's cache so unchanged children retain their vectors.
+    index = payload.get("search_index") or {}
+    record_ids = index.get("record_ids") or []
+    terms_by_id = {str(identifier): {} for identifier in record_ids if identifier}
+    for term, values in (index.get("postings") or {}).items():
+        for offset in range(0, len(values) - 1, 2):
+            document_id, frequency = values[offset:offset + 2]
+            if not isinstance(document_id, int) or not (0 <= document_id < len(record_ids)):
+                continue
+            identifier = str(record_ids[document_id] or "")
+            if identifier:
+                terms_by_id.setdefault(identifier, {})[str(term)] = frequency
+    for entry in payload["records"].values():
+        for child in entry.get("subtopics") or []:
+            terms = terms_by_id.get(str(child.get("subtopic_id") or ""))
+            if terms is not None:
+                child["subtopic_terms"] = terms
     return payload
 
 

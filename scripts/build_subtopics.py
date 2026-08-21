@@ -38,8 +38,8 @@ DEFAULT_RESULTS = Path("evaluation/p9_backfill_results.json")
 MIN_CURRENT_ARPA_H_PARENTS = 6
 CAMPAIGN_IMPLEMENTATION = (
     Path("scripts/build_subtopics.py"),
+    Path("scripts/extract_document_evidence.py"),
     Path("scripts/subtopic_records.py"),
-    Path("scripts/subtopic_fields.py"),
     Path("scripts/subtopic_referenced.py"),
     Path("scripts/subtopic_sources.py"),
     Path("scripts/subtopic_segmentation.py"),

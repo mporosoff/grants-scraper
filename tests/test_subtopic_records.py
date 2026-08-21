@@ -312,11 +312,40 @@ class CacheIoTests(unittest.TestCase):
             first = payload["records"]["360678"]["subtopics"][0]
             self.assertEqual(list(first), sorted(first))
             self.assertEqual(first["publication_state"], "review")
-            self.assertLessEqual(len(first["subtopic_terms"]), 400)
+            self.assertNotIn("subtopic_terms", first)
             self.assertEqual(payload["search_index"]["document_count"], 0)
 
             reread = records.read_cache(path)
             self.assertEqual(reread, payload)
+
+    def test_publishable_terms_live_only_in_the_index_and_rehydrate(self):
+        cache = records.empty_cache()
+        built = records.build_records(
+            PARENT,
+            segmented(HEADINGS),
+            document=DOCUMENT,
+            as_of="2026-08-20",
+            provenance=records.REFERENCED,
+        )
+        records.upsert_parent(
+            cache, "360678", built, as_of="2026-08-20", method="referenced"
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "subtopics.js"
+            records.write_cache(cache, path)
+            text = path.read_text(encoding="utf-8")
+            payload = json.loads(
+                text.split(records.SIDECAR_GLOBAL, 1)[1].rstrip(";\n")
+            )
+            public = payload["records"]["360678"]["subtopics"]
+            self.assertTrue(public)
+            self.assertTrue(all("subtopic_terms" not in child for child in public))
+            self.assertEqual(payload["search_index"]["document_count"], 3)
+            self.assertTrue(payload["search_index"]["postings"])
+
+            reread = records.read_cache(path)
+            restored = reread["records"]["360678"]["subtopics"]
+            self.assertTrue(all(child["subtopic_terms"] for child in restored))
 
     def test_writing_twice_is_byte_identical(self):
         cache = records.empty_cache()

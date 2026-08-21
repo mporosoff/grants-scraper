@@ -19,6 +19,12 @@ def parent(identifier, *, close_date="2026-12-31"):
 
 
 class FrameTests(unittest.TestCase):
+    def test_campaign_fingerprint_covers_existing_implementation_files(self):
+        for path in build_subtopics.CAMPAIGN_IMPLEMENTATION:
+            with self.subTest(path=path):
+                self.assertTrue(path.is_file())
+        self.assertEqual(len(build_subtopics.implementation_sha256()), 64)
+
     def test_frame_freezes_only_current_parents(self):
         catalog = {"opportunities": [
             parent("active"),

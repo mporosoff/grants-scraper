@@ -1,0 +1,260 @@
+{
+  "as_of": "2026-08-20",
+  "cache_metrics": {
+    "subtopic_confidence_counts": {
+      "high": 236,
+      "low": 91,
+      "medium": 119
+    },
+    "subtopic_methods": {
+      "arl_current_topics": 1,
+      "genesis_focus_workbook": 1,
+      "heading_font": 2,
+      "hgeo_declared_topics": 3,
+      "label_run": 1,
+      "nasa_roses_table": 9,
+      "numbered": 5,
+      "outline_structural": 7,
+      "toc": 1
+    },
+    "subtopic_parent_count": 29,
+    "subtopic_publication_counts": {
+      "publishable": 236,
+      "review": 210
+    },
+    "subtopic_publication_reasons": {
+      "high_confidence": 236,
+      "tier_low": 91,
+      "tier_medium": 119
+    },
+    "subtopic_record_count": 446,
+    "subtopic_rejection_reasons": {
+      "no_children": 2,
+      "no_extractable_text": 15,
+      "no_layer_accepted": 1368,
+      "time_budget": 1
+    }
+  },
+  "campaign": {
+    "attempted_parent_count": 1415,
+    "cov4_classifier_calls": 243,
+    "cov4_classifier_errors": {},
+    "cov4_offered": 243,
+    "field_errors": [],
+    "structured_failure_reasons": {},
+    "top_level_fetch_failures": [
+      {
+        "error": "ConnectionError",
+        "opportunity_id": "300997"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "310029"
+      },
+      {
+        "error": "ConnectionError",
+        "opportunity_id": "318918"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "345327"
+      },
+      {
+        "error": "ConnectionError",
+        "opportunity_id": "359996"
+      },
+      {
+        "error": "ConnectionError",
+        "opportunity_id": "360003"
+      },
+      {
+        "error": "ConnectionError",
+        "opportunity_id": "360004"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "360324"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "360332"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "360333"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "360334"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "360335"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "360336"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "360337"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "360338"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "360455"
+      },
+      {
+        "error": "ConnectionError",
+        "opportunity_id": "361234"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "362568"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "362911"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "362990"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "363122"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "363165"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "363212"
+      },
+      {
+        "error": "ConnectionError",
+        "opportunity_id": "363224"
+      },
+      {
+        "error": "ConnectionError",
+        "opportunity_id": "363240"
+      },
+      {
+        "error": "ConnectionError",
+        "opportunity_id": "363241"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "363252"
+      },
+      {
+        "error": "ConnectionError",
+        "opportunity_id": "363258"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "363280"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "363296"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "363308"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "363321"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "363322"
+      },
+      {
+        "error": "ConnectionError",
+        "opportunity_id": "363325"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "363368"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "363372"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "363400"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "363407"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "363478"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "363532"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "363550"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "363554"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "363584"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "363585"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "363587"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "363588"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "363589"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "363600"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "363601"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "363602"
+      },
+      {
+        "error": "HTTPError",
+        "opportunity_id": "vpr-email:vpr-122b30a8725e40bf"
+      }
+    ]
+  },
+  "frame_catalog_sha256": "2322b2f6e4f7b009b8d518ae4d5d241fcf8fe6fdab88f192cae284bf9d207c29",
+  "frame_evidence_cache_sha256": "2e5196fceba24921b486dce76a29f5759f642ce207fa65fc9bb9a11632a1a71c",
+  "schema_version": 1,
+  "sidecar_parent_count": 29,
+  "sidecar_record_count": 446,
+  "sidecar_searchable_record_count": 236,
+  "sidecar_sha256": "fb726ad3b4d40b78993834981f53c4b5f89975152f5ee817d36fcc88ab050e6a",
+  "validation_anomalies": []
+}
