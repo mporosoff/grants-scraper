@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml</id>
-  <updated>2026-08-20T10:49:33Z</updated>
+  <updated>2026-08-21T10:49:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -60,6 +60,17 @@
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Closes 2027-06-01 | The National Institute of Mental Health (NIMH), with other NIH Institutes and Centers (ICs), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop web-accessible data archives to capture, store, and curate data related to the Brain Research Through Advancing Innovative Neurotechnologies® (BRAIN) Initiative activities. The data archives teams will work with th…</summary>
+  </entry>
+  <entry>
+    <title>Single Cell Opioid Responses in the Context of HIV (SCORCH) Program: Phase 2</title>
+    <link href="https://www.grants.gov/search-results-detail/363680"/>
+    <id>urn:funding-finder:grants-gov:363680</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Closes 2027-06-08 | NIDA seeks to further advance its mission in the area of single cell biology. Since 2020, the NIDA-funded Single Cell Opioid Responses in the Context of HIV (SCORCH) consortium has generated single-nucleus datasets from human and animal postmortem brain tissue under conditions of HIV infection, antiretroviral therapy (ART), and/or substance exposure (e.g. opioids, cocaine, methamphetamine, and can…</summary>
   </entry>
   <entry>
     <title>Partnership with Common Fund Data Ecosystem Resources</title>
@@ -651,18 +662,5 @@
     <category term="Technology development"/>
     <category term="Cybersecurity"/>
     <summary>National Institutes of Health | Closes 2027-05-07 | The purpose of this funding opportunity is to encourage multidisciplinary investigators to develop new approaches or apply existing approaches in novel ways to measure brain activity, connectivity, genomics, or other aspects across the age spectrum of neurodevelopment. The overarching goal is to extend our understanding of brain development and aging, including studies of the neurodevelopmental or…</summary>
-  </entry>
-  <entry>
-    <title>New Approaches for Measuring Brain Changes Across Longer Timespans (R21 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/357377"/>
-    <id>urn:funding-finder:grants-gov:357377</id>
-    <updated>2024-11-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Neuroscience"/>
-    <category term="Technology development"/>
-    <category term="Cybersecurity"/>
-    <summary>National Institutes of Health | Closes 2027-05-07 | The purpose of this funding opportunity is to encourage multidisciplinary investigators to submit applications developing exploratory, highly novel new approaches, or innovative applications of existing approaches to measure brain activity, connectivity, genomics, or other aspects across the age spectrum of neurodevelopment. The overarching goal is to extend our understanding of brain development …</summary>
   </entry>
 </feed>

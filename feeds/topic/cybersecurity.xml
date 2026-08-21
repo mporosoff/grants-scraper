@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-08-20T10:49:33Z</updated>
+  <updated>2026-08-21T10:49:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -16,7 +16,7 @@
     <category term="Community development"/>
     <category term="Energy"/>
     <category term="Cybersecurity"/>
-    <summary>Rural Utilities Service | Closes 2027-05-03 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+    <summary>Rural Utilities Service | Closes 2026-10-09 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
   </entry>
   <entry>
     <title>Trauma Care Readiness and Coordination Cooperative Agreement</title>
@@ -524,53 +524,6 @@
     <summary>Food and Drug Administration | Closes 2026-08-21 | The purpose of this funding opportunity is to provide continued support to: (1) assist in the identification and development of a prioritized list of botanical ingredients based on safety concerns, trends and knowledge of botanical ingredients in foods, dietary supplements, and cosmetics marketed in the U.S.; (2) acquire, validate and characterize authenticated reference materials, including raw a…</summary>
   </entry>
   <entry>
-    <title>CyberNext: Advance Cybersecurity and AI Readiness</title>
-    <link href="https://www.grants.gov/search-results-detail/363249"/>
-    <id>urn:funding-finder:grants-gov:363249</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>U.S. Mission to Albania</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Cybersecurity"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Albania | Closes 2026-08-20 | Project Background, Goals, and Objectives Albania has experienced multiple cyberattacks in recent years, placing increasingly digital government services and critical institutions at significant risk. While Albania is actively embracing AI, substantial skill gaps remain - gaps that American expertise is uniquely positioned to address. The “CyberNext: Advanced Cybersecurity and AI Readiness” progra…</summary>
-  </entry>
-  <entry>
-    <title>Education and Outreach to Tribal Producers through the Tribal Food Safety Alliance</title>
-    <link href="https://www.grants.gov/search-results-detail/363239"/>
-    <id>urn:funding-finder:grants-gov:363239</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>Food and Drug Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Cybersecurity"/>
-    <summary>Food and Drug Administration | Closes 2026-08-20 | The primary purpose of this program is to develop and provide education and/or training, and outreach regarding FDA's Produce Safety Rule to produce farmers who are members of federally recognized Tribes. The program is expected to help Tribal farmers access appropriate technical assistance and may include Tribal farmers who are not currently required to comply with the rule but are interested in …</summary>
-  </entry>
-  <entry>
-    <title>GameON - U.S.-Albania E-Sports and Innovation</title>
-    <link href="https://www.grants.gov/search-results-detail/363247"/>
-    <id>urn:funding-finder:grants-gov:363247</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>U.S. Mission to Albania</name></author>
-    <category term="Cybersecurity"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Albania | Closes 2026-08-20 | 1. Project Background, Goals, and Objectives Albania's youth face a rapidly evolving digital economy that demands advanced technical skills, entrepreneurial mindsets, and exposure to international industry standards. Albanian interest in gaming - a global market forecasted to surpass $745 billion by 2030, in which the United States is leading - is high, presenting an opportunity to increase Albani…</summary>
-  </entry>
-  <entry>
-    <title>Use of Digital Health Technologies in Clinical Investigations to Support Drug and Biological Product Development (U01) Clinical Trials Optional</title>
-    <link href="https://www.grants.gov/search-results-detail/363255"/>
-    <id>urn:funding-finder:grants-gov:363255</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>Food and Drug Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Cybersecurity"/>
-    <summary>Food and Drug Administration | Closes 2026-08-20 | The purpose of this Notice of Funding Opportunity (NOFO) is to address topics related to the use of digital health technologies (DHTs) for remote data acquisition in clinical investigations to support drug development.</summary>
-  </entry>
-  <entry>
     <title>Fiscal Year 2027 Expanding Nutrition Services</title>
     <link href="https://www.grants.gov/search-results-detail/362823"/>
     <id>urn:funding-finder:grants-gov:362823</id>
@@ -719,5 +672,49 @@
     <category term="Manufacturing"/>
     <category term="Cybersecurity"/>
     <summary>National Institute of Standards and Technology | Closes 2029-09-30 | NIST is soliciting proposals from eligible applicants for research, prototyping, and commercial solutions that advance microelectronics technology in the U.S., to be considered for funding by the CHIPS Research and Development Office (CRDO).</summary>
+  </entry>
+  <entry>
+    <title>Clinical Trial Readiness for Rare Diseases, Disorders, and Syndromes (R21 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359645"/>
+    <id>urn:funding-finder:grants-gov:359645</id>
+    <updated>2025-09-22T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Cybersecurity"/>
+    <summary>National Institutes of Health | Closes 2028-07-20 | This Notice of Funding Opportunity (NOFO) invites researchers to submit applications for support of clinical projects that address critical needs for clinical trial readiness in rare diseases. The initiative seeks applications that are intended to facilitate rare diseases research by enabling efficient and effective movement of candidate therapeutics or diagnostics toward clinical trials, and to i…</summary>
+  </entry>
+  <entry>
+    <title>Advancing Research on the Application of Digital Health Technology to the Management of Type 2 Diabetes (R01- Clinical Trail Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/359252"/>
+    <id>urn:funding-finder:grants-gov:359252</id>
+    <updated>2025-09-17T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Cybersecurity"/>
+    <summary>National Institutes of Health | Closes 2026-10-06 | This notice of funding opportunity (NOFO) invites applications designed to examine the efficacy and clinical effectiveness of multimodality digital health technology approaches to the remote management of diabetes.</summary>
+  </entry>
+  <entry>
+    <title>BRAIN Initiative: Theories, Models and Methods for Analysis of Complex Data from the Brain (R01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359068"/>
+    <id>urn:funding-finder:grants-gov:359068</id>
+    <updated>2025-09-16T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Neuroscience"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>National Institutes of Health | Closes 2027-11-08 | The Theories, Models and Methods (TMM) initiative will support the development of computational tools for understanding dynamic brain circuits that are made broadly accessible to the greater research community. This program supports applications focused on tool building and dissemination in the domain of theories about neural circuit mechanisms, models of circuit structure and function, and/or com…</summary>
+  </entry>
+  <entry>
+    <title>NIDCD Clinical Research Center Grant (P50 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/358863"/>
+    <id>urn:funding-finder:grants-gov:358863</id>
+    <updated>2025-09-15T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Cybersecurity"/>
+    <summary>National Institutes of Health | Closes 2026-10-03 | The National Institute on Deafness and Other Communication Disorders (NIDCD) invites applications for Clinical Research Center Grants designed to advance the diagnosis, prevention, treatment, and amelioration of human sensory and communication disorders. For this announcement, Clinical Research is defined as research involving individuals with a sensory and/or communication disorder, or data/tissu…</summary>
   </entry>
 </feed>

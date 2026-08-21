@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml</id>
-  <updated>2026-08-20T10:49:33Z</updated>
+  <updated>2026-08-21T10:49:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -63,6 +63,16 @@
     <author><name>Indian Health Service</name></author>
     <category term="Arts and culture"/>
     <summary>Indian Health Service | Closes 2027-10-01 | The goal of the Youth Aftercare cooperative agreement is to help American Indian and Alaska Native (AI/AN) youth achieve and sustain safety, sobriety, and long-term success after discharge from a Youth Regional Treatment Center (YRTC). The program strengthens culturally appropriate, community-based aftercare services by improving care coordination, building partnerships across the continuum of car…</summary>
+  </entry>
+  <entry>
+    <title>Senator Paul D. Wellstone Muscular Dystrophy Specialized Research Centers (MDSRC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363681"/>
+    <id>urn:funding-finder:grants-gov:363681</id>
+    <updated>2027-07-30T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health | Closes 2027-10-01 | This renewal of the Senator Paul D. Wellstone Muscular Dystrophy Specialized Research Centers (MDSRCs) continues a legislatively-mandated Centers of Excellence program, which aims to expand and intensify research on muscular dystrophy. The Centers advance basic, translational, and clinical muscular dystrophy research through interdisciplinary collaboration and shared resources for the research com…</summary>
   </entry>
   <entry>
     <title>Single Source: Institutional Development Award (IDeA) Clinical Research Resource Center (I-CRRC)</title>
@@ -217,6 +227,14 @@
     <category term="Data science"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Closes 2027-06-11 | NCI intends to release a Notice of Funding Opportunity (NOFO) that serves to continue the advancement and sustainment of informatics tools, software, and research resources that enable the acquisition, management, analysis, visualization, and interpretation of data across the cancer research continuum, including cancer biology, diagnosis and treatment, early detection, risk assessment and preventi…</summary>
+  </entry>
+  <entry>
+    <title>Translational Research in Maternal and Pediatric Pharmacology and Therapeutics</title>
+    <link href="https://www.grants.gov/search-results-detail/363679"/>
+    <id>urn:funding-finder:grants-gov:363679</id>
+    <updated>2027-03-31T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <summary>National Institutes of Health | Closes 2027-07-09 | The Eunice Kennedy Shriver National Institute of Child Health and Human Development (NICHD), as part of its stewardship of Congressionally-mandated activities under the Best Pharmaceuticals for Children Act (BPCA) and implementation of recommendations of the Task Force on Research Specific to Pregnant Women and Lactating Women (PRGLAC), intends to renew and publish a Notice of Funding Opportunity …</summary>
   </entry>
   <entry>
     <title>Radiation Exposure Screening and Education Program</title>
@@ -558,25 +576,5 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <summary>CENTERS FOR DISEASE CONTROL CSTLTS | Closes 2027-04-02 | CDC announces the availability of supplemental funding for the 34 American Indian and Alaska Native (AI/AN) Tribes and regional AI/AN tribally designated organizations awarded funding under CDC-RFA-TO-23-0001: Strengthening Public Health Systems and Services in Indian Country. The CDC-RFA-TO-23-0001 recipients are eligible to submit applications for new FY 2027 Centers, Institute, and Offices (CIO…</summary>
-  </entry>
-  <entry>
-    <title>Chronic Care Telehealth Centers of Excellence Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363274"/>
-    <id>urn:funding-finder:grants-gov:363274</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <summary>Health Resources and Services Administration | Closes 2027-05-03 | The Chronic Care Telehealth Centers for Excellence Program will fund academic medical centers to integrate innovative telehealth technologies into the full spectrum of services included in chronic care models, including but not limited to, chronic disease prevention and management, and the treatment for acute episodes that result from long-term morbidity. These centers will disseminate findings th…</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: The NHGRI Analysis, Visualization, and Informatics Lab-space (AnVIL) (U54 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/362638"/>
-    <id>urn:funding-finder:grants-gov:362638</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>National Institutes of Health | Closes 2027-05-25 | The National Human Genome Research Institute (NHGRI) intends to issue a Notice of Funding Opportunity (NOFO) to support a limited competition renewal of the Analysis, Visualization, and Informatics Lab-space (AnVIL) program. AnVIL is a secure, cloud-based platform that enables researchers to access, share, and analyze large-scale genomic datasets without relying on local infrastructure. Currently,…</summary>
   </entry>
 </feed>

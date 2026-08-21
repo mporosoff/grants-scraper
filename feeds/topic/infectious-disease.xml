@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml</id>
-  <updated>2026-08-20T10:49:33Z</updated>
+  <updated>2026-08-21T10:49:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Resources and Workforce Development for the Regional Biocontainment Laboratories</title>
@@ -488,16 +488,6 @@
     <summary>National Institutes of Health | Closes 2026-09-29 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by continuing support for a Clinical Research Network on Antimicrobial Resistance (AMR). AMR is a major health challenge that limits treatment options and allows resistant infections to persist. Individuals with chronic conditions like diabetes and cancer are particularly vulnerable, resulting in increas…</summary>
   </entry>
   <entry>
-    <title>Limited Competition: Social, Behavioral, &amp; Economic (SBE) Coordinating Center</title>
-    <link href="https://www.grants.gov/search-results-detail/360159"/>
-    <id>urn:funding-finder:grants-gov:360159</id>
-    <updated>2026-06-20T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Infectious disease"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2026-08-20 | This is a Forecast for a Limited Competition Notice of Funding Opportunity (NOFO) that will invite application(s) from eligible organization(s) to apply. Please see the Eligibility Section for additional information. In accordance with NIH standard peer-review processes, the application(s) will be peer-reviewed, and only meritorious application(s) will be considered for funding. It is anticipated …</summary>
-  </entry>
-  <entry>
     <title>Avant Garde/Avenir Awards for Investigators Conducting High Risk/High Reward Research on HIV and Substance Use (or Substance Use Disorders) (DP1 Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/358991"/>
     <id>urn:funding-finder:grants-gov:358991</id>
@@ -674,5 +664,19 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Social and behavioral sciences"/>
     <category term="Transportation"/>
     <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2027-09-18 | ATTENTION: This announcement will be revised regularly to incorporate country specific narratives (Attachment 1 of the announcement) with information vital to the content of application. Potential applicants interested in applying to this announcement should click 'Subscribe' to be notified of future revisions. DoD HIV/AID Prevention Program's (DHAPP) objective, through the PEPFAR program, is to s…</summary>
+  </entry>
+  <entry>
+    <title>Plant Biotic Interactions</title>
+    <link href="https://www.grants.gov/search-results-detail/327047"/>
+    <id>urn:funding-finder:grants-gov:327047</id>
+    <updated>2020-05-14T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Posted | The Plant Biotic Interactions (PBI) program supports research on the processes that mediate beneficial and antagonistic interactions between plants and their viral, bacterial, oomycete, fungal, plant, and invertebrate symbionts, pathogens and pests. This joint NSF/NIFA program supports projects focused on current and emerging model and non-model systems, and agriculturally relevant plants. The pro…</summary>
   </entry>
 </feed>

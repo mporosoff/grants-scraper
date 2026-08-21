@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-08-20T10:49:33Z</updated>
+  <updated>2026-08-21T10:49:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development</title>
@@ -73,19 +73,6 @@
     <summary>Department of Housing and Urban Development | Closes 2026-10-19 | HUD is issuing the Preservation and Reinvestment Initiative for Community Enhancement (PRICE) competition NOFO to preserve long-term housing affordability for residents of manufactured housing or an MHC, to redevelop MHCs, and to primarily benefit low- and moderate-income (LMI) residents. Congress appropriated in FY2025 these competitive grants to preserve and revitalize manufactured housing and e…</summary>
   </entry>
   <entry>
-    <title>MPS Chemistry Research Programs (MPS Chem)</title>
-    <link href="https://www.grants.gov/search-results-detail/363617"/>
-    <id>urn:funding-finder:grants-gov:363617</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports foundational research through multiple programs in the chemical sciences. Programs include: Chemical CatalysisChemical Measurement and ImagingChemical Mechanism, Function, and PropertiesChemical Structure and DynamicsChemical SynthesisChemical Systems and SolutionsChemical Theory, Models and …</summary>
-  </entry>
-  <entry>
     <title>MPS Materials Research Programs (MPS Materials)</title>
     <link href="https://www.grants.gov/search-results-detail/363618"/>
     <id>urn:funding-finder:grants-gov:363618</id>
@@ -143,16 +130,17 @@
     <summary>U.S. National Science Foundation | Closes 2076-08-19 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research for electrical, communications and computing systems through the following programs: The Electronic, Photonic, Magnetic, and Quantum Devices (EPMQD) program supports foundational engineering research on novel classical and quantum devices, exploring matter’s electronic, photonic, and magnetic …</summary>
   </entry>
   <entry>
-    <title>Pax Silica Artificial Intelligence Assistance Project</title>
-    <link href="https://www.grants.gov/search-results-detail/363596"/>
-    <id>urn:funding-finder:grants-gov:363596</id>
-    <updated>2026-08-14T00:00:00Z</updated>
-    <author><name>Bureau of Economic and Business Affairs</name></author>
+    <title>MPS Chemistry Research Programs (MPS Chem)</title>
+    <link href="https://www.grants.gov/search-results-detail/363617"/>
+    <id>urn:funding-finder:grants-gov:363617</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Catalysis and reaction engineering"/>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
     <category term="Data science"/>
-    <summary>Bureau of Economic and Business Affairs | Closes 2026-08-20 | Leveraging foreign assistance from the Pax Fund, this NOFO launches the Pax Silica Artificial Intelligence (AI) Assistance Project-a historic first-of-its-kind programmatic initiative to strengthen global AI supply chain security by creating a trusted supply chain credentialing and provenance platform to secure the AI supply chain in partner countries and economies. This NOFO seeks to fund the est…</summary>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-20 | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports foundational research through multiple programs in the chemical sciences. Programs include: Chemical CatalysisChemical Measurement and ImagingChemical Mechanism, Function, and PropertiesChemical Structure and DynamicsChemical SynthesisChemical Systems and SolutionsChemical Theory, Models and …</summary>
   </entry>
   <entry>
     <title>Promoting Responsible Investment and Rights-Respecting Production Models</title>
@@ -282,20 +270,6 @@
     <category term="Manufacturing"/>
     <category term="Technology development"/>
     <summary>Bureau of Land Management | Closes 2026-09-28 | The Bureau of Land Management"s Plant Conservation and Restoration Program (PCRP) is a national leader in building the native seed supply chain essential for restoring resilient public lands and supporting multiple use and sustained yield. PCRP advances Department of the Interior mission to protect and manage America's natural resources. The native seed PCRP adds to the commercial market enables r…</summary>
-  </entry>
-  <entry>
-    <title>Subnational Industrial Innovation and Resilient Entrepreneurship Accelerator</title>
-    <link href="https://www.grants.gov/search-results-detail/363319"/>
-    <id>urn:funding-finder:grants-gov:363319</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>U.S. Mission to Argentina</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Argentina | Closes 2026-08-20 | The U.S. Embassy Buenos Aires announces an open competition to support subnational economic growth and operational modernization in Argentina's strategic manufacturing and resource corridors. This program will establish a competitive business acceleration program designed to provide next-generation entrepreneurs in industrial and mining provinces with practical management tools, strategic scaling …</summary>
   </entry>
   <entry>
     <title>U.S.-ASEAN Road to 50: Rising Leaders Forum</title>
@@ -469,6 +443,22 @@
     <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | Project Background, Goals, and Objectives: In an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will lea…</summary>
   </entry>
   <entry>
+    <title>Transport Phenomena (TP)</title>
+    <link href="https://www.grants.gov/search-results-detail/362063"/>
+    <id>urn:funding-finder:grants-gov:362063</id>
+    <updated>2026-04-24T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Separations and membranes"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-20 | The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
+  </entry>
+  <entry>
     <title>Chemical Process Systems (CPS)</title>
     <link href="https://www.grants.gov/search-results-detail/362061"/>
     <id>urn:funding-finder:grants-gov:362061</id>
@@ -499,22 +489,6 @@
     <category term="Technology development"/>
     <summary>U.S. National Science Foundation | Posted | The Energy, Water, and Resource Engineering (EWRE) program supports fundamental research to advance energy, water, and resource management and to safeguard health. Better use of domestic resources will make U.S. manufacturing, energy and water systems more efficient and secure.
 EWRE supports research that creates domestic sources of energy, advances water management, and recovers resources using c…</summary>
-  </entry>
-  <entry>
-    <title>Transport Phenomena (TP)</title>
-    <link href="https://www.grants.gov/search-results-detail/362063"/>
-    <id>urn:funding-finder:grants-gov:362063</id>
-    <updated>2026-04-24T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Quantum science"/>
-    <category term="Separations and membranes"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>U.S. National Science Foundation | Posted | The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
   </entry>
   <entry>
     <title>INSPIRING GENERATIONS OF NEW INNOVATORS TO IMPACT TECHNOLOGIES IN ENERGY 2026 (IGNIITE 2026)</title>
@@ -760,5 +734,31 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Energy"/>
     <category term="Artificial intelligence and machine learning"/>
     <summary>U.S. National Science Foundation | Posted | Large-scale simulations and the ability to accumulate massive amounts of data have revolutionized science and engineering. The goal of the Computational and Data-enabled Science and Engineering (CDS&amp;E) meta-program is to identify and capitalize on opportunities for major scientific and engineering breakthroughs through new computational and data-analysis approaches and best practices. The CDS&amp;E me…</summary>
+  </entry>
+  <entry>
+    <title>Advanced Technological Education</title>
+    <link href="https://www.grants.gov/search-results-detail/355100"/>
+    <id>urn:funding-finder:grants-gov:355100</id>
+    <updated>2024-06-25T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Closes 2026-10-01 | With a focus on two-year Institutions of Higher Education (IHEs), the Advanced Technological Education (ATE) program supports the education of technicians for the high-technology fields that drive our nation's economy. The program involves partnerships between academic institutions (grades 7-12, IHEs), industry, and economic development agencies to promote improvement in the education of science a…</summary>
+  </entry>
+  <entry>
+    <title>IUSE/Professional Formation of Engineers: Revolutionizing Engineering Departments</title>
+    <link href="https://www.grants.gov/search-results-detail/353413"/>
+    <id>urn:funding-finder:grants-gov:353413</id>
+    <updated>2024-04-05T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation | Closes 2026-09-08 | Revolutionizing Engineering Departments (hereinafter referred to as RED) is designed to build upon previous efforts in engineering education research. Specifically, previous and ongoing evaluations of the NSF Engineering Education and Centers Division program and its predecessors, as well as those related programs in the Directorate for STEM Education, have shown that prior investments have signif…</summary>
   </entry>
 </feed>

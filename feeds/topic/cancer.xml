@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml</id>
-  <updated>2026-08-20T10:49:33Z</updated>
+  <updated>2026-08-21T10:49:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -163,6 +163,24 @@
     <category term="Biology and biotechnology"/>
     <category term="Cancer"/>
     <summary>Centers for Disease Control and Prevention - ERA | Closes 2026-11-02 | The National Mesothelioma Virtual Bank (NMVB) was established in 2006 to serve as a resource for malignant mesothelioma research. This funding opportunity will advance biomedical research for malignant mesothelioma by adding more biospecimens together with demographic data and clinical data. Examples of biospecimens include fresh frozen tumor and control tissues, paraffin embedded tissues, blood, …</summary>
+  </entry>
+  <entry>
+    <title>DoW Breast Cancer, Breakthrough Award Levels 1 and 2</title>
+    <link href="https://www.grants.gov/search-results-detail/363670"/>
+    <id>urn:funding-finder:grants-gov:363670</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Cancer"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-11-18 | Summary: The fiscal year 2026 (FY26) Breast Cancer Research Program (BCRP) Breakthrough Award mechanism supports promising research with high potential to lead to or make breakthroughs in breast cancer. All applications must address at least one of the FY26 BCRP overarching challenges or provide adequate justification for exception. Applications must address the challenge in a way that can lead to…</summary>
+  </entry>
+  <entry>
+    <title>DoW Breast Cancer, Clinical Research Extension Award</title>
+    <link href="https://www.grants.gov/search-results-detail/363671"/>
+    <id>urn:funding-finder:grants-gov:363671</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Cancer"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-11-18 | Summary: The fiscal year 2026 (FY26) Breast Cancer Research Program (BCRP) Clinical Research Extension Award supports research that extends the data collection, follow-up, and analysis of breast cancer clinical studies. The intent of this award mechanism is to increase the clinically relevant impact of breast cancer patient participation in clinical studies by addressing the knowledge lost due to …</summary>
   </entry>
   <entry>
     <title>NCI Research Specialist (Clinician Scientist) Award (R50 Clinical Trial Not Allowed)</title>
@@ -597,23 +615,5 @@ a high level of innovation and creativity. The goal is to support the best young
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
     <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-07 | Summary: The fiscal year 2026 (FY26) Pancreatic Cancer Research Program (PCARP) Focused Pilot Award supports the exploration and development of impactful and innovative concepts under a patient-centered focus area of pancreatic cancer research that could ultimately lead to major advancements that will have a profound effect on patients’ overall quality of life. The research this award supports sho…</summary>
-  </entry>
-  <entry>
-    <title>DoW Pancreatic Cancer Research Program, Idea Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362190"/>
-    <id>urn:funding-finder:grants-gov:362190</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-07 | Summary: The fiscal year 2026 (FY26) Pancreatic Cancer Research Program (PCARP) Idea Development Award supports the development of innovative, high-risk/high-reward research that could lead to critical discoveries or major advancements that will accelerate progress in improving outcomes for individuals with pancreatic cancer. This award mechanism supports innovative ideas with the potential to yie…</summary>
-  </entry>
-  <entry>
-    <title>DoW Pancreatic Cancer Research Program, Translational Research Partnership Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362191"/>
-    <id>urn:funding-finder:grants-gov:362191</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-07 | Summary: The fiscal year 2026 (FY26) Pancreatic Cancer Research Program (PCARP) Translational Research Partnership Award supports partnerships between clinicians, population scientists, applied scientists and/or basic scientists that will accelerate the movement of promising ideas in pancreatic cancer toward clinical applications. The partnership must include at least one member with expertise in …</summary>
   </entry>
 </feed>

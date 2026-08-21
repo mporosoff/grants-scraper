@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-08-20T10:49:33Z</updated>
+  <updated>2026-08-21T10:49:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Mentored Career Transition Award (KT1/R00)</title>
@@ -132,6 +132,29 @@
     <category term="Education and workforce"/>
     <category term="Transportation"/>
     <summary>69A345 Office of the Under Secretary for Policy | Closes 2026-11-15 | The Drone Infrastructure Inspection Grants (DIIG) Program will provide grants to eligible government entities to facilitate the use of small Unmanned Aircraft Systems (UAS), referred to herein as drones, in critical infrastructure inspection. The objective is to increase the widespread adoption of drones and relevant technologies in support of more efficient Inspection, Operation, Construction, Ma…</summary>
+  </entry>
+  <entry>
+    <title>FY26-22-Baltimore Penn Station Facility Improvements</title>
+    <link href="https://www.grants.gov/search-results-detail/363674"/>
+    <id>urn:funding-finder:grants-gov:363674</id>
+    <updated>2026-08-20T00:00:00Z</updated>
+    <author><name>DOT - Federal Railroad Administration</name></author>
+    <category term="Transportation"/>
+    <summary>DOT - Federal Railroad Administration | Closes 2026-09-04 | This grant will fund multimodal infrastructure investments around Baltimore Penn Station to improve transit, walking, and bicycling connections to support the station’s role as an intermodal hub in the heart of Baltimore City and to enable passenger traffic through the Station to grow.</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year (FY) 2027 AmeriCorps Seniors RSVP Competition</title>
+    <link href="https://www.grants.gov/search-results-detail/363482"/>
+    <id>urn:funding-finder:grants-gov:363482</id>
+    <updated>2026-08-20T00:00:00Z</updated>
+    <author><name>AmeriCorps</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Transportation"/>
+    <summary>AmeriCorps | Closes 2026-10-20 | AmeriCorps improves lives, strengthens communities, and fosters civic engagement through service and volunteering. AmeriCorps brings people together to tackle some of the country’s most pressing challenges through national service and volunteerism. AmeriCorps members and AmeriCorps Seniors volunteers serve with organizations dedicated to the improvement of communities and those serving. AmeriCorps…</summary>
   </entry>
   <entry>
     <title>Sin Rutas, Sin Recursos: Hitting Criminal Networks Where It Hurts</title>
@@ -626,25 +649,5 @@
     <category term="Transportation"/>
     <category term="Water"/>
     <summary>DOC NOAA - ERA Production | Closes 2026-09-18 | The National Estuarine Research Reserve System (NERRS) consists of estuarine areas of the United States and its territories designated and managed for research and educational purposes (Reserve) as specified in 15 C.F.R. Part 921. By funding Reserve lead agencies and universities to conduct land acquisition and construction projects that support the NERRS mission, NOAA will strengthen protection o…</summary>
-  </entry>
-  <entry>
-    <title>FY 2026 Notice of Funding Opportunity: Innovative Coordinated Access and Mobility Pilot Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363122"/>
-    <id>urn:funding-finder:grants-gov:363122</id>
-    <updated>2026-07-09T00:00:00Z</updated>
-    <author><name>DOT - Federal Transit Administration</name></author>
-    <category term="Transportation"/>
-    <summary>DOT - Federal Transit Administration | Closes 2026-09-09 | The Federal Transit Administration (FTA) announces the opportunity to apply for $11,959,671 million in Fiscal Year (FY) 2024, 2025, and 2026 competitive grant funding to support transit services for the FY 2026 Innovative Coordinated Access and Mobility (ICAM) pilot program. Under the ICAM pilot program, funds awarded will finance innovative capital projects for the transportation-disadvantaged, w…</summary>
-  </entry>
-  <entry>
-    <title>Fiscal Year 2026 United States Marine Highway Program (USMHP)</title>
-    <link href="https://www.grants.gov/search-results-detail/362478"/>
-    <id>urn:funding-finder:grants-gov:362478</id>
-    <updated>2026-07-06T00:00:00Z</updated>
-    <author><name>Maritime Administration</name></author>
-    <category term="Energy"/>
-    <category term="Transportation"/>
-    <category term="Cybersecurity"/>
-    <summary>Maritime Administration | Closes 2026-08-31 | The United States Marine Highway Program (USMHP), codified at 46 U.S.C. 55601, was originally established by Section 1121 of the Energy Independence and Security Act of 2007 to reduce landside congestion through the designation of Marine Highway Routes. The USMHP statute authorizes the U.S. Department of Transportation (“Department” or “DOT”) to make grants to implement Projects or components of P…</summary>
   </entry>
 </feed>

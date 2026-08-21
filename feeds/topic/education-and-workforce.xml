@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml</id>
-  <updated>2026-08-20T10:49:33Z</updated>
+  <updated>2026-08-21T10:49:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -15,6 +15,16 @@
     <category term="Education and workforce"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Closes 2028-05-30 | The National Institute on Deafness and Other Communication Disorders (NIDCD) intends to publish a Notice of Funding Opportunity (NOFO) for clinical audiologists currently enrolled in Ph. D. programs. NIDCD encourages audiologists with strong research potential to integrate clinical and translational research into their career paths. A strong research foundation is essential for advancing hearing h…</summary>
+  </entry>
+  <entry>
+    <title>Senator Paul D. Wellstone Muscular Dystrophy Specialized Research Centers (MDSRC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363681"/>
+    <id>urn:funding-finder:grants-gov:363681</id>
+    <updated>2027-07-30T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health | Closes 2027-10-01 | This renewal of the Senator Paul D. Wellstone Muscular Dystrophy Specialized Research Centers (MDSRCs) continues a legislatively-mandated Centers of Excellence program, which aims to expand and intensify research on muscular dystrophy. The Centers advance basic, translational, and clinical muscular dystrophy research through interdisciplinary collaboration and shared resources for the research com…</summary>
   </entry>
   <entry>
     <title>Single Source: Institutional Development Award (IDeA) Clinical Research Resource Center (I-CRRC)</title>
@@ -606,16 +616,5 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health | Closes 2026-11-01 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop, operate, and sustain a cloud-based data storage and computing platform that democratizes access to large-scale Alzheimer’s disease (AD) and AD-related dementias (ADRD) genetic and genomic data. The platform must be secure, scalable, and interoperable. The platform wil…</summary>
-  </entry>
-  <entry>
-    <title>Clinical and Translational Science Award</title>
-    <link href="https://www.grants.gov/search-results-detail/363244"/>
-    <id>urn:funding-finder:grants-gov:363244</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2027-01-25 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
   </entry>
 </feed>

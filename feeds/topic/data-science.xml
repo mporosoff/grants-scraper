@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-08-20T10:49:33Z</updated>
+  <updated>2026-08-21T10:49:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -200,19 +200,6 @@
     <summary>U.S. National Science Foundation | Closes 2027-02-11 | The Emerging Frontiers in Research and Innovation (EFRI) program serves a critical role in helping the NSF Directorate for Engineering focus on important emerging areas in a timely way. The EFRI program invests in potentially transformative ideas that offer the opportunity for significant shifts in foundational engineering knowledge. EFRI-funded research must have strong potential for long-term im…</summary>
   </entry>
   <entry>
-    <title>MPS Chemistry Research Programs (MPS Chem)</title>
-    <link href="https://www.grants.gov/search-results-detail/363617"/>
-    <id>urn:funding-finder:grants-gov:363617</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports foundational research through multiple programs in the chemical sciences. Programs include: Chemical CatalysisChemical Measurement and ImagingChemical Mechanism, Function, and PropertiesChemical Structure and DynamicsChemical SynthesisChemical Systems and SolutionsChemical Theory, Models and …</summary>
-  </entry>
-  <entry>
     <title>MPS Materials Research Programs (MPS Materials)</title>
     <link href="https://www.grants.gov/search-results-detail/363618"/>
     <id>urn:funding-finder:grants-gov:363618</id>
@@ -270,16 +257,17 @@
     <summary>U.S. National Science Foundation | Closes 2076-08-19 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research for electrical, communications and computing systems through the following programs: The Electronic, Photonic, Magnetic, and Quantum Devices (EPMQD) program supports foundational engineering research on novel classical and quantum devices, exploring matter’s electronic, photonic, and magnetic …</summary>
   </entry>
   <entry>
-    <title>Pax Silica Artificial Intelligence Assistance Project</title>
-    <link href="https://www.grants.gov/search-results-detail/363596"/>
-    <id>urn:funding-finder:grants-gov:363596</id>
-    <updated>2026-08-14T00:00:00Z</updated>
-    <author><name>Bureau of Economic and Business Affairs</name></author>
+    <title>MPS Chemistry Research Programs (MPS Chem)</title>
+    <link href="https://www.grants.gov/search-results-detail/363617"/>
+    <id>urn:funding-finder:grants-gov:363617</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Catalysis and reaction engineering"/>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
     <category term="Data science"/>
-    <summary>Bureau of Economic and Business Affairs | Closes 2026-08-20 | Leveraging foreign assistance from the Pax Fund, this NOFO launches the Pax Silica Artificial Intelligence (AI) Assistance Project-a historic first-of-its-kind programmatic initiative to strengthen global AI supply chain security by creating a trusted supply chain credentialing and provenance platform to secure the AI supply chain in partner countries and economies. This NOFO seeks to fund the est…</summary>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-20 | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports foundational research through multiple programs in the chemical sciences. Programs include: Chemical CatalysisChemical Measurement and ImagingChemical Mechanism, Function, and PropertiesChemical Structure and DynamicsChemical SynthesisChemical Systems and SolutionsChemical Theory, Models and …</summary>
   </entry>
   <entry>
     <title>Promoting Responsible Investment and Rights-Respecting Production Models</title>
@@ -598,20 +586,6 @@
     <summary>Administration for Children and Families - ANA | Closes 2026-08-27 | The Administration for Native Americans (ANA), announces funds for a National Center for Native Training and Technical Assistance (the Center). The Center will be ANA"s primary provider of training and technical assistance (TTA). The goal is to build the capacity of ANA applicants and recipients to implement successful strategies and facilitate sustainable and successful outcomes that strengthen N…</summary>
   </entry>
   <entry>
-    <title>Subnational Industrial Innovation and Resilient Entrepreneurship Accelerator</title>
-    <link href="https://www.grants.gov/search-results-detail/363319"/>
-    <id>urn:funding-finder:grants-gov:363319</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>U.S. Mission to Argentina</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Argentina | Closes 2026-08-20 | The U.S. Embassy Buenos Aires announces an open competition to support subnational economic growth and operational modernization in Argentina's strategic manufacturing and resource corridors. This program will establish a competitive business acceleration program designed to provide next-generation entrepreneurs in industrial and mining provinces with practical management tools, strategic scaling …</summary>
-  </entry>
-  <entry>
     <title>AI Partnership &amp; Exchange for Tech Leaders (APEX)</title>
     <link href="https://www.grants.gov/search-results-detail/363315"/>
     <id>urn:funding-finder:grants-gov:363315</id>
@@ -744,5 +718,32 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>69A355 Research and Technology | Closes 2026-08-28 | he U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Tribal Transportation Safety Strategy Pilot Program. This three-year cooperative agreement is designed to address the critical public safety crisis in Tribal communities, as American Indian and Alaska Native populations experience…</summary>
+  </entry>
+  <entry>
+    <title>Scholarly Editions and Translations</title>
+    <link href="https://www.grants.gov/search-results-detail/363014"/>
+    <id>urn:funding-finder:grants-gov:363014</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>National Endowment for the Humanities</name></author>
+    <category term="Arts and culture"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>National Endowment for the Humanities | Closes 2026-09-16 | The National Endowment for the Humanities (NEH) Division of Research is accepting applications for the Scholarly Editions and Translations program. The purpose of this program is to support collaborative teams who edit, annotate, and translate foundational humanities texts that are vital to generating new scholarship but are not available in adequate editions or translations. This year’s competiti…</summary>
+  </entry>
+  <entry>
+    <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
+    <link href="https://www.grants.gov/search-results-detail/362900"/>
+    <id>urn:funding-finder:grants-gov:362900</id>
+    <updated>2026-06-22T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <category term="Data science"/>
+    <category term="Energy"/>
+    <category term="Materials science"/>
+    <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | Project Background, Goals, and Objectives: In an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will lea…</summary>
   </entry>
 </feed>

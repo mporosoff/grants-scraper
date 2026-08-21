@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-08-20T10:49:33Z</updated>
+  <updated>2026-08-21T10:49:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Microplastics Research and Resource Coordination Center (U24 - Clinical Trial Not Allowed)</title>
@@ -82,19 +82,6 @@
     <summary>U.S. National Science Foundation | Closes 2027-02-11 | The Emerging Frontiers in Research and Innovation (EFRI) program serves a critical role in helping the NSF Directorate for Engineering focus on important emerging areas in a timely way. The EFRI program invests in potentially transformative ideas that offer the opportunity for significant shifts in foundational engineering knowledge. EFRI-funded research must have strong potential for long-term im…</summary>
   </entry>
   <entry>
-    <title>MPS Chemistry Research Programs (MPS Chem)</title>
-    <link href="https://www.grants.gov/search-results-detail/363617"/>
-    <id>urn:funding-finder:grants-gov:363617</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports foundational research through multiple programs in the chemical sciences. Programs include: Chemical CatalysisChemical Measurement and ImagingChemical Mechanism, Function, and PropertiesChemical Structure and DynamicsChemical SynthesisChemical Systems and SolutionsChemical Theory, Models and …</summary>
-  </entry>
-  <entry>
     <title>MPS Materials Research Programs (MPS Materials)</title>
     <link href="https://www.grants.gov/search-results-detail/363618"/>
     <id>urn:funding-finder:grants-gov:363618</id>
@@ -152,16 +139,17 @@
     <summary>U.S. National Science Foundation | Closes 2076-08-19 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research for electrical, communications and computing systems through the following programs: The Electronic, Photonic, Magnetic, and Quantum Devices (EPMQD) program supports foundational engineering research on novel classical and quantum devices, exploring matter’s electronic, photonic, and magnetic …</summary>
   </entry>
   <entry>
-    <title>Pax Silica Artificial Intelligence Assistance Project</title>
-    <link href="https://www.grants.gov/search-results-detail/363596"/>
-    <id>urn:funding-finder:grants-gov:363596</id>
-    <updated>2026-08-14T00:00:00Z</updated>
-    <author><name>Bureau of Economic and Business Affairs</name></author>
+    <title>MPS Chemistry Research Programs (MPS Chem)</title>
+    <link href="https://www.grants.gov/search-results-detail/363617"/>
+    <id>urn:funding-finder:grants-gov:363617</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Catalysis and reaction engineering"/>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
     <category term="Data science"/>
-    <summary>Bureau of Economic and Business Affairs | Closes 2026-08-20 | Leveraging foreign assistance from the Pax Fund, this NOFO launches the Pax Silica Artificial Intelligence (AI) Assistance Project-a historic first-of-its-kind programmatic initiative to strengthen global AI supply chain security by creating a trusted supply chain credentialing and provenance platform to secure the AI supply chain in partner countries and economies. This NOFO seeks to fund the est…</summary>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-20 | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports foundational research through multiple programs in the chemical sciences. Programs include: Chemical CatalysisChemical Measurement and ImagingChemical Mechanism, Function, and PropertiesChemical Structure and DynamicsChemical SynthesisChemical Systems and SolutionsChemical Theory, Models and …</summary>
   </entry>
   <entry>
     <title>Promoting Responsible Investment and Rights-Respecting Production Models</title>
@@ -260,6 +248,22 @@
     <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | Project Background, Goals, and Objectives: In an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will lea…</summary>
   </entry>
   <entry>
+    <title>Transport Phenomena (TP)</title>
+    <link href="https://www.grants.gov/search-results-detail/362063"/>
+    <id>urn:funding-finder:grants-gov:362063</id>
+    <updated>2026-04-24T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Separations and membranes"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-20 | The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
+  </entry>
+  <entry>
     <title>Chemical Process Systems (CPS)</title>
     <link href="https://www.grants.gov/search-results-detail/362061"/>
     <id>urn:funding-finder:grants-gov:362061</id>
@@ -290,22 +294,6 @@
     <category term="Technology development"/>
     <summary>U.S. National Science Foundation | Posted | The Energy, Water, and Resource Engineering (EWRE) program supports fundamental research to advance energy, water, and resource management and to safeguard health. Better use of domestic resources will make U.S. manufacturing, energy and water systems more efficient and secure.
 EWRE supports research that creates domestic sources of energy, advances water management, and recovers resources using c…</summary>
-  </entry>
-  <entry>
-    <title>Transport Phenomena (TP)</title>
-    <link href="https://www.grants.gov/search-results-detail/362063"/>
-    <id>urn:funding-finder:grants-gov:362063</id>
-    <updated>2026-04-24T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Quantum science"/>
-    <category term="Separations and membranes"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>U.S. National Science Foundation | Posted | The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
   </entry>
   <entry>
     <title>Space Technology Research, Development, Demonstration, and Infusion (SpaceTech REDDI-2026)</title>
@@ -464,20 +452,6 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>U.S. National Science Foundation | Closes 2026-11-16 | Proposals in the area of plasma physics submitted to the Division of Physics that are not governed by another solicitation (such as CAREER), should be submitted to the Division-wide solicitation: Division of Physics: Investigator-Initiated Research Projects. The Plasma Physics program participates in multiple NSF meta-programs such as the ECosytem for Leading Innovation in Plasma Science and Engin…</summary>
-  </entry>
-  <entry>
-    <title>Division of Materials Research: Condensed Matter and Materials Theory (CMMT)</title>
-    <link href="https://www.grants.gov/search-results-detail/349654"/>
-    <id>urn:funding-finder:grants-gov:349654</id>
-    <updated>2023-08-01T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Materials science"/>
-    <category term="Quantum science"/>
-    <category term="Transportation"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Closes 2076-08-14 | CMMT supports theoretical and computational materials research in the topical areas represented in DMR's other Topical Materials Research Programs (these are also variously known as Individual Investigator Award (IIA) Programs, or Core Programs, or Disciplinary Programs), which are: Condensed Matter Physics (CMP), Biomaterials (BMAT), Ceramics (CER), Electronic and Photonic Materials (EPM), Metals…</summary>
   </entry>
   <entry>
     <title>Division of Materials Research: Topical Materials Research Programs</title>

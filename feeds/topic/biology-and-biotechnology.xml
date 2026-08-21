@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-08-20T10:49:33Z</updated>
+  <updated>2026-08-21T10:49:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -114,6 +114,17 @@
     <summary>National Institutes of Health | Closes 2027-05-25 | The National Human Genome Research Institute (NHGRI) intends to issue a Notice of Funding Opportunity (NOFO) to support a limited competition renewal of the Analysis, Visualization, and Informatics Lab-space (AnVIL) program. AnVIL is a secure, cloud-based platform that enables researchers to access, share, and analyze large-scale genomic datasets without relying on local infrastructure. Currently,…</summary>
   </entry>
   <entry>
+    <title>Single Cell Opioid Responses in the Context of HIV (SCORCH) Program: Phase 2</title>
+    <link href="https://www.grants.gov/search-results-detail/363680"/>
+    <id>urn:funding-finder:grants-gov:363680</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Closes 2027-06-08 | NIDA seeks to further advance its mission in the area of single cell biology. Since 2020, the NIDA-funded Single Cell Opioid Responses in the Context of HIV (SCORCH) consortium has generated single-nucleus datasets from human and animal postmortem brain tissue under conditions of HIV infection, antiretroviral therapy (ART), and/or substance exposure (e.g. opioids, cocaine, methamphetamine, and can…</summary>
+  </entry>
+  <entry>
     <title>Advanced Development and Validation of Emerging Technologies for Basic and Clinical Cancer Research (R33 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/363168"/>
     <id>urn:funding-finder:grants-gov:363168</id>
@@ -167,6 +178,17 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
     <summary>National Institutes of Health | Closes 2027-02-05 | The goal of this program is to support collaborative translational research projects aligned with NIH efforts to enhance the translation of basic biological discoveries into clinical applications that improve health. It encourages high quality science demonstrating the potential to result in understanding an important disease process or lead to new therapeutic interventions, diagnostics, or preven…</summary>
+  </entry>
+  <entry>
+    <title>Multimodal AI to Accelerate Precision Medicine for Type 1 Diabetes (U01- Clinical Trials Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363678"/>
+    <id>urn:funding-finder:grants-gov:363678</id>
+    <updated>2026-12-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health | Closes 2027-02-10 | Type 1 diabetes (T1D) is a complex disease involving interactions among many different cell types, tissues, organs and biological processes. Genetics, the environment, and lifestyle all play a role in disease development and progression. Over the past two decades, the National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK) has supported major T1D research consortia covering basic,…</summary>
   </entry>
   <entry>
     <title>Research Resource for a National Swine Resource and Research Center (U42 Clinical Trial Not Allowed)</title>
@@ -311,6 +333,16 @@
     <category term="Biology and biotechnology"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Closes 2027-03-04 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for Exploratory Clinical Trials Grants Program in the mission areas of NIAMS. The goal of the NIAMS clinical trial program is to support research leading to the prevention or reduction of symptoms and improve outcomes and function in pa…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for Affiliated Partner with the Hawaii- Pacific Islands Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/363672"/>
+    <id>urn:funding-finder:grants-gov:363672</id>
+    <updated>2026-08-20T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <summary>Geological Survey | Closes 2026-09-20 | The USGS is offering a funding opportunity to a CESU partner for research on brown treesnakes (Boiga irregularis) in the Pacific Islands. Brown treesnakes (BTS) have caused the severe decline, extirpation, or extinction of several native terrestrial vertebrate species in Guam. The USGS Pacific Island Ecosystems Research Center (PIERC) has staff on Guam and elsewhere that conduct research on biolog…</summary>
   </entry>
   <entry>
     <title>Radiation Oncology-Biology Integration Network (ROBIN) Centers (U54 Clinical Trial Required)</title>
@@ -568,17 +600,6 @@
     <summary>Bureau of Land Management | Closes 2026-09-25 | BLM Invasive and Noxious Plant Management Programs work to prevent, detect, inventory, control, and monitor weed populations on public lands. Invasive species cost the public millions of dollars in control and management each year and many invasive plants and noxious weeds are highly competitive and have the ability to permanently degrade our public lands. Noxious weeds and invasive species expans…</summary>
   </entry>
   <entry>
-    <title>Use of Digital Health Technologies in Clinical Investigations to Support Drug and Biological Product Development (U01) Clinical Trials Optional</title>
-    <link href="https://www.grants.gov/search-results-detail/363255"/>
-    <id>urn:funding-finder:grants-gov:363255</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>Food and Drug Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Cybersecurity"/>
-    <summary>Food and Drug Administration | Closes 2026-08-20 | The purpose of this Notice of Funding Opportunity (NOFO) is to address topics related to the use of digital health technologies (DHTs) for remote data acquisition in clinical investigations to support drug development.</summary>
-  </entry>
-  <entry>
     <title>Cooperative Program for Modeling Clinical Transplantation</title>
     <link href="https://www.grants.gov/search-results-detail/361831"/>
     <id>urn:funding-finder:grants-gov:361831</id>
@@ -648,24 +669,5 @@
     <category term="Manufacturing"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Closes 2026-11-10 | The National Institutes of Neurological Disorders and Stroke (NINDS) is interested in supporting research projects proposing the optimization and translational development of genomic and biologic therapeutic candidates for Alzheimer’s Disease-Related Dementias (ADRD). Breakthroughs in genomic and biologic therapies are creating new opportunities to treat, prevent, and potentially modify the course…</summary>
-  </entry>
-  <entry>
-    <title>Early-Onset Cancers: Investigating Etiology, Mechanisms, and Early Detection Strategies (RP1 Clinical Trials Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/361438"/>
-    <id>urn:funding-finder:grants-gov:361438</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <summary>National Institutes of Health | Closes 2026-10-05 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) invites applications that investigate the etiology of sporadic non-hereditary early-onset cancers (EOCs: ages 18 to 49 years) and the underlying biological mechanisms that play a role in these cancers to inform prevention and control strategies. The proposed research is expected to advance the understanding of t…</summary>
-  </entry>
-  <entry>
-    <title>DoW Neurofibromatosis Investigator-Initiated Research Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362975"/>
-    <id>urn:funding-finder:grants-gov:362975</id>
-    <updated>2026-06-25T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Biology and biotechnology"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-22 | Summary: The fiscal year 2026 (FY26) Neurofibromatosis Research Program (NFRP) Investigator-Initiated Research Award (IIRA) supports high-impact research that addresses a critical need and has the potential to make important contributions to the field of neurofibromatosis disorders or advance patient care. Research projects may focus on any phase of research, excluding clinical trials. The rationa…</summary>
   </entry>
 </feed>

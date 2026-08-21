@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-08-20T10:49:33Z</updated>
+  <updated>2026-08-21T10:49:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
@@ -16,6 +16,17 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Environmental science"/>
     <summary>Health Resources and Services Administration | Closes 2027-03-18 | The purpose of this program is to improve maternal and infant outcomes by preventing contact with harmful materials before, during, and after pregnancy. This program aims to improve maternal and infant health outcomes by preventing harmful exposures before, during, and after pregnancy. It supports a national expert-staffed call center that provides timely, evidence-based information and personaliz…</summary>
+  </entry>
+  <entry>
+    <title>Multimodal AI to Accelerate Precision Medicine for Type 1 Diabetes (U01- Clinical Trials Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363678"/>
+    <id>urn:funding-finder:grants-gov:363678</id>
+    <updated>2026-12-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health | Closes 2027-02-10 | Type 1 diabetes (T1D) is a complex disease involving interactions among many different cell types, tissues, organs and biological processes. Genetics, the environment, and lifestyle all play a role in disease development and progression. Over the past two decades, the National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK) has supported major T1D research consortia covering basic,…</summary>
   </entry>
   <entry>
     <title>NIOSH Centers of Excellence for Total Worker Health® (U19)</title>
@@ -132,19 +143,6 @@
     <summary>U.S. National Science Foundation | Closes 2027-02-11 | The Emerging Frontiers in Research and Innovation (EFRI) program serves a critical role in helping the NSF Directorate for Engineering focus on important emerging areas in a timely way. The EFRI program invests in potentially transformative ideas that offer the opportunity for significant shifts in foundational engineering knowledge. EFRI-funded research must have strong potential for long-term im…</summary>
   </entry>
   <entry>
-    <title>MPS Chemistry Research Programs (MPS Chem)</title>
-    <link href="https://www.grants.gov/search-results-detail/363617"/>
-    <id>urn:funding-finder:grants-gov:363617</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports foundational research through multiple programs in the chemical sciences. Programs include: Chemical CatalysisChemical Measurement and ImagingChemical Mechanism, Function, and PropertiesChemical Structure and DynamicsChemical SynthesisChemical Systems and SolutionsChemical Theory, Models and …</summary>
-  </entry>
-  <entry>
     <title>MPS Materials Research Programs (MPS Materials)</title>
     <link href="https://www.grants.gov/search-results-detail/363618"/>
     <id>urn:funding-finder:grants-gov:363618</id>
@@ -202,16 +200,17 @@
     <summary>U.S. National Science Foundation | Closes 2076-08-19 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research for electrical, communications and computing systems through the following programs: The Electronic, Photonic, Magnetic, and Quantum Devices (EPMQD) program supports foundational engineering research on novel classical and quantum devices, exploring matter’s electronic, photonic, and magnetic …</summary>
   </entry>
   <entry>
-    <title>Pax Silica Artificial Intelligence Assistance Project</title>
-    <link href="https://www.grants.gov/search-results-detail/363596"/>
-    <id>urn:funding-finder:grants-gov:363596</id>
-    <updated>2026-08-14T00:00:00Z</updated>
-    <author><name>Bureau of Economic and Business Affairs</name></author>
+    <title>MPS Chemistry Research Programs (MPS Chem)</title>
+    <link href="https://www.grants.gov/search-results-detail/363617"/>
+    <id>urn:funding-finder:grants-gov:363617</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Catalysis and reaction engineering"/>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
     <category term="Data science"/>
-    <summary>Bureau of Economic and Business Affairs | Closes 2026-08-20 | Leveraging foreign assistance from the Pax Fund, this NOFO launches the Pax Silica Artificial Intelligence (AI) Assistance Project-a historic first-of-its-kind programmatic initiative to strengthen global AI supply chain security by creating a trusted supply chain credentialing and provenance platform to secure the AI supply chain in partner countries and economies. This NOFO seeks to fund the est…</summary>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-20 | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports foundational research through multiple programs in the chemical sciences. Programs include: Chemical CatalysisChemical Measurement and ImagingChemical Mechanism, Function, and PropertiesChemical Structure and DynamicsChemical SynthesisChemical Systems and SolutionsChemical Theory, Models and …</summary>
   </entry>
   <entry>
     <title>Promoting Responsible Investment and Rights-Respecting Production Models</title>
@@ -600,32 +599,6 @@
     <summary>Administration for Children and Families - ANA | Closes 2026-08-27 | The Administration for Native Americans (ANA), announces funds for a National Center for Native Training and Technical Assistance (the Center). The Center will be ANA"s primary provider of training and technical assistance (TTA). The goal is to build the capacity of ANA applicants and recipients to implement successful strategies and facilitate sustainable and successful outcomes that strengthen N…</summary>
   </entry>
   <entry>
-    <title>Subnational Industrial Innovation and Resilient Entrepreneurship Accelerator</title>
-    <link href="https://www.grants.gov/search-results-detail/363319"/>
-    <id>urn:funding-finder:grants-gov:363319</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>U.S. Mission to Argentina</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Argentina | Closes 2026-08-20 | The U.S. Embassy Buenos Aires announces an open competition to support subnational economic growth and operational modernization in Argentina's strategic manufacturing and resource corridors. This program will establish a competitive business acceleration program designed to provide next-generation entrepreneurs in industrial and mining provinces with practical management tools, strategic scaling …</summary>
-  </entry>
-  <entry>
-    <title>U.S.-Argentina Alumni Summit</title>
-    <link href="https://www.grants.gov/search-results-detail/363320"/>
-    <id>urn:funding-finder:grants-gov:363320</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>U.S. Mission to Argentina</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Argentina | Closes 2026-08-20 | The U.S. Embassy Buenos Aires announces an open competition to strengthen civic leadership, good governance, and institutional resilience across Argentina. This program will organize a national cross-sector Alumni Summit to equip emerging leaders from the public, academic, and non-governmental organization (NGO) sectors with practical tools, strategic insights, and ethical frameworks regarding inn…</summary>
-  </entry>
-  <entry>
     <title>AI Partnership &amp; Exchange for Tech Leaders (APEX)</title>
     <link href="https://www.grants.gov/search-results-detail/363315"/>
     <id>urn:funding-finder:grants-gov:363315</id>
@@ -689,18 +662,6 @@
     <summary>U.S. National Science Foundation | Closes 2026-11-04 | This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
   </entry>
   <entry>
-    <title>CyberNext: Advance Cybersecurity and AI Readiness</title>
-    <link href="https://www.grants.gov/search-results-detail/363249"/>
-    <id>urn:funding-finder:grants-gov:363249</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>U.S. Mission to Albania</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Cybersecurity"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Albania | Closes 2026-08-20 | Project Background, Goals, and Objectives Albania has experienced multiple cyberattacks in recent years, placing increasingly digital government services and critical institutions at significant risk. While Albania is actively embracing AI, substantial skill gaps remain - gaps that American expertise is uniquely positioned to address. The “CyberNext: Advanced Cybersecurity and AI Readiness” progra…</summary>
-  </entry>
-  <entry>
     <title>ROSES25: A.14 Atmosphere</title>
     <link href="https://www.grants.gov/search-results-detail/363240"/>
     <id>urn:funding-finder:grants-gov:363240</id>
@@ -750,5 +711,43 @@
     <category term="Manufacturing"/>
     <category term="Cybersecurity"/>
     <summary>National Energy Technology Laboratory | Closes 2026-09-08 | Modification 000003: The purpose of this modification is to revise NOFO Part 1. Section I.A.1 is revised to correct the Topic Area 1b cost share to 20% and Section IV.C.2 is revised to delete the Environmental Considerations Summary and Environmental Impact Volume from the Summary of Application Requirements table. This Notice of Funding Opportunity (NOFO) will seek proposals for specific research…</summary>
+  </entry>
+  <entry>
+    <title>NIAMS P30 Centers Program (P30 - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359152"/>
+    <id>urn:funding-finder:grants-gov:359152</id>
+    <updated>2026-07-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Closes 2026-10-01 | The overall goal of this program is to accelerate scientific discovery, improve research efficiency, and enhance the translation of research findings into improved health outcomes. Centers funded under this program will also foster multidisciplinary collaboration, support workforce development across career stages, and promote training in emerging areas such as data science, artificial intelligenc…</summary>
+  </entry>
+  <entry>
+    <title>Interdisciplinary Transportation Law and Policy Technology Training Development</title>
+    <link href="https://www.grants.gov/search-results-detail/362960"/>
+    <id>urn:funding-finder:grants-gov:362960</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>69A355 Research and Technology</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <category term="Cybersecurity"/>
+    <summary>69A355 Research and Technology | Closes 2026-08-28 | The U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Interdisciplinary Transportation Law and Policy Technology Training Development program. This 24-month cooperative agreement aims to bridge the critical knowledge gap between fast-changing transportation technologies and our Nati…</summary>
+  </entry>
+  <entry>
+    <title>Tribal Transportation Safety Strategy Pilot Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362956"/>
+    <id>urn:funding-finder:grants-gov:362956</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>69A355 Research and Technology</name></author>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>69A355 Research and Technology | Closes 2026-08-28 | he U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Tribal Transportation Safety Strategy Pilot Program. This three-year cooperative agreement is designed to address the critical public safety crisis in Tribal communities, as American Indian and Alaska Native populations experience…</summary>
   </entry>
 </feed>

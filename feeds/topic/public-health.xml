@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml</id>
-  <updated>2026-08-20T10:49:33Z</updated>
+  <updated>2026-08-21T10:49:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Healthy Lifestyles in Youth</title>
@@ -535,6 +535,15 @@
     <summary>National Institutes of Health | Closes 2026-11-10 | The National Institutes of Health (NIH), including all of its Institutes and Centers, plans to publish a Notice of Funding Opportunity inviting eligible colleges, universities, and nonprofit organizations to apply for the NIH Research Evaluation and Commercialization Hub (REACH) program. The REACH program helps move promising biomedical discoveries from academic research into real-world products t…</summary>
   </entry>
   <entry>
+    <title>Modernizing Violent Death and Suicide Surveillance Using the National Violent Death Reporting System (NVDRS)</title>
+    <link href="https://www.grants.gov/search-results-detail/363683"/>
+    <id>urn:funding-finder:grants-gov:363683</id>
+    <updated>2026-09-22T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCIPC</name></author>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control - NCIPC | Closes 2027-05-04 | The National Violent Death Reporting System (NVDRS) is CDC's state-based surveillance system for violent deaths and suicides. NVDRS combines information from death certificates, coroner or medical examiner reports, including toxicology reports, and law enforcement reports to provide comprehensive, incident-level data on the circumstances surrounding violent deaths. Through this Notice of Funding O…</summary>
+  </entry>
+  <entry>
     <title>Clinical and Translational Science Award</title>
     <link href="https://www.grants.gov/search-results-detail/363244"/>
     <id>urn:funding-finder:grants-gov:363244</id>
@@ -629,16 +638,5 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Closes 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the National Institutes of Health (NIH) mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center, and Laboratory Center working with Clinical Trials Units (CTUs), to advance prevention and treatment research on HIV and HIV…</summary>
-  </entry>
-  <entry>
-    <title>HIV/AIDS Clinical Trials Network Laboratory Centers</title>
-    <link href="https://www.grants.gov/search-results-detail/361820"/>
-    <id>urn:funding-finder:grants-gov:361820</id>
-    <updated>2026-08-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center, and Laboratory Center (LC) working with Clinical Trials Units, to test prevention and treatment strategies and conduct implementation research designed to end t…</summary>
   </entry>
 </feed>

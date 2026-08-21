@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml</id>
-  <updated>2026-08-20T10:49:33Z</updated>
+  <updated>2026-08-21T10:49:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -353,16 +353,6 @@
     <summary>National Institutes of Health | Closes 2029-07-12 | The National Institutes of Health (NIH) will award Institutional Mentored Career Development grants to eligible domestic institutions to support career development programs designed to prepare later stage postdoctoral fellows and junior faculty scholars who have made a commitment to an independent research career for their career advancement and transition to independence. Supported scholars will …</summary>
   </entry>
   <entry>
-    <title>Limited Competition: Social, Behavioral, &amp; Economic (SBE) Coordinating Center</title>
-    <link href="https://www.grants.gov/search-results-detail/360159"/>
-    <id>urn:funding-finder:grants-gov:360159</id>
-    <updated>2026-06-20T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Infectious disease"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2026-08-20 | This is a Forecast for a Limited Competition Notice of Funding Opportunity (NOFO) that will invite application(s) from eligible organization(s) to apply. Please see the Eligibility Section for additional information. In accordance with NIH standard peer-review processes, the application(s) will be peer-reviewed, and only meritorious application(s) will be considered for funding. It is anticipated …</summary>
-  </entry>
-  <entry>
     <title>DoW Orthopaedic, Applied Research Award</title>
     <link href="https://www.grants.gov/search-results-detail/362520"/>
     <id>urn:funding-finder:grants-gov:362520</id>
@@ -653,5 +643,16 @@
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
     <summary>U.S. National Science Foundation | Posted | The Collaboratory to Advance Mathematics Education and Learning (CAMEL) for K-12 initiative aims to advance mathematics learning and education through purposeful collaboration that draws on the interdisciplinary Science of Learning (including neuroscience; cognitive, developmental, and social sciences; computer science; machine learning; engineering; and education research), deep experiences in ed…</summary>
+  </entry>
+  <entry>
+    <title>Mind and Body Interventions to Restore Whole Person Health via Emotional Well-Being Mechanisms (R61/R33 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/359155"/>
+    <id>urn:funding-finder:grants-gov:359155</id>
+    <updated>2025-09-26T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Cybersecurity"/>
+    <summary>National Institutes of Health | Closes 2028-06-07 | The National Center for Complementary and Integrative Health (NCCIH) announces this Notice of Funding Opportunity (NOFO) to solicit applications for research on how mind and body interventions through psychological and/or physical inputs (e.g., mindfulness meditation, yoga, acupuncture, massage, and other brain and/or body based interventions) impact mechanisms of emotional well-being (EWB) and th…</summary>
   </entry>
 </feed>
