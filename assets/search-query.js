@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const QUERY_API_CONTRACT_VERSION = 2;
+  const QUERY_API_CONTRACT_VERSION = 3;
 
   // PFAS notices are often written around the problem being addressed instead
   // of naming an individual compound. These terms keep searches useful against
@@ -29,10 +29,13 @@
     Object.freeze(["hydrometallurgy", "leaching"]),
     Object.freeze(["ion", "exchange"]),
   ]);
-  const SEPARATION_METHOD_CONCEPT = "separation extraction processing recovery purification solvent hydrometallurgy leaching ion exchange membrane";
+  const SEPARATION_METHOD_CONCEPT = "separation separate extraction extract processing recovery recover purification solvent hydrometallurgy leaching ion exchange membrane refining";
   const SEPARATION_QUERY_TERMS = new Set([
     "separation", "extraction", "processing", "recovery", "purification",
   ]);
+  const MARITIME_CONCEPT = "maritime marine naval navy ocean sea";
+  const NAVIGATION_CONCEPT = "navigation pnt";
+  const QUANTUM_SENSING_CONCEPT = "quantum sensing";
   const AGENCY_QUALIFIER_TERMS = new Set(["doe", "nsf", "nasa", "nih"]);
   const BROAD_CALL_CONCEPT = "broad agency announcement baa long range office wide open scope";
   const BROAD_CALL_EVIDENCE = Object.freeze([
@@ -197,6 +200,8 @@
     phenomena: ["phenomenon"],
     woman: ["women"],
     women: ["woman"],
+    biology: ["biological", "biochemical", "biotechnology"],
+    biological: ["biology"],
   });
 
   const MAX_ACRONYM_LENGTH = 8;
@@ -398,6 +403,7 @@
       role: options.role || "",
       required: options.required === true,
       evidencePolicy: options.evidencePolicy || "",
+      strictEvidence: options.strictEvidence !== false,
       saturateConcept: options.saturateConcept === true,
       expansion: {
         kind: "scientific_concept",
@@ -431,6 +437,10 @@
     }
     const directTermSet = new Set(directTerms);
     const hasPfasAlias = directTerms.some(term => QUERY_ALIASES[term] === PFAS_CONCEPT);
+    const hasCriticalMineralPhrase = searchV2
+      && /\bcritical[\s-]+minerals?\b/i.test(normalizedValue);
+    const hasQuantumSensingPhrase = searchV2
+      && /\bquantum[\s-]+sens(?:e|ing|ors?)\b/i.test(normalizedValue);
     const hasRareEarthPhrase = /\brare[\s-]+earth(?:[\s-]+elements?)?\b/i.test(normalizedValue);
     const hasRareEarthAcronym = searchV2 && (
       hasDottedRee || /\bREEs?\b/i.test(normalizedValue)
@@ -455,6 +465,45 @@
     let acronymAttempts = 0;
     const emittedConcepts = new Set();
     return directTerms.flatMap(term => {
+      if (hasQuantumSensingPhrase && ["quantum", "sens"].includes(term)) {
+        if (emittedConcepts.has("quantum-sensing")) return [];
+        emittedConcepts.add("quantum-sensing");
+        return [conceptGroup("quantum sensing", QUANTUM_SENSING_CONCEPT, directTermSet, {
+          literalTerms: ["quantum", "sens"],
+          minimumEvidence: 2,
+          conceptId: "quantum-sensing",
+          role: "method",
+          required: true,
+          phrase: "quantum sensing",
+          basis: "controlled technical compound",
+        })];
+      }
+      if (hasCriticalMineralPhrase && ["critical", "mineral"].includes(term)) {
+        if (emittedConcepts.has("critical-minerals")) return [];
+        emittedConcepts.add("critical-minerals");
+        return [conceptGroup("critical mineral", "critical mineral", directTermSet, {
+          literalTerms: ["critical", "mineral"],
+          minimumEvidence: 2,
+          evidencePhrases: ["critical mineral"],
+          conceptId: "critical-minerals",
+          role: "target",
+          required: true,
+          evidencePolicy: "controlled_compound",
+          phrase: "critical minerals",
+          basis: "controlled technical compound",
+        })];
+      }
+      if (hasCriticalMineralPhrase && term === "workforce") {
+        return [conceptGroup(term, "workforce worker", directTermSet, {
+          literalTerms: [term],
+          minimumEvidence: 1,
+          conceptId: "literal:workforce",
+          role: "application_or_context",
+          required: true,
+          phrase: "workforce or workers",
+          basis: "bounded workforce vocabulary",
+        })];
+      }
       // Recognized names such as "perfluorooctanoic acid" and "forever
       // chemicals" are one PFAS concept, not two independent requirements.
       if (hasPfasAlias && PFAS_DESCRIPTOR_TERMS.has(term)) return [];
@@ -467,6 +516,10 @@
           evidenceAlternatives: CATALYSIS_EVIDENCE,
           evidenceWindows: CATALYST_CONTEXT_WINDOWS,
           evidenceMode: "any",
+          conceptId: searchV2 ? "catalysis" : "",
+          role: searchV2 ? "method" : "",
+          required: searchV2,
+          strictEvidence: false,
           phrase: "scientific catalysis",
           basis: "guarded scientific word family",
         })];
@@ -478,6 +531,10 @@
           literalTerms: ["ai"],
           minimumEvidence: 1,
           evidenceAlternatives: AI_EVIDENCE,
+          conceptId: searchV2 ? "artificial-intelligence" : "",
+          role: searchV2 ? "method" : "",
+          required: searchV2,
+          evidencePolicy: searchV2 ? "protected_ai" : "",
           phrase: "artificial intelligence and machine learning",
           basis: "deterministic technical abbreviation",
         })];
@@ -592,22 +649,46 @@
           conceptId: "separations",
           role: "method",
           required: true,
+          evidencePolicy: "technical_separation",
           saturateConcept: true,
           phrase: "solvent extraction and separations",
         })];
       }
-      if (searchV2 && hasRareEarthQuery && SEPARATION_QUERY_TERMS.has(term)) {
+      if (searchV2 && SEPARATION_QUERY_TERMS.has(term)) {
         if (emittedConcepts.has("separations")) return [];
         emittedConcepts.add("separations");
         return [conceptGroup(term, SEPARATION_METHOD_CONCEPT, directTermSet, {
           literalTerms: [term],
-          evidenceAlternatives: [[term]],
-          requiredAlways: true,
+          minimumEvidence: 1,
+          requiredAlways: hasRareEarthQuery,
           conceptId: "separations",
           role: "method",
           required: true,
+          evidencePolicy: "technical_separation",
           saturateConcept: true,
           phrase: "separations, extraction, processing, and recovery",
+        })];
+      }
+      if (searchV2 && term === "maritime") {
+        return [conceptGroup(term, MARITIME_CONCEPT, directTermSet, {
+          literalTerms: [term],
+          minimumEvidence: 1,
+          conceptId: "literal:maritime",
+          role: "application_or_context",
+          required: true,
+          phrase: "maritime, marine, naval, or ocean",
+          basis: "bounded maritime vocabulary",
+        })];
+      }
+      if (searchV2 && term === "navigation") {
+        return [conceptGroup(term, NAVIGATION_CONCEPT, directTermSet, {
+          literalTerms: [term],
+          minimumEvidence: 1,
+          conceptId: "literal:navigation",
+          role: "application_or_context",
+          required: true,
+          phrase: "navigation, positioning, and timing",
+          basis: "bounded technical vocabulary",
         })];
       }
       const weightedTerms = new Map([[term, 1]]);
@@ -624,12 +705,22 @@
           })
         : null;
       if (looksLikeAcronym) acronymAttempts += 1;
+      const searchMetadata = searchV2 ? {
+        conceptId: `literal:${term}`,
+        role: AGENCY_QUALIFIER_TERMS.has(term)
+          ? "program_or_agency_qualifier"
+          : "application_or_context",
+        required: true,
+        requiredAlways: AGENCY_QUALIFIER_TERMS.has(term),
+        exactIndexedAcronym: uppercaseTerms.has(term) && term.length <= 4,
+      } : {};
       // Literal matches are preferable to broader long-form expansions. The
       // glossary is a fallback for abbreviations absent from this catalog.
       if (indexed && !ALWAYS_EXPAND_ALIASES.has(term) && !acronymExpansion) {
         return [{
           source: term,
           terms: [...weightedTerms].map(([expanded, weight]) => ({ term: expanded, weight })),
+          ...searchMetadata,
         }];
       }
       const expansion = acronymExpansion?.phrase || QUERY_ALIASES[term];
@@ -644,14 +735,7 @@
         source: term,
         terms: [...weightedTerms].map(([expanded, weight]) => ({ term: expanded, weight })),
         minimumEvidence: acronymExpansion ? 2 : undefined,
-        ...(searchV2 ? {
-          conceptId: `literal:${term}`,
-          role: AGENCY_QUALIFIER_TERMS.has(term)
-            ? "program_or_agency_qualifier"
-            : "application_or_context",
-          required: true,
-          requiredAlways: AGENCY_QUALIFIER_TERMS.has(term),
-        } : {}),
+        ...searchMetadata,
         expansion: acronymExpansion ? {
           kind: "contextual_acronym",
           phrase: acronymExpansion.phrase,

@@ -1,279 +1,221 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "evaluated_at": "2026-08-22",
   "holdout_status": "sealed_and_unopened",
-  "changed_top_10_queries": 14,
-  "unchanged_top_10_queries": 35,
+  "baseline": "evaluation/search_v2_phase2_top10.json",
+  "judgments": "evaluation/search_v2_stabilization_movement_judgments.json",
+  "changed_top_10_queries": 11,
+  "unchanged_top_10_queries": 38,
+  "all_material_movements_reviewed": true,
   "movements": [
     {
       "id": "ree_01",
       "discipline": "chemistry_materials",
       "query": "REE",
-      "old_candidate_count": 1,
+      "old_candidate_count": 0,
       "new_candidate_count": 0,
-      "old_top_10": [
-        "362900"
-      ],
+      "old_top_10": [],
       "new_top_10": [],
       "added_to_top_10": [],
-      "removed_from_top_10": [
-        "362900"
-      ],
-      "top_10_changed": true,
-      "review": "REE-family movement is governed by the corrected truth rubric."
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
     },
     {
       "id": "ree_02",
       "discipline": "chemistry_materials",
       "query": "REEs",
-      "old_candidate_count": 14,
+      "old_candidate_count": 0,
       "new_candidate_count": 0,
-      "old_top_10": [
-        "359996",
-        "363224",
-        "363241",
-        "360003",
-        "363240",
-        "363325",
-        "363258",
-        "361234",
-        "360004",
-        "362900"
-      ],
+      "old_top_10": [],
       "new_top_10": [],
       "added_to_top_10": [],
-      "removed_from_top_10": [
-        "359996",
-        "363224",
-        "363241",
-        "360003",
-        "363240",
-        "363325",
-        "363258",
-        "361234",
-        "360004",
-        "362900"
-      ],
-      "top_10_changed": true,
-      "review": "REE-family movement is governed by the corrected truth rubric."
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
     },
     {
       "id": "ree_03",
       "discipline": "chemistry_materials",
       "query": "REE separations",
-      "old_candidate_count": 0,
+      "old_candidate_count": 3,
       "new_candidate_count": 3,
-      "old_top_10": [],
+      "old_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
       "new_top_10": [
         "362061",
         "360678",
         "361526"
       ],
-      "added_to_top_10": [
-        "362061",
-        "360678",
-        "361526"
-      ],
+      "added_to_top_10": [],
       "removed_from_top_10": [],
-      "top_10_changed": true,
-      "review": "REE-family movement is governed by the corrected truth rubric."
+      "top_10_changed": false,
+      "review": null
     },
     {
       "id": "ree_04",
       "discipline": "chemistry_materials",
       "query": "rare earth",
-      "old_candidate_count": 1,
+      "old_candidate_count": 0,
       "new_candidate_count": 0,
-      "old_top_10": [
-        "362900"
-      ],
+      "old_top_10": [],
       "new_top_10": [],
       "added_to_top_10": [],
-      "removed_from_top_10": [
-        "362900"
-      ],
-      "top_10_changed": true,
-      "review": "REE-family movement is governed by the corrected truth rubric."
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
     },
     {
       "id": "ree_05",
       "discipline": "chemistry_materials",
       "query": "rare earth elements",
-      "old_candidate_count": 1,
+      "old_candidate_count": 0,
       "new_candidate_count": 0,
-      "old_top_10": [
-        "362900"
-      ],
+      "old_top_10": [],
       "new_top_10": [],
       "added_to_top_10": [],
-      "removed_from_top_10": [
-        "362900"
-      ],
-      "top_10_changed": true,
-      "review": "REE-family movement is governed by the corrected truth rubric."
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
     },
     {
       "id": "ree_06",
       "discipline": "chemistry_materials",
       "query": "rare earth separations",
-      "old_candidate_count": 0,
+      "old_candidate_count": 3,
       "new_candidate_count": 3,
-      "old_top_10": [],
+      "old_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
       "new_top_10": [
         "362061",
         "360678",
         "361526"
       ],
-      "added_to_top_10": [
-        "362061",
-        "360678",
-        "361526"
-      ],
+      "added_to_top_10": [],
       "removed_from_top_10": [],
-      "top_10_changed": true,
-      "review": "REE-family movement is governed by the corrected truth rubric."
+      "top_10_changed": false,
+      "review": null
     },
     {
       "id": "ree_07",
       "discipline": "chemistry_materials",
       "query": "rare earth element recovery",
-      "old_candidate_count": 0,
+      "old_candidate_count": 3,
       "new_candidate_count": 3,
-      "old_top_10": [],
+      "old_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
       "new_top_10": [
         "362061",
         "360678",
         "361526"
       ],
-      "added_to_top_10": [
-        "362061",
-        "360678",
-        "361526"
-      ],
+      "added_to_top_10": [],
       "removed_from_top_10": [],
-      "top_10_changed": true,
-      "review": "REE-family movement is governed by the corrected truth rubric."
+      "top_10_changed": false,
+      "review": null
     },
     {
       "id": "ree_08",
       "discipline": "chemistry_materials",
       "query": "lanthanide separation",
-      "old_candidate_count": 0,
+      "old_candidate_count": 3,
       "new_candidate_count": 3,
-      "old_top_10": [],
+      "old_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
       "new_top_10": [
         "362061",
         "360678",
         "361526"
       ],
-      "added_to_top_10": [
-        "362061",
-        "360678",
-        "361526"
-      ],
+      "added_to_top_10": [],
       "removed_from_top_10": [],
-      "top_10_changed": true,
-      "review": "REE-family movement is governed by the corrected truth rubric."
+      "top_10_changed": false,
+      "review": null
     },
     {
       "id": "ree_09",
       "discipline": "chemistry_materials",
       "query": "lanthanide extraction",
-      "old_candidate_count": 1,
+      "old_candidate_count": 3,
       "new_candidate_count": 3,
       "old_top_10": [
-        "362900"
+        "360678",
+        "362061",
+        "361526"
       ],
       "new_top_10": [
-        "360678",
         "362061",
+        "360678",
         "361526"
       ],
-      "added_to_top_10": [
-        "360678",
-        "362061",
-        "361526"
-      ],
-      "removed_from_top_10": [
-        "362900"
-      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
       "top_10_changed": true,
-      "review": "REE-family movement is governed by the corrected truth rubric."
+      "review": {
+        "status": "accepted",
+        "reason": "The same three authoritative primary programs remain; CPS and BES only exchange ranks after bounded method-evidence normalization, with no recall or label change."
+      }
     },
     {
       "id": "ree_10",
       "discipline": "chemistry_materials",
       "query": "solvent extraction of REEs",
-      "old_candidate_count": 8,
+      "old_candidate_count": 3,
       "new_candidate_count": 3,
       "old_top_10": [
-        "363241",
-        "363258",
-        "361234",
-        "360004",
-        "362900",
-        "362847",
-        "360881",
-        "344592"
+        "360678",
+        "361526",
+        "362061"
       ],
       "new_top_10": [
         "360678",
         "361526",
         "362061"
       ],
-      "added_to_top_10": [
-        "360678",
-        "361526",
-        "362061"
-      ],
-      "removed_from_top_10": [
-        "363241",
-        "363258",
-        "361234",
-        "360004",
-        "362900",
-        "362847",
-        "360881",
-        "344592"
-      ],
-      "top_10_changed": true,
-      "review": "REE-family movement is governed by the corrected truth rubric."
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
     },
     {
       "id": "ree_11",
       "discipline": "chemistry_materials",
       "query": "ionic liquids for REE extraction",
-      "old_candidate_count": 5,
+      "old_candidate_count": 3,
       "new_candidate_count": 3,
       "old_top_10": [
-        "362063",
         "362061",
-        "363375",
-        "356605",
-        "360678"
+        "360678",
+        "361526"
       ],
       "new_top_10": [
         "362061",
         "360678",
         "361526"
       ],
-      "added_to_top_10": [
-        "361526"
-      ],
-      "removed_from_top_10": [
-        "362063",
-        "363375",
-        "356605"
-      ],
-      "top_10_changed": true,
-      "review": "REE-family movement is governed by the corrected truth rubric."
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
     },
     {
       "id": "ree_12",
       "discipline": "chemistry_materials",
       "query": "critical mineral separations",
       "old_candidate_count": 18,
-      "new_candidate_count": 18,
+      "new_candidate_count": 3,
       "old_top_10": [
         "362061",
         "356605",
@@ -288,20 +230,27 @@
       ],
       "new_top_10": [
         "362061",
+        "361526",
+        "nsf-cbet:PD-26-370Y"
+      ],
+      "added_to_top_10": [
+        "361526"
+      ],
+      "removed_from_top_10": [
         "356605",
         "363215",
         "362900",
         "363633",
-        "nsf-cbet:PD-26-370Y",
         "363684",
         "363645",
         "363536",
         "363544"
       ],
-      "added_to_top_10": [],
-      "removed_from_top_10": [],
-      "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "The candidate adds Genesis and retains CPS and EWRE while removing the adjudicated workshop, workforce, diplomacy, ecology, geoscience-metadata, and ungrounded umbrella matches."
+      }
     },
     {
       "id": "ree_13",
@@ -336,7 +285,7 @@
       "added_to_top_10": [],
       "removed_from_top_10": [],
       "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "review": null
     },
     {
       "id": "ree_14",
@@ -371,24 +320,20 @@
       "added_to_top_10": [],
       "removed_from_top_10": [],
       "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "review": null
     },
     {
       "id": "ree_15",
       "discipline": "chemistry_materials",
       "query": "ree",
-      "old_candidate_count": 1,
+      "old_candidate_count": 0,
       "new_candidate_count": 0,
-      "old_top_10": [
-        "362900"
-      ],
+      "old_top_10": [],
       "new_top_10": [],
       "added_to_top_10": [],
-      "removed_from_top_10": [
-        "362900"
-      ],
-      "top_10_changed": true,
-      "review": "REE-family movement is governed by the corrected truth rubric."
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
     },
     {
       "id": "ree_16",
@@ -401,7 +346,7 @@
       "added_to_top_10": [],
       "removed_from_top_10": [],
       "top_10_changed": false,
-      "review": "REE-family movement is governed by the corrected truth rubric."
+      "review": null
     },
     {
       "id": "ree_17",
@@ -414,49 +359,49 @@
       "added_to_top_10": [],
       "removed_from_top_10": [],
       "top_10_changed": false,
-      "review": "REE-family movement is governed by the corrected truth rubric."
+      "review": null
     },
     {
       "id": "ree_18",
       "discipline": "chemistry_materials",
       "query": "REE separation",
-      "old_candidate_count": 0,
+      "old_candidate_count": 3,
       "new_candidate_count": 3,
-      "old_top_10": [],
+      "old_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
       "new_top_10": [
         "362061",
         "360678",
         "361526"
       ],
-      "added_to_top_10": [
-        "362061",
-        "360678",
-        "361526"
-      ],
+      "added_to_top_10": [],
       "removed_from_top_10": [],
-      "top_10_changed": true,
-      "review": "REE-family movement is governed by the corrected truth rubric."
+      "top_10_changed": false,
+      "review": null
     },
     {
       "id": "ree_19",
       "discipline": "chemistry_materials",
       "query": "separation of REEs",
-      "old_candidate_count": 0,
+      "old_candidate_count": 3,
       "new_candidate_count": 3,
-      "old_top_10": [],
+      "old_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
       "new_top_10": [
         "362061",
         "360678",
         "361526"
       ],
-      "added_to_top_10": [
-        "362061",
-        "360678",
-        "361526"
-      ],
+      "added_to_top_10": [],
       "removed_from_top_10": [],
-      "top_10_changed": true,
-      "review": "REE-family movement is governed by the corrected truth rubric."
+      "top_10_changed": false,
+      "review": null
     },
     {
       "id": "adv_chem_01",
@@ -469,14 +414,14 @@
       "added_to_top_10": [],
       "removed_from_top_10": [],
       "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "review": null
     },
     {
       "id": "adv_chem_02",
       "discipline": "chemistry_materials",
       "query": "AI catalyst design",
       "old_candidate_count": 88,
-      "new_candidate_count": 88,
+      "new_candidate_count": 2,
       "old_top_10": [
         "362061",
         "356605",
@@ -491,9 +436,12 @@
       ],
       "new_top_10": [
         "362061",
+        "351715"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
         "356605",
         "360678",
-        "351715",
         "363617",
         "362063",
         "347749",
@@ -501,10 +449,11 @@
         "341244",
         "362681"
       ],
-      "added_to_top_10": [],
-      "removed_from_top_10": [],
-      "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "CPS and ECLIPSE retain evidence for the complete AI, catalyst, and design intent; the removed programs establish only partial or cross-topic fit. Genesis was not in the Phase 2 top ten, so required-anchor recall does not regress."
+      }
     },
     {
       "id": "adv_chem_03",
@@ -517,14 +466,14 @@
       "added_to_top_10": [],
       "removed_from_top_10": [],
       "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "review": null
     },
     {
       "id": "adv_chem_04",
       "discipline": "chemistry_materials",
       "query": "CO2 membrane separation",
       "old_candidate_count": 12,
-      "new_candidate_count": 12,
+      "new_candidate_count": 0,
       "old_top_10": [
         "360678",
         "362061",
@@ -537,7 +486,9 @@
         "356605",
         "363662"
       ],
-      "new_top_10": [
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
         "360678",
         "362061",
         "362063",
@@ -549,10 +500,11 @@
         "356605",
         "363662"
       ],
-      "added_to_top_10": [],
-      "removed_from_top_10": [],
-      "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "None of the former results establishes all three CO2, membrane, and separation concepts in substantive scope; several are biomedical or policy lexical collisions."
+      }
     },
     {
       "id": "adv_energy_01",
@@ -565,26 +517,29 @@
       "added_to_top_10": [],
       "removed_from_top_10": [],
       "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "review": null
     },
     {
       "id": "adv_energy_02",
       "discipline": "energy",
       "query": "geothermal lithium extraction",
       "old_candidate_count": 2,
-      "new_candidate_count": 2,
+      "new_candidate_count": 0,
       "old_top_10": [
         "363065",
         "361526"
       ],
-      "new_top_10": [
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
         "363065",
         "361526"
       ],
-      "added_to_top_10": [],
-      "removed_from_top_10": [],
-      "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "The oil-and-gas notice lacks lithium, while Genesis does not establish the combined geothermal-lithium extraction intent; removing both avoids partial-intent admission."
+      }
     },
     {
       "id": "adv_energy_03",
@@ -597,7 +552,7 @@
       "added_to_top_10": [],
       "removed_from_top_10": [],
       "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "review": null
     },
     {
       "id": "adv_bio_01",
@@ -614,7 +569,7 @@
       "added_to_top_10": [],
       "removed_from_top_10": [],
       "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "review": null
     },
     {
       "id": "adv_bio_02",
@@ -649,14 +604,14 @@
       "added_to_top_10": [],
       "removed_from_top_10": [],
       "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "review": null
     },
     {
       "id": "adv_bio_03",
       "discipline": "biomedical",
       "query": "AI cancer diagnosis",
       "old_candidate_count": 33,
-      "new_candidate_count": 33,
+      "new_candidate_count": 0,
       "old_top_10": [
         "362259",
         "357030",
@@ -669,7 +624,9 @@
         "350944",
         "363217"
       ],
-      "new_top_10": [
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
         "362259",
         "357030",
         "357748",
@@ -681,10 +638,11 @@
         "350944",
         "363217"
       ],
-      "added_to_top_10": [],
-      "removed_from_top_10": [],
-      "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "The former cancer programs do not establish artificial-intelligence diagnosis scope. The remaining AI/AN population-abbreviation collision was also removed by the generic resolved-acronym evidence guard."
+      }
     },
     {
       "id": "adv_health_01",
@@ -719,7 +677,7 @@
       "added_to_top_10": [],
       "removed_from_top_10": [],
       "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "review": null
     },
     {
       "id": "adv_health_02",
@@ -746,7 +704,7 @@
       "added_to_top_10": [],
       "removed_from_top_10": [],
       "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "review": null
     },
     {
       "id": "adv_health_03",
@@ -771,7 +729,7 @@
       "added_to_top_10": [],
       "removed_from_top_10": [],
       "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "review": null
     },
     {
       "id": "adv_ag_01",
@@ -806,7 +764,7 @@
       "added_to_top_10": [],
       "removed_from_top_10": [],
       "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "review": null
     },
     {
       "id": "adv_ag_02",
@@ -831,7 +789,7 @@
       "added_to_top_10": [],
       "removed_from_top_10": [],
       "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "review": null
     },
     {
       "id": "adv_ag_03",
@@ -844,7 +802,7 @@
       "added_to_top_10": [],
       "removed_from_top_10": [],
       "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "review": null
     },
     {
       "id": "adv_space_01",
@@ -863,15 +821,18 @@
       "new_top_10": [
         "363537",
         "352741",
-        "vpr-email:infoready-2028504",
         "330296",
+        "vpr-email:infoready-2028504",
         "328902",
         "344592"
       ],
       "added_to_top_10": [],
       "removed_from_top_10": [],
-      "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "Top-ten membership is unchanged; bounded biology word-form expansion only reorders two existing middle-ranked results."
+      }
     },
     {
       "id": "adv_space_02",
@@ -884,7 +845,7 @@
       "added_to_top_10": [],
       "removed_from_top_10": [],
       "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "review": null
     },
     {
       "id": "adv_space_03",
@@ -907,7 +868,7 @@
       "added_to_top_10": [],
       "removed_from_top_10": [],
       "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "review": null
     },
     {
       "id": "adv_defense_01",
@@ -926,14 +887,14 @@
       "added_to_top_10": [],
       "removed_from_top_10": [],
       "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "review": null
     },
     {
       "id": "adv_defense_02",
       "discipline": "defense",
       "query": "autonomous maritime sensing",
       "old_candidate_count": 5,
-      "new_candidate_count": 5,
+      "new_candidate_count": 1,
       "old_top_10": [
         "344592",
         "356605",
@@ -942,16 +903,20 @@
         "345241"
       ],
       "new_top_10": [
+        "356605"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
         "344592",
-        "356605",
         "334972",
         "363292",
         "345241"
       ],
-      "added_to_top_10": [],
-      "removed_from_top_10": [],
-      "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "The Navy and Marine Corps BAA is the only result whose published scope establishes autonomy, maritime context, and sensing; ground, mining, fishing-safety, and unrelated multi-agent matches are removed."
+      }
     },
     {
       "id": "adv_defense_03",
@@ -970,14 +935,14 @@
       "added_to_top_10": [],
       "removed_from_top_10": [],
       "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "review": null
     },
     {
       "id": "adv_ai_01",
       "discipline": "ai_computing",
       "query": "trustworthy AI health",
       "old_candidate_count": 106,
-      "new_candidate_count": 106,
+      "new_candidate_count": 1,
       "old_top_10": [
         "353936",
         "361318",
@@ -991,6 +956,12 @@
         "324456"
       ],
       "new_top_10": [
+        "363107"
+      ],
+      "added_to_top_10": [
+        "363107"
+      ],
+      "removed_from_top_10": [
         "353936",
         "361318",
         "359949",
@@ -1002,10 +973,11 @@
         "361348",
         "324456"
       ],
-      "added_to_top_10": [],
-      "removed_from_top_10": [],
-      "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "Bridge2AI explicitly combines trustworthy AI with biomedical and behavioral health research; the removed results each lack at least one substantive query concept."
+      }
     },
     {
       "id": "adv_ai_02",
@@ -1040,14 +1012,14 @@
       "added_to_top_10": [],
       "removed_from_top_10": [],
       "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "review": null
     },
     {
       "id": "adv_ai_03",
       "discipline": "ai_computing",
       "query": "quantum sensing biology",
       "old_candidate_count": 15,
-      "new_candidate_count": 15,
+      "new_candidate_count": 2,
       "old_top_10": [
         "362061",
         "344592",
@@ -1062,7 +1034,10 @@
       ],
       "new_top_10": [
         "362061",
-        "344592",
+        "344592"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
         "275109",
         "362063",
         "363613",
@@ -1072,10 +1047,11 @@
         "360678",
         "332894"
       ],
-      "added_to_top_10": [],
-      "removed_from_top_10": [],
-      "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "CPS and the ARL Electronic Sensing child establish the integrated quantum-sensing and biology intent; broad umbrellas and programs with separate or absent concepts are removed."
+      }
     },
     {
       "id": "adv_env_01",
@@ -1096,7 +1072,7 @@
       "added_to_top_10": [],
       "removed_from_top_10": [],
       "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "review": null
     },
     {
       "id": "adv_env_02",
@@ -1109,7 +1085,7 @@
       "added_to_top_10": [],
       "removed_from_top_10": [],
       "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "review": null
     },
     {
       "id": "adv_env_03",
@@ -1144,14 +1120,14 @@
       "added_to_top_10": [],
       "removed_from_top_10": [],
       "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "review": null
     },
     {
       "id": "adv_policy_01",
       "discipline": "cross_domain",
       "query": "critical mineral workforce",
       "old_candidate_count": 73,
-      "new_candidate_count": 73,
+      "new_candidate_count": 3,
       "old_top_10": [
         "363633",
         "363316",
@@ -1165,10 +1141,13 @@
         "363385"
       ],
       "new_top_10": [
-        "363633",
-        "363316",
-        "363645",
         "363215",
+        "363633",
+        "363645"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "363316",
         "362900",
         "363544",
         "363536",
@@ -1176,10 +1155,11 @@
         "362061",
         "363385"
       ],
-      "added_to_top_10": [],
-      "removed_from_top_10": [],
-      "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "The three retained programs explicitly combine critical-minerals scope with workers or workforce development; policy forums, diplomacy, ecology, and process-research programs do not."
+      }
     },
     {
       "id": "adv_policy_02",
@@ -1210,7 +1190,7 @@
       "added_to_top_10": [],
       "removed_from_top_10": [],
       "top_10_changed": false,
-      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+      "review": null
     }
   ]
 }

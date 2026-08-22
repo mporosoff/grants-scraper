@@ -13,7 +13,7 @@ import re
 from .build_catalog import tokenize
 
 
-QUERY_API_CONTRACT_VERSION = 2
+QUERY_API_CONTRACT_VERSION = 3
 PFAS_CONCEPT = (
     "persistent contaminant contamination pollution remediation groundwater "
     "drinking wastewater water treatment purification"
@@ -39,12 +39,15 @@ IONIC_LIQUID_EVIDENCE = (
     ("ion", "exchange"),
 )
 SEPARATION_METHOD_CONCEPT = (
-    "separation extraction processing recovery purification solvent "
-    "hydrometallurgy leaching ion exchange membrane"
+    "separation separate extraction extract processing recovery recover purification "
+    "solvent hydrometallurgy leaching ion exchange membrane refining"
 )
 SEPARATION_QUERY_TERMS = {
     "separation", "extraction", "processing", "recovery", "purification",
 }
+MARITIME_CONCEPT = "maritime marine naval navy ocean sea"
+NAVIGATION_CONCEPT = "navigation pnt"
+QUANTUM_SENSING_CONCEPT = "quantum sensing"
 AGENCY_QUALIFIER_TERMS = {"doe", "nsf", "nasa", "nih"}
 BROAD_CALL_CONCEPT = "broad agency announcement baa long range office wide open scope"
 BROAD_CALL_EVIDENCE = (
@@ -211,6 +214,7 @@ def _concept_group(
     role: str = "",
     required: bool = False,
     evidence_policy: str = "",
+    strict_evidence: bool = True,
     saturate_concept: bool = False,
 ) -> dict:
     weighted: dict[str, float] = {}
@@ -233,6 +237,7 @@ def _concept_group(
         "role": role,
         "required": required,
         "evidence_policy": evidence_policy,
+        "strict_evidence": strict_evidence,
         "saturate_concept": saturate_concept,
     }
 
@@ -274,6 +279,12 @@ def expand_query_groups(
     has_pfas_alias = any(
         QUERY_ALIASES.get(term) == PFAS_CONCEPT for term in direct_terms
     )
+    critical_mineral_phrase = search_v2 and bool(re.search(
+        r"\bcritical[\s-]+minerals?\b", value, re.I
+    ))
+    quantum_sensing_phrase = search_v2 and bool(re.search(
+        r"\bquantum[\s-]+sens(?:e|ing|ors?)\b", value, re.I
+    ))
     rare_earth_phrase = bool(re.search(
         r"\brare[\s-]+earth(?:[\s-]+elements?)?\b", value, re.I
     ))
@@ -298,8 +309,56 @@ def expand_query_groups(
     il_abbreviation = bool(re.search(r"\bILs?\b", value, re.I)) and (
         _has_ionic_liquid_context(value, direct_term_set)
     )
+    uppercase_terms = {
+        token
+        for raw in re.findall(r"\b[A-Z][A-Z0-9]{2,8}s?\b", value)
+        for token in tokenize(raw)
+    }
     emitted: set[str] = set()
     for term in direct_terms:
+        if quantum_sensing_phrase and term in {"quantum", "sens"}:
+            if "quantum-sensing" in emitted:
+                continue
+            emitted.add("quantum-sensing")
+            groups.append(_concept_group(
+                "quantum sensing",
+                QUANTUM_SENSING_CONCEPT,
+                direct_term_set,
+                literal_terms=("quantum", "sens"),
+                minimum_evidence=2,
+                concept_id="quantum-sensing",
+                role="method",
+                required=True,
+            ))
+            continue
+        if critical_mineral_phrase and term in {"critical", "mineral"}:
+            if "critical-minerals" in emitted:
+                continue
+            emitted.add("critical-minerals")
+            groups.append(_concept_group(
+                "critical mineral",
+                "critical mineral",
+                direct_term_set,
+                literal_terms=("critical", "mineral"),
+                minimum_evidence=2,
+                evidence_phrases=("critical mineral",),
+                concept_id="critical-minerals",
+                role="target",
+                required=True,
+                evidence_policy="controlled_compound",
+            ))
+            continue
+        if critical_mineral_phrase and term == "workforce":
+            groups.append(_concept_group(
+                term,
+                "workforce worker",
+                direct_term_set,
+                literal_terms=(term,),
+                concept_id="literal:workforce",
+                role="application_or_context",
+                required=True,
+            ))
+            continue
         if has_pfas_alias and term in PFAS_DESCRIPTOR_TERMS:
             continue
         if term in {"catalyst", "catalysi", "catalytic"}:
@@ -315,6 +374,10 @@ def expand_query_groups(
                 evidence_alternatives=CATALYSIS_EVIDENCE,
                 evidence_windows=CATALYST_CONTEXT_WINDOWS,
                 evidence_mode="any",
+                concept_id="catalysis" if search_v2 else "",
+                role="method" if search_v2 else "",
+                required=search_v2,
+                strict_evidence=False,
             ))
             continue
         if term == "ai":
@@ -328,6 +391,10 @@ def expand_query_groups(
                 literal_terms=("ai",),
                 minimum_evidence=1,
                 evidence_alternatives=AI_EVIDENCE,
+                concept_id="artificial-intelligence" if search_v2 else "",
+                role="method" if search_v2 else "",
+                required=search_v2,
+                evidence_policy="protected_ai" if search_v2 else "",
             ))
             continue
         if (
@@ -445,10 +512,11 @@ def expand_query_groups(
                 concept_id="separations",
                 role="method",
                 required=True,
+                evidence_policy="technical_separation",
                 saturate_concept=True,
             ))
             continue
-        if search_v2 and rare_earth_query and term in SEPARATION_QUERY_TERMS:
+        if search_v2 and term in SEPARATION_QUERY_TERMS:
             if "separations" in emitted:
                 continue
             emitted.add("separations")
@@ -457,12 +525,34 @@ def expand_query_groups(
                 SEPARATION_METHOD_CONCEPT,
                 direct_term_set,
                 literal_terms=(term,),
-                evidence_alternatives=((term,),),
-                required_always=True,
+                required_always=rare_earth_query,
                 concept_id="separations",
                 role="method",
                 required=True,
+                evidence_policy="technical_separation",
                 saturate_concept=True,
+            ))
+            continue
+        if search_v2 and term == "maritime":
+            groups.append(_concept_group(
+                term,
+                MARITIME_CONCEPT,
+                direct_term_set,
+                literal_terms=(term,),
+                concept_id="literal:maritime",
+                role="application_or_context",
+                required=True,
+            ))
+            continue
+        if search_v2 and term == "navigation":
+            groups.append(_concept_group(
+                term,
+                NAVIGATION_CONCEPT,
+                direct_term_set,
+                literal_terms=(term,),
+                concept_id="literal:navigation",
+                role="application_or_context",
+                required=True,
             ))
             continue
         weighted_terms: dict[str, float] = {term: 1.0}
@@ -493,6 +583,8 @@ def expand_query_groups(
                 ),
                 "required": True,
                 "required_always": term in AGENCY_QUALIFIER_TERMS,
+                "exact_indexed_acronym": term in uppercase_terms and len(term) <= 4,
+                "strict_evidence": False,
             })
         groups.append(group)
     return groups

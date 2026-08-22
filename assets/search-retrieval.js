@@ -5,11 +5,18 @@
   const B = .75;
   const PREFIX_LIMIT = 12;
   const FUZZY_LIMIT = 6;
-  const RETRIEVAL_API_CONTRACT_VERSION = 2;
+  const RETRIEVAL_API_CONTRACT_VERSION = 3;
   const SCIENTIFIC_CONCEPT_ROLES = new Set(["target", "method"]);
+  const BROAD_OPPORTUNITY_RE = /broad agency announcement|\bbaa\b|continuation of solicitation|office of science financial assistance|long[\s-]?range|research announcement|research interests of|established program to stimulate competitive research|research collaboration|\broses\b|omnibus|unsolicited proposal|open topic|financial assistance program|annual program statement|office[ -]wide|open[ -]scope solicitation/i;
   const PROTECTED_TECHNICAL_SCOPE_RE = /\b(?:research|r&d|scientific|hypothesis|experimental|computational|chemical|materials?|separat(?:e|ion|ions)|extract(?:ion)?|process(?:ing)?|recover(?:y)?|purif(?:y|ication)|hydrometallurgy|refin(?:e|ing)|synthesis)\b/i;
   const PROTECTED_NON_RESEARCH_SCOPE_RE = /\b(?:workshops?|training|advocacy|policy recommendations?|public diplomacy|participants?)\b/i;
   const PROTECTED_STRONG_RESEARCH_RE = /\b(?:research|r&d|fundamental|hypothesis|experimental|computational)\b/i;
+  const SEPARATION_INTRINSIC_METHOD_RE = /\b(?:separat(?:e|ed|ing|ion|ions)|purif(?:y|ied|ication)|hydrometallurg(?:y|ical)|leach(?:ed|ing)?|ion exchange|membranes?)\b/i;
+  const SEPARATION_CONTEXTUAL_METHOD_RE = /\b(?:extract(?:s|ed|ing|ion|ions)?|process(?:es|ed|ing)?|recover(?:s|ed|ing|y|ies)?|refin(?:e|ed|ing))\b/i;
+  const SEPARATION_MATERIAL_CONTEXT_RE = /\b(?:chemical|compounds?|critical[\s-]+minerals?|rare[\s-]+earth|lanthanides?|materials?|metals?|minerals?|ores?|resources?|recycl(?:e|ed|ing)|sorbents?|solvents?)\b/i;
+  const SEPARATION_PRIMARY_SCOPE_RE = /\b(?:research|r&d|fundamental|scientific|experimental|engineering|methods?|technolog(?:y|ies|ical)|investigat(?:e|es|ed|ing|ion|ions))\b/i;
+  const SEPARATION_NON_RESEARCH_RE = /\b(?:workshops?|training|advocacy|policy recommendations?|public diplomacy|commercial diplomacy|participants?|investment forums?)\b/i;
+  const INCIDENTAL_ALIGNMENT_RE = /\b(?:aligns? with|consistent with|administration priorit(?:y|ies)|executive orders?|\bEO\s+\d)/i;
 
   function compareIds(left, right) {
     return String(left).localeCompare(String(right), undefined, {
@@ -403,6 +410,80 @@
       };
     }
 
+    function protectedAiEvidence(documentId) {
+      const matchingFields = documentFields[documentId].flatMap(([field, value, admissionEligible]) => {
+        if (!admissionEligible) return [];
+        const text = String(value || "");
+        const longForm = /\bartificial[\s-]+intelligence\b|\bmachine[\s-]+learning\b/i.test(text);
+        const acronym = /\bAI\b(?!\s*\/\s*AN\b)/.test(text);
+        const technicalContext = /\b(?:AI[\s-]+(?:enabled|ready|driven|based|science|models?)|algorithms?|comput(?:e|ing|ational)|data|models?)\b/i.test(text);
+        return longForm || (acronym && technicalContext) ? [field] : [];
+      });
+      return matchingFields.length ? {
+        policy: "protected_ai",
+        fields: [...new Set(matchingFields)],
+      } : null;
+    }
+
+    function technicalSeparationEvidence(documentId) {
+      const eligibleFields = documentFields[documentId]
+        .filter(([_field, _value, admissionEligible]) => admissionEligible);
+      const narrativeFields = eligibleFields
+        .filter(([field]) => /title|description|summary|program_area/.test(field));
+      const matchingFields = eligibleFields.flatMap(([field, value]) => {
+        const text = String(value || "");
+        const sentences = text.split(/(?<=[.!?])\s+|…+|[\n\r]+/);
+        const primarySentence = sentences.some(sentence => {
+          const materialContext = SEPARATION_MATERIAL_CONTEXT_RE.test(sentence);
+          const intrinsic = SEPARATION_INTRINSIC_METHOD_RE.test(sentence)
+            && (materialContext || SEPARATION_PRIMARY_SCOPE_RE.test(sentence));
+          const contextual = SEPARATION_CONTEXTUAL_METHOD_RE.test(sentence)
+            && materialContext;
+          return (intrinsic || contextual) && !INCIDENTAL_ALIGNMENT_RE.test(sentence);
+        });
+        return primarySentence ? [field] : [];
+      });
+      const narrativeText = narrativeFields
+        .map(([_field, value]) => String(value || ""))
+        .join(" ");
+      if (!matchingFields.length) {
+        const combinedMethod = SEPARATION_INTRINSIC_METHOD_RE.test(narrativeText)
+          || SEPARATION_CONTEXTUAL_METHOD_RE.test(narrativeText);
+        if (
+          combinedMethod
+          && SEPARATION_MATERIAL_CONTEXT_RE.test(narrativeText)
+          && !INCIDENTAL_ALIGNMENT_RE.test(narrativeText)
+        ) matchingFields.push(...narrativeFields.map(([field]) => field));
+      }
+      if (!matchingFields.length) return null;
+      if (!SEPARATION_PRIMARY_SCOPE_RE.test(narrativeText)) return null;
+      if (
+        SEPARATION_NON_RESEARCH_RE.test(narrativeText)
+        && !PROTECTED_STRONG_RESEARCH_RE.test(narrativeText)
+      ) return null;
+      return {
+        policy: "technical_separation",
+        fields: [...new Set(matchingFields)],
+      };
+    }
+
+    function controlledCompoundEvidence(documentId, phrases) {
+      const phraseTokens = (phrases || [])
+        .map(value => queryApi.tokenize(value).join(" "))
+        .filter(Boolean);
+      const matchingFields = documentFields[documentId].flatMap(([field, value, admissionEligible]) => {
+        if (!admissionEligible || !/title|description|summary|program_area/.test(field)) return [];
+        const fieldText = queryApi.tokenize(value).join(" ");
+        return phraseTokens.some(phrase => (` ${fieldText} `).includes(` ${phrase} `))
+          ? [field]
+          : [];
+      });
+      return matchingFields.length ? {
+        policy: "controlled_compound",
+        fields: [...new Set(matchingFields)],
+      } : null;
+    }
+
     indexTerms.forEach(term => {
       if (!termsByLength.has(term.length)) termsByLength.set(term.length, []);
       termsByLength.get(term.length).push(term);
@@ -414,7 +495,10 @@
       });
     });
 
-    function resolveTerm(term) {
+    function resolveTerm(term, { exactOnly = false } = {}) {
+      if (exactOnly) {
+        return postings[term] ? [{ term, weight: 1, kind: "exact" }] : [];
+      }
       if (resolutionCache.has(term)) return resolutionCache.get(term);
       if (postings[term]) {
         const exact = [{ term, weight: 1, kind: "exact" }];
@@ -559,6 +643,17 @@
     ) {
       const groups = expandedGroups(query, { context });
       const scopeMatches = authoritativeScopeMatches(groups);
+      const shortCompleteCoverage = searchV2
+        && coverage
+        && groups.length >= 2
+        && groups.length <= 4
+        && groups.some(group => group.strictEvidence === true);
+      const strictSubstantiveCoverage = shortCompleteCoverage
+        && groups.some(group => group.strictEvidence === true);
+      const strictBroadGrounding = strictSubstantiveCoverage;
+      const strictEvidenceGroupIndexes = groups.flatMap((group, index) => (
+        group.strictEvidence === true ? [index] : []
+      ));
       const scores = new Float64Array(documentCount);
       const lexicalScores = new Float64Array(documentCount);
       const semanticScores = new Float64Array(documentCount);
@@ -567,6 +662,12 @@
       const requiredGroupCoverage = new Uint8Array(documentCount);
       const alwaysRequiredCoverage = new Uint8Array(documentCount);
       const lexicalGroupMatches = searchV2
+        ? Array.from({ length: documentCount }, () => new Set())
+        : null;
+      const substantiveGroupMatches = strictSubstantiveCoverage
+        ? Array.from({ length: documentCount }, () => new Set())
+        : null;
+      const broadGroundedGroupMatches = strictBroadGrounding && catalogRole === "parent"
         ? Array.from({ length: documentCount }, () => new Set())
         : null;
       const fuzzyTerms = new Map();
@@ -588,12 +689,14 @@
         const groupDocuments = new Set();
         const groupEvidence = new Map();
         const groupLexicalScores = new Map();
-        const groupMatchedTerms = (collectEvidence || group.saturateConcept)
+        const groupMatchedTerms = (collectEvidence || group.saturateConcept || strictSubstantiveCoverage)
           ? new Map()
           : null;
         group.terms.forEach(({ term: queryTerm, weight: queryWeight }) => {
           const queryTermDocuments = new Set();
-          resolveTerm(queryTerm).forEach(resolution => {
+          resolveTerm(queryTerm, {
+            exactOnly: group.exactIndexedAcronym === true && queryTerm === group.source,
+          }).forEach(resolution => {
             // Fuzzy recovery is for the text the user entered. Controlled
             // synonyms and scientific variants must match their indexed form
             // instead of drifting through a second, implicit expansion.
@@ -650,13 +753,37 @@
           const protectedEvidence = searchV2 && group.evidencePolicy === "protected_rare_earth"
             ? protectedRareEarthEvidence(documentId)
             : null;
+          const aiEvidence = searchV2 && group.evidencePolicy === "protected_ai"
+            ? protectedAiEvidence(documentId)
+            : null;
+          const separationEvidence = searchV2 && group.evidencePolicy === "technical_separation"
+            ? technicalSeparationEvidence(documentId)
+            : null;
+          const compoundEvidence = searchV2 && group.evidencePolicy === "controlled_compound"
+            ? controlledCompoundEvidence(documentId, group.evidencePhrases)
+            : null;
           if (
             searchV2
             && group.evidencePolicy === "protected_rare_earth"
             && !protectedEvidence
           ) return;
+          if (
+            searchV2
+            && group.evidencePolicy === "protected_ai"
+            && !aiEvidence
+          ) return;
+          if (
+            searchV2
+            && group.evidencePolicy === "technical_separation"
+            && !separationEvidence
+          ) return;
+          if (
+            searchV2
+            && group.evidencePolicy === "controlled_compound"
+            && !compoundEvidence
+          ) return;
           const evidenceChecks = [];
-          if (evidenceAlternatives.length && !protectedEvidence) {
+          if (evidenceAlternatives.length && !protectedEvidence && !aiEvidence) {
             evidenceChecks.push(evidenceAlternatives.some(alternative =>
               alternative.every(term => exactDocuments(term).has(documentId))
             ));
@@ -680,6 +807,26 @@
           groupDocuments.add(documentId);
         });
         groupDocuments.forEach(documentId => {
+          if (strictSubstantiveCoverage) {
+            const matchedTerms = [...(groupMatchedTerms?.get(documentId) || new Map()).keys()];
+            const matchedFields = fieldsForTerms(documentId, matchedTerms);
+            if (matchedFields.some(field => field.admissionEligible)) {
+              substantiveGroupMatches[documentId].add(groupIndex);
+            }
+            if (
+              strictBroadGrounding
+              && catalogRole === "parent"
+            ) {
+              const groundedTerms = new Set(matchedFields.flatMap(field => (
+                field.field === "parent_title" || field.field === "parent_description"
+                  ? field.matchedTerms
+                  : []
+              )));
+              if (groundedTerms.size >= requiredEvidence) {
+                broadGroundedGroupMatches[documentId].add(groupIndex);
+              }
+            }
+          }
           const rawContribution = groupLexicalScores.get(documentId) || 0;
           const termContributions = [...(groupMatchedTerms?.get(documentId) || new Map()).values()]
             .sort((left, right) => right - left);
@@ -758,6 +905,12 @@
             if (group.requiredUnlessTopic) requiredGroupCoverage[documentId] += 1;
             if (group.requiredAlways) alwaysRequiredCoverage[documentId] += 1;
           }
+          if (strictSubstantiveCoverage) {
+            substantiveGroupMatches[documentId].add(groupIndex);
+            if (strictBroadGrounding && catalogRole === "parent") {
+              broadGroundedGroupMatches[documentId].add(groupIndex);
+            }
+          }
         });
         lexicalScores[documentId] += scopeEntailmentScore;
         if (collectEvidence) {
@@ -818,8 +971,9 @@
 
       // Candidate admission is lexical. Topic inference may rerank a record
       // that already matches the query, but it must never manufacture a large
-      // result set from a coarse catalog topic. Two-concept searches use AND;
-      // longer natural-language searches use a forgiving 60% concept floor.
+      // result set from a coarse catalog topic. Concise two- to four-concept
+      // searches require complete substantive coverage; longer natural-language
+      // searches retain the forgiving 60% concept floor.
       const hasExplicitMinimumCoverage = requestedMinimumCoverage !== null
         && requestedMinimumCoverage !== undefined
         && Number.isFinite(Number(requestedMinimumCoverage));
@@ -836,7 +990,7 @@
             ? 1
             : protectedCompleteCoverage
               ? groups.length
-              : groups.length <= 2
+              : shortCompleteCoverage
               ? groups.length
               : Math.ceil(groups.length * .6)
       );
@@ -851,6 +1005,8 @@
           semanticCoverage: semanticCoverage[documentId],
           requiredGroupCoverage: requiredGroupCoverage[documentId],
           alwaysRequiredCoverage: alwaysRequiredCoverage[documentId],
+          substantiveCoverage: substantiveGroupMatches?.[documentId]?.size || 0,
+          broadGroundedCoverage: broadGroundedGroupMatches?.[documentId]?.size || 0,
           lexicalScore: lexicalScores[documentId],
           semanticScore: semanticScores[documentId],
           finalScore: 0,
@@ -867,6 +1023,28 @@
           && !exactPhraseDocuments.has(documentId)
         ) {
           if (admission) admission.reason = "insufficient_lexical_coverage";
+          continue;
+        }
+        if (
+          strictSubstantiveCoverage
+          && substantiveGroupMatches[documentId].size < groups.length
+          && !exactPhraseDocuments.has(documentId)
+          && !evidence?.[documentId]?.authoritativeScope
+        ) {
+          if (admission) admission.reason = "insufficient_substantive_query_coverage";
+          continue;
+        }
+        if (
+          strictBroadGrounding
+          && catalogRole === "parent"
+          && BROAD_OPPORTUNITY_RE.test(`${records[documentId].title || ""} ${records[documentId].opportunity_number || ""}`)
+          && strictEvidenceGroupIndexes.some(groupIndex => (
+            !broadGroundedGroupMatches[documentId].has(groupIndex)
+          ))
+          && !exactPhraseDocuments.has(documentId)
+          && !evidence?.[documentId]?.authoritativeScope
+        ) {
+          if (admission) admission.reason = "ungrounded_broad_program_scope";
           continue;
         }
         if (
@@ -973,7 +1151,10 @@
             contractVersion: searchV2Config?.contract_version || null,
             evidenceSchemaVersion,
             catalogRole,
-            protectedCompleteCoverage,
+          protectedCompleteCoverage,
+          shortCompleteCoverage,
+          strictSubstantiveCoverage,
+          strictBroadGrounding,
             authoritativeScopeEntailments: [...scopeMatches.values()].map(match => ({
               id: match.id,
               parentId: String(match.parent_id),
@@ -985,6 +1166,7 @@
               required: group.required === true || group.requiredAlways === true,
               source: group.source,
               evidencePolicy: group.evidencePolicy || "",
+              strictEvidence: group.strictEvidence === true,
             })),
           },
           scoringConfiguration: {

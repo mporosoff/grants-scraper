@@ -3,7 +3,7 @@
   "frozen_at": "2026-08-22",
   "phase": 3,
   "purpose": "Frozen development truth for deterministic, causal Funding Finder match explanations.",
-  "source_search_contract": "search-v2-track-b-1",
+  "source_search_contract": "search-v2-track-b-2",
   "relevance_rubric": "evaluation/search_v2_truth.json schema version 2",
   "holdout_status": "sealed_not_executed_or_adjudicated",
   "rules": {
@@ -236,7 +236,7 @@
     {"id":"negative_nasa_earth","source":"catalog_search","query":"REEs","result_id":"363224","expected":{"admitted":false,"reason_count":0,"human_label":"correct_and_useful"}},
     {"id":"negative_policy_workshop","source":"catalog_search","query":"REE","result_id":"362900","expected":{"admitted":false,"reason_count":0,"human_label":"correct_and_useful"}},
     {"id":"negative_rare_disease","source":"catalog_search","query":"REEs","result_id":"359996","expected":{"admitted":false,"reason_count":0,"human_label":"correct_and_useful"}},
-    {"id":"weak_cfd_collision","source":"catalog_search","query":"CFD","result_id":"329436","expected":{"admitted":true,"tier":"weak_lexical","reason_count":0,"human_label":"correct_but_too_shallow","review_note":"The result is admitted by the unchanged cross-domain retrieval path, but no honest contextual explanation exists for the CFD-to-CFDA collision."}},
+    {"id":"weak_cfd_collision","source":"catalog_search","query":"CFD","result_id":"329436","expected":{"admitted":false,"reason_count":0,"human_label":"correct_and_useful"}},
     {"id":"fixture_explicit_title","source":"fixture","fixture_id":"explicit_title","expected":{"admitted":true,"tier":"contextual","required_codes":["query_interpretation","field_context"],"required_fields":["parent_title"],"human_label":"correct_and_useful"}},
     {"id":"fixture_explicit_description","source":"fixture","fixture_id":"explicit_description","expected":{"admitted":true,"tier":"contextual","required_codes":["field_context"],"required_fields":["parent_description"],"human_label":"correct_and_useful"}},
     {"id":"fixture_expanded_lanthanide","source":"fixture","fixture_id":"expanded_lanthanide","expected":{"admitted":true,"tier":"expanded","required_codes":["query_interpretation","field_context"],"required_text":["lanthanide"],"human_label":"correct_and_useful"}},

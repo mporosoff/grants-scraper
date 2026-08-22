@@ -240,6 +240,35 @@ test("refuses an ambiguous catalog acronym until context disambiguates it", () =
   assert.equal(resolved[0].expansion.phrase, "computational fluid dynamics");
 });
 
+test("search v2 marks short uppercase acronyms exact-only unless deterministically resolved", () => {
+  const api = loadApi();
+  const unresolved = api.expandGroups("CFD", term => term === "cfda", { searchV2: true });
+  assert.equal(unresolved.length, 1);
+  assert.equal(unresolved[0].source, "cfd");
+  assert.equal(unresolved[0].exactIndexedAcronym, true);
+  assert.deepEqual([...unresolved[0].terms].map(item => item.term), ["cfd"]);
+
+  const technical = api.expandGroups(
+    "critical mineral separations",
+    () => true,
+    { searchV2: true },
+  );
+  assert.deepEqual(
+    [...technical].map(group => group.conceptId),
+    ["critical-minerals", "separations"],
+  );
+  assert.equal(technical[0].evidencePolicy, "controlled_compound");
+  assert.ok(technical[1].terms.some(item => item.term === "process"));
+  assert.ok(technical[1].terms.some(item => item.term === "recovery"));
+
+  const maritime = api.expandGroups("autonomous maritime sensing", () => true, { searchV2: true });
+  assert.ok(maritime[1].terms.some(item => item.term === "marine"));
+  assert.ok(maritime[1].terms.some(item => item.term === "navy"));
+
+  const navigation = api.expandGroups("quantum navigation", () => true, { searchV2: true });
+  assert.ok(navigation[1].terms.some(item => item.term === "pnt"));
+});
+
 test("groups aliases and scientific irregulars under the terms the user entered", () => {
   const api = loadApi();
   const groups = api.expandGroups("analyses CO2");

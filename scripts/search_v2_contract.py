@@ -10,7 +10,7 @@ import re
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "config" / "search_v2.json"
-RETRIEVAL_API_CONTRACT_VERSION = 2
+RETRIEVAL_API_CONTRACT_VERSION = 3
 SCIENTIFIC_CONCEPT_ROLES = {"target", "method"}
 TECHNICAL_SCOPE_RE = re.compile(
     r"\b(?:research|r&d|scientific|hypothesis|experimental|computational|"
@@ -36,6 +36,37 @@ RARE_EARTH_ACRONYM_RE = re.compile(
 RARE_EARTH_ACRONYM_CONTEXT_RE = re.compile(
     r"\bcritical[\s-]+minerals?\b|\bseparat(?:e|ion|ions)\b|\bextract(?:ion)?\b|"
     r"\brecover(?:y)?\b|\bhydrometallurgy\b|\brefin(?:e|ing)\b",
+    re.I,
+)
+SEPARATION_INTRINSIC_METHOD_RE = re.compile(
+    r"\b(?:separat(?:e|ed|ing|ion|ions)|purif(?:y|ied|ication)|"
+    r"hydrometallurg(?:y|ical)|leach(?:ed|ing)?|ion exchange|membranes?)\b",
+    re.I,
+)
+SEPARATION_CONTEXTUAL_METHOD_RE = re.compile(
+    r"\b(?:extract(?:s|ed|ing|ion|ions)?|process(?:es|ed|ing)?|"
+    r"recover(?:s|ed|ing|y|ies)?|refin(?:e|ed|ing))\b",
+    re.I,
+)
+SEPARATION_MATERIAL_CONTEXT_RE = re.compile(
+    r"\b(?:chemical|compounds?|critical[\s-]+minerals?|rare[\s-]+earth|"
+    r"lanthanides?|materials?|metals?|minerals?|ores?|resources?|"
+    r"recycl(?:e|ed|ing)|sorbents?|solvents?)\b",
+    re.I,
+)
+SEPARATION_PRIMARY_SCOPE_RE = re.compile(
+    r"\b(?:research|r&d|fundamental|scientific|experimental|engineering|methods?|"
+    r"technolog(?:y|ies|ical)|investigat(?:e|es|ed|ing|ion|ions))\b",
+    re.I,
+)
+SEPARATION_NON_RESEARCH_RE = re.compile(
+    r"\b(?:workshops?|training|advocacy|policy recommendations?|public diplomacy|"
+    r"commercial diplomacy|participants?|investment forums?)\b",
+    re.I,
+)
+INCIDENTAL_ALIGNMENT_RE = re.compile(
+    r"\b(?:aligns? with|consistent with|administration priorit(?:y|ies)|"
+    r"executive orders?|EO\s+\d)",
     re.I,
 )
 
@@ -104,6 +135,96 @@ def protected_rare_earth_evidence(record: dict) -> dict | None:
         return None
     return {
         "policy": "protected_rare_earth",
+        "fields": list(dict.fromkeys(matching_fields)),
+    }
+
+
+def protected_ai_evidence(record: dict) -> dict | None:
+    matching_fields: list[str] = []
+    for field, text in _admission_fields(record):
+        long_form = bool(re.search(
+            r"\bartificial[\s-]+intelligence\b|\bmachine[\s-]+learning\b",
+            text,
+            re.I,
+        ))
+        acronym = bool(re.search(r"\bAI\b(?!\s*/\s*AN\b)", text))
+        context = bool(re.search(
+            r"\b(?:AI[\s-]+(?:enabled|ready|driven|based|science|models?)|"
+            r"algorithms?|comput(?:e|ing|ational)|data|models?)\b",
+            text,
+            re.I,
+        ))
+        if long_form or (acronym and context):
+            matching_fields.append(field)
+    if not matching_fields:
+        return None
+    return {"policy": "protected_ai", "fields": list(dict.fromkeys(matching_fields))}
+
+
+def controlled_compound_evidence(record: dict, phrases: tuple[str, ...]) -> dict | None:
+    matching_fields: list[str] = []
+    for field, text in _admission_fields(record):
+        if not re.search(r"title|description|summary|program_area", field):
+            continue
+        for phrase in phrases:
+            words = [re.escape(word) for word in re.split(r"[\s-]+", phrase) if word]
+            if words and re.search(r"\b" + r"[\s-]+".join(words) + r"s?\b", text, re.I):
+                matching_fields.append(field)
+                break
+    if not matching_fields:
+        return None
+    return {
+        "policy": "controlled_compound",
+        "fields": list(dict.fromkeys(matching_fields)),
+    }
+
+
+def technical_separation_evidence(record: dict) -> dict | None:
+    fields = _admission_fields(record)
+    narrative_fields = [
+        (field, text)
+        for field, text in fields
+        if re.search(r"title|description|summary|program_area", field)
+    ]
+    matching_fields: list[str] = []
+    for field, text in fields:
+        sentences = re.split(r"(?<=[.!?])\s+|…+|[\n\r]+", text)
+        if any(
+            (
+                (
+                    bool(SEPARATION_INTRINSIC_METHOD_RE.search(sentence))
+                    and bool(
+                        SEPARATION_MATERIAL_CONTEXT_RE.search(sentence)
+                        or SEPARATION_PRIMARY_SCOPE_RE.search(sentence)
+                    )
+                )
+                or (
+                    bool(SEPARATION_CONTEXTUAL_METHOD_RE.search(sentence))
+                    and bool(SEPARATION_MATERIAL_CONTEXT_RE.search(sentence))
+                )
+            )
+            and not INCIDENTAL_ALIGNMENT_RE.search(sentence)
+            for sentence in sentences
+        ):
+            matching_fields.append(field)
+    narrative = " ".join(text for _, text in narrative_fields)
+    if not matching_fields:
+        combined_method = bool(
+            SEPARATION_INTRINSIC_METHOD_RE.search(narrative)
+            or SEPARATION_CONTEXTUAL_METHOD_RE.search(narrative)
+        )
+        if (
+            combined_method
+            and SEPARATION_MATERIAL_CONTEXT_RE.search(narrative)
+            and not INCIDENTAL_ALIGNMENT_RE.search(narrative)
+        ):
+            matching_fields.extend(field for field, _ in narrative_fields)
+    if not matching_fields or not SEPARATION_PRIMARY_SCOPE_RE.search(narrative):
+        return None
+    if SEPARATION_NON_RESEARCH_RE.search(narrative) and not STRONG_RESEARCH_RE.search(narrative):
+        return None
+    return {
+        "policy": "technical_separation",
         "fields": list(dict.fromkeys(matching_fields)),
     }
 

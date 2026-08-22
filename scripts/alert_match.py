@@ -17,6 +17,7 @@ Pure standard library; no third-party dependencies. Import path:
 from __future__ import annotations
 
 import math
+import re
 from datetime import date, datetime
 from pathlib import Path
 
@@ -25,7 +26,10 @@ from .currentness import record_is_current
 from .search_query import expand_query_groups
 from .search_v2_contract import (
     authoritative_scope_matches,
+    controlled_compound_evidence,
+    protected_ai_evidence,
     protected_rare_earth_evidence,
+    technical_separation_evidence,
     validate_search_v2_catalog,
 )
 
@@ -102,8 +106,12 @@ def _posting_terms(
     postings: dict,
     index_terms: list[str],
     terms_by_length: dict[int, list[str]],
+    *,
+    exact_only: bool = False,
 ) -> list[tuple[str, float]]:
     """Resolve exact, prefix, then conservative typo-tolerant index terms."""
+    if exact_only:
+        return [(query_term, 1.0)] if query_term in postings else []
     if query_term in postings:
         return [(query_term, 1.0)]
     if len(query_term) >= 3:
@@ -160,6 +168,11 @@ def hybrid_scores(
     required_group_coverage = [0] * document_count
     always_required_coverage = [0] * document_count
     query_groups = expand_query_groups(query, postings, search_v2=search_v2)
+    short_complete_coverage = bool(
+        search_v2
+        and 2 <= len(query_groups) <= 4
+        and any(group.get("strict_evidence") for group in query_groups)
+    )
     records = catalog["opportunities"]
     scope_matches = (
         authoritative_scope_matches(records, query_groups, search_v2_spec)
@@ -167,6 +180,19 @@ def hybrid_scores(
         else {}
     )
     lexical_group_matches = [set() for _ in range(document_count)]
+    substantive_group_matches = [set() for _ in range(document_count)]
+    broad_grounded_group_matches = [set() for _ in range(document_count)]
+    strict_group_indexes = {
+        index for index, group in enumerate(query_groups) if group.get("strict_evidence")
+    }
+    field_token_sets = []
+    narrative_token_sets = []
+    for record in records:
+        title_terms = set(tokenize(str(record.get("title") or "")))
+        description_terms = set(tokenize(str(record.get("description") or "")))
+        citation_terms = set(tokenize(str(record.get("document_search_text") or "")))
+        field_token_sets.append(title_terms | description_terms | citation_terms)
+        narrative_token_sets.append(title_terms | description_terms)
     document_topics = [list(dict.fromkeys(record.get("topic_areas") or [])) for record in records]
     document_phrase_text = [
         " ".join(tokenize(" ".join([
@@ -215,7 +241,14 @@ def hybrid_scores(
         for query_term, query_weight in group_terms:
             query_term_documents: set[int] = set()
             for term, resolution_weight in _posting_terms(
-                query_term, postings, index_terms, terms_by_length
+                query_term,
+                postings,
+                index_terms,
+                terms_by_length,
+                exact_only=bool(
+                    group.get("exact_indexed_acronym")
+                    and query_term == group["source"]
+                ),
             ):
                 # Typo recovery applies to the user's term, not to controlled
                 # synonym/word-family alternatives inside the same concept.
@@ -261,6 +294,15 @@ def hybrid_scores(
         def has_required_evidence(document_id: int) -> bool:
             if search_v2 and group.get("evidence_policy") == "protected_rare_earth":
                 return protected_rare_earth_evidence(records[document_id]) is not None
+            if search_v2 and group.get("evidence_policy") == "protected_ai":
+                return protected_ai_evidence(records[document_id]) is not None
+            if search_v2 and group.get("evidence_policy") == "technical_separation":
+                return technical_separation_evidence(records[document_id]) is not None
+            if search_v2 and group.get("evidence_policy") == "controlled_compound":
+                return controlled_compound_evidence(
+                    records[document_id],
+                    tuple(group.get("evidence_phrases") or ()),
+                ) is not None
             checks: list[bool] = []
             if alternatives:
                 checks.append(any(
@@ -294,7 +336,22 @@ def hybrid_scores(
             if evidence >= required_evidence
             and has_required_evidence(document_id)
         }
+        if short_complete_coverage:
+            group_documents = {
+                document_id
+                for document_id in group_documents
+                if len(
+                    set(group_term_scores.get(document_id, {}))
+                    & field_token_sets[document_id]
+                ) >= required_evidence
+            }
         for document_id in group_documents:
+            substantive_group_matches[document_id].add(group_index)
+            if len(
+                set(group_term_scores.get(document_id, {}))
+                & narrative_token_sets[document_id]
+            ) >= required_evidence:
+                broad_grounded_group_matches[document_id].add(group_index)
             contribution = group_lexical_scores.get(document_id, 0.0)
             if search_v2 and group.get("saturate_concept"):
                 term_contributions = sorted(
@@ -359,6 +416,8 @@ def hybrid_scores(
                     required_group_coverage[document_id] += 1
                 if group.get("required_always"):
                     always_required_coverage[document_id] += 1
+                substantive_group_matches[document_id].add(group_index)
+                broad_grounded_group_matches[document_id].add(group_index)
         lexical_scores[document_id] += scope_entailment_score
 
     import unicodedata
@@ -397,7 +456,7 @@ def hybrid_scores(
         0
         if not query_groups
         else len(query_groups)
-        if protected_complete_coverage
+        if protected_complete_coverage or short_complete_coverage
         else len(query_groups)
         if len(query_groups) <= 2
         else math.ceil(len(query_groups) * 0.6)
@@ -418,6 +477,34 @@ def hybrid_scores(
             minimum_coverage
             and lexical_coverage[document_id] < minimum_coverage
             and document_id not in exact_phrase_documents
+        ):
+            continue
+        if (
+            short_complete_coverage
+            and len(substantive_group_matches[document_id]) < len(query_groups)
+            and document_id not in exact_phrase_documents
+            and document_id not in scope_matches
+        ):
+            continue
+        broad_title = str(records[document_id].get("title") or "")
+        if (
+            short_complete_coverage
+            and re.search(
+                r"broad agency announcement|\bbaa\b|continuation of solicitation|"
+                r"office of science financial assistance|long[\s-]?range|research announcement|"
+                r"research interests of|established program to stimulate competitive research|"
+                r"research collaboration|\broses\b|omnibus|unsolicited proposal|open topic|"
+                r"financial assistance program|annual program statement|office[ -]wide|"
+                r"open[ -]scope solicitation",
+                broad_title,
+                re.I,
+            )
+            and any(
+                group_index not in broad_grounded_group_matches[document_id]
+                for group_index in strict_group_indexes
+            )
+            and document_id not in exact_phrase_documents
+            and document_id not in scope_matches
         ):
             continue
         if (

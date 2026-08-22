@@ -38,6 +38,7 @@ function catalogFor(records, queryApi) {
       record.title,
       record.opportunity_number,
       record.description,
+      record.document_search_text,
       ...(record.topic_areas || []),
       ...(record.disciplines || []),
     ].filter(Boolean).join(" ");
@@ -50,6 +51,7 @@ function catalogFor(records, queryApi) {
     }
   });
   return {
+    schema_version: 3,
     opportunities: records,
     record_count: records.length,
     search_index: {
@@ -58,6 +60,22 @@ function catalogFor(records, queryApi) {
       document_lengths: documentLengths,
       average_document_length: documentLengths.reduce((sum, value) => sum + value, 0) / records.length,
     },
+  };
+}
+
+function searchV2Config(apis) {
+  return {
+    schema_version: 2,
+    contract_version: "test-search-v2-stabilization",
+    compatibility: {
+      query_api_contract_version: apis.query.contractVersion,
+      retrieval_api_contract_version: apis.retrieval.contractVersion,
+      parent_catalog_schema_version: 3,
+      child_catalog_schema_version: 1,
+      search_index_algorithm: "bm25",
+      evidence_schema_version: 2,
+    },
+    authoritative_scope_entailments: [],
   };
 }
 
@@ -143,6 +161,100 @@ test("requires both concepts in a two-concept search", () => {
   assert.equal(result.scores[1], 0);
   assert.equal(result.scores[2], 0);
   assert.equal(result.diagnostics.minimumCoverage, 2);
+});
+
+test("search v2 requires complete substantive coverage for concise technical queries", () => {
+  const apis = loadApis();
+  const catalog = catalogFor([
+    record("complete", "Critical mineral extraction", "Chemical processing and recovery methods."),
+    record("target-only", "Critical minerals workforce workshop", "Policy and advocacy training."),
+    record("method-only", "Chemical separation methods", "Membranes and extraction processes."),
+    record("topic-only", "Quantum sensing platform", "Quantum sensors for materials.", ["Biology and biotechnology"]),
+  ], apis.query);
+  const engine = apis.retrieval.create(catalog, apis.query, {
+    searchV2: true,
+    searchV2Config: searchV2Config(apis),
+    catalogRole: "parent",
+  });
+  const minerals = engine.score("critical mineral separations", { semantic: false, evidence: true });
+  assert.ok(minerals.scores[0] > 0, "existing extraction and recovery vocabulary may satisfy separation intent");
+  assert.equal(minerals.scores[1], 0, "target words cannot substitute for separation intent");
+  assert.equal(minerals.scores[2], 0, "method words cannot substitute for the target");
+  assert.equal(minerals.diagnostics.minimumCoverage, 2);
+  assert.equal(minerals.diagnostics.searchV2.shortCompleteCoverage, true);
+
+  const topicOnly = engine.score("quantum sensing biology", { semantic: false, evidence: true });
+  assert.equal(topicOnly.scores[3], 0, "topic metadata alone cannot satisfy a substantive short-query group");
+  assert.equal(
+    topicOnly.evidence[3].admission.reason,
+    "insufficient_substantive_query_coverage",
+  );
+});
+
+test("search v2 grounds broad short-query matches in narrative or child evidence", () => {
+  const apis = loadApis();
+  const crossTopic = record(
+    "cross-topic",
+    "Long Range Broad Agency Announcement",
+    "Open research across many disciplines.",
+  );
+  crossTopic.document_search_text = "synthetic biology biological materials quantum science quantum sensing";
+  const grounded = record(
+    "grounded",
+    "Navy and Marine Corps Long Range Broad Agency Announcement",
+    "Naval and marine operations research.",
+  );
+  grounded.document_search_text = "autonomous systems sensing technology";
+  const catalog = catalogFor([crossTopic, grounded], apis.query);
+  const engine = apis.retrieval.create(catalog, apis.query, {
+    searchV2: true,
+    searchV2Config: searchV2Config(apis),
+    catalogRole: "parent",
+  });
+
+  const biology = engine.score("quantum sensing biology", { semantic: false, evidence: true });
+  assert.equal(biology.scores[0], 0);
+  assert.equal(biology.evidence[0].admission.reason, "ungrounded_broad_program_scope");
+
+  const maritime = engine.score("autonomous maritime sensing", { semantic: false });
+  assert.ok(maritime.scores[1] > 0, "bounded marine and naval language may satisfy maritime context");
+});
+
+test("search v2 never prefix-expands a short uppercase acronym", () => {
+  const apis = loadApis();
+  const collision = record("collision", "CFDA administration", "Catalog of Federal Domestic Assistance number.");
+  const resolved = record("resolved", "Computational fluid dynamics", "Computational fluid dynamics for reacting flows.");
+  const catalog = catalogFor([collision, resolved], apis.query);
+  const engine = apis.retrieval.create(catalog, apis.query, {
+    searchV2: true,
+    searchV2Config: searchV2Config(apis),
+    catalogRole: "parent",
+  });
+
+  const withoutContext = engine.score("CFD", { semantic: false });
+  assert.deepEqual([...withoutContext.scores], [0, 0]);
+  const withContext = engine.score("CFD", {
+    semantic: false,
+    context: "Computational fluid dynamics for turbulent reactors.",
+  });
+  assert.equal(withContext.scores[0], 0);
+  assert.ok(withContext.scores[1] > 0);
+});
+
+test("search v2 disambiguates resolved AI from the AI/AN population abbreviation", () => {
+  const apis = loadApis();
+  const catalog = catalogFor([
+    record("ai", "AI-enabled cancer diagnosis", "Artificial intelligence models for cancer diagnosis."),
+    record("aian", "American Indian and Alaska Native cancer outcomes", "AI/AN cancer diagnosis research."),
+  ], apis.query);
+  const engine = apis.retrieval.create(catalog, apis.query, {
+    searchV2: true,
+    searchV2Config: searchV2Config(apis),
+    catalogRole: "parent",
+  });
+  const result = engine.score("AI cancer diagnosis", { semantic: false });
+  assert.ok(result.scores[0] > 0);
+  assert.equal(result.scores[1], 0);
 });
 
 test("reported catalyst and AI search is narrow without losing chemistry programs", () => {

@@ -211,7 +211,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("Enter to send", explorer_html)
         self.assertIn("Export CSV", explorer_html)
         self.assertIn('id="result-label"', explorer_html)
-        search_v2_version = "search-v2-phase2-20260822"
+        search_v2_version = "search-v2-phase2-1-20260822"
         self.assertIn(
             '<script src="./data/opportunities.js?v=catalog-',
             explorer_html,

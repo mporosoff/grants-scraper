@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "evaluated_at": "2026-08-22",
+  "phase": "2.1/3.1-stabilization",
+  "holdout_status": "sealed_and_unopened",
+  "review_basis": "Each changed development top ten was reviewed against the exact query and published parent or publication-eligible child scope. The MEAS-5 frame had no final top-ten movement.",
+  "reviews": {
+    "development:ree_09": {
+      "status": "accepted",
+      "reason": "The same three authoritative primary programs remain; CPS and BES only exchange ranks after bounded method-evidence normalization, with no recall or label change."
+    },
+    "development:ree_12": {
+      "status": "accepted",
+      "reason": "The candidate adds Genesis and retains CPS and EWRE while removing the adjudicated workshop, workforce, diplomacy, ecology, geoscience-metadata, and ungrounded umbrella matches."
+    },
+    "development:adv_chem_02": {
+      "status": "accepted",
+      "reason": "CPS and ECLIPSE retain evidence for the complete AI, catalyst, and design intent; the removed programs establish only partial or cross-topic fit. Genesis was not in the Phase 2 top ten, so required-anchor recall does not regress."
+    },
+    "development:adv_chem_04": {
+      "status": "accepted",
+      "reason": "None of the former results establishes all three CO2, membrane, and separation concepts in substantive scope; several are biomedical or policy lexical collisions."
+    },
+    "development:adv_energy_02": {
+      "status": "accepted",
+      "reason": "The oil-and-gas notice lacks lithium, while Genesis does not establish the combined geothermal-lithium extraction intent; removing both avoids partial-intent admission."
+    },
+    "development:adv_bio_03": {
+      "status": "accepted",
+      "reason": "The former cancer programs do not establish artificial-intelligence diagnosis scope. The remaining AI/AN population-abbreviation collision was also removed by the generic resolved-acronym evidence guard."
+    },
+    "development:adv_space_01": {
+      "status": "accepted",
+      "reason": "Top-ten membership is unchanged; bounded biology word-form expansion only reorders two existing middle-ranked results."
+    },
+    "development:adv_defense_02": {
+      "status": "accepted",
+      "reason": "The Navy and Marine Corps BAA is the only result whose published scope establishes autonomy, maritime context, and sensing; ground, mining, fishing-safety, and unrelated multi-agent matches are removed."
+    },
+    "development:adv_ai_01": {
+      "status": "accepted",
+      "reason": "Bridge2AI explicitly combines trustworthy AI with biomedical and behavioral health research; the removed results each lack at least one substantive query concept."
+    },
+    "development:adv_ai_03": {
+      "status": "accepted",
+      "reason": "CPS and the ARL Electronic Sensing child establish the integrated quantum-sensing and biology intent; broad umbrellas and programs with separate or absent concepts are removed."
+    },
+    "development:adv_policy_01": {
+      "status": "accepted",
+      "reason": "The three retained programs explicitly combine critical-minerals scope with workers or workforce development; policy forums, diplomacy, ecology, and process-research programs do not."
+    }
+  }
+}

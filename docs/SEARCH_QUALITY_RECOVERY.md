@@ -1,6 +1,6 @@
 # Funding Finder v1.2.0 search-quality recovery
 
-Status: Phase 3 complete; Phase 4 not started
+Status: Phase 2.1 / Phase 3.1 stabilization complete and candidate frozen; Phase 4 not started
 
 Branch: `search-quality-v2`
 
@@ -194,9 +194,9 @@ Representative explanation cards from the frozen frame:
 | `R.E.E. recovery` with lanthanide evidence | Expanded scientific match | Discloses the acronym expansion and identifies lanthanide evidence in the opportunity description |
 | Profile-assisted catalysis fixture | Exact title match | Gives the public title evidence, then says only that the research profile increased ranking; private profile text is never repeated |
 | Explicit adjacent Transport Phenomena fixture | Broader program fit | Clearly says the published scope is adjacent and does not explicitly name the target |
-| `CFD` → `CFDA` collision | No displayed explanation | Fails closed because no honest contextual explanation exists for the unchanged weak retrieval result |
+| `CFD` → `CFDA` collision | No displayed explanation | Rejected before explanation because a short technical acronym cannot prefix-expand into a longer unrelated indexed token |
 
-The explanation truth frame was committed before implementation at `7a18983` and contains 42 query/result pairs. The final result is 40 `correct_and_useful` and 2 individually reviewed `correct_but_too_shallow` cases, for 95.24% useful coverage. The two shallow cases are deliberately fail-closed: the `CFD`/`CFDA` collision and a fixture admitted only through generic metadata. Both render no confident explanation.
+The explanation truth frame was committed before implementation at `7a18983` and contains 42 query/result pairs. After stabilization, 41 are `correct_and_useful` and one individually reviewed case is `correct_but_too_shallow`, for 97.62% useful coverage. The remaining shallow case is deliberately fail-closed: a fixture admitted only through generic metadata renders no confident explanation. The former `CFD`/`CFDA` collision is now rejected by retrieval and therefore has no explanation.
 
 All Phase 3 explanation gates pass:
 
@@ -215,9 +215,38 @@ The browser asset delta for Phase 3 is 15,553 uncompressed bytes: 13,801 bytes i
 
 The frozen frame and results are `evaluation/match_explain_v2_frame.json` and `evaluation/match_explain_v2_results.json`. No sealed search holdout query was executed or adjudicated, production remains disabled, and no live deployment occurred.
 
+## Phase 2.1 / Phase 3.1 stabilization outcome
+
+The development-only stabilization pass generalized the partial-intent correction without changing the Phase 2 relevance definition or scoring architecture. It preserves the protected REE concept, all three authoritative-scope entailments, global field weights, title bonuses, the Phase 3 explanation contract, and the production-off flag. It adds no BM25F, embeddings, query-time AI, telemetry, or broad ontology.
+
+For concise technical queries with two to four substantive concept groups, primary admission now requires complete substantive coverage when at least one group has a bounded scientific evidence rule. A synonym or deterministic expansion may satisfy its own group, but one query concept cannot substitute for another. Longer natural-language searches retain the prior forgiving coverage behavior. The bounded evidence vocabulary adds only concepts supported by existing deterministic program language or observed development failures: critical minerals, technical separation operations, quantum sensing, maritime context, navigation/PNT, critical-minerals workforce context, and artificial-intelligence evidence. Scientific `catalysis` remains non-strict so the stable two-term chemistry behavior and MEAS-5 frame are not broadened or damaged.
+
+Short uppercase technical acronyms now require an exact indexed token or an existing high-confidence deterministic resolution. They cannot recover through prefix or fuzzy matching into a longer token. This removes `CFD` → `CFDA` generically. The existing `AI` resolution also rejects `AI/AN` population wording unless genuine artificial-intelligence evidence is present.
+
+Development relevance truth is now keyed by exact query ID and result ID in `evaluation/search_v2_development_truth.json`: 77 judgments across 16 existing development queries. This prevents a result's judgment for one scientific domain from leaking into another query. During the bounded review, `adv_ai_03:344592` was corrected to primary after its single publication-eligible ARL child was verified to fund electronic sensing of biological threats. That is recorded as a query-specific truth correction, not a scoring change. The sealed holdout was neither inspected nor modified and must eventually be judged with the corrected relevance rubric.
+
+The six required cross-domain development checks are fully judged and contain no unjudged or non-primary top-ten result:
+
+| Query | Stabilized primary results | Precision at 10 | Required recall |
+| --- | --- | ---: | ---: |
+| `critical mineral separations` | NSF CPS, Genesis, NSF EWRE | 1.00 | 1.00, up from 0.67 |
+| `AI catalyst design` | NSF CPS, DOE ECLIPSE | 1.00 | 0.67, unchanged |
+| `critical mineral workforce` | DOL critical-sectors workforce, U.S.-Egypt workforce collaboration, UNITE | 1.00 | 1.00 |
+| `autonomous maritime sensing` | ONR Long Range BAA | 1.00 | 1.00 |
+| `quantum navigation` | DEVCOM ARL and TDAC BAAs | 1.00 | 1.00 |
+| `quantum sensing biology` | NSF CPS and the ARL Electronic Sensing child | 1.00 | 1.00 |
+
+Across the 49-query development frame, 11 top-ten lists moved relative to the Phase 2 candidate and all 11 have explicit query-specific reviews in `evaluation/search_v2_stabilization_movement_judgments.json`. The material improvements include moving Genesis into `critical mineral separations` while removing the policy workshop and other partial-intent records; restricting `AI catalyst design`, `autonomous maritime sensing`, `trustworthy AI health`, `quantum sensing biology`, and `critical mineral workforce` to results establishing the complete intent; and removing unsupported partial matches for `CO2 membrane separation`, `geothermal lithium extraction`, and `AI cancer diagnosis`. One REE query and `space biology` only reordered already-relevant membership. The final 48-query MEAS-5 frame spans 11 disciplines and has zero top-ten movement.
+
+Phase 3 was not redesigned. The same causal, field-backed, fail-closed contract was rerun across all 42 pairs. Only the `CFD` case changed, because it is no longer admitted; all legitimate explanation evidence remains causal and the final frame has 41 useful cases, one reviewed shallow metadata fixture, and zero unsupported explanations.
+
+Local browser verification loaded the flagged candidate without warnings or errors. `REE separations` rendered exactly NSF CPS, DOE BES Separation Science, and Genesis, each labeled `Primary program-scope match`. With the flag absent, the same search rendered no matches, confirming production isolation. Under the default Grants.gov source filter, `critical mineral separations` rendered CPS and Genesis and excluded the policy workshop; the development evaluator additionally retains the relevant NSF EWRE result when all configured sources are evaluated.
+
+The machine-readable stabilization evidence is `evaluation/search_v2_results.json`, `evaluation/search_v2_development_truth.json`, `evaluation/search_v2_phase2_top10.json`, `evaluation/search_v2_movement_review.json`, and `evaluation/search_v2_stabilization_movement_judgments.json`.
+
 ## Phase boundary
 
-Completed through Phase 3:
+Completed through Phase 2.1 / Phase 3.1:
 
 - latest-live baseline and isolated branch;
 - exact live asset reconciliation;
@@ -238,18 +267,26 @@ Completed through Phase 3:
 - primary authoritative-scope, direct child, contextual field, expanded acronym, exact identifier, profile-ranking, broader-fit, and fail-closed weak-evidence treatments;
 - compact collapsed explanation UI with desktop and 390 px mobile browser verification;
 - explanation privacy, publication-boundary, causality, density, and usefulness gates.
+- query-specific development truth keyed by query and result;
+- complete substantive coverage for bounded two-to-four-concept technical queries while preserving longer-query coverage behavior;
+- exact-only short-acronym recovery and bounded `AI/AN` disambiguation;
+- six fully adjudicated cross-domain development checks and review of all 11 development top-ten movements;
+- final 49-query, MEAS-5, historical-baseline, explanation, browser, Python, size, and no-drift gates.
 
-Verification at the Phase 1 boundary:
+Verification at the Phase 2.1 / Phase 3.1 boundary:
 
 | Gate | Result | Exit code |
 | --- | --- | ---: |
-| Full browser product suite | 126 passed | 0 |
+| 49-query development frame | All hard gates passed; warm p95 45.12 ms; holdout sealed | 0 |
+| Query-specific cross-domain sample | 6 queries; no unjudged or non-primary top-ten results; recall not worse | 0 |
+| 48-query MEAS-5 frame | 11 disciplines; zero top-ten movement | 0 |
+| Full browser product suite | 131 passed | 0 |
 | Historical query baseline | 37 queries; zero top-10 churn | 0 |
-| Selected Python Phase 2/page/size suites | 37 passed | 0 |
-| Phase 3 explanation truth | 42 pairs; 95.24% correct and useful; 0 unsupported | 0 |
+| Selected Python search/parity/page/size suites | 15 passed | 0 |
+| Phase 3 explanation truth | 42 pairs; 97.62% correct and useful; 0 unsupported | 0 |
 | Size-budget tests | 3 passed | 0 |
 | Hermetic no-drift rebuild | 22 artifacts unchanged | 0 |
-| Full Python suite on current refreshed catalog | 825 ran; 10 failures and 1 error in inherited P5/P7/MEAS-8 frozen-census checks | 1 |
+| Full Python suite on current refreshed catalog | 827 ran; 10 failures and 1 error in inherited P5/P7/MEAS-8 frozen-census checks | 1 |
 
 The full Python failures reproduce catalog-fixture drift already present after the 2026-08-22 `main` catalog refresh: historical frames pin 1,475 records/745 cache entries while the current inputs contain 1,453 records/709 cache entries, and one retired ID (`362088`) is still referenced. No failing test imports or exercises the Phase 2 retrieval or Phase 3 explanation path. Those historical artifacts were not rewritten because they are outside this recovery scope and are intended to remain frozen evidence. Phase 2 added `tests/test_search_query.py` for the new browser/Python parity contract.
 
@@ -258,4 +295,4 @@ Not started:
 - Phase 4 holdout execution and release-candidate freeze;
 - merge, deployment, or live v1.2.0 shipment.
 
-`main` remained untouched after branch creation. The Phase 3 candidate remains committed only to `search-quality-v2`, with production activation intentionally deferred.
+`main` remained untouched after branch creation. The stabilized Phase 2/3 candidate is frozen only on `search-quality-v2`, with production activation intentionally deferred. Phase 4 remains closed: no sealed holdout query has been run or adjudicated.

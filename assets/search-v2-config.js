@@ -2,11 +2,11 @@
   "use strict";
   globalThis.FUNDING_SEARCH_V2_CONFIG = Object.freeze({
     "schema_version": 2,
-    "contract_version": "search-v2-track-b-1",
-    "asset_version": "search-v2-phase2-20260822",
+    "contract_version": "search-v2-track-b-2",
+    "asset_version": "search-v2-phase2-1-20260822",
     "compatibility": {
-      "query_api_contract_version": 2,
-      "retrieval_api_contract_version": 2,
+      "query_api_contract_version": 3,
+      "retrieval_api_contract_version": 3,
       "parent_catalog_schema_version": 3,
       "child_catalog_schema_version": 1,
       "search_index_algorithm": "bm25",
@@ -104,9 +104,8 @@
       {
         "query": "critical mineral separations",
         "concept_ids": [
-          "literal:critical",
-          "literal:mineral",
-          "literal:separation"
+          "critical-minerals",
+          "separations"
         ]
       }
     ],

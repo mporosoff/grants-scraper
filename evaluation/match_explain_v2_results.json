@@ -5,15 +5,15 @@
   "status": "explanation_gates_passed",
   "production_enabled": false,
   "frame": "evaluation/match_explain_v2_frame.json",
-  "frame_sha256": "a9624ef7ccd1cc016eeb8c065fb835913793dcf3530c25e4082bbf3232735f1f",
+  "frame_sha256": "8370a51302110a4e7688f201b5ab104be72698267b8b98b9e1925f145ce3a258",
   "explanation_asset": "assets/match-explain.js",
   "explanation_asset_sha256": "f74f010d62ab460cf13f99d9448795ce8147794c4f821eabcdefcbf9625cf92f",
   "explanation_contract_version": 2,
   "holdout_status": "sealed_not_executed_or_adjudicated",
   "case_count": 42,
   "label_counts": {
-    "correct_and_useful": 40,
-    "correct_but_too_shallow": 2,
+    "correct_and_useful": 41,
+    "correct_but_too_shallow": 1,
     "misleading": 0,
     "unsupported": 0,
     "overstated_broad_fit": 0,
@@ -27,13 +27,9 @@
     "private_profile_excerpt_leakage": [],
     "tautological_explanations": [],
     "authoritative_scope_mislabeled_broad": [],
-    "correct_and_useful_rate": 0.952381,
+    "correct_and_useful_rate": 0.97619,
     "correct_and_useful_rate_at_least_90_percent": true,
     "individually_reviewed_shallow_cases": [
-      {
-        "id": "weak_cfd_collision",
-        "note": "The result is admitted by the unchanged cross-domain retrieval path, but no honest contextual explanation exists for the CFD-to-CFDA collision."
-      },
       {
         "id": "fixture_weak_metadata",
         "note": "Generic topic metadata is insufficient for a causal scientific explanation and should not be dressed up as one."
@@ -137,7 +133,7 @@
             },
             {
               "type": "topic_rerank",
-              "contribution": 9.844460952471115
+              "contribution": 1.1434050826472848
             }
           ],
           "selectedEvidence": [
@@ -261,7 +257,7 @@
             },
             {
               "type": "topic_rerank",
-              "contribution": 9.844460952471115
+              "contribution": 1.1434050826472848
             }
           ],
           "selectedEvidence": [
@@ -378,6 +374,10 @@
             {
               "type": "authoritative_scope",
               "contribution": 1
+            },
+            {
+              "type": "topic_rerank",
+              "contribution": 1.1434050826472848
             }
           ],
           "selectedEvidence": [
@@ -491,7 +491,7 @@
             },
             {
               "type": "topic_rerank",
-              "contribution": 9.844460952471115
+              "contribution": 1.1434050826472848
             }
           ],
           "selectedEvidence": [
@@ -599,7 +599,7 @@
             },
             {
               "type": "topic_rerank",
-              "contribution": 9.844460952471115
+              "contribution": 1.1434050826472848
             }
           ],
           "selectedEvidence": [
@@ -700,6 +700,10 @@
             {
               "type": "authoritative_scope",
               "contribution": 1
+            },
+            {
+              "type": "topic_rerank",
+              "contribution": 1.1434050826472848
             }
           ],
           "selectedEvidence": [
@@ -1157,8 +1161,13 @@
               "contribution": 15.871000047132213
             },
             {
+              "type": "lexical_concept",
+              "conceptId": "separations",
+              "contribution": 10.74335791705023
+            },
+            {
               "type": "topic_rerank",
-              "contribution": 15.427309013456355
+              "contribution": 12.011468073969048
             }
           ],
           "selectedEvidence": [
@@ -1280,8 +1289,13 @@
               "contribution": 12.40167101903114
             },
             {
+              "type": "lexical_concept",
+              "conceptId": "separations",
+              "contribution": 8.450702289112826
+            },
+            {
               "type": "topic_rerank",
-              "contribution": 15.427309013456355
+              "contribution": 12.011468073969048
             }
           ],
           "selectedEvidence": [
@@ -1400,7 +1414,7 @@
             },
             {
               "type": "topic_rerank",
-              "contribution": 12.128333766919711
+              "contribution": 8.96613609665638
             }
           ],
           "selectedEvidence": [
@@ -1469,15 +1483,15 @@
           "admittedBy": [
             {
               "path": "explicit_evidence",
-              "conceptId": "",
-              "role": "",
+              "conceptId": "literal:de-foa-0003600",
+              "role": "application_or_context",
               "fields": []
             }
           ],
           "rankedBy": [
             {
               "type": "lexical_concept",
-              "conceptId": "",
+              "conceptId": "literal:de-foa-0003600",
               "contribution": 11.261472578816457
             },
             {
@@ -1537,8 +1551,8 @@
           "admittedBy": [
             {
               "path": "explicit_evidence",
-              "conceptId": "",
-              "role": "",
+              "conceptId": "literal:de-foa-0003612",
+              "role": "application_or_context",
               "fields": [
                 "citation_source_evidence"
               ]
@@ -1547,7 +1561,7 @@
           "rankedBy": [
             {
               "type": "lexical_concept",
-              "conceptId": "",
+              "conceptId": "literal:de-foa-0003612",
               "contribution": 12.56387823957213
             },
             {
@@ -1607,8 +1621,8 @@
           "admittedBy": [
             {
               "path": "explicit_evidence",
-              "conceptId": "",
-              "role": "",
+              "conceptId": "literal:chemical",
+              "role": "application_or_context",
               "fields": [
                 "parent_title",
                 "parent_description"
@@ -1616,8 +1630,8 @@
             },
             {
               "path": "explicit_evidence",
-              "conceptId": "",
-              "role": "",
+              "conceptId": "literal:process",
+              "role": "application_or_context",
               "fields": [
                 "parent_title",
                 "parent_description"
@@ -1625,8 +1639,8 @@
             },
             {
               "path": "explicit_evidence",
-              "conceptId": "",
-              "role": "",
+              "conceptId": "literal:system",
+              "role": "application_or_context",
               "fields": [
                 "parent_title",
                 "parent_description"
@@ -1636,17 +1650,17 @@
           "rankedBy": [
             {
               "type": "lexical_concept",
-              "conceptId": "",
+              "conceptId": "literal:chemical",
               "contribution": 6.96237363521464
             },
             {
               "type": "lexical_concept",
-              "conceptId": "",
+              "conceptId": "literal:process",
               "contribution": 3.246098037723672
             },
             {
               "type": "lexical_concept",
-              "conceptId": "",
+              "conceptId": "literal:system",
               "contribution": 2.732826653821175
             },
             {
@@ -1717,11 +1731,10 @@
             "text": "The subprogram summary provides the matching context: “Focus Area: Electrochemical Energy Conversion Catalyst Discovery and Scale up”.",
             "evidence": {
               "path": "explicit_evidence",
-              "conceptId": "",
+              "conceptId": "catalysis",
               "field": "child_summary",
               "terms": [
-                "catalyst",
-                "design"
+                "catalyst"
               ],
               "admissionRole": "admission"
             }
@@ -1731,8 +1744,8 @@
           "admittedBy": [
             {
               "path": "explicit_evidence",
-              "conceptId": "",
-              "role": "",
+              "conceptId": "catalysis",
+              "role": "method",
               "fields": [
                 "child_title",
                 "child_summary"
@@ -1740,8 +1753,8 @@
             },
             {
               "path": "explicit_evidence",
-              "conceptId": "",
-              "role": "",
+              "conceptId": "literal:design",
+              "role": "application_or_context",
               "fields": [
                 "child_summary"
               ]
@@ -1750,12 +1763,12 @@
           "rankedBy": [
             {
               "type": "lexical_concept",
-              "conceptId": "",
+              "conceptId": "catalysis",
               "contribution": 6.752898040826243
             },
             {
               "type": "lexical_concept",
-              "conceptId": "",
+              "conceptId": "literal:design",
               "contribution": 2.1611322222876668
             }
           ],
@@ -1769,11 +1782,10 @@
             },
             {
               "path": "explicit_evidence",
-              "conceptId": "",
+              "conceptId": "catalysis",
               "field": "child_summary",
               "terms": [
-                "catalyst",
-                "design"
+                "catalyst"
               ],
               "admissionRole": "admission"
             }
@@ -1832,7 +1844,7 @@
             "text": "The subprogram summary provides the matching context: “This Program supports fundamental electrochemical studies to understand and control the physics and chemistry that govern electrochemical redox reactions and transport of…”.",
             "evidence": {
               "path": "explicit_evidence",
-              "conceptId": "",
+              "conceptId": "catalysis",
               "field": "child_summary",
               "terms": [
                 "electrocatalysi",
@@ -1846,8 +1858,8 @@
           "admittedBy": [
             {
               "path": "explicit_evidence",
-              "conceptId": "",
-              "role": "",
+              "conceptId": "catalysis",
+              "role": "method",
               "fields": [
                 "child_summary",
                 "authoritative_program_area"
@@ -1855,20 +1867,20 @@
             },
             {
               "path": "explicit_evidence",
-              "conceptId": "",
-              "role": "",
+              "conceptId": "literal:design",
+              "role": "application_or_context",
               "fields": []
             }
           ],
           "rankedBy": [
             {
               "type": "lexical_concept",
-              "conceptId": "",
+              "conceptId": "catalysis",
               "contribution": 10.123015876256773
             },
             {
               "type": "lexical_concept",
-              "conceptId": "",
+              "conceptId": "literal:design",
               "contribution": 1.1360331501923073
             },
             {
@@ -1886,7 +1898,7 @@
             },
             {
               "path": "explicit_evidence",
-              "conceptId": "",
+              "conceptId": "catalysis",
               "field": "child_summary",
               "terms": [
                 "electrocatalysi",
@@ -1948,16 +1960,10 @@
             "text": "The subprogram summary provides the matching context: “Focus Area: Electrochemical Energy Conversion Catalyst Discovery and Scale up”.",
             "evidence": {
               "path": "explicit_evidence",
-              "conceptId": "",
+              "conceptId": "literal:electrochemical",
               "field": "child_summary",
               "terms": [
-                "electrochemical",
-                "catalyst",
-                "up",
-                "conversion",
-                "scale",
-                "discovery",
-                "energy"
+                "electrochemical"
               ],
               "admissionRole": "admission"
             }
@@ -1967,8 +1973,8 @@
           "admittedBy": [
             {
               "path": "explicit_evidence",
-              "conceptId": "",
-              "role": "",
+              "conceptId": "literal:electrochemical",
+              "role": "application_or_context",
               "fields": [
                 "child_title",
                 "child_summary"
@@ -1976,8 +1982,8 @@
             },
             {
               "path": "explicit_evidence",
-              "conceptId": "",
-              "role": "",
+              "conceptId": "literal:energy",
+              "role": "application_or_context",
               "fields": [
                 "child_title",
                 "child_summary"
@@ -1985,8 +1991,8 @@
             },
             {
               "path": "explicit_evidence",
-              "conceptId": "",
-              "role": "",
+              "conceptId": "literal:conversion",
+              "role": "application_or_context",
               "fields": [
                 "child_title",
                 "child_summary"
@@ -1994,8 +2000,8 @@
             },
             {
               "path": "explicit_evidence",
-              "conceptId": "",
-              "role": "",
+              "conceptId": "catalysis",
+              "role": "method",
               "fields": [
                 "child_title",
                 "child_summary"
@@ -2003,8 +2009,8 @@
             },
             {
               "path": "explicit_evidence",
-              "conceptId": "",
-              "role": "",
+              "conceptId": "literal:discovery",
+              "role": "application_or_context",
               "fields": [
                 "child_title",
                 "child_summary"
@@ -2012,8 +2018,8 @@
             },
             {
               "path": "explicit_evidence",
-              "conceptId": "",
-              "role": "",
+              "conceptId": "literal:scale",
+              "role": "application_or_context",
               "fields": [
                 "child_title",
                 "child_summary"
@@ -2021,8 +2027,8 @@
             },
             {
               "path": "explicit_evidence",
-              "conceptId": "",
-              "role": "",
+              "conceptId": "literal:up",
+              "role": "application_or_context",
               "fields": [
                 "child_title",
                 "child_summary"
@@ -2032,37 +2038,37 @@
           "rankedBy": [
             {
               "type": "lexical_concept",
-              "conceptId": "",
+              "conceptId": "literal:electrochemical",
               "contribution": 7.29192592294562
             },
             {
               "type": "lexical_concept",
-              "conceptId": "",
+              "conceptId": "literal:energy",
               "contribution": 2.1611322222876668
             },
             {
               "type": "lexical_concept",
-              "conceptId": "",
+              "conceptId": "literal:conversion",
               "contribution": 5.531951129251871
             },
             {
               "type": "lexical_concept",
-              "conceptId": "",
+              "conceptId": "catalysis",
               "contribution": 6.752898040826243
             },
             {
               "type": "lexical_concept",
-              "conceptId": "",
+              "conceptId": "literal:discovery",
               "contribution": 2.8303432180629624
             },
             {
               "type": "lexical_concept",
-              "conceptId": "",
+              "conceptId": "literal:scale",
               "contribution": 3.8448069722275613
             },
             {
               "type": "lexical_concept",
-              "conceptId": "",
+              "conceptId": "literal:up",
               "contribution": 5.761198408170649
             },
             {
@@ -2079,16 +2085,10 @@
             },
             {
               "path": "explicit_evidence",
-              "conceptId": "",
+              "conceptId": "literal:electrochemical",
               "field": "child_summary",
               "terms": [
-                "electrochemical",
-                "catalyst",
-                "up",
-                "conversion",
-                "scale",
-                "discovery",
-                "energy"
+                "electrochemical"
               ],
               "admissionRole": "admission"
             }
@@ -2147,7 +2147,7 @@
             "text": "The subprogram summary provides the matching context: “This Program supports fundamental electrochemical studies to understand and control the physics and chemistry that govern electrochemical redox reactions and transport of…”.",
             "evidence": {
               "path": "explicit_evidence",
-              "conceptId": "",
+              "conceptId": "catalysis",
               "field": "child_summary",
               "terms": [
                 "electrocatalysi",
@@ -2161,16 +2161,16 @@
           "admittedBy": [
             {
               "path": "explicit_evidence",
-              "conceptId": "",
-              "role": "",
+              "conceptId": "literal:electrochemistry",
+              "role": "application_or_context",
               "fields": [
                 "child_title"
               ]
             },
             {
               "path": "explicit_evidence",
-              "conceptId": "",
-              "role": "",
+              "conceptId": "catalysis",
+              "role": "method",
               "fields": [
                 "child_summary",
                 "authoritative_program_area"
@@ -2180,12 +2180,12 @@
           "rankedBy": [
             {
               "type": "lexical_concept",
-              "conceptId": "",
+              "conceptId": "literal:electrochemistry",
               "contribution": 5.544072380189274
             },
             {
               "type": "lexical_concept",
-              "conceptId": "",
+              "conceptId": "catalysis",
               "contribution": 10.123015876256773
             },
             {
@@ -2203,7 +2203,7 @@
             },
             {
               "path": "explicit_evidence",
-              "conceptId": "",
+              "conceptId": "catalysis",
               "field": "child_summary",
               "terms": [
                 "electrocatalysi",
@@ -2254,7 +2254,7 @@
             "text": "The opportunity description provides the matching context: “Microreactors, membrane and catalytic reactors, atmospheric plasmas, and other novel configurations are of interest”.",
             "evidence": {
               "path": "explicit_evidence",
-              "conceptId": "",
+              "conceptId": "catalysis",
               "field": "parent_description",
               "terms": [
                 "catalysi",
@@ -2268,8 +2268,8 @@
           "admittedBy": [
             {
               "path": "explicit_evidence",
-              "conceptId": "",
-              "role": "",
+              "conceptId": "catalysis",
+              "role": "method",
               "fields": [
                 "parent_description",
                 "citation_source_evidence"
@@ -2279,7 +2279,7 @@
           "rankedBy": [
             {
               "type": "lexical_concept",
-              "conceptId": "",
+              "conceptId": "catalysis",
               "contribution": 15.419602834459944
             },
             {
@@ -2290,7 +2290,7 @@
           "selectedEvidence": [
             {
               "path": "explicit_evidence",
-              "conceptId": "",
+              "conceptId": "catalysis",
               "field": "parent_description",
               "terms": [
                 "catalysi",
@@ -2341,7 +2341,7 @@
             "text": "The official-notice evidence provides the matching context: “Contacts: • Marco Fornari, marc… Full application deadline 2025-11-30 …reactions, particularly with single-site or single-atom catalysts, will not be supported”.",
             "evidence": {
               "path": "explicit_evidence",
-              "conceptId": "",
+              "conceptId": "catalysis",
               "field": "citation_source_evidence",
               "terms": [
                 "catalysi",
@@ -2355,8 +2355,8 @@
           "admittedBy": [
             {
               "path": "explicit_evidence",
-              "conceptId": "",
-              "role": "",
+              "conceptId": "catalysis",
+              "role": "method",
               "fields": [
                 "citation_source_evidence"
               ]
@@ -2365,7 +2365,7 @@
           "rankedBy": [
             {
               "type": "lexical_concept",
-              "conceptId": "",
+              "conceptId": "catalysis",
               "contribution": 11.658071030015673
             },
             {
@@ -2376,7 +2376,7 @@
           "selectedEvidence": [
             {
               "path": "explicit_evidence",
-              "conceptId": "",
+              "conceptId": "catalysis",
               "field": "citation_source_evidence",
               "terms": [
                 "catalysi",
@@ -2424,7 +2424,7 @@
             "text": "The opportunity description provides the matching context: “This solicitation applies to six (of the nine) CHE Disciplinary Research Programs: Chemical Catalysis (CAT); Chemical Measurement and Imaging (CMI); Chemical Mechanism, Function…”.",
             "evidence": {
               "path": "explicit_evidence",
-              "conceptId": "",
+              "conceptId": "catalysis",
               "field": "parent_description",
               "terms": [
                 "catalysi"
@@ -2437,8 +2437,8 @@
           "admittedBy": [
             {
               "path": "explicit_evidence",
-              "conceptId": "",
-              "role": "",
+              "conceptId": "catalysis",
+              "role": "method",
               "fields": [
                 "parent_description",
                 "citation_source_evidence"
@@ -2448,7 +2448,7 @@
           "rankedBy": [
             {
               "type": "lexical_concept",
-              "conceptId": "",
+              "conceptId": "catalysis",
               "contribution": 8.801551834907793
             },
             {
@@ -2459,7 +2459,7 @@
           "selectedEvidence": [
             {
               "path": "explicit_evidence",
-              "conceptId": "",
+              "conceptId": "catalysis",
               "field": "parent_description",
               "terms": [
                 "catalysi"
@@ -2534,56 +2534,17 @@
       "source": "catalog_search",
       "query": "CFD",
       "result_id": "329436",
-      "result_title": "University Nuclear Leadership Program– Scholarship and Fellowship Support",
-      "admitted": true,
+      "result_title": "",
+      "admitted": false,
       "expected": {
-        "admitted": true,
-        "tier": "weak_lexical",
+        "admitted": false,
         "reason_count": 0,
-        "human_label": "correct_but_too_shallow",
-        "review_note": "The result is admitted by the unchanged cross-domain retrieval path, but no honest contextual explanation exists for the CFD-to-CFDA collision."
+        "human_label": "correct_and_useful"
       },
-      "explanation": {
-        "contractVersion": 2,
-        "tier": "weak_lexical",
-        "label": "Limited match evidence",
-        "primary": false,
-        "broadFallback": false,
-        "admissionPath": "explicit_evidence",
-        "reasons": [],
-        "trace": {
-          "admittedBy": [
-            {
-              "path": "explicit_evidence",
-              "conceptId": "literal:cfd",
-              "role": "application_or_context",
-              "fields": [
-                "citation_source_evidence"
-              ]
-            }
-          ],
-          "rankedBy": [
-            {
-              "type": "lexical_concept",
-              "conceptId": "literal:cfd",
-              "contribution": 5.254832041463286
-            },
-            {
-              "type": "topic_rerank",
-              "contribution": 2.85915489562777
-            }
-          ],
-          "selectedEvidence": [],
-          "childDroveMatch": false,
-          "exactOpportunityNumber": false,
-          "exactTitlePhrase": false,
-          "profileSources": [],
-          "eligibilityContributed": false
-        }
-      },
+      "explanation": null,
       "assertion_failures": [],
-      "adjudicated_label": "correct_but_too_shallow",
-      "review_note": "The result is admitted by the unchanged cross-domain retrieval path, but no honest contextual explanation exists for the CFD-to-CFDA collision."
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
     },
     {
       "id": "fixture_explicit_title",

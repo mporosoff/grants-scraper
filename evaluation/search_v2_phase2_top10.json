@@ -1,0 +1,505 @@
+{
+  "schema_version": 1,
+  "frozen_at": "2026-08-22",
+  "source": "evaluation/search_v2_results.json@fd9de37",
+  "source_sha256": "1bc44d35da6ee01bd30d796b97ac0b5ebc22558d3a7fd467f9d114203633e3e3",
+  "holdout_status": "sealed_and_unopened",
+  "queries": {
+    "ree_01": {
+      "query": "REE",
+      "top_10": [],
+      "candidate_count": 0
+    },
+    "ree_02": {
+      "query": "REEs",
+      "top_10": [],
+      "candidate_count": 0
+    },
+    "ree_03": {
+      "query": "REE separations",
+      "top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "candidate_count": 3
+    },
+    "ree_04": {
+      "query": "rare earth",
+      "top_10": [],
+      "candidate_count": 0
+    },
+    "ree_05": {
+      "query": "rare earth elements",
+      "top_10": [],
+      "candidate_count": 0
+    },
+    "ree_06": {
+      "query": "rare earth separations",
+      "top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "candidate_count": 3
+    },
+    "ree_07": {
+      "query": "rare earth element recovery",
+      "top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "candidate_count": 3
+    },
+    "ree_08": {
+      "query": "lanthanide separation",
+      "top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "candidate_count": 3
+    },
+    "ree_09": {
+      "query": "lanthanide extraction",
+      "top_10": [
+        "360678",
+        "362061",
+        "361526"
+      ],
+      "candidate_count": 3
+    },
+    "ree_10": {
+      "query": "solvent extraction of REEs",
+      "top_10": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "candidate_count": 3
+    },
+    "ree_11": {
+      "query": "ionic liquids for REE extraction",
+      "top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "candidate_count": 3
+    },
+    "ree_12": {
+      "query": "critical mineral separations",
+      "top_10": [
+        "362061",
+        "356605",
+        "363215",
+        "362900",
+        "363633",
+        "nsf-cbet:PD-26-370Y",
+        "363684",
+        "363645",
+        "363536",
+        "363544"
+      ],
+      "candidate_count": 18
+    },
+    "ree_13": {
+      "query": "catalysis",
+      "top_10": [
+        "362061",
+        "360678",
+        "356605",
+        "347749",
+        "363617",
+        "362063",
+        "356055",
+        "341244",
+        "362681",
+        "350018"
+      ],
+      "candidate_count": 17
+    },
+    "ree_14": {
+      "query": "catalyst",
+      "top_10": [
+        "362061",
+        "360678",
+        "356605",
+        "361526",
+        "347749",
+        "363617",
+        "362063",
+        "356055",
+        "341244",
+        "362681"
+      ],
+      "candidate_count": 18
+    },
+    "ree_15": {
+      "query": "ree",
+      "top_10": [],
+      "candidate_count": 0
+    },
+    "ree_16": {
+      "query": "R.E.E.",
+      "top_10": [],
+      "candidate_count": 0
+    },
+    "ree_17": {
+      "query": "rare-earth elements",
+      "top_10": [],
+      "candidate_count": 0
+    },
+    "ree_18": {
+      "query": "REE separation",
+      "top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "candidate_count": 3
+    },
+    "ree_19": {
+      "query": "separation of REEs",
+      "top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "candidate_count": 3
+    },
+    "adv_chem_01": {
+      "query": "PFAS destruction",
+      "top_10": [],
+      "candidate_count": 0
+    },
+    "adv_chem_02": {
+      "query": "AI catalyst design",
+      "top_10": [
+        "362061",
+        "356605",
+        "360678",
+        "351715",
+        "363617",
+        "362063",
+        "347749",
+        "356055",
+        "341244",
+        "362681"
+      ],
+      "candidate_count": 88
+    },
+    "adv_chem_03": {
+      "query": "battery recycling",
+      "top_10": [],
+      "candidate_count": 0
+    },
+    "adv_chem_04": {
+      "query": "CO2 membrane separation",
+      "top_10": [
+        "360678",
+        "362061",
+        "362063",
+        "358022",
+        "358021",
+        "360223",
+        "363604",
+        "363628",
+        "356605",
+        "363662"
+      ],
+      "candidate_count": 12
+    },
+    "adv_energy_01": {
+      "query": "direct air capture membranes",
+      "top_10": [],
+      "candidate_count": 0
+    },
+    "adv_energy_02": {
+      "query": "geothermal lithium extraction",
+      "top_10": [
+        "363065",
+        "361526"
+      ],
+      "candidate_count": 2
+    },
+    "adv_energy_03": {
+      "query": "grid-scale battery safety",
+      "top_10": [],
+      "candidate_count": 0
+    },
+    "adv_bio_01": {
+      "query": "microbiome therapeutics",
+      "top_10": [
+        "356610"
+      ],
+      "candidate_count": 1
+    },
+    "adv_bio_02": {
+      "query": "rare disease biomarkers",
+      "top_10": [
+        "362752",
+        "363678",
+        "356879",
+        "359280",
+        "357570",
+        "359644",
+        "359645",
+        "359279",
+        "360621",
+        "360622"
+      ],
+      "candidate_count": 24
+    },
+    "adv_bio_03": {
+      "query": "AI cancer diagnosis",
+      "top_10": [
+        "362259",
+        "357030",
+        "357748",
+        "357067",
+        "357627",
+        "357651",
+        "357014",
+        "350943",
+        "350944",
+        "363217"
+      ],
+      "candidate_count": 33
+    },
+    "adv_health_01": {
+      "query": "rural maternal health",
+      "top_10": [
+        "363412",
+        "359945",
+        "363407",
+        "363532",
+        "363516",
+        "363411",
+        "363679",
+        "363582",
+        "363222",
+        "363210"
+      ],
+      "candidate_count": 38
+    },
+    "adv_health_02": {
+      "query": "opioid overdose prevention",
+      "top_10": [
+        "363058",
+        "363636",
+        "362672",
+        "363686",
+        "363601",
+        "344592"
+      ],
+      "candidate_count": 6
+    },
+    "adv_health_03": {
+      "query": "environmental justice asthma",
+      "top_10": [
+        "329432",
+        "363629",
+        "356231",
+        "329436",
+        "362644"
+      ],
+      "candidate_count": 5
+    },
+    "adv_ag_01": {
+      "query": "precision agriculture water",
+      "top_10": [
+        "357579",
+        "360205",
+        "355706",
+        "nsf-cbet:PD-26-370Y",
+        "361080",
+        "363285",
+        "362394",
+        "362910",
+        "363334",
+        "362787"
+      ],
+      "candidate_count": 21
+    },
+    "adv_ag_02": {
+      "query": "crop disease sensing",
+      "top_10": [
+        "363326",
+        "361876",
+        "363328",
+        "362062",
+        "363292"
+      ],
+      "candidate_count": 5
+    },
+    "adv_ag_03": {
+      "query": "livestock methane reduction",
+      "top_10": [],
+      "candidate_count": 0
+    },
+    "adv_space_01": {
+      "query": "space biology",
+      "top_10": [
+        "363537",
+        "352741",
+        "vpr-email:infoready-2028504",
+        "330296",
+        "328902",
+        "344592"
+      ],
+      "candidate_count": 6
+    },
+    "adv_space_02": {
+      "query": "lunar regolith extraction",
+      "top_10": [],
+      "candidate_count": 0
+    },
+    "adv_space_03": {
+      "query": "Earth observation wildfire",
+      "top_10": [
+        "356536",
+        "357105",
+        "356538",
+        "356669"
+      ],
+      "candidate_count": 4
+    },
+    "adv_defense_01": {
+      "query": "hypersonic materials",
+      "top_10": [
+        "330175",
+        "345241"
+      ],
+      "candidate_count": 2
+    },
+    "adv_defense_02": {
+      "query": "autonomous maritime sensing",
+      "top_10": [
+        "344592",
+        "356605",
+        "334972",
+        "363292",
+        "345241"
+      ],
+      "candidate_count": 5
+    },
+    "adv_defense_03": {
+      "query": "quantum navigation",
+      "top_10": [
+        "344592",
+        "345241"
+      ],
+      "candidate_count": 2
+    },
+    "adv_ai_01": {
+      "query": "trustworthy AI health",
+      "top_10": [
+        "353936",
+        "361318",
+        "359949",
+        "359270",
+        "359666",
+        "359271",
+        "363678",
+        "363412",
+        "361348",
+        "324456"
+      ],
+      "candidate_count": 106
+    },
+    "adv_ai_02": {
+      "query": "cybersecurity workforce",
+      "top_10": [
+        "363586",
+        "361238",
+        "358380",
+        "363594",
+        "363440",
+        "363645",
+        "363609",
+        "363436",
+        "363527",
+        "363439"
+      ],
+      "candidate_count": 113
+    },
+    "adv_ai_03": {
+      "query": "quantum sensing biology",
+      "top_10": [
+        "362061",
+        "344592",
+        "275109",
+        "362063",
+        "363613",
+        "353413",
+        "362681",
+        "361526",
+        "360678",
+        "332894"
+      ],
+      "candidate_count": 15
+    },
+    "adv_env_01": {
+      "query": "PFAS groundwater remediation",
+      "top_10": [
+        "351547",
+        "363334",
+        "362395"
+      ],
+      "candidate_count": 3
+    },
+    "adv_env_02": {
+      "query": "harmful algal bloom forecasting",
+      "top_10": [],
+      "candidate_count": 0
+    },
+    "adv_env_03": {
+      "query": "coastal resilience infrastructure",
+      "top_10": [
+        "356562",
+        "356561",
+        "363538",
+        "363537",
+        "361080",
+        "358004",
+        "363229",
+        "357554",
+        "356002",
+        "363355"
+      ],
+      "candidate_count": 17
+    },
+    "adv_policy_01": {
+      "query": "critical mineral workforce",
+      "top_10": [
+        "363633",
+        "363316",
+        "363645",
+        "363215",
+        "362900",
+        "363544",
+        "363536",
+        "363355",
+        "362061",
+        "363385"
+      ],
+      "candidate_count": 73
+    },
+    "adv_policy_02": {
+      "query": "catalyst for education",
+      "top_10": [
+        "347749",
+        "363526",
+        "363530",
+        "363617",
+        "351715",
+        "330175",
+        "341244",
+        "357014"
+      ],
+      "candidate_count": 8
+    }
+  }
+}

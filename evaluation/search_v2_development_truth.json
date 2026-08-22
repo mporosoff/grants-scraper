@@ -169,10 +169,10 @@
     },
     "adv_ai_03": {
       "query": "quantum sensing biology",
-      "required_primary_ids": ["362061"],
+      "required_primary_ids": ["362061", "344592"],
       "judgments": {
         "362061": {"label":"primary_relevant","evidence":"CPS supports biochemical processes and explicitly identifies quantum simulation and sensing within program scope."},
-        "344592": {"label":"broader_program_fit","evidence":"The ARL umbrella lists synthetic biology and quantum sensing in separate broad areas; no single child establishes the integrated query."},
+        "344592": {"label":"primary_relevant","evidence":"The publication-eligible Electronic Sensing child is in an authoritative quantum program area and explicitly funds sensing of biological threats, establishing the integrated query."},
         "275109": {"label":"broader_program_fit","evidence":"National Facilities supports quantum and biological research users, but the complete sensing intent is not established."},
         "362063": {"label":"broader_program_fit","evidence":"Transport Phenomena is adjacent to quantum and biological research but does not establish quantum sensing biology."},
         "363613": {"label":"broader_program_fit","evidence":"ECCS supports quantum sensing but the biology concept is absent from substantive scope."},
@@ -196,5 +196,6 @@
     "ree_12", "adv_chem_02", "adv_policy_01", "adv_defense_02", "adv_defense_03", "adv_ai_03", "phase3_cfd"
   ],
   "cross_domain_query_ids": ["ree_12", "adv_chem_02", "adv_policy_01", "adv_defense_02", "adv_defense_03", "adv_ai_03"],
+  "adjudication_revision": "The bounded post-checkpoint review corrected adv_ai_03:344592 after inspecting its single publication-eligible child; this was a query-specific relevance correction, not a scoring change.",
   "sealed_holdout_inspected": false
 }

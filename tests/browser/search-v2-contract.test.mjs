@@ -137,7 +137,7 @@ test("mixed search-v2 assets fail loudly", () => {
   ), /query code is incompatible/);
 });
 
-test("frozen Phase 2 evidence records every development gate without holdout execution", async () => {
+test("stabilized Phase 2/3 evidence records every development gate without holdout execution", async () => {
   const results = JSON.parse(await readFile(
     new URL("evaluation/search_v2_results.json", ROOT),
     "utf8",
@@ -146,17 +146,38 @@ test("frozen Phase 2 evidence records every development gate without holdout exe
     new URL("evaluation/search_v2_movement_review.json", ROOT),
     "utf8",
   ));
+  const truth = JSON.parse(await readFile(
+    new URL("evaluation/search_v2_development_truth.json", ROOT),
+    "utf8",
+  ));
   assert.equal(results.status, "development_gates_passed");
+  assert.equal(results.phase, "2.1/3.1-stabilization");
   assert.equal(results.production_enabled, false);
   assert.equal(results.holdout_status, "sealed_and_unopened");
   assert.equal(results.hard_gates.ree_separations_required_primary_ids_present, true);
   assert.equal(results.hard_gates.ree_separations_only_required_primary_results, true);
-  assert.deepEqual(results.hard_gates.ree_family_irrelevant_admissions, []);
+  assert.deepEqual(results.hard_gates.ree_family_non_primary_admissions, []);
   assert.deepEqual(results.hard_gates.ree_family_unlabelled_admissions, []);
+  assert.equal(results.hard_gates.query_specific_truth_keys_valid, true);
+  assert.deepEqual(results.hard_gates.cross_domain_unjudged_top_10, []);
+  assert.deepEqual(results.hard_gates.cross_domain_non_primary_top_10, []);
+  assert.deepEqual(results.hard_gates.short_query_integrity_failures, []);
+  assert.deepEqual(results.hard_gates.short_acronym_prefix_leakage, []);
+  assert.equal(results.hard_gates.development_movements_reviewed, true);
+  assert.equal(results.hard_gates.meas5_movements_reviewed, true);
   assert.equal(results.meas5_cross_domain_gate.changed_top_10_queries, 0);
-  assert.equal(movement.changed_top_10_queries, 14);
-  assert.equal(movement.unchanged_top_10_queries, 35);
+  assert.equal(movement.changed_top_10_queries, 11);
+  assert.equal(movement.unchanged_top_10_queries, 38);
   assert.ok(movement.movements
     .filter(item => item.top_10_changed)
-    .every(item => item.id.startsWith("ree_")));
+    .every(item => item.review?.status === "accepted" && item.review.reason));
+  assert.equal(truth.sealed_holdout_inspected, false);
+  assert.match(
+    truth.queries.adv_chem_02.judgments["362061"].evidence,
+    /artificial intelligence|AI|machine learning/i,
+  );
+  assert.doesNotMatch(
+    truth.queries.adv_chem_02.judgments["362061"].evidence,
+    /rare-earth|rare earth/i,
+  );
 });

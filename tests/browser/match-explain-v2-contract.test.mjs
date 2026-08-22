@@ -108,13 +108,13 @@ test("profile explanations disclose the source type but never private text", () 
   assert.deepEqual([...result.trace.profileSources], ["manual"]);
 });
 
-test("weak metadata and short fuzzy collisions do not receive confident prose", () => {
+test("weak metadata receives no prose and rejected acronym collisions receive no explanation", () => {
   const metadata = explain.buildV2(clone(frame.fixtures.weak_metadata));
   assert.equal(metadata.tier, "weak_lexical");
   assert.deepEqual([...metadata.reasons], []);
   const cfd = phase3.results.find(item => item.id === "weak_cfd_collision");
-  assert.equal(cfd.explanation.tier, "weak_lexical");
-  assert.deepEqual(cfd.explanation.reasons, []);
+  assert.equal(cfd.admitted, false);
+  assert.equal(cfd.explanation, null);
 });
 
 test("the frozen 42-pair explanation truth gate passes without holdout use", () => {

@@ -80,6 +80,59 @@ class SearchV2ContractTests(unittest.TestCase):
         )
         self.assertEqual(generic_scores[0], 0)
 
+    def test_short_technical_query_and_acronym_metadata_match_browser_contract(self):
+        minerals = expand_query_groups(
+            "critical mineral separations",
+            search_v2=True,
+        )
+        self.assertEqual(
+            [group.get("concept_id") for group in minerals],
+            ["critical-minerals", "separations"],
+        )
+        self.assertEqual(minerals[0].get("evidence_policy"), "controlled_compound")
+        self.assertEqual(minerals[1].get("evidence_policy"), "technical_separation")
+
+        navigation = expand_query_groups("quantum navigation", search_v2=True)
+        self.assertIn(("pnt", 0.86), navigation[1]["terms"])
+
+        acronym = expand_query_groups("CFD", postings={"cfd": [0, 1]}, search_v2=True)
+        self.assertTrue(acronym[0]["exact_indexed_acronym"])
+
+    def test_short_technical_admission_and_acronym_resolution_match_browser_contract(self):
+        technical = _record(
+            "technical",
+            "Critical mineral separation research",
+            "Chemical processing and recovery research for critical mineral resources.",
+        )
+        policy = _record(
+            "policy",
+            "Critical Minerals Policy Workshop",
+            "A workshop on mineral supply policy and international coordination.",
+        )
+        cfd = _record(
+            "cfd",
+            "Computational fluid dynamics research",
+            "CFD methods for turbulent transport.",
+        )
+        cfda = _record(
+            "cfda",
+            "CFDA assistance listing",
+            "Federal assistance catalog information.",
+        )
+        catalog = _catalog([technical, policy, cfd, cfda])
+
+        mineral_scores, _, _ = hybrid_scores(
+            catalog,
+            "critical mineral separations",
+            search_v2=True,
+        )
+        self.assertGreater(mineral_scores[0], 0)
+        self.assertEqual(mineral_scores[1], 0)
+
+        acronym_scores, _, _ = hybrid_scores(catalog, "CFD", search_v2=True)
+        self.assertGreater(acronym_scores[2], 0)
+        self.assertEqual(acronym_scores[3], 0)
+
     def test_explicit_evidence_rejects_policy_and_lexical_collisions(self):
         technical = _record(
             "technical",
