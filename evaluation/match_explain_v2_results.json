@@ -1,0 +1,4035 @@
+{
+  "schema_version": 1,
+  "evaluated_at": "2026-08-22",
+  "phase": 3,
+  "status": "explanation_gates_passed",
+  "production_enabled": false,
+  "frame": "evaluation/match_explain_v2_frame.json",
+  "frame_sha256": "a9624ef7ccd1cc016eeb8c065fb835913793dcf3530c25e4082bbf3232735f1f",
+  "explanation_asset": "assets/match-explain.js",
+  "explanation_asset_sha256": "f74f010d62ab460cf13f99d9448795ce8147794c4f821eabcdefcbf9625cf92f",
+  "explanation_contract_version": 2,
+  "holdout_status": "sealed_not_executed_or_adjudicated",
+  "case_count": 42,
+  "label_counts": {
+    "correct_and_useful": 40,
+    "correct_but_too_shallow": 2,
+    "misleading": 0,
+    "unsupported": 0,
+    "overstated_broad_fit": 0,
+    "privacy_problem": 0
+  },
+  "gates": {
+    "case_count_at_least_30": true,
+    "unsupported_explanations": [],
+    "causal_evidence_violations": [],
+    "review_only_child_leakage": [],
+    "private_profile_excerpt_leakage": [],
+    "tautological_explanations": [],
+    "authoritative_scope_mislabeled_broad": [],
+    "correct_and_useful_rate": 0.952381,
+    "correct_and_useful_rate_at_least_90_percent": true,
+    "individually_reviewed_shallow_cases": [
+      {
+        "id": "weak_cfd_collision",
+        "note": "The result is admitted by the unchanged cross-domain retrieval path, but no honest contextual explanation exists for the CFD-to-CFDA collision."
+      },
+      {
+        "id": "fixture_weak_metadata",
+        "note": "Generic topic metadata is insufficient for a causal scientific explanation and should not be dressed up as one."
+      }
+    ],
+    "maximum_reason_count": 3,
+    "collapsed_by_default": true,
+    "holdout_status": "sealed_not_executed_or_adjudicated"
+  },
+  "results": [
+    {
+      "id": "scope_ree_cps",
+      "source": "catalog_search",
+      "query": "REE separations",
+      "result_id": "362061",
+      "result_title": "Chemical Process Systems (CPS)",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "authoritative_scope",
+        "admission_path": "authoritative_scope_entailment",
+        "required_codes": [
+          "query_interpretation",
+          "authoritative_scope",
+          "controlled_relationship"
+        ],
+        "forbidden_labels": [
+          "Broader program fit"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "authoritative_scope",
+        "label": "Primary program-scope match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "authoritative_scope_entailment",
+        "reasons": [
+          {
+            "code": "authoritative_scope",
+            "text": "Authoritative program scope: “Chemical Process Systems — Critical Minerals and Separations”.",
+            "evidence": {
+              "path": "authoritative_scope_entailment",
+              "kind": "parent_program_scope",
+              "field": "parent_program_scope",
+              "sourceLabel": "Chemical Process Systems — Critical Minerals and Separations"
+            }
+          },
+          {
+            "code": "controlled_relationship",
+            "text": "Controlled relationship: Rare-earth elements are a subset of critical minerals; rare-earth separation is contained within chemical separation processes.",
+            "evidence": {
+              "path": "authoritative_scope_entailment",
+              "relationships": [
+                "rare-earth elements are a subset of critical minerals",
+                "rare-earth separation is contained within chemical separation processes"
+              ]
+            }
+          },
+          {
+            "code": "query_interpretation",
+            "text": "Interpreted “REE” as rare-earth elements.",
+            "evidence": {
+              "canonicalConcept": "rare-earth-elements",
+              "userForm": "REE"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "authoritative_scope_entailment",
+              "entailmentId": "nsf-cps-critical-minerals-separations-ree",
+              "coveredConcepts": [
+                "rare-earth-elements",
+                "separations"
+              ],
+              "authoritativeScope": {
+                "kind": "parent_program_scope",
+                "record_id": "362061",
+                "label": "Chemical Process Systems — Critical Minerals and Separations",
+                "source_url": "https://www.nsf.gov/funding/pgm_summ.jsp?pims_id=506547"
+              },
+              "controlledRelationships": [
+                "rare-earth elements are a subset of critical minerals",
+                "rare-earth separation is contained within chemical separation processes",
+                "ionic-liquid extraction is a specialization of chemical separation"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "authoritative_scope",
+              "contribution": 1
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "separations",
+              "contribution": 12.042805334004708
+            },
+            {
+              "type": "topic_rerank",
+              "contribution": 9.844460952471115
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "authoritative_scope_entailment",
+              "kind": "parent_program_scope",
+              "field": "parent_program_scope",
+              "sourceLabel": "Chemical Process Systems — Critical Minerals and Separations"
+            },
+            {
+              "path": "authoritative_scope_entailment",
+              "relationships": [
+                "rare-earth elements are a subset of critical minerals",
+                "rare-earth separation is contained within chemical separation processes"
+              ]
+            },
+            {
+              "canonicalConcept": "rare-earth-elements",
+              "userForm": "REE"
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "scope_ree_doe",
+      "source": "catalog_search",
+      "query": "REE separations",
+      "result_id": "360678",
+      "result_title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "authoritative_scope",
+        "admission_path": "authoritative_scope_entailment",
+        "required_codes": [
+          "query_interpretation",
+          "authoritative_scope",
+          "controlled_relationship"
+        ],
+        "forbidden_labels": [
+          "Broader program fit"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "authoritative_scope",
+        "label": "Primary program-scope match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "authoritative_scope_entailment",
+        "reasons": [
+          {
+            "code": "authoritative_scope",
+            "text": "Authoritative program scope: “Basic Energy Sciences — Separation Science”.",
+            "evidence": {
+              "path": "authoritative_scope_entailment",
+              "kind": "controlled_program_area",
+              "field": "controlled_program_area",
+              "sourceLabel": "Basic Energy Sciences — Separation Science"
+            }
+          },
+          {
+            "code": "controlled_relationship",
+            "text": "Controlled relationship: Rare-earth separation is a specialization of separation science.",
+            "evidence": {
+              "path": "authoritative_scope_entailment",
+              "relationships": [
+                "rare-earth separation is a specialization of separation science"
+              ]
+            }
+          },
+          {
+            "code": "query_interpretation",
+            "text": "Interpreted “REE” as rare-earth elements.",
+            "evidence": {
+              "canonicalConcept": "rare-earth-elements",
+              "userForm": "REE"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "authoritative_scope_entailment",
+              "entailmentId": "doe-bes-separation-science-ree",
+              "coveredConcepts": [
+                "rare-earth-elements",
+                "separations"
+              ],
+              "authoritativeScope": {
+                "kind": "controlled_program_area",
+                "record_id": "360678:rss",
+                "label": "Basic Energy Sciences — Separation Science",
+                "source_url": "https://science.osti.gov"
+              },
+              "controlledRelationships": [
+                "rare-earth separation is a specialization of separation science",
+                "ionic-liquid extraction is a specialization of chemical separation"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "authoritative_scope",
+              "contribution": 1
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "separations",
+              "contribution": 9.4800698035015
+            },
+            {
+              "type": "topic_rerank",
+              "contribution": 9.844460952471115
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "authoritative_scope_entailment",
+              "kind": "controlled_program_area",
+              "field": "controlled_program_area",
+              "sourceLabel": "Basic Energy Sciences — Separation Science"
+            },
+            {
+              "path": "authoritative_scope_entailment",
+              "relationships": [
+                "rare-earth separation is a specialization of separation science"
+              ]
+            },
+            {
+              "canonicalConcept": "rare-earth-elements",
+              "userForm": "REE"
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "scope_ree_genesis",
+      "source": "catalog_search",
+      "query": "REE separations",
+      "result_id": "361526",
+      "result_title": "The Genesis Mission: Transforming Science and Energy with AI",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "authoritative_scope",
+        "admission_path": "authoritative_scope_entailment",
+        "required_codes": [
+          "query_interpretation",
+          "authoritative_scope",
+          "controlled_relationship"
+        ],
+        "forbidden_labels": [
+          "Broader program fit"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "authoritative_scope",
+        "label": "Primary program-scope match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "authoritative_scope_entailment",
+        "reasons": [
+          {
+            "code": "authoritative_scope",
+            "text": "Authoritative program scope: “Securing America’s Critical Minerals Supply — Extraction and Processing Technologies”.",
+            "evidence": {
+              "path": "authoritative_scope_entailment",
+              "kind": "publication_eligible_child",
+              "field": "publication_eligible_child",
+              "sourceLabel": "Securing America’s Critical Minerals Supply — Extraction and Processing Technologies"
+            }
+          },
+          {
+            "code": "controlled_relationship",
+            "text": "Controlled relationship: Rare-earth elements are a subset of critical minerals; rare-earth separation is an extraction, processing, or recovery operation.",
+            "evidence": {
+              "path": "authoritative_scope_entailment",
+              "relationships": [
+                "rare-earth elements are a subset of critical minerals",
+                "rare-earth separation is an extraction, processing, or recovery operation"
+              ]
+            }
+          },
+          {
+            "code": "query_interpretation",
+            "text": "Interpreted “REE” as rare-earth elements.",
+            "evidence": {
+              "canonicalConcept": "rare-earth-elements",
+              "userForm": "REE"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "authoritative_scope_entailment",
+              "entailmentId": "genesis-critical-minerals-extraction-ree",
+              "coveredConcepts": [
+                "rare-earth-elements",
+                "separations"
+              ],
+              "authoritativeScope": {
+                "kind": "publication_eligible_child",
+                "record_id": "361526:d-3",
+                "label": "Securing America’s Critical Minerals Supply — Extraction and Processing Technologies",
+                "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/350588"
+              },
+              "controlledRelationships": [
+                "rare-earth elements are a subset of critical minerals",
+                "rare-earth separation is an extraction, processing, or recovery operation",
+                "ionic-liquid extraction is a specialization of extraction and processing"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "authoritative_scope",
+              "contribution": 1
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "authoritative_scope_entailment",
+              "kind": "publication_eligible_child",
+              "field": "publication_eligible_child",
+              "sourceLabel": "Securing America’s Critical Minerals Supply — Extraction and Processing Technologies"
+            },
+            {
+              "path": "authoritative_scope_entailment",
+              "relationships": [
+                "rare-earth elements are a subset of critical minerals",
+                "rare-earth separation is an extraction, processing, or recovery operation"
+              ]
+            },
+            {
+              "canonicalConcept": "rare-earth-elements",
+              "userForm": "REE"
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "scope_phrase_cps",
+      "source": "catalog_search",
+      "query": "rare earth separations",
+      "result_id": "362061",
+      "result_title": "Chemical Process Systems (CPS)",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "authoritative_scope",
+        "admission_path": "authoritative_scope_entailment",
+        "required_codes": [
+          "authoritative_scope",
+          "controlled_relationship"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "authoritative_scope",
+        "label": "Primary program-scope match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "authoritative_scope_entailment",
+        "reasons": [
+          {
+            "code": "authoritative_scope",
+            "text": "Authoritative program scope: “Chemical Process Systems — Critical Minerals and Separations”.",
+            "evidence": {
+              "path": "authoritative_scope_entailment",
+              "kind": "parent_program_scope",
+              "field": "parent_program_scope",
+              "sourceLabel": "Chemical Process Systems — Critical Minerals and Separations"
+            }
+          },
+          {
+            "code": "controlled_relationship",
+            "text": "Controlled relationship: Rare-earth elements are a subset of critical minerals; rare-earth separation is contained within chemical separation processes.",
+            "evidence": {
+              "path": "authoritative_scope_entailment",
+              "relationships": [
+                "rare-earth elements are a subset of critical minerals",
+                "rare-earth separation is contained within chemical separation processes"
+              ]
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "authoritative_scope_entailment",
+              "entailmentId": "nsf-cps-critical-minerals-separations-ree",
+              "coveredConcepts": [
+                "rare-earth-elements",
+                "separations"
+              ],
+              "authoritativeScope": {
+                "kind": "parent_program_scope",
+                "record_id": "362061",
+                "label": "Chemical Process Systems — Critical Minerals and Separations",
+                "source_url": "https://www.nsf.gov/funding/pgm_summ.jsp?pims_id=506547"
+              },
+              "controlledRelationships": [
+                "rare-earth elements are a subset of critical minerals",
+                "rare-earth separation is contained within chemical separation processes",
+                "ionic-liquid extraction is a specialization of chemical separation"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "authoritative_scope",
+              "contribution": 1
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "separations",
+              "contribution": 12.042805334004708
+            },
+            {
+              "type": "topic_rerank",
+              "contribution": 9.844460952471115
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "authoritative_scope_entailment",
+              "kind": "parent_program_scope",
+              "field": "parent_program_scope",
+              "sourceLabel": "Chemical Process Systems — Critical Minerals and Separations"
+            },
+            {
+              "path": "authoritative_scope_entailment",
+              "relationships": [
+                "rare-earth elements are a subset of critical minerals",
+                "rare-earth separation is contained within chemical separation processes"
+              ]
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "scope_phrase_doe",
+      "source": "catalog_search",
+      "query": "rare earth separations",
+      "result_id": "360678",
+      "result_title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "authoritative_scope",
+        "admission_path": "authoritative_scope_entailment",
+        "required_codes": [
+          "authoritative_scope",
+          "controlled_relationship"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "authoritative_scope",
+        "label": "Primary program-scope match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "authoritative_scope_entailment",
+        "reasons": [
+          {
+            "code": "authoritative_scope",
+            "text": "Authoritative program scope: “Basic Energy Sciences — Separation Science”.",
+            "evidence": {
+              "path": "authoritative_scope_entailment",
+              "kind": "controlled_program_area",
+              "field": "controlled_program_area",
+              "sourceLabel": "Basic Energy Sciences — Separation Science"
+            }
+          },
+          {
+            "code": "controlled_relationship",
+            "text": "Controlled relationship: Rare-earth separation is a specialization of separation science.",
+            "evidence": {
+              "path": "authoritative_scope_entailment",
+              "relationships": [
+                "rare-earth separation is a specialization of separation science"
+              ]
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "authoritative_scope_entailment",
+              "entailmentId": "doe-bes-separation-science-ree",
+              "coveredConcepts": [
+                "rare-earth-elements",
+                "separations"
+              ],
+              "authoritativeScope": {
+                "kind": "controlled_program_area",
+                "record_id": "360678:rss",
+                "label": "Basic Energy Sciences — Separation Science",
+                "source_url": "https://science.osti.gov"
+              },
+              "controlledRelationships": [
+                "rare-earth separation is a specialization of separation science",
+                "ionic-liquid extraction is a specialization of chemical separation"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "authoritative_scope",
+              "contribution": 1
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "separations",
+              "contribution": 9.4800698035015
+            },
+            {
+              "type": "topic_rerank",
+              "contribution": 9.844460952471115
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "authoritative_scope_entailment",
+              "kind": "controlled_program_area",
+              "field": "controlled_program_area",
+              "sourceLabel": "Basic Energy Sciences — Separation Science"
+            },
+            {
+              "path": "authoritative_scope_entailment",
+              "relationships": [
+                "rare-earth separation is a specialization of separation science"
+              ]
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "scope_phrase_genesis",
+      "source": "catalog_search",
+      "query": "rare earth separations",
+      "result_id": "361526",
+      "result_title": "The Genesis Mission: Transforming Science and Energy with AI",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "authoritative_scope",
+        "admission_path": "authoritative_scope_entailment",
+        "required_codes": [
+          "authoritative_scope",
+          "controlled_relationship"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "authoritative_scope",
+        "label": "Primary program-scope match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "authoritative_scope_entailment",
+        "reasons": [
+          {
+            "code": "authoritative_scope",
+            "text": "Authoritative program scope: “Securing America’s Critical Minerals Supply — Extraction and Processing Technologies”.",
+            "evidence": {
+              "path": "authoritative_scope_entailment",
+              "kind": "publication_eligible_child",
+              "field": "publication_eligible_child",
+              "sourceLabel": "Securing America’s Critical Minerals Supply — Extraction and Processing Technologies"
+            }
+          },
+          {
+            "code": "controlled_relationship",
+            "text": "Controlled relationship: Rare-earth elements are a subset of critical minerals; rare-earth separation is an extraction, processing, or recovery operation.",
+            "evidence": {
+              "path": "authoritative_scope_entailment",
+              "relationships": [
+                "rare-earth elements are a subset of critical minerals",
+                "rare-earth separation is an extraction, processing, or recovery operation"
+              ]
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "authoritative_scope_entailment",
+              "entailmentId": "genesis-critical-minerals-extraction-ree",
+              "coveredConcepts": [
+                "rare-earth-elements",
+                "separations"
+              ],
+              "authoritativeScope": {
+                "kind": "publication_eligible_child",
+                "record_id": "361526:d-3",
+                "label": "Securing America’s Critical Minerals Supply — Extraction and Processing Technologies",
+                "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/350588"
+              },
+              "controlledRelationships": [
+                "rare-earth elements are a subset of critical minerals",
+                "rare-earth separation is an extraction, processing, or recovery operation",
+                "ionic-liquid extraction is a specialization of extraction and processing"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "authoritative_scope",
+              "contribution": 1
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "authoritative_scope_entailment",
+              "kind": "publication_eligible_child",
+              "field": "publication_eligible_child",
+              "sourceLabel": "Securing America’s Critical Minerals Supply — Extraction and Processing Technologies"
+            },
+            {
+              "path": "authoritative_scope_entailment",
+              "relationships": [
+                "rare-earth elements are a subset of critical minerals",
+                "rare-earth separation is an extraction, processing, or recovery operation"
+              ]
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "scope_solvent_cps",
+      "source": "catalog_search",
+      "query": "solvent extraction of REEs",
+      "result_id": "362061",
+      "result_title": "Chemical Process Systems (CPS)",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "authoritative_scope",
+        "admission_path": "authoritative_scope_entailment",
+        "required_codes": [
+          "query_interpretation",
+          "authoritative_scope",
+          "controlled_relationship"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "authoritative_scope",
+        "label": "Primary program-scope match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "authoritative_scope_entailment",
+        "reasons": [
+          {
+            "code": "authoritative_scope",
+            "text": "Authoritative program scope: “Chemical Process Systems — Critical Minerals and Separations”.",
+            "evidence": {
+              "path": "authoritative_scope_entailment",
+              "kind": "parent_program_scope",
+              "field": "parent_program_scope",
+              "sourceLabel": "Chemical Process Systems — Critical Minerals and Separations"
+            }
+          },
+          {
+            "code": "controlled_relationship",
+            "text": "Controlled relationship: Rare-earth elements are a subset of critical minerals; rare-earth separation is contained within chemical separation processes.",
+            "evidence": {
+              "path": "authoritative_scope_entailment",
+              "relationships": [
+                "rare-earth elements are a subset of critical minerals",
+                "rare-earth separation is contained within chemical separation processes"
+              ]
+            }
+          },
+          {
+            "code": "query_interpretation",
+            "text": "Interpreted “REEs” as rare-earth elements.",
+            "evidence": {
+              "canonicalConcept": "rare-earth-elements",
+              "userForm": "REEs"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "authoritative_scope_entailment",
+              "entailmentId": "nsf-cps-critical-minerals-separations-ree",
+              "coveredConcepts": [
+                "separations",
+                "rare-earth-elements"
+              ],
+              "authoritativeScope": {
+                "kind": "parent_program_scope",
+                "record_id": "362061",
+                "label": "Chemical Process Systems — Critical Minerals and Separations",
+                "source_url": "https://www.nsf.gov/funding/pgm_summ.jsp?pims_id=506547"
+              },
+              "controlledRelationships": [
+                "rare-earth elements are a subset of critical minerals",
+                "rare-earth separation is contained within chemical separation processes",
+                "ionic-liquid extraction is a specialization of chemical separation"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "authoritative_scope",
+              "contribution": 1
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "authoritative_scope_entailment",
+              "kind": "parent_program_scope",
+              "field": "parent_program_scope",
+              "sourceLabel": "Chemical Process Systems — Critical Minerals and Separations"
+            },
+            {
+              "path": "authoritative_scope_entailment",
+              "relationships": [
+                "rare-earth elements are a subset of critical minerals",
+                "rare-earth separation is contained within chemical separation processes"
+              ]
+            },
+            {
+              "canonicalConcept": "rare-earth-elements",
+              "userForm": "REEs"
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "scope_solvent_doe",
+      "source": "catalog_search",
+      "query": "solvent extraction of REEs",
+      "result_id": "360678",
+      "result_title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "authoritative_scope",
+        "admission_path": "authoritative_scope_entailment",
+        "required_codes": [
+          "query_interpretation",
+          "authoritative_scope",
+          "controlled_relationship"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "authoritative_scope",
+        "label": "Primary program-scope match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "authoritative_scope_entailment",
+        "reasons": [
+          {
+            "code": "authoritative_scope",
+            "text": "Authoritative program scope: “Basic Energy Sciences — Separation Science”.",
+            "evidence": {
+              "path": "authoritative_scope_entailment",
+              "kind": "controlled_program_area",
+              "field": "controlled_program_area",
+              "sourceLabel": "Basic Energy Sciences — Separation Science"
+            }
+          },
+          {
+            "code": "controlled_relationship",
+            "text": "Controlled relationship: Rare-earth separation is a specialization of separation science.",
+            "evidence": {
+              "path": "authoritative_scope_entailment",
+              "relationships": [
+                "rare-earth separation is a specialization of separation science"
+              ]
+            }
+          },
+          {
+            "code": "query_interpretation",
+            "text": "Interpreted “REEs” as rare-earth elements.",
+            "evidence": {
+              "canonicalConcept": "rare-earth-elements",
+              "userForm": "REEs"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "authoritative_scope_entailment",
+              "entailmentId": "doe-bes-separation-science-ree",
+              "coveredConcepts": [
+                "separations",
+                "rare-earth-elements"
+              ],
+              "authoritativeScope": {
+                "kind": "controlled_program_area",
+                "record_id": "360678:rss",
+                "label": "Basic Energy Sciences — Separation Science",
+                "source_url": "https://science.osti.gov"
+              },
+              "controlledRelationships": [
+                "rare-earth separation is a specialization of separation science",
+                "ionic-liquid extraction is a specialization of chemical separation"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "authoritative_scope",
+              "contribution": 1
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "authoritative_scope_entailment",
+              "kind": "controlled_program_area",
+              "field": "controlled_program_area",
+              "sourceLabel": "Basic Energy Sciences — Separation Science"
+            },
+            {
+              "path": "authoritative_scope_entailment",
+              "relationships": [
+                "rare-earth separation is a specialization of separation science"
+              ]
+            },
+            {
+              "canonicalConcept": "rare-earth-elements",
+              "userForm": "REEs"
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "scope_solvent_genesis",
+      "source": "catalog_search",
+      "query": "solvent extraction of REEs",
+      "result_id": "361526",
+      "result_title": "The Genesis Mission: Transforming Science and Energy with AI",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "authoritative_scope",
+        "admission_path": "authoritative_scope_entailment",
+        "required_codes": [
+          "query_interpretation",
+          "authoritative_scope",
+          "controlled_relationship"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "authoritative_scope",
+        "label": "Primary program-scope match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "authoritative_scope_entailment",
+        "reasons": [
+          {
+            "code": "authoritative_scope",
+            "text": "Authoritative program scope: “Securing America’s Critical Minerals Supply — Extraction and Processing Technologies”.",
+            "evidence": {
+              "path": "authoritative_scope_entailment",
+              "kind": "publication_eligible_child",
+              "field": "publication_eligible_child",
+              "sourceLabel": "Securing America’s Critical Minerals Supply — Extraction and Processing Technologies"
+            }
+          },
+          {
+            "code": "controlled_relationship",
+            "text": "Controlled relationship: Rare-earth elements are a subset of critical minerals; rare-earth separation is an extraction, processing, or recovery operation.",
+            "evidence": {
+              "path": "authoritative_scope_entailment",
+              "relationships": [
+                "rare-earth elements are a subset of critical minerals",
+                "rare-earth separation is an extraction, processing, or recovery operation"
+              ]
+            }
+          },
+          {
+            "code": "query_interpretation",
+            "text": "Interpreted “REEs” as rare-earth elements.",
+            "evidence": {
+              "canonicalConcept": "rare-earth-elements",
+              "userForm": "REEs"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "authoritative_scope_entailment",
+              "entailmentId": "genesis-critical-minerals-extraction-ree",
+              "coveredConcepts": [
+                "separations",
+                "rare-earth-elements"
+              ],
+              "authoritativeScope": {
+                "kind": "publication_eligible_child",
+                "record_id": "361526:d-3",
+                "label": "Securing America’s Critical Minerals Supply — Extraction and Processing Technologies",
+                "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/350588"
+              },
+              "controlledRelationships": [
+                "rare-earth elements are a subset of critical minerals",
+                "rare-earth separation is an extraction, processing, or recovery operation",
+                "ionic-liquid extraction is a specialization of extraction and processing"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "authoritative_scope",
+              "contribution": 1
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "authoritative_scope_entailment",
+              "kind": "publication_eligible_child",
+              "field": "publication_eligible_child",
+              "sourceLabel": "Securing America’s Critical Minerals Supply — Extraction and Processing Technologies"
+            },
+            {
+              "path": "authoritative_scope_entailment",
+              "relationships": [
+                "rare-earth elements are a subset of critical minerals",
+                "rare-earth separation is an extraction, processing, or recovery operation"
+              ]
+            },
+            {
+              "canonicalConcept": "rare-earth-elements",
+              "userForm": "REEs"
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "scope_ionic_cps",
+      "source": "catalog_search",
+      "query": "ionic liquids for REE extraction",
+      "result_id": "362061",
+      "result_title": "Chemical Process Systems (CPS)",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "authoritative_scope",
+        "admission_path": "authoritative_scope_entailment",
+        "required_codes": [
+          "query_interpretation",
+          "authoritative_scope",
+          "controlled_relationship"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "authoritative_scope",
+        "label": "Primary program-scope match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "authoritative_scope_entailment",
+        "reasons": [
+          {
+            "code": "authoritative_scope",
+            "text": "Authoritative program scope: “Chemical Process Systems — Critical Minerals and Separations”.",
+            "evidence": {
+              "path": "authoritative_scope_entailment",
+              "kind": "parent_program_scope",
+              "field": "parent_program_scope",
+              "sourceLabel": "Chemical Process Systems — Critical Minerals and Separations"
+            }
+          },
+          {
+            "code": "controlled_relationship",
+            "text": "Controlled relationship: Rare-earth elements are a subset of critical minerals; rare-earth separation is contained within chemical separation processes.",
+            "evidence": {
+              "path": "authoritative_scope_entailment",
+              "relationships": [
+                "rare-earth elements are a subset of critical minerals",
+                "rare-earth separation is contained within chemical separation processes"
+              ]
+            }
+          },
+          {
+            "code": "query_interpretation",
+            "text": "Interpreted “REE” as rare-earth elements.",
+            "evidence": {
+              "canonicalConcept": "rare-earth-elements",
+              "userForm": "REE"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "authoritative_scope_entailment",
+              "entailmentId": "nsf-cps-critical-minerals-separations-ree",
+              "coveredConcepts": [
+                "ionic-liquid-extraction",
+                "rare-earth-elements",
+                "separations"
+              ],
+              "authoritativeScope": {
+                "kind": "parent_program_scope",
+                "record_id": "362061",
+                "label": "Chemical Process Systems — Critical Minerals and Separations",
+                "source_url": "https://www.nsf.gov/funding/pgm_summ.jsp?pims_id=506547"
+              },
+              "controlledRelationships": [
+                "rare-earth elements are a subset of critical minerals",
+                "rare-earth separation is contained within chemical separation processes",
+                "ionic-liquid extraction is a specialization of chemical separation"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "authoritative_scope",
+              "contribution": 1
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "ionic-liquid-extraction",
+              "contribution": 15.871000047132213
+            },
+            {
+              "type": "topic_rerank",
+              "contribution": 15.427309013456355
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "authoritative_scope_entailment",
+              "kind": "parent_program_scope",
+              "field": "parent_program_scope",
+              "sourceLabel": "Chemical Process Systems — Critical Minerals and Separations"
+            },
+            {
+              "path": "authoritative_scope_entailment",
+              "relationships": [
+                "rare-earth elements are a subset of critical minerals",
+                "rare-earth separation is contained within chemical separation processes"
+              ]
+            },
+            {
+              "canonicalConcept": "rare-earth-elements",
+              "userForm": "REE"
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "scope_ionic_doe",
+      "source": "catalog_search",
+      "query": "ionic liquids for REE extraction",
+      "result_id": "360678",
+      "result_title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "authoritative_scope",
+        "admission_path": "authoritative_scope_entailment",
+        "required_codes": [
+          "query_interpretation",
+          "authoritative_scope",
+          "controlled_relationship"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "authoritative_scope",
+        "label": "Primary program-scope match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "authoritative_scope_entailment",
+        "reasons": [
+          {
+            "code": "authoritative_scope",
+            "text": "Authoritative program scope: “Basic Energy Sciences — Separation Science”.",
+            "evidence": {
+              "path": "authoritative_scope_entailment",
+              "kind": "controlled_program_area",
+              "field": "controlled_program_area",
+              "sourceLabel": "Basic Energy Sciences — Separation Science"
+            }
+          },
+          {
+            "code": "controlled_relationship",
+            "text": "Controlled relationship: Rare-earth separation is a specialization of separation science; ionic-liquid extraction is a specialization of chemical separation.",
+            "evidence": {
+              "path": "authoritative_scope_entailment",
+              "relationships": [
+                "rare-earth separation is a specialization of separation science",
+                "ionic-liquid extraction is a specialization of chemical separation"
+              ]
+            }
+          },
+          {
+            "code": "query_interpretation",
+            "text": "Interpreted “REE” as rare-earth elements.",
+            "evidence": {
+              "canonicalConcept": "rare-earth-elements",
+              "userForm": "REE"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "authoritative_scope_entailment",
+              "entailmentId": "doe-bes-separation-science-ree",
+              "coveredConcepts": [
+                "ionic-liquid-extraction",
+                "rare-earth-elements",
+                "separations"
+              ],
+              "authoritativeScope": {
+                "kind": "controlled_program_area",
+                "record_id": "360678:rss",
+                "label": "Basic Energy Sciences — Separation Science",
+                "source_url": "https://science.osti.gov"
+              },
+              "controlledRelationships": [
+                "rare-earth separation is a specialization of separation science",
+                "ionic-liquid extraction is a specialization of chemical separation"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "authoritative_scope",
+              "contribution": 1
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "ionic-liquid-extraction",
+              "contribution": 12.40167101903114
+            },
+            {
+              "type": "topic_rerank",
+              "contribution": 15.427309013456355
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "authoritative_scope_entailment",
+              "kind": "controlled_program_area",
+              "field": "controlled_program_area",
+              "sourceLabel": "Basic Energy Sciences — Separation Science"
+            },
+            {
+              "path": "authoritative_scope_entailment",
+              "relationships": [
+                "rare-earth separation is a specialization of separation science",
+                "ionic-liquid extraction is a specialization of chemical separation"
+              ]
+            },
+            {
+              "canonicalConcept": "rare-earth-elements",
+              "userForm": "REE"
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "scope_ionic_genesis",
+      "source": "catalog_search",
+      "query": "ionic liquids for REE extraction",
+      "result_id": "361526",
+      "result_title": "The Genesis Mission: Transforming Science and Energy with AI",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "authoritative_scope",
+        "admission_path": "authoritative_scope_entailment",
+        "required_codes": [
+          "query_interpretation",
+          "authoritative_scope",
+          "controlled_relationship"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "authoritative_scope",
+        "label": "Primary program-scope match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "authoritative_scope_entailment",
+        "reasons": [
+          {
+            "code": "authoritative_scope",
+            "text": "Authoritative program scope: “Securing America’s Critical Minerals Supply — Extraction and Processing Technologies”.",
+            "evidence": {
+              "path": "authoritative_scope_entailment",
+              "kind": "publication_eligible_child",
+              "field": "publication_eligible_child",
+              "sourceLabel": "Securing America’s Critical Minerals Supply — Extraction and Processing Technologies"
+            }
+          },
+          {
+            "code": "controlled_relationship",
+            "text": "Controlled relationship: Rare-earth elements are a subset of critical minerals; rare-earth separation is an extraction, processing, or recovery operation.",
+            "evidence": {
+              "path": "authoritative_scope_entailment",
+              "relationships": [
+                "rare-earth elements are a subset of critical minerals",
+                "rare-earth separation is an extraction, processing, or recovery operation"
+              ]
+            }
+          },
+          {
+            "code": "query_interpretation",
+            "text": "Interpreted “REE” as rare-earth elements.",
+            "evidence": {
+              "canonicalConcept": "rare-earth-elements",
+              "userForm": "REE"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "authoritative_scope_entailment",
+              "entailmentId": "genesis-critical-minerals-extraction-ree",
+              "coveredConcepts": [
+                "ionic-liquid-extraction",
+                "rare-earth-elements",
+                "separations"
+              ],
+              "authoritativeScope": {
+                "kind": "publication_eligible_child",
+                "record_id": "361526:d-3",
+                "label": "Securing America’s Critical Minerals Supply — Extraction and Processing Technologies",
+                "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/350588"
+              },
+              "controlledRelationships": [
+                "rare-earth elements are a subset of critical minerals",
+                "rare-earth separation is an extraction, processing, or recovery operation",
+                "ionic-liquid extraction is a specialization of extraction and processing"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "authoritative_scope",
+              "contribution": 1
+            },
+            {
+              "type": "topic_rerank",
+              "contribution": 12.128333766919711
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "authoritative_scope_entailment",
+              "kind": "publication_eligible_child",
+              "field": "publication_eligible_child",
+              "sourceLabel": "Securing America’s Critical Minerals Supply — Extraction and Processing Technologies"
+            },
+            {
+              "path": "authoritative_scope_entailment",
+              "relationships": [
+                "rare-earth elements are a subset of critical minerals",
+                "rare-earth separation is an extraction, processing, or recovery operation"
+              ]
+            },
+            {
+              "canonicalConcept": "rare-earth-elements",
+              "userForm": "REE"
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "exact_doe_number",
+      "source": "catalog_search",
+      "query": "DE-FOA-0003600",
+      "result_id": "360678",
+      "result_title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "direct",
+        "required_codes": [
+          "exact_opportunity_number"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "direct",
+        "label": "Exact identifier match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "exact_phrase_or_identifier",
+        "reasons": [
+          {
+            "code": "exact_opportunity_number",
+            "text": "Exact opportunity-number match: “DE-FOA-0003600”.",
+            "evidence": {
+              "path": "exact_phrase_or_identifier",
+              "field": "opportunity_number"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "role": "",
+              "fields": []
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "lexical_concept",
+              "conceptId": "",
+              "contribution": 11.261472578816457
+            },
+            {
+              "type": "exact_phrase_or_identifier"
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "exact_phrase_or_identifier",
+              "field": "opportunity_number"
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": true,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "exact_genesis_number",
+      "source": "catalog_search",
+      "query": "DE-FOA-0003612",
+      "result_id": "361526",
+      "result_title": "The Genesis Mission: Transforming Science and Energy with AI",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "direct",
+        "required_codes": [
+          "exact_opportunity_number"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "direct",
+        "label": "Exact identifier match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "exact_phrase_or_identifier",
+        "reasons": [
+          {
+            "code": "exact_opportunity_number",
+            "text": "Exact opportunity-number match: “DE-FOA-0003612”.",
+            "evidence": {
+              "path": "exact_phrase_or_identifier",
+              "field": "opportunity_number"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "role": "",
+              "fields": [
+                "citation_source_evidence"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "lexical_concept",
+              "conceptId": "",
+              "contribution": 12.56387823957213
+            },
+            {
+              "type": "exact_phrase_or_identifier"
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "exact_phrase_or_identifier",
+              "field": "opportunity_number"
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": true,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "exact_cps_title",
+      "source": "catalog_search",
+      "query": "Chemical Process Systems",
+      "result_id": "362061",
+      "result_title": "Chemical Process Systems (CPS)",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "direct",
+        "required_codes": [
+          "exact_title"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "direct",
+        "label": "Exact title match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "exact_phrase_or_identifier",
+        "reasons": [
+          {
+            "code": "exact_title",
+            "text": "Exact opportunity-title match: “Chemical Process Systems (CPS)”.",
+            "evidence": {
+              "path": "exact_phrase_or_identifier",
+              "field": "parent_title"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "role": "",
+              "fields": [
+                "parent_title",
+                "parent_description"
+              ]
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "role": "",
+              "fields": [
+                "parent_title",
+                "parent_description"
+              ]
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "role": "",
+              "fields": [
+                "parent_title",
+                "parent_description"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "lexical_concept",
+              "conceptId": "",
+              "contribution": 6.96237363521464
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "",
+              "contribution": 3.246098037723672
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "",
+              "contribution": 2.732826653821175
+            },
+            {
+              "type": "topic_rerank",
+              "contribution": 3.169064112377149
+            },
+            {
+              "type": "exact_phrase_or_identifier"
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "exact_phrase_or_identifier",
+              "field": "parent_title"
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": true,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "child_genesis_catalyst",
+      "source": "catalog_search",
+      "query": "catalyst design",
+      "result_id": "361526",
+      "result_title": "The Genesis Mission: Transforming Science and Energy with AI",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "direct",
+        "required_codes": [
+          "child_hierarchy",
+          "field_context"
+        ],
+        "required_text": [
+          "Electrochemical Energy Conversion Catalyst Discovery and Scale up"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "direct",
+        "label": "Subprogram match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "explicit_evidence",
+        "reasons": [
+          {
+            "code": "child_hierarchy",
+            "text": "Matched through the publication-eligible subprogram “Electrochemical Energy Conversion Catalyst Discovery and Scale up”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "field": "child_hierarchy",
+              "childTitle": "Electrochemical Energy Conversion Catalyst Discovery and Scale up",
+              "childId": "361526:g-12",
+              "publicationState": "publishable"
+            }
+          },
+          {
+            "code": "field_context",
+            "text": "The subprogram summary provides the matching context: “Focus Area: Electrochemical Energy Conversion Catalyst Discovery and Scale up”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "field": "child_summary",
+              "terms": [
+                "catalyst",
+                "design"
+              ],
+              "admissionRole": "admission"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "role": "",
+              "fields": [
+                "child_title",
+                "child_summary"
+              ]
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "role": "",
+              "fields": [
+                "child_summary"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "lexical_concept",
+              "conceptId": "",
+              "contribution": 6.752898040826243
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "",
+              "contribution": 2.1611322222876668
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "explicit_evidence",
+              "field": "child_hierarchy",
+              "childTitle": "Electrochemical Energy Conversion Catalyst Discovery and Scale up",
+              "childId": "361526:g-12",
+              "publicationState": "publishable"
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "field": "child_summary",
+              "terms": [
+                "catalyst",
+                "design"
+              ],
+              "admissionRole": "admission"
+            }
+          ],
+          "childDroveMatch": true,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "child_army_electrochemistry",
+      "source": "catalog_search",
+      "query": "catalyst design",
+      "result_id": "344592",
+      "result_title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "direct",
+        "required_codes": [
+          "child_hierarchy",
+          "field_context"
+        ],
+        "required_text": [
+          "Electrochemistry"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "direct",
+        "label": "Subprogram match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "explicit_evidence",
+        "reasons": [
+          {
+            "code": "child_hierarchy",
+            "text": "This umbrella opportunity matched through the publication-eligible subprogram “Electrochemistry”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "field": "child_hierarchy",
+              "childTitle": "Electrochemistry",
+              "childId": "344592:ab-0025",
+              "publicationState": "publishable"
+            }
+          },
+          {
+            "code": "field_context",
+            "text": "The subprogram summary provides the matching context: “This Program supports fundamental electrochemical studies to understand and control the physics and chemistry that govern electrochemical redox reactions and transport of…”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "field": "child_summary",
+              "terms": [
+                "electrocatalysi",
+                "catalysi"
+              ],
+              "admissionRole": "admission"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "role": "",
+              "fields": [
+                "child_summary",
+                "authoritative_program_area"
+              ]
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "role": "",
+              "fields": []
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "lexical_concept",
+              "conceptId": "",
+              "contribution": 10.123015876256773
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "",
+              "contribution": 1.1360331501923073
+            },
+            {
+              "type": "topic_rerank",
+              "contribution": 7.192937735782902
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "explicit_evidence",
+              "field": "child_hierarchy",
+              "childTitle": "Electrochemistry",
+              "childId": "344592:ab-0025",
+              "publicationState": "publishable"
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "field": "child_summary",
+              "terms": [
+                "electrocatalysi",
+                "catalysi"
+              ],
+              "admissionRole": "admission"
+            }
+          ],
+          "childDroveMatch": true,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "child_genesis_exact_title",
+      "source": "catalog_search",
+      "query": "Electrochemical Energy Conversion Catalyst Discovery and Scale up",
+      "result_id": "361526",
+      "result_title": "The Genesis Mission: Transforming Science and Energy with AI",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "direct",
+        "required_codes": [
+          "child_hierarchy"
+        ],
+        "required_text": [
+          "Electrochemical Energy Conversion Catalyst Discovery and Scale up"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "direct",
+        "label": "Subprogram match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "exact_phrase_or_identifier",
+        "reasons": [
+          {
+            "code": "child_hierarchy",
+            "text": "Matched through the publication-eligible subprogram “Electrochemical Energy Conversion Catalyst Discovery and Scale up”.",
+            "evidence": {
+              "path": "exact_phrase_or_identifier",
+              "field": "child_hierarchy",
+              "childTitle": "Electrochemical Energy Conversion Catalyst Discovery and Scale up",
+              "childId": "361526:g-12",
+              "publicationState": "publishable"
+            }
+          },
+          {
+            "code": "field_context",
+            "text": "The subprogram summary provides the matching context: “Focus Area: Electrochemical Energy Conversion Catalyst Discovery and Scale up”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "field": "child_summary",
+              "terms": [
+                "electrochemical",
+                "catalyst",
+                "up",
+                "conversion",
+                "scale",
+                "discovery",
+                "energy"
+              ],
+              "admissionRole": "admission"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "role": "",
+              "fields": [
+                "child_title",
+                "child_summary"
+              ]
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "role": "",
+              "fields": [
+                "child_title",
+                "child_summary"
+              ]
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "role": "",
+              "fields": [
+                "child_title",
+                "child_summary"
+              ]
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "role": "",
+              "fields": [
+                "child_title",
+                "child_summary"
+              ]
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "role": "",
+              "fields": [
+                "child_title",
+                "child_summary"
+              ]
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "role": "",
+              "fields": [
+                "child_title",
+                "child_summary"
+              ]
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "role": "",
+              "fields": [
+                "child_title",
+                "child_summary"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "lexical_concept",
+              "conceptId": "",
+              "contribution": 7.29192592294562
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "",
+              "contribution": 2.1611322222876668
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "",
+              "contribution": 5.531951129251871
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "",
+              "contribution": 6.752898040826243
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "",
+              "contribution": 2.8303432180629624
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "",
+              "contribution": 3.8448069722275613
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "",
+              "contribution": 5.761198408170649
+            },
+            {
+              "type": "exact_phrase_or_identifier"
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "exact_phrase_or_identifier",
+              "field": "child_hierarchy",
+              "childTitle": "Electrochemical Energy Conversion Catalyst Discovery and Scale up",
+              "childId": "361526:g-12",
+              "publicationState": "publishable"
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "field": "child_summary",
+              "terms": [
+                "electrochemical",
+                "catalyst",
+                "up",
+                "conversion",
+                "scale",
+                "discovery",
+                "energy"
+              ],
+              "admissionRole": "admission"
+            }
+          ],
+          "childDroveMatch": true,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": true,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "child_army_summary",
+      "source": "catalog_search",
+      "query": "electrochemistry catalyst",
+      "result_id": "344592",
+      "result_title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "direct",
+        "required_codes": [
+          "child_hierarchy",
+          "field_context"
+        ],
+        "required_text": [
+          "Electrochemistry"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "direct",
+        "label": "Subprogram match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "explicit_evidence",
+        "reasons": [
+          {
+            "code": "child_hierarchy",
+            "text": "This umbrella opportunity matched through the publication-eligible subprogram “Electrochemistry”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "field": "child_hierarchy",
+              "childTitle": "Electrochemistry",
+              "childId": "344592:ab-0025",
+              "publicationState": "publishable"
+            }
+          },
+          {
+            "code": "field_context",
+            "text": "The subprogram summary provides the matching context: “This Program supports fundamental electrochemical studies to understand and control the physics and chemistry that govern electrochemical redox reactions and transport of…”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "field": "child_summary",
+              "terms": [
+                "electrocatalysi",
+                "catalysi"
+              ],
+              "admissionRole": "admission"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "role": "",
+              "fields": [
+                "child_title"
+              ]
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "role": "",
+              "fields": [
+                "child_summary",
+                "authoritative_program_area"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "lexical_concept",
+              "conceptId": "",
+              "contribution": 5.544072380189274
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "",
+              "contribution": 10.123015876256773
+            },
+            {
+              "type": "topic_rerank",
+              "contribution": 6.559188892895719
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "explicit_evidence",
+              "field": "child_hierarchy",
+              "childTitle": "Electrochemistry",
+              "childId": "344592:ab-0025",
+              "publicationState": "publishable"
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "field": "child_summary",
+              "terms": [
+                "electrocatalysi",
+                "catalysi"
+              ],
+              "admissionRole": "admission"
+            }
+          ],
+          "childDroveMatch": true,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "explicit_cps_catalysis",
+      "source": "catalog_search",
+      "query": "catalysis",
+      "result_id": "362061",
+      "result_title": "Chemical Process Systems (CPS)",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "contextual",
+        "required_codes": [
+          "field_context"
+        ],
+        "required_fields": [
+          "parent_description"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "contextual",
+        "label": "Contextual evidence match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "explicit_evidence",
+        "reasons": [
+          {
+            "code": "field_context",
+            "text": "The opportunity description provides the matching context: “Microreactors, membrane and catalytic reactors, atmospheric plasmas, and other novel configurations are of interest”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "field": "parent_description",
+              "terms": [
+                "catalysi",
+                "catalytic"
+              ],
+              "admissionRole": "admission"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "role": "",
+              "fields": [
+                "parent_description",
+                "citation_source_evidence"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "lexical_concept",
+              "conceptId": "",
+              "contribution": 15.419602834459944
+            },
+            {
+              "type": "topic_rerank",
+              "contribution": 10.845592840409312
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "field": "parent_description",
+              "terms": [
+                "catalysi",
+                "catalytic"
+              ],
+              "admissionRole": "admission"
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "explicit_doe_catalysis",
+      "source": "catalog_search",
+      "query": "catalysis",
+      "result_id": "360678",
+      "result_title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "contextual",
+        "required_codes": [
+          "field_context"
+        ],
+        "required_fields": [
+          "citation_source_evidence"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "contextual",
+        "label": "Contextual evidence match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "explicit_evidence",
+        "reasons": [
+          {
+            "code": "field_context",
+            "text": "The official-notice evidence provides the matching context: “Contacts: • Marco Fornari, marc… Full application deadline 2025-11-30 …reactions, particularly with single-site or single-atom catalysts, will not be supported”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "field": "citation_source_evidence",
+              "terms": [
+                "catalysi",
+                "catalyst"
+              ],
+              "admissionRole": "admission"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "role": "",
+              "fields": [
+                "citation_source_evidence"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "lexical_concept",
+              "conceptId": "",
+              "contribution": 11.658071030015673
+            },
+            {
+              "type": "topic_rerank",
+              "contribution": 10.845592840409312
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "field": "citation_source_evidence",
+              "terms": [
+                "catalysi",
+                "catalyst"
+              ],
+              "admissionRole": "admission"
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "explicit_chemistry_catalysis",
+      "source": "catalog_search",
+      "query": "catalysis",
+      "result_id": "347749",
+      "result_title": "Division of Chemistry: Disciplinary Research Programs",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "contextual",
+        "required_codes": [
+          "field_context"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "contextual",
+        "label": "Contextual evidence match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "explicit_evidence",
+        "reasons": [
+          {
+            "code": "field_context",
+            "text": "The opportunity description provides the matching context: “This solicitation applies to six (of the nine) CHE Disciplinary Research Programs: Chemical Catalysis (CAT); Chemical Measurement and Imaging (CMI); Chemical Mechanism, Function…”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "field": "parent_description",
+              "terms": [
+                "catalysi"
+              ],
+              "admissionRole": "admission"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "role": "",
+              "fields": [
+                "parent_description",
+                "citation_source_evidence"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "lexical_concept",
+              "conceptId": "",
+              "contribution": 8.801551834907793
+            },
+            {
+              "type": "topic_rerank",
+              "contribution": 10.845592840409312
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "",
+              "field": "parent_description",
+              "terms": [
+                "catalysi"
+              ],
+              "admissionRole": "admission"
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "negative_nasa_earth",
+      "source": "catalog_search",
+      "query": "REEs",
+      "result_id": "363224",
+      "result_title": "",
+      "admitted": false,
+      "expected": {
+        "admitted": false,
+        "reason_count": 0,
+        "human_label": "correct_and_useful"
+      },
+      "explanation": null,
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "negative_policy_workshop",
+      "source": "catalog_search",
+      "query": "REE",
+      "result_id": "362900",
+      "result_title": "",
+      "admitted": false,
+      "expected": {
+        "admitted": false,
+        "reason_count": 0,
+        "human_label": "correct_and_useful"
+      },
+      "explanation": null,
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "negative_rare_disease",
+      "source": "catalog_search",
+      "query": "REEs",
+      "result_id": "359996",
+      "result_title": "",
+      "admitted": false,
+      "expected": {
+        "admitted": false,
+        "reason_count": 0,
+        "human_label": "correct_and_useful"
+      },
+      "explanation": null,
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "weak_cfd_collision",
+      "source": "catalog_search",
+      "query": "CFD",
+      "result_id": "329436",
+      "result_title": "University Nuclear Leadership Program– Scholarship and Fellowship Support",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "weak_lexical",
+        "reason_count": 0,
+        "human_label": "correct_but_too_shallow",
+        "review_note": "The result is admitted by the unchanged cross-domain retrieval path, but no honest contextual explanation exists for the CFD-to-CFDA collision."
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "weak_lexical",
+        "label": "Limited match evidence",
+        "primary": false,
+        "broadFallback": false,
+        "admissionPath": "explicit_evidence",
+        "reasons": [],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "literal:cfd",
+              "role": "application_or_context",
+              "fields": [
+                "citation_source_evidence"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "lexical_concept",
+              "conceptId": "literal:cfd",
+              "contribution": 5.254832041463286
+            },
+            {
+              "type": "topic_rerank",
+              "contribution": 2.85915489562777
+            }
+          ],
+          "selectedEvidence": [],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_but_too_shallow",
+      "review_note": "The result is admitted by the unchanged cross-domain retrieval path, but no honest contextual explanation exists for the CFD-to-CFDA collision."
+    },
+    {
+      "id": "fixture_explicit_title",
+      "source": "fixture",
+      "query": "REE separation",
+      "result_id": "fixture-explicit-title",
+      "result_title": "Rare Earth Element Separation Research",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "contextual",
+        "required_codes": [
+          "query_interpretation",
+          "field_context"
+        ],
+        "required_fields": [
+          "parent_title"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "contextual",
+        "label": "Contextual evidence match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "explicit_evidence",
+        "reasons": [
+          {
+            "code": "query_interpretation",
+            "text": "Interpreted “REE” as rare-earth elements.",
+            "evidence": {
+              "canonicalConcept": "rare-earth-elements",
+              "userForm": "REE"
+            }
+          },
+          {
+            "code": "field_context",
+            "text": "Rare-earth target evidence appears in the opportunity title: “Rare Earth Element Separation Research”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "conceptId": "rare-earth-elements",
+              "field": "parent_title",
+              "terms": [
+                "rare"
+              ],
+              "admissionRole": "admission"
+            }
+          },
+          {
+            "code": "field_context",
+            "text": "Separation-method evidence appears in the opportunity title: “Rare Earth Element Separation Research”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "conceptId": "separations",
+              "field": "parent_title",
+              "terms": [
+                "separation"
+              ],
+              "admissionRole": "admission"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "rare-earth-elements",
+              "role": "target",
+              "fields": [
+                "parent_title"
+              ]
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "separations",
+              "role": "method",
+              "fields": [
+                "parent_title",
+                "parent_description"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "lexical_concept",
+              "conceptId": "rare-earth-elements"
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "separations"
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "canonicalConcept": "rare-earth-elements",
+              "userForm": "REE"
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "rare-earth-elements",
+              "field": "parent_title",
+              "terms": [
+                "rare"
+              ],
+              "admissionRole": "admission"
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "separations",
+              "field": "parent_title",
+              "terms": [
+                "separation"
+              ],
+              "admissionRole": "admission"
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "fixture_explicit_description",
+      "source": "fixture",
+      "query": "lanthanide recovery",
+      "result_id": "fixture-explicit-description",
+      "result_title": "Advanced Materials Research",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "contextual",
+        "required_codes": [
+          "field_context"
+        ],
+        "required_fields": [
+          "parent_description"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "contextual",
+        "label": "Contextual evidence match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "explicit_evidence",
+        "reasons": [
+          {
+            "code": "field_context",
+            "text": "Rare-earth target evidence appears in the opportunity description: “The program supports experimental research on lanthanide recovery and purification from complex feedstocks”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "conceptId": "rare-earth-elements",
+              "field": "parent_description",
+              "terms": [
+                "lanthanide"
+              ],
+              "admissionRole": "admission"
+            }
+          },
+          {
+            "code": "field_context",
+            "text": "Separation-method evidence appears in the opportunity description: “The program supports experimental research on lanthanide recovery and purification from complex feedstocks”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "conceptId": "separations",
+              "field": "parent_description",
+              "terms": [
+                "recovery"
+              ],
+              "admissionRole": "admission"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "rare-earth-elements",
+              "role": "target",
+              "fields": [
+                "parent_description"
+              ]
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "separations",
+              "role": "method",
+              "fields": [
+                "parent_description"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "lexical_concept",
+              "conceptId": "rare-earth-elements"
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "separations"
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "rare-earth-elements",
+              "field": "parent_description",
+              "terms": [
+                "lanthanide"
+              ],
+              "admissionRole": "admission"
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "separations",
+              "field": "parent_description",
+              "terms": [
+                "recovery"
+              ],
+              "admissionRole": "admission"
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "fixture_expanded_lanthanide",
+      "source": "fixture",
+      "query": "R.E.E. recovery",
+      "result_id": "fixture-expanded",
+      "result_title": "Critical Materials Recovery",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "expanded",
+        "required_codes": [
+          "query_interpretation",
+          "field_context"
+        ],
+        "required_text": [
+          "lanthanide"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "expanded",
+        "label": "Expanded scientific match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "explicit_evidence",
+        "reasons": [
+          {
+            "code": "query_interpretation",
+            "text": "Interpreted “R.E.E” as rare-earth elements.",
+            "evidence": {
+              "canonicalConcept": "rare-earth-elements",
+              "userForm": "R.E.E."
+            }
+          },
+          {
+            "code": "field_context",
+            "text": "Separation-method evidence appears in the opportunity title: “Critical Materials Recovery”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "conceptId": "separations",
+              "field": "parent_title",
+              "terms": [
+                "recovery"
+              ],
+              "admissionRole": "admission"
+            }
+          },
+          {
+            "code": "field_context",
+            "text": "Rare-earth target evidence appears in the opportunity description: “Fundamental research on recovery and purification of lanthanides from industrial streams”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "conceptId": "rare-earth-elements",
+              "field": "parent_description",
+              "terms": [
+                "lanthanide"
+              ],
+              "admissionRole": "admission"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "rare-earth-elements",
+              "role": "target",
+              "fields": [
+                "parent_description"
+              ]
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "separations",
+              "role": "method",
+              "fields": [
+                "parent_title",
+                "parent_description"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "lexical_concept",
+              "conceptId": "rare-earth-elements"
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "separations"
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "canonicalConcept": "rare-earth-elements",
+              "userForm": "R.E.E."
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "separations",
+              "field": "parent_title",
+              "terms": [
+                "recovery"
+              ],
+              "admissionRole": "admission"
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "rare-earth-elements",
+              "field": "parent_description",
+              "terms": [
+                "lanthanide"
+              ],
+              "admissionRole": "admission"
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "fixture_target_method",
+      "source": "fixture",
+      "query": "REE separation",
+      "result_id": "fixture-explicit-title",
+      "result_title": "Rare Earth Element Separation Research",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "contextual",
+        "required_codes": [
+          "field_context"
+        ],
+        "required_concepts": [
+          "rare-earth-elements",
+          "separations"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "contextual",
+        "label": "Contextual evidence match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "explicit_evidence",
+        "reasons": [
+          {
+            "code": "query_interpretation",
+            "text": "Interpreted “REE” as rare-earth elements.",
+            "evidence": {
+              "canonicalConcept": "rare-earth-elements",
+              "userForm": "REE"
+            }
+          },
+          {
+            "code": "field_context",
+            "text": "Rare-earth target evidence appears in the opportunity title: “Rare Earth Element Separation Research”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "conceptId": "rare-earth-elements",
+              "field": "parent_title",
+              "terms": [
+                "rare"
+              ],
+              "admissionRole": "admission"
+            }
+          },
+          {
+            "code": "field_context",
+            "text": "Separation-method evidence appears in the opportunity title: “Rare Earth Element Separation Research”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "conceptId": "separations",
+              "field": "parent_title",
+              "terms": [
+                "separation"
+              ],
+              "admissionRole": "admission"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "rare-earth-elements",
+              "role": "target",
+              "fields": [
+                "parent_title"
+              ]
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "separations",
+              "role": "method",
+              "fields": [
+                "parent_title",
+                "parent_description"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "lexical_concept",
+              "conceptId": "rare-earth-elements"
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "separations"
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "canonicalConcept": "rare-earth-elements",
+              "userForm": "REE"
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "rare-earth-elements",
+              "field": "parent_title",
+              "terms": [
+                "rare"
+              ],
+              "admissionRole": "admission"
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "separations",
+              "field": "parent_title",
+              "terms": [
+                "separation"
+              ],
+              "admissionRole": "admission"
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "fixture_child_title",
+      "source": "fixture",
+      "query": "catalyst design",
+      "result_id": "fixture-child-title",
+      "result_title": "Annual Science Solicitation",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "direct",
+        "required_codes": [
+          "child_hierarchy",
+          "field_context"
+        ],
+        "required_text": [
+          "Catalysis Science"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "direct",
+        "label": "Subprogram match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "explicit_evidence",
+        "reasons": [
+          {
+            "code": "child_hierarchy",
+            "text": "Matched through the publication-eligible subprogram “Catalysis Science”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "field": "child_hierarchy",
+              "childTitle": "Catalysis Science",
+              "childId": "fixture-child-title:1",
+              "publicationState": "publish"
+            }
+          },
+          {
+            "code": "field_context",
+            "text": "The subprogram summary provides the matching context: “Supports catalyst design and reaction-mechanism research”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "conceptId": "literal:catalyst",
+              "field": "child_summary",
+              "terms": [
+                "catalyst"
+              ],
+              "admissionRole": "admission"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "literal:catalyst",
+              "role": "application_or_context",
+              "fields": [
+                "child_title",
+                "child_summary"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "lexical_concept",
+              "conceptId": "literal:catalyst"
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "explicit_evidence",
+              "field": "child_hierarchy",
+              "childTitle": "Catalysis Science",
+              "childId": "fixture-child-title:1",
+              "publicationState": "publish"
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "literal:catalyst",
+              "field": "child_summary",
+              "terms": [
+                "catalyst"
+              ],
+              "admissionRole": "admission"
+            }
+          ],
+          "childDroveMatch": true,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "fixture_child_summary",
+      "source": "fixture",
+      "query": "reactive separations",
+      "result_id": "fixture-child-summary",
+      "result_title": "Office-wide Research Announcement",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "direct",
+        "required_codes": [
+          "child_hierarchy",
+          "field_context"
+        ],
+        "required_fields": [
+          "child_summary"
+        ],
+        "required_text": [
+          "Molecular Transformations"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "direct",
+        "label": "Subprogram match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "explicit_evidence",
+        "reasons": [
+          {
+            "code": "child_hierarchy",
+            "text": "Matched through the publication-eligible subprogram “Molecular Transformations”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "field": "child_hierarchy",
+              "childTitle": "Molecular Transformations",
+              "childId": "fixture-child-summary:1",
+              "publicationState": "publish"
+            }
+          },
+          {
+            "code": "field_context",
+            "text": "The subprogram summary provides the matching context: “Supports reactive separations and molecular-level control of coupled reaction and separation processes”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "conceptId": "literal:separation",
+              "field": "child_summary",
+              "terms": [
+                "separation"
+              ],
+              "admissionRole": "admission"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "literal:separation",
+              "role": "application_or_context",
+              "fields": [
+                "child_summary"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "lexical_concept",
+              "conceptId": "literal:separation"
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "explicit_evidence",
+              "field": "child_hierarchy",
+              "childTitle": "Molecular Transformations",
+              "childId": "fixture-child-summary:1",
+              "publicationState": "publish"
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "literal:separation",
+              "field": "child_summary",
+              "terms": [
+                "separation"
+              ],
+              "admissionRole": "admission"
+            }
+          ],
+          "childDroveMatch": true,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "fixture_review_child_no_leak",
+      "source": "fixture",
+      "query": "separation science",
+      "result_id": "fixture-review-child",
+      "result_title": "Annual Solicitation",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "weak_lexical",
+        "reason_count": 0,
+        "forbidden_text": [
+          "Internal Review Separation Science",
+          "fixture-review-child:rss"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "weak_lexical",
+        "label": "Limited match evidence",
+        "primary": false,
+        "broadFallback": false,
+        "admissionPath": "unexplained",
+        "reasons": [],
+        "trace": {
+          "admittedBy": [],
+          "rankedBy": [],
+          "selectedEvidence": [],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "fixture_manual_profile",
+      "source": "fixture",
+      "query": "catalysis",
+      "result_id": "fixture-profile",
+      "result_title": "Catalysis Science",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "required_codes": [
+          "profile_contribution"
+        ],
+        "forbidden_text": [
+          "secret zeolite project"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "direct",
+        "label": "Exact title match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "explicit_evidence",
+        "reasons": [
+          {
+            "code": "exact_title",
+            "text": "Exact opportunity-title match: “Catalysis Science”.",
+            "evidence": {
+              "path": "exact_phrase_or_identifier",
+              "field": "parent_title"
+            }
+          },
+          {
+            "code": "profile_contribution",
+            "text": "Your research profile increased this result’s ranking after it met the search criteria.",
+            "evidence": {
+              "source": "manual",
+              "role": "ranking_only",
+              "privateTextIncluded": false
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "literal:catalysis",
+              "role": "application_or_context",
+              "fields": [
+                "parent_title",
+                "parent_description"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "lexical_concept",
+              "conceptId": "literal:catalysis"
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "exact_phrase_or_identifier",
+              "field": "parent_title"
+            },
+            {
+              "source": "manual",
+              "role": "ranking_only",
+              "privateTextIncluded": false
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": true,
+          "profileSources": [
+            "manual"
+          ],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "fixture_cv_profile",
+      "source": "fixture",
+      "query": "catalysis",
+      "result_id": "fixture-profile",
+      "result_title": "Catalysis Science",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "required_codes": [
+          "profile_contribution"
+        ],
+        "forbidden_text": [
+          "secret zeolite project"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "direct",
+        "label": "Exact title match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "explicit_evidence",
+        "reasons": [
+          {
+            "code": "exact_title",
+            "text": "Exact opportunity-title match: “Catalysis Science”.",
+            "evidence": {
+              "path": "exact_phrase_or_identifier",
+              "field": "parent_title"
+            }
+          },
+          {
+            "code": "profile_contribution",
+            "text": "Your CV increased this result’s ranking after it met the search criteria.",
+            "evidence": {
+              "source": "cv",
+              "role": "ranking_only",
+              "privateTextIncluded": false
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "literal:catalysis",
+              "role": "application_or_context",
+              "fields": [
+                "parent_title",
+                "parent_description"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "lexical_concept",
+              "conceptId": "literal:catalysis"
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "exact_phrase_or_identifier",
+              "field": "parent_title"
+            },
+            {
+              "source": "cv",
+              "role": "ranking_only",
+              "privateTextIncluded": false
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": true,
+          "profileSources": [
+            "cv"
+          ],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "fixture_orcid_profile",
+      "source": "fixture",
+      "query": "catalysis",
+      "result_id": "fixture-profile",
+      "result_title": "Catalysis Science",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "required_codes": [
+          "profile_contribution"
+        ],
+        "forbidden_text": [
+          "secret zeolite project"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "direct",
+        "label": "Exact title match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "explicit_evidence",
+        "reasons": [
+          {
+            "code": "exact_title",
+            "text": "Exact opportunity-title match: “Catalysis Science”.",
+            "evidence": {
+              "path": "exact_phrase_or_identifier",
+              "field": "parent_title"
+            }
+          },
+          {
+            "code": "profile_contribution",
+            "text": "Your ORCID publications increased this result’s ranking after it met the search criteria.",
+            "evidence": {
+              "source": "orcid",
+              "role": "ranking_only",
+              "privateTextIncluded": false
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "literal:catalysis",
+              "role": "application_or_context",
+              "fields": [
+                "parent_title",
+                "parent_description"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "lexical_concept",
+              "conceptId": "literal:catalysis"
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "exact_phrase_or_identifier",
+              "field": "parent_title"
+            },
+            {
+              "source": "orcid",
+              "role": "ranking_only",
+              "privateTextIncluded": false
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": true,
+          "profileSources": [
+            "orcid"
+          ],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "fixture_eligibility_rerank",
+      "source": "fixture",
+      "query": "catalysis",
+      "result_id": "fixture-profile",
+      "result_title": "Catalysis Science",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "required_codes": [
+          "eligibility_contribution"
+        ],
+        "forbidden_text": [
+          "secret zeolite project"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "direct",
+        "label": "Exact title match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "explicit_evidence",
+        "reasons": [
+          {
+            "code": "exact_title",
+            "text": "Exact opportunity-title match: “Catalysis Science”.",
+            "evidence": {
+              "path": "exact_phrase_or_identifier",
+              "field": "parent_title"
+            }
+          },
+          {
+            "code": "eligibility_contribution",
+            "text": "Your applicant or career-stage settings improved this result’s ranking.",
+            "evidence": {
+              "role": "ranking_only"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "literal:catalysis",
+              "role": "application_or_context",
+              "fields": [
+                "parent_title",
+                "parent_description"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "lexical_concept",
+              "conceptId": "literal:catalysis"
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "exact_phrase_or_identifier",
+              "field": "parent_title"
+            },
+            {
+              "role": "ranking_only"
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": true,
+          "profileSources": [],
+          "eligibilityContributed": true
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "fixture_generic_title_rerank",
+      "source": "fixture",
+      "query": "advanced reactive separations",
+      "result_id": "fixture-title-rerank",
+      "result_title": "Advanced Research Program",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "contextual",
+        "required_codes": [
+          "field_context"
+        ],
+        "required_fields": [
+          "parent_description"
+        ],
+        "forbidden_claims": [
+          "generic_title_as_direct_scope"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "contextual",
+        "label": "Contextual evidence match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "explicit_evidence",
+        "reasons": [
+          {
+            "code": "field_context",
+            "text": "The opportunity description provides the matching context: “The funded scientific scope includes reactive separations and coupled reaction-separation processes”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "conceptId": "literal:separation",
+              "field": "parent_description",
+              "terms": [
+                "separation"
+              ],
+              "admissionRole": "admission"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "literal:separation",
+              "role": "application_or_context",
+              "fields": [
+                "parent_description"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "lexical_concept",
+              "conceptId": "literal:advanced"
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "literal:separation"
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "literal:separation",
+              "field": "parent_description",
+              "terms": [
+                "separation"
+              ],
+              "admissionRole": "admission"
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "fixture_broader_fit",
+      "source": "fixture",
+      "query": "REE separations",
+      "result_id": "fixture-broad",
+      "result_title": "Transport Phenomena",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "broader_program",
+        "required_codes": [
+          "broader_program"
+        ],
+        "required_labels": [
+          "Broader program fit"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "broader_program",
+        "label": "Broader program fit",
+        "primary": false,
+        "broadFallback": true,
+        "admissionPath": "broad_program_fallback",
+        "reasons": [
+          {
+            "code": "broader_program",
+            "text": "Broader program fit: Transport Phenomena supports interfacial transport and separation methods adjacent to the proposed work. The published scope is adjacent but does not explicitly name the target.",
+            "evidence": {
+              "path": "broad_program_fallback",
+              "field": "published_program_scope"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "broad_program_fallback",
+              "fields": [
+                "parent_description"
+              ]
+            }
+          ],
+          "rankedBy": [],
+          "selectedEvidence": [
+            {
+              "path": "broad_program_fallback",
+              "field": "published_program_scope"
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "fixture_weak_metadata",
+      "source": "fixture",
+      "query": "REE separation",
+      "result_id": "fixture-weak",
+      "result_title": "General Science Program",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "weak_lexical",
+        "reason_count": 0,
+        "human_label": "correct_but_too_shallow",
+        "review_note": "Generic topic metadata is insufficient for a causal scientific explanation and should not be dressed up as one."
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "weak_lexical",
+        "label": "Limited match evidence",
+        "primary": false,
+        "broadFallback": false,
+        "admissionPath": "explicit_evidence",
+        "reasons": [],
+        "trace": {
+          "admittedBy": [],
+          "rankedBy": [
+            {
+              "type": "topic_rerank"
+            }
+          ],
+          "selectedEvidence": [],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_but_too_shallow",
+      "review_note": "Generic topic metadata is insufficient for a causal scientific explanation and should not be dressed up as one."
+    },
+    {
+      "id": "fixture_exact_number",
+      "source": "fixture",
+      "query": "FIXTURE-001",
+      "result_id": "fixture-explicit-title",
+      "result_title": "Rare Earth Element Separation Research",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "tier": "direct",
+        "required_codes": [
+          "exact_opportunity_number"
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "direct",
+        "label": "Exact identifier match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "exact_phrase_or_identifier",
+        "reasons": [
+          {
+            "code": "exact_opportunity_number",
+            "text": "Exact opportunity-number match: “FIXTURE-001”.",
+            "evidence": {
+              "path": "exact_phrase_or_identifier",
+              "field": "opportunity_number"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "rare-earth-elements",
+              "role": "target",
+              "fields": [
+                "parent_title"
+              ]
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "separations",
+              "role": "method",
+              "fields": [
+                "parent_title",
+                "parent_description"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "lexical_concept",
+              "conceptId": "rare-earth-elements"
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "separations"
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "exact_phrase_or_identifier",
+              "field": "opportunity_number"
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": true,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    },
+    {
+      "id": "fixture_no_query_echo",
+      "source": "fixture",
+      "query": "lanthanide recovery",
+      "result_id": "fixture-explicit-description",
+      "result_title": "Advanced Materials Research",
+      "admitted": true,
+      "expected": {
+        "admitted": true,
+        "forbidden_complete_reasons": [
+          "Search terms matched: lanthanide, recovery.",
+          "Keyword match: lanthanide."
+        ],
+        "human_label": "correct_and_useful"
+      },
+      "explanation": {
+        "contractVersion": 2,
+        "tier": "contextual",
+        "label": "Contextual evidence match",
+        "primary": true,
+        "broadFallback": false,
+        "admissionPath": "explicit_evidence",
+        "reasons": [
+          {
+            "code": "field_context",
+            "text": "Rare-earth target evidence appears in the opportunity description: “The program supports experimental research on lanthanide recovery and purification from complex feedstocks”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "conceptId": "rare-earth-elements",
+              "field": "parent_description",
+              "terms": [
+                "lanthanide"
+              ],
+              "admissionRole": "admission"
+            }
+          },
+          {
+            "code": "field_context",
+            "text": "Separation-method evidence appears in the opportunity description: “The program supports experimental research on lanthanide recovery and purification from complex feedstocks”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "conceptId": "separations",
+              "field": "parent_description",
+              "terms": [
+                "recovery"
+              ],
+              "admissionRole": "admission"
+            }
+          }
+        ],
+        "trace": {
+          "admittedBy": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "rare-earth-elements",
+              "role": "target",
+              "fields": [
+                "parent_description"
+              ]
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "separations",
+              "role": "method",
+              "fields": [
+                "parent_description"
+              ]
+            }
+          ],
+          "rankedBy": [
+            {
+              "type": "lexical_concept",
+              "conceptId": "rare-earth-elements"
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "separations"
+            }
+          ],
+          "selectedEvidence": [
+            {
+              "path": "explicit_evidence",
+              "conceptId": "rare-earth-elements",
+              "field": "parent_description",
+              "terms": [
+                "lanthanide"
+              ],
+              "admissionRole": "admission"
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "separations",
+              "field": "parent_description",
+              "terms": [
+                "recovery"
+              ],
+              "admissionRole": "admission"
+            }
+          ],
+          "childDroveMatch": false,
+          "exactOpportunityNumber": false,
+          "exactTitlePhrase": false,
+          "profileSources": [],
+          "eligibilityContributed": false
+        }
+      },
+      "assertion_failures": [],
+      "adjudicated_label": "correct_and_useful",
+      "review_note": null
+    }
+  ]
+}

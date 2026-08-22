@@ -1257,6 +1257,8 @@
         eligibility: eligibilityBonuses[index],
         parentDirectEvidence: row.parentDirectEvidence,
         parentProfileEvidence: row.parentProfileEvidence,
+        parentAdmitted: row.parentAdmitted,
+        childDroveMatch: row.childDroveMatch,
         profileSources,
         bestChild: displayBestChild,
         matchingChildren: row.matchingChildren,
@@ -2012,6 +2014,26 @@
 
   function matchExplanation(match, record) {
     if (!APP_CONFIG?.flags?.matchExplanations || !MATCH_EXPLAIN_API?.build) return "";
+    if (APP_CONFIG?.flags?.searchV2 && MATCH_EXPLAIN_API?.buildV2) {
+      const explanation = MATCH_EXPLAIN_API.buildV2({
+        query: state.query,
+        parent: {
+          record,
+          broad: isBroadOpportunity(record),
+          parentAdmitted: match.parentAdmitted,
+          directEvidence: match.parentDirectEvidence,
+          profileEvidence: match.parentProfileEvidence,
+        },
+        bestChild: match.bestChild,
+        childDroveMatch: match.childDroveMatch,
+        parentAdmitted: match.parentAdmitted,
+        profileSources: match.profileSources,
+        eligibility: match.eligibility,
+        broadFallback: match.broadFallback || null,
+      });
+      if (!explanation?.reasons?.length) return "";
+      return `<details class="match-explanation match-explanation-v2" data-match-tier="${escapeAttribute(explanation.tier)}"><summary><span>Why this matched</span><span class="match-explanation-tier">${escapeHtml(explanation.label)}</span></summary><ul>${explanation.reasons.map(item => `<li>${escapeHtml(item.text)}</li>`).join("")}</ul></details>`;
+    }
     const reasons = MATCH_EXPLAIN_API.build({
       parent: {
         record,
@@ -4348,6 +4370,12 @@
       }
       if (APP_CONFIG?.flags?.searchV2 && !SEARCH_V2_CONFIG) {
         throw new Error("Search v2 could not initialize because its concept contract is missing.");
+      }
+      if (
+        APP_CONFIG?.flags?.searchV2
+        && Number(MATCH_EXPLAIN_API?.contractVersion || 0) !== 2
+      ) {
+        throw new Error("Search v2 could not initialize because its explanation contract is incompatible.");
       }
       searchEngine = RETRIEVAL_API.create(catalog, SEARCH_QUERY, {
         searchV2: APP_CONFIG?.flags?.searchV2 === true,

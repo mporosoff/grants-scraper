@@ -1430,6 +1430,24 @@ textarea:focus {
   cursor: pointer;
 }
 
+.match-explanation-v2 > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  max-width: 100%;
+}
+
+.match-explanation-tier {
+  padding: 2px 6px;
+  border: 1px solid #c9d9ea;
+  border-radius: 999px;
+  background: #f4f8fd;
+  color: #526177;
+  font-size: .66rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
 .match-explanation {
   margin: 14px 0 0;
   padding-top: 12px;

@@ -219,7 +219,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         release_version = "filters-2026-08-13"
         feature_version = "orcid-2026-08-13"
         search_version = "relevance-2026-08-15-v6"
-        style_version = "match-ux-20260821"
+        style_version = "search-v2-phase3-20260822"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={style_version}">',
             explorer_html,
@@ -244,7 +244,10 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn(f'assets/app-config.js?v={search_v2_version}', explorer_html)
         self.assertIn(f'assets/search-v2-config.js?v={search_v2_version}', explorer_html)
         self.assertIn(f'assets/subtopic-runtime.js?v={search_v2_version}', explorer_html)
-        self.assertIn('assets/match-explain.js?v=match-ux-20260821', explorer_html)
+        self.assertIn(
+            'assets/match-explain.js?v=search-v2-phase3-20260822',
+            explorer_html,
+        )
         self.assertIn("data-app-version", explorer_html)
         self.assertNotIn("assets/preferences.js", explorer_html)
         self.assertIn(
@@ -260,7 +263,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            f'<script src="./assets/app.js?v={search_v2_version}"></script>',
+            '<script src="./assets/app.js?v=search-v2-phase3-20260822"></script>',
             explorer_html,
         )
         self.assertIn(

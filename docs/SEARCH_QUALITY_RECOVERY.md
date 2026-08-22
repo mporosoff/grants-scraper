@@ -1,6 +1,6 @@
 # Funding Finder v1.2.0 search-quality recovery
 
-Status: Phase 2 complete; Phase 3 not started
+Status: Phase 3 complete; Phase 4 not started
 
 Branch: `search-quality-v2`
 
@@ -171,9 +171,53 @@ The machine-readable evidence is in `evaluation/search_v2_results.json`, `evalua
 
 No sealed holdout query has been executed or adjudicated. The evaluator refuses a `--holdout` invocation, and the eventual Phase 4 judgment contract is the corrected schema-version-2 relevance rubric.
 
+## Phase 3 outcome
+
+Phase 3 replaced the flagged candidate’s keyword-echo explanations with a versioned causal contract. The production v1 explanation path remains unchanged; contextual explanation v2 activates only with the local/test search-v2 flag.
+
+The new contract consumes Phase 2’s `admittedBy`, `rankedBy`, authoritative-scope, field-contribution, and parent/child provenance. Each displayed reason has a reason code and selected evidence record. Removing the causal admission field removes the explanation. The UI shows at most three reasons and remains collapsed by default.
+
+Authoritative scope entailment is presented as **Primary program-scope match**, not as broader-program fit. A separate **Broader program fit** class exists only for an explicitly supplied adjacent-program fallback; it is never inferred from an umbrella title, agency, discipline, topic, or generic program label.
+
+Representative explanation cards from the frozen frame:
+
+| Case | Collapsed label | Expanded explanation |
+| --- | --- | --- |
+| NSF CPS for `REE separations` | Primary program-scope match | Authoritative scope: Chemical Process Systems — Critical Minerals and Separations; controlled rare-earth/critical-minerals and chemical-separation relationships; `REE` interpretation disclosed |
+| DOE BES for `REE separations` | Primary program-scope match | Authoritative scope: Basic Energy Sciences — Separation Science; rare-earth separation identified as a specialization of separation science |
+| Genesis for `REE separations` | Primary program-scope match | Authoritative scope: Securing America’s Critical Minerals Supply — Extraction and Processing Technologies; controlled target and operation relationships disclosed |
+| Genesis for `catalyst design` | Subprogram match | Names the publication-eligible Electrochemical Energy Conversion Catalyst Discovery and Scale up focus area and its matching summary |
+| Army BAA for `catalyst design` | Subprogram match | Names the publication-eligible Electrochemistry subprogram and its causal summary evidence |
+| `DE-FOA-0003600` | Exact identifier match | Names the exact opportunity number rather than echoing the query |
+| NSF CPS for `catalysis` | Contextual evidence match | Quotes the bounded opportunity-description sentence containing catalysis in its scientific scope |
+| Explicit rare-earth title fixture | Contextual evidence match | Discloses the `REE` interpretation and identifies target and method evidence in the opportunity title |
+| `R.E.E. recovery` with lanthanide evidence | Expanded scientific match | Discloses the acronym expansion and identifies lanthanide evidence in the opportunity description |
+| Profile-assisted catalysis fixture | Exact title match | Gives the public title evidence, then says only that the research profile increased ranking; private profile text is never repeated |
+| Explicit adjacent Transport Phenomena fixture | Broader program fit | Clearly says the published scope is adjacent and does not explicitly name the target |
+| `CFD` → `CFDA` collision | No displayed explanation | Fails closed because no honest contextual explanation exists for the unchanged weak retrieval result |
+
+The explanation truth frame was committed before implementation at `7a18983` and contains 42 query/result pairs. The final result is 40 `correct_and_useful` and 2 individually reviewed `correct_but_too_shallow` cases, for 95.24% useful coverage. The two shallow cases are deliberately fail-closed: the `CFD`/`CFDA` collision and a fixture admitted only through generic metadata. Both render no confident explanation.
+
+All Phase 3 explanation gates pass:
+
+- 0 unsupported or misleading explanations;
+- 0 reasons citing evidence that did not affect admission or ranking;
+- 0 review-only child leakage;
+- 0 private profile/CV/ORCID excerpts;
+- 0 authoritative-scope results mislabeled as broader fit;
+- 0 tautological query echoes;
+- every causal child-driven explanation names the publication-eligible child;
+- generic title reranking is explained through the substantive admission field instead;
+- maximum three reasons per card, collapsed by default;
+- at a 390 px browser viewport, all three REE card summaries fit with no horizontal overflow.
+
+The browser asset delta for Phase 3 is 15,553 uncompressed bytes: 13,801 bytes in the explanation contract, 1,417 bytes in app wiring, 319 bytes in compact badge styling, and 16 bytes in coordinated cache-version strings. Existing size-budget tests pass.
+
+The frozen frame and results are `evaluation/match_explain_v2_frame.json` and `evaluation/match_explain_v2_results.json`. No sealed search holdout query was executed or adjudicated, production remains disabled, and no live deployment occurred.
+
 ## Phase boundary
 
-Completed through Phase 2:
+Completed through Phase 3:
 
 - latest-live baseline and isolated branch;
 - exact live asset reconciliation;
@@ -189,24 +233,29 @@ Completed through Phase 2:
 - browser/Python parity and mixed-schema fail-closed readiness checks;
 - old/new development movement review and cross-domain regression evaluation;
 - local flagged/unflagged browser integration verification.
+- frozen 42-pair explanation truth frame committed before explanation tuning;
+- deterministic explanation contract separating admission, ranking, and displayed evidence;
+- primary authoritative-scope, direct child, contextual field, expanded acronym, exact identifier, profile-ranking, broader-fit, and fail-closed weak-evidence treatments;
+- compact collapsed explanation UI with desktop and 390 px mobile browser verification;
+- explanation privacy, publication-boundary, causality, density, and usefulness gates.
 
 Verification at the Phase 1 boundary:
 
 | Gate | Result | Exit code |
 | --- | --- | ---: |
-| Full browser product suite | 118 passed | 0 |
+| Full browser product suite | 126 passed | 0 |
 | Historical query baseline | 37 queries; zero top-10 churn | 0 |
 | Selected Python Phase 2/page/size suites | 37 passed | 0 |
+| Phase 3 explanation truth | 42 pairs; 95.24% correct and useful; 0 unsupported | 0 |
 | Size-budget tests | 3 passed | 0 |
 | Hermetic no-drift rebuild | 22 artifacts unchanged | 0 |
 | Full Python suite on current refreshed catalog | 825 ran; 10 failures and 1 error in inherited P5/P7/MEAS-8 frozen-census checks | 1 |
 
-The full Python failures reproduce catalog-fixture drift already present after the 2026-08-22 `main` catalog refresh: historical frames pin 1,475 records/745 cache entries while the current inputs contain 1,453 records/709 cache entries, and one retired ID (`362088`) is still referenced. No failing test imports or exercises the Phase 2 search path. Those historical artifacts were not rewritten because they are outside this recovery scope and are intended to remain frozen evidence. Phase 2 added `tests/test_search_query.py` for the new browser/Python parity contract.
+The full Python failures reproduce catalog-fixture drift already present after the 2026-08-22 `main` catalog refresh: historical frames pin 1,475 records/745 cache entries while the current inputs contain 1,453 records/709 cache entries, and one retired ID (`362088`) is still referenced. No failing test imports or exercises the Phase 2 retrieval or Phase 3 explanation path. Those historical artifacts were not rewritten because they are outside this recovery scope and are intended to remain frozen evidence. Phase 2 added `tests/test_search_query.py` for the new browser/Python parity contract.
 
 Not started:
 
-- Phase 3 contextual explanation redesign;
 - Phase 4 holdout execution and release-candidate freeze;
 - merge, deployment, or live v1.2.0 shipment.
 
-`main` remained untouched after branch creation. The Phase 2 candidate remains committed only to `search-quality-v2`, with production activation intentionally deferred.
+`main` remained untouched after branch creation. The Phase 3 candidate remains committed only to `search-quality-v2`, with production activation intentionally deferred.
