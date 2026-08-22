@@ -65,8 +65,8 @@ function compactResult(ranked, queryTruth) {
 }
 
 async function evaluate() {
-  if (process.argv.includes("--holdout")) {
-    throw new Error("Phase 2 refuses to open the sealed holdout. Phase 4 owns first execution and adjudication.");
+  if (process.argv.some(argument => /holdout/i.test(argument))) {
+    throw new Error("Development evaluation refuses every holdout argument. A separately authorized one-time acceptance runner owns holdout execution.");
   }
   const [
     frameSource,

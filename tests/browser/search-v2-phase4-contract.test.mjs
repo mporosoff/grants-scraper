@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
+import { spawn } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import test from "node:test";
 
 const ROOT = new URL("../../", import.meta.url);
@@ -12,6 +14,33 @@ async function source(path) {
 function sha256(value) {
   return createHash("sha256").update(value).digest("hex");
 }
+
+function runNode(path, args = []) {
+  return new Promise(resolve => {
+    const child = spawn(process.execPath, [fileURLToPath(new URL(path, ROOT)), ...args], {
+      cwd: fileURLToPath(new URL("../../", import.meta.url)),
+    });
+    let stderr = "";
+    child.stderr.on("data", chunk => { stderr += chunk; });
+    child.on("close", code => resolve({ code, stderr }));
+  });
+}
+
+test("Iteration-2 acceptance frame is sealed behind a non-executing lock", async () => {
+  const [frameSource, runnerSource] = await Promise.all([
+    source("evaluation/search_v2_iteration2_holdout_frame.json"),
+    source("tools/run_search_v2_iteration2_holdout.mjs"),
+  ]);
+  const frame = JSON.parse(frameSource);
+  assert.equal(frame.status, "sealed_never_executed");
+  assert.equal(frame.construction_contract.candidate_executions, 0);
+  assert.ok(frame.queries.length >= 24 && frame.queries.length <= 30);
+  assert.equal(new Set(frame.queries.map(item => item.query.toLowerCase())).size, frame.queries.length);
+  assert.doesNotMatch(runnerSource, /loadHarness|rankQuery|search-query|search-retrieval/);
+  const attempt = await runNode("tools/run_search_v2_iteration2_holdout.mjs");
+  assert.notEqual(attempt.code, 0);
+  assert.match(attempt.stderr, /sealed and has never been executed/);
+});
 
 test("Phase 4 binds one immutable holdout execution to query-specific truth", async () => {
   const [rawSource, truthSource, resultsSource, preopenSource] = await Promise.all([
