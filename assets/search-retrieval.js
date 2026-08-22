@@ -234,12 +234,28 @@
     return previous[right.length];
   }
 
-  function create(catalog, queryApi) {
+  function create(catalog, queryApi, configuration = {}) {
     const index = catalog?.search_index;
     const records = catalog?.opportunities || [];
     if (!index?.postings || !queryApi?.expandGroups) {
       throw new Error("Hybrid search could not initialize because its catalog helpers are missing.");
     }
+
+    // The defaults below are the production scoring contract. Phase-1/CI
+    // diagnostics may set an individual value to zero to measure an ablation,
+    // without carrying a second copy of the retrieval implementation.
+    const exactTitleMatchBoost = Number.isFinite(Number(configuration.exactTitleMatchBoost))
+      ? Math.max(0, Number(configuration.exactTitleMatchBoost))
+      : 24;
+    const titlePhraseBoost = Number.isFinite(Number(configuration.titlePhraseBoost))
+      ? Math.max(0, Number(configuration.titlePhraseBoost))
+      : 12;
+    const opportunityNumberBoost = Number.isFinite(Number(configuration.opportunityNumberBoost))
+      ? Math.max(0, Number(configuration.opportunityNumberBoost))
+      : 50;
+    const trigramPhraseBoost = Number.isFinite(Number(configuration.trigramPhraseBoost))
+      ? Math.max(0, Number(configuration.trigramPhraseBoost))
+      : 40;
 
     const postings = index.postings;
     const displayTermCache = new Map();
@@ -528,10 +544,13 @@
             evidence[documentId].groups.push({
               source: group.source,
               contribution: groupLexicalScores.get(documentId) || 0,
-              matchedTerms: [...(groupMatchedTerms.get(documentId) || new Map())]
+              matchedTermContributions: [...(groupMatchedTerms.get(documentId) || new Map())]
                 .sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0]))
-                .map(([term]) => term),
+                .map(([term, contribution]) => ({ term, contribution })),
             });
+            evidence[documentId].groups.at(-1).matchedTerms = evidence[
+              documentId
+            ].groups.at(-1).matchedTermContributions.map(item => item.term);
             evidence[documentId].groups.at(-1).matchedDisplayTerms = evidence[
               documentId
             ].groups.at(-1).matchedTerms.map(term => displayTerm(documentId, term));
@@ -568,7 +587,9 @@
           const title = String(record.title || "").toLowerCase();
           const opportunityNumber = String(record.opportunity_number || "").toLowerCase();
           if (title.includes(phrase)) {
-            lexicalScores[documentId] += title === phrase ? 24 : 12;
+            lexicalScores[documentId] += title === phrase
+              ? exactTitleMatchBoost
+              : titlePhraseBoost;
             exactPhraseDocuments.add(documentId);
             if (collectEvidence) {
               evidence[documentId].exactPhrase = true;
@@ -576,7 +597,7 @@
             }
           }
           if (opportunityNumber === phrase) {
-            lexicalScores[documentId] += 50;
+            lexicalScores[documentId] += opportunityNumberBoost;
             exactPhraseDocuments.add(documentId);
             if (collectEvidence) {
               evidence[documentId].exactPhrase = true;
@@ -596,7 +617,7 @@
         records.forEach((_record, documentId) => {
           queryTrigrams.forEach(trigram => {
             if (documentPhraseText[documentId].includes(trigram)) {
-              lexicalScores[documentId] += 40;
+              lexicalScores[documentId] += trigramPhraseBoost;
               if (collectEvidence) evidence[documentId].trigrams.push(trigram);
             }
           });
@@ -626,28 +647,56 @@
       const alwaysRequiredGroups = groups.filter(group => group.requiredAlways);
       for (let documentId = 0; documentId < documentCount; documentId += 1) {
         const combined = lexicalScores[documentId] + semanticScores[documentId];
+        const admission = collectEvidence ? {
+          admitted: false,
+          reason: "no_scoring_evidence",
+          lexicalCoverage: lexicalCoverage[documentId],
+          semanticCoverage: semanticCoverage[documentId],
+          requiredGroupCoverage: requiredGroupCoverage[documentId],
+          alwaysRequiredCoverage: alwaysRequiredCoverage[documentId],
+          lexicalScore: lexicalScores[documentId],
+          semanticScore: semanticScores[documentId],
+          finalScore: 0,
+        } : null;
+        if (collectEvidence) evidence[documentId].admission = admission;
         if (combined <= 0) continue;
         const effectiveCoverage = lexicalCoverage[documentId] + (.55 * semanticCoverage[documentId]);
         if (
           minimumCoverage
           && lexicalCoverage[documentId] < minimumCoverage
           && !exactPhraseDocuments.has(documentId)
-        ) continue;
+        ) {
+          if (admission) admission.reason = "insufficient_lexical_coverage";
+          continue;
+        }
         if (
           requiredGroups.length
           && requiredGroupCoverage[documentId] < requiredGroups.length
           && !requiredGroups.every(group =>
             documentTopics[documentId].includes(group.requiredUnlessTopic)
           )
-        ) continue;
+        ) {
+          if (admission) admission.reason = "missing_required_concept_evidence";
+          continue;
+        }
         if (
           alwaysRequiredGroups.length
           && alwaysRequiredCoverage[documentId] < alwaysRequiredGroups.length
-        ) continue;
+        ) {
+          if (admission) admission.reason = "missing_always_required_concept_evidence";
+          continue;
+        }
         const coverageRatio = groups.length
           ? Math.min(1, effectiveCoverage / groups.length)
           : 0;
         scores[documentId] = combined * (.78 + (.5 * coverageRatio));
+        if (admission) {
+          admission.admitted = true;
+          admission.reason = exactPhraseDocuments.has(documentId)
+            ? "exact_phrase_or_identifier"
+            : "lexical_concept_coverage";
+          admission.finalScore = scores[documentId];
+        }
       }
 
       return {
@@ -677,6 +726,12 @@
               confidence: group.expansion.confidence,
               basis: group.expansion.basis,
             })),
+          scoringConfiguration: {
+            exactTitleMatchBoost,
+            titlePhraseBoost,
+            opportunityNumberBoost,
+            trigramPhraseBoost,
+          },
         },
       };
     }

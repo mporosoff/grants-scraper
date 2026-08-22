@@ -389,7 +389,38 @@ test("explanation evidence reports only terms that contributed", () => {
     Array.from(result.evidence[0].groups, group => [...group.matchedDisplayTerms]),
     [["Carbon"], ["capture"]],
   );
+  assert.deepEqual(
+    Array.from(result.evidence[0].groups, group => (
+      Array.from(group.matchedTermContributions, item => item.term)
+    )),
+    [["carbon"], ["capture"]],
+  );
+  assert.equal(result.evidence[0].admission.admitted, true);
+  assert.equal(result.evidence[0].admission.reason, "exact_phrase_or_identifier");
+  assert.equal(result.evidence[1].admission.admitted, false);
+  assert.equal(result.evidence[1].admission.reason, "no_scoring_evidence");
   assert.deepEqual(Array.from(result.evidence[1].groups), []);
+});
+
+test("diagnostic scoring configuration can ablate title boosts without changing defaults", () => {
+  const apis = loadApis();
+  const catalog = catalogFor([
+    record("title", "Carbon capture"),
+    record("description", "General research", "Carbon capture"),
+  ], apis.query);
+  const production = apis.retrieval.create(catalog, apis.query)
+    .score("carbon capture", { semantic: false, evidence: true });
+  const ablated = apis.retrieval.create(catalog, apis.query, {
+    exactTitleMatchBoost: 0,
+    titlePhraseBoost: 0,
+    trigramPhraseBoost: 0,
+  }).score("carbon capture", { semantic: false, evidence: true });
+
+  assert.equal(production.diagnostics.scoringConfiguration.exactTitleMatchBoost, 24);
+  assert.equal(ablated.diagnostics.scoringConfiguration.exactTitleMatchBoost, 0);
+  assert.ok(production.scores[0] > ablated.scores[0]);
+  assert.ok(ablated.scores[0] > 0, "the underlying indexed title evidence remains");
+  assert.equal(production.scores[1], ablated.scores[1]);
 });
 
 test("generic parent-child rollup is deterministic and cardinality-neutral", () => {

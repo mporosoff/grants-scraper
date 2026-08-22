@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "frozen_at": "2026-08-22",
+  "scope": "Development-set REE family adjudication against the current catalog and publication-eligible child sidecar.",
+  "label_definitions": {
+    "direct_ree_fit": "The source explicitly supports rare-earth or lanthanide technical R&D.",
+    "broad_program_fit": "The authoritative source supports a program area broad enough for rare-earth technical R&D, but does not explicitly name the target in the indexed scope.",
+    "method_only_broad_fit": "The source supports a relevant method but supplies no rare-earth target evidence; it must not satisfy a target-plus-method query by itself.",
+    "irrelevant": "The source does not support rare-earth technical R&D for the query family."
+  },
+  "adjudications": {
+    "360678": {
+      "label": "broad_program_fit",
+      "admit_as_direct": false,
+      "source_url": "https://science.osti.gov",
+      "evidence": "DOE Office of Science annual open solicitation covering Basic Energy Sciences and the indexed notice program area Separations.",
+      "policy_note": "Eligible only for a separately labeled broader-program tier unless explicit rare-earth target evidence is found."
+    },
+    "361526": {
+      "label": "broad_program_fit",
+      "admit_as_direct": false,
+      "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/350588",
+      "evidence": "Genesis Mission includes Securing America’s Critical Minerals Supply and a published Extraction and Processing Technologies focus area.",
+      "policy_note": "Strong broad-program anchor, but current indexed source text does not explicitly identify rare-earth elements."
+    },
+    "362061": {
+      "label": "broad_program_fit",
+      "admit_as_direct": false,
+      "source_url": "https://www.nsf.gov/funding/pgm_summ.jsp?pims_id=506547",
+      "evidence": "NSF Chemical Process Systems explicitly spans critical minerals and separations.",
+      "policy_note": "Potential broad home, not direct rare-earth evidence."
+    },
+    "362063": {
+      "label": "method_only_broad_fit",
+      "admit_as_direct": false,
+      "evidence": "NSF Transport Phenomena supports transport and separations methods but the indexed scope has no rare-earth target evidence."
+    },
+    "356605": {
+      "label": "method_only_broad_fit",
+      "admit_as_direct": false,
+      "source_url": "https://www.onr.navy.mil/work-with-us/funding-opportunities",
+      "evidence": "The ONR long-range BAA has broad separations/materials scope but no indexed rare-earth target evidence."
+    },
+    "344592": {
+      "label": "method_only_broad_fit",
+      "admit_as_direct": false,
+      "evidence": "The admitted children were Dynamical Influences on Social Systems for REEs and Polymer Chemistry for solvent extraction; neither supplies rare-earth target evidence."
+    },
+    "363375": {
+      "label": "irrelevant",
+      "admit_as_direct": false,
+      "evidence": "The Desalination and Water Purification program is scoped to impaired-water treatment and supplies no rare-earth target evidence."
+    },
+    "362900": {
+      "label": "irrelevant",
+      "admit_as_direct": false,
+      "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353222",
+      "evidence": "The YSEALI award funds a regional workshop, advocacy, policy recommendations, and supply-chain simulations; rare-earth minerals are workshop content rather than technical R&D scope."
+    },
+    "359996": {"label":"irrelevant","admit_as_direct":false,"evidence":"NASA Rapid Response and Novel Research in Earth Science; no rare-earth-material scope."},
+    "363224": {"label":"irrelevant","admit_as_direct":false,"evidence":"NASA Accelerating Earth Solutions; Earth is planetary/environmental, not rare-earth material evidence."},
+    "363241": {"label":"irrelevant","admit_as_direct":false,"evidence":"NASA Biosphere program element; Earth/element token co-occurrence is unrelated to rare-earth materials."},
+    "360003": {"label":"irrelevant","admit_as_direct":false,"evidence":"NASA INNOVATE Earth-science program element; no rare-earth-material scope."},
+    "363240": {"label":"irrelevant","admit_as_direct":false,"evidence":"NASA Atmosphere program element; no rare-earth-material scope."},
+    "363325": {"label":"irrelevant","admit_as_direct":false,"evidence":"NASA Habitable Worlds Observatory precursor science; Earth and element occurrences do not denote rare-earth elements."},
+    "363258": {"label":"irrelevant","admit_as_direct":false,"evidence":"NASA Planetary Science Enabling Facilities; no rare-earth-material scope."},
+    "361234": {"label":"irrelevant","admit_as_direct":false,"evidence":"NASA Heliophysics Foundational Research; no rare-earth-material scope."},
+    "360004": {"label":"irrelevant","admit_as_direct":false,"evidence":"NASA Solar System Science; no rare-earth-material scope."},
+    "360007": {"label":"irrelevant","admit_as_direct":false,"evidence":"FDA rare-disease natural-history studies; rare and elements are unrelated to rare-earth materials."},
+    "362847": {"label":"irrelevant","admit_as_direct":false,"evidence":"Department of War Rare Cancers Concept Award; no rare-earth-material scope."},
+    "360881": {"label":"irrelevant","admit_as_direct":false,"evidence":"NIH metastasis research; rare and elements are unrelated to rare-earth materials."}
+  },
+  "required_anchor_ids": ["360678", "361526", "362061"],
+  "known_negative_ids": ["362900", "359996", "363224", "363241", "360003", "363240", "363325", "363258", "361234", "360004", "360007", "362847", "360881"],
+  "current_direct_ree_fit_count": 0,
+  "coverage_note": "No current published parent or child in the 2026-08-22 catalog explicitly combines rare-earth target evidence with technical R&D scope. The adjudicated DOE/NSF anchors are broad-program homes and must be labeled honestly if displayed."
+}
