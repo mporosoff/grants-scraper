@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "phase": 4,
+  "attempted_at": "2026-08-22",
+  "status": "executor_failed_before_first_query_score",
+  "candidate_code_sha": "627e7c82480e97ed1cc6a5adbc4e830469347acb",
+  "executor_commit": "fdf95c1",
+  "holdout_frame_read": true,
+  "scored_query_count": 0,
+  "holdout_outcomes_observed": false,
+  "raw_results_file_created": false,
+  "failure": "The production comparison harness was passed to rankQuery before its parent and child engines were instantiated.",
+  "correction": "Instantiate the unchanged production and search-v2 engines from the same base harness before ranking.",
+  "retrieval_or_explanation_change": false,
+  "post_outcome_tuning": false
+}

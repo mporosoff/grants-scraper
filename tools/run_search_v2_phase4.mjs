@@ -134,8 +134,9 @@ async function execute() {
     throw new Error("The registered holdout contains duplicate query IDs or text.");
   }
 
-  const production = await loadHarness();
-  const candidate = makeVariantHarness(production, { searchV2: true });
+  const base = await loadHarness();
+  const production = makeVariantHarness(base, { searchV2: false });
+  const candidate = makeVariantHarness(base, { searchV2: true });
   const results = [];
   for (const item of holdout.queries) {
     const oldRanked = rankQuery(production, item.query, { evidence: true });
