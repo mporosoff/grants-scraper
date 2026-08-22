@@ -15,6 +15,7 @@ import vm from "node:vm";
 const ROOT = new URL("../", import.meta.url);
 const FRAME_PATH = "evaluation/search_v2_frame.json";
 const TRUTH_PATH = "evaluation/search_v2_truth.json";
+const RELEVANCE_CORRECTION_PATH = "evaluation/search_v2_relevance_correction.json";
 const BASELINE_PATH = "evaluation/search_v2_baseline.json";
 const DIAGNOSIS_PATH = "evaluation/search_v2_diagnosis.json";
 const ABLATION_PATH = "evaluation/search_v2_field_ablation.json";
@@ -424,6 +425,7 @@ function queryIsReeFamily(item) {
 
 async function collectBaseline(base, frame, truth) {
   const harness = makeVariantHarness(base, {});
+  const requiredPrimaryIds = truth.required_primary_ids || [];
   const results = [];
   const unlabelled = new Set();
   for (const item of frame.queries) {
@@ -448,7 +450,7 @@ async function collectBaseline(base, frame, truth) {
       diagnostics: ranked.diagnostics,
       normalization_scales: ranked.scales,
       top_results: top,
-      required_anchor_status: truth.required_anchor_ids.map(id => {
+      required_primary_status: requiredPrimaryIds.map(id => {
         const rank = ranked.rows.findIndex(row => row.id === id);
         return rank >= 0
           ? { id, admitted: true, rank: rank + 1 }
@@ -516,6 +518,7 @@ const VARIANTS = Object.freeze([
 ]);
 
 async function collectAblation(base, frame, truth) {
+  const requiredPrimaryIds = truth.required_primary_ids || [];
   const variants = [];
   const admissionsByVariant = new Map();
   for (const definition of VARIANTS) {
@@ -540,7 +543,7 @@ async function collectAblation(base, frame, truth) {
         known_negative_admissions: ranked.rows
           .filter(row => truth.known_negative_ids.includes(row.id))
           .map(row => row.id),
-        anchor_ranks: Object.fromEntries(truth.required_anchor_ids.map(id => {
+        primary_ranks: Object.fromEntries(requiredPrimaryIds.map(id => {
           const rank = ranked.rows.findIndex(row => row.id === id);
           return [id, rank < 0 ? null : rank + 1];
         })),
@@ -631,9 +634,9 @@ function buildDiagnosis(frame, truth, baseline, ablation) {
       {
         id: "RC-5",
         status: "confirmed",
-        mechanism: "The current published catalog contains no direct rare-earth technical-R&D parent or publishable child. DOE Office of Science, Genesis, and NSF CPS are adjudicated broad-program homes only.",
+        mechanism: "Retrieval has no controlled authoritative-scope entailment path. It therefore treats missing literal rare-earth wording as missing relevance even when published program scope contains the complete scientific intent.",
         evidence_query: "REE separations",
-        effect: "Strict target evidence alone produces a valid no-direct-match state; broad-program recall requires an explicit display policy rather than synonym leakage."
+        effect: "DOE BES Separation Science, Genesis Critical Minerals extraction/processing/recovery, and NSF Chemical Process Systems are omitted despite being primary relevant under the corrected bounded rubric."
       },
       {
         id: "RC-6",
@@ -657,20 +660,25 @@ function buildDiagnosis(frame, truth, baseline, ablation) {
       interpretation: "Title influence changes cross-domain ranking and some admissions, but disabling title bonuses does not repair the REE acronym/phrase failures. The motivating defect is protected-concept admission; field provenance remains a systemic explanation limitation."
     },
     source_coverage: {
-      direct_ree_fit_count: truth.current_direct_ree_fit_count,
-      broad_program_anchor_ids: truth.required_anchor_ids,
-      stop_condition: "No ingestion repair is required to represent the adjudicated broad homes, but the absence of a current direct REE call must remain visible rather than being hidden by false positives."
+      primary_ree_fit_count: truth.current_primary_ree_fit_count,
+      explicit_evidence_fit_count: truth.current_explicit_evidence_fit_count,
+      authoritative_scope_fit_count: truth.current_authoritative_scope_fit_count,
+      required_primary_ids: truth.required_primary_ids,
+      stop_condition: "Phase 2 must retrieve the three adjudicated primary programs through bounded scope entailment while continuing to exclude lexical noise and unbounded generic-metadata inference."
     },
     recommended_repair_track: "B",
-    scope_authorization: "A bounded protected-concept/query-admission correction is sufficient for retrieval. Add causal field/hierarchy provenance for explanations without replacing the full BM25 index architecture.",
+    scope_authorization: "A bounded protected-concept correction with explicit-evidence and authoritative-scope-entailment admission paths is sufficient for retrieval. Add causal field/hierarchy provenance for explanations without replacing the full BM25 index architecture.",
     work_eliminated: [
       "No embedding or query-time model layer.",
       "No wholesale BM25F rewrite in Phase 2.",
       "No intuitive global title/description reweighting.",
-      "No source-ingestion rebuild solely to fabricate direct REE recall.",
+      "No source-ingestion rebuild solely to fabricate literal REE wording.",
       "No artificial search delay."
     ],
-    unresolved_product_policy: "Choose whether adjudicated broad-program homes appear in a separately labeled Broader program fit tier when direct target evidence is absent."
+    relevance_policy_status: "corrected_pre_phase_2",
+    relevance_correction: RELEVANCE_CORRECTION_PATH,
+    primary_admission_paths: ["explicit_evidence", "authoritative_scope_entailment"],
+    broader_program_policy: "Reserve Broader program fit for genuinely adjacent programs whose published scientific scope does not establish primary entailment."
   };
 }
 
@@ -683,6 +691,11 @@ async function main() {
   const truthSource = await readFile(new URL(TRUTH_PATH, ROOT), "utf8");
   const frame = JSON.parse(frameSource);
   const truth = JSON.parse(truthSource);
+  if (write && truth.correction_stage === "pre_phase_2") {
+    throw new Error(
+      "The Phase 1 retrieval baseline is frozen. The pre-Phase-2 correction changes judgment only; do not rewrite scoring evidence.",
+    );
+  }
   const harness = await loadHarness();
   const baseline = await collectBaseline(harness, frame, truth);
   baseline.frame_sha256 = sha256(frameSource);

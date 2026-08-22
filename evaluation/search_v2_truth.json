@@ -1,77 +1,126 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "frozen_at": "2026-08-22",
-  "scope": "Development-set REE family adjudication against the current catalog and publication-eligible child sidecar.",
+  "corrected_at": "2026-08-22",
+  "correction_stage": "pre_phase_2",
+  "scoring_changed": false,
+  "scope": "Development-set REE-family relevance adjudication against the current catalog and publication-eligible child sidecar.",
+  "relevance_rubric": {
+    "primary_result": "A current, applicant-eligible opportunity is primary relevant when the research query is clearly within its published scientific or programmatic scope. Literal target wording is not required.",
+    "primary_admission_paths": {
+      "explicit_evidence": "The opportunity or a publication-eligible child explicitly establishes the query target and method or scientific intent.",
+      "authoritative_scope_entailment": "Controlled relationships plus authoritative opportunity or child scope establish that the query concept is contained within the funded scientific domain. For example, rare-earth elements are a controlled subset of critical minerals, and rare-earth separation is contained within an authoritative extraction, processing, recovery, or separation-science scope."
+    },
+    "scope_entailment_constraints": [
+      "Every entailment must identify both the controlled concept relationship and the authoritative opportunity or child scope that completes the relevance path.",
+      "Generic agency, discipline, broad topic, funding category, or method labels cannot establish scope entailment by themselves.",
+      "A method cannot substitute for a target unless an authoritative scoped relationship establishes that the target is contained within that program domain.",
+      "Currentness and applicant eligibility remain independent gates; a relevance label does not waive either gate."
+    ],
+    "broader_program_fit": "A genuinely adjacent program whose scope makes fit plausible, but whose published scientific scope does not establish that the complete query concept is contained within the program.",
+    "irrelevant": "The published scope does not support the query's scientific intent, including lexical collisions involving Earth science, rare disease, rare cancer, policy workshops, or unrelated child text."
+  },
   "label_definitions": {
-    "direct_ree_fit": "The source explicitly supports rare-earth or lanthanide technical R&D.",
-    "broad_program_fit": "The authoritative source supports a program area broad enough for rare-earth technical R&D, but does not explicitly name the target in the indexed scope.",
-    "method_only_broad_fit": "The source supports a relevant method but supplies no rare-earth target evidence; it must not satisfy a target-plus-method query by itself.",
-    "irrelevant": "The source does not support rare-earth technical R&D for the query family."
+    "primary_relevant": "Primary through either explicit evidence or bounded authoritative scope entailment.",
+    "broader_program_fit": "Scientifically adjacent and plausibly useful, but not established as primary by authoritative scope.",
+    "irrelevant": "Not relevant to rare-earth separation research under either primary-admission path."
   },
   "adjudications": {
     "360678": {
-      "label": "broad_program_fit",
-      "admit_as_direct": false,
+      "label": "primary_relevant",
+      "admit_as_primary": true,
+      "admission_path": "authoritative_scope_entailment",
       "source_url": "https://science.osti.gov",
-      "evidence": "DOE Office of Science annual open solicitation covering Basic Energy Sciences and the indexed notice program area Separations.",
-      "policy_note": "Eligible only for a separately labeled broader-program tier unless explicit rare-earth target evidence is found."
+      "evidence": "DOE Office of Science Basic Energy Sciences publishes Separation Science within the solicitation's controlled program scope.",
+      "scope_entailment": {
+        "query_concept": "rare-earth separations",
+        "controlled_relationships": [
+          "rare-earth separation is a specialization of separation science"
+        ],
+        "authoritative_scope": "Basic Energy Sciences — Separation Science"
+      }
     },
     "361526": {
-      "label": "broad_program_fit",
-      "admit_as_direct": false,
+      "label": "primary_relevant",
+      "admit_as_primary": true,
+      "admission_path": "authoritative_scope_entailment",
       "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/350588",
-      "evidence": "Genesis Mission includes Securing America’s Critical Minerals Supply and a published Extraction and Processing Technologies focus area.",
-      "policy_note": "Strong broad-program anchor, but current indexed source text does not explicitly identify rare-earth elements."
+      "evidence": "Genesis Mission publishes Securing America’s Critical Minerals Supply with extraction, processing, and recovery scope.",
+      "scope_entailment": {
+        "query_concept": "rare-earth separations",
+        "controlled_relationships": [
+          "rare-earth elements are a subset of critical minerals",
+          "rare-earth separation is an extraction, processing, or recovery operation"
+        ],
+        "authoritative_scope": "Securing America’s Critical Minerals Supply — Extraction and Processing Technologies"
+      }
     },
     "362061": {
-      "label": "broad_program_fit",
-      "admit_as_direct": false,
+      "label": "primary_relevant",
+      "admit_as_primary": true,
+      "admission_path": "authoritative_scope_entailment",
       "source_url": "https://www.nsf.gov/funding/pgm_summ.jsp?pims_id=506547",
-      "evidence": "NSF Chemical Process Systems explicitly spans critical minerals and separations.",
-      "policy_note": "Potential broad home, not direct rare-earth evidence."
+      "evidence": "NSF Chemical Process Systems explicitly publishes critical-minerals and separations scope.",
+      "scope_entailment": {
+        "query_concept": "rare-earth separations",
+        "controlled_relationships": [
+          "rare-earth elements are a subset of critical minerals",
+          "rare-earth separation is contained within chemical separation processes"
+        ],
+        "authoritative_scope": "Chemical Process Systems — Critical Minerals and Separations"
+      }
     },
     "362063": {
-      "label": "method_only_broad_fit",
-      "admit_as_direct": false,
-      "evidence": "NSF Transport Phenomena supports transport and separations methods but the indexed scope has no rare-earth target evidence."
+      "label": "broader_program_fit",
+      "admit_as_primary": false,
+      "evidence": "NSF Transport Phenomena supports adjacent transport and separations methods, but its published scope does not establish the rare-earth or critical-minerals target relationship needed for primary admission."
     },
     "356605": {
-      "label": "method_only_broad_fit",
-      "admit_as_direct": false,
+      "label": "broader_program_fit",
+      "admit_as_primary": false,
       "source_url": "https://www.onr.navy.mil/work-with-us/funding-opportunities",
-      "evidence": "The ONR long-range BAA has broad separations/materials scope but no indexed rare-earth target evidence."
+      "evidence": "The ONR long-range BAA has adjacent separations and materials scope, but generic broad-agency scope does not establish rare-earth separation as contained within the program."
     },
     "344592": {
-      "label": "method_only_broad_fit",
-      "admit_as_direct": false,
-      "evidence": "The admitted children were Dynamical Influences on Social Systems for REEs and Polymer Chemistry for solvent extraction; neither supplies rare-earth target evidence."
+      "label": "irrelevant",
+      "admit_as_primary": false,
+      "evidence": "The admitted children were Dynamical Influences on Social Systems for REEs and Polymer Chemistry for solvent extraction; neither supplies a valid explicit-evidence or authoritative-scope path."
     },
     "363375": {
       "label": "irrelevant",
-      "admit_as_direct": false,
-      "evidence": "The Desalination and Water Purification program is scoped to impaired-water treatment and supplies no rare-earth target evidence."
+      "admit_as_primary": false,
+      "evidence": "The Desalination and Water Purification program is scoped to impaired-water treatment and does not establish rare-earth or critical-minerals scope."
     },
     "362900": {
       "label": "irrelevant",
-      "admit_as_direct": false,
+      "admit_as_primary": false,
       "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353222",
       "evidence": "The YSEALI award funds a regional workshop, advocacy, policy recommendations, and supply-chain simulations; rare-earth minerals are workshop content rather than technical R&D scope."
     },
-    "359996": {"label":"irrelevant","admit_as_direct":false,"evidence":"NASA Rapid Response and Novel Research in Earth Science; no rare-earth-material scope."},
-    "363224": {"label":"irrelevant","admit_as_direct":false,"evidence":"NASA Accelerating Earth Solutions; Earth is planetary/environmental, not rare-earth material evidence."},
-    "363241": {"label":"irrelevant","admit_as_direct":false,"evidence":"NASA Biosphere program element; Earth/element token co-occurrence is unrelated to rare-earth materials."},
-    "360003": {"label":"irrelevant","admit_as_direct":false,"evidence":"NASA INNOVATE Earth-science program element; no rare-earth-material scope."},
-    "363240": {"label":"irrelevant","admit_as_direct":false,"evidence":"NASA Atmosphere program element; no rare-earth-material scope."},
-    "363325": {"label":"irrelevant","admit_as_direct":false,"evidence":"NASA Habitable Worlds Observatory precursor science; Earth and element occurrences do not denote rare-earth elements."},
-    "363258": {"label":"irrelevant","admit_as_direct":false,"evidence":"NASA Planetary Science Enabling Facilities; no rare-earth-material scope."},
-    "361234": {"label":"irrelevant","admit_as_direct":false,"evidence":"NASA Heliophysics Foundational Research; no rare-earth-material scope."},
-    "360004": {"label":"irrelevant","admit_as_direct":false,"evidence":"NASA Solar System Science; no rare-earth-material scope."},
-    "360007": {"label":"irrelevant","admit_as_direct":false,"evidence":"FDA rare-disease natural-history studies; rare and elements are unrelated to rare-earth materials."},
-    "362847": {"label":"irrelevant","admit_as_direct":false,"evidence":"Department of War Rare Cancers Concept Award; no rare-earth-material scope."},
-    "360881": {"label":"irrelevant","admit_as_direct":false,"evidence":"NIH metastasis research; rare and elements are unrelated to rare-earth materials."}
+    "359996": {"label":"irrelevant","admit_as_primary":false,"evidence":"NASA Rapid Response and Novel Research in Earth Science; no rare-earth-material scope."},
+    "363224": {"label":"irrelevant","admit_as_primary":false,"evidence":"NASA Accelerating Earth Solutions; Earth is planetary/environmental, not rare-earth material evidence."},
+    "363241": {"label":"irrelevant","admit_as_primary":false,"evidence":"NASA Biosphere program element; Earth/element token co-occurrence is unrelated to rare-earth materials."},
+    "360003": {"label":"irrelevant","admit_as_primary":false,"evidence":"NASA INNOVATE Earth-science program element; no rare-earth-material scope."},
+    "363240": {"label":"irrelevant","admit_as_primary":false,"evidence":"NASA Atmosphere program element; no rare-earth-material scope."},
+    "363325": {"label":"irrelevant","admit_as_primary":false,"evidence":"NASA Habitable Worlds Observatory precursor science; Earth and element occurrences do not denote rare-earth elements."},
+    "363258": {"label":"irrelevant","admit_as_primary":false,"evidence":"NASA Planetary Science Enabling Facilities; no rare-earth-material scope."},
+    "361234": {"label":"irrelevant","admit_as_primary":false,"evidence":"NASA Heliophysics Foundational Research; no rare-earth-material scope."},
+    "360004": {"label":"irrelevant","admit_as_primary":false,"evidence":"NASA Solar System Science; no rare-earth-material scope."},
+    "360007": {"label":"irrelevant","admit_as_primary":false,"evidence":"FDA rare-disease natural-history studies; rare and elements are unrelated to rare-earth materials."},
+    "362847": {"label":"irrelevant","admit_as_primary":false,"evidence":"Department of War Rare Cancers Concept Award; no rare-earth-material scope."},
+    "360881": {"label":"irrelevant","admit_as_primary":false,"evidence":"NIH metastasis research; rare and elements are unrelated to rare-earth materials."}
   },
-  "required_anchor_ids": ["360678", "361526", "362061"],
-  "known_negative_ids": ["362900", "359996", "363224", "363241", "360003", "363240", "363325", "363258", "361234", "360004", "360007", "362847", "360881"],
-  "current_direct_ree_fit_count": 0,
-  "coverage_note": "No current published parent or child in the 2026-08-22 catalog explicitly combines rare-earth target evidence with technical R&D scope. The adjudicated DOE/NSF anchors are broad-program homes and must be labeled honestly if displayed."
+  "required_primary_ids": ["360678", "361526", "362061"],
+  "broader_program_fit_ids": ["362063", "356605"],
+  "known_irrelevant_ids": ["344592", "362900", "363375", "359996", "363224", "363241", "360003", "363240", "363325", "363258", "361234", "360004", "360007", "362847", "360881"],
+  "known_negative_ids": ["344592", "362900", "363375", "359996", "363224", "363241", "360003", "363240", "363325", "363258", "361234", "360004", "360007", "362847", "360881"],
+  "current_primary_ree_fit_count": 3,
+  "current_explicit_evidence_fit_count": 0,
+  "current_authoritative_scope_fit_count": 3,
+  "ree_separations_success_criterion": {
+    "required_primary_ids": ["360678", "361526", "362061"],
+    "excluded_noise_classes": ["NASA Earth or planetary science", "rare disease or rare cancer", "policy workshop", "unrelated child-text collision"],
+    "note": "Apply currentness and applicant-eligibility gates before display."
+  },
+  "holdout_judgment_contract": "When Phase 4 opens the sealed holdout, judge it under schema version 2: explicit evidence and bounded authoritative scope entailment are both valid primary-admission paths. Do not reuse the superseded literal-target interpretation."
 }

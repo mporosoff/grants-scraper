@@ -19,8 +19,8 @@ The live site and refreshed local `main` produced the same public-search results
 | Query | Results | Outcome |
 | --- | ---: | --- |
 | `REE` | 1 | YSEALI supply-chain policy workshop; irrelevant technical-R&D fit |
-| `REEs` | 14 | NASA Earth/planetary, clinical rare-disease/cancer, YSEALI, and an unrelated Army child; all invalid direct REE matches |
-| `REE separations` | 0 | Misses all adjudicated broad DOE/NSF program homes |
+| `REEs` | 14 | NASA Earth/planetary, clinical rare-disease/cancer, YSEALI, and an unrelated Army child; all invalid primary results |
+| `REE separations` | 0 | Misses all three authoritative-scope primary results |
 | `solvent extraction of REEs` | 8 | Targetless NASA/clinical/policy/Army results admitted |
 | `ionic liquids for REE extraction` | 5 | Method-only programs admitted without rare-earth target evidence |
 | `R.E.E.` | 0 | Dotted acronym is not normalized |
@@ -50,17 +50,32 @@ No service worker is registered by this repository. Cache-busting strings exist,
 The development/holdout split was frozen before any Phase 2 tuning:
 
 - development: 19 REE/control queries plus 30 adversarial queries across chemistry/materials, energy, biomedical, public health, agriculture, space, defense, AI/computing, and environmental science;
-- holdout: 24 sealed queries stratified across direct positives, broad-program positives, method-only cases, hard negatives, phrase/acronym variants, and disciplines;
+- holdout: 24 sealed queries stratified across primary positives, broader-program positives, method-only cases, hard negatives, phrase/acronym variants, and disciplines;
 - holdout status: unopened;
 - current REE truth population: 20 adjudicated result records, with no unlabelled result from the REE-family development queries.
 
-The current catalog contains no publication-eligible parent or child that explicitly combines rare-earth target evidence with technical R&D scope. The supported anchors are broader program homes:
+The current catalog contains no publication-eligible parent or child that explicitly combines rare-earth target wording with technical R&D scope. Explicit wording is only one valid relevance path. The following are primary results through bounded authoritative scope entailment:
 
 - DOE Office of Science annual solicitation (`360678`): Basic Energy Sciences and Separations;
 - Genesis Mission (`361526`): Critical Minerals Supply plus Extraction and Processing Technologies;
 - NSF Chemical Process Systems (`362061`): critical minerals and separations.
 
-These are not honest direct matches. If displayed, they require a distinct `Broader program fit` policy and explanation.
+Their published scientific scopes encompass rare-earth separation: rare-earth elements are a controlled subset of critical minerals, and rare-earth separation lies within extraction, processing, recovery, separation science, and the cited Chemical Process Systems scope. Currentness and applicant eligibility remain separate display gates.
+
+`Broader program fit` is reserved for genuinely adjacent programs whose fit is plausible but not established by published scope. NSF Transport Phenomena (`362063`) and the ONR long-range BAA (`356605`) currently carry that non-primary label.
+
+## Pre-Phase-2 relevance correction
+
+On 2026-08-22, before any Phase 2 tuning, the relevance definition was corrected. The earlier Phase 1 interpretation incorrectly treated literal rare-earth or lanthanide target wording as necessary for a primary result. The corrected primary-admission contract has two paths:
+
+1. **Explicit evidence:** the opportunity or a publication-eligible child explicitly establishes the target and method or scientific intent.
+2. **Authoritative scope entailment:** controlled concept relationships plus authoritative opportunity or child scope establish that the complete query concept is contained within the funded scientific domain.
+
+Scope entailment is deliberately bounded. Generic agency, discipline, broad topic, category, or method labels are insufficient; each entailment must expose the controlled relationship and the authoritative scope evidence that completes the path. This correction changes the development truth rubric and labels only. It does not change query frames, retrieval scoring, admission behavior, ranking, or production assets.
+
+The sealed holdout remains unopened and unchanged. When it is first adjudicated in Phase 4, it must use the corrected rubric rather than the superseded literal-target interpretation. The machine-readable audit record is `evaluation/search_v2_relevance_correction.json`.
+
+The frozen Phase 1 baseline retains its original retrieval outputs, score traces, truth hash, and embedded adjudication snapshots as historical evidence. The correction record binds that superseded truth hash to schema version 2. From this checkpoint forward, evaluation must join results to `evaluation/search_v2_truth.json`; it must not use the baseline's embedded pre-correction labels as current judgment.
 
 ## Confirmed root causes
 
@@ -68,7 +83,7 @@ These are not honest direct matches. If displayed, they require a distinct `Broa
 2. The rare-earth guard accepts token co-occurrence rather than an actual phrase/proximity. `rare` and `earth` can therefore satisfy the concept in a policy/workshop notice.
 3. `requiredUnlessTopic: Separations and membranes` lets a method topic substitute for the missing rare-earth target. This admits targetless results for complex extraction queries.
 4. Dotted and hyphenated forms are not normalized into the protected acronym/phrase representation.
-5. The current source/index surface has broad DOE/NSF homes but no direct current rare-earth R&D call. A correct direct-result set may therefore be empty.
+5. Retrieval has no controlled authoritative-scope entailment path. It therefore misses DOE BES Separation Science, Genesis Critical Minerals extraction/processing/recovery, and NSF Chemical Process Systems even though their published scopes establish primary relevance for `REE separations`.
 6. Parent and child indexes collapse field identity. Retrieval evidence exposes matched terms and aggregate score contribution, so `Why this matched` cannot reliably distinguish title, description, child, program area, metadata, or source evidence.
 
 The evidence rules out stale assets, a live/local catalog mismatch, sidecar timing, personalization, eligibility, freshness, filters, sorting, and title bonuses as the primary cause of the reported REE behavior.
@@ -99,23 +114,23 @@ Recommended retrieval track: **Track B — bounded query/admission correction**.
 Phase 2 is authorized to:
 
 - normalize `REE`, `REEs`, dotted forms, hyphenated rare-earth phrases, and lanthanide variants into one protected target concept;
-- require literal/phrase/proximity target evidence for direct admission;
-- prevent separations/method topics from substituting for the target concept;
+- admit primary results through either explicit evidence or bounded authoritative scope entailment;
+- encode controlled target relationships such as `rare-earth elements ⊂ critical minerals` and require authoritative extraction, processing, recovery, separation-science, or equivalent child/program scope to complete the entailment path;
+- require literal/phrase/proximity evidence for the explicit-evidence path;
+- prevent generic separations/method topics, agency, discipline, or broad category labels from substituting for a missing target or controlled scope relationship;
 - saturate synonym contribution at the concept level;
 - preserve browser/Python query parity;
 - add a shared search/index/sidecar schema readiness contract;
 - preserve causal field/hierarchy provenance needed by Phase 3 explanations;
-- prototype a separately labeled broad-program fallback, without treating it as a direct result.
+- reserve a separately labeled broader-program tier for adjacent programs whose authoritative scope does not establish primary entailment.
 
-Phase 2 is not authorized to add embeddings, query-time AI, telemetry, artificial delay, a wholesale BM25F rewrite, broad synonym expansion, intuitive global weight tuning, or a source-ingestion rebuild intended to fabricate direct REE recall.
+Phase 2 is not authorized to add embeddings, query-time AI, telemetry, artificial delay, a wholesale BM25F rewrite, broad synonym expansion, intuitive global weight tuning, or unbounded inference from generic metadata.
 
-## User checkpoint
+## User checkpoint resolved
 
-One product-policy decision remains before the Phase 2 result contract can be finalized:
+The result contract now requires DOE BES Separation Science (`360678`), Genesis Critical Minerals extraction/processing/recovery (`361526`), and NSF Chemical Process Systems (`362061`) as primary relevant results for `REE separations`, subject to currentness and applicant eligibility. The success state is not an empty primary list plus three suggestions.
 
-> When no direct rare-earth target evidence exists, should DOE Office of Science, Genesis, and NSF Chemical Process Systems appear in a separate `Broader program fit` tier, or should the direct list remain empty and broader homes appear only as a suggestion?
-
-The recommended default is a separate broader-program tier because it preserves useful DOE/Genesis discovery while staying explicit that the source does not name the target.
+NASA Earth/planetary programs, rare-disease or rare-cancer programs, the YSEALI policy workshop, and unrelated child-text collisions remain excluded noise.
 
 ## Phase boundary
 
@@ -125,7 +140,7 @@ Completed in Phase 1:
 - exact live asset reconciliation;
 - 19 live query results;
 - frozen development/holdout split;
-- complete REE result adjudication;
+- complete REE result adjudication, followed by the recorded pre-Phase-2 relevance-definition correction;
 - production-module diagnostic trace;
 - eight field ablations;
 - root-cause and Track B decision.
@@ -146,7 +161,7 @@ The full Python failures reproduce catalog-fixture drift already present after t
 Not started:
 
 - Phase 2 retrieval/query correction;
-- broad-program UI policy implementation;
+- controlled primary scope-entailment implementation;
 - Phase 3 contextual explanation redesign;
 - Phase 4 holdout execution and release-candidate freeze;
 - merge, deployment, or live v1.2.0 shipment.
