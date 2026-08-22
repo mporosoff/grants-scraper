@@ -8,7 +8,7 @@
     if (sidecarPromise) return sidecarPromise;
     sidecarPromise = new Promise((resolve, reject) => {
       const script = document.createElement("script");
-      script.src = "./data/subtopics.js?v=p10-term-display-20260821";
+      script.src = "./data/subtopics.js?v=search-v2-phase2-20260822";
       script.async = true;
       script.addEventListener("load", () => {
         if (globalThis.SUBTOPIC_CATALOG) resolve(globalThis.SUBTOPIC_CATALOG);

@@ -17,6 +17,7 @@
   const APP_VERSION = APP_CONFIG?.release?.version || "1.1.0";
   const CANONICAL_URL = "https://mporosoff.github.io/grants-scraper/";
   const SEARCH_QUERY = globalThis.FUNDING_SEARCH_QUERY;
+  const SEARCH_V2_CONFIG = globalThis.FUNDING_SEARCH_V2_CONFIG;
   const RETRIEVAL_API = globalThis.FUNDING_RETRIEVAL;
   const SUBTOPIC_API = globalThis.FUNDING_SUBTOPICS;
   const MATCH_EXPLAIN_API = globalThis.FUNDING_MATCH_EXPLAIN;
@@ -4345,14 +4346,25 @@
       if (!RETRIEVAL_API?.create) {
         throw new Error("The hybrid retrieval helper did not load. Refresh the page and try again.");
       }
-      searchEngine = RETRIEVAL_API.create(catalog, SEARCH_QUERY);
+      if (APP_CONFIG?.flags?.searchV2 && !SEARCH_V2_CONFIG) {
+        throw new Error("Search v2 could not initialize because its concept contract is missing.");
+      }
+      searchEngine = RETRIEVAL_API.create(catalog, SEARCH_QUERY, {
+        searchV2: APP_CONFIG?.flags?.searchV2 === true,
+        searchV2Config: SEARCH_V2_CONFIG,
+        catalogRole: "parent",
+      });
       if (APP_CONFIG?.flags?.subtopics) {
         if (!SUBTOPIC_API?.loadSidecar || !RETRIEVAL_API?.createChildCatalog) {
           throw new Error("The topic search helper did not load. Refresh the page and try again.");
         }
         const sidecar = await SUBTOPIC_API.loadSidecar();
         childCatalog = RETRIEVAL_API.createChildCatalog(sidecar);
-        childSearchEngine = RETRIEVAL_API.create(childCatalog, SEARCH_QUERY);
+        childSearchEngine = RETRIEVAL_API.create(childCatalog, SEARCH_QUERY, {
+          searchV2: APP_CONFIG?.flags?.searchV2 === true,
+          searchV2Config: SEARCH_V2_CONFIG,
+          catalogRole: "child",
+        });
       }
       if (!PROFILE_API?.loadProfile || !PROFILE_API?.extractCv) {
         throw new Error("The local profile module did not load. Refresh the page and try again.");

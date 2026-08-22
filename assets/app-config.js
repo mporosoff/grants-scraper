@@ -8,6 +8,7 @@
   const productionFlags = Object.freeze({
     subtopics: true,
     matchExplanations: true,
+    searchV2: false,
   });
   const localHosts = new Set(["localhost", "127.0.0.1", "[::1]"]);
   const local = localHosts.has(globalThis.location?.hostname || "");
@@ -18,6 +19,9 @@
     ),
     matchExplanations: productionFlags.matchExplanations || (
       local && parameters.get("ff-explain") === "1"
+    ),
+    searchV2: productionFlags.searchV2 || (
+      local && parameters.get("ff-search-v2") === "1"
     ),
   });
 

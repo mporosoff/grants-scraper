@@ -29,17 +29,17 @@ test("P11 production feature flags enable topics and explanations", () => {
   const production = loadConfig("https://mporosoff.github.io/?ff-subtopics=1&ff-explain=1");
   assert.deepEqual(
     { ...production.productionFlags },
-    { subtopics: true, matchExplanations: true },
+    { subtopics: true, matchExplanations: true, searchV2: false },
   );
   assert.deepEqual(
     { ...production.flags },
-    { subtopics: true, matchExplanations: true },
+    { subtopics: true, matchExplanations: true, searchV2: false },
   );
 
-  const local = loadConfig("http://127.0.0.1:8765/?ff-subtopics=1&ff-explain=1");
+  const local = loadConfig("http://127.0.0.1:8765/?ff-subtopics=1&ff-explain=1&ff-search-v2=1");
   assert.deepEqual(
     { ...local.flags },
-    { subtopics: true, matchExplanations: true },
+    { subtopics: true, matchExplanations: true, searchV2: true },
   );
   assert.equal(local.release.version, "1.1.0");
   assert.equal(local.release.updated, "2026-08-21");
@@ -50,10 +50,9 @@ test("sidecar is lazy and normal pages share one app release source", () => {
   assert.match(runtimeSource, /document\.head\.append\(script\)/);
   assert.doesNotMatch(mainHtml, /<script src="\.\/data\/subtopics\.js/);
   assert.doesNotMatch(teamHtml, /<script src="(?:\.\/)?data\/subtopics\.js/);
-  for (const page of [mainHtml, teamHtml]) {
-    assert.match(page, /assets\/app-config\.js\?v=app-1\.1\.0/);
-    assert.match(page, /data-app-version/);
-  }
+  assert.match(mainHtml, /assets\/app-config\.js\?v=search-v2-phase2-20260822/);
+  assert.match(teamHtml, /assets\/app-config\.js\?v=app-1\.1\.0/);
+  for (const page of [mainHtml, teamHtml]) assert.match(page, /data-app-version/);
 });
 
 test("explanations are evidence-only, source-aware, and capped at three", () => {

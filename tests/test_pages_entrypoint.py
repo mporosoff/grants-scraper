@@ -211,6 +211,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("Enter to send", explorer_html)
         self.assertIn("Export CSV", explorer_html)
         self.assertIn('id="result-label"', explorer_html)
+        search_v2_version = "search-v2-phase2-20260822"
         self.assertIn(
             '<script src="./data/opportunities.js?v=catalog-',
             explorer_html,
@@ -240,22 +241,26 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             '<script src="./assets/profile.js?v=audit-2026-08-13"></script>',
             explorer_html,
         )
-        self.assertIn('assets/app-config.js?v=app-1.1.0', explorer_html)
-        self.assertIn('assets/subtopic-runtime.js?v=app-1.1.0', explorer_html)
+        self.assertIn(f'assets/app-config.js?v={search_v2_version}', explorer_html)
+        self.assertIn(f'assets/search-v2-config.js?v={search_v2_version}', explorer_html)
+        self.assertIn(f'assets/subtopic-runtime.js?v={search_v2_version}', explorer_html)
         self.assertIn('assets/match-explain.js?v=match-ux-20260821', explorer_html)
         self.assertIn("data-app-version", explorer_html)
         self.assertNotIn("assets/preferences.js", explorer_html)
-        for asset in ("profile-ranking.js", "search-query.js"):
-            self.assertIn(
-                f'<script src="./assets/{asset}?v={search_version}"></script>',
-                explorer_html,
-            )
         self.assertIn(
-            '<script src="./assets/search-retrieval.js?v=app-1.1.0"></script>',
+            f'<script src="./assets/profile-ranking.js?v={search_version}"></script>',
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/app.js?v=match-ux-20260821"></script>',
+            f'<script src="./assets/search-query.js?v={search_v2_version}"></script>',
+            explorer_html,
+        )
+        self.assertIn(
+            f'<script src="./assets/search-retrieval.js?v={search_v2_version}"></script>',
+            explorer_html,
+        )
+        self.assertIn(
+            f'<script src="./assets/app.js?v={search_v2_version}"></script>',
             explorer_html,
         )
         self.assertIn(

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "evaluated_at": "2026-08-22",
+  "status": "not_required_by_phase_1_evidence",
+  "inherited_measurement": "evaluation/search_v2_field_ablation.json",
+  "reason": "Track B retained production field weights and bonuses. Phase 2 added field-local causal verification, not a new field-scoring model.",
+  "replacement_gates": [
+    "explicit protected evidence identifies substantive parent/child fields",
+    "generic topic, discipline, agency, and category fields cannot establish scope entailment",
+    "protected concept contribution saturates at the top two term contributions",
+    "parent/child rollup remains cardinality-neutral"
+  ]
+}

@@ -23,6 +23,11 @@ from pathlib import Path
 from .build_catalog import tokenize
 from .currentness import record_is_current
 from .search_query import expand_query_groups
+from .search_v2_contract import (
+    authoritative_scope_matches,
+    protected_rare_earth_evidence,
+    validate_search_v2_catalog,
+)
 
 # Facet name -> record field. Mirrors ``facet_counts`` in build_catalog so the
 # filters a user picked in the UI mean the same thing here.
@@ -126,12 +131,18 @@ def _posting_terms(
     return [(term, weight) for _, weight, term in candidates[:6]]
 
 
-def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[float]]:
+def hybrid_scores(
+    catalog: dict,
+    query: str,
+    *,
+    search_v2: bool = False,
+) -> tuple[list[float], bool, list[float]]:
     """Return blended scores, query presence, and lexical-only scores.
 
     Document ids are positions in ``catalog['opportunities']`` (the order the
     index was built in), so ``scores[i]`` scores ``opportunities[i]``.
     """
+    search_v2_spec = validate_search_v2_catalog(catalog) if search_v2 else None
     index = catalog["search_index"]
     postings = index["postings"]
     lengths = index["document_lengths"]
@@ -148,8 +159,14 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
     semantic_coverage = [0] * document_count
     required_group_coverage = [0] * document_count
     always_required_coverage = [0] * document_count
-    query_groups = expand_query_groups(query, postings)
+    query_groups = expand_query_groups(query, postings, search_v2=search_v2)
     records = catalog["opportunities"]
+    scope_matches = (
+        authoritative_scope_matches(records, query_groups, search_v2_spec)
+        if search_v2
+        else {}
+    )
+    lexical_group_matches = [set() for _ in range(document_count)]
     document_topics = [list(dict.fromkeys(record.get("topic_areas") or [])) for record in records]
     document_phrase_text = [
         " ".join(tokenize(" ".join([
@@ -189,11 +206,12 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
                 return True
         return False
 
-    for group in query_groups:
+    for group_index, group in enumerate(query_groups):
         group_terms = group["terms"]
         group_documents: set[int] = set()
         group_evidence: dict[int, int] = {}
         group_lexical_scores: dict[int, float] = {}
+        group_term_scores: dict[int, dict[str, float]] = {}
         for query_term, query_weight in group_terms:
             query_term_documents: set[int] = set()
             for term, resolution_weight in _posting_terms(
@@ -215,12 +233,15 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
                     denominator = frequency + _K1 * (
                         1 - _B + _B * (lengths[document_id] / average_length)
                     )
+                    contribution = term_weight * inverse_frequency * (
+                        (frequency * (_K1 + 1)) / denominator
+                    )
                     group_lexical_scores[document_id] = (
                         group_lexical_scores.get(document_id, 0.0)
-                        + term_weight * inverse_frequency * (
-                        (frequency * (_K1 + 1)) / denominator
-                        )
+                        + contribution
                     )
+                    term_scores = group_term_scores.setdefault(document_id, {})
+                    term_scores[term] = term_scores.get(term, 0.0) + contribution
                     query_term_documents.add(document_id)
             for document_id in query_term_documents:
                 group_evidence[document_id] = group_evidence.get(document_id, 0) + 1
@@ -238,6 +259,8 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
         evidence_mode = group.get("evidence_mode") or "all"
 
         def has_required_evidence(document_id: int) -> bool:
+            if search_v2 and group.get("evidence_policy") == "protected_rare_earth":
+                return protected_rare_earth_evidence(records[document_id]) is not None
             checks: list[bool] = []
             if alternatives:
                 checks.append(any(
@@ -272,8 +295,19 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
             and has_required_evidence(document_id)
         }
         for document_id in group_documents:
-            lexical_scores[document_id] += group_lexical_scores.get(document_id, 0.0)
+            contribution = group_lexical_scores.get(document_id, 0.0)
+            if search_v2 and group.get("saturate_concept"):
+                term_contributions = sorted(
+                    group_term_scores.get(document_id, {}).values(),
+                    reverse=True,
+                )
+                if term_contributions:
+                    contribution = term_contributions[0] + 0.35 * (
+                        term_contributions[1] if len(term_contributions) > 1 else 0.0
+                    )
+            lexical_scores[document_id] += contribution
             lexical_coverage[document_id] += 1
+            lexical_group_matches[document_id].add(group_index)
             if group.get("required_unless_topic"):
                 required_group_coverage[document_id] += 1
             if group.get("required_always"):
@@ -309,6 +343,24 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
             if document_id not in group_documents:
                 semantic_coverage[document_id] += 1
 
+    scope_entailment_score = max(
+        0.01,
+        float((search_v2_spec or {}).get("scope_entailment_score") or 1.0),
+    )
+    for document_id, match in scope_matches.items():
+        covered_concepts = set(match.get("covered_concepts") or [])
+        for group_index, group in enumerate(query_groups):
+            if group.get("concept_id") not in covered_concepts:
+                continue
+            if group_index not in lexical_group_matches[document_id]:
+                lexical_group_matches[document_id].add(group_index)
+                lexical_coverage[document_id] += 1
+                if group.get("required_unless_topic"):
+                    required_group_coverage[document_id] += 1
+                if group.get("required_always"):
+                    always_required_coverage[document_id] += 1
+        lexical_scores[document_id] += scope_entailment_score
+
     import unicodedata
 
     exact_phrase_documents: set[int] = set()
@@ -337,9 +389,15 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
     # Keep candidate admission lexical. Catalog topics can rerank a record
     # that already satisfies the query, but cannot create topic-wide matches.
     # Two concepts are conjunctive; longer searches keep a 60% coverage floor.
+    protected_complete_coverage = search_v2 and any(
+        group.get("evidence_policy") == "protected_rare_earth"
+        for group in query_groups
+    )
     minimum_coverage = (
         0
         if not query_groups
+        else len(query_groups)
+        if protected_complete_coverage
         else len(query_groups)
         if len(query_groups) <= 2
         else math.ceil(len(query_groups) * 0.6)
@@ -382,9 +440,14 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
     return scores, bool(query_groups), lexical_scores
 
 
-def bm25_scores(catalog: dict, query: str) -> tuple[list[float], bool]:
+def bm25_scores(
+    catalog: dict,
+    query: str,
+    *,
+    search_v2: bool = False,
+) -> tuple[list[float], bool]:
     """Compatibility wrapper for callers that consumed the former BM25 API."""
-    scores, has_terms, _ = hybrid_scores(catalog, query)
+    scores, has_terms, _ = hybrid_scores(catalog, query, search_v2=search_v2)
     return scores, has_terms
 
 
@@ -486,6 +549,8 @@ def search_catalog(
     filters: dict | None = None,
     top_k: int | None = None,
     as_of: date | None = None,
+    *,
+    search_v2: bool = False,
 ) -> list[dict]:
     """Return matching opportunity records, ranked like the site.
 
@@ -496,7 +561,11 @@ def search_catalog(
     """
     records = catalog.get("opportunities") or []
     if query and query.strip():
-        scores, has_terms, lexical_scores = hybrid_scores(catalog, query)
+        scores, has_terms, lexical_scores = hybrid_scores(
+            catalog,
+            query,
+            search_v2=search_v2,
+        )
     else:
         scores, lexical_scores, has_terms = [0.0] * len(records), [0.0] * len(records), False
 

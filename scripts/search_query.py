@@ -13,6 +13,7 @@ import re
 from .build_catalog import tokenize
 
 
+QUERY_API_CONTRACT_VERSION = 2
 PFAS_CONCEPT = (
     "persistent contaminant contamination pollution remediation groundwater "
     "drinking wastewater water treatment purification"
@@ -37,6 +38,14 @@ IONIC_LIQUID_EVIDENCE = (
     ("hydrometallurgy", "leaching"),
     ("ion", "exchange"),
 )
+SEPARATION_METHOD_CONCEPT = (
+    "separation extraction processing recovery purification solvent "
+    "hydrometallurgy leaching ion exchange membrane"
+)
+SEPARATION_QUERY_TERMS = {
+    "separation", "extraction", "processing", "recovery", "purification",
+}
+AGENCY_QUALIFIER_TERMS = {"doe", "nsf", "nasa", "nih"}
 BROAD_CALL_CONCEPT = "broad agency announcement baa long range office wide open scope"
 BROAD_CALL_EVIDENCE = (
     ("broad", "agency", "announcement"),
@@ -198,6 +207,11 @@ def _concept_group(
     evidence_mode: str = "all",
     required_unless_topic: str = "",
     required_always: bool = False,
+    concept_id: str = "",
+    role: str = "",
+    required: bool = False,
+    evidence_policy: str = "",
+    saturate_concept: bool = False,
 ) -> dict:
     weighted: dict[str, float] = {}
     literals = set(literal_terms)
@@ -215,6 +229,11 @@ def _concept_group(
         "evidence_mode": evidence_mode,
         "required_unless_topic": required_unless_topic,
         "required_always": required_always,
+        "concept_id": concept_id,
+        "role": role,
+        "required": required,
+        "evidence_policy": evidence_policy,
+        "saturate_concept": saturate_concept,
     }
 
 
@@ -232,10 +251,25 @@ def _has_ionic_liquid_context(value: str, terms: set[str]) -> bool:
 def expand_query_groups(
     value: str,
     postings: dict[str, list] | None = None,
+    *,
+    search_v2: bool = False,
 ) -> list[dict]:
     """Group every alias/irregular expansion under its original query term."""
     groups: list[dict] = []
+    dotted_ree = bool(re.search(
+        r"\bR\s*\.\s*E\s*\.\s*E(?:\s*\.)?s?(?![A-Za-z0-9])",
+        value,
+        re.I,
+    ))
     direct_terms = list(dict.fromkeys(tokenize(value)))
+    if search_v2 and dotted_ree:
+        direct_terms = [
+            "ree" if re.fullmatch(r"r\.e\.e(?:s)?", term, re.I) else term
+            for term in direct_terms
+        ]
+        if "ree" not in direct_terms:
+            direct_terms.insert(0, "ree")
+        direct_terms = list(dict.fromkeys(direct_terms))
     direct_term_set = set(direct_terms)
     has_pfas_alias = any(
         QUERY_ALIASES.get(term) == PFAS_CONCEPT for term in direct_terms
@@ -243,7 +277,18 @@ def expand_query_groups(
     rare_earth_phrase = bool(re.search(
         r"\brare[\s-]+earth(?:[\s-]+elements?)?\b", value, re.I
     ))
+    rare_earth_acronym = search_v2 and bool(
+        dotted_ree or re.search(r"\bREEs?\b", value, re.I)
+    )
+    rare_earth_query = bool(
+        rare_earth_phrase
+        or rare_earth_acronym
+        or set(direct_terms) & {"ree", "rees", "lanthanide", "lanthanides"}
+    )
     ionic_liquid_phrase = bool(re.search(r"\bionic[\s-]+liquids?\b", value, re.I))
+    solvent_extraction_phrase = search_v2 and bool(re.search(
+        r"\bsolvent[\s-]+extractions?\b", value, re.I
+    ))
     broad_call_phrase = bool(re.search(
         r"\bbroad[\s-]+agency[\s-]+announcements?\b|\bBAAs?\b", value, re.I
     ))
@@ -301,6 +346,9 @@ def expand_query_groups(
                 evidence_alternatives=BASIC_ENERGY_SCIENCES_EVIDENCE,
                 evidence_phrases=("basic energy science", "bes"),
                 required_always=True,
+                concept_id="basic-energy-sciences" if search_v2 else "",
+                role="program_or_agency_qualifier" if search_v2 else "",
+                required=search_v2,
             ))
             continue
         if (
@@ -318,22 +366,34 @@ def expand_query_groups(
                 minimum_evidence=1,
                 evidence_alternatives=BROAD_CALL_EVIDENCE,
                 required_always=True,
+                concept_id="broad-call" if search_v2 else "",
+                role="program_or_agency_qualifier" if search_v2 else "",
+                required=search_v2,
             ))
             continue
         if (
-            (rare_earth_phrase and term in {"rare", "earth", "element"})
+            (rare_earth_phrase and term in {
+                "rare", "earth", "element", "rare-earth", "rare-earth-element",
+            })
             or term in {"ree", "lanthanide"}
+            or (search_v2 and (term == "rees" or (rare_earth_acronym and term == "ree")))
         ):
             if "rare-earth" in emitted:
                 continue
             emitted.add("rare-earth")
             groups.append(_concept_group(
-                "rare earth" if rare_earth_phrase else term,
+                "rare earth" if rare_earth_phrase else ("ree" if search_v2 else term),
                 RARE_EARTH_CONCEPT,
                 direct_term_set,
-                literal_terms=("rare", "earth", "element") if rare_earth_phrase else (term,),
+                literal_terms=("rare", "earth", "element") if rare_earth_phrase else (("ree",) if search_v2 else (term,)),
                 evidence_alternatives=RARE_EARTH_EVIDENCE,
-                required_unless_topic="Separations and membranes",
+                required_unless_topic="" if search_v2 else "Separations and membranes",
+                required_always=search_v2,
+                concept_id="rare-earth-elements" if search_v2 else "",
+                role="target" if search_v2 else "",
+                required=search_v2,
+                evidence_policy="protected_rare_earth" if search_v2 else "",
+                saturate_concept=search_v2,
             ))
             continue
         if ionic_liquid_phrase and term in {"ionic", "liquid"}:
@@ -348,6 +408,9 @@ def expand_query_groups(
                 minimum_evidence=2,
                 evidence_alternatives=IONIC_LIQUID_EVIDENCE,
                 required_always=True,
+                concept_id="ionic-liquid-extraction" if search_v2 else "",
+                role="method" if search_v2 else "",
+                required=search_v2,
             ))
             continue
         if il_abbreviation and term in {"il", "ils"}:
@@ -362,6 +425,44 @@ def expand_query_groups(
                 minimum_evidence=2,
                 evidence_alternatives=IONIC_LIQUID_EVIDENCE,
                 required_always=True,
+                concept_id="ionic-liquid-extraction" if search_v2 else "",
+                role="method" if search_v2 else "",
+                required=search_v2,
+            ))
+            continue
+        if rare_earth_query and solvent_extraction_phrase and term in {"solvent", "extraction"}:
+            if "separations" in emitted:
+                continue
+            emitted.add("separations")
+            groups.append(_concept_group(
+                "solvent extraction",
+                SEPARATION_METHOD_CONCEPT,
+                direct_term_set,
+                literal_terms=("solvent", "extraction"),
+                minimum_evidence=2,
+                evidence_phrases=("solvent extraction",),
+                required_always=True,
+                concept_id="separations",
+                role="method",
+                required=True,
+                saturate_concept=True,
+            ))
+            continue
+        if search_v2 and rare_earth_query and term in SEPARATION_QUERY_TERMS:
+            if "separations" in emitted:
+                continue
+            emitted.add("separations")
+            groups.append(_concept_group(
+                term,
+                SEPARATION_METHOD_CONCEPT,
+                direct_term_set,
+                literal_terms=(term,),
+                evidence_alternatives=((term,),),
+                required_always=True,
+                concept_id="separations",
+                role="method",
+                required=True,
+                saturate_concept=True,
             ))
             continue
         weighted_terms: dict[str, float] = {term: 1.0}
@@ -374,24 +475,38 @@ def expand_query_groups(
                     if expanded != term and expanded in direct_term_set:
                         continue
                     weighted_terms.setdefault(expanded, 0.86)
-        groups.append({
+        group = {
             "source": term,
             "terms": list(weighted_terms.items()),
             "minimum_evidence": 0,
             "evidence_alternatives": (),
             "required_unless_topic": "",
             "required_always": False,
-        })
+        }
+        if search_v2:
+            group.update({
+                "concept_id": f"literal:{term}",
+                "role": (
+                    "program_or_agency_qualifier"
+                    if term in AGENCY_QUALIFIER_TERMS
+                    else "application_or_context"
+                ),
+                "required": True,
+                "required_always": term in AGENCY_QUALIFIER_TERMS,
+            })
+        groups.append(group)
     return groups
 
 
 def expand_query_terms(
     value: str,
     postings: dict[str, list] | None = None,
+    *,
+    search_v2: bool = False,
 ) -> list[tuple[str, float]]:
     """Return de-duplicated direct and lightly downweighted alias terms."""
     weighted_terms: dict[str, float] = {}
-    for group in expand_query_groups(value, postings):
+    for group in expand_query_groups(value, postings, search_v2=search_v2):
         for term, weight in group["terms"]:
             weighted_terms[term] = max(weight, weighted_terms.get(term, 0.0))
     return list(weighted_terms.items())

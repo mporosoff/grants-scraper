@@ -1,6 +1,8 @@
 (() => {
   "use strict";
 
+  const QUERY_API_CONTRACT_VERSION = 2;
+
   // PFAS notices are often written around the problem being addressed instead
   // of naming an individual compound. These terms keep searches useful against
   // catalogs that describe water contamination and remediation but omit PFAS.
@@ -27,6 +29,11 @@
     Object.freeze(["hydrometallurgy", "leaching"]),
     Object.freeze(["ion", "exchange"]),
   ]);
+  const SEPARATION_METHOD_CONCEPT = "separation extraction processing recovery purification solvent hydrometallurgy leaching ion exchange membrane";
+  const SEPARATION_QUERY_TERMS = new Set([
+    "separation", "extraction", "processing", "recovery", "purification",
+  ]);
+  const AGENCY_QUALIFIER_TERMS = new Set(["doe", "nsf", "nasa", "nih"]);
   const BROAD_CALL_CONCEPT = "broad agency announcement baa long range office wide open scope";
   const BROAD_CALL_EVIDENCE = Object.freeze([
     Object.freeze(["broad", "agency", "announcement"]),
@@ -387,6 +394,11 @@
       evidenceMode: options.evidenceMode || "all",
       requiredUnlessTopic: options.requiredUnlessTopic || "",
       requiredAlways: options.requiredAlways === true,
+      conceptId: options.conceptId || "",
+      role: options.role || "",
+      required: options.required === true,
+      evidencePolicy: options.evidencePolicy || "",
+      saturateConcept: options.saturateConcept === true,
       expansion: {
         kind: "scientific_concept",
         phrase: options.phrase || concept,
@@ -407,12 +419,28 @@
   }
 
   function expandGroups(value, hasIndexedTerm = () => false, options = {}) {
-    const directTerms = [...new Set(tokenize(value))];
+    const searchV2 = options.searchV2 === true;
+    const normalizedValue = normalizeText(value);
+    const hasDottedRee = /\bR\s*\.\s*E\s*\.\s*E(?:\s*\.)?s?(?![A-Za-z0-9])/i.test(normalizedValue);
+    let directTerms = [...new Set(tokenize(value))];
+    if (searchV2 && hasDottedRee) {
+      directTerms = [...new Set(directTerms.map(term => (
+        /^r\.e\.e(?:s)?$/i.test(term) ? "ree" : term
+      )))];
+      if (!directTerms.includes("ree")) directTerms.unshift("ree");
+    }
     const directTermSet = new Set(directTerms);
     const hasPfasAlias = directTerms.some(term => QUERY_ALIASES[term] === PFAS_CONCEPT);
-    const normalizedValue = normalizeText(value);
     const hasRareEarthPhrase = /\brare[\s-]+earth(?:[\s-]+elements?)?\b/i.test(normalizedValue);
+    const hasRareEarthAcronym = searchV2 && (
+      hasDottedRee || /\bREEs?\b/i.test(normalizedValue)
+    );
+    const hasRareEarthQuery = hasRareEarthPhrase
+      || hasRareEarthAcronym
+      || directTerms.some(term => ["ree", "rees", "lanthanide", "lanthanides"].includes(term));
     const hasIonicLiquidPhrase = /\bionic[\s-]+liquids?\b/i.test(normalizedValue);
+    const hasSolventExtractionPhrase = searchV2
+      && /\bsolvent[\s-]+extractions?\b/i.test(normalizedValue);
     const hasBroadCallPhrase = /\bbroad[\s-]+agency[\s-]+announcements?\b|\bBAAs?\b/i.test(normalizedValue);
     const hasBasicEnergySciences = /\bbasic[\s-]+energy[\s-]+sciences?\b|\bBES\b/i.test(normalizedValue);
     // IL/ILs is far too ambiguous to expand globally. It is interpreted as
@@ -470,6 +498,9 @@
             evidenceAlternatives: BASIC_ENERGY_SCIENCES_EVIDENCE,
             evidencePhrases: ["basic energy science", "bes"],
             requiredAlways: true,
+            conceptId: searchV2 ? "basic-energy-sciences" : "",
+            role: searchV2 ? "program_or_agency_qualifier" : "",
+            required: searchV2,
             phrase: "basic energy sciences",
           },
         )];
@@ -489,24 +520,34 @@
             minimumEvidence: 1,
             evidenceAlternatives: BROAD_CALL_EVIDENCE,
             requiredAlways: true,
+            conceptId: searchV2 ? "broad-call" : "",
+            role: searchV2 ? "program_or_agency_qualifier" : "",
+            required: searchV2,
             phrase: "broad agency announcement",
           },
         )];
       }
       if (
-        (hasRareEarthPhrase && ["rare", "earth", "element"].includes(term))
+        (hasRareEarthPhrase && ["rare", "earth", "element", "rare-earth", "rare-earth-element"].includes(term))
         || ["ree", "lanthanide"].includes(term)
+        || (searchV2 && (term === "rees" || (hasRareEarthAcronym && term === "ree")))
       ) {
         if (emittedConcepts.has("rare-earth")) return [];
         emittedConcepts.add("rare-earth");
         return [conceptGroup(
-          hasRareEarthPhrase ? "rare earth" : term,
+          hasRareEarthPhrase ? "rare earth" : (searchV2 ? "ree" : term),
           RARE_EARTH_CONCEPT,
           directTermSet,
           {
-            literalTerms: hasRareEarthPhrase ? ["rare", "earth", "element"] : [term],
+            literalTerms: hasRareEarthPhrase ? ["rare", "earth", "element"] : [searchV2 ? "ree" : term],
             evidenceAlternatives: RARE_EARTH_EVIDENCE,
-            requiredUnlessTopic: "Separations and membranes",
+            requiredUnlessTopic: searchV2 ? "" : "Separations and membranes",
+            requiredAlways: searchV2,
+            conceptId: searchV2 ? "rare-earth-elements" : "",
+            role: searchV2 ? "target" : "",
+            required: searchV2,
+            evidencePolicy: searchV2 ? "protected_rare_earth" : "",
+            saturateConcept: searchV2,
             phrase: "rare earth elements",
           },
         )];
@@ -519,6 +560,9 @@
           minimumEvidence: 2,
           evidenceAlternatives: IONIC_LIQUID_EVIDENCE,
           requiredAlways: true,
+          conceptId: searchV2 ? "ionic-liquid-extraction" : "",
+          role: searchV2 ? "method" : "",
+          required: searchV2,
           phrase: "ionic liquids",
         })];
       }
@@ -530,8 +574,40 @@
           minimumEvidence: 2,
           evidenceAlternatives: IONIC_LIQUID_EVIDENCE,
           requiredAlways: true,
+          conceptId: searchV2 ? "ionic-liquid-extraction" : "",
+          role: searchV2 ? "method" : "",
+          required: searchV2,
           phrase: "ionic liquids",
           basis: "contextual scientific abbreviation",
+        })];
+      }
+      if (hasRareEarthQuery && hasSolventExtractionPhrase && ["solvent", "extraction"].includes(term)) {
+        if (emittedConcepts.has("separations")) return [];
+        emittedConcepts.add("separations");
+        return [conceptGroup("solvent extraction", SEPARATION_METHOD_CONCEPT, directTermSet, {
+          literalTerms: ["solvent", "extraction"],
+          minimumEvidence: 2,
+          evidencePhrases: ["solvent extraction"],
+          requiredAlways: true,
+          conceptId: "separations",
+          role: "method",
+          required: true,
+          saturateConcept: true,
+          phrase: "solvent extraction and separations",
+        })];
+      }
+      if (searchV2 && hasRareEarthQuery && SEPARATION_QUERY_TERMS.has(term)) {
+        if (emittedConcepts.has("separations")) return [];
+        emittedConcepts.add("separations");
+        return [conceptGroup(term, SEPARATION_METHOD_CONCEPT, directTermSet, {
+          literalTerms: [term],
+          evidenceAlternatives: [[term]],
+          requiredAlways: true,
+          conceptId: "separations",
+          role: "method",
+          required: true,
+          saturateConcept: true,
+          phrase: "separations, extraction, processing, and recovery",
         })];
       }
       const weightedTerms = new Map([[term, 1]]);
@@ -568,6 +644,14 @@
         source: term,
         terms: [...weightedTerms].map(([expanded, weight]) => ({ term: expanded, weight })),
         minimumEvidence: acronymExpansion ? 2 : undefined,
+        ...(searchV2 ? {
+          conceptId: `literal:${term}`,
+          role: AGENCY_QUALIFIER_TERMS.has(term)
+            ? "program_or_agency_qualifier"
+            : "application_or_context",
+          required: true,
+          requiredAlways: AGENCY_QUALIFIER_TERMS.has(term),
+        } : {}),
         expansion: acronymExpansion ? {
           kind: "contextual_acronym",
           phrase: acronymExpansion.phrase,
@@ -590,6 +674,7 @@
   }
 
   globalThis.FUNDING_SEARCH_QUERY = Object.freeze({
+    contractVersion: QUERY_API_CONTRACT_VERSION,
     aliases: QUERY_ALIASES,
     normalizeText,
     tokenize,

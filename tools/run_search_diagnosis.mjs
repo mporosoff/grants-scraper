@@ -140,6 +140,7 @@ function emptyScores(count) {
 async function loadHarness() {
   const sources = {};
   for (const relative of [
+    "assets/search-v2-config.js",
     "assets/search-query.js",
     "assets/search-retrieval.js",
     "assets/match-explain.js",
@@ -149,6 +150,7 @@ async function loadHarness() {
 
   const context = { globalThis: {} };
   for (const relative of [
+    "assets/search-v2-config.js",
     "assets/search-query.js",
     "assets/search-retrieval.js",
     "assets/match-explain.js",
@@ -159,6 +161,7 @@ async function loadHarness() {
   const queryApi = context.globalThis.FUNDING_SEARCH_QUERY;
   const retrievalApi = context.globalThis.FUNDING_RETRIEVAL;
   const explanationApi = context.globalThis.FUNDING_MATCH_EXPLAIN;
+  const searchV2Config = context.globalThis.FUNDING_SEARCH_V2_CONFIG;
   const childCatalog = retrievalApi.createChildCatalog(sidecar);
   return {
     sources,
@@ -167,6 +170,7 @@ async function loadHarness() {
     queryApi,
     retrievalApi,
     explanationApi,
+    searchV2Config,
     hashes: Object.fromEntries(Object.entries(sources).map(([path, source]) => [path, sha256(source)])),
   };
 }
@@ -188,15 +192,22 @@ function makeVariantHarness(base, definition) {
         { maximumDocumentFrequency: false },
       ))
     : base.childCatalog;
+  const engineConfiguration = {
+    ...(definition.scoringConfiguration || {}),
+    ...(definition.searchV2 ? {
+      searchV2: true,
+      searchV2Config: base.searchV2Config,
+    } : {}),
+  };
   const parentEngine = base.retrievalApi.create(
     parentCatalog,
     base.queryApi,
-    definition.scoringConfiguration || {},
+    { ...engineConfiguration, catalogRole: "parent" },
   );
   const childEngine = base.retrievalApi.create(
     childCatalog,
     base.queryApi,
-    definition.scoringConfiguration || {},
+    { ...engineConfiguration, catalogRole: "child" },
   );
 
   let gate = null;

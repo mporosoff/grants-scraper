@@ -1,0 +1,113 @@
+"""Search-v2 browser/server query-plan and scope-entailment parity gates."""
+
+from __future__ import annotations
+
+import unittest
+
+from scripts import build_catalog
+from scripts.alert_match import hybrid_scores
+from scripts.search_query import QUERY_API_CONTRACT_VERSION, expand_query_groups
+from scripts.search_v2_contract import (
+    load_search_v2_config,
+    protected_rare_earth_evidence,
+)
+
+
+def _record(identifier: str, title: str = "Generic program", description: str = "") -> dict:
+    return {
+        "opportunity_id": identifier,
+        "opportunity_number": f"TEST-{identifier}",
+        "title": title,
+        "agency": "Test agency",
+        "topic_areas": [],
+        "disciplines": ["Chemistry"],
+        "funding_categories": ["Science"],
+        "funding_instruments": ["Grant"],
+        "applicant_types": ["Institutions of higher education"],
+        "eligibility_text": "",
+        "description": description,
+        "document_search_text": "",
+    }
+
+
+def _catalog(records: list[dict]) -> dict:
+    return {
+        "schema_version": 3,
+        "opportunities": records,
+        "record_count": len(records),
+        "search_index": build_catalog.build_search_index(records),
+    }
+
+
+class SearchV2ContractTests(unittest.TestCase):
+    def test_query_plans_match_the_shared_browser_contract(self):
+        specification = load_search_v2_config()
+        self.assertEqual(
+            QUERY_API_CONTRACT_VERSION,
+            specification["compatibility"]["query_api_contract_version"],
+        )
+        for item in specification["query_contract_cases"]:
+            with self.subTest(query=item["query"]):
+                groups = expand_query_groups(item["query"], search_v2=True)
+                self.assertEqual(
+                    [group.get("concept_id") for group in groups],
+                    item["concept_ids"],
+                )
+
+    def test_authoritative_scope_entailment_is_primary_and_bounded(self):
+        records = [
+            _record("360678"),
+            _record("361526"),
+            _record("362061"),
+            _record(
+                "unmapped",
+                "Critical minerals separations",
+                "Research on critical minerals recovery.",
+            ),
+        ]
+        scores, _, _ = hybrid_scores(_catalog(records), "REE separations", search_v2=True)
+        admitted = {
+            records[index]["opportunity_id"]
+            for index, score in enumerate(scores)
+            if score > 0
+        }
+        self.assertEqual(admitted, {"360678", "361526", "362061"})
+
+        generic_scores, _, _ = hybrid_scores(
+            _catalog(records),
+            "critical mineral separations",
+            search_v2=True,
+        )
+        self.assertEqual(generic_scores[0], 0)
+
+    def test_explicit_evidence_rejects_policy_and_lexical_collisions(self):
+        technical = _record(
+            "technical",
+            "Rare earth separation research",
+            "Fundamental chemical research on rare earth elements and solvent extraction.",
+        )
+        workshop = _record(
+            "workshop",
+            "Rare Earth Policy Workshop",
+            "Training participants in advocacy and policy recommendations.",
+        )
+        nasa = _record(
+            "nasa",
+            "Earth Science Program Element",
+            "Planetary and atmospheric research.",
+        )
+        self.assertIsNotNone(protected_rare_earth_evidence(technical))
+        self.assertIsNone(protected_rare_earth_evidence(workshop))
+        self.assertIsNone(protected_rare_earth_evidence(nasa))
+
+        scores, _, _ = hybrid_scores(
+            _catalog([technical, workshop, nasa]),
+            "REE separations",
+            search_v2=True,
+        )
+        self.assertGreater(scores[0], 0)
+        self.assertEqual(scores[1:], [0.0, 0.0])
+
+
+if __name__ == "__main__":
+    unittest.main()

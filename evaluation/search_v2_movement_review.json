@@ -1,0 +1,1216 @@
+{
+  "schema_version": 1,
+  "evaluated_at": "2026-08-22",
+  "holdout_status": "sealed_and_unopened",
+  "changed_top_10_queries": 14,
+  "unchanged_top_10_queries": 35,
+  "movements": [
+    {
+      "id": "ree_01",
+      "discipline": "chemistry_materials",
+      "query": "REE",
+      "old_candidate_count": 1,
+      "new_candidate_count": 0,
+      "old_top_10": [
+        "362900"
+      ],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "362900"
+      ],
+      "top_10_changed": true,
+      "review": "REE-family movement is governed by the corrected truth rubric."
+    },
+    {
+      "id": "ree_02",
+      "discipline": "chemistry_materials",
+      "query": "REEs",
+      "old_candidate_count": 14,
+      "new_candidate_count": 0,
+      "old_top_10": [
+        "359996",
+        "363224",
+        "363241",
+        "360003",
+        "363240",
+        "363325",
+        "363258",
+        "361234",
+        "360004",
+        "362900"
+      ],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "359996",
+        "363224",
+        "363241",
+        "360003",
+        "363240",
+        "363325",
+        "363258",
+        "361234",
+        "360004",
+        "362900"
+      ],
+      "top_10_changed": true,
+      "review": "REE-family movement is governed by the corrected truth rubric."
+    },
+    {
+      "id": "ree_03",
+      "discipline": "chemistry_materials",
+      "query": "REE separations",
+      "old_candidate_count": 0,
+      "new_candidate_count": 3,
+      "old_top_10": [],
+      "new_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "added_to_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "removed_from_top_10": [],
+      "top_10_changed": true,
+      "review": "REE-family movement is governed by the corrected truth rubric."
+    },
+    {
+      "id": "ree_04",
+      "discipline": "chemistry_materials",
+      "query": "rare earth",
+      "old_candidate_count": 1,
+      "new_candidate_count": 0,
+      "old_top_10": [
+        "362900"
+      ],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "362900"
+      ],
+      "top_10_changed": true,
+      "review": "REE-family movement is governed by the corrected truth rubric."
+    },
+    {
+      "id": "ree_05",
+      "discipline": "chemistry_materials",
+      "query": "rare earth elements",
+      "old_candidate_count": 1,
+      "new_candidate_count": 0,
+      "old_top_10": [
+        "362900"
+      ],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "362900"
+      ],
+      "top_10_changed": true,
+      "review": "REE-family movement is governed by the corrected truth rubric."
+    },
+    {
+      "id": "ree_06",
+      "discipline": "chemistry_materials",
+      "query": "rare earth separations",
+      "old_candidate_count": 0,
+      "new_candidate_count": 3,
+      "old_top_10": [],
+      "new_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "added_to_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "removed_from_top_10": [],
+      "top_10_changed": true,
+      "review": "REE-family movement is governed by the corrected truth rubric."
+    },
+    {
+      "id": "ree_07",
+      "discipline": "chemistry_materials",
+      "query": "rare earth element recovery",
+      "old_candidate_count": 0,
+      "new_candidate_count": 3,
+      "old_top_10": [],
+      "new_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "added_to_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "removed_from_top_10": [],
+      "top_10_changed": true,
+      "review": "REE-family movement is governed by the corrected truth rubric."
+    },
+    {
+      "id": "ree_08",
+      "discipline": "chemistry_materials",
+      "query": "lanthanide separation",
+      "old_candidate_count": 0,
+      "new_candidate_count": 3,
+      "old_top_10": [],
+      "new_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "added_to_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "removed_from_top_10": [],
+      "top_10_changed": true,
+      "review": "REE-family movement is governed by the corrected truth rubric."
+    },
+    {
+      "id": "ree_09",
+      "discipline": "chemistry_materials",
+      "query": "lanthanide extraction",
+      "old_candidate_count": 1,
+      "new_candidate_count": 3,
+      "old_top_10": [
+        "362900"
+      ],
+      "new_top_10": [
+        "360678",
+        "362061",
+        "361526"
+      ],
+      "added_to_top_10": [
+        "360678",
+        "362061",
+        "361526"
+      ],
+      "removed_from_top_10": [
+        "362900"
+      ],
+      "top_10_changed": true,
+      "review": "REE-family movement is governed by the corrected truth rubric."
+    },
+    {
+      "id": "ree_10",
+      "discipline": "chemistry_materials",
+      "query": "solvent extraction of REEs",
+      "old_candidate_count": 8,
+      "new_candidate_count": 3,
+      "old_top_10": [
+        "363241",
+        "363258",
+        "361234",
+        "360004",
+        "362900",
+        "362847",
+        "360881",
+        "344592"
+      ],
+      "new_top_10": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "added_to_top_10": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "removed_from_top_10": [
+        "363241",
+        "363258",
+        "361234",
+        "360004",
+        "362900",
+        "362847",
+        "360881",
+        "344592"
+      ],
+      "top_10_changed": true,
+      "review": "REE-family movement is governed by the corrected truth rubric."
+    },
+    {
+      "id": "ree_11",
+      "discipline": "chemistry_materials",
+      "query": "ionic liquids for REE extraction",
+      "old_candidate_count": 5,
+      "new_candidate_count": 3,
+      "old_top_10": [
+        "362063",
+        "362061",
+        "363375",
+        "356605",
+        "360678"
+      ],
+      "new_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "added_to_top_10": [
+        "361526"
+      ],
+      "removed_from_top_10": [
+        "362063",
+        "363375",
+        "356605"
+      ],
+      "top_10_changed": true,
+      "review": "REE-family movement is governed by the corrected truth rubric."
+    },
+    {
+      "id": "ree_12",
+      "discipline": "chemistry_materials",
+      "query": "critical mineral separations",
+      "old_candidate_count": 18,
+      "new_candidate_count": 18,
+      "old_top_10": [
+        "362061",
+        "356605",
+        "363215",
+        "362900",
+        "363633",
+        "nsf-cbet:PD-26-370Y",
+        "363684",
+        "363645",
+        "363536",
+        "363544"
+      ],
+      "new_top_10": [
+        "362061",
+        "356605",
+        "363215",
+        "362900",
+        "363633",
+        "nsf-cbet:PD-26-370Y",
+        "363684",
+        "363645",
+        "363536",
+        "363544"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "ree_13",
+      "discipline": "chemistry_materials",
+      "query": "catalysis",
+      "old_candidate_count": 17,
+      "new_candidate_count": 17,
+      "old_top_10": [
+        "362061",
+        "360678",
+        "356605",
+        "347749",
+        "363617",
+        "362063",
+        "356055",
+        "341244",
+        "362681",
+        "350018"
+      ],
+      "new_top_10": [
+        "362061",
+        "360678",
+        "356605",
+        "347749",
+        "363617",
+        "362063",
+        "356055",
+        "341244",
+        "362681",
+        "350018"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "ree_14",
+      "discipline": "chemistry_materials",
+      "query": "catalyst",
+      "old_candidate_count": 18,
+      "new_candidate_count": 18,
+      "old_top_10": [
+        "362061",
+        "360678",
+        "356605",
+        "361526",
+        "347749",
+        "363617",
+        "362063",
+        "356055",
+        "341244",
+        "362681"
+      ],
+      "new_top_10": [
+        "362061",
+        "360678",
+        "356605",
+        "361526",
+        "347749",
+        "363617",
+        "362063",
+        "356055",
+        "341244",
+        "362681"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "ree_15",
+      "discipline": "chemistry_materials",
+      "query": "ree",
+      "old_candidate_count": 1,
+      "new_candidate_count": 0,
+      "old_top_10": [
+        "362900"
+      ],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "362900"
+      ],
+      "top_10_changed": true,
+      "review": "REE-family movement is governed by the corrected truth rubric."
+    },
+    {
+      "id": "ree_16",
+      "discipline": "chemistry_materials",
+      "query": "R.E.E.",
+      "old_candidate_count": 0,
+      "new_candidate_count": 0,
+      "old_top_10": [],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "REE-family movement is governed by the corrected truth rubric."
+    },
+    {
+      "id": "ree_17",
+      "discipline": "chemistry_materials",
+      "query": "rare-earth elements",
+      "old_candidate_count": 0,
+      "new_candidate_count": 0,
+      "old_top_10": [],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "REE-family movement is governed by the corrected truth rubric."
+    },
+    {
+      "id": "ree_18",
+      "discipline": "chemistry_materials",
+      "query": "REE separation",
+      "old_candidate_count": 0,
+      "new_candidate_count": 3,
+      "old_top_10": [],
+      "new_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "added_to_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "removed_from_top_10": [],
+      "top_10_changed": true,
+      "review": "REE-family movement is governed by the corrected truth rubric."
+    },
+    {
+      "id": "ree_19",
+      "discipline": "chemistry_materials",
+      "query": "separation of REEs",
+      "old_candidate_count": 0,
+      "new_candidate_count": 3,
+      "old_top_10": [],
+      "new_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "added_to_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "removed_from_top_10": [],
+      "top_10_changed": true,
+      "review": "REE-family movement is governed by the corrected truth rubric."
+    },
+    {
+      "id": "adv_chem_01",
+      "discipline": "chemistry_materials",
+      "query": "PFAS destruction",
+      "old_candidate_count": 0,
+      "new_candidate_count": 0,
+      "old_top_10": [],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_chem_02",
+      "discipline": "chemistry_materials",
+      "query": "AI catalyst design",
+      "old_candidate_count": 88,
+      "new_candidate_count": 88,
+      "old_top_10": [
+        "362061",
+        "356605",
+        "360678",
+        "351715",
+        "363617",
+        "362063",
+        "347749",
+        "356055",
+        "341244",
+        "362681"
+      ],
+      "new_top_10": [
+        "362061",
+        "356605",
+        "360678",
+        "351715",
+        "363617",
+        "362063",
+        "347749",
+        "356055",
+        "341244",
+        "362681"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_chem_03",
+      "discipline": "chemistry_materials",
+      "query": "battery recycling",
+      "old_candidate_count": 0,
+      "new_candidate_count": 0,
+      "old_top_10": [],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_chem_04",
+      "discipline": "chemistry_materials",
+      "query": "CO2 membrane separation",
+      "old_candidate_count": 12,
+      "new_candidate_count": 12,
+      "old_top_10": [
+        "360678",
+        "362061",
+        "362063",
+        "358022",
+        "358021",
+        "360223",
+        "363604",
+        "363628",
+        "356605",
+        "363662"
+      ],
+      "new_top_10": [
+        "360678",
+        "362061",
+        "362063",
+        "358022",
+        "358021",
+        "360223",
+        "363604",
+        "363628",
+        "356605",
+        "363662"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_energy_01",
+      "discipline": "energy",
+      "query": "direct air capture membranes",
+      "old_candidate_count": 0,
+      "new_candidate_count": 0,
+      "old_top_10": [],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_energy_02",
+      "discipline": "energy",
+      "query": "geothermal lithium extraction",
+      "old_candidate_count": 2,
+      "new_candidate_count": 2,
+      "old_top_10": [
+        "363065",
+        "361526"
+      ],
+      "new_top_10": [
+        "363065",
+        "361526"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_energy_03",
+      "discipline": "energy",
+      "query": "grid-scale battery safety",
+      "old_candidate_count": 0,
+      "new_candidate_count": 0,
+      "old_top_10": [],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_bio_01",
+      "discipline": "biomedical",
+      "query": "microbiome therapeutics",
+      "old_candidate_count": 1,
+      "new_candidate_count": 1,
+      "old_top_10": [
+        "356610"
+      ],
+      "new_top_10": [
+        "356610"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_bio_02",
+      "discipline": "biomedical",
+      "query": "rare disease biomarkers",
+      "old_candidate_count": 24,
+      "new_candidate_count": 24,
+      "old_top_10": [
+        "362752",
+        "363678",
+        "356879",
+        "359280",
+        "357570",
+        "359644",
+        "359645",
+        "359279",
+        "360621",
+        "360622"
+      ],
+      "new_top_10": [
+        "362752",
+        "363678",
+        "356879",
+        "359280",
+        "357570",
+        "359644",
+        "359645",
+        "359279",
+        "360621",
+        "360622"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_bio_03",
+      "discipline": "biomedical",
+      "query": "AI cancer diagnosis",
+      "old_candidate_count": 33,
+      "new_candidate_count": 33,
+      "old_top_10": [
+        "362259",
+        "357030",
+        "357748",
+        "357067",
+        "357627",
+        "357651",
+        "357014",
+        "350943",
+        "350944",
+        "363217"
+      ],
+      "new_top_10": [
+        "362259",
+        "357030",
+        "357748",
+        "357067",
+        "357627",
+        "357651",
+        "357014",
+        "350943",
+        "350944",
+        "363217"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_health_01",
+      "discipline": "public_health",
+      "query": "rural maternal health",
+      "old_candidate_count": 38,
+      "new_candidate_count": 38,
+      "old_top_10": [
+        "363412",
+        "359945",
+        "363407",
+        "363532",
+        "363516",
+        "363411",
+        "363679",
+        "363582",
+        "363222",
+        "363210"
+      ],
+      "new_top_10": [
+        "363412",
+        "359945",
+        "363407",
+        "363532",
+        "363516",
+        "363411",
+        "363679",
+        "363582",
+        "363222",
+        "363210"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_health_02",
+      "discipline": "public_health",
+      "query": "opioid overdose prevention",
+      "old_candidate_count": 6,
+      "new_candidate_count": 6,
+      "old_top_10": [
+        "363058",
+        "363636",
+        "362672",
+        "363686",
+        "363601",
+        "344592"
+      ],
+      "new_top_10": [
+        "363058",
+        "363636",
+        "362672",
+        "363686",
+        "363601",
+        "344592"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_health_03",
+      "discipline": "public_health",
+      "query": "environmental justice asthma",
+      "old_candidate_count": 5,
+      "new_candidate_count": 5,
+      "old_top_10": [
+        "329432",
+        "363629",
+        "356231",
+        "329436",
+        "362644"
+      ],
+      "new_top_10": [
+        "329432",
+        "363629",
+        "356231",
+        "329436",
+        "362644"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_ag_01",
+      "discipline": "agriculture",
+      "query": "precision agriculture water",
+      "old_candidate_count": 21,
+      "new_candidate_count": 21,
+      "old_top_10": [
+        "357579",
+        "360205",
+        "355706",
+        "nsf-cbet:PD-26-370Y",
+        "361080",
+        "363285",
+        "362394",
+        "362910",
+        "363334",
+        "362787"
+      ],
+      "new_top_10": [
+        "357579",
+        "360205",
+        "355706",
+        "nsf-cbet:PD-26-370Y",
+        "361080",
+        "363285",
+        "362394",
+        "362910",
+        "363334",
+        "362787"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_ag_02",
+      "discipline": "agriculture",
+      "query": "crop disease sensing",
+      "old_candidate_count": 5,
+      "new_candidate_count": 5,
+      "old_top_10": [
+        "363326",
+        "361876",
+        "363328",
+        "362062",
+        "363292"
+      ],
+      "new_top_10": [
+        "363326",
+        "361876",
+        "363328",
+        "362062",
+        "363292"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_ag_03",
+      "discipline": "agriculture",
+      "query": "livestock methane reduction",
+      "old_candidate_count": 0,
+      "new_candidate_count": 0,
+      "old_top_10": [],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_space_01",
+      "discipline": "space",
+      "query": "space biology",
+      "old_candidate_count": 6,
+      "new_candidate_count": 6,
+      "old_top_10": [
+        "363537",
+        "352741",
+        "vpr-email:infoready-2028504",
+        "330296",
+        "328902",
+        "344592"
+      ],
+      "new_top_10": [
+        "363537",
+        "352741",
+        "vpr-email:infoready-2028504",
+        "330296",
+        "328902",
+        "344592"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_space_02",
+      "discipline": "space",
+      "query": "lunar regolith extraction",
+      "old_candidate_count": 0,
+      "new_candidate_count": 0,
+      "old_top_10": [],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_space_03",
+      "discipline": "space",
+      "query": "Earth observation wildfire",
+      "old_candidate_count": 4,
+      "new_candidate_count": 4,
+      "old_top_10": [
+        "356536",
+        "357105",
+        "356538",
+        "356669"
+      ],
+      "new_top_10": [
+        "356536",
+        "357105",
+        "356538",
+        "356669"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_defense_01",
+      "discipline": "defense",
+      "query": "hypersonic materials",
+      "old_candidate_count": 2,
+      "new_candidate_count": 2,
+      "old_top_10": [
+        "330175",
+        "345241"
+      ],
+      "new_top_10": [
+        "330175",
+        "345241"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_defense_02",
+      "discipline": "defense",
+      "query": "autonomous maritime sensing",
+      "old_candidate_count": 5,
+      "new_candidate_count": 5,
+      "old_top_10": [
+        "344592",
+        "356605",
+        "334972",
+        "363292",
+        "345241"
+      ],
+      "new_top_10": [
+        "344592",
+        "356605",
+        "334972",
+        "363292",
+        "345241"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_defense_03",
+      "discipline": "defense",
+      "query": "quantum navigation",
+      "old_candidate_count": 2,
+      "new_candidate_count": 2,
+      "old_top_10": [
+        "344592",
+        "345241"
+      ],
+      "new_top_10": [
+        "344592",
+        "345241"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_ai_01",
+      "discipline": "ai_computing",
+      "query": "trustworthy AI health",
+      "old_candidate_count": 106,
+      "new_candidate_count": 106,
+      "old_top_10": [
+        "353936",
+        "361318",
+        "359949",
+        "359270",
+        "359666",
+        "359271",
+        "363678",
+        "363412",
+        "361348",
+        "324456"
+      ],
+      "new_top_10": [
+        "353936",
+        "361318",
+        "359949",
+        "359270",
+        "359666",
+        "359271",
+        "363678",
+        "363412",
+        "361348",
+        "324456"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_ai_02",
+      "discipline": "ai_computing",
+      "query": "cybersecurity workforce",
+      "old_candidate_count": 113,
+      "new_candidate_count": 113,
+      "old_top_10": [
+        "363586",
+        "361238",
+        "358380",
+        "363594",
+        "363440",
+        "363645",
+        "363609",
+        "363436",
+        "363527",
+        "363439"
+      ],
+      "new_top_10": [
+        "363586",
+        "361238",
+        "358380",
+        "363594",
+        "363440",
+        "363645",
+        "363609",
+        "363436",
+        "363527",
+        "363439"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_ai_03",
+      "discipline": "ai_computing",
+      "query": "quantum sensing biology",
+      "old_candidate_count": 15,
+      "new_candidate_count": 15,
+      "old_top_10": [
+        "362061",
+        "344592",
+        "275109",
+        "362063",
+        "363613",
+        "353413",
+        "362681",
+        "361526",
+        "360678",
+        "332894"
+      ],
+      "new_top_10": [
+        "362061",
+        "344592",
+        "275109",
+        "362063",
+        "363613",
+        "353413",
+        "362681",
+        "361526",
+        "360678",
+        "332894"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_env_01",
+      "discipline": "environmental_science",
+      "query": "PFAS groundwater remediation",
+      "old_candidate_count": 3,
+      "new_candidate_count": 3,
+      "old_top_10": [
+        "351547",
+        "363334",
+        "362395"
+      ],
+      "new_top_10": [
+        "351547",
+        "363334",
+        "362395"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_env_02",
+      "discipline": "environmental_science",
+      "query": "harmful algal bloom forecasting",
+      "old_candidate_count": 0,
+      "new_candidate_count": 0,
+      "old_top_10": [],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_env_03",
+      "discipline": "environmental_science",
+      "query": "coastal resilience infrastructure",
+      "old_candidate_count": 17,
+      "new_candidate_count": 17,
+      "old_top_10": [
+        "356562",
+        "356561",
+        "363538",
+        "363537",
+        "361080",
+        "358004",
+        "363229",
+        "357554",
+        "356002",
+        "363355"
+      ],
+      "new_top_10": [
+        "356562",
+        "356561",
+        "363538",
+        "363537",
+        "361080",
+        "358004",
+        "363229",
+        "357554",
+        "356002",
+        "363355"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_policy_01",
+      "discipline": "cross_domain",
+      "query": "critical mineral workforce",
+      "old_candidate_count": 73,
+      "new_candidate_count": 73,
+      "old_top_10": [
+        "363633",
+        "363316",
+        "363645",
+        "363215",
+        "362900",
+        "363544",
+        "363536",
+        "363355",
+        "362061",
+        "363385"
+      ],
+      "new_top_10": [
+        "363633",
+        "363316",
+        "363645",
+        "363215",
+        "362900",
+        "363544",
+        "363536",
+        "363355",
+        "362061",
+        "363385"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    },
+    {
+      "id": "adv_policy_02",
+      "discipline": "cross_domain",
+      "query": "catalyst for education",
+      "old_candidate_count": 8,
+      "new_candidate_count": 8,
+      "old_top_10": [
+        "347749",
+        "363526",
+        "363530",
+        "363617",
+        "351715",
+        "330175",
+        "341244",
+        "357014"
+      ],
+      "new_top_10": [
+        "347749",
+        "363526",
+        "363530",
+        "363617",
+        "351715",
+        "330175",
+        "341244",
+        "357014"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": "No search-v2 concept rule applies unless the query plan says otherwise."
+    }
+  ]
+}

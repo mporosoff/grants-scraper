@@ -1,6 +1,6 @@
 # Funding Finder v1.2.0 search-quality recovery
 
-Status: Phase 1 complete; Phase 2 not started
+Status: Phase 2 complete; Phase 3 not started
 
 Branch: `search-quality-v2`
 
@@ -132,9 +132,48 @@ The result contract now requires DOE BES Separation Science (`360678`), Genesis 
 
 NASA Earth/planetary programs, rare-disease or rare-cancer programs, the YSEALI policy workshop, and unrelated child-text collisions remain excluded noise.
 
+## Phase 2 outcome
+
+Phase 2 implemented the authorized Track B design without changing global field weights, title bonuses, or the relevance definition. Production remains disabled. The candidate path is available only through the local/test `ff-search-v2` flag until the Phase 4 release gate.
+
+The implementation adds:
+
+- one protected target concept for `REE`, `REEs`, `R.E.E.`, rare-earth phrase variants, and lanthanides;
+- explicit, field-backed evidence admission for technical rare-earth research, with policy/workshop and lexical-collision guards;
+- identifier-bound authoritative scope entailments for DOE BES Separation Science (`360678`), Genesis Critical Minerals extraction and processing (`361526`), and NSF Chemical Process Systems (`362061`);
+- complete target-plus-method coverage for protected REE searches, so a generic method or topic cannot replace the rare-earth target;
+- concept-level synonym saturation;
+- browser/Python query-plan and scope-entailment parity;
+- a shared query/retrieval/catalog/index/evidence compatibility contract that rejects mixed asset schemas;
+- causal admission provenance that separates `admittedBy`, `rankedBy`, authoritative scope, and field contribution evidence for Phase 3.
+
+The controlled scope map lives in `config/search_v2.json`. It requires exact mapped opportunity identifiers, a supported complete scientific query, controlled concept relationships, and an authoritative parent, program-area, or publication-eligible child scope. Generic critical-minerals text, agency, discipline, topic, and category metadata do not create an entailment.
+
+### Old/new development comparison
+
+| Query | Phase 1 result count | Phase 2 result count | Phase 2 outcome |
+| --- | ---: | ---: | --- |
+| `REE` / `REEs` / `R.E.E.` / `rare-earth elements` | 0–14, depending on spelling | 0 for every alias | Identical protected target-only behavior; no current explicit technical result |
+| `REE separations` | 0 | 3 | NSF CPS, DOE BES Separation Science, Genesis Mission; all admitted as primary by authoritative scope entailment |
+| `rare earth separations` | 0 | 3 | Same three primary results |
+| `lanthanide separation` | 0 | 3 | Same three primary results |
+| `rare earth element recovery` | 0 | 3 | Same three primary results |
+| `solvent extraction of REEs` | 8 noisy results | 3 | Same three primary results; NASA, clinical, policy, and unrelated child collisions removed |
+| `ionic liquids for REE extraction` | 5 method-only results | 3 | Same three primary results; targetless method programs removed |
+
+Across the 49-query development frame, 14 top-ten lists changed and all 14 were REE-family queries governed by the corrected rubric; the other 35 were unchanged. Every REE-family admission is adjudicated, no known irrelevant result is admitted, and `REE separations` contains exactly the three required primary results. The separate 48-query MEAS-5 frame spans 11 disciplines and had zero top-ten movement between production and the candidate on identical catalog and sidecar bytes. The historical 37-query production baseline also remains at zero top-ten churn.
+
+Warm candidate scoring measured a 5.70 ms median, 11.84 ms p95, and 14.58 ms maximum over three passes of the development frame. Evidence-collecting evaluation measured an 11.30 ms median and 90.64 ms p95. The coordinated browser asset delta is 23,547 uncompressed bytes, including the new 5,701-byte generated configuration wrapper; parent and child catalog bytes are unchanged.
+
+Local browser verification on 2026-08-22 loaded the flagged path without console warnings or errors and rendered exactly three results for `REE separations`: Chemical Process Systems, the DOE Office of Science annual solicitation containing BES Separation Science, and the Genesis Mission. The same page without the flag rendered `No opportunities matched`, confirming that the production path remains isolated.
+
+The machine-readable evidence is in `evaluation/search_v2_results.json`, `evaluation/search_v2_movement_review.json`, `evaluation/search_v2_field_calibration.json`, and `evaluation/search_v2_field_ablation_final.json`. Phase 1 evidence did not authorize a BM25F rewrite or global weight search, so the calibration and final-ablation records explicitly mark those tasks not required rather than manufacturing a tuning exercise.
+
+No sealed holdout query has been executed or adjudicated. The evaluator refuses a `--holdout` invocation, and the eventual Phase 4 judgment contract is the corrected schema-version-2 relevance rubric.
+
 ## Phase boundary
 
-Completed in Phase 1:
+Completed through Phase 2:
 
 - latest-live baseline and isolated branch;
 - exact live asset reconciliation;
@@ -144,26 +183,30 @@ Completed in Phase 1:
 - production-module diagnostic trace;
 - eight field ablations;
 - root-cause and Track B decision.
+- protected query normalization and substantive explicit-evidence verification;
+- bounded authoritative program-scope entailment for the three required primary programs;
+- concept saturation, strict protected-query coverage, and causal field/scope provenance;
+- browser/Python parity and mixed-schema fail-closed readiness checks;
+- old/new development movement review and cross-domain regression evaluation;
+- local flagged/unflagged browser integration verification.
 
 Verification at the Phase 1 boundary:
 
 | Gate | Result | Exit code |
 | --- | --- | ---: |
-| Full browser product suite | 109 passed | 0 |
+| Full browser product suite | 118 passed | 0 |
 | Historical query baseline | 37 queries; zero top-10 churn | 0 |
-| Page-entrypoint tests | 7 passed | 0 |
+| Selected Python Phase 2/page/size suites | 37 passed | 0 |
 | Size-budget tests | 3 passed | 0 |
 | Hermetic no-drift rebuild | 22 artifacts unchanged | 0 |
-| Full Python suite on current refreshed catalog | 822 ran; 10 failures and 1 error in inherited P5/P7/MEAS-8 frozen-census checks | 1 |
+| Full Python suite on current refreshed catalog | 825 ran; 10 failures and 1 error in inherited P5/P7/MEAS-8 frozen-census checks | 1 |
 
-The full Python failures reproduce catalog-fixture drift already present after the 2026-08-22 `main` catalog refresh: historical frames pin 1,475 records/745 cache entries while the current inputs contain 1,453 records/709 cache entries, and one retired ID (`362088`) is still referenced. No failing test imports or exercises the Phase 1 JavaScript tracing change. Those historical artifacts were not rewritten because they are outside this recovery scope and are intended to remain frozen evidence. The plan’s recommended `tests/test_search_query.py` parity file does not exist in the current repository; creating it belongs to Phase 2 when browser/Python query behavior changes.
+The full Python failures reproduce catalog-fixture drift already present after the 2026-08-22 `main` catalog refresh: historical frames pin 1,475 records/745 cache entries while the current inputs contain 1,453 records/709 cache entries, and one retired ID (`362088`) is still referenced. No failing test imports or exercises the Phase 2 search path. Those historical artifacts were not rewritten because they are outside this recovery scope and are intended to remain frozen evidence. Phase 2 added `tests/test_search_query.py` for the new browser/Python parity contract.
 
 Not started:
 
-- Phase 2 retrieval/query correction;
-- controlled primary scope-entailment implementation;
 - Phase 3 contextual explanation redesign;
 - Phase 4 holdout execution and release-candidate freeze;
 - merge, deployment, or live v1.2.0 shipment.
 
-`main` remained untouched after branch creation. Phase 1 began with zero branch divergence. At the Phase 1 handoff, the branch contains only the committed Phase 1 package and tracks its remote counterpart.
+`main` remained untouched after branch creation. The Phase 2 candidate remains committed only to `search-quality-v2`, with production activation intentionally deferred.
