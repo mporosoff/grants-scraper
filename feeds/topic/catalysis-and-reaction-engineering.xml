@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml</id>
-  <updated>2026-08-21T17:45:06Z</updated>
+  <updated>2026-08-22T10:47:36Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>MPS Chemistry Research Programs (MPS Chem)</title>
@@ -44,6 +44,22 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Air Force Office of Scientific Research | Closes 2027-04-05 | The Department of Defense (DoD) announces the fiscal year 2026 (FY26) Defense Established Program to Stimulate Competitive Research (DEPSCoR) - Research Collaboration (RC) opportunity. The program is sponsored and managed by the Basic Research Office, Office of the Under Secretary of Defense for Research and Engineering (OUSD [R&amp;E]), awarded by the Air Force Office of Scientific Research (AFOSR), …</summary>
+  </entry>
+  <entry>
+    <title>Research Interests of the Air Force Office of Scientific Research</title>
+    <link href="https://www.grants.gov/search-results-detail/362681"/>
+    <id>urn:funding-finder:grants-gov:362681</id>
+    <updated>2026-06-04T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Transportation"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Energy"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>Air Force Office of Scientific Research | Posted | AFOSR plans, coordinates, and executes the Air Force Research Laboratory’s (AFRL) basic research program in response to technical guidance from AFRL and requirements of the Air Force. Additionally, the office fosters, supports, and conducts research within Air Force, university, and industry laboratories; and ensures transition of research results to support U.S. Air Force needs. The focus of AFOS…</summary>
   </entry>
   <entry>
     <title>Transport Phenomena (TP)</title>

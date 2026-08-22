@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-08-21T17:45:06Z</updated>
+  <updated>2026-08-22T10:47:36Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -17,6 +17,33 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>Rural Utilities Service | Closes 2026-10-09 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+  </entry>
+  <entry>
+    <title>Ensuring “Pro-American Worker” Critical Minerals Supply Chain in the Western Hemisphere</title>
+    <link href="https://www.grants.gov/search-results-detail/363215"/>
+    <id>urn:funding-finder:grants-gov:363215</id>
+    <updated>2026-08-21T00:00:00Z</updated>
+    <author><name>Bureau of International Labor Affairs</name></author>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Energy"/>
+    <summary>Bureau of International Labor Affairs | Closes 2026-09-21 | Questions regarding this Funding Opportunity Announcement (FOA) may be emailed to OGM_ILAB@dol.gov.</summary>
+  </entry>
+  <entry>
+    <title>Geosciences Core Research: Atmospheric, Geospace, Earth and Ocean Sciences (GEO Core)</title>
+    <link href="https://www.grants.gov/search-results-detail/363684"/>
+    <id>urn:funding-finder:grants-gov:363684</id>
+    <updated>2026-08-21T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Environmental science"/>
+    <category term="Materials science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-21 | The NSF Geosciences Research solicitation supports foundational research projects that advance the frontiers of knowledge across all areas of the geosciences. This solicitation calls for proposals in three programs: Atmospheric and Geospace Sciences (AGS) Program; Earth Sciences (EAR) Program; and Ocean Sciences (OCE) Program. These programs support projects that expand the frontiers of knowledge …</summary>
   </entry>
   <entry>
     <title>Egypt Annual Program Statement</title>
@@ -660,34 +687,5 @@
     <category term="Manufacturing"/>
     <category term="Cybersecurity"/>
     <summary>National Energy Technology Laboratory | Closes 2026-09-08 | Modification 000003: The purpose of this modification is to revise NOFO Part 1. Section I.A.1 is revised to correct the Topic Area 1b cost share to 20% and Section IV.C.2 is revised to delete the Environmental Considerations Summary and Environmental Impact Volume from the Summary of Application Requirements table. This Notice of Funding Opportunity (NOFO) will seek proposals for specific research…</summary>
-  </entry>
-  <entry>
-    <title>Middle East Regional Cooperation (MERC)</title>
-    <link href="https://www.grants.gov/search-results-detail/363070"/>
-    <id>urn:funding-finder:grants-gov:363070</id>
-    <updated>2026-07-06T00:00:00Z</updated>
-    <author><name>Assistance Coordination</name></author>
-    <category term="Technology development"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Cybersecurity"/>
-    <category term="Water"/>
-    <summary>Assistance Coordination | Closes 2026-09-30 | The Middle East Regional Cooperation (MERC) Program supports joint scientific research and innovation partnerships between the United States, Israel, and countries across the Middle East and North Africa (MENA). The program funds applied research projects that address shared regional challenges while advancing U.S. economic, technological, and strategic interests. MERC is designed to bring togethe…</summary>
-  </entry>
-  <entry>
-    <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
-    <link href="https://www.grants.gov/search-results-detail/362900"/>
-    <id>urn:funding-finder:grants-gov:362900</id>
-    <updated>2026-06-22T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Cybersecurity"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <category term="Data science"/>
-    <category term="Energy"/>
-    <category term="Materials science"/>
-    <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | Project Background, Goals, and Objectives: In an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will lea…</summary>
   </entry>
 </feed>

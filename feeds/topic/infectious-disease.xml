@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml</id>
-  <updated>2026-08-21T17:45:06Z</updated>
+  <updated>2026-08-22T10:47:36Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Resources and Workforce Development for the Regional Biocontainment Laboratories</title>
@@ -260,6 +260,19 @@
     <summary>National Institutes of Health | Closes 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the National Institutes of Health (NIH) mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center (SDMC), and Laboratory Center (LC) working with Clinical Trials Units (CTUs), to advance prevention, treatment, and implement…</summary>
   </entry>
   <entry>
+    <title>Spatial Ecology and Chronic Wasting Disease Dynamics of Wild White-tailed and Mule Deer in Northern Colorado</title>
+    <link href="https://www.grants.gov/search-results-detail/363685"/>
+    <id>urn:funding-finder:grants-gov:363685</id>
+    <updated>2026-08-21T00:00:00Z</updated>
+    <author><name>Animal and Plant Health Inspection Service</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <summary>Animal and Plant Health Inspection Service | Closes 2026-08-31 | The Animal Plant Health Inspection Service (APHIS) Wildlife Services, National Wildlife Research Center (NWRC) anticipates awarding $413,380 in cooperative agreement funding to support one project that addresses the funding priorities to investigate chronic wasting disease (CWD) as a population-limiting factor in Northern Colorado mule deer and white-tailed deer and to better understand the relati…</summary>
+  </entry>
+  <entry>
     <title>Centers for Structural Biology of HIV and other Infectious Diseases</title>
     <link href="https://www.grants.gov/search-results-detail/361050"/>
     <id>urn:funding-finder:grants-gov:361050</id>
@@ -458,19 +471,6 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Environmental science"/>
     <category term="Infectious disease"/>
     <summary>Animal and Plant Health Inspection Service | Closes 2026-10-19 | The U.S. Department of Agriculture, Animal and Plant Health Inspection Service announce this funding opportunity to carry out the Plant Protection Act Section 7721 (PPA 7721) National Clean Plant Network (NCPN) program. APHIS will consider project proposals that clearly and directly support the strategic goals and objectives of the National Clean Plant Network as described in the NCPN Strategic Pl…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement to Support Shellfish Safety Assistance Project</title>
-    <link href="https://www.grants.gov/search-results-detail/363282"/>
-    <id>urn:funding-finder:grants-gov:363282</id>
-    <updated>2026-07-22T00:00:00Z</updated>
-    <author><name>Food and Drug Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <category term="Cybersecurity"/>
-    <summary>Food and Drug Administration | Closes 2026-08-21 | The purpose of this funding opportunity is to (1) improve information exchange and transfer among States, Federal and Foreign Agencies, industry, and consumers; (2) strengthen state activities through training, technical assistance, research, education, and support for States to participate in meetings that foster a cooperative shellfish program based on public health principles; and (3) promote e…</summary>
   </entry>
   <entry>
     <title>Cooperative Program for Modeling Clinical Transplantation</title>

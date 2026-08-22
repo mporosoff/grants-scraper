@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-08-21T17:45:06Z</updated>
+  <updated>2026-08-22T10:47:36Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -675,6 +675,15 @@
     <summary>Health Resources and Services Administration | Closes 2027-03-23 | The Rural Health Network Development Planning Program supports the planning and development of rural integrated health care networks with specific focus on collaboration of entities to establish or improve local capacity and care coordination in underserved communities. Specifically, the program uses the concept of developing networks as a strategy for linking rural health care network participant…</summary>
   </entry>
   <entry>
+    <title>Rural Communities Opioid Response Program - Child and Adolescent Behavioral Health</title>
+    <link href="https://www.grants.gov/search-results-detail/363687"/>
+    <id>urn:funding-finder:grants-gov:363687</id>
+    <updated>2027-01-22T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Social and behavioral sciences"/>
+    <summary>Health Resources and Services Administration | Closes 2027-03-23 | The RCORP-Child and Adolescent Behavioral Health Program provides funding to rural communities to establish and expand behavioral health care services, including mental health and substance use disorder for rural children and adolescents.</summary>
+  </entry>
+  <entry>
     <title>Implementation Research on Coordinated Combinations of Community-Clinical Linkage Strategies for Diabetes Prevention and Management</title>
     <link href="https://www.grants.gov/search-results-detail/363360"/>
     <id>urn:funding-finder:grants-gov:363360</id>
@@ -806,6 +815,14 @@
     <updated>2027-01-14T00:00:00Z</updated>
     <author><name>Health Resources and Services Administration</name></author>
     <summary>Health Resources and Services Administration | Closes 2027-03-16 | The Rural Health Network Development program supports integrated health care networks that address health care needs of targeted rural communities. Applicants may choose between two funding tracts. The Network Advancement Tract supports networks comprised of independent rural hospitals and clinics in integrated network collaboration. It bridges support to offset small scale structural barriers tha…</summary>
+  </entry>
+  <entry>
+    <title>Rural Communities Opioid Response Program - Overdose Response</title>
+    <link href="https://www.grants.gov/search-results-detail/363686"/>
+    <id>urn:funding-finder:grants-gov:363686</id>
+    <updated>2027-01-11T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <summary>Health Resources and Services Administration | Closes 2027-03-10 | The purpose of the Rural Communities Opioid Response Program (RCORP) - Overdose Response is to support improving health care in rural areas by addressing their immediate and short-term needs related to the provision of substance use disorder services. RCORP Overdose Response aims to reduce and prevent the risk of overdoses in rural areas.</summary>
   </entry>
   <entry>
     <title>Partnership with Common Fund Data Ecosystem Resources</title>
@@ -949,22 +966,5 @@
     <updated>2026-12-18T00:00:00Z</updated>
     <author><name>Health Resources and Services Administration</name></author>
     <summary>Health Resources and Services Administration | Closes 2027-03-18 | The purpose of the Maternal, Infant, and Early Childhood Home Visiting (MIECHV) Program is to improve maternal and child health, early childhood development, and family well-being by providing pregnant women and families with young children voluntary, evidence-based home visiting services.</summary>
-  </entry>
-  <entry>
-    <title>Rural Residency Planning and Development Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363508"/>
-    <id>urn:funding-finder:grants-gov:363508</id>
-    <updated>2026-12-18T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Education and workforce"/>
-    <summary>Health Resources and Services Administration | Closes 2027-03-18 | The Rural Residency Planning and Development (RRPD) program improves and expands rural health care access. It does this by developing new, accredited, sustainable rural residency programs, including rural track programs (RTPs). Newly created rural physician residency programs increase training and ultimately practice in rural areas to address physician shortages. The RRPD program provides start-up…</summary>
-  </entry>
-  <entry>
-    <title>NIOSH Small Research Grant Program (R03)</title>
-    <link href="https://www.grants.gov/search-results-detail/363299"/>
-    <id>urn:funding-finder:grants-gov:363299</id>
-    <updated>2026-12-17T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-02-16 | The purpose of the R03 grant program is (1) to develop an understanding of the risks and conditions associated with occupational diseases and injuries, (2) to explore methods for reducing risks and preventing or minimizing exposure to hazardous conditions in the workplace, and (3) to translate significant scientific findings into prevention practices and products that will effectively reduce work-…</summary>
   </entry>
 </feed>

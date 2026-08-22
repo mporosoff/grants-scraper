@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-08-21T17:45:06Z</updated>
+  <updated>2026-08-22T10:47:36Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -119,6 +119,64 @@
     <category term="Data science"/>
     <category term="Environmental science"/>
     <summary>National Institutes of Health | Closes 2027-01-25 | The National Human Genome Research Institute (NHGRI), with other NIH Institutes and Centers (ICs) National Cancer Institute (NCI) and National Institute of Environmental Health Sciences (NIEHS), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to facilitate genomic research and the dissemination of its products, NHGRI proposes this RFA to support both new and exist…</summary>
+  </entry>
+  <entry>
+    <title>Ensuring “Pro-American Worker” Critical Minerals Supply Chain in the Western Hemisphere</title>
+    <link href="https://www.grants.gov/search-results-detail/363215"/>
+    <id>urn:funding-finder:grants-gov:363215</id>
+    <updated>2026-08-21T00:00:00Z</updated>
+    <author><name>Bureau of International Labor Affairs</name></author>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Energy"/>
+    <summary>Bureau of International Labor Affairs | Closes 2026-09-21 | Questions regarding this Funding Opportunity Announcement (FOA) may be emailed to OGM_ILAB@dol.gov.</summary>
+  </entry>
+  <entry>
+    <title>Freedom Shield: Global Forced Labor Import Prohibition Initiative</title>
+    <link href="https://www.grants.gov/search-results-detail/363531"/>
+    <id>urn:funding-finder:grants-gov:363531</id>
+    <updated>2026-08-21T00:00:00Z</updated>
+    <author><name>Bureau of International Labor Affairs</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Bureau of International Labor Affairs | Closes 2026-09-21 | Questions regarding this Funding Opportunity Announcement (FOA) may be emailed to OGM_ILAB@dol.gov.</summary>
+  </entry>
+  <entry>
+    <title>Protecting the American Seafood Supply Chain by Countering Unfair Labor Practices and Illegal, Unreported, and Unregulated (IUU) Fishing</title>
+    <link href="https://www.grants.gov/search-results-detail/363214"/>
+    <id>urn:funding-finder:grants-gov:363214</id>
+    <updated>2026-08-21T00:00:00Z</updated>
+    <author><name>Bureau of International Labor Affairs</name></author>
+    <category term="Manufacturing"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Bureau of International Labor Affairs | Closes 2026-09-21 | Questions regarding this Funding Opportunity Announcement (FOA) may be emailed to OGM_ILAB@dol.gov.</summary>
+  </entry>
+  <entry>
+    <title>Supporting Implementation of the Labor Provisions of Trade Arrangements for American Worker Competitiveness</title>
+    <link href="https://www.grants.gov/search-results-detail/363212"/>
+    <id>urn:funding-finder:grants-gov:363212</id>
+    <updated>2026-08-21T00:00:00Z</updated>
+    <author><name>Bureau of International Labor Affairs</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Bureau of International Labor Affairs | Closes 2026-09-21 | Questions regarding this Funding Opportunity Announcement (FOA) may be emailed to OGM_ILAB@dol.gov.</summary>
+  </entry>
+  <entry>
+    <title>Geosciences Core Research: Atmospheric, Geospace, Earth and Ocean Sciences (GEO Core)</title>
+    <link href="https://www.grants.gov/search-results-detail/363684"/>
+    <id>urn:funding-finder:grants-gov:363684</id>
+    <updated>2026-08-21T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Environmental science"/>
+    <category term="Materials science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-21 | The NSF Geosciences Research solicitation supports foundational research projects that advance the frontiers of knowledge across all areas of the geosciences. This solicitation calls for proposals in three programs: Atmospheric and Geospace Sciences (AGS) Program; Earth Sciences (EAR) Program; and Ocean Sciences (OCE) Program. These programs support projects that expand the frontiers of knowledge …</summary>
   </entry>
   <entry>
     <title>Radiation Oncology-Biology Integration Network (ROBIN) Centers (U54 Clinical Trial Required)</title>
@@ -635,18 +693,6 @@
     <summary>National Energy Technology Laboratory | Closes 2026-09-22 | Advancing Oil and Natural Gas Production and Delivery This Notice of Funding Opportunity (NOFO) is seeking proposals to advance cost-effective technologies for improving the efficiency, reliability, and resilience of the Unites States oil and natural gas supply chain. This funding opportunity spans research and development efforts focused on enhancing resource utilization, modernizing infrastructu…</summary>
   </entry>
   <entry>
-    <title>Technology Enhanced Adoptive Family Recruiting and Matching</title>
-    <link href="https://www.grants.gov/search-results-detail/361968"/>
-    <id>urn:funding-finder:grants-gov:361968</id>
-    <updated>2026-07-22T00:00:00Z</updated>
-    <author><name>Administration for Children and Families - ACYF/CB</name></author>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Administration for Children and Families - ACYF/CB | Closes 2026-08-21 | This program will fund projects focused on technology-enabled strategies that improve adoptive matching, placement, and permanency for children in foster care awaiting adoption. The funds, awarded to four regional centers, will be used to design, implement and evaluate these strategies. These centers will focus on children with an adoption permanency goal or who are legally free for adoption due t…</summary>
-  </entry>
-  <entry>
     <title>Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets)</title>
     <link href="https://www.grants.gov/search-results-detail/363268"/>
     <id>urn:funding-finder:grants-gov:363268</id>
@@ -656,15 +702,6 @@
     <category term="Technology development"/>
     <category term="Data science"/>
     <summary>U.S. National Science Foundation | Closes 2026-11-04 | This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
-  </entry>
-  <entry>
-    <title>Data Analytics &amp; AI to Counter Global Diversion</title>
-    <link href="https://www.grants.gov/search-results-detail/363221"/>
-    <id>urn:funding-finder:grants-gov:363221</id>
-    <updated>2026-07-16T00:00:00Z</updated>
-    <author><name>Bureau of Arms Control and Nonproliferation</name></author>
-    <category term="Data science"/>
-    <summary>Bureau of Arms Control and Nonproliferation | Closes 2026-08-21 | This effort seeks to address multiple facets of export control challenges. The first component will analyze trade data, create exemplary visualizations (e.g., dashboards), and train export control authorities to use data analysis for export control implementation. The second component will design, develop, and deploy a smartphone-accessible application for frontline officers to detect and identify…</summary>
   </entry>
   <entry>
     <title>Collaborative Research</title>
@@ -705,45 +742,5 @@
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health | Closes 2026-10-01 | The overall goal of this program is to accelerate scientific discovery, improve research efficiency, and enhance the translation of research findings into improved health outcomes. Centers funded under this program will also foster multidisciplinary collaboration, support workforce development across career stages, and promote training in emerging areas such as data science, artificial intelligenc…</summary>
-  </entry>
-  <entry>
-    <title>Tribal Transportation Safety Strategy Pilot Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362956"/>
-    <id>urn:funding-finder:grants-gov:362956</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>69A355 Research and Technology</name></author>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>69A355 Research and Technology | Closes 2026-08-28 | he U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Tribal Transportation Safety Strategy Pilot Program. This three-year cooperative agreement is designed to address the critical public safety crisis in Tribal communities, as American Indian and Alaska Native populations experience…</summary>
-  </entry>
-  <entry>
-    <title>Scholarly Editions and Translations</title>
-    <link href="https://www.grants.gov/search-results-detail/363014"/>
-    <id>urn:funding-finder:grants-gov:363014</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>National Endowment for the Humanities</name></author>
-    <category term="Arts and culture"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>National Endowment for the Humanities | Closes 2026-09-16 | The National Endowment for the Humanities (NEH) Division of Research is accepting applications for the Scholarly Editions and Translations program. The purpose of this program is to support collaborative teams who edit, annotate, and translate foundational humanities texts that are vital to generating new scholarship but are not available in adequate editions or translations. This year’s competiti…</summary>
-  </entry>
-  <entry>
-    <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
-    <link href="https://www.grants.gov/search-results-detail/362900"/>
-    <id>urn:funding-finder:grants-gov:362900</id>
-    <updated>2026-06-22T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Cybersecurity"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <category term="Data science"/>
-    <category term="Energy"/>
-    <category term="Materials science"/>
-    <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | Project Background, Goals, and Objectives: In an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will lea…</summary>
   </entry>
 </feed>

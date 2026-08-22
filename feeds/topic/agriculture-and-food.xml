@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-08-21T17:45:06Z</updated>
+  <updated>2026-08-22T10:47:36Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -90,6 +90,19 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Agriculture and food"/>
     <summary>Health Resources and Services Administration | Closes 2026-10-20 | Fiscal Year (FY) 2027 Regional Nutrition Hubs (RNH) will support region-specific technical assistance (TA) on expanding high-quality nutrition services to the Health Resources and Services Administration's (HRSA) Health Center Program (H80) award recipients and look-alikes (health centers). Nutrition services prevent, manage, and treat diseases and conditions through nutritional and food-based int…</summary>
+  </entry>
+  <entry>
+    <title>Spatial Ecology and Chronic Wasting Disease Dynamics of Wild White-tailed and Mule Deer in Northern Colorado</title>
+    <link href="https://www.grants.gov/search-results-detail/363685"/>
+    <id>urn:funding-finder:grants-gov:363685</id>
+    <updated>2026-08-21T00:00:00Z</updated>
+    <author><name>Animal and Plant Health Inspection Service</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <summary>Animal and Plant Health Inspection Service | Closes 2026-08-31 | The Animal Plant Health Inspection Service (APHIS) Wildlife Services, National Wildlife Research Center (NWRC) anticipates awarding $413,380 in cooperative agreement funding to support one project that addresses the funding priorities to investigate chronic wasting disease (CWD) as a population-limiting factor in Northern Colorado mule deer and white-tailed deer and to better understand the relati…</summary>
   </entry>
   <entry>
     <title>Children, Youth, and Families At-Risk Professional Development and Technical Assistance Program</title>
@@ -364,19 +377,6 @@
     <summary>Animal and Plant Health Inspection Service | Closes 2026-10-19 | The U.S. Department of Agriculture, Animal and Plant Health Inspection Service announce this funding opportunity to carry out the Plant Protection Act Section 7721 (PPA 7721) National Clean Plant Network (NCPN) program. APHIS will consider project proposals that clearly and directly support the strategic goals and objectives of the National Clean Plant Network as described in the NCPN Strategic Pl…</summary>
   </entry>
   <entry>
-    <title>Federal and University Partnership to Improve the Safety of Seafood from the Gulf of America</title>
-    <link href="https://www.grants.gov/search-results-detail/363304"/>
-    <id>urn:funding-finder:grants-gov:363304</id>
-    <updated>2026-07-23T00:00:00Z</updated>
-    <author><name>Food and Drug Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Public health"/>
-    <category term="Cybersecurity"/>
-    <summary>Food and Drug Administration | Closes 2026-08-21 | FDA is announcing the availability of funds for the support of a cooperative agreement between the Human Food Program/ Office of Laboratory Operations and Applied Science (OLOAS)/ Office of Applied Microbiolgy and Technology (OAMT) and the Marine Environmental Sciences Consortium/Dauphin Island Sea Lab (DISL). The scientific, public health, and policy expertise within the Food and Drug Administrat…</summary>
-  </entry>
-  <entry>
     <title>Wetland Mitigation Banking Program Fiscal Year (FY) 2026</title>
     <link href="https://www.grants.gov/search-results-detail/363288"/>
     <id>urn:funding-finder:grants-gov:363288</id>
@@ -397,31 +397,6 @@
     <category term="Environmental science"/>
     <category term="Water"/>
     <summary>Natural Resources Conservation Service | Closes 2026-09-21 | The purpose of the Feral Swine Eradication and Control Project (FSCP) is to respond to the threat feral swine pose to agriculture, native ecosystems, and human and animal health. Feral swine are a destructive, non-native, invasive species and their populations have expanded across the United States since the 1980’s. Over an estimated $3.4 billion in damage, including agricultural, is caused by fer…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement to Support Shellfish Safety Assistance Project</title>
-    <link href="https://www.grants.gov/search-results-detail/363282"/>
-    <id>urn:funding-finder:grants-gov:363282</id>
-    <updated>2026-07-22T00:00:00Z</updated>
-    <author><name>Food and Drug Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <category term="Cybersecurity"/>
-    <summary>Food and Drug Administration | Closes 2026-08-21 | The purpose of this funding opportunity is to (1) improve information exchange and transfer among States, Federal and Foreign Agencies, industry, and consumers; (2) strengthen state activities through training, technical assistance, research, education, and support for States to participate in meetings that foster a cooperative shellfish program based on public health principles; and (3) promote e…</summary>
-  </entry>
-  <entry>
-    <title>Research, Education, and Outreach on Botanical Natural Products</title>
-    <link href="https://www.grants.gov/search-results-detail/363286"/>
-    <id>urn:funding-finder:grants-gov:363286</id>
-    <updated>2026-07-22T00:00:00Z</updated>
-    <author><name>Food and Drug Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <category term="Cybersecurity"/>
-    <summary>Food and Drug Administration | Closes 2026-08-21 | The purpose of this funding opportunity is to provide continued support to: (1) assist in the identification and development of a prioritized list of botanical ingredients based on safety concerns, trends and knowledge of botanical ingredients in foods, dietary supplements, and cosmetics marketed in the U.S.; (2) acquire, validate and characterize authenticated reference materials, including raw a…</summary>
   </entry>
   <entry>
     <title>ROSES25: A.13 Accelerating Earth Solutions</title>
@@ -693,5 +668,25 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>National Institute of Food and Agriculture | Closes 2026-12-31 | The AFRI Foundational and Applied Science Program supports grants in six AFRI priority areas to advance knowledge in both fundamental and applied sciences important to agriculture. The six priority areas are: Plant Health and Production and Plant Products; Animal Health and Production and Animal Products; Food Safety, Nutrition, and Health; Bioenergy, Natural Resources, and Environment; Agricultur…</summary>
+  </entry>
+  <entry>
+    <title>NARMS Cooperative Agreement Program to Strengthen Antibiotic Resistance Surveillance in Retail Food Specimens</title>
+    <link href="https://www.grants.gov/search-results-detail/360006"/>
+    <id>urn:funding-finder:grants-gov:360006</id>
+    <updated>2025-07-11T00:00:00Z</updated>
+    <author><name>Food and Drug Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>Food and Drug Administration | Closes 2027-04-01 | This Funding Opportunity Announcement (FOA) issued by the Food and Drug Administration (FDA), Center for Veterinary Medicine (CVM), builds upon the National Antimicrobial Resistance Monitoring System (NARMS) which was initiated in 1996 as one of the key activities in a national action plan to combat antibiotic resistance threats. The purpose of this FOA is to protect and promote public health by e…</summary>
+  </entry>
+  <entry>
+    <title>Reissue of RFA-FD-22-001 - Efficient and Innovative Natural History Studies Addressing Unmet Needs in Rare Diseases (R01 Clinical Trials Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/360007"/>
+    <id>urn:funding-finder:grants-gov:360007</id>
+    <updated>2025-07-11T00:00:00Z</updated>
+    <author><name>Food and Drug Administration</name></author>
+    <category term="Agriculture and food"/>
+    <summary>Food and Drug Administration | Closes 2028-02-08 | The purpose of this notice of funding opportunity (NOFO) is to support efficient and innovative natural history studies that advance medical product development in rare diseases/conditions with unmet needs. Through the support of natural history studies with high quality and interpretable data elements, FDA expects to address critical knowledge gaps, remove major barriers to progress in the field,…</summary>
   </entry>
 </feed>

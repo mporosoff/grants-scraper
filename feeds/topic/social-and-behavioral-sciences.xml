@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml</id>
-  <updated>2026-08-21T17:45:06Z</updated>
+  <updated>2026-08-22T10:47:36Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -121,6 +121,15 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Social and behavioral sciences"/>
     <summary>Health Resources and Services Administration | Closes 2027-03-23 | The purpose of the Rural Communities Opioid Response Program (RCORP) - Evaluation is to evaluate the impact of rural behavioral health strategies and methods employed under the RCORP initiative, and to develop evaluation tools and resources for use in rural communities to inform future community-led rural health initiatives</summary>
+  </entry>
+  <entry>
+    <title>Rural Communities Opioid Response Program - Child and Adolescent Behavioral Health</title>
+    <link href="https://www.grants.gov/search-results-detail/363687"/>
+    <id>urn:funding-finder:grants-gov:363687</id>
+    <updated>2027-01-22T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Social and behavioral sciences"/>
+    <summary>Health Resources and Services Administration | Closes 2027-03-23 | The RCORP-Child and Adolescent Behavioral Health Program provides funding to rural communities to establish and expand behavioral health care services, including mental health and substance use disorder for rural children and adolescents.</summary>
   </entry>
   <entry>
     <title>Demonstration Projects for Whole-Person Health Models for Women Living with HIV in the South</title>
@@ -643,16 +652,5 @@
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
     <summary>U.S. National Science Foundation | Posted | The Collaboratory to Advance Mathematics Education and Learning (CAMEL) for K-12 initiative aims to advance mathematics learning and education through purposeful collaboration that draws on the interdisciplinary Science of Learning (including neuroscience; cognitive, developmental, and social sciences; computer science; machine learning; engineering; and education research), deep experiences in ed…</summary>
-  </entry>
-  <entry>
-    <title>Mind and Body Interventions to Restore Whole Person Health via Emotional Well-Being Mechanisms (R61/R33 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/359155"/>
-    <id>urn:funding-finder:grants-gov:359155</id>
-    <updated>2025-09-26T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Cybersecurity"/>
-    <summary>National Institutes of Health | Closes 2028-06-07 | The National Center for Complementary and Integrative Health (NCCIH) announces this Notice of Funding Opportunity (NOFO) to solicit applications for research on how mind and body interventions through psychological and/or physical inputs (e.g., mindfulness meditation, yoga, acupuncture, massage, and other brain and/or body based interventions) impact mechanisms of emotional well-being (EWB) and th…</summary>
   </entry>
 </feed>

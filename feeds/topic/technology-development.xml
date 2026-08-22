@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-08-21T17:45:06Z</updated>
+  <updated>2026-08-22T10:47:36Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -586,18 +586,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <summary>U.S. Mission to Indonesia | Closes 2026-08-30 | Indonesia is ASEAN’s largest economy and most populous nation, with a young, fast-growing digital population that is rapidly adopting artificial intelligence and creative-technology tools. The choices this generation makes about which technologies, standards, and platforms to build on will shape Indonesia’s digital economy for decades. Demand for trusted, high-quality AI tools is outpacing access …</summary>
   </entry>
   <entry>
-    <title>Technology Enhanced Adoptive Family Recruiting and Matching</title>
-    <link href="https://www.grants.gov/search-results-detail/361968"/>
-    <id>urn:funding-finder:grants-gov:361968</id>
-    <updated>2026-07-22T00:00:00Z</updated>
-    <author><name>Administration for Children and Families - ACYF/CB</name></author>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Administration for Children and Families - ACYF/CB | Closes 2026-08-21 | This program will fund projects focused on technology-enabled strategies that improve adoptive matching, placement, and permanency for children in foster care awaiting adoption. The funds, awarded to four regional centers, will be used to design, implement and evaluate these strategies. These centers will focus on children with an adoption permanency goal or who are legally free for adoption due t…</summary>
-  </entry>
-  <entry>
     <title>Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets)</title>
     <link href="https://www.grants.gov/search-results-detail/363268"/>
     <id>urn:funding-finder:grants-gov:363268</id>
@@ -675,5 +663,15 @@ a high level of innovation and creativity. The goal is to support the best young
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Technology development"/>
     <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-22 | Summary: The fiscal year 2026 (FY26) Neurofibromatosis Research Program (NFRP) Exploration-Hypothesis Development Award (EHDA) supports the initial exploration of innovative, high-risk, high-gain, and potentially groundbreaking concepts in neurofibromatosis (NF) research. Studies supported by this award mechanism should lay the groundwork for future avenues of scientific investigation. The propose…</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: Growing Great Ideas: Research Education Course in Entrepreneurship and Product Development for Researchers Studying Drug Use, Drug Misuse, and Drug Addiction (UE5 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/360561"/>
+    <id>urn:funding-finder:grants-gov:360561</id>
+    <updated>2026-06-23T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Closes 2026-10-01 | This notice of funding opportunity (NOFO) seeks to establish a course to equip researchers studying drug use, drug misuse, and drug addiction with the skills, knowledge, and practical tools needed to translate their scientific discoveries into impactful real world solutions. The course is envisioned to focus on building capacity in product development, entrepreneurship, and innovation pathways so …</summary>
   </entry>
 </feed>

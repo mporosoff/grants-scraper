@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-08-21T17:45:06Z</updated>
+  <updated>2026-08-22T10:47:36Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Mentored Career Transition Award (KT1/R00)</title>
@@ -245,16 +245,6 @@
     <summary>NYSERDA | Closes 2026-10-20 | Supports public sector organizations that aim to develop large portfolios of public Level 2 electric vehicle charging sites within their jurisdictions in New York State. Program Opportunity Notice (PON) 6141 makes up to $35 million available from the Sustainable Future Program, with a minimum of $1 million and a maximum of $15 million of NYSERDA funding per award.</summary>
   </entry>
   <entry>
-    <title>FY26 Transportation Emergency Response Training</title>
-    <link href="https://www.grants.gov/search-results-detail/363583"/>
-    <id>urn:funding-finder:grants-gov:363583</id>
-    <updated>2026-08-13T00:00:00Z</updated>
-    <author><name>DOT - Federal Railroad Administration</name></author>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <summary>DOT - Federal Railroad Administration | Closes 2026-08-21 | This grant will fund training for emergency responders, emergency medical technicians, police/fire personnel, etc. of tank car nomenclature, railroad operations and other related matters useful to mitigate railroad emergencies.</summary>
-  </entry>
-  <entry>
     <title>Syria Annual Program Statement</title>
     <link href="https://www.grants.gov/search-results-detail/363578"/>
     <id>urn:funding-finder:grants-gov:363578</id>
@@ -408,7 +398,6 @@
     <updated>2026-07-31T00:00:00Z</updated>
     <author><name>69A350 OSDBU</name></author>
     <category term="Transportation"/>
-    <category term="Cybersecurity"/>
     <summary>69A350 OSDBU | Closes 2026-08-30 | The U.S. Department of Transportation (USDOT), Office of the Secretary (OST), Office of Small and Disadvantaged Business Utilization (OSDBU), announces the availability of funding under Notice of Funding Opportunity (NOFO) Number OST/OSDBU-2026-SBTTAC-Region 1-FY2026-1 to establish and operate the Region 1 Small Business Transportation Technical Assistance Center (SBTTAC) formerly known as the Sma…</summary>
   </entry>
   <entry>
@@ -429,7 +418,6 @@
     <updated>2026-07-31T00:00:00Z</updated>
     <author><name>69A350 OSDBU</name></author>
     <category term="Transportation"/>
-    <category term="Cybersecurity"/>
     <summary>69A350 OSDBU | Closes 2026-08-30 | The U.S. Department of Transportation (USDOT), Office of the Secretary (OST), Office of Small and Disadvantaged Business Utilization (OSDBU), announces the availability of funding under Notice of Funding Opportunity (NOFO) Number OST/OSDBU-2026-SBTTAC-Region 3-FY2026-1 to establish and operate the Region 3 Small Business Transportation Technical Assistance Center (SBTTAC) formerly known as the Sma…</summary>
   </entry>
   <entry>
@@ -461,7 +449,6 @@
     <updated>2026-07-31T00:00:00Z</updated>
     <author><name>69A350 OSDBU</name></author>
     <category term="Transportation"/>
-    <category term="Cybersecurity"/>
     <summary>69A350 OSDBU | Closes 2026-08-30 | The U.S. Department of Transportation (USDOT), Office of the Secretary (OST), Office of Small and Disadvantaged Business Utilization (OSDBU), announces the availability of funding under Notice of Funding Opportunity (NOFO) Number OST/OSDBU-2026-SBTTAC-Region 6-FY2026-1 to establish and operate the Region 6 Small Business Transportation Technical Assistance Center (SBTTAC) formerly known as the Sma…</summary>
   </entry>
   <entry>
@@ -649,5 +636,14 @@
     <category term="Transportation"/>
     <category term="Water"/>
     <summary>DOC NOAA - ERA Production | Closes 2026-09-18 | The National Estuarine Research Reserve System (NERRS) consists of estuarine areas of the United States and its territories designated and managed for research and educational purposes (Reserve) as specified in 15 C.F.R. Part 921. By funding Reserve lead agencies and universities to conduct land acquisition and construction projects that support the NERRS mission, NOAA will strengthen protection o…</summary>
+  </entry>
+  <entry>
+    <title>FY 2026 Notice of Funding Opportunity: Innovative Coordinated Access and Mobility Pilot Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363122"/>
+    <id>urn:funding-finder:grants-gov:363122</id>
+    <updated>2026-07-09T00:00:00Z</updated>
+    <author><name>DOT - Federal Transit Administration</name></author>
+    <category term="Transportation"/>
+    <summary>DOT - Federal Transit Administration | Closes 2026-09-09 | The Federal Transit Administration (FTA) announces the opportunity to apply for $11,959,671 million in Fiscal Year (FY) 2024, 2025, and 2026 competitive grant funding to support transit services for the FY 2026 Innovative Coordinated Access and Mobility (ICAM) pilot program. Under the ICAM pilot program, funds awarded will finance innovative capital projects for the transportation-disadvantaged, w…</summary>
   </entry>
 </feed>

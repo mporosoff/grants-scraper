@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-08-21T17:45:06Z</updated>
+  <updated>2026-08-22T10:47:36Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development</title>
@@ -21,19 +21,39 @@
     <title>Ensuring “Pro-American Worker” Critical Minerals Supply Chain in the Western Hemisphere</title>
     <link href="https://www.grants.gov/search-results-detail/363215"/>
     <id>urn:funding-finder:grants-gov:363215</id>
-    <updated>2026-09-01T00:00:00Z</updated>
+    <updated>2026-08-21T00:00:00Z</updated>
     <author><name>Bureau of International Labor Affairs</name></author>
     <category term="Manufacturing"/>
-    <summary>Bureau of International Labor Affairs | Closes 2026-10-17 | The Bureau of International Labor Affairs (ILAB), U.S. Department of Labor (USDOL, or the Department), announces the availability of approximately $5,000,000 total costs (subject to the availability of Federal funds) for 1 cooperative agreement(s) to fund a technical assistance project aimed at supporting fair labor standards in the critical minerals sector, specifically copper, lithium, and silve…</summary>
+    <category term="Materials science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Energy"/>
+    <summary>Bureau of International Labor Affairs | Closes 2026-09-21 | Questions regarding this Funding Opportunity Announcement (FOA) may be emailed to OGM_ILAB@dol.gov.</summary>
   </entry>
   <entry>
     <title>Protecting the American Seafood Supply Chain by Countering Unfair Labor Practices and Illegal, Unreported, and Unregulated (IUU) Fishing</title>
     <link href="https://www.grants.gov/search-results-detail/363214"/>
     <id>urn:funding-finder:grants-gov:363214</id>
-    <updated>2026-09-01T00:00:00Z</updated>
+    <updated>2026-08-21T00:00:00Z</updated>
     <author><name>Bureau of International Labor Affairs</name></author>
     <category term="Manufacturing"/>
-    <summary>Bureau of International Labor Affairs | Closes 2026-10-17 | The Bureau of International Labor Affairs (ILAB), U.S. Department of Labor (USDOL, or the Department), announces the availability of approximately $11,000,000 total costs (subject to the availability of Federal funds) for 1 cooperative agreement(s) to fund a technical assistance project aimed at addressing abusive labor practices associated with Illegal, Unreported, and Unregulated (IUU) fishing i…</summary>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Bureau of International Labor Affairs | Closes 2026-09-21 | Questions regarding this Funding Opportunity Announcement (FOA) may be emailed to OGM_ILAB@dol.gov.</summary>
+  </entry>
+  <entry>
+    <title>Geosciences Core Research: Atmospheric, Geospace, Earth and Ocean Sciences (GEO Core)</title>
+    <link href="https://www.grants.gov/search-results-detail/363684"/>
+    <id>urn:funding-finder:grants-gov:363684</id>
+    <updated>2026-08-21T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Environmental science"/>
+    <category term="Materials science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Closes 2076-08-21 | The NSF Geosciences Research solicitation supports foundational research projects that advance the frontiers of knowledge across all areas of the geosciences. This solicitation calls for proposals in three programs: Atmospheric and Geospace Sciences (AGS) Program; Earth Sciences (EAR) Program; and Ocean Sciences (OCE) Program. These programs support projects that expand the frontiers of knowledge …</summary>
   </entry>
   <entry>
     <title>Egypt Annual Program Statement</title>
@@ -366,15 +386,6 @@
     <summary>National Energy Technology Laboratory | Closes 2026-09-22 | Advancing Oil and Natural Gas Production and Delivery This Notice of Funding Opportunity (NOFO) is seeking proposals to advance cost-effective technologies for improving the efficiency, reliability, and resilience of the Unites States oil and natural gas supply chain. This funding opportunity spans research and development efforts focused on enhancing resource utilization, modernizing infrastructu…</summary>
   </entry>
   <entry>
-    <title>Manufacturing Extension Partnership Center State Competition</title>
-    <link href="https://www.grants.gov/search-results-detail/363279"/>
-    <id>urn:funding-finder:grants-gov:363279</id>
-    <updated>2026-07-22T00:00:00Z</updated>
-    <author><name>National Institute of Standards and Technology</name></author>
-    <category term="Manufacturing"/>
-    <summary>National Institute of Standards and Technology | Closes 2026-08-21 | The NIST Hollings Manufacturing Extension Partnership (NIST MEP) is seeking applications from eligible applicants to establish and operate a MEP Center in the States of Alabama, Alaska, Arkansas, California, Georgia, Louisiana, Massachusetts, Missouri, Montana, Ohio, Pennsylvania, Utah and Vermont, and in the U.S. Territory of Puerto Rico.</summary>
-  </entry>
-  <entry>
     <title>Public Wireless Supply Chain Innovation Fund Grant Program - Solutions for AI-Native RAN</title>
     <link href="https://www.grants.gov/search-results-detail/363179"/>
     <id>urn:funding-finder:grants-gov:363179</id>
@@ -441,6 +452,22 @@
     <category term="Energy"/>
     <category term="Materials science"/>
     <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | Project Background, Goals, and Objectives: In an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will lea…</summary>
+  </entry>
+  <entry>
+    <title>Research Interests of the Air Force Office of Scientific Research</title>
+    <link href="https://www.grants.gov/search-results-detail/362681"/>
+    <id>urn:funding-finder:grants-gov:362681</id>
+    <updated>2026-06-04T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Transportation"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Energy"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>Air Force Office of Scientific Research | Posted | AFOSR plans, coordinates, and executes the Air Force Research Laboratory’s (AFRL) basic research program in response to technical guidance from AFRL and requirements of the Air Force. Additionally, the office fosters, supports, and conducts research within Air Force, university, and industry laboratories; and ensures transition of research results to support U.S. Air Force needs. The focus of AFOS…</summary>
   </entry>
   <entry>
     <title>Transport Phenomena (TP)</title>
@@ -745,20 +772,5 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Education and workforce"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Closes 2026-10-01 | With a focus on two-year Institutions of Higher Education (IHEs), the Advanced Technological Education (ATE) program supports the education of technicians for the high-technology fields that drive our nation's economy. The program involves partnerships between academic institutions (grades 7-12, IHEs), industry, and economic development agencies to promote improvement in the education of science a…</summary>
-  </entry>
-  <entry>
-    <title>IUSE/Professional Formation of Engineers: Revolutionizing Engineering Departments</title>
-    <link href="https://www.grants.gov/search-results-detail/353413"/>
-    <id>urn:funding-finder:grants-gov:353413</id>
-    <updated>2024-04-05T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Manufacturing"/>
-    <category term="Quantum science"/>
-    <category term="Technology development"/>
-    <summary>U.S. National Science Foundation | Closes 2026-09-08 | Revolutionizing Engineering Departments (hereinafter referred to as RED) is designed to build upon previous efforts in engineering education research. Specifically, previous and ongoing evaluations of the NSF Engineering Education and Centers Division program and its predecessors, as well as those related programs in the Directorate for STEM Education, have shown that prior investments have signif…</summary>
   </entry>
 </feed>

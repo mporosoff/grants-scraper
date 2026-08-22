@@ -1,8 +1,2362 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-21T17:45:12Z",
+  "generated_at": "2026-08-22T10:47:45Z",
   "retention_days": 90,
   "events": [
+    {
+      "id": "fcac550db3b880842d62",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363685",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "363685",
+        "opportunity_number": "USDA-APHIS-10028-WSNWRC00-26-0018",
+        "title": "Spatial Ecology and Chronic Wasting Disease Dynamics of Wild White-tailed and Mule Deer in Northern Colorado",
+        "agency": "Animal and Plant Health Inspection Service",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-21",
+        "close_date": "2026-08-31",
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Agriculture and food",
+          "Biology and biotechnology",
+          "Education and workforce",
+          "Environmental science",
+          "Infectious disease"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Private institutions of higher education"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 100,
+        "award_ceiling": 413380,
+        "detail_page": "https://www.grants.gov/search-results-detail/363685",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354749"
+      }
+    },
+    {
+      "id": "fc85dc7645b744bd8f99",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363481",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363481",
+        "opportunity_number": "26-513",
+        "title": "U.S. National Science Foundation State and Regional Artificial Intelligence Infrastructure Hubs:",
+        "agency": "U.S. National Science Foundation",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-06",
+        "close_date": "2026-11-04",
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Education and workforce",
+          "Data science",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/363481",
+        "funding_opportunity_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf26513",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "f93b0784381d6ad9e0bb",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363552",
+      "detail": "Deadline 2026-09-21",
+      "record": {
+        "opportunity_id": "363552",
+        "opportunity_number": "O-BJS-2026-172682",
+        "title": "BJS FY 2026 Annual Surveys of Probation and Parole (ASPP) RY 2026-2030",
+        "agency": "Bureau of Justice Statistics",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-13",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-08-14",
+        "version": "Synopsis 4",
+        "topic_areas": [],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": 2250000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363552",
+        "funding_opportunity_url": "https://www.ojp.gov/funding/docs/bjs-2026-172682.pdf",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-21"
+    },
+    {
+      "id": "f51c3277d25762615c08",
+      "type": "deadline_changed",
+      "label": "Deadline changed",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363212",
+      "detail": "2026-10-15 → 2026-09-21",
+      "record": {
+        "opportunity_id": "363212",
+        "opportunity_number": "FOA-ILAB-26-28",
+        "title": "Supporting Implementation of the Labor Provisions of Trade Arrangements for American Worker Competitiveness",
+        "agency": "Bureau of International Labor Affairs",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-21",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 3",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ],
+        "disciplines": [],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 8000000,
+        "award_ceiling": 18000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363212",
+        "funding_opportunity_url": "https://www.dol.gov/agencies/ilab",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354754"
+      },
+      "old_deadline": "2026-10-15",
+      "new_deadline": "2026-09-21"
+    },
+    {
+      "id": "f50db6b97fa1574c35d7",
+      "type": "deadline_changed",
+      "label": "Deadline changed",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363215",
+      "detail": "2026-10-17 → 2026-09-21",
+      "record": {
+        "opportunity_id": "363215",
+        "opportunity_number": "FOA-ILAB-26-30",
+        "title": "Ensuring “Pro-American Worker” Critical Minerals Supply Chain in the Western Hemisphere",
+        "agency": "Bureau of International Labor Affairs",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-21",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Manufacturing",
+          "Materials science",
+          "Artificial intelligence and machine learning",
+          "Data science",
+          "Energy"
+        ],
+        "disciplines": [],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 5000000,
+        "award_ceiling": 5000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363215",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354759"
+      },
+      "old_deadline": "2026-10-17",
+      "new_deadline": "2026-09-21"
+    },
+    {
+      "id": "ed66fa206af706366dbf",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363531",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363531",
+        "opportunity_number": "FOA-ILAB-26-44",
+        "title": "Freedom Shield: Global Forced Labor Import Prohibition Initiative",
+        "agency": "Bureau of International Labor Affairs",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-21",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ],
+        "disciplines": [],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 7000000,
+        "award_ceiling": 18000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363531",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354756"
+      }
+    },
+    {
+      "id": "ec26ffa403c30911c35f",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363428",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363428",
+        "opportunity_number": "OST-OSDBU-2026-SBTTAC-REGION3-FY2026-1",
+        "title": "Small Business Transportation Technical Assistance Center (Region 3)",
+        "agency": "69A350 OSDBU",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-31",
+        "close_date": "2026-08-30",
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 4",
+        "topic_areas": [
+          "Transportation"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "Public and state institutions of higher education",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 278272,
+        "award_ceiling": 278272,
+        "detail_page": "https://www.grants.gov/search-results-detail/363428",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354762"
+      }
+    },
+    {
+      "id": "ea52f41e1bf70643786d",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363425",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363425",
+        "opportunity_number": "OST-OSDBU-2026-SBTTAC-REGION1-FY2026-1",
+        "title": "Small Business Transportation Technical Assistance Center (Region 1)",
+        "agency": "69A350 OSDBU",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-31",
+        "close_date": "2026-08-30",
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 4",
+        "topic_areas": [
+          "Transportation"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "Public and state institutions of higher education",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 452420,
+        "award_ceiling": 452420,
+        "detail_page": "https://www.grants.gov/search-results-detail/363425",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354758"
+      }
+    },
+    {
+      "id": "e43e3906cf9f095b0aad",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363600",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363600",
+        "opportunity_number": "HRSA-27-041",
+        "title": "Rural Communities Opioid Response Program - Evaluation",
+        "agency": "Health Resources and Services Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2027-01-23",
+        "close_date": "2027-03-23",
+        "last_updated": "2026-08-21",
+        "version": "Forecast 3",
+        "topic_areas": [
+          "Social and behavioral sciences"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 5000000,
+        "award_ceiling": 5000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363600",
+        "funding_opportunity_url": "https://www.hrsa.gov/rural-health/opioid-response",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "e2dadede077e22b2f87c",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363436",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363436",
+        "opportunity_number": "OST-OSDBU-2026-SBTTAC-REGION2-FY2026-1",
+        "title": "Small Business Transportation Technical Assistance Center (Region 2)",
+        "agency": "69A350 OSDBU",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-31",
+        "close_date": "2026-08-30",
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 8",
+        "topic_areas": [
+          "Education and workforce",
+          "Transportation",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Business and Economic Development"
+        ],
+        "applicant_types": [
+          "Nonprofits with 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 444652,
+        "award_ceiling": 444652,
+        "detail_page": "https://www.grants.gov/search-results-detail/363436",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354766"
+      }
+    },
+    {
+      "id": "d5628aed7919c49463fb",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363529",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363529",
+        "opportunity_number": "DFOP0019574",
+        "title": "Supporting Implementation of the REIF in the Great Lakes Region of Africa",
+        "agency": "Bureau of African Affairs",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-10",
+        "close_date": "2026-09-09",
+        "last_updated": "2026-08-10",
+        "version": "Synopsis 2",
+        "topic_areas": [],
+        "disciplines": [
+          "Business and Economic Development"
+        ],
+        "applicant_types": [
+          "Public and state institutions of higher education",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 14490000,
+        "award_ceiling": 14490000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363529",
+        "funding_opportunity_url": "https://mygrants.servicenowservices.com/mygrants?id=mygrants_form&table=x_g_usd4_d_grant_funding_opportunity&sys_id=c1a38a3647a64bd04f681864336d43ea&view=Default",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "d08a90d0ed922c54490d",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363282",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363282",
+        "opportunity_number": "RFA-FD-26-013",
+        "title": "Cooperative Agreement to Support Shellfish Safety Assistance Project",
+        "agency": "Food and Drug Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-22",
+        "close_date": "2026-08-21",
+        "last_updated": "2026-07-22",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Agriculture and food",
+          "Education and workforce",
+          "Infectious disease",
+          "Public health",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences",
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": 500000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363282",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354081"
+      }
+    },
+    {
+      "id": "ccccf76d19ad4375ccf2",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363663",
+      "detail": "Deadline 2026-09-21",
+      "record": {
+        "opportunity_id": "363663",
+        "opportunity_number": "USDA-NIFA-ES-011939",
+        "title": "Food and Agriculture Defense Initiative Extension Disaster Education Network",
+        "agency": "National Institute of Food and Agriculture",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-19",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Agriculture and food",
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 382400,
+        "award_ceiling": 382400,
+        "detail_page": "https://www.grants.gov/search-results-detail/363663",
+        "funding_opportunity_url": "https://www.nifa.usda.gov/grants/funding-opportunities/food-agriculture-defense-initiative-extension-disaster-education-0",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354716"
+      },
+      "deadline": "2026-09-21"
+    },
+    {
+      "id": "c77352ea54c067b807d5",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363420",
+      "detail": "Deadline 2026-09-21",
+      "record": {
+        "opportunity_id": "363420",
+        "opportunity_number": "HRSA-27-007",
+        "title": "Fiscal Year (FY) Service Area Competition (SAC)",
+        "agency": "Health Resources and Services Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-08-21",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-08-17",
+        "version": "Forecast 5",
+        "topic_areas": [],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 566100,
+        "award_ceiling": 15336000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363420",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-21"
+    },
+    {
+      "id": "b23140179ba77cb18722",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363439",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363439",
+        "opportunity_number": "OST-OSDBU-2026-SBTTAC-REGION-5-FY2026-1",
+        "title": "Small Business Transportation Technical Assistance Center (Region 5)",
+        "agency": "69A350 OSDBU",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-31",
+        "close_date": "2026-08-30",
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 6",
+        "topic_areas": [
+          "Education and workforce",
+          "Transportation",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Business and Economic Development"
+        ],
+        "applicant_types": [
+          "Nonprofits with 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 382925,
+        "award_ceiling": 382925,
+        "detail_page": "https://www.grants.gov/search-results-detail/363439",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354305"
+      }
+    },
+    {
+      "id": "afcd18c9028d60386192",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363304",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363304",
+        "opportunity_number": "RFA-FD-26-014",
+        "title": "Federal and University Partnership to Improve the Safety of Seafood from the Gulf of America",
+        "agency": "Food and Drug Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-23",
+        "close_date": "2026-08-21",
+        "last_updated": "2026-07-23",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Agriculture and food",
+          "Education and workforce",
+          "Environmental science",
+          "Public health",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Medical and Health",
+          "Community and Social Sciences",
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": 125000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363304",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354122"
+      }
+    },
+    {
+      "id": "a6be1d69f872ff4d779f",
+      "type": "deadline_changed",
+      "label": "Deadline changed",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363531",
+      "detail": "2026-09-17 → 2026-09-21",
+      "record": {
+        "opportunity_id": "363531",
+        "opportunity_number": "FOA-ILAB-26-44",
+        "title": "Freedom Shield: Global Forced Labor Import Prohibition Initiative",
+        "agency": "Bureau of International Labor Affairs",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-21",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ],
+        "disciplines": [],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 7000000,
+        "award_ceiling": 18000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363531",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354756"
+      },
+      "old_deadline": "2026-09-17",
+      "new_deadline": "2026-09-21"
+    },
+    {
+      "id": "a42c9481109f4d677cef",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363423",
+      "detail": "Deadline 2026-09-21",
+      "record": {
+        "opportunity_id": "363423",
+        "opportunity_number": "HRSA-27-005",
+        "title": "Fiscal Year (FY) 2027 Service Area Competition (SAC)",
+        "agency": "Health Resources and Services Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-08-21",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-08-17",
+        "version": "Forecast 5",
+        "topic_areas": [],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 1216000,
+        "award_ceiling": 19182000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363423",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-21"
+    },
+    {
+      "id": "a1fd5f01df4c13414554",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363685",
+      "detail": "Deadline 2026-08-31",
+      "record": {
+        "opportunity_id": "363685",
+        "opportunity_number": "USDA-APHIS-10028-WSNWRC00-26-0018",
+        "title": "Spatial Ecology and Chronic Wasting Disease Dynamics of Wild White-tailed and Mule Deer in Northern Colorado",
+        "agency": "Animal and Plant Health Inspection Service",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-21",
+        "close_date": "2026-08-31",
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Agriculture and food",
+          "Biology and biotechnology",
+          "Education and workforce",
+          "Environmental science",
+          "Infectious disease"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Private institutions of higher education"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 100,
+        "award_ceiling": 413380,
+        "detail_page": "https://www.grants.gov/search-results-detail/363685",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354749"
+      },
+      "deadline": "2026-08-31"
+    },
+    {
+      "id": "9f03e03343a14b5a06e5",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363419",
+      "detail": "Deadline 2026-09-21",
+      "record": {
+        "opportunity_id": "363419",
+        "opportunity_number": "HRSA-27-006",
+        "title": "Fiscal Year (FY) 2027 Service Area Competition (SAC)",
+        "agency": "Health Resources and Services Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-08-21",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-08-17",
+        "version": "Forecast 5",
+        "topic_areas": [],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 398400,
+        "award_ceiling": 22025000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363419",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-21"
+    },
+    {
+      "id": "9e1b3a545a1e2ea6582d",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363437",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363437",
+        "opportunity_number": "OST-OSDBU-2026-SBTTAC-REGION4-FY2026-1",
+        "title": "Small Business Transportation Technical Assistance Center (Region 4)",
+        "agency": "69A350 OSDBU",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-31",
+        "close_date": "2026-08-30",
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 7",
+        "topic_areas": [
+          "Education and workforce",
+          "Transportation",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Business and Economic Development"
+        ],
+        "applicant_types": [
+          "Nonprofits with 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 300172,
+        "award_ceiling": 300172,
+        "detail_page": "https://www.grants.gov/search-results-detail/363437",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354304"
+      }
+    },
+    {
+      "id": "9816930a265ca19c2ce3",
+      "type": "deadline_changed",
+      "label": "Deadline changed",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363615",
+      "detail": "2076-08-17 → 2076-08-21",
+      "record": {
+        "opportunity_id": "363615",
+        "opportunity_number": "26-517",
+        "title": "Core Research in Biological Sciences (BIO Core)",
+        "agency": "U.S. National Science Foundation",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-17",
+        "close_date": "2076-08-21",
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Biology and biotechnology"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 500000,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/363615",
+        "funding_opportunity_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf26517",
+        "primary_document_url": null
+      },
+      "old_deadline": "2076-08-17",
+      "new_deadline": "2076-08-21"
+    },
+    {
+      "id": "8e804cf2b596b06ae2e0",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363215",
+      "detail": "Deadline 2026-09-21",
+      "record": {
+        "opportunity_id": "363215",
+        "opportunity_number": "FOA-ILAB-26-30",
+        "title": "Ensuring “Pro-American Worker” Critical Minerals Supply Chain in the Western Hemisphere",
+        "agency": "Bureau of International Labor Affairs",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-21",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Manufacturing",
+          "Materials science",
+          "Artificial intelligence and machine learning",
+          "Data science",
+          "Energy"
+        ],
+        "disciplines": [],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 5000000,
+        "award_ceiling": 5000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363215",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354759"
+      },
+      "deadline": "2026-09-21"
+    },
+    {
+      "id": "8d636aa45f6fba71fca3",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363686",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "363686",
+        "opportunity_number": "HRSA-27-040",
+        "title": "Rural Communities Opioid Response Program - Overdose Response",
+        "agency": "Health Resources and Services Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2027-01-11",
+        "close_date": "2027-03-10",
+        "last_updated": "2026-08-21",
+        "version": "Forecast 1",
+        "topic_areas": [],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 300000,
+        "award_ceiling": 300000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363686",
+        "funding_opportunity_url": "https://www.hrsa.gov/rural-health/opioid-response",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "87287472202f4d4438d5",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363236",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363236",
+        "opportunity_number": "DOS-LONDON-PD-2026-02",
+        "title": "Liberty Under Law: The Shared Anglo-American Tradition",
+        "agency": "U.S. Mission to the United Kingdom",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-20",
+        "close_date": "2026-08-21",
+        "last_updated": "2026-07-20",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce"
+        ],
+        "disciplines": [],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement",
+          "Grant"
+        ],
+        "award_floor": 100000,
+        "award_ceiling": 500000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363236",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353987"
+      }
+    },
+    {
+      "id": "8180872390755a0c9df0",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363610",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363610",
+        "opportunity_number": "O-OVC-2026-172691",
+        "title": "OVC FY26 Invited to Apply Antiterrorism and Emergency Assistance Program for Crime Victim Compensation and/or Assistance - Minneapolis, Minnesota (Crisis)",
+        "agency": "Office for Victims of Crime",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-14",
+        "close_date": "2026-08-21",
+        "last_updated": "2026-08-17",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": 4805538,
+        "detail_page": "https://www.grants.gov/search-results-detail/363610",
+        "funding_opportunity_url": "https://ovc.ojp.gov/program/aeap/overview",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "76086f50d25f308554a0",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363583",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363583",
+        "opportunity_number": "FR-SEC-26-001",
+        "title": "FY26 Transportation Emergency Response Training",
+        "agency": "DOT - Federal Railroad Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-13",
+        "close_date": "2026-08-21",
+        "last_updated": "2026-08-18",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Education and workforce",
+          "Transportation"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": 150000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363583",
+        "funding_opportunity_url": "https://www.grantsolutions.gov/gs/preaward/previewPublicAnnouncement.do?id=127566",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "74f1786f5a3a38dcc86c",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363615",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363615",
+        "opportunity_number": "26-517",
+        "title": "Core Research in Biological Sciences (BIO Core)",
+        "agency": "U.S. National Science Foundation",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-17",
+        "close_date": "2076-08-21",
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Biology and biotechnology"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 500000,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/363615",
+        "funding_opportunity_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf26517",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "696d81d16d62622672bc",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363601",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363601",
+        "opportunity_number": "HRSA-27-042",
+        "title": "Rural Communities Opioid Response Program - Community Systems Development",
+        "agency": "Health Resources and Services Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2027-02-05",
+        "close_date": "2027-04-06",
+        "last_updated": "2026-08-21",
+        "version": "Forecast 3",
+        "topic_areas": [
+          "Social and behavioral sciences"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": 500000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363601",
+        "funding_opportunity_url": "https://www.hrsa.gov/rural-health/opioid-response",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "65f8d8376a932f913890",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "361968",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "361968",
+        "opportunity_number": "HHS-2026-ACF-ACYF-CO-0040",
+        "title": "Technology Enhanced Adoptive Family Recruiting and Matching",
+        "agency": "Administration for Children and Families - ACYF/CB",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-22",
+        "close_date": "2026-08-21",
+        "last_updated": "2026-07-22",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce",
+          "Technology development",
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 1500000,
+        "award_ceiling": 2674000,
+        "detail_page": "https://www.grants.gov/search-results-detail/361968",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354082"
+      }
+    },
+    {
+      "id": "64c65e513b8fdc1ff2fa",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363687",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "363687",
+        "opportunity_number": "HRSA-27-043",
+        "title": "Rural Communities Opioid Response Program - Child and Adolescent Behavioral Health",
+        "agency": "Health Resources and Services Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2027-01-22",
+        "close_date": "2027-03-23",
+        "last_updated": "2026-08-21",
+        "version": "Forecast 1",
+        "topic_areas": [
+          "Social and behavioral sciences"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": 1000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363687",
+        "funding_opportunity_url": "https://www.hrsa.gov/rural-health/opioid-response",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "644a24bd9501ad1b59cf",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363682",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363682",
+        "opportunity_number": "USDA-NIFA-ARPA-012381",
+        "title": "Agriculture Risk Management Education Partnerships Competitive Grants Program",
+        "agency": "National Institute of Food and Agriculture",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-20",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Agriculture and food",
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 565800,
+        "award_ceiling": 2121750,
+        "detail_page": "https://www.grants.gov/search-results-detail/363682",
+        "funding_opportunity_url": "https://www.nifa.usda.gov/grants/funding-opportunities/agriculture-risk-management-education-partnerships-competitive-grants",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354747"
+      }
+    },
+    {
+      "id": "5f17a72fe677e03f6208",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363214",
+      "detail": "Deadline 2026-09-21",
+      "record": {
+        "opportunity_id": "363214",
+        "opportunity_number": "FOA-ILAB-26-29",
+        "title": "Protecting the American Seafood Supply Chain by Countering Unfair Labor Practices and Illegal, Unreported, and Unregulated (IUU) Fishing",
+        "agency": "Bureau of International Labor Affairs",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-21",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 4",
+        "topic_areas": [
+          "Manufacturing",
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ],
+        "disciplines": [],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 11000000,
+        "award_ceiling": 11000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363214",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354752"
+      },
+      "deadline": "2026-09-21"
+    },
+    {
+      "id": "5bd774a0f943b56e4d61",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363574",
+      "detail": "Deadline 2026-09-21",
+      "record": {
+        "opportunity_id": "363574",
+        "opportunity_number": "O-BJS-2026-172685",
+        "title": "BJS FY 2026 Criminal History Record Assessment and Research Program (CHRARP)",
+        "agency": "Bureau of Justice Statistics",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-13",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-08-14",
+        "version": "Synopsis 3",
+        "topic_areas": [],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Public and state institutions of higher education",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": 1750000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363574",
+        "funding_opportunity_url": "https://www.ojp.gov/funding/docs/bjs-2026-172685.pdf",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-21"
+    },
+    {
+      "id": "5b1af5877716e5cdf2ce",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363212",
+      "detail": "Deadline 2026-09-21",
+      "record": {
+        "opportunity_id": "363212",
+        "opportunity_number": "FOA-ILAB-26-28",
+        "title": "Supporting Implementation of the Labor Provisions of Trade Arrangements for American Worker Competitiveness",
+        "agency": "Bureau of International Labor Affairs",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-21",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 3",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ],
+        "disciplines": [],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 8000000,
+        "award_ceiling": 18000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363212",
+        "funding_opportunity_url": "https://www.dol.gov/agencies/ilab",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354754"
+      },
+      "deadline": "2026-09-21"
+    },
+    {
+      "id": "5a33a3a010d258de1e50",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363215",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363215",
+        "opportunity_number": "FOA-ILAB-26-30",
+        "title": "Ensuring “Pro-American Worker” Critical Minerals Supply Chain in the Western Hemisphere",
+        "agency": "Bureau of International Labor Affairs",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-21",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Manufacturing",
+          "Materials science",
+          "Artificial intelligence and machine learning",
+          "Data science",
+          "Energy"
+        ],
+        "disciplines": [],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 5000000,
+        "award_ceiling": 5000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363215",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354759"
+      }
+    },
+    {
+      "id": "58deed627befc7eec18d",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "362681",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "362681",
+        "opportunity_number": "FA955026S0001",
+        "title": "Research Interests of the Air Force Office of Scientific Research",
+        "agency": "Air Force Office of Scientific Research",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-06-04",
+        "close_date": null,
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 6",
+        "topic_areas": [
+          "Biology and biotechnology",
+          "Transportation",
+          "Catalysis and reaction engineering",
+          "Materials science",
+          "Quantum science",
+          "Energy",
+          "Data science",
+          "Artificial intelligence and machine learning",
+          "Manufacturing",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement",
+          "Grant",
+          "Other",
+          "Procurement Contract"
+        ],
+        "award_floor": null,
+        "award_ceiling": 10000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/362681",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/352688"
+      }
+    },
+    {
+      "id": "4eea9f9ff1b35b985b0c",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363421",
+      "detail": "Deadline 2026-09-21",
+      "record": {
+        "opportunity_id": "363421",
+        "opportunity_number": "HRSA-27-008",
+        "title": "Fiscal Year (FY) 2027 Service Area Competition (SAC)",
+        "agency": "Health Resources and Services Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-08-21",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-08-17",
+        "version": "Forecast 3",
+        "topic_areas": [],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 650000,
+        "award_ceiling": 10117000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363421",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-21"
+    },
+    {
+      "id": "44b6e10e28ad37fdb1a3",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363684",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "363684",
+        "opportunity_number": "26-516",
+        "title": "Geosciences Core Research: Atmospheric, Geospace, Earth and Ocean Sciences (GEO Core)",
+        "agency": "U.S. National Science Foundation",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-21",
+        "close_date": "2076-08-21",
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 3",
+        "topic_areas": [
+          "Environmental science",
+          "Materials science",
+          "Artificial intelligence and machine learning",
+          "Data science",
+          "Energy",
+          "Manufacturing"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/363684",
+        "funding_opportunity_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf26516",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "3f7b18ec7874ab7c0c9f",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363682",
+      "detail": "Deadline 2026-09-21",
+      "record": {
+        "opportunity_id": "363682",
+        "opportunity_number": "USDA-NIFA-ARPA-012381",
+        "title": "Agriculture Risk Management Education Partnerships Competitive Grants Program",
+        "agency": "National Institute of Food and Agriculture",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-20",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Agriculture and food",
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 565800,
+        "award_ceiling": 2121750,
+        "detail_page": "https://www.grants.gov/search-results-detail/363682",
+        "funding_opportunity_url": "https://www.nifa.usda.gov/grants/funding-opportunities/agriculture-risk-management-education-partnerships-competitive-grants",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354747"
+      },
+      "deadline": "2026-09-21"
+    },
+    {
+      "id": "3c87296bb33bf7e8b5cb",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363221",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363221",
+        "opportunity_number": "DFOP0018157",
+        "title": "Data Analytics & AI to Counter Global Diversion",
+        "agency": "Bureau of Arms Control and Nonproliferation",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-16",
+        "close_date": "2026-08-21",
+        "last_updated": "2026-07-16",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Data science"
+        ],
+        "disciplines": [
+          "Business and Economic Development"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": 5901000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363221",
+        "funding_opportunity_url": "https://mygrants.servicenowservices.com/mygrants?id=mygrants_form&table=x_g_usd4_d_grant_funding_opportunity&sys_id=120317011bd48b54baa70fe4604bcb86&view=Default",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "39d86d8556d53ffd724b",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363505",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363505",
+        "opportunity_number": "DFOP0019542",
+        "title": "Promoting Civilizational Values",
+        "agency": "Bureau of Democracy Human Rights and Labor",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-07",
+        "close_date": "2026-08-21",
+        "last_updated": "2026-08-07",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Arts and culture",
+          "Education and workforce"
+        ],
+        "disciplines": [],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 1973359,
+        "award_ceiling": 1973359,
+        "detail_page": "https://www.grants.gov/search-results-detail/363505",
+        "funding_opportunity_url": "https://mygrants.servicenowservices.com/mygrants?id=mygrants_form&table=x_g_usd4_d_grant_funding_opportunity&sys_id=c20164259366cb90d114b7986cba1017&view=Default",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354446"
+      }
+    },
+    {
+      "id": "35ad43f58399e36014d8",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363689",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "363689",
+        "opportunity_number": "DFOP0018712",
+        "title": "NEA/AC Regional Annual Program Statement",
+        "agency": "Bureau of Near Eastern Affairs",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-21",
+        "close_date": "2026-09-30",
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 1",
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 250000,
+        "award_ceiling": 30000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363689",
+        "funding_opportunity_url": "https://mygrants.servicenowservices.com/mygrants?id=mygrants_form&table=x_g_usd4_d_grant_funding_opportunity&sys_id=7236420187ed435020b862060cbb3582&view=Default",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "359b4fb12813cc148cd5",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363212",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363212",
+        "opportunity_number": "FOA-ILAB-26-28",
+        "title": "Supporting Implementation of the Labor Provisions of Trade Arrangements for American Worker Competitiveness",
+        "agency": "Bureau of International Labor Affairs",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-21",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 3",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ],
+        "disciplines": [],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 8000000,
+        "award_ceiling": 18000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363212",
+        "funding_opportunity_url": "https://www.dol.gov/agencies/ilab",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354754"
+      }
+    },
+    {
+      "id": "30c9be76c6b98ef8570b",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363300",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363300",
+        "opportunity_number": "DFOP0018712",
+        "title": "NEA/AC Regional Annual Program Statement",
+        "agency": "Bureau of Near Eastern Affairs",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-23",
+        "close_date": "2026-09-30",
+        "last_updated": "2026-07-23",
+        "version": "Synopsis 1",
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 250000,
+        "award_ceiling": 30000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363300",
+        "funding_opportunity_url": "https://mygrants.servicenowservices.com/mygrants?id=mygrants_form&table=x_g_usd4_d_grant_funding_opportunity&sys_id=7236420187ed435020b862060cbb3582&view=Default",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "304c7ad6b38fdc41b886",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363279",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363279",
+        "opportunity_number": "2026-NIST-MEP-02",
+        "title": "Manufacturing Extension Partnership Center State Competition",
+        "agency": "National Institute of Standards and Technology",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-22",
+        "close_date": "2026-08-21",
+        "last_updated": "2026-07-22",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Manufacturing"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/363279",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354080"
+      }
+    },
+    {
+      "id": "28f2397ce858d4facd50",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363321",
+      "detail": "Deadline 2026-09-21",
+      "record": {
+        "opportunity_id": "363321",
+        "opportunity_number": "FTA-2026-010-TPM-BUS",
+        "title": "Fiscal Year 2026 Competitive Funding Opportunity: Buses and Bus Facilities Program",
+        "agency": "DOT - Federal Transit Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-27",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-07-27",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Transportation"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Federally recognized Native American tribal governments",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/363321",
+        "funding_opportunity_url": "https://www.transit.dot.gov/notices-funding/fy-2026-notice-funding-opportunity-grants-buses-and-bus-facilities-infrastructure",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-21"
+    },
+    {
+      "id": "24355f982c38e890134b",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363322",
+      "detail": "Deadline 2026-09-21",
+      "record": {
+        "opportunity_id": "363322",
+        "opportunity_number": "FTA-2026-011-TPM-LWNO",
+        "title": "Fiscal Year 2026 Competitive Funding Opportunity: Low or No Emission Program",
+        "agency": "DOT - Federal Transit Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-27",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-07-27",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Transportation"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Federally recognized Native American tribal governments",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/363322",
+        "funding_opportunity_url": "https://www.transit.dot.gov/notices-funding/fy-2026-notice-funding-opportunity-grants-buses-and-bus-facilities-infrastructure",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-21"
+    },
+    {
+      "id": "1e1f80e3e4c04b2c7bf9",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363328",
+      "detail": "Deadline 2026-09-21",
+      "record": {
+        "opportunity_id": "363328",
+        "opportunity_number": "USDA-APHIS-10031-PPQ-PPDMDPP-2027",
+        "title": "Plant Protection Act Section 7721 Plant Pest and Disease Management and Disaster Prevention Program (PPDMDPP)",
+        "agency": "Animal and Plant Health Inspection Service",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-27",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-07-27",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Agriculture and food",
+          "Education and workforce",
+          "Infectious disease"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Nonprofits with 501(c)(3) status",
+          "Private institutions of higher education",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement",
+          "Grant",
+          "Other"
+        ],
+        "award_floor": 1,
+        "award_ceiling": 400000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363328",
+        "funding_opportunity_url": "https://www.aphis.usda.gov/funding/ppdmdpp",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354176"
+      },
+      "deadline": "2026-09-21"
+    },
+    {
+      "id": "1a5ed06b99dc2e42d7ac",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363285",
+      "detail": "Deadline 2026-09-21",
+      "record": {
+        "opportunity_id": "363285",
+        "opportunity_number": "USDA-NRCS-NHQ-FSCP-26-NOFO0001453",
+        "title": "NRCS' Feral Swine Eradication and Control Pilot Program Fiscal Year (FY) 2026",
+        "agency": "Natural Resources Conservation Service",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-23",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-07-23",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Agriculture and food",
+          "Arts and culture",
+          "Environmental science",
+          "Water"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 75000,
+        "award_ceiling": 3000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363285",
+        "funding_opportunity_url": "https://www.nrcs.usda.gov/feral-swine-eradication-and-control-pilot-program",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354104"
+      },
+      "deadline": "2026-09-21"
+    },
+    {
+      "id": "19f6ec0ecd47cbf41e39",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363286",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363286",
+        "opportunity_number": "RFA-FD-26-011",
+        "title": "Research, Education, and Outreach on Botanical Natural Products",
+        "agency": "Food and Drug Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-22",
+        "close_date": "2026-08-21",
+        "last_updated": "2026-07-22",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Agriculture and food",
+          "Education and workforce",
+          "Public health",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences",
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": 5100000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363286",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354088"
+      }
+    },
+    {
+      "id": "17256deca052a3e7b471",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363553",
+      "detail": "Deadline 2026-09-21",
+      "record": {
+        "opportunity_id": "363553",
+        "opportunity_number": "O-BJS-2026-172683",
+        "title": "BJS FY 2026 National Incident-Based Reporting System Estimation Program",
+        "agency": "Bureau of Justice Statistics",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-13",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-08-14",
+        "version": "Synopsis 3",
+        "topic_areas": [],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Public and state institutions of higher education",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": 5300000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363553",
+        "funding_opportunity_url": "https://www.ojp.gov/funding/docs/bjs-2026-172683.pdf",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-21"
+    },
+    {
+      "id": "16657a1b34935d984f3d",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363430",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363430",
+        "opportunity_number": "OST-OSDBU-2026-SBTTAC-REGION6-FY2026-1",
+        "title": "Small Business Transportation Technical Assistance Center (Region 6)",
+        "agency": "69A350 OSDBU",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-31",
+        "close_date": "2026-08-30",
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 4",
+        "topic_areas": [
+          "Transportation"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "Public and state institutions of higher education",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 441559,
+        "award_ceiling": 441559,
+        "detail_page": "https://www.grants.gov/search-results-detail/363430",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354763"
+      }
+    },
+    {
+      "id": "050f36b1a399538697f8",
+      "type": "deadline_changed",
+      "label": "Deadline changed",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363214",
+      "detail": "2026-10-17 → 2026-09-21",
+      "record": {
+        "opportunity_id": "363214",
+        "opportunity_number": "FOA-ILAB-26-29",
+        "title": "Protecting the American Seafood Supply Chain by Countering Unfair Labor Practices and Illegal, Unreported, and Unregulated (IUU) Fishing",
+        "agency": "Bureau of International Labor Affairs",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-21",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 4",
+        "topic_areas": [
+          "Manufacturing",
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ],
+        "disciplines": [],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 11000000,
+        "award_ceiling": 11000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363214",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354752"
+      },
+      "old_deadline": "2026-10-17",
+      "new_deadline": "2026-09-21"
+    },
+    {
+      "id": "02add95ceea7ebda1167",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363256",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363256",
+        "opportunity_number": "DOS-KAZ-ALM-PDS-26-001",
+        "title": "Access Alumni Outreach and Engagement and English Access Scholarship Program",
+        "agency": "U.S. Mission to Kazakhstan",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-21",
+        "close_date": "2026-08-21",
+        "last_updated": "2026-07-21",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Arts and culture",
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Education"
+        ],
+        "applicant_types": [
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 30000,
+        "award_ceiling": 50000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363256",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "012d38e1b1fd183ff5df",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-08-22T10:40:41.293717Z",
+      "opportunity_id": "363214",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363214",
+        "opportunity_number": "FOA-ILAB-26-29",
+        "title": "Protecting the American Seafood Supply Chain by Countering Unfair Labor Practices and Illegal, Unreported, and Unregulated (IUU) Fishing",
+        "agency": "Bureau of International Labor Affairs",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-21",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-08-21",
+        "version": "Synopsis 4",
+        "topic_areas": [
+          "Manufacturing",
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ],
+        "disciplines": [],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 11000000,
+        "award_ceiling": 11000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363214",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354752"
+      }
+    },
     {
       "id": "ec05272902198c87177b",
       "type": "closing_soon",
