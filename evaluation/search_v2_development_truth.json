@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "frozen_at": "2026-08-22",
+  "phase": "2.1_pre_tuning",
+  "holdout_status": "sealed_and_unopened",
+  "purpose": "Query-specific development judgments for the bounded Phase 2.1 short-query stabilization pass.",
+  "key_contract": "Every relevance judgment is keyed by an exact development query id and result id. A result judgment must never be reused for another query.",
+  "relevance_rubric": "evaluation/search_v2_truth.json#relevance_rubric",
+  "review_protocol": {
+    "sample": "Existing development queries only: the current top ten where available, plus a small number of known relevant anchors needed to measure recall.",
+    "labels": {
+      "primary_relevant": "The complete query intent is explicitly supported or is contained within authoritative published program scope.",
+      "broader_program_fit": "The published scope is adjacent or plausibly useful, but does not establish the complete query intent as primary.",
+      "irrelevant": "One or more substantive query concepts are absent, metadata-only, cross-topic, or outside the funded purpose."
+    },
+    "primary_admission_target": ["primary_relevant"],
+    "sealed_holdout_used": false
+  },
+  "queries": {
+    "ree_03": {
+      "query": "REE separations",
+      "required_primary_ids": ["360678", "361526", "362061"],
+      "judgments": {
+        "360678": {"label":"primary_relevant","evidence":"DOE BES Separation Science authoritatively contains rare-earth separation research."},
+        "361526": {"label":"primary_relevant","evidence":"Genesis Critical Minerals publishes extraction and processing scope containing rare-earth separation."},
+        "362061": {"label":"primary_relevant","evidence":"NSF CPS explicitly publishes critical-minerals and chemical-separations scope."}
+      }
+    },
+    "ree_06": {
+      "query": "rare earth separations",
+      "required_primary_ids": ["360678", "361526", "362061"],
+      "judgments": {
+        "360678": {"label":"primary_relevant","evidence":"DOE BES Separation Science contains the query scope."},
+        "361526": {"label":"primary_relevant","evidence":"Genesis extraction and processing scope contains the query scope."},
+        "362061": {"label":"primary_relevant","evidence":"NSF CPS critical-minerals and separations scope contains the query scope."}
+      }
+    },
+    "ree_07": {
+      "query": "rare earth element recovery",
+      "required_primary_ids": ["360678", "361526", "362061"],
+      "judgments": {
+        "360678": {"label":"primary_relevant","evidence":"Separation Science contains rare-earth recovery research."},
+        "361526": {"label":"primary_relevant","evidence":"Genesis explicitly supports critical-mineral extraction, processing, and recovery."},
+        "362061": {"label":"primary_relevant","evidence":"CPS supports critical-mineral recovery through chemical processes."}
+      }
+    },
+    "ree_08": {
+      "query": "lanthanide separation",
+      "required_primary_ids": ["360678", "361526", "362061"],
+      "judgments": {
+        "360678": {"label":"primary_relevant","evidence":"Lanthanide separation is within BES Separation Science."},
+        "361526": {"label":"primary_relevant","evidence":"Lanthanides are rare-earth critical minerals within Genesis extraction and processing scope."},
+        "362061": {"label":"primary_relevant","evidence":"Lanthanide chemical separations are within CPS scope."}
+      }
+    },
+    "ree_09": {
+      "query": "lanthanide extraction",
+      "required_primary_ids": ["360678", "361526", "362061"],
+      "judgments": {
+        "360678": {"label":"primary_relevant","evidence":"Lanthanide extraction is within BES Separation Science."},
+        "361526": {"label":"primary_relevant","evidence":"Genesis explicitly supports critical-mineral extraction and processing."},
+        "362061": {"label":"primary_relevant","evidence":"CPS supports chemical extraction and critical-mineral processing."}
+      }
+    },
+    "ree_10": {
+      "query": "solvent extraction of REEs",
+      "required_primary_ids": ["360678", "361526", "362061"],
+      "judgments": {
+        "360678": {"label":"primary_relevant","evidence":"Solvent extraction of rare earths is within Separation Science."},
+        "361526": {"label":"primary_relevant","evidence":"Genesis critical-mineral extraction and processing contains the query scope."},
+        "362061": {"label":"primary_relevant","evidence":"CPS chemical separations scope contains solvent extraction of rare earths."}
+      }
+    },
+    "ree_11": {
+      "query": "ionic liquids for REE extraction",
+      "required_primary_ids": ["360678", "361526", "362061"],
+      "judgments": {
+        "360678": {"label":"primary_relevant","evidence":"Ionic-liquid extraction is a specialization of BES separation science."},
+        "361526": {"label":"primary_relevant","evidence":"Ionic-liquid extraction is contained within Genesis extraction and processing scope."},
+        "362061": {"label":"primary_relevant","evidence":"Ionic-liquid extraction is contained within CPS chemical separations scope."}
+      }
+    },
+    "ree_18": {
+      "query": "REE separation",
+      "required_primary_ids": ["360678", "361526", "362061"],
+      "judgments": {
+        "360678": {"label":"primary_relevant","evidence":"DOE BES Separation Science contains the query scope."},
+        "361526": {"label":"primary_relevant","evidence":"Genesis extraction and processing scope contains the query scope."},
+        "362061": {"label":"primary_relevant","evidence":"NSF CPS critical-minerals and separations scope contains the query scope."}
+      }
+    },
+    "ree_19": {
+      "query": "separation of REEs",
+      "required_primary_ids": ["360678", "361526", "362061"],
+      "judgments": {
+        "360678": {"label":"primary_relevant","evidence":"DOE BES Separation Science contains the query scope."},
+        "361526": {"label":"primary_relevant","evidence":"Genesis extraction and processing scope contains the query scope."},
+        "362061": {"label":"primary_relevant","evidence":"NSF CPS critical-minerals and separations scope contains the query scope."}
+      }
+    },
+    "ree_12": {
+      "query": "critical mineral separations",
+      "required_primary_ids": ["362061", "nsf-cbet:PD-26-370Y", "361526"],
+      "judgments": {
+        "362061": {"label":"primary_relevant","evidence":"CPS explicitly supports critical minerals, separations, and critical-mineral recovery."},
+        "356605": {"label":"broader_program_fit","evidence":"The ONR umbrella has adjacent separation and critical-material scope but does not establish the critical-mineral target."},
+        "363215": {"label":"irrelevant","evidence":"This is a labor and supply-chain program with no mineral-separation research scope."},
+        "362900": {"label":"irrelevant","evidence":"This is a policy workshop and simulation program, not technical separations R&D."},
+        "363633": {"label":"irrelevant","evidence":"The diplomacy APS lists critical minerals but has no separations research scope."},
+        "nsf-cbet:PD-26-370Y": {"label":"primary_relevant","evidence":"EWRE supports critical-mineral recycling and recovery using chemical and physical processes."},
+        "363684": {"label":"irrelevant","evidence":"Critical-minerals text is collapsed notice metadata; the published program is general geoscience."},
+        "363645": {"label":"irrelevant","evidence":"UNITE funds workforce deliverables rather than critical-mineral separations research."},
+        "363536": {"label":"broader_program_fit","evidence":"The Tunisia program concerns commercial investment and downstream mineral processing, adjacent to but not a technical separations research program."},
+        "363544": {"label":"irrelevant","evidence":"The ecological restoration project does not support critical-mineral separations."},
+        "361526": {"label":"primary_relevant","evidence":"Genesis publishes Securing America’s Critical Minerals Supply with Extraction and Processing Technologies."}
+      }
+    },
+    "adv_chem_02": {
+      "query": "AI catalyst design",
+      "required_primary_ids": ["362061", "351715", "361526"],
+      "judgments": {
+        "362061": {"label":"primary_relevant","evidence":"CPS explicitly combines catalysis and process design with artificial intelligence and machine learning."},
+        "356605": {"label":"broader_program_fit","evidence":"The ONR umbrella lists AI and catalyst-design topics, but no single published focus establishes their integration."},
+        "360678": {"label":"broader_program_fit","evidence":"The DOE umbrella includes AI and Catalysis Science, but the current evidence does not establish AI catalyst design as one funded scope."},
+        "351715": {"label":"primary_relevant","evidence":"ECLIPSE supports plasma catalysis, reactor design, and computational or AI-enabled plasma science."},
+        "363617": {"label":"broader_program_fit","evidence":"MPS Chemistry supports catalysis and computational methods, but the complete AI-design intent is not explicit."},
+        "362063": {"label":"broader_program_fit","evidence":"Transport Phenomena has AI and adjacent catalysis metadata but does not establish catalyst-design scope."},
+        "347749": {"label":"broader_program_fit","evidence":"The chemistry umbrella is scientifically adjacent but does not establish the complete AI catalyst-design intent."},
+        "356055": {"label":"broader_program_fit","evidence":"Computational and Data-Enabled Science is adjacent, but complete catalyst-design scope is not established."},
+        "341244": {"label":"broader_program_fit","evidence":"The chemistry pilot is adjacent but does not establish the complete integrated query."},
+        "362681": {"label":"broader_program_fit","evidence":"AFOSR lists adjacent AI and catalysis research areas, but the sampled scope does not establish their integration."},
+        "361526": {"label":"primary_relevant","evidence":"Genesis is an AI-centered mission with a publication-eligible Electrochemical Energy Conversion Catalyst Discovery and Scale up focus area."}
+      }
+    },
+    "adv_policy_01": {
+      "query": "critical mineral workforce",
+      "required_primary_ids": ["363633", "363645", "363215"],
+      "judgments": {
+        "363633": {"label":"primary_relevant","evidence":"The Egypt APS explicitly accepts critical-minerals sectors and workforce training aligned with U.S. business needs."},
+        "363316": {"label":"irrelevant","evidence":"Critical minerals are a forum priority, while workforce appears only as generic metadata."},
+        "363645": {"label":"primary_relevant","evidence":"UNITE explicitly funds university-industry teams addressing workforce gaps in critical-minerals and other named strategic sectors."},
+        "363215": {"label":"primary_relevant","evidence":"The program explicitly concerns workers in the Western Hemisphere critical-minerals supply chain."},
+        "362900": {"label":"broader_program_fit","evidence":"The workshop builds professional capacity around critical-minerals supply chains but is broader than a workforce program."},
+        "363544": {"label":"irrelevant","evidence":"The ecological project contains policy references to critical minerals but no workforce scope."},
+        "363536": {"label":"broader_program_fit","evidence":"The Tunisia commercial-diplomacy program supports mineral processing investment but does not establish workforce scope."},
+        "363355": {"label":"irrelevant","evidence":"The BLM restoration program matches generic topic metadata rather than critical-mineral workforce scope."},
+        "362061": {"label":"irrelevant","evidence":"CPS supports critical-mineral process research, not workforce development."},
+        "363385": {"label":"irrelevant","evidence":"The water-resource project does not fund critical-mineral workforce development."}
+      }
+    },
+    "adv_defense_02": {
+      "query": "autonomous maritime sensing",
+      "required_primary_ids": ["356605"],
+      "judgments": {
+        "344592": {"label":"irrelevant","evidence":"The matched child is autonomous ground and air sensing; no maritime scope is established."},
+        "356605": {"label":"primary_relevant","evidence":"The Navy and Marine Corps S&T notice explicitly covers autonomous systems and sensing in naval or maritime operations."},
+        "334972": {"label":"irrelevant","evidence":"Commercial fishing safety training supplies maritime wording but no autonomous sensing research."},
+        "363292": {"label":"irrelevant","evidence":"The NIOSH program supports autonomy and sensing for mining, not maritime use."},
+        "345241": {"label":"irrelevant","evidence":"The matched multi-agent child does not establish maritime sensing scope."}
+      }
+    },
+    "adv_defense_03": {
+      "query": "quantum navigation",
+      "required_primary_ids": ["344592", "345241"],
+      "judgments": {
+        "344592": {"label":"primary_relevant","evidence":"The publication-eligible QIS-PNT child explicitly supports quantum approaches to navigation and sensing."},
+        "345241": {"label":"primary_relevant","evidence":"The publication-eligible Quantum Technology child explicitly lists PNT and quantum analytics."}
+      }
+    },
+    "adv_ai_03": {
+      "query": "quantum sensing biology",
+      "required_primary_ids": ["362061"],
+      "judgments": {
+        "362061": {"label":"primary_relevant","evidence":"CPS supports biochemical processes and explicitly identifies quantum simulation and sensing within program scope."},
+        "344592": {"label":"broader_program_fit","evidence":"The ARL umbrella lists synthetic biology and quantum sensing in separate broad areas; no single child establishes the integrated query."},
+        "275109": {"label":"broader_program_fit","evidence":"National Facilities supports quantum and biological research users, but the complete sensing intent is not established."},
+        "362063": {"label":"broader_program_fit","evidence":"Transport Phenomena is adjacent to quantum and biological research but does not establish quantum sensing biology."},
+        "363613": {"label":"broader_program_fit","evidence":"ECCS supports quantum sensing but the biology concept is absent from substantive scope."},
+        "353413": {"label":"irrelevant","evidence":"The engineering-education program does not fund quantum sensing biology."},
+        "362681": {"label":"broader_program_fit","evidence":"AFOSR spans quantum and biological sciences, but the sampled scope does not establish the integrated query."},
+        "361526": {"label":"broader_program_fit","evidence":"Genesis spans quantum and biotechnology challenges but the current evidence does not establish quantum sensing biology."},
+        "360678": {"label":"broader_program_fit","evidence":"The DOE umbrella spans quantum and biological programs but no bounded entailment establishes the integrated query."},
+        "332894": {"label":"broader_program_fit","evidence":"LQC is a quantum program without established biological sensing scope."}
+      }
+    },
+    "phase3_cfd": {
+      "query": "CFD",
+      "required_primary_ids": [],
+      "judgments": {
+        "329436": {"label":"irrelevant","evidence":"CFD matched only the longer unrelated token CFDA; no exact acronym or resolved computational-fluid-dynamics evidence exists."}
+      }
+    }
+  },
+  "reviewed_query_ids": [
+    "ree_03", "ree_06", "ree_07", "ree_08", "ree_09", "ree_10", "ree_11", "ree_18", "ree_19",
+    "ree_12", "adv_chem_02", "adv_policy_01", "adv_defense_02", "adv_defense_03", "adv_ai_03", "phase3_cfd"
+  ],
+  "cross_domain_query_ids": ["ree_12", "adv_chem_02", "adv_policy_01", "adv_defense_02", "adv_defense_03", "adv_ai_03"],
+  "sealed_holdout_inspected": false
+}
