@@ -1,6 +1,6 @@
 # Funding Finder v1.2.0 search-quality recovery
 
-Status: Phase 2.1 / Phase 3.1 stabilization complete and candidate frozen; Phase 4 not started
+Status: Phase 4 complete; release candidate blocked by the adjudicated holdout; Phase 5 not authorized
 
 Branch: `search-quality-v2`
 
@@ -290,9 +290,30 @@ Verification at the Phase 2.1 / Phase 3.1 boundary:
 
 The full Python failures reproduce catalog-fixture drift already present after the 2026-08-22 `main` catalog refresh: historical frames pin 1,475 records/745 cache entries while the current inputs contain 1,453 records/709 cache entries, and one retired ID (`362088`) is still referenced. No failing test imports or exercises the Phase 2 retrieval or Phase 3 explanation path. Those historical artifacts were not rewritten because they are outside this recovery scope and are intended to remain frozen evidence. Phase 2 added `tests/test_search_query.py` for the new browser/Python parity contract.
 
-Not started:
+## Phase 4 outcome
 
-- Phase 4 holdout execution and release-candidate freeze;
-- merge, deployment, or live v1.2.0 shipment.
+The pre-registered 24-query holdout was opened and executed exactly once
+against frozen candidate code `627e7c82480e97ed1cc6a5adbc4e830469347acb`, then
+adjudicated as query/result pairs under the corrected authoritative-scope
+rubric. No post-outcome retrieval or explanation tuning occurred.
 
-`main` remained untouched after branch creation. The stabilized Phase 2/3 candidate is frozen only on `search-quality-v2`, with production activation intentionally deferred. Phase 4 remains closed: no sealed holdout query has been run or adjudicated.
+The release candidate is blocked. Five of six positive REE variants missed all
+three authoritative DOE BES, Genesis, and NSF CPS programs; direct-positive
+holdout queries exposed missing rural maternal-health and agricultural anchors,
+partial-intent admissions, a 213-candidate health/workforce/workshop explosion,
+and rich evidence buried below weaker matches. The NASA rare-earth false-positive
+gate passed, and the exact `rare earth solvent extraction` success case returned
+the three required primary programs.
+
+All independent infrastructure and regression gates passed: the 49-query
+development frame, 48-query MEAS-5 frame, 37-query historical baseline,
+42-pair explanation frame, 137 browser tests, 756 live-product Python tests,
+11 focused Python tests, 50-case parent/child invariant, size gates, 22-artifact
+no-drift rebuild, and desktop/390 px mobile verification. Four grouped permanent
+CI canaries were added. These passes do not override the failed holdout.
+
+The complete review is `evaluation/PHASE4_REVIEW.md`; the machine-readable
+decision is `evaluation/search_v2_release_candidate.json`. Search v2 remains
+disabled, `main` remains untouched, and Phase 5 is not authorized. Any further
+tuning must be a new iteration with this failed holdout preserved as evidence
+and a newly frozen development/holdout protocol.

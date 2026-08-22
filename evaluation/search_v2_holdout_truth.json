@@ -1,0 +1,270 @@
+{
+  "schema_version": 1,
+  "adjudicated_at": "2026-08-22",
+  "phase": "4_holdout_adjudication",
+  "status": "opened_once_and_adjudicated",
+  "candidate_code_sha": "627e7c82480e97ed1cc6a5adbc4e830469347acb",
+  "raw_results": "evaluation/search_v2_holdout_results_raw.json",
+  "raw_results_sha256": "8d4a1d37e0940fde1eefdd3dca7f3fa2a39a40194ce6b083b40eafd4897fb919",
+  "relevance_rubric": "evaluation/search_v2_truth.json#relevance_rubric",
+  "key_contract": "Every judgment is keyed by the exact holdout query id and result id; no result-level judgment is reused across queries.",
+  "protocol": {
+    "primary_relevant": "The complete query intent is explicitly supported or contained within bounded authoritative published program scope.",
+    "broader_program_fit": "The published scope is genuinely adjacent, but does not establish the complete query intent.",
+    "irrelevant": "A substantive query concept is absent, administrative or metadata wording supplies the match, or the funded purpose is outside the query.",
+    "currentness": "A result that cannot reasonably be treated as a current opportunity is not accepted into the primary set.",
+    "primary_metric_labels": ["primary_relevant"],
+    "adjudicated_depth": "Candidate top 10 plus known relevant anchors needed to measure recall.",
+    "post_outcome_tuning": false
+  },
+  "queries": {
+    "hold_ree_01": {
+      "query": "rare earth recycling",
+      "required_primary_ids": ["360678", "361526", "362061"],
+      "judgments": {
+        "360678": {"label":"primary_relevant","evidence":"BES Separation Science contains recovery and separation research used to reclaim rare-earth materials."},
+        "361526": {"label":"primary_relevant","evidence":"Genesis publishes critical-mineral extraction, processing, and recovery scope that contains rare-earth recycling."},
+        "362061": {"label":"primary_relevant","evidence":"CPS publishes chemical-process and critical-mineral recovery scope that contains rare-earth recycling."}
+      }
+    },
+    "hold_ree_02": {
+      "query": "rare earth solvent extraction",
+      "required_primary_ids": ["360678", "361526", "362061"],
+      "judgments": {
+        "360678": {"label":"primary_relevant","evidence":"Solvent extraction of rare earths lies within the published BES Separation Science scope."},
+        "361526": {"label":"primary_relevant","evidence":"The Genesis critical-minerals extraction and processing scope contains rare-earth solvent extraction."},
+        "362061": {"label":"primary_relevant","evidence":"CPS chemical-separations and critical-minerals scope contains rare-earth solvent extraction."}
+      }
+    },
+    "hold_ree_03": {
+      "query": "lanthanide ion exchange",
+      "required_primary_ids": ["360678", "361526", "362061"],
+      "judgments": {
+        "360678": {"label":"primary_relevant","evidence":"Ion exchange is a separation method and lanthanides are within BES Separation Science."},
+        "361526": {"label":"primary_relevant","evidence":"Lanthanides are rare-earth critical minerals and ion-exchange processing lies within the Genesis extraction and processing scope."},
+        "362061": {"label":"primary_relevant","evidence":"Lanthanide ion exchange lies within CPS chemical-separations and critical-minerals scope."}
+      }
+    },
+    "hold_ree_04": {
+      "query": "REE hydrometallurgy",
+      "required_primary_ids": ["360678", "361526", "362061"],
+      "judgments": {
+        "360678": {"label":"primary_relevant","evidence":"Hydrometallurgical rare-earth extraction and separation lies within BES Separation Science."},
+        "361526": {"label":"primary_relevant","evidence":"REE hydrometallurgy lies within the published Genesis critical-mineral extraction and processing scope."},
+        "362061": {"label":"primary_relevant","evidence":"REE hydrometallurgy lies within CPS chemical-process and critical-minerals scope."}
+      }
+    },
+    "hold_ree_05": {
+      "query": "yttrium separation",
+      "required_primary_ids": ["360678", "361526", "362061"],
+      "judgments": {
+        "360678": {"label":"primary_relevant","evidence":"Yttrium separation lies within BES Separation Science."},
+        "361526": {"label":"primary_relevant","evidence":"Yttrium is a critical rare-earth material within Genesis extraction and processing scope."},
+        "362061": {"label":"primary_relevant","evidence":"Yttrium separation lies within CPS chemical-separations and critical-minerals scope."}
+      }
+    },
+    "hold_ree_06": {
+      "query": "scandium recovery",
+      "required_primary_ids": ["360678", "361526", "362061"],
+      "judgments": {
+        "360678": {"label":"primary_relevant","evidence":"Scandium recovery lies within BES Separation Science."},
+        "361526": {"label":"primary_relevant","evidence":"Scandium is a critical rare-earth material within the Genesis recovery scope."},
+        "362061": {"label":"primary_relevant","evidence":"Scandium recovery lies within CPS critical-mineral chemical-process scope."}
+      }
+    },
+    "hold_ree_07": {
+      "query": "rare Earth observation elements",
+      "required_primary_ids": [],
+      "judgments": {}
+    },
+    "hold_ree_08": {
+      "query": "rare disease molecular elements",
+      "required_primary_ids": ["359280", "359644"],
+      "judgments": {
+        "359280": {"label":"primary_relevant","evidence":"The GREGoRi technology center explicitly supports rare-disease molecular and genomic methods."},
+        "359644": {"label":"primary_relevant","evidence":"GREGoRi innovation projects explicitly support molecular investigation of rare genetic diseases."},
+        "359279": {"label":"broader_program_fit","evidence":"The coordination and data center supports the rare-disease program but is infrastructure rather than molecular research."},
+        "360007": {"label":"irrelevant","evidence":"The natural-history program has rare-disease scope but does not establish molecular research intent."},
+        "344592": {"label":"irrelevant","evidence":"The Army BAA combines unrelated molecular and element wording and has no rare-disease scope."}
+      }
+    },
+    "hold_chem_01": {
+      "query": "electrocatalytic ammonia synthesis",
+      "required_primary_ids": ["344592"],
+      "judgments": {
+        "344592": {"label":"primary_relevant","evidence":"The publication-eligible Electrochemistry child supports electrocatalysis and synthesis chemistry, containing the proposed ammonia-synthesis research."}
+      }
+    },
+    "hold_chem_02": {
+      "query": "innovation catalyst student success",
+      "required_primary_ids": ["357498", "359104"],
+      "judgments": {
+        "357498": {"label":"primary_relevant","evidence":"S-STEM explicitly funds interventions for student success that build participation in the innovation economy."},
+        "359966": {"label":"broader_program_fit","evidence":"Translation to Practice supports innovation and workforce outcomes but does not establish student-success interventions."},
+        "359104": {"label":"primary_relevant","evidence":"LSAMP explicitly funds innovative institutional strategies for STEM student development, retention, and success."}
+      }
+    },
+    "hold_energy_01": {
+      "query": "long duration energy storage",
+      "required_primary_ids": ["356623"],
+      "judgments": {
+        "352741": {"label":"broader_program_fit","evidence":"The NRL BAA can fund energy research, but 'Long Range' is an administrative title and does not establish long-duration storage."},
+        "363631": {"label":"irrelevant","evidence":"Cold-chain food assistance does not fund long-duration energy-storage research."},
+        "360205": {"label":"irrelevant","evidence":"AFRI wording is assembled from unrelated source references and does not establish long-duration energy-storage scope."},
+        "358023": {"label":"irrelevant","evidence":"The communication-disorders clinical trial has no long-duration energy-storage scope."},
+        "363215": {"label":"irrelevant","evidence":"The critical-minerals workforce program does not fund energy-storage technology research."},
+        "356982": {"label":"irrelevant","evidence":"The BRAIN device program does not fund long-duration energy storage."},
+        "356623": {"label":"primary_relevant","evidence":"SCALEUP publishes grid-scale and energy-storage technology scope that contains long-duration energy storage."},
+        "363632": {"label":"broader_program_fit","evidence":"The ONR young-investigator program is broadly adjacent to energy technology but does not establish long-duration storage scope."},
+        "356811": {"label":"irrelevant","evidence":"The BRAIN sensor program does not fund long-duration energy storage."},
+        "344592": {"label":"irrelevant","evidence":"The selected AI cyber-physical-systems child supplies 'duration' but does not establish energy-storage scope."}
+      }
+    },
+    "hold_energy_02": {
+      "query": "mineral supply chain diplomacy",
+      "required_primary_ids": ["363536", "362900"],
+      "judgments": {
+        "363536": {"label":"primary_relevant","evidence":"The Tunisia program explicitly uses commercial diplomacy to secure U.S. critical-minerals supply chains."},
+        "362900": {"label":"primary_relevant","evidence":"The regional workshop explicitly addresses critical-minerals supply-chain policy and international cooperation."},
+        "363215": {"label":"broader_program_fit","evidence":"The program addresses the critical-minerals supply chain but its funded purpose is workforce development, not diplomacy."},
+        "363316": {"label":"broader_program_fit","evidence":"The ASEAN leaders forum is diplomatically adjacent and names critical-minerals priorities, but does not establish a mineral-supply-chain funding scope."},
+        "363355": {"label":"irrelevant","evidence":"The BLM conservation program does not fund mineral-supply-chain diplomacy."}
+      }
+    },
+    "hold_bio_01": {
+      "query": "single cell cancer immunology",
+      "required_primary_ids": ["vpr-email:infoready-2028504"],
+      "judgments": {
+        "vpr-email:infoready-2028504": {"label":"primary_relevant","evidence":"The Mathers Foundation authoritatively publishes basic-science scope spanning immunology, cellular physiology, cancer biology, genetics, and genomics, which contains single-cell cancer immunology."},
+        "361606": {"label":"broader_program_fit","evidence":"The SCLC consortium supports cancer molecular characterization and immune-evasion work, but 'small cell' does not establish the single-cell method intent."}
+      }
+    },
+    "hold_bio_02": {
+      "query": "BioData Catalyst training",
+      "required_primary_ids": [],
+      "judgments": {}
+    },
+    "hold_health_01": {
+      "query": "maternal mortality rural communities",
+      "required_primary_ids": ["363582"],
+      "judgments": {
+        "363582": {"label":"primary_relevant","evidence":"The Rural Maternity and Obstetrics Management Strategies program directly supports rural maternal-care systems and outcomes."},
+        "363407": {"label":"broader_program_fit","evidence":"AIM explicitly addresses maternal mortality, but the sampled published scope does not establish the rural-community component."},
+        "363217": {"label":"irrelevant","evidence":"The record concerns rural cancer mortality and omits the maternal-health concept entirely."}
+      }
+    },
+    "hold_health_02": {
+      "query": "health data workforce workshop",
+      "required_primary_ids": [],
+      "judgments": {
+        "328573": {"label":"irrelevant","evidence":"The mathematical-sciences infrastructure program does not establish the integrated health-data-workforce workshop intent."},
+        "308873": {"label":"irrelevant","evidence":"The materials-research workshop program has no health-data-workforce scope."},
+        "358569": {"label":"irrelevant","evidence":"Applied Mathematics does not establish the integrated health-data-workforce workshop intent."},
+        "360205": {"label":"irrelevant","evidence":"AFRI source wording combines separate concepts without a health-data-workforce workshop scope."},
+        "361169": {"label":"irrelevant","evidence":"The agriculture workforce program does not establish health-data workshop scope."},
+        "254073": {"label":"irrelevant","evidence":"The ocean-drilling program has no health-data-workforce workshop scope."},
+        "363441": {"label":"irrelevant","evidence":"The media-literacy workshop series has no health-data-workforce scope."},
+        "363468": {"label":"irrelevant","evidence":"The education-methodology program does not establish health-data-workforce workshop scope."},
+        "363290": {"label":"broader_program_fit","evidence":"NIOSH can support occupational-health conferences, but the published scope does not establish integrated data-workforce training."},
+        "363291": {"label":"broader_program_fit","evidence":"NIOSH can support occupational-health conferences, but the published scope does not establish integrated data-workforce training."}
+      }
+    },
+    "hold_ag_01": {
+      "query": "drought tolerant crop genetics",
+      "required_primary_ids": ["360205"],
+      "judgments": {
+        "360205": {"label":"primary_relevant","evidence":"AFRI's published plant-health, crop-production, and genetics scope contains breeding drought-tolerant crops."}
+      }
+    },
+    "hold_space_01": {
+      "query": "microgravity radiation biology",
+      "required_primary_ids": [],
+      "corpus_note": "No current program in the frozen catalog establishes microgravity or space-radiation biology; precision is therefore the measurable requirement.",
+      "judgments": {
+        "362647": {"label":"irrelevant","evidence":"The cancer radiation-oncology network has no microgravity scope."},
+        "361399": {"label":"irrelevant","evidence":"The cancer radiation-combinations program has no microgravity scope."},
+        "361447": {"label":"irrelevant","evidence":"The radionuclide preclinical program has no microgravity scope."},
+        "362063": {"label":"irrelevant","evidence":"Transport Phenomena does not establish the combined microgravity radiation-biology intent."},
+        "275109": {"label":"irrelevant","evidence":"National Facilities does not establish a microgravity radiation-biology program scope."},
+        "356717": {"label":"irrelevant","evidence":"The cancer-assay program has no microgravity scope."},
+        "360946": {"label":"irrelevant","evidence":"The cancer-assay program has no microgravity scope."},
+        "356718": {"label":"irrelevant","evidence":"The cancer-assay program has no microgravity scope."},
+        "352741": {"label":"irrelevant","evidence":"The NRL umbrella does not publish a bounded microgravity radiation-biology scope."}
+      }
+    },
+    "hold_space_02": {
+      "query": "Earth system chemical elements",
+      "required_primary_ids": ["356536"],
+      "judgments": {
+        "359996": {"label":"broader_program_fit","evidence":"Earth Science is adjacent, but 'element' comes from the administrative phrase 'program element' and no chemical-elements scope is established."},
+        "363224": {"label":"broader_program_fit","evidence":"The Earth-solutions program is adjacent, but 'element' is administrative wording rather than chemical scope."},
+        "363241": {"label":"broader_program_fit","evidence":"Biosphere research is adjacent to elemental cycling, but the sampled published evidence does not establish the chemical-elements intent."},
+        "360003": {"label":"broader_program_fit","evidence":"INNOVATE is an Earth Science program, but the evidence uses administrative 'program element' wording and does not establish chemical scope."},
+        "363240": {"label":"broader_program_fit","evidence":"Atmospheric research is adjacent to elemental chemistry, but the sampled evidence does not establish the complete query intent."},
+        "363325": {"label":"irrelevant","evidence":"Habitable-worlds precursor science is not an Earth-system chemical-elements program."},
+        "360004": {"label":"irrelevant","evidence":"Solar System Science uses Earth and program-element wording incidentally and does not establish Earth-system chemical scope."},
+        "363258": {"label":"irrelevant","evidence":"Planetary facilities do not establish Earth-system chemical-elements research scope."},
+        "361234": {"label":"irrelevant","evidence":"Heliophysics uses Earth-system and program-element wording but does not establish chemical-elements scope."},
+        "356536": {"label":"primary_relevant","evidence":"The Geospace Cluster explicitly funds research on chemical processes in the coupled Sun-Earth system."}
+      }
+    },
+    "hold_defense_01": {
+      "query": "high temperature hypersonic composites",
+      "required_primary_ids": ["344592"],
+      "judgments": {
+        "344592": {"label":"primary_relevant","evidence":"The publication-eligible Super-Materials child establishes high-temperature composite materials research for extreme and hypersonic environments."}
+      }
+    },
+    "hold_ai_01": {
+      "query": "secure foundation models",
+      "required_primary_ids": ["361333", "vpr-email:NSF26-015", "361526"],
+      "judgments": {
+        "361333": {"label":"primary_relevant","evidence":"PESOSE explicitly funds safety and security work for open-source machine-learning models, a bounded scope containing secure open-source foundation models."},
+        "362061": {"label":"irrelevant","evidence":"CPS does not establish secure foundation-model research scope."},
+        "vpr-email:NSF26-015": {"label":"primary_relevant","evidence":"The DCL routes AI-agent ecosystem work through PESOSE's security scope and can contain secure open-source foundation-model work."},
+        "nsf-cbet:PD-26-370Y": {"label":"irrelevant","evidence":"EWRE has no secure foundation-model research scope."},
+        "359103": {"label":"irrelevant","evidence":"INCLUDES is an education and participation program, not a secure foundation-model program."},
+        "324456": {"label":"broader_program_fit","evidence":"Expeditions in Computing is adjacent to ambitious computing research but does not establish the complete secure foundation-model intent."},
+        "362900": {"label":"irrelevant","evidence":"The supply-chain workshop matches 'secure' in a nontechnical context and has no foundation-model scope."},
+        "362063": {"label":"irrelevant","evidence":"Transport Phenomena does not establish secure foundation-model scope."},
+        "362062": {"label":"irrelevant","evidence":"EBBS does not establish secure foundation-model scope."},
+        "363633": {"label":"irrelevant","evidence":"The Egypt APS has no bounded secure foundation-model research scope."},
+        "361526": {"label":"primary_relevant","evidence":"Genesis is an AI and national-security mission with a publication-eligible Composable and Modular Foundation Models child."}
+      }
+    },
+    "hold_ai_02": {
+      "query": "AI journalism exchange",
+      "required_primary_ids": ["363370"],
+      "judgments": {
+        "363370": {"label":"primary_relevant","evidence":"The Jakarta media grants competition explicitly supports journalism exchanges concerning AI and emerging technology."}
+      }
+    },
+    "hold_env_01": {
+      "query": "membrane PFAS treatment",
+      "required_primary_ids": ["363375", "362061"],
+      "judgments": {
+        "363375": {"label":"primary_relevant","evidence":"The desalination and water-purification research program explicitly supports membrane treatment research for PFAS-contaminated water."},
+        "362061": {"label":"primary_relevant","evidence":"CPS publishes membrane-separations and PFAS chemical-process scope containing the complete query intent."},
+        "363065": {"label":"broader_program_fit","evidence":"The produced-water program supports PFAS treatment but the sampled scope does not establish membrane treatment."},
+        "360223": {"label":"irrelevant","evidence":"The ultra-rare-cancer record contains membrane and treatment wording but no PFAS scope."},
+        "362910": {"label":"irrelevant","evidence":"RCPP citation and source text supplies terms without a membrane-PFAS-treatment funded purpose."},
+        "362909": {"label":"irrelevant","evidence":"RCPP citation and source text supplies terms without a membrane-PFAS-treatment funded purpose."}
+      }
+    },
+    "hold_env_02": {
+      "query": "coastal ecosystem climate adaptation",
+      "required_primary_ids": ["363537"],
+      "judgments": {
+        "103313": {"label":"irrelevant","evidence":"The FY 2012 program cannot be accepted as a current 2026 opportunity even though its historical scope is adjacent."},
+        "363537": {"label":"primary_relevant","evidence":"The current Alaska CESU award explicitly supports climate-adaptation science for coastal ecosystem hazards and resource management."},
+        "356669": {"label":"broader_program_fit","evidence":"The NOAA OAR BAA is adjacent to coastal climate research but does not establish the complete adaptation intent in the sampled scope."},
+        "355706": {"label":"broader_program_fit","evidence":"The NOAA Fisheries BAA is adjacent to coastal ecosystems and climate but does not establish the complete adaptation intent."}
+      }
+    }
+  },
+  "reviewed_query_ids": [
+    "hold_ree_01", "hold_ree_02", "hold_ree_03", "hold_ree_04", "hold_ree_05", "hold_ree_06", "hold_ree_07", "hold_ree_08",
+    "hold_chem_01", "hold_chem_02", "hold_energy_01", "hold_energy_02", "hold_bio_01", "hold_bio_02", "hold_health_01", "hold_health_02",
+    "hold_ag_01", "hold_space_01", "hold_space_02", "hold_defense_01", "hold_ai_01", "hold_ai_02", "hold_env_01", "hold_env_02"
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "evaluated_at": "2026-08-22",
+  "phase": 4,
+  "status": "completed",
+  "candidate_code_sha": "627e7c82480e97ed1cc6a5adbc4e830469347acb",
+  "post_outcome_tuning": false,
+  "summary": {
+    "development_queries": 49,
+    "meas5_queries": 48,
+    "meas5_disciplines": 11,
+    "meas5_top_10_movements": 0,
+    "historical_queries": 37,
+    "historical_top_10_churn": 0,
+    "explanation_pairs": 42,
+    "explanation_correct_and_useful": 41,
+    "explanation_unsupported": 0,
+    "browser_tests_passed": 137,
+    "live_product_python_tests_passed": 756,
+    "focused_python_tests_passed": 11,
+    "permanent_search_canaries_passed": 4,
+    "parent_child_fixed_cases": 50,
+    "no_drift_artifacts": 22
+  },
+  "gates": {
+    "historical_and_cross_domain": {
+      "status": "passed",
+      "evidence": [
+        "49-query development evaluator exited 0 with every stabilization hard gate passed.",
+        "48-query MEAS-5 comparison across 11 disciplines had zero production-versus-candidate top-10 movement.",
+        "37-query historical baseline had zero top-10 churn."
+      ]
+    },
+    "field_calibration": {
+      "status": "passed",
+      "evidence": "Phase 1 Track B retained the frozen global field weights and title bonuses; the bounded field-local verification replacement gates remain green."
+    },
+    "explanation_truth": {
+      "status": "passed",
+      "evidence": "The unchanged 42-pair Phase 3 frame exited 0: 41 correct/useful, one reviewed shallow metadata fixture, and zero unsupported explanations. Holdout retrieval-driven misleading labels are reported separately as a failed holdout gate."
+    },
+    "publication_boundary": {
+      "status": "passed",
+      "evidence": "Browser contracts found zero review-only child leakage; only publication-eligible causal children are displayed."
+    },
+    "readiness": {
+      "status": "passed",
+      "evidence": "Mixed search-v2 assets fail loudly, the local flagged page initialized without console warnings/errors, and the unflagged page returned the frozen production behavior."
+    },
+    "size_and_performance": {
+      "status": "passed",
+      "evidence": "All three catalog/sidecar size-budget tests passed; holdout latency percentiles are recorded in the adjudicated result artifact."
+    },
+    "parent_child_invariants": {
+      "status": "passed",
+      "evidence": "The frozen 50-case P9 scorer was byte-identical and cardinality-invariant; browser rollup contracts also passed."
+    },
+    "browser_mobile": {
+      "status": "passed",
+      "evidence": "The flagged local REE page rendered exactly three primary program-scope cards. At 390 px, the document width was 375 px, all cards were 313 px wide, all three explanation badges were present, and horizontal overflow was false."
+    },
+    "python_tests": {
+      "status": "passed",
+      "evidence": "The live-product validation ran 756 tests successfully; 11 focused search/parity/schema/size tests also passed.",
+      "inherited_frozen_census_note": "The four closed historical P5/P7/MEAS-8 modules remain excluded from the live-refresh runner. Their previously documented frozen-census failures were not repaired or redrawn in this phase."
+    },
+    "browser_tests": {
+      "status": "passed",
+      "evidence": "137 browser contract tests passed, including four grouped permanent search-quality canaries and two Phase 4 artifact-contract tests."
+    },
+    "query_canaries": {
+      "status": "passed",
+      "evidence": "Permanent canaries now cover REE/REEs/REE separations, NASA noise, catalysis/catalyst, PFAS, AI catalyst design, space biology, exact opportunity number, Genesis focus-area child evidence, generic-title rejection, and description-rich recovery."
+    },
+    "no_drift": {
+      "status": "passed",
+      "evidence": "Hermetic rebuild reported: no-drift OK, 22 artifacts unchanged."
+    }
+  }
+}
