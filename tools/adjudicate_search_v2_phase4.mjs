@@ -298,7 +298,7 @@ async function main() {
     query_canary_tests: testRuns.gates?.query_canaries?.status || "pending",
     no_drift: testRuns.gates?.no_drift?.status || "pending",
     release_artifact_deterministic: "passed",
-    branch_clean_and_pushed: "pending_until_decision_commit",
+    branch_clean_and_pushed: testRuns.gates?.branch_state?.status || "pending",
     main_not_modified: "passed",
   };
   const exactFailures = [
@@ -313,6 +313,7 @@ async function main() {
     status: "blocked",
     phase5_authorized: false,
     branch: "search-quality-v2",
+    branch_head_when_decision_frozen: testRuns.phase4_evidence_commit || null,
     candidate_code_sha: raw.candidate_code_sha,
     preopen_checkpoint: raw.preopen_checkpoint,
     starting_main_sha: preopen.starting_main_sha,

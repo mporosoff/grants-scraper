@@ -4,6 +4,7 @@
   "phase": 4,
   "status": "completed",
   "candidate_code_sha": "627e7c82480e97ed1cc6a5adbc4e830469347acb",
+  "phase4_evidence_commit": "2fed3cc0ccd9e3013ea2e9937e7c2548108c20b7",
   "post_outcome_tuning": false,
   "summary": {
     "development_queries": 49,
@@ -75,6 +76,10 @@
     "no_drift": {
       "status": "passed",
       "evidence": "Hermetic rebuild reported: no-drift OK, 22 artifacts unchanged."
+    },
+    "branch_state": {
+      "status": "passed",
+      "evidence": "The Phase 4 evidence commit 2fed3cc0ccd9e3013ea2e9937e7c2548108c20b7 was clean and matched origin/search-quality-v2 before closeout metadata was finalized."
     }
   }
 }

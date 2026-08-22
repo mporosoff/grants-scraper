@@ -68,4 +68,9 @@ test("Phase 4 blocks Phase 5 on the exact adjudicated failures", async () => {
     expected.map(name => `holdout:${name}`),
   );
   assert.equal(release.acceptance_gate_table.main_not_modified, "passed");
+  assert.equal(release.acceptance_gate_table.branch_clean_and_pushed, "passed");
+  assert.equal(
+    release.branch_head_when_decision_frozen,
+    "2fed3cc0ccd9e3013ea2e9937e7c2548108c20b7",
+  );
 });

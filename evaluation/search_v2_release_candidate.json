@@ -5,6 +5,7 @@
   "status": "blocked",
   "phase5_authorized": false,
   "branch": "search-quality-v2",
+  "branch_head_when_decision_frozen": "2fed3cc0ccd9e3013ea2e9937e7c2548108c20b7",
   "candidate_code_sha": "627e7c82480e97ed1cc6a5adbc4e830469347acb",
   "preopen_checkpoint": "evaluation/search_v2_phase4_preopen.json",
   "starting_main_sha": "ef7a0642f6ce66828f01ee280bd5993f66029b2f",
@@ -44,7 +45,7 @@
     "query_canary_tests": "passed",
     "no_drift": "passed",
     "release_artifact_deterministic": "passed",
-    "branch_clean_and_pushed": "pending_until_decision_commit",
+    "branch_clean_and_pushed": "passed",
     "main_not_modified": "passed"
   },
   "exact_failing_gates": [
