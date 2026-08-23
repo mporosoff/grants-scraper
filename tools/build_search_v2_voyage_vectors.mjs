@@ -204,6 +204,28 @@ async function run() {
     if (priorVectorSha !== previous.manifest.vector_sha256) {
       throw new Error("The existing vector asset does not match its manifest hash.");
     }
+    if (write) {
+      let receipt = {};
+      try {
+        receipt = JSON.parse(await readFile(new URL(RECEIPT_PATH, ROOT), "utf8"));
+      } catch {
+        receipt = { schema_version: 1, status: "previous_receipt_unavailable" };
+      }
+      receipt.last_validated_at = new Date().toISOString();
+      receipt.last_validation = {
+        status: "unchanged_corpus_and_vector_reused",
+        passage_count: corpus.length,
+        corpus_sha256: corpusSha,
+        vector_sha256: priorVectorSha,
+        API_request_count: 0,
+        source_hashes: {
+          "assets/search-hybrid.js": await sha256File("assets/search-hybrid.js"),
+          "data/opportunities.js": await sha256File("data/opportunities.js"),
+          "data/subtopics.js": await sha256File("data/subtopics.js"),
+        },
+      };
+      await writeFile(new URL(RECEIPT_PATH, ROOT), `${JSON.stringify(receipt, null, 2)}\n`);
+    }
     process.stdout.write(`${JSON.stringify({
       write,
       unchanged: true,

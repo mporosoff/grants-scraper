@@ -53,7 +53,8 @@ _ENTRIES: list[tuple[str, list[str], str]] = [
     ("solvent extraction", ["Separations and membranes"],
      r"solvent extraction|liquid[- ]liquid extraction"),
     ("hydrometallurgy", ["Separations and membranes", "Materials science"],
-     r"hydrometallurg\w*|selective leaching|ion exchange|adsorptive separation"),
+     r"\bhydrometallurg\w*\b|\bselective leaching\b|\bion exchange\b|"
+     r"\badsorptive separation\b"),
     ("quantum science", ["Quantum science"],
      r"quantum information|quantum computing|quantum science|quantum materials|\bqubit"),
     ("fusion energy", ["Energy"],

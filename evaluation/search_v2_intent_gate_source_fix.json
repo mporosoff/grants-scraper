@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-23T18:20:00Z",
+  "status": "source_representation_defect_fixed",
+  "result_id": "363604",
+  "root_cause": {
+    "owner": "controlled program-area extraction",
+    "label": "hydrometallurgy",
+    "bad_match": "ion exchange matched the suffix of information exchange",
+    "general_fix": "require word-bounded controlled phrases and revalidate cached evidence quotes against the current recognizers",
+    "record_specific_override_added": false
+  },
+  "incremental_rebuild": {
+    "mode": "program-area-only cache/catalog/search-index revalidation",
+    "cache_records_revalidated_out": [
+      "360333",
+      "362370",
+      "363604",
+      "363628",
+      "363662"
+    ],
+    "catalog_records_changed": [
+      "360333",
+      "363604",
+      "363628",
+      "363662"
+    ],
+    "changed_public_passage_ids": [
+      "parent:360333",
+      "parent:363604",
+      "parent:363628",
+      "parent:363662"
+    ],
+    "unrelated_document_evidence_fields_remerged": false,
+    "affected_passages_embedded": 4,
+    "written_embedding_requests": 1,
+    "written_embedding_tokens": 1443,
+    "prewrite_dry_run_requests": 1,
+    "prewrite_dry_run_tokens": 1443,
+    "subsequent_no_change_validation_requests": 0,
+    "total_development_embedding_requests": 2,
+    "total_development_embedding_tokens": 2886,
+    "estimated_total_embedding_cost_at_published_paid_pricing_usd": 0.000058
+  },
+  "before": {
+    "catalog_sha256": "f6168e043fc6e4466edb49dd4fa0f957d09509f9591ee952bda035b423d27f1f",
+    "document_evidence_sha256": "60bde6d0fc5fc228f9c0087bc6edce9a965ab8b54ecb9215a236c3c6d697fe94",
+    "result_363604_document_program_areas": ["hydrometallurgy"]
+  },
+  "after": {
+    "catalog_sha256": "fb5dec36f33184572a84d6d9fed76adbb415c6102e2acbed50dc2d6ba22cbff6",
+    "document_evidence_sha256": "bdcb01b5d074e42326a9bb02c1a6484d15f6a09c56689683b36752569a505d6c",
+    "result_363604_document_program_areas": [],
+    "result_363604_topic_areas": [],
+    "result_363604_search_text_contains_hydrometallurgy": false,
+    "passage_count": 1659,
+    "corpus_sha256": "7f649d8036d5003c2836a4ca2cfea5a62e1e52296c8a66d6f7498a9a5baed9c1",
+    "vector_sha256": "697c84f76e83107e290df9b27168cd14fe6592bff2ae657b22d8eb9ee25fb8c2",
+    "vector_bytes": 3397632
+  }
+}

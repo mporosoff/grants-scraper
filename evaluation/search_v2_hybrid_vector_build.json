@@ -1,124 +1,59 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-23T16:43:38.108Z",
+  "generated_at": "2026-08-23T17:42:23.444Z",
   "status": "written",
   "model": "voyage-4-lite",
   "provider_revision": "not exposed by the real-time embedding API",
   "input_type": "document",
   "API_key_printed_or_persisted": false,
   "passage_count": 1659,
-  "reused_passage_count": 0,
-  "embedded_passage_count": 1659,
-  "removed_prior_passage_count": 0,
-  "corpus_sha256": "06d93e73cb9741c859aa6cf643f4f1e6c1b2feef7b995586b55b3943405cb727",
-  "vector_sha256": "51b6c28d122172e11b6e0769e5726379491332290e94f500006f7eaef6680425",
+  "reused_passage_count": 1655,
+  "embedded_passage_count": 4,
+  "removed_prior_passage_count": 4,
+  "corpus_sha256": "7f649d8036d5003c2836a4ca2cfea5a62e1e52296c8a66d6f7498a9a5baed9c1",
+  "vector_sha256": "697c84f76e83107e290df9b27168cd14fe6592bff2ae657b22d8eb9ee25fb8c2",
   "vector_format": "float16-le",
   "vector_bytes": 3397632,
   "source_hashes": {
-    "assets/search-hybrid.js": "c62cd8583ba0cd94b1892f995c2d789d2b770315f44518458fc3788d217a9302",
-    "data/opportunities.js": "f6168e043fc6e4466edb49dd4fa0f957d09509f9591ee952bda035b423d27f1f",
+    "assets/search-hybrid.js": "8d55963673c748cf7586326eb4e190d38a3aa69e55ece2048da2c5a2e6487e6c",
+    "data/opportunities.js": "56c6dc0a0c6f884402abe24c02ed00964a9699f48d694ae2826e14b6703bf6f4",
     "data/subtopics.js": "e2f45ecdfab26770f2346eaa4a488bb57fcaa3cc17c5d90ed25e30d14727f40d"
   },
   "API_requests": [
     {
       "batch_index": 0,
-      "passage_count": 256,
+      "passage_count": 4,
       "http_status": 200,
-      "request_id": "5740fcf52bb359147b2c2fc751da387c",
+      "request_id": "45f02b7393ffffdc5abbb3c9c36802ba",
       "model": "voyage-4-lite",
-      "usage_total_tokens": 25046,
-      "request_payload_bytes": 136894,
-      "response_payload_bytes": 3266341,
-      "latency_ms": 1309.0218
-    },
-    {
-      "batch_index": 1,
-      "passage_count": 256,
-      "http_status": 200,
-      "request_id": "7e231854650aa4d8a5450ef8aa3dcdcf",
-      "model": "voyage-4-lite",
-      "usage_total_tokens": 74745,
-      "request_payload_bytes": 391333,
-      "response_payload_bytes": 3265916,
-      "latency_ms": 1568.9632
-    },
-    {
-      "batch_index": 2,
-      "passage_count": 256,
-      "http_status": 200,
-      "request_id": "176c7a447a0593dc7b2c2fc751da3802",
-      "model": "voyage-4-lite",
-      "usage_total_tokens": 70217,
-      "request_payload_bytes": 373498,
-      "response_payload_bytes": 3265526,
-      "latency_ms": 1135.2018
-    },
-    {
-      "batch_index": 3,
-      "passage_count": 256,
-      "http_status": 200,
-      "request_id": "09ebd428e272857ca5450ef8aa3dc0eb",
-      "model": "voyage-4-lite",
-      "usage_total_tokens": 73348,
-      "request_payload_bytes": 395214,
-      "response_payload_bytes": 3265371,
-      "latency_ms": 1058.368
-    },
-    {
-      "batch_index": 4,
-      "passage_count": 256,
-      "http_status": 200,
-      "request_id": "15146a4d37ddc81c7b2c2fc751da31b6",
-      "model": "voyage-4-lite",
-      "usage_total_tokens": 73208,
-      "request_payload_bytes": 395771,
-      "response_payload_bytes": 3265136,
-      "latency_ms": 1002.2707
-    },
-    {
-      "batch_index": 5,
-      "passage_count": 256,
-      "http_status": 200,
-      "request_id": "6bea1e07905ffd86a5450ef8aa3dce41",
-      "model": "voyage-4-lite",
-      "usage_total_tokens": 60617,
-      "request_payload_bytes": 330037,
-      "response_payload_bytes": 3266009,
-      "latency_ms": 1584.9614
-    },
-    {
-      "batch_index": 6,
-      "passage_count": 123,
-      "http_status": 200,
-      "request_id": "f31fd2825a73186aab7427f400595f4d",
-      "model": "voyage-4-lite",
-      "usage_total_tokens": 18061,
-      "request_payload_bytes": 95659,
-      "response_payload_bytes": 1569786,
-      "latency_ms": 518.0763
+      "usage_total_tokens": 1443,
+      "request_payload_bytes": 7422,
+      "response_payload_bytes": 51069,
+      "latency_ms": 344.9499
     }
   ],
-  "API_request_count": 7,
-  "usage_total_tokens": 395242,
-  "estimated_cost_at_published_paid_pricing_usd": 0.007905,
+  "API_request_count": 1,
+  "usage_total_tokens": 1443,
+  "estimated_cost_at_published_paid_pricing_usd": 0.000029,
   "float16_quantization": {
-    "vectors_checked": 1659,
+    "vectors_checked": 4,
     "minimum_cosine_to_float32": 1,
     "mean_cosine_to_float32": 1,
     "spent_set_candidate_recall_validation_required": true
   },
   "vectors_contain_public_passages_only": true,
   "vectors_persist_private_profile_or_researcher_data": false,
-  "post_build_runtime_validation": {
-    "validated_at": "2026-08-23",
-    "assets/search-hybrid.js_sha256": "8d55963673c748cf7586326eb4e190d38a3aa69e55ece2048da2c5a2e6487e6c",
-    "passage_construction_or_corpus_changed": false,
+  "last_validated_at": "2026-08-23T18:13:27.766Z",
+  "last_validation": {
+    "status": "unchanged_corpus_and_vector_reused",
     "passage_count": 1659,
-    "corpus_sha256": "06d93e73cb9741c859aa6cf643f4f1e6c1b2feef7b995586b55b3943405cb727",
-    "vector_sha256": "51b6c28d122172e11b6e0769e5726379491332290e94f500006f7eaef6680425",
-    "incremental_rebuild_reused": 1659,
-    "incremental_rebuild_embedded": 0,
-    "incremental_rebuild_API_requests": 0,
-    "note": "Runtime-only acronym safeguards changed after the original embedding build. Passage construction and vector inputs remained byte-identical; the no-change incremental validation used no provider request."
+    "corpus_sha256": "7f649d8036d5003c2836a4ca2cfea5a62e1e52296c8a66d6f7498a9a5baed9c1",
+    "vector_sha256": "697c84f76e83107e290df9b27168cd14fe6592bff2ae657b22d8eb9ee25fb8c2",
+    "API_request_count": 0,
+    "source_hashes": {
+      "assets/search-hybrid.js": "9d7a385bb063a0b7351683697dfe0d581644e3bdefb9226209e4e38f451deb0b",
+      "data/opportunities.js": "fb5dec36f33184572a84d6d9fed76adbb415c6102e2acbed50dc2d6ba22cbff6",
+      "data/subtopics.js": "e2f45ecdfab26770f2346eaa4a488bb57fcaa3cc17c5d90ed25e30d14727f40d"
+    }
   }
 }

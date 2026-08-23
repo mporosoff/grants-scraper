@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-23T16:43:38.108Z",
+  "generated_at": "2026-08-23T17:42:23.444Z",
   "model": "voyage-4-lite",
   "provider_revision": "not exposed by the real-time embedding API",
   "input_type": "document",
@@ -11,8 +11,8 @@
   "passage_count": 1659,
   "parent_passage_count": 1423,
   "child_passage_count": 236,
-  "corpus_sha256": "06d93e73cb9741c859aa6cf643f4f1e6c1b2feef7b995586b55b3943405cb727",
-  "vector_sha256": "51b6c28d122172e11b6e0769e5726379491332290e94f500006f7eaef6680425",
+  "corpus_sha256": "7f649d8036d5003c2836a4ca2cfea5a62e1e52296c8a66d6f7498a9a5baed9c1",
+  "vector_sha256": "697c84f76e83107e290df9b27168cd14fe6592bff2ae657b22d8eb9ee25fb8c2",
   "vector_bytes": 3397632,
   "stable_passage_id_contract": "parent:<opportunity_id> or child:<subtopic_id>",
   "passages": [
@@ -6349,7 +6349,7 @@
       "parent_id": "360333",
       "passage_kind": "parent",
       "record_id": "360333",
-      "text_sha256": "b1949faa96e2d0b4e2ea0a3b20560f90ab145b6137f6b3acce0bb6cf56d5463d",
+      "text_sha256": "d85b783fb5ad89bc1ac67819ca8f1b14ac0e771a63a80a1c7a20f6e7558154ca",
       "vector_row": 791
     },
     {
@@ -12069,7 +12069,7 @@
       "parent_id": "363604",
       "passage_kind": "parent",
       "record_id": "363604",
-      "text_sha256": "b290cff7d6c1a1ea1de244095cac7b5482b5cc8b2ac80e8ebf2ea53f0084d29a",
+      "text_sha256": "746bcd90432f75979ec6095a6763edef72758de1554b78c9698539aa6825ace3",
       "vector_row": 1506
     },
     {
@@ -12221,7 +12221,7 @@
       "parent_id": "363628",
       "passage_kind": "parent",
       "record_id": "363628",
-      "text_sha256": "003a267f7e73b74aed01848c7f7c9d687b44b7dc7b0cc2a7151a3bdd52d41b7a",
+      "text_sha256": "079ca4e353d006a046319f763d78055528ca37af8a2112ecf3e7cca284cf9552",
       "vector_row": 1525
     },
     {
@@ -12445,7 +12445,7 @@
       "parent_id": "363662",
       "passage_kind": "parent",
       "record_id": "363662",
-      "text_sha256": "e6eb051082cb6ed4c09232a4dc33ecd6b27a420a32c5ed5ea65609b1154843aa",
+      "text_sha256": "322d9c44907685602b845da16a1becd72f83db1a504ccfcc36e7d5134d754e1e",
       "vector_row": 1553
     },
     {

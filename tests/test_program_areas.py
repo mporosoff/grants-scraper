@@ -11,6 +11,7 @@ from scripts import program_areas
 from scripts.extract_document_evidence import (
     extract_program_areas,
     merge_document_entry,
+    revalidate_program_areas_only,
 )
 
 DOCUMENT = {
@@ -71,6 +72,18 @@ class ExtractTests(unittest.TestCase):
         _, hits = entry_for(UNRELATED_TEXT)
         self.assertEqual(hits, [])
 
+    def test_information_exchange_is_not_ion_exchange(self):
+        _, hits = entry_for(
+            "Regular briefings and information exchange maintain visibility."
+        )
+        self.assertNotIn("hydrometallurgy", {hit["label"] for hit in hits})
+
+    def test_standalone_ion_exchange_remains_hydrometallurgy_evidence(self):
+        _, hits = entry_for(
+            "The funded research includes ion exchange for selective recovery."
+        )
+        self.assertIn("hydrometallurgy", {hit["label"] for hit in hits})
+
 
 class MergeTests(unittest.TestCase):
     def test_folds_into_search_text_and_topics(self):
@@ -115,6 +128,55 @@ class MergeTests(unittest.TestCase):
             merged["topic_areas"],
         )
         self.assertNotIn("catalysis", merged.get("document_search_text") or "")
+
+    def test_stale_cached_compound_suffix_is_removed_from_existing_record(self):
+        entry, _ = entry_for(UMBRELLA_TEXT)
+        entry["program_areas"] = [{
+            "label": "hydrometallurgy",
+            "topics": ["Separations and membranes", "Materials science"],
+            "citation": {
+                **DOCUMENT,
+                "quote": "Regular briefings and information exchange maintain visibility.",
+            },
+        }]
+        record = {
+            "opportunity_id": "4",
+            "title": "Governance program",
+            "topic_areas": ["Separations and membranes", "Materials science"],
+            "document_program_areas": ["hydrometallurgy"],
+        }
+        merged = merge_document_entry(record, entry)
+        self.assertNotIn("document_program_areas", merged)
+        self.assertNotIn("Separations and membranes", merged["topic_areas"])
+        self.assertNotIn("Materials science", merged["topic_areas"])
+
+    def test_program_area_only_revalidation_does_not_remerge_unrelated_fields(self):
+        entry, _ = entry_for(UMBRELLA_TEXT)
+        entry["program_areas"] = [{
+            "label": "hydrometallurgy",
+            "topics": ["Separations and membranes", "Materials science"],
+            "citation": {
+                **DOCUMENT,
+                "quote": "Regular briefings and information exchange maintain visibility.",
+            },
+        }]
+        record = {
+            "opportunity_id": "4",
+            "title": "Governance program",
+            "topic_areas": ["Separations and membranes", "Materials science"],
+            "document_program_areas": ["hydrometallurgy"],
+            "deadlines": [{"date": "2027-01-01", "kind": "application"}],
+        }
+        catalog = {"opportunities": [record], "search_index": {}}
+        cache = {"records": {"4": entry}}
+        rebuilt, rebuilt_cache, changed_ids = revalidate_program_areas_only(
+            catalog,
+            cache,
+        )
+        self.assertEqual(changed_ids, ["4"])
+        self.assertEqual(rebuilt["opportunities"][0]["deadlines"], record["deadlines"])
+        self.assertNotIn("document_program_areas", rebuilt["opportunities"][0])
+        self.assertEqual(rebuilt_cache["records"]["4"]["program_areas"], [])
 
 
 if __name__ == "__main__":
