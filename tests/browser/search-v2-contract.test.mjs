@@ -73,73 +73,44 @@ test("browser query plans obey the shared search-v2 concept contract", () => {
   }
 });
 
-test("REE spelling variants resolve identically without lexical noise", () => {
-  const variants = ["REE", "REEs", "R.E.E.", "rare earth elements"];
-  const resultSets = variants.map(query => [...ranked(query).rolled.rows].map(row => row.id));
-  resultSets.slice(1).forEach((ids, index) => {
-    assert.deepEqual(ids, resultSets[0], variants[index + 1]);
-  });
-  assert.deepEqual(resultSets[0], []);
+test("local search v2 uses fielded retrieval without scientific relationship mappings", () => {
+  assert.equal(configuration.fielded_ranking.architecture, "bm25f_passage_coordination");
+  assert.equal(configuration.fielded_ranking.use_configured_scientific_entailments, false);
+  assert.deepEqual([...configuration.concept_families], []);
+  assert.deepEqual([...configuration.source_scope_relationships], []);
+  assert.deepEqual([...configuration.authoritative_scope_entailments], []);
+  const result = parentV2.score("upper atmosphere radiation belt dynamics", { evidence: true });
+  assert.equal(result.diagnostics.searchV2.rankingArchitecture, "fielded_bm25f");
+  assert.equal(result.diagnostics.searchV2.configuredScientificEntailmentsUsed, false);
+  assert.ok(result.scores[parentCatalog.opportunities.findIndex(record => (
+    String(record.opportunity_id) === "356536"
+  ))] > 0);
+});
+
+test("rich matching child carries its umbrella parent through one strongest passage", () => {
+  const result = ranked("trustworthy AI research software");
+  const genesis = result.rolled.rows.find(row => row.id === "361526");
+  assert.ok(genesis);
+  assert.equal(genesis.childDroveMatch, true);
+  assert.equal(genesis.bestChild.id, "361526:e-18");
+  assert.equal(genesis.bestChild.directEvidence.admission.reason, "fielded_complete_intent");
+  assert.equal(genesis.bestChild.directEvidence.admission.admittedBy[0].path, "fielded_bm25f");
+  assert.equal(result.rolled.cardinalityBonus, 0);
+});
+
+test("ordinary indexed evidence does not recreate configured REE entailments", () => {
+  const result = ranked("rare earth solvent extraction");
+  assert.equal(
+    result.rolled.rows.length,
+    0,
+    "fielded scoring must not manufacture missing material/method evidence",
+  );
   assert.deepEqual(
     [...parentV1.score("REE").scores]
       .map((score, index) => score > 0 ? String(parentCatalog.opportunities[index].opportunity_id) : null)
       .filter(Boolean),
     ["362900"],
     "the disabled production path remains the frozen v1 behavior",
-  );
-});
-
-test("REE separations admits every source-supported authoritative program as primary", () => {
-  const result = ranked("REE separations");
-  assert.deepEqual(
-    new Set(result.rolled.rows.map(row => row.id)),
-    new Set(["360678", "361526", "362061", "nsf-cbet:PD-26-370Y"]),
-  );
-  for (const row of result.rolled.rows) {
-    if (row.id === "nsf-cbet:PD-26-370Y") {
-      assert.equal(row.parentDirectEvidence.admission.reason, "source_grounded_scope_entailment");
-      assert.equal(row.parentDirectEvidence.admission.admittedBy[0].path, "source_grounded_scope");
-      assert.equal(
-        row.parentDirectEvidence.admission.admittedBy[0].relationship.id,
-        "rare-earth-subset-to-critical-mineral-scope",
-      );
-    } else {
-      assert.equal(row.parentDirectEvidence.admission.reason, "authoritative_scope_entailment");
-      assert.equal(row.parentDirectEvidence.admission.admittedBy.length, 1);
-      assert.equal(
-        row.parentDirectEvidence.admission.admittedBy[0].path,
-        "authoritative_scope_entailment",
-      );
-      assert.ok(row.parentDirectEvidence.authoritativeScope.controlledRelationships.length > 0);
-    }
-  }
-  const prohibited = new Set([
-    "362900", "359996", "363224", "363241", "360003", "363240",
-    "363325", "363258", "361234", "360004", "360007", "362847", "360881", "344592",
-  ]);
-  assert.deepEqual([...result.rolled.rows].filter(row => prohibited.has(row.id)), []);
-});
-
-test("bounded scope entailment covers controlled REE separation variants only", () => {
-  for (const query of [
-    "lanthanide separation",
-    "rare earth element recovery",
-    "solvent extraction of REEs",
-    "ionic liquids for REE extraction",
-  ]) {
-    const expected = query.startsWith("ionic liquids")
-      ? ["360678", "361526", "362061"]
-      : ["360678", "361526", "362061", "nsf-cbet:PD-26-370Y"];
-    assert.deepEqual(
-      new Set(ranked(query).rolled.rows.map(row => row.id)),
-      new Set(expected),
-      query,
-    );
-  }
-  const generic = parentV2.score("critical mineral separations", { evidence: true });
-  assert.deepEqual(
-    new Set(generic.diagnostics.searchV2.authoritativeScopeEntailments.map(item => item.parentId)),
-    new Set(["361526", "362061"]),
   );
 });
 

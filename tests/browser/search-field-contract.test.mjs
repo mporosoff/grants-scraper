@@ -68,7 +68,7 @@ function engine(records) {
   );
 }
 
-test("explicit protected evidence is substantive and field-backed", () => {
+test("explicit fielded evidence is substantive and field-backed", () => {
   const records = [
     record(
       "explicit",
@@ -98,24 +98,24 @@ test("explicit protected evidence is substantive and field-backed", () => {
     .filter(Boolean);
   assert.deepEqual(admitted, ["explicit"]);
   const trace = result.evidence[0];
-  assert.equal(trace.admission.reason, "explicit_evidence");
-  assert.ok(trace.admission.admittedBy.every(item => item.path === "explicit_evidence"));
+  assert.equal(trace.admission.reason, "fielded_complete_intent");
+  assert.ok(trace.admission.admittedBy.every(item => item.path === "fielded_bm25f"));
   assert.ok(trace.admission.fieldContributions.some(item => item.field === "parent_title"));
-  assert.ok(trace.groups.some(group => group.saturationApplied));
+  assert.ok(trace.groups.every(group => group.evidencePath === "fielded_bm25f"));
+  assert.ok(trace.groups.every(group => group.saturationApplied === false));
   assert.ok(trace.groups.every(group => group.contribution <= group.rawContribution));
 });
 
-test("authoritative entailment is identifier-bound rather than metadata-derived", () => {
+test("fielded retrieval ignores former identifier-bound entailment maps", () => {
   const records = [
     record("360678", "Generic annual solicitation", "General program information."),
     record("unmapped", "Critical minerals separations", "Research on critical minerals recovery."),
   ];
   const scoped = engine(records).score("REE separations", { evidence: true });
-  assert.ok(scoped.scores[0] > 0);
-  assert.equal(scoped.evidence[0].admission.reason, "authoritative_scope_entailment");
-  assert.equal(scoped.evidence[0].authoritativeScope.entailmentId, "doe-bes-separation-science-ree");
+  assert.equal(scoped.scores[0], 0);
   assert.equal(scoped.scores[1], 0, "generic critical-minerals metadata is not an entailment map");
 
   const generic = engine(records).score("critical mineral separations", { evidence: true });
-  assert.deepEqual([...generic.diagnostics.searchV2.authoritativeScopeEntailments], []);
+  assert.ok(generic.scores[1] > 0, "complete indexed source text can match without a program map");
+  assert.equal(generic.diagnostics.searchV2.configuredScientificEntailmentsUsed, false);
 });

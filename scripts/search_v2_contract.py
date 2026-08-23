@@ -1,4 +1,4 @@
-"""Shared deterministic search-v2 concept and scope-entailment contract."""
+"""Shared local search-v2 compatibility and authoritative-field contract."""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ import re
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "config" / "search_v2.json"
-RETRIEVAL_API_CONTRACT_VERSION = 4
+RETRIEVAL_API_CONTRACT_VERSION = 5
 SCIENTIFIC_CONCEPT_ROLES = {
     "target", "method", "property", "application_or_context", "target_and_method",
 }

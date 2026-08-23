@@ -5,7 +5,7 @@
   const B = .75;
   const PREFIX_LIMIT = 12;
   const FUZZY_LIMIT = 6;
-  const RETRIEVAL_API_CONTRACT_VERSION = 4;
+  const RETRIEVAL_API_CONTRACT_VERSION = 5;
   const STALE_UNDATED_MAX_AGE_DAYS = 5 * 366;
   const PRIMARY_EVIDENCE_TIER = Object.freeze({
     exact_or_child: 1,
@@ -204,6 +204,8 @@
     const childrenByParent = new Map();
     const partialChildrenByParent = new Map();
     const rejectedParents = new Set(parentDirect?.currentnessRejectedIndexes || []);
+    const fieldedRanking = parentDirect?.diagnostics?.searchV2?.rankingArchitecture === "fielded_bm25f"
+      || childDirect?.diagnostics?.searchV2?.rankingArchitecture === "fielded_bm25f";
 
     function verifiedGroups(result, index) {
       return new Set(result?.verificationGroupIndexes?.[index] || []);
@@ -398,7 +400,7 @@
       let matchingChildren = childrenByParent.get(id) || [];
       let parentAdmitted = Number(parentDirect?.scores?.[index]) > 0;
       let parentDirectEvidence = parentDirect?.evidence?.[index] || null;
-      const aggregate = !parentAdmitted && !matchingChildren.length
+      const aggregate = !fieldedRanking && !parentAdmitted && !matchingChildren.length
         ? aggregateScopeMatch(index, id)
         : null;
       if (aggregate) {
@@ -574,12 +576,17 @@
         ? [
             ["child_title", record.title || "", true],
             ["child_summary", record.description || record.summary || "", true],
-            ["authoritative_program_area", (record.program_area_labels || []).join(" "), true],
+            ["authoritative_program_area", (
+              record.program_area_labels || record.document_program_areas || []
+            ).join(" "), true],
             ["child_topic", (record.topic_areas || []).join(" "), false],
           ]
         : [
             ["parent_title", record.title || "", true],
             ["parent_description", record.description || "", true],
+            ["authoritative_program_area", (
+              record.program_area_labels || record.document_program_areas || []
+            ).join(" "), true],
             ["authoritative_document_scope", authoritativeDocumentScope, true],
             ["citation_source_evidence", record.document_search_text || "", !searchV2],
             ["topic_area", (record.topic_areas || []).join(" "), false],
@@ -592,10 +599,11 @@
       fields.map(([name, value]) => [name, new Set(queryApi.tokenize(value))]),
     ));
     function scopeTokens(value) {
-      return queryApi.tokenize(value).flatMap(term => [
-        term,
-        ...term.split("-").filter(part => part.length > 1),
-      ]);
+      return queryApi.tokenize(value).flatMap(term => (
+        term.includes("-")
+          ? [term, ...term.split("-").filter(part => part.length > 1)]
+          : [term]
+      ));
     }
     const documentScopeFields = documentFields.map((fields, documentId) => fields
       .filter(([_name, _value, admissionEligible]) => admissionEligible)
@@ -616,6 +624,76 @@
             : [],
         };
       }));
+    const fieldedConfig = searchV2Config?.fielded_ranking || null;
+    const fieldedRankingEnabled = searchV2
+      && fieldedConfig?.architecture === "bm25f_passage_coordination";
+    const fieldWeights = Object.freeze({
+      parent_title: 8,
+      child_title: 9,
+      child_summary: 4,
+      parent_description: 2,
+      authoritative_program_area: 6,
+      authoritative_document_scope: 3,
+      ...(fieldedConfig?.field_weights || {}),
+    });
+    const fieldLengthNormalization = Object.freeze({
+      parent_title: .2,
+      child_title: .15,
+      child_summary: .6,
+      parent_description: .75,
+      authoritative_program_area: .2,
+      authoritative_document_scope: .5,
+      ...(fieldedConfig?.field_length_normalization || {}),
+    });
+    const fieldedK1 = Number(fieldedConfig?.k1 || 1.2);
+    const coordinationPower = Number(fieldedConfig?.coordination_power || 3);
+    const proximityWindow = Number(fieldedConfig?.proximity_window || 32);
+    const proximityBonus = Number(fieldedConfig?.proximity_bonus || 3);
+    const exactPhraseBonus = Number(fieldedConfig?.exact_phrase_bonus || 8);
+    const titleExactPhraseBonus = Number(fieldedConfig?.title_exact_phrase_bonus || 12);
+    const conservativeFuzzyMinimumLength = Number(
+      fieldedConfig?.conservative_fuzzy_minimum_length || 7,
+    );
+    const fieldedFieldNames = Object.keys(fieldWeights);
+    const fieldedTokenCounts = documentScopeFields.map(fields => new Map(fields.map(field => {
+      const counts = new Map();
+      field.tokens.forEach(term => counts.set(term, (counts.get(term) || 0) + 1));
+      return [field.field, { ...field, counts }];
+    })));
+    const fieldedAverageLengths = Object.fromEntries(fieldedFieldNames.map(fieldName => {
+      const lengthsForField = fieldedTokenCounts.flatMap(fields => (
+        fields.has(fieldName) ? [fields.get(fieldName).tokens.length] : []
+      ));
+      return [fieldName, lengthsForField.length
+        ? lengthsForField.reduce((sum, value) => sum + value, 0) / lengthsForField.length
+        : 1];
+    }));
+    const fieldedVocabulary = new Set(documentScopeFields.flatMap(fields => (
+      fields.flatMap(field => [...field.positions.keys()])
+    )));
+    const fieldedDocumentFrequency = new Map();
+    fieldedTokenCounts.forEach(fields => {
+      const terms = new Set([...fields.values()].flatMap(field => [...field.counts.keys()]));
+      terms.forEach(term => fieldedDocumentFrequency.set(
+        term,
+        (fieldedDocumentFrequency.get(term) || 0) + 1,
+      ));
+    });
+    const fieldedPassages = documentScopeFields.map(fields => fields.flatMap(field => {
+      const parts = ["parent_description", "child_summary", "authoritative_document_scope"]
+        .includes(field.field)
+        ? String(field.value || "").split(/(?<=[.!?])\s+|…+|[\n\r]+/)
+        : [field.value];
+      return parts.map(value => String(value || "").trim()).filter(Boolean).map(value => ({
+        field: field.field,
+        value,
+        tokens: queryApi.tokenize(value).flatMap(term => (
+          term.includes("-")
+            ? [term, ...term.split("-").filter(part => part.length > 1)]
+            : [term]
+        )),
+      }));
+    }));
     const sourceScopeVocabulary = [...new Set(documentScopeFields.flatMap(fields => (
       fields.flatMap(field => [...field.positions.keys()])
     )))];
@@ -1024,12 +1102,462 @@
       ).slice(0, 3);
     }
 
+    function fieldedQueryGroups(query, { context = "" } = {}) {
+      const rawUppercase = new Set(
+        (String(query || "").match(/\b[A-Z][A-Z0-9.-]{1,7}\b/g) || [])
+          .flatMap(value => queryApi.tokenize(value)),
+      );
+      return queryApi.tokenize(query).map((source, index) => {
+        const exactIndexedAcronym = rawUppercase.has(source) && source.length <= 8;
+        const alternatives = [[source]];
+        const compoundParts = source.split("-").filter(part => part.length > 1);
+        if (compoundParts.length > 1) alternatives.push(compoundParts);
+        let expansion = null;
+        if (exactIndexedAcronym) {
+          const registeredPhrase = searchV2Config?.acronym_expansions?.[source];
+          expansion = registeredPhrase ? {
+            phrase: registeredPhrase,
+            confidence: 1,
+            basis: "registered unambiguous acronym",
+          } : String(context || "").trim()
+            ? acronymResolver?.resolve?.(source, { context, uppercase: true })
+            : null;
+          const expansionTerms = expansion ? queryApi.tokenize(expansion.phrase) : [];
+          if (expansionTerms.length >= 2) alternatives.push(expansionTerms);
+        }
+        const normalizedAlternatives = alternatives.map(terms => [...new Set(terms)]);
+        return {
+          index,
+          source,
+          conceptId: `literal:${source}`,
+          role: "substantive",
+          required: true,
+          exactIndexedAcronym,
+          alternatives: normalizedAlternatives,
+          terms: [...new Set(normalizedAlternatives.flat())].map(term => ({
+            term,
+            weight: term === source ? 1 : .9,
+          })),
+          evidencePolicy: "indexed_field_evidence",
+          expansion: expansion ? {
+            kind: "contextual_acronym",
+            phrase: expansion.phrase,
+            confidence: expansion.confidence,
+            basis: expansion.basis,
+          } : null,
+        };
+      });
+    }
+
     function expandedGroups(query, { context = "" } = {}) {
+      if (fieldedRankingEnabled) return fieldedQueryGroups(query, { context });
       return queryApi.expandGroups(
         query,
         term => Boolean(postings[term]),
         { acronymResolver, context, searchV2 },
       );
+    }
+
+    function scoreFielded(
+      query,
+      {
+        coverage = true,
+        context = "",
+        minimumCoverage: requestedMinimumCoverage = null,
+        evidence: collectEvidence = false,
+      } = {},
+    ) {
+      const groups = fieldedQueryGroups(query, { context });
+      const groupCount = groups.length;
+      const shortMinimum = Number(searchV2Config?.primary_admission?.concise_query_minimum_groups || 2);
+      const shortMaximum = Number(searchV2Config?.primary_admission?.concise_query_maximum_groups || 5);
+      const strictComplete = coverage && groupCount >= shortMinimum && groupCount <= shortMaximum;
+      const configuredLongCoverage = Number(
+        requestedMinimumCoverage
+        ?? fieldedConfig?.long_query_minimum_coordination
+        ?? .7,
+      );
+      const minimumCoordination = strictComplete ? 1 : Math.max(0, Math.min(1, configuredLongCoverage));
+      const scores = new Float64Array(documentCount);
+      const broaderScores = new Float64Array(documentCount);
+      const evidenceTiers = new Uint8Array(documentCount);
+      const lexicalScores = new Float64Array(documentCount);
+      const discoveryScores = new Float64Array(documentCount);
+      const semanticScores = new Float64Array(documentCount);
+      const lexicalCoverage = new Uint16Array(documentCount);
+      const semanticCoverage = new Uint16Array(documentCount);
+      const verificationGroupIndexes = Array.from({ length: documentCount }, () => []);
+      const currentnessRejectedIndexes = records.flatMap((record, index) => (
+        staleUndatedOpportunity(record) ? [index] : []
+      ));
+      const currentnessRejected = new Set(currentnessRejectedIndexes);
+      const fuzzyTerms = new Map();
+      const fieldedResolutionCache = new Map();
+      const fieldedTermScoreCache = new Map();
+      const resultEvidence = collectEvidence
+        ? Array.from({ length: documentCount }, () => ({
+          schemaVersion: evidenceSchemaVersion,
+          groups: [],
+          authoritativeScope: null,
+          sourceGroundedScope: null,
+          highestContributingPassage: null,
+          exactPhrase: false,
+          exactTitlePhrase: false,
+          exactOpportunityNumber: false,
+          trigrams: [],
+        }))
+        : null;
+
+      function fieldedResolutions(term, exactOnly = false) {
+        const cacheKey = `${exactOnly ? "exact" : "normal"}:${term}`;
+        if (fieldedResolutionCache.has(cacheKey)) return fieldedResolutionCache.get(cacheKey);
+        if (fieldedVocabulary.has(term)) {
+          const exact = [{ term, weight: 1, kind: "exact" }];
+          fieldedResolutionCache.set(cacheKey, exact);
+          return exact;
+        }
+        if (exactOnly || term.length < conservativeFuzzyMinimumLength) {
+          fieldedResolutionCache.set(cacheKey, []);
+          return [];
+        }
+        const candidates = [];
+        for (let length = term.length - 1; length <= term.length + 1; length += 1) {
+          for (const candidate of termsByLength.get(length) || []) {
+            if (!fieldedVocabulary.has(candidate) || candidate[0] !== term[0]) continue;
+            const distance = boundedDamerauLevenshtein(term, candidate, 1);
+            if (distance !== 1) continue;
+            candidates.push({ term: candidate, weight: .72, kind: "fuzzy" });
+          }
+        }
+        const resolved = candidates.sort((left, right) => left.term.localeCompare(right.term)).slice(0, 2);
+        fieldedResolutionCache.set(cacheKey, resolved);
+        return resolved;
+      }
+
+      function termFieldScore(documentId, queryTerm, { exactOnly = false } = {}) {
+        const cacheKey = `${documentId}:${exactOnly ? "exact" : "normal"}:${queryTerm}`;
+        if (fieldedTermScoreCache.has(cacheKey)) return fieldedTermScoreCache.get(cacheKey);
+        let best = null;
+        fieldedResolutions(queryTerm, exactOnly).forEach(resolution => {
+          const df = Number(fieldedDocumentFrequency.get(resolution.term) || 0);
+          if (!df) return;
+          const idf = Math.log(1 + ((documentCount - df + .5) / (df + .5)));
+          const fields = [];
+          let weightedFrequency = 0;
+          fieldedTokenCounts[documentId].forEach((field, fieldName) => {
+            if (!fieldWeights[fieldName]) return;
+            const frequency = Number(field.counts.get(resolution.term) || 0);
+            if (!frequency) return;
+            const average = Math.max(1, Number(fieldedAverageLengths[fieldName] || 1));
+            const normalization = 1 - Number(fieldLengthNormalization[fieldName] || 0)
+              + Number(fieldLengthNormalization[fieldName] || 0) * (field.tokens.length / average);
+            const normalizedFrequency = Number(fieldWeights[fieldName]) * frequency
+              / Math.max(.1, normalization);
+            weightedFrequency += normalizedFrequency;
+            fields.push({
+              field: fieldName,
+              matchedTerms: [resolution.term],
+              admissionEligible: true,
+              contribution: normalizedFrequency,
+            });
+          });
+          if (!(weightedFrequency > 0)) return;
+          const contribution = resolution.weight * idf
+            * ((weightedFrequency * (fieldedK1 + 1)) / (fieldedK1 + weightedFrequency));
+          const candidate = { ...resolution, contribution, idf, fields };
+          if (resolution.kind === "fuzzy") {
+            if (!fuzzyTerms.has(queryTerm)) fuzzyTerms.set(queryTerm, new Set());
+            fuzzyTerms.get(queryTerm).add(resolution.term);
+          }
+          if (!best || candidate.contribution > best.contribution) best = candidate;
+        });
+        fieldedTermScoreCache.set(cacheKey, best);
+        return best;
+      }
+
+      function bestGroupMatch(documentId, group) {
+        let best = null;
+        group.alternatives.forEach(alternative => {
+          if (
+            group.exactIndexedAcronym === true
+            && alternative.length === 1
+            && alternative[0] === group.source
+            && !exactShortAcronymEvidence(documentId, group.source)
+          ) return;
+          const matches = alternative.map(term => termFieldScore(documentId, term, {
+            exactOnly: group.exactIndexedAcronym === true && alternative.length === 1,
+          }));
+          if (matches.some(match => !match)) return;
+          const contribution = matches.reduce((sum, match) => sum + match.contribution, 0);
+          const candidate = { alternative, matches, contribution };
+          if (!best || candidate.contribution > best.contribution) best = candidate;
+        });
+        return best;
+      }
+
+      function passageMatch(documentId, documentGroupMatches) {
+        let best = null;
+        fieldedPassages[documentId].forEach(passage => {
+          const positions = new Map();
+          passage.tokens.forEach((term, index) => {
+            if (!positions.has(term)) positions.set(term, []);
+            positions.get(term).push(index);
+          });
+          const matchedGroups = [];
+          const usedPositions = [];
+          documentGroupMatches.forEach((groupMatch, groupIndex) => {
+            if (!groupMatch) return;
+            let selectedAlternative = null;
+            groupMatch.alternative.forEach(term => {
+              const resolved = groupMatch.matches.find(match => match.term === term)
+                || groupMatch.matches.find(match => match.kind === "fuzzy");
+              const concrete = resolved?.term || term;
+              const position = positions.get(concrete)?.[0];
+              if (!Number.isInteger(position)) return;
+              if (!selectedAlternative) selectedAlternative = [];
+              selectedAlternative.push({ term: concrete, position });
+            });
+            if (selectedAlternative?.length === groupMatch.alternative.length) {
+              matchedGroups.push(groupIndex);
+              usedPositions.push(...selectedAlternative.map(item => item.position));
+            }
+          });
+          const span = usedPositions.length
+            ? Math.max(...usedPositions) - Math.min(...usedPositions) + 1
+            : Number.POSITIVE_INFINITY;
+          const candidate = {
+            field: passage.field,
+            text: passage.value,
+            matchedGroups,
+            matchedTerms: [...new Set(usedPositions.map(position => passage.tokens[position]))],
+            span,
+          };
+          if (
+            !best
+            || candidate.matchedGroups.length > best.matchedGroups.length
+            || (
+              candidate.matchedGroups.length === best.matchedGroups.length
+              && candidate.span < best.span
+            )
+          ) best = candidate;
+        });
+        return best;
+      }
+
+      const normalizedPhrase = queryApi.tokenize(query).join(" ");
+      records.forEach((record, documentId) => {
+        const groupMatches = groups.map(group => bestGroupMatch(documentId, group));
+        const matchedIndexes = groupMatches.flatMap((match, index) => match ? [index] : []);
+        verificationGroupIndexes[documentId] = matchedIndexes;
+        lexicalCoverage[documentId] = matchedIndexes.length;
+        const baseScore = groupMatches.reduce((sum, match) => sum + Number(match?.contribution || 0), 0);
+        lexicalScores[documentId] = baseScore;
+        discoveryScores[documentId] = baseScore;
+        const opportunityNumber = String(record.opportunity_number || "").trim().toLowerCase();
+        const exactIdentifier = opportunityNumber && String(query || "").trim().toLowerCase() === opportunityNumber;
+        if (!(baseScore > 0) && !exactIdentifier || !groupCount) return;
+        if (exactIdentifier) discoveryScores[documentId] = opportunityNumberBoost;
+        const coordination = matchedIndexes.length / groupCount;
+        const singleAcronymExpansionOnly = groupCount === 1
+          && groups[0].exactIndexedAcronym === true
+          && groups[0].expansion?.basis !== "researcher context"
+          && groupMatches[0]
+          && !(
+            groupMatches[0].alternative.length === 1
+            && groupMatches[0].alternative[0] === groups[0].source
+            && exactShortAcronymEvidence(documentId, groups[0].source)
+          );
+        const bestPassage = passageMatch(documentId, groupMatches);
+        const fieldPhraseMatches = documentScopeFields[documentId].filter(field => (
+          normalizedPhrase
+          && (` ${field.tokens.join(" ")} `).includes(` ${normalizedPhrase} `)
+        ));
+        const titlePhrase = fieldPhraseMatches.some(field => /title$/.test(field.field));
+        const phraseBonus = fieldPhraseMatches.length
+          ? (titlePhrase ? titleExactPhraseBonus : exactPhraseBonus)
+          : 0;
+        const proximity = bestPassage?.matchedGroups.length === groupCount
+          && bestPassage.span <= proximityWindow
+          ? proximityBonus * (1 - Math.max(0, bestPassage.span - groupCount) / proximityWindow)
+          : 0;
+        const finalScore = baseScore * Math.pow(coordination, coordinationPower)
+          + phraseBonus + proximity + (exactIdentifier ? opportunityNumberBoost : 0);
+        const admitted = exactIdentifier || (
+          coordination >= minimumCoordination && !singleAcronymExpansionOnly
+        );
+        const broader = !admitted
+          && groupCount >= 2
+          && coordination >= Math.max(.5, minimumCoordination - .35)
+          && Number(bestPassage?.matchedGroups.length || 0) >= groupCount - 1;
+        if (!currentnessRejected.has(documentId)) {
+          if (admitted) scores[documentId] = finalScore;
+          else if (broader) broaderScores[documentId] = finalScore;
+        }
+        const bestField = groupMatches.flatMap((match, groupIndex) => (
+          (match?.matches || []).flatMap(termMatch => termMatch.fields.map(field => ({
+            ...field,
+            groupIndex,
+            aggregateTermContribution: termMatch.contribution,
+          })))
+        )).sort((left, right) => (
+          right.aggregateTermContribution - left.aggregateTermContribution
+          || left.field.localeCompare(right.field)
+        ))[0];
+        evidenceTiers[documentId] = admitted
+          ? (exactIdentifier ? PRIMARY_EVIDENCE_TIER.exact_or_child
+            : /child_/.test(bestField?.field || "") ? PRIMARY_EVIDENCE_TIER.exact_or_child
+            : /title$/.test(bestField?.field || "") ? PRIMARY_EVIDENCE_TIER.exact_or_child
+              : PRIMARY_EVIDENCE_TIER.contextual_parent)
+          : broader ? PRIMARY_EVIDENCE_TIER.broader_program : PRIMARY_EVIDENCE_TIER.weak_discovery;
+        if (!collectEvidence) return;
+        const item = resultEvidence[documentId];
+        item.exactPhrase = fieldPhraseMatches.length > 0;
+        item.exactTitlePhrase = titlePhrase;
+        item.exactOpportunityNumber = Boolean(exactIdentifier);
+        item.highestContributingPassage = bestPassage ? {
+          field: bestPassage.field,
+          text: bestPassage.text,
+          matchedTerms: bestPassage.matchedTerms,
+          matchedConcepts: bestPassage.matchedGroups.map(index => groups[index].conceptId),
+          span: Number.isFinite(bestPassage.span) ? bestPassage.span : null,
+        } : null;
+        item.groups = groupMatches.flatMap((match, groupIndex) => {
+          if (!match) return [];
+          const group = groups[groupIndex];
+          return [{
+            source: group.source,
+            conceptId: group.conceptId,
+            role: group.role,
+            evidencePath: "fielded_bm25f",
+            contribution: match.contribution,
+            rawContribution: match.contribution,
+            saturationApplied: false,
+            matchedTerms: match.matches.map(termMatch => termMatch.term),
+            matchedDisplayTerms: match.matches.map(termMatch => (
+              displayTerm(documentId, termMatch.term) || termMatch.term
+            )),
+            matchedTermContributions: match.matches.map(termMatch => ({
+              term: termMatch.term,
+              contribution: termMatch.contribution,
+              fields: termMatch.fields,
+            })),
+          }];
+        });
+        const classification = admitted ? "primary" : broader ? "broader_program_fit" : "reject";
+        const reason = admitted
+          ? exactIdentifier ? "exact_identifier" : "fielded_complete_intent"
+          : broader ? "fielded_adjacent_intent" : "insufficient_query_coordination";
+        item.admission = {
+          admitted,
+          classification,
+          reason,
+          evidenceTier: evidenceTiers[documentId],
+          lexicalCoverage: matchedIndexes.length,
+          semanticCoverage: 0,
+          substantiveCoverage: matchedIndexes.length,
+          finalScore,
+          admittedBy: admitted ? [{
+            path: "fielded_bm25f",
+            field: bestPassage?.field || bestField?.field || "",
+            fields: [bestPassage?.field || bestField?.field || ""].filter(Boolean),
+            matchedConcepts: matchedIndexes.map(index => groups[index].conceptId),
+          }] : [],
+          rankedBy: [
+            { type: "bm25f", score: baseScore },
+            { type: "query_coordination", ratio: coordination, power: coordinationPower },
+            ...(phraseBonus ? [{ type: "exact_phrase", score: phraseBonus }] : []),
+            ...(proximity ? [{ type: "proximity", score: proximity, span: bestPassage.span }] : []),
+          ],
+          fieldContributions: groupMatches.flatMap((match, groupIndex) => (
+            (match?.matches || []).flatMap(termMatch => termMatch.fields.map(field => ({
+              conceptId: groups[groupIndex].conceptId,
+              term: termMatch.term,
+              field: field.field,
+              admissionEligible: true,
+              aggregateTermContribution: termMatch.contribution,
+            })))
+          )),
+        };
+      });
+
+      const discoveredCandidateCount = Array.from(discoveryScores).filter(value => value > 0).length;
+      const admittedPrimaryCount = Array.from(scores).filter(value => value > 0).length;
+      const admittedBroaderCount = Array.from(broaderScores).filter(value => value > 0).length;
+      return {
+        scores,
+        broaderScores,
+        evidenceTiers,
+        lexicalScores,
+        discoveryScores,
+        semanticScores,
+        lexicalCoverage,
+        semanticCoverage,
+        evidence: resultEvidence,
+        queryGroups: groups.map(group => ({
+          index: group.index,
+          conceptId: group.conceptId,
+          role: group.role,
+          source: group.source,
+        })),
+        verificationGroupIndexes,
+        currentnessRejectedIndexes,
+        hasTerms: groupCount > 0,
+        diagnostics: {
+          queryGroups: groupCount,
+          minimumCoverage: minimumCoordination,
+          fuzzyTerms: [...fuzzyTerms].map(([source, matches]) => ({ source, matches: [...matches] })),
+          inferredTopics: [],
+          acronymExpansions: groups.filter(group => group.expansion).map(group => ({
+            source: group.source,
+            phrase: group.expansion.phrase,
+            confidence: group.expansion.confidence,
+            basis: group.expansion.basis,
+          })),
+          searchV2: {
+            enabled: searchV2,
+            contractVersion: searchV2Config?.contract_version || null,
+            evidenceSchemaVersion,
+            catalogRole,
+            rankingArchitecture: "fielded_bm25f",
+            configuredScientificEntailmentsUsed: false,
+            strictCompleteCoverage: strictComplete,
+            queryPlan: groups.map(group => ({
+              conceptId: group.conceptId,
+              role: group.role,
+              required: true,
+              source: group.source,
+              evidencePolicy: "indexed_field_evidence",
+            })),
+            discovery: {
+              internalCandidateCount: discoveredCandidateCount,
+              visiblePrimaryCount: admittedPrimaryCount,
+              broaderFitCount: admittedBroaderCount,
+              rejectedPartialIntentCount: Math.max(
+                0,
+                discoveredCandidateCount - admittedPrimaryCount - admittedBroaderCount,
+              ),
+              rejectedCurrentnessCount: currentnessRejectedIndexes.length,
+              admissionCounts: {
+                exactOrChild: Array.from(evidenceTiers).filter(value => value === PRIMARY_EVIDENCE_TIER.exact_or_child).length,
+                authoritativeScope: 0,
+                contextualParent: Array.from(evidenceTiers).filter(value => value === PRIMARY_EVIDENCE_TIER.contextual_parent).length,
+              },
+            },
+          },
+          scoringConfiguration: {
+            architecture: "bm25f_passage_coordination",
+            fieldWeights,
+            fieldLengthNormalization,
+            k1: fieldedK1,
+            coordinationPower,
+            proximityWindow,
+            proximityBonus,
+            exactPhraseBonus,
+            titleExactPhraseBonus,
+            opportunityNumberBoost,
+          },
+        },
+      };
     }
 
     function authoritativeScopeMatches(groups) {
@@ -1117,6 +1645,14 @@
         evidence: collectEvidence = false,
       } = {},
     ) {
+      if (fieldedRankingEnabled) {
+        return scoreFielded(query, {
+          coverage,
+          context,
+          minimumCoverage: requestedMinimumCoverage,
+          evidence: collectEvidence,
+        });
+      }
       const groups = expandedGroups(query, { context });
       const scopeMatches = authoritativeScopeMatches(groups);
       const broaderFitMatches = designatedBroaderFitMatches(groups);

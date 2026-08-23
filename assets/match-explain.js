@@ -154,8 +154,27 @@
 
   function admissionFields(evidence) {
     return new Set((evidence?.admission?.admittedBy || [])
-      .filter(item => ["explicit_evidence", "source_grounded_scope"].includes(item.path))
-      .flatMap(item => item.fields || []));
+      .filter(item => ["explicit_evidence", "source_grounded_scope", "fielded_bm25f"].includes(item.path))
+      .flatMap(item => item.fields || [item.field] || []).filter(Boolean));
+  }
+
+  function fieldedPassageReason(evidence) {
+    const passage = evidence?.highestContributingPassage;
+    if (evidence?.admission?.admittedBy?.[0]?.path !== "fielded_bm25f" || !passage?.text) {
+      return null;
+    }
+    const fieldLabel = FIELD_LABELS[passage.field] || "indexed source passage";
+    return reason(
+      "fielded_passage",
+      `The strongest matching ${fieldLabel} says: ${quoted(passage.text)}.`,
+      {
+        path: "fielded_bm25f",
+        field: passage.field,
+        terms: passage.matchedTerms || [],
+        span: passage.span,
+        generatedAgencyWording: false,
+      },
+    );
   }
 
   function causalFieldRows(evidence, record, { exclude = [] } = {}) {
@@ -407,7 +426,9 @@
           publicationState: child.record.publication_state || "published_index",
         },
       ));
-      reasons.push(...contextualFieldReasons(
+      const passage = fieldedPassageReason(child.directEvidence);
+      if (passage) reasons.push(passage);
+      else reasons.push(...contextualFieldReasons(
         child.directEvidence,
         child.record,
         { exclude: ["child_title"], maximum: 1 },
@@ -434,6 +455,8 @@
       activeEvidence?.admission?.admitted
       && !shortQueryCollision(query, activeEvidence, activeRecord)
     ) {
+      const passage = fieldedPassageReason(activeEvidence);
+      if (passage) reasons.push(passage);
       const form = rareEarthQueryForm(query);
       if (form && evidenceHasConcept(activeEvidence, "rare-earth-elements")) {
         reasons.push(reason(
@@ -442,10 +465,10 @@
           { canonicalConcept: "rare-earth-elements", userForm: form },
         ));
       }
-      reasons.push(...contextualFieldReasons(activeEvidence, activeRecord, {
+      if (!passage) reasons.push(...contextualFieldReasons(activeEvidence, activeRecord, {
         maximum: Math.max(1, 3 - reasons.length),
       }));
-      if (reasons.some(item => item.code === "field_context")) {
+      if (passage || reasons.some(item => item.code === "field_context")) {
         tier = form && activeEvidence.groups?.some(group => (
           group.conceptId === "rare-earth-elements"
           && !["ree", "rees", "rare", "earth", "element", "elements"]

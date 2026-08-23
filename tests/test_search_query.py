@@ -54,7 +54,7 @@ class SearchV2ContractTests(unittest.TestCase):
                     item["concept_ids"],
                 )
 
-    def test_authoritative_scope_entailment_is_primary_and_bounded(self):
+    def test_fielded_search_does_not_manufacture_scope_entailment(self):
         records = [
             _record("360678"),
             _record("361526"),
@@ -71,7 +71,7 @@ class SearchV2ContractTests(unittest.TestCase):
             for index, score in enumerate(scores)
             if score > 0
         }
-        self.assertEqual(admitted, {"360678", "361526", "362061", "unmapped"})
+        self.assertEqual(admitted, set())
 
         generic_scores, _, _ = hybrid_scores(
             _catalog(records),
@@ -79,6 +79,13 @@ class SearchV2ContractTests(unittest.TestCase):
             search_v2=True,
         )
         self.assertEqual(generic_scores[0], 0)
+        specification = load_search_v2_config()
+        self.assertEqual(
+            specification["fielded_ranking"]["architecture"],
+            "bm25f_passage_coordination",
+        )
+        self.assertEqual(specification["concept_families"], [])
+        self.assertEqual(specification["authoritative_scope_entailments"], [])
 
     def test_short_technical_query_and_acronym_metadata_match_browser_contract(self):
         minerals = expand_query_groups(

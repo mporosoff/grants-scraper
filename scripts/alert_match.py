@@ -140,6 +140,251 @@ def _posting_terms(
     return [(term, weight) for _, weight, term in candidates[:6]]
 
 
+def _authoritative_document_scope(record: dict) -> str:
+    values: list[str] = []
+    for fact in ((record.get("document_evidence") or {}).get("facts") or []):
+        if fact.get("type") != "review_criteria":
+            continue
+        if isinstance(fact.get("value"), str):
+            values.append(fact["value"])
+        quote = (fact.get("citation") or {}).get("quote")
+        if quote:
+            values.append(str(quote))
+    return " ".join(values)
+
+
+def _fielded_local_scores(
+    catalog: dict,
+    query: str,
+    specification: dict,
+) -> tuple[list[float], bool, list[float]]:
+    """BM25F-style local scoring over authoritative fields only.
+
+    This is the server-side saved-search counterpart of the browser fielded
+    path. It deliberately ignores configured scientific relationship tables.
+    """
+    records = catalog.get("opportunities") or []
+    document_count = len(records)
+    configuration = specification.get("fielded_ranking") or {}
+    field_weights = {
+        "parent_title": 8.0,
+        "child_title": 9.0,
+        "child_summary": 4.0,
+        "parent_description": 2.0,
+        "authoritative_program_area": 6.0,
+        "authoritative_document_scope": 3.0,
+        **configuration.get("field_weights", {}),
+    }
+    field_b = {
+        "parent_title": 0.2,
+        "child_title": 0.15,
+        "child_summary": 0.6,
+        "parent_description": 0.75,
+        "authoritative_program_area": 0.2,
+        "authoritative_document_scope": 0.5,
+        **configuration.get("field_length_normalization", {}),
+    }
+    k1 = float(configuration.get("k1") or 1.2)
+    coordination_power = float(configuration.get("coordination_power") or 3.0)
+    fuzzy_minimum = int(configuration.get("conservative_fuzzy_minimum_length") or 7)
+    proximity_window = int(configuration.get("proximity_window") or 32)
+    proximity_bonus = float(configuration.get("proximity_bonus") or 3.0)
+    phrase_bonus = float(configuration.get("exact_phrase_bonus") or 8.0)
+    title_phrase_bonus = float(configuration.get("title_exact_phrase_bonus") or 12.0)
+
+    def fields(record: dict) -> dict[str, str]:
+        child = bool(record.get("subtopic_id"))
+        if child:
+            return {
+                "child_title": str(record.get("title") or ""),
+                "child_summary": str(record.get("summary") or record.get("description") or ""),
+                "authoritative_program_area": " ".join(
+                    str(value) for value in record.get("program_area_labels") or []
+                ),
+            }
+        return {
+            "parent_title": str(record.get("title") or ""),
+            "parent_description": str(record.get("description") or ""),
+            "authoritative_program_area": " ".join(
+                str(value) for value in (
+                    record.get("program_area_labels")
+                    or record.get("document_program_areas")
+                    or []
+                )
+            ),
+            "authoritative_document_scope": _authoritative_document_scope(record),
+        }
+
+    document_fields = [fields(record) for record in records]
+    token_counts: list[dict[str, dict[str, int]]] = []
+    vocabulary: set[str] = set()
+    document_frequency: dict[str, int] = {}
+    for row in document_fields:
+        counts_by_field: dict[str, dict[str, int]] = {}
+        present: set[str] = set()
+        for field, value in row.items():
+            counts: dict[str, int] = {}
+            for term in tokenize(value):
+                counts[term] = counts.get(term, 0) + 1
+                vocabulary.add(term)
+                present.add(term)
+                if "-" in term:
+                    for part in (item for item in term.split("-") if len(item) > 1):
+                        counts[part] = counts.get(part, 0) + 1
+                        vocabulary.add(part)
+                        present.add(part)
+            counts_by_field[field] = counts
+        token_counts.append(counts_by_field)
+        for term in present:
+            document_frequency[term] = document_frequency.get(term, 0) + 1
+    average_lengths = {
+        field: (
+            sum(sum(row.get(field, {}).values()) for row in token_counts)
+            / max(1, sum(field in row for row in token_counts))
+        )
+        for field in field_weights
+    }
+
+    query_terms = tokenize(query)
+    uppercase_terms = {
+        token
+        for value in re.findall(r"\b[A-Z][A-Z0-9.-]{1,7}\b", query)
+        for token in tokenize(value)
+    }
+    groups: list[dict] = []
+    for source in query_terms:
+        alternatives = [[source]]
+        parts = [part for part in source.split("-") if len(part) > 1]
+        if len(parts) > 1:
+            alternatives.append(parts)
+        if source in uppercase_terms:
+            expansion = tokenize((specification.get("acronym_expansions") or {}).get(source, ""))
+            if len(expansion) >= 2:
+                alternatives.append(expansion)
+        groups.append({
+            "source": source,
+            "alternatives": alternatives,
+            "exact_acronym": source in uppercase_terms,
+        })
+    if not groups:
+        empty = [0.0] * document_count
+        return empty, False, empty.copy()
+
+    def resolutions(term: str, exact_only: bool) -> list[tuple[str, float]]:
+        if term in vocabulary:
+            return [(term, 1.0)]
+        if exact_only or len(term) < fuzzy_minimum:
+            return []
+        values = [
+            candidate
+            for candidate in vocabulary
+            if candidate[0] == term[0]
+            and abs(len(candidate) - len(term)) <= 1
+            and _bounded_damerau_levenshtein(term, candidate, 1) == 1
+        ]
+        return [(candidate, 0.72) for candidate in sorted(values)[:2]]
+
+    def exact_acronym_evidence(document_id: int, source: str) -> bool:
+        pattern = re.compile(
+            rf"(^|[^A-Za-z0-9]){re.escape(source.upper())}"
+            rf"(?![A-Za-z0-9]|\s*/\s*[A-Z])"
+        )
+        return any(pattern.search(value) for value in document_fields[document_id].values())
+
+    def term_score(document_id: int, term: str, exact_only: bool) -> float:
+        best = 0.0
+        for resolved, resolution_weight in resolutions(term, exact_only):
+            weighted_frequency = 0.0
+            for field, counts in token_counts[document_id].items():
+                frequency = counts.get(resolved, 0)
+                if not frequency:
+                    continue
+                length = sum(counts.values())
+                average = max(1.0, average_lengths.get(field, 1.0))
+                normalization = 1 - float(field_b.get(field, 0.0)) + float(
+                    field_b.get(field, 0.0)
+                ) * length / average
+                weighted_frequency += float(field_weights.get(field, 0.0)) * frequency / max(
+                    0.1, normalization
+                )
+            if weighted_frequency <= 0:
+                continue
+            df = document_frequency.get(resolved, 0)
+            inverse_frequency = math.log(
+                1 + ((document_count - df + 0.5) / (df + 0.5))
+            )
+            best = max(
+                best,
+                resolution_weight * inverse_frequency
+                * ((weighted_frequency * (k1 + 1)) / (k1 + weighted_frequency)),
+            )
+        return best
+
+    scores = [0.0] * document_count
+    lexical_scores = [0.0] * document_count
+    normalized_phrase = " ".join(query_terms)
+    strict = 2 <= len(groups) <= 5
+    minimum = 1.0 if strict else float(configuration.get("long_query_minimum_coordination") or 0.7)
+    for document_id, record in enumerate(records):
+        matched = 0
+        base = 0.0
+        for group in groups:
+            best = 0.0
+            for alternative in group["alternatives"]:
+                if group["exact_acronym"] and len(alternative) == 1 and not exact_acronym_evidence(
+                    document_id, group["source"]
+                ):
+                    continue
+                values = [
+                    term_score(
+                        document_id,
+                        term,
+                        group["exact_acronym"] and len(alternative) == 1,
+                    )
+                    for term in alternative
+                ]
+                if values and all(value > 0 for value in values):
+                    best = max(best, sum(values))
+            if best > 0:
+                matched += 1
+                base += best
+        lexical_scores[document_id] = base
+        coordination = matched / len(groups)
+        identifier = str(record.get("opportunity_number") or "").strip().lower()
+        if identifier and query.strip().lower() == identifier:
+            scores[document_id] = base + 50.0
+            continue
+        if (
+            len(groups) == 1
+            and groups[0]["exact_acronym"]
+            and not exact_acronym_evidence(document_id, groups[0]["source"])
+        ):
+            continue
+        if coordination < minimum:
+            continue
+        bonus = 0.0
+        for field, value in document_fields[document_id].items():
+            field_tokens = tokenize(value)
+            if normalized_phrase and normalized_phrase in " ".join(field_tokens):
+                bonus = max(
+                    bonus,
+                    title_phrase_bonus if field.endswith("title") else phrase_bonus,
+                )
+            positions = [
+                index
+                for index, term in enumerate(field_tokens)
+                if term in set(query_terms)
+            ]
+            if len(set(field_tokens) & set(query_terms)) == len(set(query_terms)) and positions:
+                span = max(positions) - min(positions) + 1
+                if span <= proximity_window:
+                    bonus = max(bonus, proximity_bonus * (
+                        1 - max(0, span - len(groups)) / proximity_window
+                    ))
+        scores[document_id] = base * coordination ** coordination_power + bonus
+    return scores, True, lexical_scores
+
+
 def hybrid_scores(
     catalog: dict,
     query: str,
@@ -152,6 +397,12 @@ def hybrid_scores(
     index was built in), so ``scores[i]`` scores ``opportunities[i]``.
     """
     search_v2_spec = validate_search_v2_catalog(catalog) if search_v2 else None
+    if (
+        search_v2
+        and (search_v2_spec.get("fielded_ranking") or {}).get("architecture")
+        == "bm25f_passage_coordination"
+    ):
+        return _fielded_local_scores(catalog, query, search_v2_spec)
     index = catalog["search_index"]
     postings = index["postings"]
     lengths = index["document_lengths"]
