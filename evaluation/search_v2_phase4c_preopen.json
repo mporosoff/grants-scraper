@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-08-23",
+  "phase": "4C",
+  "branch": "search-quality-v2",
+  "frozen_candidate_sha": "f893d43e795a7f70efdf8191e863fb33e286d148",
+  "origin_candidate_sha": "f893d43e795a7f70efdf8191e863fb33e286d148",
+  "main_sha": "ef7a0642f6ce66828f01ee280bd5993f66029b2f",
+  "origin_main_sha": "ef7a0642f6ce66828f01ee280bd5993f66029b2f",
+  "working_tree_clean": true,
+  "production_flag": {
+    "path": "assets/app-config.js",
+    "search_v2_enabled": false
+  },
+  "holdout": {
+    "frame": "evaluation/search_v2_iteration3_holdout_frame.json",
+    "frame_sha256": "7fde6b7ccbdab59331c26899f37bdbb8f9ee7e30f8f3632f257e28d27124865e",
+    "manifest": "evaluation/search_v2_iteration3_holdout_manifest.json",
+    "manifest_sha256": "d45fcc91a52d01673cf1fa5bc91f25ed26c0c8f92f970e902559ecbda9164c6c",
+    "query_count": 36,
+    "execution_count": 0,
+    "raw_result_exists": false,
+    "truth_exists": false,
+    "adjudicated_result_exists": false
+  },
+  "candidate_hashes": {
+    "assets/search-query.js": "43ddabcf52c78008f1862fb3a62ab5913f1a5de29b4bf5657f6196adfb3b5376",
+    "assets/search-retrieval.js": "b67b19392131ce039f928ebf435cc42be481b5e0c7d4cf9b60223b8fdd94f097",
+    "assets/search-hybrid.js": "6a4ffccd34a31a6ea8c40397584560636c0238d4b8250705c2ab4a7077a7c4b3",
+    "assets/match-explain.js": "640cbb7b814d9eb78d6a4d62bd56253cbfa6ca07fe330db7e3d2413ba7d3806f",
+    "assets/app.js": "21d62103a41636c288eb6a6f8ab6f5cd34f320829284c2492bc66ba16272cc2a",
+    "assets/app-config.js": "42c5b3d6d4e24971ead1e024d85c07545612cb1d70b21e757caf6e77e7f1a028",
+    "config/search_v2.json": "e0b4c902a00b578d7d044001c72c230dbf0ce55c919091cf8730f245964d99c9",
+    "workers/search-voyage-proxy/src/index.js": "b7ef68b1cd8d47d9e9f385795306ea1dd148d4237426aa20a19f5c3e9b466a53",
+    "workers/search-voyage-proxy/wrangler.jsonc": "685a88e0230cee56c977806637284c016cdf9847b7cbaac0f946ebe7ec7622b4"
+  },
+  "data_hashes": {
+    "data/opportunities.js": "fb5dec36f33184572a84d6d9fed76adbb415c6102e2acbed50dc2d6ba22cbff6",
+    "data/subtopics.js": "e2f45ecdfab26770f2346eaa4a488bb57fcaa3cc17c5d90ed25e30d14727f40d",
+    "data/search-v2-voyage-manifest.json": "56fb57090696d3f9537be6a7f092a1565866672297f98f7d255518378109021d",
+    "data/search-v2-voyage-vectors.f16": "697c84f76e83107e290df9b27168cd14fe6592bff2ae657b22d8eb9ee25fb8c2",
+    "passage_corpus_sha256": "7f649d8036d5003c2836a4ca2cfea5a62e1e52296c8a66d6f7498a9a5baed9c1",
+    "passage_count": 1659,
+    "vector_bytes": 3397632
+  },
+  "historical_evidence_hashes": {
+    "evaluation/search_v2_holdout_results_raw.json": "8d4a1d37e0940fde1eefdd3dca7f3fa2a39a40194ce6b083b40eafd4897fb919",
+    "evaluation/search_v2_iteration2_holdout_results_raw.json": "fef755fb0bfdd2f485bf712478dc3b82623038882f9e961746d79ac599ff8af5",
+    "evaluation/search_v2_release_candidate.json": "0edf8c283eff216e445e72101196c2fd038e42708710591a79d5e71e24f2d8ab",
+    "evaluation/search_v2_release_candidate_v2.json": "4f3400a560209720b96e5f2d50364be6ce1342fa9eb6ef315c49eab2e589db4d"
+  },
+  "inherited_development_gate_hashes": {
+    "evaluation/search_v2_strong_coherence_results.json": "3c03a142efba394247756e6236ff1db29fa4c2aeef5e42d6e010d135d4cd8d9c",
+    "evaluation/search_v2_strong_coherence_test_runs.json": "826286f57d7c09bb2f44a00cf503c027203bbd13109ed9e8e01596ed5062c418",
+    "evaluation/search_v2_strong_potential_gate_report.json": "87c0f0d3b69c5f633b03dbf555302990a763657a88e4d396a42956e99ac7769b"
+  },
+  "preopen_checks": {
+    "head_exactly_frozen_candidate": true,
+    "origin_matches_head": true,
+    "main_unchanged": true,
+    "working_tree_clean_before_checkpoint": true,
+    "search_v2_off": true,
+    "holdout_hash_matches": true,
+    "holdout_execution_count_zero": true,
+    "no_holdout_result_or_truth_artifact": true,
+    "prior_raw_evidence_unchanged": true,
+    "vector_passage_hash_handshake": true,
+    "proxy_validation": true,
+    "candidate_behavior_changed_after_freeze": false
+  },
+  "acceptance_gates": {
+    "reviewed_strong_precision_at_10_minimum": 0.9,
+    "maximum_clearly_irrelevant_strong": 0,
+    "maximum_zero_anchor_strong": 0,
+    "cross_scope_aggregation_permitted": false,
+    "acronym_identifier_safeguards_required": true,
+    "combined_required_recall_at_20_minimum": 0.8,
+    "combined_required_recall_at_50_minimum": 0.9,
+    "strong_potential_deduplication_required": true,
+    "potential_display_must_remain_bounded": true,
+    "source_backed_explanations_required": true,
+    "post_holdout_tuning_permitted": false
+  },
+  "declarations": {
+    "acceptance_session_only": true,
+    "holdout_execution_count": 0,
+    "candidate_behavior_frozen": true,
+    "phase5_authorized": false,
+    "deploy_or_merge_authorized": false
+  }
+}
