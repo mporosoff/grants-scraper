@@ -149,6 +149,18 @@ test("hybrid client is lazy, rejects a stale manifest, and sends no browser cred
         usage: { total_tokens: 10 },
       }), { status: 200 });
     }
+    if (String(url).endsWith("/judge")) {
+      const body = JSON.parse(options.body);
+      return new Response(JSON.stringify({
+        model: api.JUDGE_MODEL,
+        results: body.results.map((item, index) => ({
+          id: item.id,
+          classification: index === 0 ? "primary" : index === 1 ? "broader" : "reject",
+        })),
+        usage: { input_tokens: 50, output_tokens: 20, total_tokens: 70, neurons: 2 },
+        latency_ms: 10,
+      }), { status: 200 });
+    }
     return new Response("", { status: 404 });
   };
   const client = api.createClient({
@@ -163,11 +175,55 @@ test("hybrid client is lazy, rejects a stale manifest, and sends no browser cred
   });
   assert.deepEqual(requests, []);
   const result = await client.search("rare earth recycling");
-  assert.ok(result.parents.length > 0);
+  assert.equal(result.parents.length, 2);
+  assert.deepEqual(Array.from(result.parents, item => item.intent_classification), ["primary", "broader"]);
+  assert.equal(result.diagnostics.judge.reject_count, 8);
   const posts = requests.filter(item => item.options?.method === "POST");
-  assert.equal(posts.length, 2);
+  assert.equal(posts.length, 3);
   assert.ok(posts.every(item => !Object.keys(item.options.headers).some(name => /authorization|api.key/i.test(name))));
   assert.ok(result.parents.every(item => item.explanation?.excerpt && !/score|similarity/i.test(item.explanation.excerpt)));
+});
+
+test("intent-gate failure preserves neutral hybrid ranking without fabricated labels", async () => {
+  const fetchImpl = async (url, options = {}) => {
+    if (String(url) === "/manifest") return new Response(JSON.stringify(manifest), { status: 200 });
+    if (String(url) === "/vectors") return new Response(vectorBuffer, { status: 200 });
+    if (String(url).endsWith("/embed-query")) {
+      const vectors = api.decodeFloat16(
+        vectorBuffer.buffer.slice(vectorBuffer.byteOffset, vectorBuffer.byteOffset + vectorBuffer.byteLength),
+        corpus.length,
+        api.EMBEDDING_DIMENSION,
+      );
+      return new Response(JSON.stringify({ embedding: Array.from(vectors.slice(0, api.EMBEDDING_DIMENSION)) }), { status: 200 });
+    }
+    if (String(url).endsWith("/rerank")) {
+      const body = JSON.parse(options.body);
+      return new Response(JSON.stringify({ rankings: body.candidates.map((item, index) => ({
+        index,
+        passage_id: item.passage_id,
+        relevance_score: 1 - index / Math.max(1, body.candidates.length),
+      })) }), { status: 200 });
+    }
+    if (String(url).endsWith("/judge")) {
+      return new Response(JSON.stringify({ error: { code: "judge_unavailable" } }), { status: 503 });
+    }
+    return new Response("", { status: 404 });
+  };
+  const client = api.createClient({
+    parentCatalog: harness.parentCatalog,
+    childCatalog: harness.childCatalog,
+    parentEngine: harness.parentEngine,
+    childEngine: harness.childEngine,
+    proxyUrl: "http://localhost/",
+    manifestUrl: "/manifest",
+    vectorUrl: "/vectors",
+    fetchImpl,
+  });
+  const result = await client.search("rare earth recycling");
+  assert.ok(result.parents.length > 10);
+  assert.equal(result.diagnostics.judge.status, "fallback");
+  assert.ok(result.parents.every(item => item.intent_classification === null && item.judge_fallback));
+  assert.equal(result.usage.judge_fallbacks, 1);
 });
 
 test("provider errors and client timeouts fail closed for the existing local-result fallback", async () => {
@@ -217,6 +273,10 @@ test("site integration remains disabled, lazy, extractive, and fail-closed", () 
   assert.match(appSource, /Enhanced ranking is temporarily unavailable, so local ranking is shown/);
   assert.ok(appSource.indexOf("state.matches = search.matches") < appSource.indexOf("scheduleHybridSearch(state.query)"));
   assert.match(appSource, /Public source passage/);
+  assert.match(appSource, /Primary match/);
+  assert.match(appSource, /Broader program fit/);
+  assert.match(appSource, /Intent-gated hybrid catalog/);
+  assert.match(appSource, /intent classification is temporarily unavailable/i);
   assert.doesNotMatch(appSource, /Matched because semantic similarity|Voyage score/);
   assert.doesNotMatch(appSource, /VOYAGE_API_KEY|Authorization:\s*`Bearer/);
 });

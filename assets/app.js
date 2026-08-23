@@ -1330,6 +1330,10 @@
           : 0,
         evidenceTier: 1,
         hybridRank: Number(item.hybrid_rank),
+        intentClassification: ["primary", "broader"].includes(item.intent_classification)
+          ? item.intent_classification
+          : null,
+        judgeFallback: item.judge_fallback === true,
         hybridExplanation: item.explanation || null,
         bestChild: childMatch,
         childDroveMatch: Boolean(child),
@@ -1374,8 +1378,16 @@
       state.hybrid.usage = result.usage || null;
       applyHybridParents(state.hybrid.parents);
       state.page = 1;
-      $("search-status").textContent =
-        `Enhanced ranking complete: ${state.matches.length.toLocaleString()} public opportunities match the current filters.`;
+      const judge = state.hybrid.diagnostics?.judge;
+      if (judge?.status === "complete") {
+        $("search-status").textContent = `${Number(judge.primary_count || 0).toLocaleString()} primary ${Number(judge.primary_count || 0) === 1 ? "match" : "matches"}`
+          + `${judge.broader_count ? ` · ${Number(judge.broader_count).toLocaleString()} broader program ${Number(judge.broader_count) === 1 ? "fit" : "fits"}` : ""}.`;
+      } else if (judge?.fallback) {
+        $("search-status").textContent = `Enhanced ranking complete: ${state.matches.length.toLocaleString()} opportunities. Intent classification is temporarily unavailable, so the neutral hybrid-ranked list is shown.`;
+      } else {
+        $("search-status").textContent =
+          `Enhanced ranking complete: ${state.matches.length.toLocaleString()} public opportunities match the current filters.`;
+      }
       renderResults();
     }).catch(error => {
       if (sequence !== state.hybrid.sequence || normalizedQuery !== state.query) return;
@@ -2189,6 +2201,8 @@
       || catalog?.source?.url
       || "https://www.grants.gov/";
     const flags = [
+      match.intentClassification === "primary" ? `<span class="badge open">Primary match</span>` : "",
+      match.intentClassification === "broader" ? `<span class="badge broad">Broader program fit</span>` : "",
       isBroadOpportunity(record) ? `<span class="badge broad">Broad / umbrella call</span>` : "",
       record.has_preliminary_stage ? `<span class="badge warning">LOI / preproposal</span>` : "",
       record.actionability_status === "preliminary_deadline_passed_verify"
@@ -2984,7 +2998,11 @@
               ? "Single-FOA focus"
               : "Chat-focused results"
       : state.hybrid.active
-        ? "Hybrid-ranked public catalog"
+        ? state.hybrid.diagnostics?.judge?.status === "complete"
+          ? "Intent-gated hybrid catalog"
+          : state.hybrid.diagnostics?.judge?.fallback
+            ? "Hybrid-ranked catalog · intent gate fallback"
+            : "Hybrid-ranked public catalog"
         : state.hybrid.pending
           ? "Local catalog · enhancing ranking"
           : state.hybrid.fallbackReason

@@ -96,3 +96,89 @@ test("proxy converts provider failures into clean non-secret errors", async () =
   assert.deepEqual(body, { error: { code: "provider_invalid_response" } });
   assert.doesNotMatch(JSON.stringify(body), /test-secret|upstream/);
 });
+
+test("judge validates public-only input and returns strict structured classifications", async () => {
+  const calls = [];
+  const AI = { run: async (model, input) => {
+    calls.push({ model, input });
+    return {
+      response: { results: [{ id: first.parent_id, classification: "primary" }] },
+      usage: { prompt_tokens: 40, completion_tokens: 8, total_tokens: 48 },
+    };
+  } };
+  const handler = createHandler();
+  const valid = {
+    query: "public research query",
+    results: [{
+      id: first.parent_id,
+      title: first.values.parent_title?.[0] || first.title,
+      passage: first.text,
+      field: first.fields[0],
+      type: first.passage_kind,
+    }],
+  };
+  const response = await handler(request("/judge", valid), { AI });
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.deepEqual(body.results, [{ id: first.parent_id, classification: "primary" }]);
+  assert.deepEqual(body.usage, { input_tokens: 40, output_tokens: 8, total_tokens: 48, neurons: 0 });
+  assert.equal(calls[0].model, "@cf/meta/llama-3.1-8b-instruct-fast");
+  assert.equal(calls[0].input.response_format.type, "json_schema");
+  assert.match(calls[0].input.messages[0].content, /only from its supplied published passage/i);
+  assert.doesNotMatch(calls[0].input.messages[0].content, /public research query/);
+
+  const privateField = await handler(request("/judge", {
+    ...valid,
+    results: [{ ...valid.results[0], profile: "private researcher data" }],
+  }), { AI });
+  assert.equal(privateField.status, 400);
+  const arbitraryPassage = await handler(request("/judge", {
+    ...valid,
+    results: [{ ...valid.results[0], passage: "private researcher data" }],
+  }), { AI });
+  assert.equal(arbitraryPassage.status, 400);
+  const arbitraryTitle = await handler(request("/judge", {
+    ...valid,
+    results: [{ ...valid.results[0], title: "private researcher data" }],
+  }), { AI });
+  assert.equal(arbitraryTitle.status, 400);
+  const wrongType = await handler(request("/judge", {
+    ...valid,
+    results: [{
+      ...valid.results[0],
+      type: valid.results[0].type === "parent" ? "publication_eligible_child" : "parent",
+    }],
+  }), { AI });
+  assert.equal(wrongType.status, 400);
+  const absentField = await handler(request("/judge", {
+    ...valid,
+    results: [{ ...valid.results[0], field: "bounded_source_evidence" }],
+  }), { AI });
+  assert.equal(absentField.status, 400);
+  assert.equal(calls.length, 1);
+});
+
+test("judge rejects invalid classifications and converts Workers AI failures cleanly", async () => {
+  const valid = {
+    query: "public research query",
+    results: [{
+      id: first.parent_id,
+      title: first.values.parent_title?.[0] || first.title,
+      passage: first.text,
+      field: first.fields[0],
+      type: first.passage_kind,
+    }],
+  };
+  const invalidHandler = createHandler();
+  const invalid = await invalidHandler(request("/judge", valid), {
+    AI: { run: async () => ({ response: { results: [{ id: first.parent_id, classification: "maybe" }] } }) },
+  });
+  assert.equal(invalid.status, 502);
+  assert.deepEqual(await invalid.json(), { error: { code: "judge_invalid_response" } });
+
+  const failed = await invalidHandler(request("/judge", valid), {
+    AI: { run: async () => { throw new Error("private provider failure"); } },
+  });
+  assert.equal(failed.status, 503);
+  assert.deepEqual(await failed.json(), { error: { code: "judge_unavailable" } });
+});

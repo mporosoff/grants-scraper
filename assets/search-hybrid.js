@@ -4,10 +4,12 @@
   const CONTRACT_VERSION = 1;
   const EMBEDDING_MODEL = "voyage-4-lite";
   const RERANK_MODEL = "rerank-2.5";
+  const JUDGE_MODEL = "@cf/meta/llama-3.1-8b-instruct-fast";
   const EMBEDDING_DIMENSION = 1024;
   const BM25_DEPTH = 200;
   const SEMANTIC_DEPTH = 200;
   const RERANK_DEPTH = 300;
+  const JUDGE_DEPTH = 10;
   const RRF_K = 60;
   const MAX_PASSAGE_CHARS = 3_000;
   const MAX_QUERY_CHARS = 500;
@@ -418,8 +420,15 @@
     const usage = {
       embedding_requests: 0,
       rerank_requests: 0,
+      judge_requests: 0,
       embedding_tokens: 0,
       rerank_tokens: 0,
+      judge_input_tokens: 0,
+      judge_output_tokens: 0,
+      judge_total_tokens: 0,
+      judge_neurons: 0,
+      judge_failures: 0,
+      judge_fallbacks: 0,
       fallbacks: 0,
       failures: 0,
       last_latency_ms: 0,
@@ -565,11 +574,85 @@
           }
           return { ...source, voyage_score: Number(item.relevance_score) };
         });
-        const parents = strongestParents(passages).map((passage, index) => ({
+        const rankedParents = strongestParents(passages).map((passage, index) => ({
           ...passage,
           hybrid_rank: index + 1,
           explanation: explanationFromPassage(passage),
         }));
+        const judgeCandidates = rankedParents.slice(0, JUDGE_DEPTH);
+        let parents = rankedParents;
+        let judgeDiagnostics;
+        try {
+          usage.judge_requests += 1;
+          const judged = await post("judge", {
+            query: normalizedQuery,
+            results: judgeCandidates.map(passage => ({
+              id: passage.parent_id,
+              title: passage.values?.parent_title?.[0] || passage.title || "",
+              passage: passage.text,
+              field: passage.explanation?.source_field || "parent_title",
+              type: passage.passage_kind,
+            })),
+          });
+          const expected = new Set(judgeCandidates.map(passage => passage.parent_id));
+          const classifications = new Map();
+          if (!Array.isArray(judged.results) || judged.results.length !== expected.size) {
+            throw new HybridSearchError("judge_contract_mismatch", "The intent gate returned an invalid result count.");
+          }
+          judged.results.forEach(item => {
+            if (!expected.has(String(item?.id || "")) || classifications.has(String(item.id))
+              || !["primary", "broader", "reject"].includes(item?.classification)) {
+              throw new HybridSearchError("judge_contract_mismatch", "The intent gate returned an invalid classification.");
+            }
+            classifications.set(String(item.id), item.classification);
+          });
+          if (classifications.size !== expected.size) {
+            throw new HybridSearchError("judge_contract_mismatch", "The intent gate omitted a result.");
+          }
+          usage.judge_input_tokens += Number(judged.usage?.input_tokens || 0);
+          usage.judge_output_tokens += Number(judged.usage?.output_tokens || 0);
+          usage.judge_total_tokens += Number(judged.usage?.total_tokens || 0);
+          usage.judge_neurons += Number(judged.usage?.neurons || 0);
+          const classified = judgeCandidates.map(passage => ({
+            ...passage,
+            rerank_rank: passage.hybrid_rank,
+            intent_classification: classifications.get(passage.parent_id),
+          }));
+          const primary = classified.filter(item => item.intent_classification === "primary");
+          const broader = classified.filter(item => item.intent_classification === "broader");
+          const rejected = classified.filter(item => item.intent_classification === "reject");
+          parents = [...primary, ...broader].map((passage, index) => ({
+            ...passage,
+            hybrid_rank: index + 1,
+          }));
+          judgeDiagnostics = {
+            status: "complete",
+            model: judged.model || JUDGE_MODEL,
+            judged_count: classified.length,
+            primary_count: primary.length,
+            broader_count: broader.length,
+            reject_count: rejected.length,
+            latency_ms: Number(judged.latency_ms || 0),
+            results: classified.map(item => ({
+              id: item.parent_id,
+              rerank_rank: item.rerank_rank,
+              classification: item.intent_classification,
+            })),
+          };
+        } catch (error) {
+          usage.judge_failures += 1;
+          usage.judge_fallbacks += 1;
+          parents = rankedParents.map(passage => ({
+            ...passage,
+            intent_classification: null,
+            judge_fallback: true,
+          }));
+          judgeDiagnostics = {
+            status: "fallback",
+            fallback: true,
+            reason: String(error?.code || "judge_unavailable"),
+          };
+        }
         usage.last_latency_ms = performance.now() - started;
         return {
           parents,
@@ -579,6 +662,8 @@
             union_candidates: guarded.length,
             safeguard_rejections: safeguardRejections,
             parent_count: parents.length,
+            candidate_top_50: rankedParents.slice(0, 50).map(item => item.parent_id),
+            judge: judgeDiagnostics,
             corpus_sha256: assets.manifest.corpus_sha256,
             vector_sha256: assets.manifest.vector_sha256,
             latency_ms: usage.last_latency_ms,
@@ -605,10 +690,12 @@
     CONTRACT_VERSION,
     EMBEDDING_MODEL,
     RERANK_MODEL,
+    JUDGE_MODEL,
     EMBEDDING_DIMENSION,
     BM25_DEPTH,
     SEMANTIC_DEPTH,
     RERANK_DEPTH,
+    JUDGE_DEPTH,
     RRF_K,
     MAX_PASSAGE_CHARS,
     MAX_QUERY_CHARS,
