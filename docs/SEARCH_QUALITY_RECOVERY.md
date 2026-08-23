@@ -518,3 +518,59 @@ behavior remain unchanged, search v2 remains off, `main` is untouched, and
 Phase 4C remains sealed and unexecuted.
 
 **HYBRID VOYAGE RETRIEVAL + RERANKING CLEARS THE QUALITY BAR — PRODUCTION ARCHITECTURE SHOULD BE CONSIDERED**
+
+## Production-shaped hybrid Voyage implementation
+
+The feasibility architecture is now implemented behind the disabled search-v2
+flag without deploying a proxy or changing production behavior. The browser
+renders the existing local BM25F results immediately, then lazily loads a
+versioned 1,659-passage `voyage-4-lite` float16 index, performs local cosine
+retrieval, fuses the top 200 lexical and semantic passages with reciprocal-rank
+fusion, and sends at most 300 allowlisted public passages to `rerank-2.5` through
+a separately deployable Cloudflare Worker. The strongest parent or eligible
+child passage represents each result. Any vector, network, provider, schema, or
+timeout failure leaves the already-rendered BM25F results in place.
+
+The static index uses stable passage IDs and a corpus/vector hash handshake.
+Its 3,397,632-byte vector payload and 431,976-byte manifest are excluded from
+the initial page and downloaded only for an eligible search. An incremental
+no-change build reused all 1,659 passages, made zero provider requests, and
+left both assets byte-identical. The browser gained 31,992 uncompressed initial
+bytes. The Worker accepts only the production GitHub Pages origin and local
+development origins, validates exact query and candidate schemas, requires
+committed public passage ID/text-hash pairs, returns no documents, retains the
+Voyage key as a server secret, and contains no query logging. It has been
+contract-tested locally but not deployed.
+
+The production-shaped run used both spent holdouts only: 52 queries and 65
+required anchors. Required-anchor Recall@10 was 0.846 and Recall@50 was 0.954;
+query-average nDCG@10 was 0.734, and Precision@10 over the 70 previously judged
+top-ten pairs was 0.786. All 19 audited Phase-4B anchors and all 16 audited
+vocabulary-gap anchors reached the top 50. Warm end-to-end latency was 651 ms
+p50 and 854 ms p95. The final run made 52 query-embedding and 49 reranking
+requests, reranked 12,832 public passages, and has a nominal published-price
+estimate of $0.156, or about $2.99 per 1,000 searches at the measured mix.
+
+The development gate remains blocked. A bounded manual review covered 139
+exact query/result pairs: every surfaced top-ten result for zero-anchor queries
+and the top result for every positive query that returned one. All 100 reviewed
+zero-anchor results were non-primary, and positive-query top-one complete-intent
+precision was 0.795. A global cutoff cannot separate them: hard-negative scores
+reach 0.641 while required anchors fall to 0.340; a 0.45 cutoff still leaves 49
+hard-negative results and reduces required Recall@50 to 0.585. The audit also
+found an ingestion-owned representation error: the Burma governance record
+`363604` exposes `hydrometallurgy` as an authoritative program area despite no
+support in its title or description, making it rank first for `REE
+hydrometallurgy` and contaminating its extractive explanation.
+
+The complete browser suite passes 166 tests, the focused hybrid/proxy suite
+passes eight, focused Python suites pass 43 unittest cases plus 37 pytest cases
+and 24 subtests, the live-product Python run passes 756 tests, the 50-case
+parent/child invariant is byte-identical and cardinality-invariant, and the
+hermetic rebuild preserves all 22 governed artifacts. Search v2 remains off,
+the Worker is not deployed, `main` is unchanged, and the Phase-4C holdout
+remains sealed and unexecuted. Phase 4C is not authorized until the source
+representation defect and the generalized partial-intent precision failure are
+resolved without query-specific tuning.
+
+**HYBRID PRODUCTION IMPLEMENTATION BLOCKED — SPENT HARD NEGATIVES STILL RECEIVE HIGH-RANKED PARTIAL-INTENT RESULTS**

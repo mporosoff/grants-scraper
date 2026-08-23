@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "evaluated_at": "2026-08-23",
+  "branch": "search-quality-v2",
+  "starting_sha": "fbac67665ad117fbe02a9bd5025a6bbba7306950",
+  "status": "development_gates_blocked_on_precision_and_source_representation",
+  "decision": "HYBRID PRODUCTION IMPLEMENTATION BLOCKED — SPENT HARD NEGATIVES STILL RECEIVE HIGH-RANKED PARTIAL-INTENT RESULTS",
+  "architecture": {
+    "browser": [
+      "existing local BM25F",
+      "lazy static voyage-4-lite document vectors",
+      "local cosine top-200 semantic retrieval",
+      "top-200 BM25F plus top-200 semantic RRF union (k=60)",
+      "bounded proxy rerank-2.5 over at most 300 passages",
+      "strongest public parent-or-child passage per parent"
+    ],
+    "hard_safeguards": [
+      "currentness",
+      "publication-eligible child boundary",
+      "exact identifier priority",
+      "case-sensitive exact short acronym evidence or existing high-confidence resolution",
+      "complete remaining lexical intent for unresolved acronym queries"
+    ],
+    "explanation": "Extractive winning public passage/field only; no embedding or Voyage score is causal evidence.",
+    "fallback": "The existing BM25F list is rendered first and remains in place on vector, proxy, provider, or timeout failure.",
+    "manual_scientific_relationship_mapping_counts": {
+      "concept_families": 0,
+      "controlled_relationships": 0,
+      "source_scope_relationships": 0,
+      "authoritative_scope_entailments": 0,
+      "broader_program_fits": 0
+    }
+  },
+  "static_vectors": {
+    "model": "voyage-4-lite",
+    "input_type": "document",
+    "dimension": 1024,
+    "passage_count": 1659,
+    "parent_passages": 1423,
+    "publication_eligible_child_passages": 236,
+    "format": "float16 little-endian",
+    "vector_bytes": 3397632,
+    "manifest_bytes": 431976,
+    "corpus_sha256": "06d93e73cb9741c859aa6cf643f4f1e6c1b2feef7b995586b55b3943405cb727",
+    "vector_sha256": "51b6c28d122172e11b6e0769e5726379491332290e94f500006f7eaef6680425",
+    "lazy_loaded": true,
+    "initial_page_contains_vector_payload": false,
+    "incremental_no_change_rebuild": "1659 reused, 0 embedded, 0 API requests, byte-identical manifest/vector/receipt"
+  },
+  "proxy": {
+    "implementation": "Cloudflare Worker",
+    "deployment_status": "implemented and locally contract-tested; not deployed",
+    "server_secret": "VOYAGE_API_KEY",
+    "browser_secret_present": false,
+    "endpoints": ["POST /embed-query", "POST /rerank"],
+    "public_passage_allowlist": "committed passage IDs and SHA-256 hashes",
+    "production_origin": "https://mporosoff.github.io",
+    "local_origins": ["http://localhost:*", "http://127.0.0.1:*"],
+    "query_logging_added": false
+  },
+  "spent_quality": {
+    "queries": 52,
+    "required_anchors": 65,
+    "required_recall_at_10": 0.846154,
+    "required_recall_at_50": 0.953846,
+    "query_average_ndcg_at_10": 0.73411,
+    "query_average_mrr": 0.736924,
+    "precision_at_10_over_existing_judgments": 0.785714,
+    "existing_judged_top_10_pairs": 70,
+    "known_irrelevant_top_10": 5,
+    "known_broader_top_10": 10,
+    "maximum_parent_count": 298,
+    "maximum_union_passages": 300,
+    "phase4b_19_anchor_recall_at_50": 1.0,
+    "vocabulary_gap_16_anchor_recall_at_50": 1.0,
+    "unrecovered_required_anchors": [
+      {"query_id": "hold_ree_04", "result_id": "360678", "reason": "semantic discovery miss retained from feasibility"},
+      {"query_id": "hold_env_01", "result_id": "362061", "reason": "unresolved short acronym PFAS has no exact/high-confidence existing resolution in this passage"},
+      {"query_id": "hold_env_01", "result_id": "363375", "reason": "unresolved short acronym PFAS has no exact/high-confidence existing resolution in this passage"}
+    ]
+  },
+  "bounded_precision_review": {
+    "artifact": "evaluation/search_v2_hybrid_precision_review.json",
+    "reviewed_exact_query_result_pairs": 139,
+    "zero_anchor_top_10_pairs": 100,
+    "zero_anchor_non_primary_pairs": 100,
+    "positive_query_top_1_complete_intent_precision": 0.794872,
+    "full_precision_at_10_established": false,
+    "precision_gate_pass": false,
+    "score_cutoff_added": false,
+    "cutoff_finding": "Hard-negative scores overlap required-anchor scores; a 0.45 cutoff leaves 49 hard-negative results and reduces required Recall@50 to 0.584615."
+  },
+  "source_representation_blocker": {
+    "query_id": "hold_ree_04",
+    "result_id": "363604",
+    "rank": 1,
+    "field": "document_program_areas",
+    "value": "hydrometallurgy",
+    "actual_parent_purpose": "community-backed governance and peace in Burma",
+    "owner": "source ingestion / document program-area extraction"
+  },
+  "leave_out": {
+    "all_scientific_relationship_mappings_withheld": true,
+    "required_recall_at_50": {
+      "agriculture": 1.0,
+      "ai_computing": 1.0,
+      "biomedical": 1.0,
+      "chemistry_materials": 0.967742,
+      "defense": 1.0,
+      "education": 1.0,
+      "energy": 1.0,
+      "environmental_science": 0.6,
+      "public_health": 1.0,
+      "space": 1.0
+    }
+  },
+  "acronym": {
+    "AIM_former_collision_id": "344592",
+    "feasibility_rank": 1,
+    "production_shaped_rank": null,
+    "CPS_hard_negative_visible_count": 0,
+    "AIM_hard_negative_visible_count": 0,
+    "case_sensitive_ordinary_word_leakage": 0
+  },
+  "explanations": {
+    "top_10_outputs_checked": 490,
+    "missing": 0,
+    "semantic_score_or_similarity_claims": 0,
+    "private_profile_cv_or_orcid_leakage": 0,
+    "source_representation_collision_found": 1
+  },
+  "performance": {
+    "cold_first_query_ms": 1210.8567,
+    "warm_p50_ms": 650.7613,
+    "warm_p95_ms": 854.2538,
+    "maximum_ms": 1210.8567,
+    "provider_timeout_count": 0,
+    "provider_error_count_final_run": 0,
+    "payload_p95_bytes": 437650,
+    "initial_page_uncompressed_delta_bytes": 31992,
+    "lazy_vector_download_bytes": 3397632,
+    "lazy_manifest_download_bytes": 431976
+  },
+  "cost": {
+    "final_evaluation_embedding_requests": 52,
+    "final_evaluation_rerank_requests": 49,
+    "final_evaluation_documents_reranked": 12832,
+    "final_evaluation_embedding_tokens": 194,
+    "final_evaluation_rerank_tokens": 3113921,
+    "final_evaluation_estimated_paid_cost_usd": 0.1557,
+    "estimated_paid_cost_per_1000_searches_usd": 2.994229,
+    "billing_or_deployment_authorized": false
+  },
+  "tests": [
+    {"gate": "browser", "result": "166 passed", "exit_code": 0},
+    {"gate": "hybrid_and_proxy_focused", "result": "8 passed", "exit_code": 0},
+    {"gate": "focused_python_unittest", "result": "43 passed", "exit_code": 0},
+    {"gate": "focused_python_pytest", "result": "37 passed, 24 subtests passed", "exit_code": 0},
+    {"gate": "live_product_python", "result": "756 passed", "exit_code": 0},
+    {"gate": "browser_python_config_parity", "result": "passed", "exit_code": 0},
+    {"gate": "parent_child_invariant", "result": "50 cases, byte-identical, cardinality-invariant", "exit_code": 0},
+    {"gate": "hermetic_no_drift", "result": "22 artifacts unchanged", "exit_code": 0},
+    {"gate": "size_budget", "result": "passed in focused Python suites", "exit_code": 0}
+  ],
+  "phase_boundary": {
+    "phase4c_executed_or_inspected": false,
+    "phase4c_results_artifact_exists": false,
+    "phase4c_truth_artifact_exists": false,
+    "phase4c_authorized": false,
+    "main_unchanged": true,
+    "production_search_v2": false,
+    "deployed": false
+  }
+}
