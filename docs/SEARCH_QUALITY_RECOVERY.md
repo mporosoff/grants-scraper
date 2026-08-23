@@ -445,3 +445,17 @@ Native CPU performance at depth 50 measured 0.828 seconds p50 and 1.050 seconds 
 Detailed evidence is in `evaluation/search_v2_local_minilm_results.json`, `evaluation/search_v2_local_minilm_runtime_benchmark.json`, `evaluation/search_v2_local_minilm_model_receipt.json`, and `evaluation/search_v2_local_minilm_decision.json`. Phase 4C remains sealed and unexecuted.
 
 **LOCAL MINILM RERANKING DOES NOT JUSTIFY ITS COST/WEIGHT — DISCARD THIS PATH**
+
+## Voyage reranker API feasibility
+
+A final development-only experiment tested `rerank-2.5` through Voyage's ordinary real-time API without changing the frozen BM25F baseline or production search behavior. The harness used the same 52 spent queries and 65 required anchors as the MiniLM experiment, retrieved up to 200 BM25F parent/child passages per query, sent only bounded public indexed text, used one fixed generic complete-intent instruction, and retained only the strongest reranked passage per parent. Semantic score never created primary admission evidence. No private researcher data, model weights, browser dependency, backend, Worker, secret, scientific mapping, or generated program metadata was added.
+
+Voyage improved ordering among reachable candidates: required-anchor Recall@10 rose from 0.477 for BM25F and 0.538 for MiniLM to 0.615. Recall@50 rose from 0.600 to 0.662, and judged-pair Precision@10 rose from 0.492 to 0.714. Eleven required anchors entered the top ten and two left it. Voyage promoted three of the 16 audited vocabulary-gap anchors into the top ten beyond BM25F, including CPS for dysprosium recovery, Genesis for critical-metal leaching, and SCALEUP for grid-scale storage scale-up. This was genuine semantic-paraphrase recovery within the candidate pool.
+
+The end-to-end quality bar nevertheless failed. Only 43 of 65 required anchors were present in the frozen depth-200 candidate pool, establishing a maximum possible Recall@50 of 0.662 versus the pre-registered approximate 0.85 screen. Seven of the 16 vocabulary-gap anchors were absent from the candidate pool. Voyage therefore reached the pool ceiling but could not solve discovery. It also newly promoted one known irrelevant acronym collision to rank 2 on a hard negative. Historical truth remains sparse over semantic top tens, with 445 Voyage pairs unjudged; no new large adjudication was used to rescue the result.
+
+The run completed 52 successful scoring requests after two recorded pre-scoring HTTP 429 attempts during rate-limit propagation, reranked 6,653 passages, and reported 2,055,171 tokens. At Voyage's published paid price the nominal cost is $0.102759. This usage is about 1.03% of the published 200-million-token free allocation, although the rerank response does not expose the account's remaining free balance. API latency measured 0.385 seconds p50 and 0.513 seconds p95; BM25F plus API measured 0.435 seconds p50 and 0.640 seconds p95. Browser asset size changed by zero bytes.
+
+Detailed results are in `evaluation/search_v2_voyage_reranker_results.json`, the request/usage receipt is `evaluation/search_v2_voyage_api_receipt.json`, the candidate ceiling is `evaluation/search_v2_voyage_candidate_ceiling.json`, and the decision is `evaluation/search_v2_voyage_reranker_decision.json`. Phase 4C remains sealed and unexecuted.
+
+**VOYAGE RERANKING DOES NOT CLEAR THE QUALITY BAR — DISCARD API RERANKING**
