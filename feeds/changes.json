@@ -1,8 +1,399 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-22T10:47:45Z",
+  "generated_at": "2026-08-23T10:45:54Z",
   "retention_days": 90,
   "events": [
+    {
+      "id": "fd84d03a2089b89aa13e",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-23T10:41:08.474501Z",
+      "opportunity_id": "363599",
+      "detail": "Deadline 2026-09-22",
+      "record": {
+        "opportunity_id": "363599",
+        "opportunity_number": "O-BJS-2026-172687",
+        "title": "BJS FY 2026 State Justice Statistics Program for Statistical Analysis Centers",
+        "agency": "Bureau of Justice Statistics",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-14",
+        "close_date": "2026-09-22",
+        "last_updated": "2026-08-14",
+        "version": "Synopsis 3",
+        "topic_areas": [],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": 225000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363599",
+        "funding_opportunity_url": "https://www.ojp.gov/funding/docs/bjs-2026-172687.pdf",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-22"
+    },
+    {
+      "id": "dd4550e28405e7c4c035",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-23T10:41:08.474501Z",
+      "opportunity_id": "362329",
+      "detail": "Deadline 2026-09-22",
+      "record": {
+        "opportunity_id": "362329",
+        "opportunity_number": "HT942526PRMRPPCTA",
+        "title": "DoW Peer Reviewed Medical, Platform Clinical Translation Award",
+        "agency": "Defense Health Agency Contracting Activity - DHACA",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-05-08",
+        "close_date": "2026-09-22",
+        "last_updated": "2026-05-14",
+        "version": "Synopsis 1",
+        "topic_areas": [],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement",
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/362329",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/351894"
+      },
+      "deadline": "2026-09-22"
+    },
+    {
+      "id": "cc71733e7ac4763db3a8",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-23T10:41:08.474501Z",
+      "opportunity_id": "362975",
+      "detail": "Deadline 2026-09-22",
+      "record": {
+        "opportunity_id": "362975",
+        "opportunity_number": "HT942526NFRPIIRA",
+        "title": "DoW Neurofibromatosis Investigator-Initiated Research Award",
+        "agency": "Defense Health Agency Contracting Activity - DHACA",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-06-25",
+        "close_date": "2026-09-22",
+        "last_updated": "2026-06-25",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Biology and biotechnology"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/362975",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353402"
+      },
+      "deadline": "2026-09-22"
+    },
+    {
+      "id": "cb8c0a89a4aebf567581",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-23T10:41:08.474501Z",
+      "opportunity_id": "362974",
+      "detail": "Deadline 2026-09-22",
+      "record": {
+        "opportunity_id": "362974",
+        "opportunity_number": "HT942526NFRPNFRASA",
+        "title": "DoW Neurofibromatosis Research Academy - Scholar Award",
+        "agency": "Defense Health Agency Contracting Activity - DHACA",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-06-25",
+        "close_date": "2026-09-22",
+        "last_updated": "2026-06-25",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce",
+          "Environmental science"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/362974",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353400"
+      },
+      "deadline": "2026-09-22"
+    },
+    {
+      "id": "ba021c77186536417ccd",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-23T10:41:08.474501Z",
+      "opportunity_id": "302273",
+      "detail": "Deadline 2026-09-22",
+      "record": {
+        "opportunity_id": "302273",
+        "opportunity_number": "PD-18-7970",
+        "title": "Combinatorics",
+        "agency": "U.S. National Science Foundation",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2018-03-29",
+        "close_date": "2026-09-22",
+        "last_updated": "2025-10-09",
+        "version": "Synopsis 14",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/302273",
+        "funding_opportunity_url": "https://www.nsf.gov/funding/pgm_summ.jsp?pims_id=503570",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-22"
+    },
+    {
+      "id": "7b4ef245436105aff061",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-23T10:41:08.474501Z",
+      "opportunity_id": "362321",
+      "detail": "Deadline 2026-09-22",
+      "record": {
+        "opportunity_id": "362321",
+        "opportunity_number": "HT942526PRMRPCTA",
+        "title": "DoW Peer Reviewed Medical, Clinical Trial Award",
+        "agency": "Defense Health Agency Contracting Activity - DHACA",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-05-08",
+        "close_date": "2026-09-22",
+        "last_updated": "2026-05-14",
+        "version": "Synopsis 1",
+        "topic_areas": [],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement",
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/362321",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/351884"
+      },
+      "deadline": "2026-09-22"
+    },
+    {
+      "id": "76943f584f7e0b541459",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-23T10:41:08.474501Z",
+      "opportunity_id": "362973",
+      "detail": "Deadline 2026-09-22",
+      "record": {
+        "opportunity_id": "362973",
+        "opportunity_number": "HT942526NFRPSIA",
+        "title": "DoW Neurofibromatosis Synergistic Idea Award",
+        "agency": "Defense Health Agency Contracting Activity - DHACA",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-06-25",
+        "close_date": "2026-09-22",
+        "last_updated": "2026-06-25",
+        "version": "Synopsis 1",
+        "topic_areas": [],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/362973",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353398"
+      },
+      "deadline": "2026-09-22"
+    },
+    {
+      "id": "41f86e9936224083072f",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-23T10:41:08.474501Z",
+      "opportunity_id": "302270",
+      "detail": "Deadline 2026-09-22",
+      "record": {
+        "opportunity_id": "302270",
+        "opportunity_number": "PD-18-1268",
+        "title": "Foundations",
+        "agency": "U.S. National Science Foundation",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2018-03-29",
+        "close_date": "2026-09-22",
+        "last_updated": "2025-10-09",
+        "version": "Synopsis 13",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/302270",
+        "funding_opportunity_url": "https://www.nsf.gov/funding/pgm_summ.jsp?pims_id=5548",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-22"
+    },
+    {
+      "id": "1ed4ca5b7f97c37247dd",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-23T10:41:08.474501Z",
+      "opportunity_id": "362976",
+      "detail": "Deadline 2026-09-22",
+      "record": {
+        "opportunity_id": "362976",
+        "opportunity_number": "HT942526NFRPEHDA",
+        "title": "DoW Neurofibromatosis Exploration-Hypothesis Development Award",
+        "agency": "Defense Health Agency Contracting Activity - DHACA",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-06-25",
+        "close_date": "2026-09-22",
+        "last_updated": "2026-06-25",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Technology development"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/362976",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353403"
+      },
+      "deadline": "2026-09-22"
+    },
+    {
+      "id": "05196c6a9dcb94044956",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-23T10:41:08.474501Z",
+      "opportunity_id": "363302",
+      "detail": "Deadline 2026-09-22",
+      "record": {
+        "opportunity_id": "363302",
+        "opportunity_number": "DE-FOA-0003634",
+        "title": "Advancing Oil and Natural Gas Production and Delivery",
+        "agency": "National Energy Technology Laboratory",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-23",
+        "close_date": "2026-09-22",
+        "last_updated": "2026-07-23",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Energy",
+          "Manufacturing",
+          "Artificial intelligence and machine learning",
+          "Data science",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 1,
+        "award_ceiling": 28000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363302",
+        "funding_opportunity_url": "https://www.fedconnect.net",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354120"
+      },
+      "deadline": "2026-09-22"
+    },
     {
       "id": "fcac550db3b880842d62",
       "type": "new",

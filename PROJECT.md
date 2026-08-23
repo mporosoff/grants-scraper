@@ -72,7 +72,7 @@ verified. Degradation exits visibly and opens or updates an owner-facing GitHub
 issue. UR InfoReady is a disabled shell pending a stable permissioned route.
 
 <!-- catalog-summary:start -->
-The August 22, 2026 build contains 1,455 open or current forecasted funding
+The August 23, 2026 build contains 1,455 open or current forecasted funding
 opportunities (1,143 posted and 312 forecasted) rather than the former 48-record
 engineering shortlist. It contains no record with a deadline before the catalog date.
 Current published sources are ARPA-H (10), Grants.gov (1,378), NASA ROSES (2), NYSERDA
@@ -571,7 +571,7 @@ presented as the FOA.
 ### Current evidence baseline
 
 <!-- catalog-evidence:start -->
-The August 22, 2026 catalog contains 1,455 current posted or forecasted opportunities:
+The August 23, 2026 catalog contains 1,455 current posted or forecasted opportunities:
 
 - 346 have a defensible direct announcement attachment (227 high confidence, 119 medium
   confidence);
