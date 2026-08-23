@@ -812,3 +812,71 @@ in `evaluation/search_v2_phase4c_test_runs.json`, and the release decision is in
 deployment or merge occurred, and `main` remains unchanged.
 
 **PHASE 4C PASSED — PHASE 5 AUTHORIZED**
+
+## Phase 5 final release
+
+Funding Finder v1.2.0 was reconciled with current `origin/main`, rebuilt against
+the refreshed public catalog, merged, deployed, and verified on the live GitHub
+Pages site. The release preserves the accepted product contract: atomic local
+evidence produces **Strong matches**, while BM25F plus lazy `voyage-4-lite`
+vectors, reciprocal-rank fusion, acronym/identifier safeguards, and
+`rerank-2.5` produce up to 12 deduplicated **Potential matches**. Team Match
+uses the same corpus, vector, proxy, and hybrid client once per recomputation;
+its existing every-researcher evidence gate remains authoritative.
+
+The release reconciled main at
+`b37f041b6c1c412b24e6a276561feed777400ca0` and merged the release branch in
+`f74c35b69df8fd6e81ee2d22571d5f05ff91a75e`. The post-merge catalog refresh
+`1e0252ae29ae00f492b71f85cd288a6e05dc59db` is authoritative. Its incremental
+vector rebuild retained 1,655 byte-identical passages, embedded four changed
+passages, removed four stale passages, and produced 1,659 float16 vectors. The
+final corpus SHA-256 is
+`7f649d8036d5003c2836a4ca2cfea5a62e1e52296c8a66d6f7498a9a5baed9c1` and the
+vector SHA-256 is
+`697c84f76e83107e290df9b27168cd14fe6592bff2ae657b22d8eb9ee25fb8c2`.
+
+The existing Cloudflare Worker is live at
+`https://funding-finder-voyage-search.urochestercheme.workers.dev/`, version
+`0e302778-b722-4d83-92fc-68722607460d`. `VOYAGE_API_KEY` is stored only as an
+encrypted Worker secret. Production-origin CORS, bounded schemas, public-passage
+hash allowlisting, invalid-request rejection, and provider-error translation
+all pass. The production flow contains no Workers AI judge, browser credential,
+query-time LLM classification, application-added query logging, or private
+researcher/profile text.
+
+Live verification found and repaired two deployment-boundary issues without
+changing retrieval behavior. First, the lazy subtopic sidecar used a stale
+fixed cache key after the catalog refresh; it now derives its key from the
+loaded catalog generation. Second, Funding Finder's CSP omitted `'self'` from
+`connect-src`, preventing same-origin manifest/vector fetches; same-origin
+connections are now explicitly allowed while all external restrictions remain
+unchanged. Regression tests pin both contracts.
+
+On the final live site, `rare earth recycling` returned zero Strong and 12
+Potential results headed by EWRE, Genesis, and Chemical Process Systems;
+`rural obstetric care networks` returned Rural MOMS as the sole Strong result
+plus 12 Potential results; exact `DE-FOA-0003612` returned Genesis as one Strong
+result; and `CFD` returned zero results. Strong and Potential explanations used
+only their respective source-backed passages. Live Team Match verified the Add
+Researcher picker, department/saved/manual/ORCID paths, duplicate prevention,
+four-person maximum, removal restoration, faculty non-editability, custom
+editing, full-team evidence, exact Funding Finder links, neutral terminology,
+and the 390-pixel menu with `aria-current` but no visible “Current” badge.
+
+The final non-holdout gates pass: 188 browser tests; 62 focused Python tests;
+760 live-product Python tests; the 50-case parent/child invariant; the 37-query
+historical baseline with zero top-ten churn; the 42-pair explanation frame with
+zero unsupported or private-text cases; browser/Python configuration parity;
+the vector/corpus handshake; size gates; provider/vector/proxy failure
+contracts; and the 22-artifact no-drift rebuild. The final spent-development
+gate remains at Strong Precision@10 1.000, combined Recall@20 0.908, combined
+Recall@50 0.954, and zero Strong results on zero-anchor queries. Phase 4C was
+not rerun; its raw SHA-256 remains
+`c8bd5a3b105963b826f406227ca6a0d4664cf80827f4ce2d5adac550088707ab`.
+
+Production fallback is configuration-only: set `productionFlags.searchV2` to
+false and clear `productionHybridProxy`. Funding Finder and Team Match then
+remain locally usable, refreshed catalog/evidence/feed data stays in place, and
+the Worker may remain deployed but unused or be disabled separately.
+
+**V1.2.0 DEPLOYED AND LIVE-VERIFIED — SEARCH QUALITY AND TEAM MATCH UPDATE COMPLETE**
