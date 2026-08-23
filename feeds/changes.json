@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-23T10:45:54Z",
+  "generated_at": "2026-08-23T21:32:17Z",
   "retention_days": 90,
   "events": [
     {
       "id": "fd84d03a2089b89aa13e",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-23T10:41:08.474501Z",
+      "changed_at": "2026-08-23T21:26:24.185079Z",
       "opportunity_id": "363599",
       "detail": "Deadline 2026-09-22",
       "record": {
@@ -44,7 +44,7 @@
       "id": "dd4550e28405e7c4c035",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-23T10:41:08.474501Z",
+      "changed_at": "2026-08-23T21:26:24.185079Z",
       "opportunity_id": "362329",
       "detail": "Deadline 2026-09-22",
       "record": {
@@ -82,7 +82,7 @@
       "id": "cc71733e7ac4763db3a8",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-23T10:41:08.474501Z",
+      "changed_at": "2026-08-23T21:26:24.185079Z",
       "opportunity_id": "362975",
       "detail": "Deadline 2026-09-22",
       "record": {
@@ -121,7 +121,7 @@
       "id": "cb8c0a89a4aebf567581",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-23T10:41:08.474501Z",
+      "changed_at": "2026-08-23T21:26:24.185079Z",
       "opportunity_id": "362974",
       "detail": "Deadline 2026-09-22",
       "record": {
@@ -161,7 +161,7 @@
       "id": "ba021c77186536417ccd",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-23T10:41:08.474501Z",
+      "changed_at": "2026-08-23T21:26:24.185079Z",
       "opportunity_id": "302273",
       "detail": "Deadline 2026-09-22",
       "record": {
@@ -201,7 +201,7 @@
       "id": "7b4ef245436105aff061",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-23T10:41:08.474501Z",
+      "changed_at": "2026-08-23T21:26:24.185079Z",
       "opportunity_id": "362321",
       "detail": "Deadline 2026-09-22",
       "record": {
@@ -239,7 +239,7 @@
       "id": "76943f584f7e0b541459",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-23T10:41:08.474501Z",
+      "changed_at": "2026-08-23T21:26:24.185079Z",
       "opportunity_id": "362973",
       "detail": "Deadline 2026-09-22",
       "record": {
@@ -276,7 +276,7 @@
       "id": "41f86e9936224083072f",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-23T10:41:08.474501Z",
+      "changed_at": "2026-08-23T21:26:24.185079Z",
       "opportunity_id": "302270",
       "detail": "Deadline 2026-09-22",
       "record": {
@@ -316,7 +316,7 @@
       "id": "1ed4ca5b7f97c37247dd",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-23T10:41:08.474501Z",
+      "changed_at": "2026-08-23T21:26:24.185079Z",
       "opportunity_id": "362976",
       "detail": "Deadline 2026-09-22",
       "record": {
@@ -355,7 +355,7 @@
       "id": "05196c6a9dcb94044956",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-23T10:41:08.474501Z",
+      "changed_at": "2026-08-23T21:26:24.185079Z",
       "opportunity_id": "363302",
       "detail": "Deadline 2026-09-22",
       "record": {

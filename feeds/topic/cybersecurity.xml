@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-08-23T10:45:48Z</updated>
+  <updated>2026-08-23T21:32:08Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -24,8 +24,6 @@
     <id>urn:funding-finder:grants-gov:363662</id>
     <updated>2026-08-19T00:00:00Z</updated>
     <author><name>Assistant Secretary for Preparedness and Response</name></author>
-    <category term="Separations and membranes"/>
-    <category term="Materials science"/>
     <category term="Cybersecurity"/>
     <summary>Assistant Secretary for Preparedness and Response | Closes 2026-09-18 | A trauma system is, “…an organized, inclusive approach to facilitating and coordinating a multidisciplinary system response to severely injured patients.”[14] Coordination across prehospital entities (e.g., EMS) and hospitals signal an effective trauma system, where patients can get the right level of care they need. Access to trauma care in the United States is inconsistent. For example, 1 in 3 A…</summary>
   </entry>
@@ -88,8 +86,6 @@
     <updated>2026-08-17T00:00:00Z</updated>
     <author><name>DOT Federal Highway Administration</name></author>
     <category term="Transportation"/>
-    <category term="Separations and membranes"/>
-    <category term="Materials science"/>
     <category term="Cybersecurity"/>
     <summary>DOT Federal Highway Administration | Closes 2026-09-16 | The purpose of the ADCMS Competitive Grant Program is to provide incentives for eligible applicants to promote, implement, deploy, demonstrate, showcase, support, and document the application of new technology in construction projects at a program level. Eligible applicants under the ADCMS Competitive Grant Program are State Departments of Transportation (State DOT), including the District of Colu…</summary>
   </entry>
@@ -274,8 +270,6 @@
     <author><name>Centers for Disease Control-GHC</name></author>
     <category term="Education and workforce"/>
     <category term="Public health"/>
-    <category term="Separations and membranes"/>
-    <category term="Materials science"/>
     <category term="Cybersecurity"/>
     <summary>Centers for Disease Control-GHC | Closes 2026-10-02 | The CDC office in Ethiopia was established in 2001 and works closely with the Ministry of Health (MOH), the Ethiopian Public Health Institute (EPHI), and other Government of Ethiopia (GOE) agencies to develop the capacity to prevent, detect, and respond to priority diseases. In 2014, CDC began coordination with the GOE to build Ethiopia's capacity to achieve the International Health Regulation (IH…</summary>
   </entry>

@@ -20332,7 +20332,6 @@ globalThis.SUBTOPIC_CATALOG={
    "segmentation_method": "numbered",
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_children",
    "subtopics": []
   },
   "360380": {
@@ -39235,6 +39234,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363685": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363689": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
