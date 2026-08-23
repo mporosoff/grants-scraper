@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-23T20:10:38.720Z",
+  "generated_at": "2026-08-23T21:12:00.614Z",
   "status": "spent_development_product_contract_evaluation_complete",
   "product_contract": {
     "strong": "Existing conservative local deterministic evidence matcher, unchanged.",
@@ -34,19 +34,19 @@
         "top_10_reviewed_primary_count": 50,
         "top_10_known_irrelevant_count": 5,
         "top_10_reviewed_non_primary_count": 15,
-        "top_10_unreviewed_count": 325,
-        "reviewed_pair_count": 167,
+        "top_10_unreviewed_count": 324,
+        "reviewed_pair_count": 168,
         "reviewed_primary_count": 51,
         "known_irrelevant_count": 5,
         "reviewed_non_primary_count": 16,
-        "unreviewed_count": 421,
+        "unreviewed_count": 420,
         "zero_anchor_displayed_count": 120
       },
       "combined": {
         "required_recall_at_10": 0.861538,
         "required_recall_at_20": 0.907692,
         "required_recall_at_50": 0.953846,
-        "query_average_ndcg_at_10": 0.773995,
+        "query_average_ndcg_at_10": 0.770203,
         "deduplication_failures": 0,
         "required_anchor_misses_at_50": [
           {
@@ -204,19 +204,19 @@
           "top_10_reviewed_primary_count": 28,
           "top_10_known_irrelevant_count": 0,
           "top_10_reviewed_non_primary_count": 0,
-          "top_10_unreviewed_count": 91,
-          "reviewed_pair_count": 30,
+          "top_10_unreviewed_count": 90,
+          "reviewed_pair_count": 31,
           "reviewed_primary_count": 29,
           "known_irrelevant_count": 0,
           "reviewed_non_primary_count": 0,
-          "unreviewed_count": 114,
+          "unreviewed_count": 113,
           "zero_anchor_displayed_count": 0
         },
         "combined": {
           "required_recall_at_10": 0.870968,
           "required_recall_at_20": 0.935484,
           "required_recall_at_50": 0.967742,
-          "query_average_ndcg_at_10": 0.759273,
+          "query_average_ndcg_at_10": 0.746634,
           "deduplication_failures": 0,
           "required_anchor_misses_at_50": [
             {
@@ -504,16 +504,16 @@
   },
   "performance": {
     "query_count": 52,
-    "cold_first_query_ms": 1179.6712,
-    "warm_p50_ms": 638.4073,
-    "warm_p95_ms": 818.0092,
-    "maximum_ms": 1179.6712,
-    "strong_local_p50_ms": 34.6081,
-    "strong_local_p95_ms": 84.8,
-    "proxy_p50_ms": 272.1886,
-    "proxy_p95_ms": 562.7514,
+    "cold_first_query_ms": 1307.6215,
+    "warm_p50_ms": 653.3957,
+    "warm_p95_ms": 942.327,
+    "maximum_ms": 1552.2799,
+    "strong_local_p50_ms": 38.4593,
+    "strong_local_p95_ms": 90.5056,
+    "proxy_p50_ms": 327.1804,
+    "proxy_p95_ms": 579.9102,
     "payload_p50_bytes": 53,
-    "payload_p95_bytes": 437650,
+    "payload_p95_bytes": 437508,
     "error_count": 0,
     "timeout_count": 0
   },
@@ -521,14 +521,14 @@
     "embedding_requests": 52,
     "rerank_requests": 49,
     "embedding_tokens": 194,
-    "rerank_tokens": 3111731,
+    "rerank_tokens": 3115261,
     "fallbacks": 0,
     "failures": 0,
-    "last_latency_ms": 558.9809999999998,
+    "last_latency_ms": 707.4115999999995,
     "request_count": 101,
     "documents_reranked": 12831,
-    "estimated_paid_cost_usd": 0.15559,
-    "estimated_paid_cost_per_1000_searches_usd": 2.992124
+    "estimated_paid_cost_usd": 0.155767,
+    "estimated_paid_cost_per_1000_searches_usd": 2.995518
   },
   "safety": {
     "population": "two spent holdouts only",
@@ -540,15 +540,15 @@
   },
   "static_assets": {
     "passage_count": 1659,
-    "corpus_sha256": "7f649d8036d5003c2836a4ca2cfea5a62e1e52296c8a66d6f7498a9a5baed9c1",
-    "vector_sha256": "697c84f76e83107e290df9b27168cd14fe6592bff2ae657b22d8eb9ee25fb8c2",
+    "corpus_sha256": "06d93e73cb9741c859aa6cf643f4f1e6c1b2feef7b995586b55b3943405cb727",
+    "vector_sha256": "1ef8e7f9fa68e5523f7b9f8ee93bd08fa70aba0ed5bfd88992a04156d1c4dc09",
     "vector_bytes": 3397632
   },
   "git_state": {
     "branch": "search-quality-v2",
-    "head": "94e8a4fb233277e6d236273c9e9670fceebd5f45",
+    "head": "ec2af257981e33657e417a1eee36b08daefe639f",
     "main": "ef7a0642f6ce66828f01ee280bd5993f66029b2f",
-    "origin_main": "ef7a0642f6ce66828f01ee280bd5993f66029b2f"
+    "origin_main": "b37f041b6c1c412b24e6a276561feed777400ca0"
   },
   "rows": [
     {
@@ -829,8 +829,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 54.7135,
-        "hybrid_total": 1179.6712
+        "strong_local": 76.5344,
+        "hybrid_total": 1307.6215
       }
     },
     {
@@ -1111,8 +1111,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 27.1,
-        "hybrid_total": 657.2974
+        "strong_local": 38.232,
+        "hybrid_total": 775.5929
       }
     },
     {
@@ -1371,10 +1371,10 @@
           "359280",
           "361820",
           "363210",
+          "363396",
           "363449",
           "358411",
-          "363050",
-          "338558"
+          "363050"
         ],
         "required_ranks": {
           "360678": 9,
@@ -1393,8 +1393,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 19.3394,
-        "hybrid_total": 745.0565
+        "strong_local": 20.5798,
+        "hybrid_total": 850.3501
       }
     },
     {
@@ -1431,28 +1431,28 @@
       },
       "potential": {
         "ids": [
+          "363604",
           "344592",
+          "363628",
+          "363662",
           "361526",
           "363618",
           "363684",
           "349655",
+          "360333",
           "362061",
           "357609",
-          "362900",
-          "363616",
-          "nsf-cbet:PD-26-370Y",
-          "363215",
-          "351715"
+          "362900"
         ],
-        "available_after_deduplication": 120,
+        "available_after_deduplication": 123,
         "review": {
-          "reviewed_count": 2,
+          "reviewed_count": 3,
           "reviewed_primary_count": 2,
           "reviewed_broader_count": 0,
           "known_irrelevant_count": 0,
           "reviewed_non_primary_count": 0,
-          "unreviewed_count": 10,
-          "precision_over_reviewed": 1,
+          "unreviewed_count": 9,
+          "precision_over_reviewed": 0.666667,
           "known_irrelevant_ids": [],
           "reviewed_non_primary_ids": []
         },
@@ -1460,6 +1460,17 @@
           {
             "rank": 1,
             "hybrid_rank_before_deduplication": 1,
+            "id": "363604",
+            "title": "Strengthening Community-Backed Governance to Advance Stability and Peace in Burma",
+            "passage_id": "parent:363604",
+            "passage_kind": "parent",
+            "source_field": "parent_description",
+            "source_excerpt": "The U.S. Department of State, Bureau of Democracy, Human Rights, and Labor (DRL) announces an open competition for organizations interested in submitting applications for a program to advance peace process prospects by positioning Ethnic Resistance Organizations (EROs), civil society, and state-level actors as credible, unified, and community-backed…",
+            "existing_truth": "not_primary_relevant"
+          },
+          {
+            "rank": 2,
+            "hybrid_rank_before_deduplication": 2,
             "id": "344592",
             "title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
             "passage_id": "child:344592:ab-0006",
@@ -1469,8 +1480,30 @@
             "existing_truth": null
           },
           {
-            "rank": 2,
-            "hybrid_rank_before_deduplication": 2,
+            "rank": 3,
+            "hybrid_rank_before_deduplication": 3,
+            "id": "363628",
+            "title": "FY25 and FY26 Advanced Digital Construction Management Systems (ADCMS)",
+            "passage_id": "parent:363628",
+            "passage_kind": "parent",
+            "source_field": "parent_description",
+            "source_excerpt": "The purpose of the ADCMS Competitive Grant Program is to provide incentives for eligible applicants to promote, implement, deploy, demonstrate, showcase, support, and document the application of new technology in construction projects at a program level. Eligible applicants under the ADCMS Competitive Grant Program are State Departments of Transportation…",
+            "existing_truth": null
+          },
+          {
+            "rank": 4,
+            "hybrid_rank_before_deduplication": 4,
+            "id": "363662",
+            "title": "Trauma Care Readiness and Coordination Cooperative Agreement",
+            "passage_id": "parent:363662",
+            "passage_kind": "parent",
+            "source_field": "parent_description",
+            "source_excerpt": "A trauma system is, “…an organized, inclusive approach to facilitating and coordinating a multidisciplinary system response to severely injured patients.”[14] Coordination across prehospital entities (e.g., EMS) and hospitals signal an effective trauma system, where patients can get the right level of care they need. Access to trauma care in the United…",
+            "existing_truth": null
+          },
+          {
+            "rank": 5,
+            "hybrid_rank_before_deduplication": 5,
             "id": "361526",
             "title": "The Genesis Mission: Transforming Science and Energy with AI",
             "passage_id": "child:361526:d-3",
@@ -1480,8 +1513,8 @@
             "existing_truth": "primary_relevant"
           },
           {
-            "rank": 3,
-            "hybrid_rank_before_deduplication": 3,
+            "rank": 6,
+            "hybrid_rank_before_deduplication": 6,
             "id": "363618",
             "title": "MPS Materials Research Programs (MPS Materials)",
             "passage_id": "parent:363618",
@@ -1491,8 +1524,8 @@
             "existing_truth": null
           },
           {
-            "rank": 4,
-            "hybrid_rank_before_deduplication": 4,
+            "rank": 7,
+            "hybrid_rank_before_deduplication": 7,
             "id": "363684",
             "title": "Geosciences Core Research: Atmospheric, Geospace, Earth and Ocean Sciences (GEO Core)",
             "passage_id": "parent:363684",
@@ -1502,8 +1535,8 @@
             "existing_truth": null
           },
           {
-            "rank": 5,
-            "hybrid_rank_before_deduplication": 5,
+            "rank": 8,
+            "hybrid_rank_before_deduplication": 8,
             "id": "349655",
             "title": "Division of Materials Research: Topical Materials Research Programs",
             "passage_id": "parent:349655",
@@ -1513,8 +1546,19 @@
             "existing_truth": null
           },
           {
-            "rank": 6,
-            "hybrid_rank_before_deduplication": 6,
+            "rank": 9,
+            "hybrid_rank_before_deduplication": 9,
+            "id": "360333",
+            "title": "Expanding global health security through local partnerships in Ethiopia",
+            "passage_id": "parent:360333",
+            "passage_kind": "parent",
+            "source_field": "parent_description",
+            "source_excerpt": "The CDC office in Ethiopia was established in 2001 and works closely with the Ministry of Health (MOH), the Ethiopian Public Health Institute (EPHI), and other Government of Ethiopia (GOE) agencies to develop the capacity to prevent, detect, and respond to priority diseases. In 2014, CDC began coordination with the GOE to build Ethiopia's capacity to…",
+            "existing_truth": null
+          },
+          {
+            "rank": 10,
+            "hybrid_rank_before_deduplication": 10,
             "id": "362061",
             "title": "Chemical Process Systems (CPS)",
             "passage_id": "parent:362061",
@@ -1524,8 +1568,8 @@
             "existing_truth": "primary_relevant"
           },
           {
-            "rank": 7,
-            "hybrid_rank_before_deduplication": 7,
+            "rank": 11,
+            "hybrid_rank_before_deduplication": 11,
             "id": "357609",
             "title": "Chemical Evolution of the Solid Earth and Volcanology",
             "passage_id": "parent:357609",
@@ -1535,8 +1579,8 @@
             "existing_truth": null
           },
           {
-            "rank": 8,
-            "hybrid_rank_before_deduplication": 8,
+            "rank": 12,
+            "hybrid_rank_before_deduplication": 12,
             "id": "362900",
             "title": "The 2027 YSEALI Regional Workshop: Securing Supply Chains",
             "passage_id": "parent:362900",
@@ -1544,74 +1588,34 @@
             "source_field": "parent_description",
             "source_excerpt": "Project Background, Goals, and Objectives: In an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals…",
             "existing_truth": null
-          },
-          {
-            "rank": 9,
-            "hybrid_rank_before_deduplication": 9,
-            "id": "363616",
-            "title": "Engineering (ENG): Chemical, Bioengineering, Energy, and Transport Systems (CBET)",
-            "passage_id": "parent:363616",
-            "passage_kind": "parent",
-            "source_field": "parent_description",
-            "source_excerpt": "The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational engineering research for chemical, bioengineering, energy, and transport systems through the following programs: The Chemical Process Systems (CPS) program supports foundational engineering research in chemical and biochemical processes for chemicals, fuels,…",
-            "existing_truth": null
-          },
-          {
-            "rank": 10,
-            "hybrid_rank_before_deduplication": 10,
-            "id": "nsf-cbet:PD-26-370Y",
-            "title": "Energy, Water, and Resource Engineering (EWRE)",
-            "passage_id": "parent:nsf-cbet:PD-26-370Y",
-            "passage_kind": "parent",
-            "source_field": "parent_description",
-            "source_excerpt": "The Energy, Water, and Resource Engineering (EWRE) program supports fundamental research to advance energy, water, and resource management and to safeguard health. Better use of domestic resources will make U.S. manufacturing, energy and water systems more efficient and secure. EWRE supports research that creates domestic sources of energy, advances water…",
-            "existing_truth": null
-          },
-          {
-            "rank": 11,
-            "hybrid_rank_before_deduplication": 11,
-            "id": "363215",
-            "title": "Ensuring “Pro-American Worker” Critical Minerals Supply Chain in the Western Hemisphere",
-            "passage_id": "parent:363215",
-            "passage_kind": "parent",
-            "source_field": "parent_description",
-            "source_excerpt": "Questions regarding this Funding Opportunity Announcement (FOA) may be emailed to OGM_ILAB@dol.gov.",
-            "existing_truth": null
-          },
-          {
-            "rank": 12,
-            "hybrid_rank_before_deduplication": 12,
-            "id": "351715",
-            "title": "ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)",
-            "passage_id": "parent:351715",
-            "passage_kind": "parent",
-            "source_field": "parent_description",
-            "source_excerpt": "Plasma science is a transdisciplinary field of research where fundamental studies in many disciplines, including plasma physics, plasma chemistry, materials science, and space science, come together to advance knowledge for discovery and technological innovation. The primary goal of the ECosystem for Leading Innovation in Plasma Science and Engineering…",
-            "existing_truth": null
           }
         ]
       },
       "combined": {
         "visible_ids": [
+          "363604",
           "344592",
+          "363628",
+          "363662",
           "361526",
           "363618",
           "363684",
           "349655",
+          "360333",
           "362061",
           "357609",
-          "362900",
-          "363616",
-          "nsf-cbet:PD-26-370Y",
-          "363215",
-          "351715"
+          "362900"
         ],
         "internal_top_50": [
+          "363604",
           "344592",
+          "363628",
+          "363662",
           "361526",
           "363618",
           "363684",
           "349655",
+          "360333",
           "362061",
           "357609",
           "362900",
@@ -1652,31 +1656,27 @@
           "275150",
           "363302",
           "vpr-email:vpr-167136617b79dc5d",
-          "358022",
-          "362910",
-          "363233",
-          "363611",
-          "352741"
+          "358022"
         ],
         "required_ranks": {
           "360678": null,
-          "361526": 2,
-          "362061": 6
+          "361526": 5,
+          "362061": 10
         },
         "required_recall_at_10": 0.666667,
         "required_recall_at_20": 0.666667,
         "required_recall_at_50": 0.666667,
-        "ndcg_at_10": 0.463242
+        "ndcg_at_10": 0.317194
       },
       "deduplication_overlap": [],
       "internal": {
-        "hybrid_parent_count": 120,
-        "union_passage_count": 200,
+        "hybrid_parent_count": 123,
+        "union_passage_count": 201,
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 20.11,
-        "hybrid_total": 584.0826
+        "strong_local": 22.9885,
+        "hybrid_total": 569.0808
       }
     },
     {
@@ -1957,8 +1957,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 10.2389,
-        "hybrid_total": 520.3449
+        "strong_local": 11.1206,
+        "hybrid_total": 553.7436
       }
     },
     {
@@ -1999,14 +1999,14 @@
           "362061",
           "362672",
           "363684",
+          "363618",
           "349655",
           "nsf-cbet:PD-26-370Y",
           "363215",
           "363526",
           "360678",
           "344592",
-          "357609",
-          "357442"
+          "357609"
         ],
         "available_after_deduplication": 120,
         "review": {
@@ -2068,6 +2068,17 @@
           {
             "rank": 5,
             "hybrid_rank_before_deduplication": 5,
+            "id": "363618",
+            "title": "MPS Materials Research Programs (MPS Materials)",
+            "passage_id": "parent:363618",
+            "passage_kind": "parent",
+            "source_field": "parent_description",
+            "source_excerpt": "The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple materials research programs that advance fundamental understanding of materials, their properties, and their potential applications. The programs covered by this solicitation are: BiomaterialsCeramicsCondensed Matter and Materials…",
+            "existing_truth": null
+          },
+          {
+            "rank": 6,
+            "hybrid_rank_before_deduplication": 6,
             "id": "349655",
             "title": "Division of Materials Research: Topical Materials Research Programs",
             "passage_id": "parent:349655",
@@ -2077,8 +2088,8 @@
             "existing_truth": null
           },
           {
-            "rank": 6,
-            "hybrid_rank_before_deduplication": 6,
+            "rank": 7,
+            "hybrid_rank_before_deduplication": 7,
             "id": "nsf-cbet:PD-26-370Y",
             "title": "Energy, Water, and Resource Engineering (EWRE)",
             "passage_id": "parent:nsf-cbet:PD-26-370Y",
@@ -2088,8 +2099,8 @@
             "existing_truth": null
           },
           {
-            "rank": 7,
-            "hybrid_rank_before_deduplication": 7,
+            "rank": 8,
+            "hybrid_rank_before_deduplication": 8,
             "id": "363215",
             "title": "Ensuring “Pro-American Worker” Critical Minerals Supply Chain in the Western Hemisphere",
             "passage_id": "parent:363215",
@@ -2099,8 +2110,8 @@
             "existing_truth": null
           },
           {
-            "rank": 8,
-            "hybrid_rank_before_deduplication": 8,
+            "rank": 9,
+            "hybrid_rank_before_deduplication": 9,
             "id": "363526",
             "title": "FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) – RESEARCH COLLABORATION (RC)",
             "passage_id": "parent:363526",
@@ -2110,8 +2121,8 @@
             "existing_truth": null
           },
           {
-            "rank": 9,
-            "hybrid_rank_before_deduplication": 9,
+            "rank": 10,
+            "hybrid_rank_before_deduplication": 10,
             "id": "360678",
             "title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
             "passage_id": "parent:360678",
@@ -2121,8 +2132,8 @@
             "existing_truth": "primary_relevant"
           },
           {
-            "rank": 10,
-            "hybrid_rank_before_deduplication": 10,
+            "rank": 11,
+            "hybrid_rank_before_deduplication": 11,
             "id": "344592",
             "title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
             "passage_id": "child:344592:ab-0077",
@@ -2132,25 +2143,14 @@
             "existing_truth": null
           },
           {
-            "rank": 11,
-            "hybrid_rank_before_deduplication": 11,
+            "rank": 12,
+            "hybrid_rank_before_deduplication": 12,
             "id": "357609",
             "title": "Chemical Evolution of the Solid Earth and Volcanology",
             "passage_id": "parent:357609",
             "passage_kind": "parent",
             "source_field": "parent_description",
             "source_excerpt": "The Chemical Evolution of the Solid Earth and Volcanology (CESEV) program aims to advance fundamental knowledge about the origin and evolution of our home planet including its core, mantle, and continental crust. The program encourages a wide range of laboratory, field, experimental, theoretical, and/or computational studies that explore the continuous…",
-            "existing_truth": null
-          },
-          {
-            "rank": 12,
-            "hybrid_rank_before_deduplication": 12,
-            "id": "357442",
-            "title": "Alcohol Treatment, Pharmacotherapy, and Recovery Research (R01 Clinical Trial Required)",
-            "passage_id": "parent:357442",
-            "passage_kind": "parent",
-            "source_field": "parent_description",
-            "source_excerpt": "The National Institute on Alcohol Abuse and Alcoholism solicits applications for an R01 Clinical Trial Required mechanism focusing on alcohol treatment and recovery research. This NOFO will focus broadly on topics relevant for treatment of and recovery from alcohol use disorder (AUD), including: medications development, precision medicine, behavioral…",
             "existing_truth": null
           }
         ]
@@ -2161,20 +2161,21 @@
           "362061",
           "362672",
           "363684",
+          "363618",
           "349655",
           "nsf-cbet:PD-26-370Y",
           "363215",
           "363526",
           "360678",
           "344592",
-          "357609",
-          "357442"
+          "357609"
         ],
         "internal_top_50": [
           "361526",
           "362061",
           "362672",
           "363684",
+          "363618",
           "349655",
           "nsf-cbet:PD-26-370Y",
           "363215",
@@ -2219,18 +2220,17 @@
           "358373",
           "359225",
           "362856",
-          "341244",
-          "362224"
+          "341244"
         ],
         "required_ranks": {
-          "360678": 9,
+          "360678": 10,
           "361526": 1,
           "362061": 2
         },
         "required_recall_at_10": 1,
         "required_recall_at_20": 1,
         "required_recall_at_50": 1,
-        "ndcg_at_10": 0.906628
+        "ndcg_at_10": 0.901013
       },
       "deduplication_overlap": [],
       "internal": {
@@ -2239,8 +2239,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 22.3132,
-        "hybrid_total": 764.3027
+        "strong_local": 24.9064,
+        "hybrid_total": 635.2081
       }
     },
     {
@@ -2509,8 +2509,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 39.6809,
-        "hybrid_total": 702.9596
+        "strong_local": 38.7188,
+        "hybrid_total": 589.6171
       }
     },
     {
@@ -2558,7 +2558,7 @@
           "362849",
           "356909"
         ],
-        "available_after_deduplication": 278,
+        "available_after_deduplication": 279,
         "review": {
           "reviewed_count": 4,
           "reviewed_primary_count": 2,
@@ -2785,13 +2785,13 @@
       },
       "deduplication_overlap": [],
       "internal": {
-        "hybrid_parent_count": 278,
+        "hybrid_parent_count": 279,
         "union_passage_count": 300,
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 90.2029,
-        "hybrid_total": 741.0307
+        "strong_local": 103.1549,
+        "hybrid_total": 802.9064
       }
     },
     {
@@ -3066,8 +3066,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 16.7494,
-        "hybrid_total": 488.839
+        "strong_local": 15.5709,
+        "hybrid_total": 503.1257
       }
     },
     {
@@ -3115,7 +3115,7 @@
           "361008",
           "359966"
         ],
-        "available_after_deduplication": 239,
+        "available_after_deduplication": 240,
         "review": {
           "reviewed_count": 4,
           "reviewed_primary_count": 2,
@@ -3340,13 +3340,13 @@
       },
       "deduplication_overlap": [],
       "internal": {
-        "hybrid_parent_count": 239,
+        "hybrid_parent_count": 240,
         "union_passage_count": 300,
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 75.3554,
-        "hybrid_total": 924.4799
+        "strong_local": 85.6204,
+        "hybrid_total": 638.5726
       }
     },
     {
@@ -3623,8 +3623,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 55.9935,
-        "hybrid_total": 818.0092
+        "strong_local": 65.1294,
+        "hybrid_total": 735.2531
       }
     },
     {
@@ -3881,6 +3881,7 @@
           "349655",
           "363302",
           "363486",
+          "363604",
           "363578",
           "363618",
           "363449",
@@ -3905,8 +3906,7 @@
           "362754",
           "363387",
           "363617",
-          "351404",
-          "351715"
+          "351404"
         ],
         "required_ranks": {
           "362900": 2,
@@ -3924,8 +3924,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 25.8786,
-        "hybrid_total": 550.227
+        "strong_local": 35.7248,
+        "hybrid_total": 653.3957
       }
     },
     {
@@ -3971,7 +3971,7 @@
           "357002",
           "357014"
         ],
-        "available_after_deduplication": 262,
+        "available_after_deduplication": 263,
         "review": {
           "reviewed_count": 3,
           "reviewed_primary_count": 1,
@@ -4195,13 +4195,13 @@
       },
       "deduplication_overlap": [],
       "internal": {
-        "hybrid_parent_count": 262,
+        "hybrid_parent_count": 263,
         "union_passage_count": 283,
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 58.484,
-        "hybrid_total": 691.5664
+        "strong_local": 62.5238,
+        "hybrid_total": 962.0523
       }
     },
     {
@@ -4470,8 +4470,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 51.0778,
-        "hybrid_total": 667.333
+        "strong_local": 53.8071,
+        "hybrid_total": 691.1325
       }
     },
     {
@@ -4746,8 +4746,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 68.4324,
-        "hybrid_total": 860.6978
+        "strong_local": 77.5082,
+        "hybrid_total": 725.4352
       }
     },
     {
@@ -5016,8 +5016,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 103.6886,
-        "hybrid_total": 657.5396
+        "strong_local": 111.773,
+        "hybrid_total": 754.7665
       }
     },
     {
@@ -5292,8 +5292,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 23.7249,
-        "hybrid_total": 644.0204
+        "strong_local": 20.974,
+        "hybrid_total": 681.8124
       }
     },
     {
@@ -5566,8 +5566,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 20.4496,
-        "hybrid_total": 622.4053
+        "strong_local": 31.0484,
+        "hybrid_total": 602.2521
       }
     },
     {
@@ -5842,8 +5842,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 49.4802,
-        "hybrid_total": 599.6521
+        "strong_local": 51.7652,
+        "hybrid_total": 711.307
       }
     },
     {
@@ -6118,8 +6118,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 35.5277,
-        "hybrid_total": 598.4722
+        "strong_local": 38.8477,
+        "hybrid_total": 627.3491
       }
     },
     {
@@ -6169,7 +6169,7 @@
           "363618",
           "363614"
         ],
-        "available_after_deduplication": 243,
+        "available_after_deduplication": 244,
         "review": {
           "reviewed_count": 2,
           "reviewed_primary_count": 2,
@@ -6395,13 +6395,13 @@
       },
       "deduplication_overlap": [],
       "internal": {
-        "hybrid_parent_count": 243,
+        "hybrid_parent_count": 244,
         "union_passage_count": 300,
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 31.4335,
-        "hybrid_total": 663.023
+        "strong_local": 38.4593,
+        "hybrid_total": 655.7243
       }
     },
     {
@@ -6688,8 +6688,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 44.203,
-        "hybrid_total": 754.2857
+        "strong_local": 76.3986,
+        "hybrid_total": 1552.2799
       }
     },
     {
@@ -6757,8 +6757,8 @@
         "safeguard_rejections": 357
       },
       "latency_ms": {
-        "strong_local": 43.267,
-        "hybrid_total": 194.8453
+        "strong_local": 56.5925,
+        "hybrid_total": 220.8473
       }
     },
     {
@@ -7045,8 +7045,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 25.735,
-        "hybrid_total": 636.4043
+        "strong_local": 37.9506,
+        "hybrid_total": 590.9271
       }
     },
     {
@@ -7096,7 +7096,7 @@
           "363530",
           "362063"
         ],
-        "available_after_deduplication": 180,
+        "available_after_deduplication": 179,
         "review": {
           "reviewed_count": 3,
           "reviewed_primary_count": 3,
@@ -7322,13 +7322,13 @@
       },
       "deduplication_overlap": [],
       "internal": {
-        "hybrid_parent_count": 180,
-        "union_passage_count": 225,
+        "hybrid_parent_count": 179,
+        "union_passage_count": 224,
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 15.1786,
-        "hybrid_total": 528.0395
+        "strong_local": 19.0882,
+        "hybrid_total": 554.6806
       }
     },
     {
@@ -7609,8 +7609,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 16.2352,
-        "hybrid_total": 549.773
+        "strong_local": 23.2087,
+        "hybrid_total": 504.9311
       }
     },
     {
@@ -7660,7 +7660,7 @@
           "363633",
           "359692"
         ],
-        "available_after_deduplication": 217,
+        "available_after_deduplication": 216,
         "review": {
           "reviewed_count": 3,
           "reviewed_primary_count": 3,
@@ -7886,13 +7886,13 @@
       },
       "deduplication_overlap": [],
       "internal": {
-        "hybrid_parent_count": 217,
+        "hybrid_parent_count": 216,
         "union_passage_count": 300,
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 38.1141,
-        "hybrid_total": 626.0256
+        "strong_local": 46.0277,
+        "hybrid_total": 683.7674
       }
     },
     {
@@ -8170,8 +8170,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 73.0467,
-        "hybrid_total": 704.0773
+        "strong_local": 53.2545,
+        "hybrid_total": 671.0365
       }
     },
     {
@@ -8458,8 +8458,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 37.2367,
-        "hybrid_total": 666.4892
+        "strong_local": 45.4704,
+        "hybrid_total": 640.7994
       }
     },
     {
@@ -8516,7 +8516,7 @@
           "363313",
           "363679"
         ],
-        "available_after_deduplication": 295,
+        "available_after_deduplication": 297,
         "review": {
           "reviewed_count": 0,
           "reviewed_primary_count": 0,
@@ -8741,13 +8741,13 @@
       },
       "deduplication_overlap": [],
       "internal": {
-        "hybrid_parent_count": 296,
+        "hybrid_parent_count": 298,
         "union_passage_count": 300,
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 34.6081,
-        "hybrid_total": 688.4451
+        "strong_local": 55.1408,
+        "hybrid_total": 659.4788
       }
     },
     {
@@ -9034,8 +9034,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 67.9994,
-        "hybrid_total": 687.1762
+        "strong_local": 64.345,
+        "hybrid_total": 682.2785
       }
     },
     {
@@ -9310,8 +9310,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 20.9315,
-        "hybrid_total": 496.8209
+        "strong_local": 33.1815,
+        "hybrid_total": 486.6963
       }
     },
     {
@@ -9586,8 +9586,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 34.2965,
-        "hybrid_total": 726.2718
+        "strong_local": 34.9179,
+        "hybrid_total": 709.6476
       }
     },
     {
@@ -9862,8 +9862,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 62.1936,
-        "hybrid_total": 641.4158
+        "strong_local": 73.7348,
+        "hybrid_total": 679.5572
       }
     },
     {
@@ -10138,8 +10138,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 19.8128,
-        "hybrid_total": 588.7535
+        "strong_local": 25.9001,
+        "hybrid_total": 546.9837
       }
     },
     {
@@ -10426,8 +10426,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 84.8,
-        "hybrid_total": 704.056
+        "strong_local": 68.5858,
+        "hybrid_total": 821.4708
       }
     },
     {
@@ -10473,7 +10473,7 @@
           "356055",
           "359269"
         ],
-        "available_after_deduplication": 168,
+        "available_after_deduplication": 167,
         "review": {
           "reviewed_count": 1,
           "reviewed_primary_count": 1,
@@ -10697,13 +10697,13 @@
       },
       "deduplication_overlap": [],
       "internal": {
-        "hybrid_parent_count": 168,
+        "hybrid_parent_count": 167,
         "union_passage_count": 300,
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 65.2598,
-        "hybrid_total": 723.2447
+        "strong_local": 90.5056,
+        "hybrid_total": 724.4103
       }
     },
     {
@@ -10972,8 +10972,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 65.087,
-        "hybrid_total": 629.9345
+        "strong_local": 40.3442,
+        "hybrid_total": 942.327
       }
     },
     {
@@ -11019,7 +11019,7 @@
           "356055",
           "363614"
         ],
-        "available_after_deduplication": 137,
+        "available_after_deduplication": 138,
         "review": {
           "reviewed_count": 1,
           "reviewed_primary_count": 1,
@@ -11243,13 +11243,13 @@
       },
       "deduplication_overlap": [],
       "internal": {
-        "hybrid_parent_count": 137,
+        "hybrid_parent_count": 138,
         "union_passage_count": 263,
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 31.027,
-        "hybrid_total": 638.4073
+        "strong_local": 27.1292,
+        "hybrid_total": 593.391
       }
     },
     {
@@ -11524,8 +11524,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 18.8261,
-        "hybrid_total": 518.2133
+        "strong_local": 18.0463,
+        "hybrid_total": 622.4378
       }
     },
     {
@@ -11571,7 +11571,7 @@
           "349724",
           "350018"
         ],
-        "available_after_deduplication": 107,
+        "available_after_deduplication": 108,
         "review": {
           "reviewed_count": 2,
           "reviewed_primary_count": 1,
@@ -11795,13 +11795,13 @@
       },
       "deduplication_overlap": [],
       "internal": {
-        "hybrid_parent_count": 107,
+        "hybrid_parent_count": 108,
         "union_passage_count": 233,
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 31.9687,
-        "hybrid_total": 537.8987
+        "strong_local": 26.6615,
+        "hybrid_total": 531.3428
       }
     },
     {
@@ -11847,7 +11847,7 @@
           "362644",
           "359966"
         ],
-        "available_after_deduplication": 168,
+        "available_after_deduplication": 169,
         "review": {
           "reviewed_count": 1,
           "reviewed_primary_count": 1,
@@ -12052,14 +12052,14 @@
           "359198",
           "363448",
           "363224",
+          "363305",
           "357580",
           "361526",
           "363299",
           "357330",
           "361204",
           "357422",
-          "362305",
-          "vpr-email:NSF26-511"
+          "362305"
         ],
         "required_ranks": {
           "363375": 1
@@ -12071,13 +12071,13 @@
       },
       "deduplication_overlap": [],
       "internal": {
-        "hybrid_parent_count": 168,
+        "hybrid_parent_count": 169,
         "union_passage_count": 216,
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 23.0504,
-        "hybrid_total": 490.4869
+        "strong_local": 27.9694,
+        "hybrid_total": 542.9635
       }
     },
     {
@@ -12364,8 +12364,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 36.4347,
-        "hybrid_total": 685.9406
+        "strong_local": 51.0786,
+        "hybrid_total": 781.182
       }
     },
     {
@@ -12634,8 +12634,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 49.2649,
-        "hybrid_total": 652.375
+        "strong_local": 50.5321,
+        "hybrid_total": 670.317
       }
     },
     {
@@ -12904,8 +12904,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 25.303,
-        "hybrid_total": 549.955
+        "strong_local": 24.4731,
+        "hybrid_total": 613.2724
       }
     },
     {
@@ -13174,8 +13174,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 15.9188,
-        "hybrid_total": 505.166
+        "strong_local": 17.7546,
+        "hybrid_total": 568.2461
       }
     },
     {
@@ -13444,8 +13444,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 19.8652,
-        "hybrid_total": 605.3935
+        "strong_local": 24.2334,
+        "hybrid_total": 598.698
       }
     },
     {
@@ -13504,8 +13504,8 @@
         "safeguard_rejections": 348
       },
       "latency_ms": {
-        "strong_local": 44.2543,
-        "hybrid_total": 196.9783
+        "strong_local": 45.5861,
+        "hybrid_total": 203.8204
       }
     },
     {
@@ -13564,8 +13564,8 @@
         "safeguard_rejections": 318
       },
       "latency_ms": {
-        "strong_local": 34.7774,
-        "hybrid_total": 191.6012
+        "strong_local": 34.221,
+        "hybrid_total": 200.0628
       }
     },
     {
@@ -13852,8 +13852,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 21.0048,
-        "hybrid_total": 504.7203
+        "strong_local": 21.0046,
+        "hybrid_total": 593.8693
       }
     },
     {
@@ -14140,8 +14140,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 57.9746,
-        "hybrid_total": 787.0384
+        "strong_local": 65.5693,
+        "hybrid_total": 697.649
       }
     },
     {
@@ -14410,8 +14410,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 20.5573,
-        "hybrid_total": 559.0056
+        "strong_local": 29.8346,
+        "hybrid_total": 707.5197
       }
     }
   ]
