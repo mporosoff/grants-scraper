@@ -266,7 +266,11 @@ function rankQuery(harness, query, { evidence = true } = {}) {
     if (!parent || parent.record.status === "archived") return [];
     return [{ ...row, record: parent.record, index: parent.index }];
   });
-  rows.sort((left, right) => right.score - left.score || left.id.localeCompare(right.id));
+  rows.sort((left, right) => (
+    Number(left.evidenceTier || 99) - Number(right.evidenceTier || 99)
+    || right.score - left.score
+    || left.id.localeCompare(right.id)
+  ));
   return {
     query,
     rows,

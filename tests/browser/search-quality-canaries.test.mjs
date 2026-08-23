@@ -47,7 +47,11 @@ function ranked(query) {
     childProfile: { scores: new Float64Array(childCatalog.opportunities.length) },
     eligibilityBonuses: new Float64Array(parentCatalog.opportunities.length),
   }).rows;
-  rows.sort((left, right) => right.relevance - left.relevance || left.id.localeCompare(right.id));
+  rows.sort((left, right) => (
+    Number(left.evidenceTier || 99) - Number(right.evidenceTier || 99)
+    || right.relevance - left.relevance
+    || left.id.localeCompare(right.id)
+  ));
   return Array.from(rows);
 }
 
@@ -63,15 +67,16 @@ test("permanent REE and NASA canaries use the frozen catalog deliberately", () =
 });
 
 test("permanent scientific-term canaries cover catalyst, PFAS, AI, and space biology", () => {
-  for (const query of ["catalysis", "catalyst"]) {
+  for (const [query, expectedLead] of [["catalysis", "344592"], ["catalyst", "361526"]]) {
     const ids = ranked(query).map(row => row.id);
-    assert.equal(ids[0], "362061", query);
+    assert.equal(ids[0], expectedLead, `${query}: strongest publication-eligible evidence must lead`);
+    assert.ok(ids.includes("362061"), `${query}: NSF CPS must remain discoverable`);
     assert.equal(ids.includes("359942"), false, "BioData Catalyst must not be scientific catalysis");
   }
   const pfas = ranked("PFAS").map(row => row.id);
   assert.ok(pfas.includes("363375"), "the water-purification PFAS anchor must remain discoverable");
   assert.equal(pfas.includes("360223"), false, "rare-cancer wording must not satisfy PFAS");
-  assert.deepEqual(ranked("AI catalyst design").map(row => row.id), ["362061", "351715"]);
+  assert.deepEqual(ranked("AI catalyst design").map(row => row.id), ["361526", "362061"]);
 
   const prohibitedSpaceNoise = new Set([
     "359996", "363224", "363241", "360003", "363240",

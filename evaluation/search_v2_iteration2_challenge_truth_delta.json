@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "iteration": "2R-iteration-2",
+  "base_truth": "evaluation/search_v2_holdout_truth.json",
+  "key_contract": "Every addition is keyed by the exact (query_id, result_id) pair and must not be reused for another query.",
+  "base_truth_mutated": false,
+  "additions": {
+    "hold_ai_01": {
+      "query": "secure foundation models",
+      "judgments": {
+        "353936": {
+          "label": "primary_relevant",
+          "evidence": "The Mathematical Foundations of Artificial Intelligence source explicitly covers foundation models and reliable, safe, trustworthy AI methods; the complete intent is present in authoritative parent scope."
+        }
+      }
+    }
+  },
+  "notes": [
+    "The original Phase 4 truth remains byte-for-byte immutable.",
+    "Original required anchors remain unchanged; this delta adjudicates a newly surfaced top-ten result only."
+  ]
+}

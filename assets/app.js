@@ -1040,7 +1040,12 @@
       const a = catalog.opportunities[left.index];
       const b = catalog.opportunities[right.index];
       if (mode === "relevance" && (hasSearchTerms || hasPersonalization)) {
-        return right.score - left.score || compareValues(a.close_date, b.close_date);
+        const evidenceOrder = APP_CONFIG?.flags?.searchV2
+          ? Number(left.evidenceTier || 99) - Number(right.evidenceTier || 99)
+          : 0;
+        return evidenceOrder
+          || right.score - left.score
+          || compareValues(a.close_date, b.close_date);
       }
       if (mode === "posted") return compareValues(a.posted_date, b.posted_date, -1) || compareValues(a.close_date, b.close_date);
       if (mode === "award") {
@@ -1253,6 +1258,7 @@
       return [{
         index,
         score: row.score,
+        evidenceTier: row.evidenceTier,
         lexicalScore: row.relevance,
         eligibility: eligibilityBonuses[index],
         parentDirectEvidence: row.parentDirectEvidence,

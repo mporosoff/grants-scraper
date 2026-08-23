@@ -187,7 +187,7 @@ test("search v2 requires complete substantive coverage for concise technical que
   assert.equal(topicOnly.scores[3], 0, "topic metadata alone cannot satisfy a substantive short-query group");
   assert.equal(
     topicOnly.evidence[3].admission.reason,
-    "insufficient_substantive_query_coverage",
+    "insufficient_lexical_coverage",
   );
 });
 
@@ -214,10 +214,14 @@ test("search v2 grounds broad short-query matches in narrative or child evidence
 
   const biology = engine.score("quantum sensing biology", { semantic: false, evidence: true });
   assert.equal(biology.scores[0], 0);
-  assert.equal(biology.evidence[0].admission.reason, "ungrounded_broad_program_scope");
+  assert.equal(biology.evidence[0].admission.reason, "no_scoring_evidence");
 
   const maritime = engine.score("autonomous maritime sensing", { semantic: false });
-  assert.ok(maritime.scores[1] > 0, "bounded marine and naval language may satisfy maritime context");
+  assert.equal(
+    maritime.scores[1],
+    0,
+    "marine narrative plus citation-only autonomous/sensing text cannot manufacture complete intent",
+  );
 });
 
 test("search v2 never prefix-expands a short uppercase acronym", () => {

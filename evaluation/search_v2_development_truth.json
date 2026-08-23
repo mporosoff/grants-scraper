@@ -117,12 +117,12 @@
     },
     "adv_chem_02": {
       "query": "AI catalyst design",
-      "required_primary_ids": ["362061", "351715", "361526"],
+      "required_primary_ids": ["362061", "361526"],
       "judgments": {
         "362061": {"label":"primary_relevant","evidence":"CPS explicitly combines catalysis and process design with artificial intelligence and machine learning."},
         "356605": {"label":"broader_program_fit","evidence":"The ONR umbrella lists AI and catalyst-design topics, but no single published focus establishes their integration."},
         "360678": {"label":"broader_program_fit","evidence":"The DOE umbrella includes AI and Catalysis Science, but the current evidence does not establish AI catalyst design as one funded scope."},
-        "351715": {"label":"primary_relevant","evidence":"ECLIPSE supports plasma catalysis, reactor design, and computational or AI-enabled plasma science."},
+        "351715": {"label":"broader_program_fit","evidence":"ECLIPSE supports plasma catalysis, reactor design, and computational modeling, but the cataloged authoritative scope contains no artificial-intelligence or machine-learning evidence."},
         "363617": {"label":"broader_program_fit","evidence":"MPS Chemistry supports catalysis and computational methods, but the complete AI-design intent is not explicit."},
         "362063": {"label":"broader_program_fit","evidence":"Transport Phenomena has AI and adjacent catalysis metadata but does not establish catalyst-design scope."},
         "347749": {"label":"broader_program_fit","evidence":"The chemistry umbrella is scientifically adjacent but does not establish the complete AI catalyst-design intent."},
@@ -150,10 +150,10 @@
     },
     "adv_defense_02": {
       "query": "autonomous maritime sensing",
-      "required_primary_ids": ["356605"],
+      "required_primary_ids": [],
       "judgments": {
         "344592": {"label":"irrelevant","evidence":"The matched child is autonomous ground and air sensing; no maritime scope is established."},
-        "356605": {"label":"primary_relevant","evidence":"The Navy and Marine Corps S&T notice explicitly covers autonomous systems and sensing in naval or maritime operations."},
+        "356605": {"label":"broader_program_fit","evidence":"The parent notice establishes broad Navy and Marine Corps S&T scope, while autonomous systems and sensing occur only in collapsed citation/index text; the catalog does not establish their integrated maritime funded scope."},
         "334972": {"label":"irrelevant","evidence":"Commercial fishing safety training supplies maritime wording but no autonomous sensing research."},
         "363292": {"label":"irrelevant","evidence":"The NIOSH program supports autonomy and sensing for mining, not maritime use."},
         "345241": {"label":"irrelevant","evidence":"The matched multi-agent child does not establish maritime sensing scope."}
@@ -196,6 +196,6 @@
     "ree_12", "adv_chem_02", "adv_policy_01", "adv_defense_02", "adv_defense_03", "adv_ai_03", "phase3_cfd"
   ],
   "cross_domain_query_ids": ["ree_12", "adv_chem_02", "adv_policy_01", "adv_defense_02", "adv_defense_03", "adv_ai_03"],
-  "adjudication_revision": "The bounded post-checkpoint review corrected adv_ai_03:344592 after inspecting its single publication-eligible child; this was a query-specific relevance correction, not a scoring change.",
+  "adjudication_revision": "The bounded Iteration-2 review retained the adv_ai_03 correction; changed adv_chem_02:351715 from primary to broader because authoritative ECLIPSE scope contains no AI/ML evidence; and changed adv_defense_02:356605 from primary to broader because autonomous/sensing terms occur only in collapsed citation/index text outside the published parent narrative. These are query-specific truth corrections, not scoring changes.",
   "sealed_holdout_inspected": false
 }

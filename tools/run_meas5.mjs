@@ -202,7 +202,11 @@ export function rank(harness, query, profile, topicsEnabled) {
       }];
     });
   }
-  rows.sort((left, right) => right.score - left.score || left.id.localeCompare(right.id));
+  rows.sort((left, right) => (
+    Number(left.evidenceTier || 99) - Number(right.evidenceTier || 99)
+    || right.score - left.score
+    || left.id.localeCompare(right.id)
+  ));
   return rows;
 }
 

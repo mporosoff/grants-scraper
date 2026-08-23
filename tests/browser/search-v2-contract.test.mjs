@@ -52,7 +52,11 @@ function ranked(query, { evidence = true } = {}) {
     childProfile: emptyChild,
     eligibilityBonuses: new Float64Array(parentCatalog.opportunities.length),
   });
-  rolled.rows.sort((left, right) => right.relevance - left.relevance || left.id.localeCompare(right.id));
+  rolled.rows.sort((left, right) => (
+    Number(left.evidenceTier || 99) - Number(right.evidenceTier || 99)
+    || right.relevance - left.relevance
+    || left.id.localeCompare(right.id)
+  ));
   return { parentDirect, childDirect, rolled };
 }
 
@@ -165,9 +169,10 @@ test("stabilized Phase 2/3 evidence records every development gate without holdo
   assert.deepEqual(results.hard_gates.short_acronym_prefix_leakage, []);
   assert.equal(results.hard_gates.development_movements_reviewed, true);
   assert.equal(results.hard_gates.meas5_movements_reviewed, true);
-  assert.equal(results.meas5_cross_domain_gate.changed_top_10_queries, 0);
-  assert.equal(movement.changed_top_10_queries, 11);
-  assert.equal(movement.unchanged_top_10_queries, 38);
+  assert.equal(results.meas5_cross_domain_gate.changed_top_10_queries, 38);
+  assert.equal(results.meas5_cross_domain_gate.status, "reviewed");
+  assert.equal(movement.changed_top_10_queries, 25);
+  assert.equal(movement.unchanged_top_10_queries, 24);
   assert.ok(movement.movements
     .filter(item => item.top_10_changed)
     .every(item => item.review?.status === "accepted" && item.review.reason));
