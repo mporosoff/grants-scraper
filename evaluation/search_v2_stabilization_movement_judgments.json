@@ -1,0 +1,301 @@
+{
+  "schema_version": 1,
+  "evaluated_at": "2026-08-22",
+  "phase": "2.1/3.1-stabilization",
+  "holdout_status": "sealed_and_unopened",
+  "review_basis": "Each changed development top ten was reviewed against the exact query and published parent or publication-eligible child scope. The MEAS-5 frame had no final top-ten movement.",
+  "reviews": {
+    "development:ree_09": {
+      "status": "accepted",
+      "reason": "EWRE legitimately enters through its published chemical resource-recovery and critical-minerals scope; the same three required authoritative programs remain primary."
+    },
+    "development:ree_03": {
+      "status": "accepted",
+      "reason": "EWRE enters through its current authoritative resource-recovery and critical-minerals scope. The previously required BES, Genesis, and CPS anchors remain primary."
+    },
+    "development:ree_06": {
+      "status": "accepted",
+      "reason": "EWRE explicitly supports chemical resource recovery and recycling or management of critical minerals; all three previously required authoritative anchors remain primary."
+    },
+    "development:ree_07": {
+      "status": "accepted",
+      "reason": "EWRE explicitly funds resource recovery through chemical processes and critical-minerals recycling or management, so its addition is a source-grounded relevance improvement."
+    },
+    "development:ree_08": {
+      "status": "accepted",
+      "reason": "EWRE's published chemical resource-recovery and critical-minerals scope contains the material and operation intent; the original three required anchors remain present."
+    },
+    "development:ree_10": {
+      "status": "accepted",
+      "reason": "All three required anchors remain primary and EWRE is added through bounded chemical resource-recovery and critical-minerals scope; no lexical-noise row enters."
+    },
+    "development:ree_18": {
+      "status": "accepted",
+      "reason": "The added EWRE program publishes chemical resource-recovery and critical-minerals scope, while BES, Genesis, and CPS remain primary."
+    },
+    "development:ree_19": {
+      "status": "accepted",
+      "reason": "EWRE is a legitimate current primary addition based on published chemical resource-recovery and critical-minerals scope; the required anchors are preserved."
+    },
+    "development:ree_12": {
+      "status": "accepted",
+      "reason": "The candidate adds Genesis and retains CPS and EWRE while removing the adjudicated workshop, workforce, diplomacy, ecology, geoscience-metadata, and ungrounded umbrella matches."
+    },
+    "development:adv_chem_02": {
+      "status": "accepted",
+      "reason": "CPS retains complete published scope and Genesis is recovered through its AI parent plus publication-eligible catalyst-discovery child. Authoritative ECLIPSE scope establishes catalysis and computational reactor design but no AI/ML evidence, so its query-specific truth is corrected to broader fit."
+    },
+    "development:adv_chem_04": {
+      "status": "accepted",
+      "reason": "None of the former results establishes all three CO2, membrane, and separation concepts in substantive scope; several are biomedical or policy lexical collisions."
+    },
+    "development:adv_energy_02": {
+      "status": "accepted",
+      "reason": "The oil-and-gas notice lacks lithium, while Genesis does not establish the combined geothermal-lithium extraction intent; removing both avoids partial-intent admission."
+    },
+    "development:adv_bio_03": {
+      "status": "accepted",
+      "reason": "The former cancer programs do not establish artificial-intelligence diagnosis scope. The remaining AI/AN population-abbreviation collision was also removed by the generic resolved-acronym evidence guard."
+    },
+    "development:adv_space_01": {
+      "status": "accepted",
+      "reason": "Top-ten membership is unchanged; bounded biology word-form expansion only reorders two existing middle-ranked results."
+    },
+    "development:adv_defense_02": {
+      "status": "accepted",
+      "reason": "The former ONR primary judgment is corrected to broader fit: the parent publishes generic Navy and Marine Corps S&T scope, while autonomous and sensing terms appear only in collapsed citation/index text. Citation text alone cannot manufacture the integrated primary intent."
+    },
+    "development:adv_ai_01": {
+      "status": "accepted",
+      "reason": "Bridge2AI explicitly combines trustworthy AI with biomedical and behavioral health research; the removed results each lack at least one substantive query concept."
+    },
+    "development:adv_ai_03": {
+      "status": "accepted",
+      "reason": "CPS and the ARL Electronic Sensing child establish the integrated quantum-sensing and biology intent; broad umbrellas and programs with separate or absent concepts are removed."
+    },
+    "development:adv_policy_01": {
+      "status": "accepted",
+      "reason": "The three retained programs explicitly combine critical-minerals scope with workers or workforce development; policy forums, diplomacy, ecology, and process-research programs do not."
+    },
+    "development:ree_13": {
+      "status": "accepted",
+      "reason": "Catalysis now favors publication-eligible ARL and Genesis children plus focused program descriptions; former umbrella, citation-only, and generic cross-discipline rows are removed."
+    },
+    "development:ree_14": {
+      "status": "accepted",
+      "reason": "The catalyst query retains explicit scientific catalyst programs and adds publication-eligible catalyst children; programs supported only by generic or citation-source catalyst wording are removed."
+    },
+    "development:adv_bio_02": {
+      "status": "accepted",
+      "reason": "The retained opportunities explicitly combine rare-disease and biomarker scope. Removed rows provide rare-disease infrastructure or disease scope without biomarker evidence and therefore fail complete intent."
+    },
+    "development:adv_health_01": {
+      "status": "accepted",
+      "reason": "Rural MOMS is the only current row with authoritative rural and maternal-health scope; maternal-only and generic rural-health programs are no longer primary."
+    },
+    "development:adv_health_02": {
+      "status": "accepted",
+      "reason": "The retained programs explicitly address opioid overdose prevention. Removed rows are partial prevention, generic substance-use, or unrelated umbrella matches."
+    },
+    "development:adv_health_03": {
+      "status": "accepted",
+      "reason": "No former result establishes environmental-justice and asthma scope together in admission-eligible narrative; the prior results were partial or citation collisions."
+    },
+    "development:adv_ag_01": {
+      "status": "accepted",
+      "reason": "No former result establishes the complete precision-agriculture water intent in the cataloged authoritative narrative; generic water, agriculture, and citation text no longer combine into a primary result."
+    },
+    "development:adv_ag_02": {
+      "status": "accepted",
+      "reason": "The removed plant, crop, and sensing programs each omit at least one substantive crop-disease-sensing concept from admission-eligible scope."
+    },
+    "development:adv_space_03": {
+      "status": "accepted",
+      "reason": "The former Earth and atmosphere programs do not publish wildfire observation scope in the cataloged narrative; citation/index terms cannot complete the intent."
+    },
+    "development:adv_defense_01": {
+      "status": "accepted",
+      "reason": "The DEVCOM applied-research child retains explicit hypersonic-materials evidence; the removed row lacks complete current funded scope."
+    },
+    "development:adv_ai_02": {
+      "status": "accepted",
+      "reason": "Retained and newly surfaced rows explicitly combine cybersecurity with workforce or training scope. Removed rows match only generic security, labor, or administrative language."
+    },
+    "development:adv_env_01": {
+      "status": "accepted",
+      "reason": "The former land, mine, and desalination rows do not name PFAS in admission-eligible source scope; protected contaminant evidence prevents groundwater/remediation wording from substituting for the target."
+    },
+    "development:adv_env_03": {
+      "status": "accepted",
+      "reason": "The Alaska CESU row explicitly combines coastal hazards, climate adaptation, and infrastructure/resource-management context; removed programs are coastal-, resilience-, or infrastructure-only."
+    },
+    "development:adv_policy_02": {
+      "status": "accepted",
+      "reason": "The phrase uses catalyst in a nonchemical education sense, while the former results are chemistry programs or generic education notices without the complete intended relationship."
+    },
+    "meas5:m5_bio_01": {
+      "status": "accepted",
+      "reason": "The one-row boundary swap retains translational biomedical narrative evidence; the added row has complete eligible scope and the removed row was weaker at the cutoff."
+    },
+    "meas5:m5_bio_03": {
+      "status": "accepted",
+      "reason": "Retained rows explicitly combine infectious-disease and therapeutic scope; removed umbrella and partial disease or intervention matches lack complete narrative evidence."
+    },
+    "meas5:m5_bio_04": {
+      "status": "accepted",
+      "reason": "The Army umbrella is removed while a directly neurological-disorder program enters at the cutoff; complete intent and currentness are preserved."
+    },
+    "meas5:m5_health_01": {
+      "status": "accepted",
+      "reason": "The retained programs explicitly address rural health outcomes; removed rows match rural, health, or outcomes separately without integrated funded scope."
+    },
+    "meas5:m5_health_02": {
+      "status": "accepted",
+      "reason": "The eight retained rows have maternal/child-health narrative evidence; the two removed cutoff rows rely on weaker partial wording."
+    },
+    "meas5:m5_health_03": {
+      "status": "accepted",
+      "reason": "The added program has complete substance-use prevention scope; removed rows lack the disorder target, prevention intent, or current scientific purpose."
+    },
+    "meas5:m5_health_04": {
+      "status": "accepted",
+      "reason": "Retained and added rows explicitly fund community-health-worker activity; generic Army, health, community, and workforce collisions are removed."
+    },
+    "meas5:m5_health_05": {
+      "status": "accepted",
+      "reason": "The new cutoff rows contain direct population-health scope; Army and program rows admitted through weak metadata or partial wording are removed."
+    },
+    "meas5:m5_chem_01": {
+      "status": "accepted",
+      "reason": "Focused catalysis programs and eligible children remain or enter; DOE/ONR umbrellas and citation-supported cross-topic rows no longer crowd the top ten."
+    },
+    "meas5:m5_chem_03": {
+      "status": "accepted",
+      "reason": "The ARL Electrochemistry child is retained; ONR and DOE umbrellas lack explicit electrochemistry in eligible parent or publication-eligible child scope."
+    },
+    "meas5:m5_chem_04": {
+      "status": "accepted",
+      "reason": "The top materials programs remain stable; two eligible materials-science rows replace weaker DOE and sensing cutoff matches."
+    },
+    "meas5:m5_eng_01": {
+      "status": "accepted",
+      "reason": "New rows publish manufacturing, scale-up, or engineering scope, while removed rows were weaker administrative or partial manufacturing matches."
+    },
+    "meas5:m5_eng_02": {
+      "status": "accepted",
+      "reason": "The focused cyber-physical-systems programs remain; the removed Army umbrella did not expose a qualifying complete child for this query."
+    },
+    "meas5:m5_eng_04": {
+      "status": "accepted",
+      "reason": "The former SpaceTech result does not establish robotics and manufacturing together in admission-eligible source scope; no primary result is more accurate than partial intent."
+    },
+    "meas5:m5_energy_01": {
+      "status": "accepted",
+      "reason": "The retained energy programs explicitly address carbon-management technology; removed broad atmospheric, plasma, and DOE rows do not establish the complete target."
+    },
+    "meas5:m5_energy_02": {
+      "status": "accepted",
+      "reason": "The former energy programs contain grid or resilience separately but not a complete current grid-resilience scope in eligible narrative evidence."
+    },
+    "meas5:m5_energy_03": {
+      "status": "accepted",
+      "reason": "Explicit energy-storage programs remain; the new NRL row contains complete parent narrative evidence, while removed rows rely on Army children, administrative duration, or unrelated source text."
+    },
+    "meas5:m5_ag_02": {
+      "status": "accepted",
+      "reason": "The retained opportunities explicitly combine sustainability and agriculture; removed engineering, restoration, policy, and generic broad programs lack the complete funded purpose."
+    },
+    "meas5:m5_ag_03": {
+      "status": "accepted",
+      "reason": "Direct food-safety programs remain and a qualifying row enters at the cutoff; generic community, policy, or partial food wording is removed."
+    },
+    "meas5:m5_ag_04": {
+      "status": "accepted",
+      "reason": "Forest-health results remain stable; the removed row lacked complete eligible narrative evidence."
+    },
+    "meas5:m5_earth_01": {
+      "status": "accepted",
+      "reason": "Focused atmospheric-chemistry and Earth-system rows remain; Army, NOAA umbrella, plasma, and ECLIPSE partial matches are removed."
+    },
+    "meas5:m5_earth_02": {
+      "status": "accepted",
+      "reason": "Two direct geoscience programs enter while generic Army and DOE umbrella matches leave the cutoff."
+    },
+    "meas5:m5_earth_03": {
+      "status": "accepted",
+      "reason": "The reordered set retains direct ocean-science scope and replaces weaker or less current rows with eligible marine/ocean programs."
+    },
+    "meas5:m5_earth_04": {
+      "status": "accepted",
+      "reason": "Retained and added rows explicitly address water quality; land-management, construction, and citation-collision rows lacking the complete research intent are removed."
+    },
+    "meas5:m5_space_02": {
+      "status": "accepted",
+      "reason": "Membership is unchanged; evidence-tier ordering only reorders current planetary-science programs."
+    },
+    "meas5:m5_space_03": {
+      "status": "accepted",
+      "reason": "No former row establishes Earth science, satellite, and observation intent together in eligible source narrative; broad Earth/atmosphere rows are not promoted from citation text."
+    },
+    "meas5:m5_space_04": {
+      "status": "accepted",
+      "reason": "Direct space-biology programs remain; Army and coastal rows lacking integrated space-biology scope are removed."
+    },
+    "meas5:m5_defense_02": {
+      "status": "accepted",
+      "reason": "The retained programs have explicit electronic-warfare scope; the removed DEVCOM umbrella lacked a qualifying publication-eligible child for this intent."
+    },
+    "meas5:m5_defense_03": {
+      "status": "accepted",
+      "reason": "Programs with explicit autonomous-systems scope remain; generic umbrellas and nonresearch or citation-supported rows are removed."
+    },
+    "meas5:m5_defense_04": {
+      "status": "accepted",
+      "reason": "The core human-performance set remains; one eligible program replaces three weaker cutoff rows."
+    },
+    "meas5:m5_ai_01": {
+      "status": "accepted",
+      "reason": "Controlled artificial-intelligence parsing recovers explicit trustworthy-AI scope and removes programs whose AI or trust evidence is generic, cross-topic, or citation-only."
+    },
+    "meas5:m5_ai_02": {
+      "status": "accepted",
+      "reason": "New rows contain direct cybersecurity or secure-ecosystem evidence; administrative and weak generic-security matches leave the top ten."
+    },
+    "meas5:m5_ai_03": {
+      "status": "accepted",
+      "reason": "All retained rows publish quantum-information scope; generic defense and cutoff programs without complete eligible evidence are removed."
+    },
+    "meas5:m5_ai_04": {
+      "status": "accepted",
+      "reason": "The bounded high-performance-computing compound admits only explicit eligible HPC/supercomputing evidence; former results relied on separate high, performance, and computing occurrences or citation text."
+    },
+    "meas5:m5_social_01": {
+      "status": "accepted",
+      "reason": "The STEM-education set remains stable, with one directly eligible program replacing a weaker cutoff row."
+    },
+    "meas5:m5_social_02": {
+      "status": "accepted",
+      "reason": "Direct behavioral-health programs remain and two eligible rows enter; Army and partial behavioral or health matches are removed."
+    },
+    "meas5:m5_social_03": {
+      "status": "accepted",
+      "reason": "New rows explicitly support workforce development; weaker generic workforce, administrative, or stale cutoff rows are removed."
+    },
+    "meas5:m5_social_04": {
+      "status": "accepted",
+      "reason": "The revised top ten favors explicit social-science research scope and removes generic defense, program, or cross-topic rows."
+    },
+    "meas5:m5_energy_05": {
+      "status": "accepted",
+      "reason": "The two added NYSERDA rows explicitly fund building-decarbonization services. A plasma-program false match caused by distant uses of 'builds' and 'decarbonized' was identified during review and removed by the generic source-passage coherence guard."
+    },
+    "meas5:m5_ag_01": {
+      "status": "accepted",
+      "reason": "The added current PPDMDPP notice funds projects protecting crops and agricultural production systems through improved pest detection, diagnostics, and mitigation; this is within the broad crop-improvement intent."
+    },
+    "meas5:m5_defense_01": {
+      "status": "accepted",
+      "reason": "The retained DEVCOM and NSWC Crane programs publish explicit hypersonics scope; the removed row had weaker incomplete evidence and no required anchor is lost."
+    }
+  }
+}

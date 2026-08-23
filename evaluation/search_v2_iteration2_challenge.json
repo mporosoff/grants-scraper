@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "iteration": "phase-2r-iteration-2",
+  "created_at": "2026-08-22",
+  "status": "permanent_development_challenge",
+  "origin": "failed_phase4_one_time_holdout",
+  "starting_branch": "search-quality-v2",
+  "starting_sha": "38181e63bc9b19b4fea10494852dd4068ffe2d09",
+  "policy": {
+    "former_holdout_is_no_longer_unseen": true,
+    "may_be_used_for_diagnosis_and_development": true,
+    "original_raw_output_must_not_be_regenerated": true,
+    "original_truth_must_not_be_silently_changed": true,
+    "derived_iteration2_expectations_must_be_query_result_specific": true
+  },
+  "preserved_artifacts": {
+    "evaluation/search_v2_holdout_results_raw.json": "8d4a1d37e0940fde1eefdd3dca7f3fa2a39a40194ce6b083b40eafd4897fb919",
+    "evaluation/search_v2_holdout_truth.json": "83740bfd4bb5e3ef123a3a1b6e8c353b41c98a357261bce3e5b6b3e359bcebd1",
+    "evaluation/search_v2_holdout_results.json": "1505bc7d435643a40127cc5c5e8bce841135843a8662a466f68a86505704f3e7",
+    "evaluation/PHASE4_REVIEW.md": "0fdd99b6aad1fad35b3b2b4ec7d05efe9a27a9a514589629996c7da0fab7bbc9",
+    "evaluation/search_v2_release_candidate.json": "0edf8c283eff216e445e72101196c2fd038e42708710591a79d5e71e24f2d8ab"
+  },
+  "query_population": {
+    "frame": "evaluation/search_v2_holdout_frame.json",
+    "raw_results": "evaluation/search_v2_holdout_results_raw.json",
+    "query_specific_truth": "evaluation/search_v2_holdout_truth.json",
+    "adjudicated_results": "evaluation/search_v2_holdout_results.json",
+    "query_count": 24
+  },
+  "derived_expectations_location": "evaluation/search_v2_iteration2_root_causes.json",
+  "replacement_acceptance_population": "evaluation/search_v2_iteration2_holdout_frame.json"
+}

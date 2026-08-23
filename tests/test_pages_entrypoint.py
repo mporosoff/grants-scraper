@@ -91,9 +91,6 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn('assets/site-help.js', explorer_html)
         self.assertIn('assets/site-help.js', team_html)
         for page in (explorer_html, team_html):
-            self.assertIn(
-                "intended for individual and internal institutional use", page
-            )
             self.assertIn("not an official source of record", page)
             self.assertIn("&copy; 2026 Marc D. Porosoff", page)
             self.assertIn("All rights reserved", page)
@@ -105,7 +102,17 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             self.assertIn("requires written permission from the author", page)
             self.assertNotIn("MIT License", page)
             self.assertNotIn('href="./LICENSE"', page)
+        self.assertIn(
+            "intended for individual and internal institutional use", explorer_html
+        )
+        self.assertIn(
+            "Team Match is an informational research-planning aid", team_html
+        )
+        self.assertNotIn("intended for individual and internal institutional use", team_html)
         self.assertNotIn("UR ChemE", team_html)
+        self.assertIn('id="researcher-picker"', team_html)
+        self.assertIn('assets/search-hybrid.js', team_html)
+        self.assertIn('assets/team-hybrid.js', team_html)
         self.assertIn('MAX_EXTERNAL = 4', team_researchers_js)
         self.assertIn('funding-finder.external-researchers.v1', team_researchers_js)
         self.assertIn('function buildMatches', team_researchers_js)
@@ -211,6 +218,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("Enter to send", explorer_html)
         self.assertIn("Export CSV", explorer_html)
         self.assertIn('id="result-label"', explorer_html)
+        search_v2_version = "app-1.2.0"
         self.assertIn(
             '<script src="./data/opportunities.js?v=catalog-',
             explorer_html,
@@ -218,7 +226,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         release_version = "filters-2026-08-13"
         feature_version = "orcid-2026-08-13"
         search_version = "relevance-2026-08-15-v6"
-        style_version = "match-ux-20260821"
+        style_version = "search-v2-phase3-20260822"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={style_version}">',
             explorer_html,
@@ -240,22 +248,33 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             '<script src="./assets/profile.js?v=audit-2026-08-13"></script>',
             explorer_html,
         )
-        self.assertIn('assets/app-config.js?v=app-1.1.0', explorer_html)
-        self.assertIn('assets/subtopic-runtime.js?v=app-1.1.0', explorer_html)
-        self.assertIn('assets/match-explain.js?v=match-ux-20260821', explorer_html)
+        self.assertIn(f'assets/app-config.js?v={search_v2_version}', explorer_html)
+        self.assertIn(f'assets/search-v2-config.js?v={search_v2_version}', explorer_html)
+        self.assertIn(f'assets/subtopic-runtime.js?v={search_v2_version}', explorer_html)
+        self.assertIn(
+            'assets/match-explain.js?v=app-1.2.0',
+            explorer_html,
+        )
         self.assertIn("data-app-version", explorer_html)
         self.assertNotIn("assets/preferences.js", explorer_html)
-        for asset in ("profile-ranking.js", "search-query.js"):
-            self.assertIn(
-                f'<script src="./assets/{asset}?v={search_version}"></script>',
-                explorer_html,
-            )
         self.assertIn(
-            '<script src="./assets/search-retrieval.js?v=app-1.1.0"></script>',
+            f'<script src="./assets/profile-ranking.js?v={search_version}"></script>',
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/app.js?v=match-ux-20260821"></script>',
+            f'<script src="./assets/search-query.js?v={search_v2_version}"></script>',
+            explorer_html,
+        )
+        self.assertIn(
+            f'<script src="./assets/search-retrieval.js?v={search_v2_version}"></script>',
+            explorer_html,
+        )
+        self.assertIn(
+            '<script src="./assets/search-hybrid.js?v=app-1.2.0"></script>',
+            explorer_html,
+        )
+        self.assertIn(
+            '<script src="./assets/app.js?v=app-1.2.0"></script>',
             explorer_html,
         )
         self.assertIn(

@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "experiment": "voyage_rerank_2_5_realtime_feasibility",
+  "generated_at": "2026-08-23T15:44:06.2113658Z",
+  "branch": "search-quality-v2",
+  "starting_sha": "83d088cb1dfbdd48a57e574be3fbc84a7dc432e6",
+  "recommendation": "VOYAGE RERANKING DOES NOT CLEAR THE QUALITY BAR — DISCARD API RERANKING",
+  "reason": "Voyage materially improved ordering within the reachable candidate set, but required-anchor Recall@50 reached only 0.661538, below the pre-registered approximate 0.85 screening threshold. The frozen depth-200 BM25F pool contained only 43 of 65 required anchors, so no reranker could exceed 0.661538 without changing candidate discovery. Voyage recovered three of 16 audited vocabulary-gap anchors into the top 10, but seven of those 16 were absent from the candidate pool. One known irrelevant acronym collision was newly promoted to rank 2 on a hard negative. These results do not justify production API infrastructure or post-holdout integration.",
+  "screening_gate": {
+    "required_recall_at_50_threshold": 0.85,
+    "actual_required_recall_at_50": 0.661538,
+    "passed": false,
+    "prompt_or_query_specific_tuning_performed": false
+  },
+  "architecture": {
+    "candidate_discovery": "unchanged local BM25F",
+    "candidate_depth": 200,
+    "candidate_passages": "bounded existing public parent/child indexed fields only",
+    "reranker": "Voyage rerank-2.5 ordinary real-time API",
+    "provider_model_revision": "not exposed by the API",
+    "parent_aggregation": "single strongest parent-or-child passage",
+    "child_count_bonus": 0,
+    "semantic_score_created_primary_evidence": false,
+    "production_integration": false
+  },
+  "quality": {
+    "query_count": 52,
+    "required_anchor_count": 65,
+    "baseline_bm25f": {
+      "required_recall_at_10": 0.476923,
+      "required_recall_at_50": 0.6,
+      "candidate_recall_at_200": 0.661538,
+      "precision_at_10_over_judged": 0.492063,
+      "precision_at_10_conservative_lower_bound": 0.061876
+    },
+    "local_minilm_at_depth_50": {
+      "required_recall_at_10": 0.538462,
+      "required_recall_at_50": 0.6,
+      "precision_at_10_over_judged": 0.57377,
+      "precision_at_10_conservative_lower_bound": 0.06986
+    },
+    "voyage_at_depth_200": {
+      "required_recall_at_10": 0.615385,
+      "required_recall_at_50": 0.661538,
+      "precision_at_10_over_judged": 0.714286,
+      "precision_at_10_conservative_lower_bound": 0.07984,
+      "unjudged_top_10_pairs": 445,
+      "known_irrelevant_top_10_pairs": 6
+    },
+    "required_anchor_movements": {
+      "rescued_into_top_10": 11,
+      "regressed_out_of_top_10": 2,
+      "net_top_10_gain": 9,
+      "rescued_into_top_50": 4,
+      "unreachable_at_candidate_depth_200": 22
+    },
+    "phase4b_19_anchor_audit": {
+      "bm25f_recall_at_10": 0.473684,
+      "voyage_recall_at_10": 0.631579,
+      "voyage_recall_at_50": 0.631579,
+      "candidate_recall_at_200": 0.631579,
+      "newly_recovered_into_top_10": 3
+    },
+    "vocabulary_gap_16_anchor_audit": {
+      "bm25f_recall_at_10": 0.375,
+      "local_minilm_recall_at_10": 0.5,
+      "voyage_recall_at_10": 0.5625,
+      "voyage_recall_at_50": 0.5625,
+      "candidate_recall_at_200": 0.5625,
+      "newly_recovered_from_bm25f_into_top_10": 3,
+      "absent_from_candidate_pool": 7
+    },
+    "semantic_paraphrase_conclusion": "Voyage genuinely rescued reachable paraphrases rather than only reshuffling strong lexical matches, but it could not recover candidates absent from BM25F and therefore did not solve end-to-end semantic recall.",
+    "precision_caveat": "Existing spent truth leaves 445 Voyage top-ten query/result pairs unjudged, so precision gains are descriptive over known judgments rather than a new full adjudication."
+  },
+  "hard_negatives": {
+    "query_count": 12,
+    "visible_primary_behavior_changed": false,
+    "semantic_score_created_primary_results": false,
+    "baseline_top_10_known_irrelevant_pairs": 8,
+    "voyage_top_10_known_irrelevant_pairs": 4,
+    "voyage_top_10_unjudged_pairs": 114,
+    "new_known_irrelevant_promotions": [
+      {
+        "query_id": "i2hold_acronym_02",
+        "query": "AIM materials intelligence",
+        "result_id": "344592",
+        "voyage_rank": 2,
+        "failure": "acronym/lexical ambiguity remained unsafe as a ranking signal"
+      }
+    ]
+  },
+  "API_usage": {
+    "successful_rerank_requests": 52,
+    "total_request_attempts": 54,
+    "pre-scoring_http_429_attempts": 2,
+    "timeouts": 0,
+    "documents_successfully_reranked": 6653,
+    "usage_tokens_reported": 2055171,
+    "published_paid_price_usd_per_million_tokens": 0.05,
+    "estimated_cost_at_published_paid_pricing_usd": 0.102759,
+    "published_free_token_allocation": 200000000,
+    "fraction_of_published_free_allocation": 0.010276,
+    "free_credit_assessment": "The run is below and eligible for Voyage's published 200-million-token free allocation. The rerank response does not expose the account's remaining free-token balance, so actual billing status cannot be proven from API receipts alone.",
+    "API_latency_p50_ms": 384.5455,
+    "API_latency_p95_ms": 512.7126,
+    "end_to_end_latency_p50_ms": 434.8466,
+    "end_to_end_latency_p95_ms": 640.0654,
+    "request_payload_bytes_total": 9785434,
+    "request_payload_bytes_p50": 256113,
+    "request_payload_bytes_p95": 318045
+  },
+  "repository_impact": {
+    "production_search_code_changed": false,
+    "production_search_behavior_changed": false,
+    "browser_asset_size_delta_bytes": 0,
+    "model_weights_downloaded_or_committed": false,
+    "backend_worker_or_hosted_infrastructure_added": false,
+    "API_key_or_auth_headers_persisted": false,
+    "phase4c_read_or_executed": false,
+    "phase4c_results_created": false,
+    "main_touched": false,
+    "search_v2_production_flag": "OFF"
+  },
+  "artifacts": {
+    "harness": "tools/run_search_v2_voyage_feasibility.mjs",
+    "candidate_ceiling": "evaluation/search_v2_voyage_candidate_ceiling.json",
+    "results": "evaluation/search_v2_voyage_reranker_results.json",
+    "API_receipt": "evaluation/search_v2_voyage_api_receipt.json"
+  },
+  "artifact_hashes": {
+    "candidate_ceiling_sha256": "3f0a0acdab3e350b9b0a5318dd1b7d3c25295d123d67ef2050ff0dd54e682747",
+    "results_sha256": "eec45912f4c4f06ef70de81fa411c0d28fc74e6e22f1da5ce7efd21bb83bc401",
+    "API_receipt_sha256": "efa95c6a2e537f65247e5c67f13be2110042525ab6ddb363e57a961c53224a79"
+  }
+}

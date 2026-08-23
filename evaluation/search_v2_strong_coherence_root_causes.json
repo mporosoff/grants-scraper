@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "recorded_before_implementation": true,
+  "branch": "search-quality-v2",
+  "starting_head": "5f0b5d07de85e414c5c354c8175704837d7d2d9e",
+  "source_hashes": {
+    "assets/search-retrieval.js": "1c588846acfecae3d1f6baa43d7d832e1c9e751b1b928e78b99cf055a3d3f789",
+    "data/opportunities.js": "fb5dec36f33184572a84d6d9fed76adbb415c6102e2acbed50dc2d6ba22cbff6",
+    "evaluation/search_v2_strong_potential_results.json": "9d7c73305e3bbbdcc08b43fe9ccc365d9af84e35ac59fa3a6fb230da142a558d",
+    "evaluation/search_v2_strong_potential_truth.json": "8218a4cb0a9e0aef62aab995e31b12a6259e0ea972dc403b7fdcfa7679a28bf2"
+  },
+  "trace_method": {
+    "engine": "production local fielded BM25F scorer through tools/run_search_diagnosis.mjs",
+    "query_groups": "literal substantive groups emitted by the accepted fielded query contract",
+    "atomic_passage_id_format": "parent:<opportunity_id>#<field>:sentence:<one-based index>",
+    "segmentation": "the production fielded passage sentence/newline split in assets/search-retrieval.js",
+    "note": "The pre-fix scorer exposed parent:<id> as the external hybrid passage ID but did not expose IDs for its internal sentence passages. The deterministic IDs below name those exact pre-existing internal units."
+  },
+  "reviewed_non_primary_strong": [
+    {
+      "query_id": "hold_health_02",
+      "query": "health data workforce workshop",
+      "result_id": "334326",
+      "title": "Tribal Colleges and Universities Program",
+      "adjudication": "irrelevant",
+      "pre_fix_strong_rank": 1,
+      "publication_eligible_children": [],
+      "query_groups": [
+        "literal:health",
+        "literal:data",
+        "literal:workforce",
+        "literal:workshop"
+      ],
+      "evidence_units": [
+        {
+          "passage_id": "parent:334326#parent_description:sentence:2",
+          "field": "parent_description",
+          "program_track": "umbrella list of ICE-TI, TSIP, TSETS, TEA Centers, CHAI, and Pre-TI",
+          "satisfied_groups": ["literal:health"],
+          "excerpt": "Support is available ... through ... TSETS ... Cyberinfrastructure Health, Assistance, and Improvements (CHAI) ..."
+        },
+        {
+          "passage_id": "parent:334326#parent_description:sentence:14",
+          "field": "parent_description",
+          "program_track": "TSETS",
+          "satisfied_groups": ["literal:workshop"],
+          "excerpt": "Examples of project activities include ... structured series of summer intensive workshops and trainings ..."
+        },
+        {
+          "passage_id": "parent:334326#parent_description:sentence:15",
+          "field": "parent_description",
+          "program_track": "TSETS",
+          "satisfied_groups": ["literal:workforce"],
+          "excerpt": "The objective of this strand is to broaden the instructional capacity for STEM in the K-12 workforce ..."
+        },
+        {
+          "passage_id": "parent:334326#parent_description:sentence:19",
+          "field": "parent_description",
+          "program_track": "CHAI",
+          "satisfied_groups": ["literal:health"],
+          "excerpt": "The Cyberinfrastructure Health, Assistance, and Improvements (CHAI) strand supports projects ..."
+        },
+        {
+          "passage_id": "parent:334326#parent_description:sentence:20",
+          "field": "parent_description",
+          "program_track": "CHAI",
+          "satisfied_groups": ["literal:data"],
+          "excerpt": "The objective of this strand is to equip TCUP institutions ... [for] data science opportunities."
+        }
+      ],
+      "pre_fix_admission_trace": {
+        "document_level_groups": [0, 1, 2, 3],
+        "highest_contributing_atomic_passage": "parent:334326#parent_description:sentence:2",
+        "highest_contributing_atomic_passage_groups": [0],
+        "reported_admission_reason": "fielded_complete_intent",
+        "defect": "Strong admission used the union of matches across the entire parent description even though no atomic passage or program track covered the complete query."
+      }
+    },
+    {
+      "query_id": "hold_energy_02",
+      "query": "mineral supply chain diplomacy",
+      "result_id": "363316",
+      "title": "U.S.-ASEAN Road to 50: Rising Leaders Forum",
+      "adjudication": "broader_program_fit",
+      "pre_fix_strong_rank": 3,
+      "publication_eligible_children": [],
+      "query_groups": [
+        "literal:mineral",
+        "literal:supply",
+        "literal:chain",
+        "literal:diplomacy"
+      ],
+      "evidence_units": [
+        {
+          "passage_id": "parent:363316#parent_description:sentence:2",
+          "field": "parent_description",
+          "program_track": "administering Public Diplomacy Section identity",
+          "satisfied_groups": ["literal:diplomacy"],
+          "excerpt": "Mission to ASEAN (USASEAN) Public Diplomacy Section (PDS) announces an open competition ..."
+        },
+        {
+          "passage_id": "parent:363316#parent_description:sentence:6",
+          "field": "parent_description",
+          "program_track": "forum priority list",
+          "satisfied_groups": ["literal:mineral", "literal:supply", "literal:chain"],
+          "excerpt": "priorities, including ... critical minerals, resilient supply chains ..."
+        }
+      ],
+      "pre_fix_admission_trace": {
+        "document_level_groups": [0, 1, 2, 3],
+        "highest_contributing_atomic_passage": "parent:363316#parent_description:sentence:6",
+        "highest_contributing_atomic_passage_groups": [0, 1, 2],
+        "reported_admission_reason": "fielded_complete_intent",
+        "defect": "Strong admission combined an administering-office label from one sentence with a separate topical priority list; neither atomic passage supported the complete query."
+      }
+    }
+  ],
+  "root_cause": {
+    "shared_generic_bug": true,
+    "classification": "document-level query-group union used for Strong admission despite an existing atomic-passage trace",
+    "smallest_general_fix": "Keep document-level BM25F matching for candidate discovery and ranking, but require the existing conservative coverage ratio to be met by one coherent fielded passage before assigning Strong.",
+    "separate_rule_needed": false
+  }
+}

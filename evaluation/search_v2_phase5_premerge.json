@@ -1,0 +1,240 @@
+{
+  "schema_version": 1,
+  "phase": 5,
+  "recorded_at": "2026-08-23",
+  "decision": "PHASE 5 PREMERGE GATES PASSED",
+  "branch": "search-quality-v2",
+  "starting_release_sha": "f955fa578203b17e1a5e588a9b5f36d4966015fd",
+  "release_sha": "038354c8a26993246e67e27d2af69ed37775039a",
+  "team_match_update_sha": "f955fa578203b17e1a5e588a9b5f36d4966015fd",
+  "prior_main_sha": "ef7a0642f6ce66828f01ee280bd5993f66029b2f",
+  "reconciled_origin_main_sha": "b37f041b6c1c412b24e6a276561feed777400ca0",
+  "reconciliation_merge_sha": "ec2af257981e33657e417a1eee36b08daefe639f",
+  "catalog_reconciliation": {
+    "latest_main_generated_data_authoritative": true,
+    "meaningful_conflicts": [
+      {
+        "paths": [
+          "data/document_evidence.json",
+          "data/opportunities.js"
+        ],
+        "resolution": "accepted the byte-identical latest-main generated files"
+      },
+      {
+        "paths": [
+          "match_explorer.html",
+          "team_match.html"
+        ],
+        "resolution": "preserved the approved search and Team Match scripts while using the latest-main catalog cache key"
+      }
+    ],
+    "generated_catalog_evidence_feed_diff_from_origin_main": 0,
+    "retrieval_parameters_changed": false
+  },
+  "phase4c_immutable_evidence": {
+    "rerun_during_phase5": false,
+    "raw": {
+      "path": "evaluation/search_v2_iteration3_holdout_results_raw.json",
+      "sha256": "c8bd5a3b105963b826f406227ca6a0d4664cf80827f4ce2d5adac550088707ab"
+    },
+    "truth": {
+      "path": "evaluation/search_v2_iteration3_holdout_truth.json",
+      "sha256": "ac415c66337339cbf859006baf7ec9ad961d99f731c172e11daa70d39cbb84c6"
+    },
+    "adjudicated_results": {
+      "path": "evaluation/search_v2_iteration3_holdout_results.json",
+      "sha256": "236b003f45e48287ed0a1f669015df16c8909db58d9511ae92b9e0d4f77b74ff"
+    },
+    "release_decision": {
+      "path": "evaluation/search_v2_release_candidate_v3.json",
+      "sha256": "e3dd6142db52420034faac3d0a25d65141d687e5507166c09ce60ef76b99106a"
+    }
+  },
+  "frozen_behavior_hashes": {
+    "assets/search-query.js": "43ddabcf52c78008f1862fb3a62ab5913f1a5de29b4bf5657f6196adfb3b5376",
+    "assets/search-retrieval.js": "b67b19392131ce039f928ebf435cc42be481b5e0c7d4cf9b60223b8fdd94f097",
+    "assets/search-hybrid.js": "6a4ffccd34a31a6ea8c40397584560636c0238d4b8250705c2ab4a7077a7c4b3",
+    "assets/match-explain.js": "640cbb7b814d9eb78d6a4d62bd56253cbfa6ca07fe330db7e3d2413ba7d3806f",
+    "assets/app.js": "21d62103a41636c288eb6a6f8ab6f5cd34f320829284c2492bc66ba16272cc2a",
+    "config/search_v2.json": "e0b4c902a00b578d7d044001c72c230dbf0ce55c919091cf8730f245964d99c9"
+  },
+  "current_data_hashes": {
+    "data/opportunities.js": "d6a90aedeeb4cccdea6429a80e02fcbcc5a289aebf15a3bdf3b9ddbc7e95cbd8",
+    "data/subtopics.js": "5f95a155f361fd5c21bcb393c81835eb6d97c06b8e48360a4357f3c8579a4cd1"
+  },
+  "vector_rebuild": {
+    "model": "voyage-4-lite",
+    "dimension": 1024,
+    "format": "float16-le",
+    "old_passage_count": 1659,
+    "new_passage_count": 1659,
+    "reused_passage_count": 1655,
+    "embedded_passage_count": 4,
+    "removed_prior_passage_count": 4,
+    "API_request_count": 1,
+    "usage_total_tokens": 1475,
+    "estimated_paid_equivalent_cost_usd": 0.000029,
+    "corpus_sha256": "06d93e73cb9741c859aa6cf643f4f1e6c1b2feef7b995586b55b3943405cb727",
+    "manifest_sha256": "dd44c25939056a6c22101ea8f99bab6ab0cb6ae250c5d8411e506fd30d966c97",
+    "vector_sha256": "1ef8e7f9fa68e5523f7b9f8ee93bd08fa70aba0ed5bfd88992a04156d1c4dc09",
+    "vector_bytes": 3397632,
+    "passage_vector_handshake": "passed",
+    "orphaned_vectors_removed": true
+  },
+  "worker": {
+    "name": "funding-finder-voyage-search",
+    "url": "https://funding-finder-voyage-search.urochestercheme.workers.dev/",
+    "version_id": "f804a6c0-24a3-4731-8614-bda3c8e75dd9",
+    "secret_storage": "Cloudflare Worker encrypted secret only",
+    "secret_in_repository_or_browser": false,
+    "production_origin_cors": "passed",
+    "embed_query": {
+      "status": 200,
+      "model": "voyage-4-lite",
+      "dimension": 1024,
+      "usage_tokens": 2,
+      "wall_ms": 415.433
+    },
+    "rerank": {
+      "status": 200,
+      "model": "rerank-2.5",
+      "ranking_count": 1,
+      "usage_tokens": 163,
+      "wall_ms": 216.435
+    },
+    "schema_and_allowlist_rejections": "passed",
+    "forbidden_origin_rejection": "passed",
+    "provider_429_5xx_timeout_translation": "passed by browser contract tests",
+    "application_added_query_logging": false,
+    "workers_ai_judge_present": false
+  },
+  "production_config": {
+    "version": "1.2.0",
+    "updated": "2026-08-23",
+    "search_v2_enabled": true,
+    "proxy_url": "https://funding-finder-voyage-search.urochestercheme.workers.dev/",
+    "team_match_reuses_same_config": true,
+    "vectors_lazy_loaded": true,
+    "vector_asset_in_initial_html": false,
+    "local_strong_bm25_available_before_or_without_provider": true
+  },
+  "spent_population_gate": {
+    "query_count": 52,
+    "required_anchor_count": 65,
+    "strong_precision_at_10": 1.0,
+    "known_irrelevant_strong_at_10": 0,
+    "zero_anchor_strong_count": 0,
+    "combined_required_recall_at_20": 0.907692,
+    "combined_required_recall_at_50": 0.953846,
+    "deduplication_failures": 0,
+    "provider_errors": 0,
+    "phase4c_population_used": false,
+    "API_requests": 101,
+    "estimated_paid_cost_usd": 0.155767,
+    "estimated_paid_cost_per_1000_searches_usd": 2.995518,
+    "cold_first_query_ms": 1307.6215,
+    "warm_p50_ms": 653.3957,
+    "warm_p95_ms": 942.327
+  },
+  "release_gates": [
+    {
+      "name": "browser_suite",
+      "command": "node --test tests/browser/*.test.mjs",
+      "exit_code": 0,
+      "tests": 188,
+      "passed": 188
+    },
+    {
+      "name": "focused_python_search_schema_size_source",
+      "exit_code": 0,
+      "tests": 62,
+      "passed": 62
+    },
+    {
+      "name": "live_product_python",
+      "command": "python -m tools.run_refresh_validation",
+      "exit_code": 0,
+      "tests": 760,
+      "passed": 760
+    },
+    {
+      "name": "parent_child_cardinality_and_normalization",
+      "command": "node tools/p9_scoring_probe.mjs --check",
+      "exit_code": 0,
+      "cases": 50
+    },
+    {
+      "name": "browser_python_config_parity",
+      "command": "node tools/build_search_v2_config.mjs --check",
+      "exit_code": 0
+    },
+    {
+      "name": "explanation_frame",
+      "command": "node tools/run_match_explain_v2.mjs",
+      "exit_code": 0,
+      "cases": 42,
+      "correct_and_useful": 41,
+      "reviewed_shallow": 1,
+      "unsupported": 0,
+      "privacy_problem": 0
+    },
+    {
+      "name": "historical_baseline",
+      "command": "node tools/query_baseline.mjs --check",
+      "exit_code": 0,
+      "queries": 37,
+      "top_10_churn": 0
+    },
+    {
+      "name": "provider_vector_proxy_team_failure_contracts",
+      "exit_code": 0,
+      "tests": 24,
+      "passed": 24
+    },
+    {
+      "name": "generated_artifact_no_drift",
+      "command": "tools/verify_no_drift.sh",
+      "exit_code": 0,
+      "artifacts": 22,
+      "changed": 0
+    }
+  ],
+  "team_match_gates": {
+    "researcher_picker_and_department_saved_manual_orcid_flows": "passed",
+    "duplicate_prevention_and_four_person_maximum": "passed",
+    "faculty_non_editability_and_custom_edit_delete": "passed",
+    "every_member_fit_mandatory": "passed",
+    "shared_hybrid_ranking": "passed",
+    "semantic_candidate_bypass_prevented": "passed",
+    "maximum_hybrid_cycles_per_recomputation": 1,
+    "provider_failure_preserves_local_results": "passed",
+    "neutral_terminology_and_mobile_current_badge": "passed"
+  },
+  "asset_size": {
+    "lazy_vector_bytes": 3397632,
+    "lazy_vector_delta_bytes": 0,
+    "app_config_delta_bytes": 64,
+    "match_explorer_html_delta_bytes": -71,
+    "team_match_html_delta_bytes": -3,
+    "large_vector_in_initial_page_load": false
+  },
+  "security": {
+    "API_key_committed_or_printed": false,
+    "browser_secret": false,
+    "workers_ai_judge": false,
+    "public_passage_allowlist": true,
+    "private_profile_cv_or_orcid_sent_to_worker": false
+  },
+  "rollback": {
+    "steps": [
+      "set productionFlags.searchV2 to false",
+      "clear productionHybridProxy",
+      "deploy the configuration-only rollback"
+    ],
+    "catalog_revert_required": false,
+    "funding_finder_local_fallback_usable": true,
+    "team_match_local_fallback_usable": true,
+    "worker_may_remain_deployed_but_unused": true
+  },
+  "all_premerge_gates_pass": true
+}

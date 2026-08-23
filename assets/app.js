@@ -4,6 +4,7 @@
   const catalog = globalThis.GRANT_CATALOG;
   const $ = id => document.getElementById(id);
   const PAGE_SIZE = 20;
+  const POTENTIAL_MATCH_LIMIT = 12;
   const MAX_AI_CANDIDATES = 32;
   const MAX_AI_MATCHES = 12;
   const MAX_CHAT_RESULTS = 20;
@@ -17,8 +18,10 @@
   const APP_VERSION = APP_CONFIG?.release?.version || "1.1.0";
   const CANONICAL_URL = "https://mporosoff.github.io/grants-scraper/";
   const SEARCH_QUERY = globalThis.FUNDING_SEARCH_QUERY;
+  const SEARCH_V2_CONFIG = globalThis.FUNDING_SEARCH_V2_CONFIG;
   const RETRIEVAL_API = globalThis.FUNDING_RETRIEVAL;
   const SUBTOPIC_API = globalThis.FUNDING_SUBTOPICS;
+  const HYBRID_SEARCH_API = globalThis.FUNDING_HYBRID_SEARCH;
   const MATCH_EXPLAIN_API = globalThis.FUNDING_MATCH_EXPLAIN;
   const ORCID_API = globalThis.FUNDING_ORCID;
   const PROFILE_API = globalThis.FUNDING_PROFILE;
@@ -126,7 +129,20 @@
     sort: "deadline",
     filters: Object.fromEntries(Object.keys(FACETS).map(name => [name, new Set()])),
     matches: [],
+    strongMatches: [],
+    potentialMatches: [],
     searchDiagnostics: null,
+    hybrid: {
+      active: false,
+      pending: false,
+      sequence: 0,
+      cachedQuery: "",
+      cacheReady: false,
+      parents: [],
+      diagnostics: null,
+      usage: null,
+      fallbackReason: "",
+    },
     savedItems: [],
     savedIds: new Set(),
     runtimeCatalog: {
@@ -183,6 +199,7 @@
   let searchEngine = null;
   let childCatalog = null;
   let childSearchEngine = null;
+  let hybridSearchClient = null;
 
   function escapeHtml(value) {
     return String(value ?? "")
@@ -1039,7 +1056,17 @@
       const a = catalog.opportunities[left.index];
       const b = catalog.opportunities[right.index];
       if (mode === "relevance" && (hasSearchTerms || hasPersonalization)) {
-        return right.score - left.score || compareValues(a.close_date, b.close_date);
+        const hybridOrder = Number.isInteger(left.hybridRank)
+          && Number.isInteger(right.hybridRank)
+          ? left.hybridRank - right.hybridRank
+          : 0;
+        const evidenceOrder = APP_CONFIG?.flags?.searchV2
+          ? Number(left.evidenceTier || 99) - Number(right.evidenceTier || 99)
+          : 0;
+        return hybridOrder
+          || evidenceOrder
+          || right.score - left.score
+          || compareValues(a.close_date, b.close_date);
       }
       if (mode === "posted") return compareValues(a.posted_date, b.posted_date, -1) || compareValues(a.close_date, b.close_date);
       if (mode === "award") {
@@ -1252,10 +1279,13 @@
       return [{
         index,
         score: row.score,
+        evidenceTier: row.evidenceTier,
         lexicalScore: row.relevance,
         eligibility: eligibilityBonuses[index],
         parentDirectEvidence: row.parentDirectEvidence,
         parentProfileEvidence: row.parentProfileEvidence,
+        parentAdmitted: row.parentAdmitted,
+        childDroveMatch: row.childDroveMatch,
         profileSources,
         bestChild: displayBestChild,
         matchingChildren: row.matchingChildren,
@@ -1275,6 +1305,102 @@
       return computeTopicMatches(query, sortMode, retrievalOptions);
     }
     return computeParentMatches(query, sortMode, retrievalOptions);
+  }
+
+  function hybridMatches(parents) {
+    const parentById = new Map(catalog.opportunities.map((record, index) => [recordId(record), index]));
+    const childById = new Map((childCatalog?.opportunities || []).map(record => [
+      String(record.subtopic_id || record.opportunity_id || ""),
+      record,
+    ]));
+    const rejectedNofoIds = new Set(state.nofo.rejectedIds || []);
+    return (parents || []).flatMap(item => {
+      const index = parentById.get(String(item.parent_id || ""));
+      if (!Number.isInteger(index)) return [];
+      const record = catalog.opportunities[index];
+      if (rejectedNofoIds.has(recordId(record)) || !recordPassesFilters(record)) return [];
+      const child = item.passage_kind === "publication_eligible_child"
+        ? childById.get(String(item.record_id || "")) || null
+        : null;
+      const childMatch = child ? { record: child } : null;
+      return [{
+        index,
+        score: Number(item.voyage_score || 0),
+        lexicalScore: Number(item.bm25f_raw_score || item.bm25f_score || 0),
+        eligibility: state.profile.active
+          ? applicantFitBonus(record, state.profile.value.applicant_context)
+            + careerFitBonus(record, state.profile.value.career_stage)
+          : 0,
+        evidenceTier: 1,
+        hybridRank: Number(item.hybrid_rank),
+        workflowTier: "potential",
+        hybridExplanation: item.explanation || null,
+        bestChild: childMatch,
+        childDroveMatch: Boolean(child),
+        parentAdmitted: false,
+        matchingChildren: childMatch ? [childMatch] : [],
+        matchingChildCount: childMatch ? 1 : 0,
+        profileSources: {},
+      }];
+    });
+  }
+
+  function hybridCanRun(query = state.query, sortMode = state.sort) {
+    return APP_CONFIG?.flags?.searchV2 === true
+      && Boolean(hybridSearchClient?.configured)
+      && Boolean(String(query || "").trim())
+      && sortMode === "relevance";
+  }
+
+  function applyHybridParents(parents) {
+    const strongIds = new Set(state.strongMatches.map(match => (
+      recordId(catalog.opportunities[match.index])
+    )));
+    state.potentialMatches = hybridMatches(parents)
+      .filter(match => !strongIds.has(recordId(catalog.opportunities[match.index])))
+      .slice(0, POTENTIAL_MATCH_LIMIT);
+    state.matches = [...state.strongMatches, ...state.potentialMatches];
+    state.hybrid.active = true;
+    state.searchDiagnostics = {
+      ...(state.searchDiagnostics || {}),
+      hybrid: state.hybrid.diagnostics,
+    };
+  }
+
+  function scheduleHybridSearch(query) {
+    const normalizedQuery = String(query || "").trim();
+    if (!hybridCanRun(normalizedQuery)) return;
+    const sequence = ++state.hybrid.sequence;
+    state.hybrid.pending = true;
+    state.hybrid.active = false;
+    state.hybrid.fallbackReason = "";
+    hybridSearchClient.search(normalizedQuery, { context: "" }).then(result => {
+      if (sequence !== state.hybrid.sequence || normalizedQuery !== state.query) return;
+      state.hybrid.pending = false;
+      state.hybrid.cachedQuery = normalizedQuery;
+      state.hybrid.cacheReady = true;
+      state.hybrid.parents = result.parents || [];
+      state.hybrid.diagnostics = result.diagnostics || null;
+      state.hybrid.usage = result.usage || null;
+      applyHybridParents(state.hybrid.parents);
+      state.page = 1;
+      $("search-status").textContent = `${state.strongMatches.length.toLocaleString()} strong ${state.strongMatches.length === 1 ? "match" : "matches"}`
+        + ` · ${state.potentialMatches.length.toLocaleString()} potential ${state.potentialMatches.length === 1 ? "match" : "matches"}.`;
+      renderResults();
+    }).catch(error => {
+      if (sequence !== state.hybrid.sequence || normalizedQuery !== state.query) return;
+      state.hybrid.pending = false;
+      state.hybrid.active = false;
+      state.hybrid.fallbackReason = String(error?.code || "hybrid_unavailable");
+      state.searchDiagnostics = {
+        ...(state.searchDiagnostics || {}),
+        hybrid: { fallback: true, reason: state.hybrid.fallbackReason },
+      };
+      $("search-status").textContent = state.strongMatches.length
+        ? `Search complete: ${state.strongMatches.length.toLocaleString()} strong ${state.strongMatches.length === 1 ? "match" : "matches"}.`
+        : "No strong matches found. Try adjusting the search terms or filters.";
+      renderResults();
+    });
   }
 
   function currentDisplayMatches() {
@@ -1524,7 +1650,9 @@
       ? ` Interpreted ${acronymNotes.join(", ")} using ${usedResearcherContext ? "local catalog and researcher context" : "the local catalog"}; no AI call was made.`
       : "";
     $("search-status").textContent =
-      `Search complete: ${state.matches.length.toLocaleString()} opportunities match the context above.${typoNote}${acronymNote}`;
+      hybridCanRun()
+        ? `${state.strongMatches.length.toLocaleString()} strong ${state.strongMatches.length === 1 ? "match" : "matches"}. Looking for additional potential matches…${typoNote}${acronymNote}`
+        : `Search complete: ${state.matches.length.toLocaleString()} opportunities match the context above.${typoNote}${acronymNote}`;
     $("results-heading").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
@@ -1583,8 +1711,20 @@
     state.sort = $("sort").value;
     if (!preserveAi) clearAiState({ preserveNofo });
     const search = computeMatches(state.query);
-    state.matches = search.matches;
+    state.strongMatches = search.matches.map(match => ({ ...match, workflowTier: "strong" }));
+    state.potentialMatches = [];
+    state.matches = [...state.strongMatches];
     state.searchDiagnostics = search.diagnostics;
+    state.hybrid.sequence += 1;
+    state.hybrid.pending = false;
+    state.hybrid.active = false;
+    if (hybridCanRun()) {
+      if (state.hybrid.cacheReady && state.hybrid.cachedQuery === state.query) {
+        applyHybridParents(state.hybrid.parents);
+      } else {
+        scheduleHybridSearch(state.query);
+      }
+    }
     if (resetPage) state.page = 1;
     syncStateToUrl();
     if (persistProfile) scheduleProfileSave();
@@ -2010,7 +2150,33 @@
   }
 
   function matchExplanation(match, record) {
-    if (!APP_CONFIG?.flags?.matchExplanations || !MATCH_EXPLAIN_API?.build) return "";
+    if (!APP_CONFIG?.flags?.matchExplanations) return "";
+    if (match.hybridExplanation?.excerpt) {
+      const explanation = match.hybridExplanation;
+      const potential = match.workflowTier === "potential";
+      return `<details class="match-explanation match-explanation-v2" data-match-tier="${potential ? "potential-public-source-passage" : "public-source-passage"}"><summary><span>${potential ? "Why this may be relevant" : "Why this matched"}</span><span class="match-explanation-tier">${potential ? "Supporting public passage" : "Public source passage"}</span></summary><ul><li><strong>${escapeHtml(explanation.source_label || "Public source")}: </strong>${escapeHtml(explanation.excerpt)}</li></ul></details>`;
+    }
+    if (!MATCH_EXPLAIN_API?.build) return "";
+    if (APP_CONFIG?.flags?.searchV2 && MATCH_EXPLAIN_API?.buildV2) {
+      const explanation = MATCH_EXPLAIN_API.buildV2({
+        query: state.query,
+        parent: {
+          record,
+          broad: isBroadOpportunity(record),
+          parentAdmitted: match.parentAdmitted,
+          directEvidence: match.parentDirectEvidence,
+          profileEvidence: match.parentProfileEvidence,
+        },
+        bestChild: match.bestChild,
+        childDroveMatch: match.childDroveMatch,
+        parentAdmitted: match.parentAdmitted,
+        profileSources: match.profileSources,
+        eligibility: match.eligibility,
+        broadFallback: match.broadFallback || null,
+      });
+      if (!explanation?.reasons?.length) return "";
+      return `<details class="match-explanation match-explanation-v2" data-match-tier="${escapeAttribute(explanation.tier)}"><summary><span>Why this matched</span><span class="match-explanation-tier">${escapeHtml(explanation.label)}</span></summary><ul>${explanation.reasons.map(item => `<li>${escapeHtml(item.text)}</li>`).join("")}</ul></details>`;
+    }
     const reasons = MATCH_EXPLAIN_API.build({
       parent: {
         record,
@@ -2039,6 +2205,12 @@
       || catalog?.source?.url
       || "https://www.grants.gov/";
     const flags = [
+      APP_CONFIG?.flags?.searchV2 && state.query && match.workflowTier === "strong"
+        ? `<span class="badge open">Strong match</span>`
+        : "",
+      APP_CONFIG?.flags?.searchV2 && state.query && match.workflowTier === "potential"
+        ? `<span class="badge potential">Potential match</span>`
+        : "",
       isBroadOpportunity(record) ? `<span class="badge broad">Broad / umbrella call</span>` : "",
       record.has_preliminary_stage ? `<span class="badge warning">LOI / preproposal</span>` : "",
       record.actionability_status === "preliminary_deadline_passed_verify"
@@ -2086,7 +2258,7 @@
         ? "Archived"
         : "Forecasted";
 
-    return `<article class="result-card${assessment ? " ai-match" : ""}" data-opportunity-id="${escapeAttribute(id)}" tabindex="-1">
+    return `<article class="result-card${assessment ? " ai-match" : ""}${match.workflowTier === "potential" ? " potential-match" : ""}" data-opportunity-id="${escapeAttribute(id)}" tabindex="-1">
       <div class="card-topline">
         <span class="result-position">Result ${Number(resultPosition).toLocaleString()}</span>
         <span class="badge ${statusClass}">${statusLabel}</span>
@@ -2833,6 +3005,12 @@
             : state.ai.mode === "foa-focus"
               ? "Single-FOA focus"
               : "Chat-focused results"
+      : state.hybrid.active
+        ? "Strong + potential catalog"
+        : state.hybrid.pending
+          ? "Strong matches · finding potential matches"
+          : state.hybrid.fallbackReason
+            ? "Strong matches"
       : state.profile.active
         ? "Profile-ranked catalog"
         : "Public catalog";
@@ -2851,14 +3029,43 @@
       : "No records match the current search";
 
     if (!page.length) {
+      const strongPotentialWorkflow = APP_CONFIG?.flags?.searchV2 && Boolean(state.query);
+      const waitingForPotential = strongPotentialWorkflow && state.hybrid.pending;
       $("results").innerHTML = `<div class="empty-state">
-        <h3>${hasNofoDocument() ? "No catalog record matched this notice" : "No opportunities matched"}</h3>
-        <p>${hasNofoDocument() ? "You can still ask questions about the uploaded PDF in document chat. Try searching its opportunity number manually if you expect a catalog record." : "Try fewer terms, remove a filter, include forecasted opportunities, or use optional AI expansion to translate the idea into catalog terminology."}</p>
+        <h3>${hasNofoDocument() ? "No catalog record matched this notice" : strongPotentialWorkflow ? "No strong matches found" : "No opportunities matched"}</h3>
+        <p>${hasNofoDocument() ? "You can still ask questions about the uploaded PDF in document chat. Try searching its opportunity number manually if you expect a catalog record." : waitingForPotential ? "We’re checking public opportunity text for potential matches. These may be useful leads, but you should verify the official scope." : strongPotentialWorkflow ? "Try adjusting the search terms or filters." : "Try fewer terms, remove a filter, include forecasted opportunities, or use optional AI expansion to translate the idea into catalog terminology."}</p>
         ${!hasNofoDocument() && aiRefineHasContext() ? `<button class="button ai-button" id="empty-ai-refine" type="button"><span aria-hidden="true">✦</span> Broaden this search with AI</button>` : ""}
         <button class="button secondary" id="empty-clear" type="button">Clear search and filters</button>
       </div>`;
       $("empty-clear")?.addEventListener("click", clearEverything);
       $("empty-ai-refine")?.addEventListener("click", refineWithAi);
+    } else if (APP_CONFIG?.flags?.searchV2 && state.query && !state.ai.active) {
+      const groups = [];
+      page.forEach((match, index) => {
+        const tier = match.workflowTier === "potential" ? "potential" : "strong";
+        let group = groups[groups.length - 1];
+        if (!group || group.tier !== tier) {
+          group = { tier, rows: [] };
+          groups.push(group);
+        }
+        group.rows.push({ match, position: start + index + 1 });
+      });
+      const noStrongNotice = state.strongMatches.length
+        ? ""
+        : `<div class="result-tier-empty"><h3>No strong matches found.</h3><p>The broader search found potential matches below for you to review.</p></div>`;
+      $("results").innerHTML = noStrongNotice + groups.map(group => {
+        const strong = group.tier === "strong";
+        const count = strong ? state.strongMatches.length : state.potentialMatches.length;
+        return `<section class="result-tier result-tier-${group.tier}" aria-labelledby="result-tier-${group.tier}">
+          <div class="result-tier-heading">
+            <h3 id="result-tier-${group.tier}">${strong ? "Strong matches" : "Potential matches"} <span>${count.toLocaleString()}</span></h3>
+            <p>${strong
+              ? "Supported by conservative local evidence in the opportunity’s public title, program area, description, or eligible child text."
+              : "Additional leads from the broader hybrid search. The supporting public passage is shown, but confirm fit in the official opportunity."}</p>
+          </div>
+          ${group.rows.map(item => resultCard(item.match, item.position)).join("")}
+        </section>`;
+      }).join("");
     } else {
       $("results").innerHTML = page
         .map((match, index) => resultCard(match, start + index + 1))
@@ -3902,11 +4109,7 @@
     $("clear-filters").addEventListener("click", clearFiltersOnly);
     $("sort").addEventListener("change", () => {
       state.sort = $("sort").value;
-      state.matches = computeMatches(state.query, state.sort).matches;
-      state.page = 1;
-      syncStateToUrl();
-      scheduleProfileSave();
-      renderResults();
+      runSearch();
     });
     $("page-prev").addEventListener("click", () => {
       goToResultsPage(state.page - 1);
@@ -4345,14 +4548,46 @@
       if (!RETRIEVAL_API?.create) {
         throw new Error("The hybrid retrieval helper did not load. Refresh the page and try again.");
       }
-      searchEngine = RETRIEVAL_API.create(catalog, SEARCH_QUERY);
+      if (APP_CONFIG?.flags?.searchV2 && !SEARCH_V2_CONFIG) {
+        throw new Error("Search v2 could not initialize because its concept contract is missing.");
+      }
+      if (APP_CONFIG?.flags?.searchV2 && !HYBRID_SEARCH_API?.createClient) {
+        throw new Error("Search v2 could not initialize because its hybrid search helper is missing.");
+      }
+      if (
+        APP_CONFIG?.flags?.searchV2
+        && Number(MATCH_EXPLAIN_API?.contractVersion || 0) !== 2
+      ) {
+        throw new Error("Search v2 could not initialize because its explanation contract is incompatible.");
+      }
+      searchEngine = RETRIEVAL_API.create(catalog, SEARCH_QUERY, {
+        searchV2: APP_CONFIG?.flags?.searchV2 === true,
+        searchV2Config: SEARCH_V2_CONFIG,
+        catalogRole: "parent",
+      });
       if (APP_CONFIG?.flags?.subtopics) {
         if (!SUBTOPIC_API?.loadSidecar || !RETRIEVAL_API?.createChildCatalog) {
           throw new Error("The topic search helper did not load. Refresh the page and try again.");
         }
         const sidecar = await SUBTOPIC_API.loadSidecar();
         childCatalog = RETRIEVAL_API.createChildCatalog(sidecar);
-        childSearchEngine = RETRIEVAL_API.create(childCatalog, SEARCH_QUERY);
+        childSearchEngine = RETRIEVAL_API.create(childCatalog, SEARCH_QUERY, {
+          searchV2: APP_CONFIG?.flags?.searchV2 === true,
+          searchV2Config: SEARCH_V2_CONFIG,
+          catalogRole: "child",
+        });
+      }
+      if (APP_CONFIG?.flags?.searchV2 && childCatalog && childSearchEngine) {
+        hybridSearchClient = HYBRID_SEARCH_API.createClient({
+          parentCatalog: catalog,
+          childCatalog,
+          parentEngine: searchEngine,
+          childEngine: childSearchEngine,
+          proxyUrl: APP_CONFIG?.hybridSearch?.proxyUrl || "",
+          manifestUrl: APP_CONFIG?.hybridSearch?.manifestUrl,
+          vectorUrl: APP_CONFIG?.hybridSearch?.vectorUrl,
+          timeoutMs: APP_CONFIG?.hybridSearch?.timeoutMs,
+        });
       }
       if (!PROFILE_API?.loadProfile || !PROFILE_API?.extractCv) {
         throw new Error("The local profile module did not load. Refresh the page and try again.");

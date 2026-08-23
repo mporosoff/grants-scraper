@@ -690,13 +690,6 @@ html.help-open {
     order: 2;
   }
 
-  .site-nav a[aria-current="page"]::after {
-    content: "Current";
-    font-size: .65rem;
-    letter-spacing: .04em;
-    text-transform: uppercase;
-  }
-
   .nav-toggle {
     display: grid;
     flex: none;

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-08-22",
+  "stage": "pre_phase_2",
+  "change_type": "relevance_definition_correction",
+  "supersedes_truth_sha256": "354d625a4071758d831f3dc85355b31efe9bcfb12b3ee94e86578211f799004e",
+  "previous_definition": "Primary or direct relevance required explicit rare-earth or lanthanide target wording; the three authoritative programs were classified as broader-program homes.",
+  "corrected_definition": "Primary relevance may be established either by explicit evidence or by bounded authoritative scope entailment. Literal target wording is not required when controlled concept relationships and published program scope establish that the complete research query lies within the funded scientific domain.",
+  "affected_development_labels": {
+    "360678": "primary_relevant:authoritative_scope_entailment",
+    "361526": "primary_relevant:authoritative_scope_entailment",
+    "362061": "primary_relevant:authoritative_scope_entailment",
+    "362063": "broader_program_fit",
+    "356605": "broader_program_fit",
+    "344592": "irrelevant"
+  },
+  "ree_separations_required_primary_ids": ["360678", "361526", "362061"],
+  "boundedness_rule": "Generic agency, discipline, topic, category, or method labels cannot establish scope entailment. Every primary entailment must pair a controlled concept relationship with authoritative opportunity or publication-eligible child scope.",
+  "scoring_changed": false,
+  "query_frames_changed": false,
+  "development_truth_changed": true,
+  "holdout_opened": false,
+  "holdout_frame_changed": false,
+  "holdout_judgment_instruction": "At Phase 4, adjudicate the sealed holdout using search_v2_truth.json schema version 2, including both primary-admission paths; never reuse the superseded literal-target rule."
+}

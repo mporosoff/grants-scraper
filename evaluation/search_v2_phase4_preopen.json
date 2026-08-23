@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-08-22T22:15:15.3351980Z",
+  "phase": 4,
+  "status": "candidate_frozen_before_holdout_open",
+  "branch": "search-quality-v2",
+  "candidate_code_sha": "627e7c82480e97ed1cc6a5adbc4e830469347acb",
+  "starting_main_sha": "ef7a0642f6ce66828f01ee280bd5993f66029b2f",
+  "working_tree_clean_before_open": true,
+  "production_enabled": false,
+  "intended_version": "v1.2.0",
+  "holdout_status": "sealed_and_unopened",
+  "post_outcome_tuning_permitted": false,
+  "hashes": {
+    "config/search_v2.json": "1d1d9a7f7446992b7df3fe67e07fc9d1f1c34512a0d962f2d0860404fe9d9ca7",
+    "assets/search-query.js": "607ab124cdfb27dcfa171eac3e15063ba7dd388e9683ed6aa96dbf199ebddbf8",
+    "assets/search-retrieval.js": "d8c18b52c5a98f4500942486370d2969f27edda5257ab576d047581b4ab83509",
+    "assets/match-explain.js": "f74f010d62ab460cf13f99d9448795ce8147794c4f821eabcdefcbf9625cf92f",
+    "data/opportunities.js": "f6168e043fc6e4466edb49dd4fa0f957d09509f9591ee952bda035b423d27f1f",
+    "data/subtopics.js": "e2f45ecdfab26770f2346eaa4a488bb57fcaa3cc17c5d90ed25e30d14727f40d",
+    "evaluation/search_v2_frame.json": "00866f788152088c5a1fedbfc5bff8d08915d131ac949b6a354a167f96e72689",
+    "evaluation/search_v2_holdout_frame.json": "7075da9dfbe389009434a100210d6c709a4b2b3d213c52243a8112cd01032ae1",
+    "evaluation/search_v2_development_truth.json": "39c46f4b1c58ed37f6a9b51d8da0d9eddf8dc308be2027e3a2cfa444168f6452",
+    "evaluation/match_explain_v2_frame.json": "8370a51302110a4e7688f201b5ab104be72698267b8b98b9e1925f145ce3a258"
+  },
+  "sizes_bytes": {
+    "data/opportunities.js": 24164500,
+    "data/subtopics.js": 1850103,
+    "evaluation/search_v2_holdout_frame.json": 3207
+  },
+  "phase4_rules": [
+    "Open and execute the pre-registered holdout only after this checkpoint is committed.",
+    "Judge holdout pairs with the corrected query-specific relevance rubric.",
+    "Do not retune weights, aliases, thresholds, admission rules, or explanations after opening outcomes.",
+    "A failed required gate blocks Phase 5 and starts a separately frozen iteration."
+  ]
+}

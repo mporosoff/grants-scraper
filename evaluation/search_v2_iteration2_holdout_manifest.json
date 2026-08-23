@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "iteration": "phase-2r-iteration-2",
+  "frozen_at": "2026-08-22",
+  "status": "sealed_never_executed",
+  "phase4b_authorized": false,
+  "frame": "evaluation/search_v2_iteration2_holdout_frame.json",
+  "frame_sha256": "3e94159b9eff8ef424b51ddc46c4cdb3a28243a39aa21374cd3411fb5d4b3cc3",
+  "query_count": 28,
+  "starting_sha": "38181e63bc9b19b4fea10494852dd4068ffe2d09",
+  "frozen_inputs": {
+    "data/opportunities.js": "f6168e043fc6e4466edb49dd4fa0f957d09509f9591ee952bda035b423d27f1f",
+    "data/subtopics.js": "e2f45ecdfab26770f2346eaa4a488bb57fcaa3cc17c5d90ed25e30d14727f40d",
+    "config/search_v2.json": "1d1d9a7f7446992b7df3fe67e07fc9d1f1c34512a0d962f2d0860404fe9d9ca7",
+    "assets/search-query.js": "607ab124cdfb27dcfa171eac3e15063ba7dd388e9683ed6aa96dbf199ebddbf8",
+    "assets/search-retrieval.js": "d8c18b52c5a98f4500942486370d2969f27edda5257ab576d047581b4ab83509",
+    "assets/match-explain.js": "f74f010d62ab460cf13f99d9448795ce8147794c4f821eabcdefcbf9625cf92f"
+  },
+  "execution_contract": {
+    "candidate_execution_count": 0,
+    "production_execution_count": 0,
+    "results_artifact_exists": false,
+    "truth_adjudication_exists": false,
+    "normal_development_tools_refuse_holdout_arguments": true,
+    "dedicated_runner": "tools/run_search_v2_iteration2_holdout.mjs",
+    "dedicated_runner_state": "non_executing_pre_phase4b_lock",
+    "one_time_execution_requires": [
+      "explicit Phase 4B authorization",
+      "candidate freeze checkpoint",
+      "frozen input hash verification",
+      "separate immutable raw output",
+      "no prior raw output"
+    ]
+  },
+  "stratification": {
+    "chemistry_materials": 6,
+    "public_health": 4,
+    "agriculture": 3,
+    "energy": 2,
+    "ai_computing": 4,
+    "defense": 3,
+    "space": 3,
+    "environmental_science": 2,
+    "biomedical": 1
+  },
+  "pre_registered_required_anchors": {
+    "i2hold_material_01": ["360678", "361526", "362061"],
+    "i2hold_material_02": ["360678", "361526", "362061"],
+    "i2hold_material_03": ["360678", "361526", "362061"],
+    "i2hold_material_04": ["361526", "362061"],
+    "i2hold_health_01": ["363582"],
+    "i2hold_health_02": ["363582"],
+    "i2hold_health_03": ["363222"],
+    "i2hold_ag_01": ["360205"],
+    "i2hold_ag_02": ["360205"],
+    "i2hold_energy_01": ["356623"],
+    "i2hold_energy_02": ["356623"],
+    "i2hold_ai_01": ["361526"],
+    "i2hold_ai_02": ["361526"],
+    "i2hold_defense_02": ["344592"],
+    "i2hold_space_01": ["356536"],
+    "i2hold_space_02": ["356536"],
+    "i2hold_env_01": ["363375"],
+    "i2hold_env_02": ["363537"],
+    "i2hold_child_01": ["361526"],
+    "i2hold_child_02": ["361526"]
+  },
+  "pre_registered_non_primary_expectations": {
+    "i2hold_negative_01": "no primary anchor established by current source scope",
+    "i2hold_negative_02": "no primary anchor established by current source scope",
+    "i2hold_negative_03": "no primary anchor established by current source scope",
+    "i2hold_negative_04": "no primary anchor established by current source scope",
+    "i2hold_acronym_01": "ambiguous acronym must not create a primary match without exact or high-confidence resolution",
+    "i2hold_acronym_02": "ambiguous acronym must not create a primary match without exact or high-confidence resolution",
+    "i2hold_defense_01": "ONR 356605 is pre-registered as broader-program fit unless complete child or controlled program scope is present",
+    "i2hold_broader_01": "broad naval research scope is adjacent and must not be promoted to primary without complete authoritative scope"
+  },
+  "anchor_source_rationale": {
+    "360678": "DOE Office of Science solicitation with authoritative Basic Energy Sciences Separation Science scope.",
+    "361526": "Publication-eligible Genesis children include Critical Minerals Extraction and Processing Technologies, Composable and Modular Foundation Models, adversarial robustness, and rich AI/manufacturing focus areas.",
+    "362061": "NSF Chemical Process Systems publishes critical-minerals, separations, membrane, catalysis, and chemical-process scope.",
+    "363582": "Rural MOMS explicitly funds networks improving rural maternity and obstetric access and care delivery.",
+    "363222": "Tribal MIECHV explicitly supports culturally grounded maternal and early-childhood home visiting services.",
+    "360205": "AFRI authoritative plant-health, plant-production, breeding, genetics, and agricultural-systems scope.",
+    "356623": "SCALEUP publishes grid-scale and energy-storage technology scope.",
+    "344592": "Publication-eligible Super-Materials child establishes high-temperature composite materials in hypersonic environments.",
+    "356536": "Geospace explicitly funds coupled Sun-Earth dynamical, electrodynamical, and chemical-process research.",
+    "363375": "DWPR explicitly funds laboratory and pilot-scale impaired-water treatment and purification research.",
+    "363537": "Alaska CESU explicitly funds actionable coastal-erosion hazard science, data, and decision tools."
+  },
+  "prohibited_until_phase4b": [
+    "run either search path against any frame query",
+    "inspect candidate result lists for frame queries",
+    "adjudicate candidate results",
+    "use frame outcomes for rule or weight selection",
+    "create a results or truth artifact"
+  ]
+}

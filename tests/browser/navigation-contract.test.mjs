@@ -35,6 +35,10 @@ test("mobile navigation is accessible and safely dismissible", () => {
   assert.match(navigationStyles, /\.site-nav\.is-open\s*\{[\s\S]*?display:\s*flex/);
   assert.match(navigationStyles, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(navigationStyles, /@media \(forced-colors: active\)/);
+  assert.doesNotMatch(navigationStyles, /content:\s*["']Current["']/);
+  assert.doesNotMatch(navigationStyles, /a\[aria-current=["']page["']\]::after/);
+  assert.match(mainPage, /aria-current="page"/);
+  assert.match(teamPage, /aria-current="page"/);
 });
 
 test("shared Help explains the full workflow and optional provider keys", () => {

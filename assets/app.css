@@ -817,6 +817,83 @@ textarea:focus {
   padding-top: 20px;
 }
 
+.result-tier {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+}
+
+.result-tier + .result-tier {
+  margin-top: 10px;
+  padding-top: 28px;
+  border-top: 2px solid #d8e1eb;
+}
+
+.result-tier-heading {
+  padding: 14px 16px;
+  background: #f3f7fb;
+  border: 1px solid #cfdae6;
+  border-radius: 12px;
+}
+
+.result-tier-potential .result-tier-heading {
+  background: #fbf8ef;
+  border-color: #e4d8b8;
+}
+
+.result-tier-heading h3,
+.result-tier-heading p {
+  margin: 0;
+}
+
+.result-tier-heading h3 {
+  color: var(--navy);
+  font-size: 1.03rem;
+}
+
+.result-tier-heading h3 span {
+  display: inline-flex;
+  min-width: 1.6rem;
+  justify-content: center;
+  margin-left: 5px;
+  padding: 1px 6px;
+  color: #48617d;
+  background: white;
+  border: 1px solid #cfdae6;
+  border-radius: 999px;
+  font-size: .72rem;
+}
+
+.result-tier-heading p {
+  margin-top: 5px;
+  color: #526177;
+  font-size: .78rem;
+  line-height: 1.5;
+}
+
+.result-tier-empty {
+  padding: 14px 16px;
+  color: #526177;
+  background: #f7f9fc;
+  border: 1px solid #d8e1eb;
+  border-radius: 12px;
+}
+
+.result-tier-empty h3,
+.result-tier-empty p {
+  margin: 0;
+}
+
+.result-tier-empty h3 {
+  color: var(--navy);
+  font-size: 1rem;
+}
+
+.result-tier-empty p {
+  margin-top: 4px;
+  font-size: .78rem;
+}
+
 .result-card {
   position: relative;
   min-width: 0;
@@ -840,6 +917,10 @@ textarea:focus {
 
 .result-card.ai-match {
   border-left: 4px solid var(--blue);
+}
+
+.result-card.potential-match {
+  border-top-color: #b18a35;
 }
 
 .card-topline {
@@ -900,6 +981,12 @@ textarea:focus {
 }
 
 .badge.broad {
+  color: #76510d;
+  background: #fff6d9;
+  border: 1px solid #ead7a4;
+}
+
+.badge.potential {
   color: #76510d;
   background: #fff6d9;
   border: 1px solid #ead7a4;
@@ -1428,6 +1515,24 @@ textarea:focus {
   font-size: .72rem;
   font-weight: 750;
   cursor: pointer;
+}
+
+.match-explanation-v2 > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  max-width: 100%;
+}
+
+.match-explanation-tier {
+  padding: 2px 6px;
+  border: 1px solid #c9d9ea;
+  border-radius: 999px;
+  background: #f4f8fd;
+  color: #526177;
+  font-size: .66rem;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .match-explanation {

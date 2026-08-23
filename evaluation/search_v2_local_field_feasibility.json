@@ -1,0 +1,1134 @@
+{
+  "schema_version": 1,
+  "architecture_reset": "local_fielded_ir",
+  "generated_at": "2026-08-23",
+  "status": "pre_implementation_feasibility_and_post_implementation_outcome_complete",
+  "sealed_phase4c_read_or_executed": false,
+  "configured_scientific_relationships_used": false,
+  "program_specific_scope_mappings_used": false,
+  "method": "Literal/stemmed query groups, conservative edit-distance-one recovery for terms of at least seven characters, compound decomposition, and the strongest authoritative parent/child passage across six distinct fields.",
+  "field_weights_for_feasibility_only": {
+    "parent_title": 8,
+    "child_title": 9,
+    "authoritative_program_area": 6,
+    "child_summary": 4,
+    "bounded_source_evidence": 3,
+    "parent_description": 2
+  },
+  "row_count": 19,
+  "feasibility_counts": {
+    "FULL_FIELDED_SUPPORT_BUT_NOT_ONE_PASSAGE": 1,
+    "FULL_SINGLE_PASSAGE_TEXT_SUPPORT": 1,
+    "INSUFFICIENT_INDEXED_TEXT_FOR_CONVENTIONAL_RANKING": 16,
+    "PARTIAL_TEXT_SUPPORT_RELATIONSHIP_STILL_REQUIRED": 1
+  },
+  "rows": [
+    {
+      "query_id": "i2hold_material_01",
+      "query": "dysprosium solvent recovery",
+      "required_result_id": "360678",
+      "required_result_title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+      "query_groups": [
+        "dysprosium",
+        "solvent",
+        "recovery"
+      ],
+      "indexed_fields_checked": [
+        "parent_title",
+        "child_title",
+        "authoritative_program_area",
+        "child_summary",
+        "bounded_source_evidence",
+        "parent_description"
+      ],
+      "package_matched_group_count": 0,
+      "package_coverage": 0,
+      "strongest_passage": {
+        "record_id": "360678",
+        "source_kind": "parent",
+        "field": "parent_title",
+        "text": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+        "matched_group_count": 0,
+        "coverage": 0,
+        "span": null,
+        "matches": []
+      },
+      "conventional_fielded_feasibility": "INSUFFICIENT_INDEXED_TEXT_FOR_CONVENTIONAL_RANKING",
+      "inherited_iteration3_candidate_trace": {
+        "parent_candidate_discovered": true,
+        "relevant_child_candidate_discovered": null,
+        "candidate_rank_before_verification": 199
+      },
+      "local_fielded_outcome": {
+        "parent_discovery_score": 0,
+        "strongest_child_discovery_score": 0,
+        "visible_primary_rank": null,
+        "final_state": "not_primary"
+      }
+    },
+    {
+      "query_id": "i2hold_material_01",
+      "query": "dysprosium solvent recovery",
+      "required_result_id": "361526",
+      "required_result_title": "The Genesis Mission: Transforming Science and Energy with AI",
+      "query_groups": [
+        "dysprosium",
+        "solvent",
+        "recovery"
+      ],
+      "indexed_fields_checked": [
+        "parent_title",
+        "child_title",
+        "authoritative_program_area",
+        "child_summary",
+        "bounded_source_evidence",
+        "parent_description"
+      ],
+      "package_matched_group_count": 0,
+      "package_coverage": 0,
+      "strongest_passage": {
+        "record_id": "361526",
+        "source_kind": "parent",
+        "field": "parent_title",
+        "text": "The Genesis Mission: Transforming Science and Energy with AI",
+        "matched_group_count": 0,
+        "coverage": 0,
+        "span": null,
+        "matches": []
+      },
+      "conventional_fielded_feasibility": "INSUFFICIENT_INDEXED_TEXT_FOR_CONVENTIONAL_RANKING",
+      "inherited_iteration3_candidate_trace": {
+        "parent_candidate_discovered": true,
+        "relevant_child_candidate_discovered": true,
+        "candidate_rank_before_verification": 4
+      },
+      "local_fielded_outcome": {
+        "parent_discovery_score": 0,
+        "strongest_child_discovery_score": 0,
+        "visible_primary_rank": null,
+        "final_state": "not_primary"
+      }
+    },
+    {
+      "query_id": "i2hold_material_01",
+      "query": "dysprosium solvent recovery",
+      "required_result_id": "362061",
+      "required_result_title": "Chemical Process Systems (CPS)",
+      "query_groups": [
+        "dysprosium",
+        "solvent",
+        "recovery"
+      ],
+      "indexed_fields_checked": [
+        "parent_title",
+        "child_title",
+        "authoritative_program_area",
+        "child_summary",
+        "bounded_source_evidence",
+        "parent_description"
+      ],
+      "package_matched_group_count": 1,
+      "package_coverage": 0.333333,
+      "strongest_passage": {
+        "record_id": "362061",
+        "source_kind": "parent",
+        "field": "parent_description",
+        "text": "Advances can be used in gas separations, the recovery of critical minerals, bioprocessing, and protein and water purification.",
+        "matched_group_count": 1,
+        "coverage": 0.333333,
+        "span": 0,
+        "matches": [
+          {
+            "group_index": 2,
+            "source": "recovery",
+            "terms": [
+              {
+                "query": "recovery",
+                "indexed": "recovery",
+                "position": 4,
+                "kind": "exact"
+              }
+            ]
+          }
+        ]
+      },
+      "conventional_fielded_feasibility": "INSUFFICIENT_INDEXED_TEXT_FOR_CONVENTIONAL_RANKING",
+      "inherited_iteration3_candidate_trace": {
+        "parent_candidate_discovered": true,
+        "relevant_child_candidate_discovered": null,
+        "candidate_rank_before_verification": 2
+      },
+      "local_fielded_outcome": {
+        "parent_discovery_score": 4.495501245307742,
+        "strongest_child_discovery_score": 0,
+        "visible_primary_rank": null,
+        "final_state": "not_primary"
+      }
+    },
+    {
+      "query_id": "i2hold_material_02",
+      "query": "neodymium ion-exchange purification",
+      "required_result_id": "360678",
+      "required_result_title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+      "query_groups": [
+        "neodymium",
+        "ion-exchange",
+        "purification"
+      ],
+      "indexed_fields_checked": [
+        "parent_title",
+        "child_title",
+        "authoritative_program_area",
+        "child_summary",
+        "bounded_source_evidence",
+        "parent_description"
+      ],
+      "package_matched_group_count": 0,
+      "package_coverage": 0,
+      "strongest_passage": {
+        "record_id": "360678",
+        "source_kind": "parent",
+        "field": "parent_title",
+        "text": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+        "matched_group_count": 0,
+        "coverage": 0,
+        "span": null,
+        "matches": []
+      },
+      "conventional_fielded_feasibility": "INSUFFICIENT_INDEXED_TEXT_FOR_CONVENTIONAL_RANKING",
+      "inherited_iteration3_candidate_trace": {
+        "parent_candidate_discovered": true,
+        "relevant_child_candidate_discovered": null,
+        "candidate_rank_before_verification": 199
+      },
+      "local_fielded_outcome": {
+        "parent_discovery_score": 0,
+        "strongest_child_discovery_score": 0,
+        "visible_primary_rank": null,
+        "final_state": "not_primary"
+      }
+    },
+    {
+      "query_id": "i2hold_material_02",
+      "query": "neodymium ion-exchange purification",
+      "required_result_id": "361526",
+      "required_result_title": "The Genesis Mission: Transforming Science and Energy with AI",
+      "query_groups": [
+        "neodymium",
+        "ion-exchange",
+        "purification"
+      ],
+      "indexed_fields_checked": [
+        "parent_title",
+        "child_title",
+        "authoritative_program_area",
+        "child_summary",
+        "bounded_source_evidence",
+        "parent_description"
+      ],
+      "package_matched_group_count": 0,
+      "package_coverage": 0,
+      "strongest_passage": {
+        "record_id": "361526",
+        "source_kind": "parent",
+        "field": "parent_title",
+        "text": "The Genesis Mission: Transforming Science and Energy with AI",
+        "matched_group_count": 0,
+        "coverage": 0,
+        "span": null,
+        "matches": []
+      },
+      "conventional_fielded_feasibility": "INSUFFICIENT_INDEXED_TEXT_FOR_CONVENTIONAL_RANKING",
+      "inherited_iteration3_candidate_trace": {
+        "parent_candidate_discovered": true,
+        "relevant_child_candidate_discovered": true,
+        "candidate_rank_before_verification": 4
+      },
+      "local_fielded_outcome": {
+        "parent_discovery_score": 0,
+        "strongest_child_discovery_score": 0,
+        "visible_primary_rank": null,
+        "final_state": "not_primary"
+      }
+    },
+    {
+      "query_id": "i2hold_material_02",
+      "query": "neodymium ion-exchange purification",
+      "required_result_id": "362061",
+      "required_result_title": "Chemical Process Systems (CPS)",
+      "query_groups": [
+        "neodymium",
+        "ion-exchange",
+        "purification"
+      ],
+      "indexed_fields_checked": [
+        "parent_title",
+        "child_title",
+        "authoritative_program_area",
+        "child_summary",
+        "bounded_source_evidence",
+        "parent_description"
+      ],
+      "package_matched_group_count": 1,
+      "package_coverage": 0.333333,
+      "strongest_passage": {
+        "record_id": "362061",
+        "source_kind": "parent",
+        "field": "parent_description",
+        "text": "Advances can be used in gas separations, the recovery of critical minerals, bioprocessing, and protein and water purification.",
+        "matched_group_count": 1,
+        "coverage": 0.333333,
+        "span": 0,
+        "matches": [
+          {
+            "group_index": 2,
+            "source": "purification",
+            "terms": [
+              {
+                "query": "purification",
+                "indexed": "purification",
+                "position": 10,
+                "kind": "exact"
+              }
+            ]
+          }
+        ]
+      },
+      "conventional_fielded_feasibility": "INSUFFICIENT_INDEXED_TEXT_FOR_CONVENTIONAL_RANKING",
+      "inherited_iteration3_candidate_trace": {
+        "parent_candidate_discovered": true,
+        "relevant_child_candidate_discovered": null,
+        "candidate_rank_before_verification": 2
+      },
+      "local_fielded_outcome": {
+        "parent_discovery_score": 7.643660396679147,
+        "strongest_child_discovery_score": 0,
+        "visible_primary_rank": null,
+        "final_state": "not_primary"
+      }
+    },
+    {
+      "query_id": "i2hold_material_04",
+      "query": "critical-metal leaching technology",
+      "required_result_id": "361526",
+      "required_result_title": "The Genesis Mission: Transforming Science and Energy with AI",
+      "query_groups": [
+        "critical-metal",
+        "leach",
+        "technology"
+      ],
+      "indexed_fields_checked": [
+        "parent_title",
+        "child_title",
+        "authoritative_program_area",
+        "child_summary",
+        "bounded_source_evidence",
+        "parent_description"
+      ],
+      "package_matched_group_count": 1,
+      "package_coverage": 0.333333,
+      "strongest_passage": {
+        "record_id": "361526:challenge-21",
+        "source_kind": "publication_eligible_child",
+        "field": "child_title",
+        "text": "Artificial Intelligence in Fluid Flow for Energy Components and Technologies",
+        "matched_group_count": 1,
+        "coverage": 0.333333,
+        "span": 0,
+        "matches": [
+          {
+            "group_index": 2,
+            "source": "technology",
+            "terms": [
+              {
+                "query": "technology",
+                "indexed": "technology",
+                "position": 6,
+                "kind": "exact"
+              }
+            ]
+          }
+        ]
+      },
+      "conventional_fielded_feasibility": "INSUFFICIENT_INDEXED_TEXT_FOR_CONVENTIONAL_RANKING",
+      "inherited_iteration3_candidate_trace": {
+        "parent_candidate_discovered": true,
+        "relevant_child_candidate_discovered": true,
+        "candidate_rank_before_verification": 3
+      },
+      "local_fielded_outcome": {
+        "parent_discovery_score": 2.5763566446826425,
+        "strongest_child_discovery_score": 3.9368559815973283,
+        "visible_primary_rank": null,
+        "final_state": "not_primary"
+      }
+    },
+    {
+      "query_id": "i2hold_material_04",
+      "query": "critical-metal leaching technology",
+      "required_result_id": "362061",
+      "required_result_title": "Chemical Process Systems (CPS)",
+      "query_groups": [
+        "critical-metal",
+        "leach",
+        "technology"
+      ],
+      "indexed_fields_checked": [
+        "parent_title",
+        "child_title",
+        "authoritative_program_area",
+        "child_summary",
+        "bounded_source_evidence",
+        "parent_description"
+      ],
+      "package_matched_group_count": 1,
+      "package_coverage": 0.333333,
+      "strongest_passage": {
+        "record_id": "362061",
+        "source_kind": "parent",
+        "field": "parent_description",
+        "text": "New CPS technologies for manufacturing, biotechnology, critical minerals, energy, food, and other national priorities will help make the U.S.",
+        "matched_group_count": 1,
+        "coverage": 0.333333,
+        "span": 0,
+        "matches": [
+          {
+            "group_index": 2,
+            "source": "technology",
+            "terms": [
+              {
+                "query": "technology",
+                "indexed": "technology",
+                "position": 1,
+                "kind": "exact"
+              }
+            ]
+          }
+        ]
+      },
+      "conventional_fielded_feasibility": "INSUFFICIENT_INDEXED_TEXT_FOR_CONVENTIONAL_RANKING",
+      "inherited_iteration3_candidate_trace": {
+        "parent_candidate_discovered": true,
+        "relevant_child_candidate_discovered": null,
+        "candidate_rank_before_verification": 2
+      },
+      "local_fielded_outcome": {
+        "parent_discovery_score": 1.9904990901701094,
+        "strongest_child_discovery_score": 0,
+        "visible_primary_rank": null,
+        "final_state": "not_primary"
+      }
+    },
+    {
+      "query_id": "i2hold_ag_01",
+      "query": "heat-resilient plant breeding",
+      "required_result_id": "360205",
+      "required_result_title": "Agriculture and Food Research Initiative Competitive Grants Program Foundational and Applied Science Program",
+      "query_groups": [
+        "heat-resilient",
+        "plant",
+        "breed"
+      ],
+      "indexed_fields_checked": [
+        "parent_title",
+        "child_title",
+        "authoritative_program_area",
+        "child_summary",
+        "bounded_source_evidence",
+        "parent_description"
+      ],
+      "package_matched_group_count": 2,
+      "package_coverage": 0.666667,
+      "strongest_passage": {
+        "record_id": "360205",
+        "source_kind": "parent",
+        "field": "bounded_source_evidence",
+        "text": "selection criteria and/or development of high-throughput methods for on-farm recording of traits for improving selection criteria. e. Exploring alternatives to control inbreeding, exploit crossbreeding, conduct selection experiments, or develop novel breeding programs. Additional Information: a. Requests exceeding budg",
+        "matched_group_count": 1,
+        "coverage": 0.333333,
+        "span": 0,
+        "matches": [
+          {
+            "group_index": 2,
+            "source": "breed",
+            "terms": [
+              {
+                "query": "breed",
+                "indexed": "breed",
+                "position": 22,
+                "kind": "exact"
+              }
+            ]
+          }
+        ]
+      },
+      "conventional_fielded_feasibility": "INSUFFICIENT_INDEXED_TEXT_FOR_CONVENTIONAL_RANKING",
+      "inherited_iteration3_candidate_trace": {
+        "parent_candidate_discovered": false,
+        "relevant_child_candidate_discovered": null,
+        "candidate_rank_before_verification": null
+      },
+      "local_fielded_outcome": {
+        "parent_discovery_score": 15.332511786228343,
+        "strongest_child_discovery_score": 0,
+        "visible_primary_rank": null,
+        "final_state": "not_primary"
+      }
+    },
+    {
+      "query_id": "i2hold_ag_02",
+      "query": "crop disease resistance genomics",
+      "required_result_id": "360205",
+      "required_result_title": "Agriculture and Food Research Initiative Competitive Grants Program Foundational and Applied Science Program",
+      "query_groups": [
+        "crop",
+        "disease",
+        "resistance",
+        "genomic"
+      ],
+      "indexed_fields_checked": [
+        "parent_title",
+        "child_title",
+        "authoritative_program_area",
+        "child_summary",
+        "bounded_source_evidence",
+        "parent_description"
+      ],
+      "package_matched_group_count": 0,
+      "package_coverage": 0,
+      "strongest_passage": {
+        "record_id": "360205",
+        "source_kind": "parent",
+        "field": "parent_title",
+        "text": "Agriculture and Food Research Initiative Competitive Grants Program Foundational and Applied Science Program",
+        "matched_group_count": 0,
+        "coverage": 0,
+        "span": null,
+        "matches": []
+      },
+      "conventional_fielded_feasibility": "INSUFFICIENT_INDEXED_TEXT_FOR_CONVENTIONAL_RANKING",
+      "inherited_iteration3_candidate_trace": {
+        "parent_candidate_discovered": true,
+        "relevant_child_candidate_discovered": null,
+        "candidate_rank_before_verification": 480
+      },
+      "local_fielded_outcome": {
+        "parent_discovery_score": 0,
+        "strongest_child_discovery_score": 0,
+        "visible_primary_rank": null,
+        "final_state": "not_primary"
+      }
+    },
+    {
+      "query_id": "i2hold_energy_01",
+      "query": "grid-scale storage technology scale-up",
+      "required_result_id": "356623",
+      "required_result_title": "SEEDING CRITICAL ADVANCES FOR LEADING ENERGY TECHNOLOGIES WITH UNTAPPED POTENTIAL (SCALEUP) READY",
+      "query_groups": [
+        "grid-scale",
+        "storage",
+        "technology",
+        "scale-up"
+      ],
+      "indexed_fields_checked": [
+        "parent_title",
+        "child_title",
+        "authoritative_program_area",
+        "child_summary",
+        "bounded_source_evidence",
+        "parent_description"
+      ],
+      "package_matched_group_count": 2,
+      "package_coverage": 0.5,
+      "strongest_passage": {
+        "record_id": "356623",
+        "source_kind": "parent",
+        "field": "parent_title",
+        "text": "SEEDING CRITICAL ADVANCES FOR LEADING ENERGY TECHNOLOGIES WITH UNTAPPED POTENTIAL (SCALEUP) READY",
+        "matched_group_count": 2,
+        "coverage": 0.5,
+        "span": 3,
+        "matches": [
+          {
+            "group_index": 2,
+            "source": "technology",
+            "terms": [
+              {
+                "query": "technology",
+                "indexed": "technology",
+                "position": 5,
+                "kind": "exact"
+              }
+            ]
+          },
+          {
+            "group_index": 3,
+            "source": "scale-up",
+            "terms": [
+              {
+                "query": "scale-up",
+                "indexed": "scaleup",
+                "position": 8,
+                "kind": "fuzzy"
+              }
+            ]
+          }
+        ]
+      },
+      "conventional_fielded_feasibility": "INSUFFICIENT_INDEXED_TEXT_FOR_CONVENTIONAL_RANKING",
+      "inherited_iteration3_candidate_trace": {
+        "parent_candidate_discovered": true,
+        "relevant_child_candidate_discovered": null,
+        "candidate_rank_before_verification": 30
+      },
+      "local_fielded_outcome": {
+        "parent_discovery_score": 7.880665074474374,
+        "strongest_child_discovery_score": 0,
+        "visible_primary_rank": null,
+        "final_state": "not_primary"
+      }
+    },
+    {
+      "query_id": "i2hold_energy_02",
+      "query": "seasonal thermal storage commercialization",
+      "required_result_id": "356623",
+      "required_result_title": "SEEDING CRITICAL ADVANCES FOR LEADING ENERGY TECHNOLOGIES WITH UNTAPPED POTENTIAL (SCALEUP) READY",
+      "query_groups": [
+        "seasonal",
+        "thermal",
+        "storage",
+        "commercialization"
+      ],
+      "indexed_fields_checked": [
+        "parent_title",
+        "child_title",
+        "authoritative_program_area",
+        "child_summary",
+        "bounded_source_evidence",
+        "parent_description"
+      ],
+      "package_matched_group_count": 0,
+      "package_coverage": 0,
+      "strongest_passage": {
+        "record_id": "356623",
+        "source_kind": "parent",
+        "field": "parent_title",
+        "text": "SEEDING CRITICAL ADVANCES FOR LEADING ENERGY TECHNOLOGIES WITH UNTAPPED POTENTIAL (SCALEUP) READY",
+        "matched_group_count": 0,
+        "coverage": 0,
+        "span": null,
+        "matches": []
+      },
+      "conventional_fielded_feasibility": "INSUFFICIENT_INDEXED_TEXT_FOR_CONVENTIONAL_RANKING",
+      "inherited_iteration3_candidate_trace": {
+        "parent_candidate_discovered": true,
+        "relevant_child_candidate_discovered": null,
+        "candidate_rank_before_verification": 55
+      },
+      "local_fielded_outcome": {
+        "parent_discovery_score": 0,
+        "strongest_child_discovery_score": 0,
+        "visible_primary_rank": null,
+        "final_state": "not_primary"
+      }
+    },
+    {
+      "query_id": "i2hold_ai_02",
+      "query": "adversarially robust AI science workflows",
+      "required_result_id": "361526",
+      "required_result_title": "The Genesis Mission: Transforming Science and Energy with AI",
+      "query_groups": [
+        "adversarially",
+        "robust",
+        "ai",
+        "science",
+        "workflow"
+      ],
+      "indexed_fields_checked": [
+        "parent_title",
+        "child_title",
+        "authoritative_program_area",
+        "child_summary",
+        "bounded_source_evidence",
+        "parent_description"
+      ],
+      "package_matched_group_count": 3,
+      "package_coverage": 0.6,
+      "strongest_passage": {
+        "record_id": "361526",
+        "source_kind": "parent",
+        "field": "parent_description",
+        "text": "The resulting AI models and workflows, if successful, may be integrated into the American Science Cloud.",
+        "matched_group_count": 3,
+        "coverage": 0.6,
+        "span": 8,
+        "matches": [
+          {
+            "group_index": 2,
+            "source": "ai",
+            "terms": [
+              {
+                "query": "ai",
+                "indexed": "ai",
+                "position": 1,
+                "kind": "exact"
+              }
+            ]
+          },
+          {
+            "group_index": 3,
+            "source": "science",
+            "terms": [
+              {
+                "query": "science",
+                "indexed": "science",
+                "position": 9,
+                "kind": "exact"
+              }
+            ]
+          },
+          {
+            "group_index": 4,
+            "source": "workflow",
+            "terms": [
+              {
+                "query": "workflow",
+                "indexed": "workflow",
+                "position": 3,
+                "kind": "exact"
+              }
+            ]
+          }
+        ]
+      },
+      "conventional_fielded_feasibility": "INSUFFICIENT_INDEXED_TEXT_FOR_CONVENTIONAL_RANKING",
+      "inherited_iteration3_candidate_trace": {
+        "parent_candidate_discovered": true,
+        "relevant_child_candidate_discovered": true,
+        "candidate_rank_before_verification": 7
+      },
+      "local_fielded_outcome": {
+        "parent_discovery_score": 15.81831935013939,
+        "strongest_child_discovery_score": 13.810662220896846,
+        "visible_primary_rank": null,
+        "final_state": "not_primary"
+      }
+    },
+    {
+      "query_id": "i2hold_defense_02",
+      "query": "hypersonic thermal-protection materials",
+      "required_result_id": "344592",
+      "required_result_title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
+      "query_groups": [
+        "hypersonic",
+        "thermal-protection",
+        "material"
+      ],
+      "indexed_fields_checked": [
+        "parent_title",
+        "child_title",
+        "authoritative_program_area",
+        "child_summary",
+        "bounded_source_evidence",
+        "parent_description"
+      ],
+      "package_matched_group_count": 1,
+      "package_coverage": 0.333333,
+      "strongest_passage": {
+        "record_id": "344592:ab-0007",
+        "source_kind": "publication_eligible_child",
+        "field": "child_title",
+        "text": "Earth Materials and Processes",
+        "matched_group_count": 1,
+        "coverage": 0.333333,
+        "span": 0,
+        "matches": [
+          {
+            "group_index": 2,
+            "source": "material",
+            "terms": [
+              {
+                "query": "material",
+                "indexed": "material",
+                "position": 1,
+                "kind": "exact"
+              }
+            ]
+          }
+        ]
+      },
+      "conventional_fielded_feasibility": "INSUFFICIENT_INDEXED_TEXT_FOR_CONVENTIONAL_RANKING",
+      "inherited_iteration3_candidate_trace": {
+        "parent_candidate_discovered": true,
+        "relevant_child_candidate_discovered": true,
+        "candidate_rank_before_verification": 27
+      },
+      "local_fielded_outcome": {
+        "parent_discovery_score": 0,
+        "strongest_child_discovery_score": 3.3341896400029807,
+        "visible_primary_rank": null,
+        "final_state": "not_primary"
+      }
+    },
+    {
+      "query_id": "i2hold_space_01",
+      "query": "Sun-Earth electrodynamic coupling",
+      "required_result_id": "356536",
+      "required_result_title": "Geospace Cluster",
+      "query_groups": [
+        "sun-earth",
+        "electrodynamic",
+        "coupl"
+      ],
+      "indexed_fields_checked": [
+        "parent_title",
+        "child_title",
+        "authoritative_program_area",
+        "child_summary",
+        "bounded_source_evidence",
+        "parent_description"
+      ],
+      "package_matched_group_count": 2,
+      "package_coverage": 0.666667,
+      "strongest_passage": {
+        "record_id": "356536",
+        "source_kind": "parent",
+        "field": "parent_description",
+        "text": "The GC advances knowledge of the Sun--Earth system, including how various parts of the system are coupled through dynamical, electrodynamical and chemical processes.",
+        "matched_group_count": 2,
+        "coverage": 0.666667,
+        "span": 7,
+        "matches": [
+          {
+            "group_index": 0,
+            "source": "sun-earth",
+            "terms": [
+              {
+                "query": "sun-earth",
+                "indexed": "sun--earth",
+                "position": 3,
+                "kind": "fuzzy"
+              }
+            ]
+          },
+          {
+            "group_index": 2,
+            "source": "coupl",
+            "terms": [
+              {
+                "query": "coupl",
+                "indexed": "coupl",
+                "position": 10,
+                "kind": "exact"
+              }
+            ]
+          }
+        ]
+      },
+      "conventional_fielded_feasibility": "INSUFFICIENT_INDEXED_TEXT_FOR_CONVENTIONAL_RANKING",
+      "inherited_iteration3_candidate_trace": {
+        "parent_candidate_discovered": true,
+        "relevant_child_candidate_discovered": null,
+        "candidate_rank_before_verification": 1
+      },
+      "local_fielded_outcome": {
+        "parent_discovery_score": 18.2562606611992,
+        "strongest_child_discovery_score": 0,
+        "visible_primary_rank": null,
+        "final_state": "not_primary"
+      }
+    },
+    {
+      "query_id": "i2hold_space_02",
+      "query": "upper-atmosphere radiation-belt dynamics",
+      "required_result_id": "356536",
+      "required_result_title": "Geospace Cluster",
+      "query_groups": [
+        "upper-atmosphere",
+        "radiation-belt",
+        "dynamic"
+      ],
+      "indexed_fields_checked": [
+        "parent_title",
+        "child_title",
+        "authoritative_program_area",
+        "child_summary",
+        "bounded_source_evidence",
+        "parent_description"
+      ],
+      "package_matched_group_count": 3,
+      "package_coverage": 1,
+      "strongest_passage": {
+        "record_id": "356536",
+        "source_kind": "parent",
+        "field": "parent_description",
+        "text": "• Aeronomy, including studies of wave dynamics, ionization, recombination, chemical reaction, photo emission and transport of energy and momentum within and between the mesosphere, thermosphere and ionosphere of the Earth; how this global system is coupled to the stratosphere below and magnetosphere above; and the plasma physics of phenomena manifested in the coupled ionosphere-magnetosphere system.",
+        "matched_group_count": 1,
+        "coverage": 0.333333,
+        "span": 0,
+        "matches": [
+          {
+            "group_index": 2,
+            "source": "dynamic",
+            "terms": [
+              {
+                "query": "dynamic",
+                "indexed": "dynamic",
+                "position": 4,
+                "kind": "exact"
+              }
+            ]
+          }
+        ]
+      },
+      "conventional_fielded_feasibility": "PARTIAL_TEXT_SUPPORT_RELATIONSHIP_STILL_REQUIRED",
+      "inherited_iteration3_candidate_trace": {
+        "parent_candidate_discovered": true,
+        "relevant_child_candidate_discovered": null,
+        "candidate_rank_before_verification": 9
+      },
+      "local_fielded_outcome": {
+        "parent_discovery_score": 21.79289601935889,
+        "strongest_child_discovery_score": 0,
+        "visible_primary_rank": 1,
+        "final_state": "visible_primary"
+      }
+    },
+    {
+      "query_id": "i2hold_env_01",
+      "query": "pilot-scale impaired-water purification",
+      "required_result_id": "363375",
+      "required_result_title": "Desalination and Water Purification Research Program: Research Projects",
+      "query_groups": [
+        "pilot-scale",
+        "impaired-water",
+        "purification"
+      ],
+      "indexed_fields_checked": [
+        "parent_title",
+        "child_title",
+        "authoritative_program_area",
+        "child_summary",
+        "bounded_source_evidence",
+        "parent_description"
+      ],
+      "package_matched_group_count": 2,
+      "package_coverage": 0.666667,
+      "strongest_passage": {
+        "record_id": "363375",
+        "source_kind": "parent",
+        "field": "parent_title",
+        "text": "Desalination and Water Purification Research Program: Research Projects",
+        "matched_group_count": 1,
+        "coverage": 0.333333,
+        "span": 0,
+        "matches": [
+          {
+            "group_index": 2,
+            "source": "purification",
+            "terms": [
+              {
+                "query": "purification",
+                "indexed": "purification",
+                "position": 2,
+                "kind": "exact"
+              }
+            ]
+          }
+        ]
+      },
+      "conventional_fielded_feasibility": "INSUFFICIENT_INDEXED_TEXT_FOR_CONVENTIONAL_RANKING",
+      "inherited_iteration3_candidate_trace": {
+        "parent_candidate_discovered": true,
+        "relevant_child_candidate_discovered": null,
+        "candidate_rank_before_verification": 1
+      },
+      "local_fielded_outcome": {
+        "parent_discovery_score": 22.182288512396298,
+        "strongest_child_discovery_score": 0,
+        "visible_primary_rank": null,
+        "final_state": "not_primary"
+      }
+    },
+    {
+      "query_id": "i2hold_env_02",
+      "query": "coastal-erosion hazard decision tools",
+      "required_result_id": "363537",
+      "required_result_title": "Cooperative Agreement for Affiliated Partner with the Alaska Cooperative Ecosystem Studies Unit (CESU)",
+      "query_groups": [
+        "coastal-erosion",
+        "hazard",
+        "decision",
+        "tool"
+      ],
+      "indexed_fields_checked": [
+        "parent_title",
+        "child_title",
+        "authoritative_program_area",
+        "child_summary",
+        "bounded_source_evidence",
+        "parent_description"
+      ],
+      "package_matched_group_count": 4,
+      "package_coverage": 1,
+      "strongest_passage": {
+        "record_id": "363537",
+        "source_kind": "parent",
+        "field": "parent_description",
+        "text": "Research and activities may incorporate scientific expertise in areas such as hydrology, geology, geospatial science, biosecurity, and near-earth space science, including extreme events such as drought, flooding, wildland fire, coastal erosion, severe storms, and geologic hazards, to develop actionable science, data, and tools that support informed decision-making by resource managers and stakeholders.",
+        "matched_group_count": 3,
+        "coverage": 0.75,
+        "span": 10,
+        "matches": [
+          {
+            "group_index": 0,
+            "source": "coastal-erosion",
+            "terms": [
+              {
+                "query": "coastal",
+                "indexed": "coastal",
+                "position": 22,
+                "kind": "exact"
+              },
+              {
+                "query": "erosion",
+                "indexed": "erosion",
+                "position": 23,
+                "kind": "exact"
+              }
+            ]
+          },
+          {
+            "group_index": 1,
+            "source": "hazard",
+            "terms": [
+              {
+                "query": "hazard",
+                "indexed": "hazard",
+                "position": 27,
+                "kind": "exact"
+              }
+            ]
+          },
+          {
+            "group_index": 3,
+            "source": "tool",
+            "terms": [
+              {
+                "query": "tool",
+                "indexed": "tool",
+                "position": 32,
+                "kind": "exact"
+              }
+            ]
+          }
+        ]
+      },
+      "conventional_fielded_feasibility": "FULL_FIELDED_SUPPORT_BUT_NOT_ONE_PASSAGE",
+      "inherited_iteration3_candidate_trace": {
+        "parent_candidate_discovered": true,
+        "relevant_child_candidate_discovered": null,
+        "candidate_rank_before_verification": 1
+      },
+      "local_fielded_outcome": {
+        "parent_discovery_score": 20.734566118834994,
+        "strongest_child_discovery_score": 0,
+        "visible_primary_rank": 1,
+        "final_state": "visible_primary"
+      }
+    },
+    {
+      "query_id": "i2hold_child_02",
+      "query": "trustworthy scientific software AI",
+      "required_result_id": "361526",
+      "required_result_title": "The Genesis Mission: Transforming Science and Energy with AI",
+      "query_groups": [
+        "trustworthy",
+        "scientific",
+        "software",
+        "ai"
+      ],
+      "indexed_fields_checked": [
+        "parent_title",
+        "child_title",
+        "authoritative_program_area",
+        "child_summary",
+        "bounded_source_evidence",
+        "parent_description"
+      ],
+      "package_matched_group_count": 4,
+      "package_coverage": 1,
+      "strongest_passage": {
+        "record_id": "361526:e-18",
+        "source_kind": "publication_eligible_child",
+        "field": "child_title",
+        "text": "Trustworthy AI for Scientific Software",
+        "matched_group_count": 4,
+        "coverage": 1,
+        "span": 3,
+        "matches": [
+          {
+            "group_index": 0,
+            "source": "trustworthy",
+            "terms": [
+              {
+                "query": "trustworthy",
+                "indexed": "trustworthy",
+                "position": 0,
+                "kind": "exact"
+              }
+            ]
+          },
+          {
+            "group_index": 1,
+            "source": "scientific",
+            "terms": [
+              {
+                "query": "scientific",
+                "indexed": "scientific",
+                "position": 2,
+                "kind": "exact"
+              }
+            ]
+          },
+          {
+            "group_index": 2,
+            "source": "software",
+            "terms": [
+              {
+                "query": "software",
+                "indexed": "software",
+                "position": 3,
+                "kind": "exact"
+              }
+            ]
+          },
+          {
+            "group_index": 3,
+            "source": "ai",
+            "terms": [
+              {
+                "query": "ai",
+                "indexed": "ai",
+                "position": 1,
+                "kind": "exact"
+              }
+            ]
+          }
+        ]
+      },
+      "conventional_fielded_feasibility": "FULL_SINGLE_PASSAGE_TEXT_SUPPORT",
+      "inherited_iteration3_candidate_trace": {
+        "parent_candidate_discovered": true,
+        "relevant_child_candidate_discovered": true,
+        "candidate_rank_before_verification": 19
+      },
+      "local_fielded_outcome": {
+        "parent_discovery_score": 7.753962493341851,
+        "strongest_child_discovery_score": 26.801009567747894,
+        "visible_primary_rank": 1,
+        "final_state": "visible_primary"
+      }
+    }
+  ]
+}

@@ -25,24 +25,28 @@ function loadConfig(url) {
   return context.globalThis.FUNDING_FINDER_APP;
 }
 
-test("P11 production feature flags enable topics and explanations", () => {
+test("v1.2 production feature flags enable topics, explanations, and hybrid search", () => {
   const production = loadConfig("https://mporosoff.github.io/?ff-subtopics=1&ff-explain=1");
   assert.deepEqual(
     { ...production.productionFlags },
-    { subtopics: true, matchExplanations: true },
+    { subtopics: true, matchExplanations: true, searchV2: true },
   );
   assert.deepEqual(
     { ...production.flags },
-    { subtopics: true, matchExplanations: true },
+    { subtopics: true, matchExplanations: true, searchV2: true },
   );
 
-  const local = loadConfig("http://127.0.0.1:8765/?ff-subtopics=1&ff-explain=1");
+  const local = loadConfig("http://127.0.0.1:8765/?ff-subtopics=1&ff-explain=1&ff-search-v2=1");
   assert.deepEqual(
     { ...local.flags },
-    { subtopics: true, matchExplanations: true },
+    { subtopics: true, matchExplanations: true, searchV2: true },
   );
-  assert.equal(local.release.version, "1.1.0");
-  assert.equal(local.release.updated, "2026-08-21");
+  assert.equal(local.release.version, "1.2.0");
+  assert.equal(local.release.updated, "2026-08-23");
+  assert.equal(
+    production.hybridSearch.proxyUrl,
+    "https://funding-finder-voyage-search.urochestercheme.workers.dev/",
+  );
 });
 
 test("sidecar is lazy and normal pages share one app release source", () => {
@@ -50,10 +54,9 @@ test("sidecar is lazy and normal pages share one app release source", () => {
   assert.match(runtimeSource, /document\.head\.append\(script\)/);
   assert.doesNotMatch(mainHtml, /<script src="\.\/data\/subtopics\.js/);
   assert.doesNotMatch(teamHtml, /<script src="(?:\.\/)?data\/subtopics\.js/);
-  for (const page of [mainHtml, teamHtml]) {
-    assert.match(page, /assets\/app-config\.js\?v=app-1\.1\.0/);
-    assert.match(page, /data-app-version/);
-  }
+  assert.match(mainHtml, /assets\/app-config\.js\?v=app-1\.2\.0/);
+  assert.match(teamHtml, /assets\/app-config\.js\?v=app-1\.2\.0/);
+  for (const page of [mainHtml, teamHtml]) assert.match(page, /data-app-version/);
 });
 
 test("explanations are evidence-only, source-aware, and capped at three", () => {

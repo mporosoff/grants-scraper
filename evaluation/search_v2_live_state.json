@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-08-22",
+  "url": "https://mporosoff.github.io/grants-scraper/match_explorer.html",
+  "live_app_version": "1.1.0",
+  "starting_main_sha": "ef7a0642f6ce66828f01ee280bd5993f66029b2f",
+  "profile_personalization_disabled_for_queries": true,
+  "assets": {
+    "match_explorer.html": {"sha256":"990df60dd4096c576b2422863c7c476c38b4aae8f2f9aad37d961c04621444b1","bytes":38397,"matches_starting_main":true},
+    "assets/search-query.js": {"sha256":"f41a5351701b788be4fc4bc52f72045daf8c48c126d8e75680b2cdfee42096dd","bytes":24687,"matches_starting_main":true,"cache_key":"relevance-2026-08-15-v6"},
+    "assets/search-retrieval.js": {"sha256":"4c7a45b70e481d6082cad338a6e370e7f1a24d8c5a3c8c5869bd9ee0a892f156","bytes":27128,"matches_starting_main":true,"cache_key":"app-1.1.0"},
+    "assets/match-explain.js": {"sha256":"cbdac9ad95eb07953239414abe753b84fb2c492b8282857faa7afcaf9ce54333","bytes":4016,"matches_starting_main":true,"cache_key":"match-ux-20260821"},
+    "data/opportunities.js": {"sha256":"f6168e043fc6e4466edb49dd4fa0f957d09509f9591ee952bda035b423d27f1f","bytes":24164500,"matches_starting_main":true,"cache_key":"catalog-20260822T104801Z"},
+    "data/subtopics.js": {"sha256":"e2f45ecdfab26770f2346eaa4a488bb57fcaa3cc17c5d90ed25e30d14727f40d","bytes":1850103,"matches_starting_main":true,"cache_key":"p10-term-display-20260821"}
+  },
+  "readiness": {
+    "first_observed_reload_ms": 2103,
+    "subsequent_warm_reload_ms": 1598,
+    "sidecar_load_succeeded": true,
+    "catalog_and_sidecar_ready_before_event_binding": true,
+    "url_query_reruns_after_sidecar": true,
+    "parent_only_result_state_possible": false,
+    "visible_initialization_error_on_sidecar_failure": true,
+    "service_worker_present": false,
+    "cross_asset_schema_handshake_present": false,
+    "note": "Initialization awaits the sidecar and constructs the child engine before binding search events. Failures render Catalog unavailable. Parent schema and sidecar completeness are checked, but query/retrieval/sidecar assets have no shared version handshake."
+  },
+  "live_queries": [
+    {"query":"REE","count":1,"ids":["362900"]},
+    {"query":"REEs","count":14,"ids":["359996","363224","363241","360003","363240","363325","363258","361234","360004","362900","360007","362847","360881","344592"]},
+    {"query":"REE separations","count":0,"ids":[]},
+    {"query":"rare earth","count":1,"ids":["362900"]},
+    {"query":"rare earth elements","count":1,"ids":["362900"]},
+    {"query":"rare earth separations","count":0,"ids":[]},
+    {"query":"rare earth element recovery","count":0,"ids":[]},
+    {"query":"lanthanide separation","count":0,"ids":[]},
+    {"query":"lanthanide extraction","count":1,"ids":["362900"]},
+    {"query":"solvent extraction of REEs","count":8,"ids":["363241","363258","361234","360004","362900","362847","360881","344592"]},
+    {"query":"ionic liquids for REE extraction","count":5,"ids":["362063","362061","363375","356605","360678"]},
+    {"query":"critical mineral separations","count":18,"ids":["362061","356605","363215","362900","363633","nsf-cbet:PD-26-370Y","363684","363645","363536","363544","363385","363316","361526","362065","363537","363660","363355","344592"]},
+    {"query":"catalysis","count":17,"ids":["362061","360678","356605","347749","363617","362063","356055","341244","362681","350018","363526","351715","363530","330175","357014","344592","361526"]},
+    {"query":"catalyst","count":18,"ids":["362061","360678","356605","361526","347749","363617","362063","356055","341244","362681","350018","363526","351715","363530","330175","357014","344592","363302"]},
+    {"query":"ree","count":1,"ids":["362900"]},
+    {"query":"R.E.E.","count":0,"ids":[]},
+    {"query":"rare-earth elements","count":0,"ids":[]},
+    {"query":"REE separation","count":0,"ids":[]},
+    {"query":"separation of REEs","count":0,"ids":[]}
+  ],
+  "reconciliation": "All six hashed live assets matched the refreshed local main bytes. The live failures are production behavior, not stale deployment behavior."
+}

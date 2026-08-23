@@ -1894,6 +1894,14 @@ def citation_deadline(fact):
 
 def merge_document_entry(record, entry):
     output = deepcopy(record)
+    previous_program_labels = list(output.pop("document_program_areas", None) or [])
+    previous_program_topics = set(program_areas.topics_for(previous_program_labels))
+    if previous_program_topics:
+        output["topic_areas"] = [
+            topic
+            for topic in (output.get("topic_areas") or [])
+            if topic not in previous_program_topics
+        ]
     if not entry:
         output["document_evidence_status"] = "pending"
         output["document_evidence"] = None
@@ -2020,17 +2028,7 @@ def merge_document_entry(record, entry):
     # Revalidate cached hits against the current controlled vocabulary. This
     # lets a tightened recognizer remove an older false positive (for example,
     # "catalytic capital") without retaining stale search/facet pollution.
-    patterns_by_label = {
-        label: pattern for label, _, pattern in program_areas.ENTRIES
-    }
-    program_area_hits = [
-        hit
-        for hit in (entry.get("program_areas") or [])
-        if patterns_by_label.get(hit.get("label"))
-        and patterns_by_label[hit["label"]].search(
-            ((hit.get("citation") or {}).get("quote") or "")
-        )
-    ]
+    program_area_hits = validated_program_area_hits(entry)
     program_labels = [hit.get("label") for hit in program_area_hits if hit.get("label")]
     if program_labels:
         searchable.extend(program_labels)
@@ -2048,6 +2046,72 @@ def merge_document_entry(record, entry):
         " ".join(str(value) for value in searchable if value)
     )
     return output
+
+
+def validated_program_area_hits(entry):
+    """Return only cached program-area hits still supported by their quote.
+
+    The controlled recognizers can be tightened after a false positive is
+    discovered. Revalidating the cache as well as the browser record prevents
+    a stale derived hit from returning on a later zero-fetch refresh.
+    """
+    patterns_by_label = {
+        label: pattern for label, _, pattern in program_areas.ENTRIES
+    }
+    return [
+        hit
+        for hit in (entry.get("program_areas") or [])
+        if patterns_by_label.get(hit.get("label"))
+        and patterns_by_label[hit["label"]].search(
+            ((hit.get("citation") or {}).get("quote") or "")
+        )
+    ]
+
+
+def revalidate_program_areas_only(catalog, cache, *, now=None):
+    """Rebuild only derived program-area fields after a recognizer change.
+
+    This maintenance path deliberately leaves deadline, currentness, and other
+    document-evidence fields untouched. It lets a controlled-vocabulary bug be
+    repaired incrementally without turning the repair into a broad catalog
+    refresh.
+    """
+    now = now or utc_now()
+    output = deepcopy(catalog)
+    cached_records = cache.setdefault("records", {})
+    changed_ids = set()
+    for opportunity_id, entry in cached_records.items():
+        previous = list(entry.get("program_areas") or [])
+        current = validated_program_area_hits(entry)
+        if current != previous:
+            entry["program_areas"] = current
+            changed_ids.add(str(opportunity_id))
+
+    rebuilt_records = []
+    derived_keys = ("topic_areas", "document_program_areas", "document_search_text")
+    for record in output["opportunities"]:
+        opportunity_id = str(
+            record.get("opportunity_id")
+            or record.get("opportunity_number")
+            or ""
+        )
+        if opportunity_id not in changed_ids:
+            rebuilt_records.append(record)
+            continue
+        merged = merge_document_entry(record, cached_records.get(opportunity_id))
+        rebuilt = deepcopy(record)
+        for key in derived_keys:
+            if key in merged:
+                rebuilt[key] = merged[key]
+            else:
+                rebuilt.pop(key, None)
+        rebuilt_records.append(rebuilt)
+
+    output["opportunities"] = rebuilt_records
+    output["search_index"] = build_search_index(rebuilt_records)
+    output["document_evidence_generated_at"] = iso_utc(now)
+    cache["generated_at"] = iso_utc(now)
+    return output, cache, sorted(changed_ids)
 
 
 def document_metrics(records, cache, refreshed, not_modified, failures):
@@ -2236,6 +2300,8 @@ def enrich_document_evidence(
     classifier_run_entries = []
     for entry in cached_records.values():
         entry["archived_from_catalog_at"] = None
+        if entry.get("program_areas"):
+            entry["program_areas"] = validated_program_area_hits(entry)
 
     candidates = []
     for record in records:
@@ -2483,6 +2549,14 @@ def parse_args(argv=None):
         default=DEFAULT_SUBTOPIC_CACHE,
         help="Subtopic record cache, written only with --enable-subtopics.",
     )
+    parser.add_argument(
+        "--revalidate-program-areas-only",
+        action="store_true",
+        help=(
+            "Revalidate cached controlled program-area hits and rebuild only "
+            "their derived catalog/search-index fields; perform no fetches."
+        ),
+    )
     args = parser.parse_args(argv)
     if args.max_documents < 0:
         parser.error("--max-documents must be non-negative")
@@ -2499,6 +2573,15 @@ def main(argv=None):
     args = parse_args(argv)
     catalog = read_catalog(args.catalog)
     cache = read_cache(args.cache)
+    if args.revalidate_program_areas_only:
+        enriched, cache, changed_ids = revalidate_program_areas_only(catalog, cache)
+        write_cache(cache, args.cache)
+        write_catalog(enriched, args.catalog)
+        print(
+            "Program-area revalidation complete: "
+            f"{len(changed_ids)} affected records ({', '.join(changed_ids) or 'none'})."
+        )
+        return 0
     enriched, cache = enrich_document_evidence(
         catalog,
         cache,

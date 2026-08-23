@@ -1,0 +1,230 @@
+import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
+import { readFile } from "node:fs/promises";
+import { spawn } from "node:child_process";
+import { fileURLToPath } from "node:url";
+import test from "node:test";
+
+const ROOT = new URL("../../", import.meta.url);
+
+async function source(path) {
+  return readFile(new URL(path, ROOT), "utf8");
+}
+
+function sha256(value) {
+  return createHash("sha256").update(value).digest("hex");
+}
+
+function runNode(path, args = []) {
+  return new Promise(resolve => {
+    const child = spawn(process.execPath, [fileURLToPath(new URL(path, ROOT)), ...args], {
+      cwd: fileURLToPath(new URL("../../", import.meta.url)),
+    });
+    let stderr = "";
+    child.stderr.on("data", chunk => { stderr += chunk; });
+    child.on("close", code => resolve({ code, stderr }));
+  });
+}
+
+test("Iteration-2 Phase 4B execution is frozen to one immutable raw artifact", async () => {
+  const [frameSource, runnerSource, rawSource, receiptSource, truthSource, resultsSource] = await Promise.all([
+    source("evaluation/search_v2_iteration2_holdout_frame.json"),
+    source("tools/run_search_v2_iteration2_holdout.mjs"),
+    source("evaluation/search_v2_iteration2_holdout_results_raw.json"),
+    source("evaluation/search_v2_phase4b_execution.json"),
+    source("evaluation/search_v2_iteration2_holdout_truth.json"),
+    source("evaluation/search_v2_iteration2_holdout_results.json"),
+  ]);
+  const frame = JSON.parse(frameSource);
+  const raw = JSON.parse(rawSource);
+  const receipt = JSON.parse(receiptSource);
+  const truth = JSON.parse(truthSource);
+  const results = JSON.parse(resultsSource);
+  assert.equal(frame.status, "sealed_never_executed");
+  assert.equal(frame.construction_contract.candidate_executions, 0);
+  assert.ok(frame.queries.length >= 24 && frame.queries.length <= 30);
+  assert.equal(new Set(frame.queries.map(item => item.query.toLowerCase())).size, frame.queries.length);
+  assert.match(runnerSource, /loadHarness|rankQuery/);
+  assert.equal(raw.execution_count, 1);
+  assert.equal(raw.query_count, 28);
+  assert.equal(raw.post_outcome_tuning_permitted, false);
+  assert.equal(receipt.raw_results_sha256, sha256(rawSource));
+  assert.equal(truth.raw_results_sha256, sha256(rawSource));
+  assert.equal(results.raw_results_sha256, sha256(rawSource));
+  assert.deepEqual(new Set(truth.reviewed_query_ids), new Set(frame.queries.map(item => item.id)));
+  const attempt = await runNode("tools/run_search_v2_iteration2_holdout.mjs", ["--execute-once"]);
+  assert.notEqual(attempt.code, 0);
+  assert.match(attempt.stderr, /already exists.*single-use/s);
+});
+
+test("Phase 4B blocks Phase 5 on the immutable Iteration-2 adjudication", async () => {
+  const [rawSource, truthSource, resultsSource, testRunsSource, releaseSource] = await Promise.all([
+    source("evaluation/search_v2_iteration2_holdout_results_raw.json"),
+    source("evaluation/search_v2_iteration2_holdout_truth.json"),
+    source("evaluation/search_v2_iteration2_holdout_results.json"),
+    source("evaluation/search_v2_phase4b_test_runs.json"),
+    source("evaluation/search_v2_release_candidate_v2.json"),
+  ]);
+  const results = JSON.parse(resultsSource);
+  const testRuns = JSON.parse(testRunsSource);
+  const release = JSON.parse(releaseSource);
+  const expectedFailures = [
+    "A_required_primary_recall",
+    "B_primary_precision",
+    "C_complete_intent",
+    "D_authoritative_scope_generalization",
+    "E_evidence_tier_ranking",
+    "F_broader_program_separation",
+    "G_explanations",
+  ];
+
+  assert.equal(release.immutable_evidence.raw_results.sha256, sha256(rawSource));
+  assert.equal(release.immutable_evidence.query_result_truth.sha256, sha256(truthSource));
+  assert.equal(release.immutable_evidence.adjudicated_results.sha256, sha256(resultsSource));
+  assert.equal(release.immutable_evidence.regression_runs.sha256, sha256(testRunsSource));
+  assert.deepEqual(results.failed_holdout_gates, expectedFailures);
+  assert.deepEqual(release.failed_gates, expectedFailures);
+  assert.equal(release.phase5_authorized, false);
+  assert.equal(release.post_holdout_tuning, false);
+  assert.equal(release.production.search_v2_enabled, false);
+  assert.equal(release.main.unchanged, true);
+  assert.equal(testRuns.all_regression_runs_exit_zero, true);
+});
+
+test("Phase 4 binds one immutable holdout execution to query-specific truth", async () => {
+  const [rawSource, truthSource, resultsSource, preopenSource] = await Promise.all([
+    source("evaluation/search_v2_holdout_results_raw.json"),
+    source("evaluation/search_v2_holdout_truth.json"),
+    source("evaluation/search_v2_holdout_results.json"),
+    source("evaluation/search_v2_phase4_preopen.json"),
+  ]);
+  const raw = JSON.parse(rawSource);
+  const truth = JSON.parse(truthSource);
+  const results = JSON.parse(resultsSource);
+  const preopen = JSON.parse(preopenSource);
+
+  assert.equal(raw.execution_count, 1);
+  assert.equal(raw.query_count, 24);
+  assert.equal(raw.post_outcome_tuning_permitted, false);
+  assert.equal(raw.candidate_code_sha, preopen.candidate_code_sha);
+  assert.equal(
+    raw.holdout_frame_sha256,
+    preopen.hashes["evaluation/search_v2_holdout_frame.json"],
+  );
+  assert.equal(truth.raw_results_sha256, sha256(rawSource));
+  assert.equal(truth.protocol.post_outcome_tuning, false);
+  assert.deepEqual(new Set(truth.reviewed_query_ids), new Set(raw.results.map(item => item.id)));
+  assert.ok(raw.results.every(item => truth.queries[item.id]?.query === item.query));
+  assert.equal(results.raw_results_sha256, sha256(rawSource));
+  assert.equal(results.truth_sha256, sha256(truthSource));
+  assert.deepEqual(results.holdout_gates.query_specific_truth_complete.unjudged_top_10, []);
+});
+
+test("Phase 4 blocks Phase 5 on the exact adjudicated failures", async () => {
+  const [results, release] = await Promise.all([
+    source("evaluation/search_v2_holdout_results.json").then(JSON.parse),
+    source("evaluation/search_v2_release_candidate.json").then(JSON.parse),
+  ]);
+  const expected = [
+    "ree_direct_anchor_recall",
+    "doe_genesis_scope_recall",
+    "direct_positive_precision_and_recall_at_10",
+    "no_candidate_explosion",
+    "no_confirmed_irrelevant_primary_admissions",
+    "rich_evidence_not_buried_by_partial_or_generic_matches",
+    "explanations_not_misleading",
+  ];
+  assert.equal(results.status, "adjudicated_release_candidate_blocked");
+  assert.deepEqual(results.failed_holdout_gates, expected);
+  assert.equal(results.holdout_gates.nasa_rare_earth_false_positive.pass, true);
+  assert.equal(results.holdout_gates.no_candidate_explosion.failures[0].count, 213);
+  assert.equal(release.status, "blocked");
+  assert.equal(release.phase5_authorized, false);
+  assert.equal(release.production_flag_state.search_v2_enabled, false);
+  assert.deepEqual(
+    release.exact_failing_gates,
+    expected.map(name => `holdout:${name}`),
+  );
+  assert.equal(release.acceptance_gate_table.main_not_modified, "passed");
+  assert.equal(release.acceptance_gate_table.branch_clean_and_pushed, "passed");
+  assert.equal(
+    release.branch_head_when_decision_frozen,
+    "2fed3cc0ccd9e3013ea2e9937e7c2548108c20b7",
+  );
+});
+
+test("Iteration-3 Phase 4C execution is frozen to one immutable raw artifact", async () => {
+  const [frameSource, manifestSource, runnerSource, rawSource, receiptSource, truthSource, resultsSource, releaseSource] = await Promise.all([
+    source("evaluation/search_v2_iteration3_holdout_frame.json"),
+    source("evaluation/search_v2_iteration3_holdout_manifest.json"),
+    source("tools/run_search_v2_iteration3_holdout.mjs"),
+    source("evaluation/search_v2_iteration3_holdout_results_raw.json"),
+    source("evaluation/search_v2_phase4c_execution.json"),
+    source("evaluation/search_v2_iteration3_holdout_truth.json"),
+    source("evaluation/search_v2_iteration3_holdout_results.json"),
+    source("evaluation/search_v2_release_candidate_v3.json"),
+  ]);
+  const frame = JSON.parse(frameSource);
+  const manifest = JSON.parse(manifestSource);
+  const raw = JSON.parse(rawSource);
+  const receipt = JSON.parse(receiptSource);
+  const truth = JSON.parse(truthSource);
+  const results = JSON.parse(resultsSource);
+  const release = JSON.parse(releaseSource);
+  // The frame and manifest remain immutable preregistration evidence.
+  assert.equal(frame.status, "sealed_never_executed");
+  assert.equal(frame.construction_contract.candidate_executions, 0);
+  assert.equal(frame.queries.length, 36);
+  assert.equal(sha256(frameSource), "7fde6b7ccbdab59331c26899f37bdbb8f9ee7e30f8f3632f257e28d27124865e");
+  assert.equal(manifest.frame_sha256, sha256(frameSource));
+  assert.equal(raw.execution_count, 1);
+  assert.equal(raw.holdout_query_execution_count, 36);
+  assert.equal(raw.frozen_candidate_sha, "f893d43e795a7f70efdf8191e863fb33e286d148");
+  assert.equal(sha256(rawSource), "c8bd5a3b105963b826f406227ca6a0d4664cf80827f4ce2d5adac550088707ab");
+  assert.equal(receipt.execution_count, 1);
+  assert.equal(receipt.raw_sha256, sha256(rawSource));
+  assert.equal(truth.raw_results_sha256, sha256(rawSource));
+  assert.equal(results.execution_count, 1);
+  assert.equal(results.raw_results_sha256, sha256(rawSource));
+  assert.equal(results.aggregate_metrics.strong_precision_at_10, 1);
+  assert.equal(results.aggregate_metrics.strong_irrelevant_count, 0);
+  assert.equal(results.aggregate_metrics.combined_required_recall_at_20, 1);
+  assert.equal(results.aggregate_metrics.combined_required_recall_at_50, 1);
+  assert.equal(results.all_holdout_quality_gates_pass, true);
+  assert.equal(release.decision_summary, "PHASE 4C PASSED — PHASE 5 AUTHORIZED");
+  assert.equal(release.phase5_authorized, true);
+  assert.equal(release.immutable_evidence.raw_results.sha256, sha256(rawSource));
+  assert.equal(release.immutable_evidence.truth.sha256, sha256(truthSource));
+  assert.equal(release.immutable_evidence.adjudicated_results.sha256, sha256(resultsSource));
+  assert.equal(release.production.search_v2_enabled, false);
+  assert.equal(release.main.unchanged, true);
+  assert.match(runnerSource, /await exists\(RAW_PATH\).*await exists\(EXECUTION_PATH\)/s);
+  const attempt = await runNode(
+    "tools/run_search_v2_iteration3_holdout.mjs",
+    ["--execute-once", "--candidate", "f893d43e795a7f70efdf8191e863fb33e286d148"],
+  );
+  assert.notEqual(attempt.code, 0);
+  assert.match(attempt.stderr, /already been executed/);
+});
+
+test("Iteration-3 fate and leave-out evidence expose the unresolved architecture gate", async () => {
+  const [fates, results, leaveout] = await Promise.all([
+    source("evaluation/search_v2_iteration3_anchor_fates.json").then(JSON.parse),
+    source("evaluation/search_v2_iteration3_results.json").then(JSON.parse),
+    source("evaluation/search_v2_iteration3_leaveout.json").then(JSON.parse),
+  ]);
+  assert.equal(fates.missed_anchor_count, 19);
+  assert.deepEqual(fates.primary_failure_class_counts, {
+    QUERY_INTERPRETATION_FAILURE: 15,
+    SCOPE_REPRESENTATION_FAILURE: 2,
+    VERIFICATION_FAILURE: 2,
+  });
+  assert.equal(fates.semantic_benchmark_trigger.triggered, false);
+  assert.equal(results.combined.required_anchor_micro_recall_at_50, 1);
+  assert.equal(results.combined.irrelevant_visible_primary_count, 0);
+  const byId = new Map(leaveout.results.map(item => [item.id, item]));
+  assert.equal(byId.get("agriculture_family_and_program_out").held_out_recall_at_50, 0);
+  assert.equal(byId.get("energy_family_and_program_out").held_out_recall_at_50, 0);
+  assert.equal(byId.get("ai_family_and_program_out").held_out_recall_at_50, 0.2);
+  assert.equal(byId.get("scaleup_program_out").held_out_recall_at_50, 0);
+});

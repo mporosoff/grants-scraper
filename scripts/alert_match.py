@@ -17,12 +17,21 @@ Pure standard library; no third-party dependencies. Import path:
 from __future__ import annotations
 
 import math
+import re
 from datetime import date, datetime
 from pathlib import Path
 
 from .build_catalog import tokenize
 from .currentness import record_is_current
 from .search_query import expand_query_groups
+from .search_v2_contract import (
+    authoritative_scope_matches,
+    controlled_compound_evidence,
+    protected_ai_evidence,
+    protected_rare_earth_evidence,
+    technical_separation_evidence,
+    validate_search_v2_catalog,
+)
 
 # Facet name -> record field. Mirrors ``facet_counts`` in build_catalog so the
 # filters a user picked in the UI mean the same thing here.
@@ -40,6 +49,7 @@ FACET_FIELDS: dict[str, str] = {
 
 _K1 = 1.2
 _B = 0.75
+_STALE_UNDATED_MAX_AGE_DAYS = 5 * 366
 NEW_RELEVANT_MAX_AGE_DAYS = 14
 NEW_RELEVANT_MIN_SCORE_RATIO = 0.2
 NEW_RELEVANT_MIN_BOOST = 8.0
@@ -97,8 +107,12 @@ def _posting_terms(
     postings: dict,
     index_terms: list[str],
     terms_by_length: dict[int, list[str]],
+    *,
+    exact_only: bool = False,
 ) -> list[tuple[str, float]]:
     """Resolve exact, prefix, then conservative typo-tolerant index terms."""
+    if exact_only:
+        return [(query_term, 1.0)] if query_term in postings else []
     if query_term in postings:
         return [(query_term, 1.0)]
     if len(query_term) >= 3:
@@ -126,12 +140,269 @@ def _posting_terms(
     return [(term, weight) for _, weight, term in candidates[:6]]
 
 
-def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[float]]:
+def _authoritative_document_scope(record: dict) -> str:
+    values: list[str] = []
+    for fact in ((record.get("document_evidence") or {}).get("facts") or []):
+        if fact.get("type") != "review_criteria":
+            continue
+        if isinstance(fact.get("value"), str):
+            values.append(fact["value"])
+        quote = (fact.get("citation") or {}).get("quote")
+        if quote:
+            values.append(str(quote))
+    return " ".join(values)
+
+
+def _fielded_local_scores(
+    catalog: dict,
+    query: str,
+    specification: dict,
+) -> tuple[list[float], bool, list[float]]:
+    """BM25F-style local scoring over authoritative fields only.
+
+    This is the server-side saved-search counterpart of the browser fielded
+    path. It deliberately ignores configured scientific relationship tables.
+    """
+    records = catalog.get("opportunities") or []
+    document_count = len(records)
+    configuration = specification.get("fielded_ranking") or {}
+    field_weights = {
+        "parent_title": 8.0,
+        "child_title": 9.0,
+        "child_summary": 4.0,
+        "parent_description": 2.0,
+        "authoritative_program_area": 6.0,
+        "authoritative_document_scope": 3.0,
+        **configuration.get("field_weights", {}),
+    }
+    field_b = {
+        "parent_title": 0.2,
+        "child_title": 0.15,
+        "child_summary": 0.6,
+        "parent_description": 0.75,
+        "authoritative_program_area": 0.2,
+        "authoritative_document_scope": 0.5,
+        **configuration.get("field_length_normalization", {}),
+    }
+    k1 = float(configuration.get("k1") or 1.2)
+    coordination_power = float(configuration.get("coordination_power") or 3.0)
+    fuzzy_minimum = int(configuration.get("conservative_fuzzy_minimum_length") or 7)
+    proximity_window = int(configuration.get("proximity_window") or 32)
+    proximity_bonus = float(configuration.get("proximity_bonus") or 3.0)
+    phrase_bonus = float(configuration.get("exact_phrase_bonus") or 8.0)
+    title_phrase_bonus = float(configuration.get("title_exact_phrase_bonus") or 12.0)
+
+    def fields(record: dict) -> dict[str, str]:
+        child = bool(record.get("subtopic_id"))
+        if child:
+            return {
+                "child_title": str(record.get("title") or ""),
+                "child_summary": str(record.get("summary") or record.get("description") or ""),
+                "authoritative_program_area": " ".join(
+                    str(value) for value in record.get("program_area_labels") or []
+                ),
+            }
+        return {
+            "parent_title": str(record.get("title") or ""),
+            "parent_description": str(record.get("description") or ""),
+            "authoritative_program_area": " ".join(
+                str(value) for value in (
+                    record.get("program_area_labels")
+                    or record.get("document_program_areas")
+                    or []
+                )
+            ),
+            "authoritative_document_scope": _authoritative_document_scope(record),
+        }
+
+    document_fields = [fields(record) for record in records]
+    token_counts: list[dict[str, dict[str, int]]] = []
+    vocabulary: set[str] = set()
+    document_frequency: dict[str, int] = {}
+    for row in document_fields:
+        counts_by_field: dict[str, dict[str, int]] = {}
+        present: set[str] = set()
+        for field, value in row.items():
+            counts: dict[str, int] = {}
+            for term in tokenize(value):
+                counts[term] = counts.get(term, 0) + 1
+                vocabulary.add(term)
+                present.add(term)
+                if "-" in term:
+                    for part in (item for item in term.split("-") if len(item) > 1):
+                        counts[part] = counts.get(part, 0) + 1
+                        vocabulary.add(part)
+                        present.add(part)
+            counts_by_field[field] = counts
+        token_counts.append(counts_by_field)
+        for term in present:
+            document_frequency[term] = document_frequency.get(term, 0) + 1
+    average_lengths = {
+        field: (
+            sum(sum(row.get(field, {}).values()) for row in token_counts)
+            / max(1, sum(field in row for row in token_counts))
+        )
+        for field in field_weights
+    }
+
+    query_terms = tokenize(query)
+    uppercase_terms = {
+        token
+        for value in re.findall(r"\b[A-Z][A-Z0-9.-]{1,7}\b", query)
+        for token in tokenize(value)
+    }
+    groups: list[dict] = []
+    for source in query_terms:
+        alternatives = [[source]]
+        parts = [part for part in source.split("-") if len(part) > 1]
+        if len(parts) > 1:
+            alternatives.append(parts)
+        if source in uppercase_terms:
+            expansion = tokenize((specification.get("acronym_expansions") or {}).get(source, ""))
+            if len(expansion) >= 2:
+                alternatives.append(expansion)
+        groups.append({
+            "source": source,
+            "alternatives": alternatives,
+            "exact_acronym": source in uppercase_terms,
+        })
+    if not groups:
+        empty = [0.0] * document_count
+        return empty, False, empty.copy()
+
+    def resolutions(term: str, exact_only: bool) -> list[tuple[str, float]]:
+        if term in vocabulary:
+            return [(term, 1.0)]
+        if exact_only or len(term) < fuzzy_minimum:
+            return []
+        values = [
+            candidate
+            for candidate in vocabulary
+            if candidate[0] == term[0]
+            and abs(len(candidate) - len(term)) <= 1
+            and _bounded_damerau_levenshtein(term, candidate, 1) == 1
+        ]
+        return [(candidate, 0.72) for candidate in sorted(values)[:2]]
+
+    def exact_acronym_evidence(document_id: int, source: str) -> bool:
+        pattern = re.compile(
+            rf"(^|[^A-Za-z0-9]){re.escape(source.upper())}"
+            rf"(?![A-Za-z0-9]|\s*/\s*[A-Z])"
+        )
+        return any(pattern.search(value) for value in document_fields[document_id].values())
+
+    def term_score(document_id: int, term: str, exact_only: bool) -> float:
+        best = 0.0
+        for resolved, resolution_weight in resolutions(term, exact_only):
+            weighted_frequency = 0.0
+            for field, counts in token_counts[document_id].items():
+                frequency = counts.get(resolved, 0)
+                if not frequency:
+                    continue
+                length = sum(counts.values())
+                average = max(1.0, average_lengths.get(field, 1.0))
+                normalization = 1 - float(field_b.get(field, 0.0)) + float(
+                    field_b.get(field, 0.0)
+                ) * length / average
+                weighted_frequency += float(field_weights.get(field, 0.0)) * frequency / max(
+                    0.1, normalization
+                )
+            if weighted_frequency <= 0:
+                continue
+            df = document_frequency.get(resolved, 0)
+            inverse_frequency = math.log(
+                1 + ((document_count - df + 0.5) / (df + 0.5))
+            )
+            best = max(
+                best,
+                resolution_weight * inverse_frequency
+                * ((weighted_frequency * (k1 + 1)) / (k1 + weighted_frequency)),
+            )
+        return best
+
+    scores = [0.0] * document_count
+    lexical_scores = [0.0] * document_count
+    normalized_phrase = " ".join(query_terms)
+    strict = 2 <= len(groups) <= 5
+    minimum = 1.0 if strict else float(configuration.get("long_query_minimum_coordination") or 0.7)
+    for document_id, record in enumerate(records):
+        matched = 0
+        base = 0.0
+        for group in groups:
+            best = 0.0
+            for alternative in group["alternatives"]:
+                if group["exact_acronym"] and len(alternative) == 1 and not exact_acronym_evidence(
+                    document_id, group["source"]
+                ):
+                    continue
+                values = [
+                    term_score(
+                        document_id,
+                        term,
+                        group["exact_acronym"] and len(alternative) == 1,
+                    )
+                    for term in alternative
+                ]
+                if values and all(value > 0 for value in values):
+                    best = max(best, sum(values))
+            if best > 0:
+                matched += 1
+                base += best
+        lexical_scores[document_id] = base
+        coordination = matched / len(groups)
+        identifier = str(record.get("opportunity_number") or "").strip().lower()
+        if identifier and query.strip().lower() == identifier:
+            scores[document_id] = base + 50.0
+            continue
+        if (
+            len(groups) == 1
+            and groups[0]["exact_acronym"]
+            and not exact_acronym_evidence(document_id, groups[0]["source"])
+        ):
+            continue
+        if coordination < minimum:
+            continue
+        bonus = 0.0
+        for field, value in document_fields[document_id].items():
+            field_tokens = tokenize(value)
+            if normalized_phrase and normalized_phrase in " ".join(field_tokens):
+                bonus = max(
+                    bonus,
+                    title_phrase_bonus if field.endswith("title") else phrase_bonus,
+                )
+            positions = [
+                index
+                for index, term in enumerate(field_tokens)
+                if term in set(query_terms)
+            ]
+            if len(set(field_tokens) & set(query_terms)) == len(set(query_terms)) and positions:
+                span = max(positions) - min(positions) + 1
+                if span <= proximity_window:
+                    bonus = max(bonus, proximity_bonus * (
+                        1 - max(0, span - len(groups)) / proximity_window
+                    ))
+        scores[document_id] = base * coordination ** coordination_power + bonus
+    return scores, True, lexical_scores
+
+
+def hybrid_scores(
+    catalog: dict,
+    query: str,
+    *,
+    search_v2: bool = False,
+) -> tuple[list[float], bool, list[float]]:
     """Return blended scores, query presence, and lexical-only scores.
 
     Document ids are positions in ``catalog['opportunities']`` (the order the
     index was built in), so ``scores[i]`` scores ``opportunities[i]``.
     """
+    search_v2_spec = validate_search_v2_catalog(catalog) if search_v2 else None
+    if (
+        search_v2
+        and (search_v2_spec.get("fielded_ranking") or {}).get("architecture")
+        == "bm25f_passage_coordination"
+    ):
+        return _fielded_local_scores(catalog, query, search_v2_spec)
     index = catalog["search_index"]
     postings = index["postings"]
     lengths = index["document_lengths"]
@@ -143,13 +414,157 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
         terms_by_length.setdefault(len(term), []).append(term)
 
     lexical_scores = [0.0] * document_count
+    discovery_scores = [0.0] * document_count
     semantic_scores = [0.0] * document_count
     lexical_coverage = [0] * document_count
     semantic_coverage = [0] * document_count
     required_group_coverage = [0] * document_count
     always_required_coverage = [0] * document_count
-    query_groups = expand_query_groups(query, postings)
+    query_groups = expand_query_groups(query, postings, search_v2=search_v2)
+    short_complete_coverage = bool(
+        search_v2
+        and 2 <= len(query_groups) <= 5
+    )
     records = catalog["opportunities"]
+    scope_matches = (
+        authoritative_scope_matches(records, query_groups, search_v2_spec)
+        if search_v2
+        else {}
+    )
+    lexical_group_matches = [set() for _ in range(document_count)]
+    substantive_group_matches = [set() for _ in range(document_count)]
+    broad_grounded_group_matches = [set() for _ in range(document_count)]
+    strict_group_indexes = {
+        index for index, group in enumerate(query_groups) if group.get("strict_evidence")
+    }
+    field_token_sets = []
+    narrative_token_sets = []
+    admission_scope_fields: list[list[tuple[str, list[str]]]] = []
+
+    def scope_tokens(value: str) -> list[str]:
+        return [
+            part
+            for term in tokenize(value)
+            for part in (term, *[item for item in term.split("-") if len(item) > 1])
+        ]
+
+    def authoritative_document_scope(record: dict) -> str:
+        facts = ((record.get("document_evidence") or {}).get("facts") or [])
+        values: list[str] = []
+        for fact in facts:
+            if fact.get("type") != "review_criteria":
+                continue
+            if isinstance(fact.get("value"), str):
+                values.append(fact["value"])
+            quote = (fact.get("citation") or {}).get("quote")
+            if quote:
+                values.append(str(quote))
+        return " ".join(values)
+
+    for record in records:
+        title_terms = set(tokenize(str(record.get("title") or "")))
+        description_terms = set(tokenize(str(record.get("description") or "")))
+        citation_terms = set(tokenize(str(record.get("document_search_text") or "")))
+        authoritative_scope_terms = set(tokenize(authoritative_document_scope(record)))
+        field_token_sets.append(title_terms | description_terms | citation_terms)
+        narrative_token_sets.append(
+            title_terms | description_terms | authoritative_scope_terms
+        )
+        admission_scope_fields.append([
+            ("parent_title", scope_tokens(str(record.get("title") or ""))),
+            ("parent_description", scope_tokens(str(record.get("description") or ""))),
+            (
+                "authoritative_document_scope",
+                scope_tokens(authoritative_document_scope(record)),
+            ),
+        ])
+    source_scope_relationships: dict[str, list[dict]] = {}
+    for relationship in (search_v2_spec or {}).get("source_scope_relationships") or []:
+        concept_id = str(relationship.get("query_concept_id") or "")
+        if concept_id:
+            source_scope_relationships.setdefault(concept_id, []).append(relationship)
+
+    def scope_terms_related(query_term: str, source_term: str) -> bool:
+        if query_term == source_term:
+            return True
+        minimum = min(len(query_term), len(source_term))
+        return minimum >= 5 and (
+            query_term.startswith(source_term) or source_term.startswith(query_term)
+        )
+
+    def field_scope_match(
+        field_tokens: list[str],
+        requirements: list[str],
+        *,
+        exact_short: bool = False,
+    ) -> list[str] | None:
+        maximum_span = len(field_tokens) if len(requirements) <= 1 else 12
+        for start in range(len(field_tokens)):
+            window = field_tokens[start:start + maximum_span]
+            matches: list[str] = []
+            for requirement in requirements:
+                matched = next((
+                    token for token in window
+                    if (
+                        token == requirement
+                        if exact_short and len(requirement) <= 4
+                        else scope_terms_related(requirement, token)
+                    )
+                ), None)
+                if matched is None:
+                    break
+                matches.append(matched)
+            if len(matches) == len(requirements):
+                return list(dict.fromkeys(matches))
+        return None
+
+    def source_grounded_role_evidence(document_id: int, group: dict) -> bool:
+        if group.get("exact_indexed_acronym"):
+            acronym = str(group.get("source") or "").upper()
+            pattern = re.compile(
+                rf"(^|[^A-Za-z0-9]){re.escape(acronym)}"
+                rf"(?![A-Za-z0-9]|\s*/\s*[A-Z])"
+            )
+            if not any(
+                pattern.search(str(value or ""))
+                for field, value in (
+                    ("parent_title", records[document_id].get("title")),
+                    ("parent_description", records[document_id].get("description")),
+                    (
+                        "authoritative_document_scope",
+                        authoritative_document_scope(records[document_id]),
+                    ),
+                )
+            ):
+                return False
+        requirements = scope_tokens(str(group.get("source") or ""))
+        for _field, tokens in admission_scope_fields[document_id]:
+            if requirements and field_scope_match(
+                tokens,
+                requirements,
+                exact_short=bool(group.get("exact_indexed_acronym")),
+            ):
+                return True
+        for relationship in source_scope_relationships.get(
+            str(group.get("concept_id") or ""),
+            [],
+        ):
+            for alternative in relationship.get("source_alternatives") or []:
+                evidence_class_requirements = (
+                    relationship.get("evidence_class_requirements") or {}
+                ).get(str(group.get("evidence_class") or ""), [])
+                if evidence_class_requirements and not any(
+                    term in evidence_class_requirements for term in alternative
+                ):
+                    continue
+                alternative_requirements = scope_tokens(" ".join(alternative or []))
+                for _field, tokens in admission_scope_fields[document_id]:
+                    if alternative_requirements and field_scope_match(
+                        tokens,
+                        alternative_requirements,
+                    ):
+                        return True
+        return False
     document_topics = [list(dict.fromkeys(record.get("topic_areas") or [])) for record in records]
     document_phrase_text = [
         " ".join(tokenize(" ".join([
@@ -189,15 +604,23 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
                 return True
         return False
 
-    for group in query_groups:
+    for group_index, group in enumerate(query_groups):
         group_terms = group["terms"]
         group_documents: set[int] = set()
         group_evidence: dict[int, int] = {}
         group_lexical_scores: dict[int, float] = {}
+        group_term_scores: dict[int, dict[str, float]] = {}
         for query_term, query_weight in group_terms:
             query_term_documents: set[int] = set()
             for term, resolution_weight in _posting_terms(
-                query_term, postings, index_terms, terms_by_length
+                query_term,
+                postings,
+                index_terms,
+                terms_by_length,
+                exact_only=bool(
+                    group.get("exact_indexed_acronym")
+                    and query_term == group["source"]
+                ),
             ):
                 # Typo recovery applies to the user's term, not to controlled
                 # synonym/word-family alternatives inside the same concept.
@@ -215,12 +638,15 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
                     denominator = frequency + _K1 * (
                         1 - _B + _B * (lengths[document_id] / average_length)
                     )
+                    contribution = term_weight * inverse_frequency * (
+                        (frequency * (_K1 + 1)) / denominator
+                    )
                     group_lexical_scores[document_id] = (
                         group_lexical_scores.get(document_id, 0.0)
-                        + term_weight * inverse_frequency * (
-                        (frequency * (_K1 + 1)) / denominator
-                        )
+                        + contribution
                     )
+                    term_scores = group_term_scores.setdefault(document_id, {})
+                    term_scores[term] = term_scores.get(term, 0.0) + contribution
                     query_term_documents.add(document_id)
             for document_id in query_term_documents:
                 group_evidence[document_id] = group_evidence.get(document_id, 0) + 1
@@ -228,6 +654,8 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
             int(group.get("minimum_evidence") or 0)
             or (2 if len(group_terms) >= 6 else 1)
         )
+        for document_id, value in group_lexical_scores.items():
+            discovery_scores[document_id] += value
         alternatives = group.get("evidence_alternatives") or ()
         evidence_phrases = tuple(
             " ".join(tokenize(value))
@@ -238,6 +666,44 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
         evidence_mode = group.get("evidence_mode") or "all"
 
         def has_required_evidence(document_id: int) -> bool:
+            if search_v2 and group.get("exact_indexed_acronym"):
+                acronym = str(group.get("source") or "").upper()
+                pattern = re.compile(
+                    rf"(^|[^A-Za-z0-9]){re.escape(acronym)}"
+                    rf"(?![A-Za-z0-9]|\s*/\s*[A-Z])"
+                )
+                source = " ".join((
+                    str(records[document_id].get("title") or ""),
+                    str(records[document_id].get("description") or ""),
+                    authoritative_document_scope(records[document_id]),
+                ))
+                if not pattern.search(source):
+                    return False
+            if search_v2 and group.get("evidence_policy") == "source_grounded_only":
+                return False
+            if search_v2 and group.get("evidence_policy") == "protected_rare_earth":
+                return protected_rare_earth_evidence(records[document_id]) is not None
+            if search_v2 and group.get("evidence_policy") == "protected_ai":
+                return protected_ai_evidence(records[document_id]) is not None
+            if search_v2 and group.get("evidence_policy") == "protected_ai_security":
+                text = " ".join((
+                    str(records[document_id].get("title") or ""),
+                    str(records[document_id].get("description") or ""),
+                ))
+                pattern = (
+                    r"\b(?:secure|security|cybersecurity|adversarial|attack|mitigation)\b"
+                    if group.get("evidence_class") == "security"
+                    else r"\b(?:secure|security|cybersecurity|adversarial|robustness|robust|"
+                         r"resilience|resilient|attack|mitigation|trustworthy)\b"
+                )
+                return re.search(pattern, text, re.I) is not None
+            if search_v2 and group.get("evidence_policy") == "technical_separation":
+                return technical_separation_evidence(records[document_id]) is not None
+            if search_v2 and group.get("evidence_policy") == "controlled_compound":
+                return controlled_compound_evidence(
+                    records[document_id],
+                    tuple(group.get("evidence_phrases") or ()),
+                ) is not None
             checks: list[bool] = []
             if alternatives:
                 checks.append(any(
@@ -271,9 +737,35 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
             if evidence >= required_evidence
             and has_required_evidence(document_id)
         }
+        if short_complete_coverage:
+            group_documents = {
+                document_id
+                for document_id in group_documents
+                if len(
+                    set(group_term_scores.get(document_id, {}))
+                    & field_token_sets[document_id]
+                ) >= required_evidence
+            }
         for document_id in group_documents:
-            lexical_scores[document_id] += group_lexical_scores.get(document_id, 0.0)
+            substantive_group_matches[document_id].add(group_index)
+            if len(
+                set(group_term_scores.get(document_id, {}))
+                & narrative_token_sets[document_id]
+            ) >= required_evidence:
+                broad_grounded_group_matches[document_id].add(group_index)
+            contribution = group_lexical_scores.get(document_id, 0.0)
+            if search_v2 and group.get("saturate_concept"):
+                term_contributions = sorted(
+                    group_term_scores.get(document_id, {}).values(),
+                    reverse=True,
+                )
+                if term_contributions:
+                    contribution = term_contributions[0] + 0.35 * (
+                        term_contributions[1] if len(term_contributions) > 1 else 0.0
+                    )
+            lexical_scores[document_id] += contribution
             lexical_coverage[document_id] += 1
+            lexical_group_matches[document_id].add(group_index)
             if group.get("required_unless_topic"):
                 required_group_coverage[document_id] += 1
             if group.get("required_always"):
@@ -309,6 +801,48 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
             if document_id not in group_documents:
                 semantic_coverage[document_id] += 1
 
+    if search_v2 and short_complete_coverage:
+        for document_id in range(document_count):
+            if (
+                discovery_scores[document_id] + semantic_scores[document_id] <= 0
+                and document_id not in scope_matches
+            ):
+                continue
+            for group_index, group in enumerate(query_groups):
+                if group_index in substantive_group_matches[document_id]:
+                    continue
+                if not source_grounded_role_evidence(document_id, group):
+                    continue
+                lexical_group_matches[document_id].add(group_index)
+                substantive_group_matches[document_id].add(group_index)
+                broad_grounded_group_matches[document_id].add(group_index)
+                lexical_coverage[document_id] += 1
+                lexical_scores[document_id] += 0.35
+                if group.get("required_unless_topic"):
+                    required_group_coverage[document_id] += 1
+                if group.get("required_always"):
+                    always_required_coverage[document_id] += 1
+
+    scope_entailment_score = max(
+        0.01,
+        float((search_v2_spec or {}).get("scope_entailment_score") or 1.0),
+    )
+    for document_id, match in scope_matches.items():
+        covered_concepts = set(match.get("covered_concepts") or [])
+        for group_index, group in enumerate(query_groups):
+            if group.get("concept_id") not in covered_concepts:
+                continue
+            if group_index not in lexical_group_matches[document_id]:
+                lexical_group_matches[document_id].add(group_index)
+                lexical_coverage[document_id] += 1
+                if group.get("required_unless_topic"):
+                    required_group_coverage[document_id] += 1
+                if group.get("required_always"):
+                    always_required_coverage[document_id] += 1
+                substantive_group_matches[document_id].add(group_index)
+                broad_grounded_group_matches[document_id].add(group_index)
+        lexical_scores[document_id] += scope_entailment_score
+
     import unicodedata
 
     exact_phrase_documents: set[int] = set()
@@ -337,9 +871,15 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
     # Keep candidate admission lexical. Catalog topics can rerank a record
     # that already satisfies the query, but cannot create topic-wide matches.
     # Two concepts are conjunctive; longer searches keep a 60% coverage floor.
+    protected_complete_coverage = search_v2 and any(
+        group.get("evidence_policy") == "protected_rare_earth"
+        for group in query_groups
+    )
     minimum_coverage = (
         0
         if not query_groups
+        else len(query_groups)
+        if protected_complete_coverage or short_complete_coverage
         else len(query_groups)
         if len(query_groups) <= 2
         else math.ceil(len(query_groups) * 0.6)
@@ -351,15 +891,57 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
         group for group in query_groups if group.get("required_always")
     ]
     scores = [0.0] * document_count
+
+    def stale_undated(record: dict) -> bool:
+        if record.get("rolling") or record.get("close_date") or record.get("archive_date"):
+            return False
+        if str(record.get("status") or "").lower() not in {"posted", "forecasted"}:
+            return False
+        try:
+            posted = datetime.strptime(str(record.get("posted_date") or "")[:10], "%Y-%m-%d").date()
+        except ValueError:
+            return False
+        return (date.today() - posted).days > _STALE_UNDATED_MAX_AGE_DAYS
+
     for document_id in range(document_count):
         combined = lexical_scores[document_id] + semantic_scores[document_id]
         if combined <= 0:
+            continue
+        if search_v2 and stale_undated(records[document_id]):
             continue
         effective_coverage = lexical_coverage[document_id] + 0.55 * semantic_coverage[document_id]
         if (
             minimum_coverage
             and lexical_coverage[document_id] < minimum_coverage
             and document_id not in exact_phrase_documents
+        ):
+            continue
+        if (
+            short_complete_coverage
+            and len(substantive_group_matches[document_id]) < len(query_groups)
+            and document_id not in exact_phrase_documents
+            and document_id not in scope_matches
+        ):
+            continue
+        broad_title = str(records[document_id].get("title") or "")
+        if (
+            short_complete_coverage
+            and re.search(
+                r"broad agency announcement|\bbaa\b|continuation of solicitation|"
+                r"office of science financial assistance|long[\s-]?range|research announcement|"
+                r"research interests of|established program to stimulate competitive research|"
+                r"research collaboration|\broses\b|omnibus|unsolicited proposal|open topic|"
+                r"financial assistance program|annual program statement|office[ -]wide|"
+                r"open[ -]scope solicitation",
+                broad_title,
+                re.I,
+            )
+            and any(
+                group_index not in broad_grounded_group_matches[document_id]
+                for group_index in strict_group_indexes
+            )
+            and document_id not in exact_phrase_documents
+            and document_id not in scope_matches
         ):
             continue
         if (
@@ -382,9 +964,14 @@ def hybrid_scores(catalog: dict, query: str) -> tuple[list[float], bool, list[fl
     return scores, bool(query_groups), lexical_scores
 
 
-def bm25_scores(catalog: dict, query: str) -> tuple[list[float], bool]:
+def bm25_scores(
+    catalog: dict,
+    query: str,
+    *,
+    search_v2: bool = False,
+) -> tuple[list[float], bool]:
     """Compatibility wrapper for callers that consumed the former BM25 API."""
-    scores, has_terms, _ = hybrid_scores(catalog, query)
+    scores, has_terms, _ = hybrid_scores(catalog, query, search_v2=search_v2)
     return scores, has_terms
 
 
@@ -486,6 +1073,8 @@ def search_catalog(
     filters: dict | None = None,
     top_k: int | None = None,
     as_of: date | None = None,
+    *,
+    search_v2: bool = False,
 ) -> list[dict]:
     """Return matching opportunity records, ranked like the site.
 
@@ -496,7 +1085,11 @@ def search_catalog(
     """
     records = catalog.get("opportunities") or []
     if query and query.strip():
-        scores, has_terms, lexical_scores = hybrid_scores(catalog, query)
+        scores, has_terms, lexical_scores = hybrid_scores(
+            catalog,
+            query,
+            search_v2=search_v2,
+        )
     else:
         scores, lexical_scores, has_terms = [0.0] * len(records), [0.0] * len(records), False
 

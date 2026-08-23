@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-08-23T19:57:50.250Z",
+  "phase": "4C",
+  "execution_count": 1,
+  "holdout_query_execution_count": 36,
+  "raw_results": "evaluation/search_v2_iteration3_holdout_results_raw.json",
+  "raw_sha256": "c8bd5a3b105963b826f406227ca6a0d4664cf80827f4ce2d5adac550088707ab",
+  "frozen_candidate_sha": "f893d43e795a7f70efdf8191e863fb33e286d148",
+  "acceptance_runner_head": "05ea0365d2924ae47e081410242e67451a8332e7",
+  "frame_sha256": "7fde6b7ccbdab59331c26899f37bdbb8f9ee7e30f8f3632f257e28d27124865e",
+  "config_sha256": "e0b4c902a00b578d7d044001c72c230dbf0ce55c919091cf8730f245964d99c9",
+  "catalog_sha256": "fb5dec36f33184572a84d6d9fed76adbb415c6102e2acbed50dc2d6ba22cbff6",
+  "sidecar_sha256": "e2f45ecdfab26770f2346eaa4a488bb57fcaa3cc17c5d90ed25e30d14727f40d",
+  "corpus_sha256": "7f649d8036d5003c2836a4ca2cfea5a62e1e52296c8a66d6f7498a9a5baed9c1",
+  "vector_sha256": "697c84f76e83107e290df9b27168cd14fe6592bff2ae657b22d8eb9ee25fb8c2",
+  "provider_request_count": 67,
+  "provider_error_count": 0,
+  "query_fallback_count": 0,
+  "second_execution_permitted": false
+}

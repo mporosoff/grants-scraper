@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="A research-team tool for finding funding opportunities that fit department faculty and saved external collaborators." />
+<meta name="description" content="Add two to four researchers to find funding opportunities that fit the whole team." />
 <meta name="theme-color" content="#001e5f" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Funding Finder Team Match" />
@@ -22,9 +22,9 @@
 <meta name="twitter:image" content="https://mporosoff.github.io/grants-scraper/assets/social/faculty-pairing-link-preview.jpg" />
 <meta name="twitter:image:alt" content="Faculty and funding collaboration finder" />
 <meta http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://api.crossref.org; base-uri 'none'; form-action 'none'" />
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://api.crossref.org https://funding-finder-voyage-search.urochestercheme.workers.dev http://localhost:* http://127.0.0.1:*; base-uri 'none'; form-action 'none'" />
 <meta name="robots" content="noindex, nofollow" />
-<title>ChemE faculty and funding | collaboration finder (internal)</title>
+<title>Research team and funding | collaboration finder</title>
 <link rel="canonical" href="https://mporosoff.github.io/grants-scraper/team_match.html" />
 <link rel="icon" href="./assets/icons/faculty-pairing.ico?v=20260815" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/faculty-pairing-32.png?v=20260815" />
@@ -33,7 +33,7 @@
 <link rel="manifest" href="./assets/icons/faculty-pairing.webmanifest?v=20260815" />
 <link rel="stylesheet" href="./assets/brand.css?v=20260812" />
 <link rel="stylesheet" href="./assets/app.css?v=match-ux-20260821" />
-<link rel="stylesheet" href="./assets/site-nav.css?v=brand-2026-08-12" />
+<link rel="stylesheet" href="./assets/site-nav.css?v=team-match-pre-phase5-20260823" />
 <style>
   :root{
     --navy:var(--ur-navy,#001e5f);--navy-2:var(--ur-meliora-blue,#021bc3);--blue:var(--ur-arpeggio-azure,#0066fd);--blue-dark:var(--ur-meliora-blue,#021bc3);--blue-soft:rgb(183 211 255 / 34%);
@@ -62,6 +62,7 @@
   .pi-toggle.on{background:var(--blue-soft);border-color:var(--blue);color:var(--blue-dark);font-weight:600;}
   .pi-toggle.on .dot{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px #fff;}
   .pi-toggle[disabled]{opacity:.4;cursor:not-allowed;}
+  .pi-toggle[hidden]{display:none;}
   .pi-entry{display:inline-flex;align-items:center;gap:4px;}
   .pi-toggle.external{border-style:dashed;background:#f2fbf7;}
   .pi-toggle.external .dot{border-color:#5aa88a;background:#d7f2e7;}
@@ -71,6 +72,12 @@
   .pi-edit{display:grid;place-items:center;width:30px;height:30px;border:1px solid var(--line-strong);border-radius:50%;background:var(--surface);color:var(--blue-dark);font:inherit;cursor:pointer;}
   .pi-edit:hover{border-color:var(--blue);background:var(--blue-soft);}
   .pi-edit[disabled]{opacity:.4;cursor:not-allowed;}
+  .researcher-picker{display:flex;flex-wrap:wrap;align-items:end;gap:9px;margin-top:12px;padding:12px;border:1px solid #bed2eb;border-radius:11px;background:#f7faff;}
+  .researcher-picker[hidden]{display:none;}
+  .researcher-picker label{display:grid;flex:1;min-width:min(100%,280px);gap:5px;color:var(--navy);font-size:.8rem;font-weight:750;}
+  .researcher-picker select{width:100%;padding:9px 11px;border:1px solid var(--line-strong);border-radius:9px;background:#fff;color:var(--ink);font:inherit;font-weight:400;}
+  .researcher-picker button{padding:9px 13px;border:1px solid var(--blue);border-radius:9px;background:var(--blue);color:#fff;font:inherit;font-size:.82rem;font-weight:750;cursor:pointer;}
+  .researcher-picker button:disabled{opacity:.5;cursor:not-allowed;}
   .external-status{margin:9px 2px 0;color:var(--muted);font-size:.78rem;}
   .external-status.error{color:#9b2735;}
   .researcher-editor{margin:14px 0 2px;padding:16px;border:1px solid #bed2eb;border-radius:12px;background:#f7faff;}
@@ -189,22 +196,31 @@
 <div class="wrap">
   <header class="page">
     <h1>Research team and funding collaboration finder</h1>
-    <p>Pick two to four department faculty or saved external collaborators. The page computes their shared and complementary research themes, then screens the current catalog and scores research-focused opportunities with graded theme, topic, agency-scope, and recency signals. Every result must fit everyone selected.</p>
+    <p>Add two to four researchers to find funding opportunities that fit the team. Choose from department faculty or add another researcher by name, research keywords, or ORCID iD.</p>
     <p class="meta-line" id="meta-line">Loading…</p>
   </header>
 
   <div class="panel">
     <h2>Your team</h2>
-    <p class="hint" id="team-hint">Pick two to four researchers to see funding calls that fit every person in the group.</p>
+    <p class="hint" id="team-hint">Add two to four researchers to see funding opportunities that fit everyone on the team.</p>
     <div class="pi-grid" id="pi-grid">
-      <button class="pi-toggle add-researcher" id="add-researcher" type="button" aria-expanded="false" aria-controls="external-researcher-form">
+      <button class="pi-toggle add-researcher" id="add-researcher" type="button" aria-expanded="false" aria-controls="researcher-picker">
         <span class="dot" aria-hidden="true">+</span>
         Add researcher
       </button>
     </div>
-    <p class="external-status" id="external-status" aria-live="polite">External researchers are saved only in this browser.</p>
+    <div class="researcher-picker" id="researcher-picker" hidden>
+      <label for="researcher-choice">
+        Choose a researcher
+        <select id="researcher-choice">
+          <option value="">Choose a researcher</option>
+        </select>
+      </label>
+      <button id="choose-researcher" type="button" disabled>Add to team</button>
+    </div>
+    <p class="external-status" id="external-status" aria-live="polite">Researchers you add are saved only in this browser.</p>
     <form class="researcher-editor" id="external-researcher-form" hidden>
-      <h3 id="external-editor-heading">Add an external researcher</h3>
+      <h3 id="external-editor-heading">Add a new researcher</h3>
       <p>Add a name and three to eight specific research keywords, import public publication topics with an ORCID iD, or combine both.</p>
       <div class="researcher-fields">
         <label for="external-name">
@@ -243,22 +259,25 @@
   <div id="view" class="result-list"></div>
 
   <footer class="note">
-    <p>Faculty interests and the hand-checked agency scope map are maintained in <code>scripts/faculty_match.py</code>. Matching runs live against the nightly-refreshed current catalog, and archived calls are always excluded. “Broad / umbrella call” marks solicitations that span multiple sponsor topics and require subprogram-level verification. External profiles and imported public ORCID-linked publication metadata remain stored only in this browser. This internal tool remains marked no-index.</p>
+    <p>Team Match screens current parent opportunities and publication-eligible child topics using the same local fielded and optional hybrid search assets as Funding Finder. Every displayed opportunity must also pass the team-specific evidence check for every selected researcher. Archived calls are excluded. Researchers you add and imported public ORCID-linked publication metadata are stored only in this browser. When enhanced ranking is available, one bounded query containing selected research terms and theme labels, but not researcher names or publication text, is sent through the existing Funding Finder search proxy.</p>
     <p class="app-version" data-app-version></p>
     <section class="legal-notice" id="use-notice" aria-label="Use and copyright notice">
-      <p><strong>Use notice:</strong> Team Match is an informational research-planning aid intended for individual and internal institutional use. It is not an official source of record, application or submission system, or legal, financial, compliance, or sponsor guidance.</p>
+      <p><strong>Use notice:</strong> Team Match is an informational research-planning aid. It is not an official source of record, application or submission system, or legal, financial, compliance, or sponsor guidance.</p>
       <p>Opportunity and researcher-match information may be incomplete, outdated, or machine-generated. Before acting or applying, independently verify fit, eligibility, deadlines, requirements, and terms in the sponsor's official notice.</p>
       <p class="copyright-notice">&copy; 2026 Marc D. Porosoff. All rights reserved. Personal, non-commercial use is permitted. All other use, including modification, redistribution, and commercial or organizational use, requires written permission from the author.</p>
     </section>
   </footer>
 </div>
 
-<script src="assets/app-config.js?v=app-1.1.0"></script>
+<script src="assets/app-config.js?v=app-1.2.0"></script>
+<script src="assets/search-v2-config.js?v=app-1.2.0"></script>
 <script src="./data/opportunities.js?v=catalog-20260823T104559Z"></script>
 <script src="data/faculty_matches.js?v=graded-team-themes-v1"></script>
-<script src="assets/search-query.js?v=relevance-2026-08-15-v6"></script>
-<script src="assets/search-retrieval.js?v=app-1.1.0"></script>
-<script src="assets/subtopic-runtime.js?v=app-1.1.0"></script>
+<script src="assets/search-query.js?v=app-1.2.0"></script>
+<script src="assets/search-retrieval.js?v=app-1.2.0"></script>
+<script src="assets/subtopic-runtime.js?v=app-1.2.0"></script>
+<script src="assets/search-hybrid.js?v=app-1.2.0"></script>
+<script src="assets/team-hybrid.js?v=app-1.2.0"></script>
 <script src="assets/orcid.js?v=orcid-2026-08-13"></script>
 <script src="assets/team-researchers.js?v=acronym-2026-08-13"></script>
 <script src="assets/team-matcher.js?v=audit-2026-08-13"></script>
@@ -274,14 +293,22 @@
   var TEAM_API = globalThis.FUNDING_TEAM_RESEARCHERS || null;
   var ORCID_API = globalThis.FUNDING_ORCID || null;
   var SEARCH_API = globalThis.FUNDING_SEARCH_QUERY || null;
+  var SEARCH_V2_CONFIG = globalThis.FUNDING_SEARCH_V2_CONFIG || null;
   var RETRIEVAL_API = globalThis.FUNDING_RETRIEVAL || null;
   var APP_CONFIG = globalThis.FUNDING_FINDER_APP || null;
   var SUBTOPIC_API = globalThis.FUNDING_SUBTOPICS || null;
+  var HYBRID_SEARCH_API = globalThis.FUNDING_HYBRID_SEARCH || null;
+  var TEAM_HYBRID_API = globalThis.FUNDING_TEAM_HYBRID || null;
   var MATCHER_API = globalThis.FUNDING_TEAM_MATCHER || null;
   var MATCH_ENGINE = null;
   var CHILD_MATCH_ENGINE = null;
   var CHILD_CATALOG = null;
   var SEARCH_ENGINE = null;
+  var HYBRID_SEARCH_CLIENT = null;
+  var TEAM_HYBRID_COORDINATOR = null;
+  var teamHybridState = { signature: "", status: "idle", rankById: new Map() };
+  var lastHybridProfiles = [];
+  var lastHybridThemes = [];
   try {
     SEARCH_ENGINE = RETRIEVAL_API && SEARCH_API
       ? RETRIEVAL_API.create(catalogData, SEARCH_API)
@@ -422,7 +449,6 @@
     var renderFit = function (f) {
       var why = reasonText(f);
       return '<div class="pi"><span class="name">' + esc(last(f.name)) + "</span>" +
-        (f.external ? '<span class="badge external">external</span>' : "") +
         (why ? '<div class="why">' + esc(why) + "</div>" :
           (f.scopeLabel ? '<div class="why">Broad sponsor-scope match</div>' : "")) + "</div>";
     };
@@ -698,6 +724,8 @@
     var activeLabels = new Set(themes.filter(function (theme) {
       return themeState[theme.label] !== false;
     }).map(function (theme) { return theme.label; }));
+    lastHybridProfiles = profiles;
+    lastHybridThemes = themes.filter(function (theme) { return activeLabels.has(theme.label); });
     var outcome = MATCH_ENGINE.matchTeam(profiles, activeLabels);
     renderThemes(outcome.themes);
     if (!CHILD_MATCH_ENGINE || !RETRIEVAL_API || !CHILD_CATALOG) {
@@ -751,7 +779,6 @@
       var kt = memberTerms(member);
       var summary = memberSummary(member);
       return '<div class="st-card"><span class="who">' + esc(last(memberName(member))) + "</span>" +
-        (isExternalKey(member) ? ' <span class="badge external">external</span>' : "") +
         (kt.length ? '<div class="terms">' + esc(kt.slice(0, 3).join(" · ")) + "</div>" : "") +
         (summary ? '<div class="summary" title="' + esc(summary) + '">' + esc(summary.slice(0, 90)) + (summary.length > 90 ? "…" : "") + "</div>" : "") + "</div>";
     }).join("");
@@ -762,8 +789,15 @@
       $("view").innerHTML = '<div class="empty">Pick at least two researchers above to see the calls they could pursue together.</div>';
       return;
     }
-    var all = buildShared().filter(function (e) { return matchesQuery(e, q); });
+    var all = buildShared();
     all.sort(balancedRanking);
+    var hybridSignature = TEAM_HYBRID_API
+      ? TEAM_HYBRID_API.teamSignature(lastHybridProfiles, lastHybridThemes)
+      : "";
+    if (teamHybridState.status === "ready" && teamHybridState.signature === hybridSignature) {
+      all = TEAM_HYBRID_API.applyHybridRanking(all, teamHybridState.rankById);
+    }
+    all = all.filter(function (e) { return matchesQuery(e, q); });
 
     var picked = selected.map(function (member) { return last(memberName(member)); }).join(" + ");
     $("count").textContent = all.length + " call" + (all.length === 1 ? "" : "s") + " fit every selected researcher {" + picked + "}" +
@@ -782,6 +816,26 @@
         (q ? " for that filter." : ". Try a different combination.") + "</div>";
     }
     $("view").innerHTML = html;
+    requestTeamHybridRanking(hybridSignature);
+  }
+
+  function requestTeamHybridRanking(signature) {
+    if (!TEAM_HYBRID_COORDINATOR || !signature || selected.length < 2) return;
+    if (teamHybridState.signature === signature && teamHybridState.status !== "idle") return;
+    teamHybridState = { signature: signature, status: "pending", rankById: new Map() };
+    TEAM_HYBRID_COORDINATOR.run({
+      profiles: lastHybridProfiles,
+      themes: lastHybridThemes
+    }).then(function (outcome) {
+      var currentSignature = TEAM_HYBRID_API.teamSignature(lastHybridProfiles, lastHybridThemes);
+      if (outcome.signature !== currentSignature) return;
+      teamHybridState = {
+        signature: outcome.signature,
+        status: "ready",
+        rankById: outcome.rankById
+      };
+      refresh();
+    });
   }
 
   function refresh() {
@@ -795,19 +849,19 @@
   }
 
   function updateMetaLine() {
-    var externalLabel = externalResearchers.length
-      ? " · " + externalResearchers.length + " external researcher" + (externalResearchers.length === 1 ? "" : "s")
+    var savedLabel = externalResearchers.length
+      ? " · " + externalResearchers.length + " saved researcher" + (externalResearchers.length === 1 ? "" : "s")
       : "";
-    $("meta-line").textContent = names.length + " faculty profiles" + externalLabel + " · " +
+    $("meta-line").textContent = names.length + " department faculty profiles" + savedLabel + " · " +
       "live graded matching across " + (MATCH_ENGINE ? MATCH_ENGINE.records.length : 0) + " screened current opportunities";
   }
 
   function renderExternalStatus(message, isError) {
     var count = externalResearchers.length;
     var base = count
-      ? count + " of " + MAX_EXTERNAL + " external researcher" + (count === 1 ? "" : "s") + " saved on this device."
-      : "External researchers are saved only in this browser (up to " + MAX_EXTERNAL + ").";
-    if (!storageAvailable) base = "External researchers are available in this tab only; browser storage is unavailable.";
+      ? count + " of " + MAX_EXTERNAL + " researcher" + (count === 1 ? "" : "s") + " saved on this device."
+      : "Researchers you add are saved only in this browser (up to " + MAX_EXTERNAL + ").";
+    if (!storageAvailable) base = "Researchers you add are available in this tab only; browser storage is unavailable.";
     $("external-status").textContent = message ? base + " " + message : base;
     $("external-status").classList.toggle("error", Boolean(isError));
   }
@@ -818,35 +872,106 @@
     MATCH_ENGINE = MATCHER_API.create(catalogData, M || {}, SEARCH_API);
   }
 
+  function appendResearcherOption(group, value, label) {
+    var option = document.createElement("option");
+    option.value = value;
+    option.textContent = label;
+    group.appendChild(option);
+  }
+
+  function renderResearcherPicker() {
+    var choice = $("researcher-choice");
+    choice.innerHTML = '<option value="">Choose a researcher</option>';
+    var facultyGroup = document.createElement("optgroup");
+    facultyGroup.label = "Department faculty";
+    names.filter(function (name) { return selected.indexOf(name) === -1; }).forEach(function (name) {
+      appendResearcherOption(facultyGroup, name, name);
+    });
+    if (facultyGroup.children.length) choice.appendChild(facultyGroup);
+
+    var savedGroup = document.createElement("optgroup");
+    savedGroup.label = "Saved researchers";
+    externalResearchers.forEach(function (profile) {
+      var key = externalKey(profile.id);
+      if (selected.indexOf(key) === -1) appendResearcherOption(savedGroup, key, profile.name);
+    });
+    if (savedGroup.children.length) choice.appendChild(savedGroup);
+
+    if (externalResearchers.length < MAX_EXTERNAL) {
+      var newGroup = document.createElement("optgroup");
+      newGroup.label = "Add a new researcher";
+      appendResearcherOption(newGroup, "__new__", "Enter name, keywords, or ORCID iD");
+      choice.appendChild(newGroup);
+    }
+    choice.value = "";
+    $("choose-researcher").disabled = true;
+  }
+
   function renderExternalButtons() {
     var grid = $("pi-grid");
-    grid.querySelectorAll("[data-external-entry]").forEach(function (entry) { entry.remove(); });
+    grid.querySelectorAll("[data-member-entry]").forEach(function (entry) { entry.remove(); });
     var addButton = $("add-researcher");
-    externalResearchers.forEach(function (profile) {
-      var member = externalKey(profile.id);
+    selected.forEach(function (member) {
+      var profile = externalProfile(member);
       var entry = document.createElement("span");
       entry.className = "pi-entry";
-      entry.dataset.externalEntry = profile.id;
+      entry.dataset.memberEntry = member;
 
       var toggleButton = document.createElement("button");
       toggleButton.type = "button";
-      toggleButton.className = "pi-toggle external";
+      toggleButton.className = "pi-toggle on" + (profile ? " external" : "");
       toggleButton.id = "t_" + btnId(member);
-      toggleButton.innerHTML = '<span class="dot" aria-hidden="true"></span>' + esc(profile.name);
+      toggleButton.setAttribute("aria-label", "Remove " + memberName(member) + " from team");
+      toggleButton.title = "Remove from team";
+      toggleButton.innerHTML = '<span class="dot" aria-hidden="true"></span>' + esc(memberName(member));
       toggleButton.addEventListener("click", function () { toggle(member); });
-
-      var editButton = document.createElement("button");
-      editButton.type = "button";
-      editButton.className = "pi-edit";
-      editButton.setAttribute("aria-label", "Edit " + profile.name);
-      editButton.title = "Edit " + profile.name;
-      editButton.innerHTML = "&#9998;";
-      editButton.addEventListener("click", function () { openExternalEditor(profile.id); });
-
       entry.appendChild(toggleButton);
-      entry.appendChild(editButton);
+      if (profile) {
+        var editButton = document.createElement("button");
+        editButton.type = "button";
+        editButton.className = "pi-edit";
+        editButton.setAttribute("aria-label", "Edit " + profile.name);
+        editButton.title = "Edit " + profile.name;
+        editButton.innerHTML = "&#9998;";
+        editButton.addEventListener("click", function () { openExternalEditor(profile.id); });
+        entry.appendChild(editButton);
+      }
       grid.insertBefore(entry, addButton);
     });
+    addButton.hidden = selected.length >= MAX;
+    addButton.disabled = selected.length >= MAX;
+    if (addButton.hidden) {
+      $("researcher-picker").hidden = true;
+      addButton.setAttribute("aria-expanded", "false");
+    }
+    renderResearcherPicker();
+  }
+
+  function toggleResearcherPicker() {
+    if (selected.length >= MAX) return;
+    var picker = $("researcher-picker");
+    var opening = picker.hidden;
+    if (opening) closeExternalEditor();
+    picker.hidden = !opening;
+    $("add-researcher").setAttribute("aria-expanded", opening ? "true" : "false");
+    if (opening) $("researcher-choice").focus();
+  }
+
+  function chooseResearcher() {
+    var member = $("researcher-choice").value;
+    if (!member) return;
+    if (member === "__new__") {
+      $("researcher-picker").hidden = true;
+      openExternalEditor("");
+      return;
+    }
+    if (selected.indexOf(member) !== -1) {
+      renderExternalStatus("That researcher is already on the team.", true);
+      return;
+    }
+    toggle(member);
+    $("researcher-picker").hidden = true;
+    $("add-researcher").setAttribute("aria-expanded", "false");
   }
 
   function keywordInput() {
@@ -911,13 +1036,13 @@
     $("external-editor-message").textContent = "";
     renderExternalOrcidStatus("", false);
     $("delete-external").hidden = true;
-    $("add-researcher").setAttribute("aria-expanded", "false");
+    $("add-researcher").setAttribute("aria-expanded", $("researcher-picker").hidden ? "false" : "true");
     updateKeywordCount();
   }
 
   function openExternalEditor(id) {
     if (!TEAM_API) {
-      renderExternalStatus("The external-researcher helper did not load. Refresh the page and try again.", true);
+      renderExternalStatus("The researcher helper did not load. Refresh the page and try again.", true);
       return;
     }
     var profile = id ? externalProfile(id) : null;
@@ -926,7 +1051,7 @@
       return;
     }
     editingExternalId = profile ? profile.id : "";
-    $("external-editor-heading").textContent = profile ? "Edit external researcher" : "Add an external researcher";
+    $("external-editor-heading").textContent = profile ? "Edit researcher" : "Add a new researcher";
     $("external-name").value = profile ? profile.name : "";
     $("external-keywords").value = profile ? profile.keywords.join(", ") : "";
     $("external-orcid").value = profile ? profile.orcid_id || "" : "";
@@ -944,6 +1069,7 @@
       : "", false);
     $("delete-external").hidden = !profile;
     $("external-editor-message").textContent = "";
+    $("researcher-picker").hidden = true;
     $("external-researcher-form").hidden = false;
     $("add-researcher").setAttribute("aria-expanded", "true");
     updateKeywordCount();
@@ -955,6 +1081,7 @@
     externalResearchers = result.profiles;
     storageAvailable = result.saved;
     themeState = {};
+    teamHybridState = { signature: "", status: "idle", rankById: new Map() };
     rebuildResearcherMatches();
     return result;
   }
@@ -977,7 +1104,7 @@
       return profile.id !== editingExternalId && profile.name.toLowerCase() === name.toLowerCase();
     });
     if (duplicate) {
-      $("external-editor-message").textContent = "A saved external researcher already uses that name.";
+      $("external-editor-message").textContent = "A saved researcher already uses that name.";
       $("external-name").focus();
       return;
     }
@@ -1005,7 +1132,7 @@
       });
     } else {
       if (next.length >= MAX_EXTERNAL) {
-        $("external-editor-message").textContent = "You can save up to four external researchers.";
+        $("external-editor-message").textContent = "You can save up to four researchers.";
         return;
       }
       savedId = TEAM_API.createId(name, next);
@@ -1054,21 +1181,11 @@
 
   function updateToggles() {
     var atMax = selected.length >= MAX;
-    var members = names.concat(externalResearchers.map(function (profile) { return externalKey(profile.id); }));
-    members.forEach(function (member) {
-      var btn = $("t_" + btnId(member));
-      if (!btn) return;
-      var on = selected.indexOf(member) !== -1;
-      btn.classList.toggle("on", on);
-      btn.setAttribute("aria-pressed", on ? "true" : "false");
-      btn.disabled = !on && atMax;
-    });
-    $("add-researcher").disabled = externalResearchers.length >= MAX_EXTERNAL;
-    $("add-researcher").title = externalResearchers.length >= MAX_EXTERNAL
-      ? "Four external researchers are already saved"
-      : "Add and save an external researcher";
+    renderExternalButtons();
+    $("add-researcher").disabled = atMax;
+    $("add-researcher").title = atMax ? "The team already has four researchers" : "Add a researcher";
     $("team-hint").textContent = selected.length < 2
-      ? "Pick two to four researchers, including saved external collaborators, to see calls that fit everyone selected."
+      ? "Add two to four researchers to see funding opportunities that fit everyone on the team."
       : "Showing only calls that fit all " + selected.length + " selected researchers. Adding a researcher can only narrow these results.";
   }
   function btnId(n) { return n.replace(/[^a-z0-9]/gi, ""); }
@@ -1078,6 +1195,7 @@
     if (i !== -1) selected.splice(i, 1);
     else if (selected.length < MAX) selected.push(member);
     themeState = {};
+    teamHybridState = { signature: "", status: "idle", rankById: new Map() };
     updateToggles();
     refresh();
   }
@@ -1090,7 +1208,7 @@
       return;
     }
     if (!TEAM_API || !SEARCH_API || !MATCHER_API) {
-      renderExternalStatus("External researchers are unavailable because a helper did not load.", true);
+      renderExternalStatus("Saved researchers are unavailable because a helper did not load.", true);
     } else {
       externalStorage = safeStorage();
       var loaded = TEAM_API.load(externalStorage);
@@ -1109,23 +1227,47 @@
         return;
       }
     }
+    if (
+      CHILD_CATALOG && RETRIEVAL_API && SEARCH_API && SEARCH_V2_CONFIG &&
+      HYBRID_SEARCH_API && TEAM_HYBRID_API
+    ) {
+      try {
+        var hybridParentEngine = RETRIEVAL_API.create(catalogData, SEARCH_API, {
+          searchV2: true,
+          searchV2Config: SEARCH_V2_CONFIG,
+          catalogRole: "parent"
+        });
+        var hybridChildEngine = RETRIEVAL_API.create(CHILD_CATALOG, SEARCH_API, {
+          searchV2: true,
+          searchV2Config: SEARCH_V2_CONFIG,
+          catalogRole: "child"
+        });
+        HYBRID_SEARCH_CLIENT = HYBRID_SEARCH_API.createClient({
+          parentCatalog: catalogData,
+          childCatalog: CHILD_CATALOG,
+          parentEngine: hybridParentEngine,
+          childEngine: hybridChildEngine,
+          proxyUrl: APP_CONFIG && APP_CONFIG.hybridSearch ? APP_CONFIG.hybridSearch.proxyUrl : "",
+          manifestUrl: APP_CONFIG && APP_CONFIG.hybridSearch ? APP_CONFIG.hybridSearch.manifestUrl : undefined,
+          vectorUrl: APP_CONFIG && APP_CONFIG.hybridSearch ? APP_CONFIG.hybridSearch.vectorUrl : undefined,
+          timeoutMs: APP_CONFIG && APP_CONFIG.hybridSearch ? APP_CONFIG.hybridSearch.timeoutMs : undefined
+        });
+        TEAM_HYBRID_COORDINATOR = TEAM_HYBRID_API.createCoordinator({ client: HYBRID_SEARCH_CLIENT });
+      } catch (_hybridError) {
+        HYBRID_SEARCH_CLIENT = null;
+        TEAM_HYBRID_COORDINATOR = null;
+      }
+    }
     updateMetaLine();
 
-    var grid = $("pi-grid");
-    var addButton = $("add-researcher");
-    names.forEach(function (n) {
-      var btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "pi-toggle";
-      btn.id = "t_" + btnId(n);
-      btn.innerHTML = '<span class="dot"></span>' + esc(n);
-      btn.addEventListener("click", function () { toggle(n); });
-      grid.insertBefore(btn, addButton);
-    });
     renderExternalButtons();
 
     $("filter").addEventListener("input", refresh);
-    $("add-researcher").addEventListener("click", function () { openExternalEditor(""); });
+    $("add-researcher").addEventListener("click", toggleResearcherPicker);
+    $("researcher-choice").addEventListener("change", function () {
+      $("choose-researcher").disabled = !$("researcher-choice").value;
+    });
+    $("choose-researcher").addEventListener("click", chooseResearcher);
     $("cancel-external").addEventListener("click", closeExternalEditor);
     $("delete-external").addEventListener("click", deleteExternal);
     $("external-researcher-form").addEventListener("submit", saveExternal);

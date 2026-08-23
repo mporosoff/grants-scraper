@@ -38,6 +38,7 @@ function catalogFor(records, queryApi) {
       record.title,
       record.opportunity_number,
       record.description,
+      record.document_search_text,
       ...(record.topic_areas || []),
       ...(record.disciplines || []),
     ].filter(Boolean).join(" ");
@@ -50,6 +51,7 @@ function catalogFor(records, queryApi) {
     }
   });
   return {
+    schema_version: 3,
     opportunities: records,
     record_count: records.length,
     search_index: {
@@ -57,6 +59,66 @@ function catalogFor(records, queryApi) {
       document_count: records.length,
       document_lengths: documentLengths,
       average_document_length: documentLengths.reduce((sum, value) => sum + value, 0) / records.length,
+    },
+  };
+}
+
+function searchV2Config(apis) {
+  return {
+    schema_version: 2,
+    contract_version: "test-search-v2-stabilization",
+    compatibility: {
+      query_api_contract_version: apis.query.contractVersion,
+      retrieval_api_contract_version: apis.retrieval.contractVersion,
+      parent_catalog_schema_version: 3,
+      child_catalog_schema_version: 1,
+      search_index_algorithm: "bm25",
+      evidence_schema_version: 2,
+    },
+    authoritative_scope_entailments: [],
+  };
+}
+
+function fieldedSearchV2Config(apis) {
+  return {
+    ...searchV2Config(apis),
+    contract_version: "test-local-fielded-search-v2",
+    concept_families: [],
+    source_scope_relationships: [],
+    authoritative_scope_entailments: [],
+    broader_program_fits: [],
+    primary_admission: {
+      concise_query_minimum_groups: 2,
+      concise_query_maximum_groups: 5,
+      require_complete_substantive_intent: true,
+    },
+    fielded_ranking: {
+      architecture: "bm25f_passage_coordination",
+      use_configured_scientific_entailments: false,
+      field_weights: {
+        parent_title: 8,
+        child_title: 9,
+        child_summary: 4,
+        parent_description: 2,
+        authoritative_program_area: 6,
+        authoritative_document_scope: 3,
+      },
+      field_length_normalization: {
+        parent_title: .2,
+        child_title: .15,
+        child_summary: .6,
+        parent_description: .75,
+        authoritative_program_area: .2,
+        authoritative_document_scope: .5,
+      },
+      k1: 1.2,
+      coordination_power: 3,
+      proximity_window: 32,
+      proximity_bonus: 3,
+      exact_phrase_bonus: 8,
+      title_exact_phrase_bonus: 12,
+      conservative_fuzzy_minimum_length: 7,
+      long_query_minimum_coordination: .7,
     },
   };
 }
@@ -143,6 +205,295 @@ test("requires both concepts in a two-concept search", () => {
   assert.equal(result.scores[1], 0);
   assert.equal(result.scores[2], 0);
   assert.equal(result.diagnostics.minimumCoverage, 2);
+});
+
+test("fielded coordination ranks complete intent above extreme partial frequency", () => {
+  const apis = loadApis();
+  const catalog = catalogFor([
+    record("complete", "Autonomous maritime sensing", "Sensors for autonomous maritime operations."),
+    record("partial", "Autonomous systems", "Autonomous ".repeat(100)),
+  ], apis.query);
+  const engine = apis.retrieval.create(catalog, apis.query, {
+    searchV2: true,
+    searchV2Config: fieldedSearchV2Config(apis),
+    catalogRole: "parent",
+  });
+  const result = engine.score("autonomous maritime sensing", { evidence: true });
+  assert.ok(result.scores[0] > 0);
+  assert.equal(result.scores[1], 0);
+  assert.ok(result.discoveryScores[1] > 0, "partial text remains available to candidate discovery");
+  assert.equal(result.evidence[1].admission.reason, "insufficient_query_coordination");
+  assert.equal(result.diagnostics.searchV2.rankingArchitecture, "fielded_bm25f");
+});
+
+test("fielded scoring rewards title phrases and compact proximity", () => {
+  const apis = loadApis();
+  const catalog = catalogFor([
+    record("phrase", "Seasonal thermal storage commercialization"),
+    record("scattered", "Seasonal systems", `thermal ${"background ".repeat(45)} storage commercialization`),
+  ], apis.query);
+  const engine = apis.retrieval.create(catalog, apis.query, {
+    searchV2: true,
+    searchV2Config: fieldedSearchV2Config(apis),
+    catalogRole: "parent",
+  });
+  const result = engine.score("seasonal thermal storage commercialization", { evidence: true });
+  assert.ok(result.scores[0] > result.scores[1]);
+  assert.equal(result.evidence[0].exactTitlePhrase, true);
+  assert.ok(result.evidence[0].admission.rankedBy.some(item => item.type === "proximity"));
+  assert.equal(result.evidence[0].highestContributingPassage.field, "parent_title");
+});
+
+test("fielded scoring treats authoritative parent program areas as a distinct field", () => {
+  const apis = loadApis();
+  const scoped = record("scope", "General research program", "Supports scientific research.");
+  scoped.document_program_areas = ["Seasonal thermal storage commercialization"];
+  const catalog = catalogFor([
+    scoped,
+    record("generic", "Seasonal opportunity", "Thermal research and storage studies."),
+  ], apis.query);
+  const engine = apis.retrieval.create(catalog, apis.query, {
+    searchV2: true,
+    searchV2Config: fieldedSearchV2Config(apis),
+    catalogRole: "parent",
+  });
+  const result = engine.score("seasonal thermal storage commercialization", { evidence: true });
+
+  assert.ok(result.scores[0] > 0);
+  assert.equal(result.scores[1], 0, "partial parent prose must not satisfy complete intent");
+  assert.equal(
+    result.evidence[0].highestContributingPassage.field,
+    "authoritative_program_area",
+  );
+});
+
+test("fielded Strong admission cannot combine separate parent program tracks", () => {
+  const apis = loadApis();
+  const catalog = catalogFor([
+    record(
+      "umbrella",
+      "Umbrella research program",
+      [
+        "Track Alpha supports health data infrastructure.",
+        "Track Alpha develops clinical repositories.",
+        "Track Alpha serves research institutions.",
+        "Track Beta supports workforce workshops.",
+      ].join(" "),
+    ),
+  ], apis.query);
+  const engine = apis.retrieval.create(catalog, apis.query, {
+    searchV2: true,
+    searchV2Config: fieldedSearchV2Config(apis),
+    catalogRole: "parent",
+  });
+  const result = engine.score("health data workforce workshop", { evidence: true });
+
+  assert.equal(result.scores[0], 0);
+  assert.ok(result.discoveryScores[0] > 0);
+  assert.equal(result.evidence[0].admission.reason, "incoherent_cross_passage_evidence");
+  assert.deepEqual([...result.verificationGroupIndexes[0]], [0, 1]);
+});
+
+test("fielded Strong admission cannot combine sibling children", () => {
+  const apis = loadApis();
+  const parentCatalog = catalogFor([
+    record("parent", "Umbrella research program", "Supports multiple independent tracks."),
+  ], apis.query);
+  const children = [
+    {
+      ...record("child-a", "Health data track", "Supports clinical repositories."),
+      subtopic_id: "parent:a",
+      parent_id: "parent",
+      publication_state: "publishable",
+    },
+    {
+      ...record("child-b", "Workforce workshop track", "Supports professional training."),
+      subtopic_id: "parent:b",
+      parent_id: "parent",
+      publication_state: "publishable",
+    },
+  ];
+  const childCatalog = { ...catalogFor(children, apis.query), schema_version: 1 };
+  const parentEngine = apis.retrieval.create(parentCatalog, apis.query, {
+    searchV2: true,
+    searchV2Config: fieldedSearchV2Config(apis),
+    catalogRole: "parent",
+  });
+  const childEngine = apis.retrieval.create(childCatalog, apis.query, {
+    searchV2: true,
+    searchV2Config: fieldedSearchV2Config(apis),
+    catalogRole: "child",
+  });
+  const query = "health data workforce workshop";
+  const parentDirect = parentEngine.score(query, { evidence: true });
+  const childDirect = childEngine.score(query, { evidence: true });
+  const rolled = apis.retrieval.rollupScores({
+    parentCatalog,
+    childCatalog,
+    parentDirect,
+    parentProfile: { scores: new Float64Array(1) },
+    childDirect,
+    childProfile: { scores: new Float64Array(2) },
+    eligibilityBonuses: [0],
+  });
+
+  assert.deepEqual([...childDirect.scores], [0, 0]);
+  assert.ok(childDirect.discoveryScores[0] > 0);
+  assert.ok(childDirect.discoveryScores[1] > 0);
+  assert.equal(rolled.rows.length, 0);
+});
+
+test("one coherent parent or child passage still produces Strong", () => {
+  const apis = loadApis();
+  const parentCatalog = catalogFor([
+    record("parent", "Health data workforce workshop", "Supports an integrated program."),
+  ], apis.query);
+  const childCatalog = { ...catalogFor([{
+    ...record("child", "Integrated training track", "Health data workforce workshops support practitioners."),
+    subtopic_id: "parent:child",
+    parent_id: "parent",
+    publication_state: "publishable",
+  }], apis.query), schema_version: 1 };
+  const options = {
+    searchV2: true,
+    searchV2Config: fieldedSearchV2Config(apis),
+  };
+  const parent = apis.retrieval.create(parentCatalog, apis.query, {
+    ...options,
+    catalogRole: "parent",
+  }).score("health data workforce workshop", { evidence: true });
+  const child = apis.retrieval.create(childCatalog, apis.query, {
+    ...options,
+    catalogRole: "child",
+  }).score("health data workforce workshop", { evidence: true });
+
+  assert.ok(parent.scores[0] > 0);
+  assert.ok(child.scores[0] > 0);
+  assert.equal(parent.evidence[0].admission.atomicEvidenceCoherent, true);
+  assert.equal(child.evidence[0].admission.atomicEvidenceCoherent, true);
+  assert.equal(parent.evidence[0].highestContributingPassage.field, "parent_title");
+  assert.equal(child.evidence[0].highestContributingPassage.field, "child_summary");
+});
+
+test("fielded short acronyms require exact evidence or high-confidence resolution", () => {
+  const apis = loadApis();
+  const catalog = catalogFor([
+    record("collision", "CFDA administration", "Catalog of Federal Domestic Assistance."),
+    record("resolved", "Computational fluid dynamics", "Computational fluid dynamics for flows."),
+  ], apis.query);
+  const engine = apis.retrieval.create(catalog, apis.query, {
+    searchV2: true,
+    searchV2Config: fieldedSearchV2Config(apis),
+    catalogRole: "parent",
+  });
+  const literal = engine.score("CFD");
+  assert.deepEqual([...literal.scores], [0, 0]);
+  const contextual = engine.score("CFD", {
+    context: "Computational fluid dynamics for turbulent reactors.",
+  });
+  assert.equal(contextual.scores[0], 0);
+  assert.ok(contextual.scores[1] > 0);
+});
+
+test("search v2 requires complete substantive coverage for concise technical queries", () => {
+  const apis = loadApis();
+  const catalog = catalogFor([
+    record("complete", "Critical mineral extraction", "Chemical processing and recovery methods."),
+    record("target-only", "Critical minerals workforce workshop", "Policy and advocacy training."),
+    record("method-only", "Chemical separation methods", "Membranes and extraction processes."),
+    record("topic-only", "Quantum sensing platform", "Quantum sensors for materials.", ["Biology and biotechnology"]),
+  ], apis.query);
+  const engine = apis.retrieval.create(catalog, apis.query, {
+    searchV2: true,
+    searchV2Config: searchV2Config(apis),
+    catalogRole: "parent",
+  });
+  const minerals = engine.score("critical mineral separations", { semantic: false, evidence: true });
+  assert.ok(
+    minerals.scores[0] > 0,
+    `existing extraction and recovery vocabulary may satisfy separation intent: ${JSON.stringify(minerals.evidence[0])}`,
+  );
+  assert.equal(minerals.scores[1], 0, "target words cannot substitute for separation intent");
+  assert.equal(minerals.scores[2], 0, "method words cannot substitute for the target");
+  assert.equal(minerals.diagnostics.minimumCoverage, 2);
+  assert.equal(minerals.diagnostics.searchV2.shortCompleteCoverage, true);
+
+  const topicOnly = engine.score("quantum sensing biology", { semantic: false, evidence: true });
+  assert.equal(topicOnly.scores[3], 0, "topic metadata alone cannot satisfy a substantive short-query group");
+  assert.equal(
+    topicOnly.evidence[3].admission.reason,
+    "insufficient_lexical_coverage",
+  );
+});
+
+test("search v2 grounds broad short-query matches in narrative or child evidence", () => {
+  const apis = loadApis();
+  const crossTopic = record(
+    "cross-topic",
+    "Long Range Broad Agency Announcement",
+    "Open research across many disciplines.",
+  );
+  crossTopic.document_search_text = "synthetic biology biological materials quantum science quantum sensing";
+  const grounded = record(
+    "grounded",
+    "Navy and Marine Corps Long Range Broad Agency Announcement",
+    "Naval and marine operations research.",
+  );
+  grounded.document_search_text = "autonomous systems sensing technology";
+  const catalog = catalogFor([crossTopic, grounded], apis.query);
+  const engine = apis.retrieval.create(catalog, apis.query, {
+    searchV2: true,
+    searchV2Config: searchV2Config(apis),
+    catalogRole: "parent",
+  });
+
+  const biology = engine.score("quantum sensing biology", { semantic: false, evidence: true });
+  assert.equal(biology.scores[0], 0);
+  assert.equal(biology.evidence[0].admission.reason, "no_scoring_evidence");
+
+  const maritime = engine.score("autonomous maritime sensing", { semantic: false });
+  assert.equal(
+    maritime.scores[1],
+    0,
+    "marine narrative plus citation-only autonomous/sensing text cannot manufacture complete intent",
+  );
+});
+
+test("search v2 never prefix-expands a short uppercase acronym", () => {
+  const apis = loadApis();
+  const collision = record("collision", "CFDA administration", "Catalog of Federal Domestic Assistance number.");
+  const resolved = record("resolved", "Computational fluid dynamics", "Computational fluid dynamics for reacting flows.");
+  const catalog = catalogFor([collision, resolved], apis.query);
+  const engine = apis.retrieval.create(catalog, apis.query, {
+    searchV2: true,
+    searchV2Config: searchV2Config(apis),
+    catalogRole: "parent",
+  });
+
+  const withoutContext = engine.score("CFD", { semantic: false });
+  assert.deepEqual([...withoutContext.scores], [0, 0]);
+  const withContext = engine.score("CFD", {
+    semantic: false,
+    context: "Computational fluid dynamics for turbulent reactors.",
+  });
+  assert.equal(withContext.scores[0], 0);
+  assert.ok(withContext.scores[1] > 0);
+});
+
+test("search v2 disambiguates resolved AI from the AI/AN population abbreviation", () => {
+  const apis = loadApis();
+  const catalog = catalogFor([
+    record("ai", "AI-enabled cancer diagnosis", "Artificial intelligence models for cancer diagnosis."),
+    record("aian", "American Indian and Alaska Native cancer outcomes", "AI/AN cancer diagnosis research."),
+  ], apis.query);
+  const engine = apis.retrieval.create(catalog, apis.query, {
+    searchV2: true,
+    searchV2Config: searchV2Config(apis),
+    catalogRole: "parent",
+  });
+  const result = engine.score("AI cancer diagnosis", { semantic: false, evidence: true });
+  assert.ok(result.scores[0] > 0);
+  assert.equal(result.scores[1], 0, JSON.stringify(result.evidence[1]));
 });
 
 test("reported catalyst and AI search is narrow without losing chemistry programs", () => {
@@ -389,7 +740,38 @@ test("explanation evidence reports only terms that contributed", () => {
     Array.from(result.evidence[0].groups, group => [...group.matchedDisplayTerms]),
     [["Carbon"], ["capture"]],
   );
+  assert.deepEqual(
+    Array.from(result.evidence[0].groups, group => (
+      Array.from(group.matchedTermContributions, item => item.term)
+    )),
+    [["carbon"], ["capture"]],
+  );
+  assert.equal(result.evidence[0].admission.admitted, true);
+  assert.equal(result.evidence[0].admission.reason, "exact_phrase_or_identifier");
+  assert.equal(result.evidence[1].admission.admitted, false);
+  assert.equal(result.evidence[1].admission.reason, "no_scoring_evidence");
   assert.deepEqual(Array.from(result.evidence[1].groups), []);
+});
+
+test("diagnostic scoring configuration can ablate title boosts without changing defaults", () => {
+  const apis = loadApis();
+  const catalog = catalogFor([
+    record("title", "Carbon capture"),
+    record("description", "General research", "Carbon capture"),
+  ], apis.query);
+  const production = apis.retrieval.create(catalog, apis.query)
+    .score("carbon capture", { semantic: false, evidence: true });
+  const ablated = apis.retrieval.create(catalog, apis.query, {
+    exactTitleMatchBoost: 0,
+    titlePhraseBoost: 0,
+    trigramPhraseBoost: 0,
+  }).score("carbon capture", { semantic: false, evidence: true });
+
+  assert.equal(production.diagnostics.scoringConfiguration.exactTitleMatchBoost, 24);
+  assert.equal(ablated.diagnostics.scoringConfiguration.exactTitleMatchBoost, 0);
+  assert.ok(production.scores[0] > ablated.scores[0]);
+  assert.ok(ablated.scores[0] > 0, "the underlying indexed title evidence remains");
+  assert.equal(production.scores[1], ablated.scores[1]);
 });
 
 test("generic parent-child rollup is deterministic and cardinality-neutral", () => {

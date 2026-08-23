@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-08-23",
+  "starting_sha": "342a08f2a4b92c5cbc0809ba3b5402bab096893d",
+  "decision": "STRONG + POTENTIAL WORKFLOW BLOCKED",
+  "runs": [
+    {
+      "gate": "spent_strong_potential_product_evaluation",
+      "command": "node tools/run_search_v2_strong_potential_eval.mjs --write",
+      "exit_code": 0,
+      "details": {
+        "queries": 52,
+        "required_anchors": 65,
+        "voyage_requests": 101,
+        "api_errors": 0,
+        "phase4c_used": false,
+        "quality_gate_passed": false
+      }
+    },
+    {
+      "gate": "browser_suite",
+      "command": "node --test tests/browser/*.test.mjs",
+      "exit_code": 0,
+      "details": { "tests": 173, "passed": 173, "failed": 0 }
+    },
+    {
+      "gate": "focused_python_search_schema_size_source",
+      "command": "python -m unittest tests.test_search_query tests.test_size_budget tests.test_subtopic_records tests.test_p9_scoring tests.test_pages_entrypoint tests.test_program_areas",
+      "exit_code": 0,
+      "details": { "tests": 62, "passed": 62, "failed": 0 }
+    },
+    {
+      "gate": "live_product_python",
+      "command": "python -m tools.run_refresh_validation",
+      "exit_code": 0,
+      "details": {
+        "tests": 760,
+        "passed": 760,
+        "failed": 0,
+        "closed_frozen_measurement_modules_excluded": [
+          "test_meas8",
+          "test_p5_closeout",
+          "test_p7_frame",
+          "test_p7_residual"
+        ]
+      }
+    },
+    {
+      "gate": "parent_child_cardinality_and_normalization",
+      "command": "node tools/p9_scoring_probe.mjs --check",
+      "exit_code": 0,
+      "details": { "case_count": 50, "cardinality_invariant": true, "byte_identical": true }
+    },
+    {
+      "gate": "browser_python_config_parity",
+      "command": "node tools/build_search_v2_config.mjs --check",
+      "exit_code": 0,
+      "details": { "generated_asset_current": true }
+    },
+    {
+      "gate": "phase3_42_pair_explanation_frame",
+      "command": "node tools/run_match_explain_v2.mjs",
+      "exit_code": 0,
+      "details": {
+        "case_count": 42,
+        "correct_and_useful": 41,
+        "reviewed_shallow": 1,
+        "unsupported": 0,
+        "privacy_problem": 0
+      }
+    },
+    {
+      "gate": "historical_37_query_baseline",
+      "command": "node tools/query_baseline.mjs --check",
+      "exit_code": 0,
+      "details": { "query_count": 37, "top_10_churn": 0 }
+    },
+    {
+      "gate": "hermetic_no_drift",
+      "command": "Git Bash with PATH=/c/miniforge:/usr/bin:/bin ./tools/verify_no_drift.sh",
+      "exit_code": 0,
+      "details": { "artifact_count": 22, "changed_artifacts": 0 }
+    },
+    {
+      "gate": "syntax_json_whitespace_and_secret_checks",
+      "command": "node --check; JSON parse; git diff --check; bounded credential-pattern scan",
+      "exit_code": 0,
+      "details": {
+        "api_key_printed_or_persisted": false,
+        "phase4c_result_artifacts": 0
+      }
+    }
+  ],
+  "asset_deltas_bytes": {
+    "assets/app.js": 2401,
+    "assets/app.css": 1410,
+    "assets/search-hybrid.js": -3888,
+    "initial_browser_asset_net": -77,
+    "workers/search-voyage-proxy/src/index.js": -7338,
+    "data/search-v2-voyage-vectors.f16": 0,
+    "data/search-v2-voyage-manifest.json": 0
+  },
+  "preserved_hashes": {
+    "phase4_raw": "8d4a1d37e0940fde1eefdd3dca7f3fa2a39a40194ce6b083b40eafd4897fb919",
+    "phase4b_raw": "fef755fb0bfdd2f485bf712478dc3b82623038882f9e961746d79ac599ff8af5",
+    "intent_gate_results": "9dbb84f6827d68216b3481d2fc8692fbcccc4dbb66d49401675008a125247367",
+    "intent_gate_gate_report": "3d5aed7847c46524fb07d1f61413b4d12e9e675eccfad9bfc8739fe063d1111e"
+  },
+  "sealed_phase4c": {
+    "frame_sha256": "7fde6b7ccbdab59331c26899f37bdbb8f9ee7e30f8f3632f257e28d27124865e",
+    "manifest_sha256": "d45fcc91a52d01673cf1fa5bc91f25ed26c0c8f92f970e902559ecbda9164c6c",
+    "read_or_executed": false,
+    "result_or_truth_artifact_created": false
+  },
+  "all_implementation_and_regression_runs_exit_zero": true,
+  "quality_decision_overrides_regression_status": true
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "frozen_at": "2026-08-22",
+  "status": "sealed",
+  "unlock_phase": 4,
+  "purpose": "Untouched, stratified holdout for the v1.2.0 retrieval release candidate. Phase 1 and Phase 2 tools must refuse to calculate or summarize these outcomes.",
+  "queries": [
+    {"id":"hold_ree_01","stratum":"acronym_phrase","discipline":"chemistry_materials","query":"rare earth recycling"},
+    {"id":"hold_ree_02","stratum":"acronym_phrase","discipline":"chemistry_materials","query":"rare earth solvent extraction"},
+    {"id":"hold_ree_03","stratum":"acronym_phrase","discipline":"chemistry_materials","query":"lanthanide ion exchange"},
+    {"id":"hold_ree_04","stratum":"acronym_phrase","discipline":"chemistry_materials","query":"REE hydrometallurgy"},
+    {"id":"hold_ree_05","stratum":"acronym_phrase","discipline":"chemistry_materials","query":"yttrium separation"},
+    {"id":"hold_ree_06","stratum":"acronym_phrase","discipline":"chemistry_materials","query":"scandium recovery"},
+    {"id":"hold_ree_07","stratum":"hard_negative","discipline":"space","query":"rare Earth observation elements"},
+    {"id":"hold_ree_08","stratum":"hard_negative","discipline":"biomedical","query":"rare disease molecular elements"},
+    {"id":"hold_chem_01","stratum":"direct_positive","discipline":"chemistry_materials","query":"electrocatalytic ammonia synthesis"},
+    {"id":"hold_chem_02","stratum":"hard_negative","discipline":"education","query":"innovation catalyst student success"},
+    {"id":"hold_energy_01","stratum":"direct_positive","discipline":"energy","query":"long duration energy storage"},
+    {"id":"hold_energy_02","stratum":"method_only","discipline":"energy","query":"mineral supply chain diplomacy"},
+    {"id":"hold_bio_01","stratum":"direct_positive","discipline":"biomedical","query":"single cell cancer immunology"},
+    {"id":"hold_bio_02","stratum":"hard_negative","discipline":"biomedical","query":"BioData Catalyst training"},
+    {"id":"hold_health_01","stratum":"direct_positive","discipline":"public_health","query":"maternal mortality rural communities"},
+    {"id":"hold_health_02","stratum":"hard_negative","discipline":"public_health","query":"health data workforce workshop"},
+    {"id":"hold_ag_01","stratum":"direct_positive","discipline":"agriculture","query":"drought tolerant crop genetics"},
+    {"id":"hold_space_01","stratum":"direct_positive","discipline":"space","query":"microgravity radiation biology"},
+    {"id":"hold_space_02","stratum":"hard_negative","discipline":"space","query":"Earth system chemical elements"},
+    {"id":"hold_defense_01","stratum":"direct_positive","discipline":"defense","query":"high temperature hypersonic composites"},
+    {"id":"hold_ai_01","stratum":"direct_positive","discipline":"ai_computing","query":"secure foundation models"},
+    {"id":"hold_ai_02","stratum":"hard_negative","discipline":"education","query":"AI journalism exchange"},
+    {"id":"hold_env_01","stratum":"direct_positive","discipline":"environmental_science","query":"membrane PFAS treatment"},
+    {"id":"hold_env_02","stratum":"broad_program_positive","discipline":"environmental_science","query":"coastal ecosystem climate adaptation"}
+  ]
+}

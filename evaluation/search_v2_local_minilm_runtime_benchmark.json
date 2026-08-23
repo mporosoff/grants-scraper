@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "experiment": "local_minilm_runtime_benchmark",
+  "generated_at": "2026-08-23T11:14:41.789Z",
+  "phase4c_read_or_executed": false,
+  "model": {
+    "id": "cross-encoder/ms-marco-MiniLM-L6-v2",
+    "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+    "license": "apache-2.0",
+    "onnx_file": "onnx/model_quint8_avx2.onnx",
+    "model_file_name": "model_quint8_avx2",
+    "quantization": "dynamic UINT8 weights, AVX2-targeted ONNX export",
+    "maximum_sequence_length": 256
+  },
+  "query_id": "hold_health_02",
+  "candidate_passage_count": 20,
+  "maximum_sequence_length": 256,
+  "devices": {
+    "wasm_single_thread": {
+      "initialization_ms": 908.7601,
+      "rss_initialization_delta_bytes": 206426112,
+      "warm_runs_ms": [
+        3323.9703,
+        3140.507,
+        3322.5968
+      ],
+      "warm_p50_ms": 3322.5968,
+      "warm_p95_ms": 3323.9703
+    },
+    "cpu": {
+      "initialization_ms": 585.337,
+      "rss_initialization_delta_bytes": 88457216,
+      "warm_runs_ms": [
+        266.8044,
+        270.9973,
+        299.1219
+      ],
+      "warm_p50_ms": 270.9973,
+      "warm_p95_ms": 299.1219
+    }
+  },
+  "webgpu_available_in_node_harness": false
+}

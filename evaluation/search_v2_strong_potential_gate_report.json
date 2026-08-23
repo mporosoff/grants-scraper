@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-23T21:12:00.614Z",
+  "decision": "STRONG + POTENTIAL WORKFLOW PASSES DEVELOPMENT PRODUCT GATES",
+  "blocking_gates": [],
+  "gates": {
+    "strong_precision_at_least_0_90": true,
+    "no_known_irrelevant_strong_results": true,
+    "zero_anchor_queries_have_no_strong_results": true,
+    "short_acronym_collision_not_strong": true,
+    "combined_required_recall_at_20_at_least_0_80": true,
+    "combined_required_recall_at_50_at_least_0_95": true,
+    "potential_limit_enforced": true,
+    "strong_potential_ids_deduplicated": true,
+    "potential_explanations_extract_public_passages": true,
+    "no_semantic_score_or_model_explanation_claims": true,
+    "no_api_errors_or_timeouts": true,
+    "manual_relationship_mappings_remain_zero": true
+  },
+  "metrics": {
+    "query_count": 52,
+    "required_anchor_count": 65,
+    "strong": {
+      "required_recall_at_10": 0.169231,
+      "required_recall_at_50": 0.169231,
+      "precision_at_10_over_reviewed": 1,
+      "reviewed_pair_count": 11,
+      "known_irrelevant_at_10_count": 0,
+      "reviewed_non_primary_at_10_count": 0,
+      "unreviewed_at_10_count": 0,
+      "zero_anchor_visible_count": 0,
+      "visible_count": 11,
+      "maximum_visible_count": 2
+    },
+    "potential": {
+      "displayed_count": 588,
+      "maximum_displayed_count": 12,
+      "top_10_pair_count": 490,
+      "top_10_reviewed_primary_count": 50,
+      "top_10_known_irrelevant_count": 5,
+      "top_10_reviewed_non_primary_count": 15,
+      "top_10_unreviewed_count": 324,
+      "reviewed_pair_count": 168,
+      "reviewed_primary_count": 51,
+      "known_irrelevant_count": 5,
+      "reviewed_non_primary_count": 16,
+      "unreviewed_count": 420,
+      "zero_anchor_displayed_count": 120
+    },
+    "combined": {
+      "required_recall_at_10": 0.861538,
+      "required_recall_at_20": 0.907692,
+      "required_recall_at_50": 0.953846,
+      "query_average_ndcg_at_10": 0.770203,
+      "deduplication_failures": 0,
+      "required_anchor_misses_at_50": [
+        {
+          "query_id": "hold_ree_04",
+          "result_id": "360678"
+        },
+        {
+          "query_id": "hold_env_01",
+          "result_id": "362061"
+        },
+        {
+          "query_id": "hold_env_01",
+          "result_id": "363375"
+        }
+      ]
+    }
+  },
+  "phase4c_authorized_for_separate_session": true,
+  "phase5_authorized": false,
+  "production_flag_enabled": false
+}

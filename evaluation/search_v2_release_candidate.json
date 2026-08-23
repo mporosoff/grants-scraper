@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "phase": 4,
+  "decision": "Release candidate blocked with exact failing gate",
+  "status": "blocked",
+  "phase5_authorized": false,
+  "branch": "search-quality-v2",
+  "branch_head_when_decision_frozen": "2fed3cc0ccd9e3013ea2e9937e7c2548108c20b7",
+  "candidate_code_sha": "627e7c82480e97ed1cc6a5adbc4e830469347acb",
+  "preopen_checkpoint": "evaluation/search_v2_phase4_preopen.json",
+  "starting_main_sha": "ef7a0642f6ce66828f01ee280bd5993f66029b2f",
+  "intended_version": "v1.2.0",
+  "intended_release_date_policy": "No release date until a new iteration passes a newly frozen acceptance protocol.",
+  "production_flag_state": {
+    "search_v2_enabled": false,
+    "intended_phase5_change": "one configuration change only after a future Phase 4 pass"
+  },
+  "artifact_hashes": {
+    "preopen": "67326e866e75500b295b5b9762ec86e69d783747d85d35df06718d4c62f3083a",
+    "raw_holdout": "8d4a1d37e0940fde1eefdd3dca7f3fa2a39a40194ce6b083b40eafd4897fb919",
+    "holdout_truth": "83740bfd4bb5e3ef123a3a1b6e8c353b41c98a357261bce3e5b6b3e359bcebd1"
+  },
+  "catalog_and_sidecar_hashes": {
+    "opportunities": "f6168e043fc6e4466edb49dd4fa0f957d09509f9591ee952bda035b423d27f1f",
+    "subtopics": "e2f45ecdfab26770f2346eaa4a488bb57fcaa3cc17c5d90ed25e30d14727f40d"
+  },
+  "acceptance_gate_table": {
+    "frozen_development_holdout_assignment_preserved": "passed",
+    "phase2_configuration_frozen_before_holdout": "passed",
+    "separate_holdout_no_post_outcome_tuning": "passed",
+    "frozen_acceptance_set_unchanged": "passed",
+    "ree_hard_gates": "failed",
+    "nasa_false_positive_gate": "passed",
+    "doe_genesis_recall_gates": "failed",
+    "cross_domain_historical_baselines": "passed",
+    "field_ablation_calibration": "passed",
+    "explanation_truth": "failed",
+    "review_only_publication_boundary": "passed",
+    "cold_warm_readiness_mixed_version": "passed",
+    "search_index_size_performance": "passed",
+    "parent_child_normalization_cardinality": "passed",
+    "browser_mobile_performance": "passed",
+    "python_tests": "passed",
+    "browser_tests": "passed",
+    "query_canary_tests": "passed",
+    "no_drift": "passed",
+    "release_artifact_deterministic": "passed",
+    "branch_clean_and_pushed": "passed",
+    "main_not_modified": "passed"
+  },
+  "exact_failing_gates": [
+    "holdout:ree_direct_anchor_recall",
+    "holdout:doe_genesis_scope_recall",
+    "holdout:direct_positive_precision_and_recall_at_10",
+    "holdout:no_candidate_explosion",
+    "holdout:no_confirmed_irrelevant_primary_admissions",
+    "holdout:rich_evidence_not_buried_by_partial_or_generic_matches",
+    "holdout:explanations_not_misleading"
+  ],
+  "pending_non_dispositive_gates": [],
+  "known_limitations": [
+    "The protected REE architecture does not generalize to recycling, ion exchange, hydrometallurgy, yttrium, or scandium variants in the holdout.",
+    "Generic short-query coverage still admits partial-intent and administrative-wording matches for unprotected concepts.",
+    "A broad health-data-workforce-workshop query expands to 213 candidates.",
+    "Several rich authoritative or child-scope anchors are absent or buried below weaker matches.",
+    "The causal explanation contract can accurately cite evidence for an incorrect admission, making the displayed primary label misleading until retrieval is corrected."
+  ],
+  "rollback_method": "Keep FF_SEARCH_V2 disabled; no production rollback action is required because Phase 4 did not merge or deploy.",
+  "next_iteration_discipline": "Reopen the owning retrieval phase, preserve this failed holdout as permanent evidence, freeze a new development/holdout protocol before tuning, and do not patch individual holdout strings in place.",
+  "test_summary": {
+    "development_queries": 49,
+    "meas5_queries": 48,
+    "meas5_disciplines": 11,
+    "meas5_top_10_movements": 0,
+    "historical_queries": 37,
+    "historical_top_10_churn": 0,
+    "explanation_pairs": 42,
+    "explanation_correct_and_useful": 41,
+    "explanation_unsupported": 0,
+    "browser_tests_passed": 137,
+    "live_product_python_tests_passed": 756,
+    "focused_python_tests_passed": 11,
+    "permanent_search_canaries_passed": 4,
+    "parent_child_fixed_cases": 50,
+    "no_drift_artifacts": 22
+  }
+}

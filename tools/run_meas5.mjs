@@ -16,9 +16,10 @@ function assignmentJson(source) {
   return JSON.parse(source.slice(source.indexOf("{"), source.lastIndexOf(";")).trim());
 }
 
-export async function loadHarness() {
+export async function loadHarness({ searchV2 = false } = {}) {
   const context = { globalThis: {} };
   for (const relative of [
+    "assets/search-v2-config.js",
     "assets/search-query.js",
     "assets/search-retrieval.js",
     "assets/profile-ranking.js",
@@ -31,13 +32,22 @@ export async function loadHarness() {
   const queryApi = context.globalThis.FUNDING_SEARCH_QUERY;
   const retrievalApi = context.globalThis.FUNDING_RETRIEVAL;
   const profileApi = context.globalThis.FUNDING_PROFILE_RANKING;
+  const searchV2Config = context.globalThis.FUNDING_SEARCH_V2_CONFIG;
   const childCatalog = retrievalApi.createChildCatalog(sidecar);
+  const sharedConfiguration = searchV2 ? { searchV2: true, searchV2Config } : {};
   return {
     catalog,
     childCatalog,
-    parentEngine: retrievalApi.create(catalog, queryApi),
-    childEngine: retrievalApi.create(childCatalog, queryApi),
+    parentEngine: retrievalApi.create(catalog, queryApi, {
+      ...sharedConfiguration,
+      catalogRole: "parent",
+    }),
+    childEngine: retrievalApi.create(childCatalog, queryApi, {
+      ...sharedConfiguration,
+      catalogRole: "child",
+    }),
     profileApi,
+    searchV2Config,
     queryApi,
     retrievalApi,
     sidecarSha256: createHash("sha256").update(sidecarSource).digest("hex"),
@@ -192,7 +202,11 @@ export function rank(harness, query, profile, topicsEnabled) {
       }];
     });
   }
-  rows.sort((left, right) => right.score - left.score || left.id.localeCompare(right.id));
+  rows.sort((left, right) => (
+    Number(left.evidenceTier || 99) - Number(right.evidenceTier || 99)
+    || right.score - left.score
+    || left.id.localeCompare(right.id)
+  ));
   return rows;
 }
 

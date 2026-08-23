@@ -1,0 +1,1624 @@
+{
+  "schema_version": 1,
+  "architecture_reset": "local_fielded_ir",
+  "status": "development_measurement_complete_not_phase4c_acceptance",
+  "sealed_phase4c_read_or_executed": false,
+  "architecture": {
+    "ranking": "bm25f_passage_coordination",
+    "configured_scientific_relationships_used": false,
+    "active_manual_relationship_mappings": {
+      "concept_families": 0,
+      "controlled_relationships": 0,
+      "source_scope_relationships": 0,
+      "authoritative_scope_entailments": 0,
+      "broader_program_fits": 0
+    },
+    "fields": [
+      "parent_title",
+      "child_title",
+      "child_summary",
+      "parent_description",
+      "authoritative_program_area",
+      "authoritative_document_scope"
+    ],
+    "parent_rollup": "strongest_single_parent_or_child_passage",
+    "child_count_bonus": 0
+  },
+  "combined": {
+    "query_count": 52,
+    "required_anchor_count": 65,
+    "primary_precision_at_10": 0.974359,
+    "required_primary_recall_at_10": 0.184615,
+    "required_primary_recall_at_50": 0.184615,
+    "ndcg_at_10": 0.374587,
+    "visible_primary_count": 14,
+    "maximum_visible_primary_count": 3,
+    "internal_candidate_count": 11857,
+    "maximum_internal_candidate_count": 793,
+    "broader_fit_count": 92,
+    "rejected_partial_intent_count": 11751,
+    "irrelevant_or_unjudged_visible_primary_count": 2,
+    "required_anchor_misses_at_50": [
+      {
+        "id": "360678",
+        "rank": null,
+        "queryId": "hold_ree_01"
+      },
+      {
+        "id": "361526",
+        "rank": null,
+        "queryId": "hold_ree_01"
+      },
+      {
+        "id": "362061",
+        "rank": null,
+        "queryId": "hold_ree_01"
+      },
+      {
+        "id": "360678",
+        "rank": null,
+        "queryId": "hold_ree_02"
+      },
+      {
+        "id": "361526",
+        "rank": null,
+        "queryId": "hold_ree_02"
+      },
+      {
+        "id": "362061",
+        "rank": null,
+        "queryId": "hold_ree_02"
+      },
+      {
+        "id": "360678",
+        "rank": null,
+        "queryId": "hold_ree_03"
+      },
+      {
+        "id": "361526",
+        "rank": null,
+        "queryId": "hold_ree_03"
+      },
+      {
+        "id": "362061",
+        "rank": null,
+        "queryId": "hold_ree_03"
+      },
+      {
+        "id": "360678",
+        "rank": null,
+        "queryId": "hold_ree_04"
+      },
+      {
+        "id": "361526",
+        "rank": null,
+        "queryId": "hold_ree_04"
+      },
+      {
+        "id": "362061",
+        "rank": null,
+        "queryId": "hold_ree_04"
+      },
+      {
+        "id": "360678",
+        "rank": null,
+        "queryId": "hold_ree_05"
+      },
+      {
+        "id": "361526",
+        "rank": null,
+        "queryId": "hold_ree_05"
+      },
+      {
+        "id": "362061",
+        "rank": null,
+        "queryId": "hold_ree_05"
+      },
+      {
+        "id": "360678",
+        "rank": null,
+        "queryId": "hold_ree_06"
+      },
+      {
+        "id": "361526",
+        "rank": null,
+        "queryId": "hold_ree_06"
+      },
+      {
+        "id": "362061",
+        "rank": null,
+        "queryId": "hold_ree_06"
+      },
+      {
+        "id": "359280",
+        "rank": null,
+        "queryId": "hold_ree_08"
+      },
+      {
+        "id": "359644",
+        "rank": null,
+        "queryId": "hold_ree_08"
+      },
+      {
+        "id": "344592",
+        "rank": null,
+        "queryId": "hold_chem_01"
+      },
+      {
+        "id": "357498",
+        "rank": null,
+        "queryId": "hold_chem_02"
+      },
+      {
+        "id": "359104",
+        "rank": null,
+        "queryId": "hold_chem_02"
+      },
+      {
+        "id": "356623",
+        "rank": null,
+        "queryId": "hold_energy_01"
+      },
+      {
+        "id": "vpr-email:infoready-2028504",
+        "rank": null,
+        "queryId": "hold_bio_01"
+      },
+      {
+        "id": "363582",
+        "rank": null,
+        "queryId": "hold_health_01"
+      },
+      {
+        "id": "360205",
+        "rank": null,
+        "queryId": "hold_ag_01"
+      },
+      {
+        "id": "356536",
+        "rank": null,
+        "queryId": "hold_space_02"
+      },
+      {
+        "id": "344592",
+        "rank": null,
+        "queryId": "hold_defense_01"
+      },
+      {
+        "id": "361333",
+        "rank": null,
+        "queryId": "hold_ai_01"
+      },
+      {
+        "id": "361526",
+        "rank": null,
+        "queryId": "hold_ai_01"
+      },
+      {
+        "id": "vpr-email:NSF26-015",
+        "rank": null,
+        "queryId": "hold_ai_01"
+      },
+      {
+        "id": "362061",
+        "rank": null,
+        "queryId": "hold_env_01"
+      },
+      {
+        "id": "363375",
+        "rank": null,
+        "queryId": "hold_env_01"
+      },
+      {
+        "id": "360678",
+        "rank": null,
+        "queryId": "i2hold_material_01"
+      },
+      {
+        "id": "361526",
+        "rank": null,
+        "queryId": "i2hold_material_01"
+      },
+      {
+        "id": "362061",
+        "rank": null,
+        "queryId": "i2hold_material_01"
+      },
+      {
+        "id": "360678",
+        "rank": null,
+        "queryId": "i2hold_material_02"
+      },
+      {
+        "id": "361526",
+        "rank": null,
+        "queryId": "i2hold_material_02"
+      },
+      {
+        "id": "362061",
+        "rank": null,
+        "queryId": "i2hold_material_02"
+      },
+      {
+        "id": "360678",
+        "rank": null,
+        "queryId": "i2hold_material_03"
+      },
+      {
+        "id": "361526",
+        "rank": null,
+        "queryId": "i2hold_material_03"
+      },
+      {
+        "id": "362061",
+        "rank": null,
+        "queryId": "i2hold_material_03"
+      },
+      {
+        "id": "361526",
+        "rank": null,
+        "queryId": "i2hold_material_04"
+      },
+      {
+        "id": "362061",
+        "rank": null,
+        "queryId": "i2hold_material_04"
+      },
+      {
+        "id": "360205",
+        "rank": null,
+        "queryId": "i2hold_ag_01"
+      },
+      {
+        "id": "360205",
+        "rank": null,
+        "queryId": "i2hold_ag_02"
+      },
+      {
+        "id": "356623",
+        "rank": null,
+        "queryId": "i2hold_energy_01"
+      },
+      {
+        "id": "356623",
+        "rank": null,
+        "queryId": "i2hold_energy_02"
+      },
+      {
+        "id": "361526",
+        "rank": null,
+        "queryId": "i2hold_ai_02"
+      },
+      {
+        "id": "344592",
+        "rank": null,
+        "queryId": "i2hold_defense_02"
+      },
+      {
+        "id": "356536",
+        "rank": null,
+        "queryId": "i2hold_space_01"
+      },
+      {
+        "id": "363375",
+        "rank": null,
+        "queryId": "i2hold_env_01"
+      }
+    ]
+  },
+  "by_population": {
+    "phase4_iteration1_spent": {
+      "query_count": 24,
+      "required_anchor_count": 38,
+      "primary_precision_at_10": 0.944444,
+      "required_primary_recall_at_10": 0.105263,
+      "required_primary_recall_at_50": 0.105263,
+      "ndcg_at_10": 0.235511,
+      "visible_primary_count": 6,
+      "maximum_visible_primary_count": 3,
+      "internal_candidate_count": 4745,
+      "maximum_internal_candidate_count": 793,
+      "broader_fit_count": 38,
+      "rejected_partial_intent_count": 4701,
+      "irrelevant_or_unjudged_visible_primary_count": 2,
+      "required_anchor_misses_at_50": [
+        {
+          "id": "360678",
+          "rank": null,
+          "queryId": "hold_ree_01"
+        },
+        {
+          "id": "361526",
+          "rank": null,
+          "queryId": "hold_ree_01"
+        },
+        {
+          "id": "362061",
+          "rank": null,
+          "queryId": "hold_ree_01"
+        },
+        {
+          "id": "360678",
+          "rank": null,
+          "queryId": "hold_ree_02"
+        },
+        {
+          "id": "361526",
+          "rank": null,
+          "queryId": "hold_ree_02"
+        },
+        {
+          "id": "362061",
+          "rank": null,
+          "queryId": "hold_ree_02"
+        },
+        {
+          "id": "360678",
+          "rank": null,
+          "queryId": "hold_ree_03"
+        },
+        {
+          "id": "361526",
+          "rank": null,
+          "queryId": "hold_ree_03"
+        },
+        {
+          "id": "362061",
+          "rank": null,
+          "queryId": "hold_ree_03"
+        },
+        {
+          "id": "360678",
+          "rank": null,
+          "queryId": "hold_ree_04"
+        },
+        {
+          "id": "361526",
+          "rank": null,
+          "queryId": "hold_ree_04"
+        },
+        {
+          "id": "362061",
+          "rank": null,
+          "queryId": "hold_ree_04"
+        },
+        {
+          "id": "360678",
+          "rank": null,
+          "queryId": "hold_ree_05"
+        },
+        {
+          "id": "361526",
+          "rank": null,
+          "queryId": "hold_ree_05"
+        },
+        {
+          "id": "362061",
+          "rank": null,
+          "queryId": "hold_ree_05"
+        },
+        {
+          "id": "360678",
+          "rank": null,
+          "queryId": "hold_ree_06"
+        },
+        {
+          "id": "361526",
+          "rank": null,
+          "queryId": "hold_ree_06"
+        },
+        {
+          "id": "362061",
+          "rank": null,
+          "queryId": "hold_ree_06"
+        },
+        {
+          "id": "359280",
+          "rank": null,
+          "queryId": "hold_ree_08"
+        },
+        {
+          "id": "359644",
+          "rank": null,
+          "queryId": "hold_ree_08"
+        },
+        {
+          "id": "344592",
+          "rank": null,
+          "queryId": "hold_chem_01"
+        },
+        {
+          "id": "357498",
+          "rank": null,
+          "queryId": "hold_chem_02"
+        },
+        {
+          "id": "359104",
+          "rank": null,
+          "queryId": "hold_chem_02"
+        },
+        {
+          "id": "356623",
+          "rank": null,
+          "queryId": "hold_energy_01"
+        },
+        {
+          "id": "vpr-email:infoready-2028504",
+          "rank": null,
+          "queryId": "hold_bio_01"
+        },
+        {
+          "id": "363582",
+          "rank": null,
+          "queryId": "hold_health_01"
+        },
+        {
+          "id": "360205",
+          "rank": null,
+          "queryId": "hold_ag_01"
+        },
+        {
+          "id": "356536",
+          "rank": null,
+          "queryId": "hold_space_02"
+        },
+        {
+          "id": "344592",
+          "rank": null,
+          "queryId": "hold_defense_01"
+        },
+        {
+          "id": "361333",
+          "rank": null,
+          "queryId": "hold_ai_01"
+        },
+        {
+          "id": "361526",
+          "rank": null,
+          "queryId": "hold_ai_01"
+        },
+        {
+          "id": "vpr-email:NSF26-015",
+          "rank": null,
+          "queryId": "hold_ai_01"
+        },
+        {
+          "id": "362061",
+          "rank": null,
+          "queryId": "hold_env_01"
+        },
+        {
+          "id": "363375",
+          "rank": null,
+          "queryId": "hold_env_01"
+        }
+      ]
+    },
+    "phase4b_iteration2_spent": {
+      "query_count": 28,
+      "required_anchor_count": 27,
+      "primary_precision_at_10": 1,
+      "required_primary_recall_at_10": 0.296296,
+      "required_primary_recall_at_50": 0.296296,
+      "ndcg_at_10": 0.493794,
+      "visible_primary_count": 8,
+      "maximum_visible_primary_count": 1,
+      "internal_candidate_count": 7112,
+      "maximum_internal_candidate_count": 686,
+      "broader_fit_count": 54,
+      "rejected_partial_intent_count": 7050,
+      "irrelevant_or_unjudged_visible_primary_count": 0,
+      "required_anchor_misses_at_50": [
+        {
+          "id": "360678",
+          "rank": null,
+          "queryId": "i2hold_material_01"
+        },
+        {
+          "id": "361526",
+          "rank": null,
+          "queryId": "i2hold_material_01"
+        },
+        {
+          "id": "362061",
+          "rank": null,
+          "queryId": "i2hold_material_01"
+        },
+        {
+          "id": "360678",
+          "rank": null,
+          "queryId": "i2hold_material_02"
+        },
+        {
+          "id": "361526",
+          "rank": null,
+          "queryId": "i2hold_material_02"
+        },
+        {
+          "id": "362061",
+          "rank": null,
+          "queryId": "i2hold_material_02"
+        },
+        {
+          "id": "360678",
+          "rank": null,
+          "queryId": "i2hold_material_03"
+        },
+        {
+          "id": "361526",
+          "rank": null,
+          "queryId": "i2hold_material_03"
+        },
+        {
+          "id": "362061",
+          "rank": null,
+          "queryId": "i2hold_material_03"
+        },
+        {
+          "id": "361526",
+          "rank": null,
+          "queryId": "i2hold_material_04"
+        },
+        {
+          "id": "362061",
+          "rank": null,
+          "queryId": "i2hold_material_04"
+        },
+        {
+          "id": "360205",
+          "rank": null,
+          "queryId": "i2hold_ag_01"
+        },
+        {
+          "id": "360205",
+          "rank": null,
+          "queryId": "i2hold_ag_02"
+        },
+        {
+          "id": "356623",
+          "rank": null,
+          "queryId": "i2hold_energy_01"
+        },
+        {
+          "id": "356623",
+          "rank": null,
+          "queryId": "i2hold_energy_02"
+        },
+        {
+          "id": "361526",
+          "rank": null,
+          "queryId": "i2hold_ai_02"
+        },
+        {
+          "id": "344592",
+          "rank": null,
+          "queryId": "i2hold_defense_02"
+        },
+        {
+          "id": "356536",
+          "rank": null,
+          "queryId": "i2hold_space_01"
+        },
+        {
+          "id": "363375",
+          "rank": null,
+          "queryId": "i2hold_env_01"
+        }
+      ]
+    }
+  },
+  "by_family": {
+    "agriculture": {
+      "query_count": 3,
+      "required_anchor_count": 3,
+      "primary_precision_at_10": 1,
+      "required_primary_recall_at_10": 0,
+      "required_primary_recall_at_50": 0,
+      "ndcg_at_10": 0,
+      "visible_primary_count": 0,
+      "maximum_visible_primary_count": 0,
+      "internal_candidate_count": 352,
+      "maximum_internal_candidate_count": 269,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 352,
+      "irrelevant_or_unjudged_visible_primary_count": 0,
+      "required_anchor_misses_at_50": [
+        {
+          "id": "360205",
+          "rank": null,
+          "queryId": "hold_ag_01"
+        },
+        {
+          "id": "360205",
+          "rank": null,
+          "queryId": "i2hold_ag_01"
+        },
+        {
+          "id": "360205",
+          "rank": null,
+          "queryId": "i2hold_ag_02"
+        }
+      ]
+    },
+    "ai_computing": {
+      "query_count": 6,
+      "required_anchor_count": 8,
+      "primary_precision_at_10": 1,
+      "required_primary_recall_at_10": 0.5,
+      "required_primary_recall_at_50": 0.5,
+      "ndcg_at_10": 0.666667,
+      "visible_primary_count": 4,
+      "maximum_visible_primary_count": 1,
+      "internal_candidate_count": 2687,
+      "maximum_internal_candidate_count": 686,
+      "broader_fit_count": 24,
+      "rejected_partial_intent_count": 2659,
+      "irrelevant_or_unjudged_visible_primary_count": 0,
+      "required_anchor_misses_at_50": [
+        {
+          "id": "361333",
+          "rank": null,
+          "queryId": "hold_ai_01"
+        },
+        {
+          "id": "361526",
+          "rank": null,
+          "queryId": "hold_ai_01"
+        },
+        {
+          "id": "vpr-email:NSF26-015",
+          "rank": null,
+          "queryId": "hold_ai_01"
+        },
+        {
+          "id": "361526",
+          "rank": null,
+          "queryId": "i2hold_ai_02"
+        }
+      ]
+    },
+    "biology": {
+      "query_count": 2,
+      "required_anchor_count": 1,
+      "primary_precision_at_10": 1,
+      "required_primary_recall_at_10": 0,
+      "required_primary_recall_at_50": 0,
+      "ndcg_at_10": 0.5,
+      "visible_primary_count": 0,
+      "maximum_visible_primary_count": 0,
+      "internal_candidate_count": 481,
+      "maximum_internal_candidate_count": 251,
+      "broader_fit_count": 4,
+      "rejected_partial_intent_count": 477,
+      "irrelevant_or_unjudged_visible_primary_count": 0,
+      "required_anchor_misses_at_50": [
+        {
+          "id": "vpr-email:infoready-2028504",
+          "rank": null,
+          "queryId": "hold_bio_01"
+        }
+      ]
+    },
+    "chemistry": {
+      "query_count": 2,
+      "required_anchor_count": 3,
+      "primary_precision_at_10": 1,
+      "required_primary_recall_at_10": 0,
+      "required_primary_recall_at_50": 0,
+      "ndcg_at_10": 0,
+      "visible_primary_count": 0,
+      "maximum_visible_primary_count": 0,
+      "internal_candidate_count": 258,
+      "maximum_internal_candidate_count": 245,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 258,
+      "irrelevant_or_unjudged_visible_primary_count": 0,
+      "required_anchor_misses_at_50": [
+        {
+          "id": "344592",
+          "rank": null,
+          "queryId": "hold_chem_01"
+        },
+        {
+          "id": "357498",
+          "rank": null,
+          "queryId": "hold_chem_02"
+        },
+        {
+          "id": "359104",
+          "rank": null,
+          "queryId": "hold_chem_02"
+        }
+      ]
+    },
+    "defense": {
+      "query_count": 3,
+      "required_anchor_count": 2,
+      "primary_precision_at_10": 1,
+      "required_primary_recall_at_10": 0,
+      "required_primary_recall_at_50": 0,
+      "ndcg_at_10": 0,
+      "visible_primary_count": 0,
+      "maximum_visible_primary_count": 0,
+      "internal_candidate_count": 792,
+      "maximum_internal_candidate_count": 386,
+      "broader_fit_count": 2,
+      "rejected_partial_intent_count": 790,
+      "irrelevant_or_unjudged_visible_primary_count": 0,
+      "required_anchor_misses_at_50": [
+        {
+          "id": "344592",
+          "rank": null,
+          "queryId": "hold_defense_01"
+        },
+        {
+          "id": "344592",
+          "rank": null,
+          "queryId": "i2hold_defense_02"
+        }
+      ]
+    },
+    "energy": {
+      "query_count": 4,
+      "required_anchor_count": 5,
+      "primary_precision_at_10": 0.916667,
+      "required_primary_recall_at_10": 0.4,
+      "required_primary_recall_at_50": 0.4,
+      "ndcg_at_10": 0.231511,
+      "visible_primary_count": 3,
+      "maximum_visible_primary_count": 3,
+      "internal_candidate_count": 754,
+      "maximum_internal_candidate_count": 355,
+      "broader_fit_count": 1,
+      "rejected_partial_intent_count": 750,
+      "irrelevant_or_unjudged_visible_primary_count": 1,
+      "required_anchor_misses_at_50": [
+        {
+          "id": "356623",
+          "rank": null,
+          "queryId": "hold_energy_01"
+        },
+        {
+          "id": "356623",
+          "rank": null,
+          "queryId": "i2hold_energy_01"
+        },
+        {
+          "id": "356623",
+          "rank": null,
+          "queryId": "i2hold_energy_02"
+        }
+      ]
+    },
+    "environment": {
+      "query_count": 4,
+      "required_anchor_count": 5,
+      "primary_precision_at_10": 1,
+      "required_primary_recall_at_10": 0.4,
+      "required_primary_recall_at_50": 0.4,
+      "ndcg_at_10": 0.431557,
+      "visible_primary_count": 2,
+      "maximum_visible_primary_count": 1,
+      "internal_candidate_count": 548,
+      "maximum_internal_candidate_count": 231,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 546,
+      "irrelevant_or_unjudged_visible_primary_count": 0,
+      "required_anchor_misses_at_50": [
+        {
+          "id": "362061",
+          "rank": null,
+          "queryId": "hold_env_01"
+        },
+        {
+          "id": "363375",
+          "rank": null,
+          "queryId": "hold_env_01"
+        },
+        {
+          "id": "363375",
+          "rank": null,
+          "queryId": "i2hold_env_01"
+        }
+      ]
+    },
+    "hard_negative": {
+      "query_count": 4,
+      "required_anchor_count": 0,
+      "primary_precision_at_10": 1,
+      "required_primary_recall_at_10": 0,
+      "required_primary_recall_at_50": 0,
+      "ndcg_at_10": 1,
+      "visible_primary_count": 0,
+      "maximum_visible_primary_count": 0,
+      "internal_candidate_count": 734,
+      "maximum_internal_candidate_count": 559,
+      "broader_fit_count": 11,
+      "rejected_partial_intent_count": 723,
+      "irrelevant_or_unjudged_visible_primary_count": 0,
+      "required_anchor_misses_at_50": []
+    },
+    "health": {
+      "query_count": 5,
+      "required_anchor_count": 4,
+      "primary_precision_at_10": 0.8,
+      "required_primary_recall_at_10": 0.75,
+      "required_primary_recall_at_50": 0.75,
+      "ndcg_at_10": 0.565247,
+      "visible_primary_count": 4,
+      "maximum_visible_primary_count": 1,
+      "internal_candidate_count": 2370,
+      "maximum_internal_candidate_count": 793,
+      "broader_fit_count": 8,
+      "rejected_partial_intent_count": 2358,
+      "irrelevant_or_unjudged_visible_primary_count": 1,
+      "required_anchor_misses_at_50": [
+        {
+          "id": "363582",
+          "rank": null,
+          "queryId": "hold_health_01"
+        }
+      ]
+    },
+    "materials": {
+      "query_count": 12,
+      "required_anchor_count": 31,
+      "primary_precision_at_10": 1,
+      "required_primary_recall_at_10": 0,
+      "required_primary_recall_at_50": 0,
+      "ndcg_at_10": 0.083333,
+      "visible_primary_count": 0,
+      "maximum_visible_primary_count": 0,
+      "internal_candidate_count": 1295,
+      "maximum_internal_candidate_count": 337,
+      "broader_fit_count": 6,
+      "rejected_partial_intent_count": 1289,
+      "irrelevant_or_unjudged_visible_primary_count": 0,
+      "required_anchor_misses_at_50": [
+        {
+          "id": "360678",
+          "rank": null,
+          "queryId": "hold_ree_01"
+        },
+        {
+          "id": "361526",
+          "rank": null,
+          "queryId": "hold_ree_01"
+        },
+        {
+          "id": "362061",
+          "rank": null,
+          "queryId": "hold_ree_01"
+        },
+        {
+          "id": "360678",
+          "rank": null,
+          "queryId": "hold_ree_02"
+        },
+        {
+          "id": "361526",
+          "rank": null,
+          "queryId": "hold_ree_02"
+        },
+        {
+          "id": "362061",
+          "rank": null,
+          "queryId": "hold_ree_02"
+        },
+        {
+          "id": "360678",
+          "rank": null,
+          "queryId": "hold_ree_03"
+        },
+        {
+          "id": "361526",
+          "rank": null,
+          "queryId": "hold_ree_03"
+        },
+        {
+          "id": "362061",
+          "rank": null,
+          "queryId": "hold_ree_03"
+        },
+        {
+          "id": "360678",
+          "rank": null,
+          "queryId": "hold_ree_04"
+        },
+        {
+          "id": "361526",
+          "rank": null,
+          "queryId": "hold_ree_04"
+        },
+        {
+          "id": "362061",
+          "rank": null,
+          "queryId": "hold_ree_04"
+        },
+        {
+          "id": "360678",
+          "rank": null,
+          "queryId": "hold_ree_05"
+        },
+        {
+          "id": "361526",
+          "rank": null,
+          "queryId": "hold_ree_05"
+        },
+        {
+          "id": "362061",
+          "rank": null,
+          "queryId": "hold_ree_05"
+        },
+        {
+          "id": "360678",
+          "rank": null,
+          "queryId": "hold_ree_06"
+        },
+        {
+          "id": "361526",
+          "rank": null,
+          "queryId": "hold_ree_06"
+        },
+        {
+          "id": "362061",
+          "rank": null,
+          "queryId": "hold_ree_06"
+        },
+        {
+          "id": "359280",
+          "rank": null,
+          "queryId": "hold_ree_08"
+        },
+        {
+          "id": "359644",
+          "rank": null,
+          "queryId": "hold_ree_08"
+        },
+        {
+          "id": "360678",
+          "rank": null,
+          "queryId": "i2hold_material_01"
+        },
+        {
+          "id": "361526",
+          "rank": null,
+          "queryId": "i2hold_material_01"
+        },
+        {
+          "id": "362061",
+          "rank": null,
+          "queryId": "i2hold_material_01"
+        },
+        {
+          "id": "360678",
+          "rank": null,
+          "queryId": "i2hold_material_02"
+        },
+        {
+          "id": "361526",
+          "rank": null,
+          "queryId": "i2hold_material_02"
+        },
+        {
+          "id": "362061",
+          "rank": null,
+          "queryId": "i2hold_material_02"
+        },
+        {
+          "id": "360678",
+          "rank": null,
+          "queryId": "i2hold_material_03"
+        },
+        {
+          "id": "361526",
+          "rank": null,
+          "queryId": "i2hold_material_03"
+        },
+        {
+          "id": "362061",
+          "rank": null,
+          "queryId": "i2hold_material_03"
+        },
+        {
+          "id": "361526",
+          "rank": null,
+          "queryId": "i2hold_material_04"
+        },
+        {
+          "id": "362061",
+          "rank": null,
+          "queryId": "i2hold_material_04"
+        }
+      ]
+    },
+    "other": {
+      "query_count": 3,
+      "required_anchor_count": 0,
+      "primary_precision_at_10": 1,
+      "required_primary_recall_at_10": 0,
+      "required_primary_recall_at_50": 0,
+      "ndcg_at_10": 0.666667,
+      "visible_primary_count": 0,
+      "maximum_visible_primary_count": 0,
+      "internal_candidate_count": 1008,
+      "maximum_internal_candidate_count": 534,
+      "broader_fit_count": 30,
+      "rejected_partial_intent_count": 978,
+      "irrelevant_or_unjudged_visible_primary_count": 0,
+      "required_anchor_misses_at_50": []
+    },
+    "space": {
+      "query_count": 4,
+      "required_anchor_count": 3,
+      "primary_precision_at_10": 1,
+      "required_primary_recall_at_10": 0.333333,
+      "required_primary_recall_at_50": 0.333333,
+      "ndcg_at_10": 0.5,
+      "visible_primary_count": 1,
+      "maximum_visible_primary_count": 1,
+      "internal_candidate_count": 578,
+      "maximum_internal_candidate_count": 435,
+      "broader_fit_count": 6,
+      "rejected_partial_intent_count": 571,
+      "irrelevant_or_unjudged_visible_primary_count": 0,
+      "required_anchor_misses_at_50": [
+        {
+          "id": "356536",
+          "rank": null,
+          "queryId": "hold_space_02"
+        },
+        {
+          "id": "356536",
+          "rank": null,
+          "queryId": "i2hold_space_01"
+        }
+      ]
+    }
+  },
+  "by_required_program": {
+    "344592": {
+      "required_anchor_checks": 3,
+      "recall_at_10": 0,
+      "recall_at_50": 0,
+      "checks": [
+        {
+          "query_id": "hold_chem_01",
+          "query": "electrocatalytic ammonia synthesis",
+          "rank": null
+        },
+        {
+          "query_id": "hold_defense_01",
+          "query": "high temperature hypersonic composites",
+          "rank": null
+        },
+        {
+          "query_id": "i2hold_defense_02",
+          "query": "hypersonic thermal-protection materials",
+          "rank": null
+        }
+      ]
+    },
+    "356536": {
+      "required_anchor_checks": 3,
+      "recall_at_10": 0.333333,
+      "recall_at_50": 0.333333,
+      "checks": [
+        {
+          "query_id": "hold_space_02",
+          "query": "Earth system chemical elements",
+          "rank": null
+        },
+        {
+          "query_id": "i2hold_space_01",
+          "query": "Sun-Earth electrodynamic coupling",
+          "rank": null
+        },
+        {
+          "query_id": "i2hold_space_02",
+          "query": "upper-atmosphere radiation-belt dynamics",
+          "rank": 1
+        }
+      ]
+    },
+    "356623": {
+      "required_anchor_checks": 3,
+      "recall_at_10": 0,
+      "recall_at_50": 0,
+      "checks": [
+        {
+          "query_id": "hold_energy_01",
+          "query": "long duration energy storage",
+          "rank": null
+        },
+        {
+          "query_id": "i2hold_energy_01",
+          "query": "grid-scale storage technology scale-up",
+          "rank": null
+        },
+        {
+          "query_id": "i2hold_energy_02",
+          "query": "seasonal thermal storage commercialization",
+          "rank": null
+        }
+      ]
+    },
+    "357498": {
+      "required_anchor_checks": 1,
+      "recall_at_10": 0,
+      "recall_at_50": 0,
+      "checks": [
+        {
+          "query_id": "hold_chem_02",
+          "query": "innovation catalyst student success",
+          "rank": null
+        }
+      ]
+    },
+    "359104": {
+      "required_anchor_checks": 1,
+      "recall_at_10": 0,
+      "recall_at_50": 0,
+      "checks": [
+        {
+          "query_id": "hold_chem_02",
+          "query": "innovation catalyst student success",
+          "rank": null
+        }
+      ]
+    },
+    "359280": {
+      "required_anchor_checks": 1,
+      "recall_at_10": 0,
+      "recall_at_50": 0,
+      "checks": [
+        {
+          "query_id": "hold_ree_08",
+          "query": "rare disease molecular elements",
+          "rank": null
+        }
+      ]
+    },
+    "359644": {
+      "required_anchor_checks": 1,
+      "recall_at_10": 0,
+      "recall_at_50": 0,
+      "checks": [
+        {
+          "query_id": "hold_ree_08",
+          "query": "rare disease molecular elements",
+          "rank": null
+        }
+      ]
+    },
+    "360205": {
+      "required_anchor_checks": 3,
+      "recall_at_10": 0,
+      "recall_at_50": 0,
+      "checks": [
+        {
+          "query_id": "hold_ag_01",
+          "query": "drought tolerant crop genetics",
+          "rank": null
+        },
+        {
+          "query_id": "i2hold_ag_01",
+          "query": "heat-resilient plant breeding",
+          "rank": null
+        },
+        {
+          "query_id": "i2hold_ag_02",
+          "query": "crop disease resistance genomics",
+          "rank": null
+        }
+      ]
+    },
+    "360678": {
+      "required_anchor_checks": 9,
+      "recall_at_10": 0,
+      "recall_at_50": 0,
+      "checks": [
+        {
+          "query_id": "hold_ree_01",
+          "query": "rare earth recycling",
+          "rank": null
+        },
+        {
+          "query_id": "hold_ree_02",
+          "query": "rare earth solvent extraction",
+          "rank": null
+        },
+        {
+          "query_id": "hold_ree_03",
+          "query": "lanthanide ion exchange",
+          "rank": null
+        },
+        {
+          "query_id": "hold_ree_04",
+          "query": "REE hydrometallurgy",
+          "rank": null
+        },
+        {
+          "query_id": "hold_ree_05",
+          "query": "yttrium separation",
+          "rank": null
+        },
+        {
+          "query_id": "hold_ree_06",
+          "query": "scandium recovery",
+          "rank": null
+        },
+        {
+          "query_id": "i2hold_material_01",
+          "query": "dysprosium solvent recovery",
+          "rank": null
+        },
+        {
+          "query_id": "i2hold_material_02",
+          "query": "neodymium ion-exchange purification",
+          "rank": null
+        },
+        {
+          "query_id": "i2hold_material_03",
+          "query": "lanthanum resource recovery",
+          "rank": null
+        }
+      ]
+    },
+    "361333": {
+      "required_anchor_checks": 1,
+      "recall_at_10": 0,
+      "recall_at_50": 0,
+      "checks": [
+        {
+          "query_id": "hold_ai_01",
+          "query": "secure foundation models",
+          "rank": null
+        }
+      ]
+    },
+    "361526": {
+      "required_anchor_checks": 15,
+      "recall_at_10": 0.2,
+      "recall_at_50": 0.2,
+      "checks": [
+        {
+          "query_id": "hold_ree_01",
+          "query": "rare earth recycling",
+          "rank": null
+        },
+        {
+          "query_id": "hold_ree_02",
+          "query": "rare earth solvent extraction",
+          "rank": null
+        },
+        {
+          "query_id": "hold_ree_03",
+          "query": "lanthanide ion exchange",
+          "rank": null
+        },
+        {
+          "query_id": "hold_ree_04",
+          "query": "REE hydrometallurgy",
+          "rank": null
+        },
+        {
+          "query_id": "hold_ree_05",
+          "query": "yttrium separation",
+          "rank": null
+        },
+        {
+          "query_id": "hold_ree_06",
+          "query": "scandium recovery",
+          "rank": null
+        },
+        {
+          "query_id": "hold_ai_01",
+          "query": "secure foundation models",
+          "rank": null
+        },
+        {
+          "query_id": "i2hold_material_01",
+          "query": "dysprosium solvent recovery",
+          "rank": null
+        },
+        {
+          "query_id": "i2hold_material_02",
+          "query": "neodymium ion-exchange purification",
+          "rank": null
+        },
+        {
+          "query_id": "i2hold_material_03",
+          "query": "lanthanum resource recovery",
+          "rank": null
+        },
+        {
+          "query_id": "i2hold_material_04",
+          "query": "critical-metal leaching technology",
+          "rank": null
+        },
+        {
+          "query_id": "i2hold_ai_01",
+          "query": "composable scientific foundation models",
+          "rank": 1
+        },
+        {
+          "query_id": "i2hold_ai_02",
+          "query": "adversarially robust AI science workflows",
+          "rank": null
+        },
+        {
+          "query_id": "i2hold_child_01",
+          "query": "agentic chemical manufacturing",
+          "rank": 1
+        },
+        {
+          "query_id": "i2hold_child_02",
+          "query": "trustworthy scientific software AI",
+          "rank": 1
+        }
+      ]
+    },
+    "362061": {
+      "required_anchor_checks": 11,
+      "recall_at_10": 0,
+      "recall_at_50": 0,
+      "checks": [
+        {
+          "query_id": "hold_ree_01",
+          "query": "rare earth recycling",
+          "rank": null
+        },
+        {
+          "query_id": "hold_ree_02",
+          "query": "rare earth solvent extraction",
+          "rank": null
+        },
+        {
+          "query_id": "hold_ree_03",
+          "query": "lanthanide ion exchange",
+          "rank": null
+        },
+        {
+          "query_id": "hold_ree_04",
+          "query": "REE hydrometallurgy",
+          "rank": null
+        },
+        {
+          "query_id": "hold_ree_05",
+          "query": "yttrium separation",
+          "rank": null
+        },
+        {
+          "query_id": "hold_ree_06",
+          "query": "scandium recovery",
+          "rank": null
+        },
+        {
+          "query_id": "hold_env_01",
+          "query": "membrane PFAS treatment",
+          "rank": null
+        },
+        {
+          "query_id": "i2hold_material_01",
+          "query": "dysprosium solvent recovery",
+          "rank": null
+        },
+        {
+          "query_id": "i2hold_material_02",
+          "query": "neodymium ion-exchange purification",
+          "rank": null
+        },
+        {
+          "query_id": "i2hold_material_03",
+          "query": "lanthanum resource recovery",
+          "rank": null
+        },
+        {
+          "query_id": "i2hold_material_04",
+          "query": "critical-metal leaching technology",
+          "rank": null
+        }
+      ]
+    },
+    "362900": {
+      "required_anchor_checks": 1,
+      "recall_at_10": 1,
+      "recall_at_50": 1,
+      "checks": [
+        {
+          "query_id": "hold_energy_02",
+          "query": "mineral supply chain diplomacy",
+          "rank": 2
+        }
+      ]
+    },
+    "363222": {
+      "required_anchor_checks": 1,
+      "recall_at_10": 1,
+      "recall_at_50": 1,
+      "checks": [
+        {
+          "query_id": "i2hold_health_03",
+          "query": "tribal maternal home visiting services",
+          "rank": 1
+        }
+      ]
+    },
+    "363370": {
+      "required_anchor_checks": 1,
+      "recall_at_10": 1,
+      "recall_at_50": 1,
+      "checks": [
+        {
+          "query_id": "hold_ai_02",
+          "query": "AI journalism exchange",
+          "rank": 1
+        }
+      ]
+    },
+    "363375": {
+      "required_anchor_checks": 2,
+      "recall_at_10": 0,
+      "recall_at_50": 0,
+      "checks": [
+        {
+          "query_id": "hold_env_01",
+          "query": "membrane PFAS treatment",
+          "rank": null
+        },
+        {
+          "query_id": "i2hold_env_01",
+          "query": "pilot-scale impaired-water purification",
+          "rank": null
+        }
+      ]
+    },
+    "363536": {
+      "required_anchor_checks": 1,
+      "recall_at_10": 1,
+      "recall_at_50": 1,
+      "checks": [
+        {
+          "query_id": "hold_energy_02",
+          "query": "mineral supply chain diplomacy",
+          "rank": 1
+        }
+      ]
+    },
+    "363537": {
+      "required_anchor_checks": 2,
+      "recall_at_10": 1,
+      "recall_at_50": 1,
+      "checks": [
+        {
+          "query_id": "hold_env_02",
+          "query": "coastal ecosystem climate adaptation",
+          "rank": 1
+        },
+        {
+          "query_id": "i2hold_env_02",
+          "query": "coastal-erosion hazard decision tools",
+          "rank": 1
+        }
+      ]
+    },
+    "363582": {
+      "required_anchor_checks": 3,
+      "recall_at_10": 0.666667,
+      "recall_at_50": 0.666667,
+      "checks": [
+        {
+          "query_id": "hold_health_01",
+          "query": "maternal mortality rural communities",
+          "rank": null
+        },
+        {
+          "query_id": "i2hold_health_01",
+          "query": "rural obstetric care networks",
+          "rank": 1
+        },
+        {
+          "query_id": "i2hold_health_02",
+          "query": "rural maternity access innovation",
+          "rank": 1
+        }
+      ]
+    },
+    "vpr-email:infoready-2028504": {
+      "required_anchor_checks": 1,
+      "recall_at_10": 0,
+      "recall_at_50": 0,
+      "checks": [
+        {
+          "query_id": "hold_bio_01",
+          "query": "single cell cancer immunology",
+          "rank": null
+        }
+      ]
+    },
+    "vpr-email:NSF26-015": {
+      "required_anchor_checks": 1,
+      "recall_at_10": 0,
+      "recall_at_50": 0,
+      "checks": [
+        {
+          "query_id": "hold_ai_01",
+          "query": "secure foundation models",
+          "rank": null
+        }
+      ]
+    }
+  },
+  "latency_ms": {
+    "p50": 38.0768,
+    "p95": 109.0765,
+    "maximum": 150.3437
+  },
+  "comparison": {
+    "phase4_iteration1_before": {
+      "query_average_primary_precision_at_10": 0.372917,
+      "positive_query_average_recall_at_10": 0.633333,
+      "positive_query_average_recall_at_50": 0.65,
+      "direct_positive_average_precision_at_10": 0.348148,
+      "direct_positive_average_ndcg_at_10": 0.585801,
+      "zero_result_queries": [
+        "hold_ree_01",
+        "hold_ree_03",
+        "hold_ree_04",
+        "hold_ree_05",
+        "hold_ree_06",
+        "hold_ree_07",
+        "hold_bio_02",
+        "hold_ag_01"
+      ],
+      "candidate_count_maximum": 213,
+      "candidate_latency_ms": {
+        "p50": 26.9618,
+        "p95": 133.3234
+      },
+      "production_latency_ms": {
+        "p50": 16.287,
+        "p95": 159.672
+      }
+    },
+    "phase4b_iteration2_before": {
+      "query_count": 28,
+      "positive_query_count": 20,
+      "required_anchor_count": 27,
+      "query_average_primary_precision_at_10": 0.410714,
+      "positive_query_required_primary_recall_at_10": 0.3,
+      "positive_query_required_primary_recall_at_50": 0.3,
+      "required_anchor_micro_recall_at_10": 0.296296,
+      "required_anchor_micro_recall_at_50": 0.296296,
+      "ndcg_at_10": 0.392857,
+      "required_anchor_mrr": 0.3,
+      "visible_primary_count": 12,
+      "broader_fit_count": 0,
+      "internal_candidate_discovery_count": 19839,
+      "rejected_partial_intent_count": 19826,
+      "irrelevant_visible_primary_count": 3,
+      "broader_as_visible_primary_count": 1,
+      "maximum_visible_primary_count": 3,
+      "maximum_internal_candidate_count": 1142,
+      "visible_primary_admission_counts": {
+        "authoritative_scope": 3,
+        "publication_eligible_child": 3,
+        "explicit_parent_evidence": 6
+      },
+      "visible_primary_evidence_tier_counts": {
+        "tier_1": 3,
+        "tier_2": 3,
+        "tier_3": 6
+      },
+      "candidate_latency_ms": {
+        "p50": 35.7121,
+        "p95": 172.5294
+      },
+      "production_comparison_latency_ms": {
+        "p50": 18.4053,
+        "p95": 168.9629
+      }
+    }
+  }
+}

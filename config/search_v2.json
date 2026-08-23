@@ -1,0 +1,71 @@
+{
+  "schema_version": 2,
+  "contract_version": "search-v2-local-fielded-1",
+  "asset_version": "search-v2-local-bm25f-20260823",
+  "compatibility": {
+    "query_api_contract_version": 4,
+    "retrieval_api_contract_version": 5,
+    "parent_catalog_schema_version": 3,
+    "child_catalog_schema_version": 1,
+    "search_index_algorithm": "bm25",
+    "evidence_schema_version": 2
+  },
+  "concept_families": [],
+  "controlled_relationships": [],
+  "source_scope_relationships": [],
+  "query_contract_cases": [],
+  "authoritative_scope_entailments": [],
+  "broader_program_fits": [],
+  "acronym_expansions": {
+    "ai": "artificial intelligence",
+    "ml": "machine learning",
+    "ree": "rare earth element",
+    "rees": "rare earth elements",
+    "llm": "large language model",
+    "hpc": "high performance computing"
+  },
+  "evidence_tiers": {
+    "A": "exact identifier or publication-eligible child with complete explicit intent",
+    "B": "complete authoritative child or program-scope entailment",
+    "C": "complete contextual parent title or description evidence",
+    "D": "explicitly designated broader-program fit",
+    "E": "partial or weak discovery evidence; never primary"
+  },
+  "primary_admission": {
+    "concise_query_minimum_groups": 2,
+    "concise_query_maximum_groups": 5,
+    "require_complete_substantive_intent": true,
+    "citation_source_may_independently_admit": false,
+    "generic_topic_or_agency_may_independently_admit": false
+  },
+  "fielded_ranking": {
+    "architecture": "bm25f_passage_coordination",
+    "use_configured_scientific_entailments": false,
+    "field_weights": {
+      "parent_title": 8,
+      "child_title": 9,
+      "child_summary": 4,
+      "parent_description": 2,
+      "authoritative_program_area": 6,
+      "authoritative_document_scope": 3
+    },
+    "field_length_normalization": {
+      "parent_title": 0.2,
+      "child_title": 0.15,
+      "child_summary": 0.6,
+      "parent_description": 0.75,
+      "authoritative_program_area": 0.2,
+      "authoritative_document_scope": 0.5
+    },
+    "k1": 1.2,
+    "coordination_power": 3,
+    "proximity_window": 32,
+    "proximity_bonus": 3,
+    "exact_phrase_bonus": 8,
+    "title_exact_phrase_bonus": 12,
+    "conservative_fuzzy_minimum_length": 7,
+    "long_query_minimum_coordination": 0.7,
+    "parent_rollup": "strongest_single_parent_or_child_passage",
+    "child_count_bonus": 0
+  }
+}

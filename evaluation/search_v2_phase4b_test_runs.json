@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "phase": "4B",
+  "iteration": 2,
+  "recorded_at": "2026-08-22",
+  "candidate_code_sha": "daa3355bc68b9fda45037a0a8d2be8c38fad7638",
+  "candidate_behavior_changed_during_phase4b": false,
+  "holdout_executions": 1,
+  "post_holdout_tuning": false,
+  "runs": [
+    {
+      "gate": "development_49_query",
+      "command": "node tools/run_search_v2.mjs",
+      "exit_code": 0,
+      "result": "passed",
+      "details": {
+        "query_count": 49,
+        "warm_p50_ms": 11.2296,
+        "warm_p95_ms": 31.4553,
+        "warm_max_ms": 35.6316,
+        "all_hard_gates": true
+      }
+    },
+    {
+      "gate": "former_phase4_challenge",
+      "command": "node tools/run_search_v2_iteration2_challenge.mjs",
+      "exit_code": 0,
+      "result": "passed",
+      "details": {
+        "query_count": 24,
+        "primary_precision_at_10": 1.0,
+        "required_primary_recall_at_10": 1.0,
+        "required_primary_recall_at_50": 1.0,
+        "direct_positive_ndcg_at_10": 0.91534,
+        "maximum_visible_primary_count": 4,
+        "confirmed_irrelevant_top_ten": 0,
+        "read_only_rerun": true
+      }
+    },
+    {
+      "gate": "meas5_48_query_11_discipline",
+      "command": "node tools/run_meas5.mjs",
+      "exit_code": 0,
+      "result": "passed",
+      "details": {
+        "query_count": 48,
+        "discipline_count": 11
+      }
+    },
+    {
+      "gate": "historical_37_query_baseline",
+      "command": "node tools/query_baseline.mjs --check",
+      "exit_code": 0,
+      "result": "passed",
+      "details": {
+        "query_count": 37,
+        "top_10_churn": 0
+      }
+    },
+    {
+      "gate": "phase3_42_pair_explanation_frame",
+      "command": "node tools/run_match_explain_v2.mjs",
+      "exit_code": 0,
+      "result": "passed",
+      "details": {
+        "case_count": 42,
+        "correct_and_useful": 41,
+        "reviewed_shallow": 1,
+        "unsupported": 0,
+        "misleading": 0
+      }
+    },
+    {
+      "gate": "parent_child_cardinality_and_normalization",
+      "command": "node tools/p9_scoring_probe.mjs --check",
+      "exit_code": 0,
+      "result": "passed",
+      "details": {
+        "case_count": 50,
+        "cardinality_invariant": true,
+        "byte_identical": true
+      }
+    },
+    {
+      "gate": "browser_python_config_parity",
+      "command": "node tools/build_search_v2_config.mjs --check",
+      "exit_code": 0,
+      "result": "passed",
+      "details": {
+        "generated_asset_current": true
+      }
+    },
+    {
+      "gate": "browser_suite",
+      "command": "node --test tests/browser/*.test.mjs",
+      "exit_code": 0,
+      "result": "passed",
+      "details": {
+        "tests": 139,
+        "passed": 139,
+        "failed": 0
+      }
+    },
+    {
+      "gate": "focused_python_search_parity_schema_size",
+      "command": "python -m unittest tests.test_search_query tests.test_size_budget tests.test_subtopic_records tests.test_p9_scoring",
+      "exit_code": 0,
+      "result": "passed",
+      "details": {
+        "tests": 43,
+        "passed": 43,
+        "failed": 0
+      }
+    },
+    {
+      "gate": "live_product_python",
+      "command": "python -m tools.run_refresh_validation",
+      "exit_code": 0,
+      "result": "passed",
+      "details": {
+        "tests": 756,
+        "passed": 756,
+        "failed": 0,
+        "inherited_closed_frozen_census_modules_excluded": [
+          "test_meas8",
+          "test_p5_closeout",
+          "test_p7_frame",
+          "test_p7_residual"
+        ]
+      }
+    },
+    {
+      "gate": "no_drift",
+      "command": "./tools/verify_no_drift.sh",
+      "exit_code": 0,
+      "result": "passed",
+      "details": {
+        "artifact_count": 22,
+        "changed_artifacts": 0
+      }
+    }
+  ],
+  "gate_summary": {
+    "H_regression": {
+      "pass": true,
+      "failed_runs": []
+    },
+    "I_performance_and_size": {
+      "pass": true,
+      "development_warm_ms": {
+        "p50": 11.2296,
+        "p95": 31.4553,
+        "maximum": 35.6316
+      },
+      "phase4b_candidate_ms": {
+        "p50": 35.7121,
+        "p95": 172.5294
+      },
+      "phase4b_production_comparison_ms": {
+        "p50": 18.4053,
+        "p95": 168.9629
+      },
+      "maximum_internal_candidate_count": 1142,
+      "browser_assets": {
+        "app_js_bytes": 192831,
+        "search_query_js_bytes": 59346,
+        "search_retrieval_js_bytes": 65008,
+        "match_explain_js_bytes": 17817,
+        "search_v2_config_js_bytes": 41076,
+        "phase4b_delta_bytes": 0
+      },
+      "size_budget_passed": true
+    }
+  },
+  "all_regression_runs_exit_zero": true,
+  "note": "Passing regression and infrastructure checks do not override failed Phase-4B holdout gates A-G."
+}

@@ -1,0 +1,1168 @@
+{
+  "schema_version": 1,
+  "iteration": 3,
+  "created_at": "2026-08-22",
+  "status": "pre_implementation_anchor_fate_trace_complete",
+  "source_raw_artifact": "evaluation/search_v2_iteration2_holdout_results_raw.json",
+  "source_raw_sha256": "fef755fb0bfdd2f485bf712478dc3b82623038882f9e961746d79ac599ff8af5",
+  "source_results_artifact": "evaluation/search_v2_iteration2_holdout_results.json",
+  "source_results_sha256": "5e6dee415139dc0c81879ead161fa931211bc583176c0c537df437282d90a15a",
+  "missed_anchor_count": 19,
+  "primary_failure_class_counts": {
+    "QUERY_INTERPRETATION_FAILURE": 15,
+    "SCOPE_REPRESENTATION_FAILURE": 2,
+    "VERIFICATION_FAILURE": 2
+  },
+  "all_failure_class_counts": {
+    "DISCOVERY_FAILURE": 1,
+    "QUERY_INTERPRETATION_FAILURE": 16,
+    "SCOPE_REPRESENTATION_FAILURE": 2,
+    "VERIFICATION_FAILURE": 2,
+    "ROLLUP_FAILURE": 0,
+    "RANKING_FAILURE": 0,
+    "SOURCE_COVERAGE_FAILURE": 0
+  },
+  "discovery_summary": {
+    "parent_candidates_discovered": 18,
+    "parent_candidates_not_discovered": 1,
+    "relevant_children_required": 6,
+    "relevant_children_discovered": 6,
+    "verified_primary_before_final_ranking": 0,
+    "ranking_owned_misses": 0
+  },
+  "semantic_benchmark_trigger": {
+    "triggered": false,
+    "reason": "18 of 19 required parents and every required publication-eligible child were already discovered; the dominant owners are query/scope representation and verification, not semantic candidate recall.",
+    "ppmi_result_interpretation": "The prior PPMI result is not treated as evidence against modern semantic retrieval; a new benchmark is simply not justified by this fate trace."
+  },
+  "architecture_implication": "Keep broad internal discovery, complete-intent verification, evidence tiers, and causal explanations. Replace query-string/program allowlists with source-grounded role signatures and a generic role-aware verifier; do not add semantic candidate infrastructure in this iteration.",
+  "rows": [
+    {
+      "query_id": "i2hold_material_01",
+      "query": "dysprosium solvent recovery",
+      "required_result_id": "360678",
+      "required_result_title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+      "authoritative_source": {
+        "kind": "controlled_program_area",
+        "label": "Basic Energy Sciences \u2014 Separation Science",
+        "url": "https://science.osti.gov",
+        "relevant_child_id": null,
+        "relevant_child_title": null
+      },
+      "source_evidence_available": true,
+      "source_scope_summary": [
+        "separation science",
+        "rare-earth separation and recovery"
+      ],
+      "parent_candidate_discovered": true,
+      "relevant_child_required": false,
+      "relevant_child_candidate_discovered": null,
+      "candidate_rank_before_verification": 199,
+      "candidate_rank_definition": "rank of the parent rollup by maximum raw lexical-plus-topic discovery score before admission verification",
+      "query_concepts_produced": [
+        {
+          "concept_id": "rare-earth-elements",
+          "role": "target",
+          "source": "ree",
+          "required": true
+        },
+        {
+          "concept_id": "literal:solvent",
+          "role": "application_or_context",
+          "source": "solvent",
+          "required": true
+        },
+        {
+          "concept_id": "separations",
+          "role": "method",
+          "source": "recovery",
+          "required": true
+        }
+      ],
+      "scope_concepts_available": [
+        "separation science",
+        "rare-earth separation and recovery"
+      ],
+      "verification_result": "rejected",
+      "rejection_reason": "insufficient_lexical_coverage",
+      "evidence_tier": 5,
+      "final_result_state": "rejected_not_visible",
+      "primary_failure_class": "QUERY_INTERPRETATION_FAILURE",
+      "secondary_failure_classes": [],
+      "causal_trace": "The source candidate exists, but hyphenated compounds, modifiers, or synonymous scientific roles remain separate literal requirements instead of a coherent canonical intent.",
+      "smallest_general_fix": "Derive role-aware intent from compound/modifier structure and compare it to source roles without query-string allowlists."
+    },
+    {
+      "query_id": "i2hold_material_01",
+      "query": "dysprosium solvent recovery",
+      "required_result_id": "361526",
+      "required_result_title": "The Genesis Mission: Transforming Science and Energy with AI",
+      "authoritative_source": {
+        "kind": "publication_eligible_child",
+        "label": "Genesis Mission focus-area workbook",
+        "url": "https://www.grants.gov/search-results-detail/361526",
+        "relevant_child_id": "361526:d-3",
+        "relevant_child_title": "Extraction and Processing Technologies"
+      },
+      "source_evidence_available": true,
+      "source_scope_summary": [
+        "critical-minerals extraction and processing",
+        "AI science workflows",
+        "scientific software"
+      ],
+      "parent_candidate_discovered": true,
+      "relevant_child_required": true,
+      "relevant_child_candidate_discovered": true,
+      "candidate_rank_before_verification": 4,
+      "candidate_rank_definition": "rank of the parent rollup by maximum raw lexical-plus-topic discovery score before admission verification",
+      "query_concepts_produced": [
+        {
+          "concept_id": "rare-earth-elements",
+          "role": "target",
+          "source": "ree",
+          "required": true
+        },
+        {
+          "concept_id": "literal:solvent",
+          "role": "application_or_context",
+          "source": "solvent",
+          "required": true
+        },
+        {
+          "concept_id": "separations",
+          "role": "method",
+          "source": "recovery",
+          "required": true
+        }
+      ],
+      "scope_concepts_available": [
+        "critical-minerals extraction and processing",
+        "AI science workflows",
+        "scientific software"
+      ],
+      "verification_result": "rejected",
+      "rejection_reason": "insufficient_lexical_coverage",
+      "evidence_tier": 5,
+      "final_result_state": "rejected_not_visible",
+      "primary_failure_class": "QUERY_INTERPRETATION_FAILURE",
+      "secondary_failure_classes": [],
+      "causal_trace": "The source candidate exists, but hyphenated compounds, modifiers, or synonymous scientific roles remain separate literal requirements instead of a coherent canonical intent.",
+      "smallest_general_fix": "Derive role-aware intent from compound/modifier structure and compare it to source roles without query-string allowlists."
+    },
+    {
+      "query_id": "i2hold_material_01",
+      "query": "dysprosium solvent recovery",
+      "required_result_id": "362061",
+      "required_result_title": "Chemical Process Systems (CPS)",
+      "authoritative_source": {
+        "kind": "authoritative_parent_scope",
+        "label": "Chemical Process Systems",
+        "url": "https://www.nsf.gov/funding/pgm_summ.jsp?pims_id=506547",
+        "relevant_child_id": null,
+        "relevant_child_title": null
+      },
+      "source_evidence_available": true,
+      "source_scope_summary": [
+        "critical minerals",
+        "separations",
+        "recovery",
+        "chemical process technology"
+      ],
+      "parent_candidate_discovered": true,
+      "relevant_child_required": false,
+      "relevant_child_candidate_discovered": null,
+      "candidate_rank_before_verification": 2,
+      "candidate_rank_definition": "rank of the parent rollup by maximum raw lexical-plus-topic discovery score before admission verification",
+      "query_concepts_produced": [
+        {
+          "concept_id": "rare-earth-elements",
+          "role": "target",
+          "source": "ree",
+          "required": true
+        },
+        {
+          "concept_id": "literal:solvent",
+          "role": "application_or_context",
+          "source": "solvent",
+          "required": true
+        },
+        {
+          "concept_id": "separations",
+          "role": "method",
+          "source": "recovery",
+          "required": true
+        }
+      ],
+      "scope_concepts_available": [
+        "critical minerals",
+        "separations",
+        "recovery",
+        "chemical process technology"
+      ],
+      "verification_result": "rejected",
+      "rejection_reason": "insufficient_lexical_coverage",
+      "evidence_tier": 5,
+      "final_result_state": "rejected_not_visible",
+      "primary_failure_class": "QUERY_INTERPRETATION_FAILURE",
+      "secondary_failure_classes": [],
+      "causal_trace": "The source candidate exists, but hyphenated compounds, modifiers, or synonymous scientific roles remain separate literal requirements instead of a coherent canonical intent.",
+      "smallest_general_fix": "Derive role-aware intent from compound/modifier structure and compare it to source roles without query-string allowlists."
+    },
+    {
+      "query_id": "i2hold_material_02",
+      "query": "neodymium ion-exchange purification",
+      "required_result_id": "360678",
+      "required_result_title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+      "authoritative_source": {
+        "kind": "controlled_program_area",
+        "label": "Basic Energy Sciences \u2014 Separation Science",
+        "url": "https://science.osti.gov",
+        "relevant_child_id": null,
+        "relevant_child_title": null
+      },
+      "source_evidence_available": true,
+      "source_scope_summary": [
+        "separation science",
+        "rare-earth separation and recovery"
+      ],
+      "parent_candidate_discovered": true,
+      "relevant_child_required": false,
+      "relevant_child_candidate_discovered": null,
+      "candidate_rank_before_verification": 199,
+      "candidate_rank_definition": "rank of the parent rollup by maximum raw lexical-plus-topic discovery score before admission verification",
+      "query_concepts_produced": [
+        {
+          "concept_id": "rare-earth-elements",
+          "role": "target",
+          "source": "ree",
+          "required": true
+        },
+        {
+          "concept_id": "literal:ion-exchange",
+          "role": "application_or_context",
+          "source": "ion-exchange",
+          "required": true
+        },
+        {
+          "concept_id": "separations",
+          "role": "method",
+          "source": "purification",
+          "required": true
+        }
+      ],
+      "scope_concepts_available": [
+        "separation science",
+        "rare-earth separation and recovery"
+      ],
+      "verification_result": "rejected",
+      "rejection_reason": "insufficient_lexical_coverage",
+      "evidence_tier": 5,
+      "final_result_state": "rejected_not_visible",
+      "primary_failure_class": "QUERY_INTERPRETATION_FAILURE",
+      "secondary_failure_classes": [],
+      "causal_trace": "The source candidate exists, but hyphenated compounds, modifiers, or synonymous scientific roles remain separate literal requirements instead of a coherent canonical intent.",
+      "smallest_general_fix": "Derive role-aware intent from compound/modifier structure and compare it to source roles without query-string allowlists."
+    },
+    {
+      "query_id": "i2hold_material_02",
+      "query": "neodymium ion-exchange purification",
+      "required_result_id": "361526",
+      "required_result_title": "The Genesis Mission: Transforming Science and Energy with AI",
+      "authoritative_source": {
+        "kind": "publication_eligible_child",
+        "label": "Genesis Mission focus-area workbook",
+        "url": "https://www.grants.gov/search-results-detail/361526",
+        "relevant_child_id": "361526:d-3",
+        "relevant_child_title": "Extraction and Processing Technologies"
+      },
+      "source_evidence_available": true,
+      "source_scope_summary": [
+        "critical-minerals extraction and processing",
+        "AI science workflows",
+        "scientific software"
+      ],
+      "parent_candidate_discovered": true,
+      "relevant_child_required": true,
+      "relevant_child_candidate_discovered": true,
+      "candidate_rank_before_verification": 4,
+      "candidate_rank_definition": "rank of the parent rollup by maximum raw lexical-plus-topic discovery score before admission verification",
+      "query_concepts_produced": [
+        {
+          "concept_id": "rare-earth-elements",
+          "role": "target",
+          "source": "ree",
+          "required": true
+        },
+        {
+          "concept_id": "literal:ion-exchange",
+          "role": "application_or_context",
+          "source": "ion-exchange",
+          "required": true
+        },
+        {
+          "concept_id": "separations",
+          "role": "method",
+          "source": "purification",
+          "required": true
+        }
+      ],
+      "scope_concepts_available": [
+        "critical-minerals extraction and processing",
+        "AI science workflows",
+        "scientific software"
+      ],
+      "verification_result": "rejected",
+      "rejection_reason": "insufficient_lexical_coverage",
+      "evidence_tier": 5,
+      "final_result_state": "rejected_not_visible",
+      "primary_failure_class": "QUERY_INTERPRETATION_FAILURE",
+      "secondary_failure_classes": [],
+      "causal_trace": "The source candidate exists, but hyphenated compounds, modifiers, or synonymous scientific roles remain separate literal requirements instead of a coherent canonical intent.",
+      "smallest_general_fix": "Derive role-aware intent from compound/modifier structure and compare it to source roles without query-string allowlists."
+    },
+    {
+      "query_id": "i2hold_material_02",
+      "query": "neodymium ion-exchange purification",
+      "required_result_id": "362061",
+      "required_result_title": "Chemical Process Systems (CPS)",
+      "authoritative_source": {
+        "kind": "authoritative_parent_scope",
+        "label": "Chemical Process Systems",
+        "url": "https://www.nsf.gov/funding/pgm_summ.jsp?pims_id=506547",
+        "relevant_child_id": null,
+        "relevant_child_title": null
+      },
+      "source_evidence_available": true,
+      "source_scope_summary": [
+        "critical minerals",
+        "separations",
+        "recovery",
+        "chemical process technology"
+      ],
+      "parent_candidate_discovered": true,
+      "relevant_child_required": false,
+      "relevant_child_candidate_discovered": null,
+      "candidate_rank_before_verification": 2,
+      "candidate_rank_definition": "rank of the parent rollup by maximum raw lexical-plus-topic discovery score before admission verification",
+      "query_concepts_produced": [
+        {
+          "concept_id": "rare-earth-elements",
+          "role": "target",
+          "source": "ree",
+          "required": true
+        },
+        {
+          "concept_id": "literal:ion-exchange",
+          "role": "application_or_context",
+          "source": "ion-exchange",
+          "required": true
+        },
+        {
+          "concept_id": "separations",
+          "role": "method",
+          "source": "purification",
+          "required": true
+        }
+      ],
+      "scope_concepts_available": [
+        "critical minerals",
+        "separations",
+        "recovery",
+        "chemical process technology"
+      ],
+      "verification_result": "rejected",
+      "rejection_reason": "insufficient_lexical_coverage",
+      "evidence_tier": 5,
+      "final_result_state": "rejected_not_visible",
+      "primary_failure_class": "QUERY_INTERPRETATION_FAILURE",
+      "secondary_failure_classes": [],
+      "causal_trace": "The source candidate exists, but hyphenated compounds, modifiers, or synonymous scientific roles remain separate literal requirements instead of a coherent canonical intent.",
+      "smallest_general_fix": "Derive role-aware intent from compound/modifier structure and compare it to source roles without query-string allowlists."
+    },
+    {
+      "query_id": "i2hold_material_04",
+      "query": "critical-metal leaching technology",
+      "required_result_id": "361526",
+      "required_result_title": "The Genesis Mission: Transforming Science and Energy with AI",
+      "authoritative_source": {
+        "kind": "publication_eligible_child",
+        "label": "Genesis Mission focus-area workbook",
+        "url": "https://www.grants.gov/search-results-detail/361526",
+        "relevant_child_id": "361526:d-3",
+        "relevant_child_title": "Extraction and Processing Technologies"
+      },
+      "source_evidence_available": true,
+      "source_scope_summary": [
+        "critical-minerals extraction and processing",
+        "AI science workflows",
+        "scientific software"
+      ],
+      "parent_candidate_discovered": true,
+      "relevant_child_required": true,
+      "relevant_child_candidate_discovered": true,
+      "candidate_rank_before_verification": 3,
+      "candidate_rank_definition": "rank of the parent rollup by maximum raw lexical-plus-topic discovery score before admission verification",
+      "query_concepts_produced": [
+        {
+          "concept_id": "literal:critical-metal",
+          "role": "application_or_context",
+          "source": "critical-metal",
+          "required": true
+        },
+        {
+          "concept_id": "separations",
+          "role": "method",
+          "source": "leach",
+          "required": true
+        },
+        {
+          "concept_id": "literal:technology",
+          "role": "application_or_context",
+          "source": "technology",
+          "required": true
+        }
+      ],
+      "scope_concepts_available": [
+        "critical-minerals extraction and processing",
+        "AI science workflows",
+        "scientific software"
+      ],
+      "verification_result": "rejected",
+      "rejection_reason": "insufficient_lexical_coverage",
+      "evidence_tier": 5,
+      "final_result_state": "rejected_not_visible",
+      "primary_failure_class": "QUERY_INTERPRETATION_FAILURE",
+      "secondary_failure_classes": [],
+      "causal_trace": "The source candidate exists, but hyphenated compounds, modifiers, or synonymous scientific roles remain separate literal requirements instead of a coherent canonical intent.",
+      "smallest_general_fix": "Derive role-aware intent from compound/modifier structure and compare it to source roles without query-string allowlists."
+    },
+    {
+      "query_id": "i2hold_material_04",
+      "query": "critical-metal leaching technology",
+      "required_result_id": "362061",
+      "required_result_title": "Chemical Process Systems (CPS)",
+      "authoritative_source": {
+        "kind": "authoritative_parent_scope",
+        "label": "Chemical Process Systems",
+        "url": "https://www.nsf.gov/funding/pgm_summ.jsp?pims_id=506547",
+        "relevant_child_id": null,
+        "relevant_child_title": null
+      },
+      "source_evidence_available": true,
+      "source_scope_summary": [
+        "critical minerals",
+        "separations",
+        "recovery",
+        "chemical process technology"
+      ],
+      "parent_candidate_discovered": true,
+      "relevant_child_required": false,
+      "relevant_child_candidate_discovered": null,
+      "candidate_rank_before_verification": 2,
+      "candidate_rank_definition": "rank of the parent rollup by maximum raw lexical-plus-topic discovery score before admission verification",
+      "query_concepts_produced": [
+        {
+          "concept_id": "literal:critical-metal",
+          "role": "application_or_context",
+          "source": "critical-metal",
+          "required": true
+        },
+        {
+          "concept_id": "separations",
+          "role": "method",
+          "source": "leach",
+          "required": true
+        },
+        {
+          "concept_id": "literal:technology",
+          "role": "application_or_context",
+          "source": "technology",
+          "required": true
+        }
+      ],
+      "scope_concepts_available": [
+        "critical minerals",
+        "separations",
+        "recovery",
+        "chemical process technology"
+      ],
+      "verification_result": "rejected",
+      "rejection_reason": "insufficient_lexical_coverage",
+      "evidence_tier": 5,
+      "final_result_state": "rejected_not_visible",
+      "primary_failure_class": "QUERY_INTERPRETATION_FAILURE",
+      "secondary_failure_classes": [],
+      "causal_trace": "The source candidate exists, but hyphenated compounds, modifiers, or synonymous scientific roles remain separate literal requirements instead of a coherent canonical intent.",
+      "smallest_general_fix": "Derive role-aware intent from compound/modifier structure and compare it to source roles without query-string allowlists."
+    },
+    {
+      "query_id": "i2hold_ag_01",
+      "query": "heat-resilient plant breeding",
+      "required_result_id": "360205",
+      "required_result_title": "Agriculture and Food Research Initiative Competitive Grants Program Foundational and Applied Science Program",
+      "authoritative_source": {
+        "kind": "authoritative_parent_and_notice_scope",
+        "label": "AFRI Foundational and Applied Science",
+        "url": "https://www.nifa.usda.gov/grants/funding-opportunities/agriculture-food-research-initiative-foundational-applied-science",
+        "relevant_child_id": null,
+        "relevant_child_title": null
+      },
+      "source_evidence_available": true,
+      "source_scope_summary": [
+        "plant production",
+        "breeding",
+        "genetics/genome modification",
+        "biotic and abiotic stress"
+      ],
+      "parent_candidate_discovered": false,
+      "relevant_child_required": false,
+      "relevant_child_candidate_discovered": null,
+      "candidate_rank_before_verification": null,
+      "candidate_rank_definition": "rank of the parent rollup by maximum raw lexical-plus-topic discovery score before admission verification",
+      "query_concepts_produced": [
+        {
+          "concept_id": "literal:heat-resilient",
+          "role": "application_or_context",
+          "source": "heat-resilient",
+          "required": true
+        },
+        {
+          "concept_id": "crop-genetics",
+          "role": "method",
+          "source": "crop genetics",
+          "required": true
+        },
+        {
+          "concept_id": "literal:breed",
+          "role": "application_or_context",
+          "source": "breed",
+          "required": true
+        }
+      ],
+      "scope_concepts_available": [
+        "plant production",
+        "breeding",
+        "genetics/genome modification",
+        "biotic and abiotic stress"
+      ],
+      "verification_result": "rejected",
+      "rejection_reason": "no_scoring_evidence",
+      "evidence_tier": 5,
+      "final_result_state": "rejected_not_visible",
+      "primary_failure_class": "SCOPE_REPRESENTATION_FAILURE",
+      "secondary_failure_classes": [
+        "DISCOVERY_FAILURE"
+      ],
+      "causal_trace": "The authoritative notice contains the needed scientific scope, but the searchable parent representation exposes only a broad program synopsis and no reusable role-level scope signature.",
+      "smallest_general_fix": "Expose provenance-backed role phrases from authoritative parent/notice text as a reusable source scope signature."
+    },
+    {
+      "query_id": "i2hold_ag_02",
+      "query": "crop disease resistance genomics",
+      "required_result_id": "360205",
+      "required_result_title": "Agriculture and Food Research Initiative Competitive Grants Program Foundational and Applied Science Program",
+      "authoritative_source": {
+        "kind": "authoritative_parent_and_notice_scope",
+        "label": "AFRI Foundational and Applied Science",
+        "url": "https://www.nifa.usda.gov/grants/funding-opportunities/agriculture-food-research-initiative-foundational-applied-science",
+        "relevant_child_id": null,
+        "relevant_child_title": null
+      },
+      "source_evidence_available": true,
+      "source_scope_summary": [
+        "plant production",
+        "breeding",
+        "genetics/genome modification",
+        "biotic and abiotic stress"
+      ],
+      "parent_candidate_discovered": true,
+      "relevant_child_required": false,
+      "relevant_child_candidate_discovered": null,
+      "candidate_rank_before_verification": 480,
+      "candidate_rank_definition": "rank of the parent rollup by maximum raw lexical-plus-topic discovery score before admission verification",
+      "query_concepts_produced": [
+        {
+          "concept_id": "crop-genetics",
+          "role": "method",
+          "source": "crop genetics",
+          "required": true
+        },
+        {
+          "concept_id": "literal:disease",
+          "role": "application_or_context",
+          "source": "disease",
+          "required": true
+        },
+        {
+          "concept_id": "literal:resistance",
+          "role": "application_or_context",
+          "source": "resistance",
+          "required": true
+        }
+      ],
+      "scope_concepts_available": [
+        "plant production",
+        "breeding",
+        "genetics/genome modification",
+        "biotic and abiotic stress"
+      ],
+      "verification_result": "rejected",
+      "rejection_reason": "insufficient_lexical_coverage",
+      "evidence_tier": 5,
+      "final_result_state": "rejected_not_visible",
+      "primary_failure_class": "SCOPE_REPRESENTATION_FAILURE",
+      "secondary_failure_classes": [
+        "QUERY_INTERPRETATION_FAILURE"
+      ],
+      "causal_trace": "The authoritative notice contains the needed scientific scope, but the searchable parent representation exposes only a broad program synopsis and no reusable role-level scope signature.",
+      "smallest_general_fix": "Expose provenance-backed role phrases from authoritative parent/notice text as a reusable source scope signature."
+    },
+    {
+      "query_id": "i2hold_energy_01",
+      "query": "grid-scale storage technology scale-up",
+      "required_result_id": "356623",
+      "required_result_title": "SEEDING CRITICAL ADVANCES FOR LEADING ENERGY TECHNOLOGIES WITH UNTAPPED POTENTIAL (SCALEUP) READY",
+      "authoritative_source": {
+        "kind": "authoritative_parent_source_scope",
+        "label": "SCALEUP READY",
+        "url": "https://arpa-e-foa.energy.gov",
+        "relevant_child_id": null,
+        "relevant_child_title": null
+      },
+      "source_evidence_available": true,
+      "source_scope_summary": [
+        "energy-storage and grid technologies",
+        "technology scale-up and commercialization"
+      ],
+      "parent_candidate_discovered": true,
+      "relevant_child_required": false,
+      "relevant_child_candidate_discovered": null,
+      "candidate_rank_before_verification": 30,
+      "candidate_rank_definition": "rank of the parent rollup by maximum raw lexical-plus-topic discovery score before admission verification",
+      "query_concepts_produced": [
+        {
+          "concept_id": "literal:grid-scale",
+          "role": "application_or_context",
+          "source": "grid-scale",
+          "required": true
+        },
+        {
+          "concept_id": "literal:storage",
+          "role": "application_or_context",
+          "source": "storage",
+          "required": true
+        },
+        {
+          "concept_id": "literal:technology",
+          "role": "application_or_context",
+          "source": "technology",
+          "required": true
+        },
+        {
+          "concept_id": "literal:scale-up",
+          "role": "application_or_context",
+          "source": "scale-up",
+          "required": true
+        }
+      ],
+      "scope_concepts_available": [
+        "energy-storage and grid technologies",
+        "technology scale-up and commercialization"
+      ],
+      "verification_result": "rejected",
+      "rejection_reason": "insufficient_lexical_coverage",
+      "evidence_tier": 5,
+      "final_result_state": "rejected_not_visible",
+      "primary_failure_class": "QUERY_INTERPRETATION_FAILURE",
+      "secondary_failure_classes": [],
+      "causal_trace": "The source candidate exists, but hyphenated compounds, modifiers, or synonymous scientific roles remain separate literal requirements instead of a coherent canonical intent.",
+      "smallest_general_fix": "Derive role-aware intent from compound/modifier structure and compare it to source roles without query-string allowlists."
+    },
+    {
+      "query_id": "i2hold_energy_02",
+      "query": "seasonal thermal storage commercialization",
+      "required_result_id": "356623",
+      "required_result_title": "SEEDING CRITICAL ADVANCES FOR LEADING ENERGY TECHNOLOGIES WITH UNTAPPED POTENTIAL (SCALEUP) READY",
+      "authoritative_source": {
+        "kind": "authoritative_parent_source_scope",
+        "label": "SCALEUP READY",
+        "url": "https://arpa-e-foa.energy.gov",
+        "relevant_child_id": null,
+        "relevant_child_title": null
+      },
+      "source_evidence_available": true,
+      "source_scope_summary": [
+        "energy-storage and grid technologies",
+        "technology scale-up and commercialization"
+      ],
+      "parent_candidate_discovered": true,
+      "relevant_child_required": false,
+      "relevant_child_candidate_discovered": null,
+      "candidate_rank_before_verification": 55,
+      "candidate_rank_definition": "rank of the parent rollup by maximum raw lexical-plus-topic discovery score before admission verification",
+      "query_concepts_produced": [
+        {
+          "concept_id": "literal:seasonal",
+          "role": "application_or_context",
+          "source": "seasonal",
+          "required": true
+        },
+        {
+          "concept_id": "literal:thermal",
+          "role": "application_or_context",
+          "source": "thermal",
+          "required": true
+        },
+        {
+          "concept_id": "literal:storage",
+          "role": "application_or_context",
+          "source": "storage",
+          "required": true
+        },
+        {
+          "concept_id": "literal:commercialization",
+          "role": "application_or_context",
+          "source": "commercialization",
+          "required": true
+        }
+      ],
+      "scope_concepts_available": [
+        "energy-storage and grid technologies",
+        "technology scale-up and commercialization"
+      ],
+      "verification_result": "rejected",
+      "rejection_reason": "insufficient_lexical_coverage",
+      "evidence_tier": 5,
+      "final_result_state": "rejected_not_visible",
+      "primary_failure_class": "QUERY_INTERPRETATION_FAILURE",
+      "secondary_failure_classes": [],
+      "causal_trace": "The source candidate exists, but hyphenated compounds, modifiers, or synonymous scientific roles remain separate literal requirements instead of a coherent canonical intent.",
+      "smallest_general_fix": "Derive role-aware intent from compound/modifier structure and compare it to source roles without query-string allowlists."
+    },
+    {
+      "query_id": "i2hold_ai_02",
+      "query": "adversarially robust AI science workflows",
+      "required_result_id": "361526",
+      "required_result_title": "The Genesis Mission: Transforming Science and Energy with AI",
+      "authoritative_source": {
+        "kind": "publication_eligible_child",
+        "label": "Genesis Mission focus-area workbook",
+        "url": "https://www.grants.gov/search-results-detail/361526",
+        "relevant_child_id": "361526:a-20",
+        "relevant_child_title": "AI for Adversarial Robustness and Resilience"
+      },
+      "source_evidence_available": true,
+      "source_scope_summary": [
+        "critical-minerals extraction and processing",
+        "AI science workflows",
+        "scientific software"
+      ],
+      "parent_candidate_discovered": true,
+      "relevant_child_required": true,
+      "relevant_child_candidate_discovered": true,
+      "candidate_rank_before_verification": 7,
+      "candidate_rank_definition": "rank of the parent rollup by maximum raw lexical-plus-topic discovery score before admission verification",
+      "query_concepts_produced": [
+        {
+          "concept_id": "literal:adversarially",
+          "role": "application_or_context",
+          "source": "adversarially",
+          "required": true
+        },
+        {
+          "concept_id": "literal:robust",
+          "role": "application_or_context",
+          "source": "robust",
+          "required": true
+        },
+        {
+          "concept_id": "artificial-intelligence",
+          "role": "method",
+          "source": "ai",
+          "required": true
+        },
+        {
+          "concept_id": "literal:science",
+          "role": "application_or_context",
+          "source": "science",
+          "required": true
+        },
+        {
+          "concept_id": "literal:workflow",
+          "role": "application_or_context",
+          "source": "workflow",
+          "required": true
+        }
+      ],
+      "scope_concepts_available": [
+        "critical-minerals extraction and processing",
+        "AI science workflows",
+        "scientific software"
+      ],
+      "verification_result": "rejected",
+      "rejection_reason": "insufficient_lexical_coverage",
+      "evidence_tier": 5,
+      "final_result_state": "rejected_not_visible",
+      "primary_failure_class": "VERIFICATION_FAILURE",
+      "secondary_failure_classes": [],
+      "causal_trace": "The relevant publication-eligible child is discovered and contains the complete intent, but the verifier rejects it because one surface-form/acronym group is not counted as satisfied.",
+      "smallest_general_fix": "Let exact source-backed child phrases satisfy their semantic role even when the query uses a resolved acronym or inflectional surface variant."
+    },
+    {
+      "query_id": "i2hold_defense_02",
+      "query": "hypersonic thermal-protection materials",
+      "required_result_id": "344592",
+      "required_result_title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
+      "authoritative_source": {
+        "kind": "publication_eligible_child",
+        "label": "ARL Super-Materials",
+        "url": "https://www.arl.devcom.army.mil/opportunities/arl-baa/",
+        "relevant_child_id": "344592:ab-0081",
+        "relevant_child_title": "Super-Materials Research in support of the Sciences of Extreme Materials Competency"
+      },
+      "source_evidence_available": true,
+      "source_scope_summary": [
+        "structural materials",
+        "high-temperature dynamic thermal environments"
+      ],
+      "parent_candidate_discovered": true,
+      "relevant_child_required": true,
+      "relevant_child_candidate_discovered": true,
+      "candidate_rank_before_verification": 27,
+      "candidate_rank_definition": "rank of the parent rollup by maximum raw lexical-plus-topic discovery score before admission verification",
+      "query_concepts_produced": [
+        {
+          "concept_id": "literal:hypersonic",
+          "role": "application_or_context",
+          "source": "hypersonic",
+          "required": true
+        },
+        {
+          "concept_id": "literal:thermal-protection",
+          "role": "application_or_context",
+          "source": "thermal-protection",
+          "required": true
+        },
+        {
+          "concept_id": "literal:material",
+          "role": "application_or_context",
+          "source": "material",
+          "required": true
+        }
+      ],
+      "scope_concepts_available": [
+        "structural materials",
+        "high-temperature dynamic thermal environments"
+      ],
+      "verification_result": "rejected",
+      "rejection_reason": "insufficient_lexical_coverage",
+      "evidence_tier": 5,
+      "final_result_state": "rejected_not_visible",
+      "primary_failure_class": "QUERY_INTERPRETATION_FAILURE",
+      "secondary_failure_classes": [],
+      "causal_trace": "The source candidate exists, but hyphenated compounds, modifiers, or synonymous scientific roles remain separate literal requirements instead of a coherent canonical intent.",
+      "smallest_general_fix": "Derive role-aware intent from compound/modifier structure and compare it to source roles without query-string allowlists."
+    },
+    {
+      "query_id": "i2hold_space_01",
+      "query": "Sun-Earth electrodynamic coupling",
+      "required_result_id": "356536",
+      "required_result_title": "Geospace Cluster",
+      "authoritative_source": {
+        "kind": "authoritative_parent_scope",
+        "label": "NSF Geospace Cluster",
+        "url": "https://www.nsf.gov/funding/pgm_summ.jsp?pims_id=506312",
+        "relevant_child_id": null,
+        "relevant_child_title": null
+      },
+      "source_evidence_available": true,
+      "source_scope_summary": [
+        "Sun-Earth coupling",
+        "upper atmosphere",
+        "radiation belts",
+        "electrodynamical processes"
+      ],
+      "parent_candidate_discovered": true,
+      "relevant_child_required": false,
+      "relevant_child_candidate_discovered": null,
+      "candidate_rank_before_verification": 1,
+      "candidate_rank_definition": "rank of the parent rollup by maximum raw lexical-plus-topic discovery score before admission verification",
+      "query_concepts_produced": [
+        {
+          "concept_id": "earth-system",
+          "role": "target",
+          "source": "earth system",
+          "required": true
+        },
+        {
+          "concept_id": "literal:electrodynamic",
+          "role": "application_or_context",
+          "source": "electrodynamic",
+          "required": true
+        },
+        {
+          "concept_id": "literal:coupl",
+          "role": "application_or_context",
+          "source": "coupl",
+          "required": true
+        }
+      ],
+      "scope_concepts_available": [
+        "Sun-Earth coupling",
+        "upper atmosphere",
+        "radiation belts",
+        "electrodynamical processes"
+      ],
+      "verification_result": "rejected",
+      "rejection_reason": "insufficient_lexical_coverage",
+      "evidence_tier": 5,
+      "final_result_state": "rejected_not_visible",
+      "primary_failure_class": "QUERY_INTERPRETATION_FAILURE",
+      "secondary_failure_classes": [],
+      "causal_trace": "The source candidate exists, but hyphenated compounds, modifiers, or synonymous scientific roles remain separate literal requirements instead of a coherent canonical intent.",
+      "smallest_general_fix": "Derive role-aware intent from compound/modifier structure and compare it to source roles without query-string allowlists."
+    },
+    {
+      "query_id": "i2hold_space_02",
+      "query": "upper-atmosphere radiation-belt dynamics",
+      "required_result_id": "356536",
+      "required_result_title": "Geospace Cluster",
+      "authoritative_source": {
+        "kind": "authoritative_parent_scope",
+        "label": "NSF Geospace Cluster",
+        "url": "https://www.nsf.gov/funding/pgm_summ.jsp?pims_id=506312",
+        "relevant_child_id": null,
+        "relevant_child_title": null
+      },
+      "source_evidence_available": true,
+      "source_scope_summary": [
+        "Sun-Earth coupling",
+        "upper atmosphere",
+        "radiation belts",
+        "electrodynamical processes"
+      ],
+      "parent_candidate_discovered": true,
+      "relevant_child_required": false,
+      "relevant_child_candidate_discovered": null,
+      "candidate_rank_before_verification": 9,
+      "candidate_rank_definition": "rank of the parent rollup by maximum raw lexical-plus-topic discovery score before admission verification",
+      "query_concepts_produced": [
+        {
+          "concept_id": "literal:upper-atmosphere",
+          "role": "application_or_context",
+          "source": "upper-atmosphere",
+          "required": true
+        },
+        {
+          "concept_id": "literal:radiation-belt",
+          "role": "application_or_context",
+          "source": "radiation-belt",
+          "required": true
+        },
+        {
+          "concept_id": "literal:dynamic",
+          "role": "application_or_context",
+          "source": "dynamic",
+          "required": true
+        }
+      ],
+      "scope_concepts_available": [
+        "Sun-Earth coupling",
+        "upper atmosphere",
+        "radiation belts",
+        "electrodynamical processes"
+      ],
+      "verification_result": "rejected",
+      "rejection_reason": "insufficient_lexical_coverage",
+      "evidence_tier": 5,
+      "final_result_state": "rejected_not_visible",
+      "primary_failure_class": "QUERY_INTERPRETATION_FAILURE",
+      "secondary_failure_classes": [],
+      "causal_trace": "The source candidate exists, but hyphenated compounds, modifiers, or synonymous scientific roles remain separate literal requirements instead of a coherent canonical intent.",
+      "smallest_general_fix": "Derive role-aware intent from compound/modifier structure and compare it to source roles without query-string allowlists."
+    },
+    {
+      "query_id": "i2hold_env_01",
+      "query": "pilot-scale impaired-water purification",
+      "required_result_id": "363375",
+      "required_result_title": "Desalination and Water Purification Research Program: Research Projects",
+      "authoritative_source": {
+        "kind": "authoritative_parent_scope",
+        "label": "Desalination and Water Purification Research",
+        "url": "https://www.grants.gov/search-results-detail/363375",
+        "relevant_child_id": null,
+        "relevant_child_title": null
+      },
+      "source_evidence_available": true,
+      "source_scope_summary": [
+        "pilot-scale treatment",
+        "impaired water",
+        "purification and commercialization"
+      ],
+      "parent_candidate_discovered": true,
+      "relevant_child_required": false,
+      "relevant_child_candidate_discovered": null,
+      "candidate_rank_before_verification": 1,
+      "candidate_rank_definition": "rank of the parent rollup by maximum raw lexical-plus-topic discovery score before admission verification",
+      "query_concepts_produced": [
+        {
+          "concept_id": "literal:pilot-scale",
+          "role": "application_or_context",
+          "source": "pilot-scale",
+          "required": true
+        },
+        {
+          "concept_id": "literal:impaired-water",
+          "role": "application_or_context",
+          "source": "impaired-water",
+          "required": true
+        },
+        {
+          "concept_id": "separations",
+          "role": "method",
+          "source": "purification",
+          "required": true
+        }
+      ],
+      "scope_concepts_available": [
+        "pilot-scale treatment",
+        "impaired water",
+        "purification and commercialization"
+      ],
+      "verification_result": "rejected",
+      "rejection_reason": "insufficient_lexical_coverage",
+      "evidence_tier": 5,
+      "final_result_state": "rejected_not_visible",
+      "primary_failure_class": "QUERY_INTERPRETATION_FAILURE",
+      "secondary_failure_classes": [],
+      "causal_trace": "The source candidate exists, but hyphenated compounds, modifiers, or synonymous scientific roles remain separate literal requirements instead of a coherent canonical intent.",
+      "smallest_general_fix": "Derive role-aware intent from compound/modifier structure and compare it to source roles without query-string allowlists."
+    },
+    {
+      "query_id": "i2hold_env_02",
+      "query": "coastal-erosion hazard decision tools",
+      "required_result_id": "363537",
+      "required_result_title": "Cooperative Agreement for Affiliated Partner with the Alaska Cooperative Ecosystem Studies Unit (CESU)",
+      "authoritative_source": {
+        "kind": "authoritative_parent_scope",
+        "label": "Alaska CESU climate-adaptation research",
+        "url": "https://www.grants.gov/search-results-detail/363537",
+        "relevant_child_id": null,
+        "relevant_child_title": null
+      },
+      "source_evidence_available": true,
+      "source_scope_summary": [
+        "coastal erosion",
+        "natural hazards",
+        "actionable decision data and tools"
+      ],
+      "parent_candidate_discovered": true,
+      "relevant_child_required": false,
+      "relevant_child_candidate_discovered": null,
+      "candidate_rank_before_verification": 1,
+      "candidate_rank_definition": "rank of the parent rollup by maximum raw lexical-plus-topic discovery score before admission verification",
+      "query_concepts_produced": [
+        {
+          "concept_id": "literal:coastal-erosion",
+          "role": "application_or_context",
+          "source": "coastal-erosion",
+          "required": true
+        },
+        {
+          "concept_id": "literal:hazard",
+          "role": "application_or_context",
+          "source": "hazard",
+          "required": true
+        },
+        {
+          "concept_id": "literal:decision",
+          "role": "application_or_context",
+          "source": "decision",
+          "required": true
+        },
+        {
+          "concept_id": "literal:tool",
+          "role": "application_or_context",
+          "source": "tool",
+          "required": true
+        }
+      ],
+      "scope_concepts_available": [
+        "coastal erosion",
+        "natural hazards",
+        "actionable decision data and tools"
+      ],
+      "verification_result": "rejected",
+      "rejection_reason": "insufficient_lexical_coverage",
+      "evidence_tier": 5,
+      "final_result_state": "rejected_not_visible",
+      "primary_failure_class": "QUERY_INTERPRETATION_FAILURE",
+      "secondary_failure_classes": [],
+      "causal_trace": "The source candidate exists, but hyphenated compounds, modifiers, or synonymous scientific roles remain separate literal requirements instead of a coherent canonical intent.",
+      "smallest_general_fix": "Derive role-aware intent from compound/modifier structure and compare it to source roles without query-string allowlists."
+    },
+    {
+      "query_id": "i2hold_child_02",
+      "query": "trustworthy scientific software AI",
+      "required_result_id": "361526",
+      "required_result_title": "The Genesis Mission: Transforming Science and Energy with AI",
+      "authoritative_source": {
+        "kind": "publication_eligible_child",
+        "label": "Genesis Mission focus-area workbook",
+        "url": "https://www.grants.gov/search-results-detail/361526",
+        "relevant_child_id": "361526:e-18",
+        "relevant_child_title": "Trustworthy AI for Scientific Software"
+      },
+      "source_evidence_available": true,
+      "source_scope_summary": [
+        "critical-minerals extraction and processing",
+        "AI science workflows",
+        "scientific software"
+      ],
+      "parent_candidate_discovered": true,
+      "relevant_child_required": true,
+      "relevant_child_candidate_discovered": true,
+      "candidate_rank_before_verification": 19,
+      "candidate_rank_definition": "rank of the parent rollup by maximum raw lexical-plus-topic discovery score before admission verification",
+      "query_concepts_produced": [
+        {
+          "concept_id": "literal:trustworthy",
+          "role": "application_or_context",
+          "source": "trustworthy",
+          "required": true
+        },
+        {
+          "concept_id": "literal:scientific",
+          "role": "application_or_context",
+          "source": "scientific",
+          "required": true
+        },
+        {
+          "concept_id": "literal:software",
+          "role": "application_or_context",
+          "source": "software",
+          "required": true
+        },
+        {
+          "concept_id": "artificial-intelligence",
+          "role": "method",
+          "source": "ai",
+          "required": true
+        }
+      ],
+      "scope_concepts_available": [
+        "critical-minerals extraction and processing",
+        "AI science workflows",
+        "scientific software"
+      ],
+      "verification_result": "rejected",
+      "rejection_reason": "insufficient_lexical_coverage",
+      "evidence_tier": 5,
+      "final_result_state": "rejected_not_visible",
+      "primary_failure_class": "VERIFICATION_FAILURE",
+      "secondary_failure_classes": [],
+      "causal_trace": "The relevant publication-eligible child is discovered and contains the complete intent, but the verifier rejects it because one surface-form/acronym group is not counted as satisfied.",
+      "smallest_general_fix": "Let exact source-backed child phrases satisfy their semantic role even when the query uses a resolved acronym or inflectional surface variant."
+    }
+  ]
+}

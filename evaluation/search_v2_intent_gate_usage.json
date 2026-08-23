@@ -1,0 +1,1787 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-23T18:04:00.437Z",
+  "models": {
+    "embedding": "voyage-4-lite",
+    "reranking": "rerank-2.5",
+    "judge": "@cf/meta/llama-3.1-8b-instruct-fast"
+  },
+  "local_wrangler_remote_binding_url": "http://127.0.0.1:8787/",
+  "requests": [
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 32,
+      "latency_ms": 303.3704,
+      "provider_latency_ms": 301.496,
+      "usage": {
+        "total_tokens": 2
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 249083,
+      "latency_ms": 648.1562,
+      "provider_latency_ms": 638.332,
+      "usage": {
+        "total_tokens": 49962
+      },
+      "item_count": 227
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 16095,
+      "latency_ms": 1719.5886,
+      "provider_latency_ms": 1618,
+      "usage": {
+        "input_tokens": 2994,
+        "output_tokens": 106,
+        "total_tokens": 3100,
+        "neurons": 16.026966094970703
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 41,
+      "latency_ms": 171.5777,
+      "provider_latency_ms": 170.892,
+      "usage": {
+        "total_tokens": 3
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 246156,
+      "latency_ms": 716.9292,
+      "provider_latency_ms": 702.627,
+      "usage": {
+        "total_tokens": 50079
+      },
+      "item_count": 228
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 16222,
+      "latency_ms": 962.1497,
+      "provider_latency_ms": 951,
+      "usage": {
+        "input_tokens": 3005,
+        "output_tokens": 96,
+        "total_tokens": 3101,
+        "neurons": 15.723590850830078
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 35,
+      "latency_ms": 160.7407,
+      "provider_latency_ms": 160.246,
+      "usage": {
+        "total_tokens": 4
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 223826,
+      "latency_ms": 460.3004,
+      "provider_latency_ms": 455.123,
+      "usage": {
+        "total_tokens": 44658
+      },
+      "item_count": 225
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 18732,
+      "latency_ms": 955.0841,
+      "provider_latency_ms": 940,
+      "usage": {
+        "input_tokens": 3505,
+        "output_tokens": 97,
+        "total_tokens": 3602,
+        "neurons": 17.817739486694336
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 31,
+      "latency_ms": 172.9105,
+      "provider_latency_ms": 172.006,
+      "usage": {
+        "total_tokens": 7
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 203199,
+      "latency_ms": 348.8712,
+      "provider_latency_ms": 342.059,
+      "usage": {
+        "total_tokens": 41689
+      },
+      "item_count": 200
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 15678,
+      "latency_ms": 893.2566,
+      "provider_latency_ms": 882,
+      "usage": {
+        "input_tokens": 2974,
+        "output_tokens": 104,
+        "total_tokens": 3078,
+        "neurons": 15.874857902526855
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 30,
+      "latency_ms": 164.0164,
+      "provider_latency_ms": 163.095,
+      "usage": {
+        "total_tokens": 3
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 148932,
+      "latency_ms": 419.8486,
+      "provider_latency_ms": 414.784,
+      "usage": {
+        "total_tokens": 29804
+      },
+      "item_count": 201
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 18384,
+      "latency_ms": 994.3333,
+      "provider_latency_ms": 983,
+      "usage": {
+        "input_tokens": 3485,
+        "output_tokens": 100,
+        "total_tokens": 3585,
+        "neurons": 17.8399715423584
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 29,
+      "latency_ms": 168.2668,
+      "provider_latency_ms": 167.553,
+      "usage": {
+        "total_tokens": 2
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 235629,
+      "latency_ms": 408.8071,
+      "provider_latency_ms": 399.529,
+      "usage": {
+        "total_tokens": 46352
+      },
+      "item_count": 230
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 16232,
+      "latency_ms": 817.756,
+      "provider_latency_ms": 805,
+      "usage": {
+        "input_tokens": 3123,
+        "output_tokens": 104,
+        "total_tokens": 3227,
+        "neurons": 16.488523483276367
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 43,
+      "latency_ms": 192.3248,
+      "provider_latency_ms": 191.621,
+      "usage": {
+        "total_tokens": 3
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 284546,
+      "latency_ms": 442.4757,
+      "provider_latency_ms": 434.587,
+      "usage": {
+        "total_tokens": 57541
+      },
+      "item_count": 250
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 14480,
+      "latency_ms": 875.6253,
+      "provider_latency_ms": 865,
+      "usage": {
+        "input_tokens": 2623,
+        "output_tokens": 97,
+        "total_tokens": 2720,
+        "neurons": 14.185168266296387
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 43,
+      "latency_ms": 165.4375,
+      "provider_latency_ms": 164.64,
+      "usage": {
+        "total_tokens": 3
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 468037,
+      "latency_ms": 573.3354,
+      "provider_latency_ms": 565.497,
+      "usage": {
+        "total_tokens": 92995
+      },
+      "item_count": 300
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 14480,
+      "latency_ms": 1023.6693,
+      "provider_latency_ms": 1011,
+      "usage": {
+        "input_tokens": 2849,
+        "output_tokens": 95,
+        "total_tokens": 2944,
+        "neurons": 15.04622745513916
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 46,
+      "latency_ms": 152.1024,
+      "provider_latency_ms": 151.201,
+      "usage": {
+        "total_tokens": 5
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 177250,
+      "latency_ms": 495.6846,
+      "provider_latency_ms": 488.864,
+      "usage": {
+        "total_tokens": 36280
+      },
+      "item_count": 207
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 16219,
+      "latency_ms": 822.428,
+      "provider_latency_ms": 809,
+      "usage": {
+        "input_tokens": 3096,
+        "output_tokens": 104,
+        "total_tokens": 3200,
+        "neurons": 16.377323150634766
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 47,
+      "latency_ms": 162.6591,
+      "provider_latency_ms": 162.131,
+      "usage": {
+        "total_tokens": 3
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 389631,
+      "latency_ms": 620.9085,
+      "provider_latency_ms": 613.544,
+      "usage": {
+        "total_tokens": 74511
+      },
+      "item_count": 300
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 17863,
+      "latency_ms": 1091.3962,
+      "provider_latency_ms": 1073,
+      "usage": {
+        "input_tokens": 3412,
+        "output_tokens": 99,
+        "total_tokens": 3511,
+        "neurons": 17.50444793701172
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 40,
+      "latency_ms": 172.9586,
+      "provider_latency_ms": 172.058,
+      "usage": {
+        "total_tokens": 3
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 328685,
+      "latency_ms": 561.2257,
+      "provider_latency_ms": 551.254,
+      "usage": {
+        "total_tokens": 65747
+      },
+      "item_count": 300
+    },
+    {
+      "endpoint": "/judge",
+      "status": 502,
+      "payload_bytes": 18815,
+      "latency_ms": 910.0251,
+      "provider_latency_ms": 0,
+      "usage": {},
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 42,
+      "latency_ms": 146.3307,
+      "provider_latency_ms": 145.801,
+      "usage": {
+        "total_tokens": 3
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 263456,
+      "latency_ms": 459.1779,
+      "provider_latency_ms": 452.19,
+      "usage": {
+        "total_tokens": 51444
+      },
+      "item_count": 229
+    },
+    {
+      "endpoint": "/judge",
+      "status": 502,
+      "payload_bytes": 14609,
+      "latency_ms": 1254.9659,
+      "provider_latency_ms": 0,
+      "usage": {},
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 41,
+      "latency_ms": 147.3766,
+      "provider_latency_ms": 146.645,
+      "usage": {
+        "total_tokens": 4
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 452780,
+      "latency_ms": 536.7205,
+      "provider_latency_ms": 526.985,
+      "usage": {
+        "total_tokens": 88783
+      },
+      "item_count": 283
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 20255,
+      "latency_ms": 1381.9944,
+      "provider_latency_ms": 1367,
+      "usage": {
+        "input_tokens": 3978,
+        "output_tokens": 105,
+        "total_tokens": 4083,
+        "neurons": 20.044761657714844
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 37,
+      "latency_ms": 173.0656,
+      "provider_latency_ms": 172.335,
+      "usage": {
+        "total_tokens": 3
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 437650,
+      "latency_ms": 614.4616,
+      "provider_latency_ms": 604.234,
+      "usage": {
+        "total_tokens": 86251
+      },
+      "item_count": 300
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 17152,
+      "latency_ms": 1081.1727,
+      "provider_latency_ms": 1071,
+      "usage": {
+        "input_tokens": 3361,
+        "output_tokens": 99,
+        "total_tokens": 3460,
+        "neurons": 17.294403076171875
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 48,
+      "latency_ms": 163.8595,
+      "provider_latency_ms": 163.021,
+      "usage": {
+        "total_tokens": 3
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 387591,
+      "latency_ms": 490.0555,
+      "provider_latency_ms": 479.643,
+      "usage": {
+        "total_tokens": 75846
+      },
+      "item_count": 300
+    },
+    {
+      "endpoint": "/judge",
+      "status": 502,
+      "payload_bytes": 12578,
+      "latency_ms": 795.7839,
+      "provider_latency_ms": 0,
+      "usage": {},
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 42,
+      "latency_ms": 155.0528,
+      "provider_latency_ms": 154.484,
+      "usage": {
+        "total_tokens": 3
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 441934,
+      "latency_ms": 489.7189,
+      "provider_latency_ms": 481.652,
+      "usage": {
+        "total_tokens": 85528
+      },
+      "item_count": 300
+    },
+    {
+      "endpoint": "/judge",
+      "status": 502,
+      "payload_bytes": 14819,
+      "latency_ms": 787.2617,
+      "provider_latency_ms": 0,
+      "usage": {},
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 42,
+      "latency_ms": 165.1841,
+      "provider_latency_ms": 164.655,
+      "usage": {
+        "total_tokens": 3
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 270760,
+      "latency_ms": 408.4009,
+      "provider_latency_ms": 403.611,
+      "usage": {
+        "total_tokens": 53912
+      },
+      "item_count": 220
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 17839,
+      "latency_ms": 867.2287,
+      "provider_latency_ms": 857,
+      "usage": {
+        "input_tokens": 3497,
+        "output_tokens": 107,
+        "total_tokens": 3604,
+        "neurons": 18.133468627929688
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 42,
+      "latency_ms": 166.7,
+      "provider_latency_ms": 165.994,
+      "usage": {
+        "total_tokens": 3
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 286341,
+      "latency_ms": 458.3097,
+      "provider_latency_ms": 450.396,
+      "usage": {
+        "total_tokens": 57052
+      },
+      "item_count": 235
+    },
+    {
+      "endpoint": "/judge",
+      "status": 502,
+      "payload_bytes": 16420,
+      "latency_ms": 819.4543,
+      "provider_latency_ms": 0,
+      "usage": {},
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 42,
+      "latency_ms": 161.1816,
+      "provider_latency_ms": 160.606,
+      "usage": {
+        "total_tokens": 3
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 327247,
+      "latency_ms": 531.271,
+      "provider_latency_ms": 523.06,
+      "usage": {
+        "total_tokens": 65906
+      },
+      "item_count": 300
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 14151,
+      "latency_ms": 831.9819,
+      "provider_latency_ms": 809,
+      "usage": {
+        "input_tokens": 2724,
+        "output_tokens": 104,
+        "total_tokens": 2828,
+        "neurons": 14.84521770477295
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 50,
+      "latency_ms": 152.7261,
+      "provider_latency_ms": 152.093,
+      "usage": {
+        "total_tokens": 5
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 333196,
+      "latency_ms": 446.1085,
+      "provider_latency_ms": 438.871,
+      "usage": {
+        "total_tokens": 66182
+      },
+      "item_count": 300
+    },
+    {
+      "endpoint": "/judge",
+      "status": 502,
+      "payload_bytes": 14058,
+      "latency_ms": 982.1153,
+      "provider_latency_ms": 0,
+      "usage": {},
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 36,
+      "latency_ms": 183.29,
+      "provider_latency_ms": 182.338,
+      "usage": {
+        "total_tokens": 2
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 429207,
+      "latency_ms": 630.8242,
+      "provider_latency_ms": 622.998,
+      "usage": {
+        "total_tokens": 83919
+      },
+      "item_count": 300
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 15874,
+      "latency_ms": 1234.4197,
+      "provider_latency_ms": 1220,
+      "usage": {
+        "input_tokens": 3041,
+        "output_tokens": 96,
+        "total_tokens": 3137,
+        "neurons": 15.871858596801758
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 34,
+      "latency_ms": 177.081,
+      "provider_latency_ms": 176.399,
+      "usage": {
+        "total_tokens": 2
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 362134,
+      "latency_ms": 426.0397,
+      "provider_latency_ms": 415.151,
+      "usage": {
+        "total_tokens": 69280
+      },
+      "item_count": 300
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 22548,
+      "latency_ms": 1261.2429,
+      "provider_latency_ms": 1247,
+      "usage": {
+        "input_tokens": 4155,
+        "output_tokens": 97,
+        "total_tokens": 4252,
+        "neurons": 20.49480438232422
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 35,
+      "latency_ms": 159.186,
+      "provider_latency_ms": 157.96,
+      "usage": {
+        "total_tokens": 3
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 48,
+      "latency_ms": 206.8505,
+      "provider_latency_ms": 206.167,
+      "usage": {
+        "total_tokens": 3
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 333121,
+      "latency_ms": 472.9369,
+      "provider_latency_ms": 464.374,
+      "usage": {
+        "total_tokens": 66529
+      },
+      "item_count": 243
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 18352,
+      "latency_ms": 1125.745,
+      "provider_latency_ms": 1105,
+      "usage": {
+        "input_tokens": 3552,
+        "output_tokens": 100,
+        "total_tokens": 3652,
+        "neurons": 18.115915298461914
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 39,
+      "latency_ms": 155.8384,
+      "provider_latency_ms": 155.123,
+      "usage": {
+        "total_tokens": 5
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 289959,
+      "latency_ms": 407.1665,
+      "provider_latency_ms": 399.342,
+      "usage": {
+        "total_tokens": 57830
+      },
+      "item_count": 224
+    },
+    {
+      "endpoint": "/judge",
+      "status": 502,
+      "payload_bytes": 17087,
+      "latency_ms": 1329.6722,
+      "provider_latency_ms": 0,
+      "usage": {},
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 47,
+      "latency_ms": 160.3447,
+      "provider_latency_ms": 159.823,
+      "usage": {
+        "total_tokens": 6
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 210886,
+      "latency_ms": 350.5612,
+      "provider_latency_ms": 343.058,
+      "usage": {
+        "total_tokens": 42690
+      },
+      "item_count": 200
+    },
+    {
+      "endpoint": "/judge",
+      "status": 502,
+      "payload_bytes": 19493,
+      "latency_ms": 1762.9975,
+      "provider_latency_ms": 0,
+      "usage": {},
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 39,
+      "latency_ms": 174.0895,
+      "provider_latency_ms": 173.218,
+      "usage": {
+        "total_tokens": 4
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 377835,
+      "latency_ms": 505.9139,
+      "provider_latency_ms": 495.637,
+      "usage": {
+        "total_tokens": 74744
+      },
+      "item_count": 300
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 15182,
+      "latency_ms": 1203.352,
+      "provider_latency_ms": 1194,
+      "usage": {
+        "input_tokens": 2850,
+        "output_tokens": 109,
+        "total_tokens": 2959,
+        "neurons": 15.538496017456055
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 46,
+      "latency_ms": 163.7299,
+      "provider_latency_ms": 163.294,
+      "usage": {
+        "total_tokens": 4
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 349140,
+      "latency_ms": 427.6091,
+      "provider_latency_ms": 420.125,
+      "usage": {
+        "total_tokens": 68433
+      },
+      "item_count": 300
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 15616,
+      "latency_ms": 848.1137,
+      "provider_latency_ms": 825,
+      "usage": {
+        "input_tokens": 2929,
+        "output_tokens": 110,
+        "total_tokens": 3039,
+        "neurons": 15.89872932434082
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 41,
+      "latency_ms": 152.3046,
+      "provider_latency_ms": 151.625,
+      "usage": {
+        "total_tokens": 4
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 409027,
+      "latency_ms": 489.9951,
+      "provider_latency_ms": 477.269,
+      "usage": {
+        "total_tokens": 80611
+      },
+      "item_count": 300
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 12553,
+      "latency_ms": 1493.4791,
+      "provider_latency_ms": 1483,
+      "usage": {
+        "input_tokens": 2411,
+        "output_tokens": 158,
+        "total_tokens": 2569,
+        "neurons": 15.438970565795898
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 45,
+      "latency_ms": 172.4177,
+      "provider_latency_ms": 171.71,
+      "usage": {
+        "total_tokens": 3
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 411139,
+      "latency_ms": 495.3254,
+      "provider_latency_ms": 486.55,
+      "usage": {
+        "total_tokens": 79503
+      },
+      "item_count": 300
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 12370,
+      "latency_ms": 1256.0183,
+      "provider_latency_ms": 1245,
+      "usage": {
+        "input_tokens": 2362,
+        "output_tokens": 100,
+        "total_tokens": 2462,
+        "neurons": 13.214826583862305
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 50,
+      "latency_ms": 160.2809,
+      "provider_latency_ms": 159.303,
+      "usage": {
+        "total_tokens": 4
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 390061,
+      "latency_ms": 485.0309,
+      "provider_latency_ms": 472.891,
+      "usage": {
+        "total_tokens": 77302
+      },
+      "item_count": 300
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 13361,
+      "latency_ms": 1069.1803,
+      "provider_latency_ms": 1056,
+      "usage": {
+        "input_tokens": 2631,
+        "output_tokens": 97,
+        "total_tokens": 2728,
+        "neurons": 14.218116760253906
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 41,
+      "latency_ms": 172.3748,
+      "provider_latency_ms": 171.874,
+      "usage": {
+        "total_tokens": 5
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 189638,
+      "latency_ms": 329.4731,
+      "provider_latency_ms": 321.758,
+      "usage": {
+        "total_tokens": 39212
+      },
+      "item_count": 210
+    },
+    {
+      "endpoint": "/judge",
+      "status": 502,
+      "payload_bytes": 19901,
+      "latency_ms": 964.1906,
+      "provider_latency_ms": 0,
+      "usage": {},
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 44,
+      "latency_ms": 158.4413,
+      "provider_latency_ms": 157.679,
+      "usage": {
+        "total_tokens": 4
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 439798,
+      "latency_ms": 489.9708,
+      "provider_latency_ms": 479.46,
+      "usage": {
+        "total_tokens": 87220
+      },
+      "item_count": 300
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 17089,
+      "latency_ms": 1571.0524,
+      "provider_latency_ms": 1553,
+      "usage": {
+        "input_tokens": 3387,
+        "output_tokens": 148,
+        "total_tokens": 3535,
+        "neurons": 19.110008239746094
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 50,
+      "latency_ms": 156.0666,
+      "provider_latency_ms": 155.218,
+      "usage": {
+        "total_tokens": 5
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 359808,
+      "latency_ms": 425.1125,
+      "provider_latency_ms": 415.916,
+      "usage": {
+        "total_tokens": 71146
+      },
+      "item_count": 300
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 17145,
+      "latency_ms": 1836.3492,
+      "provider_latency_ms": 1829,
+      "usage": {
+        "input_tokens": 3379,
+        "output_tokens": 157,
+        "total_tokens": 3536,
+        "neurons": 19.390871047973633
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 54,
+      "latency_ms": 171.3464,
+      "provider_latency_ms": 170.407,
+      "usage": {
+        "total_tokens": 4
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 220643,
+      "latency_ms": 408.7987,
+      "provider_latency_ms": 403.921,
+      "usage": {
+        "total_tokens": 46054
+      },
+      "item_count": 226
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 16892,
+      "latency_ms": 1272.7473,
+      "provider_latency_ms": 1262,
+      "usage": {
+        "input_tokens": 3256,
+        "output_tokens": 111,
+        "total_tokens": 3367,
+        "neurons": 17.280366897583008
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 51,
+      "latency_ms": 154.2032,
+      "provider_latency_ms": 153.187,
+      "usage": {
+        "total_tokens": 4
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 373604,
+      "latency_ms": 509.8336,
+      "provider_latency_ms": 496.651,
+      "usage": {
+        "total_tokens": 72621
+      },
+      "item_count": 300
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 15730,
+      "latency_ms": 1039.1767,
+      "provider_latency_ms": 1021,
+      "usage": {
+        "input_tokens": 2998,
+        "output_tokens": 98,
+        "total_tokens": 3096,
+        "neurons": 15.764495849609375
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 53,
+      "latency_ms": 162.2503,
+      "provider_latency_ms": 161.319,
+      "usage": {
+        "total_tokens": 6
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 359103,
+      "latency_ms": 444.2232,
+      "provider_latency_ms": 434.76,
+      "usage": {
+        "total_tokens": 69617
+      },
+      "item_count": 300
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 18182,
+      "latency_ms": 805.056,
+      "provider_latency_ms": 795,
+      "usage": {
+        "input_tokens": 3469,
+        "output_tokens": 102,
+        "total_tokens": 3571,
+        "neurons": 17.84381103515625
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 44,
+      "latency_ms": 161.4016,
+      "provider_latency_ms": 160.863,
+      "usage": {
+        "total_tokens": 3
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 363701,
+      "latency_ms": 459.5458,
+      "provider_latency_ms": 449.171,
+      "usage": {
+        "total_tokens": 71766
+      },
+      "item_count": 300
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 17351,
+      "latency_ms": 803.1164,
+      "provider_latency_ms": 791,
+      "usage": {
+        "input_tokens": 3457,
+        "output_tokens": 95,
+        "total_tokens": 3552,
+        "neurons": 17.550312042236328
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 51,
+      "latency_ms": 174.3529,
+      "provider_latency_ms": 173.504,
+      "usage": {
+        "total_tokens": 5
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 283517,
+      "latency_ms": 453.0055,
+      "provider_latency_ms": 444.828,
+      "usage": {
+        "total_tokens": 57311
+      },
+      "item_count": 263
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 18081,
+      "latency_ms": 1138.3254,
+      "provider_latency_ms": 1112,
+      "usage": {
+        "input_tokens": 3583,
+        "output_tokens": 96,
+        "total_tokens": 3679,
+        "neurons": 18.1041202545166
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 45,
+      "latency_ms": 339.862,
+      "provider_latency_ms": 339.05,
+      "usage": {
+        "total_tokens": 5
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 166557,
+      "latency_ms": 353.8808,
+      "provider_latency_ms": 347.434,
+      "usage": {
+        "total_tokens": 34977
+      },
+      "item_count": 204
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 17787,
+      "latency_ms": 1591.3691,
+      "provider_latency_ms": 1575,
+      "usage": {
+        "input_tokens": 3373,
+        "output_tokens": 175,
+        "total_tokens": 3548,
+        "neurons": 19.9937801361084
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 52,
+      "latency_ms": 172.1561,
+      "provider_latency_ms": 171.549,
+      "usage": {
+        "total_tokens": 7
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 230118,
+      "latency_ms": 380.454,
+      "provider_latency_ms": 375.938,
+      "usage": {
+        "total_tokens": 47213
+      },
+      "item_count": 233
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 18604,
+      "latency_ms": 879.9671,
+      "provider_latency_ms": 860,
+      "usage": {
+        "input_tokens": 3567,
+        "output_tokens": 99,
+        "total_tokens": 3666,
+        "neurons": 18.142826080322266
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 51,
+      "latency_ms": 166.7761,
+      "provider_latency_ms": 166.136,
+      "usage": {
+        "total_tokens": 4
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 265731,
+      "latency_ms": 413.878,
+      "provider_latency_ms": 408.083,
+      "usage": {
+        "total_tokens": 53099
+      },
+      "item_count": 216
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 18135,
+      "latency_ms": 742.4035,
+      "provider_latency_ms": 729,
+      "usage": {
+        "input_tokens": 3503,
+        "output_tokens": 104,
+        "total_tokens": 3607,
+        "neurons": 18.053577423095703
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 49,
+      "latency_ms": 154.4361,
+      "provider_latency_ms": 153.769,
+      "usage": {
+        "total_tokens": 6
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 458723,
+      "latency_ms": 578.2413,
+      "provider_latency_ms": 567.867,
+      "usage": {
+        "total_tokens": 90470
+      },
+      "item_count": 300
+    },
+    {
+      "endpoint": "/judge",
+      "status": 502,
+      "payload_bytes": 18938,
+      "latency_ms": 931.7184,
+      "provider_latency_ms": 0,
+      "usage": {},
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 45,
+      "latency_ms": 182.9986,
+      "provider_latency_ms": 182.492,
+      "usage": {
+        "total_tokens": 4
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 390145,
+      "latency_ms": 462.36,
+      "provider_latency_ms": 454.446,
+      "usage": {
+        "total_tokens": 76131
+      },
+      "item_count": 300
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 15051,
+      "latency_ms": 974.7597,
+      "provider_latency_ms": 954,
+      "usage": {
+        "input_tokens": 2928,
+        "output_tokens": 99,
+        "total_tokens": 3027,
+        "neurons": 15.511064529418945
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 43,
+      "latency_ms": 245.8173,
+      "provider_latency_ms": 245.363,
+      "usage": {
+        "total_tokens": 4
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 361791,
+      "latency_ms": 411.8411,
+      "provider_latency_ms": 403.956,
+      "usage": {
+        "total_tokens": 72670
+      },
+      "item_count": 247
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 14243,
+      "latency_ms": 1154.4327,
+      "provider_latency_ms": 1143,
+      "usage": {
+        "input_tokens": 2788,
+        "output_tokens": 97,
+        "total_tokens": 2885,
+        "neurons": 14.864730834960938
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 49,
+      "latency_ms": 244.1715,
+      "provider_latency_ms": 243.601,
+      "usage": {
+        "total_tokens": 4
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 291587,
+      "latency_ms": 394.3409,
+      "provider_latency_ms": 385.558,
+      "usage": {
+        "total_tokens": 57159
+      },
+      "item_count": 219
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 17139,
+      "latency_ms": 1049.8149,
+      "provider_latency_ms": 1038,
+      "usage": {
+        "input_tokens": 3241,
+        "output_tokens": 97,
+        "total_tokens": 3338,
+        "neurons": 16.730438232421875
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 43,
+      "latency_ms": 181.7808,
+      "provider_latency_ms": 180.952,
+      "usage": {
+        "total_tokens": 3
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 309042,
+      "latency_ms": 428.9393,
+      "provider_latency_ms": 423.087,
+      "usage": {
+        "total_tokens": 60401
+      },
+      "item_count": 223
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 20686,
+      "latency_ms": 1162.9944,
+      "provider_latency_ms": 1146,
+      "usage": {
+        "input_tokens": 3950,
+        "output_tokens": 100,
+        "total_tokens": 4050,
+        "neurons": 19.755102157592773
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 30,
+      "latency_ms": 486.8268,
+      "provider_latency_ms": 485.793,
+      "usage": {
+        "total_tokens": 2
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 38,
+      "latency_ms": 231.8463,
+      "provider_latency_ms": 231.234,
+      "usage": {
+        "total_tokens": 2
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 42,
+      "latency_ms": 157.1387,
+      "provider_latency_ms": 156.676,
+      "usage": {
+        "total_tokens": 3
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 237348,
+      "latency_ms": 442.9779,
+      "provider_latency_ms": 436.401,
+      "usage": {
+        "total_tokens": 46665
+      },
+      "item_count": 237
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 15028,
+      "latency_ms": 1066.9791,
+      "provider_latency_ms": 1050,
+      "usage": {
+        "input_tokens": 2873,
+        "output_tokens": 96,
+        "total_tokens": 2969,
+        "neurons": 15.179941177368164
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 46,
+      "latency_ms": 155.5115,
+      "provider_latency_ms": 154.69,
+      "usage": {
+        "total_tokens": 3
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 381419,
+      "latency_ms": 925.2585,
+      "provider_latency_ms": 912.162,
+      "usage": {
+        "total_tokens": 73117
+      },
+      "item_count": 300
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 18068,
+      "latency_ms": 1413.13,
+      "provider_latency_ms": 1394,
+      "usage": {
+        "input_tokens": 3487,
+        "output_tokens": 179,
+        "total_tokens": 3666,
+        "neurons": 20.602767944335938
+      },
+      "item_count": 10
+    },
+    {
+      "endpoint": "/embed-query",
+      "status": 200,
+      "payload_bytes": 48,
+      "latency_ms": 164.6825,
+      "provider_latency_ms": 163.903,
+      "usage": {
+        "total_tokens": 3
+      },
+      "item_count": 0
+    },
+    {
+      "endpoint": "/rerank",
+      "status": 200,
+      "payload_bytes": 324999,
+      "latency_ms": 506.5552,
+      "provider_latency_ms": 499.657,
+      "usage": {
+        "total_tokens": 64843
+      },
+      "item_count": 249
+    },
+    {
+      "endpoint": "/judge",
+      "status": 200,
+      "payload_bytes": 18011,
+      "latency_ms": 1087.0221,
+      "provider_latency_ms": 1077,
+      "usage": {
+        "input_tokens": 3458,
+        "output_tokens": 98,
+        "total_tokens": 3556,
+        "neurons": 17.659034729003906
+      },
+      "item_count": 10
+    }
+  ],
+  "totals": {
+    "embedding_requests": 52,
+    "rerank_requests": 49,
+    "judge_requests": 49,
+    "embedding_tokens": 194,
+    "rerank_tokens": 3113055,
+    "judge_input_tokens": 125254,
+    "judge_output_tokens": 4235,
+    "judge_total_tokens": 129489,
+    "judge_neurons": 663.5316333770752,
+    "judge_failures": 10,
+    "judge_fallbacks": 10,
+    "fallbacks": 0,
+    "failures": 0,
+    "last_latency_ms": 1823.1494999999995,
+    "voyage_estimated_paid_cost_usd": 0.155657,
+    "workers_ai_reported_neurons": 663.5316333770752,
+    "workers_ai_reported_tokens": 129489,
+    "workers_ai_requests": 49,
+    "workers_ai_free_neurons_per_day": 10000,
+    "workers_ai_free_tier_fraction_if_neurons_reported": 0.066353,
+    "raw_query_storage_added": false
+  },
+  "secrets": {
+    "printed": false,
+    "persisted": false,
+    "sent_to_browser": false
+  }
+}

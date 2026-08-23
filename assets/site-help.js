@@ -105,7 +105,7 @@
         <div class="help-grid">
           <div class="help-card">
             <h4>Build a team</h4>
-            <p>Select two to four listed researchers. You can also save up to four external researchers using specific research keywords, an ORCID publication import, or both.</p>
+            <p>Select two to four researchers. Choose department faculty or save another researcher using specific research keywords, an ORCID publication import, or both.</p>
           </div>
           <div class="help-card">
             <h4>Steer the themes</h4>
@@ -170,7 +170,7 @@
         <div class="help-grid">
           <div class="help-card">
             <h4>Stays in this browser</h4>
-            <p>Saved opportunities, profiles, external researchers, extracted upload text, and chat state stay on the device. Invited-reviewer ratings also stay local until explicitly exported. Original CV and notice files are not retained.</p>
+            <p>Saved opportunities, profiles, researchers you add, extracted upload text, and chat state stay on the device. Invited-reviewer ratings also stay local until explicitly exported. Original CV and notice files are not retained.</p>
           </div>
           <div class="help-card">
             <h4>Sent only when you use AI</h4>

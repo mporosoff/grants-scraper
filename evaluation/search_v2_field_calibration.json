@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "evaluated_at": "2026-08-22",
+  "phase_1_authorized_track": "B",
+  "status": "not_required_by_phase_1_evidence",
+  "selected_design": "compact first-stage retrieval plus protected field-local verification and identifier-bound authoritative scope entailment",
+  "global_field_weights_changed": false,
+  "title_bonuses_changed": false,
+  "scope_entailment_score": 1,
+  "selection_rule": "Use the smallest positive bounded score because authoritative scope controls admission; existing lexical evidence may rank an already-admitted program.",
+  "rejected_work": [
+    "BM25F fielded-postings rewrite",
+    "global title/description weight search",
+    "embedding or query-time model layer"
+  ]
+}

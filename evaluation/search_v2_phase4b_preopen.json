@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "phase": "4B",
+  "iteration": "search-v2-iteration-2",
+  "created_at": "2026-08-22",
+  "status": "candidate_frozen_before_phase4b_holdout_open",
+  "branch": "search-quality-v2",
+  "branch_head_before_preopen_commit": "daa3355bc68b9fda45037a0a8d2be8c38fad7638",
+  "candidate_code_sha": "daa3355bc68b9fda45037a0a8d2be8c38fad7638",
+  "candidate_tree_sha": "add6b88b802855fde619b716272b906603664296",
+  "implementation_freeze_checkpoint": "bf2d3ab6b7aedcdf183c8389acbfd0f4f662f37a",
+  "candidate_behavior_changed_after_implementation_freeze": false,
+  "origin_branch_matched_candidate_before_open": true,
+  "working_tree_clean_before_open": true,
+  "main_sha": "ef7a0642f6ce66828f01ee280bd5993f66029b2f",
+  "origin_main_sha": "ef7a0642f6ce66828f01ee280bd5993f66029b2f",
+  "production_flag": {
+    "path": "assets/app-config.js",
+    "sha256": "a679a5080582ae0c00c8a9b03caa5bb1a67ae971b06cc140c3f7f4102d3c4401",
+    "search_v2_enabled": false
+  },
+  "phase4b_authorization": {
+    "authorized": true,
+    "source": "explicit user Phase 4B one-time acceptance instruction",
+    "phase5_authorized_before_decision": false
+  },
+  "holdout": {
+    "frame": "evaluation/search_v2_iteration2_holdout_frame.json",
+    "frame_sha256": "3e94159b9eff8ef424b51ddc46c4cdb3a28243a39aa21374cd3411fb5d4b3cc3",
+    "manifest": "evaluation/search_v2_iteration2_holdout_manifest.json",
+    "manifest_sha256": "d041445e753aa2f70d96a4f7c6f4874828ef8df32d2fb3c1aaa8289cd25c7942",
+    "query_count": 28,
+    "status_before_open": "sealed_never_executed",
+    "execution_count": 0,
+    "raw_results_artifact_exists": false,
+    "truth_artifact_exists": false,
+    "adjudicated_results_artifact_exists": false
+  },
+  "frozen_hashes": {
+    "config/search_v2.json": "54ecac7b0b5e07135d601e98f56c100c211993b0eea060cb581e3e64bf532429",
+    "assets/search-query.js": "9df2b390a06ff610afe53b52a82b0df3c432eb6b3389f378e9f5b0dc584ab5d3",
+    "assets/search-retrieval.js": "6bb5662112e13e6c817f26f689023319e20786d675ef7ed223c35efd39d3c3c4",
+    "assets/match-explain.js": "f74f010d62ab460cf13f99d9448795ce8147794c4f821eabcdefcbf9625cf92f",
+    "assets/app.js": "63891c3fc338ab62f5d17858fd366fee842e1e2279c8bcbac52bde6ba8301aee",
+    "data/opportunities.js": "f6168e043fc6e4466edb49dd4fa0f957d09509f9591ee952bda035b423d27f1f",
+    "data/subtopics.js": "e2f45ecdfab26770f2346eaa4a488bb57fcaa3cc17c5d90ed25e30d14727f40d",
+    "evaluation/search_v2_iteration2_holdout_frame.json": "3e94159b9eff8ef424b51ddc46c4cdb3a28243a39aa21374cd3411fb5d4b3cc3",
+    "evaluation/search_v2_iteration2_holdout_manifest.json": "d041445e753aa2f70d96a4f7c6f4874828ef8df32d2fb3c1aaa8289cd25c7942"
+  },
+  "preserved_failed_phase4_hashes": {
+    "evaluation/search_v2_holdout_results_raw.json": "8d4a1d37e0940fde1eefdd3dca7f3fa2a39a40194ce6b083b40eafd4897fb919",
+    "evaluation/search_v2_holdout_truth.json": "83740bfd4bb5e3ef123a3a1b6e8c353b41c98a357261bce3e5b6b3e359bcebd1",
+    "evaluation/search_v2_holdout_results.json": "1505bc7d435643a40127cc5c5e8bce841135843a8662a466f68a86505704f3e7",
+    "evaluation/PHASE4_REVIEW.md": "0fdd99b6aad1fad35b3b2b4ec7d05efe9a27a9a514589629996c7da0fab7bbc9",
+    "evaluation/search_v2_release_candidate.json": "0edf8c283eff216e445e72101196c2fd038e42708710591a79d5e71e24f2d8ab"
+  },
+  "inherited_iteration2_gate_state": {
+    "decision": "ITERATION 2 DEVELOPMENT GATES PASSED",
+    "development_49_query": "passed",
+    "former_phase4_challenge": "passed",
+    "meas5_48_query_11_discipline": "passed_with_reviewed_movements",
+    "historical_37_query": "passed_zero_top10_churn",
+    "phase3r_42_pair_explanations": "passed",
+    "browser_tests": "138_passed",
+    "focused_python_tests": "43_passed",
+    "live_product_python_tests": "756_passed",
+    "parent_child_invariant": "50_passed",
+    "no_drift": "22_artifacts_unchanged",
+    "warm_latency_ms": {
+      "p50": 11.328,
+      "p95": 31.3899
+    },
+    "browser_asset_delta_bytes": 75445
+  },
+  "acceptance_gates": {
+    "A_required_primary_recall": {
+      "required_recall_at_50": 1.0,
+      "no_required_anchor_completely_missed": true,
+      "recall_at_10_miss_requires_review": true
+    },
+    "B_primary_precision": {
+      "irrelevant_visible_primary_count": 0,
+      "hard_negatives_zero_primary_unless_new_authoritative_positive": true,
+      "no_visible_primary_explosion": true
+    },
+    "C_complete_intent": {
+      "partial_intent_cannot_be_primary": true,
+      "controlled_relationships_must_be_directional_and_scope_backed": true
+    },
+    "D_authoritative_scope_generalization": {
+      "must_generalize_on_new_holdout": true,
+      "former_challenge_repairs_alone_are_insufficient": true
+    },
+    "E_evidence_tier_ranking": {
+      "review_every_required_primary_below_rank_10": true,
+      "rich_evidence_must_not_be_buried_by_weak_or_partial_matches": true
+    },
+    "F_broader_program_separation": {
+      "broader_separate_from_primary": true,
+      "broader_cannot_rescue_primary_recall": true
+    },
+    "G_explanations": {
+      "unsupported": 0,
+      "misleading": 0,
+      "review_only_leakage": 0,
+      "private_profile_leakage": 0,
+      "primary_label_on_broader_or_irrelevant": 0
+    },
+    "H_regression": {
+      "all_iteration2_development_and_product_gates_must_remain_green": true,
+      "closed_frozen_census_modules_exempt_only_as_previously_documented": true
+    },
+    "I_performance_and_size": {
+      "report_warm_and_phase4b_p50_p95": true,
+      "report_internal_candidate_counts": true,
+      "size_gate_must_pass": true
+    }
+  },
+  "protocol": {
+    "execute_exactly_once": true,
+    "immutable_raw_written_before_adjudication": true,
+    "truth_key": "query_id,result_id",
+    "post_holdout_tuning_permitted": false,
+    "phase4b_may_merge_or_deploy": false,
+    "production_flag_may_change": false
+  }
+}

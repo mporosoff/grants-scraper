@@ -1,0 +1,1266 @@
+{
+  "schema_version": 2,
+  "evaluated_at": "2026-08-22",
+  "holdout_status": "sealed_and_unopened",
+  "baseline": "evaluation/search_v2_phase2_top10.json",
+  "judgments": "evaluation/search_v2_stabilization_movement_judgments.json",
+  "changed_top_10_queries": 25,
+  "unchanged_top_10_queries": 24,
+  "all_material_movements_reviewed": true,
+  "movements": [
+    {
+      "id": "ree_01",
+      "discipline": "chemistry_materials",
+      "query": "REE",
+      "old_candidate_count": 0,
+      "new_candidate_count": 0,
+      "old_top_10": [],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
+    },
+    {
+      "id": "ree_02",
+      "discipline": "chemistry_materials",
+      "query": "REEs",
+      "old_candidate_count": 0,
+      "new_candidate_count": 0,
+      "old_top_10": [],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
+    },
+    {
+      "id": "ree_03",
+      "discipline": "chemistry_materials",
+      "query": "REE separations",
+      "old_candidate_count": 3,
+      "new_candidate_count": 3,
+      "old_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "new_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
+    },
+    {
+      "id": "ree_04",
+      "discipline": "chemistry_materials",
+      "query": "rare earth",
+      "old_candidate_count": 0,
+      "new_candidate_count": 0,
+      "old_top_10": [],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
+    },
+    {
+      "id": "ree_05",
+      "discipline": "chemistry_materials",
+      "query": "rare earth elements",
+      "old_candidate_count": 0,
+      "new_candidate_count": 0,
+      "old_top_10": [],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
+    },
+    {
+      "id": "ree_06",
+      "discipline": "chemistry_materials",
+      "query": "rare earth separations",
+      "old_candidate_count": 3,
+      "new_candidate_count": 3,
+      "old_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "new_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
+    },
+    {
+      "id": "ree_07",
+      "discipline": "chemistry_materials",
+      "query": "rare earth element recovery",
+      "old_candidate_count": 3,
+      "new_candidate_count": 3,
+      "old_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "new_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
+    },
+    {
+      "id": "ree_08",
+      "discipline": "chemistry_materials",
+      "query": "lanthanide separation",
+      "old_candidate_count": 3,
+      "new_candidate_count": 3,
+      "old_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "new_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
+    },
+    {
+      "id": "ree_09",
+      "discipline": "chemistry_materials",
+      "query": "lanthanide extraction",
+      "old_candidate_count": 3,
+      "new_candidate_count": 3,
+      "old_top_10": [
+        "360678",
+        "362061",
+        "361526"
+      ],
+      "new_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "The same three authoritative primary programs remain; CPS and BES only exchange ranks after bounded method-evidence normalization, with no recall or label change."
+      }
+    },
+    {
+      "id": "ree_10",
+      "discipline": "chemistry_materials",
+      "query": "solvent extraction of REEs",
+      "old_candidate_count": 3,
+      "new_candidate_count": 3,
+      "old_top_10": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "new_top_10": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
+    },
+    {
+      "id": "ree_11",
+      "discipline": "chemistry_materials",
+      "query": "ionic liquids for REE extraction",
+      "old_candidate_count": 3,
+      "new_candidate_count": 3,
+      "old_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "new_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
+    },
+    {
+      "id": "ree_12",
+      "discipline": "chemistry_materials",
+      "query": "critical mineral separations",
+      "old_candidate_count": 18,
+      "new_candidate_count": 3,
+      "old_top_10": [
+        "362061",
+        "356605",
+        "363215",
+        "362900",
+        "363633",
+        "nsf-cbet:PD-26-370Y",
+        "363684",
+        "363645",
+        "363536",
+        "363544"
+      ],
+      "new_top_10": [
+        "361526",
+        "362061",
+        "nsf-cbet:PD-26-370Y"
+      ],
+      "added_to_top_10": [
+        "361526"
+      ],
+      "removed_from_top_10": [
+        "356605",
+        "363215",
+        "362900",
+        "363633",
+        "363684",
+        "363645",
+        "363536",
+        "363544"
+      ],
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "The candidate adds Genesis and retains CPS and EWRE while removing the adjudicated workshop, workforce, diplomacy, ecology, geoscience-metadata, and ungrounded umbrella matches."
+      }
+    },
+    {
+      "id": "ree_13",
+      "discipline": "chemistry_materials",
+      "query": "catalysis",
+      "old_candidate_count": 17,
+      "new_candidate_count": 6,
+      "old_top_10": [
+        "362061",
+        "360678",
+        "356605",
+        "347749",
+        "363617",
+        "362063",
+        "356055",
+        "341244",
+        "362681",
+        "350018"
+      ],
+      "new_top_10": [
+        "344592",
+        "361526",
+        "362061",
+        "347749",
+        "356055",
+        "351715"
+      ],
+      "added_to_top_10": [
+        "344592",
+        "361526",
+        "351715"
+      ],
+      "removed_from_top_10": [
+        "360678",
+        "356605",
+        "363617",
+        "362063",
+        "341244",
+        "362681",
+        "350018"
+      ],
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "Catalysis now favors publication-eligible ARL and Genesis children plus focused program descriptions; former umbrella, citation-only, and generic cross-discipline rows are removed."
+      }
+    },
+    {
+      "id": "ree_14",
+      "discipline": "chemistry_materials",
+      "query": "catalyst",
+      "old_candidate_count": 18,
+      "new_candidate_count": 7,
+      "old_top_10": [
+        "362061",
+        "360678",
+        "356605",
+        "361526",
+        "347749",
+        "363617",
+        "362063",
+        "356055",
+        "341244",
+        "362681"
+      ],
+      "new_top_10": [
+        "361526",
+        "344592",
+        "363302",
+        "362061",
+        "347749",
+        "356055",
+        "351715"
+      ],
+      "added_to_top_10": [
+        "344592",
+        "363302",
+        "351715"
+      ],
+      "removed_from_top_10": [
+        "360678",
+        "356605",
+        "363617",
+        "362063",
+        "341244",
+        "362681"
+      ],
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "The catalyst query retains explicit scientific catalyst programs and adds publication-eligible catalyst children; programs supported only by generic or citation-source catalyst wording are removed."
+      }
+    },
+    {
+      "id": "ree_15",
+      "discipline": "chemistry_materials",
+      "query": "ree",
+      "old_candidate_count": 0,
+      "new_candidate_count": 0,
+      "old_top_10": [],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
+    },
+    {
+      "id": "ree_16",
+      "discipline": "chemistry_materials",
+      "query": "R.E.E.",
+      "old_candidate_count": 0,
+      "new_candidate_count": 0,
+      "old_top_10": [],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
+    },
+    {
+      "id": "ree_17",
+      "discipline": "chemistry_materials",
+      "query": "rare-earth elements",
+      "old_candidate_count": 0,
+      "new_candidate_count": 0,
+      "old_top_10": [],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
+    },
+    {
+      "id": "ree_18",
+      "discipline": "chemistry_materials",
+      "query": "REE separation",
+      "old_candidate_count": 3,
+      "new_candidate_count": 3,
+      "old_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "new_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
+    },
+    {
+      "id": "ree_19",
+      "discipline": "chemistry_materials",
+      "query": "separation of REEs",
+      "old_candidate_count": 3,
+      "new_candidate_count": 3,
+      "old_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "new_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
+    },
+    {
+      "id": "adv_chem_01",
+      "discipline": "chemistry_materials",
+      "query": "PFAS destruction",
+      "old_candidate_count": 0,
+      "new_candidate_count": 0,
+      "old_top_10": [],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
+    },
+    {
+      "id": "adv_chem_02",
+      "discipline": "chemistry_materials",
+      "query": "AI catalyst design",
+      "old_candidate_count": 88,
+      "new_candidate_count": 2,
+      "old_top_10": [
+        "362061",
+        "356605",
+        "360678",
+        "351715",
+        "363617",
+        "362063",
+        "347749",
+        "356055",
+        "341244",
+        "362681"
+      ],
+      "new_top_10": [
+        "361526",
+        "362061"
+      ],
+      "added_to_top_10": [
+        "361526"
+      ],
+      "removed_from_top_10": [
+        "356605",
+        "360678",
+        "351715",
+        "363617",
+        "362063",
+        "347749",
+        "356055",
+        "341244",
+        "362681"
+      ],
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "CPS retains complete published scope and Genesis is recovered through its AI parent plus publication-eligible catalyst-discovery child. Authoritative ECLIPSE scope establishes catalysis and computational reactor design but no AI/ML evidence, so its query-specific truth is corrected to broader fit."
+      }
+    },
+    {
+      "id": "adv_chem_03",
+      "discipline": "chemistry_materials",
+      "query": "battery recycling",
+      "old_candidate_count": 0,
+      "new_candidate_count": 0,
+      "old_top_10": [],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
+    },
+    {
+      "id": "adv_chem_04",
+      "discipline": "chemistry_materials",
+      "query": "CO2 membrane separation",
+      "old_candidate_count": 12,
+      "new_candidate_count": 0,
+      "old_top_10": [
+        "360678",
+        "362061",
+        "362063",
+        "358022",
+        "358021",
+        "360223",
+        "363604",
+        "363628",
+        "356605",
+        "363662"
+      ],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "360678",
+        "362061",
+        "362063",
+        "358022",
+        "358021",
+        "360223",
+        "363604",
+        "363628",
+        "356605",
+        "363662"
+      ],
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "None of the former results establishes all three CO2, membrane, and separation concepts in substantive scope; several are biomedical or policy lexical collisions."
+      }
+    },
+    {
+      "id": "adv_energy_01",
+      "discipline": "energy",
+      "query": "direct air capture membranes",
+      "old_candidate_count": 0,
+      "new_candidate_count": 0,
+      "old_top_10": [],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
+    },
+    {
+      "id": "adv_energy_02",
+      "discipline": "energy",
+      "query": "geothermal lithium extraction",
+      "old_candidate_count": 2,
+      "new_candidate_count": 0,
+      "old_top_10": [
+        "363065",
+        "361526"
+      ],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "363065",
+        "361526"
+      ],
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "The oil-and-gas notice lacks lithium, while Genesis does not establish the combined geothermal-lithium extraction intent; removing both avoids partial-intent admission."
+      }
+    },
+    {
+      "id": "adv_energy_03",
+      "discipline": "energy",
+      "query": "grid-scale battery safety",
+      "old_candidate_count": 0,
+      "new_candidate_count": 0,
+      "old_top_10": [],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
+    },
+    {
+      "id": "adv_bio_01",
+      "discipline": "biomedical",
+      "query": "microbiome therapeutics",
+      "old_candidate_count": 1,
+      "new_candidate_count": 1,
+      "old_top_10": [
+        "356610"
+      ],
+      "new_top_10": [
+        "356610"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
+    },
+    {
+      "id": "adv_bio_02",
+      "discipline": "biomedical",
+      "query": "rare disease biomarkers",
+      "old_candidate_count": 24,
+      "new_candidate_count": 2,
+      "old_top_10": [
+        "362752",
+        "363678",
+        "356879",
+        "359280",
+        "357570",
+        "359644",
+        "359645",
+        "359279",
+        "360621",
+        "360622"
+      ],
+      "new_top_10": [
+        "362752",
+        "359645"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "363678",
+        "356879",
+        "359280",
+        "357570",
+        "359644",
+        "359279",
+        "360621",
+        "360622"
+      ],
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "The retained opportunities explicitly combine rare-disease and biomarker scope. Removed rows provide rare-disease infrastructure or disease scope without biomarker evidence and therefore fail complete intent."
+      }
+    },
+    {
+      "id": "adv_bio_03",
+      "discipline": "biomedical",
+      "query": "AI cancer diagnosis",
+      "old_candidate_count": 33,
+      "new_candidate_count": 0,
+      "old_top_10": [
+        "362259",
+        "357030",
+        "357748",
+        "357067",
+        "357627",
+        "357651",
+        "357014",
+        "350943",
+        "350944",
+        "363217"
+      ],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "362259",
+        "357030",
+        "357748",
+        "357067",
+        "357627",
+        "357651",
+        "357014",
+        "350943",
+        "350944",
+        "363217"
+      ],
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "The former cancer programs do not establish artificial-intelligence diagnosis scope. The remaining AI/AN population-abbreviation collision was also removed by the generic resolved-acronym evidence guard."
+      }
+    },
+    {
+      "id": "adv_health_01",
+      "discipline": "public_health",
+      "query": "rural maternal health",
+      "old_candidate_count": 38,
+      "new_candidate_count": 1,
+      "old_top_10": [
+        "363412",
+        "359945",
+        "363407",
+        "363532",
+        "363516",
+        "363411",
+        "363679",
+        "363582",
+        "363222",
+        "363210"
+      ],
+      "new_top_10": [
+        "363582"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "363412",
+        "359945",
+        "363407",
+        "363532",
+        "363516",
+        "363411",
+        "363679",
+        "363222",
+        "363210"
+      ],
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "Rural MOMS is the only current row with authoritative rural and maternal-health scope; maternal-only and generic rural-health programs are no longer primary."
+      }
+    },
+    {
+      "id": "adv_health_02",
+      "discipline": "public_health",
+      "query": "opioid overdose prevention",
+      "old_candidate_count": 6,
+      "new_candidate_count": 3,
+      "old_top_10": [
+        "363058",
+        "363636",
+        "362672",
+        "363686",
+        "363601",
+        "344592"
+      ],
+      "new_top_10": [
+        "363058",
+        "363636",
+        "362672"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "363686",
+        "363601",
+        "344592"
+      ],
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "The retained programs explicitly address opioid overdose prevention. Removed rows are partial prevention, generic substance-use, or unrelated umbrella matches."
+      }
+    },
+    {
+      "id": "adv_health_03",
+      "discipline": "public_health",
+      "query": "environmental justice asthma",
+      "old_candidate_count": 5,
+      "new_candidate_count": 0,
+      "old_top_10": [
+        "329432",
+        "363629",
+        "356231",
+        "329436",
+        "362644"
+      ],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "329432",
+        "363629",
+        "356231",
+        "329436",
+        "362644"
+      ],
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "No former result establishes environmental-justice and asthma scope together in admission-eligible narrative; the prior results were partial or citation collisions."
+      }
+    },
+    {
+      "id": "adv_ag_01",
+      "discipline": "agriculture",
+      "query": "precision agriculture water",
+      "old_candidate_count": 21,
+      "new_candidate_count": 0,
+      "old_top_10": [
+        "357579",
+        "360205",
+        "355706",
+        "nsf-cbet:PD-26-370Y",
+        "361080",
+        "363285",
+        "362394",
+        "362910",
+        "363334",
+        "362787"
+      ],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "357579",
+        "360205",
+        "355706",
+        "nsf-cbet:PD-26-370Y",
+        "361080",
+        "363285",
+        "362394",
+        "362910",
+        "363334",
+        "362787"
+      ],
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "No former result establishes the complete precision-agriculture water intent in the cataloged authoritative narrative; generic water, agriculture, and citation text no longer combine into a primary result."
+      }
+    },
+    {
+      "id": "adv_ag_02",
+      "discipline": "agriculture",
+      "query": "crop disease sensing",
+      "old_candidate_count": 5,
+      "new_candidate_count": 0,
+      "old_top_10": [
+        "363326",
+        "361876",
+        "363328",
+        "362062",
+        "363292"
+      ],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "363326",
+        "361876",
+        "363328",
+        "362062",
+        "363292"
+      ],
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "The removed plant, crop, and sensing programs each omit at least one substantive crop-disease-sensing concept from admission-eligible scope."
+      }
+    },
+    {
+      "id": "adv_ag_03",
+      "discipline": "agriculture",
+      "query": "livestock methane reduction",
+      "old_candidate_count": 0,
+      "new_candidate_count": 0,
+      "old_top_10": [],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
+    },
+    {
+      "id": "adv_space_01",
+      "discipline": "space",
+      "query": "space biology",
+      "old_candidate_count": 6,
+      "new_candidate_count": 4,
+      "old_top_10": [
+        "363537",
+        "352741",
+        "vpr-email:infoready-2028504",
+        "330296",
+        "328902",
+        "344592"
+      ],
+      "new_top_10": [
+        "352741",
+        "330296",
+        "vpr-email:infoready-2028504",
+        "328902"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "363537",
+        "344592"
+      ],
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "Top-ten membership is unchanged; bounded biology word-form expansion only reorders two existing middle-ranked results."
+      }
+    },
+    {
+      "id": "adv_space_02",
+      "discipline": "space",
+      "query": "lunar regolith extraction",
+      "old_candidate_count": 0,
+      "new_candidate_count": 0,
+      "old_top_10": [],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
+    },
+    {
+      "id": "adv_space_03",
+      "discipline": "space",
+      "query": "Earth observation wildfire",
+      "old_candidate_count": 4,
+      "new_candidate_count": 0,
+      "old_top_10": [
+        "356536",
+        "357105",
+        "356538",
+        "356669"
+      ],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "356536",
+        "357105",
+        "356538",
+        "356669"
+      ],
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "The former Earth and atmosphere programs do not publish wildfire observation scope in the cataloged narrative; citation/index terms cannot complete the intent."
+      }
+    },
+    {
+      "id": "adv_defense_01",
+      "discipline": "defense",
+      "query": "hypersonic materials",
+      "old_candidate_count": 2,
+      "new_candidate_count": 1,
+      "old_top_10": [
+        "330175",
+        "345241"
+      ],
+      "new_top_10": [
+        "345241"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "330175"
+      ],
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "The DEVCOM applied-research child retains explicit hypersonic-materials evidence; the removed row lacks complete current funded scope."
+      }
+    },
+    {
+      "id": "adv_defense_02",
+      "discipline": "defense",
+      "query": "autonomous maritime sensing",
+      "old_candidate_count": 5,
+      "new_candidate_count": 0,
+      "old_top_10": [
+        "344592",
+        "356605",
+        "334972",
+        "363292",
+        "345241"
+      ],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "344592",
+        "356605",
+        "334972",
+        "363292",
+        "345241"
+      ],
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "The former ONR primary judgment is corrected to broader fit: the parent publishes generic Navy and Marine Corps S&T scope, while autonomous and sensing terms appear only in collapsed citation/index text. Citation text alone cannot manufacture the integrated primary intent."
+      }
+    },
+    {
+      "id": "adv_defense_03",
+      "discipline": "defense",
+      "query": "quantum navigation",
+      "old_candidate_count": 2,
+      "new_candidate_count": 2,
+      "old_top_10": [
+        "344592",
+        "345241"
+      ],
+      "new_top_10": [
+        "344592",
+        "345241"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
+    },
+    {
+      "id": "adv_ai_01",
+      "discipline": "ai_computing",
+      "query": "trustworthy AI health",
+      "old_candidate_count": 106,
+      "new_candidate_count": 1,
+      "old_top_10": [
+        "353936",
+        "361318",
+        "359949",
+        "359270",
+        "359666",
+        "359271",
+        "363678",
+        "363412",
+        "361348",
+        "324456"
+      ],
+      "new_top_10": [
+        "363107"
+      ],
+      "added_to_top_10": [
+        "363107"
+      ],
+      "removed_from_top_10": [
+        "353936",
+        "361318",
+        "359949",
+        "359270",
+        "359666",
+        "359271",
+        "363678",
+        "363412",
+        "361348",
+        "324456"
+      ],
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "Bridge2AI explicitly combines trustworthy AI with biomedical and behavioral health research; the removed results each lack at least one substantive query concept."
+      }
+    },
+    {
+      "id": "adv_ai_02",
+      "discipline": "ai_computing",
+      "query": "cybersecurity workforce",
+      "old_candidate_count": 113,
+      "new_candidate_count": 5,
+      "old_top_10": [
+        "363586",
+        "361238",
+        "358380",
+        "363594",
+        "363440",
+        "363645",
+        "363609",
+        "363436",
+        "363527",
+        "363439"
+      ],
+      "new_top_10": [
+        "361238",
+        "358380",
+        "363440",
+        "363645",
+        "357554"
+      ],
+      "added_to_top_10": [
+        "357554"
+      ],
+      "removed_from_top_10": [
+        "363586",
+        "363594",
+        "363609",
+        "363436",
+        "363527",
+        "363439"
+      ],
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "Retained and newly surfaced rows explicitly combine cybersecurity with workforce or training scope. Removed rows match only generic security, labor, or administrative language."
+      }
+    },
+    {
+      "id": "adv_ai_03",
+      "discipline": "ai_computing",
+      "query": "quantum sensing biology",
+      "old_candidate_count": 15,
+      "new_candidate_count": 2,
+      "old_top_10": [
+        "362061",
+        "344592",
+        "275109",
+        "362063",
+        "363613",
+        "353413",
+        "362681",
+        "361526",
+        "360678",
+        "332894"
+      ],
+      "new_top_10": [
+        "344592",
+        "362061"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "275109",
+        "362063",
+        "363613",
+        "353413",
+        "362681",
+        "361526",
+        "360678",
+        "332894"
+      ],
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "CPS and the ARL Electronic Sensing child establish the integrated quantum-sensing and biology intent; broad umbrellas and programs with separate or absent concepts are removed."
+      }
+    },
+    {
+      "id": "adv_env_01",
+      "discipline": "environmental_science",
+      "query": "PFAS groundwater remediation",
+      "old_candidate_count": 3,
+      "new_candidate_count": 0,
+      "old_top_10": [
+        "351547",
+        "363334",
+        "362395"
+      ],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "351547",
+        "363334",
+        "362395"
+      ],
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "The former land, mine, and desalination rows do not name PFAS in admission-eligible source scope; protected contaminant evidence prevents groundwater/remediation wording from substituting for the target."
+      }
+    },
+    {
+      "id": "adv_env_02",
+      "discipline": "environmental_science",
+      "query": "harmful algal bloom forecasting",
+      "old_candidate_count": 0,
+      "new_candidate_count": 0,
+      "old_top_10": [],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [],
+      "top_10_changed": false,
+      "review": null
+    },
+    {
+      "id": "adv_env_03",
+      "discipline": "environmental_science",
+      "query": "coastal resilience infrastructure",
+      "old_candidate_count": 17,
+      "new_candidate_count": 1,
+      "old_top_10": [
+        "356562",
+        "356561",
+        "363538",
+        "363537",
+        "361080",
+        "358004",
+        "363229",
+        "357554",
+        "356002",
+        "363355"
+      ],
+      "new_top_10": [
+        "363537"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "356562",
+        "356561",
+        "363538",
+        "361080",
+        "358004",
+        "363229",
+        "357554",
+        "356002",
+        "363355"
+      ],
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "The Alaska CESU row explicitly combines coastal hazards, climate adaptation, and infrastructure/resource-management context; removed programs are coastal-, resilience-, or infrastructure-only."
+      }
+    },
+    {
+      "id": "adv_policy_01",
+      "discipline": "cross_domain",
+      "query": "critical mineral workforce",
+      "old_candidate_count": 73,
+      "new_candidate_count": 3,
+      "old_top_10": [
+        "363633",
+        "363316",
+        "363645",
+        "363215",
+        "362900",
+        "363544",
+        "363536",
+        "363355",
+        "362061",
+        "363385"
+      ],
+      "new_top_10": [
+        "363215",
+        "363633",
+        "363645"
+      ],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "363316",
+        "362900",
+        "363544",
+        "363536",
+        "363355",
+        "362061",
+        "363385"
+      ],
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "The three retained programs explicitly combine critical-minerals scope with workers or workforce development; policy forums, diplomacy, ecology, and process-research programs do not."
+      }
+    },
+    {
+      "id": "adv_policy_02",
+      "discipline": "cross_domain",
+      "query": "catalyst for education",
+      "old_candidate_count": 8,
+      "new_candidate_count": 0,
+      "old_top_10": [
+        "347749",
+        "363526",
+        "363530",
+        "363617",
+        "351715",
+        "330175",
+        "341244",
+        "357014"
+      ],
+      "new_top_10": [],
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "347749",
+        "363526",
+        "363530",
+        "363617",
+        "351715",
+        "330175",
+        "341244",
+        "357014"
+      ],
+      "top_10_changed": true,
+      "review": {
+        "status": "accepted",
+        "reason": "The phrase uses catalyst in a nonchemical education sense, while the former results are chemistry programs or generic education notices without the complete intended relationship."
+      }
+    }
+  ]
+}

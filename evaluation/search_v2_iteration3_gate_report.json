@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "iteration": 3,
+  "recorded_at": "2026-08-23",
+  "decision": "ITERATION 3 BLOCKED — ARCHITECTURE DECISION REQUIRED",
+  "phase4c_authorized": false,
+  "phase5_authorized": false,
+  "starting_sha": "cbc5e3166dd9fd45aa23b565b93244425cea4c21",
+  "frozen_prototype_sha": "23ad29de1d8f7809a13e96374675c698e381c362",
+  "branch": "search-quality-v2",
+  "production": {
+    "main_sha": "ef7a0642f6ce66828f01ee280bd5993f66029b2f",
+    "main_unchanged": true,
+    "search_v2_enabled": false,
+    "merged": false,
+    "deployed": false
+  },
+  "phase4c_holdout": {
+    "frame": "evaluation/search_v2_iteration3_holdout_frame.json",
+    "frame_sha256": "7fde6b7ccbdab59331c26899f37bdbb8f9ee7e30f8f3632f257e28d27124865e",
+    "manifest_sha256": "d45fcc91a52d01673cf1fa5bc91f25ed26c0c8f92f970e902559ecbda9164c6c",
+    "query_count": 36,
+    "status": "sealed_never_executed",
+    "execution_count": 0,
+    "result_artifact_exists": false,
+    "runner_lock_verified": true,
+    "intentionally_withheld_program_and_relationship_families_recorded": true
+  },
+  "immutable_prior_acceptance_evidence": {
+    "phase4": {
+      "evaluation/PHASE4_REVIEW.md": "0fdd99b6aad1fad35b3b2b4ec7d05efe9a27a9a514589629996c7da0fab7bbc9",
+      "evaluation/search_v2_release_candidate.json": "0edf8c283eff216e445e72101196c2fd038e42708710591a79d5e71e24f2d8ab",
+      "evaluation/search_v2_holdout_results_raw.json": "8d4a1d37e0940fde1eefdd3dca7f3fa2a39a40194ce6b083b40eafd4897fb919",
+      "evaluation/search_v2_holdout_truth.json": "83740bfd4bb5e3ef123a3a1b6e8c353b41c98a357261bce3e5b6b3e359bcebd1",
+      "evaluation/search_v2_holdout_results.json": "1505bc7d435643a40127cc5c5e8bce841135843a8662a466f68a86505704f3e7"
+    },
+    "phase4b": {
+      "evaluation/search_v2_release_candidate_v2.json": "4f3400a560209720b96e5f2d50364be6ce1342fa9eb6ef315c49eab2e589db4d",
+      "evaluation/search_v2_iteration2_holdout_frame.json": "3e94159b9eff8ef424b51ddc46c4cdb3a28243a39aa21374cd3411fb5d4b3cc3",
+      "evaluation/search_v2_iteration2_holdout_results_raw.json": "fef755fb0bfdd2f485bf712478dc3b82623038882f9e961746d79ac599ff8af5",
+      "evaluation/search_v2_iteration2_holdout_truth.json": "40eb063659289d2b84bae2dae66513278ebfbd5740b46ccd566fbef010bbac48",
+      "evaluation/search_v2_iteration2_holdout_results.json": "5e6dee415139dc0c81879ead161fa931211bc583176c0c537df437282d90a15a",
+      "evaluation/search_v2_phase4b_test_runs.json": "4079bcd6c2d39efae206c4522f3d91bed2c225b2ec07ac9b8cce893228f41694",
+      "docs/SEARCH_QUALITY_RECOVERY.md": "71970eeb5290e98d43483a7e093fd23fffa64a5a674dec3d16e31b0b38b12d50"
+    },
+    "preservation_check": "all hashes unchanged at final pre-commit verification"
+  },
+  "anchor_fate": {
+    "artifact": "evaluation/search_v2_iteration3_anchor_fates.json",
+    "sha256": "32bdd8509d354b17606c10fe94c412d1decdc42884c29759b32f73dd10d8225f",
+    "missed_anchor_count": 19,
+    "primary_failure_class_counts": {
+      "QUERY_INTERPRETATION_FAILURE": 15,
+      "SCOPE_REPRESENTATION_FAILURE": 2,
+      "VERIFICATION_FAILURE": 2
+    },
+    "secondary_discovery_failure_count": 1,
+    "parents_discovered": 18,
+    "parents_not_discovered": 1,
+    "required_children_discovered": 6,
+    "required_children_total": 6,
+    "ranking_owned_misses": 0,
+    "source_coverage_owned_misses": 0
+  },
+  "architecture_prototyped": {
+    "query_representation": "canonical concise scientific intent with bounded target, method, property, application/context, population, and program-form roles",
+    "source_representation": "deterministic role signatures extracted from authoritative parent title/description, accepted notice facts, controlled program areas, and publication-eligible child title/summary",
+    "verification": "complete-intent verification over explicit evidence, bounded source relationships, and provenance-backed scope; generic metadata and citation text remain ineligible",
+    "rollup": "parent/child evidence may aggregate only with a non-generic scientific bridge; cross-topic umbrella-child combinations fail closed",
+    "classification": "candidate discovery remains separate from primary, broader, and reject states",
+    "ranking": "existing evidence tiers retained; global field weights unchanged",
+    "currentness": "search-v2-only fail-closed guard rejects stale undated posted notices older than five years",
+    "explanations": "Phase-3 causal contract retained; only verified source evidence is explainable",
+    "production_dependencies_added": []
+  },
+  "architecture_alternatives_rejected_or_deferred": {
+    "broad_or_lexical_admission": "rejected because it recreates partial-intent false positives",
+    "more_program_specific_mappings": "stopped because leave-program/family-out results show memorization rather than generalization",
+    "global_bm25_retune": "not run because the fate trace found zero ranking-owned misses",
+    "query_time_ai_or_paid_api": "rejected by product constraints",
+    "ppmi_as_production_semantics": "rejected previously; its result is not generalized to modern semantic methods",
+    "modern_semantic_candidate_benchmark": "not triggered because 18/19 parents and all required children were already discovered",
+    "recommended_architecture_decision": "Evaluate a build-time, versioned, provenance-backed source-scope signature generator or source-ingestion enrichment that exposes scientific roles and bounded paraphrases without program-specific query rules. Generated text may aid discovery/interpretation but must not be shown as agency language or independently verify primary relevance."
+  },
+  "spent_challenge_after": {
+    "artifact": "evaluation/search_v2_iteration3_results.json",
+    "sha256": "c9e2219377e5b33770e4d9851c37c703be76e0e954c7b2a6a355c9e7fc56566b",
+    "query_count": 52,
+    "required_anchor_count": 65,
+    "query_average_primary_precision_at_10": 1.0,
+    "positive_query_required_primary_recall_at_10": 1.0,
+    "positive_query_required_primary_recall_at_50": 1.0,
+    "required_anchor_micro_recall_at_50": 1.0,
+    "query_average_ndcg_at_10": 0.903365,
+    "visible_primary_count": 77,
+    "broader_fit_count": 3,
+    "irrelevant_visible_primary_count": 0,
+    "broader_as_visible_primary_count": 0,
+    "maximum_visible_primary_count": 4,
+    "maximum_internal_candidate_count": 1386,
+    "all_19_phase4b_missed_anchors_recovered": true
+  },
+  "spent_challenge_before": {
+    "phase4": {
+      "primary_precision_at_10": 0.373,
+      "required_primary_recall_at_10": 0.633,
+      "required_primary_recall_at_50": 0.65,
+      "ndcg_at_10": 0.586,
+      "irrelevant_top_ten_primary_admissions": 43
+    },
+    "phase4b": {
+      "primary_precision_at_10": 0.410714,
+      "required_primary_recall_at_10": 0.3,
+      "required_primary_recall_at_50": 0.3,
+      "ndcg_at_10": 0.392857,
+      "irrelevant_visible_primary_count": 3,
+      "broader_as_visible_primary_count": 1
+    }
+  },
+  "leave_out_gate": {
+    "artifact": "evaluation/search_v2_iteration3_leaveout.json",
+    "sha256": "7159cb86c58924ce2d98b0ae21b53e8cd6fd055e735c885deb12c35a7fc07d4d",
+    "status": "failed",
+    "full_required_recall_at_50": 1.0,
+    "all_program_contracts_withheld_recall_at_50": 0.692308,
+    "all_relationships_withheld_recall_at_50": 0.969231,
+    "pure_source_representation_recall_at_50": 0.338462,
+    "held_out_family_recall_at_50": {
+      "material": 0.068966,
+      "agriculture": 0.0,
+      "energy": 0.0,
+      "ai": 0.2
+    },
+    "held_out_program_recall_at_50": {
+      "genesis": 1.0,
+      "afri": 1.0,
+      "scaleup": 0.0,
+      "bes": 0.666667
+    },
+    "blocking_reason": "The fixed challenge sets are perfect, but deliberately untuned relationship families and SCALEUP program scope collapse. This does not support unseen-query generalization and triggers the stop condition against continuing program-specific mappings."
+  },
+  "regression_and_explanation": {
+    "test_runs": "evaluation/search_v2_iteration3_test_runs.json",
+    "test_runs_sha256": "6ce3940e97041823d41eb76e873130b3a0093172722d02dd92b8c8f9e75893de",
+    "movement_review": "evaluation/search_v2_iteration3_movement_review.json",
+    "movement_review_sha256": "5245fa6275475f2a409e7081c38c6e5dadc572595139f7d4dd7fbb78644223b9",
+    "development_49": "passed",
+    "meas5_48_11_disciplines": "passed with reviewed movements",
+    "historical_37": "passed with zero top-10 churn",
+    "browser": "141 passed",
+    "focused_python": "67 passed",
+    "live_product_python": "756 passed",
+    "no_drift": "22 artifacts unchanged",
+    "explanation_cases": 42,
+    "explanation_correct_and_useful": 41,
+    "explanation_reviewed_shallow": 1,
+    "explanation_unsupported": 0,
+    "explanation_privacy_or_review_leakage": 0
+  },
+  "performance_and_size": {
+    "development_warm_ms": {"p50": 29.6222, "p95": 88.4207},
+    "spent_challenge_ms": {"p50": 77.0343, "p95": 161.2536, "maximum": 327.1982},
+    "iteration2_warm_reference_ms": {"p50": 11.33, "p95": 31.39},
+    "assets_bytes": {
+      "app.js": {"current": 192831, "delta": 0},
+      "search-query.js": {"current": 70043, "delta": 10697},
+      "search-retrieval.js": {"current": 96121, "delta": 31113},
+      "match-explain.js": {"current": 21734, "delta": 3917},
+      "search-v2-config.js": {"current": 55667, "delta": 14591}
+    },
+    "tracked_search_v2_asset_delta_bytes": 60318,
+    "size_gates": "passed",
+    "assessment": "Performance remains inside the existing development gate, but latency and architecture size increased materially without passing untuned-family generalization; this reinforces the blocked decision."
+  },
+  "candidate_hashes": {
+    "config/search_v2.json": "ed05b6e6703270723c2b0f3d8cb5da367db4ba3a04cab5ec49e851ddb67decf2",
+    "assets/search-query.js": "43ddabcf52c78008f1862fb3a62ab5913f1a5de29b4bf5657f6196adfb3b5376",
+    "assets/search-retrieval.js": "a1794f1e6522a3cf0b94d0f072e5340600566b99c03ff59f4a3e25de78aef5d4",
+    "assets/match-explain.js": "aea28abdf3c67bfe76016faebed5fe1133d5377fd441ba512450e53569483e80",
+    "assets/app.js": "63891c3fc338ab62f5d17858fd366fee842e1e2279c8bcbac52bde6ba8301aee",
+    "data/opportunities.js": "f6168e043fc6e4466edb49dd4fa0f957d09509f9591ee952bda035b423d27f1f",
+    "data/subtopics.js": "e2f45ecdfab26770f2346eaa4a488bb57fcaa3cc17c5d90ed25e30d14727f40d"
+  },
+  "final_gate_table": {
+    "both_spent_holdouts_preserved": "passed",
+    "phase4c_holdout_sealed_unexecuted": "passed",
+    "all_19_anchor_fates_traced": "passed",
+    "all_spent_required_anchors_accounted_for": "passed",
+    "spent_precision_recall": "passed",
+    "complete_intent_and_broader_separation": "passed on spent and fixed development frames",
+    "leave_family_program_out_generalization": "failed",
+    "explanations": "passed",
+    "regressions": "passed",
+    "performance_size": "passed existing limits but materially regressed",
+    "main_unchanged_and_flag_off": "passed"
+  },
+  "next_decision": "Do not authorize Phase 4C. Choose whether to add a build-time provenance-backed scope-signature generation/ingestion layer and rerun leave-family/program-out development gates. Do not add more query/program mappings merely to perfect spent evidence.",
+  "explicit_phase_status": {
+    "phase4c": "not_authorized",
+    "phase5": "not_authorized"
+  }
+}

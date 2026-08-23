@@ -1,0 +1,125 @@
+{
+  "schema_version": 2,
+  "frozen_at": "2026-08-22",
+  "relevance_corrected_at": "2026-08-22",
+  "starting_main_sha": "ef7a0642f6ce66828f01ee280bd5993f66029b2f",
+  "live_asset_reconciliation": "identical_to_local_main",
+  "holdout_status": "sealed_and_unopened",
+  "reported_failures": {
+    "REE": {
+      "candidate_count": 1,
+      "ids": [
+        "362900"
+      ]
+    },
+    "REEs": {
+      "candidate_count": 14,
+      "ids": [
+        "359996",
+        "363224",
+        "363241",
+        "360003",
+        "363240",
+        "363325",
+        "363258",
+        "361234",
+        "360004",
+        "362900",
+        "360007",
+        "362847",
+        "360881",
+        "344592"
+      ]
+    },
+    "REE_separations": {
+      "candidate_count": 0,
+      "ids": []
+    }
+  },
+  "root_causes": [
+    {
+      "id": "RC-1",
+      "status": "confirmed",
+      "mechanism": "The tokenizer leaves the four-character plural REEs as rees. The protected rare-earth branch recognizes ree and lanthanide but not rees, so the generic alias expansion runs without rare-earth evidence guards.",
+      "evidence_query": "REEs",
+      "effect": "NASA Earth/element, rare-disease, rare-cancer, and unrelated child-token results are admitted."
+    },
+    {
+      "id": "RC-2",
+      "status": "confirmed",
+      "mechanism": "Rare-earth evidence alternatives test token co-occurrence, not phrase adjacency/proximity. The YSEALI policy workshop therefore satisfies rare + earth even though it is not technical R&D.",
+      "evidence_query": "REE",
+      "effect": "A policy/workshop notice is the sole result for REE, ree, rare earth, rare earth elements, and lanthanide extraction."
+    },
+    {
+      "id": "RC-3",
+      "status": "confirmed",
+      "mechanism": "requiredUnlessTopic allows the Separations and membranes topic to substitute for the required rare-earth target concept.",
+      "evidence_query": "ionic liquids for REE extraction",
+      "effect": "Five method-only or unrelated programs are admitted without rare-earth evidence."
+    },
+    {
+      "id": "RC-4",
+      "status": "confirmed",
+      "mechanism": "Hyphenated and dotted scientific forms are not normalized into the protected phrase/acronym representation.",
+      "evidence_query": "R.E.E. / rare-earth elements",
+      "effect": "Both punctuation variants return zero results."
+    },
+    {
+      "id": "RC-5",
+      "status": "confirmed",
+      "mechanism": "Retrieval has no controlled authoritative-scope entailment path. It therefore treats missing literal rare-earth wording as missing relevance even when published program scope contains the complete scientific intent.",
+      "evidence_query": "REE separations",
+      "effect": "DOE BES Separation Science, Genesis Critical Minerals extraction/processing/recovery, and NSF Chemical Process Systems are omitted despite being primary relevant under the corrected bounded rubric."
+    },
+    {
+      "id": "RC-6",
+      "status": "confirmed",
+      "mechanism": "The parent index collapses all weighted fields into one posting frequency and the child index stores collapsed source terms. The explanation layer receives terms and aggregate contributions but not causal fields.",
+      "evidence_query": "catalysis",
+      "effect": "Rendered reasons fall back to tautologies such as Search terms matched: catalysis."
+    }
+  ],
+  "rejected_hypotheses": [
+    "stale live search assets",
+    "live/local catalog mismatch",
+    "parent-only search caused by a sidecar race",
+    "profile, eligibility, freshness, filters, or sort as the reported public-search cause",
+    "title boost as the primary REE admission mechanism"
+  ],
+  "field_ablation_summary": {
+    "production_admissions": 674,
+    "no_title_bonus_admissions": 673,
+    "title_removed_admissions": 654,
+    "interpretation": "Title influence changes cross-domain ranking and some admissions, but disabling title bonuses does not repair the REE acronym/phrase failures. The motivating defect is protected-concept admission; field provenance remains a systemic explanation limitation."
+  },
+  "source_coverage": {
+    "primary_ree_fit_count": 3,
+    "explicit_evidence_fit_count": 0,
+    "authoritative_scope_fit_count": 3,
+    "required_primary_ids": [
+      "360678",
+      "361526",
+      "362061"
+    ],
+    "stop_condition": "Phase 2 must retrieve the three adjudicated primary programs through bounded scope entailment while continuing to exclude lexical noise and unbounded generic-metadata inference."
+  },
+  "recommended_repair_track": "B",
+  "scope_authorization": "A bounded protected-concept correction with explicit-evidence and authoritative-scope-entailment admission paths is sufficient for retrieval. Add causal field/hierarchy provenance for explanations without replacing the full BM25 index architecture.",
+  "work_eliminated": [
+    "No embedding or query-time model layer.",
+    "No wholesale BM25F rewrite in Phase 2.",
+    "No intuitive global title/description reweighting.",
+    "No source-ingestion rebuild solely to fabricate literal REE wording.",
+    "No artificial search delay."
+  ],
+  "relevance_policy_status": "corrected_pre_phase_2",
+  "relevance_correction": "evaluation/search_v2_relevance_correction.json",
+  "primary_admission_paths": [
+    "explicit_evidence",
+    "authoritative_scope_entailment"
+  ],
+  "broader_program_policy": "Reserve Broader program fit for genuinely adjacent programs whose published scientific scope does not establish primary entailment.",
+  "frame_sha256": "00866f788152088c5a1fedbfc5bff8d08915d131ac949b6a354a167f96e72689",
+  "truth_sha256": "cd831885e64198a22bc9fe61b54405e0d6bfb248ece390f7990470d8072eeac5"
+}

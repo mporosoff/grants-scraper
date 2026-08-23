@@ -1,0 +1,2358 @@
+{
+  "schema_version": 1,
+  "iteration": "2R-iteration-2",
+  "generated_at": "2026-08-23T01:14:04.159Z",
+  "status": "development_challenge_executed",
+  "frame": "evaluation/search_v2_holdout_frame.json",
+  "base_truth": "evaluation/search_v2_holdout_truth.json",
+  "truth_delta": "evaluation/search_v2_iteration2_challenge_truth_delta.json",
+  "sealed_iteration2_holdout_read_or_executed": false,
+  "before_metrics_from_immutable_phase4": {
+    "primary_precision_at_10": 0.373,
+    "required_primary_recall_at_10": 0.633,
+    "required_primary_recall_at_50": 0.65,
+    "direct_positive_ndcg_at_10": 0.586,
+    "maximum_visible_primary_count": 213,
+    "confirmed_irrelevant_top_ten_admissions": 43
+  },
+  "after_metrics": {
+    "query_count": 24,
+    "primary_precision_at_10": 1,
+    "required_primary_recall_at_10": 1,
+    "required_primary_recall_at_50": 1,
+    "ndcg_at_10": 0.882691,
+    "direct_positive_ndcg_at_10": 0.91534,
+    "visible_primary_count": 39,
+    "internal_candidate_discovery_count": 11675,
+    "broader_fit_count": 1,
+    "rejected_partial_intent_count": 11635,
+    "admission_counts": {
+      "direct": 5,
+      "child": 0,
+      "authoritative_scope": 34
+    },
+    "maximum_visible_primary_count": 4,
+    "maximum_internal_candidate_count": 1128,
+    "query_time_ms": {
+      "p50": 32.5781,
+      "p95": 183.9217
+    }
+  },
+  "metrics_by_query_class": {
+    "AI/computing": {
+      "query_count": 2,
+      "primary_precision_at_10": 1,
+      "required_primary_recall_at_10": 1,
+      "required_primary_recall_at_50": 1,
+      "ndcg_at_10": 0.976036,
+      "direct_positive_ndcg_at_10": 0.952073,
+      "visible_primary_count": 5,
+      "internal_candidate_discovery_count": 1566,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 1561,
+      "admission_counts": {
+        "direct": 2,
+        "child": 0,
+        "authoritative_scope": 3
+      },
+      "maximum_visible_primary_count": 4,
+      "maximum_internal_candidate_count": 945,
+      "query_time_ms": {
+        "p50": 17.1531,
+        "p95": 46.0612
+      }
+    },
+    "REE/material hierarchy": {
+      "query_count": 7,
+      "primary_precision_at_10": 1,
+      "required_primary_recall_at_10": 1,
+      "required_primary_recall_at_50": 1,
+      "ndcg_at_10": 0.986755,
+      "direct_positive_ndcg_at_10": 0,
+      "visible_primary_count": 20,
+      "internal_candidate_discovery_count": 2747,
+      "broader_fit_count": 1,
+      "rejected_partial_intent_count": 2726,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 20
+      },
+      "maximum_visible_primary_count": 3,
+      "maximum_internal_candidate_count": 598,
+      "query_time_ms": {
+        "p50": 27.4418,
+        "p95": 183.9217
+      }
+    },
+    "agriculture": {
+      "query_count": 1,
+      "primary_precision_at_10": 1,
+      "required_primary_recall_at_10": 1,
+      "required_primary_recall_at_50": 1,
+      "ndcg_at_10": 1,
+      "direct_positive_ndcg_at_10": 1,
+      "visible_primary_count": 1,
+      "internal_candidate_discovery_count": 2,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 1,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 1
+      },
+      "maximum_visible_primary_count": 1,
+      "maximum_internal_candidate_count": 2,
+      "query_time_ms": {
+        "p50": 42.7798,
+        "p95": 42.7798
+      }
+    },
+    "biomedical": {
+      "query_count": 1,
+      "primary_precision_at_10": 1,
+      "required_primary_recall_at_10": 1,
+      "required_primary_recall_at_50": 1,
+      "ndcg_at_10": 0.826235,
+      "direct_positive_ndcg_at_10": 0.826235,
+      "visible_primary_count": 1,
+      "internal_candidate_discovery_count": 332,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 331,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 1
+      },
+      "maximum_visible_primary_count": 1,
+      "maximum_internal_candidate_count": 332,
+      "query_time_ms": {
+        "p50": 36.7341,
+        "p95": 36.7341
+      }
+    },
+    "chemistry_materials": {
+      "query_count": 1,
+      "primary_precision_at_10": 1,
+      "required_primary_recall_at_10": 1,
+      "required_primary_recall_at_50": 1,
+      "ndcg_at_10": 1,
+      "direct_positive_ndcg_at_10": 1,
+      "visible_primary_count": 1,
+      "internal_candidate_discovery_count": 150,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 149,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 1
+      },
+      "maximum_visible_primary_count": 1,
+      "maximum_internal_candidate_count": 150,
+      "query_time_ms": {
+        "p50": 32.5781,
+        "p95": 32.5781
+      }
+    },
+    "defense": {
+      "query_count": 1,
+      "primary_precision_at_10": 1,
+      "required_primary_recall_at_10": 1,
+      "required_primary_recall_at_50": 1,
+      "ndcg_at_10": 1,
+      "direct_positive_ndcg_at_10": 1,
+      "visible_primary_count": 1,
+      "internal_candidate_discovery_count": 59,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 58,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 1
+      },
+      "maximum_visible_primary_count": 1,
+      "maximum_internal_candidate_count": 59,
+      "query_time_ms": {
+        "p50": 14.0314,
+        "p95": 14.0314
+      }
+    },
+    "education": {
+      "query_count": 1,
+      "primary_precision_at_10": 1,
+      "required_primary_recall_at_10": 1,
+      "required_primary_recall_at_50": 1,
+      "ndcg_at_10": 0.907284,
+      "direct_positive_ndcg_at_10": 0,
+      "visible_primary_count": 2,
+      "internal_candidate_discovery_count": 989,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 987,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 2
+      },
+      "maximum_visible_primary_count": 2,
+      "maximum_internal_candidate_count": 989,
+      "query_time_ms": {
+        "p50": 211.7644,
+        "p95": 211.7644
+      }
+    },
+    "energy": {
+      "query_count": 2,
+      "primary_precision_at_10": 1,
+      "required_primary_recall_at_10": 1,
+      "required_primary_recall_at_50": 1,
+      "ndcg_at_10": 0.783207,
+      "direct_positive_ndcg_at_10": 0.726229,
+      "visible_primary_count": 3,
+      "internal_candidate_discovery_count": 1582,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 1579,
+      "admission_counts": {
+        "direct": 2,
+        "child": 0,
+        "authoritative_scope": 1
+      },
+      "maximum_visible_primary_count": 2,
+      "maximum_internal_candidate_count": 901,
+      "query_time_ms": {
+        "p50": 26.6802,
+        "p95": 38.1634
+      }
+    },
+    "environment": {
+      "query_count": 2,
+      "primary_precision_at_10": 1,
+      "required_primary_recall_at_10": 1,
+      "required_primary_recall_at_50": 1,
+      "ndcg_at_10": 0.816756,
+      "direct_positive_ndcg_at_10": 0.907284,
+      "visible_primary_count": 3,
+      "internal_candidate_discovery_count": 647,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 644,
+      "admission_counts": {
+        "direct": 1,
+        "child": 0,
+        "authoritative_scope": 2
+      },
+      "maximum_visible_primary_count": 2,
+      "maximum_internal_candidate_count": 645,
+      "query_time_ms": {
+        "p50": 16.9947,
+        "p95": 23.9433
+      }
+    },
+    "hard negatives": {
+      "query_count": 4,
+      "primary_precision_at_10": 1,
+      "required_primary_recall_at_10": 0,
+      "required_primary_recall_at_50": 0,
+      "ndcg_at_10": 0.75,
+      "direct_positive_ndcg_at_10": 1,
+      "visible_primary_count": 0,
+      "internal_candidate_discovery_count": 2845,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 2845,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 0
+      },
+      "maximum_visible_primary_count": 0,
+      "maximum_internal_candidate_count": 1128,
+      "query_time_ms": {
+        "p50": 29.4846,
+        "p95": 124.2868
+      }
+    },
+    "health": {
+      "query_count": 1,
+      "primary_precision_at_10": 1,
+      "required_primary_recall_at_10": 1,
+      "required_primary_recall_at_50": 1,
+      "ndcg_at_10": 0.826235,
+      "direct_positive_ndcg_at_10": 0.826235,
+      "visible_primary_count": 1,
+      "internal_candidate_discovery_count": 291,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 290,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 1
+      },
+      "maximum_visible_primary_count": 1,
+      "maximum_internal_candidate_count": 291,
+      "query_time_ms": {
+        "p50": 113.7377,
+        "p95": 113.7377
+      }
+    },
+    "space": {
+      "query_count": 1,
+      "primary_precision_at_10": 1,
+      "required_primary_recall_at_10": 1,
+      "required_primary_recall_at_50": 1,
+      "ndcg_at_10": 0.56554,
+      "direct_positive_ndcg_at_10": 0,
+      "visible_primary_count": 1,
+      "internal_candidate_discovery_count": 465,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 464,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 1
+      },
+      "maximum_visible_primary_count": 1,
+      "maximum_internal_candidate_count": 465,
+      "query_time_ms": {
+        "p50": 57.814,
+        "p95": 57.814
+      }
+    }
+  },
+  "gates": {
+    "all_required_ree_anchors_at_10": true,
+    "hard_negatives_zero_primary": true,
+    "rural_moms_recovered": true,
+    "afri_recovered": true,
+    "scaleup_not_buried": true,
+    "genesis_useful_window": true,
+    "no_visible_primary_explosion": true,
+    "no_confirmed_irrelevant_top_ten": true
+  },
+  "movement_from_failed_phase4": [
+    {
+      "id": "hold_ree_01",
+      "before_visible_primary_count": 0,
+      "after_visible_primary_count": 3,
+      "added_to_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "removed_from_top_10": []
+    },
+    {
+      "id": "hold_ree_02",
+      "before_visible_primary_count": 3,
+      "after_visible_primary_count": 3,
+      "added_to_top_10": [],
+      "removed_from_top_10": []
+    },
+    {
+      "id": "hold_ree_03",
+      "before_visible_primary_count": 0,
+      "after_visible_primary_count": 3,
+      "added_to_top_10": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "removed_from_top_10": []
+    },
+    {
+      "id": "hold_ree_04",
+      "before_visible_primary_count": 0,
+      "after_visible_primary_count": 3,
+      "added_to_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "removed_from_top_10": []
+    },
+    {
+      "id": "hold_ree_05",
+      "before_visible_primary_count": 0,
+      "after_visible_primary_count": 3,
+      "added_to_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "removed_from_top_10": []
+    },
+    {
+      "id": "hold_ree_06",
+      "before_visible_primary_count": 0,
+      "after_visible_primary_count": 3,
+      "added_to_top_10": [
+        "362061",
+        "360678",
+        "361526"
+      ],
+      "removed_from_top_10": []
+    },
+    {
+      "id": "hold_ree_07",
+      "before_visible_primary_count": 0,
+      "after_visible_primary_count": 0,
+      "added_to_top_10": [],
+      "removed_from_top_10": []
+    },
+    {
+      "id": "hold_ree_08",
+      "before_visible_primary_count": 5,
+      "after_visible_primary_count": 2,
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "359279",
+        "360007",
+        "344592"
+      ]
+    },
+    {
+      "id": "hold_chem_01",
+      "before_visible_primary_count": 1,
+      "after_visible_primary_count": 1,
+      "added_to_top_10": [],
+      "removed_from_top_10": []
+    },
+    {
+      "id": "hold_chem_02",
+      "before_visible_primary_count": 3,
+      "after_visible_primary_count": 2,
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "359966"
+      ]
+    },
+    {
+      "id": "hold_energy_01",
+      "before_visible_primary_count": 10,
+      "after_visible_primary_count": 1,
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "352741",
+        "363631",
+        "360205",
+        "358023",
+        "363215",
+        "356982",
+        "363632",
+        "356811",
+        "344592"
+      ]
+    },
+    {
+      "id": "hold_energy_02",
+      "before_visible_primary_count": 5,
+      "after_visible_primary_count": 2,
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "363215",
+        "363316",
+        "363355"
+      ]
+    },
+    {
+      "id": "hold_bio_01",
+      "before_visible_primary_count": 2,
+      "after_visible_primary_count": 1,
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "361606"
+      ]
+    },
+    {
+      "id": "hold_bio_02",
+      "before_visible_primary_count": 0,
+      "after_visible_primary_count": 0,
+      "added_to_top_10": [],
+      "removed_from_top_10": []
+    },
+    {
+      "id": "hold_health_01",
+      "before_visible_primary_count": 1,
+      "after_visible_primary_count": 1,
+      "added_to_top_10": [
+        "363582"
+      ],
+      "removed_from_top_10": [
+        "363217"
+      ]
+    },
+    {
+      "id": "hold_health_02",
+      "before_visible_primary_count": 213,
+      "after_visible_primary_count": 0,
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "328573",
+        "308873",
+        "358569",
+        "360205",
+        "361169",
+        "254073",
+        "363441",
+        "363468",
+        "363290",
+        "363291"
+      ]
+    },
+    {
+      "id": "hold_ag_01",
+      "before_visible_primary_count": 0,
+      "after_visible_primary_count": 1,
+      "added_to_top_10": [
+        "360205"
+      ],
+      "removed_from_top_10": []
+    },
+    {
+      "id": "hold_space_01",
+      "before_visible_primary_count": 9,
+      "after_visible_primary_count": 0,
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "362647",
+        "361399",
+        "361447",
+        "362063",
+        "275109",
+        "356717",
+        "360946",
+        "356718",
+        "352741"
+      ]
+    },
+    {
+      "id": "hold_space_02",
+      "before_visible_primary_count": 16,
+      "after_visible_primary_count": 1,
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "359996",
+        "363224",
+        "363241",
+        "360003",
+        "363240",
+        "363325",
+        "360004",
+        "363258",
+        "361234"
+      ]
+    },
+    {
+      "id": "hold_defense_01",
+      "before_visible_primary_count": 1,
+      "after_visible_primary_count": 1,
+      "added_to_top_10": [],
+      "removed_from_top_10": []
+    },
+    {
+      "id": "hold_ai_01",
+      "before_visible_primary_count": 59,
+      "after_visible_primary_count": 4,
+      "added_to_top_10": [
+        "361526",
+        "353936"
+      ],
+      "removed_from_top_10": [
+        "362061",
+        "nsf-cbet:PD-26-370Y",
+        "359103",
+        "324456",
+        "362900",
+        "362063",
+        "362062",
+        "363633"
+      ]
+    },
+    {
+      "id": "hold_ai_02",
+      "before_visible_primary_count": 1,
+      "after_visible_primary_count": 1,
+      "added_to_top_10": [],
+      "removed_from_top_10": []
+    },
+    {
+      "id": "hold_env_01",
+      "before_visible_primary_count": 6,
+      "after_visible_primary_count": 2,
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "363065",
+        "360223",
+        "362910",
+        "362909"
+      ]
+    },
+    {
+      "id": "hold_env_02",
+      "before_visible_primary_count": 4,
+      "after_visible_primary_count": 1,
+      "added_to_top_10": [],
+      "removed_from_top_10": [
+        "103313",
+        "356669",
+        "355706"
+      ]
+    }
+  ],
+  "results": [
+    {
+      "id": "hold_ree_01",
+      "query": "rare earth recycling",
+      "stratum": "acronym_phrase",
+      "discipline": "chemistry_materials",
+      "query_class": "REE/material hierarchy",
+      "latency_ms": 183.9217,
+      "visible_primary_count": 3,
+      "internal_candidate_count": 598,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 595,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 3
+      },
+      "required_primary_ids": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "required_primary_ranks": {
+        "360678": 2,
+        "361526": 3,
+        "362061": 1
+      },
+      "metrics_at_10": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 1,
+        "retrieved_required_primary_ids": [
+          "360678",
+          "361526",
+          "362061"
+        ]
+      },
+      "metrics_at_50": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 1,
+        "retrieved_required_primary_ids": [
+          "360678",
+          "361526",
+          "362061"
+        ]
+      },
+      "query_plan": [
+        {
+          "concept_id": "rare-earth-elements",
+          "role": "target",
+          "evidence_policy": "protected_rare_earth"
+        },
+        {
+          "concept_id": "separations",
+          "role": "method",
+          "evidence_policy": "technical_separation"
+        }
+      ],
+      "top_10": [
+        {
+          "rank": 1,
+          "id": "362061",
+          "title": "Chemical Process Systems (CPS)",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "CPS publishes chemical-process and critical-mineral recovery scope that contains rare-earth recycling."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        },
+        {
+          "rank": 2,
+          "id": "360678",
+          "title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "BES Separation Science contains recovery and separation research used to reclaim rare-earth materials."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        },
+        {
+          "rank": 3,
+          "id": "361526",
+          "title": "The Genesis Mission: Transforming Science and Energy with AI",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "Genesis publishes critical-mineral extraction, processing, and recovery scope that contains rare-earth recycling."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        }
+      ]
+    },
+    {
+      "id": "hold_ree_02",
+      "query": "rare earth solvent extraction",
+      "stratum": "acronym_phrase",
+      "discipline": "chemistry_materials",
+      "query_class": "REE/material hierarchy",
+      "latency_ms": 20.5713,
+      "visible_primary_count": 3,
+      "internal_candidate_count": 3,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 0,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 3
+      },
+      "required_primary_ids": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "required_primary_ranks": {
+        "360678": 1,
+        "361526": 2,
+        "362061": 3
+      },
+      "metrics_at_10": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 1,
+        "retrieved_required_primary_ids": [
+          "360678",
+          "361526",
+          "362061"
+        ]
+      },
+      "metrics_at_50": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 1,
+        "retrieved_required_primary_ids": [
+          "360678",
+          "361526",
+          "362061"
+        ]
+      },
+      "query_plan": [
+        {
+          "concept_id": "rare-earth-elements",
+          "role": "target",
+          "evidence_policy": "protected_rare_earth"
+        },
+        {
+          "concept_id": "separations",
+          "role": "method",
+          "evidence_policy": "technical_separation"
+        }
+      ],
+      "top_10": [
+        {
+          "rank": 1,
+          "id": "360678",
+          "title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "Solvent extraction of rare earths lies within the published BES Separation Science scope."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        },
+        {
+          "rank": 2,
+          "id": "361526",
+          "title": "The Genesis Mission: Transforming Science and Energy with AI",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "The Genesis critical-minerals extraction and processing scope contains rare-earth solvent extraction."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        },
+        {
+          "rank": 3,
+          "id": "362061",
+          "title": "Chemical Process Systems (CPS)",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "CPS chemical-separations and critical-minerals scope contains rare-earth solvent extraction."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        }
+      ]
+    },
+    {
+      "id": "hold_ree_03",
+      "query": "lanthanide ion exchange",
+      "stratum": "acronym_phrase",
+      "discipline": "chemistry_materials",
+      "query_class": "REE/material hierarchy",
+      "latency_ms": 14.5706,
+      "visible_primary_count": 3,
+      "internal_candidate_count": 3,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 0,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 3
+      },
+      "required_primary_ids": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "required_primary_ranks": {
+        "360678": 1,
+        "361526": 2,
+        "362061": 3
+      },
+      "metrics_at_10": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 1,
+        "retrieved_required_primary_ids": [
+          "360678",
+          "361526",
+          "362061"
+        ]
+      },
+      "metrics_at_50": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 1,
+        "retrieved_required_primary_ids": [
+          "360678",
+          "361526",
+          "362061"
+        ]
+      },
+      "query_plan": [
+        {
+          "concept_id": "rare-earth-elements",
+          "role": "target",
+          "evidence_policy": "protected_rare_earth"
+        },
+        {
+          "concept_id": "separations",
+          "role": "method",
+          "evidence_policy": "technical_separation"
+        }
+      ],
+      "top_10": [
+        {
+          "rank": 1,
+          "id": "360678",
+          "title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "Ion exchange is a separation method and lanthanides are within BES Separation Science."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        },
+        {
+          "rank": 2,
+          "id": "361526",
+          "title": "The Genesis Mission: Transforming Science and Energy with AI",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "Lanthanides are rare-earth critical minerals and ion-exchange processing lies within the Genesis extraction and processing scope."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        },
+        {
+          "rank": 3,
+          "id": "362061",
+          "title": "Chemical Process Systems (CPS)",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "Lanthanide ion exchange lies within CPS chemical-separations and critical-minerals scope."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        }
+      ]
+    },
+    {
+      "id": "hold_ree_04",
+      "query": "REE hydrometallurgy",
+      "stratum": "acronym_phrase",
+      "discipline": "chemistry_materials",
+      "query_class": "REE/material hierarchy",
+      "latency_ms": 33.8247,
+      "visible_primary_count": 3,
+      "internal_candidate_count": 598,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 595,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 3
+      },
+      "required_primary_ids": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "required_primary_ranks": {
+        "360678": 2,
+        "361526": 3,
+        "362061": 1
+      },
+      "metrics_at_10": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 1,
+        "retrieved_required_primary_ids": [
+          "360678",
+          "361526",
+          "362061"
+        ]
+      },
+      "metrics_at_50": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 1,
+        "retrieved_required_primary_ids": [
+          "360678",
+          "361526",
+          "362061"
+        ]
+      },
+      "query_plan": [
+        {
+          "concept_id": "rare-earth-elements",
+          "role": "target",
+          "evidence_policy": "protected_rare_earth"
+        },
+        {
+          "concept_id": "separations",
+          "role": "method",
+          "evidence_policy": "technical_separation"
+        }
+      ],
+      "top_10": [
+        {
+          "rank": 1,
+          "id": "362061",
+          "title": "Chemical Process Systems (CPS)",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "REE hydrometallurgy lies within CPS chemical-process and critical-minerals scope."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        },
+        {
+          "rank": 2,
+          "id": "360678",
+          "title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "Hydrometallurgical rare-earth extraction and separation lies within BES Separation Science."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        },
+        {
+          "rank": 3,
+          "id": "361526",
+          "title": "The Genesis Mission: Transforming Science and Energy with AI",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "REE hydrometallurgy lies within the published Genesis critical-mineral extraction and processing scope."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        }
+      ]
+    },
+    {
+      "id": "hold_ree_05",
+      "query": "yttrium separation",
+      "stratum": "acronym_phrase",
+      "discipline": "chemistry_materials",
+      "query_class": "REE/material hierarchy",
+      "latency_ms": 27.4418,
+      "visible_primary_count": 3,
+      "internal_candidate_count": 598,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 595,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 3
+      },
+      "required_primary_ids": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "required_primary_ranks": {
+        "360678": 2,
+        "361526": 3,
+        "362061": 1
+      },
+      "metrics_at_10": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 1,
+        "retrieved_required_primary_ids": [
+          "360678",
+          "361526",
+          "362061"
+        ]
+      },
+      "metrics_at_50": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 1,
+        "retrieved_required_primary_ids": [
+          "360678",
+          "361526",
+          "362061"
+        ]
+      },
+      "query_plan": [
+        {
+          "concept_id": "rare-earth-elements",
+          "role": "target",
+          "evidence_policy": "protected_rare_earth"
+        },
+        {
+          "concept_id": "separations",
+          "role": "method",
+          "evidence_policy": "technical_separation"
+        }
+      ],
+      "top_10": [
+        {
+          "rank": 1,
+          "id": "362061",
+          "title": "Chemical Process Systems (CPS)",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "Yttrium separation lies within CPS chemical-separations and critical-minerals scope."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        },
+        {
+          "rank": 2,
+          "id": "360678",
+          "title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "Yttrium separation lies within BES Separation Science."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        },
+        {
+          "rank": 3,
+          "id": "361526",
+          "title": "The Genesis Mission: Transforming Science and Energy with AI",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "Yttrium is a critical rare-earth material within Genesis extraction and processing scope."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        }
+      ]
+    },
+    {
+      "id": "hold_ree_06",
+      "query": "scandium recovery",
+      "stratum": "acronym_phrase",
+      "discipline": "chemistry_materials",
+      "query_class": "REE/material hierarchy",
+      "latency_ms": 33.0115,
+      "visible_primary_count": 3,
+      "internal_candidate_count": 598,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 595,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 3
+      },
+      "required_primary_ids": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "required_primary_ranks": {
+        "360678": 2,
+        "361526": 3,
+        "362061": 1
+      },
+      "metrics_at_10": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 1,
+        "retrieved_required_primary_ids": [
+          "360678",
+          "361526",
+          "362061"
+        ]
+      },
+      "metrics_at_50": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 1,
+        "retrieved_required_primary_ids": [
+          "360678",
+          "361526",
+          "362061"
+        ]
+      },
+      "query_plan": [
+        {
+          "concept_id": "rare-earth-elements",
+          "role": "target",
+          "evidence_policy": "protected_rare_earth"
+        },
+        {
+          "concept_id": "separations",
+          "role": "method",
+          "evidence_policy": "technical_separation"
+        }
+      ],
+      "top_10": [
+        {
+          "rank": 1,
+          "id": "362061",
+          "title": "Chemical Process Systems (CPS)",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "Scandium recovery lies within CPS critical-mineral chemical-process scope."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        },
+        {
+          "rank": 2,
+          "id": "360678",
+          "title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "Scandium recovery lies within BES Separation Science."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        },
+        {
+          "rank": 3,
+          "id": "361526",
+          "title": "The Genesis Mission: Transforming Science and Energy with AI",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "Scandium is a critical rare-earth material within the Genesis recovery scope."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        }
+      ]
+    },
+    {
+      "id": "hold_ree_07",
+      "query": "rare Earth observation elements",
+      "stratum": "hard_negative",
+      "discipline": "space",
+      "query_class": "hard negatives",
+      "latency_ms": 23.8849,
+      "visible_primary_count": 0,
+      "internal_candidate_count": 354,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 354,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 0
+      },
+      "required_primary_ids": [],
+      "required_primary_ranks": {},
+      "metrics_at_10": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 1,
+        "retrieved_required_primary_ids": []
+      },
+      "metrics_at_50": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 1,
+        "retrieved_required_primary_ids": []
+      },
+      "query_plan": [
+        {
+          "concept_id": "rare-earth-elements",
+          "role": "target",
+          "evidence_policy": "protected_rare_earth"
+        },
+        {
+          "concept_id": "literal:observation",
+          "role": "application_or_context"
+        }
+      ],
+      "top_10": []
+    },
+    {
+      "id": "hold_ree_08",
+      "query": "rare disease molecular elements",
+      "stratum": "hard_negative",
+      "discipline": "biomedical",
+      "query_class": "REE/material hierarchy",
+      "latency_ms": 26.1424,
+      "visible_primary_count": 2,
+      "internal_candidate_count": 349,
+      "broader_fit_count": 1,
+      "rejected_partial_intent_count": 346,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 2
+      },
+      "required_primary_ids": [
+        "359280",
+        "359644"
+      ],
+      "required_primary_ranks": {
+        "359280": 1,
+        "359644": 2
+      },
+      "metrics_at_10": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 0.907284,
+        "retrieved_required_primary_ids": [
+          "359280",
+          "359644"
+        ]
+      },
+      "metrics_at_50": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 0.907284,
+        "retrieved_required_primary_ids": [
+          "359280",
+          "359644"
+        ]
+      },
+      "query_plan": [
+        {
+          "concept_id": "rare-disease-molecular-genomics",
+          "role": "target",
+          "evidence_policy": "controlled_compound"
+        }
+      ],
+      "top_10": [
+        {
+          "rank": 1,
+          "id": "359280",
+          "title": "GREGoRi Technology Integration Center (U01, Clinical Trials Optional)",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "The GREGoRi technology center explicitly supports rare-disease molecular and genomic methods."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        },
+        {
+          "rank": 2,
+          "id": "359644",
+          "title": "GREGoRi Innovation Projects (U01 Clinical Trial Optional)",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "GREGoRi innovation projects explicitly support molecular investigation of rare genetic diseases."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        }
+      ]
+    },
+    {
+      "id": "hold_chem_01",
+      "query": "electrocatalytic ammonia synthesis",
+      "stratum": "direct_positive",
+      "discipline": "chemistry_materials",
+      "query_class": "chemistry_materials",
+      "latency_ms": 32.5781,
+      "visible_primary_count": 1,
+      "internal_candidate_count": 150,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 149,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 1
+      },
+      "required_primary_ids": [
+        "344592"
+      ],
+      "required_primary_ranks": {
+        "344592": 1
+      },
+      "metrics_at_10": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 1,
+        "retrieved_required_primary_ids": [
+          "344592"
+        ]
+      },
+      "metrics_at_50": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 1,
+        "retrieved_required_primary_ids": [
+          "344592"
+        ]
+      },
+      "query_plan": [
+        {
+          "concept_id": "electrocatalysis",
+          "role": "method",
+          "evidence_policy": ""
+        },
+        {
+          "concept_id": "ammonia-synthesis",
+          "role": "target",
+          "evidence_policy": "controlled_compound"
+        }
+      ],
+      "top_10": [
+        {
+          "rank": 1,
+          "id": "344592",
+          "title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "The publication-eligible Electrochemistry child supports electrocatalysis and synthesis chemistry, containing the proposed ammonia-synthesis research."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        }
+      ]
+    },
+    {
+      "id": "hold_chem_02",
+      "query": "innovation catalyst student success",
+      "stratum": "hard_negative",
+      "discipline": "education",
+      "query_class": "education",
+      "latency_ms": 211.7644,
+      "visible_primary_count": 2,
+      "internal_candidate_count": 989,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 987,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 2
+      },
+      "required_primary_ids": [
+        "357498",
+        "359104"
+      ],
+      "required_primary_ranks": {
+        "357498": 1,
+        "359104": 2
+      },
+      "metrics_at_10": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 0.907284,
+        "retrieved_required_primary_ids": [
+          "357498",
+          "359104"
+        ]
+      },
+      "metrics_at_50": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 0.907284,
+        "retrieved_required_primary_ids": [
+          "357498",
+          "359104"
+        ]
+      },
+      "query_plan": [
+        {
+          "concept_id": "education-innovation",
+          "role": "application_or_context",
+          "evidence_policy": ""
+        },
+        {
+          "concept_id": "student-success",
+          "role": "target",
+          "evidence_policy": "controlled_compound"
+        }
+      ],
+      "top_10": [
+        {
+          "rank": 1,
+          "id": "357498",
+          "title": "NSF Scholarships in Science, Technology, Engineering, and Mathematics Program",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "S-STEM explicitly funds interventions for student success that build participation in the innovation economy."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        },
+        {
+          "rank": 2,
+          "id": "359104",
+          "title": "Louis Stokes Alliances for Minority Participation",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "LSAMP explicitly funds innovative institutional strategies for STEM student development, retention, and success."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        }
+      ]
+    },
+    {
+      "id": "hold_energy_01",
+      "query": "long duration energy storage",
+      "stratum": "direct_positive",
+      "discipline": "energy",
+      "query_class": "energy",
+      "latency_ms": 38.1634,
+      "visible_primary_count": 1,
+      "internal_candidate_count": 681,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 680,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 1
+      },
+      "required_primary_ids": [
+        "356623"
+      ],
+      "required_primary_ranks": {
+        "356623": 1
+      },
+      "metrics_at_10": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 0.726229,
+        "retrieved_required_primary_ids": [
+          "356623"
+        ]
+      },
+      "metrics_at_50": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 0.726229,
+        "retrieved_required_primary_ids": [
+          "356623"
+        ]
+      },
+      "query_plan": [
+        {
+          "concept_id": "long-duration",
+          "role": "application_or_context",
+          "evidence_policy": "controlled_compound"
+        },
+        {
+          "concept_id": "energy-storage",
+          "role": "target",
+          "evidence_policy": "controlled_compound"
+        }
+      ],
+      "top_10": [
+        {
+          "rank": 1,
+          "id": "356623",
+          "title": "SEEDING CRITICAL ADVANCES FOR LEADING ENERGY TECHNOLOGIES WITH UNTAPPED POTENTIAL (SCALEUP) READY",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "SCALEUP publishes grid-scale and energy-storage technology scope that contains long-duration energy storage."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        }
+      ]
+    },
+    {
+      "id": "hold_energy_02",
+      "query": "mineral supply chain diplomacy",
+      "stratum": "method_only",
+      "discipline": "energy",
+      "query_class": "energy",
+      "latency_ms": 26.6802,
+      "visible_primary_count": 2,
+      "internal_candidate_count": 901,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 899,
+      "admission_counts": {
+        "direct": 2,
+        "child": 0,
+        "authoritative_scope": 0
+      },
+      "required_primary_ids": [
+        "363536",
+        "362900"
+      ],
+      "required_primary_ranks": {
+        "362900": 2,
+        "363536": 1
+      },
+      "metrics_at_10": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 0.840185,
+        "retrieved_required_primary_ids": [
+          "363536",
+          "362900"
+        ]
+      },
+      "metrics_at_50": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 0.840185,
+        "retrieved_required_primary_ids": [
+          "363536",
+          "362900"
+        ]
+      },
+      "query_plan": [
+        {
+          "concept_id": "literal:mineral",
+          "role": "application_or_context"
+        },
+        {
+          "concept_id": "literal:supply",
+          "role": "application_or_context"
+        },
+        {
+          "concept_id": "literal:chain",
+          "role": "application_or_context"
+        },
+        {
+          "concept_id": "literal:diplomacy",
+          "role": "application_or_context"
+        }
+      ],
+      "top_10": [
+        {
+          "rank": 1,
+          "id": "363536",
+          "title": "Safeguarding U.S. Critical Minerals Supply Chains- Tunisia",
+          "evidence_tier": 3,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "The Tunisia program explicitly uses commercial diplomacy to secure U.S. critical-minerals supply chains."
+          },
+          "admission_reason": "explicit_evidence"
+        },
+        {
+          "rank": 2,
+          "id": "362900",
+          "title": "The 2027 YSEALI Regional Workshop: Securing Supply Chains",
+          "evidence_tier": 3,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "The regional workshop explicitly addresses critical-minerals supply-chain policy and international cooperation."
+          },
+          "admission_reason": "explicit_evidence"
+        }
+      ]
+    },
+    {
+      "id": "hold_bio_01",
+      "query": "single cell cancer immunology",
+      "stratum": "direct_positive",
+      "discipline": "biomedical",
+      "query_class": "biomedical",
+      "latency_ms": 36.7341,
+      "visible_primary_count": 1,
+      "internal_candidate_count": 332,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 331,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 1
+      },
+      "required_primary_ids": [
+        "vpr-email:infoready-2028504"
+      ],
+      "required_primary_ranks": {
+        "vpr-email:infoready-2028504": 1
+      },
+      "metrics_at_10": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 0.826235,
+        "retrieved_required_primary_ids": [
+          "vpr-email:infoready-2028504"
+        ]
+      },
+      "metrics_at_50": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 0.826235,
+        "retrieved_required_primary_ids": [
+          "vpr-email:infoready-2028504"
+        ]
+      },
+      "query_plan": [
+        {
+          "concept_id": "single-cell-biology",
+          "role": "method",
+          "evidence_policy": "controlled_compound"
+        },
+        {
+          "concept_id": "cancer-immunology",
+          "role": "target",
+          "evidence_policy": "controlled_compound"
+        }
+      ],
+      "top_10": [
+        {
+          "rank": 1,
+          "id": "vpr-email:infoready-2028504",
+          "title": "Limited Submission Opportunity: $700,000 – The G. Harold and Leila Y. Mathers Foundation – Research Grant (Spring 2027 Cycle)",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "The Mathers Foundation authoritatively publishes basic-science scope spanning immunology, cellular physiology, cancer biology, genetics, and genomics, which contains single-cell cancer immunology."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        }
+      ]
+    },
+    {
+      "id": "hold_bio_02",
+      "query": "BioData Catalyst training",
+      "stratum": "hard_negative",
+      "discipline": "biomedical",
+      "query_class": "hard negatives",
+      "latency_ms": 65.4282,
+      "visible_primary_count": 0,
+      "internal_candidate_count": 671,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 671,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 0
+      },
+      "required_primary_ids": [],
+      "required_primary_ranks": {},
+      "metrics_at_10": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 1,
+        "retrieved_required_primary_ids": []
+      },
+      "metrics_at_50": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 1,
+        "retrieved_required_primary_ids": []
+      },
+      "query_plan": [
+        {
+          "concept_id": "literal:biodata",
+          "role": "application_or_context"
+        },
+        {
+          "concept_id": "catalysis",
+          "role": "method",
+          "evidence_policy": ""
+        },
+        {
+          "concept_id": "literal:train",
+          "role": "application_or_context"
+        }
+      ],
+      "top_10": []
+    },
+    {
+      "id": "hold_health_01",
+      "query": "maternal mortality rural communities",
+      "stratum": "direct_positive",
+      "discipline": "public_health",
+      "query_class": "health",
+      "latency_ms": 113.7377,
+      "visible_primary_count": 1,
+      "internal_candidate_count": 291,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 290,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 1
+      },
+      "required_primary_ids": [
+        "363582"
+      ],
+      "required_primary_ranks": {
+        "363582": 1
+      },
+      "metrics_at_10": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 0.826235,
+        "retrieved_required_primary_ids": [
+          "363582"
+        ]
+      },
+      "metrics_at_50": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 0.826235,
+        "retrieved_required_primary_ids": [
+          "363582"
+        ]
+      },
+      "query_plan": [
+        {
+          "concept_id": "maternal-health",
+          "role": "target",
+          "evidence_policy": "controlled_compound"
+        },
+        {
+          "concept_id": "rural-care-context",
+          "role": "application_or_context",
+          "evidence_policy": "controlled_compound"
+        }
+      ],
+      "top_10": [
+        {
+          "rank": 1,
+          "id": "363582",
+          "title": "Rural Maternity and Obstetrics Management Strategies Program",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "The Rural Maternity and Obstetrics Management Strategies program directly supports rural maternal-care systems and outcomes."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        }
+      ]
+    },
+    {
+      "id": "hold_health_02",
+      "query": "health data workforce workshop",
+      "stratum": "hard_negative",
+      "discipline": "public_health",
+      "query_class": "hard negatives",
+      "latency_ms": 124.2868,
+      "visible_primary_count": 0,
+      "internal_candidate_count": 1128,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 1128,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 0
+      },
+      "required_primary_ids": [],
+      "required_primary_ranks": {},
+      "metrics_at_10": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 0,
+        "retrieved_required_primary_ids": []
+      },
+      "metrics_at_50": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 0,
+        "retrieved_required_primary_ids": []
+      },
+      "query_plan": [
+        {
+          "concept_id": "literal:health",
+          "role": "application_or_context"
+        },
+        {
+          "concept_id": "literal:data",
+          "role": "application_or_context"
+        },
+        {
+          "concept_id": "literal:workforce",
+          "role": "application_or_context"
+        },
+        {
+          "concept_id": "literal:workshop",
+          "role": "application_or_context"
+        }
+      ],
+      "top_10": []
+    },
+    {
+      "id": "hold_ag_01",
+      "query": "drought tolerant crop genetics",
+      "stratum": "direct_positive",
+      "discipline": "agriculture",
+      "query_class": "agriculture",
+      "latency_ms": 42.7798,
+      "visible_primary_count": 1,
+      "internal_candidate_count": 2,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 1,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 1
+      },
+      "required_primary_ids": [
+        "360205"
+      ],
+      "required_primary_ranks": {
+        "360205": 1
+      },
+      "metrics_at_10": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 1,
+        "retrieved_required_primary_ids": [
+          "360205"
+        ]
+      },
+      "metrics_at_50": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 1,
+        "retrieved_required_primary_ids": [
+          "360205"
+        ]
+      },
+      "query_plan": [
+        {
+          "concept_id": "drought-resilience",
+          "role": "target",
+          "evidence_policy": "controlled_compound"
+        },
+        {
+          "concept_id": "crop-genetics",
+          "role": "method",
+          "evidence_policy": "controlled_compound"
+        }
+      ],
+      "top_10": [
+        {
+          "rank": 1,
+          "id": "360205",
+          "title": "Agriculture and Food Research Initiative Competitive Grants Program Foundational and Applied Science Program",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "AFRI's published plant-health, crop-production, and genetics scope contains breeding drought-tolerant crops."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        }
+      ]
+    },
+    {
+      "id": "hold_space_01",
+      "query": "microgravity radiation biology",
+      "stratum": "direct_positive",
+      "discipline": "space",
+      "query_class": "hard negatives",
+      "latency_ms": 29.4846,
+      "visible_primary_count": 0,
+      "internal_candidate_count": 692,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 692,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 0
+      },
+      "required_primary_ids": [],
+      "required_primary_ranks": {},
+      "metrics_at_10": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 1,
+        "retrieved_required_primary_ids": []
+      },
+      "metrics_at_50": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 1,
+        "retrieved_required_primary_ids": []
+      },
+      "query_plan": [
+        {
+          "concept_id": "literal:microgravity",
+          "role": "application_or_context"
+        },
+        {
+          "concept_id": "literal:radiation",
+          "role": "application_or_context"
+        },
+        {
+          "concept_id": "literal:biology",
+          "role": "application_or_context"
+        }
+      ],
+      "top_10": []
+    },
+    {
+      "id": "hold_space_02",
+      "query": "Earth system chemical elements",
+      "stratum": "hard_negative",
+      "discipline": "space",
+      "query_class": "space",
+      "latency_ms": 57.814,
+      "visible_primary_count": 1,
+      "internal_candidate_count": 465,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 464,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 1
+      },
+      "required_primary_ids": [
+        "356536"
+      ],
+      "required_primary_ranks": {
+        "356536": 1
+      },
+      "metrics_at_10": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 0.56554,
+        "retrieved_required_primary_ids": [
+          "356536"
+        ]
+      },
+      "metrics_at_50": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 0.56554,
+        "retrieved_required_primary_ids": [
+          "356536"
+        ]
+      },
+      "query_plan": [
+        {
+          "concept_id": "earth-system",
+          "role": "target",
+          "evidence_policy": "controlled_compound"
+        },
+        {
+          "concept_id": "chemical-processes",
+          "role": "method",
+          "evidence_policy": "controlled_compound"
+        }
+      ],
+      "top_10": [
+        {
+          "rank": 1,
+          "id": "356536",
+          "title": "Geospace Cluster",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "The Geospace Cluster explicitly funds research on chemical processes in the coupled Sun-Earth system."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        }
+      ]
+    },
+    {
+      "id": "hold_defense_01",
+      "query": "high temperature hypersonic composites",
+      "stratum": "direct_positive",
+      "discipline": "defense",
+      "query_class": "defense",
+      "latency_ms": 14.0314,
+      "visible_primary_count": 1,
+      "internal_candidate_count": 59,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 58,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 1
+      },
+      "required_primary_ids": [
+        "344592"
+      ],
+      "required_primary_ranks": {
+        "344592": 1
+      },
+      "metrics_at_10": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 1,
+        "retrieved_required_primary_ids": [
+          "344592"
+        ]
+      },
+      "metrics_at_50": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 1,
+        "retrieved_required_primary_ids": [
+          "344592"
+        ]
+      },
+      "query_plan": [
+        {
+          "concept_id": "high-temperature-materials",
+          "role": "target",
+          "evidence_policy": "protected_high_temperature_composites"
+        },
+        {
+          "concept_id": "hypersonic-environment",
+          "role": "application_or_context",
+          "evidence_policy": "protected_hypersonic"
+        }
+      ],
+      "top_10": [
+        {
+          "rank": 1,
+          "id": "344592",
+          "title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "The publication-eligible Super-Materials child establishes high-temperature composite materials research for extreme and hypersonic environments."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        }
+      ]
+    },
+    {
+      "id": "hold_ai_01",
+      "query": "secure foundation models",
+      "stratum": "direct_positive",
+      "discipline": "ai_computing",
+      "query_class": "AI/computing",
+      "latency_ms": 46.0612,
+      "visible_primary_count": 4,
+      "internal_candidate_count": 621,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 617,
+      "admission_counts": {
+        "direct": 1,
+        "child": 0,
+        "authoritative_scope": 3
+      },
+      "required_primary_ids": [
+        "361333",
+        "vpr-email:NSF26-015",
+        "361526"
+      ],
+      "required_primary_ranks": {
+        "361333": 1,
+        "361526": 3,
+        "vpr-email:NSF26-015": 2
+      },
+      "metrics_at_10": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 0.952073,
+        "retrieved_required_primary_ids": [
+          "361333",
+          "vpr-email:NSF26-015",
+          "361526"
+        ]
+      },
+      "metrics_at_50": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 0.952073,
+        "retrieved_required_primary_ids": [
+          "361333",
+          "vpr-email:NSF26-015",
+          "361526"
+        ]
+      },
+      "query_plan": [
+        {
+          "concept_id": "security-resilience",
+          "role": "application_or_context",
+          "evidence_policy": "protected_ai_security"
+        },
+        {
+          "concept_id": "foundation-models",
+          "role": "target",
+          "evidence_policy": "controlled_compound"
+        }
+      ],
+      "top_10": [
+        {
+          "rank": 1,
+          "id": "361333",
+          "title": "Pathways to Enable Secure Open-Source Ecosystems",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "PESOSE explicitly funds safety and security work for open-source machine-learning models, a bounded scope containing secure open-source foundation models."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        },
+        {
+          "rank": 2,
+          "id": "vpr-email:NSF26-015",
+          "title": "NSF DCL Advancing Artificial Intelligence (AI) Agent Ecosystems through the National Science Foundation Pathways to Enable Secure Open-Source Ecosystems (NSF PESOSE) Program | NSF 26-015",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "The DCL routes AI-agent ecosystem work through PESOSE's security scope and can contain secure open-source foundation-model work."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        },
+        {
+          "rank": 3,
+          "id": "361526",
+          "title": "The Genesis Mission: Transforming Science and Energy with AI",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "Genesis is an AI and national-security mission with a publication-eligible Composable and Modular Foundation Models child."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        },
+        {
+          "rank": 4,
+          "id": "353936",
+          "title": "Mathematical Foundations of Artificial Intelligence",
+          "evidence_tier": 3,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "The Mathematical Foundations of Artificial Intelligence source explicitly covers foundation models and reliable, safe, trustworthy AI methods; the complete intent is present in authoritative parent scope."
+          },
+          "admission_reason": "explicit_evidence"
+        }
+      ]
+    },
+    {
+      "id": "hold_ai_02",
+      "query": "AI journalism exchange",
+      "stratum": "hard_negative",
+      "discipline": "education",
+      "query_class": "AI/computing",
+      "latency_ms": 17.1531,
+      "visible_primary_count": 1,
+      "internal_candidate_count": 945,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 944,
+      "admission_counts": {
+        "direct": 1,
+        "child": 0,
+        "authoritative_scope": 0
+      },
+      "required_primary_ids": [
+        "363370"
+      ],
+      "required_primary_ranks": {
+        "363370": 1
+      },
+      "metrics_at_10": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 1,
+        "retrieved_required_primary_ids": [
+          "363370"
+        ]
+      },
+      "metrics_at_50": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 1,
+        "retrieved_required_primary_ids": [
+          "363370"
+        ]
+      },
+      "query_plan": [
+        {
+          "concept_id": "artificial-intelligence",
+          "role": "method",
+          "evidence_policy": "protected_ai"
+        },
+        {
+          "concept_id": "literal:journalism",
+          "role": "application_or_context"
+        },
+        {
+          "concept_id": "literal:exchange",
+          "role": "application_or_context"
+        }
+      ],
+      "top_10": [
+        {
+          "rank": 1,
+          "id": "363370",
+          "title": "U.S. Embassy Jakarta Media Small Grants Competition",
+          "evidence_tier": 3,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "The Jakarta media grants competition explicitly supports journalism exchanges concerning AI and emerging technology."
+          },
+          "admission_reason": "explicit_evidence"
+        }
+      ]
+    },
+    {
+      "id": "hold_env_01",
+      "query": "membrane PFAS treatment",
+      "stratum": "direct_positive",
+      "discipline": "environmental_science",
+      "query_class": "environment",
+      "latency_ms": 23.9433,
+      "visible_primary_count": 2,
+      "internal_candidate_count": 2,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 0,
+      "admission_counts": {
+        "direct": 0,
+        "child": 0,
+        "authoritative_scope": 2
+      },
+      "required_primary_ids": [
+        "363375",
+        "362061"
+      ],
+      "required_primary_ranks": {
+        "362061": 1,
+        "363375": 2
+      },
+      "metrics_at_10": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 0.907284,
+        "retrieved_required_primary_ids": [
+          "363375",
+          "362061"
+        ]
+      },
+      "metrics_at_50": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 0.907284,
+        "retrieved_required_primary_ids": [
+          "363375",
+          "362061"
+        ]
+      },
+      "query_plan": [
+        {
+          "concept_id": "membrane-treatment",
+          "role": "method",
+          "evidence_policy": "controlled_compound"
+        },
+        {
+          "concept_id": "pfas-contamination",
+          "role": "target",
+          "evidence_policy": "protected_pfas"
+        }
+      ],
+      "top_10": [
+        {
+          "rank": 1,
+          "id": "362061",
+          "title": "Chemical Process Systems (CPS)",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "CPS publishes membrane-separations and PFAS chemical-process scope containing the complete query intent."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        },
+        {
+          "rank": 2,
+          "id": "363375",
+          "title": "Desalination and Water Purification Research Program: Research Projects",
+          "evidence_tier": 2,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "The desalination and water-purification research program explicitly supports membrane treatment research for PFAS-contaminated water."
+          },
+          "admission_reason": "authoritative_scope_entailment"
+        }
+      ]
+    },
+    {
+      "id": "hold_env_02",
+      "query": "coastal ecosystem climate adaptation",
+      "stratum": "broad_program_positive",
+      "discipline": "environmental_science",
+      "query_class": "environment",
+      "latency_ms": 16.9947,
+      "visible_primary_count": 1,
+      "internal_candidate_count": 645,
+      "broader_fit_count": 0,
+      "rejected_partial_intent_count": 644,
+      "admission_counts": {
+        "direct": 1,
+        "child": 0,
+        "authoritative_scope": 0
+      },
+      "required_primary_ids": [
+        "363537"
+      ],
+      "required_primary_ranks": {
+        "363537": 1
+      },
+      "metrics_at_10": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 0.726229,
+        "retrieved_required_primary_ids": [
+          "363537"
+        ]
+      },
+      "metrics_at_50": {
+        "primary_precision": 1,
+        "required_primary_recall": 1,
+        "ndcg": 0.726229,
+        "retrieved_required_primary_ids": [
+          "363537"
+        ]
+      },
+      "query_plan": [
+        {
+          "concept_id": "literal:coastal",
+          "role": "application_or_context"
+        },
+        {
+          "concept_id": "literal:ecosystem",
+          "role": "application_or_context"
+        },
+        {
+          "concept_id": "literal:climate",
+          "role": "application_or_context"
+        },
+        {
+          "concept_id": "literal:adaptation",
+          "role": "application_or_context"
+        }
+      ],
+      "top_10": [
+        {
+          "rank": 1,
+          "id": "363537",
+          "title": "Cooperative Agreement for Affiliated Partner with the Alaska Cooperative Ecosystem Studies Unit (CESU)",
+          "evidence_tier": 3,
+          "truth": {
+            "label": "primary_relevant",
+            "evidence": "The current Alaska CESU award explicitly supports climate-adaptation science for coastal ecosystem hazards and resource management."
+          },
+          "admission_reason": "explicit_evidence"
+        }
+      ]
+    }
+  ]
+}

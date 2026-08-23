@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "iteration": "phase-2r-iteration-2",
+  "reviewed_at": "2026-08-22",
+  "status": "all_material_movements_reviewed",
+  "populations": {
+    "former_phase4_challenge": {
+      "query_count": 24,
+      "changed_top_10_queries": 18,
+      "source": "evaluation/search_v2_iteration2_results.json",
+      "review_result": "accepted_relevance_improvement"
+    },
+    "development_frame": {
+      "query_count": 49,
+      "changed_top_10_queries": 25,
+      "unchanged_top_10_queries": 24,
+      "source": "evaluation/search_v2_movement_review.json",
+      "judgments": "evaluation/search_v2_stabilization_movement_judgments.json",
+      "review_result": "all_changed_lists_have_explicit_accepted_reviews"
+    },
+    "meas5": {
+      "query_count": 48,
+      "discipline_count": 11,
+      "changed_top_10_queries": 38,
+      "source": "evaluation/search_v2_results.json",
+      "judgments": "evaluation/search_v2_stabilization_movement_judgments.json",
+      "review_result": "reviewed_nonzero_churn_allowed"
+    },
+    "historical_baseline": {
+      "query_count": 37,
+      "changed_top_10_queries": 0,
+      "review_result": "passed"
+    }
+  },
+  "material_improvements": [
+    "Five previously missed REE material/method variants now admit DOE BES, Genesis, and NSF CPS through the same bounded family relationships used by the positive solvent-extraction control.",
+    "Rural MOMS and AFRI are recovered from existing authoritative parent scope without publishing review-only child evidence.",
+    "SCALEUP moves from rank 7 to rank 1 after administrative duration evidence is rejected and authoritative complete evidence is tiered first.",
+    "Genesis moves from rank 30 to rank 3 for secure foundation models through publication-eligible child scope and evidence-tier ordering.",
+    "Health data workforce workshop and microgravity radiation biology now expose zero primary results while retaining broad internal discovery diagnostics.",
+    "Citation-only, administrative program-element, stale, partial-intent, and adjudicated broader-fit records no longer share the primary list."
+  ],
+  "query_specific_truth_corrections": [
+    {
+      "key": "adv_chem_02:351715",
+      "from": "primary_relevant",
+      "to": "broader_program_fit",
+      "reason": "The authoritative ECLIPSE scope establishes computational catalyst design but does not establish AI or machine-learning intent."
+    },
+    {
+      "key": "adv_defense_02:356605",
+      "from": "primary_relevant",
+      "to": "broader_program_fit",
+      "reason": "Autonomous maritime sensing appears only in collapsed citation/index text, not in the published parent narrative or an eligible child."
+    }
+  ],
+  "remaining_regressions": [],
+  "sealed_iteration2_holdout_used": false,
+  "review_policy": "Movement was accepted only when query-specific truth or causal source evidence showed a precision or recall improvement; unchanged production behavior was not presumed correct."
+}
