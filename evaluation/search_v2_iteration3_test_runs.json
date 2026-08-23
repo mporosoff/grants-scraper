@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "iteration": 3,
+  "recorded_at": "2026-08-23",
+  "status": "regression_gates_passed_architecture_gate_blocked",
+  "runs": [
+    {
+      "id": "development_49",
+      "command": "node tools/run_search_v2.mjs",
+      "exit_code": 0,
+      "result": "49 queries; development gates passed; warm p50 29.6222 ms; warm p95 88.4207 ms"
+    },
+    {
+      "id": "former_phase4_challenge",
+      "command": "node tools/run_search_v2_iteration2_challenge.mjs",
+      "exit_code": 0,
+      "result": "24-query challenge runner gates passed with Iteration-3 exact-pair truth supplement"
+    },
+    {
+      "id": "meas5",
+      "command": "node tools/run_meas5.mjs",
+      "exit_code": 0,
+      "result": "48 queries across 11 disciplines"
+    },
+    {
+      "id": "historical_baseline",
+      "command": "node tools/query_baseline.mjs --check",
+      "exit_code": 0,
+      "result": "37 queries; zero top-10 churn"
+    },
+    {
+      "id": "phase3_explanations",
+      "command": "node tools/run_match_explain_v2.mjs",
+      "exit_code": 0,
+      "result": "42 cases; 41 correct/useful; 1 reviewed shallow; zero unsupported, causal, privacy, or review-only violations"
+    },
+    {
+      "id": "p9_parent_child_invariants",
+      "command": "node tools/p9_scoring_probe.mjs --check",
+      "exit_code": 0,
+      "result": "50 cases; cardinality invariant; byte-identical"
+    },
+    {
+      "id": "config_asset_parity",
+      "command": "node tools/build_search_v2_config.mjs --check",
+      "exit_code": 0,
+      "result": "generated browser config is current"
+    },
+    {
+      "id": "browser_suite",
+      "command": "node --test tests/browser/*.test.mjs",
+      "exit_code": 0,
+      "result": "141 passed; 0 failed"
+    },
+    {
+      "id": "focused_python",
+      "command": "python -m unittest tests.test_search_query tests.test_alert_match tests.test_size_budget tests.test_subtopic_records tests.test_p9_scoring",
+      "exit_code": 0,
+      "result": "67 passed; 0 failed"
+    },
+    {
+      "id": "live_product_python",
+      "command": "python -m tools.run_refresh_validation",
+      "exit_code": 0,
+      "result": "756 passed; 0 failed; closed frozen-census modules remain excluded exactly as previously documented"
+    },
+    {
+      "id": "no_drift",
+      "command": "tools/verify_no_drift.sh",
+      "exit_code": 0,
+      "result": "22 generated artifacts unchanged"
+    },
+    {
+      "id": "phase4c_runner_lock",
+      "command": "node tools/run_search_v2_iteration3_holdout.mjs",
+      "exit_code": 1,
+      "expected_nonzero": true,
+      "result": "lock refused execution before loading production search modules"
+    },
+    {
+      "id": "diff_check",
+      "command": "git diff --check",
+      "exit_code": 0,
+      "result": "no whitespace errors"
+    }
+  ],
+  "all_required_green_runs_exit_zero": true,
+  "sealed_runner_refused_as_required": true,
+  "phase4c_holdout_executions": 0
+}

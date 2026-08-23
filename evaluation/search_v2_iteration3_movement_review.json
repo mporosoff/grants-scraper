@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "iteration": 3,
+  "reviewed_at": "2026-08-23",
+  "status": "all_material_movements_reviewed",
+  "rubric": "Exact query-result relevance: primary requires complete explicit, publication-eligible child, or bounded source-grounded authoritative scope; broader lacks one major established dimension; incidental or partial evidence is rejected.",
+  "summary": {
+    "phase4b_missed_anchors_reviewed": 19,
+    "phase4b_missed_anchors_recovered": 19,
+    "new_legitimate_primary_pairs_added_to_truth": 12,
+    "new_legitimate_broader_pairs_added_to_truth": 1,
+    "clearly_irrelevant_visible_primary_pairs_after_review": 0,
+    "broader_pairs_presented_as_primary": 0
+  },
+  "movement_clusters": [
+    {
+      "cluster": "phase4b_anchor_recovery",
+      "count": 19,
+      "decision": "accepted",
+      "reason": "Every missed required anchor is recovered through query-role interpretation, source-grounded scope, or the corrected complete-intent verifier; no recovery is ranking-only or semantic-only."
+    },
+    {
+      "cluster": "ewre_critical_minerals_resource_recovery",
+      "count": 12,
+      "decision": "accepted",
+      "reason": "EWRE explicitly publishes chemical resource recovery plus recycling and management of critical minerals; exact query-result judgments were added without rewriting either spent holdout."
+    },
+    {
+      "cluster": "cross_domain_source_scope",
+      "count": 2,
+      "decision": "accepted",
+      "reason": "TCUP supplies complete innovation/student-success scope and CICI supplies complete AI-science-workflow security/resilience scope."
+    },
+    {
+      "cluster": "foundation_model_broader_fit",
+      "count": 1,
+      "decision": "accepted_as_broader",
+      "reason": "MFAI establishes foundation models and trustworthy AI but not the security/adversarial dimension; it remains separate from primary."
+    },
+    {
+      "cluster": "stale_undated_notice",
+      "count": 1,
+      "decision": "removed",
+      "reason": "A posted FY2012 notice with no current close, archive, or rolling evidence is rejected by a generic search-v2 currentness guard."
+    },
+    {
+      "cluster": "distant_lexical_collision",
+      "count": 1,
+      "decision": "removed",
+      "reason": "A plasma program combined the generic verb 'builds' with 'decarbonized' 60 tokens later; the generic concise-intent coherence window was tightened from 72 to 48 tokens."
+    },
+    {
+      "cluster": "cross_child_rollup_collision",
+      "count": 1,
+      "decision": "removed",
+      "reason": "A broad AI umbrella combined parent biology text with an unrelated quantum-sensing child; parent-child aggregation now requires a non-generic bridge grounded in the parent title and child source."
+    },
+    {
+      "cluster": "meas5_reviewed_movements",
+      "count": 3,
+      "decision": "accepted",
+      "reason": "Building decarbonization retains two explicit NYSERDA programs, crop improvement gains a current crop-protection/improvement notice, and hypersonics retains only the two explicitly scoped programs."
+    }
+  ],
+  "references": [
+    "evaluation/search_v2_iteration3_anchor_fates.json",
+    "evaluation/search_v2_iteration3_truth_supplement.json",
+    "evaluation/search_v2_stabilization_movement_judgments.json",
+    "evaluation/search_v2_iteration3_results.json"
+  ]
+}
