@@ -679,21 +679,90 @@
         (fieldedDocumentFrequency.get(term) || 0) + 1,
       ));
     });
-    const fieldedPassages = documentScopeFields.map(fields => fields.flatMap(field => {
-      const parts = ["parent_description", "child_summary", "authoritative_document_scope"]
-        .includes(field.field)
-        ? String(field.value || "").split(/(?<=[.!?])\s+|…+|[\n\r]+/)
-        : [field.value];
-      return parts.map(value => String(value || "").trim()).filter(Boolean).map(value => ({
-        field: field.field,
-        value,
-        tokens: queryApi.tokenize(value).flatMap(term => (
-          term.includes("-")
-            ? [term, ...term.split("-").filter(part => part.length > 1)]
-            : [term]
-        )),
+    function boundedPassageWindows(value) {
+      let sentenceOffset = 0;
+      return String(value || "").split(/[\n\r]+/).flatMap(paragraph => {
+        const sentences = paragraph.split(/(?<=[.!?])\s+|…+/)
+          .map(part => part.trim()).filter(Boolean);
+        const windows = sentences.map((_sentence, index) => {
+          const end = Math.min(sentences.length, index + 3);
+          return {
+            value: sentences.slice(index, end).join(" "),
+            unit: `sentences:${sentenceOffset + index + 1}-${sentenceOffset + end}`,
+          };
+        });
+        sentenceOffset += sentences.length;
+        return windows;
+      });
+    }
+    function atomicFieldedPassage({
+      documentId,
+      field,
+      value,
+      unit,
+      fields = [field],
+      title = "",
+    }) {
+      const combined = [String(title || "").trim(), String(value || "").trim()]
+        .filter(Boolean).join(". ");
+      const record = records[documentId] || {};
+      const recordId = String(
+        record.subtopic_id || record.opportunity_id || record.opportunity_number || documentId,
+      );
+      return {
+        passageId: `${catalogRole}:${recordId}#${field}:${unit}`,
+        field,
+        fields,
+        value: combined,
+        tokens: scopeTokens(combined),
+      };
+    }
+    const fieldedPassages = records.map((record, documentId) => {
+      const child = Boolean(record.subtopic_id);
+      const titleField = child ? "child_title" : "parent_title";
+      const descriptionField = child ? "child_summary" : "parent_description";
+      const title = String(record.title || "").trim();
+      const passages = [];
+      if (title) passages.push(atomicFieldedPassage({
+        documentId,
+        field: titleField,
+        value: title,
+        unit: "title",
       }));
-    }));
+      boundedPassageWindows(record.description || record.summary || "").forEach(passage => {
+        passages.push(atomicFieldedPassage({
+          documentId,
+          field: descriptionField,
+          value: passage.value,
+          unit: passage.unit,
+          fields: [titleField, descriptionField],
+          title,
+        }));
+      });
+      (record.program_area_labels || record.document_program_areas || []).forEach((value, index) => {
+        passages.push(atomicFieldedPassage({
+          documentId,
+          field: "authoritative_program_area",
+          value,
+          unit: `entry:${index + 1}`,
+          fields: [titleField, "authoritative_program_area"],
+          title,
+        }));
+      });
+      if (!child) authoritativeDocumentScopeByDocument[documentId].forEach((fact, factIndex) => {
+        boundedPassageWindows(fact.value).forEach(passage => {
+          passages.push(atomicFieldedPassage({
+            documentId,
+            field: "authoritative_document_scope",
+            value: passage.value,
+            unit: `fact:${factIndex + 1}:${passage.unit}`,
+            fields: [titleField, "authoritative_document_scope"],
+            title,
+          }));
+        });
+      });
+      return passages;
+    });
     const sourceScopeVocabulary = [...new Set(documentScopeFields.flatMap(fields => (
       fields.flatMap(field => [...field.positions.keys()])
     )))];
@@ -1326,7 +1395,9 @@
             ? Math.max(...usedPositions) - Math.min(...usedPositions) + 1
             : Number.POSITIVE_INFINITY;
           const candidate = {
+            passageId: passage.passageId,
             field: passage.field,
+            fields: passage.fields,
             text: passage.value,
             matchedGroups,
             matchedTerms: [...new Set(usedPositions.map(position => passage.tokens[position]))],
@@ -1348,7 +1419,6 @@
       records.forEach((record, documentId) => {
         const groupMatches = groups.map(group => bestGroupMatch(documentId, group));
         const matchedIndexes = groupMatches.flatMap((match, index) => match ? [index] : []);
-        verificationGroupIndexes[documentId] = matchedIndexes;
         lexicalCoverage[documentId] = matchedIndexes.length;
         const baseScore = groupMatches.reduce((sum, match) => sum + Number(match?.contribution || 0), 0);
         lexicalScores[documentId] = baseScore;
@@ -1368,6 +1438,8 @@
             && exactShortAcronymEvidence(documentId, groups[0].source)
           );
         const bestPassage = passageMatch(documentId, groupMatches);
+        const atomicMatchedIndexes = bestPassage?.matchedGroups || [];
+        verificationGroupIndexes[documentId] = atomicMatchedIndexes;
         const fieldPhraseMatches = documentScopeFields[documentId].filter(field => (
           normalizedPhrase
           && (` ${field.tokens.join(" ")} `).includes(` ${normalizedPhrase} `)
@@ -1382,13 +1454,13 @@
           : 0;
         const finalScore = baseScore * Math.pow(coordination, coordinationPower)
           + phraseBonus + proximity + (exactIdentifier ? opportunityNumberBoost : 0);
+        const atomicCoordination = atomicMatchedIndexes.length / groupCount;
         const admitted = exactIdentifier || (
-          coordination >= minimumCoordination && !singleAcronymExpansionOnly
+          atomicCoordination >= minimumCoordination && !singleAcronymExpansionOnly
         );
         const broader = !admitted
           && groupCount >= 2
-          && coordination >= Math.max(.5, minimumCoordination - .35)
-          && Number(bestPassage?.matchedGroups.length || 0) >= groupCount - 1;
+          && atomicCoordination >= Math.max(.5, minimumCoordination - .35);
         if (!currentnessRejected.has(documentId)) {
           if (admitted) scores[documentId] = finalScore;
           else if (broader) broaderScores[documentId] = finalScore;
@@ -1415,14 +1487,16 @@
         item.exactTitlePhrase = titlePhrase;
         item.exactOpportunityNumber = Boolean(exactIdentifier);
         item.highestContributingPassage = bestPassage ? {
+          passageId: bestPassage.passageId,
           field: bestPassage.field,
+          fields: bestPassage.fields,
           text: bestPassage.text,
           matchedTerms: bestPassage.matchedTerms,
           matchedConcepts: bestPassage.matchedGroups.map(index => groups[index].conceptId),
           span: Number.isFinite(bestPassage.span) ? bestPassage.span : null,
         } : null;
         item.groups = groupMatches.flatMap((match, groupIndex) => {
-          if (!match) return [];
+          if (!match || !atomicMatchedIndexes.includes(groupIndex)) return [];
           const group = groups[groupIndex];
           return [{
             source: group.source,
@@ -1439,14 +1513,22 @@
             matchedTermContributions: match.matches.map(termMatch => ({
               term: termMatch.term,
               contribution: termMatch.contribution,
-              fields: termMatch.fields,
+              fields: termMatch.fields.filter(field => (
+                bestPassage?.fields?.includes(field.field)
+              )),
             })),
           }];
         });
         const classification = admitted ? "primary" : broader ? "broader_program_fit" : "reject";
+        const incoherentCrossPassageEvidence = !admitted
+          && coordination >= minimumCoordination
+          && atomicCoordination < minimumCoordination;
         const reason = admitted
           ? exactIdentifier ? "exact_identifier" : "fielded_complete_intent"
-          : broader ? "fielded_adjacent_intent" : "insufficient_query_coordination";
+          : broader ? "fielded_adjacent_intent"
+            : incoherentCrossPassageEvidence
+              ? "incoherent_cross_passage_evidence"
+              : "insufficient_query_coordination";
         item.admission = {
           admitted,
           classification,
@@ -1454,28 +1536,38 @@
           evidenceTier: evidenceTiers[documentId],
           lexicalCoverage: matchedIndexes.length,
           semanticCoverage: 0,
-          substantiveCoverage: matchedIndexes.length,
+          substantiveCoverage: atomicMatchedIndexes.length,
+          atomicCoverage: atomicMatchedIndexes.length,
+          atomicEvidenceCoherent: admitted,
           finalScore,
           admittedBy: admitted ? [{
             path: "fielded_bm25f",
             field: bestPassage?.field || bestField?.field || "",
-            fields: [bestPassage?.field || bestField?.field || ""].filter(Boolean),
-            matchedConcepts: matchedIndexes.map(index => groups[index].conceptId),
+            fields: bestPassage?.fields
+              || [bestPassage?.field || bestField?.field || ""].filter(Boolean),
+            passageId: bestPassage?.passageId || null,
+            matchedConcepts: atomicMatchedIndexes.map(index => groups[index].conceptId),
           }] : [],
           rankedBy: [
             { type: "bm25f", score: baseScore },
             { type: "query_coordination", ratio: coordination, power: coordinationPower },
+            { type: "atomic_evidence_coordination", ratio: atomicCoordination },
             ...(phraseBonus ? [{ type: "exact_phrase", score: phraseBonus }] : []),
             ...(proximity ? [{ type: "proximity", score: proximity, span: bestPassage.span }] : []),
           ],
           fieldContributions: groupMatches.flatMap((match, groupIndex) => (
-            (match?.matches || []).flatMap(termMatch => termMatch.fields.map(field => ({
-              conceptId: groups[groupIndex].conceptId,
-              term: termMatch.term,
-              field: field.field,
-              admissionEligible: true,
-              aggregateTermContribution: termMatch.contribution,
-            })))
+            atomicMatchedIndexes.includes(groupIndex)
+              ?
+            (match?.matches || []).flatMap(termMatch => termMatch.fields
+              .filter(field => bestPassage?.fields?.includes(field.field))
+              .map(field => ({
+                conceptId: groups[groupIndex].conceptId,
+                term: termMatch.term,
+                field: field.field,
+                admissionEligible: true,
+                aggregateTermContribution: termMatch.contribution,
+              })))
+              : []
           )),
         };
       });

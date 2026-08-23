@@ -267,6 +267,114 @@ test("fielded scoring treats authoritative parent program areas as a distinct fi
   );
 });
 
+test("fielded Strong admission cannot combine separate parent program tracks", () => {
+  const apis = loadApis();
+  const catalog = catalogFor([
+    record(
+      "umbrella",
+      "Umbrella research program",
+      [
+        "Track Alpha supports health data infrastructure.",
+        "Track Alpha develops clinical repositories.",
+        "Track Alpha serves research institutions.",
+        "Track Beta supports workforce workshops.",
+      ].join(" "),
+    ),
+  ], apis.query);
+  const engine = apis.retrieval.create(catalog, apis.query, {
+    searchV2: true,
+    searchV2Config: fieldedSearchV2Config(apis),
+    catalogRole: "parent",
+  });
+  const result = engine.score("health data workforce workshop", { evidence: true });
+
+  assert.equal(result.scores[0], 0);
+  assert.ok(result.discoveryScores[0] > 0);
+  assert.equal(result.evidence[0].admission.reason, "incoherent_cross_passage_evidence");
+  assert.deepEqual([...result.verificationGroupIndexes[0]], [0, 1]);
+});
+
+test("fielded Strong admission cannot combine sibling children", () => {
+  const apis = loadApis();
+  const parentCatalog = catalogFor([
+    record("parent", "Umbrella research program", "Supports multiple independent tracks."),
+  ], apis.query);
+  const children = [
+    {
+      ...record("child-a", "Health data track", "Supports clinical repositories."),
+      subtopic_id: "parent:a",
+      parent_id: "parent",
+      publication_state: "publishable",
+    },
+    {
+      ...record("child-b", "Workforce workshop track", "Supports professional training."),
+      subtopic_id: "parent:b",
+      parent_id: "parent",
+      publication_state: "publishable",
+    },
+  ];
+  const childCatalog = { ...catalogFor(children, apis.query), schema_version: 1 };
+  const parentEngine = apis.retrieval.create(parentCatalog, apis.query, {
+    searchV2: true,
+    searchV2Config: fieldedSearchV2Config(apis),
+    catalogRole: "parent",
+  });
+  const childEngine = apis.retrieval.create(childCatalog, apis.query, {
+    searchV2: true,
+    searchV2Config: fieldedSearchV2Config(apis),
+    catalogRole: "child",
+  });
+  const query = "health data workforce workshop";
+  const parentDirect = parentEngine.score(query, { evidence: true });
+  const childDirect = childEngine.score(query, { evidence: true });
+  const rolled = apis.retrieval.rollupScores({
+    parentCatalog,
+    childCatalog,
+    parentDirect,
+    parentProfile: { scores: new Float64Array(1) },
+    childDirect,
+    childProfile: { scores: new Float64Array(2) },
+    eligibilityBonuses: [0],
+  });
+
+  assert.deepEqual([...childDirect.scores], [0, 0]);
+  assert.ok(childDirect.discoveryScores[0] > 0);
+  assert.ok(childDirect.discoveryScores[1] > 0);
+  assert.equal(rolled.rows.length, 0);
+});
+
+test("one coherent parent or child passage still produces Strong", () => {
+  const apis = loadApis();
+  const parentCatalog = catalogFor([
+    record("parent", "Health data workforce workshop", "Supports an integrated program."),
+  ], apis.query);
+  const childCatalog = { ...catalogFor([{
+    ...record("child", "Integrated training track", "Health data workforce workshops support practitioners."),
+    subtopic_id: "parent:child",
+    parent_id: "parent",
+    publication_state: "publishable",
+  }], apis.query), schema_version: 1 };
+  const options = {
+    searchV2: true,
+    searchV2Config: fieldedSearchV2Config(apis),
+  };
+  const parent = apis.retrieval.create(parentCatalog, apis.query, {
+    ...options,
+    catalogRole: "parent",
+  }).score("health data workforce workshop", { evidence: true });
+  const child = apis.retrieval.create(childCatalog, apis.query, {
+    ...options,
+    catalogRole: "child",
+  }).score("health data workforce workshop", { evidence: true });
+
+  assert.ok(parent.scores[0] > 0);
+  assert.ok(child.scores[0] > 0);
+  assert.equal(parent.evidence[0].admission.atomicEvidenceCoherent, true);
+  assert.equal(child.evidence[0].admission.atomicEvidenceCoherent, true);
+  assert.equal(parent.evidence[0].highestContributingPassage.field, "parent_title");
+  assert.equal(child.evidence[0].highestContributingPassage.field, "child_summary");
+});
+
 test("fielded short acronyms require exact evidence or high-confidence resolution", () => {
   const apis = loadApis();
   const catalog = catalogFor([

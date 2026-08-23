@@ -16,6 +16,7 @@ const [
   productTruth,
   gate,
   historicalIntentGate,
+  coherenceTrace,
 ] = await Promise.all([
   readFile(new URL("assets/app.js", root), "utf8"),
   readFile(new URL("assets/search-hybrid.js", root), "utf8"),
@@ -28,6 +29,7 @@ const [
   readFile(new URL("evaluation/search_v2_strong_potential_truth.json", root), "utf8").then(JSON.parse),
   readFile(new URL("evaluation/search_v2_strong_potential_gate_report.json", root), "utf8").then(JSON.parse),
   readFile(new URL("evaluation/search_v2_intent_gate_gate_report.json", root), "utf8").then(JSON.parse),
+  readFile(new URL("evaluation/search_v2_strong_coherence_root_causes.json", root), "utf8").then(JSON.parse),
 ]);
 
 test("the disabled browser contract renders Strong before bounded deduplicated Potential", () => {
@@ -77,24 +79,37 @@ test("the static vector handshake and safety boundary remain intact", () => {
   assert.equal(results.safety.secret_printed_or_persisted, false);
 });
 
-test("spent product metrics expose the observed Strong blocker without hiding discovery gains", () => {
+test("spent product metrics pass the atomic Strong-coherence gates without losing discovery", () => {
   const metrics = results.quality.global;
-  assert.equal(metrics.strong.precision_at_10_over_reviewed, 0.857143);
-  assert.equal(metrics.strong.known_irrelevant_at_10_count, 1);
-  assert.equal(metrics.strong.zero_anchor_visible_count, 1);
+  assert.equal(metrics.strong.precision_at_10_over_reviewed, 1);
+  assert.equal(metrics.strong.known_irrelevant_at_10_count, 0);
+  assert.equal(metrics.strong.zero_anchor_visible_count, 0);
   assert.equal(metrics.combined.required_recall_at_10, 0.861538);
   assert.equal(metrics.combined.required_recall_at_20, 0.907692);
   assert.equal(metrics.combined.required_recall_at_50, 0.953846);
   assert.equal(metrics.potential.maximum_displayed_count, 12);
   assert.equal(metrics.potential.top_10_known_irrelevant_count, 5);
-  assert.equal(metrics.potential.top_10_reviewed_primary_count, 49);
+  assert.equal(metrics.potential.top_10_reviewed_primary_count, 50);
   assert.equal(results.quality.acronym_safeguard.appears_in_strong, false);
-  assert.deepEqual(gate.blocking_gates, [
-    "strong_precision_at_least_0_90",
-    "no_known_irrelevant_strong_results",
-    "zero_anchor_queries_have_no_strong_results",
-  ]);
-  assert.equal(gate.phase4c_authorized_for_separate_session, false);
+  assert.deepEqual(gate.blocking_gates, []);
+  assert.equal(gate.phase4c_authorized_for_separate_session, true);
+});
+
+test("the generic coherence rule removes both traced non-primary Strong results", () => {
+  assert.equal(coherenceTrace.root_cause.shared_generic_bug, true);
+  assert.equal(coherenceTrace.root_cause.separate_rule_needed, false);
+  assert.deepEqual(
+    coherenceTrace.reviewed_non_primary_strong.map(item => item.result_id),
+    ["334326", "363316"],
+  );
+  const health = results.rows.find(row => row.id === "hold_health_02");
+  const diplomacy = results.rows.find(row => row.id === "hold_energy_02");
+  const geospace = results.rows.find(row => row.id === "i2hold_space_02");
+  assert.deepEqual(health.strong.ids, []);
+  assert.equal(diplomacy.strong.ids.includes("363316"), false);
+  assert.equal(diplomacy.potential.ids.includes("363316"), true);
+  assert.equal(geospace.strong.ids.includes("356536"), false);
+  assert.equal(geospace.potential.ids.includes("356536"), true);
 });
 
 test("new truth is exact-pair scoped and does not rewrite historical holdout truth", () => {

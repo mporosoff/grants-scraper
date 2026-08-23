@@ -73,7 +73,7 @@ test("browser query plans obey the shared search-v2 concept contract", () => {
   }
 });
 
-test("local search v2 uses fielded retrieval without scientific relationship mappings", () => {
+test("local search v2 keeps cross-passage scope evidence in discovery without making it Strong", () => {
   assert.equal(configuration.fielded_ranking.architecture, "bm25f_passage_coordination");
   assert.equal(configuration.fielded_ranking.use_configured_scientific_entailments, false);
   assert.deepEqual([...configuration.concept_families], []);
@@ -82,9 +82,16 @@ test("local search v2 uses fielded retrieval without scientific relationship map
   const result = parentV2.score("upper atmosphere radiation belt dynamics", { evidence: true });
   assert.equal(result.diagnostics.searchV2.rankingArchitecture, "fielded_bm25f");
   assert.equal(result.diagnostics.searchV2.configuredScientificEntailmentsUsed, false);
-  assert.ok(result.scores[parentCatalog.opportunities.findIndex(record => (
+  const geospace = parentCatalog.opportunities.findIndex(record => (
     String(record.opportunity_id) === "356536"
-  ))] > 0);
+  ));
+  assert.equal(result.scores[geospace], 0);
+  assert.ok(result.discoveryScores[geospace] > 0);
+  assert.equal(result.evidence[geospace].admission.classification, "broader_program_fit");
+  assert.ok(
+    result.evidence[geospace].admission.atomicCoverage
+      < result.evidence[geospace].admission.lexicalCoverage,
+  );
 });
 
 test("rich matching child carries its umbrella parent through one strongest passage", () => {

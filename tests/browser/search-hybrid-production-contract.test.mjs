@@ -5,7 +5,7 @@ import { performance } from "node:perf_hooks";
 import test from "node:test";
 import vm from "node:vm";
 
-import { loadHarness, makeVariantHarness } from "../../tools/run_search_diagnosis.mjs";
+import { loadHarness, makeVariantHarness, rankQuery } from "../../tools/run_search_diagnosis.mjs";
 
 const root = new URL("../../", import.meta.url);
 const [source, manifest, vectorBuffer, appSource, configSource, htmlSource] = await Promise.all([
@@ -100,6 +100,29 @@ test("semantic retrieval, RRF union, acronym guard, and strongest-child rollup a
     { parent_id: "q", passage_id: "parent:q", voyage_score: .7 },
   ]);
   assert.equal(Array.from(parents, item => item.passage_id).join(","), "child:c,parent:q");
+});
+
+test("a cross-track result removed from Strong remains eligible for Potential", () => {
+  const query = "health data workforce workshop";
+  const local = rankQuery(harness, query, { evidence: true });
+  assert.equal(local.rows.some(row => row.id === "334326"), false);
+
+  const parentDirect = harness.parentEngine.score(query, { evidence: true });
+  const childDirect = harness.childEngine.score(query, { evidence: true });
+  const candidates = api.buildBm25Candidates({
+    parentCatalog: harness.parentCatalog,
+    childCatalog: harness.childCatalog,
+    parentDirect,
+    childDirect,
+    corpusById: new Map(corpus.map(item => [item.passage_id, item])),
+  });
+  const blocker = candidates.find(item => item.parent_id === "334326");
+
+  assert.ok(blocker);
+  assert.equal(blocker.passage_id, "parent:334326");
+  assert.ok(parentDirect.discoveryScores[harness.parentCatalog.opportunities.findIndex(record => (
+    String(record.opportunity_id) === "334326"
+  ))] > 0);
 });
 
 test("hybrid client is lazy, rejects a stale manifest, and sends no browser credential", async () => {
