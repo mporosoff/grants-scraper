@@ -4,6 +4,7 @@
   const catalog = globalThis.GRANT_CATALOG;
   const $ = id => document.getElementById(id);
   const PAGE_SIZE = 20;
+  const POTENTIAL_MATCH_LIMIT = 12;
   const MAX_AI_CANDIDATES = 32;
   const MAX_AI_MATCHES = 12;
   const MAX_CHAT_RESULTS = 20;
@@ -128,6 +129,8 @@
     sort: "deadline",
     filters: Object.fromEntries(Object.keys(FACETS).map(name => [name, new Set()])),
     matches: [],
+    strongMatches: [],
+    potentialMatches: [],
     searchDiagnostics: null,
     hybrid: {
       active: false,
@@ -1330,10 +1333,7 @@
           : 0,
         evidenceTier: 1,
         hybridRank: Number(item.hybrid_rank),
-        intentClassification: ["primary", "broader"].includes(item.intent_classification)
-          ? item.intent_classification
-          : null,
-        judgeFallback: item.judge_fallback === true,
+        workflowTier: "potential",
         hybridExplanation: item.explanation || null,
         bestChild: childMatch,
         childDroveMatch: Boolean(child),
@@ -1353,7 +1353,13 @@
   }
 
   function applyHybridParents(parents) {
-    state.matches = hybridMatches(parents);
+    const strongIds = new Set(state.strongMatches.map(match => (
+      recordId(catalog.opportunities[match.index])
+    )));
+    state.potentialMatches = hybridMatches(parents)
+      .filter(match => !strongIds.has(recordId(catalog.opportunities[match.index])))
+      .slice(0, POTENTIAL_MATCH_LIMIT);
+    state.matches = [...state.strongMatches, ...state.potentialMatches];
     state.hybrid.active = true;
     state.searchDiagnostics = {
       ...(state.searchDiagnostics || {}),
@@ -1378,16 +1384,8 @@
       state.hybrid.usage = result.usage || null;
       applyHybridParents(state.hybrid.parents);
       state.page = 1;
-      const judge = state.hybrid.diagnostics?.judge;
-      if (judge?.status === "complete") {
-        $("search-status").textContent = `${Number(judge.primary_count || 0).toLocaleString()} primary ${Number(judge.primary_count || 0) === 1 ? "match" : "matches"}`
-          + `${judge.broader_count ? ` · ${Number(judge.broader_count).toLocaleString()} broader program ${Number(judge.broader_count) === 1 ? "fit" : "fits"}` : ""}.`;
-      } else if (judge?.fallback) {
-        $("search-status").textContent = `Enhanced ranking complete: ${state.matches.length.toLocaleString()} opportunities. Intent classification is temporarily unavailable, so the neutral hybrid-ranked list is shown.`;
-      } else {
-        $("search-status").textContent =
-          `Enhanced ranking complete: ${state.matches.length.toLocaleString()} public opportunities match the current filters.`;
-      }
+      $("search-status").textContent = `${state.strongMatches.length.toLocaleString()} strong ${state.strongMatches.length === 1 ? "match" : "matches"}`
+        + ` · ${state.potentialMatches.length.toLocaleString()} potential ${state.potentialMatches.length === 1 ? "match" : "matches"}.`;
       renderResults();
     }).catch(error => {
       if (sequence !== state.hybrid.sequence || normalizedQuery !== state.query) return;
@@ -1398,8 +1396,9 @@
         ...(state.searchDiagnostics || {}),
         hybrid: { fallback: true, reason: state.hybrid.fallbackReason },
       };
-      $("search-status").textContent =
-        `Search complete: ${state.matches.length.toLocaleString()} opportunities. Enhanced ranking is temporarily unavailable, so local ranking is shown.`;
+      $("search-status").textContent = state.strongMatches.length
+        ? `Search complete: ${state.strongMatches.length.toLocaleString()} strong ${state.strongMatches.length === 1 ? "match" : "matches"}.`
+        : "No strong matches found. Try adjusting the search terms or filters.";
       renderResults();
     });
   }
@@ -1651,7 +1650,9 @@
       ? ` Interpreted ${acronymNotes.join(", ")} using ${usedResearcherContext ? "local catalog and researcher context" : "the local catalog"}; no AI call was made.`
       : "";
     $("search-status").textContent =
-      `Search complete: ${state.matches.length.toLocaleString()} opportunities match the context above.${typoNote}${acronymNote}`;
+      hybridCanRun()
+        ? `${state.strongMatches.length.toLocaleString()} strong ${state.strongMatches.length === 1 ? "match" : "matches"}. Looking for additional potential matches…${typoNote}${acronymNote}`
+        : `Search complete: ${state.matches.length.toLocaleString()} opportunities match the context above.${typoNote}${acronymNote}`;
     $("results-heading").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
@@ -1710,7 +1711,9 @@
     state.sort = $("sort").value;
     if (!preserveAi) clearAiState({ preserveNofo });
     const search = computeMatches(state.query);
-    state.matches = search.matches;
+    state.strongMatches = search.matches.map(match => ({ ...match, workflowTier: "strong" }));
+    state.potentialMatches = [];
+    state.matches = [...state.strongMatches];
     state.searchDiagnostics = search.diagnostics;
     state.hybrid.sequence += 1;
     state.hybrid.pending = false;
@@ -2150,7 +2153,8 @@
     if (!APP_CONFIG?.flags?.matchExplanations) return "";
     if (match.hybridExplanation?.excerpt) {
       const explanation = match.hybridExplanation;
-      return `<details class="match-explanation match-explanation-v2" data-match-tier="public-source-passage"><summary><span>Why this matched</span><span class="match-explanation-tier">Public source passage</span></summary><ul><li><strong>${escapeHtml(explanation.source_label || "Public source")}: </strong>${escapeHtml(explanation.excerpt)}</li></ul></details>`;
+      const potential = match.workflowTier === "potential";
+      return `<details class="match-explanation match-explanation-v2" data-match-tier="${potential ? "potential-public-source-passage" : "public-source-passage"}"><summary><span>${potential ? "Why this may be relevant" : "Why this matched"}</span><span class="match-explanation-tier">${potential ? "Supporting public passage" : "Public source passage"}</span></summary><ul><li><strong>${escapeHtml(explanation.source_label || "Public source")}: </strong>${escapeHtml(explanation.excerpt)}</li></ul></details>`;
     }
     if (!MATCH_EXPLAIN_API?.build) return "";
     if (APP_CONFIG?.flags?.searchV2 && MATCH_EXPLAIN_API?.buildV2) {
@@ -2201,8 +2205,12 @@
       || catalog?.source?.url
       || "https://www.grants.gov/";
     const flags = [
-      match.intentClassification === "primary" ? `<span class="badge open">Primary match</span>` : "",
-      match.intentClassification === "broader" ? `<span class="badge broad">Broader program fit</span>` : "",
+      APP_CONFIG?.flags?.searchV2 && state.query && match.workflowTier === "strong"
+        ? `<span class="badge open">Strong match</span>`
+        : "",
+      APP_CONFIG?.flags?.searchV2 && state.query && match.workflowTier === "potential"
+        ? `<span class="badge potential">Potential match</span>`
+        : "",
       isBroadOpportunity(record) ? `<span class="badge broad">Broad / umbrella call</span>` : "",
       record.has_preliminary_stage ? `<span class="badge warning">LOI / preproposal</span>` : "",
       record.actionability_status === "preliminary_deadline_passed_verify"
@@ -2250,7 +2258,7 @@
         ? "Archived"
         : "Forecasted";
 
-    return `<article class="result-card${assessment ? " ai-match" : ""}" data-opportunity-id="${escapeAttribute(id)}" tabindex="-1">
+    return `<article class="result-card${assessment ? " ai-match" : ""}${match.workflowTier === "potential" ? " potential-match" : ""}" data-opportunity-id="${escapeAttribute(id)}" tabindex="-1">
       <div class="card-topline">
         <span class="result-position">Result ${Number(resultPosition).toLocaleString()}</span>
         <span class="badge ${statusClass}">${statusLabel}</span>
@@ -2998,15 +3006,11 @@
               ? "Single-FOA focus"
               : "Chat-focused results"
       : state.hybrid.active
-        ? state.hybrid.diagnostics?.judge?.status === "complete"
-          ? "Intent-gated hybrid catalog"
-          : state.hybrid.diagnostics?.judge?.fallback
-            ? "Hybrid-ranked catalog · intent gate fallback"
-            : "Hybrid-ranked public catalog"
+        ? "Strong + potential catalog"
         : state.hybrid.pending
-          ? "Local catalog · enhancing ranking"
+          ? "Strong matches · finding potential matches"
           : state.hybrid.fallbackReason
-            ? "Local BM25F fallback"
+            ? "Strong matches"
       : state.profile.active
         ? "Profile-ranked catalog"
         : "Public catalog";
@@ -3025,14 +3029,43 @@
       : "No records match the current search";
 
     if (!page.length) {
+      const strongPotentialWorkflow = APP_CONFIG?.flags?.searchV2 && Boolean(state.query);
+      const waitingForPotential = strongPotentialWorkflow && state.hybrid.pending;
       $("results").innerHTML = `<div class="empty-state">
-        <h3>${hasNofoDocument() ? "No catalog record matched this notice" : "No opportunities matched"}</h3>
-        <p>${hasNofoDocument() ? "You can still ask questions about the uploaded PDF in document chat. Try searching its opportunity number manually if you expect a catalog record." : "Try fewer terms, remove a filter, include forecasted opportunities, or use optional AI expansion to translate the idea into catalog terminology."}</p>
+        <h3>${hasNofoDocument() ? "No catalog record matched this notice" : strongPotentialWorkflow ? "No strong matches found" : "No opportunities matched"}</h3>
+        <p>${hasNofoDocument() ? "You can still ask questions about the uploaded PDF in document chat. Try searching its opportunity number manually if you expect a catalog record." : waitingForPotential ? "We’re checking public opportunity text for potential matches. These may be useful leads, but you should verify the official scope." : strongPotentialWorkflow ? "Try adjusting the search terms or filters." : "Try fewer terms, remove a filter, include forecasted opportunities, or use optional AI expansion to translate the idea into catalog terminology."}</p>
         ${!hasNofoDocument() && aiRefineHasContext() ? `<button class="button ai-button" id="empty-ai-refine" type="button"><span aria-hidden="true">✦</span> Broaden this search with AI</button>` : ""}
         <button class="button secondary" id="empty-clear" type="button">Clear search and filters</button>
       </div>`;
       $("empty-clear")?.addEventListener("click", clearEverything);
       $("empty-ai-refine")?.addEventListener("click", refineWithAi);
+    } else if (APP_CONFIG?.flags?.searchV2 && state.query && !state.ai.active) {
+      const groups = [];
+      page.forEach((match, index) => {
+        const tier = match.workflowTier === "potential" ? "potential" : "strong";
+        let group = groups[groups.length - 1];
+        if (!group || group.tier !== tier) {
+          group = { tier, rows: [] };
+          groups.push(group);
+        }
+        group.rows.push({ match, position: start + index + 1 });
+      });
+      const noStrongNotice = state.strongMatches.length
+        ? ""
+        : `<div class="result-tier-empty"><h3>No strong matches found.</h3><p>The broader search found potential matches below for you to review.</p></div>`;
+      $("results").innerHTML = noStrongNotice + groups.map(group => {
+        const strong = group.tier === "strong";
+        const count = strong ? state.strongMatches.length : state.potentialMatches.length;
+        return `<section class="result-tier result-tier-${group.tier}" aria-labelledby="result-tier-${group.tier}">
+          <div class="result-tier-heading">
+            <h3 id="result-tier-${group.tier}">${strong ? "Strong matches" : "Potential matches"} <span>${count.toLocaleString()}</span></h3>
+            <p>${strong
+              ? "Supported by conservative local evidence in the opportunity’s public title, program area, description, or eligible child text."
+              : "Additional leads from the broader hybrid search. The supporting public passage is shown, but confirm fit in the official opportunity."}</p>
+          </div>
+          ${group.rows.map(item => resultCard(item.match, item.position)).join("")}
+        </section>`;
+      }).join("");
     } else {
       $("results").innerHTML = page
         .map((match, index) => resultCard(match, start + index + 1))

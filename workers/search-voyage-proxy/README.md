@@ -1,19 +1,16 @@
 # Funding Finder Voyage search proxy
 
-This Worker exposes only three POST endpoints:
+This Worker exposes only two POST endpoints:
 
 - `/embed-query` for a bounded public Funding Finder query;
 - `/rerank` for up to 300 passages whose IDs and SHA-256 hashes match the
   committed public passage manifest.
-- `/judge` for one structured classification of up to 10 reranked public
-  results using the remote Workers AI binding.
 
 The Worker does not log query strings, accept researcher profiles/CVs/ORCID
 data, return documents, or expose the Voyage credential. Browser requests are
 accepted only from `https://mporosoff.github.io` and local HTTP development
 origins. Embedding/reranking failures return bounded error codes so the browser
-can retain local BM25F; judge failures preserve the neutral hybrid-ranked list
-without fabricating primary/broader labels.
+can retain the local Strong matches and omit unavailable Potential matches.
 
 ## Local verification
 
@@ -25,9 +22,6 @@ npx wrangler dev
 ```
 
 Never commit `.dev.vars` or an API key.
-
-The `AI` binding is configured as a remote binding. Wrangler may prompt for a
-one-time Cloudflare login before the first local `/judge` request.
 
 ## One-time deployment when separately authorized
 

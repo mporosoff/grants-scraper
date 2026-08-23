@@ -149,18 +149,6 @@ test("hybrid client is lazy, rejects a stale manifest, and sends no browser cred
         usage: { total_tokens: 10 },
       }), { status: 200 });
     }
-    if (String(url).endsWith("/judge")) {
-      const body = JSON.parse(options.body);
-      return new Response(JSON.stringify({
-        model: api.JUDGE_MODEL,
-        results: body.results.map((item, index) => ({
-          id: item.id,
-          classification: index === 0 ? "primary" : index === 1 ? "broader" : "reject",
-        })),
-        usage: { input_tokens: 50, output_tokens: 20, total_tokens: 70, neurons: 2 },
-        latency_ms: 10,
-      }), { status: 200 });
-    }
     return new Response("", { status: 404 });
   };
   const client = api.createClient({
@@ -175,16 +163,16 @@ test("hybrid client is lazy, rejects a stale manifest, and sends no browser cred
   });
   assert.deepEqual(requests, []);
   const result = await client.search("rare earth recycling");
-  assert.equal(result.parents.length, 2);
-  assert.deepEqual(Array.from(result.parents, item => item.intent_classification), ["primary", "broader"]);
-  assert.equal(result.diagnostics.judge.reject_count, 8);
+  assert.ok(result.parents.length > 10);
+  assert.ok(result.parents.every(item => !Object.hasOwn(item, "intent_classification")));
+  assert.equal(result.diagnostics.judge, undefined);
   const posts = requests.filter(item => item.options?.method === "POST");
-  assert.equal(posts.length, 3);
+  assert.equal(posts.length, 2);
   assert.ok(posts.every(item => !Object.keys(item.options.headers).some(name => /authorization|api.key/i.test(name))));
   assert.ok(result.parents.every(item => item.explanation?.excerpt && !/score|similarity/i.test(item.explanation.excerpt)));
 });
 
-test("intent-gate failure preserves neutral hybrid ranking without fabricated labels", async () => {
+test("hybrid results remain ranked leads without fabricated relevance labels", async () => {
   const fetchImpl = async (url, options = {}) => {
     if (String(url) === "/manifest") return new Response(JSON.stringify(manifest), { status: 200 });
     if (String(url) === "/vectors") return new Response(vectorBuffer, { status: 200 });
@@ -204,9 +192,6 @@ test("intent-gate failure preserves neutral hybrid ranking without fabricated la
         relevance_score: 1 - index / Math.max(1, body.candidates.length),
       })) }), { status: 200 });
     }
-    if (String(url).endsWith("/judge")) {
-      return new Response(JSON.stringify({ error: { code: "judge_unavailable" } }), { status: 503 });
-    }
     return new Response("", { status: 404 });
   };
   const client = api.createClient({
@@ -221,9 +206,9 @@ test("intent-gate failure preserves neutral hybrid ranking without fabricated la
   });
   const result = await client.search("rare earth recycling");
   assert.ok(result.parents.length > 10);
-  assert.equal(result.diagnostics.judge.status, "fallback");
-  assert.ok(result.parents.every(item => item.intent_classification === null && item.judge_fallback));
-  assert.equal(result.usage.judge_fallbacks, 1);
+  assert.equal(result.diagnostics.judge, undefined);
+  assert.ok(result.parents.every(item => item.explanation?.excerpt));
+  assert.equal(result.usage.judge_requests, undefined);
 });
 
 test("provider errors and client timeouts fail closed for the existing local-result fallback", async () => {
@@ -270,13 +255,20 @@ test("site integration remains disabled, lazy, extractive, and fail-closed", () 
   assert.match(htmlSource, /assets\/search-hybrid\.js/);
   assert.doesNotMatch(htmlSource, /search-v2-voyage-vectors\.f16|search-v2-voyage-manifest\.json/);
   assert.match(appSource, /hybridSearchClient\.search\(normalizedQuery, \{ context: "" \}\)/);
-  assert.match(appSource, /Enhanced ranking is temporarily unavailable, so local ranking is shown/);
-  assert.ok(appSource.indexOf("state.matches = search.matches") < appSource.indexOf("scheduleHybridSearch(state.query)"));
-  assert.match(appSource, /Public source passage/);
-  assert.match(appSource, /Primary match/);
-  assert.match(appSource, /Broader program fit/);
-  assert.match(appSource, /Intent-gated hybrid catalog/);
-  assert.match(appSource, /intent classification is temporarily unavailable/i);
+  assert.match(appSource, /No strong matches found\. Try adjusting the search terms or filters/);
+  assert.ok(appSource.indexOf("state.strongMatches = search.matches") < appSource.indexOf("scheduleHybridSearch(state.query)"));
+  assert.match(appSource, /Why this may be relevant/);
+  assert.match(appSource, /Strong match/);
+  assert.match(appSource, /Potential match/);
+  assert.match(appSource, /Strong \+ potential catalog/);
+  assert.match(appSource, /const POTENTIAL_MATCH_LIMIT = 12/);
+  assert.match(appSource, /\.filter\(match => !strongIds\.has/);
+  assert.match(appSource, /Strong matches/);
+  assert.match(appSource, /Potential matches/);
+  assert.match(appSource, /No strong matches found\.<\/h3><p>The broader search found potential matches below/);
+  assert.match(appSource, /confirm fit in the official opportunity/i);
+  assert.doesNotMatch(appSource, /intent classification is temporarily unavailable/i);
+  assert.doesNotMatch(source, /\/judge|JUDGE_MODEL|intent_classification/);
   assert.doesNotMatch(appSource, /Matched because semantic similarity|Voyage score/);
   assert.doesNotMatch(appSource, /VOYAGE_API_KEY|Authorization:\s*`Bearer/);
 });
