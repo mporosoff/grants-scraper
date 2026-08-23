@@ -250,7 +250,10 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         )
         self.assertIn(f'assets/app-config.js?v={search_v2_version}', explorer_html)
         self.assertIn(f'assets/search-v2-config.js?v={search_v2_version}', explorer_html)
-        self.assertIn(f'assets/subtopic-runtime.js?v={search_v2_version}', explorer_html)
+        self.assertIn(
+            'assets/subtopic-runtime.js?v=app-1.2.0-sidecar-cache1',
+            explorer_html,
+        )
         self.assertIn(
             'assets/match-explain.js?v=app-1.2.0',
             explorer_html,
