@@ -58,6 +58,8 @@ test("sidecar is lazy and normal pages share one app release source", () => {
   assert.doesNotMatch(teamHtml, /<script src="(?:\.\/)?data\/subtopics\.js/);
   assert.match(mainHtml, /assets\/app-config\.js\?v=app-1\.2\.0/);
   assert.match(teamHtml, /assets\/app-config\.js\?v=app-1\.2\.0/);
+  assert.match(mainHtml, /connect-src 'self'/);
+  assert.match(teamHtml, /connect-src 'self'/);
   for (const page of [mainHtml, teamHtml]) assert.match(page, /data-app-version/);
 });
 
