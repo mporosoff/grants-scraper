@@ -34183,7 +34183,7 @@ globalThis.SUBTOPIC_CATALOG={
      "evidence_anchor": "p5",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-08-20",
-     "last_verified": "2026-08-20",
+     "last_verified": "2026-08-23",
      "opportunity_id": "362859:fa-1",
      "ordinal_label": "1",
      "own_deadline": null,
@@ -34211,6 +34211,7 @@ globalThis.SUBTOPIC_CATALOG={
      "term_display": {
       "across": "across",
       "analysi": "Analysis",
+      "area": "Area",
       "bas": "based",
       "build": "build",
       "bulk": "bulk",
@@ -34223,6 +34224,7 @@ globalThis.SUBTOPIC_CATALOG={
       "element": "elements",
       "elemental": "elemental",
       "excitation": "excitation",
+      "focu": "Focus",
       "generate": "generate",
       "integrat": "Integrated",
       "intensity": "intensity",
@@ -34256,7 +34258,7 @@ globalThis.SUBTOPIC_CATALOG={
      "evidence_anchor": "p5",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-08-20",
-     "last_verified": "2026-08-20",
+     "last_verified": "2026-08-23",
      "opportunity_id": "362859:fa-2",
      "ordinal_label": "2",
      "own_deadline": null,
@@ -34285,6 +34287,7 @@ globalThis.SUBTOPIC_CATALOG={
       "advanc": "advanced",
       "analysi": "analysis",
       "architecture": "architecture",
+      "area": "Area",
       "capability": "capabilities",
       "capable": "capable",
       "design": "design",
@@ -34292,6 +34295,7 @@ globalThis.SUBTOPIC_CATALOG={
       "experiment": "experiments",
       "fa1": "FA1",
       "fa4": "FA4",
+      "focu": "Focus",
       "foundation": "Foundations",
       "method": "methods",
       "multimodal": "multimodal",
@@ -34318,7 +34322,7 @@ globalThis.SUBTOPIC_CATALOG={
      "evidence_anchor": "p5",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-08-20",
-     "last_verified": "2026-08-20",
+     "last_verified": "2026-08-23",
      "opportunity_id": "362859:fa-3",
      "ordinal_label": "3",
      "own_deadline": null,
@@ -34347,6 +34351,7 @@ globalThis.SUBTOPIC_CATALOG={
       "advanc": "advanced",
       "analysi": "analysis",
       "architecture": "architecture",
+      "area": "Area",
       "bulk": "bulk",
       "capability": "capabilities",
       "capable": "capable",
@@ -34355,6 +34360,7 @@ globalThis.SUBTOPIC_CATALOG={
       "experiment": "experiments",
       "fa1": "FA1",
       "fa4": "FA4",
+      "focu": "Focus",
       "foundation": "Foundations",
       "method": "methods",
       "multimodal": "multimodal",
@@ -34381,7 +34387,7 @@ globalThis.SUBTOPIC_CATALOG={
      "evidence_anchor": "p5",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-08-20",
-     "last_verified": "2026-08-20",
+     "last_verified": "2026-08-23",
      "opportunity_id": "362859:fa-4",
      "ordinal_label": "4",
      "own_deadline": null,
@@ -34412,7 +34418,7 @@ globalThis.SUBTOPIC_CATALOG={
       "addition": "addition",
       "address": "Addressing",
       "analysi": "analysis",
-      "area": "areas",
+      "area": "Area",
       "bas": "based",
       "build": "build",
       "bulk": "bulk",
@@ -34425,7 +34431,7 @@ globalThis.SUBTOPIC_CATALOG={
       "explore": "Explore",
       "external": "external",
       "feedback": "feedback",
-      "focu": "focus",
+      "focu": "Focus",
       "four": "four",
       "fusion": "Fusion",
       "identification": "identification",
@@ -39081,6 +39087,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "363641": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "363642": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -39096,6 +39109,34 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363646": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363647": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363648": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363654": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363656": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -39131,6 +39172,20 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363666": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363668": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363669": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
