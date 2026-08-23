@@ -124,6 +124,23 @@ test("starts with one Add researcher control instead of a department pill wall",
   assert.match(teamPage, /selected\.indexOf\(key\) === -1/);
 });
 
+test("opens the researcher picker without forcing the native select open", () => {
+  assert.match(teamPage, /picker\.hidden = !opening/);
+  assert.doesNotMatch(teamPage, /\$\("researcher-choice"\)\.focus\(\)/);
+  const newResearcher = teamPage.indexOf('newGroup.label = "Add a new researcher"');
+  const faculty = teamPage.indexOf('facultyGroup.label = "Department faculty"');
+  const saved = teamPage.indexOf('savedGroup.label = "Saved researchers"');
+  assert.ok(newResearcher > -1 && newResearcher < faculty && faculty < saved);
+});
+
+test("starts at the top and omits the catalog-count hero line", () => {
+  assert.match(teamPage, /history\.scrollRestoration = "manual"/);
+  assert.match(teamPage, /window\.addEventListener\("pageshow"/);
+  assert.match(teamPage, /window\.scrollTo\(0, 0\)/);
+  assert.doesNotMatch(teamPage, /id="meta-line"/);
+  assert.doesNotMatch(teamPage, /department faculty profiles|live graded matching across/);
+});
+
 test("supports repeated selection, removal, editing, and the four-person maximum", () => {
   assert.match(teamPage, /function chooseResearcher\(\)/);
   assert.match(teamPage, /if \(selected\.indexOf\(member\) !== -1\)/);
