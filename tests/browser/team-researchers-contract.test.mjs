@@ -72,8 +72,11 @@ function buildIndex(records, query) {
   };
 }
 
-test("wires the external researcher editor into a syntactically valid page", () => {
+test("wires the researcher picker and editor into a syntactically valid page", () => {
   assert.match(teamPage, /id="add-researcher"/);
+  assert.match(teamPage, /id="researcher-picker"/);
+  assert.match(teamPage, /id="researcher-choice"/);
+  assert.match(teamPage, /id="choose-researcher"/);
   assert.match(teamPage, /id="external-researcher-form"/);
   assert.match(teamPage, /id="external-orcid"/);
   assert.match(teamPage, /id="import-external-orcid"/);
@@ -81,6 +84,8 @@ test("wires the external researcher editor into a syntactically valid page", () 
   assert.match(teamPage, /assets\/team-researchers\.js/);
   assert.match(teamPage, /assets\/team-matcher\.js/);
   assert.match(teamPage, /assets\/search-retrieval\.js/);
+  assert.match(teamPage, /assets\/search-hybrid\.js/);
+  assert.match(teamPage, /assets\/team-hybrid\.js/);
   assert.match(teamPage, /MATCHER_API\.create\(catalogData, M \|\| \{\}, SEARCH_API\)/);
   assert.match(teamPage, /function rebuildResearcherMatches/);
   assert.match(teamPage, /function memberProfile/);
@@ -90,7 +95,7 @@ test("wires the external researcher editor into a syntactically valid page", () 
   assert.match(teamPage, /Per-award amount/);
   assert.match(teamPage, /Eligible applicants/);
   assert.match(teamPage, /Open official FOA/);
-  assert.match(teamPage, /intended for individual and internal institutional use/);
+  assert.match(teamPage, /Team Match is an informational research-planning aid/);
   assert.match(teamPage, /not an official source of record/);
   assert.match(teamPage, /independently verify fit, eligibility, deadlines, requirements, and terms/);
   assert.match(teamPage, /&copy; 2026 Marc D\. Porosoff/);
@@ -105,6 +110,41 @@ test("wires the external researcher editor into a syntactically valid page", () 
     .filter(Boolean);
   assert.equal(inlineScripts.length, 1);
   assert.doesNotThrow(() => new Function(inlineScripts[0]));
+});
+
+test("starts with one Add researcher control instead of a department pill wall", () => {
+  const grid = teamPage.match(/<div class="pi-grid" id="pi-grid">([\s\S]*?)<\/div>/)?.[1] || "";
+  assert.match(grid, />\s*Add researcher\s*<\/button>/);
+  assert.equal((grid.match(/class="pi-toggle/g) || []).length, 1);
+  assert.doesNotMatch(teamPage, /names\.forEach\(function \(n\) \{[\s\S]*?grid\.insertBefore/);
+  assert.match(teamPage, /facultyGroup\.label = "Department faculty"/);
+  assert.match(teamPage, /savedGroup\.label = "Saved researchers"/);
+  assert.match(teamPage, /newGroup\.label = "Add a new researcher"/);
+  assert.match(teamPage, /selected\.indexOf\(name\) === -1/);
+  assert.match(teamPage, /selected\.indexOf\(key\) === -1/);
+});
+
+test("supports repeated selection, removal, editing, and the four-person maximum", () => {
+  assert.match(teamPage, /function chooseResearcher\(\)/);
+  assert.match(teamPage, /if \(selected\.indexOf\(member\) !== -1\)/);
+  assert.match(teamPage, /toggleButton\.setAttribute\("aria-label", "Remove "/);
+  assert.match(teamPage, /if \(profile\) \{[\s\S]*?openExternalEditor\(profile\.id\)/);
+  assert.match(teamPage, /addButton\.hidden = selected\.length >= MAX/);
+  assert.match(teamPage, /selected = selected\.filter\(function \(member\) \{ return member !== key; \}\)/);
+  assert.match(teamPage, /autoSelected = !wasEditing && selected\.length < MAX/);
+  assert.match(teamPage, /TEAM_API\.save\(externalStorage, nextProfiles\)/);
+  assert.match(teamPage, /ORCID_API\.fetchProfile/);
+});
+
+test("uses neutral visitor-facing researcher terminology", () => {
+  const visibleText = teamPage
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ");
+  assert.doesNotMatch(visibleText, /\b(?:internal|external)\b/i);
+  assert.doesNotMatch(teamPage, /\(internal\)/i);
+  assert.match(visibleText, /Researchers you add are saved only in this browser/);
 });
 
 test("normalizes and saves no more than four external researchers", () => {

@@ -91,9 +91,6 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn('assets/site-help.js', explorer_html)
         self.assertIn('assets/site-help.js', team_html)
         for page in (explorer_html, team_html):
-            self.assertIn(
-                "intended for individual and internal institutional use", page
-            )
             self.assertIn("not an official source of record", page)
             self.assertIn("&copy; 2026 Marc D. Porosoff", page)
             self.assertIn("All rights reserved", page)
@@ -105,7 +102,17 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             self.assertIn("requires written permission from the author", page)
             self.assertNotIn("MIT License", page)
             self.assertNotIn('href="./LICENSE"', page)
+        self.assertIn(
+            "intended for individual and internal institutional use", explorer_html
+        )
+        self.assertIn(
+            "Team Match is an informational research-planning aid", team_html
+        )
+        self.assertNotIn("intended for individual and internal institutional use", team_html)
         self.assertNotIn("UR ChemE", team_html)
+        self.assertIn('id="researcher-picker"', team_html)
+        self.assertIn('assets/search-hybrid.js', team_html)
+        self.assertIn('assets/team-hybrid.js', team_html)
         self.assertIn('MAX_EXTERNAL = 4', team_researchers_js)
         self.assertIn('funding-finder.external-researchers.v1', team_researchers_js)
         self.assertIn('function buildMatches', team_researchers_js)
