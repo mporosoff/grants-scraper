@@ -133,6 +133,16 @@ test("opens the researcher picker without forcing the native select open", () =>
   assert.ok(newResearcher > -1 && newResearcher < faculty && faculty < saved);
 });
 
+test("shows an accessible progress state while adding a researcher", () => {
+  assert.match(teamPage, /id="researcher-picker-status" role="status" aria-live="polite"/);
+  assert.match(teamPage, /function setResearcherAddBusy\(busy, member\)/);
+  assert.match(teamPage, /button\.textContent = busy \? "Adding…" : "Add to team"/);
+  assert.match(teamPage, /button\.setAttribute\("aria-busy", "true"\)/);
+  assert.match(teamPage, /"Adding " \+ memberName\(member\) \+ " and finding team matches…"/);
+  assert.match(teamPage, /setResearcherAddBusy\(true, member\);[\s\S]*?setTimeout\(function \(\) \{[\s\S]*?toggle\(member\)/);
+  assert.match(teamPage, /setResearcherAddBusy\(false, member\)/);
+});
+
 test("starts at the top and omits the catalog-count hero line", () => {
   assert.match(teamPage, /history\.scrollRestoration = "manual"/);
   assert.match(teamPage, /window\.addEventListener\("pageshow"/);

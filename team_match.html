@@ -76,6 +76,11 @@
   .researcher-picker select{width:100%;padding:9px 11px;border:1px solid var(--line-strong);border-radius:9px;background:#fff;color:var(--ink);font:inherit;font-weight:400;}
   .researcher-picker button{padding:9px 13px;border:1px solid var(--blue);border-radius:9px;background:var(--blue);color:#fff;font:inherit;font-size:.82rem;font-weight:750;cursor:pointer;}
   .researcher-picker button:disabled{opacity:.5;cursor:not-allowed;}
+  .researcher-picker button[aria-busy="true"]{opacity:1;cursor:wait;}
+  .researcher-picker button[aria-busy="true"]::before{content:"";display:inline-block;width:.8em;height:.8em;margin-right:7px;border:2px solid rgb(255 255 255 / 55%);border-top-color:#fff;border-radius:50%;vertical-align:-.1em;animation:team-add-spin .7s linear infinite;}
+  .researcher-picker-status{flex-basis:100%;min-height:1.2em;margin:0;color:var(--blue-dark);font-size:.76rem;font-weight:650;}
+  @keyframes team-add-spin{to{transform:rotate(360deg);}}
+  @media (prefers-reduced-motion:reduce){.researcher-picker button[aria-busy="true"]::before{animation:none;}}
   .external-status{margin:9px 2px 0;color:var(--muted);font-size:.78rem;}
   .external-status.error{color:#9b2735;}
   .researcher-editor{margin:14px 0 2px;padding:16px;border:1px solid #bed2eb;border-radius:12px;background:#f7faff;}
@@ -214,6 +219,7 @@
         </select>
       </label>
       <button id="choose-researcher" type="button" disabled>Add to team</button>
+      <p class="researcher-picker-status" id="researcher-picker-status" role="status" aria-live="polite"></p>
     </div>
     <p class="external-status" id="external-status" aria-live="polite">Researchers you add are saved only in this browser.</p>
     <form class="researcher-editor" id="external-researcher-form" hidden>
@@ -946,6 +952,19 @@
     $("add-researcher").setAttribute("aria-expanded", opening ? "true" : "false");
   }
 
+  function setResearcherAddBusy(busy, member) {
+    var choice = $("researcher-choice");
+    var button = $("choose-researcher");
+    choice.disabled = busy;
+    button.disabled = busy || !choice.value;
+    button.textContent = busy ? "Adding…" : "Add to team";
+    if (busy) button.setAttribute("aria-busy", "true");
+    else button.removeAttribute("aria-busy");
+    $("researcher-picker-status").textContent = busy
+      ? "Adding " + memberName(member) + " and finding team matches…"
+      : "";
+  }
+
   function chooseResearcher() {
     var member = $("researcher-choice").value;
     if (!member) return;
@@ -958,9 +977,21 @@
       renderExternalStatus("That researcher is already on the team.", true);
       return;
     }
-    toggle(member);
-    $("researcher-picker").hidden = true;
-    $("add-researcher").setAttribute("aria-expanded", "false");
+    setResearcherAddBusy(true, member);
+    setTimeout(function () {
+      var error = null;
+      try {
+        toggle(member);
+        $("researcher-picker").hidden = true;
+        $("add-researcher").setAttribute("aria-expanded", "false");
+      } catch (caught) {
+        error = caught;
+      }
+      setResearcherAddBusy(false, member);
+      if (error) {
+        $("researcher-picker-status").textContent = "The researcher could not be added. Please try again.";
+      }
+    }, 25);
   }
 
   function keywordInput() {
