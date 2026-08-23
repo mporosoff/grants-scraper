@@ -2,18 +2,18 @@
   "use strict";
 
   const release = Object.freeze({
-    version: "1.1.0",
-    updated: "2026-08-21",
+    version: "1.2.0",
+    updated: "2026-08-23",
   });
   const productionFlags = Object.freeze({
     subtopics: true,
     matchExplanations: true,
-    searchV2: false,
+    searchV2: true,
   });
   const localHosts = new Set(["localhost", "127.0.0.1", "[::1]"]);
   const local = localHosts.has(globalThis.location?.hostname || "");
   const parameters = new URLSearchParams(globalThis.location?.search || "");
-  const productionHybridProxy = "";
+  const productionHybridProxy = "https://funding-finder-voyage-search.urochestercheme.workers.dev/";
 
   function localHybridProxy() {
     if (!local) return "";

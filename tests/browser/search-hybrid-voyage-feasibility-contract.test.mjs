@@ -62,5 +62,5 @@ test("receipt contains usage but no credential or stored vector data", () => {
   assert.equal(receipt.reranking.total_tokens, 3349932);
   assert.equal(receipt.authentication.key_printed_or_persisted_by_harness, false);
   assert.equal(receipt.corpus_vectors_persisted, false);
-  assert.match(appConfig, /searchV2:\s*false/);
+  assert.match(appConfig, /searchV2:\s*true/);
 });

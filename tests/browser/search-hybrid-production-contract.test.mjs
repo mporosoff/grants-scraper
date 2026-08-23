@@ -309,9 +309,12 @@ test("provider errors and client timeouts fail closed for the existing local-res
   assert.equal(timedOut.usage().fallbacks, 1);
 });
 
-test("site integration remains disabled, lazy, extractive, and fail-closed", () => {
-  assert.match(configSource, /searchV2:\s*false/);
-  assert.match(configSource, /productionHybridProxy\s*=\s*""/);
+test("production integration is enabled, lazy, extractive, and fail-closed", () => {
+  assert.match(configSource, /searchV2:\s*true/);
+  assert.match(
+    configSource,
+    /productionHybridProxy\s*=\s*"https:\/\/funding-finder-voyage-search\.urochestercheme\.workers\.dev\/"/,
+  );
   assert.match(htmlSource, /assets\/search-hybrid\.js/);
   assert.doesNotMatch(htmlSource, /search-v2-voyage-vectors\.f16|search-v2-voyage-manifest\.json/);
   assert.match(appSource, /hybridSearchClient\.search\(normalizedQuery, \{ context: "" \}\)/);

@@ -32,8 +32,9 @@ const [
   readFile(new URL("evaluation/search_v2_strong_coherence_root_causes.json", root), "utf8").then(JSON.parse),
 ]);
 
-test("the disabled browser contract renders Strong before bounded deduplicated Potential", () => {
-  assert.match(configSource, /searchV2:\s*false/);
+test("the production browser contract renders Strong before bounded deduplicated Potential", () => {
+  assert.match(configSource, /searchV2:\s*true/);
+  assert.match(configSource, /funding-finder-voyage-search\.urochestercheme\.workers\.dev/);
   assert.match(appSource, /const POTENTIAL_MATCH_LIMIT = 12/);
   assert.match(appSource, /state\.matches = \[\.\.\.state\.strongMatches, \.\.\.state\.potentialMatches\]/);
   assert.match(appSource, /\.filter\(match => !strongIds\.has/);
