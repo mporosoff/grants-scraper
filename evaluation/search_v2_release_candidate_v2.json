@@ -101,6 +101,16 @@
     "broader_as_visible_primary_count": 1,
     "maximum_visible_primary_count": 3,
     "maximum_internal_candidate_count": 1142,
+    "visible_primary_admission_counts": {
+      "authoritative_scope": 3,
+      "publication_eligible_child": 3,
+      "explicit_parent_evidence": 6
+    },
+    "visible_primary_evidence_tier_counts": {
+      "tier_1": 3,
+      "tier_2": 3,
+      "tier_3": 6
+    },
     "candidate_latency_ms": {
       "p50": 35.7121,
       "p95": 172.5294
