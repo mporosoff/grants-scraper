@@ -224,8 +224,15 @@ async function main() {
     }),
     results: rows,
   };
-  await writeFile(new URL(OUTPUT_PATH, ROOT), `${JSON.stringify(payload, null, 2)}\n`, "utf8");
-  console.log(JSON.stringify({ output: OUTPUT_PATH, after_metrics: payload.after_metrics, gates: payload.gates }, null, 2));
+  if (process.argv.includes("--write")) {
+    await writeFile(new URL(OUTPUT_PATH, ROOT), `${JSON.stringify(payload, null, 2)}\n`, "utf8");
+  }
+  console.log(JSON.stringify({
+    output: process.argv.includes("--write") ? OUTPUT_PATH : null,
+    after_metrics: payload.after_metrics,
+    gates: payload.gates,
+  }, null, 2));
+  if (Object.values(payload.gates).some(value => value !== true)) process.exitCode = 1;
 }
 
 await main();

@@ -374,3 +374,21 @@ Machine-readable outcome and movement review are in `evaluation/search_v2_iterat
 **READY TO FREEZE CANDIDATE FOR PHASE 3R / PHASE 4B**
 
 Phase 4B has not been authorized or executed. Search v2 remains off, `main` remains untouched, nothing was deployed, no release version/date was created, and Phase 5 remains unauthorized.
+
+## Phase 4B outcome
+
+Phase 4B supersedes the preceding Iteration-2 pre-open status. The pre-registered 28-query frame was verified at SHA-256 `3e94159b9eff8ef424b51ddc46c4cdb3a28243a39aa21374cd3411fb5d4b3cc3`, opened once against frozen candidate `daa3355bc68b9fda45037a0a8d2be8c38fad7638`, and immediately frozen. The immutable raw-results SHA-256 is `fef755fb0bfdd2f485bf712478dc3b82623038882f9e961746d79ac599ff8af5`. The runner now refuses a second execution. Adjudication is keyed by exact query and result, retains every pre-registered anchor, and made no retrieval, scoring, concept, scope, explanation, or UI change.
+
+The release candidate is blocked. Across 28 queries and 27 required anchors, query-average primary Precision@10 was 0.411, positive-query required-primary Recall@10 and Recall@50 were both 0.300, micro anchor recall was 0.296, and nDCG@10 was 0.393. Nineteen required anchors were completely missed. Recall failed in materials, agriculture, energy, AI/computing, defense, space, and environmental science. The only domain with complete positive-query recall was public health, where one adjacent rural residency-workforce program was incorrectly labeled primary.
+
+The candidate considered 19,839 internal candidates, rejected 19,826, displayed 12 primary results, displayed no broader fits, and had a maximum of three visible primaries versus 1,142 internal candidates for one query. Three displayed primaries were irrelevant and one was a broader fit. The failures include unseen material-operation normalization and scope gaps; missing authoritative parent/child recall for AFRI, SCALEUP, Genesis, ARL, Geospace, DWPR, and CESU; AIM/ordinary-`aim` and partial-intent admissions; a stale currentness admission; and a broader-fit classification failure. These are class-level Iteration-3 evidence, not authorization to patch or rerun this spent holdout.
+
+Phase-4B explanations contained no unsupported evidence or privacy/review-only leakage, but four of 12 were misleading because retrieval incorrectly labeled broader or irrelevant results as primary. The independent 42-pair Phase-3 frame itself remained green with 41 useful cases, one reviewed shallow fail-closed case, and zero unsupported or misleading explanations.
+
+All regression and infrastructure gates remained green: the 49-query development frame; former Phase-4 challenge; 48-query/11-discipline MEAS-5 frame; 37-query historical baseline with zero top-ten churn; 50-case parent/child invariant; browser/Python configuration parity; 139 browser tests; 43 focused Python tests; 756 live-product Python tests; size gates; and the 22-artifact no-drift rebuild. Warm development latency was 11.23 ms p50 and 31.46 ms p95. Phase-4B candidate latency was 35.71 ms p50 and 172.53 ms p95. Phase 4B added zero browser-asset bytes.
+
+The authoritative decision is `evaluation/search_v2_release_candidate_v2.json`; raw execution, receipt, truth, adjudicated results, and actual test exit codes are recorded in the adjacent Phase-4B evaluation artifacts. Search v2 remains disabled, `main` remains untouched, nothing was deployed, and no release version/date was created.
+
+**PHASE 4B BLOCKED — PHASE 5 NOT AUTHORIZED**
+
+The Phase-4B holdout is permanently spent and must not be rerun as acceptance. If work continues, these outputs become Iteration-3 challenge evidence and a new sealed holdout must be frozen before any tuning.

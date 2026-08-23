@@ -1,0 +1,271 @@
+{
+  "schema_version": 1,
+  "phase": "4B",
+  "iteration": 2,
+  "decided_at": "2026-08-22",
+  "decision": "RELEASE CANDIDATE BLOCKED WITH EXACT FAILING GATE",
+  "decision_summary": "PHASE 4B BLOCKED — PHASE 5 NOT AUTHORIZED",
+  "phase5_authorized": false,
+  "branch": "search-quality-v2",
+  "starting_candidate_sha": "daa3355bc68b9fda45037a0a8d2be8c38fad7638",
+  "candidate_tree_sha": "add6b88b802855fde619b716272b906603664296",
+  "implementation_freeze_checkpoint": "bf2d3ab6b7aedcdf183c8389acbfd0f4f662f37a",
+  "preopen_commit": "f30a290",
+  "holdout_and_adjudication_commit": "5b63cf7b0a4a1e1839190b4e0b07338f0dc7ae29",
+  "decision_package_parent_sha": "5b63cf7b0a4a1e1839190b4e0b07338f0dc7ae29",
+  "final_branch_head": "recorded_in_the_completion_report_after_the_decision_commit",
+  "candidate_behavior_changed_during_phase4b": false,
+  "post_holdout_tuning": false,
+  "production": {
+    "search_v2_enabled": false,
+    "flag_path": "assets/app-config.js",
+    "flag_sha256": "a679a5080582ae0c00c8a9b03caa5bb1a67ae971b06cc140c3f7f4102d3c4401",
+    "deployed": false,
+    "merged_to_main": false
+  },
+  "main": {
+    "start_sha": "ef7a0642f6ce66828f01ee280bd5993f66029b2f",
+    "end_sha_before_decision_commit": "ef7a0642f6ce66828f01ee280bd5993f66029b2f",
+    "origin_main_sha": "ef7a0642f6ce66828f01ee280bd5993f66029b2f",
+    "unchanged": true
+  },
+  "immutable_evidence": {
+    "preopen_checkpoint": {
+      "path": "evaluation/search_v2_phase4b_preopen.json",
+      "sha256": "ffc762b26384f66e6711d6a1f7b8d6755e3be5221f85153491c7a1e26c101018"
+    },
+    "holdout_frame": {
+      "path": "evaluation/search_v2_iteration2_holdout_frame.json",
+      "sha256": "3e94159b9eff8ef424b51ddc46c4cdb3a28243a39aa21374cd3411fb5d4b3cc3",
+      "query_count": 28
+    },
+    "holdout_manifest": {
+      "path": "evaluation/search_v2_iteration2_holdout_manifest.json",
+      "sha256": "d041445e753aa2f70d96a4f7c6f4874828ef8df32d2fb3c1aaa8289cd25c7942"
+    },
+    "raw_results": {
+      "path": "evaluation/search_v2_iteration2_holdout_results_raw.json",
+      "sha256": "fef755fb0bfdd2f485bf712478dc3b82623038882f9e961746d79ac599ff8af5",
+      "execution_count": 1,
+      "second_execution_refused": true
+    },
+    "execution_receipt": {
+      "path": "evaluation/search_v2_phase4b_execution.json",
+      "sha256": "d087cbb12f56c9c985dad6e523faf768544da9025dc2dde16534aff540b0de3d"
+    },
+    "query_result_truth": {
+      "path": "evaluation/search_v2_iteration2_holdout_truth.json",
+      "sha256": "40eb063659289d2b84bae2dae66513278ebfbd5740b46ccd566fbef010bbac48"
+    },
+    "adjudicated_results": {
+      "path": "evaluation/search_v2_iteration2_holdout_results.json",
+      "sha256": "5e6dee415139dc0c81879ead161fa931211bc583176c0c537df437282d90a15a"
+    },
+    "regression_runs": {
+      "path": "evaluation/search_v2_phase4b_test_runs.json",
+      "sha256": "4079bcd6c2d39efae206c4522f3d91bed2c225b2ec07ac9b8cce893228f41694"
+    }
+  },
+  "frozen_candidate_hashes": {
+    "config/search_v2.json": "54ecac7b0b5e07135d601e98f56c100c211993b0eea060cb581e3e64bf532429",
+    "assets/search-query.js": "9df2b390a06ff610afe53b52a82b0df3c432eb6b3389f378e9f5b0dc584ab5d3",
+    "assets/search-retrieval.js": "6bb5662112e13e6c817f26f689023319e20786d675ef7ed223c35efd39d3c3c4",
+    "assets/match-explain.js": "f74f010d62ab460cf13f99d9448795ce8147794c4f821eabcdefcbf9625cf92f",
+    "assets/app.js": "63891c3fc338ab62f5d17858fd366fee842e1e2279c8bcbac52bde6ba8301aee",
+    "data/opportunities.js": "f6168e043fc6e4466edb49dd4fa0f957d09509f9591ee952bda035b423d27f1f",
+    "data/subtopics.js": "e2f45ecdfab26770f2346eaa4a488bb57fcaa3cc17c5d90ed25e30d14727f40d"
+  },
+  "preserved_failed_phase4_hashes": {
+    "evaluation/search_v2_holdout_results_raw.json": "8d4a1d37e0940fde1eefdd3dca7f3fa2a39a40194ce6b083b40eafd4897fb919",
+    "evaluation/search_v2_holdout_truth.json": "83740bfd4bb5e3ef123a3a1b6e8c353b41c98a357261bce3e5b6b3e359bcebd1",
+    "evaluation/search_v2_holdout_results.json": "1505bc7d435643a40127cc5c5e8bce841135843a8662a466f68a86505704f3e7",
+    "evaluation/PHASE4_REVIEW.md": "0fdd99b6aad1fad35b3b2b4ec7d05efe9a27a9a514589629996c7da0fab7bbc9",
+    "evaluation/search_v2_release_candidate.json": "0edf8c283eff216e445e72101196c2fd038e42708710591a79d5e71e24f2d8ab"
+  },
+  "phase4b_metrics": {
+    "query_count": 28,
+    "positive_query_count": 20,
+    "required_anchor_count": 27,
+    "query_average_primary_precision_at_10": 0.410714,
+    "positive_query_required_primary_recall_at_10": 0.3,
+    "positive_query_required_primary_recall_at_50": 0.3,
+    "required_anchor_micro_recall_at_10": 0.296296,
+    "required_anchor_micro_recall_at_50": 0.296296,
+    "ndcg_at_10": 0.392857,
+    "required_anchor_mrr": 0.3,
+    "visible_primary_count": 12,
+    "broader_fit_count": 0,
+    "internal_candidate_discovery_count": 19839,
+    "rejected_partial_intent_count": 19826,
+    "irrelevant_visible_primary_count": 3,
+    "broader_as_visible_primary_count": 1,
+    "maximum_visible_primary_count": 3,
+    "maximum_internal_candidate_count": 1142,
+    "candidate_latency_ms": {
+      "p50": 35.7121,
+      "p95": 172.5294
+    },
+    "production_comparison_latency_ms": {
+      "p50": 18.4053,
+      "p95": 168.9629
+    }
+  },
+  "metrics_by_domain": {
+    "agriculture": {"queries": 3, "positive_queries": 2, "precision_at_10": 0.333333, "recall_at_10": 0.0, "recall_at_50": 0.0, "ndcg_at_10": 0.333333, "visible_primaries": 0, "internal_candidates": 1500},
+    "ai_computing": {"queries": 4, "positive_queries": 3, "precision_at_10": 0.25, "recall_at_10": 0.333333, "recall_at_50": 0.333333, "ndcg_at_10": 0.25, "visible_primaries": 3, "irrelevant_primaries": 2, "internal_candidates": 3456},
+    "biomedical_hard_negative": {"queries": 1, "positive_queries": 0, "precision_at_10": 1.0, "visible_primaries": 0, "internal_candidates": 815},
+    "chemistry_materials": {"queries": 6, "positive_queries": 5, "precision_at_10": 0.5, "recall_at_10": 0.4, "recall_at_50": 0.4, "ndcg_at_10": 0.5, "visible_primaries": 4, "internal_candidates": 4090},
+    "defense": {"queries": 3, "positive_queries": 1, "precision_at_10": 0.333333, "recall_at_10": 0.0, "recall_at_50": 0.0, "ndcg_at_10": 0.0, "visible_primaries": 1, "irrelevant_primaries": 1, "internal_candidates": 2264},
+    "energy": {"queries": 2, "positive_queries": 2, "precision_at_10": 0.0, "recall_at_10": 0.0, "recall_at_50": 0.0, "ndcg_at_10": 0.0, "visible_primaries": 0, "internal_candidates": 1687},
+    "environmental_science": {"queries": 2, "positive_queries": 2, "precision_at_10": 0.0, "recall_at_10": 0.0, "recall_at_50": 0.0, "ndcg_at_10": 0.0, "visible_primaries": 0, "internal_candidates": 1384},
+    "public_health": {"queries": 4, "positive_queries": 3, "precision_at_10": 0.875, "recall_at_10": 1.0, "recall_at_50": 1.0, "ndcg_at_10": 1.0, "visible_primaries": 4, "broader_as_primary": 1, "internal_candidates": 2699},
+    "space": {"queries": 3, "positive_queries": 2, "precision_at_10": 0.333333, "recall_at_10": 0.0, "recall_at_50": 0.0, "ndcg_at_10": 0.333333, "visible_primaries": 0, "internal_candidates": 1944}
+  },
+  "required_anchor_outcome": {
+    "retrieved_at_10": 8,
+    "missed_completely": 19,
+    "below_rank_10": 0,
+    "retrieved_ranks": {
+      "i2hold_material_03:362061": 1,
+      "i2hold_material_03:360678": 2,
+      "i2hold_material_03:361526": 3,
+      "i2hold_health_01:363582": 1,
+      "i2hold_health_02:363582": 1,
+      "i2hold_health_03:363222": 1,
+      "i2hold_ai_01:361526": 1,
+      "i2hold_child_01:361526": 1
+    },
+    "missed_by_domain": {
+      "chemistry_materials": 8,
+      "agriculture": 2,
+      "energy": 2,
+      "ai_computing": 2,
+      "defense": 1,
+      "space": 2,
+      "environmental_science": 2
+    }
+  },
+  "explanations": {
+    "phase4b_visible_primary_explanations": 12,
+    "correct_and_useful": 8,
+    "correct_and_useful_rate": 0.666667,
+    "unsupported": 0,
+    "misleading": 4,
+    "primary_labels_on_broader_or_irrelevant": 4,
+    "review_only_leakage": 0,
+    "private_profile_cv_orcid_leakage": 0,
+    "regression_42_pair_frame": "passed_41_useful_1_reviewed_shallow_0_unsupported_0_misleading"
+  },
+  "gate_outcomes": {
+    "A_required_primary_recall": {"pass": false, "reason": "Recall@50 was 0.300 by positive query and 19 of 27 required anchors were completely missed."},
+    "B_primary_precision": {"pass": false, "reason": "Three irrelevant results and one broader fit were displayed as primary."},
+    "C_complete_intent": {"pass": false, "reason": "Rural obstetric workforce and AIM/aim lexical collisions were admitted without complete intent."},
+    "D_authoritative_scope_generalization": {"pass": false, "reason": "Required anchors failed across materials, agriculture, energy, AI, defense, space, and environment."},
+    "E_evidence_tier_ranking": {"pass": false, "reason": "Nineteen rich or authoritative anchors were absent rather than merely ranked below ten."},
+    "F_broader_program_separation": {"pass": false, "reason": "A rural residency workforce program was labeled primary for an obstetric-care-network query; no broader fits were emitted."},
+    "G_explanations": {"pass": false, "reason": "Four of twelve visible-primary explanations made misleading primary claims because retrieval labels were wrong."},
+    "H_regression": {"pass": true, "reason": "All required development, browser, Python, invariant, parity, and no-drift reruns exited zero."},
+    "I_performance_and_size": {"pass": true, "reason": "Size gates passed, Phase-4B added zero browser-asset bytes, and latency/candidate counts were recorded."}
+  },
+  "failed_gates": [
+    "A_required_primary_recall",
+    "B_primary_precision",
+    "C_complete_intent",
+    "D_authoritative_scope_generalization",
+    "E_evidence_tier_ranking",
+    "F_broader_program_separation",
+    "G_explanations"
+  ],
+  "root_cause_clusters": [
+    {
+      "class": "concept_family_and_query_normalization_generalization",
+      "evidence": "Two unseen rare-earth/material-operation formulations missed all three authoritative material anchors, and a critical-metal leaching query missed both required scopes.",
+      "owner": "iteration_3_retrieval_design"
+    },
+    {
+      "class": "authoritative_scope_and_child_candidate_recall",
+      "evidence": "AFRI, SCALEUP, Genesis, ARL, Geospace, DWPR, and CESU anchors were completely absent for defensible cross-domain paraphrases.",
+      "owner": "iteration_3_retrieval_design_or_source_evidence_audit"
+    },
+    {
+      "class": "complete_intent_and_acronym_collision",
+      "evidence": "A rural residency workforce program and two AIM/ordinary-aim records became primary without satisfying the complete query intent.",
+      "owner": "iteration_3_admission_verifier"
+    },
+    {
+      "class": "currentness_and_broader_fit_separation",
+      "evidence": "A topically related but stale FY2012 record became primary, and one genuinely adjacent rural workforce program was not separated as broader fit.",
+      "owner": "iteration_3_currentness_and_classification"
+    },
+    {
+      "class": "explanation_label_dependency",
+      "evidence": "The explanation mechanism remained causal, but inherited four incorrect primary classifications and therefore produced four misleading primary labels.",
+      "owner": "retrieval_label_fix_before_phase3_verification"
+    }
+  ],
+  "comparison": {
+    "iteration1_failed_holdout": {
+      "primary_precision_at_10": 0.373,
+      "required_primary_recall_at_10": 0.633,
+      "required_primary_recall_at_50": 0.65,
+      "direct_positive_ndcg_at_10": 0.586,
+      "maximum_visible_primary_count": 213,
+      "irrelevant_top_ten_primary_admissions": 43
+    },
+    "iteration2_development_challenge": {
+      "primary_precision_at_10": 1.0,
+      "required_primary_recall_at_10": 1.0,
+      "required_primary_recall_at_50": 1.0,
+      "direct_positive_ndcg_at_10": 0.91534,
+      "maximum_visible_primary_count": 4,
+      "irrelevant_top_ten_primary_admissions": 0
+    },
+    "phase4b_new_holdout": {
+      "primary_precision_at_10": 0.410714,
+      "required_primary_recall_at_10": 0.3,
+      "required_primary_recall_at_50": 0.3,
+      "ndcg_at_10": 0.392857,
+      "maximum_visible_primary_count": 3,
+      "irrelevant_visible_primary_count": 3,
+      "broader_as_visible_primary_count": 1
+    }
+  },
+  "regression_status": {
+    "development_49_query": "passed",
+    "former_phase4_challenge": "passed",
+    "meas5_48_query_11_discipline": "passed",
+    "historical_37_query_baseline": "passed_zero_top10_churn",
+    "phase3_42_pair_explanation_frame": "passed",
+    "browser_suite": "passed_139_of_139",
+    "focused_python": "passed_43_of_43",
+    "live_product_python": "passed_756_of_756",
+    "parent_child_invariant": "passed_50_cases_byte_identical",
+    "size_gates": "passed",
+    "no_drift": "passed_22_artifacts_unchanged"
+  },
+  "asset_size": {
+    "phase4b_browser_asset_delta_bytes": 0,
+    "candidate_browser_assets_bytes": {
+      "assets/app.js": 192831,
+      "assets/search-query.js": 59346,
+      "assets/search-retrieval.js": 65008,
+      "assets/match-explain.js": 17817,
+      "assets/search-v2-config.js": 41076
+    }
+  },
+  "known_limitations": [
+    "The deterministic concept-family and scope machinery does not generalize reliably to many unseen material-operation and cross-domain paraphrases.",
+    "Acronym and ordinary-word collisions can still satisfy concise complete-intent admission in unseen forms.",
+    "Broader-program and currentness separation is not fail-closed for every unseen query.",
+    "Passing prior development/challenge gates materially overstates unseen-domain recall."
+  ],
+  "rollback_path": "No rollback action is required because search v2 remains disabled, no production assets changed during Phase 4B, main was not touched, and nothing was deployed.",
+  "next_protocol": {
+    "phase5_authorized": false,
+    "phase4b_holdout_spent": true,
+    "phase4b_outputs_must_remain_immutable": true,
+    "iteration3_may_use_phase4b_as_challenge_evidence": true,
+    "new_sealed_holdout_required_before_iteration3_tuning": true,
+    "phase4b_must_not_be_rerun_as_acceptance": true
+  }
+}

@@ -26,20 +26,69 @@ function runNode(path, args = []) {
   });
 }
 
-test("Iteration-2 acceptance frame is sealed behind a non-executing lock", async () => {
-  const [frameSource, runnerSource] = await Promise.all([
+test("Iteration-2 Phase 4B execution is frozen to one immutable raw artifact", async () => {
+  const [frameSource, runnerSource, rawSource, receiptSource, truthSource, resultsSource] = await Promise.all([
     source("evaluation/search_v2_iteration2_holdout_frame.json"),
     source("tools/run_search_v2_iteration2_holdout.mjs"),
+    source("evaluation/search_v2_iteration2_holdout_results_raw.json"),
+    source("evaluation/search_v2_phase4b_execution.json"),
+    source("evaluation/search_v2_iteration2_holdout_truth.json"),
+    source("evaluation/search_v2_iteration2_holdout_results.json"),
   ]);
   const frame = JSON.parse(frameSource);
+  const raw = JSON.parse(rawSource);
+  const receipt = JSON.parse(receiptSource);
+  const truth = JSON.parse(truthSource);
+  const results = JSON.parse(resultsSource);
   assert.equal(frame.status, "sealed_never_executed");
   assert.equal(frame.construction_contract.candidate_executions, 0);
   assert.ok(frame.queries.length >= 24 && frame.queries.length <= 30);
   assert.equal(new Set(frame.queries.map(item => item.query.toLowerCase())).size, frame.queries.length);
-  assert.doesNotMatch(runnerSource, /loadHarness|rankQuery|search-query|search-retrieval/);
-  const attempt = await runNode("tools/run_search_v2_iteration2_holdout.mjs");
+  assert.match(runnerSource, /loadHarness|rankQuery/);
+  assert.equal(raw.execution_count, 1);
+  assert.equal(raw.query_count, 28);
+  assert.equal(raw.post_outcome_tuning_permitted, false);
+  assert.equal(receipt.raw_results_sha256, sha256(rawSource));
+  assert.equal(truth.raw_results_sha256, sha256(rawSource));
+  assert.equal(results.raw_results_sha256, sha256(rawSource));
+  assert.deepEqual(new Set(truth.reviewed_query_ids), new Set(frame.queries.map(item => item.id)));
+  const attempt = await runNode("tools/run_search_v2_iteration2_holdout.mjs", ["--execute-once"]);
   assert.notEqual(attempt.code, 0);
-  assert.match(attempt.stderr, /sealed and has never been executed/);
+  assert.match(attempt.stderr, /already exists.*single-use/s);
+});
+
+test("Phase 4B blocks Phase 5 on the immutable Iteration-2 adjudication", async () => {
+  const [rawSource, truthSource, resultsSource, testRunsSource, releaseSource] = await Promise.all([
+    source("evaluation/search_v2_iteration2_holdout_results_raw.json"),
+    source("evaluation/search_v2_iteration2_holdout_truth.json"),
+    source("evaluation/search_v2_iteration2_holdout_results.json"),
+    source("evaluation/search_v2_phase4b_test_runs.json"),
+    source("evaluation/search_v2_release_candidate_v2.json"),
+  ]);
+  const results = JSON.parse(resultsSource);
+  const testRuns = JSON.parse(testRunsSource);
+  const release = JSON.parse(releaseSource);
+  const expectedFailures = [
+    "A_required_primary_recall",
+    "B_primary_precision",
+    "C_complete_intent",
+    "D_authoritative_scope_generalization",
+    "E_evidence_tier_ranking",
+    "F_broader_program_separation",
+    "G_explanations",
+  ];
+
+  assert.equal(release.immutable_evidence.raw_results.sha256, sha256(rawSource));
+  assert.equal(release.immutable_evidence.query_result_truth.sha256, sha256(truthSource));
+  assert.equal(release.immutable_evidence.adjudicated_results.sha256, sha256(resultsSource));
+  assert.equal(release.immutable_evidence.regression_runs.sha256, sha256(testRunsSource));
+  assert.deepEqual(results.failed_holdout_gates, expectedFailures);
+  assert.deepEqual(release.failed_gates, expectedFailures);
+  assert.equal(release.phase5_authorized, false);
+  assert.equal(release.post_holdout_tuning, false);
+  assert.equal(release.production.search_v2_enabled, false);
+  assert.equal(release.main.unchanged, true);
+  assert.equal(testRuns.all_regression_runs_exit_zero, true);
 });
 
 test("Phase 4 binds one immutable holdout execution to query-specific truth", async () => {
