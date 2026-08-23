@@ -13,7 +13,7 @@ import re
 from .build_catalog import tokenize
 
 
-QUERY_API_CONTRACT_VERSION = 3
+QUERY_API_CONTRACT_VERSION = 4
 PFAS_CONCEPT = (
     "persistent contaminant contamination pollution remediation groundwater "
     "drinking wastewater water treatment purification"
@@ -67,6 +67,11 @@ DROUGHT_RESILIENCE_CONCEPT = "drought tolerant tolerance resilience resilient ab
 CROP_GENETICS_CONCEPT = "crop plant genetics genetic genomics genomic breeding cultivar germplasm trait"
 ENERGY_STORAGE_CONCEPT = "energy storage battery grid-scale grid technology technologies"
 LONG_DURATION_CONCEPT = "long duration long-duration seasonal extended storage"
+ABIOTIC_STRESS_CONCEPT = "abiotic stress heat thermal drought temperature tolerance resilience resilient"
+BIOTIC_STRESS_CONCEPT = "biotic stress disease pathogen pest resistance resistant resilience resilient"
+TECHNOLOGY_MATURATION_CONCEPT = "scale up scale-up scaling commercialization commercial deployment demonstration market maturation"
+SCIENTIFIC_WORKFLOW_CONCEPT = "science scientific research workflow workflows software computing"
+SCIENTIFIC_SOFTWARE_CONCEPT = "science scientific research software code computing"
 FOUNDATION_MODEL_CONCEPT = "foundation model models composable modular generative ai"
 SECURITY_RESILIENCE_CONCEPT = "secure security cybersecurity adversarial robustness robust resilience resilient attack mitigation trustworthy"
 EARTH_SYSTEM_CONCEPT = "earth system sun-earth geospace coupled"
@@ -87,6 +92,10 @@ MARITIME_CONCEPT = "maritime marine naval navy ocean sea"
 NAVIGATION_CONCEPT = "navigation pnt"
 QUANTUM_SENSING_CONCEPT = "quantum sensing"
 AGENCY_QUALIFIER_TERMS = {"doe", "nsf", "nasa", "nih"}
+PROGRAM_FORM_TERMS = {
+    "commercialization", "deployment", "demonstration", "network", "training",
+    "workforce", "workshop",
+}
 BROAD_CALL_CONCEPT = "broad agency announcement baa long range office wide open scope"
 BROAD_CALL_EVIDENCE = (
     ("broad", "agency", "announcement"),
@@ -254,6 +263,8 @@ def _concept_group(
     role: str = "",
     required: bool = False,
     evidence_policy: str = "",
+    evidence_class: str = "",
+    exact_indexed_acronym: bool = False,
     strict_evidence: bool = True,
     saturate_concept: bool = False,
 ) -> dict:
@@ -277,6 +288,8 @@ def _concept_group(
         "role": role,
         "required": required,
         "evidence_policy": evidence_policy,
+        "evidence_class": evidence_class,
+        "exact_indexed_acronym": exact_indexed_acronym,
         "strict_evidence": strict_evidence,
         "saturate_concept": saturate_concept,
     }
@@ -322,6 +335,9 @@ def expand_query_groups(
     critical_mineral_phrase = search_v2 and bool(re.search(
         r"\bcritical[\s-]+minerals?\b", value, re.I
     ))
+    critical_metal_phrase = search_v2 and bool(re.search(
+        r"\bcritical[\s-]+metals?\b", value, re.I
+    ))
     quantum_sensing_phrase = search_v2 and bool(re.search(
         r"\bquantum[\s-]+sens(?:e|ing|ors?)\b", value, re.I
     ))
@@ -346,6 +362,11 @@ def expand_query_groups(
     resource_recovery_phrase = search_v2 and bool(re.search(
         r"\bresource[\s-]+recovery\b", value, re.I
     ))
+    separation_operation = search_v2 and bool(re.search(
+        r"\b(?:separat\w*|extract\w*|recover\w*|purif\w*|hydrometallurg\w*|leach\w*|refin\w*|recycl\w*|processing)\b",
+        value,
+        re.I,
+    ))
     maternal_health_phrase = search_v2 and bool(re.search(
         r"\bmaternal[\s-]+(?:mortality|morbidity|health)\b", value, re.I
     ))
@@ -353,6 +374,14 @@ def expand_query_groups(
         re.search(r"\brural\b", value, re.I)
         and re.search(
             r"\b(?:communities?|areas?|care|maternity|obstetrics?|networks?|access)\b",
+            value,
+            re.I,
+        )
+    )
+    explicit_care_network = search_v2 and bool(
+        re.search(r"\bnetworks?\b", value, re.I)
+        and re.search(
+            r"\b(?:care|health|clinical|maternity|obstetrics?|services?)\b",
             value,
             re.I,
         )
@@ -365,11 +394,37 @@ def expand_query_groups(
         re.search(r"\b(?:crops?|plants?)\b", value, re.I)
         and re.search(r"\b(?:genetics?|genomics?|breeding|traits?)\b", value, re.I)
     )
+    abiotic_stress_phrase = search_v2 and bool(
+        re.search(r"\b(?:crops?|plants?)\b", value, re.I)
+        and re.search(
+            r"\b(?:heat|thermal|temperature|drought)[\s-]*(?:toleran\w*|resilien\w*)\b",
+            value,
+            re.I,
+        )
+    )
+    biotic_stress_phrase = search_v2 and bool(
+        re.search(r"\b(?:crops?|plants?)\b", value, re.I)
+        and re.search(r"\b(?:disease|pathogen|pest)\b", value, re.I)
+        and re.search(r"\b(?:resistan\w*|resilien\w*|toleran\w*)\b", value, re.I)
+    )
     long_duration_phrase = search_v2 and bool(re.search(
         r"\blong[\s-]+duration\b", value, re.I
     ))
     energy_storage_phrase = search_v2 and bool(re.search(
         r"\benergy[\s-]+storage\b", value, re.I
+    ))
+    storage_technology_phrase = search_v2 and bool(
+        re.search(r"\bstor(?:e|age)\b", value, re.I)
+        and re.search(r"\b(?:grid[\s-]+scale|thermal|seasonal|energy|battery)\b", value, re.I)
+    )
+    seasonal_storage_phrase = search_v2 and bool(
+        re.search(r"\bseasonal\b", value, re.I)
+        and re.search(r"\bstor(?:e|age)\b", value, re.I)
+    )
+    technology_maturation_phrase = search_v2 and bool(re.search(
+        r"\b(?:scale[\s-]+up|commerciali[sz]\w*|deploy\w*|demonstrat\w*|matur\w*)\b",
+        value,
+        re.I,
     ))
     foundation_model_phrase = search_v2 and bool(re.search(
         r"\bfoundation[\s-]+models?\b", value, re.I
@@ -379,6 +434,22 @@ def expand_query_groups(
         value,
         re.I,
     ))
+    ai_security_context = search_v2 and bool(
+        re.search(r"\b(?:AI|artificial[\s-]+intelligence|machine[\s-]+learning)\b", value, re.I)
+        and re.search(
+            r"\b(?:secure|security|cybersecurity|adversarial\w*|robust(?:ness)?|resilien(?:t|ce)|trustworthy)\b",
+            value,
+            re.I,
+        )
+    )
+    scientific_workflow_phrase = search_v2 and bool(
+        re.search(r"\b(?:science|scientific|research)\b", value, re.I)
+        and re.search(r"\b(?:workflows?|software|computing)\b", value, re.I)
+    )
+    scientific_software_phrase = search_v2 and bool(
+        re.search(r"\b(?:science|scientific|research)\b", value, re.I)
+        and re.search(r"\bsoftware\b", value, re.I)
+    )
     artificial_intelligence_phrase = search_v2 and bool(re.search(
         r"\bartificial[\s-]+intelligence\b", value, re.I
     ))
@@ -440,6 +511,10 @@ def expand_query_groups(
         value,
         re.I,
     ))
+    thermal_protection_materials_phrase = search_v2 and bool(
+        re.search(r"\bthermal[\s-]+protection\b", value, re.I)
+        and re.search(r"\bmaterials?\b", value, re.I)
+    )
     hypersonic_environment_phrase = search_v2 and bool(re.search(
         r"\bhypersonics?\b", value, re.I
     ))
@@ -454,11 +529,121 @@ def expand_query_groups(
     )
     uppercase_terms = {
         token
-        for raw in re.findall(r"\b[A-Z][A-Z0-9]{2,8}s?\b", value)
+        for raw in re.findall(r"\b[A-Z][A-Z0-9]{1,8}s?\b", value)
         for token in tokenize(raw)
     }
     emitted: set[str] = set()
     for term in direct_terms:
+        if abiotic_stress_phrase and term in {
+            "heat-resilient", "heat", "thermal", "temperature", "drought",
+            "tolerant", "tolerance", "resilient", "resilience",
+        }:
+            if "abiotic-stress-resilience" in emitted:
+                continue
+            emitted.add("abiotic-stress-resilience")
+            groups.append(_concept_group(
+                "abiotic stress resilience", ABIOTIC_STRESS_CONCEPT, direct_term_set,
+                literal_terms=(term,), concept_id="abiotic-stress-resilience",
+                role="property", required=True, evidence_policy="source_grounded_only",
+                saturate_concept=True,
+            ))
+            continue
+        if biotic_stress_phrase and term in {
+            "disease", "pathogen", "pest", "resistance", "resistant",
+            "resilience", "resilient", "tolerance", "tolerant",
+        }:
+            if "biotic-stress-resilience" in emitted:
+                continue
+            emitted.add("biotic-stress-resilience")
+            groups.append(_concept_group(
+                "biotic stress resilience", BIOTIC_STRESS_CONCEPT, direct_term_set,
+                literal_terms=(term,), concept_id="biotic-stress-resilience",
+                role="property", required=True, evidence_policy="source_grounded_only",
+                saturate_concept=True,
+            ))
+            continue
+        if seasonal_storage_phrase and term == "seasonal":
+            if "long-duration" in emitted:
+                continue
+            emitted.add("long-duration")
+            groups.append(_concept_group(
+                "long duration", LONG_DURATION_CONCEPT, direct_term_set,
+                literal_terms=("seasonal",), concept_id="long-duration",
+                role="property", required=True, evidence_policy="source_grounded_only",
+                saturate_concept=True,
+            ))
+            continue
+        if storage_technology_phrase and term in {
+            "grid-scale", "thermal", "storage", "energy", "battery",
+        }:
+            if "energy-storage" in emitted:
+                continue
+            emitted.add("energy-storage")
+            groups.append(_concept_group(
+                "energy storage", ENERGY_STORAGE_CONCEPT, direct_term_set,
+                literal_terms=(term,), concept_id="energy-storage", role="target",
+                required=True, evidence_policy="source_grounded_only",
+                saturate_concept=True,
+            ))
+            continue
+        if technology_maturation_phrase and term in {
+            "scale-up", "scale", "commercialization", "commercialisation",
+            "deployment", "demonstration", "maturation", "technology",
+        }:
+            if "technology-maturation" in emitted:
+                continue
+            emitted.add("technology-maturation")
+            groups.append(_concept_group(
+                "technology maturation", TECHNOLOGY_MATURATION_CONCEPT, direct_term_set,
+                literal_terms=(term,), concept_id="technology-maturation",
+                role="application_or_context", required=True,
+                evidence_policy="source_grounded_only", saturate_concept=True,
+            ))
+            continue
+        if ai_security_context and term in {
+            "secure", "security", "cybersecurity", "adversarial", "adversarially",
+            "robustness", "robust", "resilience", "resilient", "trustworthy",
+        }:
+            if "security-resilience" in emitted:
+                continue
+            emitted.add("security-resilience")
+            groups.append(_concept_group(
+                "security resilience", SECURITY_RESILIENCE_CONCEPT, direct_term_set,
+                literal_terms=(term,), concept_id="security-resilience", role="property",
+                required=True, evidence_policy="source_grounded_only",
+                evidence_class=(
+                    "security" if term in {"secure", "security", "cybersecurity"}
+                    else "resilience"
+                ),
+                saturate_concept=True,
+            ))
+            continue
+        if scientific_software_phrase and term in {
+            "science", "scientific", "research", "software",
+        }:
+            if "scientific-software" in emitted:
+                continue
+            emitted.add("scientific-software")
+            groups.append(_concept_group(
+                "scientific software", SCIENTIFIC_SOFTWARE_CONCEPT, direct_term_set,
+                literal_terms=(term,), concept_id="scientific-software", role="target",
+                required=True, evidence_policy="source_grounded_only",
+                saturate_concept=True,
+            ))
+            continue
+        if scientific_workflow_phrase and term in {
+            "science", "scientific", "research", "workflow", "software", "computing",
+        }:
+            if "scientific-workflows" in emitted:
+                continue
+            emitted.add("scientific-workflows")
+            groups.append(_concept_group(
+                "scientific workflows", SCIENTIFIC_WORKFLOW_CONCEPT, direct_term_set,
+                literal_terms=(term,), concept_id="scientific-workflows",
+                role="application_or_context", required=True,
+                evidence_policy="source_grounded_only", saturate_concept=True,
+            ))
+            continue
         if artificial_intelligence_phrase and term in {"artificial", "intelligence"}:
             if "artificial-intelligence" in emitted:
                 continue
@@ -610,7 +795,12 @@ def expand_query_groups(
                 evidence_policy="controlled_compound", saturate_concept=True,
             ))
             continue
-        if high_temperature_composites_phrase and term in {"high", "temperature", "composite"}:
+        if (
+            high_temperature_composites_phrase or thermal_protection_materials_phrase
+        ) and term in {
+            "high", "temperature", "composite", "thermal-protection", "thermal",
+            "protection", "material",
+        }:
             if "high-temperature-materials" in emitted:
                 continue
             emitted.add("high-temperature-materials")
@@ -647,7 +837,11 @@ def expand_query_groups(
                 required=True,
             ))
             continue
-        if critical_mineral_phrase and term in {"critical", "mineral"}:
+        if (
+            critical_mineral_phrase and term in {"critical", "mineral"}
+        ) or (
+            critical_metal_phrase and term in {"critical", "metal", "critical-metal"}
+        ):
             if "critical-minerals" in emitted:
                 continue
             emitted.add("critical-minerals")
@@ -655,9 +849,9 @@ def expand_query_groups(
                 "critical mineral",
                 "critical mineral",
                 direct_term_set,
-                literal_terms=("critical", "mineral"),
-                minimum_evidence=2,
-                evidence_phrases=("critical mineral",),
+                literal_terms=(term,) if critical_metal_phrase else ("critical", "mineral"),
+                minimum_evidence=1 if critical_metal_phrase else 2,
+                evidence_phrases=() if critical_metal_phrase else ("critical mineral",),
                 concept_id="critical-minerals",
                 role="target",
                 required=True,
@@ -696,7 +890,7 @@ def expand_query_groups(
             continue
         if rural_context_phrase and term in {
             "rural", "community", "area", "care", "network", "access",
-        }:
+        } and not (explicit_care_network and term == "network"):
             if "rural-care-context" in emitted:
                 continue
             emitted.add("rural-care-context")
@@ -733,7 +927,7 @@ def expand_query_groups(
             ))
             continue
         if crop_genetics_phrase and term in {
-            "crop", "plant", "genetic", "genomic", "breeding", "trait",
+            "crop", "plant", "genetic", "genomic", "breed", "breeding", "trait",
         }:
             if "crop-genetics" in emitted:
                 continue
@@ -742,7 +936,7 @@ def expand_query_groups(
                 "crop genetics",
                 CROP_GENETICS_CONCEPT,
                 direct_term_set,
-                literal_terms=("crop", "plant", "genetic", "genomic", "breeding", "trait"),
+                literal_terms=("crop", "plant", "genetic", "genomic", "breed", "breeding", "trait"),
                 evidence_phrases=("crop genetics", "crop genomics", "crop breeding", "plant genetics", "plant genomics", "plant breeding"),
                 concept_id="crop-genetics",
                 role="method",
@@ -802,6 +996,10 @@ def expand_query_groups(
                 role="application_or_context",
                 required=True,
                 evidence_policy="protected_ai_security",
+                evidence_class=(
+                    "security" if term in {"secure", "security", "cybersecurity"}
+                    else "resilience"
+                ),
                 saturate_concept=True,
             ))
             continue
@@ -946,6 +1144,9 @@ def expand_query_groups(
                 role="method" if search_v2 else "",
                 required=search_v2,
                 evidence_policy="protected_ai" if search_v2 else "",
+                exact_indexed_acronym=(
+                    search_v2 and term in uppercase_terms and len(term) <= 4
+                ),
             ))
             continue
         if (
@@ -1067,7 +1268,7 @@ def expand_query_groups(
                 saturate_concept=True,
             ))
             continue
-        if ion_exchange_phrase and term in {"ion", "exchange"}:
+        if ion_exchange_phrase and term in {"ion", "exchange", "ion-exchange"}:
             if "separations" in emitted:
                 continue
             emitted.add("separations")
@@ -1075,8 +1276,8 @@ def expand_query_groups(
                 "ion exchange",
                 SEPARATION_METHOD_CONCEPT,
                 direct_term_set,
-                literal_terms=("ion", "exchange"),
-                minimum_evidence=2,
+                literal_terms=(term,) if term == "ion-exchange" else ("ion", "exchange"),
+                minimum_evidence=1 if term == "ion-exchange" else 2,
                 evidence_phrases=("ion exchange",),
                 required_always=rare_earth_query,
                 concept_id="separations",
@@ -1120,6 +1321,15 @@ def expand_query_groups(
                 saturate_concept=True,
             ))
             continue
+        if search_v2 and term == "solvent" and separation_operation:
+            continue
+        if (
+            search_v2
+            and term == "technology"
+            and separation_operation
+            and (rare_earth_query or critical_mineral_phrase or critical_metal_phrase)
+        ):
+            continue
         if search_v2 and term == "maritime":
             groups.append(_concept_group(
                 term,
@@ -1143,6 +1353,11 @@ def expand_query_groups(
             ))
             continue
         weighted_terms: dict[str, float] = {term: 1.0}
+        compound_parts = [
+            part for part in term.split("-") if search_v2 and len(part) > 1
+        ]
+        for part in compound_parts:
+            weighted_terms.setdefault(part, 0.96)
         for variant in query_variants(term)[1:]:
             weighted_terms.setdefault(variant, 0.94)
         if not (postings and term in postings and term not in ALWAYS_EXPAND_ALIASES):
@@ -1166,11 +1381,15 @@ def expand_query_groups(
                 "role": (
                     "program_or_agency_qualifier"
                     if term in AGENCY_QUALIFIER_TERMS
+                    else "program_form_or_intervention"
+                    if term in PROGRAM_FORM_TERMS
                     else "application_or_context"
                 ),
                 "required": True,
                 "required_always": term in AGENCY_QUALIFIER_TERMS,
                 "exact_indexed_acronym": term in uppercase_terms and len(term) <= 4,
+                "minimum_evidence": len(compound_parts),
+                "source_components": compound_parts,
                 "strict_evidence": False,
             })
         groups.append(group)

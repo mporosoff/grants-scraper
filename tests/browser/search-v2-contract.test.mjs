@@ -89,20 +89,29 @@ test("REE spelling variants resolve identically without lexical noise", () => {
   );
 });
 
-test("REE separations admits the three authoritative programs as primary", () => {
+test("REE separations admits every source-supported authoritative program as primary", () => {
   const result = ranked("REE separations");
   assert.deepEqual(
     new Set(result.rolled.rows.map(row => row.id)),
-    new Set(["360678", "361526", "362061"]),
+    new Set(["360678", "361526", "362061", "nsf-cbet:PD-26-370Y"]),
   );
   for (const row of result.rolled.rows) {
-    assert.equal(row.parentDirectEvidence.admission.reason, "authoritative_scope_entailment");
-    assert.equal(row.parentDirectEvidence.admission.admittedBy.length, 1);
-    assert.equal(
-      row.parentDirectEvidence.admission.admittedBy[0].path,
-      "authoritative_scope_entailment",
-    );
-    assert.ok(row.parentDirectEvidence.authoritativeScope.controlledRelationships.length > 0);
+    if (row.id === "nsf-cbet:PD-26-370Y") {
+      assert.equal(row.parentDirectEvidence.admission.reason, "source_grounded_scope_entailment");
+      assert.equal(row.parentDirectEvidence.admission.admittedBy[0].path, "source_grounded_scope");
+      assert.equal(
+        row.parentDirectEvidence.admission.admittedBy[0].relationship.id,
+        "rare-earth-subset-to-critical-mineral-scope",
+      );
+    } else {
+      assert.equal(row.parentDirectEvidence.admission.reason, "authoritative_scope_entailment");
+      assert.equal(row.parentDirectEvidence.admission.admittedBy.length, 1);
+      assert.equal(
+        row.parentDirectEvidence.admission.admittedBy[0].path,
+        "authoritative_scope_entailment",
+      );
+      assert.ok(row.parentDirectEvidence.authoritativeScope.controlledRelationships.length > 0);
+    }
   }
   const prohibited = new Set([
     "362900", "359996", "363224", "363241", "360003", "363240",
@@ -118,14 +127,20 @@ test("bounded scope entailment covers controlled REE separation variants only", 
     "solvent extraction of REEs",
     "ionic liquids for REE extraction",
   ]) {
+    const expected = query.startsWith("ionic liquids")
+      ? ["360678", "361526", "362061"]
+      : ["360678", "361526", "362061", "nsf-cbet:PD-26-370Y"];
     assert.deepEqual(
       new Set(ranked(query).rolled.rows.map(row => row.id)),
-      new Set(["360678", "361526", "362061"]),
+      new Set(expected),
       query,
     );
   }
   const generic = parentV2.score("critical mineral separations", { evidence: true });
-  assert.deepEqual([...generic.diagnostics.searchV2.authoritativeScopeEntailments], []);
+  assert.deepEqual(
+    new Set(generic.diagnostics.searchV2.authoritativeScopeEntailments.map(item => item.parentId)),
+    new Set(["361526", "362061"]),
+  );
 });
 
 test("mixed search-v2 assets fail loudly", () => {

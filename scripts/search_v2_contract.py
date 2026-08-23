@@ -10,8 +10,10 @@ import re
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "config" / "search_v2.json"
-RETRIEVAL_API_CONTRACT_VERSION = 3
-SCIENTIFIC_CONCEPT_ROLES = {"target", "method"}
+RETRIEVAL_API_CONTRACT_VERSION = 4
+SCIENTIFIC_CONCEPT_ROLES = {
+    "target", "method", "property", "application_or_context", "target_and_method",
+}
 TECHNICAL_SCOPE_RE = re.compile(
     r"\b(?:research|r&d|scientific|hypothesis|experimental|computational|"
     r"chemical|materials?|separat(?:e|ion|ions)|extract(?:ion)?|process(?:ing)?|"
@@ -249,12 +251,21 @@ def authoritative_scope_matches(
     for entry in specification.get("authoritative_scope_entailments") or []:
         supported = set(entry.get("supported_query_concepts") or [])
         required = entry.get("required_query_concepts") or []
-        if not all(concept in scientific_concepts for concept in required):
-            continue
-        if (
+        exact_contract_match = all(
+            concept in scientific_concepts for concept in required
+        ) and not (
             specification.get("scope_entailment_requires_complete_scientific_query")
             and any(concept not in supported for concept in scientific_concepts)
-        ):
+        )
+        signature_supported = set(
+            (entry.get("scope_signature") or {}).get("supported_concepts") or []
+        )
+        signature_match = bool(
+            (entry.get("scope_signature") or {}).get("bounded") is True
+            and len(scientific_concepts) >= 2
+            and all(concept in signature_supported for concept in scientific_concepts)
+        )
+        if not exact_contract_match and not signature_match:
             continue
         document_id = record_by_id.get(str(entry.get("parent_id") or ""))
         if document_id is None:
@@ -262,7 +273,13 @@ def authoritative_scope_matches(
         matches[document_id] = {
             **entry,
             "covered_concepts": [
-                concept for concept in scientific_concepts if concept in supported
+                concept for concept in scientific_concepts
+                if concept in (supported if exact_contract_match else signature_supported)
             ],
+            "match_type": (
+                "source_scope_signature"
+                if signature_match and not exact_contract_match
+                else "controlled_concept_contract"
+            ),
         }
     return matches

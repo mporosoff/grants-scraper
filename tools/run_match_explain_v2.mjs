@@ -58,13 +58,20 @@ function causalFailures(explanation) {
   for (const item of explanation.reasons || []) {
     const evidence = item.evidence || {};
     if (item.code === "field_context" && !admittedBy.some(path => (
-      path.path === "explicit_evidence"
+      ["explicit_evidence", "source_grounded_scope"].includes(path.path)
       && (path.fields || []).includes(evidence.field)
       && (!evidence.conceptId || !path.conceptId || path.conceptId === evidence.conceptId)
     ))) failures.push(`uncausal_field=${evidence.field || "none"}`);
     if (
-      ["authoritative_scope", "controlled_relationship"].includes(item.code)
+      item.code === "authoritative_scope"
       && !admittedBy.some(path => path.path === "authoritative_scope_entailment")
+    ) failures.push(`uncausal_scope=${item.code}`);
+    if (
+      item.code === "controlled_relationship"
+      && !admittedBy.some(path => (
+        path.path === "authoritative_scope_entailment"
+        || (path.path === "source_grounded_scope" && path.relationship)
+      ))
     ) failures.push(`uncausal_scope=${item.code}`);
     if (item.code === "query_interpretation" && !admittedBy.some(path => (
       path.conceptId === evidence.canonicalConcept

@@ -7,7 +7,35 @@
   "reviews": {
     "development:ree_09": {
       "status": "accepted",
-      "reason": "The same three authoritative primary programs remain; CPS and BES only exchange ranks after bounded method-evidence normalization, with no recall or label change."
+      "reason": "EWRE legitimately enters through its published chemical resource-recovery and critical-minerals scope; the same three required authoritative programs remain primary."
+    },
+    "development:ree_03": {
+      "status": "accepted",
+      "reason": "EWRE enters through its current authoritative resource-recovery and critical-minerals scope. The previously required BES, Genesis, and CPS anchors remain primary."
+    },
+    "development:ree_06": {
+      "status": "accepted",
+      "reason": "EWRE explicitly supports chemical resource recovery and recycling or management of critical minerals; all three previously required authoritative anchors remain primary."
+    },
+    "development:ree_07": {
+      "status": "accepted",
+      "reason": "EWRE explicitly funds resource recovery through chemical processes and critical-minerals recycling or management, so its addition is a source-grounded relevance improvement."
+    },
+    "development:ree_08": {
+      "status": "accepted",
+      "reason": "EWRE's published chemical resource-recovery and critical-minerals scope contains the material and operation intent; the original three required anchors remain present."
+    },
+    "development:ree_10": {
+      "status": "accepted",
+      "reason": "All three required anchors remain primary and EWRE is added through bounded chemical resource-recovery and critical-minerals scope; no lexical-noise row enters."
+    },
+    "development:ree_18": {
+      "status": "accepted",
+      "reason": "The added EWRE program publishes chemical resource-recovery and critical-minerals scope, while BES, Genesis, and CPS remain primary."
+    },
+    "development:ree_19": {
+      "status": "accepted",
+      "reason": "EWRE is a legitimate current primary addition based on published chemical resource-recovery and critical-minerals scope; the required anchors are preserved."
     },
     "development:ree_12": {
       "status": "accepted",
@@ -256,6 +284,18 @@
     "meas5:m5_social_04": {
       "status": "accepted",
       "reason": "The revised top ten favors explicit social-science research scope and removes generic defense, program, or cross-topic rows."
+    },
+    "meas5:m5_energy_05": {
+      "status": "accepted",
+      "reason": "The two added NYSERDA rows explicitly fund building-decarbonization services. A plasma-program false match caused by distant uses of 'builds' and 'decarbonized' was identified during review and removed by the generic source-passage coherence guard."
+    },
+    "meas5:m5_ag_01": {
+      "status": "accepted",
+      "reason": "The added current PPDMDPP notice funds projects protecting crops and agricultural production systems through improved pest detection, diagnostics, and mitigation; this is within the broad crop-improvement intent."
+    },
+    "meas5:m5_defense_01": {
+      "status": "accepted",
+      "reason": "The retained DEVCOM and NSWC Crane programs publish explicit hypersonics scope; the removed row had weaker incomplete evidence and no required anchor is lost."
     }
   }
 }

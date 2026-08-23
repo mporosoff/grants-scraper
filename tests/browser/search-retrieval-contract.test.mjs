@@ -177,7 +177,10 @@ test("search v2 requires complete substantive coverage for concise technical que
     catalogRole: "parent",
   });
   const minerals = engine.score("critical mineral separations", { semantic: false, evidence: true });
-  assert.ok(minerals.scores[0] > 0, "existing extraction and recovery vocabulary may satisfy separation intent");
+  assert.ok(
+    minerals.scores[0] > 0,
+    `existing extraction and recovery vocabulary may satisfy separation intent: ${JSON.stringify(minerals.evidence[0])}`,
+  );
   assert.equal(minerals.scores[1], 0, "target words cannot substitute for separation intent");
   assert.equal(minerals.scores[2], 0, "method words cannot substitute for the target");
   assert.equal(minerals.diagnostics.minimumCoverage, 2);
@@ -256,9 +259,9 @@ test("search v2 disambiguates resolved AI from the AI/AN population abbreviation
     searchV2Config: searchV2Config(apis),
     catalogRole: "parent",
   });
-  const result = engine.score("AI cancer diagnosis", { semantic: false });
+  const result = engine.score("AI cancer diagnosis", { semantic: false, evidence: true });
   assert.ok(result.scores[0] > 0);
-  assert.equal(result.scores[1], 0);
+  assert.equal(result.scores[1], 0, JSON.stringify(result.evidence[1]));
 });
 
 test("reported catalyst and AI search is narrow without losing chemistry programs", () => {

@@ -271,8 +271,10 @@ async function evaluate() {
     ree_separations_required_primary_ids_present: REQUIRED_PRIMARY_IDS.every(id => (
       reeSeparation?.top_results.some(row => row.id === id)
     )),
+    // Required anchors are a recall floor, not an allowlist. A newly surfaced
+    // result is valid when its exact query-result truth judgment is primary.
     ree_separations_only_required_primary_results: (
-      reeSeparation?.top_results.every(row => REQUIRED_PRIMARY_IDS.includes(row.id)) === true
+      reeSeparation?.top_results.every(row => row.truth?.label === "primary_relevant") === true
     ),
     ree_family_non_primary_admissions: irrelevantReeIds,
     ree_family_unlabelled_admissions: unlabelledReeIds,

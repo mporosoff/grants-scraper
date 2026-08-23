@@ -62,7 +62,7 @@ test("permanent REE and NASA canaries use the frozen catalog deliberately", () =
   assert.deepEqual(aliasResults[0], []);
   assert.deepEqual(
     new Set(ranked("REE separations").map(row => row.id)),
-    new Set(["360678", "361526", "362061"]),
+    new Set(["360678", "361526", "362061", "nsf-cbet:PD-26-370Y"]),
   );
 });
 

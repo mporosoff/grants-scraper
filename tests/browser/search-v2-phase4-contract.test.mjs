@@ -152,3 +152,49 @@ test("Phase 4 blocks Phase 5 on the exact adjudicated failures", async () => {
     "2fed3cc0ccd9e3013ea2e9937e7c2548108c20b7",
   );
 });
+
+test("Iteration-3 Phase 4C population remains sealed behind an execution lock", async () => {
+  const [frameSource, manifestSource, runnerSource] = await Promise.all([
+    source("evaluation/search_v2_iteration3_holdout_frame.json"),
+    source("evaluation/search_v2_iteration3_holdout_manifest.json"),
+    source("tools/run_search_v2_iteration3_holdout.mjs"),
+  ]);
+  const frame = JSON.parse(frameSource);
+  const manifest = JSON.parse(manifestSource);
+  assert.equal(frame.status, "sealed_never_executed");
+  assert.equal(frame.construction_contract.candidate_executions, 0);
+  assert.equal(frame.queries.length, 36);
+  assert.equal(sha256(frameSource), "7fde6b7ccbdab59331c26899f37bdbb8f9ee7e30f8f3632f257e28d27124865e");
+  assert.equal(manifest.frame_sha256, sha256(frameSource));
+  assert.match(runnerSource, /^#!.*\n\nthrow new Error/);
+  assert.doesNotMatch(runnerSource, /loadHarness|rankQuery|search-retrieval/);
+  await assert.rejects(
+    source("evaluation/search_v2_iteration3_holdout_results_raw.json"),
+    error => error?.code === "ENOENT",
+  );
+  const attempt = await runNode("tools/run_search_v2_iteration3_holdout.mjs");
+  assert.notEqual(attempt.code, 0);
+  assert.match(attempt.stderr, /sealed and has never been executed/);
+});
+
+test("Iteration-3 fate and leave-out evidence expose the unresolved architecture gate", async () => {
+  const [fates, results, leaveout] = await Promise.all([
+    source("evaluation/search_v2_iteration3_anchor_fates.json").then(JSON.parse),
+    source("evaluation/search_v2_iteration3_results.json").then(JSON.parse),
+    source("evaluation/search_v2_iteration3_leaveout.json").then(JSON.parse),
+  ]);
+  assert.equal(fates.missed_anchor_count, 19);
+  assert.deepEqual(fates.primary_failure_class_counts, {
+    QUERY_INTERPRETATION_FAILURE: 15,
+    SCOPE_REPRESENTATION_FAILURE: 2,
+    VERIFICATION_FAILURE: 2,
+  });
+  assert.equal(fates.semantic_benchmark_trigger.triggered, false);
+  assert.equal(results.combined.required_anchor_micro_recall_at_50, 1);
+  assert.equal(results.combined.irrelevant_visible_primary_count, 0);
+  const byId = new Map(leaveout.results.map(item => [item.id, item]));
+  assert.equal(byId.get("agriculture_family_and_program_out").held_out_recall_at_50, 0);
+  assert.equal(byId.get("energy_family_and_program_out").held_out_recall_at_50, 0);
+  assert.equal(byId.get("ai_family_and_program_out").held_out_recall_at_50, 0.2);
+  assert.equal(byId.get("scaleup_program_out").held_out_recall_at_50, 0);
+});

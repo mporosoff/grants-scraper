@@ -11,6 +11,7 @@ const ROOT = new URL("../", import.meta.url);
 const FRAME_PATH = "evaluation/search_v2_holdout_frame.json";
 const BASE_TRUTH_PATH = "evaluation/search_v2_holdout_truth.json";
 const TRUTH_DELTA_PATH = "evaluation/search_v2_iteration2_challenge_truth_delta.json";
+const ITERATION3_TRUTH_SUPPLEMENT_PATH = "evaluation/search_v2_iteration3_truth_supplement.json";
 const OLD_RAW_PATH = "evaluation/search_v2_holdout_results_raw.json";
 const OUTPUT_PATH = "evaluation/search_v2_iteration2_results.json";
 
@@ -111,10 +112,11 @@ function summarize(rows) {
 }
 
 async function main() {
-  const [frame, baseTruth, delta, oldRaw] = await Promise.all([
+  const [frame, baseTruth, delta, iteration3Supplement, oldRaw] = await Promise.all([
     readFile(new URL(FRAME_PATH, ROOT), "utf8").then(JSON.parse),
     readFile(new URL(BASE_TRUTH_PATH, ROOT), "utf8").then(JSON.parse),
     readFile(new URL(TRUTH_DELTA_PATH, ROOT), "utf8").then(JSON.parse),
+    readFile(new URL(ITERATION3_TRUTH_SUPPLEMENT_PATH, ROOT), "utf8").then(JSON.parse),
     readFile(new URL(OLD_RAW_PATH, ROOT), "utf8").then(JSON.parse),
   ]);
   const truth = structuredClone(baseTruth);
@@ -124,6 +126,17 @@ async function main() {
     }
     Object.assign(truth.queries[queryId].judgments, addition.judgments || {});
   });
+  (iteration3Supplement.judgments || [])
+    .filter(item => item.population === "phase4_iteration1_spent")
+    .forEach(item => {
+      if (truth.queries[item.query_id]?.query !== item.query) {
+        throw new Error(`Iteration-3 query-specific truth mismatch for ${item.query_id}.`);
+      }
+      truth.queries[item.query_id].judgments[item.result_id] = {
+        label: item.label,
+        evidence: item.evidence,
+      };
+    });
 
   const base = await loadHarness();
   const candidate = makeVariantHarness(base, { searchV2: true });
@@ -187,6 +200,7 @@ async function main() {
     frame: FRAME_PATH,
     base_truth: BASE_TRUTH_PATH,
     truth_delta: TRUTH_DELTA_PATH,
+    iteration3_truth_supplement: ITERATION3_TRUTH_SUPPLEMENT_PATH,
     sealed_iteration2_holdout_read_or_executed: false,
     before_metrics_from_immutable_phase4: {
       primary_precision_at_10: 0.373,

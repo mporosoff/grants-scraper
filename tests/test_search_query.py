@@ -71,7 +71,7 @@ class SearchV2ContractTests(unittest.TestCase):
             for index, score in enumerate(scores)
             if score > 0
         }
-        self.assertEqual(admitted, {"360678", "361526", "362061"})
+        self.assertEqual(admitted, {"360678", "361526", "362061", "unmapped"})
 
         generic_scores, _, _ = hybrid_scores(
             _catalog(records),

@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const QUERY_API_CONTRACT_VERSION = 3;
+  const QUERY_API_CONTRACT_VERSION = 4;
 
   // PFAS notices are often written around the problem being addressed instead
   // of naming an individual compound. These terms keep searches useful against
@@ -51,6 +51,11 @@
   const CROP_GENETICS_CONCEPT = "crop plant genetics genetic genomics genomic breeding cultivar germplasm trait";
   const ENERGY_STORAGE_CONCEPT = "energy storage battery grid-scale grid technology technologies";
   const LONG_DURATION_CONCEPT = "long duration long-duration seasonal extended storage";
+  const ABIOTIC_STRESS_CONCEPT = "abiotic stress heat thermal drought temperature tolerance resilience resilient";
+  const BIOTIC_STRESS_CONCEPT = "biotic stress disease pathogen pest resistance resistant resilience resilient";
+  const TECHNOLOGY_MATURATION_CONCEPT = "scale up scale-up scaling commercialization commercial deployment demonstration market maturation";
+  const SCIENTIFIC_WORKFLOW_CONCEPT = "science scientific research workflow workflows software computing";
+  const SCIENTIFIC_SOFTWARE_CONCEPT = "science scientific research software code computing";
   const FOUNDATION_MODEL_CONCEPT = "foundation model models composable modular generative ai";
   const SECURITY_RESILIENCE_CONCEPT = "secure security cybersecurity adversarial robustness robust resilience resilient attack mitigation trustworthy";
   const EARTH_SYSTEM_CONCEPT = "earth system sun-earth geospace coupled";
@@ -69,6 +74,10 @@
   const NAVIGATION_CONCEPT = "navigation pnt";
   const QUANTUM_SENSING_CONCEPT = "quantum sensing";
   const AGENCY_QUALIFIER_TERMS = new Set(["doe", "nsf", "nasa", "nih"]);
+  const PROGRAM_FORM_TERMS = new Set([
+    "commercialization", "deployment", "demonstration", "network", "training",
+    "workforce", "workshop",
+  ]);
   const BROAD_CALL_CONCEPT = "broad agency announcement baa long range office wide open scope";
   const BROAD_CALL_EVIDENCE = Object.freeze([
     Object.freeze(["broad", "agency", "announcement"]),
@@ -437,6 +446,8 @@
       role: options.role || "",
       required: options.required === true,
       evidencePolicy: options.evidencePolicy || "",
+      evidenceClass: options.evidenceClass || "",
+      exactIndexedAcronym: options.exactIndexedAcronym === true,
       strictEvidence: options.strictEvidence !== false,
       saturateConcept: options.saturateConcept === true,
       expansion: {
@@ -473,6 +484,8 @@
     const hasPfasAlias = directTerms.some(term => QUERY_ALIASES[term] === PFAS_CONCEPT);
     const hasCriticalMineralPhrase = searchV2
       && /\bcritical[\s-]+minerals?\b/i.test(normalizedValue);
+    const hasCriticalMetalPhrase = searchV2
+      && /\bcritical[\s-]+metals?\b/i.test(normalizedValue);
     const hasQuantumSensingPhrase = searchV2
       && /\bquantum[\s-]+sens(?:e|ing|ors?)\b/i.test(normalizedValue);
     const hasRareEarthPhrase = /\brare[\s-]+earth(?:[\s-]+elements?)?\b/i.test(normalizedValue);
@@ -489,26 +502,55 @@
       && /\bion[\s-]+exchange\b/i.test(normalizedValue);
     const hasResourceRecoveryPhrase = searchV2
       && /\bresource[\s-]+recovery\b/i.test(normalizedValue);
+    const hasSeparationOperation = searchV2
+      && /\b(?:separat\w*|extract\w*|recover\w*|purif\w*|hydrometallurg\w*|leach\w*|refin\w*|recycl\w*|processing)\b/i.test(normalizedValue);
     const hasMaternalHealthPhrase = searchV2
       && /\bmaternal[\s-]+(?:mortality|morbidity|health)\b/i.test(normalizedValue);
     const hasRuralContextPhrase = searchV2
       && /\brural\b/i.test(normalizedValue)
       && /\b(?:communities?|areas?|care|maternity|obstetrics?|networks?|access)\b/i.test(normalizedValue);
+    const hasExplicitCareNetwork = searchV2
+      && /\bnetworks?\b/i.test(normalizedValue)
+      && /\b(?:care|health|clinical|maternity|obstetrics?|services?)\b/i.test(normalizedValue);
     const hasDroughtResiliencePhrase = searchV2
       && /\bdrought\b/i.test(normalizedValue)
       && /\b(?:toleran(?:t|ce)|resilien(?:t|ce)|stress|trait)\b/i.test(normalizedValue);
     const hasCropGeneticsPhrase = searchV2
       && /\b(?:crops?|plants?)\b/i.test(normalizedValue)
       && /\b(?:genetics?|genomics?|breeding|traits?)\b/i.test(normalizedValue);
+    const hasAbioticStressPhrase = searchV2
+      && /\b(?:crops?|plants?)\b/i.test(normalizedValue)
+      && /\b(?:heat|thermal|temperature|drought)[\s-]*(?:toleran\w*|resilien\w*)\b/i.test(normalizedValue);
+    const hasBioticStressPhrase = searchV2
+      && /\b(?:crops?|plants?)\b/i.test(normalizedValue)
+      && /\b(?:disease|pathogen|pest)\b/i.test(normalizedValue)
+      && /\b(?:resistan\w*|resilien\w*|toleran\w*)\b/i.test(normalizedValue);
     const hasLongDurationPhrase = searchV2
       && /\blong[\s-]+duration\b/i.test(normalizedValue);
     const hasEnergyStoragePhrase = searchV2
       && /\benergy[\s-]+storage\b/i.test(normalizedValue);
+    const hasStorageTechnologyPhrase = searchV2
+      && /\bstor(?:e|age)\b/i.test(normalizedValue)
+      && /\b(?:grid[\s-]+scale|thermal|seasonal|energy|battery)\b/i.test(normalizedValue);
+    const hasSeasonalStoragePhrase = searchV2
+      && /\bseasonal\b/i.test(normalizedValue)
+      && /\bstor(?:e|age)\b/i.test(normalizedValue);
+    const hasTechnologyMaturationPhrase = searchV2
+      && /\b(?:scale[\s-]+up|commerciali[sz]\w*|deploy\w*|demonstrat\w*|matur\w*)\b/i.test(normalizedValue);
     const hasFoundationModelPhrase = searchV2
       && /\bfoundation[\s-]+models?\b/i.test(normalizedValue);
     const hasModelSecurityContext = searchV2
       && hasFoundationModelPhrase
       && /\b(?:secure|security|cybersecurity|adversarial|robust(?:ness)?|resilien(?:t|ce)|trustworthy)\b/i.test(normalizedValue);
+    const hasAiSecurityContext = searchV2
+      && /\b(?:AI|artificial[\s-]+intelligence|machine[\s-]+learning)\b/i.test(normalizedValue)
+      && /\b(?:secure|security|cybersecurity|adversarial\w*|robust(?:ness)?|resilien(?:t|ce)|trustworthy)\b/i.test(normalizedValue);
+    const hasScientificWorkflowPhrase = searchV2
+      && /\b(?:science|scientific|research)\b/i.test(normalizedValue)
+      && /\b(?:workflows?|software|computing)\b/i.test(normalizedValue);
+    const hasScientificSoftwarePhrase = searchV2
+      && /\b(?:science|scientific|research)\b/i.test(normalizedValue)
+      && /\bsoftware\b/i.test(normalizedValue);
     const hasArtificialIntelligencePhrase = searchV2
       && /\bartificial[\s-]+intelligence\b/i.test(normalizedValue);
     const hasHighPerformanceComputingPhrase = searchV2
@@ -544,9 +586,11 @@
     const hasHighTemperatureCompositesPhrase = searchV2
       && /\bhigh[\s-]+temperature\b/i.test(normalizedValue)
       && /\bcomposites?\b/i.test(normalizedValue);
+    const hasThermalProtectionMaterialsPhrase = searchV2
+      && /\bthermal[\s-]+protection\b/i.test(normalizedValue)
+      && /\bmaterials?\b/i.test(normalizedValue);
     const hasHypersonicEnvironment = searchV2
-      && /\bhypersonic\b/i.test(normalizedValue)
-      && hasHighTemperatureCompositesPhrase;
+      && /\bhypersonics?\b/i.test(normalizedValue);
     const hasBroadCallPhrase = /\bbroad[\s-]+agency[\s-]+announcements?\b|\bBAAs?\b/i.test(normalizedValue);
     const hasBasicEnergySciences = /\bbasic[\s-]+energy[\s-]+sciences?\b|\bBES\b/i.test(normalizedValue);
     // IL/ILs is far too ambiguous to expand globally. It is interpreted as
@@ -555,12 +599,153 @@
     const hasIlAbbreviation = /\bILs?\b/i.test(normalizedValue)
       && hasIonicLiquidContext(normalizedValue, directTermSet, options.context || "");
     const uppercaseTerms = new Set(
-      (normalizeText(value).match(/\b[A-Z][A-Z0-9]{2,8}s?\b/g) || [])
+      (normalizeText(value).match(/\b[A-Z][A-Z0-9]{1,8}s?\b/g) || [])
         .map(normalizeToken),
     );
     let acronymAttempts = 0;
     const emittedConcepts = new Set();
     return directTerms.flatMap(term => {
+      if (hasAbioticStressPhrase && [
+        "heat-resilient", "heat", "thermal", "temperature", "drought",
+        "tolerant", "tolerance", "resilient", "resilience",
+      ].includes(term)) {
+        if (emittedConcepts.has("abiotic-stress-resilience")) return [];
+        emittedConcepts.add("abiotic-stress-resilience");
+        return [conceptGroup("abiotic stress resilience", ABIOTIC_STRESS_CONCEPT, directTermSet, {
+          literalTerms: [term],
+          minimumEvidence: 1,
+          conceptId: "abiotic-stress-resilience",
+          role: "property",
+          required: true,
+          evidencePolicy: "source_grounded_only",
+          saturateConcept: true,
+          phrase: "heat and abiotic-stress resilience",
+          basis: "bounded environmental-stress property",
+        })];
+      }
+      if (hasBioticStressPhrase && [
+        "disease", "pathogen", "pest", "resistance", "resistant",
+        "resilience", "resilient", "tolerance", "tolerant",
+      ].includes(term)) {
+        if (emittedConcepts.has("biotic-stress-resilience")) return [];
+        emittedConcepts.add("biotic-stress-resilience");
+        return [conceptGroup("biotic stress resilience", BIOTIC_STRESS_CONCEPT, directTermSet, {
+          literalTerms: [term],
+          minimumEvidence: 1,
+          conceptId: "biotic-stress-resilience",
+          role: "property",
+          required: true,
+          evidencePolicy: "source_grounded_only",
+          saturateConcept: true,
+          phrase: "disease resistance and biotic-stress resilience",
+          basis: "bounded biological-stress property",
+        })];
+      }
+      if (hasSeasonalStoragePhrase && term === "seasonal") {
+        if (emittedConcepts.has("long-duration")) return [];
+        emittedConcepts.add("long-duration");
+        return [conceptGroup("long duration", LONG_DURATION_CONCEPT, directTermSet, {
+          literalTerms: ["seasonal"],
+          minimumEvidence: 1,
+          conceptId: "long-duration",
+          role: "property",
+          required: true,
+          evidencePolicy: "source_grounded_only",
+          saturateConcept: true,
+          phrase: "seasonal and long-duration operation",
+          basis: "bounded duration hierarchy",
+        })];
+      }
+      if (hasStorageTechnologyPhrase && [
+        "grid-scale", "thermal", "storage", "energy", "battery",
+      ].includes(term)) {
+        if (emittedConcepts.has("energy-storage")) return [];
+        emittedConcepts.add("energy-storage");
+        return [conceptGroup("energy storage", ENERGY_STORAGE_CONCEPT, directTermSet, {
+          literalTerms: [term],
+          minimumEvidence: 1,
+          conceptId: "energy-storage",
+          role: "target",
+          required: true,
+          evidencePolicy: "source_grounded_only",
+          saturateConcept: true,
+          phrase: "grid, thermal, or seasonal energy storage",
+          basis: "bounded storage-technology hierarchy",
+        })];
+      }
+      if (hasTechnologyMaturationPhrase && [
+        "scale-up", "scale", "commercialization", "commercialisation",
+        "deployment", "demonstration", "maturation", "technology",
+      ].includes(term)) {
+        if (emittedConcepts.has("technology-maturation")) return [];
+        emittedConcepts.add("technology-maturation");
+        return [conceptGroup("technology maturation", TECHNOLOGY_MATURATION_CONCEPT, directTermSet, {
+          literalTerms: [term],
+          minimumEvidence: 1,
+          conceptId: "technology-maturation",
+          role: "application_or_context",
+          required: true,
+          evidencePolicy: "source_grounded_only",
+          saturateConcept: true,
+          phrase: "technology scale-up and commercialization",
+          basis: "bounded technology-maturation process",
+        })];
+      }
+      if (hasAiSecurityContext && [
+        "secure", "security", "cybersecurity", "adversarial", "adversarially",
+        "robustness", "robust", "resilience", "resilient", "trustworthy",
+      ].includes(term)) {
+        if (emittedConcepts.has("security-resilience")) return [];
+        emittedConcepts.add("security-resilience");
+        return [conceptGroup("security resilience", SECURITY_RESILIENCE_CONCEPT, directTermSet, {
+          literalTerms: [term],
+          minimumEvidence: 1,
+          conceptId: "security-resilience",
+          role: "property",
+          required: true,
+          evidencePolicy: "source_grounded_only",
+          evidenceClass: ["secure", "security", "cybersecurity"].includes(term)
+            ? "security"
+            : "resilience",
+          saturateConcept: true,
+          phrase: "AI security, robustness, and resilience",
+          basis: "bounded AI property family",
+        })];
+      }
+      if (hasScientificSoftwarePhrase && [
+        "science", "scientific", "research", "software",
+      ].includes(term)) {
+        if (emittedConcepts.has("scientific-software")) return [];
+        emittedConcepts.add("scientific-software");
+        return [conceptGroup("scientific software", SCIENTIFIC_SOFTWARE_CONCEPT, directTermSet, {
+          literalTerms: [term],
+          minimumEvidence: 1,
+          conceptId: "scientific-software",
+          role: "target",
+          required: true,
+          evidencePolicy: "source_grounded_only",
+          saturateConcept: true,
+          phrase: "scientific and research software",
+          basis: "bounded scientific-software target",
+        })];
+      }
+      if (hasScientificWorkflowPhrase && [
+        "science", "scientific", "research", "workflow", "software", "computing",
+      ].includes(term)) {
+        if (emittedConcepts.has("scientific-workflows")) return [];
+        emittedConcepts.add("scientific-workflows");
+        return [conceptGroup("scientific workflows", SCIENTIFIC_WORKFLOW_CONCEPT, directTermSet, {
+          literalTerms: [term],
+          minimumEvidence: 1,
+          conceptId: "scientific-workflows",
+          role: "application_or_context",
+          required: true,
+          evidencePolicy: "source_grounded_only",
+          saturateConcept: true,
+          phrase: "scientific workflows and software",
+          basis: "bounded scientific-computing context",
+        })];
+      }
       if (hasArtificialIntelligencePhrase && ["artificial", "intelligence"].includes(term)) {
         if (emittedConcepts.has("artificial-intelligence")) return [];
         emittedConcepts.add("artificial-intelligence");
@@ -606,13 +791,16 @@
           basis: "controlled technical compound",
         })];
       }
-      if (hasCriticalMineralPhrase && ["critical", "mineral"].includes(term)) {
+      if (
+        (hasCriticalMineralPhrase && ["critical", "mineral"].includes(term))
+        || (hasCriticalMetalPhrase && ["critical", "metal", "critical-metal"].includes(term))
+      ) {
         if (emittedConcepts.has("critical-minerals")) return [];
         emittedConcepts.add("critical-minerals");
         return [conceptGroup("critical mineral", "critical mineral", directTermSet, {
-          literalTerms: ["critical", "mineral"],
-          minimumEvidence: 2,
-          evidencePhrases: ["critical mineral"],
+          literalTerms: hasCriticalMetalPhrase ? [term] : ["critical", "mineral"],
+          minimumEvidence: hasCriticalMetalPhrase ? 1 : 2,
+          evidencePhrases: hasCriticalMetalPhrase ? null : ["critical mineral"],
           conceptId: "critical-minerals",
           role: "target",
           required: true,
@@ -745,7 +933,10 @@
           basis: "bounded chemical target and operation",
         })];
       }
-      if (hasHighTemperatureCompositesPhrase && ["high", "temperature", "composite"].includes(term)) {
+      if ((hasHighTemperatureCompositesPhrase || hasThermalProtectionMaterialsPhrase) && [
+        "high", "temperature", "composite", "thermal-protection", "thermal",
+        "protection", "material",
+      ].includes(term)) {
         if (emittedConcepts.has("high-temperature-materials")) return [];
         emittedConcepts.add("high-temperature-materials");
         return [conceptGroup("high temperature composites", HIGH_TEMPERATURE_MATERIALS_CONCEPT, directTermSet, {
@@ -793,7 +984,11 @@
           basis: "bounded maternal-health relationship",
         })];
       }
-      if (hasRuralContextPhrase && ["rural", "community", "area", "care", "network", "access"].includes(term)) {
+      if (
+        hasRuralContextPhrase
+        && ["rural", "community", "area", "care", "network", "access"].includes(term)
+        && !(hasExplicitCareNetwork && term === "network")
+      ) {
         if (emittedConcepts.has("rural-care-context")) return [];
         emittedConcepts.add("rural-care-context");
         return [conceptGroup("rural care", RURAL_CARE_CONCEPT, directTermSet, {
@@ -825,11 +1020,11 @@
           basis: "bounded plant trait relationship",
         })];
       }
-      if (hasCropGeneticsPhrase && ["crop", "plant", "genetic", "genomic", "breeding", "trait"].includes(term)) {
+      if (hasCropGeneticsPhrase && ["crop", "plant", "genetic", "genomic", "breed", "breeding", "trait"].includes(term)) {
         if (emittedConcepts.has("crop-genetics")) return [];
         emittedConcepts.add("crop-genetics");
         return [conceptGroup("crop genetics", CROP_GENETICS_CONCEPT, directTermSet, {
-          literalTerms: ["crop", "plant", "genetic", "genomic", "breeding", "trait"],
+          literalTerms: ["crop", "plant", "genetic", "genomic", "breed", "breeding", "trait"],
           minimumEvidence: 1,
           evidencePhrases: ["crop genetics", "crop genomics", "crop breeding", "plant genetics", "plant genomics", "plant breeding"],
           conceptId: "crop-genetics",
@@ -882,7 +1077,9 @@
           role: "application_or_context",
           required: true,
           evidencePolicy: "protected_ai_security",
-          evidencePolicy: "protected_ai_security",
+          evidenceClass: ["secure", "security", "cybersecurity"].includes(term)
+            ? "security"
+            : "resilience",
           saturateConcept: true,
           phrase: "AI security, robustness, and resilience",
           basis: "bounded AI property family",
@@ -1014,6 +1211,7 @@
           role: searchV2 ? "method" : "",
           required: searchV2,
           evidencePolicy: searchV2 ? "protected_ai" : "",
+          exactIndexedAcronym: searchV2 && uppercaseTerms.has(term) && term.length <= 4,
           phrase: "artificial intelligence and machine learning",
           basis: "deterministic technical abbreviation",
         })];
@@ -1133,12 +1331,12 @@
           phrase: "solvent extraction and separations",
         })];
       }
-      if (hasIonExchangePhrase && ["ion", "exchange"].includes(term)) {
+      if (hasIonExchangePhrase && ["ion", "exchange", "ion-exchange"].includes(term)) {
         if (emittedConcepts.has("separations")) return [];
         emittedConcepts.add("separations");
         return [conceptGroup("ion exchange", SEPARATION_METHOD_CONCEPT, directTermSet, {
-          literalTerms: ["ion", "exchange"],
-          minimumEvidence: 2,
+          literalTerms: term === "ion-exchange" ? [term] : ["ion", "exchange"],
+          minimumEvidence: term === "ion-exchange" ? 1 : 2,
           evidencePhrases: ["ion exchange"],
           requiredAlways: hasRareEarthQuery,
           conceptId: "separations",
@@ -1181,6 +1379,17 @@
           phrase: "separations, extraction, processing, and recovery",
         })];
       }
+      if (
+        searchV2
+        && term === "solvent"
+        && hasSeparationOperation
+      ) return [];
+      if (
+        searchV2
+        && term === "technology"
+        && hasSeparationOperation
+        && (hasRareEarthQuery || hasCriticalMineralPhrase || hasCriticalMetalPhrase)
+      ) return [];
       if (searchV2 && term === "maritime") {
         return [conceptGroup(term, MARITIME_CONCEPT, directTermSet, {
           literalTerms: [term],
@@ -1204,12 +1413,17 @@
         })];
       }
       const weightedTerms = new Map([[term, 1]]);
+      const compoundParts = searchV2 && term.includes("-")
+        ? term.split("-").map(normalizeToken).filter(part => part.length > 1)
+        : [];
+      compoundParts.forEach(part => weightedTerms.set(part, .96));
       variants(term).slice(1).forEach(variant => weightedTerms.set(variant, .94));
       const indexed = hasIndexedTerm(term);
       const looksLikeAcronym = /^[a-z]{3,8}$/.test(term)
         && (uppercaseTerms.has(term) || !/[aeiou]/.test(term));
       const acronymExpansion = looksLikeAcronym
         && options.acronymResolver?.resolve
+        && tokenize(options.context || "").length >= 2
         && acronymAttempts < MAX_ACRONYM_ATTEMPTS
         ? options.acronymResolver.resolve(term, {
             context: options.context || "",
@@ -1221,10 +1435,14 @@
         conceptId: `literal:${term}`,
         role: AGENCY_QUALIFIER_TERMS.has(term)
           ? "program_or_agency_qualifier"
-          : "application_or_context",
+          : PROGRAM_FORM_TERMS.has(term)
+            ? "program_form_or_intervention"
+            : "application_or_context",
         required: true,
         requiredAlways: AGENCY_QUALIFIER_TERMS.has(term),
         exactIndexedAcronym: uppercaseTerms.has(term) && term.length <= 4,
+        sourceComponents: compoundParts,
+        ...(compoundParts.length ? { minimumEvidence: compoundParts.length } : {}),
       } : {};
       // Literal matches are preferable to broader long-form expansions. The
       // glossary is a fallback for abbreviations absent from this catalog.

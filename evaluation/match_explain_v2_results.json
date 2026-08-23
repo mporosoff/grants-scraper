@@ -5,9 +5,9 @@
   "status": "explanation_gates_passed",
   "production_enabled": false,
   "frame": "evaluation/match_explain_v2_frame.json",
-  "frame_sha256": "0f4e8bcf3a5196f1f2b2ed82f6bf6f4d39ea66a8beda932fa8fe569a13471af6",
+  "frame_sha256": "51d9794bed78d6f9115015b72d2f0bfd5c84240f2d68a7cf8f7bf007510d72af",
   "explanation_asset": "assets/match-explain.js",
-  "explanation_asset_sha256": "f74f010d62ab460cf13f99d9448795ce8147794c4f821eabcdefcbf9625cf92f",
+  "explanation_asset_sha256": "aea28abdf3c67bfe76016faebed5fe1133d5377fd441ba512450e53569483e80",
   "explanation_contract_version": 2,
   "holdout_status": "sealed_not_executed_or_adjudicated",
   "case_count": 42,
@@ -127,9 +127,18 @@
               "contribution": 1
             },
             {
+              "type": "source_grounded_scope",
+              "contribution": 0.35
+            },
+            {
               "type": "lexical_concept",
               "conceptId": "separations",
               "contribution": 12.042805334004708
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "rare-earth-elements",
+              "contribution": 0.35
             },
             {
               "type": "topic_rerank",
@@ -294,10 +303,10 @@
       "expected": {
         "admitted": true,
         "tier": "authoritative_scope",
-        "admission_path": "authoritative_scope_entailment",
+        "admission_path": "source_grounded_scope_entailment",
         "required_codes": [
-          "query_interpretation",
-          "authoritative_scope",
+          "child_hierarchy",
+          "field_context",
           "controlled_relationship"
         ],
         "forbidden_labels": [
@@ -308,93 +317,122 @@
       "explanation": {
         "contractVersion": 2,
         "tier": "authoritative_scope",
-        "label": "Primary program-scope match",
+        "label": "Primary subprogram-scope match",
         "primary": true,
         "broadFallback": false,
-        "admissionPath": "authoritative_scope_entailment",
+        "admissionPath": "source_grounded_scope_entailment",
         "reasons": [
           {
-            "code": "authoritative_scope",
-            "text": "Authoritative program scope: “Securing America’s Critical Minerals Supply — Extraction and Processing Technologies”.",
+            "code": "child_hierarchy",
+            "text": "Matched through the publication-eligible subprogram “Extraction and Processing Technologies”.",
             "evidence": {
-              "path": "authoritative_scope_entailment",
-              "kind": "publication_eligible_child",
-              "field": "publication_eligible_child",
-              "sourceLabel": "Securing America’s Critical Minerals Supply — Extraction and Processing Technologies"
+              "path": "source_grounded_scope_entailment",
+              "field": "child_hierarchy",
+              "childTitle": "Extraction and Processing Technologies",
+              "childId": "361526:d-3",
+              "publicationState": "publishable"
+            }
+          },
+          {
+            "code": "field_context",
+            "text": "Separation-method evidence appears in the subprogram summary: “Focus Area: Extraction and Processing Technologies”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "conceptId": "separations",
+              "field": "child_summary",
+              "terms": [
+                "extraction",
+                "process"
+              ],
+              "admissionRole": "admission"
             }
           },
           {
             "code": "controlled_relationship",
-            "text": "Controlled relationship: Rare-earth elements are a subset of critical minerals; rare-earth separation is an extraction, processing, or recovery operation.",
+            "text": "Controlled relationship used for verification: The bounded rare-earth family is a subset of critical minerals; a program must also establish the queried operation or context..",
             "evidence": {
-              "path": "authoritative_scope_entailment",
-              "relationships": [
-                "rare-earth elements are a subset of critical minerals",
-                "rare-earth separation is an extraction, processing, or recovery operation"
-              ]
-            }
-          },
-          {
-            "code": "query_interpretation",
-            "text": "Interpreted “REE” as rare-earth elements.",
-            "evidence": {
-              "canonicalConcept": "rare-earth-elements",
-              "userForm": "REE"
+              "path": "source_grounded_scope",
+              "relationship": "The bounded rare-earth family is a subset of critical minerals; a program must also establish the queried operation or context.",
+              "generatedAgencyWording": false
             }
           }
         ],
         "trace": {
           "admittedBy": [
             {
-              "path": "authoritative_scope_entailment",
-              "entailmentId": "genesis-critical-minerals-extraction-ree",
-              "coveredConcepts": [
-                "rare-earth-elements",
-                "separations"
+              "path": "source_grounded_scope",
+              "conceptId": "rare-earth-elements",
+              "role": "target",
+              "fields": [
+                "child_summary"
               ],
-              "authoritativeScope": {
-                "kind": "publication_eligible_child",
-                "record_id": "361526:d-3",
-                "label": "Securing America’s Critical Minerals Supply — Extraction and Processing Technologies",
-                "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/350588"
+              "matchedTerms": [
+                "critical",
+                "mineral"
+              ],
+              "relationship": {
+                "id": "rare-earth-subset-to-critical-mineral-scope",
+                "type": "subset_of",
+                "rationale": "The bounded rare-earth family is a subset of critical minerals; a program must also establish the queried operation or context.",
+                "directionality": "rare-earth query target to critical-minerals source scope only; never the reverse"
               },
-              "controlledRelationships": [
-                "rare-earth elements are a subset of critical minerals",
-                "rare-earth separation is an extraction, processing, or recovery operation",
-                "ionic-liquid extraction is a specialization of extraction and processing"
+              "provenance": []
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "separations",
+              "role": "method",
+              "fields": [
+                "child_title",
+                "child_summary"
               ]
             }
           ],
           "rankedBy": [
             {
-              "type": "authoritative_scope",
-              "contribution": 1
+              "type": "source_grounded_scope",
+              "contribution": 0.35
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "separations",
+              "contribution": 7.834377126620644
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "rare-earth-elements",
+              "contribution": 0.35
             },
             {
               "type": "topic_rerank",
-              "contribution": 1.229218444320066
+              "contribution": 2.7608341957508404
             }
           ],
           "selectedEvidence": [
             {
-              "path": "authoritative_scope_entailment",
-              "kind": "publication_eligible_child",
-              "field": "publication_eligible_child",
-              "sourceLabel": "Securing America’s Critical Minerals Supply — Extraction and Processing Technologies"
+              "path": "source_grounded_scope_entailment",
+              "field": "child_hierarchy",
+              "childTitle": "Extraction and Processing Technologies",
+              "childId": "361526:d-3",
+              "publicationState": "publishable"
             },
             {
-              "path": "authoritative_scope_entailment",
-              "relationships": [
-                "rare-earth elements are a subset of critical minerals",
-                "rare-earth separation is an extraction, processing, or recovery operation"
-              ]
+              "path": "explicit_evidence",
+              "conceptId": "separations",
+              "field": "child_summary",
+              "terms": [
+                "extraction",
+                "process"
+              ],
+              "admissionRole": "admission"
             },
             {
-              "canonicalConcept": "rare-earth-elements",
-              "userForm": "REE"
+              "path": "source_grounded_scope",
+              "relationship": "The bounded rare-earth family is a subset of critical minerals; a program must also establish the queried operation or context.",
+              "generatedAgencyWording": false
             }
           ],
-          "childDroveMatch": false,
+          "childDroveMatch": true,
           "exactOpportunityNumber": false,
           "exactTitlePhrase": false,
           "profileSources": [],
@@ -480,9 +518,18 @@
               "contribution": 1
             },
             {
+              "type": "source_grounded_scope",
+              "contribution": 0.35
+            },
+            {
               "type": "lexical_concept",
               "conceptId": "separations",
               "contribution": 12.042805334004708
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "rare-earth-elements",
+              "contribution": 0.35
             },
             {
               "type": "topic_rerank",
@@ -627,9 +674,10 @@
       "expected": {
         "admitted": true,
         "tier": "authoritative_scope",
-        "admission_path": "authoritative_scope_entailment",
+        "admission_path": "source_grounded_scope_entailment",
         "required_codes": [
-          "authoritative_scope",
+          "child_hierarchy",
+          "field_context",
           "controlled_relationship"
         ],
         "human_label": "correct_and_useful"
@@ -637,81 +685,122 @@
       "explanation": {
         "contractVersion": 2,
         "tier": "authoritative_scope",
-        "label": "Primary program-scope match",
+        "label": "Primary subprogram-scope match",
         "primary": true,
         "broadFallback": false,
-        "admissionPath": "authoritative_scope_entailment",
+        "admissionPath": "source_grounded_scope_entailment",
         "reasons": [
           {
-            "code": "authoritative_scope",
-            "text": "Authoritative program scope: “Securing America’s Critical Minerals Supply — Extraction and Processing Technologies”.",
+            "code": "child_hierarchy",
+            "text": "Matched through the publication-eligible subprogram “Extraction and Processing Technologies”.",
             "evidence": {
-              "path": "authoritative_scope_entailment",
-              "kind": "publication_eligible_child",
-              "field": "publication_eligible_child",
-              "sourceLabel": "Securing America’s Critical Minerals Supply — Extraction and Processing Technologies"
+              "path": "source_grounded_scope_entailment",
+              "field": "child_hierarchy",
+              "childTitle": "Extraction and Processing Technologies",
+              "childId": "361526:d-3",
+              "publicationState": "publishable"
+            }
+          },
+          {
+            "code": "field_context",
+            "text": "Separation-method evidence appears in the subprogram summary: “Focus Area: Extraction and Processing Technologies”.",
+            "evidence": {
+              "path": "explicit_evidence",
+              "conceptId": "separations",
+              "field": "child_summary",
+              "terms": [
+                "extraction",
+                "process"
+              ],
+              "admissionRole": "admission"
             }
           },
           {
             "code": "controlled_relationship",
-            "text": "Controlled relationship: Rare-earth elements are a subset of critical minerals; rare-earth separation is an extraction, processing, or recovery operation.",
+            "text": "Controlled relationship used for verification: The bounded rare-earth family is a subset of critical minerals; a program must also establish the queried operation or context..",
             "evidence": {
-              "path": "authoritative_scope_entailment",
-              "relationships": [
-                "rare-earth elements are a subset of critical minerals",
-                "rare-earth separation is an extraction, processing, or recovery operation"
-              ]
+              "path": "source_grounded_scope",
+              "relationship": "The bounded rare-earth family is a subset of critical minerals; a program must also establish the queried operation or context.",
+              "generatedAgencyWording": false
             }
           }
         ],
         "trace": {
           "admittedBy": [
             {
-              "path": "authoritative_scope_entailment",
-              "entailmentId": "genesis-critical-minerals-extraction-ree",
-              "coveredConcepts": [
-                "rare-earth-elements",
-                "separations"
+              "path": "source_grounded_scope",
+              "conceptId": "rare-earth-elements",
+              "role": "target",
+              "fields": [
+                "child_summary"
               ],
-              "authoritativeScope": {
-                "kind": "publication_eligible_child",
-                "record_id": "361526:d-3",
-                "label": "Securing America’s Critical Minerals Supply — Extraction and Processing Technologies",
-                "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/350588"
+              "matchedTerms": [
+                "critical",
+                "mineral"
+              ],
+              "relationship": {
+                "id": "rare-earth-subset-to-critical-mineral-scope",
+                "type": "subset_of",
+                "rationale": "The bounded rare-earth family is a subset of critical minerals; a program must also establish the queried operation or context.",
+                "directionality": "rare-earth query target to critical-minerals source scope only; never the reverse"
               },
-              "controlledRelationships": [
-                "rare-earth elements are a subset of critical minerals",
-                "rare-earth separation is an extraction, processing, or recovery operation",
-                "ionic-liquid extraction is a specialization of extraction and processing"
+              "provenance": []
+            },
+            {
+              "path": "explicit_evidence",
+              "conceptId": "separations",
+              "role": "method",
+              "fields": [
+                "child_title",
+                "child_summary"
               ]
             }
           ],
           "rankedBy": [
             {
-              "type": "authoritative_scope",
-              "contribution": 1
+              "type": "source_grounded_scope",
+              "contribution": 0.35
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "separations",
+              "contribution": 7.834377126620644
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "rare-earth-elements",
+              "contribution": 0.35
             },
             {
               "type": "topic_rerank",
-              "contribution": 1.229218444320066
+              "contribution": 2.7608341957508404
             }
           ],
           "selectedEvidence": [
             {
-              "path": "authoritative_scope_entailment",
-              "kind": "publication_eligible_child",
-              "field": "publication_eligible_child",
-              "sourceLabel": "Securing America’s Critical Minerals Supply — Extraction and Processing Technologies"
+              "path": "source_grounded_scope_entailment",
+              "field": "child_hierarchy",
+              "childTitle": "Extraction and Processing Technologies",
+              "childId": "361526:d-3",
+              "publicationState": "publishable"
             },
             {
-              "path": "authoritative_scope_entailment",
-              "relationships": [
-                "rare-earth elements are a subset of critical minerals",
-                "rare-earth separation is an extraction, processing, or recovery operation"
-              ]
+              "path": "explicit_evidence",
+              "conceptId": "separations",
+              "field": "child_summary",
+              "terms": [
+                "extraction",
+                "process"
+              ],
+              "admissionRole": "admission"
+            },
+            {
+              "path": "source_grounded_scope",
+              "relationship": "The bounded rare-earth family is a subset of critical minerals; a program must also establish the queried operation or context.",
+              "generatedAgencyWording": false
             }
           ],
-          "childDroveMatch": false,
+          "childDroveMatch": true,
           "exactOpportunityNumber": false,
           "exactTitlePhrase": false,
           "profileSources": [],
@@ -804,6 +893,20 @@
             {
               "type": "authoritative_scope",
               "contribution": 1
+            },
+            {
+              "type": "source_grounded_scope",
+              "contribution": 0.7
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "separations",
+              "contribution": 0.35
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "rare-earth-elements",
+              "contribution": 0.35
             }
           ],
           "selectedEvidence": [
@@ -1029,6 +1132,15 @@
             {
               "type": "authoritative_scope",
               "contribution": 1
+            },
+            {
+              "type": "source_grounded_scope",
+              "contribution": 0.35
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "rare-earth-elements",
+              "contribution": 0.35
             }
           ],
           "selectedEvidence": [
@@ -1146,6 +1258,10 @@
               "contribution": 1
             },
             {
+              "type": "source_grounded_scope",
+              "contribution": 0.35
+            },
+            {
               "type": "lexical_concept",
               "conceptId": "ionic-liquid-extraction",
               "contribution": 15.871000047132213
@@ -1154,6 +1270,11 @@
               "type": "lexical_concept",
               "conceptId": "separations",
               "contribution": 10.74335791705023
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "rare-earth-elements",
+              "contribution": 0.35
             },
             {
               "type": "topic_rerank",
@@ -1393,6 +1514,15 @@
               "contribution": 1
             },
             {
+              "type": "source_grounded_scope",
+              "contribution": 0.35
+            },
+            {
+              "type": "lexical_concept",
+              "conceptId": "rare-earth-elements",
+              "contribution": 0.35
+            },
+            {
               "type": "topic_rerank",
               "contribution": 11.566370849486255
             }
@@ -1619,7 +1749,7 @@
             },
             {
               "type": "topic_rerank",
-              "contribution": 2.6979393425821696
+              "contribution": 2.49404741384338
             },
             {
               "type": "exact_phrase_or_identifier"
@@ -1854,15 +1984,6 @@
             },
             {
               "path": "explicit_evidence",
-              "conceptId": "literal:scale",
-              "role": "application_or_context",
-              "fields": [
-                "child_title",
-                "child_summary"
-              ]
-            },
-            {
-              "path": "explicit_evidence",
               "conceptId": "literal:up",
               "role": "application_or_context",
               "fields": [
@@ -1891,11 +2012,6 @@
               "type": "lexical_concept",
               "conceptId": "catalyst-design",
               "contribution": 7.74351816714828
-            },
-            {
-              "type": "lexical_concept",
-              "conceptId": "literal:scale",
-              "contribution": 3.8448069722275613
             },
             {
               "type": "lexical_concept",

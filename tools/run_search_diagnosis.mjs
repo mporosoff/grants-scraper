@@ -196,7 +196,7 @@ function makeVariantHarness(base, definition) {
     ...(definition.scoringConfiguration || {}),
     ...(definition.searchV2 ? {
       searchV2: true,
-      searchV2Config: base.searchV2Config,
+      searchV2Config: definition.searchV2Config || base.searchV2Config,
     } : {}),
   };
   const parentEngine = base.retrievalApi.create(

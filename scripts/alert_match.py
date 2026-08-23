@@ -49,6 +49,7 @@ FACET_FIELDS: dict[str, str] = {
 
 _K1 = 1.2
 _B = 0.75
+_STALE_UNDATED_MAX_AGE_DAYS = 5 * 366
 NEW_RELEVANT_MAX_AGE_DAYS = 14
 NEW_RELEVANT_MIN_SCORE_RATIO = 0.2
 NEW_RELEVANT_MIN_BOOST = 8.0
@@ -162,6 +163,7 @@ def hybrid_scores(
         terms_by_length.setdefault(len(term), []).append(term)
 
     lexical_scores = [0.0] * document_count
+    discovery_scores = [0.0] * document_count
     semantic_scores = [0.0] * document_count
     lexical_coverage = [0] * document_count
     semantic_coverage = [0] * document_count
@@ -170,8 +172,7 @@ def hybrid_scores(
     query_groups = expand_query_groups(query, postings, search_v2=search_v2)
     short_complete_coverage = bool(
         search_v2
-        and 2 <= len(query_groups) <= 4
-        and any(group.get("strict_evidence") for group in query_groups)
+        and 2 <= len(query_groups) <= 5
     )
     records = catalog["opportunities"]
     scope_matches = (
@@ -187,12 +188,132 @@ def hybrid_scores(
     }
     field_token_sets = []
     narrative_token_sets = []
+    admission_scope_fields: list[list[tuple[str, list[str]]]] = []
+
+    def scope_tokens(value: str) -> list[str]:
+        return [
+            part
+            for term in tokenize(value)
+            for part in (term, *[item for item in term.split("-") if len(item) > 1])
+        ]
+
+    def authoritative_document_scope(record: dict) -> str:
+        facts = ((record.get("document_evidence") or {}).get("facts") or [])
+        values: list[str] = []
+        for fact in facts:
+            if fact.get("type") != "review_criteria":
+                continue
+            if isinstance(fact.get("value"), str):
+                values.append(fact["value"])
+            quote = (fact.get("citation") or {}).get("quote")
+            if quote:
+                values.append(str(quote))
+        return " ".join(values)
+
     for record in records:
         title_terms = set(tokenize(str(record.get("title") or "")))
         description_terms = set(tokenize(str(record.get("description") or "")))
         citation_terms = set(tokenize(str(record.get("document_search_text") or "")))
+        authoritative_scope_terms = set(tokenize(authoritative_document_scope(record)))
         field_token_sets.append(title_terms | description_terms | citation_terms)
-        narrative_token_sets.append(title_terms | description_terms)
+        narrative_token_sets.append(
+            title_terms | description_terms | authoritative_scope_terms
+        )
+        admission_scope_fields.append([
+            ("parent_title", scope_tokens(str(record.get("title") or ""))),
+            ("parent_description", scope_tokens(str(record.get("description") or ""))),
+            (
+                "authoritative_document_scope",
+                scope_tokens(authoritative_document_scope(record)),
+            ),
+        ])
+    source_scope_relationships: dict[str, list[dict]] = {}
+    for relationship in (search_v2_spec or {}).get("source_scope_relationships") or []:
+        concept_id = str(relationship.get("query_concept_id") or "")
+        if concept_id:
+            source_scope_relationships.setdefault(concept_id, []).append(relationship)
+
+    def scope_terms_related(query_term: str, source_term: str) -> bool:
+        if query_term == source_term:
+            return True
+        minimum = min(len(query_term), len(source_term))
+        return minimum >= 5 and (
+            query_term.startswith(source_term) or source_term.startswith(query_term)
+        )
+
+    def field_scope_match(
+        field_tokens: list[str],
+        requirements: list[str],
+        *,
+        exact_short: bool = False,
+    ) -> list[str] | None:
+        maximum_span = len(field_tokens) if len(requirements) <= 1 else 12
+        for start in range(len(field_tokens)):
+            window = field_tokens[start:start + maximum_span]
+            matches: list[str] = []
+            for requirement in requirements:
+                matched = next((
+                    token for token in window
+                    if (
+                        token == requirement
+                        if exact_short and len(requirement) <= 4
+                        else scope_terms_related(requirement, token)
+                    )
+                ), None)
+                if matched is None:
+                    break
+                matches.append(matched)
+            if len(matches) == len(requirements):
+                return list(dict.fromkeys(matches))
+        return None
+
+    def source_grounded_role_evidence(document_id: int, group: dict) -> bool:
+        if group.get("exact_indexed_acronym"):
+            acronym = str(group.get("source") or "").upper()
+            pattern = re.compile(
+                rf"(^|[^A-Za-z0-9]){re.escape(acronym)}"
+                rf"(?![A-Za-z0-9]|\s*/\s*[A-Z])"
+            )
+            if not any(
+                pattern.search(str(value or ""))
+                for field, value in (
+                    ("parent_title", records[document_id].get("title")),
+                    ("parent_description", records[document_id].get("description")),
+                    (
+                        "authoritative_document_scope",
+                        authoritative_document_scope(records[document_id]),
+                    ),
+                )
+            ):
+                return False
+        requirements = scope_tokens(str(group.get("source") or ""))
+        for _field, tokens in admission_scope_fields[document_id]:
+            if requirements and field_scope_match(
+                tokens,
+                requirements,
+                exact_short=bool(group.get("exact_indexed_acronym")),
+            ):
+                return True
+        for relationship in source_scope_relationships.get(
+            str(group.get("concept_id") or ""),
+            [],
+        ):
+            for alternative in relationship.get("source_alternatives") or []:
+                evidence_class_requirements = (
+                    relationship.get("evidence_class_requirements") or {}
+                ).get(str(group.get("evidence_class") or ""), [])
+                if evidence_class_requirements and not any(
+                    term in evidence_class_requirements for term in alternative
+                ):
+                    continue
+                alternative_requirements = scope_tokens(" ".join(alternative or []))
+                for _field, tokens in admission_scope_fields[document_id]:
+                    if alternative_requirements and field_scope_match(
+                        tokens,
+                        alternative_requirements,
+                    ):
+                        return True
+        return False
     document_topics = [list(dict.fromkeys(record.get("topic_areas") or [])) for record in records]
     document_phrase_text = [
         " ".join(tokenize(" ".join([
@@ -282,6 +403,8 @@ def hybrid_scores(
             int(group.get("minimum_evidence") or 0)
             or (2 if len(group_terms) >= 6 else 1)
         )
+        for document_id, value in group_lexical_scores.items():
+            discovery_scores[document_id] += value
         alternatives = group.get("evidence_alternatives") or ()
         evidence_phrases = tuple(
             " ".join(tokenize(value))
@@ -292,10 +415,37 @@ def hybrid_scores(
         evidence_mode = group.get("evidence_mode") or "all"
 
         def has_required_evidence(document_id: int) -> bool:
+            if search_v2 and group.get("exact_indexed_acronym"):
+                acronym = str(group.get("source") or "").upper()
+                pattern = re.compile(
+                    rf"(^|[^A-Za-z0-9]){re.escape(acronym)}"
+                    rf"(?![A-Za-z0-9]|\s*/\s*[A-Z])"
+                )
+                source = " ".join((
+                    str(records[document_id].get("title") or ""),
+                    str(records[document_id].get("description") or ""),
+                    authoritative_document_scope(records[document_id]),
+                ))
+                if not pattern.search(source):
+                    return False
+            if search_v2 and group.get("evidence_policy") == "source_grounded_only":
+                return False
             if search_v2 and group.get("evidence_policy") == "protected_rare_earth":
                 return protected_rare_earth_evidence(records[document_id]) is not None
             if search_v2 and group.get("evidence_policy") == "protected_ai":
                 return protected_ai_evidence(records[document_id]) is not None
+            if search_v2 and group.get("evidence_policy") == "protected_ai_security":
+                text = " ".join((
+                    str(records[document_id].get("title") or ""),
+                    str(records[document_id].get("description") or ""),
+                ))
+                pattern = (
+                    r"\b(?:secure|security|cybersecurity|adversarial|attack|mitigation)\b"
+                    if group.get("evidence_class") == "security"
+                    else r"\b(?:secure|security|cybersecurity|adversarial|robustness|robust|"
+                         r"resilience|resilient|attack|mitigation|trustworthy)\b"
+                )
+                return re.search(pattern, text, re.I) is not None
             if search_v2 and group.get("evidence_policy") == "technical_separation":
                 return technical_separation_evidence(records[document_id]) is not None
             if search_v2 and group.get("evidence_policy") == "controlled_compound":
@@ -400,6 +550,28 @@ def hybrid_scores(
             if document_id not in group_documents:
                 semantic_coverage[document_id] += 1
 
+    if search_v2 and short_complete_coverage:
+        for document_id in range(document_count):
+            if (
+                discovery_scores[document_id] + semantic_scores[document_id] <= 0
+                and document_id not in scope_matches
+            ):
+                continue
+            for group_index, group in enumerate(query_groups):
+                if group_index in substantive_group_matches[document_id]:
+                    continue
+                if not source_grounded_role_evidence(document_id, group):
+                    continue
+                lexical_group_matches[document_id].add(group_index)
+                substantive_group_matches[document_id].add(group_index)
+                broad_grounded_group_matches[document_id].add(group_index)
+                lexical_coverage[document_id] += 1
+                lexical_scores[document_id] += 0.35
+                if group.get("required_unless_topic"):
+                    required_group_coverage[document_id] += 1
+                if group.get("required_always"):
+                    always_required_coverage[document_id] += 1
+
     scope_entailment_score = max(
         0.01,
         float((search_v2_spec or {}).get("scope_entailment_score") or 1.0),
@@ -468,9 +640,23 @@ def hybrid_scores(
         group for group in query_groups if group.get("required_always")
     ]
     scores = [0.0] * document_count
+
+    def stale_undated(record: dict) -> bool:
+        if record.get("rolling") or record.get("close_date") or record.get("archive_date"):
+            return False
+        if str(record.get("status") or "").lower() not in {"posted", "forecasted"}:
+            return False
+        try:
+            posted = datetime.strptime(str(record.get("posted_date") or "")[:10], "%Y-%m-%d").date()
+        except ValueError:
+            return False
+        return (date.today() - posted).days > _STALE_UNDATED_MAX_AGE_DAYS
+
     for document_id in range(document_count):
         combined = lexical_scores[document_id] + semantic_scores[document_id]
         if combined <= 0:
+            continue
+        if search_v2 and stale_undated(records[document_id]):
             continue
         effective_coverage = lexical_coverage[document_id] + 0.55 * semantic_coverage[document_id]
         if (

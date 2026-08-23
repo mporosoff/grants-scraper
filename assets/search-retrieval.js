@@ -5,7 +5,8 @@
   const B = .75;
   const PREFIX_LIMIT = 12;
   const FUZZY_LIMIT = 6;
-  const RETRIEVAL_API_CONTRACT_VERSION = 3;
+  const RETRIEVAL_API_CONTRACT_VERSION = 4;
+  const STALE_UNDATED_MAX_AGE_DAYS = 5 * 366;
   const PRIMARY_EVIDENCE_TIER = Object.freeze({
     exact_or_child: 1,
     authoritative_scope: 2,
@@ -29,6 +30,15 @@
       numeric: true,
       sensitivity: "base",
     });
+  }
+
+  function staleUndatedOpportunity(record, now = Date.now()) {
+    if (!record || record.rolling || record.close_date || record.archive_date) return false;
+    const status = String(record.status || "").toLowerCase();
+    if (!["posted", "forecasted"].includes(status)) return false;
+    const posted = Date.parse(String(record.posted_date || ""));
+    return Number.isFinite(posted)
+      && Math.floor((now - posted) / 86_400_000) > STALE_UNDATED_MAX_AGE_DAYS;
   }
 
   function positiveScale(values) {
@@ -192,10 +202,35 @@
     const childNativeScale = positiveScale(childRaw);
     const childScale = Math.max(parentScale, childNativeScale);
     const childrenByParent = new Map();
+    const partialChildrenByParent = new Map();
+    const rejectedParents = new Set(parentDirect?.currentnessRejectedIndexes || []);
+
+    function verifiedGroups(result, index) {
+      return new Set(result?.verificationGroupIndexes?.[index] || []);
+    }
+
+    function candidateContribution(result, index) {
+      return Number(result?.scores?.[index] || 0)
+        || Number(result?.lexicalScores?.[index] || 0)
+        + Number(result?.semanticScores?.[index] || 0);
+    }
 
     childRecords.forEach((record, index) => {
-      if (!(Number(childDirect?.scores?.[index]) > 0)) return;
       const parentId = String(record.parent_id || "");
+      const groups = verifiedGroups(childDirect, index);
+      if (groups.size && parentId) {
+        if (!partialChildrenByParent.has(parentId)) partialChildrenByParent.set(parentId, []);
+        partialChildrenByParent.get(parentId).push({
+          id: String(record.subtopic_id || record.opportunity_id),
+          record,
+          index,
+          groups,
+          contribution: candidateContribution(childDirect, index),
+          directEvidence: childDirect?.evidence?.[index] || null,
+          profileEvidence: childProfile?.evidence?.[index] || null,
+        });
+      }
+      if (!(Number(childDirect?.scores?.[index]) > 0)) return;
       if (!childrenByParent.has(parentId)) childrenByParent.set(parentId, []);
       childrenByParent.get(parentId).push({
         id: String(record.subtopic_id || record.opportunity_id),
@@ -213,15 +248,171 @@
       || compareIds(left.id, right.id)
     )));
 
+    function aggregateScopeMatch(parentIndex, parentId) {
+      const queryGroups = parentDirect?.queryGroups || childDirect?.queryGroups || [];
+      if (queryGroups.length < 2 || queryGroups.length > 5) return null;
+      const expected = new Set(queryGroups.map(group => Number(group.index)));
+      const contributors = [];
+      const bridgeStopWords = new Set([
+        "ai", "analysis", "and", "application", "applications", "area", "areas", "army", "announcement",
+        "baa", "challenge", "competencies", "data", "development", "devcom", "domain",
+        "focus", "foundational", "method", "methodologies", "office", "program", "proposal",
+        "research", "scale", "science", "scientific", "system", "systems", "tdac", "tdacbaa",
+        "technique", "techniques", "technology", "title", "topic", "topics", "tpoc",
+      ]);
+      function bridgeTokens(item) {
+        // A broad parent's description can enumerate many unrelated children.
+        // For a parent-child bridge, only the umbrella identity in the parent
+        // title may connect those scopes; child-child bridges may use each
+        // publication-eligible child's full source description.
+        const bridgeText = item.kind === "parent"
+          ? item.record?.title || ""
+          : `${item.record?.title || ""} ${item.record?.description || item.record?.summary || ""}`;
+        return new Set((String(bridgeText)
+          .toLowerCase().match(/[a-z0-9]+/g) || []).filter(token => (
+          token.length >= 4 && !bridgeStopWords.has(token)
+        )));
+      }
+      function hasSharedScientificBridge(pair) {
+        const [left, right] = pair.map(bridgeTokens);
+        return [...left].some(token => right.has(token));
+      }
+      const parentGroups = verifiedGroups(parentDirect, parentIndex);
+      if (parentGroups.size) {
+        contributors.push({
+          kind: "parent",
+          id: parentId,
+          record: parentRecords[parentIndex],
+          groups: parentGroups,
+          contribution: candidateContribution(parentDirect, parentIndex),
+          directEvidence: parentDirect?.evidence?.[parentIndex] || null,
+        });
+      }
+      (partialChildrenByParent.get(parentId) || []).forEach(child => {
+        if (!["publishable", "published_index"].includes(child.record.publication_state || "publishable")) return;
+        contributors.push({ ...child, kind: "child" });
+      });
+      const combinations = [];
+      for (let left = 0; left < contributors.length; left += 1) {
+        for (let right = left + 1; right < contributors.length; right += 1) {
+          const pair = [contributors[left], contributors[right]];
+          if (pair.every(item => item.kind === "parent")) continue;
+          if (!hasSharedScientificBridge(pair)) continue;
+          const covered = new Set(pair.flatMap(item => [...item.groups]));
+          if (![...expected].every(groupIndex => covered.has(groupIndex))) continue;
+          combinations.push({
+            contributors: pair,
+            contribution: pair.reduce((sum, item) => sum + item.contribution, 0),
+          });
+        }
+      }
+      combinations.sort((left, right) => (
+        right.contribution - left.contribution
+        || left.contributors.map(item => item.id).join("+")
+          .localeCompare(right.contributors.map(item => item.id).join("+"))
+      ));
+      const selected = combinations[0];
+      if (!selected) return null;
+      const conceptIds = groupIndexes => [...groupIndexes].map(groupIndex => (
+        queryGroups[groupIndex]?.conceptId || queryGroups[groupIndex]?.source || String(groupIndex)
+      ));
+      const childContributors = selected.contributors.filter(item => item.kind === "child");
+      const evidenceGroups = selected.contributors.flatMap(item => item.directEvidence?.groups || []);
+      const sourceGroups = selected.contributors.flatMap(item => (
+        item.directEvidence?.sourceGroundedScope?.groups || []
+      ));
+      const contributorRows = selected.contributors.map(item => ({
+        kind: item.kind,
+        id: item.id,
+        title: item.record?.title || "",
+        coveredConcepts: conceptIds(item.groups),
+        publicationState: item.record?.publication_state || "parent",
+      }));
+      const directEvidence = {
+        schemaVersion: 2,
+        groups: evidenceGroups,
+        authoritativeScope: null,
+        sourceGroundedScope: sourceGroups.length ? {
+          path: "source_grounded_scope",
+          groups: sourceGroups,
+        } : null,
+        hierarchicalScope: {
+          path: "parent_child_scope_aggregation",
+          parentId,
+          contributors: contributorRows,
+          coveredConcepts: conceptIds(expected),
+        },
+        exactPhrase: false,
+        exactTitlePhrase: false,
+        exactOpportunityNumber: false,
+        trigrams: [],
+        admission: {
+          admitted: true,
+          classification: "primary",
+          evidenceTier: PRIMARY_EVIDENCE_TIER.authoritative_scope,
+          reason: "parent_child_scope_aggregation",
+          lexicalCoverage: expected.size,
+          semanticCoverage: 0,
+          substantiveCoverage: expected.size,
+          finalScore: selected.contribution,
+          admittedBy: [{
+            path: "parent_child_scope_aggregation",
+            parentId,
+            coveredConcepts: conceptIds(expected),
+            contributors: contributorRows,
+          }],
+          rankedBy: [{ type: "parent_child_scope_aggregation" }],
+          fieldContributions: evidenceGroups.flatMap(group => (
+            (group.matchedTermContributions || []).flatMap(term => (
+              (term.fields || []).map(field => ({
+                conceptId: group.conceptId,
+                term: term.term,
+                field: field.field,
+                admissionEligible: field.admissionEligible,
+                aggregateTermContribution: term.contribution,
+              }))
+            ))
+          )),
+        },
+      };
+      const matchingChildren = childContributors.map(child => ({
+        id: child.id,
+        record: child.record,
+        raw: Math.max(.35, child.contribution * 2),
+        normalized: Math.max(.35, child.contribution * 2) / childScale,
+        evidenceTier: PRIMARY_EVIDENCE_TIER.authoritative_scope,
+        directEvidence: child.directEvidence,
+        profileEvidence: child.profileEvidence || null,
+      })).sort((left, right) => right.normalized - left.normalized || compareIds(left.id, right.id));
+      return {
+        raw: Math.max(.35, selected.contribution * 2),
+        directEvidence,
+        matchingChildren,
+      };
+    }
+
     const rows = [];
     parentRecords.forEach((record, index) => {
+      if (rejectedParents.has(index)) return;
       const id = String(record.opportunity_id || record.opportunity_number || "");
-      const matchingChildren = childrenByParent.get(id) || [];
-      const parentAdmitted = Number(parentDirect?.scores?.[index]) > 0;
+      let matchingChildren = childrenByParent.get(id) || [];
+      let parentAdmitted = Number(parentDirect?.scores?.[index]) > 0;
+      let parentDirectEvidence = parentDirect?.evidence?.[index] || null;
+      const aggregate = !parentAdmitted && !matchingChildren.length
+        ? aggregateScopeMatch(index, id)
+        : null;
+      if (aggregate) {
+        parentAdmitted = true;
+        parentRaw[index] = aggregate.raw;
+        parentDirectEvidence = aggregate.directEvidence;
+        matchingChildren = aggregate.matchingChildren;
+      }
       if (!parentAdmitted && !matchingChildren.length) return;
       const parentNormalized = parentRaw[index] / parentScale;
       const childNormalized = matchingChildren[0]?.normalized || 0;
-      const parentEvidenceTier = parentAdmitted
+      const parentEvidenceTier = aggregate
+        ? PRIMARY_EVIDENCE_TIER.authoritative_scope
+        : parentAdmitted
         ? Number(parentDirect?.evidenceTiers?.[index] || PRIMARY_EVIDENCE_TIER.contextual_parent)
         : PRIMARY_EVIDENCE_TIER.weak_discovery;
       const childEvidenceTier = matchingChildren[0]?.evidenceTier || PRIMARY_EVIDENCE_TIER.weak_discovery;
@@ -243,7 +434,7 @@
         parentRaw: parentRaw[index],
         parentNormalized,
         childDroveMatch,
-        parentDirectEvidence: parentDirect?.evidence?.[index] || null,
+        parentDirectEvidence,
         parentProfileEvidence: parentProfile?.evidence?.[index] || null,
         bestChild: matchingChildren[0] || null,
         matchingChildren,
@@ -360,8 +551,25 @@
     const acronymResolver = queryApi.createAcronymResolver
       ? queryApi.createAcronymResolver(records)
       : null;
-    const documentFields = records.map(record => {
+    function authoritativeDocumentScopeFacts(record) {
+      const facts = record?.document_evidence?.facts || [];
+      return facts.filter(fact => fact?.type === "review_criteria").map(fact => ({
+        id: String(fact.id || ""),
+        type: String(fact.type || ""),
+        value: [
+          typeof fact.value === "string" ? fact.value : "",
+          fact.citation?.quote || "",
+        ].filter(Boolean).join(" "),
+        citationUrl: String(fact.citation?.citation_url || fact.citation?.document_url || ""),
+        documentName: String(fact.citation?.document_name || ""),
+        location: String(fact.citation?.location || ""),
+      })).filter(fact => fact.value);
+    }
+    const authoritativeDocumentScopeByDocument = records.map(authoritativeDocumentScopeFacts);
+    const documentFields = records.map((record, documentId) => {
       const child = Boolean(record.subtopic_id);
+      const authoritativeDocumentScope = authoritativeDocumentScopeByDocument[documentId]
+        .map(fact => fact.value).join(" ");
       return child
         ? [
             ["child_title", record.title || "", true],
@@ -372,6 +580,7 @@
         : [
             ["parent_title", record.title || "", true],
             ["parent_description", record.description || "", true],
+            ["authoritative_document_scope", authoritativeDocumentScope, true],
             ["citation_source_evidence", record.document_search_text || "", !searchV2],
             ["topic_area", (record.topic_areas || []).join(" "), false],
             ["discipline", (record.disciplines || []).join(" "), false],
@@ -382,6 +591,156 @@
     const documentFieldTokens = documentFields.map(fields => new Map(
       fields.map(([name, value]) => [name, new Set(queryApi.tokenize(value))]),
     ));
+    function scopeTokens(value) {
+      return queryApi.tokenize(value).flatMap(term => [
+        term,
+        ...term.split("-").filter(part => part.length > 1),
+      ]);
+    }
+    const documentScopeFields = documentFields.map((fields, documentId) => fields
+      .filter(([_name, _value, admissionEligible]) => admissionEligible)
+      .map(([field, value]) => {
+        const tokens = scopeTokens(value);
+        const positions = new Map();
+        tokens.forEach((token, index) => {
+          if (!positions.has(token)) positions.set(token, []);
+          positions.get(token).push(index);
+        });
+        return {
+          field,
+          value: String(value || ""),
+          tokens,
+          positions,
+          provenance: field === "authoritative_document_scope"
+            ? authoritativeDocumentScopeByDocument[documentId]
+            : [],
+        };
+      }));
+    const sourceScopeVocabulary = [...new Set(documentScopeFields.flatMap(fields => (
+      fields.flatMap(field => [...field.positions.keys()])
+    )))];
+    const sourceScopeRelatedTermCache = new Map();
+    const sourceScopeRelationships = new Map();
+    (searchV2Config?.source_scope_relationships || []).forEach(relationship => {
+      const conceptId = String(relationship.query_concept_id || "");
+      if (!conceptId) return;
+      if (!sourceScopeRelationships.has(conceptId)) sourceScopeRelationships.set(conceptId, []);
+      sourceScopeRelationships.get(conceptId).push(relationship);
+    });
+
+    function scopeTermsRelated(queryTerm, sourceTerm) {
+      if (queryTerm === sourceTerm) return true;
+      if (!queryTerm || !sourceTerm) return false;
+      const minimum = Math.min(queryTerm.length, sourceTerm.length);
+      return minimum >= 5
+        && (queryTerm.startsWith(sourceTerm) || sourceTerm.startsWith(queryTerm));
+    }
+
+    function sourceScopeRelatedTerms(requirement) {
+      if (!sourceScopeRelatedTermCache.has(requirement)) {
+        sourceScopeRelatedTermCache.set(requirement, sourceScopeVocabulary.filter(term => (
+          term !== requirement && scopeTermsRelated(requirement, term)
+        )));
+      }
+      return sourceScopeRelatedTermCache.get(requirement);
+    }
+
+    function fieldScopeMatch(field, requirements, { exactShort = false } = {}) {
+      const matches = requirements.map(requirement => {
+        const exact = field.positions.get(requirement) || [];
+        if (exact.length || (exactShort && requirement.length <= 4)) {
+          return exact.map(position => ({ position, term: requirement }));
+        }
+        return sourceScopeRelatedTerms(requirement).flatMap(term => (
+          (field.positions.get(term) || []).map(position => ({ position, term }))
+        ));
+      });
+      if (matches.some(items => !items.length)) return null;
+      if (matches.length === 1) {
+        return { field: field.field, matchedTerms: [matches[0][0].term] };
+      }
+      const maximumSpan = 11;
+      for (const anchor of matches[0]) {
+        const selected = [anchor];
+        for (const items of matches.slice(1)) {
+          const item = items.find(candidate => Math.abs(candidate.position - anchor.position) <= maximumSpan);
+          if (!item) break;
+          selected.push(item);
+        }
+        if (
+          selected.length === matches.length
+          && Math.max(...selected.map(item => item.position))
+            - Math.min(...selected.map(item => item.position)) <= maximumSpan
+        ) {
+          return {
+            field: field.field,
+            matchedTerms: [...new Set(selected.map(item => item.term))],
+          };
+        }
+      }
+      return null;
+    }
+
+    function sourceGroundedRoleEvidence(documentId, group, { allowAdjacent = false } = {}) {
+      const fields = documentScopeFields[documentId] || [];
+      const exactShort = group.exactIndexedAcronym === true;
+      if (
+        exactShort
+        && group.expansion?.kind !== "contextual_acronym"
+        && !exactShortAcronymEvidence(documentId, group.source)
+      ) return null;
+      const directRequirements = scopeTokens(group.source || "");
+      for (const field of fields) {
+        const direct = fieldScopeMatch(field, directRequirements, { exactShort });
+        if (direct && directRequirements.length) {
+          return {
+            ...direct,
+            path: "source_grounded_scope",
+            relationship: null,
+            sourceExcerpt: field.value,
+            provenance: field.provenance || [],
+          };
+        }
+      }
+      for (const relationship of sourceScopeRelationships.get(group.conceptId) || []) {
+        for (const alternative of relationship.source_alternatives || []) {
+          const evidenceClassRequirements = relationship.evidence_class_requirements?.[
+            group.evidenceClass
+          ] || [];
+          if (
+            evidenceClassRequirements.length
+            && !alternative.some(term => evidenceClassRequirements.includes(term))
+            && !allowAdjacent
+          ) continue;
+          const requirements = scopeTokens((alternative || []).join(" "));
+          for (const field of fields) {
+            const related = fieldScopeMatch(field, requirements);
+            if (!related || !requirements.length) continue;
+            return {
+              ...related,
+              path: "source_grounded_scope",
+              relationship: {
+                id: relationship.canonical_id,
+                type: relationship.relationship_type,
+                rationale: relationship.source_rationale,
+                directionality: relationship.directionality,
+              },
+              sourceExcerpt: field.value,
+              provenance: field.provenance || [],
+            };
+          }
+        }
+      }
+      return null;
+    }
+    function exactShortAcronymEvidence(documentId, source) {
+      const acronym = String(source || "").toUpperCase();
+      if (!/^[A-Z0-9]{2,4}$/.test(acronym)) return false;
+      const pattern = new RegExp(`(^|[^A-Za-z0-9])${acronym}(?![A-Za-z0-9]|\\s*\\/\\s*[A-Z])`);
+      return documentFields[documentId].some(([_field, value, admissionEligible]) => (
+        admissionEligible && pattern.test(String(value || ""))
+      ));
+    }
     const documentTopics = records.map(record => [
       ...new Set((record.topic_areas || []).filter(Boolean).map(String)),
     ]);
@@ -393,17 +752,19 @@
       ...(record.topic_areas || []),
     ].join(" ")));
     const documentPhraseText = documentPhraseTokens.map(terms => terms.join(" "));
-    const documentNarrativeSentences = records.map(record => [
+    const documentNarrativeSentences = records.map((record, documentId) => [
       record.title || "",
       record.description || record.summary || "",
       ...(record.program_area_labels || []),
+      ...authoritativeDocumentScopeByDocument[documentId].map(fact => fact.value),
     ].join(". ").split(/(?<=[.!?])\s+|…+|[\n\r]+/).map(value => (
-      new Set(queryApi.tokenize(value))
+      new Set(scopeTokens(value))
     )).filter(tokens => tokens.size));
-    const documentNarrativeTokens = records.map(record => queryApi.tokenize([
+    const documentNarrativeTokens = records.map((record, documentId) => queryApi.tokenize([
       record.title || "",
       record.description || record.summary || "",
       ...(record.program_area_labels || []),
+      ...authoritativeDocumentScopeByDocument[documentId].map(fact => fact.value),
     ].join(". ")));
     const topicDocuments = new Map();
 
@@ -469,10 +830,13 @@
       } : null;
     }
 
-    function protectedAiSecurityEvidence(documentId) {
+    function protectedAiSecurityEvidence(documentId, group) {
+      const pattern = group?.evidenceClass === "security"
+        ? /\b(?:secure|security|cybersecurity|adversarial|attack|mitigation)\b/i
+        : /\b(?:secure|security|cybersecurity|adversarial|robustness|robust|resilience|resilient|attack|mitigation|trustworthy)\b/i;
       const matchingFields = documentFields[documentId].flatMap(([field, value, admissionEligible]) => {
         if (!admissionEligible || !/title|description|summary|program_area/.test(field)) return [];
-        return /\b(?:secure|security|cybersecurity|adversarial|robustness|robust|resilience|resilient|attack|mitigation|trustworthy)\b/i.test(String(value || ""))
+        return pattern.test(String(value || ""))
           ? [field]
           : [];
       });
@@ -682,16 +1046,26 @@
       (searchV2Config.authoritative_scope_entailments || []).forEach(entry => {
         const supported = new Set(entry.supported_query_concepts || []);
         const required = entry.required_query_concepts || [];
-        if (!required.every(conceptId => scientificConcepts.includes(conceptId))) return;
-        if (
-          searchV2Config.scope_entailment_requires_complete_scientific_query
-          && scientificConcepts.some(conceptId => !supported.has(conceptId))
-        ) return;
+        const signatureSupported = new Set(entry.scope_signature?.supported_concepts || []);
+        const exactContractMatch = required.every(conceptId => scientificConcepts.includes(conceptId))
+          && !(
+            searchV2Config.scope_entailment_requires_complete_scientific_query
+            && scientificConcepts.some(conceptId => !supported.has(conceptId))
+          );
+        const signatureMatch = entry.scope_signature?.bounded === true
+          && scientificConcepts.length >= 2
+          && scientificConcepts.every(conceptId => signatureSupported.has(conceptId));
+        if (!exactContractMatch && !signatureMatch) return;
         const documentId = recordById.get(String(entry.parent_id || ""));
         if (!Number.isInteger(documentId)) return;
         matches.set(documentId, {
           ...entry,
-          coveredConcepts: scientificConcepts.filter(conceptId => supported.has(conceptId)),
+          coveredConcepts: scientificConcepts.filter(conceptId => (
+            exactContractMatch ? supported.has(conceptId) : signatureSupported.has(conceptId)
+          )),
+          matchType: signatureMatch && !exactContractMatch
+            ? "source_scope_signature"
+            : "controlled_concept_contract",
         });
       });
       return matches;
@@ -762,11 +1136,15 @@
       const broaderScores = new Float64Array(documentCount);
       const evidenceTiers = new Uint8Array(documentCount);
       const lexicalScores = new Float64Array(documentCount);
+      const discoveryScores = new Float64Array(documentCount);
       const semanticScores = new Float64Array(documentCount);
       const lexicalCoverage = new Uint16Array(documentCount);
       const semanticCoverage = new Uint16Array(documentCount);
       const requiredGroupCoverage = new Uint8Array(documentCount);
       const alwaysRequiredCoverage = new Uint8Array(documentCount);
+      const sourceGroundedCoverage = new Uint8Array(documentCount);
+      const sourceGroundedRelationshipCoverage = new Uint8Array(documentCount);
+      const criticalMineralSubsetCoverage = new Uint8Array(documentCount);
       const lexicalGroupMatches = searchV2
         ? Array.from({ length: documentCount }, () => new Set())
         : null;
@@ -774,6 +1152,14 @@
         ? Array.from({ length: documentCount }, () => new Set())
         : null;
       const substantiveTermsByDocument = strictSubstantiveCoverage
+        ? Array.from({ length: documentCount }, () => (
+            Array.from({ length: groups.length }, () => new Set())
+          ))
+        : null;
+      const adjacentGroupMatches = strictSubstantiveCoverage
+        ? Array.from({ length: documentCount }, () => new Set())
+        : null;
+      const adjacentTermsByDocument = strictSubstantiveCoverage
         ? Array.from({ length: documentCount }, () => (
             Array.from({ length: groups.length }, () => new Set())
           ))
@@ -789,12 +1175,17 @@
           schemaVersion: evidenceSchemaVersion,
           groups: [],
           authoritativeScope: null,
+          sourceGroundedScope: null,
           exactPhrase: false,
           exactTitlePhrase: false,
           exactOpportunityNumber: false,
           trigrams: [],
         }))
         : null;
+      const currentnessRejectedIndexes = searchV2
+        ? records.flatMap((record, index) => staleUndatedOpportunity(record) ? [index] : [])
+        : [];
+      const currentnessRejected = new Set(currentnessRejectedIndexes);
 
       groups.forEach((group, groupIndex) => {
         const groupDocuments = new Set();
@@ -850,6 +1241,22 @@
         });
         const requiredEvidence = Number(group.minimumEvidence || 0)
           || (group.terms.length >= 6 ? 2 : 1);
+        groupLexicalScores.forEach((value, documentId) => {
+          discoveryScores[documentId] += value;
+          if (!strictSubstantiveCoverage) return;
+          const matchedTerms = [...(groupMatchedTerms?.get(documentId) || new Map()).keys()];
+          const matchedFields = fieldsForTerms(documentId, matchedTerms)
+            .filter(field => field.admissionEligible);
+          const eligibleMatchedTerms = new Set(matchedFields.flatMap(field => field.matchedTerms));
+          if (
+            Number(groupEvidence.get(documentId) || 0) < requiredEvidence
+            || eligibleMatchedTerms.size < requiredEvidence
+          ) return;
+          adjacentGroupMatches[documentId].add(groupIndex);
+          matchedFields.forEach(field => field.matchedTerms.forEach(term => (
+            adjacentTermsByDocument[documentId][groupIndex].add(term)
+          )));
+        });
         const evidenceAlternatives = Array.isArray(group.evidenceAlternatives)
           ? group.evidenceAlternatives
           : [];
@@ -861,6 +1268,7 @@
           : [];
         groupEvidence.forEach((evidence, documentId) => {
           if (evidence < requiredEvidence) return;
+          if (searchV2 && group.evidencePolicy === "source_grounded_only") return;
           const protectedEvidence = searchV2 && group.evidencePolicy === "protected_rare_earth"
             ? protectedRareEarthEvidence(documentId)
             : null;
@@ -871,7 +1279,7 @@
             ? protectedPfasEvidence(documentId)
             : null;
           const aiSecurityEvidence = searchV2 && group.evidencePolicy === "protected_ai_security"
-            ? protectedAiSecurityEvidence(documentId)
+            ? protectedAiSecurityEvidence(documentId, group)
             : null;
           const highTemperatureCompositeEvidence = searchV2 && group.evidencePolicy === "protected_high_temperature_composites"
             ? protectedHighTemperatureCompositeEvidence(documentId)
@@ -930,6 +1338,11 @@
             const hasAdmissionEligibleField = fieldsForTerms(documentId, matchedTerms)
               .some(item => item.admissionEligible);
             if (!hasAdmissionEligibleField) return;
+            if (
+              group.exactIndexedAcronym === true
+              && group.expansion?.kind !== "contextual_acronym"
+              && !exactShortAcronymEvidence(documentId, group.source)
+            ) return;
           }
           const evidenceChecks = [];
           if (evidenceAlternatives.length && !protectedEvidence && !aiEvidence && !pfasEvidence) {
@@ -1046,6 +1459,78 @@
         });
       });
 
+      // Iteration 3 source signatures verify compound and morphological intent
+      // only against publication-eligible parent/child fields. They may add a
+      // deterministic discovery score, but generic topics, agency fields, and
+      // citation text are deliberately absent from this path.
+      if (searchV2 && strictSubstantiveCoverage) {
+        records.forEach((_record, documentId) => {
+          if (
+            discoveryScores[documentId] + semanticScores[documentId] <= 0
+            && !scopeMatches.has(documentId)
+          ) return;
+          groups.forEach((group, groupIndex) => {
+            if (substantiveGroupMatches[documentId].has(groupIndex)) return;
+            const match = sourceGroundedRoleEvidence(documentId, group);
+            if (!match) return;
+            const contribution = .35;
+            if (!lexicalGroupMatches[documentId].has(groupIndex)) {
+              lexicalGroupMatches[documentId].add(groupIndex);
+              lexicalCoverage[documentId] += 1;
+              lexicalScores[documentId] += contribution;
+              if (group.requiredUnlessTopic) requiredGroupCoverage[documentId] += 1;
+              if (group.requiredAlways) alwaysRequiredCoverage[documentId] += 1;
+            }
+            substantiveGroupMatches[documentId].add(groupIndex);
+            sourceGroundedCoverage[documentId] += 1;
+            if (match.relationship) sourceGroundedRelationshipCoverage[documentId] += 1;
+            if (match.relationship?.id === "rare-earth-subset-to-critical-mineral-scope") {
+              criticalMineralSubsetCoverage[documentId] = 1;
+            }
+            match.matchedTerms.forEach(term => (
+              substantiveTermsByDocument[documentId][groupIndex].add(term)
+            ));
+            if (
+              strictBroadGrounding
+              && catalogRole === "parent"
+              && ["parent_title", "parent_description", "authoritative_document_scope"].includes(match.field)
+            ) broadGroundedGroupMatches[documentId].add(groupIndex);
+            if (!collectEvidence) return;
+            evidence[documentId].groups.push({
+              source: group.source,
+              conceptId: group.conceptId || "",
+              role: group.role || "",
+              evidencePath: "source_grounded_scope",
+              contribution,
+              rawContribution: contribution,
+              saturationApplied: false,
+              sourceRelationship: match.relationship,
+              matchedTerms: match.matchedTerms,
+              matchedDisplayTerms: match.matchedTerms.map(term => displayTerm(documentId, term) || term),
+              matchedTermContributions: match.matchedTerms.map(term => ({
+                term,
+                contribution: contribution / Math.max(1, match.matchedTerms.length),
+                fields: [{ field: match.field, matchedTerms: [term], admissionEligible: true }],
+              })),
+            });
+            if (!evidence[documentId].sourceGroundedScope) {
+              evidence[documentId].sourceGroundedScope = {
+                path: "source_grounded_scope",
+                groups: [],
+              };
+            }
+            evidence[documentId].sourceGroundedScope.groups.push({
+              conceptId: group.conceptId || "",
+              role: group.role || "",
+              field: match.field,
+              matchedTerms: match.matchedTerms,
+              relationship: match.relationship,
+              provenance: match.provenance,
+            });
+          });
+        });
+      }
+
       const scopeEntailmentScore = Math.max(
         .01,
         Number(searchV2Config?.scope_entailment_score || 1),
@@ -1150,22 +1635,72 @@
       );
       const requiredGroups = groups.filter(group => group.requiredUnlessTopic);
       const alwaysRequiredGroups = groups.filter(group => group.requiredAlways);
-      function hasCoherentNarrativeIntent(documentId) {
+      function hasCoherentNarrativeIntent(documentId, { allowOneMissing = false } = {}) {
         if (!strictSubstantiveCoverage) return true;
+        const intentGroups = allowOneMissing
+          ? substantiveTermsByDocument[documentId].filter(terms => terms.size > 0)
+          : substantiveTermsByDocument[documentId];
+        if (allowOneMissing && intentGroups.length < groups.length - 1) return false;
         if (documentNarrativeSentences[documentId].some(sentence => (
-          substantiveTermsByDocument[documentId].every(terms => (
+          intentGroups.every(terms => (
             terms.size > 0 && [...terms].some(term => sentence.has(term))
           ))
         ))) return true;
         const tokens = documentNarrativeTokens[documentId];
-        const maximumSpan = 72;
+        // Keep concise scientific intent inside one bounded source passage.
+        // A wider window admitted unrelated uses from neighboring program
+        // examples (for example, a generic verb in one sentence and an
+        // application term several sentences later).
+        const maximumSpan = 48;
         for (let start = 0; start < tokens.length; start += 1) {
-          const window = new Set(tokens.slice(start, start + maximumSpan));
-          if (substantiveTermsByDocument[documentId].every(terms => (
+          const window = new Set(tokens.slice(start, start + maximumSpan).flatMap(token => [
+            token,
+            ...token.split("-").filter(part => part.length > 1),
+          ]));
+          if (intentGroups.every(terms => (
             terms.size > 0 && [...terms].some(term => window.has(term))
           ))) return true;
         }
         return false;
+      }
+      function hasCoherentAdjacentIntent(documentId) {
+        if (!strictSubstantiveCoverage) return false;
+        const termsByGroup = adjacentTermsByDocument[documentId];
+        if (documentNarrativeSentences[documentId].some(sentence => (
+          termsByGroup.every(terms => (
+            terms.size > 0 && [...terms].some(term => sentence.has(term))
+          ))
+        ))) return true;
+        const tokens = documentNarrativeTokens[documentId];
+        const maximumSpan = 48;
+        for (let start = 0; start < tokens.length; start += 1) {
+          const window = new Set(tokens.slice(start, start + maximumSpan).flatMap(token => [
+            token,
+            ...token.split("-").filter(part => part.length > 1),
+          ]));
+          if (termsByGroup.every(terms => (
+            terms.size > 0 && [...terms].some(term => window.has(term))
+          ))) return true;
+        }
+        return false;
+      }
+      function hasBoundedCriticalMineralOperationScope(documentId) {
+        const values = (documentScopeFields[documentId] || []).map(field => field.value);
+        const sourceUnits = [...values, values.join(" ")];
+        return sourceUnits.some(value => {
+          const tokens = scopeTokens(value);
+          for (let index = 0; index + 1 < tokens.length; index += 1) {
+            if (tokens[index] !== "critical" || !tokens[index + 1].startsWith("mineral")) continue;
+            const start = Math.max(0, index - 50);
+            const windowTokens = tokens.slice(start, index + 52);
+            const window = windowTokens.join(" ");
+            if (!/\b(?:separat|extract|process|recover|recycl|refin|leach|purif|hydrometallurg)/.test(window)) continue;
+            if (!/\b(?:research|science|scientific|chemical|engineering|technology|technologies|method|program|support|fund|advance|develop|resource recovery)\b/.test(window)) continue;
+            if (/\b(?:align\w* with|executive order|commercial diplomacy|workforce training|trade facilitation|are critical to)\b/.test(window)) continue;
+            return true;
+          }
+          return false;
+        });
       }
       for (let documentId = 0; documentId < documentCount; documentId += 1) {
         const combined = lexicalScores[documentId] + semanticScores[documentId];
@@ -1189,6 +1724,10 @@
         } : null;
         if (collectEvidence) evidence[documentId].admission = admission;
         if (combined <= 0) continue;
+        if (currentnessRejected.has(documentId)) {
+          if (admission) admission.reason = "stale_undated_opportunity";
+          continue;
+        }
         if (broaderFitMatches.has(documentId) && !scopeMatches.has(documentId)) {
           const broader = broaderFitMatches.get(documentId);
           broaderScores[documentId] = combined;
@@ -1203,6 +1742,64 @@
               fitId: broader.id,
               publishedScope: broader.published_scope,
               rationale: broader.rationale,
+            }];
+          }
+          continue;
+        }
+        const missingSubstantiveDimensions = strictSubstantiveCoverage
+          ? groups.length - substantiveGroupMatches[documentId].size
+          : groups.length;
+        const missingSubstantiveIndexes = strictSubstantiveCoverage
+          ? groups.flatMap((_group, groupIndex) => (
+              substantiveGroupMatches[documentId].has(groupIndex) ? [] : [groupIndex]
+            ))
+          : [];
+        const adjacentMissingEvidence = missingSubstantiveIndexes.length === 1
+          ? sourceGroundedRoleEvidence(
+              documentId,
+              groups[missingSubstantiveIndexes[0]],
+              { allowAdjacent: true },
+            )
+          : null;
+        const boundedIncompleteBroaderFit = strictSubstantiveCoverage
+          && !scopeMatches.has(documentId)
+          && groups.length === 3
+          && missingSubstantiveDimensions === 1
+          && substantiveGroupMatches[documentId].size >= 2
+          && groups[missingSubstantiveIndexes[0]]?.role === "program_form_or_intervention"
+          && hasCoherentNarrativeIntent(documentId, { allowOneMissing: true });
+        const sourceAdjacentBroaderFit = strictSubstantiveCoverage
+          && !scopeMatches.has(documentId)
+          && groups.length >= 2
+          && missingSubstantiveDimensions === 1
+          && adjacentGroupMatches[documentId].size === groups.length
+          && Boolean(adjacentMissingEvidence)
+          && hasCoherentAdjacentIntent(documentId);
+        if (sourceAdjacentBroaderFit || boundedIncompleteBroaderFit) {
+          broaderScores[documentId] = combined;
+          evidenceTiers[documentId] = PRIMARY_EVIDENCE_TIER.broader_program;
+          if (admission) {
+            const missingConcepts = groups.flatMap((group, groupIndex) => (
+              substantiveGroupMatches[documentId].has(groupIndex)
+                ? []
+                : [group.conceptId || group.source]
+            ));
+            admission.classification = "broader_program_fit";
+            admission.evidenceTier = PRIMARY_EVIDENCE_TIER.broader_program;
+            admission.reason = "source_grounded_adjacent_scope";
+            admission.finalScore = combined;
+            admission.admittedBy = [{
+              path: "source_grounded_adjacent_scope",
+              establishedConcepts: groups.flatMap((group, groupIndex) => (
+                substantiveGroupMatches[documentId].has(groupIndex)
+                  ? [group.conceptId || group.source]
+                  : []
+              )),
+              missingConcepts,
+              fields: adjacentMissingEvidence ? [adjacentMissingEvidence.field] : [],
+              matchedTerms: adjacentMissingEvidence?.matchedTerms || [],
+              relationship: adjacentMissingEvidence?.relationship || null,
+              statement: "One major query dimension is adjacent but not established by published scope.",
             }];
           }
           continue;
@@ -1255,6 +1852,16 @@
           continue;
         }
         if (
+          (criticalMineralSubsetCoverage[documentId]
+            || groups.some(group => group.conceptId === "critical-minerals"))
+          && groups.some(group => group.conceptId === "separations")
+          && !hasBoundedCriticalMineralOperationScope(documentId)
+          && !scopeMatches.has(documentId)
+        ) {
+          if (admission) admission.reason = "unbounded_critical_mineral_scope";
+          continue;
+        }
+        if (
           strictBroadGrounding
           && catalogRole === "parent"
           && BROAD_OPPORTUNITY_RE.test(`${records[documentId].title || ""} ${records[documentId].opportunity_number || ""}`)
@@ -1291,8 +1898,11 @@
         if (admission) {
           admission.admitted = true;
           const scopeEvidence = evidence[documentId].authoritativeScope;
+          const sourceScopeEvidence = evidence[documentId].sourceGroundedScope;
           admission.reason = scopeEvidence
             ? "authoritative_scope_entailment"
+            : sourceScopeEvidence
+              ? "source_grounded_scope_entailment"
             : exactPhraseDocuments.has(documentId)
               ? "exact_phrase_or_identifier"
               : "explicit_evidence";
@@ -1300,6 +1910,8 @@
           admission.classification = "primary";
           admission.evidenceTier = scopeEvidence
             ? PRIMARY_EVIDENCE_TIER.authoritative_scope
+            : sourceGroundedRelationshipCoverage[documentId] > 0
+              ? PRIMARY_EVIDENCE_TIER.authoritative_scope
             : exactPhraseDocuments.has(documentId) || catalogRole === "child"
               ? PRIMARY_EVIDENCE_TIER.exact_or_child
               : PRIMARY_EVIDENCE_TIER.contextual_parent;
@@ -1311,6 +1923,33 @@
                 authoritativeScope: scopeEvidence.authoritativeScope,
                 controlledRelationships: scopeEvidence.controlledRelationships,
               }]
+            : sourceScopeEvidence
+              ? [
+                  ...sourceScopeEvidence.groups.map(group => ({
+                    path: "source_grounded_scope",
+                    conceptId: group.conceptId,
+                    role: group.role,
+                    fields: [group.field],
+                    matchedTerms: group.matchedTerms,
+                    relationship: group.relationship,
+                    provenance: group.provenance,
+                  })),
+                  ...evidence[documentId].groups
+                    .filter(group => (
+                      group.evidencePath === "explicit_evidence"
+                      && !sourceScopeEvidence.groups.some(sourceGroup => (
+                        sourceGroup.conceptId === group.conceptId
+                      ))
+                    ))
+                    .map(group => ({
+                      path: "explicit_evidence",
+                      conceptId: group.conceptId,
+                      role: group.role,
+                      fields: [...new Set(group.matchedTermContributions.flatMap(term => (
+                        term.fields.filter(field => field.admissionEligible).map(field => field.field)
+                      )))],
+                    })),
+                ]
             : evidence[documentId].groups.map(group => ({
                 path: group.evidencePath,
                 conceptId: group.conceptId,
@@ -1321,6 +1960,10 @@
               }));
           admission.rankedBy = [
             ...(scopeEvidence ? [{ type: "authoritative_scope", contribution: scopeEvidence.contribution }] : []),
+            ...(sourceScopeEvidence ? [{
+              type: "source_grounded_scope",
+              contribution: .35 * sourceGroundedCoverage[documentId],
+            }] : []),
             ...evidence[documentId].groups.map(group => ({
               type: "lexical_concept",
               conceptId: group.conceptId,
@@ -1346,13 +1989,15 @@
         evidenceTiers[documentId] = evidence?.[documentId]?.admission?.evidenceTier || (
           scopeMatches.has(documentId)
             ? PRIMARY_EVIDENCE_TIER.authoritative_scope
+            : sourceGroundedRelationshipCoverage[documentId] > 0
+              ? PRIMARY_EVIDENCE_TIER.authoritative_scope
             : exactPhraseDocuments.has(documentId) || catalogRole === "child"
               ? PRIMARY_EVIDENCE_TIER.exact_or_child
               : PRIMARY_EVIDENCE_TIER.contextual_parent
         );
       }
 
-      const discoveredCandidateCount = Array.from(lexicalScores, (value, documentId) => (
+      const discoveredCandidateCount = Array.from(discoveryScores, (value, documentId) => (
         value + semanticScores[documentId] > 0 ? 1 : 0
       )).reduce((sum, value) => sum + value, 0);
       const admittedPrimaryCount = Array.from(scores).filter(value => value > 0).length;
@@ -1365,6 +2010,7 @@
             "missing_required_concept_evidence",
             "missing_always_required_concept_evidence",
             "ungrounded_broad_program_scope",
+            "unbounded_critical_mineral_scope",
           ].includes(item?.admission?.reason)).length
         : Math.max(0, discoveredCandidateCount - admittedPrimaryCount);
 
@@ -1373,10 +2019,21 @@
         broaderScores,
         evidenceTiers,
         lexicalScores,
+        discoveryScores,
         semanticScores,
         lexicalCoverage,
         semanticCoverage,
         evidence,
+        queryGroups: groups.map((group, index) => ({
+          index,
+          conceptId: group.conceptId || group.source,
+          role: group.role || "",
+          source: group.source,
+        })),
+        verificationGroupIndexes: substantiveGroupMatches
+          ? substantiveGroupMatches.map(matches => [...matches].sort((left, right) => left - right))
+          : null,
+        currentnessRejectedIndexes,
         hasTerms: groups.length > 0,
         diagnostics: {
           queryGroups: groups.length,
@@ -1424,6 +2081,7 @@
               visiblePrimaryCount: admittedPrimaryCount,
               broaderFitCount: admittedBroaderCount,
               rejectedPartialIntentCount,
+              rejectedCurrentnessCount: currentnessRejectedIndexes.length,
               admissionCounts: {
                 exactOrChild: Array.from(evidenceTiers).filter(value => value === PRIMARY_EVIDENCE_TIER.exact_or_child).length,
                 authoritativeScope: Array.from(evidenceTiers).filter(value => value === PRIMARY_EVIDENCE_TIER.authoritative_scope).length,

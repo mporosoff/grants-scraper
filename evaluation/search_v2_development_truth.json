@@ -23,7 +23,8 @@
       "judgments": {
         "360678": {"label":"primary_relevant","evidence":"DOE BES Separation Science authoritatively contains rare-earth separation research."},
         "361526": {"label":"primary_relevant","evidence":"Genesis Critical Minerals publishes extraction and processing scope containing rare-earth separation."},
-        "362061": {"label":"primary_relevant","evidence":"NSF CPS explicitly publishes critical-minerals and chemical-separations scope."}
+        "362061": {"label":"primary_relevant","evidence":"NSF CPS explicitly publishes critical-minerals and chemical-separations scope."},
+        "nsf-cbet:PD-26-370Y": {"label":"primary_relevant","evidence":"EWRE publishes chemical resource-recovery and critical-minerals recycling/management scope."}
       }
     },
     "ree_06": {
@@ -32,7 +33,8 @@
       "judgments": {
         "360678": {"label":"primary_relevant","evidence":"DOE BES Separation Science contains the query scope."},
         "361526": {"label":"primary_relevant","evidence":"Genesis extraction and processing scope contains the query scope."},
-        "362061": {"label":"primary_relevant","evidence":"NSF CPS critical-minerals and separations scope contains the query scope."}
+        "362061": {"label":"primary_relevant","evidence":"NSF CPS critical-minerals and separations scope contains the query scope."},
+        "nsf-cbet:PD-26-370Y": {"label":"primary_relevant","evidence":"EWRE publishes chemical resource-recovery and critical-minerals recycling/management scope."}
       }
     },
     "ree_07": {
@@ -41,7 +43,8 @@
       "judgments": {
         "360678": {"label":"primary_relevant","evidence":"Separation Science contains rare-earth recovery research."},
         "361526": {"label":"primary_relevant","evidence":"Genesis explicitly supports critical-mineral extraction, processing, and recovery."},
-        "362061": {"label":"primary_relevant","evidence":"CPS supports critical-mineral recovery through chemical processes."}
+        "362061": {"label":"primary_relevant","evidence":"CPS supports critical-mineral recovery through chemical processes."},
+        "nsf-cbet:PD-26-370Y": {"label":"primary_relevant","evidence":"EWRE explicitly supports resource recovery through chemical processes and critical-minerals recycling/management."}
       }
     },
     "ree_08": {
@@ -50,7 +53,8 @@
       "judgments": {
         "360678": {"label":"primary_relevant","evidence":"Lanthanide separation is within BES Separation Science."},
         "361526": {"label":"primary_relevant","evidence":"Lanthanides are rare-earth critical minerals within Genesis extraction and processing scope."},
-        "362061": {"label":"primary_relevant","evidence":"Lanthanide chemical separations are within CPS scope."}
+        "362061": {"label":"primary_relevant","evidence":"Lanthanide chemical separations are within CPS scope."},
+        "nsf-cbet:PD-26-370Y": {"label":"primary_relevant","evidence":"EWRE's chemical resource-recovery and critical-minerals scope contains the target and operation intent."}
       }
     },
     "ree_09": {
@@ -59,7 +63,8 @@
       "judgments": {
         "360678": {"label":"primary_relevant","evidence":"Lanthanide extraction is within BES Separation Science."},
         "361526": {"label":"primary_relevant","evidence":"Genesis explicitly supports critical-mineral extraction and processing."},
-        "362061": {"label":"primary_relevant","evidence":"CPS supports chemical extraction and critical-mineral processing."}
+        "362061": {"label":"primary_relevant","evidence":"CPS supports chemical extraction and critical-mineral processing."},
+        "nsf-cbet:PD-26-370Y": {"label":"primary_relevant","evidence":"EWRE's chemical resource-recovery and critical-minerals scope contains the lanthanide target and extraction operation."}
       }
     },
     "ree_10": {
@@ -68,7 +73,8 @@
       "judgments": {
         "360678": {"label":"primary_relevant","evidence":"Solvent extraction of rare earths is within Separation Science."},
         "361526": {"label":"primary_relevant","evidence":"Genesis critical-mineral extraction and processing contains the query scope."},
-        "362061": {"label":"primary_relevant","evidence":"CPS chemical separations scope contains solvent extraction of rare earths."}
+        "362061": {"label":"primary_relevant","evidence":"CPS chemical separations scope contains solvent extraction of rare earths."},
+        "nsf-cbet:PD-26-370Y": {"label":"primary_relevant","evidence":"EWRE's published chemical resource-recovery and critical-minerals scope contains the target and separation-processing intent."}
       }
     },
     "ree_11": {
@@ -86,7 +92,8 @@
       "judgments": {
         "360678": {"label":"primary_relevant","evidence":"DOE BES Separation Science contains the query scope."},
         "361526": {"label":"primary_relevant","evidence":"Genesis extraction and processing scope contains the query scope."},
-        "362061": {"label":"primary_relevant","evidence":"NSF CPS critical-minerals and separations scope contains the query scope."}
+        "362061": {"label":"primary_relevant","evidence":"NSF CPS critical-minerals and separations scope contains the query scope."},
+        "nsf-cbet:PD-26-370Y": {"label":"primary_relevant","evidence":"EWRE publishes chemical resource-recovery and critical-minerals recycling/management scope."}
       }
     },
     "ree_19": {
@@ -95,7 +102,8 @@
       "judgments": {
         "360678": {"label":"primary_relevant","evidence":"DOE BES Separation Science contains the query scope."},
         "361526": {"label":"primary_relevant","evidence":"Genesis extraction and processing scope contains the query scope."},
-        "362061": {"label":"primary_relevant","evidence":"NSF CPS critical-minerals and separations scope contains the query scope."}
+        "362061": {"label":"primary_relevant","evidence":"NSF CPS critical-minerals and separations scope contains the query scope."},
+        "nsf-cbet:PD-26-370Y": {"label":"primary_relevant","evidence":"EWRE publishes chemical resource-recovery and critical-minerals recycling/management scope."}
       }
     },
     "ree_12": {

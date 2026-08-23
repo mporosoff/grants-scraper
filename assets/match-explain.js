@@ -13,6 +13,7 @@
     authoritative_program_area: "named program area",
     parent_title: "opportunity title",
     parent_description: "opportunity description",
+    authoritative_document_scope: "authoritative notice scope",
     citation_source_evidence: "official-notice evidence",
   });
   const FIELD_PRIORITY = Object.freeze([
@@ -21,6 +22,7 @@
     "authoritative_program_area",
     "parent_title",
     "parent_description",
+    "authoritative_document_scope",
     "citation_source_evidence",
   ]);
   const CONCEPT_LABELS = Object.freeze({
@@ -120,6 +122,15 @@
       return (record.program_area_labels || record.document_program_areas || []).join("; ");
     }
     if (field === "parent_description") return record.description || "";
+    if (field === "authoritative_document_scope") {
+      return (record.document_evidence?.facts || [])
+        .filter(fact => fact?.type === "review_criteria")
+        .flatMap(fact => [
+          typeof fact.value === "string" ? fact.value : "",
+          fact.citation?.quote || "",
+        ])
+        .filter(Boolean).join(" ");
+    }
     if (field === "citation_source_evidence") return record.document_search_text || "";
     return "";
   }
@@ -143,7 +154,7 @@
 
   function admissionFields(evidence) {
     return new Set((evidence?.admission?.admittedBy || [])
-      .filter(item => item.path === "explicit_evidence")
+      .filter(item => ["explicit_evidence", "source_grounded_scope"].includes(item.path))
       .flatMap(item => item.fields || []));
   }
 
@@ -198,7 +209,7 @@
     if (!record || record.child_type !== "subject") return null;
     if (
       record.publication_state
-      && !["publish", "published", "publishable"].includes(record.publication_state)
+      && !["publish", "published", "publishable", "published_index"].includes(record.publication_state)
     ) {
       return null;
     }
@@ -273,6 +284,29 @@
     });
   }
 
+  function sourceRelationshipReason(evidence) {
+    const relationships = unique((evidence?.sourceGroundedScope?.groups || [])
+      .map(group => group.relationship?.rationale)
+      .filter(Boolean));
+    if (!relationships.length) return null;
+    return reason(
+      "controlled_relationship",
+      `Controlled relationship used for verification: ${sentenceLabel(relationships[0])}.`,
+      {
+        path: "source_grounded_scope",
+        relationship: relationships[0],
+        generatedAgencyWording: false,
+      },
+    );
+  }
+
+  function sourceGroundedReasons(evidence, record, maximum = 3) {
+    const reasons = contextualFieldReasons(evidence, record, { maximum: 2 });
+    const relationship = sourceRelationshipReason(evidence);
+    if (relationship && reasons.length < maximum) reasons.push(relationship);
+    return reasons.slice(0, maximum);
+  }
+
   function profileReason(profileSources) {
     const source = ["manual", "cv", "orcid"].find(name => (
       Number(profileSources?.[name]?.score || 0) > 0
@@ -298,16 +332,30 @@
     const parentEvidence = parent?.directEvidence || null;
     const parentWasAdmitted = parentAdmitted ?? parent?.parentAdmitted
       ?? parentEvidence?.admission?.admitted === true;
+    const parentIsBroader = parentEvidence?.admission?.classification === "broader_program_fit";
     const child = publicChild(bestChild, childDroveMatch, parentWasAdmitted);
     const activeEvidence = child?.directEvidence
-      || (parentWasAdmitted ? parentEvidence : null);
+      || ((parentWasAdmitted || parentIsBroader) ? parentEvidence : null);
     const activeRecord = child?.record || parent?.record || null;
     const admissionPath = activeEvidence?.admission?.reason || "unexplained";
     let tier = "weak_lexical";
     let label = "Limited match evidence";
     let reasons = [];
 
-    if (broadFallback?.status === true) {
+    if (parentIsBroader && !child) {
+      const missing = activeEvidence?.admission?.admittedBy?.[0]?.missingConcepts || [];
+      tier = "broader_program";
+      label = "Broader program fit";
+      reasons = [reason(
+        "broader_program",
+        `Broader program fit: the published scope is adjacent but does not establish ${bounded(missing.join(", ") || "one major part of the search intent")}.`,
+        {
+          path: activeEvidence.admission.reason,
+          missingConcepts: missing,
+          generatedAgencyWording: false,
+        },
+      )];
+    } else if (broadFallback?.status === true) {
       tier = "broader_program";
       label = "Broader program fit";
       reasons = [reason(
@@ -315,13 +363,39 @@
         `Broader program fit: ${bounded(broadFallback.scope || broadFallback.label)}${broadFallback.targetExplicit === false ? " The published scope is adjacent but does not explicitly name the target." : ""}`,
         { path: "broad_program_fallback", field: "published_program_scope" },
       )];
-    } else if (parentEvidence?.authoritativeScope?.path === "authoritative_scope_entailment") {
+    } else if (!child && parentWasAdmitted && parentEvidence?.authoritativeScope?.path === "authoritative_scope_entailment") {
       tier = "authoritative_scope";
       label = "Primary program-scope match";
       reasons = scopeReasons(query, parentEvidence);
+    } else if (!child && parentWasAdmitted && parentEvidence?.hierarchicalScope?.path === "parent_child_scope_aggregation") {
+      tier = "authoritative_scope";
+      label = "Primary subprogram-scope match";
+      const contributors = parentEvidence.hierarchicalScope.contributors || [];
+      const childTitles = contributors
+        .filter(item => item.kind === "child" && item.title)
+        .map(item => quoted(item.title));
+      reasons = [reason(
+        "child_hierarchy",
+        `The complete search intent is established across ${childTitles.length === 1 ? "the publication-eligible subprogram" : "publication-eligible subprograms"} ${childTitles.join(" and ")}.`,
+        {
+          path: "parent_child_scope_aggregation",
+          contributors,
+          generatedAgencyWording: false,
+        },
+      )];
+      const relationship = sourceRelationshipReason(parentEvidence);
+      if (relationship && reasons.length < 3) reasons.push(relationship);
+    } else if (!child && parentWasAdmitted && parentEvidence?.sourceGroundedScope?.path === "source_grounded_scope") {
+      const relationshipBacked = parentEvidence.sourceGroundedScope.groups
+        .some(group => Boolean(group.relationship));
+      tier = relationshipBacked ? "authoritative_scope" : "contextual";
+      label = relationshipBacked ? "Primary source-scope match" : "Contextual evidence match";
+      reasons = sourceGroundedReasons(parentEvidence, parent?.record);
     } else if (child) {
-      tier = "direct";
-      label = "Subprogram match";
+      const relationshipBacked = child.directEvidence?.sourceGroundedScope?.groups
+        ?.some(group => Boolean(group.relationship));
+      tier = relationshipBacked ? "authoritative_scope" : "direct";
+      label = relationshipBacked ? "Primary subprogram-scope match" : "Subprogram match";
       reasons.push(reason(
         "child_hierarchy",
         `${parent?.broad ? "This umbrella opportunity matched through" : "Matched through"} the publication-eligible subprogram ${quoted(child.record.title)}.`,
@@ -338,6 +412,8 @@
         child.record,
         { exclude: ["child_title"], maximum: 1 },
       ));
+      const relationship = sourceRelationshipReason(child.directEvidence);
+      if (relationship && reasons.length < 3) reasons.push(relationship);
     } else if (activeEvidence?.exactOpportunityNumber) {
       tier = "direct";
       label = "Exact identifier match";

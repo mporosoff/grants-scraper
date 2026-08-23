@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "iteration": 3,
+  "status": "query_specific_spent_challenge_adjudication_supplement",
+  "original_truth_artifacts_modified": false,
+  "rubric": "A primary result must establish complete intent through explicit authoritative text, a publication-eligible child, or bounded source-grounded scope entailment. Broader fit is adjacent but lacks one major established query dimension.",
+  "judgments": [
+    {
+      "population": "phase4_iteration1_spent",
+      "query_id": "hold_ree_01",
+      "query": "rare earth recycling",
+      "result_id": "nsf-cbet:PD-26-370Y",
+      "label": "primary_relevant",
+      "evidence": "EWRE explicitly funds resource recovery, recycling and management of critical minerals using chemical processes; rare-earth elements are the bounded critical-minerals subset and recycling is explicit."
+    },
+    {
+      "population": "phase4_iteration1_spent",
+      "query_id": "hold_ree_02",
+      "query": "rare earth solvent extraction",
+      "result_id": "nsf-cbet:PD-26-370Y",
+      "label": "primary_relevant",
+      "evidence": "EWRE explicitly funds chemical-process resource recovery and critical-minerals management; its published scientific scope contains the target and separation-processing intent."
+    },
+    {
+      "population": "phase4_iteration1_spent",
+      "query_id": "hold_ree_03",
+      "query": "lanthanide ion exchange",
+      "result_id": "nsf-cbet:PD-26-370Y",
+      "label": "primary_relevant",
+      "evidence": "EWRE's authoritative critical-minerals, chemical-process and resource-recovery scope contains the lanthanide target family and queried separation operation family."
+    },
+    {
+      "population": "phase4_iteration1_spent",
+      "query_id": "hold_ree_04",
+      "query": "REE hydrometallurgy",
+      "result_id": "nsf-cbet:PD-26-370Y",
+      "label": "primary_relevant",
+      "evidence": "EWRE explicitly supports critical-minerals resource recovery through chemical processes, which contains the rare-earth hydrometallurgical intent."
+    },
+    {
+      "population": "phase4_iteration1_spent",
+      "query_id": "hold_ree_05",
+      "query": "yttrium separation",
+      "result_id": "nsf-cbet:PD-26-370Y",
+      "label": "primary_relevant",
+      "evidence": "Yttrium is in the bounded rare-earth subset; EWRE explicitly funds chemical-process resource recovery and critical-minerals recycling/management."
+    },
+    {
+      "population": "phase4_iteration1_spent",
+      "query_id": "hold_ree_06",
+      "query": "scandium recovery",
+      "result_id": "nsf-cbet:PD-26-370Y",
+      "label": "primary_relevant",
+      "evidence": "Scandium is in the bounded rare-earth subset and EWRE explicitly funds resource recovery and critical-minerals recycling/management."
+    },
+    {
+      "population": "phase4_iteration1_spent",
+      "query_id": "hold_chem_02",
+      "query": "innovation catalyst student success",
+      "result_id": "334326",
+      "label": "primary_relevant",
+      "evidence": "TCUP's published scope explicitly supports innovative STEM teaching models and successful projects that increase STEM students and improve their preparation."
+    },
+    {
+      "population": "phase4_iteration1_spent",
+      "query_id": "hold_ai_01",
+      "query": "secure foundation models",
+      "result_id": "353936",
+      "label": "broader_program_fit",
+      "evidence": "MFAI explicitly funds foundation-model theory and trustworthy AI, but does not establish security, cybersecurity or adversarial robustness as funded scope."
+    },
+    {
+      "population": "phase4b_iteration2_spent",
+      "query_id": "i2hold_material_01",
+      "query": "dysprosium solvent recovery",
+      "result_id": "nsf-cbet:PD-26-370Y",
+      "label": "primary_relevant",
+      "evidence": "EWRE's critical-minerals, chemical-process, recycling and resource-recovery scope contains the dysprosium target and solvent-recovery intent."
+    },
+    {
+      "population": "phase4b_iteration2_spent",
+      "query_id": "i2hold_material_02",
+      "query": "neodymium ion-exchange purification",
+      "result_id": "nsf-cbet:PD-26-370Y",
+      "label": "primary_relevant",
+      "evidence": "EWRE's explicit critical-minerals and chemical resource-recovery scope contains the neodymium target and separation/purification operation family."
+    },
+    {
+      "population": "phase4b_iteration2_spent",
+      "query_id": "i2hold_material_03",
+      "query": "lanthanum resource recovery",
+      "result_id": "nsf-cbet:PD-26-370Y",
+      "label": "primary_relevant",
+      "evidence": "EWRE explicitly funds resource recovery and critical-minerals recycling/management; lanthanum is within the bounded rare-earth subset."
+    },
+    {
+      "population": "phase4b_iteration2_spent",
+      "query_id": "i2hold_material_04",
+      "query": "critical-metal leaching technology",
+      "result_id": "nsf-cbet:PD-26-370Y",
+      "label": "primary_relevant",
+      "evidence": "EWRE explicitly funds critical-minerals resource recovery using chemical processes and technological breakthrough development."
+    },
+    {
+      "population": "phase4b_iteration2_spent",
+      "query_id": "i2hold_ai_02",
+      "query": "adversarially robust AI science workflows",
+      "result_id": "358004",
+      "label": "primary_relevant",
+      "evidence": "CICI explicitly funds AI-ready scientific data/results, scientific workflows, cybersecurity, robustness and cyberinfrastructure resilience."
+    }
+  ]
+}

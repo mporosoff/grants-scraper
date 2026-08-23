@@ -2,11 +2,11 @@
   "use strict";
   globalThis.FUNDING_SEARCH_V2_CONFIG = Object.freeze({
     "schema_version": 2,
-    "contract_version": "search-v2-iteration2-1",
-    "asset_version": "search-v2-phase2r-iteration2-20260822",
+    "contract_version": "search-v2-iteration3-1",
+    "asset_version": "search-v2-iteration3-source-scope-20260822",
     "compatibility": {
-      "query_api_contract_version": 3,
-      "retrieval_api_contract_version": 3,
+      "query_api_contract_version": 4,
+      "retrieval_api_contract_version": 4,
       "parent_catalog_schema_version": 3,
       "child_catalog_schema_version": 1,
       "search_index_algorithm": "bm25",
@@ -482,6 +482,316 @@
         "transitive": false
       }
     ],
+    "source_scope_relationships": [
+      {
+        "canonical_id": "rare-earth-subset-to-critical-mineral-scope",
+        "query_concept_id": "rare-earth-elements",
+        "relationship_type": "subset_of",
+        "source_alternatives": [
+          [
+            "rare",
+            "earth"
+          ],
+          [
+            "lanthanide"
+          ],
+          [
+            "critical",
+            "mineral"
+          ]
+        ],
+        "source_rationale": "The bounded rare-earth family is a subset of critical minerals; a program must also establish the queried operation or context.",
+        "observed_need": [
+          "hold_ree_01",
+          "i2hold_material_01"
+        ],
+        "directionality": "rare-earth query target to critical-minerals source scope only; never the reverse",
+        "transitive": false
+      },
+      {
+        "canonical_id": "separation-processing-source-family",
+        "query_concept_id": "separations",
+        "relationship_type": "bounded_operation_family",
+        "source_alternatives": [
+          [
+            "separation",
+            "science"
+          ],
+          [
+            "chemical",
+            "separation"
+          ],
+          [
+            "extraction",
+            "processing"
+          ],
+          [
+            "resource",
+            "recovery"
+          ],
+          [
+            "recover",
+            "resource"
+          ]
+        ],
+        "source_rationale": "Separation science, chemical separations, extraction/processing, and resource recovery are bounded source-side forms of the queried operation family.",
+        "observed_need": [
+          "hold_ree_01",
+          "i2hold_material_04"
+        ],
+        "directionality": "specialized separation or recovery query operation to explicit source operation scope only",
+        "transitive": false
+      },
+      {
+        "canonical_id": "crop-genetics-source-family",
+        "query_concept_id": "crop-genetics",
+        "relationship_type": "bounded_organism_method_family",
+        "source_alternatives": [
+          [
+            "plant",
+            "breeding"
+          ],
+          [
+            "crop",
+            "breeding"
+          ],
+          [
+            "genome",
+            "modification"
+          ],
+          [
+            "genetic",
+            "diversity"
+          ],
+          [
+            "germplasm",
+            "trait"
+          ]
+        ],
+        "source_rationale": "Plant/crop breeding, genome modification, genetic diversity, and germplasm traits are bounded source-side forms of crop genetics.",
+        "observed_need": [
+          "hold_ag_01",
+          "i2hold_ag_01",
+          "i2hold_ag_02"
+        ],
+        "directionality": "crop-genetics query method to explicit plant/crop genetic or breeding scope only",
+        "transitive": false
+      },
+      {
+        "canonical_id": "heat-resilience-to-abiotic-stress",
+        "query_concept_id": "abiotic-stress-resilience",
+        "relationship_type": "specialization_of",
+        "source_alternatives": [
+          [
+            "abiotic",
+            "stress"
+          ],
+          [
+            "heat",
+            "tolerance"
+          ],
+          [
+            "temperature",
+            "resilience"
+          ]
+        ],
+        "source_rationale": "Heat and temperature stress are abiotic stresses in the authoritative AFRI plant-production source scope.",
+        "observed_need": [
+          "i2hold_ag_01"
+        ],
+        "directionality": "heat-resilience query property to explicit plant abiotic-stress scope only",
+        "transitive": false
+      },
+      {
+        "canonical_id": "disease-resistance-to-biotic-stress",
+        "query_concept_id": "biotic-stress-resilience",
+        "relationship_type": "specialization_of",
+        "source_alternatives": [
+          [
+            "biotic",
+            "stress"
+          ],
+          [
+            "disease",
+            "resistance"
+          ],
+          [
+            "pathogen",
+            "resistance"
+          ]
+        ],
+        "source_rationale": "Disease and pathogen resistance are biotic-stress traits in the authoritative AFRI plant-production source scope.",
+        "observed_need": [
+          "i2hold_ag_02"
+        ],
+        "directionality": "plant disease-resistance query property to explicit plant biotic-stress scope only",
+        "transitive": false
+      },
+      {
+        "canonical_id": "seasonal-to-long-duration",
+        "query_concept_id": "long-duration",
+        "relationship_type": "specialization_of",
+        "source_alternatives": [
+          [
+            "long",
+            "duration"
+          ],
+          [
+            "seasonal",
+            "storage"
+          ],
+          [
+            "extended",
+            "storage"
+          ]
+        ],
+        "source_rationale": "Seasonal storage is a bounded long-duration storage application; administrative award duration is excluded.",
+        "observed_need": [
+          "i2hold_energy_02"
+        ],
+        "directionality": "seasonal storage query property to scientific long-duration storage scope only",
+        "transitive": false
+      },
+      {
+        "canonical_id": "storage-technology-family",
+        "query_concept_id": "energy-storage",
+        "relationship_type": "bounded_technology_family",
+        "source_alternatives": [
+          [
+            "energy",
+            "storage"
+          ],
+          [
+            "grid",
+            "storage"
+          ],
+          [
+            "thermal",
+            "storage"
+          ]
+        ],
+        "source_rationale": "Grid and thermal storage are bounded energy-storage technology forms.",
+        "observed_need": [
+          "i2hold_energy_01",
+          "i2hold_energy_02"
+        ],
+        "directionality": "storage-technology query target to explicit energy-storage scope only",
+        "transitive": false
+      },
+      {
+        "canonical_id": "technology-maturation-process",
+        "query_concept_id": "technology-maturation",
+        "relationship_type": "bounded_program_objective",
+        "source_alternatives": [
+          [
+            "commercial",
+            "scaling"
+          ],
+          [
+            "commercial",
+            "deployment"
+          ],
+          [
+            "deployment",
+            "scale"
+          ],
+          [
+            "technology",
+            "maturation"
+          ],
+          [
+            "scale",
+            "up"
+          ]
+        ],
+        "source_rationale": "Scale-up, pre-commercial scaling, deployment, and commercialization describe the same bounded technology-maturation objective.",
+        "observed_need": [
+          "i2hold_energy_01",
+          "i2hold_energy_02"
+        ],
+        "directionality": "technology-maturation query objective to explicit scale-up or commercialization scope only",
+        "transitive": false
+      },
+      {
+        "canonical_id": "ai-security-resilience-property",
+        "query_concept_id": "security-resilience",
+        "relationship_type": "bounded_technology_property",
+        "source_alternatives": [
+          [
+            "adversarial",
+            "robustness"
+          ],
+          [
+            "security",
+            "resilience"
+          ],
+          [
+            "cybersecurity",
+            "resilience"
+          ],
+          [
+            "trustworthy",
+            "ai"
+          ]
+        ],
+        "evidence_class_requirements": {
+          "security": [
+            "secure",
+            "security",
+            "cybersecurity",
+            "adversarial",
+            "attack",
+            "mitigation"
+          ]
+        },
+        "source_rationale": "Adversarial robustness, cybersecurity resilience, and trustworthy AI are bounded AI security properties when AI scope is also established.",
+        "observed_need": [
+          "i2hold_ai_02",
+          "i2hold_child_02"
+        ],
+        "directionality": "AI security-property query to explicit AI security or robustness scope only",
+        "transitive": false
+      },
+      {
+        "canonical_id": "scientific-workflow-context",
+        "query_concept_id": "scientific-workflows",
+        "relationship_type": "bounded_application_context",
+        "source_alternatives": [
+          [
+            "science",
+            "workflow"
+          ],
+          [
+            "scientific",
+            "workflow"
+          ]
+        ],
+        "source_rationale": "Scientific software and science workflows are bounded scientific-computing application contexts.",
+        "observed_need": [
+          "i2hold_ai_02",
+          "i2hold_child_02"
+        ],
+        "directionality": "scientific workflow/software query context to explicit science-workflow or scientific-software scope only",
+        "transitive": false
+      },
+      {
+        "canonical_id": "scientific-software-target",
+        "query_concept_id": "scientific-software",
+        "relationship_type": "bounded_technology_target",
+        "source_alternatives": [
+          [
+            "scientific",
+            "software"
+          ]
+        ],
+        "source_rationale": "Scientific and research software establish a bounded software target; generic workflows or data do not substitute for software.",
+        "observed_need": [
+          "i2hold_child_02"
+        ],
+        "directionality": "scientific-software query target to explicit scientific or research software scope only",
+        "transitive": false
+      }
+    ],
     "query_contract_cases": [
       {
         "query": "REE",
@@ -588,7 +898,7 @@
       {
         "query": "drought tolerant crop genetics",
         "concept_ids": [
-          "drought-resilience",
+          "abiotic-stress-resilience",
           "crop-genetics"
         ]
       },
@@ -616,7 +926,7 @@
       {
         "query": "trustworthy artificial intelligence",
         "concept_ids": [
-          "literal:trustworthy",
+          "security-resilience",
           "artificial-intelligence"
         ]
       },
@@ -673,6 +983,120 @@
           "high-temperature-materials",
           "hypersonic-environment"
         ]
+      },
+      {
+        "query": "dysprosium solvent recovery",
+        "concept_ids": [
+          "rare-earth-elements",
+          "separations"
+        ]
+      },
+      {
+        "query": "neodymium ion-exchange purification",
+        "concept_ids": [
+          "rare-earth-elements",
+          "separations"
+        ]
+      },
+      {
+        "query": "critical-metal leaching technology",
+        "concept_ids": [
+          "critical-minerals",
+          "separations"
+        ]
+      },
+      {
+        "query": "heat-resilient plant breeding",
+        "concept_ids": [
+          "abiotic-stress-resilience",
+          "crop-genetics"
+        ]
+      },
+      {
+        "query": "crop disease resistance genomics",
+        "concept_ids": [
+          "crop-genetics",
+          "biotic-stress-resilience"
+        ]
+      },
+      {
+        "query": "grid-scale storage technology scale-up",
+        "concept_ids": [
+          "energy-storage",
+          "technology-maturation"
+        ]
+      },
+      {
+        "query": "seasonal thermal storage commercialization",
+        "concept_ids": [
+          "long-duration",
+          "energy-storage",
+          "technology-maturation"
+        ]
+      },
+      {
+        "query": "adversarially robust AI science workflows",
+        "concept_ids": [
+          "security-resilience",
+          "artificial-intelligence",
+          "scientific-workflows"
+        ]
+      },
+      {
+        "query": "hypersonic thermal-protection materials",
+        "concept_ids": [
+          "hypersonic-environment",
+          "high-temperature-materials"
+        ]
+      },
+      {
+        "query": "Sun-Earth electrodynamic coupling",
+        "concept_ids": [
+          "earth-system",
+          "literal:electrodynamic",
+          "literal:coupl"
+        ]
+      },
+      {
+        "query": "upper-atmosphere radiation-belt dynamics",
+        "concept_ids": [
+          "literal:upper-atmosphere",
+          "literal:radiation-belt",
+          "literal:dynamic"
+        ]
+      },
+      {
+        "query": "pilot-scale impaired-water purification",
+        "concept_ids": [
+          "literal:pilot-scale",
+          "literal:impaired-water",
+          "separations"
+        ]
+      },
+      {
+        "query": "coastal-erosion hazard decision tools",
+        "concept_ids": [
+          "literal:coastal-erosion",
+          "literal:hazard",
+          "literal:decision",
+          "literal:tool"
+        ]
+      },
+      {
+        "query": "trustworthy scientific software AI",
+        "concept_ids": [
+          "security-resilience",
+          "scientific-software",
+          "artificial-intelligence"
+        ]
+      },
+      {
+        "query": "rural obstetric care networks",
+        "concept_ids": [
+          "rural-care-context",
+          "literal:obstetric",
+          "literal:network"
+        ]
       }
     ],
     "authoritative_scope_entailments": [
@@ -717,6 +1141,21 @@
           "label": "Securing America’s Critical Minerals Supply — Extraction and Processing Technologies",
           "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/350588"
         },
+        "scope_signature": {
+          "version": 1,
+          "supported_concepts": [
+            "critical-minerals",
+            "rare-earth-elements",
+            "separations",
+            "ionic-liquid-extraction"
+          ],
+          "provenance_fields": [
+            "publication_eligible_child_title",
+            "child_summary",
+            "authoritative_program_area"
+          ],
+          "bounded": true
+        },
         "controlled_relationships": [
           "rare-earth elements are a subset of critical minerals",
           "rare-earth separation is an extraction, processing, or recovery operation",
@@ -740,6 +1179,20 @@
           "record_id": "362061",
           "label": "Chemical Process Systems — Critical Minerals and Separations",
           "source_url": "https://www.nsf.gov/funding/pgm_summ.jsp?pims_id=506547"
+        },
+        "scope_signature": {
+          "version": 1,
+          "supported_concepts": [
+            "critical-minerals",
+            "rare-earth-elements",
+            "separations",
+            "ionic-liquid-extraction"
+          ],
+          "provenance_fields": [
+            "parent_title",
+            "parent_description"
+          ],
+          "bounded": true
         },
         "controlled_relationships": [
           "rare-earth elements are a subset of critical minerals",
@@ -786,9 +1239,30 @@
           "label": "AFRI — Plant Production, Breeding, Genetics, Traits, and Abiotic Stress",
           "source_url": "https://www.nifa.usda.gov"
         },
+        "scope_signature": {
+          "version": 1,
+          "supported_concepts": [
+            "crop-genetics",
+            "drought-resilience",
+            "abiotic-stress-resilience",
+            "biotic-stress-resilience"
+          ],
+          "provenance_fields": [
+            "authoritative_parent_source_scope"
+          ],
+          "source_scope_items": [
+            "plant production",
+            "plant breeding",
+            "genetics and genome modification",
+            "biotic and abiotic stress"
+          ],
+          "bounded": true
+        },
         "controlled_relationships": [
           "drought tolerance is a bounded plant abiotic-stress resilience trait",
-          "crop genetics is contained in AFRI plant breeding, genetics, genomics, and trait scope"
+          "crop genetics is contained in AFRI plant breeding, genetics, genomics, and trait scope",
+          "heat resilience is a plant abiotic-stress specialization",
+          "disease resistance is a plant biotic-stress specialization"
         ]
       },
       {
@@ -808,8 +1282,28 @@
           "label": "SCALEUP — Grid-Scale and Energy-Storage Technologies",
           "source_url": "https://arpa-e-foa.energy.gov"
         },
+        "scope_signature": {
+          "version": 1,
+          "supported_concepts": [
+            "long-duration",
+            "energy-storage",
+            "technology-maturation"
+          ],
+          "provenance_fields": [
+            "parent_description",
+            "authoritative_parent_source_scope"
+          ],
+          "source_scope_items": [
+            "energy-storage and grid technologies",
+            "pre-commercial scaling",
+            "technology scale-up and commercialization"
+          ],
+          "bounded": true
+        },
         "controlled_relationships": [
           "long-duration energy storage is contained in the adjudicated SCALEUP grid-scale energy-storage technology scope",
+          "seasonal storage is a bounded long-duration energy-storage specialization",
+          "scale-up and commercialization are explicit program objectives",
           "administrative project duration is not scientific long-duration evidence"
         ]
       },
