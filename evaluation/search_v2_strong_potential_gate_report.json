@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-23T18:42:52.521Z",
+  "decision": "STRONG + POTENTIAL WORKFLOW BLOCKED",
+  "specific_observed_product_failure": "The unchanged local matcher labels Tribal Colleges and Universities Program as Strong for the zero-anchor query health data workforce workshop by coordinating those words across unrelated program tracks. One additional Strong result is adjudicated broader rather than primary. The resulting reviewed Strong Precision@10 is 0.857143, below the desired 0.90 product bar.",
+  "blocking_gates": [
+    "strong_precision_at_least_0_90",
+    "no_known_irrelevant_strong_results",
+    "zero_anchor_queries_have_no_strong_results"
+  ],
+  "gates": {
+    "strong_precision_at_least_0_90": false,
+    "no_known_irrelevant_strong_results": false,
+    "zero_anchor_queries_have_no_strong_results": false,
+    "short_acronym_collision_not_strong": true,
+    "combined_required_recall_at_20_at_least_0_80": true,
+    "combined_required_recall_at_50_at_least_0_95": true,
+    "potential_limit_enforced": true,
+    "strong_potential_ids_deduplicated": true,
+    "potential_explanations_extract_public_passages": true,
+    "no_semantic_score_or_model_explanation_claims": true,
+    "no_api_errors_or_timeouts": true,
+    "manual_relationship_mappings_remain_zero": true
+  },
+  "metrics": {
+    "query_count": 52,
+    "required_anchor_count": 65,
+    "strong": {
+      "required_recall_at_10": 0.184615,
+      "required_recall_at_50": 0.184615,
+      "precision_at_10_over_reviewed": 0.857143,
+      "reviewed_pair_count": 14,
+      "known_irrelevant_at_10_count": 1,
+      "reviewed_non_primary_at_10_count": 2,
+      "unreviewed_at_10_count": 0,
+      "zero_anchor_visible_count": 1,
+      "visible_count": 14,
+      "maximum_visible_count": 3
+    },
+    "potential": {
+      "displayed_count": 588,
+      "maximum_displayed_count": 12,
+      "reviewed_pair_count": 165,
+      "reviewed_primary_count": 50,
+      "known_irrelevant_count": 5,
+      "reviewed_non_primary_count": 115,
+      "unreviewed_count": 423,
+      "zero_anchor_displayed_count": 120
+    },
+    "combined": {
+      "required_recall_at_10": 0.861538,
+      "required_recall_at_20": 0.907692,
+      "required_recall_at_50": 0.953846,
+      "query_average_ndcg_at_10": 0.783221,
+      "deduplication_failures": 0,
+      "required_anchor_misses_at_50": [
+        {
+          "query_id": "hold_ree_04",
+          "result_id": "360678"
+        },
+        {
+          "query_id": "hold_env_01",
+          "result_id": "362061"
+        },
+        {
+          "query_id": "hold_env_01",
+          "result_id": "363375"
+        }
+      ]
+    }
+  },
+  "performance": {
+    "cold_first_query_ms": 1070.4323,
+    "warm_p50_ms": 613.7198,
+    "warm_p95_ms": 749.1084,
+    "strong_local_p50_ms": 29.6469,
+    "strong_local_p95_ms": 80.1193,
+    "error_count": 0,
+    "timeout_count": 0
+  },
+  "usage": {
+    "embedding_requests": 52,
+    "rerank_requests": 49,
+    "documents_reranked": 12830,
+    "estimated_paid_cost_usd": 0.155588,
+    "estimated_paid_cost_per_1000_searches_usd": 2.992085
+  },
+  "evidence": {
+    "results": "evaluation/search_v2_strong_potential_results.json",
+    "truth": "evaluation/search_v2_strong_potential_truth.json",
+    "api_receipt": "evaluation/search_v2_strong_potential_api_receipt.json",
+    "test_runs": "evaluation/search_v2_strong_potential_test_runs.json"
+  },
+  "phase4c_authorized_for_separate_session": false,
+  "phase5_authorized": false,
+  "production_flag_enabled": false
+}
